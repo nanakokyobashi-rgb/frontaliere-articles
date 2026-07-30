@@ -74,3 +74,31 @@ jobs:
 
       - id: deploy
         uses: actions/deploy-pages@v4
+
+      # Tell the site the surface moved. The publisher knows when it has
+      # published, so the push is the event — the consumer's schedule is only a
+      # safety net for a dispatch that never arrives. Without this a new article
+      # waits up to twelve hours before entering the sitemap, which for fresh
+      # content is the difference that matters.
+      # Best-effort: a failed dispatch must never fail a good publish. The
+      # scheduled sync picks it up.
+      - name: Notify the site
+        if: steps.deploy.outcome == 'success'
+        continue-on-error: true
+        env:
+          PAT: ${{ secrets.SITE_REPO_PAT }}
+        run: |
+          set -euo pipefail
+          if [ -z "${PAT:-}" ]; then
+            echo "::warning::SITE_REPO_PAT unset — the site will pick this up on its schedule"
+            exit 0
+          fi
+          code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST \
+            -H "Authorization: Bearer $PAT" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/valerielinc-ops/frontaliere-si-o-no/dispatches \
+            -d '{"event_type":"articles-published"}')
+          echo "dispatch → HTTP $code"
+          if [ "$code" != "204" ]; then
+            echo "::warning::dispatch returned $code — the site will pick this up on its schedule"
+          fi
