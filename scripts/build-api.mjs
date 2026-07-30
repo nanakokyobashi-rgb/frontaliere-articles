@@ -123,13 +123,18 @@ const SECTION_PATHS = {
   },
 };
 
-function buildSitemap(entries, section, slugMap, meta) {
+function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
   const paths = SECTION_PATHS[section];
   const sectionPath = paths.it;
   const urls = [];
   for (const a of entries) {
     const slug = slugMap?.[a.id]?.it;
     if (!slug) continue;
+    // A canonical-overridden ("shadowed") article points its canonical at a
+    // different winner URL, so listing it here — as <loc> OR as an hreflang
+    // alternate — contradicts the self-canonical gate the consumer enforces
+    // (tests/blog-slugs-sitemap-sync.test.ts, guarding against #3120).
+    if (shadowed.has(slug)) continue;
     const title = meta[`blog.article.${a.id}.title`];
     const alt = meta[`blog.article.${a.id}.imageAlt`];
     const lastmod = a.updatedAt || a.date || '';
@@ -178,6 +183,17 @@ const writeXml = (name, { xml, count }) => {
   return count;
 };
 
+// Canonical overrides travel WITH the corpus: they decide which swiss articles
+// may appear in the sitemap at all, so keeping them in the site repo would leave
+// this publisher unable to produce a correct file.
+const shadowedSwissSlugs = new Set(
+  Object.keys(
+    JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'swiss-article-canonical-overrides.json'), 'utf-8'))
+      .overrides ?? {},
+  ),
+);
+console.log(`[build-api] shadowed swiss slugs excluded: ${shadowedSwissSlugs.size}`);
+
 const metaIt = (await load('content/blog-meta-it.ts')).default;
 const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 const sitemapCounts = {
@@ -187,7 +203,7 @@ const sitemapCounts = {
   ),
   blogCh: writeXml(
     'sitemap-blog-ch.xml',
-    buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt),
+    buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs),
   ),
 };
 if (sitemapCounts.blog < 100) {
