@@ -105,7 +105,27 @@ const xmlEsc = (s) =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
-function buildSitemap(entries, sectionPath, slugMap, meta) {
+// Per-locale section prefix. hreflang alternates are NOT optional decoration: the
+// site's committed sitemaps carry five links per url (it/en/de/fr/x-default) and
+// publishing without them would silently drop every alternate from the index.
+const SECTION_PATHS = {
+  frontaliere: {
+    it: '/articoli-frontaliere/',
+    en: '/en/cross-border-articles/',
+    de: '/de/grenzgaenger-artikel/',
+    fr: '/fr/articles-frontalier/',
+  },
+  svizzera: {
+    it: '/articoli-svizzera/',
+    en: '/en/swiss-articles/',
+    de: '/de/schweiz-artikel/',
+    fr: '/fr/articles-suisse/',
+  },
+};
+
+function buildSitemap(entries, section, slugMap, meta) {
+  const paths = SECTION_PATHS[section];
+  const sectionPath = paths.it;
   const urls = [];
   for (const a of entries) {
     const slug = slugMap?.[a.id]?.it;
@@ -122,6 +142,17 @@ function buildSitemap(entries, sectionPath, slugMap, meta) {
       if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
       parts.push(`    </image:image>`);
     }
+    for (const loc of ['it', 'en', 'de', 'fr']) {
+      const s2 = slugMap?.[a.id]?.[loc];
+      if (s2) {
+        parts.push(
+          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
+        );
+      }
+    }
+    parts.push(
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${slug}/" />`,
+    );
     if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
     parts.push(`    <changefreq>monthly</changefreq>`);
     parts.push(`    <priority>0.7</priority>`);
@@ -143,7 +174,7 @@ function buildSitemap(entries, sectionPath, slugMap, meta) {
 const writeXml = (name, { xml, count }) => {
   fs.writeFileSync(path.join(OUT, name), xml);
   written[name] = xml.length;
-  console.log(`[build-api] ${name}: ${count} urls, ${xml.length} bytes`);
+  console.log(`[build-api] ${name}: ${count} urls, ${(xml.match(/xhtml:link/g) ?? []).length} alternates, ${xml.length} bytes`);
   return count;
 };
 
@@ -152,11 +183,11 @@ const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 const sitemapCounts = {
   blog: writeXml(
     'sitemap-blog.xml',
-    buildSitemap(ARTICLES, '/articoli-frontaliere/', blogSlugs.BLOG_SLUGS, metaIt),
+    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt),
   ),
   blogCh: writeXml(
     'sitemap-blog-ch.xml',
-    buildSitemap(SWISS_ARTICLES, '/articoli-svizzera/', swissSlugs.SWISS_SLUGS, metaChIt),
+    buildSitemap(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt),
   ),
 };
 if (sitemapCounts.blog < 100) {
