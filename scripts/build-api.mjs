@@ -85,6 +85,85 @@ const commit = (() => {
   }
 })();
 
+
+
+// ── Sitemaps ──────────────────────────────────────────────────────
+//
+// The article sitemaps are derived entirely from data this repo owns — registry,
+// per-locale meta, slug maps — so they belong here, not in the site repo. Emitting
+// them alongside the JSON is what lets a new article be announced to crawlers
+// without the site deploying: the site serves these as static files.
+//
+// Shape matches what the site published before the split, byte-for-byte in
+// structure: IT locs only, an image block, lastmod, monthly/0.7.
+const SITE = 'https://frontaliereticino.ch';
+
+const xmlEsc = (s) =>
+  String(s ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
+function buildSitemap(entries, sectionPath, slugMap, meta) {
+  const urls = [];
+  for (const a of entries) {
+    const slug = slugMap?.[a.id]?.it;
+    if (!slug) continue;
+    const title = meta[`blog.article.${a.id}.title`];
+    const alt = meta[`blog.article.${a.id}.imageAlt`];
+    const lastmod = a.updatedAt || a.date || '';
+    const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
+    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${slug}/</loc>`];
+    if (img) {
+      parts.push(`    <image:image>`);
+      parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
+      if (title) parts.push(`      <image:title>${xmlEsc(title)}</image:title>`);
+      if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
+      parts.push(`    </image:image>`);
+    }
+    if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
+    parts.push(`    <changefreq>monthly</changefreq>`);
+    parts.push(`    <priority>0.7</priority>`);
+    parts.push(`  </url>`);
+    urls.push(parts.join('\n'));
+  }
+  return {
+    xml:
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
+      `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n` +
+      `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
+      urls.join('\n') +
+      `\n</urlset>\n`,
+    count: urls.length,
+  };
+}
+
+const writeXml = (name, { xml, count }) => {
+  fs.writeFileSync(path.join(OUT, name), xml);
+  written[name] = xml.length;
+  console.log(`[build-api] ${name}: ${count} urls, ${xml.length} bytes`);
+  return count;
+};
+
+const metaIt = (await load('content/blog-meta-it.ts')).default;
+const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
+const sitemapCounts = {
+  blog: writeXml(
+    'sitemap-blog.xml',
+    buildSitemap(ARTICLES, '/articoli-frontaliere/', blogSlugs.BLOG_SLUGS, metaIt),
+  ),
+  blogCh: writeXml(
+    'sitemap-blog-ch.xml',
+    buildSitemap(SWISS_ARTICLES, '/articoli-svizzera/', swissSlugs.SWISS_SLUGS, metaChIt),
+  ),
+};
+if (sitemapCounts.blog < 100) {
+  throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
+}
+
+// Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
   commit,
@@ -92,6 +171,8 @@ write('manifest.json', {
   counts: {
     articles: ARTICLES.length,
     swissArticles: SWISS_ARTICLES.length,
+    sitemapBlogUrls: sitemapCounts.blog,
+    sitemapBlogChUrls: sitemapCounts.blogCh,
   },
   files: written,
 });
