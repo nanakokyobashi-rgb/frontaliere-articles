@@ -19,6 +19,9 @@
  *   meta-<locale>.json      title/excerpt/imageAlt per article, frontaliere
  *   meta-ch-<locale>.json   same, svizzera
  *   slugs.json         id -> per-locale slug, plus the reverse map
+ *   sitemap-blog.xml / sitemap-blog-ch.xml   article sitemaps, with hreflang
+ *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
+ *   news-ticker-live.json  the homepage ticker's five newest articles
  *
  * Run with tsx: the corpus sources use extensionless relative specifiers, which
  * plain Node ESM does not resolve.
@@ -27,6 +30,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
+import { buildAllRssFeeds } from '../engine/rssFeeds.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -210,6 +214,75 @@ if (sitemapCounts.blog < 100) {
   throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
 }
 
+// ── RSS feeds ─────────────────────────────────────────────────────
+//
+// Same argument as the sitemaps: the feeds are a pure function of the corpus,
+// so the repo that owns the corpus is the one that can emit them without being
+// a publish cycle behind. The generator itself is NOT reimplemented here — it
+// is `engine/rssFeeds.mjs`, the very module the site repo calls, arriving with
+// the mirror. A second copy would drift silently: nobody diffs a feed once it
+// is served, so a divergence surfaces only when an aggregator drops the channel.
+//
+// `layout` is the whole difference between the two callers: the site keeps the
+// corpus under services/, this repo under content/.
+const rssSections = buildAllRssFeeds({
+  fs,
+  path,
+  rootDir: ROOT,
+  registries: { frontaliere: ARTICLES, svizzera: SWISS_ARTICLES },
+  layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+});
+
+let rssFeedCount = 0;
+let rssItemTotal = 0;
+for (const section of rssSections) {
+  if (section.feeds.length === 0) {
+    throw new Error(
+      `rss: section '${section.id}' produced no feeds (${section.articleCount} articles parsed) — refusing to publish`,
+    );
+  }
+  for (const [name, xml] of section.feeds) {
+    const items = (xml.match(/<item>/g) ?? []).length;
+    if (items === 0) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
+    fs.writeFileSync(path.join(OUT, name), xml);
+    written[name] = xml.length;
+    rssFeedCount++;
+    rssItemTotal += items;
+    console.log(`[build-api] ${name}: ${items} items, ${xml.length} bytes`);
+  }
+}
+
+// ── News-ticker payload ───────────────────────────────────────────
+//
+// The homepage ticker shows the 5 newest articles. The site used to compute
+// this at build time from its own copy of the corpus; it now consumes this
+// file, which means a newly published article reaches the ticker without a
+// site build. `hubLocales` is passed explicitly — `computeTickerArticles`
+// otherwise reads it from the site shell, which does not exist here (that
+// coupling is exactly what issue #4974 item 2 removed).
+const { computeTickerArticles } = await load('engine/newsTickerDataPlugin.ts');
+const tickerArticles = computeTickerArticles(fs, path, ROOT, ARTICLES, {
+  hubLocales: LOCALES,
+  metaDir: 'content',
+  slugDataFile: 'content/routerBlogData.ts',
+});
+if (tickerArticles.length === 0) {
+  throw new Error('news-ticker-live.json would be empty — refusing to publish');
+}
+for (const art of tickerArticles) {
+  for (const loc of LOCALES) {
+    if (!art.title?.[loc] || art.title[loc] === `blog.article.${art.id}.title`) {
+      throw new Error(
+        `news-ticker: article '${art.id}' has no ${loc} title (raw i18n key would ship) — refusing to publish`,
+      );
+    }
+    if (!art.slug?.[loc]) {
+      throw new Error(`news-ticker: article '${art.id}' has no ${loc} slug — refusing to publish`);
+    }
+  }
+}
+write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -220,6 +293,9 @@ write('manifest.json', {
     swissArticles: SWISS_ARTICLES.length,
     sitemapBlogUrls: sitemapCounts.blog,
     sitemapBlogChUrls: sitemapCounts.blogCh,
+    rssFeeds: rssFeedCount,
+    rssItems: rssItemTotal,
+    tickerArticles: tickerArticles.length,
   },
   files: written,
 });

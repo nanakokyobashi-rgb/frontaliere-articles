@@ -39,9 +39,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '22'
 
@@ -65,6 +65,29 @@ jobs:
           for f in articles.json slugs.json manifest.json; do
             test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
           done
+
+          # The ten feeds and the ticker payload are consumed as live SEO/UI
+          # surface, so gate them on the artifact too — not just on the builder
+          # having exited zero. An empty feed served over a good one drops a
+          # whole channel; an empty ticker leaves the homepage on its skeleton.
+          for f in rss.xml rss-it.xml rss-en.xml rss-de.xml rss-fr.xml \
+                   rss-svizzera.xml rss-svizzera-it.xml rss-svizzera-en.xml \
+                   rss-svizzera-de.xml rss-svizzera-fr.xml; do
+            test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
+            items=$(grep -c '<item>' "dist/api/$f" || true)
+            echo "$f: $items items"
+            if [ "$items" -lt 1 ]; then
+              echo "::error::dist/api/$f has no <item> entries — refusing to publish"
+              exit 1
+            fi
+          done
+
+          ticker=$(node -p "require('./dist/api/news-ticker-live.json').articles.length")
+          echo "news-ticker articles: $ticker"
+          if [ "$ticker" -lt 5 ]; then
+            echo "::error::news-ticker-live.json carries only $ticker articles — refusing to publish"
+            exit 1
+          fi
 
       - uses: actions/configure-pages@v5
 

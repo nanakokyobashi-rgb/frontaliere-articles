@@ -21,8 +21,19 @@ Pages, sotto `dist/api/`:
 | `meta-<locale>.json` | titolo / excerpt / imageAlt per articolo, frontaliere |
 | `meta-ch-<locale>.json` | idem, svizzera |
 | `slugs.json` | mappa id → slug per locale, più la mappa inversa |
+| `sitemap-blog.xml`, `sitemap-blog-ch.xml` | sitemap articoli, con alternate hreflang |
+| `rss.xml`, `rss-<locale>.xml`, `rss-svizzera*.xml` | dieci feed RSS 2.0 |
+| `news-ticker-live.json` | i cinque articoli più recenti, per il ticker in homepage |
 
 Locali: `it`, `en`, `de`, `fr`.
+
+Sitemap, feed e ticker sono **funzioni pure del corpus**: stanno qui perché
+questo è il repo che può emetterli senza essere un ciclo di pubblicazione
+indietro. Il generatore RSS non è riscritto qui — è `engine/rssFeeds.mjs`, lo
+stesso modulo che chiama il repo del sito, parametrizzato su dove sta il corpus.
+Una seconda copia andrebbe in drift in silenzio: un feed non lo diffa nessuno
+una volta servito, e la divergenza salta fuori solo quando un aggregatore molla
+il canale.
 
 Il consumer dovrebbe leggere `manifest.json` per primo: `commit` identifica
 esattamente lo stato del corpus, e `counts` permette di rifiutare un set
