@@ -1,0 +1,76 @@
+name: Publish article data API
+
+# This repository owns the article corpus. The site that renders it lives in a
+# separate repository and consumes this data as plain JSON over HTTP — it must
+# never reach into these sources at build time. Publishing on every push to main
+# is what lets the two repos move independently: an article lands here and is
+# live for consumers without the site repo deploying anything.
+#
+# JSON is the contract on purpose. The previous coupling shipped the registry as
+# a Rollup-shaped ES module; republishing it out-of-band as a standalone esbuild
+# bundle produced a module whose generated namespace export the consumer expected
+# and did not find, and every article page on the live site sat on a loading
+# skeleton. A JSON document has no module shape to disagree about.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'scripts/build-api.mjs'
+      - '.github/workflows/publish-api.yml'
+  workflow_dispatch:
+
+# One publish at a time, and never cancel one in flight: a half-written data
+# surface is worse than a slightly stale one.
+concurrency:
+  group: publish-api
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # tsx, not plain node: the corpus sources use extensionless relative
+      # specifiers, which plain Node ESM does not resolve.
+      - name: Build data surface
+        run: npx -y tsx@4 scripts/build-api.mjs
+
+      # The builder already refuses to emit an empty registry; this is the second
+      # gate, on the artifact rather than the process, so a truncated write can
+      # never be published over a good copy.
+      - name: Verify artifact
+        run: |
+          set -euo pipefail
+          count=$(node -p "require('./dist/api/manifest.json').counts.articles")
+          echo "articles in manifest: $count"
+          if [ "$count" -lt 100 ]; then
+            echo "::error::manifest reports only $count articles — refusing to publish"
+            exit 1
+          fi
+          for f in articles.json slugs.json manifest.json; do
+            test -s "dist/api/$f" || { echo "::error::dist/api/$f missing or empty"; exit 1; }
+          done
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/api
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
