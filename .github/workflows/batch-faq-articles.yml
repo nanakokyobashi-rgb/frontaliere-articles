@@ -35,6 +35,22 @@ name: Batch FAQ Generation
 on:
   schedule:
     - cron: '30 0 * * *'  # Daily at 00:30 UTC (after the Gemini quota reset)
+  # Self-test. A push that touches this workflow or the scripts it drives re-runs
+  # it in DRY-RUN — no AI calls, no writes, no commit (see "Resolve run mode").
+  # Two things fall out of that, and both matter:
+  #   1. It proves the plumbing — checkout, npm ci, Remote Config, credential
+  #      presence, the corpus scan — on every change, instead of discovering a
+  #      broken workflow at 00:30 UTC when nobody is watching.
+  #   2. GitHub only makes a workflow dispatchable once it has seen it run. A
+  #      brand-new file on a side branch is NOT in /actions/workflows, so
+  #      workflow_dispatch 404s until something registers it. This is what lets
+  #      the workflow be tested before cutover rather than only after.
+  push:
+    paths:
+      - '.github/workflows/batch-faq-articles.yml'
+      - 'generator/scripts/batch-add-faq-to-articles.mjs'
+      - 'generator/scripts/fix-faq-locales.mjs'
+      - 'generator/scripts/load-rc-env.mjs'
   workflow_dispatch:
     inputs:
       limit:
@@ -72,6 +88,24 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 360
     steps:
+      # Exactly one place decides whether this run may write, so no later step has
+      # to re-derive it from the event name. A push is ALWAYS dry (it is a
+      # self-test on a code change); a schedule is always real; a manual dispatch
+      # is whatever the operator asked for.
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -132,14 +166,14 @@ jobs:
           if [ "${{ inputs.skip_translate }}" = "true" ]; then
             ARGS="$ARGS --skip-translate"
           fi
-          if [ "${{ inputs.dry_run }}" = "true" ]; then
+          if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
           echo "running: node generator/scripts/batch-add-faq-to-articles.mjs $ARGS"
           node generator/scripts/batch-add-faq-to-articles.mjs $ARGS
 
       - name: Fix FAQ locales (translate missing/wrong-locale FAQs)
-        if: inputs.dry_run != true
+        if: steps.mode.outputs.dry != 'true'
         run: node generator/scripts/fix-faq-locales.mjs --limit 500
 
       # No git-add-resolved.mjs here: that exists in the site repo because
@@ -156,7 +190,7 @@ jobs:
           echo "modified blog body files: $MODIFIED"
 
       - name: Commit and push changes
-        if: steps.count.outputs.modified_count != '0'
+        if: steps.mode.outputs.dry != 'true' && steps.count.outputs.modified_count != '0'
         run: |
           set -euo pipefail
           if [ -z "${GITHUB_PAT:-}" ]; then
@@ -198,7 +232,7 @@ jobs:
         run: |
           {
             echo "### Batch FAQ Generation"
-            echo "- Dry run: ${{ inputs.dry_run || 'false' }}"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
             echo "- Limit: ${{ inputs.limit || '200' }}"
             echo "- Concurrency: ${{ inputs.concurrency || '1' }}"
             echo "- Skip translate: ${{ inputs.skip_translate || 'false' }}"
