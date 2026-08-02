@@ -30,15 +30,34 @@
  *   node generator/scripts/refresh-border-wait-window.mjs
  *   node generator/scripts/refresh-border-wait-window.mjs --check   # no write
  *
- * Override the source with BORDER_WAIT_WINDOW_URL (used by the tests).
+ * Override with BORDER_WAIT_WINDOW_URL to pin a single source (used by the tests).
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const SOURCE =
-  process.env.BORDER_WAIT_WINDOW_URL ??
-  'https://frontaliereticino.ch/data/border-wait-ranking-window.json';
+const FILE = 'border-wait-ranking-window.json';
+const ENV_URL = process.env.BORDER_WAIT_WINDOW_URL;
+
+/**
+ * Where the site actually serves its data JSON.
+ *
+ * NOT same-origin. `scripts/offload-generated-images-cdn.mjs` in the site repo
+ * pushes every dist/data file to the CDN and then DELETES the same-origin copy,
+ * so https://frontaliereticino.ch/data/<f> 404s for every one of them — verified
+ * against files that have existed for months, not just the new ones.
+ *
+ * Same-origin is still tried as a fallback, because the offload step only runs
+ * when CDN_BASE is known; a deploy without it leaves the files where the naive
+ * URL expects them. First 200 wins.
+ */
+const SOURCES = ENV_URL
+  ? [ENV_URL]
+  : [
+      `https://cdn.frontaliereticino.ch/data/${FILE}`,
+      `https://frontaliereticino.ch/data/${FILE}`,
+    ];
+
 
 const CACHE = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -80,10 +99,19 @@ async function get(url) {
 }
 
 let raw;
-try {
-  raw = await get(SOURCE);
-} catch (err) {
-  fail(`${SOURCE} unavailable: ${err.message}`);
+let SOURCE;
+{
+  const errors = [];
+  for (const url of SOURCES) {
+    try {
+      raw = await get(url);
+      SOURCE = url;
+      break;
+    } catch (err) {
+      errors.push(`${url}: ${err.message}`);
+    }
+  }
+  if (raw === undefined) fail(`no source reachable —\n  ${errors.join('\n  ')}`);
 }
 
 let payload;
