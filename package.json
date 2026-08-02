@@ -24,6 +24,7 @@
     "test:parity": "node generator/tests/parity/run.mjs --check",
     "test:dry-run": "node generator/tests/dry-run-entrypoints.mjs",
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
-    "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs"
+    "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
+    "refresh:events": "node generator/scripts/refresh-events-dataset.mjs"
   }
 }

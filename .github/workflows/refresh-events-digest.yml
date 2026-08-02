@@ -1,0 +1,164 @@
+name: Refresh Events Weekend Digest
+
+# The ONE step of the site repo's crawl-events.yml that moves here (issue #4974
+# item 3, §0.2). That workflow is a site data pipeline — it crawls tio.ch,
+# guidle, myswitzerland and geneve.ch into data/events.json — and five of its six
+# steps have no corpus involvement at all. Moving "the workflow" is not
+# well-formed; only `generate-events-digest-article.mjs` moves, and this is it.
+#
+# It refreshes ONE evergreen article (`eventi-weekend-ticino`) in place. It never
+# registers a new one, so it cannot flood the corpus.
+#
+# THE DATA COMES OVER HTTP
+#
+# The crawling stays in the site repo, so the dataset does too. The site now
+# publishes it (assemble-events-dataset.mjs writes public/data/events.json in the
+# same call as data/events.json) and refresh-events-dataset.mjs fetches it here.
+#
+# That fetch is a HARD gate and its position in this job is deliberate. It runs
+# BEFORE the digest, and a failure stops the run, because loadEventsDataset()
+# treats a missing file as zero events and the digest will cheerfully render
+# "no events this weekend" from that — overwriting a correct digest on an
+# evergreen URL with an empty one. Soft-failing here would be strictly worse than
+# not running at all.
+#
+# Note that a genuine zero-Ticino-event weekend is NOT that failure: the digest
+# is Ticino-scoped by design (#3647) and renders non-TI events in their own
+# section, so an empty Ticino count with a populated dataset is a correct
+# outcome, not a broken fetch. Only the fetch itself is gated.
+
+on:
+  schedule:
+    # Thursday 06:40 UTC — ahead of the weekend the digest describes, and off the
+    # slot the site repo's crawl-events.yml uses so the two do not collide while
+    # both still exist.
+    - cron: '40 6 * * 4'
+  # Self-test on change, always dry. See batch-faq-articles.yml.
+  push:
+    paths:
+      - '.github/workflows/refresh-events-digest.yml'
+      - 'generator/scripts/generate-events-digest-article.mjs'
+      - 'generator/scripts/refresh-events-dataset.mjs'
+      - 'generator/scripts/lib/events-digest-content.mjs'
+      - 'generator/scripts/lib/events-utils.mjs'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Fetch and render, but write and commit nothing'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: refresh-events-digest
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --ignore-scripts
+
+      # Hard gate — see the header. No dataset, no digest.
+      - name: Fetch the events dataset
+        run: npm run refresh:events
+
+      - name: Refresh the weekend digest
+        env:
+          DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
+        run: node generator/scripts/generate-events-digest-article.mjs
+
+      - name: Prepare Firebase credentials
+        if: steps.mode.outputs.dry != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — it is the only source of the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Commit and push
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          # data/events.json is gitignored: it is a fetched cache of another
+          # repo's dataset, and committing 1.9 MB of it per run would be noise.
+          git add content/blog-body/it/eventi-weekend-ticino.ts \
+                  content/blog-body/en/eventi-weekend-ticino.ts \
+                  content/blog-body/de/eventi-weekend-ticino.ts \
+                  content/blog-body/fr/eventi-weekend-ticino.ts \
+                  content/blog-articles-data.ts \
+                  content/seo/seo-blog-5.ts
+          if git diff --cached --quiet; then
+            echo "no digest changes"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml"
+            exit 1
+          fi
+
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+          git commit -m "Refresh the weekend events digest"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep $((attempt * 3))
+          done
+          echo "::error::push failed after 3 attempts"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Events Weekend Digest"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
