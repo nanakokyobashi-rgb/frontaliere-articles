@@ -22,6 +22,9 @@
  *   sitemap-blog.xml / sitemap-blog-ch.xml   article sitemaps, with hreflang
  *   rss*.xml           ten RSS feeds (two sections x four locales + main copy)
  *   news-ticker-live.json  the homepage ticker's five newest articles
+ *   sitemap-news-candidates.xml  Google News candidates (migration §7.2)
+ *   images-manifest.json + images/blog/*.webp  hero images (migration §7.1),
+ *                      emitted ONLY when this repo actually holds images
  *
  * Run with tsx: the corpus sources use extensionless relative specifiers, which
  * plain Node ESM does not resolve.
@@ -30,7 +33,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
-import { buildAllRssFeeds } from '../engine/rssFeeds.mjs';
+import { buildAllRssFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
+// The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
+// re-copied: main pulls the eligibility decision from this repo and a third copy
+// of the token list is exactly the drift that module's header warns about. A
+// static import is also the point — the failure this replaced was a regex parse
+// that silently returned [], which `isArticleNewsEligible` would read as
+// allow-all. A missing module throws; an empty list does not.
+import {
+  isArticleNewsEligible,
+  NEWS_SITEMAP_WINDOW_HOURS,
+} from '../generator/data/news-sitemap-whitelist.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -38,6 +51,14 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
 
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
+
+// Migration artifact names (docs/articles-generator-migration.md §7). Spelled
+// exactly as scripts/pull-articles-api.mjs fetches them in the site repo.
+const NEWS_CANDIDATES = 'sitemap-news-candidates.xml';
+const IMAGE_MANIFEST = 'images-manifest.json';
+
+let newsCandidateCount = 0;
+let imageCount = 0;
 
 const written = {};
 const write = (name, value) => {
@@ -283,6 +304,200 @@ for (const art of tickerArticles) {
 }
 write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 
+// ── Google News candidates (migration §7.2) ───────────────────────
+//
+// §3 picks option (a): THIS repo decides Google News eligibility once, from the
+// whitelist vendored into its own tree, and publishes the resulting <url> blocks
+// as candidates. The site never re-decides eligibility — it merges these over
+// what it is serving and applies the mechanical 48h prune. Two independent
+// eligibility codepaths is the "two producers, last writer wins" failure that
+// create-article's own modifySitemap() comment warns about.
+//
+// Derived from the corpus rather than accumulated in a committed file, for the
+// same reason sitemap-blog.xml and the feeds are: a state file that create-article
+// appends to would be a second source of truth that drifts the moment a run dies
+// between writing the corpus and writing the file. This is a pure function of the
+// registry, so republishing on every push is idempotent and self-healing.
+//
+// The candidate set is ALLOWED to be empty, and the file is emitted anyway: the
+// window prunes it every day and a quiet day is a correct outcome, not an absence.
+// The consumer accepts an empty <urlset> and refuses a non-sitemap document, so
+// emitting always is also what lets it run under --require-new.
+{
+  /**
+   * Per-article SEO text the whitelist matches on. `keywords` lives only in the
+   * seo-blog*.ts chunks, so it has to be read from there; `articleSection` and
+   * `tags` are NOT persisted anywhere in this repo (create-article has them only
+   * in memory during generation), so the registry's `category` stands in for
+   * articleSection and tags are simply absent. That is the whole of what the
+   * corpus retains — not a sampling of it.
+   */
+  const seoTextById = new Map();
+  for (const section of RSS_SECTIONS) {
+    for (const file of section.seoFiles) {
+      const fp = path.join(ROOT, 'content', 'seo', file);
+      if (!fs.existsSync(fp)) continue;
+      const src = fs.readFileSync(fp, 'utf-8');
+      const entryRe = /'blog-([^']+)':\s*\{/g;
+      const positions = [];
+      let m;
+      while ((m = entryRe.exec(src)) !== null) positions.push({ id: m[1], start: m.index });
+      for (let i = 0; i < positions.length; i++) {
+        const { id, start } = positions[i];
+        const end = i + 1 < positions.length ? positions[i + 1].start : src.length;
+        const block = src.slice(start, Math.min(end, start + 4000));
+        // `(?:[^'\\]|\\.)*` rather than `[^']+`: create-article escapes literal
+        // apostrophes into these values, and the naive class stops at the
+        // backslash-quote — which in Italian truncates a third of the corpus
+        // (the bug engine/rssFeeds.mjs documents against its own parser).
+        const keywords = block.match(/keywords:\s*'((?:[^'\\]|\\.)*)'/)?.[1];
+        const headline = block.match(/"headline":\s*"((?:[^"\\]|\\.)*)"/)?.[1];
+        seoTextById.set(id, { keywords, headline });
+      }
+    }
+  }
+
+  const NEWS_PUBLICATION = 'Frontaliere Ticino';
+  const now = Date.now();
+  const today = new Date(now).toISOString().slice(0, 10);
+
+  const candidateBlocks = [];
+  let considered = 0;
+
+  const collect = (entries, sectionId, slugMap, meta) => {
+    const paths = SECTION_PATHS[sectionId];
+    for (const a of entries) {
+      const slug = slugMap?.[a.id]?.it;
+      if (!slug) continue;
+      const publishedAt = a.date;
+      if (!publishedAt) continue;
+      considered += 1;
+
+      const title = meta[`blog.article.${a.id}.title`] || '';
+      const seo = seoTextById.get(a.id) ?? {};
+      // headline and title are the same string for every generator-written
+      // article, but create-article's own gate reads BOTH — so both are fed in
+      // rather than assuming they agree. They go into the `title` slot because
+      // the vendored predicate is a byte-faithful mirror of main's, and adding a
+      // field to it here is precisely the divergence the vendoring forbids.
+      const titleText = [title, seo.headline].filter(Boolean).join(' ');
+
+      if (
+        !isArticleNewsEligible(
+          {
+            slug,
+            title: titleText,
+            articleSection: a.category,
+            keywords: seo.keywords,
+            publishedAt,
+          },
+          now,
+        )
+      ) {
+        continue;
+      }
+
+      const itLoc = `${SITE}${paths.it}${slug}/`;
+      const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
+
+      const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${today}</lastmod>`];
+      for (const loc of LOCALES) {
+        const s2 = slugMap?.[a.id]?.[loc];
+        if (s2) {
+          parts.push(
+            `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
+          );
+        }
+      }
+      parts.push(
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${itLoc}" />`,
+        `    <news:news>`,
+        `      <news:publication>`,
+        `        <news:name>${NEWS_PUBLICATION}</news:name>`,
+        `        <news:language>it</news:language>`,
+        `      </news:publication>`,
+        // The consumer refuses a block without this field and prunes on it, so
+        // it carries the registry's own timestamp verbatim. Generator-written
+        // entries hold a full ISO instant; the handful of legacy day-only dates
+        // resolve to midnight UTC, which costs part of a window but never
+        // fabricates freshness.
+        `      <news:publication_date>${xmlEsc(publishedAt)}</news:publication_date>`,
+        `      <news:title>${xmlEsc(title)}</news:title>`,
+        `    </news:news>`,
+      );
+      if (img) {
+        parts.push(
+          `    <image:image>`,
+          `      <image:loc>${xmlEsc(img)}</image:loc>`,
+          `      <image:title>${xmlEsc(title)}</image:title>`,
+          `    </image:image>`,
+        );
+      }
+      parts.push(`  </url>`);
+      candidateBlocks.push(parts.join('\n'));
+    }
+  };
+
+  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt);
+  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt);
+
+  const candidatesXml =
+    `<?xml version="1.0" encoding="UTF-8"?>\n` +
+    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
+    `        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"\n` +
+    `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n` +
+    `        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
+    (candidateBlocks.length ? candidateBlocks.join('\n') + '\n' : '') +
+    `</urlset>\n`;
+
+  fs.writeFileSync(path.join(OUT, NEWS_CANDIDATES), candidatesXml);
+  written[NEWS_CANDIDATES] = candidatesXml.length;
+  newsCandidateCount = candidateBlocks.length;
+  console.log(
+    `[build-api] ${NEWS_CANDIDATES}: ${candidateBlocks.length} candidates from ` +
+      `${considered} dated articles (${NEWS_SITEMAP_WINDOW_HOURS}h window), ${candidatesXml.length} bytes`,
+  );
+}
+
+// ── Hero images (migration §7.1) ──────────────────────────────────
+//
+// Unlike every other artifact here an image cannot be re-derived by the consumer,
+// so it has to be transferred. The manifest is a plain list, not a diff: it is
+// republished whole on every push and the site downloads only what it is missing,
+// which keeps the pull idempotent without either side tracking the other's state.
+//
+// Emitted ONLY when there is at least one image. The consumer refuses a manifest
+// listing zero images — deliberately, since an empty list is indistinguishable
+// from a publisher that broke halfway — so publishing one while generation still
+// runs in the site repo (and this repo therefore holds no images at all) would
+// turn every sync red. Absence is the correct signal until the generator cuts
+// over and starts writing public/images/blog/ here.
+{
+  const srcDir = path.join(ROOT, 'public', 'images', 'blog');
+  const files = fs.existsSync(srcDir)
+    ? fs.readdirSync(srcDir).filter((f) => f.endsWith('.webp')).sort()
+    : [];
+
+  if (files.length === 0) {
+    console.log(
+      `[build-api] ${IMAGE_MANIFEST}: not emitted — public/images/blog holds no .webp ` +
+        `(the consumer refuses a zero-image manifest; absence is the correct signal)`,
+    );
+  } else {
+    const destDir = path.join(OUT, 'images', 'blog');
+    fs.mkdirSync(destDir, { recursive: true });
+    const images = [];
+    for (const file of files) {
+      const bytes = fs.readFileSync(path.join(srcDir, file));
+      fs.writeFileSync(path.join(destDir, file), bytes);
+      images.push({ id: file.replace(/\.webp$/, ''), path: `images/blog/${file}`, bytes: bytes.length });
+    }
+    write(IMAGE_MANIFEST, { commit, images });
+    imageCount = images.length;
+    console.log(`[build-api] images/blog: ${images.length} files copied to dist/api`);
+  }
+}
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -296,6 +511,8 @@ write('manifest.json', {
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,
+    newsCandidates: newsCandidateCount,
+    images: imageCount,
   },
   files: written,
 });

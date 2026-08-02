@@ -97,6 +97,62 @@ jobs:
             exit 1
           fi
 
+          # ── Migration artifacts (docs §7 in the site repo) ──────────────
+          #
+          # The candidates file must ALWAYS exist — the site runs its sync with
+          # --require-new and treats absence as a broken publisher. An empty
+          # <urlset> is a correct quiet day, so the gate is presence and shape,
+          # not a count floor (a floor would refuse every correct quiet day).
+          test -s dist/api/sitemap-news-candidates.xml || {
+            echo "::error::sitemap-news-candidates.xml missing or empty — refusing to publish"; exit 1; }
+          grep -q '<urlset' dist/api/sitemap-news-candidates.xml || {
+            echo "::error::sitemap-news-candidates.xml is not a sitemap document — refusing"; exit 1; }
+
+          cands=$(grep -c '<url>' dist/api/sitemap-news-candidates.xml || true)
+          echo "news candidates: $cands"
+
+          # Every block must carry a publication date: it is the field the whole
+          # freshness window turns on and the consumer refuses a block without one.
+          dates=$(grep -c '<news:publication_date>' dist/api/sitemap-news-candidates.xml || true)
+          if [ "$cands" -ne "$dates" ]; then
+            echo "::error::$cands candidate blocks but $dates publication dates — refusing"
+            exit 1
+          fi
+
+          # Ceiling, not a floor. The candidate set is the 48h slice of the corpus,
+          # which is single digits on a normal day; a few hundred would mean the
+          # window check broke and the whole 3.6k-article corpus is being offered
+          # as "news". That silently torches the news sitemap, so it stops here.
+          if [ "$cands" -gt 200 ]; then
+            echo "::error::$cands news candidates — the 48h window is not being applied; refusing"
+            exit 1
+          fi
+
+          # The image manifest is emitted ONLY when this repo holds hero images,
+          # because the consumer refuses one listing zero. So its absence is valid
+          # and only its CONTENT is gated here.
+          if [ -f dist/api/images-manifest.json ]; then
+            imgs=$(node -p "require('./dist/api/images-manifest.json').images.length")
+            echo "images in manifest: $imgs"
+            if [ "$imgs" -lt 1 ]; then
+              echo "::error::images-manifest.json was emitted but lists zero images — refusing"
+              exit 1
+            fi
+            # Every listed path must have actually been copied into the artifact,
+            # or the site fetches a 404 and fails the whole sync.
+            node -e "
+              const m = require('./dist/api/images-manifest.json');
+              const fs = require('fs');
+              const missing = m.images.filter((i) => !fs.existsSync('dist/api/' + i.path));
+              if (missing.length) {
+                console.error('::error::manifest lists ' + missing.length + ' image(s) not present in dist/api: ' + missing.map(i => i.path).join(', '));
+                process.exit(1);
+              }
+            "
+          else
+            echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
+          fi
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3
