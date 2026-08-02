@@ -56,9 +56,12 @@ fs.mkdirSync(OUT, { recursive: true });
 // exactly as scripts/pull-articles-api.mjs fetches them in the site repo.
 const NEWS_CANDIDATES = 'sitemap-news-candidates.xml';
 const IMAGE_MANIFEST = 'images-manifest.json';
+/** Site-consumed ranking snapshot republished from the generator's output (§4). */
+const BORDER_RANKING = 'border-wait-ranking.json';
 
 let newsCandidateCount = 0;
 let imageCount = 0;
+let borderRankingEntries = 0;
 
 const written = {};
 const write = (name, value) => {
@@ -498,6 +501,48 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   }
 }
 
+// ── Border-wait ranking snapshot (migration §4) ───────────────────
+//
+// generate-border-wait-ranking-article.mjs writes public/data/border-wait-ranking.json
+// alongside the article bodies. That file is NOT article content — it feeds the
+// site's InlineBorderWaitRanking chart — so §4 left it as an open question:
+// either the site keeps producing it, or this repo produces it and the site pulls
+// it. This is the second option, and it is the only one consistent with the rest
+// of the split: the ranking is computed from the same 7-day window this repo
+// already fetches, so having the site recompute it would mean two producers of
+// one number, disagreeing whenever their windows differ by a run.
+//
+// Republished verbatim, not re-derived: whatever the generator wrote is what the
+// site gets. Absent until the ranking producer has run at least once here, which
+// is why this is emitted conditionally rather than gated — the site's pull treats
+// it exactly like the image manifest, absence meaning "not produced yet".
+{
+  const src = path.join(ROOT, 'public', 'data', 'border-wait-ranking.json');
+  if (fs.existsSync(src)) {
+    const raw = fs.readFileSync(src, 'utf-8');
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`public/data/border-wait-ranking.json is not valid JSON: ${err.message}`);
+    }
+    // A ranking with no crossings would blank the live chart. Refuse rather than
+    // publish it — the site cannot tell an empty ranking from a broken one.
+    const entries = Array.isArray(parsed?.ranking) ? parsed.ranking : null;
+    if (!entries || entries.length === 0) {
+      throw new Error('border-wait-ranking.json carries no ranking entries — refusing to publish');
+    }
+    fs.writeFileSync(path.join(OUT, BORDER_RANKING), raw);
+    written[BORDER_RANKING] = raw.length;
+    borderRankingEntries = entries.length;
+    console.log(`[build-api] ${BORDER_RANKING}: ${entries.length} crossings, ${raw.length} bytes`);
+  } else {
+    console.log(
+      `[build-api] ${BORDER_RANKING}: not emitted — the ranking producer has not run here yet`,
+    );
+  }
+}
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -513,6 +558,7 @@ write('manifest.json', {
     tickerArticles: tickerArticles.length,
     newsCandidates: newsCandidateCount,
     images: imageCount,
+    borderRankingEntries,
   },
   files: written,
 });

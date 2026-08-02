@@ -1,0 +1,182 @@
+name: Publish Journalist Articles
+
+# Drains the Firestore `journalist_articles` queue and registers each approved
+# article into this repository's corpus (issue #4974 item 3, §4/§5).
+#
+# The DASHBOARD does not move. components/pages/JournalistDashboardPage.tsx and
+# its Firestore-backed services stay in the site repo — that is a site feature,
+# 1100+ lines of React over a Firestore collection, and moving it would be
+# rewriting it, not migrating it. Only the half that WRITES articles moves, which
+# is this script. The queue stays the contract between the two.
+#
+# THE ORPHAN FAILURE MODE — read before editing the commit step
+#
+# publish-journalist-article.mjs stamps each doc status:'published' in Firestore
+# BEFORE this workflow commits anything, and nothing re-processes a doc that is
+# already 'published'. So a push that fails after a successful run does not retry
+# later — it silently loses the article. Incident 2026-07-16 (site repo run
+# 29485706663) orphaned four articles for 8+ hours exactly this way.
+#
+# The site repo defends with git-push-with-retry.sh plus an append-conflict
+# resolver. Neither was transported, and re-implementing that resolver here from
+# memory would be worse than not having it. So this workflow instead:
+#   - retries the push with a rebase between attempts, and
+#   - FAILS LOUDLY with the published ids in the summary if it still cannot push,
+#     so the orphaned docs are named rather than silently dropped.
+# It never swallows a push failure. If this step is red, those ids need
+# re-committing by hand or un-stamping in Firestore.
+#
+# WHAT IS DROPPED FROM THE SITE REPO'S COPY
+#   - check-journalist-article-links.mjs: checks links against the LIVE site, so
+#     it can only run after the site has pulled and deployed — not here (§4).
+#   - check-seo-pages-syntax.mjs: services/seo/seo-pages.ts is no longer written
+#     by the generator at all (#4983/#4997), so the gate guards a file nobody
+#     touches (§4 calls it dead weight — drop, don't port).
+#   - trigger-deploy / fast-publish dispatches: site-only.
+#   - The composite action fallbacks: optional model tiers, not transported.
+
+on:
+  schedule:
+    - cron: '15 */2 * * *'  # Every 2 hours at :15 — off the article-gen slots
+  # Self-test on change, always dry. See batch-faq-articles.yml for why this is
+  # what makes the workflow dispatchable and keeps the plumbing covered.
+  push:
+    paths:
+      - '.github/workflows/publish-journalist-articles.yml'
+      - 'generator/scripts/publish-journalist-article.mjs'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Connect and report the queue, but publish nothing'
+        required: false
+        default: false
+        type: boolean
+
+# Never cancel: a cancelled run can land between the Firestore stamp and the
+# commit, which is the orphan window described above.
+concurrency:
+  group: publish-journalist-articles
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — it is both the Firestore credential and the only source of the provider keys"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Dry mode stops here on purpose: this script has no --dry-run flag, and
+      # its first side effect is a Firestore write. Proving the queue is
+      # reachable is as far as a self-test may safely go.
+      - name: Report the queue (dry run — no publish)
+        if: steps.mode.outputs.dry == 'true'
+        run: |
+          set -euo pipefail
+          node -e "
+            const admin = (await import('firebase-admin')).default;
+            admin.initializeApp({ credential: admin.credential.applicationDefault(),
+              projectId: process.env.GCLOUD_PROJECT || 'frontaliere-ticino' });
+            const snap = await admin.firestore().collection('journalist_articles')
+              .where('status','==','queued').get();
+            console.log('queued journalist articles:', snap.size);
+          " --input-type=module
+
+      - name: Configure git identity
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      - name: Publish queued journalist articles
+        id: publish
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/publish-journalist-article.mjs
+
+      - name: Commit and push registered articles
+        id: commit
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no journalist-article changes"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml"
+            exit 1
+          fi
+
+          git commit -m "Publish journalist article(s)"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3 4 5; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep $((attempt * 3))
+          done
+
+          # Deliberately NOT `|| true`. Firestore already says these are
+          # published; if the commit never lands they are orphaned, and the only
+          # signal anyone gets is this failure.
+          echo "::error::push failed after 5 attempts — these ids are stamped 'published' in Firestore but NOT committed: ${{ steps.publish.outputs.published_ids }}"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Publish Journalist Articles"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Published ids: ${{ steps.publish.outputs.published_ids || 'none' }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"

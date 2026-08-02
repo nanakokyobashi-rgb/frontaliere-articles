@@ -1,0 +1,185 @@
+name: Refresh Border-Wait Ranking Digest (weekly)
+
+# Evergreen "best/worst dogane" ranking article (`classifica-dogane-ticino`),
+# moved here with the generator (issue #4974 item 3, §4/§5). The article is
+# registered ONCE; this only refreshes its four locale bodies plus the compact
+# ranking JSON the site's InlineBorderWaitRanking chart reads.
+#
+# THE DATA COMES OVER HTTP, AND THAT IS THE WHOLE REWIRE
+#
+# The ranking needs a 7-day sample-weighted mean over all 24 hourly cells. That
+# is computed from a border-wait history that exists only in the site repo, and
+# is NOT the same statistic as the 30-day p25/p75 averages overlay (§0bis.1 —
+# easy to conflate, they cannot substitute for each other). So the site publishes
+# the pre-aggregated 2x7-day window as border-wait-ranking-window.json and this
+# repo fetches it. refresh-border-wait-window.mjs is that fetch.
+#
+# Unlike the averages fetch, this one is NOT soft-failing. The averages are a
+# cosmetic overlay with hard-coded editorial defaults behind them; this window IS
+# the article's data. An unreachable or stale publisher must stop the run, because
+# the alternative is republishing an evergreen URL that already ranks with a
+# ranking table built from nothing.
+#
+# WHERE THE RANKING JSON GOES
+#
+# generate-border-wait-ranking-article.mjs writes public/data/border-wait-ranking.json.
+# That file is site surface, not corpus, and §4 left its ownership open. It is
+# resolved here in the only way consistent with the rest of the split: this repo
+# produces it, scripts/build-api.mjs republishes it into the API surface, and the
+# site's pull-articles-api.mjs fetches it. The alternative — the site recomputing
+# it — would mean two producers of one number, disagreeing whenever their windows
+# differ by a run.
+#
+# DROPPED FROM THE SITE REPO'S COPY
+#   - the vitest gate: this repo has no vitest and no .ts test runner. The
+#     equivalent cover here is generator-ci.yml's node:test suite plus the
+#     dry-run entry-point gate, which run on every push to generator/**.
+#   - git-add-resolved.mjs: needed there because blog-body is a symlink into
+#     packages/articles; here the real files sit at content/blog-body.
+#   - trigger-deploy.sh / github-issue-creator.mjs: site-only, not transported.
+
+on:
+  schedule:
+    # Weekly, Monday 04:50 UTC — same off-peak slot the site repo used.
+    - cron: '50 4 * * 1'
+  # Self-test on change, always dry. See batch-faq-articles.yml.
+  push:
+    paths:
+      - '.github/workflows/generate-border-wait-ranking-weekly.yml'
+      - 'generator/scripts/generate-border-wait-ranking-article.mjs'
+      - 'generator/scripts/refresh-border-wait-window.mjs'
+      - 'generator/scripts/lib/border-wait-ranking.mjs'
+      - 'generator/scripts/lib/border-wait-ranking-content.mjs'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Plan only: fetch the window and render, write nothing'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: border-wait-ranking-digest
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # --ignore-scripts: this job renders text and fetches one JSON. It does not
+      # need sharp's or playwright's postinstall, which are the slowest part of a
+      # full install here.
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --ignore-scripts
+
+      # Hard gate, deliberately before anything else: no window, no article.
+      - name: Fetch the border-wait ranking window
+        run: npm run refresh:border-wait-window
+
+      # tsx, not node: this entry point reaches ../build-plugins/borderWaitData.ts
+      # and services/borderWaitFormat.ts, which plain Node ESM cannot resolve.
+      - name: Refresh ranking digest article body + snapshot JSON
+        env:
+          DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
+        run: npx -y tsx@4 generator/scripts/generate-border-wait-ranking-article.mjs
+
+      # Only the push needs a credential here — the window comes from the public
+      # CDN and the render is offline — so Remote Config is loaded only on a run
+      # that will actually commit. A dry run never touches it.
+      - name: Prepare Firebase credentials
+        if: steps.mode.outputs.dry != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — it is the only source of the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Configure git identity
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      - name: Commit and push
+        id: commit
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          git add public/data/border-wait-ranking.json \
+                  content/blog-body/it/classifica-dogane-ticino.ts \
+                  content/blog-body/en/classifica-dogane-ticino.ts \
+                  content/blog-body/de/classifica-dogane-ticino.ts \
+                  content/blog-body/fr/classifica-dogane-ticino.ts
+          if git diff --cached --quiet; then
+            echo "no ranking digest changes"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml, so the refreshed ranking would never reach the site"
+            exit 1
+          fi
+
+          git commit -m "Weekly border-wait ranking digest refresh"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep $((attempt * 3))
+          done
+          echo "::error::push failed after 3 attempts"
+          exit 1
+
+      # The PAT is only needed for the push, so it is loaded only when there will
+      # be one. A dry run never touches Remote Config.
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Border-Wait Ranking Digest"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
