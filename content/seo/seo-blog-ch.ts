@@ -22754,6 +22754,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontalieri-pensione-altrove': {
+    title: 'Svizzeri all\'estero: pensione qui o altrove | Frontaliere Ticino',
+    description: 'Secondo quanto comunicato nel settembre 2025, molte persone di nazionalità svizzera in pensione vivono a metà tempo tra la Svizzera e un altro Paese.',
+    keywords: 'frontalieri, ticino, svizzera, italia, svizzeri, estero, pensione, altrove',
+    ogTitle: 'Svizzeri in pensione vivono a metà tempo tra la Svizzera e un altro Paese',
+    ogDescription: 'Secondo quanto comunicato nel settembre 2025, molte persone di nazionalità svizzera in pensione vivono a metà tempo tra la Svizzera e un altro Paese.',
+    canonicalPath: '/articoli-svizzera/frontalieri-pensione-altrove/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzeri all'estero: pensione qui o altrove",
+      "description": "Secondo quanto comunicato nel settembre 2025, molte persone di nazionalità svizzera in pensione vivono a metà tempo tra la Svizzera e un altro Paese.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontalieri-pensione-altrove.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "svizzeri in pensione vivono a metà tempo tra la Svizzera e un altro Paese"
+      },
+      "datePublished": "2026-08-02T22:45:06+00:00",
+      "dateModified": "2026-08-02T22:45:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/frontalieri-pensione-altrove/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

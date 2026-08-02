@@ -1759,6 +1759,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lavoro-forzato-svizzera.title': 'Lavoro forzato nelle catene svizzere: realtà o mito?',
     'blog.article.lavoro-forzato-svizzera.excerpt': 'Gli Stati Uniti accusano la Svizzera di non fare abbastanza contro il lavoro forzato nelle sue catene di approvvigionamento.',
     'blog.article.lavoro-forzato-svizzera.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne',
+    'blog.article.frontalieri-pensione-altrove.title': 'Svizzeri all\'estero: pensione qui o altrove',
+    'blog.article.frontalieri-pensione-altrove.excerpt': 'Secondo quanto comunicato nel settembre 2025, molte persone di nazionalità svizzera aspirano a trascorrere una parte dell\'anno sotto altri cieli, senza però rompere completamente i legami con la Confederazione.',
+    'blog.article.frontalieri-pensione-altrove.imageAlt': 'svizzeri in pensione vivono a metà tempo tra la Svizzera e un altro Paese',
 };
 
 export default blogMetaChIt;

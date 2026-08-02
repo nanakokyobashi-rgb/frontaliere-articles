@@ -1759,6 +1759,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lavoro-forzato-svizzera.title': 'Forced labor in Swiss chains: reality or myth?',
     'blog.article.lavoro-forzato-svizzera.excerpt': 'The United States accuses Switzerland of not doing enough against forced labor in its supply chains.',
     'blog.article.lavoro-forzato-svizzera.imageAlt': 'Panoramic view of Lugano with the lake and mountains',
+    'blog.article.frontalieri-pensione-altrove.title': 'Swiss Abroad: Retirement here or elsewhere',
+    'blog.article.frontalieri-pensione-altrove.excerpt': 'According to a statement in September 2025, many Swiss nationals aspire to spend part of the year under other skies, but without completely breaking ties with the Confederation.',
+    'blog.article.frontalieri-pensione-altrove.imageAlt': 'Swiss retirees living part-time between Switzerland and another country',
 };
 
 export default blogMetaChEn;

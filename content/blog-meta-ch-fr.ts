@@ -1759,6 +1759,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lavoro-forzato-svizzera.title': 'Le travail forcé dans les chaînes suisses : réalité ou mythe ?',
     'blog.article.lavoro-forzato-svizzera.excerpt': 'Les États-Unis accusent la Suisse de ne pas faire assez contre le travail forcé dans leurs chaînes d’approvisionnement.',
     'blog.article.lavoro-forzato-svizzera.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes',
+    'blog.article.frontalieri-pensione-altrove.title': 'Suisse à l’étranger : retraite ici ou ailleurs',
+    'blog.article.frontalieri-pensione-altrove.excerpt': 'Selon un communiqué de septembre 2025, de nombreux ressortissants suisses aspirent à passer une partie de l’année sous d’autres cieux, mais sans rompre complètement les liens avec la Confédération.',
+    'blog.article.frontalieri-pensione-altrove.imageAlt': 'Retraités suisses vivant à mi-temps entre la Suisse et un autre pays',
 };
 
 export default blogMetaChFr;

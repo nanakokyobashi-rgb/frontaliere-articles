@@ -1759,6 +1759,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lavoro-forzato-svizzera.title': 'Zwangsarbeit in Schweizer Ketten: Realität oder Mythos?',
     'blog.article.lavoro-forzato-svizzera.excerpt': 'Die USA werfen der Schweiz vor, nicht genug gegen Zwangsarbeit in ihren Lieferketten zu tun.',
     'blog.article.lavoro-forzato-svizzera.imageAlt': 'Panoramablick auf Lugano mit See und Bergen',
+    'blog.article.frontalieri-pensione-altrove.title': 'Swiss Abroad: Ruhestand hier oder anderswo',
+    'blog.article.frontalieri-pensione-altrove.excerpt': 'Laut einer Erklärung aus dem September 2025 streben viele Schweizer Staatsangehörige an, einen Teil des Jahres unter anderem Himmel zu verbringen, jedoch ohne die Verbindung zum Bund vollständig abzubrechen.',
+    'blog.article.frontalieri-pensione-altrove.imageAlt': 'Schweizer Rentner leben zwischen der Schweiz und einem anderen Land',
 };
 
 export default blogMetaChDe;
