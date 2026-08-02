@@ -38,6 +38,7 @@ import {
 } from './cluster-classifier-prompt.mjs';
 import { cascadedScore } from './scoring/cascadedScore.mjs';
 import { computeAdaptiveTopicCandidateDupJaccard } from './scoring/constants.mjs';
+import { corpusPath } from './corpus-paths.mjs';
 
 // ── Paths (overridable via opts for tests) ─────────────────────
 export const PERFORMANCE_PATH = 'data/article-performance.json';
@@ -201,7 +202,7 @@ export function extractItTitlesFromMeta(metaSrc) {
   return out;
 }
 
-export function loadExistingItTitles(metaPath = 'services/locales/blog-meta-it.ts') {
+export function loadExistingItTitles(metaPath = corpusPath('services/locales/blog-meta-it.ts')) {
   try {
     if (!existsSync(metaPath)) return [];
     return extractItTitlesFromMeta(readFileSync(metaPath, 'utf-8'));

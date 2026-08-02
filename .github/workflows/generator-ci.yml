@@ -1,0 +1,103 @@
+name: Generator CI
+
+# Gates for the article generator transported from valerielinc-ops/frontaliere-si-o-no
+# (issue #4974 item 3). This repository had no CI for generator/ at all — the 67
+# files arrived as a copy and had never been executed here, which is how six
+# unresolved imports and a wrong repo-root survived the transport unnoticed.
+#
+# Scoped to generator/ on purpose. `main` publishes the live surface (JSON,
+# sitemaps, 10 RSS feeds, news-ticker) that the site consumes in production, and
+# nothing in this workflow touches it: no writes, no pushes, no secrets.
+
+on:
+  push:
+    branches-ignore: [main]
+    paths:
+      - 'generator/**'
+      - '.github/workflows/generator-ci.yml'
+  pull_request:
+    paths:
+      - 'generator/**'
+      - '.github/workflows/generator-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: generator-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # No `npm ci`: the generator's gates are deliberately dependency-free
+      # (node:test, node:assert). The repo has no lockfile and no devDeps, and
+      # adding a test framework just to run assertions would make this job the
+      # slowest thing in a repo whose whole job is to publish static files.
+
+      # The glob is not decoration. `node --test <dir>` collapses the directory
+      # into ONE failing test on Node 22 instead of discovering the files.
+      - name: Unit + closure gates
+        run: node --test 'generator/tests/*.test.mjs'
+
+      # The parity gate: the transported modules must still behave exactly as
+      # main's did at transport time. The golden was recorded by running the
+      # same probes against main's scripts/ tree and confirming both sides were
+      # byte-identical, so a diff here is a regression in this copy.
+      # See generator/tests/parity/run.mjs for the cross-repo invocation.
+      - name: Generator parity vs recorded main behaviour
+        run: node generator/tests/parity/run.mjs --check
+
+      # Validates the REWIRE without writing: fetches main's published averages
+      # and shape-checks them. Soft-fails when the site is unreachable, because
+      # the overlay is optional (borderCrossings.ts falls back to editorial
+      # defaults) — a flaky network must not turn this job red.
+      - name: Border-wait averages REWIRE reachable
+        run: node generator/scripts/refresh-border-wait-averages.mjs --check
+
+      # The ranking window is NOT soft-failing like the averages above: it is
+      # the weekly ranking article's actual data, so an unreachable or stale
+      # publisher must stop the pipeline rather than yield an article with no
+      # ranking on an evergreen URL that already ranks.
+      - name: Border-wait ranking window reachable and fresh
+        run: node generator/scripts/refresh-border-wait-window.mjs --check
+
+  dry-run:
+    # The generator's own smoke test: load every entry point with writes
+    # disabled (DRY_RUN=1, the convention the scripts already document) and
+    # confirm none of them dies on module resolution. This is what "the code
+    # has never been run here" was hiding — a static import of a file that was
+    # never transported throws before the first statement, so a script can be
+    # perfectly correct and still be dead on arrival.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # This job DOES need the dependencies, unlike the gates above: the whole
+      # point is to reach the end of each entry point's import graph, and that
+      # graph runs through jsdom / sharp / playwright / firebase-admin. Without
+      # them every script fails identically on a missing package and the check
+      # proves nothing.
+      - name: Install generator dependencies
+        run: npm ci --no-audit --no-fund
+
+      # generate-border-wait-ranking-article.mjs now REQUIRES the fetched window
+      # (it is the article's data). Fetch it first so the dry-run exercises the
+      # real path instead of the missing-cache error branch.
+      - name: Fetch border-wait ranking window
+        run: npm run refresh:border-wait-window
+
+      - name: Load every generator entry point (writes disabled)
+        run: npm run test:dry-run

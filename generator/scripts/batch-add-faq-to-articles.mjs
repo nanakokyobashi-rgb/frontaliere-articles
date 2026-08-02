@@ -25,8 +25,10 @@ import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const ROOT = resolve(__dirname, '..');
-import { resolveGitAddPath } from './lib/resolve-git-add-path.mjs';
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const ROOT = resolve(__dirname, '..', '..');
+import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
@@ -111,7 +113,8 @@ EXAMPLES:
 
 // ── Constants ────────────────────────────────────────────────
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const BODY_DIR = `services/locales/${SECTION_BODY_DIR}`;
+// Mapped to this repo's `content/` layout; see lib/corpus-paths.mjs.
+const BODY_DIR = corpusPath(`services/locales/${SECTION_BODY_DIR}`);
 // Section-keyed progress file so a svizzera run does not skip frontaliere
 // articles (and vice versa). frontaliere keeps the original filename.
 const PROGRESS_FILE = SECTION === 'svizzera'

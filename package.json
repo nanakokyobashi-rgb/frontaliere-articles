@@ -9,5 +9,21 @@
   "sideEffects": false,
   "peerDependencies": {
     "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.2.0",
+    "firebase-admin": "^13.6.1",
+    "google-trends-api": "^4.9.2",
+    "jsdom": "^28.0.0",
+    "playwright": "^1.58.2",
+    "sharp": "^0.34.5",
+    "undici": "^7.24.5"
+  },
+  "scripts": {
+    "test": "node --test 'generator/tests/*.test.mjs'",
+    "test:parity": "node generator/tests/parity/run.mjs --check",
+    "test:dry-run": "node generator/tests/dry-run-entrypoints.mjs",
+    "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
+    "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs"
   }
 }

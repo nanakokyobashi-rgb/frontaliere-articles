@@ -25,9 +25,12 @@ import { loadEventsDataset, isoDay } from './lib/events-utils.mjs';
 import { buildWeekendDigestArticle } from './lib/events-digest-content.mjs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
+import { corpusPath } from './lib/corpus-paths.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '..');
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const LOCALES = ['it', 'en', 'de', 'fr'];
 
 // Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
@@ -67,7 +70,7 @@ export function buildData(todayIso) {
 /** Rewrite only the 4 body files (idempotent refresh; registration is append-only). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
   for (const locale of LOCALES) {
-    const dir = path.join(repoRoot, 'services', 'locales', 'blog-body', locale);
+    const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${data.id}.ts`);
     writeFileSync(file, buildBodyFile(data, locale));

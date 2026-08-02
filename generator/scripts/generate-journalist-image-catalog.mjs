@@ -20,7 +20,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const BLOG_DIR = path.join(PROJECT_ROOT, 'public', 'images', 'blog');
 const OUT_PATH = path.join(PROJECT_ROOT, 'public', 'data', 'journalist-image-catalog.json');
 
@@ -77,7 +79,20 @@ export function appendCatalogEntry(blogImagePath) {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
+  // DRY_RUN=1 is the convention the other generator entry points already use
+  // ("plan only, no writes" — see generate-events-digest-article.mjs and
+  // generate-border-wait-ranking-article.mjs). This script had no dry-run
+  // branch, so a CI smoke run that merely wanted to prove it LOADS ended up
+  // creating public/data/ and writing the catalog. Added so the whole set can
+  // be exercised uniformly with writes off.
+  const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const catalog = buildCatalog();
-  writeCatalog(catalog);
-  console.log(`✅ Wrote ${catalog.length} entries to ${path.relative(PROJECT_ROOT, OUT_PATH)}`);
+  if (dryRun) {
+    console.log(
+      `DRY_RUN — would write ${catalog.length} entries to ${path.relative(PROJECT_ROOT, OUT_PATH)}; no files written.`,
+    );
+  } else {
+    writeCatalog(catalog);
+    console.log(`✅ Wrote ${catalog.length} entries to ${path.relative(PROJECT_ROOT, OUT_PATH)}`);
+  }
 }

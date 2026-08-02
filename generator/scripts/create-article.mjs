@@ -141,9 +141,10 @@ import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs'
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
-import { ARTICLE_SECTION_CORE } from '../build-plugins/shared/articleSectionCore.mjs';
+import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
-import { resolveGitAddPaths } from './lib/resolve-git-add-path.mjs';
+import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
+import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
@@ -183,32 +184,32 @@ const _evidenceIndex = USE_CASCADED_SCORING
   : null;
 
 // ── C1 News Sitemap Whitelist ──────────────────────────────────
-// Loaded by parsing data/news-sitemap-whitelist.ts at startup so we don't
-// need a TS loader for this single-string-array import. See that file for
-// rationale and the full keyword list (5 + 1 macro-themes).
-const NEWS_SITEMAP_WHITELIST_TOKENS = (() => {
-  try {
-    const wlPath = path.resolve('data/news-sitemap-whitelist.ts');
-    if (!existsSync(wlPath)) return [];
-    const src = readFileSync(wlPath, 'utf-8');
-    const block = src.match(/NEWS_SITEMAP_WHITELIST[^=]*=\s*Object\.freeze\(\s*\[([\s\S]*?)\]\s*\)/);
-    if (!block) return [];
-    return [...block[1].matchAll(/'([^']+)'|"([^"]+)"/g)]
-      .map((m) => (m[1] || m[2]).toLowerCase())
-      .filter(Boolean);
-  } catch (err) {
-    console.error('⚠️  Could not load news-sitemap whitelist; defaulting to allow-all:', err?.message);
-    return [];
-  }
-})();
+// REWIRED (issue #4974 item 3, §5.3). Main loaded this by regex-parsing
+// `data/news-sitemap-whitelist.ts` at startup, to avoid needing a TS loader for
+// one string array, and fell back to an empty list — i.e. allow-all — if the
+// parse found nothing. Transported here that fallback fired every time: the
+// file it looked for does not exist in this repository, so EVERY article would
+// have entered sitemap-news.xml, silently, with no error and no log. That is
+// the exact opposite of what the whitelist is for.
+//
+// It is now a vendored `.mjs` module imported statically (see
+// generator/data/news-sitemap-whitelist.mjs for why a copy rather than a live
+// call back into main). A missing module is now an import error, not a silent
+// policy inversion. The allow-all branch below is kept, because an empty list
+// is still the documented "do not block publishing" escape hatch — but it can
+// no longer be reached by accident.
+const NEWS_SITEMAP_WHITELIST_TOKENS = NEWS_SITEMAP_WHITELIST.map((t) => t.toLowerCase());
 
 /**
  * Decide whether an article should be added to sitemap-news.xml.
  * `data` is the freshly-generated article object from create-article.mjs.
  * Match is case-insensitive substring across slug, title, articleSection,
- * keywords, and tags. Empty whitelist (load failure) falls back to allow-all
- * to avoid blocking publishing on a parser hiccup — operator must rerun
- * `npm run sanitize:news-sitemap` if that happens.
+ * keywords, and tags.
+ *
+ * NOTE this deliberately does NOT apply the 48h window that
+ * `isArticleNewsEligible()` in the vendored module also enforces: an article
+ * being generated right now is by definition inside it, and the window is
+ * re-applied downstream by the consumer when it prunes.
  */
 function isArticleEligibleForNewsSitemap(data) {
   if (NEWS_SITEMAP_WHITELIST_TOKENS.length === 0) return true; // safe default
@@ -1722,11 +1723,21 @@ const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
   'https://www.watson.ch/api/1.0/rss/all.xml': 'https://www.watson.ch/',
 };
 
-const PROJECT_ROOT = new URL('..', import.meta.url).pathname.replace(/\/$/, '');
+// `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
+// so one level up WAS the repo root; the transport (#4974 item 3, step 2) put it
+// at `generator/scripts/create-article.mjs`, which makes one level up the
+// `generator/` directory. Left unchanged, every read and write in this file
+// would have been scoped to `generator/…` — reads would fail and writes would
+// create a phantom corpus inside the generator tree.
+const PROJECT_ROOT = new URL('../..', import.meta.url).pathname.replace(/\/$/, '');
 
 // ── Helpers ─────────────────────────────────────────────────
+// Every read and write in this file funnels through here, which is what makes
+// `corpusPath()` a single choke point for the main→nanako layout difference
+// (`services/locales/…` → `content/…`) instead of ~30 edited literals. See
+// lib/corpus-paths.mjs for why the mapping is an explicit table.
 function resolve(rel) {
-  return `${PROJECT_ROOT}/${rel}`;
+  return `${PROJECT_ROOT}/${corpusPath(rel)}`;
 }
 
 function read(rel) {

@@ -10,13 +10,14 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { corpusPath } from './corpus-paths.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..');
 
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
-  const file = path.join(repoRoot, 'data', 'blog-articles-data.ts');
+  const file = path.join(repoRoot, corpusPath('data/blog-articles-data.ts'));
   let src = readFileSync(file, 'utf-8');
   const entryRe = new RegExp(`(\\n([ \\t]*)id: '${id}',[\\s\\S]*?)(\\n[ \\t]*\\},)`);
   const m = src.match(entryRe);
@@ -60,7 +61,7 @@ export function bumpDateModified(
   repoRoot = DEFAULT_REPO_ROOT,
   seoFile = 'services/seo/seo-blog-5.ts',
 ) {
-  const file = path.join(repoRoot, seoFile);
+  const file = path.join(repoRoot, corpusPath(seoFile));
   const src = readFileSync(file, 'utf-8');
   const startIdx = src.indexOf(`'blog-${id}':`);
   if (startIdx < 0) return false;

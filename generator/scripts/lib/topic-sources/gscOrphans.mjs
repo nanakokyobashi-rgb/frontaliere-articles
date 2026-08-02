@@ -15,9 +15,10 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { fnv1a32 } from '../fnv1a.mjs';
 import { computeAdaptiveTopicCandidateDupJaccard } from '../scoring/constants.mjs';
+import { corpusPath } from '../corpus-paths.mjs';
 
 const ORPHAN_QUERIES_PATH = 'data/gsc-orphan-queries.json';
-const BLOG_META_PATH = 'services/locales/blog-meta-it.ts';
+const BLOG_META_PATH = corpusPath('services/locales/blog-meta-it.ts');
 
 // Was 20 — too aggressive: dropped 327/329 orphan queries (~99%) including
 // long-tail frontaliere-rich queries with 5–19 impressions/window. Lowered

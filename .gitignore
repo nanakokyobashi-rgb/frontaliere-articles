@@ -1,2 +1,5 @@
 dist/
 node_modules/
+generator/data/border-wait-averages.json
+.tmp/
+generator/data/border-wait-ranking-window.json

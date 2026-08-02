@@ -70,7 +70,9 @@ import { generateFaqIT } from './batch-add-faq-to-articles.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const PROJECT_ROOT = path.resolve(__dirname, '..');
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const PROJECT_ROOT = path.resolve(__dirname, '..', '..');
 const BASE_URL = 'https://frontaliereticino.ch';
 
 // Mirrors the (unexported) CATEGORIES list in create-article.mjs. The client

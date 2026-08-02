@@ -1,0 +1,193 @@
+{
+  "lib/border-wait-ranking.mjs": {
+    "computeWeekWindow([\"2026-07-15\"])": {
+      "value": {
+        "weekEnd": "2026-07-14",
+        "weekStart": "2026-07-08"
+      }
+    },
+    "computeWeekWindow([\"2028-03-01\"])": {
+      "value": {
+        "weekEnd": "2028-02-29",
+        "weekStart": "2028-02-23"
+      }
+    },
+    "rankingFromStats([{\"chiasso-strada\":{\"weightedAvgMinutes\":5.0555,\"totalSamples\":36},\"gaggiolo\":{\"weightedAvgMinutes\":0.6842,\"totalSamples\":38},\"ponte-tresa\":{\"weightedAvgMinutes\":0.1,\"totalSamples\":3}}])": {
+      "value": [
+        {
+          "avgMinutes": 0.6842,
+          "rank": 1,
+          "slug": "gaggiolo",
+          "totalSamples": 38
+        },
+        {
+          "avgMinutes": 5.0555,
+          "rank": 2,
+          "slug": "chiasso-strada",
+          "totalSamples": 36
+        }
+      ]
+    },
+    "rankingFromStats([{}])": {
+      "value": []
+    },
+    "trendFromStats([{\"chiasso-strada\":{\"weightedAvgMinutes\":6,\"totalSamples\":36},\"gaggiolo\":{\"weightedAvgMinutes\":1,\"totalSamples\":38},\"brogeda\":{\"weightedAvgMinutes\":3,\"totalSamples\":40}},{\"chiasso-strada\":{\"weightedAvgMinutes\":4,\"totalSamples\":30},\"gaggiolo\":{\"weightedAvgMinutes\":0.6,\"totalSamples\":25}}])": {
+      "value": {
+        "chiasso-strada": {
+          "currentAvgMinutes": 6,
+          "deltaMinutes": 2,
+          "direction": "worse",
+          "previousAvgMinutes": 4
+        },
+        "gaggiolo": {
+          "currentAvgMinutes": 1,
+          "deltaMinutes": 0.4,
+          "direction": "flat",
+          "previousAvgMinutes": 0.6
+        }
+      }
+    },
+    "windowFileNames([\"2026-01-03\",5])": {
+      "value": [
+        "2025-12-29.json",
+        "2025-12-30.json",
+        "2025-12-31.json",
+        "2026-01-01.json",
+        "2026-01-02.json"
+      ]
+    },
+    "windowFileNames([\"2026-07-15\"])": {
+      "value": [
+        "2026-07-08.json",
+        "2026-07-09.json",
+        "2026-07-10.json",
+        "2026-07-11.json",
+        "2026-07-12.json",
+        "2026-07-13.json",
+        "2026-07-14.json"
+      ]
+    }
+  },
+  "lib/border-wait-ranking.mjs#history": {
+    "aggregateCrossingStats(<fixture>,[\"2026-07-11\",3])": {
+      "value": {
+        "chiasso-strada": {
+          "totalSamples": 36,
+          "weightedAvgMinutes": 5.055555555555555
+        },
+        "gaggiolo": {
+          "totalSamples": 38,
+          "weightedAvgMinutes": 0.6578947368421053
+        }
+      }
+    },
+    "aggregateCrossingStats(<fixture>,[\"2026-07-11\",7])": {
+      "value": {
+        "chiasso-strada": {
+          "totalSamples": 36,
+          "weightedAvgMinutes": 5.055555555555555
+        },
+        "gaggiolo": {
+          "totalSamples": 38,
+          "weightedAvgMinutes": 0.6578947368421053
+        }
+      }
+    }
+  },
+  "lib/decode-html-entities.mjs": {
+    "decodeHtmlEntities([\"&amp;amp;\"])": {
+      "value": "&"
+    },
+    "decodeHtmlEntities([\"&quot;citt&agrave;&quot; &#8217;\"])": {
+      "value": "\"citt&agrave;\" ’"
+    },
+    "decodeHtmlEntities([\"Imposta &amp; tassa &lt;fonte&gt;\"])": {
+      "value": "Imposta & tassa <fonte>"
+    },
+    "decodeHtmlEntities([\"nessuna entita\"])": {
+      "value": "nessuna entita"
+    }
+  },
+  "lib/detect-language.mjs": {
+    "detectLanguage([\"Der Grenzgänger zahlt die Quellensteuer in der Schweiz.\"])": {
+      "value": "de"
+    },
+    "detectLanguage([\"Il frontaliere paga l’imposta alla fonte in Svizzera.\"])": {
+      "value": "it"
+    },
+    "detectLanguage([\"Le frontalier paie l’impôt à la source en Suisse.\"])": {
+      "value": "fr"
+    },
+    "detectLanguage([\"The cross-border worker pays withholding tax in Switzerland.\"])": {
+      "value": "en"
+    },
+    "isSameLanguage([\"Ciao a tutti quanti oggi\",\"Buongiorno a tutti quanti\",\"it\"])": {
+      "value": true
+    }
+  },
+  "lib/fnv1a.mjs": {
+    "fnv1a32([\"\"])": {
+      "value": 2166136261
+    },
+    "fnv1a32([\"città-öäü-À\"])": {
+      "value": 1000865185
+    },
+    "fnv1a32([\"frontaliere-ticino\"])": {
+      "value": 1877195393
+    },
+    "fnv1a32Mod([\"\",7])": {
+      "value": 2
+    },
+    "fnv1a32Mod([\"nuovo-accordo-fiscale-2026\",97])": {
+      "value": 70
+    }
+  },
+  "lib/haversine.mjs": {
+    "haversineKm([0,0,0,0])": {
+      "value": 0
+    },
+    "haversineKm([45.8399,8.9525,46.0037,8.9511])": {
+      "value": 18.214050913715447
+    }
+  },
+  "lib/it-text-similarity.mjs": {
+    "containmentSim([\"avs pensione\",\"la pensione avs cambia nel 2026\"])": {
+      "value": 1
+    },
+    "jaccardSim([\"tassa salute frontalieri ticino\",\"nuova tassa salute per frontalieri\"])": {
+      "value": 0.8
+    },
+    "normalizeItWord([\"Città\"])": {
+      "value": "Citt"
+    },
+    "stemIt([\"lavoratore\"])": {
+      "value": "lavora"
+    },
+    "stemIt([\"pensioni\"])": {
+      "value": "pen"
+    },
+    "tokenizeIt([\"Le nuove regole sulla tassa della salute per i frontalieri\"])": {
+      "value": [
+        "nuov",
+        "regol",
+        "imposta",
+        "sanità",
+        "frontaliere"
+      ]
+    }
+  },
+  "lib/slug-truncate.mjs": {
+    "truncateSlugAtWordBoundary([\"a-b-c-d-e-f-g-h-i-j-k\",5])": {
+      "value": "a-b-c"
+    },
+    "truncateSlugAtWordBoundary([\"breve\",60])": {
+      "value": "breve"
+    },
+    "truncateSlugAtWordBoundary([\"nuovo-accordo-fiscale-frontalieri-2026\",20])": {
+      "value": "nuovo-accordo-fiscal"
+    },
+    "truncateSlugAtWordBoundary([\"senzaseparatori\",6])": {
+      "value": "senzas"
+    }
+  }
+}

@@ -16,10 +16,13 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
+import { corpusPath } from './lib/corpus-paths.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const ROOT = resolve(__dirname, '..');
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const ROOT = resolve(__dirname, '..', '..');
 
 const args = process.argv.slice(2);
 const DRY_RUN = args.includes('--dry-run');
@@ -48,7 +51,7 @@ function getSectionArg() {
 const SECTION = getSectionArg();
 const SECTION_BODY_SUBDIR = SECTION === 'svizzera' ? 'blog-body-ch' : 'blog-body';
 
-const BODY_DIR = resolve(ROOT, `services/locales/${SECTION_BODY_SUBDIR}`);
+const BODY_DIR = resolve(ROOT, corpusPath(`services/locales/${SECTION_BODY_SUBDIR}`));
 
 // ── File helpers ────────────────────────────────────────────
 

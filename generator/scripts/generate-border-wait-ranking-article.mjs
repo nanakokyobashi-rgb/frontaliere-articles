@@ -29,17 +29,22 @@
  */
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { writeFileSync, mkdirSync } from 'node:fs';
-import { computeRanking, computeTrend, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
 import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content.mjs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
 import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
+import { corpusPath } from './lib/corpus-paths.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '..');
+// `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
+// so one level up is now the generator directory, not the repo root.
+const REPO_ROOT = path.resolve(__dirname, '..', '..');
 const LOCALES = ['it', 'en', 'de', 'fr'];
-const HISTORY_DIR = path.join(REPO_ROOT, 'data', 'border-wait-history');
+// REWIRE (#4974 item 3): the 1.7 GB history stays in the site repo; this reads
+// the ~32 KB aggregate refresh-border-wait-window.mjs fetches from it.
+const WINDOW_PATH = path.join(__dirname, '..', 'data', 'border-wait-ranking-window.json');
 const RANKING_JSON_PATH = path.join(REPO_ROOT, 'public', 'data', 'border-wait-ranking.json');
 
 // Evergreen metadata — registered once, NEVER refreshed (no date/count inside).
@@ -62,21 +67,54 @@ const STATIC_META = {
   },
 };
 
-/** Compute the current ranking/trend/fun-facts/week-window/movers snapshot for todayIso. */
-export function computeSnapshot(todayIso, historyDir = HISTORY_DIR) {
+/**
+ * Load the aggregate window fetched by refresh-border-wait-window.mjs.
+ *
+ * REWIRE (issue #4974 item 3). In main this script read
+ * `data/border-wait-history/*.json` directly — 90 daily files, 1.7 GB, site
+ * telemetry that stays there. Here the same numbers arrive as the ~32 KB
+ * aggregate main publishes, and the identical pure functions
+ * (`rankingFromStats` / `trendFromStats`) run over them.
+ *
+ * Missing is fatal, deliberately: this is the article's data, not an overlay.
+ * Generating the ranking article without a ranking is wrong output on an
+ * evergreen URL that already ranks, not degraded output.
+ */
+export function loadWindow(windowPath = WINDOW_PATH) {
+  if (!existsSync(windowPath)) {
+    throw new Error(
+      `border-wait window not found at ${windowPath} — run ` +
+        `generator/scripts/refresh-border-wait-window.mjs first`,
+    );
+  }
+  const payload = JSON.parse(readFileSync(windowPath, 'utf-8'));
+  if (!payload?.current?.perCrossing) {
+    throw new Error(`${windowPath} has no current.perCrossing — refusing`);
+  }
+  return payload;
+}
+
+/**
+ * Compute the current ranking/trend/fun-facts/week-window/movers snapshot for
+ * todayIso, from the fetched aggregate window.
+ */
+export function computeSnapshot(todayIso, windowPayload = loadWindow()) {
   // This snapshot feeds the evergreen "Classifica delle dogane in Ticino"
   // article + its embedded live chart (buildRankingJson below) — both
-  // Ticino-only by identity. computeRanking/computeTrend are generic
+  // Ticino-only by identity. rankingFromStats/trendFromStats are generic
   // aggregation over ALL registered crossings (now 134, incl. the 108
   // non-Ticino Germany/Austria/Liechtenstein/France-corridor ones from
   // #4889), so scope to Ticino here, once, before funFacts/movers derive
   // from it — otherwise a foreign crossing could surface as this
   // Ticino-only article's best/worst/biggest mover.
-  const rankingAll = computeRanking(historyDir, todayIso, { days: 7 });
+  const rankingAll = rankingFromStats(windowPayload.current.perCrossing);
   const ranking = rankingAll
     .filter((r) => isTicinoCrossing(r.slug))
     .map((r, idx) => ({ ...r, rank: idx + 1 }));
-  const trendAll = computeTrend(historyDir, todayIso, { days: 7 });
+  const trendAll = trendFromStats(
+    windowPayload.current.perCrossing,
+    windowPayload.previous?.perCrossing ?? {},
+  );
   const trend = Object.fromEntries(Object.entries(trendAll).filter(([slug]) => isTicinoCrossing(slug)));
   const funFacts = computeFunFacts(ranking);
   const { weekStart, weekEnd } = computeWeekWindow(todayIso, 7);
@@ -85,8 +123,8 @@ export function computeSnapshot(todayIso, historyDir = HISTORY_DIR) {
 }
 
 /** Build the full registration `data` object from the current ranking snapshot. */
-export function buildData(todayIso, historyDir = HISTORY_DIR) {
-  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, historyDir);
+export function buildData(todayIso, windowPayload = loadWindow()) {
+  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload);
   const article = buildBorderWaitRankingArticle({ ranking, trend, funFacts, weekStart, weekEnd, movers, todayIso });
   return {
     id: article.id,
@@ -101,7 +139,7 @@ export function buildData(todayIso, historyDir = HISTORY_DIR) {
 /** Rewrite only the 4 body files (idempotent refresh; registration is append-only). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
   for (const locale of LOCALES) {
-    const dir = path.join(repoRoot, 'services', 'locales', 'blog-body', locale);
+    const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${data.id}.ts`);
     writeFileSync(file, buildBodyFile(data, locale));
@@ -136,8 +174,11 @@ export function buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart
 async function main() {
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const todayIso = process.env.TODAY_ISO || new Date().toISOString().slice(0, 10);
-  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso);
-  const data = buildData(todayIso);
+  // Loaded once and threaded through, so the two calls cannot disagree if the
+  // cache is refreshed mid-run.
+  const windowPayload = loadWindow();
+  const { ranking, trend, funFacts, weekStart, weekEnd, movers } = computeSnapshot(todayIso, windowPayload);
+  const data = buildData(todayIso, windowPayload);
   const exists = checkArticleIdExists(data.id);
 
   console.log(
