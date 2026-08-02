@@ -15,10 +15,18 @@ on:
     paths:
       - 'generator/**'
       - '.github/workflows/generator-ci.yml'
+      # The dry-run job's whole premise is `npm ci` + loading every entry point,
+      # so what gets installed is part of what it tests. Without these two, a
+      # dependency change — or the addition of the lockfile `npm ci` requires —
+      # lands without ever re-running the job it governs.
+      - 'package.json'
+      - 'package-lock.json'
   pull_request:
     paths:
       - 'generator/**'
       - '.github/workflows/generator-ci.yml'
+      - 'package.json'
+      - 'package-lock.json'
   workflow_dispatch:
 
 permissions:
