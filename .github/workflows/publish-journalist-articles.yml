@@ -84,6 +84,15 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          # persist-credentials: false is load-bearing, not hygiene.
+          # actions/checkout otherwise stores the GITHUB_TOKEN as
+          # `http.https://github.com/.extraheader`, and that header takes
+          # PRECEDENCE over credentials embedded in a push URL. So the push
+          # below authenticated as GITHUB_TOKEN — which this job grants only
+          # `contents: read` — instead of as GITHUB_PAT, and was rejected five
+          # times over. The article had already been generated and committed
+          # locally by then, so it was simply lost.
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
