@@ -1750,6 +1750,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.confronto-imposte-cantonali-2026.title': 'Cantonal tax: comparison 2026 and focus on the canton of Vaud',
     'blog.article.confronto-imposte-cantonali-2026.excerpt': 'Analysis of cantonal tax rates for 2026, differences between Swiss cantons and specific focus on the tax system of the Canton of Vaud.',
     'blog.article.confronto-imposte-cantonali-2026.imageAlt': 'View of a Swiss city with modern office buildings',
+    'blog.article.rendite-avs-all-estero.title': 'Old-age annuities abroad: what you need to know',
+    'blog.article.rendite-avs-all-estero.excerpt': 'How to withdraw your AHV/IV pension from abroad and what to look out for as a Swiss abroad.',
+    'blog.article.rendite-avs-all-estero.imageAlt': 'Panoramic view of Lake Lugano with Swiss mountains in the background',
 };
 
 export default blogMetaChEn;

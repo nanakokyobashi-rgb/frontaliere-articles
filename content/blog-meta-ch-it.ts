@@ -1750,6 +1750,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.confronto-imposte-cantonali-2026.title': 'Imposta cantonale: confronto 2026 e focus sul Canton Vaud',
     'blog.article.confronto-imposte-cantonali-2026.excerpt': 'Analisi delle aliquote fiscali cantonali per il 2026, differenze tra i cantoni svizzeri e focus specifico sul sistema fiscale del Canton Vaud.',
     'blog.article.confronto-imposte-cantonali-2026.imageAlt': 'Panorama di una città svizzera con uffici moderni',
+    'blog.article.rendite-avs-all-estero.title': 'Rendite di vecchiaia all’estero: quel che c’è da sapere',
+    'blog.article.rendite-avs-all-estero.excerpt': 'Come riscuotere la tua rendita AVS/AI dall\'estero e a cosa fare attenzione in quanto svizzero all\'estero.',
+    'blog.article.rendite-avs-all-estero.imageAlt': 'Vista panoramica del Lago di Lugano con le montagne svizzere sullo sfondo',
 };
 
 export default blogMetaChIt;

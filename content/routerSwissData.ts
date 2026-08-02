@@ -609,6 +609,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'redditi-estero-controlli-doppia-tassazione': { it: 'redditi-estero-controlli-doppia-tassazione', en: 'income-earned-abroad-controls-avoiding-double-taxation', de: 'einkommen-im-ausland-kontrollen-doppelbesteuerung-vermeiden', fr: 'revenus-gagnes-a-l-etranger-controles-eviter-double-imposition' },
  'svizzera-ceuta-melilla-controlli-frontiere': { it: 'svizzera-ceuta-melilla-controlli-frontiere', en: 'switzerland-ceuta-melilla-border-controls', de: 'schweiz-ceuta-melilla-grenzkontrollen', fr: 'suisse-ceuta-melilla-controles-frontieres' },
  'confronto-imposte-cantonali-2026': { it: 'confronto-imposte-cantonali-2026', en: 'cantonal-tax-comparison-2026-vaud', de: 'kantonale-steuervergleich-2026-waadt', fr: 'comparaison-impots-cantonaux-2026-vaud' },
+ 'rendite-avs-all-estero': { it: 'rendite-avs-all-estero', en: 'swiss-state-pensions-abroad', de: 'ahv-rente-im-ausland', fr: 'rentes-avs-a-l-etranger' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

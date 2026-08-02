@@ -1750,6 +1750,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.confronto-imposte-cantonali-2026.title': 'Kantonssteuer: Vergleich 2026 und Fokus auf den Kanton Waadt',
     'blog.article.confronto-imposte-cantonali-2026.excerpt': 'Analyse der kantonalen Steuersätze für 2026, Unterschiede zwischen Schweizer Kantonen und besonderer Fokus auf das Steuersystem des Kantons Vaud.',
     'blog.article.confronto-imposte-cantonali-2026.imageAlt': 'Blick auf eine Schweizer Stadt mit modernen Bürogebäuden',
+    'blog.article.rendite-avs-all-estero.title': 'Altersrenten im Ausland: Was Sie wissen müssen',
+    'blog.article.rendite-avs-all-estero.excerpt': 'Wie Sie Ihre AHV/IV-Rente aus dem Ausland beziehen und worauf Sie als Auslandschweizer achten sollten.',
+    'blog.article.rendite-avs-all-estero.imageAlt': 'Panoramablick auf den Luganersee mit den Schweizer Bergen im Hintergrund',
 };
 
 export default blogMetaChDe;

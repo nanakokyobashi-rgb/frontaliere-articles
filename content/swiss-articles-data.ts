@@ -5248,6 +5248,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'rendite-avs-all-estero',
+    category: 'pensione',
+    date: '2026-08-02T18:06:02.860Z',
+    image: '/images/blog/rendite-avs-all-estero.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
