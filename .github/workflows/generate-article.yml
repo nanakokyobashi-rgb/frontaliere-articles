@@ -1,0 +1,242 @@
+name: Generate Blog Article
+
+# The last producer to move (issue #4974 item 3, §4/§5). Scans for a source,
+# generates a full multi-language article and registers it into the corpus this
+# repository owns.
+#
+# THE SELF-TRIGGER CHAIN IS NOT PORTED — READ THIS BEFORE ADDING IT BACK
+#
+# The site repo's copy chains itself: each run dispatches the next via
+# workflow_dispatch, alternating frontaliere/svizzera, to work around cron
+# unreliability. That needs a credential that can dispatch, and none exists here:
+#
+#   - secrets.GITHUB_TOKEN cannot, by GitHub's anti-recursion rule — which is
+#     precisely why the site repo mints an App token instead.
+#   - The site's GitHub App is installed on valerielinc-ops only. Installing it
+#     here requires this account's owner to approve it in the UI, and its
+#     APP_ID/APP_PRIVATE_KEY are Actions secrets over there, not in Remote
+#     Config (checked: absent) — and secret values cannot be read back.
+#   - Remote Config's GITHUB_PAT pushes fine but has an EMPTY scope set, so
+#     POST /actions/workflows/*/dispatches answers 403. Verified, not assumed.
+#
+# So the alternation moves into the cron instead: two schedules, each pinning its
+# own section. Same net cadence, both sections growing at the same rate, no
+# credential required. What is genuinely lost is the chain's ability to retry
+# immediately after a failed or empty run — here a bad slot simply waits for the
+# next one. That is a real downgrade, and the way to undo it is to grant one of
+# the two credentials above and restore the chain, NOT to reintroduce a dispatch
+# that will 403 in silence.
+#
+# ALSO DROPPED, each for a reason
+#   - mint-app-token.mjs: the App has no rights here (above).
+#   - npm run test:articles: site tests, some asserting on React rendering (§4).
+#   - cleanup-news-sitemap.mjs: operated on public/sitemap-news.xml, which does
+#     not exist here. The 48h prune now runs where the file is assembled — in the
+#     site's pull-articles-api.mjs (§7.2).
+#   - check-seo-pages-syntax.mjs: services/seo/seo-pages.ts is no longer written
+#     by the generator at all (#4983/#4997) — the gate guards a file nobody
+#     touches (§4: drop, don't port).
+#   - trigger-deploy / fast-publish / corpus-mirror dispatches: site-only.
+#   - setup-omniroute / setup-claude-haiku-fallback: optional model tiers behind
+#     their own kill-switches, never transported.
+
+on:
+  schedule:
+    # The chain's alternation, expressed as two schedules. Kept on the site
+    # repo's :07/:37 slots so the cadence is unchanged and the pair stays clear
+    # of the other producers' minutes.
+    - cron: '7 * * * *'   # frontaliere
+    - cron: '37 * * * *'  # svizzera
+  # Self-test on change, always dry. See batch-faq-articles.yml for why this is
+  # what makes a new workflow dispatchable at all.
+  push:
+    paths:
+      - '.github/workflows/generate-article.yml'
+      - 'generator/scripts/create-article.mjs'
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'Optional: specific source URL (empty = auto-scan)'
+        required: false
+        type: string
+      section:
+        description: 'frontaliere (default) or svizzera'
+        required: false
+        default: 'frontaliere'
+        type: string
+      dry_run:
+        description: 'Load the generator and stop before generating'
+        required: false
+        default: false
+        type: boolean
+
+# Never cancel: create-article.mjs registers across ~10 files and a cancelled run
+# can leave the corpus half-written.
+concurrency:
+  group: generate-article
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Resolve run mode and section
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+
+          # Section: the :37 schedule is svizzera, everything else frontaliere.
+          # github.event.schedule carries the cron expression that fired, which
+          # is the only way a scheduled run can tell which of its two schedules
+          # it is — there is no per-schedule input.
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            case "${{ github.event.schedule }}" in
+              '37 * * * *') SEC=svizzera ;;
+              *)            SEC=frontaliere ;;
+            esac
+          else
+            SEC="${{ inputs.section }}"
+          fi
+          [ "$SEC" = "svizzera" ] || SEC=frontaliere
+
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "section=$SEC" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → section=$SEC dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the provider keys and the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Verify a model provider is actually available
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_MODELS_PAT:-}" ]; then
+            echo "::error::GH_MODELS_PAT missing after the Remote Config load — refusing to start a run that would fail on every model"
+            exit 1
+          fi
+          echo "model provider credentials present"
+
+      # Dry mode stops here: create-article.mjs has no --dry-run, and its first
+      # side effect is a network call to a model provider. Proving it LOADS is as
+      # far as a self-test may safely go — which is exactly the failure the
+      # transport closure work was about (six missing imports made this file
+      # throw before main()).
+      - name: Load the generator without running it (dry run)
+        if: steps.mode.outputs.dry == 'true'
+        run: node generator/tests/dry-run-entrypoints.mjs
+
+      - name: Configure git identity
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      # Hard-killed out of process, like the site repo's copy: a model provider
+      # that accepts the connection and then stalls would otherwise hold the job
+      # to its 60-minute timeout and take the slot with it.
+      - name: Generate the article
+        id: generate
+        if: steps.mode.outputs.dry != 'true'
+        env:
+          TARGET_SECTION: ${{ steps.mode.outputs.section }}
+        run: |
+          set -uo pipefail
+          hard_kill_s=2400
+          if [ -n "${{ inputs.url }}" ]; then
+            timeout --signal=TERM --kill-after=60s "${hard_kill_s}s" \
+              node generator/scripts/create-article.mjs --section="$TARGET_SECTION" "${{ inputs.url }}"
+          else
+            timeout --signal=TERM --kill-after=60s "${hard_kill_s}s" \
+              node generator/scripts/create-article.mjs --section="$TARGET_SECTION"
+          fi
+          rc=$?
+          if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
+            echo "::warning::create-article.mjs hard-killed after ${hard_kill_s}s — no article this run"
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          # A run that finds no suitable source is a normal outcome, not a
+          # failure: the scan is quota- and freshness-bound by design.
+          if [ "$rc" != "0" ]; then
+            echo "::warning::create-article.mjs exited $rc — treating as no-article-this-run"
+            echo "generated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "generated=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          git add -A
+          if git diff --cached --quiet; then
+            echo "no article generated this run"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml, so a new article would never reach the site"
+            exit 1
+          fi
+
+          git commit -m "Generate blog article (${{ steps.mode.outputs.section }})"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3 4 5; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep $((attempt * 3))
+          done
+          echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Generate Blog Article"
+            echo "- Section: ${{ steps.mode.outputs.section }}"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Generated: ${{ steps.generate.outputs.generated || 'n/a' }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
