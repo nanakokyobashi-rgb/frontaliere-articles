@@ -1756,6 +1756,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ceo-kagi-esportazioni-difficolta.title': 'Kägi CEO: "The biggest problem is exports"',
     'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, CEO of Kägi, addresses the challenges of exports and raw material costs.',
     'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Panoramic view of Lugano with the lake and mountains',
+    'blog.article.lavoro-forzato-svizzera.title': 'Forced labor in Swiss chains: reality or myth?',
+    'blog.article.lavoro-forzato-svizzera.excerpt': 'The United States accuses Switzerland of not doing enough against forced labor in its supply chains.',
+    'blog.article.lavoro-forzato-svizzera.imageAlt': 'Panoramic view of Lugano with the lake and mountains',
 };
 
 export default blogMetaChEn;

@@ -1756,6 +1756,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ceo-kagi-esportazioni-difficolta.title': 'Kägi-CEO: "Das größte Problem sind die Exporte"',
     'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, CEO von Kägi, stellt sich den Herausforderungen des Exports und der Rohstoffkosten.',
     'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Panoramablick auf Lugano mit See und Bergen',
+    'blog.article.lavoro-forzato-svizzera.title': 'Zwangsarbeit in Schweizer Ketten: Realität oder Mythos?',
+    'blog.article.lavoro-forzato-svizzera.excerpt': 'Die USA werfen der Schweiz vor, nicht genug gegen Zwangsarbeit in ihren Lieferketten zu tun.',
+    'blog.article.lavoro-forzato-svizzera.imageAlt': 'Panoramablick auf Lugano mit See und Bergen',
 };
 
 export default blogMetaChDe;

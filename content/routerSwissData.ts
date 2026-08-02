@@ -611,6 +611,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'confronto-imposte-cantonali-2026': { it: 'confronto-imposte-cantonali-2026', en: 'cantonal-tax-comparison-2026-vaud', de: 'kantonale-steuervergleich-2026-waadt', fr: 'comparaison-impots-cantonaux-2026-vaud' },
  'rendite-avs-all-estero': { it: 'rendite-avs-all-estero', en: 'swiss-state-pensions-abroad', de: 'ahv-rente-im-ausland', fr: 'rentes-avs-a-l-etranger' },
  'ceo-kagi-esportazioni-difficolta': { it: 'ceo-kagi-esportazioni-difficolta', en: 'kagi-ceo-export-challenges', de: 'kagi-chef-export-schwierigkeiten', fr: 'ceo-kagi-difficultes-exportation' },
+ 'lavoro-forzato-svizzera': { it: 'lavoro-forzato-svizzera', en: 'forced-labor-swiss-supply-chains', de: 'zwangsarbeit-in-schweizer-lieferketten', fr: 'travail-force-dans-les-chaines-dapprovisionnement-suisses' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
