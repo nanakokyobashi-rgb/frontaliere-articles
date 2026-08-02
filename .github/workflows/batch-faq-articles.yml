@@ -1,0 +1,207 @@
+name: Batch FAQ Generation
+
+# First producer of the generator migration to run here rather than in the site
+# repo (issue #4974 item 3, docs/articles-generator-migration.md §5). It is first
+# in the cutover order because it is the least entangled: it reads and writes only
+# blog-body files, which this repository owns outright, and it has a --dry-run
+# mode, so the plumbing can be proven before a single article is touched.
+#
+# WHAT CHANGED VERSUS THE SITE REPO'S COPY
+#
+#   - No `mint-app-token.mjs`. That mints a token for the site repo's GitHub App
+#     installation, which is scoped to valerielinc-ops/frontaliere-si-o-no and has
+#     no rights here. The push identity is GITHUB_PAT, pulled from Remote Config.
+#   - No `setup-omniroute` / `setup-claude-haiku-fallback` composite actions. Both
+#     are OPTIONAL model tiers behind their own RC kill-switches, and neither was
+#     part of the transport manifest. The primary providers all arrive through
+#     load-rc-env.mjs, so dropping them costs fallback depth, not capability.
+#   - No `npm run test:articles`. Those are site tests, some of which assert on
+#     React rendering (§4).
+#   - No `trigger-deploy.sh` and no corpus-mirror dispatch. Neither exists here:
+#     publish-api.yml republishes the surface when the corpus lands on main, and
+#     the site pulls it. That is the whole point of the split.
+#   - No github-issue-creator.mjs failure report — not transported. A failed run
+#     is visible in the Actions tab; inventing a second copy of that script here
+#     would be a drifting duplicate for no gain.
+#
+# WHY THE PUSH USES A PAT AND NOT secrets.GITHUB_TOKEN
+#
+# A GITHUB_TOKEN push never triggers another workflow (GitHub's anti-recursion
+# rule). Pushing the corpus with it would leave publish-api.yml unfired, so the
+# published surface would silently freeze at the previous commit until some
+# unrelated push came along — exactly the failure mirror-articles-corpus.yml
+# documents in the site repo. The PAT is what makes the corpus→publish chain fire.
+
+on:
+  schedule:
+    - cron: '30 0 * * *'  # Daily at 00:30 UTC (after the Gemini quota reset)
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'Number of articles to process per run'
+        required: false
+        default: '200'
+        type: string
+      concurrency:
+        description: 'Parallel articles (AI calls)'
+        required: false
+        default: '1'
+        type: string
+      skip_translate:
+        description: 'Skip EN/DE/FR translation (Italian FAQ only)'
+        required: false
+        default: false
+        type: boolean
+      dry_run:
+        description: 'Preview only: no AI calls, no file writes, no commit'
+        required: false
+        default: false
+        type: boolean
+
+# Never cancel a run in flight: the script commits incrementally and keeps its
+# own resume state, so a cancelled run leaves a half-written corpus behind.
+concurrency:
+  group: batch-faq-articles
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  generate-faq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the provider keys and the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      # ~90 keys: every LLM/translation provider the generator can reach, plus
+      # GITHUB_PAT. Values are masked by the script itself before being written
+      # to $GITHUB_ENV.
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Verify a model provider is actually available
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_MODELS_PAT:-}" ]; then
+            echo "::error::GH_MODELS_PAT missing after the Remote Config load — refusing to start a run that would fail article by article"
+            exit 1
+          fi
+          echo "model provider credentials present"
+
+      - name: Configure git identity
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      # The script resumes from data/batch-faq-progress.json. The directory is
+      # not tracked here (nothing else in this repo writes to a root data/), so
+      # the first run would otherwise die on ENOENT when it saves progress.
+      - name: Ensure progress directory exists
+        run: mkdir -p data
+
+      - name: Run batch FAQ generation
+        id: faq
+        run: |
+          set -euo pipefail
+          ARGS="--limit ${{ inputs.limit || '200' }} --concurrency ${{ inputs.concurrency || '1' }}"
+          if [ "${{ inputs.skip_translate }}" = "true" ]; then
+            ARGS="$ARGS --skip-translate"
+          fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then
+            ARGS="$ARGS --dry-run"
+          fi
+          echo "running: node generator/scripts/batch-add-faq-to-articles.mjs $ARGS"
+          node generator/scripts/batch-add-faq-to-articles.mjs $ARGS
+
+      - name: Fix FAQ locales (translate missing/wrong-locale FAQs)
+        if: inputs.dry_run != true
+        run: node generator/scripts/fix-faq-locales.mjs --limit 500
+
+      # No git-add-resolved.mjs here: that exists in the site repo because
+      # services/locales/blog-body is a SYMLINK into packages/articles, and
+      # `git add` on the symlink stages nothing. This repository holds the real
+      # files at content/blog-body, so the plain path is the correct one — the
+      # same reason lib/corpus-paths.mjs replaces resolve-git-add-path.mjs.
+      - name: Count modified files
+        id: count
+        run: |
+          set -euo pipefail
+          MODIFIED=$(git diff --name-only -- content/blog-body/ | wc -l | tr -d ' ')
+          echo "modified_count=$MODIFIED" >> "$GITHUB_OUTPUT"
+          echo "modified blog body files: $MODIFIED"
+
+      - name: Commit and push changes
+        if: steps.count.outputs.modified_count != '0'
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — refusing to push with a token that would not trigger publish-api.yml"
+            exit 1
+          fi
+
+          git add content/blog-body/
+          git add -f data/batch-faq-progress.json 2>/dev/null || true
+
+          if git diff --cached --quiet; then
+            echo "no staged changes — nothing to commit"
+            exit 0
+          fi
+
+          MODIFIED="${{ steps.count.outputs.modified_count }}"
+          git commit -m "Auto-generated FAQ for ${MODIFIED} blog articles"
+
+          # Pushes to the ref this run was started from, NOT hardcoded main. On a
+          # scheduled run that is main; on a workflow_dispatch against a side
+          # branch it keeps the commit on that branch, which is what makes this
+          # workflow testable before cutover instead of only after.
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed ${MODIFIED} modified files to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep 3
+          done
+          echo "::error::push failed after 3 attempts"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Batch FAQ Generation"
+            echo "- Dry run: ${{ inputs.dry_run || 'false' }}"
+            echo "- Limit: ${{ inputs.limit || '200' }}"
+            echo "- Concurrency: ${{ inputs.concurrency || '1' }}"
+            echo "- Skip translate: ${{ inputs.skip_translate || 'false' }}"
+            echo "- Modified files: ${{ steps.count.outputs.modified_count || '0' }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
