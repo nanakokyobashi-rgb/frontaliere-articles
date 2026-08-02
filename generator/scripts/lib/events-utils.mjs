@@ -23,7 +23,10 @@ import { MUNICIPALITIES } from '../../data/municipalities.ts';
 import { freeTranslateWithRetry } from './free-translate.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const REPO_ROOT = path.resolve(__dirname, '..', '..');
+// `../../..`: same one-level-deeper correction as evergreen-article-refresh.mjs
+// — this module moved from scripts/lib/ to generator/scripts/lib/, so the old
+// two-level hop now lands on `generator/` instead of the repo root.
+const REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 
 // ── Canton scope ─────────────────────────────────────────────
 // Legacy single-canton constant, kept for the TI-only call sites that predate

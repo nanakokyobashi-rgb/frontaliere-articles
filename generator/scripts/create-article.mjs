@@ -8583,19 +8583,13 @@ function validateStructuredData(data) {
  * Call this after modifying any child sitemap so the sitemap index stays fresh.
  */
 function updateSitemapIndexLastmod(childSitemapUrl) {
-  const file = 'public/sitemap.xml';
-  let src = read(file);
-  const today = new Date().toISOString().slice(0, 10);
-  // Match the <sitemap> block containing this child URL and update its <lastmod>
-  const escapedUrl = childSitemapUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const rx = new RegExp(
-    `(<loc>${escapedUrl}</loc>\\s*<lastmod>)\\d{4}-\\d{2}-\\d{2}(</lastmod>)`
-  );
-  if (rx.test(src)) {
-    src = src.replace(rx, `$1${today}$2`);
-    write(file, src);
-    console.error(`  ✅ ${file} — updated lastmod for ${childSitemapUrl}`);
-  }
+  // No-op here for the same reason as modifySitemap/modifySitemapNews: public/
+  // sitemap.xml is the SITE's index and does not exist in this repository.
+  //
+  // The bump still happens, on the side that owns the file: pull-articles-api.mjs
+  // rewrites the child sitemap and bumps its <lastmod> in sitemap.xml in the same
+  // run — "whoever rewrites a child sitemap bumps the index for it" (§3, §7.2).
+  void childSitemapUrl;
 }
 
 /**
@@ -8647,72 +8641,26 @@ function modifySitemap(data) {
 }
 
 function modifySitemapNews(data) {
-  const file = 'public/sitemap-news.xml';
-
-  // C1 — Google News topic whitelist gate (see data/news-sitemap-whitelist.ts).
-  // Off-topic articles (sport, cultura, infrastruttura non-frontaliera, ecc.)
-  // stay in sitemap-blog.xml but never enter sitemap-news.xml. This boosts
-  // topical authority for the 5+1 macro-themes Google News rewards.
-  if (!isArticleEligibleForNewsSitemap(data)) {
-    console.error(`  ⏭️  ${file} — skipped (article off-topic for news whitelist)`);
-    return;
-  }
-
-  let src = read(file);
-  const now = new Date().toISOString();
-  const today = now.slice(0, 10);
-
-  // Ensure xmlns:image namespace is present (for Google News image discovery)
-  if (!src.includes('xmlns:image=')) {
-    src = src.replace(
-      'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"',
-      'xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"\n        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"'
-    );
-  }
-
-  // Ensure xmlns:xhtml namespace is present (for hreflang alternates)
-  if (!src.includes('xmlns:xhtml=')) {
-    src = src.replace(
-      'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"',
-      'xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n        xmlns:xhtml="http://www.w3.org/1999/xhtml"'
-    );
-  }
-
-  const imagePath = data._generatedImagePath
-    ? data._generatedImagePath.replace(/^\//, '')
-    : `images/places/${data.image}`;
-  const imageTitle = sanitizePlainText(data.seo.headline || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-  // sitemap-news.xml is SHARED across sections; only the per-article hreflang
-  // alternates differ (built from the active section's hub slugs).
-  const { itLoc, alternates } = buildSectionSitemapUrls(data);
-
-  const entry = `  <url>
-    <loc>${itLoc}</loc>
-    <lastmod>${today}</lastmod>
-${alternates}
-    <news:news>
-      <news:publication>
-        <news:name>Frontaliere Ticino</news:name>
-        <news:language>it</news:language>
-      </news:publication>
-      <news:publication_date>${now}</news:publication_date>
-      <news:title>${String(data.content.it.title || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</news:title>
-    </news:news>
-    <image:image>
-      <image:loc>${BASE_URL}/${imagePath}</image:loc>
-      <image:title>${imageTitle}</image:title>
-    </image:image>
-  </url>`;
-
-  // Insert before </urlset>
-  src = src.replace(
-    /(\n)<\/urlset>/,
-    `$1\n${entry}\n</urlset>`
-  );
-
-  write(file, src);
-  console.error(`  ✅ ${file}`);
-  updateSitemapIndexLastmod('https://frontaliereticino.ch/sitemap-news.xml');
+  // No-op since generation moved to this repository (issue #4974 item 3, §7.2).
+  //
+  // Two reasons, and either one alone would be enough.
+  //
+  // 1. The file it used to append to — public/sitemap-news.xml — does not exist
+  //    here. That is not an oversight: this repo has no `public/`, because it
+  //    publishes a data surface, not a site. Left as-is, read() throws ENOENT and
+  //    every producer that registers an article dies before writing anything.
+  //
+  // 2. Even with the file present, appending would be wrong. scripts/build-api.mjs
+  //    DERIVES sitemap-news-candidates.xml from the corpus on every publish, using
+  //    the same vendored whitelist this function used to consult. An incremental
+  //    append would be a second producer of the same fact, and the derived document
+  //    — rebuilt from scratch each time — would silently win on the next publish.
+  //
+  // The eligibility decision is NOT lost, it moved: build-api.mjs applies
+  // isArticleNewsEligible() to the whole corpus inside the 48h window, so an
+  // article registered here appears as a candidate on the next publish without
+  // this function doing anything. Same reasoning as modifySitemap() above.
+  void data;
 }
 
 // ── Step 5: Git add ─────────────────────────────────────────

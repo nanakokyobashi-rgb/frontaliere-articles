@@ -13,7 +13,14 @@ import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..');
+// `../../..`, not `../..`. In the site repo this module sits at
+// scripts/lib/, so two levels up WAS the repo root; the transport (#4974 item 3)
+// put it at generator/scripts/lib/, which makes two levels up the `generator/`
+// directory. Left unchanged, every corpus read here resolves to
+// generator/content/... and throws ENOENT — which is exactly how the events
+// digest died after the sitemap writes were no-op'd. The rewire fixed this for
+// the seven ENTRY POINTS but not for the libraries they call.
+const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
@@ -84,23 +91,19 @@ export function bumpDateModified(
 }
 
 /** Bump the `<lastmod>` on the article's sitemap-blog.xml entry to match the refresh date. */
-export function bumpSitemapLastmod(
-  slug,
-  isoDate,
-  repoRoot = DEFAULT_REPO_ROOT,
-  sitemapFile = 'public/sitemap-blog.xml',
-) {
-  const file = path.join(repoRoot, sitemapFile);
-  let src = readFileSync(file, 'utf-8');
-  // Match the <url> block whose <loc> ends /<slug>/ and rewrite ITS <lastmod>.
-  // The negative lookahead keeps the match inside the url block, so a missing
-  // lastmod can never make it bump a different article's date.
-  const urlBlockRe = new RegExp(
-    `(<url>\\s*<loc>[^<]*/${slug}/</loc>(?:(?!</url>)[\\s\\S])*?<lastmod>)[^<]*(</lastmod>)`,
-  );
-  const m = src.match(urlBlockRe);
-  if (!m) return false;
-  src = src.replace(urlBlockRe, `$1${isoDate}$2`);
-  writeFileSync(file, src);
+export function bumpSitemapLastmod(slug, isoDate, repoRoot = DEFAULT_REPO_ROOT, sitemapFile = 'public/sitemap-blog.xml') {
+  // No-op since generation moved to this repository (issue #4974 item 3).
+  //
+  // public/sitemap-blog.xml does not exist here — scripts/build-api.mjs REGENERATES
+  // that sitemap from the corpus on every publish, and takes each <lastmod> from the
+  // article's own `updatedAt || date`. So the freshness signal this function existed
+  // to write is already carried by bumpUpdatedAt(), which the callers invoke first;
+  // rewriting a file that is rebuilt from scratch minutes later would change nothing
+  // even if the file were here.
+  //
+  // Left as a reading of the site's copy it would throw ENOENT and take the events
+  // digest down with it. Returns true so callers do not log a spurious
+  // "lastmod not bumped" warning for work that is now someone else's by design.
+  void slug; void isoDate; void repoRoot; void sitemapFile;
   return true;
 }
