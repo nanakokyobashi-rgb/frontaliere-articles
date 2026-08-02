@@ -9189,6 +9189,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.rallentamenti-autostrada-a8-milano-varese.title': 'Verlangsamungen auf der Autobahn A8 zwischen Mailand und Varese',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.excerpt': 'Auf der A8-Autobahn zwischen Mailand und Varese werden Verlangsamungen erwartet, da die schalldämmenden Barrieren zwischen Castellanza und Legnano ersetzt wurden.',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.imageAlt': 'Stau auf der A8 zwischen Mailand und Varese',
+    'blog.article.frontalieri-vallese-differenza-ticino.title': 'Grenzüberschreitende Pendler im Wallis: eine andere Realität als im Tessin',
+    'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'Im Wallis stehen die italienischen Arbeiter nicht im Zentrum der politischen Auseinandersetzung wie im Tessin.',
+    'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Panoramablick auf die Schweizer Alpen mit Grenzübergang',
 };
 
 export default blogMetaDe;

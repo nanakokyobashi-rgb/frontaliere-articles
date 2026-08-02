@@ -27588,6 +27588,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-vallese-differenza-ticino',
+ category: 'pratico',
+ date: '2026-08-02T19:29:10.401Z',
+ image: '/images/blog/frontalieri-vallese-differenza-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

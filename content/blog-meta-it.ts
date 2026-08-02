@@ -9191,6 +9191,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.rallentamenti-autostrada-a8-milano-varese.title': 'Rallentamenti sull\'autostrada A8 tra Milano e Varese',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.excerpt': 'Sono previsti rallentamenti sull\'autostrada A8 tra Milano e Varese a causa dei lavori di sostituzione delle barriere fonoassorbenti tra Castellanza e Legnano.',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.imageAlt': 'Rallentamenti sull\'autostrada A8 tra Milano e Varese',
+    'blog.article.frontalieri-vallese-differenza-ticino.title': 'Frontalieri in Vallese: una realtà diversa dal Ticino',
+    'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'Nel Vallese, i lavoratori italiani non sono al centro dello scontro politico come nel Ticino.',
+    'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Vista panoramica delle Alpi svizzere con valico di frontiera',
 };
 
 export default blogMetaIt;

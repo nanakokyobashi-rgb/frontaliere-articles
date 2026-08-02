@@ -9190,6 +9190,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.rallentamenti-autostrada-a8-milano-varese.title': 'Slowdowns on the A8 motorway between Milan and Varese',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.excerpt': 'Slowdowns are expected on the A8 motorway between Milan and Varese due to the replacement of the sound-absorbing barriers between Castellanza and Legnano.',
     'blog.article.rallentamenti-autostrada-a8-milano-varese.imageAlt': 'Traffic congestion on the A8 highway between Milan and Varese',
+    'blog.article.frontalieri-vallese-differenza-ticino.title': 'Cross-border commuters in Valais: a different reality from Ticino',
+    'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'In Valais, Italian workers are not at the center of the political clash as in Ticino.',
+    'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Panoramic view of Swiss Alps with border crossing',
 };
 
 export default blogMetaEn;
