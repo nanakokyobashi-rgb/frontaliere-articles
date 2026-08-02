@@ -9193,6 +9193,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-vallese-differenza-ticino.title': 'Cross-border commuters in Valais: a different reality from Ticino',
     'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'In Valais, Italian workers are not at the center of the political clash as in Ticino.',
     'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Panoramic view of Swiss Alps with border crossing',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'He drives an ambulance and works six days a month: "I earn 2300 euros"',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Dream working conditions for those who drive an ambulance in Spain: 2300 euros net with six days of work a year.',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'An ambulance driving through the streets of Lugano, Ticino, Switzerland',
 };
 
 export default blogMetaEn;

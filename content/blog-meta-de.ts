@@ -9192,6 +9192,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-vallese-differenza-ticino.title': 'Grenzüberschreitende Pendler im Wallis: eine andere Realität als im Tessin',
     'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'Im Wallis stehen die italienischen Arbeiter nicht im Zentrum der politischen Auseinandersetzung wie im Tessin.',
     'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Panoramablick auf die Schweizer Alpen mit Grenzübergang',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Er fährt Krankenwagen und arbeitet sechs Tage im Monat: "Ich verdiene 2300 Euro"',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Traumhafte Arbeitsbedingungen für Ambulanzfahrer in Spanien: 2300 Euro netto bei sechs Arbeitstagen im Jahr.',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Ein Krankenwagen fährt durch die Straßen von Lugano, Tessin, Schweiz',
 };
 
 export default blogMetaDe;

@@ -27597,6 +27597,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'ambulanza-spagna-guadagno-2300-euro',
+ category: 'novita',
+ date: '2026-08-02T23:09:29.539Z',
+ image: '/images/blog/ambulanza-spagna-guadagno-2300-euro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -9194,6 +9194,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-vallese-differenza-ticino.title': 'Frontalieri in Vallese: una realtà diversa dal Ticino',
     'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'Nel Vallese, i lavoratori italiani non sono al centro dello scontro politico come nel Ticino.',
     'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Vista panoramica delle Alpi svizzere con valico di frontiera',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Guida un\'ambulanza e lavora sei giorni al mese: "Guadagno 2300 euro"',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagna: 2300 euro netti con sei giorni di lavoro l\'anno.',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Un\'ambulanza che percorre le strade di Lugano, Ticino, Svizzera',
 };
 
 export default blogMetaIt;

@@ -9195,6 +9195,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-vallese-differenza-ticino.title': 'Navetteurs transfrontaliers en Valais : une réalité différente',
     'blog.article.frontalieri-vallese-differenza-ticino.excerpt': 'En Valais, les travailleurs italiens ne sont pas au centre de l\'affrontement politique comme au Tessin.',
     'blog.article.frontalieri-vallese-differenza-ticino.imageAlt': 'Vue panoramique des Alpes suisses avec passage frontalier',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Ambulancier : 2300 euros par mois',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Conditions de travail de rêve pour celui qui conduit une ambulance en Espagne : 2 300 euros nets avec six jours de travail par an.',
+    'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Une ambulance roulant dans les rues de Lugano, Tessin, Suisse',
 };
 
 export default blogMetaFr;
