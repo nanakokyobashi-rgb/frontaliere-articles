@@ -176,6 +176,13 @@ jobs:
         env:
           TARGET_SECTION: ${{ steps.mode.outputs.section }}
         run: |
+          # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
+          # so without this the step dies the instant create-article.mjs exits
+          # non-zero and every branch below — the timeout handling, the
+          # no-article-this-run handling — is unreachable. That is exactly what
+          # happened on the first scheduled run after cutover: the step was
+          # reported as a hard failure for a condition it was written to absorb.
+          set +e
           set -uo pipefail
           hard_kill_s=2400
           if [ -n "${{ inputs.url }}" ]; then

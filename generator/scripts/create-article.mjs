@@ -8686,8 +8686,18 @@ function gitAddAll(data) {
     // services/seoService.ts is NOT staged any more (issue #4974 item 3): this
     // script no longer writes it — the per-article breadcrumb entries it used
     // to append were unreachable. See modifySeoService above.
-    'public/sitemap-news.xml',
-    'public/sitemap.xml',
+    // public/sitemap-news.xml and public/sitemap.xml are NOT staged here any
+    // more, and their absence from this list is load-bearing rather than tidy.
+    //
+    // Both were written by modifySitemapNews()/updateSitemapIndexLastmod(),
+    // which are no-ops in this repository — there is no public/ here, and the
+    // news candidates are DERIVED from the corpus by scripts/build-api.mjs on
+    // every publish. Staging a path that no longer exists is not harmless:
+    // `git add` fails on an unmatched pathspec, and because this is the LAST
+    // step of registration it killed a run that had already generated the whole
+    // article. Observed on the first scheduled run after cutover
+    // (2026-08-02, la-vigilanza-sulle-banche-in-svizzera): translations done,
+    // image written, then the whole thing lost at `git add`.
   ];
   if (existsSync(resolve(SOURCE_QUOTA_FILE))) {
     files.push(SOURCE_QUOTA_FILE);
