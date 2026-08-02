@@ -1753,6 +1753,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rendite-avs-all-estero.title': 'Old-age annuities abroad: what you need to know',
     'blog.article.rendite-avs-all-estero.excerpt': 'How to withdraw your AHV/IV pension from abroad and what to look out for as a Swiss abroad.',
     'blog.article.rendite-avs-all-estero.imageAlt': 'Panoramic view of Lake Lugano with Swiss mountains in the background',
+    'blog.article.ceo-kagi-esportazioni-difficolta.title': 'Kägi CEO: "The biggest problem is exports"',
+    'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, CEO of Kägi, addresses the challenges of exports and raw material costs.',
+    'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Panoramic view of Lugano with the lake and mountains',
 };
 
 export default blogMetaChEn;

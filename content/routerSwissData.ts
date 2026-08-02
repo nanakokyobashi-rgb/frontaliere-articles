@@ -610,6 +610,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'svizzera-ceuta-melilla-controlli-frontiere': { it: 'svizzera-ceuta-melilla-controlli-frontiere', en: 'switzerland-ceuta-melilla-border-controls', de: 'schweiz-ceuta-melilla-grenzkontrollen', fr: 'suisse-ceuta-melilla-controles-frontieres' },
  'confronto-imposte-cantonali-2026': { it: 'confronto-imposte-cantonali-2026', en: 'cantonal-tax-comparison-2026-vaud', de: 'kantonale-steuervergleich-2026-waadt', fr: 'comparaison-impots-cantonaux-2026-vaud' },
  'rendite-avs-all-estero': { it: 'rendite-avs-all-estero', en: 'swiss-state-pensions-abroad', de: 'ahv-rente-im-ausland', fr: 'rentes-avs-a-l-etranger' },
+ 'ceo-kagi-esportazioni-difficolta': { it: 'ceo-kagi-esportazioni-difficolta', en: 'kagi-ceo-export-challenges', de: 'kagi-chef-export-schwierigkeiten', fr: 'ceo-kagi-difficultes-exportation' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

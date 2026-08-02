@@ -5257,6 +5257,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'ceo-kagi-esportazioni-difficolta',
+    category: 'novita',
+    date: '2026-08-02T20:00:36.571Z',
+    image: '/images/blog/ceo-kagi-esportazioni-difficolta.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

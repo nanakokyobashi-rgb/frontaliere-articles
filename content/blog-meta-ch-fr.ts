@@ -1753,6 +1753,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rendite-avs-all-estero.title': 'Rentes de vieillesse à l\'étranger : ce qu\'il faut savoir',
     'blog.article.rendite-avs-all-estero.excerpt': 'Comment retirer votre pension AHV/IV à l’étranger et à quoi faire attention en tant que Suisse à l’étranger.',
     'blog.article.rendite-avs-all-estero.imageAlt': 'Vue panoramique du lac de Lugano avec les montagnes suisses en arrière-plan',
+    'blog.article.ceo-kagi-esportazioni-difficolta.title': 'PDG de Kägi : « Le plus gros problème, ce sont les exportations »',
+    'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, PDG de Kägi, aborde les défis liés aux exportations et aux coûts des matières premières.',
+    'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes',
 };
 
 export default blogMetaChFr;

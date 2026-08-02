@@ -1753,6 +1753,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rendite-avs-all-estero.title': 'Rendite di vecchiaia all’estero: quel che c’è da sapere',
     'blog.article.rendite-avs-all-estero.excerpt': 'Come riscuotere la tua rendita AVS/AI dall\'estero e a cosa fare attenzione in quanto svizzero all\'estero.',
     'blog.article.rendite-avs-all-estero.imageAlt': 'Vista panoramica del Lago di Lugano con le montagne svizzere sullo sfondo',
+    'blog.article.ceo-kagi-esportazioni-difficolta.title': 'CEO di Kägi: «Il problema più grande sono le esportazioni»',
+    'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, CEO di Kägi, affronta le sfide delle esportazioni e dei costi delle materie prime.',
+    'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne',
 };
 
 export default blogMetaChIt;

@@ -1753,6 +1753,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rendite-avs-all-estero.title': 'Altersrenten im Ausland: Was Sie wissen müssen',
     'blog.article.rendite-avs-all-estero.excerpt': 'Wie Sie Ihre AHV/IV-Rente aus dem Ausland beziehen und worauf Sie als Auslandschweizer achten sollten.',
     'blog.article.rendite-avs-all-estero.imageAlt': 'Panoramablick auf den Luganersee mit den Schweizer Bergen im Hintergrund',
+    'blog.article.ceo-kagi-esportazioni-difficolta.title': 'Kägi-CEO: "Das größte Problem sind die Exporte"',
+    'blog.article.ceo-kagi-esportazioni-difficolta.excerpt': 'Cédric El-Idrissi, CEO von Kägi, stellt sich den Herausforderungen des Exports und der Rohstoffkosten.',
+    'blog.article.ceo-kagi-esportazioni-difficolta.imageAlt': 'Panoramablick auf Lugano mit See und Bergen',
 };
 
 export default blogMetaChDe;
