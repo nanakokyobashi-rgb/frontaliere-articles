@@ -9207,6 +9207,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Magasinier au Tessin : salaire, entreprises et permis G',
     'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Renseignez-vous sur les salaires, les principales entreprises, les permis G et les horaires de travail des travailleurs d’entrepôt transfrontaliers au Tessin.',
     'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Travailleur frontalier dans un entrepôt logistique à Lugano, Tessin.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': 'Prête à travailler dans la restauration. Suter s\'indigne: « Aussi ? »',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia annonce son déménagement en Italie par manque d\'opportunités d\'emploi et le débat sur le secteur de la restauration en tant que réalité professionnelle s\'enflamme.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes environnantes',
 };
 
 export default blogMetaFr;

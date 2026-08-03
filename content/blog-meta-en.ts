@@ -9205,6 +9205,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Warehouse worker in Ticino: salary, companies and G permit',
     'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Find out everything about salaries, main companies, G permits and work shifts for cross-border warehouse workers in Ticino.',
     'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Frontalier warehouse worker in a logistics warehouse in Lugano, Ticino.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': '"Ready to work in the restaurant industry as well." Suter is indignant: "Also?"',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia announces her move to Italy due to lack of job opportunities and the debate on the catering sector as a professional reality is ignited.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Panoramic view of Lugano with the lake and surrounding mountains',
 };
 
 export default blogMetaEn;

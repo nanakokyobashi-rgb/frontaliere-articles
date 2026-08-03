@@ -9206,6 +9206,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Magazziniere in Ticino: stipendio, aziende e permesso G',
     'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
     'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Magazziniere frontaliero al lavoro in un magazzino logistico a Lugano, Ticino.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': '«Pronta a lavorare anche nella ristorazione». Suter si indigna: «Anche?»',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia annuncia il trasferimento in Italia per mancanza di opportunità lavorative e si accende il dibattito sul settore della ristorazione come realtà professionale.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne',
 };
 
 export default blogMetaIt;

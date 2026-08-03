@@ -9204,6 +9204,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Lagerist im Tessin: Gehalt, Betriebe und Bewilligung G',
     'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Erfahren Sie alles über Gehälter, Hauptunternehmen, G-Genehmigungen und Arbeitsschichten für grenzüberschreitende Lagerarbeiter in Tessin.',
     'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Frontalier Lagerarbeiter in einem Logistiklager in Lugano, Tessin.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': '"Bereit, auch in der Gastronomie zu arbeiten." Suter ist empört: "Außerdem?"',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia kündigt den Umzug nach Italien aus Mangel an Beschäftigungsmöglichkeiten an und entfacht die Debatte über die Gastronomie als professionelle Realität.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Panoramablick auf Lugano mit dem See und den umliegenden Bergen',
 };
 
 export default blogMetaDe;
