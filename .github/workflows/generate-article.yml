@@ -4,28 +4,48 @@ name: Generate Blog Article
 # generates a full multi-language article and registers it into the corpus this
 # repository owns.
 #
-# THE SELF-TRIGGER CHAIN IS NOT PORTED — READ THIS BEFORE ADDING IT BACK
+# THE SELF-TRIGGER CHAIN, RESTORED WITHOUT A DISPATCH CREDENTIAL (2026-08-03)
 #
 # The site repo's copy chains itself: each run dispatches the next via
 # workflow_dispatch, alternating frontaliere/svizzera, to work around cron
-# unreliability. That needs a credential that can dispatch, and none exists here:
+# unreliability. At cutover that was dropped, because dispatching needs a
+# credential this repo does not have — and that is still true, re-verified today:
 #
 #   - secrets.GITHUB_TOKEN cannot, by GitHub's anti-recursion rule — which is
 #     precisely why the site repo mints an App token instead.
-#   - The site's GitHub App is installed on valerielinc-ops only. Installing it
-#     here requires this account's owner to approve it in the UI, and its
-#     APP_ID/APP_PRIVATE_KEY are Actions secrets over there, not in Remote
-#     Config (checked: absent) — and secret values cannot be read back.
-#   - Remote Config's GITHUB_PAT pushes fine but has an EMPTY scope set, so
-#     POST /actions/workflows/*/dispatches answers 403. Verified, not assumed.
+#   - The site's GitHub App is installed on valerielinc-ops only, and its
+#     APP_ID/APP_PRIVATE_KEY are Actions secrets over there, absent from Remote
+#     Config; secret values cannot be read back.
+#   - Remote Config's GITHUB_PAT still answers 403 on
+#     POST /actions/workflows/*/dispatches ("Resource not accessible by
+#     integration" — it is an integration token with no Actions write).
 #
-# So the alternation moves into the cron instead: two schedules, each pinning its
-# own section. Same net cadence, both sections growing at the same rate, no
-# credential required. What is genuinely lost is the chain's ability to retry
-# immediately after a failed or empty run — here a bad slot simply waits for the
-# next one. That is a real downgrade, and the way to undo it is to grant one of
-# the two credentials above and restore the chain, NOT to reintroduce a dispatch
-# that will 403 in silence.
+# The cost of dropping it was measured rather than estimated, and it was far
+# larger than the "loses an immediate retry" note this comment used to carry.
+# On 2026-08-01, the last full day on the chain, generate-article ran 47 times:
+# 14 from cron and 33 from the chain. The chain was 70% of all invocations. On
+# cron alone this repo managed 17 runs on 08-02 and 3 in the first eight hours
+# of 08-03 — six consecutive :07/:37 slots silently dropped, while the site
+# repo's scheduler delivered 16 runs in the same hour. Pure cron does not carry
+# this workload.
+#
+# So the chain is back, built on the one thing the PAT provably CAN do: push.
+# A push authenticated with a PAT triggers workflows normally (only
+# GITHUB_TOKEN pushes are suppressed by the anti-recursion rule), which is
+# already visible in this repo — publish-api.yml fires on every corpus push
+# this workflow makes. Adding `content/**` to the push trigger below therefore
+# makes each generated article start the next attempt, with no new credential.
+#
+# WHY IT CANNOT RUN AWAY. The chain link is the ARTICLE, not the run: only a
+# push that touches content/** continues it. A run that generates nothing
+# pushes only data/topic-candidates-evergreen-rejected.json, which is not in the
+# trigger paths, so the chain stops there and waits for cron. That is the one
+# deliberate difference from the site repo's version, which dispatched
+# unconditionally — an unconditional chain that hits a fast-failing generator
+# spins as fast as the runs exit, and this repo has just spent four days proving
+# the generator can fail on every attempt. Chaining only on success makes the
+# stop condition impossible to get wrong, at the price of needing cron to
+# restart it after a dry spell. The two extra cron slots below pay that price.
 #
 # ALSO DROPPED, each for a reason
 #   - mint-app-token.mjs: the App has no rights here (above).
@@ -42,17 +62,30 @@ name: Generate Blog Article
 
 on:
   schedule:
-    # The chain's alternation, expressed as two schedules. Kept on the site
-    # repo's :07/:37 slots so the cadence is unchanged and the pair stays clear
-    # of the other producers' minutes.
+    # Four slots, not two. Cron is now only the chain's STARTER — it has to
+    # restart the chain after every dry spell, and GitHub drops slots freely
+    # under load (six consecutive misses observed on 2026-08-03). Two slots an
+    # hour left hours-long holes with nothing to restart from. All four stay
+    # clear of the other producers' minutes (:15 publish-journalist, :30
+    # batch-faq, :50 border-wait).
     - cron: '7 * * * *'   # frontaliere
+    - cron: '22 * * * *'  # svizzera
     - cron: '37 * * * *'  # svizzera
-  # Self-test on change, always dry. See batch-faq-articles.yml for why this is
-  # what makes a new workflow dispatchable at all.
+    - cron: '52 * * * *'  # frontaliere
   push:
     paths:
+      # Self-test on change, always dry. See batch-faq-articles.yml for why this
+      # is what makes a new workflow dispatchable at all.
       - '.github/workflows/generate-article.yml'
       - 'generator/scripts/create-article.mjs'
+      # THE CHAIN LINK. A corpus push means an article was actually produced, so
+      # the next attempt starts immediately instead of waiting for a cron slot
+      # that may never arrive. Runs that produce nothing touch only
+      # data/topic-candidates-evergreen-rejected.json and so do not chain — see
+      # the header. Other producers (batch-faq, border-wait, publish-journalist)
+      # also write content/**, and their pushes starting a generation attempt is
+      # intended, not a side effect: it is one more restart point.
+      - 'content/**'
   workflow_dispatch:
     inputs:
       url:
@@ -84,36 +117,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Resolve run mode and section
-        id: mode
-        run: |
-          set -euo pipefail
-          if [ "${{ github.event_name }}" = "push" ]; then
-            DRY=true
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            DRY="${{ inputs.dry_run }}"
-          else
-            DRY=false
-          fi
-
-          # Section: the :37 schedule is svizzera, everything else frontaliere.
-          # github.event.schedule carries the cron expression that fired, which
-          # is the only way a scheduled run can tell which of its two schedules
-          # it is — there is no per-schedule input.
-          if [ "${{ github.event_name }}" = "schedule" ]; then
-            case "${{ github.event.schedule }}" in
-              '37 * * * *') SEC=svizzera ;;
-              *)            SEC=frontaliere ;;
-            esac
-          else
-            SEC="${{ inputs.section }}"
-          fi
-          [ "$SEC" = "svizzera" ] || SEC=frontaliere
-
-          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
-          echo "section=$SEC" >> "$GITHUB_OUTPUT"
-          echo "event=${{ github.event_name }} → section=$SEC dry_run=$DRY"
-
       - name: Checkout
         uses: actions/checkout@v5
         with:
@@ -127,6 +130,71 @@ jobs:
           # times over. The article had already been generated and committed
           # locally by then, so it was simply lost.
           persist-credentials: false
+
+      # AFTER checkout, unlike before: telling a chain push from a self-test
+      # push means looking at which files the push actually touched, and that
+      # needs the repo on disk. `github.event.before` plus fetch-depth: 0 above
+      # is what makes the diff resolvable.
+      - name: Resolve run mode and section
+        id: mode
+        run: |
+          set -euo pipefail
+          EV="${{ github.event_name }}"
+
+          # A push is DRY unless it carried a corpus change — that is the chain
+          # link. Editing this workflow or create-article.mjs must still only
+          # ever self-test, never generate for real.
+          CHAIN=false
+          if [ "$EV" = "push" ]; then
+            BEFORE="${{ github.event.before }}"
+            # All-zero on a branch's first push, and a force-push can leave a
+            # `before` that is no longer reachable; both fall back to the single
+            # commit, which is the conservative read.
+            if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ] \
+               || ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+              CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)
+            else
+              CHANGED=$(git diff --name-only "$BEFORE" "${{ github.sha }}" 2>/dev/null || true)
+            fi
+            if printf '%s\n' "$CHANGED" | grep -q '^content/'; then CHAIN=true; fi
+          fi
+
+          if [ "$EV" = "push" ] && [ "$CHAIN" != "true" ]; then
+            DRY=true
+          elif [ "$EV" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+
+          # Section. github.event.schedule carries the cron expression that
+          # fired, which is the only way a scheduled run can tell which of its
+          # schedules it is — there is no per-schedule input.
+          if [ "$EV" = "schedule" ]; then
+            case "${{ github.event.schedule }}" in
+              '22 * * * *'|'37 * * * *') SEC=svizzera ;;
+              *)                         SEC=frontaliere ;;
+            esac
+          elif [ "$CHAIN" = "true" ]; then
+            # ALTERNATE, the way the site repo's chain did. The previous link's
+            # own commit subject records which section it wrote, so flipping it
+            # keeps the two sections growing at the same rate however long the
+            # chain runs. Anything unrecognised (another producer's push, e.g.
+            # the border-wait digest) starts a frontaliere run.
+            case "$(git log -1 --format=%s)" in
+              *'(svizzera)'*) SEC=frontaliere ;;
+              *'(frontaliere)'*) SEC=svizzera ;;
+              *) SEC=frontaliere ;;
+            esac
+          else
+            SEC="${{ inputs.section }}"
+          fi
+          [ "$SEC" = "svizzera" ] || SEC=frontaliere
+
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "section=$SEC" >> "$GITHUB_OUTPUT"
+          echo "chain=$CHAIN" >> "$GITHUB_OUTPUT"
+          echo "event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY"
 
       - name: Setup Node.js
         uses: actions/setup-node@v5
@@ -226,7 +294,7 @@ jobs:
             exit 0
           fi
           if [ -z "${GITHUB_PAT:-}" ]; then
-            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml, so a new article would never reach the site"
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push fires no workflow at all (anti-recursion), so the article would never reach the site via publish-api.yml AND the self-trigger chain would stop dead. Both depend on this push being PAT-authenticated."
             exit 1
           fi
 
