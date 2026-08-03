@@ -617,6 +617,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'le-scuse-di-pfister-alle-chiese': { it: 'le-scuse-di-pfister-alle-chiese', en: 'pfister-apology-to-christian-churches', de: 'pfister-entschuldigung-an-die-schweizer-christlichen-kirchen', fr: 'l-excuse-de-pfister-aux-eglises-chretiennes-suisses' },
  'publibike-passa-investitore-britannico': { it: 'publibike-passa-investitore-britannico', en: 'publibike-passes-to-british-investor', de: 'publibike-wechselt-zu-britischem-investor', fr: 'publibike-passe-a-un-investisseur-britannique' },
  'vendite-auto-svizzera-luglio-2026': { it: 'vendite-auto-svizzera-luglio-2026', en: 'car-sales-switzerland-july-2026', de: 'auto-verkaeufe-schweiz-juli-2026', fr: 'ventes-voitures-suisse-juillet-2026' },
+ 'rallentamento-borsa-svizzera-luglio': { it: 'rallentamento-borsa-svizzera-luglio', en: 'slowdown-swiss-stock-exchange-july', de: 'verlangsamung-schweizer-boerse-juli', fr: 'ralentissement-bourse-suisse-juillet' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

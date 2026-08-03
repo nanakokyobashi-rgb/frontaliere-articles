@@ -1774,6 +1774,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Voiture en Suisse : baisse en juillet, boom électrique BYD',
     'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Les immatriculations ont chuté de 3,2 % en juillet, mais l’électrification continue. BYD dépasse Tesla sur le marché suisse des voitures électriques.',
     'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Showroom de voitures électriques et hybrides en Suisse',
+    'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Bourse suisse : baisse des volumes en juillet',
+    'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'L\'activité de trading sur la place suisse marque une baisse de 10,4 % par rapport à juin, mais le nombre de transactions augmente de 2,3 %.',
+    'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Vue du quartier financier suisse pendant la pause estivale',
 };
 
 export default blogMetaChFr;

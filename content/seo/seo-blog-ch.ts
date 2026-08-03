@@ -22949,6 +22949,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rallentamento-borsa-svizzera-luglio': {
+    title: 'Borsa svizzera: i volumi scendono a luglio | Frontaliere Ticino',
+    description: 'L\'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, borsa, volumi, scendono, luglio',
+    ogTitle: 'Borsa svizzera: volumi in calo a luglio, i dati SIX',
+    ogDescription: 'L\'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX.',
+    canonicalPath: '/articoli-svizzera/rallentamento-borsa-svizzera-luglio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borsa svizzera: i volumi scendono a luglio",
+      "description": "L'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rallentamento-borsa-svizzera-luglio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del distretto finanziario svizzero durante la pausa estiva"
+      },
+      "datePublished": "2026-08-03T17:36:24+00:00",
+      "dateModified": "2026-08-03T17:36:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rallentamento-borsa-svizzera-luglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -1774,6 +1774,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Cars in Switzerland: decline in July, BYD electric boom',
     'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Registrations fell by 3.2% in July, but electrification continues. BYD overtakes Tesla in the Swiss electric car market.',
     'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Electric and hybrid car showroom in Switzerland',
+    'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Swiss Stock Exchange: Volumes Fall in July',
+    'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'Trading activity on the Swiss market fell by 10.4% compared to June, but the number of transactions rose by 2.3%.',
+    'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'View of the Swiss financial district during the summer break',
 };
 
 export default blogMetaChEn;

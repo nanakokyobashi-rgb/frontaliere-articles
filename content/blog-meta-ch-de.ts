@@ -1774,6 +1774,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Autos in der Schweiz: Rückgang im Juli, BYD-Elektroboom',
     'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Im Juli gingen die Zulassungen um 3,2% zurück, aber die Elektrifizierung geht weiter. BYD überholt Tesla im Schweizer Elektroauto-Markt.',
     'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Elektro- und Hybrid-Autohaus in der Schweiz',
+    'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Schweizer Börse: Die Volumina sinkt im Juli',
+    'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'Die Handelstätigkeit auf dem Schweizer Marktplatz ist im Vergleich zum Juni um 10,4% zurückgegangen, aber die Anzahl der Transaktionen ist um 2,3% gestiegen.',
+    'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Blick auf das Schweizer Finanzviertel während der Sommerpause',
 };
 
 export default blogMetaChDe;
