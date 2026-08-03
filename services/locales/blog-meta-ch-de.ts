@@ -1,0 +1,1 @@
+../../content/blog-meta-ch-de.ts
