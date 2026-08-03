@@ -9203,6 +9203,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico a Locarno: riflessioni sulla memoria',
     'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Il Teatro Periferico porta in scena al Paravento di Locarno una riflessione sulla memoria, analizzandone luci e ombre nel contesto culturale ticinese.',
     'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Facciata del Teatro Paravento di Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Magazziniere in Ticino: stipendio, aziende e permesso G',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Magazziniere frontaliero al lavoro in un magazzino logistico a Lugano, Ticino.',
 };
 
 export default blogMetaIt;

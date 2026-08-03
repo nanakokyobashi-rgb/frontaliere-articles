@@ -9201,6 +9201,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico in Locarno: Reflexionen über das Gedächtnis',
     'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Das Teatro Periferico inszeniert im Paravento von Locarno eine Reflexion über die Erinnerung und analysiert Licht und Schatten im kulturellen Kontext des Tessins.',
     'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Fassade des Paravento Theaters in Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Lagerist im Tessin: Gehalt, Betriebe und Bewilligung G',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Erfahren Sie alles über Gehälter, Hauptunternehmen, G-Genehmigungen und Arbeitsschichten für grenzüberschreitende Lagerarbeiter in Tessin.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Frontalier Lagerarbeiter in einem Logistiklager in Lugano, Tessin.',
 };
 
 export default blogMetaDe;

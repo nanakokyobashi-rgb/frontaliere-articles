@@ -9202,6 +9202,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico in Locarno: reflections on memory',
     'blog.article.teatro-periferico-locarno-memoria.excerpt': 'The Teatro Periferico brings to the stage at the Paravento in Locarno a reflection on memory, analyzing its lights and shadows in the cultural context of Ticino.',
     'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Facade of the Paravento theater in Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Warehouse worker in Ticino: salary, companies and G permit',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Find out everything about salaries, main companies, G permits and work shifts for cross-border warehouse workers in Ticino.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Frontalier warehouse worker in a logistics warehouse in Lugano, Ticino.',
 };
 
 export default blogMetaEn;
