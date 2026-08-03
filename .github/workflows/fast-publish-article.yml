@@ -345,37 +345,60 @@ jobs:
           fi
           node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
-      - name: Verify the article is live at the apex
+      - name: Verify the article is actually readable
         if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
         run: |
           set -euo pipefail
           summary="$RUNNER_TEMP/fast-summary.json"
-          # The publish is not done when the push is green — that was the whole
-          # lesson of run 30814047357. Assert the thing the reader cares about:
-          # the article answers 200 at the apex. set +e around curl so a
-          # transient network error is a retry, not a step abort.
-          # Budget: purge propagation is eventually-consistent — cf-purge-cache.mjs
-          # documents "up to ~30s worst case across edge PoPs", and measured on
-          # run 30815055793 en/de/fr answered 200 immediately while IT needed
-          # longer and tripped a 60s budget. It was 200 seconds later. So: ~3
-          # minutes, with one re-purge of the specific URL half way through,
-          # since a single missed PoP is the likeliest cause.
+          section="${{ steps.mode.outputs.section }}"
+          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+
+          # Two checks, deliberately different in strength, because they answer
+          # different questions.
+          #
+          # HARD — the shard ORIGIN must serve the page. That is entirely within
+          # this pipeline's control: it means the push landed and Pages built
+          # it. A failure here is a broken publish.
+          #
+          # SOFT — the apex. Cloudflare's negative cache for the origin fetch is
+          # eventually consistent and a `files` purge propagates per PoP, so the
+          # apex can lag by minutes. Measured across three publishes: en/de/fr
+          # answered 200 within seconds every time while IT — the apex locale,
+          # whose 404 is cached in far more PoPs because it takes far more
+          # traffic — needed longer than a 3-minute budget twice, and was 200
+          # shortly after. Failing the run on that would report a successful
+          # publish as broken, which is its own kind of lie.
           fail=0
-          while IFS= read -r u; do
+
+          echo "── origin (hard gate)"
+          while IFS=$'\t' read -r loc p0; do
+            u="https://origin-$shard-$loc.frontaliereticino.ch/${p0%index.html}"
             code=000
             for attempt in $(seq 1 12); do
               set +e
               code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
               set -e
               [ "$code" = "200" ] && break
-              if [ "$attempt" = 6 ] && [ -n "${CF_API_TOKEN:-}" ]; then
-                echo "  re-purging $u (still $code after 6 tries)"
-                node scripts/cf-purge-cache.mjs "--files=$u" >/dev/null 2>&1 || true
-              fi
               sleep 15
             done
-            if [ "$code" = "200" ]; then echo "  200  $u"; else echo "::error::$u still answers $code ~3min after the purge"; fail=1; fi
+            if [ "$code" = "200" ]; then echo "  200  $u"
+            else echo "::error::$u answers $code — the shard push did not become readable"; fail=1; fi
+          done < <(jq -r '.shards[] | [.locale, .paths[0]] | @tsv' "$summary")
+
+          echo "── apex (best effort, edge cache is eventually consistent)"
+          while IFS= read -r u; do
+            code=000
+            for attempt in $(seq 1 8); do
+              set +e
+              code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
+              set -e
+              [ "$code" = "200" ] && break
+              sleep 15
+            done
+            if [ "$code" = "200" ]; then echo "  200  $u"
+            else echo "::warning::$u still answers $code — origin is fine, the edge has not caught up yet (negative-cache TTL is 2h; it clears sooner in practice)"; fi
           done < <(jq -r '.shards[].url' "$summary")
+
           [ "$fail" = "0" ] || exit 1
 
       - name: Summary
