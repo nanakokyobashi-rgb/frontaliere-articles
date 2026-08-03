@@ -1,0 +1,81 @@
+{
+  "updatedAt": "2026-08-03",
+  "windowDays": 7,
+  "weekStart": "2026-07-27",
+  "weekEnd": "2026-08-02",
+  "ranking": [
+    {
+      "slug": "campione-d-italia-bissone",
+      "rank": 1,
+      "avgMinutes": 1.8,
+      "totalSamples": 56,
+      "trend": "flat",
+      "deltaMinutes": -0.2
+    },
+    {
+      "slug": "chiasso-centro",
+      "rank": 2,
+      "avgMinutes": 3.6,
+      "totalSamples": 56,
+      "trend": "flat",
+      "deltaMinutes": 0
+    },
+    {
+      "slug": "san-pietro",
+      "rank": 3,
+      "avgMinutes": 4.6,
+      "totalSamples": 55,
+      "trend": "flat",
+      "deltaMinutes": 0.1
+    },
+    {
+      "slug": "gaggiolo",
+      "rank": 4,
+      "avgMinutes": 4.6,
+      "totalSamples": 55,
+      "trend": "better",
+      "deltaMinutes": -0.7
+    },
+    {
+      "slug": "chiasso-strada",
+      "rank": 5,
+      "avgMinutes": 4.7,
+      "totalSamples": 56,
+      "trend": "better",
+      "deltaMinutes": -7.1
+    },
+    {
+      "slug": "chiasso-brogeda",
+      "rank": 6,
+      "avgMinutes": 7.1,
+      "totalSamples": 56,
+      "trend": "better",
+      "deltaMinutes": -2.1
+    }
+  ],
+  "funFacts": {
+    "bestSlug": "campione-d-italia-bissone",
+    "worstSlug": "chiasso-brogeda",
+    "deltaMinutesPerCrossing": 5.3,
+    "minutesPerYear": 2431,
+    "hoursPerYear": 40.5,
+    "workingDaysLostPerYear": 1.7
+  },
+  "movers": {
+    "improved": [
+      {
+        "slug": "chiasso-strada",
+        "deltaMinutes": -7.058583959899749
+      },
+      {
+        "slug": "chiasso-brogeda",
+        "deltaMinutes": -2.139411027568922
+      },
+      {
+        "slug": "gaggiolo",
+        "deltaMinutes": -0.7320574162679421
+      }
+    ],
+    "worsened": []
+  }
+}
