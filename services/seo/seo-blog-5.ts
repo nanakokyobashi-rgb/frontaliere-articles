@@ -1,0 +1,1 @@
+../../content/seo/seo-blog-5.ts

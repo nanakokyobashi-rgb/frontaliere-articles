@@ -1,0 +1,1 @@
+../../content/seo/seoMetadataType.ts
