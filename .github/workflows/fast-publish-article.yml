@@ -287,6 +287,87 @@ jobs:
             bash scripts/lib/upload-cdn-file.sh "$local" "$key"
           done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
 
+      - name: Purge the edge cache for what was published
+        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          summary="$RUNNER_TEMP/fast-summary.json"
+          section="${{ steps.mode.outputs.section }}"
+          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+
+          # Without this the article stays 404 at the apex even though the shard
+          # has it and the origin serves it. Measured on run 30814047357: push
+          # green on all 4 locales, origin-articolifrontaliere-it answered 200
+          # with the right <title>, and the apex kept returning a cached 404.
+          #
+          # BOTH cache layers have to be purged, and the origin one is the one
+          # that actually matters. locale-router.js fetches the shard origin
+          # with `cf: { cacheEverything: true, cacheTtl: ORIGIN_CACHE_TTL }`,
+          # and its own comment says it: "with cacheEverything it also
+          # negative-caches origin 404s: a page that flips 404->200 on deploy
+          # may serve a cached 404 from an already-probed colo for up to this
+          # TTL" — 2 hours. That entry is keyed on the ORIGIN url, not the apex
+          # one, so an apex-only purge reports success and changes nothing.
+          # Measured: after purging 8 apex URLs the apex still answered 404 with
+          # cf-cache-status HIT and a still-GROWING age (1262 -> 1476); adding
+          # the one origin URL flipped it to 200 age=0 immediately.
+          #
+          # The origin path is the relpath verbatim, locale prefix included
+          # (origin-...-de serves /de/grenzgaenger-artikel/..., not
+          # /grenzgaenger-artikel/... — verified 200 vs 404).
+          #
+          # 16 URLs: article + archive page-1, apex + origin, x4 locales. The
+          # free plan's `files` purge caps at 30, and cf-purge-cache.mjs makes
+          # an over-cap list a hard error rather than truncating. Deep archive
+          # pages page-2..N are deliberately excluded — they only gain an entry
+          # at the tail and would blow the cap.
+          # Built in shell rather than one jq expression: the origin hostname
+          # depends on the locale of the shard entry, which is easier to keep
+          # obviously correct here than inside a jq reduce.
+          urls=()
+          while IFS=$'\t' read -r loc p0 p2; do
+            for rel in "$p0" "$p2"; do
+              rel="${rel%index.html}"
+              urls+=("https://frontaliereticino.ch/$rel")
+              urls+=("https://origin-$shard-$loc.frontaliereticino.ch/$rel")
+            done
+          done < <(jq -r '.shards[] | [.locale, .paths[0], .paths[2]] | @tsv' "$summary")
+
+          echo "purging ${#urls[@]} URL(s)"
+          printf '  %s\n' "${urls[@]}"
+
+          # cf-purge-cache.mjs is non-fatal when CF_API_TOKEN is absent — it
+          # prints a notice and exits 0. Wrong posture here: a silent skip is
+          # exactly how an article stays 404 for two hours, so check first.
+          if [ -z "${CF_API_TOKEN:-}" ]; then
+            echo "::error::CF_API_TOKEN missing after the Remote Config load — the article is on the shard but the apex will keep serving a cached 404"
+            exit 1
+          fi
+          node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+
+      - name: Verify the article is live at the apex
+        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          summary="$RUNNER_TEMP/fast-summary.json"
+          # The publish is not done when the push is green — that was the whole
+          # lesson of run 30814047357. Assert the thing the reader cares about:
+          # the article answers 200 at the apex. set +e around curl so a
+          # transient network error is a retry, not a step abort.
+          fail=0
+          while IFS= read -r u; do
+            code=000
+            for attempt in 1 2 3 4 5 6; do
+              set +e
+              code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
+              set -e
+              [ "$code" = "200" ] && break
+              sleep 10
+            done
+            if [ "$code" = "200" ]; then echo "  200  $u"; else echo "::error::$u still answers $code after the purge"; fail=1; fi
+          done < <(jq -r '.shards[].url' "$summary")
+          [ "$fail" = "0" ] || exit 1
+
       - name: Summary
         if: always() && steps.mode.outputs.skip != 'true'
         run: |
