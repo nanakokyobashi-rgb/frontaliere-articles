@@ -1762,6 +1762,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.frontalieri-pensione-altrove.title': 'Suisse à l’étranger : retraite ici ou ailleurs',
     'blog.article.frontalieri-pensione-altrove.excerpt': 'Selon un communiqué de septembre 2025, de nombreux ressortissants suisses aspirent à passer une partie de l’année sous d’autres cieux, mais sans rompre complètement les liens avec la Confédération.',
     'blog.article.frontalieri-pensione-altrove.imageAlt': 'Retraités suisses vivant à mi-temps entre la Suisse et un autre pays',
+    'blog.article.milionari-reddito-svizzera-2022.title': 'Ils gagnent plus d\'un million de francs par an : c\'est là qu\'ils vivent',
+    'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurich est en tête, avec 482 millionnaires de revenus, suivie de Zoug. Mais Lugano se distingue aussi, avec 99 millionnaires de revenus.',
+    'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Vue panoramique de Zurich avec le lac de Zurich en arrière-plan',
 };
 
 export default blogMetaChFr;

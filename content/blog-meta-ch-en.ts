@@ -1762,6 +1762,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.frontalieri-pensione-altrove.title': 'Swiss Abroad: Retirement here or elsewhere',
     'blog.article.frontalieri-pensione-altrove.excerpt': 'According to a statement in September 2025, many Swiss nationals aspire to spend part of the year under other skies, but without completely breaking ties with the Confederation.',
     'blog.article.frontalieri-pensione-altrove.imageAlt': 'Swiss retirees living part-time between Switzerland and another country',
+    'blog.article.milionari-reddito-svizzera-2022.title': 'They earn over a million francs a year – that\'s where they live',
+    'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurich is in the lead, with 482 millionaires in income, followed by Zug. But Lugano also stands out, with 99 millionaires of income.',
+    'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Panoramic view of Zurich with Lake Zurich in the background',
 };
 
 export default blogMetaChEn;

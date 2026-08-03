@@ -1762,6 +1762,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.frontalieri-pensione-altrove.title': 'Svizzeri all\'estero: pensione qui o altrove',
     'blog.article.frontalieri-pensione-altrove.excerpt': 'Secondo quanto comunicato nel settembre 2025, molte persone di nazionalità svizzera aspirano a trascorrere una parte dell\'anno sotto altri cieli, senza però rompere completamente i legami con la Confederazione.',
     'blog.article.frontalieri-pensione-altrove.imageAlt': 'svizzeri in pensione vivono a metà tempo tra la Svizzera e un altro Paese',
+    'blog.article.milionari-reddito-svizzera-2022.title': 'Guadagnano oltre un milione di franchi all\'anno: ecco dove vivono',
+    'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurigo risulta in testa, con 482 milionari di reddito, seguita da Zugo. Ma spicca anche Lugano, con 99 milionari di reddito.',
+    'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Vista panoramica di Zurigo con il Lago di Zurigo sullo sfondo',
 };
 
 export default blogMetaChIt;

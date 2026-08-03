@@ -1762,6 +1762,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.frontalieri-pensione-altrove.title': 'Swiss Abroad: Ruhestand hier oder anderswo',
     'blog.article.frontalieri-pensione-altrove.excerpt': 'Laut einer Erklärung aus dem September 2025 streben viele Schweizer Staatsangehörige an, einen Teil des Jahres unter anderem Himmel zu verbringen, jedoch ohne die Verbindung zum Bund vollständig abzubrechen.',
     'blog.article.frontalieri-pensione-altrove.imageAlt': 'Schweizer Rentner leben zwischen der Schweiz und einem anderen Land',
+    'blog.article.milionari-reddito-svizzera-2022.title': 'Sie verdienen mehr als eine Million Franken pro Jahr: Hier leben sie',
+    'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zürich liegt mit 482 Millionären an der Spitze, gefolgt von Zug. Aber auch Lugano sticht mit 99 Millionären aus der Masse heraus.',
+    'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Panoramablick auf Zürich mit dem Zürichsee im Hintergrund',
 };
 
 export default blogMetaChDe;

@@ -613,6 +613,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ceo-kagi-esportazioni-difficolta': { it: 'ceo-kagi-esportazioni-difficolta', en: 'kagi-ceo-export-challenges', de: 'kagi-chef-export-schwierigkeiten', fr: 'ceo-kagi-difficultes-exportation' },
  'lavoro-forzato-svizzera': { it: 'lavoro-forzato-svizzera', en: 'forced-labor-swiss-supply-chains', de: 'zwangsarbeit-in-schweizer-lieferketten', fr: 'travail-force-dans-les-chaines-dapprovisionnement-suisses' },
  'frontalieri-pensione-altrove': { it: 'frontalieri-pensione-altrove', en: 'frontalieri-pensione-altrove-en', de: 'frontalieri-pensione-altrove-de', fr: 'frontalieri-pensione-altrove-fr' },
+ 'milionari-reddito-svizzera-2022': { it: 'milionari-reddito-svizzera-2022', en: 'millionaires-income-switzerland-2022', de: 'millionaere-einkommen-schweiz-2022', fr: 'millionnaires-revenu-suisse-2022' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
