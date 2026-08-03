@@ -1777,6 +1777,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Swiss Stock Exchange: Volumes Fall in July',
     'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'Trading activity on the Swiss market fell by 10.4% compared to June, but the number of transactions rose by 2.3%.',
     'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'View of the Swiss financial district during the summer break',
+    'blog.article.il-futuro-del-lavoro.title': 'Artificial intelligence revolutionizes the job market',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'As communicated in June 2025, artificial intelligence is changing the way we work in Switzerland',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Photograph of an artificial intelligence algorithm in action in Switzerland',
 };
 
 export default blogMetaChEn;

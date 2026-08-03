@@ -1777,6 +1777,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Schweizer Börse: Die Volumina sinkt im Juli',
     'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'Die Handelstätigkeit auf dem Schweizer Marktplatz ist im Vergleich zum Juni um 10,4% zurückgegangen, aber die Anzahl der Transaktionen ist um 2,3% gestiegen.',
     'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Blick auf das Schweizer Finanzviertel während der Sommerpause',
+    'blog.article.il-futuro-del-lavoro.title': 'Künstliche Intelligenz revolutioniert den Arbeitsmarkt',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'Laut einer Erklärung vom Juni 2025 verändert künstliche Intelligenz unsere Arbeitsweise in der Schweiz',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Fotografie eines Algorhythmus der künstlichen Intelligenz in Aktion in der Schweiz',
 };
 
 export default blogMetaChDe;

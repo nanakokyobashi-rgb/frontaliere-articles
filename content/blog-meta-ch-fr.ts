@@ -1777,6 +1777,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Bourse suisse : baisse des volumes en juillet',
     'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'L\'activité de trading sur la place suisse marque une baisse de 10,4 % par rapport à juin, mais le nombre de transactions augmente de 2,3 %.',
     'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Vue du quartier financier suisse pendant la pause estivale',
+    'blog.article.il-futuro-del-lavoro.title': 'L’intelligence artificielle révolutionne le marché du travail',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'Selon un communiqué de juin 2025, l’intelligence artificielle change notre façon de travailler en Suisse',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Photographie d\'un algorithme d\'intelligence artificielle en action en Suisse',
 };
 
 export default blogMetaChFr;

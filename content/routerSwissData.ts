@@ -618,6 +618,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'publibike-passa-investitore-britannico': { it: 'publibike-passa-investitore-britannico', en: 'publibike-passes-to-british-investor', de: 'publibike-wechselt-zu-britischem-investor', fr: 'publibike-passe-a-un-investisseur-britannique' },
  'vendite-auto-svizzera-luglio-2026': { it: 'vendite-auto-svizzera-luglio-2026', en: 'car-sales-switzerland-july-2026', de: 'auto-verkaeufe-schweiz-juli-2026', fr: 'ventes-voitures-suisse-juillet-2026' },
  'rallentamento-borsa-svizzera-luglio': { it: 'rallentamento-borsa-svizzera-luglio', en: 'slowdown-swiss-stock-exchange-july', de: 'verlangsamung-schweizer-boerse-juli', fr: 'ralentissement-bourse-suisse-juillet' },
+ 'il-futuro-del-lavoro': { it: 'il-futuro-del-lavoro', en: 'the-future-of-work', de: 'die-zukunft-der-arbeit', fr: 'l-avenir-du-travail' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

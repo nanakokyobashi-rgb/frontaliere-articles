@@ -1777,6 +1777,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Borsa svizzera: i volumi scendono a luglio',
     'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'L\'attività di negoziazione sulla piazza elvetica segna un calo del 10,4% rispetto a giugno, ma il numero di transazioni sale del 2,3%.',
     'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Veduta del distretto finanziario svizzero durante la pausa estiva',
+    'blog.article.il-futuro-del-lavoro.title': 'L\'intelligenza artificiale rivoluziona il mercato del lavoro',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'Secondo quanto comunicato nel giugno 2025, l\'intelligenza artificiale sta cambiando il modo in cui lavoriamo in Svizzera',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Fotografia di un algoritmo di intelligenza artificiale in azione in Svizzera',
 };
 
 export default blogMetaChIt;
