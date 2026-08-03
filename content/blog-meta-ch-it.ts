@@ -1765,6 +1765,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.milionari-reddito-svizzera-2022.title': 'Guadagnano oltre un milione di franchi all\'anno: ecco dove vivono',
     'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurigo risulta in testa, con 482 milionari di reddito, seguita da Zugo. Ma spicca anche Lugano, con 99 milionari di reddito.',
     'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Vista panoramica di Zurigo con il Lago di Zurigo sullo sfondo',
+    'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister scusa Chiese, obbligo ecclesiastici resta',
+    'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Il Consigliere federale Martin Pfister invia una lettera di scuse alle Chiese cristiane svizzere, ma l\'obbligo di servizio per gli ecclesiastici resta.',
+    'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Il Consigliere federale Martin Pfister invia una lettera di scuse alle Chiese cristiane svizzere.',
+    'blog.article.publibike-passa-investitore-britannico.title': 'Publibike passa a un investitore britannico',
+    'blog.article.publibike-passa-investitore-britannico.excerpt': 'Il noleggiatore svizzero di biciclette Publibike passa in maggioranza all’investitore britannico Visionedgeone.',
+    'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Bicicletta elettrica di Publibike parcheggiata a Lugano',
 };
 
 export default blogMetaChIt;

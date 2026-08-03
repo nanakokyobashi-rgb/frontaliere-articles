@@ -1765,6 +1765,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.milionari-reddito-svizzera-2022.title': 'They earn over a million francs a year – that\'s where they live',
     'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurich is in the lead, with 482 millionaires in income, followed by Zug. But Lugano also stands out, with 99 millionaires of income.',
     'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Panoramic view of Zurich with Lake Zurich in the background',
+    'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister excuses Churches, ecclesiastical obligation remains',
+    'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Federal Councillor Martin Pfister sends a letter of apology to the Swiss Christian churches, but the obligation of service for clergymen remains.',
+    'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'The Federal Councillor Martin Pfister sends a letter of apology to the Swiss Christian Churches.',
+    'blog.article.publibike-passa-investitore-britannico.title': 'Publibike switches to a UK investor',
+    'blog.article.publibike-passa-investitore-britannico.excerpt': 'The Swiss bicycle rental company Publibike is majority-owned by British investor Visionedgeone.',
+    'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Electric bike from Publibike parked in Lugano',
 };
 
 export default blogMetaChEn;
