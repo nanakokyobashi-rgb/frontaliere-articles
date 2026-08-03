@@ -1783,6 +1783,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.votazioni-federali-guida-2026.title': 'Votes fédéraux : les dates et les sujets du 27 septembre 2026',
     'blog.article.votazioni-federali-guida-2026.excerpt': 'Guide des votes du 27 septembre 2026 : de la neutralité à l’initiative alimentaire. Voici ce que décide le peuple suisse.',
     'blog.article.votazioni-federali-guida-2026.imageAlt': 'Palais fédéral à Berne, siège des décisions politiques suisses.',
+    'blog.article.publibike-investitore-britannico.title': 'PubliBike acquistata da un fondo d’investimento britannico',
+    'blog.article.publibike-investitore-britannico.excerpt': 'La société PubliBike, également active au Tessin, a été acquise par la majorité du fonds d’investissement britannique VisionEdgeOne.',
+    'blog.article.publibike-investitore-britannico.imageAlt': 'Frontalier suisse en vélo devant le lac de Lugano',
 };
 
 export default blogMetaChFr;

@@ -1783,6 +1783,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.votazioni-federali-guida-2026.title': 'Votazioni federali: le date e i temi del 27 settembre 2026',
     'blog.article.votazioni-federali-guida-2026.excerpt': 'Guida alle votazioni del 27 settembre 2026: dalla neutralità all\'iniziativa sull\'alimentazione. Ecco cosa decide il popolo svizzero.',
     'blog.article.votazioni-federali-guida-2026.imageAlt': 'Palazzo federale a Berna, sede delle decisioni politiche svizzere.',
+    'blog.article.publibike-investitore-britannico.title': 'Di più PubliBike passa in mani inglesi, acquistata da fondo d’investimento',
+    'blog.article.publibike-investitore-britannico.excerpt': 'La società PubliBike, attiva anche in Ticino, è stata acquisita in maggioranza dal fondo d\'investimento britannico VisionEdgeOne.',
+    'blog.article.publibike-investitore-britannico.imageAlt': 'Frontaliere svizzero in bicicletta davanti al lago di Lugano',
 };
 
 export default blogMetaChIt;

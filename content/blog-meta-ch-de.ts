@@ -1783,6 +1783,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.votazioni-federali-guida-2026.title': 'Bundeswahlen: Die Daten und Themen des 27. September 2026',
     'blog.article.votazioni-federali-guida-2026.excerpt': 'Leitfaden zu den Abstimmungen vom 27. September 2026: Von der Neutralität zur Lebensmittelinitiative. Hier ist, was das Schweizer Volk entscheidet.',
     'blog.article.votazioni-federali-guida-2026.imageAlt': 'Bundeshaus in Bern, Sitz der politischen Entscheidungen in der Schweiz.',
+    'blog.article.publibike-investitore-britannico.title': 'Mehr PubliBike geht in englische Hände über, gekauft von Investmentfonds',
+    'blog.article.publibike-investitore-britannico.excerpt': 'Das auch im Tessin tätige Unternehmen PubliBike wurde mehrheitlich vom britischen Investmentfonds VisionEdgeOne übernommen.',
+    'blog.article.publibike-investitore-britannico.imageAlt': 'Schweizer Grenzgänger vor dem Luganer See',
 };
 
 export default blogMetaChDe;

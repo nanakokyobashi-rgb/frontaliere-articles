@@ -1783,6 +1783,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.votazioni-federali-guida-2026.title': 'Federal votes: the dates and topics of 27 September 2026',
     'blog.article.votazioni-federali-guida-2026.excerpt': 'Guide to the votes on 27 September 2026: from neutrality to the food initiative. Here\'s what the Swiss people decide.',
     'blog.article.votazioni-federali-guida-2026.imageAlt': 'Federal Palace in Bern, seat of Swiss political decisions.',
+    'blog.article.publibike-investitore-britannico.title': 'More PubliBike passes into British hands, purchased by investment fund',
+    'blog.article.publibike-investitore-britannico.excerpt': 'The company PubliBike, which is also active in Ticino, has been acquired by the majority of the British investment fund VisionEdgeOne.',
+    'blog.article.publibike-investitore-britannico.imageAlt': 'Swiss frontier worker on a bike in front of Lake Lugano',
 };
 
 export default blogMetaChEn;
