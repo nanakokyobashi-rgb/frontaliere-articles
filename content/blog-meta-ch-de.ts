@@ -1765,6 +1765,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.milionari-reddito-svizzera-2022.title': 'Sie verdienen mehr als eine Million Franken pro Jahr: Hier leben sie',
     'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zürich liegt mit 482 Millionären an der Spitze, gefolgt von Zug. Aber auch Lugano sticht mit 99 Millionären aus der Masse heraus.',
     'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Panoramablick auf Zürich mit dem Zürichsee im Hintergrund',
+    'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister entschuldigt Kirchen, kirchliche Verpflichtung bleibt bestehen',
+    'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Bundesrat Martin Pfister schickt ein Entschuldigungsschreiben an die Christlichen Kirchen der Schweiz, aber die Dienstpflicht für die Geistlichen bleibt bestehen.',
+    'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Der Bundesrat Martin Pfister sendet eine Entschuldigung an die Schweizer Christlichen Kirchen.',
 };
 
 export default blogMetaChDe;

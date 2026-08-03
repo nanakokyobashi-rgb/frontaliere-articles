@@ -1765,6 +1765,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.milionari-reddito-svizzera-2022.title': 'Ils gagnent plus d\'un million de francs par an : c\'est là qu\'ils vivent',
     'blog.article.milionari-reddito-svizzera-2022.excerpt': 'Zurich est en tête, avec 482 millionnaires de revenus, suivie de Zoug. Mais Lugano se distingue aussi, avec 99 millionnaires de revenus.',
     'blog.article.milionari-reddito-svizzera-2022.imageAlt': 'Vue panoramique de Zurich avec le lac de Zurich en arrière-plan',
+    'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister excuse les Églises, l’obligation ecclésiastique reste',
+    'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Le conseiller fédéral Martin Pfister envoie une lettre d’excuses aux Églises chrétiennes suisses, mais l’obligation de service pour les ecclésiastiques demeure.',
+    'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Le Conseiller fédéral Martin Pfister envoie une lettre d\'excuse aux Églises chrétiennes suisses.',
 };
 
 export default blogMetaChFr;

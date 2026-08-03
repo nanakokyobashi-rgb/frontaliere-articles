@@ -614,6 +614,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'lavoro-forzato-svizzera': { it: 'lavoro-forzato-svizzera', en: 'forced-labor-swiss-supply-chains', de: 'zwangsarbeit-in-schweizer-lieferketten', fr: 'travail-force-dans-les-chaines-dapprovisionnement-suisses' },
  'frontalieri-pensione-altrove': { it: 'frontalieri-pensione-altrove', en: 'frontalieri-pensione-altrove-en', de: 'frontalieri-pensione-altrove-de', fr: 'frontalieri-pensione-altrove-fr' },
  'milionari-reddito-svizzera-2022': { it: 'milionari-reddito-svizzera-2022', en: 'millionaires-income-switzerland-2022', de: 'millionaere-einkommen-schweiz-2022', fr: 'millionnaires-revenu-suisse-2022' },
+ 'le-scuse-di-pfister-alle-chiese': { it: 'le-scuse-di-pfister-alle-chiese', en: 'pfister-apology-to-christian-churches', de: 'pfister-entschuldigung-an-die-schweizer-christlichen-kirchen', fr: 'l-excuse-de-pfister-aux-eglises-chretiennes-suisses' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

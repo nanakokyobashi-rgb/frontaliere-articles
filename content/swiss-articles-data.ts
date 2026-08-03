@@ -5293,6 +5293,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'le-scuse-di-pfister-alle-chiese',
+    category: 'novita',
+    date: '2026-08-03T12:16:24.070Z',
+    image: '/images/blog/le-scuse-di-pfister-alle-chiese.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
