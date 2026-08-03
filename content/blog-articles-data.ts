@@ -27660,6 +27660,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'coworking-spazi-lugano',
+ category: 'pratico',
+ date: '2026-08-03T22:42:36.134Z',
+ image: '/images/blog/coworking-spazi-lugano.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

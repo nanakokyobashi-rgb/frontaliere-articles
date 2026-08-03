@@ -9214,6 +9214,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.title': 'Zurich transport company, "that\'s why we chose Chinese buses"',
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.excerpt': 'VBZ purchased eight standard buses and twelve Chinese articulated models for a total of 20 vehicles.',
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.imageAlt': 'Yutong bus in Ticino',
+    'blog.article.coworking-spazi-lugano.title': 'The best coworking spaces in Lugano and Ticino: costs, services included',
+    'blog.article.coworking-spazi-lugano.excerpt': 'Discover the best coworking spaces in Lugano and Ticino, with costs, services included and who is ideal for those who work independently or remotely.',
+    'blog.article.coworking-spazi-lugano.imageAlt': 'Panoramic view of Lugano with the lake and mountains in the background, with people working in coworking spaces.',
 };
 
 export default blogMetaEn;

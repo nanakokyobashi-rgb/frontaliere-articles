@@ -9213,6 +9213,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.title': 'Zürcher Verkehrsunternehmen, "deshalb haben wir chinesische Busse gewählt"',
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.excerpt': 'Die VBZ kaufte acht Standardbusse und zwölf chinesische Gelenkmodelle mit insgesamt 20 Fahrzeugen.',
     'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.imageAlt': 'Yutong Bus in der Schweiz',
+    'blog.article.coworking-spazi-lugano.title': 'Die besten Coworking Spaces in Lugano und im Tessin: Kosten, Inklusivleistungen',
+    'blog.article.coworking-spazi-lugano.excerpt': 'Entdecken Sie die besten Coworking-Spaces in Lugano und Tessin, mit Kosten, inklusive Dienstleistungen und die ideal für alle, die unabhängig oder remote arbeiten.',
+    'blog.article.coworking-spazi-lugano.imageAlt': 'Panoramablick auf Lugano mit dem See und den Bergen im Hintergrund, mit Menschen, die in Coworking-Spaces arbeiten.',
 };
 
 export default blogMetaDe;
