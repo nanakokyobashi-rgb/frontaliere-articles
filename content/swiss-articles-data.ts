@@ -5320,6 +5320,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'rallentamento-borsa-svizzera-luglio',
+    category: 'pratico',
+    date: '2026-08-03T17:36:24.945Z',
+    image: '/images/blog/rallentamento-borsa-svizzera-luglio.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'il-futuro-del-lavoro',
+    category: 'fiscale',
+    date: '2026-08-03T18:31:49.520Z',
+    image: '/images/blog/il-futuro-del-lavoro.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'votazioni-federali-guida-2026',
+    category: 'novita',
+    date: '2026-08-03T18:55:21.167Z',
+    image: '/images/blog/votazioni-federali-guida-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

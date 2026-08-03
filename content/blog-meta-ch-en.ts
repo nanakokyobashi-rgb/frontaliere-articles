@@ -1774,6 +1774,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Cars in Switzerland: decline in July, BYD electric boom',
     'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Registrations fell by 3.2% in July, but electrification continues. BYD overtakes Tesla in the Swiss electric car market.',
     'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Electric and hybrid car showroom in Switzerland',
+    'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Swiss Stock Exchange: Volumes Fall in July',
+    'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'Trading activity on the Swiss market fell by 10.4% compared to June, but the number of transactions rose by 2.3%.',
+    'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'View of the Swiss financial district during the summer break',
+    'blog.article.il-futuro-del-lavoro.title': 'Artificial intelligence revolutionizes the job market',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'As communicated in June 2025, artificial intelligence is changing the way we work in Switzerland',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Photograph of an artificial intelligence algorithm in action in Switzerland',
+    'blog.article.votazioni-federali-guida-2026.title': 'Federal votes: the dates and topics of 27 September 2026',
+    'blog.article.votazioni-federali-guida-2026.excerpt': 'Guide to the votes on 27 September 2026: from neutrality to the food initiative. Here\'s what the Swiss people decide.',
+    'blog.article.votazioni-federali-guida-2026.imageAlt': 'Federal Palace in Bern, seat of Swiss political decisions.',
 };
 
 export default blogMetaChEn;

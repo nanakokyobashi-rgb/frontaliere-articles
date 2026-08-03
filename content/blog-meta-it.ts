@@ -9200,6 +9200,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE e BNS ferme: cosa cambia per chi vive tra Italia e Svizzera',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Le decisioni delle banche centrali europee e svizzere influenzano il cambio CHF/EUR, con implicazioni per i frontalieri.',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Vista aerea di Lugano con il Lago di Lugano, montagne e panorama cittadino.',
+    'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico a Locarno: riflessioni sulla memoria',
+    'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Il Teatro Periferico porta in scena al Paravento di Locarno una riflessione sulla memoria, analizzandone luci e ombre nel contesto culturale ticinese.',
+    'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Facciata del Teatro Paravento di Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Magazziniere in Ticino: stipendio, aziende e permesso G',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Scopri tutto su stipendi, aziende principali, permesso G e turni di lavoro per i frontalieri magazzinieri in Ticino.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Magazziniere frontaliero al lavoro in un magazzino logistico a Lugano, Ticino.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': '«Pronta a lavorare anche nella ristorazione». Suter si indigna: «Anche?»',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia annuncia il trasferimento in Italia per mancanza di opportunità lavorative e si accende il dibattito sul settore della ristorazione come realtà professionale.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne',
 };
 
 export default blogMetaIt;

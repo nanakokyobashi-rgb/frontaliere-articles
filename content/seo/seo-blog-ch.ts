@@ -22949,6 +22949,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rallentamento-borsa-svizzera-luglio': {
+    title: 'Borsa svizzera: i volumi scendono a luglio | Frontaliere Ticino',
+    description: 'L\'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, borsa, volumi, scendono, luglio',
+    ogTitle: 'Borsa svizzera: volumi in calo a luglio, i dati SIX',
+    ogDescription: 'L\'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX.',
+    canonicalPath: '/articoli-svizzera/rallentamento-borsa-svizzera-luglio/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borsa svizzera: i volumi scendono a luglio",
+      "description": "L'attività alla borsa svizzera cala del 10,4% a luglio. Analisi dei volumi, transazioni e impatto stagionale secondo i dati ufficiali di SIX. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rallentamento-borsa-svizzera-luglio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del distretto finanziario svizzero durante la pausa estiva"
+      },
+      "datePublished": "2026-08-03T17:36:24+00:00",
+      "dateModified": "2026-08-03T17:36:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rallentamento-borsa-svizzera-luglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-il-futuro-del-lavoro': {
+    title: 'L\'intelligenza artificiale rivoluziona il mercato del lavoro',
+    description: 'Secondo quanto comunicato nel giugno 2025, l\'intelligenza artificiale sta cambiando il modo in cui lavoriamo in Svizzera. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, intelligenza, artificiale, rivoluziona, mercato',
+    ogTitle: 'Il futuro del lavoro in Svizzera: come l\'intelligenza artificiale sta cambiando il mercato del lavoro',
+    ogDescription: 'Secondo quanto comunicato nel giugno 2025, l\'intelligenza artificiale sta cambiando il modo in cui lavoriamo in Svizzera',
+    canonicalPath: '/articoli-svizzera/il-futuro-del-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'intelligenza artificiale rivoluziona il mercato del lavoro",
+      "description": "Secondo quanto comunicato nel giugno 2025, l'intelligenza artificiale sta cambiando il modo in cui lavoriamo in Svizzera. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/il-futuro-del-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fotografia di un algoritmo di intelligenza artificiale in azione in Svizzera"
+      },
+      "datePublished": "2026-08-03T18:31:49+00:00",
+      "dateModified": "2026-08-03T18:31:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/il-futuro-del-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-votazioni-federali-guida-2026': {
+    title: 'Votazioni federali: le date e i temi del 27 settembre 2026',
+    description: 'Guida ufficiale alle votazioni federali del 27 settembre 2026: neutralità, agricoltura e futuro della Svizzera. Informazioni utili per i cittadini.',
+    keywords: 'frontalieri, ticino, svizzera, italia, votazioni, federali, date, temi',
+    ogTitle: 'Votazioni federali 27 settembre 2026: i temi principali',
+    ogDescription: 'Scopri i temi delle votazioni federali del 27 settembre 2026: neutralità e alimentazione al voto in Svizzera.',
+    canonicalPath: '/articoli-svizzera/votazioni-federali-guida-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Votazioni federali: le date e i temi del 27 settembre 2026",
+      "description": "Guida ufficiale alle votazioni federali del 27 settembre 2026: neutralità, agricoltura e futuro della Svizzera. Informazioni utili per i cittadini.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/votazioni-federali-guida-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede delle decisioni politiche svizzere."
+      },
+      "datePublished": "2026-08-03T18:55:21+00:00",
+      "dateModified": "2026-08-03T18:55:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/votazioni-federali-guida-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

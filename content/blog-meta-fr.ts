@@ -9201,6 +9201,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE et BNS : ce qui change pour les frontaliers',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Les décisions des banques centrales européennes et suisses influencent le taux de change CHF/EUR, avec des implications pour les frontaliers.',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Vue aérienne de Lugano avec le lac de Lugano, montagnes et panorama urbain.',
+    'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico à Locarno : réflexions sur la mémoire',
+    'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Le Teatro Periferico apporte sur scène au Paravento à Locarno une réflexion sur la mémoire, analysant ses lumières et ses ombres dans le contexte culturel du Tessin.',
+    'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Façade du théâtre Paravento à Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Magasinier au Tessin : salaire, entreprises et permis G',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Renseignez-vous sur les salaires, les principales entreprises, les permis G et les horaires de travail des travailleurs d’entrepôt transfrontaliers au Tessin.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Travailleur frontalier dans un entrepôt logistique à Lugano, Tessin.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': 'Prête à travailler dans la restauration. Suter s\'indigne: « Aussi ? »',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia annonce son déménagement en Italie par manque d\'opportunités d\'emploi et le débat sur le secteur de la restauration en tant que réalité professionnelle s\'enflamme.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes environnantes',
 };
 
 export default blogMetaFr;

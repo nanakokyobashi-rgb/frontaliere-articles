@@ -27615,6 +27615,33 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'teatro-periferico-locarno-memoria',
+ category: 'pratico',
+ date: '2026-08-03T18:06:42.652Z',
+ image: '/images/blog/teatro-periferico-locarno-memoria.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lavorare-magazziniere-logistica-ticino',
+ category: 'pratico',
+ date: '2026-08-03T18:47:41.690Z',
+ image: '/images/blog/lavorare-magazziniere-logistica-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lavoro-ristorazione-difficolta-ticino',
+ category: 'pratico',
+ date: '2026-08-03T19:42:08.726Z',
+ image: '/images/blog/lavoro-ristorazione-difficolta-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

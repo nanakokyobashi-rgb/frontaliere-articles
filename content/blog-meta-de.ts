@@ -9198,6 +9198,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE und BNS: Was ändert sich für Italien-Schweiz-Grenzgänger?',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Die Entscheidungen der europäischen und schweizerischen Zentralbanken beeinflussen den CHF/EUR-Wechselkurs mit Auswirkungen auf die Grenzgänger.',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Luftaufnahme von Lugano mit dem Luganersee, Bergen und Stadtpanorama.',
+    'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico in Locarno: Reflexionen über das Gedächtnis',
+    'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Das Teatro Periferico inszeniert im Paravento von Locarno eine Reflexion über die Erinnerung und analysiert Licht und Schatten im kulturellen Kontext des Tessins.',
+    'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Fassade des Paravento Theaters in Locarno',
+    'blog.article.lavorare-magazziniere-logistica-ticino.title': 'Lagerist im Tessin: Gehalt, Betriebe und Bewilligung G',
+    'blog.article.lavorare-magazziniere-logistica-ticino.excerpt': 'Erfahren Sie alles über Gehälter, Hauptunternehmen, G-Genehmigungen und Arbeitsschichten für grenzüberschreitende Lagerarbeiter in Tessin.',
+    'blog.article.lavorare-magazziniere-logistica-ticino.imageAlt': 'Frontalier Lagerarbeiter in einem Logistiklager in Lugano, Tessin.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.title': '"Bereit, auch in der Gastronomie zu arbeiten." Suter ist empört: "Außerdem?"',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia kündigt den Umzug nach Italien aus Mangel an Beschäftigungsmöglichkeiten an und entfacht die Debatte über die Gastronomie als professionelle Realität.',
+    'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Panoramablick auf Lugano mit dem See und den umliegenden Bergen',
 };
 
 export default blogMetaDe;

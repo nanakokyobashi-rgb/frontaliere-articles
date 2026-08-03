@@ -1774,6 +1774,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Auto in Svizzera: calo a luglio, boom elettrico BYD',
     'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Le immatricolazioni scendono del 3,2% a luglio, ma l\'elettrificazione prosegue. BYD supera Tesla nel mercato svizzero delle auto elettriche.',
     'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Salone di auto elettriche e ibride in Svizzera',
+    'blog.article.rallentamento-borsa-svizzera-luglio.title': 'Borsa svizzera: i volumi scendono a luglio',
+    'blog.article.rallentamento-borsa-svizzera-luglio.excerpt': 'L\'attività di negoziazione sulla piazza elvetica segna un calo del 10,4% rispetto a giugno, ma il numero di transazioni sale del 2,3%.',
+    'blog.article.rallentamento-borsa-svizzera-luglio.imageAlt': 'Veduta del distretto finanziario svizzero durante la pausa estiva',
+    'blog.article.il-futuro-del-lavoro.title': 'L\'intelligenza artificiale rivoluziona il mercato del lavoro',
+    'blog.article.il-futuro-del-lavoro.excerpt': 'Secondo quanto comunicato nel giugno 2025, l\'intelligenza artificiale sta cambiando il modo in cui lavoriamo in Svizzera',
+    'blog.article.il-futuro-del-lavoro.imageAlt': 'Fotografia di un algoritmo di intelligenza artificiale in azione in Svizzera',
+    'blog.article.votazioni-federali-guida-2026.title': 'Votazioni federali: le date e i temi del 27 settembre 2026',
+    'blog.article.votazioni-federali-guida-2026.excerpt': 'Guida alle votazioni del 27 settembre 2026: dalla neutralità all\'iniziativa sull\'alimentazione. Ecco cosa decide il popolo svizzero.',
+    'blog.article.votazioni-federali-guida-2026.imageAlt': 'Palazzo federale a Berna, sede delle decisioni politiche svizzere.',
 };
 
 export default blogMetaChIt;
