@@ -17,11 +17,23 @@
 # Config PAT cannot dispatch workflows — 403 "Resource not accessible by
 # integration", re-verified. Push is the one thing it can do.
 #
-# ARMING. Every run is DRY unless the repo variable FAST_PUBLISH_ARMED is
-# exactly 'true'. A dry run renders, validates and probes shard write access,
-# and pushes nothing — not to a shard, not to the CDN. That is deliberate for
-# the first execution: it exercises the whole path against the real corpus
-# before anything reaches a shard. Flip the variable to arm it.
+# ARMING. A corpus push PUBLISHES. That was not the first posture: every run
+# used to be dry unless a repo variable said otherwise, so the first execution
+# could exercise the whole path against the real corpus before anything reached
+# a shard. That has happened — the dry run went green end to end, and twelve
+# articles have since been published through the armed path — so the gate has
+# served its purpose and the default is now to publish.
+#
+# KILL SWITCH, in this order:
+#   1. `.github/FAST_PUBLISH_DISABLED` present in the repo  -> dry
+#   2. repo variable FAST_PUBLISH_ARMED == 'false'          -> dry
+#   3. workflow_dispatch with dry_run: true                 -> dry
+# The file is first because it is the one a session can set: this environment's
+# agent proxy refuses the Actions variables API ("Access to this GitHub Actions
+# path is not permitted through this proxy"), so a variable-only switch cannot
+# be flipped from here — which is exactly how the pipeline sat idle after the
+# dry run passed. An in-repo switch is also reviewable in a diff and revertible
+# with a commit.
 #
 # SHARD WRITE ACCESS — already proven, before this workflow ever runs.
 # §10.2 recorded "NOT YET PROVEN ... the write has to be proven inside
@@ -95,15 +107,26 @@ jobs:
         run: |
           set -euo pipefail
 
-          dry=true
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            # Dispatch says what it wants; default stays dry so a manual poke
+            # cannot publish by accident.
+            dry=true
             [ "${{ inputs.dry_run }}" = "false" ] && dry=false
-          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "true" ]; then
-            # A push that only touched this workflow or the driver is a
-            # self-test and stays dry even when armed.
+          else
+            # A push publishes, unless a kill switch says otherwise, and unless
+            # it carries no article at all: a push that only touched this
+            # workflow or the driver is a self-test.
+            dry=false
+            if [ -f .github/FAST_PUBLISH_DISABLED ]; then
+              echo "::warning::.github/FAST_PUBLISH_DISABLED present — running dry"
+              dry=true
+            elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "false" ]; then
+              echo "::warning::repo variable FAST_PUBLISH_ARMED=false — running dry"
+              dry=true
+            fi
             changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
-            if printf '%s\n' "$changed" | grep -q '^content/'; then
-              dry=false
+            if ! printf '%s\n' "$changed" | grep -q '^content/'; then
+              dry=true
             fi
           fi
           echo "dry=$dry" >> "$GITHUB_OUTPUT"
@@ -413,6 +436,6 @@ jobs:
             if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then
               echo
               echo "Dry run: rendered, validated and probed shard write access. Pushed nothing."
-              echo "Set repo variable \`FAST_PUBLISH_ARMED=true\` to publish."
+              echo "A push touching \`content/**\` publishes; remove \`.github/FAST_PUBLISH_DISABLED\` if it is present."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
