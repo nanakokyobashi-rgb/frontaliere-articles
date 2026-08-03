@@ -1771,6 +1771,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.publibike-passa-investitore-britannico.title': 'Publibike switches to a UK investor',
     'blog.article.publibike-passa-investitore-britannico.excerpt': 'The Swiss bicycle rental company Publibike is majority-owned by British investor Visionedgeone.',
     'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Electric bike from Publibike parked in Lugano',
+    'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Cars in Switzerland: decline in July, BYD electric boom',
+    'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Registrations fell by 3.2% in July, but electrification continues. BYD overtakes Tesla in the Swiss electric car market.',
+    'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Electric and hybrid car showroom in Switzerland',
 };
 
 export default blogMetaChEn;

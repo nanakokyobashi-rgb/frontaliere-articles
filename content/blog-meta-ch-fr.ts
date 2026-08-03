@@ -1771,6 +1771,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.publibike-passa-investitore-britannico.title': 'Publibike passe à un investisseur britannique',
     'blog.article.publibike-passa-investitore-britannico.excerpt': 'La société suisse de location de vélos Publibike est majoritairement détenue par l’investisseur britannique Visionedgeone.',
     'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Vélo électrique de Publibike garé à Lugano',
+    'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Voiture en Suisse : baisse en juillet, boom électrique BYD',
+    'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Les immatriculations ont chuté de 3,2 % en juillet, mais l’électrification continue. BYD dépasse Tesla sur le marché suisse des voitures électriques.',
+    'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Showroom de voitures électriques et hybrides en Suisse',
 };
 
 export default blogMetaChFr;

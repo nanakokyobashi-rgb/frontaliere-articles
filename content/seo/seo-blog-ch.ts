@@ -22910,6 +22910,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vendite-auto-svizzera-luglio-2026': {
+    title: 'Auto in Svizzera: calo a luglio, boom elettrico BYD',
+    description: 'Le vendite di auto nuove in Svizzera scendono del 3,2% a luglio 2026. L\'elettrico avanza con BYD che sorpassa Tesla. Dati ufficiali Auto-Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, auto, calo, luglio, boom',
+    ogTitle: 'Auto in Svizzera: calo a luglio, boom elettrico BYD',
+    ogDescription: 'Le vendite di auto nuove in Svizzera scendono del 3,2% a luglio 2026. L\'elettrico avanza con BYD che sorpassa Tesla.',
+    canonicalPath: '/articoli-svizzera/vendite-auto-svizzera-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Auto in Svizzera: calo a luglio, boom elettrico BYD",
+      "description": "Le vendite di auto nuove in Svizzera scendono del 3,2% a luglio 2026. L'elettrico avanza con BYD che sorpassa Tesla. Dati ufficiali Auto-Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vendite-auto-svizzera-luglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Salone di auto elettriche e ibride in Svizzera"
+      },
+      "datePublished": "2026-08-03T15:36:39+00:00",
+      "dateModified": "2026-08-03T15:36:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/vendite-auto-svizzera-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

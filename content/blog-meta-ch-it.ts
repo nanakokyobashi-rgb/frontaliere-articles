@@ -1771,6 +1771,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.publibike-passa-investitore-britannico.title': 'Publibike passa a un investitore britannico',
     'blog.article.publibike-passa-investitore-britannico.excerpt': 'Il noleggiatore svizzero di biciclette Publibike passa in maggioranza all’investitore britannico Visionedgeone.',
     'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Bicicletta elettrica di Publibike parcheggiata a Lugano',
+    'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Auto in Svizzera: calo a luglio, boom elettrico BYD',
+    'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Le immatricolazioni scendono del 3,2% a luglio, ma l\'elettrificazione prosegue. BYD supera Tesla nel mercato svizzero delle auto elettriche.',
+    'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Salone di auto elettriche e ibride in Svizzera',
 };
 
 export default blogMetaChIt;
