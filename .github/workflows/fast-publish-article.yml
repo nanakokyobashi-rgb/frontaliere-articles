@@ -245,6 +245,22 @@ jobs:
             fail=1
           fi
           echo "IT archive lists $items items"
+
+          # The article registry (data/{blog,swiss}-articles-data.ts -> content/)
+          # is read inside a try/catch in ogPagesPlugin: when it is missing the
+          # render SUCCEEDS and silently downgrades NewsArticle.author from the
+          # named Person to a generic Organization, and drops the visible byline.
+          # Measured: 4 of 42 rendered files differ, all of them article pages,
+          # and nothing anywhere reports a problem. Same silent-degradation class
+          # as the empty archive above, so it gets the same treatment.
+          it_article="$(jq -r '.shards[] | select(.locale=="it") | .paths[0]' "$summary")"
+          if ! grep -q '"author":{"@type":"Person"' "$dist/$it_article"; then
+            echo "::error::$it_article has no Person author in its NewsArticle JSON-LD — the article registry did not resolve (check the data/*-articles-data.ts symlinks)"
+            fail=1
+          else
+            echo "article carries a named Person author"
+          fi
+
           [ "$fail" = "0" ] || exit 1
 
       - name: Publish to shards and CDN
