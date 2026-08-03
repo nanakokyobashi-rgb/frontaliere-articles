@@ -1,0 +1,288 @@
+# Fast-publish one article: render its 4 locale pages + the section archive and
+# push them straight to the article shard repos and the CDN, skipping the full
+# site build.
+#
+# WHY THIS EXISTS (issue #4974 item 3, migration §10.4 step 4)
+# ───────────────────────────────────────────────────────────
+# The main repo's `fast-publish-article.yml` was what made a generated article
+# visible in minutes. §4 of the migration doc filed it under "site-only" — a
+# judgement about where it RAN, not what it DID — and after the cutover nothing
+# dispatched it. The result: every article generated since 2026-08-02 exists in
+# the corpus, is listed in the API sitemaps, and 404s on the site.
+#
+# THE CHAIN LINK. `push: content/**` is the same link generate-article.yml
+# restored in 0517589: a corpus push means an article was actually produced, so
+# publication starts immediately instead of waiting for anything to dispatch it.
+# It has to be a push trigger and not a workflow dispatch, because the Remote
+# Config PAT cannot dispatch workflows — 403 "Resource not accessible by
+# integration", re-verified. Push is the one thing it can do.
+#
+# ARMING. Every run is DRY unless the repo variable FAST_PUBLISH_ARMED is
+# exactly 'true'. A dry run renders, validates and probes shard write access,
+# and pushes nothing — not to a shard, not to the CDN. That is deliberate for
+# the first execution: it exercises the whole path against the real corpus
+# before anything reaches a shard. Flip the variable to arm it.
+#
+# SHARD WRITE ACCESS — already proven, before this workflow ever runs.
+# §10.2 recorded "NOT YET PROVEN ... the write has to be proven inside
+# Actions", because the agent proxy refuses POST /git/refs. That conclusion was
+# too pessimistic: the git receive-pack ADVERTISEMENT
+# (GET /info/refs?service=git-receive-pack) is permission-gated and is a plain
+# GET, so it goes through. Measured 2026-08-03 with Remote Config's GITHUB_PAT:
+# all 8 article shards answer 200; the control (torvalds/linux, which this PAT
+# obviously cannot write) answers 403 on receive-pack and 200 on upload-pack.
+# The PAT can write to every article shard. The probe step below re-runs that
+# same check every time, so a revoked or narrowed PAT fails loudly here rather
+# than half-way through a publish.
+#
+# Shards belong to nanakokyobashi-rgb (scripts/lib/section-shard-owners.json),
+# so this repo pushes to its own repos. The main repo's SHARD_*_DEPLOY_KEY
+# secrets are irrelevant here — main needed them because main pushed to repos
+# it did not own.
+
+name: fast-publish-article
+
+on:
+  push:
+    paths:
+      # Self-test on change, always dry (see the `dry` resolution below).
+      - '.github/workflows/fast-publish-article.yml'
+      - 'scripts/publish-article-fast.mjs'
+      # THE CHAIN LINK — a corpus push means an article was produced.
+      - 'content/**'
+  workflow_dispatch:
+    inputs:
+      article_id:
+        description: 'Article id to publish (empty = derive from the last corpus commit)'
+        required: false
+        type: string
+      section:
+        description: 'frontaliere or svizzera (empty = derive)'
+        required: false
+        type: string
+      dry_run:
+        description: 'Render and validate, push nothing'
+        required: false
+        default: true
+        type: boolean
+
+# Never cancel: a cancelled run can leave some locales pushed and others not.
+concurrency:
+  group: fast-publish-article
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          # persist-credentials: false is load-bearing, not hygiene. It stops
+          # actions/checkout leaving its GITHUB_TOKEN in an extraheader that
+          # would then be used ahead of the PAT for every shard push — the
+          # `contents: read` token, which cannot write and whose push fires no
+          # workflow anyway.
+          persist-credentials: false
+
+      - name: Resolve mode, article id and section
+        id: mode
+        run: |
+          set -euo pipefail
+
+          dry=true
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ "${{ inputs.dry_run }}" = "false" ] && dry=false
+          elif [ "${{ vars.FAST_PUBLISH_ARMED }}" = "true" ]; then
+            # A push that only touched this workflow or the driver is a
+            # self-test and stays dry even when armed.
+            changed="$(git diff --name-only HEAD~1 HEAD 2>/dev/null || true)"
+            if printf '%s\n' "$changed" | grep -q '^content/'; then
+              dry=false
+            fi
+          fi
+          echo "dry=$dry" >> "$GITHUB_OUTPUT"
+
+          id="${{ inputs.article_id }}"
+          section="${{ inputs.section }}"
+
+          if [ -z "$id" ]; then
+            # Derive from the corpus commit: a generated article always adds a
+            # body file per locale under content/blog-body{,-ch}/<loc>/<id>.ts.
+            # `grep || true` — under `set -e` a no-match exit 1 would kill the
+            # step, and "no article in this push" is a normal outcome, not a
+            # failure.
+            body="$(git diff --name-only HEAD~1 HEAD 2>/dev/null \
+                    | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1 || true)"
+            if [ -n "$body" ]; then
+              id="$(basename "$body" .ts)"
+              case "$body" in
+                content/blog-body-ch/*) section=svizzera ;;
+                *)                      section=frontaliere ;;
+              esac
+            fi
+          fi
+
+          if [ -z "$id" ]; then
+            echo "no article body in this push — nothing to publish"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+          echo "section=${section:-frontaliere}" >> "$GITHUB_OUTPUT"
+          echo "resolved id=$id section=${section:-frontaliere} dry=$dry"
+
+      - name: Set up Node
+        if: steps.mode.outputs.skip != 'true'
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.mode.outputs.skip != 'true'
+        run: npm ci
+
+      - name: Prepare Firebase credentials
+        if: steps.mode.outputs.skip != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Remote Config is the only source of the shard PAT and the R2 credentials"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: steps.mode.outputs.skip != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Probe shard write access
+        if: steps.mode.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing after the Remote Config load"
+            exit 1
+          fi
+          section="${{ steps.mode.outputs.section }}"
+          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
+
+          # The receive-pack advertisement is permission-gated: a credential
+          # that cannot write gets 403 here while still getting 200 on
+          # upload-pack. This is a GET and writes nothing.
+          fail=0
+          for loc in it en de fr; do
+            repo="$owner/frontaliere-$shard-$loc"
+            # set +e: a non-2xx is data here, not a reason to end the step.
+            set +e
+            code="$(curl -s -o /dev/null -w '%{http_code}' -u "x-access-token:$GITHUB_PAT" \
+                    "https://github.com/$repo.git/info/refs?service=git-receive-pack")"
+            set -e
+            if [ "$code" = "200" ]; then
+              echo "  write OK   $repo"
+            else
+              echo "::error::no write access to $repo (receive-pack returned $code)"
+              fail=1
+            fi
+          done
+          [ "$fail" = "0" ] || exit 1
+
+      - name: Render the article (fast path)
+        if: steps.mode.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          npx -y tsx@4 scripts/publish-article-fast.mjs \
+            --id "${{ steps.mode.outputs.id }}" \
+            --section "${{ steps.mode.outputs.section }}" \
+            --out "$RUNNER_TEMP/fast-dist" \
+            --summary "$RUNNER_TEMP/fast-summary.json"
+
+      - name: Validate what was rendered
+        if: steps.mode.outputs.skip != 'true'
+        run: |
+          set -euo pipefail
+          summary="$RUNNER_TEMP/fast-summary.json"
+          dist="$RUNNER_TEMP/fast-dist"
+
+          # Every path the summary promises must exist and be non-empty. A
+          # zero-item archive renders "successfully" (the core EMITS-EMPTY by
+          # design), so size alone is not enough — the archive must also list
+          # something.
+          fail=0
+          for loc in it en de fr; do
+            n="$(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths | length' "$summary")"
+            if [ "${n:-0}" -lt 3 ]; then
+              echo "::error::locale $loc has only ${n:-0} paths (expected article + bridge + >=1 archive page)"
+              fail=1
+            fi
+          done
+
+          while IFS= read -r rel; do
+            if [ ! -s "$dist/$rel" ]; then
+              echo "::error::missing or empty rendered file: $rel"
+              fail=1
+            fi
+          done < <(jq -r '.shards[].paths[]' "$summary")
+
+          # The archive must not be empty. This is the defect that made the
+          # first local render produce four pages with zero <li> items when the
+          # corpus symlinks were missing — it did not fail, it published nothing.
+          it_archive="$(jq -r '.shards[] | select(.locale=="it") | .paths[2]' "$summary")"
+          items="$(grep -o '<li>' "$dist/$it_archive" | wc -l)"
+          if [ "$items" -lt 1 ]; then
+            echo "::error::IT archive $it_archive lists 0 articles — refusing to publish an empty archive over the live one"
+            fail=1
+          fi
+          echo "IT archive lists $items items"
+          [ "$fail" = "0" ] || exit 1
+
+      - name: Publish to shards and CDN
+        if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          summary="$RUNNER_TEMP/fast-summary.json"
+          dist="$RUNNER_TEMP/fast-dist"
+          section="${{ steps.mode.outputs.section }}"
+          shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+
+          for loc in it en de fr; do
+            mapfile -t paths < <(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths[]' "$summary")
+            # Signature is <section> <locale> <scratch_dist_dir> <relpath...>.
+            # There is no subtree argument: each relpath is BOTH the path under
+            # $dist and the destination path inside the shard repo.
+            echo "── pushing ${#paths[@]} files to $shard/$loc"
+            bash scripts/lib/push-article-shard-incremental.sh \
+              "$shard" "$loc" "$dist" "${paths[@]}"
+          done
+
+          while IFS=$'\t' read -r local key; do
+            [ -n "$local" ] || continue
+            bash scripts/lib/upload-cdn-file.sh "$local" "$key"
+          done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
+
+      - name: Summary
+        if: always() && steps.mode.outputs.skip != 'true'
+        run: |
+          {
+            echo "### fast-publish-article"
+            echo
+            echo "- id: \`${{ steps.mode.outputs.id }}\`"
+            echo "- section: \`${{ steps.mode.outputs.section }}\`"
+            echo "- mode: \`$([ "${{ steps.mode.outputs.dry }}" = "true" ] && echo DRY || echo ARMED)\`"
+            if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then
+              echo
+              echo "Dry run: rendered, validated and probed shard write access. Pushed nothing."
+              echo "Set repo variable \`FAST_PUBLISH_ARMED=true\` to publish."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
