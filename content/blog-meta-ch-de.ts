@@ -1771,6 +1771,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.publibike-passa-investitore-britannico.title': 'Publibike wechselt zu einem britischen Investor',
     'blog.article.publibike-passa-investitore-britannico.excerpt': 'Das Schweizer Fahrradverleihunternehmen Publibike befindet sich mehrheitlich im Besitz des britischen Investors Visionedgeone.',
     'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Elektrofahrrad von Publibike in Lugano geparkt',
+    'blog.article.vendite-auto-svizzera-luglio-2026.title': 'Autos in der Schweiz: Rückgang im Juli, BYD-Elektroboom',
+    'blog.article.vendite-auto-svizzera-luglio-2026.excerpt': 'Im Juli gingen die Zulassungen um 3,2% zurück, aber die Elektrifizierung geht weiter. BYD überholt Tesla im Schweizer Elektroauto-Markt.',
+    'blog.article.vendite-auto-svizzera-luglio-2026.imageAlt': 'Elektro- und Hybrid-Autohaus in der Schweiz',
 };
 
 export default blogMetaChDe;
