@@ -354,17 +354,27 @@ jobs:
           # lesson of run 30814047357. Assert the thing the reader cares about:
           # the article answers 200 at the apex. set +e around curl so a
           # transient network error is a retry, not a step abort.
+          # Budget: purge propagation is eventually-consistent — cf-purge-cache.mjs
+          # documents "up to ~30s worst case across edge PoPs", and measured on
+          # run 30815055793 en/de/fr answered 200 immediately while IT needed
+          # longer and tripped a 60s budget. It was 200 seconds later. So: ~3
+          # minutes, with one re-purge of the specific URL half way through,
+          # since a single missed PoP is the likeliest cause.
           fail=0
           while IFS= read -r u; do
             code=000
-            for attempt in 1 2 3 4 5 6; do
+            for attempt in $(seq 1 12); do
               set +e
               code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
               set -e
               [ "$code" = "200" ] && break
-              sleep 10
+              if [ "$attempt" = 6 ] && [ -n "${CF_API_TOKEN:-}" ]; then
+                echo "  re-purging $u (still $code after 6 tries)"
+                node scripts/cf-purge-cache.mjs "--files=$u" >/dev/null 2>&1 || true
+              fi
+              sleep 15
             done
-            if [ "$code" = "200" ]; then echo "  200  $u"; else echo "::error::$u still answers $code after the purge"; fail=1; fi
+            if [ "$code" = "200" ]; then echo "  200  $u"; else echo "::error::$u still answers $code ~3min after the purge"; fail=1; fi
           done < <(jq -r '.shards[].url' "$summary")
           [ "$fail" = "0" ] || exit 1
 
