@@ -1780,6 +1780,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.il-futuro-del-lavoro.title': 'Künstliche Intelligenz revolutioniert den Arbeitsmarkt',
     'blog.article.il-futuro-del-lavoro.excerpt': 'Laut einer Erklärung vom Juni 2025 verändert künstliche Intelligenz unsere Arbeitsweise in der Schweiz',
     'blog.article.il-futuro-del-lavoro.imageAlt': 'Fotografie eines Algorhythmus der künstlichen Intelligenz in Aktion in der Schweiz',
+    'blog.article.votazioni-federali-guida-2026.title': 'Bundeswahlen: Die Daten und Themen des 27. September 2026',
+    'blog.article.votazioni-federali-guida-2026.excerpt': 'Leitfaden zu den Abstimmungen vom 27. September 2026: Von der Neutralität zur Lebensmittelinitiative. Hier ist, was das Schweizer Volk entscheidet.',
+    'blog.article.votazioni-federali-guida-2026.imageAlt': 'Bundeshaus in Bern, Sitz der politischen Entscheidungen in der Schweiz.',
 };
 
 export default blogMetaChDe;

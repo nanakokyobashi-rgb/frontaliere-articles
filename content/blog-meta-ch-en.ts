@@ -1780,6 +1780,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.il-futuro-del-lavoro.title': 'Artificial intelligence revolutionizes the job market',
     'blog.article.il-futuro-del-lavoro.excerpt': 'As communicated in June 2025, artificial intelligence is changing the way we work in Switzerland',
     'blog.article.il-futuro-del-lavoro.imageAlt': 'Photograph of an artificial intelligence algorithm in action in Switzerland',
+    'blog.article.votazioni-federali-guida-2026.title': 'Federal votes: the dates and topics of 27 September 2026',
+    'blog.article.votazioni-federali-guida-2026.excerpt': 'Guide to the votes on 27 September 2026: from neutrality to the food initiative. Here\'s what the Swiss people decide.',
+    'blog.article.votazioni-federali-guida-2026.imageAlt': 'Federal Palace in Bern, seat of Swiss political decisions.',
 };
 
 export default blogMetaChEn;

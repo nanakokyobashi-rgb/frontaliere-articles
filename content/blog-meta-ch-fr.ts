@@ -1780,6 +1780,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.il-futuro-del-lavoro.title': 'L’intelligence artificielle révolutionne le marché du travail',
     'blog.article.il-futuro-del-lavoro.excerpt': 'Selon un communiqué de juin 2025, l’intelligence artificielle change notre façon de travailler en Suisse',
     'blog.article.il-futuro-del-lavoro.imageAlt': 'Photographie d\'un algorithme d\'intelligence artificielle en action en Suisse',
+    'blog.article.votazioni-federali-guida-2026.title': 'Votes fédéraux : les dates et les sujets du 27 septembre 2026',
+    'blog.article.votazioni-federali-guida-2026.excerpt': 'Guide des votes du 27 septembre 2026 : de la neutralité à l’initiative alimentaire. Voici ce que décide le peuple suisse.',
+    'blog.article.votazioni-federali-guida-2026.imageAlt': 'Palais fédéral à Berne, siège des décisions politiques suisses.',
 };
 
 export default blogMetaChFr;
