@@ -9195,6 +9195,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Er fährt Krankenwagen und arbeitet sechs Tage im Monat: "Ich verdiene 2300 Euro"',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Traumhafte Arbeitsbedingungen für Ambulanzfahrer in Spanien: 2300 Euro netto bei sechs Arbeitstagen im Jahr.',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Ein Krankenwagen fährt durch die Straßen von Lugano, Tessin, Schweiz',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE und BNS: Was ändert sich für Italien-Schweiz-Grenzgänger?',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Die Entscheidungen der europäischen und schweizerischen Zentralbanken beeinflussen den CHF/EUR-Wechselkurs mit Auswirkungen auf die Grenzgänger.',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Luftaufnahme von Lugano mit dem Luganersee, Bergen und Stadtpanorama.',
 };
 
 export default blogMetaDe;

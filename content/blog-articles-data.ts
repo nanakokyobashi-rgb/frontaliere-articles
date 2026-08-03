@@ -27606,6 +27606,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'bce-bns-ferme-cambi-per-frontalieri',
+ category: 'fiscale',
+ date: '2026-08-03T08:39:58.078Z',
+ image: '/images/blog/bce-bns-ferme-cambi-per-frontalieri.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

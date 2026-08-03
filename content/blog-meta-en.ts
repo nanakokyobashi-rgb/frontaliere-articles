@@ -9196,6 +9196,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'He drives an ambulance and works six days a month: "I earn 2300 euros"',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Dream working conditions for those who drive an ambulance in Spain: 2300 euros net with six days of work a year.',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'An ambulance driving through the streets of Lugano, Ticino, Switzerland',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'ECB and SNB: What\'s Next for Italy-Switzerland Border Residents',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'The decisions of the European and Swiss central banks affect the CHF/EUR exchange rate, which has implications for cross-border commuters.',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Aerial view of Lugano with Lake Lugano, mountains, and cityscape.',
 };
 
 export default blogMetaEn;

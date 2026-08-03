@@ -9197,6 +9197,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Guida un\'ambulanza e lavora sei giorni al mese: "Guadagno 2300 euro"',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Condizioni di lavoro da sogno per chi guida un\'ambulanza in Spagna: 2300 euro netti con sei giorni di lavoro l\'anno.',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Un\'ambulanza che percorre le strade di Lugano, Ticino, Svizzera',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE e BNS ferme: cosa cambia per chi vive tra Italia e Svizzera',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Le decisioni delle banche centrali europee e svizzere influenzano il cambio CHF/EUR, con implicazioni per i frontalieri.',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Vista aerea di Lugano con il Lago di Lugano, montagne e panorama cittadino.',
 };
 
 export default blogMetaIt;

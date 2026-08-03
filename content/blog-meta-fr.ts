@@ -9198,6 +9198,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.ambulanza-spagna-guadagno-2300-euro.title': 'Ambulancier : 2300 euros par mois',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.excerpt': 'Conditions de travail de rêve pour celui qui conduit une ambulance en Espagne : 2 300 euros nets avec six jours de travail par an.',
     'blog.article.ambulanza-spagna-guadagno-2300-euro.imageAlt': 'Une ambulance roulant dans les rues de Lugano, Tessin, Suisse',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE et BNS : ce qui change pour les frontaliers',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Les décisions des banques centrales européennes et suisses influencent le taux de change CHF/EUR, avec des implications pour les frontaliers.',
+    'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Vue aérienne de Lugano avec le lac de Lugano, montagnes et panorama urbain.',
 };
 
 export default blogMetaFr;
