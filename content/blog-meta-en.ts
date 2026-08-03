@@ -9208,6 +9208,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lavoro-ristorazione-difficolta-ticino.title': '"Ready to work in the restaurant industry as well." Suter is indignant: "Also?"',
     'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia announces her move to Italy due to lack of job opportunities and the debate on the catering sector as a professional reality is ignited.',
     'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Panoramic view of Lugano with the lake and surrounding mountains',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.title': 'Cross-border commuters: Buying a property in Switzerland as an investment',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.excerpt': 'Restrictions for non-residents, taxation, differences with the purchase of the first home.',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.imageAlt': 'Aerial view of Lugano with the lake and mountains in the background. A person looking at a real estate brochure.',
 };
 
 export default blogMetaEn;

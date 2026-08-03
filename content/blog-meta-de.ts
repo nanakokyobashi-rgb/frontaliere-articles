@@ -9207,6 +9207,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lavoro-ristorazione-difficolta-ticino.title': '"Bereit, auch in der Gastronomie zu arbeiten." Suter ist empört: "Außerdem?"',
     'blog.article.lavoro-ristorazione-difficolta-ticino.excerpt': 'Lisa Bosia kündigt den Umzug nach Italien aus Mangel an Beschäftigungsmöglichkeiten an und entfacht die Debatte über die Gastronomie als professionelle Realität.',
     'blog.article.lavoro-ristorazione-difficolta-ticino.imageAlt': 'Panoramablick auf Lugano mit dem See und den umliegenden Bergen',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.title': 'Grenzüberschreitende Pendler: Ein Immobilienkauf in der Schweiz als Investition',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.excerpt': 'Einschränkungen für Gebietsfremde, Steuern, Unterschiede beim Kauf des ersten Hauses.',
+    'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.imageAlt': 'Luftaufnahme von Lugano mit dem See und den Bergen im Hintergrund. Eine Person, die eine Immobilienbroschüre betrachtet.',
 };
 
 export default blogMetaDe;
