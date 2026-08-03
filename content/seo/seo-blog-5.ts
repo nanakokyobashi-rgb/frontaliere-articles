@@ -58493,6 +58493,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi': {
+    title: 'Azienda trasporti Zurigo, “ecco perché abbiamo scelto bus cinesi”',
+    description: 'La VBZ ha acquistato autobus cinesi per migliorare la qualità e la sostenibilità dei suoi servizi. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, azienda, trasporti, zurigo, ecco',
+    ogTitle: 'Azienda trasporti Zurigo, “ecco perché abbiamo scelto bus cinesi”',
+    ogDescription: 'La VBZ ha acquistato autobus cinesi per migliorare la qualità e la sostenibilità dei suoi servizi.',
+    canonicalPath: '/articoli-frontaliere/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Azienda trasporti Zurigo, “ecco perché abbiamo scelto bus cinesi”",
+      "description": "La VBZ ha acquistato autobus cinesi per migliorare la qualità e la sostenibilità dei suoi servizi. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autobus Yutong in Ticino"
+      },
+      "datePublished": "2026-08-03T21:42:13+00:00",
+      "dateModified": "2026-08-03T21:42:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

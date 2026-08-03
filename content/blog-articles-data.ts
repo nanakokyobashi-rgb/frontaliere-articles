@@ -27651,6 +27651,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi',
+ category: 'fiscale',
+ date: '2026-08-03T21:42:13.032Z',
+ image: '/images/blog/azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

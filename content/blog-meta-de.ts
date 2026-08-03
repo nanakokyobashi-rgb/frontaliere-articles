@@ -9210,6 +9210,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.title': 'Grenzüberschreitende Pendler: Ein Immobilienkauf in der Schweiz als Investition',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.excerpt': 'Einschränkungen für Gebietsfremde, Steuern, Unterschiede beim Kauf des ersten Hauses.',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.imageAlt': 'Luftaufnahme von Lugano mit dem See und den Bergen im Hintergrund. Eine Person, die eine Immobilienbroschüre betrachtet.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.title': 'Zürcher Verkehrsunternehmen, "deshalb haben wir chinesische Busse gewählt"',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.excerpt': 'Die VBZ kaufte acht Standardbusse und zwölf chinesische Gelenkmodelle mit insgesamt 20 Fahrzeugen.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.imageAlt': 'Yutong Bus in der Schweiz',
 };
 
 export default blogMetaDe;

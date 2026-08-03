@@ -9211,6 +9211,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.title': 'Cross-border commuters: Buying a property in Switzerland as an investment',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.excerpt': 'Restrictions for non-residents, taxation, differences with the purchase of the first home.',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.imageAlt': 'Aerial view of Lugano with the lake and mountains in the background. A person looking at a real estate brochure.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.title': 'Zurich transport company, "that\'s why we chose Chinese buses"',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.excerpt': 'VBZ purchased eight standard buses and twelve Chinese articulated models for a total of 20 vehicles.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.imageAlt': 'Yutong bus in Ticino',
 };
 
 export default blogMetaEn;

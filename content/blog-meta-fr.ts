@@ -9213,6 +9213,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.title': 'Frontaliers: Acheter un bien en Suisse',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.excerpt': 'Contraintes pour les non-résidents, fiscalité, différences avec l\'achat de la première maison.',
     'blog.article.frontaliere-acquisto-immobile-investimento-svizzera.imageAlt': 'Vue aérienne de Lugano avec le lac et les montagnes en arrière-plan. Une personne regardant un prospectus immobilier.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.title': 'Zurich, pourquoi les bus chinois',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.excerpt': 'VBZ a acheté huit autobus standards et douze modèles articulés chinois pour un total de 20 véhicules.',
+    'blog.article.azienda-trasporti-zurigo-ecco-perche-abbiamo-scelto-bus-cinesi.imageAlt': 'Autobus Yutong en Suisse',
 };
 
 export default blogMetaFr;
