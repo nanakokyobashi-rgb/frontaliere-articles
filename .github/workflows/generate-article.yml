@@ -284,6 +284,21 @@ jobs:
           fi
           echo "generated=true" >> "$GITHUB_OUTPUT"
 
+      # Encode the 480w WebP thumbnail for the new hero. This step exists in the
+      # main repo's generate-article.yml and was dropped in transport, so every
+      # article generated here since the cutover has a hero and no thumbnail.
+      # publish-article-fast.mjs looks for
+      # public/images/blog/thumbnails/<slug>-480w.webp, logs "does not exist on
+      # disk" and omits it from cdnUploads — a log line, not a failure, so the
+      # thumbnail simply 404s on the CDN forever.
+      #
+      # The .webp outputs are COMMITTED (git is the cache): the committed ones
+      # arrive with the checkout, so the script skips them via its fast path and
+      # only encodes the freshly-added hero. `git add -A` below commits it.
+      - name: Generate responsive image thumbnail for the new article
+        if: steps.mode.outputs.dry != 'true'
+        run: node scripts/generate-image-thumbnails.mjs
+
       - name: Commit and push
         if: steps.mode.outputs.dry != 'true'
         run: |

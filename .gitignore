@@ -4,3 +4,9 @@ generator/data/border-wait-averages.json
 .tmp/
 generator/data/border-wait-ranking-window.json
 data/events.json
+
+# Responsive 480w WebP thumbnails: the .webp outputs are COMMITTED (git is the
+# cache, see scripts/generate-image-thumbnails.mjs). The SHA manifest stays
+# LOCAL: committing it would conflict on every concurrent article.
+public/images/blog/thumbnails/.thumbcache.json
+public/images/places/thumbnails/.thumbcache.json
