@@ -1768,6 +1768,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister scusa Chiese, obbligo ecclesiastici resta',
     'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Il Consigliere federale Martin Pfister invia una lettera di scuse alle Chiese cristiane svizzere, ma l\'obbligo di servizio per gli ecclesiastici resta.',
     'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Il Consigliere federale Martin Pfister invia una lettera di scuse alle Chiese cristiane svizzere.',
+    'blog.article.publibike-passa-investitore-britannico.title': 'Publibike passa a un investitore britannico',
+    'blog.article.publibike-passa-investitore-britannico.excerpt': 'Il noleggiatore svizzero di biciclette Publibike passa in maggioranza all’investitore britannico Visionedgeone.',
+    'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Bicicletta elettrica di Publibike parcheggiata a Lugano',
 };
 
 export default blogMetaChIt;

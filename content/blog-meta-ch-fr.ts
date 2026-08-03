@@ -1768,6 +1768,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister excuse les Églises, l’obligation ecclésiastique reste',
     'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Le conseiller fédéral Martin Pfister envoie une lettre d’excuses aux Églises chrétiennes suisses, mais l’obligation de service pour les ecclésiastiques demeure.',
     'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Le Conseiller fédéral Martin Pfister envoie une lettre d\'excuse aux Églises chrétiennes suisses.',
+    'blog.article.publibike-passa-investitore-britannico.title': 'Publibike passe à un investisseur britannique',
+    'blog.article.publibike-passa-investitore-britannico.excerpt': 'La société suisse de location de vélos Publibike est majoritairement détenue par l’investisseur britannique Visionedgeone.',
+    'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Vélo électrique de Publibike garé à Lugano',
 };
 
 export default blogMetaChFr;

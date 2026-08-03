@@ -5302,6 +5302,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'publibike-passa-investitore-britannico',
+    category: 'novita',
+    date: '2026-08-03T13:06:08.768Z',
+    image: '/images/blog/publibike-passa-investitore-britannico.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

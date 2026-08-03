@@ -1768,6 +1768,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.le-scuse-di-pfister-alle-chiese.title': 'Pfister entschuldigt Kirchen, kirchliche Verpflichtung bleibt bestehen',
     'blog.article.le-scuse-di-pfister-alle-chiese.excerpt': 'Bundesrat Martin Pfister schickt ein Entschuldigungsschreiben an die Christlichen Kirchen der Schweiz, aber die Dienstpflicht für die Geistlichen bleibt bestehen.',
     'blog.article.le-scuse-di-pfister-alle-chiese.imageAlt': 'Der Bundesrat Martin Pfister sendet eine Entschuldigung an die Schweizer Christlichen Kirchen.',
+    'blog.article.publibike-passa-investitore-britannico.title': 'Publibike wechselt zu einem britischen Investor',
+    'blog.article.publibike-passa-investitore-britannico.excerpt': 'Das Schweizer Fahrradverleihunternehmen Publibike befindet sich mehrheitlich im Besitz des britischen Investors Visionedgeone.',
+    'blog.article.publibike-passa-investitore-britannico.imageAlt': 'Elektrofahrrad von Publibike in Lugano geparkt',
 };
 
 export default blogMetaChDe;
