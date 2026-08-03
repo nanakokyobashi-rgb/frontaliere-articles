@@ -90,7 +90,14 @@ case "$loc" in
   *) echo "::error::unsupported locale '$loc' (expected it|de|en|fr)" >&2; exit 1 ;;
 esac
 
-repo_root="$(pwd)"
+# Script-relative, not cwd-relative. `$(pwd)` silently resolved
+# section-shard-owners.json to nothing when invoked from anywhere but the repo
+# root, and jq's `// "valerielinc-ops"` default then sent the push to the WRONG
+# OWNER — these shards belong to nanakokyobashi-rgb. Actions happens to run
+# with cwd = repo root, so this never bit in CI, but it is one `cd` away from
+# doing so. Falls back to the old behaviour if the layout ever moves.
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." 2>/dev/null && pwd)"
+[ -f "$repo_root/scripts/lib/section-shard-owners.json" ] || repo_root="$(pwd)"
 owners_json="$repo_root/scripts/lib/section-shard-owners.json"
 SECTION_UPPER="$(echo "$section" | tr a-z A-Z)"
 LOC_UPPER="$(echo "$loc" | tr a-z A-Z)"
@@ -111,9 +118,35 @@ done
 # the article ride the next full deploy instead.
 key_var="SHARD_${SECTION_UPPER}_${LOC_UPPER}_DEPLOY_KEY"
 key_val="${!key_var:-}"
+
+# PAT MODE (issue #4974 item 3). Historically a missing deploy key meant
+# "fast path not provisioned" and this script exited 0 — a SILENT no-op that
+# the caller reports as success. That was right when the shards belonged to
+# another owner and the only write credential was an SSH deploy key.
+#
+# It is wrong now: scripts/lib/section-shard-owners.json puts both article
+# sections under nanakokyobashi-rgb, this repo, and Remote Config's GITHUB_PAT
+# writes to all eight article shards (measured — the permission-gated
+# receive-pack advertisement answers 200 on all 8 and 403 on a control repo).
+#
+# The migration doc's §10.2 says `shard_pat_push`'s "$SHARD_PUSH_PAT, else
+# $GITHUB_PAT" fallback already makes the deploy keys irrelevant here. It does
+# not: that fallback sits AFTER the retry loop, and the deploy-key gate above
+# used to exit 0 long before anything reached it. Measured on run 30813668145 —
+# every locale logged "not provisioned", zero HTML reached any shard, and the
+# workflow still went green.
+#
+# So: no deploy key + a usable PAT => push over HTTPS instead of no-op. Only
+# when NEITHER credential exists is a skip still the right answer.
+pat_mode=0
 if [ -z "$key_val" ]; then
-  echo "no $key_var secret — skipping $loc $section article fast-path push (not provisioned)"
-  exit 0
+  if [ -n "${SHARD_PUSH_PAT:-${GITHUB_PAT:-}}" ]; then
+    pat_mode=1
+    echo "no $key_var secret — pushing $loc $section over HTTPS with the PAT instead"
+  else
+    echo "no $key_var secret and no SHARD_PUSH_PAT/GITHUB_PAT — skipping $loc $section article fast-path push (no write credential)"
+    exit 0
+  fi
 fi
 
 SHARD_OWNER="$(jq -r --arg s "$section" '.[$s] // "valerielinc-ops"' "$owners_json" 2>/dev/null || echo valerielinc-ops)"
@@ -125,9 +158,24 @@ if [ -z "${RUNNER_TEMP:-}" ]; then
   echo "ℹ️ RUNNER_TEMP unset — using temp dir $RUNNER_TEMP"
 fi
 
+# Always defined: "${GIT_PAT_OPTS[@]}" on an UNSET array aborts under `set -u`
+# in bash 3.2, and this script runs with -u. Empty in deploy-key mode.
+GIT_PAT_OPTS=()
 keyfile="$RUNNER_TEMP/article-shard_${section}_${loc}_key"
-printf '%s\n' "$key_val" > "$keyfile" && chmod 600 "$keyfile"
-export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+if [ "$pat_mode" = 0 ]; then
+  printf '%s\n' "$key_val" > "$keyfile" && chmod 600 "$keyfile"
+  export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+else
+  # HTTPS remote + the same credential helper shard_pat_push uses: the token is
+  # read from $SHARD_PUSH_TOKEN inside the helper, so it never reaches the
+  # remote URL, argv, or a `set -x` trace.
+  SHARD_PUSH_TOKEN="${SHARD_PUSH_PAT:-${GITHUB_PAT:-}}"
+  export SHARD_PUSH_TOKEN
+  echo "::add-mask::$SHARD_PUSH_TOKEN"
+  SHARD_REPO="$(shard_https_push_url "$SHARD_REPO")" || {
+    echo "::error::cannot derive an HTTPS URL for $SHARD_REPO" >&2; exit 1; }
+  GIT_PAT_OPTS=(-c credential.helper= -c "credential.helper=$_SHARD_CRED_HELPER")
+fi
 
 stage="$RUNNER_TEMP/article-shard-$section-$loc"
 # Incident #4734 was an unfreed-staging-dir class (runner disk exhaustion) —
@@ -145,7 +193,7 @@ _attempt() {
   rm -rf "$stage"
   local clone_err
   clone_err="$(mktemp)"
-  if ! git clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
+  if ! git "${GIT_PAT_OPTS[@]}" clone -q --depth 1 --filter=blob:none --no-checkout "$SHARD_REPO" "$stage" 2>"$clone_err"; then
     echo "::warning::clone of $SHARD_REPO failed: $(cat "$clone_err")"
     rm -f "$clone_err"
     return 1
@@ -215,7 +263,7 @@ _attempt() {
   # Never `push -f`: a non-fast-forward here means someone else (the periodic
   # full deploy's push-section-shard.sh, or another fast-path publish) pushed
   # in the meantime. Re-clone onto the new tip and rebuild, don't overwrite it.
-  if git -C "$stage" push "$SHARD_REPO" "$commit":main; then
+  if git "${GIT_PAT_OPTS[@]}" -C "$stage" push "$SHARD_REPO" "$commit":main; then
     echo "✅ $section-$loc article shard: pushed $commit ($new_count new file(s), filecount $prev_n -> $new_total)"
     return 0
   fi
