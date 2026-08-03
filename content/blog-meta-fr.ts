@@ -9201,6 +9201,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'BCE et BNS : ce qui change pour les frontaliers',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'Les décisions des banques centrales européennes et suisses influencent le taux de change CHF/EUR, avec des implications pour les frontaliers.',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Vue aérienne de Lugano avec le lac de Lugano, montagnes et panorama urbain.',
+    'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico à Locarno : réflexions sur la mémoire',
+    'blog.article.teatro-periferico-locarno-memoria.excerpt': 'Le Teatro Periferico apporte sur scène au Paravento à Locarno une réflexion sur la mémoire, analysant ses lumières et ses ombres dans le contexte culturel du Tessin.',
+    'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Façade du théâtre Paravento à Locarno',
 };
 
 export default blogMetaFr;

@@ -9199,6 +9199,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.title': 'ECB and SNB: What\'s Next for Italy-Switzerland Border Residents',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.excerpt': 'The decisions of the European and Swiss central banks affect the CHF/EUR exchange rate, which has implications for cross-border commuters.',
     'blog.article.bce-bns-ferme-cambi-per-frontalieri.imageAlt': 'Aerial view of Lugano with Lake Lugano, mountains, and cityscape.',
+    'blog.article.teatro-periferico-locarno-memoria.title': 'Teatro Periferico in Locarno: reflections on memory',
+    'blog.article.teatro-periferico-locarno-memoria.excerpt': 'The Teatro Periferico brings to the stage at the Paravento in Locarno a reflection on memory, analyzing its lights and shadows in the cultural context of Ticino.',
+    'blog.article.teatro-periferico-locarno-memoria.imageAlt': 'Facade of the Paravento theater in Locarno',
 };
 
 export default blogMetaEn;
