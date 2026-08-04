@@ -69,7 +69,9 @@
     "frontaliere documenti primo giorno lavoro ticino 2026 errori comuni",
     "frontaliere pensione avs inps 2026 errori comuni",
     "cercare lavoro in svizzera guida pratica 2026 canton Argovia",
-    "sistema sanitario svizzero lamal guida 2026 canton Ginevra"
+    "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
+    "confronto imposta cantonale svizzera cantoni",
+    "costo della vita per cantone svizzera"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -91,8 +93,8 @@
     "cercare lavoro in svizzera guida pratica 2026 canton Argovia": 2,
     "sistema sanitario svizzero lamal guida 2026 canton Ginevra": 2,
     "sistema sanitario svizzero lamal guida 2026 canton Berna": 3,
-    "sistema sanitario svizzero lamal guida 2026 canton Basilea": 2,
-    "sistema sanitario svizzero lamal guida 2026 canton San Gallo": 2,
+    "sistema sanitario svizzero lamal guida 2026 canton Basilea": 3,
+    "sistema sanitario svizzero lamal guida 2026 canton San Gallo": 3,
     "trasferirsi in svizzera da italiano non frontaliere guida": 1,
     "sistema sanitario svizzero panoramica generale": 3,
     "clima e meteo ticino stagioni caratteristiche": 1,
@@ -123,6 +125,10 @@
     "frontaliere documenti primo giorno lavoro ticino 2026 simulazione pratica": 2,
     "frontaliere trasporti chiasso lugano abbonamenti 2026 oltre 20 km": 2,
     "frontaliere trasporti chiasso lugano abbonamenti 2026 famiglia con figli": 2,
-    "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 1
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 1,
+    "premi cassa malati lamal per cantone": 1,
+    "secondo pilastro lpp guida completa svizzera": 1,
+    "terzo pilastro 3a vantaggi fiscali svizzera": 1,
+    "affitti svizzera diritti inquilino disdetta": 1
   }
 }
