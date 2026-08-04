@@ -1795,6 +1795,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Fatture, affitto e cassa malati, le difficoltà di 98 famiglie',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'Un sondaggio sui beneficiari del progetto Cesto Solidale Amélie rivela difficoltà economiche e mancanza di lavoro',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Famiglie svizzere che ricevono cesti solidali',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.title': 'Un matrimonio che vale cento posti di lavoro',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.excerpt': 'La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di lavoro.',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.imageAlt': 'Un matrimonio tra quattro ditte edili in Vallemaggia',
 };
 
 export default blogMetaChIt;

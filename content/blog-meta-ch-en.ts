@@ -1795,6 +1795,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Invoices, rent and sick pay, the difficulties of 98 families',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'A survey of the beneficiaries of the Amélie Solidarity Basket project reveals economic difficulties and lack of work',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Swiss families receiving solidarity baskets',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.title': 'A marriage worth a hundred jobs',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.excerpt': 'The news was made official last Friday in Prato Sornico. In Vallemaggia a wedding is celebrated that is worth a total of a hundred jobs.',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.imageAlt': 'A union of four construction companies in Vallemaggia',
 };
 
 export default blogMetaChEn;

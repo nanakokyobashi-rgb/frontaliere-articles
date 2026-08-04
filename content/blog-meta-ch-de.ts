@@ -1795,6 +1795,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Rechnungen, Miete und Krankenversicherung, die Schwierigkeiten von 98 Familien',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'Eine Umfrage unter den Begünstigten des Amélie Solidarity Basket-Projekts zeigt wirtschaftliche Schwierigkeiten und Arbeitsmangel',
     'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Schweizer Familien, die Solidaritätskörbe erhalten',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.title': 'Eine Ehe, die hundert Arbeitsplätze wert ist',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.excerpt': 'Die Nachricht wurde am vergangenen Freitag in Prato Sornico offiziell gemacht. Im Maggiatal wird eine Hochzeit gefeiert, die insgesamt etwa hundert Arbeitsplätze wert ist.',
+    'blog.article.un-matrimonio-che-vale-cento-posti-di-lavoro.imageAlt': 'Eine Verbindung von vier Bauunternehmen in Vallemaggia',
 };
 
 export default blogMetaChDe;

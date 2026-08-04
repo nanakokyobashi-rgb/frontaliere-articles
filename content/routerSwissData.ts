@@ -624,6 +624,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'economia-sanitaria-svizzera': { it: 'economia-sanitaria-svizzera', en: 'swiss-health-economy', de: 'schweizer-gesundheitswirtschaft', fr: 'economie-sante-suisse' },
  'cercare-lavoro-svizzera-estero-guida': { it: 'cercare-lavoro-svizzera-estero-guida', en: 'job-search-switzerland-from-abroad-guide', de: 'arbeitsplatzsuche-schweiz-aus-dem-ausland-guide', fr: 'recherche-d-emploi-suisse-de-l-etranger-guide' },
  'frontaliere-ticino-98-famiglie-caso-solidale': { it: 'frontaliere-ticino-98-famiglie-caso-solidale', en: 'frontaliere-ticino-98-families-solidarity-case', de: 'frontaliere-ticino-98-familien-solidaritaetsfall', fr: 'frontaliere-ticino-98-familles-cause-solidarite' },
+ 'un-matrimonio-che-vale-cento-posti-di-lavoro': { it: 'un-matrimonio-che-vale-cento-posti-di-lavoro', en: 'a-union-of-four-construction-companies-in-vallemaggia', de: 'eine-verbindung-von-vier-bauunternehmen-in-vallemaggia', fr: 'un-mariage-entre-quatre-entreprises-de-construction-en-vallemaggia' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -23222,6 +23222,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-un-matrimonio-che-vale-cento-posti-di-lavoro': {
+    title: 'Un matrimonio che vale cento posti di lavoro | Frontaliere Ticino',
+    description: 'La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di',
+    keywords: 'frontalieri, ticino, svizzera, italia, matrimonio, vale, cento, posti',
+    ogTitle: 'Un matrimonio che vale cento posti di lavoro',
+    ogDescription: 'La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di',
+    canonicalPath: '/articoli-svizzera/un-matrimonio-che-vale-cento-posti-di-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Un matrimonio che vale cento posti di lavoro",
+      "description": "La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/un-matrimonio-che-vale-cento-posti-di-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un matrimonio tra quattro ditte edili in Vallemaggia"
+      },
+      "datePublished": "2026-08-04T05:05:39+00:00",
+      "dateModified": "2026-08-04T05:05:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/un-matrimonio-che-vale-cento-posti-di-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
