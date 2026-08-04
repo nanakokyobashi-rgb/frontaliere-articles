@@ -23183,6 +23183,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontaliere-ticino-98-famiglie-caso-solidale': {
+    title: 'Fatture, affitto e cassa malati, le difficoltà di 98 famiglie',
+    description: 'Un sondaggio sui beneficiari del progetto Cesto Solidale Amélie rivela difficoltà economiche e mancanza di lavoro. Dati aggiornati 2026 per frontalieri in',
+    keywords: 'frontalieri, ticino, svizzera, italia, fatture, affitto, cassa, malati',
+    ogTitle: 'Fatture, affitto e cassa malati, le difficoltà di 98 famiglie',
+    ogDescription: 'Un sondaggio sui beneficiari del progetto Cesto Solidale Amélie rivela difficoltà economiche e mancanza di lavoro.',
+    canonicalPath: '/articoli-svizzera/frontaliere-ticino-98-famiglie-caso-solidale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fatture, affitto e cassa malati, le difficoltà di 98 famiglie",
+      "description": "Un sondaggio sui beneficiari del progetto Cesto Solidale Amélie rivela difficoltà economiche e mancanza di lavoro. Dati aggiornati 2026 per frontalieri in",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-ticino-98-famiglie-caso-solidale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglie svizzere che ricevono cesti solidali"
+      },
+      "datePublished": "2026-08-04T04:53:54+00:00",
+      "dateModified": "2026-08-04T04:53:54+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/frontaliere-ticino-98-famiglie-caso-solidale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -5374,6 +5374,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'frontaliere-ticino-98-famiglie-caso-solidale',
+    category: 'pratico',
+    date: '2026-08-04T04:53:54.860Z',
+    image: '/images/blog/frontaliere-ticino-98-famiglie-caso-solidale.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

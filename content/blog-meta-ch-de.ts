@@ -1792,6 +1792,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Jobsuche aus dem Ausland in der Schweiz: Ein praktischer Leitfaden',
     'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Erfahren Sie, wie Sie aus dem Ausland nach Jobs in der Schweiz suchen: Anzeigenportale, Lebensläufe im Schweizer Format, Vorstellungsgespräche, Arbeitserlaubnis und erste bürokratische Schritte.',
     'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Panoramablick auf Lugano, Schweiz',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Rechnungen, Miete und Krankenversicherung, die Schwierigkeiten von 98 Familien',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'Eine Umfrage unter den Begünstigten des Amélie Solidarity Basket-Projekts zeigt wirtschaftliche Schwierigkeiten und Arbeitsmangel',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Schweizer Familien, die Solidaritätskörbe erhalten',
 };
 
 export default blogMetaChDe;

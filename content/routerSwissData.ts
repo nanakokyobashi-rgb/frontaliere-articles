@@ -623,6 +623,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'publibike-investitore-britannico': { it: 'publibike-investitore-britannico', en: 'publibike-british-investor', de: 'publibike-britischer-investor', fr: 'publibike-investisseur-britannique' },
  'economia-sanitaria-svizzera': { it: 'economia-sanitaria-svizzera', en: 'swiss-health-economy', de: 'schweizer-gesundheitswirtschaft', fr: 'economie-sante-suisse' },
  'cercare-lavoro-svizzera-estero-guida': { it: 'cercare-lavoro-svizzera-estero-guida', en: 'job-search-switzerland-from-abroad-guide', de: 'arbeitsplatzsuche-schweiz-aus-dem-ausland-guide', fr: 'recherche-d-emploi-suisse-de-l-etranger-guide' },
+ 'frontaliere-ticino-98-famiglie-caso-solidale': { it: 'frontaliere-ticino-98-famiglie-caso-solidale', en: 'frontaliere-ticino-98-families-solidarity-case', de: 'frontaliere-ticino-98-familien-solidaritaetsfall', fr: 'frontaliere-ticino-98-familles-cause-solidarite' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

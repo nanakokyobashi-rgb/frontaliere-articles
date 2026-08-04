@@ -1792,6 +1792,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Cercare lavoro in Svizzera dall\'estero: guida pratica',
     'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Scopri come cercare lavoro in Svizzera dall\'estero: portali di annunci, CV in formato svizzero, colloqui, permesso di lavoro e primi passi burocratici.',
     'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Vista panoramica di Lugano, Svizzera',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Fatture, affitto e cassa malati, le difficoltà di 98 famiglie',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'Un sondaggio sui beneficiari del progetto Cesto Solidale Amélie rivela difficoltà economiche e mancanza di lavoro',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Famiglie svizzere che ricevono cesti solidali',
 };
 
 export default blogMetaChIt;

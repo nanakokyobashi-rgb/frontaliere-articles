@@ -1792,6 +1792,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Looking for a job in Switzerland from abroad: a practical guide',
     'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Find out how to look for a job in Switzerland from abroad: job portals, CVs in Swiss format, interviews, work permits and first bureaucratic steps.',
     'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Panoramic view of Lugano, Switzerland',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.title': 'Invoices, rent and sick pay, the difficulties of 98 families',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.excerpt': 'A survey of the beneficiaries of the Amélie Solidarity Basket project reveals economic difficulties and lack of work',
+    'blog.article.frontaliere-ticino-98-famiglie-caso-solidale.imageAlt': 'Swiss families receiving solidarity baskets',
 };
 
 export default blogMetaChEn;
