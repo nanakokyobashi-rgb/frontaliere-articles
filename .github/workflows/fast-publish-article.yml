@@ -231,6 +231,27 @@ jobs:
             --out "$RUNNER_TEMP/fast-dist" \
             --summary "$RUNNER_TEMP/fast-summary.json"
 
+      # The hub LANDING was the one article surface a full site deploy still
+      # owned. Since ARTICOLIFRONTALIERE_BUILD_EMIT_SKIP went on (2026-07-29
+      # 19:28) the site stopped writing it and nothing took over: the article
+      # was live at its own URL, in /tutti/ and in the sitemap, while the page
+      # readers land on kept showing that evening's set. Nothing failed, which
+      # is why it went unnoticed for a week.
+      #
+      # Best-effort on purpose: a refreshed grid must never be the reason a
+      # published article fails to reach its shard. The script is fail-closed
+      # per page — it leaves a page alone rather than write a half-formed one —
+      # so the worst case here is the hub staying as stale as it already was.
+      - name: Refresh the hub landing grid
+        if: steps.mode.outputs.skip != 'true'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          npx -y tsx@4 scripts/refresh-hub-landing.mjs \
+            --out "$RUNNER_TEMP/fast-dist" \
+            --section "${{ steps.mode.outputs.section }}" \
+            --summary "$RUNNER_TEMP/hub-landing.json"
+
       - name: Validate what was rendered
         if: steps.mode.outputs.skip != 'true'
         run: |
@@ -305,6 +326,20 @@ jobs:
               "$shard" "$loc" "$dist" "${paths[@]}"
           done
 
+          # The refreshed landing pages, when the step above produced any. Kept
+          # a separate push rather than merged into $summary so a landing that
+          # could not be refreshed cannot hold back the article's own files.
+          hub="$RUNNER_TEMP/hub-landing.json"
+          if [ -s "$hub" ]; then
+            for loc in it en de fr; do
+              mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$hub")
+              [ "${#hpaths[@]}" -gt 0 ] || continue
+              echo "── pushing ${#hpaths[@]} landing page(s) to $shard/$loc"
+              bash scripts/lib/push-article-shard-incremental.sh \
+                "$shard" "$loc" "$dist" "${hpaths[@]}"
+            done
+          fi
+
           while IFS=$'\t' read -r local key; do
             [ -n "$local" ] || continue
             bash scripts/lib/upload-cdn-file.sh "$local" "$key"
@@ -355,6 +390,19 @@ jobs:
               urls+=("https://origin-$shard-$loc.frontaliereticino.ch/$rel")
             done
           done < <(jq -r '.shards[] | [.locale, .paths[0], .paths[2]] | @tsv' "$summary")
+
+          # The landing pages too, or the grid we just refreshed sits behind a
+          # 4h edge cache and the article stays invisible on the page readers
+          # land on — the exact symptom this refresh exists to fix.
+          hub="$RUNNER_TEMP/hub-landing.json"
+          if [ -s "$hub" ]; then
+            while IFS=$'\t' read -r loc rel; do
+              [ -n "$rel" ] || continue
+              rel="${rel%index.html}"
+              urls+=("https://frontaliereticino.ch/$rel")
+              urls+=("https://origin-$shard-$loc.frontaliereticino.ch/$rel")
+            done < <(jq -r '.pages[] | [.locale, .path] | @tsv' "$hub")
+          fi
 
           echo "purging ${#urls[@]} URL(s)"
           printf '  %s\n' "${urls[@]}"
