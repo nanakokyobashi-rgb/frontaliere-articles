@@ -25,7 +25,8 @@
     "parchi naturali e riserve ticino",
     "mercato immobiliare ticino prezzi tendenze",
     "aprire un conto in banca svizzera per residenti",
-    "mercato del lavoro ticino settori in crescita"
+    "mercato del lavoro ticino settori in crescita",
+    "trasferirsi in svizzera da italiano non frontaliere guida"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -50,6 +51,12 @@
     "sistema sanitario svizzero lamal guida 2026 canton Basilea": 1,
     "sistema sanitario svizzero lamal guida 2026 canton San Gallo": 1,
     "trasferirsi in svizzera da italiano non frontaliere guida": 1,
-    "sistema sanitario svizzero panoramica generale": 1
+    "sistema sanitario svizzero panoramica generale": 2,
+    "clima e meteo ticino stagioni caratteristiche": 1,
+    "shopping outlet centri commerciali ticino": 1,
+    "trasporti pubblici ticino guida abbonamenti generali": 1,
+    "pensionarsi in svizzera per chi si trasferisce non frontaliere": 1,
+    "sport e tempo libero ticino strutture sportive": 1,
+    "chiassoletteraria festival letterario chiasso date": 1
   }
 }
