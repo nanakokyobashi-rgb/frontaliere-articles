@@ -27669,6 +27669,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'matrimonio-aziendale-vallemaggia-100',
+ category: 'pratico',
+ date: '2026-08-04T04:57:08.475Z',
+ image: '/images/blog/matrimonio-aziendale-vallemaggia-100.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -9219,6 +9219,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.coworking-spazi-lugano.title': 'Meilleurs espaces de coworking à Lugano et Ticino: coûts, services',
     'blog.article.coworking-spazi-lugano.excerpt': 'Découvrez les meilleurs espaces de coworking à Lugano et au Tessin, avec les tarifs, les services inclus et qui sont idéaux pour ceux qui travaillent de manière autonome ou à distance.',
     'blog.article.coworking-spazi-lugano.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes en arrière-plan, avec des personnes travaillant dans des espaces de coworking.',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.title': 'Vallemaggia, un mariage en maxi-construction sauve 100 emplois',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.excerpt': 'Quatre entreprises de construction unissent leurs forces pour former la nouvelle VDM Holding Ltd. En activité depuis 2027, l’opération vise à assurer la continuité sociale et de l’emploi dans la vallée.',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.imageAlt': 'Vue panoramique du Vallemaggia avec architecture traditionnelle en pierre.',
 };
 
 export default blogMetaFr;

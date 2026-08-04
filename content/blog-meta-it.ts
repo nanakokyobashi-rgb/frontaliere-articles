@@ -9218,6 +9218,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.coworking-spazi-lugano.title': 'I migliori spazi di coworking a Lugano e in Ticino: costi, servizi inclusi',
     'blog.article.coworking-spazi-lugano.excerpt': 'Scopri i migliori spazi di coworking a Lugano e in Ticino, con costi, servizi inclusi e chi sono ideali per chi lavora in autonomia o da remoto.',
     'blog.article.coworking-spazi-lugano.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne sullo sfondo, con persone che lavorano in spazi di coworking.',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.title': 'Vallemaggia, un maxi-matrimonio edile salva 100 posti',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.excerpt': 'Quattro aziende edili si uniscono nella nuova VDM Holding SA. Operativa dal 2027, l\'operazione mira a garantire continuità sociale e occupazionale in valle.',
+    'blog.article.matrimonio-aziendale-vallemaggia-100.imageAlt': 'Veduta panoramica della Vallemaggia con architettura tradizionale in pietra.',
 };
 
 export default blogMetaIt;
