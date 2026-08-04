@@ -64,7 +64,9 @@
     "frontaliere pensione avs inps 2026 famiglia con figli",
     "frontaliere pensione avs inps 2026 single",
     "frontaliere pensione avs inps 2026 simulazione pratica",
-    "frontaliere documenti primo giorno lavoro ticino 2026"
+    "frontaliere documenti primo giorno lavoro ticino 2026",
+    "frontaliere documenti primo giorno lavoro ticino 2026 single",
+    "frontaliere documenti primo giorno lavoro ticino 2026 errori comuni"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -110,8 +112,14 @@
     "frontaliere credito imposta 2026 errori comuni": 2,
     "frontaliere cambio chf eur strategia 2026": 2,
     "frontaliere cambio chf eur strategia 2026 entro 20 km": 2,
-    "frontaliere cambio chf eur strategia 2026 errori comuni": 1,
-    "frontaliere pensione avs inps 2026 errori comuni": 1,
-    "frontaliere documenti primo giorno lavoro ticino 2026 entro 20 km": 1
+    "frontaliere cambio chf eur strategia 2026 errori comuni": 2,
+    "frontaliere pensione avs inps 2026 errori comuni": 2,
+    "frontaliere documenti primo giorno lavoro ticino 2026 entro 20 km": 2,
+    "frontaliere documenti primo giorno lavoro ticino 2026 oltre 20 km": 1,
+    "frontaliere documenti primo giorno lavoro ticino 2026 famiglia con figli": 1,
+    "frontaliere documenti primo giorno lavoro ticino 2026 simulazione pratica": 1,
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 oltre 20 km": 1,
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 famiglia con figli": 1,
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 1
   }
 }
