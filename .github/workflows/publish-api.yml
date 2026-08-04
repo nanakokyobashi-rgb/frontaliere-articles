@@ -83,6 +83,15 @@ jobs:
       - name: Build data surface
         run: npx -y tsx@4 scripts/build-api.mjs
 
+      # The runtime index the SITE's article LISTS read. Publishing an article
+      # to its shard makes its own URL live in a minute; it does not put it in
+      # the hub, the archive or the homepage, which the site renders from data
+      # compiled into its bundle. Without this an article stayed invisible in
+      # every list until the site redeployed — the last thing generation here
+      # still needed from over there.
+      - name: Build the runtime blog index
+        run: node scripts/build-blog-index.mjs
+
       # The builder already refuses to emit an empty registry; this is the second
       # gate, on the artifact rather than the process, so a truncated write can
       # never be published over a good copy.
@@ -205,7 +214,7 @@ jobs:
       # Best-effort, exactly like the dispatch below: the R2 PUT is a freshness
       # optimisation over a passthrough that already works, so a missing
       # credential or a failed upload must never fail a good publish.
-      - name: Push the article sitemaps to the edge
+      - name: Push the article sitemaps and the blog index to the edge
         if: steps.deploy.outcome == 'success'
         continue-on-error: true
         run: |
@@ -228,6 +237,17 @@ jobs:
             fi
             bash scripts/lib/upload-cdn-file.sh "dist/api/$f" "edge/$f"
             urls+=("https://frontaliereticino.ch/$f")
+          done
+
+          # The blog index goes to /data/, where the site's SPA already fetches
+          # its jobs index from — NOT to /edge/, which is the Worker's
+          # whitelist-and-purge path for whole documents it serves as pages.
+          # This one is fetched by the app, so it just needs to be at the URL
+          # cdnDataUrl() builds.
+          for f in dist/api/data/blog-index-*.json; do
+            [ -s "$f" ] || continue
+            bash scripts/lib/upload-cdn-file.sh "$f" "data/$(basename "$f")"
+            urls+=("https://cdn.frontaliereticino.ch/data/$(basename "$f")")
           done
           if [ ${#urls[@]} -gt 0 ]; then
             node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
