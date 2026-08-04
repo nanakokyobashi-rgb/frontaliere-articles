@@ -224,13 +224,23 @@ jobs:
             exit 0
           fi
           # The R2 key is NOT the URL path. locale-router.js maps each
-          # whitelisted path to its own `cdnKey`, and for these two that key is
+          # whitelisted path to its own `cdnKey`, and for these that key is
           # `/edge/<name>` — a PUT to a bare `<name>` would land on a key the
           # Worker never reads, i.e. a silent no-op. Verified by reading
           # EDGE_PUSHED_FILES rather than assuming the obvious mapping.
           # upload-cdn-file.sh strips a leading slash, so pass it without.
+          #
+          # sitemap-articles-archive.xml joined for CORRECTNESS, not speed.
+          # EDGE_PUSHED_FILES exists because the apex passthrough origin strips
+          # hreflang alternates: measured live, sitemap-blog.xml went 15230
+          # committed → 0 served, and every sitemap on that path loses them
+          # while the ones served from here keep theirs. The archive sitemap
+          # carries 40 alternates on its page-1 entries, so served from the
+          # passthrough it would publish an alternate-less index — the same
+          # defect, freshly reintroduced. Registered in EDGE_PUSHED_FILES on
+          # the site side; this is the upload that key reads.
           urls=()
-          for f in sitemap-blog.xml sitemap-blog-ch.xml; do
+          for f in sitemap-blog.xml sitemap-blog-ch.xml sitemap-articles-archive.xml; do
             if [ ! -s "dist/api/$f" ]; then
               echo "::warning::dist/api/$f missing or empty — skipping"
               continue
