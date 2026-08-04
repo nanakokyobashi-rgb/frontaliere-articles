@@ -1786,6 +1786,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.publibike-investitore-britannico.title': 'Mehr PubliBike geht in englische Hände über, gekauft von Investmentfonds',
     'blog.article.publibike-investitore-britannico.excerpt': 'Das auch im Tessin tätige Unternehmen PubliBike wurde mehrheitlich vom britischen Investmentfonds VisionEdgeOne übernommen.',
     'blog.article.publibike-investitore-britannico.imageAlt': 'Schweizer Grenzgänger vor dem Luganer See',
+    'blog.article.economia-sanitaria-svizzera.title': 'Schweizer Gesundheitsökonomie: Herausforderungen und Innovationen',
+    'blog.article.economia-sanitaria-svizzera.excerpt': 'Analyse von Schweizer multinationalen Unternehmen im Gesundheitswesen und aktuellen Herausforderungen.',
+    'blog.article.economia-sanitaria-svizzera.imageAlt': 'Panoramablick auf Lugano mit dem See und den umliegenden Bergen',
 };
 
 export default blogMetaChDe;

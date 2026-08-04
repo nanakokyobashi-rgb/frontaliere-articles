@@ -1786,6 +1786,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.publibike-investitore-britannico.title': 'Di più PubliBike passa in mani inglesi, acquistata da fondo d’investimento',
     'blog.article.publibike-investitore-britannico.excerpt': 'La società PubliBike, attiva anche in Ticino, è stata acquisita in maggioranza dal fondo d\'investimento britannico VisionEdgeOne.',
     'blog.article.publibike-investitore-britannico.imageAlt': 'Frontaliere svizzero in bicicletta davanti al lago di Lugano',
+    'blog.article.economia-sanitaria-svizzera.title': 'Economia sanitaria svizzera: sfide e innovazioni',
+    'blog.article.economia-sanitaria-svizzera.excerpt': 'Analisi delle multinazionali svizzere nel settore sanitario e delle sfide attuali.',
+    'blog.article.economia-sanitaria-svizzera.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne circostanti',
 };
 
 export default blogMetaChIt;

@@ -1786,6 +1786,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.publibike-investitore-britannico.title': 'PubliBike acquistata da un fondo d’investimento britannico',
     'blog.article.publibike-investitore-britannico.excerpt': 'La société PubliBike, également active au Tessin, a été acquise par la majorité du fonds d’investissement britannique VisionEdgeOne.',
     'blog.article.publibike-investitore-britannico.imageAlt': 'Frontalier suisse en vélo devant le lac de Lugano',
+    'blog.article.economia-sanitaria-svizzera.title': 'Économie de la santé suisse : défis et innovations',
+    'blog.article.economia-sanitaria-svizzera.excerpt': 'Analyse des multinationales suisses dans le secteur de la santé et des défis actuels.',
+    'blog.article.economia-sanitaria-svizzera.imageAlt': 'Vue panoramique de Lugano avec le lac et les montagnes environnantes',
 };
 
 export default blogMetaChFr;
