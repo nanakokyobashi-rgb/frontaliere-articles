@@ -38,7 +38,14 @@
     "clima e meteo ticino stagioni caratteristiche",
     "cercare lavoro in svizzera guida pratica 2026 canton Argovia",
     "sistema sanitario svizzero lamal guida 2026 canton Berna",
-    "sistema sanitario svizzero lamal guida 2026 canton Basilea"
+    "sistema sanitario svizzero lamal guida 2026 canton Basilea",
+    "shopping outlet centri commerciali ticino",
+    "trasporti pubblici ticino guida abbonamenti generali",
+    "sport e tempo libero ticino strutture sportive",
+    "chiassoletteraria festival letterario chiasso date",
+    "locarno film festival biglietti piazza grande",
+    "mercatini di natale ticino lugano bellinzona",
+    "rabadan carnevale bellinzona programma"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -65,12 +72,13 @@
     "vino merlot ticinese cantine da visitare": 1,
     "mercato immobiliare ticino prezzi tendenze": 1,
     "sistema sanitario svizzero panoramica generale": 3,
-    "mercato del lavoro ticino settori in crescita": 2,
+    "mercato del lavoro ticino settori in crescita": 3,
     "premi cassa malati lamal per cantone": 2,
     "secondo pilastro lpp guida completa svizzera": 2,
     "terzo pilastro 3a vantaggi fiscali svizzera": 2,
     "affitti svizzera diritti inquilino disdetta": 2,
     "dichiarazione delle imposte in svizzera guida": 1,
-    "permesso di soggiorno svizzera tipologie B C L": 1
+    "permesso di soggiorno svizzera tipologie B C L": 1,
+    "pensionarsi in svizzera per chi si trasferisce non frontaliere": 1
   }
 }
