@@ -53,6 +53,31 @@ jobs:
         with:
           node-version: '22'
 
+      # Remote Config holds the R2 and Cloudflare credentials the edge push
+      # below needs. Without these two steps that push would find no
+      # credentials, warn, and skip — a silent no-op reported as success, which
+      # is the failure mode this migration produced three times already.
+      # Best-effort: publishing the API surface must not depend on them, so a
+      # missing service account degrades to "no edge push", not a failed run.
+      - name: Prepare Firebase credentials
+        id: fbcreds
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON unset — the sitemaps will reach the edge on the site's next deploy instead"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: steps.fbcreds.outcome == 'success'
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       # tsx, not plain node: the corpus sources use extensionless relative
       # specifiers, which plain Node ESM does not resolve.
       - name: Build data surface
@@ -161,6 +186,52 @@ jobs:
 
       - id: deploy
         uses: actions/deploy-pages@v4
+
+      # Push the article sitemaps straight to the edge.
+      #
+      # The Worker's EDGE_PUSHED_FILES whitelist already lists exactly
+      # /sitemap-blog.xml and /sitemap-blog-ch.xml: for those two paths it
+      # serves a fresher copy from the pushable R2 origin when one exists, and
+      # falls open to the normal passthrough on any miss. Until now only the
+      # site repo ever PUT them there, from a copy it had pulled from this
+      # API — so a new article entered the served sitemap on the SITE's next
+      # deploy, not on this publish. With articles now rendered and pushed
+      # from here within a minute of generation, the sitemap was the last part
+      # of an article's publication still waiting on the other repo.
+      #
+      # Whoever produces the artifact publishes it: build-api.mjs generates
+      # these two files a few steps above, so this job is their owner.
+      #
+      # Best-effort, exactly like the dispatch below: the R2 PUT is a freshness
+      # optimisation over a passthrough that already works, so a missing
+      # credential or a failed upload must never fail a good publish.
+      - name: Push the article sitemaps to the edge
+        if: steps.deploy.outcome == 'success'
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          if [ -z "${R2_ACCESS_KEY_ID:-}" ] || [ -z "${CF_API_TOKEN:-}" ]; then
+            echo "::warning::R2/CF credentials absent — the edge keeps serving the passthrough copy"
+            exit 0
+          fi
+          # The R2 key is NOT the URL path. locale-router.js maps each
+          # whitelisted path to its own `cdnKey`, and for these two that key is
+          # `/edge/<name>` — a PUT to a bare `<name>` would land on a key the
+          # Worker never reads, i.e. a silent no-op. Verified by reading
+          # EDGE_PUSHED_FILES rather than assuming the obvious mapping.
+          # upload-cdn-file.sh strips a leading slash, so pass it without.
+          urls=()
+          for f in sitemap-blog.xml sitemap-blog-ch.xml; do
+            if [ ! -s "dist/api/$f" ]; then
+              echo "::warning::dist/api/$f missing or empty — skipping"
+              continue
+            fi
+            bash scripts/lib/upload-cdn-file.sh "dist/api/$f" "edge/$f"
+            urls+=("https://frontaliereticino.ch/$f")
+          done
+          if [ ${#urls[@]} -gt 0 ]; then
+            node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          fi
 
       # Tell the site the surface moved. The publisher knows when it has
       # published, so the push is the event — the consumer's schedule is only a
