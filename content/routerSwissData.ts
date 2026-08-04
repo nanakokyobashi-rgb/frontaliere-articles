@@ -622,6 +622,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'votazioni-federali-guida-2026': { it: 'votazioni-federali-guida-2026', en: 'federal-votes-september-27-2026', de: 'eidgenoessische-abstimmungen-27-september-2026', fr: 'votations-federales-27-septembre-2026' },
  'publibike-investitore-britannico': { it: 'publibike-investitore-britannico', en: 'publibike-british-investor', de: 'publibike-britischer-investor', fr: 'publibike-investisseur-britannique' },
  'economia-sanitaria-svizzera': { it: 'economia-sanitaria-svizzera', en: 'swiss-health-economy', de: 'schweizer-gesundheitswirtschaft', fr: 'economie-sante-suisse' },
+ 'cercare-lavoro-svizzera-estero-guida': { it: 'cercare-lavoro-svizzera-estero-guida', en: 'job-search-switzerland-from-abroad-guide', de: 'arbeitsplatzsuche-schweiz-aus-dem-ausland-guide', fr: 'recherche-d-emploi-suisse-de-l-etranger-guide' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

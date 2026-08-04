@@ -1789,6 +1789,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.economia-sanitaria-svizzera.title': 'Schweizer Gesundheitsökonomie: Herausforderungen und Innovationen',
     'blog.article.economia-sanitaria-svizzera.excerpt': 'Analyse von Schweizer multinationalen Unternehmen im Gesundheitswesen und aktuellen Herausforderungen.',
     'blog.article.economia-sanitaria-svizzera.imageAlt': 'Panoramablick auf Lugano mit dem See und den umliegenden Bergen',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Jobsuche aus dem Ausland in der Schweiz: Ein praktischer Leitfaden',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Erfahren Sie, wie Sie aus dem Ausland nach Jobs in der Schweiz suchen: Anzeigenportale, Lebensläufe im Schweizer Format, Vorstellungsgespräche, Arbeitserlaubnis und erste bürokratische Schritte.',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Panoramablick auf Lugano, Schweiz',
 };
 
 export default blogMetaChDe;

@@ -1789,6 +1789,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.economia-sanitaria-svizzera.title': 'Swiss health economics: challenges and innovations',
     'blog.article.economia-sanitaria-svizzera.excerpt': 'Analysis of Swiss multinationals in the healthcare sector and current challenges.',
     'blog.article.economia-sanitaria-svizzera.imageAlt': 'Panoramic view of Lugano with the lake and surrounding mountains',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Looking for a job in Switzerland from abroad: a practical guide',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Find out how to look for a job in Switzerland from abroad: job portals, CVs in Swiss format, interviews, work permits and first bureaucratic steps.',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Panoramic view of Lugano, Switzerland',
 };
 
 export default blogMetaChEn;

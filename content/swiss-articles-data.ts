@@ -5365,6 +5365,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cercare-lavoro-svizzera-estero-guida',
+    category: 'pratico',
+    date: '2026-08-04T01:29:23.807Z',
+    image: '/images/blog/cercare-lavoro-svizzera-estero-guida.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

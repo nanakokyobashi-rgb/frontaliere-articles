@@ -1789,6 +1789,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.economia-sanitaria-svizzera.title': 'Economia sanitaria svizzera: sfide e innovazioni',
     'blog.article.economia-sanitaria-svizzera.excerpt': 'Analisi delle multinazionali svizzere nel settore sanitario e delle sfide attuali.',
     'blog.article.economia-sanitaria-svizzera.imageAlt': 'Vista panoramica di Lugano con il lago e le montagne circostanti',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.title': 'Cercare lavoro in Svizzera dall\'estero: guida pratica',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.excerpt': 'Scopri come cercare lavoro in Svizzera dall\'estero: portali di annunci, CV in formato svizzero, colloqui, permesso di lavoro e primi passi burocratici.',
+    'blog.article.cercare-lavoro-svizzera-estero-guida.imageAlt': 'Vista panoramica di Lugano, Svizzera',
 };
 
 export default blogMetaChIt;
