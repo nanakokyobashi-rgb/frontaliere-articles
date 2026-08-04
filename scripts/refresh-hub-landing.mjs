@@ -56,6 +56,23 @@ const SUMMARY = argOf('--summary', '');
 const ONLY_SECTION = argOf('--section', '');
 const LOCALES = argOf('--locales', 'it,en,de,fr').split(',').map((s) => s.trim()).filter(Boolean);
 
+/**
+ * Sanity floor for a fetched landing. The smallest real one is the svizzera
+ * hub at ~9 KB (copy + a CTA, no grid); anything under 4 KB is an error page
+ * or a truncated body, not a page worth patching.
+ */
+const MIN_LANDING_BYTES = 4096;
+
+/**
+ * Sections that demonstrably HAVE a grid today. If one of these refreshes
+ * nothing, the mechanism is broken and the run must say so — reporting
+ * "nothing to refresh" and exiting 0 is precisely the silent-staleness shape
+ * that let the hub sit a week behind in the first place.
+ */
+const EXPECT_GRID = new Set(
+  argOf('--expect-grid', 'frontaliere').split(',').map((s) => s.trim()).filter(Boolean),
+);
+
 const SECTIONS = [
   {
     name: 'frontaliere',
@@ -82,6 +99,73 @@ const shardOwners = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/sect
 
 const { renderArticleHubCards, replaceArticleHubCards } = await import('../engine/articlesHubCards.ts');
 const { rewriteBlogImageRefs, hasBlogImageLeak } = await import('../engine/blogImageCdnFinalize.ts');
+
+/** Trailing-slash key form, identical to staticPagesPlugin's `seoKey`. */
+const seoKey = (p) => {
+  const clean = String(p).replace(/\/+$/, '');
+  return clean ? `${clean}/` : '/';
+};
+
+/** Balanced `{...}` starting at `open`, or null. Mirrors the site's extractor. */
+function extractBalanced(src, open) {
+  let depth = 0;
+  for (let i = open; i < src.length; i++) {
+    if (src[i] === '{') depth++;
+    else if (src[i] === '}') { depth--; if (depth === 0) return src.slice(open, i + 1); }
+  }
+  return null;
+}
+
+/**
+ * `canonicalPath → { title, desc }` out of `content/seo/*.ts`.
+ *
+ * THE point of this reader: the site renders its cards from this same map
+ * (`staticPagesPlugin.ts`, `seoMap.ogT` / `seoMap.desc`), while this repo's
+ * meta chunks carry a DIFFERENT, un-tuned string. Reading the corpus's own
+ * `blog-meta-*` here instead produced 59 differing titles out of 63 cards
+ * compared against what production serves — every fast-publish would have
+ * rewritten the hub's SEO titles and the next full build would have put them
+ * back. Same map, same field precedence (`ogTitle || title`), same unescaping,
+ * so the two emitters agree by construction rather than by luck.
+ *
+ * Only IT paths exist in these files (4617 entries, zero under /en|/de|/fr),
+ * so non-IT cards still come from the meta chunks — and the fail-closed gate
+ * below is what keeps that from silently degrading those pages.
+ */
+function readSeoMap() {
+  const dir = path.join(ROOT, 'content', 'seo');
+  const out = new Map();
+  if (!fs.existsSync(dir)) return out;
+
+  const matchStr = (block, key) => {
+    const rxSingle = new RegExp(`${key}:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
+    const rxDouble = new RegExp(`${key}:\\s*"((?:[^"\\\\]|\\\\.)*)"`);
+    const m = block.match(rxSingle) || block.match(rxDouble);
+    return m?.[1]?.replace(/\\(.)/g, (_, c) => (c === 'n' ? ' ' : c === 'r' ? '' : c === 't' ? ' ' : c)) ?? '';
+  };
+
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith('.ts'))) {
+    const src = fs.readFileSync(path.join(dir, file), 'utf-8');
+    const entryStartRx = /['"][^'"]+['"]\s*:\s*\{/g;
+    let claimedUntil = 0;
+    let m;
+    while ((m = entryStartRx.exec(src)) !== null) {
+      if (m.index < claimedUntil) continue;
+      const bracePos = m.index + m[0].length - 1;
+      const block = extractBalanced(src, bracePos);
+      if (!block) continue;
+      claimedUntil = bracePos + block.length;
+      const cp = block.match(/canonicalPath:\s*["']([^"']+)["']/)?.[1];
+      if (!cp) continue;
+      const title = matchStr(block, 'title');
+      out.set(seoKey(cp), {
+        title: matchStr(block, 'ogTitle') || title,
+        desc: matchStr(block, 'description'),
+      });
+    }
+  }
+  return out;
+}
 
 /**
  * `'blog.article.<id>.<field>': '<value>'` pairs out of a meta chunk. Regex and
@@ -113,11 +197,28 @@ async function currentLandingHtml(owner, repo, relPath) {
   if (process.env.GITHUB_PAT) headers.Authorization = `Bearer ${process.env.GITHUB_PAT}`;
   const res = await fetch(url, { headers });
   if (!res.ok) throw new Error(`GET ${relPath} → HTTP ${res.status}`);
-  return res.text();
+  const html = await res.text();
+
+  // A truncated download is the failure worth engineering against: the grid
+  // sits mid-document, so a body cut anywhere after it still balances, still
+  // patches, and still publishes — with the nav, the FAQ and </html> gone. The
+  // result answers 200 and looks fine to every check downstream. `</html>` is
+  // the cheap proof the document arrived whole; the size floor catches an
+  // error page that happens to be well-formed.
+  if (!/<\/html>\s*$/i.test(html.trimEnd())) {
+    throw new Error(`${relPath} did not end at </html> (${html.length} B) — truncated?`);
+  }
+  if (html.length < MIN_LANDING_BYTES) {
+    throw new Error(`${relPath} is ${html.length} B, under the ${MIN_LANDING_BYTES} B floor`);
+  }
+  return html;
 }
 
 /** Must match the marker `replaceArticleHubCards` scans for. */
 const GRID_OPEN = '<div class="ssg-article-grid">';
+
+const seoMap = readSeoMap();
+console.log(`[hub-landing] SEO map: ${seoMap.size} entries`);
 
 let refreshed = 0;
 let skipped = 0;
@@ -158,14 +259,37 @@ for (const section of SECTIONS) {
     }
 
     const meta = readMeta(section.metaPrefix, locale);
+    // Fail-closed on meta coverage. A card with neither source resolves to a
+    // de-slugified id — "Fondo Liberta Svizzera Multe" — in the href label,
+    // the aria-label, the img alt and the h3. The site's own build has the SEO
+    // map for those ids and renders them properly, so publishing a degraded
+    // grid would replace good titles with bad ones on every article, and the
+    // next full deploy would put them back: a flip-flop nobody asked for.
+    // Measured before this gate: 10 IT and 16 FR of the newest 100 had no
+    // corpus meta. Better to leave the page as it is and say so.
+    let missing = 0;
+    const resolveMeta = (id, artPath) => {
+      const fromSeo = seoMap.get(seoKey(artPath));
+      if (fromSeo?.title) return fromSeo;
+      const fromChunk = meta.get(id);
+      if (fromChunk?.title) return fromChunk;
+      missing++;
+      return null;
+    };
+
     let cards = renderArticleHubCards({
       articles: sorted,
       locale,
       sectionSlug: slug,
       localePrefix: locale === 'it' ? '' : locale,
       resolveSlug: (id) => slugMap[id]?.[locale],
-      resolveMeta: (id) => meta.get(id) ?? null,
+      resolveMeta,
     });
+    if (missing > 0) {
+      console.error(`[hub-landing] ${section.name}/${locale}: ${missing} of the top 100 have no title in either source — refusing to publish a degraded grid`);
+      skipped++;
+      continue;
+    }
     // Same rewrite the article path applies: the registry stores same-origin
     // image paths, and the shard origin does not serve /images/blog.
     cards = rewriteBlogImageRefs(cards);
@@ -217,7 +341,17 @@ if (SUMMARY) {
 }
 
 console.log(`[hub-landing] refreshed ${refreshed}, no-grid ${absent}, skipped ${skipped}`);
-if (refreshed === 0 && absent === 0) {
-  console.error('[hub-landing] nothing was refreshed — the mechanism is broken, not just one shard');
-  process.exit(1);
+
+// Per-section, not global: a section that is legitimately grid-less (svizzera,
+// until the site build ships its new branch) must not mask a section that
+// should have refreshed and did not.
+let broken = false;
+for (const section of SECTIONS) {
+  if (!EXPECT_GRID.has(section.name)) continue;
+  const got = pages.filter((p) => p.section === section.name).length;
+  if (got === 0) {
+    console.error(`[hub-landing] ${section.name} refreshed 0 pages but is expected to have a grid — this is the silent-staleness failure, not a no-op`);
+    broken = true;
+  }
 }
+if (broken) process.exit(1);

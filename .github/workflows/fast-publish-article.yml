@@ -326,9 +326,22 @@ jobs:
               "$shard" "$loc" "$dist" "${paths[@]}"
           done
 
-          # The refreshed landing pages, when the step above produced any. Kept
-          # a separate push rather than merged into $summary so a landing that
-          # could not be refreshed cannot hold back the article's own files.
+          while IFS=$'\t' read -r local key; do
+            [ -n "$local" ] || continue
+            bash scripts/lib/upload-cdn-file.sh "$local" "$key"
+          done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
+
+          # The refreshed landing pages, LAST and non-fatal.
+          #
+          # Both properties matter. Last, because this step runs under
+          # `set -e`: a landing push that exits non-zero from here would
+          # terminate the step before the CDN uploads above ever ran, and the
+          # purge step has no `always()` — so the article would be on its shard
+          # with no og:image and a cached 404 at the apex. Non-fatal, because a
+          # hub that stays as stale as it already was is a far smaller failure
+          # than an article that never becomes readable. The shard push races
+          # the periodic deploy and this change doubles the pushes per article,
+          # so that non-zero exit is a real possibility, not a theoretical one.
           hub="$RUNNER_TEMP/hub-landing.json"
           if [ -s "$hub" ]; then
             for loc in it en de fr; do
@@ -336,14 +349,12 @@ jobs:
               [ "${#hpaths[@]}" -gt 0 ] || continue
               echo "── pushing ${#hpaths[@]} landing page(s) to $shard/$loc"
               bash scripts/lib/push-article-shard-incremental.sh \
-                "$shard" "$loc" "$dist" "${hpaths[@]}"
+                "$shard" "$loc" "$dist" "${hpaths[@]}" \
+                || echo "::warning::hub landing push failed for $shard/$loc — the hub stays stale, the article is unaffected"
             done
+          else
+            echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
           fi
-
-          while IFS=$'\t' read -r local key; do
-            [ -n "$local" ] || continue
-            bash scripts/lib/upload-cdn-file.sh "$local" "$key"
-          done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
 
       - name: Purge the edge cache for what was published
         if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
