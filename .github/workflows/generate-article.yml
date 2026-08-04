@@ -313,7 +313,27 @@ jobs:
             exit 1
           fi
 
-          git commit -m "Generate blog article (${{ steps.mode.outputs.section }})"
+          # Title the commit by what it actually produced. `git add -A` stages
+          # data/topic-candidates-evergreen-rejected.json, which this job
+          # rewrites on EVERY run including ones that generate nothing, so
+          # "changes exist" is not "an article exists" — and every such run was
+          # landing as "Generate blog article (section)". Measured on four
+          # consecutive runs: two produced an article, two produced only the
+          # rejected-candidates file, and all four claimed an article. The log
+          # read as twice the output that existed.
+          #
+          # The honest signal is the one fast-publish-article.yml also keys on:
+          # a real generation adds a per-locale body file under
+          # content/blog-body{,-ch}/<loc>/<id>.ts. `grep -q ... || true` because
+          # under `set -e` a no-match exit 1 would end the step, and "nothing
+          # generated" is a normal outcome.
+          body_added="$(git diff --cached --name-only --diff-filter=A \
+                        | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1 || true)"
+          if [ -n "$body_added" ]; then
+            git commit -m "Generate blog article (${{ steps.mode.outputs.section }})"
+          else
+            git commit -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
+          fi
 
           TARGET="${{ github.ref_name }}"
           REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
