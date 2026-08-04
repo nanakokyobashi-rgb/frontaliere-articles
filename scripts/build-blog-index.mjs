@@ -31,8 +31,10 @@
  * mechanism.
  *
  * Usage: node scripts/build-blog-index.mjs [--out <dir>]
- * Emits: <out>/blog-index-<section>-<locale>.json  (2 sections x 4 locales),
- *        each carrying the newest RECENT_LIMIT articles — see the slice below.
+ * Emits: <out>/blog-index-<section>-<locale>.json       newest RECENT_LIMIT
+ *        <out>/blog-index-<section>-<locale>-full.json  every article
+ *        (2 sections x 4 locales x 2 files). The capped file is the fast path;
+ *        the full one is what stops the cap being a cliff — see the slice below.
  */
 
 import fs from 'node:fs';
@@ -51,7 +53,14 @@ const SECTIONS = [
 /** Minimum entries below which the registry parse is assumed broken, not empty. */
 const MIN_ENTRIES = 50;
 
-/** How many of the newest articles the overlay carries — see the slice below. */
+/**
+ * How many of the newest articles the FAST-PATH index carries.
+ *
+ * No longer a ceiling on what a consumer can see: the full set is published
+ * alongside it and the consumer escalates when this window cannot close its
+ * gap (see the slice below). Tuning this trades bytes on the common path
+ * against how often that escalation fires.
+ */
 const RECENT_LIMIT = Number(process.env.BLOG_INDEX_LIMIT) || 150;
 
 /**
@@ -142,21 +151,42 @@ for (const section of SECTIONS) {
     // Newest first: this index feeds LISTS, and a list is read from the top.
     entries.sort((a, b) => String(b.date).localeCompare(String(a.date)));
 
-    // Capped, and the cap is the whole design. The site's bundle already
-    // carries every article it knew about at build time; this index exists to
-    // cover the ones generated SINCE, so only the recent tail is ever needed.
-    // The full set is 3069 entries = ~1.3 MB per locale, which is not something
-    // to fetch on every blog view. RECENT_LIMIT of 150 is ~65 KB and is a wide
-    // margin: at the observed rate of a few articles a day it covers weeks
-    // between site deploys.
+    // Two files, and the split is the point.
+    //
+    // The capped one is a FAST PATH, not the contract. Its original comment
+    // said RECENT_LIMIT "covers weeks between site deploys" — true only while
+    // the site keeps deploying. When deploys stalled (2026-08-03 → 04, and the
+    // hub had been frozen since 2026-07-29) the bundle stopped advancing while
+    // articles kept publishing, and a cap sized against deploy cadence turns
+    // into a silent cliff: articles older than the window and newer than the
+    // bundle are in NEITHER, so they exist, are live at their own URL, and are
+    // invisible in every list. Nothing reports that.
+    //
+    // So the full set is published alongside it. The consumer reads the capped
+    // file first and escalates to the full one only when `total` says it is
+    // still missing something — no extra bytes on the common path, and no
+    // window to fall through on the uncommon one.
     const capped = entries.slice(0, RECENT_LIMIT);
     const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
     fs.writeFileSync(file, JSON.stringify({
       version: 1, section: section.name, locale,
       count: capped.length, total: entries.length, articles: capped,
+      // Lets a consumer tell "the window covers my gap" from "it does not"
+      // without fetching the full file to find out.
+      oldest: capped[capped.length - 1]?.date ?? null,
+      full: `blog-index-${section.name}-${locale}-full.json`,
     }) + '\n');
     const kb = Math.round(fs.statSync(file).size / 1024);
     console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
+
+    const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
+    fs.writeFileSync(fullFile, JSON.stringify({
+      version: 1, section: section.name, locale,
+      count: entries.length, total: entries.length, articles: entries,
+      oldest: entries[entries.length - 1]?.date ?? null,
+    }) + '\n');
+    const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
+    console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
   }
 }
 
