@@ -385,22 +385,31 @@ jobs:
           # (origin-...-de serves /de/grenzgaenger-artikel/..., not
           # /grenzgaenger-artikel/... — verified 200 vs 404).
           #
-          # 16 URLs: article + archive page-1, apex + origin, x4 locales. The
-          # free plan's `files` purge caps at 30, and cf-purge-cache.mjs makes
-          # an over-cap list a hard error rather than truncating. Deep archive
-          # pages page-2..N are deliberately excluded — they only gain an entry
-          # at the tail and would blow the cap.
+          # EVERY path this run pushed, apex + origin.
+          #
+          # It used to be `paths[0]` and `paths[2]` only — the article and the
+          # archive's page-1 — with deep pages "deliberately excluded" because
+          # they "only gain an entry at the tail and would blow the cap". The
+          # chronological sort (issue #4974) retired the first half of that:
+          # moving an article to the front shifts the boundary of every page,
+          # so 31 pages per locale now change on every publish, not one. And
+          # cf-purge-cache.mjs now batches past the 30-URL free-plan cap
+          # instead of erroring, which retires the second half.
+          #
+          # Leaving them out meant every archive page but the first served
+          # stale content for the full 4h edge TTL, with no ETag to revalidate
+          # against — the pages the sort exists to keep fresh.
+          #
           # Built in shell rather than one jq expression: the origin hostname
           # depends on the locale of the shard entry, which is easier to keep
           # obviously correct here than inside a jq reduce.
           urls=()
-          while IFS=$'\t' read -r loc p0 p2; do
-            for rel in "$p0" "$p2"; do
-              rel="${rel%index.html}"
-              urls+=("https://frontaliereticino.ch/$rel")
-              urls+=("https://origin-$shard-$loc.frontaliereticino.ch/$rel")
-            done
-          done < <(jq -r '.shards[] | [.locale, .paths[0], .paths[2]] | @tsv' "$summary")
+          while IFS=$'\t' read -r loc rel; do
+            [ -n "$rel" ] || continue
+            rel="${rel%index.html}"
+            urls+=("https://frontaliereticino.ch/$rel")
+            urls+=("https://origin-$shard-$loc.frontaliereticino.ch/$rel")
+          done < <(jq -r '.shards[] | .locale as $l | .paths[] | [$l, .] | @tsv' "$summary")
 
           # The landing pages too, or the grid we just refreshed sits behind a
           # 4h edge cache and the article stays invisible on the page readers

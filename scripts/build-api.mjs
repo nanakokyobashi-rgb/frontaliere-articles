@@ -238,6 +238,83 @@ if (sitemapCounts.blog < 100) {
   throw new Error(`sitemap-blog.xml has only ${sitemapCounts.blog} urls — refusing to publish`);
 }
 
+// ── Archive pages (issue #4974) ───────────────────────────────────────────
+// `/{section}/{all}/` and its `page-N` chain existed and appeared in NO
+// sitemap. `emitSeoHubs` pushes an entry per page, but only into the sitemap
+// the site build writes — and the site stopped emitting these pages when
+// BUILD_EMIT_SKIP went on, while fast-publish (which does emit them) passes
+// `sitemapEntries: []`. Measured on the live index: zero archive URLs across
+// every sitemap it lists. With every locale now emitting every page, that is
+// ~240 indexable pages declared nowhere.
+//
+// Page count comes from the SAME union the emitter paginates
+// (`readArticleArchiveUnionSlugs`), so this file cannot list a page the
+// archive does not have. The page size is spelled out rather than read from
+// the site shell, which does not exist in this process — see the ticker call
+// below for the same reason. It must track ARTICLES_PAGE_SIZE in
+// `build-plugins/seoHubsData.ts`; the count assertion below is what catches a
+// drift.
+const ARCHIVE_ALL_SLUG = { it: 'tutti', en: 'all', de: 'alle', fr: 'tous' };
+const ARCHIVE_PAGE_SIZE = 100;
+const { readArticleArchiveUnionSlugs } = await load('engine/shared/articleArchiveUnion.ts');
+const { ARTICLE_SECTIONS } = await load('articleSections.ts');
+
+function archiveBase(section, locale) {
+  const prefix = locale === 'it' ? '' : `/${locale}`;
+  return `${prefix}/${ARTICLE_SECTIONS[section].indexSlug[locale]}/${ARCHIVE_ALL_SLUG[locale]}/`;
+}
+
+function buildArchiveSitemap() {
+  const urls = [];
+  for (const section of ['frontaliere', 'svizzera']) {
+    const total = readArticleArchiveUnionSlugs(fs, path, ROOT, section).size;
+    const pages = Math.max(1, Math.ceil(total / ARCHIVE_PAGE_SIZE));
+    for (const locale of LOCALES) {
+      for (let page = 1; page <= pages; page++) {
+        const base = archiveBase(section, locale);
+        const loc = page === 1 ? base : `${base.slice(0, -1)}/page-${page}/`;
+        const parts = [`  <url>`, `    <loc>${SITE}${loc}</loc>`];
+        // Alternates on page 1 only — that is where the emitted page carries
+        // hreflang (buildHtml gates them the same way). Declaring alternates
+        // the page itself does not serve is its own SEO defect.
+        if (page === 1) {
+          for (const alt of LOCALES) {
+            parts.push(
+              `    <xhtml:link rel="alternate" hreflang="${alt}" href="${SITE}${archiveBase(section, alt)}" />`,
+            );
+          }
+          parts.push(
+            `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${archiveBase(section, 'it')}" />`,
+          );
+        }
+        parts.push(`    <changefreq>daily</changefreq>`);
+        parts.push(`    <priority>${page === 1 ? '0.6' : '0.4'}</priority>`);
+        parts.push(`  </url>`);
+        urls.push(parts.join('\n'));
+      }
+    }
+  }
+  return {
+    xml:
+      `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
+      `        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
+      urls.join('\n') +
+      `\n</urlset>\n`,
+    count: urls.length,
+  };
+}
+
+sitemapCounts.archive = writeXml('sitemap-articles-archive.xml', buildArchiveSitemap());
+// Two sections x four locales, so the count is 4 x (frontalierePages +
+// svizzeraPages) — under 8 means a section resolved to a single empty page,
+// which is the shape a broken registry parse takes.
+if (sitemapCounts.archive < 8) {
+  throw new Error(
+    `sitemap-articles-archive.xml has only ${sitemapCounts.archive} urls — refusing to publish`,
+  );
+}
+
 // ── RSS feeds ─────────────────────────────────────────────────────
 //
 // Same argument as the sitemaps: the feeds are a pure function of the corpus,

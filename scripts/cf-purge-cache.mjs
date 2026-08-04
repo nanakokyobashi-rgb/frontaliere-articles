@@ -88,11 +88,23 @@ const targetFiles = filesArg
       .filter(Boolean)
   : null;
 
-if (targetFiles && targetFiles.length > MAX_TARGETED_FILES) {
-  console.error(
-    `❌ --files lists ${targetFiles.length} URLs, over the ${MAX_TARGETED_FILES}-URL free-plan cap. Split into multiple calls — never silently truncated.`,
-  );
-  process.exit(1);
+/**
+ * Split into cap-sized batches rather than refusing.
+ *
+ * The hard error was the right call while every caller purged a handful of
+ * URLs: it made a silent truncation impossible, which is the failure that
+ * matters. But it also made the cap a ceiling on what may be purged AT ALL,
+ * and the chronological archive sort (issue #4974) moved the boundary of every
+ * page on every publish — 31 pages per locale per section now change where one
+ * used to. A caller that must purge 60 URLs had two options: pass 30 and leave
+ * the rest stale for the 4h edge TTL, or fail the step. Batching gives it a
+ * third that keeps the no-truncation guarantee: every URL is purged, in
+ * `MAX_TARGETED_FILES`-sized calls, and a failure in any batch is still fatal.
+ */
+function batched(urls, size) {
+  const out = [];
+  for (let i = 0; i < urls.length; i += size) out.push(urls.slice(i, i + size));
+  return out;
 }
 
 // Non-fatal when the secret is absent: callers wire this with
@@ -141,17 +153,30 @@ async function resolveZoneId() {
 
 try {
   const zoneId = await resolveZoneId();
-  const purgeBody = targetFiles ? { files: targetFiles } : { purge_everything: true };
-  const purgeLabel = targetFiles ? `${targetFiles.length} file(s)` : 'purge_everything';
-  const { json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
-  if (!json?.success) {
-    console.error(`❌ ${purgeLabel} failed: ${JSON.stringify(json?.errors)}`);
-    warnStaleEdge(
-      `${purgeLabel} API call failed: ${JSON.stringify(json?.errors)}`,
-      targetFiles ? `until the next successful purge of these URLs` : undefined,
-    );
-    process.exit(1);
+  const batches = targetFiles ? batched(targetFiles, MAX_TARGETED_FILES) : [null];
+  if (targetFiles && batches.length > 1) {
+    console.log(`ℹ️  ${targetFiles.length} URLs → ${batches.length} batches of up to ${MAX_TARGETED_FILES}.`);
   }
+
+  for (const [i, batch] of batches.entries()) {
+    const purgeBody = batch ? { files: batch } : { purge_everything: true };
+    const purgeLabel = batch
+      ? `${batch.length} file(s)${batches.length > 1 ? ` (batch ${i + 1}/${batches.length})` : ''}`
+      : 'purge_everything';
+    const { json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
+    if (!json?.success) {
+      console.error(`❌ ${purgeLabel} failed: ${JSON.stringify(json?.errors)}`);
+      warnStaleEdge(
+        `${purgeLabel} API call failed: ${JSON.stringify(json?.errors)}`,
+        batch ? `until the next successful purge of these URLs` : undefined,
+      );
+      // Fatal on the first failing batch: a partial purge is exactly the
+      // half-done state the hard error above existed to prevent, and the
+      // caller must see it rather than read a green step.
+      process.exit(1);
+    }
+  }
+
   if (targetFiles) {
     console.log(`✅ Cloudflare edge cache purged for ${targetFiles.length} URL(s) (zone ${zoneId}):`);
     for (const url of targetFiles) console.log(`   - ${url}`);
