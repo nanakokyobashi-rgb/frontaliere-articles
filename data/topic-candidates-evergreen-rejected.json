@@ -71,7 +71,9 @@
     "cercare lavoro in svizzera guida pratica 2026 canton Argovia",
     "sistema sanitario svizzero lamal guida 2026 canton Ginevra",
     "confronto imposta cantonale svizzera cantoni",
-    "costo della vita per cantone svizzera"
+    "costo della vita per cantone svizzera",
+    "premi cassa malati lamal per cantone",
+    "cercare lavoro in svizzera dall estero guida"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -127,8 +129,11 @@
     "frontaliere trasporti chiasso lugano abbonamenti 2026 famiglia con figli": 2,
     "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 1,
     "premi cassa malati lamal per cantone": 1,
-    "secondo pilastro lpp guida completa svizzera": 1,
-    "terzo pilastro 3a vantaggi fiscali svizzera": 1,
-    "affitti svizzera diritti inquilino disdetta": 1
+    "secondo pilastro lpp guida completa svizzera": 2,
+    "terzo pilastro 3a vantaggi fiscali svizzera": 2,
+    "affitti svizzera diritti inquilino disdetta": 2,
+    "dichiarazione delle imposte in svizzera guida": 1,
+    "permesso di soggiorno svizzera tipologie B C L": 1,
+    "aprire un attivita in svizzera guida pratica": 1
   }
 }
