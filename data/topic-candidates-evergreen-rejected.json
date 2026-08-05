@@ -83,7 +83,11 @@
     "frontaliere cambio datore lavoro procedura permesso 2026 simulazione pratica",
     "frontaliere pensionamento anticipato pianificazione 2026",
     "frontaliere pensionamento anticipato pianificazione 2026 entro 20 km",
-    "frontaliere pensionamento anticipato pianificazione 2026 oltre 20 km"
+    "frontaliere pensionamento anticipato pianificazione 2026 oltre 20 km",
+    "frontaliere cambio datore lavoro procedura permesso 2026 single",
+    "frontaliere infortunio lavoro assicurazione lainf 2026 entro 20 km",
+    "frontaliere infortunio lavoro assicurazione lainf 2026 simulazione pratica",
+    "frontaliere pensionamento anticipato pianificazione 2026 famiglia con figli"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -153,16 +157,16 @@
     "votazioni federali svizzera come funzionano": 1,
     "trasporti pubblici svizzera abbonamenti sconti": 1,
     "congedo parentale svizzera durata indennita": 1,
-    "frontaliere cambio datore lavoro procedura permesso 2026 famiglia con figli": 2,
+    "frontaliere cambio datore lavoro procedura permesso 2026 famiglia con figli": 3,
     "frontaliere cambio datore lavoro procedura permesso 2026 single": 2,
     "frontaliere cambio datore lavoro procedura permesso 2026 simulazione pratica": 1,
-    "frontaliere cambio datore lavoro procedura permesso 2026 errori comuni": 2,
+    "frontaliere cambio datore lavoro procedura permesso 2026 errori comuni": 3,
     "frontaliere infortunio lavoro assicurazione lainf 2026": 1,
     "frontaliere infortunio lavoro assicurazione lainf 2026 entro 20 km": 2,
-    "frontaliere infortunio lavoro assicurazione lainf 2026 oltre 20 km": 1,
-    "frontaliere infortunio lavoro assicurazione lainf 2026 famiglia con figli": 1,
-    "frontaliere infortunio lavoro assicurazione lainf 2026 single": 1,
+    "frontaliere infortunio lavoro assicurazione lainf 2026 oltre 20 km": 2,
+    "frontaliere infortunio lavoro assicurazione lainf 2026 famiglia con figli": 2,
+    "frontaliere infortunio lavoro assicurazione lainf 2026 single": 2,
     "frontaliere infortunio lavoro assicurazione lainf 2026 simulazione pratica": 1,
-    "frontaliere infortunio lavoro assicurazione lainf 2026 errori comuni": 1
+    "frontaliere infortunio lavoro assicurazione lainf 2026 errori comuni": 2
   }
 }
