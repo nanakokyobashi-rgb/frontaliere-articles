@@ -77,7 +77,8 @@
     "frontaliere trasporti chiasso lugano abbonamenti 2026 famiglia con figli",
     "frontaliere trasporti chiasso lugano abbonamenti 2026 errori comuni",
     "frontaliere cambio datore lavoro procedura permesso 2026",
-    "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km"
+    "frontaliere cambio datore lavoro procedura permesso 2026 oltre 20 km",
+    "frontaliere cambio datore lavoro procedura permesso 2026 entro 20 km"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -131,7 +132,7 @@
     "frontaliere documenti primo giorno lavoro ticino 2026 simulazione pratica": 3,
     "frontaliere trasporti chiasso lugano abbonamenti 2026 oltre 20 km": 3,
     "frontaliere trasporti chiasso lugano abbonamenti 2026 famiglia con figli": 2,
-    "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 2,
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 single": 3,
     "premi cassa malati lamal per cantone": 1,
     "secondo pilastro lpp guida completa svizzera": 3,
     "terzo pilastro 3a vantaggi fiscali svizzera": 3,
@@ -139,13 +140,19 @@
     "dichiarazione delle imposte in svizzera guida": 2,
     "permesso di soggiorno svizzera tipologie B C L": 2,
     "aprire un attivita in svizzera guida pratica": 2,
-    "frontaliere trasporti chiasso lugano abbonamenti 2026 simulazione pratica": 1,
+    "frontaliere trasporti chiasso lugano abbonamenti 2026 simulazione pratica": 2,
     "frontaliere cambio datore lavoro procedura permesso 2026 entro 20 km": 1,
     "assicurazione disoccupazione svizzera come funziona": 1,
     "sistema sanitario svizzero lamal come funziona": 1,
     "comprare casa in svizzera mutuo requisiti": 1,
     "votazioni federali svizzera come funzionano": 1,
     "trasporti pubblici svizzera abbonamenti sconti": 1,
-    "congedo parentale svizzera durata indennita": 1
+    "congedo parentale svizzera durata indennita": 1,
+    "frontaliere cambio datore lavoro procedura permesso 2026 famiglia con figli": 1,
+    "frontaliere cambio datore lavoro procedura permesso 2026 single": 1,
+    "frontaliere cambio datore lavoro procedura permesso 2026 simulazione pratica": 1,
+    "frontaliere cambio datore lavoro procedura permesso 2026 errori comuni": 1,
+    "frontaliere infortunio lavoro assicurazione lainf 2026": 1,
+    "frontaliere infortunio lavoro assicurazione lainf 2026 entro 20 km": 1
   }
 }
