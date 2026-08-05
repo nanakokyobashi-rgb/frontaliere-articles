@@ -63,11 +63,57 @@ const MIN_ENTRIES = 50;
  */
 const RECENT_LIMIT = Number(process.env.BLOG_INDEX_LIMIT) || 150;
 
+const REPO = 'valerielinc-ops/frontaliere-si-o-no';
+const SHA = 'main';
+const CDN_BLOG_BASE = 'https://cdn.frontaliereticino.ch/images/blog';
+const RAW_BLOG_BASE = `https://raw.githubusercontent.com/${REPO}/${SHA}/public/images/blog`;
+const FULL_BLOG_RX = /^(?:https?:\/\/[^/]+)?\/images\/blog\/([^/]+\.(?:webp|png|jpe?g|avif))$/i;
+
+/**
+ * Byte-compatible copy of `content/blogImageCdnMirror.ts`'s `cdnBlogImage`.
+ *
+ * WHY A COPY AND NOT AN IMPORT
+ * ────────────────────────────
+ * The registries do NOT export what their source literals say. `RAW_ARTICLES`
+ * and `RAW_SWISS_ARTICLES` hold site-relative `/images/blog/<id>.webp` — kept
+ * that way on purpose so the build plugins that regex-parse those files still
+ * find a path they recognise — and the actual exports map every entry through
+ * `cdnBlogImage` before anyone sees it. Reading the file with a regex (see
+ * `readRegistry` below) therefore reads the PRE-rewrite literal: the one shape
+ * no consumer of this index can render. The apex serves `/images/places/`
+ * (which is why the older articles looked fine) but not `/images/blog/`, whose
+ * files live only on the CDN, so every card the overlay contributed came out
+ * with a 404 hero. Measured 2026-08-05 on the pre-fix output: 3036 of 3083
+ * frontaliere entries and 612 of 614 svizzera entries carried a
+ * `/images/blog/` path.
+ *
+ * The import would be the single-producer fix, but it is not available here:
+ * this script is invoked as plain `node scripts/build-blog-index.mjs` in
+ * `.github/workflows/publish-api.yml` (unlike `build-api.mjs` and
+ * `refresh-hub-landing.mjs`, which run under tsx and do import the TS
+ * modules), and plain Node cannot load a `.ts` module. Keeping it on plain
+ * node is deliberate — it is what lets this step stay independent of the
+ * corpus's TS module graph and its extensionless specifiers. So this is a
+ * fourth byte-compatible copy alongside the three `blogImageCdnMirror.ts`
+ * already documents; keep it in step with that file, which is the one the
+ * registries actually call.
+ */
+function cdnBlogImage(p) {
+  if (!p) return p ?? '';
+  if (p.startsWith(CDN_BLOG_BASE) || p.startsWith(RAW_BLOG_BASE)) return p;
+  const m = p.match(FULL_BLOG_RX);
+  if (!m) return p; // thumbnails and non-blog paths (/images/places/…) pass through
+  return `${CDN_BLOG_BASE}/${m[1]}`;
+}
+
 /**
  * Registry entries as `{ id: '…', category: '…', date: '…', image: '…' }`
  * object literals. Parsed with a regex rather than imported: this file must not
  * drag the corpus's TS module graph (and its extensionless specifiers) into a
  * plain-node script, and the shapes here are emitted by our own generator.
+ *
+ * `image` is the raw literal, so it is rewritten through `cdnBlogImage` above
+ * to land on the value the registry's own export carries.
  */
 function readRegistry(rel) {
   const abs = path.join(ROOT, rel);
@@ -85,7 +131,7 @@ function readRegistry(rel) {
       category: pick('category') ?? '',
       date: pick('date') ?? '',
       updatedAt: pick('updatedAt') ?? undefined,
-      image: pick('image') ?? '',
+      image: cdnBlogImage(pick('image') ?? ''),
       hasCalculator: pickBool('hasCalculator') || undefined,
       authorSlug: pick('authorSlug') ?? undefined,
     });
@@ -120,6 +166,17 @@ for (const section of SECTIONS) {
     failed = true;
     continue;
   }
+  // Second gate, on the values rather than the count: a surviving
+  // `/images/blog/` path is a hero that 404s on the apex, and a card with a
+  // broken image is the failure this index existed to prevent. Cheap enough to
+  // assert every time, and it fails loudly instead of publishing dead art.
+  const leaks = registry.filter((a) => /^\/images\/blog\//.test(a.image));
+  if (leaks.length > 0) {
+    console.error(`[blog-index] ${section.name}: ${leaks.length} entries still carry a same-origin /images/blog/ hero after the CDN rewrite (e.g. ${leaks[0].id} → ${leaks[0].image}) — refusing to publish 404 images`);
+    failed = true;
+    continue;
+  }
+
   const itMeta = readMeta(section.metaPrefix, 'it');
 
   for (const locale of LOCALES) {
