@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Refresh the `ssg-article-grid` on the article-hub LANDING pages.
+ * Put the `ssg-article-grid` on the article-hub LANDING pages — refreshing it
+ * where it exists, CREATING it where it does not.
  *
  * ─── The gap this closes ─────────────────────────────────────────────────
  * Three article surfaces exist per section, and until now this repo owned
@@ -22,16 +23,33 @@
  * build's output, none of it a function of the corpus. Re-rendering the whole
  * page here would mean porting ~5000 lines of staticPagesPlugin and would put
  * this repo in the business of owning prose it has no source for. Only the
- * grid depends on the corpus, so only the grid is replaced — through the same
+ * grid depends on the corpus, so only the grid is written — through the same
  * renderer the site uses (`engine/articlesHubCards.ts`), so the two emitters
  * cannot drift into different markup.
  *
+ * ─── Refresh was not enough ──────────────────────────────────────────────
+ * Until now this script could only SWAP a grid that was already on the page,
+ * and `/articoli-svizzera/` (x4 locales) never had one: its live bytes come
+ * from staticPagesPlugin's generic fallback branch, emitted before the hub
+ * branch existed, so there was no marker to swap. It logged "nothing to
+ * refresh" and exited 0, every run, for a week — while 617 articles sat behind
+ * 9 KB of copy with no way in.
+ *
+ * And the site could not fix it either: `deploy-shard-sections.sh` there
+ * excludes both article sections from the shard push loop unconditionally, so
+ * whatever that build emits for these prefixes never reaches the shard the
+ * Worker serves. Two writers, neither of them writing, nothing red anywhere.
+ * `ensureArticleHubCards` creates the grid at the site template's own anchor
+ * when it is absent, which makes that state unreachable: the side that IS on
+ * the serving path can now produce the marker it needs.
+ *
  * ─── Fail-closed ─────────────────────────────────────────────────────────
- * A page whose current HTML cannot be fetched, or whose grid marker is
- * missing or unbalanced, is SKIPPED — never written half-formed. A truncated
- * hub still answers 200, so "write something" is the wrong default. The run
- * exits non-zero only when it refreshed nothing at all, which is the case
- * that means the mechanism itself is broken rather than one shard being slow.
+ * A page whose current HTML cannot be fetched, whose grid marker is present
+ * but unbalanced, or which has no shell nav to anchor a new grid against, is
+ * SKIPPED — never written half-formed. A truncated hub still answers 200, so
+ * "write something" is the wrong default. The run exits non-zero when a
+ * section it was told to write produced nothing, which is the case that means
+ * the mechanism itself is broken rather than one shard being slow.
  *
  * Usage:
  *   npx -y tsx@4 scripts/refresh-hub-landing.mjs --out <dir> [--section frontaliere|svizzera]
@@ -57,20 +75,31 @@ const ONLY_SECTION = argOf('--section', '');
 const LOCALES = argOf('--locales', 'it,en,de,fr').split(',').map((s) => s.trim()).filter(Boolean);
 
 /**
- * Sanity floor for a fetched landing. The smallest real one is the svizzera
- * hub at ~9 KB (copy + a CTA, no grid); anything under 4 KB is an error page
- * or a truncated body, not a page worth patching.
+ * Sanity floor for a fetched landing. The smallest real one was the svizzera
+ * hub at ~9 KB, back when it carried copy and a CTA and no grid; anything
+ * under 4 KB is an error page or a truncated body, not a page worth patching.
+ * Deliberately left well below the ~90 KB a landing weighs once its grid is
+ * there — this floor exists to reject an error page, not to ratchet size.
  */
 const MIN_LANDING_BYTES = 4096;
 
 /**
- * Sections that demonstrably HAVE a grid today. If one of these refreshes
- * nothing, the mechanism is broken and the run must say so — reporting
- * "nothing to refresh" and exiting 0 is precisely the silent-staleness shape
- * that let the hub sit a week behind in the first place.
+ * Sections whose landing this run MUST end up writing. If one of these
+ * refreshes nothing, the mechanism is broken and the run must say so —
+ * reporting "nothing to refresh" and exiting 0 is precisely the
+ * silent-staleness shape that let the hub sit a week behind in the first
+ * place.
+ *
+ * BOTH sections now, not just frontaliere. Svizzera was excused here because
+ * its landing genuinely had no grid to swap — and that exemption is exactly
+ * what kept the failure quiet: 617 articles behind 9 KB of copy, four locales,
+ * a full run of green logs every time. `ensureArticleHubCards` removes the
+ * reason for the exemption (it CREATES the grid when the page has none), so
+ * the exemption goes with it. There is no longer any section this script may
+ * legitimately leave untouched.
  */
 const EXPECT_GRID = new Set(
-  argOf('--expect-grid', 'frontaliere').split(',').map((s) => s.trim()).filter(Boolean),
+  argOf('--expect-grid', 'frontaliere,svizzera').split(',').map((s) => s.trim()).filter(Boolean),
 );
 
 const SECTIONS = [
@@ -97,7 +126,10 @@ const SECTIONS = [
 const shardSlugs = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/section-shard-slugs.json'), 'utf-8'));
 const shardOwners = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts/lib/section-shard-owners.json'), 'utf-8'));
 
-const { renderArticleHubCards, replaceArticleHubCards } = await import('../engine/articlesHubCards.ts');
+// GRID_OPEN comes from the engine rather than being restated here: it is the
+// literal both emitters agree on, and a second copy is how they stop agreeing.
+const { renderArticleHubCards, ensureArticleHubCards, ARTICLE_HUB_GRID_OPEN: GRID_OPEN } =
+  await import('../engine/articlesHubCards.ts');
 const { rewriteBlogImageRefs, hasBlogImageLeak } = await import('../engine/blogImageCdnFinalize.ts');
 
 /** Trailing-slash key form, identical to staticPagesPlugin's `seoKey`. */
@@ -214,9 +246,6 @@ async function currentLandingHtml(owner, repo, relPath) {
   return html;
 }
 
-/** Must match the marker `replaceArticleHubCards` scans for. */
-const GRID_OPEN = '<div class="ssg-article-grid">';
-
 const seoMap = readSeoMap();
 console.log(`[hub-landing] SEO map: ${seoMap.size} entries`);
 
@@ -299,21 +328,33 @@ for (const section of SECTIONS) {
       continue;
     }
 
-    // Two very different reasons the swap can decline, and collapsing them
-    // would hide a real break behind an expected one: the svizzera landing has
-    // no grid at all (its staticPagesPlugin branch emits copy + a CTA to
-    // /tutti/ and nothing else), whereas a grid that is present but unbalanced
-    // means the page is malformed and someone should look.
-    if (!html.includes(GRID_OPEN)) {
-      console.log(`[hub-landing] ${section.name}/${locale}: no article grid on this page — nothing to refresh`);
-      absent++;
-      continue;
-    }
-    const patched = replaceArticleHubCards(html, cards);
+    // A landing with no marker used to end the story here: log "nothing to
+    // refresh", count it as absent, exit 0. That was the whole failure. The
+    // site is NOT on the serving path for these prefixes — its
+    // `deploy-shard-sections.sh` excludes both article sections from the shard
+    // push loop — so a page this script declines to write is a page nobody
+    // writes. `ensureArticleHubCards` CREATES the grid at the site template's
+    // own anchor instead, and every later run finds the marker and takes the
+    // ordinary swap path.
+    //
+    // Fail-closed is unchanged, and still distinguishes the two real refusals:
+    // a marker present but unbalanced means the page is malformed and someone
+    // should look; a page with no shell nav has no defensible place to put a
+    // grid.
+    const created = !html.includes(GRID_OPEN);
+    const patched = ensureArticleHubCards(html, cards, locale);
     if (patched === null) {
-      console.error(`[hub-landing] ${section.name}/${locale}: grid present but unbalanced — left alone`);
+      console.error(
+        `[hub-landing] ${section.name}/${locale}: ${created
+          ? 'no grid marker and no shell nav to anchor one'
+          : 'grid present but unbalanced'} — left alone`,
+      );
       skipped++;
       continue;
+    }
+    if (created) {
+      console.log(`[hub-landing] ${section.name}/${locale}: no grid on this page — CREATED one`);
+      absent++;
     }
 
     const abs = path.join(OUT, relPath);
@@ -340,11 +381,10 @@ if (SUMMARY) {
   fs.writeFileSync(path.resolve(SUMMARY), JSON.stringify({ schema: 1, pages }, null, 2) + '\n');
 }
 
-console.log(`[hub-landing] refreshed ${refreshed}, no-grid ${absent}, skipped ${skipped}`);
+console.log(`[hub-landing] refreshed ${refreshed} (${absent} of them newly created), skipped ${skipped}`);
 
-// Per-section, not global: a section that is legitimately grid-less (svizzera,
-// until the site build ships its new branch) must not mask a section that
-// should have refreshed and did not.
+// Per-section, not global: one section refreshing must not mask another that
+// should have and did not. No section is exempt any more — see EXPECT_GRID.
 let broken = false;
 for (const section of SECTIONS) {
   if (!EXPECT_GRID.has(section.name)) continue;
