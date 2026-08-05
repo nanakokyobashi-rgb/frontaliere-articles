@@ -25,6 +25,7 @@
     "test:dry-run": "node generator/tests/dry-run-entrypoints.mjs",
     "refresh:border-wait": "node generator/scripts/refresh-border-wait-averages.mjs",
     "refresh:border-wait-window": "node generator/scripts/refresh-border-wait-window.mjs",
-    "refresh:events": "node generator/scripts/refresh-events-dataset.mjs"
+    "refresh:events": "node generator/scripts/refresh-events-dataset.mjs",
+    "test:shell-contract": "npx -y tsx@4 generator/tests/shell-contract-coverage.mjs"
   }
 }

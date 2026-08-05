@@ -56,6 +56,7 @@ import {
   TITLE_MAX_CHARS,
   clampMetaDescription,
   META_DESCRIPTION_MAX_CHARS,
+  repairSerpSnippet,
 } from './shared/titleSuffix';
 import { resolveSpaBundle } from './spaBundleResolver';
 import { truncateCodeUnits } from './shared/safeTruncate';
@@ -112,6 +113,7 @@ const contract: SiteShellContract = {
   titleMaxChars: TITLE_MAX_CHARS,
   clampMetaDescription,
   metaDescriptionMaxChars: META_DESCRIPTION_MAX_CHARS,
+  repairSerpSnippet,
 
   truncateCodeUnits,
 
