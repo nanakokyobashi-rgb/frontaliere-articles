@@ -1,0 +1,123 @@
+name: Auto-merge engine lockstep PR
+
+# Mergia la PR che il mirror dell'engine del sito apre su questo repo.
+#
+# PERCHÉ ESISTE. `mirror-articles-engine.yml` (nel repo del sito) apre una PR qui a ogni
+# push sull'engine + ogni 6h. Nessuna automazione la raccoglieva: PR #8 è rimasta verde su
+# 6 check per 9 ore in attesa di una mano umana. Non è igiene — è nanako a RENDERE le
+# pagine articolo, quindi finché l'engine non scende ogni articolo pubblicato esce da un
+# engine vecchio. È già successo, e si è visto solo come `audit:footer-root-presence`
+# passato da 23 a 3608 offender: nessun errore, nessuna CI rossa, solo pagine sbagliate.
+#
+# PERCHÉ IL PAT E NON `GITHUB_TOKEN`. Questa è la parte che sembra un dettaglio e non lo è.
+# Un merge fatto con `GITHUB_TOKEN` non fa scattare nessun workflow a valle (regola
+# anti-ricorsione di GitHub), e `publish-api.yml` è proprio su `push` che tocca `engine/**`.
+# La PR risulterebbe mergiata e la superficie dati NON verrebbe rigenerata — un guasto più
+# silenzioso di quello che questo workflow chiude. Il merge deve essere autenticato con un
+# PAT vero.
+#
+# QUALE PAT. `GITHUB_PAT_NANAKO`, non `GITHUB_PAT`. Sono due credenziali diverse entrambe in
+# Remote Config e non sono intercambiabili: `GITHUB_PAT` è un token *integration* senza
+# Actions write (risponde 403 su dispatch, vedi l'intestazione di generate-article.yml),
+# mentre `GITHUB_PAT_NANAKO` è un PAT classico dell'account con scope `repo` + `workflow`.
+# Verificato il 2026-08-06 con una sonda su un ref inesistente: 422 «No ref found» invece di
+# 403, cioè l'autorizzazione c'è.
+#
+# PERIMETRO. Solo il branch `engine-lockstep-auto`, che il mirror possiede in esclusiva e
+# force-pusha a ogni run — è stato derivato, mai modificato a mano. Il mirror stesso ha una
+# allowlist fail-closed sul diff staged che gli impedisce di nominare `content/**`, quindi
+# quel branch non può portare corpus. Nessun altro branch viene mai toccato da qui.
+
+on:
+  # Alla fine dei check, non all'apertura: alla `opened` i check non sono ancora partiti e
+  # il gate sotto troverebbe sempre uno stato pendente.
+  check_suite:
+    types: [completed]
+  # Rete di sicurezza. `check_suite` può non arrivare (o arrivare mentre la PR è ancora in
+  # rebase) e senza il cron la PR resterebbe ferma esattamente come prima — che è il difetto
+  # che questo workflow chiude, quindi vale la pena avere due strade.
+  schedule:
+    - cron: '17 */2 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: auto-merge-engine-lockstep
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # Il PAT arriva da Remote Config, non da qui: senza questo il credential di
+          # actions/checkout resterebbe quello di GITHUB_TOKEN.
+          persist-credentials: false
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — it is the only source of the merge PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Merge the lockstep PR when it is green
+        env:
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente. NON ricado su GITHUB_TOKEN: un merge fatto con quello non farebbe scattare publish-api.yml, quindi la PR risulterebbe mergiata e la superficie dati resterebbe vecchia — silenziosamente. Meglio non mergiare affatto."
+            exit 1
+          fi
+          export GH_TOKEN="$GITHUB_PAT_NANAKO"
+
+          PR=$(gh pr list --head engine-lockstep-auto --state open --json number -q '.[0].number // empty')
+          if [ -z "$PR" ]; then
+            echo "Nessuna PR lockstep aperta — niente da fare."
+            exit 0
+          fi
+          echo "PR lockstep aperta: #$PR"
+
+          # Stato dei check. `gh pr checks` esce non-zero quando qualcosa non è verde, il che
+          # sotto `set -e` chiuderebbe il job come FALLITO per una PR semplicemente ancora in
+          # corso — un rosso che non significa niente e che a furia di ripetersi si impara a
+          # ignorare. Qui un check pendente o fallito è un NON-EVENTO: si esce 0 e ci riprova
+          # il prossimo giro.
+          STATE=$(gh pr checks "$PR" --json state -q '[.[].state]|join(",")' 2>/dev/null || echo "UNKNOWN")
+          echo "check: $STATE"
+          case "$STATE" in
+            *FAILURE*|*ERROR*|*CANCELLED*|*TIMED_OUT*)
+              echo "Check non verdi — non mergio. Se persiste è un difetto dell'engine, non di questo workflow."
+              exit 0 ;;
+            *PENDING*|*QUEUED*|*IN_PROGRESS*|UNKNOWN)
+              echo "Check ancora in corso — riprovo al prossimo giro."
+              exit 0 ;;
+          esac
+
+          # `--merge`, non `--squash`: il commit del mirror porta il SHA del sito da cui
+          # l'engine è stato copiato, che è l'unica traccia di provenienza fra i due repo.
+          # Uno squash la sostituirebbe col titolo della PR e la perderebbe.
+          gh pr merge "$PR" --merge --delete-branch=false
+          echo "PR #$PR mergiata con il PAT: publish-api.yml riceve il push e rigenera la superficie dati."
