@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "418fc859ff7eba49",
+        "corpus": "f0bca0e127840d15",
         "alignedAt": "2026-08-06"
       }
     },
@@ -472,6 +472,44 @@
       "baseline": {
         "site": null,
         "corpus": "ef5f1d89c878dd13",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/duplicateDeclarations.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c3f48eb83de91627",
+        "corpus": "c3f48eb83de91627",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/secrets-scope-detect.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7de8e2060fb167b2",
+        "corpus": "7de8e2060fb167b2",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/mergePreviewCheck.mjs",
+      "mode": "adapted",
+      "reason": "Sul sito importa duplicateDeclarations.mjs staticamente, e quello importa `typescript`, che questo repo non ha fra le dipendenze. Con l'import statico auto-merge-eval.mjs non si CARICA: l'auto-merge fallirebbe su ogni PR con ERR_MODULE_NOT_FOUND prima di valutare qualunque gate. Aggiungere npm ci al workflow di merge costerebbe playwright+sharp+transformers a ogni merge, per un gate che qui vale poco (intercetta un SyntaxError di esbuild al merge, e questo repo builda con tsx). Quindi typescript viene risolto a runtime e, se assente, il check si dichiara saltato — stesso pattern di skip conservativo che il file gia' usa per rete/sha/merge-tree. Se typescript entrasse fra le dipendenze, il gate si riattiva da solo.",
+      "baseline": {
+        "site": "3ec37d147e81605b",
+        "corpus": "04a9c890ea333451",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/loop-scripts-closure.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard nato da un difetto reale del porting: node --check valida la sintassi ma non segue gli import, quindi tre file mancanti sono passati indenni da ogni controllo e avrebbero rotto l'auto-merge su ogni PR. Risolve l'albero staticamente (non importa: quasi tutti gli script hanno una modalita' CLI e alcuni chiamano l'API GitHub) e verifica anche che non compaiano dipendenze npm non dichiarate, perche' e' il girare-senza-npm-ci a rendere economico il ciclo su questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "487404ca92096032",
         "alignedAt": "2026-08-06"
       }
     }
