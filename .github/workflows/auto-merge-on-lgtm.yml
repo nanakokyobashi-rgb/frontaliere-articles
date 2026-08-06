@@ -1,0 +1,223 @@
+name: Auto-merge on Claude LGTM
+
+# Mergia una PR quando coesistono DUE condizioni, in qualunque ordine arrivino:
+#   A) una review di claude-bot sulla HEAD corrente con `## LGTM` e nessun
+#      `🔴 Important`;
+#   B) il check-run `tests (node --test)` sulla HEAD == `success`.
+#
+# Il controllo "nessun 🔴 Important" NON vive nell'`if:` del job qui sotto: un
+# `contains()` YAML è una substring-match ingenua, e "🔴 Important" compare anche
+# nella prosa di NEGAZIONE del reviewer ("zero 🔴 Important findings..."). Sul
+# sito questo ha fatto skippare una PR con `## LGTM` e zero finding reali. La
+# decisione vive SOLO in auto-merge-eval.mjs, che la valuta negation-aware.
+#
+# Il gate sui test richiede `success`, non "diverso da failure": se il check è
+# pending o MANCANTE il merge NON procede. È l'invariante che sul sito ha
+# richiesto una regressione per essere imparato (PR mergiata mentre i test
+# giravano → poi rossi → main rosso), ed è anche la ragione per cui questo repo
+# ha `tests.yml` (senza `paths`) invece di appoggiarsi al `generator-ci.yml`
+# path-scoped: sotto un CI path-scoped il check sarebbe assente sulla maggior
+# parte delle PR del ciclo, e "assente" qui significa "non mergiare mai".
+#
+# Due trigger per coprire entrambi gli ordini di arrivo:
+#   - pull_request_review (LGTM appena postato): se i test non sono ancora
+#     verdi esce 0 in silenzio — sarà il completamento di `tests` a ri-valutare.
+#   - workflow_run di `tests` completato: risolve la PR dalla head e ri-valuta
+#     (potrebbe esserci già un `## LGTM` in attesa).
+#
+# ── ADATTAMENTI rispetto al sito (manifest: `adapted`) ──────────────────────
+#  - Identità di merge: `GITHUB_PAT_NANAKO` da Remote Config. Questo repo è di
+#    un altro account e non ha la GitHub App del sito.
+#  - Niente `npm ci`: gli script del ciclo usano solo builtin Node.
+#  - Il ponte Remote Config è `generator/scripts/load-rc-env.mjs`, non
+#    `scripts/load-rc-env.mjs`.
+#  - Rete di sicurezza `publish-api` in coda: vedi lo step finale. Non esiste
+#    sul sito perché lì il problema non si pone.
+
+on:
+  pull_request_review:
+    types: [submitted]
+  workflow_run:
+    workflows: ['tests']
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write # alert token-down
+  actions: write # dispatch di publish-api come rete di sicurezza
+
+jobs:
+  auto-merge:
+    # Pre-filtro a livello di evento. Il resto dei gate — incluso il check
+    # `🔴 Important` negation-aware — sta in auto-merge-eval.mjs, unica fonte di
+    # verità per entrambi i trigger.
+    if: |
+      (github.event_name == 'pull_request_review' &&
+        github.event.review.user.type == 'Bot' &&
+        startsWith(github.event.review.user.login, 'claude') &&
+        github.event.review.state == 'commented' &&
+        contains(github.event.review.body, '## LGTM') &&
+        github.event.pull_request.draft == false)
+      ||
+      (github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      # ── Perché serve un PAT e non basta GITHUB_TOKEN ────────────────────
+      # Per design GitHub, un push generato dal GITHUB_TOKEN di default NON
+      # triggera altri workflow (anti-ricorsione). Su questo repo la
+      # conseguenza è specifica e silenziosa: `publish-api.yml` gira su `push`
+      # verso main che tocca `content/`, `engine/` o `scripts/build-api.mjs`.
+      # Un merge fatto col GITHUB_TOKEN non lo fa partire → la superficie dati
+      # servita al sito resta quella vecchia, senza un errore da nessuna parte.
+      # Un PAT non ha questo limite.
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: gli script del ciclo (auto-merge-eval e dipendenze)
+      # usano esclusivamente builtin Node. È stato verificato risolvendo
+      # l'albero completo degli import — zero dipendenze npm.
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna credenziale Firebase — GITHUB_PAT_NANAKO non verrà caricato; il merge ripiega su GITHUB_TOKEN (nessun cascade publish-api)."
+          fi
+
+      # Il loader esce 0 anche quando non carica NIENTE, di proposito: non deve
+      # mai rompere un workflow. Qui va bene — l'assenza del PAT è gestita a
+      # valle (alert + rete di sicurezza publish-api).
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # No-op oggi: questo repo non ha una GitHub App installata, quindi
+      # APP_ID/APP_PRIVATE_KEY non esistono e lo script esce senza settare
+      # APP_TOKEN. Resta nel workflow per due ragioni: tiene la catena di
+      # fallback identica a quella del sito (meno drift da riconciliare), ed è
+      # già pronto il giorno in cui una App venisse installata anche qui.
+      - name: Mint App token (primary identity, PAT fallback)
+        continue-on-error: true
+        env:
+          APP_ID: ${{ secrets.APP_ID }}
+          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/mint-app-token.mjs
+
+      # Token assente = degrado silenzioso del ciclo (merge senza cascade →
+      # superficie dati vecchia). Alert deterministico, zero-Claude, dedupato
+      # sul titolo canonico. GH_TOKEN qui è il GITHUB_TOKEN, non il PAT.
+      - name: Alert token-down (dedup, zero-Claude)
+        if: env.APP_TOKEN == '' && env.GITHUB_PAT_NANAKO == ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      # ── Risolvi il PR number dall'evento ─────────────────────────────────
+      # pull_request_review porta la PR; workflow_run no — va risolta dalla
+      # head del run di `tests` (prima per SHA, poi per branch).
+      - name: Resolve PR number
+        id: resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          REVIEW_PR: ${{ github.event.pull_request.number }}
+          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+        run: |
+          set -uo pipefail
+          if [ "$EVENT_NAME" = "pull_request_review" ]; then
+            echo "pr_number=$REVIEW_PR" >> "$GITHUB_OUTPUT"
+            echo "Risolto PR #$REVIEW_PR (pull_request_review)."
+            exit 0
+          fi
+          PRN=$(gh api "repos/$REPO/commits/$RUN_HEAD_SHA/pulls" \
+            --jq '[.[] | select(.state == "open")][0].number // empty' 2>/dev/null || true)
+          if [ -z "${PRN:-}" ] && [ -n "${RUN_HEAD_BRANCH:-}" ]; then
+            PRN=$(gh pr list --repo "$REPO" --head "$RUN_HEAD_BRANCH" --state open \
+              --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          fi
+          if [ -z "${PRN:-}" ]; then
+            echo "Nessuna PR aperta per head_sha=$RUN_HEAD_SHA / branch=$RUN_HEAD_BRANCH — niente da mergiare."
+          else
+            echo "Risolto PR #$PRN (workflow_run di tests completato)."
+          fi
+          echo "pr_number=${PRN:-}" >> "$GITHUB_OUTPUT"
+
+      # ── Valutazione unica + merge ────────────────────────────────────────
+      # La decisione (LGTM + test verdi + collision gate) e il merge vivono in
+      # auto-merge-eval.mjs, identico per entrambi i trigger. Esce 0 anche
+      # quando un gate non è soddisfatto: l'altro trigger ri-valuterà, non è un
+      # errore.
+      - name: Evaluate gates + squash-merge
+        if: steps.resolve.outputs.pr_number != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          # Il check-run atteso su questo repo. La const lo legge da qui; il
+          # guard test `generator/tests/ci-check-name.test.mjs` verifica che
+          # combaci col `name:` del job in tests.yml.
+          CI_CHECK_NAME: 'tests (node --test)'
+          # Primario = PAT di nanako da Remote Config: il suo push del merge fa
+          # ripartire publish-api. Fallback = GITHUB_TOKEN, che mergia ma senza
+          # cascade (coperto dalla rete di sicurezza sotto).
+          MERGE_PRIMARY_TOKEN: ${{ env.APP_TOKEN || env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          MERGE_FALLBACK_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT_NANAKO != '' }}
+        run: node scripts/ci/auto-merge-eval.mjs "${{ steps.resolve.outputs.pr_number }}"
+
+      # ── Rete di sicurezza: publish-api dopo un merge senza cascade ───────
+      # Non esiste sul sito, e qui serve. Se il merge è avvenuto col fallback
+      # GITHUB_TOKEN (PAT assente o rifiutato), l'anti-ricorsione di GitHub
+      # impedisce a `publish-api.yml` di partire: la superficie servita al sito
+      # resterebbe quella vecchia, in silenzio e a tempo indefinito.
+      #
+      # Non ci si affida a un output di auto-merge-eval (non ne espone): si
+      # interroga lo stato reale della PR. Si dispatcha solo se la PR risulta
+      # MERGIATA e ha toccato i path che publish-api sorveglia — dispatchare a
+      # vuoto costerebbe una build della superficie per niente.
+      - name: Safety net — dispatch publish-api if merged without cascade
+        if: always() && steps.resolve.outputs.pr_number != '' && env.APP_TOKEN == '' && env.GITHUB_PAT_NANAKO == ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PRN: ${{ steps.resolve.outputs.pr_number }}
+        run: |
+          set -uo pipefail
+          merged=$(gh pr view "$PRN" --repo "$REPO" --json merged --jq '.merged // false' 2>/dev/null || echo false)
+          if [ "$merged" != "true" ]; then
+            echo "PR #$PRN non è mergiata — nessuna rete di sicurezza da attivare."
+            exit 0
+          fi
+          touched=$(gh pr view "$PRN" --repo "$REPO" --json files --jq '.files[].path' 2>/dev/null \
+            | grep -E '^(content/|engine/|scripts/build-api\.mjs$)' || true)
+          if [ -z "$touched" ]; then
+            echo "PR #$PRN mergiata senza PAT, ma non tocca i path di publish-api → nessun republish necessario."
+            exit 0
+          fi
+          echo "::warning::PR #$PRN mergiata col GITHUB_TOKEN di fallback e tocca i path della superficie dati: publish-api NON è partito da solo. Lo dispatcho esplicitamente."
+          gh workflow run publish-api.yml --repo "$REPO" --ref main \
+            && echo "publish-api dispatchato." \
+            || echo "::error::Dispatch di publish-api fallito — la superficie dati potrebbe restare vecchia. Verificare a mano."
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

@@ -1,0 +1,73 @@
+name: Workflow failure → issue
+
+# Apre una issue per ogni workflow di questo repo che fallisce, così che un
+# guasto entri nella coda di triage invece di restare una riga rossa nella
+# scheda Actions che nessuno guarda.
+#
+# Scansione centrale, non uno step per workflow: il razionale completo sta in
+# `scripts/ci/scan-failed-runs.mjs`. In breve — cablare uno step in ogni YAML
+# vorrebbe dire modificare i workflow di generazione (il core operativo di
+# questo repo) per una preoccupazione che non è la loro, e lascerebbe comunque
+# scoperto ogni workflow nuovo. `close-recovered-failure-issues.yml` chiude
+# centralmente; questo apre centralmente.
+#
+# ── Cadenza, e perché non è quella del sito ─────────────────────────────────
+# Ogni 30 minuti ai minuti 9 e 39, deliberatamente sfasati dai cron del sito
+# (che gira a :15/:17/:20/:23). I due repo colpiscono la STESSA API GitHub e la
+# stessa quota: cron allineati sommano i picchi invece di distribuirli.
+#
+# Zero Claude: è tutto deterministico. Il costo di quota è nullo — questo
+# workflow può girare frequentemente senza togliere niente al ciclo del sito.
+
+on:
+  schedule:
+    - cron: '9,39 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Elenca cosa aprirebbe senza aprire niente'
+        required: false
+        type: boolean
+        default: false
+      lookback_min:
+        description: 'Finestra di scansione in minuti (default 40)'
+        required: false
+        default: '40'
+
+permissions:
+  contents: read
+  issues: write
+  actions: read # elencare le run e i loro job
+
+concurrency:
+  group: workflow-failure-issues
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: lo scanner e github-issue-creator usano solo builtin.
+
+      - name: Scan failed runs and open issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          # Lo smoke del token è usa-e-getta e fallisce di proposito quando il
+          # token non c'è: non deve generare issue.
+          IGNORE_WORKFLOWS: 'Claude token smoke'
+        run: |
+          ARGS="--lookback-min ${{ github.event.inputs.lookback_min || '40' }}"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          node scripts/ci/scan-failed-runs.mjs $ARGS
