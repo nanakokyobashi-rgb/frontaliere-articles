@@ -5689,6 +5689,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'easyjet-apollon-acquisizione',
+    category: 'fiscale',
+    date: '2026-08-06T23:19:27.868Z',
+    image: '/images/blog/easyjet-apollon-acquisizione.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

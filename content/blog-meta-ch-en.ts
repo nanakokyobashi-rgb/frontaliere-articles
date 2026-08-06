@@ -1897,6 +1897,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rischio-bolla-svizzera-2026.title': 'The danger of a housing bubble continues to increase',
     'blog.article.rischio-bolla-svizzera-2026.excerpt': 'The UBS Swiss Real Estate Bubble Index stood at 0.72 points in the second quarter of 2026',
     'blog.article.rischio-bolla-svizzera-2026.imageAlt': 'Lugano skyline with residential buildings and clouds',
+    'blog.article.easyjet-apollon-acquisizione.title': 'EasyJet switches to the American fund Apollo for 6.23 billion francs',
+    'blog.article.easyjet-apollon-acquisizione.excerpt': 'The acquisition is expected to close by the end of the first quarter of next year',
+    'blog.article.easyjet-apollon-acquisizione.imageAlt': 'EasyJet, aircraft of EasyJet, acquisition by Apollo, EasyJet\'s headquarters in Luton',
 };
 
 export default blogMetaChEn;
