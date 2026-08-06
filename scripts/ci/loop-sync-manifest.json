@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "1f3a2d7cb569e909",
+        "corpus": "883319a31f2f86ea",
         "alignedAt": "2026-08-06"
       }
     },
@@ -540,6 +540,26 @@
       "baseline": {
         "site": "3881f7aff32b5e5d",
         "corpus": "9898137394c5554e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/pr-body-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Runner del gate sul body. I due moduli che fanno il lavoro (pr-body-sections-check, pr-body-closes-check) sono condivisi col sito e restano `identical`; questo e' solo la colla — il pr-body-contract.yml del sito incorpora invece una decina di check del suo dominio (CLS degli slot pubblicitari, lookbehind client, pattern sibling) che qui non hanno senso.",
+      "baseline": {
+        "site": null,
+        "corpus": "fc59c832f678d46e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-body-contract.yml",
+      "mode": "adapted",
+      "reason": "Sottoinsieme generico di quello del sito: solo le due verifiche sul contratto del body, senza i check di dominio del sito. Zero Claude — intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa.",
+      "baseline": {
+        "site": "b607ffd26f01ce20",
+        "corpus": "56de197f2233954b",
         "alignedAt": "2026-08-06"
       }
     }
