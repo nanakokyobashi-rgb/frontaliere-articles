@@ -89,7 +89,8 @@
     "frontaliere infortunio lavoro assicurazione lainf 2026 simulazione pratica",
     "frontaliere pensionamento anticipato pianificazione 2026 famiglia con figli",
     "frontaliere pensionamento anticipato pianificazione 2026 errori comuni",
-    "congedo parentale svizzera durata indennita"
+    "congedo parentale svizzera durata indennita",
+    "frontaliere nascita figlio anagrafe pratiche 2026 single"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -174,9 +175,10 @@
     "frontaliere pensionamento anticipato pianificazione 2026 simulazione pratica": 3,
     "frontaliere nascita figlio anagrafe pratiche 2026": 3,
     "frontaliere nascita figlio anagrafe pratiche 2026 entro 20 km": 1,
-    "frontaliere nascita figlio anagrafe pratiche 2026 oltre 20 km": 1,
-    "frontaliere nascita figlio anagrafe pratiche 2026 famiglia con figli": 1,
+    "frontaliere nascita figlio anagrafe pratiche 2026 oltre 20 km": 2,
+    "frontaliere nascita figlio anagrafe pratiche 2026 famiglia con figli": 2,
     "frontaliere nascita figlio anagrafe pratiche 2026 single": 1,
-    "imposta cantonale confronto svizzera 2026": 2
+    "imposta cantonale confronto svizzera 2026": 2,
+    "frontaliere nascita figlio anagrafe pratiche 2026 simulazione pratica": 1
   }
 }
