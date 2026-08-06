@@ -1894,6 +1894,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lex-netflix-cinema-svizzero-2025.title': 'Lex Netflix: investimenti nel cinema svizzero in crescita del 25% nel 2025',
     'blog.article.lex-netflix-cinema-svizzero-2025.excerpt': 'Nel 2025, le piattaforme di streaming hanno investito 19,9 milioni di franchi nel cinema elvetico, un aumento del 25% rispetto all\'anno precedente, grazie all\'obbligo del 4% sul reddito lordo svizzero.',
     'blog.article.lex-netflix-cinema-svizzero-2025.imageAlt': 'Squadra cinematografica svizzera al lavoro su una produzione locale nel 2025',
+    'blog.article.rischio-bolla-svizzera-2026.title': 'Il pericolo di una bolla immobiliare continua ad aumentare',
+    'blog.article.rischio-bolla-svizzera-2026.excerpt': 'L\'UBS Swiss Real Estate Bubble Index si è attestato a 0,72 punti nel secondo trimestre 2026',
+    'blog.article.rischio-bolla-svizzera-2026.imageAlt': 'Scena di Lugano con edifici residenziali e nuvole',
 };
 
 export default blogMetaChIt;
