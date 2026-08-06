@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "f0bca0e127840d15",
+        "corpus": "1f3a2d7cb569e909",
         "alignedAt": "2026-08-06"
       }
     },
@@ -510,6 +510,36 @@
       "baseline": {
         "site": null,
         "corpus": "487404ca92096032",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/auto-merge-sweep.yml",
+      "mode": "adapted",
+      "reason": "Identita' di merge GITHUB_PAT_NANAKO, CI_CHECK_NAME di questo repo, niente npm ci, cadenza sfasata (12,42 invece di */15). La logica di gate resta in auto-merge-eval.mjs, condivisa con l'auto-merge event-driven.",
+      "baseline": {
+        "site": "6512a455eeb91262",
+        "corpus": "56d67d1ff1324e57",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-collision-detector.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, cadenza sfasata (18,48). Lo script sottostante e' identical.",
+      "baseline": {
+        "site": "a894d9b0a3b2b2cc",
+        "corpus": "890026f621187114",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-autorebase.yml",
+      "mode": "adapted",
+      "reason": "Identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52).",
+      "baseline": {
+        "site": "3881f7aff32b5e5d",
+        "corpus": "9898137394c5554e",
         "alignedAt": "2026-08-06"
       }
     }
