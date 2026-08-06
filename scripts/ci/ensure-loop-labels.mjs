@@ -51,6 +51,7 @@ export const LABELS = [
   ['fu-parked', '5319e7', 'Fuori dalla coda attiva dopo troppi tentativi'],
   ['stale-review', 'f9d0c4', 'Stallo rilevato: la PR non ha segnale a valle'],
   ['collision-risk', 'e99695', 'Modifica file gia toccati da un altra PR aperta'],
+  ['needs-human', '7057ff', 'Il fixer ha esaurito i round: serve una mano umana'],
   ['priority:urgent', 'b60205', ''],
   ['priority:high', 'd93f0b', ''],
   ['priority:medium', 'fbca04', ''],

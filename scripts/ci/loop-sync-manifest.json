@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "13708e3dcdf57843",
+        "corpus": "06bc50c9c03e2cca",
         "alignedAt": "2026-08-06"
       }
     },
@@ -266,17 +266,17 @@
       "reason": "Equivalente in node:test del guard vitest del sito (tests/ci-vitest-check-name.test.ts): lega il valore di VITEST_CHECK_NAME al `name:` del job in tests.yml. Non e' `identical` perche' il sito lo scrive in TypeScript per vitest e qui non c'e' ne' l'uno ne' l'altro.",
       "baseline": {
         "site": null,
-        "corpus": "26c626184ead3e32",
+        "corpus": "2160bdb2756d1c25",
         "alignedAt": "2026-08-06"
       }
     },
     {
       "path": ".github/workflows/lessons-harvester.yml",
-      "mode": "not-ported",
-      "reason": "Harvesta pattern ricorrenti dai doc-contract e da harvest-clusters.json (prodotto da scripts/ci/harvest-agent-lessons.mjs) per proporre modifiche alle istruzioni degli agenti. Qui girerebbe a vuoto finche' non c'e' uno storico di review e di fix da cui harvestare. Da rivalutare quando il ciclo avra' accumulato qualche settimana di dati reali.",
+      "mode": "adapted",
+      "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
       "baseline": {
         "site": "4eee66a5917239d8",
-        "corpus": null,
+        "corpus": "8fa19800e54df34d",
         "alignedAt": "2026-08-06"
       }
     },
@@ -351,11 +351,11 @@
     },
     {
       "path": ".github/actions/setup-headroom/action.yml",
-      "mode": "not-ported",
+      "mode": "identical",
       "reason": "Proxy di compressione del contesto (la voce punta ad action.yml: il manifest indicizza file, non cartelle). del contesto: sul sito risparmia quota, ma installa da PyPI a ogni run e aggiunge superficie di fallimento su un ciclo appena nato. Da rivalutare quando il ciclo sara' stabile — e' un risparmio di quota, quindi vale la pena.",
       "baseline": {
         "site": "a4be46d61d7904b8",
-        "corpus": null,
+        "corpus": "a4be46d61d7904b8",
         "alignedAt": "2026-08-06"
       }
     },
@@ -569,7 +569,7 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "076c53b9a1218650",
+        "corpus": "2bb3e4f154873c7f",
         "alignedAt": "2026-08-06"
       }
     },
@@ -580,6 +580,112 @@
       "baseline": {
         "site": null,
         "corpus": "4be008f730283c1d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/stale-pr-rescuer.yml",
+      "mode": "adapted",
+      "reason": "Il nome del check-run sul sito e' hardcoded DUE volte dentro jq; qui arriva da CI_CHECK_NAME e viene passato con --arg. Un literal in piu' nello YAML sarebbe una seconda sorgente di verita' per lo stesso valore — la classe di drift che ci-check-name.test.mjs sorveglia, e che dentro una stringa jq nessun test vedrebbe. Cadenza :35.",
+      "baseline": {
+        "site": "e309ac041a8cc34a",
+        "corpus": "0186cb72bef9d3cd",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/recycle-stale-prs.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito.",
+      "baseline": {
+        "site": "cc1466b7e98b8d94",
+        "corpus": "6816b51fdce1576f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-redflag-fixer.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico.",
+      "baseline": {
+        "site": "b456c412e8ae9075",
+        "corpus": "3e7c07bca43b6c78",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/post-merge-followup.yml",
+      "mode": "adapted",
+      "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
+      "baseline": {
+        "site": "7ebca8a5727691c2",
+        "corpus": "e3e038db53e07967",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/actions/setup-headroom/install.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "383249ff404fb547",
+        "corpus": "383249ff404fb547",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/actions/setup-headroom/start.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "57e4d70f791b5ddb",
+        "corpus": "57e4d70f791b5ddb",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/collect-followup-batch.mjs",
+      "mode": "adapted",
+      "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito.",
+      "baseline": {
+        "site": "7e46173ed1e1334d",
+        "corpus": "e51f349de4cebfe2",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/harvest-agent-lessons.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "8b022bd8bcb08a44",
+        "corpus": "8b022bd8bcb08a44",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/false-positive-declaration.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "220daf74fa503c7f",
+        "corpus": "220daf74fa503c7f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "FOLLOWUP.md",
+      "mode": "adapted",
+      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i tre hard-exclude) con il filtro di scopo di questo repo.",
+      "baseline": {
+        "site": "ba86d79cae8e91ab",
+        "corpus": "22688b9eada13b5c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/followup-authors.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Lega FOLLOWUP_ELIGIBLE_AUTHORS nello YAML al filtro nel codice. Senza, il batch vuoto sarebbe indistinguibile da 'nessun follow-up da fare'.",
+      "baseline": {
+        "site": null,
+        "corpus": "fe42d6113d80f86a",
         "alignedAt": "2026-08-06"
       }
     }

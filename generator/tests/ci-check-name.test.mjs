@@ -62,6 +62,36 @@ test('il nome del check-run in tests.yml combacia con VITEST_CHECK_NAME', async 
   );
 });
 
+test('ogni CI_CHECK_NAME negli workflow combacia col nome del job', () => {
+  // Il valore è ora ripetuto in piu' workflow (auto-merge, sweep, autorebase,
+  // stale-pr-rescuer) perche' lo YAML non puo' importare una const. Ogni
+  // ripetizione e' una sorgente di verita' in piu' che puo' divergere — e
+  // divergere qui non rompe niente: la query dei check-run torna vuota, il
+  // gate legge conclusion '' e la coda si ferma in silenzio.
+  //
+  // In `stale-pr-rescuer.yml` il valore finisce dentro una stringa jq, dove
+  // nessun altro controllo lo guarderebbe mai.
+  const wfDir = path.join(ROOT, '.github/workflows');
+  const expected = jobNameFromWorkflow(fs.readFileSync(WORKFLOW, 'utf8'));
+  const wrong = [];
+
+  for (const f of fs.readdirSync(wfDir)) {
+    if (!f.endsWith('.yml')) continue;
+    const src = fs.readFileSync(path.join(wfDir, f), 'utf8');
+    for (const m of src.matchAll(/^\s*CI_CHECK_NAME:\s*(.+?)\s*$/gm)) {
+      const value = m[1].replace(/^['"]|['"]$/g, '');
+      if (value !== expected) wrong.push(`${f}: "${value}"`);
+    }
+  }
+
+  assert.deepEqual(
+    wrong,
+    [],
+    `Questi workflow dichiarano un CI_CHECK_NAME diverso dal job in tests.yml ("${expected}"). ` +
+      `Il gate cercherebbe un check che non esiste e nessuna PR mergerebbe, senza errori:\n  ${wrong.join('\n  ')}`,
+  );
+});
+
 test('CI_CHECK_NAME resta sovrascrivibile da env', async () => {
   // L'override è ciò che permette al sito di adottare lo stesso file: il giorno
   // in cui lo fa, i due constants.mjs diventano identici e il drift va a zero.
