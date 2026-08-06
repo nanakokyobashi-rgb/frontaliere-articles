@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "99e5d25a4ec47d04",
+        "corpus": "418fc859ff7eba49",
         "alignedAt": "2026-08-06"
       }
     },
@@ -325,7 +325,7 @@
       "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire.",
       "baseline": {
         "site": null,
-        "corpus": "cc6a59485b2d964b",
+        "corpus": "eab404ca15a9d5d8",
         "alignedAt": "2026-08-06"
       }
     },
@@ -366,6 +366,112 @@
       "baseline": {
         "site": null,
         "corpus": "636e787ec850895c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/followup-drainer.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b849f695a95955ba",
+        "corpus": "b849f695a95955ba",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/run-budget.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1ce4e20c19a79fdf",
+        "corpus": "1ce4e20c19a79fdf",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e0835498f050dce5",
+        "corpus": "e0835498f050dce5",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/triage-sweep.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "cb74e3305444dac5",
+        "corpus": "cb74e3305444dac5",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/classify-issue.mjs",
+      "mode": "adapted",
+      "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci.",
+      "baseline": {
+        "site": "04d09fd104293724",
+        "corpus": "9f7e74cc6ea2022a",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/issue-triage.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci; ponte RC in generator/scripts/load-rc-env.mjs; token di routing GITHUB_PAT_NANAKO, esposto a triage-sweep.mjs col nome GITHUB_PAT che lo script legge (mappare qui tiene lo script byte-identico invece di forkarlo); cadenza sweep sfasata.",
+      "baseline": {
+        "site": "820646b283567a83",
+        "corpus": "5098bdaec824fc56",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/issue-fix.yml",
+      "mode": "adapted",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati).",
+      "baseline": {
+        "site": "289881edc3c42140",
+        "corpus": "4cd0a15fc599662e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/followup-drainer.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
+      "baseline": {
+        "site": "d9409a02c28b646a",
+        "corpus": "b51bd246fac7389d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": "adapted",
+      "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test.",
+      "baseline": {
+        "site": "2152ed23b82968b2",
+        "corpus": "0860b171ac7b0751",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "ISSUES.md",
+      "mode": "adapted",
+      "reason": "Contratto del fixer adattato: categorie di questo repo, gate test node --test, e la catena assorbente del 429 descritta con i numeri del sito perche' e' la ragione per cui la telemetria FIX_OUTCOME e' obbligatoria.",
+      "baseline": {
+        "site": "9c762fb417106a95",
+        "corpus": "df3818f0efb4ccb7",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/classify-issue.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Equivalente in node:test del guard vitest del sito. Due dei test coprono l'ORDINE delle regex: `fast-publish-article` non deve essere catturato dalla categoria publish (8 fallimenti transienti a settimana salterebbero la coda), e un vero publish-api non deve finire in generation.",
+      "baseline": {
+        "site": null,
+        "corpus": "ef5f1d89c878dd13",
         "alignedAt": "2026-08-06"
       }
     }

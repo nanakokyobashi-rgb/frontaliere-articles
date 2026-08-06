@@ -60,9 +60,34 @@ jobs:
 
       # Nessun `npm ci`: lo scanner e github-issue-creator usano solo builtin.
 
+      # ── Perché serve il PAT per APRIRE una issue ────────────────────────
+      # Una issue creata dal GITHUB_TOKEN NON emette l'evento `issues: opened`
+      # (anti-ricorsione GitHub). Aprendo col GITHUB_TOKEN, quindi, ogni issue
+      # di fallimento nascerebbe fuori dal triage event-driven e resterebbe
+      # orfana fino allo sweep periodico. Sul sito è esattamente così che si
+      # sono accumulate 46 issue mai triagiate, alcune vecchie di due settimane.
+      # Col PAT l'evento parte e il triage la classifica subito.
+      # Senza PAT il degrado è morbido, non silenzioso: le issue si aprono
+      # comunque e le raccoglie lo sweep.
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
       - name: Scan failed runs and open issues
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # PAT se disponibile (l'evento `issues: opened` parte → triage
+          # immediato), altrimenti GITHUB_TOKEN (le issue si aprono lo stesso,
+          # le raccoglie lo sweep del triage).
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           # Lo smoke del token è usa-e-getta e fallisce di proposito quando il
           # token non c'è: non deve generare issue.
@@ -71,3 +96,7 @@ jobs:
           ARGS="--lookback-min ${{ github.event.inputs.lookback_min || '40' }}"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           node scripts/ci/scan-failed-runs.mjs $ARGS
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

@@ -1,0 +1,218 @@
+name: Issue triage (deterministic classify + route)
+
+# Classifica ogni issue e la instrada: `agent:fix` se va risolta subito,
+# `agent:fix-queued` + `fu-prio:<prio>` se deve passare dalla coda.
+#
+# ZERO Claude. La classificazione è regex su titolo e label
+# (`scripts/lib/classify-issue.mjs`, testato in
+# `generator/tests/classify-issue.test.mjs`), quindi il triage non tocca la
+# quota condivisa col sito. Su questo repo importa più che altrove: il volume di
+# issue è dominato dai fallimenti di generazione articoli, e farli passare da un
+# modello sarebbe spendere quota per riconoscere un titolo.
+#
+# ── I due percorsi, e perché servono entrambi ───────────────────────────────
+#
+# `triage` (event-driven) scatta su `issues: opened`. `sweep` (schedulato)
+# recupera le orfane. Non è ridondanza: una issue creata dal GITHUB_TOKEN NON
+# emette l'evento `opened` (anti-ricorsione GitHub), quindi senza lo sweep ogni
+# issue aperta da un'automazione senza PAT resterebbe fuori dal triage per
+# sempre. Sul sito è così che se ne sono accumulate 46, alcune di due settimane.
+# `workflow-failure-issues.yml` usa il PAT proprio per stare sul primo percorso,
+# ma il secondo resta la rete.
+#
+# ── ADATTAMENTI rispetto al sito (manifest: `adapted`) ──────────────────────
+#  - Nessun `npm ci`: gli script del ciclo usano solo builtin Node.
+#  - Ponte Remote Config: `generator/scripts/load-rc-env.mjs`.
+#  - Token di routing: `GITHUB_PAT_NANAKO`. Viene esposto a `triage-sweep.mjs`
+#    come `GITHUB_PAT`, che è il nome che lo script legge: mappare qui tiene
+#    lo script byte-identico a quello del sito invece di forkarlo.
+#  - Cadenza dello sweep sfasata (`:41` invece di `:17`).
+
+on:
+  issues:
+    types: [opened]
+  schedule:
+    - cron: '41 */4 * * *'
+  workflow_dispatch:
+    inputs:
+      cap:
+        description: 'Max issue instradate a fix immediato per run (anti-burst)'
+        required: false
+        type: string
+        default: '5'
+      dry_run:
+        description: 'Solo log, nessuna modifica'
+        required: false
+        type: boolean
+        default: false
+
+# Una run di triage alla volta: i fallimenti arrivano in burst (un provider LLM
+# che cade fa cadere più workflow di generazione insieme) e serializzare evita
+# race sul routing.
+concurrency:
+  group: issue-triage
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  triage:
+    if: ${{ github.event_name == 'issues' && !contains(github.event.issue.labels.*.name, 'agent:triaged') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna Firebase SA — GITHUB_PAT_NANAKO non caricato; il routing sarà inerte (solo agent:triaged)."
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Alert token-down (dedup, zero-Claude)
+        if: env.GITHUB_PAT_NANAKO == ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Classify and route (deterministic, no Claude)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Le label di ROUTING devono essere applicate col PAT, non col
+          # GITHUB_TOKEN: un evento `labeled` emesso dal GITHUB_TOKEN non fa
+          # partire né il fixer né il drainer. Col GITHUB_TOKEN il triage
+          # sembrerebbe funzionare — la label c'è — ma non succederebbe nulla.
+          ROUTING_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
+          state=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json state --jq '.state')
+          title="$ISSUE_TITLE"
+          echo "Issue #$ISSUE_NUMBER state=$state labels=$labels_json title=$title"
+
+          decision=$(node scripts/lib/classify-issue.mjs "$title" "$labels_json")
+          echo "decision=$decision"
+          cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
+          autofix=$(node -e "process.stdout.write(String(JSON.parse(process.argv[1]).autofix===true))" "$decision")
+          route=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).route||'none')" "$decision")
+          fuprio=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).fuPrio||'')" "$decision")
+          echo "category=$cat autofix=$autofix route=$route fuPrio=$fuprio"
+
+          # Label anti-loop sempre, col GITHUB_TOKEN: non deve triggerare nulla.
+          gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:triaged" || true
+
+          if [ "$route" = "none" ] || [ "$autofix" != "true" ]; then
+            echo "route=$route autofix=$autofix → nessun routing."; exit 0
+          fi
+          if [ "$state" != "OPEN" ]; then
+            echo "Issue non OPEN ($state) → skip routing."; exit 0
+          fi
+          if [ -z "${ROUTING_TOKEN:-}" ]; then
+            echo "::warning::Nessun PAT usabile → routing inerte (il GITHUB_TOKEN non farebbe partire fixer/drainer)."; exit 0
+          fi
+          # Non fatale: se il PAT non ha i permessi o la label non esiste, il
+          # triage resta comunque completato (issue etichettata) e il problema
+          # è visibile come warning invece che come run rossa.
+          if [ "$route" = "queue" ]; then
+            prio="${fuprio:-low}"
+            echo "Accodo #$ISSUE_NUMBER → agent:fix-queued + fu-prio:$prio (la promuove il drainer)."
+            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" \
+              --add-label "agent:fix-queued" --add-label "fu-prio:$prio" \
+              || echo "::warning::accodamento via PAT fallito (scope/label?) — routing non applicato, triage completato."
+          else
+            echo "Applico agent:fix via PAT su #$ISSUE_NUMBER (category=$cat) → fa partire il fixer."
+            GH_TOKEN="$ROUTING_TOKEN" gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --add-label "agent:fix" \
+              || echo "::warning::agent:fix via PAT fallito (scope issues:write? label assente?) — routing non applicato, triage completato."
+          fi
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
+
+  # Recupera le issue orfane che il percorso event-driven non vede mai. Su
+  # questo repo NON è un caso limite: è il percorso normale ogni volta che il
+  # PAT non è disponibile, perché tutte le issue di fallimento nascono da
+  # un'automazione.
+  sweep:
+    if: ${{ github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          else
+            echo "⚠️ Nessuna Firebase SA — routing dello sweep inerte (solo agent:triaged)."
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Alert token-down (dedup, zero-Claude)
+        if: env.GITHUB_PAT_NANAKO == ''
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+      - name: Triage sweep (recover orphaned issues, deterministic)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # `triage-sweep.mjs` legge `GITHUB_PAT`. Mappare qui il nome del PAT
+          # di questo account tiene lo script byte-identico a quello del sito:
+          # è la differenza fra un file copiabile e un fork da riallineare a
+          # mano ogni volta.
+          GITHUB_PAT: ${{ env.GITHUB_PAT_NANAKO }}
+          GH_REPO: ${{ github.repository }}
+          INPUT_CAP: ${{ github.event.inputs.cap || '5' }}
+          INPUT_DRY_RUN: ${{ github.event.inputs.dry_run }}
+        run: |
+          set -uo pipefail
+          ARGS=(--cap "$INPUT_CAP")
+          if [ "$INPUT_DRY_RUN" = "true" ]; then ARGS+=(--dry-run); fi
+          node scripts/ci/triage-sweep.mjs "${ARGS[@]}"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
