@@ -8,17 +8,33 @@ name: Generate Blog Article
 #
 # The site repo's copy chains itself: each run dispatches the next via
 # workflow_dispatch, alternating frontaliere/svizzera, to work around cron
-# unreliability. At cutover that was dropped, because dispatching needs a
-# credential this repo does not have — and that is still true, re-verified today:
+# unreliability. At cutover that was dropped because dispatching needed a
+# credential this repo appeared not to have:
 #
 #   - secrets.GITHUB_TOKEN cannot, by GitHub's anti-recursion rule — which is
 #     precisely why the site repo mints an App token instead.
 #   - The site's GitHub App is installed on valerielinc-ops only, and its
 #     APP_ID/APP_PRIVATE_KEY are Actions secrets over there, absent from Remote
 #     Config; secret values cannot be read back.
-#   - Remote Config's GITHUB_PAT still answers 403 on
+#   - Remote Config's GITHUB_PAT answers 403 on
 #     POST /actions/workflows/*/dispatches ("Resource not accessible by
 #     integration" — it is an integration token with no Actions write).
+#
+# CORRECTION (2026-08-06): the premise was wrong, and the correction matters more
+# than the conclusion. Remote Config carries a SECOND credential, GITHUB_PAT_NANAKO,
+# a classic PAT for this account with `repo` + `workflow` — already mapped in
+# RC_TO_ENV and already loaded by every workflow here. It CAN dispatch: probed with
+# POST .../dispatches against a nonexistent ref, it answers 422 "No ref found"
+# rather than 403, which proves the authorisation without executing anything. The
+# 403 above is real but belongs to GITHUB_PAT, a different token; all six pushing
+# workflows use that one while the capable one sits unused next to it.
+#
+# THE CHAIN STAYS ON PUSH ANYWAY, and not for lack of a credential. See the
+# stop-condition argument below: chaining on the ARTICLE rather than on the RUN is
+# what makes a fast-failing generator unable to spin. That property was bought with
+# four days of evidence and is worth more than the credential ever was. This note
+# exists so the next reader does not re-derive "we cannot dispatch" — we can, we
+# choose not to.
 #
 # The cost of dropping it was measured rather than estimated, and it was far
 # larger than the "loses an immediate retry" note this comment used to carry.
