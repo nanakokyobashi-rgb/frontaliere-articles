@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "883319a31f2f86ea",
+        "corpus": "13708e3dcdf57843",
         "alignedAt": "2026-08-06"
       }
     },
@@ -421,7 +421,7 @@
       "reason": "Niente npm ci; ponte RC in generator/scripts/load-rc-env.mjs; token di routing GITHUB_PAT_NANAKO, esposto a triage-sweep.mjs col nome GITHUB_PAT che lo script legge (mappare qui tiene lo script byte-identico invece di forkarlo); cadenza sweep sfasata.",
       "baseline": {
         "site": "820646b283567a83",
-        "corpus": "5098bdaec824fc56",
+        "corpus": "d0a7c7dd7bcac1b8",
         "alignedAt": "2026-08-06"
       }
     },
@@ -431,7 +431,7 @@
       "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati).",
       "baseline": {
         "site": "289881edc3c42140",
-        "corpus": "4cd0a15fc599662e",
+        "corpus": "1c5bf29dbc52be66",
         "alignedAt": "2026-08-06"
       }
     },
@@ -560,6 +560,26 @@
       "baseline": {
         "site": "b607ffd26f01ce20",
         "corpus": "56de197f2233954b",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/ensure-loop-labels.mjs",
+      "mode": "corpus-only",
+      "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
+      "baseline": {
+        "site": null,
+        "corpus": "076c53b9a1218650",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/loop-labels.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Copre due modi di sbagliare gia' capitati: una descrizione oltre i 100 caratteri (GitHub la rifiuta con un errore generico — e' costata la mancata creazione di agent:in-progress, l'unica che serve al mutex, mentre le altre dodici passavano), e un valore di fu-prio emesso dal classificatore senza la label corrispondente. Il secondo test prende i valori possibili dalla loro SORGENTE invece di indovinarli: il controllo per prefisso si accontentava di un membro qualsiasi della famiglia e non vedeva la rimozione di fu-prio:high.",
+      "baseline": {
+        "site": null,
+        "corpus": "4be008f730283c1d",
         "alignedAt": "2026-08-06"
       }
     }

@@ -77,6 +77,18 @@ jobs:
         with:
           node-version: '22'
 
+      # Le label di routing non si creano da sole: `gh issue edit --add-label`
+      # fallisce se la label non esiste, e nei workflow quel fallimento è un
+      # warning NON bloccante (di proposito: un routing mancato non deve
+      # diventare una run rossa). Senza questo step il ciclo girerebbe, loggerebbe
+      # e uscirebbe 0 — senza instradare nulla. Idempotente, costa una lista.
+      - name: Ensure loop labels exist (idempotente)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/ensure-loop-labels.mjs
+
       - name: Prepare Firebase credentials
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
