@@ -30,9 +30,21 @@ concurrency:
 
 jobs:
   contract:
-    # Le PR draft sono lavoro in corso: il body si completa prima di uscire da
-    # draft, e segnalarlo prima sarebbe solo rumore.
-    if: github.event.pull_request.draft == false
+    # Due esclusioni:
+    #  - Le draft sono lavoro in corso: il body si completa prima di uscire da
+    #    draft, e segnalarlo prima sarebbe solo rumore.
+    #  - `engine-lockstep-auto` e' la PR del MIRROR dell'engine: il suo body lo
+    #    genera il workflow del sito, non un agente di qui, e pretendere il
+    #    contratto umano su di essa e' un errore di categoria. Non e'
+    #    accademico: quella PR ha il proprio auto-merge dedicato
+    #    (`auto-merge-engine-lockstep.yml`), che tratta un check rosso come
+    #    non-evento ed esce 0 — quindi un fallimento QUI la blocca in silenzio.
+    #    E' il canale con cui le correzioni all'engine scendono dal sito: gia'
+    #    una volta si e' interrotto senza che nulla lo dicesse, e nove commit
+    #    non sono mai arrivati.
+    if: >-
+      github.event.pull_request.draft == false &&
+      github.event.pull_request.head.ref != 'engine-lockstep-auto'
     runs-on: ubuntu-latest
     timeout-minutes: 6
     steps:

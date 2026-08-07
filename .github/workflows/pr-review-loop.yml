@@ -59,9 +59,15 @@ jobs:
       # minimal. Sorgente unica: sia il re-review guard sia la tier-decision
       # leggono questa var, mai una regex duplicata.
       NONCODE_RE: '^(content/|data/|dist/|public/)|(^|/)(package-lock\.json)$|\.(snap|png|jpe?g|webp|gif|svg|ico|woff2?)$'
+    # `engine-lockstep-auto` e' escluso: e' la PR del mirror dell'engine, il cui
+    # contenuto e' gia' stato reviewato SUL SITO prima di essere mirrorato.
+    # Reviewarlo di nuovo qui spende quota condivisa per ripetere un giudizio
+    # gia' dato, e — peggio — un `## LGTM` negato blocca il suo auto-merge
+    # dedicato, cioe' il canale con cui le correzioni all'engine scendono.
     if: >-
       github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.event == 'pull_request'
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.head_branch != 'engine-lockstep-auto'
     steps:
       # ── Risolvi la PR dalla head del run di `tests` ──────────────────────
       # Un evento workflow_run NON porta la PR: la si risolve dall'head_sha

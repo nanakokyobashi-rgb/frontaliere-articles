@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "f3846a9be9fbc396",
+        "corpus": "b1654ab15577a976",
         "alignedAt": "2026-08-07"
       }
     },
@@ -286,7 +286,7 @@
       "reason": "Stessa struttura del sito (trigger su workflow_run di `tests`, re-review guard, tier, debounce, prefetch, classificazione degli errori API). Divergono NONCODE_RE e funnel_crit, che puntano all'albero di questo repo: qui il grosso e' content/ (14.888 file) e il codice funnel-critical e' generator/, engine/, host/ e gli emitter di dist/api/. Escluso il proxy Headroom.",
       "baseline": {
         "site": "6be9dd2d95c644a9",
-        "corpus": "e5ae1c2d2c117191",
+        "corpus": "b7826bd6e68803ba",
         "alignedAt": "2026-08-07"
       }
     },
@@ -559,7 +559,7 @@
       "reason": "Sottoinsieme generico di quello del sito: solo le due verifiche sul contratto del body, senza i check di dominio del sito. Zero Claude — intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa.",
       "baseline": {
         "site": "b607ffd26f01ce20",
-        "corpus": "56de197f2233954b",
+        "corpus": "10dbc9d8810f0923",
         "alignedAt": "2026-08-07"
       }
     },
