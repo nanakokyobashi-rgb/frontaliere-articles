@@ -71,12 +71,26 @@ const LOOKBACK_MIN = Number(val('--lookback-min', '40'));
 const MAX_ISSUES = Number(val('--max-issues', '5'));
 const GATE = Number(val('--gate', '3'));
 const REPO = process.env.GITHUB_REPOSITORY || '';
-const IGNORE = new Set(
-  (process.env.IGNORE_WORKFLOWS || 'Claude token smoke')
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-);
+/**
+ * Lista dei workflow da ignorare, dal valore grezzo della env.
+ *
+ * `??` e non `||`, ed e' la differenza che conta: con `||` la stringa VUOTA e'
+ * falsy, quindi impostare `IGNORE_WORKFLOWS: ''` per dire "non ignorare
+ * niente" otterrebbe in silenzio l'esatto contrario — la lista di default.
+ * Il default vale solo quando la variabile non e' proprio definita.
+ *
+ * Trovato dalla review automatica sulla PR #15, al primo giro reale del ciclo.
+ */
+export function parseIgnoreList(raw) {
+  return new Set(
+    (raw ?? '')
+      .split(',')
+      .map((s) => s.trim())
+      .filter(Boolean),
+  );
+}
+
+const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
 
 function gh(args, fallback = '') {
   try {
@@ -229,13 +243,17 @@ async function main() {
   return 0;
 }
 
-main().then(
-  (c) => process.exit(c),
-  (e) => {
-    // PROCEED-SAFE: uno scanner rotto non deve far fallire il workflow che lo
-    // ospita, altrimenti il rilevatore di fallimenti diventa esso stesso un
-    // fallimento ricorrente da segnalare.
-    console.error(`[scan-failed-runs] errore non fatale: ${e && e.stack ? e.stack : e}`);
-    process.exit(0);
-  },
-);
+// Solo in modalita' CLI: senza guardia, importare questo modulo da un test lo
+// eseguirebbe — e questo script apre issue sul repo.
+if (process.argv[1] && process.argv[1].endsWith('scan-failed-runs.mjs')) {
+  main().then(
+    (c) => process.exit(c),
+    (e) => {
+      // PROCEED-SAFE: uno scanner rotto non deve far fallire il workflow che lo
+      // ospita, altrimenti il rilevatore di fallimenti diventa esso stesso un
+      // fallimento ricorrente da segnalare.
+      console.error(`[scan-failed-runs] errore non fatale: ${e && e.stack ? e.stack : e}`);
+      process.exit(0);
+    },
+  );
+}
