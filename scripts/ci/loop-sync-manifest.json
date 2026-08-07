@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "ab196e4c220e1e05",
+        "corpus": "633e932eef92e8c1",
         "alignedAt": "2026-08-07"
       }
     },
@@ -569,7 +569,7 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "c33bdb48e7ab2d6d",
+        "corpus": "1286d7dc6f3a28f6",
         "alignedAt": "2026-08-07"
       }
     },
@@ -599,7 +599,7 @@
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito.",
       "baseline": {
         "site": "cc1466b7e98b8d94",
-        "corpus": "6816b51fdce1576f",
+        "corpus": "f2697242e1a68320",
         "alignedAt": "2026-08-07"
       }
     },
