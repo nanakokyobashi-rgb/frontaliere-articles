@@ -9316,6 +9316,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.graffio-nella-barba-locarno-film-festival.title': 'The scratch on the beard of the artistic director at the Locarno Film Festival',
     'blog.article.graffio-nella-barba-locarno-film-festival.excerpt': 'In the soft and voluminous beard of the artistic director lies a declaration of intent for Swiss cinema, with investments increasing by 25% in 2025.',
     'blog.article.graffio-nella-barba-locarno-film-festival.imageAlt': 'Well-groomed beard of the artistic director at Locarno Film Festival in front of Piazza Grande',
+    'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio simonetti, monsieur peur: the special pardo at the Locarno film festival',
+    'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Horror soundtrack composer awarded a special Pardo at the Locarno Film Festival for scoring the genre from Deep Red onwards',
+    'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti conducting Profondo rosso score at Locarno Film Festival',
 };
 
 export default blogMetaEn;

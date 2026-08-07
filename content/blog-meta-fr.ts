@@ -9318,6 +9318,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.graffio-nella-barba-locarno-film-festival.title': 'La rayure dans la barbe du directeur artistique au Locarno Film Festival',
     'blog.article.graffio-nella-barba-locarno-film-festival.excerpt': 'Dans la barbe molle et volumineuse du directeur artistique se cache une déclaration d’intention pour le cinéma suisse, avec des investissements en hausse de 25 % en 2025.',
     'blog.article.graffio-nella-barba-locarno-film-festival.imageAlt': 'Barbe bien entretenue du directeur artistique au Festival du film de Locarno devant la Piazza Grande',
+    'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio Simonetti, monsieur peur : le pardo spécial',
+    'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Le compositeur de bandes sonores d\'horreur récompensé par un Pardo spécial au Locarno Film Festival pour avoir marqué le genre à partir de Profond rouge',
+    'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti dirigeant la bande originale de Profondo rosso au Festival du film de Locarno',
 };
 
 export default blogMetaFr;

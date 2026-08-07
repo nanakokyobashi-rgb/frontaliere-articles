@@ -9315,6 +9315,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.graffio-nella-barba-locarno-film-festival.title': 'Das Kratzen im Bart des künstlerischen Leiters beim Locarno Film Festival',
     'blog.article.graffio-nella-barba-locarno-film-festival.excerpt': 'Im weichen und voluminösen Bart des künstlerischen Leiters verbirgt sich eine Absichtserklärung für das Schweizer Kino, mit Investitionen, die bis 2025 um 25% steigen.',
     'blog.article.graffio-nella-barba-locarno-film-festival.imageAlt': 'Gepflegter Bart des künstlerischen Leiters beim Locarno Film Festival vor der Piazza Grande',
+    'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio simonetti, monsieur peur: der besondere Pardo beim Locarno Filmfestival',
+    'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Der Komponist von Horror-Soundtracks wurde beim Locarno Film Festival mit einem besonderen Pardo ausgezeichnet, weil er das Genre von Deep Red ab markiert hat',
+    'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti dirigiert die Profondo rosso-Musik am Locarno Film Festival',
 };
 
 export default blogMetaDe;

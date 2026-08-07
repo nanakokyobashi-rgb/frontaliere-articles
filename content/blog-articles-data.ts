@@ -27966,6 +27966,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'claudio-simonetti-monsieur-peur',
+ category: 'novita',
+ date: '2026-08-07T05:52:34.300Z',
+ image: '/images/blog/claudio-simonetti-monsieur-peur.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
