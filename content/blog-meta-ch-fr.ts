@@ -1909,6 +1909,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.title': 'Impôt cantonal comparaison Suisse 2026 canton Bâle',
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.excerpt': 'Comparaison 2026 des taux cantonaux en Suisse : focus sur Bâle avec des données sur AD/AC 1,1%, LAA 0,7–1,5%, LPP 7–18% et franchise frontalière € 10\'000.',
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.imageAlt': 'Vue aérienne de Bâle sur le Rhin avec immeubles de bureaux et architecture suisse traditionnelle',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.title': 'Caisses de chômage, les problèmes techniques sont en grande partie surmontés',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.excerpt': 'Après des mois de retards de paiement, le SECO annonce que les dysfonctionnements du nouveau système informatique ont été résolus. Il reste cependant quelques points critiques.',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.imageAlt': 'une scène de travail à la direction de la sécurité sociale (SECO) à Berne, avec des employés qui résolvent des problèmes techniques aux ordinateurs',
 };
 
 export default blogMetaChFr;

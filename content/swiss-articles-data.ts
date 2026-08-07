@@ -5725,6 +5725,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'casse-di-disoccupazione-superati-i-problemi-tecnici',
+    category: 'pratico',
+    date: '2026-08-07T05:27:14.916Z',
+    image: '/images/blog/casse-di-disoccupazione-superati-i-problemi-tecnici.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

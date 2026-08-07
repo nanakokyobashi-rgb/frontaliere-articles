@@ -24704,6 +24704,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casse-di-disoccupazione-superati-i-problemi-tecnici': {
+    title: 'Casse di disoccupazione, superati in gran parte i problemi tecnici',
+    description: 'La SECO annuncia che i problemi tecnici del nuovo sistema informatico SIPAD 2.0 sono stati superati. I ritardi nei pagamenti delle indennità di disoccupazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, casse, disoccupazione, superati, gran',
+    ogTitle: 'Casse di disoccupazione, superati in gran parte i problemi tecnici',
+    ogDescription: 'La SECO annuncia che i problemi tecnici del nuovo sistema informatico SIPAD 2.0 sono stati superati. I ritardi nei pagamenti delle indennità di disoccupazione',
+    canonicalPath: '/articoli-svizzera/casse-di-disoccupazione-superati-i-problemi-tecnici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casse di disoccupazione, superati in gran parte i problemi tecnici",
+      "description": "La SECO annuncia che i problemi tecnici del nuovo sistema informatico SIPAD 2.0 sono stati superati. I ritardi nei pagamenti delle indennità di disoccupazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/casse-di-disoccupazione-superati-i-problemi-tecnici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "una scena di lavoro nella sede della SECO a Berna, con impiegati che risolvono problemi tecnici al computer"
+      },
+      "datePublished": "2026-08-07T05:27:14+00:00",
+      "dateModified": "2026-08-07T05:27:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/casse-di-disoccupazione-superati-i-problemi-tecnici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

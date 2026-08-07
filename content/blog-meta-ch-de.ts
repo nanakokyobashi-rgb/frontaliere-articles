@@ -1909,6 +1909,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.title': 'Kantonssteuer Vergleich Schweiz 2026 Kanton Basel',
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.excerpt': 'Vergleich 2026 der kantonalen Steuersätze in der Schweiz: Fokus auf Basel mit Daten zu AD/AC 1,1%, UVG 0,7-1,5%, BVG 7-18% und Grenzfranchise € 10\'000.',
     'blog.article.imposta-cantonale-confronto-svizzera-2026-canton-basilea.imageAlt': 'Luftaufnahme von Basel am Rhein mit Bürogebäuden und traditioneller Schweizer Architektur',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.title': 'Arbeitslosenkassen, technische Probleme weitestgehend überwunden',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.excerpt': 'Nach monatelangen Zahlungsverzögerungen gibt das SECO bekannt, dass die Störungen des neuen IT-Systems behoben sind. Es gibt jedoch noch einige kritische Punkte.',
+    'blog.article.casse-di-disoccupazione-superati-i-problemi-tecnici.imageAlt': 'ein Bild von Arbeitnehmern im SECO-Hauptquartier in Bern, die technische Probleme lösen',
 };
 
 export default blogMetaChDe;
