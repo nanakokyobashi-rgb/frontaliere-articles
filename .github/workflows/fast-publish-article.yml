@@ -323,10 +323,20 @@ jobs:
           # questo gate difende i BYTE che stanno per essere pushati, quindi regge anche se
           # un domani il rewrite si sposta altrove.
           #
-          # Il pattern è ancorato a `src="` / `href="`: la pagina sana contiene comunque un
-          # `href*="/assets/"` dentro un selettore CSS inline (lo swap del media print), che
-          # non è un riferimento a risorsa e non deve far fallire nulla.
-          asset_rx='(src|href)="/assets/[^"]'
+          # Il pattern arriva da `host/shared/cdnAssetOffloadRx.mjs`, che e' la sorgente
+          # unica di questo matcher (AGENTS.md #6). Non e' pignoleria: la docstring di
+          # quel file racconta che due consumer ne portavano una copia 1:1 fatta a mano, e
+          # che se divergono il deploy spedisce un 404 — un `/assets/` same-origin che lo
+          # step di Drop ha cancellato dall'artefatto ma che la pagina ancora referenzia.
+          #
+          # Il canonico e' anche piu' largo di quanto lo fosse la copia a mano: copre gli
+          # apici SINGOLI e gli `url(...)` dei CSS, che il pattern precedente lasciava
+          # passare in silenzio. E resta immune al falso positivo che quella copia evitava
+          # per ancoraggio — il `href*="/assets/"` dentro un selettore CSS inline (lo swap
+          # del media print) — perche' esige un'estensione di file vera dopo il path:
+          # verificato su entrambi i casi piu' gli URL gia' offloadati sul CDN, che non
+          # devono far fallire nulla.
+          asset_rx="$(node --input-type=module -e "import {ASSETS_SAME_ORIGIN_ERE} from './host/shared/cdnAssetOffloadRx.mjs'; process.stdout.write(ASSETS_SAME_ORIGIN_ERE);")"
           {
             jq -r '.shards[].paths[]' "$summary"
             [ -s "$RUNNER_TEMP/hub-landing.json" ] && jq -r '.pages[].path' "$RUNNER_TEMP/hub-landing.json"
