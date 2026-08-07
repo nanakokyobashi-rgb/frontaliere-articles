@@ -76,7 +76,16 @@ export function classifyIssue(title = '', labels = []) {
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
   const autofix = true;
-  const route = category === 'publish' ? 'fix' : 'queue';
+  // `crawler-transient` è l'esito, non un bug da instradare: la issue è già la
+  // ledger (o un commento su di essa) che assorbe i blip sotto-soglia — vedi
+  // `findOrCreateTransientLedger` in `github-issue-creator.mjs`. Instradarla al
+  // fixer brucia un run per niente: era già il comportamento esplicito di
+  // `triage-sweep.mjs` ("routarle brucerebbe issue-fix per nulla"), ma solo
+  // quel percorso lo applicava — il triage event-driven (`issue-triage.yml`)
+  // instradava comunque, ed è così che la ledger stessa (`crawler-transient`
+  // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
+  // vive qui, sorgente unica per entrambi i percorsi.
+  const route = has('crawler-transient') ? 'none' : category === 'publish' ? 'fix' : 'queue';
   const fuPrio =
     route === 'queue'
       ? has('priority:high') ||
