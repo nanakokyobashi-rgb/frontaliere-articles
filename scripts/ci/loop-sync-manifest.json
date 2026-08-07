@@ -1,0 +1,693 @@
+{
+  "_doc": [
+    "Registro dei file del ciclo autonomo condivisi con valerielinc-ops/frontaliere-si-o-no.",
+    "Letto da scripts/ci/loop-drift-check.mjs, che NON confronta i due lati fra loro ma",
+    "entrambi contro la `baseline` — l'hash dei due file al momento dell'ultimo allineamento",
+    "cosciente. E' quello a rendere la diagnosi utile: dice CHI si e' mosso, non solo che",
+    "sono diversi. Vedi l'intestazione dello script per le quattro classi.",
+    "",
+    "mode:",
+    "  identical   — deve restare byte-identico al sito; una modifica la' e' copiabile qui.",
+    "  adapted     — differisce di proposito; `reason` spiega perche'. Resta sorvegliato:",
+    "                e' proprio sui file adattati che una modifica del sito si perde,",
+    "                perche' 'tanto e' diverso apposta'.",
+    "  corpus-only — non esiste sul sito.",
+    "  not-ported  — il sito ce l'ha, qui deliberatamente no; `reason` spiega perche'.",
+    "",
+    "Dopo un allineamento voluto: `node scripts/ci/loop-drift-check.mjs --init`."
+  ],
+  "siteRepo": "valerielinc-ops/frontaliere-si-o-no",
+  "siteRef": "main",
+  "alignedAt": "2026-08-06",
+  "files": [
+    {
+      "path": "scripts/ci/alert-pat-down.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a0b8956a6e389cb8",
+        "corpus": "a0b8956a6e389cb8",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/auto-merge-eval.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b405aabb5dc8a3b7",
+        "corpus": "b405aabb5dc8a3b7",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/auto-merge-sweep.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "d3eb47642f8c151e",
+        "corpus": "d3eb47642f8c151e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/check-issue-already-resolved.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "9464562c14d306a6",
+        "corpus": "9464562c14d306a6",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/check-quota-backoff.mjs",
+      "mode": "adapted",
+      "baseline": {
+        "site": "7926b298503c143d",
+        "corpus": "c474b254aff5b326",
+        "alignedAt": "2026-08-06"
+      },
+      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead)."
+    },
+    {
+      "path": "scripts/ci/check-workflows-scope.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4e9cdf43a03efb7e",
+        "corpus": "4e9cdf43a03efb7e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/claim-issue-in-flight.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7e144e72470c6daf",
+        "corpus": "7e144e72470c6daf",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/claude-rate-limit.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "30cee9619a3f49af",
+        "corpus": "30cee9619a3f49af",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/claude-usage-summary.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e485429ea717dfaf",
+        "corpus": "e485429ea717dfaf",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/followup-resolution-match.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "64da1ac9881f00e1",
+        "corpus": "64da1ac9881f00e1",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/mint-app-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "74fcea5905fe2b70",
+        "corpus": "74fcea5905fe2b70",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/pr-autorebase.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "f57631a27795d573",
+        "corpus": "f57631a27795d573",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/pr-collision-detector.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "abea5394c95a1452",
+        "corpus": "abea5394c95a1452",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/pr-contribution-fingerprint.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "566902d2f27a3f4c",
+        "corpus": "566902d2f27a3f4c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/scan-job-timeouts.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7a2599a9bae3c9c3",
+        "corpus": "7a2599a9bae3c9c3",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/prComments.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "69363f2f81925e6b",
+        "corpus": "69363f2f81925e6b",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/vitestCheck.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ef1d69bc8d64958f",
+        "corpus": "ef1d69bc8d64958f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/github-issue-creator.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "229470d3fca385ad",
+        "corpus": "229470d3fca385ad",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/pr-body-closes-check.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1896ec1f1c286bb1",
+        "corpus": "1896ec1f1c286bb1",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/pr-body-sections-check.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "17654ae277bb9f4d",
+        "corpus": "17654ae277bb9f4d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/workflow-scope-detect.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "82956457a60d14b2",
+        "corpus": "82956457a60d14b2",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/constants.mjs",
+      "mode": "adapted",
+      "reason": "Il check-run atteso dall'auto-merge qui si chiama `tests (node --test)`, non `vitest (unit + integration)`: questo repo non usa vitest. Differisce UNA riga; il nome dell'export resta `VITEST_CHECK_NAME` proprio per non far divergere i tre consumer (auto-merge-eval, pr-autorebase, vitestCheck), che restano identici e copiabili. Il valore e' sovrascrivibile via env CI_CHECK_NAME: il giorno in cui il sito adotta la stessa riga, i due file tornano identici e questa voce diventa `identical`.",
+      "baseline": {
+        "site": "1a8ac5c935d29d8f",
+        "corpus": "38fa70152f8d238d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/githubApiHeaders.mjs",
+      "mode": "adapted",
+      "reason": "Sul sito e' un re-export da functions/src/githubApiHeaders.js, perche' li' il builder deve finire nel bundle delle Cloud Functions. Questo repo non ha functions/ e non deploya nulla del genere, quindi l'implementazione e' inline. Attenzione: il pin X-GitHub-Api-Version ora esiste in due copie.",
+      "baseline": {
+        "site": "20e4e76243cb60b0",
+        "corpus": "bb17921f280d33c5",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/tests.yml",
+      "mode": "adapted",
+      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome.",
+      "baseline": {
+        "site": "5fa890e4a23a6619",
+        "corpus": "69fb6e3c4efa522c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/loop-drift-check.mjs",
+      "mode": "corpus-only",
+      "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
+      "baseline": {
+        "site": null,
+        "corpus": "81ab848a828d9979",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/loop-sync-manifest.json",
+      "mode": "corpus-only",
+      "reason": "Questo file.",
+      "baseline": {
+        "site": null,
+        "corpus": "06bc50c9c03e2cca",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/ci-check-name.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Equivalente in node:test del guard vitest del sito (tests/ci-vitest-check-name.test.ts): lega il valore di VITEST_CHECK_NAME al `name:` del job in tests.yml. Non e' `identical` perche' il sito lo scrive in TypeScript per vitest e qui non c'e' ne' l'uno ne' l'altro.",
+      "baseline": {
+        "site": null,
+        "corpus": "2160bdb2756d1c25",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/lessons-harvester.yml",
+      "mode": "adapted",
+      "reason": "Solo la cadenza (53 5 invece di 17 5). NB: la mia esclusione iniziale era sbagliata — lo step Claude e' gatato su has_novel=='true', quindi senza pattern nuovi il workflow esce a costo ZERO, non brucia una run al giorno.",
+      "baseline": {
+        "site": "4eee66a5917239d8",
+        "corpus": "8fa19800e54df34d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-review-loop.yml",
+      "mode": "adapted",
+      "reason": "Stessa struttura del sito (trigger su workflow_run di `tests`, re-review guard, tier, debounce, prefetch, classificazione degli errori API). Divergono NONCODE_RE e funnel_crit, che puntano all'albero di questo repo: qui il grosso e' content/ (14.888 file) e il codice funnel-critical e' generator/, engine/, host/ e gli emitter di dist/api/. Escluso il proxy Headroom.",
+      "baseline": {
+        "site": "6be9dd2d95c644a9",
+        "corpus": "e5ae1c2d2c117191",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/auto-merge-on-lgtm.yml",
+      "mode": "adapted",
+      "reason": "Identita' di merge = GITHUB_PAT_NANAKO da Remote Config (questo repo e' di un altro account e non ha la GitHub App del sito); ponte RC in generator/scripts/load-rc-env.mjs; nessun npm ci. In piu' una rete di sicurezza che non esiste sul sito: se il merge avviene col GITHUB_TOKEN di fallback, l'anti-ricorsione impedisce a publish-api.yml di partire e la superficie dati resterebbe vecchia in silenzio — lo step finale la dispatcha esplicitamente.",
+      "baseline": {
+        "site": "1d807b8fdfebeefc",
+        "corpus": "c810a90b47eb97ea",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/close-recovered-failure-issues.yml",
+      "mode": "adapted",
+      "reason": "Solo la cadenza cambia: :47 invece del :17 del sito, per non sommare i picchi sulla stessa API. Lo script sottostante e' identical.",
+      "baseline": {
+        "site": "f7c6be4644c56dc2",
+        "corpus": "9f0f6678fdaec04d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/close-recovered-failure-issues.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "985a3c299fa2753a",
+        "corpus": "985a3c299fa2753a",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/workflow-failure-issues.yml",
+      "mode": "corpus-only",
+      "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire.",
+      "baseline": {
+        "site": null,
+        "corpus": "eab404ca15a9d5d8",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/scan-failed-runs.mjs",
+      "mode": "corpus-only",
+      "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM).",
+      "baseline": {
+        "site": null,
+        "corpus": "5b43f15b106f0af0",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "REVIEW.md",
+      "mode": "adapted",
+      "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
+      "baseline": {
+        "site": "4198ed3448ecc9e6",
+        "corpus": "13d07dd907494123",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/actions/setup-headroom/action.yml",
+      "mode": "identical",
+      "reason": "Proxy di compressione del contesto (la voce punta ad action.yml: il manifest indicizza file, non cartelle). del contesto: sul sito risparmia quota, ma installa da PyPI a ogni run e aggiunge superficie di fallimento su un ciclo appena nato. Da rivalutare quando il ciclo sara' stabile — e' un risparmio di quota, quindi vale la pena.",
+      "baseline": {
+        "site": "a4be46d61d7904b8",
+        "corpus": "a4be46d61d7904b8",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/loop-drift-check.yml",
+      "mode": "corpus-only",
+      "reason": "Il workflow che esegue il rilevatore di divergenza. Vive solo qui: e' questo il lato che riceve il ciclo, il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
+      "baseline": {
+        "site": null,
+        "corpus": "636e787ec850895c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/followup-drainer.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b849f695a95955ba",
+        "corpus": "b849f695a95955ba",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/run-budget.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "1ce4e20c19a79fdf",
+        "corpus": "1ce4e20c19a79fdf",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e0835498f050dce5",
+        "corpus": "e0835498f050dce5",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/triage-sweep.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "cb74e3305444dac5",
+        "corpus": "cb74e3305444dac5",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/classify-issue.mjs",
+      "mode": "adapted",
+      "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci.",
+      "baseline": {
+        "site": "04d09fd104293724",
+        "corpus": "9f7e74cc6ea2022a",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/issue-triage.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci; ponte RC in generator/scripts/load-rc-env.mjs; token di routing GITHUB_PAT_NANAKO, esposto a triage-sweep.mjs col nome GITHUB_PAT che lo script legge (mappare qui tiene lo script byte-identico invece di forkarlo); cadenza sweep sfasata.",
+      "baseline": {
+        "site": "820646b283567a83",
+        "corpus": "d0a7c7dd7bcac1b8",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/issue-fix.yml",
+      "mode": "adapted",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati).",
+      "baseline": {
+        "site": "289881edc3c42140",
+        "corpus": "1c5bf29dbc52be66",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/followup-drainer.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci; ponte RC del corpus; promozione via GITHUB_PAT_NANAKO; cadenza sfasata dal sito.",
+      "baseline": {
+        "site": "d9409a02c28b646a",
+        "corpus": "b51bd246fac7389d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": "adapted",
+      "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test.",
+      "baseline": {
+        "site": "2152ed23b82968b2",
+        "corpus": "0860b171ac7b0751",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "ISSUES.md",
+      "mode": "adapted",
+      "reason": "Contratto del fixer adattato: categorie di questo repo, gate test node --test, e la catena assorbente del 429 descritta con i numeri del sito perche' e' la ragione per cui la telemetria FIX_OUTCOME e' obbligatoria.",
+      "baseline": {
+        "site": "9c762fb417106a95",
+        "corpus": "df3818f0efb4ccb7",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/classify-issue.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Equivalente in node:test del guard vitest del sito. Due dei test coprono l'ORDINE delle regex: `fast-publish-article` non deve essere catturato dalla categoria publish (8 fallimenti transienti a settimana salterebbero la coda), e un vero publish-api non deve finire in generation.",
+      "baseline": {
+        "site": null,
+        "corpus": "ef5f1d89c878dd13",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/duplicateDeclarations.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c3f48eb83de91627",
+        "corpus": "c3f48eb83de91627",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/lib/secrets-scope-detect.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7de8e2060fb167b2",
+        "corpus": "7de8e2060fb167b2",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/mergePreviewCheck.mjs",
+      "mode": "adapted",
+      "reason": "Sul sito importa duplicateDeclarations.mjs staticamente, e quello importa `typescript`, che questo repo non ha fra le dipendenze. Con l'import statico auto-merge-eval.mjs non si CARICA: l'auto-merge fallirebbe su ogni PR con ERR_MODULE_NOT_FOUND prima di valutare qualunque gate. Aggiungere npm ci al workflow di merge costerebbe playwright+sharp+transformers a ogni merge, per un gate che qui vale poco (intercetta un SyntaxError di esbuild al merge, e questo repo builda con tsx). Quindi typescript viene risolto a runtime e, se assente, il check si dichiara saltato — stesso pattern di skip conservativo che il file gia' usa per rete/sha/merge-tree. Se typescript entrasse fra le dipendenze, il gate si riattiva da solo.",
+      "baseline": {
+        "site": "3ec37d147e81605b",
+        "corpus": "04a9c890ea333451",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/loop-scripts-closure.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard nato da un difetto reale del porting: node --check valida la sintassi ma non segue gli import, quindi tre file mancanti sono passati indenni da ogni controllo e avrebbero rotto l'auto-merge su ogni PR. Risolve l'albero staticamente (non importa: quasi tutti gli script hanno una modalita' CLI e alcuni chiamano l'API GitHub) e verifica anche che non compaiano dipendenze npm non dichiarate, perche' e' il girare-senza-npm-ci a rendere economico il ciclo su questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "487404ca92096032",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/auto-merge-sweep.yml",
+      "mode": "adapted",
+      "reason": "Identita' di merge GITHUB_PAT_NANAKO, CI_CHECK_NAME di questo repo, niente npm ci, cadenza sfasata (12,42 invece di */15). La logica di gate resta in auto-merge-eval.mjs, condivisa con l'auto-merge event-driven.",
+      "baseline": {
+        "site": "6512a455eeb91262",
+        "corpus": "56d67d1ff1324e57",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-collision-detector.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, cadenza sfasata (18,48). Lo script sottostante e' identical.",
+      "baseline": {
+        "site": "a894d9b0a3b2b2cc",
+        "corpus": "890026f621187114",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-autorebase.yml",
+      "mode": "adapted",
+      "reason": "Identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52).",
+      "baseline": {
+        "site": "3881f7aff32b5e5d",
+        "corpus": "9898137394c5554e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/pr-body-contract.mjs",
+      "mode": "corpus-only",
+      "reason": "Runner del gate sul body. I due moduli che fanno il lavoro (pr-body-sections-check, pr-body-closes-check) sono condivisi col sito e restano `identical`; questo e' solo la colla — il pr-body-contract.yml del sito incorpora invece una decina di check del suo dominio (CLS degli slot pubblicitari, lookbehind client, pattern sibling) che qui non hanno senso.",
+      "baseline": {
+        "site": null,
+        "corpus": "fc59c832f678d46e",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-body-contract.yml",
+      "mode": "adapted",
+      "reason": "Sottoinsieme generico di quello del sito: solo le due verifiche sul contratto del body, senza i check di dominio del sito. Zero Claude — intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa.",
+      "baseline": {
+        "site": "b607ffd26f01ce20",
+        "corpus": "56de197f2233954b",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/ensure-loop-labels.mjs",
+      "mode": "corpus-only",
+      "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
+      "baseline": {
+        "site": null,
+        "corpus": "2bb3e4f154873c7f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/loop-labels.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Copre due modi di sbagliare gia' capitati: una descrizione oltre i 100 caratteri (GitHub la rifiuta con un errore generico — e' costata la mancata creazione di agent:in-progress, l'unica che serve al mutex, mentre le altre dodici passavano), e un valore di fu-prio emesso dal classificatore senza la label corrispondente. Il secondo test prende i valori possibili dalla loro SORGENTE invece di indovinarli: il controllo per prefisso si accontentava di un membro qualsiasi della famiglia e non vedeva la rimozione di fu-prio:high.",
+      "baseline": {
+        "site": null,
+        "corpus": "4be008f730283c1d",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/stale-pr-rescuer.yml",
+      "mode": "adapted",
+      "reason": "Il nome del check-run sul sito e' hardcoded DUE volte dentro jq; qui arriva da CI_CHECK_NAME e viene passato con --arg. Un literal in piu' nello YAML sarebbe una seconda sorgente di verita' per lo stesso valore — la classe di drift che ci-check-name.test.mjs sorveglia, e che dentro una stringa jq nessun test vedrebbe. Cadenza :35.",
+      "baseline": {
+        "site": "e309ac041a8cc34a",
+        "corpus": "0186cb72bef9d3cd",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/recycle-stale-prs.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito.",
+      "baseline": {
+        "site": "cc1466b7e98b8d94",
+        "corpus": "6816b51fdce1576f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/pr-redflag-fixer.yml",
+      "mode": "adapted",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico.",
+      "baseline": {
+        "site": "b456c412e8ae9075",
+        "corpus": "3e7c07bca43b6c78",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/workflows/post-merge-followup.yml",
+      "mode": "adapted",
+      "reason": "Tre adattamenti sostanziali: FOLLOWUP_ELIGIBLE_AUTHORS con gli autori di QUESTO repo (senza, il filtro resta quello del sito e il batch sarebbe SEMPRE vuoto — il workflow girerebbe ogni tre ore senza trovare nulla e senza un errore); il gate autore dentro il prompt allineato; QUOTA_BEACON_PEER_REPO per cedere al sito; cron 40 */3 sfasato.",
+      "baseline": {
+        "site": "7ebca8a5727691c2",
+        "corpus": "e3e038db53e07967",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/actions/setup-headroom/install.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "383249ff404fb547",
+        "corpus": "383249ff404fb547",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": ".github/actions/setup-headroom/start.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "57e4d70f791b5ddb",
+        "corpus": "57e4d70f791b5ddb",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/collect-followup-batch.mjs",
+      "mode": "adapted",
+      "reason": "ELIGIBLE_AUTHORS ora legge FOLLOWUP_ELIGIBLE_AUTHORS. Sul sito e' un literal con i suoi account: lasciato cosi' avrebbe scartato ogni PR del corpus. L'override e' opzionale, quindi il file resta valido identico anche sul sito.",
+      "baseline": {
+        "site": "7e46173ed1e1334d",
+        "corpus": "e51f349de4cebfe2",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/harvest-agent-lessons.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "8b022bd8bcb08a44",
+        "corpus": "8b022bd8bcb08a44",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/false-positive-declaration.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "220daf74fa503c7f",
+        "corpus": "220daf74fa503c7f",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "FOLLOWUP.md",
+      "mode": "adapted",
+      "reason": "Stessa struttura del contratto del sito (gate anti-nipote, parse rules, i tre hard-exclude) con il filtro di scopo di questo repo.",
+      "baseline": {
+        "site": "ba86d79cae8e91ab",
+        "corpus": "22688b9eada13b5c",
+        "alignedAt": "2026-08-06"
+      }
+    },
+    {
+      "path": "generator/tests/followup-authors.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Lega FOLLOWUP_ELIGIBLE_AUTHORS nello YAML al filtro nel codice. Senza, il batch vuoto sarebbe indistinguibile da 'nessun follow-up da fare'.",
+      "baseline": {
+        "site": null,
+        "corpus": "fe42d6113d80f86a",
+        "alignedAt": "2026-08-06"
+      }
+    }
+  ]
+}

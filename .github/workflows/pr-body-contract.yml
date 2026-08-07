@@ -1,0 +1,53 @@
+name: PR body contract
+
+# Verifica che il body della PR rispetti il contratto di `REVIEW.md`: le due
+# sezioni con l'header letterale e con contenuto vero, e nessun
+# `Closes #a #b` sulla stessa riga (GitHub chiude solo la prima, le altre
+# restano aperte in silenzio).
+#
+# Zero Claude, e questo è il punto: il reviewer segnalerebbe comunque la
+# violazione come 🔴 process, ma spendendo un ciclo di review — quota condivisa
+# col sito — per dire una cosa che una regex sa. Qui la si intercetta prima.
+#
+# Il `pr-body-contract.yml` del sito è molto più grande perché incorpora una
+# decina di check del suo dominio (CLS degli slot pubblicitari, pattern dei
+# sibling…) che qui non hanno senso: questo è il sottoinsieme generico,
+# costruito sopra gli stessi due moduli condivisi, che restano sorvegliati dal
+# manifest.
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: pr-body-contract-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  contract:
+    # Le PR draft sono lavoro in corso: il body si completa prima di uscire da
+    # draft, e segnalarlo prima sarebbe solo rumore.
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Verifica il contratto del body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/pr-body-contract.mjs "${{ github.event.pull_request.number }}"

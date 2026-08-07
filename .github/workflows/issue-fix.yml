@@ -1,0 +1,320 @@
+name: Issue fix (Claude → PR)
+
+# Il fixer autonomo: prende una issue etichettata `agent:fix`, diagnostica,
+# applica un fix chirurgico e apre una PR — che poi entra nel ciclo di review e
+# auto-merge come qualunque altra.
+#
+# È il consumatore di quota più costoso del ciclo (~1M token per run sul sito),
+# ed è per questo che arriva per ultimo e dietro quattro cancelli a costo zero.
+#
+# ── I quattro pre-flight, e cosa impedisce ciascuno ─────────────────────────
+#
+# 1. quota backoff — se la quota Claude condivisa è esaurita, la run morirebbe
+#    su HTTP 429 al primo turno: zero turni, zero costo, ma lo slot serializzato
+#    occupato e la coda ferma. Sul sito questo è il 52% dei fallimenti del
+#    fixer, e 49 su 61 sono avvenuti dentro una finestra di rate-limit GIÀ nota.
+#    Qui il gate legge ANCHE il beacon del sito (`QUOTA_BEACON_PEER_REPO`): il
+#    429 è per-account, quindi un limite visto là è il nostro.
+# 2. already-resolved — la issue potrebbe essere già stata risolta da una PR
+#    mergiata nel frattempo.
+# 3. workflows-scope — se il fix richiede di toccare `.github/workflows/**` ma
+#    il token di push non ha lo scope, il push fallirebbe DOPO che il lavoro è
+#    stato fatto. Rilevarlo al turno 1 invece che alla fine è la differenza fra
+#    zero token e un milione.
+# 4. claim in-flight — mutua esclusione: due run sulla stessa issue.
+#
+# Tutti e quattro sono deterministici, zero Claude, e girano PRIMA dello step
+# che costa.
+#
+# ── ADATTAMENTI (manifest: `adapted`) ───────────────────────────────────────
+#  - Gate `sender`: accetta gli account del progetto (i due owner) e claude*.
+#    Sul sito è cablato su `valerielinc-ops`; qui la label di routing viene
+#    applicata dal PAT di questo repo, che è di un altro account.
+#  - Identità di push: `GITHUB_PAT_NANAKO`, non un token di GitHub App.
+#  - Gate dei test: `node --test`, non vitest. Niente `npm ci`.
+#  - Ponte Remote Config: `generator/scripts/load-rc-env.mjs`.
+
+on:
+  issues:
+    types: [labeled]
+
+# Un fixer alla volta. La coda `agent:fix-queued` esiste proprio perché questo
+# slot è serializzato: promuovere più issue insieme le farebbe morire
+# cancellate-in-coda.
+concurrency:
+  group: issue-fix
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  fix:
+    # La label È il consenso: solo chi ha accesso in scrittura può applicarla.
+    # Il gate sul sender è la cintura contro una label aggiunta da
+    # un'automazione esterna.
+    if: |
+      github.event.label.name == 'agent:fix' &&
+      (github.event.sender.login == 'nanakokyobashi-rgb' ||
+       github.event.sender.login == 'valerielinc-ops' ||
+       startsWith(github.event.sender.login, 'claude'))
+    runs-on: ubuntu-latest
+    # Il tetto vero del runner. Non è un budget: sono i minuti massimi prima che
+    # il lavoro già fatto venga ucciso a metà. Si pagano i minuti usati, non il
+    # tetto.
+    timeout-minutes: 360
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Le label di routing non si creano da sole: `gh issue edit --add-label`
+      # fallisce se la label non esiste, e nei workflow quel fallimento è un
+      # warning NON bloccante (di proposito: un routing mancato non deve
+      # diventare una run rossa). Senza questo step il ciclo girerebbe, loggerebbe
+      # e uscirebbe 0 — senza instradare nulla. Idempotente, costa una lista.
+      - name: Ensure loop labels exist (idempotente)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/ensure-loop-labels.mjs
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # ── Pre-flight 1: quota ───────────────────────────────────────────────
+      # Il primo di tutti, perché è quello che risparmia di più: quando la
+      # quota è esaurita chiude il job senza aver speso niente, e ri-accoda la
+      # issue SENZA consumarle un tentativo (una run che non ha nemmeno letto
+      # la issue non è un fallimento del fixer).
+      - name: Pre-flight — quota backoff gate (zero-Claude)
+        id: quota
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          # Precedenza a senso unico: cediamo alla quota del sito, il sito non
+          # cede mai alla nostra.
+          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      # ── Pre-flight 2: già risolta ─────────────────────────────────────────
+      - name: Pre-flight — already-resolved gate (zero-Claude)
+        id: preflight
+        if: steps.quota.outputs.quota_blocked != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node scripts/ci/check-issue-already-resolved.mjs
+
+      # ── Pre-flight 3: capability sui workflow ─────────────────────────────
+      # Solo quando NON c'è il PAT: col PAT il push su `.github/workflows/**`
+      # passa, e girare il guard toglierebbe una capacità che il run possiede.
+      - name: Pre-flight — workflows-scope capability guard (zero-Claude)
+        id: scope_guard
+        if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node scripts/ci/check-workflows-scope.mjs
+
+      # ── Pre-flight 4: mutua esclusione ────────────────────────────────────
+      - name: Pre-flight — in-progress claim gate (zero-Claude, mutex)
+        id: claim
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: node scripts/ci/claim-issue-in-flight.mjs
+
+      - name: Determine fix tier
+        id: tier
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+        # I cap turni sono anti-runaway sopra il p99 dei run sani, non budget di
+        # lavoro: un run che muore al cap brucia la quota intera e non consegna
+        # niente, che è peggio di qualche turno in più.
+        run: |
+          set -euo pipefail
+          labels_json=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json labels --jq '[.labels[].name]')
+          decision=$(node scripts/lib/classify-issue.mjs "$ISSUE_TITLE" "$labels_json")
+          cat=$(node -e "process.stdout.write(JSON.parse(process.argv[1]).category)" "$decision")
+          echo "category=$cat"
+
+          # Una issue aggregata (più item distinti) non entra in un solo run:
+          # tentarli tutti sfora il budget e non consegna NESSUNA PR. Il
+          # circuit-breaker nel prompt fixa UN item e deferisce il resto.
+          body=$(gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json body --jq '.body // ""')
+          agg_count=$(printf '%s' "$body" | grep -cE '^[[:space:]]*[-*][[:space:]]+' || true)
+          if [ "${agg_count:-0}" -ge 4 ]; then is_agg=true; else is_agg=false; fi
+          echo "is_aggregate=$is_agg" >> "$GITHUB_OUTPUT"
+          echo "agg_count=${agg_count:-0}" >> "$GITHUB_OUTPUT"
+
+          case "$cat" in
+            publish|engine) echo "tier=high"   >> "$GITHUB_OUTPUT"; echo "max_turns=60" >> "$GITHUB_OUTPUT" ;;
+            *)              echo "tier=normal" >> "$GITHUB_OUTPUT"; echo "max_turns=45" >> "$GITHUB_OUTPUT" ;;
+          esac
+          echo "model=claude-sonnet-5" >> "$GITHUB_OUTPUT"
+          echo "category=$cat" >> "$GITHUB_OUTPUT"
+
+      # Un run precedente può essere morto DOPO aver pushato il checkpoint WIP:
+      # in quel caso il branch esiste già su origin col diff reale, e ripartire
+      # da zero butterebbe lavoro già fatto e già pagato.
+      - name: Check for resumable WIP branch (zero-Claude)
+        id: resume
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -uo pipefail
+          if git ls-remote --exit-code --heads origin "fix/issue-$ISSUE_NUMBER" >/dev/null 2>&1; then
+            echo "resume=true" >> "$GITHUB_OUTPUT"
+            echo "Branch fix/issue-$ISSUE_NUMBER già su origin → resume."
+          else
+            echo "resume=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure git identity
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        env:
+          REPO: ${{ github.repository }}
+        run: |
+          set -uo pipefail
+          git config user.name  "claude-fixer[bot]"
+          git config user.email "claude-fixer[bot]@users.noreply.github.com"
+          if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
+            echo "push identity: PAT (i file .github/workflows/** sono pushabili se il PAT ha lo scope workflow)"
+          else
+            echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile)"
+          fi
+
+      - name: Run Claude fix
+        id: claude_fix
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          allowed_bots: 'github-actions[bot], claude[bot]'
+          show_full_output: true
+          claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
+          prompt: |
+            Sei l'agent di fix autonomo per la issue #${{ github.event.issue.number }} ("${{ github.event.issue.title }}"). Tier: ${{ steps.tier.outputs.tier }}, categoria: ${{ steps.tier.outputs.category }}.
+
+            Questo repo pubblica una superficie dati su HTTP (`dist/api/`) che `frontaliereticino.ch` consuma in produzione. **Il sito non ribuilda quando questo repo pubblica**: un errore qui è live subito.
+
+            **Bootstrap (in quest'ordine):**
+            1. Leggi `ISSUES.md` → "Fix flow" — contratto operativo del fixer.
+            2. Leggi `AGENTS.md` — non-negoziabili e architettura. VINCOLANTE.
+            3. Carica la issue: `gh issue view $ISSUE_NUMBER --json number,title,body,labels,comments`.
+
+            **Pre-condizioni (termina se falliscono):**
+            - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
+            - **Overlap sui file:** estrai i path target dal body. Se una PR aperta modifica già uno di quei file → commenta e TERMINA, per non creare un conflitto o un doppione. Nel dubbio (issue non file-specifica) procedi.
+            - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Il push di questo run usa un PAT: se ha lo scope `workflow`, modificare `.github/workflows/**` passa. Procedi normalmente, ma se il push di un workflow viene rifiutato NON insistere: documenta e termina con `blocked-workflows-scope`.' || 'Questo run ha solo il GITHUB_TOKEN, che NON ha lo scope `workflow`. Se il fix richiede di toccare `.github/workflows/**` il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: serve il PAT o una mano umana", e TERMINA SUBITO.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
+            - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }} (item=${{ steps.tier.outputs.agg_count }}).** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
+
+            **Fix flow:**
+            1. Branch isolato — **resume-aware** (`resume=${{ steps.resume.outputs.resume }}`): se `false`, `git checkout -b fix/issue-$ISSUE_NUMBER`. Se `true`, un run precedente è morto dopo il checkpoint: `git fetch origin fix/issue-$ISSUE_NUMBER && git checkout fix/issue-$ISSUE_NUMBER`, ispeziona con `git log --oneline origin/main..HEAD --stat` e CONTINUA da lì se il diff è pertinente; se è stale, `git reset --hard origin/main`. Usa giudizio, non è un automatismo.
+               Questo container è **già** un checkout isolato monouso: **non** creare worktree interni. La regola worktree-first vale per le sessioni locali con un `main` condiviso, non qui — crearne uno brucia turni rifacendo la meccanica del checkout.
+            2. Diagnosi della **root cause**, non del sintomo. **Budget:** se dopo ~15 turni non emerge una root cause chiara, NON continuare a scavare: restringi lo scope o termina pulito con outcome `no-root-cause`.
+            3. Fix chirurgico alla **CLASSE del bug, non al singolo file**. Niente refactor drive-by, ma per un fix di pattern (regex, guard, soglia, selettore) cerca con `rg` i gemelli in `generator/`, `engine/`, `host/`, `scripts/` e sweepa l'intera classe **nella stessa PR**, oppure giustifica ogni gemello non toccato in `## Non implementato`. Toccare i file gemelli con lo stesso antipattern non è drive-by: è il fix completo, e previene il 🔴 del reviewer che costerebbe due cicli di quota.
+            4. **Checkpoint WIP — commit e push IMMEDIATI.** Appena il fix è applicato, anche prima di testarlo: `git add -A && git commit -m "wip(issue-$ISSUE_NUMBER): checkpoint pre-test"` e `git push -u origin fix/issue-$ISSUE_NUMBER`. Se il run muore dopo questo punto il branch sopravvive col diff reale, recuperabile al retry. Senza checkpoint, un run morto per max-turns perde il 100% del lavoro col container.
+            5. Mai abbassare un quality gate o un test per far passare qualcosa.
+            6. **Gate test pre-PR (obbligatorio):** `node --test 'generator/tests/*.test.mjs'`. **Non** usare vitest: questo repo non ce l'ha. Non usare `npm test` cieco. Il glob è necessario — `node --test <dir>` su Node 22 collassa la cartella in un unico test fallito invece di scoprire i file. Rosso → fixa la root cause e rigira. Una PR coi test rossi non riceve review e resta ferma: è un ciclo sprecato.
+            7. Commit (no-op se dal checkpoint non è cambiato altro — una storia wip+fix sul branch va bene).
+            8. Push.
+            9. Apri la PR con `gh pr create`. Body OBBLIGATORIO:
+               ```
+               ## Implementato
+               - <cosa fa il fix>
+               Closes #$ISSUE_NUMBER
+
+               ## Non implementato (ancora)
+               - <scope non fatto + stato: in questa PR / PR concatenata #N / blocked: <causa>>
+               ```
+            10. La PR entra da sola nel ciclo di review e auto-merge. **NON mergiare a mano.**
+
+            **Vincoli:**
+            - Modifiche chirurgiche, root-cause, una issue alla volta.
+            - Mai toccare file fuori dallo scope — **eccetto i gemelli della stessa classe di bug** (passo 3): quelli SONO in scope.
+            - **CODE vs DATA:** `content/` (14.888 file), `dist/`, `data/`, `public/` NON sono codice da leggere riga per riga. Se la root cause è un drift dell'output, fixa il CODICE che lo genera. Campione → `Read` mirato. `rg` scopato al codice: `rg <pattern> generator engine host scripts -g '!content/**' -g '!dist/**'`.
+            - Se la root cause non è determinabile con confidenza → NON forzare un fix: commenta "Root cause non determinata: <cosa hai trovato>. Serve indagine umana." e TERMINA senza PR.
+            - **Telemetria (OBBLIGATORIO):** l'ULTIMO commento che posti sulla issue DEVE iniziare con un marker su riga propria: `<!-- FIX_OUTCOME: <code> -->`, con `<code>` fra `pr-created`, `blocked-workflows-scope`, `blocked-secrets`, `blocked-admin-settings`, `no-root-cause`, `overlap-skip`, `pr-already-open`, `already-fixed`. Se apri una PR e non posti altro, posta comunque un commento col solo marker. Senza marker, il drainer non sa distinguere un verdetto da una run morta e ri-accoda a vuoto.
+
+      - name: Claude usage metrics
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_fix.outputs.execution_file }}" "issue-fix"
+
+      # Distingue le morti: max-turns, 429, 5xx. Senza questo, un 429 (che ha
+      # `subtype: success` con `is_error: true`) è indistinguibile da una run
+      # morta, e la issue verrebbe ri-accodata contro un muro noto finché non
+      # esaurisce i tentativi e viene parcheggiata — poi chiusa in automatico
+      # senza che nessun agent l'abbia mai letta.
+      - name: Mark Claude terminal outcome (granular telemetry)
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          EXEC_FILE: ${{ steps.claude_fix.outputs.execution_file }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/ci/mark-claude-terminal-outcome.mjs
+
+      # Simmetrico al claim, e su OGNI percorso terminale (successo, blocco,
+      # max-turns, fallimento infra). `agent:in-progress` e' mutua esclusione,
+      # non uno stato: lasciato appeso su una issue aperta, la esclude dal fixer
+      # per SEMPRE — nessun errore, la issue semplicemente non viene piu' presa.
+      #
+      # I due gate insieme dicono "questo run aveva davvero il lock": lo step
+      # claim e' stato eseguito (non corto-circuitato da un gate a monte) E ha
+      # visto la issue libera. Cosi' non si rimuove mai un claim di qualcun altro.
+      - name: Release in-progress claim (zero-Claude, mutex)
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.claim.outcome != 'skipped' && steps.claim.outputs.in_flight != 'true'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          gh issue edit "$ISSUE" --repo "${{ github.repository }}" --remove-label agent:in-progress 2>/dev/null || true
+          echo "Rilasciato agent:in-progress su #$ISSUE (best-effort)."
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
