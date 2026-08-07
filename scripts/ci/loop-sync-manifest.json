@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "633e932eef92e8c1",
+        "corpus": "f3846a9be9fbc396",
         "alignedAt": "2026-08-07"
       }
     },
@@ -411,7 +411,7 @@
       "reason": "Superficie del modulo e CLI IDENTICHE al sito — classifyIssue(title,labels) -> {category,autofix,route,fuPrio} — cosi' triage-sweep.mjs e lo YAML del triage restano copiabili. Cambiano solo le categorie: il sito ha crawler/revenue/RPM, qui ci sono publish (l'unica che salta la coda: se publish-api non riparte il sito serve dati vecchi in silenzio), engine (si rompe dietro una CI verde), generation (il grosso del volume, transiente da provider LLM) e ci.",
       "baseline": {
         "site": "04d09fd104293724",
-        "corpus": "9f7e74cc6ea2022a",
+        "corpus": "c81475da91104f57",
         "alignedAt": "2026-08-07"
       }
     },
@@ -471,7 +471,7 @@
       "reason": "Equivalente in node:test del guard vitest del sito. Due dei test coprono l'ORDINE delle regex: `fast-publish-article` non deve essere catturato dalla categoria publish (8 fallimenti transienti a settimana salterebbero la coda), e un vero publish-api non deve finire in generation.",
       "baseline": {
         "site": null,
-        "corpus": "ef5f1d89c878dd13",
+        "corpus": "e09e8de48907fe2e",
         "alignedAt": "2026-08-07"
       }
     },
@@ -569,7 +569,7 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "1286d7dc6f3a28f6",
+        "corpus": "ad11637dc288da75",
         "alignedAt": "2026-08-07"
       }
     },

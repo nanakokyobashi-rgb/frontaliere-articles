@@ -43,7 +43,7 @@ const REPO = process.env.GITHUB_REPOSITORY || process.env.GH_REPO || '';
  */
 export const LABELS = [
   ['agent:triaged', 'ededed', 'Classificata dal triage (label anti-loop)'],
-  ['agent:fix', '0e8a16', 'Instradata al fixer. RESTA anche a verdetto dato: toglierla la fa re-instradare'],
+  ['agent:fix', '0e8a16', 'In carico al fixer. Al verdetto il drainer la sostituisce con fu-parked'],
   ['agent:fix-queued', 'fbca04', 'In coda: il drainer la promuove a slot libero'],
   ['agent:in-progress', 'd93f0b', 'MUTEX del fixer, non stato: se resta appesa senza run attive, va rimossa o la issue non verra presa'],
   ['fu-prio:high', 'b60205', 'Drenata prima dalla coda'],
