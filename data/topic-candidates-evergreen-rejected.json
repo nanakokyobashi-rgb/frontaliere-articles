@@ -99,7 +99,8 @@
     "costo della vita svizzera 2026",
     "costo della vita svizzera 2026 canton Basilea",
     "costo della vita svizzera 2026 canton Lucerna",
-    "costo della vita svizzera 2026 canton Argovia"
+    "costo della vita svizzera 2026 canton Argovia",
+    "imposta cantonale confronto svizzera 2026 canton Argovia"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -193,9 +194,9 @@
     "frontaliere licenziamento diritti preavviso indennita 2026": 1,
     "frontaliere licenziamento diritti preavviso indennita 2026 entro 20 km": 1,
     "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km": 1,
-    "imposta cantonale confronto svizzera 2026 canton Ginevra": 1,
-    "imposta cantonale confronto svizzera 2026 canton Basilea": 1,
-    "imposta cantonale confronto svizzera 2026 canton Vaud": 1,
+    "imposta cantonale confronto svizzera 2026 canton Ginevra": 2,
+    "imposta cantonale confronto svizzera 2026 canton Basilea": 2,
+    "imposta cantonale confronto svizzera 2026 canton Vaud": 2,
     "imposta cantonale confronto svizzera 2026 canton Argovia": 1,
     "costo della vita svizzera 2026 canton Zurigo": 1,
     "costo della vita svizzera 2026 canton Ginevra": 1,
