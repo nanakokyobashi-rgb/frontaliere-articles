@@ -9320,6 +9320,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio simonetti, monsieur peur: il pardo speciale al Locarno film festival',
     'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Il compositore di colonne sonore horror premiato con un Pardo speciale al Locarno Film Festival per aver segnato il genere da Profondo rosso in poi',
     'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti dirige la colonna sonora di Profondo rosso al Locarno Film Festival',
+    'blog.article.compatta-usata-frontalieri-varese-milano.title': 'SUV o compatta usata: la scelta più intelligente',
+    'blog.article.compatta-usata-frontalieri-varese-milano.excerpt': 'Per i frontalieri Varese-Milano-Ticino, una compatta usata riduce costi di gestione e facilita gli spostamenti quotidiani rispetto a un SUV, secondo VareseNoi.it',
+    'blog.article.compatta-usata-frontalieri-varese-milano.imageAlt': 'Auto compatta usata al valico di Brogeda tra Italia e Svizzera',
 };
 
 export default blogMetaIt;

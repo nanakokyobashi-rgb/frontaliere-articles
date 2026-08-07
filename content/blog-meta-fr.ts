@@ -9321,6 +9321,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio Simonetti, monsieur peur : le pardo spécial',
     'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Le compositeur de bandes sonores d\'horreur récompensé par un Pardo spécial au Locarno Film Festival pour avoir marqué le genre à partir de Profond rouge',
     'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti dirigeant la bande originale de Profondo rosso au Festival du film de Locarno',
+    'blog.article.compatta-usata-frontalieri-varese-milano.title': 'SUV ou compact d\'occasion : le choix le plus intelligent',
+    'blog.article.compatta-usata-frontalieri-varese-milano.excerpt': 'Pour les frontaliers Varese-Milan-Tessin, un compact d\'occasion réduit les coûts d\'exploitation et facilite les déplacements quotidiens par rapport à un SUV, selon VareseNoi.it',
+    'blog.article.compatta-usata-frontalieri-varese-milano.imageAlt': 'Voiture compacte d\'occasion au poste frontalier de Brogeda',
 };
 
 export default blogMetaFr;

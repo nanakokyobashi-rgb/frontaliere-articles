@@ -27975,6 +27975,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'compatta-usata-frontalieri-varese-milano',
+ category: 'pratico',
+ date: '2026-08-07T07:06:37.976Z',
+ image: '/images/blog/compatta-usata-frontalieri-varese-milano.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

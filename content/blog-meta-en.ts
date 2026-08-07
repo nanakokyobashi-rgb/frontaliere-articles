@@ -9319,6 +9319,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.claudio-simonetti-monsieur-peur.title': 'Claudio simonetti, monsieur peur: the special pardo at the Locarno film festival',
     'blog.article.claudio-simonetti-monsieur-peur.excerpt': 'Horror soundtrack composer awarded a special Pardo at the Locarno Film Festival for scoring the genre from Deep Red onwards',
     'blog.article.claudio-simonetti-monsieur-peur.imageAlt': 'Claudio Simonetti conducting Profondo rosso score at Locarno Film Festival',
+    'blog.article.compatta-usata-frontalieri-varese-milano.title': 'Used SUV or compact: the smartest choice',
+    'blog.article.compatta-usata-frontalieri-varese-milano.excerpt': 'For border crossers Varese-Milan-Ticino, a used compact reduces operating costs and facilitates daily travel compared to an SUV, according to VareseNoi.it',
+    'blog.article.compatta-usata-frontalieri-varese-milano.imageAlt': 'Used compact car at Brogeda border crossing between Italy and Switzerland',
 };
 
 export default blogMetaEn;

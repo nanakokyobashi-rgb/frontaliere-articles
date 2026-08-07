@@ -59897,6 +59897,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-compatta-usata-frontalieri-varese-milano': {
+    title: 'SUV o compatta usata: la scelta più intelligente',
+    description: 'Scopri quando una compatta usata è più intelligente di un SUV per gli spostamenti quotidiani dei frontalieri tra Varese, Milano e Svizzera. Consigli pratici',
+    keywords: 'frontalieri, ticino, svizzera, italia, compatta, usata, scelta, intelligente',
+    ogTitle: 'Compatta usata vs SUV per frontalieri Varese-Milano-Ticino',
+    ogDescription: 'Guida pratica sulla scelta tra compatta usata e SUV per gli spostamenti frontalieri Varese-Milano-Ticino: quando conviene davvero l\'opzione più pratica ed',
+    canonicalPath: '/articoli-frontaliere/compatta-usata-frontalieri-varese-milano',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "SUV o compatta usata: la scelta più intelligente",
+      "description": "Scopri quando una compatta usata è più intelligente di un SUV per gli spostamenti quotidiani dei frontalieri tra Varese, Milano e Svizzera. Consigli pratici",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/compatta-usata-frontalieri-varese-milano.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Auto compatta usata al valico di Brogeda tra Italia e Svizzera"
+      },
+      "datePublished": "2026-08-07T07:06:38+00:00",
+      "dateModified": "2026-08-07T07:06:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/compatta-usata-frontalieri-varese-milano/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
