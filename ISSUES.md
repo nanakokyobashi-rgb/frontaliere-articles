@@ -107,8 +107,8 @@ Non ogni issue produce una PR, e forzarne una è peggio che non farla:
 
 ## Telemetria degli esiti (obbligatoria)
 
-L'**ultimo** commento che il fixer posta sulla issue deve iniziare con un
-marker su riga propria:
+L'**ultimo** commento che il fixer posta sulla issue deve contenere un marker
+su riga propria — in testa o in coda, indifferentemente:
 
 ```
 <!-- FIX_OUTCOME: <code> -->
@@ -117,6 +117,11 @@ marker su riga propria:
 `<code>` ∈ `pr-created` · `blocked-workflows-scope` · `blocked-secrets` ·
 `blocked-admin-settings` · `no-root-cause` · `overlap-skip` ·
 `pr-already-open` · `already-fixed`.
+
+La posizione non conta: `FIX_OUTCOME_RE` in `followup-drainer.mjs` non è
+ancorata, e il drainer stesso scrive il marker in fondo ai propri commenti. Una
+regola più stretta di quanto il codice richieda verrebbe violata innocuamente
+per sempre, e insegnerebbe a leggere questo contratto come approssimativo.
 
 **Perché è obbligatorio.** Senza marker granulare, il drainer non distingue un
 verdetto legittimo da una run morta, e ri-accoda contro un muro. Sul sito
