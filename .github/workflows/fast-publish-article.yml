@@ -305,6 +305,46 @@ jobs:
             echo "article carries a named Person author"
           fi
 
+          # Nessuna pagina può uscire con riferimenti /assets/ same-origin (issue #5270).
+          #
+          # IL DIFETTO. `publish-article-fast.mjs` renderizzava l'archivio `/tutti/` DOPO
+          # `offload-generated-images-cdn.mjs`, che è l'unico passaggio che riscrive i
+          # `/assets/...` — stringhe letterali emesse da articleHubPagesPlugin, non asset
+          # Rollup — verso il CDN. Nessuna origin sul percorso di servizio ospita /assets:
+          # `https://frontaliereticino.ch/assets/index-entry.js` risponde 404. Le pagine
+          # archivio uscivano quindi senza CSS, senza bundle SPA e senza loader AdSense.
+          #
+          # PERCHÉ QUI E NON SOLO NEL TEST DI ORDINE. `scripts/publish-article-fast.mjs` è
+          # una COPIA di quello del repo del sito e nessun mirror trasporta `scripts/`: il
+          # sito ha corretto l'ordine il 2026-08-06 (valerielinc-ops/frontaliere-si-o-no#5271)
+          # e questa copia ha continuato a pubblicare l'ordine rotto. Poiché entrambi i repo
+          # pushano gli shard degli articoli, l'archivio live alternava sano e rotto a
+          # seconda di chi aveva pubblicato per ultimo. Il test di ordine difende l'ordine;
+          # questo gate difende i BYTE che stanno per essere pushati, quindi regge anche se
+          # un domani il rewrite si sposta altrove.
+          #
+          # Il pattern è ancorato a `src="` / `href="`: la pagina sana contiene comunque un
+          # `href*="/assets/"` dentro un selettore CSS inline (lo swap del media print), che
+          # non è un riferimento a risorsa e non deve far fallire nulla.
+          asset_rx='(src|href)="/assets/[^"]'
+          {
+            jq -r '.shards[].paths[]' "$summary"
+            [ -s "$RUNNER_TEMP/hub-landing.json" ] && jq -r '.pages[].path' "$RUNNER_TEMP/hub-landing.json"
+          } | sort -u | while IFS= read -r rel; do
+            [ -n "$rel" ] || continue
+            [ -f "$dist/$rel" ] || continue
+            n="$(grep -Eco "$asset_rx" "$dist/$rel" || true)"
+            [ "${n:-0}" -gt 0 ] && echo "$rel:$n"
+          done > "$RUNNER_TEMP/same-origin-assets.txt" || true
+
+          if [ -s "$RUNNER_TEMP/same-origin-assets.txt" ]; then
+            echo "::error::rendered pages still carry same-origin /assets/ refs (404 in production — issue #5270); the CDN offload must run AFTER every page is rendered:"
+            cat "$RUNNER_TEMP/same-origin-assets.txt"
+            fail=1
+          else
+            echo "no same-origin /assets/ refs in any rendered page"
+          fi
+
           [ "$fail" = "0" ] || exit 1
 
       - name: Publish to shards and CDN
