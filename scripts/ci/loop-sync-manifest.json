@@ -688,6 +688,11 @@
         "corpus": "fe42d6113d80f86a",
         "alignedAt": "2026-08-06"
       }
+    },
+    {
+      "path": "generator/tests/ignore-list-semantics.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Regressione trovata dalla REVIEW AUTOMATICA al primo giro reale del ciclo (PR #15): `process.env.X || default` tratta la stringa vuota come falsy, quindi `IGNORE_WORKFLOWS: ''` per svuotare la lista otteneva in silenzio la lista di default. Copre anche la guardia CLI, senza la quale importare lo scanner da un test lo eseguirebbe davvero."
     }
   ]
 }
