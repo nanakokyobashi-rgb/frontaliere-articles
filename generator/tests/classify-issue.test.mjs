@@ -71,6 +71,24 @@ test('ogni categoria e\' autofixabile (nessun guardrail di categoria)', () => {
   }
 });
 
+test('crawler-transient non instrada mai, in nessun percorso di triage', () => {
+  // triage-sweep.mjs esclude esplicitamente crawler-transient dal routing
+  // ("routarle brucerebbe issue-fix per nulla"); il percorso event-driven
+  // (issue-triage.yml) passa per questo stesso classificatore, quindi il
+  // guard deve vivere qui per coprire entrambi. Copre anche la ledger stessa
+  // ("Crawler transient failures (rolling ledger)"), che porta questa label
+  // fin dalla nascita e altrimenti finirebbe in coda come categoria "other".
+  const r = classifyIssue('Crawler transient failures (rolling ledger)', ['crawler-transient', 'priority:low']);
+  assert.equal(r.route, 'none');
+  assert.equal(r.fuPrio, null);
+  assert.equal(r.autofix, true, 'nessun guardrail di categoria: solo il route cambia');
+});
+
+test('crawler-transient vince anche su publish (nessuna label salta il guard)', () => {
+  const r = classifyIssue('Workflow Failure: Publish article data API', ['crawler-transient']);
+  assert.equal(r.route, 'none');
+});
+
 test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () => {
   // Lo YAML fa `node -e "JSON.parse(...).category"`: se la forma cambia, il
   // triage legge undefined e non instrada nulla, in silenzio.
