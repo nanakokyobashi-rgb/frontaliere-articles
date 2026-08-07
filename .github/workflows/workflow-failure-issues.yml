@@ -89,9 +89,10 @@ jobs:
           # le raccoglie lo sweep del triage).
           GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          # Lo smoke del token è usa-e-getta e fallisce di proposito quando il
-          # token non c'è: non deve generare issue.
-          IGNORE_WORKFLOWS: 'Claude token smoke'
+          # Nessun workflow da ignorare: lo smoke del token, unico caso previsto,
+          # ha esaurito il suo compito ed è stato rimosso. La variabile resta
+          # supportata dallo scanner per un eventuale caso futuro.
+          IGNORE_WORKFLOWS: ''
         run: |
           ARGS="--lookback-min ${{ github.event.inputs.lookback_min || '40' }}"
           if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
