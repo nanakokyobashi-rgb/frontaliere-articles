@@ -59,10 +59,19 @@ test('ogni label applicata dal ciclo è dichiarata in ensure-loop-labels', () =>
   // Solo le label applicate DAVVERO — `--add-label X` / `--remove-label X` —
   // non ogni menzione in un commento, che produrrebbe falsi positivi.
   const APPLY_RE = /--(?:add-label|remove-label)[= ]+["']?([A-Za-z][\w:-]*)["']?/g;
+  // Punto cieco scoperto portando l'hardening di pr-autorebase dal sito: una
+  // label passata come VARIABILE in una chiamata gh ad array
+  // (`'--add-label', REOPEN_FAILED_LABEL`) non viene vista dalla regex sopra,
+  // perche' dopo il flag c'e' una virgola, non il nome. Si raccolgono quindi
+  // anche le costanti `*_LABEL = '<literal>'`: e' la forma con cui questi nomi
+  // vengono dichiarati, e senza di esse il guard tace proprio sui casi che
+  // scattano di rado — cioe' quelli in cui una label mancante fa piu' danno.
+  const CONST_RE = /\b\w*LABELS?\b\s*=\s*["']([A-Za-z][\w:-]*)["']/g;
   const used = new Set();
   for (const f of sources) {
     const src = fs.readFileSync(f, 'utf8');
     for (const m of src.matchAll(APPLY_RE)) used.add(m[1].toLowerCase());
+    for (const m of src.matchAll(CONST_RE)) used.add(m[1].toLowerCase());
   }
 
   // Alcune label si compongono a runtime (`--add-label "fu-prio:$prio"`): la

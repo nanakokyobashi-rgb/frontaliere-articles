@@ -26,7 +26,7 @@
       "baseline": {
         "site": "a0b8956a6e389cb8",
         "corpus": "a0b8956a6e389cb8",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -35,7 +35,7 @@
       "baseline": {
         "site": "b405aabb5dc8a3b7",
         "corpus": "b405aabb5dc8a3b7",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -44,7 +44,7 @@
       "baseline": {
         "site": "d3eb47642f8c151e",
         "corpus": "d3eb47642f8c151e",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -53,7 +53,7 @@
       "baseline": {
         "site": "9464562c14d306a6",
         "corpus": "9464562c14d306a6",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -62,7 +62,7 @@
       "baseline": {
         "site": "7926b298503c143d",
         "corpus": "c474b254aff5b326",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       },
       "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead)."
     },
@@ -72,7 +72,7 @@
       "baseline": {
         "site": "4e9cdf43a03efb7e",
         "corpus": "4e9cdf43a03efb7e",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -81,7 +81,7 @@
       "baseline": {
         "site": "7e144e72470c6daf",
         "corpus": "7e144e72470c6daf",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -90,7 +90,7 @@
       "baseline": {
         "site": "30cee9619a3f49af",
         "corpus": "30cee9619a3f49af",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -99,7 +99,7 @@
       "baseline": {
         "site": "e485429ea717dfaf",
         "corpus": "e485429ea717dfaf",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -108,7 +108,7 @@
       "baseline": {
         "site": "64da1ac9881f00e1",
         "corpus": "64da1ac9881f00e1",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -117,7 +117,7 @@
       "baseline": {
         "site": "74fcea5905fe2b70",
         "corpus": "74fcea5905fe2b70",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -125,8 +125,8 @@
       "mode": "identical",
       "baseline": {
         "site": "455f0d78fb802a68",
-        "corpus": "f57631a27795d573",
-        "alignedAt": "2026-08-06"
+        "corpus": "455f0d78fb802a68",
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -135,7 +135,7 @@
       "baseline": {
         "site": "abea5394c95a1452",
         "corpus": "abea5394c95a1452",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -144,7 +144,7 @@
       "baseline": {
         "site": "566902d2f27a3f4c",
         "corpus": "566902d2f27a3f4c",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -153,7 +153,7 @@
       "baseline": {
         "site": "7a2599a9bae3c9c3",
         "corpus": "7a2599a9bae3c9c3",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -162,7 +162,7 @@
       "baseline": {
         "site": "69363f2f81925e6b",
         "corpus": "69363f2f81925e6b",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -171,7 +171,7 @@
       "baseline": {
         "site": "ef1d69bc8d64958f",
         "corpus": "ef1d69bc8d64958f",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -180,7 +180,7 @@
       "baseline": {
         "site": "229470d3fca385ad",
         "corpus": "229470d3fca385ad",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -189,7 +189,7 @@
       "baseline": {
         "site": "1896ec1f1c286bb1",
         "corpus": "1896ec1f1c286bb1",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -198,7 +198,7 @@
       "baseline": {
         "site": "17654ae277bb9f4d",
         "corpus": "17654ae277bb9f4d",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -207,7 +207,7 @@
       "baseline": {
         "site": "82956457a60d14b2",
         "corpus": "82956457a60d14b2",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -217,7 +217,7 @@
       "baseline": {
         "site": "1a8ac5c935d29d8f",
         "corpus": "38fa70152f8d238d",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -227,7 +227,7 @@
       "baseline": {
         "site": "20e4e76243cb60b0",
         "corpus": "bb17921f280d33c5",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -237,7 +237,7 @@
       "baseline": {
         "site": "5fa890e4a23a6619",
         "corpus": "69fb6e3c4efa522c",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -247,7 +247,7 @@
       "baseline": {
         "site": null,
         "corpus": "81ab848a828d9979",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -256,8 +256,8 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "ebb29428bfc4626e",
-        "alignedAt": "2026-08-06"
+        "corpus": "ab196e4c220e1e05",
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -267,7 +267,7 @@
       "baseline": {
         "site": null,
         "corpus": "2160bdb2756d1c25",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -277,7 +277,7 @@
       "baseline": {
         "site": "4eee66a5917239d8",
         "corpus": "8fa19800e54df34d",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -287,7 +287,7 @@
       "baseline": {
         "site": "6be9dd2d95c644a9",
         "corpus": "e5ae1c2d2c117191",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -297,7 +297,7 @@
       "baseline": {
         "site": "1d807b8fdfebeefc",
         "corpus": "c810a90b47eb97ea",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -307,7 +307,7 @@
       "baseline": {
         "site": "f7c6be4644c56dc2",
         "corpus": "9f0f6678fdaec04d",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -316,7 +316,7 @@
       "baseline": {
         "site": "985a3c299fa2753a",
         "corpus": "985a3c299fa2753a",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -326,7 +326,7 @@
       "baseline": {
         "site": null,
         "corpus": "ad6d8ac3d5a44261",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -336,7 +336,7 @@
       "baseline": {
         "site": null,
         "corpus": "af63f7e93f19dd40",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -346,7 +346,7 @@
       "baseline": {
         "site": "4198ed3448ecc9e6",
         "corpus": "13d07dd907494123",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -356,7 +356,7 @@
       "baseline": {
         "site": "a4be46d61d7904b8",
         "corpus": "a4be46d61d7904b8",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -366,7 +366,7 @@
       "baseline": {
         "site": null,
         "corpus": "636e787ec850895c",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -375,7 +375,7 @@
       "baseline": {
         "site": "b849f695a95955ba",
         "corpus": "b849f695a95955ba",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -384,7 +384,7 @@
       "baseline": {
         "site": "1ce4e20c19a79fdf",
         "corpus": "1ce4e20c19a79fdf",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -393,7 +393,7 @@
       "baseline": {
         "site": "e0835498f050dce5",
         "corpus": "e0835498f050dce5",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -402,7 +402,7 @@
       "baseline": {
         "site": "cb74e3305444dac5",
         "corpus": "cb74e3305444dac5",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -412,7 +412,7 @@
       "baseline": {
         "site": "04d09fd104293724",
         "corpus": "9f7e74cc6ea2022a",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -422,7 +422,7 @@
       "baseline": {
         "site": "820646b283567a83",
         "corpus": "d0a7c7dd7bcac1b8",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -432,7 +432,7 @@
       "baseline": {
         "site": "289881edc3c42140",
         "corpus": "cb278e6a944bd64a",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -442,7 +442,7 @@
       "baseline": {
         "site": "d9409a02c28b646a",
         "corpus": "b51bd246fac7389d",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -452,7 +452,7 @@
       "baseline": {
         "site": "583ffff626bd1994",
         "corpus": "0860b171ac7b0751",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -462,7 +462,7 @@
       "baseline": {
         "site": "9c762fb417106a95",
         "corpus": "90281612a9ae457f",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -472,7 +472,7 @@
       "baseline": {
         "site": null,
         "corpus": "ef5f1d89c878dd13",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -481,7 +481,7 @@
       "baseline": {
         "site": "c3f48eb83de91627",
         "corpus": "c3f48eb83de91627",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -490,7 +490,7 @@
       "baseline": {
         "site": "7de8e2060fb167b2",
         "corpus": "7de8e2060fb167b2",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -500,7 +500,7 @@
       "baseline": {
         "site": "3ec37d147e81605b",
         "corpus": "04a9c890ea333451",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -510,7 +510,7 @@
       "baseline": {
         "site": null,
         "corpus": "487404ca92096032",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -520,7 +520,7 @@
       "baseline": {
         "site": "6512a455eeb91262",
         "corpus": "56d67d1ff1324e57",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -530,7 +530,7 @@
       "baseline": {
         "site": "a894d9b0a3b2b2cc",
         "corpus": "890026f621187114",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -540,7 +540,7 @@
       "baseline": {
         "site": "3881f7aff32b5e5d",
         "corpus": "9898137394c5554e",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -550,7 +550,7 @@
       "baseline": {
         "site": null,
         "corpus": "fc59c832f678d46e",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -560,7 +560,7 @@
       "baseline": {
         "site": "b607ffd26f01ce20",
         "corpus": "56de197f2233954b",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -569,8 +569,8 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "7973ca467b4db273",
-        "alignedAt": "2026-08-06"
+        "corpus": "c33bdb48e7ab2d6d",
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -579,8 +579,8 @@
       "reason": "Copre due modi di sbagliare gia' capitati: una descrizione oltre i 100 caratteri (GitHub la rifiuta con un errore generico — e' costata la mancata creazione di agent:in-progress, l'unica che serve al mutex, mentre le altre dodici passavano), e un valore di fu-prio emesso dal classificatore senza la label corrispondente. Il secondo test prende i valori possibili dalla loro SORGENTE invece di indovinarli: il controllo per prefisso si accontentava di un membro qualsiasi della famiglia e non vedeva la rimozione di fu-prio:high.",
       "baseline": {
         "site": null,
-        "corpus": "4be008f730283c1d",
-        "alignedAt": "2026-08-06"
+        "corpus": "1d089ec7fe786ff4",
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -590,7 +590,7 @@
       "baseline": {
         "site": "e309ac041a8cc34a",
         "corpus": "0186cb72bef9d3cd",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -600,7 +600,7 @@
       "baseline": {
         "site": "cc1466b7e98b8d94",
         "corpus": "6816b51fdce1576f",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -610,7 +610,7 @@
       "baseline": {
         "site": "b456c412e8ae9075",
         "corpus": "3e7c07bca43b6c78",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -620,7 +620,7 @@
       "baseline": {
         "site": "7ebca8a5727691c2",
         "corpus": "e3e038db53e07967",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -629,7 +629,7 @@
       "baseline": {
         "site": "383249ff404fb547",
         "corpus": "383249ff404fb547",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -638,7 +638,7 @@
       "baseline": {
         "site": "57e4d70f791b5ddb",
         "corpus": "57e4d70f791b5ddb",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -648,7 +648,7 @@
       "baseline": {
         "site": "7e46173ed1e1334d",
         "corpus": "e51f349de4cebfe2",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -657,7 +657,7 @@
       "baseline": {
         "site": "8b022bd8bcb08a44",
         "corpus": "8b022bd8bcb08a44",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -666,7 +666,7 @@
       "baseline": {
         "site": "220daf74fa503c7f",
         "corpus": "220daf74fa503c7f",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -676,7 +676,7 @@
       "baseline": {
         "site": "ba86d79cae8e91ab",
         "corpus": "22688b9eada13b5c",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -686,7 +686,7 @@
       "baseline": {
         "site": null,
         "corpus": "fe42d6113d80f86a",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     },
     {
@@ -696,7 +696,7 @@
       "baseline": {
         "site": null,
         "corpus": "f18d1a612b49834c",
-        "alignedAt": "2026-08-06"
+        "alignedAt": "2026-08-07"
       }
     }
   ]
