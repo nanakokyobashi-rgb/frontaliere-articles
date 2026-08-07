@@ -102,7 +102,8 @@
     "costo della vita svizzera 2026 canton Argovia",
     "imposta cantonale confronto svizzera 2026 canton Argovia",
     "frontaliere licenziamento diritti preavviso indennita 2026",
-    "costo della vita svizzera 2026 canton Vaud"
+    "costo della vita svizzera 2026 canton Vaud",
+    "premi cassa malati lamal 2026 canton Ginevra"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -205,7 +206,7 @@
     "costo della vita svizzera 2026 canton Berna": 3,
     "costo della vita svizzera 2026 canton Vaud": 2,
     "costo della vita svizzera 2026 canton San Gallo": 2,
-    "premi cassa malati lamal 2026": 2,
-    "premi cassa malati lamal 2026 canton Zurigo": 2
+    "premi cassa malati lamal 2026": 3,
+    "premi cassa malati lamal 2026 canton Zurigo": 3
   }
 }
