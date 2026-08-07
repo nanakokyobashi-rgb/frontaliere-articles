@@ -18,7 +18,7 @@
   ],
   "siteRepo": "valerielinc-ops/frontaliere-si-o-no",
   "siteRef": "main",
-  "alignedAt": "2026-08-06",
+  "alignedAt": "2026-08-07",
   "files": [
     {
       "path": "scripts/ci/alert-pat-down.mjs",
@@ -124,7 +124,7 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f57631a27795d573",
+        "site": "455f0d78fb802a68",
         "corpus": "f57631a27795d573",
         "alignedAt": "2026-08-06"
       }
@@ -256,7 +256,7 @@
       "reason": "Questo file.",
       "baseline": {
         "site": null,
-        "corpus": "06bc50c9c03e2cca",
+        "corpus": "ebb29428bfc4626e",
         "alignedAt": "2026-08-06"
       }
     },
@@ -325,7 +325,7 @@
       "reason": "Il sito apre le issue di fallimento con uno step dentro ognuno dei suoi 135 workflow. Qui la scansione e' centrale: modificare i workflow di generazione (il core operativo del repo) per una preoccupazione che non e' la loro lascerebbe comunque scoperto ogni workflow nuovo. Il sito e' gia' arrivato alla stessa conclusione per il lato che CHIUDE (close-recovered, 'without wiring a per-workflow step into ~300 YAML files'): questa e' la meta' simmetrica, ed e' un candidato a risalire.",
       "baseline": {
         "site": null,
-        "corpus": "eab404ca15a9d5d8",
+        "corpus": "ad6d8ac3d5a44261",
         "alignedAt": "2026-08-06"
       }
     },
@@ -335,7 +335,7 @@
       "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM).",
       "baseline": {
         "site": null,
-        "corpus": "5b43f15b106f0af0",
+        "corpus": "af63f7e93f19dd40",
         "alignedAt": "2026-08-06"
       }
     },
@@ -431,7 +431,7 @@
       "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati).",
       "baseline": {
         "site": "289881edc3c42140",
-        "corpus": "1c5bf29dbc52be66",
+        "corpus": "cb278e6a944bd64a",
         "alignedAt": "2026-08-06"
       }
     },
@@ -450,7 +450,7 @@
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test.",
       "baseline": {
-        "site": "2152ed23b82968b2",
+        "site": "583ffff626bd1994",
         "corpus": "0860b171ac7b0751",
         "alignedAt": "2026-08-06"
       }
@@ -461,7 +461,7 @@
       "reason": "Contratto del fixer adattato: categorie di questo repo, gate test node --test, e la catena assorbente del 429 descritta con i numeri del sito perche' e' la ragione per cui la telemetria FIX_OUTCOME e' obbligatoria.",
       "baseline": {
         "site": "9c762fb417106a95",
-        "corpus": "df3818f0efb4ccb7",
+        "corpus": "90281612a9ae457f",
         "alignedAt": "2026-08-06"
       }
     },
@@ -569,7 +569,7 @@
       "reason": "Il corpus e' nato con le sole label di default di GitHub: nessuna delle 13 del ciclo esisteva. `gh issue edit --add-label` NON crea la label mancante, fallisce — e nei workflow quel fallimento e' un warning non bloccante, quindi il ciclo sarebbe girato INERTE senza un errore. Il sito non ha questo script perche' le sue label ci sono da sempre; qui e' un prerequisito. Idempotente, girato come primo step di triage e fixer perche' una label cancellata per sbaglio ricreerebbe lo stesso stallo mesi dopo.",
       "baseline": {
         "site": null,
-        "corpus": "2bb3e4f154873c7f",
+        "corpus": "7973ca467b4db273",
         "alignedAt": "2026-08-06"
       }
     },
@@ -692,7 +692,12 @@
     {
       "path": "generator/tests/ignore-list-semantics.test.mjs",
       "mode": "corpus-only",
-      "reason": "Regressione trovata dalla REVIEW AUTOMATICA al primo giro reale del ciclo (PR #15): `process.env.X || default` tratta la stringa vuota come falsy, quindi `IGNORE_WORKFLOWS: ''` per svuotare la lista otteneva in silenzio la lista di default. Copre anche la guardia CLI, senza la quale importare lo scanner da un test lo eseguirebbe davvero."
+      "reason": "Regressione trovata dalla REVIEW AUTOMATICA al primo giro reale del ciclo (PR #15): `process.env.X || default` tratta la stringa vuota come falsy, quindi `IGNORE_WORKFLOWS: ''` per svuotare la lista otteneva in silenzio la lista di default. Copre anche la guardia CLI, senza la quale importare lo scanner da un test lo eseguirebbe davvero.",
+      "baseline": {
+        "site": null,
+        "corpus": "f18d1a612b49834c",
+        "alignedAt": "2026-08-06"
+      }
     }
   ]
 }

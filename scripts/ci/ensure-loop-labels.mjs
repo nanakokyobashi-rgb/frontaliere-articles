@@ -43,7 +43,7 @@ const REPO = process.env.GITHUB_REPOSITORY || process.env.GH_REPO || '';
  */
 export const LABELS = [
   ['agent:triaged', 'ededed', 'Classificata dal triage (label anti-loop)'],
-  ['agent:fix', '0e8a16', 'In lavorazione dal fixer autonomo'],
+  ['agent:fix', '0e8a16', 'Instradata al fixer. RESTA anche a verdetto dato: toglierla la fa re-instradare'],
   ['agent:fix-queued', 'fbca04', 'In coda: il drainer la promuove a slot libero'],
   ['agent:in-progress', 'd93f0b', 'MUTEX del fixer, non stato: se resta appesa senza run attive, va rimossa o la issue non verra presa'],
   ['fu-prio:high', 'b60205', 'Drenata prima dalla coda'],
@@ -77,22 +77,50 @@ function main() {
     return 0;
   }
 
-  let existing = new Set();
+  let existing = new Map();
   try {
-    const raw = gh(['label', 'list', '--repo', REPO, '--limit', '200', '--json', 'name', '--jq', '[.[].name] | join("\n")']);
+    // JSON diretto, non una concatenazione in jq: un separatore inventato
+    // (null byte, tab) o non passa attraverso execFileSync o si scontra col
+    // contenuto stesso delle descrizioni.
+    const raw = gh(['label', 'list', '--repo', REPO, '--limit', '200', '--json', 'name,description']);
     // GitHub tratta i nomi delle label come case-insensitive per l'unicità:
     // creare `Bug` dove esiste `bug` fallisce. Il confronto va fatto uguale.
-    existing = new Set(raw.split('\n').filter(Boolean).map((s) => s.toLowerCase()));
+    for (const l of JSON.parse(raw || '[]')) {
+      if (l && l.name) existing.set(String(l.name).toLowerCase(), String(l.description || ''));
+    }
   } catch (e) {
     console.error(`[ensure-loop-labels] impossibile elencare le label (${String(e.message).slice(0, 100)}) — esco senza bloccare.`);
     return 0;
+  }
+
+  // Riconcilia le descrizioni divergenti. Senza questo, correggere una
+  // descrizione nel codice non la porterebbe MAI sul repo: `gh label create`
+  // fallisce se la label esiste, e nessuno aggiorna quella vecchia. Una label
+  // che spiega male il proprio significato e' esattamente il tipo di segnale
+  // che si smette di leggere.
+  let fixed = 0;
+  for (const [name, , description] of LABELS) {
+    const cur = existing.get(name.toLowerCase());
+    if (cur === undefined || !description || cur === description) continue;
+    if (DRY) {
+      console.log(`[ensure-loop-labels] (dry-run) aggiornerei la descrizione di "${name}"`);
+      fixed++;
+      continue;
+    }
+    try {
+      gh(['label', 'edit', name, '--repo', REPO, '--description', description]);
+      console.log(`[ensure-loop-labels] descrizione aggiornata: "${name}"`);
+      fixed++;
+    } catch (e) {
+      console.warn(`::warning::[ensure-loop-labels] descrizione di "${name}" non aggiornata: ${String(e.message).slice(0, 100)}`);
+    }
   }
 
   let created = 0;
   const missing = LABELS.filter(([name]) => !existing.has(name.toLowerCase()));
 
   if (!missing.length) {
-    console.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già.`);
+    console.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già${fixed ? ` (${fixed} descrizione/i riallineate)` : ''}.`);
     return 0;
   }
 

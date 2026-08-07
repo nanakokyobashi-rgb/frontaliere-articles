@@ -74,10 +74,15 @@ const REPO = process.env.GITHUB_REPOSITORY || '';
 /**
  * Lista dei workflow da ignorare, dal valore grezzo della env.
  *
- * `??` e non `||`, ed e' la differenza che conta: con `||` la stringa VUOTA e'
- * falsy, quindi impostare `IGNORE_WORKFLOWS: ''` per dire "non ignorare
- * niente" otterrebbe in silenzio l'esatto contrario — la lista di default.
- * Il default vale solo quando la variabile non e' proprio definita.
+ * **Non c'e' piu' un default**: ne' "variabile assente" ne' "stringa vuota"
+ * producono una lista precompilata. Il default storico (`'Claude token smoke'`)
+ * e' stato ELIMINATO, non solo scavalcato — il workflow che lo giustificava non
+ * esiste piu'.
+ *
+ * Il `??` invece del `||` resta necessario comunque: con `||` la stringa vuota
+ * e' falsy, quindi il giorno in cui qualcuno reintroducesse un default
+ * troverebbe che impostare `IGNORE_WORKFLOWS: ''` per dire "non ignorare
+ * niente" otterrebbe in silenzio l'esatto contrario.
  *
  * Trovato dalla review automatica sulla PR #15, al primo giro reale del ciclo.
  */
