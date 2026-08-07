@@ -83,6 +83,15 @@
 //
 //      If either copy is touched, touch both.
 //
+//      De-dup status: blocked, not actionable from this repo. Both remedies
+//      (teach mirror-articles-engine.yml to also carry scripts/, or move this
+//      ordering under engine/ so the mirror already ships it) require editing
+//      files that live in the SITE repo (valerielinc-ops/frontaliere-si-o-no),
+//      which owns both that workflow and engine/ (this repo only ever
+//      receives a mirrored copy of engine/, per AGENTS.md #3). Recommended
+//      path: move the render-then-offload order under engine/ on the site
+//      side so the mirror carries it here automatically.
+//
 // Writes a summary JSON describing what was rendered, for stream B
 // (incremental shard push) and stream C (fast-publish workflow) to consume:
 //   { id, section, shards: [{locale, subtree, paths, url}, ...], cdnUploads: [{local, key}, ...] }
