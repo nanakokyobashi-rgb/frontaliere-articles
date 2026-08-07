@@ -85,11 +85,16 @@ function main() {
     // JSON diretto, non una concatenazione in jq: un separatore inventato
     // (null byte, tab) o non passa attraverso execFileSync o si scontra col
     // contenuto stesso delle descrizioni.
-    const raw = gh(['label', 'list', '--repo', REPO, '--limit', '200', '--json', 'name,description']);
+    const raw = gh(['label', 'list', '--repo', REPO, '--limit', '200', '--json', 'name,description,color']);
     // GitHub tratta i nomi delle label come case-insensitive per l'unicità:
     // creare `Bug` dove esiste `bug` fallisce. Il confronto va fatto uguale.
     for (const l of JSON.parse(raw || '[]')) {
-      if (l && l.name) existing.set(String(l.name).toLowerCase(), String(l.description || ''));
+      if (l && l.name) {
+        existing.set(String(l.name).toLowerCase(), {
+          description: String(l.description || ''),
+          color: String(l.color || '').toLowerCase(),
+        });
+      }
     }
   } catch (e) {
     console.error(`[ensure-loop-labels] impossibile elencare le label (${String(e.message).slice(0, 100)}) — esco senza bloccare.`);
@@ -101,21 +106,29 @@ function main() {
   // fallisce se la label esiste, e nessuno aggiorna quella vecchia. Una label
   // che spiega male il proprio significato e' esattamente il tipo di segnale
   // che si smette di leggere.
+  // Descrizione E colore: limitarsi alla descrizione lascerebbe aperto per il
+  // colore lo stesso stallo silenzioso che questa riconciliazione esiste per
+  // chiudere — cambiarlo nel codice non lo porterebbe mai sul repo.
   let fixed = 0;
-  for (const [name, , description] of LABELS) {
+  for (const [name, color, description] of LABELS) {
     const cur = existing.get(name.toLowerCase());
-    if (cur === undefined || !description || cur === description) continue;
+    if (cur === undefined) continue;
+    const args = [];
+    if (description && cur.description !== description) args.push('--description', description);
+    if (color && cur.color !== String(color).toLowerCase()) args.push('--color', color);
+    if (!args.length) continue;
+    const what = args.filter((a) => a.startsWith('--')).map((a) => a.slice(2)).join(' + ');
     if (DRY) {
-      console.log(`[ensure-loop-labels] (dry-run) aggiornerei la descrizione di "${name}"`);
+      console.log(`[ensure-loop-labels] (dry-run) aggiornerei ${what} di "${name}"`);
       fixed++;
       continue;
     }
     try {
-      gh(['label', 'edit', name, '--repo', REPO, '--description', description]);
-      console.log(`[ensure-loop-labels] descrizione aggiornata: "${name}"`);
+      gh(['label', 'edit', name, '--repo', REPO, ...args]);
+      console.log(`[ensure-loop-labels] ${what} aggiornato: "${name}"`);
       fixed++;
     } catch (e) {
-      console.warn(`::warning::[ensure-loop-labels] descrizione di "${name}" non aggiornata: ${String(e.message).slice(0, 100)}`);
+      console.warn(`::warning::[ensure-loop-labels] "${name}" non aggiornata: ${String(e.message).slice(0, 100)}`);
     }
   }
 
@@ -123,7 +136,7 @@ function main() {
   const missing = LABELS.filter(([name]) => !existing.has(name.toLowerCase()));
 
   if (!missing.length) {
-    console.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già${fixed ? ` (${fixed} descrizione/i riallineate)` : ''}.`);
+    console.log(`[ensure-loop-labels] tutte le ${LABELS.length} label del ciclo esistono già${fixed ? ` (${fixed} riallineata/e)` : ''}.`);
     return 0;
   }
 

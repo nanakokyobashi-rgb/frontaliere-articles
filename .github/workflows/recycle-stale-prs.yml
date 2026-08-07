@@ -109,8 +109,14 @@ jobs:
           NOW=$(date -u +%s)
           MAXAGE=$(( ${MAX_AGE_HOURS:-24} * 3600 ))
 
+          # `autorebase-reopen-failed` e' escluso: quella label la mette
+          # pr-autorebase quando la coppia close+reopen si rompe a meta', e dice
+          # esattamente "non cancellare questo head ref". Questo workflow e'
+          # l'unico che cancella branch su questo repo (`--delete-branch` sotto),
+          # quindi e' qui che la label deve avere effetto — altrimenti resta un
+          # segnale che nessuno legge, applicato proprio quando serve di piu'.
           prs=$(gh pr list --repo "$REPO" --state open --label stale-review --limit 50 \
-            --json number,title,body,createdAt,author)
+            --json number,title,body,createdAt,author,labels)
           COUNT=$(printf '%s' "$prs" | jq 'length')
           echo "stale-review PRs aperte: $COUNT"
 
@@ -119,6 +125,15 @@ jobs:
             TITLE=$(printf '%s' "$pr" | jq -r '.title')
             BODY=$(printf '%s' "$pr" | jq -r '.body // ""')
             CREATED=$(printf '%s' "$pr" | jq -r '.createdAt')
+
+            # Gate 0 — head ref protetto. PRIMO di tutti: gli altri gate
+            # decidono SE riciclare, questo decide se e' lecito farlo. Una PR
+            # con questa label ha gia' avuto un close+reopen rotto a meta';
+            # `gh pr close --delete-branch` qui sotto le porterebbe via anche il
+            # branch, cioe' l'unica cosa ancora recuperabile.
+            if printf '%s' "$pr" | jq -e '[.labels[].name] | index("autorebase-reopen-failed")' >/dev/null 2>&1; then
+              echo "PR #$N ha autorebase-reopen-failed (head ref da preservare) — skip"; continue
+            fi
 
             # Gate 1: PR aperta da >MAXAGE.
             CS=$(date -u -d "$CREATED" +%s 2>/dev/null || echo "$NOW")
