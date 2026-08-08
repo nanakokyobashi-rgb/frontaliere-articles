@@ -174,7 +174,8 @@ export function scanContentForDirtyIds(rootDir) {
 export function orderAndCap(ids, cap) {
   const n = Number(cap);
   const effectiveCap = Number.isInteger(n) && n >= 0 ? n : 10;
-  return { selected: ids.slice(0, effectiveCap), leftover: ids.slice(effectiveCap) };
+  const sorted = [...ids].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
+  return { selected: sorted.slice(0, effectiveCap), leftover: sorted.slice(effectiveCap) };
 }
 
 function parseArgs(argv) {
