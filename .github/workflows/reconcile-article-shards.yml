@@ -29,6 +29,16 @@
 # restano in un posto solo — una copia divergerebbe, ed è esattamente la
 # storia già scritta in testa a scripts/publish-article-fast.mjs.
 #
+# LA LEZIONE DEL PRIMO GIRO (2026-08-08): la prima esecuzione reale della
+# detection dichiarò 69 fantasmi. Uno era vero (il dazi svizzero, 404 su
+# tutti e 4 i locali). Gli altri 68 erano TUTTI serviti 200: falsi positivi
+# di `git ls-tree`, che col default core.quotePath quota in ottali C ogni
+# path con umlaut o accento (`"...duba\303\257-bis-ticino/..."`) mentre
+# slugs.json annuncia UTF-8 raw. Da qui i due invarianti della detection:
+# core.quotePath=false + de-quoting difensivo (unquoteGitPath), e il
+# principio che una diff «troppo bella per essere vera» va verificata su
+# un campione HTTP prima di fidarsi.
+#
 # ANTI-TEMPESTA, tre guardie indipendenti:
 #   - CAP per run (default 3, dal più recente): un arretrato storico non può
 #     trasformarsi in decine di ripubblicazioni in un colpo solo;

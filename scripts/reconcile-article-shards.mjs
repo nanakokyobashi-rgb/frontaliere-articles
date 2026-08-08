@@ -15,8 +15,9 @@
 //
 // Non era un caso isolato: alla prima esecuzione reale di questa scansione la
 // diff ha trovato anche `un-anno-dallo-shock-dei-dazi-esportatori-incerti`
-// (svizzera, 2026-08-07) assente su TUTTI e 4 i locali, più un arretrato di
-// ~68 articoli feb-apr 2026 senza pagina de/fr.
+// (svizzera, 2026-08-07) assente su TUTTI e 4 i locali — confermato 404 sia
+// sugli origin che all'apex, mentre uno sweep HEAD su tutte le 15.064 URL
+// annunciate non ha trovato NESSUN altro 404.
 //
 // COSA FA QUESTO SCRIPT (solo DETECTION — non pubblica niente):
 //   1. legge la superficie annunciata dall'API pubblicata (manifest.json per
@@ -120,6 +121,59 @@ export function validateAnnouncedSurface({ manifest, slugs, articles, swissArtic
 }
 
 /**
+ * De-quoting dei path di `git ls-tree`. Col default `core.quotePath=true` git
+ * QUOTA i path non-ASCII e ne escapa i byte in ottali C:
+ *
+ *   "de/grenzgaenger-artikel/duba\303\257-bis-ticino/index.html"
+ *
+ * mentre slugs.json annuncia la stringa UTF-8 raw (`dubaï-bis-ticino`). Alla
+ * prima esecuzione reale questo ha prodotto 68 FALSI fantasmi — tutti e soli
+ * gli slug de/fr/en con umlaut o accenti, tutti serviti 200 sia dall'origin
+ * che dall'apex (misurato su 3 campioni + sweep completo delle 15.064 URL
+ * annunciate). Il comando in readShardTree passa `-c core.quotePath=false`;
+ * questa funzione è la cintura oltre alle bretelle: decodifica comunque una
+ * riga quotata, così un config globale o un default diverso non possono
+ * reintrodurre la classe in silenzio.
+ *
+ * Gli escape ottali sono BYTE, non code point: vanno accumulati e decodificati
+ * come UTF-8 alla fine (\303\257 → 0xC3 0xAF → «ï»), mai char-per-char.
+ */
+export function unquoteGitPath(line) {
+  if (typeof line !== 'string' || line.length < 2 || !line.startsWith('"') || !line.endsWith('"')) {
+    return line;
+  }
+  const inner = line.slice(1, -1);
+  const bytes = [];
+  const simple = { '\\': 0x5c, '"': 0x22, a: 0x07, b: 0x08, f: 0x0c, n: 0x0a, r: 0x0d, t: 0x09, v: 0x0b };
+  for (let i = 0; i < inner.length; i++) {
+    if (inner[i] !== '\\') {
+      bytes.push(inner.charCodeAt(i));
+      continue;
+    }
+    const next = inner[i + 1];
+    if (next >= '0' && next <= '7') {
+      let oct = '';
+      let j = i + 1;
+      while (j < inner.length && oct.length < 3 && inner[j] >= '0' && inner[j] <= '7') {
+        oct += inner[j];
+        j++;
+      }
+      bytes.push(parseInt(oct, 8));
+      i = j - 1;
+    } else if (next !== undefined) {
+      bytes.push(simple[next] ?? next.charCodeAt(0));
+      i++;
+    }
+  }
+  return Buffer.from(bytes).toString('utf8');
+}
+
+/** Normalizza l'output riga-per-riga di ls-tree in path UTF-8 confrontabili. */
+export function normalizeTreePaths(lines) {
+  return lines.map(unquoteGitPath);
+}
+
+/**
  * Un tree di shard credibile: un clone fallito a metà o un repo azzerato non
  * devono far sembrare «mancante» l'intero corpus. 50 è largo: lo shard più
  * piccolo (articolisvizzera-*) ne ha ~1.400.
@@ -210,13 +264,16 @@ function readShardTree(owner, shard, loc, scratchRoot) {
         stdio: ['ignore', 'ignore', 'pipe'],
         timeout: 120000,
       });
-      const out = execFileSync('git', ['-C', dir, 'ls-tree', '-r', '--name-only', 'HEAD'], {
+      // core.quotePath=false: senza, git quota i path non-ASCII in ottali C e
+      // ogni slug con umlaut/accento diventa un falso fantasma (68 al primo
+      // giro reale — vedi unquoteGitPath, che resta come seconda difesa).
+      const out = execFileSync('git', ['-C', dir, '-c', 'core.quotePath=false', 'ls-tree', '-r', '--name-only', 'HEAD'], {
         encoding: 'utf8',
         maxBuffer: 64 * 1024 * 1024,
         timeout: 60000,
       });
       fs.rmSync(dir, { recursive: true, force: true });
-      return out.split('\n').filter(Boolean);
+      return normalizeTreePaths(out.split('\n').filter(Boolean));
     } catch (err) {
       lastErr = err;
     }

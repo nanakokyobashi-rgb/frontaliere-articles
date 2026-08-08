@@ -17,9 +17,14 @@
  *     l'intero locale en/de/fr — cioè una tempesta di ripubblicazioni;
  *   - gli id svizzeri «shadowed» sono de-listati APPOSTA: contarli come
  *     fantasmi li ripubblicherebbe per sempre (12 al primo giro reale);
- *   - il cap e l'ordinamento (più recente prima) sono l'anti-tempesta: al
- *     primo giro reale la diff conteneva 69 id, di cui 68 arretrato storico
- *     feb-apr — il fantasma fresco DEVE passare davanti;
+ *   - il cap e l'ordinamento (più recente prima) sono l'anti-tempesta: il
+ *     fantasma fresco DEVE passare davanti a qualunque arretrato;
+ *   - i path di `git ls-tree` vanno DE-QUOTATI: col default core.quotePath
+ *     git escapa i non-ASCII in ottali C, e al primo giro reale questo ha
+ *     prodotto 68 falsi fantasmi — tutti e soli gli slug de/fr/en con
+ *     umlaut o accenti, tutti serviti 200 (misurato su campioni + sweep
+ *     completo delle 15.064 URL annunciate). Ripubblicarli in massa è
+ *     esattamente la tempesta che il resto del design previene;
  *   - una superficie annunciata troncata (fetch parziale, counts incoerenti)
  *     va rifiutata prima dell'uso, non riconciliata.
  *
@@ -36,6 +41,8 @@ import {
   treeLooksSane,
   computeMissing,
   orderAndCap,
+  unquoteGitPath,
+  normalizeTreePaths,
 } from '../../scripts/reconcile-article-shards.mjs';
 
 // Base slug reali (scripts/lib/section-shard-slugs.json) per le due sezioni.
@@ -238,6 +245,55 @@ test('cap 0 seleziona niente e lascia tutto in coda; cap invalido cade sul defau
   const fallback = orderAndCap(missing, new Map(), 'non-un-numero');
   assert.equal(fallback.selected.length, 3);
   assert.equal(fallback.leftover.length, 2);
+});
+
+// ── unquoteGitPath: i 68 falsi fantasmi del primo giro reale ────────────────
+
+test('un path quotato da ls-tree torna UTF-8 raw: gli ottali sono byte, non code point', () => {
+  // Il campione vero del primo giro: dubaï, ï = 0xC3 0xAF = \303\257.
+  assert.equal(
+    unquoteGitPath('"de/grenzgaenger-artikel/duba\\303\\257-bis-ticino/index.html"'),
+    'de/grenzgaenger-artikel/dubaï-bis-ticino/index.html',
+  );
+  // Umlaut a inizio segmento (ärzte) e accento francese (prévention).
+  assert.equal(
+    unquoteGitPath('"de/grenzgaenger-artikel/\\303\\244rzte-mangelverbano-ticino/index.html"'),
+    'de/grenzgaenger-artikel/ärzte-mangelverbano-ticino/index.html',
+  );
+  assert.equal(
+    unquoteGitPath('"fr/articles-frontalier/pr\\303\\251vention-maschile-beccaria/index.html"'),
+    'fr/articles-frontalier/prévention-maschile-beccaria/index.html',
+  );
+});
+
+test('una riga non quotata passa invariata; gli escape semplici si sciolgono', () => {
+  assert.equal(unquoteGitPath('articoli-frontaliere/slug-ascii/index.html'), 'articoli-frontaliere/slug-ascii/index.html');
+  assert.equal(unquoteGitPath('"a\\"b\\\\c"'), 'a"b\\c');
+  assert.equal(unquoteGitPath(''), '');
+  assert.equal(unquoteGitPath('"'), '"'); // una virgoletta sola non è una riga quotata
+});
+
+test('la classe intera: uno slug accentato quotato NON è un fantasma dopo la normalizzazione', () => {
+  const slugs = {
+    blog: { 'fuga-da-dubai-ticino-alternativa': { de: 'dubaï-bis-ticino' } },
+    swiss: {},
+  };
+  // Il tree come ls-tree lo emette col default core.quotePath=true…
+  const rawLines = ['CNAME', '404.html', '"de/grenzgaenger-artikel/duba\\303\\257-bis-ticino/index.html"'];
+  const filler = Array.from({ length: 60 }, (_, i) => `filler/${i}/index.html`);
+  const normalized = new Set(normalizeTreePaths([...rawLines, ...filler]));
+  const trees = allTrees();
+  trees['articolifrontaliere-de'] = normalized;
+  // …e dopo normalizeTreePaths la pagina viene trovata: zero fantasmi.
+  assert.deepEqual(
+    computeMissing({ slugs, shadowedSwissIds: new Set(), sectionShardSlugs: SECTION_SHARD_SLUGS, trees }),
+    [],
+  );
+  // Controprova: SENZA normalizzazione la stessa riga produce il falso
+  // positivo — è la regressione che questo guard esiste per impedire.
+  trees['articolifrontaliere-de'] = new Set([...rawLines, ...filler]);
+  const falsi = computeMissing({ slugs, shadowedSwissIds: new Set(), sectionShardSlugs: SECTION_SHARD_SLUGS, trees });
+  assert.equal(falsi.length, 1);
 });
 
 // ── validateAnnouncedSurface: mai riconciliare su dati troncati ─────────────
