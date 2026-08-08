@@ -756,6 +756,38 @@
         "corpus": "9f28aa91b7129cb9",
         "alignedAt": "2026-08-08"
       }
+    },
+    {
+      "path": "generator/tests/lib/expect-shim.mjs",
+      "mode": "corpus-only",
+      "reason": "Sottoinsieme dell'API expect di vitest sopra node:assert, usato dalle suite dei gate articolo portate dal sito. Esiste per lasciare i corpi dei test quasi byte-identici all'originale vitest: un riallineamento futuro con la suite del sito resta copia + intestazione, non una riscrittura. Solo i matcher censiti sulle suite portate; un matcher non implementato lancia, non passa.",
+      "baseline": {
+        "site": null,
+        "corpus": "d64b2a834249dfb5",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/article-factuality-gates.test.mjs",
+      "sitePath": "tests/article-factuality-gates.test.ts",
+      "mode": "adapted",
+      "reason": "Suite dei gate deterministici di fattualita' (incidente 2026-07-28). La libreria generator/scripts/lib/article-factuality-gates.mjs e' arrivata col trasporto del generatore ma la sua suite era rimasta solo sul sito — il punto cieco 'assenza di un test da un lato' del drift check. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse, l'unico expect.arrayContaining riscritto come toContain per elemento. I fixture e le asserzioni sono quelli del sito.",
+      "baseline": {
+        "site": "8e3cbf379ad0cdf1",
+        "corpus": "5a092f55c91cc903",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/article-fabrication-guard.test.mjs",
+      "sitePath": "tests/article-fabrication-guard.test.ts",
+      "mode": "adapted",
+      "reason": "Scan anti-allucinazioni su tutti i corpi (istituzioni/acronimi inventati, fatti errati noti, statistiche a fonte vaga). Adattamenti: path content/ al posto di services/locales/, node:test + expect-shim, offender aggregati per classe invece di it.each per file, sanity >3000 corpi IT perche' uno sparse checkout senza content/ non passi a vuoto. I PATTERN restano byte-identici al sito: nuove voci si aggiungono prima la' e si ricopiano qui. Misurato al porting: 0 offender su 15.076 file.",
+      "baseline": {
+        "site": "ea03d049017092b7",
+        "corpus": "76a86e1937c4569a",
+        "alignedAt": "2026-08-08"
+      }
     }
   ]
 }
