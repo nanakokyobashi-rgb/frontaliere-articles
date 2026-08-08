@@ -186,6 +186,52 @@ test('the review scenario builds an edition instead of throwing (exit-0 contract
   assert.match(a3.content.it.title, /il pieno giusto vale/);
 });
 
+test('title and jobs section never contradict: null yesterdayAdded → totals lead, not the outage note', () => {
+  // Second review finding: with the jobsTotal headline the body4 used to fall
+  // into jobsDown ("stats not up to date") — a self-contradicting edition.
+  // Plausibly the COMMON morning path, not an edge (stats regenerate later).
+  const brief = structuredClone(BRIEF);
+  brief.blocks.jobs.yesterdayAdded = null;
+  const article = buildDailyBriefArticle(brief);
+  for (const locale of ['it', 'en', 'de', 'fr']) {
+    const body4 = article.content[locale].body4;
+    assert.ok(!body4.includes('⚠️'), `${locale}.body4 carries the outage note despite jobs.available`);
+  }
+  assert.match(article.content.it.body4, /22'645|22.645|22645/); // the totals lead
+  assert.match(article.content.it.body4, /\/cerca-lavoro-ticino\//); // link still there
+});
+
+test('cascade priority among fallbacks is what the comment declares', () => {
+  const calm = structuredClone(BRIEF.blocks);
+  calm.borderWait.worst.waitMinutes = 3; // sub-threshold queue
+  calm.jobs.yesterdayAdded = null;
+  calm.exchange = { available: false };
+  calm.fuel = { available: false };
+  // sub-threshold borderWait beats jobsTotal when both are available
+  assert.equal(pickHeadline(calm).kind, 'borderWait');
+  calm.borderWait = { available: false };
+  // finite-but-sub-threshold jobs beats jobsTotal
+  calm.jobs.yesterdayAdded = 2;
+  assert.equal(pickHeadline(calm).kind, 'jobs');
+  calm.jobs.yesterdayAdded = null;
+  assert.equal(pickHeadline(calm).kind, 'jobsTotal');
+});
+
+test('loadSnapshot refuses a snapshot whose counter disagrees with its own blocks', () => {
+  const dir = mkdtempSync(path.join(os.tmpdir(), 'daily-brief-lie-'));
+  const file = path.join(dir, 'daily-brief.json');
+  const lying = structuredClone(BRIEF);
+  lying.blocks.borderWait = { available: false };
+  lying.blocks.fuel = { available: false };
+  lying.blocks.exchange = { available: false };
+  lying.blocks.jobs = { available: false };
+  lying.counts.availableBlocks = 4; // the lie
+  writeFileSync(file, JSON.stringify(lying));
+  const { brief, reason } = loadSnapshot('2026-08-08', file);
+  assert.equal(brief, null);
+  assert.match(reason, /inconsistent snapshot/);
+});
+
 test('slugs are dated per locale; author rotation is deterministic and rotates', () => {
   const slugs = dailyBriefSlugs('2026-08-08');
   assert.equal(slugs.it, 'bollettino-frontaliere-2026-08-08');

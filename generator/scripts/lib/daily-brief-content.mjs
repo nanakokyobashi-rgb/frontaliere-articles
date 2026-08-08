@@ -201,6 +201,8 @@ const T = {
     jobsH: 'Lavoro: i numeri di ieri',
     jobsLead: (j) =>
       `Ieri sono arrivati **${fmt('it', j.yesterdayAdded)} nuovi annunci** di lavoro in Svizzera sul nostro job board; negli ultimi sette giorni ${fmt('it', j.last7dAdded)}. In totale gli annunci attivi sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}.`,
+    jobsLeadTotal: (j) =>
+      `Sul nostro job board gli annunci di lavoro attivi in Svizzera sono **${fmt('it', j.activeJobs)}**${j.activeCompanies ? `, da ${fmt('it', j.activeCompanies)} aziende` : ''}${Number.isFinite(j.last7dAdded) ? `; negli ultimi sette giorni ne sono arrivati ${fmt('it', j.last7dAdded)} nuovi` : ''}.`,
     jobsLink: `Le offerte si filtrano per cantone, settore e città: [cerca lavoro in Ticino e in Svizzera](${HUB.jobs.it}).`,
     jobsDown: '⚠️ Le statistiche del job board non sono aggiornate: il blocco torna nella prossima edizione. Gli annunci restano su [cerca lavoro](/cerca-lavoro-ticino/).',
     methodH: 'Come nasce questo bollettino',
@@ -256,6 +258,8 @@ const T = {
     jobsH: 'Jobs: yesterday’s numbers',
     jobsLead: (j) =>
       `**${fmt('en', j.yesterdayAdded)} new Swiss job listings** landed on our job board yesterday; ${fmt('en', j.last7dAdded)} over the last seven days. Active listings now total **${fmt('en', j.activeJobs)}**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}.`,
+    jobsLeadTotal: (j) =>
+      `Our job board currently carries **${fmt('en', j.activeJobs)} active Swiss job listings**${j.activeCompanies ? ` from ${fmt('en', j.activeCompanies)} companies` : ''}${Number.isFinite(j.last7dAdded) ? `; ${fmt('en', j.last7dAdded)} new ones arrived over the last seven days` : ''}.`,
     jobsLink: `Filter by canton, sector and city: [find jobs in Ticino and Switzerland](${HUB.jobs.en}).`,
     jobsDown: '⚠️ Job-board statistics are not up to date; this section returns in the next edition. Listings stay on [find jobs](/en/find-jobs-ticino/).',
     methodH: 'How this brief is made',
@@ -311,6 +315,8 @@ const T = {
     jobsH: 'Arbeitsmarkt: die Zahlen von gestern',
     jobsLead: (j) =>
       `Gestern kamen **${fmt('de', j.yesterdayAdded)} neue Stellenangebote** in der Schweiz auf unser Job-Board; in den letzten sieben Tagen ${fmt('de', j.last7dAdded)}. Insgesamt sind **${fmt('de', j.activeJobs)}** Anzeigen aktiv${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}.`,
+    jobsLeadTotal: (j) =>
+      `Auf unserem Job-Board sind derzeit **${fmt('de', j.activeJobs)} Stellenangebote in der Schweiz aktiv**${j.activeCompanies ? `, von ${fmt('de', j.activeCompanies)} Unternehmen` : ''}${Number.isFinite(j.last7dAdded) ? `; in den letzten sieben Tagen kamen ${fmt('de', j.last7dAdded)} neue hinzu` : ''}.`,
     jobsLink: `Nach Kanton, Branche und Stadt filtern: [Jobs im Tessin und in der Schweiz](${HUB.jobs.de}).`,
     jobsDown: '⚠️ Die Job-Board-Statistik ist nicht aktuell; der Abschnitt kehrt in der nächsten Ausgabe zurück. Die Angebote bleiben unter [Jobs im Tessin](/de/jobs-im-tessin/).',
     methodH: 'Wie dieses Bulletin entsteht',
@@ -366,6 +372,8 @@ const T = {
     jobsH: 'Emploi : les chiffres d’hier',
     jobsLead: (j) =>
       `Hier, **${fmt('fr', j.yesterdayAdded)} nouvelles offres d'emploi** en Suisse sont arrivées sur notre job board ; ${fmt('fr', j.last7dAdded)} sur les sept derniers jours. Au total, **${fmt('fr', j.activeJobs)}** annonces sont actives${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}.`,
+    jobsLeadTotal: (j) =>
+      `Notre job board compte actuellement **${fmt('fr', j.activeJobs)} offres d'emploi actives en Suisse**${j.activeCompanies ? `, de ${fmt('fr', j.activeCompanies)} entreprises` : ''}${Number.isFinite(j.last7dAdded) ? ` ; ${fmt('fr', j.last7dAdded)} nouvelles sont arrivées sur les sept derniers jours` : ''}.`,
     jobsLink: `Filtrez par canton, secteur et ville : [trouver un emploi au Tessin et en Suisse](${HUB.jobs.fr}).`,
     jobsDown: '⚠️ Les statistiques du job board ne sont pas à jour ; la section revient dans la prochaine édition. Les offres restent sur [trouver un emploi](/fr/trouver-emploi-tessin/).',
     methodH: 'Comment naît ce bulletin',
@@ -457,11 +465,17 @@ function buildLocaleContent(locale, brief, headline) {
     parts3.push(t.fxDown);
   }
 
-  // body4 — jobs + method
+  // body4 — jobs + method. Gated on `available`, like the headline cascade:
+  // a null yesterdayAdded (the stats regenerate during the day — plausible on
+  // the morning cron) falls back to the totals lead, so the title and this
+  // section can never contradict each other (second review finding, PR #51).
   const parts4 = [`## ${t.jobsH}`];
   const jobs = blocks.jobs;
   if (jobs?.available && Number.isFinite(jobs.yesterdayAdded)) {
     parts4.push(t.jobsLead(jobs));
+    parts4.push(t.jobsLink);
+  } else if (jobs?.available) {
+    parts4.push(t.jobsLeadTotal(jobs));
     parts4.push(t.jobsLink);
   } else {
     parts4.push(t.jobsDown);
@@ -504,6 +518,14 @@ export function loadSnapshot(todayIso, snapshotPath) {
   const available = Number(brief?.counts?.availableBlocks);
   if (!Number.isFinite(available) || available < MIN_AVAILABLE_BLOCKS) {
     return { brief: null, reason: `only ${available || 0} available blocks (min ${MIN_AVAILABLE_BLOCKS}) — too thin for an edition` };
+  }
+  // Defensive recount from the flags themselves: a snapshot whose counter
+  // disagrees with its own blocks (producer bug, hand-edited file) must be a
+  // refusal here — not a downstream throw that turns the cron red (second
+  // review on PR #51, adversarial check).
+  const realAvailable = Object.values(brief.blocks || {}).filter((b) => b?.available).length;
+  if (realAvailable < MIN_AVAILABLE_BLOCKS) {
+    return { brief: null, reason: `counter says ${available} but only ${realAvailable} blocks are actually available — inconsistent snapshot, refusing` };
   }
   return { brief, reason: null };
 }
