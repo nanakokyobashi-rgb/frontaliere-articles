@@ -1,0 +1,275 @@
+# Ripubblica le pagine live i cui articoli portano ancora un control character
+# C0 nel corpus (issue #67, dopo #65).
+#
+# PERCHE'. #65 sanifica l'HTML/JSON/XML all'uscita degli emitter: da quel
+# merge in poi ogni pubblicazione esce pulita qualunque cosa contenga il
+# corpus. Ma l'HTML gia' emesso PRIMA di #65 e' byte su disco sugli shard e
+# resta sporco finche' non viene ri-renderizzato — un control character in
+# `headline`/`caption` del ld+json e' dato strutturato PARSATO da un crawler,
+# non un dettaglio ingoiato dal browser. #66 tiene la causa a monte (il
+# generatore che scrive questi byte); finche' non e' chiusa, nuovi articoli
+# possono ancora nascere sporchi, quindi questo workflow resta invocabile di
+# nuovo — non e' un one-shot.
+#
+# COME. `scripts/find-dirty-content-ids.mjs` rilegge content/** (dato, non
+# rete: nessun `npm ci` sul percorso di detection, per restare immune alla
+# stessa classe di guasto — ETIMEDOUT su npm — che ha lasciato scoperto il
+# caso gemello in reconcile-article-shards.yml) e produce l'elenco (sezione,
+# id) da ripubblicare. Il backfill dispatcha fast-publish-article.yml — che
+# gia' fa render, push shard, purge CDN e verify in un posto solo — invece di
+# reimplementare quella pipeline qui.
+#
+# Il loop di dispatch-e-attendi, il tetto orario anti-tempesta e il budget
+# interno (soft/hard) rispecchiano deliberatamente quelli di
+# reconcile-article-shards.yml: stesso concurrency group a valle
+# (fast-publish-article), stesso caso peggiore per item (~42 min: attesa
+# gruppo + attesa comparsa run + attesa esito), quindi stessa aritmetica di
+# sicurezza. Non e' stato fattorizzato in uno script comune per non rifattorare
+# un workflow gia' in produzione fuori dallo scope di questa issue.
+#
+# Manuale (workflow_dispatch) e non su push/schedule: e' un drenaggio di
+# backlog, non una reazione a un evento — farlo partire da soli quando serve
+# tiene sotto controllo quanti fast-publish concorrenti competono con la
+# pubblicazione normale.
+
+name: republish-dirty-content
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Rileva e riporta, non dispatcha ripubblicazioni'
+        required: false
+        default: true
+        type: boolean
+      cap:
+        description: 'Ripubblicazioni massime in questo run'
+        required: false
+        default: '10'
+
+concurrency:
+  group: republish-dirty-content
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write # dispatch di fast-publish-article.yml + lettura run
+  issues: write
+
+jobs:
+  republish:
+    runs-on: ubuntu-latest
+    # Stessa aritmetica di reconcile-article-shards.yml: fino a qualche
+    # backfill sequenziale da ~7-10 min l'uno, piu' le attese di coda.
+    timeout-minutes: 50
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # NIENTE `npm ci`: la detection usa solo builtin Node + i moduli del
+      # repo (scripts/lib/sanitize-control-chars.mjs), zero dipendenze npm.
+
+      - name: Detect dirty ids (control character C0 nel corpus)
+        id: detect
+        run: |
+          set -euo pipefail
+          cap="${{ inputs.cap || '10' }}"
+          node scripts/find-dirty-content-ids.mjs \
+            --out "$RUNNER_TEMP/dirty.json" --cap "$cap"
+          {
+            echo "distinct=$(jq -r '.counts.distinct' "$RUNNER_TEMP/dirty.json")"
+            echo "selected=$(jq -r '.counts.selected' "$RUNNER_TEMP/dirty.json")"
+            echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/dirty.json")"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Resolve backfill mode
+        id: mode
+        run: |
+          set -euo pipefail
+          allow=true
+          if [ "${{ inputs.dry_run }}" != "false" ]; then
+            allow=false
+            echo "dispatch disabilitato: dry_run"
+          fi
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
+      - name: Backfill (dispatch fast-publish-article per gli id selezionati)
+        id: backfill
+        if: steps.mode.outputs.allow == 'true' && steps.detect.outputs.selected != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WF: fast-publish-article.yml
+        run: |
+          set -euo pipefail
+          results="$RUNNER_TEMP/backfill-results.tsv"
+          : > "$results"
+          selected_total="$(jq '.selected | length' "$RUNNER_TEMP/dirty.json")"
+
+          # Stesso bilancio wall-clock di reconcile-article-shards.yml (vedi
+          # l'intestazione di quel workflow per la derivazione): il loop esce
+          # PULITO da solo, e cio' che resta finisce in `unprocessed`, che
+          # apre l'issue piu' sotto invece di sparire in silenzio.
+          START_TS="$(date +%s)"
+          SOFT_BUDGET=2100   # niente item nuovi oltre i 35 min
+          HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
+          elapsed() { echo $(( $(date +%s) - START_TS )); }
+
+          active_runs() {
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100" \
+              | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
+              || echo 999
+          }
+
+          # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora,
+          # CONDIVISO con reconcile-article-shards (stesso workflow a valle).
+          deferred=false
+          hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
+            | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
+          if [ "$recent" -ge 6 ]; then
+            echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando (tetto anti-tempesta)"
+            deferred=true
+          fi
+
+          failed=0
+          if [ "$deferred" = "false" ]; then
+          while IFS=$'\t' read -r id section; do
+            [ -n "$id" ] || continue
+
+            if [ "$(elapsed)" -ge "$SOFT_BUDGET" ]; then
+              echo "::warning::budget interno esaurito ($(elapsed)s) — mi fermo qui; il resto lo riprende un prossimo giro manuale"
+              break
+            fi
+
+            waited=0
+            while [ "$(active_runs)" -gt 0 ]; do
+              if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
+                echo "::warning::fast-publish occupato da troppo — mi fermo qui; il resto lo riprende un prossimo giro manuale"
+                break 2
+              fi
+              sleep 30; waited=$((waited + 30))
+            done
+
+            before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "── dispatch republish: $section/$id"
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
+              -f ref=main \
+              -f "inputs[article_id]=$id" \
+              -f "inputs[section]=$section" \
+              -f "inputs[dry_run]=false"
+
+            run_id=""
+            for i in $(seq 1 12); do
+              sleep 10
+              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
+                | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"
+              [ -n "$run_id" ] && break
+            done
+            if [ -z "$run_id" ]; then
+              echo "::warning::dispatch inviato ma la run non compare — la conterà il prossimo giro"
+              printf '%s\t%s\t%s\n' "$id" "$section" "lost" >> "$results"
+              failed=$((failed + 1))
+              continue
+            fi
+
+            conclusion=""
+            waited=0
+            while [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
+              status="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
+              if [ "$status" = "completed" ]; then
+                conclusion="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
+                break
+              fi
+              sleep 30; waited=$((waited + 30))
+            done
+            echo "   run $run_id → ${conclusion:-timeout}"
+            printf '%s\t%s\t%s\n' "$id" "$section" "${conclusion:-timeout}" >> "$results"
+            if [ "${conclusion:-}" != "success" ]; then failed=$((failed + 1)); fi
+          done < <(jq -r '.selected[] | [.id, .section] | @tsv' "$RUNNER_TEMP/dirty.json")
+          fi
+
+          attempted="$(grep -c . "$results" || true)"
+          unprocessed=$(( selected_total - attempted ))
+          [ "$unprocessed" -lt 0 ] && unprocessed=0
+          echo "attempted=$attempted, failed=$failed, unprocessed=$unprocessed, deferred=$deferred"
+          {
+            echo "deferred=$deferred"
+            echo "failed=$failed"
+            echo "attempted=$attempted"
+            echo "unprocessed=$unprocessed"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Prepare Firebase credentials
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Open/update the canonical issue (backfill falliti o coda oltre il cap)
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          report="$RUNNER_TEMP/dirty.json"
+          results="$RUNNER_TEMP/backfill-results.tsv"
+
+          body="$(printf '%s\n' \
+            "La ricerca di articoli con control character C0 nel corpus ha trovato lavoro che questo run non ha potuto chiudere." \
+            "" \
+            "- sporchi totali: **$(jq -r '.counts.distinct' "$report")** (selezionati: $(jq -r '.counts.selected' "$report"), oltre il cap: $(jq -r '.counts.leftover' "$report"))" \
+            "- backfill in questo run: tentati ${{ steps.backfill.outputs.attempted || '0' }}, falliti ${{ steps.backfill.outputs.failed || '0' }}, **non processati ${{ steps.backfill.outputs.unprocessed || '0' }}**" \
+            "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            "" \
+            "### Esito dei backfill tentati" \
+            '```' \
+            "$( [ -s "$results" ] && cat "$results" || echo '(nessun dispatch in questo run)' )" \
+            '```' \
+            "" \
+            "### In coda oltre il cap" \
+            '```' \
+            "$(jq -r '.leftover[] | [.section, .id] | @tsv' "$report")" \
+            '```' \
+            "" \
+            "Ri-lanciare manualmente questo workflow (\`gh workflow run republish-dirty-content.yml -f dry_run=false\`) drena il resto: non e' su schedule, quindi non riparte da solo." \
+            "" \
+            "_Aperta automaticamente da republish-dirty-content._")"
+
+          node scripts/lib/github-issue-creator.mjs \
+            --title "Articoli con control character C0: ripubblicazione incompleta" \
+            --description "$body" \
+            --priority 2 \
+            --label automation \
+            --workflow "republish-dirty-content"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
+
+      - name: Summary
+        if: always() && steps.detect.outcome == 'success'
+        run: |
+          {
+            echo "### republish-dirty-content"
+            echo
+            echo "- sporchi: **${{ steps.detect.outputs.distinct }}** (tentati ora: ${{ steps.detect.outputs.selected }}, in coda: ${{ steps.detect.outputs.leftover }})"
+            echo "- dispatch: \`${{ steps.mode.outputs.allow }}\` — tentati: \`${{ steps.backfill.outputs.attempted || '0' }}\`, falliti: \`${{ steps.backfill.outputs.failed || '0' }}\`, non processati: \`${{ steps.backfill.outputs.unprocessed || '0' }}\`, rimandato: \`${{ steps.backfill.outputs.deferred || 'false' }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
