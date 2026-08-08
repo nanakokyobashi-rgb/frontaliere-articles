@@ -26,6 +26,14 @@ on:
       # landed here and changed nothing, because only content/ was watched.
       - 'engine/**'
       - 'scripts/build-api.mjs'
+      # Same argument, one level down. build-blog-index.mjs runs in this job and
+      # emits the runtime list index; sanitize-control-chars.mjs is the output
+      # boundary both it and build-api.mjs pass every byte through. Watching the
+      # entrypoint alone repeats the RSS failure above in a new place: a fix to
+      # either lands, republishes nothing, and the served surface keeps being
+      # built by the old code until an unrelated corpus change happens along.
+      - 'scripts/build-blog-index.mjs'
+      - 'scripts/lib/sanitize-control-chars.mjs'
       - '.github/workflows/publish-api.yml'
   workflow_dispatch:
 

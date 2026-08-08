@@ -121,6 +121,15 @@ import path from 'node:path';
 import os from 'node:os';
 import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
+// Output-boundary sanitisation (see scripts/lib/sanitize-control-chars.mjs).
+// The renderer is engine/ogPagesPlugin.ts, which arrives by mirror and is not
+// editable from this repo, so the guard sits where THIS script writes the
+// bytes. Measured on the live apex page for `trump-intesa-o-inferno`: 0x17 and
+// 0x08 raw in <title>, og:title, og:image:alt, <h1> and the hero alt, and the
+// same two escaped inside the NewsArticle `headline`/`caption` and the
+// BreadcrumbList `name` — structured data served to crawlers, not to a browser
+// that would swallow them.
+import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -276,8 +285,12 @@ async function main() {
     indexHtml = rewriteBlogImageRefs(indexHtml);
     const finalBridgeHtml = rewriteBlogImageRefs(bridgeHtml);
 
-    fs.writeFileSync(indexAbs, indexHtml, 'utf-8');
-    fs.writeFileSync(flatAbs, finalBridgeHtml, 'utf-8');
+    // Last transform before the bytes hit disk, so it covers steps 1-5 and
+    // anything a later step inserts through them. A clean page comes back
+    // byte-identical, which keeps the byte-identity contract with the full
+    // build intact (scripts/check-article-byte-identity.mjs).
+    fs.writeFileSync(indexAbs, sanitizeHtmlDocument(indexHtml), 'utf-8');
+    fs.writeFileSync(flatAbs, sanitizeHtmlDocument(finalBridgeHtml), 'utf-8');
   }
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
@@ -320,6 +333,22 @@ async function main() {
     distDir,
     section: args.section,
   });
+
+  // The archive lists every article's TITLE, so it carries the same control
+  // bytes the article page does — one poisoned title contaminates every page
+  // of the /tutti/ chain in all 4 locales, not just its own URL. Steps 2-5
+  // deliberately skip these pages (they are article-body transforms); this is
+  // not an article-body transform, so it does not skip them. Rewritten only
+  // when something actually changed, so a clean archive keeps its bytes.
+  for (const locale of locales) {
+    for (const rel of hubResult.pathsByLocale[locale] ?? []) {
+      const abs = path.join(distDir, rel);
+      if (!fs.existsSync(abs)) continue;
+      const html = fs.readFileSync(abs, 'utf-8');
+      const clean = sanitizeHtmlDocument(html);
+      if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
+    }
+  }
 
   // ── Step 7: offload-generated-images-cdn.mjs, unmodified, via subprocess ──
   // The script hardcodes distDir = path.resolve(process.cwd(), 'dist'), so we

@@ -873,6 +873,26 @@
         "corpus": "492eaa81df74cbfe",
         "alignedAt": "2026-08-08"
       }
+    },
+    {
+      "path": "scripts/lib/sanitize-control-chars.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia di confine sull'output degli emitter (0x08/0x17 nei titoli sorgente). Non esiste sul sito: il sito rende le sue pagine dal proprio build e non emette ne' sitemap-blog.xml ne' i meta-*.json di questa superficie, che sono prodotti solo qui. Il difetto era misurato QUI (sitemap non well-formed, structured data inquinato sulla pagina live), e qui vivono i tre emitter che la usano: build-api.mjs, build-blog-index.mjs, publish-article-fast.mjs.",
+      "baseline": {
+        "site": null,
+        "corpus": "61f6e2723fabdad7",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/sanitize-control-chars.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Suite node:test del modulo sopra, piu' il guard statico che i tre emitter lo chiamino davvero: un sanificatore che nessuno invoca e' lo stesso difetto con un file in piu'. Include il caso che il byte-scan non vede — 0x08 gia' scappato in `\\b` dentro un blocco ld+json — perche' e' quello che ha fatto passare la CI verde.",
+      "baseline": {
+        "site": null,
+        "corpus": "2f41ffd5d74146bb",
+        "alignedAt": "2026-08-08"
+      }
     }
   ]
 }
