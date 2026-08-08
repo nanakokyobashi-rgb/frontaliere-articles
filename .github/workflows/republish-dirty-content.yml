@@ -11,13 +11,40 @@
 # possono ancora nascere sporchi, quindi questo workflow resta invocabile di
 # nuovo — non e' un one-shot.
 #
-# COME. `scripts/find-dirty-content-ids.mjs` rilegge content/** (dato, non
-# rete: nessun `npm ci` sul percorso di detection, per restare immune alla
-# stessa classe di guasto — ETIMEDOUT su npm — che ha lasciato scoperto il
-# caso gemello in reconcile-article-shards.yml) e produce l'elenco (sezione,
-# id) da ripubblicare. Il backfill dispatcha fast-publish-article.yml — che
-# gia' fa render, push shard, purge CDN e verify in un posto solo — invece di
-# reimplementare quella pipeline qui.
+# COME. `scripts/find-dirty-content-ids.mjs` seleziona in DUE passi e produce
+# l'elenco (sezione, id) da ripubblicare. Il backfill dispatcha
+# fast-publish-article.yml — che gia' fa render, push shard, purge CDN e verify
+# in un posto solo — invece di reimplementare quella pipeline qui.
+#
+#   1. pre-filtro sul corpus: rilegge content/** e tiene gli id che portano
+#      ancora un C0 (29 al 2026-08-09, su 3769 articoli). Gratuito e locale.
+#   2. filtro sulla PAGINA LIVE: un GET delle 4 URL locale di ogni candidato,
+#      sugli host origin, e tiene solo gli id la cui pagina e' ancora sporca.
+#
+# Il passo 2 e' la fix di #73 e senza di esso il drenaggio NON CONVERGE:
+# ripubblicare non riscrive `content/` (il corpus lo scrive solo il generatore,
+# e i 592 byte restano finche' #66 non e' chiusa), quindi la selezione del solo
+# passo 1 non cambia mai. Misurato: tre run consecutive, i primi 10 id in ordine
+# alfabetico rifatti due volte e i 19 «in coda» mai serviti.
+#
+# Col passo 2, sulla superficie reale del 2026-08-09: 29 candidati dal corpus →
+# 15 con la pagina ancora sporca, 116 pagine viste, tutte 200. Escono i 10
+# ripubblicati la sera prima E altri 4 gia' puliti da ripubblicazioni
+# precedenti — questi ultimi verificati a mano, pagina per pagina, prima di
+# fidarsene.
+#
+# «NIENTE npm» NON VUOL DIRE «NIENTE RETE». Il vincolo resta quello di prima —
+# nessun `npm ci` sul percorso di detection, per restare immune alla stessa
+# classe di guasto (ETIMEDOUT su npm) che ha lasciato scoperto il caso gemello
+# in reconcile-article-shards.yml — e il passo 2 lo rispetta: `fetch` e' builtin
+# di Node 22, non passa dal registro npm e non installa niente. E' esattamente
+# la posizione di reconcile-article-shards.yml, che fa rete (API pubblicata +
+# git) senza `npm ci` per la stessa ragione. Costo misurato: 116 richieste,
+# ~4 secondi.
+#
+# In dubbio si tiene: un fetch che fallisce non vale «pulita», l'id resta
+# candidato. Un falso positivo costa una ripubblicazione idempotente; un falso
+# negativo lascia una pagina sporca per sempre.
 #
 # Il loop di dispatch-e-attendi, il tetto orario anti-tempesta e il budget
 # interno (soft/hard) rispecchiano deliberatamente quelli di
@@ -73,10 +100,11 @@ jobs:
         with:
           node-version: '22'
 
-      # NIENTE `npm ci`: la detection usa solo builtin Node + i moduli del
-      # repo (scripts/lib/sanitize-control-chars.mjs), zero dipendenze npm.
+      # NIENTE `npm ci`: la detection usa solo builtin Node (`fetch` compreso)
+      # + i moduli del repo (scripts/lib/sanitize-control-chars.mjs,
+      # scripts/reconcile-article-shards.mjs), zero dipendenze npm.
 
-      - name: Detect dirty ids (control character C0 nel corpus)
+      - name: Detect dirty ids (C0 nel corpus E ancora sulla pagina live)
         id: detect
         run: |
           set -euo pipefail
@@ -84,6 +112,9 @@ jobs:
           node scripts/find-dirty-content-ids.mjs \
             --out "$RUNNER_TEMP/dirty.json" --cap "$cap"
           {
+            echo "candidates=$(jq -r '.counts.corpusCandidates' "$RUNNER_TEMP/dirty.json")"
+            echo "liveclean=$(jq -r '.counts.liveClean' "$RUNNER_TEMP/dirty.json")"
+            echo "livefilter=$(jq -r '.liveFilter' "$RUNNER_TEMP/dirty.json")"
             echo "distinct=$(jq -r '.counts.distinct' "$RUNNER_TEMP/dirty.json")"
             echo "selected=$(jq -r '.counts.selected' "$RUNNER_TEMP/dirty.json")"
             echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/dirty.json")"
@@ -233,9 +264,10 @@ jobs:
           results="$RUNNER_TEMP/backfill-results.tsv"
 
           body="$(printf '%s\n' \
-            "La ricerca di articoli con control character C0 nel corpus ha trovato lavoro che questo run non ha potuto chiudere." \
+            "La ricerca di articoli con control character C0 ancora sulla pagina live ha trovato lavoro che questo run non ha potuto chiudere." \
             "" \
-            "- sporchi totali: **$(jq -r '.counts.distinct' "$report")** (selezionati: $(jq -r '.counts.selected' "$report"), oltre il cap: $(jq -r '.counts.leftover' "$report"))" \
+            "- candidati dal corpus: $(jq -r '.counts.corpusCandidates' "$report") — di cui $(jq -r '.counts.liveClean' "$report") con pagine live gia' pulite (filtro live: \`$(jq -r '.liveFilter' "$report")\`)" \
+            "- sporchi sul live: **$(jq -r '.counts.distinct' "$report")** (selezionati: $(jq -r '.counts.selected' "$report"), oltre il cap: $(jq -r '.counts.leftover' "$report"))" \
             "- backfill in questo run: tentati ${{ steps.backfill.outputs.attempted || '0' }}, falliti ${{ steps.backfill.outputs.failed || '0' }}, **non processati ${{ steps.backfill.outputs.unprocessed || '0' }}**" \
             "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             "" \
@@ -270,6 +302,7 @@ jobs:
           {
             echo "### republish-dirty-content"
             echo
-            echo "- sporchi: **${{ steps.detect.outputs.distinct }}** (tentati ora: ${{ steps.detect.outputs.selected }}, in coda: ${{ steps.detect.outputs.leftover }})"
+            echo "- candidati dal corpus: ${{ steps.detect.outputs.candidates }} → filtro live \`${{ steps.detect.outputs.livefilter }}\`, gia' puliti: ${{ steps.detect.outputs.liveclean }}"
+            echo "- sporchi sul live: **${{ steps.detect.outputs.distinct }}** (tentati ora: ${{ steps.detect.outputs.selected }}, in coda: ${{ steps.detect.outputs.leftover }})"
             echo "- dispatch: \`${{ steps.mode.outputs.allow }}\` — tentati: \`${{ steps.backfill.outputs.attempted || '0' }}\`, falliti: \`${{ steps.backfill.outputs.failed || '0' }}\`, non processati: \`${{ steps.backfill.outputs.unprocessed || '0' }}\`, rimandato: \`${{ steps.backfill.outputs.deferred || 'false' }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
