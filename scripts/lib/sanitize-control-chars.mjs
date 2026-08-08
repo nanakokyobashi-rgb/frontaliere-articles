@@ -90,6 +90,15 @@ export function findControlChars(text) {
  * than rebuilt as a bare object, because rebuilding it would change what
  * `JSON.stringify` then emits. That is a data-corrupting fix for a
  * data-corruption bug, so it is refused explicitly instead of accidentally.
+ *
+ * KEYS ARE SANITISED TOO, and that is the one place this can lose data: strip a
+ * control character out of `blog.article.x.ti<0x08>tle` and it becomes
+ * `blog.article.x.title`, which the object may already have. The clean entry
+ * would be silently overwritten by the poisoned one — a whole article's title
+ * replaced by another's, with nothing raised. So a collision THROWS. It has
+ * never been observed in the corpus (the meta keys are generated from slugs and
+ * carry no control character); refusing is what keeps "never observed" from
+ * quietly becoming "never noticed".
  */
 export function sanitizeDeep(value) {
   if (typeof value === 'string') return sanitizeText(value);
@@ -98,7 +107,22 @@ export function sanitizeDeep(value) {
     const proto = Object.getPrototypeOf(value);
     if (proto !== Object.prototype && proto !== null) return value;
     const out = {};
-    for (const [key, val] of Object.entries(value)) out[sanitizeText(key)] = sanitizeDeep(val);
+    const origin = new Map();
+    for (const [key, val] of Object.entries(value)) {
+      const cleanKey = sanitizeText(key);
+      const previous = origin.get(cleanKey);
+      // Checked on the ORIGINAL keys, in both directions: whichever of the two
+      // arrives second would win, and neither order is a correct outcome.
+      if (previous !== undefined && previous !== key) {
+        throw new Error(
+          `sanitizeDeep: keys ${JSON.stringify(previous)} and ${JSON.stringify(key)} both become ` +
+            `${JSON.stringify(cleanKey)} once their control characters are removed — ` +
+            'refusing to drop one of the two values',
+        );
+      }
+      origin.set(cleanKey, key);
+      out[cleanKey] = sanitizeDeep(val);
+    }
     return out;
   }
   return value;
@@ -163,8 +187,20 @@ function stripEscapedControlChars(str) {
   return out;
 }
 
-/** Double-quoted string literals, with escapes consumed so `\"` does not close one. */
-const DOUBLE_QUOTED = /"(?:[^"\\]|\\[\s\S])*"/g;
+/**
+ * Quoted string literals, double and single, with escapes consumed so `\"` does
+ * not close one.
+ *
+ * Both quote styles, because `JSON.stringify` produces double quotes but hand-
+ * written inline script does not, and the escape rules are identical in either.
+ * NOT template literals: a `${...}` interpolation can hold arbitrary code — a
+ * regex literal included — and `\b` in a regex is a word boundary. Covering
+ * backticks would mean parsing the interpolation to know where the string
+ * really is, and getting that wrong changes the program. If an emitter ever
+ * interpolates a title into a template literal, this pass misses it silently;
+ * the raw-character pass still catches the unescaped spelling.
+ */
+const QUOTED = /"(?:[^"\\]|\\[\s\S])*"|'(?:[^'\\]|\\[\s\S])*'/g;
 
 /** Inline `<script>` blocks; the `src` test is applied to the attributes by the caller. */
 const SCRIPT_BLOCK = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
@@ -183,16 +219,16 @@ const SCRIPT_BLOCK = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
  *     document can be clean under pass 1 and still serve a poisoned `headline`.
  *
  * Pass 2 is confined twice over: to inline scripts (a `src=` block has no body
- * of ours to fix), and within those, to double-quoted string literals. That
- * second confinement is what makes removing `\b` safe — in a JavaScript regex
- * literal `\b` is a word boundary and deleting it would change the program, but
- * a regex literal is not inside a double-quoted string.
+ * of ours to fix), and within those, to quoted string literals. That second
+ * confinement is what makes removing `\b` safe — in a JavaScript regex literal
+ * `\b` is a word boundary and deleting it would change the program, but a regex
+ * literal is not inside a quoted string. See QUOTED for what that leaves out.
  */
 export function sanitizeHtmlDocument(html) {
   if (typeof html !== 'string') return html;
   return html.replace(INVALID_C0, '').replace(SCRIPT_BLOCK, (whole, attrs, body) => {
     if (/\bsrc\s*=/i.test(attrs) || body === '') return whole;
-    const cleaned = body.replace(DOUBLE_QUOTED, stripEscapedControlChars);
+    const cleaned = body.replace(QUOTED, stripEscapedControlChars);
     return cleaned === body ? whole : `<script${attrs}>${cleaned}</script>`;
   });
 }

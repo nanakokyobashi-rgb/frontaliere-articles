@@ -139,6 +139,25 @@ test('a control character survives JSON.stringify as an escape — sanitising th
   assert.doesNotMatch(serialisedClean, /\\u00[01]|\\b|\\f/);
 });
 
+test('refuses two keys that collapse onto the same key, in either order', () => {
+  // Stripping a key is the one way this module can LOSE data: the poisoned key
+  // and the clean one become the same string, and whichever arrives second
+  // wins. A wrong article's title under the right key raises nothing anywhere,
+  // so it stops here rather than being resolved by iteration order.
+  const DIRTY_KEY = 'blog.article.x.ti\u0008tle';
+  const CLEAN_KEY = 'blog.article.x.title';
+  const dirtyFirst = { [DIRTY_KEY]: 'sbagliato', [CLEAN_KEY]: 'giusto' };
+  const cleanFirst = { [CLEAN_KEY]: 'giusto', [DIRTY_KEY]: 'sbagliato' };
+  assert.equal(Object.keys(dirtyFirst).length, 2, 'the two keys really are distinct');
+  for (const [label, obj] of [['dirty first', dirtyFirst], ['clean first', cleanFirst]]) {
+    assert.throws(() => sanitizeDeep(obj), /both become .*blog\.article\.x\.title.*refusing/s, label);
+  }
+});
+
+test('a key that only needs sanitising, with no twin, still goes through', () => {
+  assert.deepEqual(sanitizeDeep({ ['a\u0008b']: 1, c: 2 }), { ab: 1, c: 2 });
+});
+
 test('does not rebuild a non-plain object into a bare one', () => {
   const when = new Date('2026-08-08T00:00:00.000Z');
   const out = sanitizeDeep({ when });
@@ -271,6 +290,34 @@ test('a \\b word boundary in a regex literal is left alone', () => {
   assert.equal(sanitizeHtmlDocument(html), html);
 });
 
+test('single-quoted string literals are covered too, not only double-quoted ones', () => {
+  // JSON.stringify emits double quotes; hand-written inline script does not,
+  // and the escape rules are the same in either.
+  const html = "<script>var t='marted\\b8 sar\\u00170'</script>";
+  assert.equal(sanitizeHtmlDocument(html), "<script>var t='marted8 sar0'</script>");
+});
+
+test('a single-quoted string containing double quotes is matched as one span', () => {
+  // The exact shape the renderer emits; a naive alternation would open a
+  // double-quoted span in the middle of it.
+  const html =
+    '<script>var ls=document.querySelectorAll(\'link[media="print"][href]\');' +
+    "var u='x\\u0017y'</script>";
+  assert.equal(
+    sanitizeHtmlDocument(html),
+    '<script>var ls=document.querySelectorAll(\'link[media="print"][href]\');' +
+      "var u='xy'</script>",
+  );
+});
+
+test('template literals are deliberately NOT covered, and the reason is the interpolation', () => {
+  // A `${...}` can hold a regex literal, where `\b` is a word boundary. The
+  // limit is documented on QUOTED; this pins it so it cannot be widened by
+  // accident without someone reading why.
+  const html = '<script>var t=`a\\bb${/\\bx\\b/.source}`</script>';
+  assert.equal(sanitizeHtmlDocument(html), html);
+});
+
 test('an external script and a clean page are untouched', () => {
   const html =
     '<script defer src="https://cdn.frontaliereticino.ch/a.js"></script>' +
@@ -324,6 +371,7 @@ test('every emitter that writes the public surface goes through the sanitiser', 
     'scripts/build-blog-index.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
       /JSON\.stringify\(sanitizeDeep\(\{/,
+      /assertNoControlChars\(/,
     ],
     'scripts/publish-article-fast.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
