@@ -239,13 +239,17 @@ jobs:
           # passthrough it would publish an alternate-less index — the same
           # defect, freshly reintroduced. Registered in EDGE_PUSHED_FILES on
           # the site side; this is the upload that key reads.
+          #
+          # Same explicit Cache-Control as the blog index below, for the same
+          # reason: these three are rewritten on every publish, and
+          # upload-cdn-file.sh's default is the write-once images/ class.
           urls=()
           for f in sitemap-blog.xml sitemap-blog-ch.xml sitemap-articles-archive.xml; do
             if [ ! -s "dist/api/$f" ]; then
               echo "::warning::dist/api/$f missing or empty — skipping"
               continue
             fi
-            bash scripts/lib/upload-cdn-file.sh "dist/api/$f" "edge/$f"
+            bash scripts/lib/upload-cdn-file.sh "dist/api/$f" "edge/$f" "public,max-age=600"
             urls+=("https://frontaliereticino.ch/$f")
           done
 
@@ -254,9 +258,25 @@ jobs:
           # whitelist-and-purge path for whole documents it serves as pages.
           # This one is fetched by the app, so it just needs to be at the URL
           # cdnDataUrl() builds.
+          #
+          # The explicit Cache-Control is load-bearing. upload-cdn-file.sh
+          # defaults to `public, max-age=86400`, which is the images/ class: it
+          # is correct for a hero image written once and never again, and wrong
+          # for a file this job REWRITES on every publish — roughly every half
+          # hour. The site's own deploy already syncs this exact R2 prefix with
+          # `public,max-age=600` (scripts/lib/deploy-it-pages-prep.sh, _r2_sync
+          # "$stage/data" data), so the 24h default was this publisher writing a
+          # second, 144x slacker freshness contract into a prefix that already
+          # had one. Matching it is the point — not a tuning choice.
+          #
+          # This is the SAFETY NET, not the mechanism: the purge below is what
+          # makes a publish visible immediately. The TTL decides how long a
+          # publish stays invisible when that purge does not happen — a missing
+          # CF_API_TOKEN, a Cloudflare error, a variant nobody thought of. That
+          # window was 24 hours. It is now 10 minutes.
           for f in dist/api/data/blog-index-*.json; do
             [ -s "$f" ] || continue
-            bash scripts/lib/upload-cdn-file.sh "$f" "data/$(basename "$f")"
+            bash scripts/lib/upload-cdn-file.sh "$f" "data/$(basename "$f")" "public,max-age=600"
             urls+=("https://cdn.frontaliereticino.ch/data/$(basename "$f")")
           done
           if [ ${#urls[@]} -gt 0 ]; then

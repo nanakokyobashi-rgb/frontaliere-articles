@@ -71,6 +71,7 @@
  * own propagation window.
  */
 import { resolveZoneId as resolveZoneIdShared } from './lib/cf-analytics.mjs';
+import { purgeBodiesForUrls } from './lib/cf-purge-variants.mjs';
 
 const PURGE_SETTLE_MS = Number(process.env.CF_PURGE_SETTLE_MS) || 20_000;
 const MAX_TARGETED_FILES = 30; // Cloudflare free-plan `files` purge_cache cap.
@@ -159,21 +160,36 @@ try {
   }
 
   for (const [i, batch] of batches.entries()) {
-    const purgeBody = batch ? { files: batch } : { purge_everything: true };
     const purgeLabel = batch
       ? `${batch.length} file(s)${batches.length > 1 ? ` (batch ${i + 1}/${batches.length})` : ''}`
       : 'purge_everything';
-    const { json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
-    if (!json?.success) {
-      console.error(`❌ ${purgeLabel} failed: ${JSON.stringify(json?.errors)}`);
-      warnStaleEdge(
-        `${purgeLabel} API call failed: ${JSON.stringify(json?.errors)}`,
-        batch ? `until the next successful purge of these URLs` : undefined,
-      );
-      // Fatal on the first failing batch: a partial purge is exactly the
-      // half-done state the hard error above existed to prevent, and the
-      // caller must see it rather than read a green step.
-      process.exit(1);
+
+    // One POST per cache VARIANT, not one per URL list. `cdn.frontaliereticino.ch`
+    // answers with `Vary: Origin`, so the edge holds a separate entry for the
+    // cross-origin `fetch()` the site's SPA makes — and that entry is the only
+    // one a visitor ever reads. A bare `files: [url]` purge clears the
+    // header-less entry and leaves the browser's alone until its own max-age
+    // expires. See scripts/lib/cf-purge-variants.mjs for the measurement that
+    // made this repo's own publish look green while the article stayed
+    // invisible in every list.
+    const purgeVariants = batch
+      ? purgeBodiesForUrls(batch)
+      : [{ label: 'purge_everything', purge_everything: true }];
+
+    for (const { label, ...purgeBody } of purgeVariants) {
+      const { json } = await cf('POST', `/zones/${zoneId}/purge_cache`, purgeBody);
+      if (!json?.success) {
+        console.error(`❌ ${purgeLabel} [${label}] failed: ${JSON.stringify(json?.errors)}`);
+        warnStaleEdge(
+          `${purgeLabel} [${label}] API call failed: ${JSON.stringify(json?.errors)}`,
+          batch ? `until the next successful purge of these URLs` : undefined,
+        );
+        // Fatal on the first failing batch: a partial purge is exactly the
+        // half-done state the hard error above existed to prevent, and the
+        // caller must see it rather than read a green step. A variant left
+        // unpurged is the same half-done state, one layer down.
+        process.exit(1);
+      }
     }
   }
 
