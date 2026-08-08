@@ -1,0 +1,218 @@
+name: Generate Daily Brief Edition (Bollettino del Frontaliere)
+
+# The DAILY dated edition (`bollettino-frontaliere-YYYY-MM-DD`) — the Discover
+# opener. Form copied from generate-border-wait-ranking-weekly.yml, with the
+# differences that matter spelled out:
+#
+#   - DATED id, registered fresh every day (not an evergreen body refresh):
+#     a bumped updatedAt on a stable id is not a new story for Discover.
+#     Flooding is bounded by build-api's sitemap retention (latest 90 listed).
+#   - The data comes from Firestore over REST (trafficCurrent, fuelPrices,
+#     exchangeHistory) plus the public CDN jobs-stats.json — so the Firebase
+#     service account is needed BEFORE generation, in every mode, unlike the
+#     ranking whose window is public. A missing SA is a config error and fails
+#     the run; a missing DATA SOURCE only degrades its block (per-block
+#     degradation lives in the scripts, not here).
+#   - A day with fewer than 2 fresh blocks produces NO edition and exits 0
+#     without committing: a day without data must not break the cron, and an
+#     empty edition must never be published (loadSnapshot enforces both).
+#   - The hero + thumbnail are pushed to R2 after the commit (best-effort,
+#     same upload-cdn-file.sh as fast-publish): the og:image in the static
+#     HTML points at cdn.frontaliereticino.ch, and Discover reads exactly
+#     that URL. The raw.githubusercontent client fallback does not cover the
+#     static markup, so the CDN warm belongs to this job.
+#
+# The push uses GITHUB_PAT from Remote Config, NOT GITHUB_TOKEN — a
+# GITHUB_TOKEN push would not fire publish-api.yml (GitHub anti-recursion),
+# and the edition would never reach the API surface, the sitemap, or the site.
+
+on:
+  schedule:
+    # Daily, 05:05 UTC — before the morning commute (07:05 CEST), off the
+    # congested top-of-hour cron slot.
+    - cron: '5 5 * * *'
+  # Self-test on change, always dry. See generate-border-wait-ranking-weekly.yml.
+  push:
+    paths:
+      - '.github/workflows/generate-daily-brief.yml'
+      - 'generator/scripts/refresh-daily-brief-data.mjs'
+      - 'generator/scripts/generate-daily-brief-article.mjs'
+      - 'generator/scripts/lib/daily-brief-data.mjs'
+      - 'generator/scripts/lib/daily-brief-content.mjs'
+      - 'generator/scripts/lib/daily-brief-image.mjs'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Plan only: fetch the data and render, write nothing'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: generate-daily-brief
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          # Load-bearing, not hygiene: the stored GITHUB_TOKEN extraheader
+          # would take precedence over the PAT in the push URL below. See the
+          # incident note in generate-border-wait-ranking-weekly.yml.
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      # --ignore-scripts is safe WITH sharp: its linux binary arrives via the
+      # platform-specific optional package, no postinstall needed.
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund --ignore-scripts
+
+      # Needed BEFORE generation in every mode: the data snapshot reads
+      # Firestore over REST with this service account. Missing SA = config
+      # error = red run (a data outage, by contrast, only degrades blocks).
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — Firestore reads and the push PAT both come from it"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Refresh the day's data snapshot
+        env:
+          DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
+        run: node generator/scripts/refresh-daily-brief-data.mjs
+
+      # Registers today's edition (or refreshes it on a same-day rerun), and
+      # renders the unique 1200×675 hero from the day's numbers. Refuses thin
+      # or stale snapshots with exit 0 — see the script header.
+      - name: Generate the daily edition
+        env:
+          DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
+        run: node generator/scripts/generate-daily-brief-article.mjs
+
+      # RC is loaded only when there is a commit to push (GITHUB_PAT) and
+      # assets to warm on the CDN (R2_*). A dry run never touches it.
+      - name: Load secrets from Remote Config
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Configure git identity
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      - name: Commit and push
+        id: commit
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          # Explicit list, never -A. Globs (nullglob: a no-edition day expands
+          # them to nothing, and `git add` of an unmatched pathspec would fail
+          # the green exit below). The seo glob covers a shard roll past
+          # seo-blog-5.
+          shopt -s nullglob
+          git add public/data/daily-brief.json \
+                  content/blogArticleIds.ts \
+                  content/routerBlogData.ts \
+                  content/blog-articles-data.ts \
+                  content/blog-meta-it.ts \
+                  content/blog-meta-en.ts \
+                  content/blog-meta-de.ts \
+                  content/blog-meta-fr.ts \
+                  content/seo/seo-blog-*.ts
+          EDITION_FILES=(content/blog-body/*/bollettino-frontaliere-*.ts \
+                         public/images/blog/bollettino-frontaliere-*.webp \
+                         public/images/blog/thumbnails/bollettino-frontaliere-*-480w.webp)
+          if [ "${#EDITION_FILES[@]}" -gt 0 ]; then
+            git add "${EDITION_FILES[@]}"
+          fi
+          if git diff --cached --quiet; then
+            echo "no edition today (no data, or nothing changed) — exiting green"
+            echo "pushed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml and the edition would never go live"
+            exit 1
+          fi
+
+          git commit -m "Daily brief edition $(date -u +%F)"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              echo "pushed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            sleep $((attempt * 3))
+          done
+          echo "::error::push failed after 3 attempts (git output above)"
+          exit 1
+
+      # Best-effort CDN warm (upload-cdn-file.sh always exits 0 by design):
+      # the static og:image URL is cdn.frontaliereticino.ch/images/blog/<id>.webp
+      # and Discover fetches exactly that. Purge afterwards in case a 404 for
+      # the not-yet-uploaded key was already cached at the edge.
+      - name: Push hero + thumbnail to the CDN
+        if: steps.mode.outputs.dry != 'true' && steps.commit.outputs.pushed == 'true'
+        run: |
+          set -euo pipefail
+          ID="bollettino-frontaliere-$(date -u +%F)"
+          HERO="public/images/blog/$ID.webp"
+          THUMB="public/images/blog/thumbnails/$ID-480w.webp"
+          if [ ! -f "$HERO" ]; then
+            echo "::warning::$HERO not on disk — nothing to warm (edition may be a same-day refresh)"
+            exit 0
+          fi
+          bash scripts/lib/upload-cdn-file.sh "$HERO" "images/blog/$ID.webp"
+          if [ -f "$THUMB" ]; then
+            bash scripts/lib/upload-cdn-file.sh "$THUMB" "images/blog/thumbnails/$ID-480w.webp"
+          fi
+          node scripts/cf-purge-cache.mjs --files="https://cdn.frontaliereticino.ch/images/blog/$ID.webp,https://cdn.frontaliereticino.ch/images/blog/thumbnails/$ID-480w.webp" || true
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Daily Brief Edition"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Pushed: ${{ steps.commit.outputs.pushed || 'n/a' }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
