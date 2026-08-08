@@ -231,6 +231,16 @@
       }
     },
     {
+      "path": ".github/workflows/gh-pat-expiry-monitor.yml",
+      "mode": "adapted",
+      "reason": "Identita' GITHUB_PAT_NANAKO, ponte RC del corpus, niente npm ci, niente exit 1 sul load-failure (il failure-scanner aprirebbe una issue doppia), niente step shard deploy-key (admin=false), cadenza 20 6,18 invece di 30 6. LOAD_FAIL_TITLE resta letterale: e' la chiave di dedup con alert-pat-down.mjs.",
+      "baseline": {
+        "site": "07b46476f187df45",
+        "corpus": "8346089e16d173a6",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
       "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome.",
