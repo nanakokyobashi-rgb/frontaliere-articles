@@ -316,42 +316,14 @@ jobs:
           section="${{ steps.mode.outputs.section }}"
           shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
 
-          # UN SOLO push per locale, articolo + hub insieme.
-          #
-          # Prima erano due — l'articolo qui, la griglia dell'hub più in basso in questo
-          # stesso step — verso LO STESSO repo shard, a pochi secondi di distanza. Ogni push
-          # innesca una build GitHub Pages, e due build concorrenti sullo stesso repo si
-          # ostacolano: nello storico di frontaliere-articolisvizzera-it ogni pubblicazione
-          # compare come una COPPIA di build allo stesso minuto, una `built` e una `errored`,
-          # per giorni.
-          #
-          # Finché una delle due passava, il difetto era invisibile. Il 2026-08-06 alle 11:34
-          # hanno fallito entrambe: l'articolo era committato nello shard (21 KB, verificato
-          # via API) e l'origin rispondeva 404 ore dopo, perché il sito restava sull'ultima
-          # build riuscita. Il gate «Verify the article is actually readable» ha fatto il suo
-          # lavoro e ha reso rosso il run — 5 run su 20 in due giorni, su articoli diversi.
-          #
-          # Con un push solo la corsa non esiste: una build per pubblicazione.
           for loc in it en de fr; do
             mapfile -t paths < <(jq -r --arg l "$loc" '.shards[] | select(.locale==$l) | .paths[]' "$summary")
-            hpaths=()
-            if [ -s "$RUNNER_TEMP/hub-landing.json" ]; then
-              mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$RUNNER_TEMP/hub-landing.json")
-            fi
             # Signature is <section> <locale> <scratch_dist_dir> <relpath...>.
             # There is no subtree argument: each relpath is BOTH the path under
             # $dist and the destination path inside the shard repo.
-            echo "── pushing ${#paths[@]} article + ${#hpaths[@]} landing file(s) to $shard/$loc"
-            # Il fallback conserva la differenza di severità che le due chiamate separate
-            # esprimevano: l'articolo è duro, l'hub è morbido («the hub stays stale, the
-            # article is unaffected»). Se il push combinato fallisce si riprova col solo
-            # articolo, così una pagina hub malformata non può impedire la pubblicazione.
-            if ! bash scripts/lib/push-article-shard-incremental.sh \
-                 "$shard" "$loc" "$dist" "${paths[@]}" ${hpaths[@]+"${hpaths[@]}"}; then
-              echo "::warning::combined push failed for $shard/$loc — retrying with the article alone (the hub stays stale)"
-              bash scripts/lib/push-article-shard-incremental.sh \
-                "$shard" "$loc" "$dist" "${paths[@]}"
-            fi
+            echo "── pushing ${#paths[@]} files to $shard/$loc"
+            bash scripts/lib/push-article-shard-incremental.sh \
+              "$shard" "$loc" "$dist" "${paths[@]}"
           done
 
           while IFS=$'\t' read -r local key; do
@@ -359,21 +331,28 @@ jobs:
             bash scripts/lib/upload-cdn-file.sh "$local" "$key"
           done < <(jq -r '.cdnUploads[] | "\(.local)\t\(.key)"' "$summary")
 
-          # Il push delle landing dell'hub non è più qui: è stato assorbito nel push unico
-          # in cima a questo step.
+          # The refreshed landing pages, LAST and non-fatal.
           #
-          # Il commento che stava in questo punto aveva già visto metà del problema — «this
-          # change doubles the pushes per article, so that non-zero exit is a real
-          # possibility» — e lo mitigava mettendo il push dell'hub PER ULTIMO e non fatale,
-          # così un suo fallimento non poteva terminare lo step prima delle upload CDN.
-          #
-          # Quella mitigazione proteggeva dal fallimento dello *script* di push. Non poteva
-          # proteggere dalla conseguenza vera del raddoppio, che sta fuori dal runner: due
-          # push allo stesso repo shard producono due build GitHub Pages concorrenti, e una
-          # delle due va sistematicamente in `errored`. Con un push solo la causa sparisce
-          # invece di essere assorbita, e le due proprietà che quel commento difendeva —
-          # ordine e non-fatalità — sono conservate dal fallback dentro il loop.
-          if [ ! -s "$RUNNER_TEMP/hub-landing.json" ]; then
+          # Both properties matter. Last, because this step runs under
+          # `set -e`: a landing push that exits non-zero from here would
+          # terminate the step before the CDN uploads above ever ran, and the
+          # purge step has no `always()` — so the article would be on its shard
+          # with no og:image and a cached 404 at the apex. Non-fatal, because a
+          # hub that stays as stale as it already was is a far smaller failure
+          # than an article that never becomes readable. The shard push races
+          # the periodic deploy and this change doubles the pushes per article,
+          # so that non-zero exit is a real possibility, not a theoretical one.
+          hub="$RUNNER_TEMP/hub-landing.json"
+          if [ -s "$hub" ]; then
+            for loc in it en de fr; do
+              mapfile -t hpaths < <(jq -r --arg l "$loc" '.pages[] | select(.locale==$l) | .path' "$hub")
+              [ "${#hpaths[@]}" -gt 0 ] || continue
+              echo "── pushing ${#hpaths[@]} landing page(s) to $shard/$loc"
+              bash scripts/lib/push-article-shard-incremental.sh \
+                "$shard" "$loc" "$dist" "${hpaths[@]}" \
+                || echo "::warning::hub landing push failed for $shard/$loc — the hub stays stale, the article is unaffected"
+            done
+          else
             echo "::warning::no hub-landing.json — the landing grid was not refreshed for this article"
           fi
 

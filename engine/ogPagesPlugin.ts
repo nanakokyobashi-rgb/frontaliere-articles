@@ -8,7 +8,6 @@
  */
 
 import path from 'path';
-import { buildRelatedArticlesIndex } from './relatedArticlesIndex';
 import type { Plugin } from 'vite';
 import { getSiteShell } from './siteShell';
 import { buildArticleSeoSections, cleanupArticleBodySections, articleBodySectionLabel, renderArticleDerivedSectionsHtml } from './articleSeoFallback';
@@ -17,7 +16,6 @@ import { stripMarkdownPlain } from './shared/stripMarkdownPlain';
 import { isFaqQuestionHeading } from './shared/faqQuestionPrefixes';
 import { boostDescriptionForCtr } from './shared/ctrBoostDescription';
 import { ARTICLE_SECTION_DESCRIPTORS, extractBlogEntryPositions, blogKeyToArticleId } from './shared/articleSectionDescriptors';
-import { ARTICLE_ROBOTS_INDEX_ENHANCED } from './shared/robotsDirective';
 
 /**
  * Empty SPA mount point, mirroring build-plugins/htmlTemplate.ts `rootShell`.
@@ -40,33 +38,6 @@ function articleRootShell(hasSpaBundle: boolean): string {
     ? '<div id="root"><div class="ft-hdr-reserve" aria-hidden="true"></div></div>'
     : '<div id="root"></div>';
 }
-
-/**
- * Footer portal target — the OTHER half of the staticOverlay shell contract.
- *
- * `articleRootShell` above mirrors only the `#root` mount of
- * build-plugins/htmlTemplate.ts; the canonical `seoContentOutsideRoot` body
- * section there emits BOTH `#root` and, after `</main>`, a
- * `<div id="footer-root"></div>`. App.tsx (`footerPortalTarget`) portals the
- * footer into that node on every `staticOverlay` route; when the node is
- * absent the portal resolves to `null` and the footer falls back to an INLINE
- * render inside `#root` — i.e. ABOVE `main.seo-static-content`, burying the
- * whole article (and every footer internal link) under ~1500 px of chrome on
- * mobile. That is the exact failure PR #243 fixed for `/calcola-stipendio/*`
- * and that `audit:footer-root-presence` (scripts/audit-footer-root-presence.mjs,
- * zero-tolerance) guards.
- *
- * Emitting the article body as a `<main class="seo-static-content">` sibling of
- * `#root` (#4959) opted these pages INTO that contract without bringing this
- * half along, so all ~900 articles × 4 locales shipped without the portal
- * target: 3608 offenders in post-deploy validation run 30974294824, up from 23.
- *
- * Deliberately re-stated here rather than imported, for the same reason as
- * `articleRootShell`: this package must not reach back into `build-plugins`
- * (tests/packages-articles-confinement.test.ts) and it is loaded inside the
- * post-walk worker thread.
- */
-const ARTICLE_FOOTER_ROOT = '<div id="footer-root"></div>';
 
 export interface RenderedArticleEntry {
  articleId: string;
@@ -163,7 +134,6 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  titleBrandSuffix: TITLE_BRAND_SUFFIX,
  titleMaxChars: TITLE_MAX_CHARS,
  clampMetaDescription,
- repairSerpSnippet,
  truncateCodeUnits,
  stableChunkFile,
  stableChunkFiles,
@@ -305,13 +275,11 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  if (!answerRaw) continue;
  const cleanAnswer = stripMarkdownForFaq(answerRaw);
  if (!cleanAnswer) continue;
- // Surrogate-safe (truncateHeadline slices via truncateCodeUnits): this answer
- // becomes FAQPage JSON-LD acceptedAnswer.text; a raw slice can split an emoji
- // pair and leave a lone surrogate that breaks parsing. truncateHeadline also
- // cuts on a word boundary and peels the dangling clause tail — the previous
- // raw slice ended answers mid-word inside a rich result that Google renders
- // directly in the SERP.
- const truncated = truncateHeadline(cleanAnswer, 300);
+ // Surrogate-safe: this answer becomes FAQPage JSON-LD acceptedAnswer.text; a
+ // raw slice can split an emoji pair and leave a lone surrogate that breaks parsing.
+ const truncated = cleanAnswer.length > 300
+ ? truncateCodeUnits(cleanAnswer, 297) + '...'
+ : cleanAnswer;
  pairs.push({ question: heading, answer: truncated });
  }
  return pairs;
@@ -759,20 +727,6 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  const LOC_TAG: Record<string, string> = { it: 'it_CH', en: 'en_US', de: 'de_CH', fr: 'fr_CH' };
 
- // Hero-image intrinsic size. Every blog hero this pipeline produces is
- // 1200x675 (sampled across the live CDN + /images/places: all exactly that),
- // which is also what og:image:width/height and the Event branch's ImageObject
- // already asserted — as three separate literals. One constant, because the
- // <img> below now carries the same numbers and a fourth copy is a drift
- // waiting to happen: the width/height attributes are what reserve the box
- // before the bytes arrive, so a stale literal here is CLS on every article
- // page, which Auto Ads then inherits (Non-Negotiable #7 — reserve space).
- //
- // 1200px wide is not incidental: it is Google Discover's documented floor for
- // the large-image card that `max-image-preview:large` opts into.
- const HERO_WIDTH = 1200;
- const HERO_HEIGHT = 675;
-
  // Race-free SPA bundle hash extraction (SiteShellContract.resolveSpaBundle —
  // see build-plugins/spaBundleResolver.ts for the real site-side implementation).
  const spaBundle = resolveSpaBundle(distDir);
@@ -798,36 +752,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  const relatedArticlesLabel: Record<string, string> = {
  it: 'Articoli correlati', en: 'Related articles', de: 'Verwandte Artikel', fr: 'Articles connexes',
  };
- // Topic-ranked related articles with an inbound-link floor
- // (packages/articles/engine/relatedArticlesIndex.ts).
- //
- // This replaces a picker that took the 3 newest same-category articles plus
- // the 2 newest overall. That pool is sorted globally by date and does not
- // vary per article, so every page emitted nearly the same five links:
- // replayed against the 3.085 published articles, 99,48% of them (3.069)
- // received ZERO inbound links from any other article, and two articles were
- // linked from all 3.084 others. `category` could not rescue it either — four
- // values, with `novita` holding 62% of the corpus.
- //
- // Built ONCE for the whole corpus rather than per page: the fairness pass and
- // the orphan repair are corpus-level properties and cannot be decided one
- // page at a time. `entries` is guaranteed full/unfiltered here even on the
- // single-article fast path (see the `onlyArticleIdSet` comment below), which
- // is exactly what this needs.
- const relatedArticlesMap = buildRelatedArticlesIndex(
- entries.map(e => ({
- articleId: e.articleId,
- title: e.ogT.replace(/\s*\|\s*Frontaliere Ticino\s*$/i, ''),
- excerpt: e.ogD,
- datePub: e.datePub,
- category: articleCategoryById[e.articleId],
- })),
- );
- const entryById = new Map(entries.map(e => [e.articleId, e]));
- const buildRelatedArticlesHtml = (currentId: string, _currentCategory: string, locale: string): string => {
- const picks = (relatedArticlesMap.get(currentId) ?? [])
- .map(id => entryById.get(id))
- .filter((e): e is typeof entries[number] => Boolean(e));
+ // Sort entries by date (most recent first) for recency-based fallback
+ const entriesByDate = [...entries].sort((a, b) => (b.datePub || '').localeCompare(a.datePub || ''));
+ const buildRelatedArticlesHtml = (currentId: string, currentCategory: string, locale: string): string => {
+ // Prefer same category, then fall back to most recent
+ const sameCategory = entriesByDate.filter(e => e.articleId !== currentId && articleCategoryById[e.articleId] === currentCategory);
+ const others = entriesByDate.filter(e => e.articleId !== currentId && articleCategoryById[e.articleId] !== currentCategory);
+ const picks = [...sameCategory.slice(0, 3), ...others.slice(0, 5 - Math.min(sameCategory.length, 3))].slice(0, 5);
  if (picks.length === 0) return '';
  const items = picks.map(art => {
  const slug = blogSlugs[art.articleId]?.[locale] ?? art.articleId;
@@ -842,8 +773,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
 
  for (const en of entries) {
  // Single-article / batch fast path (#4837 stream A, batched #4881 Fase 4):
- // the entries parse above MUST stay full/unfiltered (the title-collision map
- // and the corpus-wide related-articles index both need every other article's
+ // the entries parse above MUST stay full/unfiltered (title-collision map +
+ // entriesByDate related-articles pool both need every other article's
  // metadata to render THIS one correctly) — this is the only place that
  // narrows down to the requested id set.
  if (onlyArticleIdSet && !onlyArticleIdSet.has(en.articleId)) continue;
@@ -894,23 +825,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  // headline structured data to match (Publisher Center answer/9607104)
  // Headline VERBATIM — no truncation. Brand applied conditionally below.
  const localizedTitle = localizedTitleRaw.replace(/\s*\|\s*Frontaliere Ticino\s*$/i, '');
- // Repair descriptions the corpus generator already amputated mid-clause
- // BEFORE they reach this render layer. `scripts/create-article.mjs` cut the
- // stored excerpt to a fixed budget without peeling the tail, so 2 936 entries
- // in content/seo/** end on a dangling preposition — 1 844 of them on the
- // literal "… Dati aggiornati 2026 per". Those arrive UNDER the clamp budget,
- // so no downstream truncation ever inspects them: without this call they ship
- // to the SERP broken. No-ops on text that already reads as complete.
- // Applied at the single definition point so <meta name="description">,
- // og:description, the visible <p> lede and JSON-LD all stay identical.
- const localizedDesc = repairSerpSnippet(localizedMeta?.excerpt || en.ogD);
- // Hero alt text. The corpus already carries a per-locale `imageAlt` (parsed
- // out of the blog-meta chunks alongside title/excerpt) and nothing consumed
- // it — og:image:alt fell back to the headline. Prefer the real alt, keep the
- // headline as the floor so the attribute is never empty: an <img> without an
- // accessible name fails the repo's own accessibility contract, and a decorative
- // alt="" would tell Discover this image is not about the article.
- const heroAlt = localizedMeta?.imageAlt || localizedTitle;
+ const localizedDesc = localizedMeta?.excerpt || en.ogD;
  // Pad short descriptions to ≥150 chars for Bing (locale variant excerpts are often <150)
  const LOCALE_DESC_CONTEXT: Partial<Record<string, string>> = {
  en: ' Practical guide and free tools for cross-border workers (frontalieri) between Switzerland and Italy. Frontaliere Ticino.',
@@ -930,14 +845,10 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  (localeForMeta ?? 'it') as 'it' | 'en' | 'de' | 'fr',
  { maxLength: 155 },
  );
- // Truncate to ≤155 chars for Bing/Google snippet display.
- // truncateHeadline, NOT truncateCodeUnits: the raw code-unit slice cut mid
- // WORD and shipped snippets like "…impatto su perme…" (live offender
- // /articoli-frontaliere/calendario-festivi-ticino-2026/). truncateHeadline
- // cuts on a word boundary and peels the dangling clause tail, so the snippet
- // always ends on a content word — same helper every other template family
- // already reaches through clampMetaDescription.
- const metaDesc = truncateHeadline(metaDescRaw, 155);
+ // Truncate to ≤155 chars for Bing/Google snippet display
+ const metaDesc = metaDescRaw.length > 155
+ ? truncateCodeUnits(metaDescRaw, 152) + '…'
+ : metaDescRaw;
  // <title>: headline VERBATIM, brand suffix only when total <= TITLE_MAX_CHARS.
  // Per build-plugins/shared/titleSuffix.ts, mid-headline ellipsis truncation
  // tanks CTR (see /calcola-stipendio/ regression doc). We only force a
@@ -1069,8 +980,8 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  description: sdStr('description') || localizedDesc,
  image: imageObjectLd({
  url: imgU,
- width: HERO_WIDTH,
- height: HERO_HEIGHT,
+ width: 1200,
+ height: 675,
  }),
  url: full,
  inLanguage: locale,
@@ -1117,19 +1028,7 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  '@type': 'NewsArticle',
  headline: localizedTitle,
  description: localizedDesc,
- // ImageObject, not the bare URL string this used to be. Google's
- // Article/NewsArticle guidance asks for the image's dimensions so card
- // eligibility can be decided WITHOUT fetching and measuring the file, and
- // Discover's large-image card has a documented 1200px floor — a bare string
- // makes that a fetch-and-hope. The Event branch above already builds its
- // image through this exact helper; this branch, which covers every real
- // news article, did not.
- image: imageObjectLd({
- url: imgU,
- width: HERO_WIDTH,
- height: HERO_HEIGHT,
- caption: heroAlt,
- }),
+ image: imgU,
  url: full,
  inLanguage: locale,
  // Author matches the visible "Di {authorName}" byline below and the
@@ -1272,13 +1171,13 @@ export async function renderArticlePages(opts: RenderArticlePagesOptions): Promi
  <meta property="og:title" content="${esc(localizedTitle)}">
  <meta property="og:description" content="${esc(clampMetaDescription(localizedDesc))}">
  <meta property="og:image" content="${imgU}">
- <meta property="og:image:width" content="${HERO_WIDTH}">
- <meta property="og:image:height" content="${HERO_HEIGHT}">
+ <meta property="og:image:width" content="1200">
+ <meta property="og:image:height" content="675">
  <meta property="og:image:type" content="${en.img?.includes('.webp') ? 'image/webp' : 'image/jpeg'}">
  <meta property="og:image:alt" content="${esc(localizedTitle)}">
  <meta property="og:locale" content="${LOC_TAG[locale] ?? 'it_CH'}">
  <meta property="og:site_name" content="Frontaliere Ticino">
- <meta name="robots" content="${ARTICLE_ROBOTS_INDEX_ENHANCED}">
+ <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
  <meta property="fb:app_id" content="891036063797338">
  <meta property="article:published_time" content="${esc(normalizeDateTime(en.datePub || en.dateMod || todayIso))}">
  <meta property="article:modified_time" content="${esc(normalizeDateTime(en.dateMod || en.datePub || todayIso))}">
@@ -1289,29 +1188,6 @@ ${href}
  <script type="application/ld+json">${ldJsonStr}</script>
  <script type="application/ld+json">${breadcrumbLd}</script>${faqLdTag}
  <link rel="icon" type="image/svg+xml" href="/favicon.svg">`;
-
- // The hero image, as an ELEMENT. Until now the static article HTML carried
- // none: measured on four live article pages with a Googlebot-smartphone UA,
- // `<img` occurred 0 times, `<picture>` 0, `srcset` 0. The only reference was
- // the preload directly below — a preload with no consumer in the document,
- // which is both a wasted high-priority fetch and, more to the point, nothing
- // for Discover to build a card from. The image existed only in the React
- // render (components/community/BlogArticles.tsx), i.e. behind JS execution.
- //
- // `max-image-preview:large` was already set in the head. That directive
- // raises the CAP on preview size; it does not supply an image. With no <img>
- // in the crawled markup the cap applied to nothing — which is why this is the
- // technical half of "appear in Discover", not an editorial one.
- //
- // Same `en.img` URL as the preload on purpose, so the preload finally has its
- // consumer and resolves to one request rather than two. width/height are the
- // intrinsic size (see HERO_WIDTH/HERO_HEIGHT) so the box is reserved before
- // the bytes land — no CLS for Auto Ads to inherit. The `/images/blog/...`
- // src is rewritten to the CDN downstream by rewriteBlogImageRefs(), which is
- // attribute-agnostic (it matches the path, not the surrounding attribute) and
- // therefore already covers src= exactly as it covers the preload's href=.
- const heroFigureHtml =
- `<figure class="my-4"><img src="${en.img}" alt="${esc(heroAlt)}" width="${HERO_WIDTH}" height="${HERO_HEIGHT}" fetchpriority="high" decoding="async" class="w-full h-auto rounded-lg"></figure>`;
 
  const blogPreloads = [
  `<link rel="preload" as="image" href="${en.img}" fetchpriority="high">`,
@@ -1369,7 +1245,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body class="bg-surface-alt text-heading overflow-x-hidden">
- ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(differentiateH1FromTitle(localizedTitle, htmlPageTitle, articleLocale))}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')} · ${buildDateByline(en.datePub || en.dateMod || todayIso, en.dateMod || en.datePub || todayIso, locale)}</p>${heroFigureHtml}<p>${esc(localizedDesc)}</p>${articleBodyHtml}${visibleFaqHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav></article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(true)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(differentiateH1FromTitle(localizedTitle, htmlPageTitle, articleLocale))}</h1><p class="article-byline s-L_lk4l">Di ${en.authorSlug && en.authorName ? `<a href="/autori/${en.authorSlug}/" rel="author">${esc(en.authorName)}</a>` : esc(en.authorName || 'Redazione Frontaliere Ticino')} · ${buildDateByline(en.datePub || en.dateMod || todayIso, en.dateMod || en.datePub || todayIso, locale)}</p><p>${esc(localizedDesc)}</p>${articleBodyHtml}${visibleFaqHtml}${buildRelatedArticlesHtml(en.articleId, articleCategoryById[en.articleId] || '', locale)}<nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav></article></main>
  <script type="module" crossorigin fetchpriority="high" src="/assets/${entryJs}"></script>
  </body>
 </html>`;
@@ -1392,7 +1268,7 @@ ${headTags}
  ${OFFERWALL_FC_SNIPPET}
  </head>
  <body>
- ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(differentiateH1FromTitle(localizedTitle, htmlPageTitle, articleLocale))}</h1>${heroFigureHtml}<p>${esc(localizedDesc)}</p><nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav></article></main>${ARTICLE_FOOTER_ROOT}
+ ${articleRootShell(false)}<main class="seo-static-content"><article class="ft-blog-article"><h1>${esc(differentiateH1FromTitle(localizedTitle, htmlPageTitle, articleLocale))}</h1><p>${esc(localizedDesc)}</p><nav><a href="/">Simulatore Fiscale</a> | <a href="/compara-servizi/">Confronta Servizi</a> | <a href="/tasse-e-pensione/">Tasse e Pensione</a> | <a href="/guida-frontaliere/">Guida Frontaliere</a> | <a href="/domande-frequenti-frontalieri/">FAQ</a> | <a href="/glossario-frontaliere/">Glossario</a> | <a href="/${SECTION.indexSlug.it}/">Articoli</a></nav></article></main>
  </body>
 </html>`;
  };

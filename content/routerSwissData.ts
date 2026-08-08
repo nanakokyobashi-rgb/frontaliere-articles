@@ -651,18 +651,6 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'calo-disavanzo-cantonale-2026': { it: 'calo-disavanzo-cantonale-2026', en: 'cantonal-deficit-improvement-2026', de: 'kantonales-defizit-2026', fr: 'deficit-cantonal-2026' },
  'canicola-lavoro-dialogo-consiglio-stato': { it: 'canicola-lavoro-dialogo-consiglio-stato', en: 'heatwave-work-council-dialogue', de: 'hitze-arbeitsrat-dialog', fr: 'canicule-travail-conseil-dialogue' },
  'glencore-aumenta-utili-e-ricavi-nel-semestre': { it: 'glencore-aumenta-utili-e-ricavi-nel-semestre', en: 'glencore-augments-profits-and-revenues-in-the-first-half', de: 'glencore-steigert-gewinn-und-umsatz-im-ersten-halbjahr', fr: 'glencore-augmente-ses-benefices-et-ses-revenus-dans-la-premiere-mois' },
- 'raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato': { it: 'raffreddare-le-citta-svizzere-il-lavoro-e-appena-iniziato', en: 'slug-en', de: 'slug-de', fr: 'slug-fr' },
- 'snl-ricorso-lago-maggiore': { it: 'snl-ricorso-lago-maggiore', en: 'snl-ricorso-lago-maggiore', de: 'snl-ricorso-lago-maggiore', fr: 'snl-ricorso-lago-maggiore' },
- 'marina-carobbio-guscetti-fiducia-istituzioni': { it: 'marina-carobbio-guscetti-fiducia-istituzioni', en: 'marina-carobbio-guscetti-confidence-in-institutions', de: 'marina-carobbio-guscetti-vertrauen-in-der-verwaltung', fr: 'marina-carobbio-guscetti-confiance-dans-les-institutions' },
- 'votazioni-federali-svizzera-funzionano': { it: 'votazioni-federali-svizzera-funzionano', en: 'swiss-federal-votes-how-they-work', de: 'schweizerische-bundeswahlen-wie-funktionieren-sie', fr: 'votes-federaux-suisse-fonctionnent' },
- 'imposta-cantonale-confronto-svizzera-2026-canton-zurigo': { it: 'imposta-cantonale-confronto-svizzera-2026-canton-zurigo', en: 'imposta-cantonale-confronto-svizzera-2026-canton-zurigo', de: 'imposta-cantonale-confronto-svizzera-2026-canton-zurigo', fr: 'imposta-cantonale-confronto-svizzera-2026-canton-zurigo' },
- 'lex-netflix-cinema-svizzero-2025': { it: 'lex-netflix-cinema-svizzero-2025', en: 'lex-netflix-swiss-cinema-2025', de: 'lex-netflix-schweizer-kino-2025', fr: 'lex-netflix-cinema-suisse-2025' },
- 'rischio-bolla-svizzera-2026': { it: 'rischio-bolla-svizzera-2026', en: 'swiss-real-estate-bubble-risk-2026', de: 'schweizer-immobilien-bubble-risiko-2026', fr: 'risque-de-bulle-immobiliere-suisse-2026' },
- 'easyjet-apollon-acquisizione': { it: 'easyjet-apollon-acquisizione', en: 'easyjet-apollon-acquisition', de: 'easyjet-apollon-ubernahme', fr: 'easyjet-apollon-acquisition' },
- 'disoccupazione-svizzera-luglio-2026-seco': { it: 'disoccupazione-svizzera-luglio-2026-seco', en: 'switzerland-unemployment-july-2026-seco', de: 'arbeitslosigkeit-schweiz-juli-2026-seco', fr: 'chomage-suisse-juillet-2026-seco' },
- 'costo-vita-2026-zurigo-analisi': { it: 'costo-vita-2026-zurigo-analisi', en: 'cost-of-living-switzerland-2026-zurich-canton', de: 'lebenskosten-schweiz-2026-kanton-zuerich', fr: 'cout-de-la-vie-suisse-2026-canton-zurich' },
- 'imposta-cantonale-confronto-svizzera-2026-canton-basilea': { it: 'imposta-cantonale-confronto-svizzera-2026-canton-basilea', en: 'canton-tax-comparison-switzerland-2026-basel-canton', de: 'kantonaler-steuervergleich-schweiz-2026-kanton-basel', fr: 'comparaison-impots-cantonaux-suisse-2026-canton-de-bale' },
- 'casse-di-disoccupazione-superati-i-problemi-tecnici': { it: 'casse-di-disoccupazione-superati-i-problemi-tecnici', en: 'cases-of-unemployment-superated-the-technical-problems', de: 'arbeitslosenfursorge-uberwunden-technische-probleme', fr: 'caisses-de-chomage-surmontes-de-problemes-techniques' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

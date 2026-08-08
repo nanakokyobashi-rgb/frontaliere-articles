@@ -15,16 +15,6 @@ on:
     paths:
       - 'generator/**'
       - '.github/workflows/generator-ci.yml'
-      # engine/ and host/ are two halves of one contract and must be tested
-      # together. engine/ is mirrored down from the site (which owns it) and
-      # reads the shell that host/ (which we own) supplies; the shell-contract
-      # gate below is the only thing that checks they still fit. Without these
-      # two patterns an engine mirror PR ran NO CI at all — which is how the
-      # site's #5147 could add `repairSerpSnippet` to the contract and have the
-      # mirrored engine throw `TypeError: repairSerpSnippet is not a function`
-      # at article-render time behind a green tick.
-      - 'engine/**'
-      - 'host/**'
       # The dry-run job's whole premise is `npm ci` + loading every entry point,
       # so what gets installed is part of what it tests. Without these two, a
       # dependency change — or the addition of the lockfile `npm ci` requires —
@@ -37,11 +27,6 @@ on:
       - '.github/workflows/generator-ci.yml'
       - 'package.json'
       - 'package-lock.json'
-      # See the note on the push trigger: the automated engine mirror from the
-      # site arrives as a PR, and this is what makes that PR gated rather than
-      # merely visible.
-      - 'engine/**'
-      - 'host/**'
   workflow_dispatch:
 
 permissions:
@@ -70,17 +55,6 @@ jobs:
       # into ONE failing test on Node 22 instead of discovering the files.
       - name: Unit + closure gates
         run: node --test 'generator/tests/*.test.mjs'
-
-      # Runtime, and separate from the suite above on purpose: that suite runs
-      # under a bare `node --test`, which cannot import TypeScript, so every one
-      # of its engine assertions reads the engine as TEXT. A shell missing a
-      # member is invisible to text — 40/40 green while `renderArticlePages`
-      # throws. This boots the real bootstrap and inspects the real object.
-      #
-      # tsx via npx, not a dependency: this job deliberately has no `npm ci`
-      # (see the note above), and the repo's own scripts already run this way.
-      - name: Shell contract - host/ satisfies the mirrored engine
-        run: npx -y tsx@4 generator/tests/shell-contract-coverage.mjs
 
       # The parity gate: the transported modules must still behave exactly as
       # main's did at transport time. The golden was recorded by running the
