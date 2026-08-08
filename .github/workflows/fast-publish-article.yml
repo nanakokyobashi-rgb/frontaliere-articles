@@ -504,6 +504,7 @@ jobs:
           summary="$RUNNER_TEMP/fast-summary.json"
           section="${{ steps.mode.outputs.section }}"
           shard="$([ "$section" = "svizzera" ] && echo articolisvizzera || echo articolifrontaliere)"
+          owner="$(jq -r --arg s "$shard" '.[$s] // "valerielinc-ops"' scripts/lib/section-shard-owners.json)"
 
           # Two checks, deliberately different in strength, because they answer
           # different questions.
@@ -522,19 +523,111 @@ jobs:
           # publish as broken, which is its own kind of lie.
           fail=0
 
+          # WHY THE TIMEOUT IS NOT ITSELF THE VERDICT (issue #31).
+          #
+          # This gate was failing ~10% of runs, and every time it was right that
+          # the URL was 404 — but wrong about the reason it reported ("the shard
+          # push did not become readable" points at the push, which had landed).
+          # The real cause sits one layer down, outside the runner: the GitHub
+          # Pages build for that shard commit comes back `errored` with a
+          # duration of 0ms. Nothing was built, so the page stays 404 until some
+          # LATER push happens to trigger a good build.
+          #
+          # Measured on frontaliere-articolisvizzera-fr: build errored 0ms at
+          # 2026-08-08T03:23:51Z for commit 1ed91403 (run 31237078985), and the
+          # very next build — same commit, no new push — was `built` in 34s.
+          # Same signature at 2026-08-07T22:50:48Z. An errored 0ms build is a
+          # transient fault on GitHub's side, and re-requesting it clears it.
+          #
+          # So on a timeout we ask Pages what happened and, only when it says
+          # `errored`, request one more build and poll once more. ONE retry, not
+          # a loop: a Pages outage that survives a second build is a real
+          # failure and must stay red rather than be papered over. Either way
+          # the error message now carries the build status, so the issue this
+          # opens points at the cause instead of the symptom.
+          #
+          # $GITHUB_PAT is the same credential the shard push uses (Remote
+          # Config, loaded above; push-article-shard-incremental.sh reads
+          # $SHARD_PUSH_PAT then falls back to it). Verified 2026-08-08: it is a
+          # classic PAT with `repo`, which is enough for both Pages endpoints
+          # even though it only has push — not admin — on the shard repos.
+          # load-rc-env.mjs already ::add-mask::s it.
+
+          # Poll $1 until it answers 200, at most $2 times. Last code observed
+          # is left in $POLL_CODE.
+          poll_origin() {
+            local u="$1" attempts="$2" i
+            POLL_CODE=000
+            for i in $(seq 1 "$attempts"); do
+              set +e
+              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
+              set -e
+              [ "$POLL_CODE" = "200" ] && return 0
+              sleep 15
+            done
+            return 1
+          }
+
+          # Latest Pages build state for repo $1 -> $PAGES_STATUS (+ $PAGES_ERROR).
+          # Never fatal: an unreachable or unauthorised API just reads "unknown",
+          # which falls through to the same hard failure as before.
+          pages_latest() {
+            local repo="$1" body
+            set +e
+            body="$(curl -s --max-time 20 \
+                    -H "Authorization: Bearer ${GITHUB_PAT:-}" \
+                    -H "Accept: application/vnd.github+json" \
+                    "https://api.github.com/repos/$repo/pages/builds/latest")"
+            set -e
+            PAGES_STATUS="$(printf '%s' "$body" | jq -r '.status // "unknown"' 2>/dev/null || echo unknown)"
+            PAGES_ERROR="$(printf '%s' "$body" | jq -r '.error.message // ""' 2>/dev/null || echo "")"
+            [ -n "$PAGES_STATUS" ] || PAGES_STATUS=unknown
+          }
+
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::warning::GITHUB_PAT is not set — the Pages-build recovery is unavailable, a timeout will fail as it did before"
+          fi
+
           echo "── origin (hard gate)"
           while IFS=$'\t' read -r loc p0; do
             u="https://origin-$shard-$loc.frontaliereticino.ch/${p0%index.html}"
-            code=000
-            for attempt in $(seq 1 12); do
-              set +e
-              code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
-              set -e
-              [ "$code" = "200" ] && break
-              sleep 15
-            done
-            if [ "$code" = "200" ]; then echo "  200  $u"
-            else echo "::error::$u answers $code — the shard push did not become readable"; fail=1; fi
+            repo="$owner/frontaliere-$shard-$loc"
+
+            if poll_origin "$u" 12; then
+              echo "  200  $u"
+              continue
+            fi
+
+            pages_latest "$repo"
+            echo "::warning::$u answers $POLL_CODE after the first poll — latest Pages build for $repo is '$PAGES_STATUS'"
+
+            if [ "$PAGES_STATUS" != "errored" ]; then
+              echo "::error::$u answers $POLL_CODE — the shard push did not become readable (Pages build status: $PAGES_STATUS)"
+              fail=1
+              continue
+            fi
+
+            echo "── the Pages build errored; requesting one rebuild of $repo"
+            set +e
+            rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
+                  -H "Authorization: Bearer ${GITHUB_PAT:-}" \
+                  -H "Accept: application/vnd.github+json" \
+                  "https://api.github.com/repos/$repo/pages/builds")"
+            set -e
+            if [ "$rc" != "201" ]; then
+              echo "::error::$u answers $POLL_CODE and the Pages build for $repo is 'errored'; the rebuild request returned HTTP $rc so it could not be retried"
+              fail=1
+              continue
+            fi
+
+            if poll_origin "$u" 12; then
+              echo "  200  $u  (recovered after re-requesting the Pages build)"
+              continue
+            fi
+
+            pages_latest "$repo"
+            echo "::error::$u answers $POLL_CODE after a rebuild — GitHub Pages build for $repo is '$PAGES_STATUS'${PAGES_ERROR:+ ($PAGES_ERROR)}. The push landed; this is a Pages build failure on the shard, not a missing article."
+            fail=1
           done < <(jq -r '.shards[] | [.locale, .paths[0]] | @tsv' "$summary")
 
           echo "── apex (best effort, edge cache is eventually consistent)"
