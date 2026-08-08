@@ -1,0 +1,275 @@
+name: GH_PAT Expiry Monitor
+
+# Porta su questo repo il monitor del PAT che il ciclo dava per esistente.
+#
+# ## Perché esisteva un buco
+#
+# `scripts/ci/alert-pat-down.mjs` è arrivato qui `mode: "identical"` dal sito, e
+# dichiara nel proprio commento due cose che qui NON erano vere:
+#
+#   «Il titolo è IDENTICO a quello del monitor → il dedup di
+#    github-issue-creator converge sull'issue canonica e l'auto-close-on-recovery
+#    del monitor resta l'unico punto di chiusura.»
+#
+#   «⚠ Tenere PAT_DOWN_TITLE in sync con LOAD_FAIL_TITLE in
+#    .github/workflows/gh-pat-expiry-monitor.yml»
+#
+# Quel workflow non c'era. Risultato osservato il 2026-08-08: un 429 transitorio
+# di Remote Config (`Remote Config REST fetch failed: 429`, run 31253394803) ha
+# fatto aprire la issue #45 `priority:urgent`, la condizione è rientrata da sé
+# entro pochi minuti — e NIENTE poteva chiuderla. `close-recovered-failure-issues.mjs`
+# matcha solo `^(?:Workflow|Crawler|CI) Failure: `, che questo titolo non
+# soddisfa; l'unico file che conosceva `PAT_DOWN_TITLE` era l'alerter che la apre.
+#
+# Il danno non è la singola issue rimasta aperta: è che l'alert fa DEDUP sul
+# titolo canonico. Senza chiuditore, ogni 429 successivo commenta sulla stessa
+# issue urgente perenne, e il segnale «il loop è giù» resta acceso per sempre —
+# a quel punto non distingue più l'allarme vero da quello stantio. Un allarme
+# sempre acceso è un allarme spento.
+#
+# ## ADATTAMENTI rispetto al sito (manifest: `adapted`)
+#
+#  - **`GITHUB_PAT_NANAKO`, non `GITHUB_PAT`.** È il nome che `RC_TO_ENV` mappa
+#    per questo account, ed è quello su cui gatano tutti i workflow qui.
+#  - **`LOAD_FAIL_TITLE` resta però `...GITHUB_PAT failed to load`, LETTERALE.**
+#    Non è una svista: è la chiave di dedup, e deve combaciare byte a byte con
+#    `PAT_DOWN_TITLE` in `alert-pat-down.mjs` (che è `identical` col sito e non
+#    si può divergere) e con le issue GIÀ emesse — la #45 in primis. Cambiarlo in
+#    `GITHUB_PAT_NANAKO` spezzerebbe il dedup e questo monitor aprirebbe una
+#    SECONDA issue invece di chiudere la prima. `generator/tests/pat-down-title-sync.test.mjs`
+#    pinna l'uguaglianza.
+#  - **Niente `npm ci`**: gli script del ciclo qui usano solo builtin Node.
+#  - **Il ponte RC è `generator/scripts/load-rc-env.mjs`**, non `scripts/`.
+#  - **NIENTE `exit 1` sul load-failure.** Il sito fallisce il run apposta, per
+#    renderlo rumoroso. Qui sarebbe controproducente: `workflow-failure-issues.yml`
+#    gira ogni `9,39` con `IGNORE_WORKFLOWS: ''` (cioè non ignora niente), quindi
+#    un run rosso produrrebbe una SECONDA issue — «Workflow Failure: GH_PAT
+#    Expiry Monitor» — accanto all'alert urgente che abbiamo appena aperto. Due
+#    issue per un fatto solo è esattamente il rumore che questo monitor esiste
+#    per ridurre. Il segnale è la issue urgente; il run resta verde e lo dice
+#    con `::error::`.
+#  - **Niente step sullo shadowing delle deploy key degli shard.** Leggere i NOMI
+#    dei secret è API admin-only e su questo repo `admin=false`; è lavoro del
+#    proprietario, dal lato sito.
+#  - **Due giri al giorno invece di uno** (`20 6,18`): il sito sta a `30 6`, e la
+#    latenza fino a ~24h è proprio ciò di cui l'alerter si lamenta nel suo
+#    commento. Due dimezzano la finestra di chiusura di un alert transitorio.
+#    NON di più: il modo in cui il PAT «cade» è un 429 di Remote Config, quindi
+#    interrogare RC più spesso rende più probabile il guasto che stiamo
+#    sorvegliando.
+#
+# Zero Claude, tutto deterministico.
+
+on:
+  schedule:
+    - cron: '20 6,18 * * *'
+  workflow_dispatch:
+    inputs:
+      warn_days:
+        description: 'Avvisa se il PAT scade entro questi giorni'
+        required: false
+        type: string
+        default: '30'
+
+concurrency:
+  group: gh-pat-expiry-monitor
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-expiry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        # Esce SEMPRE 0 by-design (non deve mai rompere un workflow), quindi
+        # l'unico segnale affidabile è l'env vuoto allo step successivo.
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Check PAT load-failure + expiry
+        env:
+          WARN_DAYS: ${{ inputs.warn_days || '30' }}
+          GH_REPO: ${{ github.repository }}
+          # GITHUB_TOKEN, NON il PAT: il PAT è la cosa potenzialmente rotta, e
+          # queste chiamate toccano solo le issue di questo repo.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          # ── Chiavi di dedup. Vedi ADATTAMENTI: il primo è LETTERALE. ───────
+          LOAD_FAIL_TITLE="Agent loop down: GITHUB_PAT failed to load"
+          EXPIRY_TITLE="GH_PAT expiry warning: rotate the Remote Config PAT"
+
+          # ── Fase 1: classifica la salute del PAT ──────────────────────────
+          LOAD_FAILED=false
+          LOAD_FAIL_REASON=""
+          EXPIRY=""
+
+          if [ -z "${GITHUB_PAT_NANAKO:-}" ]; then
+            echo "::error::GITHUB_PAT_NANAKO assente dall'ambiente — load da Remote Config fallito o parametro mancante. Il ciclo è degradato finché non rientra."
+            LOAD_FAILED=true
+            LOAD_FAIL_REASON="\`GITHUB_PAT_NANAKO\` è **vuoto** nell'ambiente del workflow — \`generator/scripts/load-rc-env.mjs\` non l'ha fornito. Cause probabili: outage o **rate limit (429)** di Remote Config, \`FIREBASE_SERVICE_ACCOUNT_JSON\` assente/ruotato, o il parametro cancellato da RC."
+          else
+            LOGIN="$(GH_TOKEN="$GITHUB_PAT_NANAKO" gh api user --jq '.login' 2>/dev/null || true)"
+            if [ -z "$LOGIN" ]; then
+              echo "::error::GITHUB_PAT_NANAKO presente ma non autentica (\`gh api user\` non ha risposto) — token scaduto o revocato."
+              LOAD_FAILED=true
+              LOAD_FAIL_REASON="\`GITHUB_PAT_NANAKO\` **è presente ma non autentica** — \`gh api user\` non ha risposto. Il token è quasi certamente **scaduto o revocato**."
+            else
+              echo "✅ Il PAT autentica come '$LOGIN'."
+              HEADERS="$(GH_TOKEN="$GITHUB_PAT_NANAKO" gh api -i / 2>/dev/null || true)"
+              # `|| true` OBBLIGATORIO: sotto `set -euo pipefail` un grep senza
+              # match — cioè un PAT classic SENZA header di scadenza, il caso
+              # normale — esce 1 e ucciderebbe lo script PRIMA della recovery.
+              # Sul sito questo ha tenuto il monitor morto in silenzio per 11
+              # giorni (2026-06-01 → 06-12).
+              EXPIRY="$(printf '%s\n' "$HEADERS" \
+                | { grep -i '^github-authentication-token-expiration:' || true; } \
+                | head -n1 \
+                | sed -E 's/^[^:]+:[[:space:]]*//' \
+                | tr -d '\r')"
+            fi
+          fi
+
+          echo "LOAD_FAILED=${LOAD_FAILED} | header di scadenza: '${EXPIRY:-<nessuno>}'"
+
+          # ── Fase 2: alert urgente (apri) oppure recovery (chiudi) ─────────
+          if [ "$LOAD_FAILED" = "true" ]; then
+            echo "::error::Apro/aggiorno l'alert urgente 'agent loop down'."
+
+            LOAD_DESC="$(printf '%s\n' \
+              "## 🚨 Il ciclo è DEGRADATO — il PAT non si è caricato" \
+              "" \
+              "$LOAD_FAIL_REASON" \
+              "" \
+              "### Impatto, altrimenti silenzioso" \
+              "Con \`GITHUB_PAT_NANAKO\` mancante o non valido questi workflow degradano al" \
+              "loro percorso inerte, con al massimo un \`::warning::\` che non legge nessuno:" \
+              "- \`auto-merge-on-lgtm.yml\` — merge col GITHUB_TOKEN, che **non ri-triggera \`publish-api.yml\`**: la superficie dati servita al sito resta vecchia senza un errore da nessuna parte" \
+              "- \`pr-autorebase.yml\` — niente push del rebase, niente dispatch di \`tests.yml\`" \
+              "- \`issue-triage.yml\` / \`followup-drainer.yml\` — routing e drain fermi" \
+              "- \`recycle-stale-prs.yml\` — re-queue \`agent:fix\` saltato" \
+              "" \
+              "### Cosa fare" \
+              "1. Verificare che Remote Config risponda e che il parametro del PAT esista e non sia vuoto." \
+              "2. Se un **429**, è rate limit transitorio: nessuna azione, rientra da sé." \
+              "3. Se scaduto o revocato, generare un PAT nuovo (scope minimi \`repo\` + \`workflow\`) e aggiornare Remote Config." \
+              "" \
+              "Questa issue si **auto-chiude** al prossimo run di questo monitor in cui il PAT autentica." \
+              "" \
+              "_Aperta automaticamente da GH_PAT Expiry Monitor._")"
+
+            node scripts/lib/github-issue-creator.mjs \
+              --title "$LOAD_FAIL_TITLE" \
+              --description "$LOAD_DESC" \
+              --priority 1 \
+              --label automation \
+              --workflow "GH_PAT Expiry Monitor"
+
+            # Niente `exit 1`: vedi ADATTAMENTI. Il run resta verde apposta.
+            exit 0
+          fi
+
+          # Recovery: chiude l'alert aperto, idempotente. È il punto di chiusura
+          # che `alert-pat-down.mjs` dà per esistente.
+          OPEN_LOAD_ALERT="$(gh issue list \
+            --state open \
+            --search "in:title \"${LOAD_FAIL_TITLE}\"" \
+            --limit 10 \
+            --json number,title \
+            --jq "[.[] | select(.title == \"${LOAD_FAIL_TITLE}\")][0].number" \
+            2>/dev/null || true)"
+          if [ -n "$OPEN_LOAD_ALERT" ] && [ "$OPEN_LOAD_ALERT" != "null" ]; then
+            echo "Recovery: chiudo l'alert aperto #${OPEN_LOAD_ALERT}."
+            gh issue comment "$OPEN_LOAD_ALERT" \
+              --body "✅ Recovery — il PAT ha autenticato correttamente nell'ultimo run di GH_PAT Expiry Monitor. Il ciclo è di nuovo integro. Chiudo." \
+              || true
+            gh issue close "$OPEN_LOAD_ALERT" --reason completed || true
+          else
+            echo "Nessun alert aperto da chiudere."
+          fi
+
+          # ── Fase 3: promemoria di rotazione se la scadenza è vicina ───────
+          NOW_EPOCH="$(date -u +%s)"
+          SHOULD_WARN=false
+          WARN_REASON=""
+          EXPIRY_DISPLAY="${EXPIRY:-sconosciuta}"
+
+          if [ -z "$EXPIRY" ]; then
+            echo "✅ Il PAT non riporta scadenza (classic senza expiration). Nessun avviso."
+            exit 0
+          fi
+
+          EXPIRY_EPOCH="$(date -u -d "$EXPIRY" +%s 2>/dev/null || true)"
+          if [ -z "$EXPIRY_EPOCH" ]; then
+            echo "::warning::Non riesco a interpretare la scadenza '$EXPIRY' — salto il confronto."
+            exit 0
+          fi
+
+          DAYS_LEFT=$(( (EXPIRY_EPOCH - NOW_EPOCH) / 86400 ))
+          echo "Il PAT scade fra ${DAYS_LEFT} giorno/i (soglia: ${WARN_DAYS})."
+          EXPIRY_DISPLAY="$EXPIRY (${DAYS_LEFT} giorno/i rimasti)"
+          if [ "$DAYS_LEFT" -gt "$WARN_DAYS" ]; then
+            echo "✅ Nessun avviso di scadenza necessario."
+            exit 0
+          fi
+
+          WARN_REASON="Il PAT scade fra **${DAYS_LEFT} giorno/i** (il \`${EXPIRY}\`), dentro la finestra di ${WARN_DAYS} giorni. Va ruotato in Firebase Remote Config prima che scada."
+
+          echo "::warning::Apro/aggiorno l'avviso di scadenza del PAT."
+
+          DESCRIPTION="$(printf '%s\n' \
+            "## ⚠️ Il PAT di questo repo sta per scadere" \
+            "" \
+            "$WARN_REASON" \
+            "" \
+            "**Scadenza rilevata:** \`${EXPIRY_DISPLAY}\`" \
+            "" \
+            "### Perché conta" \
+            "È un PAT **classic**, quindi scade davvero — a differenza del token della GitHub App" \
+            "che usa il sito, che si auto-rinnova. Alla scadenza il ciclo di questo repo non si" \
+            "ferma con un errore: **degrada in silenzio** al GITHUB_TOKEN, e un merge fatto con" \
+            "quello NON ri-triggera \`publish-api.yml\` — la superficie dati servita al sito" \
+            "resta ferma all'ultima build senza che niente lo dica." \
+            "" \
+            "### Cosa fare" \
+            "1. Generare un PAT nuovo con gli stessi scope (almeno \`repo\` + \`workflow\`)." \
+            "2. Aggiornare il parametro in Firebase Remote Config." \
+            "3. Chiudere questa issue a rotazione avvenuta." \
+            "" \
+            "_Aperta automaticamente da GH_PAT Expiry Monitor._")"
+
+          node scripts/lib/github-issue-creator.mjs \
+            --title "$EXPIRY_TITLE" \
+            --description "$DESCRIPTION" \
+            --priority 2 \
+            --label automation \
+            --workflow "GH_PAT Expiry Monitor"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
