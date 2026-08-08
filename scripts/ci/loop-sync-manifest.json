@@ -843,6 +843,36 @@
         "corpus": "e9a0e67be94c399e",
         "alignedAt": "2026-08-08"
       }
+    },
+    {
+      "path": ".github/workflows/reconcile-article-shards.yml",
+      "mode": "corpus-only",
+      "reason": "Rimedio alla classe 'articolo fantasma' (run 31245282583): publish-api e fast-publish partono in parallelo dallo stesso push, e un fast-publish morto a npm ci lascia l'articolo annunciato ma 404 sugli shard, senza retry. La riconciliazione vive qui perche' e' questo il repo che annuncia (slugs.json) e che pusha gli shard; il sito non possiede nessuno dei due lati del confronto.",
+      "baseline": {
+        "site": null,
+        "corpus": "653a1e9222cda7a0",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "scripts/reconcile-article-shards.mjs",
+      "mode": "corpus-only",
+      "reason": "La detection della riconciliazione: diff slug annunciati (API pubblicata) vs pagine reali (ls-tree dei clone blob:none degli 8 shard), esclusi gli id svizzeri shadowed, con ordinamento dal piu' recente e cap anti-tempesta. Builtin-only apposta: il chiamante non fa npm ci, cosi' la detection non puo' fallire nello stesso modo del run che ripara.",
+      "baseline": {
+        "site": null,
+        "corpus": "ea7f649e2dde0dde",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/reconcile-article-shards.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard node:test della logica pura della riconciliazione: path shard esatti (it alla radice, en/de/fr prefissati), esclusione shadowed, cap e ordinamento. Regressioni qui significano o fantasmi non visti o tempeste di ripubblicazione.",
+      "baseline": {
+        "site": null,
+        "corpus": "492eaa81df74cbfe",
+        "alignedAt": "2026-08-08"
+      }
     }
   ]
 }
