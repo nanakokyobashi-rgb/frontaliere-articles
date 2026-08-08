@@ -528,9 +528,9 @@
       "mode": "adapted",
       "reason": "Niente npm ci, cadenza sfasata (18,48). Lo script sottostante e' identical.",
       "baseline": {
-        "site": "a894d9b0a3b2b2cc",
-        "corpus": "890026f621187114",
-        "alignedAt": "2026-08-07"
+        "site": "621eb39d289ebb74",
+        "corpus": "0284db5fa2a3e17a",
+        "alignedAt": "2026-08-08"
       }
     },
     {
