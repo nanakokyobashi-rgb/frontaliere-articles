@@ -51,7 +51,7 @@ export const LABELS = [
   ['fu-parked', '5319e7', 'Fuori dalla coda attiva dopo troppi tentativi'],
   ['stale-review', 'f9d0c4', 'Stallo rilevato: la PR non ha segnale a valle'],
   ['collision-risk', 'e99695', 'Modifica file gia toccati da un altra PR aperta'],
-  ['needs-human', '7057ff', 'Il fixer ha esaurito i round: serve una mano umana'],
+  ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
