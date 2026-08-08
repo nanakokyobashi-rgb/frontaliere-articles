@@ -788,6 +788,61 @@
         "corpus": "76a86e1937c4569a",
         "alignedAt": "2026-08-08"
       }
+    },
+    {
+      "path": "generator/tests/article-locale-gates.test.mjs",
+      "sitePath": "tests/article-locale-gates.test.ts",
+      "mode": "adapted",
+      "reason": "Suite del lato locale dei gate di fattualita' (l'incidente 'border guards' per 'frontalieri'). Le traduzioni en/de/fr si generano qui: il gate va sorvegliato qui. Adattamenti: node:test + expect-shim al posto di vitest, annotazioni TS rimosse; fixture e asserzioni sono quelle del sito, percorsi delle librerie invariati.",
+      "baseline": {
+        "site": "b106a5492eb0771b",
+        "corpus": "bd4110eb346efd46",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/article-duplicate-detection.test.mjs",
+      "sitePath": "tests/article-duplicate-detection.test.ts",
+      "mode": "adapted",
+      "reason": "NON una copia: il test del sito replica un checkForDuplicates VECCHIO (soglie 0.60/0.45/0.35/0.40, stemmer inline) che non esiste piu' in nessuno dei due repo. Qui la replica segue l'algoritmo ATTUALE di create-article.mjs (0.72/adattivo/0.62/0.55, condizioni composte, tokenizer condiviso it-text-similarity) col comportamento MISURATO sui fixture del sito, piu' un drift guard sulle righe delle soglie nel sorgente. Il test del sito e' candidato allo stesso aggiornamento (site-ahead consapevole).",
+      "baseline": {
+        "site": "a2231b03718c068d",
+        "corpus": "66f1589c5e666941",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/article-body-wordcount.test.mjs",
+      "sitePath": "tests/article-body-wordcount.test.ts",
+      "mode": "adapted",
+      "reason": "Gate duro sul thin content (<300 parole) sui corpi IT di entrambe le sezioni. Adattamenti: path content/, node:test + expect-shim, sanity >3000 file perche' uno sparse checkout non passi a vuoto. Conteggio invariato. Misurato al porting: 0 offender su 3.769 corpi.",
+      "baseline": {
+        "site": "db743b55e2ad1454",
+        "corpus": "5beb0c983b79797a",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/blog-headline-validation.test.mjs",
+      "sitePath": "tests/blog-headline-validation.test.ts",
+      "mode": "adapted",
+      "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Piu' severo del sito, di proposito: la' l'asserzione stretta e' it.skip e copre solo blog-meta-it; qui e' ATTIVA su entrambe le sezioni, con baseline esplicita e datata dei 9 offender storici (tutti 'troppo lungo', issue #58 per lo svuotamento).",
+      "baseline": {
+        "site": "3e348f14062393f4",
+        "corpus": "ed1dcedd34d1ef32",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/blog-title-casing.test.mjs",
+      "sitePath": "tests/blog-title-casing.test.ts",
+      "mode": "adapted",
+      "reason": "Anti-shouting (titolo TUTTO MAIUSCOLO, incidente vivo). Il sito importa le funzioni da create-article.mjs sotto vitest; qui l'import e' impossibile senza node_modules, quindi il test estrae il blocco puro (i due Set + le due funzioni) e lo valuta in sandbox, con fallimento rumoroso se i delimitatori spariscono. Aggiunti (non esistono sul sito): wiring guard sui call-site dell'incidente e scan anti-shouting su titoli+imageAlt degli 8 file meta pubblicati (0 offender al porting).",
+      "baseline": {
+        "site": "1a7615185408595c",
+        "corpus": "e9a0e67be94c399e",
+        "alignedAt": "2026-08-08"
+      }
     }
   ]
 }
