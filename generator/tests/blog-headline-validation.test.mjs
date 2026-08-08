@@ -11,17 +11,10 @@
  *  - L'integrazione copre ANCHE `blog-meta-ch-it.ts`: la sezione svizzera si
  *    genera qui e sul sito era scoperta.
  *  - Il sito tiene l'asserzione stretta in `it.skip` e si limita a loggare gli
- *    offender. Qui l'asserzione è ATTIVA, con la baseline esplicita e datata
- *    degli offender preesistenti qui sotto: un titolo NUOVO fuori norma
- *    fallisce la CI, i 9 storici no finché qualcuno non li corregge. Una
- *    entry di baseline il cui titolo è stato corretto (o il cui articolo è
- *    sparito) viene segnalata a log perché la si rimuova, senza far fallire
- *    la coda delle PR per una pulizia altrui.
- *
- * BASELINE (registrata 2026-08-08, misurata su main: 3.121 titoli frontaliere
- * + 647 svizzera): 9 offender, tutti `Headline troppo lungo (max 110 char)`,
- * tutti in blog-meta-it.ts. Follow-up per accorciarli e svuotare la baseline:
- * https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/58
+ *    offender. Qui l'asserzione è ATTIVA e STRICT su tutti i titoli
+ *    pubblicati: la baseline degli offender storici (issue #58,
+ *    HEADLINE_BASELINE_2026_08_08) è stata svuotata dopo averli accorciati
+ *    sotto i 110 char, e rimossa insieme al ramo di tolleranza.
  *
  * ────────────────────────────────────────────────────────────────────────────
  * Intestazione originale del sito (estratto):
@@ -39,22 +32,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
-
-// ── Baseline esplicita degli offender preesistenti (2026-08-08) ────────────
-// Chiave: id articolo. Valore: il difetto tollerato. SOLO quel difetto è
-// tollerato per quell'id: se l'articolo peggiora (es. diventa anche
-// clickbait), il gate scatta comunque.
-const HEADLINE_BASELINE_2026_08_08 = new Map([
-  ['energia-ets-von-der-leyen', 'Headline troppo lungo (max 110 char)'],
-  ['aumento-franchigia-minima', 'Headline troppo lungo (max 110 char)'],
-  ['catastrofi-ticino-prontezza-2026', 'Headline troppo lungo (max 110 char)'],
-  ['droga-al-confine-ticino-2025', 'Headline troppo lungo (max 110 char)'],
-  ['kebab-case-ticino-nubifragio-grigioni', 'Headline troppo lungo (max 110 char)'],
-  ['como-lago-pasqua-boom-prenotazioni', 'Headline troppo lungo (max 110 char)'],
-  ['frontalieri-la-flat-tax-entra-nel-tuir-dal-2027-imposta-sostitutiva-pari-al-25-d', 'Headline troppo lungo (max 110 char)'],
-  ['lavoro-frontaliero-subordinazione-e-credito-dimposta-nei-rapporti-italiasvizzera', 'Headline troppo lungo (max 110 char)'],
-  ['residenza-fiscale-accertata-in-italia-e-caducazione-delle-sanzioni-rw-il-presupp', 'Headline troppo lungo (max 110 char)'],
-]);
 
 // ──────────────────────────────────────────────────────────────────────────
 // Local copy of the validator — kept in sync with scripts/create-article.mjs
@@ -252,7 +229,7 @@ function loadPublishedTitles(metaFile) {
   return out;
 }
 
-describe('blog article headlines — A5 integration (STRICT + baseline)', () => {
+describe('blog article headlines — A5 integration (STRICT)', () => {
   const published = [
     ...loadPublishedTitles('blog-meta-it.ts'),
     ...loadPublishedTitles('blog-meta-ch-it.ts'),
@@ -262,34 +239,19 @@ describe('blog article headlines — A5 integration (STRICT + baseline)', () => 
     expect(published.length).toBeGreaterThan(3000);
   });
 
-  it('every published title passes validateHeadline, salvo la baseline 2026-08-08', () => {
+  it('every published title passes validateHeadline', () => {
     const failures = [];
-    const staleBaseline = [];
-    const seen = new Set();
 
     for (const { id, title } of published) {
-      seen.add(id);
       const errors = validateHeadline(title);
-      const tolerated = HEADLINE_BASELINE_2026_08_08.get(id);
-      const residual = tolerated ? errors.filter((e) => e !== tolerated) : errors;
-      if (tolerated && errors.length === 0) staleBaseline.push(id);
-      if (residual.length > 0) {
-        failures.push(`  - ${id}: "${title.slice(0, 80)}" → ${residual.join('; ')}`);
+      if (errors.length > 0) {
+        failures.push(`  - ${id}: "${title.slice(0, 80)}" → ${errors.join('; ')}`);
       }
     }
-    for (const id of HEADLINE_BASELINE_2026_08_08.keys()) {
-      if (!seen.has(id)) staleBaseline.push(`${id} (articolo assente)`);
-    }
 
-    if (staleBaseline.length > 0) {
-      // Non fallisce: la pulizia della baseline non deve bloccare PR altrui.
-      console.warn(
-        `[baseline stantia] ${staleBaseline.length} entry corrette o sparite — rimuoverle da HEADLINE_BASELINE_2026_08_08: ${staleBaseline.join(', ')}`,
-      );
-    }
     if (failures.length > 0) {
-      console.error(`Titoli fuori norma A5 (non in baseline):\n${failures.join('\n')}`);
+      console.error(`Titoli fuori norma A5:\n${failures.join('\n')}`);
     }
-    expect(failures, 'titoli fuori norma A5 non in baseline (elenco sopra)').toEqual([]);
+    expect(failures, 'titoli fuori norma A5 (elenco sopra)').toEqual([]);
   });
 });
