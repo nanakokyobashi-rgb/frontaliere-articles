@@ -332,7 +332,15 @@ async function main() {
   const perShard = {};
   try {
     for (const { shard } of SECTIONS) {
-      const owner = owners[shard] || 'valerielinc-ops';
+      // Fail-hard, niente default: `|| 'valerielinc-ops'` era l'inferenza
+      // pre-migrazione contro cui section-shard-owners.json stesso mette in
+      // guardia — un owner sbagliato qui farebbe leggere (o non trovare) il
+      // tree di un altro account in silenzio.
+      const owner = owners[shard];
+      if (!owner) {
+        console.error(`::error::[reconcile] section-shard-owners.json non ha la chiave "${shard}" — mi fermo invece di inferire un owner`);
+        process.exit(1);
+      }
       for (const loc of LOCALES) {
         const paths = readShardTree(owner, shard, loc, scratchRoot);
         if (!treeLooksSane(paths)) {

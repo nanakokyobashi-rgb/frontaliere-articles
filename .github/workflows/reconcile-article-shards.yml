@@ -148,31 +148,52 @@ jobs:
           set -euo pipefail
           results="$RUNNER_TEMP/backfill-results.tsv"
           : > "$results"
+          selected_total="$(jq '.selected | length' "$RUNNER_TEMP/reconcile.json")"
+
+          # BILANCIO WALL-CLOCK INTERNO. Il caso peggiore di UN item è ~42 min
+          # (900s gruppo occupato + 120s per trovare la run + 1500s di attesa
+          # esito): con cap 3 si sfonderebbe timeout-minutes, e un job UCCISO
+          # dal timeout NON esegue gli step `if: always()` — l'issue non si
+          # aprirebbe, che è la via silenziosa per eccellenza. Quindi il loop
+          # esce PULITO da solo: SOFT_BUDGET ferma i nuovi item, HARD_DEADLINE
+          # taglia anche le attese interne, e ciò che resta finisce nel
+          # conteggio `unprocessed` qui sotto, che apre l'issue.
+          START_TS="$(date +%s)"
+          SOFT_BUDGET=2100   # niente item nuovi oltre i 35 min
+          HARD_DEADLINE=2700 # niente attese oltre i 45 min (timeout job: 50)
+          elapsed() { echo $(( $(date +%s) - START_TS )); }
 
           # Ogni lettura dell'API tollera il transitorio degradando verso la
           # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
           # rete deve rimandare il backfill al giro dopo, non far diventare
-          # rosso il meccanismo di recupero.
+          # rosso il meccanismo di recupero. per_page=100 (il massimo): con la
+          # pagina corta il conteggio del tetto si troncherebbe proprio nei
+          # giorni ad alto traffico, cioè quando serve.
           active_runs() {
-            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=30" \
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=100" \
               | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
               || echo 999
           }
 
           # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
+          deferred=false
           hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
-          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=30" \
+          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=100" \
             | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
           if [ "$recent" -ge 6 ]; then
             echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando al prossimo giro (tetto anti-tempesta)"
-            echo "deferred=true" >> "$GITHUB_OUTPUT"
-            echo "failed=0" >> "$GITHUB_OUTPUT"
-            exit 0
+            deferred=true
           fi
 
           failed=0
+          if [ "$deferred" = "false" ]; then
           while IFS=$'\t' read -r id section; do
             [ -n "$id" ] || continue
+
+            if [ "$(elapsed)" -ge "$SOFT_BUDGET" ]; then
+              echo "::warning::budget interno esaurito ($(elapsed)s) — mi fermo qui; il resto lo conta unprocessed e lo riprende il cron"
+              break
+            fi
 
             # La concurrency di fast-publish tiene UNA sola run pending per
             # gruppo: dispatchare mentre il gruppo è occupato farebbe
@@ -180,8 +201,8 @@ jobs:
             # libero, poi dispatcha, poi aspetta l'esito.
             waited=0
             while [ "$(active_runs)" -gt 0 ]; do
-              if [ "$waited" -ge 900 ]; then
-                echo "::warning::fast-publish occupato da 15 min — mi fermo qui, riprende il cron"
+              if [ "$waited" -ge 900 ] || [ "$(elapsed)" -ge "$HARD_DEADLINE" ]; then
+                echo "::warning::fast-publish occupato da troppo — mi fermo qui; il resto lo conta unprocessed e lo riprende il cron"
                 break 2
               fi
               sleep 30; waited=$((waited + 30))
@@ -195,7 +216,16 @@ jobs:
               -f "inputs[section]=$section" \
               -f "inputs[dry_run]=false"
 
-            # Trova la run appena creata (event=workflow_dispatch, created >= before)…
+            # Trova la run appena creata (event=workflow_dispatch, created >=
+            # before). CORRELAZIONE EURISTICA, dichiaratamente: l'API non
+            # espone gli input di un workflow_dispatch, quindi si va di
+            # finestra temporale. Un dispatch concorrente nella stessa
+            # finestra può far leggere la run sbagliata o far ripartire lo
+            # stesso id a un giro futuro — ed è ACCETTATO perché il backfill
+            # è idempotente per costruzione: il push shard confronta i tree e
+            # un contenuto identico è un clean no-op, il purge in più è solo
+            # una purge. Il costo di un doppio è qualche minuto di runner,
+            # non uno stato sbagliato.
             run_id=""
             for i in $(seq 1 12); do
               sleep 10
@@ -214,7 +244,7 @@ jobs:
             # nel gruppo di concurrency per volta).
             conclusion=""
             waited=0
-            while [ "$waited" -lt 1500 ]; do
+            while [ "$waited" -lt 1500 ] && [ "$(elapsed)" -lt "$HARD_DEADLINE" ]; do
               status="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
               if [ "$status" = "completed" ]; then
                 conclusion="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
@@ -226,16 +256,32 @@ jobs:
             printf '%s\t%s\t%s\n' "$id" "$section" "${conclusion:-timeout}" >> "$results"
             if [ "${conclusion:-}" != "success" ]; then failed=$((failed + 1)); fi
           done < <(jq -r '.selected[] | [.id, .section] | @tsv' "$RUNNER_TEMP/reconcile.json")
+          fi
 
-          echo "deferred=false" >> "$GITHUB_OUTPUT"
-          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+          # NIENTE USCITE SILENZIOSE: qualunque strada abbia portato qui
+          # (tetto orario, budget, gruppo occupato, giro completo), ciò che
+          # era selezionato e NON è stato tentato viene contato e reso
+          # visibile — è la condizione che apre l'issue, insieme ai falliti.
+          # Il primo design scriveva `deferred` e non lo leggeva nessuno:
+          # lo stesso pattern «il ciclo non riparte in silenzio» spostato
+          # dentro il rimedio.
+          attempted="$(grep -c . "$results" || true)"
+          unprocessed=$(( selected_total - attempted ))
+          [ "$unprocessed" -lt 0 ] && unprocessed=0
+          echo "attempted=$attempted, failed=$failed, unprocessed=$unprocessed, deferred=$deferred"
+          {
+            echo "deferred=$deferred"
+            echo "failed=$failed"
+            echo "attempted=$attempted"
+            echo "unprocessed=$unprocessed"
+          } >> "$GITHUB_OUTPUT"
 
       # Il PAT (se Remote Config risponde) fa partire l'evento `issues:opened`
       # e quindi il triage immediato; senza, l'issue si apre col GITHUB_TOKEN
       # e la raccoglie lo sweep — stesso degrado morbido di
       # workflow-failure-issues.yml.
       - name: Prepare Firebase credentials
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         continue-on-error: true
         env:
           FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
@@ -246,12 +292,12 @@ jobs:
           fi
 
       - name: Load secrets from Remote Config
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Open/update the canonical issue (backfill falliti o coda oltre il cap)
-        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.backfill.outputs.unprocessed > 0 || steps.detect.outputs.leftover != '0')
         env:
           GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -264,7 +310,8 @@ jobs:
             "La riconciliazione slug annunciati ↔ pagine sugli shard ha trovato lavoro che questo run non ha potuto chiudere." \
             "" \
             "- corpus: \`$(jq -r '.apiCommit' "$report")\`" \
-            "- fantasmi totali: **$(jq -r '.counts.missing' "$report")** (cap per run: $(jq -r '.counts.selected' "$report") tentati, $(jq -r '.counts.leftover' "$report") in coda)" \
+            "- fantasmi totali: **$(jq -r '.counts.missing' "$report")** (selezionati: $(jq -r '.counts.selected' "$report"), oltre il cap: $(jq -r '.counts.leftover' "$report"))" \
+            "- backfill in questo run: tentati ${{ steps.backfill.outputs.attempted || '0' }}, falliti ${{ steps.backfill.outputs.failed || '0' }}, **non processati ${{ steps.backfill.outputs.unprocessed || '0' }}** (tetto orario/budget/gruppo occupato — li riprende il cron ≤2h)" \
             "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             "" \
             "### Esito dei backfill tentati" \
@@ -300,5 +347,5 @@ jobs:
             echo
             echo "- innesco: \`${{ github.event_name }}\`$([ "${{ github.event_name }}" = "workflow_run" ] && echo " (fast-publish \`${{ github.event.workflow_run.event }}\` → \`${{ github.event.workflow_run.conclusion }}\`)")"
             echo "- fantasmi: **${{ steps.detect.outputs.missing }}** (tentati ora: ${{ steps.detect.outputs.selected }}, in coda: ${{ steps.detect.outputs.leftover }})"
-            echo "- dispatch: \`${{ steps.mode.outputs.allow }}\`, falliti: \`${{ steps.backfill.outputs.failed || '0' }}\`"
+            echo "- dispatch: \`${{ steps.mode.outputs.allow }}\` — tentati: \`${{ steps.backfill.outputs.attempted || '0' }}\`, falliti: \`${{ steps.backfill.outputs.failed || '0' }}\`, non processati: \`${{ steps.backfill.outputs.unprocessed || '0' }}\`, rimandato: \`${{ steps.backfill.outputs.deferred || 'false' }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
