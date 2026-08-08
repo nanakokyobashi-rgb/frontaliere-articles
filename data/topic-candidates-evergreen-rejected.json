@@ -107,7 +107,10 @@
     "premi cassa malati lamal 2026 canton Lucerna",
     "premi cassa malati lamal 2026 canton Argovia",
     "salario medio professioni svizzera 2026",
-    "premi cassa malati lamal 2026 canton San Gallo"
+    "premi cassa malati lamal 2026 canton San Gallo",
+    "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km",
+    "frontaliere licenziamento diritti preavviso indennita 2026 famiglia con figli",
+    "frontaliere licenziamento diritti preavviso indennita 2026 single"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -197,9 +200,9 @@
     "frontaliere nascita figlio anagrafe pratiche 2026 single": 1,
     "imposta cantonale confronto svizzera 2026": 2,
     "frontaliere nascita figlio anagrafe pratiche 2026 simulazione pratica": 3,
-    "frontaliere nascita figlio anagrafe pratiche 2026 errori comuni": 2,
+    "frontaliere nascita figlio anagrafe pratiche 2026 errori comuni": 3,
     "frontaliere licenziamento diritti preavviso indennita 2026": 1,
-    "frontaliere licenziamento diritti preavviso indennita 2026 entro 20 km": 1,
+    "frontaliere licenziamento diritti preavviso indennita 2026 entro 20 km": 2,
     "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km": 1,
     "imposta cantonale confronto svizzera 2026 canton Ginevra": 3,
     "imposta cantonale confronto svizzera 2026 canton Basilea": 2,
