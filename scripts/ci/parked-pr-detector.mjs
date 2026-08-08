@@ -112,11 +112,22 @@ function main() {
 
   for (const pr of parked) {
     console.log(`  #${pr.number} draft, fermo dal ${pr.updatedAt} — ${String(pr.title).slice(0, 80)}`);
-    if (DRY) { console.log(`  [dry] +label ${PARKED_LABEL} #${pr.number}`); }
-    else {
-      gh(['pr', 'edit', String(pr.number), '--repo', REPO, '--add-label', PARKED_LABEL],
-        { json: false, allowFail: true });
-    }
+    // ORDINE LOAD-BEARING: prima il commento, poi la label.
+    //
+    // Le due chiamate sono `gh` indipendenti e `allowFail`, quindi una delle
+    // due puo' fallire da sola (rate limit, blip). Con la label per prima, un
+    // commento fallito non veniva mai piu' riprovato: `selectParkedPrs`
+    // esclude chi ha gia' `needs-human`, quindi al run successivo la PR era
+    // saltata e restava etichettata per sempre SENZA la spiegazione — cioe'
+    // proprio il pezzo che dice all'umano cosa fare, che e' l'unico scopo di
+    // questo detector.
+    //
+    // Invertendo, ogni combinazione converge:
+    //   comment ok  + label ko  → il run dopo la ri-seleziona (niente label),
+    //                             `commentOnce` vede il marker e non duplica,
+    //                             la label viene riprovata.
+    //   comment ko  + (label non applicata) → ri-selezionata, riprova entrambi.
+    //   entrambi ok → esclusa dalla label, marker gia' presente. Idempotente.
     commentOnceShared(gh, REPO, pr.number, '<!-- PARKED-DRAFT -->',
       `🅿️ **PR parcheggiata**: è in draft e ferma da più di ${hours}h.\n\n` +
       'Una draft è fuori da **tutti** gli strati del ciclo insieme — review, auto-merge, ' +
@@ -134,6 +145,12 @@ function main() {
       'che non deve fare.\n\n' +
       '_Segnale deterministico da parked-pr-detector.mjs (zero-Claude). Il commento non si ripete._',
       { dry: DRY });
+
+    if (DRY) { console.log(`  [dry] +label ${PARKED_LABEL} #${pr.number}`); }
+    else {
+      gh(['pr', 'edit', String(pr.number), '--repo', REPO, '--add-label', PARKED_LABEL],
+        { json: false, allowFail: true });
+    }
   }
   console.log('parked scan completo.');
 }
