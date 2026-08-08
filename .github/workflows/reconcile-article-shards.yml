@@ -1,0 +1,294 @@
+# Riconciliazione «slug annunciati ↔ pagine reali sugli shard»: il rimedio
+# SISTEMICO alla classe «articolo fantasma».
+#
+# LA CLASSE (misurata il 2026-08-08, run 31245282583). Un push su main che
+# tocca content/** lancia in parallelo publish-api.yml (annuncia: slugs.json,
+# sitemap, hub) e fast-publish-article.yml (pubblica le pagine sugli 8 shard).
+# Quella mattina il primo è andato e il secondo è morto in 29s su `npm ci`
+# (ETIMEDOUT): `grigioni-frontalieri-calano` è rimasto annunciato ovunque e
+# 404 per 8,5 ore, e NIENTE lo ritentava — i fast-publish successivi pubblicano
+# solo il proprio articolo, e uno step di rimedio dentro il run fallito non può
+# girare, perché un run morto a `npm ci` non arriva mai ai propri step.
+#
+# IL RIMEDIO STA FUORI DAL RUN CHE FALLISCE, in due strati:
+#
+#   1. `workflow_run` su fast-publish-article completato: GitHub emette
+#      l'evento anche per un run morto al primo step, quindi il fallimento di
+#      stamattina avrebbe innescato la riconciliazione DOPO POCHI MINUTI, non
+#      dopo 8,5 ore di attesa di un umano.
+#   2. `schedule` ogni 2 ore come rete di sicurezza, per i casi in cui
+#      l'evento non parte proprio (workflow rotto a livello YAML, publish-api
+#      che annuncia mentre fast-publish non parte affatto) — stessa coppia
+#      evento+cron con cui il sito consuma il repository_dispatch
+#      `articles-published` di publish-api.yml.
+#
+# La DETECTION non fa `npm ci` (script builtin-only): è immune alla stessa
+# classe di guasto che ripara. Il BACKFILL non re-implementa la pubblicazione:
+# dispatcha fast-publish-article.yml con l'article_id mancante, così render,
+# validazioni, push shard, purge Cloudflare (apex + origin, 4 locali) e verify
+# restano in un posto solo — una copia divergerebbe, ed è esattamente la
+# storia già scritta in testa a scripts/publish-article-fast.mjs.
+#
+# ANTI-TEMPESTA, tre guardie indipendenti:
+#   - CAP per run (default 3, dal più recente): un arretrato storico non può
+#     trasformarsi in decine di ripubblicazioni in un colpo solo;
+#   - niente dispatch quando il run che ci ha innescato era ESSO STESSO un
+#     workflow_dispatch: un backfill fallito non può re-innescarsi a catena
+#     stretta (ci riprova il cron, ≤2h dopo), e un backfill riuscito non
+#     dispatcha oltre — il drenaggio prosegue coi push veri e col cron;
+#   - tetto assoluto di dispatch recenti (6 nell'ultima ora, contati
+#     sull'API): qualunque difetto di rilevamento non ancora immaginato
+#     resta limitato, non infinito.
+#
+# Se un backfill fallisce o il cap lascia fuori qualcosa, si apre/aggiorna
+# UNA issue canonica (dedup sul titolo via scripts/lib/github-issue-creator.mjs)
+# con il dettaglio: la coda resta visibile invece di affidarsi alla memoria.
+
+name: reconcile-article-shards
+
+on:
+  workflow_run:
+    workflows: [fast-publish-article]
+    types: [completed]
+  schedule:
+    # :53 per stare fuori dai minuti già occupati (:9/:39 workflow-failure-issues
+    # qui; :15/:17/:20/:23 i cron del sito, che colpiscono la stessa quota API).
+    - cron: '53 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Rileva e riporta, non dispatcha backfill'
+        required: false
+        default: true
+        type: boolean
+      cap:
+        description: 'Backfill massimi in questo run'
+        required: false
+        default: '3'
+
+# Una riconciliazione alla volta; mai cancellarne una a metà dei dispatch.
+concurrency:
+  group: reconcile-article-shards
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: write # dispatch di fast-publish-article.yml + lettura run
+  issues: write
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    # Fino a 3 backfill sequenziali da ~7-10 min l'uno, più le attese di
+    # coda: 50 copre il caso peggiore senza lasciar vivere uno zombie.
+    timeout-minutes: 50
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # NIENTE `npm ci`, deliberatamente: la detection usa solo builtin. Il
+      # run 31245282583 è morto proprio su npm — il meccanismo che recupera
+      # quel fallimento non deve poter fallire nello stesso modo.
+
+      - name: Detect ghosts (slug annunciati senza pagina sullo shard)
+        id: detect
+        run: |
+          set -euo pipefail
+          cap="${{ inputs.cap || '3' }}"
+          node scripts/reconcile-article-shards.mjs \
+            --out "$RUNNER_TEMP/reconcile.json" --cap "$cap"
+          {
+            echo "missing=$(jq -r '.counts.missing' "$RUNNER_TEMP/reconcile.json")"
+            echo "selected=$(jq -r '.counts.selected' "$RUNNER_TEMP/reconcile.json")"
+            echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/reconcile.json")"
+          } >> "$GITHUB_OUTPUT"
+
+      # Il dispatch è consentito solo quando l'innesco non era a sua volta un
+      # dispatch (anti-catena, vedi intestazione) e il run non è un dry run
+      # manuale. La detection sopra gira SEMPRE — anche in modalità
+      # sola-lettura il report finisce nel summary e nell'issue.
+      - name: Resolve backfill mode
+        id: mode
+        run: |
+          set -euo pipefail
+          allow=true
+          reason=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" != "false" ]; then
+            allow=false; reason="dry_run manuale"
+          elif [ "${{ github.event_name }}" = "workflow_run" ] && [ "${{ github.event.workflow_run.event }}" = "workflow_dispatch" ]; then
+            allow=false; reason="l'innesco era esso stesso un dispatch (backfill o poke manuale): niente catena stretta, ci pensa il cron"
+          fi
+          [ -n "$reason" ] && echo "dispatch disabilitato: $reason"
+          echo "allow=$allow" >> "$GITHUB_OUTPUT"
+
+      - name: Backfill (dispatch fast-publish-article per gli id selezionati)
+        id: backfill
+        if: steps.mode.outputs.allow == 'true' && steps.detect.outputs.selected != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WF: fast-publish-article.yml
+        run: |
+          set -euo pipefail
+          results="$RUNNER_TEMP/backfill-results.tsv"
+          : > "$results"
+
+          # Ogni lettura dell'API tollera il transitorio degradando verso la
+          # scelta PRUDENTE (occupato/tetto raggiunto → rimandare): un blip di
+          # rete deve rimandare il backfill al giro dopo, non far diventare
+          # rosso il meccanismo di recupero.
+          active_runs() {
+            gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?per_page=30" \
+              | jq '[.workflow_runs[] | select(.status=="queued" or .status=="in_progress")] | length' \
+              || echo 999
+          }
+
+          # Tetto assoluto: quanti dispatch di fast-publish nell'ultima ora.
+          hour_ago="$(date -u -d '60 minutes ago' +%Y-%m-%dT%H:%M:%SZ)"
+          recent="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=30" \
+            | jq --arg t "$hour_ago" '[.workflow_runs[] | select(.created_at >= $t)] | length' || echo 999)"
+          if [ "$recent" -ge 6 ]; then
+            echo "::warning::già $recent dispatch di fast-publish nell'ultima ora — rimando al prossimo giro (tetto anti-tempesta)"
+            echo "deferred=true" >> "$GITHUB_OUTPUT"
+            echo "failed=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          failed=0
+          while IFS=$'\t' read -r id section; do
+            [ -n "$id" ] || continue
+
+            # La concurrency di fast-publish tiene UNA sola run pending per
+            # gruppo: dispatchare mentre il gruppo è occupato farebbe
+            # cancellare i pending più vecchi. Quindi: aspetta il gruppo
+            # libero, poi dispatcha, poi aspetta l'esito.
+            waited=0
+            while [ "$(active_runs)" -gt 0 ]; do
+              if [ "$waited" -ge 900 ]; then
+                echo "::warning::fast-publish occupato da 15 min — mi fermo qui, riprende il cron"
+                break 2
+              fi
+              sleep 30; waited=$((waited + 30))
+            done
+
+            before="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "── dispatch backfill: $section/$id"
+            gh api -X POST "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/dispatches" \
+              -f ref=main \
+              -f "inputs[article_id]=$id" \
+              -f "inputs[section]=$section" \
+              -f "inputs[dry_run]=false"
+
+            # Trova la run appena creata (event=workflow_dispatch, created >= before)…
+            run_id=""
+            for i in $(seq 1 12); do
+              sleep 10
+              run_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/$WF/runs?event=workflow_dispatch&per_page=10" \
+                | jq -r --arg t "$before" '[.workflow_runs[] | select(.created_at >= $t)] | sort_by(.created_at) | last | .id // empty' || true)"
+              [ -n "$run_id" ] && break
+            done
+            if [ -z "$run_id" ]; then
+              echo "::warning::dispatch inviato ma la run non compare — la conterà il prossimo giro"
+              printf '%s\t%s\t%s\n' "$id" "$section" "lost" >> "$results"
+              failed=$((failed + 1))
+              continue
+            fi
+
+            # …e aspettane la conclusione (sequenziale APPOSTA: un solo run
+            # nel gruppo di concurrency per volta).
+            conclusion=""
+            waited=0
+            while [ "$waited" -lt 1500 ]; do
+              status="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.status' || echo '')"
+              if [ "$status" = "completed" ]; then
+                conclusion="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id" | jq -r '.conclusion' || echo '')"
+                break
+              fi
+              sleep 30; waited=$((waited + 30))
+            done
+            echo "   run $run_id → ${conclusion:-timeout}"
+            printf '%s\t%s\t%s\n' "$id" "$section" "${conclusion:-timeout}" >> "$results"
+            if [ "${conclusion:-}" != "success" ]; then failed=$((failed + 1)); fi
+          done < <(jq -r '.selected[] | [.id, .section] | @tsv' "$RUNNER_TEMP/reconcile.json")
+
+          echo "deferred=false" >> "$GITHUB_OUTPUT"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
+      # Il PAT (se Remote Config risponde) fa partire l'evento `issues:opened`
+      # e quindi il triage immediato; senza, l'issue si apre col GITHUB_TOKEN
+      # e la raccoglie lo sweep — stesso degrado morbido di
+      # workflow-failure-issues.yml.
+      - name: Prepare Firebase credentials
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Open/update the canonical issue (backfill falliti o coda oltre il cap)
+        if: always() && steps.detect.outcome == 'success' && (steps.backfill.outputs.failed > 0 || steps.detect.outputs.leftover != '0')
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          report="$RUNNER_TEMP/reconcile.json"
+          results="$RUNNER_TEMP/backfill-results.tsv"
+
+          body="$(printf '%s\n' \
+            "La riconciliazione slug annunciati ↔ pagine sugli shard ha trovato lavoro che questo run non ha potuto chiudere." \
+            "" \
+            "- corpus: \`$(jq -r '.apiCommit' "$report")\`" \
+            "- fantasmi totali: **$(jq -r '.counts.missing' "$report")** (cap per run: $(jq -r '.counts.selected' "$report") tentati, $(jq -r '.counts.leftover' "$report") in coda)" \
+            "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            "" \
+            "### Esito dei backfill tentati" \
+            '```' \
+            "$( [ -s "$results" ] && cat "$results" || echo '(nessun dispatch in questo run)' )" \
+            '```' \
+            "" \
+            "### In coda oltre il cap (più recenti prima, max 20 mostrati)" \
+            '```' \
+            "$(jq -r '.leftover[:20][] | [.date // "senza-data", .section, .id, (.locales|join(","))] | @tsv' "$report")" \
+            '```' \
+            "" \
+            "La coda si drena da sola (cap per run a ogni giro: cron ogni 2h + ogni fast-publish da push). Questa issue serve se gli STESSI id restano qui per giorni: a quel punto non è un transitorio — guardare i log dei run di backfill." \
+            "" \
+            "_Aperta automaticamente da reconcile-article-shards._")"
+
+          node scripts/lib/github-issue-creator.mjs \
+            --title "Articoli fantasma: annunciati senza pagina sugli shard" \
+            --description "$body" \
+            --priority 2 \
+            --label automation \
+            --workflow "reconcile-article-shards"
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
+
+      - name: Summary
+        if: always() && steps.detect.outcome == 'success'
+        run: |
+          {
+            echo "### reconcile-article-shards"
+            echo
+            echo "- innesco: \`${{ github.event_name }}\`$([ "${{ github.event_name }}" = "workflow_run" ] && echo " (fast-publish \`${{ github.event.workflow_run.event }}\` → \`${{ github.event.workflow_run.conclusion }}\`)")"
+            echo "- fantasmi: **${{ steps.detect.outputs.missing }}** (tentati ora: ${{ steps.detect.outputs.selected }}, in coda: ${{ steps.detect.outputs.leftover }})"
+            echo "- dispatch: \`${{ steps.mode.outputs.allow }}\`, falliti: \`${{ steps.backfill.outputs.failed || '0' }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
