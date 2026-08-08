@@ -15,9 +15,28 @@ name: PR body contract
 # costruito sopra gli stessi due moduli condivisi, che restano sorvegliati dal
 # manifest.
 
+# `ready_for_review` e' load-bearing, non decorativo: il job qui sotto e' gated
+# su `draft == false`, quindi finche' la PR e' draft il check NON gira affatto.
+# Senza questo trigger, una draft promossa a ready non ha piu' nessun evento che
+# lo faccia partire — `synchronize` fira sui push, non sul cambio di stato — e a
+# differenza di `pr-collision-detector.yml` qui non c'e' nessuno `schedule:` che
+# la recuperi. Il body resterebbe non verificato per tutta la vita della PR se
+# dopo la promozione non arriva ne' un push ne' un edit del body.
+#
+# Cio' che si perde NON e' un gate di merge: `auto-merge-eval` valuta il
+# completeness contract direttamente dal PR body (`prBodyContractOk(meta.body)`),
+# non dalla sticky di questo workflow, e il percorso normale richiede comunque un
+# `## LGTM` di Claude che il body lo legge. Si perde il feedback deterministico
+# veloce, cioe' esattamente cio' per cui questo workflow esiste: intercettare con
+# una regex una violazione che altrimenti costa un ciclo di review — quota
+# condivisa col sito — per essere detta.
+#
+# Sul sito il job NON ha il gate `draft == false`: il check gira gia' sulle
+# draft, quindi la stessa lista di trigger la' non ha questo buco e aggiungere
+# `ready_for_review` comprerebbe solo un run ridondante a ogni promozione.
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read
