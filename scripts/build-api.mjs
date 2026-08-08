@@ -50,6 +50,19 @@ import {
 // ("never noindex, never delete HTML"). Imported so the selector has exactly
 // one implementation, shared with the generator's tests.
 import { selectRetiredDailyEditions } from '../generator/scripts/lib/daily-brief-content.mjs';
+// Output-boundary sanitisation. The corpus is allowed to hold a control
+// character — the generator wrote it, and two titles do — but nothing this
+// script emits is: XML 1.0 admits no C0 but TAB/LF/CR, so a single 0x08 in one
+// <image:title> makes the whole 3120-url sitemap not well-formed and a strict
+// consumer may drop all of it. Applied at the four places bytes actually leave
+// this process (write / writeXml / the RSS + candidates writes / the verbatim
+// republishes), not at each field, so an emitter added later inherits it.
+import {
+  sanitizeDeep,
+  sanitizeXmlDocument,
+  sanitizeJsonText,
+  assertNoControlChars,
+} from './lib/sanitize-control-chars.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -73,9 +86,15 @@ let borderRankingEntries = 0;
 let dailyBriefBlocks = 0;
 
 const written = {};
+// Sanitised on the value, not on the serialised text: JSON.stringify ESCAPES a
+// control character into `\u0008`, which is valid JSON and therefore survives
+// any scan of the emitted bytes — while every consumer that parses the file
+// gets the control character back. The only place to catch it is before the
+// stringify. `written[name]` records the sanitised length, so manifest.json
+// keeps describing the bytes actually served.
 const write = (name, value) => {
   const file = path.join(OUT, name);
-  const json = JSON.stringify(value);
+  const json = JSON.stringify(sanitizeDeep(value));
   fs.writeFileSync(file, json);
   written[name] = json.length;
   console.log(`[build-api] ${name}: ${json.length} bytes`);
@@ -213,10 +232,16 @@ function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
   };
 }
 
+// One sanitisation point for every sitemap this file emits, on the assembled
+// document rather than on each interpolated field: xmlEsc() escapes the five
+// markup characters and has nothing to say about a control byte, and the parts
+// that skip xmlEsc entirely (<loc>, <lastmod>) are as capable of carrying one.
 const writeXml = (name, { xml, count }) => {
-  fs.writeFileSync(path.join(OUT, name), xml);
-  written[name] = xml.length;
-  console.log(`[build-api] ${name}: ${count} urls, ${(xml.match(/xhtml:link/g) ?? []).length} alternates, ${xml.length} bytes`);
+  const clean = sanitizeXmlDocument(xml);
+  assertNoControlChars(clean, name);
+  fs.writeFileSync(path.join(OUT, name), clean);
+  written[name] = clean.length;
+  console.log(`[build-api] ${name}: ${count} urls, ${(clean.match(/xhtml:link/g) ?? []).length} alternates, ${clean.length} bytes`);
   return count;
 };
 
@@ -358,11 +383,17 @@ for (const section of rssSections) {
   for (const [name, xml] of section.feeds) {
     const items = (xml.match(/<item>/g) ?? []).length;
     if (items === 0) throw new Error(`rss: ${name} has no <item> entries — refusing to publish`);
-    fs.writeFileSync(path.join(OUT, name), xml);
-    written[name] = xml.length;
+    // The feeds come out of engine/rssFeeds.mjs, which arrives by mirror and is
+    // not ours to edit here (a change would be overwritten on the next mirror
+    // run). Sanitising where this script writes them keeps the fix in the repo
+    // that owns the write, and covers whatever the shared builder hands over.
+    const clean = sanitizeXmlDocument(xml);
+    assertNoControlChars(clean, name);
+    fs.writeFileSync(path.join(OUT, name), clean);
+    written[name] = clean.length;
     rssFeedCount++;
     rssItemTotal += items;
-    console.log(`[build-api] ${name}: ${items} items, ${xml.length} bytes`);
+    console.log(`[build-api] ${name}: ${items} items, ${clean.length} bytes`);
   }
 }
 
@@ -534,14 +565,16 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt);
   collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt);
 
-  const candidatesXml =
+  const candidatesXml = sanitizeXmlDocument(
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
-    `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
-    `        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"\n` +
-    `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n` +
-    `        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
-    (candidateBlocks.length ? candidateBlocks.join('\n') + '\n' : '') +
-    `</urlset>\n`;
+      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
+      `        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"\n` +
+      `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n` +
+      `        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
+      (candidateBlocks.length ? candidateBlocks.join('\n') + '\n' : '') +
+      `</urlset>\n`,
+  );
+  assertNoControlChars(candidatesXml, NEWS_CANDIDATES);
 
   fs.writeFileSync(path.join(OUT, NEWS_CANDIDATES), candidatesXml);
   written[NEWS_CANDIDATES] = candidatesXml.length;
@@ -622,10 +655,13 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     if (!entries || entries.length === 0) {
       throw new Error('border-wait-ranking.json carries no ranking entries — refusing to publish');
     }
-    fs.writeFileSync(path.join(OUT, BORDER_RANKING), raw);
-    written[BORDER_RANKING] = raw.length;
+    // Still verbatim in the normal case: sanitizeJsonText returns the original
+    // text unless the document actually carries a control character.
+    const clean = sanitizeJsonText(raw);
+    fs.writeFileSync(path.join(OUT, BORDER_RANKING), clean);
+    written[BORDER_RANKING] = clean.length;
     borderRankingEntries = entries.length;
-    console.log(`[build-api] ${BORDER_RANKING}: ${entries.length} crossings, ${raw.length} bytes`);
+    console.log(`[build-api] ${BORDER_RANKING}: ${entries.length} crossings, ${clean.length} bytes`);
   } else {
     console.log(
       `[build-api] ${BORDER_RANKING}: not emitted — the ranking producer has not run here yet`,
@@ -653,10 +689,11 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     if (!Number.isFinite(available) || available < 1) {
       throw new Error('daily-brief.json carries no available blocks — refusing to publish');
     }
-    fs.writeFileSync(path.join(OUT, DAILY_BRIEF), raw);
-    written[DAILY_BRIEF] = raw.length;
+    const clean = sanitizeJsonText(raw);
+    fs.writeFileSync(path.join(OUT, DAILY_BRIEF), clean);
+    written[DAILY_BRIEF] = clean.length;
     dailyBriefBlocks = available;
-    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${raw.length} bytes`);
+    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${clean.length} bytes`);
   } else {
     console.log(
       `[build-api] ${DAILY_BRIEF}: not emitted — the daily-brief producer has not run here yet`,
@@ -686,3 +723,23 @@ write('manifest.json', {
 });
 
 console.log(`[build-api] wrote ${Object.keys(written).length} files to dist/api`);
+
+// ── Final gate: no control character leaves this process ──────────────────
+//
+// Deliberately a tautology over the writers above — its job is the writer that
+// does NOT exist yet. Every artifact here went through a sanitiser, so this
+// pass is silent today; the day someone adds an emitter and forgets, the build
+// that adds it fails, instead of a crawler discovering three days later that
+// sitemap-blog.xml is not well-formed. The scan is on the RAW BYTES of every
+// text artifact, which is why it can only ever be the last word: JSON hides a
+// control character behind an escape, so this catches the XML spelling and
+// `sanitizeDeep` (at `write`) catches the JSON one.
+{
+  const textFiles = fs
+    .readdirSync(OUT)
+    .filter((f) => f.endsWith('.xml') || f.endsWith('.json'));
+  for (const f of textFiles) {
+    assertNoControlChars(fs.readFileSync(path.join(OUT, f), 'utf-8'), `dist/api/${f}`);
+  }
+  console.log(`[build-api] control-character gate: ${textFiles.length} text artifacts clean`);
+}
