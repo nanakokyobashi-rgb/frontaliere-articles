@@ -44,6 +44,12 @@ import {
   isArticleNewsEligible,
   NEWS_SITEMAP_WINDOW_HOURS,
 } from '../generator/data/news-sitemap-whitelist.mjs';
+// Sitemap retention for the dated daily editions (Bollettino del Frontaliere):
+// the newest N stay listed, older ones are DE-LISTED but never deleted — same
+// semantics as the swiss canonical-override shadowing below, same house rule
+// ("never noindex, never delete HTML"). Imported so the selector has exactly
+// one implementation, shared with the generator's tests.
+import { selectRetiredDailyEditions } from '../generator/scripts/lib/daily-brief-content.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -227,10 +233,14 @@ console.log(`[build-api] shadowed swiss slugs excluded: ${shadowedSwissSlugs.siz
 
 const metaIt = (await load('content/blog-meta-it.ts')).default;
 const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
+// Daily editions carry their date in the id, and slugs.it === id, so the
+// retired set plugs straight into buildSitemap's shadowed parameter.
+const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
+console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
 const sitemapCounts = {
   blog: writeXml(
     'sitemap-blog.xml',
-    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt),
+    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, retiredDailyEditions),
   ),
   blogCh: writeXml(
     'sitemap-blog-ch.xml',
