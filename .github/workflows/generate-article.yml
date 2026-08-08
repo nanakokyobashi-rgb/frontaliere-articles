@@ -89,6 +89,18 @@ on:
     - cron: '37 * * * *'  # svizzera
     - cron: '52 * * * *'  # frontaliere
   push:
+    # Without this, ANY branch touching content/** starts a generation
+    # attempt — not just main. Measured (issue #35, same bug class in
+    # fast-publish-article.yml): a manually-pushed backup branch
+    # (snapshot/sessione-morta-2026-08-08, explicitly marked "NON VA
+    # MERGIATO") reverted the corpus wholesale and still matched
+    # `content/**`. The normal chain (this workflow, batch-faq,
+    # border-wait, publish-journalist) always pushes to
+    # `github.ref_name`, which for scheduled/dispatch runs is main — so
+    # this restriction does not affect the real chain link, only stray
+    # non-main pushes. Matches publish-api.yml's own `branches: [main]`
+    # guard on the same paths.
+    branches: [main]
     paths:
       # Self-test on change, always dry. See batch-faq-articles.yml for why this
       # is what makes a new workflow dispatchable at all.
