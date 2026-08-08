@@ -101,7 +101,9 @@ function weekday(dateIso, locale) {
   return WEEKDAYS[locale][new Date(`${dateIso}T12:00:00Z`).getUTCDay()];
 }
 
-/** Locale-aware number formatting (decimal comma for it/de/fr). */
+/** Locale-aware number formatting, Swiss conventions: apostrophe grouping
+ * (22'645); decimal separator is a POINT for it-CH/de-CH/en-CH and a comma
+ * only for fr-CH — matching what Swiss users see on the site itself. */
 function fmt(locale, n, digits = 0) {
   if (!Number.isFinite(n)) return '—';
   const tag = { it: 'it-CH', en: 'en-CH', de: 'de-CH', fr: 'fr-CH' }[locale];
@@ -116,8 +118,17 @@ function signed(locale, n, digits) {
 /**
  * The proprietary number that leads the title. Cascade: a real queue beats
  * everything (it is the one number nobody else has), then yesterday's job
- * count, then the exchange rate, then fuel. Callers guarantee ≥1 available
- * block (the generator refuses thinner snapshots).
+ * count, then the exchange rate, then fuel.
+ *
+ * The cascade is TOTAL over available blocks — proven by the enumeration test
+ * in daily-brief-content.test.mjs: whenever ≥1 block is `available`, a
+ * headline exists. That totality is load-bearing: shapeFuel can be available
+ * with an empty cheapestItaly (bestSavings only), shapeJobs with a null
+ * yesterdayAdded — without the terminal fallbacks below, that combination
+ * made buildDailyBriefArticle throw and the cron exit 1, violating the
+ * "a day without data must not break the cron" contract (review finding on
+ * PR #51). `null` is still returned for zero available blocks, which
+ * loadSnapshot refuses long before this runs.
  */
 export function pickHeadline(blocks) {
   const bw = blocks.borderWait;
@@ -134,7 +145,14 @@ export function pickHeadline(blocks) {
   if (fuel?.available && fuel.cheapestItaly[0]) {
     return { kind: 'fuel', municipality: fuel.cheapestItaly[0].municipality, priceEur: fuel.cheapestItaly[0].minPriceEur };
   }
+  // Terminal fallbacks — sub-threshold numbers still beat no edition.
   if (bw?.available) return { kind: 'borderWait', name: bw.worst.name, minutes: bw.worst.waitMinutes };
+  if (jobs?.available && Number.isFinite(jobs.yesterdayAdded)) return { kind: 'jobs', count: jobs.yesterdayAdded };
+  if (jobs?.available) return { kind: 'jobsTotal', count: jobs.activeJobs };
+  if (fuel?.available && fuel.bestSavings[0]) {
+    const s = fuel.bestSavings[0];
+    return { kind: 'fuelSaving', municipality: s.municipality, saving50LEur: s.saving50LEur };
+  }
   return null;
 }
 
@@ -144,8 +162,10 @@ const T = {
     headline: (h) => ({
       borderWait: `a ${h.name} ${h.minutes} minuti di coda`,
       jobs: `${fmt('it', h.count)} nuovi annunci di lavoro ieri`,
+      jobsTotal: `${fmt('it', h.count)} annunci di lavoro attivi in Svizzera`,
       exchange: `franco a ${fmt('it', h.rate, 4)} €`,
       fuel: `benzina da ${fmt('it', h.priceEur, 3)} €/L a ${h.municipality}`,
+      fuelSaving: `a ${h.municipality} il pieno giusto vale ${fmt('it', h.saving50LEur, 0)} €`,
     })[h.kind],
     title: (dateLabel, headline) => `Bollettino del frontaliere – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
@@ -197,8 +217,10 @@ const T = {
     headline: (h) => ({
       borderWait: `${h.minutes}-minute queue at ${h.name}`,
       jobs: `${fmt('en', h.count)} new job listings yesterday`,
+      jobsTotal: `${fmt('en', h.count)} active job listings in Switzerland`,
       exchange: `franc at €${fmt('en', h.rate, 4)}`,
       fuel: `petrol from €${fmt('en', h.priceEur, 3)}/L in ${h.municipality}`,
+      fuelSaving: `the right fill-up in ${h.municipality} is worth €${fmt('en', h.saving50LEur, 0)}`,
     })[h.kind],
     title: (dateLabel, headline) => `Cross-border daily brief – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
@@ -250,8 +272,10 @@ const T = {
     headline: (h) => ({
       borderWait: `${h.minutes} Minuten Wartezeit in ${h.name}`,
       jobs: `${fmt('de', h.count)} neue Stellenangebote gestern`,
+      jobsTotal: `${fmt('de', h.count)} aktive Stellenangebote in der Schweiz`,
       exchange: `Franken bei ${fmt('de', h.rate, 4)} €`,
       fuel: `Benzin ab ${fmt('de', h.priceEur, 3)} €/L in ${h.municipality}`,
+      fuelSaving: `in ${h.municipality} ist die richtige Tankfüllung ${fmt('de', h.saving50LEur, 0)} € wert`,
     })[h.kind],
     title: (dateLabel, headline) => `Grenzgänger-Tagesbulletin – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
@@ -303,8 +327,10 @@ const T = {
     headline: (h) => ({
       borderWait: `${h.minutes} minutes d'attente à ${h.name}`,
       jobs: `${fmt('fr', h.count)} nouvelles offres d'emploi hier`,
+      jobsTotal: `${fmt('fr', h.count)} offres d'emploi actives en Suisse`,
       exchange: `franc à ${fmt('fr', h.rate, 4)} €`,
       fuel: `essence dès ${fmt('fr', h.priceEur, 3)} €/L à ${h.municipality}`,
+      fuelSaving: `à ${h.municipality}, le bon plein vaut ${fmt('fr', h.saving50LEur, 0)} €`,
     })[h.kind],
     title: (dateLabel, headline) => `Bulletin du frontalier – ${dateLabel} : ${headline}`,
     excerpt: (dateLabel) =>

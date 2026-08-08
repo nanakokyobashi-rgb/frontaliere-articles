@@ -136,6 +136,56 @@ test('headline cascade: queue ≥10min beats jobs beats exchange', () => {
   assert.equal(pickHeadline(calm).kind, 'fuel');
 });
 
+test('pickHeadline is TOTAL over available blocks (PR #51 review finding)', () => {
+  // The shapes that used to exhaust the cascade: fuel available with EMPTY
+  // cheapestItaly (bestSavings only), jobs available with null yesterdayAdded.
+  const variants = {
+    borderWait: [null, { available: false }, BRIEF.blocks.borderWait,
+      { ...BRIEF.blocks.borderWait, worst: { slug: 's', name: 'S', waitMinutes: 3 } }],
+    fuel: [null, { available: false }, BRIEF.blocks.fuel,
+      { ...BRIEF.blocks.fuel, cheapestItaly: [] }],
+    exchange: [null, { available: false }, BRIEF.blocks.exchange],
+    jobs: [null, { available: false }, BRIEF.blocks.jobs,
+      { ...BRIEF.blocks.jobs, yesterdayAdded: null },
+      { ...BRIEF.blocks.jobs, yesterdayAdded: 3 }],
+  };
+  const KINDS = new Set(['borderWait', 'jobs', 'jobsTotal', 'exchange', 'fuel', 'fuelSaving']);
+  let combos = 0;
+  for (const borderWait of variants.borderWait)
+    for (const fuel of variants.fuel)
+      for (const exchange of variants.exchange)
+        for (const jobs of variants.jobs) {
+          combos++;
+          const blocks = { borderWait, fuel, exchange, jobs };
+          const anyAvailable = Object.values(blocks).some((b) => b?.available);
+          const h = pickHeadline(blocks);
+          if (anyAvailable) {
+            assert.ok(h, `null headline despite available blocks: ${Object.entries(blocks).filter(([, b]) => b?.available).map(([k]) => k)}`);
+            assert.ok(KINDS.has(h.kind), `unknown kind ${h.kind}`);
+          } else {
+            assert.equal(h, null);
+          }
+        }
+  assert.equal(combos, 4 * 4 * 3 * 5);
+});
+
+test('the review scenario builds an edition instead of throwing (exit-0 contract)', () => {
+  const brief = structuredClone(BRIEF);
+  brief.blocks.borderWait = { available: false, reason: 'x' };
+  brief.blocks.exchange = { available: false, reason: 'x' };
+  brief.blocks.fuel.cheapestItaly = [];
+  brief.blocks.jobs.yesterdayAdded = 3; // sub-threshold
+  brief.counts.availableBlocks = 2;
+  const a1 = buildDailyBriefArticle(brief); // used to throw here
+  assert.match(a1.content.it.title, /3 nuovi annunci/);
+  brief.blocks.jobs.yesterdayAdded = null; // → jobsTotal fallback
+  const a2 = buildDailyBriefArticle(brief);
+  assert.match(a2.content.it.title, /annunci di lavoro attivi/);
+  brief.blocks.jobs = { available: false, reason: 'x' }; // fuel-only, savings-only
+  const a3 = buildDailyBriefArticle(brief);
+  assert.match(a3.content.it.title, /il pieno giusto vale/);
+});
+
 test('slugs are dated per locale; author rotation is deterministic and rotates', () => {
   const slugs = dailyBriefSlugs('2026-08-08');
   assert.equal(slugs.it, 'bollettino-frontaliere-2026-08-08');
