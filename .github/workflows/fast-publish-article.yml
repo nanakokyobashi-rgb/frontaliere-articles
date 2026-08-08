@@ -56,6 +56,17 @@ name: fast-publish-article
 
 on:
   push:
+    # Without this, ANY branch touching content/** fires this workflow — not
+    # just main. Measured (issue #35): a manually-pushed backup branch
+    # (snapshot/sessione-morta-2026-08-08, explicitly marked "NON VA
+    # MERGIATO") reverted the corpus wholesale, and the push still matched
+    # `content/**` and ran the publish attempt, which then failed because the
+    # derived article id was absent from the reverted registry. The normal
+    # chain (generate-article.yml et al.) pushes to `github.ref_name`, which
+    # for scheduled/dispatch runs is always main — so this restriction does
+    # not affect the real chain link, only stray non-main pushes. Matches
+    # publish-api.yml's own `branches: [main]` guard on the same paths.
+    branches: [main]
     paths:
       # Self-test on change, always dry (see the `dry` resolution below).
       - '.github/workflows/fast-publish-article.yml'
