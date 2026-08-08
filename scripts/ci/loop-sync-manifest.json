@@ -430,9 +430,9 @@
       "mode": "adapted",
       "reason": "Niente npm ci; ponte RC in generator/scripts/load-rc-env.mjs; token di routing GITHUB_PAT_NANAKO, esposto a triage-sweep.mjs col nome GITHUB_PAT che lo script legge (mappare qui tiene lo script byte-identico invece di forkarlo); cadenza sweep sfasata.",
       "baseline": {
-        "site": "820646b283567a83",
-        "corpus": "d0a7c7dd7bcac1b8",
-        "alignedAt": "2026-08-07"
+        "site": "0c6c95699e499c25",
+        "corpus": "3dc30e3bfcdbd817",
+        "alignedAt": "2026-08-08"
       }
     },
     {
@@ -578,9 +578,9 @@
       "mode": "adapted",
       "reason": "Sottoinsieme generico di quello del sito: solo le due verifiche sul contratto del body, senza i check di dominio del sito. Zero Claude — intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa.",
       "baseline": {
-        "site": "b607ffd26f01ce20",
-        "corpus": "10dbc9d8810f0923",
-        "alignedAt": "2026-08-07"
+        "site": "587bbaf371bfbcc0",
+        "corpus": "fd457b4af761ef94",
+        "alignedAt": "2026-08-08"
       }
     },
     {
@@ -616,11 +616,11 @@
     {
       "path": ".github/workflows/recycle-stale-prs.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs.",
       "baseline": {
-        "site": "cc1466b7e98b8d94",
-        "corpus": "f2697242e1a68320",
-        "alignedAt": "2026-08-07"
+        "site": "e74b26d3812bf008",
+        "corpus": "0597af47ae837953",
+        "alignedAt": "2026-08-08"
       }
     },
     {
@@ -717,6 +717,44 @@
         "site": null,
         "corpus": "f18d1a612b49834c",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": "scripts/ci/parked-pr-detector.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "698fc51ff42c1b5b",
+        "corpus": "698fc51ff42c1b5b",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "scripts/ci/stale-claim-detector.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "817402350589fd49",
+        "corpus": "817402350589fd49",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/parked-pr-detector.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Equivalente in node:test del guard vitest del sito (tests/parked-pr-detector.test.ts): copre la selezione delle draft parcheggiate, cioe' quelle fuori da TUTTI e sei gli strati del ciclo insieme. Corpus-only perche' il sito lo scrive in TypeScript per vitest, che qui non gira.",
+      "baseline": {
+        "site": null,
+        "corpus": "ee336dc7d0ec654c",
+        "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "generator/tests/stale-claim-detector.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Equivalente in node:test del guard vitest del sito (tests/stale-claim-detector.test.ts). La meta' che conta e' l'errore OPPOSTO: finche' una PR e' in volo il claim agent:in-progress e' corretto, e rilasciarlo farebbe partire un secondo fixer in parallelo — la collisione #4788/#4793 causata dal detector che la previene.",
+      "baseline": {
+        "site": null,
+        "corpus": "9f28aa91b7129cb9",
+        "alignedAt": "2026-08-08"
       }
     }
   ]

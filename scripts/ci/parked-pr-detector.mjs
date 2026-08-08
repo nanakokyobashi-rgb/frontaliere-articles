@@ -21,7 +21,7 @@
  * non viene rebasata, non viene etichettata stale e quindi non viene riciclata.
  * Resta aperta finché un umano non ci inciampa — e nessuno gli dice di farlo.
  *
- * È successo: la PR #33 di questo repo, uno snapshot di sessione morta aperto
+ * È successo: la PR #33 di `frontaliere-articles`, uno snapshot di sessione morta aperto
  * come draft «⛔️ NON MERGIARE» per rimandare una decisione. Il contenitore
  * sbagliato ha reso la decisione invisibile invece che rimandata, e nel
  * frattempo i suoi 29 file funnel-critical restavano nel grafo delle collisioni
