@@ -1,75 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-08T14:02:22.968Z",
+  "generatedAt": "2026-08-08T18:58:24.059Z",
   "dateIso": "2026-08-08",
   "counts": {
     "availableBlocks": 4,
     "crossings": 141,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 22645
+    "jobsActive": 22711
   },
   "blocks": {
     "borderWait": {
       "available": true,
-      "updatedAt": "2026-08-08T12:47:36.522Z",
+      "updatedAt": "2026-08-08T18:24:35.823Z",
       "count": 141,
-      "zeroWaitCount": 104,
+      "zeroWaitCount": 121,
       "worst": {
-        "slug": "porto-ceresio-brusino",
-        "name": "Porto Ceresio-Brusino",
-        "waitMinutes": 9
+        "slug": "moillesulaz",
+        "name": "Moillesulaz",
+        "waitMinutes": 2
       },
       "crossings": [
-        {
-          "slug": "porto-ceresio-brusino",
-          "name": "Porto Ceresio-Brusino",
-          "waitMinutes": 9,
-          "status": "yellow",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "campione-d-italia-bissone",
-          "name": "Campione d'Italia-Bissone",
-          "waitMinutes": 8,
-          "status": "yellow",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
-          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
-          "waitMinutes": 3,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "traforo-del-gran-san-bernardo",
-          "name": "Traforo del Gran San Bernardo",
-          "waitMinutes": 3,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "basel-weil-am-rhein-hiltalingerstrasse",
-          "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "ferney-voltaire-grand-saconnex",
-          "name": "Ferney-Voltaire / Grand-Saconnex",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "konstanz-tagerwilen-gottlieber-strasse",
-          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
-          "waitMinutes": 2,
-          "status": "green",
-          "direction": "Entrambi"
-        },
         {
           "slug": "moillesulaz",
           "name": "Moillesulaz",
@@ -78,9 +29,16 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "au-lustenau",
-          "name": "Au-Lustenau",
-          "waitMinutes": 1,
+          "slug": "porto-ceresio-brusino",
+          "name": "Porto Ceresio-Brusino",
+          "waitMinutes": 2,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "traforo-del-gran-san-bernardo",
+          "name": "Traforo del Gran San Bernardo",
+          "waitMinutes": 2,
           "status": "green",
           "direction": "Entrambi"
         },
@@ -92,22 +50,15 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "bardonnex",
-          "name": "Bardonnex",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
-          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "basel-weil-am-rhein-freiburgerstrasse",
           "name": "Basel – Weil am Rhein, Freiburgerstrasse",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "basel-weil-am-rhein-hiltalingerstrasse",
+          "name": "Basel – Weil am Rhein, Hiltalingerstrasse",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -127,8 +78,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "camedo",
-          "name": "Camedo (Re-Centovalli)",
+          "slug": "campione-d-italia-bissone",
+          "name": "Campione d'Italia-Bissone",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -155,43 +106,15 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "ferney-voltaire-grand-saconnex",
+          "name": "Ferney-Voltaire / Grand-Saconnex",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "gaggiolo",
           "name": "Gaggiolo (Cantello-Stabio)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "inzlingen-riehen",
-          "name": "Inzlingen – Riehen",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
-          "name": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "jestetten-laufen-uhwiesen-grenzstrasse",
-          "name": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "jestetten-neuhausen-am-rheinfall-zollstrasse",
-          "name": "Jestetten – Neuhausen am Rheinfall, Zollstrasse",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "jestetten-wilchingen",
-          "name": "Jestetten – Wilchingen",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -211,8 +134,15 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "lottstetten-nack",
-          "name": "Lottstetten – Nack",
+          "slug": "konstanz-tagerwilen-gottlieber-strasse",
+          "name": "Konstanz – Tägerwilen, Gottlieber Strasse",
+          "waitMinutes": 1,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "oria-gandria",
+          "name": "Oria-Gandria",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -225,57 +155,8 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
-          "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "riehen-lorrach-stetten",
-          "name": "Riehen – Lörrach-Stetten",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "riehen-weil-am-rhein",
           "name": "Riehen – Weil am Rhein",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "rielasingen-worblingen-ramsen-hofenacker",
-          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "samnaun-spiss",
-          "name": "Samnaun-Spiss",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "st-margrethen-hochst",
-          "name": "St. Margrethen-Höchst",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "thonex-vallard",
-          "name": "Thônex-Vallard (Autoroute Blanche)",
-          "waitMinutes": 1,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
-          "slug": "widnau-lustenau-schmitterbrucke",
-          "name": "Widnau-Lustenau (Schmitterbrücke)",
           "waitMinutes": 1,
           "status": "green",
           "direction": "Entrambi"
@@ -288,8 +169,29 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "au-lustenau",
+          "name": "Au-Lustenau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "bardonnex",
+          "name": "Bardonnex",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "bargen-sh-tengen",
           "name": "Bargen SH – Tengen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "basel-weil-am-rhein-autostrada-a2-a5",
+          "name": "Basel – Weil am Rhein, Autostrada A2/A5",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -388,6 +290,13 @@
         {
           "slug": "busingen-am-hochrhein-schaffhausen-gennersbrunnerstrasse",
           "name": "Büsingen am Hochrhein – Schaffhausen, Gennersbrunnerstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "camedo",
+          "name": "Camedo (Re-Centovalli)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -638,6 +547,27 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "inzlingen-riehen",
+          "name": "Inzlingen – Riehen",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "jestetten-laufen-uhwiesen-dorfstrasse",
+          "name": "Jestetten – Laufen-Uhwiesen, Dorfstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "jestetten-laufen-uhwiesen-grenzstrasse",
+          "name": "Jestetten – Laufen-Uhwiesen, Grenzstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "jestetten-neuhausen-am-rheinfall-buchweg",
           "name": "Jestetten – Neuhausen am Rheinfall, Buchweg",
           "waitMinutes": 0,
@@ -645,8 +575,22 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "jestetten-neuhausen-am-rheinfall-zollstrasse",
+          "name": "Jestetten – Neuhausen am Rheinfall, Zollstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "jestetten-rheinau",
           "name": "Jestetten – Rheinau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "jestetten-wilchingen",
+          "name": "Jestetten – Wilchingen",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -743,6 +687,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "lottstetten-nack",
+          "name": "Lottstetten – Nack",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "lottstetten-rafz-landstrasse",
           "name": "Lottstetten – Rafz, Landstrasse",
           "waitMinutes": 0,
@@ -827,13 +778,6 @@
           "direction": "Entrambi"
         },
         {
-          "slug": "oria-gandria",
-          "name": "Oria-Gandria",
-          "waitMinutes": 0,
-          "status": "green",
-          "direction": "Entrambi"
-        },
-        {
           "slug": "perly",
           "name": "Perly (Perly-Certoux)",
           "waitMinutes": 0,
@@ -864,6 +808,34 @@
         {
           "slug": "rheineck-gai-au",
           "name": "Rheineck-Gaißau",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "rheinfelden-rheinfelden-ag-alte-rheinbrucke",
+          "name": "Rheinfelden (Baden) – Rheinfelden AG, Alte Rheinbrücke",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "rheinfelden-rheinfelden-ag-autostrada-a861-a3",
+          "name": "Rheinfelden (Baden) – Rheinfelden AG, Autostrada A861/A3",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "riehen-lorrach-stetten",
+          "name": "Riehen – Lörrach-Stetten",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "rielasingen-worblingen-ramsen-hofenacker",
+          "name": "Rielasingen-Worblingen – Ramsen-Hofenacker",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -904,6 +876,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "samnaun-spiss",
+          "name": "Samnaun-Spiss",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "san-pietro",
           "name": "San Pietro (Clivio-Stabio)",
           "waitMinutes": 0,
@@ -939,6 +918,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "st-margrethen-hochst",
+          "name": "St. Margrethen-Höchst",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "stuhlingen-hallau",
           "name": "Stühlingen – Hallau",
           "waitMinutes": 0,
@@ -962,6 +948,13 @@
         {
           "slug": "tengen-thayngen-wiechserstrasse",
           "name": "Tengen – Thayngen, Wiechserstrasse",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
+          "slug": "thonex-vallard",
+          "name": "Thônex-Vallard (Autoroute Blanche)",
           "waitMinutes": 0,
           "status": "green",
           "direction": "Entrambi"
@@ -995,6 +988,13 @@
           "direction": "Entrambi"
         },
         {
+          "slug": "widnau-lustenau-schmitterbrucke",
+          "name": "Widnau-Lustenau (Schmitterbrücke)",
+          "waitMinutes": 0,
+          "status": "green",
+          "direction": "Entrambi"
+        },
+        {
           "slug": "widnau-lustenau",
           "name": "Widnau-Lustenau (Wiesenrain)",
           "waitMinutes": 0,
@@ -1012,11 +1012,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-08T12:00:48.426Z",
+      "generatedAt": "2026-08-08T18:03:41.281Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 66,
-      "cheaperSwissCount": 71,
-      "tieCount": 9,
+      "cheaperItalyCount": 95,
+      "cheaperSwissCount": 46,
+      "tieCount": 4,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -1099,12 +1099,12 @@
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-08T11:27:11.986Z",
-      "activeJobs": 22645,
-      "activeCompanies": 857,
-      "todayAdded": 591,
+      "generatedAt": "2026-08-08T17:25:51.760Z",
+      "activeJobs": 22711,
+      "activeCompanies": 859,
+      "todayAdded": 589,
       "yesterdayAdded": 1188,
-      "last7dAdded": 4869
+      "last7dAdded": 4867
     }
   }
 }
