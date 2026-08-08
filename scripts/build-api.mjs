@@ -58,10 +58,13 @@ const NEWS_CANDIDATES = 'sitemap-news-candidates.xml';
 const IMAGE_MANIFEST = 'images-manifest.json';
 /** Site-consumed ranking snapshot republished from the generator's output (§4). */
 const BORDER_RANKING = 'border-wait-ranking.json';
+/** Daily-brief snapshot (Bollettino del Frontaliere) — same republish contract. */
+const DAILY_BRIEF = 'daily-brief.json';
 
 let newsCandidateCount = 0;
 let imageCount = 0;
 let borderRankingEntries = 0;
+let dailyBriefBlocks = 0;
 
 const written = {};
 const write = (name, value) => {
@@ -620,6 +623,37 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   }
 }
 
+// Daily-brief snapshot (Bollettino del Frontaliere): same contract as the
+// border-wait ranking above — republished verbatim from the generator's
+// output, absent until refresh-daily-brief-data.mjs has run here at least
+// once. Consumers (the daily email digest) refuse a set they can't trust via
+// `counts.availableBlocks` and `dateIso`, so the only thing worth refusing at
+// build time is a payload that carries no blocks at all.
+{
+  const src = path.join(ROOT, 'public', 'data', 'daily-brief.json');
+  if (fs.existsSync(src)) {
+    const raw = fs.readFileSync(src, 'utf-8');
+    let parsed;
+    try {
+      parsed = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`public/data/daily-brief.json is not valid JSON: ${err.message}`);
+    }
+    const available = Number(parsed?.counts?.availableBlocks);
+    if (!Number.isFinite(available) || available < 1) {
+      throw new Error('daily-brief.json carries no available blocks — refusing to publish');
+    }
+    fs.writeFileSync(path.join(OUT, DAILY_BRIEF), raw);
+    written[DAILY_BRIEF] = raw.length;
+    dailyBriefBlocks = available;
+    console.log(`[build-api] ${DAILY_BRIEF}: ${available}/4 blocks (${parsed?.dateIso}), ${raw.length} bytes`);
+  } else {
+    console.log(
+      `[build-api] ${DAILY_BRIEF}: not emitted — the daily-brief producer has not run here yet`,
+    );
+  }
+}
+
 // Written last: it records the byte size of every other artifact.
 write('manifest.json', {
   schema: 1,
@@ -636,6 +670,7 @@ write('manifest.json', {
     newsCandidates: newsCandidateCount,
     images: imageCount,
     borderRankingEntries,
+    dailyBriefBlocks,
   },
   files: written,
 });
