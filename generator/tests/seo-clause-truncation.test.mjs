@@ -189,17 +189,28 @@ describe('cablaggio del modulo condiviso', () => {
 // ── Il contratto che non ha forma di import ────────────────────────────────
 
 describe('guardia "gia\' completo" allineata a repairSerpSnippet', () => {
-  // Lo scan qui sotto deve saltare le stringhe che chiudono su punteggiatura
-  // terminale, perche' e' cio' che fa `repairSerpSnippet` in
-  // host/shared/titleSuffix.ts prima di spelare. Quella e' una regola
-  // CONDIVISA che non passa da un import (il .ts non e' importabile da
-  // node:test), quindi va legata esplicitamente: e' la stessa forma del
-  // SiteShellContract, e lo stesso motivo per cui esiste
-  // loop-references-exist.test.mjs.
-  it('il letterale della guardia esiste ancora in titleSuffix.ts', () => {
+  // Lo scan piu' sotto deve saltare le stringhe che chiudono su punteggiatura
+  // terminale, perche' e' cio' che fa `repairSerpSnippet` prima di spelare.
+  //
+  // RIALLINEATO: la primitiva e' MIGRATA da host/shared/titleSuffix.ts a
+  // host/shared/clauseTail.mjs (PR #116), perche' scripts/build-api.mjs e' un
+  // .mjs e non puo' importare un .ts. Questo guard aveva pinnato il letterale
+  // nel file vecchio e ha fatto fallire la CI al primo tentativo di spostarlo.
+  // E' il comportamento voluto, non un intralcio: un contratto senza forma di
+  // import va legato per TESTO, e un legame per testo deve rompersi quando il
+  // testo si sposta — altrimenti non stava legando niente.
+  it('il letterale della guardia vive in clauseTail.mjs', () => {
+    const mjs = fs.readFileSync(CLAUSE_TAIL, 'utf-8');
+    expect(mjs, 'se repairSerpSnippet cambia guardia, lo scan sotto va riallineato')
+      .toContain('.test(normalized)) return normalized;');
+  });
+
+  it('titleSuffix.ts la riesporta invece di ridefinirla (AGENTS.md #6)', () => {
     const ts = fs.readFileSync(TITLE_SUFFIX, 'utf-8');
-    expect(ts, 'se repairSerpSnippet cambia guardia, lo scan sotto va riallineato')
-      .toContain('if (/[.!?…»"\')\\]]$/u.test(normalized)) return normalized;');
+    expect(ts, 'deve riesportare, non ridefinire')
+      .toContain("export { repairSerpSnippet } from './clauseTail.mjs';");
+    expect(ts, 'una seconda definizione sarebbe la duplicazione che la migrazione ha rimosso')
+      .not.toContain('export function repairSerpSnippet');
   });
 });
 
