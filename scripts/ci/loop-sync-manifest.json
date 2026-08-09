@@ -19,6 +19,70 @@
   "siteRepo": "valerielinc-ops/frontaliere-si-o-no",
   "siteRef": "main",
   "alignedAt": "2026-08-09",
+  "scope": {
+    "_doc": [
+      "Il manifest sorveglia FILE, uno per uno. Finche' l'unica cosa dichiarata sono i file",
+      "registrati, «non e' nel manifest» resta ambiguo fra «non ha un gemello sul sito» e",
+      "«nessuno ha guardato» — e la seconda non lascia traccia. E' cosi' che tutto",
+      "generator/scripts/lib/ (65 file, 55 byte-identici al sito) e' rimasto invisibile fino",
+      "alla issue #97, e prima ancora create-article.mjs (#81 -> #82).",
+      "",
+      "`roots` chiude l'ambiguita' dichiarando gli alberi CENSITI: sotto un root ogni file",
+      "deve avere una voce in `files`, qualunque sia il mode. Un file nuovo che nessuno",
+      "classifica rompe generator/tests/loop-sync-manifest-scope.test.mjs — offline, senza",
+      "rete, senza sapere niente del sito.",
+      "",
+      "`outOfScope` e' l'altra meta': i prefissi che hanno gemelli sul sito e che si e' deciso",
+      "di NON registrare, con la ragione scritta. Serve al censimento di rete (opt-in,",
+      "LOOP_TWIN_CENSUS=1 nello stesso test), che verifica che nessun gemello byte-identico",
+      "stia fuori sia da `files` sia da `roots` sia da qui. Il confronto e' sullo sha del blob",
+      "git, che e' calcolato sul contenuto: due file byte-identici hanno lo stesso sha anche in",
+      "repo diversi.",
+      "",
+      "`prefix` si confronta con startsWith sul path relativo alla radice del repo."
+    ],
+    "censusAt": "2026-08-09",
+    "roots": [
+      {
+        "path": "scripts/ci",
+        "reason": "Il cuore del ciclo agentico. Gia' censito al 100% prima di questo blocco (35/35): il root lo DICHIARA, cosi' il prossimo script che ci atterra non puo' entrare senza un mode."
+      },
+      {
+        "path": "scripts/lib",
+        "reason": "Librerie condivise fra ciclo agentico e pubblicazione. Meta' erano registrate, meta' no — fra queste git-push-with-retry.sh, che cita issue del SITO (#2988, #4190, #4557, #3809, #4183) nei propri commenti ed e' inequivocabilmente un gemello."
+      },
+      {
+        "path": "generator/scripts/lib",
+        "reason": "Le librerie che gli entry point del generatore importano. Zero voci prima della issue #97, 55 file su 65 byte-identici a scripts/lib/ del sito: l'albero intero era fuori sorveglianza mentre i suoi chiamanti (#82, #92) erano dentro."
+      },
+      {
+        "path": "host",
+        "reason": "La meta' `host/` di SiteShellContract. E' il contratto che CLAUDE.md indica come la trappola: non ha forma di import, quindi tests/packages-articles-confinement.test.ts non lo copre e spedire l'engine senza host/ da' TypeError a render time dietro una CI verde. Cinque file qui dichiarano in intestazione «MUST stay byte-equal to the main repo's» nominando host/host-drift.test.mjs come guardia — quel file non esiste ne' qui ne' sul sito (verificato su entrambi gli alberi git). Finche' non esiste, queste voci sono la guardia."
+      }
+    ],
+    "outOfScope": [
+      {
+        "prefix": "content/",
+        "reason": "Il corpus. Lo scrive solo il generatore, e gli omonimi sotto packages/articles/content/ del sito sono l'output della stessa pipeline, non codice condiviso."
+      },
+      {
+        "prefix": "engine/",
+        "reason": "25 file, tutti byte-identici a packages/articles/engine/ del sito — ma hanno gia' un canale di discesa AUTOMATICO: mirror-articles-engine.yml (push sui path dell'engine + schedule 6h) apre una PR qui. Registrarli produrrebbe un site-ahead per tutta la durata di ogni PR di mirror, cioe' rumore su un canale che funziona. Se quel canale si rompe di nuovo — e' gia' successo, nove commit persi visibili solo come audit:footer-root-presence da 23 a 3608 — il segnale giusto e' un allarme sul mirror, non un drift check giornaliero."
+      },
+      {
+        "prefix": "index.ts",
+        "reason": "Nell'allowlist di mirror-articles-engine.yml insieme a engine/: stessa ragione."
+      },
+      {
+        "prefix": "articleSections.ts",
+        "reason": "Nell'allowlist di mirror-articles-engine.yml insieme a engine/: stessa ragione."
+      },
+      {
+        "prefix": "public/images/",
+        "reason": "246 immagini byte-identiche a quelle del sito. Sono asset, non codice: non hanno ne' una fix che «scende» ne' una che «risale», e registrarle costerebbe 246 fetch HTTP per ogni giro di loop-drift-check per sorvegliare byte che nessuno modifica in place."
+      }
+    ]
+  },
   "files": [
     {
       "path": "scripts/ci/alert-pat-down.mjs",
@@ -1011,6 +1075,1093 @@
       "baseline": {
         "site": "eae01748163e0032",
         "corpus": "d42109a464204179",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/cf-analytics.mjs",
+      "mode": "identical",
+      "reason": "Client GraphQL Cloudflare Analytics. **Oggi i due lati NON coincidono**, e la registrazione lo dichiara apposta: il blob qui e' identico a `valerielinc-ops@be6b31d5:scripts/lib/cf-analytics.mjs`, cioe' e' la copia del trasporto del 2026-08-02 mai piu' toccata; il sito ha aggiunto `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` il 2026-08-05. Non e' un adattamento, e' ritardo: `identical` fa emergere il caso come `undeclared-drift` invece di lasciarlo muto.",
+      "baseline": {
+        "site": "4e3a87aedeb3b4c0",
+        "corpus": "a0ac96009b459a53",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/cf-purge-variants.mjs",
+      "mode": "adapted",
+      "reason": "Purge di TUTTE le varianti di cache per una URL (`Vary: Origin`, due entry per URL sull'edge). Divergente anche da `be6b31d5`: qui l'intestazione e' riscritta dal punto di vista del PUBLISHER — la misura citata e' quella del 2026-08-08 su run 31241440018, dove sei `blog-index-<sezione>-<locale>.json` su otto erano sfasati di 12-16 ore fra la variante senza Origin (quella che i gate di questo repo leggono) e quella con Origin (l'unica che il browser legge). Il sito ha risolto nel proprio repo con valerielinc-ops#5273; questo repo carica sullo STESSO bucket dietro la STESSA zona, quindi gli serve la stessa cura ma con la propria diagnosi.",
+      "baseline": {
+        "site": "6ffb7130f5833629",
+        "corpus": "4076a746a6ebdb3b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/git-push-with-retry.sh",
+      "mode": "identical",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. **Oggi i due lati NON coincidono** e la ragione e' la stessa di cf-analytics.mjs: il blob qui e' identico a `be6b31d5`, il sito ha aggiunto dopo le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Nota che gia' oggi registra `merge.compat-shard.driver` puntando a `scripts/ci/merge-compat-shard.mjs`, che qui non esiste — innocuo perche' il comando finisce in `|| true` e nessun `.gitattributes` locale marca quei path.",
+      "baseline": {
+        "site": "643a10e4815e38bc",
+        "corpus": "7dea1006a6223cc2",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/npm-ci-retry.sh",
+      "mode": "corpus-only",
+      "reason": "Wrapper `npm ci` con retry, nato qui per i 9 punti di install del generatore (PR #91). Il sito non ha un file omonimo.",
+      "baseline": {
+        "site": null,
+        "corpus": "a8622b19f6c32868",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/push-article-shard-incremental.sh",
+      "mode": "adapted",
+      "reason": "Push incrementale degli shard articolo. Divergente anche da `be6b31d5`, e per due cose che sul sito non hanno senso: (1) `repo_root` risolto rispetto allo script e non a `$(pwd)`, perche' con cwd diversa `section-shard-owners.json` spariva e il default `// \"valerielinc-ops\"` di jq mandava il push all'OWNER SBAGLIATO — questi shard sono di nanakokyobashi-rgb; (2) la PAT mode: senza deploy key lo script usciva 0 in silenzio e il chiamante riportava successo (misurato su run 30813668145: ogni locale «not provisioned», zero HTML sugli shard, workflow verde). Qui, senza deploy key ma con `SHARD_PUSH_PAT`/`GITHUB_PAT`, pusha via HTTPS.",
+      "baseline": {
+        "site": "c6f403314174da9b",
+        "corpus": "84649b82b65653cd",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/rebase-onto-remote.sh",
+      "mode": "corpus-only",
+      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "59731c0256635700",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/section-shard-owners.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "2330b38e03d26aae",
+        "corpus": "2330b38e03d26aae",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/section-shard-slugs.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "eb210d92df09b557",
+        "corpus": "eb210d92df09b557",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/shard-git-helpers.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "d8e87c84a4c2b386",
+        "corpus": "d8e87c84a4c2b386",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/upload-cdn-file.sh",
+      "mode": "identical",
+      "baseline": {
+        "site": "61e284495c142198",
+        "corpus": "61e284495c142198",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/ai-models.mjs",
+      "sitePath": "scripts/lib/ai-models.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "404f6338e70d813a",
+        "corpus": "404f6338e70d813a",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/ai-search-template.mjs",
+      "sitePath": "scripts/lib/ai-search-template.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "d9cd0305649921d0",
+        "corpus": "d9cd0305649921d0",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-body-repetition.mjs",
+      "sitePath": "scripts/lib/article-body-repetition.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "625947bd73212122",
+        "corpus": "625947bd73212122",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-defect-memory.mjs",
+      "sitePath": "scripts/lib/article-defect-memory.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a13c591f43e63b70",
+        "corpus": "a13c591f43e63b70",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-factuality-gates.mjs",
+      "sitePath": "scripts/lib/article-factuality-gates.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "3adad2e431042688",
+        "corpus": "3adad2e431042688",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-free-mt.mjs",
+      "sitePath": "scripts/lib/article-free-mt.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0f3dd9cefcb52b17",
+        "corpus": "0f3dd9cefcb52b17",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-locale-lexicon.mjs",
+      "sitePath": "scripts/lib/article-locale-lexicon.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "f372a9c4926035ee",
+        "corpus": "f372a9c4926035ee",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-sanitizers.mjs",
+      "sitePath": "scripts/lib/article-sanitizers.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "f6b2ff0506dbf434",
+        "corpus": "f6b2ff0506dbf434",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-topic-selector.mjs",
+      "sitePath": "scripts/lib/article-topic-selector.mjs",
+      "mode": "adapted",
+      "reason": "Selettore dei topic. Divergente anche da `be6b31d5`: due sole righe, l'import di `corpusPath` da `./corpus-paths.mjs` e il default di `loadExistingItTitles`, che qui deve risolvere dentro `content/` invece che sotto `services/locales/`. Adattamento di trasporto puro; qualunque altra modifica del sito e' copiabile sopra.",
+      "baseline": {
+        "site": "963503e2e083d20a",
+        "corpus": "0d9e75ceb94e873a",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/atomic-write-json.mjs",
+      "sitePath": "scripts/lib/atomic-write-json.mjs",
+      "mode": "adapted",
+      "reason": "Scrittura JSON atomica. La divergenza e' nata in modo PASSIVO — il blob qui e' identico a `be6b31d5` e il sito ha aggiunto dopo il passaggio per `preserveSlugHistory` (`./slug-preservation-guard.mjs`, valerielinc-ops#5157) — ma la decisione di restare diversi e' presa ora ed e' deliberata: quel guard serve al crawler dei job, protegge gli slug sotto `data/jobs/by-crawler/*.json`, e ne' il modulo ne' quei dati esistono in questo repo. Copiarlo qui darebbe un import irrisolto. Ogni ALTRA modifica del sito a questo file va invece riapplicata.",
+      "baseline": {
+        "site": "03d4a457b7d356ae",
+        "corpus": "ad38e70657bc1995",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/border-wait-ranking-content.mjs",
+      "sitePath": "scripts/lib/border-wait-ranking-content.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "3abebcd10fe6cbed",
+        "corpus": "3abebcd10fe6cbed",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/border-wait-ranking.mjs",
+      "sitePath": "scripts/lib/border-wait-ranking.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "095a269edb9bc8e6",
+        "corpus": "095a269edb9bc8e6",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cluster-classifier-prompt.mjs",
+      "sitePath": "scripts/lib/cluster-classifier-prompt.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c52b041b081d3d39",
+        "corpus": "c52b041b081d3d39",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/corpus-paths.mjs",
+      "mode": "corpus-only",
+      "reason": "L'helper `corpusPath()` che riscrive i path del sito nei path del corpus. E' la meta' di trasporto per cui esistono gli `adapted` di questa cartella: sul sito non ha senso, perche' li' il corpus E' il repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "47b093660c826bb1",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-content.mjs",
+      "mode": "corpus-only",
+      "reason": "Composizione del Bollettino del Frontaliere, edizione datata quotidiana nata su questo repo. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "0ec6738d2e856a61",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-data.mjs",
+      "mode": "corpus-only",
+      "reason": "Raccolta dati del Bollettino del Frontaliere. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "38f36979425f30d7",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/daily-brief-image.mjs",
+      "mode": "corpus-only",
+      "reason": "Immagine di testata del Bollettino del Frontaliere. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "9cf499df15b47c3e",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/decode-html-entities.mjs",
+      "sitePath": "scripts/lib/decode-html-entities.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "25cd9c3dd0fe4af6",
+        "corpus": "25cd9c3dd0fe4af6",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/detect-language.mjs",
+      "sitePath": "scripts/lib/detect-language.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e9d1b7896c24df17",
+        "corpus": "e9d1b7896c24df17",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/discoveryPool.mjs",
+      "sitePath": "scripts/lib/discovery/discoveryPool.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "d5c5bada873c3bab",
+        "corpus": "d5c5bada873c3bab",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/discoveryScore.mjs",
+      "sitePath": "scripts/lib/discovery/discoveryScore.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "72f7e9d7f9843823",
+        "corpus": "72f7e9d7f9843823",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/domainAnchor.mjs",
+      "sitePath": "scripts/lib/discovery/domainAnchor.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0141f873b5d28505",
+        "corpus": "0141f873b5d28505",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/frontaliereAnchor.mjs",
+      "sitePath": "scripts/lib/discovery/frontaliereAnchor.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4ef3742d9e51a2fa",
+        "corpus": "4ef3742d9e51a2fa",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/googleNewsUrlResolver.mjs",
+      "sitePath": "scripts/lib/discovery/googleNewsUrlResolver.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e67cdf47b126d68b",
+        "corpus": "e67cdf47b126d68b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/sources/googleNewsRssSource.mjs",
+      "sitePath": "scripts/lib/discovery/sources/googleNewsRssSource.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "fc66db1ec0a2e698",
+        "corpus": "fc66db1ec0a2e698",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/sources/googleSuggestSource.mjs",
+      "sitePath": "scripts/lib/discovery/sources/googleSuggestSource.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "d324259ea4515cb6",
+        "corpus": "d324259ea4515cb6",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/sources/googleTrendsSource.mjs",
+      "sitePath": "scripts/lib/discovery/sources/googleTrendsSource.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "483ebda89271b78b",
+        "corpus": "483ebda89271b78b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/discovery/sources/orphanQuerySource.mjs",
+      "sitePath": "scripts/lib/discovery/sources/orphanQuerySource.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e59259eaa6807f71",
+        "corpus": "e59259eaa6807f71",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/dup-stoplist.mjs",
+      "sitePath": "scripts/lib/dup-stoplist.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "de12d5f7473a42aa",
+        "corpus": "de12d5f7473a42aa",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/ensure-chromium.mjs",
+      "sitePath": "scripts/lib/ensure-chromium.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "54656b480b2b8275",
+        "corpus": "54656b480b2b8275",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/events-digest-content.mjs",
+      "sitePath": "scripts/lib/events-digest-content.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "976cd7fdedd9a2ec",
+        "corpus": "976cd7fdedd9a2ec",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/events-utils.mjs",
+      "sitePath": "scripts/lib/events-utils.mjs",
+      "mode": "adapted",
+      "reason": "Utility del crawler eventi. L'adattamento reale e' uno solo — `REPO_ROOT` a `../../..` per lo stesso spostamento di cartella di `evergreen-article-refresh.mjs` — ed e' cio' che rende il file NON riallineabile con una copia. **Ma sotto quell'adattamento c'e' un ritardo, e va detto qui perche' nient'altro lo dira'**: il sito ha aggiunto il 2026-08-03 (809abec2) il parametro `deadline` a `enrichEventsWithLocaleFallbackTranslations`, che cappa il wall clock dello stadio di traduzione. Senza, quello stadio e' la cosa piu' lunga che i crawler nationwide fanno e ha cancellato `crawl-events` ogni giorno dal 2026-07-07: il checkpoint restava congelato e il dataset non veniva mai committato. Qui la fix NON c'e'. Va riapplicata a mano sopra l'adattamento, non copiata.",
+      "baseline": {
+        "site": "17534dd263c33453",
+        "corpus": "69fc810377df367c",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/evergreen-article-refresh.mjs",
+      "sitePath": "scripts/lib/evergreen-article-refresh.mjs",
+      "mode": "adapted",
+      "reason": "Refresh degli articoli evergreen. Tre adattamenti veri: `DEFAULT_REPO_ROOT` a `../../..` (il trasporto ha spostato il modulo da `scripts/lib/` a `generator/scripts/lib/`, quindi due livelli su cadono in `generator/`), `corpusPath()` su ogni lettura, e `bumpSitemapLastmod` ridotta a no-op perche' `public/sitemap-blog.xml` qui non esiste — `scripts/build-api.mjs` rigenera quella sitemap dal corpus a ogni pubblicazione prendendo `<lastmod>` da `updatedAt || date`, che `bumpUpdatedAt` ha gia' scritto. Piu' `writeCorpusFile` per la guardia control char (#66).",
+      "baseline": {
+        "site": "c3d355c001c85c25",
+        "corpus": "5a39fa6bea2d7563",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/evergreen-topic-generator.mjs",
+      "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "f8d4b6be414dbfe5",
+        "corpus": "f8d4b6be414dbfe5",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/evidence/constants.mjs",
+      "sitePath": "scripts/lib/evidence/constants.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "45e21f66d2360a3b",
+        "corpus": "45e21f66d2360a3b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/evidence/embeddingClient.mjs",
+      "sitePath": "scripts/lib/evidence/embeddingClient.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4b213acd8fa3988c",
+        "corpus": "4b213acd8fa3988c",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/extract-article-text.mjs",
+      "sitePath": "scripts/lib/extract-article-text.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a03d0cdf61be8da7",
+        "corpus": "a03d0cdf61be8da7",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/fact-check-consensus.mjs",
+      "sitePath": "scripts/lib/fact-check-consensus.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7c38c5110b5cf598",
+        "corpus": "7c38c5110b5cf598",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/fnv1a.mjs",
+      "sitePath": "scripts/lib/fnv1a.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "8ca1189a2497a6a6",
+        "corpus": "8ca1189a2497a6a6",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/free-translate.mjs",
+      "sitePath": "scripts/lib/free-translate.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "eb07dcf3a4b0dc6d",
+        "corpus": "eb07dcf3a4b0dc6d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/google-service-account-token.mjs",
+      "sitePath": "scripts/lib/google-service-account-token.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ae637dc85730dd2e",
+        "corpus": "ae637dc85730dd2e",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/haversine.mjs",
+      "sitePath": "scripts/lib/haversine.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "ad658040d567fa58",
+        "corpus": "ad658040d567fa58",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/it-text-similarity.mjs",
+      "sitePath": "scripts/lib/it-text-similarity.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b9355022563cb313",
+        "corpus": "b9355022563cb313",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/itLanguageCheck.mjs",
+      "sitePath": "scripts/lib/itLanguageCheck.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "b4c5d683eca4e7aa",
+        "corpus": "b4c5d683eca4e7aa",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/llm-json-repair.mjs",
+      "sitePath": "scripts/lib/llm-json-repair.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "dd088410f084c844",
+        "corpus": "dd088410f084c844",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/local-opus-mt.mjs",
+      "sitePath": "scripts/lib/local-opus-mt.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "5a4560459057675c",
+        "corpus": "5a4560459057675c",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/meta-field-regex.mjs",
+      "sitePath": "scripts/lib/meta-field-regex.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0c43d71a4ebb7531",
+        "corpus": "0c43d71a4ebb7531",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/mymemory-translate.mjs",
+      "sitePath": "scripts/lib/mymemory-translate.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "2677822dde8452e3",
+        "corpus": "2677822dde8452e3",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/perf-sources/domainTerms.mjs",
+      "sitePath": "scripts/lib/perf-sources/domainTerms.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "7346e5a9a16de480",
+        "corpus": "7346e5a9a16de480",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/profession-taxonomy.mjs",
+      "sitePath": "scripts/lib/profession-taxonomy.mjs",
+      "mode": "identical",
+      "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. **Oggi i due lati NON coincidono, e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, cioe' alla copia del trasporto del 2026-08-02, mentre il sito ha aggiunto il 2026-08-05 (21e2d13d) `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`. Registrarlo `adapted` avrebbe dichiarato deliberato un ritardo: `identical` lo fa uscire come `undeclared-drift`, che e' la verita'.",
+      "baseline": {
+        "site": "d15cfe455f5879b5",
+        "corpus": "2cc826c9a6ed57d7",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scheduler/quotaController.mjs",
+      "sitePath": "scripts/lib/scheduler/quotaController.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "5dc29a182638027e",
+        "corpus": "5dc29a182638027e",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scheduler/slugSimilarity.mjs",
+      "sitePath": "scripts/lib/scheduler/slugSimilarity.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "e19e5aeffe726892",
+        "corpus": "e19e5aeffe726892",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scoring/cascadedScore.mjs",
+      "sitePath": "scripts/lib/scoring/cascadedScore.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "2ed579228003fa3b",
+        "corpus": "2ed579228003fa3b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scoring/constants.mjs",
+      "sitePath": "scripts/lib/scoring/constants.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "6dc91e985caa7eca",
+        "corpus": "6dc91e985caa7eca",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scoring/embeddingMatcher.mjs",
+      "sitePath": "scripts/lib/scoring/embeddingMatcher.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "02ff97a6a52bfdf0",
+        "corpus": "02ff97a6a52bfdf0",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scoring/semanticDedup.mjs",
+      "sitePath": "scripts/lib/scoring/semanticDedup.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "8b5da48c9029113f",
+        "corpus": "8b5da48c9029113f",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/scoring/termExtractor.mjs",
+      "sitePath": "scripts/lib/scoring/termExtractor.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "87c57d37c7ca41ee",
+        "corpus": "87c57d37c7ca41ee",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/slug-truncate.mjs",
+      "sitePath": "scripts/lib/slug-truncate.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "0d09461e4b97c3be",
+        "corpus": "0d09461e4b97c3be",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/detectLocale.mjs",
+      "sitePath": "scripts/lib/topic-sources/detectLocale.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "c2d44e4154c45ea3",
+        "corpus": "c2d44e4154c45ea3",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/googleNewsRss.mjs",
+      "sitePath": "scripts/lib/topic-sources/googleNewsRss.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "56df3eae3b51ffef",
+        "corpus": "56df3eae3b51ffef",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/googleSuggest.mjs",
+      "sitePath": "scripts/lib/topic-sources/googleSuggest.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "a0c53dab4d1eac31",
+        "corpus": "a0c53dab4d1eac31",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/googleTrends.mjs",
+      "sitePath": "scripts/lib/topic-sources/googleTrends.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "8aa357ac9d370a9d",
+        "corpus": "8aa357ac9d370a9d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/gscOrphans.mjs",
+      "sitePath": "scripts/lib/topic-sources/gscOrphans.mjs",
+      "mode": "adapted",
+      "reason": "Sorgente topic dalle query orfane di Search Console. Stesso identico adattamento di `article-topic-selector.mjs` e due sole righe: import di `corpusPath` e `BLOG_META_PATH` risolto nel corpus. Tutto il resto e' copiabile dal sito.",
+      "baseline": {
+        "site": "9b89459f35afb9c1",
+        "corpus": "7e130835aac76473",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-sources/wordpressSearch.mjs",
+      "sitePath": "scripts/lib/topic-sources/wordpressSearch.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "57d680bbaf19c26d",
+        "corpus": "57d680bbaf19c26d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/translation-glossary.mjs",
+      "sitePath": "scripts/lib/translation-glossary.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "443eeda27c3a7f1f",
+        "corpus": "443eeda27c3a7f1f",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/authors.ts",
+      "sitePath": "data/authors.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "34927c5d217635e5",
+        "corpus": "34927c5d217635e5",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/batchWrite.ts",
+      "sitePath": "build-plugins/batchWrite.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "d0e045812aef8d35",
+        "corpus": "d0e045812aef8d35",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/blogContextualLinksData.ts",
+      "sitePath": "build-plugins/blogContextualLinksData.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "510e1f9b2546a18a",
+        "corpus": "510e1f9b2546a18a",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/constants.ts",
+      "sitePath": "build-plugins/constants.ts",
+      "mode": "adapted",
+      "reason": "Costanti del sito che l'engine legge via SiteShellContract. E' un ESTRATTO PER CHIUSURA di `build-plugins/constants.ts` (850 righe la': solo le ~15 dichiarazioni che il contratto raggiunge, 177 righe qui), quindi non potra' mai essere byte-identico e `adapted` e' il mode giusto. La sua intestazione dichiara pero' «These values MUST stay byte-equal to the main repo's» e nomina `host/host-drift.test.mjs` come guardia: **quel file non esiste, ne' qui ne' sul sito** (verificato su entrambi gli alberi git). Finche' non esiste, questa voce di manifest E' la guardia.",
+      "baseline": {
+        "site": "62e473f867f388d7",
+        "corpus": "7c8c22b48ee255aa",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/contentHash.ts",
+      "sitePath": "build-plugins/contentHash.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "ef018c7640bd8c8b",
+        "corpus": "ef018c7640bd8c8b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/htmlTemplate.ts",
+      "sitePath": "build-plugins/htmlTemplate.ts",
+      "mode": "adapted",
+      "reason": "Chrome HTML delle pagine statiche letta dall'engine via SiteShellContract. Estratto per chiusura di `build-plugins/htmlTemplate.ts` (449 righe la', 145 qui): le 5 dichiarazioni che il contratto raggiunge. Stessa nota di `host/constants.ts` sulla guardia `host/host-drift.test.mjs` inesistente.",
+      "baseline": {
+        "site": "03eb2981c0b55179",
+        "corpus": "671d160a32722476",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/seo/imageObjectLd.ts",
+      "sitePath": "services/seo/imageObjectLd.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "f4b83c5927233968",
+        "corpus": "f4b83c5927233968",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/seo/organizationLd.ts",
+      "sitePath": "services/seo/organizationLd.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "afca1c4aace7ca3e",
+        "corpus": "afca1c4aace7ca3e",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/seoHubsData.ts",
+      "sitePath": "build-plugins/seoHubsData.ts",
+      "mode": "adapted",
+      "reason": "Dati slug/locale degli hub letti dall'engine via SiteShellContract. Estratto per chiusura di `build-plugins/seoHubsData.ts` (321 righe la', 64 qui); `SLUG_TABLES` non e' trasportato perche' la chiusura ne raggiunge due campi per locale, inlineati. Stessa nota sulla guardia inesistente.",
+      "baseline": {
+        "site": "67299610cd5bcfe8",
+        "corpus": "6a1073ede10a5ee9",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/buildDayStamp.ts",
+      "sitePath": "build-plugins/shared/buildDayStamp.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "4031b7a41322f25d",
+        "corpus": "4031b7a41322f25d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/cdnAssetOffloadRx.mjs",
+      "sitePath": "build-plugins/shared/cdnAssetOffloadRx.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "2e679602cd8788ca",
+        "corpus": "2e679602cd8788ca",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/chunkFiles.ts",
+      "sitePath": "build-plugins/shared/chunkFiles.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "b690cf322d96bc44",
+        "corpus": "b690cf322d96bc44",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/criticalCss.ts",
+      "sitePath": "build-plugins/shared/criticalCss.ts",
+      "mode": "adapted",
+      "reason": "Link al CSS critico. Estratto per chiusura di `build-plugins/shared/criticalCss.ts` (893 righe la', 24 qui: il resto e' il payload CSS inline che il percorso articolo non emette). Stessa nota sulla guardia inesistente.",
+      "baseline": {
+        "site": "0c5a992dec3b8ff6",
+        "corpus": "0d394f21212a14bb",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/inlineJsonScript.ts",
+      "sitePath": "build-plugins/shared/inlineJsonScript.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "2d1b8c01016ef1d3",
+        "corpus": "2d1b8c01016ef1d3",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/localeEmitFilter.ts",
+      "sitePath": "build-plugins/shared/localeEmitFilter.ts",
+      "mode": "identical",
+      "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. **Oggi i due lati NON coincidono e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, il sito ha corretto dopo (#5327) il caso `dist/<loc>.html` — la homepage di locale sta alla RADICE di dist, non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`. Sul sito questo ha prodotto `/en.html` `/de.html` `/fr.html` a 404 in produzione. Qui la correzione non e' mai scesa. `identical` la fa uscire come `undeclared-drift`.",
+      "baseline": {
+        "site": "291ab28adf5a0e14",
+        "corpus": "8e14c6e58fd7a46d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/railGutters.ts",
+      "sitePath": "build-plugins/shared/railGutters.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "649ba978a7be7869",
+        "corpus": "649ba978a7be7869",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/safeTruncate.ts",
+      "sitePath": "build-plugins/shared/safeTruncate.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "776508d2f174584f",
+        "corpus": "776508d2f174584f",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/seoContentTokens.ts",
+      "sitePath": "build-plugins/shared/seoContentTokens.ts",
+      "mode": "adapted",
+      "reason": "Differenziazione H1/title. Estratto per chiusura di `build-plugins/shared/seoContentTokens.ts` (1024 righe la', 65 qui: il resto e' chrome di card job/aziende/cantoni che il percorso articolo non raggiunge). Stessa nota sulla guardia inesistente.",
+      "baseline": {
+        "site": "ca8e313990325b7d",
+        "corpus": "638de2e984bf97e1",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/spaEntryFilenames.ts",
+      "sitePath": "build-plugins/shared/spaEntryFilenames.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "c5024de13d323c65",
+        "corpus": "c5024de13d323c65",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/stripLiteralMarkdown.ts",
+      "sitePath": "build-plugins/shared/stripLiteralMarkdown.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "f617046a3b476b4f",
+        "corpus": "f617046a3b476b4f",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/viteAssetHashRx.mjs",
+      "sitePath": "build-plugins/shared/viteAssetHashRx.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "4f64a90cb0b2a21b",
+        "corpus": "4f64a90cb0b2a21b",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/viteAssetHashRx.ts",
+      "sitePath": "build-plugins/shared/viteAssetHashRx.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "7b3a0ae384ef3521",
+        "corpus": "7b3a0ae384ef3521",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/sharedWriteRegistry.ts",
+      "sitePath": "build-plugins/sharedWriteRegistry.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "8b993116044fb9f2",
+        "corpus": "8b993116044fb9f2",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shell-contract-fingerprint.json",
+      "mode": "corpus-only",
+      "reason": "Impronta dei 41 membri di SiteShellContract, prodotta e verificata da `host/tests/shell-contract-fingerprint.test.mjs`. Artefatto di questo lato: e' il gate runtime che impedisce di spedire l'engine senza la sua meta' `host/`.",
+      "baseline": {
+        "site": null,
+        "corpus": "2db6595933fc9e97",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/siteShellBootstrap.ts",
+      "mode": "corpus-only",
+      "reason": "Il bootstrap che costruisce SiteShellContract da `host/`. E' la meta' che sul sito e' fornita da `build-plugins/` e `services/`: qui e' un file solo, e non ha omonimo la'.",
+      "baseline": {
+        "site": null,
+        "corpus": "e8b2194a9da23407",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/spaBundleResolver.ts",
+      "sitePath": "build-plugins/spaBundleResolver.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "b104ddc085bac232",
+        "corpus": "b104ddc085bac232",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/tests/shell-contract-fingerprint.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate runtime che avvia il bootstrap vero e conta i membri del contratto. Nessun omonimo sul sito: la' l'equivalente e' `tests/packages-articles-confinement.test.ts`, che pero' controlla gli import, non il contratto.",
+      "baseline": {
+        "site": null,
+        "corpus": "d6ed30c333d95138",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/tests/shell-contract-functions.golden.json",
+      "sitePath": "tests/articles-shell-contract-functions.golden.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "c584aaf489c71a41",
+        "corpus": "c584aaf489c71a41",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/tests/shell-contract-functions.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Confronto del contratto contro il golden `host/tests/shell-contract-functions.golden.json`. Nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "1dcc96439e77feb6",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/data/canton-url-slugs.json",
+      "sitePath": "data/canton-url-slugs.json",
+      "mode": "identical",
+      "baseline": {
+        "site": "d19254df2dbbd579",
+        "corpus": "d19254df2dbbd579",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/services/borderWaitFormat.ts",
+      "sitePath": "services/borderWaitFormat.ts",
+      "mode": "identical",
+      "baseline": {
+        "site": "51efd41847424ad0",
+        "corpus": "51efd41847424ad0",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/generate-image-thumbnails.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "81218522bca6c226",
+        "corpus": "81218522bca6c226",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/loop-sync-manifest-scope.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Il guard strutturale del manifest: sotto un albero dichiarato in `scope.roots` ogni file deve avere un mode. Vive qui perche' e' qui che il ciclo ARRIVA — il sito e' la sorgente e non ha un manifest da censire. Porta anche il censimento di rete (opt-in, LOOP_TWIN_CENSUS=1) che cerca alberi gemelli mai dichiarati.",
+      "baseline": {
+        "site": null,
+        "corpus": "895c4f20d97f14a2",
         "alignedAt": "2026-08-09"
       }
     }
