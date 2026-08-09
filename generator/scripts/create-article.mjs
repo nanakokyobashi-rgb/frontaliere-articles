@@ -3400,6 +3400,112 @@ const EVERGREEN_FACTS_BRIEF = `FATTI VERIFICATI (ground truth — il fact-checke
 - Le aliquote fiscali (imposta alla fonte, aliquote federali/cantonali) sono stabilite da leggi federali/cantonali e amministrate da AFC/ESTV a livello federale e dalle amministrazioni cantonali delle contribuzioni — MAI da UFAS (previdenza sociale, AVS/AI) né da BFS (statistica: rileva dati, non fissa aliquote).
 - LAMal = assicurazione malattia (NON "tassa sulla salute"); frontalieri G hanno diritto d'opzione; franchige adulti CHF 300–2500.`;
 
+// ── Ground truth della sezione `svizzera` (issue #96) ───────────────────
+//
+// Perche' esiste. EVERGREEN_FACTS_BRIEF qui sopra e' interamente frontaliero
+// — Accordo Frontalieri, IRPEF, Convenzione 1976, ristorni — e fino al
+// 2026-08-09 veniva iniettato SENZA branch di sezione. Per un evergreen della
+// sezione `svizzera` (imposta cantonale, LAMal, LPP, locazione, permessi) quei
+// fatti non sono ne' pertinenti ne' citabili: l'articolo li omette
+// CORRETTAMENTE, e li' l'omissione veniva letta come un difetto.
+//
+// Misurato sui run reali (sezione svizzera, section=svizzera nel log):
+//   31302188005 "dichiarazione imposte svizzera ... canton Vaud" → recall 4%,0%,7%,11%,0%
+//   31294793333 "affitti svizzera mercato immobiliare ... Berna" → recall 0%,15%,0%,0%,0%
+//   31286677581 "secondo pilastro lpp ... San Gallo"             → recall 7%,30%,7%,7%,11%
+// Sempre `[source-fidelity-low] ... /27 dei fatti verificabili della fonte`:
+// 27 anchor, TUTTI dal brief frontaliero (misurato a parte con
+// extractSourceAnchors — stesso numero, due lenti indipendenti).
+// Sei tentativi, poi uno strike; tre strike e la keyword muore. Al 2026-08-09
+// 94 delle 110 keyword del pool svizzero erano gia' morte (42 ban permanenti,
+// 52 per strike) e il run finiva con «Tutte le keyword evergreen risultano
+// gia' coperte dal pre-flight».
+//
+// Piu' corto del gemello frontaliero DI PROPOSITO. Un brief e' un ELENCO DI
+// VALORI PERMESSI: ogni riga sbagliata diventa ground truth contro cui il
+// fact-checker blocca, quindi qui stanno solo fatti strutturali e stabili
+// (competenze, aliquote di legge, soglie procedurali). Le cifre indicizzate
+// ogni anno — massimale 3a, soglia d'entrata LPP, premi LAMal — sono
+// deliberatamente ASSENTI: l'istruzione esplicita e' di ometterle, non di
+// ricostruirle a memoria, che e' il modo in cui nascono le allucinazioni che
+// checkFabricatedInstitutionAcronyms poi blocca.
+const EVERGREEN_FACTS_BRIEF_CH = `FATTI VERIFICATI (ground truth — il fact-checker blocca l'articolo se diverghi da questi valori):
+- Sistema fiscale svizzero a TRE livelli: imposta federale diretta (IFD) + cantonale + comunale. Ogni cantone ha la propria legge tributaria e il proprio moltiplicatore; i comuni applicano un moltiplicatore sul cantonale. Non esiste un'aliquota unica nazionale.
+- Competenze (MAI confonderle): AFC/ESTV (Amministrazione federale delle contribuzioni) amministra l'imposta federale diretta e l'IVA; le amministrazioni CANTONALI delle contribuzioni gestiscono imposta cantonale e comunale; UFAS/BSV si occupa di previdenza sociale (AVS/AI/LPP) e NON fissa imposte; UST/BFS rileva statistiche e NON fissa aliquote.
+- Contributi sociali su salario: AVS/AI/IPG 5.3% a carico del dipendente (10.6% totale con il datore), AD/AC 1.1% fino al massimale annuo, LAINF/LAA 0.7–1.5% secondo settore. Accrediti di vecchiaia LPP sul salario coordinato: 7% (25–34 anni), 10% (35–44), 15% (45–54), 18% (55 anni fino all'eta' di riferimento).
+- LAMal: assicurazione malattia OBBLIGATORIA per chi risiede in Svizzera, da stipulare entro 3 mesi dall'arrivo. E' un'assicurazione privata a premi pro capite, NON una tassa e NON un contributo sul salario. Franchigie adulti CHF 300, 500, 1000, 1500, 2000, 2500. Premi fissati per cantone e regione di premio; la riduzione premi (sussidio) e' cantonale.
+- Permessi per stranieri (autorita' federale: SEM): L = breve durata (fino a 1 anno), B = dimora (rinnovabile), C = domicilio (di norma dopo 10 anni di residenza, 5 per cittadini UE/AELS secondo accordo), G = frontaliere. Naturalizzazione ordinaria: permesso C e 10 anni di residenza (gli anni tra i 8 e i 18 contano doppio), piu' requisiti cantonali e comunali.
+- Locazione (Codice delle obbligazioni, art. 253 e segg., diritto FEDERALE uguale in tutti i cantoni): deposito cauzionale al massimo 3 mesi di pigione, su conto vincolato intestato all'inquilino; disdetta del locatore valida solo su modulo ufficiale cantonale; contestazione entro 30 giorni all'autorita' di conciliazione.
+- Lavoro: NESSUN salario minimo federale (alcuni cantoni ne hanno uno proprio). Durata massima settimanale 45 ore (industria, uffici, personale di vendita) o 50 ore negli altri settori. Vacanze minime 4 settimane (5 fino ai 20 anni compiuti). Congedo maternita' 14 settimane all'80% del salario tramite IPG; congedo di paternita' 2 settimane. Termini di disdetta legali: 1 mese nel primo anno, 2 mesi dal 2° al 9°, 3 mesi dal 10° in poi.
+- Democrazia diretta: 4 date di votazione federale all'anno. Iniziativa popolare 100'000 firme in 18 mesi; referendum facoltativo 50'000 firme in 100 giorni. Una modifica della Costituzione richiede la DOPPIA maggioranza (popolo E cantoni).
+- Acronimi/enti VALIDI (non inventarne altri): SECO, SEM, UST/BFS, UFSP/BAG, AFC/ESTV, UFAS/BSV, SUVA, BNS/SNB, UDSC, Fedpol, ARE, USTAT (Ticino).
+- Cifre indicizzate ogni anno — massimale del 3° pilastro 3a, soglia d'entrata e deduzione di coordinamento LPP, massimale AD/AC, premi medi LAMal, salario mediano: NON riportare un importo preciso se non sei certo dell'anno. Descrivi il meccanismo e rimanda alla fonte ufficiale.`;
+
+// I due brief nella forma che serve a `stripInjectedBriefs`. Un array, non due
+// costanti nominate al call-site: cosi' aggiungere una terza sezione domani
+// non lascia indietro il denominatore del gate di recall.
+const EVERGREEN_FACTS_BRIEFS = [EVERGREEN_FACTS_BRIEF, EVERGREEN_FACTS_BRIEF_CH];
+
+/**
+ * Il brief da iniettare per una sezione. PURA e nominata apposta: il difetto
+ * di #96 non era il contenuto del brief, era che il punto di iniezione non
+ * aveva nessun branch di sezione da leggere — `IS_FRONTALIERE` esisteva gia'
+ * (definito ~1500 righe piu' su) e nessuno lo interrogava qui.
+ *
+ * Default frontaliere per QUALUNQUE valore non riconosciuto: e' la sezione
+ * storica e il default di `parseSectionArg`, quindi un nome sbagliato degrada
+ * al comportamento precedente invece di consegnare un ground truth svizzero a
+ * un articolo frontaliero.
+ */
+export function evergreenFactsBriefFor(sectionName) {
+  return sectionName === 'svizzera' ? EVERGREEN_FACTS_BRIEF_CH : EVERGREEN_FACTS_BRIEF;
+}
+
+/**
+ * Toglie i brief iniettati dal testo usato come DENOMINATORE del gate di
+ * fedelta' alla fonte (`checkSourceFidelity`).
+ *
+ * Questa e' la meta' strutturale della fix, e senza di essa il brief
+ * section-aware da solo NON basta — verificato: un brief svizzero produce
+ * comunque 27 anchor svizzeri, e un articolo sui diritti dell'inquilino non
+ * ne cita 14 piu' di quanto citasse l'IRPEF.
+ *
+ * La ragione e' che il brief serve due scopi OPPOSTI nello stesso punto:
+ *   - come GROUNDING dice «se citi un'aliquota, usa questa»  (un elenco di valori permessi)
+ *   - come FONTE  dice «devi ricitarne almeno la meta'»       (una trascrizione da conservare)
+ * `checkSourceFidelity` misura il secondo — «hai conservato quello che la
+ * fonte diceva?» — ed e' scritto per una PAGINA DI NOTIZIA scrapata. Un
+ * evergreen non ha una fonte: il testo che riceve al suo posto e' un menu che
+ * il generatore ha scritto da se'. Misurarne il recall e' un errore di
+ * categoria, e `llmFactCheck` lo sapeva gia': ha il ramo `isEvergreen` che lo
+ * esenta esplicitamente («Per evergreen, NON segnalare come issue un fatto
+ * solo perche' non compare in una fonte originale»). Il gate deterministico
+ * non ha mai ricevuto la stessa esenzione — e' li' il difetto di wiring.
+ *
+ * NON abbassa nessuna soglia: `minRecall` resta 0.5 e `minAnchors` resta 3.
+ * Tolto il brief, il testo residuo dell'evergreen porta 0 anchor (misurato) e
+ * il gate si disattiva da solo per la propria guardia `anchors.size <
+ * minAnchors`, che e' il ramo gia' previsto per «fonte troppo sottile per
+ * giudicare».
+ *
+ * Su una fonte reale e' un NO-OP esatto (una pagina di notizia non contiene il
+ * brief), quindi il gate resta a piena forza dove e' stato progettato per
+ * lavorare — incluso `stats-bfs://`, dove il prompt e' fatto di numeri BFS
+ * veri e il recall su quelli e' esattamente cio' che si vuole misurare.
+ *
+ * @param {string} sourceText
+ * @param {string[]} briefs
+ * @returns {string}
+ */
+export function stripInjectedBriefs(sourceText, briefs = EVERGREEN_FACTS_BRIEFS) {
+  if (typeof sourceText !== 'string' || sourceText === '') return '';
+  let out = sourceText;
+  for (const brief of briefs) {
+    if (typeof brief === 'string' && brief.length > 0) out = out.split(brief).join('\n');
+  }
+  return out;
+}
+
 // ── Fact-check response cache (DEFAULT ON — kill switch) ────────────────
 // origin/main already hard-codes `cache: true` on this exact call (no flag,
 // no namespace) — the cache is ALREADY ACTIVE in production today. This
@@ -4218,7 +4324,14 @@ async function fetchPageContent(url) {
     const keyword = process.env._EVERGREEN_KEYWORD || decodeURIComponent(url.replace('evergreen://', ''));
     const angle = process.env._EVERGREEN_ANGLE || '';
     console.error(`📚 Articolo evergreen: "${keyword}"`);
-    return `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: ${angle}\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia. Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, città o importi specifici inventati.\n\n${EVERGREEN_FACTS_BRIEF}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth è usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non è certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`;
+    // Section-aware (#96). Il dominio dichiarato al writer e il ground truth
+    // che riceve devono essere LO STESSO dominio: dire «sezione svizzera
+    // nazionale» e poi allegare i fatti frontalieri e' la contraddizione che
+    // ha prosciugato la sezione.
+    const domainLine = IS_FRONTALIERE
+      ? 'Usa solo fatti verificati e stabili sul dominio frontalieri Ticino-Italia.'
+      : 'Usa solo fatti verificati e stabili sul dominio svizzero a scala nazionale/cantonale (fiscalità, previdenza, lavoro, alloggio, permessi, istituzioni federali). NON restringere al Ticino né al caso frontaliere.';
+    return `[ARTICOLO EVERGREEN SEO]\nKeyword target: ${keyword}\nAngolo editoriale: ${angle}\n\nGenera un articolo approfondito e pratico ottimizzato per questa keyword long-tail. ${domainLine} Se servono esempi, presentali come scenari ipotetici, senza nomi, aziende, città o importi specifici inventati.\n\n${evergreenFactsBriefFor(SECTION_NAME)}\n\n⚠️ I FATTI VERIFICATI qui sopra DEVONO corrispondere ESATTAMENTE (lo stesso ground truth è usato dal fact-checker, che blocca l'articolo se diverghi). Per dettagli NON coperti, attieniti a nozioni stabili e generali del dominio; se un dato specifico non è certo, ometti o usa formulazioni qualitative invece di inventare cifre/date precise.`;
   }
   // Orphan-query candidates carry a site-relative path (GSC topLandingPage
   // is stored path-only by design, see gscFetcher.mjs:231) — fetch() has no
@@ -5082,7 +5195,13 @@ Il notizia/evento è solo il punto di partenza. Il valore sta nelle implicazioni
     publishedAt: new Date().toISOString(),
   });
 
-  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${EVERGREEN_FACTS_BRIEF}\n`;
+  // Section-aware (#96). Questo blocco NON alimenta il gate di recall — li' il
+  // denominatore e' `pageContent`, cioe' la pagina scrapata — quindi era una
+  // meta' meno letale del difetto. Restava pero' la stessa contraddizione di
+  // grounding: a un articolo svizzero nazionale venivano offerti gli scaglioni
+  // IRPEF come «fatti di dominio», ed e' materiale che un modello debole poi
+  // usa davvero.
+  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${evergreenFactsBriefFor(SECTION_NAME)}\n`;
 
   const prompt = `${systemRoleLine}
 
@@ -10166,7 +10285,14 @@ async function generateAndValidateArticle(url, sourceContext = null) {
           body2: data.content.it?.body2 || '',
           body3: data.content.it?.body3 || '',
         },
-        sourceText: pageContent,
+        // `stripInjectedBriefs`, non `pageContent` nudo (#96). Per un
+        // evergreen `pageContent` E' il brief che questo stesso script ha
+        // appena scritto, quindi passarlo qui chiedeva all'articolo di
+        // ricitare meta' del proprio ground truth per non essere bloccato —
+        // 27 anchor, soglia 14. Su una fonte reale la chiamata e' un no-op
+        // esatto e il gate resta invariato. Vedi il commento della funzione
+        // per il motivo per cui questo NON e' un allentamento del gate.
+        sourceText: stripInjectedBriefs(pageContent),
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
