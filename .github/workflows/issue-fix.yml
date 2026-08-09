@@ -213,6 +213,19 @@ jobs:
           git config user.name  "claude-fixer[bot]"
           git config user.email "claude-fixer[bot]@users.noreply.github.com"
           if [ -n "${GITHUB_PAT_NANAKO:-}" ]; then
+            # `actions/checkout` persiste il token del runner (una GitHub App)
+            # in `http.https://github.com/.extraheader`, e un header
+            # Authorization esplicito PREVALE sulle credenziali dentro l'URL del
+            # remote. Senza rimuoverlo, il `set-url` qui sotto e' INERTE: il push
+            # viaggia comunque con l'identita' della App, e GitHub lo rifiuta con
+            # "refusing to allow a GitHub App to create or update workflow ...
+            # without workflows permission" — anche quando il PAT ha eccome lo
+            # scope `workflow`. E' esattamente cosi' che i fix per #76 e #77 sono
+            # stati scritti, dichiarati "blocked-workflows-scope" e persi.
+            #
+            # Verificato contro github.com: con un extraheader fasullo e un URL
+            # valido, `git ls-remote` fallisce; rimuovendo l'extraheader riesce.
+            git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
             git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
             echo "push identity: PAT (i file .github/workflows/** sono pushabili se il PAT ha lo scope workflow)"
           else
@@ -292,6 +305,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
+          # `mark-claude-terminal-outcome.mjs` legge ISSUE, non ISSUE_NUMBER
+          # (mode `identical`: lo script e' quello del sito, dove il chiamante
+          # passa ISSUE). Con la sola ISSUE_NUMBER lo script usciva stampando
+          # "ISSUE non impostata -> niente telemetria da postare" e la telemetria
+          # granulare non e' MAI stata pubblicata — cioe' proprio il segnale che
+          # spiegherebbe un fixer che gira e non produce nulla.
+          ISSUE: ${{ github.event.issue.number }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           EXEC_FILE: ${{ steps.claude_fix.outputs.execution_file }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
