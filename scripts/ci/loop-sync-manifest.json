@@ -112,6 +112,16 @@
       }
     },
     {
+      "path": "scripts/ci/check-blog-body-syntax.mjs",
+      "mode": "corpus-only",
+      "reason": "Preflight di sintassi TypeScript sui corpi, sul percorso di PUBBLICAZIONE. Portato da tests/blog-body-typescript-syntax.test.ts del sito ma riscritto: la' e' un test su PR, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno.",
+      "baseline": {
+        "site": null,
+        "corpus": "2c3cff8a275891d1",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
@@ -800,6 +810,16 @@
         "site": "698fc51ff42c1b5b",
         "corpus": "698fc51ff42c1b5b",
         "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "scripts/ci/retry-cmd.sh",
+      "mode": "corpus-only",
+      "reason": "Wrapper di retry generico per i comandi di rete del percorso di pubblicazione (npx). Fratello di scripts/lib/npm-ci-retry.sh, che copre i soli `npm ci`; vive qui perche' e' il ciclo di pubblicazione a usarlo e il sito non ha un equivalente.",
+      "baseline": {
+        "site": null,
+        "corpus": "250f479cee7368bb",
+        "alignedAt": "2026-08-09"
       }
     },
     {
