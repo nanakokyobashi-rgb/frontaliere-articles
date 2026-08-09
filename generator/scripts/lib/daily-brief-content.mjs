@@ -156,6 +156,19 @@ export function pickHeadline(blocks) {
   return null;
 }
 
+/**
+ * Locale copy for the brief.
+ *
+ * `excerpt` is not just a teaser: it becomes the article's meta description on
+ * the site, where `tests/seo-description-length.test.ts` hard-fails above 170
+ * characters — and it fails on EVERY branch, not only the one that happened to
+ * be open when the edition landed. Keep each excerpt inside the ideal 130–165
+ * band at the LONGEST date label its locale can produce (`22 settembre 2026`,
+ * `September 22, 2026`), which is what `daily-brief-content.test.mjs` measures.
+ *
+ * The date stays in on purpose: an edition ships every morning, so a template
+ * without it would give 365 pages a year one identical description.
+ */
 const T = {
   it: {
     briefName: 'Bollettino del frontaliere',
@@ -169,7 +182,7 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Bollettino del frontaliere – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco–euro e i nuovi annunci di lavoro in Svizzera. Dati raccolti dal nostro monitoraggio, aggiornati ogni giorno.`,
+      `I numeri di oggi, ${dateLabel}, per i frontalieri: attese ai valichi, benzina più economica, cambio franco-euro e nuovi annunci di lavoro in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
       `Buongiorno, è ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro numeri misurati oggi dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
@@ -226,7 +239,7 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Cross-border daily brief – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `Today's numbers (${dateLabel}) for cross-border commuters: border waits measured this morning, the cheapest fuel municipalities, the CHF–EUR rate and new Swiss job listings. Proprietary monitoring, updated daily.`,
+      `Today's numbers (${dateLabel}) for cross-border commuters: border waits, the cheapest fuel municipalities, the franc-euro rate and new Swiss job postings.`,
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
     intro: (wd, dateLabel) =>
       `Good morning — it's ${wd}, ${dateLabel}. This is the daily brief for people who live on one side of the border and work on the other: four numbers measured today by our monitoring — border queues, fuel, the exchange rate and jobs — each with a link to its live page.`,
@@ -283,7 +296,7 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Grenzgänger-Tagesbulletin – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `Die Zahlen von heute (${dateLabel}) für Grenzgänger: heute Morgen gemessene Wartezeiten an den Grenzübergängen, die günstigsten Tank-Gemeinden, der CHF-EUR-Kurs und neue Stellenangebote in der Schweiz. Eigene Messung, täglich aktualisiert.`,
+      `Die Zahlen von heute (${dateLabel}) für Grenzgänger: Wartezeiten an den Übergängen, günstigste Tankgemeinden, Franken-Euro-Kurs und neue Stellenangebote.`,
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
     intro: (wd, dateLabel) =>
       `Guten Morgen — heute ist ${wd}, der ${dateLabel}. Das ist das tägliche Bulletin für alle, die auf der einen Seite der Grenze wohnen und auf der anderen arbeiten: vier heute gemessene Zahlen — Staus an den Übergängen, Benzin, Wechselkurs und Arbeitsmarkt — jeweils mit Link zur Live-Seite.`,
@@ -340,7 +353,7 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Bulletin du frontalier – ${dateLabel} : ${headline}`,
     excerpt: (dateLabel) =>
-      `Les chiffres du jour (${dateLabel}) pour les frontaliers : attentes aux douanes mesurées ce matin, les communes où l'essence coûte le moins cher, le taux CHF-EUR et les nouvelles offres d'emploi en Suisse. Suivi propriétaire, mis à jour chaque jour.`,
+      `Les chiffres du jour (${dateLabel}) pour les frontaliers : attentes aux douanes, communes où l'essence coûte le moins, taux franc-euro et nouvelles offres.`,
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
     intro: (wd, dateLabel) =>
       `Bonjour — nous sommes ${wd} ${dateLabel}. Voici le bulletin quotidien pour celles et ceux qui vivent d'un côté de la frontière et travaillent de l'autre : quatre chiffres mesurés aujourd'hui par notre suivi — files aux douanes, essence, taux de change et emploi — chacun avec le lien vers sa page en direct.`,

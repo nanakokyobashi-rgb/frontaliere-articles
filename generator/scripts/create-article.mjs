@@ -10659,6 +10659,48 @@ export function buildArticlePublishedUrls(data) {
  * @param {{ skipRss?: boolean, skipNews?: boolean }} [opts]
  * @returns {Promise<{ slugs: Record<string, string>, publishedUrls: Record<string, string> }>}
  */
+/**
+ * Budget for `seo.description` / `seo.ogDescription`.
+ *
+ * The site's `tests/seo-description-length.test.ts` hard-fails above 170; 160
+ * keeps a margin and matches what the AI flow here already enforced before this
+ * became a shared rule.
+ */
+const SEO_DESCRIPTION_MAX = 160;
+
+/**
+ * Hard cap on the meta descriptions, applied at the SHARED write path.
+ *
+ * The corpus this repo publishes is mirrored into the site's
+ * `packages/articles/content/`, where `tests/seo-description-length.test.ts`
+ * fails the whole repo when any entry exceeds 170 characters — on every branch,
+ * not just the one that met it. The cap existed here too, as
+ * `truncateAtWordBoundary(desc, 160)`, but it lived inside the AI flow's own
+ * enrichment step, so only articles created through `main()` ever got it.
+ *
+ * `generate-daily-brief-article.mjs` imports `registerArticleFiles` directly and
+ * never passes through that step, so the 2026-08-09 edition registered a
+ * 265-char description and turned the site's `tests` job red everywhere. The
+ * defect is not the one edition: it is a rule enforced in one producer instead
+ * of at the choke point they all share. This is the port of the site's fix
+ * (valerielinc-ops#5360) to this repo's fork of the generator.
+ *
+ * 160, not 170: the same value the AI flow already used, leaving headroom under
+ * the test's hard bound. Word-boundary truncation, never a mid-word cut.
+ *
+ * Idempotent — a description already within budget comes back unchanged, so the
+ * AI flow clamping earlier and this clamping again is a no-op.
+ */
+function clampSeoDescriptions(data) {
+  const seo = data?.seo;
+  if (!seo || typeof seo !== 'object') return;
+  for (const field of ['description', 'ogDescription']) {
+    const value = seo[field];
+    if (typeof value !== 'string' || value.length === 0) continue;
+    seo[field] = truncateAtWordBoundary(value, SEO_DESCRIPTION_MAX);
+  }
+}
+
 export async function registerArticleFiles(data, opts = {}) {
   if (!data || !data.id || !data.content?.it?.title) {
     throw new Error('registerArticleFiles: data.id and data.content.it.title are required');
@@ -10669,6 +10711,7 @@ export async function registerArticleFiles(data, opts = {}) {
         'Refresh the body files instead of re-registering.',
     );
   }
+  clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
