@@ -3304,7 +3304,16 @@ function assertNoFabricatedLaborOfficeCrossLocale(data) {
 
 // ── Reference sheet of verified domain facts ──
 // Fed into the LLM fact-check prompt so the model cross-checks against known-good data
-// instead of relying solely on training data.
+// instead of relying solely on training data. NOT section-branched (unlike
+// EVERGREEN_FACTS_BRIEF/_CH below) — llmFactCheck injects this same sheet for
+// both `frontaliere` and `svizzera` articles. The prompt's institution check
+// (llmFactCheck, "ISTITUZIONI E ENTI") hard-instructs the model to flag any
+// acronym NOT in this whitelist as suspect, so the institution list here must
+// be a SUPERSET covering both sections' legitimate entities — omitting a real
+// national institution (e.g. AFC/ESTV, BNS/SNB, both used elsewhere in this
+// file as valid `svizzera`-section topics) makes llmFactCheck flag it as
+// fabricated on an otherwise-correct national article, the same false-block
+// mechanism issue #96 fixed on the deterministic source-fidelity gate.
 const VERIFIED_DOMAIN_FACTS = `
 FATTI VERIFICATI DI RIFERIMENTO — usa come ground truth:
 
@@ -3327,10 +3336,10 @@ ALIQUOTE ITALIANE (2024-2026):
 - Vecchi frontalieri (ante 17/7/2023): esenzione €7'500 fino al 2033
 
 ISTITUZIONI REALI:
-- Svizzera: SECO, SEM, SUVA, USTAT, UFSP (BAG in tedesco), SUPSI, USI, EOC, DFE, DSS, ARE, BFS
+- Svizzera: SECO, SEM, SUVA, USTAT, UFSP (BAG in tedesco), SUPSI, USI, EOC, DFE, DSS, ARE, BFS, AFC/ESTV, BNS/SNB
 - Italia: INPS, Agenzia delle Entrate, MEF, Guardia di Finanza, INAIL
 - Bilaterali: non sono "accordi EU-Svizzera" (la Svizzera NON è membro UE/EEA)
-- BPS (SUISSE), UFAS, UFG, UDSC, Fedpol = istituzioni REALI
+- BPS (SUISSE), UFAS/BSV, UFG, UDSC, Fedpol = istituzioni REALI
 
 NUMERI FRONTALIERI:
 - Frontalieri in Ticino: ~79'000 (USTAT, 2024) — circa 30% della forza lavoro cantonale
