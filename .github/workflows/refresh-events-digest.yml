@@ -96,7 +96,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund --ignore-scripts
+        run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
       # Hard gate — see the header. No dataset, no digest.
       - name: Fetch the events dataset

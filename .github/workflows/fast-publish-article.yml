@@ -181,7 +181,7 @@ jobs:
 
       - name: Install dependencies
         if: steps.mode.outputs.skip != 'true'
-        run: npm ci
+        run: bash scripts/lib/npm-ci-retry.sh
 
       - name: Prepare Firebase credentials
         if: steps.mode.outputs.skip != 'true'
