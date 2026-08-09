@@ -34,6 +34,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { execSync } from 'node:child_process';
 import { buildAllRssFeeds, RSS_SECTIONS } from '../engine/rssFeeds.mjs';
+// repairSerpSnippet vive in clauseTail.mjs (un .mjs) proprio perche' questo file
+// non puo' importare un .ts: e' la sorgente unica che il layer TS riesporta.
+// Senza passarla, rssFeeds.mjs spedirebbe le description verbatim (#5453).
+import { repairSerpSnippet } from '../host/shared/clauseTail.mjs';
 // The vendored Google News whitelist (issue #4974 item 3, §5.3). Imported, not
 // re-copied: main pulls the eligibility decision from this repo and a third copy
 // of the token list is exactly the drift that module's header warns about. A
@@ -370,6 +374,12 @@ const rssSections = buildAllRssFeeds({
   rootDir: ROOT,
   registries: { frontaliere: ARTICLES, svizzera: SWISS_ARTICLES },
   layout: { seoDir: 'content/seo', localesDir: 'content', slugDir: 'content' },
+  // Il corpus e' il produttore REALE dei dieci feed: il sito chiama
+  // buildAllRssFeeds solo dai test. Se questa riga manca, la riparazione della
+  // coda resta inerte in produzione dietro una CI verde del sito — la stessa
+  // forma dell'incidente SiteShellContract. L'engine attuale ignora il
+  // parametro; quello che arriva col prossimo mirror lo pretende.
+  repairSerpSnippet,
 });
 
 let rssFeedCount = 0;
