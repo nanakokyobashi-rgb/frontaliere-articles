@@ -904,6 +904,83 @@
         "corpus": "ecab6c65415d3133",
         "alignedAt": "2026-08-09"
       }
+    },
+    {
+      "path": "generator/scripts/load-rc-env.mjs",
+      "sitePath": "scripts/load-rc-env.mjs",
+      "mode": "identical",
+      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. E' l'unico dei sette gemelli byte-identico al sito (hash eef68283b8f6f277 su entrambi i lati, verificato), e lo e' legittimamente: non risolve nessun path relativo, quindi lo spostamento in generator/scripts/ non lo tocca. `identical` e non `adapted` proprio per questo — qui una riga aggiunta alla mappa sul sito e' copiabile cosi' com'e', ed e' il caso in cui una divergenza silenziosa costa di piu': un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca.",
+      "baseline": {
+        "site": "eef68283b8f6f277",
+        "corpus": "eef68283b8f6f277",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/generate-journalist-image-catalog.mjs",
+      "sitePath": "scripts/generate-journalist-image-catalog.mjs",
+      "mode": "adapted",
+      "reason": "Catalogo delle immagini del giornalista; `create-article.mjs` ne importa `appendCatalogEntry`. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Un solo adattamento oltre a quello: il ramo `DRY_RUN=1` in coda, che sul sito non esiste. Senza, uno smoke run di CI che voleva solo dimostrare che il modulo si CARICA finiva per creare public/data/ e scrivere il catalogo; gli altri entry point del generatore (generate-events-digest-article, generate-border-wait-ranking-article) usavano gia' quella convenzione. E' un miglioramento del meccanismo, quindi candidato a risalire al sito.",
+      "baseline": {
+        "site": "43b2a0639c74c954",
+        "corpus": "21607559bddd68c3",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/publish-journalist-article.mjs",
+      "sitePath": "scripts/publish-journalist-article.mjs",
+      "mode": "adapted",
+      "reason": "Percorso di pubblicazione degli articoli firmati. Il gemello con il diff piu' piccolo dei sette: Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Nient'altro. Proprio per questo e' il piu' esposto al punto cieco che il manifest esiste per coprire: un file quasi uguale non ha nessun segnale visibile che lo distingua da uno allineato, e una modifica del sito qui si perde senza lasciare traccia.",
+      "baseline": {
+        "site": "e8d8cb515301783c",
+        "corpus": "49aa1cb695aa6844",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/generate-events-digest-article.mjs",
+      "sitePath": "scripts/generate-events-digest-article.mjs",
+      "mode": "adapted",
+      "reason": "Digest eventi del weekend (evergreen, registrato una volta e rinfrescato nei body). Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` per il layout `content/` invece di `services/locales/`, e la scrittura dei 4 body passa da `sanitizeText`/`findControlChars` (issue #66) — la stessa guardia al write di create-article.mjs, che sul sito non serve perche' i byte non atterrano li'.",
+      "baseline": {
+        "site": "955467555a07c900",
+        "corpus": "4b53833ee7811acf",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/fix-faq-locales.mjs",
+      "sitePath": "scripts/fix-faq-locales.mjs",
+      "mode": "adapted",
+      "reason": "Riparazione delle FAQ per locale. Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, e i due write passano da un helper `writeCorpusFile` che applica la guardia sui control char C0 (issue #66). Le due divergenze hanno la stessa radice — questo repo e' quello dove i byte finiscono davvero in content/ — e sono le stesse di generate-events-digest-article.mjs e batch-add-faq-to-articles.mjs.",
+      "baseline": {
+        "site": "4b873db68cf657f2",
+        "corpus": "bc212c55ece38bc7",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/batch-add-faq-to-articles.mjs",
+      "sitePath": "scripts/batch-add-faq-to-articles.mjs",
+      "mode": "adapted",
+      "reason": "Batch FAQ su tutti gli articoli (1.138 righe, il piu' grande dei sette). Differenza comune a tutti i gemelli trasportati: `PROJECT_ROOT` risale di due livelli invece di uno, perche' il trasporto ha spostato lo script da `scripts/` a `generator/scripts/`. Oltre a quello: `corpusPath()` sul BODY_DIR, `resolveGitAddPath` importata da `lib/corpus-paths.mjs` invece di `lib/resolve-git-add-path.mjs` (qui i due helper stanno nello stesso modulo), e la funzione `write()` con la guardia sui control char C0 (issue #66). Il corpo — prompt, cascata di traduzione, riparazione del JSON dell'LLM — e' quello del sito.",
+      "baseline": {
+        "site": "ecfbef46b21f6563",
+        "corpus": "8505e7a2a23cb85d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/generate-border-wait-ranking-article.mjs",
+      "sitePath": "scripts/generate-border-wait-ranking-article.mjs",
+      "mode": "adapted",
+      "reason": "Classifica delle dogane (evergreen). Il gemello che diverge di piu' (78 righe), e la divergenza grossa NON e' il trasporto ma un REWIRE della sorgente dati (issue valerielinc-ops#4974 item 3): sul sito lo script legge `data/border-wait-history/` — 90 file giornalieri, 1,7 GB di telemetria che resta la'; qui legge l'aggregato da ~32 KB che `refresh-border-wait-window.mjs` ne estrae, quindi `computeRanking`/`computeTrend` (che prendono una directory) diventano `rankingFromStats`/`trendFromStats` (che prendono le statistiche gia' aggregate). Le funzioni pure sotto sono le stesse. Restano poi le divergenze di trasporto degli altri: `PROJECT_ROOT` a due livelli, `corpusPath()` e la guardia sui control char. L'assenza mancata: se il sito cambia la FORMA di quelle statistiche, qui non fallisce niente finche' un articolo non esce sbagliato.",
+      "baseline": {
+        "site": "eae01748163e0032",
+        "corpus": "d42109a464204179",
+        "alignedAt": "2026-08-09"
+      }
     }
   ]
 }
