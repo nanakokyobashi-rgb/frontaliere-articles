@@ -5226,7 +5226,7 @@ Genera JSON (no markdown, no code fences):
     "description": "Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)",
     "keywords": "6-8 keywords IT",
     "ogTitle": "OG title (OBBLIGATORIO ≤ 60 caratteri)",
-    "ogDescription": "OG desc (≤ 160 caratteri)",
+    "ogDescription": "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
     "headline": "Headline JSON-LD",
     "breadcrumbName": "Breadcrumb 2-3 parole"
   }
@@ -6223,14 +6223,19 @@ function validate(data, opts = {}) {
     // used four lines below for the description and for breadcrumbName — this
     // call site just never got it.
     const title = truncateAtWordBoundary(String(it.title || data.id), 57);
-    const desc = truncateAtWordBoundary(String(it.excerpt || it.title || ''), 160);
+    const rawDesc = String(it.excerpt || it.title || '').replace(/\s+/g, ' ').trim();
+    const desc = truncateAtWordBoundary(rawDesc, 160);
+    // ogDescription gets its own cap (SEO_OG_DESCRIPTION_MAX), not the 160
+    // description limit — otherwise this fallback ships the same capped
+    // string the L6850 clamp was fixed to stop producing.
+    const ogDesc = truncateAtWordBoundary(rawDesc, SEO_OG_DESCRIPTION_MAX);
     console.error(`⚠️  Campo "seo" mancante — generato automaticamente da content.it`);
     data.seo = {
       title: `${title} | Frontaliere Ticino`,
       description: desc,
       keywords: `frontalieri, ticino, ${data.category || 'lavoro'}, svizzera, italia`,
       ogTitle: title,
-      ogDescription: desc,
+      ogDescription: ogDesc,
       headline: title,
       breadcrumbName: title.split(/[:.–—]/)[0].trim().slice(0, 40),
     };
@@ -6847,7 +6852,10 @@ function optimizeSeoMetadata(data) {
     desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
   }
   data.seo.description = truncateAtWordBoundary(desc, 160);
-  data.seo.ogDescription = truncateAtWordBoundary(data.seo.ogDescription || data.seo.description, 160);
+  data.seo.ogDescription = truncateAtWordBoundary(
+    data.seo.ogDescription || data.seo.description,
+    SEO_OG_DESCRIPTION_MAX,
+  );
 
   const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida', '2026']);
   const terms = `${it.title || ''} ${it.excerpt || ''} ${data.id || ''}`
@@ -10669,6 +10677,20 @@ export function buildArticlePublishedUrls(data) {
 const SEO_DESCRIPTION_MAX = 160;
 
 /**
+ * The SOCIAL budget, deliberately looser than the SERP one.
+ *
+ * `ogDescription` never reaches a Google snippet: it reaches Facebook,
+ * LinkedIn and WhatsApp, which render far more than 160 characters. Capping it
+ * at the SERP value threw away useful text for no reason — and, worse, it made
+ * the two fields indistinguishable, which is the shape that let one string
+ * serve three surfaces in the first place (#79).
+ *
+ * 250 is a real ceiling, not a formality: the OG card does eventually clip, and
+ * `content/seo/**` entries are scanned against it by seo-description-cap.test.mjs.
+ */
+const SEO_OG_DESCRIPTION_MAX = 250;
+
+/**
  * Hard cap on the meta descriptions, applied at the SHARED write path.
  *
  * The corpus this repo publishes is mirrored into the site's
@@ -10688,16 +10710,32 @@ const SEO_DESCRIPTION_MAX = 160;
  * 160, not 170: the same value the AI flow already used, leaving headroom under
  * the test's hard bound. Word-boundary truncation, never a mid-word cut.
  *
+ * TWO THRESHOLDS, not one. `description` is the SERP snippet and also the
+ * source of `structuredData.description` in the SEO entry, so both live under
+ * SEO_DESCRIPTION_MAX. `ogDescription` is the social card and gets
+ * SEO_OG_DESCRIPTION_MAX. Sharing one threshold silently truncated a social
+ * text that had every right to be longer.
+ *
+ * This is a SAFETY NET, not the mechanism. A producer whose text arrives here
+ * needing a cut has a copy bug: the daily brief now writes three fields sized
+ * for their own surfaces (see `daily-brief-content.mjs`), and this must never
+ * fire on it. It stays because the AI flow can still hand over anything.
+ *
  * Idempotent — a description already within budget comes back unchanged, so the
  * AI flow clamping earlier and this clamping again is a no-op.
  */
+const SEO_DESCRIPTION_BUDGETS = {
+  description: SEO_DESCRIPTION_MAX,
+  ogDescription: SEO_OG_DESCRIPTION_MAX,
+};
+
 function clampSeoDescriptions(data) {
   const seo = data?.seo;
   if (!seo || typeof seo !== 'object') return;
-  for (const field of ['description', 'ogDescription']) {
+  for (const [field, max] of Object.entries(SEO_DESCRIPTION_BUDGETS)) {
     const value = seo[field];
     if (typeof value !== 'string' || value.length === 0) continue;
-    seo[field] = truncateAtWordBoundary(value, SEO_DESCRIPTION_MAX);
+    seo[field] = truncateAtWordBoundary(value, max);
   }
 }
 

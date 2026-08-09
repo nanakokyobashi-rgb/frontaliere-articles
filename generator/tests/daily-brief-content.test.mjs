@@ -117,39 +117,112 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
 });
 
 /**
- * The excerpt is the article's meta description once the corpus reaches the
- * site, where `tests/seo-description-length.test.ts` hard-fails outside 80–170
- * characters — and it fails on EVERY branch, not only the one that happened to
- * be open when the edition landed. The 2026-08-09 edition shipped at 265 and
- * did exactly that.
+ * THREE descriptive surfaces, three budgets — and the reason the split exists.
  *
- * Measured at the LONGEST date label each locale can produce, because that is
- * the case that has to fit: `22 settembre 2026` is four characters wider than
- * the `9 agosto 2026` a spot check would use. The band asserted here is the
- * ideal 130–165, not the hard 170, so a future edit has to eat the headroom
- * deliberately rather than by accident.
+ * Until #80 one string was excerpt, meta description and OG description at
+ * once, so the tightest of the three constraints governed all of them. The
+ * 2026-08-09 edition shipped a 265-char meta description and turned the site's
+ * `tests` job red on every branch; the fix that unblocked it cut the excerpt to
+ * ~155, which made the READER pay for a Google limit. #81 separates them.
+ *
+ * What this test pins, per locale:
+ *
+ *   excerpt         ≥ MIN_EXCERPT. A MINIMUM, deliberately: the failure mode
+ *                   this repo has already lived through is someone shortening
+ *                   the excerpt to make a SEO test pass. There is no maximum
+ *                   the site enforces on it — nothing truncates a card teaser —
+ *                   so the only ceiling here is a sanity one.
+ *   seoDescription  150–160. Google truncates around 160 and the site hard-fails
+ *                   above 170 (`tests/seo-description-length.test.ts`).
+ *   ogDescription   200–250. Social cards render far more than a SERP does.
+ *
+ * Measured across every month at BOTH ends of the date-label width, because the
+ * label is interpolated and swings up to 7 characters (`May 1, 2026` →
+ * `September 22, 2026`). Checking one date proves nothing about the other 364.
  */
-test('every locale excerpt fits the site meta-description budget at the longest date', () => {
-  const HARD_MIN = 80, SOFT_MIN = 130, SOFT_MAX = 165, HARD_MAX = 170;
+const SURFACE_BUDGETS = {
+  excerpt: { min: 200, max: 320 },
+  seoDescription: { min: 150, max: 160 },
+  ogDescription: { min: 200, max: 250 },
+};
+/** The site's hard bound on `description`, mirrored so a drift here is loud. */
+const SITE_DESCRIPTION_HARD_MAX = 170;
+
+test('the three descriptive surfaces each fit their own budget, every locale, every date', () => {
+  assert.ok(
+    SURFACE_BUDGETS.seoDescription.max < SITE_DESCRIPTION_HARD_MAX,
+    'the SERP budget must leave headroom under the site hard limit',
+  );
   for (let month = 1; month <= 12; month++) {
-    const dateIso = `2026-${String(month).padStart(2, '0')}-22`; // two-digit day = widest label
-    const article = buildDailyBriefArticle({ ...BRIEF, dateIso });
-    for (const locale of ['it', 'en', 'de', 'fr']) {
-      const excerpt = article.content[locale].excerpt;
-      const len = excerpt.length;
-      assert.ok(
-        len >= SOFT_MIN && len <= SOFT_MAX,
-        `${locale} excerpt is ${len} chars at ${dateIso} (ideal ${SOFT_MIN}-${SOFT_MAX}, ` +
-          `site hard limit ${HARD_MIN}-${HARD_MAX}): ${excerpt}`,
-      );
-      // The date has to survive any rewrite: an edition ships every morning, so
-      // a template without it gives 365 pages a year one identical description.
-      assert.ok(
-        excerpt.includes(humanDate(dateIso, locale)),
-        `${locale} excerpt dropped its date label at ${dateIso}: ${excerpt}`,
-      );
+    // '01' = narrowest label, '22' = widest. Both ends, or the band is untested.
+    for (const day of ['01', '22']) {
+      const dateIso = `2026-${String(month).padStart(2, '0')}-${day}`;
+      const article = buildDailyBriefArticle({ ...BRIEF, dateIso });
+      for (const locale of ['it', 'en', 'de', 'fr']) {
+        const c = article.content[locale];
+        for (const [field, { min, max }] of Object.entries(SURFACE_BUDGETS)) {
+          const value = c[field];
+          assert.equal(typeof value, 'string', `${locale}.${field} is not a string`);
+          assert.ok(
+            value.length >= min && value.length <= max,
+            `${locale}.${field} is ${value.length} chars at ${dateIso} (budget ${min}-${max}): ${value}`,
+          );
+          // The date has to survive any rewrite: an edition ships every morning,
+          // so a template without it gives 365 pages a year one identical text.
+          assert.ok(
+            value.includes(humanDate(dateIso, locale)),
+            `${locale}.${field} dropped its date label at ${dateIso}: ${value}`,
+          );
+          // A truncated template is the shape this split exists to avoid.
+          assert.ok(!/[…]|\.\.\.$/.test(value), `${locale}.${field} looks truncated: ${value}`);
+        }
+      }
     }
   }
+});
+
+/**
+ * The regression guard proper. Everything above could pass while the three
+ * fields carried the same string — which is precisely the state that produced
+ * #79. Assert they are DISTINCT, and that the one the reader sees is the
+ * longest of the three.
+ */
+test('the excerpt never doubles as the meta description again (#79 regression guard)', () => {
+  for (const dateIso of ['2026-03-01', '2026-09-22']) {
+    const article = buildDailyBriefArticle({ ...BRIEF, dateIso });
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      const { excerpt, seoDescription, ogDescription } = article.content[locale];
+      assert.notEqual(seoDescription, excerpt, `${locale}: seoDescription is the excerpt again`);
+      assert.notEqual(ogDescription, excerpt, `${locale}: ogDescription is the excerpt again`);
+      assert.notEqual(seoDescription, ogDescription, `${locale}: SERP and social text collapsed into one`);
+      // The reader-facing text is the richest of the three, by construction.
+      assert.ok(excerpt.length > ogDescription.length, `${locale}: excerpt is not the richest text`);
+      assert.ok(ogDescription.length > seoDescription.length, `${locale}: social text is not richer than the SERP one`);
+      // And none of them is a prefix of another: that would be a truncation,
+      // not a text written for its surface.
+      assert.ok(!excerpt.startsWith(seoDescription), `${locale}: seoDescription is a truncation of the excerpt`);
+      assert.ok(!excerpt.startsWith(ogDescription), `${locale}: ogDescription is a truncation of the excerpt`);
+    }
+  }
+});
+
+/**
+ * The wiring, at the object the registrar actually receives. `buildData` is
+ * where the excerpt used to leak into `seo.description` — one assignment, and
+ * the reason a rich excerpt was impossible.
+ */
+test('buildData feeds seo.description from seoDescription, never from the excerpt', () => {
+  const data = buildData(BRIEF);
+  const c = buildDailyBriefArticle(BRIEF).content.it;
+  assert.equal(data.seo.description, c.seoDescription);
+  assert.equal(data.seo.ogDescription, c.ogDescription);
+  assert.notEqual(data.seo.description, c.excerpt);
+  assert.notEqual(data.seo.ogDescription, c.excerpt);
+  // The bound the site enforces on `description`, restated where it is set.
+  assert.ok(
+    data.seo.description.length <= SITE_DESCRIPTION_HARD_MAX,
+    `seo.description is ${data.seo.description.length} chars (site hard max ${SITE_DESCRIPTION_HARD_MAX})`,
+  );
 });
 
 test('a degraded block becomes a note, never a hole', () => {
