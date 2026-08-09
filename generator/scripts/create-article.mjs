@@ -149,6 +149,16 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+// L'emettitore del blocco meta per-locale. Estratto da qui (era `buildMetaBlock`
+// + `escapeForSingleQuoteTS` piu' sotto) perche' e' l'unico punto in cui il
+// corpus decide quali campi per-locale diventano superficie pubblica, e dentro
+// questo file — 11k righe, `jsdom` fra le dipendenze statiche — nessun test
+// `node --test` poteva raggiungerlo. Vedi l'intestazione del modulo.
+import {
+  buildMetaBlock,
+  escapeForSingleQuoteTS,
+  META_SEO_FIELDS,
+} from './lib/article-meta-block.mjs';
 import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
@@ -8178,9 +8188,10 @@ function sanitizeBodyText(s) {
   return out.join('');
 }
 
-function escapeForSingleQuoteTS(s) {
-  return String(s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n').replace(/\r/g, '');
-}
+// escapeForSingleQuoteTS ora vive in scripts/lib/article-meta-block.mjs, accanto
+// all'emettitore che lo usa per primo: un campo nuovo emesso senza il suo escape
+// produce un .ts che non compila, e il test che pinna il campo deve poter
+// verificare anche quello.
 
 /**
  * Validate that a generated .ts body file is syntactically valid.
@@ -8394,20 +8405,10 @@ function modifyBlogArticlesTsx(data) {
   console.error(`  ✅ ${file}`);
 }
 
-/** Build i18n block with only META keys (title, excerpt, imageAlt) */
-function buildMetaBlock(data, locale) {
-  const c = data.content[locale];
-  const id = data.id;
-  const lines = [
-    `    'blog.article.${id}.title': '${escapeForSingleQuoteTS(c.title)}',`,
-    `    'blog.article.${id}.excerpt': '${escapeForSingleQuoteTS(c.excerpt)}',`,
-  ];
-  const alt = data.imageAlt?.[locale];
-  if (alt) {
-    lines.push(`    'blog.article.${id}.imageAlt': '${escapeForSingleQuoteTS(alt)}',`);
-  }
-  return lines.join('\n');
-}
+// buildMetaBlock ora vive in scripts/lib/article-meta-block.mjs. Emette
+// title/excerpt/imageAlt nelle stesse posizioni di prima — per un articolo senza
+// i campi SEO per-locale l'output e' byte-identico — e in coda, quando il
+// content builder li ha scritti, seoDescription e ogDescription.
 
 // body1/2/3 are always emitted if the key exists on `c` (even '' — matches
 // the historic fixed-3 schema); body4+ is opt-in per article (only emitted
@@ -8464,7 +8465,11 @@ function decodeLocaleContentEntities(data, locale) {
   const c = data.content?.[locale];
   if (c) {
     const bodyFields = Array.from({ length: MAX_BODY_KEYS }, (_, i) => `body${i + 1}`);
-    for (const field of ['title', 'excerpt', ...bodyFields]) {
+    // META_SEO_FIELDS insieme a title/excerpt: da quando il blocco meta li
+    // emette, `seoDescription` e `ogDescription` finiscono in un file .ts e poi
+    // in `meta-<locale>.json` esattamente come l'excerpt. Un `&egrave;` non
+    // decodificato qui arriverebbe letterale in una SERP.
+    for (const field of ['title', 'excerpt', ...META_SEO_FIELDS, ...bodyFields]) {
       if (typeof c[field] === 'string') c[field] = decodeHtmlEntities(c[field]);
     }
     if (Array.isArray(c.faq)) {
@@ -10910,19 +10915,47 @@ const SEO_OG_DESCRIPTION_MAX = 250;
  *
  * Idempotent — a description already within budget comes back unchanged, so the
  * AI flow clamping earlier and this clamping again is a no-op.
+ *
+ * DUE SUPERFICI, LO STESSO PUNTO. `data.seo` e' l'entry IT di `content/seo/**`;
+ * `data.content[locale].seoDescription` / `.ogDescription` sono i gemelli
+ * per-locale che da ora finiscono nel blocco meta e quindi in
+ * `meta-<locale>.json`. Sono lo stesso tipo di testo per lo stesso tipo di
+ * consumatore, quindi cadono sotto lo stesso tetto e nello stesso choke point:
+ * il difetto che #5360/#81 hanno chiuso era proprio una regola applicata in un
+ * produttore invece che dove tutti scrivono. Anche qui e' una RETE DI SICUREZZA
+ * e non il meccanismo — il Bollettino nasce a 158-159 caratteri e questa non
+ * deve mai scattarci sopra.
  */
 const SEO_DESCRIPTION_BUDGETS = {
   description: SEO_DESCRIPTION_MAX,
   ogDescription: SEO_OG_DESCRIPTION_MAX,
 };
 
+/** Gli stessi due budget, con i nomi che i campi hanno dentro `content[locale]`. */
+const LOCALE_SEO_DESCRIPTION_BUDGETS = {
+  seoDescription: SEO_DESCRIPTION_MAX,
+  ogDescription: SEO_OG_DESCRIPTION_MAX,
+};
+
 function clampSeoDescriptions(data) {
   const seo = data?.seo;
-  if (!seo || typeof seo !== 'object') return;
-  for (const [field, max] of Object.entries(SEO_DESCRIPTION_BUDGETS)) {
-    const value = seo[field];
-    if (typeof value !== 'string' || value.length === 0) continue;
-    seo[field] = truncateAtWordBoundary(value, max);
+  if (seo && typeof seo === 'object') {
+    for (const [field, max] of Object.entries(SEO_DESCRIPTION_BUDGETS)) {
+      const value = seo[field];
+      if (typeof value !== 'string' || value.length === 0) continue;
+      seo[field] = truncateAtWordBoundary(value, max);
+    }
+  }
+  const content = data?.content;
+  if (content && typeof content === 'object') {
+    for (const localeContent of Object.values(content)) {
+      if (!localeContent || typeof localeContent !== 'object') continue;
+      for (const [field, max] of Object.entries(LOCALE_SEO_DESCRIPTION_BUDGETS)) {
+        const value = localeContent[field];
+        if (typeof value !== 'string' || value.length === 0) continue;
+        localeContent[field] = truncateAtWordBoundary(value, max);
+      }
+    }
   }
 }
 

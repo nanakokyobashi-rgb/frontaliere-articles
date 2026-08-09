@@ -1670,6 +1670,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/article-meta-block.mjs",
+      "mode": "corpus-only",
+      "reason": "L'emettitore del blocco meta per-locale, estratto da generator/scripts/create-article.mjs (dove era `buildMetaBlock` + `escapeForSingleQuoteTS`). E' il punto in cui il corpus decide QUALI campi per-locale diventano superficie pubblica: build-api.mjs serializza il default export di blog-meta-<locale>.ts senza filtrare, quindi un campo che non passa di qui non esiste per nessun consumatore. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, che e' gia' registrato `adapted` — un gemello di FILE qui non esiste. La meta' lettrice (metaFieldRegex, la voce qui sotto) e' invece `identical`, ed e' voluto: il lettore e' condiviso, lo scrittore no.",
+      "baseline": {
+        "site": null,
+        "corpus": "b32967d7a7470176",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "identical",
