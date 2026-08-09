@@ -736,6 +736,16 @@
       }
     },
     {
+      "path": "scripts/ci/followup-marker-backstop.mjs",
+      "mode": "corpus-only",
+      "reason": "Backstop deterministico del marker di idempotenza del triage post-merge (#99). Vive solo qui: il sito ha il proprio equivalente per FIX_OUTCOME dentro issue-fix.yml, non uno script separato, quindi non c'e' gemello da tenere allineato.",
+      "baseline": {
+        "site": null,
+        "corpus": "4ec95a7368587970",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
