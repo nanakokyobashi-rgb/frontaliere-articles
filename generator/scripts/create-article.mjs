@@ -139,6 +139,7 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
@@ -7164,12 +7165,80 @@ function loadExistingArticleSummaries() {
   return _existingArticleSummariesCache;
 }
 
+// ── Date di pubblicazione, per il gate «argomento già coperto» ──────────────
+// I titoli stanno nei meta (`blog-meta{,-ch}-it.ts`), le DATE stanno nei
+// registri (`blog-articles-data.ts` / `swiss-articles-data.ts`): due file
+// diversi, uniti qui per id. Cross-section per la stessa ragione di
+// readAllSectionsMetaIt — le guide-mestiere vengono generate in entrambe le
+// sezioni e un gemello nella sezione sorella deve contare.
+//
+// Il regex accetta fino a 300 caratteri fra `id:` e `date:` perché nel
+// registro fra i due campi c'è `category:`; è ancorato a `id:` in modo che
+// una voce senza `date` non rubi la data della voce successiva (il primo
+// match per id vince e non si sovrascrive).
+let _existingArticleDatesCache = null;
+function loadExistingArticleDates() {
+  if (_existingArticleDatesCache !== null) return _existingArticleDatesCache;
+  const dates = new Map();
+  for (const cfg of Object.values(ARTICLE_SECTION_CONFIGS)) {
+    let src;
+    try {
+      src = read(cfg.registryFile);
+    } catch { continue; } // registro assente (sezione non ancora popolata)
+    const re = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
+    let m;
+    while ((m = re.exec(src)) !== null) {
+      if (!dates.has(m[1])) dates.set(m[1], m[2]);
+    }
+  }
+  _existingArticleDatesCache = dates;
+  return _existingArticleDatesCache;
+}
+
+/**
+ * Gli articoli esistenti con la loro data. Un id senza data resta senza:
+ * findRecentTopicCoverage lo ignora (fail-open) invece di trattarlo come
+ * appena pubblicato.
+ *
+ * Memoizzato come i due loader che unisce: il pre-flight lo chiama una volta
+ * per candidato — centinaia di volte per run — e senza cache ogni chiamata
+ * rialloccherebbe ~3.800 oggetti.
+ */
+let _existingArticleSummariesWithDatesCache = null;
+function loadExistingArticleSummariesWithDates() {
+  if (_existingArticleSummariesWithDatesCache !== null) return _existingArticleSummariesWithDatesCache;
+  const dates = loadExistingArticleDates();
+  _existingArticleSummariesWithDatesCache = loadExistingArticleSummaries()
+    .map((a) => ({ ...a, date: dates.get(a.id) || null }));
+  return _existingArticleSummariesWithDatesCache;
+}
+
 // ── Pre-flight evergreen keyword check ──────────────────────
 // Lightweight duplicate check: compares evergreen keyword words against
 // existing article titles using Jaccard similarity. Runs BEFORE calling
 // Gemini to avoid wasting API calls on keywords that will certainly fail
 // the post-generation duplicate detector.
 function preFlightEvergreenCheck(candidate) {
+  // «Argomento già coperto» PRIMA del Jaccard: il pool strutturale
+  // (buildProfessionEvergreenTopics) emette due candidati per ogni mestiere
+  // — `…stipendio requisiti` e `quanto guadagna un…` — quindi il secondo è un
+  // duplicato garantito del primo appena questo è pubblicato. Intercettarlo
+  // qui risparmia il ciclo LLM; il gate bloccante vero resta quello dopo la
+  // generazione (Step 3a.4), che copre anche i percorsi non-evergreen.
+  const keyword = String(candidate?.keyword || candidate || '');
+  const covered = findRecentTopicCoverage(
+    { id: keyword, title: keyword },
+    loadExistingArticleSummariesWithDates(),
+  );
+  if (covered) {
+    return {
+      duplicate: true,
+      signal: `topic_coverage:${covered.professionId}`,
+      sim: 1,
+      existingTitle: covered.existingTitle,
+      existingId: covered.existingId,
+    };
+  }
   return preFlightEvergreenTopicCheck(candidate, loadExistingArticleSummaries());
 }
 
@@ -10547,6 +10616,15 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
   });
+  // Step 3a.4: «argomento già coperto» — l'unico gate che NON misura una
+  // distanza lessicale. I due sopra confrontano quanto si somigliano due
+  // testi; questo confronta DI COSA parlano. È la differenza che ha lasciato
+  // passare le tre guide-piastrellista del 2026-08-09 (combinato 0.278 contro
+  // una soglia di 0.55, con il solo token `piastrell` in comune su sette).
+  // Sta qui, dopo checkForDuplicates, perché questo è il punto obbligato di
+  // OGNI percorso di generazione — news, evergreen, discovery — mentre il
+  // pre-flight evergreen vede solo i candidati evergreen.
+  assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
