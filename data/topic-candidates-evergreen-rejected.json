@@ -133,7 +133,11 @@
     "quanto guadagna un docente frontaliere in ticino",
     "quanto guadagna un receptionist frontaliere in ticino",
     "quanto guadagna un carpentiere frontaliere in ticino",
-    "frontaliere lattoniere ticino stipendio requisiti"
+    "frontaliere lattoniere ticino stipendio requisiti",
+    "frontaliere giardiniere ticino stipendio requisiti",
+    "frontaliere piastrellista ticino stipendio requisiti",
+    "quanto guadagna un gessatore frontaliere in ticino",
+    "quanto guadagna un corriere frontaliere in ticino"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -218,9 +222,11 @@
     "frontaliere tecnico automazione ticino stipendio requisiti": 1,
     "frontaliere contabile ticino stipendio requisiti": 2,
     "frontaliere fiduciario ticino stipendio requisiti": 1,
-    "frontaliere falegname ticino stipendio requisiti": 1,
+    "frontaliere falegname ticino stipendio requisiti": 2,
     "frontaliere giardiniere ticino stipendio requisiti": 1,
     "terzo pilastro 3a svizzera vantaggi 2026 canton Basilea": 1,
-    "terzo pilastro 3a svizzera vantaggi 2026 canton Vaud": 1
+    "terzo pilastro 3a svizzera vantaggi 2026 canton Vaud": 1,
+    "frontaliere gessatore ticino stipendio requisiti": 1,
+    "quanto guadagna un montatore frontaliere in ticino": 1
   }
 }
