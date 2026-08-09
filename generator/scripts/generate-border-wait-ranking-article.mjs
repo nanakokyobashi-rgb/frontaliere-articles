@@ -36,6 +36,7 @@ import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './cre
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
 import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { corpusPath } from './lib/corpus-paths.mjs';
+import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -142,7 +143,13 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${data.id}.ts`);
-    writeFileSync(file, buildBodyFile(data, locale));
+    const body = buildBodyFile(data, locale);
+    const clean = sanitizeText(body);
+    if (clean !== body) {
+      const found = findControlChars(body);
+      console.error(`  ⚠️  ${file}: stripped ${found.length} invalid C0 control character(s) before writing`);
+    }
+    writeFileSync(file, clean);
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
 }

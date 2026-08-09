@@ -35,6 +35,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified } from './lib/evergreen-article-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
+import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 // loadSnapshot/buildData live in the lib (not here) so `node --test` can pin
 // the refusal rules without importing create-article.mjs, whose static deps
 // (jsdom) exist only where `npm ci` ran.
@@ -52,7 +53,13 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
     const file = path.join(dir, `${data.id}.ts`);
-    writeFileSync(file, buildBodyFile(data, locale));
+    const body = buildBodyFile(data, locale);
+    const clean = sanitizeText(body);
+    if (clean !== body) {
+      const found = findControlChars(body);
+      console.error(`  ⚠️  ${file}: stripped ${found.length} invalid C0 control character(s) before writing`);
+    }
+    writeFileSync(file, clean);
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
 }

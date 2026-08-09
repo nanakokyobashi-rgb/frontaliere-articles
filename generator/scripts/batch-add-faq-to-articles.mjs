@@ -29,6 +29,7 @@ const __dirname = dirname(__filename);
 // so one level up is now the generator directory, not the repo root.
 const ROOT = resolve(__dirname, '..', '..');
 import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
+import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
@@ -127,8 +128,15 @@ function read(filePath) {
   return readFileSync(resolve(filePath), 'utf-8');
 }
 
+// Same write-time guard as create-article.mjs write() (issue #66): strip any
+// C0 control character other than TAB/LF/CR before it reaches content/.
 function write(filePath, content) {
-  writeFileSync(resolve(filePath), content, 'utf-8');
+  const clean = sanitizeText(content);
+  if (clean !== content) {
+    const found = findControlChars(content);
+    console.error(`  ⚠️  write(${filePath}): stripped ${found.length} invalid C0 control character(s) before writing`);
+  }
+  writeFileSync(resolve(filePath), clean, 'utf-8');
 }
 
 /** Same escaping as create-article.mjs buildBodyFile() */
