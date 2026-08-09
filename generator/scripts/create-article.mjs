@@ -160,7 +160,8 @@ import {
   escapeForSingleQuoteTS,
   META_SEO_FIELDS,
 } from './lib/article-meta-block.mjs';
-import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
 // data/article-performance.json is produced weekly by Phase 1A.
@@ -1767,10 +1768,10 @@ function read(rel) {
 // relying on every future write call site to remember to sanitize.
 function write(rel, content) {
   const clean = sanitizeText(content);
-  if (clean !== content) {
-    const found = findControlChars(content);
-    console.error(`  ⚠️  write(${rel}): stripped ${found.length} invalid C0 control character(s) before writing`);
-  }
+  // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+  // esatta una riparazione futura (issue #95). Si registra prima, con il
+  // contesto che conserva la coppia (byte, carattere seguente).
+  reportStrippedControlChars(rel, content, clean);
   writeFileSync(resolve(rel), clean, 'utf-8');
 }
 

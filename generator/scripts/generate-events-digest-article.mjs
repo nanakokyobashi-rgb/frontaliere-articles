@@ -26,7 +26,8 @@ import { buildWeekendDigestArticle } from './lib/events-digest-content.mjs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified, bumpSitemapLastmod } from './lib/evergreen-article-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
-import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -76,10 +77,10 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     const file = path.join(dir, `${data.id}.ts`);
     const body = buildBodyFile(data, locale);
     const clean = sanitizeText(body);
-    if (clean !== body) {
-      const found = findControlChars(body);
-      console.error(`  ⚠️  ${file}: stripped ${found.length} invalid C0 control character(s) before writing`);
-    }
+    // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+    // esatta una riparazione futura (issue #95). Si registra prima, con il
+    // contesto che conserva la coppia (byte, carattere seguente).
+    reportStrippedControlChars(file, body, clean);
     writeFileSync(file, clean);
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
