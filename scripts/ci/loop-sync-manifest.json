@@ -1710,6 +1710,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/topic-coverage-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate «argomento gia' coperto»: blocca una seconda guida sullo stesso mestiere entro 90 giorni. Nato da un difetto osservato QUI (tre guide-piastrellista il 2026-08-09, di cui due a 24 minuti di distanza) e da un pool — `buildProfessionEvergreenTopics` — che emette due candidati per mestiere per costruzione. Non ha omonimo sul sito. E' deliberatamente un file NUOVO invece di un ritocco a `it-text-similarity.mjs`/`dup-stoplist.mjs`/`scoring/constants.mjs`, che sono tutti `identical`: la fix li' sarebbe dovuta partire dal sito e scendere col mirror, mentre il difetto e' in produzione qui. Se il sito vorra' lo stesso gate, questo file e' portabile cosi' com'e' (dipende solo da `profession-taxonomy.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "58011f21c0ea671d",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",
