@@ -260,3 +260,63 @@ jobs:
         # Exact token/cost for this run (replaces estimates). Writes a table to the run
         # Step Summary + a grep-able CLAUDE_USAGE line to the log. Best-effort: never fails.
         run: node scripts/ci/claude-usage-summary.mjs "${{ steps.followup.outputs.execution_file }}" "post-merge-followup"
+
+      # Backstop deterministico del MARKER DI IDEMPOTENZA (issue #99).
+      #
+      # Il prompt qui sopra dichiara OBBLIGATORIO il commento
+      # `## Post-merge follow-up triage` su ogni PR del batch, perché è quel
+      # commento — e nient'altro — che `collect-followup-batch.mjs` legge per
+      # sapere quali PR ha già triagiato. Fino a oggi NIENTE verificava che
+      # fosse stato scritto: dopo lo step Claude c'era solo il conteggio dei
+      # token, che guarda il costo e non l'esito.
+      #
+      # Misurato il 2026-08-09: 19 run fra il 7 e il 9 agosto, 17 `success`;
+      # su 18 PR mergiate esaminate una per una, ZERO portano il commento;
+      # zero issue `follow-up` esistono sul repo. Costo diretto: senza marker
+      # nessuna PR risulta mai triagiata, quindi ogni run schedulata ri-triagia
+      # la stessa finestra e brucia quota ogni 3 ore, e «valutata e scartata»
+      # resta indistinguibile da «mai vista».
+      #
+      # ── La causa NON è «il modello salta un obbligo» ──────────────────────
+      # Nei log delle run verdi (31307620545, 31280660682, 31259694903,
+      # 31313086420) ogni invocazione del tool Bash — anche `pwd` — muore su
+      # `bwrap: Can't create file at /home/.mcp.json: Permission denied`. Sulla
+      # 31307620545: 9 tool_use Bash, 9 tool_result `is_error: true`, ZERO
+      # riusciti. Il modello si è comportato correttamente, ha rifiutato di
+      # fabbricare un esito e ha scritto che la run andava trattata come
+      # fallita «so a retry doesn't get skipped by the idempotency marker». È il
+      # messaggio finale ad avere `subtype: "success"`, e la run esce verde.
+      #
+      # Per questo il backstop NON scrive il marker a scatola chiusa. Se lo
+      # facesse, timbrerebbe «zero outstanding items» su ogni PR di ogni
+      # finestra rotta: da difetto visibile-se-lo-cerchi a perdita SILENZIOSA e
+      # IRREVERSIBILE, perché il collector non può distinguere un marker vero da
+      # uno fabbricato. Scrive solo se la sessione ha davvero parlato con
+      # GitHub, provato da tre segnali indipendenti in OR (comando di shell
+      # riuscito / marker già presente su una PR del batch / issue
+      # `follow-up(#N)` esistenti). Altrimenti esce 1.
+      #
+      # Il rosso è deliberato ed è lo stesso ragionamento dello step «Skip on
+      # exhausted quota (no false green — watermark must hold)» qui sopra: il
+      # watermark avanza sulle sole run di SUCCESSO, quindi uscire verdi senza
+      # aver triagiato farebbe scorrere la finestra e perderebbe le PR per
+      # sempre. Fallire la lascia indietro; la run successiva (≤3h) ri-copre
+      # tutto, e `workflow-failure-issues.yml` porta il guasto nella coda di
+      # triage invece di lasciarlo una riga rossa che nessuno guarda.
+      #
+      # Forma imitata dal backstop `FIX_OUTCOME` di `issue-fix.yml`, che pure
+      # esiste perché «prompt-emitted markers are unreliable».
+      - name: Follow-up marker backstop (deterministic, zero-Claude)
+        # `always()`: gira anche se lo step Claude è fallito — è proprio lì che
+        # serve sapere se qualcuno ha lasciato marker a metà. Le due condizioni
+        # sul batch/quota ricalcano quelle dello step Claude: se Claude non
+        # doveva girare, non c'è nessun obbligo da verificare.
+        if: always() && steps.quota.outputs.quota_blocked != 'true' && steps.collect.outputs.batch_count != '0' && steps.collect.outputs.batch_count != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          BATCH_PRS: ${{ steps.collect.outputs.batch_prs }}
+          EXEC_FILE: ${{ steps.followup.outputs.execution_file }}
+          CLAUDE_STEP_OUTCOME: ${{ steps.followup.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: node scripts/ci/followup-marker-backstop.mjs
