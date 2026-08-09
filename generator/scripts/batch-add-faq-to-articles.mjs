@@ -29,7 +29,8 @@ const __dirname = dirname(__filename);
 // so one level up is now the generator directory, not the repo root.
 const ROOT = resolve(__dirname, '..', '..');
 import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
-import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
@@ -132,10 +133,10 @@ function read(filePath) {
 // C0 control character other than TAB/LF/CR before it reaches content/.
 function write(filePath, content) {
   const clean = sanitizeText(content);
-  if (clean !== content) {
-    const found = findControlChars(content);
-    console.error(`  ⚠️  write(${filePath}): stripped ${found.length} invalid C0 control character(s) before writing`);
-  }
+  // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+  // esatta una riparazione futura (issue #95). Si registra prima, con il
+  // contesto che conserva la coppia (byte, carattere seguente).
+  reportStrippedControlChars(filePath, content, clean);
   writeFileSync(resolve(filePath), clean, 'utf-8');
 }
 

@@ -35,7 +35,8 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified } from './lib/evergreen-article-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
-import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 // loadSnapshot/buildData live in the lib (not here) so `node --test` can pin
 // the refusal rules without importing create-article.mjs, whose static deps
 // (jsdom) exist only where `npm ci` ran.
@@ -55,10 +56,10 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     const file = path.join(dir, `${data.id}.ts`);
     const body = buildBodyFile(data, locale);
     const clean = sanitizeText(body);
-    if (clean !== body) {
-      const found = findControlChars(body);
-      console.error(`  ⚠️  ${file}: stripped ${found.length} invalid C0 control character(s) before writing`);
-    }
+    // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+    // esatta una riparazione futura (issue #95). Si registra prima, con il
+    // contesto che conserva la coppia (byte, carattere seguente).
+    reportStrippedControlChars(file, body, clean);
     writeFileSync(file, clean);
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }

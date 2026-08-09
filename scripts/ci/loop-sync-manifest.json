@@ -1680,6 +1680,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/control-char-write-report.mjs",
+      "mode": "corpus-only",
+      "reason": "Rende rumoroso e recuperabile lo strip dei control character in scrittura (#95). Vive solo qui: e' il generatore ad avere i sette choke point di scrittura portati da #75, e il sito non genera articoli. La sanificazione condivisa e' scripts/lib/sanitize-control-chars.mjs, che e' un'altra voce.",
+      "baseline": {
+        "site": null,
+        "corpus": "b15e05c286a34620",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "identical",
