@@ -20,7 +20,11 @@
  * SOLO i matcher che le suite portate usano davvero (censiti sul sorgente del
  * sito, 2026-08-08): toBe, toEqual, toContain, toBeNaN, toMatch, toBeCloseTo,
  * toBeTruthy, toBeDefined, toBeGreaterThan(OrEqual), toBeLessThan,
- * toHaveLength, e `.not` per toBe/toContain. Un matcher non implementato
+ * toHaveLength, e `.not` per TUTTI i matcher. (Questa riga diceva «`.not` per
+ * toBe/toContain» ed era piu' restrittiva dell'implementazione: `.not` non e'
+ * cablato per matcher, ricostruisce l'oggetto con `negated: true` e ogni
+ * matcher passa da `maybe()`. Verificato portando article-sanitizers, che usa
+ * `.not.toMatch` 15 volte: 39/39 verdi.) Un matcher non implementato
  * lancia TypeError (undefined is not a function): un test che ne usasse uno
  * nuovo fallisce rumorosamente invece di passare in silenzio.
  *
