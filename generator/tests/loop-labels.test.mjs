@@ -67,11 +67,48 @@ test('ogni label applicata dal ciclo è dichiarata in ensure-loop-labels', () =>
   // vengono dichiarati, e senza di esse il guard tace proprio sui casi che
   // scattano di rado — cioe' quelli in cui una label mancante fa piu' danno.
   const CONST_RE = /\b\w*LABELS?\b\s*=\s*["']([A-Za-z][\w:-]*)["']/g;
+  // `gh issue create --label X` applica una label quanto `--add-label`. Va
+  // distinto da `gh issue list --label X`, che filtra e basta: si guarda la
+  // riga, perche' e' li' che la sottocomando compare.
+  const CREATE_LABEL_RE = /--label[= ]+["']?([A-Za-z][\w:-]*)["']?/g;
+  const LIST_CONTEXT_RE = /(?:issue|pr)["']?\s*,?\s*["']?list|(?:issue|pr) list/;
+
+  // ── Il punto cieco che e' costato l'intera Fase 0 ────────────────────────
+  // Le label che un PROMPT istruisce l'agente ad applicare non hanno forma di
+  // flag. `post-merge-followup.yml` dice, in prosa dentro il prompt:
+  //     Label: `follow-up` + UNO funnel-* se inferibile.
+  // Nessuna regex sui flag di `gh` puo' vederlo — e infatti `follow-up`
+  // compariva nei sorgenti SOLO dentro un esempio `gh issue list --label
+  // follow-up`, cioe' in un contesto di filtro, mentre la label che il triage
+  // applica davvero viveva in quella riga di prosa. Risultato misurato: il
+  // workflow ha girato per giorni batchando correttamente le PR e non ha mai
+  // mintato una issue, perche' la label non esisteva sul repo; 0 issue
+  // `follow-up` sul corpus contro 100+ sul sito, e tutto il deferred work
+  // delle PR mergiate evaporato senza un errore da nessuna parte.
+  //
+  // E' la stessa forma di `SiteShellContract`: un contratto che non ha forma
+  // di import non e' coperto dai guard che seguono gli import. Qui si legge
+  // la convenzione con cui questi prompt dichiarano le label — una riga
+  // `Label: ...` — e se ne estraggono i token, backtickati o no.
+  const PROMPT_LABEL_LINE_RE = /^.*\bLabels?:\s*(.+)$/gim;
+  const PROMPT_TOKEN_RE = /`([A-Za-z][\w:-]*\*?)`|\b([a-z][\w:-]*-\*)/g;
+
   const used = new Set();
   for (const f of sources) {
     const src = fs.readFileSync(f, 'utf8');
     for (const m of src.matchAll(APPLY_RE)) used.add(m[1].toLowerCase());
     for (const m of src.matchAll(CONST_RE)) used.add(m[1].toLowerCase());
+    for (const line of src.split('\n')) {
+      if (LIST_CONTEXT_RE.test(line)) continue;
+      for (const m of line.matchAll(CREATE_LABEL_RE)) used.add(m[1].toLowerCase());
+    }
+    for (const lineMatch of src.matchAll(PROMPT_LABEL_LINE_RE)) {
+      for (const m of lineMatch[1].matchAll(PROMPT_TOKEN_RE)) {
+        // `funnel-*` e simili sono famiglie: si normalizzano al prefisso, che
+        // il controllo di famiglia sotto verifica come tale.
+        used.add((m[1] || m[2]).toLowerCase().replace(/\*$/, ''));
+      }
+    }
   }
 
   // Alcune label si compongono a runtime (`--add-label "fu-prio:$prio"`): la
@@ -81,7 +118,7 @@ test('ogni label applicata dal ciclo è dichiarata in ensure-loop-labels', () =>
   const undeclared = [...used]
     .filter((l) => {
       if (declared.has(l) || selfCreated.has(l)) return false;
-      if (l.endsWith(':')) return ![...declared].some((d) => d.startsWith(l));
+      if (/[:-]$/.test(l)) return ![...declared].some((d) => d.startsWith(l));
       return true;
     })
     .sort();
