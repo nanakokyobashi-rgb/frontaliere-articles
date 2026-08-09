@@ -971,12 +971,12 @@
     },
     {
       "path": "scripts/lib/sanitize-control-chars.mjs",
-      "mode": "corpus-only",
-      "reason": "Guardia di confine sull'output degli emitter (0x08/0x17 nei titoli sorgente). Non esiste sul sito: il sito rende le sue pagine dal proprio build e non emette ne' sitemap-blog.xml ne' i meta-*.json di questa superficie, che sono prodotti solo qui. Il difetto era misurato QUI (sitemap non well-formed, structured data inquinato sulla pagina live), e qui vivono i tre emitter che la usano: build-api.mjs, build-blog-index.mjs, publish-article-fast.mjs.",
+      "mode": "identical",
+      "reason": "Era `corpus-only` sulla premessa «non esiste sul sito», che era vera e non doveva esserlo: il sito rende e pusha le stesse pagine sugli stessi shard (lo dice l'intestazione di scripts/publish-article-fast.mjs di questo repo, «BOTH repos push the article shards»), e non aveva NESSUNA gestione dei control character — valerielinc-ops/frontaliere-si-o-no#5457. Il sito ne ha ora una copia byte-identica. Identica di proposito: e' la DEFINIZIONE (quali C0 sono illegali, e come si scrivono una volta escapati) a dover restare una sola, perche' due repo che pubblicano la stessa pagina e non concordano su quali byte siano illegali sono la forma esatta del difetto. La POLITICA invece diverge, ed e' voluto: qui si STRIPPA al confine degli emitter, sul sito si RIFIUTA di pubblicare (scripts/lib/control-char-publish-gate.mjs, voce `not-ported` qui sotto). L'asimmetria e' scritta: strippare distrugge l'ancora (byte C0 + coda) da cui generator/scripts/repair-mangled-chars.mjs ricostruisce il carattere perduto — 303 occorrenze su 582 riparate il 2026-08-09 (#94) — e sul sito il costo di un rifiuto e' una pagina sola, non una sitemap intera. Le funzioni che strippano restano quindi presenti ma non chiamate sul sito, e un test la' lo impone (tests/control-char-publish-gate.test.ts).",
       "baseline": {
-        "site": null,
+        "site": "61f6e2723fabdad7",
         "corpus": "61f6e2723fabdad7",
-        "alignedAt": "2026-08-08"
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -2203,6 +2203,25 @@
       "baseline": {
         "site": null,
         "corpus": "895c4f20d97f14a2",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/control-char-publish-gate.mjs",
+      "mode": "not-ported",
+      "reason": "Meta' SITO della coppia: rifiuta di pubblicare un file reso che porta un control character, invece di ripulirlo. Deliberatamente non portato qui, perche' qui sarebbe la politica SBAGLIATA: questo repo emette sitemap-blog.xml, dove un C0 puo' far rifiutare l'intero documento a un consumatore severo (3120 URL su due byte), quindi strippare e' il male minore. Il sito emette pagine una alla volta sugli shard, dove rifiutare costa esattamente la pagina rifiutata: la' il rifiuto e' possibile, e quindi obbligatorio, perche' strippare sovrascriverebbe una pagina servita CORRETTA con una riparata a meta'. Misurato il 2026-08-09 su lavena-ponte-tresa-territorio-poroso: sorgente `Il <0x08>3territorio poroso<0x08>3`, meta-it.json pubblicato `Il 3territorio poroso3`, pagina live `Il territorio poroso` — la live e' giusta, e un gate che strippa la romperebbe.",
+      "baseline": {
+        "site": "fbe142331dc24c6c",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/publish-article-fast.mjs",
+      "mode": "adapted",
+      "reason": "IL PUNTO CIECO CHE HA PERMESSO LA #5457. L'intestazione della copia di QUESTO repo dichiara «This repo is a SEPARATE COPY of the site's scripts/publish-article-fast.mjs» e chiede «If either copy is touched, touch both» — ma la dichiarazione esiste solo da questo lato, il file non era nel manifest, e nessun meccanismo la faceva rispettare. Cosi' la #65 ha cablato sanitizeHtmlDocument nei writeFileSync di questa copia (righe 292-293) e la copia del sito e' rimasta senza, agli stessi identici punti di scrittura, per giorni. E' la stessa classe gia' misurata sull'ordine render/offload, dove l'archivio live alternava sano e rotto a seconda di chi aveva pubblicato. `adapted` e non `identical` perche' divergono davvero e per costruzione (445 righe qui contro 333 la', 298 righe di diff): percorsi di render diversi, dipendenze diverse, e ora anche politiche diverse sui control character — qui si sanifica, la' si rifiuta (scripts/lib/control-char-publish-gate.mjs). Sorvegliato proprio perche' adattato: e' sui file adattati che una modifica di un lato si perde, «tanto e' diverso apposta».",
+      "baseline": {
+        "site": "418dc711cb6be62b",
+        "corpus": "d61863a86e162c7f",
         "alignedAt": "2026-08-09"
       }
     }
