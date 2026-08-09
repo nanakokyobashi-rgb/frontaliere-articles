@@ -195,10 +195,62 @@ function listTsFiles(dir) {
 }
 
 /** Aggiunge (o marca) `${section}:${id}` nella mappa dei risultati. */
-function mark(map, section, id, source) {
+/**
+ * Le stringhe che il marker lascia SULLA PAGINA una volta tolto il byte C0.
+ *
+ * Perche' serve un secondo criterio. `pageCarriesControlChars` chiede «sanificare
+ * cambierebbe il documento?», e su una pagina emessa dopo #65 la risposta e' NO
+ * anche quando il testo e' rotto: gli emitter il byte lo tolgono in uscita, e
+ * cio' che resta e' la CIFRA dentro la parola. `compétences` diventa
+ * `comp9tences` — nessun control character, e il criterio vecchio la dichiara
+ * pulita. E' lo stesso criterio con cui #71 e' stata chiusa per sbaglio: misura
+ * il marker, non il difetto.
+ *
+ * L'oracolo qui e' il CORPUS, non un pattern: si prende il token che contiene il
+ * marker, si toglie il byte, e la stringa risultante e' esattamente quella che
+ * la pagina mostrera'. Cercare quella — e non un `\w+\d\w+` generico — e' cio'
+ * che rende il criterio senza falsi positivi: non e' «una parola con una cifra
+ * dentro», e' «QUESTA parola, che sappiamo essere nata da un marker in QUESTO
+ * articolo».
+ *
+ * Si scartano i residui che non mescolano lettere e cifre: quelli sono i casi
+ * in cui il marker sostituiva un separatore puro (una lista di sole cifre, un
+ * marcatore markdown isolato), dove togliere il byte non lascia una parola
+ * visibilmente rotta e non c'e' niente da cercare.
+ *
+ * La cifra non deve stare per forza IN MEZZO a lettere: il marker sostituisce
+ * anche il primo o l'ultimo carattere di una parola (una lettera accentata a
+ * inizio parola, o l'ultima lettera prima della punteggiatura), e in quel caso
+ * il residuo e' `3territorio` o `poroso3`, non `comp9tence`. Misurato sul
+ * corpus reale: `content/blog-body/it/lavena-ponte-tresa-territorio-poroso.ts`
+ * porta entrambe le forme sullo stesso articolo (`^H3territorio`, `poroso^H3`).
+ */
+export function residuesInText(text) {
+  const out = new Set();
+  if (typeof text !== 'string') return out;
+  const C0 = /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/;
+  const TOKEN = /[A-Za-z\u00c0-\u024f\u0000-\u0008\u000b\u000c\u000e-\u001f0-9]+/g;
+  const HAS_LETTER = /[A-Za-z\u00c0-\u024f]/;
+  const HAS_DIGIT = /[0-9]/;
+  for (const m of text.matchAll(TOKEN)) {
+    const tok = m[0];
+    if (!C0.test(tok)) continue;
+    const stripped = tok.replace(new RegExp(C0.source, 'g'), '');
+    // Deve restare un token che mescola lettere e cifre, in qualunque ordine e
+    // posizione: e' la firma del residuo. Un token che dopo lo strip e' gia'
+    // pulito (solo lettere) o resta puramente numerico (solo cifre) non lascia
+    // una parola visibilmente rotta, e cercarlo darebbe falsi positivi ovunque.
+    if (!HAS_LETTER.test(stripped) || !HAS_DIGIT.test(stripped)) continue;
+    out.add(stripped);
+  }
+  return out;
+}
+
+function mark(map, section, id, source, residues) {
   const key = `${section}:${id}`;
-  const entry = map.get(key) || { section, id, sources: [] };
+  const entry = map.get(key) || { section, id, sources: [], residues: [] };
   entry.sources.push(source);
+  if (residues) for (const r of residues) if (!entry.residues.includes(r)) entry.residues.push(r);
   map.set(key, entry);
 }
 
@@ -220,7 +272,7 @@ export function scanContentForDirtyIds(rootDir) {
       totalFiles += 1;
       totalOccurrences += n;
       const id = path.basename(file, '.ts');
-      mark(found, section, id, path.relative(rootDir, file));
+      mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
     }
   }
 
@@ -235,7 +287,8 @@ export function scanContentForDirtyIds(rootDir) {
     if (n === 0) continue;
     totalFiles += 1;
     totalOccurrences += n;
-    for (const id of dirtyIdsInMetaText(text)) mark(found, 'frontaliere', id, path.relative(rootDir, file));
+    const metaResidues = residuesInText(text);
+    for (const id of dirtyIdsInMetaText(text)) mark(found, 'frontaliere', id, path.relative(rootDir, file), metaResidues);
   }
 
   const seoDir = path.join(contentDir, 'seo');
@@ -245,7 +298,8 @@ export function scanContentForDirtyIds(rootDir) {
     if (n === 0) continue;
     totalFiles += 1;
     totalOccurrences += n;
-    for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, path.relative(rootDir, file));
+    const seoResidues = residuesInText(text);
+    for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, path.relative(rootDir, file), seoResidues);
   }
 
   const ids = [...found.values()].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
@@ -330,11 +384,20 @@ export function liveUrlsForCandidate({ section, id, slugs, sectionShardSlugs }) 
  * workflow ma di reconcile-article-shards. `unknown` copre tutto il resto —
  * 5xx, 429, timeout, DNS — e vale come "sporco" per il chiamante.
  */
-export function classifyProbe({ status, body, error }) {
+export function classifyProbe({ status, body, error, residues }) {
   if (error) return 'unknown';
   if (status === 404 || status === 410) return 'absent';
   if (typeof status !== 'number' || status < 200 || status >= 300) return 'unknown';
-  return pageCarriesControlChars(body) ? 'dirty' : 'clean';
+  if (pageCarriesControlChars(body)) return 'dirty';
+  // Secondo criterio: il RESIDUO. Una pagina emessa dopo #65 non porta piu' il
+  // byte, ma porta la cifra che il byte si e' lasciato dietro dentro la parola.
+  // Senza questo ramo il drenaggio riporta 0 su pagine visibilmente rotte —
+  // misurato: `nestle-200-postes-de-travail-en-lombardie` rispondeva 200 con 23
+  // parole rotte mentre il detector lo dichiarava pulito.
+  if (Array.isArray(residues) && typeof body === 'string') {
+    for (const r of residues) if (r && body.includes(r)) return 'dirty';
+  }
+  return 'clean';
 }
 
 /**
@@ -375,7 +438,7 @@ export async function mapWithConcurrency(items, limit, worker) {
  * senza, un blip di rete diventa un `unknown`, cioe' un candidato tenuto a
  * vuoto — e il costo di sbagliare da quel lato e' una ripubblicazione inutile.
  */
-export async function probePage(url, { fetchImpl = fetch, attempts = 3, timeoutMs = 20000, sleep } = {}) {
+export async function probePage(url, { fetchImpl = fetch, attempts = 3, timeoutMs = 20000, sleep, residues } = {}) {
   const wait = sleep || ((ms) => new Promise((r) => setTimeout(r, ms)));
   let lastError;
   for (let attempt = 1; attempt <= attempts; attempt++) {
@@ -385,7 +448,7 @@ export async function probePage(url, { fetchImpl = fetch, attempts = 3, timeoutM
       if (status === 404 || status === 410) return { status, verdict: 'absent' };
       if (status >= 200 && status < 300) {
         const body = await res.text();
-        return { status, verdict: classifyProbe({ status, body }) };
+        return { status, verdict: classifyProbe({ status, body, residues }) };
       }
       lastError = new Error(`HTTP ${status}`);
     } catch (err) {
@@ -415,7 +478,7 @@ export async function filterCandidatesByLivePage(
   for (const job of jobs) for (const u of job.urls) flat.push({ job, ...u });
 
   const results = await mapWithConcurrency(flat, concurrency, async (item) => {
-    const r = await probePage(item.url, { fetchImpl, attempts, sleep });
+    const r = await probePage(item.url, { fetchImpl, attempts, sleep, residues: item.job.candidate.residues });
     if (onProbe) onProbe({ ...item, ...r });
     return { job: item.job, locale: item.locale, url: item.url, ...r };
   });
