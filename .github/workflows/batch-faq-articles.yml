@@ -230,7 +230,11 @@ jobs:
               exit 0
             fi
             echo "push attempt $attempt failed — rebasing onto $TARGET"
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            # Same non-transient conflict as generate-article.yml (issue #76):
+            # data/batch-faq-progress.json is resumability bookkeeping rewritten
+            # in full each run, so retrying the identical rebase cannot succeed.
+            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              data/batch-faq-progress.json || true
             sleep 3
           done
           echo "::error::push failed after 3 attempts (git output above)"
