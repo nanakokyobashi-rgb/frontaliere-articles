@@ -82,6 +82,13 @@ jobs:
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v5
+        with:
+          # fetch-depth: 0 perche' `github.event.before` deve essere raggiungibile
+          # dal passo sotto: senza storia completa il diff sui corpi toccati non
+          # si calcola, e lo scoping del preflight deve poter ricadere su
+          # scansione piena — vedi lo step "Determine which article bodies this
+          # push touched".
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:
@@ -143,9 +150,45 @@ jobs:
           bash "$GITHUB_WORKSPACE/scripts/ci/retry-cmd.sh" \
             npm install --no-save --no-audit --no-fund --prefer-offline --loglevel=error "$ESBUILD_PIN"
 
+      # Calcola quali corpi QUESTO push ha toccato, cosi' il transform esbuild
+      # (la parte costosa del preflight) puo' scoparsi a quelli invece di
+      # riparsare l'intero corpus a ogni pubblicazione. I PAVIMENTI anti-falso-
+      # verde nello script restano comunque sull'intero corpus via `readdir`:
+      # non dipendono da questo diff.
+      #
+      # Fallback esplicito su scansione piena (mai su una lista vuota, che
+      # farebbe passare inosservato un corpo nuovo rotto) quando il diff non e'
+      # calcolabile in modo pulito: `workflow_dispatch` non ha un `before`,
+      # `before` puo' essere assente o irraggiungibile dopo un force-push.
+      - name: Determine which article bodies this push touched
+        id: changed-bodies
+        env:
+          BEFORE: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -uo pipefail
+          scan_mode="full"
+          files=""
+          if [ "$EVENT_NAME" = "push" ] && [ -n "${BEFORE:-}" ] && \
+             [ "$BEFORE" != "0000000000000000000000000000000000000000" ] && \
+             git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then
+            if diff_out=$(git diff --name-only "$BEFORE" HEAD -- content/blog-body content/blog-body-ch 2>/dev/null); then
+              scan_mode="changed"
+              files="$diff_out"
+            fi
+          fi
+          echo "scan-mode=$scan_mode" >> "$GITHUB_OUTPUT"
+          {
+            echo "changed-files<<PREFLIGHT_CHANGED_FILES_EOF"
+            echo "$files"
+            echo "PREFLIGHT_CHANGED_FILES_EOF"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Preflight — i corpi articolo devono parsare come TypeScript
         env:
           PREFLIGHT_ESBUILD_DIR: ${{ runner.temp }}/preflight
+          PREFLIGHT_SCAN_MODE: ${{ steps.changed-bodies.outputs.scan-mode }}
+          PREFLIGHT_CHANGED_FILES: ${{ steps.changed-bodies.outputs.changed-files }}
         run: node scripts/ci/check-blog-body-syntax.mjs
 
       # Remote Config holds the R2 and Cloudflare credentials the edge push

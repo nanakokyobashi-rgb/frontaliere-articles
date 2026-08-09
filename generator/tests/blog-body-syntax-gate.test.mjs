@@ -32,9 +32,11 @@ import {
   BLOG_BODY_ROOTS,
   MIN_FILES_TOTAL,
   collectTypeScriptFiles,
+  filesToScan,
   floorViolations,
   formatOffender,
   loadEsbuild,
+  parseChangedFiles,
 } from '../../scripts/ci/check-blog-body-syntax.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -114,6 +116,51 @@ test('collectTypeScriptFiles ricorre, prende solo .ts, e su una radice assente r
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+});
+
+// ── Lo scoping ai corpi toccati dal push ────────────────────────────────────
+
+test('parseChangedFiles scarta righe vuote, input assente => []', () => {
+  assert.deepEqual(parseChangedFiles(''), []);
+  assert.deepEqual(parseChangedFiles(undefined), []);
+  assert.deepEqual(
+    parseChangedFiles('content/blog-body/it/uno.ts\n\ncontent/blog-body-ch/fr/due.ts\n'),
+    ['content/blog-body/it/uno.ts', 'content/blog-body-ch/fr/due.ts'],
+  );
+});
+
+test('filesToScan: scanMode diverso da "changed" e\' SEMPRE scansione piena', () => {
+  const perRoot = [
+    { rel: 'content/blog-body', files: [path.join(ROOT, 'content/blog-body/it/a.ts')] },
+    { rel: 'content/blog-body-ch', files: [path.join(ROOT, 'content/blog-body-ch/fr/b.ts')] },
+  ];
+  assert.deepEqual(filesToScan(perRoot, { scanMode: 'full' }), perRoot.flatMap((r) => r.files));
+  assert.deepEqual(filesToScan(perRoot, {}), perRoot.flatMap((r) => r.files), 'default = piena');
+  assert.deepEqual(
+    filesToScan(perRoot, { scanMode: 'qualunque-altra-cosa', changedFiles: [] }),
+    perRoot.flatMap((r) => r.files),
+    'solo scanMode === "changed" scopa, ogni altro valore e\' scansione piena a prescindere da changedFiles',
+  );
+});
+
+test('filesToScan: scanMode "changed" intersects con changedFiles', () => {
+  const a = path.join(ROOT, 'content/blog-body/it/a.ts');
+  const b = path.join(ROOT, 'content/blog-body/it/b.ts');
+  const c = path.join(ROOT, 'content/blog-body-ch/fr/c.ts');
+  const perRoot = [
+    { rel: 'content/blog-body', files: [a, b] },
+    { rel: 'content/blog-body-ch', files: [c] },
+  ];
+  const result = filesToScan(perRoot, {
+    scanMode: 'changed',
+    changedFiles: ['content/blog-body/it/b.ts', 'content/blog-body-ch/fr/nonesiste.ts'],
+  });
+  assert.deepEqual(result, [b], 'solo i file sia raccolti che nel diff, un path assente non produce nulla');
+});
+
+test('filesToScan: "changed" con lista vuota e\' un push legittimo che non tocca corpi, non un fallback', () => {
+  const perRoot = [{ rel: 'content/blog-body', files: [path.join(ROOT, 'content/blog-body/it/a.ts')] }];
+  assert.deepEqual(filesToScan(perRoot, { scanMode: 'changed', changedFiles: [] }), []);
 });
 
 // ── Il parser: assente = errore, MAI skip ───────────────────────────────────
@@ -200,6 +247,45 @@ test('publish-api.yml esegue il gate, e gli passa la directory del parser', () =
   assert.ok(iGate > 0, 'invocazione del gate non trovata');
   assert.ok(iBuild > 0, 'invocazione del build non trovata');
   assert.ok(iGate < iBuild, 'il preflight deve precedere la costruzione della superficie dati');
+});
+
+test('publish-api.yml scopa il preflight ai corpi toccati, con fallback esplicito', () => {
+  const src = fs.readFileSync(WORKFLOW, 'utf8');
+
+  assert.match(
+    src,
+    /fetch-depth:\s*0/,
+    'senza fetch-depth: 0 github.event.before non e\' raggiungibile e lo scoping degrada sempre a piena',
+  );
+  assert.match(
+    src,
+    /Determine which article bodies this push touched/,
+    'manca lo step che calcola il diff sui corpi per lo scoping',
+  );
+  assert.match(
+    src,
+    /PREFLIGHT_SCAN_MODE:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.scan-mode\s*\}\}/,
+    'il preflight non riceve la modalita\' di scansione calcolata dallo step precedente',
+  );
+  assert.match(
+    src,
+    /PREFLIGHT_CHANGED_FILES:\s*\$\{\{\s*steps\.changed-bodies\.outputs\.changed-files\s*\}\}/,
+    'il preflight non riceve la lista dei corpi cambiati calcolata dallo step precedente',
+  );
+
+  // Il fallback su scansione piena, mai su lista vuota, e' l'invariante che
+  // impedisce a un corpo nuovo rotto di passare inosservato quando il diff
+  // non e' calcolabile (workflow_dispatch, before assente/irraggiungibile).
+  assert.match(src, /scan_mode="full"/, 'il default dello step deve essere la scansione piena');
+  assert.match(
+    src,
+    /git cat-file -e "\$\{BEFORE\}\^\{commit\}"/,
+    'before va verificato raggiungibile prima di calcolare il diff, altrimenti si ricade su scansione piena',
+  );
+
+  const iDetermine = src.indexOf('Determine which article bodies this push touched');
+  const iGate = src.indexOf('node scripts/ci/check-blog-body-syntax.mjs');
+  assert.ok(iDetermine > 0 && iGate > 0 && iDetermine < iGate, 'il diff va calcolato prima di invocare il gate');
 });
 
 test('il job di pubblicazione ha un tetto di tempo', () => {

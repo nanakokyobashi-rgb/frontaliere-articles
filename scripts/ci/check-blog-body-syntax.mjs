@@ -74,6 +74,24 @@
  *
  * Exit 0 = tutti i corpi parsano. Exit 1 = offender, o pavimento non raggiunto,
  * o parser assente. Non esistono altri esiti.
+ *
+ * ── Scoping ai corpi toccati dal push ─────────────────────────────────────
+ *
+ * I PAVIMENTI (sopra) restano sempre sull'intero corpus via `readdir`: costano
+ * nulla, e sono l'anti-falso-verde che non deve mai dipendere da quali file un
+ * diff dice di aver toccato. La parte costosa — `esbuild.transform` su ~15k
+ * file — e' invece scopata ai soli corpi cambiati da QUESTO push, quando il
+ * chiamante puo' calcolarli:
+ *
+ *   PREFLIGHT_SCAN_MODE=changed
+ *   PREFLIGHT_CHANGED_FILES=<path relativi alla root, uno per riga>
+ *
+ * Con `PREFLIGHT_SCAN_MODE` assente o diverso da `changed`, o senza questa
+ * variabile, la scansione e' PIENA (comportamento di default, sicuro). Il
+ * chiamante (`publish-api.yml`) ricade su scansione piena ogni volta che il
+ * diff contro `github.event.before` non e' calcolabile (workflow_dispatch,
+ * `before` assente o irraggiungibile per force-push) — MAI su una lista
+ * vuota, che farebbe passare inosservato un corpo nuovo rotto.
  */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -157,6 +175,40 @@ export function floorViolations(perRoot, { minTotal = MIN_FILES_TOTAL } = {}) {
   return violations;
 }
 
+/**
+ * Legge `PREFLIGHT_CHANGED_FILES`: un path relativo alla root per riga (l'output
+ * di `git diff --name-only`, passato attraverso l'output multi-riga di un job
+ * GitHub Actions). Righe vuote scartate. Nessuna validazione di esistenza qui:
+ * un path che non compare fra i file raccolti da `collectTypeScriptFiles`
+ * (cancellato, o fuori da BLOG_BODY_ROOTS) semplicemente non finisce in
+ * `filesToScan`.
+ */
+export function parseChangedFiles(raw) {
+  if (!raw) return [];
+  return raw
+    .split('\n')
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+}
+
+/**
+ * Decide quali file passare a esbuild. Pura: non tocca il filesystem, prende
+ * in input cio' che `run()` ha gia' raccolto con `collectTypeScriptFiles`.
+ *
+ * `scanMode !== 'changed'` (assente, `'full'`, o qualunque altra cosa) e'
+ * SEMPRE scansione piena — il default sicuro. Solo `scanMode === 'changed'`
+ * scopa ai `changedFiles`, e un push che non tocca nessun corpo produce
+ * legittimamente lista vuota (push che tocca solo engine/**, non un corpo
+ * rotto passato inosservato: quello e' il caso "diff non calcolabile", che il
+ * chiamante deve mappare su scansione piena PRIMA di arrivare qui).
+ */
+export function filesToScan(perRoot, { scanMode, changedFiles = [] } = {}) {
+  const allFiles = perRoot.flatMap((r) => r.files);
+  if (scanMode !== 'changed') return allFiles;
+  const changedSet = new Set(changedFiles);
+  return allFiles.filter((f) => changedSet.has(path.relative(ROOT, f)));
+}
+
 /** Formatta gli offender come il test del sito: path relativo + messaggi esbuild. */
 export function formatOffender(filePath, err) {
   const messages =
@@ -207,7 +259,7 @@ export function loadEsbuild(dir = process.env.PREFLIGHT_ESBUILD_DIR) {
  */
 const BATCH = 500;
 
-export async function run({ log = console.log, error = console.error } = {}) {
+export async function run({ log = console.log, error = console.error, env = process.env } = {}) {
   const perRoot = BLOG_BODY_ROOTS.map((r) => {
     const files = collectTypeScriptFiles(path.join(ROOT, r.rel));
     return { ...r, count: files.length, files };
@@ -215,14 +267,29 @@ export async function run({ log = console.log, error = console.error } = {}) {
 
   for (const r of perRoot) log(`${r.rel}: ${r.count} file`);
 
+  // I pavimenti restano sull'intero corpus (perRoot sopra), a prescindere
+  // dallo scan mode: e' l'anti-falso-verde e non deve dipendere da un diff.
   const violations = floorViolations(perRoot);
   if (violations.length) {
     for (const v of violations) error(`::error::preflight blog-body — ${v}`);
     return 1;
   }
 
+  const scanMode = env.PREFLIGHT_SCAN_MODE === 'changed' ? 'changed' : 'full';
+  const changedFiles = scanMode === 'changed' ? parseChangedFiles(env.PREFLIGHT_CHANGED_FILES) : [];
+  const files = filesToScan(perRoot, { scanMode, changedFiles });
+
+  if (scanMode === 'changed') {
+    const total = perRoot.reduce((sum, r) => sum + r.count, 0);
+    log(`preflight blog-body: modalita' changed, ${files.length} corpo/i toccati da questo push su ${total} totali`);
+  }
+
+  if (files.length === 0) {
+    log('preflight blog-body: nessun corpo da analizzare per questo push');
+    return 0;
+  }
+
   const esbuild = loadEsbuild();
-  const files = perRoot.flatMap((r) => r.files);
   const failures = [];
 
   const started = Date.now();
