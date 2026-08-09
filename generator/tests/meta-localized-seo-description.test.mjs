@@ -166,6 +166,31 @@ test('emettitore: un campo vuoto o assente non produce una chiave vuota', () => 
   assert.equal(lines.length, 3, 'un valore vuoto deve essere OMESSO, non emesso come stringa vuota');
 });
 
+test('emettitore: title/excerpt whitespace-only restano byte-identici a prima (#123)', () => {
+  // Il vecchio `buildMetaBlock` (prima di #117) non faceva alcun controllo di
+  // presenza su title/excerpt: un valore whitespace-only usciva intatto. Un
+  // trim generico applicato a tutti i campi lo collasserebbe a stringa vuota.
+  const data = articleWith({ en: { title: '   ', excerpt: '  \t ' } });
+  const block = buildMetaBlock(data, 'en');
+  assert.equal(
+    block,
+    "    'blog.article.demo-articolo.title': '   ',\n" +
+      "    'blog.article.demo-articolo.excerpt': '  \t ',\n" +
+      "    'blog.article.demo-articolo.imageAlt': 'Alt EN',",
+    'title/excerpt whitespace-only devono uscire cosi\' come stanno, non come stringa vuota',
+  );
+});
+
+test('emettitore: imageAlt whitespace-only viene comunque emesso (#123)', () => {
+  // Il vecchio codice era `if (alt)`: falsy solo sulla stringa vuota, quindi un
+  // valore whitespace-only era gia' sufficiente per emetterlo.
+  const data = articleWith();
+  data.imageAlt.en = '   ';
+  const lines = buildMetaBlockLines(data, 'en');
+  assert.equal(lines.length, 3, 'imageAlt whitespace-only deve essere emesso, non omesso');
+  assert.ok(lines[2].includes("'   '"), 'imageAlt whitespace-only deve uscire intatto');
+});
+
 // ── 2. L'edizione vera ───────────────────────────────────────────────────────
 
 const BRIEF = {
