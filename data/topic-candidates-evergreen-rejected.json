@@ -115,7 +115,10 @@
     "frontaliere licenziamento diritti preavviso indennita 2026 simulazione pratica",
     "frontaliere formazione professionale riqualifica corsi 2026",
     "secondo pilastro lpp svizzera guida 2026",
-    "dichiarazione imposte svizzera guida pratica 2026 canton Zurigo"
+    "dichiarazione imposte svizzera guida pratica 2026 canton Zurigo",
+    "frontaliere formazione professionale riqualifica corsi 2026 famiglia con figli",
+    "frontaliere formazione professionale riqualifica corsi 2026 single",
+    "frontaliere formazione professionale riqualifica corsi 2026 simulazione pratica"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -231,7 +234,7 @@
     "salario medio professioni svizzera 2026 canton Vaud": 3,
     "salario medio professioni svizzera 2026 canton San Gallo": 3,
     "frontaliere licenziamento diritti preavviso indennita 2026 errori comuni": 3,
-    "frontaliere formazione professionale riqualifica corsi 2026 entro 20 km": 2,
+    "frontaliere formazione professionale riqualifica corsi 2026 entro 20 km": 3,
     "salario medio professioni svizzera 2026 canton Lucerna": 3,
     "salario medio professioni svizzera 2026 canton Argovia": 3,
     "secondo pilastro lpp svizzera guida 2026": 2,
@@ -250,6 +253,8 @@
     "affitti svizzera mercato immobiliare 2026 canton San Gallo": 1,
     "affitti svizzera mercato immobiliare 2026 canton Lucerna": 1,
     "affitti svizzera mercato immobiliare 2026 canton Argovia": 1,
-    "dichiarazione imposte svizzera guida pratica 2026": 1
+    "dichiarazione imposte svizzera guida pratica 2026": 1,
+    "frontaliere formazione professionale riqualifica corsi 2026 oltre 20 km": 1,
+    "frontaliere formazione professionale riqualifica corsi 2026 errori comuni": 1
   }
 }
