@@ -971,10 +971,10 @@
     },
     {
       "path": "scripts/lib/sanitize-control-chars.mjs",
-      "mode": "identical",
-      "reason": "Era `corpus-only` sulla premessa «non esiste sul sito», che era vera e non doveva esserlo: il sito rende e pusha le stesse pagine sugli stessi shard (lo dice l'intestazione di scripts/publish-article-fast.mjs di questo repo, «BOTH repos push the article shards»), e non aveva NESSUNA gestione dei control character — valerielinc-ops/frontaliere-si-o-no#5457. Il sito ne ha ora una copia byte-identica. Identica di proposito: e' la DEFINIZIONE (quali C0 sono illegali, e come si scrivono una volta escapati) a dover restare una sola, perche' due repo che pubblicano la stessa pagina e non concordano su quali byte siano illegali sono la forma esatta del difetto. La POLITICA invece diverge, ed e' voluto: qui si STRIPPA al confine degli emitter, sul sito si RIFIUTA di pubblicare (scripts/lib/control-char-publish-gate.mjs, voce `not-ported` qui sotto). L'asimmetria e' scritta: strippare distrugge l'ancora (byte C0 + coda) da cui generator/scripts/repair-mangled-chars.mjs ricostruisce il carattere perduto — 303 occorrenze su 582 riparate il 2026-08-09 (#94) — e sul sito il costo di un rifiuto e' una pagina sola, non una sitemap intera. Le funzioni che strippano restano quindi presenti ma non chiamate sul sito, e un test la' lo impone (tests/control-char-publish-gate.test.ts).",
+      "mode": "corpus-only",
+      "reason": "Sanificazione dei control character in uscita, portata da #65. E' corpus-only per un FATTO, non per scelta: sul sito il file non esiste (404 verificato). Era stato registrato 'identical' da #118 in previsione della PR gemella sul sito, che pero' e' stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB). Un manifest che dichiara 'identical' su un file inesistente asserisce il falso e produce un site-behind permanente. La divergenza vera resta aperta e tracciata: il sito emette grezze le 279 occorrenze rimaste mentre il corpus le strippa — valerielinc-ops#5457. Quando la meta' del sito atterra, questa voce torna 'identical' con la baseline reale.",
       "baseline": {
-        "site": "61f6e2723fabdad7",
+        "site": null,
         "corpus": "61f6e2723fabdad7",
         "alignedAt": "2026-08-09"
       }
