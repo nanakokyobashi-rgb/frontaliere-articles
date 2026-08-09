@@ -10292,7 +10292,25 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         // 27 anchor, soglia 14. Su una fonte reale la chiamata e' un no-op
         // esatto e il gate resta invariato. Vedi il commento della funzione
         // per il motivo per cui questo NON e' un allentamento del gate.
-        sourceText: stripInjectedBriefs(pageContent),
+        // Stringa VUOTA sul ramo evergreen, non il testo ripulito. Lo strip
+        // toglieva il brief dal denominatore del gate di recall — corretto —
+        // ma `runFactualityGates` passa lo STESSO `sourceText` anche a
+        // `collectInstitutionAcronyms`, e il residuo (712 char misurati) sta
+        // sopra `MIN_SOURCE_CHARS_FOR_SUPPORT` (400): `canJudge` restava true
+        // e ogni ente dell'articolo passava da `present` ad `absent` — cioe'
+        // evidenza bloccante fabbricata dal nulla, l'opposto di quanto
+        // dichiara il commento di quella funzione («Reporting 'absent' here
+        // would let source-less runs manufacture blocking evidence out of
+        // nothing»). Con '' torna `unknown`, che e' l'intento scritto.
+        //
+        // E un branch sull'URL non ha la fragilita' del match esatto: una
+        // sottrazione di stringa diventa un no-op silenzioso il giorno in cui
+        // il brief viene iniettato con una trasformazione in mezzo.
+        //
+        // `stats-bfs://` conserva il gate (quel prompt non nomina il brief).
+        // Nessuna soglia toccata: con '' scatta la guardia gia' esistente per
+        // fonte troppo sottile.
+        sourceText: url.startsWith('evergreen://') ? '' : pageContent,
         sourceDate: lastSourcePublishedAt || undefined,
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
