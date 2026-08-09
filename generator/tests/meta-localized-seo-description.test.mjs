@@ -401,3 +401,45 @@ test('superficie: dalla prima edizione datata che porta il campo, lo portano tut
       'dall\'excerpt troncato a 155: senza, quelle SERP tornano indietro in silenzio.',
   );
 });
+
+// ── Il cablaggio, che nessuno pinnava ────────────────────────────────────────
+//
+// I test sopra provano che `buildMetaBlock` emette i campi. NON provano che sia
+// LEI a scrivere i registri. Verificato da una seconda lente reintroducendo in
+// `create-article.mjs` l'emettitore vecchio a tre campi: **627 test, 625 pass,
+// 0 fail** — verde su copie reali. In quello stato la produzione non emette
+// piu' niente e il cricchetto non se ne accorge mai, perche' senza edizioni che
+// portano il campo `armedFrom` resta `undefined`, il test stampa «cricchetto
+// dormiente» e passa per sempre.
+//
+// E' letteralmente la classe che l'intestazione di questo file dichiara di
+// chiudere — «un difetto di EMISSIONE non ha una forma che un test sul
+// produttore possa vedere» — reintrodotta un livello piu' in alto.
+//
+// Non e' teorica: `create-article.mjs` e' `adapted`, il gemello sul sito ha
+// ancora la funzione inline, e un rebase che perde l'import non accende nulla
+// perche' `generate-article.yml` degrada un exit non-zero a `::warning::`.
+//
+// Stesso pattern di `seo-description-cap.test.mjs`: si asserisce sul SORGENTE.
+test('create-article usa la lib condivisa e non ridefinisce buildMetaBlock', () => {
+  const src = fs.readFileSync(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'scripts', 'create-article.mjs'),
+    'utf-8',
+  );
+  const importMatch = /import\s*\{([^}]*)\}\s*from\s*'\.\/lib\/article-meta-block\.mjs'/.exec(src);
+  assert.ok(
+    importMatch,
+    "create-article.mjs non importa piu' scripts/lib/article-meta-block.mjs: i registri li scrive qualcun altro",
+  );
+  assert.match(
+    importMatch[1],
+    /\bbuildMetaBlock\b/,
+    "buildMetaBlock non e' fra i simboli importati dalla lib condivisa",
+  );
+  assert.doesNotMatch(
+    src,
+    /function\s+buildMetaBlock\s*\(/,
+    "create-article.mjs ridefinisce buildMetaBlock localmente: la lib condivisa e' scavalcata e i campi SEO non escono",
+  );
+});
+

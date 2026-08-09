@@ -139,6 +139,7 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
@@ -6567,17 +6568,33 @@ function validate(data, opts = {}) {
         .replace(/[^a-z0-9-]/g, '-')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '')
-        // Same prompt-placeholder leak the id is guarded against above: the
-        // schema shown to the model spells the id as
-        // "kebab-case-3-5-words-max-40-chars", and a model that echoes it into
-        // the id tends to echo it here too. The IT slug is safe by construction
-        // (assigned from the already-cleaned id); these three are not.
-        .replace(/^kebab-case-/, '')
         .slice(0, 80);
+      // Same prompt-placeholder leak the id is guarded against above, and the
+      // reason this branch no longer strips `kebab-case-` by hand: the schema
+      // shown to the model spells the id as "kebab-case-3-5-words-max-40-chars"
+      // AND the slugs as "slug-en"/"slug-de"/"slug-fr", and only the first of
+      // the two families was ever covered here — the `slug-*` family reached
+      // production 24 times. `inspectSlugForPromptPlaceholder()` is the shared
+      // classifier, the SAME one `deriveAndSanitizeArticleSlugs()` enforces at
+      // the write path, so the two cannot drift into disagreeing about what a
+      // placeholder is. The IT slug is safe by construction (assigned from the
+      // already-cleaned id); these three are not.
+      const check = inspectSlugForPromptPlaceholder(data.slugs[locale]);
+      if (check.leaked) {
+        console.warn(
+          check.recovered
+            ? `  ❌ [slug-placeholder] Slug ${locale} conteneva il segnaposto del prompt: "${original}" → "${check.slug}"`
+            : `  ❌ [slug-placeholder] Slug ${locale} E' il segnaposto del prompt ("${original}"): niente di recuperabile.`,
+        );
+      }
       // Fall back to the IT slug rather than ship an empty one: an empty slug
       // routes to the section hub, silently making the article unreachable at
-      // its own URL.
-      if (!data.slugs[locale]) data.slugs[locale] = data.slugs.it;
+      // its own URL. The translated title is not an option HERE — this runs on
+      // the Italian generation call, before `translateArticle()` — so the IT
+      // slug is the only deterministic answer at this point, exactly as in the
+      // missing-slug loop above. It is a valid, distinct URL: the locale prefix
+      // and the hub segment already differ.
+      data.slugs[locale] = check.slug || data.slugs.it;
       if (data.slugs[locale] !== original) {
         console.warn(`  ⚠️  Slug ${locale} sanitizzato: "${original}" → "${data.slugs[locale]}"`);
       }
@@ -7174,12 +7191,80 @@ function loadExistingArticleSummaries() {
   return _existingArticleSummariesCache;
 }
 
+// ── Date di pubblicazione, per il gate «argomento già coperto» ──────────────
+// I titoli stanno nei meta (`blog-meta{,-ch}-it.ts`), le DATE stanno nei
+// registri (`blog-articles-data.ts` / `swiss-articles-data.ts`): due file
+// diversi, uniti qui per id. Cross-section per la stessa ragione di
+// readAllSectionsMetaIt — le guide-mestiere vengono generate in entrambe le
+// sezioni e un gemello nella sezione sorella deve contare.
+//
+// Il regex accetta fino a 300 caratteri fra `id:` e `date:` perché nel
+// registro fra i due campi c'è `category:`; è ancorato a `id:` in modo che
+// una voce senza `date` non rubi la data della voce successiva (il primo
+// match per id vince e non si sovrascrive).
+let _existingArticleDatesCache = null;
+function loadExistingArticleDates() {
+  if (_existingArticleDatesCache !== null) return _existingArticleDatesCache;
+  const dates = new Map();
+  for (const cfg of Object.values(ARTICLE_SECTION_CONFIGS)) {
+    let src;
+    try {
+      src = read(cfg.registryFile);
+    } catch { continue; } // registro assente (sezione non ancora popolata)
+    const re = /id:\s*'([^']+)',[\s\S]{0,300}?date:\s*'([^']+)'/g;
+    let m;
+    while ((m = re.exec(src)) !== null) {
+      if (!dates.has(m[1])) dates.set(m[1], m[2]);
+    }
+  }
+  _existingArticleDatesCache = dates;
+  return _existingArticleDatesCache;
+}
+
+/**
+ * Gli articoli esistenti con la loro data. Un id senza data resta senza:
+ * findRecentTopicCoverage lo ignora (fail-open) invece di trattarlo come
+ * appena pubblicato.
+ *
+ * Memoizzato come i due loader che unisce: il pre-flight lo chiama una volta
+ * per candidato — centinaia di volte per run — e senza cache ogni chiamata
+ * rialloccherebbe ~3.800 oggetti.
+ */
+let _existingArticleSummariesWithDatesCache = null;
+function loadExistingArticleSummariesWithDates() {
+  if (_existingArticleSummariesWithDatesCache !== null) return _existingArticleSummariesWithDatesCache;
+  const dates = loadExistingArticleDates();
+  _existingArticleSummariesWithDatesCache = loadExistingArticleSummaries()
+    .map((a) => ({ ...a, date: dates.get(a.id) || null }));
+  return _existingArticleSummariesWithDatesCache;
+}
+
 // ── Pre-flight evergreen keyword check ──────────────────────
 // Lightweight duplicate check: compares evergreen keyword words against
 // existing article titles using Jaccard similarity. Runs BEFORE calling
 // Gemini to avoid wasting API calls on keywords that will certainly fail
 // the post-generation duplicate detector.
 function preFlightEvergreenCheck(candidate) {
+  // «Argomento già coperto» PRIMA del Jaccard: il pool strutturale
+  // (buildProfessionEvergreenTopics) emette due candidati per ogni mestiere
+  // — `…stipendio requisiti` e `quanto guadagna un…` — quindi il secondo è un
+  // duplicato garantito del primo appena questo è pubblicato. Intercettarlo
+  // qui risparmia il ciclo LLM; il gate bloccante vero resta quello dopo la
+  // generazione (Step 3a.4), che copre anche i percorsi non-evergreen.
+  const keyword = String(candidate?.keyword || candidate || '');
+  const covered = findRecentTopicCoverage(
+    { id: keyword, title: keyword },
+    loadExistingArticleSummariesWithDates(),
+  );
+  if (covered) {
+    return {
+      duplicate: true,
+      signal: `topic_coverage:${covered.professionId}`,
+      sim: 1,
+      existingTitle: covered.existingTitle,
+      existingId: covered.existingId,
+    };
+  }
   return preFlightEvergreenTopicCheck(candidate, loadExistingArticleSummaries());
 }
 
@@ -10552,6 +10637,15 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     store: loadEmbeddingStore({ binPath: SECTION.embeddingsBinPath }),
     meta: loadEmbeddingMeta({ metaPath: SECTION.embeddingsMetaPath }),
   });
+  // Step 3a.4: «argomento già coperto» — l'unico gate che NON misura una
+  // distanza lessicale. I due sopra confrontano quanto si somigliano due
+  // testi; questo confronta DI COSA parlano. È la differenza che ha lasciato
+  // passare le tre guide-piastrellista del 2026-08-09 (combinato 0.278 contro
+  // una soglia di 0.55, con il solo token `piastrell` in comune su sette).
+  // Sta qui, dopo checkForDuplicates, perché questo è il punto obbligato di
+  // OGNI percorso di generazione — news, evergreen, discovery — mentre il
+  // pre-flight evergreen vede solo i candidati evergreen.
+  assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
@@ -10777,6 +10871,108 @@ function slugifySlugPart(input) {
 }
 
 /**
+ * ── PROMPT-PLACEHOLDER SLUG GUARD ──────────────────────────────────────────
+ *
+ * The JSON schema shown to the model spells the two URL-bearing fields with
+ * literal example values:
+ *
+ *   "id": "kebab-case-3-5-words-max-40-chars",
+ *   "slugs": { "it": "slug-it", "en": "slug-en", "de": "slug-de", "fr": "slug-fr" },
+ *
+ * A model that runs out of attention echoes them back instead of replacing
+ * them — either verbatim (`slug-en`), or with the placeholder glued onto a
+ * real slug (`slug-gaggiolo-traffic`, `kebab-case-turismo-ticino`). Nothing
+ * downstream noticed: `slugifySlugPart()` sees a perfectly well-formed
+ * lowercase-ASCII-hyphen token and passes it through unchanged, and the
+ * sanitizer in `validate()` only ever stripped the `kebab-case-` prefix — the
+ * `slug-` family was never covered.
+ *
+ * MEASURED 2026-08-09 on the published `slugs.json`: 24 live slugs across 8
+ * articles, all answering 200 and all listed in `sitemap-blog.xml` /
+ * `sitemap-blog-ch.xml` (hence in each other's hreflang sets). Four more had
+ * already reached production through the `id` in the earlier round of the same
+ * defect (`kebab-case-3-5-words-max-40-chars`, `kebab-case-turismo-ticino`,
+ * `kebab-case-ticino-nubifragio-grigioni`, `kebab-case-rossi-bruxelles-ticino`).
+ * A published URL is the one part of an article that cannot be corrected later
+ * without a redirect the shard renderer has no mechanism for.
+ *
+ * WHY A PREFIX MATCH AND NOT AN EXACT LIST. Two reasons, both measured.
+ *
+ * Half the live offenders are not the placeholder: they are the placeholder
+ * with real content glued to it (`slug-gaggiolo-traffic`,
+ * `slug-terzo-pilastro-3a-schweiz`), which an exact-match list cannot see.
+ *
+ * And the placeholder does not survive as a literal. `slug-inglese` /
+ * `slug-tedesco` / `slug-francese` are NOT in the prompt — the schema says
+ * `slug-en` / `slug-de` / `slug-fr`. The surrounding prompt is written in
+ * Italian, so the model translates the placeholder's MEANING ("lo slug in
+ * inglese") and hands back a token that never appeared in its input. That is
+ * not a historical artifact: `terzo-pilastro-3a-svizzero-vantaggi-2026-canton-basilea`
+ * was generated on 2026-08-09 and carries all three. A list of the four
+ * literals now in the prompt would not have caught a single one of them.
+ * What is stable across every wording and every language is the SHAPE: the
+ * schema names the field inside the value.
+ *
+ * The asymmetry of the cost decides the aggressiveness: a false positive costs
+ * a slightly different slug on an article that is not published yet, a false
+ * negative costs a permanent public URL. The aggressiveness is measured, not
+ * assumed: `generator/tests/slug-placeholder-guard.test.mjs` runs this
+ * classifier over the whole live registry — 15.172 slugs — and asserts that
+ * the only 28 it flags are the 28 already published, and that the other 15.144
+ * come through untouched.
+ */
+const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;
+
+/**
+ * What is left after the prefix is stripped, when the remainder is still part
+ * of the schema hint rather than article content. `it|en|de|fr` covers
+ * `slug-en`; the Italian/English language NAMES cover the translated variants
+ * the model invents from an Italian prompt (`slug-inglese`, `slug-tedesco`,
+ * `slug-francese`); the numeric shapes cover
+ * `kebab-case-3-5-words-max-40-chars`; the rest are the generic values models
+ * substitute when they have nothing to say.
+ */
+const NON_SLUG_REMAINDER_RX =
+  /^(?:it|en|de|fr|ita|eng|ger|deu|fra|italiano|inglese|tedesco|francese|italian|english|german|french|slug|placeholder|segnaposto|example|esempio|sample|test|todo|tbd|na|n-a|none|null|undefined|xxx|titolo|title|articolo|article)$/i;
+
+/** `3-5-words-max-40-chars`, `max-40-chars`, `40-chars`, `3-5-words`… */
+const SCHEMA_HINT_SHAPE_RX = /(?:^|-)(?:\d+-\d+-words|max-\d+-chars|\d+-chars|\d+-words)(?:-|$)/i;
+
+/**
+ * Classify one slug candidate against the prompt schema.
+ *
+ * @param {unknown} input raw slug (already sanitized or not — this normalizes)
+ * @returns {{ slug: string, leaked: boolean, recovered: boolean }}
+ *   `leaked`   — the value is, or starts with, a schema placeholder.
+ *   `slug`     — the usable remainder, `''` when nothing survives.
+ *   `recovered`— `leaked` and a usable remainder was salvaged from it.
+ */
+export function inspectSlugForPromptPlaceholder(input) {
+  const normalized = slugifySlugPart(input);
+  if (!normalized) return { slug: '', leaked: false, recovered: false };
+
+  // A value that IS a placeholder, with no prefix to strip (`undefined`,
+  // `placeholder`, a bare `slug`, `3-5-words-max-40-chars`).
+  if (NON_SLUG_REMAINDER_RX.test(normalized) || SCHEMA_HINT_SHAPE_RX.test(normalized)) {
+    return { slug: '', leaked: true, recovered: false };
+  }
+  if (!PROMPT_SLUG_PREFIX_RX.test(normalized)) {
+    return { slug: normalized, leaked: false, recovered: false };
+  }
+
+  // Strip repeatedly: `slug-kebab-case-x` and `slug-slug-en` both occur.
+  let remainder = normalized;
+  for (let i = 0; i < 4 && PROMPT_SLUG_PREFIX_RX.test(remainder); i += 1) {
+    remainder = remainder.replace(PROMPT_SLUG_PREFIX_RX, '');
+  }
+  const usable =
+    remainder.length >= 4 &&
+    !NON_SLUG_REMAINDER_RX.test(remainder) &&
+    !SCHEMA_HINT_SHAPE_RX.test(remainder);
+  return { slug: usable ? remainder : '', leaked: true, recovered: usable };
+}
+
+/**
  * Derive and sanitize the final per-locale slugs for an article: the Italian
  * slug is always locked to `data.id` (routing convention — see `validate()`'s
  * own `data.slugs.it = data.id`), and any en/de/fr slug the caller hasn't
@@ -10793,20 +10989,81 @@ function slugifySlugPart(input) {
  * Mutates `data.slugs` in place AND returns it so callers can consume the
  * exposed final value instead of re-deriving their own.
  *
+ * ── PLACEHOLDER ENFORCEMENT, AND WHY IT LIVES HERE ────────────────────────
+ *
+ * `validate()` already screens the AI flow's output, but `validate()` is ONE
+ * producer. `generate-daily-brief-article.mjs`, `generate-events-digest-article.mjs`,
+ * `generate-border-wait-ranking-article.mjs` and `publish-journalist-article.mjs`
+ * all import `registerArticleFiles` directly and never pass through it — the
+ * exact shape of the 2026-08-09 meta-description incident (a rule enforced in
+ * one producer instead of at the write path they share, see
+ * `clampSeoDescriptions`). This function is that shared write path: it runs
+ * inside `registerArticleFiles()` before the first file is touched.
+ *
+ * TWO DIFFERENT ANSWERS, on purpose:
+ *
+ *  · en/de/fr → DETERMINISTIC RECOVERY, loud. The slug is recovered from the
+ *    placeholder's own remainder when there is one (`slug-gaggiolo-traffic` →
+ *    `gaggiolo-traffic` — the model did produce a real slug, it just kept the
+ *    label), then from the translated title, then from the IT slug. All three
+ *    are correct URLs; falling back to the IT slug across locales never
+ *    collides, because the locale prefix and the hub segment already differ
+ *    (`/en/cross-border-articles/x/` vs `/articoli-frontaliere/x/`). Rejecting
+ *    the article instead would throw away a good, fact-checked, translated
+ *    piece over a label on one of twelve fields — the same trade-off already
+ *    argued at the `id` guard in `validate()`.
+ *
+ *  · id / IT slug → THROW. The id is not just a URL: it is the registry key,
+ *    the body filename and the hreflang anchor, and `registerArticleFiles()`
+ *    has ALREADY run `checkArticleIdExists(data.id)` by the time we get here.
+ *    Rewriting it at this point would publish the article under an id nobody
+ *    checked for collisions. There is a correct place to recover it — the
+ *    `PROMPT_ID_LEAK_RX` branch in `validate()`, which rebuilds it from the
+ *    Italian title and can retry the whole generation — so reaching this
+ *    function with a leaked id means a producer bypassed that path, which is a
+ *    bug to surface, not to paper over.
+ *
  * @param {object} data
  * @returns {Record<string, string>} the finalized `data.slugs` map
  */
 export function deriveAndSanitizeArticleSlugs(data) {
   data.slugs = data.slugs && typeof data.slugs === 'object' ? data.slugs : {};
+
+  const idCheck = inspectSlugForPromptPlaceholder(data.id);
+  if (idCheck.leaked) {
+    throw new Error(
+      `[slug-placeholder] l'id "${data.id}" e' un segnaposto del prompt (o ne conserva il prefisso). ` +
+        "L'id e' la chiave del registro, il nome del file body e lo slug italiano, e checkArticleIdExists() " +
+        'e\' gia\' stato eseguito su questo valore: correggerlo qui pubblicherebbe l\'articolo sotto un id ' +
+        `mai controllato per collisioni. Va corretto a monte — validate() lo ricostruisce dal titolo IT ` +
+        `("${data.content?.it?.title || ''}") — oppure dal produttore che lo ha passato.`,
+    );
+  }
+
   data.slugs.it = data.id;
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
       const title = String(data.content?.[locale]?.title || data.content?.it?.title || '');
       const fallback = title ? slugifySlugPart(title) : data.slugs.it;
       data.slugs[locale] = fallback || data.slugs.it;
-    } else {
-      data.slugs[locale] = slugifySlugPart(data.slugs[locale]) || data.slugs.it;
+      continue;
     }
+    const raw = String(data.slugs[locale]);
+    const check = inspectSlugForPromptPlaceholder(raw);
+    if (!check.leaked) {
+      data.slugs[locale] = check.slug || data.slugs.it;
+      continue;
+    }
+    const title = String(data.content?.[locale]?.title || '');
+    const fromTitle = title ? slugifySlugPart(title) : '';
+    const replacement = check.slug || fromTitle || data.slugs.it;
+    const source = check.slug ? 'resto del segnaposto' : fromTitle ? `titolo ${locale}` : 'slug IT';
+    console.error(
+      `❌ [slug-placeholder] lo slug ${locale} e' un segnaposto del prompt: "${raw}" → "${replacement}" (da: ${source}). ` +
+        'Il modello ha ricopiato lo schema invece di compilarlo — se ricorre, e\' il prompt a dover cambiare, ' +
+        'non questa rete di sicurezza.',
+    );
+    data.slugs[locale] = replacement;
   }
   return data.slugs;
 }
