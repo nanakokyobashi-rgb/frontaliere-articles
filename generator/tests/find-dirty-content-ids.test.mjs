@@ -54,6 +54,7 @@ import {
   verdictForCandidate,
   mapWithConcurrency,
   filterCandidatesByLivePage,
+  residuesInText,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
@@ -526,3 +527,43 @@ test('filtro live + orderAndCap: il giro dopo serve id DIVERSI, non gli stessi',
   assert.deepEqual(conFiltro.selected.map((s) => s.id), ['c-tre', 'd-quattro']);
   assert.deepEqual(conFiltro.leftover.map((s) => s.id), ['e-cinque']);
 });
+
+// ── Il residuo: il criterio che mancava ──────────────────────────────────────
+//
+// `pageCarriesControlChars` chiede «sanificare cambierebbe il documento?». Su
+// una pagina emessa dopo #65 la risposta e' NO anche quando il testo e' rotto,
+// perche' l'emitter il byte lo toglie in uscita e lascia la CIFRA dentro la
+// parola. Misurato: il drenaggio riportava `0 con pagina live ancora sporca`
+// mentre `nestle-200-postes-de-travail-en-lombardie` rispondeva 200 con 23
+// parole rotte. E' lo stesso criterio con cui #71 fu chiusa per sbaglio.
+
+test('residuesInText ricava la stringa che restera\' sulla pagina', () => {
+  // \x16 al posto di 'é': tolto il byte resta la cifra dentro la parola.
+  const out = residuesInText("const a = 'comp\u00169tences et con\u00167ues';");
+  assert.ok(out.has('comp9tences'), `atteso comp9tences, visti: ${[...out]}`);
+  assert.ok(out.has('con7ues'), `atteso con7ues, visti: ${[...out]}`);
+});
+
+test('residuesInText ignora i marker che non lasciano traccia', () => {
+  // Qui il marker sostituiva un separatore: tolto il byte la parola e' gia'
+  // corretta, quindi non c'e' nessuna stringa da cercare sulla pagina. Cercare
+  // un `\w+\d\w+` generico darebbe invece falsi positivi ovunque.
+  const out = residuesInText("const a = 'Ita\u0008lia e Svizzera';");
+  assert.equal(out.size, 0, `nessun residuo atteso, visti: ${[...out]}`);
+});
+
+test('una pagina SENZA control character ma col residuo e\' sporca', () => {
+  // Il caso reale: l'emitter ha gia' sanificato, quindi zero byte C0, e la
+  // pagina resta rotta. Senza questo ramo il drenaggio non converge mai.
+  const body = '<p>des programmes sp9cifiques pour les comp9tences pratiques</p>';
+  assert.equal(classifyProbe({ status: 200, body }), 'clean');
+  assert.equal(classifyProbe({ status: 200, body, residues: ['comp9tences'] }), 'dirty');
+});
+
+test('i residui di un ALTRO articolo non sporcano questa pagina', () => {
+  // Il residuo e' un oracolo per-articolo, non un pattern globale: e' cio' che
+  // rende il criterio senza falsi positivi.
+  const body = '<p>testo perfettamente pulito</p>';
+  assert.equal(classifyProbe({ status: 200, body, residues: ['comp9tences', 'situ9e'] }), 'clean');
+});
+
