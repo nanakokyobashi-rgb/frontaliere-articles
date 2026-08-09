@@ -426,14 +426,14 @@ test('create-article usa la lib condivisa e non ridefinisce buildMetaBlock', () 
     path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', 'scripts', 'create-article.mjs'),
     'utf-8',
   );
-  assert.match(
-    src,
-    /from\s+'\.\/lib\/article-meta-block\.mjs'/,
+  const importMatch = /import\s*\{([^}]*)\}\s*from\s*'\.\/lib\/article-meta-block\.mjs'/.exec(src);
+  assert.ok(
+    importMatch,
     "create-article.mjs non importa piu' scripts/lib/article-meta-block.mjs: i registri li scrive qualcun altro",
   );
   assert.match(
-    src,
-    /buildMetaBlock[\s\S]{0,400}from\s+'\.\/lib\/article-meta-block\.mjs'/,
+    importMatch[1],
+    /\bbuildMetaBlock\b/,
     "buildMetaBlock non e' fra i simboli importati dalla lib condivisa",
   );
   assert.doesNotMatch(
