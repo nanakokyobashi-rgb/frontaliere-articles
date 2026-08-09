@@ -893,6 +893,17 @@
         "corpus": "2f41ffd5d74146bb",
         "alignedAt": "2026-08-08"
       }
+    },
+    {
+      "path": "generator/scripts/create-article.mjs",
+      "sitePath": "scripts/create-article.mjs",
+      "mode": "adapted",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi.",
+      "baseline": {
+        "site": "44b4dcb727b012ea",
+        "corpus": "e0688d64decce308",
+        "alignedAt": "2026-08-09"
+      }
     }
   ]
 }
