@@ -22,6 +22,7 @@ import {
   DAILY_EDITION_SITEMAP_KEEP,
   loadSnapshot,
   buildData,
+  humanDate,
 } from '../scripts/lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg } from '../scripts/lib/daily-brief-image.mjs';
 
@@ -113,6 +114,42 @@ test('every locale gets 4 bodies, its hub links and a 3-question FAQ', () => {
   assert.match(article.content.de.body1, /\/de\/wartezeit-grenze\//);
   assert.match(article.content.en.body2, /\/en\/gasoline-price-switzerland\/today\//);
   assert.match(article.content.fr.body4, /\/fr\/trouver-emploi-tessin\//);
+});
+
+/**
+ * The excerpt is the article's meta description once the corpus reaches the
+ * site, where `tests/seo-description-length.test.ts` hard-fails outside 80–170
+ * characters — and it fails on EVERY branch, not only the one that happened to
+ * be open when the edition landed. The 2026-08-09 edition shipped at 265 and
+ * did exactly that.
+ *
+ * Measured at the LONGEST date label each locale can produce, because that is
+ * the case that has to fit: `22 settembre 2026` is four characters wider than
+ * the `9 agosto 2026` a spot check would use. The band asserted here is the
+ * ideal 130–165, not the hard 170, so a future edit has to eat the headroom
+ * deliberately rather than by accident.
+ */
+test('every locale excerpt fits the site meta-description budget at the longest date', () => {
+  const HARD_MIN = 80, SOFT_MIN = 130, SOFT_MAX = 165, HARD_MAX = 170;
+  for (let month = 1; month <= 12; month++) {
+    const dateIso = `2026-${String(month).padStart(2, '0')}-22`; // two-digit day = widest label
+    const article = buildDailyBriefArticle({ ...BRIEF, dateIso });
+    for (const locale of ['it', 'en', 'de', 'fr']) {
+      const excerpt = article.content[locale].excerpt;
+      const len = excerpt.length;
+      assert.ok(
+        len >= SOFT_MIN && len <= SOFT_MAX,
+        `${locale} excerpt is ${len} chars at ${dateIso} (ideal ${SOFT_MIN}-${SOFT_MAX}, ` +
+          `site hard limit ${HARD_MIN}-${HARD_MAX}): ${excerpt}`,
+      );
+      // The date has to survive any rewrite: an edition ships every morning, so
+      // a template without it gives 365 pages a year one identical description.
+      assert.ok(
+        excerpt.includes(humanDate(dateIso, locale)),
+        `${locale} excerpt dropped its date label at ${dateIso}: ${excerpt}`,
+      );
+    }
+  }
 });
 
 test('a degraded block becomes a note, never a hole', () => {
