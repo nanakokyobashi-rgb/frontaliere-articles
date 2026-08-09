@@ -148,6 +148,7 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
 
 // ── Smarter generator inputs (Phase 3 — spec 2026-05-06) ───────
 // data/article-performance.json is produced weekly by Phase 1A.
@@ -1746,8 +1747,19 @@ function read(rel) {
   return readFileSync(resolve(rel), 'utf-8');
 }
 
+// Write-time guard (issue #66): a `.ts` under content/ must never carry a C0
+// control character other than TAB/LF/CR — they have shown up as the residue
+// of a mangled accented letter or typographic quote (`sar\x170` for «sarà»).
+// This is the single write choke point for the generator, so stripping here
+// is what makes it IMPOSSIBLE for the corpus to receive one, rather than
+// relying on every future write call site to remember to sanitize.
 function write(rel, content) {
-  writeFileSync(resolve(rel), content, 'utf-8');
+  const clean = sanitizeText(content);
+  if (clean !== content) {
+    const found = findControlChars(content);
+    console.error(`  ⚠️  write(${rel}): stripped ${found.length} invalid C0 control character(s) before writing`);
+  }
+  writeFileSync(resolve(rel), clean, 'utf-8');
 }
 
 // ── Section config (--section=frontaliere|svizzera) ──────────────

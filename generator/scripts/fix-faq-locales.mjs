@@ -17,6 +17,18 @@ import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
+import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+
+// Write-time guard (issue #66): strip any C0 control character other than
+// TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
+function writeCorpusFile(filePath, content) {
+  const clean = sanitizeText(content);
+  if (clean !== content) {
+    const found = findControlChars(content);
+    console.error(`  ⚠️  write(${filePath}): stripped ${found.length} invalid C0 control character(s) before writing`);
+  }
+  writeFileSync(filePath, clean, 'utf-8');
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -79,7 +91,7 @@ function replaceFaqInFile(filePath, newFaqArray) {
     /(\.faq['']\s*:\s*[''])((?:[^'\\]|\\.)*)(['']\s*[,}])/,
     (_match, g1, _g2, g3) => g1 + jsonStr + g3
   );
-  writeFileSync(filePath, content, 'utf-8');
+  writeCorpusFile(filePath, content);
 }
 
 function insertFaqKey(filePath, articleId, faqArray) {
@@ -89,7 +101,7 @@ function insertFaqKey(filePath, articleId, faqArray) {
   if (closingIdx === -1) return false;
   const faqLine = `    'blog.article.${articleId}.faq': '${jsonStr}',\n`;
   content = content.slice(0, closingIdx) + faqLine + content.slice(closingIdx);
-  writeFileSync(filePath, content, 'utf-8');
+  writeCorpusFile(filePath, content);
   return true;
 }
 
