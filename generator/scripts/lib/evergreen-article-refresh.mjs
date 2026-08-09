@@ -11,6 +11,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
+import { sanitizeText, findControlChars } from '../../../scripts/lib/sanitize-control-chars.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`, not `../..`. In the site repo this module sits at
@@ -21,6 +22,21 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // digest died after the sitemap writes were no-op'd. The rewire fixed this for
 // the seven ENTRY POINTS but not for the libraries they call.
 const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
+
+// Write-time guard (issue #66): same rule as create-article.mjs write() — a
+// `.ts` under content/ must never carry a C0 control character other than
+// TAB/LF/CR. These two functions rewrite an existing corpus file in place
+// (a date/timestamp substring), so in practice they can only reintroduce a
+// byte the file already carried; the guard is here anyway so this write
+// choke point can't be the one that's missing it.
+function writeCorpusFile(file, content) {
+  const clean = sanitizeText(content);
+  if (clean !== content) {
+    const found = findControlChars(content);
+    console.error(`  ⚠️  write(${file}): stripped ${found.length} invalid C0 control character(s) before writing`);
+  }
+  writeFileSync(file, clean);
+}
 
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */
 export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
@@ -48,7 +64,7 @@ export function bumpUpdatedAt(id, todayIso, repoRoot = DEFAULT_REPO_ROOT) {
   }
   if (block === m[1]) return false;
   src = src.replace(m[1], block);
-  writeFileSync(file, src);
+  writeCorpusFile(file, src);
   return true;
 }
 
@@ -86,7 +102,7 @@ export function bumpDateModified(
   const pub = block.match(/"datePublished":\s*"([^"]*)"/);
   const effective = pub && Date.parse(pub[1]) > Date.parse(isoDateTime) ? pub[1] : isoDateTime;
   const replaced = block.replace(dmRe, `"dateModified": "${effective}"`);
-  writeFileSync(file, src.slice(0, startIdx) + replaced + after.slice(blockEnd));
+  writeCorpusFile(file, src.slice(0, startIdx) + replaced + after.slice(blockEnd));
   return true;
 }
 
