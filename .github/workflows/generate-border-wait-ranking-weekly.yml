@@ -108,7 +108,7 @@ jobs:
       # need sharp's or playwright's postinstall, which are the slowest part of a
       # full install here.
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund --ignore-scripts
+        run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
       # Hard gate, deliberately before anything else: no window, no article.
       - name: Fetch the border-wait ranking window

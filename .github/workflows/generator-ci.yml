@@ -125,7 +125,7 @@ jobs:
       # them every script fails identically on a missing package and the check
       # proves nothing.
       - name: Install generator dependencies
-        run: npm ci --no-audit --no-fund
+        run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund
 
       # generate-border-wait-ranking-article.mjs now REQUIRES the fetched window
       # (it is the article's data). Fetch it first so the dry-run exercises the

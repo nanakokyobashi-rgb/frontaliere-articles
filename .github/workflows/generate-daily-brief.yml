@@ -92,7 +92,7 @@ jobs:
       # --ignore-scripts is safe WITH sharp: its linux binary arrives via the
       # platform-specific optional package, no postinstall needed.
       - name: Install dependencies
-        run: npm ci --no-audit --no-fund --ignore-scripts
+        run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
       # Needed BEFORE generation in every mode: the data snapshot reads
       # Firestore over REST with this service account. Missing SA = config
