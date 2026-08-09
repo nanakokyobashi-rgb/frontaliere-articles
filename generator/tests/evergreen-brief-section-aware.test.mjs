@@ -211,9 +211,22 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
     (src.match(/\$\{EVERGREEN_FACTS_BRIEF\}/g) || []).length, 0,
     'c\'e\' ancora un\'interpolazione diretta di ${EVERGREEN_FACTS_BRIEF}: quel punto ignora la sezione',
   );
+  // ANCORATA al ramo evergreen://, non al file intero. Un'asserzione globale
+  // la soddisfaceva l'ALTRO call-site (`domainFactsBlock`, che non sta sul
+  // percorso evergreen): bastava un'indirezione banale nel ramo evergreen
+  // — `const brief = EVERGREEN_FACTS_BRIEF;` e poi `${brief}` — per rimettere
+  // il brief frontaliero nel prompt svizzero con 12/12 test VERDI. Il falso
+  // verde stava nel guard scritto per impedire proprio quel difetto.
+  const evgAt = src.indexOf("if (url.startsWith('evergreen://'))");
+  assert.ok(evgAt !== -1, 'blocco evergreen:// non trovato — aggiornare questo guard');
+  const evgBlock = src.slice(evgAt, src.indexOf('\n  }', evgAt));
   assert.ok(
-    src.includes('${evergreenFactsBriefFor(SECTION_NAME)}'),
-    'nessun punto di iniezione passa da evergreenFactsBriefFor(SECTION_NAME)',
+    evgBlock.includes('${evergreenFactsBriefFor(SECTION_NAME)}'),
+    'il ramo evergreen:// non passa da evergreenFactsBriefFor(SECTION_NAME)',
+  );
+  assert.equal(
+    (evgBlock.match(/EVERGREEN_FACTS_BRIEF(?![_A-Za-z])/g) || []).length, 0,
+    'il ramo evergreen:// nomina di nuovo il brief frontaliero invece del selettore',
   );
   // Ancorato al blocco di runFactualityGates, non a tutto il file: l'altra
   // chiamata con `sourceText` e' quella di buildSourceContract, che e' gia'
@@ -223,9 +236,13 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
   // implementava l'intento; #96 e' l'altra.
   const gateCall = src.indexOf('runFactualityGates({');
   assert.ok(gateCall !== -1, 'chiamata a runFactualityGates non trovata — aggiornare questo guard');
-  const gateBlock = src.slice(gateCall, gateCall + 1200);
+  // Finestra ampia: il blocco porta un commento lungo che spiega perche' il
+  // ramo evergreen e' esentato, e con 1200 char `sourceText:` ci cadeva fuori
+  // — il guard falliva sul codice CORRETTO, che e' il modo piu' rapido di far
+  // disattivare un guard da chi ha fretta.
+  const gateBlock = src.slice(gateCall, gateCall + 3000);
   assert.ok(
-    gateBlock.includes('sourceText: stripInjectedBriefs(pageContent)'),
+    /sourceText: url\.startsWith\('evergreen:\/\/'\) \? '' : pageContent/.test(gateBlock),
     'runFactualityGates riceve di nuovo pageContent nudo: il brief e\' tornato nel denominatore del gate di recall',
   );
   assert.equal(
