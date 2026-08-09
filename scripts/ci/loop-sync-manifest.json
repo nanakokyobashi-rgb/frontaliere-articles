@@ -151,9 +151,9 @@
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7a2599a9bae3c9c3",
-        "corpus": "7a2599a9bae3c9c3",
-        "alignedAt": "2026-08-07"
+        "site": "0a14e92c9b7e83c3",
+        "corpus": "0a14e92c9b7e83c3",
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -178,9 +178,9 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "229470d3fca385ad",
-        "corpus": "229470d3fca385ad",
-        "alignedAt": "2026-08-07"
+        "site": "a21b17334add07fc",
+        "corpus": "a21b17334add07fc",
+        "alignedAt": "2026-08-09"
       }
     },
     {
