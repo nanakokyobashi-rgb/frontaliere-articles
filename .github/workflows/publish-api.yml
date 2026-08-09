@@ -51,6 +51,32 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # MISURATO 2026-08-09: la run riuscita piu' recente (31315163937) impiega 44s
+    # in totale, di cui 6s per "Build data surface" e 22s per la spinta all'edge.
+    # 20 minuti sono ~27x il caso normale: non tagliano niente di sano, e tagliano
+    # un job appeso. Questo workflow e `generator-ci.yml` erano gli unici due dei
+    # 31 senza `timeout-minutes`, e qui l'assenza pesa il doppio: la concurrency
+    # `publish-api` NON cancella (`cancel-in-progress: false`), quindi un job
+    # appeso non fallisce — mette in coda ogni pubblicazione successiva dietro di
+    # se'. Il default di GitHub e' 6 ORE.
+    #
+    # Il retry aggiunto sotto rende il tetto necessario, non solo prudente:
+    # 3 tentativi con backoff lineare allungano il caso peggiore, e senza un
+    # tetto sarebbero 3 tentativi da 6 ore.
+    #
+    # 20 e' un BUDGET, scelto piu' corto del caso peggiore teorico della scala
+    # di retry (3 tentativi del wrapper x i 5 fetch-retry di npm possono, su una
+    # rete davvero giu', superarlo). E' voluto: se la rete e' giu' da venti
+    # minuti, rimandare alla pubblicazione successiva costa una finestra di
+    # staleness di circa mezz'ora — mentre un job che resta appeso quaranta
+    # minuti blocca dietro di se' OGNI pubblicazione, perche' questa concurrency
+    # non cancella. Meglio tagliare la scala che tenere la coda ferma.
+    #
+    # Nota: un job fermato da `timeout-minutes` risulta `cancelled`, non
+    # `failure`, quindi i reporter con `if: failure()` non lo vedono; a coprirlo
+    # e' il cron di scan-job-timeouts.mjs. Il tetto serve comunque: e' cio' che
+    # fa finire il job.
+    timeout-minutes: 20
     environment:
       name: github-pages
       url: ${{ steps.deploy.outputs.page_url }}
@@ -60,6 +86,67 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: '22'
+          # La meta' strutturale della mitigazione di #98, e quella che conta di
+          # piu': il retry accorcia le probabilita', la cache toglie la richiesta.
+          # Senza questa riga NIENTE in questo job era cachato — ne' `npx -y
+          # tsx@4` (che risolve e scarica tsx dal registro a OGNI run) ne'
+          # l'install del parser qui sotto. `cache: 'npm'` conserva `~/.npm`, che
+          # include sia la cache dei tarball sia `_npx/`: a cache calda entrambi
+          # i comandi sono serviti da disco.
+          # La chiave e' l'hash di package-lock.json, che questo repo ha e che
+          # cambia di rado.
+          cache: 'npm'
+
+      # ── PREFLIGHT: la sintassi dei corpi articolo ────────────────────────────
+      #
+      # Perche' QUI e non in tests.yml, con le due misure che lo decidono:
+      #
+      #  1. `tests.yml` gira su `pull_request` e `push: branches-ignore: [main]`.
+      #     Gli articoli atterrano per PUSH DIRETTO su main. MISURATO: gli ultimi
+      #     commit su main che toccano content/blog-body ("Generate blog article")
+      #     hanno 0 PR associate, e delle ultime 30 run di tests.yml NESSUNA e' su
+      #     main. Un gate sulle PR non vedrebbe mai un articolo.
+      #  2. `tests.yml` e' dependency-free per progetto (nessun npm ci, commento
+      #     esplicito nel file) e questo controllo ha bisogno di un parser.
+      #
+      # E perche' un gate serve, dato che questo job non ne ha bisogno:
+      # MISURATO, `scripts/build-api.mjs` non contiene la stringa `blog-body`
+      # nemmeno una volta — carica registri, meta, router e content/seo, mai un
+      # corpo. Quindi un corpo rotto NON rompe questa superficie: nasce qui e
+      # detona sul SITO, nei quattro job build-locale. Il 2026-07-29 un apostrofo
+      # non scappato in un corpo FR svizzera ha ucciso ogni deploy del sito
+      # finche' qualcuno non l'ha trovato leggendo i log di build.
+      #
+      # Il gate sta PRIMA delle credenziali e del build apposta: se un corpo e'
+      # rotto si scopre in una decina di secondi, senza montare segreti ne'
+      # produrre un artefatto da buttare.
+      - name: Install the preflight parser (esbuild)
+        env:
+          # Pin ESATTO, non un range. Un gate che cambia parser da solo puo'
+          # iniziare a rifiutare qualcosa senza che nessuno abbia toccato una
+          # riga, e questo gate ferma le pubblicazioni. La versione insegue
+          # quella con cui il SITO builda davvero (misurato: esbuild 0.25.12 nel
+          # suo node_modules, via vite): l'oracolo del gate deve essere il
+          # compilatore che poi si rompe, non un altro.
+          ESBUILD_PIN: esbuild@0.25.12
+        run: |
+          set -euo pipefail
+          # In una directory ISOLATA, non nella radice del repo: `npm install`
+          # qui dentro tirerebbe anche le 7 dipendenze di package.json —
+          # playwright, sharp e @huggingface/transformers comprese — cioe'
+          # esattamente il download fuori registro che #77 ha pagato caro.
+          mkdir -p "$RUNNER_TEMP/preflight"
+          cd "$RUNNER_TEMP/preflight"
+          printf '{"name":"preflight-parser","private":true}\n' > package.json
+          # --prefer-offline: a cache calda (vedi `cache: 'npm'` sopra) il
+          # tarball arriva da disco e la rete non viene toccata affatto.
+          bash "$GITHUB_WORKSPACE/scripts/ci/retry-cmd.sh" \
+            npm install --no-save --no-audit --no-fund --prefer-offline --loglevel=error "$ESBUILD_PIN"
+
+      - name: Preflight — i corpi articolo devono parsare come TypeScript
+        env:
+          PREFLIGHT_ESBUILD_DIR: ${{ runner.temp }}/preflight
+        run: node scripts/ci/check-blog-body-syntax.mjs
 
       # Remote Config holds the R2 and Cloudflare credentials the edge push
       # below needs. Without these two steps that push would find no
@@ -88,8 +175,21 @@ jobs:
 
       # tsx, not plain node: the corpus sources use extensionless relative
       # specifiers, which plain Node ESM does not resolve.
+      #
+      # Attraverso il wrapper di retry (issue #98). `npx -y` risolve e SCARICA
+      # tsx dal registro npm; qui un ETIMEDOUT non costa un articolo, costa la
+      # pubblicazione dell'intera superficie dati — manifest, articles.json,
+      # slugs.json, le due sitemap blog, i dieci feed RSS, il ticker.
+      #
+      # Ritentare l'INTERO comando (non solo il download) e' sicuro, e non e'
+      # una deduzione: build-api.mjs fa `fs.rmSync(OUT, {recursive, force})`
+      # sulla propria cartella di output alla riga 71 prima di scrivere qualunque
+      # cosa. E' la stessa proprieta' che rende corretto ritentare `npm ci`, ed
+      # e' cio' che impedisce a un tentativo interrotto di lasciare un
+      # `dist/api/` mezzo vecchio e mezzo nuovo.
+      # Costa poco anche quando non serve: misurato, questo step dura 6s.
       - name: Build data surface
-        run: npx -y tsx@4 scripts/build-api.mjs
+        run: bash scripts/ci/retry-cmd.sh npx -y tsx@4 scripts/build-api.mjs
 
       # The runtime index the SITE's article LISTS read. Publishing an article
       # to its shard makes its own URL live in a minute; it does not put it in
