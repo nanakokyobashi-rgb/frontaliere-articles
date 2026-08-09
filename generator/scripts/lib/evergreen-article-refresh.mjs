@@ -11,7 +11,8 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
-import { sanitizeText, findControlChars } from '../../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './control-char-write-report.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../../..`, not `../..`. In the site repo this module sits at
@@ -31,10 +32,10 @@ const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 // choke point can't be the one that's missing it.
 function writeCorpusFile(file, content) {
   const clean = sanitizeText(content);
-  if (clean !== content) {
-    const found = findControlChars(content);
-    console.error(`  ⚠️  write(${file}): stripped ${found.length} invalid C0 control character(s) before writing`);
-  }
+  // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+  // esatta una riparazione futura (issue #95). Si registra prima, con il
+  // contesto che conserva la coppia (byte, carattere seguente).
+  reportStrippedControlChars(file, content, clean);
   writeFileSync(file, clean);
 }
 

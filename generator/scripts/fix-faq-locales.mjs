@@ -17,16 +17,17 @@ import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
-import { sanitizeText, findControlChars } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
 function writeCorpusFile(filePath, content) {
   const clean = sanitizeText(content);
-  if (clean !== content) {
-    const found = findControlChars(content);
-    console.error(`  ⚠️  write(${filePath}): stripped ${found.length} invalid C0 control character(s) before writing`);
-  }
+  // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
+  // esatta una riparazione futura (issue #95). Si registra prima, con il
+  // contesto che conserva la coppia (byte, carattere seguente).
+  reportStrippedControlChars(filePath, content, clean);
   writeFileSync(filePath, clean, 'utf-8');
 }
 

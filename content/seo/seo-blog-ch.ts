@@ -25484,6 +25484,279 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-terzo-pilastro-3a-vantaggi-svizzera': {
+    title: 'Terzo pilastro 3a: vantaggi fiscali reali in Svizzera',
+    description: 'Il terzo pilastro 3a in Svizzera offre vantaggi fiscali reali ai contribuenti, ma è importante comprendere le differenze tra le opzioni bancarie e assicurative.',
+    keywords: 'frontalieri, ticino, svizzera, italia, terzo, pilastro, vantaggi, fiscali',
+    ogTitle: 'Terzo pilastro 3a: vantaggi fiscali reali in Svizzera',
+    ogDescription: 'Il terzo pilastro 3a in Svizzera offre vantaggi fiscali reali ai contribuenti, ma è importante comprendere le differenze tra le opzioni bancarie e assicurative.',
+    canonicalPath: '/articoli-svizzera/terzo-pilastro-3a-vantaggi-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Terzo pilastro 3a: vantaggi fiscali reali in Svizzera",
+      "description": "Il terzo pilastro 3a in Svizzera offre vantaggi fiscali reali ai contribuenti, ma è importante comprendere le differenze tra le opzioni bancarie e assicurative.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/terzo-pilastro-3a-vantaggi-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una scena fotorealistica di una località turistica sul lago di Lugano, con un lago cristallino e montagne circostanti."
+      },
+      "datePublished": "2026-08-09T17:53:25+00:00",
+      "dateModified": "2026-08-09T17:53:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/terzo-pilastro-3a-vantaggi-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-secondo-pilastro-lpp-guida-completa-svizzera': {
+    title: 'LPP: guida ai contributi e al riscatto lacune | Frontaliere Ticino',
+    description: 'La guida completa al secondo pilastro LPP per i cittadini svizzeri. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, contributi, riscatto, lacune, completa',
+    ogTitle: 'Secondo pilastro LPP: guida completa Svizzera',
+    ogDescription: 'La guida completa al secondo pilastro LPP per i cittadini svizzeri',
+    canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-guida-completa-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "LPP: guida ai contributi e al riscatto lacune",
+      "description": "La guida completa al secondo pilastro LPP per i cittadini svizzeri. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/secondo-pilastro-lpp-guida-completa-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una guida completa al secondo pilastro LPP per i cittadini svizzeri"
+      },
+      "datePublished": "2026-08-09T17:59:47+00:00",
+      "dateModified": "2026-08-09T17:59:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/secondo-pilastro-lpp-guida-completa-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-a2-ancora-al-collasso': {
+    title: 'Ticino non ostaggio del traffico | Frontaliere Ticino',
+    description: 'L\'autostrada A2 è stata chiusa per ore dopo un grave incidente a Mezzovico, generando un effetto domino che ha paralizzato il Sottoceneri. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, ostaggio, traffico, autostrada, stata',
+    ogTitle: 'A2 ancora al collasso: «Il Ticino non può essere ostaggio del traffico di transito»',
+    ogDescription: 'L\'autostrada A2 è stata chiusa per ore dopo un grave incidente a Mezzovico, generando un effetto domino che ha paralizzato il Sottoceneri.',
+    canonicalPath: '/articoli-svizzera/a2-ancora-al-collasso/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino non ostaggio del traffico",
+      "description": "L'autostrada A2 è stata chiusa per ore dopo un grave incidente a Mezzovico, generando un effetto domino che ha paralizzato il Sottoceneri. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/a2-ancora-al-collasso.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontalieri bloccati sulla A2 a Mezzovico. Foto realistica DSLR."
+      },
+      "datePublished": "2026-08-09T18:48:45+00:00",
+      "dateModified": "2026-08-09T18:48:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/a2-ancora-al-collasso/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permessi-di-soggiorno-svizzera-tipologie-b-c-l': {
+    title: 'Permessi di soggiorno in Svizzera: differenze tra permesso B, C e L',
+    description: 'Le differenze tra i permessi di soggiorno B, C e L in Svizzera e i requisiti per ottenere uno di essi. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permessi, soggiorno, differenze, permesso',
+    ogTitle: 'Permessi di soggiorno in Svizzera: differenze tra permesso B, C e L',
+    ogDescription: 'Le differenze tra i permessi di soggiorno B, C e L in Svizzera e i requisiti per ottenere uno di essi',
+    canonicalPath: '/articoli-svizzera/permessi-di-soggiorno-svizzera-tipologie-b-c-l/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permessi di soggiorno in Svizzera: differenze tra permesso B, C e L",
+      "description": "Le differenze tra i permessi di soggiorno B, C e L in Svizzera e i requisiti per ottenere uno di essi. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permessi-di-soggiorno-svizzera-tipologie-b-c-l.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scena di una persona che riceve un permesso di soggiorno in Svizzera"
+      },
+      "datePublished": "2026-08-09T19:47:34+00:00",
+      "dateModified": "2026-08-09T19:47:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permessi-di-soggiorno-svizzera-tipologie-b-c-l/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-aprire-attivita-svizzera-guida-pratica': {
+    title: 'Aprire un\'attività in Svizzera: cosa serve | Frontaliere Ticino',
+    description: 'La procedura di apertura di un\'attività in Svizzera può variare a seconda del settore e delle esigenze dell\'attività. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, aprire, attività, cosa, serve',
+    ogTitle: 'Aprire un\'attività in Svizzera: forma giuridica, registro di commercio, capitale minimo, differenze cantonali e oneri fiscali',
+    ogDescription: 'La procedura di apertura di un\'attività in Svizzera può variare a seconda del settore e delle esigenze dell\'attività.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-svizzera-guida-pratica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Aprire un'attività in Svizzera: cosa serve",
+      "description": "La procedura di apertura di un'attività in Svizzera può variare a seconda del settore e delle esigenze dell'attività. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-svizzera-guida-pratica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida pratica per aprire un'attività in Svizzera."
+      },
+      "datePublished": "2026-08-09T19:57:35+00:00",
+      "dateModified": "2026-08-09T19:57:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-svizzera-guida-pratica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trasporti-pubblici-svizzera-abbonamenti-sconti': {
+    title: 'Abbonamenti trasporto pubblico in Svizzera: costi e vantaggi',
+    description: 'Scopri i dettagli sugli abbonamenti di trasporto pubblico in Svizzera, inclusi AG, mezza tariffa, abbonamenti cantonali e comunitari. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, abbonamenti, trasporto, pubblico, costi',
+    ogTitle: 'Guida agli abbonamenti di trasporto pubblico in Svizzera',
+    ogDescription: 'Scopri i dettagli sugli abbonamenti di trasporto pubblico in Svizzera, inclusi AG, mezza tariffa, abbonamenti cantonali e comunitari.',
+    canonicalPath: '/articoli-svizzera/trasporti-pubblici-svizzera-abbonamenti-sconti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Abbonamenti trasporto pubblico in Svizzera: costi e vantaggi",
+      "description": "Scopri i dettagli sugli abbonamenti di trasporto pubblico in Svizzera, inclusi AG, mezza tariffa, abbonamenti cantonali e comunitari. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasporti-pubblici-svizzera-abbonamenti-sconti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Persona che si dirige verso un treno in una stazione ferroviaria svizzera"
+      },
+      "datePublished": "2026-08-09T20:15:42+00:00",
+      "dateModified": "2026-08-09T20:15:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/trasporti-pubblici-svizzera-abbonamenti-sconti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-imposta-cantonale-confronto-svizzera-2026-canton-ginevra': {
+    title: 'Cantoni svizzeri: confronto aliquote imposta e strategie di ottimizzazione',
+    description: 'Il canton Ginevra ha mantenuto le aliquote attuali per i redditi inferiori a CHF 50.000 e non ha modificato l\'aliquota per i redditi superiori a CHF 100.000.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantoni, svizzeri, confronto, aliquote',
+    ogTitle: 'Confronto 2026 delle aliquote di imposta cantonale in Svizzera: differenze tra cantoni, scaglioni e strategie di ottimizzazione lecita. Focus sul canton Ginevra con dati specifici e confronto nazionale.',
+    ogDescription: 'Il canton Ginevra ha mantenuto le aliquote attuali per i redditi inferiori a CHF 50.000 e non ha modificato l\'aliquota per i redditi superiori a CHF 100.000. Il confronto con gli altri cantoni rivela differenze significative nelle aliquote',
+    canonicalPath: '/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-ginevra/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cantoni svizzeri: confronto aliquote imposta e strategie di ottimizzazione",
+      "description": "Il canton Ginevra ha mantenuto le aliquote attuali per i redditi inferiori a CHF 50.000 e non ha modificato l'aliquota per i redditi superiori a CHF 100.000.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-ginevra.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una vista della città di Ginevra con il lago Lemano in primo piano."
+      },
+      "datePublished": "2026-08-09T20:34:44+00:00",
+      "dateModified": "2026-08-09T20:34:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposta-cantonale-confronto-svizzera-2026-canton-ginevra/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

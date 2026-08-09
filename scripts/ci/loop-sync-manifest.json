@@ -972,11 +972,11 @@
     {
       "path": "scripts/lib/sanitize-control-chars.mjs",
       "mode": "corpus-only",
-      "reason": "Guardia di confine sull'output degli emitter (0x08/0x17 nei titoli sorgente). Non esiste sul sito: il sito rende le sue pagine dal proprio build e non emette ne' sitemap-blog.xml ne' i meta-*.json di questa superficie, che sono prodotti solo qui. Il difetto era misurato QUI (sitemap non well-formed, structured data inquinato sulla pagina live), e qui vivono i tre emitter che la usano: build-api.mjs, build-blog-index.mjs, publish-article-fast.mjs.",
+      "reason": "Sanificazione dei control character in uscita, portata da #65. E' corpus-only per un FATTO, non per scelta: sul sito il file non esiste (404 verificato). Era stato registrato 'identical' da #118 in previsione della PR gemella sul sito, che pero' e' stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB). Un manifest che dichiara 'identical' su un file inesistente asserisce il falso e produce un site-behind permanente. La divergenza vera resta aperta e tracciata: il sito emette grezze le 279 occorrenze rimaste mentre il corpus le strippa — valerielinc-ops#5457. Quando la meta' del sito atterra, questa voce torna 'identical' con la baseline reale.",
       "baseline": {
         "site": null,
         "corpus": "61f6e2723fabdad7",
-        "alignedAt": "2026-08-08"
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -1700,6 +1700,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/control-char-write-report.mjs",
+      "mode": "corpus-only",
+      "reason": "Rende rumoroso e recuperabile lo strip dei control character in scrittura (#95). Vive solo qui: e' il generatore ad avere i sette choke point di scrittura portati da #75, e il sito non genera articoli. La sanificazione condivisa e' scripts/lib/sanitize-control-chars.mjs, che e' un'altra voce.",
+      "baseline": {
+        "site": null,
+        "corpus": "b15e05c286a34620",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "generator/scripts/lib/meta-field-regex.mjs",
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "identical",
@@ -1726,6 +1736,16 @@
       "baseline": {
         "site": "7346e5a9a16de480",
         "corpus": "7346e5a9a16de480",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/topic-coverage-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate «argomento gia' coperto»: blocca una seconda guida sullo stesso mestiere entro 90 giorni. Nato da un difetto osservato QUI (tre guide-piastrellista il 2026-08-09, di cui due a 24 minuti di distanza) e da un pool — `buildProfessionEvergreenTopics` — che emette due candidati per mestiere per costruzione. Non ha omonimo sul sito. E' deliberatamente un file NUOVO invece di un ritocco a `it-text-similarity.mjs`/`dup-stoplist.mjs`/`scoring/constants.mjs`, che sono tutti `identical`: la fix li' sarebbe dovuta partire dal sito e scendere col mirror, mentre il difetto e' in produzione qui. Se il sito vorra' lo stesso gate, questo file e' portabile cosi' com'e' (dipende solo da `profession-taxonomy.mjs`).",
+      "baseline": {
+        "site": null,
+        "corpus": "58011f21c0ea671d",
         "alignedAt": "2026-08-09"
       }
     },
@@ -2223,6 +2243,25 @@
       "baseline": {
         "site": null,
         "corpus": "895c4f20d97f14a2",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/lib/control-char-publish-gate.mjs",
+      "mode": "not-ported",
+      "reason": "Meta' SITO della coppia: rifiuta di pubblicare un file reso che porta un control character, invece di ripulirlo. Deliberatamente non portato qui, perche' qui sarebbe la politica SBAGLIATA: questo repo emette sitemap-blog.xml, dove un C0 puo' far rifiutare l'intero documento a un consumatore severo (3120 URL su due byte), quindi strippare e' il male minore. Il sito emette pagine una alla volta sugli shard, dove rifiutare costa esattamente la pagina rifiutata: la' il rifiuto e' possibile, e quindi obbligatorio, perche' strippare sovrascriverebbe una pagina servita CORRETTA con una riparata a meta'. Misurato il 2026-08-09 su lavena-ponte-tresa-territorio-poroso: sorgente `Il <0x08>3territorio poroso<0x08>3`, meta-it.json pubblicato `Il 3territorio poroso3`, pagina live `Il territorio poroso` — la live e' giusta, e un gate che strippa la romperebbe.",
+      "baseline": {
+        "site": "fbe142331dc24c6c",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "scripts/publish-article-fast.mjs",
+      "mode": "adapted",
+      "reason": "IL PUNTO CIECO CHE HA PERMESSO LA #5457. L'intestazione della copia di QUESTO repo dichiara «This repo is a SEPARATE COPY of the site's scripts/publish-article-fast.mjs» e chiede «If either copy is touched, touch both» — ma la dichiarazione esiste solo da questo lato, il file non era nel manifest, e nessun meccanismo la faceva rispettare. Cosi' la #65 ha cablato sanitizeHtmlDocument nei writeFileSync di questa copia (righe 292-293) e la copia del sito e' rimasta senza, agli stessi identici punti di scrittura, per giorni. E' la stessa classe gia' misurata sull'ordine render/offload, dove l'archivio live alternava sano e rotto a seconda di chi aveva pubblicato. `adapted` e non `identical` perche' divergono davvero e per costruzione (445 righe qui contro 333 la', 298 righe di diff): percorsi di render diversi, dipendenze diverse, e ora anche politiche diverse sui control character — qui si sanifica, la' si rifiuta (scripts/lib/control-char-publish-gate.mjs). Sorvegliato proprio perche' adattato: e' sui file adattati che una modifica di un lato si perde, «tanto e' diverso apposta».",
+      "baseline": {
+        "site": "418dc711cb6be62b",
+        "corpus": "d61863a86e162c7f",
         "alignedAt": "2026-08-09"
       }
     }

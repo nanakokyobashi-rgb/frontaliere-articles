@@ -61418,6 +61418,279 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-agente-sicurezza-ticino-frontaliere': {
+    title: 'Agente di sicurezza in Ticino: requisiti e lavoro da frontaliere',
+    description: 'Lavorare come agente di sicurezza in Ticino da frontaliere: scopri requisiti, permesso G, tassazione e gestione contributi sociali con il nuovo accordo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, agente, sicurezza, requisiti, lavoro',
+    ogTitle: 'Agente di sicurezza in Ticino: requisiti e lavoro da frontaliere',
+    ogDescription: 'Guida completa per frontalieri che vogliono lavorare nella sicurezza privata in Ticino: permessi, fisco e previdenza spiegati in modo semplice.',
+    canonicalPath: '/articoli-frontaliere/agente-sicurezza-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Agente di sicurezza in Ticino: requisiti e lavoro da frontaliere",
+      "description": "Lavorare come agente di sicurezza in Ticino da frontaliere: scopri requisiti, permesso G, tassazione e gestione contributi sociali con il nuovo accordo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/agente-sicurezza-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Agente di sicurezza in servizio presso un edificio in Ticino"
+      },
+      "datePublished": "2026-08-09T17:56:26+00:00",
+      "dateModified": "2026-08-09T17:56:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/agente-sicurezza-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-lavoro-autista-frontaliere-ticino': {
+    title: 'Frontaliere autista in Ticino: stipendio e requisiti',
+    description: 'Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e nuovo accordo fiscale 2026. Scopri cosa sapere.',
+    keywords: 'frontalieri, ticino, svizzera, italia, autista, stipendio, requisiti, completa',
+    ogTitle: 'Frontaliere autista in Ticino: guida a stipendio e requisiti',
+    ogDescription: 'Tutto quello che un autista deve sapere per lavorare in Ticino: fisco, contributi, assicurazioni e le novità del nuovo accordo fiscale 2026.',
+    canonicalPath: '/articoli-frontaliere/guida-lavoro-autista-frontaliere-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere autista in Ticino: stipendio e requisiti",
+      "description": "Guida pratica per autisti frontalieri in Ticino: stipendio, imposta alla fonte, previdenza AVS/LPP e nuovo accordo fiscale 2026. Scopri cosa sapere.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-lavoro-autista-frontaliere-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Autista professionale al lavoro in Ticino con vista panoramica"
+      },
+      "datePublished": "2026-08-09T18:44:56+00:00",
+      "dateModified": "2026-08-09T18:44:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/guida-lavoro-autista-frontaliere-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-a2-traffico-ticino-interrogazione': {
+    title: 'A2 al collasso: interrogazione sul traffico di transito',
+    description: 'Dopo l\'incidente a Mezzovico, Avanti con Ticino&Lavoro chiede misure concrete per limitare i disagi del traffico di puro transito sull\'A2. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, collasso, interrogazione, traffico, transito',
+    ogTitle: 'A2 al collasso: interrogazione sul traffico di transito',
+    ogDescription: 'Dopo l\'incidente a Mezzovico, Avanti con Ticino&Lavoro chiede misure concrete per limitare i disagi del traffico di puro transito sull\'A2.',
+    canonicalPath: '/articoli-frontaliere/a2-traffico-ticino-interrogazione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "A2 al collasso: interrogazione sul traffico di transito",
+      "description": "Dopo l'incidente a Mezzovico, Avanti con Ticino&Lavoro chiede misure concrete per limitare i disagi del traffico di puro transito sull'A2. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/a2-traffico-ticino-interrogazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Traffico intenso sull'autostrada A2 in Ticino"
+      },
+      "datePublished": "2026-08-09T18:52:02+00:00",
+      "dateModified": "2026-08-09T18:52:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/a2-traffico-ticino-interrogazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontaliere-cameriere-ticino-stipendio-requisiti': {
+    title: 'Camerieri frontaliere: stipendio, requisiti e riconoscimento titolo',
+    description: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino. I requisiti per ottenere il permesso G sono stati',
+    keywords: 'frontalieri, ticino, svizzera, italia, camerieri, stipendio, requisiti, riconoscimento',
+    ogTitle: 'Lavorare come cameriere in Ticino da frontaliere: stipendio medio, requisiti, eventuale riconoscimento del titolo di studio, permesso G.',
+    ogDescription: 'Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino. I requisiti per ottenere il permesso G sono stati modificati.',
+    canonicalPath: '/articoli-frontaliere/frontaliere-cameriere-ticino-stipendio-requisiti',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Camerieri frontaliere: stipendio, requisiti e riconoscimento titolo",
+      "description": "Il nuovo Accordo Frontalieri prevede un aumento dello stipendio medio dei camerieri frontalieri in Ticino. I requisiti per ottenere il permesso G sono stati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontaliere-cameriere-ticino-stipendio-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un cameriere in un ristorante a Lugano."
+      },
+      "datePublished": "2026-08-09T19:38:59+00:00",
+      "dateModified": "2026-08-09T19:38:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontaliere-cameriere-ticino-stipendio-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bideau-locarno-film-festival': {
+    title: 'Jean-luc bideau omaggiato al Locarno film festival',
+    description: 'L\'attore Jean-Luc Bideau omaggiato a Locarno. Il festival ospita anche il regista Giovanni Tortorici con il film Ketticè. Scopri le novità della kermesse.',
+    keywords: 'frontalieri, ticino, svizzera, italia, jean-luc, bideau, omaggiato, locarno',
+    ogTitle: 'Jean-Luc Bideau premiato al Locarno Film Festival',
+    ogDescription: 'Jean-Luc Bideau riceve un prestigioso riconoscimento al Locarno Film Festival. Presentato anche il film Ketticè di Giovanni Tortorici. Leggi le ultime dal festival.',
+    canonicalPath: '/articoli-frontaliere/bideau-locarno-film-festival',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Jean-luc bideau omaggiato al Locarno film festival",
+      "description": "L'attore Jean-Luc Bideau omaggiato a Locarno. Il festival ospita anche il regista Giovanni Tortorici con il film Ketticè. Scopri le novità della kermesse.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bideau-locarno-film-festival.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Atmosfera notturna al Locarno Film Festival in Piazza Grande."
+      },
+      "datePublished": "2026-08-09T19:50:11+00:00",
+      "dateModified": "2026-08-09T19:50:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bideau-locarno-film-festival/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-trasquera-lavorare-ticino': {
+    title: 'Vivere a Trasquera e lavorare in Ticino da frontaliere',
+    description: 'Guida per frontalieri: tassazione, nuovo accordo fiscale, franchigie e gestione del reddito tra Trasquera e il Canton Ticino. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, trasquera, lavorare, pratica',
+    ogTitle: 'Vivere a Trasquera e lavorare in Ticino: guida fiscale',
+    ogDescription: 'Tutto quello che i frontalieri devono sapere su tassazione, franchigie e previdenza tra Italia e Svizzera dopo il nuovo accordo del 2024.',
+    canonicalPath: '/articoli-frontaliere/vivere-trasquera-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Trasquera e lavorare in Ticino da frontaliere",
+      "description": "Guida per frontalieri: tassazione, nuovo accordo fiscale, franchigie e gestione del reddito tra Trasquera e il Canton Ticino. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-trasquera-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio alpino al confine tra Italia e Svizzera"
+      },
+      "datePublished": "2026-08-09T20:00:50+00:00",
+      "dateModified": "2026-08-09T20:00:50+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-trasquera-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro': {
+    title: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
+    description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, maccagno, pino, veddasca',
+    ogTitle: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
+    ogDescription: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono i pro e i contro di questo trasferimento?',
+    canonicalPath: '/articoli-frontaliere/trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro",
+      "description": "Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una vista della città di Maccagno con Pino e Veddasca, in Italia"
+      },
+      "datePublished": "2026-08-09T20:29:17+00:00",
+      "dateModified": "2026-08-09T20:29:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

@@ -103,16 +103,38 @@ export function escapeForSingleQuoteTS(s) {
  *   `data.content[locale][field]`  — dove stanno title/excerpt e i body
  *   `data[field][locale]`          — dove sta imageAlt (mappa per locale)
  *
- * Un campo assente, non-stringa o vuoto NON viene emesso: una chiave con valore
- * vuoto e' peggio di una chiave assente, perche' un consumatore che fa
- * `meta?.seoDescription || fallback` la tratta come fallback ma un consumatore
- * che fa `'seoDescription' in meta` no.
+ * La regola di presenza NON e' unica: e' quella che aveva ciascun campo nel
+ * vecchio `buildMetaBlock` dentro `create-article.mjs`, prima che questo modulo
+ * lo sostituisse (#117).
+ *
+ *   - `title`/`excerpt` (META_ALWAYS_EMITTED): il vecchio codice non faceva
+ *     ALCUN controllo di presenza — usava `c.title`/`c.excerpt` cosi' come
+ *     stavano, `escapeForSingleQuoteTS` collassava solo `undefined`/`null`/`''`
+ *     a stringa vuota. Un valore whitespace-only era truthy e usciva intatto.
+ *   - `imageAlt`: il vecchio codice era `if (alt)` — falsy solo sulla stringa
+ *     vuota, quindi whitespace-only era gia' sufficiente per emetterlo.
+ *   - `seoDescription`/`ogDescription` (META_SEO_FIELDS, nuovi con #117): qui
+ *     il trim e' voluto, non un refuso — un valore whitespace-only e' trattato
+ *     come assente ed e' cio' che pinna il test "un campo vuoto o assente non
+ *     produce una chiave vuota".
+ *
+ * Trattarli tutti con lo stesso trim (come faceva una versione precedente di
+ * questa funzione) rompeva il claim "byte-identico a prima" per title/excerpt/
+ * imageAlt whitespace-only: un caso degenere, ma la garanzia di
+ * retrocompatibilita' vale anche li'.
  */
 function readLocaleField(data, locale, field) {
-  const fromContent = data?.content?.[locale]?.[field];
-  if (typeof fromContent === 'string' && fromContent.trim() !== '') return fromContent;
-  const fromMap = data?.[field]?.[locale];
-  if (typeof fromMap === 'string' && fromMap.trim() !== '') return fromMap;
+  const isAlwaysEmitted = META_ALWAYS_EMITTED.includes(field);
+  const isSeoField = META_SEO_FIELDS.includes(field);
+  for (const raw of [data?.content?.[locale]?.[field], data?.[field]?.[locale]]) {
+    if (typeof raw !== 'string') continue;
+    if (isAlwaysEmitted) return raw;
+    if (isSeoField) {
+      if (raw.trim() !== '') return raw;
+    } else if (raw !== '') {
+      return raw;
+    }
+  }
   return null;
 }
 

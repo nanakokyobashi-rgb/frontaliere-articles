@@ -682,6 +682,13 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'terzo-pilastro-3a-svizzero-vantaggi-canton-lucerna': { it: 'terzo-pilastro-3a-svizzero-vantaggi-canton-lucerna', en: 'slug-terzo-pilastro-3a-switzerland', de: 'slug-terzo-pilastro-3a-schweiz', fr: 'slug-terzo-pilastro-3a-suisse' },
  'autostrada-riapertura-ticino': { it: 'autostrada-riapertura-ticino', en: 'a2-highway-riopening-ticino', de: 'a2-autobahn-wiedereroffnung-tessin', fr: 'autoroute-a2-ouverture-again-tessin' },
  'sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea': { it: 'sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea', en: 'swiss-healthcare-system-lamal-guide-2026-canton-basel', de: 'schweizer-gesundheitssystem-lamal-anleitung-2026-kanton-basel', fr: 'systeme-de-sante-suisse-lamal-guide-2026-canton-de-bale' },
+ 'terzo-pilastro-3a-vantaggi-svizzera': { it: 'terzo-pilastro-3a-vantaggi-svizzera', en: 'third-pillar-3a-benefits-switzerland', de: 'dritter-saule-3a-vorteile-schweiz', fr: 'troisieme-pilier-3a-avantages-suisse' },
+ 'secondo-pilastro-lpp-guida-completa-svizzera': { it: 'secondo-pilastro-lpp-guida-completa-svizzera', en: 'second-pillar-lpp-complete-guide-switzerland', de: 'zweite-saeule-lpp-umfassende-anleitung-schweiz', fr: 'deuxieme-pilier-lpp-guide-complete-suisse' },
+ 'a2-ancora-al-collasso': { it: 'a2-ancora-al-collasso', en: 'a2-still-blocked', de: 'a2-noch-im-stau', fr: 'a2-encore-bloque' },
+ 'permessi-di-soggiorno-svizzera-tipologie-b-c-l': { it: 'permessi-di-soggiorno-svizzera-tipologie-b-c-l', en: 'swiss-residence-permits', de: 'schweizer-wohnerlaubnisse', fr: 'permis-de-sejour-suisse' },
+ 'aprire-attivita-svizzera-guida-pratica': { it: 'aprire-attivita-svizzera-guida-pratica', en: 'opening-business-switzerland', de: 'geschaeft-in-schweiz-eroffnen', fr: 'ouvrir-entreprise-suisse' },
+ 'trasporti-pubblici-svizzera-abbonamenti-sconti': { it: 'trasporti-pubblici-svizzera-abbonamenti-sconti', en: 'public-transport-switzerland-subscriptions-discounts', de: 'oeffentliche-verkehr-schweiz-abos-rabatte', fr: 'transport-en-commun-suisse-abonnements-rabais' },
+ 'imposta-cantonale-confronto-svizzera-2026-canton-ginevra': { it: 'imposta-cantonale-confronto-svizzera-2026-canton-ginevra', en: 'imposta-cantonale-confronto-svizzera-2026-canton-ginevra', de: 'imposta-cantonale-confronto-svizzera-2026-canton-ginevra', fr: 'imposta-cantonale-confronto-svizzera-2026-canton-ginevra' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
