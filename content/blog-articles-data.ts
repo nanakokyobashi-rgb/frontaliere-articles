@@ -28407,6 +28407,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'trasferirsi-a-saltrio-da-frontaliere-pro-e-contro',
+ category: 'fiscale',
+ date: '2026-08-09T23:17:47.000Z',
+ image: '/images/blog/trasferirsi-a-saltrio-da-frontaliere-pro-e-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'trasferirsi-cannobio-frontaliere-pro-contro',
+ category: 'pratico',
+ date: '2026-08-09T23:30:56.354Z',
+ image: '/images/blog/trasferirsi-cannobio-frontaliere-pro-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

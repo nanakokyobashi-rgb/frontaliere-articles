@@ -9465,6 +9465,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-saltrio-lavorare-ticino-frontalieri.title': 'Vivre à Saltrio : le changement de frontalié',
     'blog.article.vivere-saltrio-lavorare-ticino-frontalieri.excerpt': 'Réglée à la source, nouvel accord frontalier et double imposition : ce que cela signifie pour les frontaliers du Tessin',
     'blog.article.vivere-saltrio-lavorare-ticino-frontalieri.imageAlt': 'Un frontalier en auto sur l\'autoroute A2',
+    'blog.article.trasferirsi-a-saltrio-da-frontaliere-pro-e-contro.title': 'Déménager à Saltrio en tant que frontalier : avantages et inconvénients',
+    'blog.article.trasferirsi-a-saltrio-da-frontaliere-pro-e-contro.excerpt': 'Taxes, doubles impositions et nouvelles règles pour les frontaliers qui souhaitent déménager à Saltrio',
+    'blog.article.trasferirsi-a-saltrio-da-frontaliere-pro-e-contro.imageAlt': 'Une photographie d\'un passage frontalier entre l\'Italie et la Suisse',
+    'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.title': 'Déménager à Cannobio en tant que frontalier : avantages et inconvénients',
+    'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.excerpt': 'Analyse pratique de la vie à Cannobio en travaillant au Tessin : fiscalité, accords et gestion des déplacements quotidiens pour les travailleurs frontaliers.',
+    'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.imageAlt': 'Vue panoramique de Cannobio sur le lac Majeur',
 };
 
 export default blogMetaFr;

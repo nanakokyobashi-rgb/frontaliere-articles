@@ -1996,6 +1996,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-cassa-malati-lamal-2026-canton-zurigo.title': 'I premi cassa malati LAMal nel Canton Zurigo per il 2026',
     'blog.article.premi-cassa-malati-lamal-2026-canton-zurigo.excerpt': 'I premi dell\'assicurazione malattia LAMal nel Canton Zurigo per il 2026',
     'blog.article.premi-cassa-malati-lamal-2026-canton-zurigo.imageAlt': 'Immagine editoriale di un lago svizzero con una barca a vela',
+    'blog.article.premi-cassa-malati-lamal-2026-cantone-bern.title': 'LAMal nel Cantone Berna: guida ai premi e sussidi',
+    'blog.article.premi-cassa-malati-lamal-2026-cantone-bern.excerpt': 'I premi LAMal nel Cantone Berna sono soggetti a differenze rispetto ad altri cantoni svizzeri. Ecco cosa sapere.',
+    'blog.article.premi-cassa-malati-lamal-2026-cantone-bern.imageAlt': 'Immagine di un lago in Svizzera',
+    'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.title': 'Premi cassa malati LAMal 2026 nel Canton Basilea',
+    'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.excerpt': 'Franchigie adulti CHF 300, 500, 1000, 1500, 2000, 2500. Premi fissati per cantone e regione di premio.',
+    'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.imageAlt': 'Scena svizzera nazionale/cantonale pertinente al tema premi cassa malati, fotorealistica, DSLR, non sembrare AI',
 };
 
 export default blogMetaChIt;
