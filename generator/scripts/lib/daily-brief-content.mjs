@@ -159,15 +159,49 @@ export function pickHeadline(blocks) {
 /**
  * Locale copy for the brief.
  *
- * `excerpt` is not just a teaser: it becomes the article's meta description on
- * the site, where `tests/seo-description-length.test.ts` hard-fails above 170
- * characters — and it fails on EVERY branch, not only the one that happened to
- * be open when the edition landed. Keep each excerpt inside the ideal 130–165
- * band at the LONGEST date label its locale can produce (`22 settembre 2026`,
- * `September 22, 2026`), which is what `daily-brief-content.test.mjs` measures.
+ * ## Three descriptive surfaces, three different budgets
  *
- * The date stays in on purpose: an edition ships every morning, so a template
- * without it would give 365 pages a year one identical description.
+ * Until #80 a single string served all three, so the tightest constraint —
+ * Google's snippet — silently became the ceiling for the other two, and the
+ * reader got the shortest text any of the three could tolerate. They are now
+ * three separate fields, each written for its own surface:
+ *
+ *   `excerpt`          RICH, 200+ chars. This is what a HUMAN reads: the card
+ *                      in the blog list, the related-articles rail, the
+ *                      newsletter teaser. Nothing truncates it there, so the
+ *                      only reason to shorten it would be to appease a SEO
+ *                      test — which is exactly what this split removes. Never
+ *                      trim it below 200: that regression is the one that
+ *                      already happened once (#80, 2026-08-09).
+ *
+ *   `seoDescription`   150–160 chars. Google truncates a SERP snippet around
+ *                      160, and the site's `tests/seo-description-length.test.ts`
+ *                      hard-fails above 170 on EVERY branch. Written to stand
+ *                      alone in a result list: date first, then the two or
+ *                      three things people actually search for.
+ *
+ *   `ogDescription`    200–250 chars. Facebook/LinkedIn/WhatsApp show far more
+ *                      than a SERP does, so the social card gets a fuller text.
+ *
+ * All three are measured at the LONGEST date label a locale can produce
+ * (`22 settembre 2026`, `September 22, 2026`, `22. September 2026`) AND at the
+ * shortest (`1 marzo 2026`, `May 1, 2026`): the label is interpolated, and its
+ * width swings by up to 7 characters over the year. `daily-brief-content.test.mjs`
+ * checks every month at both ends.
+ *
+ * `clampSeoDescriptions` in create-article.mjs stays as a SAFETY NET at the
+ * shared write path (160 for description, 250 for ogDescription). After this
+ * split it must never fire on the brief — these texts are born the right size.
+ *
+ * ONE CAVEAT, and it is a site-side one. Only the IT `seoDescription` reaches a
+ * meta description today: the SEO entry `blog-<id>` is IT-only, and the site's
+ * `packages/articles/engine/ogPagesPlugin.ts` still derives the en/de/fr meta
+ * description from the LOCALE EXCERPT, clipping it at 155 with an ellipsis.
+ * The localized `seoDescription`s below are therefore written and tested here,
+ * but consuming them needs a change on the site — see the PR body.
+ *
+ * The date stays in all three on purpose: an edition ships every morning, so a
+ * template without it would give 365 pages a year one identical description.
  */
 const T = {
   it: {
@@ -182,7 +216,11 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Bollettino del frontaliere – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `I numeri di oggi, ${dateLabel}, per i frontalieri: attese ai valichi, benzina più economica, cambio franco-euro e nuovi annunci di lavoro in Svizzera.`,
+      `I numeri di oggi, ${dateLabel}, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.`,
+    seoDescription: (dateLabel) =>
+      `Bollettino frontalieri del ${dateLabel}: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.`,
+    ogDescription: (dateLabel) =>
+      `I numeri del ${dateLabel} per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.`,
     imageAlt: (dateLabel) => `I numeri del giorno per i frontalieri – ${dateLabel}: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro`,
     intro: (wd, dateLabel) =>
       `Buongiorno, è ${wd} ${dateLabel}. Questo è il bollettino quotidiano per chi vive da una parte del confine e lavora dall'altra: quattro numeri misurati oggi dal nostro monitoraggio — code ai valichi, benzina, cambio e lavoro — con i link alle pagine live per seguirli durante la giornata.`,
@@ -239,7 +277,11 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Cross-border daily brief – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `Today's numbers (${dateLabel}) for cross-border commuters: border waits, the cheapest fuel municipalities, the franc-euro rate and new Swiss job postings.`,
+      `Today's numbers, ${dateLabel}, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday's close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.`,
+    seoDescription: (dateLabel) =>
+      `Cross-border brief, ${dateLabel}: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.`,
+    ogDescription: (dateLabel) =>
+      `The numbers for ${dateLabel}, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.`,
     imageAlt: (dateLabel) => `The day's numbers for cross-border commuters – ${dateLabel}: border waits, fuel prices, CHF-EUR rate and job listings`,
     intro: (wd, dateLabel) =>
       `Good morning — it's ${wd}, ${dateLabel}. This is the daily brief for people who live on one side of the border and work on the other: four numbers measured today by our monitoring — border queues, fuel, the exchange rate and jobs — each with a link to its live page.`,
@@ -296,7 +338,11 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Grenzgänger-Tagesbulletin – ${dateLabel}: ${headline}`,
     excerpt: (dateLabel) =>
-      `Die Zahlen von heute (${dateLabel}) für Grenzgänger: Wartezeiten an den Übergängen, günstigste Tankgemeinden, Franken-Euro-Kurs und neue Stellenangebote.`,
+      `Die Zahlen von heute, ${dateLabel}, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.`,
+    seoDescription: (dateLabel) =>
+      `Grenzgänger-Bulletin vom ${dateLabel}: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.`,
+    ogDescription: (dateLabel) =>
+      `Die Zahlen vom ${dateLabel} für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.`,
     imageAlt: (dateLabel) => `Die Zahlen des Tages für Grenzgänger – ${dateLabel}: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote`,
     intro: (wd, dateLabel) =>
       `Guten Morgen — heute ist ${wd}, der ${dateLabel}. Das ist das tägliche Bulletin für alle, die auf der einen Seite der Grenze wohnen und auf der anderen arbeiten: vier heute gemessene Zahlen — Staus an den Übergängen, Benzin, Wechselkurs und Arbeitsmarkt — jeweils mit Link zur Live-Seite.`,
@@ -353,7 +399,11 @@ const T = {
     })[h.kind],
     title: (dateLabel, headline) => `Bulletin du frontalier – ${dateLabel} : ${headline}`,
     excerpt: (dateLabel) =>
-      `Les chiffres du jour (${dateLabel}) pour les frontaliers : attentes aux douanes, communes où l'essence coûte le moins, taux franc-euro et nouvelles offres.`,
+      `Les chiffres du jour, ${dateLabel}, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.`,
+    seoDescription: (dateLabel) =>
+      `Bulletin du frontalier du ${dateLabel} : les files aux douanes ce matin, l'essence la moins chère, taux franc-euro et nouvelles offres d'emploi en Suisse.`,
+    ogDescription: (dateLabel) =>
+      `Les chiffres du ${dateLabel} pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l'essence coûte le moins cher, ce que vaut le franc aujourd'hui et combien d'offres d'emploi sont parues en Suisse.`,
     imageAlt: (dateLabel) => `Les chiffres du jour pour les frontaliers – ${dateLabel} : attentes aux douanes, prix de l'essence, taux CHF-EUR et offres d'emploi`,
     intro: (wd, dateLabel) =>
       `Bonjour — nous sommes ${wd} ${dateLabel}. Voici le bulletin quotidien pour celles et ceux qui vivent d'un côté de la frontière et travaillent de l'autre : quatre chiffres mesurés aujourd'hui par notre suivi — files aux douanes, essence, taux de change et emploi — chacun avec le lien vers sa page en direct.`,
@@ -496,9 +546,16 @@ function buildLocaleContent(locale, brief, headline) {
   parts4.push(`## ${t.methodH}`);
   parts4.push(t.method);
 
+  // `seoDescription` / `ogDescription` ride along on the locale content so the
+  // test suite can measure all four locales, and so a future site-side change
+  // can pick up the localized ones. They are NOT written to blog-meta-*.ts:
+  // `buildMetaBlock` emits title/excerpt/imageAlt only, and `buildBodyFile`
+  // scans body1..bodyN — extra keys here are inert in the corpus surface.
   return {
     title: t.title(dateLabel, t.headline(headline)),
     excerpt: t.excerpt(dateLabel),
+    seoDescription: t.seoDescription(dateLabel),
+    ogDescription: t.ogDescription(dateLabel),
     body1: parts1.join('\n\n'),
     body2: parts2.join('\n\n'),
     body3: parts3.join('\n\n'),
@@ -558,13 +615,21 @@ export function buildData(brief) {
     author,
     seo: {
       title: it.title,
-      description: it.excerpt,
+      // NOT `it.excerpt`. The excerpt is the reader-facing teaser and is
+      // deliberately ~280 chars; this is the SERP snippet and is written for
+      // 160. Collapsing the two is the defect #79/#80 came from — the SERP
+      // budget ended up governing what the reader was allowed to see.
+      // `structuredData.description` in the SEO entry is emitted from this same
+      // field, so it inherits the 160-char budget.
+      description: it.seoDescription,
       // 'dogana' is deliberate: it is a news-sitemap whitelist token, so each
       // edition becomes Google News-eligible inside the 48h window on its own.
       keywords:
         'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
       ogTitle: it.title,
-      ogDescription: it.excerpt,
+      // Facebook/LinkedIn/WhatsApp show far more than a SERP: the social card
+      // gets its own ~210-char text, capped at 250 by the safety net.
+      ogDescription: it.ogDescription,
       headline: it.title,
       breadcrumbName: `Bollettino ${humanDate(brief.dateIso, 'it')}`,
     },

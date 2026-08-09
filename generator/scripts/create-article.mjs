@@ -10669,6 +10669,20 @@ export function buildArticlePublishedUrls(data) {
 const SEO_DESCRIPTION_MAX = 160;
 
 /**
+ * The SOCIAL budget, deliberately looser than the SERP one.
+ *
+ * `ogDescription` never reaches a Google snippet: it reaches Facebook,
+ * LinkedIn and WhatsApp, which render far more than 160 characters. Capping it
+ * at the SERP value threw away useful text for no reason — and, worse, it made
+ * the two fields indistinguishable, which is the shape that let one string
+ * serve three surfaces in the first place (#79).
+ *
+ * 250 is a real ceiling, not a formality: the OG card does eventually clip, and
+ * `content/seo/**` entries are scanned against it by seo-description-cap.test.mjs.
+ */
+const SEO_OG_DESCRIPTION_MAX = 250;
+
+/**
  * Hard cap on the meta descriptions, applied at the SHARED write path.
  *
  * The corpus this repo publishes is mirrored into the site's
@@ -10688,16 +10702,32 @@ const SEO_DESCRIPTION_MAX = 160;
  * 160, not 170: the same value the AI flow already used, leaving headroom under
  * the test's hard bound. Word-boundary truncation, never a mid-word cut.
  *
+ * TWO THRESHOLDS, not one. `description` is the SERP snippet and also the
+ * source of `structuredData.description` in the SEO entry, so both live under
+ * SEO_DESCRIPTION_MAX. `ogDescription` is the social card and gets
+ * SEO_OG_DESCRIPTION_MAX. Sharing one threshold silently truncated a social
+ * text that had every right to be longer.
+ *
+ * This is a SAFETY NET, not the mechanism. A producer whose text arrives here
+ * needing a cut has a copy bug: the daily brief now writes three fields sized
+ * for their own surfaces (see `daily-brief-content.mjs`), and this must never
+ * fire on it. It stays because the AI flow can still hand over anything.
+ *
  * Idempotent — a description already within budget comes back unchanged, so the
  * AI flow clamping earlier and this clamping again is a no-op.
  */
+const SEO_DESCRIPTION_BUDGETS = {
+  description: SEO_DESCRIPTION_MAX,
+  ogDescription: SEO_OG_DESCRIPTION_MAX,
+};
+
 function clampSeoDescriptions(data) {
   const seo = data?.seo;
   if (!seo || typeof seo !== 'object') return;
-  for (const field of ['description', 'ogDescription']) {
+  for (const [field, max] of Object.entries(SEO_DESCRIPTION_BUDGETS)) {
     const value = seo[field];
     if (typeof value !== 'string' || value.length === 0) continue;
-    seo[field] = truncateAtWordBoundary(value, SEO_DESCRIPTION_MAX);
+    seo[field] = truncateAtWordBoundary(value, max);
   }
 }
 

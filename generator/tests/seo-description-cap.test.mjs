@@ -37,6 +37,20 @@
  *    pinnano la funzione, lo scan pinna che nessuna description gia' scritta
  *    sfori, qualunque percorso l'abbia prodotta. E' il gate che avrebbe fermato
  *    il 2026-08-09 QUI, prima che diventasse rosso sul sito.
+ *
+ * ## Aggiornamento: DUE soglie, non una (#81)
+ *
+ * Il cap nasceva con una soglia sola per `description` e `ogDescription`, il
+ * che risolveva il rosso ma rifaceva lo stesso errore un livello piu' in
+ * basso: il vincolo piu' stretto (lo snippet di Google, 160) diventava il
+ * tetto anche per la card social, che ne regge molti di piu'. Ora
+ * `SEO_DESCRIPTION_BUDGETS` tiene un budget per campo — 160 alla description
+ * (che alimenta anche `structuredData.description`), 250 alla ogDescription —
+ * e lo scan sull'output misura ogni campo col proprio metro.
+ *
+ * E resta una RETE DI SICUREZZA. Dopo #81 il bollettino scrive tre testi gia'
+ * della lunghezza giusta (`daily-brief-content.mjs`): se il clamp interviene su
+ * un'edizione, il difetto e' nel template, non qui.
  */
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
@@ -64,21 +78,39 @@ function sliceFn(src, header) {
   return src.slice(start, start + endRel + 2);
 }
 
+/** Slice a top-level `const NAME = { ... };` up to the first `\n};` at column 0. */
+function sliceConst(src, header) {
+  const start = src.indexOf(header);
+  if (start === -1) {
+    throw new Error(`"${header}" non trovato in create-article.mjs — aggiornare i delimitatori di questo test`);
+  }
+  const endRel = src.slice(start).search(/\n\};\n/);
+  if (endRel === -1) throw new Error(`chiusura di "${header}" non trovata`);
+  return src.slice(start, start + endRel + 3);
+}
+
 function extractCapBlock() {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
   const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
   if (!max) throw new Error('SEO_DESCRIPTION_MAX non trovato in create-article.mjs');
+  const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
+  if (!ogMax) throw new Error('SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs');
   const block = [
     sliceFn(src, 'function truncateAtWordBoundary(text, maxLen) {'),
     `const SEO_DESCRIPTION_MAX = ${max[1]};`,
+    `const SEO_OG_DESCRIPTION_MAX = ${ogMax[1]};`,
+    // Estratto dal sorgente, non riscritto: se la mappa dei budget cambia
+    // forma il test la vede, invece di misurare una copia divergente.
+    sliceConst(src, 'const SEO_DESCRIPTION_BUDGETS = {'),
     sliceFn(src, 'function clampSeoDescriptions(data) {'),
   ].join('\n\n');
   return new Function(
-    `${block}\nreturn { clampSeoDescriptions, truncateAtWordBoundary, SEO_DESCRIPTION_MAX };`,
+    `${block}\nreturn { clampSeoDescriptions, truncateAtWordBoundary, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS };`,
   )();
 }
 
-const { clampSeoDescriptions, SEO_DESCRIPTION_MAX } = extractCapBlock();
+const { clampSeoDescriptions, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS } =
+  extractCapBlock();
 
 /** Il testo esatto che ha rotto il sito, due giorni di fila. */
 const OFFENDER =
@@ -98,7 +130,42 @@ describe('clampSeoDescriptions', () => {
     const data = { seo: { description: OFFENDER, ogDescription: OFFENDER } };
     clampSeoDescriptions(data);
     expect(data.seo.description.length).toBeLessThan(SEO_DESCRIPTION_MAX + 1);
-    expect(data.seo.ogDescription.length).toBeLessThan(SEO_DESCRIPTION_MAX + 1);
+    expect(data.seo.ogDescription.length).toBeLessThan(SEO_OG_DESCRIPTION_MAX + 1);
+  });
+
+  /**
+   * Le due soglie sono il punto della PR #81, non un dettaglio: con una soglia
+   * sola la og description lunga scritta apposta per Facebook/LinkedIn veniva
+   * riportata a 160, e le tre superfici tornavano a essere una sola.
+   */
+  it('applica DUE soglie: 160 alla description, 250 alla ogDescription', () => {
+    expect(SEO_OG_DESCRIPTION_MAX).toBeGreaterThan(SEO_DESCRIPTION_MAX);
+    expect(SEO_DESCRIPTION_BUDGETS.description).toBe(SEO_DESCRIPTION_MAX);
+    expect(SEO_DESCRIPTION_BUDGETS.ogDescription).toBe(SEO_OG_DESCRIPTION_MAX);
+
+    // Un testo social lungo ma legittimo: oltre il budget SERP, dentro quello
+    // social. Deve uscire TAGLIATO da description e INTATTO da ogDescription.
+    const social =
+      'I numeri del 22 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, ' +
+      'in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro ' +
+      'sono usciti in Svizzera.';
+    expect(social.length).toBeGreaterThan(SEO_DESCRIPTION_MAX);
+    expect(social.length).toBeLessThan(SEO_OG_DESCRIPTION_MAX + 1);
+
+    const data = { seo: { description: social, ogDescription: social } };
+    clampSeoDescriptions(data);
+    expect(data.seo.ogDescription).toBe(social); // non toccata
+    expect(data.seo.description.length).toBeLessThan(SEO_DESCRIPTION_MAX + 1);
+    expect(data.seo.description).not.toBe(social); // tagliata
+  });
+
+  it('taglia anche la ogDescription quando sfora il suo budget', () => {
+    const huge = `${OFFENDER} ${OFFENDER}`;
+    expect(huge.length).toBeGreaterThan(SEO_OG_DESCRIPTION_MAX);
+    const data = { seo: { ogDescription: huge } };
+    clampSeoDescriptions(data);
+    expect(data.seo.ogDescription.length).toBeLessThan(SEO_OG_DESCRIPTION_MAX + 1);
+    expect(huge.startsWith(data.seo.ogDescription)).toBe(true); // taglio a coda
   });
 
   it('taglia a confine di parola, mai a meta', () => {
@@ -170,8 +237,15 @@ function readQuoted(src, pos) {
   return null;
 }
 
+/**
+ * Il tetto per campo sull'output. `description` risponde al sito (170);
+ * `ogDescription` non finisce mai in una SERP e ha il suo budget social — è
+ * per questo che lo scan non può misurarli con lo stesso metro.
+ */
+const OUTPUT_MAX = { description: SITE_HARD_MAX, ogDescription: SEO_OG_DESCRIPTION_MAX };
+
 describe('corpus pubblicato', () => {
-  it(`nessuna description in content/seo/ supera i ${SITE_HARD_MAX} caratteri`, () => {
+  it(`nessuna description in content/seo/ supera il suo tetto (${SITE_HARD_MAX} SERP / ${SEO_OG_DESCRIPTION_MAX} social)`, () => {
     const files = fs.readdirSync(SEO_DIR).filter((f) => f.startsWith('seo-blog') && f.endsWith('.ts'));
     expect(files.length).toBeGreaterThan(0);
 
@@ -180,17 +254,18 @@ describe('corpus pubblicato', () => {
     for (const file of files) {
       const src = fs.readFileSync(path.join(SEO_DIR, file), 'utf-8');
       for (const field of ['description', 'ogDescription']) {
+        const limit = OUTPUT_MAX[field];
         const needle = `\n    ${field}: `;
         let at = src.indexOf(needle);
         while (at !== -1) {
           const value = readQuoted(src, at + needle.length);
           if (value !== null) {
             measured++;
-            if (value.length > SITE_HARD_MAX) {
+            if (value.length > limit) {
               // Risali alla chiave dell'entry per un messaggio azionabile.
               const keyAt = src.lastIndexOf("\n  '", at);
               const key = keyAt === -1 ? '?' : src.slice(keyAt + 4, src.indexOf("'", keyAt + 4));
-              offenders.push(`${file} ${key}.${field}: ${value.length} chars`);
+              offenders.push(`${file} ${key}.${field}: ${value.length} chars (max ${limit})`);
             }
           }
           at = src.indexOf(needle, at + needle.length);
