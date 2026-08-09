@@ -57,6 +57,7 @@ import { expect } from './lib/expect-shim.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -104,9 +105,15 @@ function extractCapBlock() {
     sliceConst(src, 'const SEO_DESCRIPTION_BUDGETS = {'),
     sliceFn(src, 'function clampSeoDescriptions(data) {'),
   ].join('\n\n');
+  // `truncateAtWordBoundary` non e' piu' autocontenuta: delega a
+  // `truncateToClause` di host/shared/clauseTail.mjs (vedi
+  // seo-clause-truncation.test.mjs). Le si inietta il modulo VERO, non una
+  // riscrittura — altrimenti questa sandbox misurerebbe una copia divergente
+  // dello stesso troncamento, che e' il difetto che quella fix ha chiuso.
   return new Function(
+    'truncateToClause',
     `${block}\nreturn { clampSeoDescriptions, truncateAtWordBoundary, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS };`,
-  )();
+  )(truncateToClause);
 }
 
 const { clampSeoDescriptions, SEO_DESCRIPTION_MAX, SEO_OG_DESCRIPTION_MAX, SEO_DESCRIPTION_BUDGETS } =

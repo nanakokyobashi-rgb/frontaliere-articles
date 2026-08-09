@@ -901,7 +901,39 @@
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi.",
       "baseline": {
         "site": "44b4dcb727b012ea",
-        "corpus": "ecab6c65415d3133",
+        "corpus": "db56c06d00a35f67",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/clauseTail.mjs",
+      "sitePath": "build-plugins/shared/clauseTail.mjs",
+      "mode": "identical",
+      "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso.",
+      "baseline": {
+        "site": "4967da4d256e3516",
+        "corpus": "4967da4d256e3516",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "host/shared/titleSuffix.ts",
+      "sitePath": "build-plugins/shared/titleSuffix.ts",
+      "mode": "identical",
+      "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire.",
+      "baseline": {
+        "site": "557f1f701a297cce",
+        "corpus": "557f1f701a297cce",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/seo-clause-truncation.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Gate del troncamento SEO del generatore. Corpus-only perche' il banco del sito (tests/seo-serp-clause-truncation.test.ts) prova le funzioni del render layer sotto vitest, mentre qui il bersaglio e' il FORK del generatore, che non e' importabile senza node_modules: il test estrae truncateAtWordBoundary e la valuta iniettandole il truncateToClause vero, cosi' le asserzioni restano comportamentali e rimettere il corpo vecchio le fa fallire (verificato: 4 test su 15). Aggiunge il gate sull'output di content/seo/** con ratchet datato sui 3.544 residui storici e zero tolleranza sugli articoli pubblicati dopo la fix.",
+      "baseline": {
+        "site": null,
+        "corpus": "509feb23d747ff20",
         "alignedAt": "2026-08-09"
       }
     }

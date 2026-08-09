@@ -144,6 +144,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
+import { truncateToClause } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
@@ -2477,11 +2478,44 @@ async function optimizeImageToWebp(inputPath, outputPath) {
   return { ok: true, before, after };
 }
 
+/**
+ * Tronca a `maxLen` chiudendo su una CLAUSOLA COMPLETA.
+ *
+ * Delega a `truncateToClause` di `host/shared/clauseTail.mjs` — lo STESSO
+ * modulo che `host/shared/titleSuffix.ts` riesporta e che l'engine usa a render
+ * time via `repairSerpSnippet` (SiteShellContract). Generatore e renderer non
+ * possono piu' avere due idee diverse di "coda pulita", che e' esattamente il
+ * modo in cui la regola era gia' andata alla deriva sul sito (issue
+ * valerielinc-ops#4356/#4357/#4358: cinque punti di troncamento, cinque regole).
+ *
+ * NON si duplica la lista di stopword qui (AGENTS.md #6): il modulo esiste gia'
+ * in questo repo, arriva con la meta' `host/` del contratto, ed e' byte-identico
+ * a `build-plugins/shared/clauseTail.mjs` del sito.
+ *
+ * Due difetti che questo sostituisce, entrambi MISURATI su questo corpus il
+ * 2026-08-09 (27.764 campi SEO in content/seo/seo-blog*.ts, 3.075 articoli):
+ *
+ *   1. `Math.max(cut.lastIndexOf(' '), maxLen - 12)` ripiegava su un taglio a
+ *      carattere ogni volta che l'ultimo spazio cadeva prima di `maxLen - 12`,
+ *      cioe' quando l'ultima parola era piu' lunga di ~13 caratteri: un
+ *      composto tedesco o un tecnicismo veniva tagliato A META' PAROLA.
+ *      Nel corpus e' arrivato una volta sola ("...frontalieri che attraversano
+ *      q"), ma e' un difetto di input, non di frequenza: basta un titolo con
+ *      una parola lunga a cavallo del limite.
+ *   2. Strippando solo la punteggiatura, la preposizione restava appesa:
+ *      3.548 campi su 1.139 articoli finiscono su una parola funzionale,
+ *      1.792 di essi sul letterale "Dati aggiornati <anno> per".
+ *
+ * Uno snippet che si ferma su una preposizione legge come un disco rotto nella
+ * SERP e rende Google piu' propenso a scartare la description e sintetizzarne
+ * una propria, perdendo il controllo del messaggio.
+ *
+ * Il dato GIA' scritto non viene riscritto qui: l'engine lo ripara a render
+ * time (`repairSerpSnippet` in engine/ogPagesPlugin.ts, verificato in
+ * produzione). Questa e' la chiusura del rubinetto, non la bonifica.
+ */
 function truncateAtWordBoundary(text, maxLen) {
-  const s = String(text || '').replace(/\s+/g, ' ').trim();
-  if (s.length <= maxLen) return s;
-  const cut = s.slice(0, maxLen + 1);
-  return cut.slice(0, Math.max(cut.lastIndexOf(' '), maxLen - 12)).trim().replace(/[,:;.\-–—\s]+$/, '');
+  return truncateToClause(text, maxLen);
 }
 
 // ── SEO length caps (Semrush + Google snippet compliance) ──
