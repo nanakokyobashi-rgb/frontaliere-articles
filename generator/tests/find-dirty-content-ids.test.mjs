@@ -552,6 +552,25 @@ test('residuesInText ignora i marker che non lasciano traccia', () => {
   assert.equal(out.size, 0, `nessun residuo atteso, visti: ${[...out]}`);
 });
 
+test('residuesInText copre anche il residuo a inizio o fine parola', () => {
+  // Il marker puo' sostituire il PRIMO o l'ULTIMO carattere di una parola, non
+  // solo uno in mezzo: misurato sul corpus reale in
+  // lavena-ponte-tresa-territorio-poroso.ts (`\x083territorio`, `poroso\x083`).
+  // Una parola con una sola lettera prima della cifra ('c1us') e' lo stesso
+  // difetto: il byte era il carattere iniziale, non uno interno.
+  const out = residuesInText("const a = '\x083territorio e poroso\x083, c\x011us dem Direktor';");
+  assert.ok(out.has('3territorio'), `atteso 3territorio, visti: ${[...out]}`);
+  assert.ok(out.has('poroso3'), `atteso poroso3, visti: ${[...out]}`);
+  assert.ok(out.has('c1us'), `atteso c1us, visti: ${[...out]}`);
+});
+
+test('residuesInText ignora i token rimasti puramente numerici', () => {
+  // Un marker fra due cifre (una lista, un range) resta un token di sole
+  // cifre dopo lo strip: nessuna lettera, nessuna parola visibilmente rotta.
+  const out = residuesInText("const a = '2024\x0e2033';");
+  assert.equal(out.size, 0, `nessun residuo atteso, visti: ${[...out]}`);
+});
+
 test('una pagina SENZA control character ma col residuo e\' sporca', () => {
   // Il caso reale: l'emitter ha gia' sanificato, quindi zero byte C0, e la
   // pagina resta rotta. Senza questo ramo il drenaggio non converge mai.

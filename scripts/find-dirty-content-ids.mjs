@@ -213,23 +213,34 @@ function listTsFiles(dir) {
  * dentro», e' «QUESTA parola, che sappiamo essere nata da un marker in QUESTO
  * articolo».
  *
- * Si scartano i residui che non contengono una cifra fra lettere: quelli sono i
- * casi in cui il marker sostituiva un separatore, dove togliere il byte da' una
- * parola gia' corretta e non c'e' niente da cercare.
+ * Si scartano i residui che non mescolano lettere e cifre: quelli sono i casi
+ * in cui il marker sostituiva un separatore puro (una lista di sole cifre, un
+ * marcatore markdown isolato), dove togliere il byte non lascia una parola
+ * visibilmente rotta e non c'e' niente da cercare.
+ *
+ * La cifra non deve stare per forza IN MEZZO a lettere: il marker sostituisce
+ * anche il primo o l'ultimo carattere di una parola (una lettera accentata a
+ * inizio parola, o l'ultima lettera prima della punteggiatura), e in quel caso
+ * il residuo e' `3territorio` o `poroso3`, non `comp9tence`. Misurato sul
+ * corpus reale: `content/blog-body/it/lavena-ponte-tresa-territorio-poroso.ts`
+ * porta entrambe le forme sullo stesso articolo (`^H3territorio`, `poroso^H3`).
  */
 export function residuesInText(text) {
   const out = new Set();
   if (typeof text !== 'string') return out;
   const C0 = /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/;
   const TOKEN = /[A-Za-z\u00c0-\u024f\u0000-\u0008\u000b\u000c\u000e-\u001f0-9]+/g;
+  const HAS_LETTER = /[A-Za-z\u00c0-\u024f]/;
+  const HAS_DIGIT = /[0-9]/;
   for (const m of text.matchAll(TOKEN)) {
     const tok = m[0];
     if (!C0.test(tok)) continue;
     const stripped = tok.replace(new RegExp(C0.source, 'g'), '');
-    // Deve restare una parola con una cifra IN MEZZO a lettere: e' la firma del
-    // residuo. Un token che dopo lo strip e' gia' una parola pulita non lascia
-    // traccia sulla pagina, e cercarlo darebbe falsi positivi ovunque.
-    if (!/[A-Za-z\u00c0-\u024f]{2,}[0-9]+[A-Za-z\u00c0-\u024f]/.test(stripped)) continue;
+    // Deve restare un token che mescola lettere e cifre, in qualunque ordine e
+    // posizione: e' la firma del residuo. Un token che dopo lo strip e' gia'
+    // pulito (solo lettere) o resta puramente numerico (solo cifre) non lascia
+    // una parola visibilmente rotta, e cercarlo darebbe falsi positivi ovunque.
+    if (!HAS_LETTER.test(stripped) || !HAS_DIGIT.test(stripped)) continue;
     out.add(stripped);
   }
   return out;
