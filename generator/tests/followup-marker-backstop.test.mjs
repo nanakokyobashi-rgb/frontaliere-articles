@@ -144,7 +144,7 @@ test('le due letture del marker concordano su tutta la matrice', () => {
 
 test('caso 1 — marker presente: il backstop non fa nulla', () => {
   const gh = fakeGh({ commentsByPr: { 56: comments(`${MARKER_PREFIX}: zero outstanding items.`) } });
-  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), gh, log: silent });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), stepOutcome: 'success', gh, log: silent });
   assert.equal(r.decisions[0].code, 'marker-present');
   assert.equal(r.decisions[0].action, 'noop');
   assert.equal(r.decisions[0].level, 'none');
@@ -154,7 +154,7 @@ test('caso 1 — marker presente: il backstop non fa nulla', () => {
 
 test('caso 2 — marker assente e sessione consegnata: lo posta, con warning', () => {
   const gh = fakeGh({ commentsByPr: { 56: comments('solo chiacchiere') } });
-  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), runUrl: 'https://run/1', gh, log: silent });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), stepOutcome: 'success', runUrl: 'https://run/1', gh, log: silent });
 
   assert.equal(r.decisions[0].code, 'marker-missing');
   assert.equal(r.decisions[0].action, 'post');
@@ -184,7 +184,7 @@ test('caso 3 — marker assente MA issue create: warning rumoroso e marker che n
       { number: 204, title: 'non e\' un follow-up canonico' },
     ]),
   });
-  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: brokenSandboxExec(), gh, log: silent });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), stepOutcome: 'success', gh, log: silent });
 
   const d = r.decisions[0];
   assert.equal(d.code, 'marker-missing-with-issues');
@@ -199,8 +199,13 @@ test('caso 3 — marker assente MA issue create: warning rumoroso e marker che n
   assert.ok(body.includes('#201') && body.includes('#202'));
   assert.ok(!body.includes('#203'), 'issue di un\'altra PR non vanno attribuite a questa');
 
-  // Le issue sono anche la PROVA che la sessione ha parlato con GitHub: qui
-  // l'execution file e' quello rotto, eppure il backstop deve consegnare.
+  // La consegna la decide l'esito dello step, NON le issue trovate. Prima
+  // questo test usava un execution file rotto e si aspettava `delivered:
+  // true` perche' le issue «provavano» che la sessione avesse parlato con
+  // GitHub: era il segnale piu' debole dei tre, perche' `gh issue list`
+  // restituisce issue di QUALUNQUE epoca. Una sola issue vecchia per una
+  // qualsiasi PR del batch ribaltava la consegna per tutto il batch, anche
+  // con Claude che non aveva girato affatto.
   assert.equal(r.delivered, true);
 });
 
@@ -223,26 +228,32 @@ test('caso 4 — sessione NON consegnata: NIENTE marker, error, exit 1', () => {
   assert.equal(r.exitCode, 1, 'il rosso e\' cio\' che tiene fermo il watermark e fa ri-coprire la finestra');
 });
 
-test('caso 4-bis — una sola PR gia\' marcata prova che la sessione ha parlato con GitHub', () => {
-  // Segnale 2: l\'execution file e\' quello rotto (nessun Bash riuscito), ma un
-  // marker c\'e\'. Allora sull\'altra PR l\'assenza e\' un obbligo saltato, non
-  // una sessione morta → si posta.
+test('caso 4-bis — un marker su UN\'ALTRA PR non prova niente per questa', () => {
+  // Questo test pinnava la semantica OPPOSTA: «una sola PR gia' marcata prova
+  // che la sessione ha parlato con GitHub», e da li' timbrava TUTTO il batch.
+  // Era uno dei tre segnali per-sessione applicati per-PR, ed e' esattamente
+  // il difetto: su una sessione morta a meta' (`error_max_turns` su un batch
+  // grande) le PR gia' triagiate portano il marker, e la loro presenza faceva
+  // timbrare «zero outstanding items» su quelle che la sessione non aveva mai
+  // raggiunto. Il collector le salta poi per sempre.
   const gh = fakeGh({
-    commentsByPr: { 56: comments(`${MARKER_PREFIX}: zero outstanding items.`), 57: comments('niente') },
+    56: { comments: [{ body: '## Post-merge follow-up triage: 2 item' }] }, // triagiata davvero
+    57: { comments: [] },                                                   // mai raggiunta
   });
-  const r = runBackstop({ batch: [56, 57], repo: 'o/r', execRaw: brokenSandboxExec(), gh, log: silent });
-  assert.equal(r.delivered, true);
-  assert.equal(r.decisions[0].code, 'marker-present');
-  assert.equal(r.decisions[1].code, 'marker-missing');
-  assert.deepEqual(r.posted, [57]);
-  assert.equal(r.exitCode, 0);
+  const r = runBackstop({
+    batch: [56, 57], repo: 'o/r', execRaw: healthyExec(),
+    stepOutcome: 'failure',   // la sessione e' morta a meta'
+    gh, log: silent,
+  });
+  assert.deepEqual(r.posted, [], 'nessuna PR va timbrata quando lo step non e\' riuscito');
+  assert.ok(r.exitCode !== 0, 'la run deve fallire, cosi\' il watermark non avanza');
 });
 
 test('commenti illeggibili: nessun marker e nessun rosso', () => {
   // `gh` a vuoto non dice «marker assente», dice «non lo so». Trattarlo come
   // assenza scriverebbe un marker su un dubbio — l\'unica mossa irreversibile.
   const gh = fakeGh({ unreadable: [56] });
-  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), gh, log: silent });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), stepOutcome: 'success', gh, log: silent });
   assert.equal(r.decisions[0].code, 'comments-unreadable');
   assert.equal(r.decisions[0].action, 'unknown');
   assert.deepEqual(gh.posts(), []);

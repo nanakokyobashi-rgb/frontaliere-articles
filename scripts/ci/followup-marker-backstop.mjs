@@ -391,20 +391,59 @@ export function runBackstop({
     };
   });
 
+  // La consegna la decide l'ESITO DELLO STEP, non un'euristica sui suoi
+  // effetti collaterali. Il marker e' un'affermazione PER-PR («questa PR e'
+  // stata triagiata»), ma i tre segnali che stavano qui erano misurati una
+  // volta per SESSIONE e poi applicati a ogni PR del batch. Su una sessione
+  // morta a meta' — `error_max_turns` su un batch grande, che e' la norma
+  // (batch misurati: 64,63,61,60,59,57,56,55) — il backstop timbrava
+  // «zero outstanding items» sulle PR che la sessione non aveva MAI
+  // raggiunto, e il collector le salta per sempre. Cioe' proprio la perdita
+  // irreversibile che questo file esiste per impedire.
+  //
+  // Peggio: il workflow DOCUMENTA quel recupero («error_max_turns → il
+  // watermark non avanza → l'idempotenza salta le PR gia' commentate e
+  // riprende le restanti»), e il backstop cancellava esattamente le
+  // «restanti». Sui dati reali la sovrapposizione fra due run consecutive
+  // mostra sette PR ri-coperte dopo un fallimento: con l'euristica attiva
+  // sarebbero state marcate a vuoto.
+  //
+  // Gli altri due segnali erano anche piu' deboli: una issue `follow-up`
+  // di QUALUNQUE epoca per una qualsiasi PR del batch ribaltava `delivered`
+  // a true per tutto il batch — anche con execution file vuoto, cioe' con
+  // Claude che non aveva girato affatto. Ed era innocuo solo finche' il repo
+  // aveva zero issue `follow-up`: una guardia sicura soltanto finche' la fix
+  // che deve proteggere non funziona.
+  //
+  // `CLAUDE_STEP_OUTCOME` era gia' cablato nel workflow, gia' letto qui, e
+  // usato SOLO dentro una stringa di log. Era il segnale giusto, inerte.
+  // Due condizioni, entrambe necessarie:
+  //  - lo step Claude e' arrivato in fondo (`success`): senza, le PR non
+  //    raggiunte NON vanno timbrate, o si cancella il recupero;
+  //  - il sandbox funzionava: se `bwrap` e' rotto Claude non ha potuto
+  //    parlare con GitHub affatto, e uno step `success` con zero comandi
+  //    riusciti descrive una sessione che non ha fatto niente.
+  const delivered = stepOutcome === 'success' && !session.sandboxBroken;
   const deliveredBy = [];
   if (session.shellCapable) deliveredBy.push(`${session.bashOk} comandi di shell riusciti`);
   if (observed.some((o) => o.markerPresent === true)) deliveredBy.push('marker gia\' presente su una PR del batch');
   if (observed.some((o) => o.issueNumbers.length > 0)) deliveredBy.push('issue follow-up esistenti per il batch');
-  const delivered = deliveredBy.length > 0;
 
   log(
-    `[backstop] sessione ${delivered ? 'CONSEGNATA' : 'NON consegnata'}` +
-    (delivered ? ` (prove: ${deliveredBy.join('; ')})` : ' (nessuno dei tre segnali regge)'),
+    `[backstop] step Claude = ${stepOutcome || '(ignoto)'} -> sessione ` +
+    `${delivered ? 'CONSEGNATA' : 'NON consegnata'}` +
+    (deliveredBy.length ? ` [indizi collaterali, NON decisivi: ${deliveredBy.join('; ')}]` : ''),
   );
+  if (!delivered) {
+    log('[backstop] lo step non e\' riuscito: NON timbro nulla. Le PR non marcate ' +
+        'restano nella finestra e la run successiva le riprende — e\' il recupero ' +
+        'che il workflow documenta, e timbrarle qui lo cancellerebbe.');
+  }
 
   // Passata 2 — decide e agisce.
   const decisions = [];
   const posted = [];
+  const failedPosts = [];
   for (const o of observed) {
     const d = decide({ ...o, delivered, runUrl });
     decisions.push(d);
@@ -416,8 +455,18 @@ export function runBackstop({
       if (dryRun) {
         log(`[backstop] DRY_RUN: non posto su #${o.pr}. Corpo:\n${d.body}`);
       } else {
-        gh(['pr', 'comment', String(o.pr), ...repoArgs, '--body-file', '-'], { input: d.body });
-        posted.push(o.pr);
+        // Il ritorno va CONTROLLATO: `realGh` inghiotte l'errore e torna ''.
+        // Contare un commento fallito come marker scritto lascia una PR con
+        // issue e senza marker — cioe' esattamente lo stato che al giro dopo
+        // faceva scattare il falso segnale «issue esistenti = consegnato».
+        const out = gh(['pr', 'comment', String(o.pr), ...repoArgs, '--body-file', '-'], { input: d.body });
+        if (out && String(out).trim()) {
+          posted.push(o.pr);
+        } else {
+          failedPosts.push(o.pr);
+          console.log(`::error::followup-marker-backstop: il commento su #${o.pr} NON e' atterrato ` +
+                      '(gh ha fallito). Il marker non esiste: la PR resta da triagiare.');
+        }
       }
     }
   }
