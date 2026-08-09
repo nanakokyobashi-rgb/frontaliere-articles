@@ -59,6 +59,7 @@ import {
   optimizeSeoMetadata,
   normalizeTitleCasing,
   collapseShoutingTitle,
+  applyMicrocopyGuard,
   splitBodyIntoSections,
   generateExcerpt,
   checkTranslatedSlugCollisions,
@@ -174,6 +175,12 @@ async function deriveJournalistContent(data, rawBody) {
 
   console.log('  📝 generating excerpt (generateExcerpt)...');
   data.content.it.excerpt = await generateExcerpt(data.content.it.title, body1, body2, body3);
+
+  // First point in this pipeline where BOTH title and excerpt are final:
+  // normalizeTitleCasing() ran on the title back in buildArticleData(), and
+  // it returns early on sentence-cased input. The excerpt is LLM-written and
+  // had no deterministic pass at all before this one.
+  applyMicrocopyGuard(data.content.it, 'it');
 
   console.log('  ❓ generating FAQ (generateFaqIT)...');
   data.content.it.faq = await generateFaqIT(data.id, rawBody);
