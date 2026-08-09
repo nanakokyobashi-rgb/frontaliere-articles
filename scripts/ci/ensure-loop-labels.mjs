@@ -55,6 +55,19 @@ export const LABELS = [
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
+  // Le quattro che seguono le applica il triage post-merge, e sono rimaste
+  // NON dichiarate finche' `post-merge-followup.yml` non ha girato per giorni
+  // senza mintare una sola issue: 0 sul corpus contro 100+ sul sito, e ogni
+  // sezione «## Non implementato (ancora)» delle PR mergiate persa in silenzio.
+  // Il guard di loop-labels.test.mjs non poteva accorgersene, perche' legge i
+  // flag di `gh` e queste il triage le applica da un PROMPT, in prosa.
+  ['follow-up', 'fbca04', 'Scope deferito o nit/domanda del reviewer, tracciato dopo il merge'],
+  ['funnel-monetization', 'd93f0b', 'Impatto su AdSense/ricavi'],
+  ['funnel-seo', '0e8a16', 'Impatto su traffico organico / SEO'],
+  ['funnel-ux', '1d76db', 'Bug di rendering/CTA/UX nel funnel'],
+  // Applicate con `gh issue create --label`, forma che il guard non leggeva.
+  ['automation', 'ededed', 'Aperta da un automatismo del ciclo'],
+  ['bug', 'd73a4a', 'Qualcosa non funziona'],
   ['priority:urgent', 'b60205', ''],
   ['priority:high', 'd93f0b', ''],
   ['priority:medium', 'fbca04', ''],
