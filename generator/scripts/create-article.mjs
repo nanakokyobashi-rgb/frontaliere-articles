@@ -6223,14 +6223,19 @@ function validate(data, opts = {}) {
     // used four lines below for the description and for breadcrumbName — this
     // call site just never got it.
     const title = truncateAtWordBoundary(String(it.title || data.id), 57);
-    const desc = truncateAtWordBoundary(String(it.excerpt || it.title || ''), 160);
+    const rawDesc = String(it.excerpt || it.title || '').replace(/\s+/g, ' ').trim();
+    const desc = truncateAtWordBoundary(rawDesc, 160);
+    // ogDescription gets its own cap (SEO_OG_DESCRIPTION_MAX), not the 160
+    // description limit — otherwise this fallback ships the same capped
+    // string the L6850 clamp was fixed to stop producing.
+    const ogDesc = truncateAtWordBoundary(rawDesc, SEO_OG_DESCRIPTION_MAX);
     console.error(`⚠️  Campo "seo" mancante — generato automaticamente da content.it`);
     data.seo = {
       title: `${title} | Frontaliere Ticino`,
       description: desc,
       keywords: `frontalieri, ticino, ${data.category || 'lavoro'}, svizzera, italia`,
       ogTitle: title,
-      ogDescription: desc,
+      ogDescription: ogDesc,
       headline: title,
       breadcrumbName: title.split(/[:.–—]/)[0].trim().slice(0, 40),
     };
