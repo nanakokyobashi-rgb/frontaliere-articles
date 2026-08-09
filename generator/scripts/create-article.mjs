@@ -6847,7 +6847,10 @@ function optimizeSeoMetadata(data) {
     desc = `${desc}${desc.endsWith('.') ? '' : '.'} Dati aggiornati 2026 per frontalieri in Ticino.`;
   }
   data.seo.description = truncateAtWordBoundary(desc, 160);
-  data.seo.ogDescription = truncateAtWordBoundary(data.seo.ogDescription || data.seo.description, 160);
+  data.seo.ogDescription = truncateAtWordBoundary(
+    data.seo.ogDescription || data.seo.description,
+    SEO_OG_DESCRIPTION_MAX,
+  );
 
   const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida', '2026']);
   const terms = `${it.title || ''} ${it.excerpt || ''} ${data.id || ''}`
