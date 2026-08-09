@@ -5226,7 +5226,7 @@ Genera JSON (no markdown, no code fences):
     "description": "Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)",
     "keywords": "6-8 keywords IT",
     "ogTitle": "OG title (OBBLIGATORIO ≤ 60 caratteri)",
-    "ogDescription": "OG desc (≤ 160 caratteri)",
+    "ogDescription": "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
     "headline": "Headline JSON-LD",
     "breadcrumbName": "Breadcrumb 2-3 parole"
   }

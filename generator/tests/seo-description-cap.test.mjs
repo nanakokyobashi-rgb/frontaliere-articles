@@ -209,6 +209,24 @@ describe('clampSeoDescriptions', () => {
 // ── Wiring guard ───────────────────────────────────────────────────────────
 
 describe('wiring', () => {
+  /**
+   * Il prompt e' un contratto SENZA forma di import: nessun guard che segue gli
+   * import lo vede, e finche' istruiva "OG desc (≤ 160 caratteri)" il tetto a
+   * 250 aiutava solo i casi in cui il modello lo ignorava. Se qualcuno lo
+   * riporta a 160, questo test lo dice — la CI resterebbe verde altrimenti.
+   */
+  it("il prompt non istruisce un budget og piu' stretto del cap", () => {
+    const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+    const line = src.split('\n').find((l) => l.includes('"ogDescription": "OG desc'));
+    expect(typeof line).toBe('string');
+    const budgets = [...line.matchAll(/(\d{2,4})\s*caratteri/g)].map((m) => Number(m[1]));
+    expect(budgets.length).toBeGreaterThan(0);
+    expect(Math.max(...budgets)).toBe(SEO_OG_DESCRIPTION_MAX);
+    // E nessun numero nella riga puo' stare sotto il vecchio tetto: sarebbe il
+    // 160 tornato indietro sotto altra forma.
+    expect(Math.min(...budgets)).toBeGreaterThan(SEO_DESCRIPTION_MAX);
+  });
+
   it('registerArticleFiles applica il cap PRIMA di scrivere il file SEO', () => {
     const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
     const body = sliceFn(src, 'export async function registerArticleFiles(data, opts = {}) {');
