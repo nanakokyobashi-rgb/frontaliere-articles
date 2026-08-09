@@ -112,6 +112,17 @@
       }
     },
     {
+      "path": "scripts/ci/check-blog-body-syntax.mjs",
+      "sitePath": "tests/blog-body-typescript-syntax.test.ts",
+      "mode": "adapted",
+      "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
+      "baseline": {
+        "site": "57f158ab7858270e",
+        "corpus": "d9ab3e73feda5005",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "scripts/ci/check-issue-already-resolved.mjs",
       "mode": "identical",
       "baseline": {
@@ -800,6 +811,16 @@
         "site": "698fc51ff42c1b5b",
         "corpus": "698fc51ff42c1b5b",
         "alignedAt": "2026-08-08"
+      }
+    },
+    {
+      "path": "scripts/ci/retry-cmd.sh",
+      "mode": "corpus-only",
+      "reason": "Wrapper di retry generico per i comandi di rete del percorso di pubblicazione (npx). Fratello di scripts/lib/npm-ci-retry.sh, che copre i soli `npm ci`; vive qui perche' e' il ciclo di pubblicazione a usarlo e il sito non ha un equivalente.",
+      "baseline": {
+        "site": null,
+        "corpus": "250f479cee7368bb",
+        "alignedAt": "2026-08-09"
       }
     },
     {
