@@ -18,7 +18,7 @@
   ],
   "siteRepo": "valerielinc-ops/frontaliere-si-o-no",
   "siteRef": "main",
-  "alignedAt": "2026-08-07",
+  "alignedAt": "2026-08-09",
   "scope": {
     "_doc": [
       "Il manifest sorveglia FILE, uno per uno. Finche' l'unica cosa dichiarata sono i file",
@@ -502,11 +502,11 @@
     {
       "path": ".github/workflows/issue-fix.yml",
       "mode": "adapted",
-      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati).",
+      "reason": "Gate sender esteso agli account del progetto (la label di routing la applica il PAT di questo repo, di un altro account); identita' di push GITHUB_PAT_NANAKO invece del token GitHub App; gate test `node --test` invece di vitest; niente npm ci; il pre-flight di quota passa QUOTA_BEACON_PEER_REPO per cedere al sito. Prompt riscritto sul dominio di questo repo (superficie dist/api, contratto engine/host, content/ come dati). RIALLINEATO 2026-08-09 da `both-moved`, con le due modifiche verificate DISGIUNTE. Il sito ha sostituito `env.APP_TOKEN == ''` con `env.APP_TOKEN_WORKFLOWS != 'true'` nel gate del capability guard (riga 185 la'): qui quella stessa espressione era gia' `env.GITHUB_PAT_NANAKO == ''` (riga 136), cioe' il sito ha cambiato esattamente cio' che questo fork aveva gia' rimpiazzato. Il corpus si e' mosso per conto suo con #93 (rimozione dell'http.<host>.extraheader che rendeva inerte il set-url col PAT, e l'`ISSUE:` mancante per mark-claude-terminal-outcome.mjs). Nessuna delle due tocca cio' che l'altra ha toccato.",
       "baseline": {
-        "site": "289881edc3c42140",
-        "corpus": "cb278e6a944bd64a",
-        "alignedAt": "2026-08-07"
+        "site": "082c8cfe1e649be2",
+        "corpus": "9d96f186232c697b",
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -522,11 +522,11 @@
     {
       "path": "AGENTS.md",
       "mode": "adapted",
-      "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test.",
+      "reason": "Stessa struttura del contratto del sito, non-negoziabili di questo repo: mai importare content/ nel sito, l'engine si modifica in packages/articles del SITO (qui verrebbe sovrascritto dal mirror), SiteShellContract e host/ viaggiano insieme, il glob obbligatorio in node --test. RIALLINEATO 2026-08-09 senza portare nulla: il diff del sito dalla baseline precedente e' UNA riga, che aggiunge «CWV field criterion (#5001) docs/CWV-FIELD-CRITERION.md» alla sezione «Reference Docs». Qui non si applica per due motivi verificati: questo AGENTS.md non ha una sezione «Reference Docs» (le sue sono Cos'e' questo repo / La superficie pubblica / Non-negoziabili / Build e test / Credenziali / Il ciclo autonomo), e il repo non ha una cartella docs/ (404). Una modifica futura del sito che invece si applichi tornera' a comparire, perche' la baseline e' aggiornata all'hash di oggi, non disattivata.",
       "baseline": {
-        "site": "583ffff626bd1994",
+        "site": "7b52bedf01d44f0d",
         "corpus": "0860b171ac7b0751",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -690,11 +690,11 @@
     {
       "path": ".github/workflows/pr-redflag-fixer.yml",
       "mode": "adapted",
-      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico.",
+      "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO. Il gate sul reviewer (startsWith 'claude') e' gia' repo-agnostico. RIALLINEATO 2026-08-09 senza portare nulla: il sito ha cambiato una riga sola, `HAS_PAT: ${{ env.APP_TOKEN != '' || env.GITHUB_PAT != '' }}` -> `${{ env.APP_TOKEN_WORKFLOWS == 'true' || env.GITHUB_PAT != '' }}`. Qui la riga 212 e' gia' `HAS_PAT: ${{ env.GITHUB_PAT_NANAKO != '' }}`: la modifica cade dentro la zona adattata al 100%, e questo repo non ha una GitHub App da cui leggere APP_TOKEN_WORKFLOWS. RESIDUO NOTO, non chiuso qui: il commento sopra HAS_PAT (righe 195-204) afferma ancora che «HAS_PAT accetta ORA anche APP_TOKEN», falso su questo repo, e lo step di push (riga 279) si gata su `env.APP_TOKEN != '' || env.GITHUB_PAT != ''` mentre PUSH_TOKEN e' GITHUB_PAT_NANAKO (riga 281) — variabili disallineate. Il gate passa comunque perche' GITHUB_PAT e' mappato in load-rc-env.mjs, quindi l'effetto pratico non e' stato verificato.",
       "baseline": {
-        "site": "b456c412e8ae9075",
+        "site": "abb2b47aaba25e2c",
         "corpus": "3e7c07bca43b6c78",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-09"
       }
     },
     {
@@ -890,11 +890,11 @@
       "path": "generator/tests/blog-headline-validation.test.mjs",
       "sitePath": "tests/blog-headline-validation.test.ts",
       "mode": "adapted",
-      "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Piu' severo del sito, di proposito: la' l'asserzione stretta e' it.skip e copre solo blog-meta-it; qui e' ATTIVA su entrambe le sezioni, con baseline esplicita e datata dei 9 offender storici (tutti 'troppo lungo', issue #58 per lo svuotamento).",
+      "reason": "Conformita' A5 dei titoli (lunghezza, parole, clickbait): unit + drift guard su create-article.mjs + integrazione su TUTTI i titoli pubblicati. Piu' severo del sito, di proposito: la' l'asserzione stretta e' it.skip e copre solo blog-meta-it; qui e' ATTIVA e STRICT su entrambe le sezioni, SENZA baseline e SENZA ramo di tolleranza. RIALLINEATO 2026-08-09 (corpus-ahead): la versione precedente di questo campo descriveva «baseline esplicita e datata dei 9 offender storici», che non esiste piu' — i 9 titoli sono stati accorciati sotto i 110 char in content/blog-meta-it.ts e HEADLINE_BASELINE_2026_08_08 e' stata rimossa insieme al ramo di tolleranza (issue #58). Non e' un miglioramento del meccanismo da proporre al sito: e' pulizia di dati locali. Nota di metodo: il drift check confronta HASH, non prosa — un `reason` che invecchia resta falso con la CI verde, ed e' proprio cio' che era successo qui.",
       "baseline": {
         "site": "3e348f14062393f4",
-        "corpus": "ed1dcedd34d1ef32",
-        "alignedAt": "2026-08-08"
+        "corpus": "960eab60ce073d4c",
+        "alignedAt": "2026-08-09"
       }
     },
     {
