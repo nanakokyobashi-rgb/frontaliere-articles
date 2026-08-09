@@ -371,7 +371,16 @@ jobs:
               exit 0
             fi
             echo "push attempt $attempt failed — rebasing onto $TARGET"
-            git pull --rebase "$REMOTE" "$TARGET" || { git rebase --abort 2>/dev/null || true; }
+            # A conflict here is routinely NOT transient: this job rewrites the
+            # two bookkeeping caches below in full on every run, so two runs
+            # started from different bases conflict for real and all five
+            # attempts then fail identically (issue #76). The helper takes
+            # upstream's copy when the conflict is confined to those caches and
+            # lets the rebase finish, so the commit — and the article in it —
+            # survives. Any other conflicting path still aborts, as before.
+            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              data/topic-candidates-evergreen-rejected.json \
+              data/blog-images-used.json || true
             sleep $((attempt * 3))
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
