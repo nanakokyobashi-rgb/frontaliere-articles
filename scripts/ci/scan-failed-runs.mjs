@@ -97,6 +97,27 @@ export function parseIgnoreList(raw) {
 
 const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
 
+/**
+ * Workflow che dichiarano SIA `push: branches-ignore: [main]` SIA
+ * `pull_request` sugli stessi path — i gate pre-merge (`tests.yml`,
+ * `generator-ci.yml`). Per questi la run innescata da un push su un branch
+ * non-main è solo un'anteprima: quando (e se) la PR si apre, `pull_request`
+ * rigira la stessa suite e quel segnale è già escluso sotto, per lo stesso
+ * motivo — "un tests rosso su una PR è un problema della PR, lo vede il
+ * reviewer lì". Vale identico per il push che la precede: un checkpoint WIP
+ * del fixer autonomo è per contratto non testato al momento del push
+ * (ISSUES.md § "Checkpoint WIP"), e un branch di sviluppo abbandonato prima
+ * di aprire PR non ha nessuno che legga la issue. Senza questo filtro
+ * entrambi i casi aprono una "Workflow Failure" fantasma — misurato: #112,
+ * #135, #178, tutte push su branch mai (ancora) diventati PR.
+ *
+ * Non generalizzare oltre questi due nomi: gli altri workflow con `push` (i
+ * self-test di generazione, es. `batch-faq-articles.yml`) non hanno un
+ * trigger `pull_request` gemello — per loro il push È l'unico segnale che
+ * esista, ed escluderlo azzererebbe la copertura, non la duplicherebbe.
+ */
+const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
+
 function gh(args, fallback = '') {
   try {
     return execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
@@ -106,7 +127,18 @@ function gh(args, fallback = '') {
   }
 }
 
-/** Run fallite nella finestra, escluse quelle da pull_request. */
+/** Un run va segnalato, o è rumore già coperto da un altro canale? */
+export function isReportableRun(r, { since, ignore = IGNORE } = {}) {
+  return (
+    r.conclusion === 'failure' &&
+    r.event !== 'pull_request' &&
+    !(r.event === 'push' && PR_GATE_WORKFLOWS.has(r.workflowName)) &&
+    (!since || (r.updatedAt || r.createdAt) >= since) &&
+    !ignore.has(r.workflowName)
+  );
+}
+
+/** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const since = new Date(Date.now() - LOOKBACK_MIN * 60_000).toISOString();
   const raw = gh(
@@ -120,13 +152,7 @@ function failedRuns() {
   } catch {
     return [];
   }
-  return runs.filter(
-    (r) =>
-      r.conclusion === 'failure' &&
-      r.event !== 'pull_request' &&
-      (r.updatedAt || r.createdAt) >= since &&
-      !IGNORE.has(r.workflowName),
-  );
+  return runs.filter((r) => isReportableRun(r, { since }));
 }
 
 /**
