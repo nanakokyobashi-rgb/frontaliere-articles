@@ -604,8 +604,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "9f232ca4618e06ea",
-        "alignedAt": "2026-08-08"
+        "corpus": "0efeffb8668fa0a7",
+        "alignedAt": "2026-08-10"
       }
     },
     {

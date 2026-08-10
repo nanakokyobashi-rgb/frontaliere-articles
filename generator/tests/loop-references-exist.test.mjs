@@ -295,6 +295,23 @@ const DECLARED_ABSENT = {
       'La riga dice «the site repo\'s crawl-events.yml»: nomina la sorgente da cui UNO step ' +
       'e\' migrato qui (issue #4974). Il referente resta di la\' per costruzione.',
   },
+  '.github/workflows/fast-publish-article.yml :: scripts/wait-for-live-article-shards.mjs': {
+    kind: 'site-only',
+    reason:
+      'La meta\' sul sito della stessa pipeline: e\' la sonda di liveness che questo gate ' +
+      'reimplementa in shell per gli shard che pusha questo repo. La riga la cita come ' +
+      'PRECEDENTE del cache-bust `_fpcb` (issue #114) — «non e\' un nome nuovo, e\' quello ' +
+      'che usa gia\' di la\'» — non come qualcosa che questo workflow invoca. Nulla qui ' +
+      'dipende dalla sua esistenza: il gate gira per intero con curl e jq.',
+  },
+  '.github/workflows/fast-publish-article.yml :: scripts/lib/live-link-check.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il modulo del sito sotto wait-for-live-article-shards.mjs, citato nella stessa frase ' +
+      'e per la stessa ragione: e\' li\' che vive `checkLink` col suo `_=<epoch>`. ' +
+      'Descrittiva — nominare dove sta l\'altra meta\' e\' cio\' che rende ricontrollabile ' +
+      'l\'affermazione «il porting ha perso il bust», non una dipendenza.',
+  },
 };
 
 const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data']);
