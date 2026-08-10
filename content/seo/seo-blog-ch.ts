@@ -12675,7 +12675,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/aprire-conto-banca-svizzera-residenti.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "max 125 chars"
+        "caption": "Immagine editoriale relativa a: Conto bancario in Svizzera per residenti: documenti, banche principali e costi"
       },
       "datePublished": "2026-07-11T18:29:36+00:00",
       "dateModified": "2026-07-11T18:29:36+00:00",
@@ -24453,7 +24453,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/imposta-cantonale-confronto-svizzera-2026-canton-zurigo.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Max 125 caratteri"
+        "caption": "Immagine editoriale relativa a: Cantoni e aliquote: confronto 2026 e strategie di ottimizzazione"
       },
       "datePublished": "2026-08-06T03:55:28+00:00",
       "dateModified": "2026-08-06T03:55:28+00:00",
@@ -25311,7 +25311,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/terzo-pilastro-3a-svizzera-vantaggi-2026-canton-basilea.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "max 125 caratteri"
+        "caption": "Immagine editoriale relativa a: Terzo pilastro 3a: vantaggi e strategie fiscali"
       },
       "datePublished": "2026-08-09T14:38:53+00:00",
       "dateModified": "2026-08-09T14:38:53+00:00",

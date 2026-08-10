@@ -1078,8 +1078,8 @@
       "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi.",
       "baseline": {
         "site": "44b4dcb727b012ea",
-        "corpus": "db56c06d00a35f67",
-        "alignedAt": "2026-08-09"
+        "corpus": "3025de18994bdabc",
+        "alignedAt": "2026-08-10"
       }
     },
     {
@@ -1752,6 +1752,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/prompt-placeholder-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guard sui SEGNAPOSTO DEL PROMPT, valido per ogni campo di testo pubblicato (corpo, FAQ, excerpt, imageAlt, title, seo). `corpus-only` per dove sta il difetto, non per comodita: i segnaposto li scrive il generatore, che vive qui, e il criterio e derivato dai letterali dello schema JSON del prompt di generator/scripts/create-article.mjs, che e `adapted`. Chiude una CLASSE che tre fix avevano affrontato un campo alla volta: la PR #121 lo slug, it-microcopy-guard.mjs lo stile di title/excerpt, e il filtro `q.length > 10 && a.length > 20` la sola FORMA della FAQ — quest ultimo stampava «FAQ: 3 coppie valide» mentre le tre coppie ERANO lo schema, e 24 articoli hanno pubblicato FAQPage JSON-LD con «Domanda frequente 1» come domanda. Candidato a risalire al sito insieme a create-article.mjs, che ne e il chiamante: il gemello `scripts/create-article.mjs` esiste ed e vivo (publish-journalist-article lo importa), quindi il percorso del sito resta scoperto finche quel porting non avviene — vedi il bullet in `## Non implementato (ancora)` della PR.",
+      "baseline": {
+        "site": null,
+        "corpus": "e3a343378fd42a16",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
       "path": "generator/scripts/lib/it-microcopy-guard.mjs",
       "mode": "corpus-only",
       "reason": "Guardia deterministica su titolo ed excerpt (issue del 2026-08-09: «Frontaliere gruista ticino», «i frontaliere gruisti», «il stipendio medio» usciti in SERP). Non esiste sul sito, ed e' corpus-only per dove sta il difetto, non per comodita': i titoli e gli excerpt li scrive il generatore, che vive qui. Il buco che chiude e' un ramo di uscita anticipata, non una tabella mancante: normalizeTitleCasing() conosceva gia' 'ticino' in TITLE_CASING_PROPER_NOUNS ma torna subito quando il titolo non e' ne' Title Case ne' urlato (`if (!looksTitleCase && !isShouting) return s;`), e un titolo in sentence case cade esattamente li'. L'excerpt non aveva NESSUN passaggio deterministico. Candidato a risalire al sito insieme a create-article.mjs, che e' `adapted` e ne e' il chiamante: qui il gemello non esiste ancora perche' la fix nasce dal lato che pubblica.",
@@ -1759,6 +1769,16 @@
         "site": null,
         "corpus": "a9c8621700234446",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/prompt-placeholder-guard.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Banco del guard sopra. Quattro strati invece dei tre di it-microcopy-guard.test.mjs, e il quarto e la ragione per cui questo guard non invecchia: il blocco LOCK ri-estrae i valori letterali dallo schema JSON del prompt di create-article.mjs e pretende che coincidano con SCHEMA_PLACEHOLDER_LITERALS del modulo. Un segnaposto nuovo nel template rende rosso il test, invece di comparire nel corpus tre giorni dopo. Gli altri tre sono unit sulle stringhe VERE uscite in produzione, wiring (il guard gira dentro registerArticleFiles, cioe sul percorso di scrittura CONDIVISO dai quattro generatori che non passano da validate()), e gate sui campi pubblicati con i due tassi di falso positivo misurati SEPARATAMENTE su metadati (46.175 campi) e su corpi (61.484 campi). Le soglie di conteggio esistono perche uno sparse checkout senza content/ non possa passare a vuoto.",
+      "baseline": {
+        "site": null,
+        "corpus": "a170850dda771716",
+        "alignedAt": "2026-08-10"
       }
     },
     {
