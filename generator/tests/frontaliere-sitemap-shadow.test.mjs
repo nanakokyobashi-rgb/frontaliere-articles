@@ -180,3 +180,85 @@ test('build-api.mjs feeds the shadow sets into both collect(...) calls that buil
       'could leak back into sitemap-news-candidates.xml while still inside the 48h window',
   );
 });
+
+// ── The other half of the contract: where the shadowing deliberately STOPS ──
+//
+// The two tests below pin a NEGATIVE, which is unusual and is the point. The
+// shadowing rule is narrow — "a sitemap <loc> whose page canonicalises elsewhere
+// is a hard CI gate failure" (scripts/audit-sitemap-canonicals.mjs,
+// scripts/validate-sitemap-pages.mjs) — and it applies to sitemaps only. RSS and
+// news-ticker-live.json are not sitemaps and no gate reads them.
+//
+// Without these tests that scope lives only in a `_doc` string inside two JSON
+// files that no reader parses, so it reads as an oversight from the code alone:
+// PR #152's own automated review raised "filter the RSS registries" and "filter
+// the ticker input" as two 🔴 Important findings on exactly that reading. Pinning
+// the boundary turns a decision nobody can see into one that fails loudly when
+// changed by accident — and tells whoever changes it on purpose where to go.
+const SWISS_OVERRIDES_PATH = path.join(ROOT, 'content', 'swiss-article-canonical-overrides.json');
+
+test('both canonical-override files still declare the sitemap-only scope (RSS explicitly excluded)', () => {
+  const frontaliereDoc = JSON.parse(fs.readFileSync(OVERRIDES_PATH, 'utf-8'))._doc ?? '';
+  const swissDoc = JSON.parse(fs.readFileSync(SWISS_OVERRIDES_PATH, 'utf-8'))._doc ?? '';
+
+  assert.match(
+    swissDoc,
+    /RSS[\s\S]{0,40}?is NOT touched/i,
+    'content/swiss-article-canonical-overrides.json no longer documents that RSS is out of scope — ' +
+      'if the policy really changed, update scripts/build-api.mjs (and engine/rssFeeds.mjs, which owns ' +
+      'the item list for BOTH callers) in the same change; if it did not, restore the sentence',
+  );
+  // ...and the news sitemap explicitly IS in scope. This is the line that gives
+  // the round-1 fix of this PR (shadowing sitemap-news-candidates.xml) a written
+  // mandate, and it is what separates that surface from RSS and the ticker: a
+  // news sitemap is a sitemap.
+  assert.match(
+    swissDoc,
+    /sitemap-news\.xml/i,
+    'the swiss override file no longer names the news sitemap as a de-listing target — that sentence is ' +
+      'the stated basis for shadowing sitemap-news-candidates.xml in scripts/build-api.mjs',
+  );
+  assert.match(
+    frontaliereDoc,
+    /RSS is NOT touched/i,
+    'engine/shared/frontaliere-article-canonical-overrides.json no longer documents that RSS is out of ' +
+      'scope — same instruction as above. NB: this file is mirrored from the site ' +
+      '(packages/articles/engine/shared/), so it is edited THERE, not here',
+  );
+  // The positive half of the same sentence: the sitemap IS in scope. If this
+  // disappears, the four sitemap tests above are asserting a rule nothing claims.
+  assert.match(
+    frontaliereDoc,
+    /not advertised in a sitemap/i,
+    'the frontaliere override file no longer states that shadowed slugs are de-listed from the sitemap — ' +
+      'the shadowing tests above would be pinning behaviour with no stated contract behind it',
+  );
+});
+
+test('build-api.mjs passes the UNFILTERED registries to the RSS builder and to the ticker (sitemap-only scope)', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
+
+  const rssCall = src.match(/buildAllRssFeeds\(\{[\s\S]*?\n\}\);/);
+  assert.ok(rssCall, 'could not find the buildAllRssFeeds({...}) call to inspect');
+  assert.match(
+    rssCall[0],
+    /registries:\s*\{\s*frontaliere:\s*ARTICLES,\s*svizzera:\s*SWISS_ARTICLES\s*\}/,
+    'the RSS registries are no longer the raw ARTICLES/SWISS_ARTICLES. Filtering them HERE is a ' +
+      'caller-side divergence: engine/rssFeeds.mjs is the single implementation shared with the site ' +
+      '(its header forbids a second copy for exactly this reason), and both override files document ' +
+      'RSS as out of scope. Change the `_doc` and the engine module, not this call site',
+  );
+
+  const tickerCall = src.match(/computeTickerArticles\(\s*fs,\s*path,\s*ROOT,[^,]+,/);
+  assert.ok(tickerCall, 'could not find the computeTickerArticles(...) call to inspect');
+  assert.match(
+    tickerCall[0],
+    /ROOT,\s*ARTICLES,/,
+    'the ticker no longer receives the raw ARTICLES. news-ticker-live.json has THREE producers that all ' +
+      'call computeTickerArticles with an unfiltered registry — the site build (vite.config.ts), the ' +
+      "site's fast-publish (scripts/publish-article-chunks.mjs, CDN key data/news-ticker-live.json) and " +
+      'this script; producers 2 and 3 write the same payload for the same consumer, so filtering only ' +
+      "here makes the homepage's top-5 depend on which one wrote last. The filter belongs inside " +
+      'computeTickerArticles, which is edited on the site (packages/articles/engine)',
+  );
+});

@@ -329,6 +329,43 @@ if (sitemapCounts.archive < 8) {
 //
 // `layout` is the whole difference between the two callers: the site keeps the
 // corpus under services/, this repo under content/.
+//
+// ── `registries` is passed UNFILTERED, and that is the decision, not an omission ──
+//
+// The canonical-override shadowing applied above stops at the sitemaps. Both
+// override files say so in their own `_doc`, which is where the rule was
+// written down before any of this code existed:
+//
+//   content/swiss-article-canonical-overrides.json:
+//     "RSS (rss-svizzera*.xml) is NOT touched by this: RSS item lists are not
+//      covered by the self-canonical sitemap gate, and normal RSS semantics
+//      include all published items regardless of canonical hint."
+//   engine/shared/frontaliere-article-canonical-overrides.json:
+//     "RSS is NOT touched, same as the svizzera precedent."
+//
+// The rule the shadowing implements is narrow and mechanical: "a sitemap <loc>
+// whose page canonicalises elsewhere is a hard CI gate failure"
+// (scripts/audit-sitemap-canonicals.mjs, scripts/validate-sitemap-pages.mjs).
+// sitemap-blog.xml and sitemap-news-candidates.xml are sitemaps and are gated;
+// an RSS <item> is not a <loc> and no gate reads it. The shadowed page also
+// stays live by house rule — no removal, no noindex, no redirect — so dropping
+// its already-published item from the feed would be a retroactive un-publish of
+// a page that is still there, which is the "cut" that rule exists to forbid.
+//
+// Measured on the emitted feeds (2026-08-10, 3166 articles, this script run
+// end to end): of the 8 override keys, exactly ONE article carries a `<link>` in
+// any feed — `lavoro-piastrellista-ticino-frontaliere` and its three localised
+// slugs, one item per locale. The other shadowed article
+// (`piastrellista-frontaliere-ticino-guadagno`, dated 2026-07-20) is already
+// past RSS_MAX_ITEMS=50 in all ten feeds. So the reach of this decision is one
+// article, and the winner is in the same feeds alongside it — which is the
+// documented outcome, not a leak.
+//
+// If the policy is ever reversed, the filter does NOT belong on this line: the
+// `_doc` of both override files has to change first, and the exclusion belongs
+// inside engine/rssFeeds.mjs (one module, two callers — that module's header
+// forbids caller-side divergence by construction). generator/tests/frontaliere-sitemap-shadow.test.mjs
+// pins both halves of that.
 const rssSections = buildAllRssFeeds({
   fs,
   path,
@@ -377,6 +414,37 @@ for (const section of rssSections) {
 // site build. `hubLocales` is passed explicitly — `computeTickerArticles`
 // otherwise reads it from the site shell, which does not exist here (that
 // coupling is exactly what issue #4974 item 2 removed).
+//
+// ── ARTICLES is passed UNFILTERED here too, for a second and harder reason ──
+//
+// Same sitemap-only scope as the RSS block above (see it for the `_doc`
+// citations): news-ticker-live.json is a homepage widget payload, not a sitemap,
+// and no self-canonical gate reads it.
+//
+// But this artifact has THREE producers, all calling this same
+// `computeTickerArticles` with an unfiltered registry:
+//   1. frontaliere-si-o-no/vite.config.ts -> newsTickerDataPlugin -> the
+//      committed data/news-ticker-data.ts (site build time);
+//   2. frontaliere-si-o-no/scripts/publish-article-chunks.mjs -> the CDN key
+//      `data/news-ticker-live.json` (fast-publish, out of band);
+//   3. this call -> dist/api/news-ticker-live.json, which the site pulls back
+//      via scripts/pull-articles-api.mjs.
+// Producers 2 and 3 write the SAME payload for the SAME consumer. Filtering
+// only here would make the homepage's top-5 depend on which of the two wrote
+// last — a real, visible divergence introduced by a fix, and precisely the
+// caller-side drift engine/newsTickerDataPlugin.ts is shared to make impossible.
+//
+// Measured on the emitted payload (2026-08-10): the five slugs in
+// news-ticker-live.json are all dated 2026-08-10 and none is shadowed — zero
+// exposure today. The exposure is latent and bounded by the ~2h window the five
+// newest articles span at the current publishing rate, while a canonical
+// override is an owner decision taken hours later (the piastrellista group was
+// decided the day after publication, when the newest of the three was already
+// 29 articles deep).
+//
+// So if the ticker should ever exclude shadowed articles, the filter goes inside
+// computeTickerArticles — which lives in the engine and is edited on the SITE
+// (packages/articles/engine), never here, or the next mirror overwrites it.
 const { computeTickerArticles } = await load('engine/newsTickerDataPlugin.ts');
 const tickerArticles = computeTickerArticles(fs, path, ROOT, ARTICLES, {
   hubLocales: LOCALES,
