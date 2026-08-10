@@ -9559,6 +9559,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-dumenza-lavorare-ticino.title': 'Living in Dumenza and working in Ticino as a border worker',
     'blog.article.vivere-dumenza-lavorare-ticino.excerpt': 'All the important facts for border workers who work in Ticino and reside in Dumenza.',
     'blog.article.vivere-dumenza-lavorare-ticino.imageAlt': 'A border worker lives in Dumenza and works in Ticino.',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.title': 'Moving to Marzio by frontier: pros and cons',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.excerpt': 'We know what it means to be a frontier worker in Switzerland and Italy. The New Frontier Agreement introduced new rules for frontier workers, but what are the advantages and disadvantages of moving to Marzio?',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.imageAlt': 'Frontaliers who work in Switzerland and reside in Italy considering relocation to Marzio.',
 };
 
 export default blogMetaEn;

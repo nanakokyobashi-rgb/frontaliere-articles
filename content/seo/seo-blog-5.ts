@@ -62939,6 +62939,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-trasferirsi-a-marzio-da-frontaliere-pro-e-contro': {
+    title: 'Trasferirsi a Marzio da frontaliere: pro e contro',
+    description: 'Sappiamo cosa significa essere un frontaliere in Svizzera e in Italia. Il Nuovo Accordo Frontalieri ha introdotto nuove regole per i frontalieri, ma quali sono',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, marzio, contro, sappiamo',
+    ogTitle: 'Trasferirsi a Marzio da frontaliere: pro e contro',
+    ogDescription: 'Sappiamo cosa significa essere un frontaliere in Svizzera e in Italia. Il Nuovo Accordo Frontalieri ha introdotto nuove regole per i frontalieri, ma quali sono i vantaggi e svantaggi di trasferirsi a Marzio?',
+    canonicalPath: '/articoli-frontaliere/trasferirsi-a-marzio-da-frontaliere-pro-e-contro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasferirsi a Marzio da frontaliere: pro e contro",
+      "description": "Sappiamo cosa significa essere un frontaliere in Svizzera e in Italia. Il Nuovo Accordo Frontalieri ha introdotto nuove regole per i frontalieri, ma quali sono",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasferirsi-a-marzio-da-frontaliere-pro-e-contro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontalieri che lavorano in Svizzera e risiedono in Italia che considerano il trasferimento a Marzio."
+      },
+      "datePublished": "2026-08-10T21:40:00+00:00",
+      "dateModified": "2026-08-10T21:40:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trasferirsi-a-marzio-da-frontaliere-pro-e-contro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

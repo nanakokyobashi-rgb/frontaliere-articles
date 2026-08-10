@@ -9561,6 +9561,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-dumenza-lavorare-ticino.title': 'Vivre à Dumenza et travailler au Tessin en tant que frontalier',
     'blog.article.vivere-dumenza-lavorare-ticino.excerpt': 'Tous les faits importants pour les frontaliers qui travaillent au Tessin et résident à Dumenza.',
     'blog.article.vivere-dumenza-lavorare-ticino.imageAlt': 'Un frontalier vit à Dumenza et travaille dans le Tessin.',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.title': 'Déménager à Marzio en tant que frontalier : avantages et inconvénients',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.excerpt': 'Nous savons ce que signifie être un frontalier en Suisse et en Italie. Le nouvel accord frontalier a introduit de nouvelles règles pour les frontaliers, mais quels sont les avantages et les inconvénients de déménager à Marzio ?',
+    'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.imageAlt': 'Frontaliers travaillant en Suisse et résidant en Italie qui envisagent le transfert à Marzio.',
 };
 
 export default blogMetaFr;
