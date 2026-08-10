@@ -62081,6 +62081,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-porlezza-lavorare-ticino-guida': {
+    title: 'Vivere a Porlezza e lavorare in Ticino da frontaliere',
+    description: 'Guida per frontalieri: vivere a Porlezza e lavorare in Ticino. Fatti su fisco, nuovo accordo 2024, franchigie e previdenza per pendolari. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, porlezza, lavorare, pratica',
+    ogTitle: 'Vivere a Porlezza e lavorare in Ticino da frontaliere',
+    ogDescription: 'Tutto quello che un frontaliere deve sapere: fiscalità, nuovo accordo 2024, permessi e gestione del reddito tra Porlezza e il Ticino.',
+    canonicalPath: '/articoli-frontaliere/vivere-porlezza-lavorare-ticino-guida',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Porlezza e lavorare in Ticino da frontaliere",
+      "description": "Guida per frontalieri: vivere a Porlezza e lavorare in Ticino. Fatti su fisco, nuovo accordo 2024, franchigie e previdenza per pendolari. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-porlezza-lavorare-ticino-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica del lago di Lugano"
+      },
+      "datePublished": "2026-08-10T02:29:46+00:00",
+      "dateModified": "2026-08-10T02:29:46+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-porlezza-lavorare-ticino-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

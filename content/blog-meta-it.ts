@@ -9488,6 +9488,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.title': 'Vivere a Porlezza e lavorare in Ticino da frontaliere: cosa cambia e cosa fare',
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Nuovo accordo fiscale 2026: cosa significa per i frontalieri e come si applicherà',
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un frontaliere che si trova in una situazione simile potrebbe cercare di comprendere meglio le nuove norme fiscali che saranno applicate ai frontalieri.',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.title': 'Vivere a Porlezza e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.excerpt': 'Guida pratica al pendolarismo tra Porlezza e il Canton Ticino: regole, fiscalità, permessi e gestione del reddito secondo il nuovo accordo.',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.imageAlt': 'Vista panoramica del lago di Lugano',
 };
 
 export default blogMetaIt;

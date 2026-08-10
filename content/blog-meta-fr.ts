@@ -9489,6 +9489,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.title': 'Travailler en Tessin, vivre à Porlezza : ce qui change',
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Nouvel accord fiscal 2026 : ce que cela signifie pour les frontaliers et comment cela s\'appliquera',
     'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un travailleur frontalier qui se trouve dans une situation similaire peut chercher à mieux comprendre les nouvelles règles fiscales qui seront applicables aux travailleurs frontaliers.',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.title': 'Vivre à Porlezza et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.excerpt': 'Guide pratique pour les déplacements entre Porlezza et le canton du Tessin : règles, fiscalité, permis et gestion des revenus selon le nouvel accord.',
+    'blog.article.vivere-porlezza-lavorare-ticino-guida.imageAlt': 'Vue panoramique sur le lac de Lugano',
 };
 
 export default blogMetaFr;
