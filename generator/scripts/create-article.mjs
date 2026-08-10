@@ -5245,6 +5245,55 @@ function prioritizeFrontalieriHeadlines(headlines) {
 }
 
 // ── Step 1d: Use Gemini to select the best article ──────────
+/**
+ * Call the headline-selection LLM and parse a `selectedIndex` in
+ * `[0, listLength)`. An out-of-range index used to be clamped to 0 — which
+ * silently swaps the published pick for a different one than the `reason`
+ * describes (issue #188: the model answered with an id lifted from the
+ * "already published" list, clamp picked index 0, and the run report's
+ * `reason` motivated an article that was never the one generated). An
+ * incoherent index is a response to reject and retry, not a choice to save.
+ * Returns `{ idx, selection }` on success, `null` once `maxAttempts` is
+ * exhausted without a valid index.
+ */
+async function selectIndexWithRetry(basePrompt, listLength, { label, maxAttempts = 3 } = {}) {
+  let prompt = basePrompt;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const rawText = await callLLM(
+      [{ role: 'user', content: prompt }],
+      { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
+    );
+    const cleaned = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+    let selection;
+    try {
+      selection = JSON.parse(cleaned);
+    } catch {
+      const idxMatch = cleaned.match(/"selectedIndex"\s*:\s*(\d+)/);
+      const reasonMatch = cleaned.match(/"reason"\s*:\s*"([^"]*)/);
+      if (idxMatch) {
+        console.error(`  ⚠️  ${label}: JSON troncato — recovery da selectedIndex=${idxMatch[1]}`);
+        selection = {
+          selectedIndex: parseInt(idxMatch[1], 10),
+          reason: reasonMatch ? reasonMatch[1] : '(reason troncata)',
+        };
+      } else {
+        console.error(`  ⚠️  ${label}: impossibile parsare selezione (tentativo ${attempt}/${maxAttempts})`);
+        console.error(`     Risposta: ${cleaned.slice(0, 200)}`);
+        if (attempt < maxAttempts) continue;
+        return null;
+      }
+    }
+    const idx = selection.selectedIndex;
+    if (typeof idx === 'number' && idx >= 0 && idx < listLength) {
+      return { idx, selection };
+    }
+    console.error(`  ⚠️  ${label}: indice ${idx} fuori range (0-${listLength - 1}) — risposta rigettata (tentativo ${attempt}/${maxAttempts})`);
+    if (attempt >= maxAttempts) return null;
+    prompt = `${basePrompt}\n\nATTENZIONE: la risposta precedente conteneva "selectedIndex": ${idx}, non valido per un elenco di ${listLength} headline (indici validi: 0-${listLength - 1}). Rispondi di nuovo con un JSON valido e un "selectedIndex" nel range corretto.`;
+  }
+  return null;
+}
+
 async function selectArticle(headlines) {
   // Get existing article info for duplicate detection (all sections — shared id/SEO/i18n namespace)
   const existingIds = getAllArticleIds();
@@ -5256,10 +5305,15 @@ async function selectArticle(headlines) {
   titleMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
   excerptMatches.forEach((m) => { m[2] = unescapeTsValue(m[2]); });
   const existingTitles = titleMatches.map(m => m[2]);
-  // Build compact "title — excerpt" list for last 30 articles (most relevant for duplicate avoidance)
+  // Build compact "title — excerpt" list for last 30 articles (most relevant for duplicate avoidance).
+  // No id, no brackets: HEADLINE_SELECTION_PROMPT interpolates this list right
+  // next to the candidate headlines, which ARE indexed as `[i]`. An id in the
+  // same `[...]` shape reads as an index to the model — issue #188 traced a
+  // selection whose `reason` motivated a corpus article (by id) while the
+  // published pick was a different, unrelated headline.
   const recentArticles = titleMatches.slice(-30).map(m => {
     const exMatch = excerptMatches.find(e => e[1] === m[1]);
-    return `• [${m[1]}] ${m[2]}${exMatch ? ' — ' + exMatch[2].slice(0, 100) : ''}`;
+    return `• ${m[2]}${exMatch ? ' — ' + exMatch[2].slice(0, 100) : ''}`;
   }).join('\n');
 
   // Chunking: if too many headlines, split into batches to avoid token overflow
@@ -5281,35 +5335,12 @@ async function selectArticle(headlines) {
       }).join('\n');
       const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles);
       console.error(`🤖 Selezione batch ${batchIdx + 1}/${batches.length} (${batch.length} headline)...`);
-      const rawText = await callLLM(
-        [{ role: 'user', content: prompt }],
-        { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-      );
-      const cleaned = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-      let selection;
-      try {
-        selection = JSON.parse(cleaned);
-      } catch {
-        const idxMatch = cleaned.match(/"selectedIndex"\s*:\s*(\d+)/);
-        const reasonMatch = cleaned.match(/"reason"\s*:\s*"([^"]*)/);
-        if (idxMatch) {
-          console.error(`  ⚠️  JSON troncato — recovery da selectedIndex=${idxMatch[1]}`);
-          selection = {
-            selectedIndex: parseInt(idxMatch[1], 10),
-            reason: reasonMatch ? reasonMatch[1] : '(reason troncata)',
-          };
-        } else {
-          console.error(`  ⚠️  Batch ${batchIdx + 1}: impossibile parsare selezione, skip`);
-          console.error(`     Risposta: ${cleaned.slice(0, 200)}`);
-          continue;
-        }
+      const result = await selectIndexWithRetry(prompt, batch.length, { label: `Batch ${batchIdx + 1}` });
+      if (!result) {
+        console.error(`  ⚠️  Batch ${batchIdx + 1}: nessuna selezione valida dopo i retry, skip`);
+        continue;
       }
-      let idx = selection.selectedIndex;
-      if (typeof idx !== 'number' || idx < 0 || idx >= batch.length) {
-        console.error(`  ⚠️  Batch ${batchIdx + 1}: indice ${idx} fuori range (0-${batch.length - 1}), clamp a 0`);
-        idx = 0;
-      }
-      batchWinners.push({ ...batch[idx], _batchReason: selection.reason });
+      batchWinners.push({ ...batch[result.idx], _batchReason: result.selection.reason });
     }
     // Now select from batch winners
     trimmed = batchWinners;
@@ -5323,36 +5354,15 @@ async function selectArticle(headlines) {
   }).join('\n');
   const prompt = HEADLINE_SELECTION_PROMPT(headlineList, recentArticles);
   console.error(`🤖 Selezione articolo finale tra ${trimmed.length} headline...`);
-  const rawText = await callLLM(
-    [{ role: 'user', content: prompt }],
-    { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-  );
+  const result = await selectIndexWithRetry(prompt, trimmed.length, { label: 'Selezione finale' });
+  if (!result) {
+    throw Object.assign(
+      new Error(`Selezione headline rigettata — nessun selectedIndex valido dopo i retry (pool di ${trimmed.length} headline)`),
+      { qualityReject: true },
+    );
+  }
   console.error(`  ✅ Selezione completata`);
-  const cleaned = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-  let selection;
-  try {
-    selection = JSON.parse(cleaned);
-  } catch {
-    const idxMatch = cleaned.match(/"selectedIndex"\s*:\s*(\d+)/);
-    const reasonMatch = cleaned.match(/"reason"\s*:\s*"([^"]*)/);
-    if (idxMatch) {
-      console.error(`  ⚠️  JSON troncato — recovery da selectedIndex=${idxMatch[1]}`);
-      selection = {
-        selectedIndex: parseInt(idxMatch[1], 10),
-        reason: reasonMatch ? reasonMatch[1] : '(reason troncata)',
-      };
-    } else {
-      // Last resort: pick first headline
-      console.error(`  ⚠️  Impossibile parsare selezione finale, fallback a indice 0`);
-      console.error(`     Risposta: ${cleaned.slice(0, 200)}`);
-      selection = { selectedIndex: 0, reason: '(selezione automatica — parse fallito)' };
-    }
-  }
-  let idx = selection.selectedIndex;
-  if (typeof idx !== 'number' || idx < 0 || idx >= trimmed.length) {
-    console.error(`  ⚠️  Indice ${idx} fuori range (0-${trimmed.length - 1}), clamp a 0`);
-    idx = 0;
-  }
+  const { idx, selection } = result;
   const chosen = trimmed[idx];
   const tokenize = (s) => (s || '')
     .toLowerCase()
