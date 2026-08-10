@@ -295,6 +295,16 @@
       }
     },
     {
+      "path": "scripts/lib/pr-body-nextstep-check.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore del PIANO di completamento: le voci di `## Non implementato (ancora)` non devono rimandare il lavoro con una scappatoia al posto di uno stato (REVIEW.md §98). Nasce dall'escalation #140 — il bucket `reviewer-finding/pr-body-contract` ricorreva 9 volte in 14 giorni mentre il gate era verde, perche' i due moduli condivisi misurano la PRESENZA della sezione e il contratto chiede un PIANO. Sul sito non esiste: la soglia bloccante e' calibrata sui body di QUESTO repo (misurata su 40 PR mergiate), e portarla la' senza rimisurarla darebbe un tasso di falsi positivi diverso. Se il sito la vuole, si rimisura e diventa `identical`.",
+      "baseline": {
+        "site": null,
+        "corpus": "eed3a8d5d87f8bfe",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
@@ -321,6 +331,16 @@
         "site": "20e4e76243cb60b0",
         "corpus": "bb17921f280d33c5",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "mode": "adapted",
+      "reason": "Il corpus non aveva template affatto, ed e' meta' dell'escalation #140: senza scheletro, la forma corretta del body va ricordata invece che ereditata. Adattato e non `identical` perche' i due repo vogliono header DIVERSI — qui `## Non implementato (ancora)` CON «(ancora)», sul sito senza — e perche' i commenti guida citano le trappole misurate su questo lato (PR #139: «Chiude #133» non ha chiuso #133).",
+      "baseline": {
+        "site": "fa0e797cb26a3655",
+        "corpus": "757dc5bdf671adc0",
+        "alignedAt": "2026-08-10"
       }
     },
     {
