@@ -2053,6 +2053,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.reno-svizzera-merci-camion-essere.title': 'Switzerland faces cost hikes with Rhine dry',
     'blog.article.reno-svizzera-merci-camion-essere.excerpt': 'Rhine drought could have direct consequences for Switzerland',
     'blog.article.reno-svizzera-merci-camion-essere.imageAlt': 'Goods in transit on the road in Switzerland',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.title': 'OECD assigns positive assessment to Switzerland',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.excerpt': 'The Swiss National Contact Point for Responsible Business Conduct was positively assessed by the OECD.',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.imageAlt': 'Image of a view of Lugano',
 };
 
 export default blogMetaChEn;

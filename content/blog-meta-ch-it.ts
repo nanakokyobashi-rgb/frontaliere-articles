@@ -2053,6 +2053,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.reno-svizzera-merci-camion-essere.title': 'Con il Reno a secco, le cose per la Svizzera rischiano davvero di farsi più care',
     'blog.article.reno-svizzera-merci-camion-essere.excerpt': 'La siccità del Reno potrebbe avere conseguenze dirette per la Svizzera',
     'blog.article.reno-svizzera-merci-camion-essere.imageAlt': 'Merci in transito sulla strada in Svizzera',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.title': 'OCSE assegna giudizio positivo alla Svizzera',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.excerpt': 'Il punto di contatto nazionale svizzero per la condotta aziendale responsabile è stato valutato positivamente dall\'OCSE.',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.imageAlt': 'Immagine di una vista di Lugano',
 };
 
 export default blogMetaChIt;

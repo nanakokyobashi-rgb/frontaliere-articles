@@ -2053,6 +2053,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.reno-svizzera-merci-camion-essere.title': 'Reno a secco: la Svizzera paga di più',
     'blog.article.reno-svizzera-merci-camion-essere.excerpt': 'Die Dürre am Rhein könnte direkte Folgen für die Schweiz haben',
     'blog.article.reno-svizzera-merci-camion-essere.imageAlt': 'Waren in Transit auf der Strasse in der Schweiz',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.title': 'OECD beurteilt die Schweiz positiv',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.excerpt': 'Die nationale Anlaufstelle der Schweiz für verantwortungsvolles unternehmerisches Handeln wurde von der OECD positiv bewertet.',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.imageAlt': 'Bild einer Aussicht auf Lugano',
 };
 
 export default blogMetaChDe;

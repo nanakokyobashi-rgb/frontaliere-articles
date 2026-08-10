@@ -2053,6 +2053,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.reno-svizzera-merci-camion-essere.title': 'Le choses pour la Suisse risquent davvero di farsi plus chères',
     'blog.article.reno-svizzera-merci-camion-essere.excerpt': 'La sécheresse du Rhin pourrait avoir des conséquences directes pour la Suisse',
     'blog.article.reno-svizzera-merci-camion-essere.imageAlt': 'Marchandises en transit sur la route en Suisse',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.title': 'L\'OCDE donne un avis positif à la Suisse',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.excerpt': 'Le point de contact national suisse pour la conduite responsable des entreprises a été évalué positivement par l\'OCDE.',
+    'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.imageAlt': 'Image d\'une vue de Lugano',
 };
 
 export default blogMetaChFr;
