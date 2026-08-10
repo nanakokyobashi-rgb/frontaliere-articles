@@ -48,6 +48,24 @@
  *             parlare e smentisce, vince il lessico: `<00>c1usbildung` darebbe
  *             «Áusbildung», che nel corpus non esiste, quindi si rifiuta.
  *
+ * IL MARKER PARASSITA — dove non c'e' NIENTE da indovinare
+ *
+ * In una parte delle occorrenze il carattere non-ASCII e' ancora al suo posto e
+ * il byte C0 gli sta davanti: `d<0E>épenses`, `Contr<0F>ôle`, `Comunit<00>à`.
+ * Le due letture possibili — «byte parassita davanti alla é» oppure «(byte + é)
+ * e' la codifica della é» — portano alla STESSA parola, quindi qui non si
+ * sceglie fra due ricostruzioni: si toglie un byte e basta.  Solo in questo
+ * caso, e solo se il lessico conferma la parola che ne esce, la cancellazione
+ * del marker entra fra i candidati.  Dove la lettera che segue e' ASCII la
+ * cancellazione resta vietata — `<10>Der` senza il marker fa «Der», che e'
+ * tedesco corrente, e buttare l'ancora per una virgoletta persa e' proprio cio'
+ * che questo script non fa.
+ *
+ * Attenzione: parassita vuol dire che la cancellazione e' AMMESSA fra i
+ * candidati, non che vinca.  In `s<0E>él<0E>èvent` entrambi i marker sono
+ * parassiti, ma il lessico conosce «s’élèvent» e non «sélèvent»: il primo
+ * marker diventa l'apostrofo, il secondo sparisce.
+ *
  * FAIL-CLOSED
  *
  * Ogni occorrenza che nessuna delle due prove risolve resta INTATTA — col suo
@@ -264,9 +282,29 @@ function unitaPossibili(token, i) {
     const valore = parseInt(c1 + c2, 16);
     unita.push({ lunghezza: 3, coda: c1 + c2, hex: letteraLatin1(valore) });
   }
-  if (c1 && c1 >= '0' && c1 <= '9') unita.push({ lunghezza: 2, coda: c1, hex: null });
+  // La coda di una unita' corta e' una CIFRA ESADECIMALE, non una cifra decimale:
+  // in `co<0F>bt` la coda e' 'b' e 0x0F*16+0xb = 0xFB = û, che il lessico conferma
+  // con «coût» (2.726 occorrenze).  Fermarsi a [0-9] lasciava fuori a-f, cioe' i
+  // sei caratteri Latin-1 per riga della tabella: â, ê, î, ô, û e le loro
+  // compagne.  La coda resta comunque solo un CANDIDATO: se il lessico non
+  // conferma la ricostruzione, l'occorrenza e' rifiutata come prima.
+  if (c1 && HEX.test(c1) && c1 === c1.toLowerCase()) unita.push({ lunghezza: 2, coda: c1, hex: null });
   unita.push({ lunghezza: 1, coda: '', hex: null });
   return unita;
+}
+
+/**
+ * Un marker e' PARASSITA quando il carattere che lo segue e' gia' una lettera
+ * non-ASCII: in `d<0E>épenses` la é e' al suo posto e il byte C0 e' un residuo
+ * davanti a lei.  Le due letture possibili — «byte parassita davanti alla é»
+ * oppure «(byte + é) e' la codifica della é» — danno la STESSA ricostruzione,
+ * `dépenses`, quindi qui non si sceglie fra due parole: si toglie un byte.
+ * E' l'unico posto in cui la cancellazione del marker e' una ricostruzione
+ * ammessa, e vale comunque solo se il lessico conferma la parola che ne esce.
+ */
+function markerParassita(token, i) {
+  const c = token[i + 1];
+  return Boolean(c) && c.charCodeAt(0) > 127 && /\p{L}/u.test(c);
 }
 
 /** Quante lettere del token NON sono marker ne' coda consumata. */
@@ -283,8 +321,12 @@ function sostituzioniDentro(testo, marker, scelte, inizio, lunghezza) {
   let cursoreOriginale = 0;
   for (let k = 0; k < marker.length; k += 1) {
     posizione += marker[k] - cursoreOriginale;
-    if (posizione < inizio || posizione >= inizio + lunghezza) return false;
-    posizione += 1;
+    // Una cancellazione (marker parassita) non rimette nessun carattere: non c'e'
+    // niente da contenere nel ritaglio, e avanzare di 1 sposterebbe le posizioni
+    // dei marker successivi.
+    const lungo = scelte[k].carattere.length;
+    if (lungo > 0 && (posizione < inizio || posizione >= inizio + lunghezza)) return false;
+    posizione += lungo;
     cursoreOriginale = marker[k] + scelte[k].unita.lunghezza;
   }
   return true;
@@ -342,6 +384,10 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
     }
     const scelte = [];
     for (const u of unita) for (const c of ALFABETO) scelte.push({ unita: u, carattere: c });
+    // La cancellazione entra fra i candidati SOLO dove il marker e' parassita,
+    // cioe' dove la lettera non-ASCII e' gia' li'.  Altrove togliere il marker
+    // significherebbe buttare via l'ancora senza rimettere niente.
+    if (markerParassita(token, i)) scelte.push({ unita: unita[unita.length - 1], carattere: '' });
     return scelte;
   });
 
@@ -398,9 +444,13 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   // Il controllo vale solo se cio' che resta e' una PAROLA: `0x0E+'0'` isolato
   // cancellato fa «0», che nel corpus c'e' a migliaia perche' e' un numero, e
   // non dice niente su cosa ci fosse prima.
+  // Non vale dove OGNI marker del token e' parassita: li' la cancellazione non e'
+  // il segno di una lettera perduta, e' la ricostruzione — e passa comunque dal
+  // lessico come tutte le altre, qualche riga piu' sotto.
   const cancellato = ricostruisci(token, marker, marker.map(() => ({ unita: { lunghezza: 1, coda: '', hex: null }, carattere: '' })));
   const cancellatoRitagliato = ritaglia(cancellato);
-  if (/\p{L}/u.test(cancellatoRitagliato) && (lessico.get(cancellatoRitagliato) || 0) >= freqMinima) {
+  const tuttiParassiti = marker.every((i) => markerParassita(token, i));
+  if (!tuttiParassiti && /\p{L}/u.test(cancellatoRitagliato) && (lessico.get(cancellatoRitagliato) || 0) >= freqMinima) {
     return {
       esito: 'rifiutato',
       motivo: 'il marker sostituiva un carattere che non e\' una lettera (senza di lui la parola esiste gia\')',
@@ -411,7 +461,7 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   const dettaglia = (scelte, canale, freq) => ({
     esito: 'riparato',
     testo: ricostruisci(token, marker, scelte),
-    canale,
+    canale: scelte.some((s) => s.carattere === '') ? `${canale} (parassita)` : canale,
     freq,
     dettagli: marker.map((i, k) => ({
       byte: token.charCodeAt(i),

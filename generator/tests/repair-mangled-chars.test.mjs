@@ -44,7 +44,8 @@ const B = (n) => String.fromCharCode(n);
 const PAROLE_PULITE = [
   'dépenses', 'Dépenses', 'réduit', 'contrôle', 'financière', 'délais', 'évolution',
   'marché', 'première', 'conçues', 'Municipalité', 'Municipalità', 'à', 'Der',
-  'compétences', 'millions', 'nouveaux',
+  'compétences', 'millions', 'nouveaux', 'coûts', 'entraînent', 's’élèvent', 'grace',
+  'équilibré',
 ];
 const FILE_PULITO = `${PAROLE_PULITE.join(' ')}\n${PAROLE_PULITE.join(' ')}\n`;
 
@@ -94,6 +95,68 @@ test('nibble: la legge si usa DOPO averla verificata in questo file', () => {
   assert.equal(r.leggeNibble, true);
   assert.match(r.testo, /réduit à -2,7 millions/);
   assert.equal(r.rifiuti.length, 0);
+});
+
+test('parassita: la lettera non-ASCII e\' gia\' li\', si toglie solo il byte', () => {
+  // `d 9penses` sarebbe una ricostruzione; `d épenses` no: la é c'e' gia'.
+  // Cancellare il marker qui non indovina nessuna lettera.
+  const r = ripara(`les d${B(0x0e)}épenses de la ville`);
+  assert.equal(r.testo, 'les dépenses de la ville');
+  assert.equal(r.rifiuti.length, 0);
+  assert.match(r.riparazioni[0].canale, /parassita/);
+  assert.equal(r.riparazioni[0].dettagli[0].carattere, '');
+});
+
+test('parassita: vale anche quando la cancellazione non basta da sola', () => {
+  // Due marker, tutti e due davanti a una lettera non-ASCII, ma «sélèvent» non
+  // esiste: il lessico conosce «s’élèvent», quindi il primo marker diventa
+  // l'apostrofo e solo il secondo sparisce.  Parassita apre un candidato, non
+  // impone la cancellazione.
+  const r = ripara(`les recettes s${B(0x0e)}él${B(0x0e)}èvent à 233,1 millions`);
+  assert.match(r.testo, /les recettes s’élèvent à/);
+  assert.equal(r.rifiuti.length, 0);
+});
+
+test('parassita: senza conferma del lessico il marker resta dov\'e\'', () => {
+  const r = ripara(`des d${B(0x0e)}épenzes imaginaires`);
+  assert.ok(r.testo.includes(`d${B(0x0e)}épenzes`));
+  assert.equal(r.riparazioni.length, 0);
+});
+
+test('parassita: NON si applica se la lettera dopo il marker e\' ASCII', () => {
+  // `gr ace` -> «grace» esiste nel corpus, ma la 'a' e' ASCII: la cancellazione
+  // non entra fra i candidati e il vecchio rifiuto per «non e' una lettera»
+  // resta in piedi.  Senza questa riga il marker sparirebbe e con lui l'ancora
+  // di «grâce».
+  const r = ripara(`les d${B(0x0e)}épenses gr${B(0x0e)}ace aux nouveaux crédits`);
+  assert.ok(r.testo.includes(`gr${B(0x0e)}ace`), 'il marker davanti a una lettera ASCII resta');
+  assert.match(r.testo, /les dépenses/, 'quello davanti alla é invece si toglie');
+  assert.match(r.rifiuti[0].motivo, /non e' una lettera/);
+});
+
+test('parassita: una cancellazione non sposta i marker che vengono dopo', () => {
+  // `<0E>équilibr<0E>`: il primo marker sparisce, il secondo diventa é.  Se la
+  // cancellazione contasse come un carattere rimesso, la posizione del secondo
+  // finirebbe fuori dal ritaglio e la parola verrebbe rifiutata pur essendo nel
+  // corpus.  E' il caso di «Un budget équilibré», due volte su origin/main.
+  const r = ripara(`Un budget ${B(0x0e)}équilibr${B(0x0e)} pour la ville`);
+  assert.match(r.testo, /Un budget équilibré pour la ville/);
+  assert.equal(r.rifiuti.length, 0);
+});
+
+test('coda esadecimale: la cifra puo\' essere a-f, non solo 0-9', () => {
+  // 0x0F+'b' = 0xFB = û, e il lessico conferma «coûts».  Fermarsi a [0-9]
+  // lasciava fuori sei caratteri Latin-1 per riga della tabella.
+  const r = ripara(`pour estimer temps et co${B(0x0f)}bts`);
+  assert.equal(r.testo, 'pour estimer temps et coûts');
+  assert.equal(r.rifiuti.length, 0);
+});
+
+test('coda esadecimale a-f: la coda si consuma, non resta nella parola', () => {
+  // `entra 0enent` -> 0x0E+'e' = 0xEE = î: «entraînent», con la 'e' della coda
+  // mangiata dall'unita'.  Se la coda restasse verrebbe «entraîenent».
+  const r = ripara(`ces politiques entra${B(0x0e)}enent des charges`);
+  assert.match(r.testo, /politiques entraînent des charges/);
 });
 
 // ---------------------------------------------------------------------------
