@@ -266,6 +266,34 @@ export const PLACEHOLDER_RULES = Object.freeze([
     rx: /^\s*\**\s*domanda\s+frequente\s+\d+\s*\**\s*\??\s*$/i,
     why: 'La domanda E\' l\'etichetta e basta ("Domanda frequente 1"), senza nulla dietro.',
   },
+  // ── La stessa etichetta, tradotta (issue #204) ──────────────────────────
+  //
+  // `faq-numbered-label`/`faq-numbered-bare` sopra vedono solo l'italiano.
+  // Quando `translateArticle()` traduce il segnaposto insieme al resto, la
+  // domanda diventa "FAQ 1 based on the facts of the article?" (EN),
+  // "Häufige Frage 1 basierend auf den Fakten des Artikels?" (DE) o "Question
+  // fréquemment posée 1 basée sur les faits de l'article ?" (FR) — nessun
+  // letterale italiano le vede, esattamente come per `budget-parenthetical`.
+  //
+  // Misurato: 19 articoli in cui la bonifica (PR #196) ha tolto la FAQ
+  // segnaposto in `it` senza toccare le tre traduzioni, rimaste intatte e
+  // ancora segnaposto — la FAQ presente in tre lingue e assente nell'originale
+  // che la issue #204 descrive come sintomo, non solo come campo mancante.
+  // La testa + il numero e' l'invariante (come per budget-parenthetical): la
+  // coda ("based on the facts of the article?") non e' letterale-stabile, il
+  // numero e la testa lessicale si'.
+  {
+    id: 'faq-numbered-label-multilang',
+    kind: 'schema-echo',
+    rx: /^\**\s*(?:faq|frequently asked question|frequent question|foire aux questions|questions? fr[ée]quemment pos[ée]es?|questions? fr[ée]quentes?|h[äa]ufig(?:e)?(?:\s+gestellte)?\s+frage)\s*\d+/i,
+    why: 'Testa multilingua (EN/DE/FR) della stessa etichetta FAQ numerata di `faq-numbered-label`/`faq-numbered-bare`, tradotta insieme al resto del segnaposto.',
+  },
+  {
+    id: 'faq-ordinal-question-en',
+    kind: 'schema-echo',
+    rx: /what is the answer to the (?:first|second|third|fourth|fifth)\s+(?:frequently asked question|faq)\b/i,
+    why: 'Variante ordinale EN della domanda segnaposto ("What is the answer to the first frequently asked question…?"), osservata su tennis-donne-open-di-chiasso-….',
+  },
   ...PROMPT_SCAFFOLD_LABELS.map((label) => ({
     id: `scaffold-${label.replace(/[^A-Za-z]+/g, '-').toLowerCase().replace(/^-|-$/g, '')}`,
     kind: 'scaffold',
