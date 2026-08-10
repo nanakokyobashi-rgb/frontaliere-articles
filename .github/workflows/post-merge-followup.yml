@@ -189,6 +189,49 @@ jobs:
           # allowed_bots.
           allowed_non_write_users: "github-actions[bot], claude[bot]"
           show_full_output: true
+          # ── Il sandbox bwrap è ROTTO su questa immagine di runner (issue #127) ──
+          #
+          # Sintomo: OGNI invocazione del tool Bash — anche `pwd` — moriva con
+          #     Exit code 1
+          #     bwrap: Can't create file at /home/.mcp.json: Permission denied
+          # Misurato sul run 31328282232 (dispatch, quota disponibile): 11 tool_use,
+          # 10 Bash, **0 riusciti**. Claude non poteva chiamare `gh`, quindi zero
+          # commenti e zero issue — e lo step usciva `success`, perché la sessione
+          # termina normalmente: non fallisce il modello, falliscono i suoi strumenti.
+          # 17 run verdi consecutive che non producevano nulla.
+          #
+          # La catena causale, verificata sul log e sulla doc di Claude Code:
+          #  1. `sandbox` e `permissionMode` sono DUE cose indipendenti. Il sandbox
+          #     non si spegne passando a bypassPermissions, e non si accende con
+          #     `--allowedTools`: è acceso di default in entrambi i casi.
+          #  2. Il sandbox di questa immagine non parte affatto (la firma bwrap qui
+          #     sopra): ogni comando sandboxato fallisce prima di essere eseguito.
+          #  3. Con `allowUnsandboxedCommands` (default true) Claude Code RIPROVA il
+          #     comando fuori dal sandbox — ma passando dal flusso dei permessi.
+          #  4. Ed è qui che i sibling divergono da noi. `issue-fix.yml`,
+          #     `pr-review-loop.yml` e `pr-redflag-fixer.yml` passano
+          #     `--dangerously-skip-permissions` → il retry non-sandboxato è
+          #     auto-approvato → i comandi girano e il sandbox rotto è INVISIBILE.
+          #     Noi siamo sull'`--allowedTools` scoped → `permissionMode: "default"`
+          #     (letto nel log del run, riga `"permissionMode": "default"`) → il
+          #     retry chiede un'approvazione che in CI nessuno può dare → negato.
+          #     Nel log si vede esattamente questo: il modello prova
+          #     `dangerouslyDisableSandbox: true` e ottiene `subtype: "permission_denied"`.
+          #
+          # Quindi la differenza fra loro e noi NON è il trigger — ed è la ragione
+          # per cui questa fix non è nessuna delle due strade proposte sulla issue.
+          # Spegnere il sandbox è la riparazione MIRATA: colpisce il componente
+          # davvero rotto e lascia intatto lo scoping `--allowedTools`, che è una
+          # proprietà di sicurezza voluta (sessione read-mostly, solo `gh`).
+          # Ri-adottare `--dangerously-skip-permissions` funzionerebbe per effetto
+          # collaterale, ma butterebbe via lo scoping E reintrodurrebbe la
+          # regressione #3269 documentata sotto.
+          #
+          # NB: `settings` è un input di claude-code-action@v1 ("Claude Code
+          # settings as JSON string or path to settings JSON file"): non serve un
+          # file nel repo. Con sandbox off, `--allowedTools 'Bash(gh:*)'` resta
+          # l'unico cancello su COSA può girare — la fix non allarga i permessi.
+          settings: '{"sandbox":{"enabled":false}}'
           # max-turns DINAMICO = min(26 + 8*batch_count, 80), floor 26 (era
           # min(20+6n,60); bump fleet-wide 2026-07-17, owner). AGENTS.md vieta di
           # ABBASSARE i turni di post-merge-followup (15→20
@@ -210,6 +253,17 @@ jobs:
           # anche con actor umano), non con settings/claude_args. Torniamo allo
           # scoped `--allowedTools` precedente (problema noto ma minore: rifiuta
           # a volte sintassi shell non staticamente analizzabile, non blocca TUTTO).
+          #
+          # 2026-08-10 (#127): quella correlazione col trigger NON regge più come
+          # spiegazione, e va letta come una coincidenza di campione. I tre
+          # workflow "che funzionano" non sono un controllo valido: nessuno di
+          # loro esercita il percorso `--allowedTools`, quindi confrontavano due
+          # variabili insieme. Il vero discriminante è il sandbox — vedi il blocco
+          # `settings:` qui sopra. Restiamo sullo scoped `--allowedTools` PER
+          # SCELTA (sessione read-mostly: solo `gh`), non per ripiego.
+          # Il rollback #3269 resta valido come storia: se un domani si ri-adottasse
+          # `--dangerously-skip-permissions`, il sintomo da cercare è "requires
+          # approval", che è diverso dalla firma bwrap di #127.
           claude_args: "--max-turns ${{ steps.collect.outputs.max_turns }} --model claude-sonnet-5 --allowedTools 'Bash(gh:*),Read,Grep,Glob'"
           prompt: |
             Triage automatico follow-up in BATCH (${{ github.event_name }}).
