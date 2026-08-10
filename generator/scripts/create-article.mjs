@@ -7568,12 +7568,13 @@ function optimizeSeoMetadata(data) {
     SEO_OG_DESCRIPTION_MAX,
   );
 
-  const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida', '2026']);
+  const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida']);
+  const isStopYear = (w) => /^(19|20)\d{2}$/.test(w);
   const terms = `${it.title || ''} ${it.excerpt || ''} ${data.id || ''}`
     .toLowerCase()
     .replace(/[^a-z0-9àèéìòùäöüßç\s-]/gi, ' ')
     .split(/\s+/)
-    .filter((w) => w.length > 3 && !STOP.has(w));
+    .filter((w) => w.length > 3 && !STOP.has(w) && !isStopYear(w));
 
   const uniqueTerms = [];
   for (const t of terms) {
