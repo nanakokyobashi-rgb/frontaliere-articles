@@ -1776,51 +1776,106 @@ const RSS_FALLBACK_MAP = {
 // lives or works in CH — NOT restricted to cross-border workers. Mirrors
 // the shape of NEWS_SOURCES (RSS where available, HTML fallback via
 // NEWS_SOURCES_SVIZZERA_FALLBACK_MAP otherwise).
+//
+// ── THE ORDER IS LOAD-BEARING (rebuilt 2026-08-10) ──
+// scanNewsSources() keeps every dated headline from the last
+// MAX_ARTICLE_AGE_DAYS, but caps the *undated* ones at `undated.slice(0, 120)`
+// — a single global budget, filled in the order the sources appear here,
+// because `allHeadlines` is pushed batch-by-batch in list order.
+// swissinfo.ch used to sit first and emits ~244 undated links per run, most
+// of them chrome ("Vai alla homepage", "Vai alla navigazione"). Measured on
+// 2026-08-10 with the real extractor: it took **120 of 120** undated slots,
+// so cdt.ch's 26 real Swiss-economy headlines, seco.admin.ch's labour-market
+// releases and admin.ch's press releases never entered the pool at all.
+// Pool surviving the anchor+topical gate: 21.
+//
+// Hence the layout: dated RSS first (dated items bypass the cap, so they cost
+// no undated budget), then HTML pages ordered by *measured* gate-pass density,
+// then the SPA shells that emit mostly chrome. Same probe, same day, same
+// gate: 21 → 55 with laregione's RSS stale, 21 → 72 with it fresh.
+//
+// ── EVERY URL HERE WAS PROBED ON 2026-08-10 ──
+// status + content-type + what the extractor actually returns. Do not add a
+// source without doing the same. A 200 proves nothing on its own:
+// santesuisse.ch answered 200 (and counted as `sources.succeeded`) while
+// every one of its paths 301'd to a German training site on another domain.
+// The per-line numbers are that probe's yield — keep them updated, they are
+// the only reason the next reader can tell a live source from a dead one.
+//
+// `[dup:frontaliere]` marks a URL that is also in NEWS_SOURCES. That overlap
+// is deliberate — these are national desks that serve both audiences, and the
+// two sections classify independently against different registries (ARTICLES
+// vs SWISS_ARTICLES), each keeping only what fits its own agenda. The cost is
+// one extra classifier call per shared headline. The marker is enforced by
+// generator/tests/news-sources-svizzera.test.mjs, so the overlap (15 of 26
+// URLs before this pass, silently) can never grow unannounced again.
 const NEWS_SOURCES_SVIZZERA = [
-  // swissinfo.ch — national multilingual public broadcaster (all sections)
-  'https://www.swissinfo.ch/ita/',
-  'https://www.swissinfo.ch/ita/economia/',
-  'https://www.swissinfo.ch/ita/scienza/',
-  'https://www.swissinfo.ch/ita/politica/',
-  // RSI — national (not Ticino-only)
-  'https://www.rsi.ch/info/svizzera/?f=rss',
-  'https://www.rsi.ch/info/economia/?f=rss',
-  'https://www.rsi.ch/info/mondo/?f=rss',
-  // tvsvizzera — national IT-language SWI sister site
-  'https://www.tvsvizzera.it/tvs/',
-  'https://www.tvsvizzera.it/tvs/economia/',
-  'https://www.tvsvizzera.it/tvs/lavoro-ed-economia/',
-  // Major cantonal / national papers (beyond Ticino), economy + national
-  'https://www.cdt.ch/news/svizzera',
-  'https://www.cdt.ch/news/economia',
-  'https://www.cdt.ch/news/mondo',
-  'https://www.laregione.ch/svizzera',
-  'https://www.laregione.ch/economia',
-  'https://media.tio.ch/files/domains/tio.ch/rss/rss_home.xml',
-  'https://www.tio.ch/svizzera/economia',
-  // Federal administration / statistics / labour (national policy)
-  'https://www.admin.ch/gov/it/pagina-iniziale/documentazione/comunicati-stampa.html',  // admin.ch press (HTML — RSS WAF-blocked)
-  'https://www.bfs.admin.ch/bfs/it/home/attualita/comunicati-stampa.html',               // BFS Federal Statistical Office (HTML)
-  'https://www.seco.admin.ch/it/comunicati-stampa',                            // SECO economy/labour (HTML)
-  'https://www.bag.admin.ch/it/overview/news',                                            // BAG federal health (HTML)
-  // English/business national coverage of CH
-  'https://lenews.ch/feed/',                                                              // Le News (English, living/working in CH)
-  'https://www.watson.ch/api/1.0/rss/all.xml',                                            // watson.ch national news RSS
-  // Fiscal / labour technical coverage relevant to CH residents
-  'https://www.fiscoetasse.com/feed',
-  'https://www.lavoroediritti.com/feed/',
-  // Housing / cost of living national
-  'https://www.santesuisse.ch/it/temi-e-analisi/news-attuali/',                           // LAMal / health-insurance news (national)
+  // ── RSS datati: non consumano il budget undated ──
+  'https://www.rsi.ch/info/svizzera/?f=rss',   // [dup:frontaliere] 100 item, 100 datati, 19 recenti
+  'https://www.rsi.ch/info/economia/?f=rss',   // 100 item, 100 datati, 25 passano il gate
+  // 2026-08-10: rss_svizzera.xml e rss_economia.xml scoperti dal catalogo
+  // pubblicato su tio.ch/rss e laregione.ch/rss — le stesse due sezioni che
+  // prima venivano raschiate in HTML senza mai ricavarne una data.
+  // NB: media.tio.ch/…/rss_affari.xml e rss_economia.xml esistono ma tornano
+  // 200 con **0 byte**: sondati e scartati, non dimenticati.
+  'https://media.tio.ch/files/domains/tio.ch/rss/rss_svizzera.xml',            // 20 item, 20 datati, 20 recenti
+  'https://media.tio.ch/files/domains/tio.ch/rss/rss_home.xml',                // [dup:frontaliere] 20 item, 20 recenti
+  'https://lenews.ch/feed/',                                                   // Le News (EN, living/working in CH) — 10 item, 4 recenti
+  'https://www.fiscoetasse.com/feed',                                          // [dup:frontaliere] 20 item, 8 recenti
+  'https://www.lavoroediritti.com/feed',                                       // [dup:frontaliere] 20 item — senza `/` finale: con lo slash è un 301
+  'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_economia.xml', // 2 item, 2 datati
+  'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_svizzera.xml', // 26 item, 26 datati
+  // ── HTML con titoli veri, in ordine di densità misurata sul gate ──
+  'https://www.seco.admin.ch/it/comunicati-stampa',                            // SECO lavoro/economia — 17/22 passano il gate
+  'https://www.admin.ch/it/newnsb',                                            // Consiglio federale — 15/20; era …/documentazione/comunicati-stampa.html (301)
+  'https://www.tio.ch/svizzera/economia',                                      // [dup:frontaliere] 26/38
+  'https://www.cdt.ch/news/economia',                                          // [dup:frontaliere] 10/40 — CDT non espone alcun feed (rss e feed: 404)
+  'https://www.tvsvizzera.it/tvs/lavoro-ed-economia/',                         // [dup:frontaliere] 6/22
+  'https://www.swissinfo.ch/ita/il-futuro-del-lavoro/',                        // 20/97 — sostituisce /ita/economia/ (404)
+  'https://www.cdt.ch/news/svizzera',                                          // [dup:frontaliere] 3/40
+  'https://www.tvsvizzera.it/tvs/economia/',                                   // [dup:frontaliere] 3/32
+  // ── Shell SPA: molto chrome, quindi in fondo ──
+  'https://www.swissinfo.ch/ita/',                                             // [dup:frontaliere] 139 item, 15 recenti, 18/139 sul gate
+  'https://www.swissinfo.ch/ita/topic/politica-svizzera/',                     // 13/93 — sostituisce /ita/politica/ (301 → 404)
 ];
+// Rimossi il 2026-08-10, ognuno con la misura che lo condanna:
+//   swissinfo.ch/ita/economia/ ......... 404
+//   swissinfo.ch/ita/politica/ ......... 301 → /ita/topic/politica-federale/ → 404
+//   watson.ch/api/1.0/rss/all.xml ...... 404. Il feed vivo è api/**2.0**/rss/index.xml?tag=Front
+//                                        (200, 90 item, 88 recenti) ma è in tedesco e generalista:
+//                                        2/90 sul gate. Sondato, non adottato.
+//   santesuisse.ch/it/…/news-attuali/ .. dominio morto: OGNI path 301 → santeservices.ch/bildung/,
+//                                        200 in tedesco su formazione. Contava come `succeeded`.
+//   bfs.admin.ch/…/comunicati-stampa ... 200, 2,3 MB, **zero tag <a>**: SPA Vue/AEM, l'elenco
+//                                        arriva via JS. Nessun estrattore a regex può leggerla.
+//   bag.admin.ch/it/overview/news ...... 200 ma solo 6 link, tutti di navigazione. Stessa SPA.
+//   rsi.ch/info/mondo/?f=rss ........... esteri: 6/100 sul gate, e sono Messico, Francia, Meta/USA,
+//                                        Marocco, Ceuta, FED. Zero rilevanza nazionale CH.
+//   cdt.ch/news/mondo .................. esteri: 1/40, ed è il Pentagono.
+//   swissinfo.ch/ita/scienza/ .......... 200 e 18/121 sul gate, ma fuori dall'agenda dichiarata
+//                                        (economia/fisco/lavoro/abitare); i suoi pezzi in tema
+//                                        sono coperti meglio da /ita/il-futuro-del-lavoro/ (20/97).
+//   tvsvizzera.it/tvs/ ................. home: 4/45, e lo stesso chrome delle due sezioni già in lista.
+//   laregione.ch/svizzera, /economia ... promossi a fallback dei rispettivi RSS (sotto): la pagina
+//                                        HTML non produce una sola data, il feed le produce tutte.
 
 // HTML fallbacks for the svizzera RSS feeds that may yield 0 recent items.
+// Contract: **ogni sorgente RSS di NEWS_SOURCES_SVIZZERA ha una voce qui**,
+// verificato da news-sources-svizzera.test.mjs. Non vale il contrario — una
+// sorgente HTML non consulta mai questa mappa: in scanNewsSources() il lookup
+// `rssFallbackMap[sourceUrl]` sta solo dentro il ramo `if (isRssFeed(content))`,
+// quindi una voce per admin.ch o seco.admin.ch sarebbe codice morto.
+// Tutti i target sondati il 2026-08-10: 200 + headline estratte.
 const NEWS_SOURCES_SVIZZERA_FALLBACK_MAP = {
   'https://www.rsi.ch/info/svizzera/?f=rss': 'https://www.rsi.ch/info/svizzera/',
   'https://www.rsi.ch/info/economia/?f=rss': 'https://www.rsi.ch/info/economia/',
-  'https://www.rsi.ch/info/mondo/?f=rss': 'https://www.rsi.ch/info/mondo/',
+  'https://media.tio.ch/files/domains/tio.ch/rss/rss_svizzera.xml': 'https://www.tio.ch/svizzera',
   'https://media.tio.ch/files/domains/tio.ch/rss/rss_home.xml': 'https://www.tio.ch/',
   'https://lenews.ch/feed/': 'https://lenews.ch/',
-  'https://www.watson.ch/api/1.0/rss/all.xml': 'https://www.watson.ch/',
+  'https://www.fiscoetasse.com/feed': 'https://www.fiscoetasse.com/',
+  'https://www.lavoroediritti.com/feed': 'https://www.lavoroediritti.com/',
+  'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_economia.xml': 'https://www.laregione.ch/economia',
+  'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_svizzera.xml': 'https://www.laregione.ch/svizzera',
 };
 
 // `../..`, not `..`. In main this script sits at `scripts/create-article.mjs`,
