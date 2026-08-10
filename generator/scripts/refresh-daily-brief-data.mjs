@@ -28,6 +28,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief } from './lib/daily-brief-data.mjs';
+import { isRetryableRcFetchStatus, rcFetchBackoffMs } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -39,10 +40,21 @@ const FIRESTORE_SCOPE = 'https://www.googleapis.com/auth/datastore';
 export const JOBS_STATS_URL = 'https://cdn.frontaliereticino.ch/data/jobs-stats.json';
 const FETCH_TIMEOUT_MS = 30_000;
 
+// Same class of bug as #45/#54/#171 (load-rc-env.mjs's fetchTemplateViaRest):
+// a single-attempt fetch against a Google API treats a transient 429/5xx as a
+// hard failure, degrading the whole block for what a retry would have solved.
+const FETCH_ATTEMPTS = 4;
+
 async function fetchJson(url, headers = {}) {
-  const res = await fetch(url, { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
-  if (!res.ok) throw new Error(`GET ${url} → HTTP ${res.status}`);
-  return res.json();
+  let lastErr;
+  for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+    const res = await fetch(url, { headers, signal: AbortSignal.timeout(FETCH_TIMEOUT_MS) });
+    if (res.ok) return res.json();
+    lastErr = new Error(`GET ${url} → HTTP ${res.status}`);
+    if (!isRetryableRcFetchStatus(res.status)) throw lastErr;
+    if (attempt < FETCH_ATTEMPTS) await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
+  }
+  throw lastErr;
 }
 
 /** List every doc of a root collection (paginated), decoded, with `slug` = doc id. */
@@ -60,16 +72,24 @@ async function listCollectionDocs(token, collectionId) {
   return docs;
 }
 
-/** Get a single doc, decoded. Throws on non-404 errors; 404 → null (degrade). */
+/** Get a single doc, decoded. Throws on non-404 errors (retrying 429/5xx); 404 → null (degrade). */
 async function getDoc(token, docPath) {
-  const res = await fetch(`${FIRESTORE_BASE}/${docPath}`, {
-    headers: { Authorization: `Bearer ${token}` },
-    signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-  });
-  if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`GET ${docPath} → HTTP ${res.status}`);
-  const doc = await res.json();
-  return decodeFields(doc.fields);
+  let lastErr;
+  for (let attempt = 1; attempt <= FETCH_ATTEMPTS; attempt++) {
+    const res = await fetch(`${FIRESTORE_BASE}/${docPath}`, {
+      headers: { Authorization: `Bearer ${token}` },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
+    if (res.status === 404) return null;
+    if (res.ok) {
+      const doc = await res.json();
+      return decodeFields(doc.fields);
+    }
+    lastErr = new Error(`GET ${docPath} → HTTP ${res.status}`);
+    if (!isRetryableRcFetchStatus(res.status)) throw lastErr;
+    if (attempt < FETCH_ATTEMPTS) await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
+  }
+  throw lastErr;
 }
 
 function loadServiceAccountCreds() {
