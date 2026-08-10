@@ -5248,7 +5248,14 @@ function extractHeadlines(html, baseUrl) {
   let m;
   while ((m = linkRe.exec(html)) !== null) {
     let href = m[1];
-    const text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    let text = m[2].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+    // Federal AEM sites (admin.ch, seco.admin.ch — same CMS) prepend every
+    // teaser link's accessible name with a screen-reader-only "Maggiori
+    // informazioni su" label. It's plain text content, not a tag, so it
+    // survives the tag-strip above and would otherwise pollute the
+    // classifier's hasTopicalSignal/countAdmissionHits match with
+    // boilerplate that never carries a topic signal.
+    text = text.replace(/^maggiori informazioni su[:\s]+/i, '').trim();
     // Only keep links with meaningful text (likely headlines)
     if (text.length < 15 || text.length > 300) continue;
     // Resolve relative URLs
