@@ -363,11 +363,17 @@ function ricostruisci(token, marker, scelte) {
  * Latin-1 del carattere e il byte C0 e' la cifra alta — 0x0E+'9' = 0xE9 = é,
  * 0x0F+'4' = 0xF4 = ô.  Non e' un'ipotesi da applicare ovunque: e' una legge
  * che va VERIFICATA nel file in cui la si usa, contando quante sostituzioni
- * gia' provate dal lessico la rispettano e quante la smentiscono.  In
- * `bellinzona-2025-consuntivo-risultati.ts` la rispettano é, è, â, ô; in
- * `nestle-200-posti-lombardia.ts` la stessa é si scrive 0x16+'9' e la legge
- * cade subito.  Senza questa verifica per file, «### 0x0F+9 0x0F+9 0x0F+9»
- * diventerebbe «ùùù».
+ * gia' provate dal lessico la rispettano e quante la smentiscono.
+ *
+ * Quanto sia stretta la soglia si misura: su a6cb7e10 NESSUNO dei 29 file
+ * sporchi la raggiunge — il massimo e' 2 pro / 0 contro in
+ * `svincolo-a2-sigirino-ritardo.ts` e 1 pro / 0 contro in
+ * `bellinzona-2025-consuntivo-risultati.ts` — quindi oggi la legge non si
+ * applica da nessuna parte e nessuna delle riparazioni passa da qui.  Il ramo
+ * resta per i giri futuri, dove il residuo puo' presentarsi con altre forme.
+ * Ed e' proprio in `bellinzona` che si vede cosa costerebbe assumerla senza
+ * verifica: i suoi 18 marker residui stanno in tre token `<0F>9<0F>9<0F>9`, e
+ * 0x0F+'9' = 0xF9 = ù, cioe' «ùùù».
  */
 function caratteredaNibble(byte, coda) {
   if (coda.length !== 1 || !HEX.test(coda)) return null;
@@ -582,6 +588,10 @@ function riparaTesto(testo, lessico, freqMinima) {
   // prove che non hanno bisogno di sapere niente sul file — lessico ed hex.
   // Ogni riparazione accettata insegna una firma (byte, coda) -> carattere e
   // porta una prova a favore o contro la legge del nibble.
+  // Il `false` finale non e' un dettaglio: `mappaAppresa` si riempie SOLO qui,
+  // dove la legge del nibble e' spenta, quindi nessuna riparazione del canale
+  // `nibble` puo' entrarci e propagarsi ai token fitti di marker della seconda
+  // passata.  La mappa impara solo da cio' che lessico ed hex hanno confermato.
   const risultati = new Map();
   let proNibble = 0;
   let controNibble = 0;
