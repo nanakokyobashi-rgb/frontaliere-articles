@@ -51,34 +51,45 @@ const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), 
 const LEDGER = path.join(PROJECT_ROOT, 'data', 'topic-candidates-evergreen-rejected.json');
 const CREATE_ARTICLE = path.join(PROJECT_ROOT, 'generator', 'scripts', 'create-article.mjs');
 
+/** Estrae un blocco di `src` dal suo inizio letterale fino al terminatore dato. */
+function extractBlock(src, startNeedle, endNeedle, label) {
+  const start = src.indexOf(startNeedle);
+  if (start === -1) {
+    throw new Error(`${label} non trovata in create-article.mjs — aggiornare i delimitatori`);
+  }
+  const end = src.indexOf(endNeedle, start);
+  if (end === -1) throw new Error(`fine di ${label} non trovata`);
+  return src.slice(start, end + endNeedle.length);
+}
+
 /**
  * Ricostruisce il pool evergreen della sezione svizzera estraendo da
- * create-article.mjs le due liste che lo compongono, senza importarlo.
+ * create-article.mjs le TRE liste che lo compongono, senza importarlo.
  * Fallisce RUMOROSAMENTE se i delimitatori cambiano: un pool vuoto qui
  * significherebbe «nessuna keyword da amnistiare», cioe' un no-op silenzioso
  * che sembra un successo.
+ *
+ * `buildStructuralEvergreenTopicsSvizzera` e' entrata nel giro il 2026-08-10,
+ * con il pool nazionale per cantone. Non e' un dettaglio di completezza: e' il
+ * 82% del pool, e lasciarla fuori avrebbe reso l'amnistia una no-op su quasi
+ * tutte le keyword che possono prendere uno strike da qui in avanti.
  */
 export function svizzeraEvergreenPool(src) {
-  const startPriority = src.indexOf('const PRIORITY_EVERGREEN_TOPICS_SVIZZERA = [');
-  if (startPriority === -1) {
-    throw new Error('PRIORITY_EVERGREEN_TOPICS_SVIZZERA non trovata in create-article.mjs — aggiornare i delimitatori');
-  }
-  const endPriority = src.indexOf('\n];\n', startPriority);
-  if (endPriority === -1) throw new Error('fine di PRIORITY_EVERGREEN_TOPICS_SVIZZERA non trovata');
-  const priorityBlock = src.slice(startPriority, endPriority + 4);
-
-  const startDynamic = src.indexOf('function buildDynamicEvergreenTopicsSvizzera() {');
-  if (startDynamic === -1) {
-    throw new Error('buildDynamicEvergreenTopicsSvizzera non trovata in create-article.mjs — aggiornare i delimitatori');
-  }
-  const endDynamic = src.indexOf('\n}\n', startDynamic);
-  if (endDynamic === -1) throw new Error('fine di buildDynamicEvergreenTopicsSvizzera non trovata');
-  const dynamicBlock = src.slice(startDynamic, endDynamic + 3);
+  const priorityBlock = extractBlock(
+    src, 'const PRIORITY_EVERGREEN_TOPICS_SVIZZERA = [', '\n];\n', 'PRIORITY_EVERGREEN_TOPICS_SVIZZERA',
+  );
+  const dynamicBlock = extractBlock(
+    src, 'function buildDynamicEvergreenTopicsSvizzera() {', '\n}\n', 'buildDynamicEvergreenTopicsSvizzera',
+  );
+  const structuralBlock = extractBlock(
+    src, 'function buildStructuralEvergreenTopicsSvizzera() {', '\n}\n', 'buildStructuralEvergreenTopicsSvizzera',
+  );
 
   // eslint-disable-next-line no-new-func
   const factory = new Function(
-    `${priorityBlock}\n${dynamicBlock}\n`
-    + 'return [...PRIORITY_EVERGREEN_TOPICS_SVIZZERA, ...buildDynamicEvergreenTopicsSvizzera()].map((t) => t.keyword);',
+    `${priorityBlock}\n${dynamicBlock}\n${structuralBlock}\n`
+    + 'return [...PRIORITY_EVERGREEN_TOPICS_SVIZZERA, ...buildDynamicEvergreenTopicsSvizzera(),'
+    + ' ...buildStructuralEvergreenTopicsSvizzera()].map((t) => t.keyword);',
   );
   const pool = factory();
   if (!Array.isArray(pool) || pool.length < 50) {
