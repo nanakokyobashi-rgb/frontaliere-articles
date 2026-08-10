@@ -1944,10 +1944,11 @@ const RSS_FALLBACK_MAP = {
 // the shape of NEWS_SOURCES (RSS where available, HTML fallback via
 // NEWS_SOURCES_SVIZZERA_FALLBACK_MAP otherwise).
 //
-// ── THE ORDER IS LOAD-BEARING (rebuilt 2026-08-10) ──
+// ── THE ORDER WAS LOAD-BEARING, NO LONGER IS (rebuilt 2026-08-10, quota
+// fixed #190) ──
 // scanNewsSources() keeps every dated headline from the last
-// MAX_ARTICLE_AGE_DAYS, but caps the *undated* ones at `undated.slice(0, 120)`
-// — a single global budget, filled in the order the sources appear here,
+// MAX_ARTICLE_AGE_DAYS. Undated ones used to be capped with a single global
+// `undated.slice(0, 120)`, filled in the order the sources appear here,
 // because `allHeadlines` is pushed batch-by-batch in list order.
 // swissinfo.ch used to sit first and emits ~244 undated links per run, most
 // of them chrome ("Vai alla homepage", "Vai alla navigazione"). Measured on
@@ -1956,10 +1957,14 @@ const RSS_FALLBACK_MAP = {
 // releases and admin.ch's press releases never entered the pool at all.
 // Pool surviving the anchor+topical gate: 21.
 //
-// Hence the layout: dated RSS first (dated items bypass the cap, so they cost
-// no undated budget), then HTML pages ordered by *measured* gate-pass density,
-// then the SPA shells that emit mostly chrome. Same probe, same day, same
-// gate: 21 → 55 with laregione's RSS stale, 21 → 72 with it fresh.
+// Fixed properly in #190: the budget is now spent round-robin across
+// `h.source`, so no single prolific source can exhaust it regardless of
+// where it sits in this list. The layout below (dated RSS first, then HTML
+// pages ordered by *measured* gate-pass density, then the SPA shells that
+// emit mostly chrome) is kept because it is still useful documentation of
+// each source's yield, not because reordering fixes anything anymore.
+// Same probe, same day, same gate: 21 → 55 with laregione's RSS stale,
+// 21 → 72 with it fresh.
 //
 // ── EVERY URL HERE WAS PROBED ON 2026-08-10 ──
 // status + content-type + what the extractor actually returns. Do not add a
@@ -5205,7 +5210,29 @@ async function scanNewsSources() {
     return prioritizeFrontalieriHeadlines(filterByAnchor(allHeadlines));
   }
 
-  const undatedTop = undated.slice(0, 120).map(h => ({ ...h, _undatedFallback: true }));
+  // Round-robin across sources instead of a global `slice(0, 120)` — a
+  // single prolific source (swissinfo.ch emits ~244 undated nav links per
+  // run) used to take the entire budget on its own, so genuine headlines
+  // from every source later in NEWS_SOURCES/NEWS_SOURCES_SVIZZERA never
+  // entered the pool at all (issue #190). Grouping by `h.source` and taking
+  // one round per source until the budget is spent makes the result
+  // independent of source order, so PR #187's reordering is no longer the
+  // thing keeping this fair.
+  const UNDATED_BUDGET = 120;
+  const undatedBySource = new Map();
+  for (const h of undated) {
+    const key = h.source || '';
+    if (!undatedBySource.has(key)) undatedBySource.set(key, []);
+    undatedBySource.get(key).push(h);
+  }
+  const undatedGroups = [...undatedBySource.values()];
+  const undatedTop = [];
+  for (let round = 0; undatedTop.length < UNDATED_BUDGET && undatedGroups.some(g => round < g.length); round += 1) {
+    for (const g of undatedGroups) {
+      if (undatedTop.length >= UNDATED_BUDGET) break;
+      if (round < g.length) undatedTop.push({ ...g[round], _undatedFallback: true });
+    }
+  }
   RUN_REPORT.headlines.usedRecent = recent.length;
   RUN_REPORT.headlines.usedUndated = undatedTop.length;
   return prioritizeFrontalieriHeadlines(filterByAnchor([...recent, ...undatedTop]));
