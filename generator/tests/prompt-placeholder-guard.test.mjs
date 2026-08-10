@@ -361,6 +361,29 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato in registerArticleFiles');
   });
 
+  it('sanitizePromptPlaceholders gira anche nel flusso AI primario (generateAndValidateArticle)', () => {
+    // Il flusso primario — main() → generateAndValidateArticle(), il
+    // produttore piu' frequente del corpus (cron ogni ~30 min) — scrive i
+    // file direttamente (modifyRouterTs/modifyBlogArticlesTsx) e non passa
+    // MAI da registerArticleFiles(), che e' usata solo dai quattro
+    // produttori secondari. Senza una chiamata anche qui un segnaposto
+    // generato dal flusso quotidiano principale pubblicava senza essere
+    // intercettato (review PR #196).
+    const i = createArticleSrc.indexOf('async function generateAndValidateArticle');
+    const j = createArticleSrc.indexOf('function slugifySlugPart');
+    assert.ok(i > 0 && j > i, 'generateAndValidateArticle non trovata');
+    const corpo = createArticleSrc.slice(i, j);
+    assert.ok(corpo.includes('sanitizePromptPlaceholders(data)'), 'guard non invocato nel flusso AI primario');
+    assert.ok(
+      corpo.indexOf('translateArticle(data)') < corpo.indexOf('sanitizePromptPlaceholders(data)'),
+      'il guard deve girare DOPO translateArticle(), altrimenti non vede i segnaposto propagati dalla traduzione',
+    );
+    assert.ok(
+      corpo.indexOf('sanitizePromptPlaceholders(data)') < corpo.indexOf('modifyRouterTs(data)'),
+      'il guard deve girare PRIMA della scrittura dei file',
+    );
+  });
+
   it('gira PRIMA di clampSeoDescriptions', () => {
     // Troncare a 160 caratteri un campo che E' il segnaposto lo renderebbe
     // solo un segnaposto piu' corto — e sotto il taglio la regola di forma

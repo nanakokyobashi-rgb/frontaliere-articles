@@ -11335,6 +11335,25 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
