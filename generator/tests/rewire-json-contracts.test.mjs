@@ -430,6 +430,76 @@ test('[border-wait-averages] "N min" senza trattino resta accettato', async () =
 // 5. Cio' che il gate lato fetch, per costruzione, non puo' vedere
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * Estrae gli slug del literal `BORDER_WAIT_CROSSINGS` da `borderWaitData.ts`.
+ *
+ * Ha una funzione propria perche' la prima versione, inline, sbagliava
+ * ENTRAMBI gli estremi della finestra e lo faceva in silenzio:
+ *
+ *  - **inizio**: `src.indexOf('BORDER_WAIT_CROSSINGS')` non trova la
+ *    dichiarazione (riga 249) ma la prima *menzione*, che sta nel commento
+ *    «Adding a new crossing» a riga 201 («5. Add the slug to
+ *    BORDER_WAIT_CROSSINGS (below)»);
+ *  - **fine**: l'array chiude con `] as const;`, non con `];`, quindi
+ *    `indexOf('];')` scavallava di ~30 KB fino al primo `];` letterale del
+ *    file — dentro `BORDER_WAIT_ROUTES`, 543 righe piu' sotto.
+ *
+ * Misurato: la finestra sbagliata estraeva **166** token invece di 134,
+ * inghiottendo `TOP_5_CROSSINGS`, `BORDER_CROSSING_DISPLAY`,
+ * `CROSSING_TO_REGION`, `CROSSING_TO_FUEL_ZONE`, `BORDER_WAIT_REGIONS` e
+ * `BORDER_WAIT_LOCALES`. Un test che dice «ogni slug del fixture e' un valico
+ * che il consumatore conosce» verificava quindi l'appartenenza a un insieme
+ * molto piu' largo: uno slug tolto da `BORDER_WAIT_CROSSINGS` ma rimasto in
+ * una qualunque mappa successiva restava «conosciuto», ed e' esattamente la
+ * rottura muta che questa suite esiste per chiudere.
+ *
+ * NB: spostare solo la fine a `] as const` — la correzione piu' ovvia — NON
+ * basta e anzi peggiora: con l'inizio ancora sul commento, il primo
+ * `] as const` incontrato e' quello di `BORDER_WAIT_LOCALES` (riga 242), che
+ * sta PRIMA dell'array. Si estrarrebbero 24 token (regioni, zone carburante e
+ * i quattro codici locale) e i 10 slug del fixture diventerebbero tutti
+ * sconosciuti: rosso falso. Vanno corretti tutti e due gli estremi.
+ */
+function extractBorderWaitCrossings(src) {
+  // Ancorato alla DICHIARAZIONE, non al nome: `export const NOME ... = [`.
+  const decl = /export\s+const\s+BORDER_WAIT_CROSSINGS\s*:[^=]*=\s*\[/.exec(src);
+  assert.ok(
+    decl,
+    'dichiarazione di BORDER_WAIT_CROSSINGS non trovata in borderWaitData.ts: ' +
+      'il literal ha cambiato forma e questa estrazione va riscritta (non allentata)',
+  );
+  const after = src.slice(decl.index + decl[0].length);
+  const end = after.indexOf(']');
+  assert.notEqual(end, -1, 'array BORDER_WAIT_CROSSINGS non chiuso: sorgente troncata?');
+  const slugs = new Set([...after.slice(0, end).matchAll(/'([a-z0-9-]+)'/g)].map((m) => m[1]));
+
+  // Non-vacuita' con un pavimento vero. Il file dichiara «Full crossing
+  // registry (134)» sopra l'array; la soglia sta sotto quel numero per non
+  // rompersi quando un valico viene aggiunto o tolto, ma abbastanza in alto
+  // da non poter essere soddisfatta da nessuna delle due finestre sbagliate
+  // sopra (166 la vecchia, 24 la correzione a meta').
+  assert.ok(
+    slugs.size >= 100,
+    `estrazione di BORDER_WAIT_CROSSINGS fallita (${slugs.size} slug, attesi ~134): il literal e' cambiato forma`,
+  );
+
+  // Guardia di REGRESSIONE diretta sui due sconfinamenti. Questi token
+  // esistono in borderWaitData.ts ma NON sono valichi: sono zone carburante
+  // (`chiasso`), regioni (`ticino-como`, `basilea-germania`) e codici locale
+  // (`it`). Se ricompaiono qui, la finestra e' di nuovo fuori posto — e' il
+  // controllo che la versione precedente non aveva, ed e' il motivo per cui
+  // il difetto e' passato con la suite verde.
+  for (const token of ['it', 'en', 'de', 'fr', 'chiasso', 'mendrisio', 'lugano', 'ticino-como', 'basilea-germania']) {
+    assert.ok(
+      !slugs.has(token),
+      `'${token}' non e' un valico ma e' finito nell'estrazione: la finestra su ` +
+        'BORDER_WAIT_CROSSINGS ha di nuovo scavallato la fine dell\'array ' +
+        '(era il difetto: indexOf(\'];\') saltava a BORDER_WAIT_ROUTES, 543 righe piu\' sotto)',
+    );
+  }
+  return slugs;
+}
+
 test('[border-wait-window] il vocabolario degli slug e\' quello che il consumatore riconosce', () => {
   // `checkWindow()` conta `Object.keys(per).length` sul payload GREZZO, prima
   // di qualunque filtro: 141 valichi pubblicati, di cui la stragrande
@@ -440,9 +510,7 @@ test('[border-wait-window] il vocabolario degli slug e\' quello che il consumato
   // ogni slug del fixture deve essere un valico che il consumatore conosce.
   const c = contract('border-wait-window');
   const src = read('generator/build-plugins/borderWaitData.ts');
-  const block = src.slice(src.indexOf('BORDER_WAIT_CROSSINGS'));
-  const known = new Set([...block.slice(0, block.indexOf('];')).matchAll(/'([a-z0-9-]+)'/g)].map((m) => m[1]));
-  assert.ok(known.size > 20, `estrazione di BORDER_WAIT_CROSSINGS fallita (${known.size} slug): il literal e' cambiato forma`);
+  const known = extractBorderWaitCrossings(src);
 
   const fixture = readFixture(c);
   const unknown = Object.keys(fixture.current.perCrossing).filter((slug) => !known.has(slug));
