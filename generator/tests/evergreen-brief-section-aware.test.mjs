@@ -267,9 +267,14 @@ test('i punti di iniezione usano il selettore di sezione, non il brief nudo', ()
 test('il pool svizzero si ricostruisce da create-article.mjs, non e\' riscritto altrove', () => {
   const src = readFileSync(CREATE_ARTICLE, 'utf-8');
   const pool = svizzeraEvergreenPool(src);
-  // 110 e' il numero che il run reale stampa: «Pre-flight check su 110 keyword»
-  // (run 31315163916, section=svizzera). Se le due liste cambiano questo numero
-  // cambia con loro — l'asserzione e' sulla FORMA, non sul valore esatto.
+  // 110 era il numero che il run stampava quando questo test e' stato scritto
+  // («Pre-flight check su 110 keyword», run 31315163916). Il 2026-08-10 quel
+  // pool si e' rivelato troppo piccolo per restare vivo — 90 keyword su 110
+  // bannate, quattro run scheduled di fila senza articolo — ed e' passato a
+  // 610 con `buildStructuralEvergreenTopicsSvizzera` (20 pilastri × 25
+  // cantoni). La soglia qui resta volutamente bassa: questo test riguarda la
+  // FORMA della ricostruzione, e la taglia del pool e' pinnata dove va,
+  // in `evergreen-pool-svizzera.test.mjs`.
   assert.ok(pool.length >= 100, `pool svizzero ricostruito con sole ${pool.length} keyword`);
   assert.ok(pool.every((k) => typeof k === 'string' && k.length > 0));
   assert.ok(pool.includes('affitti svizzera diritti inquilino disdetta'), 'manca una keyword della lista statica');
