@@ -29,7 +29,7 @@
  *    con motivo loggato. Meglio una run Claude in più che perdere un follow-up.
  *
  * Output (GITHUB_OUTPUT): `batch_prs=<csv di numeri>`, `batch_count=<n>`,
- *   `max_turns=<n>` (min(26 + 8*batch_count, 80); MAI < 26 — AGENTS.md vieta di
+ *   `max_turns=<n>` (min(26 + 8*batch_count, 240); MAI < 26 — AGENTS.md vieta di
  *   abbassare i turni di post-merge-followup, qui li alza in proporzione al batch).
  *
  * Uso:  node scripts/ci/collect-followup-batch.mjs
@@ -158,12 +158,31 @@ export function hasTriageComment(commentsJson, prefix = TRIAGE_COMMENT_PREFIX) {
 }
 
 /**
- * Turni Claude proporzionati al batch: min(26 + 8*n, 80), floor 26 (mai abbassare).
- * Era min(20+6n,60) — bump fleet-wide 2026-07-17 (owner) di tutti i cap max-turns
- * Claude dopo l'ennesimo error_max_turns (cap = anti-runaway, non budget di lavoro).
+ * Turni Claude proporzionati al batch: min(26 + 8*n, 240), floor 26 (mai
+ * abbassare). Era min(26+8n,80) — bump 2026-08-10 (issue #170): il tetto a 80
+ * si attivava già a batch_count=7 (26+8*7=82>80), e da quel punto in poi
+ * `--max-turns` restava fisso a 80 QUALUNQUE fosse n — mentre il lavoro reale
+ * scala linearmente con n. La run 31380568598 (batch_count=11) ha consegnato
+ * TUTTE le 11 PR triagiate con successo in 113 turni (misurato via
+ * `CLAUDE_USAGE`), quasi esattamente i 114 previsti dalla formula non
+ * troncata (26+8*11) — ma il tetto a 80 l'ha comunque marcata `error_max_turns`
+ * / step failure, perché l'action confronta i turni REALI col cap configurato
+ * a posteriori, non con la stima. Il tetto a 80 quindi si autosabotava proprio
+ * sui batch grandi che il floor 26 dovrebbe coprire: dopo un backlog (quota
+ * esaurita, bwrap rotto) il batch cresce oltre 7 PR ed entra sistematicamente
+ * in questo fallimento, che a sua volta non avanza il watermark e fa
+ * ricrescere il prossimo batch (misurato: 2→10→21→21→24→24→30 su run
+ * consecutive tutte fallite per questa causa).
+ * 240 mantiene comunque un margine ampio sotto il `timeout-minutes: 40` del
+ * job: 240 turni ≈ 29 min al ritmo osservato (~7.35s/turno sulla run da 113
+ * turni/830s), contro un budget di 2400s. Resta un tetto anti-runaway (non un
+ * budget di lavoro), non "nessun limite": un batch anomalo (30+) può ancora
+ * saturarlo, ma a quel punto il recupero via watermark+idempotenza (vedi i
+ * commenti in `followup-marker-backstop.mjs`) è il comportamento corretto,
+ * non un difetto da correggere qui.
  */
 export function maxTurnsFor(batchCount) {
-  return Math.min(26 + 8 * Math.max(0, Number(batchCount) || 0), 80);
+  return Math.min(26 + 8 * Math.max(0, Number(batchCount) || 0), 240);
 }
 
 // ── I/O helpers ─────────────────────────────────────────────────────
