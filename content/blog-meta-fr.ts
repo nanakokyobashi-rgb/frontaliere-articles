@@ -9567,6 +9567,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.title': 'Vivre à Cannero Riviera et travailler au Tessin en tant que frontalier',
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Que doivent savoir les frontaliers qui souhaitent vivre à Cannero Riviera et travailler au Tessin ?',
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un frontalier regarde le lac de Lugano de Cannero Riviera',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.title': 'Déménager à Domodossola en tant que frontalier : avantages et inconvénients',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.excerpt': 'Qu\'est-ce qui change pour les frontaliers qui déménagent à Domodossola ?',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.imageAlt': 'Une scène d\'un frontalier en transit de Domodossola vers le Ticino.',
 };
 
 export default blogMetaFr;
