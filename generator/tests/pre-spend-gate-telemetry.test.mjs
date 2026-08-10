@@ -60,12 +60,19 @@ const RECOVERY_SRC = extractFunctionSource('function resolveRunRecovery() {');
 /**
  * Builds a fresh gate with stubbed module-scope dependencies.
  *
+ * `topicalHits` is a stub on purpose: here it only has to make the section
+ * backstop's RANKING legible ("the highest-scoring candidates come back").
+ * That the real lexicon scores national headlines correctly is a different
+ * claim, pinned in news-scan-section-gates.test.mjs against the actual
+ * SVIZZERA_TOPICAL_KEYWORDS.
+ *
  * @param {object} o
  * @param {(h: string) => boolean} o.relevant    - classifier verdict per headline
  * @param {(t: string) => (string|null)} [o.anchor] - strict-anchor matcher
+ * @param {(t: string) => number} [o.topicalHits] - topical density scorer
  * @param {boolean} [o.isFrontaliere]
  */
-function makeGate({ relevant, anchor = () => null, isFrontaliere = true, section = 'frontaliere' }) {
+function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFrontaliere = true, section = 'frontaliere' }) {
   const logs = [];
   // Mirrors the initializer's defaults, so an assertion of `false` here means
   // the gate left the field alone rather than the stub never having had it.
@@ -87,6 +94,7 @@ function makeGate({ relevant, anchor = () => null, isFrontaliere = true, section
     'matchesFrontaliereAnchor',
     'matchesFrontaliereUnambiguousAnchor',
     'classifyFrontaliereRelevance',
+    'countTopicalHits',
     'recordDiscardedHeadline',
     'RUN_REPORT',
     'console',
@@ -97,6 +105,7 @@ function makeGate({ relevant, anchor = () => null, isFrontaliere = true, section
     anchor,
     () => false, // never bypass — every candidate must reach the classifier
     async (headline) => ({ relevant: relevant(headline), reason: relevant(headline) ? 'ok' : 'relevant=no; off-topic' }),
+    topicalHits,
     () => {},
     runReport,
     fakeConsole,
@@ -115,26 +124,81 @@ function totalRejectionLine(logs) {
 // This is the `svizzera` shape measured in production — 90 of its 110 runs in
 // the window. Anchors are frontaliere-specific by construction
 // (`IS_FRONTALIERE ? matchesFrontaliereAnchor(…) : ''`), so the D-backstop has
-// nothing to work with and the pool reaches generation empty.
+// nothing to work with.
+//
+// WHAT THIS TEST USED TO ASSERT, AND WHY THAT WAS WRONG
+//
+// Until 2026-08-10 the assertions here were `kept.length === 0` and
+// `restored=0`, with the comment "svizzera has no anchor set — the backstop
+// cannot fire, and the record must say it". Both readings were accurate about
+// the code and wrong about what the code should do: they pinned a section that
+// could not recover an emptied pool BY CONSTRUCTION as if that were the
+// contract. Re-measured on 2026-08-10 across 11 sampled svizzera runs, ten
+// ended `PRESPEND_GATE_OUTCOME emptied=1 recovered=none status=skipped` and
+// the eleventh `deferred` — the national section published no news article in
+// any of them. A test cannot both describe that and be the thing that would
+// have caught it.
+//
+// So the shape is unchanged and the outcome is inverted: `anchor_candidates=0`
+// still records why the D-backstop was silent (it is a diagnosis, not a
+// verdict), and the new section backstop E answers in its place — hence
+// `restored=3 backstop=topical kept_after=3`. `restored=0` on a national
+// section is now a real failure, not the expected steady state.
 
-test('pool fully rejected with no anchor candidate → one greppable record saying so', async () => {
-  const { gate, logs, runReport } = makeGate({ relevant: () => false, isFrontaliere: false, section: 'svizzera' });
-  const kept = await gate(hl('Festival del film di Locarno', 'Incidente sulla A2', 'Nuovo ristorante a Lugano'));
+test('svizzera: pool fully rejected, no anchor set → section backstop restores instead of shipping an empty pool', async () => {
+  const { gate, logs, runReport } = makeGate({
+    relevant: () => false,
+    isFrontaliere: false,
+    section: 'svizzera',
+    // "Il franco sempre più forte" outscores the two cronaca items, exactly as
+    // the national lexicon scores them in production.
+    topicalHits: (t) => (/franco|prezzi/i.test(t) ? 2 : 0),
+  });
+  const kept = await gate(hl('Incidente sulla A2', 'Il franco sempre più forte', 'Nuovo ristorante a Lugano'));
 
-  assert.equal(kept.length, 0);
+  assert.equal(kept.length, 3, 'the section backstop restores the top-3 by topical density');
+  assert.equal(kept[0].headline, 'Il franco sempre più forte', 'restore is ranked by topical hits, not pool order');
+
   const line = totalRejectionLine(logs);
-  assert.ok(line, 'PRESPEND_GATE_TOTAL_REJECTION must be emitted when the gate empties the pool');
+  assert.ok(line, 'a rejection the section backstop repaired is still a total rejection and must be recorded');
   assert.match(line, /\bbefore=3\b/);
-  assert.match(line, /\banchor_candidates=0\b/, 'svizzera has no anchor set — the backstop cannot fire, and the record must say it');
-  assert.match(line, /\brestored=0\b/);
-  assert.match(line, /\bkept_after=0\b/);
+  assert.match(line, /\banchor_candidates=0\b/, 'the field still explains why the ANCHOR backstop was silent on this section');
+  assert.match(line, /\brestored=3\b/, 'the national section must no longer reach generation with an empty pool');
+  assert.match(line, /\bbackstop=topical\b/, 'and the record must name which backstop answered');
+  assert.match(line, /\bkept_after=3\b/);
   assert.match(line, /\bsection=svizzera\b/);
 
   assert.equal(runReport.headlines.preSpendGateRan, true);
   assert.equal(runReport.headlines.preSpendGateTotalRejection, true);
   assert.equal(runReport.headlines.preSpendGateBefore, 3);
-  assert.equal(runReport.headlines.preSpendGateKept, 0);
+  assert.equal(runReport.headlines.preSpendGateKept, 3);
+  assert.equal(runReport.headlines.preSpendGateBackstopRestored, 3);
+});
+
+// The section backstop is a floor for a section that has no anchors, NOT a
+// second chance for the frontaliere branch. If it leaked there it would undo
+// the D-backstop's precision: frontaliere restores only anchor-matched
+// candidates, and REGOLA #0 is calibrated on that.
+test('frontaliere: total rejection with no anchor candidate stays empty — the section backstop must not leak', async () => {
+  const { gate, logs, runReport } = makeGate({
+    relevant: () => false,
+    isFrontaliere: true,
+    topicalHits: () => 5,
+  });
+  const kept = await gate(hl('Festival del film di Locarno', 'Incidente sulla A2'));
+
+  assert.equal(kept.length, 0);
+  const line = totalRejectionLine(logs);
+  assert.match(line, /\brestored=0\b/);
+  assert.match(line, /\bbackstop=none\b/);
   assert.equal(runReport.headlines.preSpendGateBackstopRestored, 0);
+});
+
+// The stub above makes the ranking legible but would keep passing if the gate
+// stopped ranking altogether. Pin the wiring against the source.
+test('the section backstop ranks by countTopicalHits, not by pool order alone', () => {
+  assert.match(GATE_SRC, /!IS_FRONTALIERE/, 'the section backstop must be gated on the section');
+  assert.match(GATE_SRC, /countTopicalHits\(/, 'restoring the top-N requires scoring them');
 });
 
 // ── "Emptied but recovered" must not read like "emptied and empty-handed" ──
@@ -157,6 +221,7 @@ test('pool fully rejected but restored by the anchor backstop → same record, r
   assert.match(line, /\bbefore=4\b/);
   assert.match(line, /\banchor_candidates=4\b/);
   assert.match(line, /\brestored=3\b/);
+  assert.match(line, /\bbackstop=anchor\b/, 'on frontaliere the anchor backstop is the one that answers');
   assert.match(line, /\bkept_after=3\b/);
 
   assert.equal(runReport.headlines.preSpendGateTotalRejection, true);
