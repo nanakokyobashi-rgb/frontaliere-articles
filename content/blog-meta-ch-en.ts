@@ -2056,6 +2056,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.title': 'OECD assigns positive assessment to Switzerland',
     'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.excerpt': 'The Swiss National Contact Point for Responsible Business Conduct was positively assessed by the OECD.',
     'blog.article.condotta-aziendale-responsabile-ocse-assegna-giudizio-positivo.imageAlt': 'Image of a view of Lugano',
+    'blog.article.seco-dazi-stati-uniti-2026.title': 'United States: new tariffs on Switzerland, SECO and economic policies',
+    'blog.article.seco-dazi-stati-uniti-2026.excerpt': 'SECO announced that the United States has adopted new tariff measures based on the investigation into trade in goods produced using forced labor.',
+    'blog.article.seco-dazi-stati-uniti-2026.imageAlt': 'A scene of work in Lugano, Switzerland',
 };
 
 export default blogMetaChEn;
