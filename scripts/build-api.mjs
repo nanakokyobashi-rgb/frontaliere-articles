@@ -67,6 +67,12 @@ import {
   sanitizeJsonText,
   assertNoControlChars,
 } from './lib/sanitize-control-chars.mjs';
+// Sanificare non basta: togliere il byte C0 distrugge il MARKER che rende esatta
+// una riparazione futura. Qui si registra prima di distruggere (#95, #133).
+import {
+  reportStrippedControlChars,
+  reportStrippedControlCharsDeep,
+} from '../generator/scripts/lib/control-char-write-report.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -98,7 +104,11 @@ const written = {};
 // keeps describing the bytes actually served.
 const write = (name, value) => {
   const file = path.join(OUT, name);
-  const json = JSON.stringify(sanitizeDeep(value));
+  const cleanValue = sanitizeDeep(value);
+  // Prima della stringify, non dopo: JSON.stringify escapa i byte C0, quindi
+  // sulla forma serializzata non ci sarebbe piu' niente da vedere (#133).
+  reportStrippedControlCharsDeep(file, value, cleanValue);
+  const json = JSON.stringify(cleanValue);
   fs.writeFileSync(file, json);
   written[name] = json.length;
   console.log(`[build-api] ${name}: ${json.length} bytes`);
@@ -242,6 +252,7 @@ function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
 // that skip xmlEsc entirely (<loc>, <lastmod>) are as capable of carrying one.
 const writeXml = (name, { xml, count }) => {
   const clean = sanitizeXmlDocument(xml);
+  reportStrippedControlChars(path.join(OUT, name), xml, clean);
   assertNoControlChars(clean, name);
   fs.writeFileSync(path.join(OUT, name), clean);
   written[name] = clean.length;
@@ -398,6 +409,7 @@ for (const section of rssSections) {
     // run). Sanitising where this script writes them keeps the fix in the repo
     // that owns the write, and covers whatever the shared builder hands over.
     const clean = sanitizeXmlDocument(xml);
+    reportStrippedControlChars(path.join(OUT, name), xml, clean);
     assertNoControlChars(clean, name);
     fs.writeFileSync(path.join(OUT, name), clean);
     written[name] = clean.length;
@@ -575,15 +587,16 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt);
   collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt);
 
-  const candidatesXml = sanitizeXmlDocument(
+  const candidatesXmlRaw =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
       `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
       `        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"\n` +
       `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n` +
       `        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n` +
       (candidateBlocks.length ? candidateBlocks.join('\n') + '\n' : '') +
-      `</urlset>\n`,
-  );
+      `</urlset>\n`;
+  const candidatesXml = sanitizeXmlDocument(candidatesXmlRaw);
+  reportStrippedControlChars(path.join(OUT, NEWS_CANDIDATES), candidatesXmlRaw, candidatesXml);
   assertNoControlChars(candidatesXml, NEWS_CANDIDATES);
 
   fs.writeFileSync(path.join(OUT, NEWS_CANDIDATES), candidatesXml);
@@ -668,6 +681,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     // Still verbatim in the normal case: sanitizeJsonText returns the original
     // text unless the document actually carries a control character.
     const clean = sanitizeJsonText(raw);
+    reportStrippedControlChars(path.join(OUT, BORDER_RANKING), raw, clean);
     fs.writeFileSync(path.join(OUT, BORDER_RANKING), clean);
     written[BORDER_RANKING] = clean.length;
     borderRankingEntries = entries.length;
@@ -700,6 +714,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
       throw new Error('daily-brief.json carries no available blocks — refusing to publish');
     }
     const clean = sanitizeJsonText(raw);
+    reportStrippedControlChars(path.join(OUT, DAILY_BRIEF), raw, clean);
     fs.writeFileSync(path.join(OUT, DAILY_BRIEF), clean);
     written[DAILY_BRIEF] = clean.length;
     dailyBriefBlocks = available;

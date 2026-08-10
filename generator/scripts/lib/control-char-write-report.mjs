@@ -149,3 +149,42 @@ export function reportStrippedControlChars(file, original, clean, opts = {}) {
 
   return occ.length;
 }
+
+/**
+ * Le foglie stringa di una struttura, in ordine di visita, unite da `\n`.
+ *
+ * Serve a `reportStrippedControlCharsDeep`. `\n` e' 0x0A, che **non** e' nella
+ * classe C0 che questo modulo cerca: unire con quello non puo' inventare ne'
+ * nascondere un'occorrenza.
+ */
+function joinStringLeaves(value, out = []) {
+  if (typeof value === 'string') out.push(value);
+  else if (Array.isArray(value)) for (const v of value) joinStringLeaves(v, out);
+  else if (value && typeof value === 'object') for (const v of Object.values(value)) joinStringLeaves(v, out);
+  return out;
+}
+
+/**
+ * Come `reportStrippedControlChars`, ma per un valore STRUTTURATO che sta per
+ * essere serializzato.
+ *
+ * ## Perche' non basta la versione a stringhe (issue #133)
+ *
+ * Il richiamo istintivo sarebbe confrontare `JSON.stringify(original)` con
+ * `JSON.stringify(clean)`. Non funziona: **`JSON.stringify` escapa i byte C0**
+ * in `\u0016`, quindi la forma serializzata non contiene piu' il byte letterale e
+ * la regex di `occurrencesIn` non trova nulla. E' la stessa ragione per cui, nel
+ * corpus, un grep di byte sui `.json` non vedeva la corruzione mentre i `.ts` la
+ * mostravano.
+ *
+ * Quindi si guardano le foglie stringa **prima** della serializzazione, che e'
+ * l'unico momento in cui il byte esiste come byte.
+ */
+export function reportStrippedControlCharsDeep(file, original, clean, opts = {}) {
+  return reportStrippedControlChars(
+    file,
+    joinStringLeaves(original).join('\n'),
+    joinStringLeaves(clean).join('\n'),
+    opts,
+  );
+}
