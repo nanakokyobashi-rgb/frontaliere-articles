@@ -59,6 +59,7 @@ import {
   stripSchemaHeadingLine,
   truncateAtPromptScaffold,
   cleanFaqPairs,
+  orphanFaqLocales,
 } from './lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -346,6 +347,64 @@ if (!CHECK_ONLY) {
     if (!src.includes('__DROP_FAQ__')) continue;
     src = src.replace(/\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'__DROP_FAQ__',?/g, '');
     fs.writeFileSync(abs, src);
+  }
+}
+
+// ── 2b. Le FAQ ORFANE nelle traduzioni ──────────────────────────────────────
+//
+// Il passo 2 vede un segnaposto solo dove i letterali dello schema — che sono
+// ITALIANI — compaiono nel testo. La FAQ di en/de/fr non e' generata: e'
+// TRADOTTA da quella di `it` (`translateArticle()`), quindi lo stesso
+// segnaposto vi arriva gia' voltato in un'altra lingua e nessuna regola di
+// `findPromptPlaceholders` lo tocca. Il passo 2 toglieva percio' la chiave da
+// `it` e lasciava le tre traduzioni al loro posto.
+//
+// MISURATO: la bonifica di #196 ha fatto esattamente questo su 19 articoli, e
+// le **57 chiavi** rimaste (19 × en/de/fr) sono l'unico test rosso del job
+// `tests` del sito — `tests/i18n-completeness.test.ts`, «consistent keys across
+// all locales» — che tenendo `main` rosso teneva ferme tutte le PR aperte,
+// perche' `pr-review-loop` parte solo su `tests` verde.
+//
+// Questo passo va DOPO la rimozione delle righe `__DROP_FAQ__`: una faq `it`
+// tolta in questo stesso giro crea orfani qui. In `--check` quella rimozione
+// non e' avvenuta, quindi `faqStateOf()` conta `__DROP_FAQ__` come assenza.
+//
+// Il criterio e' in `orphanFaqLocales()`, ed e' strutturale invece che
+// testuale di proposito: vedi l'intestazione della funzione.
+const FAQ_LINE_RE = /\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)',?/;
+
+function faqStateOf(abs) {
+  if (!fs.existsSync(abs)) return { hasFile: false, hasFaq: false };
+  const m = /'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/.exec(fs.readFileSync(abs, 'utf-8'));
+  return { hasFile: true, hasFaq: Boolean(m) && m[1] !== '__DROP_FAQ__' };
+}
+
+for (const dir of ['blog-body', 'blog-body-ch']) {
+  const itDir = path.join(ROOT, 'content', dir, 'it');
+  if (!fs.existsSync(itDir)) continue;
+  for (const name of fs.readdirSync(itDir)) {
+    if (!name.endsWith('.ts')) continue;
+    const id = name.slice(0, -3);
+    const byLocale = Object.fromEntries(
+      LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name))]),
+    );
+    for (const locale of orphanFaqLocales(byLocale)) {
+      const rel = path.join('content', dir, locale, name);
+      const abs = path.join(ROOT, rel);
+      const src = fs.readFileSync(abs, 'utf-8');
+      let dropped = '';
+      const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
+        dropped = raw;
+        return '';
+      });
+      if (next === src) {
+        residuals.push({ label: rel, id, field: 'faq', locale, value: '', reason: 'chiave faq presente ma non isolabile come riga' });
+        continue;
+      }
+      if (!CHECK_ONLY) fs.writeFileSync(abs, next);
+      total += 1;
+      changes.push({ rel, id, field: 'faq', locale, how: 'faq-orfana rimossa (assente in it)', before: dropped, after: '(chiave rimossa)' });
+    }
   }
 }
 

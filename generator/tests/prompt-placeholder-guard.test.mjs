@@ -49,6 +49,7 @@ import {
   stripSchemaHeadingLine,
   truncateAtPromptScaffold,
   cleanFaqPairs,
+  orphanFaqLocales,
   sanitizePromptPlaceholders,
 } from '../scripts/lib/prompt-placeholder-guard.mjs';
 
@@ -109,6 +110,78 @@ describe('la FAQ segnaposto, che e\' il caso grave', () => {
     assert.equal(dropped.length, 0);
     assert.equal(repaired, 3);
     assert.equal(pairs[0].q, 'Che cosa significa la domanda scomoda?', 'l\'iniziale stava sull\'etichetta: va rimessa');
+  });
+});
+
+describe('la FAQ segnaposto TRADOTTA — cio\' che i letterali italiani non possono vedere', () => {
+  // Verbatim da `origin/main` il 2026-08-11, per lo stesso articolo
+  // (`regione-lombardia-fiduciosa`) di cui `it` NON ha piu' la chiave.
+  const TRADOTTE = {
+    en: [
+      { q: 'FAQ 1 based on the facts of the article?', a: 'Response with data FROM SOURCE. 50-100 words.' },
+      { q: 'Frequently Asked Question 2?', a: 'Practical answer based on the source.' },
+      { q: 'Frequently Asked Question 3?', a: 'Response with procedure or deadline from source.' },
+    ],
+    de: [
+      { q: 'FAQ 1 basierend auf den Fakten des Artikels?', a: 'Antwort mit Daten AUS DER QUELLE. 50-100 Wörter.' },
+      { q: 'FAQ 2?', a: 'Praktische Antwort basierend auf der Quelle.' },
+      { q: 'FAQ 3?', a: 'Antwort mit Verfahren oder Fälligkeit von der Quelle.' },
+    ],
+    fr: [
+      { q: "Question fréquemment posée 1 basée sur les faits de l'article ?", a: 'Réponse avec des données DE LA SOURCE. 50-100 mots.' },
+      { q: 'Foire aux questions 2 ?', a: 'Réponse pratique basée sur la source.' },
+      { q: 'Foire aux questions 3 ?', a: 'Réponse par procédure ou échéance de la source.' },
+    ],
+  };
+
+  // Questa e' la PREMESSA di `orphanFaqLocales`, e va tenuta rossa se cade:
+  // se un giorno `cleanFaqPairs` imparasse le tre lingue, la regola strutturale
+  // resterebbe corretta ma non sarebbe piu' l'unica via.
+  for (const [locale, pairs] of Object.entries(TRADOTTE)) {
+    it(`cleanFaqPairs NON vede il segnaposto in '${locale}': i letterali dello schema sono italiani`, () => {
+      const { dropped } = cleanFaqPairs(pairs, { dropShort: false });
+      assert.deepEqual(dropped, [], `se questo scarta qualcosa, la motivazione di orphanFaqLocales e' cambiata`);
+    });
+  }
+
+  it('nemmeno le tre traduzioni sono uguali fra loro: una lista di letterali non le copre', () => {
+    const primi = Object.values(TRADOTTE).map((p) => p[0].q);
+    assert.equal(new Set(primi).size, 3);
+  });
+
+  it('orphanFaqLocales le nomina tutte e tre quando `it` non ha la chiave', () => {
+    assert.deepEqual(
+      orphanFaqLocales({
+        it: { hasFile: true, hasFaq: false },
+        en: { hasFile: true, hasFaq: true },
+        de: { hasFile: true, hasFaq: true },
+        fr: { hasFile: true, hasFaq: true },
+      }),
+      ['de', 'en', 'fr'],
+    );
+  });
+
+  it('tace quando `it` la FAQ ce l\'ha — il caso normale, 3.174 articoli su 3.193', () => {
+    assert.deepEqual(
+      orphanFaqLocales({
+        it: { hasFile: true, hasFaq: true },
+        en: { hasFile: true, hasFaq: true },
+        de: { hasFile: true, hasFaq: false },
+        fr: { hasFile: true, hasFaq: true },
+      }),
+      [],
+      'una traduzione che MANCA e\' un difetto di un\'altra classe: qui non si aggiunge niente',
+    );
+  });
+
+  it('tace quando il file `it` non esiste: li\' cancellare distruggerebbe l\'unico contenuto', () => {
+    assert.deepEqual(
+      orphanFaqLocales({
+        it: { hasFile: false, hasFaq: false },
+        en: { hasFile: true, hasFaq: true },
+      }),
+      [],
+    );
   });
 });
 
@@ -562,6 +635,54 @@ describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
       const { dropped } = cleanFaqPairs(pairs, { dropShort: false });
       if (dropped.length) offenders.push(`${c.f}: ${dropped.length} coppie (${dropped[0].reason})`);
     }
+    assert.deepEqual(offenders, []);
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 5. GATE — la FAQ orfana, che il gate qui sopra NON puo' vedere
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// Il gate dei segnaposto guarda il TESTO, e su una traduzione non trova nulla
+// da guardare: il segnaposto e' passato dal traduttore e non e' piu' un
+// letterale dello schema. Restava quindi verde mentre 57 chiavi `faq` orfane
+// (19 articoli × en/de/fr, lasciate dalla bonifica #196 che aveva ripulito solo
+// `it`) tenevano ROSSO il job `tests` del sito — `tests/i18n-completeness.test.ts`,
+// «consistent keys across all locales» — e con esso ogni PR aperta, perche'
+// `pr-review-loop` parte solo su `tests` verde.
+//
+// Il criterio e' strutturale e non testuale, quindi vale anche per una FAQ `it`
+// tolta per una causa che qui non c'entra. E' il gate mancante: sul sito il
+// difetto arriva come rosso di TUTTE le PR, qui come una lista di file.
+describe('gate — nessuna FAQ orfana: en/de/fr non possono avere una faq che `it` non ha', () => {
+  const LOCALI = ['it', 'en', 'de', 'fr'];
+  const RADICI = ['blog-body', 'blog-body-ch'];
+  const hasFaqIn = (p) => (fs.existsSync(p) ? /'blog\.article\.[^']+\.faq'\s*:/.test(fs.readFileSync(p, 'utf-8')) : false);
+
+  const articoli = [];
+  for (const radice of RADICI) {
+    const itDir = path.join(ROOT, 'content', radice, 'it');
+    if (!fs.existsSync(itDir)) continue;
+    for (const name of fs.readdirSync(itDir).filter((f) => f.endsWith('.ts'))) {
+      const byLocale = Object.fromEntries(LOCALI.map((l) => {
+        const p = path.join(ROOT, 'content', radice, l, name);
+        return [l, { hasFile: fs.existsSync(p), hasFaq: hasFaqIn(p) }];
+      }));
+      articoli.push({ rel: `${radice}/…/${name}`, byLocale });
+    }
+  }
+
+  // Il pavimento anti-falso-verde: `content/blog-body**` e' fuori da ogni
+  // worktree sparse di questo repo, e uno scan su zero articoli passerebbe.
+  it('enumera piu\' di 3.000 articoli (altrimenti e\' un checkout sparse)', () => {
+    assert.ok(articoli.length > 3000, `enumerati solo ${articoli.length} articoli`);
+  });
+
+  it('zero FAQ orfane', () => {
+    const offenders = articoli
+      .map((a) => ({ rel: a.rel, orfane: orphanFaqLocales(a.byLocale) }))
+      .filter((a) => a.orfane.length)
+      .map((a) => `${a.rel}: faq presente in ${a.orfane.join(',')} e assente in it`);
     assert.deepEqual(offenders, []);
   });
 });

@@ -497,6 +497,62 @@ export function cleanFaqPairs(pairs, { dropShort = true } = {}) {
   return { pairs: kept.length >= 2 ? kept : null, repaired, dropped };
 }
 
+/**
+ * Le locali la cui `faq` e' rimasta ORFANA: `it` non ce l'ha, loro si'.
+ *
+ * ## Il difetto che chiude, misurato
+ *
+ * L'intestazione di questo modulo lo dice gia' per gli slug — «il segnaposto
+ * non sopravvive come letterale: il prompt e' scritto in italiano, quindi il
+ * modello ne traduce il SIGNIFICATO» — ma la bonifica del 2026-08-10 (#196) ha
+ * applicato quella lezione solo dove esisteva un rilevatore. Su una FAQ
+ * segnaposto ha quindi tolto la chiave dal file `it`, dove i letterali
+ * italiani matchano, e NON dai file en/de/fr, dove lo stesso segnaposto era
+ * gia' passato dal traduttore:
+ *
+ *     it → (chiave rimossa)
+ *     en → 'FAQ 1 based on the facts of the article?' / 'Response with data FROM SOURCE. 50-100 words.'
+ *     de → 'FAQ 1 basierend auf den Fakten des Artikels?'
+ *     fr → 'Question fréquemment posée 1 basée sur les faits de l\'article ?'
+ *
+ * Misurato su `origin/main` il 2026-08-11: **19 articoli × 3 locali = 57
+ * chiavi orfane** (10 in `blog-body`, 9 in `blog-body-ch`), tutte e sole quelle
+ * di #196. Il costo non e' cosmetico: quelle 57 chiavi sono l'unico
+ * fallimento del job `tests` del sito
+ * (`tests/i18n-completeness.test.ts` → «consistent keys across all locales»),
+ * e poiche' `pr-review-loop` gira solo su `tests` verde tenevano ferme tutte le
+ * PR aperte del sito.
+ *
+ * ## Perche' la regola e' sull'ORFANO e non sul testo tradotto
+ *
+ * Inseguire il testo tradotto vorrebbe dire mantenere i letterali dello schema
+ * in quattro lingue, e sarebbe una lista che il modello puo' sempre riscrivere
+ * (nemmeno le tre traduzioni sopra sono uguali fra loro: `FAQ 1` in de,
+ * `Question fréquemment posée 1` in fr). La relazione strutturale invece non
+ * dipende dalla lingua: **la FAQ di en/de/fr e' una TRADUZIONE di quella di
+ * `it`** (`translateArticle()` in create-article.mjs), quindi una traduzione
+ * senza originale non e' un dato incompleto, e' un dato che non ha piu' una
+ * fonte. Vale per qualunque causa abbia tolto l'originale, non solo per i
+ * segnaposto.
+ *
+ * `hasFile` e' richiesto perche' l'assenza del file `it` e' un difetto di
+ * un'altra classe (un articolo pubblicato solo in traduzione): li' cancellare
+ * distruggerebbe l'unico contenuto rimasto invece di ripararlo.
+ *
+ * @param {Record<string, {hasFile?: boolean, hasFaq?: boolean}>} faqByLocale
+ * @param {{sourceLocale?: string}} [opts]
+ * @returns {string[]} locali da cui togliere la chiave, ordinate
+ */
+export function orphanFaqLocales(faqByLocale, { sourceLocale = 'it' } = {}) {
+  if (!faqByLocale || typeof faqByLocale !== 'object') return [];
+  const source = faqByLocale[sourceLocale];
+  if (!source || source.hasFile !== true || source.hasFaq !== false) return [];
+  return Object.entries(faqByLocale)
+    .filter(([locale, state]) => locale !== sourceLocale && state && state.hasFaq === true)
+    .map(([locale]) => locale)
+    .sort();
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Enforcement sul percorso di scrittura
 // ─────────────────────────────────────────────────────────────────────────────
