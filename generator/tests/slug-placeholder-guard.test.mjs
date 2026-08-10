@@ -56,19 +56,30 @@
  *      · ed e' la prova di NON-regressione del classificatore. Il guard e'
  *        deliberatamente aggressivo (un falso positivo costa uno slug diverso
  *        su un articolo non ancora pubblicato, un falso negativo costa un URL
- *        pubblico permanente). Passarlo su 15.000 slug reali e trovarne 28 —
- *        esattamente i 28 noti — e' la misura che l'aggressivita' non tocca il
+ *        pubblico permanente). Passarlo su 15.000 slug reali e trovarne 25 —
+ *        esattamente i 25 noti — e' la misura che l'aggressivita' non tocca il
  *        corpus vero.
  *
  * ## `LEGACY_OFFENDERS` e' congelata, e l'uguaglianza e' ESATTA
  *
- * I 28 sono gia' pubblicati e rispondono 200. Cambiarli lascerebbe 28 URL
- * morte: in questo repo non esiste una mappa old-slug -> new-slug per gli
- * articoli (l'unico meccanismo vicino, `content/swiss-article-canonical-overrides.json`,
- * sposta il canonical e lascia VIVE entrambe le pagine — ma serve una pagina
- * vincitrice che qui non esiste), e il renderer che potrebbe emettere un
- * bridge di redirect sta in `engine/`, che il manifest dichiara `outOfScope`
- * perche' scende in mirror dal sito. Quindi restano.
+ * I 25 sono gia' pubblicati e rispondono 200, quindi non si rinominano da
+ * soli: prima serve il bridge che manda la vecchia URL sulla nuova.
+ *
+ * **Corretto il 2026-08-10** (`valerielinc-ops/frontaliere-si-o-no#5352`): la
+ * versione precedente di questo commento diceva che una mappa
+ * old-slug -> new-slug per gli articoli non esiste, e che il renderer capace
+ * di emettere un bridge sta in `engine/` (`outOfScope`). Sbagliato su
+ * entrambi i punti. Il bridge lo emette `build-plugins/legacyRedirectsPlugin.ts`
+ * del sito — non l'engine, quindi il mirror non c'entra — nella forma
+ * `noindex,follow` + canonical + meta-refresh 0s scelta in #2996, ed e' vivo in
+ * produzione da mesi su una quindicina di rename di articoli (misurato:
+ * `/articoli-frontaliere/tassa-transito-svizzera-2023/` e
+ * `/en/cross-border-articles/transit-fee-switzerland-2023/` rispondono 200
+ * `noindex,follow` con il canonical sul 2026). Dalla stessa PR quella mappa ha
+ * un ingresso a dati, `data/article-redirects.json`, e riparare un offender di
+ * questa lista e' quindi: una voce li', il rename qui, in quest'ordine.
+ * `content/swiss-article-canonical-overrides.json` resta la strada diversa che
+ * era — consolidare due pagine entrambe vive, non spostarne una.
  *
  * L'asserzione e' di uguaglianza esatta, non di inclusione: un offender NUOVO
  * rompe il test (e' il punto), e un offender RIPARATO lo rompe pure, finche'
@@ -141,7 +152,7 @@ function freshGuard() {
 
 const { inspectSlugForPromptPlaceholder } = freshGuard();
 
-// ── I 28 valori reali, presi dalla produzione ──────────────────────────────
+// ── I valori reali, presi dalla produzione ──────────────────────────────
 
 /** Segnaposti puri: non resta niente di utile una volta tolto il prefisso. */
 const UNRECOVERABLE = [
@@ -330,7 +341,7 @@ test('derive: nessun log quando non c\'e\' niente da correggere', () => {
 // ── Lo scan sul registro pubblicato ────────────────────────────────────────
 
 /**
- * I 28 segnaposti gia' pubblicati, congelati. Chiave: `<sezione>|<id>|<locale>`.
+ * I 25 segnaposti gia' pubblicati, congelati. Chiave: `<sezione>|<id>|<locale>`.
  * Vedi l'intestazione: la lista puo' solo restringersi, e restringerla e' una
  * modifica di codice.
  */
@@ -345,9 +356,6 @@ const LEGACY_OFFENDERS = new Set([
   'blog|kebab-case-3-5-words-max-40-chars|en',
   'blog|kebab-case-3-5-words-max-40-chars|de',
   'blog|kebab-case-3-5-words-max-40-chars|fr',
-  'blog|gaggiolo-traffico|en',
-  'blog|gaggiolo-traffico|de',
-  'blog|gaggiolo-traffico|fr',
   'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|en',
   'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|de',
   'blog|dipiu-frenata-per-gli-annunci-di-lavoro-in-svizzera|fr',
@@ -400,7 +408,7 @@ function readRegistry({ file, constName }) {
   return entries;
 }
 
-test('registro: nessun segnaposto oltre i 28 congelati, e la lista non e\' stantia', () => {
+test('registro: nessun segnaposto oltre i 25 congelati, e la lista non e\' stantia', () => {
   const found = new Set();
   const detail = new Map();
   let scanned = 0;
@@ -431,8 +439,9 @@ test('registro: nessun segnaposto oltre i 28 congelati, e la lista non e\' stant
     nuovi,
     [],
     `${nuovi.length} slug NUOVI con il segnaposto del prompt sono entrati nel registro.\n` +
-      'Un segnaposto pubblicato e\' un URL pubblico permanente: in questo repo non esiste una mappa\n' +
-      'old-slug -> new-slug per gli articoli, quindi non si corregge dopo.\n' +
+      'Un segnaposto pubblicato e\' un URL pubblico permanente. Ripararlo dopo si puo\', ma costa due\n' +
+      'PR in quest\'ordine: prima il bridge sul sito (data/article-redirects.json ->\n' +
+      'legacyRedirectsPlugin), poi il rename qui. Non farlo entrare e\' molto piu\' economico.\n' +
       nuovi.map((k) => `  ${k} = "${detail.get(k)}"`).join('\n'),
   );
 
@@ -441,14 +450,15 @@ test('registro: nessun segnaposto oltre i 28 congelati, e la lista non e\' stant
     spariti,
     [],
     'Questi erano in LEGACY_OFFENDERS e nel registro non ci sono piu\'. Se sono stati riparati,\n' +
-      'toglierli dalla lista in questo file (e verificare che l\'URL vecchia non resti morta:\n' +
-      'era pubblicata e rispondeva 200).\n' + spariti.map((k) => `  ${k}`).join('\n'),
+      'toglierli dalla lista in questo file. La vecchia URL era pubblicata e rispondeva 200: deve\n' +
+      'avere una voce in data/article-redirects.json sul sito, atterrata PRIMA di questo rename.\n' +
+      spariti.map((k) => `  ${k}`).join('\n'),
   );
 });
 
 test('registro: il classificatore non tocca i 15.000 slug veri gia\' pubblicati', () => {
   // La prova di non-regressione del guard aggressivo. Gli unici `leaked` sono
-  // i 28 noti: tutto il resto del corpus attraversa il classificatore intatto.
+  // i 25 noti: tutto il resto del corpus attraversa il classificatore intatto.
   //
   // Il confronto e' con `slugifySlugPart(slug)` e non con `slug` per una
   // ragione preesistente al guard: la normalizzazione taglia a 80 caratteri, e
