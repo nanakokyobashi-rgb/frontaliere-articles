@@ -2050,6 +2050,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.patto-diritti-economici-sociali-e-culturali-sviluppi-svizzera.title': 'Patto diritti economici, sociali e culturali: sviluppi Svizzera',
     'blog.article.patto-diritti-economici-sociali-e-culturali-sviluppi-svizzera.excerpt': 'Il Consiglio federale ha adottato il quinto rapporto svizzero sull\'attuazione del Patto delle Nazioni Unite relativo ai diritti economici, sociali e culturali (Patto I) il 19 giugno 2026.',
     'blog.article.patto-diritti-economici-sociali-e-culturali-sviluppi-svizzera.imageAlt': 'Una scena di un frontaliere che lavora in Svizzera, con la vista sul lago di Lugano',
+    'blog.article.reno-svizzera-merci-camion-essere.title': 'Con il Reno a secco, le cose per la Svizzera rischiano davvero di farsi più care',
+    'blog.article.reno-svizzera-merci-camion-essere.excerpt': 'La siccità del Reno potrebbe avere conseguenze dirette per la Svizzera',
+    'blog.article.reno-svizzera-merci-camion-essere.imageAlt': 'Merci in transito sulla strada in Svizzera',
 };
 
 export default blogMetaChIt;
