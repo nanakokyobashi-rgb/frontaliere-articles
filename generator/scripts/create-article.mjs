@@ -405,6 +405,48 @@ function sectionTopicalKeywords(national) {
   return isNational ? SVIZZERA_TOPICAL_KEYWORDS : TOPICAL_KEYWORDS;
 }
 
+// ── Admission lexicon (issue #189) ──────────────────────────
+// TOPICAL_KEYWORDS is read for two different jobs that must not share a
+// lexicon: RANKING (ordering already-safe candidates, e.g. the svizzera
+// restore backstop below) and ADMISSION (deciding whether a candidate is
+// worth paying for a full generation attempt — the headline topical-gate and
+// the pre-LLM source pre-filter in generateAndValidateArticle). The
+// admission gates feed candidates toward REGOLA #0 / the frontaliere-density
+// check (FRONTALIERE_DENSITY_TERMS above), which has no events/culture
+// terms. A candidate that only matches 'festival'/'sagra'/etc. therefore
+// sailed through admission and was rejected only after a full paid
+// generation — the Locarno Film Festival case measured in #189. The 8
+// events/culture tokens (added 2026-07-17, see the comment on
+// TOPICAL_KEYWORDS above) are excluded from the admission lexicon; they stay
+// in TOPICAL_KEYWORDS for ranking, where they are justified by real traffic
+// data. Scoped to the frontaliere section only: the national (svizzera)
+// section has no equivalent downstream density gate (both checks above are
+// `if (IS_FRONTALIERE)`-only), so there is no contradiction to fix there.
+const FRONTALIERE_EVENTS_CULTURE_KEYWORDS = new Set([
+  'festival', 'sagra', 'mercatin', 'fiera', 'manifestazion',
+  'spettacol', 'rassegna', 'concert',
+]);
+const FRONTALIERE_ADMISSION_KEYWORDS = TOPICAL_KEYWORDS.filter(
+  (k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)
+);
+
+function sectionAdmissionKeywords(national) {
+  const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
+  return isNational ? SVIZZERA_TOPICAL_KEYWORDS : FRONTALIERE_ADMISSION_KEYWORDS;
+}
+
+function hasAdmissionSignal(text, national) {
+  if (!text || typeof text !== 'string') return false;
+  const lower = text.toLowerCase();
+  return sectionAdmissionKeywords(national).some(k => lower.includes(k));
+}
+
+function countAdmissionHits(text, national) {
+  if (!text || typeof text !== 'string') return 0;
+  const lower = text.toLowerCase();
+  return sectionAdmissionKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
+}
+
 function hasTopicalSignal(text, national) {
   if (!text || typeof text !== 'string') return false;
   const lower = text.toLowerCase();
@@ -5192,7 +5234,7 @@ async function scanNewsSources() {
         droppedAnchor += 1;
         continue;
       }
-      if (dropNonTopical && !hasTopicalSignal(text)) {
+      if (dropNonTopical && !hasAdmissionSignal(text)) {
         droppedTopic += 1;
         continue;
       }
@@ -10597,7 +10639,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Env-gated for rollback.
   const dropOffTopicSource = (process.env.SOURCE_DROP_OFF_TOPIC ?? '1') !== '0';
   if (dropOffTopicSource && typeof pageContent === 'string' && pageContent.length > 0) {
-    const sourceHits = countTopicalHits(pageContent);
+    const sourceHits = countAdmissionHits(pageContent);
     if (sourceHits === 0) {
       console.error(`\n⏭️  Source non frontaliere-rilevante (pre-LLM): 0 topical hits sul testo sorgente (URL: ${url}). Provo un altro headline.`);
       RUN_REPORT.notes.push(`Source skipped pre-LLM: 0 topical hits (url=${url})`);
