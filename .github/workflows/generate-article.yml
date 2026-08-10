@@ -63,6 +63,16 @@ name: Generate Blog Article
 # stop condition impossible to get wrong, at the price of needing cron to
 # restart it after a dry spell. The two extra cron slots below pay that price.
 #
+# THAT PRICE TURNED OUT TO BE PAID EVERY SECOND LINK (2026-08-10). The chain
+# alternates sections, and a section whose pool is dry ends the chain the first
+# time its turn comes up — which for `svizzera` was every attempt that day.
+# The fix does NOT touch the stop condition: it lets a single run try the other
+# section before giving up, so a link ends only when BOTH sections have nothing.
+# See "Generate the article" below for the full argument, including why a
+# counter propagated across runs was rejected. Everything the paragraph above
+# asserts still holds byte for byte: only a push under content/** chains, and a
+# run that writes no article pushes nothing under content/**.
+#
 # ALSO DROPPED, each for a reason
 #   - mint-app-token.mjs: the App has no rights here (above).
 #   - npm run test:articles: site tests, some asserting on React rendering (§4).
@@ -275,11 +285,77 @@ jobs:
       # Hard-killed out of process, like the site repo's copy: a model provider
       # that accepts the connection and then stalls would otherwise hold the job
       # to its 60-minute timeout and take the slot with it.
+      #
+      # ── AN UNPRODUCTIVE LINK MUST NOT KILL THE CHAIN (2026-08-10) ──────────
+      #
+      # THE DEFECT. The chain alternates sections (see "Resolve run mode and
+      # section"), so half of all links are handed to `svizzera`. On 2026-08-10
+      # `svizzera` produced nothing on every attempt — its evergreen pool is
+      # saturated and its Phase-1 news scan comes back empty. Measured on three
+      # consecutive chain links (runs 31402855968, 31405881104, 31379813715:
+      # 60s, 42s, 79s) the run logged "Tutte le keyword evergreen risultano già
+      # coperte dal pre-flight", wrote no article, and therefore pushed nothing
+      # under content/** — so nothing triggered the next link. Every second link
+      # was terminal. Half of the 70% of invocations the chain is supposed to
+      # carry was structurally dead, and only cron restarted it.
+      #
+      # THE FIX, AND WHY THIS ONE. The retry happens INSIDE this run: when the
+      # section this link was assigned produces nothing, the same job tries the
+      # other section before giving up. Zero new runs, zero new triggers, zero
+      # new credentials.
+      #
+      # WHY IT TERMINATES — the property the header's stop-condition argument
+      # buys, kept intact:
+      #   1. The chain's stop condition is UNCHANGED. A run that produces no
+      #      article still pushes nothing under content/**, so nothing fires.
+      #      Chaining is still on the ARTICLE, never on the run.
+      #   2. The fallback spawns no run at all. It is a bounded loop over a list
+      #      built BEFORE the loop, holding at most one entry per section (there
+      #      are two), with `break` on the first article and `break` on a hard
+      #      kill. Two attempts per run, maximum, always.
+      #   3. A wall-clock budget caps the pair so two attempts cannot outlive
+      #      the job's 60-minute timeout.
+      # So "both sections dry" ends exactly where it ended before: one run, no
+      # article, no push, chain stopped, cron restarts it.
+      #
+      # THE ALTERNATIVES, AND WHY NOT:
+      #   - Hand the baton to the other section at CHAIN level: the empty run
+      #     has to push or dispatch something to do it, which is chaining on the
+      #     run — the exact shape the header spent four days proving spins — and
+      #     two dry sections then ping-pong until a cap stops them.
+      #   - Re-run the same section: repeats a failure already observed.
+      #   - An empty "chain" push: `content/**` would stop meaning "an article
+      #     arrived", which is the one invariant the stop condition rests on,
+      #     and it would re-arm the recursion with no content in it.
+      #   - A consecutive-empty-links counter propagated across runs with a cap:
+      #     it does terminate, but every empty link becomes another queued run,
+      #     and this workflow's concurrency group is already oversubscribed —
+      #     48 of the 142 runs in the 24h to 2026-08-10T16:00Z are `cancelled`
+      #     with `jobs.total_count == 0`, i.e. evicted from the pending queue by
+      #     a newer arrival without executing a single step. Adding runs makes
+      #     that worse; this fix adds none. It also needs the counter carried in
+      #     the commit subject or a dispatch input — a second state carrier that
+      #     can silently desync from the first. See "Non implementato" in the PR
+      #     for the concurrency question itself, which is not fixed here.
+      #
+      # NOTE ON BALANCE. Alternation exists to keep the two sections growing at
+      # the same rate. The fallback breaks that tie deliberately, and only in
+      # the case where the tie is not real: the skipped section had nothing to
+      # grow with. Its turn is still requested first on every link, so the day
+      # its pool refills it starts producing again with no change here.
+      #
+      # NOTE ON THE `run:` BLOCK. It carries no `${{ }}` interpolation — every
+      # value arrives through `env:`. That keeps a dispatch-supplied `url` out
+      # of the command line the shell parses, and it is what lets
+      # generator/tests/generate-article-chain.test.mjs extract this block and
+      # execute it against stubbed `node`/`timeout`/`git`.
       - name: Generate the article
         id: generate
         if: steps.mode.outputs.dry != 'true'
         env:
           TARGET_SECTION: ${{ steps.mode.outputs.section }}
+          SOURCE_URL: ${{ inputs.url }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
           # so without this the step dies the instant create-article.mjs exits
@@ -289,28 +365,109 @@ jobs:
           # reported as a hard failure for a condition it was written to absorb.
           set +e
           set -uo pipefail
-          hard_kill_s=2400
-          if [ -n "${{ inputs.url }}" ]; then
-            timeout --signal=TERM --kill-after=60s "${hard_kill_s}s" \
-              node generator/scripts/create-article.mjs --section="$TARGET_SECTION" "${{ inputs.url }}"
-          else
-            timeout --signal=TERM --kill-after=60s "${hard_kill_s}s" \
-              node generator/scripts/create-article.mjs --section="$TARGET_SECTION"
+
+          # THE HONEST SIGNAL, DEFINED ONCE. A real generation ADDS a per-locale
+          # body file under content/blog-body{,-ch}/<loc>/<id>.ts — the same
+          # thing fast-publish-article.yml keys on. Everything downstream (the
+          # commit title, the job summary) reads the outputs this function
+          # produces, so there is exactly one definition of "an article exists"
+          # in this file. `git add -A` first because the body files are new and
+          # untracked; it is idempotent and "Commit and push" runs it again.
+          # `|| true` at the call site: a no-match `grep` exits 1.
+          article_body_added() {
+            git add -A
+            git diff --cached --name-only --diff-filter=A \
+              | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1
+          }
+
+          # The attempt list, fixed before the loop — this is the termination
+          # argument in code: one entry per section, never more.
+          sections=("$TARGET_SECTION")
+          if [ "${EVENT_NAME:-}" != "workflow_dispatch" ] && [ -z "${SOURCE_URL:-}" ]; then
+            # A human who named a section (or handed over a URL, which is
+            # section-specific) gets that section and nothing else.
+            if [ "$TARGET_SECTION" = "svizzera" ]; then
+              sections+=(frontaliere)
+            else
+              sections+=(svizzera)
+            fi
           fi
-          rc=$?
-          if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
-            echo "::warning::create-article.mjs hard-killed after ${hard_kill_s}s — no article this run"
-            echo "generated=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          # A run that finds no suitable source is a normal outcome, not a
-          # failure: the scan is quota- and freshness-bound by design.
-          if [ "$rc" != "0" ]; then
-            echo "::warning::create-article.mjs exited $rc — treating as no-article-this-run"
-            echo "generated=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "generated=true" >> "$GITHUB_OUTPUT"
+
+          # 3000s against the job's 60-minute timeout leaves ~10 minutes for
+          # checkout, npm ci, the thumbnail encode and the push. `SECONDS` is
+          # this shell's own clock, so it measures the attempts and nothing else.
+          #
+          # The bound that matters: attempt N's cap is min(hard_kill, budget −
+          # elapsed), so the attempts sum to at most `budget_s` however many
+          # there are. Without the `budget_s − SECONDS` term two attempts could
+          # each take `hard_kill_s` and outlive the job's own timeout, which is
+          # the version generate-article-chain.test.mjs caught before it shipped.
+          #
+          # Overridable so that test can drive the arithmetic in seconds instead
+          # of in tens of minutes; nothing sets these in CI.
+          budget_s="${GENERATE_BUDGET_S:-3000}"
+          hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
+          # Never start an attempt that cannot finish. A sixteenth of the budget
+          # (~3 minutes on the defaults) is the floor; it also keeps the cap
+          # strictly positive, and that matters — `timeout 0s` means NO limit,
+          # so a zero cap would hand the job away rather than protect it.
+          min_attempt_s=$(( budget_s / 16 ))
+          [ "$min_attempt_s" -lt 1 ] && min_attempt_s=1
+          produced=false
+          effective="$TARGET_SECTION"
+          tried=0
+
+          for sec in "${sections[@]}"; do
+            remaining=$(( budget_s - SECONDS ))
+            if [ "$remaining" -lt "$min_attempt_s" ]; then
+              echo "::warning::time budget spent — not attempting section $sec"
+              break
+            fi
+            cap="$hard_kill_s"
+            [ "$remaining" -lt "$cap" ] && cap="$remaining"
+            tried=$(( tried + 1 ))
+            echo "── attempt $tried: section=$sec cap=${cap}s"
+
+            if [ -n "${SOURCE_URL:-}" ]; then
+              timeout --signal=TERM --kill-after=60s "${cap}s" \
+                node generator/scripts/create-article.mjs --section="$sec" "$SOURCE_URL"
+            else
+              timeout --signal=TERM --kill-after=60s "${cap}s" \
+                node generator/scripts/create-article.mjs --section="$sec"
+            fi
+            rc=$?
+
+            if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
+              # A provider that stalls stalls for the other section too, and the
+              # budget is already gone. Stop; do not spend the job's remaining
+              # minutes on the same wall.
+              echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
+              break
+            fi
+            # A run that finds no suitable source is a normal outcome, not a
+            # failure: the scan is quota- and freshness-bound by design.
+            if [ "$rc" != "0" ]; then
+              echo "::warning::create-article.mjs exited $rc on section $sec — treating as no-article-this-run"
+            fi
+
+            body="$(article_body_added || true)"
+            if [ -n "$body" ]; then
+              produced=true
+              effective="$sec"
+              echo "article body added: $body"
+              break
+            fi
+            echo "section $sec produced no article"
+          done
+
+          # `article` is the signal; `section` is the section that actually
+          # wrote, which is what the next chain link alternates off.
+          {
+            echo "article=$produced"
+            echo "section=$effective"
+          } >> "$GITHUB_OUTPUT"
+          echo "article=$produced section=$effective attempts=$tried/${#sections[@]}"
+          exit 0
 
       # Encode the 480w WebP thumbnail for the new hero. This step exists in the
       # main repo's generate-article.yml and was dropped in transport, so every
@@ -350,15 +507,19 @@ jobs:
           # rejected-candidates file, and all four claimed an article. The log
           # read as twice the output that existed.
           #
-          # The honest signal is the one fast-publish-article.yml also keys on:
-          # a real generation adds a per-locale body file under
-          # content/blog-body{,-ch}/<loc>/<id>.ts. `grep -q ... || true` because
-          # under `set -e` a no-match exit 1 would end the step, and "nothing
-          # generated" is a normal outcome.
-          body_added="$(git diff --cached --name-only --diff-filter=A \
-                        | grep -E '^content/blog-body(-ch)?/[a-z]{2}/.+\.ts$' | head -1 || true)"
-          if [ -n "$body_added" ]; then
-            git commit -m "Generate blog article (${{ steps.mode.outputs.section }})"
+          # The probe that answers that question now lives once, in
+          # `article_body_added` in the "Generate the article" step, because it
+          # is also what decides whether the fallback section gets a turn. This
+          # step and the job summary both read its outputs, so the commit title
+          # and the summary line cannot drift apart — that drift is defect 2 of
+          # this PR, where the summary said "Generated: true" on the very run
+          # whose commit said "no article generated".
+          #
+          # The produced branch names the EFFECTIVE section — the one that
+          # wrote — not the one the link was assigned, because the next link
+          # alternates off this subject and must alternate off what exists.
+          if [ "${{ steps.generate.outputs.article }}" = "true" ]; then
+            git commit -m "Generate blog article (${{ steps.generate.outputs.section }})"
           else
             git commit -m "Record rejected topic candidates (${{ steps.mode.outputs.section }} — no article generated)"
           fi
@@ -386,13 +547,42 @@ jobs:
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
           exit 1
 
+      # The summary used to read `steps.generate.outputs.generated`, which was
+      # set to `true` on every exit-0 of create-article.mjs — and exiting 0
+      # without writing anything is the NORMAL outcome, as the step above says
+      # in so many words. Verified on run 31405881104: the log carried "Tutte le
+      # keyword evergreen risultano già coperte dal pre-flight", the commit step
+      # printed "no article generated this run", and the summary said
+      # "Generated: true". It reads `steps.generate.outputs.article` now, the
+      # same output the commit title uses, so the two cannot disagree.
+      #
+      # Dry runs are spelled out rather than left as `false`: the generator is
+      # only LOADED there, never invoked, so "no" without the reason invites the
+      # same misreading from the other side.
       - name: Summary
         if: always()
+        env:
+          DRY: ${{ steps.mode.outputs.dry }}
+          CHAIN: ${{ steps.mode.outputs.chain }}
+          SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
+          SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
+          ARTICLE: ${{ steps.generate.outputs.article }}
         run: |
+          set -uo pipefail
+          if [ "${DRY:-}" = "true" ]; then
+            generated='no — dry run, the generator is loaded and never invoked'
+          elif [ -z "${ARTICLE:-}" ]; then
+            generated='unknown — the run never reached the generator'
+          elif [ "$ARTICLE" = "true" ]; then
+            generated="yes — ${SECTION_PRODUCED:-?}"
+          else
+            generated='no — no section produced an article'
+          fi
           {
             echo "### Generate Blog Article"
-            echo "- Section: ${{ steps.mode.outputs.section }}"
-            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
-            echo "- Generated: ${{ steps.generate.outputs.generated || 'n/a' }}"
+            echo "- Section requested: ${SECTION_REQUESTED:-n/a}"
+            echo "- Chain link: ${CHAIN:-n/a}"
+            echo "- Dry run: ${DRY:-n/a}"
+            echo "- Generated: $generated"
             echo "- Target ref: ${{ github.ref_name }}"
           } >> "$GITHUB_STEP_SUMMARY"
