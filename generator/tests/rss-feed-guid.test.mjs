@@ -86,3 +86,18 @@ test('guid survives a slug rename (built from articleId, not slug)', () => {
 
   assert.match(before, /<guid isPermaLink="false">/, 'guid is no longer a real permalink');
 });
+
+test('guid and link escape XML special characters in articleId and slug (issue #182)', () => {
+  // parseSeoBlogs's extraction regex (/'blog-([^']+)':\s*\{/g) accepts any
+  // character except an apostrophe, so an articleId or slug carrying '&' or
+  // '<' reaches renderFeed verbatim — unescaped, that breaks the published
+  // feed's XML.
+  const xml = buildFeedXml('art&id<x', 'slug&rename<x');
+
+  const guid = xml.match(/<guid[^>]*>([^<]+)<\/guid>/)[1];
+  const link = xml.match(/<link>([^<]+)<\/link>/g).at(-1);
+
+  assert.match(guid, /art&amp;id&lt;x/, 'guid must escape & and < from articleId');
+  assert.match(link, /slug&amp;rename&lt;x/, 'link must escape & and < from slug');
+  assert.doesNotMatch(xml, /art&id</, 'raw unescaped articleId must not appear in the feed');
+});

@@ -358,10 +358,10 @@ function renderFeed(section, locale, articles, slugs, titles, excerpts, bodies, 
         : '';
       return `    <item>
       <title>${escapeXml(item.title)}</title>
-      <link>${BASE_URL}${meta.articlePrefix}${item.slug}/</link>
+      <link>${BASE_URL}${meta.articlePrefix}${escapeXml(item.slug)}/</link>
       <description><![CDATA[${item.excerpt}]]></description>${contentEncoded}
       <pubDate>${toRfc822(item.pubDate)}</pubDate>
-      <guid isPermaLink="false">${BASE_URL}${meta.articlePrefix}${item.articleId}</guid>
+      <guid isPermaLink="false">${BASE_URL}${meta.articlePrefix}${escapeXml(item.articleId)}</guid>
       <category>${escapeXml(item.category)}</category>
       <media:content url="${escapeXml(item.imageUrl)}" medium="image"/>
     </item>`;
