@@ -2026,6 +2026,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.title': 'Imprese edili chiedono stop alle penali per ritardi della canicola',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.excerpt': 'La Società svizzera degli impresari costruttori (SSIC) presenta una petizione per regole chiare e tutela della salute durante ondate di caldo',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.imageAlt': 'Immagine di un cantiere edile in Svizzera durante l\'estate',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.title': 'Baume-Schneider chiede protezione contro la sottomissione chimica',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.excerpt': 'La consigliera federale Elisabeth Baume-Schneider chiede più protezione contro la violenza sessuale commessa tramite sostanze chimiche.',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.imageAlt': 'La consigliera federale Elisabeth Baume-Schneider durante un\'intervista',
 };
 
 export default blogMetaChIt;

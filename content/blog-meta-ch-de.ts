@@ -2026,6 +2026,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.title': 'Bauunternehmen fordern Stopp der Strafen für Hitzschlagverzögerungen',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.excerpt': 'Der Schweizerische Baumeisterverband (SBV) legt eine Petition für klare Regeln und Gesundheitsschutz bei Hitzewellen vor',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.imageAlt': 'Bild von einem Bauunternehmen in der Schweiz während des Sommers',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.title': 'Baume-Schneider bittet um Schutz vor chemischer Einwirkung',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.excerpt': 'Bundesrätin Elisabeth Baume-Schneider fordert mehr Schutz vor sexueller Gewalt durch Chemikalien.',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.imageAlt': 'Die Bundesrätin Elisabeth Baume-Schneider während einer Interview',
 };
 
 export default blogMetaChDe;

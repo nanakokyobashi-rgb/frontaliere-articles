@@ -26225,6 +26225,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-elisabeth-baume-schneider-protezione-chimica': {
+    title: 'Baume-Schneider chiede protezione contro la sottomissione chimica',
+    description: 'La consigliera federale Elisabeth Baume-Schneider chiede più protezione contro la violenza sessuale commessa tramite sostanze chimiche. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, baume-schneider, chiede, protezione, contro',
+    ogTitle: 'Baume-Schneider chiede protezione contro la sottomissione chimica',
+    ogDescription: 'La consigliera federale Elisabeth Baume-Schneider chiede più protezione contro la violenza sessuale commessa tramite sostanze chimiche.',
+    canonicalPath: '/articoli-svizzera/elisabeth-baume-schneider-protezione-chimica/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Baume-Schneider chiede protezione contro la sottomissione chimica",
+      "description": "La consigliera federale Elisabeth Baume-Schneider chiede più protezione contro la violenza sessuale commessa tramite sostanze chimiche. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/elisabeth-baume-schneider-protezione-chimica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La consigliera federale Elisabeth Baume-Schneider durante un'intervista"
+      },
+      "datePublished": "2026-08-10T18:06:26+00:00",
+      "dateModified": "2026-08-10T18:06:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/elisabeth-baume-schneider-protezione-chimica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

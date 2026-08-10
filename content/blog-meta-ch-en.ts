@@ -2026,6 +2026,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.title': 'Construction companies ask for an end to penalties for delays in the heatwave',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.excerpt': 'The Swiss Society of Construction Entrepreneurs (SSIC) presents a petition for clear rules and health protection during heatwaves',
     'blog.article.imprese-edili-svizzere-chiedono-stop-penali.imageAlt': 'Image of a construction site in Switzerland during summer',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.title': 'Baume-Schneider asks for protection against chemical submission',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.excerpt': 'Federal Councilwoman Elisabeth Baume-Schneider is calling for more protection against chemical sexual violence.',
+    'blog.article.elisabeth-baume-schneider-protezione-chimica.imageAlt': 'The Federal Councillor Elisabeth Baume-Schneider during an interview',
 };
 
 export default blogMetaChEn;
