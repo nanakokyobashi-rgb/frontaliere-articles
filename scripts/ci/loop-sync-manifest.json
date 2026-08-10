@@ -300,7 +300,7 @@
       "reason": "Validatore del PIANO di completamento: le voci di `## Non implementato (ancora)` non devono rimandare il lavoro con una scappatoia al posto di uno stato (REVIEW.md §98). Nasce dall'escalation #140 — il bucket `reviewer-finding/pr-body-contract` ricorreva 9 volte in 14 giorni mentre il gate era verde, perche' i due moduli condivisi misurano la PRESENZA della sezione e il contratto chiede un PIANO. Sul sito non esiste: la soglia bloccante e' calibrata sui body di QUESTO repo (misurata su 40 PR mergiate), e portarla la' senza rimisurarla darebbe un tasso di falsi positivi diverso. Se il sito la vuole, si rimisura e diventa `identical`.",
       "baseline": {
         "site": null,
-        "corpus": "eed3a8d5d87f8bfe",
+        "corpus": "9703d2fb5614bd90",
         "alignedAt": "2026-08-10"
       }
     },
