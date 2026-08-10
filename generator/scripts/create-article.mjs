@@ -151,6 +151,11 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+// Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
+// corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
+// dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
+// Vedi l'intestazione del modulo per il perche' non sono tre guard.
+import { cleanFaqPairs, sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 // L'emettitore del blocco meta per-locale. Estratto da qui (era `buildMetaBlock`
 // + `escapeForSingleQuoteTS` piu' sotto) perche' e' l'unico punto in cui il
 // corpus decide quali campi per-locale diventano superficie pubblica, e dentro
@@ -6453,10 +6458,27 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     if (!Array.isArray(rawFaq)) {
       console.error('  ⚠️  FAQ non è un array, lo rimuovo');
     } else {
-      const validFaq = rawFaq.filter(pair =>
-        pair && typeof pair.q === 'string' && typeof pair.a === 'string' &&
-        pair.q.length > 10 && pair.a.length > 20
-      ).slice(0, 7);
+      // ── Perche' il filtro di FORMA non bastava ─────────────────────────
+      //
+      // Il filtro qui sotto era `q.length > 10 && a.length > 20`. La domanda
+      // segnaposto dello schema («Domanda frequente 1 basata sui fatti
+      // dell'articolo?») e' lunga 50 caratteri e la sua risposta 44: passavano
+      // entrambe, e la riga di log stampava «✅ FAQ: 3 coppie valide» mentre le
+      // tre coppie ERANO lo schema. Una FAQ segnaposto e' strutturalmente
+      // valida — si contano le coppie e si passa — e da qui finiva dritta nello
+      // schema FAQPage (engine/ogPagesPlugin.ts:1354) come structured data
+      // falso verso i motori di ricerca. Misurato: 24 articoli live.
+      //
+      // `cleanFaqPairs` aggiunge il controllo di CONTENUTO e tiene la soglia
+      // delle 2 coppie dov'era, perche' e' la stessa dell'engine.
+      const { pairs: cleaned, repaired, dropped } = cleanFaqPairs(rawFaq);
+      if (dropped.length) {
+        console.error(`  ⚠️  FAQ: ${dropped.length} coppie scartate (${dropped.map((d) => d.reason).join('; ')})`);
+      }
+      if (repaired) {
+        console.error(`  ✍️  FAQ: ${repaired} coppie ripulite dall'etichetta dello schema`);
+      }
+      const validFaq = cleaned ? cleaned.slice(0, 7) : [];
       if (validFaq.length < 2) {
         console.error(`  ⚠️  FAQ troppo poche (${validFaq.length}), rimuovo`);
       } else {
@@ -11710,6 +11732,25 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
@@ -12216,6 +12257,14 @@ export async function registerArticleFiles(data, opts = {}) {
         'Refresh the body files instead of re-registering.',
     );
   }
+  // Sta QUI, sul percorso di scrittura condiviso, per la stessa ragione
+  // argomentata sopra a `deriveAndSanitizeArticleSlugs()`: `validate()` e' UN
+  // produttore, e generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
+  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
+  // importano registerArticleFiles() direttamente senza passarci mai.
+  // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
+  // segnaposto lo renderebbe solo un segnaposto piu' corto.
+  sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   modifyRouterTs(data);
