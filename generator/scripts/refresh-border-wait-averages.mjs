@@ -29,12 +29,23 @@
  * Usage:
  *   node generator/scripts/refresh-border-wait-averages.mjs
  *   node generator/scripts/refresh-border-wait-averages.mjs --check   # no write
+ *   node generator/scripts/refresh-border-wait-averages.mjs --help    # show this, no fetch
  *
  * Override with BORDER_WAIT_AVERAGES_URL to pin a single source (used by the tests).
+ * DRY_RUN=1 (or "true") is an env alias for --check.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(
+    'Usage: node generator/scripts/refresh-border-wait-averages.mjs [--check]\n' +
+      '  --check         verify the published averages, write nothing\n' +
+      '  DRY_RUN=1 env   alias for --check',
+  );
+  process.exit(0);
+}
 
 const FILE = 'border-wait-averages.json';
 const ENV_URL = process.env.BORDER_WAIT_AVERAGES_URL;
@@ -66,7 +77,8 @@ const CACHE = path.join(
   'border-wait-averages.json',
 );
 
-const CHECK_ONLY = process.argv.includes('--check');
+const CHECK_ONLY =
+  process.argv.includes('--check') || process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 
 const log = (msg) => console.log(`[refresh-border-wait-averages] ${msg}`);
 

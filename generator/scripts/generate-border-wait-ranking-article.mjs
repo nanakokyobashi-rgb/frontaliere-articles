@@ -193,6 +193,19 @@ async function main() {
     `🛂 border-wait ranking article — id=${data.id} ranked=${data._rankedCount} exists=${exists} dry=${dryRun}`,
   );
 
+  // The evergreen article already ranks under this URL. Fewer than 2 known
+  // Ticino crossings means buildBorderWaitRankingArticle() falls back to the
+  // `noData` stub copy (content.mjs: `hasData = known.length >= 2`) — a run
+  // that would silently REPLACE a correct ranking with a content-free page
+  // instead of failing loud. This is data the run itself computed, not an
+  // upstream fetch failure (that's already fatal in loadWindow()), so it must
+  // stop here rather than let registerArticleFiles/refreshBodyFiles publish it.
+  if (data._rankedCount < 2 && !dryRun) {
+    throw new Error(
+      `only ${data._rankedCount} ranked Ticino crossing(s) — refusing to publish the noData stub over the evergreen ranking article`,
+    );
+  }
+
   if (dryRun) {
     console.log('DRY_RUN — no files written.');
     console.log('  IT title :', data.content.it.title);
