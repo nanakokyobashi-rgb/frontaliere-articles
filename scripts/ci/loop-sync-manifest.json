@@ -2357,6 +2357,16 @@
         "corpus": "d61863a86e162c7f",
         "alignedAt": "2026-08-09"
       }
+    },
+    {
+      "path": "scripts/lib/build-sitemap.mjs",
+      "mode": "corpus-only",
+      "reason": "Sitemap-XML builder estratto da scripts/build-api.mjs (issue #138 item 1), cosi' e' importabile sotto un node --test puro (nessun import .ts) per un test comportamentale reale. Il sito non ha un file omonimo: costruisce le sue sitemap con un renderer diverso (build-plugins/ogPagesPlugin.ts), non con questo script.",
+      "baseline": {
+        "site": null,
+        "corpus": "e1389cde15fab19e",
+        "alignedAt": "2026-08-10"
+      }
     }
   ]
 }

@@ -73,6 +73,10 @@ import {
   reportStrippedControlChars,
   reportStrippedControlCharsDeep,
 } from '../generator/scripts/lib/control-char-write-report.mjs';
+// Pure XML builder, no .ts imports on purpose (see that file's header): lets
+// generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
+// under plain `node --test`, without a tsx subprocess.
+import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -166,85 +170,10 @@ const commit = (() => {
 //
 // Shape matches what the site published before the split, byte-for-byte in
 // structure: IT locs only, an image block, lastmod, monthly/0.7.
-const SITE = 'https://frontaliereticino.ch';
-
-const xmlEsc = (s) =>
-  String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-
-// Per-locale section prefix. hreflang alternates are NOT optional decoration: the
-// site's committed sitemaps carry five links per url (it/en/de/fr/x-default) and
-// publishing without them would silently drop every alternate from the index.
-const SECTION_PATHS = {
-  frontaliere: {
-    it: '/articoli-frontaliere/',
-    en: '/en/cross-border-articles/',
-    de: '/de/grenzgaenger-artikel/',
-    fr: '/fr/articles-frontalier/',
-  },
-  svizzera: {
-    it: '/articoli-svizzera/',
-    en: '/en/swiss-articles/',
-    de: '/de/schweiz-artikel/',
-    fr: '/fr/articles-suisse/',
-  },
-};
-
-function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
-  const paths = SECTION_PATHS[section];
-  const sectionPath = paths.it;
-  const urls = [];
-  for (const a of entries) {
-    const slug = slugMap?.[a.id]?.it;
-    if (!slug) continue;
-    // A canonical-overridden ("shadowed") article points its canonical at a
-    // different winner URL, so listing it here — as <loc> OR as an hreflang
-    // alternate — contradicts the self-canonical gate the consumer enforces
-    // (tests/blog-slugs-sitemap-sync.test.ts, guarding against #3120).
-    if (shadowed.has(slug)) continue;
-    const title = meta[`blog.article.${a.id}.title`];
-    const alt = meta[`blog.article.${a.id}.imageAlt`];
-    const lastmod = a.updatedAt || a.date || '';
-    const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
-    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${slug}/</loc>`];
-    if (img) {
-      parts.push(`    <image:image>`);
-      parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
-      if (title) parts.push(`      <image:title>${xmlEsc(title)}</image:title>`);
-      if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
-      parts.push(`    </image:image>`);
-    }
-    for (const loc of ['it', 'en', 'de', 'fr']) {
-      const s2 = slugMap?.[a.id]?.[loc];
-      if (s2) {
-        parts.push(
-          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
-        );
-      }
-    }
-    parts.push(
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${slug}/" />`,
-    );
-    if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
-    parts.push(`    <changefreq>monthly</changefreq>`);
-    parts.push(`    <priority>0.7</priority>`);
-    parts.push(`  </url>`);
-    urls.push(parts.join('\n'));
-  }
-  return {
-    xml:
-      `<?xml version="1.0" encoding="UTF-8"?>\n` +
-      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
-      `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n` +
-      `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
-      urls.join('\n') +
-      `\n</urlset>\n`,
-    count: urls.length,
-  };
-}
+//
+// SITE, xmlEsc, SECTION_PATHS and buildSitemap() itself live in
+// ./lib/build-sitemap.mjs (imported above) — moved there so the sitemap logic
+// can be unit-tested under plain `node --test` (see that file's header).
 
 // One sanitisation point for every sitemap this file emits, on the assembled
 // document rather than on each interpolated field: xmlEsc() escapes the five
@@ -271,16 +200,37 @@ const shadowedSwissSlugs = new Set(
 );
 console.log(`[build-api] shadowed swiss slugs excluded: ${shadowedSwissSlugs.size}`);
 
+// Same mechanism, frontaliere section (issue #138 item 1). The file is the
+// engine's, not the corpus's: it ships inside packages/articles/engine/shared/
+// on the site and lands at engine/shared/ here via mirror-articles-engine.yml
+// (see that file's _doc for why it lives in the engine and not in content/).
+// Same shape as the swiss map — a flat `overrides` object keyed by the
+// shadowed slug — so the same Object.keys() extraction applies unchanged; the
+// only structural difference is an extra `_groups` block that documents which
+// shadowed slugs share a winner, which this reader does not need.
+const shadowedFrontaliereSlugs = new Set(
+  Object.keys(
+    JSON.parse(
+      fs.readFileSync(path.join(ROOT, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json'), 'utf-8'),
+    ).overrides ?? {},
+  ),
+);
+console.log(`[build-api] shadowed frontaliere slugs excluded: ${shadowedFrontaliereSlugs.size}`);
+
 const metaIt = (await load('content/blog-meta-it.ts')).default;
 const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 // Daily editions carry their date in the id, and slugs.it === id, so the
 // retired set plugs straight into buildSitemap's shadowed parameter.
 const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
 console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
+// buildSitemap takes a single `shadowed` set, so the frontaliere call unions
+// the two de-listing reasons — retired daily editions and canonical-shadowed
+// duplicates — the same way the svizzera call already gets its own dedicated set.
+const frontaliereSitemapShadow = new Set([...retiredDailyEditions, ...shadowedFrontaliereSlugs]);
 const sitemapCounts = {
   blog: writeXml(
     'sitemap-blog.xml',
-    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, retiredDailyEditions),
+    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow),
   ),
   blogCh: writeXml(
     'sitemap-blog-ch.xml',
