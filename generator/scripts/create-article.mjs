@@ -4403,8 +4403,22 @@ function formatStatsBfsPrompt(quarter, data) {
   const ages = Array.isArray(data.ages) ? data.ages : [];
   const ageTable = ages.map((a) => `- ${a.name}: ${fmt(a.value)}`).join('\n');
   const gender = Array.isArray(data.genderSnapshot) ? data.genderSnapshot : [];
-  const genderPct = (g) => `${String(g.pct).replace('.', ',')}%`;
-  const genderLine = gender.map((g) => `${g.name} ${genderPct(g)} (${fmt(g.value)})`).join(' · ');
+  // g.pct arriva da Firestore senza garanzia di forma: mancante, non numerico, o
+  // una stringa già mal formattata (es. "12.3.4") che `String().replace('.', ',')`
+  // trasformerebbe in "12,3.4%" — testo che matcha ancora il pattern digit-led di
+  // `extractSourceAnchors` ma che `parseItalianNumber` non sa risolvere, producendo
+  // l'ancora impossibile `pct:NaN` (nessun testo la soddisfa mai). Un pct non
+  // finito qui non genera affatto la percentuale, invece di generarne una rotta.
+  const genderPct = (g) => {
+    const n = Number(String(g.pct).replace(',', '.'));
+    return Number.isFinite(n) ? `${n.toString().replace('.', ',')}%` : null;
+  };
+  const genderLine = gender
+    .map((g) => {
+      const pct = genderPct(g);
+      return `${g.name}${pct ? ` ${pct}` : ''} (${fmt(g.value)})`;
+    })
+    .join(' · ');
 
   const trendDirection = qoqPct == null
     ? 'stabile'
