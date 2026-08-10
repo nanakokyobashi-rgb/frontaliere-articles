@@ -499,6 +499,15 @@ jobs:
           echo "purging ${#urls[@]} URL(s)"
           printf '  %s\n' "${urls[@]}"
 
+          # The SAME list is purged a second time after the verification step
+          # (issue #114), so it is written down here instead of being rebuilt
+          # there. A second construction is a second thing to keep in sync, and
+          # the failure mode of a divergence is silent: the re-purge would clean
+          # a set of URLs that is no longer the set that was published, and a
+          # poisoned 404 would survive with every log line saying "purged".
+          # One producer, one file, one consumer.
+          printf '%s\n' "${urls[@]}" > "$RUNNER_TEMP/edge-purge-urls.txt"
+
           # cf-purge-cache.mjs is non-fatal when CF_API_TOKEN is absent — it
           # prints a notice and exits 0. Wrong posture here: a silent skip is
           # exactly how an article stays 404 for two hours, so check first.
@@ -564,14 +573,95 @@ jobs:
           # even though it only has push — not admin — on the shard repos.
           # load-rc-env.mjs already ::add-mask::s it.
 
+          # WHY EVERY PROBE CARRIES A CACHE-BUST QUERY (issue #114).
+          #
+          # This gate was writing the 404s it exists to detect into the caches
+          # the step above had just purged. It runs AFTER the purge, and until
+          # the step at the bottom of this job there was nothing behind it, so
+          # those writes were never cleared.
+          #
+          # THE TWO PROBES POISON DIFFERENT CACHES, and it matters, because the
+          # obvious story about the first one is wrong. Measured 2026-08-09:
+          #
+          #   origin-<shard>-<loc>.frontaliereticino.ch  →  server: GitHub.com,
+          #     no cf-cache-status, no cf-ray. The host is DNS-only: an external
+          #     request never enters Cloudflare at all, so it CANNOT write the
+          #     entry locale-router.js reads (that entry is created only by the
+          #     Worker's own subrequest, and is what the origin URLs in the purge
+          #     list above are for). What it does hit is GitHub's Fastly, which
+          #     negative-caches: x-cache MISS then HIT, x-cache-hits 1, on a 404.
+          #
+          #   frontaliereticino.ch  →  server: cloudflare, and on a 404
+          #     cf-cache-status MISS then HIT with `s-maxage=7200`. THIS is the
+          #     entry a reader and a crawler receive, and this loop used to walk
+          #     it naked eight times at fifteen-second intervals.
+          #
+          # So the apex probe is the one that manufactures #114 — the article
+          # alive, the origin serving 200, the sitemap announcing it, and the
+          # apex answering a cached 404 with a growing `age` on the locale the
+          # gate had just seen green.
+          #
+          # The origin probe is not innocent either, and its second-order effect
+          # is the nastier one: the 404 it parks in Fastly is served back to THIS
+          # GATE'S OWN next polls, so a shard that finishes building at second 20
+          # can keep reading the gate's own stale 404 for the rest of the window
+          # — and the Worker's subrequest, landing on the same Fastly, can pick
+          # it up and cache it for the full ORIGIN_CACHE_TTL. A gate that both
+          # creates and then re-reads its own negative answer is not measuring
+          # anything.
+          #
+          # WHY A QUERY WORKS. Both caches key on the full URL including the
+          # query, and GitHub Pages ignores the query for static files (verified
+          # in #114 from the other end: the same apex URL answered 404 naked and
+          # 200 with `?cb=<epoch>`). So the probe still measures the real origin
+          # — it just lands on a throwaway key that no reader will ever ask for.
+          # `$GITHUB_RUN_ID` + run attempt + poll index makes every probe unique,
+          # so neither a retry nor the next poll can read an earlier probe.
+          #
+          # `_fpcb` IS NOT A NEW NAME, and that is the point. The site's liveness
+          # probe for the same pipeline — scripts/wait-for-live-article-shards.mjs
+          # over scripts/lib/live-link-check.mjs, both on
+          # valerielinc-ops/frontaliere-si-o-no — has always busted its probes:
+          # `_fpcb=<epoch>` plus `Cache-Control: no-cache` on the content check,
+          # `_=<epoch>` inside checkLink. This gate is the shell reimplementation
+          # of that check for the shards this repo pushes, and the port dropped
+          # the bust. So this is not a new idea being tried here: it is the
+          # restoration of a property the other half of the pipeline never lost,
+          # under the same query name so that a grep finds both sides.
+          #
+          # `Cache-Control: no-cache` is sent for the same reason it is sent
+          # there: with a unique key it changes nothing at Cloudflare, but it
+          # tells Fastly not to hand back whatever it may already hold.
+          #
+          # This is the fix; the re-purge at the bottom is the backstop for the
+          # callers this pipeline does not control. It is that way round because
+          # #114 measured a `files` purge returning success while evicting
+          # nothing (the `Vary: Origin` double-variant class), so "purge it
+          # afterwards" cannot be the thing the correctness rests on.
+          #
+          # The bust is built INSIDE this function on purpose. `$1` stays the
+          # canonical URL, and `$1` is what gets echoed and put in the error and
+          # warning annotations, so a probe-only query can never leak into a URL
+          # a human is told to open — or into an annotation another workflow
+          # parses.
+          #
+          # Pinned by generator/tests/fast-publish-probe-cache-poisoning.test.mjs.
+          probe_url() {
+            local u="$1" i="$2" sep='?'
+            case "$u" in *\?*) sep='&' ;; esac
+            printf '%s%s_fpcb=%s.%s.%s' \
+              "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$i"
+          }
+
           # Poll $1 until it answers 200, at most $2 times. Last code observed
-          # is left in $POLL_CODE.
+          # is left in $POLL_CODE. $1 is never requested as-is: see probe_url.
           poll_origin() {
             local u="$1" attempts="$2" i
             POLL_CODE=000
             for i in $(seq 1 "$attempts"); do
               set +e
-              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
+              POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
+                           -H 'Cache-Control: no-cache' "$(probe_url "$u" "$i")")"
               set -e
               [ "$POLL_CODE" = "200" ] && return 0
               sleep 15
@@ -641,21 +731,89 @@ jobs:
             fail=1
           done < <(jq -r '.shards[] | [.locale, .paths[0]] | @tsv' "$summary")
 
-          echo "── apex (best effort, edge cache is eventually consistent)"
+          # The apex probe goes through poll_origin too — same cache-bust, one
+          # implementation. It used to be an inline copy of the same loop with a
+          # naked curl, and it is the WORSE of the two poisoners: it is the only
+          # one that reaches Cloudflare at all (the origin hosts are DNS-only —
+          # see the measurements above), and the entry it writes is the one a
+          # reader and a crawler receive. Eight attempts × 15s of that, on a
+          # locale whose shard is still building, is issue #114 being
+          # manufactured by its own gate.
+          #
+          # WHAT THIS COSTS, stated plainly: with the bust, the check no longer
+          # observes the EDGE — it observes the origin through the Worker, so it
+          # can no longer report "the edge has not caught up yet". That signal
+          # was warning-only and never gated anything, and buying it required
+          # creating the very negative entry this issue is about, on the URL a
+          # reader asks for. Edge freshness is now the job of the two purge
+          # steps, which is where it belongs; what survives here is the check
+          # that the Worker routes the apex to the right shard at all, which is
+          # the part this pipeline can actually break.
+          echo "── apex (best effort, through the Worker; edge freshness is the purge steps' job)"
           while IFS= read -r u; do
-            code=000
-            for attempt in $(seq 1 8); do
-              set +e
-              code="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$u")"
-              set -e
-              [ "$code" = "200" ] && break
-              sleep 15
-            done
-            if [ "$code" = "200" ]; then echo "  200  $u"
-            else echo "::warning::$u still answers $code — origin is fine, the edge has not caught up yet (negative-cache TTL is 2h; it clears sooner in practice)"; fi
+            if poll_origin "$u" 8; then echo "  200  $u"
+            else echo "::warning::$u still answers $POLL_CODE through the Worker on a cache-busted probe — so this is the apex routing or the shard origin itself, not a stale edge entry"; fi
           done < <(jq -r '.shards[].url' "$summary")
 
           [ "$fail" = "0" ] || exit 1
+
+      - name: Re-purge the edge cache after the verification
+        # `always()`, and that is the load-bearing part: the run this exists for
+        # is the FAILING one. When the verification times out, some locale was
+        # 404 for minutes while the world could reach it, and that is precisely
+        # when a negative entry is most likely to be sitting in the cache.
+        # Skipping the cleanup on failure would leave that 404 behind on exactly
+        # the runs that needed the cleanup most.
+        if: always() && steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+
+          # WHY A SECOND PURGE (issue #114).
+          #
+          # The first purge runs BEFORE the verification, and the verification
+          # takes minutes — up to 12 polls × 15s per locale, plus a Pages rebuild
+          # and 12 more. Anything that asks for one of these URLs during that
+          # window, while the shard is still building, gets a 404 and leaves it
+          # in the cache with nothing behind it to clear. The probes no longer do
+          # that (they carry a cache-bust), but they were never the only caller:
+          # the sitemap and slugs.json are already published by then, so a
+          # crawler arriving in that window poisons the same key just as well.
+          # Measured in #114 the 404 outlived the run by hours, on a locale the
+          # gate itself had seen green.
+          #
+          # This is a backstop, not the fix. #114 also measured a `files` purge
+          # returning success without evicting the variant the reader receives
+          # (the `Vary: Origin` double-variant class). Not creating the entry is
+          # what actually holds; re-purging is what covers the callers this
+          # pipeline does not control.
+          #
+          # The list is READ, not rebuilt — see the producer in the first purge
+          # step. Rebuilding it here would be a second copy of the apex+origin
+          # construction, free to drift, whose divergence shows up as a purge
+          # that logs success over the wrong URLs.
+          list="$RUNNER_TEMP/edge-purge-urls.txt"
+          if [ ! -s "$list" ]; then
+            # No list means the first purge step never ran (an earlier step
+            # failed, or the job was cancelled before it). Nothing was purged, so
+            # there is nothing to re-purge: a notice, not a failure.
+            echo "::notice::no $list — the first purge step did not run, so there is nothing to re-purge"
+            exit 0
+          fi
+
+          mapfile -t urls < "$list"
+          echo "re-purging ${#urls[@]} URL(s) after the verification"
+          printf '  %s\n' "${urls[@]}"
+
+          # If the list exists the first purge step ran, and that step exits 1
+          # when CF_API_TOKEN is missing — so an absent token here means the env
+          # was clobbered mid-job. Loud rather than silent: a poisoned key with
+          # no purge behind it is a multi-hour 404 on a page whose sitemap entry
+          # is already live, which is exactly the failure this step exists to end.
+          if [ -z "${CF_API_TOKEN:-}" ]; then
+            echo "::error::CF_API_TOKEN is gone after the verification — the post-verify purge cannot run, and a 404 cached during the build window would survive for hours"
+            exit 1
+          fi
+          node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       - name: Summary
         if: always() && steps.mode.outputs.skip != 'true'
