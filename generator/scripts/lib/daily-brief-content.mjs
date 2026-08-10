@@ -450,6 +450,46 @@ const T = {
   },
 };
 
+/**
+ * The three descriptive texts (`excerpt`/`seoDescription`/`ogDescription`)
+ * for one locale, as a PURE function of the calendar date.
+ *
+ * Look at `T[locale].excerpt/seoDescription/ogDescription` above: none of the
+ * three reads `headline` or `blocks` — only the interpolated `dateLabel`.
+ * `title` and the body sections do need the day's actual numbers, but these
+ * three never did. That is what makes a PUBLISHED edition's descriptive texts
+ * reconstructable from its id alone, with no dependency on the source day's
+ * `daily-brief.json` snapshot — which is overwritten daily and, for any
+ * edition older than today, is long gone.
+ *
+ * This is what `repair-daily-brief-descriptive-texts.mjs` uses to fix the two
+ * editions (`bollettino-frontaliere-2026-08-08`, `-09`) that registered
+ * before #83 split these three fields apart (issue #85): re-running the
+ * generator on their date can't work — today's snapshot is for today, not
+ * for a day that has passed — but no historical data is actually needed for
+ * this specific fix, only the date itself.
+ *
+ * `generate-daily-brief-article.mjs`'s `exists` branch does NOT need this: on
+ * a same-day rerun it already has a freshly-built `data` (from the live
+ * snapshot) whose `content[locale].{excerpt,seoDescription,ogDescription}`
+ * are already current — this helper exists for the case that `data` no
+ * longer does, because the day itself is in the past.
+ *
+ * @param {string} dateIso
+ * @param {'it'|'en'|'de'|'fr'} locale
+ * @returns {{ excerpt: string, seoDescription: string, ogDescription: string }}
+ */
+export function buildDescriptiveTexts(dateIso, locale) {
+  const t = T[locale];
+  if (!t) throw new Error(`buildDescriptiveTexts: locale sconosciuta '${locale}'`);
+  const dateLabel = humanDate(dateIso, locale);
+  return {
+    excerpt: t.excerpt(dateLabel),
+    seoDescription: t.seoDescription(dateLabel),
+    ogDescription: t.ogDescription(dateLabel),
+  };
+}
+
 function describeDeltaIt(d) {
   if (!Number.isFinite(d) || d === 0) return 'è stabile';
   return d > 0 ? `guadagna ${signed('it', d, 4)} €` : `perde ${fmt('it', Math.abs(d), 4)} €`;

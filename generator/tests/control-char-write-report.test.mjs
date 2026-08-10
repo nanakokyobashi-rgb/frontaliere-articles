@@ -183,6 +183,7 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'generator/scripts/generate-border-wait-ranking-article.mjs',
     'generator/scripts/generate-daily-brief-article.mjs',
     'generator/scripts/generate-events-digest-article.mjs',
+    'generator/scripts/lib/article-meta-refresh.mjs',
     'generator/scripts/lib/evergreen-article-refresh.mjs',
     'scripts/build-api.mjs',
     'scripts/build-blog-index.mjs',

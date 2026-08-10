@@ -1436,8 +1436,8 @@
       "reason": "Composizione del Bollettino del Frontaliere, edizione datata quotidiana nata su questo repo. Nessun omonimo sul sito.",
       "baseline": {
         "site": null,
-        "corpus": "0ec6738d2e856a61",
-        "alignedAt": "2026-08-09"
+        "corpus": "cde4373704cb201b",
+        "alignedAt": "2026-08-10"
       }
     },
     {
@@ -1458,6 +1458,16 @@
         "site": null,
         "corpus": "9cf499df15b47c3e",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/article-meta-refresh.mjs",
+      "mode": "corpus-only",
+      "reason": "Riscrittura in place di excerpt/seoDescription/ogDescription (meta) e description/ogDescription (SEO) per un articolo gia' registrato — il write path che mancava per issue #85 (registerArticleFiles scrive questi campi una volta sola). Nato per il Bollettino del Frontaliere ma senza dipendenza dal builder: nessun omonimo sul sito.",
+      "baseline": {
+        "site": null,
+        "corpus": "f5c1cdae63bac041",
+        "alignedAt": "2026-08-10"
       }
     },
     {
