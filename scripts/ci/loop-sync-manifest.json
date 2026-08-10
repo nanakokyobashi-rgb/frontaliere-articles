@@ -7,12 +7,30 @@
     "sono diversi. Vedi l'intestazione dello script per le quattro classi.",
     "",
     "mode:",
-    "  identical   — deve restare byte-identico al sito; una modifica la' e' copiabile qui.",
-    "  adapted     — differisce di proposito; `reason` spiega perche'. Resta sorvegliato:",
-    "                e' proprio sui file adattati che una modifica del sito si perde,",
-    "                perche' 'tanto e' diverso apposta'.",
-    "  corpus-only — non esiste sul sito.",
-    "  not-ported  — il sito ce l'ha, qui deliberatamente no; `reason` spiega perche'.",
+    "  identical            — deve restare byte-identico al sito; una modifica la' e' copiabile qui.",
+    "  adapted              — differisce di proposito; `reason` spiega perche'. Resta sorvegliato:",
+    "                         e' proprio sui file adattati che una modifica del sito si perde,",
+    "                         perche' 'tanto e' diverso apposta'.",
+    "  corpus-only          — non esiste sul sito, ED E' GIUSTO COSI': niente da portare (script",
+    "                         del ciclo che riceve, wrapper specifici della pubblicazione, meta'",
+    "                         host/ del contratto, o l'equivalente node:test di un file vitest del",
+    "                         sito che vive a un path diverso). Se invece il sito DOVREBBE avere",
+    "                         il gemello, il grado giusto e' `corpus-only-pending`, non questo:",
+    "                         vedi issue #125 — usare `corpus-only` per un 'manca ancora' perde",
+    "                         l'informazione nella prosa di `reason`, dove non fa fallire niente.",
+    "  corpus-only-pending  — non esiste sul sito, ma DOVREBBE: un lavoro tracciato lo portera'.",
+    "                         Richiede `trackingIssue` (URL completo di una issue APERTA sul sito,",
+    "                         es. https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/NNNN)",
+    "                         — senza una issue concreta resta `corpus-only` semplice: un 'candidato'",
+    "                         nella sola prosa e' lo stesso punto cieco che questo grado esiste per",
+    "                         chiudere. `baseline.site` resta null come `corpus-only`: non e' ancora",
+    "                         comparso, dichiarare un hash sarebbe falso. `loop-drift-check.mjs` la",
+    "                         tratta come actionable e, quando il gemello atterra sul sito (rileva",
+    "                         via fetch su `sitePath || path`), segnala la promozione a `identical`/",
+    "                         `adapted` invece di lasciare la voce a dire per sempre 'non ce l'ha'.",
+    "                         Se il lavoro tracciato viene abbandonato, la retromarcia e' manuale:",
+    "                         si torna a `corpus-only` togliendo `trackingIssue`.",
+    "  not-ported           — il sito ce l'ha, qui deliberatamente no; `reason` spiega perche'.",
     "",
     "Dopo un allineamento voluto: `node scripts/ci/loop-drift-check.mjs --init`."
   ],
@@ -277,6 +295,16 @@
       }
     },
     {
+      "path": "scripts/lib/pr-body-nextstep-check.mjs",
+      "mode": "corpus-only",
+      "reason": "Validatore del PIANO di completamento: le voci di `## Non implementato (ancora)` non devono rimandare il lavoro con una scappatoia al posto di uno stato (REVIEW.md §98). Nasce dall'escalation #140 — il bucket `reviewer-finding/pr-body-contract` ricorreva 9 volte in 14 giorni mentre il gate era verde, perche' i due moduli condivisi misurano la PRESENZA della sezione e il contratto chiede un PIANO. Sul sito non esiste: la soglia bloccante e' calibrata sui body di QUESTO repo (misurata su 40 PR mergiate), e portarla la' senza rimisurarla darebbe un tasso di falsi positivi diverso. Se il sito la vuole, si rimisura e diventa `identical`.",
+      "baseline": {
+        "site": null,
+        "corpus": "9703d2fb5614bd90",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
@@ -303,6 +331,16 @@
         "site": "20e4e76243cb60b0",
         "corpus": "bb17921f280d33c5",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": ".github/pull_request_template.md",
+      "mode": "adapted",
+      "reason": "Il corpus non aveva template affatto, ed e' meta' dell'escalation #140: senza scheletro, la forma corretta del body va ricordata invece che ereditata. Adattato e non `identical` perche' i due repo vogliono header DIVERSI — qui `## Non implementato (ancora)` CON «(ancora)», sul sito senza — e perche' i commenti guida citano le trappole misurate su questo lato (PR #139: «Chiude #133» non ha chiuso #133).",
+      "baseline": {
+        "site": "fa0e797cb26a3655",
+        "corpus": "757dc5bdf671adc0",
+        "alignedAt": "2026-08-10"
       }
     },
     {
@@ -1015,8 +1053,9 @@
     },
     {
       "path": "scripts/lib/sanitize-control-chars.mjs",
-      "mode": "corpus-only",
-      "reason": "Sanificazione dei control character in uscita, portata da #65. E' corpus-only per un FATTO, non per scelta: sul sito il file non esiste (404 verificato). Era stato registrato 'identical' da #118 in previsione della PR gemella sul sito, che pero' e' stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB). Un manifest che dichiara 'identical' su un file inesistente asserisce il falso e produce un site-behind permanente. La divergenza vera resta aperta e tracciata: il sito emette grezze le 279 occorrenze rimaste mentre il corpus le strippa — valerielinc-ops#5457. Quando la meta' del sito atterra, questa voce torna 'identical' con la baseline reale.",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/5457",
+      "reason": "Sanificazione dei control character in uscita, portata da #65. Sul sito il file non esiste (404 verificato), ma DOVREBBE: il sito rende e pusha le stesse pagine sugli stessi shard senza sanificare, quindi emette grezze le 279 occorrenze che il corpus strippa — stessa pagina, due politiche, una sola guardia. Era stato registrato 'identical' da #118 in previsione della PR gemella sul sito, che pero' e' stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB). Un manifest che dichiara 'identical' su un file inesistente asserisce il falso e produce un site-behind permanente — #124 l'ha riportata a 'corpus-only', vero ma che perdeva l'informazione 'serve e manca'. `corpus-only-pending` la restituisce senza mentire: non esiste ancora, ma il lavoro per farlo esistere e' tracciato in `trackingIssue`. Quando la meta' del sito atterra, la voce torna 'identical' con la baseline reale (`--init` dopo la promozione manuale del mode).",
       "baseline": {
         "site": null,
         "corpus": "61f6e2723fabdad7",

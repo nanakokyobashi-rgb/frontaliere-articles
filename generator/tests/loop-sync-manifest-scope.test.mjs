@@ -61,8 +61,17 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const manifest = JSON.parse(fs.readFileSync(MANIFEST_PATH, 'utf8'));
 
-/** I quattro mode che `loop-drift-check.mjs:classify()` sa trattare. */
-const MODES = new Set(['identical', 'adapted', 'corpus-only', 'not-ported']);
+/** I cinque mode che `loop-drift-check.mjs:classify()` sa trattare. */
+const MODES = new Set(['identical', 'adapted', 'corpus-only', 'corpus-only-pending', 'not-ported']);
+
+/**
+ * Una issue APERTA sul sito che tracci il lavoro mancante — non un semplice
+ * riferimento `owner#123` in prosa, che non e' verificabile ne' cliccabile da
+ * un tool. Vedi issue #125: la differenza fra "non serve" e "serve e manca"
+ * viveva solo in `reason`, dove non fallisce niente. Un URL fa fallire un
+ * `assert.match`.
+ */
+const TRACKING_ISSUE_RE = /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/issues\/\d+$/;
 
 /**
  * Gli alberi che DEVONO restare censiti. Vedi l'intestazione: sta qui e non nel
@@ -136,7 +145,8 @@ test('scope: sotto un albero censito nessun file resta senza mode', () => {
     [],
     `${missing.length} file sotto un albero censito non hanno una voce nel manifest.\n` +
       'Ognuno va classificato: `identical` (deve restare uguale al sito, la fix si fa la\'),\n' +
-      '`adapted` (diverso di proposito, con `reason`), `corpus-only` (non esiste sul sito),\n' +
+      '`adapted` (diverso di proposito, con `reason`), `corpus-only` (non esiste sul sito e non deve),\n' +
+      '`corpus-only-pending` (non esiste sul sito ma dovrebbe, con `trackingIssue`),\n' +
       `\`not-ported\` (il sito ce l'ha, qui deliberatamente no).\n  ${missing.join('\n  ')}`,
   );
 });
@@ -182,12 +192,61 @@ test('files: sitePath e baseline coerenti col mode', () => {
         `${f.path}: \`corpus-only\` con \`baseline.site\` non nullo. loop-drift-check non lo ` +
           'legge mai per questo mode, quindi il valore e\' solo un\'affermazione falsa.',
       );
+    } else if (f.mode === 'corpus-only-pending') {
+      // `sitePath` QUI e' ammesso (a differenza di `corpus-only`): dichiara
+      // dove il gemello atterrera' se il path finale differisce da `path`.
+      // `baseline.site` invece resta null come `corpus-only`: il gemello non
+      // e' ancora comparso, quindi non c'e' un hash vero da registrare — solo
+      // la promozione cosciente del mode lo rendera' legittimo.
+      assert.equal(
+        f.baseline.site,
+        null,
+        `${f.path}: \`corpus-only-pending\` con \`baseline.site\` non nullo. Il gemello non e' ` +
+          'ancora comparso sul sito (o e\' comparso e la voce va promossa, non lasciata pending ' +
+          'con un hash): in nessuno dei due casi un `--init` di routine deve scriverlo qui.',
+      );
     } else {
       assert.ok(f.baseline.site, `${f.path}: \`${f.mode}\` senza \`baseline.site\``);
     }
     if (f.mode !== 'not-ported') {
       assert.ok(f.baseline.corpus, `${f.path}: manca \`baseline.corpus\``);
     }
+  }
+});
+
+/**
+ * Il cuore della issue #125: `corpus-only` da solo non distingue "non serve"
+ * da "serve e manca", e la differenza in prosa dentro `reason` non fa fallire
+ * niente. `corpus-only-pending` esiste apposta — ma solo se porta un
+ * `trackingIssue` verificabile: senza, e' lo STESSO punto cieco con un mode in
+ * più invece che con una `reason` in più. L'URL deve puntare a una issue
+ * APERTA: una issue chiusa senza che il gemello sia mai atterrato è lavoro
+ * abbandonato che nessuno ha retrocesso a `corpus-only` — il tipo di "alert
+ * che nessuno chiude" che #45 (`alert-pat-down.mjs`) ha già insegnato a non
+ * ripetere. Il controllo sull'apertura richiede rete: vive nel censimento
+ * opt-in più sotto, non qui.
+ */
+test('files: `corpus-only-pending` porta un trackingIssue verificabile', () => {
+  for (const f of manifest.files) {
+    if (f.mode !== 'corpus-only-pending') continue;
+    assert.ok(
+      typeof f.trackingIssue === 'string' && TRACKING_ISSUE_RE.test(f.trackingIssue),
+      `${f.path}: \`corpus-only-pending\` senza un \`trackingIssue\` valido (atteso URL ` +
+        "completo tipo https://github.com/<owner>/<repo>/issues/<n>). Senza, e' un " +
+        "'candidato' solo in prosa: esattamente il punto cieco che questo mode chiude.",
+    );
+  }
+  // E il contrario: un `trackingIssue` su un mode diverso non e' letto da
+  // nessuno script e resta un campo morto — la stessa forma di documentazione
+  // che non guardia niente.
+  for (const f of manifest.files) {
+    if (f.mode === 'corpus-only-pending') continue;
+    assert.equal(
+      f.trackingIssue,
+      undefined,
+      `${f.path}: \`trackingIssue\` su mode \`${f.mode}\` — letto solo per \`corpus-only-pending\`, ` +
+        "altrove e' un campo morto. O il mode e' sbagliato, o il campo va tolto.",
+    );
   }
 });
 
@@ -260,4 +319,47 @@ test('censimento: nessun gemello byte-identico fuori da roots, files e outOfScop
   // ieri: se l'albero e' sparito, la riga va tolta.
   const dead = outOfScope.filter((x) => !mine.some((e) => e.path.startsWith(x)));
   assert.deepEqual(dead, [], `regole scope.outOfScope che non coprono piu' nessun file:\n  ${dead.join('\n  ')}`);
+});
+
+/**
+ * Seconda meta' del censimento di rete, stessa ragione per essere opt-in: la
+ * domanda "questa issue e' ancora aperta?" chiede l'API del repo del SITO, non
+ * solo git/trees.
+ *
+ * Risponde alla via d'uscita che manca dall'altro lato: `loop-drift-check.mjs`
+ * sa dire "il gemello e' atterrato" (fetch sul contenuto), ma non sa dire "il
+ * lavoro tracciato e' stato abbandonato" — se `trackingIssue` chiude senza che
+ * il file sia mai comparso, la voce resta `corpus-only-pending` per sempre,
+ * dicendo "in lavorazione" su qualcosa che nessuno sta piu' lavorando. E'
+ * l'esatta forma del punto cieco di alert-pat-down.mjs (#45): un segnale la
+ * cui condizione di chiusura non e' mai verificata finche' non lo fa un umano
+ * per caso. Qui la verifica esiste, e' solo fuori dai test offline.
+ */
+test('censimento: ogni trackingIssue di corpus-only-pending e\' ancora aperta', { skip: process.env.LOOP_TWIN_CENSUS !== '1' && 'LOOP_TWIN_CENSUS!=1 (richiede rete: vedi intestazione)' }, async () => {
+  const pending = manifest.files.filter((f) => f.mode === 'corpus-only-pending');
+  if (!pending.length) return; // niente da controllare non e' un fallimento.
+
+  const headers = { 'User-Agent': 'loop-sync-manifest-scope', Accept: 'application/vnd.github+json' };
+  const token = process.env.GH_TOKEN || process.env.GITHUB_TOKEN;
+  if (token) headers.Authorization = `Bearer ${token}`;
+
+  const stale = [];
+  for (const f of pending) {
+    const m = f.trackingIssue.match(/^https:\/\/github\.com\/([\w.-]+)\/([\w.-]+)\/issues\/(\d+)$/);
+    assert.ok(m, `${f.path}: trackingIssue malformato — dovrebbe essere gia' scartato dal test offline`);
+    const [, owner, repo, number] = m;
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/issues/${number}`, { headers });
+    assert.ok(res.ok, `GET issue ${f.trackingIssue} → HTTP ${res.status}`);
+    const issue = await res.json();
+    if (issue.state !== 'open') stale.push(`${f.path} → ${f.trackingIssue} (${issue.state})`);
+  }
+  assert.deepEqual(
+    stale,
+    [],
+    `${stale.length} voce/i \`corpus-only-pending\` puntano a una issue NON aperta sul sito:\n` +
+      `  ${stale.join('\n  ')}\n` +
+      "Il lavoro tracciato e' finito o abbandonato senza che il gemello sia mai atterrato (altrimenti " +
+      "loop-drift-check.mjs l'avrebbe segnalata `-landed`, non `-pending`). Decidi: se il lavoro " +
+      'continua altrove, aggiorna `trackingIssue`; se e\' abbandonato, retrocedi la voce a `corpus-only`.',
+  );
 });

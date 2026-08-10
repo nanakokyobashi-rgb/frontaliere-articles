@@ -47,17 +47,30 @@
  * ## La regola: si scrive un marker solo se la sessione ha CONSEGNATO
  *
  * «Consegnato» non e' il colore dello step (verde anche quando Claude non ha
- * eseguito nulla). Sono tre segnali indipendenti in OR — stessa forma di
- * `detectClaudeRateLimit` in `scripts/ci/claude-rate-limit.mjs`, e per la stessa
- * ragione: un solo segnale e' fragile.
+ * eseguito nulla). Sono tre condizioni in AND, tutte NECESSARIE:
  *
- *   1. almeno un `tool_result` Bash NON in errore nell'execution file (la
- *      sessione ha eseguito almeno un comando: poteva chiamare `gh`);
- *   2. almeno una PR del batch porta GIA' il marker (ha parlato con GitHub, e
- *      allora sulle altre l'assenza e' un obbligo davvero saltato);
- *   3. esiste almeno una issue `follow-up(#<PR>)` per una PR del batch.
+ *   1. `CLAUDE_STEP_OUTCOME === 'success'` — lo step e' arrivato in fondo;
+ *   2. l'execution file e' leggibile — altrimenti della sessione non si sa
+ *      nulla, e il dubbio non e' uno stato da cui si timbra;
+ *   3. almeno un `tool_result` Bash NON in errore — l'unica prova POSITIVA che
+ *      `gh` fosse raggiungibile.
  *
- * Se nessuno regge, il marker NON viene scritto e lo step esce 1. Non e' una
+ * Storia, perche' spiega la forma: qui c'erano tre segnali in OR, e le altre
+ * due gambe erano «una PR del batch porta gia' il marker» e «esistono issue
+ * `follow-up(#PR)`». Entrambe si misurano una volta per SESSIONE e valgono per
+ * tutto il batch, ed entrambe guardano lo stato del repo, non questa run: una
+ * issue di qualunque epoca ribaltava `delivered` a true anche con execution
+ * file vuoto. Erano guardie sicure solo finche' il repo aveva zero issue
+ * `follow-up` — cioe' solo finche' la fix che devono proteggere non funziona.
+ * Restano calcolate e stampate come «indizi collaterali», mai come decisione.
+ *
+ * La condizione 3 e' arrivata con #127 e ha rovesciato la presunzione: prima si
+ * chiedeva la prova del guasto (`bashUses > 0 && bashOk === 0`), che pero' solo
+ * una sessione che ci PROVA puo' produrre. Una sessione con zero Bash tentati
+ * passava per consegnata. Vedi il commento esteso su `delivered` in
+ * `runBackstop`.
+ *
+ * Se una condizione non regge, il marker NON viene scritto e lo step esce 1. Non e' una
  * scelta nuova: e' esattamente la logica che lo step «Skip on exhausted quota
  * (no false green — watermark must hold)» applica gia' in questo stesso
  * workflow. Il watermark di `scripts/ci/collect-followup-batch.mjs` avanza sulle
@@ -280,7 +293,7 @@ export function decide({ pr, markerPresent, issueNumbers = [], delivered, runUrl
       code: 'undelivered-session',
       message:
         `PR #${pr}: marker assente E nessuna prova che la sessione Claude abbia parlato con GitHub ` +
-        `(zero comandi di shell riusciti, zero marker sul batch, zero issue follow-up). ` +
+        `(zero comandi di shell riusciti). ` +
         `NON scrivo il marker: sarebbe un falso "zero outstanding items" definitivo. ` +
         `La run fallisce apposta, cosi' il watermark non avanza e la finestra viene ri-coperta.`,
       body: null,
@@ -368,11 +381,28 @@ export function runBackstop({
     `exec_parsed=${session.parsed} tool_uses=${session.toolUses} bash=${session.bashUses} ` +
     `bash_ok=${session.bashOk} bash_err=${session.bashErr}`,
   );
+  // Le due diagnosi restano SEPARATE di proposito. Sono guasti diversi e
+  // portano a indagini diverse: «ci ha provato e il guscio non parte» si
+  // debugga sul sandbox del runner, «non ci ha nemmeno provato» si debugga sul
+  // prompt, sui tool disponibili o sull'execution file. Fonderle in un unico
+  // «sessione non consegnata» e' precisamente come si perde la causa
+  // successiva dopo aver riparato quella di oggi.
   if (session.sandboxBroken) {
     log(
       `[backstop] ogni comando di shell della sessione e' fallito` +
       (session.sandboxError ? ` — firma: ${session.sandboxError}` : '') +
       `. La sessione non poteva chiamare gh.`,
+    );
+  } else if (!session.parsed) {
+    log(
+      "[backstop] execution file assente o illeggibile: della sessione non si sa NIENTE. " +
+      'Non e\' uno stato da cui si timbra un marker.',
+    );
+  } else if (session.bashUses === 0) {
+    log(
+      `[backstop] la sessione non ha tentato NESSUN comando di shell (tool_uses=${session.toolUses}, ` +
+      'bash=0), quindi non puo\' aver parlato con GitHub. Causa diversa dal sandbox rotto: ' +
+      'guardare il prompt, i tool concessi da --allowedTools e l\'execution file, non bwrap.',
     );
   }
 
@@ -417,13 +447,41 @@ export function runBackstop({
   //
   // `CLAUDE_STEP_OUTCOME` era gia' cablato nel workflow, gia' letto qui, e
   // usato SOLO dentro una stringa di log. Era il segnale giusto, inerte.
-  // Due condizioni, entrambe necessarie:
+  //
+  // ── 2026-08-10 (#127): la condizione era ancora al contrario ──────────
+  //
+  // Era `stepOutcome === 'success' && !session.sandboxBroken`, con
+  // `sandboxBroken = bashUses > 0 && bashOk === 0`. Cioe': si presumeva la
+  // consegna e si chiedeva la prova del CONTRARIO. Quella prova pero' la puo'
+  // dare solo una sessione che ha ALMENO PROVATO a eseguire un comando —
+  // `bashUses > 0`. Con `bashUses === 0` il guasto era invisibile e `delivered`
+  // tornava true, timbrando «zero outstanding items» su tutto il batch.
+  //
+  // Non e' un caso di scuola: e' la forma che prende OGNI causa diversa da
+  // quella di oggi. Il sandbox rotto si manifesta come 10 Bash falliti perche'
+  // il modello ci prova e riprova; ma una sessione che muore prima del primo
+  // tool, un execution file assente o illeggibile (`parsed === false`), un
+  // tool Bash non disponibile, un prompt che va a vuoto — tutti producono zero
+  // Bash tentati, e tutti sarebbero passati per «consegnati». Avremmo riparato
+  // la causa di oggi lasciando in piedi il meccanismo che l'ha resa invisibile
+  // per 17 run: il ciclo avrebbe ricominciato a mentire alla causa successiva.
+  //
+  // Ora la presunzione e' rovesciata — si esige la prova POSITIVA che la
+  // sessione poteva parlare con GitHub. Tre condizioni, tutte necessarie:
   //  - lo step Claude e' arrivato in fondo (`success`): senza, le PR non
   //    raggiunte NON vanno timbrate, o si cancella il recupero;
-  //  - il sandbox funzionava: se `bwrap` e' rotto Claude non ha potuto
-  //    parlare con GitHub affatto, e uno step `success` con zero comandi
-  //    riusciti descrive una sessione che non ha fatto niente.
-  const delivered = stepOutcome === 'success' && !session.sandboxBroken;
+  //  - l'execution file e' stato letto (`parsed`): se non sappiamo NIENTE
+  //    della sessione, non e' uno stato da cui si timbra;
+  //  - almeno un comando di shell e' RIUSCITO (`shellCapable`): e' l'unica
+  //    prova diretta che `gh` fosse raggiungibile.
+  // La terza implica la vecchia `!sandboxBroken`, quindi questa e' la stessa
+  // guardia resa piu' stretta, non una guardia diversa.
+  //
+  // Nessun falso rosso possibile: il prompt impone `gh pr view` per ogni PR e
+  // `gh pr comment` per il marker, quindi una sessione che ha davvero
+  // consegnato ha per costruzione `bashOk > 0`. Una consegna reale con zero
+  // comandi riusciti non esiste.
+  const delivered = stepOutcome === 'success' && session.parsed && session.shellCapable;
   const deliveredBy = [];
   if (session.shellCapable) deliveredBy.push(`${session.bashOk} comandi di shell riusciti`);
   if (observed.some((o) => o.markerPresent === true)) deliveredBy.push('marker gia\' presente su una PR del batch');
@@ -435,7 +493,14 @@ export function runBackstop({
     (deliveredBy.length ? ` [indizi collaterali, NON decisivi: ${deliveredBy.join('; ')}]` : ''),
   );
   if (!delivered) {
-    log('[backstop] lo step non e\' riuscito: NON timbro nulla. Le PR non marcate ' +
+    // Il motivo va detto: «non consegnata» con lo step verde e' esattamente lo
+    // stato che per 17 run e' sembrato un successo.
+    const perche = stepOutcome !== 'success'
+      ? `lo step Claude e' uscito "${stepOutcome || 'ignoto'}"`
+      : !session.parsed
+        ? 'lo step e\' uscito success ma l\'execution file non e\' leggibile'
+        : `lo step e' uscito success ma ZERO comandi di shell sono riusciti (bash=${session.bashUses}, ok=0)`;
+    log(`[backstop] ${perche}: NON timbro nulla. Le PR non marcate ` +
         'restano nella finestra e la run successiva le riprende — e\' il recupero ' +
         'che il workflow documenta, e timbrarle qui lo cancellerebbe.');
   }

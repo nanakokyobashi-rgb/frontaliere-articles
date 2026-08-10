@@ -94,6 +94,17 @@ jobs:
           # aborterebbe "non-human actor". Mai `*`.
           allowed_bots: "github-actions[bot], claude[bot], frontaliere-automation[bot]"
           show_full_output: true
+          # Stessa fix di post-merge-followup.yml (#127), e va fatta QUI nello stesso
+          # giro: questo workflow è l'ALTRO consumatore del percorso `--allowedTools`
+          # del repo, quindi condivide lo stesso sandbox bwrap rotto — vedi il blocco
+          # `settings:` di post-merge-followup.yml per la catena causale completa.
+          #
+          # Qui il difetto è ancora più difficile da vedere che là, e per due motivi:
+          # lo step Claude è condizionato ai pattern NOVEL (quasi sempre `skipped`, così
+          # il guasto non si manifesta quasi mai), e questo workflow **non ha backstop**
+          # — quando finalmente gira, esce verde senza proposta e nessuno se ne accorge.
+          # Aspettare che si rompa "davvero" significherebbe aspettare mesi.
+          settings: '{"sandbox":{"enabled":false}}'
           # 2026-07-02: ROLLBACK di --dangerously-skip-permissions (rationale completo:
           # post-merge-followup.yml claude_args comment) — issue #3269: sui trigger
           # schedule/workflow_dispatch il flag non produce mai bypassPermissions
