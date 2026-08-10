@@ -155,6 +155,54 @@ jobs:
           BATCH_COUNT: ${{ steps.collect.outputs.batch_count }}
           REPO: ${{ github.repository }}
           EVENT_NAME: ${{ github.event_name }}
+          # ── La riga che rimette in moto il triage (issue #127) ──────────────
+          #
+          # Sintomo: OGNI invocazione del tool Bash — anche `pwd` — moriva con
+          #     Exit code 1
+          #     bwrap: Can't create file at /home/.mcp.json: Permission denied
+          # Misurato sul run 31328282232: 11 tool_use, 10 Bash, **0 riusciti**.
+          # Claude non poteva chiamare `gh`, quindi zero commenti e zero issue —
+          # e lo step usciva `success`, perché la sessione finisce normalmente:
+          # non fallisce il modello, falliscono i suoi strumenti. 17 run verdi
+          # che non producevano niente.
+          #
+          # La causa NON è il sandbox di Claude Code, e non è il trigger. È la
+          # **subprocess isolation di claude-code-action**, che l'action accende
+          # DA SOLA quando `allowed_non_write_users` è valorizzato:
+          #
+          #   - step "Install subprocess isolation dependencies":
+          #       if: inputs.allowed_non_write_users != '' && runner.os == 'Linux'
+          #       → installa `bubblewrap` e `socat`
+          #   - step che lancia Claude:
+          #       CLAUDE_CODE_SUBPROCESS_ENV_SCRUB:
+          #         ${{ env.CLAUDE_CODE_SUBPROCESS_ENV_SCRUB
+          #             || (inputs.allowed_non_write_users != '' && '1') || '' }}
+          #
+          # È bwrap montato dall'action, non da Claude Code. Su questa immagine di
+          # runner non parte, e siccome avvolge OGNI comando, muore anche `pwd`.
+          # Ecco perché `dangerouslyDisableSandbox: true` non aiutava (nel log il
+          # modello ci prova e riprende lo stesso errore): quel flag spegne il
+          # sandbox di Claude Code, che qui non c'entra.
+          #
+          # E la correlazione regge in modo esatto, che è ciò che le due ipotesi
+          # precedenti non facevano: `allowed_non_write_users` è valorizzato in
+          # QUESTO workflow e in nessun altro del repo — issue-fix, pr-review-loop,
+          # pr-redflag-fixer e lessons-harvester non ce l'hanno, e nessuno dei
+          # quattro ha il guasto. Non era né il proxy Headroom né lo scoped
+          # `--allowedTools` (lessons-harvester usa `--allowedTools` ed è sano).
+          #
+          # `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB=0` è l'opt-out previsto dall'action
+          # stessa ("Subprocess isolation opted out via …=0") e ha la precedenza,
+          # perché l'espressione legge `env.` prima del default.
+          #
+          # Cosa si perde: lo scrub delle variabili d'ambiente passate ai
+          # subprocess (BASH_ENV, LD_PRELOAD, …). È una difesa contro il contenuto
+          # ostile di utenti senza write. Qui non ce n'è: `allowed_non_write_users`
+          # elenca due bot di questo progetto, l'input della sessione sono PR
+          # mergiate dall'owner, e il batch è già filtrato per autore da
+          # `collect-followup-batch.mjs`. Difesa inapplicabile al nostro input,
+          # contro un costo del 100% delle esecuzioni.
+          CLAUDE_CODE_SUBPROCESS_ENV_SCRUB: 0
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           # `allowed_non_write_users` (sotto) funziona SOLO con `github_token` esplicito,
@@ -189,49 +237,6 @@ jobs:
           # allowed_bots.
           allowed_non_write_users: "github-actions[bot], claude[bot]"
           show_full_output: true
-          # ── Il sandbox bwrap è ROTTO su questa immagine di runner (issue #127) ──
-          #
-          # Sintomo: OGNI invocazione del tool Bash — anche `pwd` — moriva con
-          #     Exit code 1
-          #     bwrap: Can't create file at /home/.mcp.json: Permission denied
-          # Misurato sul run 31328282232 (dispatch, quota disponibile): 11 tool_use,
-          # 10 Bash, **0 riusciti**. Claude non poteva chiamare `gh`, quindi zero
-          # commenti e zero issue — e lo step usciva `success`, perché la sessione
-          # termina normalmente: non fallisce il modello, falliscono i suoi strumenti.
-          # 17 run verdi consecutive che non producevano nulla.
-          #
-          # La catena causale, verificata sul log e sulla doc di Claude Code:
-          #  1. `sandbox` e `permissionMode` sono DUE cose indipendenti. Il sandbox
-          #     non si spegne passando a bypassPermissions, e non si accende con
-          #     `--allowedTools`: è acceso di default in entrambi i casi.
-          #  2. Il sandbox di questa immagine non parte affatto (la firma bwrap qui
-          #     sopra): ogni comando sandboxato fallisce prima di essere eseguito.
-          #  3. Con `allowUnsandboxedCommands` (default true) Claude Code RIPROVA il
-          #     comando fuori dal sandbox — ma passando dal flusso dei permessi.
-          #  4. Ed è qui che i sibling divergono da noi. `issue-fix.yml`,
-          #     `pr-review-loop.yml` e `pr-redflag-fixer.yml` passano
-          #     `--dangerously-skip-permissions` → il retry non-sandboxato è
-          #     auto-approvato → i comandi girano e il sandbox rotto è INVISIBILE.
-          #     Noi siamo sull'`--allowedTools` scoped → `permissionMode: "default"`
-          #     (letto nel log del run, riga `"permissionMode": "default"`) → il
-          #     retry chiede un'approvazione che in CI nessuno può dare → negato.
-          #     Nel log si vede esattamente questo: il modello prova
-          #     `dangerouslyDisableSandbox: true` e ottiene `subtype: "permission_denied"`.
-          #
-          # Quindi la differenza fra loro e noi NON è il trigger — ed è la ragione
-          # per cui questa fix non è nessuna delle due strade proposte sulla issue.
-          # Spegnere il sandbox è la riparazione MIRATA: colpisce il componente
-          # davvero rotto e lascia intatto lo scoping `--allowedTools`, che è una
-          # proprietà di sicurezza voluta (sessione read-mostly, solo `gh`).
-          # Ri-adottare `--dangerously-skip-permissions` funzionerebbe per effetto
-          # collaterale, ma butterebbe via lo scoping E reintrodurrebbe la
-          # regressione #3269 documentata sotto.
-          #
-          # NB: `settings` è un input di claude-code-action@v1 ("Claude Code
-          # settings as JSON string or path to settings JSON file"): non serve un
-          # file nel repo. Con sandbox off, `--allowedTools 'Bash(gh:*)'` resta
-          # l'unico cancello su COSA può girare — la fix non allarga i permessi.
-          settings: '{"sandbox":{"enabled":false}}'
           # max-turns DINAMICO = min(26 + 8*batch_count, 80), floor 26 (era
           # min(20+6n,60); bump fleet-wide 2026-07-17, owner). AGENTS.md vieta di
           # ABBASSARE i turni di post-merge-followup (15→20
@@ -254,16 +259,18 @@ jobs:
           # scoped `--allowedTools` precedente (problema noto ma minore: rifiuta
           # a volte sintassi shell non staticamente analizzabile, non blocca TUTTO).
           #
-          # 2026-08-10 (#127): quella correlazione col trigger NON regge più come
-          # spiegazione, e va letta come una coincidenza di campione. I tre
-          # workflow "che funzionano" non sono un controllo valido: nessuno di
-          # loro esercita il percorso `--allowedTools`, quindi confrontavano due
-          # variabili insieme. Il vero discriminante è il sandbox — vedi il blocco
-          # `settings:` qui sopra. Restiamo sullo scoped `--allowedTools` PER
-          # SCELTA (sessione read-mostly: solo `gh`), non per ripiego.
-          # Il rollback #3269 resta valido come storia: se un domani si ri-adottasse
-          # `--dangerously-skip-permissions`, il sintomo da cercare è "requires
-          # approval", che è diverso dalla firma bwrap di #127.
+          # 2026-08-10 (#127): la correlazione col trigger qui sopra NON spiega il
+          # guasto di #127, ed è bene non usarla come lente. Il discriminante vero
+          # è `allowed_non_write_users` → subprocess isolation → bwrap (vedi il
+          # blocco su `CLAUDE_CODE_SUBPROCESS_ENV_SCRUB` nell'`env:` dello step).
+          # La prova: `lessons-harvester.yml` gira sugli stessi trigger
+          # schedule/workflow_dispatch, con lo stesso scoped `--allowedTools`, ed è
+          # sano — perché non valorizza `allowed_non_write_users`.
+          # Restiamo sullo scoped `--allowedTools` PER SCELTA (sessione
+          # read-mostly: solo `gh`), non per ripiego. Il rollback #3269 resta
+          # valido come storia sua: il suo sintomo era "requires approval", una
+          # firma diversa da quella bwrap di #127. Sono due guasti distinti sullo
+          # stesso percorso, e vanno tenuti distinti.
           claude_args: "--max-turns ${{ steps.collect.outputs.max_turns }} --model claude-sonnet-5 --allowedTools 'Bash(gh:*),Read,Grep,Glob'"
           prompt: |
             Triage automatico follow-up in BATCH (${{ github.event_name }}).
