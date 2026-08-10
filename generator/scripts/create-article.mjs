@@ -4577,7 +4577,12 @@ function formatStatsBfsPrompt(quarter, data) {
   // l'ancora impossibile `pct:NaN` (nessun testo la soddisfa mai). Un pct non
   // finito qui non genera affatto la percentuale, invece di generarne una rotta.
   const genderPct = (g) => {
-    const n = Number(String(g.pct).replace(',', '.'));
+    // `Number('')`, `Number('   ')` e `Number([])` valgono 0 ed `Number.isFinite(0)`
+    // e' true: senza questo guard un pct assente/vuoto pubblicherebbe uno "0%"
+    // fabbricato, indistinguibile da uno zero reale.
+    const raw = String(g.pct ?? '').trim();
+    if (raw === '') return null;
+    const n = Number(raw.replace(',', '.'));
     return Number.isFinite(n) ? `${n.toString().replace('.', ',')}%` : null;
   };
   const genderLine = gender

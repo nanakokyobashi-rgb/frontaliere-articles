@@ -347,6 +347,26 @@ describe('genderPct — pct mancante o non numerico non genera un\'ancora imposs
     expect(brokenPrompt).toContain('Uomini (48.700)');
     expect(brokenPrompt).toContain('Donne (30.420)');
   });
+
+  // `Number('')`, `Number('   ')` e `Number([])` valgono tutti 0 in JS, e
+  // `Number.isFinite(0)` e' true: senza un guard esplicito su stringa vuota,
+  // questi input pubblicano uno "0%" fabbricato — indistinguibile da uno zero
+  // legittimo — invece di omettere la percentuale come per un pct assente.
+  const EMPTY_GENDER = {
+    ...BFS_2026_Q2,
+    genderSnapshot: [
+      { name: 'Uomini', value: 48700, pct: '' },
+      { name: 'Donne', value: 30420, pct: '   ' },
+    ],
+  };
+  const emptyPrompt = formatStatsBfsPrompt('2026-Q2', EMPTY_GENDER);
+
+  it('pct stringa vuota o solo spazi non fabbrica uno 0% falso', () => {
+    expect(emptyPrompt).not.toContain('Uomini 0%');
+    expect(emptyPrompt).not.toContain('Donne 0%');
+    expect(emptyPrompt).toContain('Uomini (48.700)');
+    expect(emptyPrompt).toContain('Donne (30.420)');
+  });
 });
 
 describe('buildStatsBfsPromptContent resta solo I/O', () => {
