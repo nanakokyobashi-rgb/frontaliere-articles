@@ -312,16 +312,109 @@ const TOPICAL_KEYWORDS = [
   'spettacol', 'rassegna', 'concert',
 ];
 
-function hasTopicalSignal(text) {
-  if (!text || typeof text !== 'string') return false;
-  const lower = text.toLowerCase();
-  return TOPICAL_KEYWORDS.some(k => lower.includes(k));
+// ── National (svizzera) extension of the topical lexicon ────
+// TOPICAL_KEYWORDS above is a FRONTALIERE lexicon: it was assembled to keep
+// cross-border work/fiscal/permit news and to drop Ticino cronaca. Applied
+// unchanged to the `svizzera` section — which is national by design and whose
+// classifier prompt says "NON sei limitato ai frontalieri" — it is not merely
+// too tight, it is aimed at the wrong target. Measured 2026-08-10 on 538 real
+// headlines fetched from the 18 reachable NEWS_SOURCES_SVIZZERA:
+//
+//   anchor-gate pass ........ 495
+//   + TOPICAL_KEYWORDS ...... 77  (16%)  ← what the section runs on today
+//   + this list ............. 188 (38%)
+//
+// The 111 recovered are the national agenda the frontaliere list has no words
+// for: "Svizzera: PIL in crescita", "L'export svizzero in ripresa", "BNS in
+// perdita di mezzo miliardo", "Il franco sempre più forte", "Impennata dei
+// fallimenti in Svizzera", "KOF, prospettive congiunturali 2026", "Iniziativa
+// 10 milioni", "Rösti: gli obiettivi climatici", "Siccità, aiuti federali per
+// l'agricoltura". Meanwhile the survivors under the frontaliere list included
+// "Il lavoro mortale dei giornalisti in Messico" and "Disinformazione russa
+// colpisce in Francia" (they contain `lavor`), which the classifier then
+// rejected — so on this section the gate was costing recall without buying
+// precision. Precision here is the classifier's job (it has the national
+// prompt at `classifyFrontaliereRelevance`); this list only has to stop the
+// pool from being an unbounded feed dump.
+//
+// Deliberately NOT a full disable of the drop. Sampled 25 real runs
+// 2026-08-10: the frontaliere section reaches the pre-spend classifier with
+// 47-56 candidates per run and that is the cost the pipeline is built for.
+// Dropping the topical gate entirely would send ~495 per run. Keeping a list
+// lands svizzera in the same band instead of a new cost regime.
+//
+// Stems are substring matches, so they are chosen to avoid the obvious
+// Italian collisions: no bare `utile` (matches "inutile"), no `fusion`
+// (matches "confusione"), no `oro` (matches "lavoro"), no `import` (matches
+// "importante"), no `volo` (matches "volontario"), no `legge` (matches
+// "leggere" — `legisla` instead), no `cure` (matches "sicure").
+const SVIZZERA_TOPICAL_KEYWORDS = [
+  ...TOPICAL_KEYWORDS,
+  // Macro / national accounts / foreign trade
+  'congiuntur', 'crescita', 'recession', 'prodotto interno lordo',
+  'export', 'esportazion', 'importazion', 'dazi', 'tariff',
+  'commercio', 'libero scambio', 'accordo commercial',
+  // Prices, purchasing power, money
+  'prezz', 'costo della vita', 'potere d\'acquisto', 'costos', 'più caro',
+  'bns', 'bce', 'franco', 'debito pubblico', 'budget', 'preventivo',
+  // Corporate results / labour-market signals
+  'fatturat', 'ricav', 'trimestre', 'semestre', 'bilancio', 'dividend',
+  'perdita', 'fallimen', 'insolven', 'acquisizion', 'delocalizza',
+  // Energy / climate / environment — federal policy, missing entirely above
+  'energi', 'elettric', 'nuclear', 'solar', 'eolic', 'idroelettric', 'penuria',
+  'clima', 'climatic', 'ambient', 'co2', 'emission', 'siccit',
+  // Health system (beyond the LAMal terms the frontaliere list already has)
+  'sanit', 'salute', 'ospedal', 'medic', 'farmac', 'assicurazion',
+  'malatti', 'vaccin',
+  // Education / research
+  'scuola', 'scolast', 'universit', 'student', 'istruzion', 'ricerca',
+  // Migration / residence / free movement. `asilo` is deliberately here and
+  // NOT in TOPICAL_KEYWORDS: asylum policy is national agenda, while for the
+  // frontaliere section "richiedenti asilo nel Locarnese" is exactly the
+  // anchored-but-off-topic cronaca that list exists to drop.
+  'migran', 'migrazion', 'asilo', 'immigrazion', 'stranier',
+  'naturalizzazion', 'permesso di dimora', 'libera circolazion',
+  // Digital / tech / critical infrastructure
+  'digital', 'intelligenza artificial', 'cyber', 'hacker', 'informatic',
+  'telecom', 'internet', 'dati personal', 'data center',
+  // Federal institutions / lawmaking / direct democracy
+  'consiglio federale', 'consiglio nazionale', 'consiglio degli stati',
+  'iniziativ', 'legisla', 'ordinanza', 'riforma', 'decret',
+  'bilateral', 'unione europea', 'neutralit',
+  'esercito', 'difesa', 'protezione civil',
+  // Statistics / population
+  'statistic', 'popolazion', 'demograf', 'censimento',
+  // Housing (beyond alloggio/affitto/immobil above)
+  'sfratto', 'pigione', 'locazion',
+  // National transport infrastructure
+  'ffs', 'aeroport', 'aviazion', 'gottardo',
+  // Agriculture / food supply
+  'agricol', 'contadin', 'allevament', 'derrate',
+];
+
+/**
+ * The topical lexicon for the section this process is generating for.
+ *
+ * Read through a function rather than a module-scope const because
+ * `IS_FRONTALIERE` is initialised ~1600 lines below this point; every caller
+ * runs long after that, which is the same pattern `applyPreSpendTopicGate`
+ * already relies on.
+ */
+function sectionTopicalKeywords(national) {
+  const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
+  return isNational ? SVIZZERA_TOPICAL_KEYWORDS : TOPICAL_KEYWORDS;
 }
 
-function countTopicalHits(text) {
+function hasTopicalSignal(text, national) {
+  if (!text || typeof text !== 'string') return false;
+  const lower = text.toLowerCase();
+  return sectionTopicalKeywords(national).some(k => lower.includes(k));
+}
+
+function countTopicalHits(text, national) {
   if (!text || typeof text !== 'string') return 0;
   const lower = text.toLowerCase();
-  return TOPICAL_KEYWORDS.reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
+  return sectionTopicalKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
 }
 
 // ── Pre-spend topic gate (REGOLA #0 short-circuit, 2026-05-15) ──
@@ -387,9 +480,36 @@ const _preSpendGateCache = new Map();
  * Defense-in-depth: REGOLA #0 inside article-gen still catches whatever
  * the classifier missed. Better to spend an article-gen attempt than to
  * silently drop a legit headline because of a transient classifier error.
+ *
+ * `sourceUrl` (2026-08-10): the anchor gates are computed on `headline + url`
+ * while the classifier used to see the title alone, so the LLM was asked to
+ * decide on strictly less evidence than the regex it is supposed to arbitrate.
+ * "Errare humanum est" is undecidable as a title and obvious once you can see
+ * it came from `laregione.ch/culture/locarno-film-festival`. Only the host +
+ * path is passed — no query string, which carries tracking parameters and no
+ * editorial signal.
  */
-async function classifyFrontaliereRelevance(headline, summary) {
-  const cacheKey = String(headline || '').toLowerCase().trim();
+function classifierSourceHint(url) {
+  const raw = String(url || '').trim();
+  if (!raw) return '';
+  try {
+    const u = new URL(raw);
+    return `${u.host}${u.pathname}`.slice(0, 160);
+  } catch {
+    // Not a parseable absolute URL (relative href, malformed feed link):
+    // pass it through verbatim rather than losing the signal entirely.
+    return raw.split('?')[0].slice(0, 160);
+  }
+}
+
+async function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+  const sourceHint = classifierSourceHint(sourceUrl);
+  // The hint is part of the prompt, so it must be part of the memo key —
+  // otherwise the same title from two different sections of two different
+  // outlets would resolve to whichever verdict was computed first. Trimmed
+  // once so the `if (cacheKey)` guards on the write paths below test exactly
+  // the emptiness this read tests: a key of " " would be written, never read.
+  const cacheKey = `${String(headline || '').toLowerCase().trim()} ${sourceHint.toLowerCase()}`.trim();
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
@@ -407,7 +527,7 @@ NON è rilevante:
 - Infrastruttura italiana lontana dal confine, eventi USA/UE senza impatto pendolare
 
 HEADLINE: ${String(headline || '').slice(0, 240)}
-${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
+${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`
     : `Sei un editor di un sito che informa CHIUNQUE viva o lavori in Svizzera (scala NAZIONALE: policy federale e cantonale, economia, fisco, lavoro, vita quotidiana, casa). NON sei limitato ai frontalieri.
@@ -422,7 +542,7 @@ NON è rilevante:
 - Articoli il cui ARGOMENTO PRINCIPALE è esclusivamente frontaliero (appartengono a una sezione separata, NON a quella nazionale): permesso G/B/C per frontalieri, ristorni Ticino-Italia, imposta alla fonte/tassazione frontalieri, dogane/valichi e pendolarismo Italia-Svizzera, telelavoro frontalieri, accordo frontalieri Italia-Svizzera, soglia 20 km. In questa sezione nazionale sarebbero duplicati fuori scopo. ATTENZIONE: una riforma o statistica NAZIONALE (es. AVS/LPP, LAMal, mercato del lavoro, Consiglio federale) che menziona i frontalieri come categoria tra quelle impattate è RILEVANTE — il tema principale è nazionale, non frontaliero
 
 HEADLINE: ${String(headline || '').slice(0, 240)}
-${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
+${sourceHint ? `FONTE: ${sourceHint}\n` : ''}${summary ? `SOMMARIO: ${String(summary).slice(0, 320)}\n` : ''}
 Rispondi ESATTAMENTE in questo formato (una riga):
 relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
 
@@ -547,7 +667,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       : '';
     let verdict;
     try {
-      verdict = await classifyFrontaliereRelevance(headlineText, summary);
+      verdict = await classifyFrontaliereRelevance(headlineText, summary, urlText);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.
@@ -568,6 +688,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // the final defense if the restored candidate is actually off-topic.
   const totalRejection = kept.length === 0 && headlines.length > 0;
   let restoredByBackstop = 0;
+  let backstopKind = 'none';
   if (kept.length === 0 && strictAnchorMatched.length > 0) {
     const RESTORE_N = 3;
     const restore = strictAnchorMatched.slice(0, RESTORE_N);
@@ -579,6 +700,42 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       console.error(`  🛟 Pre-spend gate backstop: ripristinato headline anchor-matched (anchor="${anchor}"): "${ht}…"`);
     }
     filtered = filtered.filter(f => !restoreSet.has(f.rawHeadline));
+    backstopKind = 'anchor';
+  }
+
+  // E — Section backstop for the NATIONAL (svizzera) pool.
+  //
+  // Backstop D above cannot fire here and never could: it needs a
+  // strict-anchor hit, the anchors are frontaliere terms-of-art, and the loop
+  // sets `strictAnchor = IS_FRONTALIERE ? … : ''`. So `anchor_candidates` is 0
+  // by construction on this section and a 100% classifier rejection meant the
+  // pool reached generation empty with nothing able to intervene. Measured
+  // 2026-08-10 over 11 sampled svizzera runs: 10 ended
+  // `emptied=1 recovered=none status=skipped`, the 11th `deferred` — the
+  // section published no news article in any of them.
+  //
+  // Rank by topical density rather than pool order: the national lexicon above
+  // is a recall instrument, and its hit count is the only cheap signal we have
+  // for "most on-agenda of a bad lot". Ties keep pool order, which is recency.
+  // This is deliberately a LAST-RESORT restore, not a relaxation — it runs
+  // only when the classifier said no to everything, and REGOLA #0 inside
+  // article-gen (topicGateAbort) stays the final arbiter exactly as it does
+  // for the frontaliere branch after backstop D.
+  if (kept.length === 0 && !IS_FRONTALIERE && headlines.length > 0) {
+    const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
+    const ranked = headlines
+      .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
+      .sort((a, b) => (b.hits - a.hits) || (a.i - b.i))
+      .slice(0, RESTORE_N);
+    const restoreSet = new Set(ranked.map(r => String(r.h?.headline || '')));
+    for (const { h, hits } of ranked) {
+      kept.push(h);
+      restoredByBackstop += 1;
+      const ht = String(h?.headline || '').slice(0, 80);
+      console.error(`  🛟 Pre-spend gate backstop di sezione (${SECTION_NAME}): ripristinato headline (topical-hits=${hits}): "${ht}…"`);
+    }
+    filtered = filtered.filter(f => !restoreSet.has(f.rawHeadline));
+    backstopKind = 'topical';
   }
 
   // ── Total-rejection telemetry (issue #113) ──────────────────────────
@@ -592,26 +749,36 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   //   grep -c 'PRESPEND_GATE_TOTAL_REJECTION'                → how often
   //   grep -c 'PRESPEND_GATE_TOTAL_REJECTION .* restored=0'  → …unrecovered
   //
-  // `anchor_candidates` is the field that says WHY nothing was restored:
-  // the D-backstop above needs a strict-anchor hit, and anchors are
+  // `anchor_candidates` is the field that says whether the D-backstop had
+  // anything to work with: it needs a strict-anchor hit, and anchors are
   // frontaliere-specific (`IS_FRONTALIERE ? … : ''`), so on the svizzera
-  // section it is 0 by construction and the backstop cannot fire at all.
-  // Measured over 224 real runs 2026-08-06→10: 124 total rejections, and the
-  // backstop restored nothing in every one of them — i.e. anchor_candidates
-  // was 0 across the board, which is the only way it can stay silent here.
+  // section it is 0 by construction. Measured over 224 real runs
+  // 2026-08-06→10: 124 total rejections, restored=0 in every one — 0 was the
+  // only value anchor_candidates could take there, so D stayed silent.
+  //
+  // 2026-08-10: that is now the diagnosis, not the outcome. Backstop E above
+  // restores by topical density when the section has no anchor set, so a
+  // svizzera total rejection reads `anchor_candidates=0 restored=3
+  // backstop=topical` — anchor_candidates still explains why D was silent,
+  // `backstop` says who answered instead. `restored=0` after this change means
+  // nothing recovered the pool and is the line worth alerting on.
   if (totalRejection) {
     console.error(
       `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
       + ` anchor_candidates=${strictAnchorMatched.length} restored=${restoredByBackstop}`
-      + ` kept_after=${kept.length} section=${SECTION_NAME}`,
+      + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`,
     );
   }
 
   const dropped = headlines.length - kept.length;
   if (classifierCalls > 0 || dropped > 0 || unambiguousBypasses > 0) {
     const reasonsSummary = filtered.slice(0, 3).map(f => f.reason).join(' | ');
+    // "frontaliere-relevant" is what the classifier decided only on the
+    // frontaliere section; on svizzera it answered a national prompt, and a
+    // log line claiming otherwise is how a section-blind gate hides.
+    const keptLabel = IS_FRONTALIERE ? 'frontaliere-relevant' : `rilevanti per la sezione ${SECTION_NAME}`;
     console.error(
-      `  🔍 Pre-spend topic gate: ${headlines.length} candidates → ${kept.length} frontaliere-relevant `
+      `  🔍 Pre-spend topic gate: ${headlines.length} candidates → ${kept.length} ${keptLabel} `
       + `(classifier-calls=${classifierCalls}, anchor-bypass=${unambiguousBypasses}, dropped=${dropped}${reasonsSummary ? `: ${reasonsSummary}` : ''})`,
     );
     if (filtered.length > 0) {
@@ -4918,6 +5085,28 @@ async function scanNewsSources() {
   // gate (work/fisco/permess/economy/transport/policy) requiring both
   // geographic AND topical signal. Env-gated for rollback.
   const dropNonTopical = (process.env.SCAN_DROP_NON_TOPICAL ?? '1') !== '0';
+  // 2026-08-10 — SECTION AWARENESS. Both gates above were written for the
+  // frontaliere section and were applied unchanged to `svizzera`, which is
+  // national by design. Measured on 538 real headlines from the reachable
+  // NEWS_SOURCES_SVIZZERA:
+  //
+  //   anchor-gate   drops  43/538 (8%)  — and what it drops is fiscoetasse.com
+  //                 / lavoroediritti.com Italian-domestic items ("Assegno di
+  //                 Inclusione", "NASpI dimissioni", "Bonus Sud e ZES nel
+  //                 charter nautico"). On a Swiss national section requiring a
+  //                 Swiss nexus is CORRECT, so this drop stays as-is.
+  //   topical-gate  drops 418/495 (84%) — including "Svizzera: PIL in
+  //                 crescita", "BNS in perdita di mezzo miliardo", "Il franco
+  //                 sempre più forte", "Impennata dei fallimenti in Svizzera",
+  //                 while keeping "Il lavoro mortale dei giornalisti in
+  //                 Messico" (it contains `lavor`). Wrong lexicon, not merely
+  //                 a tight one — see SVIZZERA_TOPICAL_KEYWORDS.
+  //
+  // `hasTopicalSignal` now picks the lexicon from the section, which takes the
+  // national pool from 77 to 188 survivors. The drop itself is kept rather
+  // than disabled: sampled 25 runs on 2026-08-10, frontaliere reaches the
+  // pre-spend classifier with 47-56 candidates, and that is the cost envelope
+  // this pipeline is sized for. Removing the topical drop would push ~495.
   const filterByAnchor = (list) => {
     if (!dropAnchorless && !dropNonTopical) return list;
     const kept = [];
@@ -4941,7 +5130,14 @@ async function scanNewsSources() {
     }
     if (droppedTopic > 0) {
       RUN_REPORT.headlines.droppedNonTopical = (RUN_REPORT.headlines.droppedNonTopical || 0) + droppedTopic;
-      console.error(`  🚫 Topical-gate: ${droppedTopic} headline scartate (nessun token lavoro/fisco/permess/economi/transport/policy)`);
+      // Naming the lexicon is not cosmetic: this line read
+      // "lavoro/fisco/permess/economi/transport/policy" while running on the
+      // national section, which is how the mismatch stayed invisible in 224
+      // runs of logs.
+      const lexicon = IS_FRONTALIERE
+        ? 'lavoro/fisco/permess/economi/transport/policy'
+        : `nazionale: ${SECTION_NAME} — economia/fisco/energia/sanità/scuola/migrazione/istituzioni`;
+      console.error(`  🚫 Topical-gate: ${droppedTopic} headline scartate (nessun token ${lexicon})`);
     }
     return kept;
   };
@@ -4997,6 +5193,19 @@ const FRONTALIERI_KEYWORDS = [
 
 /** Split headlines into frontalieri-relevant (boosted) + rest, return boosted first */
 function prioritizeFrontalieriHeadlines(headlines) {
+  // The national (svizzera) section must not be re-sorted by a frontaliere
+  // ruler, and above all must not be TRUNCATED by one. With >= MIN_BOOSTED
+  // frontalieri hits the threshold below drops every non-boosted headline —
+  // on this section that would hand the pool to the very topics the national
+  // classifier prompt rejects by construction ("Articoli il cui ARGOMENTO
+  // PRINCIPALE è esclusivamente frontaliero … appartengono a una sezione
+  // separata"), i.e. a guaranteed total rejection downstream. It has been
+  // harmless so far only by luck: the observed runs logged boosted=0 because
+  // the topical gate had already emptied the pool of everything but foreign
+  // news. Widening that pool (SVIZZERA_TOPICAL_KEYWORDS) makes the trap
+  // reachable, so it is closed here rather than left armed.
+  if (!IS_FRONTALIERE) return headlines;
+
   const boosted = [];
   const rest = [];
 
