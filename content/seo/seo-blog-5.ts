@@ -61654,16 +61654,16 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
 
   'blog-trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro': {
     title: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
-    description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono',
+    description: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono',
     keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, maccagno, pino, veddasca',
     ogTitle: 'Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro',
-    ogDescription: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono i pro e i contro di questo trasferimento?',
+    ogDescription: 'Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono i pro e i contro di questo trasferimento?',
     canonicalPath: '/articoli-frontaliere/trasferirsi-a-maccagno-con-pino-e-veddasca-da-frontaliere-pro-e-contro',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
       "headline": "Trasferirsi a Maccagno con Pino e Veddasca da frontaliere: pro e contro",
-      "description": "Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontaliere che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono",
+      "description": "Il nuovo accordo frontalieri del 2020 ha aperto nuove possibilità per i frontalieri che desiderano trasferirsi a Maccagno con Pino e Veddasca. Ma cosa sono",
       "image": {
         "@type": "ImageObject",
         "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
