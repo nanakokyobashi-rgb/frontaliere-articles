@@ -65,6 +65,7 @@ import path from 'node:path';
 // an article TITLE into markup — so the same output-boundary guard applies.
 // See scripts/lib/sanitize-control-chars.mjs for the incident.
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const argv = process.argv.slice(2);
@@ -363,7 +364,9 @@ for (const section of SECTIONS) {
 
     const abs = path.join(OUT, relPath);
     fs.mkdirSync(path.dirname(abs), { recursive: true });
-    fs.writeFileSync(abs, sanitizeHtmlDocument(patched), 'utf-8');
+    const cleanPage = sanitizeHtmlDocument(patched);
+    reportStrippedControlChars(abs, patched, cleanPage);
+    fs.writeFileSync(abs, cleanPage, 'utf-8');
 
     const newest = sorted[0]?.date ?? '?';
     const cardCount = (cards.match(/class="ssg-art-card"/g) ?? []).length;

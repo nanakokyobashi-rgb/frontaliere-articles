@@ -130,6 +130,7 @@ import { spawnSync } from 'node:child_process';
 // BreadcrumbList `name` — structured data served to crawlers, not to a browser
 // that would swallow them.
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
 
 const ROOT_DIR = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CDN_BASE = 'https://cdn.frontaliereticino.ch';
@@ -289,8 +290,12 @@ async function main() {
     // anything a later step inserts through them. A clean page comes back
     // byte-identical, which keeps the byte-identity contract with the full
     // build intact (scripts/check-article-byte-identity.mjs).
-    fs.writeFileSync(indexAbs, sanitizeHtmlDocument(indexHtml), 'utf-8');
-    fs.writeFileSync(flatAbs, sanitizeHtmlDocument(finalBridgeHtml), 'utf-8');
+    const indexClean = sanitizeHtmlDocument(indexHtml);
+    reportStrippedControlChars(indexAbs, indexHtml, indexClean);
+    fs.writeFileSync(indexAbs, indexClean, 'utf-8');
+    const flatClean = sanitizeHtmlDocument(finalBridgeHtml);
+    reportStrippedControlChars(flatAbs, finalBridgeHtml, flatClean);
+    fs.writeFileSync(flatAbs, flatClean, 'utf-8');
   }
 
   // ── Step 6: article-hub archive pages (issue #4881 Fase 1) ──
@@ -346,6 +351,7 @@ async function main() {
       if (!fs.existsSync(abs)) continue;
       const html = fs.readFileSync(abs, 'utf-8');
       const clean = sanitizeHtmlDocument(html);
+      reportStrippedControlChars(abs, html, clean);
       if (clean !== html) fs.writeFileSync(abs, clean, 'utf-8');
     }
   }

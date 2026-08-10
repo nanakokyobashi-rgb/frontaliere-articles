@@ -44,6 +44,7 @@ import path from 'node:path';
 // and homepage cell that shows the article. Measured on the live index,
 // blog-index-frontaliere-it-full.json carried five of them.
 import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars.mjs';
+import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -230,23 +231,29 @@ for (const section of SECTIONS) {
     // window to fall through on the uncommon one.
     const capped = entries.slice(0, RECENT_LIMIT);
     const file = path.join(OUT, `blog-index-${section.name}-${locale}.json`);
-    fs.writeFileSync(file, JSON.stringify(sanitizeDeep({
+    const payload = {
       version: 1, section: section.name, locale,
       count: capped.length, total: entries.length, articles: capped,
       // Lets a consumer tell "the window covers my gap" from "it does not"
       // without fetching the full file to find out.
       oldest: capped[capped.length - 1]?.date ?? null,
       full: `blog-index-${section.name}-${locale}-full.json`,
-    })) + '\n');
+    };
+    const cleanPayload = sanitizeDeep(payload);
+    reportStrippedControlCharsDeep(file, payload, cleanPayload);
+    fs.writeFileSync(file, JSON.stringify(cleanPayload) + '\n');
     const kb = Math.round(fs.statSync(file).size / 1024);
     console.log(`[blog-index] ${path.basename(file)} — ${capped.length}/${entries.length} articles, ${kb} KB, newest ${capped[0].date}`);
 
     const fullFile = path.join(OUT, `blog-index-${section.name}-${locale}-full.json`);
-    fs.writeFileSync(fullFile, JSON.stringify(sanitizeDeep({
+    const fullPayload = {
       version: 1, section: section.name, locale,
       count: entries.length, total: entries.length, articles: entries,
       oldest: entries[entries.length - 1]?.date ?? null,
-    })) + '\n');
+    };
+    const cleanFullPayload = sanitizeDeep(fullPayload);
+    reportStrippedControlCharsDeep(fullFile, fullPayload, cleanFullPayload);
+    fs.writeFileSync(fullFile, JSON.stringify(cleanFullPayload) + '\n');
     const fullKb = Math.round(fs.statSync(fullFile).size / 1024);
     console.log(`[blog-index] ${path.basename(fullFile)} — ${entries.length} articles, ${fullKb} KB`);
   }

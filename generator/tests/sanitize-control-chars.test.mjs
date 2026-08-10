@@ -363,26 +363,37 @@ test('every emitter that writes the public surface goes through the sanitiser', 
   const wired = {
     'scripts/build-api.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
-      /JSON\.stringify\(sanitizeDeep\(value\)\)/,
+      /sanitizeDeep\(value\)/,
       /sanitizeXmlDocument\(xml\)/,
       /sanitizeJsonText\(raw\)/,
       /assertNoControlChars\(/,
     ],
     'scripts/build-blog-index.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
-      /JSON\.stringify\(sanitizeDeep\(\{/,
+      /sanitizeDeep\(payload\)/,
+      /sanitizeDeep\(fullPayload\)/,
       /assertNoControlChars\(/,
     ],
     'scripts/publish-article-fast.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
-      /writeFileSync\(indexAbs, sanitizeHtmlDocument\(indexHtml\)/,
-      /writeFileSync\(flatAbs, sanitizeHtmlDocument\(finalBridgeHtml\)/,
+      /sanitizeHtmlDocument\(indexHtml\)/,
+      /writeFileSync\(indexAbs, indexClean/,
+      /sanitizeHtmlDocument\(finalBridgeHtml\)/,
+      /writeFileSync\(flatAbs, flatClean/,
     ],
     'scripts/refresh-hub-landing.mjs': [
       /from '\.\/lib\/sanitize-control-chars\.mjs'/,
-      /writeFileSync\(abs, sanitizeHtmlDocument\(patched\)/,
+      /sanitizeHtmlDocument\(patched\)/,
+      /writeFileSync\(abs, cleanPage/,
     ],
   };
+
+  // Le forme inline (`writeFileSync(abs, sanitize…(x))`) sono state spezzate in
+  // due istruzioni da #133, perche' fra il sanitize e la scrittura ora passa
+  // `reportStrippedControlChars`: il marker va registrato PRIMA di essere
+  // distrutto. I pattern qui sopra seguono la forma nuova e restano due —
+  // sanitize sull'input giusto, write del valore sanificato — cosi' che
+  // scollegarli resti visibile.
   for (const [rel, patterns] of Object.entries(wired)) {
     const src = fs.readFileSync(path.join(REPO_ROOT, rel), 'utf-8');
     for (const re of patterns) {

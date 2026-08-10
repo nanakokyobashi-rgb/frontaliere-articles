@@ -14,9 +14,9 @@
  * strippato lasciando la cifra orfana, non sono state recuperabili in alcun modo.
  */
 import { test } from 'node:test';
-import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import assert from 'node:assert/strict';
 import {
   occurrencesIn,
   reportStrippedControlChars,
@@ -103,29 +103,95 @@ test('un disco che rifiuta la scrittura non fa fallire la scrittura del contenut
   assert.ok(logs.some((l) => /impossibile scrivere/.test(l)), 'e il fallimento del report va detto');
 });
 
-test('i sette choke point di scrittura passano tutti da qui', () => {
-  // Il guard di cablaggio: una funzione corretta che nessuno chiama e' lo stesso
-  // difetto con un file in piu' nell'albero. Sono sette per costruzione (#75).
-  const dir = path.resolve(import.meta.dirname, '..', 'scripts');
-  const seen = [];
+test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non solo sanitizeText', () => {
+  // ## Perche' questo guard e' stato riscritto (#133)
+  //
+  // La versione precedente cercava `sanitizeText\\(` + `writeFileSync\\(` e
+  // asseriva `seen.length >= 7`. Era **auto-confermante**: l'ho scritta
+  // conoscendo i sette file del ramo `sanitizeText`, quindi cercava la forma
+  // che quei sette hanno, li trovava tutti e passava. Non poteva scoprire chi
+  // ha una forma diversa — e quattro ce l'avevano, fra cui `build-api.mjs`,
+  // che produce la superficie pubblicata: quindici scritture che strippavano
+  // i byte C0 senza emettere ne' `::error::` ne' evidenza.
+  //
+  // Due cambi, entrambi necessari:
+  //
+  //  1. I sanitizer si LEGGONO dal modulo che li esporta, invece di cablarne
+  //     il nome qui. Un `sanitizeQualcosa` aggiunto domani entra nel guard da
+  //     solo, senza che nessuno si ricordi di aggiornare questa riga.
+  //  2. La soglia `>= N` sparisce. Una soglia «almeno N» non fallisce mai
+  //     quando la copertura cala insieme al numero di file trovati: e' una
+  //     misura di se' stessa. Al suo posto c'e' l'insieme atteso, esplicito.
+  const root = path.resolve(import.meta.dirname, '..', '..');
+
+  // I sanitizer, dal modulo che li dichiara. Questa e' la meta' che rende il
+  // guard capace di scoprire cio' che non sapeva gia'.
+  const sanitizerSrc = fs.readFileSync(
+    path.join(root, 'scripts', 'lib', 'sanitize-control-chars.mjs'), 'utf-8');
+  const sanitizers = [...sanitizerSrc.matchAll(/export function (sanitize[A-Za-z]*)/g)].map((m) => m[1]);
+  assert.ok(sanitizers.length >= 4, `attesi >= 4 sanitizer esportati, visti ${sanitizers.join(', ')}`);
+
+  // Entrambi gli alberi che scrivono: il generatore e gli script di
+  // pubblicazione. Guardarne uno solo era l'altra meta' del punto cieco.
+  let seen = [];
   const walk = (d) => {
+    if (!fs.existsSync(d)) return;
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, e.name);
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
       const src = fs.readFileSync(p, 'utf-8');
-      if (/sanitizeText\(/.test(src) && /writeFileSync\(/.test(src)) seen.push({ p, src });
+      if (!/writeFileSync\(/.test(src)) continue;
+      const used = sanitizers.filter((s) => new RegExp(`\\b${s}\\(`).test(src));
+      if (used.length) seen.push({ rel: path.relative(root, p), src, used });
     }
   };
-  walk(dir);
+  walk(path.join(root, 'generator', 'scripts'));
+  walk(path.join(root, 'scripts'));
+
+  // Un match non e' sempre un choke point: `sanitize*` e `writeFileSync` nello
+  // stesso file non provano che la cosa sanificata sia la cosa scritta. Le
+  // eccezioni si dichiarano QUI, con la ragione — non restringendo il pattern,
+  // che e' cio' che toglie al guard la capacita' di scoprire.
+  const NON_CHOKE = new Map([
+    ['scripts/find-dirty-content-ids.mjs',
+     'sanifica l\'HTML SONDATO dal live per confrontarlo, e scrive il proprio report JSON: '
+     + 'due cose diverse. Non scrive mai il contenuto sanificato.'],
+  ]);
+  for (const rel of NON_CHOKE.keys()) {
+    assert.ok(seen.some((s) => s.rel === rel),
+      `${rel} e' dichiarato NON_CHOKE ma non corrisponde piu' al pattern: l'esenzione e' marcia, toglila.`);
+  }
+  seen = seen.filter((s) => !NON_CHOKE.has(s.rel));
+
   const missing = seen
-    .filter(({ src }) => !/reportStrippedControlChars\(/.test(src))
-    .map(({ p }) => path.relative(dir, p));
+    .filter(({ src }) => !/reportStrippedControlChars(Deep)?\(/.test(src))
+    .map(({ rel, used }) => `${rel}  [${used.join(', ')}]`);
+
   assert.deepEqual(
-    missing,
-    [],
-    'Questi script sanificano e scrivono senza registrare lo strip: il marker che rende '
-      + 'esatta la riparazione va perso in silenzio (#95).\n  ' + missing.join('\n  '),
+    missing, [],
+    'Questi script sanificano e scrivono senza registrare lo strip: il marker che rende\n'
+      + 'esatta la riparazione va perso in silenzio (#95, #133).\n  ' + missing.join('\n  '),
   );
-  assert.ok(seen.length >= 7, `attesi almeno 7 choke point, visti ${seen.length}`);
+
+  // Nessuna soglia «almeno N»: l'insieme atteso, per nome. Se un file entra o
+  // esce dalla lista dei choke point, questo test lo DICE invece di assorbirlo.
+  const ATTESI = [
+    'generator/scripts/batch-add-faq-to-articles.mjs',
+    'generator/scripts/create-article.mjs',
+    'generator/scripts/fix-faq-locales.mjs',
+    'generator/scripts/generate-border-wait-ranking-article.mjs',
+    'generator/scripts/generate-daily-brief-article.mjs',
+    'generator/scripts/generate-events-digest-article.mjs',
+    'generator/scripts/lib/evergreen-article-refresh.mjs',
+    'scripts/build-api.mjs',
+    'scripts/build-blog-index.mjs',
+    'scripts/publish-article-fast.mjs',
+    'scripts/refresh-hub-landing.mjs',
+  ];
+  assert.deepEqual(
+    seen.map((s) => s.rel).sort(), ATTESI,
+    'L\'insieme dei choke point e\' cambiato. Se e\' un file NUOVO che sanifica e scrive,\n'
+      + 'cablalo e aggiungilo qui. Se e\' sparito, toglilo. Non e\' un test da allentare.',
+  );
 });
