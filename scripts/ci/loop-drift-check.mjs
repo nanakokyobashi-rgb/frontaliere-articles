@@ -184,11 +184,20 @@ function classify(entry, now, base) {
 
   if (mode === 'not-ported') {
     const moved = now.site !== base.site;
+    // A differenza degli altri rami, qui `actionable` NON puo' essere sempre
+    // false: `not-ported` e' l'unico mode il cui `baseline.site` puo' restare
+    // sbagliato per sempre senza che nessun confronto lo riveli mai (issue
+    // #148 — una baseline presa dal ramo di una PR chiusa, mai su `main`). Se
+    // il sito e' fermo alla baseline non c'e' niente da decidere; se si e'
+    // mosso, la voce deve entrare nel report, perche' e' esattamente li' che
+    // una baseline fantasma si nasconderebbe altrimenti in silenzio.
     return {
       state: moved ? 'not-ported-changed' : 'not-ported-stable',
-      actionable: false,
+      actionable: moved,
       headline: moved ? 'non portato — ed e\' cambiato sul sito' : 'non portato (deliberato)',
-      detail: reason || '',
+      detail: moved
+        ? `${reason || ''} La baseline registrata (\`${base.site}\`) non corrisponde piu' al contenuto attuale sul sito (\`${now.site}\`). Verifica se la policy dichiarata resta valida sul nuovo contenuto; se la baseline non e' mai stata quella giusta (es. presa da un branch mai mergiato), correggila e rilancia \`--init\`.`
+        : reason || '',
     };
   }
 
@@ -307,7 +316,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['undeclared-drift', 'both-moved', 'site-ahead', 'not-ported-changed', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -337,6 +346,7 @@ async function main() {
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
+      section('not-ported-changed', '🔁 Non portato, ma il sito è cambiato — la policy o la baseline vanno riverificate'),
       section('corpus-only-pending-landed', '🟢 Il gemello atteso è arrivato sul sito — pronta la promozione'),
       section('missing-here', '⚠️ Dichiarato nel manifest ma assente'),
       section('removed-on-site', '⚠️ Non più sul sito'),
@@ -380,4 +390,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify };
+export { classify, sha256 };
