@@ -9564,6 +9564,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.title': 'Déménager à Marzio en tant que frontalier : avantages et inconvénients',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.excerpt': 'Nous savons ce que signifie être un frontalier en Suisse et en Italie. Le nouvel accord frontalier a introduit de nouvelles règles pour les frontaliers, mais quels sont les avantages et les inconvénients de déménager à Marzio ?',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.imageAlt': 'Frontaliers travaillant en Suisse et résidant en Italie qui envisagent le transfert à Marzio.',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.title': 'Vivre à Cannero Riviera et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Que doivent savoir les frontaliers qui souhaitent vivre à Cannero Riviera et travailler au Tessin ?',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un frontalier regarde le lac de Lugano de Cannero Riviera',
 };
 
 export default blogMetaFr;

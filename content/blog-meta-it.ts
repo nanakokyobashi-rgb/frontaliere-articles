@@ -9563,6 +9563,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.title': 'Trasferirsi a Marzio da frontaliere: pro e contro',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.excerpt': 'Sappiamo cosa significa essere un frontaliere in Svizzera e in Italia. Il Nuovo Accordo Frontalieri ha introdotto nuove regole per i frontalieri, ma quali sono i vantaggi e svantaggi di trasferirsi a Marzio?',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.imageAlt': 'Frontalieri che lavorano in Svizzera e risiedono in Italia che considerano il trasferimento a Marzio.',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.title': 'Vivere a Cannero Riviera e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Cosa devono sapere i frontalieri che desiderano vivere a Cannero Riviera e lavorare in Ticino?',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un frontaliere si affaccia sul lago di Lugano da Cannero Riviera',
 };
 
 export default blogMetaIt;

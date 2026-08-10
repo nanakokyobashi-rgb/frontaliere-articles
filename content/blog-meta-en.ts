@@ -9562,6 +9562,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.title': 'Moving to Marzio by frontier: pros and cons',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.excerpt': 'We know what it means to be a frontier worker in Switzerland and Italy. The New Frontier Agreement introduced new rules for frontier workers, but what are the advantages and disadvantages of moving to Marzio?',
     'blog.article.trasferirsi-a-marzio-da-frontaliere-pro-e-contro.imageAlt': 'Frontaliers who work in Switzerland and reside in Italy considering relocation to Marzio.',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.title': 'Living in Cannero Riviera and working in Ticino as a border worker',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.excerpt': 'What do border workers who wish to live in Cannero Riviera and work in Ticino need to know?',
+    'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'A frontaliere looks out at Lake Lugano from Cannero Riviera',
 };
 
 export default blogMetaEn;
