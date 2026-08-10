@@ -75,6 +75,7 @@ import { freeTranslateWithRetry, balanceMarkdownMarkers } from './lib/free-trans
 import { translateFieldFreeMt, translatedStringOrNull, joinTranslatedChunks } from './lib/article-free-mt.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
+import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import {
@@ -2674,6 +2675,31 @@ function collapseShoutingTitle(rawTitle) {
       return result;
     })
     .join(' ');
+}
+
+/**
+ * Apply the deterministic microcopy guard to a locale's title AND excerpt.
+ *
+ * Why this exists next to normalizeTitleCasing rather than inside it: that
+ * function returns early when the title is neither Title Case nor shouting
+ * (`if (!looksTitleCase && !isShouting) return s;`), so a title already in
+ * sentence case never reaches its proper-noun table. That is exactly how
+ * "Frontaliere gruista ticino: stipendio e requisiti" shipped on 2026-08-09
+ * with 'ticino' in the TITLE_CASING_PROPER_NOUNS set the whole time. The guard
+ * below has no early-exit branch, and it also covers the excerpt, which no
+ * casing pass ever touched.
+ *
+ * @see generator/scripts/lib/it-microcopy-guard.mjs for what it does NOT cover.
+ */
+function applyMicrocopyGuard(content, locale) {
+  if (!content || typeof content !== 'object') return;
+  for (const field of ['title', 'excerpt']) {
+    if (typeof content[field] !== 'string' || !content[field].trim()) continue;
+    const { value, fixes } = fixMicrocopy(content[field], { locale, field });
+    if (!fixes.length) continue;
+    console.warn(`  ✍️ [microcopy] ${locale.toUpperCase()} ${field}: ${fixes.map((f) => `${f.rule} "${f.found}"→"${f.expected}"`).join(', ')}`);
+    content[field] = value;
+  }
 }
 
 /**
@@ -5635,6 +5661,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     }
   }
 
+  // normalizeTitleCasing() above bails out on a title that is already in
+  // sentence case, and nothing at all ever looked at the excerpt. Both gaps
+  // shipped on 2026-08-09 ("Frontaliere gruista ticino", "il stipendio medio",
+  // "i frontaliere gruisti"). This runs unconditionally on both fields.
+  applyMicrocopyGuard(itContent, 'it');
+
   // Preserve FAQ from AI response (not in REQUIRED_IT_BODY_FIELDS, extracted separately)
   const rawFaq = itData?.content?.it?.faq || itData?.content?.faq || itData?.faq;
   if (rawFaq) {
@@ -6211,6 +6243,11 @@ ${terminologyByLang[targetLang] || ''}`;
       console.warn(`  🔡 [title-case] ${locale.toUpperCase()} title normalizzato: "${localeContent.title}" → "${uncappedTitle}"`);
       localeContent.title = uncappedTitle;
     }
+    // Toponym casing is locale-agnostic: Ticino stays Ticino in EN/DE/FR, and
+    // the free-MT cascade happily carries a lowercase 'ticino' straight over
+    // from the IT source (4 FR fields measured). Italian grammar rules inside
+    // the guard are gated on locale === 'it' and do not fire here.
+    applyMicrocopyGuard(localeContent, locale);
   }
 
   console.error(`  ✅ Articolo assemblato — ${Object.keys(data.content).length} lingue`);
@@ -11269,7 +11306,7 @@ export { translateArticle, enforceStrongInternalLinks, findBestFallbackImage, pi
 // Redazione redesign (issue #3174 follow-up): the journalist now authors only
 // {title, body}; these derive the title-casing/excerpt/body1-3/cover-image
 // candidates the shared pipeline above still expects.
-export { normalizeTitleCasing, collapseShoutingTitle, generateExcerpt, splitBodyIntoSections, findStockImageCandidates };
+export { normalizeTitleCasing, collapseShoutingTitle, applyMicrocopyGuard, generateExcerpt, splitBodyIntoSections, findStockImageCandidates };
 
 // Re-exported so eval/research harnesses (e.g. the local-LLM rewrite eval,
 // issue #3656) can run the SAME blocking fact-check gate used in production

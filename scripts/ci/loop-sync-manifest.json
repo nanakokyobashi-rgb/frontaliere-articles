@@ -1630,6 +1630,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/it-microcopy-guard.mjs",
+      "mode": "corpus-only",
+      "reason": "Guardia deterministica su titolo ed excerpt (issue del 2026-08-09: «Frontaliere gruista ticino», «i frontaliere gruisti», «il stipendio medio» usciti in SERP). Non esiste sul sito, ed e' corpus-only per dove sta il difetto, non per comodita': i titoli e gli excerpt li scrive il generatore, che vive qui. Il buco che chiude e' un ramo di uscita anticipata, non una tabella mancante: normalizeTitleCasing() conosceva gia' 'ticino' in TITLE_CASING_PROPER_NOUNS ma torna subito quando il titolo non e' ne' Title Case ne' urlato (`if (!looksTitleCase && !isShouting) return s;`), e un titolo in sentence case cade esattamente li'. L'excerpt non aveva NESSUN passaggio deterministico. Candidato a risalire al sito insieme a create-article.mjs, che e' `adapted` e ne e' il chiamante: qui il gemello non esiste ancora perche' la fix nasce dal lato che pubblica.",
+      "baseline": {
+        "site": null,
+        "corpus": "a9c8621700234446",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/tests/it-microcopy-guard.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Banco della guardia sopra. Tre strati, perche' due non bastano ed e' la lezione di blog-title-casing.test.mjs: le unit pinnano le regole sulle stringhe VERE uscite in produzione, il wiring guard pinna che create-article.mjs le invochi davvero (normalizeTitleCasing esisteva completa e corretta ma cablata solo nel percorso journalist-publish: un normalizzatore che nessuno chiama e' lo stesso difetto con un file in piu'), lo scan pinna che nessun campo pubblicato sia rimasto indietro. Le due soglie di conteggio (8 file meta, >20.000 campi) esistono perche' uno sparse checkout senza content/ non possa passare a vuoto.",
+      "baseline": {
+        "site": null,
+        "corpus": "d34de66dbfad897f",
+        "alignedAt": "2026-08-09"
+      }
+    },
+    {
       "path": "generator/scripts/lib/it-text-similarity.mjs",
       "sitePath": "scripts/lib/it-text-similarity.mjs",
       "mode": "identical",
