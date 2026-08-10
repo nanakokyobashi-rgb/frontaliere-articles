@@ -65,7 +65,7 @@ import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens } from './lib/ai-models.mjs';
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
@@ -5175,18 +5175,90 @@ async function selectArticle(headlines) {
   return chosen;
 }
 
+// ── Il budget del prompt di generazione, come SIMBOLO UNICO ──────────────
+//
+// Perche' esiste: il cap piu' alto dichiarato in tutta la flotta e' 8000
+// token di REQUEST — `DEFAULT_REQUEST_TOKENS_BY_PROVIDER` in
+// `lib/ai-models.mjs` lo applica account-wide a GitHub Models e a Groq, e
+// `MODEL_MAX_REQUEST_TOKENS` scende sotto (4000, 3000) per una dozzina di
+// modelli. Sopra quella soglia il pre-flight di `callLLM` non tenta nemmeno
+// la chiamata: stampa `⏭️  [modello] Skipped — request would exceed
+// 8000-token limit` e passa al successivo.
+//
+// Il difetto che questo simbolo chiude e' che la soglia non era scritta da
+// nessuna parte in questo file: il prompt e' cresciuto un blocco alla volta,
+// ogni blocco difendibile da solo, e nessuno pesava l'assemblato. Misurato
+// sul run 31402084443 (2026-08-10), la discontinuita' e' osservabile a meta'
+// dello stesso run, sullo stesso modello, a 55 secondi di distanza:
+//
+//   15:12:33  ramo news       ⏭️  [gpt-4.1] Skipped — request would exceed
+//                                 8000-token limit (estimated 9431)
+//   15:13:28  ramo evergreen  🤖 [1/5] Generazione contenuto IT ... con gpt-4.1
+//
+// Tutti e 7 gli skip per input-cap del run cadono nella fase news, zero nella
+// fase evergreen. L'unica variabile che cambia fra i due momenti e' quale
+// ramo ha assemblato il prompt — il ramo evergreen azzera `domainFactsBlock`
+// e `sourceContract` e porta una `pageContent` sintetica corta, il ramo news
+// li aggiunge tutti e tre. Da qui «genera solo evergreen»: non e' degrado
+// della flotta, e' una soglia netta che separa i due rami.
+//
+// Il lock e' `generator/tests/news-prompt-token-budget.test.mjs`, che assembla
+// il prompt news REALE (estratto da questo file, non replicato) e lo pesa con
+// `estimateRequestTokens` REALE.
+const PROMPT_TOKEN_BUDGET = 8000;
+
+// Il tetto che il test fa rispettare OGGI. E' un ratchet, non il traguardo:
+// puo' solo SCENDERE, e scende fino a PROMPT_TOKEN_BUDGET.
+//
+// Vive separato perche' il traguardo (8000) non e' raggiungibile in una sola
+// PR. La ripartizione misurata del prompt news (caso peggiore: fonte oltre
+// MAX_SOURCE_CHARS, id piu' lunghi del corpus) dice perche':
+//
+//   ~17.700 char  impalcatura statica del template + system + schema JSON
+//     6.036 char  la notizia (truncatedContent)
+//     1.772 char  topicalRelevanceGate (REGOLA #0)
+//     1.739 char  domainFactsBlock
+//     1.671 char  editorialFundamentalBlock
+//       801 char  sourceContract
+//       ~600 char idsSection (dopo questa PR; era 2.211)
+//
+// L'impalcatura statica da sola vale ~5.050 token: nessuna combinazione dei
+// blocchi variabili porta il totale sotto 8000 senza riscriverla, ed e' il
+// presidio anti-allucinazione (divieti, anti-clickbait, semantica dei link).
+// Il margine e' volutamente stretto (~100 token sul caso peggiore misurato):
+// il prossimo blocco che si aggiunge al prompt deve trovarlo, non assorbirlo.
+const PROMPT_TOKEN_CEILING = 10100;
+
+// Budget di OUTPUT per la chiamata di generazione IT.
+//
+// Era 8000, hardcoded due volte. Il target e' CREATE_ARTICLE_MIN_IT_WORDS
+// (900 parole IT) piu' faq + seo + overhead JSON: ~2500-3000 token misurati
+// sui payload reali. 8000 era ~3x sovradimensionato, e siccome il pre-flight
+// salta ogni modello con `MODEL_MAX_OUTPUT_TOKENS[m] < maxTokens`, quel 3x
+// era l'UNICA ragione dello skip `model max output 4000 < requested
+// maxTokens 8000` — che escludeva Phi-4-mini-reasoning (4000) e
+// Cohere-command-r-08-2024 / command-r7b-12-2024 (4096) da ogni generazione.
+//
+// 4000 e' scelto per essere <= al piu' basso di quei cap, non sotto: il
+// confronto e' `>`, quindi 4000 NON esclude un modello che dichiara 4000.
+// Il retry su troncamento sale gia' a 16000 (vedi `retryTokens` sotto), che
+// resta la valvola per i casi lunghi.
+const IT_GENERATION_MAX_TOKENS = 4000;
+
 // ── Step 2: Generate article via GitHub Models (multi-call) ─
 async function callGemini(pageContent, url, sourceContext = null) {
   // Get existing article IDs to avoid duplicates (all sections — shared id/SEO/i18n namespace)
   const existingIds = getAllArticleIds();
 
   // ── Token budget management ──
-  // Most models accept 128K+ context. We keep source generous (6000 chars)
-  // to maximize factual grounding, and limit IDs to 50 for dedup.
+  // Ogni blocco qui sotto compete con gli altri per lo STESSO budget:
+  // PROMPT_TOKEN_BUDGET token di request, oltre i quali il pre-flight di
+  // callLLM salta il modello senza tentare (vedi il commento del simbolo).
   //
   // Strategy:
-  //   1. Only send last 50 article IDs (recent ones matter most for dedup)
-  //   2. Provide generous source content (6000 chars) so the model has facts to work with
+  //   1. Send the article IDs that actually help dedup (topic-relevant first,
+  //      recency as filler) instead of the last 50 blind — see below
+  //   2. Provide source content so the model has facts to work with
   //   3. Send compact IT-only JSON template (EN/DE/FR generated in separate calls)
   //   4. Compress editorial rules (no repetition per locale)
   const generationAttempt = Number(sourceContext?._generationAttempt || 1);
@@ -5197,7 +5269,33 @@ async function callGemini(pageContent, url, sourceContext = null) {
   // the first, richness-matters attempt) buys headroom without touching
   // first-attempt grounding.
   const MAX_SOURCE_CHARS = generationAttempt > 1 ? 4500 : 6000;
-  const MAX_IDS_TO_SEND = 50;
+  // 50 → 20. Misurato sul corpus reale (3845 id): la lista passa da 2211 a
+  // 670 caratteri, cioe' ~441 token liberati — il singolo taglio piu' grande
+  // ottenibile senza toccare ne' la notizia ne' un presidio di fedelta'.
+  //
+  // La riduzione NON indebolisce il dedup, perche' cambia anche il CRITERIO.
+  // Prima: gli ultimi 50 id in ordine di registro, cioe' una finestra
+  // temporale cieca rispetto al tema — su un corpus di 3845 articoli la
+  // probabilita' che un id in collisione col tema di OGGI stia negli ultimi
+  // 50 e' bassa, e i 50 id costavano comunque il loro spazio. Adesso i primi
+  // 20 vengono scelti per SOVRAPPOSIZIONE col tema (headline + slug della
+  // fonte), che e' esattamente la popolazione dove una collisione puo'
+  // nascere, e la recency riempie solo i posti che restano. Meno caratteri e
+  // piu' segnale: sulla regola «>60% words with any existing ID» un id
+  // tematicamente vicino vale piu' di uno recente e scorrelato.
+  const MAX_IDS_TO_SEND = 20;
+  // …e un tetto in CARATTERI, che e' il vincolo vero.
+  //
+  // Un cap a CONTEGGIO non limita niente in un budget misurato in token: gli
+  // id del corpus vanno da 9 a 104 caratteri (misurato su 3845 id: p50=35,
+  // p95=51, max=104), quindi «20 id» vale fra 200 e 2100 caratteri a seconda
+  // di quali capitano — e i piu' lunghi sono gli ultimi arrivati, cioe' quelli
+  // che la selezione per recency pesca per prima. La vecchia `slice(-50)`
+  // aveva la stessa forma di difetto in grande: 2211 caratteri misurati oggi,
+  // ma nessun limite superiore dichiarato.
+  // Con il tetto in caratteri il contributo di questo blocco e' LIMITATO PER
+  // COSTRUZIONE, e non torna a crescere quando cresce il corpus.
+  const MAX_IDS_CHARS = 600;
 
   const truncatedContent = pageContent
     ? (pageContent.length > MAX_SOURCE_CHARS
@@ -5205,11 +5303,48 @@ async function callGemini(pageContent, url, sourceContext = null) {
       : pageContent)
     : '(page content unavailable — generate based on URL topic)';
 
-  // Send only recent IDs + count of older ones
-  const recentIds = existingIds.slice(-MAX_IDS_TO_SEND);
+  // Topic-relevant IDs first, recency as filler (see MAX_IDS_TO_SEND above).
+  // Le parole del tema si ricavano da headline + URL: entrambe sono presenti
+  // su ogni ramo (news, evergreen, stats-bfs), quindi la selezione non ha un
+  // ramo in cui degrada a vuoto — e se il tema non produce nessun match, il
+  // riempimento per recency riporta al comportamento storico, solo piu' corto.
+  const _idTopicWords = new Set(
+    `${sourceContext?.headline || ''} ${sourceContext?._targetKeyword || ''} ${url}`
+      .toLowerCase()
+      .split(/[^\p{L}\p{N}]+/u)
+      .filter((w) => w.length >= 4),
+  );
+  const _idRelevance = (id) => {
+    let hits = 0;
+    for (const w of String(id).toLowerCase().split('-')) if (_idTopicWords.has(w)) hits++;
+    return hits;
+  };
+  // Ordine di preferenza: prima i tematicamente vicini (punteggio
+  // decrescente), poi i piu' recenti. A parita' di punteggio vince il piu'
+  // recente: `i` e' l'ordine di registro, lo stesso che la vecchia
+  // `slice(-N)` usava come unico criterio.
+  const _idsByPreference = [
+    ...existingIds
+      .map((id, i) => ({ id, i, score: _idRelevance(id) }))
+      .filter((e) => e.score > 0)
+      .sort((a, b) => (b.score - a.score) || (b.i - a.i))
+      .map((e) => e.id),
+    ...[...existingIds].reverse(),
+  ];
+  const _keptIds = new Set();
+  let _idsChars = 0;
+  for (const id of _idsByPreference) {
+    if (_keptIds.size >= MAX_IDS_TO_SEND) break;
+    if (_keptIds.has(id)) continue;
+    const cost = String(id).length + (_keptIds.size ? 2 : 0); // ', '
+    if (_idsChars + cost > MAX_IDS_CHARS) continue;           // scarta il lungo, tieni i corti
+    _keptIds.add(id);
+    _idsChars += cost;
+  }
+  const recentIds = existingIds.filter((id) => _keptIds.has(id));
   const olderCount = existingIds.length - recentIds.length;
   const idsSection = olderCount > 0
-    ? `RECENT ARTICLE IDS (last ${MAX_IDS_TO_SEND} of ${existingIds.length} total — do NOT reuse): ${recentIds.join(', ')}`
+    ? `RECENT ARTICLE IDS (${recentIds.length} most similar/recent of ${existingIds.length} total — do NOT reuse): ${recentIds.join(', ')}`
     : `EXISTING ARTICLE IDS (do NOT reuse): ${recentIds.join(', ')}`;
 
   const relatedContext = sourceContext?.relatedHeadlines?.length
@@ -5688,12 +5823,47 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Models, Groq, Mistral, Gemini) server-enforce body1/body2/body3 presence
   // and we don't burn 5 retries when a weak model silently drops body2/body3.
   const articleSchema = buildArticleJsonSchema(primaryLocale);
+
+  // ── Pre-flight del budget, RESO VISIBILE ────────────────────────────────
+  //
+  // Stessa euristica del guard di `callLLM` (`estimateRequestTokens`), letta
+  // qui PRIMA della chiamata cosi' che la dimensione dell'assemblato sia un
+  // dato pubblicato dal run, non qualcosa da dedurre a valle contando dodici
+  // `⏭️` di modelli diversi. E' la ragione per cui il difetto e' sopravvissuto:
+  // ogni riga di skip nomina un modello, nessuna nomina il prompt.
+  //
+  // Warning, non throw: sopra budget la catena degrada ai modelli che il
+  // payload lo reggono, e rompere la pipeline sarebbe peggio del degrado.
+  // Il marker e' machine-readable e STABILE — chi costruisce un watchdog
+  // legge questa riga, non il testo attorno:
+  //
+  //   [prompt-budget] branch=<news|evergreen> section=<s> attempt=<n>
+  //   est=<token> budget=<token> over=<0|1>
+  const _promptBudgetBranch = isSyntheticSource ? 'evergreen' : 'news';
+  const _promptEstTokens = estimateRequestTokens(llmMessages, {
+    jsonSchema: articleSchema,
+    maxTokens: IT_GENERATION_MAX_TOKENS,
+  });
+  const _promptOverBudget = _promptEstTokens > PROMPT_TOKEN_BUDGET;
+  console.error(
+    `[prompt-budget] branch=${_promptBudgetBranch} section=${SECTION_NAME} `
+    + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${PROMPT_TOKEN_BUDGET} `
+    + `over=${_promptOverBudget ? 1 : 0}`,
+  );
+  if (_promptOverBudget) {
+    console.warn(
+      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} e' stimato in ${_promptEstTokens} token, `
+      + `oltre il cap piu' alto dichiarato dalla flotta (${PROMPT_TOKEN_BUDGET}): ogni modello `
+      + 'GitHub Models e Groq verra\' saltato dal pre-flight senza tentare la chiamata.',
+    );
+  }
+
   let itRaw;
   if (useGeminiDirect) {
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: 8000, jsonMode: true, jsonSchema: articleSchema });
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: 8000, jsonMode: true, jsonSchema: articleSchema });
+    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
   }
   let itData;
   const itRepaired = repairLlmJson(itRaw);
@@ -5707,7 +5877,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`   ${describeJsonParseError(itRepaired, parseErr)}`);
     console.error(`   ${describeRawForDiagnostics(itRaw)}`);
     const isTruncation = /Unterminated|Unexpected end/i.test(parseErr.message);
-    const retryTokens = isTruncation ? 16000 : 8000;
+    // Il ramo non-troncamento riusa lo stesso budget del primo tentativo (era
+    // un 8000 letterale sganciato dalla chiamata che stava ripetendo): una
+    // corruzione strutturale non e' un problema di lunghezza, e alzare il tetto
+    // qui rimetterebbe fuori i modelli con output cap basso proprio al retry.
+    const retryTokens = isTruncation ? 16000 : IT_GENERATION_MAX_TOKENS;
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
