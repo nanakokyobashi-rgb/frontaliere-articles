@@ -71,7 +71,7 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
     const alt = meta[`blog.article.${a.id}.imageAlt`];
     const lastmod = a.updatedAt || a.date || '';
     const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
-    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${slug}/</loc>`];
+    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${xmlEsc(slug)}/</loc>`];
     if (img) {
       parts.push(`    <image:image>`);
       parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
@@ -83,12 +83,12 @@ export function buildSitemap(entries, section, slugMap, meta, shadowed = new Set
       const s2 = slugMap?.[a.id]?.[loc];
       if (s2) {
         parts.push(
-          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
+          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
         );
       }
     }
     parts.push(
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${slug}/" />`,
+      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${xmlEsc(slug)}/" />`,
     );
     if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
     parts.push(`    <changefreq>monthly</changefreq>`);

@@ -316,6 +316,59 @@ describe('lengthBudgetSource — le due scale restano appaiate', () => {
   });
 });
 
+/**
+ * follow-up(#164): un `g.pct` mancante o mal formattato non deve promuovere
+ * un'ancora `pct:NaN` — la stessa classe di ancora impossibile che questo file
+ * pinna sopra per la soglia editoriale ±0,3%, qui per il caso specifico del
+ * genere. `String(g.pct).replace('.', ',')` senza validazione trasformava
+ * "12.3.4" in "12,3.4%": testo che matcha ancora il pattern digit-led di
+ * `extractSourceAnchors` ma che `parseItalianNumber` non sa risolvere.
+ */
+describe('genderPct — pct mancante o non numerico non genera un\'ancora impossibile', () => {
+  const BROKEN_GENDER = {
+    ...BFS_2026_Q2,
+    genderSnapshot: [
+      { name: 'Uomini', value: 48700, pct: '12.3.4' },
+      { name: 'Donne', value: 30420 },
+    ],
+  };
+  const brokenPrompt = formatStatsBfsPrompt('2026-Q2', BROKEN_GENDER);
+
+  it('non promuove pct:NaN ad ancora obbligatoria', () => {
+    expect([...extractSourceAnchors(brokenPrompt)]).not.toContain('pct:NaN');
+  });
+
+  it('non scrive "NaN%" né la stringa rotta nel prompt', () => {
+    expect(brokenPrompt).not.toMatch(/NaN/);
+    expect(brokenPrompt).not.toContain('12,3.4%');
+  });
+
+  it('mantiene comunque il valore assoluto del genere', () => {
+    expect(brokenPrompt).toContain('Uomini (48.700)');
+    expect(brokenPrompt).toContain('Donne (30.420)');
+  });
+
+  // `Number('')`, `Number('   ')` e `Number([])` valgono tutti 0 in JS, e
+  // `Number.isFinite(0)` e' true: senza un guard esplicito su stringa vuota,
+  // questi input pubblicano uno "0%" fabbricato — indistinguibile da uno zero
+  // legittimo — invece di omettere la percentuale come per un pct assente.
+  const EMPTY_GENDER = {
+    ...BFS_2026_Q2,
+    genderSnapshot: [
+      { name: 'Uomini', value: 48700, pct: '' },
+      { name: 'Donne', value: 30420, pct: '   ' },
+    ],
+  };
+  const emptyPrompt = formatStatsBfsPrompt('2026-Q2', EMPTY_GENDER);
+
+  it('pct stringa vuota o solo spazi non fabbrica uno 0% falso', () => {
+    expect(emptyPrompt).not.toContain('Uomini 0%');
+    expect(emptyPrompt).not.toContain('Donne 0%');
+    expect(emptyPrompt).toContain('Uomini (48.700)');
+    expect(emptyPrompt).toContain('Donne (30.420)');
+  });
+});
+
 describe('buildStatsBfsPromptContent resta solo I/O', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
   const io = sliceFn(src, 'async function buildStatsBfsPromptContent(quarter) {');

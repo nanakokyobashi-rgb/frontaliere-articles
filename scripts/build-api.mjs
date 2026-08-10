@@ -566,7 +566,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
         continue;
       }
 
-      const itLoc = `${SITE}${paths.it}${slug}/`;
+      const itLoc = `${SITE}${paths.it}${xmlEsc(slug)}/`;
       const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
 
       const parts = [`  <url>`, `    <loc>${itLoc}</loc>`, `    <lastmod>${today}</lastmod>`];
@@ -574,7 +574,7 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
         const s2 = slugMap?.[a.id]?.[loc];
         if (s2) {
           parts.push(
-            `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
+            `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${xmlEsc(s2)}/" />`,
           );
         }
       }

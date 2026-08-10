@@ -151,6 +151,11 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+// Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
+// corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
+// dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
+// Vedi l'intestazione del modulo per il perche' non sono tre guard.
+import { cleanFaqPairs, sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 // L'emettitore del blocco meta per-locale. Estratto da qui (era `buildMetaBlock`
 // + `escapeForSingleQuoteTS` piu' sotto) perche' e' l'unico punto in cui il
 // corpus decide quali campi per-locale diventano superficie pubblica, e dentro
@@ -403,6 +408,48 @@ const SVIZZERA_TOPICAL_KEYWORDS = [
 function sectionTopicalKeywords(national) {
   const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
   return isNational ? SVIZZERA_TOPICAL_KEYWORDS : TOPICAL_KEYWORDS;
+}
+
+// ── Admission lexicon (issue #189) ──────────────────────────
+// TOPICAL_KEYWORDS is read for two different jobs that must not share a
+// lexicon: RANKING (ordering already-safe candidates, e.g. the svizzera
+// restore backstop below) and ADMISSION (deciding whether a candidate is
+// worth paying for a full generation attempt — the headline topical-gate and
+// the pre-LLM source pre-filter in generateAndValidateArticle). The
+// admission gates feed candidates toward REGOLA #0 / the frontaliere-density
+// check (FRONTALIERE_DENSITY_TERMS above), which has no events/culture
+// terms. A candidate that only matches 'festival'/'sagra'/etc. therefore
+// sailed through admission and was rejected only after a full paid
+// generation — the Locarno Film Festival case measured in #189. The 8
+// events/culture tokens (added 2026-07-17, see the comment on
+// TOPICAL_KEYWORDS above) are excluded from the admission lexicon; they stay
+// in TOPICAL_KEYWORDS for ranking, where they are justified by real traffic
+// data. Scoped to the frontaliere section only: the national (svizzera)
+// section has no equivalent downstream density gate (both checks above are
+// `if (IS_FRONTALIERE)`-only), so there is no contradiction to fix there.
+const FRONTALIERE_EVENTS_CULTURE_KEYWORDS = new Set([
+  'festival', 'sagra', 'mercatin', 'fiera', 'manifestazion',
+  'spettacol', 'rassegna', 'concert',
+]);
+const FRONTALIERE_ADMISSION_KEYWORDS = TOPICAL_KEYWORDS.filter(
+  (k) => !FRONTALIERE_EVENTS_CULTURE_KEYWORDS.has(k)
+);
+
+function sectionAdmissionKeywords(national) {
+  const isNational = national === undefined ? !IS_FRONTALIERE : Boolean(national);
+  return isNational ? SVIZZERA_TOPICAL_KEYWORDS : FRONTALIERE_ADMISSION_KEYWORDS;
+}
+
+function hasAdmissionSignal(text, national) {
+  if (!text || typeof text !== 'string') return false;
+  const lower = text.toLowerCase();
+  return sectionAdmissionKeywords(national).some(k => lower.includes(k));
+}
+
+function countAdmissionHits(text, national) {
+  if (!text || typeof text !== 'string') return 0;
+  const lower = text.toLowerCase();
+  return sectionAdmissionKeywords(national).reduce((acc, k) => acc + (lower.split(k).length - 1), 0);
 }
 
 function hasTopicalSignal(text, national) {
@@ -1412,6 +1459,30 @@ const RUN_REPORT = {
     attemptsRecent: 0,
     attemptsUndated: 0,
   },
+  // ── Saturazione del pool evergreen (2026-08-10) ─────────────────────
+  // La saturazione del pool e' il difetto che NON si vede: il run esce 0,
+  // il summary del workflow dice `Generated: true` perche' il push e'
+  // riuscito, e l'unica traccia e' una riga in italiano in mezzo al log.
+  // La sezione `svizzera` e' rimasta cosi' per giorni. Questi contatori
+  // sono la meta' machine-readable, sul modello di PRESPEND_GATE_*: chi
+  // costruisce il watchdog legge `EVERGREEN_POOL_OUTCOME` (una per run che
+  // ha raggiunto la Fase 2, cioe' il denominatore) e `EVERGREEN_POOL_SATURATED`
+  // (solo quando il pool si e' davvero esaurito, con il PERCHE' ripartito
+  // per motivo di scarto).
+  evergreenPool: {
+    ran: false,
+    size: 0,
+    checked: 0,
+    // Motivi di scarto, mutuamente esclusivi e nell'ordine in cui il
+    // pre-flight li applica.
+    skippedBanned: 0, // ledger keywords[] — duplicato confermato o topic-gate abort
+    skippedStruck: 0, // ledger strikes{} ≥ EVERGREEN_STRIKE_LIMIT
+    skippedTopicCoverage: 0, // topic-coverage-guard: stesso mestiere entro la finestra
+    skippedTitleJaccard: 0, // Jaccard sul titolo di un articolo esistente
+    skippedFamily: 0, // evergreenTopicFamily: stessa famiglia (spesso satura)
+    saturated: false,
+    stage: null, // 'preflight' | 'retry' — dove si e' esaurito
+  },
   duplicateReasonBreakdown: {},
   // Pre-generation pool-exhaustion diagnostics (2026-07-21): the Fase 1 news
   // pool routinely empties before any headline reaches generation, silently
@@ -1594,6 +1665,23 @@ function finalizeRunReport(status, extra = {}) {
     );
   }
 
+  // ── Esito del pool evergreen ────────────────────────────────────────
+  // Emessa da OGNI percorso terminale che ha raggiunto la Fase 2, esattamente
+  // come la riga sopra: e' questa a fare da denominatore, altrimenti
+  // `EVERGREEN_POOL_SATURATED` da sola non dice se una saturazione e' un caso
+  // isolato o lo stato stabile della sezione (che e' quello che e' successo:
+  // 4 run su 4, e nessun segnale). Volutamente NON emessa dai run che non
+  // sono arrivati al fallback evergreen — non sono evidenza in nessuna
+  // direzione.
+  if (RUN_REPORT?.evergreenPool?.ran) {
+    const p = RUN_REPORT.evergreenPool;
+    console.error(
+      `EVERGREEN_POOL_OUTCOME saturated=${p.saturated ? 1 : 0}`
+      + ` stage=${p.stage || 'none'} pool=${p.size} checked=${p.checked}`
+      + ` status=${RUN_REPORT.status} section=${RUN_REPORT.section}`,
+    );
+  }
+
   try {
     const dir = path.dirname(resolve(CREATE_ARTICLE_REPORT_FILE));
     mkdirSync(dir, { recursive: true });
@@ -1601,6 +1689,62 @@ function finalizeRunReport(status, extra = {}) {
   } catch (e) {
     console.error(`  ⚠️  Impossibile scrivere ${CREATE_ARTICLE_REPORT_FILE}: ${e.message}`);
   }
+}
+
+/**
+ * Attribuisce uno scarto del pre-flight evergreen al motivo che lo ha causato,
+ * leggendo il `signal` che `preFlightEvergreenCheck` gia' restituisce
+ * (`topic_coverage:<id>` | `title_jaccard` | `evergreen_family:<famiglia>`).
+ *
+ * Il motivo e' l'unica parte che dice cosa FARE quando un pool si esaurisce, e
+ * i tre chiedono interventi opposti: `title_jaccard` dominante significa pool
+ * davvero coperto (serve allargarlo), `evergreen_family` dominante significa
+ * che i candidati cadono in una famiglia satura (l'allargamento non serve a
+ * niente, vanno riformulati), `topic_coverage` significa che aspettano solo la
+ * fine della finestra di 90 giorni.
+ */
+function countEvergreenPreflightDrop(signal) {
+  const p = RUN_REPORT?.evergreenPool;
+  if (!p) return;
+  const s = String(signal || '');
+  if (s.startsWith('topic_coverage')) p.skippedTopicCoverage += 1;
+  else if (s.startsWith('evergreen_family')) p.skippedFamily += 1;
+  else p.skippedTitleJaccard += 1;
+}
+
+/**
+ * Dichiara che il pool evergreen si e' esaurito, in una riga grep-abile.
+ *
+ * PERCHE' ESISTE. Fino al 2026-08-10 la saturazione era invisibile per
+ * costruzione: il run esce 0, il workflow riporta `Generated: true` (il push
+ * e' riuscito, semplicemente senza articolo dentro), e l'unica traccia era una
+ * frase in italiano — «Tutte le keyword evergreen risultano gia' coperte» — in
+ * mezzo a centinaia di righe. La sezione `svizzera` e' rimasta cosi' per
+ * giorni, su due slot cron l'ora, senza che niente lo dicesse.
+ *
+ * Stessa forma di PRESPEND_GATE_TOTAL_REJECTION, e per la stessa ragione:
+ *
+ *   grep -c 'EVERGREEN_POOL_SATURATED'                     → quante volte
+ *   grep -c 'EVERGREEN_POOL_SATURATED section=svizzera'    → …su quale sezione
+ *   grep    'EVERGREEN_POOL_OUTCOME'                       → il denominatore
+ *
+ * I contatori per motivo sono nella riga perche' «il pool e' esaurito» da solo
+ * non distingue un pool troppo piccolo da un pool scritto male (vedi
+ * countEvergreenPreflightDrop).
+ */
+function reportEvergreenPoolSaturation(stage) {
+  const p = RUN_REPORT?.evergreenPool;
+  if (!p) return;
+  p.saturated = true;
+  p.stage = stage;
+  console.error(
+    `EVERGREEN_POOL_SATURATED section=${SECTION_NAME} stage=${stage}`
+    + ` pool=${p.size} checked=${p.checked}`
+    + ` skipped_banned=${p.skippedBanned} skipped_struck=${p.skippedStruck}`
+    + ` skipped_topic_coverage=${p.skippedTopicCoverage}`
+    + ` skipped_title_jaccard=${p.skippedTitleJaccard}`
+    + ` skipped_family=${p.skippedFamily}`,
+  );
 }
 
 // Map common AI-hallucinated categories to valid ones
@@ -2670,6 +2814,199 @@ function buildDynamicEvergreenTopicsSvizzera() {
       out.push({
         keyword: `${base.k} ${addon}`,
         angle: `${base.a} Focus sul ${addon} con dati specifici e confronto nazionale.`,
+      });
+    }
+  }
+  return out;
+}
+
+// ── Pool strutturale nazionale — sezione `svizzera` (2026-08-10) ─────────
+//
+// IL DIFETTO CHE RIPARA. Il pool `svizzera` era `PRIORITY_EVERGREEN_TOPICS_SVIZZERA`
+// (20 voci scritte a mano) + `buildDynamicEvergreenTopicsSvizzera()` (10 pilastri
+// × 9 = 90): 110 keyword in tutto, contro le 537 del lato frontaliere, che ha in
+// piu' `buildStructuralEvergreenTopics()`. Al 2026-08-10 il ledger aveva 90 di
+// quelle 110 keyword bannate come duplicato confermato, e ogni run scheduled
+// della sezione finiva in ~50 secondi con «Tutte le keyword evergreen risultano
+// gia' coperte dal pre-flight» (run 31402855968, 31403653098, 31404256910,
+// 31405881104). Due dei quattro slot cron orari sono `svizzera`, quindi erano
+// no-op garantiti — e la catena self-trigger, che alterna sezione a ogni anello,
+// moriva li' perche' un run senza articolo non tocca `content/`.
+//
+// PERCHE' CRESCE INVECE DI SATURARE. Il pool vecchio non poteva crescere da
+// solo: 8 cantoni su 26, l'anno interpolato nella keyword, nessuna dimensione
+// combinatoria. Qui la dimensione e' il CANTONE, che e' anche il motivo per cui
+// l'articolo esiste: quasi tutto cio' che questi pilastri descrivono e'
+// amministrato dal cantone (aliquote, premi, permessi, assegni, scuola,
+// naturalizzazione, patente, successioni) e la risposta cambia davvero da un
+// cantone all'altro. Non e' una variante di stile sullo stesso contenuto.
+//
+// TRE SCELTE CHE NON SONO OVVIE, e la misura che le regge.
+//
+// 1. NIENTE ANNO NELLA KEYWORD. `buildDynamicEvergreenTopics*` interpola
+//    `new Date().getFullYear()`. Sembra innocuo e non lo e':
+//      - il ledger `data/topic-candidates-evergreen-rejected.json` e' indicizzato
+//        sulla stringa letterale della keyword, quindi il 1° gennaio ogni ban e
+//        ogni strike accumulato diventa irraggiungibile e il run ripaga un ciclo
+//        LLM intero per riscoprire un duplicato che sapeva gia';
+//      - `evergreenAngleTokens` teneva '2025' e '2026' in una stoplist letterale,
+//        cioe' stantia per costruzione: dal 2027 l'anno sarebbe tornato un token
+//        DISTINTIVO, abbassando la similarita' di famiglia e riaprendo come nuovi
+//        candidati che sono near-duplicate (ora e' un test su 4 cifre, vedi li').
+//    Questi 20 pilastri sono nazionali e non datati (permesso C, naturalizzazione,
+//    successioni): l'anno non aggiunge intento di ricerca, aggiunge solo il
+//    riazzeramento della memoria. Fuori.
+//
+// 2. NIENTE DIMENSIONE PROFESSIONE, benche' `PROFESSION_TAXONOMY` sia gia' qui e
+//    sia la dimensione che regge il pool frontaliere. Misurato: `topic-coverage-guard`
+//    chiude su `professionTopicKey`, che e' indicizzato SOLO sul mestiere ed e'
+//    cieco alla geografia. `stipendio infermiere canton Ginevra` e
+//    `frontaliere infermiere ticino stipendio requisiti` hanno la stessa chiave:
+//    i 25 cantoni collasserebbero su UNO slot per mestiere ogni 90 giorni, quindi
+//    la dimensione non moltiplica niente — e quel poco che passasse ruberebbe lo
+//    slot al pool frontaliere, che su quella dimensione ci vive.
+//
+// 3. TICINO ESCLUSO dai 26 cantoni. E' la sezione sorella a possedere il Ticino,
+//    con ~3.600 articoli: una keyword `… canton Ticino` sarebbe respinta dal
+//    pre-flight nel 99% dei casi, e nell'1% restante pubblicherebbe in
+//    `/articoli-svizzera/` un pezzo che appartiene all'altra sezione. E' lo stesso
+//    errore corretto il 2026-07-21 (vedi il commento a PRIORITY_EVERGREEN_TOPICS_SVIZZERA),
+//    ri-derivato per via combinatoria invece che a mano.
+//
+// NOTA PER CHI MODIFICA I PILASTRI. `evergreenTopicFamily` (piu' sotto) mappa
+// certe combinazioni di token su «famiglie», e sei di queste sono in
+// SATURATED_FAMILIES: un candidato che ci cade viene dichiarato duplicato contro
+// QUALUNQUE articolo esistente della stessa famiglia, senza soglia. La coppia
+// `permess` + `residenz|soggiorn` e' una di quelle — ed e' esattamente perche'
+// `permesso di soggiorno svizzera tipologie B C L` (lista statica) e' morta
+// all'origine. I pilastri qui sotto sono scritti per non cadere in nessuna
+// famiglia satura, keyword E angolo; `evergreen-brief-section-aware.test.mjs`
+// lo asserisce, cosi' una riscrittura distratta non lo perde in silenzio.
+function buildStructuralEvergreenTopicsSvizzera() {
+  // I 26 cantoni meno il Ticino (vedi punto 3 sopra). I codici servono al test
+  // che confronta questa lista con `generator/data/canton-url-slugs.json`: senza,
+  // un cantone dimenticato restringerebbe il pool senza che niente lo dica.
+  const CANTONI = [
+    { code: 'ZH', name: 'Zurigo' },
+    { code: 'BE', name: 'Berna' },
+    { code: 'LU', name: 'Lucerna' },
+    { code: 'UR', name: 'Uri' },
+    { code: 'SZ', name: 'Svitto' },
+    { code: 'OW', name: 'Obvaldo' },
+    { code: 'NW', name: 'Nidvaldo' },
+    { code: 'GL', name: 'Glarona' },
+    { code: 'ZG', name: 'Zugo' },
+    { code: 'FR', name: 'Friburgo' },
+    { code: 'SO', name: 'Soletta' },
+    { code: 'BS', name: 'Basilea Città' },
+    { code: 'BL', name: 'Basilea Campagna' },
+    { code: 'SH', name: 'Sciaffusa' },
+    { code: 'AR', name: 'Appenzello Esterno' },
+    { code: 'AI', name: 'Appenzello Interno' },
+    { code: 'SG', name: 'San Gallo' },
+    { code: 'GR', name: 'Grigioni' },
+    { code: 'AG', name: 'Argovia' },
+    { code: 'TG', name: 'Turgovia' },
+    { code: 'VD', name: 'Vaud' },
+    { code: 'VS', name: 'Vallese' },
+    { code: 'NE', name: 'Neuchâtel' },
+    { code: 'GE', name: 'Ginevra' },
+    { code: 'JU', name: 'Giura' },
+  ];
+
+  // `%c` → «canton <nome>» nella keyword; `%C` → «nel Cantone di <nome>»
+  // nell'angolo. Ogni pilastro e' un tema la cui risposta e' fissata da una
+  // legge o da un ufficio CANTONALE: e' quello a rendere le 25 varianti
+  // articoli diversi e non 25 riscritture dello stesso.
+  const PILLARS = [
+    {
+      k: 'imposte cantonali %c aliquote e deduzioni',
+      a: 'Imposte cantonali e comunali %C: aliquote, scaglioni, deduzioni ammesse, scadenze di consegna e portale online dell\'amministrazione fiscale cantonale.',
+    },
+    {
+      k: 'premi cassa malati %c e riduzione premi',
+      a: 'Premi dell\'assicurazione malattia obbligatoria %C: fasce di premio, franchigie, modelli alternativi e requisiti per ottenere la riduzione dei premi.',
+    },
+    {
+      k: 'permesso di dimora B %c requisiti e rinnovo',
+      a: 'Permesso di dimora B %C: requisiti, documenti da produrre, durata, procedura di rinnovo e ufficio cantonale della migrazione competente.',
+    },
+    {
+      k: 'permesso di domicilio C %c requisiti e domanda',
+      a: 'Permesso di domicilio C %C: anni richiesti, criteri di integrazione, conoscenze linguistiche, procedura di domanda e casi di rilascio anticipato.',
+    },
+    {
+      k: 'permesso L di breve durata %c validità e proroga',
+      a: 'Permesso L di breve durata %C: durata massima, condizioni di proroga, passaggio al permesso di dimora e vincoli legati al datore di lavoro.',
+    },
+    {
+      k: 'indennità di disoccupazione %c iscrizione URC',
+      a: 'Indennità di disoccupazione %C: iscrizione all\'URC, periodo di contribuzione minimo, calcolo dell\'indennità giornaliera, obblighi di ricerca impiego e provvedimenti di reinserimento professionale.',
+    },
+    {
+      k: 'assegni familiari %c importi e domanda',
+      a: 'Assegni familiari e di formazione %C: importi mensili per figlio, condizioni di diritto, cassa di compensazione competente e procedura di domanda.',
+    },
+    {
+      k: 'sistema scolastico %c iscrizione e cicli',
+      a: 'Scuola dell\'obbligo %C: cicli, età di iscrizione, calendario scolastico, lingue di insegnamento e passaggio alle scuole medie superiori.',
+    },
+    {
+      k: 'apprendistato e formazione professionale %c',
+      a: 'Apprendistato e formazione professionale %C: come si trova un posto di tirocinio, contratto di tirocinio, retribuzione dell\'apprendista e maturità professionale.',
+    },
+    {
+      k: 'borse di studio %c requisiti e importi',
+      a: 'Borse di studio e prestiti allo studio %C: requisiti, importi massimi, termini di presentazione e ufficio cantonale competente.',
+    },
+    {
+      k: 'asilo nido e custodia bambini %c costi',
+      a: 'Custodia dei bambini %C: asili nido, famiglie diurne, doposcuola, tariffe calcolate sul reddito e sussidi cantonali disponibili.',
+    },
+    {
+      k: 'comprare casa %c prezzi e mutuo ipotecario',
+      a: 'Acquisto di un\'abitazione %C: prezzi medi, fondi propri richiesti, sostenibilità del mutuo ipotecario, imposta sui trapassi e spese notarili.',
+    },
+    {
+      k: 'mercato degli affitti %c canoni medi e diritto di locazione',
+      a: 'Affitti %C: canoni medi per zona, deposito di garanzia, contestazione del canone iniziale, disdetta e autorità di conciliazione in materia di locazione.',
+    },
+    {
+      k: 'naturalizzazione %c requisiti e procedura',
+      a: 'Naturalizzazione ordinaria %C: anni richiesti dal cantone e dal comune, test di integrazione e di lingua, tasse da versare e durata della procedura.',
+    },
+    {
+      k: 'avs e prestazioni complementari %c cassa di compensazione',
+      a: 'Primo pilastro %C: cassa di compensazione cantonale, calcolo della rendita AVS, lacune contributive e prestazioni complementari a copertura del minimo vitale.',
+    },
+    {
+      k: 'abbonamenti trasporti pubblici %c zone e tariffe',
+      a: 'Trasporti pubblici %C: comunità tariffaria, zone, abbonamenti annuali e mensili, combinazione con metà-prezzo e AG, sconti per studenti e apprendisti.',
+    },
+    {
+      k: 'aprire un\'attività %c registro di commercio e costi',
+      a: 'Avviare un\'attività %C: scelta della forma giuridica, iscrizione al registro di commercio, capitale minimo, tasse di iscrizione e obblighi assicurativi.',
+    },
+    {
+      k: 'salari e mercato del lavoro %c settori e livelli',
+      a: 'Mercato del lavoro %C: settori che assumono, livelli salariali per grado di formazione, contratti collettivi in vigore e salario minimo dove previsto.',
+    },
+    {
+      k: 'patente di guida %c conversione ed esami',
+      a: 'Patente di guida %C: conversione della licenza estera, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente.',
+    },
+    {
+      k: 'imposta di successione e donazione %c aliquote',
+      a: 'Imposta di successione e di donazione %C: aliquote per grado di parentela, esenzioni per coniuge e discendenti, dichiarazione e termini da rispettare.',
+    },
+  ];
+
+  const out = [];
+  for (const c of CANTONI) {
+    for (const p of PILLARS) {
+      out.push({
+        keyword: p.k.split('%c').join(`canton ${c.name}`),
+        angle: p.a.split('%C').join(`nel Cantone di ${c.name}`),
       });
     }
   }
@@ -4625,8 +4962,27 @@ function formatStatsBfsPrompt(quarter, data) {
   const ages = Array.isArray(data.ages) ? data.ages : [];
   const ageTable = ages.map((a) => `- ${a.name}: ${fmt(a.value)}`).join('\n');
   const gender = Array.isArray(data.genderSnapshot) ? data.genderSnapshot : [];
-  const genderPct = (g) => `${String(g.pct).replace('.', ',')}%`;
-  const genderLine = gender.map((g) => `${g.name} ${genderPct(g)} (${fmt(g.value)})`).join(' · ');
+  // g.pct arriva da Firestore senza garanzia di forma: mancante, non numerico, o
+  // una stringa già mal formattata (es. "12.3.4") che `String().replace('.', ',')`
+  // trasformerebbe in "12,3.4%" — testo che matcha ancora il pattern digit-led di
+  // `extractSourceAnchors` ma che `parseItalianNumber` non sa risolvere, producendo
+  // l'ancora impossibile `pct:NaN` (nessun testo la soddisfa mai). Un pct non
+  // finito qui non genera affatto la percentuale, invece di generarne una rotta.
+  const genderPct = (g) => {
+    // `Number('')`, `Number('   ')` e `Number([])` valgono 0 ed `Number.isFinite(0)`
+    // e' true: senza questo guard un pct assente/vuoto pubblicherebbe uno "0%"
+    // fabbricato, indistinguibile da uno zero reale.
+    const raw = String(g.pct ?? '').trim();
+    if (raw === '') return null;
+    const n = Number(raw.replace(',', '.'));
+    return Number.isFinite(n) ? `${n.toString().replace('.', ',')}%` : null;
+  };
+  const genderLine = gender
+    .map((g) => {
+      const pct = genderPct(g);
+      return `${g.name}${pct ? ` ${pct}` : ''} (${fmt(g.value)})`;
+    })
+    .join(' · ');
 
   const trendDirection = qoqPct == null
     ? 'stabile'
@@ -5173,7 +5529,7 @@ async function scanNewsSources() {
         droppedAnchor += 1;
         continue;
       }
-      if (dropNonTopical && !hasTopicalSignal(text)) {
+      if (dropNonTopical && !hasAdmissionSignal(text)) {
         droppedTopic += 1;
         continue;
       }
@@ -6292,10 +6648,27 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     if (!Array.isArray(rawFaq)) {
       console.error('  ⚠️  FAQ non è un array, lo rimuovo');
     } else {
-      const validFaq = rawFaq.filter(pair =>
-        pair && typeof pair.q === 'string' && typeof pair.a === 'string' &&
-        pair.q.length > 10 && pair.a.length > 20
-      ).slice(0, 7);
+      // ── Perche' il filtro di FORMA non bastava ─────────────────────────
+      //
+      // Il filtro qui sotto era `q.length > 10 && a.length > 20`. La domanda
+      // segnaposto dello schema («Domanda frequente 1 basata sui fatti
+      // dell'articolo?») e' lunga 50 caratteri e la sua risposta 44: passavano
+      // entrambe, e la riga di log stampava «✅ FAQ: 3 coppie valide» mentre le
+      // tre coppie ERANO lo schema. Una FAQ segnaposto e' strutturalmente
+      // valida — si contano le coppie e si passa — e da qui finiva dritta nello
+      // schema FAQPage (engine/ogPagesPlugin.ts:1354) come structured data
+      // falso verso i motori di ricerca. Misurato: 24 articoli live.
+      //
+      // `cleanFaqPairs` aggiunge il controllo di CONTENUTO e tiene la soglia
+      // delle 2 coppie dov'era, perche' e' la stessa dell'engine.
+      const { pairs: cleaned, repaired, dropped } = cleanFaqPairs(rawFaq);
+      if (dropped.length) {
+        console.error(`  ⚠️  FAQ: ${dropped.length} coppie scartate (${dropped.map((d) => d.reason).join('; ')})`);
+      }
+      if (repaired) {
+        console.error(`  ✍️  FAQ: ${repaired} coppie ripulite dall'etichetta dello schema`);
+      }
+      const validFaq = cleaned ? cleaned.slice(0, 7) : [];
       if (validFaq.length < 2) {
         console.error(`  ⚠️  FAQ troppo poche (${validFaq.length}), rimuovo`);
       } else {
@@ -7732,12 +8105,13 @@ function optimizeSeoMetadata(data) {
     SEO_OG_DESCRIPTION_MAX,
   );
 
-  const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida', '2026']);
+  const STOP = new Set(['frontaliere', 'frontalieri', 'ticino', 'svizzera', 'italia', 'della', 'delle', 'degli', 'degli', 'come', 'guida']);
+  const isStopYear = (w) => /^(19|20)\d{2}$/.test(w);
   const terms = `${it.title || ''} ${it.excerpt || ''} ${data.id || ''}`
     .toLowerCase()
     .replace(/[^a-z0-9àèéìòùäöüßç\s-]/gi, ' ')
     .split(/\s+/)
-    .filter((w) => w.length > 3 && !STOP.has(w));
+    .filter((w) => w.length > 3 && !STOP.has(w) && !isStopYear(w));
 
   const uniqueTerms = [];
   for (const t of terms) {
@@ -7786,13 +8160,22 @@ function evergreenTopicFamily(text) {
 
 function evergreenAngleTokens(text) {
   const structural = new Set([
-    'frontali', 'frontalier', 'svizzer', 'ital', 'ticin', '2025', '2026',
+    'frontali', 'frontalier', 'svizzer', 'ital', 'ticin',
     'guida', 'pratic', 'aggiornat', 'confront', 'simulazion', 'scenar',
     'regol', 'quando', 'come', 'cosa',
   ]);
+  // L'anno e' strutturale come gli altri, ma era elencato a mano ('2025',
+  // '2026') — cioe' stantio per costruzione. `buildDynamicEvergreenTopics*`
+  // interpola `new Date().getFullYear()` in ogni keyword: al primo gennaio
+  // 2027 l'anno sarebbe uscito dalla stoplist ed entrato nell'insieme
+  // DISTINTIVO, abbassando la sovrapposizione di famiglia di ogni candidato e
+  // riaprendo come nuovi centinaia di near-duplicate. Un test su 4 cifre
+  // chiude la classe: per l'anno corrente e' un no-op esatto (2025 e 2026
+  // erano gia' filtrati), quindi non cambia nessuna decisione di oggi.
+  const isYear = (w) => /^(19|20)\d{2}$/.test(w);
   return filterDistinctive(tokenizeIt(text))
     .map(normalizeItWord)
-    .filter((w) => w.length > 2 && !structural.has(w));
+    .filter((w) => w.length > 2 && !structural.has(w) && !isYear(w));
 }
 
 function preFlightEvergreenTopicCheck(candidate, existingArticles) {
@@ -10543,9 +10926,21 @@ async function main() {
       // every /articoli-svizzera/ static article ended up Ticino-scoped
       // regardless of the national framing wrapped around it. `svizzera` now
       // draws from its own national pool (all-canton keywords) instead.
+      //
+      // 2026-08-10: `svizzera` ha ora anche il proprio pool strutturale
+      // (`buildStructuralEvergreenTopicsSvizzera`, 20 pilastri × 25 cantoni).
+      // Senza, la sezione stava ferma a 110 keyword contro le 537 frontaliere,
+      // ne aveva 90 gia' bannate, e OGNI run scheduled usciva in ~50s con
+      // «Tutte le keyword evergreen risultano gia' coperte dal pre-flight» —
+      // due dei quattro slot cron orari sprecati e la catena self-trigger
+      // interrotta a ogni anello svizzero. Vedi il commento sul builder.
       const topicPool = IS_FRONTALIERE
         ? [...PRIORITY_EVERGREEN_TOPICS, ...buildDynamicEvergreenTopics(), ...buildStructuralEvergreenTopics()]
-        : [...PRIORITY_EVERGREEN_TOPICS_SVIZZERA, ...buildDynamicEvergreenTopicsSvizzera()];
+        : [
+          ...PRIORITY_EVERGREEN_TOPICS_SVIZZERA,
+          ...buildDynamicEvergreenTopicsSvizzera(),
+          ...buildStructuralEvergreenTopicsSvizzera(),
+        ];
       const weekNum = Math.floor((Date.now() - new Date('2025-01-06').getTime()) / (7 * 24 * 60 * 60 * 1000));
       const baseIndex = weekNum % topicPool.length;
       const totalTopics = topicPool.length;
@@ -10557,6 +10952,9 @@ async function main() {
       // each run otherwise starts with zero memory of prior failures.
       let evergreenRejectedTracker = _loadEvergreenRejectedTracker();
 
+      RUN_REPORT.evergreenPool.ran = true;
+      RUN_REPORT.evergreenPool.size = totalTopics;
+
       // Pre-flight check — find first keyword that doesn't conflict with existing articles
       let selectedTopic = null;
       let selectedOffset = -1;
@@ -10565,12 +10963,24 @@ async function main() {
       for (let offset = 0; offset < totalTopics; offset++) {
         const idx = (baseIndex + offset) % totalTopics;
         const candidate = topicPool[idx];
+        RUN_REPORT.evergreenPool.checked += 1;
         if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
+          // Ban e strike hanno cause diverse — un duplicato confermato non si
+          // ripara mai, uno strike da quality-reject si — e un pool che muore
+          // per l'uno o per l'altro chiede due interventi diversi
+          // (allargarlo vs `reset-evergreen-strikes.mjs`). Contarli insieme
+          // rendeva la diagnosi indistinguibile.
+          if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+            RUN_REPORT.evergreenPool.skippedBanned += 1;
+          } else {
+            RUN_REPORT.evergreenPool.skippedStruck += 1;
+          }
           console.error(`   ⏭️  [${idx}] "${candidate.keyword}" → già rigettato come duplicato in run precedente — skip`);
           continue;
         }
         const check = preFlightEvergreenCheck(candidate);
         if (check.duplicate) {
+          countEvergreenPreflightDrop(check.signal);
           console.error(`   ⏭️  [${idx}] "${candidate.keyword}" → simile a "${check.existingTitle}" [${check.existingId}] (${(check.sim * 100).toFixed(0)}%) — skip`);
         } else {
           console.error(`   ✅ [${idx}] "${candidate.keyword}" → nessun conflitto — selezionato\n`);
@@ -10581,6 +10991,7 @@ async function main() {
       }
 
       if (!selectedTopic) {
+        reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
         process.exit(0);
@@ -10693,11 +11104,18 @@ async function main() {
             if (triedOffsets.has(realOffset)) continue;
             const idx = (baseIndex + realOffset) % totalTopics;
             const candidate = topicPool[idx];
+            RUN_REPORT.evergreenPool.checked += 1;
             if (_isEvergreenRejected(evergreenRejectedTracker, candidate.keyword)) {
+              if ((evergreenRejectedTracker?.keywords || []).includes(candidate.keyword)) {
+                RUN_REPORT.evergreenPool.skippedBanned += 1;
+              } else {
+                RUN_REPORT.evergreenPool.skippedStruck += 1;
+              }
               triedOffsets.add(realOffset);
               continue;
             }
             const check = preFlightEvergreenCheck(candidate);
+            if (check.duplicate) countEvergreenPreflightDrop(check.signal);
             if (!check.duplicate) {
               selectedTopic = candidate;
               selectedOffset = realOffset;
@@ -10708,6 +11126,7 @@ async function main() {
           }
 
           if (!selectedTopic) {
+            reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
             process.exit(0);
@@ -10768,7 +11187,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Env-gated for rollback.
   const dropOffTopicSource = (process.env.SOURCE_DROP_OFF_TOPIC ?? '1') !== '0';
   if (dropOffTopicSource && typeof pageContent === 'string' && pageContent.length > 0) {
-    const sourceHits = countTopicalHits(pageContent);
+    const sourceHits = countAdmissionHits(pageContent);
     if (sourceHits === 0) {
       console.error(`\n⏭️  Source non frontaliere-rilevante (pre-LLM): 0 topical hits sul testo sorgente (URL: ${url}). Provo un altro headline.`);
       RUN_REPORT.notes.push(`Source skipped pre-LLM: 0 topical hits (url=${url})`);
@@ -11503,6 +11922,25 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   console.error(`   Slug IT: ${data.slugs.it}`);
   console.error('');
 
+  // Step 3a.1: Reject/repair prompt-schema placeholders leaked into any
+  // published field (title/excerpt/body1-3/imageAlt/seo.*), same guard
+  // registerArticleFiles() runs for the four secondary producers. This IS
+  // the primary flow's write path — it writes files directly below
+  // (modifyRouterTs/modifyBlogArticlesTsx) and never calls
+  // registerArticleFiles(), so without this call a placeholder leaking here
+  // (e.g. via translateArticle() echoing the schema into en/de/fr) shipped
+  // unguarded. After translateArticle() so it also sees translation-introduced
+  // leaks, before image generation so a doomed article doesn't spend an image
+  // call first. Tagged qualityReject like every other throw in this function:
+  // a placeholder is a per-headline generation failure, not an infra error —
+  // the retry loop should rotate to the next headline, not crash the run.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
   // Step 3b: Generate article image via Gemini native image generation
   console.error('🎨 Generazione immagine articolo:');
   const imagePath = await generateArticleImage(data);
@@ -12009,6 +12447,14 @@ export async function registerArticleFiles(data, opts = {}) {
         'Refresh the body files instead of re-registering.',
     );
   }
+  // Sta QUI, sul percorso di scrittura condiviso, per la stessa ragione
+  // argomentata sopra a `deriveAndSanitizeArticleSlugs()`: `validate()` e' UN
+  // produttore, e generate-daily-brief-article.mjs, generate-events-digest-article.mjs,
+  // generate-border-wait-ranking-article.mjs e publish-journalist-article.mjs
+  // importano registerArticleFiles() direttamente senza passarci mai.
+  // Prima di clampSeoDescriptions: troncare a 160 caratteri un campo che e' il
+  // segnaposto lo renderebbe solo un segnaposto piu' corto.
+  sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
   modifyRouterTs(data);
