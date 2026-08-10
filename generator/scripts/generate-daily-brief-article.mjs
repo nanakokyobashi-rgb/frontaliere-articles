@@ -42,6 +42,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 // (jsdom) exist only where `npm ci` ran.
 import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
+import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -63,6 +64,38 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     writeFileSync(file, clean);
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
+}
+
+/**
+ * Rewrite excerpt/seoDescription/ogDescription (meta) and description/
+ * ogDescription (SEO entry) in place, for a same-day rerun whose builder
+ * output may disagree with what got registered earlier the same day — e.g.
+ * a template change (#83) deployed between two cron runs.
+ *
+ * `refreshDescriptiveTexts` is itself idempotent (compares against the
+ * stored value before writing anything), so calling this on every rerun —
+ * several times a day, per the cron — is safe: a run where nothing changed
+ * writes zero bytes and returns `changed: false` (issue #85 review note: this
+ * is what keeps `bumpDateModified` from being asked to flicker over a rerun
+ * that touched nothing).
+ */
+export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
+  const localeTexts = {};
+  for (const locale of LOCALES) {
+    const c = data.content?.[locale];
+    if (!c) continue;
+    localeTexts[locale] = {
+      excerpt: c.excerpt,
+      seoDescription: c.seoDescription,
+      ogDescription: c.ogDescription,
+    };
+  }
+  return refreshDescriptiveTexts(
+    data.id,
+    localeTexts,
+    { description: data.seo?.description, ogDescription: data.seo?.ogDescription },
+    { repoRoot },
+  );
 }
 
 export function heroPaths(id, repoRoot = REPO_ROOT) {
@@ -114,6 +147,16 @@ async function main() {
 
   console.log('♻️  same-day rerun — refreshing body files in place…');
   refreshBodyFiles(data);
+  // Meta (excerpt/seoDescription/ogDescription) + SEO (description/
+  // ogDescription) — issue #85: registerArticleFiles writes these ONCE, at
+  // registration, so without this an `exists` rerun could refresh the body
+  // text but never the descriptive surfaces it was published with.
+  const { changed: metaChanged, touched: metaTouched } = refreshMetaAndSeo(data);
+  if (metaChanged) {
+    for (const file of metaTouched) console.log(`  ✅ ${path.relative(REPO_ROOT, file)}`);
+  } else {
+    console.log('  ♻️  meta/seo already current — nothing to rewrite.');
+  }
   if (!bumpUpdatedAt(data.id, todayIso)) console.warn('⚠️  updatedAt not bumped (entry not matched).');
   if (!bumpDateModified(data.id, `${todayIso}T00:00:00+02:00`)) {
     console.warn('⚠️  dateModified not bumped — freshness signal may be stale.');
