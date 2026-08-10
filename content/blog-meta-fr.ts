@@ -9480,6 +9480,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.title': 'Trasferirsi a Maslianico: pro e contro',
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.excerpt': 'Taxes, permis et conditions de travail : ce qu\'il faut savoir avant de déménager à Maslianico en tant que navetteur transfrontalier.',
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.imageAlt': 'Vue de Lugano, avec le lac de Lugano et les montagnes environnantes.',
+    'blog.article.porlezza-frontaliere-pro-contro.title': 'Déménager à Porlezza en tant que frontalier : avantages et inconvénients',
+    'blog.article.porlezza-frontaliere-pro-contro.excerpt': 'Analyse pratique pour ceux qui choisissent de vivre à Porlezza et de travailler au Tessin en tant que frontalier, en évaluant les avantages, les inconvénients et les déplacements.',
+    'blog.article.porlezza-frontaliere-pro-contro.imageAlt': 'Vue panoramique du lac de Lugano près de la frontière italo-suisse',
+    'blog.article.vivere-ronago-lavorare-ticino.title': 'Vivre à Ronago et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-ronago-lavorare-ticino.excerpt': 'Guide pratique pour les frontaliers : taxes, nouvel accord fiscal, prévoyance et liaisons entre Ronago et le canton du Tessin.',
+    'blog.article.vivere-ronago-lavorare-ticino.imageAlt': 'Vue de Mendrisio au Tessin, zone frontalière',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.title': 'Travailler en Tessin, vivre à Porlezza : ce qui change',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Nouvel accord fiscal 2026 : ce que cela signifie pour les frontaliers et comment cela s\'appliquera',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Un travailleur frontalier qui se trouve dans une situation similaire peut chercher à mieux comprendre les nouvelles règles fiscales qui seront applicables aux travailleurs frontaliers.',
 };
 
 export default blogMetaFr;

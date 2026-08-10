@@ -28452,6 +28452,33 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'porlezza-frontaliere-pro-contro',
+ category: 'pratico',
+ date: '2026-08-10T00:39:23.609Z',
+ image: '/images/blog/porlezza-frontaliere-pro-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-ronago-lavorare-ticino',
+ category: 'pratico',
+ date: '2026-08-10T01:04:26.592Z',
+ image: '/images/blog/vivere-ronago-lavorare-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere',
+ category: 'pratico',
+ date: '2026-08-10T01:32:58.976Z',
+ image: '/images/blog/vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

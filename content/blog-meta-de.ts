@@ -9477,6 +9477,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.title': 'Umzug nach Maslianico als grenzüberschreitender Pendler: Vor- und Nachteile',
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.excerpt': 'Steuern, Genehmigungen und Arbeitsbedingungen: Was Sie wissen sollten, bevor Sie als Grenzpendler nach Maslianico ziehen.',
     'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.imageAlt': 'Lugano-Blick, mit dem Lugano-See und den umliegenden Bergen.',
+    'blog.article.porlezza-frontaliere-pro-contro.title': 'Umzug nach Porlezza als Grenzgänger: Vor- und Nachteile',
+    'blog.article.porlezza-frontaliere-pro-contro.excerpt': 'Praktische Analyse für diejenigen, die sich entscheiden, in Porlezza zu leben und im Tessin als Grenzgänger zu arbeiten, unter Berücksichtigung von Vorteilen, Nachteilen und Reisen.',
+    'blog.article.porlezza-frontaliere-pro-contro.imageAlt': 'Malerischer Blick auf den Luganersee nahe der italienisch-schweizerischen Grenze',
+    'blog.article.vivere-ronago-lavorare-ticino.title': 'Leben in Ronago und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-ronago-lavorare-ticino.excerpt': 'Praktischer Leitfaden für Grenzgänger: Steuern, neues Steuerabkommen, Vorsorge und Verbindungen zwischen Ronago und dem Kanton Tessin.',
+    'blog.article.vivere-ronago-lavorare-ticino.imageAlt': 'Blick auf Mendrisio im Tessin, Grenzgebiet',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.title': 'Frontaliere Ticino: Was sich ändert und was zu tun ist',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Neues Steuerabkommen 2026: Was es für Grenzgänger bedeutet und wie es angewendet wird',
+    'blog.article.vivere-a-porlezza-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Ein Frontalier, der sich in einer ähnlichen Situation befindet, könnte versuchen, die neuen Steuernormen besser zu verstehen, die auf Frontalier anwendbar sein werden.',
 };
 
 export default blogMetaDe;

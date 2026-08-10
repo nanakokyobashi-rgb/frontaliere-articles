@@ -180,7 +180,21 @@
     "vivere a Varzo e lavorare in Ticino da frontaliere",
     "salario medio professioni svizzera 2026 canton San Gallo",
     "secondo pilastro lpp svizzera guida 2026 canton Berna",
-    "vivere a Maslianico e lavorare in Ticino da frontaliere"
+    "vivere a Maslianico e lavorare in Ticino da frontaliere",
+    "secondo pilastro lpp svizzera guida 2026 canton Vaud",
+    "secondo pilastro lpp svizzera guida 2026 canton Lucerna",
+    "secondo pilastro lpp svizzera guida 2026 canton Argovia",
+    "affitti svizzera mercato immobiliare 2026",
+    "affitti svizzera mercato immobiliare 2026 canton Ginevra",
+    "affitti svizzera mercato immobiliare 2026 canton Basilea",
+    "affitti svizzera mercato immobiliare 2026 canton Vaud",
+    "affitti svizzera mercato immobiliare 2026 canton Zurigo",
+    "affitti svizzera mercato immobiliare 2026 canton San Gallo",
+    "affitti svizzera mercato immobiliare 2026 canton Lucerna",
+    "dichiarazione imposte svizzera guida pratica 2026 canton Berna",
+    "dichiarazione imposte svizzera guida pratica 2026 canton Basilea",
+    "dichiarazione imposte svizzera guida pratica 2026 canton Vaud",
+    "dichiarazione imposte svizzera guida pratica 2026 canton Lucerna"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -277,6 +291,12 @@
     "vivere a Brusimpiano e lavorare in Ticino da frontaliere": 1,
     "trasferirsi a Clivio da frontaliere pro e contro": 1,
     "salario medio professioni svizzera 2026 canton San Gallo": 1,
-    "secondo pilastro lpp svizzera guida 2026 canton Vaud": 1
+    "secondo pilastro lpp svizzera guida 2026 canton Vaud": 1,
+    "vivere a Porlezza e lavorare in Ticino da frontaliere": 2,
+    "secondo pilastro lpp svizzera guida 2026 canton San Gallo": 3,
+    "affitti svizzera mercato immobiliare 2026 canton Zurigo": 1,
+    "affitti svizzera mercato immobiliare 2026 canton Berna": 2,
+    "affitti svizzera mercato immobiliare 2026 canton Argovia": 1,
+    "dichiarazione imposte svizzera guida pratica 2026 canton Ginevra": 1
   }
 }
