@@ -2002,6 +2002,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.title': 'Krankenkassenprämien KVG 2026 im Kanton Basel',
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.excerpt': 'Erwachsene Selbstbehalte CHF 300, 500, 1000, 1500, 2000, 2500. Festgelegte Prämien pro Kanton und Prämienregion.',
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.imageAlt': 'Scena svizzera nazionale/cantonale pertinente al tema premi cassa malati, fotorealistica, DSLR, non sembrare AI',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.title': 'BVG-Leitfaden: Beiträge, Bezug und Vorsorgeplanung in der Schweiz',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.excerpt': 'Die zweite Säule BVG in der Schweiz: Beiträge, Bezug, Lückenrückkauf und Vorsorgeplanung. Wir fokussieren uns auf den Kanton Bern und vergleichen die Daten mit den nationalen.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.imageAlt': 'Arbeit in der Schweiz, Gehalt',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.title': 'Leitfaden zur zweiten Säule BVG in der Schweiz',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.excerpt': 'Der Leitfaden zur zweiten Säule BVG beschreibt die Beiträge, den Bezug, den Lückenrückkauf und die Vorsorgeplanung in der Schweiz, mit Fokus auf den Kanton Bern und einem nationalen Vergleich.',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.imageAlt': 'Bild eines Grenzarbeiters, der sich in einer ähnlichen Situation wie in der Anleitung befindet.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.title': 'BVG in der Schweiz: Beiträge und Vorsorgeplanung',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.excerpt': 'Erfahren Sie, wie die zweite Säule BVG in der Schweiz funktioniert, mit Fokus auf den Kanton St. Gallen. Einstellungen, Beiträge und Abhebungen.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.imageAlt': 'Praktische Anleitung zum zweiten Säule LPP in der Schweiz, mit Schwerpunkt auf dem Kanton St. Gallen. Fotorealistische Szene von Lugano, mit einem LPP-Säulen im Vordergrund.',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.title': 'BVG in der Schweiz: Beiträge und Vorsorgeplanung im Kanton Waadt',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.excerpt': 'Der Leitfaden zur zweiten Säule BVG deckt Beiträge, Bezug, Lückenrückkauf und Vorsorgeplanung im Kanton Waadt ab.',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.imageAlt': 'Ein Mensch schaut auf einen Smartphone-Bildschirm mit einem Pensionsplan-Graph',
 };
 
 export default blogMetaChDe;

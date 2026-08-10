@@ -9471,6 +9471,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.title': 'Déménager à Cannobio en tant que frontalier : avantages et inconvénients',
     'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.excerpt': 'Analyse pratique de la vie à Cannobio en travaillant au Tessin : fiscalité, accords et gestion des déplacements quotidiens pour les travailleurs frontaliers.',
     'blog.article.trasferirsi-cannobio-frontaliere-pro-contro.imageAlt': 'Vue panoramique de Cannobio sur le lac Majeur',
+    'blog.article.trasferirsi-a-varzo-da-frontaliere-pro-e-contro.title': 'Déménager à Varzo en tant que frontalier : avantages et inconvénients',
+    'blog.article.trasferirsi-a-varzo-da-frontaliere-pro-e-contro.excerpt': 'Réglage fiscal, permis de séjour et conditions de travail : ce qu\'il faut savoir avant de déménager à Varzo en tant que frontalier.',
+    'blog.article.trasferirsi-a-varzo-da-frontaliere-pro-e-contro.imageAlt': 'Un travailleur frontalier qui se transfère à Varzo pour travailler en Suisse',
+    'blog.article.vivere-maslianico-lavoro-ticino.title': 'Vivre à Maslianico et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-maslianico-lavoro-ticino.excerpt': 'Guide pratique pour les frontaliers résidant à Maslianico : nouvel accord, fiscalité, obligations d\'assurance LAMal et procédures de déplacement.',
+    'blog.article.vivere-maslianico-lavoro-ticino.imageAlt': 'Vue de la frontière entre l\'Italie et la Suisse',
+    'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.title': 'Trasferirsi a Maslianico: pro e contro',
+    'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.excerpt': 'Taxes, permis et conditions de travail : ce qu\'il faut savoir avant de déménager à Maslianico en tant que navetteur transfrontalier.',
+    'blog.article.trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.imageAlt': 'Vue de Lugano, avec le lac de Lugano et les montagnes environnantes.',
 };
 
 export default blogMetaFr;

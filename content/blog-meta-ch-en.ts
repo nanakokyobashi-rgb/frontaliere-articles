@@ -2002,6 +2002,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.title': 'LAMal 2026 sick pay premiums in the canton of Basel',
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.excerpt': 'Adult deductibles CHF 300, 500, 1000, 1500, 2000, 2500. Awards set by canton and award region.',
     'blog.article.premi-cassa-malati-lamal-2026-canton-basilea.imageAlt': 'Scena svizzera nazionale/cantonale pertinente al tema premi cassa malati, fotorealistica, DSLR, non sembrare AI',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.title': 'LPP Guide: Contributions, Withdrawal and Social Security Planning in Switzerland',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.excerpt': 'The second LPP pillar in Switzerland: contributions, withdrawals, redemption of gaps and social security planning. Let\'s focus on the canton of Bern and compare the data with the national ones.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-bern.imageAlt': 'Work in Switzerland, salary',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.title': 'Guide to the second LPP pillar in Switzerland',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.excerpt': 'The guide to the second LPP pillar describes contributions, levying, gap redemption and social security planning in Switzerland, with a focus on the canton of Bern and a national comparison.',
+    'blog.article.secondo-pilastro-lpp-bern-2026-guida.imageAlt': 'Image of a frontier worker who is in a similar situation to the one described in the guide.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.title': 'LPP in Switzerland: Contributions and social security planning',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.excerpt': 'Find out how the second LPP pillar works in Switzerland, with a focus on the canton of St. Gallen. Settings, contributions, and withdrawals.',
+    'blog.article.secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.imageAlt': 'Practical guide to the second pillar LPP in Switzerland, with a focus on the canton of St. Gallen. Photorealistic scene of Lugano, with a LPP pillar in the foreground.',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.title': 'LPP in Switzerland: Vaud Contributions',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.excerpt': 'The guide to the second pillar LPP covers contributions, withdrawal, redemption gaps and social security planning in the Canton of Vaud.',
+    'blog.article.guida-lpp-secondo-pilastro-2026-vaud.imageAlt': 'A person looks at a pension plan graph with a smartphone',
 };
 
 export default blogMetaChEn;

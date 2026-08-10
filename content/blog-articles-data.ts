@@ -28425,6 +28425,33 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'trasferirsi-a-varzo-da-frontaliere-pro-e-contro',
+ category: 'pratico',
+ date: '2026-08-09T23:56:11.322Z',
+ image: '/images/blog/trasferirsi-a-varzo-da-frontaliere-pro-e-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-maslianico-lavoro-ticino',
+ category: 'pratico',
+ date: '2026-08-10T00:08:09.823Z',
+ image: '/images/blog/vivere-maslianico-lavoro-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'trasferirsi-a-maslianico-da-frontaliere-pro-e-contro',
+ category: 'fiscale',
+ date: '2026-08-10T00:24:42.396Z',
+ image: '/images/blog/trasferirsi-a-maslianico-da-frontaliere-pro-e-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -6004,6 +6004,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'secondo-pilastro-lpp-svizzera-guida-2026-bern',
+    category: 'fiscale',
+    date: '2026-08-09T23:51:38.781Z',
+    image: '/images/blog/secondo-pilastro-lpp-svizzera-guida-2026-bern.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
+   {
+    id: 'secondo-pilastro-lpp-bern-2026-guida',
+    category: 'pratico',
+    date: '2026-08-10T00:03:58.093Z',
+    image: '/images/blog/secondo-pilastro-lpp-bern-2026-guida.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
+   {
+    id: 'secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo',
+    category: 'fiscale',
+    date: '2026-08-10T00:18:35.537Z',
+    image: '/images/blog/secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'guida-lpp-secondo-pilastro-2026-vaud',
+    category: 'pratico',
+    date: '2026-08-10T00:29:07.213Z',
+    image: '/images/blog/guida-lpp-secondo-pilastro-2026-vaud.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

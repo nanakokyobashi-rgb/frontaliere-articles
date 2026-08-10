@@ -25913,6 +25913,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-secondo-pilastro-lpp-svizzera-guida-2026-bern': {
+    title: 'Guida LPP: contributi, prelievo e pianificazione previdenziale in Svizzera',
+    description: 'Guida 2026 al secondo pilastro LPP in Svizzera: contributi, prelievo, riscatto lacune e pianificazione previdenziale. Facciamo un focus sul canton Berna',
+    keywords: 'frontalieri, ticino, svizzera, italia, contributi, prelievo, pianificazione, previdenziale',
+    ogTitle: 'Secondo pilastro LPP in Svizzera: contributi, prelievo e pianificazione previdenziale',
+    ogDescription: 'Guida 2026 al secondo pilastro LPP in Svizzera: contributi, prelievo, riscatto lacune e pianificazione previdenziale. Facciamo un focus sul canton Berna e confrontiamo i dati con quelli nazionali.',
+    canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-bern/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Guida LPP: contributi, prelievo e pianificazione previdenziale in Svizzera",
+      "description": "Guida 2026 al secondo pilastro LPP in Svizzera: contributi, prelievo, riscatto lacune e pianificazione previdenziale. Facciamo un focus sul canton Berna",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/secondo-pilastro-lpp-svizzera-guida-2026-bern.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavoro in Svizzera, stipendio"
+      },
+      "datePublished": "2026-08-09T23:51:38+00:00",
+      "dateModified": "2026-08-09T23:51:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-bern/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-secondo-pilastro-lpp-bern-2026-guida': {
+    title: 'Guida al secondo pilastro LPP in Svizzera | Frontaliere Ticino',
+    description: 'La guida al secondo pilastro LPP descrive i contributi, il prelievo, il riscatto delle lacune e la pianificazione previdenziale in Svizzera, con un focus',
+    keywords: 'frontalieri, ticino, svizzera, italia, secondo, pilastro, descrive, contributi',
+    ogTitle: 'Guida al secondo pilastro LPP: contributi, prelievo, riscatto lacune e pianificazione previdenziale in Svizzera. Focus sul canton Berna e confronto nazionale.',
+    ogDescription: 'La guida al secondo pilastro LPP descrive i contributi, il prelievo, il riscatto delle lacune e la pianificazione previdenziale in Svizzera, con un focus sul canton Berna e un confronto nazionale.',
+    canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-bern-2026-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Guida al secondo pilastro LPP in Svizzera",
+      "description": "La guida al secondo pilastro LPP descrive i contributi, il prelievo, il riscatto delle lacune e la pianificazione previdenziale in Svizzera, con un focus",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/secondo-pilastro-lpp-bern-2026-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un frontaliere che si trova in una situazione simile a quella descritta nella guida."
+      },
+      "datePublished": "2026-08-10T00:03:58+00:00",
+      "dateModified": "2026-08-10T00:03:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/secondo-pilastro-lpp-bern-2026-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo': {
+    title: 'LPP in Svizzera: Contributi e pianificazione previdenziale',
+    description: 'Scopri come funziona il secondo pilastro LPP in Svizzera, con un focus sul canton San Gallo. Impostazioni, contributi e prelievi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, contributi, pianificazione, previdenziale, scopri',
+    ogTitle: 'Guida pratica al secondo pilastro LPP in Svizzera: contributi, prelievo, riscatto lacune e pianificazione previdenziale',
+    ogDescription: 'Scopri come funziona il secondo pilastro LPP in Svizzera, con un focus sul canton San Gallo. Impostazioni, contributi e prelievi.',
+    canonicalPath: '/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "LPP in Svizzera: Contributi e pianificazione previdenziale",
+      "description": "Scopri come funziona il secondo pilastro LPP in Svizzera, con un focus sul canton San Gallo. Impostazioni, contributi e prelievi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Guida pratica al secondo pilastro LPP in Svizzera, con un focus sul canton San Gallo. Scena fotorealistica di Lugano, con un pilastro LPP in primo piano."
+      },
+      "datePublished": "2026-08-10T00:18:35+00:00",
+      "dateModified": "2026-08-10T00:18:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/secondo-pilastro-lpp-svizzera-guida-2026-canton-san-gallo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-guida-lpp-secondo-pilastro-2026-vaud': {
+    title: 'LPP in Svizzera: contributi e pianificazione previdenziale nel Canton Vaud',
+    description: 'La guida al secondo pilastro LPP copre contributi, prelievo, riscatto lacune e pianificazione previdenziale nel Canton Vaud. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, contributi, pianificazione, previdenziale, canton',
+    ogTitle: 'Guida al secondo pilastro LPP in Svizzera: contributi, prelievo, riscatto lacune e pianificazione previdenziale nel Canton Vaud',
+    ogDescription: 'La guida al secondo pilastro LPP copre contributi, prelievo, riscatto lacune e pianificazione previdenziale nel Canton Vaud.',
+    canonicalPath: '/articoli-svizzera/guida-lpp-secondo-pilastro-2026-vaud/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "LPP in Svizzera: contributi e pianificazione previdenziale nel Canton Vaud",
+      "description": "La guida al secondo pilastro LPP copre contributi, prelievo, riscatto lacune e pianificazione previdenziale nel Canton Vaud. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/guida-lpp-secondo-pilastro-2026-vaud.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una persona guarda un grafico di piano di pensione con un smartphone"
+      },
+      "datePublished": "2026-08-10T00:29:07+00:00",
+      "dateModified": "2026-08-10T00:29:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/guida-lpp-secondo-pilastro-2026-vaud/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

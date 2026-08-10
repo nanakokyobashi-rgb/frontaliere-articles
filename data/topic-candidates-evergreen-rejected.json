@@ -169,7 +169,18 @@
     "trasferirsi a Clivio da frontaliere pro e contro",
     "premi cassa malati lamal 2026 canton Berna",
     "vivere a Saltrio e lavorare in Ticino da frontaliere",
-    "vivere a Cannobio e lavorare in Ticino da frontaliere"
+    "vivere a Cannobio e lavorare in Ticino da frontaliere",
+    "premi cassa malati lamal 2026 canton Vaud",
+    "salario medio professioni svizzera 2026 canton Zurigo",
+    "salario medio professioni svizzera 2026 canton Ginevra",
+    "salario medio professioni svizzera 2026 canton Vaud",
+    "salario medio professioni svizzera 2026 canton Lucerna",
+    "salario medio professioni svizzera 2026 canton Argovia",
+    "secondo pilastro lpp svizzera guida 2026 canton Ginevra",
+    "vivere a Varzo e lavorare in Ticino da frontaliere",
+    "salario medio professioni svizzera 2026 canton San Gallo",
+    "secondo pilastro lpp svizzera guida 2026 canton Berna",
+    "vivere a Maslianico e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -264,6 +275,8 @@
     "affitti svizzera diritti inquilino disdetta": 3,
     "vivere a Valsolda e lavorare in Ticino da frontaliere": 1,
     "vivere a Brusimpiano e lavorare in Ticino da frontaliere": 1,
-    "trasferirsi a Clivio da frontaliere pro e contro": 1
+    "trasferirsi a Clivio da frontaliere pro e contro": 1,
+    "salario medio professioni svizzera 2026 canton San Gallo": 1,
+    "secondo pilastro lpp svizzera guida 2026 canton Vaud": 1
   }
 }
