@@ -357,3 +357,48 @@ test('admission is unchanged on svizzera: no downstream density gate exists ther
 test('a genuine frontaliere headline is still admitted, not just ranked', () => {
   assert.equal(FRONT.hasAdmissionSignal('Ristorni ai frontalieri, nuovo accordo fiscale'), true);
 });
+
+// ── 6. SOURCE_DROP_OFF_TOPIC pre-flight (issue #210) ────────────────────────
+//
+// `generateAndValidateArticle()` runs a cheap pre-LLM check on the scraped
+// source page, gated by `SOURCE_DROP_OFF_TOPIC`: if `countAdmissionHits
+// (pageContent)` is 0, the headline is skipped before the first paid call.
+// #185 rewrote `countTopicalHits`/`hasTopicalSignal` to read
+// `sectionTopicalKeywords(national)`, and #194 swapped this exact call site
+// from `countTopicalHits` to `countAdmissionHits` (issue #189, admission vs
+// ranking split) — neither PR passed a `national` argument at the call site
+// itself, and #185's own "Non implementato" flagged that as unverified. It
+// is not an oversight: both `sectionTopicalKeywords` and
+// `sectionAdmissionKeywords` default `national` to `!IS_FRONTALIERE` when the
+// argument is omitted, so the single-arg call already resolves to the right
+// lexicon per section — the gate was never section-blind on `main`, it just
+// had no test pinning that the default carries through this call site.
+
+test('the SOURCE_DROP_OFF_TOPIC call site passes no `national` argument, relying on the section default', () => {
+  assert.match(
+    SRC, /const sourceHits = countAdmissionHits\(pageContent\);/,
+    'il pre-flight deve restare a un solo argomento: un secondo argomento hardcoded (es. `, false`) lo renderebbe di nuovo section-blind',
+  );
+});
+
+test('SOURCE_DROP_OFF_TOPIC: a national-agenda source page is admitted on svizzera, not on frontaliere', () => {
+  const pageBody = "Il Consiglio federale ha annunciato nuove misure sul debito pubblico e sul potere d'acquisto, "
+    + "mentre la BNS segnala un rallentamento della congiuntura e dell'export verso l'Unione europea.";
+  assert.equal(
+    FRONT.countAdmissionHits(pageBody), 0,
+    'presupposto del test: nessun termine ammissibile frontaliere in questo corpo pagina',
+  );
+  assert.ok(
+    CH.countAdmissionHits(pageBody) > 0,
+    'la sezione nazionale deve trovare un segnale ammissibile in un corpo pagina di agenda nazionale',
+  );
+});
+
+test('SOURCE_DROP_OFF_TOPIC: a genuinely off-topic source page is still dropped on both sections', () => {
+  const pageBody = "Incidente stradale a Lugano, nessun ferito grave, la circolazione è ripresa dopo un'ora.";
+  assert.equal(FRONT.countAdmissionHits(pageBody), 0);
+  assert.equal(
+    CH.countAdmissionHits(pageBody), 0,
+    'il gate deve continuare a scartare la cronaca pura anche sulla sezione nazionale',
+  );
+});
