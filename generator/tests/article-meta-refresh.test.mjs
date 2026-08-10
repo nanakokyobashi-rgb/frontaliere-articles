@@ -36,11 +36,14 @@ import {
   upsertLocaleMetaFields,
   upsertSeoDescriptionBlock,
   refreshDescriptiveTexts,
+  SEO_DESCRIPTION_MAX,
+  SEO_OG_DESCRIPTION_MAX,
 } from '../scripts/lib/article-meta-refresh.mjs';
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
+const CREATE_ARTICLE = path.join(HERE, '..', 'scripts', 'create-article.mjs');
 
 // ── 1a. upsertLocaleMetaFields ──────────────────────────────────────────────
 
@@ -280,6 +283,111 @@ test('refreshDescriptiveTexts: un secondo giro con gli stessi testi non scrive n
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+// ── 1c. Il clamp (issue #146 review: il write path non ne aveva uno) ───────
+//
+// `registerArticleFiles` applica `clampSeoDescriptions` PRIMA di scrivere;
+// questo modulo e' l'ALTRO write path sugli stessi campi (cron `exists` +
+// script di repair) e deve avere la stessa rete, altrimenti una description
+// fuori budget raggiunge `dist/api/` senza che nulla nel loop se ne accorga
+// (`.github/workflows/generate-daily-brief.yml` push-a `main` senza
+// `node --test` in mezzo).
+
+const LONG_TEXT =
+  'I numeri di oggi, 9 agosto 2026, per chi attraversa il confine: attese ai valichi misurate ' +
+  'stamattina, i comuni dove la benzina costa meno, il cambio franco–euro e i nuovi annunci di ' +
+  'lavoro in Svizzera. Dati raccolti dal nostro monitoraggio, aggiornati ogni giorno.';
+
+test('refreshDescriptiveTexts: una seoDescription/description fuori budget viene tagliata prima di scrivere', () => {
+  const root = syntheticCorpus();
+  try {
+    assert.ok(LONG_TEXT.length > SEO_DESCRIPTION_MAX);
+    const localeTexts = {
+      it: { excerpt: 'Estratto lungo, non tagliato', seoDescription: LONG_TEXT, ogDescription: 'Social it' },
+    };
+    const seoTexts = { description: LONG_TEXT, ogDescription: 'Social it' };
+    refreshDescriptiveTexts('demo-id', localeTexts, seoTexts, { repoRoot: root });
+
+    const it = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
+    const seoMatch = it.match(/'blog\.article\.demo-id\.seoDescription': '([^']*)'/);
+    assert.ok(seoMatch, 'seoDescription non scritta');
+    assert.ok(seoMatch[1].length <= SEO_DESCRIPTION_MAX, `seoDescription scritta fuori budget: ${seoMatch[1].length} chars`);
+    assert.ok(LONG_TEXT.startsWith(seoMatch[1]), 'il taglio deve essere un prefisso del testo originale');
+    // excerpt non ha budget: deve restare intatto.
+    assert.ok(it.includes("'blog.article.demo-id.excerpt': 'Estratto lungo, non tagliato',"));
+
+    const seo = fs.readFileSync(path.join(root, 'content', 'seo', 'seo-blog-5.ts'), 'utf-8');
+    const descMatch = seo.match(/ {4}description: '([^']*)'/);
+    assert.ok(descMatch, 'description non scritta');
+    assert.ok(descMatch[1].length <= SEO_DESCRIPTION_MAX, `description scritta fuori budget: ${descMatch[1].length} chars`);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: una ogDescription oltre il proprio budget (250) viene tagliata comunque', () => {
+  const root = syntheticCorpus();
+  try {
+    const huge = `${LONG_TEXT} ${LONG_TEXT}`;
+    assert.ok(huge.length > SEO_OG_DESCRIPTION_MAX);
+    const localeTexts = { it: { ogDescription: huge } };
+    refreshDescriptiveTexts('demo-id', localeTexts, undefined, { repoRoot: root });
+    const it = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
+    const ogMatch = it.match(/'blog\.article\.demo-id\.ogDescription': '([^']*)'/);
+    assert.ok(ogMatch, 'ogDescription non scritta');
+    assert.ok(ogMatch[1].length <= SEO_OG_DESCRIPTION_MAX, `ogDescription scritta fuori budget: ${ogMatch[1].length} chars`);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: un testo social entro budget social ma sopra quello SERP resta intatto sull\'ogDescription', () => {
+  const root = syntheticCorpus();
+  try {
+    const social =
+      'I numeri del 22 settembre 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, ' +
+      'in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro ' +
+      'sono usciti in Svizzera.';
+    assert.ok(social.length > SEO_DESCRIPTION_MAX);
+    assert.ok(social.length <= SEO_OG_DESCRIPTION_MAX);
+    refreshDescriptiveTexts('demo-id', { it: { ogDescription: social } }, undefined, { repoRoot: root });
+    const it = fs.readFileSync(path.join(root, 'content', 'blog-meta-it.ts'), 'utf-8');
+    assert.ok(it.includes(`'blog.article.demo-id.ogDescription': '${social}',`), 'ogDescription non doveva essere tagliata');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('refreshDescriptiveTexts: il clamp e\' idempotente sul rerun (nessuna riscrittura al secondo giro)', () => {
+  const root = syntheticCorpus();
+  try {
+    const localeTexts = { it: { seoDescription: LONG_TEXT } };
+    const first = refreshDescriptiveTexts('demo-id', localeTexts, undefined, { repoRoot: root });
+    assert.equal(first.changed, true);
+    const second = refreshDescriptiveTexts('demo-id', localeTexts, undefined, { repoRoot: root });
+    assert.equal(second.changed, false, 'il testo gia\' tagliato deve tagliarsi identico e non produrre un secondo write');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('SEO_DESCRIPTION_MAX/SEO_OG_DESCRIPTION_MAX restano allineati ai valori di create-article.mjs', () => {
+  const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+  const max = src.match(/^const SEO_DESCRIPTION_MAX = (\d+);$/m);
+  const ogMax = src.match(/^const SEO_OG_DESCRIPTION_MAX = (\d+);$/m);
+  assert.ok(max, 'SEO_DESCRIPTION_MAX non trovato in create-article.mjs — aggiornare i delimitatori di questo test');
+  assert.ok(ogMax, 'SEO_OG_DESCRIPTION_MAX non trovato in create-article.mjs — aggiornare i delimitatori di questo test');
+  assert.equal(
+    SEO_DESCRIPTION_MAX,
+    Number(max[1]),
+    "article-meta-refresh.mjs duplica questo valore (non puo' importarlo senza jsdom) — i due sono andati fuori sincrono",
+  );
+  assert.equal(
+    SEO_OG_DESCRIPTION_MAX,
+    Number(ogMax[1]),
+    "article-meta-refresh.mjs duplica questo valore (non puo' importarlo senza jsdom) — i due sono andati fuori sincrono",
+  );
 });
 
 // ── 2b. Ricostruzione pura per una data passata (la riparazione delle 2 edizioni) ─

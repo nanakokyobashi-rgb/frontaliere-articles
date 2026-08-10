@@ -43,10 +43,29 @@
  * `exists` branch can run several times a day) from producing a needless
  * diff when nothing about the text actually changed, mirroring the
  * clamp-to-`datePublished` guard `bumpDateModified` already applies next to
- * this call for the same reason. This module clamps nothing itself — the
- * 160/250 safety net stays `clampSeoDescriptions`'s job in
- * create-article.mjs; a caller that hands over an over-budget string gets it
- * written over-budget.
+ * this call for the same reason.
+ *
+ * ## Clamp (issue #146 review)
+ *
+ * `registerArticleFiles` runs `clampSeoDescriptions` right before its first
+ * write (create-article.mjs) — this module is the OTHER write path onto the
+ * same fields, so it needs the same net: `.github/workflows/generate-daily-
+ * brief.yml` commits and pushes straight to `main` with no `node --test` in
+ * between, and `publish-api.yml` republishes on every `content/**` push with
+ * no test gate either. An over-budget string written here would reach
+ * `dist/api/` and the site's meta tags with nothing in the loop to catch it
+ * — the exact failure `seo-description-cap.test.mjs` exists to stop, and it
+ * already happened twice (see that file's header).
+ *
+ * `SEO_DESCRIPTION_MAX`/`SEO_OG_DESCRIPTION_MAX` below are NOT imported from
+ * create-article.mjs: importing that module pulls in its static `jsdom`
+ * dependency, which this module deliberately stays free of (see above). They
+ * are the same two numbers, kept in sync by
+ * `article-meta-refresh.test.mjs`'s budget-sync test, per AGENTS.md #6 (a
+ * value that cannot be imported gets the link covered by a test instead).
+ * `truncateToClause` IS imported, from the same dependency-free module
+ * `clampSeoDescriptions` itself delegates to — the truncation ALGORITHM has
+ * one source; only the two threshold numbers are duplicated, and covered.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
@@ -55,6 +74,7 @@ import { corpusPath } from './corpus-paths.mjs';
 import { sanitizeText } from '../../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './control-char-write-report.mjs';
 import { escapeForSingleQuoteTS } from './article-meta-block.mjs';
+import { truncateToClause } from '../../../host/shared/clauseTail.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // Two levels up from `generator/scripts/lib/` is `generator/`; one more is the
@@ -70,6 +90,49 @@ const LOCALES = ['it', 'en', 'de', 'fr'];
  * split, not to every field the meta block carries.
  */
 const LOCALE_FIELDS = ['excerpt', 'seoDescription', 'ogDescription'];
+
+/**
+ * Same values as create-article.mjs's SEO_DESCRIPTION_MAX / SEO_OG_
+ * DESCRIPTION_MAX — see the header for why they are duplicated, not
+ * imported, and how the duplication is covered.
+ */
+export const SEO_DESCRIPTION_MAX = 160;
+export const SEO_OG_DESCRIPTION_MAX = 250;
+
+/** `excerpt` is never clamped — it is the RICH surface, nothing truncates it
+ * downstream (see `daily-brief-content.mjs`), same as `LOCALE_SEO_
+ * DESCRIPTION_BUDGETS` in create-article.mjs leaving it out. */
+const LOCALE_DESCRIPTION_BUDGETS = {
+  seoDescription: SEO_DESCRIPTION_MAX,
+  ogDescription: SEO_OG_DESCRIPTION_MAX,
+};
+
+const SEO_ENTRY_DESCRIPTION_BUDGETS = {
+  description: SEO_DESCRIPTION_MAX,
+  ogDescription: SEO_OG_DESCRIPTION_MAX,
+};
+
+function clampField(value, maxLen) {
+  if (typeof value !== 'string' || value.length <= maxLen) return value;
+  return truncateToClause(value, maxLen);
+}
+
+/** Clamp only the budgeted fields of a per-locale `{excerpt, seoDescription,
+ * ogDescription}` record; everything else (including `excerpt`) passes
+ * through untouched. */
+function clampBudgetedFields(fields, budgets) {
+  if (!fields) return fields;
+  let out = fields;
+  for (const [field, max] of Object.entries(budgets)) {
+    if (!(field in fields)) continue;
+    const clamped = clampField(fields[field], max);
+    if (clamped !== fields[field]) {
+      if (out === fields) out = { ...fields };
+      out[field] = clamped;
+    }
+  }
+  return out;
+}
 
 // Same write-time guard as create-article.mjs's write() / evergreen-article-
 // refresh.mjs's writeCorpusFile: a `.ts` under content/ must never carry a C0
@@ -217,8 +280,9 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
   const touched = [];
 
   for (const locale of LOCALES) {
-    const fields = localeTexts?.[locale];
-    if (!fields) continue;
+    const rawFields = localeTexts?.[locale];
+    if (!rawFields) continue;
+    const fields = clampBudgetedFields(rawFields, LOCALE_DESCRIPTION_BUDGETS);
     const file = path.join(repoRoot, corpusPath(`services/locales/${metaPrefix}-${locale}.ts`));
     const before = readFileSync(file, 'utf-8');
     const after = upsertLocaleMetaFields(before, id, fields);
@@ -228,10 +292,11 @@ export function refreshDescriptiveTexts(id, localeTexts, seoTexts, opts = {}) {
     }
   }
 
-  if (seoTexts && (seoTexts.description || seoTexts.ogDescription)) {
+  const clampedSeoTexts = clampBudgetedFields(seoTexts, SEO_ENTRY_DESCRIPTION_BUDGETS);
+  if (clampedSeoTexts && (clampedSeoTexts.description || clampedSeoTexts.ogDescription)) {
     const seoPath = path.join(repoRoot, corpusPath(seoFile));
     const before = readFileSync(seoPath, 'utf-8');
-    const after = upsertSeoDescriptionBlock(before, id, seoTexts);
+    const after = upsertSeoDescriptionBlock(before, id, clampedSeoTexts);
     if (after !== before) {
       writeCorpusFile(seoPath, after);
       touched.push(seoPath);
