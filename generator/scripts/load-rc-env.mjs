@@ -331,7 +331,7 @@ const RC_FETCH_ATTEMPTS = 4;
 // `fetch()` forever, so RC_FETCH_ATTEMPTS never got a chance to kick in. Same
 // value and reasoning as TOKEN_EXCHANGE_TIMEOUT_MS in
 // lib/google-service-account-token.mjs, the sibling call one hop upstream.
-const RC_FETCH_TIMEOUT_MS = 30_000;
+export const RC_FETCH_TIMEOUT_MS = 30_000;
 
 async function fetchTemplateViaRest() {
   const { readFileSync } = await import('node:fs');

@@ -53,7 +53,7 @@ const TOKEN_EXCHANGE_ATTEMPTS = 4;
 // so the retry loop's attempt cap never even got a chance to kick in. 30s
 // matches the per-request timeout already used for other Google API calls on
 // this same credential chain (FETCH_TIMEOUT_MS in refresh-daily-brief-data.mjs).
-const TOKEN_EXCHANGE_TIMEOUT_MS = 30_000;
+export const TOKEN_EXCHANGE_TIMEOUT_MS = 30_000;
 
 /**
  * Exchange a signed assertion for an access token.
