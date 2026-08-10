@@ -1,0 +1,134 @@
+name: Generation health watchdog
+
+# Apre una issue quando la pipeline di generazione articoli è ROTTA MA VERDE —
+# la classe di guasto che `workflow-failure-issues.yml` non può vedere, perché
+# quello filtra su `conclusion == failure` e queste run escono `success`.
+#
+# Il razionale completo (le sei condizioni, la misura che ha scelto ogni soglia,
+# perché apertura e chiusura sono la stessa passata) sta in
+# `scripts/ci/scan-generation-health.mjs`. In breve: `generate-article.yml` esce
+# 0 di proposito quando non produce nulla — è un esito normale — quindi il
+# difetto non è mai nel singolo run, è nella SERIE. Nessuno step dentro un run
+# ha il denominatore per accorgersene; una scansione centrale sì.
+#
+# Zero Claude: è tutto deterministico. Come `workflow-failure-issues.yml`, il
+# costo di quota Claude è nullo.
+#
+# ── Cadenza, e perché questa ────────────────────────────────────────────────
+# :44, ogni due ore.
+#
+#  · Il minuto. I due repo colpiscono la STESSA quota API GitHub, quindi il cron
+#    va tenuto lontano da quelli del sito (:15/:17/:20/:23) e da quelli già
+#    occupati qui. I minuti liberi su questo repo sono 0-4, 23-26, 32-34, 43-46
+#    e 56-59; :44 è quello che massimizza la distanza dal blocco del sito
+#    (21 minuti) restando dentro una finestra libera locale. Il vertice
+#    dell'ora è escluso di proposito: è dove lo scheduler di GitHub è più
+#    congestionato, e questo repo ha già misurato sei slot consecutivi persi
+#    (vedi l'intestazione di `generate-article.yml`).
+#
+#  · Le due ore. La condizione con la finestra più stretta è `generation-idle`,
+#    a 6h: una passata ogni 2h la rileva entro un terzo della sua finestra. Più
+#    spesso non anticiperebbe nulla e costerebbe di più, perché ogni passata
+#    scarica fino a 60 log di run (~300 KB l'uno) per leggere i marker.
+#
+# ── Perché il PAT per aprire ────────────────────────────────────────────────
+# Una issue creata dal GITHUB_TOKEN NON emette l'evento `issues: opened`
+# (anti-ricorsione GitHub), quindi nascerebbe fuori dal triage event-driven e
+# resterebbe orfana fino allo sweep periodico. Col PAT il triage la classifica
+# subito. Senza PAT il degrado è morbido, non silenzioso: le issue si aprono
+# comunque e le raccoglie lo sweep.
+#
+# Lo stesso PAT serve alla label di routing: un evento `labeled` emesso dal
+# GITHUB_TOKEN non fa partire né il fixer né il drainer.
+
+on:
+  schedule:
+    - cron: '44 */2 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Elenca cosa aprirebbe/chiuderebbe senza toccare niente'
+        required: false
+        type: boolean
+        default: false
+      max_log_runs:
+        description: 'Cap sulle run di generate-article da leggere (default 60)'
+        required: false
+        default: '60'
+      run_lookback_hours:
+        description: 'Finestra sui log delle run, in ore (default 12 — TARATA insieme alle soglie, vedi lo scanner)'
+        required: false
+        default: '12'
+      commit_lookback_hours:
+        description: 'Finestra sui commit di main, in ore (default 48)'
+        required: false
+        default: '48'
+
+permissions:
+  contents: read
+  issues: write
+  actions: read # elencare le run e leggerne i log
+
+concurrency:
+  group: generation-health-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # Il corpus serve INTERO: la condizione `duplicate-topic-burst` legge
+          # `content/blog-articles-data.ts` e `content/blog-meta-it.ts` dal
+          # checkout, non dall'API.
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: lo scanner usa solo builtin Node, `gh`, e i moduli di
+      # questo repo (github-issue-creator, topic-coverage-guard).
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Le label di routing non si creano da sole: `gh issue edit --add-label`
+      # fallisce se la label non esiste, e quel fallimento qui è un warning non
+      # bloccante. Senza questo step il watchdog aprirebbe le issue e non le
+      # instraderebbe — girando, loggando e uscendo 0. Idempotente.
+      - name: Ensure loop labels exist (idempotente)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/ensure-loop-labels.mjs
+
+      - name: Scan generation health (apre e richiude nella stessa passata)
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          ARGS="--max-log-runs ${{ github.event.inputs.max_log_runs || '60' }}"
+          ARGS="$ARGS --run-lookback-hours ${{ github.event.inputs.run_lookback_hours || '12' }}"
+          ARGS="$ARGS --commit-lookback-hours ${{ github.event.inputs.commit_lookback_hours || '48' }}"
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          node scripts/ci/scan-generation-health.mjs $ARGS
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json
