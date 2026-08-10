@@ -2059,6 +2059,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.seco-dazi-stati-uniti-2026.title': 'États-Unis : droits de douane sur la Suisse',
     'blog.article.seco-dazi-stati-uniti-2026.excerpt': 'Le SECO a annoncé que les États-Unis avaient adopté de nouvelles mesures tarifaires sur la base de l\'enquête sur le commerce de biens produits en recourant au travail forcé.',
     'blog.article.seco-dazi-stati-uniti-2026.imageAlt': 'Une scène de travail à Lugano, en Suisse',
+    'blog.article.dazi-usa-consiglio-federale-2026.title': 'Droits US : la Suisse confirme ses intentions',
+    'blog.article.dazi-usa-consiglio-federale-2026.excerpt': 'Le Conseil fédéral se conforme aux accords définis dans la déclaration d’intention conjointe du 14 novembre 2025, signée entre la Suisse et les États-Unis.',
+    'blog.article.dazi-usa-consiglio-federale-2026.imageAlt': 'Négociateurs devant le Parlement suisse',
 };
 
 export default blogMetaChFr;

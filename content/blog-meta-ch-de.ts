@@ -2059,6 +2059,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.seco-dazi-stati-uniti-2026.title': 'USA: Neue Zölle auf die Schweiz, Seco und Wirtschaftspolitik',
     'blog.article.seco-dazi-stati-uniti-2026.excerpt': 'Das SECO gab bekannt, dass die Vereinigten Staaten auf der Grundlage der Untersuchung des Handels mit Waren, die unter Einsatz von Zwangsarbeit hergestellt wurden, neue Zollmaßnahmen ergriffen haben.',
     'blog.article.seco-dazi-stati-uniti-2026.imageAlt': 'Eine Szene von Arbeit in Lugano, Schweiz',
+    'blog.article.dazi-usa-consiglio-federale-2026.title': 'US-Zölle: Schweiz bestätigt Absichten',
+    'blog.article.dazi-usa-consiglio-federale-2026.excerpt': 'Der Bundesrat hält sich an die Vereinbarungen der gemeinsamen Absichtserklärung vom 14. November 2025 zwischen der Schweiz und den USA.',
+    'blog.article.dazi-usa-consiglio-federale-2026.imageAlt': 'Handelsvertreter vor dem Schweizer Parlament',
 };
 
 export default blogMetaChDe;
