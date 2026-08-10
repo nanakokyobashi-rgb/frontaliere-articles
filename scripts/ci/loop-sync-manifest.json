@@ -1154,6 +1154,36 @@
       }
     },
     {
+      "path": "generator/scripts/refresh-border-wait-window.mjs",
+      "mode": "corpus-only",
+      "reason": "Meta' CONSUMATRICE di un contratto cross-repo, non un gemello: fetcha `border-wait-ranking-window.json` che il sito pubblica con `scripts/publish-border-wait-window.mjs`. I due nomi sono diversi per costruzione (uno pubblica, l'altro consuma) e i due file DEVONO restare diversi, quindi non esiste nessun path da confrontare — e' il punto cieco della issue #101: il drift check confronta per path, i closure test seguono gli import, e qui non c'e' ne' l'uno ne' l'altro perche' i due capi si parlano via HTTP. Hard gate: e' il dato dell'articolo evergreen `classifica-dogane-ticino`, e sotto due valichi ticinesi superstiti l'articolo diventa uno stub senza che niente fallisca. La forma e' inchiodata offline da `generator/tests/rewire-json-contracts.test.mjs` (registro delle coppie in `generator/tests/lib/rewire-contracts.mjs`) e verificata sui dati veri da `.github/workflows/rewire-contract-watch.yml`.",
+      "baseline": {
+        "site": null,
+        "corpus": "6ab814fe07adacf4",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-border-wait-averages.mjs",
+      "mode": "corpus-only",
+      "reason": "Stessa forma della voce sopra: consuma `border-wait-averages.json`, prodotto sul sito da `scripts/compute-border-wait-averages.mjs`. Fallimento SOFT per progetto — l'overlay e' cosmetico e `generator/data/borderCrossings.ts` ha i default editoriali dietro — quindi il caso brutto non e' l'assenza ma un formato che passa il gate ed e' sbagliato: le stringhe arrivano gia' renderizzate e finiscono verbatim nel corpo di un articolo. Le due sponde NON asseriscono lo stesso formato: il test del sito copre `\\d+-\\d+ min`, questo lato accetta anche il caso degenere `N min` che `formatRange()` emette quando p25 == p75. La differenza e' pinnata in `generator/tests/rewire-json-contracts.test.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "b3ca421f2b189143",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/scripts/refresh-events-dataset.mjs",
+      "mode": "corpus-only",
+      "reason": "Terza meta' consumatrice: `events.json`, prodotto sul sito da `scripts/assemble-events-dataset.mjs`. Hard gate, e fino alla issue #101 l'unico dei tre senza NESSUN tocco di CI — `refresh:events` esisteva in package.json ma lo invocava solo `refresh-events-digest.yml`, in scrittura, e lo script mancava anche da `generator/tests/dry-run-entrypoints.mjs`. Conta perche' `loadEventsDataset()` inghiotte ogni fallimento e ritorna `{ events: [] }`: il digest renderizza «nessun evento questo weekend» e SOVRASCRIVE quello corretto sulla URL evergreen `eventi-weekend-ticino`. Il gate lato fetch valida `events[]`, `schemaVersion` e almeno un `startDate`; i campi che il digest renderizza davvero (title, startTime, canton, comune) sono dichiarati e verificati in `generator/tests/lib/rewire-contracts.mjs`.",
+      "baseline": {
+        "site": null,
+        "corpus": "bb221335bb9073cb",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
       "path": "scripts/lib/cf-analytics.mjs",
       "mode": "identical",
       "reason": "Client GraphQL Cloudflare Analytics. **Oggi i due lati NON coincidono**, e la registrazione lo dichiara apposta: il blob qui e' identico a `valerielinc-ops@be6b31d5:scripts/lib/cf-analytics.mjs`, cioe' e' la copia del trasporto del 2026-08-02 mai piu' toccata; il sito ha aggiunto `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` il 2026-08-05. Non e' un adattamento, e' ritardo: `identical` fa emergere il caso come `undeclared-drift` invece di lasciarlo muto.",

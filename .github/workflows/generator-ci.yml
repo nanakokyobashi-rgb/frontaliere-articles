@@ -104,6 +104,20 @@ jobs:
       - name: Border-wait ranking window reachable and fresh
         run: node generator/scripts/refresh-border-wait-window.mjs --check
 
+      # Il terzo contratto del REWIRE set, e fino alla issue #101 l'unico senza
+      # NESSUN tocco di CI: `refresh:events` esisteva in package.json ma lo
+      # invocava solo refresh-events-digest.yml, in scrittura. Hard gate come la
+      # finestra sopra, e per la stessa ragione — `loadEventsDataset()` inghiotte
+      # ogni fallimento e ritorna zero eventi, e il digest renderizza «nessun
+      # evento questo weekend» SOVRASCRIVENDO quello corretto sulla URL evergreen.
+      #
+      # Questi tre `--check` girano solo sui path di questo workflow, quindi non
+      # partono per una modifica del SITO: la copertura a orologio e'
+      # rewire-contract-watch.yml, e la forma e' inchiodata offline da
+      # generator/tests/rewire-json-contracts.test.mjs.
+      - name: Events dataset reachable and well-shaped
+        run: node generator/scripts/refresh-events-dataset.mjs --check
+
   dry-run:
     # The generator's own smoke test: load every entry point with writes
     # disabled (DRY_RUN=1, the convention the scripts already document) and

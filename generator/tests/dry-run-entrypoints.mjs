@@ -46,6 +46,10 @@ const ENTRY_POINTS = [
   'generate-journalist-image-catalog.mjs',
   'refresh-border-wait-averages.mjs',
   'refresh-border-wait-window.mjs',
+  // Terzo `refresh` del REWIRE set, dimenticato qui quando gli altri due sono
+  // stati aggiunti (issue #101). L'omissione non era visibile: la lista e'
+  // scritta a mano e nessun controllo la confronta con `generator/scripts/`.
+  'refresh-events-dataset.mjs',
 ];
 
 /**
