@@ -17,19 +17,12 @@
  * than a load failure is not counted against it — some of these legitimately
  * refuse to run without credentials, and that refusal is the script working.
  *
- * ATTENZIONE, questa riga diceva «`--help`, which every one of them handles
- * before doing any work» e NON e' vero (issue #101, finding 🟡 del round 1):
- * i tre `refresh-*` del REWIRE set — `refresh-events-dataset.mjs`,
- * `refresh-border-wait-window.mjs`, `refresh-border-wait-averages.mjs` —
- * riconoscono `--check` ma non `--help`, e nessuno dei tre legge `DRY_RUN`
- * (verificato: `grep -n 'help\|DRY_RUN'` non trova nulla in nessuno dei tre).
- * Con `--help` prendono quindi il ramo di lavoro vero: un fetch reale contro
- * `cdn.frontaliereticino.ch` a ogni push su `generator/**`, e la scrittura
- * della cache. Il delta `git status` piu' sotto non se ne accorge perche' i
- * path di cache sono gitignored. Il caricamento — cio' che questo harness
- * misura — resta provato; la meta' «writes disabled» del titolo no, per questi
- * tre. Toglierlo richiede che i tre script crescano una guardia `--help`/
- * `DRY_RUN`, che e' una modifica agli script e non a questo harness.
+ * `--help`, which every one of them handles before doing any work (issue
+ * #168 closed the gap flagged by issue #101, finding 🟡 del round 1): i tre
+ * `refresh-*` del REWIRE set — `refresh-events-dataset.mjs`,
+ * `refresh-border-wait-window.mjs`, `refresh-border-wait-averages.mjs` — ora
+ * riconoscono anche `--help` (uscita immediata, nessun fetch) e `DRY_RUN` come
+ * alias env di `--check`, oltre a `--check`.
  *
  * WHAT IT DOES NOT PROVE
  *
