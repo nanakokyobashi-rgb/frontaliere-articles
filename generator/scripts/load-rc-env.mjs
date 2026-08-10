@@ -304,6 +304,27 @@ export function isTrivialSecret(value) {
  * getRcValue() works unchanged. Returns null on any failure — callers fall
  * back to plain env vars, exactly as before.
  */
+/**
+ * Whether an HTTP status from the Remote Config REST fetch is worth retrying.
+ *
+ * 429 and 5xx are transient — the exact failure mode behind issues #45, #54
+ * and #171 ("Agent loop down: GITHUB_PAT failed to load"), all three of which
+ * turned out NOT to be a real credential problem but a single unretried 429
+ * or 503 from this endpoint. A 4xx other than 429 (bad JWT, wrong project)
+ * will not resolve itself on retry.
+ */
+export function isRetryableRcFetchStatus(status) {
+  return status === 429 || status >= 500;
+}
+
+/** Exponential backoff in ms for retry attempt N (1-based), same shape as
+ * the transient-retry loop in refresh-events-dataset.mjs. */
+export function rcFetchBackoffMs(attempt) {
+  return 1000 * 2 ** (attempt - 1);
+}
+
+const RC_FETCH_ATTEMPTS = 4;
+
 async function fetchTemplateViaRest() {
   const { readFileSync } = await import('node:fs');
   const { getServiceAccountAccessToken } = await import('./lib/google-service-account-token.mjs');
@@ -316,12 +337,20 @@ async function fetchTemplateViaRest() {
     'https://www.googleapis.com/auth/firebase.remoteconfig',
   );
 
-  const rcRes = await fetch(
-    `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
-    { headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' } },
-  );
-  if (!rcRes.ok) throw new Error(`Remote Config REST fetch failed: ${rcRes.status}`);
-  return rcRes.json();
+  let lastErr;
+  for (let attempt = 1; attempt <= RC_FETCH_ATTEMPTS; attempt++) {
+    const rcRes = await fetch(
+      `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
+      { headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' } },
+    );
+    if (rcRes.ok) return rcRes.json();
+    lastErr = new Error(`Remote Config REST fetch failed: ${rcRes.status}`);
+    if (!isRetryableRcFetchStatus(rcRes.status)) throw lastErr;
+    if (attempt < RC_FETCH_ATTEMPTS) {
+      await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
+    }
+  }
+  throw lastErr;
 }
 
 // ─── Main ────────────────────────────────────────────────────────────────

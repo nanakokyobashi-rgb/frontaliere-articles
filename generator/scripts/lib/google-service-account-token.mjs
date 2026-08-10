@@ -44,27 +44,42 @@ export function createJwtAssertion(creds, scope) {
   return `${unsigned}.${sign.sign(creds.private_key, 'base64url')}`;
 }
 
+const TOKEN_EXCHANGE_ATTEMPTS = 4;
+
 /**
  * Exchange a signed assertion for an access token.
+ *
+ * Retries 429/5xx: this call sits directly upstream of the Remote Config
+ * fetch in load-rc-env.mjs's REST fallback, and a single transient failure
+ * here produces the exact same symptom as one in the RC fetch itself — see
+ * isRetryableRcFetchStatus in load-rc-env.mjs, which retries the sibling call.
  * @param {string} assertion
  * @returns {Promise<string>} access token
  */
 export async function exchangeAssertionForToken(assertion) {
-  const res = await fetch(GOOGLE_TOKEN_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
-      assertion,
-    }),
-  });
-  if (!res.ok) {
+  let lastErr;
+  for (let attempt = 1; attempt <= TOKEN_EXCHANGE_ATTEMPTS; attempt++) {
+    const res = await fetch(GOOGLE_TOKEN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+        assertion,
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (!data?.access_token) throw new Error('OAuth response missing access_token');
+      return data.access_token;
+    }
     const text = await res.text();
-    throw new Error(`OAuth token exchange failed: ${res.status} ${text}`);
+    lastErr = new Error(`OAuth token exchange failed: ${res.status} ${text}`);
+    if (res.status !== 429 && res.status < 500) throw lastErr;
+    if (attempt < TOKEN_EXCHANGE_ATTEMPTS) {
+      await new Promise((r) => setTimeout(r, 1000 * 2 ** (attempt - 1)));
+    }
   }
-  const data = await res.json();
-  if (!data?.access_token) throw new Error('OAuth response missing access_token');
-  return data.access_token;
+  throw lastErr;
 }
 
 /**
