@@ -10830,6 +10830,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
     // ── Last resort: expand existing short content instead of failing ──
     console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
+    // Snapshot the pre-expansion draft: it already cleared runFactualityGates
+    // and llmFactCheck earlier in THIS SAME attempt (Step 3a.0b-bis / 3a.0c
+    // above) — it's short, not wrong. If expansion below fails the
+    // deterministic gate, this is what we fall back to instead of shipping
+    // the fabricated version (#156).
+    const preExpansionData = structuredClone(data);
     try {
       data = await expandShortItalianContent(data, adaptiveMinWords, { boundToText: isStatsBfsSource });
 
@@ -10846,6 +10852,36 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         dedupeRepeatedParagraphs(expandedItContent);
       }
       stripDuplicateTitleFromBody(expandedItContent);
+
+      // #156: expansion is a fresh LLM generation like any other attempt in
+      // this loop, and CLAUDE.md rule #1 carves no "last resort" exception.
+      // Re-run the SAME deterministic gates Step 3a.0b-bis enforces above —
+      // free, no model calls, and this is exactly the check that would have
+      // caught the shipped per-comune frontaliere counts and tax figures
+      // invented for a closed bfs_stats source. Unlike a mid-loop retry there
+      // is no further attempt to fall back to, so a gate failure here reverts
+      // to the pre-expansion draft rather than publish unchecked content.
+      const expandGateResult = runFactualityGates({
+        sections: {
+          body1: data.content.it?.body1 || '',
+          body2: data.content.it?.body2 || '',
+          body3: data.content.it?.body3 || '',
+        },
+        sourceText: url.startsWith('evergreen://') ? '' : pageContent,
+        sourceDate: lastSourcePublishedAt || undefined,
+        publishedAt: new Date().toISOString(),
+        memory: defectMemory(),
+      });
+      if (!expandGateResult.passed) {
+        for (const i of expandGateResult.blocking) {
+          RUN_REPORT.factuality.gateRejectionsByCode[i.code] =
+            (RUN_REPORT.factuality.gateRejectionsByCode[i.code] || 0) + 1;
+        }
+        const summary = expandGateResult.blocking.map((i) => `[${i.code}] ${i.message}`).join('; ');
+        console.error(`  🚫 Espansione rigettata dai gate deterministici: ${summary}`);
+        console.error(`  ↩️  Torno al testo pre-espansione (già approvato dai gate, ma corto)...`);
+        data = preExpansionData;
+      }
 
       const expandedWords = italianBodyWordCount(data);
       if (expandedWords >= adaptiveMinWords) {
