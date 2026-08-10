@@ -48,6 +48,24 @@
  *             parlare e smentisce, vince il lessico: `<00>c1usbildung` darebbe
  *             «Áusbildung», che nel corpus non esiste, quindi si rifiuta.
  *
+ * IL MARKER PARASSITA — dove non c'e' NIENTE da indovinare
+ *
+ * In una parte delle occorrenze il carattere non-ASCII e' ancora al suo posto e
+ * il byte C0 gli sta davanti: `d<0E>épenses`, `Contr<0F>ôle`, `Comunit<00>à`.
+ * Le due letture possibili — «byte parassita davanti alla é» oppure «(byte + é)
+ * e' la codifica della é» — portano alla STESSA parola, quindi qui non si
+ * sceglie fra due ricostruzioni: si toglie un byte e basta.  Solo in questo
+ * caso, e solo se il lessico conferma la parola che ne esce, la cancellazione
+ * del marker entra fra i candidati.  Dove la lettera che segue e' ASCII la
+ * cancellazione resta vietata — `<10>Der` senza il marker fa «Der», che e'
+ * tedesco corrente, e buttare l'ancora per una virgoletta persa e' proprio cio'
+ * che questo script non fa.
+ *
+ * Attenzione: parassita vuol dire che la cancellazione e' AMMESSA fra i
+ * candidati, non che vinca.  In `s<0E>él<0E>èvent` entrambi i marker sono
+ * parassiti, ma il lessico conosce «s’élèvent» e non «sélèvent»: il primo
+ * marker diventa l'apostrofo, il secondo sparisce.
+ *
  * FAIL-CLOSED
  *
  * Ogni occorrenza che nessuna delle due prove risolve resta INTATTA — col suo
@@ -264,9 +282,39 @@ function unitaPossibili(token, i) {
     const valore = parseInt(c1 + c2, 16);
     unita.push({ lunghezza: 3, coda: c1 + c2, hex: letteraLatin1(valore) });
   }
-  if (c1 && c1 >= '0' && c1 <= '9') unita.push({ lunghezza: 2, coda: c1, hex: null });
+  // La coda di una unita' corta e' una CIFRA ESADECIMALE, non una cifra decimale:
+  // in `co<0F>bt` la coda e' 'b' e 0x0F*16+0xb = 0xFB = û, che il lessico conferma
+  // con «coût» (2.726 occorrenze).  Fermarsi a [0-9] lasciava fuori a-f, cioe' i
+  // sei caratteri Latin-1 per riga della tabella: â, ê, î, ô, û e le loro
+  // compagne.  La coda resta comunque solo un CANDIDATO: se il lessico non
+  // conferma la ricostruzione, l'occorrenza e' rifiutata come prima.
+  //
+  // Solo MINUSCOLA, e l'asimmetria con la coda lunga qui sopra e' voluta: due
+  // caratteri esadecimali di fila dentro una parola sono gia' di per se' una
+  // forma anomala, mentre UNA lettera A-F maiuscola subito dopo il marker e'
+  // quasi sempre una maiuscola vera, cioe' l'iniziale della parola che il
+  // marker precede.  Misurato sui 279 marker di a6cb7e10: le sole 4 occorrenze
+  // con A-F maiuscola dopo il marker sono `<10>Der`, `<01>Eureka` e
+  // `<00>Alain` — tre iniziali di parola, zero code.  Accettare A-F sblocca
+  // **0** riparazioni (45 -> 45, misurato) e metterebbe a rischio quelle tre,
+  // quindi l'asimmetria e' fail-closed a costo zero.
+  if (c1 && HEX.test(c1) && c1 === c1.toLowerCase()) unita.push({ lunghezza: 2, coda: c1, hex: null });
   unita.push({ lunghezza: 1, coda: '', hex: null });
   return unita;
+}
+
+/**
+ * Un marker e' PARASSITA quando il carattere che lo segue e' gia' una lettera
+ * non-ASCII: in `d<0E>épenses` la é e' al suo posto e il byte C0 e' un residuo
+ * davanti a lei.  Le due letture possibili — «byte parassita davanti alla é»
+ * oppure «(byte + é) e' la codifica della é» — danno la STESSA ricostruzione,
+ * `dépenses`, quindi qui non si sceglie fra due parole: si toglie un byte.
+ * E' l'unico posto in cui la cancellazione del marker e' una ricostruzione
+ * ammessa, e vale comunque solo se il lessico conferma la parola che ne esce.
+ */
+function markerParassita(token, i) {
+  const c = token[i + 1];
+  return Boolean(c) && c.charCodeAt(0) > 127 && /\p{L}/u.test(c);
 }
 
 /** Quante lettere del token NON sono marker ne' coda consumata. */
@@ -283,8 +331,12 @@ function sostituzioniDentro(testo, marker, scelte, inizio, lunghezza) {
   let cursoreOriginale = 0;
   for (let k = 0; k < marker.length; k += 1) {
     posizione += marker[k] - cursoreOriginale;
-    if (posizione < inizio || posizione >= inizio + lunghezza) return false;
-    posizione += 1;
+    // Una cancellazione (marker parassita) non rimette nessun carattere: non c'e'
+    // niente da contenere nel ritaglio, e avanzare di 1 sposterebbe le posizioni
+    // dei marker successivi.
+    const lungo = scelte[k].carattere.length;
+    if (lungo > 0 && (posizione < inizio || posizione >= inizio + lunghezza)) return false;
+    posizione += lungo;
     cursoreOriginale = marker[k] + scelte[k].unita.lunghezza;
   }
   return true;
@@ -311,11 +363,17 @@ function ricostruisci(token, marker, scelte) {
  * Latin-1 del carattere e il byte C0 e' la cifra alta — 0x0E+'9' = 0xE9 = é,
  * 0x0F+'4' = 0xF4 = ô.  Non e' un'ipotesi da applicare ovunque: e' una legge
  * che va VERIFICATA nel file in cui la si usa, contando quante sostituzioni
- * gia' provate dal lessico la rispettano e quante la smentiscono.  In
- * `bellinzona-2025-consuntivo-risultati.ts` la rispettano é, è, â, ô; in
- * `nestle-200-posti-lombardia.ts` la stessa é si scrive 0x16+'9' e la legge
- * cade subito.  Senza questa verifica per file, «### 0x0F+9 0x0F+9 0x0F+9»
- * diventerebbe «ùùù».
+ * gia' provate dal lessico la rispettano e quante la smentiscono.
+ *
+ * Quanto sia stretta la soglia si misura: su a6cb7e10 NESSUNO dei 29 file
+ * sporchi la raggiunge — il massimo e' 2 pro / 0 contro in
+ * `svincolo-a2-sigirino-ritardo.ts` e 1 pro / 0 contro in
+ * `bellinzona-2025-consuntivo-risultati.ts` — quindi oggi la legge non si
+ * applica da nessuna parte e nessuna delle riparazioni passa da qui.  Il ramo
+ * resta per i giri futuri, dove il residuo puo' presentarsi con altre forme.
+ * Ed e' proprio in `bellinzona` che si vede cosa costerebbe assumerla senza
+ * verifica: i suoi 18 marker residui stanno in tre token `<0F>9<0F>9<0F>9`, e
+ * 0x0F+'9' = 0xF9 = ù, cioe' «ùùù».
  */
 function caratteredaNibble(byte, coda) {
   if (coda.length !== 1 || !HEX.test(coda)) return null;
@@ -342,6 +400,10 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
     }
     const scelte = [];
     for (const u of unita) for (const c of ALFABETO) scelte.push({ unita: u, carattere: c });
+    // La cancellazione entra fra i candidati SOLO dove il marker e' parassita,
+    // cioe' dove la lettera non-ASCII e' gia' li'.  Altrove togliere il marker
+    // significherebbe buttare via l'ancora senza rimettere niente.
+    if (markerParassita(token, i)) scelte.push({ unita: unita[unita.length - 1], carattere: '' });
     return scelte;
   });
 
@@ -398,9 +460,13 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   // Il controllo vale solo se cio' che resta e' una PAROLA: `0x0E+'0'` isolato
   // cancellato fa «0», che nel corpus c'e' a migliaia perche' e' un numero, e
   // non dice niente su cosa ci fosse prima.
+  // Non vale dove OGNI marker del token e' parassita: li' la cancellazione non e'
+  // il segno di una lettera perduta, e' la ricostruzione — e passa comunque dal
+  // lessico come tutte le altre, qualche riga piu' sotto.
   const cancellato = ricostruisci(token, marker, marker.map(() => ({ unita: { lunghezza: 1, coda: '', hex: null }, carattere: '' })));
   const cancellatoRitagliato = ritaglia(cancellato);
-  if (/\p{L}/u.test(cancellatoRitagliato) && (lessico.get(cancellatoRitagliato) || 0) >= freqMinima) {
+  const tuttiParassiti = marker.every((i) => markerParassita(token, i));
+  if (!tuttiParassiti && /\p{L}/u.test(cancellatoRitagliato) && (lessico.get(cancellatoRitagliato) || 0) >= freqMinima) {
     return {
       esito: 'rifiutato',
       motivo: 'il marker sostituiva un carattere che non e\' una lettera (senza di lui la parola esiste gia\')',
@@ -411,7 +477,7 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   const dettaglia = (scelte, canale, freq) => ({
     esito: 'riparato',
     testo: ricostruisci(token, marker, scelte),
-    canale,
+    canale: scelte.some((s) => s.carattere === '') ? `${canale} (parassita)` : canale,
     freq,
     dettagli: marker.map((i, k) => ({
       byte: token.charCodeAt(i),
@@ -445,13 +511,35 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   //    e' la preposizione «à».  La soglia e' zero lettere di contesto, non
   //    «poche»: con anche una sola lettera intorno il lessico ha voce e va
   //    ascoltato, altrimenti ` Der` diventa «Þr».
+  //    Anche qui pero' il corpus ha l'ultima parola: il carattere da solo deve
+  //    essere una PAROLA che il corpus usa da sola.  «à» lo e' (migliaia di
+  //    volte), «â» no — e la differenza non e' un dettaglio, perche' 0xE2 in
+  //    questo corpus e' anche il primo byte UTF-8 di « — » e di « “ ».  In
+  //    `svincolo-a2-sigirino-ritardo.ts` il token `<00>e2` apre una riga prima
+  //    di «Il est important de noter»: li' non c'era una â, c'era un segno di
+  //    cui e' rimasta solo la testa della sequenza UTF-8.  Senza questa riga la
+  //    lettura esadecimale ci scriverebbe «â» e l'ancora sparirebbe.
   if (hexTesto && confermate.size === 0) {
     const contesto = token.length - hexScelte.reduce((s, x) => s + x.unita.lunghezza, 0);
-    if (contesto === 0) return dettaglia(hexScelte, 'hex', 0);
+    if (contesto === 0 && (lessico.get(hexTesto) || 0) >= freqMinima) {
+      return dettaglia(hexScelte, 'hex', lessico.get(hexTesto) || 0);
+    }
   }
   // 2b. il lessico non ha confermato niente e la legge del nibble regge in
   //     questo file: e' il caso di `0x0E+'0'` da solo, che e' la preposizione «à».
-  if (nibbleTesto && confermate.size === 0) return dettaglia(nibbleScelte, 'nibble', 0);
+  //     Vale la STESSA guardia del punto 2, e qui serve anche di piu'.
+  //     `leggeNibble` e' una prova sul FILE — tre sostituzioni gia' confermate
+  //     dal lessico la rispettano e nessuna la smentisce — ma non dice niente
+  //     sul TOKEN isolato: in un file dove la legge regge, `0x0F+'4'` da solo
+  //     si leggerebbe ô e finirebbe scritto senza che una sola parola del
+  //     corpus lo confermi.  E' esattamente l'argomento del punto 2 per
+  //     `<00>e2`: la lettura da sola non basta, il carattere ricostruito
+  //     dev'essere una PAROLA che il corpus usa da sola.  «à» lo e', «ô» no.
+  if (nibbleTesto && confermate.size === 0) {
+    const contesto = token.length - nibbleScelte.reduce((s, x) => s + x.unita.lunghezza, 0);
+    const freq = lessico.get(nibbleTesto) || 0;
+    if (contesto === 0 && freq >= freqMinima) return dettaglia(nibbleScelte, 'nibble', freq);
+  }
   // 3. una sola ricostruzione confermata.
   if (confermate.size === 1) {
     const [testo, { scelte, freq }] = [...confermate][0];
@@ -500,6 +588,10 @@ function riparaTesto(testo, lessico, freqMinima) {
   // prove che non hanno bisogno di sapere niente sul file — lessico ed hex.
   // Ogni riparazione accettata insegna una firma (byte, coda) -> carattere e
   // porta una prova a favore o contro la legge del nibble.
+  // Il `false` finale non e' un dettaglio: `mappaAppresa` si riempie SOLO qui,
+  // dove la legge del nibble e' spenta, quindi nessuna riparazione del canale
+  // `nibble` puo' entrarci e propagarsi ai token fitti di marker della seconda
+  // passata.  La mappa impara solo da cio' che lessico ed hex hanno confermato.
   const risultati = new Map();
   let proNibble = 0;
   let controNibble = 0;
