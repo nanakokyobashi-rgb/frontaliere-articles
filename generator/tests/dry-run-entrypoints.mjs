@@ -11,12 +11,25 @@
  * dead on arrival. Six of them were, and the only way to find out was to run
  * them — which had never happened, because the transport was a file copy.
  *
- * Each entry point is spawned in a child process with `--help`, which every one
- * of them handles before doing any work. The child either reaches its argument
- * parsing (pass) or dies on a module-resolution/syntax error (fail). A non-zero
- * exit for a REASON OTHER than a load failure is not counted against it — some
- * of these legitimately refuse to run without credentials, and that refusal is
- * the script working.
+ * Each entry point is spawned in a child process with `--help` and `DRY_RUN=1`.
+ * The child either reaches its argument parsing (pass) or dies on a
+ * module-resolution/syntax error (fail). A non-zero exit for a REASON OTHER
+ * than a load failure is not counted against it — some of these legitimately
+ * refuse to run without credentials, and that refusal is the script working.
+ *
+ * ATTENZIONE, questa riga diceva «`--help`, which every one of them handles
+ * before doing any work» e NON e' vero (issue #101, finding 🟡 del round 1):
+ * i tre `refresh-*` del REWIRE set — `refresh-events-dataset.mjs`,
+ * `refresh-border-wait-window.mjs`, `refresh-border-wait-averages.mjs` —
+ * riconoscono `--check` ma non `--help`, e nessuno dei tre legge `DRY_RUN`
+ * (verificato: `grep -n 'help\|DRY_RUN'` non trova nulla in nessuno dei tre).
+ * Con `--help` prendono quindi il ramo di lavoro vero: un fetch reale contro
+ * `cdn.frontaliereticino.ch` a ogni push su `generator/**`, e la scrittura
+ * della cache. Il delta `git status` piu' sotto non se ne accorge perche' i
+ * path di cache sono gitignored. Il caricamento — cio' che questo harness
+ * misura — resta provato; la meta' «writes disabled» del titolo no, per questi
+ * tre. Toglierlo richiede che i tre script crescano una guardia `--help`/
+ * `DRY_RUN`, che e' una modifica agli script e non a questo harness.
  *
  * WHAT IT DOES NOT PROVE
  *
@@ -46,6 +59,10 @@ const ENTRY_POINTS = [
   'generate-journalist-image-catalog.mjs',
   'refresh-border-wait-averages.mjs',
   'refresh-border-wait-window.mjs',
+  // Terzo `refresh` del REWIRE set, dimenticato qui quando gli altri due sono
+  // stati aggiunti (issue #101). L'omissione non era visibile: la lista e'
+  // scritta a mano e nessun controllo la confronta con `generator/scripts/`.
+  'refresh-events-dataset.mjs',
 ];
 
 /**

@@ -1,0 +1,36 @@
+{
+  "generatedFor": "2026-08-10",
+  "windowDays": 7,
+  "current": {
+    "weekStart": "2026-08-03",
+    "weekEnd": "2026-08-09",
+    "perCrossing": {
+      "bizzarone-novazzano": { "weightedAvgMinutes": 0.7241379310344828, "totalSamples": 58 },
+      "chiasso-brogeda": { "weightedAvgMinutes": 9.35, "totalSamples": 60 },
+      "chiasso-centro": { "weightedAvgMinutes": 2.4, "totalSamples": 60 },
+      "chiasso-strada": { "weightedAvgMinutes": 11.915254237288135, "totalSamples": 59 },
+      "gaggiolo": { "weightedAvgMinutes": 5.183333333333334, "totalSamples": 60 },
+      "ponte-tresa": { "weightedAvgMinutes": 3.9827586206896552, "totalSamples": 58 },
+      "porto-ceresio-brusino": { "weightedAvgMinutes": 3.413793103448276, "totalSamples": 58 },
+      "san-pietro": { "weightedAvgMinutes": 2.6666666666666665, "totalSamples": 60 },
+      "anieres": { "weightedAvgMinutes": 0, "totalSamples": 58 },
+      "au-lustenau": { "weightedAvgMinutes": 3.586206896551724, "totalSamples": 58 }
+    }
+  },
+  "previous": {
+    "weekStart": "2026-07-27",
+    "weekEnd": "2026-08-02",
+    "perCrossing": {
+      "bizzarone-novazzano": { "weightedAvgMinutes": 0.5, "totalSamples": 16 },
+      "chiasso-brogeda": { "weightedAvgMinutes": 7.344827586206897, "totalSamples": 58 },
+      "chiasso-centro": { "weightedAvgMinutes": 3.5172413793103448, "totalSamples": 58 },
+      "chiasso-strada": { "weightedAvgMinutes": 4.258620689655173, "totalSamples": 58 },
+      "gaggiolo": { "weightedAvgMinutes": 4.456140350877193, "totalSamples": 57 },
+      "ponte-tresa": { "weightedAvgMinutes": 12.375, "totalSamples": 16 },
+      "porto-ceresio-brusino": { "weightedAvgMinutes": 4.0625, "totalSamples": 16 },
+      "san-pietro": { "weightedAvgMinutes": 4.43859649122807, "totalSamples": 57 },
+      "anieres": { "weightedAvgMinutes": 0, "totalSamples": 58 },
+      "au-lustenau": { "weightedAvgMinutes": 2.7758620689655173, "totalSamples": 58 }
+    }
+  }
+}

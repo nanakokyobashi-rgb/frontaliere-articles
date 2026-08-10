@@ -1,0 +1,91 @@
+name: REWIRE contract watch
+
+# I tre artefatti JSON che il SITO pubblica e che questo repo consuma, verificati
+# contro i DATI VERI a orologio (issue #101).
+#
+# ── Perche' non basta la suite offline ──────────────────────────────────────
+#
+# `generator/tests/rewire-json-contracts.test.mjs` inchioda la forma dei tre
+# contratti con fixture registrati. Quella meta' fallisce quando cambia il
+# CONSUMATORE — o quando qualcuno indebolisce la validazione di un `refresh`.
+# Non puo' fallire quando cambia il PRODUTTORE: un fixture e' una registrazione,
+# e una registrazione non si accorge di niente.
+#
+# ── Perche' non basta generator-ci.yml ──────────────────────────────────────
+#
+# I `--check` live ci sono gia' li', ma i suoi trigger sono `push`/`pull_request`
+# su `generator/**`: non partono MAI per una modifica del sito, che e' esattamente
+# il lato da cui il difetto arriva. Un contratto rotto resterebbe invisibile fino
+# alla prima generazione dopo la rottura — e in due casi su tre la generazione
+# NON fallisce, produce un articolo sbagliato su una URL evergreen che posiziona.
+#
+# ── Cosa succede quando diventa rosso ───────────────────────────────────────
+#
+# Niente di nuovo: la scansione centrale (`scripts/ci/scan-failed-runs.mjs`, via
+# `workflow-failure-issues.yml`) apre una issue dopo i fallimenti consecutivi di
+# gate, e `close-recovered-failure-issues.yml` la chiude quando torna verde. Il
+# gate sui consecutivi e' cio' che rende accettabile un check di rete a orologio:
+# un blip non produce niente, un produttore che ha cambiato forma si', perche'
+# continua a fallire.
+#
+# Nessun secret, nessuna scrittura, nessun push: solo `--check`, che valida e non
+# mette in cache niente.
+#
+# Cadenza sfasata (minuto 27, ogni 6h) dai cron del sito (:15/:17/:20/:23) e dai
+# cron gia' presenti qui: i due repo colpiscono la stessa quota API.
+
+on:
+  schedule:
+    - cron: '27 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rewire-contract-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Hard gate. E' il dato dell'articolo settimanale della classifica dogane:
+      # un publisher fermo o una forma cambiata devono fermare la pipeline, non
+      # produrre una classifica sbagliata.
+      - name: border-wait-ranking-window.json
+        run: node generator/scripts/refresh-border-wait-window.mjs --check
+
+      # Soft per progetto: l'overlay e' cosmetico e `generator/data/borderCrossings.ts`
+      # ha i default editoriali dietro. Esce comunque non-zero se ha FETCHATO
+      # qualcosa che non era un documento di medie — che e' il caso che conta,
+      # perche' quelle stringhe finiscono verbatim nel corpo di un articolo.
+      - name: border-wait-averages.json
+        run: node generator/scripts/refresh-border-wait-averages.mjs --check
+
+      # Hard gate, ed e' il contratto che fino alla #101 non aveva NESSUN tocco
+      # di CI: `loadEventsDataset()` inghiotte ogni fallimento e ritorna zero
+      # eventi, e il digest renderizza «nessun evento questo weekend»
+      # sovrascrivendo quello corretto sulla URL evergreen.
+      - name: events.json
+        run: node generator/scripts/refresh-events-dataset.mjs --check
+
+      # Il rosso qui non si ripara qui. Lo dice il job, cosi' chi apre la run non
+      # deve ricostruirlo: il registro delle tre coppie produttore/consumatore sta
+      # in generator/tests/lib/rewire-contracts.mjs.
+      - name: Dove si ripara
+        if: failure()
+        run: |
+          echo "::error::Un contratto REWIRE non combacia piu' con i dati pubblicati."
+          echo "Il produttore di tutti e tre vive nel repo del SITO e da qui non e' modificabile."
+          echo "Le tre coppie produttore/consumatore, con i campi letti e il sintomo di ognuna:"
+          echo "  generator/tests/lib/rewire-contracts.mjs"

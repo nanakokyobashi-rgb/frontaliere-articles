@@ -1,0 +1,180 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-09T07:08:46.705Z",
+  "totalEvents": 6,
+  "events": [
+    {
+      "id": "myswitzerland:5cefd7a0bcfe40e2a13193f9211fd5e7",
+      "title": "Belli sold out",
+      "titleByLocale": {
+        "it": "Belli sold out",
+        "en": "Belli sold out",
+        "de": "Belli sold out",
+        "fr": "Belli sold out"
+      },
+      "description": "Il mercato dei saldi organizzato dalla Societa commercianti di Bellinzona.",
+      "descriptionByLocale": {
+        "it": "Il mercato dei saldi organizzato dalla Societa commercianti di Bellinzona.",
+        "en": "The sales market organized by the Bellinzona Traders' Association.",
+        "de": "Der vom Handlerverband Bellinzona organisierte Ausverkaufsmarkt.",
+        "fr": "Le marche des soldes organise par l'Association des commercants de Bellinzone."
+      },
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-30",
+      "startTime": "10:00",
+      "category": "Event",
+      "venue": "6500 Bellinzona",
+      "comune": "Bellinzona",
+      "canton": "TI",
+      "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/belli-sold-out/",
+      "sourceKey": "myswitzerland",
+      "sourceName": "MySwitzerland",
+      "geo": null,
+      "recurring": false
+    },
+    {
+      "id": "tio-agenda:9f1c2b4d5e6a7b8c9d0e1f2a3b4c5d6e",
+      "title": "Concerto al LAC",
+      "titleByLocale": {
+        "it": "Concerto al LAC",
+        "en": "Concert at the LAC",
+        "de": "Konzert im LAC",
+        "fr": "Concert au LAC"
+      },
+      "description": "Serata di musica da camera al LAC Lugano Arte e Cultura.",
+      "descriptionByLocale": {
+        "it": "Serata di musica da camera al LAC Lugano Arte e Cultura.",
+        "en": "Chamber music evening at LAC Lugano Arte e Cultura.",
+        "de": "Kammermusikabend im LAC Lugano Arte e Cultura.",
+        "fr": "Soiree de musique de chambre au LAC Lugano Arte e Cultura."
+      },
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-15",
+      "startTime": "20:30",
+      "category": "Concerto",
+      "venue": "LAC, Piazza Bernardino Luini 6",
+      "comune": "Lugano",
+      "canton": "TI",
+      "url": "https://www.tio.ch/agenda/concerto-al-lac",
+      "sourceKey": "tio-agenda",
+      "sourceName": "Tio.ch Agenda",
+      "geo": null,
+      "recurring": false
+    },
+    {
+      "id": "tio-agenda:1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d",
+      "title": "Mercato del sabato",
+      "titleByLocale": {
+        "it": "Mercato del sabato",
+        "en": "Saturday market",
+        "de": "Samstagsmarkt",
+        "fr": "Marche du samedi"
+      },
+      "description": "Mercato settimanale in Piazza della Riforma.",
+      "descriptionByLocale": {
+        "it": "Mercato settimanale in Piazza della Riforma.",
+        "en": "Weekly market in Piazza della Riforma.",
+        "de": "Wochenmarkt auf der Piazza della Riforma.",
+        "fr": "Marche hebdomadaire sur la Piazza della Riforma."
+      },
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-15",
+      "startTime": "08:00",
+      "category": "Mercato",
+      "venue": "Piazza della Riforma",
+      "comune": "Lugano",
+      "canton": "TI",
+      "url": "https://www.tio.ch/agenda/mercato-del-sabato",
+      "sourceKey": "tio-agenda",
+      "sourceName": "Tio.ch Agenda",
+      "geo": null,
+      "recurring": true
+    },
+    {
+      "id": "guidle:7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f",
+      "title": "Festa di paese a Mendrisio",
+      "titleByLocale": {
+        "it": "Festa di paese a Mendrisio",
+        "en": "Village festival in Mendrisio",
+        "de": "Dorffest in Mendrisio",
+        "fr": "Fete de village a Mendrisio"
+      },
+      "description": "Bancarelle, musica dal vivo e cucina locale nel centro storico.",
+      "descriptionByLocale": {
+        "it": "Bancarelle, musica dal vivo e cucina locale nel centro storico.",
+        "en": "Stalls, live music and local food in the old town.",
+        "de": "Stande, Live-Musik und lokale Kuche in der Altstadt.",
+        "fr": "Stands, musique live et cuisine locale dans la vieille ville."
+      },
+      "startDate": "2026-08-16",
+      "endDate": "2026-08-16",
+      "startTime": "17:00",
+      "category": "Festa",
+      "venue": "Centro storico",
+      "comune": "Mendrisio",
+      "canton": "TI",
+      "url": "https://www.guidle.com/festa-di-paese-mendrisio",
+      "sourceKey": "guidle",
+      "sourceName": "Guidle",
+      "geo": null,
+      "recurring": false
+    },
+    {
+      "id": "myswitzerland:e5955a176fa94905a6d8d2906b0bad80",
+      "title": "Fruhlingsmarkt Einsiedeln",
+      "titleByLocale": {
+        "it": "Fruhlingsmarkt Einsiedeln",
+        "en": "Fruhlingsmarkt Einsiedeln",
+        "de": "Fruhlingsmarkt Einsiedeln",
+        "fr": "Fruhlingsmarkt Einsiedeln"
+      },
+      "description": "Markte in Einsiedeln, von der Hauptstrasse bis zum Rathaus.",
+      "descriptionByLocale": {
+        "it": "Markte in Einsiedeln, von der Hauptstrasse bis zum Rathaus.",
+        "en": "Markets in Einsiedeln, from the main street to the town hall.",
+        "de": "Markte in Einsiedeln, von der Hauptstrasse bis zum Rathaus.",
+        "fr": "Marches a Einsiedeln, de la rue principale a l'hotel de ville."
+      },
+      "startDate": "2026-08-15",
+      "endDate": "2026-08-15",
+      "startTime": "09:00",
+      "category": "Markt",
+      "venue": "Hauptstrasse",
+      "comune": "Einsiedeln",
+      "canton": "SZ",
+      "url": "https://www.myswitzerland.com/de-ch/erlebnisse/veranstaltungen/fruehlingsmarkt-einsiedeln/",
+      "sourceKey": "myswitzerland",
+      "sourceName": "MySwitzerland",
+      "geo": null,
+      "recurring": false
+    },
+    {
+      "id": "guidle:0f1e2d3c4b5a69788796a5b4c3d2e1f0",
+      "title": "Evento senza comune risolto",
+      "titleByLocale": {
+        "it": "Evento senza comune risolto",
+        "en": "Event with no resolved comune",
+        "de": "Veranstaltung ohne aufgeloste Gemeinde",
+        "fr": "Evenement sans commune resolue"
+      },
+      "description": "Voce reale del dataset: la risoluzione del comune fallisce e il campo resta assente.",
+      "descriptionByLocale": {
+        "it": "Voce reale del dataset: la risoluzione del comune fallisce e il campo resta assente.",
+        "en": "A real dataset row: comune resolution failed and the field is absent.",
+        "de": "Echter Datensatz: die Gemeindeauflosung schlug fehl, das Feld fehlt.",
+        "fr": "Ligne reelle du jeu de donnees : la resolution de la commune a echoue."
+      },
+      "startDate": "2026-08-16",
+      "endDate": "2026-08-16",
+      "startTime": "",
+      "category": "Event",
+      "venue": "Svizzera",
+      "canton": "",
+      "url": "https://www.guidle.com/evento-senza-comune",
+      "sourceKey": "guidle",
+      "sourceName": "Guidle",
+      "geo": null,
+      "recurring": false
+    }
+  ]
+}
