@@ -4335,7 +4335,45 @@ async function buildStatsBfsPromptContent(quarter) {
   if (!snap.exists) {
     throw new Error('config/bfs_stats Firestore doc missing — refresh-bfs-stats has not run yet.');
   }
-  const data = snap.data() || {};
+  return formatStatsBfsPrompt(quarter, snap.data() || {});
+}
+
+/**
+ * PURA: il documento `config/bfs_stats` → il testo del prompt. Separata da
+ * buildStatsBfsPromptContent() perché quella metà è tutta I/O (firebase-admin,
+ * credenziali, rete) e non è verificabile in CI, mentre QUESTA è l'unica che
+ * decide cosa il fact-checker considererà "un fatto della fonte".
+ *
+ * ## Perché il testo di questo prompt è materia da gate, non da prosa
+ *
+ * `extractSourceAnchors()` (article-factuality-gates.mjs) raccoglie come ANCORA
+ * OBBLIGATORIA ogni `\d[\d.,]*\s*%` che compare nel SOURCE CONTENT — e per
+ * `stats-bfs://` il SOURCE CONTENT è questa stringa, istruzioni editoriali
+ * comprese. Due difetti ne discendevano, entrambi misurati sul trimestre
+ * 2026-Q2 (valerielinc-ops#5341, sei tentativi, zero articoli):
+ *
+ *  1. **Un'ancora strutturalmente impossibile.** La riga di istruzione «se
+ *     sotto ±0.3% "stabile"» faceva nascere `pct:0.3`: una soglia redazionale
+ *     che nessun articolo scriverà mai, permanentemente nel denominatore di
+ *     `source-fidelity-low` e permanentemente fuori dal numeratore. È la stessa
+ *     classe di difetto che il commento di `extractSourceAnchors` documenta per
+ *     gli acronimi (ARTICOLO, SEO, VALIDI presi dall'intestazione del prompt) —
+ *     lì risolta con una allow-list, qui risolvibile solo non scrivendo la
+ *     percentuale. La direzione del trend è già calcolata e dichiarata sopra:
+ *     al writer serve la parola, non la soglia.
+ *  2. **La forma decimale sbagliata.** `matchedAnchors()` accredita SOLO la
+ *     virgola (`0,64%`), mentre `toFixed(2)` e i `pct` di Firestore producono
+ *     il punto (`0.64`). Il writer copiava fedelmente dalla fonte e falliva
+ *     lo stesso il gate che gli chiedeva quel numero — l'identico difetto già
+ *     chiuso in `renderAnchorForPrompt`, qui rimasto aperto a monte.
+ *
+ * Terza correzione, sulla qualità e non sui gate: l'articolo 2026-Q1
+ * (`frontalieri-ticino-stabili-2026-q1`) contiene cifre per Lugano, Chiasso,
+ * Mendrisio, Bellinzona e Locarno che il dataset BFS **non contiene** — sono
+ * inventate, e sono uscite agli iscritti. Il divieto ora nomina il caso invece
+ * di affidarlo a un generico "non inventare".
+ */
+function formatStatsBfsPrompt(quarter, data) {
   const trend = Array.isArray(data.trend) ? data.trend : [];
   if (trend.length === 0) {
     throw new Error('Empty trend in config/bfs_stats Firestore doc.');
@@ -4352,6 +4390,10 @@ async function buildStatsBfsPromptContent(quarter) {
 
   const fmt = (n) => Number(n).toLocaleString('it-IT');
   const sign = (n) => (n >= 0 ? '+' : '');
+  // Virgola decimale, sempre: è la sola forma che `matchedAnchors()` accredita.
+  // Scrivere qui il punto significa chiedere al writer un numero che il gate
+  // non riconoscerà mai — vedi il punto 2 del commento sopra.
+  const pctIt = (n, digits = 2) => `${sign(n)}${Number(n).toFixed(digits).replace('.', ',')}%`;
   const qoqAbs = prevPoint ? latest - prevPoint.frontalieri : null;
   const qoqPct = prevPoint ? ((latest - prevPoint.frontalieri) / prevPoint.frontalieri) * 100 : null;
   const yoyAbs = yoyValue != null ? latest - yoyValue : null;
@@ -4361,13 +4403,34 @@ async function buildStatsBfsPromptContent(quarter) {
   const ages = Array.isArray(data.ages) ? data.ages : [];
   const ageTable = ages.map((a) => `- ${a.name}: ${fmt(a.value)}`).join('\n');
   const gender = Array.isArray(data.genderSnapshot) ? data.genderSnapshot : [];
-  const genderLine = gender.map((g) => `${g.name} ${g.pct}% (${fmt(g.value)})`).join(' · ');
+  const genderPct = (g) => `${String(g.pct).replace('.', ',')}%`;
+  const genderLine = gender.map((g) => `${g.name} ${genderPct(g)} (${fmt(g.value)})`).join(' · ');
 
   const trendDirection = qoqPct == null
     ? 'stabile'
     : qoqPct > 0.3 ? 'in crescita'
     : qoqPct < -0.3 ? 'in calo'
     : 'stabile';
+
+  // Il target di lunghezza dichiarato al writer, deliberatamente SOPRA la
+  // soglia che il gate applica (CREATE_ARTICLE_MIN_IT_WORDS_FLOOR, 400 — vedi
+  // `lengthBudgetSource` in generateAndValidateArticle): il gate non deve
+  // essere il vincolo che morde, altrimenti ogni trimestre si gioca sul filo.
+  // Non è agganciato al valore calcolato perché la soglia adattiva dipende
+  // dalla lunghezza del SOURCE CONTENT, che qui è questo stesso testo: un
+  // numero derivato cambierebbe da solo a ogni riga aggiunta al prompt.
+  // `stats-bfs-prompt.test.mjs` tiene i due estremi allineati.
+  const MIN_STATS_BFS_IT_WORDS = 550;
+
+  // L'elenco letterale che il writer deve riprodurre. È lo STESSO insieme che
+  // `extractSourceAnchors()` estrarrà da questo testo: costruirlo qui, invece
+  // di sperare che il writer le ritrovi sparse nel prompt, è ciò che rende
+  // l'istruzione e il controllo la stessa cosa.
+  const requiredPcts = [
+    qoqPct != null ? pctIt(qoqPct) : '',
+    yoyPct != null ? pctIt(yoyPct) : '',
+    ...gender.map(genderPct),
+  ].filter(Boolean);
 
   return [
     '[ARTICOLO DATI BFS STATISTICA FRONTALIERI TICINO]',
@@ -4376,8 +4439,8 @@ async function buildStatsBfsPromptContent(quarter) {
     '',
     '=== DATI VERIFICATI (usare ESATTAMENTE questi numeri, non inventarne altri) ===',
     `- Frontalieri totali Canton Ticino al ${latestQuarter}: ${fmt(latest)}`,
-    prevPoint ? `- Trimestre precedente (${prevPoint.year}): ${fmt(prevPoint.frontalieri)} (variazione QoQ ${sign(qoqAbs)}${fmt(qoqAbs)} unità, ${sign(qoqPct)}${qoqPct.toFixed(2)}%)` : '',
-    yoyValue != null ? `- Stesso trimestre anno precedente (${yoyKey}): ${fmt(yoyValue)} (variazione YoY ${sign(yoyAbs)}${fmt(yoyAbs)} unità, ${sign(yoyPct)}${yoyPct.toFixed(2)}%)` : '',
+    prevPoint ? `- Trimestre precedente (${prevPoint.year}): ${fmt(prevPoint.frontalieri)} (variazione QoQ ${sign(qoqAbs)}${fmt(qoqAbs)} unità, ${pctIt(qoqPct)})` : '',
+    yoyValue != null ? `- Stesso trimestre anno precedente (${yoyKey}): ${fmt(yoyValue)} (variazione YoY ${sign(yoyAbs)}${fmt(yoyAbs)} unità, ${pctIt(yoyPct)})` : '',
     '',
     '=== SERIE STORICA (ultimi 8 trimestri) ===',
     '| Trimestre | Frontalieri Ticino |',
@@ -4391,10 +4454,29 @@ async function buildStatsBfsPromptContent(quarter) {
     '',
     '=== ANGOLO EDITORIALE RICHIESTO ===',
     `Stile: cronaca dati come https://comozero.it/attualita/statistiche-frontalieri-ticino-svizzera-primo-trimestre-2026/.`,
-    'Lead di 2-3 frasi con il numero principale e la variazione. Poi sezioni separate per: confronto con il trimestre precedente, confronto YoY, distribuzione per età, ripartizione per genere, contesto ticinese (assunzioni, settori se inferibili dai trend storici, accordo Italia-Svizzera 2026).',
+    // «settori se inferibili dai trend storici» invitava esattamente
+    // l'invenzione che il divieto più sotto chiude: la serie storica è un solo
+    // totale per trimestre, da cui nessun settore è inferibile.
+    'Lead di 2-3 frasi con il numero principale e la variazione. Poi sezioni separate per: confronto con il trimestre precedente, confronto YoY, distribuzione per età, ripartizione per genere, contesto ticinese (lettura qualitativa della serie storica qui sopra e accordo Italia-Svizzera 2026, senza cifre che non siano in questo prompt).',
     'Tono giornalistico-istituzionale italiano, non opinionistico. Usa formulazioni neutre tipo "i dati BFS indicano…", "secondo l\'Ufficio Federale di Statistica…", "la statistica trimestrale registra…".',
-    'Se la variazione QoQ è positiva titola "in crescita", se negativa "in calo", se sotto ±0.3% "stabile".',
-    'NON inventare percentuali, settori, comuni o aziende che non sono nei dati forniti. Se non sai, ometti.',
+    // La soglia dura sulle parole (CREATE_ARTICLE_MIN_IT_WORDS) vale anche qui,
+    // ma la REGOLA EDITORIALE generica dice al writer «meglio un articolo da
+    // 400 parole onesto che 1200 di forzatura» — e su una fonte sintetica come
+    // questa la prende alla lettera. Misurato sul 2026-Q2: sei tentativi fra
+    // 136 e 297 parole, tre dei quali avevano superato TUTTI i gate di
+    // fedeltà e sono stati scartati solo per lunghezza. La contraddizione si
+    // scioglie dicendo QUALE materiale, già presente e già verificato, riempie
+    // le parole richieste — non chiedendo semplicemente "scrivi di più".
+    `Lunghezza: body1+body2+body3 devono superare complessivamente le ${MIN_STATS_BFS_IT_WORDS} parole. Il materiale per arrivarci è tutto qui sopra e non va inventato: gli otto trimestri della serie storica (massimo e minimo del periodo, dove la curva ha girato), le fasce d'età (quali pesano di più, dov'è il baricentro anagrafico), la ripartizione per genere, il doppio confronto con il trimestre precedente e con lo stesso trimestre dell'anno prima. Commentali uno per uno: sono cinque blocchi di analisi, non una riga di riassunto ciascuno.`,
+    'Ripartizione dei tre corpi: body1 = il totale del trimestre e i due confronti; body2 = lettura della serie storica e della composizione per età e genere, cioè come sta cambiando il bacino dei frontalieri; body3 = che cosa comporta per chi lavora o cerca lavoro in Ticino, in termini qualitativi, più la CTA agli strumenti del sito. Nessuno dei tre deve ripetere gli altri.',
+    // NESSUNA soglia numerica qui: scriverla farebbe di `0,3%` un fatto della
+    // fonte che l'articolo dovrebbe citare. La direzione è già decisa sopra.
+    `Il trimestre va qualificato come "${trendDirection}" nel titolo e nel lead: la direzione è già stata calcolata, non ricavarla di nuovo e non contraddirla.`,
+    requiredPcts.length
+      ? `OBBLIGATORIO — cita nel corpo, alla lettera e ciascuna accanto al dato che spiega, TUTTE queste percentuali: ${requiredPcts.join(' · ')}. Copiale con la virgola decimale esattamente come sono scritte qui: un controllo automatico di fedeltà alla fonte le cerca letterali e rifiuta l'articolo se ne mancano. Ometterle "per prudenza" è il modo più rapido di far scartare il pezzo.`
+      : '',
+    'Non introdurre percentuali DIVERSE da quelle elencate qui sopra: quelle vanno riportate tutte, le altre non esistono.',
+    'I dati BFS forniti sono TUTTI i dati disponibili. Non contengono alcuna disaggregazione per comune, per settore economico o per azienda: NON scrivere cifre riferite a Lugano, Chiasso, Mendrisio, Bellinzona, Locarno o a qualunque altro comune, né a singoli settori. L\'edizione del trimestre precedente ne conteneva ed erano inventate. Se un dettaglio non è nell\'elenco sopra, ometti.',
     `Includi link interno alla dashboard /statistiche/ ("vedi i grafici aggiornati") e alla pagina /calcola-stipendio/ (CTA finale).`,
     `Fonte da citare: Ufficio Federale di Statistica (BFS), tabella DF_GGS_6 — link https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html`,
   ].filter(Boolean).join('\n');
@@ -5803,11 +5885,43 @@ function italianBodyWordCount(data) {
 }
 
 /**
+ * L'istruzione di arricchimento del prompt di espansione.
+ *
+ * `boundToText: true` è la variante per gli articoli il cui unico ground truth
+ * è un dataset chiuso — oggi `stats-bfs://`. Estratta e nominata perché la
+ * variante di default chiede ALLA LETTERA «esempi concreti con numeri reali,
+ * riferimenti a comuni ticinesi specifici, normative con date e importi», e
+ * l'espansione è l'ULTIMO passo prima della registrazione: gira dopo i gate
+ * deterministici e dopo il fact-check, e il suo output non ne ripassa nessuno
+ * (il ramo `break` subito sotto la chiamata). Su una fonte fatta di venti
+ * numeri quell'istruzione non ha nulla di reale da cui pescare, e il modello
+ * pesca dal training.
+ *
+ * Non è ipotetico: `frontalieri-ticino-stabili-2026-q1`, l'unica edizione BFS
+ * finora pubblicata, contiene cifre per Lugano («da 12.000 a 11.950»), Chiasso,
+ * Mendrisio, Bellinzona e Locarno, aliquote alla fonte per comune e premi
+ * LAMal. Nessuno di questi dati esiste in `config/bfs_stats`. È uscito agli
+ * iscritti con tutti i gate verdi.
+ */
+function expandEnrichmentLine(isFrontaliere, boundToText = false) {
+  if (boundToText) {
+    return '- Aggiungi PROFONDITÀ sui dati che il testo già contiene: confronti fra i numeri citati, lettura della tendenza, implicazioni qualitative, contesto verificabile. NON introdurre NESSUN numero, comune, aliquota, importo, data o percentuale che non sia già scritto nel TESTO ATTUALE qui sopra: la fonte di questo articolo è un dataset chiuso e ogni cifra in più sarebbe inventata.';
+  }
+  const geoRefs = isFrontaliere
+    ? 'riferimenti a comuni ticinesi specifici'
+    : 'riferimenti a cantoni o città svizzere pertinenti al tema';
+  return `- Aggiungi: esempi concreti con numeri reali, ${geoRefs}, normative con date e importi, checklist operative, confronti tra scenari pratici`;
+}
+
+/**
  * Expand short Italian body content by asking the LLM to enrich each body field.
  * This is a last-resort fallback that's far more effective than regenerating from scratch,
  * because it preserves the existing structure and just adds depth.
+ *
+ * `boundToText` limita l'arricchimento a ciò che il testo già dice — vedi
+ * expandEnrichmentLine per il motivo e per l'incidente che lo motiva.
  */
-async function expandShortItalianContent(data, targetWords) {
+async function expandShortItalianContent(data, targetWords, { boundToText = false } = {}) {
   const it = data?.content?.it;
   if (!it) return data;
 
@@ -5823,9 +5937,6 @@ async function expandShortItalianContent(data, targetWords) {
     const expandPersona = IS_FRONTALIERE
       ? 'Sei un giornalista finanziario esperto di lavoro transfrontaliero in Ticino.'
       : 'Sei un giornalista finanziario esperto di affari svizzeri a livello nazionale.';
-    const expandGeoRefs = IS_FRONTALIERE
-      ? 'riferimenti a comuni ticinesi specifici'
-      : 'riferimenti a cantoni o città svizzere pertinenti al tema';
     const expandPrompt = `${expandPersona}
 
 TESTO ATTUALE (${currentWords} parole):
@@ -5836,7 +5947,7 @@ TITOLO ARTICOLO: ${it.title || ''}
 ISTRUZIONI:
 - Riscrivi ed ESPANDI questo testo a circa ${targetFieldWords} parole (MASSIMO ${MAX_BODY_FIELD_WORDS} parole — NON superare questo limite)
 - Mantieni lo stesso tono, stile e struttura
-- Aggiungi: esempi concreti con numeri reali, ${expandGeoRefs}, normative con date e importi, checklist operative, confronti tra scenari pratici
+${expandEnrichmentLine(IS_FRONTALIERE, boundToText)}
 - NON aggiungere frasi generiche o filler — solo informazioni utili e verificabili
 - Mantieni la formattazione esistente (##, -, >, 📊, 💡, ⚠️). Citazioni (>) MAX 1 per articolo, solo per citazioni dirette brevi
 - GRASSETTO: massimo 2-3 parole in grassetto nell'intero testo, preferisci ZERO
@@ -10226,11 +10337,49 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   /** @type {string|null} */
   let lastFactCheckErrors = null;
 
+  const isStatsBfsSource = String(url || '').startsWith('stats-bfs://');
+  // La lunghezza che le scale adattive devono misurare. Per una fonte reale è
+  // il testo scrapato; per `stats-bfs://` non esiste testo scrapato, quindi è
+  // vuota — vedi il commento sotto.
+  const lengthBudgetSource = isStatsBfsSource ? '' : pageContent;
+
   // Adaptive min-words: scale target down when source is thin to prevent
   // hallucination cascade (was 900 fixed → forced model to invent facts
   // on short news briefs, blocked by fact-check on every retry).
-  const adaptiveMinWords = computeAdaptiveMinWords(pageContent);
-  if (adaptiveMinWords < CREATE_ARTICLE_MIN_IT_WORDS) {
+  //
+  // `stats-bfs://` NON passa dalla scala, e per la stessa ragione che la scala
+  // esiste. computeAdaptiveMinWords() misura i CARATTERI del source scrapato,
+  // come proxy di quanto materiale c'è. Per questa fonte il "source" è il
+  // prompt che formatStatsBfsPrompt() ha appena costruito: la sua lunghezza
+  // misura quanto sono verbose le ISTRUZIONI, non quanti dati ci sono. Il
+  // materiale vero è sempre lo stesso ogni trimestre — un totale, due
+  // variazioni, otto trimestri di serie, undici fasce d'età, due generi.
+  //
+  // Il difetto è visibile a occhio nudo: rendere le istruzioni più esplicite
+  // (valerielinc-ops#5341) ha portato il prompt da ~3.900 a ~4.024 caratteri e
+  // la soglia da 700 a 900 parole. Scrivere istruzioni migliori rendeva il
+  // gate più duro — il contrario di come la scala è pensata.
+  //
+  // E la soglia alta su questa fonte non è neutrale, è già costata una
+  // pubblicazione: `frontalieri-ticino-stabili-2026-q1` arriva alle parole
+  // richieste con cifre per Lugano, Chiasso, Mendrisio, Bellinzona e Locarno,
+  // aliquote alla fonte e premi LAMal che il dataset BFS non contiene. Nessun
+  // gate le ha viste, perché la via che le produce — expandShortItalianContent,
+  // il cui prompt chiede alla lettera «riferimenti a comuni ticinesi
+  // specifici» — gira DOPO l'ultimo controllo e il suo output non ne
+  // ripassa nessuno. Alzare l'asticella su una fonte di soli numeri è la
+  // domanda a cui quel testo è la risposta.
+  //
+  // Nessuna soglia nuova: si azzera la LUNGHEZZA passata alle scale, non le
+  // scale. Così le due companion — computeAdaptiveMinWords e
+  // computeAdaptiveMinChars — restano allineate per costruzione: scavalcarne
+  // una sola rimetterebbe in piedi esattamente il caso che il commento di
+  // computeAdaptiveMinChars descrive («un run adattivo da 400 parole (~2400
+  // char) inciampa nel floor statico da 2500»).
+  const adaptiveMinWords = computeAdaptiveMinWords(lengthBudgetSource);
+  if (isStatsBfsSource) {
+    console.error(`  📏 Fonte sintetica stats-bfs (${pageContent.length} chars di prompt, non di articolo) → min IT words target: ${adaptiveMinWords}`);
+  } else if (adaptiveMinWords < CREATE_ARTICLE_MIN_IT_WORDS) {
     console.error(`  📏 Source thin (${pageContent.length} chars) → min IT words target: ${adaptiveMinWords} (was ${CREATE_ARTICLE_MIN_IT_WORDS})`);
   }
 
@@ -10329,7 +10478,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // threshold so the early thin-content warning matches what the final
     // gate at the bottom of this function actually enforces.
     try {
-      data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(pageContent) });
+      data = validate(rawData, { minBodyChars: computeAdaptiveMinChars(lengthBudgetSource) });
     } catch (validationErr) {
       console.error(`  ⚠️  Validazione fallita: ${validationErr.message}`);
       if (attempt < maxAttempts) {
@@ -10682,7 +10831,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     // ── Last resort: expand existing short content instead of failing ──
     console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
     try {
-      data = await expandShortItalianContent(data, adaptiveMinWords);
+      data = await expandShortItalianContent(data, adaptiveMinWords, { boundToText: isStatsBfsSource });
 
       // Re-run the SAME repetition check the main loop uses above — this
       // expansion call is the path MOST likely to produce it (see
@@ -10725,7 +10874,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   {
     const itBodyFinal = `${(data.content.it || data.content)?.body1 || ''} ${(data.content.it || data.content)?.body2 || ''} ${(data.content.it || data.content)?.body3 || ''}`;
     const itPlainCharsFinal = itBodyFinal.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim().length;
-    const adaptiveMinChars = computeAdaptiveMinChars(pageContent);
+    const adaptiveMinChars = computeAdaptiveMinChars(lengthBudgetSource);
     if (itPlainCharsFinal < adaptiveMinChars) {
       const thinErr = new Error(`Articolo troppo corto dopo retry: ${itPlainCharsFinal} chars (min: ${adaptiveMinChars}). Google penalizza thin content.`);
       thinErr.qualityReject = true;
