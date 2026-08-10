@@ -7,25 +7,41 @@
  *
  * La suite prova TRE cose, e la terza è quella che di solito manca:
  *
- *  1. il vero positivo, con i dati reali della coppia piastrellista del
- *     2026-08-09 (titoli e id verbatim da content/blog-meta-it.ts, date
- *     verbatim da content/blog-articles-data.ts);
- *  2. che i gate PRE-ESISTENTI non la vedevano — replicando le loro soglie di
+ *  1. il vero positivo, con i dati reali delle coppie del corpus (titoli e id
+ *     verbatim da content/blog-meta{,-ch}-it.ts, date verbatim dai registri);
+ *  2. che i gate PRE-ESISTENTI non le vedevano — replicando le loro soglie di
  *     produzione, così il test dice PERCHÉ serviva un gate nuovo invece di
  *     ritarare quelli vecchi;
- *  3. l'assenza di falsi positivi sulle serie legittime, letta DAL CORPUS
- *     REALE del checkout e non da fixture scelte a mano: le serie per comune
- *     (`trasferirsi-a-…`, `vivere-…`) e i `bollettino-frontaliere-<data>`. Una
- *     fixture dimostra che il caso che ho immaginato passa; il corpus dimostra
- *     che passano quelli che non ho immaginato.
+ *  3. l'assenza di falsi positivi, letta DAL CORPUS REALE del checkout e non
+ *     da fixture scelte a mano. Una fixture dimostra che il caso che ho
+ *     immaginato passa; il corpus dimostra che passano quelli che non ho
+ *     immaginato.
+ *
+ * ── 2026-08-10: un'asserzione di questa suite era SBAGLIATA ────────────────
+ *
+ * La versione precedente asseriva «le serie per comune esistono nel corpus e
+ * NESSUNA è marcabile» come se fosse una proprietà desiderabile. Non lo era:
+ * era la conseguenza tautologica del fatto che una chiave-MESTIERE non si
+ * attiva su un nome di comune. Nel frattempo il corpus conteneva 33 coppie di
+ * guide-comune duplicate entro 90 giorni — `vivere a Besano` due volte a 74
+ * minuti di distanza — che quel test dichiarava sane.
+ *
+ * Le asserzioni qui sotto sono quindi ROVESCIATE di proposito: le serie per
+ * comune ORA sono marcabili, e la proprietà che resta da difendere è più
+ * stretta — comuni DIVERSI non si bloccano a vicenda, i bollettini quotidiani
+ * non sono mai marcabili, e il gate resta una minoranza netta del corpus.
  */
 import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
 import {
   assertTopicNotRecentlyCovered,
+  cantonThemeTopicKey,
+  comuneTopicKey,
   findRecentTopicCoverage,
   hasProfessionGuideIntent,
+  hasResidenceGuideIntent,
+  municipalityNames,
   professionTopicKey,
   topicCoverageKey,
 } from '../scripts/lib/topic-coverage-guard.mjs';
@@ -37,6 +53,12 @@ import {
 import { computeAdaptiveEvergreenThresholds } from '../scripts/lib/scoring/constants.mjs';
 
 const corpusUrl = (rel) => new URL(`../../content/${rel}`, import.meta.url);
+
+/** Comodità: la coppia (kind, value) come stringa, per asserire in una riga. */
+const keyOf = (article) => {
+  const k = topicCoverageKey(article);
+  return k ? `${k.kind}:${k.value}` : null;
+};
 
 // ── I tre piastrellista reali (2026-08-09), verbatim dal corpus ────────────
 
@@ -67,7 +89,8 @@ describe('gate argomento-già-coperto — il caso piastrellista (2026-08-09)', (
   it('marca B come già coperto da A, pubblicato 24 minuti prima', () => {
     const hit = findRecentTopicCoverage(PIASTRELLISTA_B, [PIASTRELLISTA_A], { now: AT_B_PUBLISH });
     expect(hit).not.toBe(null);
-    expect(hit.professionId).toBe('piastrellista');
+    expect(hit.kind).toBe('profession-guide');
+    expect(hit.value).toBe('piastrellista');
     expect(hit.existingId).toBe(PIASTRELLISTA_A.id);
     // 24 minuti = 0,0167 giorni.
     expect(hit.ageDays).toBeLessThan(0.02);
@@ -78,7 +101,7 @@ describe('gate argomento-già-coperto — il caso piastrellista (2026-08-09)', (
       now: Date.parse(PIASTRELLISTA_A.date),
     });
     expect(hit).not.toBe(null);
-    expect(hit.professionId).toBe('piastrellista');
+    expect(hit.value).toBe('piastrellista');
     expect(hit.existingId).toBe(PIASTRELLISTA_C.id);
   });
 
@@ -91,6 +114,11 @@ describe('gate argomento-già-coperto — il caso piastrellista (2026-08-09)', (
     expect(thrown).not.toBe(null);
     expect(thrown.message).toContain('ARGOMENTO GIÀ COPERTO');
     expect(thrown.message).toContain('piastrellista');
+    // Il messaggio nomina la CLASSE di chiave, non più solo il mestiere: da
+    // quando le chiavi sono tre, «Mestiere: x» e «Comune: y» sono due diagnosi
+    // diverse e il log deve dire quale delle due ha bloccato.
+    expect(thrown.message).toContain('Mestiere');
+    expect(thrown.message).toContain('profession-guide');
     expect(thrown.message).toContain(PIASTRELLISTA_A.id);
     // qualityReject: il selettore salta il candidato invece di abortire la run.
     expect(thrown.qualityReject).toBe(true);
@@ -111,6 +139,274 @@ describe('gate argomento-già-coperto — il caso piastrellista (2026-08-09)', (
   it('un esistente senza data è ignorato (fail-open), non trattato come recente', () => {
     const undated = { ...PIASTRELLISTA_A, date: null };
     expect(findRecentTopicCoverage(PIASTRELLISTA_B, [undated], { now: AT_B_PUBLISH })).toBe(null);
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════════════
+// kind: 'comune-guide' — le coppie reali del 2026-08-10
+// ══════════════════════════════════════════════════════════════════════════
+
+/** Verbatim dal corpus: id, titolo e data come pubblicati. */
+const TRONZANO_A = {
+  id: 'trasferirsi-tronzano-lago-maggiore-frontaliere',
+  title: 'trasferirsi a Tronzano Lago Maggiore da frontaliere pro e contro',
+  date: '2026-08-10T15:18:13.946Z',
+};
+const TRONZANO_B = {
+  id: 'vivere-tronzano-lago-maggiore-lavorare-ticino-da-frontaliere',
+  title: 'Vivere a Tronzano Lago Maggiore e lavorare in Ticino da frontaliere',
+  date: '2026-08-10T15:51:42.895Z',
+};
+const MASLIANICO_A = {
+  id: 'vivere-maslianico-lavoro-ticino',
+  title: 'Vivere a Maslianico e lavorare in Ticino da frontaliere',
+  date: '2026-08-10T00:08:09.823Z',
+};
+const MASLIANICO_B = {
+  id: 'trasferirsi-a-maslianico-da-frontaliere-pro-e-contro',
+  title: 'Trasferirsi a Maslianico da frontaliere: pro e contro',
+  date: '2026-08-10T00:24:42.396Z',
+};
+const BESANO_A = {
+  id: 'vivere-besano-frontaliere-ticino',
+  title: 'Vivere a Besano e lavorare in Ticino da frontaliere',
+  date: '2026-08-10T04:52:17.442Z',
+};
+const BESANO_B = {
+  id: 'vivere-besano-lavorare-ticino',
+  title: 'Vivere a Besano e lavorare in Ticino: guida pratica',
+  date: '2026-08-10T06:06:17.297Z',
+};
+const BESANO_C = {
+  id: 'trasferirsi-besano-da-frontaliere',
+  title: 'Trasferirsi a Besano da frontaliere: pro e contro',
+  date: '2026-08-10T06:18:56.946Z',
+};
+
+describe('gate argomento-già-coperto — le coppie per comune (2026-08-10)', () => {
+  it('Tronzano Lago Maggiore: la seconda a 33 minuti dalla prima è già coperta', () => {
+    const hit = findRecentTopicCoverage(TRONZANO_B, [TRONZANO_A], { now: Date.parse(TRONZANO_B.date) });
+    expect(hit).not.toBe(null);
+    expect(hit.kind).toBe('comune-guide');
+    expect(hit.value).toBe('tronzano-lago-maggiore');
+    expect(hit.existingId).toBe(TRONZANO_A.id);
+    expect(hit.ageDays).toBeLessThan(0.03);
+  });
+
+  it('il nome di più parole vuole la sequenza COMPLETA, non il primo token', () => {
+    // Se bastasse `tronzano`, «Maccagno con Pino e Veddasca» si aggancerebbe
+    // su `maccagno` e «San Fermo della Battaglia» su `san` — cioè su decine di
+    // comuni diversi. Qui il valore è lo slug del nome intero.
+    expect(comuneTopicKey('Vivere a Maccagno con Pino e Veddasca e lavorare in Ticino'))
+      .toBe('maccagno-con-pino-e-veddasca');
+    expect(comuneTopicKey('Tronzano Lago Maggiore')).toBe('tronzano-lago-maggiore');
+  });
+
+  it('Maslianico: vivere/trasferirsi a 16 minuti di distanza', () => {
+    const hit = findRecentTopicCoverage(MASLIANICO_B, [MASLIANICO_A], { now: Date.parse(MASLIANICO_B.date) });
+    expect(hit).not.toBe(null);
+    expect(hit.value).toBe('maslianico');
+    expect(hit.existingId).toBe(MASLIANICO_A.id);
+  });
+
+  it('Besano: DUE «vivere a Besano» a 74 minuti — la chiave è l\'intento, non il verbo', () => {
+    // Il caso che dice come dev'essere fatta la chiave. A e B non sono la
+    // coppia vivere/trasferirsi del pool: sono due «Vivere a Besano e lavorare
+    // in Ticino». Una chiave «comune + verbo» li lascerebbe passare entrambi.
+    const hit = findRecentTopicCoverage(BESANO_B, [BESANO_A], { now: Date.parse(BESANO_B.date) });
+    expect(hit).not.toBe(null);
+    expect(hit.value).toBe('besano');
+    expect(hit.existingId).toBe(BESANO_A.id);
+    // E il terzo, 12 minuti dopo il secondo, prende il PIÙ VICINO dei due.
+    const third = findRecentTopicCoverage(BESANO_C, [BESANO_A, BESANO_B], { now: Date.parse(BESANO_C.date) });
+    expect(third).not.toBe(null);
+    expect(third.existingId).toBe(BESANO_B.id);
+  });
+
+  it('assertTopicNotRecentlyCovered BLOCCA la seconda guida-comune, e lo dice', () => {
+    const data = { id: TRONZANO_B.id, content: { it: { title: TRONZANO_B.title } } };
+    let thrown = null;
+    try {
+      assertTopicNotRecentlyCovered(data, [TRONZANO_A], { now: Date.parse(TRONZANO_B.date), log: () => {} });
+    } catch (err) { thrown = err; }
+    expect(thrown).not.toBe(null);
+    expect(thrown.message).toContain('ARGOMENTO GIÀ COPERTO');
+    expect(thrown.message).toContain('Comune');
+    expect(thrown.message).toContain('tronzano-lago-maggiore');
+    expect(thrown.message).toContain(TRONZANO_A.id);
+    expect(thrown.qualityReject).toBe(true);
+  });
+
+  it('comuni DIVERSI non si bloccano a vicenda — è la serie a restare possibile', () => {
+    // Questa è la proprietà che sostituisce «0/25 marcabili»: il pool per
+    // comune deve poter continuare a girare, un comune dopo l'altro.
+    expect(findRecentTopicCoverage(TRONZANO_A, [MASLIANICO_A, BESANO_A], { now: Date.parse(TRONZANO_A.date) })).toBe(null);
+    expect(findRecentTopicCoverage(BESANO_A, [TRONZANO_A, MASLIANICO_B], { now: Date.parse(BESANO_A.date) })).toBe(null);
+  });
+
+  it('lo stesso comune OLTRE la finestra passa: l\'aggiornamento annuale resta legittimo', () => {
+    const hit = findRecentTopicCoverage(TRONZANO_B, [TRONZANO_A], {
+      now: Date.parse(TRONZANO_A.date) + 120 * 86_400_000,
+      windowDays: 90,
+    });
+    expect(hit).toBe(null);
+  });
+
+  it('il comune non basta senza intento di residenza (cronaca)', () => {
+    // I tre falsi positivi che `pendolarism` produceva, verbatim dal corpus.
+    expect(keyOf({
+      id: 'pendolarismo-fatale-frontaliere-porlezza',
+      title: 'Tragedia a Porlezza: muore giovane frontaliere',
+    })).toBe(null);
+    expect(keyOf({
+      id: 'carnago-forza-italia-pendolarismo',
+      title: "Carnago: Fratelli d'Italia attacca il pendolarismo di Forza Italia",
+    })).toBe(null);
+    expect(keyOf({
+      id: 'bicicletta-insubria-varese-2026',
+      title: "Pendolarismo sostenibile in bici all'Insubria",
+    })).toBe(null);
+  });
+
+  it('l\'intento di residenza non basta senza un comune', () => {
+    expect(hasResidenceGuideIntent('Trasferirsi in Svizzera: cosa cambia per il permesso B')).toBe(true);
+    expect(keyOf({
+      id: 'trasferirsi-in-svizzera-permesso-b',
+      title: 'Trasferirsi in Svizzera: cosa cambia per il permesso B',
+    })).toBe(null);
+  });
+
+  it('i nomi di comune che sono parole comuni restano fuori (misurati sul corpus)', () => {
+    // `mese` è un comune della Valchiavenna, e nel corpus compare 12 volte su
+    // 12 come «al mese». Senza AMBIGUOUS_COMUNE_TOKENS questa frase sarebbe
+    // una guida-comune su Mese.
+    expect(comuneTopicKey('Trasferirsi in Ticino: quanto si guadagna al mese')).toBe(null);
+    expect(comuneTopicKey('Vivere in Italia con il dazio doganale')).toBe(null);
+    expect(comuneTopicKey("Trasferirsi vicino all'erba sintetica")).toBe(null);
+  });
+
+  it('l\'elenco dei comuni si carica davvero — senza, i test sopra sono vacui', () => {
+    // Il file è TypeScript e viene letto come TESTO: se il regex smettesse di
+    // agganciare, `comuneTopicKey` tornerebbe sempre null e metà di questa
+    // suite passerebbe per vacuità.
+    const names = municipalityNames();
+    expect(names.length).toBeGreaterThan(500);
+    expect(names).toContain('Tronzano Lago Maggiore');
+    expect(names).toContain('Maccagno con Pino e Veddasca');
+    expect(names).toContain("Campione d'Italia");
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════════════
+// kind: 'canton-theme' — la sezione svizzera (pilastro × cantone)
+// ══════════════════════════════════════════════════════════════════════════
+
+const LPP_BERN_A = {
+  id: 'secondo-pilastro-lpp-svizzera-guida-2026-bern',
+  title: 'Guida LPP: contributi, prelievo e pianificazione previdenziale in Svizzera',
+  date: '2026-08-09T23:51:38.781Z',
+};
+const LPP_BERN_B = {
+  id: 'secondo-pilastro-lpp-bern-2026-guida',
+  title: 'Guida al secondo pilastro LPP in Svizzera',
+  date: '2026-08-10T00:03:58.093Z',
+};
+const LAMAL_GINEVRA = {
+  id: 'premi-lamal-2026-ginevra-guida',
+  title: 'Premi LAMal 2026 a Ginevra: franchigia, cambio cassa e sussidi',
+  date: '2026-08-07T20:56:09.960Z',
+};
+const LAMAL_BERNA = {
+  id: 'premi-cassa-malati-lamal-2026-cantone-bern',
+  title: 'LAMal nel Cantone Berna: guida ai premi e sussidi',
+  date: '2026-08-09T23:13:30.885Z',
+};
+
+describe('gate argomento-già-coperto — (pilastro tematico × cantone)', () => {
+  it('stesso pilastro E stesso cantone a 12 minuti: duplicato', () => {
+    const hit = findRecentTopicCoverage(LPP_BERN_B, [LPP_BERN_A], { now: Date.parse(LPP_BERN_B.date) });
+    expect(hit).not.toBe(null);
+    expect(hit.kind).toBe('canton-theme');
+    expect(hit.value).toBe('lpp:berna');
+    expect(hit.existingId).toBe(LPP_BERN_A.id);
+  });
+
+  it('«bern» e «Berna» sono lo stesso cantone: la normalizzazione se le mangia', () => {
+    expect(cantonThemeTopicKey('Guida al secondo pilastro LPP nel canton Bern')).toBe('lpp:berna');
+    expect(cantonThemeTopicKey('Guida al secondo pilastro LPP nel Cantone Berna')).toBe('lpp:berna');
+  });
+
+  it('«svizzera» e «svizzero» non fanno due articoli diversi', () => {
+    const a = 'Terzo pilastro 3a svizzera: vantaggi 2026 canton Basilea';
+    const b = 'Terzo Pilastro 3a svizzero: vantaggi canton Basilea';
+    expect(cantonThemeTopicKey(a)).toBe('terzo-pilastro:basilea');
+    expect(cantonThemeTopicKey(b)).toBe('terzo-pilastro:basilea');
+  });
+
+  it('stesso pilastro ma cantoni DIVERSI: legittimi, il pool li genera apposta', () => {
+    expect(keyOf(LAMAL_GINEVRA)).toBe('canton-theme:lamal-premi:ginevra');
+    expect(keyOf(LAMAL_BERNA)).toBe('canton-theme:lamal-premi:berna');
+    expect(findRecentTopicCoverage(LAMAL_BERNA, [LAMAL_GINEVRA], { now: Date.parse(LAMAL_BERNA.date) })).toBe(null);
+  });
+
+  it('un evergreen del pool senza intento-guida esplicito resta NON marcato', () => {
+    // Verbatim dal corpus, e asserito com'è: la congiunzione a tre braccia
+    // costa dei falsi NEGATIVI, e questo è uno. Su un gate che RIFIUTA
+    // articoli è il verso giusto in cui sbagliare — l'alternativa misurata
+    // (togliere il braccio intento-guida) faceva marcare la cronaca.
+    expect(keyOf({
+      id: 'premi-cassa-malati-lamal-2026-canton-zurigo',
+      title: 'I premi cassa malati LAMal nel Canton Zurigo per il 2026',
+    })).toBe(null);
+  });
+
+  it('l\'articolo nazionale non collide con la variante cantonale', () => {
+    // Due target SERP diversi, e il pool emette entrambi per costruzione: la
+    // base senza cantone e le otto varianti.
+    const nazionale = {
+      id: 'affitti-svizzera-mercato-immobiliare-2026',
+      title: 'Mercato degli affitti in Svizzera: prezzi e diritti',
+      date: '2026-08-10T00:58:10.142Z',
+    };
+    const sanGallo = {
+      id: 'affitti-svizzera-mercato-immobiliare-2026-canton-san-gallo',
+      title: 'Affitti in Svizzera 2026: prezzi e diritti',
+      date: '2026-08-10T01:28:26.231Z',
+    };
+    expect(findRecentTopicCoverage(sanGallo, [nazionale], { now: Date.parse(sanGallo.date) })).toBe(null);
+  });
+
+  it('più cantoni nominati = confronto, non focus: nessuna chiave', () => {
+    // Verbatim dal corpus. Prima della regola del cantone unico questo veniva
+    // accoppiato alla guida-Ginevra del pool, solo perché `ginevra` era il
+    // primo alias a combaciare.
+    expect(keyOf({
+      id: 'confronto-imposta-cantonale-svizzera-cantoni',
+      title: 'Zugo e Svitto, meno costosi di Ginevra e Vaud',
+    })).toBe(null);
+  });
+
+  it('la cronaca cantonale non marca l\'evergreen del pool', () => {
+    // Senza il requisito di intento-guida, questa notizia (2026-06-08)
+    // bloccava `premi-cassa-malati-lamal-2026-canton-zurigo` (2026-08-09).
+    expect(keyOf({
+      id: 'voto-zurigo-alloggi-cassa-malati',
+      title: 'Voto Zurigo: alloggi e premi cassa malati',
+    })).toBe(null);
+  });
+
+  it('la sigla LPP da sola non è il pilastro: serve «secondo pilastro»', () => {
+    expect(keyOf({
+      id: 'guida-contributi-sociali-svizzera',
+      title: 'Contributi busta paga Svizzera 2026: AVS, LPP e trattenute spiegate',
+    })).toBe(null);
+    expect(cantonThemeTopicKey('Guida al secondo pilastro in Svizzera')).toBe('lpp:svizzera');
+  });
+
+  it('senza né cantone né «svizzera» non c\'è chiave nazionale', () => {
+    // È ciò che tiene la chiave nazionale dal diventare il cestino di ogni
+    // articolo della sezione frontaliere che sfiora un tema svizzero.
+    expect(cantonThemeTopicKey('Guida al costo della vita a Milano')).toBe(null);
   });
 });
 
@@ -161,6 +457,18 @@ describe('i gate lessicali pre-esistenti non catturano la coppia', () => {
 
   it('il gate nuovo la cattura sugli stessi identici dati', () => {
     expect(findRecentTopicCoverage(PIASTRELLISTA_B, [PIASTRELLISTA_A], { now: AT_B_PUBLISH })).not.toBe(null);
+  });
+
+  it('nemmeno sulla coppia-comune: il titolo è quasi disgiunto, l\'argomento identico', () => {
+    // Stessa forma, misurata sui titoli reali di Tronzano. Il gate lessicale
+    // ha bisogno di 0,81 di Jaccard sul titolo (soglia adattiva a 3.800
+    // articoli) e ne trova una frazione.
+    const a = { ...TRONZANO_A, excerpt: '' };
+    const b = { ...TRONZANO_B, excerpt: '' };
+    const r = lexicalCheck(b, a);
+    expect(r.isDuplicate).toBe(false);
+    expect(r.titleSim).toBeLessThan(0.60);
+    expect(findRecentTopicCoverage(TRONZANO_B, [TRONZANO_A], { now: Date.parse(TRONZANO_B.date) })).not.toBe(null);
   });
 });
 
@@ -249,20 +557,40 @@ describe('nessun falso positivo sulle serie legittime (corpus reale del checkout
   const comuneSeries = () => CORPUS.filter((a) => /^(trasferirsi-a-|vivere-)/.test(a.id));
   const bollettini = () => CORPUS.filter((a) => /^bollettino-frontaliere-/.test(a.id));
 
-  it('le serie per comune esistono nel corpus e NESSUNA è marcabile', () => {
+  it('le serie per comune ORA sono marcabili — l\'asserzione opposta era il difetto', () => {
+    // Fino al 2026-08-10 questo test asseriva `flagged == []` e lo chiamava
+    // «immunità». Era una tautologia: una chiave-MESTIERE non si attiva su un
+    // nome di comune, quindi 0/25 non diceva niente sui duplicati-comune.
+    // Misurato il 2026-08-10 sul corpus (3.847 articoli): 50 guide-comune,
+    // 33 coppie entro 90 giorni, 26 articoli che non sarebbero mai usciti.
     const series = comuneSeries();
     expect(series.length).toBeGreaterThan(10);
     const flagged = series.filter((a) => topicCoverageKey(a) !== null);
-    expect(flagged.map((a) => a.id)).toEqual([]);
+    expect(flagged.length).toBeGreaterThan(20);
+    for (const a of flagged) expect(topicCoverageKey(a).kind).toBe('comune-guide');
   });
 
-  it('due comuni consecutivi della stessa serie non si bloccano a vicenda', () => {
-    const series = [...comuneSeries()].sort((a, b) => Date.parse(a.date || 0) - Date.parse(b.date || 0));
-    expect(series.length).toBeGreaterThan(1);
-    // Il caso peggiore: ogni articolo della serie contro TUTTI gli altri,
-    // finestra infinita. Se il gate avesse una presa sulla serie, qui esce.
-    for (const a of series) {
-      expect(findRecentTopicCoverage(a, series, { now: Date.parse(a.date), windowDays: 3650 })).toBe(null);
+  it('le coppie sullo stesso comune si marcano davvero, in condizioni reali', () => {
+    for (const id of [TRONZANO_B.id, MASLIANICO_B.id, BESANO_B.id]) {
+      const article = CORPUS.find((a) => a.id === id);
+      expect(article).not.toBe(undefined);
+      const hit = findRecentTopicCoverage(article, CORPUS, { now: Date.parse(article.date) });
+      expect(hit, `nessun duplicato trovato per ${id}`).not.toBe(null);
+      expect(hit.kind).toBe('comune-guide');
+    }
+  });
+
+  it('comuni diversi restano indipendenti anche a finestra infinita', () => {
+    // La serie deve poter continuare: il gate blocca la ripetizione DELLO
+    // STESSO comune, non la serie. Per ogni guida-comune del corpus, ogni
+    // duplicato trovato deve avere la stessa chiave — mai quella di un altro
+    // comune.
+    const keyed = comuneSeries()
+      .filter((a) => a.date && topicCoverageKey(a)?.kind === 'comune-guide');
+    expect(keyed.length).toBeGreaterThan(20);
+    for (const a of keyed) {
+      const hit = findRecentTopicCoverage(a, keyed, { now: Date.parse(a.date), windowDays: 3650 });
+      if (hit) expect(hit.value).toBe(topicCoverageKey(a).value);
     }
   });
 
@@ -270,19 +598,31 @@ describe('nessun falso positivo sulle serie legittime (corpus reale del checkout
     const daily = bollettini();
     expect(daily.length).toBeGreaterThan(0);
     for (const b of daily) {
-      expect(topicCoverageKey(b)).toBe(null);
+      expect(topicCoverageKey(b), `bollettino marcato: ${b.id}`).toBe(null);
       expect(findRecentTopicCoverage(b, daily, { now: Date.parse(b.date), windowDays: 3650 })).toBe(null);
     }
   });
 
   it('il gate resta selettivo: marca una minoranza netta del corpus', () => {
     const keyed = CORPUS.filter((a) => topicCoverageKey(a) !== null);
-    // Misurato il 2026-08-09: 158 guide-mestiere su 3.794 articoli (4,2%).
+    // Misurato il 2026-08-10 sul corpus di 3.847 articoli: 251 marcati (6,5%),
+    // di cui 162 guide-mestiere, 50 guide-comune e 39 tema×cantone.
     // Il tetto al 15% è il ratchet: se un allargamento del criterio (o della
     // tassonomia) facesse esplodere la superficie, questo test lo dice prima
     // che il gate cominci a rifiutare articoli legittimi in produzione.
-    expect(keyed.length).toBeGreaterThan(50);
+    expect(keyed.length).toBeGreaterThan(150);
     expect(keyed.length).toBeLessThan(CORPUS.length * 0.15);
+    const kinds = new Set(keyed.map((a) => topicCoverageKey(a).kind));
+    expect([...kinds].sort()).toEqual(['canton-theme', 'comune-guide', 'profession-guide']);
+  });
+
+  it('ogni classe di chiave è rappresentata: nessuna è morta in silenzio', () => {
+    // Senza questo, una chiave che smettesse di agganciare (un regex rotto,
+    // un file dati non letto) lascerebbe tutti gli altri test verdi.
+    const count = (kind) => CORPUS.filter((a) => topicCoverageKey(a)?.kind === kind).length;
+    expect(count('profession-guide')).toBeGreaterThan(100);
+    expect(count('comune-guide')).toBeGreaterThan(30);
+    expect(count('canton-theme')).toBeGreaterThan(20);
   });
 
   it('la coppia piastrellista è nel corpus e il gate la marca in condizioni reali', () => {
@@ -290,6 +630,6 @@ describe('nessun falso positivo sulle serie legittime (corpus reale del checkout
     expect(b).not.toBe(undefined);
     const hit = findRecentTopicCoverage(b, CORPUS, { now: Date.parse(b.date) });
     expect(hit).not.toBe(null);
-    expect(hit.professionId).toBe('piastrellista');
+    expect(hit.value).toBe('piastrellista');
   });
 });
