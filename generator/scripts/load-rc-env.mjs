@@ -325,6 +325,14 @@ export function rcFetchBackoffMs(attempt) {
 
 const RC_FETCH_ATTEMPTS = 4;
 
+// Wall-clock cap per attempt (follow-up #199 to #173/#198): this fetch had
+// only a status-based retry, no timeout at all — a slow-but-never-erroring
+// Remote Config endpoint (no 429/5xx, just no response) hung the awaited
+// `fetch()` forever, so RC_FETCH_ATTEMPTS never got a chance to kick in. Same
+// value and reasoning as TOKEN_EXCHANGE_TIMEOUT_MS in
+// lib/google-service-account-token.mjs, the sibling call one hop upstream.
+export const RC_FETCH_TIMEOUT_MS = 30_000;
+
 async function fetchTemplateViaRest() {
   const { readFileSync } = await import('node:fs');
   const { getServiceAccountAccessToken } = await import('./lib/google-service-account-token.mjs');
@@ -341,7 +349,10 @@ async function fetchTemplateViaRest() {
   for (let attempt = 1; attempt <= RC_FETCH_ATTEMPTS; attempt++) {
     const rcRes = await fetch(
       `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
-      { headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' } },
+      {
+        headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' },
+        signal: AbortSignal.timeout(RC_FETCH_TIMEOUT_MS),
+      },
     );
     if (rcRes.ok) return rcRes.json();
     lastErr = new Error(`Remote Config REST fetch failed: ${rcRes.status}`);
