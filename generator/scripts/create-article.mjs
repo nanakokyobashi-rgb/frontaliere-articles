@@ -10830,13 +10830,15 @@ async function generateAndValidateArticle(url, sourceContext = null) {
     }
     // ── Last resort: expand existing short content instead of failing ──
     console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
-    // Snapshot the pre-expansion draft: it already cleared runFactualityGates
-    // and llmFactCheck earlier in THIS SAME attempt (Step 3a.0b-bis / 3a.0c
-    // above) — it's short, not wrong. If expansion below fails the
-    // deterministic gate, this is what we fall back to instead of shipping
-    // the fabricated version (#156).
-    const preExpansionData = structuredClone(data);
     try {
+      // Snapshot the pre-expansion draft: it already cleared runFactualityGates
+      // and llmFactCheck earlier in THIS SAME attempt (Step 3a.0b-bis / 3a.0c
+      // above) — it's short, not wrong. If expansion below fails the
+      // deterministic gate, this is what we fall back to instead of shipping
+      // the fabricated version (#156). Cloned inside the try (#163) so a
+      // future non-serializable field on `data` degrades to `shortErr` like
+      // every other failure on this path, instead of escaping uncaught.
+      const preExpansionData = structuredClone(data);
       data = await expandShortItalianContent(data, adaptiveMinWords, { boundToText: isStatsBfsSource });
 
       // Re-run the SAME repetition check the main loop uses above — this
@@ -10872,6 +10874,15 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         publishedAt: new Date().toISOString(),
         memory: defectMemory(),
       });
+
+      // Feed the learning loop, same as Step 3a.0b-bis above (#163): this is
+      // the expansion path that caused #156, so leaving it unfed makes the
+      // riskiest branch invisible to article-defect-memory.json.
+      for (const obs of expandGateResult.observations) {
+        if (RUN_REPORT.factuality.institutionObservations.length >= INSTITUTION_OBSERVATION_CAP) break;
+        RUN_REPORT.factuality.institutionObservations.push({ ...obs, attempt });
+      }
+
       if (!expandGateResult.passed) {
         for (const i of expandGateResult.blocking) {
           RUN_REPORT.factuality.gateRejectionsByCode[i.code] =
