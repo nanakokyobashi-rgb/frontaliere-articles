@@ -2396,6 +2396,16 @@
         "corpus": "e1389cde15fab19e",
         "alignedAt": "2026-08-10"
       }
+    },
+    {
+      "path": "scripts/lib/ticker-shadow-check.mjs",
+      "mode": "corpus-only",
+      "reason": "Helper puro (issue #166, follow-up a #152) che rileva se un articolo del news-ticker e' correntemente canonical-overridden (shadowed) — non filtra, solo registra in log e in manifest.json counts.tickerArticlesShadowed, perche' filtrare SOLO qui divergerebbe dal secondo produttore di news-ticker-live.json sul sito (scripts/publish-article-chunks.mjs), che scrive lo stesso payload da un registro non filtrato. Il sito non ha un file omonimo: nessuno dei suoi produttori fa questa detection oggi.",
+      "baseline": {
+        "site": null,
+        "corpus": "070684201ba7caea",
+        "alignedAt": "2026-08-10"
+      }
     }
   ]
 }
