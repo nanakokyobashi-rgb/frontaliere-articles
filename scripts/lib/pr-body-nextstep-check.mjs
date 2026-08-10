@@ -268,6 +268,27 @@ export function checkNextStepStates(body = '') {
           'scappatoia: serve `in questa PR`, `PR concatenata #N` oppure `blocked: <causa>`. ' +
           '(Se e\' una decisione motivata e non un rinvio, scrivilo: «per scelta», «by construction».)',
       });
+    } else if (hatch && decided) {
+      // L'esenzione «decisione motivata» resta — ma VISIBILE, non silenziosa.
+      // Il messaggio della violazione qui sopra suggerisce «per scelta» come
+      // rimedio: senza questo ramo, un fixer che aggiunge la frase SENZA
+      // togliere la scappatoia usciva da entrambi i rami e la voce passava
+      // senza lasciare traccia — il rimedio suggerito diventava un bypass.
+      // Advisory e non violation perche' una decisione motivata e' uno stato
+      // terminale legittimo: va letta da un umano, non bloccata da una regex.
+      advisories.push({
+        type: 'hatch-exempted-by-decision',
+        section: 'Non implementato (ancora)',
+        index: b.index,
+        text: b.text,
+        snippet: snippetOf(b.text),
+        escapeHatch: hatch,
+        message:
+          `Voce ${b.index} («${snippetOf(b.text, 55)}») contiene «${hatch}», che sarebbe una ` +
+          'scappatoia, ma la esenta dichiarandola una decisione motivata. Non blocca — ' +
+          'verifica che sia davvero una decisione e non un rinvio rietichettato: nel secondo ' +
+          'caso serve `in questa PR`, `PR concatenata #N` oppure `blocked: <causa>`.',
+      });
     } else if (!hatch) {
       advisories.push({
         type: 'no-literal-state',
@@ -300,10 +321,14 @@ export function checkNextStepStates(body = '') {
  */
 export function suggestedSection(body = '') {
   const { violations, advisories } = checkNextStepStates(body);
-  if (!violations.length && !advisories.length) return null;
+  // `hatch-exempted-by-decision` non entra nella riscrittura: la voce ha gia'
+  // uno stato terminale (la decisione), e proporle uno `**Stato:**` direbbe di
+  // riparare una cosa che non e' rotta.
+  const rewritable = advisories.filter((a) => a.type !== 'hatch-exempted-by-decision');
+  if (!violations.length && !rewritable.length) return null;
   const flagged = new Map();
   for (const v of violations) flagged.set(v.index, 'violation');
-  for (const a of advisories) flagged.set(a.index, 'advisory');
+  for (const a of rewritable) flagged.set(a.index, 'advisory');
 
   const s = String(body ?? '');
   const headerRe = NON_IMPL_ANCORA_RE.test(s) ? NON_IMPL_ANCORA_RE : NON_IMPL_ANY_RE;

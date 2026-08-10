@@ -105,6 +105,28 @@ test('passano i body corretti in risposta alla review (#108 e #124)', () => {
   assert.equal(checkNextStepStates(pr124).ok, true);
 });
 
+test('scappatoia + decisione: esentata ma VISIBILE, non silenziosa (review #144)', () => {
+  // Il messaggio della violazione suggerisce «per scelta»/«by construction» come
+  // rimedio. Un fixer che aggiunge la frase SENZA togliere la scappatoia usciva
+  // da entrambi i rami: né violation né advisory, la voce passava senza traccia,
+  // e il rimedio suggerito diventava un bypass del gate.
+  const body = withSection(['- Il backfill è posposto, per scelta: toccare un’edizione indicizzata vale meno del rischio.']);
+  const res = checkNextStepStates(body);
+  assert.equal(res.ok, true, 'la decisione motivata resta esente: non blocca');
+  assert.equal(res.violations.length, 0);
+  assert.equal(res.advisories.length, 1, 'ma non deve sparire in silenzio');
+  assert.equal(res.advisories[0].type, 'hatch-exempted-by-decision');
+  assert.equal(res.advisories[0].escapeHatch, 'posposto');
+  assert.match(res.advisories[0].message, /non un rinvio rietichettato/);
+});
+
+test('la voce esentata dalla decisione non entra nella sezione riscritta', () => {
+  // Ha già uno stato terminale: proporle uno `**Stato:**` direbbe di riparare
+  // una cosa che non è rotta.
+  const body = withSection(['- Il backfill è posposto, per scelta: vale meno del rischio.']);
+  assert.equal(suggestedSection(body), null);
+});
+
 test('una decisione motivata non è una scappatoia', () => {
   const body = withSection([
     "- `content/` stays out of scope by construction: la allowlist fail-closed sul diff staged non può nominarlo.",
