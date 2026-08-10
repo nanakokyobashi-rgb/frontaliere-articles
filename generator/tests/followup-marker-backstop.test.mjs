@@ -249,6 +249,68 @@ test('caso 4-bis — un marker su UN\'ALTRA PR non prova niente per questa', () 
   assert.ok(r.exitCode !== 0, 'la run deve fallire, cosi\' il watermark non avanza');
 });
 
+// ── #127: la consegna esige una prova POSITIVA, non l'assenza di guasto ──
+//
+// I due test qui sotto coprono il buco che restava dopo la riparazione della
+// causa di oggi. `sandboxBroken` e' `bashUses > 0 && bashOk === 0`: solo una
+// sessione che PROVA a eseguire comandi puo' produrre quella prova. Ogni causa
+// che impedisce il primo tentativo — sessione morta prima del primo tool, tool
+// Bash non concesso, execution file assente — dava `sandboxBroken === false`,
+// quindi `delivered === true`, quindi «zero outstanding items» timbrato su
+// tutto il batch e PR perse per sempre. Il sandbox rotto e' visibile perche' il
+// modello insiste; la prossima causa non lo sara'.
+
+test('#127 — zero comandi di shell TENTATI: non e\' una consegna', () => {
+  // La sessione fa un solo Read e finisce: nessun Bash, nessun errore, step
+  // verde. E' la forma che prende «Claude non ha potuto/voluto usare gh» per
+  // qualunque causa diversa da bwrap.
+  const soloRead = JSON.stringify([
+    { type: 'assistant', message: { content: [{ type: 'tool_use', id: 'r1', name: 'Read', input: {} }] } },
+    { type: 'user', message: { content: [{ type: 'tool_result', content: '# FOLLOWUP.md', tool_use_id: 'r1' }] } },
+    { type: 'result', subtype: 'success', is_error: false, num_turns: 3 },
+  ]);
+  const s = analyzeSession(soloRead);
+  assert.equal(s.bashUses, 0);
+  assert.equal(s.sandboxBroken, false, 'nessun Bash tentato: il guasto del sandbox non e\' osservabile');
+  assert.equal(s.shellCapable, false, 'ed e\' proprio per questo che la consegna non puo\' dipendere da sandboxBroken');
+
+  const gh = fakeGh({ commentsByPr: { 56: comments('nessun marker') } });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: soloRead, stepOutcome: 'success', gh, log: silent });
+
+  assert.equal(r.delivered, false, 'step verde + zero Bash riusciti != consegnato');
+  assert.equal(r.decisions[0].code, 'undelivered-session');
+  assert.deepEqual(gh.posts(), [], 'timbrare qui renderebbe DEFINITIVA la perdita, come nel caso bwrap');
+  assert.equal(r.exitCode, 1, 'il guasto deve essere ROSSO: un verde qui e\' il ciclo che mente');
+});
+
+test('#127 — execution file illeggibile: si astiene, non presume', () => {
+  // Se l'execution file non si parsa non sappiamo NIENTE della sessione. Prima
+  // questo stato produceva toolUses=0 → sandboxBroken=false → delivered=true.
+  for (const raw of ['', 'non-json', '{}']) {
+    const s = analyzeSession(raw);
+    assert.equal(s.shellCapable, false, `input ${JSON.stringify(raw)}: nessuna prova di shell`);
+
+    const gh = fakeGh({ commentsByPr: { 56: comments('nessun marker') } });
+    const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: raw, stepOutcome: 'success', gh, log: silent });
+    assert.equal(r.delivered, false, `input ${JSON.stringify(raw)}: il dubbio non e' una consegna`);
+    assert.deepEqual(gh.posts(), [], `input ${JSON.stringify(raw)}: nessun marker su uno stato ignoto`);
+    assert.equal(r.exitCode, 1);
+  }
+});
+
+test('#127 — una sessione sana resta verde (nessun falso rosso)', () => {
+  // Il contrappeso ai due test sopra: la guardia piu' stretta non deve rendere
+  // rosse le run che consegnano davvero. Il prompt impone `gh pr view` per ogni
+  // PR e `gh pr comment` per il marker, quindi bashOk > 0 e' garantito da una
+  // consegna reale — la condizione non e' raggiungibile solo in teoria.
+  const gh = fakeGh({ commentsByPr: { 56: comments('## Post-merge follow-up triage: zero outstanding items.') } });
+  const r = runBackstop({ batch: [56], repo: 'o/r', execRaw: healthyExec(), stepOutcome: 'success', gh, log: silent });
+  assert.equal(r.delivered, true);
+  assert.equal(r.decisions[0].code, 'marker-present');
+  assert.deepEqual(gh.posts(), []);
+  assert.equal(r.exitCode, 0);
+});
+
 test('commenti illeggibili: nessun marker e nessun rosso', () => {
   // `gh` a vuoto non dice «marker assente», dice «non lo so». Trattarlo come
   // assenza scriverebbe un marker su un dubbio — l\'unica mossa irreversibile.
