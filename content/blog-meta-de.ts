@@ -9564,6 +9564,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.title': 'Leben in Cannero Riviera und Arbeiten im Tessin als Grenzgänger',
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Was müssen Grenzgänger wissen, die in Cannero Riviera leben und im Tessin arbeiten möchten?',
     'blog.article.vivere-a-cannero-riviera-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Ein Frontalier schaut auf den Luganersee von Cannero Riviera',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.title': 'Umzug nach Domodossola als Grenzgänger: Vor- und Nachteile',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.excerpt': 'Was ändert sich für Grenzgänger, die nach Domodossola ziehen?',
+    'blog.article.trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.imageAlt': 'Eine Szene eines Pendler von Domodossola nach Ticino.',
 };
 
 export default blogMetaDe;

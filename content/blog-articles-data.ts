@@ -28695,6 +28695,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'trasferirsi-a-domodossola-da-frontaliere-pro-e-contro',
+ category: 'fiscale',
+ date: '2026-08-10T22:05:00.052Z',
+ image: '/images/blog/trasferirsi-a-domodossola-da-frontaliere-pro-e-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
