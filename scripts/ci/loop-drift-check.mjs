@@ -44,6 +44,24 @@
  * perché è proprio sui file adattati che una modifica del sito si perde più
  * facilmente — nessuno se ne accorge, visto che "tanto è diverso apposta".
  *
+ * ## `corpus-only` vs `corpus-only-pending` (issue #125)
+ *
+ * `corpus-only` dice "non esiste sul sito" senza distinguere *non serve* da
+ * *serve e manca*: la differenza viveva solo in prosa dentro `reason`, che non
+ * fa fallire niente. `corpus-only-pending` è il grado che la rende un segnale:
+ *
+ *   - è sempre `actionable`, a differenza di `corpus-only` — finché il gemello
+ *     non compare, c'è un lavoro tracciato (`entry.trackingIssue`) da seguire;
+ *   - a differenza di `corpus-only`, QUESTO script interroga davvero il sito
+ *     (`sitePath || path`): se il fetch smette di rispondere 404, il gemello è
+ *     atterrato e lo stato diventa `corpus-only-pending-landed` — l'istruzione
+ *     è promuovere la voce a mano (`identical`/`adapted` + `--init`), perché
+ *     un contenuto appena arrivato può non essere ancora quello atteso;
+ *   - se il lavoro tracciato viene abbandonato, la retromarcia è manuale: si
+ *     toglie `trackingIssue` e si torna a `corpus-only`. Nessuno script lo fa
+ *     da solo, per la stessa ragione per cui non mergia né riscrive: è una
+ *     decisione, non una meccanica.
+ *
  * ## Cosa NON fa
  *
  * Non mergia, non apre PR, non riscrive niente. Emette un report. La correzione
@@ -117,6 +135,33 @@ function classify(entry, now, base) {
 
   if (mode === 'corpus-only') {
     return { state: 'corpus-only', actionable: false, headline: 'solo su questo repo', detail: reason || '' };
+  }
+
+  if (mode === 'corpus-only-pending') {
+    // A differenza di `corpus-only`, qui `now.site` NON è forzato a null: il
+    // fetch è stato eseguito davvero (vedi main()), perché la domanda utile è
+    // proprio "è ancora assente?". Un 404 che persiste è lo stato normale
+    // finché il lavoro tracciato non atterra — non un errore da segnalare come
+    // `removed-on-site` (quel branch presume un file che ESISTEVA ed è stato
+    // tolto, che è una storia diversa da "non è mai esistito").
+    const tracking = entry.trackingIssue ? ` Tracciato in ${entry.trackingIssue}.` : ' ATTENZIONE: nessun `trackingIssue` dichiarato.';
+    if (now.site !== null) {
+      return {
+        state: 'corpus-only-pending-landed',
+        actionable: true,
+        headline: "il gemello atteso e' comparso sul sito — pronta la promozione",
+        detail:
+          `${reason || ''}${tracking} Il fetch su ${entry.sitePath || rel} non risponde piu' 404: verifica che il ` +
+          "contenuto sia quello atteso, poi promuovi la voce a `identical`/`adapted` e rigenera la " +
+          'baseline con `node scripts/ci/loop-drift-check.mjs --init`.',
+      };
+    }
+    return {
+      state: 'corpus-only-pending',
+      actionable: true,
+      headline: "il sito dovrebbe avere questo file — non ce l'ha ancora",
+      detail: `${reason || ''}${tracking}`,
+    };
   }
 
   if (now.site === null) {
@@ -226,7 +271,14 @@ async function main() {
     }
 
     if (INIT) {
-      entry.baseline = { site: now.site, corpus: now.corpus, alignedAt: manifest.alignedAt || null };
+      // `corpus-only` e `corpus-only-pending` non hanno un sito da tracciare:
+      // per il secondo, `now.site` puo' essere non-null (il gemello e' appena
+      // atterrato) ma scriverlo qui lo farebbe come effetto collaterale di un
+      // `--init` di routine, saltando la verifica del contenuto che il report
+      // richiede esplicitamente. La promozione resta un atto cosciente: cambia
+      // il `mode` a mano, POI `--init` registra la baseline vera.
+      const siteBaseline = (entry.mode === 'corpus-only' || entry.mode === 'corpus-only-pending') ? null : now.site;
+      entry.baseline = { site: siteBaseline, corpus: now.corpus, alignedAt: manifest.alignedAt || null };
       continue;
     }
 
@@ -255,7 +307,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['undeclared-drift', 'both-moved', 'site-ahead', 'missing-here', 'removed-on-site', 'corpus-ahead'];
+      const ORDER = ['undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -285,12 +337,16 @@ async function main() {
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
+      section('corpus-only-pending-landed', '🟢 Il gemello atteso è arrivato sul sito — pronta la promozione'),
       section('missing-here', '⚠️ Dichiarato nel manifest ma assente'),
       section('removed-on-site', '⚠️ Non più sul sito'),
       section('corpus-ahead', '⬆️ Modificato qui — candidato a risalire al sito'),
+      section('corpus-only-pending', '⏳ In attesa del gemello sul sito (lavoro tracciato)'),
       '---',
       '',
       'Le classi `site-ahead` e `corpus-ahead` non sono errori: sono le due direzioni in cui il ciclo evolve. La prima è lavoro da portare, la seconda è un miglioramento locale che probabilmente serve a entrambi i cicli.',
+      '',
+      '`corpus-only-pending` non è un errore neanche lei: è un promemoria che punta a un lavoro già tracciato altrove (vedi `trackingIssue` in ogni riga). Non richiede un\'azione qui finché non diventa `-landed` — a quel punto la voce va promossa a mano.',
       '',
       'Dopo un allineamento voluto: `node scripts/ci/loop-drift-check.mjs --init` e committa il manifest.',
       '',
@@ -309,11 +365,19 @@ async function main() {
   return STRICT && actionable.length ? 1 : 0;
 }
 
-main().then(
-  (code) => process.exit(code),
-  (e) => {
-    // PROCEED-SAFE: un checker rotto non deve rompere la CI di nessuno.
-    console.error(`loop-drift-check fallito: ${e && e.stack ? e.stack : e}`);
-    process.exit(STRICT ? 1 : 0);
-  },
-);
+// Solo in modalita' CLI: senza guardia, importare questo modulo da un test
+// eseguirebbe main() — che fa fetch di rete e, con --issue, apre/commenta
+// issue sul repo. `classify` resta importabile per testare la classificazione
+// senza pagare nessuno dei due.
+if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
+  main().then(
+    (code) => process.exit(code),
+    (e) => {
+      // PROCEED-SAFE: un checker rotto non deve rompere la CI di nessuno.
+      console.error(`loop-drift-check fallito: ${e && e.stack ? e.stack : e}`);
+      process.exit(STRICT ? 1 : 0);
+    },
+  );
+}
+
+export { classify };
