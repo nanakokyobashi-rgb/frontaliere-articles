@@ -151,3 +151,32 @@ test('build-api.mjs reads the frontaliere override file and feeds it into the fr
     'the frontaliere call passes ONLY retiredDailyEditions again — canonical-shadowed slugs would leak back into sitemap-blog.xml',
   );
 });
+
+// Same class of defect, second surface: `collect()` (build-api.mjs) emits
+// sitemap-news-candidates.xml for BOTH sections and applied no shadowing at
+// all — a canonical-shadowed article still inside the 48h Google News window
+// would list its own now-superseded page as a news candidate, the same
+// self-canonical violation this file's sitemap-blog.xml tests guard against.
+// Source-text check for the same reason as above: build-api.mjs cannot be
+// imported by a unit test.
+test('build-api.mjs feeds the shadow sets into both collect(...) calls that build sitemap-news-candidates.xml', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts', 'build-api.mjs'), 'utf-8');
+
+  const frontaliereCall = src.match(/collect\(\s*ARTICLES,\s*'frontaliere'[^)]*\)/s);
+  assert.ok(frontaliereCall, 'could not find the frontaliere collect(...) call to inspect');
+  assert.match(
+    frontaliereCall[0],
+    /,\s*frontaliereSitemapShadow\s*\)/,
+    'the frontaliere collect(...) call no longer passes frontaliereSitemapShadow — canonical-shadowed ' +
+      'frontaliere pages could leak back into sitemap-news-candidates.xml while still inside the 48h window',
+  );
+
+  const svizzeraCall = src.match(/collect\(\s*SWISS_ARTICLES,\s*'svizzera'[^)]*\)/s);
+  assert.ok(svizzeraCall, 'could not find the svizzera collect(...) call to inspect');
+  assert.match(
+    svizzeraCall[0],
+    /,\s*shadowedSwissSlugs\s*\)/,
+    'the svizzera collect(...) call no longer passes shadowedSwissSlugs — canonical-shadowed swiss pages ' +
+      'could leak back into sitemap-news-candidates.xml while still inside the 48h window',
+  );
+});

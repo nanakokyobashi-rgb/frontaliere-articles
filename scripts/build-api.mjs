@@ -460,11 +460,16 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const candidateBlocks = [];
   let considered = 0;
 
-  const collect = (entries, sectionId, slugMap, meta) => {
+  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set()) => {
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
       if (!slug) continue;
+      // Same self-canonical gate sitemap-blog.xml enforces (buildSitemap in
+      // scripts/lib/build-sitemap.mjs): a canonical-shadowed article's own page
+      // points elsewhere, so listing its <loc> here is the same defect this PR
+      // fixes for the blog sitemap, just in the news-candidates feed instead.
+      if (shadowed.has(slug)) continue;
       const publishedAt = a.date;
       if (!publishedAt) continue;
       considered += 1;
@@ -534,8 +539,8 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     }
   };
 
-  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt);
-  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt);
+  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow);
+  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs);
 
   const candidatesXmlRaw =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
