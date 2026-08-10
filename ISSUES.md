@@ -80,6 +80,19 @@ l'unica pending, quindi non può essere cancellata.
    ```
    Una keyword `Closes` **per issue, una per riga**: GitHub chiude solo la prima
    dopo la keyword, quindi `Closes #a #b` lascia `#b` aperta.
+
+   **Eccezione — fix provabile solo da una run su `main`.** Se la PR tocca
+   `.github/workflows/**` o la config dell'action Claude (`claude_args`,
+   `settings`, sandbox, `permissionMode`) per un bug osservabile solo a
+   runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — cioè nessun test
+   o lettura del diff può dimostrare che il fix funziona, solo una run reale
+   — **non usare `Closes #<n>`**: usa `Refs #<n>` e, dopo l'apertura della PR,
+   `gh issue edit <n> --add-label awaiting-production-proof`. La issue resta
+   aperta finché qualcuno non allega la misura di una run verde su `main`
+   (vedi #151: la PR #147 è stata mergiata e la issue #127 chiusa 8 minuti
+   prima che la misura in produzione smentisse la diagnosi). Il marker
+   `FIX_OUTCOME: pr-created` resta comunque quello giusto — è la PR ad essere
+   aperta, non il verdetto del fixer a mancare.
 10. La PR entra da sola nel ciclo di review e auto-merge. **Non mergiare a mano.**
 
 ## Issue aggregate: il circuit-breaker

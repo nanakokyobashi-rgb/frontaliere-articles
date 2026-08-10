@@ -55,6 +55,7 @@ export const LABELS = [
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
+  ['awaiting-production-proof', 'c5def5', 'Merge atterrato, chiusura sospesa: serve la prova di una run su main prima di richiuderla'],
   // Le quattro che seguono le applica il triage post-merge, e sono rimaste
   // NON dichiarate finche' `post-merge-followup.yml` non ha girato per giorni
   // senza mintare una sola issue: 0 sul corpus contro 100+ sul sito, e ogni
