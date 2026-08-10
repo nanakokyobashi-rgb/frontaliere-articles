@@ -940,6 +940,50 @@
       }
     },
     {
+      "path": "generator/tests/article-sanitizers.test.mjs",
+      "sitePath": "tests/article-sanitizers.test.ts",
+      "mode": "adapted",
+      "reason": "generator/scripts/lib/article-sanitizers.mjs gira a OGNI generazione (create-article.mjs la chiama) e non aveva una suite da questo lato: loop-drift-check non poteva accorgersene perche' confronta i file del manifest uno per uno e non vede l'assenza di un test da un lato. Le due copie della lib sono byte-identiche, quindi il porting e' quasi meccanico: cambiano le due righe di import e cadono i quattro cast TypeScript `null as unknown as string`, che qui sarebbero un SyntaxError perche' node --test non fa transpiling. Le asserzioni sono intatte.",
+      "baseline": {
+        "site": "87647779656c4fba",
+        "corpus": "8bdb605638aa669b",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/tests/pr-collision-detector-drafts.test.mjs",
+      "sitePath": "tests/pr-collision-detector-drafts.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello di tests/pr-collision-detector-drafts.test.ts sul sito, riscritto per node --test perche' qui non c'e' vitest. Lo script sotto test e' mode: identical nel manifest e resta byte-identico; il test no, ed e' giusto cosi': e' il runner a differire, non il comportamento sotto test. Copre le draft che non devono partecipare al grafo delle collisioni (difetto osservato su questo repo, PR #33).",
+      "baseline": {
+        "site": "edd15f5ad95271d2",
+        "corpus": "7592867878443da1",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/tests/fast-publish-cdn-offload-order.test.mjs",
+      "sitePath": "tests/fast-publish-cdn-offload-order.test.ts",
+      "mode": "adapted",
+      "reason": "L'archivio va renderizzato PRIMA dell'offload CDN, non dopo (issue #5270): un ordine invertito lascia riferimenti /assets/ 404 su ogni pagina archivio pubblicata via fast-publish. scripts/publish-article-fast.mjs e' una copia di quello del sito senza canale di mirror automatico (mirror-articles-engine.yml porta solo engine/), e il sito aveva gia' corretto l'ordine in valerielinc-ops/frontaliere-si-o-no#5271: la suite e' il gemello che chiude il ritardo qui.",
+      "baseline": {
+        "site": "9dbc2ce29b6d3b0f",
+        "corpus": "ac21e4d755d4ed6a",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/tests/news-sitemap-whitelist.test.mjs",
+      "sitePath": "tests/news-sitemap-whitelist.test.ts",
+      "mode": "adapted",
+      "reason": "Whitelist vendorizzata di Google News (issue #4974 item 3, S5.3). Il file e' una copia della lista editoriale di main, e il difetto che sostituisce era silenzioso: una lista vuota si legge come allow-all. Le asserzioni pinnano il conteggio e la semantica invece di ispezionare l'array a occhio, riscritte per node --test perche' qui non c'e' vitest.",
+      "baseline": {
+        "site": "25b7b9adeffe66df",
+        "corpus": "18a8b5bd90744395",
+        "alignedAt": "2026-08-10"
+      }
+    },
+    {
       "path": ".github/workflows/reconcile-article-shards.yml",
       "mode": "corpus-only",
       "reason": "Rimedio alla classe 'articolo fantasma' (run 31245282583): publish-api e fast-publish partono in parallelo dallo stesso push, e un fast-publish morto a npm ci lascia l'articolo annunciato ma 404 sugli shard, senza retry. La riconciliazione vive qui perche' e' questo il repo che annuncia (slugs.json) e che pusha gli shard; il sito non possiede nessuno dei due lati del confronto.",
