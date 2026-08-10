@@ -109,7 +109,9 @@ function loadGates(section) {
     'console',
     `${LEXICON_SRC}\n${FILTER_SRC}\n${PRIORITIZE_SRC}\nreturn {
        TOPICAL_KEYWORDS, SVIZZERA_TOPICAL_KEYWORDS, FRONTALIERI_KEYWORDS,
+       FRONTALIERE_ADMISSION_KEYWORDS,
        hasTopicalSignal, countTopicalHits, filterByAnchor,
+       hasAdmissionSignal, countAdmissionHits,
        prioritizeFrontalieriHeadlines,
      };`,
   )(
@@ -301,4 +303,57 @@ test('prioritizeFrontalieriHeadlines is a no-op on the national section', () => 
   const keptFront = FRONT.prioritizeFrontalieriHeadlines(pool);
   assert.equal(keptFront.length, 10);
   assert.ok(keptFront.every(x => x._frontalieriBoosted));
+});
+
+// ── 5. Admission vs ranking lexicon (issue #189) ────────────────────────────
+//
+// TOPICAL_KEYWORDS admits events/culture content (festival, sagra, …) that
+// the downstream frontaliere-density gate (REGOLA #0) has no words for, so a
+// Locarno-Film-Festival-shaped source paid for a full generation before
+// being rejected. The admission lexicon must exclude those 8 tokens while
+// the ranking lexicon (TOPICAL_KEYWORDS itself) keeps them, since they are
+// data-justified for ranking real traffic.
+
+test('the admission lexicon drops the events/culture tokens the ranking lexicon keeps', () => {
+  const eventsCultureTokens = [
+    'festival', 'sagra', 'mercatin', 'fiera', 'manifestazion',
+    'spettacol', 'rassegna', 'concert',
+  ];
+  for (const tok of eventsCultureTokens) {
+    assert.ok(FRONT.TOPICAL_KEYWORDS.includes(tok), `presupposto del test: "${tok}" deve restare nella lista di ranking`);
+    assert.ok(
+      !FRONT.FRONTALIERE_ADMISSION_KEYWORDS.includes(tok),
+      `"${tok}" non deve ammettere un candidato: il gate a valle (REGOLA #0) lo rigetta comunque`,
+    );
+  }
+});
+
+test('a headline that only matches an events/culture token ranks as topical but is not admitted, on frontaliere', () => {
+  const text = 'Ecco i vincitori del Locarno Film Festival 2026 https://www.laregione.ch/culture/locarno-film-festival';
+  assert.equal(
+    FRONT.hasTopicalSignal(text), true,
+    'presupposto del test: il gate di ranking legacy considera questo candidato topico (bug di #189)',
+  );
+  assert.equal(
+    FRONT.hasAdmissionSignal(text), false,
+    'il gate di ammissione non deve pagare una generazione che REGOLA #0 rigetterà comunque',
+  );
+});
+
+test('filterByAnchor on frontaliere now drops a festival headline it used to admit', () => {
+  const festival = h('Ecco i vincitori di Open Doors 2026, tra fiere e rassegne culturali a Locarno');
+  const kept = FRONT.filterByAnchor([festival]);
+  assert.deepEqual(kept, [], 'un candidato solo-eventi non deve superare l\'ammissione sulla sezione frontaliere');
+});
+
+test('admission is unchanged on svizzera: no downstream density gate exists there for events/culture', () => {
+  const text = 'Grande festival internazionale a Zurigo, fiera con migliaia di visitatori';
+  assert.equal(
+    CH.hasAdmissionSignal(text), CH.hasTopicalSignal(text),
+    'la sezione nazionale non ha un gate REGOLA #0 sulla density frontaliere: ammissione e ranking restano la stessa lista',
+  );
+});
+
+test('a genuine frontaliere headline is still admitted, not just ranked', () => {
+  assert.equal(FRONT.hasAdmissionSignal('Ristorni ai frontalieri, nuovo accordo fiscale'), true);
 });
