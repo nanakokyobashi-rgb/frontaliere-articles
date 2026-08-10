@@ -181,13 +181,13 @@ function assemble(overrides) {
   }
 }
 
-/** Il ramo NEWS: fonte reale scrapata, sezione frontaliere. */
-function newsPrompt(extra = {}) {
+/** Il ramo NEWS: fonte reale scrapata. `section` di default 'frontaliere', come il call-site reale prima di #96 — passala esplicitamente per l'altra sezione. */
+function newsPrompt(extra = {}, section = 'frontaliere') {
   return assemble({
     pageContent: NEWS_PAGE_CONTENT,
     url: 'https://www.tio.ch/ticino/economia/1812345/imposta-fonte-frontalieri-nuove-aliquote',
-    IS_FRONTALIERE: true,
-    SECTION_NAME: 'frontaliere',
+    IS_FRONTALIERE: section === 'frontaliere',
+    SECTION_NAME: section,
     sourceContext: {
       headline: 'Imposta alla fonte, il Ticino rivede le aliquote per i frontalieri sopra i 120mila franchi',
       relatedHeadlines: [
@@ -263,6 +263,29 @@ test('IL TEST CENTRALE: il prompt NEWS nel caso peggiore resta sotto il tetto', 
     + 'Il tetto e\' un ratchet: puo\' solo SCENDERE. Se hai aggiunto un blocco al prompt, il costo va\n'
     + 'compensato altrove, non assorbito alzando il tetto — sopra PROMPT_TOKEN_BUDGET '
     + `(${PROMPT_TOKEN_BUDGET}) ogni modello GitHub Models e Groq viene saltato dal pre-flight.`,
+  );
+});
+
+test('il ramo NEWS SVIZZERA resta sotto il tetto — non solo l\'evergreen svizzera', () => {
+  // `generate-article.yml` alterna cron frontaliere/svizzera chiamando lo
+  // stesso create-article.mjs sia per notizie reali sia per evergreen: la
+  // sezione svizzera sul ramo NEWS e' un path di produzione raggiunto
+  // regolarmente, non solo un caso teorico. Senza questo test la sola
+  // combinazione section='svizzera' + branch=news non era mai esercitata —
+  // `newsPrompt()` fissava SECTION_NAME a 'frontaliere' e nessun altro test
+  // passava una sezione diversa sul ramo news.
+  //
+  // Il gap era reale: EVERGREEN_FACTS_BRIEF_CH iniettato in domainFactsBlock
+  // (anche sul ramo news, non solo evergreen) misurava 10.362 token, sopra
+  // PROMPT_TOKEN_CEILING — la sezione svizzera non sarebbe mai entrata in
+  // generazione da notizia reale, solo da evergreen. Il tetto in caratteri su
+  // domainFactsBlock lo riporta sotto il tetto.
+  const { estTokens } = newsPrompt({}, 'svizzera');
+  assert.ok(
+    estTokens <= PROMPT_TOKEN_CEILING,
+    `il prompt news svizzera e' stimato in ${estTokens} token, sopra PROMPT_TOKEN_CEILING (${PROMPT_TOKEN_CEILING}).\n`
+    + 'Se e\' salito, il tetto su MAX_DOMAIN_FACTS_CHARS in create-article.mjs va rivisto: senza, la sezione '
+    + 'svizzera smette di generare da notizia reale, solo da evergreen.',
   );
 });
 

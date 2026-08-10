@@ -5757,7 +5757,23 @@ Il notizia/evento è solo il punto di partenza. Il valore sta nelle implicazioni
   // grounding: a un articolo svizzero nazionale venivano offerti gli scaglioni
   // IRPEF come «fatti di dominio», ed e' materiale che un modello debole poi
   // usa davvero.
-  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${evergreenFactsBriefFor(SECTION_NAME)}\n`;
+  //
+  // Tetto in CARATTERI sul brief iniettato qui — misurato: EVERGREEN_FACTS_BRIEF_CH
+  // (sezione svizzera) e' 3.170 caratteri contro i 1.553 del gemello frontaliere,
+  // e senza un tetto il ramo news+svizzera resta sopra PROMPT_TOKEN_CEILING
+  // (misurato 10.362 contro 10.100): la sezione svizzera non entrerebbe MAI in
+  // generazione da notizia reale, solo da evergreen — la stessa classe di bug
+  // di «genera solo evergreen» che questo file dichiara di chiudere, qui sul
+  // ramo news. A differenza del ramo evergreen (dove il brief E' la fonte e va
+  // intero), qui e' materiale di CONTESTO facoltativo («usali solo se
+  // pertinenti al tema», sopra) — troncarlo per intere righe di elenco non
+  // toglie un presidio anti-allucinazione, toglie solo fatti opzionali in coda.
+  const MAX_DOMAIN_FACTS_CHARS = 1600;
+  const domainFactsBrief = evergreenFactsBriefFor(SECTION_NAME);
+  const truncatedDomainFactsBrief = domainFactsBrief.length > MAX_DOMAIN_FACTS_CHARS
+    ? domainFactsBrief.slice(0, MAX_DOMAIN_FACTS_CHARS).replace(/\n-[^\n]*$/, '') + '\n[...altri fatti di dominio omessi per brevità]'
+    : domainFactsBrief;
+  const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${truncatedDomainFactsBrief}\n`;
 
   const prompt = `${systemRoleLine}
 
