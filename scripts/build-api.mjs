@@ -77,6 +77,9 @@ import {
 // generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
 // under plain `node --test`, without a tsx subprocess.
 import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
+// Detection (not filtering — see its header) for issue #166: surfaces a
+// same-day canonical-override landing on a still-in-window ticker article.
+import { findShadowedTickerArticles } from './lib/ticker-shadow-check.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -445,6 +448,12 @@ for (const section of rssSections) {
 // So if the ticker should ever exclude shadowed articles, the filter goes inside
 // computeTickerArticles — which lives in the engine and is edited on the SITE
 // (packages/articles/engine), never here, or the next mirror overwrites it.
+//
+// Issue #166 (round-3 adversarial follow-up to #152): the "latent" window above
+// is real, not zero, so the same-day case is DETECTED — not filtered, for the
+// exact caller-drift reason above — via findShadowedTickerArticles below. It
+// logs and counts (manifest.json `counts.tickerArticlesShadowed`) so the risk
+// is visible the day it stops being latent, instead of only in this comment.
 const { computeTickerArticles } = await load('engine/newsTickerDataPlugin.ts');
 const tickerArticles = computeTickerArticles(fs, path, ROOT, ARTICLES, {
   hubLocales: LOCALES,
@@ -465,6 +474,18 @@ for (const art of tickerArticles) {
       throw new Error(`news-ticker: article '${art.id}' has no ${loc} slug — refusing to publish`);
     }
   }
+}
+// Detect-only, not filter (see the long _doc above and
+// scripts/lib/ticker-shadow-check.mjs): a same-day canonical-override on a
+// still-in-window ticker article is published exactly as before, but now
+// loud in the build log and countable in manifest.json instead of silent.
+const shadowedTickerArticles = findShadowedTickerArticles(tickerArticles, shadowedFrontaliereSlugs);
+if (shadowedTickerArticles.length > 0) {
+  console.warn(
+    `[build-api] news-ticker-live.json: ${shadowedTickerArticles.length} of ${tickerArticles.length} ` +
+      `ticker articles are canonical-overridden (shadowed) — homepage ticker may link a superseded slug ` +
+      `(issue #166): ${shadowedTickerArticles.map((a) => a.id).join(', ')}`,
+  );
 }
 write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
 
@@ -762,6 +783,7 @@ write('manifest.json', {
     rssFeeds: rssFeedCount,
     rssItems: rssItemTotal,
     tickerArticles: tickerArticles.length,
+    tickerArticlesShadowed: shadowedTickerArticles.length,
     newsCandidates: newsCandidateCount,
     images: imageCount,
     borderRankingEntries,
