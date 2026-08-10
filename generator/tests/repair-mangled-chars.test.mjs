@@ -29,7 +29,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { riparaTesto, costruisciLessico, MARKER_G } from '../scripts/repair-mangled-chars.mjs';
+import { riparaTesto, risolviToken, costruisciLessico, MARKER_G } from '../scripts/repair-mangled-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.join(QUI, '..', 'scripts', 'repair-mangled-chars.mjs');
@@ -159,6 +159,17 @@ test('coda esadecimale a-f: la coda si consuma, non resta nella parola', () => {
   assert.match(r.testo, /politiques entraînent des charges/);
 });
 
+test('nibble isolato: se il corpus usa il carattere DA SOLO, si ripara', () => {
+  // Il simmetrico del rifiuto qui sotto, e la ragione per cui la guardia non e'
+  // un divieto: 0x0E+'0' = 0xE0 = à, e «à» e' una parola francese che il corpus
+  // usa da sola.  La legge del nibble sceglie, il lessico conferma, si scrive.
+  const r = risolviToken(`${B(0x0e)}0`, new Map([['à', 5]]), 2, new Map(), true);
+  assert.equal(r.esito, 'riparato');
+  assert.equal(r.testo, 'à');
+  assert.equal(r.canale, 'nibble');
+  assert.equal(r.freq, 5, 'la frequenza riportata e\' quella che ha fatto da prova');
+});
+
 // ---------------------------------------------------------------------------
 // quello che deve RIFIUTARE — e' il punto dello script
 // ---------------------------------------------------------------------------
@@ -171,6 +182,29 @@ test('FAIL-CLOSED — hex isolato: il carattere da solo dev\'essere una parola d
   const r = ripara(`travaux prioritaires\n${B(0x00)}e2 Il est important de noter`);
   assert.ok(!r.testo.includes('â'), 'nessuna â inventata');
   assert.ok(r.testo.includes(`${B(0x00)}e2`), 'il marker resta, e con lui l\'ancora');
+  assert.equal(r.riparazioni.length, 0);
+});
+
+test('FAIL-CLOSED — nibble isolato: la legge vale nel FILE, non nel token da solo', () => {
+  // Riproduzione esatta del caso segnalato in review sulla PR #142.  Con la
+  // legge del nibble gia' verificata (`leggeNibble = true`), `0x0F+'4'` da solo
+  // si legge ô — ma nessuna parola del corpus conferma che «ô» da sola sia una
+  // ricostruzione valida, e prima della guardia veniva scritta con `freq: 0`.
+  // E' lo stesso argomento che il canale hex usa per `<00>e2`: la lettura da
+  // sola non e' una prova, e una prova sul FILE non e' una prova sul TOKEN.
+  const r = risolviToken(`${B(0x0f)}4`, new Map([['bonjour', 5]]), 2, new Map(), true);
+  assert.equal(r.esito, 'rifiutato', 'nessuna ô inventata a frequenza zero');
+  assert.match(r.motivo, /nessuna prova/);
+});
+
+test('FAIL-CLOSED — coda esadecimale MAIUSCOLA: e\' un\'iniziale, non una coda', () => {
+  // Simmetrico di «la cifra puo' essere a-f»: con la 'b' minuscola `co<0F>bts`
+  // diventa «coûts», con la 'B' maiuscola l'unita' corta non si forma e non
+  // resta niente da confermare.  Misurato sui 279 marker di origin/main: le
+  // sole 4 occorrenze con A-F maiuscola dopo il marker sono `<10>Der`,
+  // `<01>Eureka` e `<00>Alain` — iniziali di parola, non code.
+  const r = ripara(`pour estimer temps et co${B(0x0f)}Bts`);
+  assert.ok(r.testo.includes(`co${B(0x0f)}Bts`), 'la B maiuscola resta dov\'e\'');
   assert.equal(r.riparazioni.length, 0);
 });
 

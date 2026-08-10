@@ -288,6 +288,16 @@ function unitaPossibili(token, i) {
   // sei caratteri Latin-1 per riga della tabella: â, ê, î, ô, û e le loro
   // compagne.  La coda resta comunque solo un CANDIDATO: se il lessico non
   // conferma la ricostruzione, l'occorrenza e' rifiutata come prima.
+  //
+  // Solo MINUSCOLA, e l'asimmetria con la coda lunga qui sopra e' voluta: due
+  // caratteri esadecimali di fila dentro una parola sono gia' di per se' una
+  // forma anomala, mentre UNA lettera A-F maiuscola subito dopo il marker e'
+  // quasi sempre una maiuscola vera, cioe' l'iniziale della parola che il
+  // marker precede.  Misurato sui 279 marker di a6cb7e10: le sole 4 occorrenze
+  // con A-F maiuscola dopo il marker sono `<10>Der`, `<01>Eureka` e
+  // `<00>Alain` — tre iniziali di parola, zero code.  Accettare A-F sblocca
+  // **0** riparazioni (45 -> 45, misurato) e metterebbe a rischio quelle tre,
+  // quindi l'asimmetria e' fail-closed a costo zero.
   if (c1 && HEX.test(c1) && c1 === c1.toLowerCase()) unita.push({ lunghezza: 2, coda: c1, hex: null });
   unita.push({ lunghezza: 1, coda: '', hex: null });
   return unita;
@@ -511,7 +521,19 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   }
   // 2b. il lessico non ha confermato niente e la legge del nibble regge in
   //     questo file: e' il caso di `0x0E+'0'` da solo, che e' la preposizione «à».
-  if (nibbleTesto && confermate.size === 0) return dettaglia(nibbleScelte, 'nibble', 0);
+  //     Vale la STESSA guardia del punto 2, e qui serve anche di piu'.
+  //     `leggeNibble` e' una prova sul FILE — tre sostituzioni gia' confermate
+  //     dal lessico la rispettano e nessuna la smentisce — ma non dice niente
+  //     sul TOKEN isolato: in un file dove la legge regge, `0x0F+'4'` da solo
+  //     si leggerebbe ô e finirebbe scritto senza che una sola parola del
+  //     corpus lo confermi.  E' esattamente l'argomento del punto 2 per
+  //     `<00>e2`: la lettura da sola non basta, il carattere ricostruito
+  //     dev'essere una PAROLA che il corpus usa da sola.  «à» lo e', «ô» no.
+  if (nibbleTesto && confermate.size === 0) {
+    const contesto = token.length - nibbleScelte.reduce((s, x) => s + x.unita.lunghezza, 0);
+    const freq = lessico.get(nibbleTesto) || 0;
+    if (contesto === 0 && freq >= freqMinima) return dettaglia(nibbleScelte, 'nibble', freq);
+  }
   // 3. una sola ricostruzione confermata.
   if (confermate.size === 1) {
     const [testo, { scelte, freq }] = [...confermate][0];
