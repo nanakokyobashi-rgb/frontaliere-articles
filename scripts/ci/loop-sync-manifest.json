@@ -1053,13 +1053,12 @@
     },
     {
       "path": "scripts/lib/sanitize-control-chars.mjs",
-      "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/5457",
-      "reason": "Sanificazione dei control character in uscita, portata da #65. Sul sito il file non esiste (404 verificato), ma DOVREBBE: il sito rende e pusha le stesse pagine sugli stessi shard senza sanificare, quindi emette grezze le 279 occorrenze che il corpus strippa — stessa pagina, due politiche, una sola guardia. Era stato registrato 'identical' da #118 in previsione della PR gemella sul sito, che pero' e' stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB). Un manifest che dichiara 'identical' su un file inesistente asserisce il falso e produce un site-behind permanente — #124 l'ha riportata a 'corpus-only', vero ma che perdeva l'informazione 'serve e manca'. `corpus-only-pending` la restituisce senza mentire: non esiste ancora, ma il lavoro per farlo esistere e' tracciato in `trackingIssue`. Quando la meta' del sito atterra, la voce torna 'identical' con la baseline reale (`--init` dopo la promozione manuale del mode).",
+      "mode": "identical",
+      "reason": "Sanificazione dei control character in uscita, portata da #65. Registrata 'corpus-only-pending' dopo che la PR gemella sul sito era stata CHIUSA (valerielinc-ops#5488: il gate proposto rifiutava la home viva, 10 falsi positivi su 162 KB), con il lavoro di rientro tracciato in https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/5457. Promossa a `identical` da #157: il fetch su questo path non risponde piu' 404, e il contenuto scaricato e' byte-identico al file qui (hash 61f6e2723fabdad7 su entrambi i lati, verificato 2026-08-10) — non solo un file con lo stesso nome.",
       "baseline": {
-        "site": null,
+        "site": "61f6e2723fabdad7",
         "corpus": "61f6e2723fabdad7",
-        "alignedAt": "2026-08-09"
+        "alignedAt": "2026-08-10"
       }
     },
     {
