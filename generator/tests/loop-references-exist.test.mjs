@@ -231,6 +231,14 @@ const DECLARED_ABSENT = {
     kind: 'site-only',
     reason: 'Stessa mappa categoria → script del sito. Descrittiva.',
   },
+  'scripts/ci/loop-drift-check.mjs :: scripts/lib/control-char-publish-gate.mjs': {
+    kind: 'site-only',
+    reason:
+      'Citato nel docstring dell\'invariante di provenienza (issue #148) come l\'esempio ' +
+      'canonico di baseline fantasma: e\' la meta\' SITO della coppia, registrata `not-ported` ' +
+      'nel manifest apposta perche\' qui sarebbe la politica sbagliata (vedi la `reason` della ' +
+      'voce nel manifest). Descrittiva: niente qui dipende dalla sua esistenza.',
+  },
 
   // ── Nomi NUDI di workflow (risolti in .github/workflows/) ────────────────
   'scripts/lib/workflow-scope-detect.mjs :: lighthouserc.yml': {
