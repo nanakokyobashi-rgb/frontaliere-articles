@@ -566,16 +566,45 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // prevents the 100%-rejection failure mode that produced the run
   // 26440805420 no_changes streak. REGOLA #0 inside article-gen stays as
   // the final defense if the restored candidate is actually off-topic.
+  const totalRejection = kept.length === 0 && headlines.length > 0;
+  let restoredByBackstop = 0;
   if (kept.length === 0 && strictAnchorMatched.length > 0) {
     const RESTORE_N = 3;
     const restore = strictAnchorMatched.slice(0, RESTORE_N);
     const restoreSet = new Set(restore.map(r => String(r.h?.headline || '')));
     for (const { h, anchor } of restore) {
       kept.push(h);
+      restoredByBackstop += 1;
       const ht = String(h?.headline || '').slice(0, 80);
       console.error(`  🛟 Pre-spend gate backstop: ripristinato headline anchor-matched (anchor="${anchor}"): "${ht}…"`);
     }
     filtered = filtered.filter(f => !restoreSet.has(f.rawHeadline));
+  }
+
+  // ── Total-rejection telemetry (issue #113) ──────────────────────────
+  // The gate emptying the whole pool is NOT visible in the line below:
+  // "0 candidates → 0" and "40 candidates → 0" print through the same
+  // template, and neither says whether the D-backstop then put something
+  // back. Measuring issue #113 required downloading 400 run logs and
+  // reconstructing the state from three separate lines; this single
+  // machine-readable record makes the same question a two-grep job:
+  //
+  //   grep -c 'PRESPEND_GATE_TOTAL_REJECTION'                → how often
+  //   grep -c 'PRESPEND_GATE_TOTAL_REJECTION .* restored=0'  → …unrecovered
+  //
+  // `anchor_candidates` is the field that says WHY nothing was restored:
+  // the D-backstop above needs a strict-anchor hit, and anchors are
+  // frontaliere-specific (`IS_FRONTALIERE ? … : ''`), so on the svizzera
+  // section it is 0 by construction and the backstop cannot fire at all.
+  // Measured over 224 real runs 2026-08-06→10: 124 total rejections, and the
+  // backstop restored nothing in every one of them — i.e. anchor_candidates
+  // was 0 across the board, which is the only way it can stay silent here.
+  if (totalRejection) {
+    console.error(
+      `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
+      + ` anchor_candidates=${strictAnchorMatched.length} restored=${restoredByBackstop}`
+      + ` kept_after=${kept.length} section=${SECTION_NAME}`,
+    );
   }
 
   const dropped = headlines.length - kept.length;
@@ -601,6 +630,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   if (typeof RUN_REPORT === 'object' && RUN_REPORT?.headlines) {
     RUN_REPORT.headlines.droppedPreSpendGate = (RUN_REPORT.headlines.droppedPreSpendGate || 0) + dropped;
     RUN_REPORT.headlines.preSpendGateClassifierCalls = (RUN_REPORT.headlines.preSpendGateClassifierCalls || 0) + classifierCalls;
+    RUN_REPORT.headlines.preSpendGateRan = true;
+    RUN_REPORT.headlines.preSpendGateBefore = headlines.length;
+    RUN_REPORT.headlines.preSpendGateKept = kept.length;
+    RUN_REPORT.headlines.preSpendGateAnchorCandidates = strictAnchorMatched.length;
+    RUN_REPORT.headlines.preSpendGateBackstopRestored = restoredByBackstop;
+    if (totalRejection) RUN_REPORT.headlines.preSpendGateTotalRejection = true;
   }
   return kept;
 }
@@ -1190,6 +1225,20 @@ const RUN_REPORT = {
     undated: 0,
     usedRecent: 0,
     usedUndated: 0,
+    // ── Pre-spend topic gate (issue #113) ────────────────────────────
+    // Declared here rather than sprouted on first assignment so a report
+    // from a run that never reached the gate is distinguishable from one
+    // where the gate ran and kept everything. `preSpendGateRecovery` is
+    // the field the issue actually asked for: it separates "gate emptied
+    // the pool but the run still published" from "gate emptied the pool
+    // and the run produced nothing".
+    preSpendGateRan: false,
+    preSpendGateBefore: 0,
+    preSpendGateKept: 0,
+    preSpendGateAnchorCandidates: 0,
+    preSpendGateBackstopRestored: 0,
+    preSpendGateTotalRejection: false,
+    preSpendGateRecovery: null, // 'news' | 'evergreen' | 'none'
   },
   selectionUsage: {
     attemptsTotal: 0,
@@ -1336,6 +1385,18 @@ function duplicateCandidateDetail(errorMessage = '') {
   return ` — candidato: "${candidateMatch?.[1] ?? '?'}" → vicino: ${neighborMatch?.[1] ?? '?'}`;
 }
 
+/**
+ * Which article, if any, the run ended up publishing — resolved from what the
+ * run already recorded, so the pre-spend-gate outcome line below does not need
+ * its own bookkeeping threaded through every terminal branch.
+ *
+ * @returns {'news'|'evergreen'|'none'}
+ */
+function resolveRunRecovery() {
+  if (!RUN_REPORT?.article?.id) return 'none';
+  return String(RUN_REPORT.selectedArticleType || '').startsWith('evergreen') ? 'evergreen' : 'news';
+}
+
 function finalizeRunReport(status, extra = {}) {
   if (REPORT_FINALIZED) return;
   REPORT_FINALIZED = true;
@@ -1343,6 +1404,28 @@ function finalizeRunReport(status, extra = {}) {
   RUN_REPORT.status = status || 'unknown';
   RUN_REPORT.endedAt = new Date().toISOString();
   Object.assign(RUN_REPORT, extra || {});
+
+  // ── Pre-spend gate disposition (issue #113) ────────────────────────
+  // Emitted from every terminal path, so `emptied=1 recovered=none` is the
+  // literal count the issue asked for and `PRESPEND_GATE_OUTCOME` alone is
+  // its denominator. Deliberately NOT emitted when the gate never ran
+  // (FORCE_EVERGREEN, empty scan): those runs are not evidence either way.
+  //
+  // Absence of this line on a run that DID print PRESPEND_GATE_TOTAL_REJECTION
+  // is itself a reading: the process was killed before finalizing — the
+  // workflow's `timeout … 2400s` SIGKILL, which claimed 30 of 224 runs in the
+  // 2026-08-06→10 window and must not be silently counted as "no article
+  // because of the gate".
+  if (RUN_REPORT?.headlines?.preSpendGateRan) {
+    RUN_REPORT.headlines.preSpendGateRecovery = resolveRunRecovery();
+    console.error(
+      `PRESPEND_GATE_OUTCOME emptied=${RUN_REPORT.headlines.preSpendGateTotalRejection ? 1 : 0}`
+      + ` recovered=${RUN_REPORT.headlines.preSpendGateRecovery}`
+      + ` before=${RUN_REPORT.headlines.preSpendGateBefore}`
+      + ` kept=${RUN_REPORT.headlines.preSpendGateKept}`
+      + ` status=${RUN_REPORT.status} section=${RUN_REPORT.section}`,
+    );
+  }
 
   try {
     const dir = path.dirname(resolve(CREATE_ARTICLE_REPORT_FILE));
