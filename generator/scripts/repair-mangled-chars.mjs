@@ -495,9 +495,19 @@ function risolviToken(token, lessico, freqMinima, mappaAppresa, leggeNibble) {
   //    e' la preposizione «à».  La soglia e' zero lettere di contesto, non
   //    «poche»: con anche una sola lettera intorno il lessico ha voce e va
   //    ascoltato, altrimenti ` Der` diventa «Þr».
+  //    Anche qui pero' il corpus ha l'ultima parola: il carattere da solo deve
+  //    essere una PAROLA che il corpus usa da sola.  «à» lo e' (migliaia di
+  //    volte), «â» no — e la differenza non e' un dettaglio, perche' 0xE2 in
+  //    questo corpus e' anche il primo byte UTF-8 di « — » e di « “ ».  In
+  //    `svincolo-a2-sigirino-ritardo.ts` il token `<00>e2` apre una riga prima
+  //    di «Il est important de noter»: li' non c'era una â, c'era un segno di
+  //    cui e' rimasta solo la testa della sequenza UTF-8.  Senza questa riga la
+  //    lettura esadecimale ci scriverebbe «â» e l'ancora sparirebbe.
   if (hexTesto && confermate.size === 0) {
     const contesto = token.length - hexScelte.reduce((s, x) => s + x.unita.lunghezza, 0);
-    if (contesto === 0) return dettaglia(hexScelte, 'hex', 0);
+    if (contesto === 0 && (lessico.get(hexTesto) || 0) >= freqMinima) {
+      return dettaglia(hexScelte, 'hex', lessico.get(hexTesto) || 0);
+    }
   }
   // 2b. il lessico non ha confermato niente e la legge del nibble regge in
   //     questo file: e' il caso di `0x0E+'0'` da solo, che e' la preposizione «à».

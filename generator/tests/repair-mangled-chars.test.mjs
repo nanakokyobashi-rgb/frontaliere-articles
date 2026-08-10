@@ -163,6 +163,17 @@ test('coda esadecimale a-f: la coda si consuma, non resta nella parola', () => {
 // quello che deve RIFIUTARE — e' il punto dello script
 // ---------------------------------------------------------------------------
 
+test('FAIL-CLOSED — hex isolato: il carattere da solo dev\'essere una parola del corpus', () => {
+  // 0xE2 e' â in Latin-1, ma in questo corpus e' anche il primo byte UTF-8 di
+  // « — » e di « “ ».  «à» da sola e' una parola francese e il corpus la usa;
+  // «â» no.  Sulla riga vera — `<00>e2 Il est important de noter` — la lettura
+  // esadecimale scriverebbe «â» al posto di un segno.
+  const r = ripara(`travaux prioritaires\n${B(0x00)}e2 Il est important de noter`);
+  assert.ok(!r.testo.includes('â'), 'nessuna â inventata');
+  assert.ok(r.testo.includes(`${B(0x00)}e2`), 'il marker resta, e con lui l\'ancora');
+  assert.equal(r.riparazioni.length, 0);
+});
+
 test('FAIL-CLOSED — ambiguo: due ricostruzioni esistono, non si sceglie', () => {
   // `Municipalité` (fr) e `Municipalità` (it) sono entrambe nel corpus.
   const r = ripara(`la Municipalit${B(0x0e)}9 de Bellinzone`);
