@@ -7705,12 +7705,22 @@ function loadExistingArticleSummariesWithDates() {
 // Gemini to avoid wasting API calls on keywords that will certainly fail
 // the post-generation duplicate detector.
 function preFlightEvergreenCheck(candidate) {
-  // «Argomento già coperto» PRIMA del Jaccard: il pool strutturale
-  // (buildProfessionEvergreenTopics) emette due candidati per ogni mestiere
-  // — `…stipendio requisiti` e `quanto guadagna un…` — quindi il secondo è un
-  // duplicato garantito del primo appena questo è pubblicato. Intercettarlo
-  // qui risparmia il ciclo LLM; il gate bloccante vero resta quello dopo la
-  // generazione (Step 3a.4), che copre anche i percorsi non-evergreen.
+  // «Argomento già coperto» PRIMA del Jaccard: i pool strutturali emettono due
+  // candidati adiacenti per ogni entità, quindi il secondo è un duplicato
+  // garantito del primo appena questo è pubblicato — `…stipendio requisiti` /
+  // `quanto guadagna un…` per i mestieri (buildProfessionEvergreenTopics),
+  // `vivere a X e lavorare in <canton>` / `trasferirsi a X pro e contro` per i
+  // comuni (buildComuneEvergreenTopics). Intercettarlo qui risparmia il ciclo
+  // LLM; il gate bloccante vero resta quello dopo la generazione (Step 3a.4),
+  // che copre anche i percorsi non-evergreen.
+  //
+  // E resta necessario che ci siano ENTRAMBI: questo pre-flight guarda la
+  // KEYWORD, mentre l'identità dell'articolo la sceglie l'LLM. Misurato sulla
+  // run 31402084443: keyword «vivere a Tronzano Lago Maggiore e lavorare in
+  // Ticino da frontaliere» → nessun conflitto, e l'articolo prodotto è uscito
+  // con id `trasferirsi-a-tronzano-lago-maggiore-da-frontaliere-pro-e-contro`,
+  // cioè l'ALTRO candidato della coppia. Solo il gate post-generazione vede
+  // quello che l'articolo è davvero diventato.
   const keyword = String(candidate?.keyword || candidate || '');
   const covered = findRecentTopicCoverage(
     { id: keyword, title: keyword },
@@ -7719,7 +7729,7 @@ function preFlightEvergreenCheck(candidate) {
   if (covered) {
     return {
       duplicate: true,
-      signal: `topic_coverage:${covered.professionId}`,
+      signal: `topic_coverage:${covered.kind}:${covered.value}`,
       sim: 1,
       existingTitle: covered.existingTitle,
       existingId: covered.existingId,
@@ -11186,7 +11196,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // distanza lessicale. I due sopra confrontano quanto si somigliano due
   // testi; questo confronta DI COSA parlano. È la differenza che ha lasciato
   // passare le tre guide-piastrellista del 2026-08-09 (combinato 0.278 contro
-  // una soglia di 0.55, con il solo token `piastrell` in comune su sette).
+  // una soglia di 0.55, con il solo token `piastrell` in comune su sette) e,
+  // dal 2026-08-10, le 33 coppie di guide-comune e le 14 coppie
+  // (pilastro × cantone) che la chiave generalizzata intercetta.
   // Sta qui, dopo checkForDuplicates, perché questo è il punto obbligato di
   // OGNI percorso di generazione — news, evergreen, discovery — mentre il
   // pre-flight evergreen vede solo i candidati evergreen.
