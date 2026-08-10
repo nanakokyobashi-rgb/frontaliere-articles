@@ -73,6 +73,10 @@ import {
   reportStrippedControlChars,
   reportStrippedControlCharsDeep,
 } from '../generator/scripts/lib/control-char-write-report.mjs';
+// Pure XML builder, no .ts imports on purpose (see that file's header): lets
+// generator/tests/frontaliere-sitemap-shadow.test.mjs exercise it directly
+// under plain `node --test`, without a tsx subprocess.
+import { SITE, xmlEsc, SECTION_PATHS, buildSitemap } from './lib/build-sitemap.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = path.join(ROOT, 'dist', 'api');
@@ -166,85 +170,10 @@ const commit = (() => {
 //
 // Shape matches what the site published before the split, byte-for-byte in
 // structure: IT locs only, an image block, lastmod, monthly/0.7.
-const SITE = 'https://frontaliereticino.ch';
-
-const xmlEsc = (s) =>
-  String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-
-// Per-locale section prefix. hreflang alternates are NOT optional decoration: the
-// site's committed sitemaps carry five links per url (it/en/de/fr/x-default) and
-// publishing without them would silently drop every alternate from the index.
-const SECTION_PATHS = {
-  frontaliere: {
-    it: '/articoli-frontaliere/',
-    en: '/en/cross-border-articles/',
-    de: '/de/grenzgaenger-artikel/',
-    fr: '/fr/articles-frontalier/',
-  },
-  svizzera: {
-    it: '/articoli-svizzera/',
-    en: '/en/swiss-articles/',
-    de: '/de/schweiz-artikel/',
-    fr: '/fr/articles-suisse/',
-  },
-};
-
-function buildSitemap(entries, section, slugMap, meta, shadowed = new Set()) {
-  const paths = SECTION_PATHS[section];
-  const sectionPath = paths.it;
-  const urls = [];
-  for (const a of entries) {
-    const slug = slugMap?.[a.id]?.it;
-    if (!slug) continue;
-    // A canonical-overridden ("shadowed") article points its canonical at a
-    // different winner URL, so listing it here — as <loc> OR as an hreflang
-    // alternate — contradicts the self-canonical gate the consumer enforces
-    // (tests/blog-slugs-sitemap-sync.test.ts, guarding against #3120).
-    if (shadowed.has(slug)) continue;
-    const title = meta[`blog.article.${a.id}.title`];
-    const alt = meta[`blog.article.${a.id}.imageAlt`];
-    const lastmod = a.updatedAt || a.date || '';
-    const img = a.image ? (a.image.startsWith('http') ? a.image : SITE + a.image) : null;
-    const parts = [`  <url>`, `    <loc>${SITE}${sectionPath}${slug}/</loc>`];
-    if (img) {
-      parts.push(`    <image:image>`);
-      parts.push(`      <image:loc>${xmlEsc(img)}</image:loc>`);
-      if (title) parts.push(`      <image:title>${xmlEsc(title)}</image:title>`);
-      if (alt) parts.push(`      <image:caption>${xmlEsc(alt)}</image:caption>`);
-      parts.push(`    </image:image>`);
-    }
-    for (const loc of ['it', 'en', 'de', 'fr']) {
-      const s2 = slugMap?.[a.id]?.[loc];
-      if (s2) {
-        parts.push(
-          `    <xhtml:link rel="alternate" hreflang="${loc}" href="${SITE}${paths[loc]}${s2}/" />`,
-        );
-      }
-    }
-    parts.push(
-      `    <xhtml:link rel="alternate" hreflang="x-default" href="${SITE}${sectionPath}${slug}/" />`,
-    );
-    if (lastmod) parts.push(`    <lastmod>${lastmod}</lastmod>`);
-    parts.push(`    <changefreq>monthly</changefreq>`);
-    parts.push(`    <priority>0.7</priority>`);
-    parts.push(`  </url>`);
-    urls.push(parts.join('\n'));
-  }
-  return {
-    xml:
-      `<?xml version="1.0" encoding="UTF-8"?>\n` +
-      `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n` +
-      `        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n` +
-      `        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n` +
-      urls.join('\n') +
-      `\n</urlset>\n`,
-    count: urls.length,
-  };
-}
+//
+// SITE, xmlEsc, SECTION_PATHS and buildSitemap() itself live in
+// ./lib/build-sitemap.mjs (imported above) — moved there so the sitemap logic
+// can be unit-tested under plain `node --test` (see that file's header).
 
 // One sanitisation point for every sitemap this file emits, on the assembled
 // document rather than on each interpolated field: xmlEsc() escapes the five
@@ -271,16 +200,37 @@ const shadowedSwissSlugs = new Set(
 );
 console.log(`[build-api] shadowed swiss slugs excluded: ${shadowedSwissSlugs.size}`);
 
+// Same mechanism, frontaliere section (issue #138 item 1). The file is the
+// engine's, not the corpus's: it ships inside packages/articles/engine/shared/
+// on the site and lands at engine/shared/ here via mirror-articles-engine.yml
+// (see that file's _doc for why it lives in the engine and not in content/).
+// Same shape as the swiss map — a flat `overrides` object keyed by the
+// shadowed slug — so the same Object.keys() extraction applies unchanged; the
+// only structural difference is an extra `_groups` block that documents which
+// shadowed slugs share a winner, which this reader does not need.
+const shadowedFrontaliereSlugs = new Set(
+  Object.keys(
+    JSON.parse(
+      fs.readFileSync(path.join(ROOT, 'engine', 'shared', 'frontaliere-article-canonical-overrides.json'), 'utf-8'),
+    ).overrides ?? {},
+  ),
+);
+console.log(`[build-api] shadowed frontaliere slugs excluded: ${shadowedFrontaliereSlugs.size}`);
+
 const metaIt = (await load('content/blog-meta-it.ts')).default;
 const metaChIt = (await load('content/blog-meta-ch-it.ts')).default;
 // Daily editions carry their date in the id, and slugs.it === id, so the
 // retired set plugs straight into buildSitemap's shadowed parameter.
 const retiredDailyEditions = selectRetiredDailyEditions(ARTICLES.map((a) => a.id));
 console.log(`[build-api] retired daily editions de-listed from sitemap: ${retiredDailyEditions.size}`);
+// buildSitemap takes a single `shadowed` set, so the frontaliere call unions
+// the two de-listing reasons — retired daily editions and canonical-shadowed
+// duplicates — the same way the svizzera call already gets its own dedicated set.
+const frontaliereSitemapShadow = new Set([...retiredDailyEditions, ...shadowedFrontaliereSlugs]);
 const sitemapCounts = {
   blog: writeXml(
     'sitemap-blog.xml',
-    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, retiredDailyEditions),
+    buildSitemap(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow),
   ),
   blogCh: writeXml(
     'sitemap-blog-ch.xml',
@@ -379,6 +329,43 @@ if (sitemapCounts.archive < 8) {
 //
 // `layout` is the whole difference between the two callers: the site keeps the
 // corpus under services/, this repo under content/.
+//
+// ── `registries` is passed UNFILTERED, and that is the decision, not an omission ──
+//
+// The canonical-override shadowing applied above stops at the sitemaps. Both
+// override files say so in their own `_doc`, which is where the rule was
+// written down before any of this code existed:
+//
+//   content/swiss-article-canonical-overrides.json:
+//     "RSS (rss-svizzera*.xml) is NOT touched by this: RSS item lists are not
+//      covered by the self-canonical sitemap gate, and normal RSS semantics
+//      include all published items regardless of canonical hint."
+//   engine/shared/frontaliere-article-canonical-overrides.json:
+//     "RSS is NOT touched, same as the svizzera precedent."
+//
+// The rule the shadowing implements is narrow and mechanical: "a sitemap <loc>
+// whose page canonicalises elsewhere is a hard CI gate failure"
+// (scripts/audit-sitemap-canonicals.mjs, scripts/validate-sitemap-pages.mjs).
+// sitemap-blog.xml and sitemap-news-candidates.xml are sitemaps and are gated;
+// an RSS <item> is not a <loc> and no gate reads it. The shadowed page also
+// stays live by house rule — no removal, no noindex, no redirect — so dropping
+// its already-published item from the feed would be a retroactive un-publish of
+// a page that is still there, which is the "cut" that rule exists to forbid.
+//
+// Measured on the emitted feeds (2026-08-10, 3166 articles, this script run
+// end to end): of the 8 override keys, exactly ONE article carries a `<link>` in
+// any feed — `lavoro-piastrellista-ticino-frontaliere` and its three localised
+// slugs, one item per locale. The other shadowed article
+// (`piastrellista-frontaliere-ticino-guadagno`, dated 2026-07-20) is already
+// past RSS_MAX_ITEMS=50 in all ten feeds. So the reach of this decision is one
+// article, and the winner is in the same feeds alongside it — which is the
+// documented outcome, not a leak.
+//
+// If the policy is ever reversed, the filter does NOT belong on this line: the
+// `_doc` of both override files has to change first, and the exclusion belongs
+// inside engine/rssFeeds.mjs (one module, two callers — that module's header
+// forbids caller-side divergence by construction). generator/tests/frontaliere-sitemap-shadow.test.mjs
+// pins both halves of that.
 const rssSections = buildAllRssFeeds({
   fs,
   path,
@@ -427,6 +414,37 @@ for (const section of rssSections) {
 // site build. `hubLocales` is passed explicitly — `computeTickerArticles`
 // otherwise reads it from the site shell, which does not exist here (that
 // coupling is exactly what issue #4974 item 2 removed).
+//
+// ── ARTICLES is passed UNFILTERED here too, for a second and harder reason ──
+//
+// Same sitemap-only scope as the RSS block above (see it for the `_doc`
+// citations): news-ticker-live.json is a homepage widget payload, not a sitemap,
+// and no self-canonical gate reads it.
+//
+// But this artifact has THREE producers, all calling this same
+// `computeTickerArticles` with an unfiltered registry:
+//   1. frontaliere-si-o-no/vite.config.ts -> newsTickerDataPlugin -> the
+//      committed data/news-ticker-data.ts (site build time);
+//   2. frontaliere-si-o-no/scripts/publish-article-chunks.mjs -> the CDN key
+//      `data/news-ticker-live.json` (fast-publish, out of band);
+//   3. this call -> dist/api/news-ticker-live.json, which the site pulls back
+//      via scripts/pull-articles-api.mjs.
+// Producers 2 and 3 write the SAME payload for the SAME consumer. Filtering
+// only here would make the homepage's top-5 depend on which of the two wrote
+// last — a real, visible divergence introduced by a fix, and precisely the
+// caller-side drift engine/newsTickerDataPlugin.ts is shared to make impossible.
+//
+// Measured on the emitted payload (2026-08-10): the five slugs in
+// news-ticker-live.json are all dated 2026-08-10 and none is shadowed — zero
+// exposure today. The exposure is latent and bounded by the ~2h window the five
+// newest articles span at the current publishing rate, while a canonical
+// override is an owner decision taken hours later (the piastrellista group was
+// decided the day after publication, when the newest of the three was already
+// 29 articles deep).
+//
+// So if the ticker should ever exclude shadowed articles, the filter goes inside
+// computeTickerArticles — which lives in the engine and is edited on the SITE
+// (packages/articles/engine), never here, or the next mirror overwrites it.
 const { computeTickerArticles } = await load('engine/newsTickerDataPlugin.ts');
 const tickerArticles = computeTickerArticles(fs, path, ROOT, ARTICLES, {
   hubLocales: LOCALES,
@@ -510,11 +528,16 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
   const candidateBlocks = [];
   let considered = 0;
 
-  const collect = (entries, sectionId, slugMap, meta) => {
+  const collect = (entries, sectionId, slugMap, meta, shadowed = new Set()) => {
     const paths = SECTION_PATHS[sectionId];
     for (const a of entries) {
       const slug = slugMap?.[a.id]?.it;
       if (!slug) continue;
+      // Same self-canonical gate sitemap-blog.xml enforces (buildSitemap in
+      // scripts/lib/build-sitemap.mjs): a canonical-shadowed article's own page
+      // points elsewhere, so listing its <loc> here is the same defect this PR
+      // fixes for the blog sitemap, just in the news-candidates feed instead.
+      if (shadowed.has(slug)) continue;
       const publishedAt = a.date;
       if (!publishedAt) continue;
       considered += 1;
@@ -584,8 +607,8 @@ write('news-ticker-live.json', { schema: 1, articles: tickerArticles });
     }
   };
 
-  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt);
-  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt);
+  collect(ARTICLES, 'frontaliere', blogSlugs.BLOG_SLUGS, metaIt, frontaliereSitemapShadow);
+  collect(SWISS_ARTICLES, 'svizzera', swissSlugs.SWISS_SLUGS, metaChIt, shadowedSwissSlugs);
 
   const candidatesXmlRaw =
     `<?xml version="1.0" encoding="UTF-8"?>\n` +
