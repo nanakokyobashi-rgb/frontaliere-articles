@@ -170,7 +170,7 @@ test('nessuna sonda della verifica chiede l\'URL canonico nudo', () => {
   );
   assert.match(
     verify,
-    /POLL_CODE="\$\(curl [\s\S]{0,160}"\$\(probe_url "\$u" "\$i"\)"\)"/,
+    /POLL_CODE="\$\(curl [\s\S]{0,160}"\$\(probe_url "\$u"\)"\)"/,
     'poll_origin deve interrogare l\'URL bustato, non "$u"',
   );
 
@@ -199,6 +199,32 @@ test('anche la sonda sull\'apex passa da poll_origin', () => {
   assert.ok(
     !/for attempt in \$\(seq 1 8\)/.test(verify),
     'il loop inline sull\'apex è tornato: reintroduce il curl nudo sulla chiave di zona',
+  );
+});
+
+test('il bust è unico anche fra due chiamate a poll_origin sullo stesso URL', () => {
+  const verify = soloAttive(stepText(VERIFY));
+
+  // Il loop sull'origin chiama poll_origin due volte sullo STESSO $u quando la
+  // prima serie di poll fallisce e scatta il rebuild di Pages: poll → rebuild →
+  // poll. Un indice locale al loop (`i` in `for i in $(seq 1 "$attempts")`)
+  // riparte da 1 a ogni chiamata, quindi il secondo giro rilegge le stesse 12
+  // chiavi bustate che il primo ha appena scritto — invece di rileggerle solo
+  // dall'origin ricostruito. Il contatore deve essere globale allo script, non
+  // locale a poll_origin, e incrementato dentro probe_url.
+  assert.match(
+    verify,
+    /^ {10}PROBE_SEQ=0\n {10}probe_url\(\) \{/m,
+    'PROBE_SEQ deve essere dichiarato UNA volta, fuori da probe_url/poll_origin — non per-chiamata',
+  );
+  assert.match(
+    verify,
+    /probe_url\(\) \{[\s\S]{0,200}PROBE_SEQ=\$\(\(PROBE_SEQ \+ 1\)\)/,
+    'probe_url deve incrementare un contatore globale, non riusare l\'indice locale del loop chiamante',
+  );
+  assert.ok(
+    !/local u="\$1" i="\$2"/.test(verify),
+    'probe_url non deve più derivare la sua unicità dall\'indice locale del poll (resetta a ogni chiamata su uno stesso $u)',
   );
 });
 

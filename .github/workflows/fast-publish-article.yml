@@ -615,8 +615,15 @@ jobs:
           # in #114 from the other end: the same apex URL answered 404 naked and
           # 200 with `?cb=<epoch>`). So the probe still measures the real origin
           # — it just lands on a throwaway key that no reader will ever ask for.
-          # `$GITHUB_RUN_ID` + run attempt + poll index makes every probe unique,
-          # so neither a retry nor the next poll can read an earlier probe.
+          # `$GITHUB_RUN_ID` + run attempt + a monotonic counter makes every
+          # probe unique, so neither a retry nor the next poll can read an
+          # earlier probe. The counter is global to this script, not the
+          # per-call loop index: the origin loop below can call poll_origin
+          # TWICE for the same URL (poll → Pages rebuild → poll again), and a
+          # loop-local index restarts at 1 both times, so the recovery poll
+          # would silently replay the same 12 bust keys the first poll just
+          # wrote — reading its own stale answers instead of the rebuilt
+          # origin.
           #
           # `_fpcb` IS NOT A NEW NAME, and that is the point. The site's liveness
           # probe for the same pipeline — scripts/wait-for-live-article-shards.mjs
@@ -646,11 +653,13 @@ jobs:
           # parses.
           #
           # Pinned by generator/tests/fast-publish-probe-cache-poisoning.test.mjs.
+          PROBE_SEQ=0
           probe_url() {
-            local u="$1" i="$2" sep='?'
+            local u="$1" sep='?'
+            PROBE_SEQ=$((PROBE_SEQ + 1))
             case "$u" in *\?*) sep='&' ;; esac
             printf '%s%s_fpcb=%s.%s.%s' \
-              "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$i"
+              "$u" "$sep" "${GITHUB_RUN_ID:-local}" "${GITHUB_RUN_ATTEMPT:-1}" "$PROBE_SEQ"
           }
 
           # Poll $1 until it answers 200, at most $2 times. Last code observed
@@ -661,7 +670,7 @@ jobs:
             for i in $(seq 1 "$attempts"); do
               set +e
               POLL_CODE="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 \
-                           -H 'Cache-Control: no-cache' "$(probe_url "$u" "$i")")"
+                           -H 'Cache-Control: no-cache' "$(probe_url "$u")")"
               set -e
               [ "$POLL_CODE" = "200" ] && return 0
               sleep 15
