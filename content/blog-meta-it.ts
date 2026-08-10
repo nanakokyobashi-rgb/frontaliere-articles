@@ -9533,6 +9533,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.nodo-biasca-lavori-fase-finale.title': 'Nodo di Biasca: l\'ultima fase dei lavori dal 31 agosto',
     'blog.article.nodo-biasca-lavori-fase-finale.excerpt': 'Lavori al nodo di interscambio di Biasca: l\'ultima fase inizia il 31 agosto 2026 e termina il 12 settembre, con impatti sul traffico e sensi alternati.',
     'blog.article.nodo-biasca-lavori-fase-finale.imageAlt': 'Lavori di asfaltatura del nodo di interscambio di Biasca in Ticino',
+    'blog.article.trasferirsi-tronzano-lago-maggiore-frontaliere.title': 'trasferirsi a Tronzano Lago Maggiore da frontaliere pro e contro',
+    'blog.article.trasferirsi-tronzano-lago-maggiore-frontaliere.excerpt': 'Impostazione fiscale, nuovo accordo frontalieri, doppia imposizione',
+    'blog.article.trasferirsi-tronzano-lago-maggiore-frontaliere.imageAlt': 'Un frontaliere con la famiglia si sposta verso Tronzano Lago Maggiore per lavorare in Ticino',
+    'blog.article.vivere-tronzano-lago-maggiore-lavorare-ticino-da-frontaliere.title': 'Vivere a Tronzano Lago Maggiore e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-tronzano-lago-maggiore-lavorare-ticino-da-frontaliere.excerpt': 'Perché i frontalieri italiani che vivono a Tronzano Lago Maggiore possono lavorare in Ticino',
+    'blog.article.vivere-tronzano-lago-maggiore-lavorare-ticino-da-frontaliere.imageAlt': 'Max 125 caratteri',
 };
 
 export default blogMetaIt;

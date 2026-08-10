@@ -32,10 +32,22 @@
  * Usage:
  *   node generator/scripts/refresh-events-dataset.mjs           # fetch + write
  *   node generator/scripts/refresh-events-dataset.mjs --check   # verify, no write
+ *   node generator/scripts/refresh-events-dataset.mjs --help    # show this, no fetch
+ *
+ * DRY_RUN=1 (or "true") is an env alias for --check.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+if (process.argv.includes('--help') || process.argv.includes('-h')) {
+  console.log(
+    'Usage: node generator/scripts/refresh-events-dataset.mjs [--check]\n' +
+      '  --check         verify the published dataset, write nothing\n' +
+      '  DRY_RUN=1 env   alias for --check',
+  );
+  process.exit(0);
+}
 
 const FILE = 'events.json';
 const ENV_URL = process.env.EVENTS_DATASET_URL;
@@ -63,7 +75,8 @@ const CACHE = path.join(
   FILE,
 );
 
-const CHECK_ONLY = process.argv.includes('--check');
+const CHECK_ONLY =
+  process.argv.includes('--check') || process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
 
 const log = (msg) => console.log(`[refresh-events-dataset] ${msg}`);
 const fail = (msg) => {
