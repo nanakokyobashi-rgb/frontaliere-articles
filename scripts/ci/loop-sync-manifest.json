@@ -321,7 +321,7 @@
       "reason": "Il corpus non aveva template affatto, ed e' meta' dell'escalation #140: senza scheletro, la forma corretta del body va ricordata invece che ereditata. Adattato e non `identical` perche' i due repo vogliono header DIVERSI — qui `## Non implementato (ancora)` CON «(ancora)», sul sito senza — e perche' i commenti guida citano le trappole misurate su questo lato (PR #139: «Chiude #133» non ha chiuso #133).",
       "baseline": {
         "site": "fa0e797cb26a3655",
-        "corpus": "38b5691a59e47033",
+        "corpus": "757dc5bdf671adc0",
         "alignedAt": "2026-08-10"
       }
     },

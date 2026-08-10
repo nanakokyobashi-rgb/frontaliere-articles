@@ -13,11 +13,20 @@
      Sul sito (`frontaliere-si-o-no`) e' senza. Copiare un body dall'uno
      all'altro fa fallire `contract`.
 
-  3. `Closes #N` va scritto in INGLESE. GitHub riconosce solo
-     close/closes/closed, fix/fixes/fixed, resolve/resolves/resolved.
-     «Chiude #133» e' prosa: il link non viene creato e la issue resta aperta
-     con la fix gia' su main (successo reale: PR #139 / issue #133).
-     Una keyword per issue, una per riga: `Closes #12 #34` chiude solo #12.
+  3. La keyword di chiusura va scritta in INGLESE. GitHub riconosce solo
+     close/closes/closed, fix/fixes/fixed, resolve/resolves/resolved — e NON i
+     gerundi (Closing/Fixing). Un «Chiude» al posto di «Closes» e' prosa: il
+     link non viene creato e la issue resta aperta con la fix gia' su main.
+     E' successo davvero, sulla PR #139: la issue che citava e' rimasta nel
+     backlog finche' non l'ha chiusa una persona a mano.
+
+  4. Una keyword per issue, e una per riga. Due riferimenti dopo una sola
+     keyword ne chiudono soltanto il primo: gli altri restano aperti in
+     silenzio.
+
+  I riferimenti qui sopra sono di proposito senza numero: questo commento resta
+  nel body della PR, e un esempio con un numero vero verrebbe letto dal gate
+  come una chiusura rivendicata.
 -->
 
 ## Implementato
