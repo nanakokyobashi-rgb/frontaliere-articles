@@ -67,16 +67,39 @@
  * Non mergia, non apre PR, non riscrive niente. Emette un report. La correzione
  * è una decisione, e questo script non ha il contesto per prenderla.
  *
+ * ## L'invariante di provenienza (issue #148)
+ *
+ * Il confronto a tre vie sopra presume che `baseline.site`/`baseline.corpus`
+ * siano stati reali, registrati da un allineamento cosciente. Non è sempre
+ * vero: `scripts/lib/control-char-publish-gate.mjs` aveva una `baseline.site`
+ * presa dal ramo di una PR del sito CHIUSA e mai mergiata — un valore
+ * plausibile ma mai esistito su `main`. `classify()` non poteva vederlo:
+ * confronta `now` contro `base`, e un `base` fabbricato produce comunque un
+ * verdetto (qui `not-ported-changed`, per giunta già `actionable: false`).
+ *
+ * `checkBaselineProvenance()` chiude il buco cercando ogni baseline non-null
+ * nella storia REALE del path (fino a `PROVENANCE_HISTORY_CAP` commit, una
+ * chiamata `commits` + un fetch per candidato). Se non la trova in TUTTA la
+ * storia disponibile, la entry diventa `ghost-baseline` — che sostituisce
+ * il verdetto di `classify()`, perché una baseline fantasma rende quel
+ * verdetto stesso privo di significato. Se la storia supera il cap senza
+ * match, la entry NON viene segnalata: un mancato match parziale non è una
+ * prova, ed è meglio un falso negativo raro di un falso rosso ricorrente.
+ *
  * Uso:
  *   node scripts/ci/loop-drift-check.mjs             # report leggibile + exit 0
  *   node scripts/ci/loop-drift-check.mjs --json      # report JSON su stdout
  *   node scripts/ci/loop-drift-check.mjs --strict    # exit 1 se c'è drift azionabile
  *   node scripts/ci/loop-drift-check.mjs --init      # (ri)registra le baseline correnti
+ *   node scripts/ci/loop-drift-check.mjs --no-provenance  # salta la verifica di provenienza (iterazione locale)
  *
  * Env:
- *   SITE_REPO   default `valerielinc-ops/frontaliere-si-o-no`
- *   SITE_REF    default `main`
- *   GH_TOKEN    opzionale; senza, usa raw.githubusercontent (repo pubblico).
+ *   SITE_REPO               default `valerielinc-ops/frontaliere-si-o-no`
+ *   SITE_REF                default `main`
+ *   GH_TOKEN                opzionale; senza, usa raw.githubusercontent (repo pubblico)
+ *                           per i contenuti, e va incontro al rate-limit anonimo
+ *                           (60/h) per le chiamate `commits` della provenienza.
+ *   PROVENANCE_HISTORY_CAP  default 100 (il `per_page` massimo dell'API commits).
  */
 
 import fs from 'node:fs';
@@ -89,12 +112,30 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const MANIFEST_PATH = path.join(ROOT, 'scripts/ci/loop-sync-manifest.json');
 const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const SITE_REF = process.env.SITE_REF || 'main';
+// Il repo di QUESTO checkout — serve a verificare la provenienza di
+// `baseline.corpus` con la stessa API usata per il sito, perché il checkout
+// del workflow è `fetch-depth: 1` (vedi loop-drift-check.yml): `git log` in
+// CI non vede la storia, va chiesta a GitHub.
+const CORPUS_REPO = process.env.GITHUB_REPOSITORY || 'nanakokyobashi-rgb/frontaliere-articles';
+const CORPUS_REF = process.env.GITHUB_SHA || 'main';
+// Commit massimi esaminati a ritroso per confermare che una baseline sia
+// esistita davvero. 100 è il per_page massimo dell'API commits: una singola
+// richiesta, nessuna paginazione. Per i file di libreria che questo manifest
+// registra (poche righe, pochi autori) è più che sufficiente; se la storia è
+// più lunga del cap, un mancato match resta "non verificato", MAI "ghost" —
+// vedi `ghostVerdict`.
+const PROVENANCE_HISTORY_CAP = Number(process.env.PROVENANCE_HISTORY_CAP || 100);
 
 const ARGS = new Set(process.argv.slice(2));
 const AS_JSON = ARGS.has('--json');
 const STRICT = ARGS.has('--strict');
 const INIT = ARGS.has('--init');
 const AS_ISSUE = ARGS.has('--issue');
+// Opt-out per iterazione locale: la verifica di provenienza (issue #148) fa
+// fino a `PROVENANCE_HISTORY_CAP` fetch aggiuntivi PER LATO PER FILE quando un
+// hash e' cambiato dalla baseline. Di routine resta accesa: e' l'unica cosa
+// che questo script fa per non ripetere la #148.
+const NO_PROVENANCE = ARGS.has('--no-provenance');
 
 const sha256 = (buf) => crypto.createHash('sha256').update(buf).digest('hex').slice(0, 16);
 
@@ -122,6 +163,119 @@ async function siteHash(rel) {
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`GET ${rel} → HTTP ${res.status}`);
   return sha256(Buffer.from(await res.arrayBuffer()));
+}
+
+/**
+ * Cerca `targetHash` nelle revisioni storiche di `filePath` su `repo`@`ref`
+ * (issue #148). Prende la lista dei commit che hanno toccato quel path (una
+ * sola chiamata, `per_page` = cap) e ne hasha il contenuto uno per uno,
+ * fermandosi al primo match.
+ *
+ * Ritorna `{ match, exhausted, checked }`:
+ *   - `match`     true se un blob storico combacia con `targetHash`.
+ *   - `exhausted` true se la lista dei commit ricevuta è TUTTA la storia
+ *     disponibile per quel path (nessuna pagina oltre il cap, letto dal
+ *     header `Link`). Un `match: false` con `exhausted: false` NON è una
+ *     prova di niente — la storia non esaminata potrebbe contenerlo.
+ *   - `checked`   quanti commit sono stati effettivamente hashati (utile nei
+ *     report, per distinguere "un commit solo" da "cento").
+ */
+async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENANCE_HISTORY_CAP }) {
+  const perPage = Math.min(cap, 100);
+  const url = `https://api.github.com/repos/${repo}/commits?path=${encodeURIComponent(filePath)}&sha=${encodeURIComponent(ref)}&per_page=${perPage}`;
+  const headers = { 'User-Agent': 'loop-drift-check', Accept: 'application/vnd.github+json' };
+  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
+  const res = await fetch(url, { headers });
+  if (!res.ok) throw new Error(`GET commits ${repo}/${filePath} → HTTP ${res.status}`);
+  const exhausted = !(res.headers.get('link') || '').includes('rel="next"');
+  const commits = await res.json();
+
+  let checked = 0;
+  for (const commit of commits) {
+    checked += 1;
+    const rawUrl = `https://raw.githubusercontent.com/${repo}/${commit.sha}/${filePath}`;
+    const r = await fetch(rawUrl, { headers: { 'User-Agent': 'loop-drift-check' } });
+    // 404 a una revisione storica capita per rinomine/spostamenti: non è un
+    // errore, è semplicemente un punto della storia dove il path non esisteva
+    // sotto questo nome. Si prosegue con gli altri commit.
+    if (!r.ok) continue;
+    const hash = sha256(Buffer.from(await r.arrayBuffer()));
+    if (hash === targetHash) return { match: true, exhausted: true, checked };
+  }
+  return { match: false, exhausted, checked };
+}
+
+/**
+ * Decide se una baseline è "ghost" (issue #148): un hash registrato che non
+ * corrisponde a NESSUN blob mai esistito nella storia esaminata di quel lato.
+ *
+ * Pura — prende i fatti già raccolti, non fa fetch. È questo a renderla
+ * testabile offline con lo stesso schema di `classify()`.
+ *
+ *   baselineHash      l'hash registrato in manifest (null → niente da verificare).
+ *   currentHash       l'hash ORA di quel lato (null se il file non esiste più).
+ *   historyMatch      true/false se un fetch storico ha cercato e trovato/non
+ *                      trovato un match; `undefined` se non è stata cercata
+ *                      (perché `currentHash` bastava già, o per un errore di
+ *                      rete che non deve produrre un falso positivo).
+ *   historyExhausted  true solo se la storia cercata è TUTTA quella
+ *                      disponibile: un mancato match diventa un verdetto
+ *                      definitivo SOLO in questo caso, altrimenti resta
+ *                      "non verificato" — mai un falso rosso per un file con
+ *                      più storia di quanta ne sia stata esaminata.
+ */
+function ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted }) {
+  if (baselineHash == null) return { checked: false, ghost: false };
+  if (currentHash === baselineHash) return { checked: true, ghost: false, matchedAt: 'current' };
+  if (historyMatch === true) return { checked: true, ghost: false, matchedAt: 'history' };
+  if (historyMatch === undefined) return { checked: false, ghost: false };
+  if (!historyExhausted) return { checked: true, ghost: false, unresolved: true };
+  return { checked: true, ghost: true };
+}
+
+/**
+ * Verifica la provenienza di ENTRAMBI i lati di una entry, e chiama
+ * `repoHistoryMatch` solo quando serve (il lato è cambiato dalla baseline —
+ * altrimenti `currentHash === baselineHash` chiude la domanda senza rete).
+ * Un fallimento di rete non genera un ghost: si segnala e si prosegue,
+ * PROCEED-SAFE come il resto di questo script.
+ */
+async function checkBaselineProvenance(entry, now) {
+  const rel = entry.path;
+  const sitePath = entry.sitePath || rel;
+  const base = entry.baseline || {};
+  const ghosts = [];
+  const notes = [];
+
+  async function checkSide(side, { repo, ref, filePath, baselineHash, currentHash }) {
+    if (baselineHash == null) return;
+    let historyMatch;
+    let historyExhausted;
+    if (currentHash !== baselineHash) {
+      try {
+        const r = await repoHistoryMatch({ repo, ref, filePath, targetHash: baselineHash });
+        historyMatch = r.match;
+        historyExhausted = r.exhausted;
+        if (!r.match) {
+          notes.push(
+            `\`baseline.${side}\` (${baselineHash}) non combacia con l'attuale, e non e' stata trovata in ` +
+              `${r.checked} revisioni storiche di \`${filePath}\` su ${repo}@${ref}` +
+              `${r.exhausted ? ' (storia intera per questo path)' : ` (fermato al cap di ${PROVENANCE_HISTORY_CAP}, potrebbe essercene altra)`}.`,
+          );
+        }
+      } catch (e) {
+        notes.push(`verifica storica di \`baseline.${side}\` fallita: ${String(e.message || e).slice(0, 120)}`);
+        return;
+      }
+    }
+    const verdict = ghostVerdict({ baselineHash, currentHash, historyMatch, historyExhausted });
+    if (verdict.ghost) ghosts.push(side);
+  }
+
+  await checkSide('site', { repo: SITE_REPO, ref: SITE_REF, filePath: sitePath, baselineHash: base.site, currentHash: now.site });
+  await checkSide('corpus', { repo: CORPUS_REPO, ref: CORPUS_REF, filePath: rel, baselineHash: base.corpus, currentHash: now.corpus });
+
+  return { ghosts, detail: notes.join(' ') };
 }
 
 /**
@@ -283,7 +437,40 @@ async function main() {
     }
 
     const verdict = classify(entry, now, base);
-    results.push({ path: rel, mode: entry.mode, ...verdict, hashes: { ...now, baseline: base } });
+
+    // Issue #148: un file assente da un lato non produce un confronto in
+    // `classify()`, quindi una baseline fabbricata (presa da un ramo mai
+    // mergiato, o da uno stato mai committato) può restare verde per sempre —
+    // è successo davvero con `scripts/lib/control-char-publish-gate.mjs`,
+    // registrato `not-ported` (quindi già `actionable: false` per
+    // costruzione) con un hash che non ha mai corrisposto a niente su `main`
+    // del sito. Questo controllo è ORTOGONALE al verdetto sopra: anche una
+    // entry che `classify()` giudica innocua puo' nascondere una baseline
+    // fantasma, e qui la si scopre a prescindere dal `mode`.
+    let provenance = { ghosts: [], detail: '' };
+    if (!NO_PROVENANCE) {
+      try {
+        provenance = await checkBaselineProvenance(entry, now);
+      } catch (e) {
+        // PROCEED-SAFE: un controllo di provenienza rotto non deve inghiottire
+        // il resto del report.
+        provenance = { ghosts: [], detail: `verifica di provenienza fallita: ${String(e.message || e).slice(0, 120)}` };
+      }
+    }
+
+    if (provenance.ghosts.length) {
+      results.push({
+        path: rel,
+        mode: entry.mode,
+        state: 'ghost-baseline',
+        actionable: true,
+        headline: `baseline.${provenance.ghosts.join(' e baseline.')} non corrisponde a nessun blob mai esistito`,
+        detail: provenance.detail,
+        hashes: { ...now, baseline: base },
+      });
+    } else {
+      results.push({ path: rel, mode: entry.mode, ...verdict, hashes: { ...now, baseline: base } });
+    }
   }
 
   if (INIT) {
@@ -307,7 +494,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -334,6 +521,7 @@ async function main() {
       '',
       `${results.length} file sorvegliati, **${actionable.length}** richiedono una decisione.`,
       '',
+      section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
@@ -345,6 +533,8 @@ async function main() {
       '---',
       '',
       'Le classi `site-ahead` e `corpus-ahead` non sono errori: sono le due direzioni in cui il ciclo evolve. La prima è lavoro da portare, la seconda è un miglioramento locale che probabilmente serve a entrambi i cicli.',
+      '',
+      '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE, non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta.',
       '',
       '`corpus-only-pending` non è un errore neanche lei: è un promemoria che punta a un lavoro già tracciato altrove (vedi `trackingIssue` in ogni riga). Non richiede un\'azione qui finché non diventa `-landed` — a quel punto la voce va promossa a mano.',
       '',
@@ -380,4 +570,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify };
+export { classify, ghostVerdict };
