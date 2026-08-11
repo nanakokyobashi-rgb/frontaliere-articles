@@ -90,7 +90,8 @@
  *   node generator/scripts/repair-mangled-chars.mjs --write          # scrive davvero
  *
  * Uscita: 0 nessun marker o tutto risolto, 2 restano occorrenze rifiutate,
- * 1 errore d'uso.
+ * 3 --write ha scritto riparazioni dal canale residuo (revisione umana
+ * richiesta, vedi «IL GATE DEL RESIDUO» piu' sotto), 1 errore d'uso.
  */
 
 import fs from 'node:fs';
@@ -188,7 +189,8 @@ function stampaAiuto() {
   --json              rapporto in JSON invece che a righe
   --max-refusals-shown <n>   quanti rifiuti elencare  (default: 60)
 
-Uscita: 0 tutto risolto, 2 restano rifiuti, 1 errore d'uso.
+Uscita: 0 tutto risolto, 2 restano rifiuti, 3 --write ha scritto riparazioni
+        dal canale residuo (revisione umana richiesta), 1 errore d'uso.
 `);
 }
 
@@ -1152,11 +1154,61 @@ function riparaTesto(testo, lessico, freqMinima) {
 }
 
 // ---------------------------------------------------------------------------
-// main
+// IL GATE DEL RESIDUO — issue #222 (follow-up di #219)
 // ---------------------------------------------------------------------------
+//
+// Il canale del residuo scrive senza piu' il marker C0 a fare da ancora: a
+// differenza delle riparazioni ancorate al marker, qui non esiste una seconda
+// scansione di byte che le ritrovi se una e' sbagliata. Per l'unica occorrenza
+// vista finora (#219, `sar0` -> `sarò`) la rilettura a mano prima del commit ha
+// fatto da rete — ma era un passo di PROCESSO, non di codice: un giro futuro
+// puo' lanciare `--write` su tutt* i file senza rifarla, ed e' esattamente
+// cio' che la review di #219 ha segnalato come gemello mancante.
+//
+// Qui il codice rende quella rilettura obbligatoria in due modi indipendenti:
+//   1. ogni riparazione dal canale residuo viene elencata per intero (non solo
+//      contata) sia nel rapporto a righe sia in un summary che sopravvive alla
+//      run — stesso posto (`GITHUB_STEP_SUMMARY`) e stessa ragione del gemello
+//      in `control-char-write-report.mjs`;
+//   2. `--write` che ne scrive almeno una esce con un codice DEDICATO (3),
+//      distinto da «tutto risolto» (0): un giro automatico che incatena questo
+//      script con `&&` si ferma, invece di proseguire come se nulla fosse.
 
 function visibile(s) {
   return s.replace(MARKER_G, (c) => `<${c.charCodeAt(0).toString(16).padStart(2, '0').toUpperCase()}>`);
+}
+
+/**
+ * Elenca ogni riparazione del canale residuo in un summary persistente, cosi'
+ * la revisione umana ha qualcosa da leggere anche dopo che la run e' finita.
+ * No-op se `GITHUB_STEP_SUMMARY` non e' impostata (es. run locale): in quel
+ * caso l'elenco a righe stampato da `main` resta l'unica evidenza, ed e'
+ * gia' sufficiente perche' e' lo stesso terminale da cui si e' lanciato `--write`.
+ */
+function segnalaResiduiScritti(riparazioniResiduo, opts = {}) {
+  if (!riparazioniResiduo.length) return;
+  const dest = opts.summaryPath !== undefined ? opts.summaryPath : process.env.GITHUB_STEP_SUMMARY;
+  if (!dest) return;
+  const io = opts.fsImpl || fs;
+  const righe = [
+    '',
+    '### repair-mangled-chars — riparazioni dal canale residuo (issue #222)',
+    '',
+    `${riparazioniResiduo.length} riparazioni scritte senza piu' il marker C0 a fare da ancora: ` +
+    'revisione umana richiesta prima del prossimo merge.',
+    '',
+    '| file | offset | prima -> dopo | canale | testimoni |',
+    '|---|---|---|---|---|',
+    ...riparazioniResiduo.map((r) => (
+      `| ${r.file} | ${r.offset} | ${JSON.stringify(r.prima)} -> ${JSON.stringify(r.dopo)} | ${r.canale} | ${r.testimoni ?? ''} |`
+    )),
+    '',
+  ];
+  try {
+    io.appendFileSync(dest, righe.join('\n'), 'utf-8');
+  } catch {
+    // Come nel gemello: l'evidenza e' un di piu', la scrittura del contenuto no.
+  }
 }
 
 function main() {
@@ -1263,6 +1315,10 @@ function main() {
     }
   }
 
+  // Le sole riparazioni del canale residuo: sono quelle senza piu' il marker C0
+  // ad ancorarle, quindi quelle che il gate di #222 elenca ed espone a parte.
+  const riparazioniResiduo = riparazioniElenco.filter((r) => /residuo/.test(r.canale));
+
   const rapporto = {
     modalita: opz.scrivi ? 'SCRITTURA' : 'dry-run',
     sorgente: opz.ref ? `git ${opz.ref}` : path.join(opz.radice, opz.cartella),
@@ -1284,6 +1340,9 @@ function main() {
       prefiltrati: residuiPrefiltrati,
       perFile: residuiPerFile,
       lasciate: residuiLasciati,
+      // Ogni riparazione scritta, per intero: e' l'elenco che il gate di #222
+      // richiede per la revisione umana, non solo il conteggio qui sopra.
+      riparazioni: riparazioniResiduo,
     },
     // L'elenco completo delle sostituzioni: la issue #94 chiede che il diff
     // venga riletto a mano prima del commit, e questo e' il diff.
@@ -1316,6 +1375,13 @@ function main() {
     for (const x of residuiLasciati.slice(0, opz.maxRifiutiMostrati)) {
       r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.token)}  ${x.motivo}`);
     }
+    if (riparazioniResiduo.length) {
+      r.push('');
+      r.push(`   riparazioni residuo (rilettura umana richiesta, issue #222):`);
+      for (const rip of riparazioniResiduo) {
+        r.push(`     ${rip.file}:${rip.offset}  ${JSON.stringify(rip.prima)} -> ${JSON.stringify(rip.dopo)}  ${rip.canale}`);
+      }
+    }
     r.push('');
     r.push('   motivi di rifiuto:');
     for (const m of rapporto.motiviRifiuto) r.push(`     ${String(m.n).padStart(4)}  ${m.motivo}`);
@@ -1345,7 +1411,12 @@ function main() {
     process.stdout.write(`${r.join('\n')}\n`);
   }
 
-  process.exit(rifiutate > 0 ? 2 : 0);
+  // Il gate vale solo quando si e' scritto davvero: in dry-run il rapporto dice
+  // gia' cosa farebbe (vedi il test dedicato) e non c'e' ancora nulla da
+  // rileggere sul disco.
+  if (opz.scrivi) segnalaResiduiScritti(riparazioniResiduo);
+
+  process.exit(rifiutate > 0 ? 2 : (opz.scrivi && riparazioniResiduo.length > 0) ? 3 : 0);
 }
 
 // Guardia CLI: importare questo file da un test non deve eseguirlo.
@@ -1357,4 +1428,5 @@ export {
   riparaTesto, risolviToken, costruisciLessico, ritaglia,
   riparaResidui, residuiDi, costruisciTestimoni,
   MARKER, MARKER_G, TOKEN_G, ALFABETO,
+  segnalaResiduiScritti,
 };
