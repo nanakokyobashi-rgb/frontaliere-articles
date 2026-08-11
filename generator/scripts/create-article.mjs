@@ -750,25 +750,61 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     backstopKind = 'anchor';
   }
 
-  // E — Section backstop for the NATIONAL (svizzera) pool.
+  // E — Last-resort section backstop. Runs for EVERY section.
   //
-  // Backstop D above cannot fire here and never could: it needs a
-  // strict-anchor hit, the anchors are frontaliere terms-of-art, and the loop
-  // sets `strictAnchor = IS_FRONTALIERE ? … : ''`. So `anchor_candidates` is 0
-  // by construction on this section and a 100% classifier rejection meant the
-  // pool reached generation empty with nothing able to intervene. Measured
-  // 2026-08-10 over 11 sampled svizzera runs: 10 ended
-  // `emptied=1 recovered=none status=skipped`, the 11th `deferred` — the
-  // section published no news article in any of them.
+  // Introduced 2026-08-10 for the NATIONAL (svizzera) pool, where backstop D
+  // cannot fire and never could: D needs a strict-anchor hit, the anchors are
+  // frontaliere terms-of-art, and the loop sets
+  // `strictAnchor = IS_FRONTALIERE ? … : ''`. So `anchor_candidates` was 0 by
+  // construction there and a 100% classifier rejection meant the pool reached
+  // generation empty with nothing able to intervene. Measured 2026-08-10 over
+  // 11 sampled svizzera runs: 10 ended `emptied=1 recovered=none
+  // status=skipped`, the 11th `deferred` — the section published no news
+  // article in any of them.
   //
-  // Rank by topical density rather than pool order: the national lexicon above
-  // is a recall instrument, and its hit count is the only cheap signal we have
-  // for "most on-agenda of a bad lot". Ties keep pool order, which is recency.
+  // 2026-08-11 — WHY `!IS_FRONTALIERE` IS GONE FROM THIS CONDITION.
+  //
+  // The exclusion was written as "frontaliere already has D, it does not need
+  // E". That reading assumed `anchor_candidates > 0` on this section, and
+  // production says otherwise: over the 24h to 2026-08-11, 27 of 30 frontaliere
+  // gate runs printed `PRESPEND_GATE_TOTAL_REJECTION … anchor_candidates=0
+  // restored=0 backstop=none kept_after=0` — D was silent in every one, for the
+  // same "nothing to work with" reason it is silent on svizzera. On the
+  // svizzera side, which HAS backstop E, the same window shows 0 total
+  // rejections out of 26. The section quotas over those 24h are the outcome:
+  // svizzera 37 news articles out of 38 published (97.4%), frontaliere 2 out of
+  // 42 (4.8%) — the largest section had effectively lost its news branch.
+  //
+  // The candidates D+E were leaving on the floor were not junk. Two named in
+  // the gate logs of those runs: "Grigioni: scende ancora il numero di
+  // frontalieri" and "Cala il numero dei frontalieri italiani". They are
+  // rejected because the classifier prompt above is scoped ESCLUSIVAMENTE to
+  // Ticino-Italia and lists "Frontalieri di altri confini … non Ticino-Italia"
+  // as a non-relevance rule, which a Grigioni frontalieri story matches. That
+  // prompt is deliberately left alone here: this is the last-resort floor, not
+  // a re-scoping of the section.
+  //
+  // Ordering makes the change narrow rather than symmetrical-looking: D runs
+  // FIRST and pushes onto the same `kept`, so on a frontaliere run that had any
+  // anchor hit `kept.length > 0` and this block never executes. E therefore
+  // only reaches the frontaliere section in exactly the state measured above —
+  // classifier rejected everything AND no anchor candidate existed — where the
+  // alternative is not a stricter pool, it is no pool at all.
+  //
+  // Rank by topical density rather than pool order: the lexicon is a recall
+  // instrument, and its hit count is the only cheap signal we have for "most
+  // on-agenda of a bad lot". Ties keep pool order, which is recency.
+  // `countTopicalHits` is already section-aware — `sectionTopicalKeywords()`
+  // resolves `national` from `!IS_FRONTALIERE` — so the frontaliere branch
+  // ranks with TOPICAL_KEYWORDS and the national one with
+  // SVIZZERA_TOPICAL_KEYWORDS, with no argument to pass here.
+  //
   // This is deliberately a LAST-RESORT restore, not a relaxation — it runs
   // only when the classifier said no to everything, and REGOLA #0 inside
-  // article-gen (topicGateAbort) stays the final arbiter exactly as it does
-  // for the frontaliere branch after backstop D.
-  if (kept.length === 0 && !IS_FRONTALIERE && headlines.length > 0) {
+  // article-gen (topicGateAbort) stays the final arbiter on both sections: on
+  // frontaliere a restored candidate with 0 density hits still aborts on
+  // attempt 1 and the ranker picks another headline.
+  if (kept.length === 0 && headlines.length > 0) {
     const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
     const ranked = headlines
       .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
@@ -809,6 +845,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // backstop=topical` — anchor_candidates still explains why D was silent,
   // `backstop` says who answered instead. `restored=0` after this change means
   // nothing recovered the pool and is the line worth alerting on.
+  //
+  // 2026-08-11: E is no longer section-gated, so `restored=0 backstop=none` is
+  // now an unrecovered pool on EITHER section — one predicate to alert on
+  // instead of "0 on svizzera is a bug, 0 on frontaliere is Tuesday". Baseline
+  // for the frontaliere half: 27 of the 30 gate runs in the 24h to 2026-08-11
+  // printed exactly that, against 0 of 26 on svizzera.
   if (totalRejection) {
     console.error(
       `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
