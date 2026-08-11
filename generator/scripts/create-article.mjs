@@ -5883,20 +5883,39 @@ const PROMPT_TOKEN_BUDGET = 8000;
 // PR. La ripartizione misurata del prompt news (caso peggiore: fonte oltre
 // MAX_SOURCE_CHARS, id piu' lunghi del corpus) dice perche':
 //
-//   ~17.700 char  impalcatura statica del template + system + schema JSON
+//   ~15.700 char  impalcatura statica del template + system + schema JSON
 //     6.036 char  la notizia (truncatedContent)
 //     1.772 char  topicalRelevanceGate (REGOLA #0)
 //     1.739 char  domainFactsBlock
-//     1.671 char  editorialFundamentalBlock
+//     ~1.470 char editorialFundamentalBlock
 //       801 char  sourceContract
-//       ~600 char idsSection (dopo questa PR; era 2.211)
+//       ~600 char idsSection
 //
-// L'impalcatura statica da sola vale ~5.050 token: nessuna combinazione dei
+// L'impalcatura statica da sola vale ~4.490 token: nessuna combinazione dei
 // blocchi variabili porta il totale sotto 8000 senza riscriverla, ed e' il
 // presidio anti-allucinazione (divieti, anti-clickbait, semantica dei link).
-// Il margine e' volutamente stretto (~100 token sul caso peggiore misurato):
-// il prossimo blocco che si aggiunge al prompt deve trovarlo, non assorbirlo.
-const PROMPT_TOKEN_CEILING = 10100;
+//
+// 10.100 → 9.500 (2026-08-11). La discesa NON e' venuta da un presidio
+// rimosso: e' venuta da SEI ripetizioni misurate, ognuna delle quali diceva
+// due o tre volte una cosa gia' detta altrove — vedi i commenti ai punti in
+// cui sono state unificate (`styleColorLine`, `systemRoleLine`,
+// `minWordsInstruction`, `ctaDefaultLine`, DIVIETO ASSOLUTO, LINK INTERNI).
+// Misurato sul fixture del caso peggiore: news 9.994 → 9.402, evergreen
+// frontaliere 7.960 → 7.406, evergreen svizzera 8.452 → 7.866.
+//
+// L'effetto sui prompt VERI (293 marker `[prompt-budget]` letti da 28 run
+// `generate-article.yml` di successo, 2026-08-11) e' il motivo per cui vale:
+// il ramo evergreen frontaliere al primo tentativo stava sopra il cap per
+// 10-22 token — 25 campioni su 25, tutti fra 8.010 e 8.022 — cioe' mancava
+// PER UN'INEZIA, e ogni articolo evergreen pagava comunque il cascade. Dopo:
+// 0 su 25. Il ramo news resta sopra di ~1.300 token e non e' comprimibile
+// senza toccare la notizia: vedi il bullet in `## Non implementato (ancora)`
+// della PR che ha introdotto questo commento.
+//
+// Il margine resta volutamente stretto (~100 token sul caso peggiore
+// misurato): il prossimo blocco che si aggiunge al prompt deve trovarlo, non
+// assorbirlo.
+const PROMPT_TOKEN_CEILING = 9500;
 
 // Budget di OUTPUT per la chiamata di generazione IT.
 //
@@ -6079,11 +6098,14 @@ AVS/AHV, LPP/BVG, LAMal/KVG, imposta federale diretta, IVA, SECO, UST/BFS, BNS/S
   // Swiss relevance for a general Swiss-resident audience. Every section-AGNOSTIC
   // rule (fedeltà alla fonte, anti-allucinazione, anti-AI, formatting, internal
   // links, CTA divieti, grassetto, H3, anti-ripetitività) stays verbatim below.
+  // Il RUOLO e' gia' fissato dal messaggio `system` («Sei un giornalista
+  // finanziario esperto di …», con `systemRoleQualifier` per la sezione): qui
+  // resta solo cio' che quel messaggio non dice — testata, sezione, e il
+  // compito. Ripetere il ruolo in inglese nel messaggio `user` non aggiungeva
+  // vincolo, aggiungeva token su ogni singola chiamata.
   const systemRoleLine = IS_FRONTALIERE
-    ? `You are a senior financial journalist specializing in Swiss-Italian cross-border work and Ticino economics.
-You write for "Frontaliere Ticino" (frontaliereticino.ch). Based on the following source, write a blog article.`
-    : `You are a senior journalist covering Swiss NATIONAL affairs — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics — for a general Swiss-resident audience.
-You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section. Based on the following source, write a blog article.`;
+    ? `You write for "Frontaliere Ticino" (frontaliereticino.ch). Based on the following source, write a blog article.`
+    : `You write for "Frontaliere Ticino" (frontaliereticino.ch), national Switzerland section — economy, fiscal policy, labour market, cost of living, housing, federal & cantonal politics, for a general Swiss-resident audience. Based on the following source, write a blog article.`;
 
   const reachMinimumImplicationsLine = IS_FRONTALIERE
     ? `- Analizza le IMPLICAZIONI PRATICHE per i frontalieri (cosa cambia nella vita quotidiana)`
@@ -6128,13 +6150,17 @@ REGOLA OPERATIVA — se il nesso NON c'è in modo concreto e specifico, devi RIF
 
 NON inventare un angolo "implicazioni pratiche" su un evento irrilevante per riempire spazio. NON aggiungere paragrafi di consigli generici (consulta un avvocato, verifica l'assicurazione, conosci i tuoi diritti) come surrogato di un nesso reale. Meglio rifiutare e far passare il prossimo articolo.`;
 
+  // Unico elenco di riferimenti citabili del prompt. Era diviso in due —
+  // `styleColorLine` (dentro STILE) e un `ticinoScopeBlock` a se' stante — che
+  // sulla sezione svizzera erano diventati la STESSA lista due volte (cantoni,
+  // citta', istituzioni federali): 414 caratteri per un elenco solo. La meta'
+  // non ridondante di `ticinoScopeBlock` era la frase di scope («l'articolo
+  // DEVE riguardare…»), che e' il compito di REGOLA #0 e di
+  // `editorialFundamentalBlock` — un terzo posto in cui dirlo non aggiunge
+  // vincolo, aggiunge token.
   const styleColorLine = IS_FRONTALIERE
-    ? `Colore locale: valichi (Brogeda, Gaggiolo), comuni (Chiasso, Mendrisio), uffici cantonali.`
-    : `Colore locale/nazionale: città e cantoni (Zurigo, Ginevra, Berna, Basilea, Losanna, Lugano…), istituzioni federali (Consiglio federale, Parlamento, BNS), uffici cantonali.`;
-
-  const ticinoScopeBlock = IS_FRONTALIERE
-    ? `TICINO: L'articolo DEVE riguardare Canton Ticino, confine italo-svizzero, o frontalieri. Riferimenti locali: Canton Ticino, SUPSI, USI, EOC, Lugano, Bellinzona, Locarno, Mendrisio, DFE, SECO.`
-    : `SCOPE NAZIONALE: L'articolo riguarda la Svizzera a livello nazionale. I riferimenti possono spaziare su tutti i cantoni e città (Zurigo, Ginevra, Berna, Basilea, Losanna, Lugano…) e sulle istituzioni federali (Consiglio federale, Parlamento, Amministrazione federale, UST/BFS, SECO, BNS/SNB) — non solo il Ticino.`;
+    ? `Colore locale: valichi (Brogeda, Gaggiolo), comuni (Chiasso, Mendrisio, Lugano, Bellinzona, Locarno), enti (Canton Ticino, SUPSI, USI, EOC, DFE, SECO).`
+    : `Colore nazionale: cantoni e città (Zurigo, Ginevra, Berna, Basilea, Losanna, Lugano…), istituzioni federali (Consiglio federale, Parlamento, Amministrazione federale, UST/BFS, SECO, BNS/SNB), uffici cantonali.`;
 
   const editorialFundamentalBlock = IS_FRONTALIERE
     ? `REGOLA EDITORIALE FONDAMENTALE — FRONTALIERI AL CENTRO (CONDIZIONALE):
@@ -6146,9 +6172,7 @@ Se la fonte ha implicazioni CONCRETE e SPECIFICHE per il frontaliere (importi CH
 Se le implicazioni sono DEBOLI o GENERICHE (la fonte non parla direttamente di frontalieri, ma il contesto può essere tangenzialmente utile):
 - Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
 - Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.
-
-Il notizia/evento è solo il punto di partenza. Il valore sta nelle implicazioni PRATICHE per chi vive in Italia e lavora in Svizzera. Se queste implicazioni non esistono, l'articolo non doveva essere generato.`
+- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`
     : `REGOLA EDITORIALE FONDAMENTALE — INTERESSE NAZIONALE AL CENTRO (CONDIZIONALE):
 Se la fonte ha implicazioni CONCRETE e SPECIFICHE per chi vive o lavora in Svizzera (importi CHF cambiati, scadenze fiscali, nuove leggi federali/cantonali, premi cassa malati, affitti, salari, AVS/LPP, IVA, decisioni del Consiglio federale o dei cantoni):
 - Le implicazioni pratiche a livello nazionale/cantonale devono essere al CENTRO dell'articolo dall'inizio alla fine.
@@ -6158,9 +6182,7 @@ Se la fonte ha implicazioni CONCRETE e SPECIFICHE per chi vive o lavora in Svizz
 Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico diretto, ma il contesto può essere tangenzialmente utile):
 - Limita la copertura a 1-2 paragrafi brevi di contesto. NON gonfiare l'articolo con platitudini ("consulta un avvocato", "verifica la copertura", "conosci i tuoi diritti", "informati sulle leggi locali").
 - Onestamente dichiara nel body1 cosa la fonte dice E NULLA DI PIÙ, e segnala in body2/body3 i 1-2 ganci pratici reali (se esistono). Meglio un articolo da 400 parole onesto che 1200 parole di forzatura.
-- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.
-
-Il notizia/evento è solo il punto di partenza. Il valore sta nelle implicazioni PRATICHE per chi vive o lavora in Svizzera. Se queste implicazioni non esistono, l'articolo non doveva essere generato.`;
+- Se anche 1-2 paragrafi di nesso reale non esistono → torna al GATE DI RILEVANZA TOPICA (REGOLA #0) e rifiuta con "abort_topical_relevance": true.`;
 
   const body2AntiRepLine = IS_FRONTALIERE
     ? `- body2 = ANALISI PRATICA: implicazioni per i frontalieri, confronti prima/dopo, scenari concreti. Informazione che NON era nel body1.`
@@ -6170,15 +6192,16 @@ Il notizia/evento è solo il punto di partenza. Il valore sta nelle implicazioni
     : `- body3 = AZIONE: cosa fare concretamente in Svizzera, scadenze, procedura step-by-step, strumenti del sito. NON riassumere body1 o body2.`;
 
   const ctaDefaultLine = IS_FRONTALIERE
-    ? `CTA: body3 DEVE terminare con CTA verso strumenti del sito. Default: calcolatore stipendio. Temi specifici: assicurazione→health, pensioni→pension, costo vita→cost-of-living, cambio→exchange, IRPEF/comuni→border-map, auto→car-transfer, permessi→permit-compare, casa→renovation, telefonia→mobile, congedo→parental-leave, vivere CH→living-ch, vivibilità→livability.`
-    : `CTA: body3 DEVE terminare con CTA verso strumenti del sito. Default: calcolatore stipendio. Temi specifici: assicurazione→health, pensioni→pension, costo vita→cost-of-living, cambio→exchange, casa→renovation, telefonia→mobile, congedo→parental-leave, vivere CH→living-ch, vivibilità→livability. Usa il tool più pertinente al tema dell'articolo.`;
+    ? `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`
+    : `CTA: body3 DEVE terminare con CTA verso il tool più pertinente al tema (default: calcolatore stipendio). Oltre al catalogo nav: qui sotto, sono disponibili: casa→renovation, telefonia→mobile, vivere CH→living-ch, vivibilità→livability.`;
 
+  // Una sola volta. La specifica di `imagePrompt` era dichiarata due volte —
+  // qui dentro lo schema JSON e di nuovo in REGOLE FINALI
+  // (`imagePromptFinalLine`) — con l'unico frammento non ridondante («non
+  // sembrare AI») che ora vive qui.
   const imagePromptSchemaLine = IS_FRONTALIERE
-    ? `"imagePrompt": "Prompt per immagine fotorealistica DSLR ambientata in Ticino. Max 2 frasi EN.",`
-    : `"imagePrompt": "Prompt per immagine editoriale fotorealistica DSLR di una scena svizzera nazionale/cantonale pertinente al tema. Max 2 frasi EN.",`;
-  const imagePromptFinalLine = IS_FRONTALIERE
-    ? `- imagePrompt: scena fotorealistica Ticino, DSLR, non sembrare AI`
-    : `- imagePrompt: scena svizzera nazionale/cantonale pertinente al tema, fotorealistica, DSLR, non sembrare AI`;
+    ? `"imagePrompt": "Prompt per immagine fotorealistica DSLR ambientata in Ticino, che non sembri AI. Max 2 frasi EN.",`
+    : `"imagePrompt": "Prompt per immagine editoriale fotorealistica DSLR di una scena svizzera nazionale/cantonale pertinente al tema, che non sembri AI. Max 2 frasi EN.",`;
 
   // Organic/news sources (real URL) carry no ground-truth facts — only the
   // evergreen:// and stats-bfs:// branches bake EVERGREEN_FACTS_BRIEF into
@@ -6253,7 +6276,6 @@ ${sourceContract ? `\n${sourceContract}\n` : ''}
 
 Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
 - OGNI fatto, cifra, data, legge, aliquota, istituzione e statistica DEVE essere presente nel SOURCE CONTENT sopra.
-- Se la fonte dice "la nuova legge prevede X", scrivi "la nuova legge prevede X" — NON aggiungere dettagli che la fonte non menziona.
 - Se la fonte NON specifica una data, un importo, un numero di legge o un nome di istituzione: NON inventarlo. Scrivi "non ancora specificato" o omettilo.
 - Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
 - NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
@@ -6271,19 +6293,17 @@ ${primaryLocaleBlock}${targetKeywordBlock}${peopleAlsoAskBlock}${mustCoverLsiBlo
 
 STILE: Scrivi come giornalista finanziario italiano reale, NON come AI. Varia lunghezza frasi (da 5 a 30 parole). Alterna paragrafi brevi (1-2 frasi) a paragrafi più lunghi. Usa numeri, date, luoghi reali, istituzioni — MA SOLO se presenti nella fonte. ${styleColorLine}
 MAI usare: "In conclusione", "È importante notare", "In questo contesto", "Vale la pena", "È fondamentale", "Alla luce di", "Ecco cosa sapere", "Vediamo nel dettaglio", "Andiamo con ordine", "Non è un caso che", "Un aspetto cruciale", "Sempre più", "In un contesto di".
-Linguaggio diretto: "conviene" non "potrebbe essere utile". Il testo DEVE superare AI detection.
-ANTI-AI (CRITICO): Il testo NON deve sembrare generato da AI. Regole:
+Linguaggio diretto: "conviene" non "potrebbe essere utile".
+ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAI aprire body1 con una frase generica tipo "Il tema dei frontalieri...". Inizia con un FATTO concreto DALLA FONTE (data, numero, nome, luogo).
 - MAI elenchi puntati di >5 elementi (spezzali in paragrafi narrativi)
 - MAX 2 emoji callout (📊/💡/⚠️) per INTERO articolo (body1+body2+body3 combinati). Zero è meglio.
 - Varia la struttura: non TUTTI i body devono avere un elenco puntato. Alterna prosa, tabelle, citazioni.
 - NON usare parallelismi strutturali tra body1/body2/body3 (se body1 ha ## + elenco, body2 deve avere ## + prosa + tabella).
 
-${ticinoScopeBlock}
-
 ═══ DIVIETI ANTI-ALLUCINAZIONE (BLOCCANTI — RIGETTO AUTOMATICO) ═══
 
-L'articolo viene verificato da un SECONDO modello AI indipendente (fact-checker) che confronta OGNI affermazione con la fonte e con le proprie conoscenze. Inventare anche UN SOLO dato = rigetto.
+Un SECONDO modello AI indipendente (fact-checker) confronta OGNI affermazione con la fonte: inventare anche UN SOLO dato = rigetto.
 
 LEGGI E DECRETI:
 - Cita riferimenti normativi SOLO se appaiono LETTERALMENTE nella fonte.
@@ -6316,17 +6336,13 @@ TOPIC GUARD: per articoli su "tassa salute", NON invertire la platea (es. "lavor
 
 ${ctaDefaultLine}
 
-INTERNAL LINKS — REGOLA QUANTITATIVA:
-MINIMO 3 link interni totali distribuiti nei body, sintassi \`[testo](nav:azione)\`:
+LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
 - 1 in body1 o body2 (contestuale al fatto)
 - 1 in body2 o body3 (contestuale all'analisi)
 - 1 nella CTA finale di body3 (calculator preferito)
-Se l'articolo supera 1200 parole, aumenta a MINIMO 4 link.
-
-LINK INTERNI — sintassi ESCLUSIVA: [testo](nav:azione)
 ${IS_FRONTALIERE ? `Azioni e SEMANTICA STRETTA (il testo del link DEVE matchare l'azione, altrimenti il link viene strippato):
-- calculator → calcolatore FISCALE: stipendio, netto, busta paga, imposte, tasse. NON usare per tragitti, meteo, percorsi.
-- exchange → comparatore CHF/EUR (cambio valuta). NON usare per meteo, traffico, percorsi.
+- calculator → calcolatore FISCALE: stipendio, netto, busta paga, imposte, tasse.
+- exchange → comparatore CHF/EUR (cambio valuta).
 - health → LAMal/CMI assicurazione malattia. - cost-of-living → costo della vita Ticino vs Italia. - pension → AVS/LPP/rendita.
 - pillar3 → terzo pilastro 3a. - payslip → simulatore busta paga. - tax-return → dichiarazione redditi.
 - residency → Permesso B residenza. - ristorni → ristorni Ticino-Italia. - unemployment → disoccupazione frontalieri.
@@ -6337,8 +6353,8 @@ ${IS_FRONTALIERE ? `Azioni e SEMANTICA STRETTA (il testo del link DEVE matchare 
 - car-transfer → trasferimento targa CH. - permit-compare → comparatore Permesso G vs B.
 - nursery → asilo nido. - parental-leave → congedo parentale.
 - (NON esistono tool per: meteo, allerta maltempo, condizioni meteorologiche, navigatore stradale, calcolatore tragitti, route planner. NON inventare link nav: per questi temi.)` : `Azioni e SEMANTICA STRETTA (il testo del link DEVE matchare l'azione, altrimenti il link viene strippato). Usa SOLO queste azioni a respiro nazionale:
-- calculator → calcolatore stipendio/imposte. NON usare per tragitti, meteo, percorsi.
-- exchange → comparatore CHF/EUR (cambio valuta). NON usare per meteo, traffico, percorsi.
+- calculator → calcolatore stipendio/imposte.
+- exchange → comparatore CHF/EUR (cambio valuta).
 - health → LAMal/cassa malati. - cost-of-living → costo della vita in Svizzera. - pension → AVS/LPP/rendita.
 - pillar3 → terzo pilastro 3a. - payslip → busta paga svizzera. - tax-return → dichiarazione delle imposte.
 - jobs → annunci di lavoro. - companies → aziende che assumono. - banks → conti bancari in Svizzera.
@@ -6367,21 +6383,15 @@ ${editorialFundamentalBlock}
 È VIETATO inventare casi specifici (persona + luogo + ruolo + verbo + esito/cifra) per gonfiare la rilevanza frontaliere o riempire spazio. Il fact-check tratta come FALSE INFORMATION qualunque "esempio concreto" non presente nella fonte.
 
 PATTERN ESPLICITAMENTE PROIBITI (anche se sembrano plausibili):
-- "Lugano: Un'infermiera frontaliera ha segnalato carenze igieniche..." (FABBRICAZIONE)
-- "Chiasso: Un medico ha denunciato pratiche non etiche..." (FABBRICAZIONE)
-- "Un infermiere dell'ORL ha ottenuto un recupero di CHF 50.000..." (FABBRICAZIONE)
-- "Un medico dell'Ospedale Civico di Lugano ha denunciato..." (FABBRICAZIONE)
-- Qualunque bullet del tipo "- [Città CH]: Un [ruolo] ha [verbo]..." dove né la persona, né il luogo, né il caso sono nella fonte originale.
+- Qualunque bullet del tipo "- [Città CH]: Un [ruolo] ha [verbo]..." dove né la persona, né il luogo, né il caso sono nella fonte originale. Es. "Lugano: Un'infermiera frontaliera ha segnalato carenze igieniche..." o "Un infermiere dell'ORL ha ottenuto un recupero di CHF 50.000..." (FABBRICAZIONI).
 - Qualunque legge inventata con sigla approssimativa: "LProtInfo 2023" (non esiste — è art. 321a CO), "LPAP 2000" (è LPers, non LPAP). Se non sei certo della SIGLA UFFICIALE di una legge, NON citarla.
 
 REGOLE OPERATIVE:
-1. Sezioni titolate "Esempi concreti / Casi pratici / Casi reali / Per esempio" sono AMMESSE solo se gli esempi vengono ESPLICITAMENTE dalla fonte (con citazione/dettagli verificabili nella fonte originale).
-2. Se la fonte non contiene casi reali → OMETTI la sezione "Esempi concreti". Mai inventare per riempire.
-3. Se hai bisogno di un esempio ipotetico, usa frasing GENERICO E DICHIARATAMENTE IPOTETICO: "Un frontaliere che si trovi in una situazione simile potrebbe…" (senza nomi di città, ruoli specifici o cifre inventate).
-4. Cifre specifiche (CHF 50.000, 200 CHF, 1.80 CHF/litro, percentuali precise) sono AMMESSE solo se nella fonte o in dato pubblico ufficiale. Se non puoi citare la fonte, non inserire il numero.
-5. Nomi di istituzioni (FINMA, USTAT, UFAS, INSAI, SUVA) sono AMMESSI solo se RILEVANTI per il caso. FINMA = mercati finanziari/banche, NON ospedali/sanità. Non applicare istituzioni a domini sbagliati.
+1. Sezioni titolate "Esempi concreti / Casi pratici / Casi reali / Per esempio" sono AMMESSE solo se gli esempi vengono ESPLICITAMENTE dalla fonte; altrimenti OMETTI la sezione. Mai inventare per riempire.
+2. Se hai bisogno di un esempio ipotetico, usa frasing GENERICO E DICHIARATAMENTE IPOTETICO: "Un frontaliere che si trovi in una situazione simile potrebbe…" (senza nomi di città, ruoli specifici o cifre inventate).
+3. Nomi di istituzioni (FINMA, USTAT, UFAS, INSAI, SUVA) sono AMMESSI solo se RILEVANTI per il caso. FINMA = mercati finanziari/banche, NON ospedali/sanità. Non applicare istituzioni a domini sbagliati.
 
-VIOLAZIONE = articolo bocciato in fact-check con verdict=FAIL + critical:fatti_inventati. Il sistema rimuove automaticamente sezioni "Esempi concreti" sospette anche se passano il fact-check.
+VIOLAZIONE = verdict=FAIL + critical:fatti_inventati. Il sistema rimuove automaticamente le sezioni "Esempi concreti" sospette anche se passano il fact-check.
 
 Genera JSON (no markdown, no code fences):
 {
@@ -6418,20 +6428,17 @@ Genera JSON (no markdown, no code fences):
 }
 
 REGOLE FINALI:
-- Contenuto IT primario, MINIMO 350 parole per body (body1/body2/body3). EN/DE/FR verranno generati separatamente.
-- Per raggiungere il minimo: espandi con implicazioni pratiche, procedure, scenari — NON con fatti inventati. NON inserire FAQ nel body (vanno nel campo "faq" separato).
+- Contenuto IT primario. EN/DE/FR verranno generati separatamente.
 - Slug: lowercase, trattini, no accenti, max 50 chars
 - hasCalculator: true sempre
 - Apostrofi diritti ('), normative 2026
-${imagePromptFinalLine}
 - FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI della fonte. Risposte: 50-100 parole, con dati concreti dalla fonte.`;
 
   const minWordsInstruction = `\n\nMINIMUM LENGTH (CRITICAL — STRICTLY ENFORCED):
 - body1+body2+body3 MUST total ≥${minItalianWords} words. This is HARD-enforced: content below this threshold will be REJECTED.
 - EACH body field (body1, body2, body3) MUST be at least 300 words individually. Target 350-400 words each.
-- Use detailed examples, step-by-step procedures, concrete numbers/dates, comparison tables, and checklists to reach the target. Do NOT put FAQ in body text — FAQs go in the separate "faq" field.
-- Count your words before finalizing. If the total is <${minItalianWords}, ADD more content.
-${generationAttempt > 1 ? `- ⚠️ RETRY ${generationAttempt}/${generationAttemptMax}: previous attempt was REJECTED because it was only ~${sourceContext?._previousWordCount || '???'} words (minimum: ${minItalianWords}). You MUST write SIGNIFICANTLY MORE this time. Each body: 350-450 words.${generationAttempt >= 4 ? ' Include: comparison tables, step-by-step guides with numbered steps, specific examples with real numbers. Do NOT put FAQ in body text.' : ''}` : ''}`;
+- Count your words before finalizing. If the total is <${minItalianWords}, ADD more content — con i mezzi elencati in «COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE».
+${generationAttempt > 1 ? `- ⚠️ RETRY ${generationAttempt}/${generationAttemptMax}: previous attempt was REJECTED because it was only ~${sourceContext?._previousWordCount || '???'} words (minimum: ${minItalianWords}). You MUST write SIGNIFICANTLY MORE this time. Each body: 350-450 words.` : ''}`;
 
   // A5 headline refinement: when the previous attempt produced a non-conformant
   // headline (clickbait, too long, leading digit, etc.) we inject explicit rules
