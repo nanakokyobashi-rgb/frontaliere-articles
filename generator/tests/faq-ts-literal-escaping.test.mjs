@@ -40,6 +40,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -228,6 +229,41 @@ test('nessuno scrittore di .faq escapa il solo apostrofo', () => {
     'un escape a mano che ignora il backslash e\' tornato. Usa serializeFaqLiteral() ' +
       '(fix-faq-locales.mjs) o escapeForSingleQuoteTS() (lib/article-meta-block.mjs):\n  ' +
       offenders.join('\n  '),
+  );
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// 6. `--help` e `DRY_RUN=1` non toccano il corpus
+//
+// Non e' igiene: e' il contratto che `dry-run-entrypoints.mjs` da' per scontato
+// su ogni entry point, e che questo script non ha mai onorato. Non si vedeva
+// perche' il lettore rotto lo rendeva cieco su quasi tutti gli articoli: con
+// niente da fare, non scriveva, e l'armatura lo dichiarava «loaded». Riparato
+// il lettore, la prima cosa che ha fatto e' stata riscrivere un file del corpus
+// mentre veniva soltanto caricato — esattamente il difetto che l'intestazione
+// di quell'armatura racconta per generate-border-wait-ranking-article.mjs.
+// ─────────────────────────────────────────────────────────────────────────────
+
+test('`--help` esce senza leggere ne\' scrivere il corpus', () => {
+  const res = spawnSync(
+    process.execPath,
+    [path.join(SCRIPTS, 'fix-faq-locales.mjs'), '--help'],
+    { env: { ...process.env, DRY_RUN: '1', CI: '1' }, encoding: 'utf-8', timeout: 20_000 },
+  );
+  assert.equal(res.status, 0, `uscita non zero: ${res.stderr}`);
+  assert.match(res.stdout, /--reescape-broken/, 'l\'usage non descrive le opzioni');
+  // Se avesse scansionato il corpus ci avrebbe messo secondi e avrebbe parlato
+  // di articoli: qui non deve esserci traccia di lavoro.
+  assert.doesNotMatch(res.stdout, /Scanning for FAQ locale issues/);
+});
+
+test('DRY_RUN=1 vale come --dry-run', () => {
+  const src = fs.readFileSync(path.join(SCRIPTS, 'fix-faq-locales.mjs'), 'utf-8');
+  assert.match(
+    src,
+    /const DRY_RUN = [^\n]*process\.env\.DRY_RUN === '1'/,
+    'DRY_RUN=1 non e\' piu\' un alias di --dry-run: l\'armatura dry-run passa quella ' +
+      'variabile e non l\'argomento, quindi lo script tornerebbe a scrivere mentre viene caricato',
   );
 });
 

@@ -44,7 +44,16 @@ const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..', '..');
 
 const args = process.argv.slice(2);
-const DRY_RUN = args.includes('--dry-run');
+const HELP = args.includes('--help') || args.includes('-h');
+// `DRY_RUN=1` e' la convenzione del generator, non un extra: e' cio' che
+// `generator/tests/dry-run-entrypoints.mjs` passa a ogni entry point per
+// caricarlo senza fargli toccare il corpus. Questo script non la onorava — ne'
+// quella ne' `--help` — e finiva per fare lavoro vero mentre l'armatura
+// credeva di starlo solo importando. Non si vedeva perche' il lettore rotto lo
+// rendeva cieco su quasi tutto: appena ha ricominciato a vedere, ha scritto.
+// E' lo stesso difetto che l'intestazione di quell'armatura racconta per
+// generate-border-wait-ranking-article.mjs, che riscrisse quattro body.
+const DRY_RUN = args.includes('--dry-run') || process.env.DRY_RUN === '1';
 const limitIdx = args.indexOf('--limit');
 const LIMIT = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : Infinity;
 // Riparazione pura dei file gia' scritti con l'escape rotto: nessuna chiamata
@@ -265,7 +274,23 @@ function reescapeBroken() {
 
 // ── Main ────────────────────────────────────────────────────
 
+const USAGE = `fix-faq-locales.mjs — allinea le chiavi .faq di en/de/fr all'italiano.
+
+  --dry-run              elenca cosa farebbe, senza scrivere (anche DRY_RUN=1)
+  --limit N              quante voci trattare in questa run
+  --section=<sezione>    frontaliere (default) | svizzera
+  --reescape-broken      riscrive le .faq prodotte dall'escape rotto: nessuna
+                         traduzione, nessun modello, solo la codifica
+  --help                 questo testo, senza leggere ne' scrivere niente
+`;
+
 async function main() {
+  // Prima di qualunque lettura del corpus: `--help` non deve toccare il disco.
+  if (HELP) {
+    console.log(USAGE);
+    return;
+  }
+
   if (REESCAPE_BROKEN) {
     console.log(`🔧 Ri-escape dei .faq scritti con l'escape rotto (${SECTION})...\n`);
     reescapeBroken();
