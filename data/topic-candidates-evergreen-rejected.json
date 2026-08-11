@@ -231,7 +231,8 @@
     "premi cassa malati canton Zurigo e riduzione premi",
     "permesso di dimora B canton Zurigo requisiti e rinnovo",
     "permesso di domicilio C canton Zurigo requisiti e domanda",
-    "permesso L di breve durata canton Zurigo validità e proroga"
+    "permesso L di breve durata canton Zurigo validità e proroga",
+    "trasferirsi a Valpelline da frontaliere pro e contro"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -355,6 +356,7 @@
     "imposte cantonali canton Zurigo aliquote e deduzioni": 3,
     "premi cassa malati canton Zurigo e riduzione premi": 1,
     "trasferirsi a Morbegno da frontaliere pro e contro": 1,
-    "indennità di disoccupazione canton Zurigo iscrizione URC": 1
+    "indennità di disoccupazione canton Zurigo iscrizione URC": 1,
+    "vivere a Valpelline e lavorare in Vallese da frontaliere": 1
   }
 }
