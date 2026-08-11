@@ -325,18 +325,37 @@ test('il ramo EVERGREEN sta sotto il cap REALE della flotta (8000), non solo sot
   assert.equal(overBudget, false, 'il pre-flight segnala il ramo evergreen fuori budget');
 });
 
-test('l\'evergreen SVIZZERA rispetta almeno il tetto (e non ancora il cap)', () => {
-  // Misurato 8452 token contro i 7803 del gemello frontaliere. La differenza
-  // e' quasi tutta in EVERGREEN_FACTS_BRIEF_CH, che e' 3170 caratteri contro i
-  // 1553 del brief frontaliere e finisce dentro `pageContent` sul ramo
-  // evergreen. E' un difetto adiacente REALE — la sezione svizzera non entra
-  // nei due provider principali — ma vive in un blocco che questa PR non
-  // tocca: qui viene solo pinnato perche' non peggiori in silenzio.
-  const { estTokens } = evergreenPrompt('svizzera');
+test('anche l\'evergreen SVIZZERA sta sotto il cap REALE della flotta (8000)', () => {
+  // PROMOSSO da «rispetta almeno il tetto» a «rispetta il cap» il 2026-08-11.
+  //
+  // La versione precedente di questo test misurava 8452 token e si accontentava
+  // del tetto, dichiarando la sezione svizzera «un difetto adiacente REALE» che
+  // quella PR non toccava. Restava un ramo di produzione che non entrava MAI in
+  // GitHub Models / Groq: misurato sui run veri, evergreen svizzera al primo
+  // tentativo stava a 8.551-8.554 token, 8 campioni su 8 sopra il cap.
+  //
+  // Non e' stato chiuso comprimendo EVERGREEN_FACTS_BRIEF_CH — quello e' il
+  // ground truth che il fact-checker confronta, e accorciarlo farebbe divergere
+  // i due lati. E' stato chiuso togliendo dall'impalcatura le ripetizioni che
+  // la sezione svizzera pagava due volte, in particolare l'elenco dei
+  // riferimenti citabili (cantoni, citta', istituzioni federali) che compariva
+  // sia in `styleColorLine` sia nell'ex `ticinoScopeBlock`: 414 caratteri per
+  // una lista sola.
+  //
+  // Il margine e' il piu' stretto dei due rami evergreen (il brief CH e' 3.170
+  // caratteri contro i 1.553 del gemello frontaliere, ed e' una differenza
+  // strutturale che resta): se un blocco nuovo entra nel prompt, e' QUESTO
+  // il test che deve trovarlo per primo.
+  const { estTokens, overBudget } = evergreenPrompt('svizzera');
   assert.ok(
-    estTokens <= PROMPT_TOKEN_CEILING,
-    `il prompt evergreen svizzera e' stimato in ${estTokens} token, sopra PROMPT_TOKEN_CEILING (${PROMPT_TOKEN_CEILING})`,
+    estTokens <= PROMPT_TOKEN_BUDGET,
+    `il prompt evergreen svizzera e' stimato in ${estTokens} token, sopra il cap della flotta `
+    + `(${PROMPT_TOKEN_BUDGET}). E' il ramo evergreen con meno margine: il brief CH che finisce `
+    + 'in `pageContent` e\' il doppio di quello frontaliere. Se e\' risalito, il costo del blocco '
+    + 'che hai aggiunto va compensato altrove — NON accorciando EVERGREEN_FACTS_BRIEF_CH, che e\' '
+    + 'il ground truth del fact-checker.',
   );
+  assert.equal(overBudget, false, 'il pre-flight segnala il ramo evergreen svizzera fuori budget');
 });
 
 // La distanza fra i due rami e' l'invariante che e' stata violata davvero: un
