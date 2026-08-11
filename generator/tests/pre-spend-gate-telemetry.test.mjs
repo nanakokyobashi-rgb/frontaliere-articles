@@ -23,6 +23,18 @@
  *   - `PRESPEND_GATE_OUTCOME … recovered=news|evergreen|none` at the run's
  *     disposition, which is the numerator the issue named.
  *
+ * WHAT THE FILE ALSO PINS SINCE 2026-08-11
+ *
+ * The telemetry was the point; the invariant is what the telemetry then
+ * exposed. Twice now a section has reached generation with a fully rejected
+ * pool because the only backstop able to answer had been written for the other
+ * section — svizzera (fixed 2026-08-10, no anchors to restore) and frontaliere
+ * (fixed 2026-08-11, anchors existed in principle and were absent in 27 of 30
+ * measured runs). Both times a test in this file asserted the broken state as
+ * the contract. So the last-resort restore is now pinned per-section, over the
+ * sections declared in ARTICLE_SECTION_CONFIGS rather than a hardcoded pair,
+ * plus a source guard that the condition carries no section predicate at all.
+ *
  * ADAPTATION, same as blog-title-casing.test.mjs: `import`ing
  * create-article.mjs is impossible in this repo's CI (no node_modules — its
  * closure pulls sharp/undici/…). `applyPreSpendTopicGate` is self-contained
@@ -175,29 +187,156 @@ test('svizzera: pool fully rejected, no anchor set → section backstop restores
   assert.equal(runReport.headlines.preSpendGateBackstopRestored, 3);
 });
 
-// The section backstop is a floor for a section that has no anchors, NOT a
-// second chance for the frontaliere branch. If it leaked there it would undo
-// the D-backstop's precision: frontaliere restores only anchor-matched
-// candidates, and REGOLA #0 is calibrated on that.
-test('frontaliere: total rejection with no anchor candidate stays empty — the section backstop must not leak', async () => {
+// ── The same failure on the frontaliere section (2026-08-11) ───────────────
+//
+// WHAT THIS TEST USED TO ASSERT, AND WHY THAT WAS WRONG
+//
+// Until 2026-08-11 this read `frontaliere: total rejection with no anchor
+// candidate stays empty — the section backstop must not leak`, and asserted
+// `kept.length === 0 / restored=0 / backstop=none`. The reasoning was that
+// frontaliere already has backstop D, so E would only dilute it. That holds
+// only where `anchor_candidates > 0`, and production said otherwise: over the
+// 24h to 2026-08-11, 27 of 30 frontaliere gate runs printed
+// `anchor_candidates=0 restored=0 backstop=none kept_after=0` — D silent in
+// every one, for the same "nothing to work with" reason it is silent on
+// svizzera. Section quotas over the same window: svizzera 37 news out of 38
+// published (97.4%), frontaliere 2 out of 42 (4.8%).
+//
+// It is the same shape as the svizzera inversion above and the same lesson: a
+// test asserting the exact state the incident consists of cannot also be the
+// thing that catches it. `restored=0 backstop=none` is now a failure on BOTH
+// sections, which is what makes it one alertable predicate instead of two.
+test('frontaliere: total rejection with no anchor candidate → the last-resort backstop restores instead of shipping an empty pool', async () => {
   const { gate, logs, runReport } = makeGate({
     relevant: () => false,
     isFrontaliere: true,
-    topicalHits: () => 5,
+    // Real candidates named in the gate logs of those 27 runs: rejected because
+    // the classifier prompt is scoped ESCLUSIVAMENTE to Ticino-Italia and lists
+    // "Frontalieri di altri confini … non Ticino-Italia" as a non-relevance
+    // rule, which the Grigioni story matches.
+    topicalHits: (t) => (/frontalier/i.test(t) ? 2 : 0),
   });
-  const kept = await gate(hl('Festival del film di Locarno', 'Incidente sulla A2'));
+  const kept = await gate(hl(
+    'Festival del film di Locarno',
+    'Grigioni: scende ancora il numero di frontalieri',
+    'Incidente sulla A2',
+  ));
 
-  assert.equal(kept.length, 0);
+  assert.equal(kept.length, 3, 'the last-resort backstop must restore on frontaliere too');
+  assert.equal(
+    kept[0].headline,
+    'Grigioni: scende ancora il numero di frontalieri',
+    'restore is ranked by topical hits, not pool order',
+  );
+
   const line = totalRejectionLine(logs);
-  assert.match(line, /\brestored=0\b/);
-  assert.match(line, /\bbackstop=none\b/);
-  assert.equal(runReport.headlines.preSpendGateBackstopRestored, 0);
+  assert.ok(line, 'a rejection the backstop repaired is still a total rejection and must be recorded');
+  assert.match(line, /\banchor_candidates=0\b/, 'the field still explains why the ANCHOR backstop was silent');
+  assert.match(line, /\brestored=3\b/, 'the frontaliere section must no longer reach generation with an empty pool');
+  assert.match(line, /\bbackstop=topical\b/, 'and the record must name which backstop answered');
+  assert.match(line, /\bkept_after=3\b/);
+  assert.match(line, /\bsection=frontaliere\b/);
+  assert.equal(runReport.headlines.preSpendGateBackstopRestored, 3);
 });
 
-// The stub above makes the ranking legible but would keep passing if the gate
-// stopped ranking altogether. Pin the wiring against the source.
+// ── The invariant: no section may be excluded from the last-resort restore ──
+//
+// This is the point of the 2026-08-11 change, and the reason it is a test and
+// not a one-line diff. Both incidents so far were the SAME defect discovered
+// twice — a section reaching generation with an empty pool because the only
+// backstop that could have answered was written for the other section — and
+// both times the gate that should have caught it was a test asserting the
+// broken state as the contract.
+//
+// Sections are read from ARTICLE_SECTION_CONFIGS rather than hardcoded, so a
+// third section joins this loop the day it is declared instead of shipping
+// uncovered.
+
+function configuredSections() {
+  const marker = 'export const ARTICLE_SECTION_CONFIGS = {';
+  const start = SRC.indexOf(marker);
+  if (start === -1) {
+    throw new Error(`"${marker}" non trovato in create-article.mjs — aggiornare i delimitatori di questo test`);
+  }
+  const end = SRC.indexOf('\n};', start);
+  if (end === -1) throw new Error('chiusura di ARTICLE_SECTION_CONFIGS non trovata');
+  const names = [...SRC.slice(start, end).matchAll(/^ {2}(\w+): \{$/gm)].map((m) => m[1]);
+  // Two sections exist today. A count below that means the extraction broke and
+  // the loop below would pass vacuously — the exact failure mode this file
+  // guards against everywhere else.
+  if (names.length < 2) {
+    throw new Error(`estratte ${names.length} sezioni da ARTICLE_SECTION_CONFIGS (attese >= 2) — aggiornare questo test`);
+  }
+  if (!names.includes('frontaliere')) {
+    throw new Error(`la sezione "frontaliere" non compare fra ${JSON.stringify(names)} — estrazione rotta`);
+  }
+  return names;
+}
+
+for (const section of configuredSections()) {
+  test(`${section}: a fully rejected pool with no anchor candidate is never handed to generation empty`, async () => {
+    const { gate, logs } = makeGate({
+      relevant: () => false,           // classifier rejects everything
+      anchor: () => null,              // …and backstop D has nothing to restore
+      isFrontaliere: section === 'frontaliere',
+      section,
+      topicalHits: (t) => (/rilevante/i.test(t) ? 2 : 0),
+    });
+    const kept = await gate(hl('Titolo rilevante per la sezione', 'Cronaca qualunque'));
+
+    assert.ok(
+      kept.length > 0,
+      `la sezione "${section}" è esclusa dal restore di ultima istanza: `
+      + 'il pool arriva vuoto alla generazione e la sezione non pubblica notizie. '
+      + 'Vedi il blocco "E — Last-resort section backstop" in create-article.mjs.',
+    );
+    const line = totalRejectionLine(logs);
+    assert.ok(line, 'la rejection totale va comunque registrata');
+    assert.doesNotMatch(
+      line,
+      /\brestored=0\b/,
+      `"restored=0" sulla sezione "${section}" significa che nessun backstop ha risposto`,
+    );
+    assert.doesNotMatch(
+      line,
+      /\bbackstop=none\b/,
+      `"backstop=none" sulla sezione "${section}" significa che nessun backstop ha risposto`,
+    );
+  });
+}
+
+// The behavioural loop above proves the sections that exist today are covered.
+// This pins the SHAPE that keeps it true: the condition itself must carry no
+// section predicate, so re-excluding a section is a visible edit to this line
+// rather than a new branch the loop happens not to reach. Read the condition
+// alone and not the block — the comment above it discusses IS_FRONTALIERE at
+// length, and matching prose would make this guard unfalsifiable.
+function sectionBackstopCondition() {
+  const anchor = GATE_SRC.indexOf('PRESPEND_GATE_SECTION_RESTORE_N');
+  if (anchor === -1) {
+    throw new Error('PRESPEND_GATE_SECTION_RESTORE_N non trovato nel gate — aggiornare i delimitatori di questo test');
+  }
+  const ifStart = GATE_SRC.lastIndexOf('\n  if (', anchor);
+  if (ifStart === -1) throw new Error('condizione del backstop di sezione non trovata');
+  const lineEnd = GATE_SRC.indexOf('\n', ifStart + 1);
+  return GATE_SRC.slice(ifStart + 1, lineEnd);
+}
+
+test('the last-resort backstop condition carries no section predicate', () => {
+  const cond = sectionBackstopCondition();
+  assert.match(cond, /kept\.length === 0/, 'resta un last-resort: entra solo a pool svuotato');
+  assert.match(cond, /headlines\.length > 0/, 'un pool vuoto in ingresso non è una rejection');
+  assert.doesNotMatch(
+    cond,
+    /IS_FRONTALIERE|SECTION_NAME|SECTION\./,
+    `la condizione del backstop di ultima istanza è tornata a dipendere dalla sezione: ${cond.trim()} — `
+    + 'è esattamente la forma che ha tolto il ramo notizie prima alla svizzera (2026-08-10) e poi alla frontaliere (2026-08-11)',
+  );
+});
+
+// The stub in makeGate makes the ranking legible but would keep passing if the
+// gate stopped ranking altogether. Pin the wiring against the source.
 test('the section backstop ranks by countTopicalHits, not by pool order alone', () => {
-  assert.match(GATE_SRC, /!IS_FRONTALIERE/, 'the section backstop must be gated on the section');
   assert.match(GATE_SRC, /countTopicalHits\(/, 'restoring the top-N requires scoring them');
 });
 
