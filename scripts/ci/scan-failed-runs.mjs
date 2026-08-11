@@ -156,12 +156,17 @@ function failedRuns() {
 }
 
 /**
- * Una issue aperta per questo workflow cita già questa run? Se sì l'abbiamo
+ * Una issue aperta con QUESTO titolo cita già questa run? Se sì l'abbiamo
  * gia' contata in una scansione precedente e va saltata, altrimenti il gate
  * conterebbe due volte lo stesso fallimento.
+ *
+ * Prende il titolo intero e non piu' il solo nome del workflow: da quando il
+ * rilevatore qui sotto puo' emettere un titolo per-path invece di
+ * `Workflow Failure: <nome>`, cercare il titolo generico guarderebbe la issue
+ * sbagliata — e l'anti-doppio-conteggio si spegnerebbe in silenzio proprio
+ * sulla classe piu' costosa.
  */
-function alreadyReported(workflowName, runUrl) {
-  const title = `Workflow Failure: ${workflowName}`;
+function alreadyReported(title, runUrl) {
   const raw = gh(
     ['issue', 'list', '--repo', REPO, '--state', 'open', '--search', title, '--json', 'number,title', '--limit', '10'],
     '[]',
@@ -194,6 +199,206 @@ function failedJobs(runId) {
   }
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+ * Rilevatore: "articolo generato e perso" (issue #225)
+ *
+ * La issue generica `Workflow Failure: Generate Blog Article` dice il nome del
+ * workflow e lo step (`Commit and push`). Non dice le due cose che decidono
+ * cosa farne: SU QUALE FILE il push si e' incagliato, e se in quel commit
+ * c'era un articolo intero — LLM, quattro traduzioni DeepL e immagine, tutto
+ * gia' pagato — buttato via. Senza quelle due, nessun fixer puo' prenderla:
+ * misurato sul lotto di #225, quattro fallimenti in 37 ore, quattro con
+ * `ARTICLE: true`, tutti finiti `needs-human`/`fu-parked`.
+ *
+ * Modellato su scripts/ci/report-validate-dist-failure.mjs del sito, che e' il
+ * modello di issue diagnostica ricca di questo progetto. Tre contratti onorati
+ * da li', verificati sui sorgenti e non dedotti:
+ *
+ * - DEDUP: il titolo e' l'unica chiave, e sono i primi 60 caratteri
+ *   (searchSafePrefix in scripts/lib/github-issue-creator.mjs). Il path va
+ *   quindi PRIMO: searchSafePrefix taglia a 60 e, se il taglio spezza una
+ *   parola, butta l'ultimo token — un titolo `<prosa> <path>` con un path
+ *   lungo perde proprio il path e fa collassare percorsi diversi sulla stessa
+ *   issue. Col path in testa il discriminante e' dentro la finestra per
+ *   costruzione. Nessun run id nel titolo: sta nel body (stessa regola di #5121).
+ *
+ * - CLOSER: questo titolo sta deliberatamente FUORI dal TITLE_RE di
+ *   scripts/ci/close-recovered-failure-issues.mjs (che copre solo
+ *   `Workflow|Crawler|CI Failure:`). Non e' una svista: quel reconciler chiude
+ *   sul primo verde successivo, e qui il verde non prova niente — il difetto e'
+ *   un path assente da una allowlist, e resta assente anche mentre le run
+ *   passano. Chiudere sul verde e' esattamente come questa classe e' sparita
+ *   finora senza essere riparata.
+ *
+ * - FIXER: il body CITA il path `.github/workflows/**` apposta. Su questo repo
+ *   la allowlist di bookkeeping vive dentro il workflow, e il PAT del fixer non
+ *   ha lo scope `workflow`: scripts/ci/check-workflows-scope.mjs (Mode 1)
+ *   riconosce il path nel body e corto-circuita PRIMA di avviare Claude,
+ *   spendendo zero token invece di ~1M per una fix che non potrebbe pushare.
+ *   Nominarlo e' quindi il modo giusto di instradarla, non un errore.
+ * ────────────────────────────────────────────────────────────────────────── */
+
+// Prefisso dei log di GitHub Actions (`job\tstep\t2026-08-11T05:00:18.4631322Z `)
+// e sequenze ANSI. Vanno via prima di mostrare una riga in una issue.
+const ANSI_RE = /\u001b\[[0-9;]*[A-Za-z]/g;
+const LOG_PREFIX_RE = /^(?:[^\t]*\t[^\t]*\t)?\d{4}-\d{2}-\d{2}T[\d:.]+Z ?/;
+
+export function cleanLogLine(line) {
+  return String(line).replace(/\r$/, '').replace(ANSI_RE, '').replace(LOG_PREFIX_RE, '').trimEnd();
+}
+
+// `git rebase` quando il conflitto e' reale.
+const CONFLICT_RE = /CONFLICT \([^)]*\): Merge conflict in (\S.*)$/;
+// L'avviso di scripts/lib/rebase-onto-remote.sh: e' IL path che ha fatto
+// abortire, non uno qualunque del set in conflitto.
+const NOT_BOOKKEEPING_RE = /rebase conflict on '([^']+)', which is not a whole-file bookkeeping cache/;
+// L'errore vero emesso dallo step, non l'eco dello script che GitHub stampa a
+// ogni avvio dello step (quella riga c'e' anche quando il push riesce).
+const PUSH_EXHAUSTED_RE = /##\[error\]push failed after \d+ attempts/;
+// `ARTICLE: true` e' il dump dell'env dello step di summary, cioe' il valore
+// vero di steps.generate.outputs.article. `ENABLE_HAIKU_ARTICLE_FALLBACK: true`
+// non matcha: serve `ARTICLE:` preceduto da inizio riga o spazio.
+const ARTICLE_TRUE_RE = /(?:^|\s)ARTICLE:\s+true\b/m;
+// Corroborazione dentro lo step fallito stesso: il rebase nomina il commit che
+// ha rinunciato ad applicare, e il titolo del commit dice se era un articolo.
+const DROPPED_ARTICLE_COMMIT_RE = /could not apply [0-9a-f]+\.{3}\s*Generate blog article/i;
+
+/** Path in conflitto trovati nel log, in ordine di prima comparsa, senza duplicati. */
+export function conflictedPathsFromLog(text) {
+  const seen = new Set();
+  for (const raw of String(text || '').split('\n')) {
+    const line = cleanLogLine(raw);
+    const m = NOT_BOOKKEEPING_RE.exec(line) || CONFLICT_RE.exec(line);
+    if (m) seen.add(m[1].trim());
+  }
+  return [...seen];
+}
+
+/**
+ * Il path su cui il rebase si e' arreso. E' quello nominato dall'avviso
+ * dell'helper quando c'e' — gli altri path in conflitto possono essere
+ * bookkeeping gia' risolvibile — altrimenti il primo in ordine alfabetico, che
+ * e' l'ordine in cui `git diff --diff-filter=U` li presenta all'helper.
+ */
+export function blockingConflictPath(text) {
+  for (const raw of String(text || '').split('\n')) {
+    const m = NOT_BOOKKEEPING_RE.exec(cleanLogLine(raw));
+    if (m) return m[1].trim();
+  }
+  const all = conflictedPathsFromLog(text).sort();
+  return all[0] || null;
+}
+
+/** Il commit conteneva un articolo generato per intero? */
+export function articleWasGenerated(text) {
+  const s = String(text || '');
+  return ARTICLE_TRUE_RE.test(s) || DROPPED_ARTICLE_COMMIT_RE.test(s);
+}
+
+/** Il loop di retry del push ha esaurito i tentativi? */
+export function pushRetriesExhausted(text) {
+  return PUSH_EXHAUSTED_RE.test(String(text || ''));
+}
+
+/**
+ * Il titolo. Path PRIMO — vedi la nota DEDUP sopra: e' l'unica forma in cui il
+ * discriminante sopravvive al taglio a 60 caratteri anche per un path lungo.
+ * Stabile a parita' di path: nessun run id, nessun conteggio.
+ */
+export function lostArticleTitle(conflictPath) {
+  return `${conflictPath}: articolo generato e perso nel push`;
+}
+
+/** Le righe del log che spiegano il fallimento, ripulite e senza ripetizioni. */
+export function diagnosticExcerpt(text, max = 12) {
+  const out = [];
+  const seen = new Set();
+  for (const raw of String(text || '').split('\n')) {
+    const line = cleanLogLine(raw);
+    if (!CONFLICT_RE.test(line) && !NOT_BOOKKEEPING_RE.test(line) && !PUSH_EXHAUSTED_RE.test(line)) continue;
+    if (seen.has(line)) continue;
+    seen.add(line);
+    out.push(line);
+    if (out.length >= max) break;
+  }
+  return out;
+}
+
+/**
+ * Costruisce titolo e body ricchi, oppure `null` se questa run non e' della
+ * classe. Puro: prende il log gia' scaricato, non tocca la rete.
+ */
+export function buildLostArticleReport({ log, run, workflowName, workflowPath, jobLines }) {
+  if (!pushRetriesExhausted(log) || !articleWasGenerated(log)) return null;
+  const conflictPath = blockingConflictPath(log);
+  if (!conflictPath) return null;
+
+  const allPaths = conflictedPathsFromLog(log);
+  const excerpt = diagnosticExcerpt(log);
+  const wfPath = workflowPath || '.github/workflows/';
+
+  const description = [
+    `**Un articolo generato per intero e' stato buttato via.** Il commit conteneva l'articolo`,
+    "(`ARTICLE: true`), il push e' stato rifiutato, il rebase si e' fermato su un conflitto e lo step e'",
+    'morto su "the article is registered locally but not pushed". LLM, quattro traduzioni e immagine',
+    "erano gia' pagati.",
+    '',
+    `- Path che ha bloccato il rebase: \`${conflictPath}\``,
+    allPaths.length > 1 ? `- Tutti i path in conflitto: ${allPaths.map((p) => `\`${p}\``).join(', ')}` : null,
+    `- Run: ${run.url}`,
+    `- Branch: \`${run.headBranch || '?'}\``,
+    `- Evento: \`${run.event || '?'}\``,
+    `- Concluso: ${run.updatedAt || run.createdAt}`,
+    '',
+    '**Job falliti**',
+    jobLines,
+    '',
+    '**Estratto del log**',
+    '',
+    '```',
+    ...(excerpt.length ? excerpt : ['(nessuna riga diagnostica estratta)']),
+    '```',
+    '',
+    '## Suggested action',
+    '',
+    `1. Decidere che cos'e' \`${conflictPath}\`. Se e' una cache rigenerabile riscritta per intero a ogni`,
+    "   run (un catalogo, un ledger di dedup, un file di progresso), il conflitto si risolve con \"prendi",
+    '   upstream": perdere un aggiornamento costa una rigenerazione, perdere il commit costa l\'articolo.',
+    `2. In quel caso il path va aggiunto alla allowlist di bookkeeping che \`${wfPath}\` passa a`,
+    '   `scripts/lib/rebase-onto-remote.sh`. L\'helper ha gia\' il ramo che risolve cosi\' (issue #76): non',
+    '   serve logica nuova, serve dichiarare che il file appartiene a quella categoria.',
+    '3. Se invece e\' un registro append-only del corpus (`content/blog-articles-data.ts`, `content/blog-meta-*.ts`),',
+    '   "prendi upstream" NON va bene: cancellerebbe il record dell\'articolo. Serve un merge per-record,',
+    '   ed e\' un cambio di forma dei registri — decisione del proprietario, non del fixer.',
+    `4. Il test che prova la scelta sta in \`generator/tests/rebase-onto-remote.test.mjs\`: legge la`,
+    '   allowlist dal workflow e ci fa girare sopra un conflitto vero.',
+    '',
+    '---',
+    '',
+    'Issue aperta automaticamente da `scripts/ci/scan-failed-runs.mjs`. **Non si chiude da sola su una run',
+    'verde**: `close-recovered-failure-issues.mjs` copre solo i titoli `Workflow Failure:`/`CI Failure:`/',
+    "`Crawler Failure:`, e qui un verde non prova niente — il path resta fuori dalla allowlist anche mentre",
+    'le run passano. Si chiude quando la allowlist (o il registro) cambia.',
+  ].filter((l) => l !== null).join('\n');
+
+  return { title: lostArticleTitle(conflictPath), description };
+}
+
+/** Il file YAML da cui la run e' partita, es. `.github/workflows/generate-article.yml`. */
+function workflowPathOfRun(runId) {
+  return gh(['api', `repos/${REPO}/actions/runs/${runId}`, '--jq', '.path'], '') || '';
+}
+
+/**
+ * Log dei job falliti della run. Scaricato SOLO quando uno step fallito si
+ * chiama come un push: e' l'unica classe per cui questo modulo sa dire
+ * qualcosa di piu' della issue generica, e un log per run e' comunque costoso.
+ */
+function failedRunLog(runId, jobs) {
+  if (!jobs.some((j) => /push/i.test(j.step || ''))) return '';
+  return gh(['run', 'view', String(runId), '--repo', REPO, '--log-failed'], '');
+}
+
 async function main() {
   if (!REPO) {
     console.error('[scan-failed-runs] GITHUB_REPOSITORY non impostato — esco senza fare nulla.');
@@ -224,17 +429,29 @@ async function main() {
       break;
     }
 
-    if (alreadyReported(name, run.url)) {
-      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata → skip (evita doppio conteggio nel gate).`);
-      continue;
-    }
-
     const jobs = failedJobs(run.databaseId);
     const jobLines = jobs.length
       ? jobs.map((j) => `- \`${j.name}\`${j.step ? ` — step fallito: \`${j.step}\`` : ''}\n  ${j.url}`).join('\n')
       : '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
 
-    const description = [
+    // Il rilevatore ricco gira PRIMA della dedup: e' il titolo che decide quale
+    // issue guardare, e per questa classe il titolo non e' piu' quello generico.
+    const lost = buildLostArticleReport({
+      log: failedRunLog(run.databaseId, jobs),
+      run,
+      workflowName: name,
+      workflowPath: workflowPathOfRun(run.databaseId),
+      jobLines,
+    });
+
+    const title = lost ? lost.title : `Workflow Failure: ${name}`;
+
+    if (alreadyReported(title, run.url)) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} già segnalata → skip (evita doppio conteggio nel gate).`);
+      continue;
+    }
+
+    const description = lost ? lost.description : [
       `Il workflow **${name}** è fallito.`,
       '',
       `- Run: ${run.url}`,
@@ -251,21 +468,25 @@ async function main() {
     ].join('\n');
 
     if (DRY_RUN) {
-      console.log(`[scan-failed-runs] (dry-run) aprirei: "Workflow Failure: ${name}" — run ${run.url}`);
+      console.log(`[scan-failed-runs] (dry-run) aprirei: "${title}" — run ${run.url}`);
       opened++;
       continue;
     }
 
     const res = await createGithubIssue({
-      title: `Workflow Failure: ${name}`,
+      title,
       description,
-      priority: 2,
+      // Un articolo intero buttato via non e' un blip: e' la perdita piu' cara
+      // per unita' della pipeline, ed e' gia' successa quando la issue si apre.
+      priority: lost ? 1 : 2,
       labels: ['Bug'],
       workflow: name,
       // Il primo blip resta una briciola priority:low; solo la ripetizione
       // dentro la finestra escala. È ciò che tiene fuori dal triage il rumore
-      // transiente della generazione articoli.
-      consecutiveGate: GATE,
+      // transiente della generazione articoli. Non vale per un articolo perso:
+      // `-1` disattiva il gate (vedi consecutiveGate in github-issue-creator.mjs),
+      // perche' aspettare la terza perdita significa buttarne tre.
+      consecutiveGate: lost ? -1 : GATE,
     });
     if (res) opened++;
   }

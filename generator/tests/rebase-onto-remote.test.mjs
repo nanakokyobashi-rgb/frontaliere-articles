@@ -21,14 +21,16 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.resolve(HERE, '../../scripts/lib/rebase-onto-remote.sh');
+const WORKFLOW = path.resolve(HERE, '../../.github/workflows/generate-article.yml');
 const BOOKKEEPING = 'data/topic-candidates-evergreen-rejected.json';
+const IMAGE_CATALOG = 'public/data/journalist-image-catalog.json';
 
 const GIT_ENV = {
   ...process.env,
@@ -230,6 +232,92 @@ test('a plain divergence with no conflict rebases cleanly', () => {
     const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING);
     assert.equal(code, 0, `the ordinary path must keep working, got:\n${out}`);
     git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+  } finally {
+    w.cleanup();
+  }
+});
+
+/**
+ * Reads the paths generate-article.yml ACTUALLY passes to the helper.
+ *
+ * The tests below deliberately do not hard-code an allowlist: the helper has
+ * been able to resolve a bookkeeping conflict since #88, and the four runs lost
+ * to issue #225 were not a bug in it — they were a path MISSING from what the
+ * caller declared. Only the caller's own argument list can prove that, so the
+ * one place that can regress is the one the assertion reads.
+ */
+function allowlistFromWorkflow(yamlText) {
+  const lines = yamlText.split('\n');
+  const start = lines.findIndex((l) => l.includes('bash scripts/lib/rebase-onto-remote.sh'));
+  if (start === -1) return [];
+  const paths = [];
+  for (let i = start; i < lines.length; i++) {
+    const line = lines[i];
+    for (const token of line.replace(/\\\s*$/, '').trim().split(/\s+/)) {
+      if (/^[\w./-]+\.(?:json|ts|mjs)$/.test(token)) paths.push(token);
+    }
+    if (!/\\\s*$/.test(line)) break; // the shell continuation ended
+  }
+  return paths;
+}
+
+test('generate-article.yml declares the journalist image catalog as bookkeeping', () => {
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  assert.ok(allowlist.length >= 3, `could not parse the allowlist out of the workflow, got: ${JSON.stringify(allowlist)}`);
+  assert.ok(
+    allowlist.includes(IMAGE_CATALOG),
+    `${IMAGE_CATALOG} must stay on the allowlist: generate-journalist-image-catalog.mjs derives the file `
+    + 'entirely from the filenames under public/images/blog/ and rewrites it as ONE JSON.stringify line, so two '
+    + `runs that add an image always conflict on it. Off the list the helper aborts and the run dies on "the `
+    + `article is registered locally but not pushed" (issue #225, run 31459831234). Got: ${JSON.stringify(allowlist)}`,
+  );
+  // The two originals are asserted too: this list is edited by appending, and a
+  // rewrite that silently drops one would reopen issue #76 without failing here.
+  assert.ok(allowlist.includes(BOOKKEEPING), `${BOOKKEEPING} must stay on the allowlist (issue #76)`);
+  assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
+});
+
+test('a conflict on the journalist image catalog resolves instead of aborting', () => {
+  // Driven with the allowlist READ FROM THE WORKFLOW, not a literal: what this
+  // pins is that the real caller declares the path, not that the helper can
+  // resolve one when told to (the tests above already prove that).
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const w = makeWorld();
+  try {
+    // Seed the catalog into the base both runs start from — the real file is
+    // committed and rewritten in place, not created fresh on each run.
+    write(w.work, IMAGE_CATALOG, '[{"path":"/images/blog/base.webp","words":["base"]}]');
+    commitAll(w.work, 'seed the image catalog');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+
+    // A concurrent run publishes its own article and appends its image.
+    landUpstream(w, [[
+      IMAGE_CATALOG,
+      '[{"path":"/images/blog/base.webp","words":["base"]},{"path":"/images/blog/altrui.webp","words":["altrui"]}]',
+      'concurrent run appends its own hero image',
+    ]]);
+
+    // This run: a fully generated article — LLM, four translations, hero image
+    // — plus its own append to the same single-line JSON.
+    write(w.work, IMAGE_CATALOG, '[{"path":"/images/blog/base.webp","words":["base"]},{"path":"/images/blog/mio.webp","words":["mio"]}]');
+    write(w.work, 'public/images/blog/mio.webp', 'RIFF-fake\n');
+    write(w.work, 'content/blog-body/it/articolo-costoso.ts', 'export const a = 1\n');
+    commitAll(w.work, 'Generate blog article (svizzera)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...allowlist);
+    assert.equal(code, 0, `the helper must resolve this conflict, not abort. Got:\n${out}`);
+    assert.match(out, /resolved bookkeeping conflict by taking upstream: public\/data\/journalist-image-catalog\.json/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.ok(
+      existsSync(path.join(w.work, 'content/blog-body/it/articolo-costoso.ts')),
+      'the generated article must survive — an article thrown away is what issue #225 measured 4 times in 37h',
+    );
+    // The image itself is a distinct path, so it lands even though the catalog
+    // entry naming it was resolved to upstream's copy. A full rescan
+    // (generate-journalist-image-catalog.mjs) rebuilds the entry from it.
+    assert.ok(existsSync(path.join(w.work, 'public/images/blog/mio.webp')), 'the hero image must survive too');
+    assert.match(git(w.work, 'show', `HEAD:${IMAGE_CATALOG}`), /altrui/, 'the catalog must end up as upstream wrote it');
   } finally {
     w.cleanup();
   }

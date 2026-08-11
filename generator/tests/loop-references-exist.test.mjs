@@ -193,6 +193,16 @@ const DECLARED_ABSENT = {
       'La consolidazione dei crawler-group e\' del sito; qui non esistono crawler group. ' +
       'Citata per spiegare perche\' i nomi dei workflow cambiano sotto i piedi.',
   },
+  'scripts/ci/scan-failed-runs.mjs :: scripts/ci/report-validate-dist-failure.mjs': {
+    kind: 'site-only',
+    reason:
+      'Citato come MODELLO: e\' il reporter di issue diagnostica ricca del sito, e i tre ' +
+      'contratti che il rilevatore «articolo generato e perso» onora (dedup sul titolo, ' +
+      'esclusione dal closer, path dei workflow nel body per il capability guard) sono ' +
+      'documentati la\'. Descrittiva: qui non lo chiama nessuno e niente dipende dalla sua ' +
+      'esistenza — il rilevatore e\' autonomo e testato da ' +
+      '`generator/tests/scan-failed-runs-filter.test.mjs`.',
+  },
   'scripts/lib/cf-analytics.mjs :: scripts/cf-status-report.mjs': {
     kind: 'site-only',
     reason: 'Elenco «chi consuma questo modulo»: consumatori del sito. Nessuna dipendenza qui.',

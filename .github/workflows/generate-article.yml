@@ -533,15 +533,36 @@ jobs:
             fi
             echo "push attempt $attempt failed — rebasing onto $TARGET"
             # A conflict here is routinely NOT transient: this job rewrites the
-            # two bookkeeping caches below in full on every run, so two runs
+            # bookkeeping caches below in full on every run, so two runs
             # started from different bases conflict for real and all five
             # attempts then fail identically (issue #76). The helper takes
             # upstream's copy when the conflict is confined to those caches and
             # lets the rebase finish, so the commit — and the article in it —
             # survives. Any other conflicting path still aborts, as before.
+            #
+            # public/data/journalist-image-catalog.json joined the list on
+            # 2026-08-11 (issue #225). It belongs to the same category by
+            # construction, not by convenience: generate-journalist-image-catalog.mjs
+            # DERIVES it entirely from the filenames under public/images/blog/
+            # ("Run directly to do a full rescan"), and appendCatalogEntry()
+            # rewrites the whole file as a single JSON.stringify line with no
+            # newline — so any two runs that add an image conflict textually on
+            # that one line, every time. It was NOT on the list, so the helper
+            # aborted exactly as designed, five times, and the run died on
+            # "the article is registered locally but not pushed" with
+            # steps.generate.outputs.article == true. Measured over the 37h to
+            # 2026-08-11: 4 failures of this workflow, 4 with a fully generated
+            # article — LLM, four DeepL translations and the hero image all
+            # already paid for — thrown away. Run 31459831234 is the one that
+            # conflicted on this path.
+            #
+            # Taking upstream costs one catalog entry (the new image's), and the
+            # image file itself still lands in the commit; a full rescan restores
+            # it. Losing the commit costs the whole article.
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
-              data/blog-images-used.json || true
+              data/blog-images-used.json \
+              public/data/journalist-image-catalog.json || true
             sleep $((attempt * 3))
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"
