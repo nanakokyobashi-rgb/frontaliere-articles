@@ -679,7 +679,17 @@ function validateFaq(faq) {
 /** Replace existing FAQ value in a body file */
 function replaceFaqInBodyFile(filePath, faqArray) {
   let content = read(filePath);
-  const jsonStr = JSON.stringify(faqArray).replace(/'/g, "\\'");
+  // `escapeForSingleQuoteTS`, non una `.replace()` a mano: quella escapava
+  // l'apostrofo e NON il backslash, quindi il `\"` che JSON.stringify produce
+  // per ogni virgoletta finiva verbatim nel literal TS, il parser TS lo leggeva
+  // come `"` e il documento JSON si spaccava. Il percorso di INSERT qui sotto
+  // usava gia' la funzione giusta: solo questo di REPLACE era rimasto indietro.
+  //
+  // La validazione post-scrittura qui sotto non lo vedeva e non poteva vederlo:
+  // controlla la sintassi JS del file, e un literal TS con un backslash di
+  // troppo e' sintatticamente perfetto. Il difetto e' nel LIVELLO ANNIDATO, e
+  // si manifesta solo quando qualcun altro fa JSON.parse del valore.
+  const jsonStr = escapeForSingleQuoteTS(JSON.stringify(faqArray));
   // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime — a duplicate `.faq` key resolves to the last one in a JS
