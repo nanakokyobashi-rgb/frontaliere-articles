@@ -254,7 +254,10 @@
     "frontaliere bonus famiglia 2026",
     "frontaliere detrazioni fiscali Italia 2026",
     "frontaliere lavoro stagionale Ticino",
-    "frontaliere trasporto pubblico abbonamenti sconti"
+    "frontaliere trasporto pubblico abbonamenti sconti",
+    "frontaliere pensione complementare terzo pilastro",
+    "frontaliere spese sanitarie rimborsabili Italia",
+    "borse di studio canton Zurigo requisiti e importi"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -391,6 +394,7 @@
     "frontaliere bonus famiglia 2026": 1,
     "frontaliere detrazioni fiscali Italia 2026": 1,
     "frontaliere pensione complementare terzo pilastro": 1,
-    "frontaliere spese sanitarie rimborsabili Italia": 1
+    "frontaliere spese sanitarie rimborsabili Italia": 1,
+    "telelavoro frontalieri 2026": 1
   }
 }
