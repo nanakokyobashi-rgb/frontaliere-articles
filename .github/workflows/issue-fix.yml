@@ -320,6 +320,7 @@ jobs:
                ## Non implementato (ancora)
                - <scope non fatto + stato: in questa PR / PR concatenata #N / blocked: <causa>>
                ```
+               **Eccezione — fix provabile solo da una run su `main`.** Se QUESTA PR tocca `.github/workflows/**` o la config dell'action Claude (`claude_args`, `settings`, sandbox, `permissionMode`, `github_token`) per un bug osservabile solo a runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — nessun test né lettura del diff può dimostrare che il fix funziona, solo una run reale — **non usare `Closes #$ISSUE_NUMBER`**: usa `Refs #$ISSUE_NUMBER` e, dopo l'apertura della PR, `gh issue edit $ISSUE_NUMBER --add-label awaiting-production-proof`. Dettagli in `ISSUES.md` → "Fix flow".
             10. La PR entra da sola nel ciclo di review e auto-merge. **NON mergiare a mano.**
 
             **Vincoli:**
