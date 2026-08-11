@@ -243,6 +243,42 @@ function failedJobs(runId) {
  *   riconosce il path nel body e corto-circuita PRIMA di avviare Claude,
  *   spendendo zero token invece di ~1M per una fix che non potrebbe pushare.
  *   Nominarlo e' quindi il modo giusto di instradarla, non un errore.
+ *
+ *   MA nominarlo non basta, e la prima stesura di questo body lo dimostrava.
+ *   `detectWorkflowScoped()` (scripts/lib/workflow-scope-detect.mjs) e'
+ *   ESCLUSIVO per costruzione: cita >=1 workflow E **zero** path di codice
+ *   non-workflow. Un solo `<dir>/<file>.<ext>` sotto una delle cartelle di
+ *   `CODE_PATH_RE` (`scripts`, `src`, `services`, `build`, ...) riapre la
+ *   valvola "la fix potrebbe stare li'" e il verdetto torna `false`. Il body
+ *   ne aveva due — l'helper di rebase nel punto 2 e la firma dell'auto-filer
+ *   in fondo — quindi Mode 1 NON corto-circuitava e il fixer partiva lo
+ *   stesso: esattamente il costo che questa citazione dice di evitare.
+ *   Misurato eseguendo il detector sul body reale: `false` sia con la copia di
+ *   questo repo sia con quella del sito post-#5599.
+ *
+ *   La #231 ha ristabilito il verdetto TOGLIENDO i nomi: «l'helper di rebase in
+ *   scripts/lib/ (nome file omesso qui apposta…)», «dallo scanner delle run
+ *   fallite», «il reconciler che chiude in automatico». Verdetto giusto, prezzo
+ *   sbagliato: il `## Suggested action` esiste per dire A UN UMANO che cosa
+ *   aprire, e al punto 2 gli spiegava perche' non glielo diceva. Nella stessa
+ *   riscrittura sono spariti anche `close-recovered-failure-issues.mjs` e il
+ *   nome dell'auto-filer, che non erano nemmeno il problema: senza cartella
+ *   davanti `CODE_PATH_RE` non li vedeva.
+ *
+ *   Il rimedio che tiene tutte e due le cose: scrivere ogni referente che NON e'
+ *   un fix target come **nome file + cartella separati**
+ *   (`` `rebase-onto-remote.sh` ``, sotto `` `scripts/lib/` ``) invece che come
+ *   path unico. `CODE_PATH_RE` vuole cartella ed estensione ATTACCATE, quindi
+ *   nessuna delle due meta' matcha da sola, mentre `git ls-files | grep` le
+ *   trova entrambe. L'unico path scritto per intero resta il fix target vero,
+ *   che e' il workflow. La #5599 aveva coperto la stessa trappola per le issue
+ *   `Workflow Failure:`/`CI Failure:` con `isMonitorFiledWorkflowFailure()`,
+ *   che pero' aggancia sul PREFISSO DEL TITOLO: questo titolo sta apposta
+ *   fuori da quei prefissi (vedi CLOSER sopra), quindi quella scorciatoia qui
+ *   non scatta e l'invariante va tenuta a mano — pinnata dal test
+ *   "il body della issue ricca e' esclusivamente workflow-scoped" in
+ *   generator/tests/scan-failed-runs-filter.test.mjs, che chiama il detector
+ *   vero sul body vero.
  * ────────────────────────────────────────────────────────────────────────── */
 
 // Prefisso dei log di GitHub Actions (`job\tstep\t2026-08-11T05:00:18.4631322Z `)
@@ -344,6 +380,15 @@ export function buildLostArticleReport({ log, run, workflowName, workflowPath, j
   const excerpt = diagnosticExcerpt(log);
   const wfPath = workflowPath || '.github/workflows/';
 
+  // ⚠ INVARIANTE DI ROUTING — vedi la nota FIXER in testa al file.
+  // L'unico path completo `<cartella>/<file>.<ext>` ammesso qui dentro e' il
+  // workflow (`wfPath`): e' il fix target vero, ed e' cio' che fa corto-
+  // circuitare check-workflows-scope.mjs Mode 1 senza spendere token. Ogni
+  // altro referente va scritto come nome file e cartella SEPARATI
+  // (`` `x.mjs` ``, sotto `` `scripts/ci/` ``), altrimenti CODE_PATH_RE lo
+  // legge come possibile fix target e il corto-circuito salta in silenzio.
+  // Il test "il body della issue ricca e' esclusivamente workflow-scoped"
+  // chiama il detector vero su questo body: se qui rientra un path, diventa rosso.
   const description = [
     `**Un articolo generato per intero e' stato buttato via.** Il commit conteneva l'articolo`,
     "(`ARTICLE: true`), il push e' stato rifiutato, il rebase si e' fermato su un conflitto e lo step e'",
@@ -372,21 +417,19 @@ export function buildLostArticleReport({ log, run, workflowName, workflowPath, j
     "   run (un catalogo, un ledger di dedup, un file di progresso), il conflitto si risolve con \"prendi",
     '   upstream": perdere un aggiornamento costa una rigenerazione, perdere il commit costa l\'articolo.',
     `2. In quel caso il path va aggiunto alla allowlist di bookkeeping che \`${wfPath}\` passa`,
-    "   all'helper di rebase in scripts/lib/ (nome file omesso qui apposta: citarlo per intero",
-    "   farebbe scattare il rilevatore di riferimenti a codice non-workflow e romperebbe il",
-    "   corto-circuito Mode 1 di check-workflows-scope.mjs). L'helper ha gia' il ramo che risolve",
-    "   cosi' (issue #76): non serve logica nuova, serve dichiarare che il file appartiene a quella",
-    '   categoria.',
-    '3. Se invece e\' un registro append-only del corpus (`content/blog-articles-data.ts`, `content/blog-meta-*.ts`),',
-    '   "prendi upstream" NON va bene: cancellerebbe il record dell\'articolo. Serve un merge per-record,',
-    '   ed e\' un cambio di forma dei registri — decisione del proprietario, non del fixer.',
-    `4. Il test che prova la scelta sta in \`generator/tests/rebase-onto-remote.test.mjs\`: legge la`,
+    '   all\'helper di rebase — file `rebase-onto-remote.sh`, sotto `scripts/lib/`. L\'helper ha gia\' il',
+    '   ramo che risolve cosi\' (issue #76): non serve logica nuova, serve dichiarare che il file',
+    '   appartiene a quella categoria.',
+    '3. Se invece e\' un registro append-only del corpus (`blog-articles-data.ts`, `blog-meta-*.ts`, sotto',
+    '   `content/`), "prendi upstream" NON va bene: cancellerebbe il record dell\'articolo. Serve un merge',
+    '   per-record, ed e\' un cambio di forma dei registri — decisione del proprietario, non del fixer.',
+    '4. Il test che prova la scelta e\' `rebase-onto-remote.test.mjs`, sotto `generator/tests/`: legge la',
     '   allowlist dal workflow e ci fa girare sopra un conflitto vero.',
     '',
     '---',
     '',
-    "Issue aperta automaticamente dallo scanner delle run fallite. **Non si chiude da sola su una run",
-    'verde**: il reconciler che chiude in automatico copre solo i titoli `Workflow Failure:`/`CI Failure:`/',
+    'Issue aperta automaticamente da `scan-failed-runs.mjs`, sotto `scripts/ci/`. **Non si chiude da sola su',
+    'una run verde**: `close-recovered-failure-issues.mjs` copre solo i titoli `Workflow Failure:`/`CI Failure:`/',
     "`Crawler Failure:`, e qui un verde non prova niente — il path resta fuori dalla allowlist anche mentre",
     'le run passano. Si chiude quando la allowlist (o il registro) cambia.',
   ].filter((l) => l !== null).join('\n');
