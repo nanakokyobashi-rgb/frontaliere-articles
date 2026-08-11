@@ -9748,6 +9748,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.telelavoro-frontalieri.title': 'Il telelavoro per i frontalieri: cosa cambia e cosa fare',
     'blog.article.telelavoro-frontalieri.excerpt': 'Il nuovo accordo frontalieri 2024 introduce nuove regole per il telelavoro. Scopri cosa cambia e come funziona',
     'blog.article.telelavoro-frontalieri.imageAlt': 'Il telelavoro e\' un\'opportunità per i frontalieri',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'Una mozione per un Fondo cantonale per la mobilità sostenibile',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'Un gruppo di deputati ha presentato una mozione per istituire un Fondo cantonale per la mobilità sostenibile.',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'Un nuovo fondo per la mobilità sostenibile in Ticino.',
 };
 
 export default blogMetaIt;

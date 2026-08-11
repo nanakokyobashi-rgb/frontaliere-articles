@@ -9746,6 +9746,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.telelavoro-frontalieri.title': 'Telearbeit für Grenzgänger: Was sich ändert und was zu tun ist',
     'blog.article.telelavoro-frontalieri.excerpt': 'Das neue Grenzabkommen 2024 führt neue Regeln für die Telearbeit ein. Finden Sie heraus, was sich ändert und wie es funktioniert',
     'blog.article.telelavoro-frontalieri.imageAlt': 'Die Fernarbeit ist eine Chance für Grenzgänger',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'Eine Motion für einen kantonalen Fonds für nachhaltige Mobilität',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'Eine Gruppe von Abgeordneten hat eine Motion zur Einrichtung eines kantonalen Fonds für nachhaltige Mobilität eingereicht.',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'Ein neuer kantonalen Fonds für nachhaltige Mobilität in Tessin.',
 };
 
 export default blogMetaDe;

@@ -9747,6 +9747,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.telelavoro-frontalieri.title': 'Teleworking for frontier workers: what changes and what to do',
     'blog.article.telelavoro-frontalieri.excerpt': 'The new 2024 border agreement introduces new rules for teleworking. Find out what\'s changing and how it works',
     'blog.article.telelavoro-frontalieri.imageAlt': 'The telecommuting is an opportunity for frontier workers',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'A motion for a Cantonal Fund for Sustainable Mobility',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'A group of MEPs tabled a motion to establish a Cantonal Fund for Sustainable Mobility.',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'A new cantonal fund for sustainable mobility in Ticino.',
 };
 
 export default blogMetaEn;

@@ -9749,6 +9749,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.telelavoro-frontalieri.title': 'Le télétravail pour les frontaliers : ce qui change et ce qu\'il faut faire',
     'blog.article.telelavoro-frontalieri.excerpt': 'Le nouvel accord frontalier 2024 introduit de nouvelles règles pour le télétravail. Découvrez ce qui change et comment cela fonctionne',
     'blog.article.telelavoro-frontalieri.imageAlt': 'Le télétravail est une opportunité pour les travailleurs frontaliers',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'Une motion pour un fonds cantonal pour la mobilité durable',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'Un groupe de députés a présenté une motion visant à créer un fonds cantonal pour la mobilité durable.',
+    'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'Un nouveau fonds cantonal pour la mobilité durable au Tessin.',
 };
 
 export default blogMetaFr;
