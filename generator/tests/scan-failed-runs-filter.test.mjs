@@ -18,6 +18,7 @@ import {
   buildLostArticleReport,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
+import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
 
 const base = { conclusion: 'failure', createdAt: '2026-08-10T00:00:00Z', updatedAt: '2026-08-10T00:00:00Z' };
 
@@ -173,11 +174,27 @@ test("la issue ricca nomina il path, l'articolo perso e il file da modificare", 
   assert.match(report.description, /articolo generato per intero e' stato buttato via/);
   assert.ok(report.description.includes(RUN.url), 'il run id sta nel body, non nel titolo');
   assert.match(report.description, /## Suggested action/);
-  assert.match(report.description, /scripts\/lib\/rebase-onto-remote\.sh/);
   // Il path del workflow nel body e' voluto: check-workflows-scope.mjs (Mode 1)
   // lo riconosce e ferma il fixer PRIMA di spendere token su una fix che il PAT
   // di questo repo non potrebbe comunque pushare.
   assert.match(report.description, /\.github\/workflows\/generate-article\.yml/);
+});
+
+test('la issue ricca resta esclusivamente workflow-scoped: niente path di codice con estensione nel body', () => {
+  // Il body cita `scripts/lib/rebase-onto-remote.sh` (o l'attribuzione a
+  // scripts/ci/scan-failed-runs.mjs) per esteso, hasNonWorkflowCodeRefs() lo
+  // classifica come riferimento a codice, e isExclusivelyWorkflowScoped()
+  // (Mode 1 di check-workflows-scope.mjs) torna false: il fixer viene
+  // dispatchato per una issue che sa gia' di non poter risolvere (PAT senza
+  // scope `workflow`), spendendo il token che il corto-circuito dovrebbe
+  // evitare.
+  const report = buildLostArticleReport({ ...REPORT_ARGS, log: LOST_ARTICLE_LOG });
+  assert.ok(report);
+  assert.equal(
+    isExclusivelyWorkflowScoped(report.description),
+    true,
+    'il body deve restare riconoscibile come workflow-scoped da Mode 1',
+  );
 });
 
 test("il titolo e' stabile a parita' di path e discrimina dentro i 60 char della dedup", () => {
