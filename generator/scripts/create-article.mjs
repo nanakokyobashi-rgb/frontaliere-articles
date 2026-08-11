@@ -564,11 +564,11 @@ async function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
   const prompt = IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
 
-È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR.
+È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
 
 NON è rilevante:
 - Cronaca dove "frontaliere/transfrontaliero" appare solo come aggettivo (cittadino frontaliere, area frontaliera, comune di confine) senza tema lavorativo/fiscale/permessi
-- Frontalieri di altri confini (Francia-Svizzera, Italia-Slovenia, ecc.) non Ticino-Italia
+- Frontalieri di confini DIVERSI da Italia-Svizzera (Francia-Svizzera, Italia-Slovenia, Germania-Svizzera, ecc.), oppure frontalieri italiani specifici di un altro cantone svizzero non-Ticino (Grigioni, Vallese, ecc.) quando la notizia è limitata esplicitamente a quella regione e non è un dato aggregato nazionale/svizzero
 - Eventi culturali, sportivi, festival, gastronomia (anche se localizzati a Ticino o area di confine)
 - Singoli episodi di cronaca (multe, incidenti, arresti, abbandono rifiuti) senza implicazioni di policy o impatto sui pendolari
 - Infrastruttura italiana lontana dal confine, eventi USA/UE senza impatto pendolare
@@ -6120,6 +6120,8 @@ Prima di scrivere qualunque cosa, valuta se la fonte ha un nesso REALE e VERIFIC
 - Dogane e valichi (Chiasso, Brogeda, Gaggiolo, Ponte Tresa), pendolarismo CH-IT, autostrade A2/A9, traffico transfrontaliero, scioperi/eventi che bloccano i flussi pendolari
 - Mercato del lavoro ticinese, salari/sciopero in aziende che assumono frontalieri, telelavoro frontaliere
 - Accordi bilaterali CH-IT/UE, banche e cambio CHF-EUR, costo della vita Ticino vs Italia di confine
+
+ATTENZIONE: statistiche frontalieri ITALIANI aggregate a livello nazionale/svizzero sono nesso reale anche senza citare il Ticino (ne e' il canton maggioritario) — salvo che siano limitate esplicitamente a un altro cantone (Grigioni, Vallese).
 
 Esempi che NON sono nesso reale: cronaca nera senza nesso lavoro CH (omicidi comuni, sparizioni, processi non-frontalieri), eventi USA/UE/ROW senza impatto pendolare, sport, cultura/intrattenimento non-frontaliero, infrastruttura italiana lontana dal confine (Roma/Napoli/Palermo), eventi a Malpensa SENZA impatto sui voli/transito frontaliero.
 
