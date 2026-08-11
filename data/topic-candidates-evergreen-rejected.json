@@ -212,7 +212,9 @@
     "vivere a Marzio e lavorare in Ticino da frontaliere",
     "vivere a Domodossola e lavorare in Ticino da frontaliere",
     "vivere a Cernobbio e lavorare in Ticino da frontaliere",
-    "vivere a Colverde e lavorare in Ticino da frontaliere"
+    "vivere a Colverde e lavorare in Ticino da frontaliere",
+    "trasferirsi a Colverde da frontaliere pro e contro",
+    "vivere a Domaso e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -321,6 +323,9 @@
     "vivere a Tronzano Lago Maggiore e lavorare in Ticino da frontaliere": 2,
     "trasferirsi a Uggiate-Trevano da frontaliere pro e contro": 1,
     "vivere a Marzio e lavorare in Ticino da frontaliere": 1,
-    "trasferirsi a Colverde da frontaliere pro e contro": 1
+    "trasferirsi a Colverde da frontaliere pro e contro": 1,
+    "trasferirsi a Domaso da frontaliere pro e contro": 1,
+    "vivere a Bisuschio e lavorare in Ticino da frontaliere": 1,
+    "trasferirsi a Bisuschio da frontaliere pro e contro": 1
   }
 }
