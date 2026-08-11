@@ -1234,11 +1234,11 @@
     {
       "path": "scripts/lib/cf-analytics.mjs",
       "mode": "identical",
-      "reason": "Client GraphQL Cloudflare Analytics. **Oggi i due lati NON coincidono**, e la registrazione lo dichiara apposta: il blob qui e' identico a `valerielinc-ops@be6b31d5:scripts/lib/cf-analytics.mjs`, cioe' e' la copia del trasporto del 2026-08-02 mai piu' toccata; il sito ha aggiunto `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` il 2026-08-05. Non e' un adattamento, e' ritardo: `identical` fa emergere il caso come `undeclared-drift` invece di lasciarlo muto.",
+      "reason": "Client GraphQL Cloudflare Analytics. RIALLINEATO 2026-08-11 (issue #234): portato `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY`, aggiunti sul sito il 2026-08-05 e mai scesi da allora — il blob qui era ancora la copia del trasporto del 2026-08-02. Byte-identico al sito da questo commit.",
       "baseline": {
         "site": "4e3a87aedeb3b4c0",
-        "corpus": "a0ac96009b459a53",
-        "alignedAt": "2026-08-09"
+        "corpus": "4e3a87aedeb3b4c0",
+        "alignedAt": "2026-08-11"
       }
     },
     {
@@ -1254,11 +1254,11 @@
     {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
-      "reason": "Push con retry usato dai job che scrivono sugli shard. **Oggi i due lati NON coincidono** e la ragione e' la stessa di cf-analytics.mjs: il blob qui e' identico a `be6b31d5`, il sito ha aggiunto dopo le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Nota che gia' oggi registra `merge.compat-shard.driver` puntando a `scripts/ci/merge-compat-shard.mjs`, che qui non esiste — innocuo perche' il comando finisce in `|| true` e nessun `.gitattributes` locale marca quei path.",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO 2026-08-11 (issue #234): portate le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`, aggiunte sul sito dopo la baseline precedente. Stesso pattern gia' accettato per `merge.compat-shard.driver`: i tre script `scripts/ci/merge-*.mjs` che questi driver invocano non esistono qui, ma i comandi finiscono in `|| true` e nessun `.gitattributes` locale marca quei path, quindi la registrazione e' innocua finche' i gemelli non atterrano. Byte-identico al sito da questo commit.",
       "baseline": {
         "site": "643a10e4815e38bc",
-        "corpus": "7dea1006a6223cc2",
-        "alignedAt": "2026-08-09"
+        "corpus": "643a10e4815e38bc",
+        "alignedAt": "2026-08-11"
       }
     },
     {
@@ -1905,11 +1905,11 @@
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",
-      "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. **Oggi i due lati NON coincidono, e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, cioe' alla copia del trasporto del 2026-08-02, mentre il sito ha aggiunto il 2026-08-05 (21e2d13d) `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`. Registrarlo `adapted` avrebbe dichiarato deliberato un ritardo: `identical` lo fa uscire come `undeclared-drift`, che e' la verita'.",
+      "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. RIALLINEATO 2026-08-11 (issue #234): portati `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`, aggiunti sul sito il 2026-08-05 (21e2d13d) e mai scesi da allora. Byte-identico al sito da questo commit.",
       "baseline": {
         "site": "d15cfe455f5879b5",
-        "corpus": "2cc826c9a6ed57d7",
-        "alignedAt": "2026-08-09"
+        "corpus": "d15cfe455f5879b5",
+        "alignedAt": "2026-08-11"
       }
     },
     {
@@ -2211,11 +2211,11 @@
       "path": "host/shared/localeEmitFilter.ts",
       "sitePath": "build-plugins/shared/localeEmitFilter.ts",
       "mode": "identical",
-      "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. **Oggi i due lati NON coincidono e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, il sito ha corretto dopo (#5327) il caso `dist/<loc>.html` — la homepage di locale sta alla RADICE di dist, non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`. Sul sito questo ha prodotto `/en.html` `/de.html` `/fr.html` a 404 in produzione. Qui la correzione non e' mai scesa. `identical` la fa uscire come `undeclared-drift`.",
+      "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. RIALLINEATO 2026-08-11 (issue #234): portata la correzione del sito (#5327) per `dist/<loc>.html` — la homepage di locale sta alla RADICE di dist, non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`, producendo `/en.html` `/de.html` `/fr.html` a 404 in produzione sul sito. Non usato oggi a runtime in questo repo (nessun importer di `localeOfDistPath`/`shouldEmitPath` fuori da `host/batchWrite.ts`, che qui non e' invocato da `scripts/build-api.mjs`), ma tenuto allineato perche' e' meta' del contratto `SiteShellContract` (AGENTS.md #4). Byte-identico al sito da questo commit.",
       "baseline": {
         "site": "291ab28adf5a0e14",
-        "corpus": "8e14c6e58fd7a46d",
-        "alignedAt": "2026-08-09"
+        "corpus": "291ab28adf5a0e14",
+        "alignedAt": "2026-08-11"
       }
     },
     {
