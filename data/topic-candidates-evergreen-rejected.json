@@ -252,7 +252,9 @@
     "costo auto pendolare frontaliere Ticino",
     "frontaliere acquisto casa mutuo Italia",
     "frontaliere bonus famiglia 2026",
-    "frontaliere detrazioni fiscali Italia 2026"
+    "frontaliere detrazioni fiscali Italia 2026",
+    "frontaliere lavoro stagionale Ticino",
+    "frontaliere trasporto pubblico abbonamenti sconti"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -387,6 +389,8 @@
     "costo auto pendolare frontaliere Ticino": 1,
     "frontaliere acquisto casa mutuo Italia": 1,
     "frontaliere bonus famiglia 2026": 1,
-    "frontaliere detrazioni fiscali Italia 2026": 1
+    "frontaliere detrazioni fiscali Italia 2026": 1,
+    "frontaliere pensione complementare terzo pilastro": 1,
+    "frontaliere spese sanitarie rimborsabili Italia": 1
   }
 }
