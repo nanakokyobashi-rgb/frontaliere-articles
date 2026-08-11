@@ -2065,6 +2065,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.calore-data-center-poco-sfruttato.title': 'Die Wärme von Rechenzentren wird kaum genutzt',
     'blog.article.calore-data-center-poco-sfruttato.excerpt': 'Schweizer Rechenzentren könnten Wärme für die Fernwärme liefern, aber nur ein Drittel nutzt sie.',
     'blog.article.calore-data-center-poco-sfruttato.imageAlt': 'eine Fotografie von einem Datenzentrum in der Schweiz',
+    'blog.article.fit-partnership-2026.title': 'Regeln für den Handel: gemeinsames Engagement',
+    'blog.article.fit-partnership-2026.excerpt': 'Die Schweiz hat die wirtschaftliche Sicherheit und Widerstandsfähigkeit der Lieferketten durch die FIT-PARTNERSCHAFT UNTERSTÜTZT',
+    'blog.article.fit-partnership-2026.imageAlt': 'Ansicht von Lugano mit dem Bundesministerium der Justiz und Polizei in Sicht, mit dem Luganer See im Vordergrund',
+    'blog.article.piano-energetico-climatico-ticino-sfide.title': 'Klimanotstand: Die Debatte um den Tessiner Energieplan',
+    'blog.article.piano-energetico-climatico-ticino-sfide.excerpt': 'Der Meteorologe Matteo Buzzi analysiert die klimatische Dringlichkeit und die Rolle des kantonalen Energie- und Klimaplans im Grossen Rat.',
+    'blog.article.piano-energetico-climatico-ticino-sfide.imageAlt': 'Blick auf das Seebecken von Lugano an einem heißen Sommertag',
 };
 
 export default blogMetaChDe;

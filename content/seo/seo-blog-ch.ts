@@ -26732,6 +26732,84 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fit-partnership-2026': {
+    title: 'Regole per il commercio: impegno comune | Frontaliere Ticino',
+    description: 'La Svizzera ha sostenuto la sicurezza economica e la resilienza delle catene di approvvigionamento attraverso il FIT Partnership. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, regole, commercio, impegno, comune',
+    ogTitle: 'Riunione ministeriale del FIT Partnership: impegno comune a favore di un commercio basato su regole',
+    ogDescription: 'La Svizzera ha sostenuto la sicurezza economica e la resilienza delle catene di approvvigionamento attraverso il FIT Partnership.',
+    canonicalPath: '/articoli-svizzera/fit-partnership-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Regole per il commercio: impegno comune",
+      "description": "La Svizzera ha sostenuto la sicurezza economica e la resilienza delle catene di approvvigionamento attraverso il FIT Partnership. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fit-partnership-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano con il Ministero federale della giustizia e polizia nella vista, con il lago Lugano in primo piano"
+      },
+      "datePublished": "2026-08-11T00:14:47+00:00",
+      "dateModified": "2026-08-11T00:14:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/fit-partnership-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-piano-energetico-climatico-ticino-sfide': {
+    title: 'Emergenza climatica: il dibattito sul Piano energetico ticinese',
+    description: 'Matteo Buzzi analizza l\'urgenza climatica e il ruolo del Piano Energetico e Climatico Cantonale (PECC) nel dibattito in Gran Consiglio. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, emergenza, climatica, dibattito, piano',
+    ogTitle: 'Emergenza climatica: il dibattito sul Piano energetico ticinese',
+    ogDescription: 'Il meteorologo e capogruppo Verdi Matteo Buzzi interviene sull\'importanza del Piano Energetico e Climatico Cantonale di fronte alle sfide climatiche attuali.',
+    canonicalPath: '/articoli-svizzera/piano-energetico-climatico-ticino-sfide/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Emergenza climatica: il dibattito sul Piano energetico ticinese",
+      "description": "Matteo Buzzi analizza l'urgenza climatica e il ruolo del Piano Energetico e Climatico Cantonale (PECC) nel dibattito in Gran Consiglio. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/piano-energetico-climatico-ticino-sfide.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta del lungolago di Lugano in una giornata estiva calda"
+      },
+      "datePublished": "2026-08-11T00:37:30+00:00",
+      "dateModified": "2026-08-11T00:37:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/piano-energetico-climatico-ticino-sfide/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

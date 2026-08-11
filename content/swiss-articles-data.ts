@@ -6193,6 +6193,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'fit-partnership-2026',
+    category: 'fiscale',
+    date: '2026-08-11T00:14:47.799Z',
+    image: '/images/blog/fit-partnership-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'piano-energetico-climatico-ticino-sfide',
+    category: 'novita',
+    date: '2026-08-11T00:37:30.611Z',
+    image: '/images/blog/piano-energetico-climatico-ticino-sfide.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

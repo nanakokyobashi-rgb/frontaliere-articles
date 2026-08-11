@@ -2065,6 +2065,12 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.calore-data-center-poco-sfruttato.title': 'Il calore dei data center è poco sfruttato',
     'blog.article.calore-data-center-poco-sfruttato.excerpt': 'I data center svizzeri potrebbero fornire calore per il teleriscaldamento, ma solo un terzo di essi lo sfrutta.',
     'blog.article.calore-data-center-poco-sfruttato.imageAlt': 'una fotografia di un data center in Svizzera',
+    'blog.article.fit-partnership-2026.title': 'Regole per il commercio: impegno comune',
+    'blog.article.fit-partnership-2026.excerpt': 'La Svizzera ha sostenuto la sicurezza economica e la resilienza delle catene di approvvigionamento attraverso il FIT Partnership',
+    'blog.article.fit-partnership-2026.imageAlt': 'Vista di Lugano con il Ministero federale della giustizia e polizia nella vista, con il lago Lugano in primo piano',
+    'blog.article.piano-energetico-climatico-ticino-sfide.title': 'Emergenza climatica: il dibattito sul Piano energetico ticinese',
+    'blog.article.piano-energetico-climatico-ticino-sfide.excerpt': 'Il meteorologo Matteo Buzzi analizza l\'urgenza climatica e il ruolo del Piano Energetico e Climatico Cantonale in Gran Consiglio.',
+    'blog.article.piano-energetico-climatico-ticino-sfide.imageAlt': 'Veduta del lungolago di Lugano in una giornata estiva calda',
 };
 
 export default blogMetaChIt;

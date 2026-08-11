@@ -2065,6 +2065,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.calore-data-center-poco-sfruttato.title': 'The heat of the data centers is under-exploited',
     'blog.article.calore-data-center-poco-sfruttato.excerpt': 'Swiss data centers could provide heat for district heating, but only a third of them use it.',
     'blog.article.calore-data-center-poco-sfruttato.imageAlt': 'una fotografia di un data center in Svizzera',
+    'blog.article.fit-partnership-2026.title': 'Rules for Trade: Common Commitment',
+    'blog.article.fit-partnership-2026.excerpt': 'Switzerland has supported economic security and supply chain resilience through the FIT PARTNERSHIP',
+    'blog.article.fit-partnership-2026.imageAlt': 'Lugano view with Federal Ministry of Justice and Police in view, with Lake Lugano in the foreground',
+    'blog.article.piano-energetico-climatico-ticino-sfide.title': 'Climate emergency: the debate on the Ticino Energy Plan',
+    'blog.article.piano-energetico-climatico-ticino-sfide.excerpt': 'Meteorologist Matteo Buzzi analyses the climatic urgency and the role of the Cantonal Energy and Climate Plan in the Grand Council.',
+    'blog.article.piano-energetico-climatico-ticino-sfide.imageAlt': 'View of the Lugano lakefront on a hot summer day',
 };
 
 export default blogMetaChEn;
