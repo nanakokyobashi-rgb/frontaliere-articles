@@ -120,7 +120,14 @@ const PR_GATE_WORKFLOWS = new Set(['tests', 'Generator CI']);
 
 function gh(args, fallback = '') {
   try {
-    return execFileSync('gh', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+    // maxBuffer esplicito: il default di execFileSync e' 1 MB, e da quando
+    // failedRunLog() scarica il log dei job falliti quel tetto e' raggiungibile
+    // — la run 31459831234 ne produce gia' 220 KB, e una generazione lunga
+    // arriva molto oltre. Superarlo lancia ENOBUFS, che qui viene catturato e
+    // degrada in silenzio alla issue generica: cioe' proprio sulla run piu'
+    // rumorosa la diagnosi sparirebbe senza dirlo. 32 MB e' la stessa soglia
+    // che usa scripts/ci/close-recovered-failure-issues.mjs.
+    return execFileSync('gh', args, { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] }).trim();
   } catch (e) {
     console.warn(`[scan-failed-runs] gh ${args.slice(0, 3).join(' ')} fallito: ${String(e.message).slice(0, 120)}`);
     return fallback;
