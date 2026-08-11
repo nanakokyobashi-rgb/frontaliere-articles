@@ -104,3 +104,40 @@ export const REDFLAG_IMPORTANT_RE = /🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:�
  * inizia a invocare il claude-code-action, aggiungilo qui.
  */
 export const REVIEW_WORKFLOW_DRIFT_FILES = ['.github/workflows/pr-review-loop.yml'];
+
+/**
+ * Nome del check-run del job `test` di `.github/workflows/generator-ci.yml`
+ * (nessun `name:` esplicito sul job → il check-run prende l'id `test`,
+ * verificato via `gh api .../check-runs` su un run reale). Quel job include i
+ * due gate del `SiteShellContract` (`host/tests/shell-contract-{fingerprint,
+ * functions}.test.mjs`) insieme agli altri `node --test`/`tsx --test` del
+ * generatore — è il check che #242 vuole richiesto dall'auto-merge quando la
+ * PR tocca i path che lo attivano (sotto), altrimenti un `generator-ci` rosso
+ * non ferma il merge (il gate era acceso ma non bloccante, perché
+ * `auto-merge-eval.mjs` esigeva `success` solo su `VITEST_CHECK_NAME` e
+ * `main` non ha required status checks configurati — `branches/main/protection`
+ * risponde 404).
+ */
+export const GENERATOR_CI_JOB_NAME = 'test';
+
+/**
+ * Path che fanno scattare `generator-ci.yml` su una PR — MIRROR dei
+ * `pull_request.paths` in `.github/workflows/generator-ci.yml` (lo YAML non
+ * può importare una const JS). Le voci che finiscono per `/` sono prefissi di
+ * cartella (`generator/**` → `generator/`); le altre sono match esatti di
+ * file. Usati da `auto-merge-eval.mjs` (`touchesGeneratorCiPaths`) per capire
+ * se una PR deve attendere anche `GENERATOR_CI_JOB_NAME`, non solo
+ * `VITEST_CHECK_NAME`, prima di mergiare — condizionato ai path così una PR di
+ * solo contenuto non paga mai il costo extra (nessun check-run "test" da
+ * attendere, perché `generator-ci.yml` non parte nemmeno). Drift dai path
+ * reali del workflow → guard in
+ * `generator/tests/generator-ci-required-gate.test.mjs`.
+ */
+export const GENERATOR_CI_TRIGGER_PATHS = [
+  'generator/',
+  'engine/',
+  'host/',
+  '.github/workflows/generator-ci.yml',
+  'package.json',
+  'package-lock.json',
+];
