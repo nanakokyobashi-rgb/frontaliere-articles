@@ -19,6 +19,21 @@ import {
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
+// Namespace import di proposito: `workflow-scope-detect.mjs` e' `identical` nel
+// manifest del ciclo e scende dal sito, dove la #5599 gli ha aggiunto
+// `isMonitorFiledWorkflowFailure` / `extractNonWorkflowCodeRefs`. Un import
+// nominato di un export che la copia locale non ha ancora romperebbe il LINK
+// del modulo — cioe' l'intero file di test — su una differenza che qui e'
+// informativa e non portante. Col namespace la feature si sonda a runtime.
+import * as scopeDetect from '../../scripts/lib/workflow-scope-detect.mjs';
+
+const { detectWorkflowScoped, CODE_PATH_RE, isMonitorFiledWorkflowFailure } = scopeDetect;
+
+/** I path di codice che il detector CONTA, con la semantica della copia presente. */
+const codeRefsCounted = (text) =>
+  scopeDetect.extractNonWorkflowCodeRefs
+    ? scopeDetect.extractNonWorkflowCodeRefs(text)
+    : [...new Set(String(text).match(CODE_PATH_RE) || [])];
 
 const base = { conclusion: 'failure', createdAt: '2026-08-10T00:00:00Z', updatedAt: '2026-08-10T00:00:00Z' };
 
@@ -174,27 +189,73 @@ test("la issue ricca nomina il path, l'articolo perso e il file da modificare", 
   assert.match(report.description, /articolo generato per intero e' stato buttato via/);
   assert.ok(report.description.includes(RUN.url), 'il run id sta nel body, non nel titolo');
   assert.match(report.description, /## Suggested action/);
+  // L'helper, il test e l'auto-filer restano NOMINATI — l'informazione non si
+  // perde — ma con nome file e cartella separati: vedi il test qui sotto per il
+  // perche' un path unico spegnerebbe il corto-circuito del guard.
+  assert.match(report.description, /`rebase-onto-remote\.sh`/, "il body deve dire QUALE helper");
+  assert.match(report.description, /`scripts\/lib\/`/, "e in QUALE cartella sta");
+  assert.match(report.description, /`rebase-onto-remote\.test\.mjs`/);
+  assert.match(report.description, /`generator\/tests\/`/);
   // Il path del workflow nel body e' voluto: check-workflows-scope.mjs (Mode 1)
   // lo riconosce e ferma il fixer PRIMA di spendere token su una fix che il PAT
   // di questo repo non potrebbe comunque pushare.
   assert.match(report.description, /\.github\/workflows\/generate-article\.yml/);
 });
 
-test('la issue ricca resta esclusivamente workflow-scoped: niente path di codice con estensione nel body', () => {
-  // Il body cita `scripts/lib/rebase-onto-remote.sh` (o l'attribuzione a
-  // scripts/ci/scan-failed-runs.mjs) per esteso, hasNonWorkflowCodeRefs() lo
-  // classifica come riferimento a codice, e isExclusivelyWorkflowScoped()
-  // (Mode 1 di check-workflows-scope.mjs) torna false: il fixer viene
-  // dispatchato per una issue che sa gia' di non poter risolvere (PAT senza
-  // scope `workflow`), spendendo il token che il corto-circuito dovrebbe
-  // evitare.
+test("il body della issue ricca e' esclusivamente workflow-scoped (il corto-circuito del fixer scatta davvero)", () => {
+  // ⚠ QUESTO E' IL TEST CHE PROVA L'AFFERMAZIONE, e la prima stesura la smentiva.
+  //
+  // Nominare il workflow non basta: `isExclusivelyWorkflowScoped()` e'
+  // ESCLUSIVO — >=1 path `.github/workflows/**` E **zero** path di codice
+  // non-workflow (`CODE_PATH_RE`: scripts/, src/, services/, build/, ...).
+  // Il body citava `scripts/lib/rebase-onto-remote.sh` nel punto 2 e
+  // `scripts/ci/scan-failed-runs.mjs` nella firma in fondo: DUE, non uno.
+  // Con anche solo il secondo, il verdetto resta `false`, il fixer parte lo
+  // stesso e spende ~1M token per una fix che il PAT senza scope `workflow`
+  // non potrebbe comunque pushare — cioe' l'esatto costo che la citazione del
+  // workflow dice di evitare.
+  //
+  // Si asserisce su ENTRAMBI i consumatori perche' sono due call site distinti:
+  // `isExclusivelyWorkflowScoped` e' il Mode 1 di check-workflows-scope.mjs,
+  // `detectWorkflowScoped` e' il pre-flight di followup-drainer.mjs (che legge
+  // titolo + body). Fu la loro asimmetria a produrre il loop della #4437.
   const report = buildLostArticleReport({ ...REPORT_ARGS, log: LOST_ARTICLE_LOG });
-  assert.ok(report);
-  assert.equal(
-    isExclusivelyWorkflowScoped(report.description),
-    true,
-    'il body deve restare riconoscibile come workflow-scoped da Mode 1',
+  const leaked = codeRefsCounted(report.description);
+  assert.deepEqual(
+    leaked,
+    [],
+    'Il body cita path di codice non-workflow: ' + JSON.stringify(leaked) + '.\n' +
+      'Ognuno riapre la valvola "la fix potrebbe stare li\'" e spegne il corto-circuito.\n' +
+      'Non togliere l\'informazione: scrivi nome file e cartella SEPARATI\n' +
+      '(`` `x.mjs` ``, sotto `` `scripts/ci/` ``) — restano entrambi greppabili.',
   );
+  assert.equal(isExclusivelyWorkflowScoped(report.description), true);
+  assert.equal(detectWorkflowScoped(`${report.title}\n${report.description}`, { title: report.title }), true);
+
+  // E la scorciatoia del sito NON copre questo caso, quindi l'invariante sopra
+  // va tenuta a mano: `isMonitorFiledWorkflowFailure()` (#5599) esenta le issue
+  // dell'auto-filer dalla regola sui path di codice, ma aggancia sul PREFISSO
+  // del titolo (`Workflow Failure:`/`CI Failure:`), e questo titolo sta apposta
+  // fuori da quei prefissi perche' il reconciler non lo chiuda su un verde.
+  // Se un giorno il detector sceso dal mirror non esportasse piu' quella
+  // funzione, il test non deve rompersi: e' un'osservazione, non una dipendenza.
+  if (typeof isMonitorFiledWorkflowFailure === 'function') {
+    assert.equal(
+      isMonitorFiledWorkflowFailure({ title: report.title, labels: ['Bug'] }),
+      false,
+      "il titolo per-path sta fuori dai prefissi del monitor: nessuna esenzione automatica",
+    );
+  }
+});
+
+test("anche il body GENERICO resta leggibile dal routing (nessuna regressione sull'altro ramo)", () => {
+  // Il ramo generico tiene la firma con il path completo, e va bene: il suo
+  // titolo E' `Workflow Failure: <nome>`, quindi sul detector del sito post-#5599
+  // `isMonitorFiledWorkflowFailure()` decide da solo, senza leggere il body.
+  assert.ok(TITLE_RE.exec('Workflow Failure: Generate Blog Article'));
+  if (typeof isMonitorFiledWorkflowFailure === 'function') {
+    assert.equal(isMonitorFiledWorkflowFailure({ title: 'Workflow Failure: Generate Blog Article' }), true);
+  }
 });
 
 test("il titolo e' stabile a parita' di path e discrimina dentro i 60 char della dedup", () => {
