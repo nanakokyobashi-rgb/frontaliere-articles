@@ -227,7 +227,8 @@
     "vivere a Morbegno e lavorare in Grigioni da frontaliere",
     "vivere a Vervio e lavorare in Grigioni da frontaliere",
     "trasferirsi a Morbegno da frontaliere pro e contro",
-    "vivere a Castello Dell'Acqua e lavorare in Grigioni da frontaliere"
+    "vivere a Castello Dell'Acqua e lavorare in Grigioni da frontaliere",
+    "premi cassa malati canton Zurigo e riduzione premi"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -348,7 +349,7 @@
     "trasferirsi a Bormio da frontaliere pro e contro": 1,
     "vivere a Bianzone e lavorare in Grigioni da frontaliere": 1,
     "vivere a Villa di Tirano e lavorare in Grigioni da frontaliere": 1,
-    "imposte cantonali canton Zurigo aliquote e deduzioni": 2,
+    "imposte cantonali canton Zurigo aliquote e deduzioni": 3,
     "premi cassa malati canton Zurigo e riduzione premi": 1,
     "trasferirsi a Morbegno da frontaliere pro e contro": 1
   }
