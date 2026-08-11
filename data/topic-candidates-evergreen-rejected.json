@@ -223,7 +223,9 @@
     "vivere a Teglio e lavorare in Grigioni da frontaliere",
     "vivere a Ponte in Valtellina e lavorare in Grigioni da frontaliere",
     "trasferirsi a Ponte in Valtellina da frontaliere pro e contro",
-    "vivere a Aprica e lavorare in Grigioni da frontaliere"
+    "vivere a Aprica e lavorare in Grigioni da frontaliere",
+    "vivere a Morbegno e lavorare in Grigioni da frontaliere",
+    "vivere a Vervio e lavorare in Grigioni da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -345,6 +347,7 @@
     "vivere a Bianzone e lavorare in Grigioni da frontaliere": 1,
     "vivere a Villa di Tirano e lavorare in Grigioni da frontaliere": 1,
     "imposte cantonali canton Zurigo aliquote e deduzioni": 1,
-    "premi cassa malati canton Zurigo e riduzione premi": 1
+    "premi cassa malati canton Zurigo e riduzione premi": 1,
+    "trasferirsi a Morbegno da frontaliere pro e contro": 1
   }
 }
