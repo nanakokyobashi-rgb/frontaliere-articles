@@ -33,8 +33,9 @@ name: Issue fix (Claude → PR)
 #  - Identità di push: `GITHUB_PAT_NANAKO`, non un token di GitHub App —
 #    passato ANCHE come `github_token` a `claude-code-action` (vedi lo step
 #    "Run Claude fix"). Il `git remote set-url` dello step di identità copre
-#    solo i push che partono da un `run:`; l'action pusha per conto proprio,
-#    con il token che le viene dato nel `with:`, e quel remote non la riguarda.
+#    solo i push che partono da un `run:`: l'action, all'avvio, RISCRIVE quel
+#    remote col proprio token (`replaceCheckoutCredentials()`), quindi il token
+#    che conta per il lavoro dell'agente è quello passato nel `with:`.
 #  - Gate dei test: `node --test`, non vitest. Niente `npm ci`.
 #  - Ponte Remote Config: `generator/scripts/load-rc-env.mjs`.
 
@@ -240,12 +241,13 @@ jobs:
             # valido, `git ls-remote` fallisce; rimuovendo l'extraheader riesce.
             git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
             git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
-            # ATTENZIONE alla portata di questo step: configura il remote di
-            # QUESTO checkout, quindi vale per i push lanciati da un `run:`.
-            # `claude-code-action` pusha per conto proprio, con il token che
-            # riceve nel `with:` — e per quello serve `github_token`, che lo
-            # step "Run Claude fix" ora passa. I due meccanismi sono distinti:
-            # sistemare solo questo remote lasciava l'action sul token di App.
+            # ATTENZIONE alla portata di questo step: vale per i push lanciati
+            # da un `run:`. Per il lavoro dell'agente NON basta, e non perche'
+            # l'action lo ignori: perche' lo SOVRASCRIVE. All'avvio
+            # `replaceCheckoutCredentials()` azzera l'extraheader e rifa' il
+            # `set-url` col token che l'action ha ricevuto nel `with:`. Ecco
+            # perche' serve anche `github_token` sullo step "Run Claude fix":
+            # sistemare solo questo remote lasciava l'agente sul token di App.
             echo "push identity (run: steps): PAT — .github/workflows/** pushabile (scope workflow verificato sul PAT)"
             echo "push identity (claude-code-action): PAT via input github_token — vedi step 'Run Claude fix'"
           else
@@ -273,15 +275,24 @@ jobs:
           # giorni, escalata dal lessons-harvester): NON uno scope mancante sul
           # PAT (`x-oauth-scopes` include `workflow`), NON il PAT assente in CI
           # (il loader RC lo carica), NON un push col PAT rifiutato (verificato:
-          # exit 0). Il `git remote set-url` dello step precedente è corretto ma
-          # inerte qui: vale per i push da `run:`, non per quelli dell'action.
+          # exit 0). Il `git remote set-url` dello step precedente non e' solo
+          # "inerte": l'action lo SOVRASCRIVE. `configureGitAuth()` chiama
+          # `replaceCheckoutCredentials()` (src/github/operations/git-config.ts)
+          # in modo incondizionato all'avvio, che azzera l'extraheader di
+          # actions/checkout e rifa' `git remote set-url origin
+          # https://x-access-token:<token>@...` col PROPRIO token. Qualunque
+          # remote configurato prima viene riscritto un istante prima che
+          # l'agente lavori: l'unico modo di decidere quel token e' questo input.
           #
-          # Fallback obbligatorio, non decorativo: lo step "Load secrets from
-          # Remote Config" è `continue-on-error: true`, quindi un fallimento di
-          # auth lascerebbe la variabile vuota. Un `github_token: ''` esplicito
-          # può rompere l'action del tutto; col fallback si degrada esattamente
-          # al comportamento precedente (niente workflow, ma il fixer gira).
-          github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          # NIENTE fallback su `secrets.GITHUB_TOKEN`: sarebbe una REGRESSIONE.
+          # Gli eventi generati dal GITHUB_TOKEN non ri-attivano i workflow a
+          # valle (anti-ricorsione di GitHub), quindi con quel fallback una PR
+          # aperta durante un caricamento RC fallito non riceverebbe piu' ne'
+          # `tests` ne' `pr-review-loop`: resterebbe ferma e verde per sempre.
+          # La stringa vuota e' invece il ramo di DEFAULT documentato
+          # dell'action, che in quel caso conia un token proprio e lo revoca a
+          # fine run — cioe' esattamente il comportamento di oggi.
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
           allowed_bots: 'github-actions[bot], claude[bot]'
           show_full_output: true
           claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"

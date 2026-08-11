@@ -325,6 +325,24 @@ jobs:
         with:
           # Auth via subscription Max (zero API cost). MAI ANTHROPIC_API_KEY.
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Stesso token dello step "Configure push remote" qui sopra, e per la
+          # stessa ragione — ma passato DOVE conta davvero. All'avvio l'action
+          # chiama `replaceCheckoutCredentials()`
+          # (src/github/operations/git-config.ts): azzera l'extraheader di
+          # actions/checkout e RISCRIVE `origin` con il token che ha ricevuto
+          # qui. Senza questo input riscriveva col proprio token di App, e ogni
+          # push su `.github/workflows/**` moriva con "refusing to allow a
+          # GitHub App to create or update workflow ... without `workflows`
+          # permission" — proprio mentre il guard a monte (`touches_wf`/
+          # `HAS_PAT`) aveva dato via libera perche' il PAT c'era. Il remote
+          # configurato sopra resta utile ai push da `run:`.
+          #
+          # Vuoto (non `secrets.GITHUB_TOKEN`) come fallback: gli eventi del
+          # GITHUB_TOKEN non ri-attivano i workflow a valle, quindi il push del
+          # fix non farebbe ripartire `pr-review-loop` — la re-review che questo
+          # workflow esiste per innescare. Vuoto = ramo di default dell'action
+          # (conia un token proprio), cioe' il comportamento odierno.
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
           show_full_output: true
           # Le review/PR autonome sono di claude[bot] / github-actions[bot] /
           # frontaliere-automation[bot] (App): le PR aggiornate via App token
@@ -356,7 +374,7 @@ jobs:
             - CODE vs DATA: non scorrere i blob `data/**`/`public/**`; fixa il CODE che li genera.
             - Esegui i test pertinenti: `npm test` (o il subset rilevante) per validare il fix prima di committare.
             - Commit con identity canonica già configurata (Valerie Linc <valerielinc@gmail.com>), messaggio conventional, nessuna email non-canonica in coda.
-            - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è già autenticato con l'App token (se disponibile, altrimenti PAT) → ri-attiva pr-review-loop (re-review). Se il push fallisce per scope/auth → documenta in un commento e TERMINA.
+            - Push sullo stesso branch: `git push origin HEAD:${{ github.event.pull_request.head.ref }}`. Il remote `origin` è autenticato con il token passato a questa action come `github_token` (il PAT, quando disponibile): l'action riscrive `origin` all'avvio, quindi vale QUEL token, non quello configurato dagli step precedenti. Non è il GITHUB_TOKEN → il push ri-attiva `pr-review-loop` (re-review), e i file sotto `.github/workflows/**` sono pushabili. Se il push fallisce per scope/auth → prima di arrenderti verifica `git remote -v` (deve mostrare `x-access-token:***@github.com`); se dice `without workflows permission`, il PAT non è arrivato: documenta in un commento e TERMINA.
             - Aggiorna il body della PR (`gh pr edit $PR_NUMBER --body`) mantenendo `## Implementato` (aggiungi cosa hai fixato) + `## Non implementato (ancora)`.
 
             **Constraint:**
