@@ -39,6 +39,16 @@
 #     non dedotto.
 #   - `npm install ... esbuild@<pin>` in una directory usa-e-getta sotto
 #     RUNNER_TEMP, che nessun altro step legge o scrive.
+#   - `npx -y tsx@4 --test 'host/tests/*.test.mjs'` in generator-ci.yml — i due
+#     test del SiteShellContract sono di sola lettura: leggono
+#     `host/shell-contract-fingerprint.json` e
+#     `host/tests/shell-contract-functions.golden.json`, importano
+#     `host/siteShellBootstrap.ts` e asseriscono. L'unico ramo che scrive e'
+#     `--record` in shell-contract-functions.test.mjs, che richiede il flag
+#     esplicito e qui non viene passato; il `new WriteCollector(...)` della
+#     probe punta a `/tmp/nonexistent-probe` e non viene mai flushato.
+#     VERIFICATO leggendo i due sorgenti. Un tentativo interrotto non lascia
+#     stato che il successivo possa leggere.
 #
 # Se aggiungi un call-site, scrivi qui perche' ritentarlo e' sicuro. Un wrapper
 # di retry applicato a un comando non idempotente non ripara un guasto: ne

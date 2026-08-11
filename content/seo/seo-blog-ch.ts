@@ -27629,6 +27629,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neutralita-prassi-svizzera': {
+    title: 'Neutralità: la prassi attuale è nell\'interesse della Svizzera',
+    description: 'Il Consiglio federale invita a respingere l\'iniziativa sulla neutralità in votazione il 27 settembre. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, prassi, attuale, nell',
+    ogTitle: 'Neutralità: la prassi attuale è nell\'interesse della Svizzera',
+    ogDescription: 'Il Consiglio federale invita a respingere l\'iniziativa sulla neutralità in votazione il 27 settembre',
+    canonicalPath: '/articoli-svizzera/neutralita-prassi-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità: la prassi attuale è nell'interesse della Svizzera",
+      "description": "Il Consiglio federale invita a respingere l'iniziativa sulla neutralità in votazione il 27 settembre. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/neutralita-prassi-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un frontaliere svizzero"
+      },
+      "datePublished": "2026-08-11T07:58:47+00:00",
+      "dateModified": "2026-08-11T07:58:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neutralita-prassi-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bell-bellinzona-aziendale-2026': {
+    title: 'Bell: \'È stato il miglior primo semestre dalla storia aziendale\'',
+    description: 'Il colosso svizzero della lavorazione della carne ha chiuso il primo semestre con un fatturato sostanzialmente stabile e profitti in crescita. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, bell, stato, miglior, primo',
+    ogTitle: 'Bell: \'È stato il miglior primo semestre dalla storia aziendale\'',
+    ogDescription: 'Il colosso svizzero della lavorazione della carne ha chiuso il primo semestre con un fatturato sostanzialmente stabile e profitti in crescita.',
+    canonicalPath: '/articoli-svizzera/bell-bellinzona-aziendale-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bell: 'È stato il miglior primo semestre dalla storia aziendale'",
+      "description": "Il colosso svizzero della lavorazione della carne ha chiuso il primo semestre con un fatturato sostanzialmente stabile e profitti in crescita. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bell-bellinzona-aziendale-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere Ticino, aziende svizzere, economia nazionale"
+      },
+      "datePublished": "2026-08-11T08:14:09+00:00",
+      "dateModified": "2026-08-11T08:14:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bell-bellinzona-aziendale-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-consiglio-federale-iniziativa-neutralita': {
+    title: 'Neutralità: il Consiglio federale nega la stretta costituzionale',
+    description: 'Il governo federale invita a respingere l\'iniziativa sulla neutralità, avvertendo che una definizione rigida limiterebbe il margine di manovra della Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, neutralità, consiglio, federale, nega',
+    ogTitle: 'Neutralità: il Consiglio federale nega la stretta costituzionale',
+    ogDescription: 'Il governo federale invita a respingere l\'iniziativa sulla neutralità, avvertendo che una definizione rigida limiterebbe il margine di manovra della Svizzera.',
+    canonicalPath: '/articoli-svizzera/consiglio-federale-iniziativa-neutralita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neutralità: il Consiglio federale nega la stretta costituzionale",
+      "description": "Il governo federale invita a respingere l'iniziativa sulla neutralità, avvertendo che una definizione rigida limiterebbe il margine di manovra della Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/consiglio-federale-iniziativa-neutralita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo Federale a Berna, sede del governo svizzero"
+      },
+      "datePublished": "2026-08-11T08:25:30+00:00",
+      "dateModified": "2026-08-11T08:25:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/consiglio-federale-iniziativa-neutralita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-cassa-malati-zurigo-riduzione': {
+    title: 'Premi cassa malati Zurigo e riduzione premi: guida pratica',
+    description: 'Scopri come funzionano i premi LAMal nel Cantone di Zurigo, la scelta delle franchigie e i requisiti per richiedere la riduzione dei premi cantonale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, zurigo',
+    ogTitle: 'Premi cassa malati Zurigo e riduzione premi: guida pratica',
+    ogDescription: 'Informazioni essenziali sui premi LAMal a Zurigo, opzioni di franchigia e procedure per accedere alla riduzione cantonale dei premi.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-zurigo-riduzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Zurigo e riduzione premi: guida pratica",
+      "description": "Scopri come funzionano i premi LAMal nel Cantone di Zurigo, la scelta delle franchigie e i requisiti per richiedere la riduzione dei premi cantonale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-zurigo-riduzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio moderno a Zurigo con persone che camminano"
+      },
+      "datePublished": "2026-08-11T08:38:09+00:00",
+      "dateModified": "2026-08-11T08:38:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-zurigo-riduzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-dimora-b-zurigo-guida': {
+    title: 'Permesso di dimora B a Zurigo: requisiti e rinnovo',
+    description: 'Guida pratica al permesso di dimora B nel Canton Zurigo: scopri i requisiti, i documenti necessari e la procedura ufficiale per il rinnovo del titolo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, zurigo, requisiti',
+    ogTitle: 'Permesso di dimora B a Zurigo: requisiti e rinnovo',
+    ogDescription: 'Tutto quello che devi sapere sul permesso di dimora B nel Canton Zurigo: procedure, scadenze e consigli pratici per i residenti.',
+    canonicalPath: '/articoli-svizzera/permesso-dimora-b-zurigo-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di dimora B a Zurigo: requisiti e rinnovo",
+      "description": "Guida pratica al permesso di dimora B nel Canton Zurigo: scopri i requisiti, i documenti necessari e la procedura ufficiale per il rinnovo del titolo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-dimora-b-zurigo-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio direzionale moderno a Zurigo sede di uffici amministrativi"
+      },
+      "datePublished": "2026-08-11T08:49:11+00:00",
+      "dateModified": "2026-08-11T08:49:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-dimora-b-zurigo-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-domicilio-c-zurigo-requisiti-domanda': {
+    title: 'Permesso di domicilio C nel Cantone di Zurigo: requisiti e domanda',
+    description: 'Il permesso di domicilio C nel Cantone di Zurigo richiede almeno 10 anni di residenza, conoscenze linguistiche e una procedura di domanda specifica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, domicilio, cantone, zurigo',
+    ogTitle: 'Permesso di domicilio C nel Cantone di Zurigo',
+    ogDescription: 'Il permesso di domicilio C nel Cantone di Zurigo richiede almeno 10 anni di residenza, conoscenze linguistiche e una procedura di domanda specifica.',
+    canonicalPath: '/articoli-svizzera/permesso-domicilio-c-zurigo-requisiti-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di domicilio C nel Cantone di Zurigo: requisiti e domanda",
+      "description": "Il permesso di domicilio C nel Cantone di Zurigo richiede almeno 10 anni di residenza, conoscenze linguistiche e una procedura di domanda specifica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-domicilio-c-zurigo-requisiti-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una scena di Lugano con una persona che si avvicina a un ufficio del cantone di Zurigo per domandare il permesso di domicilio C."
+      },
+      "datePublished": "2026-08-11T09:01:44+00:00",
+      "dateModified": "2026-08-11T09:01:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-domicilio-c-zurigo-requisiti-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -7,18 +7,24 @@
  * and translation (freeTranslateWithRetry cascade) as the job crawlers.
  *
  * Usage:
- *   node scripts/fix-faq-locales.mjs [--dry-run] [--limit N]
+ *   node scripts/fix-faq-locales.mjs [--dry-run] [--limit N] [--section=frontaliere|svizzera]
+ *
+ * `--reescape-broken` e' una modalita' a se': non traduce e non chiama nessun
+ * modello, riscrive soltanto le chiavi `.faq` prodotte dall'escape rotto che
+ * questo file usava fino a oggi (vedi il blocco «Il literal TS che porta
+ * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
 import { resolve, basename } from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname } from 'path';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -38,9 +44,21 @@ const __dirname = dirname(__filename);
 const ROOT = resolve(__dirname, '..', '..');
 
 const args = process.argv.slice(2);
-const DRY_RUN = args.includes('--dry-run');
+const HELP = args.includes('--help') || args.includes('-h');
+// `DRY_RUN=1` e' la convenzione del generator, non un extra: e' cio' che
+// `generator/tests/dry-run-entrypoints.mjs` passa a ogni entry point per
+// caricarlo senza fargli toccare il corpus. Questo script non la onorava — ne'
+// quella ne' `--help` — e finiva per fare lavoro vero mentre l'armatura
+// credeva di starlo solo importando. Non si vedeva perche' il lettore rotto lo
+// rendeva cieco su quasi tutto: appena ha ricominciato a vedere, ha scritto.
+// E' lo stesso difetto che l'intestazione di quell'armatura racconta per
+// generate-border-wait-ranking-article.mjs, che riscrisse quattro body.
+const DRY_RUN = args.includes('--dry-run') || process.env.DRY_RUN === '1';
 const limitIdx = args.indexOf('--limit');
 const LIMIT = limitIdx >= 0 ? parseInt(args[limitIdx + 1], 10) : Infinity;
+// Riparazione pura dei file gia' scritti con l'escape rotto: nessuna chiamata
+// di traduzione, nessun modello. Opt-in, e la run schedulata NON lo passa.
+const REESCAPE_BROKEN = args.includes('--reescape-broken');
 
 // ── Section selection (--section=frontaliere|svizzera, default frontaliere) ──
 // Switches the body-dir enumeration between the cross-border and the
@@ -66,21 +84,89 @@ const SECTION_BODY_SUBDIR = SECTION === 'svizzera' ? 'blog-body-ch' : 'blog-body
 
 const BODY_DIR = resolve(ROOT, corpusPath(`services/locales/${SECTION_BODY_SUBDIR}`));
 
+// ── Il literal TS che porta l'array FAQ ─────────────────────
+//
+// La chiave `.faq` non e' testo: e' un documento JSON che vive dentro una
+// stringa TypeScript a singoli apici. Ci sono quindi DUE codifiche annidate, e
+// l'unico modo di non sbagliarle e' che scrittore e lettore siano l'uno
+// l'inverso dell'altro — che e' precisamente cio' che qui mancava.
+//
+// Lo scrittore precedente escapava l'apostrofo e NON il backslash:
+//
+//     JSON.stringify(faqArray).replace(/'/g, "\\'")
+//
+// `JSON.stringify` produce `\"` per ogni virgoletta nel testo della FAQ. Senza
+// raddoppiare il backslash, quel `\"` finisce verbatim nel literal TS, il
+// parser TS lo legge come `"` — e il JSON si spacca a meta' di una stringa.
+// Nessuno se ne accorge alla scrittura: il file `.ts` compila lo stesso, il
+// commit passa, e il danno si vede solo dove il documento viene riletto.
+// A valle `engine/ogPagesPlugin.ts` fa `JSON.parse` del valore per emettere il
+// FAQPage JSON-LD, la `JSON.parse` lancia, il `catch` e' vuoto — e la pagina
+// esce senza rich result e senza accordion, con la CI verde.
+//
+// Misurato su origin/main a08f37e8: 72 file body su 15.560 con chiave `.faq`.
+
+/** Il corpo del literal TS che rappresenta `faqArray`. */
+export function serializeFaqLiteral(faqArray) {
+  return escapeForSingleQuoteTS(JSON.stringify(faqArray));
+}
+
+/**
+ * Legge il corpo di un literal TS che dovrebbe contenere un array FAQ.
+ *
+ * Prova due decodifiche, nell'ordine, e dice QUALE ha funzionato:
+ *   1. quella esatta — l'inverso di `escapeForSingleQuoteTS`, il formato che
+ *      questo script scrive da adesso e che `create-article.mjs` ha sempre
+ *      scritto;
+ *   2. quella LEGACY — l'inverso dello scrittore rotto descritto sopra, che e'
+ *      il formato in cui stanno i file gia' prodotti.
+ *
+ * Serve leggerle entrambe per due ragioni distinte. Senza la (1) lo script
+ * diventerebbe cieco su cio' che scrive lui stesso, e su ogni FAQ italiana che
+ * contiene una virgoletta: `extractFaqFromFile` tornerebbe `null`, l'articolo
+ * verrebbe saltato in silenzio e la locale non verrebbe mai controllata.
+ * Senza la (2) i file gia' rotti diventerebbero illeggibili, e con essi
+ * irreparabili.
+ *
+ * `legacy: true` e' quindi anche il RILEVATORE: e' vero esattamente sui file
+ * che vanno riscritti (`--reescape-broken`).
+ *
+ * @returns {{ pairs: Array|null, legacy: boolean }}
+ */
+export function parseFaqLiteral(raw) {
+  const decoders = [
+    [unescapeForSingleQuoteTS, false],
+    [(s) => s.replace(/\\'/g, "'"), true],
+  ];
+  for (const [decode, legacy] of decoders) {
+    try {
+      const parsed = JSON.parse(decode(raw));
+      if (Array.isArray(parsed)) return { pairs: parsed, legacy };
+    } catch { /* prova la decodifica successiva */ }
+  }
+  return { pairs: null, legacy: false };
+}
+
 // ── File helpers ────────────────────────────────────────────
 
-function extractFaqFromFile(filePath) {
+// Escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
+// `g` + last match: a duplicate `.faq` key (merge residue) resolves to
+// the LAST occurrence at runtime (JS object literal semantics), so
+// that's the value actually live — matching only the first would read
+// dead content and mis-detect the locale.
+const FAQ_VALUE_RE = /\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g;
+
+/** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */
+function rawFaqLiteral(filePath) {
   if (!existsSync(filePath)) return null;
   const content = readFileSync(filePath, 'utf-8');
-  // Escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
-  // `g` + last match: a duplicate `.faq` key (merge residue) resolves to
-  // the LAST occurrence at runtime (JS object literal semantics), so
-  // that's the value actually live — matching only the first would read
-  // dead content and mis-detect the locale.
-  const matches = [...content.matchAll(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g)];
-  if (!matches.length) return null;
-  try {
-    return JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
-  } catch { return null; }
+  const matches = [...content.matchAll(FAQ_VALUE_RE)];
+  return matches.length ? matches[matches.length - 1][1] : null;
+}
+
+function extractFaqFromFile(filePath) {
+  const raw = rawFaqLiteral(filePath);
+  return raw === null ? null : parseFaqLiteral(raw).pairs;
 }
 
 function hasFaqKey(filePath) {
@@ -90,7 +176,7 @@ function hasFaqKey(filePath) {
 
 function replaceFaqInFile(filePath, newFaqArray) {
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = JSON.stringify(newFaqArray).replace(/'/g, "\\'");
+  const jsonStr = serializeFaqLiteral(newFaqArray);
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime, same reasoning as extractFaqFromFile above.
@@ -106,7 +192,7 @@ function replaceFaqInFile(filePath, newFaqArray) {
 
 function insertFaqKey(filePath, articleId, faqArray) {
   let content = readFileSync(filePath, 'utf-8');
-  const jsonStr = JSON.stringify(faqArray).replace(/'/g, "\\'");
+  const jsonStr = serializeFaqLiteral(faqArray);
   const closingIdx = content.lastIndexOf('};');
   if (closingIdx === -1) return false;
   const faqLine = `    'blog.article.${articleId}.faq': '${jsonStr}',\n`;
@@ -142,9 +228,75 @@ async function translateFaqArray(faqArray, targetLang) {
   return results.length > 0 ? results : null;
 }
 
+// ── Riparazione dei file gia' scritti con l'escape rotto ────
+//
+// La fix dello scrittore ferma la PRODUZIONE di file rotti; non tocca quelli
+// gia' committati, che restano senza FAQPage finche' non vengono riscritti.
+// Rieseguire la modalita' normale NON li ripara — misurato su tutti e 72:
+// `hasFaqKey` e' vero (la chiave c'e'), quindi non sono `missing`; e il testo
+// tradotto e' nella locale giusta, quindi non sono `wrong_locale`. Zero su 72
+// verrebbero toccati.
+//
+// Questa modalita' non traduce e non chiama nessun modello: rilegge il literal
+// con la decodifica legacy, che su quei file funziona per costruzione, e lo
+// riscrive con l'escape corretto. Il contenuto non cambia — cambia la codifica.
+
+function reescapeBroken() {
+  const locales = ['it', 'en', 'de', 'fr'];
+  const repaired = [];
+  for (const locale of locales) {
+    const dir = resolve(BODY_DIR, locale);
+    if (!existsSync(dir)) continue;
+    for (const file of readdirSync(dir).filter(f => f.endsWith('.ts'))) {
+      if (repaired.length >= LIMIT) break;
+      const filePath = resolve(dir, file);
+      const raw = rawFaqLiteral(filePath);
+      if (raw === null) continue;
+      const { pairs, legacy } = parseFaqLiteral(raw);
+      if (!legacy || !pairs) continue;
+      // Il ri-escape deve essere una IDENTITA' sul contenuto: se ricodificando
+      // cio' che si e' letto non si riottiene lo stesso array, il file non si
+      // tocca. E' il solo modo in cui questa riparazione puo' rompere qualcosa.
+      const rewritten = serializeFaqLiteral(pairs);
+      const back = parseFaqLiteral(rewritten);
+      if (back.legacy || JSON.stringify(back.pairs) !== JSON.stringify(pairs)) {
+        console.error(`  ⚠️  round-trip non esatto, SALTATO: ${locale}/${file}`);
+        continue;
+      }
+      repaired.push(`${locale}/${file}`);
+      if (!DRY_RUN) replaceFaqInFile(filePath, pairs);
+    }
+  }
+  console.log(`\n📊 ${DRY_RUN ? 'Da riparare' : 'Riparati'}: ${repaired.length} file`);
+  for (const f of repaired.slice(0, 50)) console.log(`  ${f}`);
+  if (repaired.length > 50) console.log(`  ... e altri ${repaired.length - 50}`);
+}
+
 // ── Main ────────────────────────────────────────────────────
 
+const USAGE = `fix-faq-locales.mjs — allinea le chiavi .faq di en/de/fr all'italiano.
+
+  --dry-run              elenca cosa farebbe, senza scrivere (anche DRY_RUN=1)
+  --limit N              quante voci trattare in questa run
+  --section=<sezione>    frontaliere (default) | svizzera
+  --reescape-broken      riscrive le .faq prodotte dall'escape rotto: nessuna
+                         traduzione, nessun modello, solo la codifica
+  --help                 questo testo, senza leggere ne' scrivere niente
+`;
+
 async function main() {
+  // Prima di qualunque lettura del corpus: `--help` non deve toccare il disco.
+  if (HELP) {
+    console.log(USAGE);
+    return;
+  }
+
+  if (REESCAPE_BROKEN) {
+    console.log(`🔧 Ri-escape dei .faq scritti con l'escape rotto (${SECTION})...\n`);
+    reescapeBroken();
+    return;
+  }
+
   console.log('🔍 Scanning for FAQ locale issues...\n');
 
   const itDir = resolve(BODY_DIR, 'it');
@@ -234,7 +386,14 @@ async function main() {
   logCascadeSummary();
 }
 
-main().catch(err => {
-  console.error('Fatal error:', err);
-  process.exit(1);
-});
+// `main()` parte solo se questo file E' l'entry point, come gia' fa
+// `batch-add-faq-to-articles.mjs`. Senza la guardia, importare il modulo per
+// testarne le funzioni pure lo ESEGUE: leggerebbe `content/` e scriverebbe.
+// E' la guardia a rendere testabili `serializeFaqLiteral`/`parseFaqLiteral`,
+// cioe' le due meta' del difetto che questa PR chiude.
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch(err => {
+    console.error('Fatal error:', err);
+    process.exit(1);
+  });
+}

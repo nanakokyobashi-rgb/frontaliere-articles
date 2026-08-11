@@ -737,6 +737,12 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'alcon-risultati-finanziari-q2-2026': { it: 'alcon-risultati-finanziari-q2-2026', en: 'alcon-q2-2026-financial-results', de: 'alcon-q2-2026-finanzergebnisse', fr: 'alcon-resultats-q2-2026' },
  'economia-svizzera-nazionale-2026': { it: 'economia-svizzera-nazionale-2026', en: 'swiss-economy-national', de: 'schweizerische-wirtschaft-national', fr: 'economie-suisse-nationale' },
  'permesso-di-dimora-b-canton-zurigo-requisiti-e-rinnovo': { it: 'permesso-di-dimora-b-canton-zurigo-requisiti-e-rinnovo', en: 'residence-permit-b-canton-zurich', de: 'aufenthaltstitel-b-kanton-zuerich', fr: 'permis-de-sejour-b-canton-de-zurich' },
+ 'neutralita-prassi-svizzera': { it: 'neutralita-prassi-svizzera', en: 'swiss-neutrality-practice', de: 'schweizerische-neutralita-praxis', fr: 'neutrality-pratique-suisse' },
+ 'bell-bellinzona-aziendale-2026': { it: 'bell-bellinzona-aziendale-2026', en: 'bell-bellinzona-aziendale-2026-en', de: 'bell-bellinzona-aziendale-2026-de', fr: 'bell-bellinzona-aziendale-2026-fr' },
+ 'consiglio-federale-iniziativa-neutralita': { it: 'consiglio-federale-iniziativa-neutralita', en: 'federal-council-reject-neutrality-initiative', de: 'bundesrat-neutralitaetsinitiative-ablehnen', fr: 'conseil-federal-rejeter-initiative-neutralite' },
+ 'premi-cassa-malati-zurigo-riduzione': { it: 'premi-cassa-malati-zurigo-riduzione', en: 'health-insurance-premiums-zurich-reduction', de: 'krankenkassenpraemien-zuerich-verbilligung', fr: 'primes-assurance-maladie-zurich-reduction' },
+ 'permesso-dimora-b-zurigo-guida': { it: 'permesso-dimora-b-zurigo-guida', en: 'residence-permit-b-zurich-requirements', de: 'aufenthaltsbewilligung-b-zuerich-voraussetzungen', fr: 'permis-de-sejour-b-zurich-exigences' },
+ 'permesso-domicilio-c-zurigo-requisiti-domanda': { it: 'permesso-domicilio-c-zurigo-requisiti-domanda', en: 'permit-of-domicile-c-zurich', de: 'aufenthaltstitel-c-zurich', fr: 'permis-de-domicile-c-zurich' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

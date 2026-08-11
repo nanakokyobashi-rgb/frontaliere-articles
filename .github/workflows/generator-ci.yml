@@ -82,6 +82,45 @@ jobs:
       - name: Shell contract - host/ satisfies the mirrored engine
         run: npx -y tsx@4 generator/tests/shell-contract-coverage.mjs
 
+      # The other two thirds of the same contract, and until now NOTHING ran
+      # them. The coverage gate above checks only PRESENCE (`k in shell &&
+      # !== undefined`); `host/tests/` holds the two files that check the
+      # VALUES (a SHA over the 21 scalars that render into every <head>) and
+      # the BEHAVIOUR (a golden of the function half, recorded from the site's
+      # own bootstrap at transport time). Both were orphaned by the same
+      # one-line cause: `tests.yml` and the suite above both discover with
+      # `generator/tests/*.test.mjs` — first level only, and only under
+      # generator/. This workflow already TRIGGERS on `host/**`, so the path
+      # filter was right and only the runner was missing.
+      #
+      # The docstring of shell-contract-functions.test.mjs says of the
+      # point-in-time comparison it replaced: "That is not a gate: nothing
+      # re-runs it". That was also, verbatim, its own state.
+      #
+      # tsx and not node for the same reason as the step above: both files
+      # `await import('../siteShellBootstrap.ts')` and node --test cannot
+      # import TypeScript.
+      #
+      # Discovery by glob rather than two hard-coded paths, so a third file
+      # landing in host/tests/ is gated on arrival instead of repeating this
+      # bug — but `node --test` on a glob that matches NOTHING exits 0, so the
+      # floor below is what keeps the discovery from silently becoming vacuous
+      # (same guard, and the same reason, as the `declared.length < 20` check
+      # inside shell-contract-coverage.mjs).
+      #
+      # Through retry-cmd.sh because `npx -y` hits the registry on every run
+      # (generator/tests/retry-cmd.test.mjs enforces this for every npx in a
+      # workflow). The idempotence this wrapper demands of each call-site is
+      # argued in its own header.
+      - name: Shell contract - transported values and behaviour have not drifted
+        run: |
+          n=$(ls -1 host/tests/*.test.mjs 2>/dev/null | wc -l | tr -d '[:space:]')
+          if [ "$n" -lt 2 ]; then
+            echo "::error::found $n test file(s) under host/tests/, expected at least 2 — the glob stopped matching and this gate would have passed for free."
+            exit 1
+          fi
+          bash scripts/ci/retry-cmd.sh npx -y tsx@4 --test 'host/tests/*.test.mjs'
+
       # The parity gate: the transported modules must still behave exactly as
       # main's did at transport time. The golden was recorded by running the
       # same probes against main's scripts/ tree and confirming both sides were

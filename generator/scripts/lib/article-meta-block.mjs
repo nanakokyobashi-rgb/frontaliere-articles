@@ -97,6 +97,28 @@ export function escapeForSingleQuoteTS(s) {
 }
 
 /**
+ * L'inverso ESATTO di `escapeForSingleQuoteTS`: da' il valore che il parser
+ * TypeScript legge dal literal a singoli apici prodotto sopra.
+ *
+ * Sta qui per la ragione scritta nel commento di `escapeForSingleQuoteTS`: la
+ * coppia scrittore/lettore va tenuta sotto lo stesso sguardo. Prima viveva in
+ * due copie private — `unescapeTs` in `repair-prompt-placeholders.mjs` e la
+ * `.replace(/\\'/g, "'")` dentro `fix-faq-locales.mjs` — e quella seconda copia
+ * NON era l'inverso di niente: conosceva solo l'apostrofo, esattamente come lo
+ * scrittore rotto che le stava accanto. Due mezze funzioni sbagliate in modo
+ * simmetrico si leggono a vicenda senza lamentarsi, e il difetto diventa
+ * visibile solo a valle, quando lo legge qualcun altro.
+ *
+ * Passata SINGOLA, non una catena di `.replace`: ogni sequenza di escape va
+ * consumata una volta sola. Una catena che sostituisce `\n` prima di `\\`
+ * riscrive il `\n` gia' protetto da un backslash raddoppiato, ed e' proprio la
+ * forma di difetto che questo modulo esiste per non ripetere.
+ */
+export function unescapeForSingleQuoteTS(s) {
+  return String(s ?? '').replace(/\\([\s\S])/g, (_, c) => (c === 'n' ? '\n' : c === 'r' ? '\r' : c));
+}
+
+/**
  * Il valore di un campo per una locale, cercato nei due posti in cui i
  * generatori di questo repo tengono i testi per-locale:
  *

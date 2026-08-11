@@ -64070,6 +64070,240 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-trasferirsi-a-vervio-da-frontaliere-pro-e-contro': {
+    title: 'Trasferirsi a Vervio da frontaliere: pro e contro',
+    description: 'Fatti e cifre sulla vita dei frontaliere in Ticino. Quanti sono i vantaggi e svantaggi di trasferirsi a Vervio?. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, vervio, contro, fatti',
+    ogTitle: 'Trasferirsi a Vervio da frontaliere: pro e contro',
+    ogDescription: 'Fatti e cifre sulla vita dei frontaliere in Ticino. Quanti sono i vantaggi e svantaggi di trasferirsi a Vervio?',
+    canonicalPath: '/articoli-frontaliere/trasferirsi-a-vervio-da-frontaliere-pro-e-contro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasferirsi a Vervio da frontaliere: pro e contro",
+      "description": "Fatti e cifre sulla vita dei frontaliere in Ticino. Quanti sono i vantaggi e svantaggi di trasferirsi a Vervio?. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasferirsi-a-vervio-da-frontaliere-pro-e-contro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontalieri Ticino in viaggio dal lavoro in Svizzera all'Italia, con un lago in sfondo."
+      },
+      "datePublished": "2026-08-11T08:08:53+00:00",
+      "dateModified": "2026-08-11T08:08:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trasferirsi-a-vervio-da-frontaliere-pro-e-contro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trasferirsi-a-castello-dellacqua-da-frontaliere-pro-e-contro': {
+    title: 'Trasferirsi a Castello Dell\'Acqua da frontaliere: pro e contro',
+    description: 'La convenzione tra Italia e Svizzera prevede nuove regole per i frontalieri che intendono trasferirsi a Castello Dell\'Acqua per lavoro. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasferirsi, castello, dell, acqua',
+    ogTitle: 'Trasferirsi a Castello Dell\'Acqua da frontaliere: pro e contro',
+    ogDescription: 'La convenzione tra Italia e Svizzera prevede nuove regole per i frontalieri che intendono trasferirsi a Castello Dell\'Acqua per lavoro',
+    canonicalPath: '/articoli-frontaliere/trasferirsi-a-castello-dellacqua-da-frontaliere-pro-e-contro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasferirsi a Castello Dell'Acqua da frontaliere: pro e contro",
+      "description": "La convenzione tra Italia e Svizzera prevede nuove regole per i frontalieri che intendono trasferirsi a Castello Dell'Acqua per lavoro. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasferirsi-a-castello-dellacqua-da-frontaliere-pro-e-contro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere lavora in Castello Dell'Acqua, con il lago di Lugano in secondo piano"
+      },
+      "datePublished": "2026-08-11T08:22:21+00:00",
+      "dateModified": "2026-08-11T08:22:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/trasferirsi-a-castello-dellacqua-da-frontaliere-pro-e-contro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sanzioni-sicurezza-lavoro-comasco': {
+    title: 'Sanzioni per sicurezza lavoro nel Comasco: 18 imprese sospese',
+    description: 'Il Comando Provinciale dei Carabinieri di Como ha condotto 18 controlli ispettivi sul territorio provinciale, portando all\'adozione di 18 provvedimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, sanzioni, sicurezza, lavoro, comasco',
+    ogTitle: 'Sanzioni per sicurezza lavoro nel Comasco: 18 imprese sospese',
+    ogDescription: 'Il Comando Provinciale dei Carabinieri di Como ha condotto 18 controlli ispettivi sul territorio provinciale, portando all\'adozione di 18 provvedimenti di sospensione dell\'attività imprenditoriale.',
+    canonicalPath: '/articoli-frontaliere/sanzioni-sicurezza-lavoro-comasco',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sanzioni per sicurezza lavoro nel Comasco: 18 imprese sospese",
+      "description": "Il Comando Provinciale dei Carabinieri di Como ha condotto 18 controlli ispettivi sul territorio provinciale, portando all'adozione di 18 provvedimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sanzioni-sicurezza-lavoro-comasco.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Fotografia di un valico di frontiera in Ticino"
+      },
+      "datePublished": "2026-08-11T08:30:29+00:00",
+      "dateModified": "2026-08-11T08:30:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/sanzioni-sicurezza-lavoro-comasco/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere': {
+    title: 'Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024',
+    description: 'Il Nuovo Accordo Frontalieri del 2024 è entrato in vigore dal 1° gennaio 2024 e prevede l\'esenzione di € 7.500 per i vecchi frontalieri e di € 10.000',
+    keywords: 'frontalieri, ticino, svizzera, italia, cosa, cambia, nuovo, accordo',
+    ogTitle: 'Vivere a Tovo di Sant\'Agata e lavorare in Grigioni da frontaliere: cosa cambia con il Nuovo Accordo Frontalieri del 2024',
+    ogDescription: 'Il Nuovo Accordo Frontalieri del 2024 è entrato in vigore dal 1° gennaio 2024 e prevede l\'esenzione di € 7.500 per i vecchi frontalieri e di € 10.000 per i nuovi frontalieri.',
+    canonicalPath: '/articoli-frontaliere/vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024",
+      "description": "Il Nuovo Accordo Frontalieri del 2024 è entrato in vigore dal 1° gennaio 2024 e prevede l'esenzione di € 7.500 per i vecchi frontalieri e di € 10.000",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere che attraversa il confine tra Tovo di Sant'Agata e Grigioni."
+      },
+      "datePublished": "2026-08-11T08:43:29+00:00",
+      "dateModified": "2026-08-11T08:43:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-allacasadicomunitalavenosegnala': {
+    title: 'Lavoro a 37 gradi a Laveno, il sindacato segnala',
+    description: 'Il sindacato ha segnalato il caso di una casa di comunità in Laveno dove si lavora con temperature elevate. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavoro, gradi, laveno, sindacato',
+    ogTitle: 'Alla casa di Comunità di Laveno si lavora con temperature fino a 37 gradi',
+    ogDescription: 'Il sindacato ha segnalato il caso di una casa di comunità in Laveno dove si lavora con temperature elevate',
+    canonicalPath: '/articoli-frontaliere/allacasadicomunitalavenosegnala',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavoro a 37 gradi a Laveno, il sindacato segnala",
+      "description": "Il sindacato ha segnalato il caso di una casa di comunità in Laveno dove si lavora con temperature elevate. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/allacasadicomunitalavenosegnala.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una casa di comunità in Ticino con temperature elevate"
+      },
+      "datePublished": "2026-08-11T08:52:14+00:00",
+      "dateModified": "2026-08-11T08:52:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/allacasadicomunitalavenosegnala/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-tovo-lavorare-grigioni': {
+    title: 'Vivere a Tovo di Sant\'Agata e lavorare in Grigioni',
+    description: 'Guida per frontalieri: fiscalità, nuovo accordo 2024, franchigie e contributi per chi lavora nei Grigioni risiedendo in Valtellina. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, tovo, sant, agata',
+    ogTitle: 'Vivere a Tovo di Sant\'Agata e lavorare in Grigioni',
+    ogDescription: 'Tutto quello che i frontalieri devono sapere su tassazione, nuovo accordo 2024, franchigie e previdenza lavorando nel Cantone dei Grigioni.',
+    canonicalPath: '/articoli-frontaliere/vivere-tovo-lavorare-grigioni',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Tovo di Sant'Agata e lavorare in Grigioni",
+      "description": "Guida per frontalieri: fiscalità, nuovo accordo 2024, franchigie e contributi per chi lavora nei Grigioni risiedendo in Valtellina. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-tovo-lavorare-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di una strada montana vicino al confine tra Italia e Svizzera"
+      },
+      "datePublished": "2026-08-11T09:05:24+00:00",
+      "dateModified": "2026-08-11T09:05:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-tovo-lavorare-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
