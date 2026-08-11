@@ -62,13 +62,48 @@ const NOW = Date.parse('2026-08-10T16:00:00.000Z');
 // col produttore, e la loro forma esatta è l'unica cosa che il parser deve
 // sapere. Provengono dalle run 31402084443 / 31405217754 / 31394604922 e dalla
 // finestra 2026-08-09→10 di `generate-article.yml`.
+//
+// ⚠ Un campione che invecchia è PEGGIO di nessun campione: certifica il parser
+// contro un input che la produzione non produce più, e resta verde mentre il
+// watchdog è cieco. È successo qui: la riga `PRESPEND_GATE_TOTAL_REJECTION` di
+// questa fixture non aveva `backstop=`, che #185 emette dal 2026-08-10, e il
+// parser posizionale che la leggeva non agganciava più NIENTE in produzione
+// (misurato l'11-08: 35 righe reali, 0 match) mentre questa suite passava.
+// Chi tocca un marker della pipeline aggiorna il campione nello stesso giro.
 const LOG_SVIZZERA_EMPTIED = [
   'generate\tResolve run mode and section\t2026-08-10T09:08:01.6991912Z \x1b[36;1mecho "event=$EV chain=$CHAIN → section=$SEC dry_run=$DRY"\x1b[0m',
   'generate\tResolve run mode and section\t2026-08-10T09:08:01.7127129Z event=schedule chain=false → section=svizzera dry_run=false',
   'generate\tGenerate the article\t2026-08-10T09:08:10.4887160Z   TARGET_SECTION: svizzera',
-  'generate\tGenerate the article\t2026-08-10T09:08:40.1Z PRESPEND_GATE_TOTAL_REJECTION before=5 classifier_calls=5 anchor_candidates=0 restored=0 kept_after=0 section=svizzera',
+  'generate\tGenerate the article\t2026-08-10T09:08:40.1Z PRESPEND_GATE_TOTAL_REJECTION before=5 classifier_calls=5 anchor_candidates=0 restored=0 backstop=none kept_after=0 section=svizzera',
   'generate\tGenerate the article\t2026-08-10T09:08:51.9Z ⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.',
   'generate\tGenerate the article\t2026-08-10T09:08:52.0029325Z PRESPEND_GATE_OUTCOME emptied=1 recovered=none before=6 kept=0 status=skipped section=svizzera',
+].join('\n');
+
+// La forma PRE-#185 della stessa riga, senza `backstop=`. Resta in retention
+// per giorni, quindi il parser deve leggerla ancora: è il campo OPZIONALE, non
+// il campo obbligatorio di ieri.
+const LOG_TOTAL_REJECTION_PRE_185 =
+  'generate\tGenerate the article\t2026-08-09T22:10:00.1Z PRESPEND_GATE_TOTAL_REJECTION before=5 classifier_calls=5 anchor_candidates=0 restored=0 kept_after=0 section=svizzera';
+
+// ── Il difetto di questa PR, VERBATIM dalla run 31455920617 (2026-08-11T03:36).
+// Il pool news è svuotato (`emptied=1`) e la sezione pubblica lo stesso, con un
+// evergreen al posto della news (`recovered=evergreen`). Nella finestra di 12h
+// misurata l'11-08 questa è la forma di 29 run su 32 svuotate: era la totalità
+// del difetto, e il predicato `recovered === 'none'` non ne vedeva nessuna.
+const LOG_FRONTALIERE_EMPTIED_EVERGREEN = [
+  'generate\tResolve run mode and section\t2026-08-11T03:36:50.1Z event=schedule chain=false → section=frontaliere dry_run=false',
+  'generate\tGenerate the article\t2026-08-11T03:37:10.1Z   TARGET_SECTION: frontaliere',
+  'generate\tGenerate the article\t2026-08-11T03:40:02.1Z PRESPEND_GATE_TOTAL_REJECTION before=31 classifier_calls=31 anchor_candidates=0 restored=0 backstop=none kept_after=0 section=frontaliere',
+  'generate\tGenerate the article\t2026-08-11T03:44:11.1Z PRESPEND_GATE_OUTCOME emptied=1 recovered=evergreen before=31 kept=0 status=generated section=frontaliere',
+].join('\n');
+
+// ── Una run sola che prova ENTRAMBE le sezioni, VERBATIM dalla run 31426037947
+// (2026-08-10T19:50). Due righe `PRESPEND_GATE_OUTCOME`: la prima frontaliere,
+// la seconda svizzera. Con `exec` la seconda non la leggeva nessuno.
+const LOG_DUE_SEZIONI = [
+  'generate\tResolve run mode and section\t2026-08-10T19:50:10.1Z event=push chain=true → section=frontaliere dry_run=false',
+  'generate\tGenerate the article\t2026-08-10T19:52:00.1Z PRESPEND_GATE_OUTCOME emptied=1 recovered=none before=33 kept=0 status=deferred section=frontaliere',
+  'generate\tGenerate the article\t2026-08-10T19:58:00.1Z PRESPEND_GATE_OUTCOME emptied=0 recovered=news before=62 kept=30 status=generated section=svizzera',
 ].join('\n');
 
 const LOG_FRONTALIERE_OK = [
@@ -131,21 +166,72 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
     assert.equal(r.section, 'svizzera');
     assert.equal(r.dryRun, false);
     assert.equal(r.event, 'schedule');
-    assert.deepEqual(r.gate, {
+    assert.deepEqual(r.gates, [{
       emptied: true, recovered: 'none', before: 6, kept: 0, status: 'skipped', section: 'svizzera',
-    });
-    assert.equal(r.totalRejections, 1);
+    }]);
+    assert.equal(r.totalRejections.length, 1);
     assert.equal(r.evergreenSaturated, true);
+  });
+
+  test('legge `backstop=`, il campo che #185 ha aggiunto in MEZZO alla riga', () => {
+    // Il campione sopra porta la riga di OGGI. Questo test la interroga sul
+    // campo nuovo: se qualcuno rimettesse un parser posizionale, `backstop`
+    // tornerebbe `null` — o, come è successo davvero, la riga non aggancerebbe
+    // affatto e `totalRejections` sarebbe vuoto con la suite verde.
+    const r = parseRunLog(LOG_SVIZZERA_EMPTIED);
+    assert.deepEqual(r.totalRejections[0], {
+      before: 5, classifierCalls: 5, anchorCandidates: 0, restored: 0,
+      backstop: 'none', keptAfter: 0, section: 'svizzera',
+    });
+  });
+
+  test('la forma PRE-#185, senza `backstop=`, resta leggibile', () => {
+    // I log in retention non si riscrivono: il campo è opzionale, non sparito.
+    const r = parseRunLog(LOG_TOTAL_REJECTION_PRE_185);
+    assert.equal(r.totalRejections.length, 1);
+    assert.equal(r.totalRejections[0].backstop, null);
+    assert.equal(r.totalRejections[0].keptAfter, 0);
+    assert.equal(r.totalRejections[0].section, 'svizzera');
+  });
+
+  test('un campo NUOVO non rompe il marker — è il difetto di #185 reso impossibile', () => {
+    // La proprietà che il parser posizionale non aveva: chi aggiunge un campo
+    // alla telemetria non deve poter azzerare in silenzio un denominatore.
+    const r = parseRunLog(
+      'generate\tx\t2026-08-11T00:00:00Z PRESPEND_GATE_OUTCOME emptied=1 recovered=evergreen'
+      + ' before=31 kept=0 status=generated campo_del_futuro=42 section=frontaliere',
+    );
+    assert.equal(r.gates.length, 1);
+    assert.equal(r.gates[0].emptied, true);
+    assert.equal(r.gates[0].section, 'frontaliere');
+  });
+
+  test('un marker senza le chiavi che servono viene SCARTATO, non completato con zeri', () => {
+    // «Permissivo» non è «credulone»: uno zero inventato entrerebbe nei
+    // denominatori come se fosse una misura.
+    const r = parseRunLog('generate\tx\t2026-08-11T00:00:00Z PRESPEND_GATE_OUTCOME emptied=1 recovered=none');
+    assert.deepEqual(r.gates, []);
   });
 
   test('una run sana non produce nessun segnale acceso', () => {
     const r = parseRunLog(LOG_FRONTALIERE_OK);
     assert.equal(r.section, 'frontaliere');
-    assert.equal(r.gate.emptied, false);
-    assert.equal(r.gate.recovered, 'evergreen');
-    assert.equal(r.gate.status, 'generated');
+    assert.equal(r.gates[0].emptied, false);
+    assert.equal(r.gates[0].recovered, 'evergreen');
+    assert.equal(r.gates[0].status, 'generated');
     assert.equal(r.evergreenSaturated, false);
     assert.equal(r.tokenLimitSkips.length, 0);
+  });
+
+  test('DUE righe del gate nella stessa run: si leggono entrambe', () => {
+    // Dopo #180 una run prova entrambe le sezioni. `exec` leggeva la prima e
+    // basta: la seconda non la leggeva nessuno, e l'esito del gate di quella
+    // sezione spariva dal suo denominatore.
+    const r = parseRunLog(LOG_DUE_SEZIONI);
+    assert.equal(r.gates.length, 2);
+    assert.deepEqual(r.gates.map((g) => g.section), ['frontaliere', 'svizzera']);
+    // La sezione della RUN resta frontaliere: è un'altra domanda.
+    assert.equal(r.section, 'frontaliere');
   });
 
   test('l\'ECO del comando non viene scambiata per il suo output', () => {
@@ -179,7 +265,8 @@ describe('parseRunLog — i marker già emessi dalla pipeline', () => {
     for (const t of ['', null, undefined, 'una riga qualsiasi']) {
       const r = parseRunLog(t);
       assert.equal(r.section, null);
-      assert.equal(r.gate, null);
+      assert.deepEqual(r.gates, []);
+      assert.deepEqual(r.totalRejections, []);
       assert.deepEqual(r.tokenLimitSkips, []);
     }
   });
@@ -200,7 +287,55 @@ describe('summarizeRuns — i denominatori', () => {
     const agg = s.bySection.get('svizzera');
     assert.equal(agg.runs, 3);
     assert.equal(agg.gateRuns, 1);
-    assert.equal(agg.gateEmptiedUnrecovered, 1);
+    assert.equal(agg.gateEmptied, 1);
+  });
+
+  test('IL DIFETTO: `recovered=evergreen` è uno SVUOTAMENTO, non un recupero', () => {
+    // Il test che conta. `resolveRunRecovery()` risponde a «questa run ha
+    // pubblicato, e cosa» — non a «il pool news si è ripreso». `evergreen`
+    // significa che la sezione ha pubblicato un evergreen AL POSTO della news:
+    // il pool news è rimasto vuoto. Contarlo come recupero (il vecchio
+    // `emptied && recovered === 'none'`) rendeva invisibile il 91% del difetto
+    // misurato l'11-08 (29 `evergreen` su 32 svuotamenti frontaliere).
+    const s = summarizeRuns([parseRunLog(LOG_FRONTALIERE_EMPTIED_EVERGREEN)]);
+    const agg = s.bySection.get('frontaliere');
+    assert.equal(agg.gateRuns, 1);
+    assert.equal(agg.gateEmptied, 1, 'uno svuotamento con recovered=evergreen DEVE contare');
+    assert.equal(agg.gateRecovered.evergreen, 1);
+    assert.equal(agg.gateRecovered.none, 0);
+    // `recovered` resta come dimensione del corpo, non come filtro.
+    assert.equal(agg.totalRejections, 1);
+    assert.equal(agg.anchorCandidatesZero, 1);
+    assert.equal(agg.restoredZero, 1);
+    assert.deepEqual(agg.backstopKinds, { none: 1 });
+  });
+
+  test('le due righe di una run bi-sezione vanno alle LORO sezioni', () => {
+    // La run è dichiarata `frontaliere`, ma porta anche l'esito di `svizzera`.
+    // Attribuire entrambe alla sezione della run gonfierebbe un denominatore e
+    // svuoterebbe l'altro.
+    const s = summarizeRuns([parseRunLog(LOG_DUE_SEZIONI)]);
+    const front = s.bySection.get('frontaliere');
+    const sviz = s.bySection.get('svizzera');
+    assert.equal(front.gateRuns, 1);
+    assert.equal(front.gateEmptied, 1);
+    assert.equal(sviz.gateRuns, 1, 'la seconda riga non deve sparire');
+    assert.equal(sviz.gateEmptied, 0);
+    // `runs` resta della sezione della RUN: sono due denominatori di due
+    // domande diverse, e `gateRuns` può legittimamente superare `runs`.
+    assert.equal(front.runs, 1);
+    assert.equal(sviz.runs, 0);
+  });
+
+  test('un valore NUOVO di `recovered` compare nel conteggio invece di sparire', () => {
+    // Stessa regola di `pairKeyOf`: un cambio di contratto a monte si vede.
+    const s = summarizeRuns([parseRunLog(
+      'generate\tx\t2026-08-11T00:00:00Z PRESPEND_GATE_OUTCOME emptied=1 recovered=sintetico'
+      + ' before=9 kept=0 status=generated section=svizzera',
+    )]);
+    const agg = s.bySection.get('svizzera');
+    assert.equal(agg.gateEmptied, 1);
+    assert.equal(agg.gateRecovered.sintetico, 1);
   });
 
   test('conta le run oversize per MODELLI DISTINTI, non per numero di salti', () => {
@@ -216,11 +351,32 @@ describe('summarizeRuns — i denominatori', () => {
 
 // ── 2. Le condizioni e le loro soglie ───────────────────────────────────────
 
+/**
+ * Un aggregato di sezione con TUTTI i campi che `summarizeRuns` produce.
+ *
+ * Costruito da una funzione e non a mano in ogni test: un fixture scritto a
+ * mano che dimentica un campo nuovo fa passare un corpo di issue che in
+ * produzione lancerebbe, ed è la stessa classe di difetto del campione di log
+ * invecchiato qui sopra.
+ */
+const agg = (over = {}) => ({
+  runs: 30,
+  saturated: 0,
+  gateRuns: 10,
+  gateEmptied: 0,
+  gateRecovered: { none: 0, evergreen: 0, news: 0 },
+  totalRejections: 0,
+  anchorCandidatesZero: 0,
+  restoredZero: 0,
+  backstopKinds: {},
+  ...over,
+});
+
 /** Misura di riferimento: tutto sano. Ogni condizione deve essere SPENTA qui. */
 function healthy() {
   const bySection = new Map();
   for (const s of SECTIONS) {
-    bySection.set(s, { runs: 30, saturated: 0, gateRuns: 10, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    bySection.set(s, agg());
   }
   return {
     now: NOW,
@@ -273,7 +429,7 @@ describe('le condizioni sono SPENTE sulla normalità misurata', () => {
 
   test('la quota di saturazione del lato ancora produttivo (64%) non accende', () => {
     const m = healthy();
-    m.runs.bySection.set('svizzera', { runs: 25, saturated: 16, gateRuns: 10, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    m.runs.bySection.set('svizzera', agg({ runs: 25, saturated: 16, gateRuns: 10 }));
     assert.ok(16 / 25 < SATURATION_RATE);
     assert.equal(verdictFor(m, 'evergreen-pool-saturated', 'svizzera').firing, false);
   });
@@ -317,21 +473,70 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
 
   test('evergreen-pool-saturated: svizzera a 16/18 (89%), frontaliere a 0/62', () => {
     const m = healthy();
-    m.runs.bySection.set('svizzera', { runs: 18, saturated: 16, gateRuns: 4, gateEmptiedUnrecovered: 0, totalRejections: 0 });
-    m.runs.bySection.set('frontaliere', { runs: 62, saturated: 0, gateRuns: 10, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 4 }));
+    m.runs.bySection.set('frontaliere', agg({ runs: 62, saturated: 0, gateRuns: 10 }));
     assert.equal(verdictFor(m, 'evergreen-pool-saturated', 'svizzera').firing, true);
     assert.equal(verdictFor(m, 'evergreen-pool-saturated', 'frontaliere').firing, false);
   });
 
   test('news-pool-total-rejection: svizzera 11/13 (85%), frontaliere 0/10', () => {
     const m = healthy();
-    m.runs.bySection.set('svizzera', { runs: 40, saturated: 0, gateRuns: 13, gateEmptiedUnrecovered: 11, totalRejections: 11 });
+    m.runs.bySection.set('svizzera', agg({ runs: 40, saturated: 0, gateRuns: 13, gateEmptied: 11, gateRecovered: { none: 11, evergreen: 0, news: 0 }, totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 } }));
     const v = verdictFor(m, 'news-pool-total-rejection', 'svizzera');
     assert.equal(v.firing, true);
     assert.match(v.body, /11 run su 13/);
     // La causa, che è ciò che serve al fixer: il backstop non può scattare.
     assert.match(v.body, /anchor_candidates/);
     assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, false);
+  });
+
+  test('IL DIFETTO, dal lato della condizione: frontaliere 32/34 con recovered=evergreen ACCENDE', () => {
+    // La misura reale dell'11-08 (finestra 12h, 69 run non-cancellate). Col
+    // vecchio predicato questa stessa finestra dava 3/34 = 9% e la condizione
+    // taceva, mentre la sezione svuotava il pool news nel 94% delle run.
+    const m = healthy();
+    m.runs.bySection.set('frontaliere', agg({
+      runs: 38, gateRuns: 34, gateEmptied: 32,
+      gateRecovered: { none: 3, evergreen: 29, news: 0 },
+      totalRejections: 35, anchorCandidatesZero: 35, restoredZero: 35, backstopKinds: { none: 35 },
+    }));
+    m.runs.bySection.set('svizzera', agg({ runs: 31, gateRuns: 34, gateEmptied: 0 }));
+    const v = verdictFor(m, 'news-pool-total-rejection', 'frontaliere');
+    assert.equal(v.firing, true, 'con recovered=evergreen la condizione DEVE accendersi');
+    assert.match(v.body, /32 run su 34/);
+    // `recovered` sopravvive come DIMENSIONE del corpo, non come filtro.
+    assert.match(v.body, /`none` 3, `evergreen` 29/);
+    // Il lato sano resta spento: la fix allarga il numeratore, non la soglia.
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'svizzera').firing, false);
+    assert.ok(32 / 34 >= TOTAL_REJECTION_RATE && 3 / 34 < TOTAL_REJECTION_RATE,
+      'la soglia 0,70 separa il predicato corretto da quello vecchio SULLA STESSA finestra');
+  });
+
+  test('il corpo NON fa scattare il gate already-resolved: la issue resta lavorabile', async () => {
+    // `check-issue-already-resolved.mjs` salta il fixer quando OGNI token
+    // distintivo del `## Suggested action` si trova verbatim in un file citato.
+    // Il footer cita QUESTO scanner, che contiene le stringhe del corpo alla
+    // lettera: un `path.mjs:771` fra backtick si auto-confermerebbe e la issue
+    // nascerebbe non-lavorabile — «un body povero produce una issue che nessuno
+    // può prendere», nella forma peggiore, cioè con la CI verde.
+    const { detectAlreadyResolved } = await import('../../scripts/ci/followup-resolution-match.mjs');
+    const io = {
+      fileExists: (p) => fs.existsSync(path.join(ROOT, p)),
+      readFile: (p) => { try { return fs.readFileSync(path.join(ROOT, p), 'utf8'); } catch { return null; } },
+    };
+    const m = healthy();
+    m.runs.bySection.set('frontaliere', agg({
+      runs: 38, gateRuns: 34, gateEmptied: 32,
+      gateRecovered: { none: 3, evergreen: 29, news: 0 },
+      totalRejections: 35, anchorCandidatesZero: 35, restoredZero: 35, backstopKinds: { none: 35 },
+    }));
+    const v = verdictFor(m, 'news-pool-total-rejection', 'frontaliere');
+    assert.equal(v.firing, true);
+    const r = detectAlreadyResolved(v.body, io);
+    assert.equal(r.resolved, false,
+      `il gate short-circuiterebbe il fixer su token: ${JSON.stringify(r.tokens)}`);
+    // Il path resta CITATO — è ciò che dà al fixer il file su cui lavorare.
+    assert.ok(r.files.includes('generator/scripts/create-article.mjs'));
   });
 
   test('prompt-oversize: 4 run con ≥5 modelli distinti saltati', () => {
@@ -471,7 +676,7 @@ describe('soppressione: una incidenza, una issue', () => {
     const m = healthy();
     m.commits.perSection.svizzera.lastArticleAt = NOW - 17 * H;
     m.commits.perSection.frontaliere.timestamps = Array.from({ length: 14 }, (_, i) => NOW - i * H);
-    m.runs.bySection.set('svizzera', { runs: 18, saturated: 16, gateRuns: 4, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 4 }));
 
     const v = verdictFor(m, 'section-dry', 'svizzera');
     assert.equal(v.firing, false);
@@ -493,7 +698,7 @@ describe('soppressione: una incidenza, una issue', () => {
     const m = healthy();
     m.commits.perSection.svizzera.lastArticleAt = NOW - 17 * H;
     m.commits.perSection.frontaliere.timestamps = Array.from({ length: 14 }, (_, i) => NOW - i * H);
-    m.runs.bySection.set('svizzera', { runs: 18, saturated: 16, gateRuns: 4, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 4 }));
     const before = evaluateConditions(m).map((v) => `${v.id}[${v.section}]=${v.firing}`).sort();
     CONDITIONS.reverse();
     try {
@@ -620,7 +825,7 @@ describe('ogni condizione che si apre si può chiudere — il test del precedent
     m.commits.lastArticleAt = NOW - 19 * H;
     m.commits.perSection.svizzera.lastArticleAt = NOW - 19 * H;
     m.commits.perSection.frontaliere.timestamps = Array.from({ length: 14 }, (_, i) => NOW - i * H);
-    m.runs.bySection.set('svizzera', { runs: 18, saturated: 16, gateRuns: 13, gateEmptiedUnrecovered: 11, totalRejections: 11 });
+    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 13, gateEmptied: 11, gateRecovered: { none: 11, evergreen: 0, news: 0 }, totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 } }));
     m.runs.oversize = { runs: 4, maxEstimated: 10930, limitsCrossed: [8000], distinctModels: 22, models: [] };
 
     const created = [];
