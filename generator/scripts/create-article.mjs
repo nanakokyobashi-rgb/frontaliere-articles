@@ -564,11 +564,11 @@ async function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
   const prompt = IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
 
-È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR.
+È RILEVANTE: lavoro/occupazione frontalieri TI, fiscalità (imposta alla fonte, ristorni, AVS/LPP), permessi B/G/C, salute (LAMal/cassa malati), trasporti pendolari, accordi Italia-Svizzera, riforme normative, mercato del lavoro ticinese, cambio CHF-EUR. ATTENZIONE: una notizia o statistica sui frontalieri ITALIANI aggregata a livello nazionale/svizzero (non limitata esplicitamente a un'altra regione) è RILEVANTE anche se non nomina il Ticino — il Ticino è il canton con la maggioranza dei frontalieri italiani, quindi un dato aggregato Italia-Svizzera lo riguarda per costruzione.
 
 NON è rilevante:
 - Cronaca dove "frontaliere/transfrontaliero" appare solo come aggettivo (cittadino frontaliere, area frontaliera, comune di confine) senza tema lavorativo/fiscale/permessi
-- Frontalieri di altri confini (Francia-Svizzera, Italia-Slovenia, ecc.) non Ticino-Italia
+- Frontalieri di confini DIVERSI da Italia-Svizzera (Francia-Svizzera, Italia-Slovenia, Germania-Svizzera, ecc.)
 - Eventi culturali, sportivi, festival, gastronomia (anche se localizzati a Ticino o area di confine)
 - Singoli episodi di cronaca (multe, incidenti, arresti, abbandono rifiuti) senza implicazioni di policy o impatto sui pendolari
 - Infrastruttura italiana lontana dal confine, eventi USA/UE senza impatto pendolare
