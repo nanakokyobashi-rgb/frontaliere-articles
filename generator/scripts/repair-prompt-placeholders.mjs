@@ -371,12 +371,27 @@ if (!CHECK_ONLY) {
 //
 // Il criterio e' in `orphanFaqLocales()`, ed e' strutturale invece che
 // testuale di proposito: vedi l'intestazione della funzione.
-const FAQ_LINE_RE = /\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)',?/;
+//
+// `g` e' obbligatorio su entrambe le regex sotto: senza, sia la lettura di
+// stato sia la rimozione si fermano al PRIMO match. Una seconda chiave `.faq`
+// nello stesso file — residuo plausibile di un merge, mai osservato nel
+// corpus attuale ma non escluso da uno futuro — resterebbe cosi' invisibile a
+// `faqStateOf()` e sopravviverebbe alla rimozione: e' pubblicata come
+// FAQPage JSON-LD, quindi orfana e live.
+const FAQ_LINE_RE = /\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)',?/g;
 
 function faqStateOf(abs) {
   if (!fs.existsSync(abs)) return { hasFile: false, hasFaq: false };
-  const m = /'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/.exec(fs.readFileSync(abs, 'utf-8'));
-  return { hasFile: true, hasFaq: Boolean(m) && m[1] !== '__DROP_FAQ__' };
+  const src = fs.readFileSync(abs, 'utf-8');
+  const re = /'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/g;
+  let hasFaq = false;
+  let m;
+  // Basta UNA occorrenza con contenuto vero: e' la stessa soglia con cui
+  // il passo 2b decide se una locale ha ancora una FAQ da orfanare.
+  while ((m = re.exec(src)) !== null) {
+    if (m[1] !== '__DROP_FAQ__') { hasFaq = true; break; }
+  }
+  return { hasFile: true, hasFaq };
 }
 
 for (const dir of ['blog-body', 'blog-body-ch']) {
@@ -392,9 +407,12 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
       const rel = path.join('content', dir, locale, name);
       const abs = path.join(ROOT, rel);
       const src = fs.readFileSync(abs, 'utf-8');
-      let dropped = '';
+      // `g` su FAQ_LINE_RE fa si' che `replace` tolga OGNI occorrenza, non
+      // solo la prima: un file con due chiavi `.faq` (residuo di merge) le
+      // perde entrambe invece di lasciarne una orfana e live.
+      const dropped = [];
       const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
-        dropped = raw;
+        dropped.push(raw);
         return '';
       });
       if (next === src) {
@@ -402,8 +420,9 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
         continue;
       }
       if (!CHECK_ONLY) fs.writeFileSync(abs, next);
-      total += 1;
-      changes.push({ rel, id, field: 'faq', locale, how: 'faq-orfana rimossa (assente in it)', before: dropped, after: '(chiave rimossa)' });
+      total += dropped.length;
+      const how = dropped.length > 1 ? `faq-orfana rimossa (assente in it, ${dropped.length}×)` : 'faq-orfana rimossa (assente in it)';
+      changes.push({ rel, id, field: 'faq', locale, how, before: dropped[0], after: '(chiave rimossa)' });
     }
   }
 }
