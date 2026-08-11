@@ -9751,6 +9751,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'Una mozione per un Fondo cantonale per la mobilità sostenibile',
     'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'Un gruppo di deputati ha presentato una mozione per istituire un Fondo cantonale per la mobilità sostenibile.',
     'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'Un nuovo fondo per la mobilità sostenibile in Ticino.',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.title': 'Regole per i frontalieri che lavorano da remoto: 25/45 giorni',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.excerpt': 'Le nuove regole per i frontalieri che lavorano da remoto in Svizzera',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.imageAlt': 'Regole per i frontalieri che lavorano da remoto',
 };
 
 export default blogMetaIt;

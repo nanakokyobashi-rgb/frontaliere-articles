@@ -9750,6 +9750,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'A motion for a Cantonal Fund for Sustainable Mobility',
     'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'A group of MEPs tabled a motion to establish a Cantonal Fund for Sustainable Mobility.',
     'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'A new cantonal fund for sustainable mobility in Ticino.',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.title': 'Rules for cross-border workers working remotely: 25/45 days',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.excerpt': 'The new rules for cross-border commuters working remotely in Switzerland',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.imageAlt': 'Rules for remote workers from Italy to Switzerland',
 };
 
 export default blogMetaEn;

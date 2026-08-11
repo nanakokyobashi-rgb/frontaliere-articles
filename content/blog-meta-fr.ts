@@ -9752,6 +9752,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fondo-cantonale-mobilita-sostenibile.title': 'Une motion pour un fonds cantonal pour la mobilité durable',
     'blog.article.fondo-cantonale-mobilita-sostenibile.excerpt': 'Un groupe de députés a présenté une motion visant à créer un fonds cantonal pour la mobilité durable.',
     'blog.article.fondo-cantonale-mobilita-sostenibile.imageAlt': 'Un nouveau fonds cantonal pour la mobilité durable au Tessin.',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.title': 'Règles pour les frontaliers qui travaillent à distance : 25/45 jours',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.excerpt': 'Les nouvelles règles pour les navetteurs transfrontaliers travaillant à distance en Suisse',
+    'blog.article.telelavoro-frontalieri-2026-regole-25-45-giorni.imageAlt': 'Règles pour les travailleurs à distance d\'Italie en Suisse',
 };
 
 export default blogMetaFr;
