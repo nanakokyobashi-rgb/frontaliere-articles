@@ -247,19 +247,48 @@ export const MAX_LOG_RUNS_DEFAULT = 60;
  * `news-pool-total-rejection` — la Fase 1 news della sezione esce sempre vuota.
  *
  * Quota di run della sezione che HANNO eseguito il pre-spend gate e ne escono
- * `emptied=1 recovered=none`. Il denominatore sono le sole run in cui il gate è
- * girato davvero: `finalizeRunReport` non emette la riga quando il gate non è
- * stato eseguito (FORCE_EVERGREEN, scan vuoto), e contare quelle come «non
- * svuotate» diluirebbe il segnale con run che non sono evidenza di niente.
+ * `emptied=1`, QUALUNQUE sia `recovered`. Il denominatore sono le sole run in
+ * cui il gate è girato davvero: `finalizeRunReport` non emette la riga quando
+ * il gate non è stato eseguito (FORCE_EVERGREEN, scan vuoto), e contare quelle
+ * come «non svuotate» diluirebbe il segnale con run che non sono evidenza di
+ * niente.
  *
- * Misurato: svizzera 11 su 13 (85%), frontaliere 0 su 10 (0%). Su finestre
- * scorrevoli di 12h svizzera non scende mai sotto il 78% (5/6, 7/9, 11/13,
- * 11/12, 6/7, 4/4) e frontaliere resta a 0 in tutte.
+ * Il perché `recovered` non è più un filtro sta su `summarizeRuns`: era il
+ * difetto, non la taratura.
  *
- * 0,70 sta 8 punti sotto il minimo osservato del lato rotto e 70 punti sopra il
- * massimo osservato del lato sano. Campione minimo 4: il gate gira ~0,38 volte
- * l'ora per sezione, quindi pretenderne di più significherebbe una finestra da
- * oltre 16h e un allarme che arriva il giorno dopo.
+ * ── Ritarato il 2026-08-11 (le 69 run non-cancellate delle ultime 12h) ──────
+ *
+ * La misura che aveva scelto 0,70 (svizzera 85%, frontaliere 0%) è del
+ * 2026-08-09→10 ed è invecchiata in venti ore: #185 ha aggiunto il backstop di
+ * sezione per il pool NAZIONALE e svizzera è guarita, mentre frontaliere — che
+ * quel backstop non lo può eseguire (`!IS_FRONTALIERE`) — è passata a svuotarsi
+ * quasi sempre. La soglia era cioè calibrata sulla sezione sbagliata.
+ *
+ * Con il predicato corretto, per passata reale del watchdog (finestra 12h):
+ *   2026-08-10T17:25  frontaliere  0/11   0%   · svizzera 12/15  80%  ← ACCESA
+ *   2026-08-10T19:42  frontaliere  5/16  31%   · svizzera 12/20  60%
+ *   2026-08-10T21:26  frontaliere 10/19  53%   · svizzera 10/22  45%
+ *   2026-08-10T23:18  frontaliere 15/22  68%   · svizzera  7/24  29%
+ *   2026-08-11T02:53  frontaliere 30/33  91%   · svizzera  5/36  14%  ← ACCESA
+ *   2026-08-11T05:41  frontaliere 35/35 100%   · svizzera  0/35   0%  ← ACCESA
+ *   2026-08-11T07:44  frontaliere 32/34  94%   · svizzera  0/34   0%  ← ACCESA
+ *
+ * **0,70 resta il valore giusto, e ora ha due lati misurati invece di uno.**
+ * Lato rotto: minimo 80% (svizzera al 17:25), poi 91-100% (frontaliere). Lato
+ * sano: massimo 14%. La soglia sta 10 punti sotto il minimo del lato rotto e 56
+ * sopra il massimo del lato sano — una separazione più larga di quella su cui
+ * era stata scelta.
+ *
+ * Le tre righe centrali sono la RAMPA: la finestra di 12h è a cavallo del
+ * cambio di regime e mescola run sane e rotte. 0,70 fa arrivare l'allarme alla
+ * prima passata in cui il regime rotto DOMINA la finestra, non alla prima in
+ * cui compare — è una proprietà voluta della coppia soglia+finestra, la stessa
+ * che documenta `SATURATION_RATE`. Il prezzo è una passata di ritardo (68% alle
+ * 23:18); il prezzo di abbassare a 0,60 sarebbe accendersi su una finestra
+ * mista, cioè su un guasto che sta già rientrando.
+ *
+ * Campione minimo 4: il gate gira ~2,8 volte l'ora per sezione, quindi 4 è
+ * soddisfatto in un'ora e mezza e serve solo a scartare le finestre corte.
  */
 export const TOTAL_REJECTION_RATE = 0.70;
 export const TOTAL_REJECTION_MIN_GATE_RUNS = 4;
@@ -374,10 +403,51 @@ export function parseGenerationCommit(subject) {
 // serve distinguere le due occorrenze in un altro modo, più fragile.
 const RUN_MODE_RE = /event=(\w+) chain=(\w+) → section=(\w+) dry_run=(\w+)/;
 const TARGET_SECTION_RE = /TARGET_SECTION:\s*(\w+)/;
-const GATE_OUTCOME_RE =
-  /PRESPEND_GATE_OUTCOME emptied=(\d+) recovered=(\w+) before=(\d+) kept=(\d+) status=(\w+) section=(\w+)/;
-const GATE_TOTAL_REJECTION_RE =
-  /PRESPEND_GATE_TOTAL_REJECTION before=(\d+) classifier_calls=(\d+) anchor_candidates=(\d+) restored=(\d+) kept_after=(\d+) section=(\w+)/g;
+/**
+ * I marker `NOME k=v k=v …` della pipeline, TUTTE le occorrenze, letti come
+ * mappa di campi invece che per posizione.
+ *
+ * ## Perché non una regex posizionale, che è ciò che c'era
+ *
+ * Una regex che elenca i campi nell'ordine in cui li trova oggi è un contratto
+ * che si rompe quando il produttore ne AGGIUNGE uno — e si rompe in silenzio,
+ * perché un marker che non aggancia è indistinguibile da un marker assente, e
+ * un marker assente qui significa «nessun problema». È successo davvero:
+ *
+ *   #185 ha inserito ` backstop=<kind>` FRA `restored=` e `kept_after=` nella
+ *   riga `PRESPEND_GATE_TOTAL_REJECTION` (`create-article.mjs`), e la regex li
+ *   pretendeva adiacenti. Misurato il 2026-08-11 sulle 69 run non-cancellate
+ *   delle ultime 12h: **35 righe reali, 0 match** con la forma posizionale.
+ *   `totalRejections` valeva 0 ovunque, e il corpo della issue avrebbe
+ *   stampato quello zero come se fosse una misura.
+ *
+ * Il difetto non era il campo mancante: era che la forma del parser rendeva
+ * ogni campo nuovo una rottura. Con la lettura per chiave, un campo aggiunto è
+ * semplicemente una chiave in più che nessuno legge ancora — e un campo
+ * RIMOSSO si vede subito, perché il record viene scartato dalla guardia sulle
+ * chiavi richieste qui sotto.
+ *
+ * La guardia esiste perché «permissivo» non diventi «credulone»: un record
+ * senza le chiavi che il chiamante userà non è un record parziale da
+ * completare con degli zeri — quelli entrerebbero nei denominatori come dati.
+ *
+ * @param {string} text log completo della run
+ * @param {string} marker nome del marker, es. `PRESPEND_GATE_OUTCOME`
+ * @param {string[]} required chiavi senza le quali il record viene scartato
+ * @returns {Array<Record<string, string>>}
+ */
+export function parseMarkerRecords(text, marker, required = []) {
+  const out = [];
+  const lineRe = new RegExp(`${marker}[ \\t]+([^\\n\\r]*)`, 'g');
+  for (const m of String(text || '').matchAll(lineRe)) {
+    const fields = {};
+    for (const f of m[1].matchAll(/([A-Za-z_][A-Za-z0-9_]*)=(\S+)/g)) fields[f[1]] = f[2];
+    if (required.every((k) => k in fields)) out.push(fields);
+  }
+  return out;
+}
+
+const num = (v, fallback = 0) => (Number.isFinite(Number(v)) ? Number(v) : fallback);
 const TOKEN_LIMIT_RE = /\[([^\]\s]+)\] Skipped — request would exceed (\d+)-token limit \(estimated (\d+)\)/g;
 const EVERGREEN_SATURATED_RE = /Tutte le keyword evergreen risultano già coperte/;
 const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
@@ -389,11 +459,16 @@ const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
  * un'informazione mancante di quel run. Un log troncato (run uccisa dal
  * `timeout … 2400s`) produce quindi un record parziale, non un'eccezione.
  *
+ * `gates` e `totalRejections` sono ARRAY, non un record e un conteggio: una run
+ * può portare l'esito del gate di più di una sezione, e una forma che ne
+ * rappresenta uno solo non è tollerante, è lossy. Chi aggrega deve leggere
+ * `section` da OGNI elemento — vedi `summarizeRuns`.
+ *
  * @param {string} text log completo della run
  * @returns {{
  *   section: string|null, event: string|null, chain: boolean|null, dryRun: boolean|null,
- *   gate: {emptied: boolean, recovered: string, before: number, kept: number, status: string, section: string}|null,
- *   totalRejections: number,
+ *   gates: Array<{emptied: boolean, recovered: string, before: number, kept: number, status: string, section: string}>,
+ *   totalRejections: Array<{before: number, classifierCalls: number, anchorCandidates: number, restored: number, backstop: string|null, keptAfter: number, section: string}>,
  *   evergreenSaturated: boolean, evergreenNone: boolean,
  *   tokenLimitSkips: Array<{model: string, limit: number, estimated: number}>
  * }}
@@ -401,10 +476,29 @@ const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
 export function parseRunLog(text) {
   const t = String(text || '');
   const mode = RUN_MODE_RE.exec(t);
-  const gateM = GATE_OUTCOME_RE.exec(t);
   const targetM = TARGET_SECTION_RE.exec(t);
+  // TUTTE le occorrenze, non la prima. Dopo #180 una singola run prova ENTRAMBE
+  // le sezioni e stampa DUE righe `PRESPEND_GATE_OUTCOME`, una per sezione: con
+  // `exec` la seconda non la leggeva nessuno. Misurato il 2026-08-11 sulle 69
+  // run non-cancellate delle ultime 12h: 3 run con due righe, e in tutte e tre
+  // la seconda era di `svizzera` dentro una run dichiarata `frontaliere` — cioè
+  // 3 esiti del gate svizzera invisibili al denominatore della loro sezione
+  // (31/34 letti). Si attribuiscono alla sezione che DICHIARANO (`summarizeRuns`),
+  // mai a quella della run che le ospita.
+  const gates = parseMarkerRecords(t, 'PRESPEND_GATE_OUTCOME', ['emptied', 'recovered', 'section'])
+    .map((f) => ({
+      emptied: f.emptied === '1',
+      recovered: f.recovered,
+      before: num(f.before),
+      kept: num(f.kept),
+      status: f.status ?? null,
+      section: f.section,
+    }));
 
-  const section = mode ? mode[3] : (targetM ? targetM[1] : (gateM ? gateM[6] : null));
+  // Il fallback sulla PRIMA riga del gate resta la sezione della RUN, che è
+  // un'altra domanda da «di che sezione è questo esito»: serve solo a chi conta
+  // le run (`runs`, `saturated`), e solo quando i marker di modo non si leggono.
+  const section = mode ? mode[3] : (targetM ? targetM[1] : (gates[0] ? gates[0].section : null));
 
   return {
     section,
@@ -414,17 +508,19 @@ export function parseRunLog(text) {
     // `dry == 'true'`, quindi la sua presenza è di per sé la prova che il run non
     // era dry — utile sui log in cui la riga `event=… dry_run=…` non è leggibile.
     dryRun: mode ? mode[4] === 'true' : (targetM ? false : null),
-    gate: gateM
-      ? {
-        emptied: gateM[1] === '1',
-        recovered: gateM[2],
-        before: Number(gateM[3]),
-        kept: Number(gateM[4]),
-        status: gateM[5],
-        section: gateM[6],
-      }
-      : null,
-    totalRejections: [...t.matchAll(GATE_TOTAL_REJECTION_RE)].length,
+    gates,
+    // `backstop` è letto se c'è e vale `null` se non c'è: i log ancora in
+    // retention emessi PRIMA di #185 non lo hanno, e restano leggibili.
+    totalRejections: parseMarkerRecords(t, 'PRESPEND_GATE_TOTAL_REJECTION', ['before', 'section'])
+      .map((f) => ({
+        before: num(f.before),
+        classifierCalls: num(f.classifier_calls),
+        anchorCandidates: num(f.anchor_candidates),
+        restored: num(f.restored),
+        backstop: f.backstop ?? null,
+        keptAfter: num(f.kept_after),
+        section: f.section,
+      })),
     evergreenSaturated: EVERGREEN_SATURATED_RE.test(t),
     evergreenNone: EVERGREEN_NONE_RE.test(t),
     tokenLimitSkips: [...t.matchAll(TOKEN_LIMIT_RE)].map((m) => ({
@@ -446,12 +542,57 @@ export function parseRunLog(text) {
  * disservizio GitHub le ha prodotte a decine, e sono infrastruttura, non
  * pipeline.
  *
+ * ## `gateEmptied` conta lo SVUOTAMENTO, non il fallimento della run
+ *
+ * La riga contava `emptied && recovered === 'none'`, e per quindici giorni ha
+ * misurato la cosa sbagliata. `recovered` non dice se il pool NEWS si è
+ * ripreso: `resolveRunRecovery()` (`create-article.mjs`) risponde a
+ * «questa run ha pubblicato qualcosa, e di che tipo», e vale
+ *   `none`      → la run non ha pubblicato affatto,
+ *   `evergreen` → ha pubblicato un evergreen AL POSTO della news,
+ *   `news`      → ha pubblicato una news.
+ * `evergreen` è quindi una SOSTITUZIONE, non un recupero: il pool news è
+ * rimasto vuoto, la sezione ha pubblicato lo stesso, e il difetto è uscito
+ * dalla porta di servizio — invisibile a questa condizione (che pretendeva
+ * `none`) e invisibile a `section-dry` (che vede pubblicare).
+ *
+ * Misurato il 2026-08-11 sulle 69 run non-cancellate delle ultime 12h:
+ *   frontaliere  gate svuotato 32/34 = 94%, di cui recovered `evergreen` 29 e
+ *                `none` 3 → col vecchio predicato 3/34 = 9%, sotto ogni soglia;
+ *   svizzera     0/34 = 0% con entrambi i predicati.
+ * Cioè: la sezione più rotta delle due era quella su cui il watchdog taceva, e
+ * a tacere non era la soglia — era il numeratore.
+ *
+ * `recovered` non sparisce: resta come DIMENSIONE nel corpo della issue
+ * (`gateRecovered`), dove distingue «non ha pubblicato niente» da «ha
+ * pubblicato un evergreen invece della news». È una descrizione dell'esito,
+ * non un filtro sull'evidenza.
+ *
+ * ## Le righe si attribuiscono alla sezione che DICHIARANO
+ *
+ * `gateRuns`/`gateEmptied`/`totalRejections` sono contati per `section` della
+ * SINGOLA riga, non della run che la ospita: dopo #180 una run prova entrambe
+ * le sezioni. Conseguenza attesa, e non un errore: `gateRuns` di una sezione
+ * può superare i suoi `runs`, perché sono due denominatori di due domande
+ * diverse (`runs` = run attribuite alla sezione; `gateRuns` = esiti del gate
+ * dichiarati da quella sezione, ovunque siano stati stampati).
+ *
  * @param {Array<ReturnType<typeof parseRunLog>>} runs
  */
 export function summarizeRuns(runs) {
   const bySection = new Map();
   for (const s of SECTIONS) {
-    bySection.set(s, { runs: 0, saturated: 0, gateRuns: 0, gateEmptiedUnrecovered: 0, totalRejections: 0 });
+    bySection.set(s, {
+      runs: 0,
+      saturated: 0,
+      gateRuns: 0,
+      gateEmptied: 0,
+      gateRecovered: { none: 0, evergreen: 0, news: 0 },
+      totalRejections: 0,
+      anchorCandidatesZero: 0,
+      restoredZero: 0,
+      backstopKinds: {},
+    });
   }
   let oversizeRuns = 0;
   let maxEstimated = 0;
@@ -469,15 +610,33 @@ export function summarizeRuns(runs) {
       modelsSkipped.add(s.model);
     }
 
+    // Per SEZIONE DELLA RIGA, e prima dell'aggregazione per run: un log in cui
+    // il marker di modo non si legge ha comunque esiti del gate attribuibili.
+    for (const g of r.gates || []) {
+      const gAgg = bySection.get(g.section);
+      if (!gAgg) continue;
+      gAgg.gateRuns++;
+      if (!g.emptied) continue;
+      gAgg.gateEmptied++;
+      // Nessun `in` a filtrare: un valore nuovo di `recovered` deve COMPARIRE
+      // nel corpo, non sparire dal conteggio. È la stessa regola di
+      // `pairKeyOf` — un cambio di contratto a monte si vede, non si assorbe.
+      gAgg.gateRecovered[g.recovered] = (gAgg.gateRecovered[g.recovered] || 0) + 1;
+    }
+    for (const tr of r.totalRejections || []) {
+      const tAgg = bySection.get(tr.section);
+      if (!tAgg) continue;
+      tAgg.totalRejections++;
+      if (tr.anchorCandidates === 0) tAgg.anchorCandidatesZero++;
+      if (tr.restored === 0) tAgg.restoredZero++;
+      const kind = tr.backstop || 'n/d';
+      tAgg.backstopKinds[kind] = (tAgg.backstopKinds[kind] || 0) + 1;
+    }
+
     const agg = bySection.get(r.section);
     if (!agg) continue;
     agg.runs++;
     if (r.evergreenSaturated) agg.saturated++;
-    agg.totalRejections += r.totalRejections;
-    if (r.gate) {
-      agg.gateRuns++;
-      if (r.gate.emptied && r.gate.recovered === 'none') agg.gateEmptiedUnrecovered++;
-    }
   }
 
   return {
@@ -590,11 +749,21 @@ const REMEASURE = {
     + 'console.log(w+"min →", findDuplicateTopicPairs(c.articles,{pairWindowMinutes:w,lookbackHours:24*365}).length)}\' --input-type=module',
 };
 
+// `## Come ri-misurare` è un HEADING, e non un `**grassetto**`, per una ragione
+// meccanica oltre che tipografica: `suggestedActionText()`
+// (`scripts/ci/followup-resolution-match.mjs`) chiude la regione `## Suggested
+// action` al primo heading di livello 2-3, e senza un heading qui la regione si
+// mangia tutto il footer — blocco ```bash compreso. Con i backtick del fence a
+// spostare la parità delle coppie, l'estrattore di token finisce per pescare
+// frammenti come `(workflow` che esistono verbatim in QUESTO file (il footer lo
+// cita), il gate `check-issue-already-resolved.mjs` li conta come «già
+// risolto» e SALTA il fixer. Un heading chiude la regione e toglie il footer
+// dal gioco.
 const footer = (howToRemeasure) => [
   '',
   '---',
   '',
-  '**Come ri-misurare**',
+  '## Come ri-misurare',
   '',
   '```bash',
   'REPO=nanakokyobashi-rgb/frontaliere-articles',
@@ -709,34 +878,82 @@ export const CONDITIONS = [
       if (!agg || agg.gateRuns < TOTAL_REJECTION_MIN_GATE_RUNS) {
         return { available: false, reason: `campione ${agg ? agg.gateRuns : 0} < ${TOTAL_REJECTION_MIN_GATE_RUNS} run col gate` };
       }
-      const rate = agg.gateEmptiedUnrecovered / agg.gateRuns;
+      const rate = agg.gateEmptied / agg.gateRuns;
       if (rate < TOTAL_REJECTION_RATE) return { firing: false };
+      const rec = agg.gateRecovered;
+      const recExtra = Object.entries(rec).filter(([k]) => !['none', 'evergreen', 'news'].includes(k));
+      const backstops = Object.entries(agg.backstopKinds)
+        .sort((a, b) => b[1] - a[1]).map(([k, n]) => `\`${k}\` ${n}`).join(', ') || '—';
       return {
         firing: true,
         body: [
-          `Il pre-spend topic gate svuota il pool news della sezione \`${section}\` e il backstop non recupera nulla:`,
-          `**${agg.gateEmptiedUnrecovered} run su ${agg.gateRuns}** (${(rate * 100).toFixed(0)}%) fra quelle in cui il gate`,
+          `Il pre-spend topic gate svuota il pool news della sezione \`${section}\`:`,
+          `**${agg.gateEmptied} run su ${agg.gateRuns}** (${(rate * 100).toFixed(0)}%) fra quelle in cui il gate`,
           `ha girato, nella finestra di ${m.runs.spanHours.toFixed(1)}h, escono`,
-          '`PRESPEND_GATE_OUTCOME emptied=1 recovered=none`.',
-          `Righe \`PRESPEND_GATE_TOTAL_REJECTION\` per la sezione nella finestra: ${agg.totalRejections}.`,
+          '`PRESPEND_GATE_OUTCOME emptied=1`.',
           '',
           `- Soglia: ${(TOTAL_REJECTION_RATE * 100).toFixed(0)}% su almeno ${TOTAL_REJECTION_MIN_GATE_RUNS} run in cui il gate è girato.`,
+          `- **Di cui \`recovered\`**: \`none\` ${rec.none}, \`evergreen\` ${rec.evergreen}, \`news\` ${rec.news}.`,
+          `- Righe \`PRESPEND_GATE_TOTAL_REJECTION\` della sezione: ${agg.totalRejections}`,
+          `  (\`anchor_candidates=0\` in ${agg.anchorCandidatesZero}, \`restored=0\` in ${agg.restoredZero}; \`backstop\`: ${backstops}).`,
           `- L'altra sezione: ${SECTIONS.filter((s) => s !== section)
-            .map((s) => { const o = m.runs.bySection.get(s); return `${s} ${o.gateEmptiedUnrecovered}/${o.gateRuns}`; }).join(', ')}.`,
+            .map((s) => { const o = m.runs.bySection.get(s); return `${s} ${o.gateEmptied}/${o.gateRuns}`; }).join(', ')}.`,
           '',
-          '**Il denominatore sono le sole run in cui il gate è girato**: `finalizeRunReport`',
-          '(`generator/scripts/create-article.mjs:1400-1428`) non emette la riga quando il gate non è stato',
-          'eseguito (FORCE_EVERGREEN, scan vuoto), e quelle run non sono evidenza in nessuna direzione.',
+          '**`recovered` descrive l\'esito, non filtra l\'evidenza — e la distinzione è tutto il difetto.**',
+          '`resolveRunRecovery()` risponde a «questa run ha pubblicato, e cosa», non a «il pool news si è',
+          'ripreso»: `evergreen` significa che la sezione ha pubblicato un evergreen AL POSTO della news, cioè',
+          'una SOSTITUZIONE con il pool news rimasto vuoto. Contarla come recupero (`recovered === \'none\'`) è',
+          'ciò che ha tenuto muto questo watchdog mentre la sezione si svuotava, e ciò che tiene muta anche',
+          '`section-dry`: la sezione continua a pubblicare, quindi nessuna condizione basata sulla PRODUZIONE',
+          'può vedere il crollo della quota news.',
           '',
-          '**Perché la soglia è 0,70.** Misurato sulle ultime 200 run di `generate-article.yml`',
-          '(2026-08-09T05:53→08-10T15:51): `svizzera` 11/13 = 85%, `frontaliere` 0/10 = 0%. Su finestre',
-          'scorrevoli di 12h svizzera non scende mai sotto il 78% e frontaliere resta a 0 in tutte.',
+          '**Il denominatore sono le sole run in cui il gate è girato**: `finalizeRunReport` non emette la riga',
+          'quando il gate non è stato eseguito (FORCE_EVERGREEN, scan vuoto), e quelle run non sono evidenza in',
+          'nessuna direzione.',
           '',
-          'Punto da cui guardare: il campo `anchor_candidates` della riga `PRESPEND_GATE_TOTAL_REJECTION` dice',
-          'PERCHÉ il backstop non ha recuperato — richiede un match di anchor stretto, e gli anchor sono',
-          'frontaliere-specifici (`IS_FRONTALIERE ? … : \'\'`), quindi sulla sezione `svizzera` valgono 0 per',
-          'costruzione e il backstop non può scattare. Il gate è in `generator/scripts/create-article.mjs:540-640`',
-          '(`adapted` nel manifest: la fix si fa qui).',
+          '**Perché la soglia è 0,70.** Ritarata il 2026-08-11 sulle 69 run non-cancellate di 12h, per passata',
+          'reale del watchdog: lato rotto mai sotto l\'80% (svizzera 12/15 il 10-08 alle 17:25; frontaliere',
+          '30/33, 35/35, 32/34 dall\'11-08), lato sano mai sopra il 14%. La soglia sta 10 punti sotto il minimo',
+          'del lato rotto e 56 sopra il massimo del lato sano.',
+          '',
+          // ⚠ I numeri di riga vanno FUORI dai backtick, e non è uno stile.
+          // `citedTokens()` promuove a «token distintivo» ogni span backtickato
+          // che porti punteggiatura di codice — `:\d` compresa — e
+          // `detectAlreadyResolved()` SALTA il fixer quando tutti i token
+          // distintivi si trovano verbatim in un file citato. Il footer cita
+          // questo stesso file, che contiene queste stringhe alla lettera:
+          // qualunque token distintivo scritto qui si auto-conferma e la issue
+          // nasce non-lavorabile. Con i backtick solo sui path nudi (che
+          // `isDistinctiveToken()` scarta come «bare file path») la regione
+          // resta a ZERO token distintivi, e `resolved` è falso per
+          // costruzione. Verificato in test: `il corpo NON fa scattare il gate
+          // already-resolved`.
+          '## Suggested action',
+          '',
+          `Leggere prima la riga \`PRESPEND_GATE_TOTAL_REJECTION\` della sezione \`${section}\`: \`anchor_candidates\``,
+          'dice se il backstop di anchor (D) aveva qualcosa su cui lavorare, `backstop` dice chi ha risposto',
+          'davvero, `restored` quante headline sono rientrate. `restored=0 backstop=none` significa che nessun',
+          'backstop è intervenuto e la Fase 1 ha raggiunto la generazione a mani vuote.',
+          '',
+          'I due punti da guardare, in questo ordine:',
+          '',
+          '1. **Il backstop di sezione è riservato alla sezione nazionale** — in',
+          '   `generator/scripts/create-article.mjs`, riga 771: la guardia lo esegue solo quando la sezione NON',
+          '   è frontaliere. È il backstop E introdotto da #185 per il pool svizzera; sulla sezione',
+          `   \`${section}\` non può scattare per costruzione, e lì resta solo il backstop D di anchor, che`,
+          '   richiede un match stretto. Con `anchor_candidates=0` nessuno dei due può intervenire e il pool',
+          '   arriva vuoto alla Fase 2. La domanda è se la sezione debba avere un backstop di ultima istanza',
+          '   proprio suo (un ranking per densità topica sul lessico di sezione, come fa E per quello',
+          '   nazionale) o se vada allentato il match di anchor.',
+          '2. **Il prompt del classificatore Ticino-only** — in `generator/scripts/create-article.mjs`, riga',
+          '   564: due prompt distinti per sezione, e il ramo frontaliere è dichiaratamente «focalizzato',
+          '   ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI» con cinque classi di NON rilevanza. Un rigetto al',
+          '   100% ripetuto su ogni run non è una giornata senza notizie: è un criterio che non lascia passare',
+          '   la testata che stiamo scansionando. Va confrontato ciò che il gate scarta (le righe',
+          '   `↪ filtrato:` nei log) con ciò che il prompt dichiara irrilevante.',
+          '',
+          'Entrambi i punti stanno in `generator/scripts/create-article.mjs`, che è `adapted` nel',
+          '`loop-sync-manifest.json`: la fix si fa **su questo repo**, non sul sito.',
         ].join('\n') + footer(REMEASURE.runs),
       };
     },
