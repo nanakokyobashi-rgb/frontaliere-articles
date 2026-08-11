@@ -30,7 +30,12 @@ name: Issue fix (Claude → PR)
 #  - Gate `sender`: accetta gli account del progetto (i due owner) e claude*.
 #    Sul sito è cablato su `valerielinc-ops`; qui la label di routing viene
 #    applicata dal PAT di questo repo, che è di un altro account.
-#  - Identità di push: `GITHUB_PAT_NANAKO`, non un token di GitHub App.
+#  - Identità di push: `GITHUB_PAT_NANAKO`, non un token di GitHub App —
+#    passato ANCHE come `github_token` a `claude-code-action` (vedi lo step
+#    "Run Claude fix"). Il `git remote set-url` dello step di identità copre
+#    solo i push che partono da un `run:`: l'action, all'avvio, RISCRIVE quel
+#    remote col proprio token (`replaceCheckoutCredentials()`), quindi il token
+#    che conta per il lavoro dell'agente è quello passato nel `with:`.
 #  - Gate dei test: `node --test`, non vitest. Niente `npm ci`.
 #  - Ponte Remote Config: `generator/scripts/load-rc-env.mjs`.
 
@@ -131,6 +136,15 @@ jobs:
       # ── Pre-flight 3: capability sui workflow ─────────────────────────────
       # Solo quando NON c'è il PAT: col PAT il push su `.github/workflows/**`
       # passa, e girare il guard toglierebbe una capacità che il run possiede.
+      #
+      # Perché la condizione ora è VERA (e prima era una promessa non mantenuta):
+      # il PAT viaggia sul remote solo per i push lanciati da un `run:`, ma è
+      # `claude-code-action` a pushare, con il proprio token. Finché non le si
+      # passava `github_token`, l'action cadeva sul token di GitHub App del run
+      # e ogni push su `.github/workflows/**` veniva rifiutato con "refusing to
+      # allow a GitHub App to create or update workflow ... without `workflows`
+      # permission" — con il PAT lì accanto, inutilizzato. Ora il PAT è passato
+      # anche all'action, quindi saltare il guard riflette una capacità reale.
       - name: Pre-flight — workflows-scope capability guard (zero-Claude)
         id: scope_guard
         if: env.GITHUB_PAT_NANAKO == '' && steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true'
@@ -227,9 +241,17 @@ jobs:
             # valido, `git ls-remote` fallisce; rimuovendo l'extraheader riesce.
             git config --unset-all http."https://github.com/".extraheader 2>/dev/null || true
             git remote set-url origin "https://x-access-token:${GITHUB_PAT_NANAKO}@github.com/${REPO}.git"
-            echo "push identity: PAT (i file .github/workflows/** sono pushabili se il PAT ha lo scope workflow)"
+            # ATTENZIONE alla portata di questo step: vale per i push lanciati
+            # da un `run:`. Per il lavoro dell'agente NON basta, e non perche'
+            # l'action lo ignori: perche' lo SOVRASCRIVE. All'avvio
+            # `replaceCheckoutCredentials()` azzera l'extraheader e rifa' il
+            # `set-url` col token che l'action ha ricevuto nel `with:`. Ecco
+            # perche' serve anche `github_token` sullo step "Run Claude fix":
+            # sistemare solo questo remote lasciava l'agente sul token di App.
+            echo "push identity (run: steps): PAT — .github/workflows/** pushabile (scope workflow verificato sul PAT)"
+            echo "push identity (claude-code-action): PAT via input github_token — vedi step 'Run Claude fix'"
           else
-            echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile)"
+            echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile, né dai run: né dall'action)"
           fi
 
       - name: Run Claude fix
@@ -242,6 +264,35 @@ jobs:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Il token con cui l'ACTION fa le sue operazioni git/GitHub. Senza
+          # questo input l'action ricade sul token di GitHub App del run, che
+          # per policy di GitHub non può creare né modificare file sotto
+          # `.github/workflows/**`: il push viene rifiutato con
+          #   "refusing to allow a GitHub App to create or update workflow
+          #    `.github/workflows/<f>.yml` without `workflows` permission"
+          # DOPO che il fix è stato scritto — cioè al costo pieno di un run.
+          # È la causa reale di `blocked-workflows-scope` (10 occorrenze in 14
+          # giorni, escalata dal lessons-harvester): NON uno scope mancante sul
+          # PAT (`x-oauth-scopes` include `workflow`), NON il PAT assente in CI
+          # (il loader RC lo carica), NON un push col PAT rifiutato (verificato:
+          # exit 0). Il `git remote set-url` dello step precedente non e' solo
+          # "inerte": l'action lo SOVRASCRIVE. `configureGitAuth()` chiama
+          # `replaceCheckoutCredentials()` (src/github/operations/git-config.ts)
+          # in modo incondizionato all'avvio, che azzera l'extraheader di
+          # actions/checkout e rifa' `git remote set-url origin
+          # https://x-access-token:<token>@...` col PROPRIO token. Qualunque
+          # remote configurato prima viene riscritto un istante prima che
+          # l'agente lavori: l'unico modo di decidere quel token e' questo input.
+          #
+          # NIENTE fallback su `secrets.GITHUB_TOKEN`: sarebbe una REGRESSIONE.
+          # Gli eventi generati dal GITHUB_TOKEN non ri-attivano i workflow a
+          # valle (anti-ricorsione di GitHub), quindi con quel fallback una PR
+          # aperta durante un caricamento RC fallito non riceverebbe piu' ne'
+          # `tests` ne' `pr-review-loop`: resterebbe ferma e verde per sempre.
+          # La stringa vuota e' invece il ramo di DEFAULT documentato
+          # dell'action, che in quel caso conia un token proprio e lo revoca a
+          # fine run — cioe' esattamente il comportamento di oggi.
+          github_token: ${{ env.GITHUB_PAT_NANAKO }}
           allowed_bots: 'github-actions[bot], claude[bot]'
           show_full_output: true
           claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
@@ -258,7 +309,7 @@ jobs:
             **Pre-condizioni (termina se falliscono):**
             - Esiste già una PR aperta che cita "#$ISSUE_NUMBER" → commenta "PR già in volo: #<n>, skip." e TERMINA.
             - **Overlap sui file:** estrai i path target dal body. Se una PR aperta modifica già uno di quei file → commenta e TERMINA, per non creare un conflitto o un doppione. Nel dubbio (issue non file-specifica) procedi.
-            - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Il push di questo run usa un PAT: se ha lo scope `workflow`, modificare `.github/workflows/**` passa. Procedi normalmente, ma se il push di un workflow viene rifiutato NON insistere: documenta e termina con `blocked-workflows-scope`.' || 'Questo run ha solo il GITHUB_TOKEN, che NON ha lo scope `workflow`. Se il fix richiede di toccare `.github/workflows/**` il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: serve il PAT o una mano umana", e TERMINA SUBITO.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
+            - **Capability guard — valutalo SUBITO, prima di implementare.** ${{ env.GITHUB_PAT_NANAKO != '' && 'Questo run ha il PAT, e il PAT è passato SIA al remote git SIA a `claude-code-action` (input `github_token`). **Modificare `.github/workflows/**` è quindi una capacità PIENA: fallo senza esitare.** Non trattarlo come un percorso rischioso e non pre-annunciare un blocco. Se un push viene rifiutato, LEGGI il messaggio prima di concludere: `blocked-workflows-scope` va usato SOLO se il testo dice letteralmente "without `workflows` permission". In quel caso NON abbandonare al primo tentativo — verifica `git remote -v` (deve puntare a `x-access-token:***@github.com`) e `git config --get-all http."https://github.com/".extraheader` (deve essere VUOTO, altrimenti l Authorization header prevale sull URL e il push viaggia con l identità della App); correggi e ritenta UNA volta. Solo se fallisce ancora con lo stesso testo, documenta con `blocked-workflows-scope` e includi il messaggio di rifiuto integrale. Qualunque altro errore di push (conflitto, protezione del branch, rete) NON è questo caso e va gestito come tale.' || 'Questo run NON ha il PAT: sia il remote git sia `claude-code-action` ricadono sul GITHUB_TOKEN, che per policy di GitHub non può creare né modificare file sotto `.github/workflows/**`. Se il fix richiede di toccarli il push fallirebbe SEMPRE → nessuna PR. NON implementare: posta un commento col diff proposto e "blocco scope workflows: il PAT non è stato caricato (controlla lo step Load secrets from Remote Config), serve il PAT o una mano umana", e TERMINA SUBITO con `blocked-workflows-scope`.' }} In ogni caso, se il fix richiede impostazioni del repo, branch protection o segreti non presenti in CI → documenta e TERMINA senza implementare. Fare tutto il lavoro per poi scoprire il blocco al push è il modo più costoso di fallire: il blocco è deterministico, va visto al turno 1.
             - **Issue aggregata — is_aggregate=${{ steps.tier.outputs.is_aggregate }} (item=${{ steps.tier.outputs.agg_count }}).** Se `true`, tentare tutti gli item in un run sfora il budget turni e consegna ZERO PR. **Regola ferrea:** fixa ESATTAMENTE UN item, poi fermati. (a) applica il capability guard per-item, saltando quelli fuori capacità senza abortire l'intera issue; (b) scegli il primo item in-capacità a maggior valore; (c) implementa solo quello; (d) appena la PR è aperta STOP IMMEDIATO, anche con turni residui; (e) elenca gli altri in `## Non implementato`, che li ri-accoda. Ogni ciclo chiude almeno un item, quindi converge.
 
             **Fix flow:**
@@ -280,6 +331,7 @@ jobs:
                ## Non implementato (ancora)
                - <scope non fatto + stato: in questa PR / PR concatenata #N / blocked: <causa>>
                ```
+               **Eccezione — fix provabile solo da una run su `main`.** Se QUESTA PR tocca `.github/workflows/**` o la config dell'action Claude (`claude_args`, `settings`, sandbox, `permissionMode`, `github_token`) per un bug osservabile solo a runtime (sandbox/bwrap, permessi, rate-limit, dispatch) — nessun test né lettura del diff può dimostrare che il fix funziona, solo una run reale — **non usare `Closes #$ISSUE_NUMBER`**: usa `Refs #$ISSUE_NUMBER` e, dopo l'apertura della PR, `gh issue edit $ISSUE_NUMBER --add-label awaiting-production-proof`. Dettagli in `ISSUES.md` → "Fix flow".
             10. La PR entra da sola nel ciclo di review e auto-merge. **NON mergiare a mano.**
 
             **Vincoli:**
