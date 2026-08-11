@@ -9744,6 +9744,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.telelavoro-frontalieri-2026.title': 'Telework for border workers: what they need to know and how to manage it',
     'blog.article.telelavoro-frontalieri-2026.excerpt': 'Teleworking for border workers: new rules and procedures to be followed to avoid tax and social security problems.',
     'blog.article.telelavoro-frontalieri-2026.imageAlt': 'Image of a cross-border worker who works in Switzerland but resides in Italy, with a computer and a machine for remote work.',
+    'blog.article.telelavoro-frontalieri.title': 'Teleworking for frontier workers: what changes and what to do',
+    'blog.article.telelavoro-frontalieri.excerpt': 'The new 2024 border agreement introduces new rules for teleworking. Find out what\'s changing and how it works',
+    'blog.article.telelavoro-frontalieri.imageAlt': 'The telecommuting is an opportunity for frontier workers',
 };
 
 export default blogMetaEn;

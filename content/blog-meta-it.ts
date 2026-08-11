@@ -9745,6 +9745,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.telelavoro-frontalieri-2026.title': 'Telelavoro per frontalieri: cosa devono sapere e come gestirlo',
     'blog.article.telelavoro-frontalieri-2026.excerpt': 'Il telelavoro per frontalieri: nuove norme e procedure da seguire per evitare problemi fiscali e previdenziali.',
     'blog.article.telelavoro-frontalieri-2026.imageAlt': 'Immagine di un frontaliere che lavora in Svizzera e risiede in Italia, con un computer e una macchina per il telelavoro.',
+    'blog.article.telelavoro-frontalieri.title': 'Il telelavoro per i frontalieri: cosa cambia e cosa fare',
+    'blog.article.telelavoro-frontalieri.excerpt': 'Il nuovo accordo frontalieri 2024 introduce nuove regole per il telelavoro. Scopri cosa cambia e come funziona',
+    'blog.article.telelavoro-frontalieri.imageAlt': 'Il telelavoro e\' un\'opportunità per i frontalieri',
 };
 
 export default blogMetaIt;

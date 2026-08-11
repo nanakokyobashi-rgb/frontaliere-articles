@@ -9743,6 +9743,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.telelavoro-frontalieri-2026.title': 'Telearbeit für Grenzgänger: Was sie wissen müssen und wie man damit umgeht',
     'blog.article.telelavoro-frontalieri-2026.excerpt': 'Telearbeit für Grenzgänger: neue Regeln und Verfahren, die befolgt werden müssen, um Steuer- und Sozialversicherungsprobleme zu vermeiden.',
     'blog.article.telelavoro-frontalieri-2026.imageAlt': 'Bild eines Grenzgängers, der in der Schweiz arbeitet, aber in Italien wohnt, mit einem Computer und einer Maschine für Fernarbeit.',
+    'blog.article.telelavoro-frontalieri.title': 'Telearbeit für Grenzgänger: Was sich ändert und was zu tun ist',
+    'blog.article.telelavoro-frontalieri.excerpt': 'Das neue Grenzabkommen 2024 führt neue Regeln für die Telearbeit ein. Finden Sie heraus, was sich ändert und wie es funktioniert',
+    'blog.article.telelavoro-frontalieri.imageAlt': 'Die Fernarbeit ist eine Chance für Grenzgänger',
 };
 
 export default blogMetaDe;

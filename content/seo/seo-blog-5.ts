@@ -65318,6 +65318,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-telelavoro-frontalieri': {
+    title: 'Il telelavoro per i frontalieri: cosa cambia e cosa fare',
+    description: 'Il nuovo accordo frontalieri 2024 introduce nuove regole per il telelavoro. Scopri cosa cambia e come funziona. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, telelavoro, cosa, cambia, fare',
+    ogTitle: 'Il telelavoro per i frontalieri: cosa cambia e cosa fare',
+    ogDescription: 'Il nuovo accordo frontalieri 2024 introduce nuove regole per il telelavoro. Scopri cosa cambia e come funziona.',
+    canonicalPath: '/articoli-frontaliere/telelavoro-frontalieri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il telelavoro per i frontalieri: cosa cambia e cosa fare",
+      "description": "Il nuovo accordo frontalieri 2024 introduce nuove regole per il telelavoro. Scopri cosa cambia e come funziona. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/telelavoro-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il telelavoro e' un'opportunità per i frontalieri"
+      },
+      "datePublished": "2026-08-11T21:42:43+00:00",
+      "dateModified": "2026-08-11T21:42:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/telelavoro-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
