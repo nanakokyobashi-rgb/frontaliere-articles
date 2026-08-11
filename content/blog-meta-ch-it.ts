@@ -2233,6 +2233,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.title': 'Casa nel Canton Zurigo: prezzi e costi',
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.excerpt': 'I prezzi medi delle case nel Canton Zurigo, i fondi propri richiesti per l\'acquisto di una casa e la sostenibilità del mutuo ipotecario.',
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.imageAlt': 'Immagine editoriale relativa a: Casa nel Canton Zurigo: prezzi e costi',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.title': 'Mercato degli affitti nel Cantone di Zurigo: canoni medi e diritto di locazione',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.excerpt': 'I canoni medi di affitto nel Cantone di Zurigo sono tra i più alti della Svizzera. Ecco cosa devi sapere sui diritti dei locatari e locatori.',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.imageAlt': 'Una foto di un appartamento in affitto a Zurigo con un prezzo medio di affitto di circa CHF 2.500-3.000 al mese.',
 };
 
 export default blogMetaChIt;

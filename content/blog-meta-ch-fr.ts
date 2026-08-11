@@ -2233,6 +2233,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.title': 'Maison dans le canton de Zurich : prix et coûts',
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.excerpt': 'Les prix moyens des maisons dans le canton de Zurich, les fonds propres requis pour l\'achat d\'une maison et la viabilité du prêt hypothécaire.',
     'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.imageAlt': 'Image éditoriale relative à: Casa nel Canton Zurigo: prezzi e costi',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.title': 'Marché locatif dans le canton de Zurich : loyers moyens et droit des locations',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.excerpt': 'Les loyers moyens dans le canton de Zurich comptent parmi les plus élevés de Suisse. Voici ce que vous devez savoir sur les droits des locataires et des propriétaires.',
+    'blog.article.affitti-zurigo-canoni-medi-e-diritto-di-locazione.imageAlt': 'Une photo d\'un appartement à louer à Zurich avec un prix de location d\'environ CHF 2 500-3 000 par mois.',
 };
 
 export default blogMetaChFr;
