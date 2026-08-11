@@ -34,8 +34,14 @@
  * Erstellung) nello stesso file.  Una tabella (byte,cifra)->carattere
  * scritta a mano sarebbe una lista di indovinelli con la faccia di un dato.
  *
- * LE DUE PROVE, ENTRAMBE ANCORATE AL CORPUS
+ * LE TRE PROVE, TUTTE ANCORATE AL CORPUS
  *
+ *   testimone — la STESSA FRASE, pulita, altrove nel corpus.  Si prendono 16
+ *             caratteri prima del marker e 24 dopo (saltando la coda) e si
+ *             cerca quella coppia di ancore nei file senza marker: cio' che i
+ *             testimoni hanno in mezzo e' il carattere perduto.  Vedi il blocco
+ *             «IL CANALE TESTIMONE» piu' sotto per il perche' accetta solo UNA
+ *             LETTERA e per il caso in cui accettare altro fabbrica il difetto.
  *   lessico — si ricostruisce la parola provando ogni carattere dell'alfabeto e
  *             si tiene SOLO se esattamente una ricostruzione e' una parola che
  *             esiste gia' nei file di `content/` SENZA marker (15.139 file,
@@ -227,6 +233,179 @@ function elencaFileGit(radice, cartella, ref) {
     pos = aCapo + 1 + dim + 1;
   }
   return elenco.map((p) => ({ percorso: p, leggi: () => contenuti.get(p) }));
+}
+
+// ---------------------------------------------------------------------------
+// IL CANALE TESTIMONE — la stessa frase, pulita, altrove nel corpus
+// ---------------------------------------------------------------------------
+//
+// PERCHE' SERVE.  Il lessico sa solo dire se una PAROLA esiste.  Non puo' dire
+// niente dove la parola ricostruita non e' nel corpus («scénarios» storpiato in
+// `sc<00>f<16>9narios` non e' una parola con un marker dentro: sono due marker e
+// una lettera di troppo), ne' dove la stessa forma esiste in due lingue
+// («Municipalité» / «Municipalità»).  Al 2026-08-11 restavano 234 occorrenze e
+// 116 di quelle avevano come motivo esattamente «nessuna ricostruzione di una
+// lettera sola esiste nel corpus».  Il canale che mancava non e' un dizionario
+// esterno: e' il corpus stesso, letto come TESTO invece che come elenco di
+// parole.  Lo stesso articolo, o un altro articolo che dice la stessa frase,
+// spesso e' pulito.
+//
+// COME FUNZIONA.  Per un marker in posizione i si prendono
+//   P = i 16 caratteri prima  (devono essere puliti)
+//   Q = i 24 caratteri dopo il marker e la sua coda  (devono essere puliti)
+// e si cercano P e Q, adiacenti, nei file del corpus SENZA marker.  Cio' che il
+// testimone ha fra P e Q e' il carattere che manca.  Le due ancore sono 40
+// caratteri esatti: un allineamento sbagliato non e' improbabile, e' escluso.
+//
+// PERCHE' ACCETTA SOLO UNA LETTERA, ed e' la parte da non allentare.
+//
+// I testimoni sono ALTRE GENERAZIONI dello stesso testo, e due generazioni
+// concordano sulle parole ma NON sulla punteggiatura ne' sull'impaginazione.
+// Misurato su `content/blog-body/it/lavena-ponte-tresa-territorio-poroso.ts`
+// contro il suo gemello pulito `content/blog-body/de/...` (che porta lo stesso
+// testo italiano, non tradotto):
+//
+//   sporco    'due paesi<08>3. Questo'      gemello  'due paesi." Questo'
+//   sporco    'nella zona. <08>3Il turismo' gemello  'nella zona. \n\n"Il turismo'
+//   sporco    'svizzeri<08>3. Il sindaco'   gemello  'svizzeri. Il sindaco'
+//
+// Il primo sposta la virgoletta dall'altra parte del punto, il secondo apre un
+// paragrafo che nel file sporco non c'e', il terzo non mette niente.  Una
+// versione precedente di questo canale — che accettava qualunque cosa i
+// testimoni avessero in mezzo — proponeva tutte e tre, cioe' 22 «riparazioni»
+// su quel file: nessuna delle tre ripara un carattere, tutte e tre importano
+// l'impaginazione di un'altra generazione, e la terza butta via l'ancora.
+// Accettando solo UNA LETTERA quelle 22 spariscono e restano 8 occorrenze che
+// sono davvero una lettera accentata perduta.  E' lo stesso fail-closed del
+// resto dello script: meglio un residuo dichiarato di una correzione inventata.
+//
+// PERCHE' 16 E NON 24 CARATTERI DI ANCORA A SINISTRA.  Misurato sui 234 marker
+// di a96290fb: con 24 il canale ne risolve 4, con 16 ne risolve 8, con 12 ne
+// risolve 8 — cioe' fra 12 e 16 il risultato e' lo stesso ed e' 24 a essere
+// troppo stretto.  Il caso che 24 perde e' `seo/seo-blog-4.ts`, dove la frase
+// e' preceduta da `title: '` mentre il testimone la fa precedere da `body3': '`:
+// il testo e' identico, la chiave che lo contiene no.
+
+/** Ancora a sinistra del marker, in caratteri. */
+const TESTIMONE_PRIMA = 16;
+/** Ancora a destra, dopo la coda. Piu' lunga: e' quella che esclude gli omonimi. */
+const TESTIMONE_DOPO = 24;
+/** Quanti caratteri il marker si puo' portare via oltre a se stesso. */
+const TESTIMONE_CODA_MAX = 3;
+/** Tetto sui riscontri esaminati per una singola ancora. */
+const TESTIMONE_RISCONTRI_MAX = 500;
+/** Quante volte si ripassa: una riparazione puo' ripulire l'ancora di un'altra. */
+const TESTIMONE_GIRI_MAX = 4;
+
+const LETTERA = /\p{L}/u;
+
+/** I file senza un solo marker: sono gli unici che possono fare da testimone. */
+function costruisciTestimoni(file, testi) {
+  const fuori = [];
+  for (const f of file) {
+    const testo = testi.get(f.percorso);
+    if (testo === undefined || MARKER.test(testo)) continue;
+    fuori.push({ percorso: f.percorso, testo });
+  }
+  return fuori;
+}
+
+/**
+ * Dove il prefisso compare nei testimoni.  In cache: la stessa frase si ripete
+ * — `lavena-ponte-tresa` ha 22 marker su una manciata di frasi distinte — e una
+ * scansione del corpus costa 168 milioni di caratteri.
+ */
+function riscontriPrefisso(prefisso, testimoni, cache) {
+  const gia = cache.get(prefisso);
+  if (gia) return gia;
+  const fuori = [];
+  for (const t of testimoni) {
+    let da = t.testo.indexOf(prefisso);
+    while (da !== -1) {
+      fuori.push({ percorso: t.percorso, testo: t.testo, dopo: da + prefisso.length });
+      if (fuori.length >= TESTIMONE_RISCONTRI_MAX) break;
+      da = t.testo.indexOf(prefisso, da + 1);
+    }
+    if (fuori.length >= TESTIMONE_RISCONTRI_MAX) break;
+  }
+  cache.set(prefisso, fuori);
+  return fuori;
+}
+
+/**
+ * Risolve il marker in posizione `i` col canale testimone.
+ * Ritorna { coda, carattere, testimoni } oppure { motivo }.
+ */
+function risolviConTestimone(testo, i, testimoni, cache) {
+  const P = testo.slice(Math.max(0, i - TESTIMONE_PRIMA), i);
+  if (P.length < TESTIMONE_PRIMA || MARKER.test(P)) {
+    return { motivo: 'testimone: l\'ancora prima del marker e\' corta o sporca' };
+  }
+  const riscontri = riscontriPrefisso(P, testimoni, cache);
+  if (riscontri.length === 0) {
+    return { motivo: 'testimone: la frase non compare in nessun file pulito' };
+  }
+  for (let coda = 0; coda <= TESTIMONE_CODA_MAX; coda += 1) {
+    const inizioQ = i + 1 + coda;
+    const Q = testo.slice(inizioQ, inizioQ + TESTIMONE_DOPO);
+    // La coda PUO' contenere altri marker (`<00>f<16>9` sta al posto di una sola
+    // é), l'ancora Q no: e' lei a dire dove ricomincia il testo buono.
+    if (Q.length < TESTIMONE_DOPO || MARKER.test(Q)) continue;
+    const proposte = new Map();
+    for (const r of riscontri) {
+      const carattere = r.testo[r.dopo];
+      if (carattere === undefined || !LETTERA.test(carattere)) continue;
+      if (!r.testo.startsWith(Q, r.dopo + 1)) continue;
+      const elenco = proposte.get(carattere) || [];
+      elenco.push(r.percorso);
+      proposte.set(carattere, elenco);
+    }
+    if (proposte.size === 1) {
+      const [carattere, percorsi] = [...proposte][0];
+      return { coda, carattere, testimoni: [...new Set(percorsi)] };
+    }
+    if (proposte.size > 1) {
+      return { motivo: `testimone: ${proposte.size} lettere diverse nello stesso punto (${[...proposte.keys()].join(' ')})` };
+    }
+  }
+  return { motivo: 'testimone: nessun testimone mette UNA LETTERA in quel punto' };
+}
+
+/**
+ * Passa tutto il file col canale testimone, fino a punto fisso.
+ * Ritorna { testo, riparazioni } — le riparazioni hanno la stessa forma di
+ * quelle di `riparaTesto`, cosi' il rapporto e' uno solo.
+ */
+function riparaConTestimoni(testo, testimoni, cache) {
+  const riparazioni = [];
+  let corrente = testo;
+  for (let giro = 0; giro < TESTIMONE_GIRI_MAX; giro += 1) {
+    let fatto = false;
+    for (const m of [...corrente.matchAll(MARKER_G)]) {
+      const i = m.index;
+      const esito = risolviConTestimone(corrente, i, testimoni, cache);
+      if (!esito.carattere) continue;
+      const prima = corrente.slice(i, i + 1 + esito.coda);
+      riparazioni.push({
+        offset: i,
+        prima,
+        dopo: esito.carattere,
+        canale: 'testimone',
+        freq: esito.testimoni.length,
+        dettagli: [...prima].filter((c) => MARKER.test(c)).map((c, k) => ({
+          byte: c.charCodeAt(0),
+          coda: k === 0 ? prima.slice(1) : '',
+          carattere: k === 0 ? esito.carattere : '',
+        })),
+        testimoni: esito.testimoni.slice(0, 3),
+      });
+      corrente = corrente.slice(0, i) + esito.carattere + corrente.slice(i + 1 + esito.coda);
+      fatto = true;
+      break; // gli offset sono cambiati: si ricomincia la scansione
+    }
+    if (!fatto) break;
+  }
+  return { testo: corrente, riparazioni };
 }
 
 // ---------------------------------------------------------------------------
@@ -685,6 +864,8 @@ function main() {
   }
 
   const { lessico, puliti } = costruisciLessico(file, testi);
+  const testimoni = costruisciTestimoni(file, testi);
+  const cacheTestimoni = new Map();
 
   const perFile = [];
   const perCoppia = new Map();
@@ -700,13 +881,19 @@ function main() {
     if (testo === undefined || !MARKER.test(testo)) continue;
     const n = (testo.match(MARKER_G) || []).length;
     occorrenze += n;
-    const r = riparaTesto(testo, lessico, opz.freqMinima);
+    // Prima il canale testimone, che lavora sul TESTO e non sui token, poi le
+    // prove per token su cio' che resta: un marker gia' risolto dal testimone
+    // non arriva mai al lessico, e un token che il testimone non tocca resta
+    // esattamente com'era.
+    const w = riparaConTestimoni(testo, testimoni, cacheTestimoni);
+    const r = riparaTesto(w.testo, lessico, opz.freqMinima);
     let nRip = 0;
-    for (const rip of r.riparazioni) {
+    for (const rip of [...w.riparazioni, ...r.riparazioni]) {
       nRip += rip.dettagli.length;
       riparazioniElenco.push({
         file: f.percorso, offset: rip.offset, prima: visibile(rip.prima), dopo: rip.dopo,
         canale: rip.canale, freqNelCorpus: rip.freq,
+        ...(rip.testimoni ? { testimoni: rip.testimoni } : {}),
       });
       for (const d of rip.dettagli) {
         const chiave = `0x${d.byte.toString(16).padStart(2, '0').toUpperCase()}+${JSON.stringify(d.coda)} -> ${JSON.stringify(d.carattere)}`;
