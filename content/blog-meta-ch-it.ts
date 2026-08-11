@@ -2230,6 +2230,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.title': 'Asilo nido e custodia bambini in Canton Zurigo: costi',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.excerpt': 'Calcolati in base al reddito delle famiglie, i costi per l\'asilo nido e la custodia dei bambini in Canton Zurigo sono una questione complessa.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.imageAlt': 'Asilo nido in Canton Zurigo',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.title': 'Casa nel Canton Zurigo: prezzi e costi',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.excerpt': 'I prezzi medi delle case nel Canton Zurigo, i fondi propri richiesti per l\'acquisto di una casa e la sostenibilità del mutuo ipotecario.',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.imageAlt': 'Immagine editoriale relativa a: Casa nel Canton Zurigo: prezzi e costi',
 };
 
 export default blogMetaChIt;

@@ -28877,6 +28877,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario': {
+    title: 'Casa nel Canton Zurigo: prezzi e costi | Frontaliere Ticino',
+    description: 'Informazioni sulla compravendita di case nel Canton Zurigo, inclusi prezzi, fondi propri e mutuo ipotecario. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, casa, canton, zurigo, prezzi',
+    ogTitle: 'Comprare casa nel Canton Zurigo: prezzi, fondi propri e mutuo ipotecario',
+    ogDescription: 'Informazioni sulla compravendita di case nel Canton Zurigo, inclusi prezzi, fondi propri e mutuo ipotecario.',
+    canonicalPath: '/articoli-svizzera/comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Casa nel Canton Zurigo: prezzi e costi",
+      "description": "Informazioni sulla compravendita di case nel Canton Zurigo, inclusi prezzi, fondi propri e mutuo ipotecario. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Casa nel Canton Zurigo: prezzi e costi"
+      },
+      "datePublished": "2026-08-11T21:52:06+00:00",
+      "dateModified": "2026-08-11T21:52:06+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

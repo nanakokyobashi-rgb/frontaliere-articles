@@ -2230,6 +2230,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Zürich: Kosten',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.excerpt': 'Gemessen am Familieneinkommen sind die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zürich ein komplexes Thema.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.imageAlt': 'Kindertagesstätte in Kanton Zürich',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.title': 'Haus im Kanton Zürich: Preise und Kosten',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.excerpt': 'Die durchschnittlichen Hauspreise im Kanton Zürich, die für den Hauskauf benötigten Eigenmittel und die Tragbarkeit des Hypothekendarlehens.',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.imageAlt': 'Redaktionelles Bild zu: Casa nel Canton Zurigo: prezzi e costi',
 };
 
 export default blogMetaChDe;

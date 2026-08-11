@@ -2230,6 +2230,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.title': 'Kindergarten and childcare in Canton Zurich: costs',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.excerpt': 'Calculated based on household income, the costs for daycare and childcare in Canton Zurich are a complex matter.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zurigo-costi.imageAlt': 'Daycare center in Canton Zurich',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.title': 'House in the Canton of Zurich: prices and costs',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.excerpt': 'The average house prices in the Canton of Zurich, the own funds required for the purchase of a house and the sustainability of the mortgage loan.',
+    'blog.article.comprare-casa-canton-zurigo-prezzi-e-mutuo-ipotecario.imageAlt': 'Editorial image related to: Casa nel Canton Zurigo: prezzi e costi',
 };
 
 export default blogMetaChEn;
