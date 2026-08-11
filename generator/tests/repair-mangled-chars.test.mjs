@@ -379,3 +379,151 @@ test('CLI: --write insieme a --ref e\' un errore d\'uso, non una scrittura', () 
     fs.rmSync(radice, { recursive: true, force: true });
   }
 });
+
+// ---------------------------------------------------------------------------
+// il canale TESTIMONE — issue #94, secondo giro
+// ---------------------------------------------------------------------------
+//
+// Anche qui il valore sta nei rifiuti, e per una ragione che i test del lessico
+// non coprono: i testimoni sono ALTRE GENERAZIONI dello stesso testo. Sulle
+// parole concordano, sulla punteggiatura e sull'impaginazione no. Un canale che
+// accetta qualunque cosa il testimone abbia in mezzo non ripara un carattere:
+// importa l'impaginazione di un'altra generazione, e dove il testimone non ha
+// niente butta via l'ancora. I quattro `FAIL-CLOSED` qui sotto sono le quattro
+// forme in cui e' successo davvero su
+// `content/blog-body/it/lavena-ponte-tresa-territorio-poroso.ts`.
+//
+// Falsificazioni eseguite, una per vincolo, ciascuna rimettendo il difetto
+// nello script e controllando quale test diventa rosso:
+//   - tolto `LETTERA.test(carattere)`      -> rosso «propone un segno di punteggiatura»
+//   - tolto il filtro sui file con marker  -> rosso «non guarda i file che hanno un marker»
+//   - ammesso un rimpiazzo di 2-4 caratteri -> rosso «propone una virgoletta»
+
+/** Un albero con un file sporco e uno o piu' testimoni puliti. */
+function conTestimoni(sporco, testimoni) {
+  const alberi = { 'sporco.ts': sporco };
+  let n = 0;
+  for (const t of testimoni) { n += 1; alberi[`testimone${n}.ts`] = t; }
+  return alberoDiProva(alberi);
+}
+
+function riparaConAlbero(sporco, testimoni) {
+  const radice = conTestimoni(sporco, testimoni);
+  try {
+    const { rapporto } = esegui(radice, ['--write']);
+    return { rapporto, testo: fs.readFileSync(path.join(radice, 'content', 'sporco.ts'), 'utf8') };
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+}
+
+test('testimone: la stessa frase pulita altrove nel corpus da\' la lettera perduta', () => {
+  // Il caso reale: `- Qui : Municipalit<0E> de Bellinzone`, che il lessico
+  // rifiuta come ambiguo (Municipalité / Municipalità esistono entrambe) e che
+  // il testimone risolve perche' la frase INTERA esiste solo in una forma.
+  const frase = 'du Tessin\\n- Qui : Municipalit';
+  const coda = ' de Bellinzone\\n- Montant : deficit';
+  const { rapporto, testo } = riparaConAlbero(
+    `${frase}${B(0x0e)}${coda}\n`,
+    [`${frase}é${coda}\n`],
+  );
+  assert.equal(rapporto.riparate, 1);
+  assert.equal(testo, `${frase}é${coda}\n`);
+  assert.equal(rapporto.riparazioni[0].canale, 'testimone');
+  assert.deepEqual(rapporto.riparazioni[0].testimoni, ['content/testimone1.ts']);
+});
+
+test('testimone: la coda puo\' contenere altri marker, l\'ancora dopo no', () => {
+  // `sc<00>f<16>9narios` -> «scénarios»: due marker e una lettera di troppo al
+  // posto di una sola é. Nessun canale per token puo' arrivarci — il giro
+  // precedente lo aveva classificato «non riparabile per principio».
+  const frase = 'quelques comparaisons entre des sc';
+  const coda = 'narios pratiques :\\n\\n- Stages';
+  const { rapporto, testo } = riparaConAlbero(
+    `${frase}${B(0x00)}f${B(0x16)}9${coda}\n`,
+    [`${frase}é${coda}\n`],
+  );
+  assert.equal(rapporto.riparate, 2, 'i due marker contano entrambi come riparati');
+  assert.equal(testo, `${frase}é${coda}\n`);
+});
+
+test('FAIL-CLOSED — testimone che propone un segno di punteggiatura, non una lettera', () => {
+  // Reale: il gemello pulito di `lavena` ha `svizzeri. Il sindaco` dove il file
+  // sporco ha `svizzeri<08>3. Il sindaco`. Le ancore si allineano — il
+  // testimone propone il punto al posto del marker — ma un punto non e' una
+  // lettera: accettarlo qui butta via l'ancora e toglie una virgoletta che con
+  // ogni probabilita' c'era. Questo test cade se si toglie il vincolo
+  // `LETTERA.test(carattere)`; verificato.
+  const prima = 'ai nostri concittadini svizzeri';
+  const dopo = '. Il sindaco Mastromarino ha anche';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}${B(0x08)}3${dopo}\n`,
+    [`${prima}${dopo}\n`],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x08)), 'il marker resta al suo posto');
+});
+
+test('FAIL-CLOSED — testimone che propone una virgoletta: non e\' una lettera, si rifiuta', () => {
+  // Reale: `due paesi<08>3. Questo` contro `due paesi." Questo`. La virgoletta
+  // e' pure dall'altra parte del punto: due generazioni punteggiano diverso.
+  const prima = 'ma piuttosto un ponte tra due paesi';
+  const dopo = '. Questo e\\\' il messaggio che vogliamo';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}${B(0x08)}3${dopo}\n`,
+    [`${prima}."${dopo.slice(1)}\n`],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x08)));
+});
+
+test('FAIL-CLOSED — testimone che apre un paragrafo: non si importa l\'impaginazione', () => {
+  // Reale: `nella zona. <08>3Il turismo` contro `nella zona. \n\nIl turismo`.
+  const prima = 'crescita economica nella zona. ';
+  const dopo = 'Il turismo della spesa e\\\' un settore';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}${B(0x08)}3${dopo}\n`,
+    [`${prima}\\n\\n"${dopo}\n`],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x08)));
+});
+
+test('FAIL-CLOSED — due testimoni che propongono lettere diverse: si rifiuta', () => {
+  const prima = 'sur les primes de la caisse maladie vot';
+  const dopo = 'es par le peuple en septembre 2025';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}${B(0x0e)}${dopo}\n`,
+    [`${prima}é${dopo}\n`, `${prima}à${dopo}\n`],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x0e)));
+});
+
+test('FAIL-CLOSED — nessun file pulito contiene la frase: nessuna ipotesi', () => {
+  const { rapporto, testo } = riparaConAlbero(
+    `verschiedenen Feuerwehren, darunter die ${B(0x07)}9euerwehr von Laveno\n`,
+    ['una frase che non c\'entra niente, ripetuta due volte per il lessico\n'],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x07)));
+});
+
+test('il testimone non guarda i file che hanno un marker, nemmeno se la frase e\' giusta', () => {
+  // Un file che porta ANCHE UN SOLO marker non testimonia per nessuno, e la
+  // frase qui sotto e' quella giusta: il rifiuto non viene dal contenuto, viene
+  // dal fatto che quel file e' sospetto in blocco. E' la stessa regola del
+  // lessico, e serve perche' un file sporco puo' portare la forma DISTRUTTA
+  // della stessa parola — `blog-meta-it.ts` ha `sar0` dove `seo-blog-4.ts` ha
+  // ancora `sar<17>0` — e prenderla per buona scriverebbe il danno al posto
+  // della riparazione. Questo test cade se `costruisciTestimoni` smette di
+  // saltare i file con marker; verificato.
+  const prima = 'du Tessin\\n- Qui : Municipalit';
+  const dopo = ' de Bellinzone\\n- Montant : deficit';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}${B(0x0e)}${dopo}\n`,
+    [`${prima}é${dopo}\nun altro punto del file: ${B(0x01)}\n`],
+  );
+  assert.equal(rapporto.riparate, 0);
+  assert.match(testo, new RegExp(B(0x0e)));
+});

@@ -17,10 +17,13 @@ import { test } from 'node:test';
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import os from 'node:os';
 import {
   occurrencesIn,
   reportStrippedControlChars,
   strippedCount,
+  residueCount,
+  stripLasciaResiduo,
   resetCounters,
   CONTEXT_CHARS,
 } from '../scripts/lib/control-char-write-report.mjs';
@@ -81,10 +84,16 @@ test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   reportStrippedControlChars('content/blog-body/fr/x.ts', `a${B}9b`, 'a9b', {
-    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl',
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '/tmp/s.md',
   });
-  assert.equal(writes.length, 1);
-  const rec = JSON.parse(writes[0].d.trim());
+  // Filtrato per destinazione e non `writes.length === 1`: da #94 le
+  // destinazioni sono due — il JSONL e il sommario della run — e contare le
+  // scritture invece dei record faceva fallire questo test appena ne compariva
+  // una seconda, dicendo «il JSONL e' sbagliato» quando il JSONL era giusto.
+  const suJsonl = writes.filter((w) => w.p === '/tmp/r.jsonl');
+  assert.equal(suJsonl.length, 1);
+  assert.equal(writes.filter((w) => w.p === '/tmp/s.md').length, 1, 'e il sommario riceve la sua copia');
+  const rec = JSON.parse(suJsonl[0].d.trim());
   assert.equal(rec.file, 'content/blog-body/fr/x.ts');
   assert.equal(rec.byte, 0x16);
   assert.ok(rec.context.includes(B), 'il record deve portare il byte, non solo il conteggio');
@@ -195,4 +204,96 @@ test('ogni choke point di scrittura passa da qui — per OGNI sanitizer, non sol
     'L\'insieme dei choke point e\' cambiato. Se e\' un file NUOVO che sanifica e scrive,\n'
       + 'cablalo e aggiungilo qui. Se e\' sparito, toglilo. Non e\' un test da allentare.',
   );
+});
+
+// ---------------------------------------------------------------------------
+// residuo e evidenza durevole — issue #94
+// ---------------------------------------------------------------------------
+
+const B08 = String.fromCharCode(0x08);
+const B10 = String.fromCharCode(0x10);
+const OGNI_C0 = new RegExp('[\\u0000-\\u0008\\u000b\\u000c\\u000e-\\u001f]', 'g');
+
+test('stripLasciaResiduo: lettera prima, cifra dopo — la parola si rompe', () => {
+  const src = `comp${B}9tences`;
+  assert.equal(stripLasciaResiduo(src, src.indexOf(B)), true);
+});
+
+test('stripLasciaResiduo: cifra dopo e lettera subito dopo — «Il <08>3territorio»', () => {
+  // Il caso da cui viene «Il 3territorio poroso3»: prima del marker c'e' uno
+  // spazio, quindi la prima regola non basta e serve guardare due caratteri
+  // avanti. Senza questa clausola dieci delle occorrenze gia' perse sarebbero
+  // classificate «strip innocuo».
+  const src = `Il ${B08}3territorio poroso`;
+  assert.equal(stripLasciaResiduo(src, src.indexOf(B08)), true);
+});
+
+test('stripLasciaResiduo: «<10>Der» NON e\' un residuo', () => {
+  // Togliere il byte lascia «Der», che era la parola giusta. Contarlo come
+  // residuo gonfierebbe il numero su cui si decidera' se bloccare, ed e'
+  // esattamente il conteggio unico che questo campo esiste per spezzare.
+  const src = `\n> ${B10}Der Hauptzweck ist`;
+  assert.equal(stripLasciaResiduo(src, src.indexOf(B10)), false);
+});
+
+test('occurrencesIn marca ogni occorrenza con `residuo`', () => {
+  const src = `> ${B10}Der Preis ist comp${B}9tences`;
+  const occ = occurrencesIn(src);
+  assert.deepEqual(occ.map((o) => o.residuo), [false, true]);
+});
+
+test('l\'annotazione dice quante rompono una parola, non solo quante ce n\'erano', () => {
+  resetCounters();
+  const righe = [];
+  const src = `> ${B10}Der comp${B}9tences`;
+  reportStrippedControlChars('content/x.ts', src, src.replace(OGNI_C0, ''), {
+    log: (s) => righe.push(s),
+    fsImpl: { mkdirSync() {}, appendFileSync() {} },
+    reportPath: '/dev/null',
+    summaryPath: '',
+  });
+  assert.equal(strippedCount(), 2);
+  assert.equal(residueCount(), 1, 'uno solo dei due rompe una parola');
+  assert.match(righe[0], /2 control character C0, di cui 1 che rompono una parola/);
+});
+
+test('l\'evidenza finisce anche nel sommario della run, dove sopravvive al runner', () => {
+  // `reportPath` sta sotto RUNNER_TEMP, che GitHub cancella a fine job, e
+  // nessun workflow lo carica come artefatto: senza questo, il contesto che
+  // rende esatta una riparazione futura viene scritto e buttato via nello
+  // stesso minuto.
+  resetCounters();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ccws-'));
+  const summary = path.join(dir, 'summary.md');
+  fs.writeFileSync(summary, '');
+  try {
+    const src = `des comp${B}9tences pratiques`;
+    reportStrippedControlChars('content/blog-body/fr/x.ts', src, src.replace(B, ''), {
+      log: () => {},
+      reportPath: path.join(dir, 'strips.jsonl'),
+      summaryPath: summary,
+    });
+    const testo = fs.readFileSync(summary, 'utf-8');
+    assert.match(testo, /control-char-strip/);
+    assert.match(testo, /content\/blog-body\/fr\/x\.ts/);
+    // Il contesto c'e', e il byte e' scritto come <16>: un C0 crudo dentro il
+    // sommario sarebbe lo stesso difetto che questo modulo non deve propagare.
+    assert.match(testo, /comp<16>9tences/);
+    assert.equal(testo.includes(B), false, 'nessun byte C0 crudo nel sommario');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test('senza GITHUB_STEP_SUMMARY non si scrive niente e non si rompe niente', () => {
+  resetCounters();
+  const src = `des comp${B}9tences`;
+  const n = reportStrippedControlChars('content/x.ts', src, src.replace(B, ''), {
+    log: () => {},
+    fsImpl: { mkdirSync() {}, appendFileSync() {} },
+    reportPath: '/dev/null',
+    summaryPath: '',
+  });
+  assert.equal(n, 1);
+  assert.equal(residueCount(), 1);
 });
