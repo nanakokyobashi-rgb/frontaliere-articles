@@ -476,15 +476,22 @@ function main() {
   // sopra per vitest, nessuna chiamata API in più. Prima di questo gate i due
   // test del SiteShellContract (host/tests/shell-contract-*) erano accesi ma
   // non bloccanti: nessun required status check su main, e questo script
-  // guardava solo il check 3. Best-effort sulla lettura dei file (come il gate
-  // merge-preview sotto): un errore transient nel leggere i file della PR non
-  // deve bloccare OGNI merge, solo quelli che davvero toccano questi path.
+  // guardava solo il check 3. Fail-CLOSED sulla lettura dei file: se il fetch
+  // fallisce non posso escludere che la PR tocchi generator/engine/host, e
+  // questo è esattamente il gate che esiste per evitare che un
+  // SiteShellContract rotto passi dietro un tick verde — un errore transient
+  // qui deve bloccare il merge, non lasciarlo passare in silenzio.
   let prFiles = [];
+  let prFilesFetchFailed = false;
   try {
     prFiles = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'],
       { json: false }).split('\n').map((s) => s.trim()).filter(Boolean);
   } catch (e) {
-    console.log(`generator-ci gate: impossibile leggere i file della PR (${String(e).slice(0, 120)}) — skip gate (non blocca).`);
+    prFilesFetchFailed = true;
+    console.log(`generator-ci gate: impossibile leggere i file della PR (${String(e).slice(0, 120)}).`);
+  }
+  if (prFilesFetchFailed) {
+    return fail(`PR #${PR}: impossibile leggere i file della PR per il gate generator-ci — skip conservativo (fail-closed, non posso escludere che tocchi generator/engine/host).`);
   }
   if (touchesGeneratorCiPaths(prFiles)) {
     const genConclusion = latestCompletedConclusionByName(checkRuns, GENERATOR_CI_JOB_NAME);
