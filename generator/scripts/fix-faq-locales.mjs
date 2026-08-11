@@ -71,11 +71,15 @@ const BODY_DIR = resolve(ROOT, corpusPath(`services/locales/${SECTION_BODY_SUBDI
 function extractFaqFromFile(filePath) {
   if (!existsSync(filePath)) return null;
   const content = readFileSync(filePath, 'utf-8');
-  // Escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences
-  const faqMatch = content.match(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/);
-  if (!faqMatch) return null;
+  // Escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
+  // `g` + last match: a duplicate `.faq` key (merge residue) resolves to
+  // the LAST occurrence at runtime (JS object literal semantics), so
+  // that's the value actually live — matching only the first would read
+  // dead content and mis-detect the locale.
+  const matches = [...content.matchAll(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g)];
+  if (!matches.length) return null;
   try {
-    return JSON.parse(faqMatch[1].replace(/\\'/g, "'"));
+    return JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
   } catch { return null; }
 }
 
@@ -87,11 +91,16 @@ function hasFaqKey(filePath) {
 function replaceFaqInFile(filePath, newFaqArray) {
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = JSON.stringify(newFaqArray).replace(/'/g, "\\'");
-  // Escape-aware regex + function replacer to avoid $-pattern issues
-  content = content.replace(
-    /(\.faq['']\s*:\s*[''])((?:[^'\\]|\\.)*)(['']\s*[,}])/,
-    (_match, g1, _g2, g3) => g1 + jsonStr + g3
-  );
+  // Escape-aware regex + function replacer to avoid $-pattern issues.
+  // `g` + last match: write the occurrence that is actually LIVE at
+  // runtime, same reasoning as extractFaqFromFile above.
+  const matches = [...content.matchAll(/(\.faq['']\s*:\s*[''])((?:[^'\\]|\\.)*)(['']\s*[,}])/g)];
+  if (matches.length) {
+    const last = matches[matches.length - 1];
+    const start = last.index;
+    const end = start + last[0].length;
+    content = content.slice(0, start) + last[1] + jsonStr + last[3] + content.slice(end);
+  }
   writeCorpusFile(filePath, content);
 }
 

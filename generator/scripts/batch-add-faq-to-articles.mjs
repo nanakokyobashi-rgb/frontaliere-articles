@@ -327,11 +327,15 @@ function isWrongLocale(faqArray, expectedLocale) {
 }
 
 function extractFaqFromContent(fileContent) {
-  // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences
-  const faqMatch = fileContent.match(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/);
-  if (!faqMatch) return null;
+  // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
+  // `g` + last match: a duplicate `.faq` key (merge residue) resolves to
+  // the LAST occurrence at runtime (JS object literal semantics), so
+  // that's the value actually live — matching only the first would read
+  // dead content and mis-detect the locale.
+  const matches = [...fileContent.matchAll(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g)];
+  if (!matches.length) return null;
   try {
-    return JSON.parse(faqMatch[1].replace(/\\'/g, "'"));
+    return JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
   } catch { return null; }
 }
 
@@ -676,13 +680,16 @@ function validateFaq(faq) {
 function replaceFaqInBodyFile(filePath, faqArray) {
   let content = read(filePath);
   const jsonStr = JSON.stringify(faqArray).replace(/'/g, "\\'");
-  // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences
-  // and function replacer avoids $ interpretation in replacement string
-  const replaced = content.replace(
-    /(\.faq'\s*:\s*')((?:[^'\\]|\\.)*)('\s*,)/,
-    (_match, g1, _g2, g3) => g1 + jsonStr + g3
-  );
-  if (replaced === content) return false;
+  // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
+  // `g` + last match: write the occurrence that is actually LIVE at
+  // runtime — a duplicate `.faq` key resolves to the last one in a JS
+  // object literal, same reasoning as extractFaqFromContent above.
+  const matches = [...content.matchAll(/(\.faq'\s*:\s*')((?:[^'\\]|\\.)*)('\s*,)/g)];
+  if (!matches.length) return false;
+  const last = matches[matches.length - 1];
+  const start = last.index;
+  const end = start + last[0].length;
+  const replaced = content.slice(0, start) + last[1] + jsonStr + last[3] + content.slice(end);
   // Post-write validation: strip TS type annotations before JS syntax check
   try {
     new Function(replaced.replace(/:\s*Record<[^>]+>\s*=/g, ' =').replace(/^export default .+$/m, ''));
