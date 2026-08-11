@@ -20,9 +20,13 @@
  * la parola: la pagina live mostra `d9lais`, `comp9tences`, `con7ues`.  Finche'
  * il byte C0 e' nel corpus la riparazione e' ANCORATA — (byte, coda) sta al
  * posto esatto del carattere perduto.  Quando il byte sparisce resta una cifra
- * indistinguibile da un refuso e non si sa piu' quale carattere rimettere.
+ * indistinguibile da un refuso e nessuna scansione di byte la trova piu'.
  * E' gia' successo: i tre `content/blog-meta-*.ts` avevano 10 occorrenze
  * l'08-08 e sul main del 09-08 hanno la cifra orfana senza piu' l'ancora.
+ * Per quelle serve un ingresso che parta dal RESIDUO invece che dal marker:
+ * e' il blocco «IL RESIDUO» piu' sotto, e non e' un quarto modo di indovinare
+ * — la prova resta il testimone, che e' l'unica che non ha bisogno di sapere
+ * quale byte c'era.
  *
  * PERCHE' NON C'E' UNA TABELLA HARDCODED
  *
@@ -93,6 +97,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
+
+import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
@@ -406,6 +412,313 @@ function riparaConTestimoni(testo, testimoni, cache) {
     if (!fatto) break;
   }
   return { testo: corrente, riparazioni };
+}
+
+// ---------------------------------------------------------------------------
+// IL RESIDUO — l'ingresso per le occorrenze che il marker non ce l'hanno piu'
+// ---------------------------------------------------------------------------
+//
+// PERCHE' SERVE UN INGRESSO DIVERSO.  Tutto cio' che sta sopra parte dal byte
+// C0: e' lui a dire DOVE guardare.  Ma il sanificatore di #65 toglie il byte e
+// lascia la coda dentro la parola, e da quel momento l'occorrenza e' invisibile
+// a qualunque scansione di byte — il byte non c'e' piu'.  E' il caso di
+// `content/blog-meta-it.ts`, che porta `Intesa o sar0 l'inferno` dove il corpus
+// dice `sarò`, e che `meta-it.json` pubblica come TITOLO dell'articolo
+// `trump-intesa-o-inferno`: user-facing, e dentro i dati strutturati.
+//
+// COME SI RICONOSCE.  La firma di cio' che lo strip lascia dietro e' gia'
+// scritta e ha gia' un nome: `stripLasciaResiduo`, in
+// `lib/control-char-write-report.mjs`.  Quella funzione guarda il testo PRIMA
+// dello strip e dice se togliere il marker incolla una cifra a una lettera.
+// Qui la si interroga dal lato opposto del tempo — il marker non c'e' piu' —
+// ricostruendo la finestra minima che legge, con un marker finto davanti alla
+// cifra.  Stessa domanda, stessa risposta, e una sola definizione di «residuo»
+// nel repo: se quella cambia, cambia anche questo canale.
+//
+// PERCHE' IL LESSICO QUI NON PUO' ESSERE UNA PROVA, E LO DICONO I NUMERI.
+// Misurato su `content/` al 2026-08-11 (15.520 file): la forma «cifra incollata
+// a una lettera» compare in **189.124 posizioni**.  Non sono 189.124 difetti:
+// sono targhe di autostrada, sigle di treni, date ISO, slug di URL.  Di quelle,
+// **46** hanno almeno una ricostruzione di UNA LETTERA che il corpus pulito
+// conosce gia' — ed e' li' che si vede quanto sarebbe distruttivo prendere il
+// lessico per una prova, perche' quasi tutte e 46 sono TESTO GIUSTO:
+//
+//     13a AVS                        il lessico proponerebbe «ça AVS»      ×3
+//     l\'A2, l\'A9  (le autostrade)   «l'à», «l'è»                          ×4
+//     user_polizia_pi1[newsId]       «user_polizia_più[newsId]»            ×12
+//     il bus notturno 'N1'           «'Né'»                                ×3
+//     il treno 'S5'                  «'Sì'»                                ×3
+//     il terzo pilastro 3a           «ça»                                  ×3
+//     %22il dentro uno slug          «œil»                                 ×4
+//     ...-und-13tes-avs (dreizehntes) «êtes»                               ×1
+//     ...-dal-5-all11-maggio (URL)   «all’1»                               ×4
+//     d-c3-a9s-c3-a9quilibre (rotta) «équilibre»                           ×1
+//
+// Undici famiglie, dieci delle quali sono danni — e sei sono dentro URL o
+// chiavi di rotta, dove una lettera al posto di una cifra non e' un refuso: e'
+// un link morto.  Quindi il lessico qui fa due mestieri, e nessuno dei due e'
+// «decidere»:
+//
+//   PREFILTRO — dove nessuna ricostruzione di una lettera esiste nel corpus non
+//     c'e' niente da provare, e le posizioni da esaminare scendono da 189.124 a
+//     46.  E' cio' che rende il canale eseguibile: la ricerca del testimone
+//     costa una scansione di 168 milioni di caratteri per ancora distinta.
+//     Essendo un prefiltro, e' anche un LIMITE dichiarato di richiamo — un
+//     residuo la cui parola riparata non e' da nessuna altra parte nel corpus
+//     non viene nemmeno guardato.
+//   CONFERMA — la lettera che il testimone propone deve fare una parola che il
+//     corpus pulito gia' conosce (>= `--min-freq`).  E' la seconda prova, ed e'
+//     qui che serve piu' che nel canale dei marker: li' il byte C0 diceva gia'
+//     che QUALCOSA era rotto, qui invece l'ingresso da solo non lo dice.
+//
+// L'ANCORA A SINISTRA DA SOLA, e perche' non e' un allentamento.
+// Il canale dei marker usa 16 caratteri prima e 24 dopo — 40 di ancora.  Il
+// residuo pero' capita anche in FONDO a un valore, e li' i 24 dopo non sono piu'
+// testo: sono il contenitore.  Misurato sul secondo residuo dello stesso titolo,
+// `spostato a marted8`: quattro riscontri nel corpus, tutti e quattro con `ì`,
+// e nessuno che combaci a destra perche' `blog-meta-it.ts` continua con
+// `',\n 'blog.article...` mentre i testimoni continuano con `',\n ogDescription:`
+// e con `\n\nL'ultimatum`.  E' l'immagine speculare della ragione per cui #218
+// ha scelto 16 e non 24 a sinistra (`title: '` contro `body3': '`): il testo e'
+// identico, il contenitore no.  Quindi il budget di 40 caratteri resta, e dove
+// il lato destro non puo' portarne si spostano tutti a sinistra — 40 e 0 — con
+// la conferma del lessico obbligatoria (che nel modo stretto e' un di piu' e
+// qui e' l'unica cosa che sostituisce l'ancora mancante).
+//
+// COSA NON FA.  Non accetta un rimpiazzo che non sia UNA LETTERA: e' lo stesso
+// vincolo del canale dei marker e per la stessa ragione misurata li'.  Costa
+// `dell6educazione` — `dell’educazione` esiste 40 volte nel corpus — e va bene
+// cosi': un apostrofo tipografico e' punteggiatura, e sulla punteggiatura due
+// generazioni dello stesso testo non concordano.  Resta dichiarato nel rapporto.
+
+/**
+ * Il marker finto con cui si interroga `stripLasciaResiduo` su un testo da cui
+ * il marker vero e' gia' stato tolto.  Non finisce mai in un file: serve solo a
+ * ricomporre la finestra di quattro caratteri che quella funzione legge.
+ */
+const MARKER_FINTO = String.fromCharCode(0x16);
+
+/** L'ancora a sinistra quando quella a destra non esiste (vedi sopra). */
+const RESIDUO_PRIMA_SOLA = 40;
+/** Quanti caratteri puo' occupare il residuo: la coda che il marker si e' portato dietro. */
+const RESIDUO_SPAN_MAX = 3;
+/** Quante volte si ripassa: una riparazione puo' ripulire l'ancora di un'altra. */
+const RESIDUO_GIRI_MAX = 4;
+
+const CIFRA = /[0-9]/;
+const ESADECIMALE = /^[0-9a-fA-F]$/;
+
+/**
+ * Le posizioni che hanno la forma di un residuo: una cifra che, se davanti le
+ * si rimettesse il marker, `stripLasciaResiduo` direbbe che togliendolo si
+ * rompe una parola.  I token che hanno ANCORA il marker dentro non entrano:
+ * quelli li risolvono i canali ancorati, che hanno piu' informazione.
+ */
+function residuiDi(testo) {
+  const token = [];
+  for (const m of testo.matchAll(TOKEN_G)) token.push({ a: m.index, b: m.index + m[0].length, testo: m[0] });
+  const fuori = [];
+  let k = 0;
+  for (let j = 0; j < testo.length; j += 1) {
+    if (!CIFRA.test(testo[j])) continue;
+    const finestra = `${testo[j - 1] || ''}${MARKER_FINTO}${testo[j]}${testo[j + 1] || ''}`;
+    if (!stripLasciaResiduo(finestra, 1)) continue;
+    while (k < token.length && token[k].b <= j) k += 1;
+    const t = k < token.length && token[k].a <= j ? token[k] : null;
+    if (!t || MARKER.test(t.testo)) continue;
+    fuori.push({ j, token: t });
+  }
+  return fuori;
+}
+
+/**
+ * Gli inizi possibili del residuo, dal piu' corto: la cifra da sola, poi la
+ * cifra con uno o due caratteri esadecimali davanti — la coda di `d<00>e9lais`
+ * dopo lo strip e' `e9`, non `9`.  Non si esce mai dal token.
+ *
+ * I caratteri davanti alla cifra devono essere esadecimali MINUSCOLI, ed e' la
+ * stessa asimmetria (e la stessa misura) di `unitaPossibili`: una A-F maiuscola
+ * non e' quasi mai una coda, e' l'iniziale di una parola vera.  Qui costa ancora
+ * piu' caro che li', perche' il residuo non ha piu' il marker a dire dove
+ * comincia il guasto: misurato in dry-run su `content/` prima di scrivere una
+ * riga, senza questa riga il canale prendeva `l\'A2` (l'autostrada) per una
+ * coda `A2` e proponeva `l\'A`, con la benedizione del lessico — che conosce
+ * «A» da solo 7.029 volte.
+ */
+function inizioResiduo(testo, j, token) {
+  const fuori = [j];
+  for (let k = 1; k < RESIDUO_SPAN_MAX; k += 1) {
+    const s = j - k;
+    if (s < token.a) break;
+    const c = testo[s];
+    if (!ESADECIMALE.test(c) || c !== c.toLowerCase()) break;
+    fuori.push(s);
+  }
+  return fuori;
+}
+
+/**
+ * La parola che esce rimettendo `carattere` al posto del residuo `[s, j]`,
+ * ritagliata come la ritaglia il lessico.  `null` se non c'e' abbastanza
+ * contesto o se il carattere rimesso non sopravvive al ritaglio — senza
+ * quest'ultimo controllo un apostrofo di bordo si vedrebbe «confermato» da una
+ * parola che non lo contiene (e' lo stesso di `sostituzioniDentro`, e senza di
+ * lui 82 code di timestamp `...138Z'` si confermavano come «Z»).
+ */
+function parolaDalResiduo(token, s, j, carattere) {
+  const prima = token.testo.slice(0, s - token.a);
+  const dopo = token.testo.slice(j + 1 - token.a);
+  if (prima.length + dopo.length < CONTESTO_MINIMO) return null;
+  const intero = prima + carattere + dopo;
+  const ritagliato = ritaglia(intero);
+  const spostamento = intero.indexOf(ritagliato);
+  if (prima.length < spostamento || prima.length >= spostamento + ritagliato.length) return null;
+  return ritagliato;
+}
+
+/**
+ * Cosa dicono i testimoni sul residuo `[s, j]`, con le ancore date.
+ * `dopo === 0` e' il modo ad ancora sinistra sola: `startsWith('')` e' sempre
+ * vero, quindi lo stesso codice serve i due modi senza un ramo in piu'.
+ */
+function risolviResiduoConTestimone(testo, s, j, testimoni, cache, prima, dopo) {
+  const P = testo.slice(Math.max(0, s - prima), s);
+  if (P.length < prima || MARKER.test(P)) {
+    return { motivo: `testimone: l'ancora prima del residuo e' corta o sporca (${prima})` };
+  }
+  const Q = testo.slice(j + 1, j + 1 + dopo);
+  if (Q.length < dopo || MARKER.test(Q)) {
+    return { motivo: `testimone: l'ancora dopo il residuo e' corta o sporca (${dopo})` };
+  }
+  const riscontri = riscontriPrefisso(P, testimoni, cache);
+  if (riscontri.length === 0) return { motivo: 'testimone: la frase non compare in nessun file pulito' };
+  const proposte = new Map();
+  for (const r of riscontri) {
+    const carattere = r.testo[r.dopo];
+    if (carattere === undefined || !LETTERA.test(carattere)) continue;
+    if (!r.testo.startsWith(Q, r.dopo + 1)) continue;
+    const elenco = proposte.get(carattere) || [];
+    elenco.push(r.percorso);
+    proposte.set(carattere, elenco);
+  }
+  if (proposte.size === 1) {
+    const [carattere, percorsi] = [...proposte][0];
+    return { carattere, testimoni: [...new Set(percorsi)] };
+  }
+  if (proposte.size > 1) {
+    return { motivo: `testimone: ${proposte.size} lettere diverse nello stesso punto (${[...proposte.keys()].join(' ')})` };
+  }
+  return { motivo: 'testimone: nessun testimone mette UNA LETTERA in quel punto' };
+}
+
+/**
+ * Quanto un motivo dice.  Si prova piu' di un'ancora per occorrenza, e l'ultima
+ * provata e' quasi sempre la meno interessante — «l'ancora e' corta» copre
+ * «nessun testimone mette una lettera», che e' l'informazione vera.  Il rapporto
+ * tiene il motivo piu' specifico fra quelli incontrati, non l'ultimo.
+ */
+function pesoMotivo(motivo) {
+  if (/non conosce/.test(motivo)) return 5;
+  if (/lettere diverse/.test(motivo)) return 4;
+  if (/UNA LETTERA/.test(motivo)) return 3;
+  if (/non compare in nessun file pulito/.test(motivo)) return 2;
+  if (/ancora/.test(motivo)) return 1;
+  return 0;
+}
+
+/**
+ * Un giro sul testo: cosa si ripara e cosa si lascia.  Non scrive: decide.
+ * Le due prove sono richieste ENTRAMBE, e in quest'ordine — il testimone dice
+ * quale lettera, il lessico conferma che ne esce una parola.  Se il testimone
+ * parla e il lessico lo smentisce non si prova un'altra ancora: si rifiuta.
+ * Cercare l'ancora che va d'accordo col lessico sarebbe scegliere la prova in
+ * base al risultato.
+ */
+function valutaResidui(testo, testimoni, cache, lessico, freqMinima) {
+  const riparazioni = [];
+  const lasciate = [];
+  let prefiltrate = 0;
+  for (const { j, token } of residuiDi(testo)) {
+    const inizi = inizioResiduo(testo, j, token);
+    // PREFILTRO: esiste almeno una ricostruzione di una lettera che il corpus
+    // conosce?  Se no, non c'e' niente da provare e non si scomoda il testimone.
+    let qualcosaDaProvare = false;
+    for (const s of inizi) {
+      for (const c of ALFABETO) {
+        const parola = parolaDalResiduo(token, s, j, c);
+        if (parola && (lessico.get(parola) || 0) >= freqMinima) { qualcosaDaProvare = true; break; }
+      }
+      if (qualcosaDaProvare) break;
+    }
+    if (!qualcosaDaProvare) { prefiltrate += 1; continue; }
+
+    let motivo = 'nessuna ancora utilizzabile';
+    let riparato = false;
+    let parlato = false; // un testimone ha proposto una lettera: non si cercano altre ancore
+    for (const s of inizi) {
+      if (parlato) break;
+      for (const [prima, dopo] of [[TESTIMONE_PRIMA, TESTIMONE_DOPO], [RESIDUO_PRIMA_SOLA, 0]]) {
+        // Senza ancora a destra NIENTE dice dove finisce il residuo, quindi il
+        // residuo puo' essere solo la cifra: un carattere via, un carattere
+        // dentro, lunghezza invariata.  Misurato in dry-run: con lo span lungo
+        // ammesso qui, `l\'A2` trovava se stesso come testimone, leggeva la «A»
+        // come il rimpiazzo dell'intera coda `A2` e cancellava il «2».  L'ancora
+        // a destra e' proprio la cosa che, nel modo stretto, lo impedisce.
+        if (dopo === 0 && s !== j) continue;
+        const esito = risolviResiduoConTestimone(testo, s, j, testimoni, cache, prima, dopo);
+        if (!esito.carattere) {
+          if (pesoMotivo(esito.motivo) >= pesoMotivo(motivo)) motivo = esito.motivo;
+          continue;
+        }
+        parlato = true;
+        const parola = parolaDalResiduo(token, s, j, esito.carattere);
+        const freq = parola ? (lessico.get(parola) || 0) : 0;
+        if (!parola || freq < freqMinima) {
+          motivo = `il testimone propone ${JSON.stringify(esito.carattere)} ma il corpus non conosce ${JSON.stringify(parola || '')}`;
+          break;
+        }
+        riparato = true;
+        riparazioni.push({
+          offset: s,
+          fine: j,
+          prima: testo.slice(s, j + 1),
+          dopo: esito.carattere,
+          token: token.testo,
+          parola,
+          canale: dopo === 0 ? 'residuo (testimone a sinistra + lessico)' : 'residuo (testimone + lessico)',
+          freq,
+          testimoni: esito.testimoni.slice(0, 3),
+          dettagli: [{ byte: null, coda: testo.slice(s, j + 1), carattere: esito.carattere }],
+        });
+        break;
+      }
+    }
+    if (!riparato) lasciate.push({ offset: j, token: token.testo, motivo });
+  }
+  return { riparazioni, lasciate, prefiltrate };
+}
+
+/**
+ * Passa tutto il file, fino a punto fisso.  Le riparazioni si applicano da
+ * destra a sinistra perche' cambiano la lunghezza del testo, e si ripassa
+ * perche' una riparazione puo' ripulire l'ancora di un'altra.
+ */
+function riparaResidui(testo, testimoni, cache, lessico, freqMinima) {
+  let corrente = testo;
+  const riparazioni = [];
+  let lasciate = [];
+  let prefiltrate = 0;
+  for (let giro = 0; giro < RESIDUO_GIRI_MAX; giro += 1) {
+    const esito = valutaResidui(corrente, testimoni, cache, lessico, freqMinima);
+    lasciate = esito.lasciate;
+    prefiltrate = esito.prefiltrate;
+    if (esito.riparazioni.length === 0) break;
+    for (const r of [...esito.riparazioni].reverse()) {
+      corrente = corrente.slice(0, r.offset) + r.dopo + corrente.slice(r.fine + 1);
+    }
+    riparazioni.push(...esito.riparazioni);
+  }
+  return { testo: corrente, riparazioni, lasciate, prefiltrate };
 }
 
 // ---------------------------------------------------------------------------
@@ -875,46 +1188,78 @@ function main() {
   let occorrenze = 0;
   const rifiutiElenco = [];
   const riparazioniElenco = [];
+  // Il canale del residuo ha una contabilita' SUA, e separata di proposito: cio'
+  // che lascia non e' un'occorrenza rifiutata ma, quasi sempre, testo giusto —
+  // `l'A9`, `pilastro 3a`, uno slug.  Sommarlo ai rifiuti dei marker
+  // renderebbe l'uscita 2 permanente e toglierebbe significato al numero che
+  // conta davvero, che e' quanti byte C0 restano nel corpus.
+  const residuiLasciati = [];
+  const residuiPerFile = [];
+  let residuiRiparati = 0;
+  let residuiPrefiltrati = 0;
 
   for (const f of file) {
     const testo = testi.get(f.percorso);
-    if (testo === undefined || !MARKER.test(testo)) continue;
-    const n = (testo.match(MARKER_G) || []).length;
-    occorrenze += n;
-    // Prima il canale testimone, che lavora sul TESTO e non sui token, poi le
-    // prove per token su cio' che resta: un marker gia' risolto dal testimone
-    // non arriva mai al lessico, e un token che il testimone non tocca resta
-    // esattamente com'era.
-    const w = riparaConTestimoni(testo, testimoni, cacheTestimoni);
-    const r = riparaTesto(w.testo, lessico, opz.freqMinima);
+    if (testo === undefined) continue;
+    let corrente = testo;
     let nRip = 0;
-    for (const rip of [...w.riparazioni, ...r.riparazioni]) {
-      nRip += rip.dettagli.length;
-      riparazioniElenco.push({
-        file: f.percorso, offset: rip.offset, prima: visibile(rip.prima), dopo: rip.dopo,
-        canale: rip.canale, freqNelCorpus: rip.freq,
-        ...(rip.testimoni ? { testimoni: rip.testimoni } : {}),
-      });
-      for (const d of rip.dettagli) {
-        const chiave = `0x${d.byte.toString(16).padStart(2, '0').toUpperCase()}+${JSON.stringify(d.coda)} -> ${JSON.stringify(d.carattere)}`;
-        const voce = perCoppia.get(chiave) || { n: 0, esempio: `${visibile(rip.prima)} -> ${rip.dopo}`, canale: rip.canale };
-        voce.n += 1;
-        perCoppia.set(chiave, voce);
+    // I canali ancorati al marker girano solo dove un marker c'e' ancora.
+    if (MARKER.test(testo)) {
+      const n = (testo.match(MARKER_G) || []).length;
+      occorrenze += n;
+      // Prima il canale testimone, che lavora sul TESTO e non sui token, poi le
+      // prove per token su cio' che resta: un marker gia' risolto dal testimone
+      // non arriva mai al lessico, e un token che il testimone non tocca resta
+      // esattamente com'era.
+      const w = riparaConTestimoni(testo, testimoni, cacheTestimoni);
+      const r = riparaTesto(w.testo, lessico, opz.freqMinima);
+      corrente = r.testo;
+      for (const rip of [...w.riparazioni, ...r.riparazioni]) {
+        nRip += rip.dettagli.length;
+        riparazioniElenco.push({
+          file: f.percorso, offset: rip.offset, prima: visibile(rip.prima), dopo: rip.dopo,
+          canale: rip.canale, freqNelCorpus: rip.freq,
+          ...(rip.testimoni ? { testimoni: rip.testimoni } : {}),
+        });
+        for (const d of rip.dettagli) {
+          const chiave = `0x${d.byte.toString(16).padStart(2, '0').toUpperCase()}+${JSON.stringify(d.coda)} -> ${JSON.stringify(d.carattere)}`;
+          const voce = perCoppia.get(chiave) || { n: 0, esempio: `${visibile(rip.prima)} -> ${rip.dopo}`, canale: rip.canale };
+          voce.n += 1;
+          perCoppia.set(chiave, voce);
+        }
       }
+      for (const rif of r.rifiuti) {
+        motivi.set(rif.motivo, (motivi.get(rif.motivo) || 0) + 1);
+        if (rifiutiElenco.length < 100000) rifiutiElenco.push({ file: f.percorso, ...rif });
+      }
+      riparate += nRip;
+      rifiutate += r.rifiuti.length;
+      perFile.push({
+        file: f.percorso, marker: n, riparate: nRip, rifiutate: r.rifiuti.length,
+        leggeNibble: r.leggeNibble, nibblePro: r.proNibble, nibbleContro: r.controNibble,
+      });
     }
-    for (const rif of r.rifiuti) {
-      motivi.set(rif.motivo, (motivi.get(rif.motivo) || 0) + 1);
-      if (rifiutiElenco.length < 100000) rifiutiElenco.push({ file: f.percorso, ...rif });
+    // Il canale del residuo gira SU TUTTI I FILE, e non e' un dettaglio: il file
+    // che porta il difetto di questo giro — `content/blog-meta-it.ts` — non ha
+    // un solo byte C0, ed e' esattamente per questo che nessuno lo trovava.
+    const res = riparaResidui(corrente, testimoni, cacheTestimoni, lessico, opz.freqMinima);
+    corrente = res.testo;
+    residuiPrefiltrati += res.prefiltrate;
+    residuiRiparati += res.riparazioni.length;
+    for (const rip of res.riparazioni) {
+      riparazioniElenco.push({
+        file: f.percorso, offset: rip.offset, prima: rip.prima, dopo: rip.dopo,
+        token: rip.token, parola: rip.parola, canale: rip.canale, freqNelCorpus: rip.freq,
+        testimoni: rip.testimoni,
+      });
     }
-    riparate += nRip;
-    rifiutate += r.rifiuti.length;
-    perFile.push({
-      file: f.percorso, marker: n, riparate: nRip, rifiutate: r.rifiuti.length,
-      leggeNibble: r.leggeNibble, nibblePro: r.proNibble, nibbleContro: r.controNibble,
-    });
-    if (opz.scrivi && nRip > 0) {
+    for (const l of res.lasciate) residuiLasciati.push({ file: f.percorso, ...l });
+    if (res.riparazioni.length || res.lasciate.length) {
+      residuiPerFile.push({ file: f.percorso, riparati: res.riparazioni.length, lasciati: res.lasciate.length });
+    }
+    if (opz.scrivi && corrente !== testo) {
       const dest = path.join(opz.radice, f.percorso);
-      fs.writeFileSync(dest, Buffer.from(r.testo, 'utf8'));
+      fs.writeFileSync(dest, Buffer.from(corrente, 'utf8'));
     }
   }
 
@@ -931,6 +1276,15 @@ function main() {
     perCoppia: [...perCoppia].map(([k, v]) => ({ coppia: k, n: v.n, canale: v.canale, esempio: v.esempio })).sort((a, b) => b.n - a.n),
     motiviRifiuto: [...motivi].map(([k, v]) => ({ motivo: k, n: v })).sort((a, b) => b.n - a.n),
     perFile: perFile.sort((a, b) => b.marker - a.marker),
+    // Il canale del residuo, contato a parte: `lasciate` NON entra in
+    // `rifiutate` e non tocca il codice d'uscita — vedi il commento sopra.
+    residui: {
+      riparati: residuiRiparati,
+      lasciati: residuiLasciati.length,
+      prefiltrati: residuiPrefiltrati,
+      perFile: residuiPerFile,
+      lasciate: residuiLasciati,
+    },
     // L'elenco completo delle sostituzioni: la issue #94 chiede che il diff
     // venga riletto a mano prima del commit, e questo e' il diff.
     riparazioni: riparazioniElenco,
@@ -953,6 +1307,14 @@ function main() {
     r.push('   (byte C0 + coda) -> carattere            n   canale            esempio');
     for (const c of rapporto.perCoppia) {
       r.push(`     ${c.coppia.padEnd(28)} ${String(c.n).padStart(4)}   ${c.canale.padEnd(16)} ${c.esempio}`);
+    }
+    r.push('');
+    r.push('   residuo (cifra orfana, marker gia\' strippato):');
+    r.push(`     riparati:  ${residuiRiparati}`);
+    r.push(`     lasciati:  ${residuiLasciati.length}   (non sono rifiuti: quasi tutti sono testo giusto)`);
+    r.push(`     scartati dal prefiltro del lessico: ${residuiPrefiltrati}`);
+    for (const x of residuiLasciati.slice(0, opz.maxRifiutiMostrati)) {
+      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.token)}  ${x.motivo}`);
     }
     r.push('');
     r.push('   motivi di rifiuto:');
@@ -991,4 +1353,8 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   main();
 }
 
-export { riparaTesto, risolviToken, costruisciLessico, ritaglia, MARKER, MARKER_G, TOKEN_G, ALFABETO };
+export {
+  riparaTesto, risolviToken, costruisciLessico, ritaglia,
+  riparaResidui, residuiDi, costruisciTestimoni,
+  MARKER, MARKER_G, TOKEN_G, ALFABETO,
+};

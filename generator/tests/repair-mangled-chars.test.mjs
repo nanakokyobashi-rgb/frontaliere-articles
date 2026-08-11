@@ -29,7 +29,9 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-import { riparaTesto, risolviToken, costruisciLessico, MARKER_G } from '../scripts/repair-mangled-chars.mjs';
+import {
+  riparaTesto, risolviToken, costruisciLessico, riparaResidui, residuiDi, MARKER_G,
+} from '../scripts/repair-mangled-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const SCRIPT = path.join(QUI, '..', 'scripts', 'repair-mangled-chars.mjs');
@@ -507,6 +509,209 @@ test('FAIL-CLOSED — nessun file pulito contiene la frase: nessuna ipotesi', ()
   );
   assert.equal(rapporto.riparate, 0);
   assert.match(testo, new RegExp(B(0x07)));
+});
+
+// ---------------------------------------------------------------------------
+// il canale RESIDUO — issue #94, quarto giro: l'ingresso senza marker
+// ---------------------------------------------------------------------------
+//
+// Qui il valore sta nei rifiuti piu' che altrove, e per una ragione che nessuno
+// dei canali precedenti ha: TUTTI loro partono dal byte C0, che e' gia' di per
+// se' la prova che qualcosa e' rotto. Il residuo no. Una cifra incollata a una
+// lettera, in questo corpus, e' quasi sempre testo giusto — `13a AVS`, `l'A2`,
+// `user_polizia_pi1[newsId]`, il bus `'N1'`, il treno `'S5'`, uno slug. Misurato
+// su `content/` all'11-08-2026: **189.124** posizioni hanno questa forma, 46
+// hanno anche una ricostruzione che il corpus conosce, e **2** sono il difetto.
+//
+// Falsificazioni eseguite, una per vincolo, ciascuna rimettendo il difetto nello
+// script e controllando quale test diventa rosso:
+//   - accettato il lessico come prova       -> rosso «13a AVS»
+//   - tolta la conferma del lessico          -> rosso «una parola che il corpus non conosce»
+//   - tolto `LETTERA.test(carattere)`        -> rosso «un apostrofo non e' una lettera»
+//   - tolta l'unanimita' fra i testimoni     -> rosso «due lettere diverse»
+//   - tolto il modo ad ancora sinistra sola  -> rosso «il contenitore diverge subito dopo»
+//   - ammesso l'esadecimale MAIUSCOLO        -> rosso «l'autostrada A2 perde la cifra»
+//   - ammesso lo span lungo senza ancora a destra -> rosso «senza ancora a destra...»
+
+test('residuo: la cifra orfana dentro una parola, provata dal testimone e confermata dal corpus', () => {
+  // Il caso vero, ed e' un titolo pubblicato: `content/blog-meta-it.ts` porta
+  // `Intesa o sar0 l'inferno` e `meta-it.json` lo serve come titolo
+  // dell'articolo `trump-intesa-o-inferno`. Nel file NON c'e' un solo byte C0 —
+  // il sanificatore di #65 lo ha tolto lasciando la cifra dentro la parola —
+  // quindi nessuna scansione di byte lo trova: l'unico ingresso e' il residuo.
+  //
+  // E la lettera non e' quella che direbbe la tabella (byte,cifra) del
+  // censimento #66, che per `(0x17,'0')` dice `à`: il corpus dice `ò`, in due
+  // file, con quaranta caratteri di ancora esatta.
+  const frase = 'Trump: "Intesa o sar';
+  const coda = ' l inferno. Il giallo dell ultimatum spostato';
+  const { rapporto, testo } = riparaConAlbero(
+    `${frase}0${coda}\n`,
+    [`${frase}ò${coda}\n${frase}ò${coda}\n`],
+  );
+  assert.equal(rapporto.occorrenze, 0, 'nessun byte C0 in tutto l\'albero: e\' il punto del canale');
+  assert.equal(rapporto.residui.riparati, 1);
+  assert.equal(testo, `${frase}ò${coda}\n`);
+  const rip = rapporto.riparazioni.find((r) => /residuo/.test(r.canale));
+  assert.equal(rip.canale, 'residuo (testimone + lessico)');
+  assert.equal(rip.parola, 'sarò');
+  assert.deepEqual(rip.testimoni, ['content/testimone1.ts']);
+});
+
+test('residuo: dove il contenitore diverge subito dopo, l\'ancora si sposta tutta a sinistra', () => {
+  // Il secondo residuo dello stesso titolo, `spostato a marted8`. Sta in fondo
+  // al valore: i 24 caratteri dopo non sono piu' testo, sono la chiave
+  // successiva del file, e nessun testimone puo' averli. E' l'immagine
+  // speculare del motivo per cui #218 usa 16 e non 24 a sinistra. Il budget di
+  // 40 caratteri resta, tutto da una parte.
+  const prima = 'La cronaca del giorno racconta che tutto era stato spostato a marted';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}8',\n  altra chiave: valore diverso\n`,
+    [`${prima}ì',\n  descrizione: altro testo ancora\n${prima}ì',\n  ancora un altro campo qui\n`],
+  );
+  assert.equal(rapporto.residui.riparati, 1);
+  assert.match(testo, /spostato a martedì/);
+  const rip = rapporto.riparazioni.find((r) => /residuo/.test(r.canale));
+  assert.equal(rip.canale, 'residuo (testimone a sinistra + lessico)');
+  assert.equal(rip.parola, 'martedì');
+});
+
+test('FAIL-CLOSED — residuo: il lessico da solo NON e\' una prova (`13a AVS` resta `13a AVS`)', () => {
+  // La tredicesima AVS. Il lessico conosce «ça» e la proporrebbe senza esitare;
+  // i testimoni dicono la stessa frase e in quel punto hanno una CIFRA, non una
+  // lettera, quindi non propongono niente. Su `content/` questa sola regola
+  // salva `l'A2`, `l'A9`, `user_polizia_pi1[newsId]`, il bus `'N1'`, il treno
+  // `'S5'`, il `pilastro 3a` e quattro slug: 40 posizioni su 42.
+  // La forma e' quella vera, virgoletta compresa: il token e' `'13a`, e
+  // ritagliando la virgoletta di bordo la ricostruzione diventa «ça», che il
+  // corpus conosce. Senza la virgoletta il token sarebbe `13a`, con una lettera
+  // sola di contesto, e il prefiltro lo scarterebbe prima di arrivare alla
+  // domanda — cioe' il test passerebbe senza provare niente.
+  const frase = "  'blog.article.tredicesima-avs.title': '13a AVS: piu trattenute in busta paga?',";
+  const { rapporto, testo } = riparaConAlbero(
+    `${frase}\n`,
+    [`${frase}\n${frase}\n`, 'ça ça ça ça\n'],
+  );
+  assert.equal(rapporto.residui.riparati, 0);
+  assert.ok(testo.includes("'13a AVS"), 'la cifra della tredicesima resta dov\'e\'');
+  assert.ok(!testo.includes('ça AVS'));
+  assert.match(rapporto.residui.lasciate[0].motivo, /UNA LETTERA/,
+    'ed e\' arrivata fino alla domanda, non e\' stata scartata prima');
+});
+
+test('FAIL-CLOSED — residuo: il testimone propone una lettera che non fa una parola del corpus', () => {
+  // Il testimone da solo qui non basta: l'ingresso non ha piu' il byte C0 che
+  // diceva «qualcosa e' rotto», quindi la lettera proposta deve anche fare una
+  // parola che il corpus gia' conosce. «marchà» compare una volta sola —
+  // sotto la soglia — e la riparazione si ferma.
+  const prima = 'Le rapport sur le grand march';
+  const dopo = ' des idees nouvelles et des projets';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}9${dopo}\n`,
+    [`${prima}à${dopo}\n`],
+  );
+  assert.equal(rapporto.residui.riparati, 0);
+  assert.ok(testo.includes('march9'), 'il residuo resta, dichiarato');
+  assert.match(rapporto.residui.lasciate[0].motivo, /il corpus non conosce/);
+});
+
+test('FAIL-CLOSED — residuo: due testimoni con due lettere diverse, non si sceglie', () => {
+  const prima = 'Le rapport sur le grand march';
+  const dopo = ' des idees nouvelles et des projets';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}9${dopo}\n`,
+    [`${prima}é${dopo}\n${prima}é${dopo}\n`, `${prima}è${dopo}\n${prima}è${dopo}\n`],
+  );
+  assert.equal(rapporto.residui.riparati, 0);
+  assert.ok(testo.includes('march9'));
+  assert.match(rapporto.residui.lasciate[0].motivo, /lettere diverse/);
+});
+
+test('FAIL-CLOSED — residuo: un apostrofo non e\' una lettera, nemmeno se il corpus lo conferma', () => {
+  // Reale, e costa una riparazione che «si vede» giusta: `blog-meta-it.ts` porta
+  // `Il Dipartimento dell6educazione`, e `dell’educazione` sta nel corpus 40
+  // volte. Ma l'apostrofo tipografico e' punteggiatura, e la misura di #218 dice
+  // che sulla punteggiatura due generazioni dello stesso testo non concordano:
+  // e' il vincolo che ha tolto 22 false riparazioni da un solo file. Resta
+  // dichiarato nel rapporto, non riparato.
+  const prima = 'Il Dipartimento dell';
+  const dopo = 'educazione, della cultura e dello sport comunica';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}6${dopo}\n`,
+    [`${prima}’${dopo}\n${prima}’${dopo}\n`],
+  );
+  assert.equal(rapporto.residui.riparati, 0);
+  assert.ok(testo.includes('dell6educazione'));
+  assert.match(rapporto.residui.lasciate[0].motivo, /UNA LETTERA/);
+});
+
+test('FAIL-CLOSED — residuo: l\'esadecimale MAIUSCOLO non e\' una coda (l\'autostrada A2 tiene la sigla)', () => {
+  // La coda puo' allungarsi all'indietro — dopo lo strip la coda di
+  // `d<00>e9lais` e' `e9`, non `9` — ma solo su esadecimali MINUSCOLI. E' la
+  // stessa asimmetria di `unitaPossibili`, con la stessa ragione: una A-F
+  // maiuscola incollata a una cifra quasi mai e' una coda, quasi sempre e' una
+  // sigla vera. Nel corpus si vede subito: delle 40 posizioni che questo canale
+  // lascia dov'erano, **dieci** sono `l'A2`, `l'A9`, il bus `'N1'` e il treno
+  // `'S5'`, tutte maiuscola+cifra.
+  //
+  // Qui il testimone e' un'altra generazione che in quel punto scrive una
+  // maiuscola accentata. Con l'esadecimale maiuscolo ammesso la coda diventa
+  // `A2`, il testimone propone `É`, il lessico conferma «É» — e l'autostrada A2
+  // sparisce dentro una lettera sola. Il byte C0 non c'e' piu': non resta
+  // nemmeno l'ancora per accorgersene dopo.
+  const prima = 'Trafic ralenti ce matin en direction du Tessin sur l\\';
+  const dopo = ' avec de longues files et des retards importants';
+  const { rapporto, testo } = riparaConAlbero(
+    `${prima}'A2'${dopo}\n`,
+    [`${prima}'É'${dopo}\n`, 'É É\n'],
+  );
+  assert.equal(rapporto.residui.riparati, 0);
+  assert.ok(testo.includes("'A2'"), 'la sigla dell\'autostrada resta intera');
+});
+
+test('FAIL-CLOSED — residuo: senza ancora a destra il residuo puo\' essere solo la cifra', () => {
+  // Stessa forma del caso `A2`, ma con un esadecimale minuscolo, che la guardia
+  // sul maiuscolo non ferma. Senza ancora a destra NIENTE dice dove finisce il
+  // residuo: se la coda potesse essere lunga, il testimone che ha la stessa
+  // parola proporrebbe la sua prima lettera come rimpiazzo di tutta la coda e la
+  // cifra sparirebbe. Con la coda ridotta alla sola cifra, il testimone in quel
+  // punto ha una cifra e non propone niente.
+  const prima = 'La strada che porta al villaggio passa proprio davanti alla ';
+  const sporco = `${prima}be2ola grande e antica del bosco\n`;
+  const testimoni = [{ percorso: 'content/t1.ts', testo: `${prima}be2ola piccola vicino al fiume\n` }];
+  const lessico = new Map([['beola', 5], ['béola', 5]]);
+  const r = riparaResidui(sporco, testimoni, new Map(), lessico, 2);
+  assert.equal(r.riparazioni.length, 0);
+  assert.equal(r.testo, sporco);
+  assert.ok(r.lasciate.length >= 1, 'l\'occorrenza e\' dichiarata, non silenziosa');
+});
+
+test('residuo: l\'ingresso e\' `stripLasciaResiduo`, non una regex nuova', () => {
+  // Le tre forme che quella funzione descrive, piu' le due che deve escludere.
+  // Se `stripLasciaResiduo` cambia, cambia anche questo canale: e' voluto, ed e'
+  // la ragione per cui l'ingresso non e' stato riscritto qui.
+  const posizioni = (s) => residuiDi(s).map((x) => x.j);
+  assert.deepEqual(posizioni('comp9tences'), [4], 'lettera prima, cifra dopo');
+  assert.deepEqual(posizioni('Il 3territorio poroso'), [3], 'cifra, poi lettera');
+  assert.deepEqual(posizioni('spostato a marted8'), [17], 'in fondo alla parola');
+  assert.deepEqual(posizioni('nel 2026 e nel 2027'), [], 'un numero non e\' un residuo');
+  assert.deepEqual(posizioni('la data 2026-04-05 alle 10:47'), [], 'nemmeno una data');
+});
+
+test('CLI: in dry-run il residuo non viene scritto', () => {
+  const frase = 'Trump: "Intesa o sar';
+  const coda = ' l inferno. Il giallo dell ultimatum spostato';
+  const sporco = `${frase}0${coda}\n`;
+  const radice = conTestimoni(sporco, [`${frase}ò${coda}\n${frase}ò${coda}\n`]);
+  try {
+    const { rapporto } = esegui(radice, []);
+    assert.equal(rapporto.modalita, 'dry-run');
+    assert.equal(rapporto.residui.riparati, 1, 'il rapporto dice cosa farebbe');
+    assert.equal(fs.readFileSync(path.join(radice, 'content', 'sporco.ts'), 'utf8'), sporco,
+      'ma sul disco non cambia un byte');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
 });
 
 test('il testimone non guarda i file che hanno un marker, nemmeno se la frase e\' giusta', () => {

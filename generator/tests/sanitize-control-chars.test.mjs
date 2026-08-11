@@ -4,7 +4,7 @@
  * ## What broke
  *
  * Two article titles in `content/` carry raw C0 bytes (upstream mangling of
- * «sarà» into `sar\u00170` and of «martedì» into `marted\u00088`). Every
+ * «sarò» into `sar\u00170` and of «martedì» into `marted\u00088`). Every
  * emitter treated them as ordinary text and forwarded them:
  *
  *   - `sitemap-blog.xml` shipped 0x08 and 0x17 inside `<image:title>` at lines
@@ -17,6 +17,27 @@
  *   - `meta-it.json` and `data/blog-index-frontaliere-it-full.json` shipped
  *     them through `JSON.stringify`, which escapes them into VALID JSON — so
  *     nothing anywhere raised, and a byte scan of the artifact found nothing.
+ *
+ * ## Those `(byte, digit)` pairs are observations, NOT a mapping
+ *
+ * `sar\u00170` is «sarò», not «sarà»: the clean twin of that same title lives
+ * in `content/blog-body/it/trump-intesa-o-inferno.ts` and spells it `C3 B2`.
+ * The «sarà» reading came from the #66 census table, and repairing off that
+ * table is how a corpus gets corrupted behind a green CI — the byte <-> char
+ * relation is a function in NEITHER direction. Three pairs from this corpus,
+ * all verified at byte level (site PR #5585):
+ *
+ *   - `\u00083` is BOTH ends of `\u00083territorio poroso\u00083` — one key,
+ *     two different characters;
+ *   - `\u000f` is `ù` in `O\u000f :` -> «Où» AND `œ` in `en \u000fuvre` ->
+ *     «en œuvre», inside the same file;
+ *   - `é` is written `\u000e` in `Municipalit\u000e de` and `\u00169` in
+ *     `comp\u00169tences`.
+ *
+ * What does hold is the «witness» channel of PR #218: the same phrase, clean,
+ * elsewhere in the corpus — witnesses unanimous, replacement exactly ONE
+ * letter. That is what proved `ò` and `ì` here, and it is why
+ * `generator/scripts/repair-mangled-chars.mjs` deliberately carries no table.
  *
  * ## Why the assertions look like this
  *
