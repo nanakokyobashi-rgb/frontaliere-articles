@@ -22,13 +22,23 @@
  *      l'unico caso di merge MANUALE residuo). Un `🔴` reale blocca comunque.
  *   3. check-run `vitest (unit + integration)` sulla HEAD == `success`
  *      (NON solo != failure: richiede success → niente merge su pending/missing).
- *   4. Collision gate (P3, preciso #2424): se la PR ha label `collision-risk`
+ *   4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
+ *      `generator-ci.yml` (`GENERATOR_CI_TRIGGER_PATHS` — generator/, engine/,
+ *      host/, generator-ci.yml stesso, package.json/-lock.json), richiede ANCHE
+ *      il check-run `GENERATOR_CI_JOB_NAME` == `success`. Prima di questo gate
+ *      i due test del `SiteShellContract` (host/tests/shell-contract-*) e gli
+ *      altri gate del generatore erano accesi ma NON bloccanti: nessun required
+ *      status check su `main` (`branches/main/protection` → 404) e
+ *      `auto-merge-eval` esigeva solo il check 3. Condizionato ai path così una
+ *      PR di solo contenuto non paga il costo extra: `generator-ci.yml` non
+ *      parte nemmeno, quindi non c'è nessun check "test" da attendere.
+ *   5. Collision gate (P3, preciso #2424): se la PR ha label `collision-risk`
  *      ED è behind origin/main, blocca SOLO se un peer collidente già MERGIATO
  *      (dai marker `<!-- COLLISION:N -->`) non è ancora incluso in head — il
  *      vero hazard #1454. Behind per soli commit main NON correlati → consentito
  *      (evita starvation/livelock sotto main trafficato). 0 behind → consentito.
- *   5. Merge-preview duplicate-declaration gate (#5215): SOLO se la PR tocca
- *      build-plugins/**. Il gate 4 è ancestry-only (un peer mergiato è incluso
+ *   6. Merge-preview duplicate-declaration gate (#5215): SOLO se la PR tocca
+ *      build-plugins/**. Il gate 5 è ancestry-only (un peer mergiato è incluso
  *      in head?) e non coglie #5187+#5170: due PR che aggiungono lo STESSO
  *      helper in righe diverse dello stesso file si fondono SENZA conflitto
  *      git ma producono un binding duplicato a livello di modulo che esbuild
@@ -49,8 +59,14 @@
  * atteso (l'altro trigger ri-valuterà), non un errore di workflow.
  */
 import { execFileSync } from 'node:child_process';
-import { VITEST_CHECK_NAME, REDFLAG_IMPORTANT_RE, REVIEW_WORKFLOW_DRIFT_FILES } from './lib/constants.mjs';
-import { latestCompletedVitestConclusion } from './lib/vitestCheck.mjs';
+import {
+  VITEST_CHECK_NAME,
+  REDFLAG_IMPORTANT_RE,
+  REVIEW_WORKFLOW_DRIFT_FILES,
+  GENERATOR_CI_JOB_NAME,
+  GENERATOR_CI_TRIGGER_PATHS,
+} from './lib/constants.mjs';
+import { latestCompletedVitestConclusion, latestCompletedConclusionByName } from './lib/vitestCheck.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
 import { checkMergePreviewDuplicates } from './lib/mergePreviewCheck.mjs';
 
@@ -155,6 +171,22 @@ export function codeContributionFingerprint(files) {
   }
   parts.sort();
   return parts.join('\n--FILE--\n');
+}
+
+/**
+ * True se `filenames` (i file di una PR) intersecano `GENERATOR_CI_TRIGGER_PATHS`
+ * — cioè se la PR fa scattare `generator-ci.yml` (stesso path-filter dei
+ * trigger `push`/`pull_request` del workflow, MIRROR-ato perché lo YAML non
+ * può importare questa const — guard in
+ * `generator/tests/generator-ci-required-gate.test.mjs`). Una voce che finisce
+ * per `/` è un prefisso di cartella; le altre sono match esatti di file. Puro
+ * → testabile senza gh.
+ */
+export function touchesGeneratorCiPaths(filenames) {
+  if (!Array.isArray(filenames)) return false;
+  return filenames.some((f) =>
+    GENERATOR_CI_TRIGGER_PATHS.some((p) => (p.endsWith('/') ? f.startsWith(p) : f === p))
+  );
 }
 
 /**
@@ -415,9 +447,11 @@ function main() {
   // success reale → auto-merge bloccato pur coi test verdi (osservato #2394).
   // Vedi lib/vitestCheck.mjs.
   let conclusion = '';
+  let checkRuns = null;
   try {
     const cr = gh(['api', `repos/${REPO}/commits/${head}/check-runs?per_page=100`]);
-    conclusion = latestCompletedVitestConclusion(cr && cr.check_runs);
+    checkRuns = cr && cr.check_runs;
+    conclusion = latestCompletedVitestConclusion(checkRuns);
   } catch (e) {
     return fail(`Impossibile leggere check-runs HEAD ${head}: ${String(e).slice(0, 160)} — skip.`);
   }
@@ -436,7 +470,33 @@ function main() {
   }
   console.log('Gate vitest: success ✔');
 
-  // 4. Collision gate (P3): collision-risk + behind main → NO merge (va rebasata).
+  // 4. Generator CI gate (#242): SOLO se la PR tocca i path che fanno scattare
+  // generator-ci.yml (GENERATOR_CI_TRIGGER_PATHS), esige ANCHE success sul
+  // check-run GENERATOR_CI_JOB_NAME — sullo STESSO array check-runs già letto
+  // sopra per vitest, nessuna chiamata API in più. Prima di questo gate i due
+  // test del SiteShellContract (host/tests/shell-contract-*) erano accesi ma
+  // non bloccanti: nessun required status check su main, e questo script
+  // guardava solo il check 3. Best-effort sulla lettura dei file (come il gate
+  // merge-preview sotto): un errore transient nel leggere i file della PR non
+  // deve bloccare OGNI merge, solo quelli che davvero toccano questi path.
+  let prFiles = [];
+  try {
+    prFiles = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'],
+      { json: false }).split('\n').map((s) => s.trim()).filter(Boolean);
+  } catch (e) {
+    console.log(`generator-ci gate: impossibile leggere i file della PR (${String(e).slice(0, 120)}) — skip gate (non blocca).`);
+  }
+  if (touchesGeneratorCiPaths(prFiles)) {
+    const genConclusion = latestCompletedConclusionByName(checkRuns, GENERATOR_CI_JOB_NAME);
+    if (genConclusion !== 'success') {
+      return fail(`PR #${PR} tocca path che attivano generator-ci.yml e il check-run '${GENERATOR_CI_JOB_NAME}' conclusion='${genConclusion || '<none/pending>'}' ≠ success — skip; il completamento di generator-ci ri-valuterà (no merge su pending/missing/failure del SiteShellContract).`);
+    }
+    console.log(`Gate generator-ci ('${GENERATOR_CI_JOB_NAME}'): success ✔`);
+  } else {
+    console.log('Gate generator-ci: PR non tocca path di generator-ci.yml — non richiesto.');
+  }
+
+  // 5. Collision gate (P3): collision-risk + behind main → NO merge (va rebasata).
   if (labels.includes('collision-risk')) {
     // `behind` via compare main...head: ahead_by sarebbe i commit della PR;
     // behind_by = commit di main non nella PR. >0 → la PR è dietro main.
@@ -501,12 +561,12 @@ function main() {
     }
   }
 
-  // 5. Merge-preview duplicate-declaration gate (#5215), SOLO se la PR tocca
+  // 6. Merge-preview duplicate-declaration gate (#5215), SOLO se la PR tocca
   // build-plugins/**: legge la tip di main ORA (non un valore cache di gate
   // precedenti) e verifica che il merge REALE PR-head+main risultante non
   // dichiari due volte un binding a livello di modulo — la classe
   // #5187+#5170, che git fonde SENZA conflitto (righe diverse dello stesso
-  // file) e che il gate collision (ancestry-only, punto 4) non può cogliere.
+  // file) e che il gate collision (ancestry-only, punto 5) non può cogliere.
   // Best-effort: qualunque impossibilità di verificare (fetch, merge-base) →
   // skip (non blocca) — vedi mergePreviewCheck.mjs.
   let touchesBuildPlugins = false;
