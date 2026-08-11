@@ -212,8 +212,8 @@ test('frontaliere: total rejection with no anchor candidate → the last-resort 
     isFrontaliere: true,
     // Real candidates named in the gate logs of those 27 runs: rejected because
     // the classifier prompt is scoped ESCLUSIVAMENTE to Ticino-Italia and lists
-    // "Frontalieri di altri confini … non Ticino-Italia" as a non-relevance
-    // rule, which the Grigioni story matches.
+    // "frontalieri italiani specifici di un altro cantone svizzero non-Ticino"
+    // as a non-relevance rule, which the Grigioni story matches.
     topicalHits: (t) => (/frontalier/i.test(t) ? 2 : 0),
   });
   const kept = await gate(hl(

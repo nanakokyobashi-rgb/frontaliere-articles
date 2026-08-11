@@ -2170,6 +2170,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assegni-familiari-canton-zurigo.title': 'Allocations familiales dans le canton de Zurich : montants et demande',
     'blog.article.assegni-familiari-canton-zurigo.excerpt': 'La procédure de demande d\'allocation familiale dans le canton de Zurich est simple et peut être déposée en ligne ou au siège de la caisse de compensation compétente.',
     'blog.article.assegni-familiari-canton-zurigo.imageAlt': 'Vue de Lugano, une ville dans le canton du Tessin, avec le lac et les collines environnantes',
+    'blog.article.indennita-di-disoccupazione-cantone-zurigo-iscrizione-urc.title': 'Indemnités de chômage dans le canton de Zurich',
+    'blog.article.indennita-di-disoccupazione-cantone-zurigo-iscrizione-urc.excerpt': 'Ce guide examine les conditions de demande d\'indemnité de chômage dans le canton de Zurich, y compris l\'inscription à l\'ORP, la période de cotisation minimale, le calcul de l\'indemnité journalière, les obligations de recherche d\'emploi et les mesures de réinsertion professionnelle.',
+    'blog.article.indennita-di-disoccupazione-cantone-zurigo-iscrizione-urc.imageAlt': 'une scène de travail dans une usine dans le canton de Zurich',
+    'blog.article.svizzera-ees-rallenta-controlli.title': 'EES rallenta i controlli aeroportuali',
+    'blog.article.svizzera-ees-rallenta-controlli.excerpt': 'Données Qsensor et Financial Times, pics estivaux jusqu\'à 120 minutes à Francfort et Amsterdam ; huit pays et la Suisse demandent des prolongations.',
+    'blog.article.svizzera-ees-rallenta-controlli.imageAlt': 'EES ralentit les contrôles aéroportuaires en Suisse.',
 };
 
 export default blogMetaChFr;
