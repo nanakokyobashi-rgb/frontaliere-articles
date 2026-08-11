@@ -246,6 +246,98 @@ export function residuesInText(text) {
   return out;
 }
 
+// ── FAQ segnaposto (issue #220) ─────────────────────────────────────────────
+//
+// I due criteri sopra (C0 grezzo, residuo) riconoscono UN solo tipo di sporco:
+// il byte di controllo. Un difetto di testo LEGALE e sbagliato — il modello
+// che ricopia lo schema del prompt invece di compilarlo (vedi
+// `generator/scripts/lib/prompt-placeholder-guard.mjs`) — e' invisibile a
+// entrambi: e' una stringa ben formata, zero control character.
+//
+// Misurato il 2026-08-11: 55 pagine su 4 locali servivano il template come
+// FAQPage JSON-LD (`"FAQ 1 based on the facts of the article?"` e le sue
+// traduzioni). Nessun elenco di letterali copre le quattro lingue — nemmeno le
+// tre traduzioni dello STESSO letterale sono uguali fra loro (misurato in
+// prompt-placeholder-guard.test.mjs) — quindi il criterio qui e' STRUTTURALE:
+// riconosce la FORMA dell'etichetta numerata dello schema («Domanda frequente
+// N» / «FAQ N» / «Frequently Asked Question N» / «Foire aux questions N» /
+// «Question fréquemment posée N»), ancorata all'INIZIO della domanda — dove
+// l'etichetta dello schema compare per davvero, mai in un articolo che PARLA
+// di FAQ a meta' frase.
+//
+// Deliberatamente NON e' `findPromptPlaceholders()` del guard di scrittura:
+// quello e' derivato dai letterali ITALIANI dello schema e per costruzione non
+// vede le traduzioni — e' la premessa stessa di `orphanFaqLocales()` li'. Qui
+// la domanda e' diversa («e' un'etichetta numerata di FAQ?», non «e'
+// esattamente questo letterale?»), e vale sia sul corpus (passo 1) sia sulla
+// pagina live (passo 2), dove l'oracolo e' STRUTTURALE anche nella lettura:
+// si fa il parse del JSON-LD FAQPage e si legge `Question.name`, il campo che
+// il crawler legge davvero — non una grep sull'HTML, che sulla grafia
+// italiana si perde 18 pagine su 18 (misurato).
+
+const FAQ_LABEL_RX =
+  /^\s*\**\s*(?:domanda\s+frequente|faq|frequently\s+asked\s+questions?|foire\s+aux\s+questions?|question\s+fr[eé]quemment\s+pos[eé]e|h[aä]ufig\s+gestellte\s+fragen?)\s*\d+\b/i;
+
+/** Vero se il testo ha la FORMA dell'etichetta numerata dello schema FAQ, in una qualunque delle quattro lingue pubblicate. */
+export function isPlaceholderFaqQuestion(text) {
+  return typeof text === 'string' && FAQ_LABEL_RX.test(text);
+}
+
+/**
+ * Le `Question.name` di ogni blocco FAQPage JSON-LD della pagina.
+ *
+ * Un `<script type="application/ld+json">` per pagina puo' portare un oggetto
+ * singolo o un array (`@graph`-like); entrambe le forme si vedono nel corpus
+ * reale (breadcrumb, articolo, FAQ sono tag separati). Un blocco che non fa il
+ * parse (markup troncato, un altro script non-JSON con lo stesso attributo)
+ * viene ignorato invece di far cadere l'intera scansione.
+ */
+export function faqQuestionNamesInHtml(html) {
+  if (typeof html !== 'string') return [];
+  const names = [];
+  const rx = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = rx.exec(html)) !== null) {
+    let data;
+    try {
+      data = JSON.parse(m[1]);
+    } catch {
+      continue;
+    }
+    for (const item of Array.isArray(data) ? data : [data]) {
+      if (!item || item['@type'] !== 'FAQPage' || !Array.isArray(item.mainEntity)) continue;
+      for (const q of item.mainEntity) {
+        if (q && typeof q.name === 'string') names.push(q.name);
+      }
+    }
+  }
+  return names;
+}
+
+/** Vero se la pagina serve almeno una domanda FAQPage segnaposto. */
+export function pageCarriesFaqPlaceholder(html) {
+  return faqQuestionNamesInHtml(html).some(isPlaceholderFaqQuestion);
+}
+
+/**
+ * Le domande del campo `faq` grezzo di un file body
+ * (`content/blog-body{,-ch}/<locale>/<id>.ts`): `[]` se il campo manca o non
+ * e' JSON valido. Stesso schema di escaping di `fix-faq-locales.mjs` — il
+ * campo e' JSON dentro una stringa TS fra apici singoli, dove solo l'apice
+ * porta un escape aggiuntivo.
+ */
+export function faqQuestionsInBodyText(text) {
+  const m = /'blog\.article\.[a-z0-9-]+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/.exec(text);
+  if (!m) return [];
+  let pairs;
+  try {
+    pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
+  } catch {
+    return [];
+  }
+  return Array.isArray(pairs) ? pairs.filter((p) => p && typeof p.q === 'string').map((p) => p.q) : [];
+}
+
 function mark(map, section, id, source, residues) {
   const key = `${section}:${id}`;
   const entry = map.get(key) || { section, id, sources: [], residues: [] };
@@ -262,17 +354,26 @@ export function scanContentForDirtyIds(rootDir) {
   const found = new Map();
   let totalFiles = 0;
   let totalOccurrences = 0;
+  let totalFaqPlaceholderFiles = 0;
 
   for (const bodyDir of Object.keys(BODY_DIR_SECTIONS)) {
     const section = sectionForBodyDir(bodyDir);
     for (const file of listTsFiles(path.join(rootDir, 'content', bodyDir))) {
       const text = fs.readFileSync(file, 'utf8');
-      const n = findControlChars(text).length;
-      if (n === 0) continue;
-      totalFiles += 1;
-      totalOccurrences += n;
       const id = path.basename(file, '.ts');
-      mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
+      const n = findControlChars(text).length;
+      if (n > 0) {
+        totalFiles += 1;
+        totalOccurrences += n;
+        mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
+      }
+      // Secondo predicato (issue #220): indipendente dal C0, quindi controllato
+      // sempre — un body puo' portare un FAQ segnaposto senza un solo control
+      // character.
+      if (faqQuestionsInBodyText(text).some(isPlaceholderFaqQuestion)) {
+        totalFaqPlaceholderFiles += 1;
+        mark(found, section, id, `${path.relative(rootDir, file)} (faq-placeholder)`, []);
+      }
     }
   }
 
@@ -303,7 +404,7 @@ export function scanContentForDirtyIds(rootDir) {
   }
 
   const ids = [...found.values()].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
-  return { ids, totalFiles, totalOccurrences };
+  return { ids, totalFiles, totalOccurrences, totalFaqPlaceholderFiles };
 }
 
 /** Ordine deterministico (sezione, poi id) + cap. Nessuna priorita' di data: sono un backlog storico, non un evento fresco. */
@@ -389,6 +490,11 @@ export function classifyProbe({ status, body, error, residues }) {
   if (status === 404 || status === 410) return 'absent';
   if (typeof status !== 'number' || status < 200 || status >= 300) return 'unknown';
   if (pageCarriesControlChars(body)) return 'dirty';
+  // Terzo criterio (issue #220): il FAQ segnaposto. Testo legale e ben
+  // formato — zero control character, nessun residuo — ma structured data
+  // FALSO: il crawler parsa il JSON-LD e legge la domanda che nessun
+  // giornalista ha mai scritto. Vedi l'intestazione sopra `isPlaceholderFaqQuestion`.
+  if (pageCarriesFaqPlaceholder(body)) return 'dirty';
   // Secondo criterio: il RESIDUO. Una pagina emessa dopo #65 non porta piu' il
   // byte, ma porta la cifra che il byte si e' lasciato dietro dentro la parola.
   // Senza questo ramo il drenaggio riporta 0 su pagine visibilmente rotte —
@@ -537,7 +643,7 @@ async function main() {
   const apiBase = (process.env.DIRTY_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const skipLive = args.skipLive || process.env.DIRTY_SKIP_LIVE === '1';
 
-  const { ids: candidates, totalFiles, totalOccurrences } = scanContentForDirtyIds(ROOT_DIR);
+  const { ids: candidates, totalFiles, totalOccurrences, totalFaqPlaceholderFiles } = scanContentForDirtyIds(ROOT_DIR);
 
   let ids = candidates;
   let liveFilter = 'skipped';
@@ -577,6 +683,7 @@ async function main() {
     generatedAt: new Date().toISOString(),
     totalFiles,
     totalOccurrences,
+    totalFaqPlaceholderFiles,
     apiBase,
     apiCommit,
     liveFilter,
@@ -596,7 +703,7 @@ async function main() {
   fs.writeFileSync(args.out, `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(
-    `[find-dirty-content-ids] ${totalFiles} file, ${totalOccurrences} byte C0, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
+    `[find-dirty-content-ids] ${totalFiles} file (${totalOccurrences} byte C0), ${totalFaqPlaceholderFiles} file con FAQ segnaposto, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
   );
   for (const { section, id, sources, liveReason, dirtyLocales } of selected) {
     const why = liveReason === 'dirty' ? `live sporco: ${dirtyLocales.join(',')}` : `live ${liveReason ?? 'non filtrato'}`;
