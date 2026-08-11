@@ -235,7 +235,9 @@
     "trasferirsi a Valpelline da frontaliere pro e contro",
     "vivere a Valpelline e lavorare in Vallese da frontaliere",
     "vivere a Morgex e lavorare in Vallese da frontaliere",
-    "trasferirsi a Morgex da frontaliere pro e contro"
+    "trasferirsi a Morgex da frontaliere pro e contro",
+    "vivere a Avise e lavorare in Vallese da frontaliere",
+    "trasferirsi a Avise da frontaliere pro e contro"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -364,6 +366,7 @@
     "vivere a La Salle e lavorare in Vallese da frontaliere": 1,
     "vivere a Saint-Nicolas e lavorare in Vallese da frontaliere": 1,
     "vivere a Avise e lavorare in Vallese da frontaliere": 1,
-    "trasferirsi a Avise da frontaliere pro e contro": 1
+    "trasferirsi a Avise da frontaliere pro e contro": 1,
+    "vivere a Sarre e lavorare in Vallese da frontaliere": 1
   }
 }
