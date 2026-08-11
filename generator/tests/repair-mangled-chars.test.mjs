@@ -31,6 +31,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   riparaTesto, risolviToken, costruisciLessico, riparaResidui, residuiDi, MARKER_G,
+  segnalaResiduiScritti,
 } from '../scripts/repair-mangled-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
@@ -704,14 +705,90 @@ test('CLI: in dry-run il residuo non viene scritto', () => {
   const sporco = `${frase}0${coda}\n`;
   const radice = conTestimoni(sporco, [`${frase}ò${coda}\n${frase}ò${coda}\n`]);
   try {
-    const { rapporto } = esegui(radice, []);
+    const { codice, rapporto } = esegui(radice, []);
     assert.equal(rapporto.modalita, 'dry-run');
     assert.equal(rapporto.residui.riparati, 1, 'il rapporto dice cosa farebbe');
     assert.equal(fs.readFileSync(path.join(radice, 'content', 'sporco.ts'), 'utf8'), sporco,
       'ma sul disco non cambia un byte');
+    assert.equal(codice, 0, 'in dry-run non c\'e\' ancora nulla da rileggere: il gate non scatta');
   } finally {
     fs.rmSync(radice, { recursive: true, force: true });
   }
+});
+
+test('CLI (issue #222): --write che scrive dal canale residuo esce con codice 3, non 0', () => {
+  // Il gate mancante segnalato dalla review di #219: senza, questo caso e'
+  // indistinguibile da un `--write` che non ha trovato nulla da riparare.
+  const frase = 'Trump: "Intesa o sar';
+  const coda = ' l inferno. Il giallo dell ultimatum spostato';
+  const radice = conTestimoni(
+    `${frase}0${coda}\n`,
+    [`${frase}ò${coda}\n${frase}ò${coda}\n`],
+  );
+  try {
+    const { codice, rapporto } = esegui(radice, ['--write']);
+    assert.equal(codice, 3, 'scrivere una riparazione residuo non e\' un successo silenzioso');
+    assert.equal(rapporto.residui.riparati, 1);
+    assert.equal(rapporto.residui.riparazioni.length, 1, 'ogni riparazione e\' elencata per intero, non solo contata');
+    assert.equal(rapporto.residui.riparazioni[0].parola, 'sarò');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('CLI (issue #222): --write senza riparazioni residuo resta al codice 0', () => {
+  const radice = alberoDiProva({ 'sporco.ts': `les d${B(0x0e)}9penses\n` });
+  try {
+    const { codice } = esegui(radice, ['--write']);
+    assert.equal(codice, 0, 'il gate scatta solo quando il canale residuo scrive qualcosa');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('CLI (issue #222): il rapporto a righe elenca ogni riparazione residuo, non solo il conteggio', () => {
+  const frase = 'Trump: "Intesa o sar';
+  const coda = ' l inferno. Il giallo dell ultimatum spostato';
+  const radice = conTestimoni(
+    `${frase}0${coda}\n`,
+    [`${frase}ò${coda}\n${frase}ò${coda}\n`],
+  );
+  try {
+    execFileSync('node', [SCRIPT, '--root', radice, '--write'], { encoding: 'utf8' });
+    assert.fail('doveva uscire con codice 3 (--write con riparazioni residuo)');
+  } catch (e) {
+    assert.equal(e.status, 3);
+    assert.match(e.stdout, /riparazioni residuo \(rilettura umana richiesta, issue #222\)/);
+    assert.match(e.stdout, /sporco\.ts:\d+/);
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('segnalaResiduiScritti (issue #222): elenca ogni riparazione in GITHUB_STEP_SUMMARY', () => {
+  const writes = [];
+  const fsImpl = { appendFileSync: (p, d) => writes.push({ p, d }) };
+  segnalaResiduiScritti(
+    [{ file: 'content/blog-meta-it.ts', offset: 42, prima: 'sar0', dopo: 'sarò', canale: 'residuo (testimone + lessico)', testimoni: ['content/x.ts'] }],
+    { summaryPath: '/tmp/step-summary.md', fsImpl },
+  );
+  assert.equal(writes.length, 1);
+  assert.equal(writes[0].p, '/tmp/step-summary.md');
+  assert.match(writes[0].d, /repair-mangled-chars — riparazioni dal canale residuo/);
+  assert.match(writes[0].d, /content\/blog-meta-it\.ts/);
+  assert.match(writes[0].d, /"sar0"/);
+  assert.match(writes[0].d, /"sarò"/);
+});
+
+test('segnalaResiduiScritti (issue #222): senza riparazioni, o senza GITHUB_STEP_SUMMARY, non scrive niente', () => {
+  const writes = [];
+  const fsImpl = { appendFileSync: (p, d) => writes.push({ p, d }) };
+  segnalaResiduiScritti([], { summaryPath: '/tmp/step-summary.md', fsImpl });
+  segnalaResiduiScritti(
+    [{ file: 'a.ts', offset: 1, prima: 'x0', dopo: 'xò', canale: 'residuo' }],
+    { summaryPath: '', fsImpl },
+  );
+  assert.equal(writes.length, 0);
 });
 
 test('il testimone non guarda i file che hanno un marker, nemmeno se la frase e\' giusta', () => {
