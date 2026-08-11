@@ -84,10 +84,16 @@ test('l\'evidenza finisce su disco in forma leggibile da un programma', () => {
   const writes = [];
   const fsImpl = { mkdirSync() {}, appendFileSync: (p, d) => writes.push({ p, d }) };
   reportStrippedControlChars('content/blog-body/fr/x.ts', `a${B}9b`, 'a9b', {
-    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl',
+    log: () => {}, fsImpl, reportPath: '/tmp/r.jsonl', summaryPath: '/tmp/s.md',
   });
-  assert.equal(writes.length, 1);
-  const rec = JSON.parse(writes[0].d.trim());
+  // Filtrato per destinazione e non `writes.length === 1`: da #94 le
+  // destinazioni sono due — il JSONL e il sommario della run — e contare le
+  // scritture invece dei record faceva fallire questo test appena ne compariva
+  // una seconda, dicendo «il JSONL e' sbagliato» quando il JSONL era giusto.
+  const suJsonl = writes.filter((w) => w.p === '/tmp/r.jsonl');
+  assert.equal(suJsonl.length, 1);
+  assert.equal(writes.filter((w) => w.p === '/tmp/s.md').length, 1, 'e il sommario riceve la sua copia');
+  const rec = JSON.parse(suJsonl[0].d.trim());
   assert.equal(rec.file, 'content/blog-body/fr/x.ts');
   assert.equal(rec.byte, 0x16);
   assert.ok(rec.context.includes(B), 'il record deve portare il byte, non solo il conteggio');
