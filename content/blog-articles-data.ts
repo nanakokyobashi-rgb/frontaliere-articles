@@ -28902,6 +28902,24 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'bollettino-frontaliere-2026-08-11',
+ category: 'novita',
+ date: '2026-08-11T05:54:44.369Z',
+ image: '/images/blog/bollettino-frontaliere-2026-08-11.webp',
+ hasCalculator: false,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'trasferirsi-a-aprica-da-frontaliere-pro-e-contro',
+ category: 'pratico',
+ date: '2026-08-11T06:01:33.590Z',
+ image: '/images/blog/trasferirsi-a-aprica-da-frontaliere-pro-e-contro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

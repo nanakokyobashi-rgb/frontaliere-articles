@@ -9633,6 +9633,14 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-chiuro-lavorare-grigioni-frontaliere.title': 'Frontalieri in Grigioni: cosa cambia e cosa fare',
     'blog.article.vivere-chiuro-lavorare-grigioni-frontaliere.excerpt': 'Die neue Frontalieri-Vereinbarung: Neuigkeiten und Änderungen für die Grenzgänger von Chiuro',
     'blog.article.vivere-chiuro-lavorare-grigioni-frontaliere.imageAlt': 'Ein Frontalier mit seiner Familie an einem sonnigen Tag in Chiuro',
+    'blog.article.bollettino-frontaliere-2026-08-11.title': 'Grenzgänger-Tagesbulletin – 11. August 2026: 603 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-08-11.excerpt': 'Die Zahlen von heute, 11. August 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-08-11.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 11. August 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-08-11.seoDescription': 'Grenzgänger-Bulletin vom 11. August 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-08-11.ogDescription': 'Die Zahlen vom 11. August 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.trasferirsi-a-aprica-da-frontaliere-pro-e-contro.title': 'Umzug nach Aprica als Grenzgänger: Vor- und Nachteile',
+    'blog.article.trasferirsi-a-aprica-da-frontaliere-pro-e-contro.excerpt': 'Zahlen und Fakten AUS DER QUELLE zum Grenzübertritt nach Aprica für Grenzgänger',
+    'blog.article.trasferirsi-a-aprica-da-frontaliere-pro-e-contro.imageAlt': 'Frontalier fährt von Aprica nach Chiasso',
 };
 
 export default blogMetaDe;
