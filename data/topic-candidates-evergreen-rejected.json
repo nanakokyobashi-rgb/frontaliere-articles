@@ -266,7 +266,8 @@
     "tassazione frontalieri 2026 nuovo accordo",
     "ingresso in svizzera frontalieri documenti dogana 2026",
     "aufenthaltsbewilligung b quellensteuer 2026",
-    "g bewilligung antrag 2026"
+    "g bewilligung antrag 2026",
+    "avs e prestazioni complementari canton Zurigo cassa di compensazione"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -407,6 +408,7 @@
     "telelavoro frontalieri 2026": 1,
     "avs e prestazioni complementari canton Zurigo cassa di compensazione": 2,
     "quellensteuer schweiz tarife 2026": 1,
-    "grenzgänger schweiz steuern 2026": 1
+    "grenzgänger schweiz steuern 2026": 1,
+    "salari e mercato del lavoro canton Zurigo settori e livelli": 1
   }
 }
