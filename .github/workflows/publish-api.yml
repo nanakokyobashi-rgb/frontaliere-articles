@@ -431,7 +431,11 @@ jobs:
             urls+=("https://cdn.frontaliereticino.ch/data/$(basename "$f")")
           done
           if [ ${#urls[@]} -gt 0 ]; then
-            node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+            # Through retry-cmd.sh — same blip class and idempotency
+            # justification as the fast-publish purge steps (issue #268): a
+            # re-invocation just re-issues purge_cache for the same URLs,
+            # which is a no-op for anything already purged.
+            bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
           fi
 
       # Tell the site the surface moved. The publisher knows when it has

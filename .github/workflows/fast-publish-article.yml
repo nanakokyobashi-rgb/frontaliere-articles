@@ -515,7 +515,13 @@ jobs:
             echo "::error::CF_API_TOKEN missing after the Remote Config load — the article is on the shard but the apex will keep serving a cached 404"
             exit 1
           fi
-          node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          # Through retry-cmd.sh (issue #268: a single Cloudflare API blip —
+          # "Authentication error" on the FIRST purge_cache call of an
+          # otherwise-healthy run — failed this step outright with no retry.
+          # Idempotent: a re-invocation just re-resolves the zone and re-POSTs
+          # purge_cache for the same URL list; purging an already-purged URL is
+          # a no-op, so retrying the whole script is safe.
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       - name: Verify the article is actually readable
         if: steps.mode.outputs.skip != 'true' && steps.mode.outputs.dry != 'true'
@@ -840,7 +846,9 @@ jobs:
             echo "::error::CF_API_TOKEN is gone after the verification — the post-verify purge cannot run, and a 404 cached during the build window would survive for hours"
             exit 1
           fi
-          node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
+          # Through retry-cmd.sh — same blip class and same idempotency
+          # justification as the first purge step above (issue #268).
+          bash scripts/ci/retry-cmd.sh node scripts/cf-purge-cache.mjs "--files=$(IFS=,; echo "${urls[*]}")"
 
       - name: Summary
         if: always() && steps.mode.outputs.skip != 'true'
