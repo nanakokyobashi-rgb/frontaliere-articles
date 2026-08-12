@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-11T05:54:42.282Z",
-  "dateIso": "2026-08-11",
+  "generatedAt": "2026-08-12T06:17:45.671Z",
+  "dateIso": "2026-08-12",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 22857
+    "jobsActive": 22798
   },
   "blocks": {
     "borderWait": {
@@ -16,10 +16,10 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-11T04:54:08.879Z",
+      "generatedAt": "2026-08-12T03:51:53.539Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 94,
-      "cheaperSwissCount": 48,
+      "cheaperItalyCount": 95,
+      "cheaperSwissCount": 47,
       "tieCount": 3,
       "cheapestItaly": [
         {
@@ -59,56 +59,56 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.518,
-          "swissPriceEur": 2.034,
+          "swissPriceEur": 2.032,
           "swissPriceChf": 1.9,
-          "saving50LEur": 25.8
+          "saving50LEur": 25.7
         },
         {
           "municipality": "Campodolcino",
           "province": "SO",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.175,
-          "swissPriceEur": 1.916,
+          "swissPriceEur": 1.914,
           "swissPriceChf": 1.79,
-          "saving50LEur": 12.95
+          "saving50LEur": 13.05
         },
         {
           "municipality": "Montagna in Valtellina",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.897,
-          "swissPriceEur": 2.12,
+          "swissPriceEur": 2.117,
           "swissPriceChf": 1.98,
-          "saving50LEur": 11.15
+          "saving50LEur": 11
         }
       ],
       "cheapestSwissStation": {
         "name": "Alpina Tankstelle",
         "sp95PriceChf": 1.42,
-        "sp95PriceEur": 1.52,
+        "sp95PriceEur": 1.519,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
       "rate": 1.0694,
-      "lastDate": "2026-08-10",
-      "prevRate": 1.0693,
-      "prevDate": "2026-08-09",
-      "delta1d": 0.0001,
-      "rate7dAgo": 1.0734,
-      "delta7d": -0.004,
+      "lastDate": "2026-08-11",
+      "prevRate": 1.0695,
+      "prevDate": "2026-08-10",
+      "delta1d": -0.0001,
+      "rate7dAgo": 1.0727,
+      "delta7d": -0.0033,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-11T04:20:52.097Z",
-      "activeJobs": 22857,
-      "activeCompanies": 859,
-      "todayAdded": 345,
-      "yesterdayAdded": 603,
-      "last7dAdded": 4217
+      "generatedAt": "2026-08-12T03:50:53.005Z",
+      "activeJobs": 22798,
+      "activeCompanies": 846,
+      "todayAdded": 500,
+      "yesterdayAdded": 762,
+      "last7dAdded": 4183
     }
   }
 }
