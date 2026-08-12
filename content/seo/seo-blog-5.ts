@@ -66059,6 +66059,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rc-auto-svizzera-frontaliere': {
+    title: 'RC auto svizzera e frontalieri: differenze con l\'Italia',
+    description: 'Guida completa all\'assicurazione RC auto in Svizzera per frontalieri: differenze con l\'Italia, bonus-malus e immatricolazione del veicolo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, auto, differenze, pratica, assicurazione',
+    ogTitle: 'Assicurazione RC auto in Svizzera per frontalieri: differenze e regole',
+    ogDescription: 'Approfondimento completo sull\'assicurazione RC auto svizzera per i lavoratori frontalieri tra Italia e Canton Ticino: differenze, bonus-malus e immatricolazione.',
+    canonicalPath: '/articoli-frontaliere/rc-auto-svizzera-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "RC auto svizzera e frontalieri: differenze con l'Italia",
+      "description": "Guida completa all'assicurazione RC auto in Svizzera per frontalieri: differenze con l'Italia, bonus-malus e immatricolazione del veicolo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rc-auto-svizzera-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Assicurazione RC auto in Svizzera per frontalieri tra differenze e immatricolazione"
+      },
+      "datePublished": "2026-08-12T10:28:45+00:00",
+      "dateModified": "2026-08-12T10:28:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/rc-auto-svizzera-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

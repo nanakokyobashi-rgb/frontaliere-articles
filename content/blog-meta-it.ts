@@ -9804,6 +9804,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.fallimenti-aziende-svizzera-1994.title': 'Svizzera, fallimenti aziendali record: livelli mai visti dal 1994',
     'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'Nel primo semestre 7496 aziende hanno dichiarato fallimento per insolvenza in Svizzera, con un incremento del 54,7% rispetto allo stesso periodo precedente.',
     'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Panoramica di un distretto economico in Svizzera con edifici commerciali',
+    'blog.article.rc-auto-svizzera-frontaliere.title': 'RC auto svizzera e frontalieri: differenze con l\'Italia',
+    'blog.article.rc-auto-svizzera-frontaliere.excerpt': 'Guida pratica all\'assicurazione RC auto in Svizzera per il frontaliere, con focus sulle differenze rispetto all\'Italia, bonus-malus e immatricolazione.',
+    'blog.article.rc-auto-svizzera-frontaliere.imageAlt': 'Assicurazione RC auto in Svizzera per frontalieri tra differenze e immatricolazione',
 };
 
 export default blogMetaIt;

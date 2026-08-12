@@ -9803,6 +9803,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.fallimenti-aziende-svizzera-1994.title': 'Switzerland, record business failures: levels not seen since 1994',
     'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'In the first half of the year, 7,496 companies declared bankruptcy due to insolvency in Switzerland, an increase of 54.7% compared to the same period of the previous year.',
     'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Overview of a business district in Switzerland with commercial buildings',
+    'blog.article.rc-auto-svizzera-frontaliere.title': 'RC Swiss and frontier cars: differences with Italy',
+    'blog.article.rc-auto-svizzera-frontaliere.excerpt': 'Practical guide to car liability insurance in Switzerland for the border worker, with a focus on the differences compared to Italy, bonus-malus and registration.',
+    'blog.article.rc-auto-svizzera-frontaliere.imageAlt': 'Swiss car insurance liability for cross-border workers differences and registration',
 };
 
 export default blogMetaEn;

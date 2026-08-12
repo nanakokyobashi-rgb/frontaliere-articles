@@ -9805,6 +9805,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.fallimenti-aziende-svizzera-1994.title': 'Suisse, faillites d\'entreprises records : des niveaux jamais vus depuis 1994',
     'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'Au premier semestre, 7496 entreprises ont déclaré faillite pour cause d\'insolvabilité en Suisse, soit une augmentation de 54,7 % par rapport à la même période précédente.',
     'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Vue d\'un quartier d\'affaires en Suisse avec des bâtiments commerciaux',
+    'blog.article.rc-auto-svizzera-frontaliere.title': 'RC voitures suisses et frontalières : différences avec l\'Italie',
+    'blog.article.rc-auto-svizzera-frontaliere.excerpt': 'Guide pratique de l\'assurance RC auto en Suisse pour le frontalier, en mettant l\'accent sur les différences par rapport à l\'Italie, le bonus-malus et l\'immatriculation.',
+    'blog.article.rc-auto-svizzera-frontaliere.imageAlt': 'Assurance RC auto suisse pour frontaliers entre différences et immatriculation',
 };
 
 export default blogMetaFr;

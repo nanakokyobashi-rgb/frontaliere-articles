@@ -9802,6 +9802,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.fallimenti-aziende-svizzera-1994.title': 'Schweiz, rekordverdächtige Unternehmensinsolvenzen: seit 1994 nie dagewesene',
     'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'Im ersten Halbjahr meldeten 7496 Unternehmen in der Schweiz Insolvenz an, was einem Anstieg von 54,7% gegenüber dem Vorquartal entspricht.',
     'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Übersicht über ein Geschäftsviertel in der Schweiz mit Gewerbegebäuden',
+    'blog.article.rc-auto-svizzera-frontaliere.title': 'RC Auto Schweiz und Grenzgänger: Unterschiede zu Italien',
+    'blog.article.rc-auto-svizzera-frontaliere.excerpt': 'Praktischer Leitfaden zur Auto-Haftpflichtversicherung in der Schweiz für Grenzgänger, mit Fokus auf Unterschiede zu Italien, Bonus-Malus und Zulassung.',
+    'blog.article.rc-auto-svizzera-frontaliere.imageAlt': 'Schweizer Kfz-Haftpflichtversicherung für Grenzgänger Unterschiede und Zulassung',
 };
 
 export default blogMetaDe;
