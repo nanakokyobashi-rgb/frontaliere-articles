@@ -2356,6 +2356,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.cultura-e-spettacoli-ticino-2026.title': 'Eurovision: Kriegsland nicht ausrichter',
     'blog.article.cultura-e-spettacoli-ticino-2026.excerpt': 'Das Veranstaltungsreglement wurde aktualisiert, auch mit einer Neuerung zum Mindestalter der Künstler: Sie müssen mindestens 18 Jahre alt sein.',
     'blog.article.cultura-e-spettacoli-ticino-2026.imageAlt': 'Locarno 2026 - Der Filmfestival Die Regeln für die Auswahl der Filme von Locarno',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.title': 'Klimaanlagen in großer Höhe: Forscher erkennen Spuren von Kältemitteln',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.excerpt': 'Forscher der höchsten Messstation Europas haben Spuren von Kältemitteln entdeckt, die zu PFAS abgebaut werden und die Umwelt verschmutzen.',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.imageAlt': 'Redaktionelles Bild zu: Climatizzatori ad alta quota: i ricercatori rilevano le tracce dei refrigeranti',
 };
 
 export default blogMetaChDe;

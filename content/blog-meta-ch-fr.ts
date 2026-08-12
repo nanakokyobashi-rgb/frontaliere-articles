@@ -2356,6 +2356,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.cultura-e-spettacoli-ticino-2026.title': 'Eurovision : si le pays gagnant est en guerre, il n\'accueillera pas le concours',
     'blog.article.cultura-e-spettacoli-ticino-2026.excerpt': 'Le règlement de la kermesse a été mis à jour, y compris avec une nouveauté sur l\'âge minimum des artistes : ils doivent avoir au moins 18 ans.',
     'blog.article.cultura-e-spettacoli-ticino-2026.imageAlt': 'Locarno 2026 - Le Festival Les règles pour choisir les films de Locarno',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.title': 'Climatiseurs à haute altitude : les chercheurs détectent les traces',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.excerpt': 'Les chercheurs de la plus haute station de mesure d\'Europe ont détecté les traces de réfrigérants qui se dégradent en PFAS et vont polluer l\'environnement.',
+    'blog.article.climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.imageAlt': 'Image éditoriale relative à: Climatizzatori ad alta quota: i ricercatori rilevano le tracce dei refrigeranti',
 };
 
 export default blogMetaChFr;

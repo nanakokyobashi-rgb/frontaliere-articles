@@ -7066,6 +7066,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti',
+    category: 'pratico',
+    date: '2026-08-12T22:05:46.444Z',
+    image: '/images/blog/climatizzatori-ad-alta-quota-i-ricercatori-rilevano-le-tracce-dei-refrigeranti.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
