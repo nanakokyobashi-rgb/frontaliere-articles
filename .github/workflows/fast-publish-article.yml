@@ -559,9 +559,14 @@ jobs:
           # Same signature at 2026-08-07T22:50:48Z. An errored 0ms build is a
           # transient fault on GitHub's side, and re-requesting it clears it.
           #
-          # So on a timeout we ask Pages what happened and, only when it says
-          # `errored`, request one more build and poll once more. ONE retry, not
-          # a loop: a Pages outage that survives a second build is a real
+          # So on a timeout we ask Pages what happened. `errored` requests one
+          # rebuild and polls once more; `building`/`queued` means a build is
+          # already in flight and just needs more time, so it polls again
+          # without requesting a second one (issue #260 — the FR shard was
+          # still `building` after the first 3-minute window and would have
+          # gone `built` shortly after, same as the IT apex case measured
+          # below). Either case is ONE retry, not a loop: a Pages outage or a
+          # build that is still not done after the second poll is a real
           # failure and must stay red rather than be papered over. Either way
           # the error message now carries the build status, so the issue this
           # opens points at the cause instead of the symptom.
@@ -711,32 +716,45 @@ jobs:
             pages_latest "$repo"
             echo "::warning::$u answers $POLL_CODE after the first poll — latest Pages build for $repo is '$PAGES_STATUS'"
 
-            if [ "$PAGES_STATUS" != "errored" ]; then
-              echo "::error::$u answers $POLL_CODE — the shard push did not become readable (Pages build status: $PAGES_STATUS)"
-              fail=1
-              continue
-            fi
-
-            echo "── the Pages build errored; requesting one rebuild of $repo"
-            set +e
-            rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
-                  -H "Authorization: Bearer ${GITHUB_PAT:-}" \
-                  -H "Accept: application/vnd.github+json" \
-                  "https://api.github.com/repos/$repo/pages/builds")"
-            set -e
-            if [ "$rc" != "201" ]; then
-              echo "::error::$u answers $POLL_CODE and the Pages build for $repo is 'errored'; the rebuild request returned HTTP $rc so it could not be retried"
-              fail=1
-              continue
-            fi
+            # `building`/`queued` is not a failure to react to — it is the
+            # ORIGIN side of the same "budget too short" case the apex
+            # comment above already documents for IT: a build in flight can
+            # legitimately outlast a 3-minute poll and still land moments
+            # later. Requesting a second build here would race the one
+            # already running, so this branch only waits; only `errored`
+            # (a build that already gave up) gets a rebuild request.
+            case "$PAGES_STATUS" in
+              errored)
+                echo "── the Pages build errored; requesting one rebuild of $repo"
+                set +e
+                rc="$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 -X POST \
+                      -H "Authorization: Bearer ${GITHUB_PAT:-}" \
+                      -H "Accept: application/vnd.github+json" \
+                      "https://api.github.com/repos/$repo/pages/builds")"
+                set -e
+                if [ "$rc" != "201" ]; then
+                  echo "::error::$u answers $POLL_CODE and the Pages build for $repo is 'errored'; the rebuild request returned HTTP $rc so it could not be retried"
+                  fail=1
+                  continue
+                fi
+                ;;
+              building|queued)
+                echo "── Pages build for $repo is still '$PAGES_STATUS'; polling longer instead of requesting a duplicate build"
+                ;;
+              *)
+                echo "::error::$u answers $POLL_CODE — the shard push did not become readable (Pages build status: $PAGES_STATUS)"
+                fail=1
+                continue
+                ;;
+            esac
 
             if poll_origin "$u" 12; then
-              echo "  200  $u  (recovered after re-requesting the Pages build)"
+              echo "  200  $u  (recovered after the second poll)"
               continue
             fi
 
             pages_latest "$repo"
-            echo "::error::$u answers $POLL_CODE after a rebuild — GitHub Pages build for $repo is '$PAGES_STATUS'${PAGES_ERROR:+ ($PAGES_ERROR)}. The push landed; this is a Pages build failure on the shard, not a missing article."
+            echo "::error::$u answers $POLL_CODE after a second poll — GitHub Pages build for $repo is '$PAGES_STATUS'${PAGES_ERROR:+ ($PAGES_ERROR)}. The push landed; this is a Pages build failure on the shard, not a missing article."
             fail=1
           done < <(jq -r '.shards[] | [.locale, .paths[0]] | @tsv' "$summary")
 
