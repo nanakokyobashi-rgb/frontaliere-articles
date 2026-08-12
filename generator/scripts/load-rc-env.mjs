@@ -332,7 +332,7 @@ export function rcFetchBackoffMs(attempt) {
 // total) guarantees at least one attempt lands in the following quota
 // window instead of exhausting the retry budget entirely inside the one
 // that is already spent.
-const RC_FETCH_ATTEMPTS = 7;
+export const RC_FETCH_ATTEMPTS = 7;
 
 // Wall-clock cap per attempt (follow-up #199 to #173/#198): this fetch had
 // only a status-based retry, no timeout at all — a slow-but-never-erroring
