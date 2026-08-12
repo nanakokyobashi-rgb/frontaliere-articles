@@ -2192,14 +2192,28 @@ const REMEDIATION_BY_CATEGORY = {
  * @param {object[]} issues
  * @param {{cap?: number}} [opts]
  */
+// `evidence` was the only field capped here (180 chars, below) — `message`
+// and `fix` were not, and both can carry unbounded text: `fix` is often a
+// multi-sentence prose remediation (up to ~460 chars measured on
+// tax-exceeds-income/fabricated-institution), and `message` sometimes embeds
+// a `.map().join(', ')` list whose length scales with how many anchors a
+// source has (see checkSourceFidelity's `source-key-rates-dropped`). Eight
+// uncapped issues is how a retry's `factCheckRefinementInstruction` alone
+// pushed the news-branch prompt to ~10.9k tokens — over every tiered
+// per-model request cap (3000/4000/6000/8000) the fleet declares, not just
+// PROMPT_TOKEN_CEILING. 260 is chosen to sit above the longest fixed
+// REMEDIATION_BY_CATEGORY fallback text (240, "istituzioni") so category
+// fallbacks are never truncated, while still bounding the per-instance text.
+const MAX_REMEDIATION_FIELD_CHARS = 260;
+
 export function formatRemediation(issues, opts = {}) {
   const cap = opts.cap ?? 8;
   const list = (issues || []).slice(0, cap);
   if (!list.length) return '';
 
   const lines = list.map((i, n) => {
-    const what = i.message || i.reason || '';
-    const how = i.fix || REMEDIATION_BY_CATEGORY[i.category] || '';
+    const what = String(i.message || i.reason || '').slice(0, MAX_REMEDIATION_FIELD_CHARS);
+    const how = String(i.fix || REMEDIATION_BY_CATEGORY[i.category] || '').slice(0, MAX_REMEDIATION_FIELD_CHARS);
     const where = i.evidence || i.claim || '';
     return [
       `${n + 1}. PROBLEMA: ${what}`,
