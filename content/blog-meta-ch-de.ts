@@ -2281,6 +2281,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tassa-utili-immobiliari-comuni.title': 'Grundstückgewinnsteuer: 40 % Anteil an den Tessiner Gemeinden',
     'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'Eine parlamentarische Initiative von Patrick Rusconi fordert, 40% der Einnahmen der TUI für die Gemeinden zu verwenden, in denen sich die Immobilie befindet.',
     'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'Ansicht von Bellinzona mit institutionellen Gebaeuden',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.title': '30-km/h-Zonen in Städten, Bundesrat greift ein',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'Der Bundesrat hat beschlossen, die Verkehrsschilderverordnung zu ändern, um in Städten Geschwindigkeitsbegrenzungen von 30 km/h einzuführen.',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': '30 km/h-Geschwindigkeitsbeschränkungen in Schweizer Städten',
 };
 
 export default blogMetaChDe;

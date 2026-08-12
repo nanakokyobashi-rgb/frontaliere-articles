@@ -2281,6 +2281,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tassa-utili-immobiliari-comuni.title': 'Taux des bénéfices immobiliers : part de 40 % aux Communes tessinoises',
     'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'Une initiative parlementaire présentée par Patrick Rusconi demande que 40 % des recettes de TUI soient alloués aux communes où se trouve l\'immeuble.',
     'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'Vue de Bellinzona avec des batiments institutionnels',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.title': 'Zones à 30 km/h dans les villes, le Conseil fédéral intervient',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'Le Conseil fédéral a décidé de modifier l\'Ordonnance sur les panneaux de signalisation pour introduire des limites de vitesse de 30 km/h dans les villes.',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': 'Limites de vitesse de 30 km/h dans les villes suisses',
 };
 
 export default blogMetaChFr;

@@ -2281,6 +2281,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tassa-utili-immobiliari-comuni.title': 'Real estate profits tax: 40% share to the municipalities of Ticino',
     'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'A parliamentary initiative presented by Patrick Rusconi calls for allocating 40% of TUI\'s revenue to the municipalities where the property is located.',
     'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'View of Bellinzona with institutional buildings and urban view',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.title': '30 km/h zones in cities, Federal Council intervenes',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'The Federal Council has decided to amend the Traffic Signs Ordinance to introduce speed limits of 30 km/h in cities.',
+    'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': '30 km/h speed limits in Swiss cities',
 };
 
 export default blogMetaChEn;
