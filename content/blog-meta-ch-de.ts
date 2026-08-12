@@ -2269,6 +2269,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposte-cantonal-berna-aliquote-deduzioni.title': 'Kantonale Steuern im Kanton Bern: Steuersätze und Abzüge',
     'blog.article.imposte-cantonal-berna-aliquote-deduzioni.excerpt': 'Die kantonalen Steuern im Kanton Bern werden von der kantonalen Verwaltung verwaltet und haben je nach Einkommensstufe unterschiedliche Sätze.',
     'blog.article.imposte-cantonal-berna-aliquote-deduzioni.imageAlt': 'Redaktionelles Bild zu: Imposte cantonali nel Cantone di Berna: aliquote e deduzioni',
+    'blog.article.no-tutele-sindacalisti-bilaterali-iii.title': 'Bilaterale III: Nein zu besonderen Schutzmaßnahmen für Gewerkschafter',
+    'blog.article.no-tutele-sindacalisti-bilaterali-iii.excerpt': 'Die Kommission für Wirtschaft und Abgaben des Ständerates schliesst die Regelung aus, die den Schutz für Gewerkschaftsvertreter in Betrieben gestärkt hätte.',
+    'blog.article.no-tutele-sindacalisti-bilaterali-iii.imageAlt': 'Eine Gewerkschaftssitzung in der Schweiz',
+    'blog.article.premi-cassa-malati-cantone-bern-riduzione.title': 'Krankenkassenprämien Kanton Bern und Prämienverbilligung',
+    'blog.article.premi-cassa-malati-cantone-bern-riduzione.excerpt': 'Hier finden Sie die wichtigsten Fakten zu den Prämien der obligatorischen Krankenversicherung im Kanton Bern.',
+    'blog.article.premi-cassa-malati-cantone-bern-riduzione.imageAlt': 'Schweizer Berge mit dem Lago di Lugano im Hintergrund.',
 };
 
 export default blogMetaChDe;
