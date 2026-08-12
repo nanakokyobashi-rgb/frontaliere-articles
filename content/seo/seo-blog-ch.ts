@@ -29579,6 +29579,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tre-banche-cantonali-be-sg-bl-profitti-in-crescita': {
+    title: 'Tre banche cantonali svizzere: tre volte profitti in crescita',
+    description: 'Le tre banche cantonali svizzere presentano i conti semestrali con profitti in crescita. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, banche, cantonali, svizzere, volte',
+    ogTitle: 'Tre banche cantonali svizzere: tre volte profitti in crescita',
+    ogDescription: 'Le tre banche cantonali svizzere presentano i conti semestrali con profitti in crescita',
+    canonicalPath: '/articoli-svizzera/tre-banche-cantonali-be-sg-bl-profitti-in-crescita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tre banche cantonali svizzere: tre volte profitti in crescita",
+      "description": "Le tre banche cantonali svizzere presentano i conti semestrali con profitti in crescita. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tre-banche-cantonali-be-sg-bl-profitti-in-crescita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tre banche cantonali svizzere presentano i conti semestrali con profitti in crescita"
+      },
+      "datePublished": "2026-08-12T10:32:20+00:00",
+      "dateModified": "2026-08-12T10:32:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tre-banche-cantonali-be-sg-bl-profitti-in-crescita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

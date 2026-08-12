@@ -6850,6 +6850,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tre-banche-cantonali-be-sg-bl-profitti-in-crescita',
+    category: 'fiscale',
+    date: '2026-08-12T10:32:20.257Z',
+    image: '/images/blog/tre-banche-cantonali-be-sg-bl-profitti-in-crescita.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

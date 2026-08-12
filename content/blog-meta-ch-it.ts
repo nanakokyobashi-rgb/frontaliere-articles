@@ -2284,6 +2284,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.zone-30-kmh-intervento-consiglio-federale.title': 'Zone 30 km/h nelle città, interviene il Consiglio federale',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'Il Consiglio federale decide di modificare l\'ordinanza sulla segnaletica stradale per introdurre limiti di velocità a 30 km/h nelle città.',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': 'Limiti di velocità a 30 km/h nelle città svizzere',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.title': 'Tre banche cantonali svizzere: tre volte profitti in crescita',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.excerpt': 'Le banche cantonali di Berna, San Gallo e Basilea Campagna presentano i conti semestrali con profitti in crescita',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.imageAlt': 'Tre banche cantonali svizzere presentano i conti semestrali con profitti in crescita',
 };
 
 export default blogMetaChIt;
