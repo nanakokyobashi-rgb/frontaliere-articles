@@ -2278,6 +2278,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tetto-salari-manager-casse-malattia.title': 'Krankenkassen: Obergrenze für Managergehälter vom CF',
     'blog.article.tetto-salari-manager-casse-malattia.excerpt': 'Der Bundesrat will die Krankenkassenkaderlöhne auf Basis von Bundesratsentgelten begrenzen.',
     'blog.article.tetto-salari-manager-casse-malattia.imageAlt': 'Das Bundeshaus in Bern Sitz des Bundesrates',
+    'blog.article.tassa-utili-immobiliari-comuni.title': 'Grundstückgewinnsteuer: 40 % Anteil an den Tessiner Gemeinden',
+    'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'Eine parlamentarische Initiative von Patrick Rusconi fordert, 40% der Einnahmen der TUI für die Gemeinden zu verwenden, in denen sich die Immobilie befindet.',
+    'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'Ansicht von Bellinzona mit institutionellen Gebaeuden',
 };
 
 export default blogMetaChDe;

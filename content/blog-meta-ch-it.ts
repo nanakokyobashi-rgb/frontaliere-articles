@@ -2278,6 +2278,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tetto-salari-manager-casse-malattia.title': 'Casse malattia: tetto ai salari dei manager fissato dal CF',
     'blog.article.tetto-salari-manager-casse-malattia.excerpt': 'Il Consiglio federale vuole porre un limite ai salari dei quadri delle casse malattia basandosi sui compensi dei consiglieri federali.',
     'blog.article.tetto-salari-manager-casse-malattia.imageAlt': 'Il Palazzo federale a Berna sede del Consiglio federale',
+    'blog.article.tassa-utili-immobiliari-comuni.title': 'Tassa utili immobiliari: quota del 40% ai Comuni ticinesi',
+    'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'Un\'iniziativa parlamentare presentata da Patrick Rusconi chiede di destinare il 40% del gettito della TUI ai Comuni dove si trova l\'immobile.',
+    'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'Vista di Bellinzona con edifici istituzionali e scorcio urbano',
 };
 
 export default blogMetaChIt;

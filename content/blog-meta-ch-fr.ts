@@ -2278,6 +2278,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tetto-salari-manager-casse-malattia.title': 'Caisses maladie : plafond des salaires des managers fixé par le CF',
     'blog.article.tetto-salari-manager-casse-malattia.excerpt': 'Le Conseil fédéral veut plafonner les salaires des cadres des caisses-maladie sur la base des rémunérations des conseillers fédéraux.',
     'blog.article.tetto-salari-manager-casse-malattia.imageAlt': 'Le Palais fédéral à Berne siège du Conseil fédéral',
+    'blog.article.tassa-utili-immobiliari-comuni.title': 'Taux des bénéfices immobiliers : part de 40 % aux Communes tessinoises',
+    'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'Une initiative parlementaire présentée par Patrick Rusconi demande que 40 % des recettes de TUI soient alloués aux communes où se trouve l\'immeuble.',
+    'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'Vue de Bellinzona avec des batiments institutionnels',
 };
 
 export default blogMetaChFr;

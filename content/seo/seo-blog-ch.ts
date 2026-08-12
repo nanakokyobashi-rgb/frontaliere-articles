@@ -29501,6 +29501,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tassa-utili-immobiliari-comuni': {
+    title: 'Tassa utili immobiliari: quota del 40% ai Comuni ticinesi',
+    description: 'Iniziativa parlamentare in Ticino per redistribuire il 40% del gettito della TUI ai Comuni. Cifre, impatti finanziari e dettagli della proposta PLR.',
+    keywords: 'frontalieri, ticino, svizzera, italia, tassa, utili, immobiliari, quota',
+    ogTitle: 'Tassa sugli utili immobiliari: una quota del 40% ai Comuni ticinesi',
+    ogDescription: 'Scopri i dettagli dell\'iniziativa parlamentare presentata in Ticino per destinare il 40% del gettito della TUI ai Comuni dove si trova l\'immobile.',
+    canonicalPath: '/articoli-svizzera/tassa-utili-immobiliari-comuni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Tassa utili immobiliari: quota del 40% ai Comuni ticinesi",
+      "description": "Iniziativa parlamentare in Ticino per redistribuire il 40% del gettito della TUI ai Comuni. Cifre, impatti finanziari e dettagli della proposta PLR.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tassa-utili-immobiliari-comuni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Bellinzona con edifici istituzionali e scorcio urbano"
+      },
+      "datePublished": "2026-08-12T10:09:35+00:00",
+      "dateModified": "2026-08-12T10:09:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/tassa-utili-immobiliari-comuni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -6832,6 +6832,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tassa-utili-immobiliari-comuni',
+    category: 'fiscale',
+    date: '2026-08-12T10:09:35.091Z',
+    image: '/images/blog/tassa-utili-immobiliari-comuni.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

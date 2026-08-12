@@ -2278,6 +2278,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tetto-salari-manager-casse-malattia.title': 'Sickness funds: cap on managers\' salaries set by the CF',
     'blog.article.tetto-salari-manager-casse-malattia.excerpt': 'The Federal Council wants to put a limit on the salaries of sickness fund managers based on the remuneration of federal councillors.',
     'blog.article.tetto-salari-manager-casse-malattia.imageAlt': 'The Federal Palace in Bern seat of the Federal Council',
+    'blog.article.tassa-utili-immobiliari-comuni.title': 'Real estate profits tax: 40% share to the municipalities of Ticino',
+    'blog.article.tassa-utili-immobiliari-comuni.excerpt': 'A parliamentary initiative presented by Patrick Rusconi calls for allocating 40% of TUI\'s revenue to the municipalities where the property is located.',
+    'blog.article.tassa-utili-immobiliari-comuni.imageAlt': 'View of Bellinzona with institutional buildings and urban view',
 };
 
 export default blogMetaChEn;
