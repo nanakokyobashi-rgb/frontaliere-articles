@@ -9816,6 +9816,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.mpute-stradali-svizzere-pagamento-da-residente-italiano.title': 'Come funzionano le multe stradali svizzere per un residente italiano',
     'blog.article.mpute-stradali-svizzere-pagamento-da-residente-italiano.excerpt': 'Il frontaliere italiano deve pagare le multe stradali svizzere entro il termine stabilito.',
     'blog.article.mpute-stradali-svizzere-pagamento-da-residente-italiano.imageAlt': 'Il frontaliere italiano deve pagare le multe stradali svizzere.',
+    'blog.article.traversata-alpi-cani-adottati-cuveglio.title': 'Traversata delle Alpi con cani adottati: terza settimana',
+    'blog.article.traversata-alpi-cani-adottati-cuveglio.excerpt': 'Terza settimana di cammino per Cristian e Mara lungo la Grande Traversata delle Alpi insieme ai loro cani adottati in canile.',
+    'blog.article.traversata-alpi-cani-adottati-cuveglio.imageAlt': 'Coppia in cammino sulle Alpi con i cani adottati',
+    'blog.article.cambio-cantone-lavoro-frontaliere.title': 'Cambio cantone di lavoro per il frontaliere',
+    'blog.article.cambio-cantone-lavoro-frontaliere.excerpt': 'Impatto del cambio di cantone di lavoro per i frontalieri tra Ticino, Grigioni e altre regioni: regole e fiscalità.',
+    'blog.article.cambio-cantone-lavoro-frontaliere.imageAlt': 'Cambio cantone di lavoro per il frontaliere',
 };
 
 export default blogMetaIt;
