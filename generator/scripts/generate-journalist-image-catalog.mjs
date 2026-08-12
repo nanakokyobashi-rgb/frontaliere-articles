@@ -87,6 +87,23 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   // be exercised uniformly with writes off.
   const dryRun = process.env.DRY_RUN === '1' || process.env.DRY_RUN === 'true';
   const catalog = buildCatalog();
+
+  // Shrink guard, same spirit as refresh-border-wait-averages.mjs: this full
+  // rescan is wired into a weekly cron (rescan-journalist-image-catalog.yml)
+  // that commits and pushes to main with no human review. A bad checkout —
+  // wrong path, a delete racing the scan, a future directory move — leaves
+  // public/images/blog/ empty or partial, and buildCatalog() would otherwise
+  // silently overwrite a good catalog with a truncated one. The image set is
+  // append-only in normal operation, so a sharp drop means a bad rescan, not
+  // that half the cover images vanished.
+  const existing = readExistingCatalog();
+  if (existing.length > 0 && catalog.length < existing.length / 2) {
+    console.error(
+      `::error::rescan would shrink journalist-image-catalog.json from ${existing.length} to ${catalog.length} entries — refusing to write`,
+    );
+    process.exit(1);
+  }
+
   if (dryRun) {
     console.log(
       `DRY_RUN — would write ${catalog.length} entries to ${path.relative(PROJECT_ROOT, OUT_PATH)}; no files written.`,
