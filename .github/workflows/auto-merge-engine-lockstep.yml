@@ -50,7 +50,17 @@ permissions:
 jobs:
   merge:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # 10 non bastava più (issue #265): RC_FETCH_ATTEMPTS/TOKEN_EXCHANGE_ATTEMPTS
+    # sono saliti a 7 per attraversare una finestra di quota Firebase per-minuto
+    # (issue #263), e i due hop insieme (token exchange + RC fetch, backoff
+    # 1+2+4+8+16+32s ≈ 63s ciascuno) possono da soli costare ~140s nel caso
+    # peggiore — prima ancora di checkout/npm ci/merge. Con un budget di soli
+    # 10 minuti quel margine si assottiglia abbastanza da rischiare un
+    # timeout-kill del job a metà retry, che appare come `cancelled` invece di
+    # un fallimento pulito. 15 allinea questo job al resto della famiglia
+    # auto-merge-*/pr-* che gira sullo stesso script (auto-merge-on-lgtm.yml,
+    # auto-merge-sweep.yml, pr-autorebase.yml, pr-redflag-fixer.yml).
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v5
         with:
@@ -79,6 +89,13 @@ jobs:
           echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
 
       - name: Load secrets from Remote Config
+        # Come in ogni altro workflow che invoca questo script (auto-merge-on-lgtm.yml,
+        # auto-merge-sweep.yml, issue-triage.yml, ecc.): lo script esce SEMPRE 0 by
+        # design, quindi questo non maschera un fallimento reale — è qui per
+        # coerenza con la famiglia e perché il caso "PAT assente" è già gestito
+        # esplicitamente allo step di merge sotto (exit 1 con messaggio chiaro),
+        # non silenziosamente.
+        continue-on-error: true
         run: node generator/scripts/load-rc-env.mjs
 
       - name: Merge the lockstep PR when it is green
