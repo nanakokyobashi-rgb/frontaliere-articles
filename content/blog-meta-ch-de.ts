@@ -2350,6 +2350,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.apple-vola-a-5000-miliardi-di-valore.title': 'Apple fliegt im Wert von 5.000 Milliarden, es ist das zweite nach Nvidia',
     'blog.article.apple-vola-a-5000-miliardi-di-valore.excerpt': 'Apple durchbricht eine Marktkapitalisierung von 5 Billionen US-Dollar und ist damit das zweite Unternehmen der Welt, das nach Nvidia die historische Schwelle erreicht.',
     'blog.article.apple-vola-a-5000-miliardi-di-valore.imageAlt': 'Eine Szene mit einem Apple Store in Zürich oder Bern mit einer Schilder, die die Kurs an 5,000 Milliarden Dollar anzeigt',
+    'blog.article.bns-promuove-berna.title': 'Die Schweizerische Nationalbank \'fördert\' Bern mit \'too big to fail\' -Massnahmen',
+    'blog.article.bns-promuove-berna.excerpt': 'Die vom Bundesrat vorgeschlagenen Massnahmen wurden vom Schweizerischen Zentralinstitut begrüsst. Die Schweizerische Nationalbank hat die von der Bundesregierung vorgeschlagenen Massnahmen gefördert.',
+    'blog.article.bns-promuove-berna.imageAlt': 'Die Schweizerische Nationalbank fördert die von der Bundesregierung vorgeschlagenen Maßnahmen, um die Stabilität des schweizerischen Finanzsystems zu stärken.',
 };
 
 export default blogMetaChDe;

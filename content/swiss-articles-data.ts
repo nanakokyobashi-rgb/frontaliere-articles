@@ -7048,6 +7048,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'bns-promuove-berna',
+    category: 'fiscale',
+    date: '2026-08-12T21:48:51.413Z',
+    image: '/images/blog/bns-promuove-berna.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

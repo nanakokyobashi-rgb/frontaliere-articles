@@ -2350,6 +2350,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.apple-vola-a-5000-miliardi-di-valore.title': 'Apple vola a 5.000 miliardi di valore, è la seconda dopo Nvidia',
     'blog.article.apple-vola-a-5000-miliardi-di-valore.excerpt': 'Apple sfonda quota 5.000 miliardi di dollari di capitalizzazione di mercato, divenendo la seconda società al mondo a raggiungere la storica soglia dopo Nvidia.',
     'blog.article.apple-vola-a-5000-miliardi-di-valore.imageAlt': 'Una scena con un Apple Store a Zurigo o a Berna con una targhetta che indica la quotazione a 5.000 miliardi di dollari',
+    'blog.article.bns-promuove-berna.title': 'La Banca nazionale svizzera \'promuove\' Berna con le misure \'too big to fail\'',
+    'blog.article.bns-promuove-berna.excerpt': 'Le misure proposte dal Consiglio federale sono state accolte favorevolmente dall\'Istituto centrale elvetico. La Banca nazionale svizzera ha promosso le misure proposte dall\'esecutivo federale.',
+    'blog.article.bns-promuove-berna.imageAlt': 'La Banca nazionale svizzera promuove le misure proposte dall\'esecutivo federale per rafforzare la stabilità del sistema finanziario svizzero.',
 };
 
 export default blogMetaChIt;
