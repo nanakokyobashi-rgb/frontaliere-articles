@@ -30476,6 +30476,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cultura-e-spettacoli-ticino-2026': {
+    title: 'Eurovision: se il Paese vincitore è in guerra, non ospiterà il concorso',
+    description: 'È stato aggiornato il regolamento della kermesse, anche con una novità sull\'età minima degli artisti: dovranno avere almeno 18 anni. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, eurovision, paese, vincitore, guerra',
+    ogTitle: 'Eurovision: se il Paese vincitore è in guerra, non ospiterà il concorso',
+    ogDescription: 'È stato aggiornato il regolamento della kermesse, anche con una novità sull\'età minima degli artisti: dovranno avere almeno 18 anni.',
+    canonicalPath: '/articoli-svizzera/cultura-e-spettacoli-ticino-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eurovision: se il Paese vincitore è in guerra, non ospiterà il concorso",
+      "description": "È stato aggiornato il regolamento della kermesse, anche con una novità sull'età minima degli artisti: dovranno avere almeno 18 anni. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cultura-e-spettacoli-ticino-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Locarno 2026 - La rassegna Le regole per scegliere i film di Locarno"
+      },
+      "datePublished": "2026-08-12T21:57:02+00:00",
+      "dateModified": "2026-08-12T21:57:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cultura-e-spettacoli-ticino-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

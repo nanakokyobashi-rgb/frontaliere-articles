@@ -2353,6 +2353,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bns-promuove-berna.title': 'The Swiss National Bank \'promotes\' Bern with \'too big to fail\' measures',
     'blog.article.bns-promuove-berna.excerpt': 'The measures proposed by the Federal Council were welcomed by the Swiss Central Institute. The Swiss National Bank has promoted the measures proposed by the federal executive.',
     'blog.article.bns-promuove-berna.imageAlt': 'The Swiss National Bank promotes measures proposed by the Federal Executive to strengthen the stability of the Swiss financial system.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.title': 'Eurovision: if the winning country is at war, it will not host the contest',
+    'blog.article.cultura-e-spettacoli-ticino-2026.excerpt': 'The rules of the festival have been updated, also with an update on the minimum age of artists: they must be at least 18 years old.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.imageAlt': 'Locarno 2026 - The Festival The rules for choosing the films of Locarno',
 };
 
 export default blogMetaChEn;

@@ -2353,6 +2353,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bns-promuove-berna.title': 'La Banque nationale suisse \'promeut\' Berne avec les mesures \'too big to fail\'',
     'blog.article.bns-promuove-berna.excerpt': 'Les mesures proposées par le Conseil fédéral ont été accueillies favorablement par l\'Institut central suisse. La Banque nationale suisse a promu les mesures proposées par l\'exécutif fédéral.',
     'blog.article.bns-promuove-berna.imageAlt': 'La Banque nationale suisse promeut les mesures proposées par l\'exécutif fédéral pour renforcer la stabilité du système financier suisse.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.title': 'Eurovision : si le pays gagnant est en guerre, il n\'accueillera pas le concours',
+    'blog.article.cultura-e-spettacoli-ticino-2026.excerpt': 'Le règlement de la kermesse a été mis à jour, y compris avec une nouveauté sur l\'âge minimum des artistes : ils doivent avoir au moins 18 ans.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.imageAlt': 'Locarno 2026 - Le Festival Les règles pour choisir les films de Locarno',
 };
 
 export default blogMetaChFr;

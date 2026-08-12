@@ -2353,6 +2353,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bns-promuove-berna.title': 'Die Schweizerische Nationalbank \'fördert\' Bern mit \'too big to fail\' -Massnahmen',
     'blog.article.bns-promuove-berna.excerpt': 'Die vom Bundesrat vorgeschlagenen Massnahmen wurden vom Schweizerischen Zentralinstitut begrüsst. Die Schweizerische Nationalbank hat die von der Bundesregierung vorgeschlagenen Massnahmen gefördert.',
     'blog.article.bns-promuove-berna.imageAlt': 'Die Schweizerische Nationalbank fördert die von der Bundesregierung vorgeschlagenen Maßnahmen, um die Stabilität des schweizerischen Finanzsystems zu stärken.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.title': 'Eurovision: Kriegsland nicht ausrichter',
+    'blog.article.cultura-e-spettacoli-ticino-2026.excerpt': 'Das Veranstaltungsreglement wurde aktualisiert, auch mit einer Neuerung zum Mindestalter der Künstler: Sie müssen mindestens 18 Jahre alt sein.',
+    'blog.article.cultura-e-spettacoli-ticino-2026.imageAlt': 'Locarno 2026 - Der Filmfestival Die Regeln für die Auswahl der Filme von Locarno',
 };
 
 export default blogMetaChDe;
