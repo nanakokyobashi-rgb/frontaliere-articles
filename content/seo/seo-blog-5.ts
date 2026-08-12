@@ -66020,6 +66020,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-fallimenti-aziende-svizzera-1994': {
+    title: 'Svizzera, fallimenti aziendali record: livelli mai visti dal 1994',
+    description: 'Nel primo semestre 7496 aziende in Svizzera hanno dichiarato fallimento per insolvenza, un livello record dal 1994 dovuto anche a modifiche normative.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fallimenti, aziendali, record, livelli',
+    ogTitle: 'Svizzera, fallimenti aziendali record nel primo semestre',
+    ogDescription: 'Nel primo semestre 7496 aziende in Svizzera hanno dichiarato fallimento per insolvenza, un livello record dal 1994 legato a fattori economici e normativi.',
+    canonicalPath: '/articoli-frontaliere/fallimenti-aziende-svizzera-1994',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Svizzera, fallimenti aziendali record: livelli mai visti dal 1994",
+      "description": "Nel primo semestre 7496 aziende in Svizzera hanno dichiarato fallimento per insolvenza, un livello record dal 1994 dovuto anche a modifiche normative.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/fallimenti-aziende-svizzera-1994.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panoramica di un distretto economico in Svizzera con edifici commerciali"
+      },
+      "datePublished": "2026-08-12T10:12:40+00:00",
+      "dateModified": "2026-08-12T10:12:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/fallimenti-aziende-svizzera-1994/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

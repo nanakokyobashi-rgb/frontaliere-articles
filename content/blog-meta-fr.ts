@@ -9802,6 +9802,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.casse-pensioni-rendimento-luglio-2026.title': 'Caisses de retraite : rendement négatif pour UBS en juillet',
     'blog.article.casse-pensioni-rendimento-luglio-2026.excerpt': 'Les caisses de pension suisses enregistrent un rendement moyen hors charges de -0,2% en juillet, selon l\'analyse périodique d\'UBS.',
     'blog.article.casse-pensioni-rendimento-luglio-2026.imageAlt': 'Caisses de pension en Suisse avec rendement négatif en juillet',
+    'blog.article.fallimenti-aziende-svizzera-1994.title': 'Suisse, faillites d\'entreprises records : des niveaux jamais vus depuis 1994',
+    'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'Au premier semestre, 7496 entreprises ont déclaré faillite pour cause d\'insolvabilité en Suisse, soit une augmentation de 54,7 % par rapport à la même période précédente.',
+    'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Vue d\'un quartier d\'affaires en Suisse avec des bâtiments commerciaux',
 };
 
 export default blogMetaFr;

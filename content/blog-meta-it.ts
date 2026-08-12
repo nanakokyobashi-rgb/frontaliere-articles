@@ -9801,6 +9801,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.casse-pensioni-rendimento-luglio-2026.title': 'Casse pensioni: in luglio rendimento negativo per UBS',
     'blog.article.casse-pensioni-rendimento-luglio-2026.excerpt': 'Le casse pensioni svizzere registrano un rendimento medio al netto delle spese del -0,2% nel mese di luglio, secondo l\'analisi periodica di UBS.',
     'blog.article.casse-pensioni-rendimento-luglio-2026.imageAlt': 'Casse pensioni in Svizzera con rendimento negativo a luglio',
+    'blog.article.fallimenti-aziende-svizzera-1994.title': 'Svizzera, fallimenti aziendali record: livelli mai visti dal 1994',
+    'blog.article.fallimenti-aziende-svizzera-1994.excerpt': 'Nel primo semestre 7496 aziende hanno dichiarato fallimento per insolvenza in Svizzera, con un incremento del 54,7% rispetto allo stesso periodo precedente.',
+    'blog.article.fallimenti-aziende-svizzera-1994.imageAlt': 'Panoramica di un distretto economico in Svizzera con edifici commerciali',
 };
 
 export default blogMetaIt;
