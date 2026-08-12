@@ -28,7 +28,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { getServiceAccountAccessToken } from './lib/google-service-account-token.mjs';
 import { writeJsonAtomic } from './lib/atomic-write-json.mjs';
 import { decodeFields, buildDailyBrief } from './lib/daily-brief-data.mjs';
-import { isRetryableRcFetchStatus, rcFetchBackoffMs } from './load-rc-env.mjs';
+import { isRetryableRcFetchStatus, rcFetchBackoffMs, RC_FETCH_ATTEMPTS } from './load-rc-env.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -43,7 +43,9 @@ const FETCH_TIMEOUT_MS = 30_000;
 // Same class of bug as #45/#54/#171 (load-rc-env.mjs's fetchTemplateViaRest):
 // a single-attempt fetch against a Google API treats a transient 429/5xx as a
 // hard failure, degrading the whole block for what a retry would have solved.
-const FETCH_ATTEMPTS = 4;
+// Shared with load-rc-env.mjs/google-service-account-token.mjs (#263) rather
+// than pinned locally, so the per-minute-quota backoff budget stays one value.
+const FETCH_ATTEMPTS = RC_FETCH_ATTEMPTS;
 
 async function fetchJson(url, headers = {}) {
   let lastErr;

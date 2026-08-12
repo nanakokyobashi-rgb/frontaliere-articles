@@ -44,7 +44,11 @@ export function createJwtAssertion(creds, scope) {
   return `${unsigned}.${sign.sign(creds.private_key, 'base64url')}`;
 }
 
-const TOKEN_EXCHANGE_ATTEMPTS = 4;
+// Kept in lockstep with RC_FETCH_ATTEMPTS in load-rc-env.mjs (issue #263):
+// same backoff formula, same credential chain, so a per-minute quota
+// rejection on this hop needs the same ~63s retry budget to reach the next
+// quota window instead of exhausting itself inside the one already spent.
+const TOKEN_EXCHANGE_ATTEMPTS = 7;
 
 // Wall-clock cap per attempt (follow-up #199 to #173/#198): neither `fetch`
 // call here nor its sibling in load-rc-env.mjs's `fetchTemplateViaRest` had

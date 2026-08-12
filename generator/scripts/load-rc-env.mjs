@@ -323,7 +323,16 @@ export function rcFetchBackoffMs(attempt) {
   return 1000 * 2 ** (attempt - 1);
 }
 
-const RC_FETCH_ATTEMPTS = 4;
+// 4 attempts (1+2+4s of backoff, ~7s total) was enough for the transient
+// blips behind #45/#54/#171, but issue #263 measured a `firebaseremoteconfig
+// .googleapis.com` "Read requests per minute" quota rejection — the admin
+// SDK call and every REST retry landed 429 inside the same ~7s burst,
+// because a quota bucket that resets once a minute cannot recover within a
+// window shorter than a minute. 7 attempts (backoff 1+2+4+8+16+32s ≈ 63s
+// total) guarantees at least one attempt lands in the following quota
+// window instead of exhausting the retry budget entirely inside the one
+// that is already spent.
+export const RC_FETCH_ATTEMPTS = 7;
 
 // Wall-clock cap per attempt (follow-up #199 to #173/#198): this fetch had
 // only a status-based retry, no timeout at all — a slow-but-never-erroring
