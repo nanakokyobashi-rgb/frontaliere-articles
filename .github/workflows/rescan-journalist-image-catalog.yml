@@ -1,0 +1,163 @@
+name: Rescan Journalist Image Catalog (weekly)
+
+# Follow-up to #231 (issue #244). generate-journalist-image-catalog.mjs's
+# appendCatalogEntry() keeps public/data/journalist-image-catalog.json current
+# incrementally, but rebase-onto-remote.sh (issue #76/#225) resolves a rebase
+# conflict on that file by taking the upstream copy outright, dropping
+# whichever run lost the race. That is the right call for a run that is mid
+# article-generation — losing one catalog entry costs nothing next to losing
+# the article — but nothing was ever rebuilding the dropped entry afterwards.
+# The catalog feeds appendCatalogEntry()'s caller,
+# publish-journalist-article.mjs's resolveHeroImage(), so a permanently
+# missing entry can surface as a wrong or absent cover image on a published
+# article.
+#
+# This workflow is the rebuild: a full rescan of public/images/blog/ — the
+# same buildCatalog() the initial seed used — on a schedule, so any entry lost
+# to a "prendi upstream" resolution is restored within a week even if nothing
+# else ever adds that exact image again.
+#
+# NO npm ci. generate-journalist-image-catalog.mjs imports only node:fs,
+# node:path, node:url (see its own header) — the same property
+# republish-dirty-content.yml relies on for its detection step, kept here for
+# the same reason: immune to an npm registry outage on a path that does not
+# need one.
+
+on:
+  schedule:
+    # Weekly, Tuesday 05:10 UTC — off the border-wait ranking's Monday 04:50
+    # slot and clear of the hourly article-generation minutes.
+    - cron: '10 5 * * 2'
+  # Self-test on change, always dry. See batch-faq-articles.yml.
+  push:
+    paths:
+      - '.github/workflows/rescan-journalist-image-catalog.yml'
+      - 'generator/scripts/generate-journalist-image-catalog.mjs'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Plan only: rescan and report, write nothing'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: rescan-journalist-image-catalog
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  rescan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Resolve run mode
+        id: mode
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "push" ]; then
+            DRY=true
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            DRY="${{ inputs.dry_run }}"
+          else
+            DRY=false
+          fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "event=${{ github.event_name }} → dry_run=$DRY"
+
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          # persist-credentials: false is load-bearing, not hygiene.
+          # actions/checkout otherwise stores the GITHUB_TOKEN as
+          # `http.https://github.com/.extraheader`, and that header takes
+          # PRECEDENCE over credentials embedded in a push URL. So the push
+          # below would authenticate as GITHUB_TOKEN — which this job grants
+          # only `contents: read` — instead of as GITHUB_PAT, and get rejected.
+          persist-credentials: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      - name: Full rescan of public/images/blog
+        id: rescan
+        env:
+          DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
+        run: node generator/scripts/generate-journalist-image-catalog.mjs
+
+      # Only the push needs a credential here — the rescan is a local
+      # directory listing — so Remote Config is loaded only on a run that will
+      # actually commit. A dry run never touches it.
+      - name: Prepare Firebase credentials
+        if: steps.mode.outputs.dry != 'true'
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::error::FIREBASE_SERVICE_ACCOUNT_JSON is not set — it is the only source of the push PAT"
+            exit 1
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Configure git identity
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          git config user.name "Valerie Linc"
+          git config user.email "valerielinc@gmail.com"
+
+      - name: Commit and push
+        id: commit
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -euo pipefail
+          git add public/data/journalist-image-catalog.json
+          if git diff --cached --quiet; then
+            echo "no catalog changes"
+            exit 0
+          fi
+          if [ -z "${GITHUB_PAT:-}" ]; then
+            echo "::error::GITHUB_PAT missing — a GITHUB_TOKEN push would not fire publish-api.yml, so the rebuilt catalog would never reach the site"
+            exit 1
+          fi
+
+          git commit -m "Rescan journalist image catalog"
+
+          TARGET="${{ github.ref_name }}"
+          REMOTE="https://x-access-token:${GITHUB_PAT}@github.com/${{ github.repository }}.git"
+          for attempt in 1 2 3; do
+            if git push "$REMOTE" "HEAD:$TARGET"; then
+              echo "pushed to $TARGET"
+              exit 0
+            fi
+            echo "push attempt $attempt failed — rebasing onto $TARGET"
+            # Same bookkeeping-conflict class as generate-article.yml (issue
+            # #76): a full rescan can race an incremental appendCatalogEntry()
+            # from a concurrent publish. Either way the file is entirely
+            # regenerable, so taking upstream and letting next week's rescan
+            # catch up is safe — see rebase-onto-remote.sh's header.
+            bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
+              public/data/journalist-image-catalog.json || true
+            sleep 3
+          done
+          echo "::error::push failed after 3 attempts (git output above)"
+          exit 1
+
+      - name: Summary
+        if: always()
+        run: |
+          {
+            echo "### Journalist Image Catalog Rescan"
+            echo "- Dry run: ${{ steps.mode.outputs.dry }}"
+            echo "- Target ref: ${{ github.ref_name }}"
+          } >> "$GITHUB_STEP_SUMMARY"
