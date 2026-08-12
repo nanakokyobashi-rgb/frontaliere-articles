@@ -787,6 +787,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tetto-salari-manager-casse-malattia': { it: 'tetto-salari-manager-casse-malattia', en: 'health-insurance-manager-salary-cap', de: 'krankenkassen-managerloehne-deckel', fr: 'plafond-salaires-dirigeants-caisse-maladie' },
  'tassa-utili-immobiliari-comuni': { it: 'tassa-utili-immobiliari-comuni', en: 'real-estate-gains-tax-municipalities-ticino', de: 'immobilienkauf-gewinnsteuer-gemeinden-tessin', fr: 'taxe-plus-values-immobilieres-communes-tessin' },
  'zone-30-kmh-intervento-consiglio-federale': { it: 'zone-30-kmh-intervento-consiglio-federale', en: 'zone-30-kmh-intervention-council-federal', de: 'zone-30-kmh-eingreifen-bundesrat', fr: 'zone-30-kmh-intervention-conseil-federal' },
+ 'tre-banche-cantonali-be-sg-bl-profitti-in-crescita': { it: 'tre-banche-cantonali-be-sg-bl-profitti-in-crescita', en: 'three-swiss-cantonal-banks-profits-in-growth', de: 'drei-schweizerische-kantonalbanken-gewinne-im-wachstum', fr: 'trois-banques-cantonales-suisses-profits-en-croissance' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

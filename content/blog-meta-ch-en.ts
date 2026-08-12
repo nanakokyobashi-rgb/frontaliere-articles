@@ -2284,6 +2284,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.zone-30-kmh-intervento-consiglio-federale.title': '30 km/h zones in cities, Federal Council intervenes',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'The Federal Council has decided to amend the Traffic Signs Ordinance to introduce speed limits of 30 km/h in cities.',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': '30 km/h speed limits in Swiss cities',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.title': 'Three Swiss cantonal banks: three times higher profits',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.excerpt': 'The cantonal banks of Bern, St. Gallen and Basel Countryside present half-yearly accounts with growing profits',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.imageAlt': 'Three Swiss cantonal banks present their semiannual accounts with profits in growth',
 };
 
 export default blogMetaChEn;

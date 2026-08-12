@@ -2284,6 +2284,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.zone-30-kmh-intervento-consiglio-federale.title': '30-km/h-Zonen in Städten, Bundesrat greift ein',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.excerpt': 'Der Bundesrat hat beschlossen, die Verkehrsschilderverordnung zu ändern, um in Städten Geschwindigkeitsbegrenzungen von 30 km/h einzuführen.',
     'blog.article.zone-30-kmh-intervento-consiglio-federale.imageAlt': '30 km/h-Geschwindigkeitsbeschränkungen in Schweizer Städten',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.title': 'Drei Schweizer Kantonalbanken: Dreimal höhere Gewinne',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.excerpt': 'Die Kantonalbanken Bern, St. Gallen und Basel-Landschaft präsentieren Halbjahresabschlüsse mit steigenden Gewinnen',
+    'blog.article.tre-banche-cantonali-be-sg-bl-profitti-in-crescita.imageAlt': 'Drei schweizerische Kantonalbanken präsentieren ihre halbjährlichen Konten mit Gewinnen im Wachstum',
 };
 
 export default blogMetaChDe;
