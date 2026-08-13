@@ -468,7 +468,7 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
 }
 
 // ── 3. content/seo/seo-blog*.ts ─────────────────────────────────────────────
-const SEO_TS_FIELDS = ['title', 'description', 'ogTitle', 'ogDescription', 'twitterTitle', 'twitterDescription'];
+const SEO_TS_FIELDS = ['title', 'description', 'keywords', 'ogTitle', 'ogDescription', 'twitterTitle', 'twitterDescription'];
 const SEO_JSON_FIELDS = ['headline', 'description', 'caption'];
 const seoDir = path.join(ROOT, 'content', 'seo');
 
@@ -486,7 +486,12 @@ for (const f of fs.readdirSync(seoDir).filter((x) => /^seo-blog.*\.ts$/.test(x))
     unescape: unescapeTs,
     escape: escapeTs,
     contextOf: (match) => ({ id: '', field: /\n\s*(\w+):/.exec(match)[1], locale: 'it' }),
-    repair: ({ value, label }) => {
+    repair: ({ field, value, label }) => {
+      // `keywords` e' una tag-list ('frontalieri, ticino, ...'), non prosa: non
+      // esiste una ricostruzione deterministica come per title/description. Un
+      // residuo esplicito e' corretto qui, riscriverlo con rebuildExcerpt
+      // (prosa dal body) cambierebbe la FORMA del campo, non solo il contenuto.
+      if (field === 'keywords') return null;
       const id = seoIdAt(whole, Number(label.split('@')[1]));
       return id ? rebuildExcerpt(id, 'it') : null;
     },
