@@ -2551,6 +2551,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Pigiones abusives, l’initiative a réussi avec plus de 108’000 signatures',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'L’initiative populaire « Oui à la protection contre les loyers abusifs » a atteint le nombre minimum de signatures nécessaires pour être présentée au référendum.',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier en Suisse avec un loyer exagéré',
+    'blog.article.modifica-ordinanza-liquidita.title': 'Liquidità estesa attraverso banche centrali',
+    'blog.article.modifica-ordinanza-liquidita.excerpt': 'Le Conseil fédéral a décidé d\'étendre le potentiel d\'approvisionnement en liquidités par l\'intermédiaire des banques centrales.',
+    'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Une scène de Lugano avec un distributeur automatique de billets en premier plan.',
 };
 
 export default blogMetaChFr;

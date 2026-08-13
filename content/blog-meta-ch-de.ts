@@ -2551,6 +2551,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Abusivemietzahlungen: 108\'000 Unterschriften',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'Die Volksinitiative «Ja zum Schutz vor missbräuchlichen Mieten» hat die Mindestzahl an Unterschriften erreicht, die nötig ist, um dem Referendum vorgelegt zu werden.',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier in der Schweiz mit einer zu hohen Miete',
+    'blog.article.modifica-ordinanza-liquidita.title': 'Bundesrat erweitert Liquidität durch Zentralbanken',
+    'blog.article.modifica-ordinanza-liquidita.excerpt': 'Der Bundesrat hat beschlossen, das Liquiditätsversorgungspotenzial über die Zentralbanken zu erweitern.',
+    'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Eine Szene aus Lugano mit einem Geldautomaten im Vordergrund.',
 };
 
 export default blogMetaChDe;

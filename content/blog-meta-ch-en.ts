@@ -2551,6 +2551,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Abusive prisons, the initiative succeeded with over 108,000 signatures',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'The popular initiative "Yes to protection against illegal rents" has reached the minimum number of signatures needed to be presented to the referendum.',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier in Switzerland with an excessive rent',
+    'blog.article.modifica-ordinanza-liquidita.title': 'Federal Council extends liquidity through central banks',
+    'blog.article.modifica-ordinanza-liquidita.excerpt': 'The Federal Council has decided to extend the potential for liquidity provision through central banks.',
+    'blog.article.modifica-ordinanza-liquidita.imageAlt': 'A scene of Lugano with an ATM in the foreground.',
 };
 
 export default blogMetaChEn;

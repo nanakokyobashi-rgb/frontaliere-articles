@@ -2551,6 +2551,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Pigioni abusive, l’iniziativa è riuscita con oltre 108’000 firme',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'L’iniziativa popolare “Sì alla protezione contro pigioni abusive” ha raggiunto il numero minimo di firme necessarie per essere presentata al referendum.',
     'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontaliere in Svizzera con un affitto eccessivo',
+    'blog.article.modifica-ordinanza-liquidita.title': 'Consiglio federale estende liquidità attraverso banche centrali',
+    'blog.article.modifica-ordinanza-liquidita.excerpt': 'Il Consiglio federale ha deciso di estendere il potenziale di approvvigionamento di liquidità attraverso le banche centrali.',
+    'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Una scena di Lugano con un bancomat in primo piano.',
 };
 
 export default blogMetaChIt;
