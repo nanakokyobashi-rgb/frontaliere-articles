@@ -2536,6 +2536,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.modifica-legge-banche-2026.title': 'Änderung des Bankengesetzes: Eidgenössisches Finanzdepartement',
     'blog.article.modifica-legge-banche-2026.excerpt': 'Der Bundesrat hat die Massstäbe für die Erarbeitung regulatorischer Anpassungen gemäss den Massnahmen und Empfehlungen im Bericht des Bundesrates zur Stabilität der Banken und im Bericht der Parlamentarischen Untersuchungskommission verabschiedet.',
     'blog.article.modifica-legge-banche-2026.imageAlt': 'Änderung des Bankengesetzes in der Schweiz',
+    'blog.article.oro-in-crollo-svizzera.title': 'Nach dem Boom stolpert Gold: Was ist jetzt zu erwarten?',
+    'blog.article.oro-in-crollo-svizzera.excerpt': 'Gold schloss das Jahr 2025 mit einem Plus von 60 Prozent ab, befindet sich nun aber in einer unsichereren Phase. Die zukünftige Richtung ist offen.',
+    'blog.article.oro-in-crollo-svizzera.imageAlt': 'Goldpreise in der Schweiz fallen',
 };
 
 export default blogMetaChDe;

@@ -2536,6 +2536,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.modifica-legge-banche-2026.title': 'Amendment of the Banking Act: Federal Department of Finance',
     'blog.article.modifica-legge-banche-2026.excerpt': 'The Federal Council approved the benchmarks for the elaboration of regulatory adjustments according to the measures and recommendations contained in the Federal Council\'s report on the stability of banks and in the report of the Parliamentary Committee of Inquiry.',
     'blog.article.modifica-legge-banche-2026.imageAlt': 'Banking law amendment in Switzerland',
+    'blog.article.oro-in-crollo-svizzera.title': 'After the boom, gold stumbles: what to expect now?',
+    'blog.article.oro-in-crollo-svizzera.excerpt': 'Gold closed 2025 up 60%, but is now going through a more uncertain phase. Future direction is open.',
+    'blog.article.oro-in-crollo-svizzera.imageAlt': 'Gold prices in Switzerland falling',
 };
 
 export default blogMetaChEn;

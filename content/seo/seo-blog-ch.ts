@@ -32855,6 +32855,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-oro-in-crollo-svizzera': {
+    title: 'Dopo il boom, l\'oro inciampa: cosa aspettarsi ora?',
+    description: 'L\'oro ha chiuso il 2025 con un rialzo del 60%, ma ora sta attraversando una fase più incerta. La direzione futura è aperta. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, dopo, boom, inciampa, cosa',
+    ogTitle: 'Dopo il boom, l\'oro inciampa: cosa aspettarsi ora?',
+    ogDescription: 'L\'oro ha chiuso il 2025 con un rialzo del 60%, ma ora sta attraversando una fase più incerta. La direzione futura è aperta.',
+    canonicalPath: '/articoli-svizzera/oro-in-crollo-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dopo il boom, l'oro inciampa: cosa aspettarsi ora?",
+      "description": "L'oro ha chiuso il 2025 con un rialzo del 60%, ma ora sta attraversando una fase più incerta. La direzione futura è aperta. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/oro-in-crollo-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'oro in crollo in Svizzera"
+      },
+      "datePublished": "2026-08-13T13:03:51+00:00",
+      "dateModified": "2026-08-13T13:03:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/oro-in-crollo-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

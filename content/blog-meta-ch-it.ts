@@ -2536,6 +2536,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.modifica-legge-banche-2026.title': 'Modifica della legge sulle banche: Dipartimento federale delle finanze',
     'blog.article.modifica-legge-banche-2026.excerpt': 'Il Consiglio federale ha approvato i parametri di riferimento per l\'elaborazione degli adeguamenti normativi secondo le misure e le raccomandazioni contenute nel rapporto del Consiglio federale sulla stabilità delle banche e nel rapporto della Commissione parlamentare d\'inchiesta.',
     'blog.article.modifica-legge-banche-2026.imageAlt': 'La modifica della legge sulle banche in Svizzera',
+    'blog.article.oro-in-crollo-svizzera.title': 'Dopo il boom, l\'oro inciampa: cosa aspettarsi ora?',
+    'blog.article.oro-in-crollo-svizzera.excerpt': 'L\'oro ha chiuso il 2025 con un rialzo del 60%, ma ora sta attraversando una fase più incerta. La direzione futura è aperta.',
+    'blog.article.oro-in-crollo-svizzera.imageAlt': 'L\'oro in crollo in Svizzera',
 };
 
 export default blogMetaChIt;

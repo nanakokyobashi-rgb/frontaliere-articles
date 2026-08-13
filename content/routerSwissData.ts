@@ -871,6 +871,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'swissquote-in-fore-calo-in-borsa': { it: 'swissquote-in-fore-calo-in-borsa', en: 'swissquote-en', de: 'swissquote-de', fr: 'swissquote-fr' },
  'ispezioni-ospedaliere-swissmedic-2025-ticino': { it: 'ispezioni-ospedaliere-swissmedic-2025-ticino', en: 'swissmedic-hospital-inspections-2025', de: 'schweizerische-medizinprodukte-inspektionen-2025', fr: 'visites-d-hopitaux-2025' },
  'modifica-legge-banche-2026': { it: 'modifica-legge-banche-2026', en: 'banking-law-amendment-2026', de: 'anderung-bankengesetz-2026', fr: 'modification-loi-banques-2026' },
+ 'oro-in-crollo-svizzera': { it: 'oro-in-crollo-svizzera', en: 'gold-falling-switzerland', de: 'goldpreise-schweiz-fallen', fr: 'prix-or-en-baisse-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
