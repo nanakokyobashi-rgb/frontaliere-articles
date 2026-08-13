@@ -2512,6 +2512,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.carbone-minimi-storici-elettricita.title': 'Produzione elettrica: il carbone tocca i minimi storici',
     'blog.article.carbone-minimi-storici-elettricita.excerpt': 'Nel 2025 il carbone copre solo il 9,2% della produzione Ue. Un calo drastico rispetto al 1990, quando pesava per oltre un terzo del totale elettrico.',
     'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Impianti elettrici in un paesaggio svizzero',
+    'blog.article.cdt-epaper-ios-revista.title': 'CdT E-paper per iOS: le nuove funzionalità',
+    'blog.article.cdt-epaper-ios-revista.excerpt': 'L\'app CDT E-paper per iOS ha ricevuto numerose recensioni positive, grazie alle sue funzionalità innovative.',
+    'blog.article.cdt-epaper-ios-revista.imageAlt': 'L\'app CDT E-paper per iOS',
 };
 
 export default blogMetaChIt;

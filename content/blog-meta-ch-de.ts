@@ -2512,6 +2512,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.carbone-minimi-storici-elettricita.title': 'Stromerzeugung: Kohle erreicht historische Tiefststände',
     'blog.article.carbone-minimi-storici-elettricita.excerpt': 'Im Jahr 2025 deckt Kohle nur 9,2% der EU-Produktion ab. Ein drastischer Rückgang im Vergleich zu 1990, als es mehr als ein Drittel des elektrischen Gesamtgewichts ausmachte.',
     'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Elektrische Infrastruktur in einer Schweizer Landschaft',
+    'blog.article.cdt-epaper-ios-revista.title': 'CDT E-Paper für iOS: die neuen Funktionen',
+    'blog.article.cdt-epaper-ios-revista.excerpt': 'Die CDT E-Paper App für iOS hat dank ihrer innovativen Funktionen zahlreiche positive Bewertungen erhalten.',
+    'blog.article.cdt-epaper-ios-revista.imageAlt': 'CDT E-paper iOS App',
 };
 
 export default blogMetaChDe;

@@ -2512,6 +2512,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.carbone-minimi-storici-elettricita.title': 'Production électrique : le charbon atteint des plus bas historiques',
     'blog.article.carbone-minimi-storici-elettricita.excerpt': 'En 2025, le charbon ne couvre que 9,2 % de la production de l\'UE. Une baisse drastique par rapport à 1990, quand elle pesait pour plus d\'un tiers du total électrique.',
     'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Infrastructure électrique dans un paysage suisse',
+    'blog.article.cdt-epaper-ios-revista.title': 'CdT E-paper pour iOS : les nouvelles fonctionnalités',
+    'blog.article.cdt-epaper-ios-revista.excerpt': 'L\'application CDT E-paper pour iOS a reçu de nombreuses critiques positives, grâce à ses fonctionnalités innovantes.',
+    'blog.article.cdt-epaper-ios-revista.imageAlt': 'L\'application CDT E-paper pour iOS',
 };
 
 export default blogMetaChFr;

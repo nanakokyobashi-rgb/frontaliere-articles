@@ -2512,6 +2512,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.carbone-minimi-storici-elettricita.title': 'Electricity production: coal hits historic lows',
     'blog.article.carbone-minimi-storici-elettricita.excerpt': 'In 2025, coal covers only 9.2% of EU production. A drastic drop compared to 1990, when it weighed more than a third of the electricity total.',
     'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Electrical infrastructure in a Swiss landscape',
+    'blog.article.cdt-epaper-ios-revista.title': 'CdT E-paper for iOS: the new features',
+    'blog.article.cdt-epaper-ios-revista.excerpt': 'The CDT E-paper app for iOS has received numerous positive reviews, thanks to its innovative features.',
+    'blog.article.cdt-epaper-ios-revista.imageAlt': 'CDT E-paper iOS app',
 };
 
 export default blogMetaChEn;

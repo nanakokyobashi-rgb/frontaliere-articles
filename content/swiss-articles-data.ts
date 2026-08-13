@@ -7534,6 +7534,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cdt-epaper-ios-revista',
+    category: 'novita',
+    date: '2026-08-13T10:13:18.025Z',
+    image: '/images/blog/cdt-epaper-ios-revista.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
