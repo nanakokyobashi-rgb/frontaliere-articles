@@ -2542,6 +2542,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Il rompicapo degli sfollati per trovare un nuovo alloggio dopo un incendio',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 persone devono trovare un nuovo tetto dopo l\'incendio che ha devastato diversi alloggi ad Aigle (VD)',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Immagine di un edificio in fiamme a Lugano',
+    'blog.article.consiglio-federale-pacchetto-misure.title': 'Il Consiglio federale ha adottato il messaggio sull\'Iniziativa Bussola.',
+    'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Il Consiglio federale ha adottato il messaggio sull\'Iniziativa Bussola.',
+    'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Il Consiglio federale ha adottato un pacchetto di misure per garantire la stabilità del sistema bancario svizzero.',
 };
 
 export default blogMetaChIt;

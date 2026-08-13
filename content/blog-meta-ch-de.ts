@@ -2542,6 +2542,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Das Rätsel der Vertriebenen, um nach einem Brand eine neue Unterkunft zu finden',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 Personen müssen nach dem Brand, der mehrere Wohnungen in Aigle (VD) verwüstet hat, ein neues Dach finden',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Bild von einem brennenden Gebäude in Lugano',
+    'blog.article.consiglio-federale-pacchetto-misure.title': 'Der Bundesrat hat die Botschaft zur Kompass-Initiative verabschiedet.',
+    'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Der Bundesrat hat die Botschaft zur Kompass-Initiative verabschiedet.',
+    'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Der Bundesrat hat ein Paket von Massnahmen zur Sicherstellung der Stabilität des Schweizer Bankensystems angenommen.',
 };
 
 export default blogMetaChDe;

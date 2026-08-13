@@ -2542,6 +2542,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'The puzzle of displaced people to find a new home after a fire',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 people have to find a new roof after the fire that devastated several homes in Aigle (VD)',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Image of a burning building in Lugano',
+    'blog.article.consiglio-federale-pacchetto-misure.title': 'The Federal Council adopted the message on the Compass Initiative.',
+    'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'The Federal Council adopted the message on the Compass Initiative.',
+    'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'The Swiss Federal Council has adopted a package of measures to ensure the stability of the Swiss banking system.',
 };
 
 export default blogMetaChEn;

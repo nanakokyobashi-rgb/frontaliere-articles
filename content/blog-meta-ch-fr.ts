@@ -2542,6 +2542,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Le casse-tête des déplacés pour trouver un nouveau logement après un incendie',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 personnes doivent trouver un nouveau toit après l\'incendie qui a ravagé plusieurs logements à Aigle (VD)',
     'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Image d\'un bâtiment en feu à Lugano',
+    'blog.article.consiglio-federale-pacchetto-misure.title': 'Le Conseil fédéral a adopté le message sur l\'Initiative Boussole.',
+    'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Le Conseil fédéral a adopté le message sur l\'Initiative Boussole.',
+    'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Le Conseil fédéral a adopté un paquet de mesures pour garantir la stabilité du système bancaire suisse.',
 };
 
 export default blogMetaChFr;

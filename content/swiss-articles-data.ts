@@ -7624,6 +7624,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'consiglio-federale-pacchetto-misure',
+    category: 'novita',
+    date: '2026-08-13T13:19:51.255Z',
+    image: '/images/blog/consiglio-federale-pacchetto-misure.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

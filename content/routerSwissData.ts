@@ -873,6 +873,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'modifica-legge-banche-2026': { it: 'modifica-legge-banche-2026', en: 'banking-law-amendment-2026', de: 'anderung-bankengesetz-2026', fr: 'modification-loi-banques-2026' },
  'oro-in-crollo-svizzera': { it: 'oro-in-crollo-svizzera', en: 'gold-falling-switzerland', de: 'goldpreise-schweiz-fallen', fr: 'prix-or-en-baisse-suisse' },
  'incendio-nuovo-alloggi-alloggio-cantoni': { it: 'incendio-nuovo-alloggi-alloggio-cantoni', en: 'fire-new-accommodation-rental-cantons', de: 'brand-neue-mietwohnung-kantone', fr: 'incendie-nouveau-logement-rental-cantons' },
+ 'consiglio-federale-pacchetto-misure': { it: 'consiglio-federale-pacchetto-misure', en: 'federal-council-measures-package', de: 'bundesrat-massnahmen-paket', fr: 'conseil-federal-paquet-de-mesures' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
