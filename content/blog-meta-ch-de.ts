@@ -2530,6 +2530,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote fällt stark an der Börse, wiegt Kryptomarktschwäche',
     'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'Die Swissquote-Aktie fiel um 11%, da die Halbjahresergebnisse unter den Erwartungen lagen',
     'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'Aktie Swissquote in Abwärts',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.title': 'Swissmedic: Wirksamkeit der Krankenhausinspektionen 2025',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.excerpt': 'Swissmedic hat 28 Inspektionen in den Bereichen Aufarbeitung, Wartung und Überwachung von Medizinprodukten durchgeführt.',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.imageAlt': 'Schweizerische Medizinprodukte-Inspektionen Lugano 2025',
 };
 
 export default blogMetaChDe;

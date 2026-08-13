@@ -2530,6 +2530,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote in forte calo in borsa, pesa debolezza mercato cripto',
     'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'L\'azione di Swissquote è scesa del 11% in seguito ai risultati semestrali inferiori alle attese',
     'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'L\'azione di Swissquote in calo in borsa',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.title': 'Swissmedic: efficacia delle ispezioni ospedaliere 2025',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.excerpt': 'Swissmedic ha effettuato 28 ispezioni nei settori ricondizionamento, manutenzione e vigilanza dei dispositivi medici.',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.imageAlt': 'Ispezioni ospedaliere Lugano 2025',
 };
 
 export default blogMetaChIt;

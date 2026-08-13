@@ -2530,6 +2530,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote falls sharply on the stock market, weighs on crypto market weakness',
     'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'Swissquote\'s share fell 11% following lower-than-expected half-year results',
     'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'Swissquote stock in decline',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.title': 'Swissmedic: Effectiveness of Hospital Inspections 2025',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.excerpt': 'Swissmedic carried out 28 inspections in the areas of reconditioning, maintenance and supervision of medical devices.',
+    'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.imageAlt': 'Swissmedic hospital inspections Lugano 2025',
 };
 
 export default blogMetaChEn;
