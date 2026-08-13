@@ -238,11 +238,31 @@ jobs:
       # qualche minuto contro un articolo fabbricato pubblicato e propagato agli
       # shard. Il rimedio e' riparare il corpo (il run successivo ripubblica
       # tutto), non allentare il gate.
-      - name: Preflight — le guardie sul corpus generato (fabrication + segnaposto)
+      # AGGIUNTE 2026-08-13 (issue #280 item 3): article-fabrication-guard e
+      # prompt-placeholder-guard non erano le sole due guardie corpus-wide
+      # nate dopo il buco misurato sopra. article-slug-i18n.test.mjs (#191) e
+      # article-source-echo.test.mjs (#202) hanno lo stesso strato 3 — un
+      # ratchet/scan sul REGISTRO PUBBLICATO, non sul sorgente del generatore
+      # — e girano SOLO su `tests.yml`/`generator-ci.yml`, entrambi con lo
+      # stesso `branches-ignore: [main]` di prima: un articolo che reintroduce
+      # lo slug italiano o un'eco della fonte pubblica lo stesso, e viene
+      # intercettato solo alla PR successiva. Stessa ragione di sopra per il
+      # PERCHE' QUI: zero dipendenze npm (solo node:fs/path/url + le due lib
+      # pure che importano, anch'esse senza npm), ~1s sull'intero corpus.
+      #
+      # NON incluse qui: news-scan-quality.test.mjs e news-sources-svizzera
+      # .test.mjs. Sono contratti statici sul SORGENTE di create-article.mjs
+      # (le liste NEWS_SOURCES, l'estrazione date), non scan del corpus
+      # pubblicato — un push che tocca solo content/** non puo' farli
+      # divergere, e create-article.mjs arriva a main solo via merge di PR,
+      # gia' coperto da tests.yml/generator-ci.yml sul branch prima del merge.
+      - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte)
         run: |
           node --test \
             generator/tests/article-fabrication-guard.test.mjs \
-            generator/tests/prompt-placeholder-guard.test.mjs
+            generator/tests/prompt-placeholder-guard.test.mjs \
+            generator/tests/article-slug-i18n.test.mjs \
+            generator/tests/article-source-echo.test.mjs
 
       # Remote Config holds the R2 and Cloudflare credentials the edge push
       # below needs. Without these two steps that push would find no

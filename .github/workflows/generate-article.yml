@@ -515,6 +515,15 @@ jobs:
       # NIENTE RIPARAZIONE EURISTICA, sempre per la DoD di #267: se una cifra e'
       # inventata, riattribuirla a un ente vero fa passare il gate e PEGGIORA
       # l'articolo. Qui si scarta e basta; la rigenerazione e' il run successivo.
+      # AGGIUNTE 2026-08-13 (issue #280 item 3): stesso gemello aggiunto al
+      # preflight di publish-api.yml, e per lo stesso motivo — questo step
+      # rifiuta PRIMA del commit, quel preflight rifiuta prima della
+      # pubblicazione se qualcos'altro (batch-faq, border-wait) fa arrivare a
+      # main un articolo che questo step non ha visto. article-slug-i18n
+      # (#191) e article-source-echo (#202) sono scan del corpus generato,
+      # stessa famiglia di fabrication/placeholder, non contratti statici sul
+      # sorgente — vedi il commento nel preflight di publish-api.yml per i due
+      # esclusi (news-scan-quality, news-sources-svizzera) e perche'.
       - name: Guard — l'articolo generato non raggiunge main se viola le guardie
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         env:
@@ -523,13 +532,15 @@ jobs:
           set -uo pipefail
           if node --test \
             generator/tests/article-fabrication-guard.test.mjs \
-            generator/tests/prompt-placeholder-guard.test.mjs; then
+            generator/tests/prompt-placeholder-guard.test.mjs \
+            generator/tests/article-slug-i18n.test.mjs \
+            generator/tests/article-source-echo.test.mjs; then
             exit 0
           fi
           {
             echo "### ✖ Articolo RIFIUTATO prima del commit — sezione \`${SECTION:-?}\`"
             echo
-            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la generazione."
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` / \`article-slug-i18n\` / \`article-source-echo\` hanno trovato offender nel corpus dopo la generazione."
             echo "**Niente e' stato committato**: il corpo resta sul runner e sparisce con lui, \`main\` non lo vede."
             echo
             echo "Gli offender sono elencati per path nel log di questo step. Confrontali con la riga \`article body added:\` dello step «Generate the article»:"
