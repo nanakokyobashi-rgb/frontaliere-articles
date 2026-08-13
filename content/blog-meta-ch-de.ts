@@ -2449,6 +2449,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.reno-siccita-logistica-svizzera.title': 'Dürre und Rhein: Auswirkungen auf die Schweizer Logistik',
     'blog.article.reno-siccita-logistica-svizzera.excerpt': 'Durch den sinkenden Rheinwasserspiegel sinkt die Schiffslast. Die Schweizer Wirtschaft beobachtet die Situation zwischen steigenden Kosten und infrastrukturellen Herausforderungen.',
     'blog.article.reno-siccita-logistica-svizzera.imageAlt': 'Niedriger Rheinpegel an einem Schweizer Industriehafen',
+    'blog.article.polpi-contro-granchio-blu.title': 'Junger Oktopus gegen blaue Krabbe: Biologischer Kampf im Mittelmeer',
+    'blog.article.polpi-contro-granchio-blu.excerpt': 'Das Projekt Octo-Blu sieht die kontrollierte Freisetzung von etwa einer halben Million kleiner Oktopusse (Octopus vulgaris) vor, die im Labor in den Gewässern vor Riccione und Cesenatico gezüchtet werden.',
+    'blog.article.polpi-contro-granchio-blu.imageAlt': 'Ein sperimentelles Projekt im Mittelmeer zielt darauf ab, die invasive Blaue Krabbe zu kontrollieren, die die marinen Ökosysteme und die Muschel- und Austernzucht devastiert.',
 };
 
 export default blogMetaChDe;
