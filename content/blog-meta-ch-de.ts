@@ -2374,6 +2374,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.inizia-servizio-civico-ricorsi-irricevibili.title': 'Bürgerinitiative, Beschwerden sind unzulässig',
     'blog.article.inizia-servizio-civico-ricorsi-irricevibili.excerpt': 'Das Bundesgericht hat entschieden, dass Beschwerden von Befürwortern der Initiative \'Für eine engagierte Schweiz\' (Bürgerdienst-Initiative) unzulässig sind.',
     'blog.article.inizia-servizio-civico-ricorsi-irricevibili.imageAlt': 'Eine Person stimmt in einer Schule in Lugano ab',
+    'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.title': 'Schulsystem des Kantons Bern: Einschreibung und Zyklen',
+    'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.excerpt': 'Wissen, was mit der Einschreibung der Kinder in die Schulklassen im Kanton Bern passiert. Informieren Sie sich über die Anforderungen, den Zeitplan und die Unterrichtssprachen.',
+    'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.imageAlt': 'Schulklasse im Kanton Bern',
 };
 
 export default blogMetaChDe;
