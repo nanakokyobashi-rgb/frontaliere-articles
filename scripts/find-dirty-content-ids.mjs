@@ -330,17 +330,30 @@ export function pageCarriesFaqPlaceholder(html) {
  * e' JSON valido. Stesso schema di escaping degli altri campi letterali TS —
  * il campo e' JSON dentro una stringa TS fra apici singoli, dove solo l'apice
  * porta un escape aggiuntivo.
+ *
+ * Con `id`, la chiave e' ANCORATA a quell'id — un file body oggi porta un solo
+ * id (il nome del file), ma niente nel formato lo impedisce strutturalmente,
+ * e senza l'ancora una `.faq` corrotta su un id successivo nello stesso file
+ * sarebbe un falso negativo silenzioso (#289). Senza `id` (retrocompat), cerca
+ * qualunque id e resta scoped alla PRIMA occorrenza, come prima.
  */
-export function faqQuestionsInBodyText(text) {
-  const m = /'blog\.article\.[a-z0-9-]+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/.exec(text);
-  if (!m) return [];
-  let pairs;
-  try {
-    pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
-  } catch {
-    return [];
+export function faqQuestionsInBodyText(text, id) {
+  const idPart = id ? id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : '[a-z0-9-]+';
+  const rx = new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, id ? 'g' : undefined);
+  const questions = [];
+  let m;
+  while ((m = rx.exec(text)) !== null) {
+    let pairs;
+    try {
+      pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
+    } catch {
+      if (!id) return [];
+      continue;
+    }
+    if (Array.isArray(pairs)) for (const p of pairs) if (p && typeof p.q === 'string') questions.push(p.q);
+    if (!id) break;
   }
-  return Array.isArray(pairs) ? pairs.filter((p) => p && typeof p.q === 'string').map((p) => p.q) : [];
+  return questions;
 }
 
 function mark(map, section, id, source, residues) {
@@ -471,7 +484,7 @@ export function scanContentForDirtyIds(rootDir) {
       }
       // Il segnaposto FAQ (sopra) e' indipendente dal C0: si controlla sempre,
       // non solo sui file gia' segnati sporchi da un byte di controllo.
-      if (faqQuestionsInBodyText(text).some(isPlaceholderFaqQuestion)) {
+      if (faqQuestionsInBodyText(text, id).some(isPlaceholderFaqQuestion)) {
         totalFaqPlaceholderFiles += 1;
         mark(found, section, id, `${path.relative(rootDir, file)} (faq-placeholder)`, []);
       }

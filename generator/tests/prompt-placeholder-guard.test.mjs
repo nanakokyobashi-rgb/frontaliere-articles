@@ -657,16 +657,24 @@ describe('gate — CORPI e FAQ pubblicati (body1..N, faq)', () => {
 describe('gate — nessuna FAQ orfana: en/de/fr non possono avere una faq che `it` non ha', () => {
   const LOCALI = ['it', 'en', 'de', 'fr'];
   const RADICI = ['blog-body', 'blog-body-ch'];
-  const hasFaqIn = (p) => (fs.existsSync(p) ? /'blog\.article\.[^']+\.faq'\s*:/.test(fs.readFileSync(p, 'utf-8')) : false);
+  // Ancorata all'id del filename, non alla prima chiave `.faq` del file: stesso
+  // anti-pattern gia' corretto in `faqQuestionsInBodyText` per #289 — senza
+  // l'ancora una `.faq` di un id estraneo verrebbe attribuita a `id`.
+  const hasFaqIn = (p, id) => {
+    if (!fs.existsSync(p)) return false;
+    const idPart = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:`).test(fs.readFileSync(p, 'utf-8'));
+  };
 
   const articoli = [];
   for (const radice of RADICI) {
     const itDir = path.join(ROOT, 'content', radice, 'it');
     if (!fs.existsSync(itDir)) continue;
     for (const name of fs.readdirSync(itDir).filter((f) => f.endsWith('.ts'))) {
+      const id = name.slice(0, -3);
       const byLocale = Object.fromEntries(LOCALI.map((l) => {
         const p = path.join(ROOT, 'content', radice, l, name);
-        return [l, { hasFile: fs.existsSync(p), hasFaq: hasFaqIn(p) }];
+        return [l, { hasFile: fs.existsSync(p), hasFaq: hasFaqIn(p, id) }];
       }));
       articoli.push({ rel: `${radice}/…/${name}`, byLocale });
     }
