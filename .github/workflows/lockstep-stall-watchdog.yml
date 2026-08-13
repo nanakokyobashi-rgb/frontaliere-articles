@@ -1,0 +1,125 @@
+name: Lockstep stall watchdog
+
+# Apre una issue quando la PR di lockstep dell'engine resta aperta oltre soglia
+# — l'allarme che `scripts/ci/loop-sync-manifest.json` dichiarava di volere e che
+# non era mai stato costruito (issue #217).
+#
+# Il razionale completo — perché la soglia è 3h, perché la condizione è «non
+# chiude» e non «è rossa», e perché apertura e chiusura sono la stessa passata —
+# sta in `scripts/ci/lockstep-stall-watch.mjs`. In breve: il manifest tiene
+# `engine/` fuori dal drift check APPOGGIANDOSI a questo canale automatico, e
+# quando il canale si è rotto (PR #205, ~4h di deadlock permanente) non l'ha
+# segnalato nessuno. Finché la lockstep è ferma nessuna modifica all'engine del
+# sito scende sul corpus, ed è il corpus a renderizzare le pagine articolo.
+#
+# Zero Claude: è tutto deterministico, come `workflow-failure-issues.yml` e
+# `generation-health-watchdog.yml`. Il costo di quota Claude è nullo e il costo
+# API è due chiamate `gh` per passata.
+#
+# ── Cadenza, e perché questa ────────────────────────────────────────────────
+# :33, ogni ora.
+#
+#  · Il minuto. I due repo colpiscono la STESSA quota API GitHub, quindi il cron
+#    va tenuto lontano da quelli del sito (:15/:17/:20/:23) e dai minuti già
+#    occupati qui. :33 cade in una finestra locale libera (32-34), è a 10 minuti
+#    dal blocco del sito, e il vertice dell'ora resta escluso di proposito — è
+#    dove lo scheduler di GitHub è più congestionato, e questo repo ha già
+#    misurato sei slot consecutivi persi (vedi l'intestazione di
+#    `generate-article.yml`).
+#
+#  · L'ora. La soglia è 3h, quindi una passata oraria rileva l'incaglio entro un
+#    terzo della finestra e nel caso peggiore a ~4h — cioè entro il tempo in cui
+#    #205 è rimasta ferma prima che qualcuno la notasse a mano. Più spesso non
+#    anticiperebbe niente, perché sotto le 3h la PR non è ancora dichiarabile
+#    incagliata; meno spesso porterebbe il caso peggiore oltre le 5h, cioè oltre
+#    l'incidente che questa guardia esiste per prendere.
+#
+# ── Perché il PAT per aprire ────────────────────────────────────────────────
+# Una issue creata dal GITHUB_TOKEN NON emette l'evento `issues: opened`
+# (anti-ricorsione GitHub), quindi nascerebbe fuori dal triage event-driven e
+# resterebbe orfana fino allo sweep periodico. Col PAT il triage la classifica
+# subito. Senza PAT il degrado è morbido, non silenzioso: la issue si apre
+# comunque e la raccoglie lo sweep.
+
+on:
+  schedule:
+    - cron: '33 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Stampa cosa aprirebbe/chiuderebbe senza toccare niente'
+        required: false
+        type: boolean
+        default: false
+      threshold_hours:
+        description: 'Ore oltre le quali la lockstep è dichiarata incagliata (default 3)'
+        required: false
+        default: '3'
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: read
+
+concurrency:
+  group: lockstep-stall-watchdog
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          filter: blob:none
+          # Lo scanner tocca solo `scripts/`: `content/` (14.888 file), `dist/`
+          # e `public/` sono peso morto per una passata oraria.
+          sparse-checkout: |
+            /*
+            !/content
+            !/dist
+            !/public
+            !/data
+          sparse-checkout-cone-mode: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: lo scanner usa solo builtin Node, `gh` e
+      # `scripts/lib/github-issue-creator.mjs`.
+
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -euo pipefail
+          if [ -z "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            echo "::warning::FIREBASE_SERVICE_ACCOUNT_JSON assente — si prosegue col GITHUB_TOKEN (la issue si aprirà comunque, la raccoglie lo sweep)."
+            exit 0
+          fi
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/sa.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$RUNNER_TEMP/sa.json" >> "$GITHUB_ENV"
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Watch the engine lockstep
+        env:
+          # `GITHUB_PAT_NANAKO` arriva da Remote Config ed è quello che fa
+          # emettere l'evento `issues: opened`; il fallback tiene la guardia viva
+          # anche quando RC non risponde.
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          THRESHOLD_HOURS: ${{ inputs.threshold_hours || '3' }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          args=(--threshold-hours "$THRESHOLD_HOURS")
+          if [ "${DRY_RUN:-false}" = "true" ]; then args+=(--dry-run); fi
+          node scripts/ci/lockstep-stall-watch.mjs "${args[@]}"

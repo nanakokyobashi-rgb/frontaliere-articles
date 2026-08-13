@@ -335,7 +335,14 @@ test('i default restano quelli del workflow, non quelli del test', () => {
 // ── La condizione di stop resta quella progettata ─────────────────────────────
 
 test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', () => {
-  const onBlock = ACTIVE.slice(ACTIVE.indexOf('on:'), ACTIVE.indexOf('concurrency:'));
+  // Il confine è `permissions:`, non `concurrency:`. Sono la stessa cosa finché
+  // `concurrency:` è una chiave di primo livello subito dopo `on:` — e dal
+  // 2026-08-13 non lo è più: la #193/#212 l'ha spostata sul job `generate`,
+  // dietro il gate `admit`. Con il vecchio confine la slice arrivava fino DENTRO
+  // i job, e l'assert negativo qui sotto avrebbe letto anche il loro corpo:
+  // un test che passa o fallisce per ciò che sta in un job non è più il test del
+  // blocco `on:`. `permissions:` è il primo top-level dopo `on:` in questo file.
+  const onBlock = ACTIVE.slice(ACTIVE.indexOf('on:'), ACTIVE.indexOf('\npermissions:'));
   assert.match(onBlock, /- 'content\/\*\*'/);
   assert.ok(
     !/topic-candidates|data\/\*\*|- 'data\//.test(onBlock),
