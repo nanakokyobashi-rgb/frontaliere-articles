@@ -38,7 +38,12 @@ function slice(startMarker, endMarker) {
 // extractHeadlines closes over extractDatesFromHtml, which closes over
 // nothing outside the three functions themselves — no module-scope names
 // need injecting.
-const BLOCK = slice('function extractDateFromUrl(url) {', '\n// ── Step 1b-bis:');
+// `.replace(/^export /gm, '')`: dal 2026-08-13 il blocco contiene anche
+// `parseHeadlineDate` e il suo registro di formati (issue #190 punto 2), che
+// sono esportati per essere provati altrove. `new Function` non accetta
+// `export`, e senza questa riga l'intera suite muore su un SyntaxError che non
+// ha nulla a che vedere con cio' che verifica.
+const BLOCK = slice('function extractDateFromUrl(url) {', '\n// ── Step 1b-bis:').replace(/^export /gm, '');
 
 assert.match(BLOCK, /function extractHeadlines\(html, baseUrl\) \{/, 'il blocco deve contenere extractHeadlines — delimitatori da aggiornare');
 assert.match(BLOCK, /function extractDatesFromHtml\(html, baseUrl\) \{/, 'il blocco deve contenere extractDatesFromHtml — delimitatori da aggiornare');

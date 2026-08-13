@@ -91,6 +91,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { truncateSlugAtWordBoundary } from '../scripts/lib/slug-truncate.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -125,14 +126,26 @@ function slicePlaceholderBlock() {
 
 function loadGuard() {
   const block = [
+    'const SLUG_MAX_LENGTH = 80;',
     sliceFn('function slugifySlugPart(input) {'),
     slicePlaceholderBlock(),
+    // La rilocalizzazione degli slug (issue #191) e' l'ultimo passaggio di
+    // deriveAndSanitizeArticleSlugs: senza il suo blocco la sandbox esplode su
+    // un nome non definito, e il guard sui segnaposto smetterebbe di girare per
+    // una ragione che non c'entra nulla con i segnaposto.
+    sliceFn("export const PROVISIONAL_IT_SLUG_FIELD = '_slugsProvisionalFromIt';"),
+    sliceFn('function clearProvisionalItSlug(data, locale) {'),
+    sliceFn('export function relocalizeSlugsAfterTranslation(data, opts = {}) {'),
     sliceFn('export function deriveAndSanitizeArticleSlugs(data) {'),
   ]
     .join('\n\n')
     .replace(/^export /gm, '');
   return new Function(
     'console',
+    'truncateSlugAtWordBoundary',
+    'sectionLocaleSlugTaken',
+    'reportSlugI18nEvent',
+    'RUN_REPORT',
     `${block}\nreturn { inspectSlugForPromptPlaceholder, deriveAndSanitizeArticleSlugs, slugifySlugPart,` +
       ' PROMPT_SLUG_PREFIX_RX, NON_SLUG_REMAINDER_RX, SCHEMA_HINT_SHAPE_RX };',
   );
@@ -147,7 +160,19 @@ function freshGuard() {
     warn: (...a) => logged.push(a.join(' ')),
     log: (...a) => logged.push(a.join(' ')),
   };
-  return { ...loadGuard()(fakeConsole), logged };
+  // Le dipendenze iniettate sono le sole che il blocco estratto non porta con
+  // se': il troncatore (che vive in una lib importabile) e i tre collaboratori
+  // della rilocalizzazione, sostituiti da versioni inerti — qui si prova il
+  // guard sui segnaposto, non la rilocalizzazione, che ha il suo banco in
+  // article-slug-i18n.test.mjs.
+  const sandbox = loadGuard()(
+    fakeConsole,
+    truncateSlugAtWordBoundary,
+    () => false,
+    () => {},
+    { slugs: { localizedFromTitle: 0, relocalized: 0, itFallback: 0, itFallbackDetail: [] } },
+  );
+  return { ...sandbox, logged };
 }
 
 const { inspectSlugForPromptPlaceholder } = freshGuard();

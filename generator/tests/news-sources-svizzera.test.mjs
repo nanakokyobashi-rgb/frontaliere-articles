@@ -189,3 +189,58 @@ test('the svizzera list carries no foreign-news desk', () => {
   const foreign = SVIZZERA.map((e) => e.url).filter((u) => /\/(mondo|estero|esteri|world)\b/i.test(u));
   assert.deepEqual(foreign, [], `foreign desks in a national section:\n  ${foreign.join('\n  ')}`);
 });
+
+// ── Domini condannati: la rimozione da UNA lista non e' una rimozione ──────
+//
+// Issue #190 punto 4. `santesuisse.ch` e `bag.admin.ch` sono stati tolti da
+// NEWS_SOURCES_SVIZZERA il 2026-08-10 con la misura che li condanna scritta
+// accanto, e sono rimasti in NEWS_SOURCES per tre giorni — dove producevano lo
+// stesso nulla, contandosi pero' fra i `sources.succeeded`. Non e' una svista
+// isolata: rimuovere e' un'operazione su UN array, e i due array non sanno
+// l'uno dell'altro. Quello che segue non verifica i due domini di allora ma la
+// forma del difetto — `DEAD_NEWS_DOMAINS` e' la dichiarazione unica, e vale su
+// entrambe le liste.
+
+/** Slice `const <name> = [ … \n];` and return the quoted domain strings in it. */
+function parseDomainList(name) {
+  const start = SRC.indexOf(`const ${name} = [`);
+  assert.notEqual(start, -1, `${name} not found in create-article.mjs`);
+  const end = SRC.indexOf('\n];', start);
+  assert.notEqual(end, -1, `${name} has no closing bracket`);
+  return [...SRC.slice(start, end).matchAll(/^\s*'([a-z0-9.-]+\.[a-z]{2,})',/gm)].map((m) => m[1]);
+}
+
+const DEAD_DOMAINS = parseDomainList('DEAD_NEWS_DOMAINS');
+
+test('DEAD_NEWS_DOMAINS is declared and non-empty (an empty ledger checks nothing)', () => {
+  assert.ok(DEAD_DOMAINS.length > 0, 'DEAD_NEWS_DOMAINS parsed as empty — the guard below would be vacuous');
+  assert.ok(DEAD_DOMAINS.includes('santesuisse.ch'), 'the domain that made this guard necessary is not in the ledger');
+  assert.ok(DEAD_DOMAINS.includes('bag.admin.ch'));
+});
+
+test('no dead domain survives in EITHER source list', () => {
+  const offenders = [];
+  for (const [name, list] of [['NEWS_SOURCES', FRONTALIERE], ['NEWS_SOURCES_SVIZZERA', SVIZZERA]]) {
+    for (const { url } of list) {
+      const host = new URL(url).hostname.replace(/^(www\d?|media)\./, '');
+      const dead = DEAD_DOMAINS.find((d) => host === d || host.endsWith(`.${d}`));
+      if (dead) offenders.push(`${name}: ${url} (dominio dichiarato morto: ${dead})`);
+    }
+  }
+  assert.deepEqual(offenders, [], `fonti condannate ancora in lista:\n  ${offenders.join('\n  ')}`);
+});
+
+test('no dead domain is used as a fallback target either', () => {
+  // Un fallback e' una fonte a tutti gli effetti: viene fetchato e parsato
+  // esattamente come le altre, e un dominio morto li' dentro e' invisibile
+  // perche' la mappa non viene mai letta finche' il feed principale regge.
+  const offenders = [];
+  for (const [name, map] of [['RSS_FALLBACK_MAP', FRONTALIERE_FB], ['NEWS_SOURCES_SVIZZERA_FALLBACK_MAP', SVIZZERA_FB]]) {
+    for (const [k, v] of Object.entries(map)) {
+      const host = new URL(v).hostname.replace(/^(www\d?|media)\./, '');
+      const dead = DEAD_DOMAINS.find((d) => host === d || host.endsWith(`.${d}`));
+      if (dead) offenders.push(`${name}: ${k} → ${v} (dominio dichiarato morto: ${dead})`);
+    }
+  }
+  assert.deepEqual(offenders, [], `fallback verso domini condannati:\n  ${offenders.join('\n  ')}`);
+});
