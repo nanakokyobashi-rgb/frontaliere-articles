@@ -9894,6 +9894,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.calcolatore-salariale-edilizia-2026.title': 'Calculateur de salaire pour la construction : vérifiez la paie',
     'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Utilisez le calculateur de salaire CNM pour comparer votre salaire avec les indications du Contrat National Manteau 2026.',
     'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Chantier de construction au Tessin',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sussidi di cassa malati online',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'La demande d\'allocations d\'assurance-maladie peut être remplie et envoyée en ligne via la plateforme de l\'Institut des assurances sociales',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Demande en ligne de prestations de maladie',
 };
 
 export default blogMetaFr;

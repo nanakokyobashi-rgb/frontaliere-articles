@@ -9892,6 +9892,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.calcolatore-salariale-edilizia-2026.title': 'Construction Salary Calculator: Payroll Check',
     'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Use the CNM salary calculator to compare your salary with the indications of the National Contract mantle 2026.',
     'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Construction site in Ticino',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sick cash benefits, now the request can also be made online',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'The application for sick cash benefits can be completed and sent online through the platform of the Social Insurance Institute',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Online request for sickness cash benefits',
 };
 
 export default blogMetaEn;

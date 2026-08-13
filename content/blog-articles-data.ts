@@ -29658,6 +29658,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online',
+ category: 'novita',
+ date: '2026-08-13T10:49:41.694Z',
+ image: '/images/blog/sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

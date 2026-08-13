@@ -9891,6 +9891,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.calcolatore-salariale-edilizia-2026.title': 'Lohnrechner für das Baugewerbe: Gehaltsabrechnung prüfen',
     'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Benutzen Sie den LMV-Lohnrechner, um Ihr Gehalt mit den Angaben des Landesmantelvertrages 2026 zu vergleichen.',
     'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Baustelle im Tessin',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Krankenkassenzuschüsse, jetzt auch online anfordern',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'Der Antrag auf Krankenkassenzuschüsse kann online über die Plattform der Sozialversicherungsanstalt ausgefüllt und eingereicht werden',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Online-Antrag für Krankengeld',
 };
 
 export default blogMetaDe;

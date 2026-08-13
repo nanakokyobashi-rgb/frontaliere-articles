@@ -9893,6 +9893,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.calcolatore-salariale-edilizia-2026.title': 'Calcolatore salariale per l\'edilizia: verifica la busta paga',
     'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Utilizza il calcolatore salariale CNM per confrontare il tuo stipendio con le indicazioni del Contratto nazionale mantello 2026.',
     'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Cantiere edile in Ticino',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sussidi di cassa malati, ora la richiesta si può fare anche online',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'La richiesta di sussidi di cassa malati può essere compilata e inviata online attraverso la piattaforma dell\'Istituto delle assicurazioni sociali',
+    'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Richiesta di sussidi di cassa malati online',
 };
 
 export default blogMetaIt;
