@@ -2566,6 +2566,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aprire-attivita-cantone-berna-guida.title': 'Starting a business in the Canton of Bern: a practical guide',
     'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'From the choice of legal form to insurance obligations and the commercial register: here are the key steps to doing business in Bern.',
     'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Bern old town with Zytglogge tower',
+    'blog.article.eclissi-solare-ospedali.title': 'Dozens in hospital for eye pain after solar eclipse',
+    'blog.article.eclissi-solare-ospedali.excerpt': 'Dozens of people in hospital after solar eclipse',
+    'blog.article.eclissi-solare-ospedali.imageAlt': 'Thousands of people in hospital after the solar eclipse',
 };
 
 export default blogMetaChEn;

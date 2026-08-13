@@ -2566,6 +2566,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aprire-attivita-cantone-berna-guida.title': 'Avviare un\'attività nel Cantone di Berna: guida pratica',
     'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Dalla scelta della forma giuridica agli obblighi assicurativi e al registro di commercio: ecco i passaggi chiave per fare impresa nel territorio bernese.',
     'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Centro storico di Berna con la Torre dell\'Orologio',
+    'blog.article.eclissi-solare-ospedali.title': 'Decine in ospedale per dolori agli occhi dopo l\'eclissi solare',
+    'blog.article.eclissi-solare-ospedali.excerpt': 'Decine di persone in ospedale dopo l\'eclissi solare',
+    'blog.article.eclissi-solare-ospedali.imageAlt': 'Decine di persone in ospedale dopo l\'eclissi solare',
 };
 
 export default blogMetaChIt;

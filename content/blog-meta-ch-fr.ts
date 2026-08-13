@@ -2566,6 +2566,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.aprire-attivita-cantone-berna-guida.title': 'Démarrer une activité dans le canton de Berne : guide pratique',
     'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Du choix de la forme juridique aux obligations d\'assurance et au registre du commerce : voici les étapes clés pour faire des affaires sur le territoire bernois.',
     'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Vieille ville de Berne avec la tour Zytglogge',
+    'blog.article.eclissi-solare-ospedali.title': 'Des dizaines à l\'hôpital pour des douleurs oculaires après une éclipse solaire',
+    'blog.article.eclissi-solare-ospedali.excerpt': 'Des dizaines de personnes hospitalisées après une éclipse solaire',
+    'blog.article.eclissi-solare-ospedali.imageAlt': 'Des milliers de personnes en hôpital après l\'éclipse solaire',
 };
 
 export default blogMetaChFr;

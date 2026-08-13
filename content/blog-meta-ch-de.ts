@@ -2566,6 +2566,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aprire-attivita-cantone-berna-guida.title': 'Ein Unternehmen im Kanton Bern gründen: Praktischer Leitfaden',
     'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Von der Wahl der Rechtsform über die Versicherungsverpflichtungen bis hin zum Handelsregister: Das sind die wichtigsten Schritte, um im Berner Raum ein Unternehmen zu gründen.',
     'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Berner Altstadt mit Zytglogge',
+    'blog.article.eclissi-solare-ospedali.title': 'Dutzende im Krankenhaus wegen Augenschmerzen nach der Sonnenfinsternis',
+    'blog.article.eclissi-solare-ospedali.excerpt': 'Dutzende Menschen nach der Sonnenfinsternis im Krankenhaus',
+    'blog.article.eclissi-solare-ospedali.imageAlt': 'Viele Menschen im Krankenhaus nach der Sonnenfinsternis',
 };
 
 export default blogMetaChDe;

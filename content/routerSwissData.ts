@@ -881,6 +881,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'avviare-attivita-canton-berna': { it: 'avviare-attivita-canton-berna', en: 'starting-business-canton-bern', de: 'unternehmen-gruenden-kanton-bern', fr: 'creer-entreprise-canton-berne' },
  'iniziativa-protezione-pigioni-abusive': { it: 'iniziativa-protezione-pigioni-abusive', en: 'initiative-protection-against-abusive-rents', de: 'initiative-schutz-gegen-missbrauchliche-mieten', fr: 'initiative-protection-contre-loyers-abusifs' },
  'aprire-attivita-cantone-berna-guida': { it: 'aprire-attivita-cantone-berna-guida', en: 'starting-business-canton-bern-guide', de: 'unternehmen-kanton-bern-gruenden', fr: 'creer-entreprise-canton-berne-guide' },
+ 'eclissi-solare-ospedali': { it: 'eclissi-solare-ospedali', en: 'solar-eclipse-hospital', de: 'sonnenfinsternis-krankenhaus', fr: 'eclipse-solaire-hopital' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

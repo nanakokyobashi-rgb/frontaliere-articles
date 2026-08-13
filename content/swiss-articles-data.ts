@@ -7696,6 +7696,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'eclissi-solare-ospedali',
+    category: 'fiscale',
+    date: '2026-08-13T16:55:55.567Z',
+    image: '/images/blog/eclissi-solare-ospedali.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
