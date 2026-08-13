@@ -2509,6 +2509,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Rhein auf dem Tiefststand, Preise in die Höhe schießen: Auch Benzin teurer',
     'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Das aussergewöhnlich niedrige Rheinniveau erschwert den Treibstofftransport in die Schweiz und treibt die Kosten in die Höhe.',
     'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Bild eines Autos, das sich einem Benzintank mit einem hohen Preis nähert',
+    'blog.article.carbone-minimi-storici-elettricita.title': 'Stromerzeugung: Kohle erreicht historische Tiefststände',
+    'blog.article.carbone-minimi-storici-elettricita.excerpt': 'Im Jahr 2025 deckt Kohle nur 9,2% der EU-Produktion ab. Ein drastischer Rückgang im Vergleich zu 1990, als es mehr als ein Drittel des elektrischen Gesamtgewichts ausmachte.',
+    'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Elektrische Infrastruktur in einer Schweizer Landschaft',
 };
 
 export default blogMetaChDe;

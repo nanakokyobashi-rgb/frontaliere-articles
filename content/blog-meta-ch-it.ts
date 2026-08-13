@@ -2509,6 +2509,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Reno ai minimi, prezzi alle stelle: più cara anche la benzina',
     'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Il livello eccezionalmente basso del Reno sta complicando il trasporto di carburanti verso la Svizzera e facendo lievitare i costi.',
     'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Immagine di un\'auto che si avvicina a un distributore di benzina con un prezzo alto',
+    'blog.article.carbone-minimi-storici-elettricita.title': 'Produzione elettrica: il carbone tocca i minimi storici',
+    'blog.article.carbone-minimi-storici-elettricita.excerpt': 'Nel 2025 il carbone copre solo il 9,2% della produzione Ue. Un calo drastico rispetto al 1990, quando pesava per oltre un terzo del totale elettrico.',
+    'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Impianti elettrici in un paesaggio svizzero',
 };
 
 export default blogMetaChIt;

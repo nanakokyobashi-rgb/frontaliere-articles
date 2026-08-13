@@ -2509,6 +2509,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Rhine at a minimum, prices skyrocketing: gasoline is also more expensive',
     'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'The exceptionally low level of the Rhine is complicating the transport of fuels to Switzerland and driving up costs.',
     'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Image of a car approaching a gas station with a high price',
+    'blog.article.carbone-minimi-storici-elettricita.title': 'Electricity production: coal hits historic lows',
+    'blog.article.carbone-minimi-storici-elettricita.excerpt': 'In 2025, coal covers only 9.2% of EU production. A drastic drop compared to 1990, when it weighed more than a third of the electricity total.',
+    'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Electrical infrastructure in a Swiss landscape',
 };
 
 export default blogMetaChEn;

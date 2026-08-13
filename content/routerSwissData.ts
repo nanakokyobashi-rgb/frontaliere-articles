@@ -862,6 +862,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri': { it: 'la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri', en: 'the-drought-affects-swiss-waterways', de: 'die-durre-betritt-schweizer-wasserwege', fr: 'la-secheresse-affecte-les-cours-d-eau-suisse' },
  'prezzi-produzione-importazione-luglio-2026': { it: 'prezzi-produzione-importazione-luglio-2026', en: 'production-import-prices-july-2026', de: 'produktions-importpreise-juli-2026', fr: 'prix-production-importation-juillet-2026' },
  'reno-ai-minimi-prezzi-svizzera': { it: 'reno-ai-minimi-prezzi-svizzera', en: 'reno-at-minimum-prices-switzerland', de: 'reno-zu-mindestpreisen-schweiz', fr: 'reno-aux-prix-minima-suisse' },
+ 'carbone-minimi-storici-elettricita': { it: 'carbone-minimi-storici-elettricita', en: 'coal-record-low-electricity', de: 'kohle-rekordtief-elektrizitat', fr: 'charbon-minis-historiques-electricite' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

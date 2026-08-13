@@ -2509,6 +2509,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Reno au plus bas, prix aux étoiles : l\'essence est également plus chère',
     'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Le niveau exceptionnellement bas du Rhin complique le transport des carburants vers la Suisse et fait grimper les coûts.',
     'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Image d\'une voiture qui se rapproche d\'une station-service avec un prix élevé',
+    'blog.article.carbone-minimi-storici-elettricita.title': 'Production électrique : le charbon atteint des plus bas historiques',
+    'blog.article.carbone-minimi-storici-elettricita.excerpt': 'En 2025, le charbon ne couvre que 9,2 % de la production de l\'UE. Une baisse drastique par rapport à 1990, quand elle pesait pour plus d\'un tiers du total électrique.',
+    'blog.article.carbone-minimi-storici-elettricita.imageAlt': 'Infrastructure électrique dans un paysage suisse',
 };
 
 export default blogMetaChFr;
