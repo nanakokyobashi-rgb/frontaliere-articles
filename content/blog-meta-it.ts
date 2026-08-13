@@ -9908,6 +9908,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vantaggi-associati-ocst-frontalieri.title': 'I vantaggi per gli associati OCST: guida ai servizi',
     'blog.article.vantaggi-associati-ocst-frontalieri.excerpt': 'Scopri come associarsi all\'OCST offre consulenza legale, fiscale e sconti esclusivi per lavoratori frontalieri attivi in Ticino.',
     'blog.article.vantaggi-associati-ocst-frontalieri.imageAlt': 'Vista panoramica su Lugano, sede di servizi sindacali per lavoratori frontalieri',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.title': 'Inflazione torna in Italia, Pil a +0,5%',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.excerpt': 'L\'economia italiana con il freno tirato, torna l\'inflazione: Pil a +0,5% e debito verso il 139%.',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.imageAlt': 'L\'economia italiana con il freno tirato, torna l\'inflazione',
 };
 
 export default blogMetaIt;

@@ -29703,6 +29703,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139',
+ category: 'fiscale',
+ date: '2026-08-13T16:41:02.263Z',
+ image: '/images/blog/italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

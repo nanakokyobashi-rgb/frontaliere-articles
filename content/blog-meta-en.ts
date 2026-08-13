@@ -9907,6 +9907,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vantaggi-associati-ocst-frontalieri.title': 'Benefits for OCST Members: Service Guide',
     'blog.article.vantaggi-associati-ocst-frontalieri.excerpt': 'Find out how joining the OCST offers legal advice, tax advice and exclusive discounts for border workers active in Ticino.',
     'blog.article.vantaggi-associati-ocst-frontalieri.imageAlt': 'Panoramic view of Lugano, home to union services for cross-border workers',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.title': 'Inflation returns to Italy, GDP at +0.5%',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.excerpt': 'The Italian economy with the brakes pulled, inflation is back: GDP at +0.5% and debt towards 139%.',
+    'blog.article.italia-con-il-freno-tirato-torna-linflazione-pil-a-05-e-debito-verso-il-139.imageAlt': 'Italian economy with the brake on, inflation returns',
 };
 
 export default blogMetaEn;
