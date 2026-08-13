@@ -29604,6 +29604,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'sussidi-cassa-malati-digitale',
+ category: 'novita',
+ date: '2026-08-13T09:52:12.096Z',
+ image: '/images/blog/sussidi-cassa-malati-digitale.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

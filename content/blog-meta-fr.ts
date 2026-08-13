@@ -9876,6 +9876,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.swissquote-crollo-azienda.title': 'Swissquote, forte baisse en Bourse',
     'blog.article.swissquote-crollo-azienda.excerpt': 'La société de services financiers Swissquote a connu une forte baisse en Bourse, influencée par la faiblesse des cryptomonnaies et les bénéfices en baisse par rapport aux estimations des analystes.',
     'blog.article.swissquote-crollo-azienda.imageAlt': 'Une photo d\'un ordinateur avec une crise des valeurs de Swissquote',
+    'blog.article.sussidi-cassa-malati-digitale.title': 'Subventions de caisse-maladie, maintenant la demande est également numérique',
+    'blog.article.sussidi-cassa-malati-digitale.excerpt': 'La demande de réduction des primes d\'assurance-maladie (RIPAM) au Tessin peut désormais être également déposée en ligne.',
+    'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Un frontalier se rapproche d\'un calculateur en ligne pour la demande de prestations de la caisse maladie.',
 };
 
 export default blogMetaFr;

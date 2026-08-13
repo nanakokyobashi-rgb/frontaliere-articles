@@ -9875,6 +9875,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.swissquote-crollo-azienda.title': 'Swissquote, forte calo in borsa',
     'blog.article.swissquote-crollo-azienda.excerpt': 'La società di servizi finanziari Swissquote ha subito un forte calo in borsa, influenzato dalla debolezza delle criptovalute e dai profitti in flessione rispetto alle stime degli analisti.',
     'blog.article.swissquote-crollo-azienda.imageAlt': 'Una foto di un computer con un crollo dei valori di Swissquote',
+    'blog.article.sussidi-cassa-malati-digitale.title': 'Sussidi di cassa malati, ora la richiesta è anche digitale',
+    'blog.article.sussidi-cassa-malati-digitale.excerpt': 'La richiesta per la riduzione dei premi dell\'assicurazione malattia (RIPAM) in Ticino può ora essere presentata anche online.',
+    'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Un frontaliere si avvicina al calcolatore online per la richiesta dei sussidi di cassa malati.',
 };
 
 export default blogMetaIt;

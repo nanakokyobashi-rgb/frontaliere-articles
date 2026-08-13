@@ -9873,6 +9873,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.swissquote-crollo-azienda.title': 'Swissquote, starker Börsencrash',
     'blog.article.swissquote-crollo-azienda.excerpt': 'Der Finanzdienstleister Swissquote verzeichnete an der Börse einen starken Rückgang, der von der Schwäche der Kryptowährungen und den im Vergleich zu Analystenschätzungen rückläufigen Gewinnen beeinflusst wurde.',
     'blog.article.swissquote-crollo-azienda.imageAlt': 'Ein Bild eines Computers mit einem Kollaps der Werte von Swissquote',
+    'blog.article.sussidi-cassa-malati-digitale.title': 'Krankenkassen-Subventionen, jetzt ist der Antrag auch digital',
+    'blog.article.sussidi-cassa-malati-digitale.excerpt': 'Der Antrag auf Prämienverbilligung der Krankenversicherung (RIPAM) im Tessin kann neu auch online gestellt werden.',
+    'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Ein Frontalier sichert sich online bei der Antragstellung von Krankenkassenbeihilfen.',
 };
 
 export default blogMetaDe;

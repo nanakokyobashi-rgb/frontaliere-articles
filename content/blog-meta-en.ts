@@ -9874,6 +9874,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.swissquote-crollo-azienda.title': 'Swissquote, sharp drop in the stock market',
     'blog.article.swissquote-crollo-azienda.excerpt': 'The financial services company Swissquote suffered a sharp drop in the stock market, influenced by the weakness of cryptocurrencies and falling profits compared to analysts\' estimates.',
     'blog.article.swissquote-crollo-azienda.imageAlt': 'A photo of a computer showing a stock market crash at Swissquote',
+    'blog.article.sussidi-cassa-malati-digitale.title': 'Sick cash subsidies, now the request is also digital',
+    'blog.article.sussidi-cassa-malati-digitale.excerpt': 'The application for the reduction of health insurance premiums (RIPAM) in Ticino can now also be submitted online.',
+    'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'A frontaliere approaches an online calculator for the application of sickness fund subsidies.',
 };
 
 export default blogMetaEn;
