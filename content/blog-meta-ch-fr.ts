@@ -2524,6 +2524,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-bussola-governo-boccia.title': 'Initiative Boussole : le Gouvernement propose de la rejeter',
     'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Le Conseil fédéral recommande au Parlement de rejeter l\'Initiative boussole sans contre-projet. Au centre, le nœud sur les futurs Bilatéraux III.',
     'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Palais fédéral à Berne siège du gouvernement suisse',
+    'blog.article.immigrazione-svizzera-calo-2026.title': 'Immigration en Suisse : le solde net baisse en 2026',
+    'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'Au cours des six premiers mois de 2026, le solde migratoire net baisse de 12,5 %. Les nouveaux permis délivrés aux travailleurs frontaliers diminuent également.',
+    'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Vue panoramique d\'un centre urbain suisse avec une architecture contemporaine.',
 };
 
 export default blogMetaChFr;

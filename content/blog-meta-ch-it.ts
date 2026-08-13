@@ -2524,6 +2524,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-bussola-governo-boccia.title': 'Iniziativa Bussola: il Governo propone di bocciarla',
     'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Il Consiglio federale raccomanda al Parlamento di respingere l\'Iniziativa bussola senza controprogetti. Al centro il nodo sui futuri Bilaterali III.',
     'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Palazzo federale a Berna sede del governo svizzero',
+    'blog.article.immigrazione-svizzera-calo-2026.title': 'Immigrazione in Svizzera: il saldo netto cala nel 2026',
+    'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'Nei primi sei mesi del 2026, il saldo migratorio netto scende del 12,5%. Diminuiscono anche i nuovi permessi rilasciati ai lavoratori frontalieri.',
+    'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Veduta panoramica di un centro urbano svizzero con architettura moderna.',
 };
 
 export default blogMetaChIt;

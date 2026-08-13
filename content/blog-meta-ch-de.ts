@@ -2524,6 +2524,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-bussola-governo-boccia.title': 'Kompass-Initiative: Die Regierung schlägt vor, sie abzulehnen',
     'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Der Bundesrat empfiehlt dem Parlament, die Kompass-Initiative ohne Gegenentwürfe abzulehnen. In der Mitte der Knoten auf den zukünftigen Bilateralen III.',
     'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Bundeshaus in Bern Sitz der Schweizer Regierung',
+    'blog.article.immigrazione-svizzera-calo-2026.title': 'Zuwanderung in die Schweiz: Nettosaldo sinkt 2026',
+    'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'In den ersten sechs Monaten des Jahres 2026 sinkt der Nettomigrationssaldo um 12,5%. Auch die neuen Genehmigungen für Grenzgänger nehmen ab.',
+    'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Panoramablick auf ein modernes Schweizer Stadtzentrum mit zeitgenössischer Architektur.',
 };
 
 export default blogMetaChDe;

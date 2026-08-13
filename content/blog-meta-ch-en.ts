@@ -2524,6 +2524,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-bussola-governo-boccia.title': 'Compass Initiative: the Government proposes to reject it',
     'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'The Federal Council recommends that Parliament reject the Compass Initiative without counter-proposals. At the center is the node on future Bilaterals III.',
     'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Federal Palace in Bern seat of the Swiss government',
+    'blog.article.immigrazione-svizzera-calo-2026.title': 'Immigration to Switzerland: the net balance falls in 2026',
+    'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'In the first six months of 2026, the net migratory balance fell by 12.5%. The new permits issued to frontier workers are also decreasing.',
+    'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Panoramic view of a modern Swiss urban center with contemporary architecture.',
 };
 
 export default blogMetaChEn;
