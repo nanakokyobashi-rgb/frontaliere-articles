@@ -29605,6 +29605,15 @@ const RAW_ARTICLES = [
  authorName: 'Marco Ferrari',
  },
  {
+ id: 'tassa-sulla-salute-contraria-agli-accordi-ora-e-pubblica-la-perizia-hinny',
+ category: 'fiscale',
+ date: '2026-08-13T09:21:24.596Z',
+ image: '/images/places/lago-lugano.webp',
+ hasCalculator: false,
+ authorSlug: 'samuele-valente',
+ authorName: 'Samuele Valente',
+ },
+ {
  id: 'sussidi-cassa-malati-digitale',
  category: 'novita',
  date: '2026-08-13T09:52:12.096Z',
