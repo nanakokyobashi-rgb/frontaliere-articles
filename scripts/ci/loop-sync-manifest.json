@@ -1892,6 +1892,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/unescape-ts-string.mjs",
+      "sitePath": "scripts/lib/unescape-ts-string.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "69c49af9f353918b",
+        "corpus": "69c49af9f353918b",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
       "path": "generator/scripts/lib/mymemory-translate.mjs",
       "sitePath": "scripts/lib/mymemory-translate.mjs",
       "mode": "identical",
