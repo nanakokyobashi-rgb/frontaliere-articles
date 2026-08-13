@@ -2518,6 +2518,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzeri-piu-propensi-a-spendere.title': 'Schweizer sind eher bereit, Geld auszugeben. Vor allem für Reisen',
     'blog.article.svizzeri-piu-propensi-a-spendere.excerpt': 'Der Verbrauchsindikator von PostFinance stieg im Juli um 1,1%',
     'blog.article.svizzeri-piu-propensi-a-spendere.imageAlt': 'Schweizer Bürger in einem Reisebüro',
+    'blog.article.sestimali-aziende-svizzere.title': 'Sestimali, sieben von zehn Schweizer Unternehmen übertreffen die Erwartungen',
+    'blog.article.sestimali-aziende-svizzere.excerpt': '70 % der von Awp untersuchten Unternehmen übertreffen die Umsatzschätzungen. Im Vergleich zu 2025 bleibt die Erholung jedoch schrittweise und inhomogen.',
+    'blog.article.sestimali-aziende-svizzere.imageAlt': 'Eine Schweizer Gesellschaft mit Sitz in Ticino',
 };
 
 export default blogMetaChDe;

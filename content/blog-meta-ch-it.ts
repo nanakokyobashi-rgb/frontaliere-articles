@@ -2518,6 +2518,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzeri-piu-propensi-a-spendere.title': 'Svizzeri più propensi a spendere. Soprattutto per viaggiare',
     'blog.article.svizzeri-piu-propensi-a-spendere.excerpt': 'L\'indicatore dei consumi di PostFinance in aumento del 1,1% in luglio',
     'blog.article.svizzeri-piu-propensi-a-spendere.imageAlt': 'Svizzeri in un negozio di viaggi',
+    'blog.article.sestimali-aziende-svizzere.title': 'Sestimali, sette aziende svizzere su dieci battono le attese',
+    'blog.article.sestimali-aziende-svizzere.excerpt': 'Il 70% delle società esaminate da Awp supera le stime sui ricavi. Ma rispetto al 2025 la ripresa resta graduale e disomogenea.',
+    'blog.article.sestimali-aziende-svizzere.imageAlt': 'Una società svizzera con sede in Ticino',
 };
 
 export default blogMetaChIt;

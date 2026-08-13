@@ -2518,6 +2518,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzeri-piu-propensi-a-spendere.title': 'Swiss more likely to spend. Especially for travel',
     'blog.article.svizzeri-piu-propensi-a-spendere.excerpt': 'The PostFinance consumption indicator increased by 1.1% in July',
     'blog.article.svizzeri-piu-propensi-a-spendere.imageAlt': 'Swiss residents in a travel agency',
+    'blog.article.sestimali-aziende-svizzere.title': 'Estimate them, seven out of ten Swiss companies beat expectations',
+    'blog.article.sestimali-aziende-svizzere.excerpt': '70% of the companies examined by AWP exceed revenue estimates. But compared to 2025, the recovery remains gradual and uneven.',
+    'blog.article.sestimali-aziende-svizzere.imageAlt': 'A Swiss company with headquarters in Ticino',
 };
 
 export default blogMetaChEn;

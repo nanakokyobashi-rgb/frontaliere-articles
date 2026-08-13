@@ -865,6 +865,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'carbone-minimi-storici-elettricita': { it: 'carbone-minimi-storici-elettricita', en: 'coal-record-low-electricity', de: 'kohle-rekordtief-elektrizitat', fr: 'charbon-minis-historiques-electricite' },
  'cdt-epaper-ios-revista': { it: 'cdt-epaper-ios-revista', en: 'cdt-epaper-ios', de: 'cdt-epaper-ios', fr: 'cdt-epaper-ios' },
  'svizzeri-piu-propensi-a-spendere': { it: 'svizzeri-piu-propensi-a-spendere', en: 'swiss-residents-more-likely-to-spend', de: 'schweizer-burger-mehr-geeignet-zu-kaufen', fr: 'suisse-residents-plus-aptes-a-consommer' },
+ 'sestimali-aziende-svizzere': { it: 'sestimali-aziende-svizzere', en: 'swiss-companies-semestral', de: 'schweizer-unsere-semestral', fr: 'societes-suisse-semestral' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
