@@ -2515,6 +2515,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.cdt-epaper-ios-revista.title': 'CdT E-paper per iOS: le nuove funzionalità',
     'blog.article.cdt-epaper-ios-revista.excerpt': 'L\'app CDT E-paper per iOS ha ricevuto numerose recensioni positive, grazie alle sue funzionalità innovative.',
     'blog.article.cdt-epaper-ios-revista.imageAlt': 'L\'app CDT E-paper per iOS',
+    'blog.article.svizzeri-piu-propensi-a-spendere.title': 'Svizzeri più propensi a spendere. Soprattutto per viaggiare',
+    'blog.article.svizzeri-piu-propensi-a-spendere.excerpt': 'L\'indicatore dei consumi di PostFinance in aumento del 1,1% in luglio',
+    'blog.article.svizzeri-piu-propensi-a-spendere.imageAlt': 'Svizzeri in un negozio di viaggi',
 };
 
 export default blogMetaChIt;

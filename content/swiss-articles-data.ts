@@ -7543,6 +7543,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzeri-piu-propensi-a-spendere',
+    category: 'fiscale',
+    date: '2026-08-13T10:21:29.368Z',
+    image: '/images/blog/svizzeri-piu-propensi-a-spendere.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
