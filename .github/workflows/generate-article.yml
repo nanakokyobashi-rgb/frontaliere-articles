@@ -516,6 +516,7 @@ jobs:
       # inventata, riattribuirla a un ente vero fa passare il gate e PEGGIORA
       # l'articolo. Qui si scarta e basta; la rigenerazione e' il run successivo.
       - name: Guard — l'articolo generato non raggiunge main se viola le guardie
+        id: guard
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
         env:
           SECTION: ${{ steps.generate.outputs.section }}
@@ -650,6 +651,13 @@ jobs:
       # Dry runs are spelled out rather than left as `false`: the generator is
       # only LOADED there, never invoked, so "no" without the reason invites the
       # same misreading from the other side.
+      #
+      # GUARD_OUTCOME closes the same bug class one variable later (#279): the
+      # Guard step above can reject the article and block the commit while
+      # `steps.generate.outputs.article` still reads `true` — the guard runs
+      # AFTER generation succeeds, so ARTICLE alone can't tell "generated" from
+      # "generated, then rejected". Reading `steps.guard.outcome` (`id: guard`
+      # on that step) is what lets this branch distinguish the two.
       - name: Summary
         if: always()
         env:
@@ -658,10 +666,13 @@ jobs:
           SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
           SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
           ARTICLE: ${{ steps.generate.outputs.article }}
+          GUARD_OUTCOME: ${{ steps.guard.outcome }}
         run: |
           set -uo pipefail
           if [ "${DRY:-}" = "true" ]; then
             generated='no — dry run, the generator is loaded and never invoked'
+          elif [ "${GUARD_OUTCOME:-}" = "failure" ]; then
+            generated='no — REJECTED by article-fabrication-guard / prompt-placeholder-guard, nothing committed (see above)'
           elif [ -z "${ARTICLE:-}" ]; then
             generated='unknown — the run never reached the generator'
           elif [ "$ARTICLE" = "true" ]; then
