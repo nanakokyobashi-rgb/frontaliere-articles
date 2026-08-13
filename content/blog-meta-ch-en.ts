@@ -2599,6 +2599,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rientro-scuola-calor.title': 'Back to school, the heat keeps you warm',
     'blog.article.rientro-scuola-calor.excerpt': 'Heatwaves reignite the debate over the safety and quality of school buildings in Switzerland.',
     'blog.article.rientro-scuola-calor.imageAlt': 'Swiss school with courtyard flooded with sun',
+    'blog.article.porsche-arretra-elettrico-taycan.title': 'Porsche pulls back on electric, Taycan production halted',
+    'blog.article.porsche-arretra-elettrico-taycan.excerpt': 'Porsche\'s decision to stop production of the Taycan by 2030 is a sign of a market where demand for electric models is not enough.',
+    'blog.article.porsche-arretra-elettrico-taycan.imageAlt': 'Porsche Taycan',
 };
 
 export default blogMetaChEn;

@@ -2599,6 +2599,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rientro-scuola-calor.title': 'Zurück in die Schule, die Hitze hält die Bank',
     'blog.article.rientro-scuola-calor.excerpt': 'Hitzewellen entzünden die Debatte um die Sicherheit und Qualität von Schulgebäuden in der Schweiz neu.',
     'blog.article.rientro-scuola-calor.imageAlt': 'Schweizer Schule mit Hof, der von der Sonne überschwemmt ist',
+    'blog.article.porsche-arretra-elettrico-taycan.title': 'Porsche springt auf den Elektroantrieb zurück, Taycan-Produktion eingestellt',
+    'blog.article.porsche-arretra-elettrico-taycan.excerpt': 'Die Entscheidung von Porsche, die Produktion des Taycan bis 2030 einzustellen, ist ein Zeichen für einen Markt, in dem die Nachfrage nach elektrischen Modellen nicht ausreicht.',
+    'blog.article.porsche-arretra-elettrico-taycan.imageAlt': 'Porsche Taycan',
 };
 
 export default blogMetaChDe;

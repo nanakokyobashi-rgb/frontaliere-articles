@@ -7795,6 +7795,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'porsche-arretra-elettrico-taycan',
+    category: 'novita',
+    date: '2026-08-13T21:46:25.293Z',
+    image: '/images/blog/porsche-arretra-elettrico-taycan.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

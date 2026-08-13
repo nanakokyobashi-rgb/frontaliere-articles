@@ -892,6 +892,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'siccita-claro-2026': { it: 'siccita-claro-2026', en: 'in-claro-drought-rises-to-grade-2-new-limitations-on-water-use', de: 'claro-siccita-auf-grad-2-neue-wasserbeschrankungen', fr: 'siccita-al-grado-2-a-claro-nuove-limitazioni' },
  'caldo-e-siccita-senza-modalita-di-crisi': { it: 'caldo-e-siccita-senza-modalita-di-crisi', en: 'heat-and-drought-without-emergency-mode', de: 'hitze-und-durre-ohne-krisenmodus', fr: 'chaleur-et-secheresse-sans-mode-urgence' },
  'rientro-scuola-calor': { it: 'rientro-scuola-calor', en: 'back-to-school-the-heat-keeps-you-warm', de: 'zuruck-in-die-schule-die-hitze-halt-die-bank', fr: 'retour-a-l-ecole-la-chaleur-tient-bon' },
+ 'porsche-arretra-elettrico-taycan': { it: 'porsche-arretra-elettrico-taycan', en: 'porsche-backs-out-of-electric-taycan', de: 'porsche-gibt-electric-taycan-auf', fr: 'porsche-arrete-la-production-de-taycan' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

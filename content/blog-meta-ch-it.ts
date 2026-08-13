@@ -2599,6 +2599,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rientro-scuola-calor.title': 'Rientro a scuola, il caldo tiene banco',
     'blog.article.rientro-scuola-calor.excerpt': 'Le ondate di calore riaccendono il dibattito sulla sicurezza e la qualità degli edifici scolastici in Svizzera.',
     'blog.article.rientro-scuola-calor.imageAlt': 'Scuola svizzera con cortile inondato di sole',
+    'blog.article.porsche-arretra-elettrico-taycan.title': 'Porsche arretra sull\'elettrico, interrotta la produzione della Taycan',
+    'blog.article.porsche-arretra-elettrico-taycan.excerpt': 'La decisione di Porsche di interrompere la produzione della Taycan entro il 2030 è un segno di un mercato in cui la domanda per i modelli elettrici non è sufficiente.',
+    'blog.article.porsche-arretra-elettrico-taycan.imageAlt': 'Porsche Taycan',
 };
 
 export default blogMetaChIt;
