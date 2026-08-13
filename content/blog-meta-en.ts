@@ -9901,6 +9901,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cassa-disoccupazione-unia.title': 'Unia Unemployment Fund: a guide for border workers',
     'blog.article.cassa-disoccupazione-unia.excerpt': 'Information and support on the Unia unemployment fund for frontier workers in Ticino.',
     'blog.article.cassa-disoccupazione-unia.imageAlt': 'Panoramic view of Lugano, home to offices and financial institutions.',
+    'blog.article.salari-minimi-legali-ticino.title': 'Legal minimum wages in Ticino: developments and prospects',
+    'blog.article.salari-minimi-legali-ticino.excerpt': 'Legal minimum wages in Ticino have been the subject of numerous initiatives and discussions in recent years.',
+    'blog.article.salari-minimi-legali-ticino.imageAlt': 'A photo of a historic building in Lugano',
 };
 
 export default blogMetaEn;

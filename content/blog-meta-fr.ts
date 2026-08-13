@@ -9903,6 +9903,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cassa-disoccupazione-unia.title': 'Caisse de chômage Unia : guide pour les frontaliers',
     'blog.article.cassa-disoccupazione-unia.excerpt': 'Informations et soutien sur la caisse de chômage Unia pour les travailleurs frontaliers au Tessin.',
     'blog.article.cassa-disoccupazione-unia.imageAlt': 'Vue panoramique sur Lugano, siège de bureaux et d\'institutions financières.',
+    'blog.article.salari-minimi-legali-ticino.title': 'Salaires minimums légaux au Tessin : développements et perspectives',
+    'blog.article.salari-minimi-legali-ticino.excerpt': 'Les salaires minimums légaux au Tessin ont fait l\'objet de nombreuses initiatives et discussions ces dernières années.',
+    'blog.article.salari-minimi-legali-ticino.imageAlt': 'Une photo d\'un bâtiment historique à Lugano',
 };
 
 export default blogMetaFr;

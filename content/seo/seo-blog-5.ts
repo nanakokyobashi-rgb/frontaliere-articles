@@ -67307,6 +67307,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salari-minimi-legali-ticino': {
+    title: 'Salari minimi legali in Ticino: sviluppi e prospettive',
+    description: 'I salari minimi legali in Ticino sono stati oggetto di numerose iniziative e discussioni negli ultimi anni. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, minimi, legali, sviluppi',
+    ogTitle: 'Salari minimi legali in Ticino: sviluppi e prospettive',
+    ogDescription: 'I salari minimi legali in Ticino sono stati oggetto di numerose iniziative e discussioni negli ultimi anni.',
+    canonicalPath: '/articoli-frontaliere/salari-minimi-legali-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari minimi legali in Ticino: sviluppi e prospettive",
+      "description": "I salari minimi legali in Ticino sono stati oggetto di numerose iniziative e discussioni negli ultimi anni. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-minimi-legali-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una foto di un edificio storico in Lugano"
+      },
+      "datePublished": "2026-08-13T12:56:49+00:00",
+      "dateModified": "2026-08-13T12:56:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/salari-minimi-legali-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

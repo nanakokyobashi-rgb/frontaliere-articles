@@ -9900,6 +9900,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cassa-disoccupazione-unia.title': 'Unia Arbeitslosenkasse: Leitfaden für Grenzgänger',
     'blog.article.cassa-disoccupazione-unia.excerpt': 'Informationen und Unterstützung zur Unia-Arbeitslosenkasse für Grenzgänger im Tessin.',
     'blog.article.cassa-disoccupazione-unia.imageAlt': 'Panoramablick auf Lugano, Sitz von Büros und Finanzinstituten.',
+    'blog.article.salari-minimi-legali-ticino.title': 'Gesetzliche Mindestlöhne im Tessin: Entwicklungen und Perspektiven',
+    'blog.article.salari-minimi-legali-ticino.excerpt': 'Die gesetzlichen Mindestlöhne im Tessin waren in den letzten Jahren Gegenstand zahlreicher Initiativen und Diskussionen.',
+    'blog.article.salari-minimi-legali-ticino.imageAlt': 'Ein Foto eines historischen Gebäudes in Lugano',
 };
 
 export default blogMetaDe;

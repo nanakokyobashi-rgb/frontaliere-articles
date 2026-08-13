@@ -9902,6 +9902,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cassa-disoccupazione-unia.title': 'Cassa Disoccupazione Unia: guida per i frontalieri',
     'blog.article.cassa-disoccupazione-unia.excerpt': 'Informazioni e supporto sulla cassa disoccupazione Unia per i lavoratori frontalieri in Ticino.',
     'blog.article.cassa-disoccupazione-unia.imageAlt': 'Vista panoramica su Lugano, sede di uffici e istituzioni finanziarie.',
+    'blog.article.salari-minimi-legali-ticino.title': 'Salari minimi legali in Ticino: sviluppi e prospettive',
+    'blog.article.salari-minimi-legali-ticino.excerpt': 'I salari minimi legali in Ticino sono stati oggetto di numerose iniziative e discussioni negli ultimi anni.',
+    'blog.article.salari-minimi-legali-ticino.imageAlt': 'Una foto di un edificio storico in Lugano',
 };
 
 export default blogMetaIt;

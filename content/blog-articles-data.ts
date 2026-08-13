@@ -29685,6 +29685,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'salari-minimi-legali-ticino',
+ category: 'fiscale',
+ date: '2026-08-13T12:56:49.743Z',
+ image: '/images/blog/salari-minimi-legali-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
