@@ -43,7 +43,19 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '.
 const LOCALES = ['it', 'en', 'de', 'fr'];
 const BODY_DIRS = ['blog-body', 'blog-body-ch'];
 
-const FAQ_KEY_RX = /'blog\.article\.[a-z0-9-]+\.faq'\s*:/;
+/**
+ * Vero se il file porta la chiave `.faq` ANCORATA a `id` — non la prima chiave
+ * `.faq` incontrata nel file a prescindere da quale id la possiede. Stesso
+ * anti-pattern gia' corretto in `faqQuestionsInBodyText` per #289: un file
+ * body oggi porta un solo id (il nome del file), ma niente nel formato lo
+ * impedisce strutturalmente, e senza l'ancora una `.faq` che appartiene a un
+ * id estraneo verrebbe attribuita all'id del filename — mascherando
+ * esattamente l'inconsistenza #204 che questo test esiste per catturare.
+ */
+function hasFaqKeyForId(text, id) {
+  const idPart = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:`).test(text);
+}
 
 /** { [bodyDir]: { [id]: { [locale]: bool } } }, letto SEMPRE come testo utf8. */
 function scanFaqPresence(root) {
@@ -57,7 +69,7 @@ function scanFaqPresence(root) {
         if (!name.endsWith('.ts')) continue;
         const id = name.slice(0, -3);
         const text = fs.readFileSync(path.join(dir, name), 'utf8');
-        (perId[id] ??= {})[locale] = FAQ_KEY_RX.test(text);
+        (perId[id] ??= {})[locale] = hasFaqKeyForId(text, id);
       }
     }
     byDir[bodyDir] = perId;
