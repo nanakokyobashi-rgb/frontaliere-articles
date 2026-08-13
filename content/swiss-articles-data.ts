@@ -7678,6 +7678,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'iniziativa-protezione-pigioni-abusive',
+    category: 'pratico',
+    date: '2026-08-13T16:38:25.604Z',
+    image: '/images/blog/iniziativa-protezione-pigioni-abusive.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

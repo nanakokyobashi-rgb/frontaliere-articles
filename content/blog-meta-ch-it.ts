@@ -2560,6 +2560,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avviare-attivita-canton-berna.title': 'Avviare un\'attività nel Canton Berna: guida alle procedure',
     'blog.article.avviare-attivita-canton-berna.excerpt': 'Cosa serve per aprire una ditta nel Canton Berna: scelta della forma giuridica, iscrizione al registro di commercio e obblighi assicurativi essenziali.',
     'blog.article.avviare-attivita-canton-berna.imageAlt': 'Ufficio moderno in una città svizzera con vista panoramica',
+    'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Iniziativa pigioni abusive: la situazione in Svizzera',
+    'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'L\'iniziativa popolare \'Sì alla protezione contro pigioni abusive\' ha raccolto 108\'437 firme valide. Ecco cosa cambia per gli inquilini svizzeri.',
+    'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Palazzi residenziali in una città svizzera',
 };
 
 export default blogMetaChIt;

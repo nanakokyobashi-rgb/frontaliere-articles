@@ -2560,6 +2560,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.avviare-attivita-canton-berna.title': 'Démarrer une activité dans le canton de Berne : guide des procédures',
     'blog.article.avviare-attivita-canton-berna.excerpt': 'Ce qu\'il faut pour ouvrir une entreprise dans le canton de Berne : choix de la forme juridique, inscription au registre du commerce et obligations d\'assurance essentielles.',
     'blog.article.avviare-attivita-canton-berna.imageAlt': 'Bureau moderne dans une ville suisse avec vue panoramique',
+    'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Initiative loyers abusifs : la situation en Suisse',
+    'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'L\'initiative populaire « Oui à la protection contre les loyers abusifs » a recueilli 108\'437 signatures valables. C\'est ce qui change pour les locataires suisses.',
+    'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Immeubles résidentiels dans une ville suisse',
 };
 
 export default blogMetaChFr;

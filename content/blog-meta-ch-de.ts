@@ -2560,6 +2560,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.avviare-attivita-canton-berna.title': 'Ein Unternehmen im Kanton Bern gründen: Verfahrensleitfaden',
     'blog.article.avviare-attivita-canton-berna.excerpt': 'Was es braucht, um eine Firma im Kanton Bern zu gründen: Wahl der Rechtsform, Handelsregistereintragung und wesentliche Versicherungspflichten.',
     'blog.article.avviare-attivita-canton-berna.imageAlt': 'Modernes Büro in einer Schweizer Stadt mit Panoramablick',
+    'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Missbräuchliche Mietzinsinitiative: Die Situation in der Schweiz',
+    'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'Die Volksinitiative \'Ja zum Schutz vor missbräuchlichen Mieten\' hat 108\'437 gültige Unterschriften gesammelt. Das ändert sich für Schweizer Mieter.',
+    'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Wohngebäude in einer Schweizer Stadt',
 };
 
 export default blogMetaChDe;

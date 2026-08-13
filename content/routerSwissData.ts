@@ -879,6 +879,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'modifica-ordinanza-liquidita': { it: 'modifica-ordinanza-liquidita', en: 'modification-of-liquidity-regulation', de: 'modifikation-der-liquiditaetsvorschriften', fr: 'modification-des-reglementations-de-liquidite' },
  'avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione': { it: 'avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione', en: 'avs-and-complementary-benefits-cantone-berna-compensation-fund', de: 'avs-und-zusatzleistungen-cantone-berna-entschadigungsfonds', fr: 'avs-et-benefices-complementaires-cantone-berna-fonds-de-compensation' },
  'avviare-attivita-canton-berna': { it: 'avviare-attivita-canton-berna', en: 'starting-business-canton-bern', de: 'unternehmen-gruenden-kanton-bern', fr: 'creer-entreprise-canton-berne' },
+ 'iniziativa-protezione-pigioni-abusive': { it: 'iniziativa-protezione-pigioni-abusive', en: 'initiative-protection-against-abusive-rents', de: 'initiative-schutz-gegen-missbrauchliche-mieten', fr: 'initiative-protection-contre-loyers-abusifs' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

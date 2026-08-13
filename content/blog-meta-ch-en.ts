@@ -2560,6 +2560,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avviare-attivita-canton-berna.title': 'Starting a business in the Canton of Bern: a guide to procedures',
     'blog.article.avviare-attivita-canton-berna.excerpt': 'What it takes to open a company in the Canton of Bern: choice of legal form, registration in the commercial register and essential insurance obligations.',
     'blog.article.avviare-attivita-canton-berna.imageAlt': 'Modern office in a Swiss city with panoramic view',
+    'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Abusive pensions initiative: the situation in Switzerland',
+    'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'The popular initiative \'Yes to protection against illegal rents\' collected 108,437 valid signatures. Here\'s what\'s changing for Swiss tenants.',
+    'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Residential buildings in a Swiss city',
 };
 
 export default blogMetaChEn;
