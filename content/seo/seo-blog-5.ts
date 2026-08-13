@@ -67229,6 +67229,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-verita-immobiliari-ticino': {
+    title: 'Verità Immobiliari: strategie per il mercato ticinese',
+    description: 'Analisi sulle dinamiche del mercato immobiliare in Ticino e consigli pratici per proprietari e investitori che vogliono valorizzare i propri immobili.',
+    keywords: 'frontalieri, ticino, svizzera, italia, verità, immobiliari, strategie, mercato',
+    ogTitle: 'Verità Immobiliari: strategie per il mercato ticinese',
+    ogDescription: 'Scopri le dinamiche del mercato immobiliare in Ticino e come ottimizzare la promozione del tuo immobile tra Lugano e il Bellinzonese con consigli pratici.',
+    canonicalPath: '/articoli-frontaliere/verita-immobiliari-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Verità Immobiliari: strategie per il mercato ticinese",
+      "description": "Analisi sulle dinamiche del mercato immobiliare in Ticino e consigli pratici per proprietari e investitori che vogliono valorizzare i propri immobili.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/verita-immobiliari-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica di Lugano e del lago, simbolo del mercato immobiliare ticinese."
+      },
+      "datePublished": "2026-08-13T11:14:04+00:00",
+      "dateModified": "2026-08-13T11:14:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/verita-immobiliari-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

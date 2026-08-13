@@ -9895,6 +9895,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sick cash benefits, now the request can also be made online',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'The application for sick cash benefits can be completed and sent online through the platform of the Social Insurance Institute',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Online request for sickness cash benefits',
+    'blog.article.verita-immobiliari-ticino.title': 'Real Estate Truths: strategies for the Ticino market',
+    'blog.article.verita-immobiliari-ticino.excerpt': 'Analysis of the dynamics of the real estate market in Ticino and new perspectives for property management between Lugano and Bellinzonese.',
+    'blog.article.verita-immobiliari-ticino.imageAlt': 'Panoramic view of Lugano and the lake, symbol of the Ticino real estate market.',
 };
 
 export default blogMetaEn;

@@ -9897,6 +9897,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sussidi di cassa malati online',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'La demande d\'allocations d\'assurance-maladie peut être remplie et envoyée en ligne via la plateforme de l\'Institut des assurances sociales',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Demande en ligne de prestations de maladie',
+    'blog.article.verita-immobiliari-ticino.title': 'Vérités immobilières : stratégies pour le marché tessinois',
+    'blog.article.verita-immobiliari-ticino.excerpt': 'Analyse de la dynamique du marché immobilier au Tessin et nouvelles perspectives pour la gestion immobilière entre Lugano et Bellinzonese.',
+    'blog.article.verita-immobiliari-ticino.imageAlt': 'Vue panoramique de Lugano et du lac, symbole du marché immobilier tessinois.',
 };
 
 export default blogMetaFr;

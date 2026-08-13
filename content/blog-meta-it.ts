@@ -9896,6 +9896,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Sussidi di cassa malati, ora la richiesta si può fare anche online',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'La richiesta di sussidi di cassa malati può essere compilata e inviata online attraverso la piattaforma dell\'Istituto delle assicurazioni sociali',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Richiesta di sussidi di cassa malati online',
+    'blog.article.verita-immobiliari-ticino.title': 'Verità Immobiliari: strategie per il mercato ticinese',
+    'blog.article.verita-immobiliari-ticino.excerpt': 'Analisi sulle dinamiche del mercato immobiliare in Ticino e nuove prospettive per la gestione delle proprietà tra Lugano e il Bellinzonese.',
+    'blog.article.verita-immobiliari-ticino.imageAlt': 'Vista panoramica di Lugano e del lago, simbolo del mercato immobiliare ticinese.',
 };
 
 export default blogMetaIt;

@@ -9894,6 +9894,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.title': 'Krankenkassenzuschüsse, jetzt auch online anfordern',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.excerpt': 'Der Antrag auf Krankenkassenzuschüsse kann online über die Plattform der Sozialversicherungsanstalt ausgefüllt und eingereicht werden',
     'blog.article.sussidi-di-cassa-malati-or-la-richiesta-si-puo-fare-anche-online.imageAlt': 'Online-Antrag für Krankengeld',
+    'blog.article.verita-immobiliari-ticino.title': 'Immobilienwahrheiten: Strategien für den Tessiner Markt',
+    'blog.article.verita-immobiliari-ticino.excerpt': 'Analyse der Dynamik des Immobilienmarktes im Tessin und neue Perspektiven für die Verwaltung von Immobilien zwischen Lugano und Bellinzona.',
+    'blog.article.verita-immobiliari-ticino.imageAlt': 'Panoramablick auf Lugano und den See, Symbol des Immobilienmarktes im Tessin.',
 };
 
 export default blogMetaDe;
