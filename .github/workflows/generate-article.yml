@@ -469,6 +469,76 @@ jobs:
           echo "article=$produced section=$effective attempts=$tried/${#sections[@]}"
           exit 0
 
+      # ── VALIDARE PRIMA DI SCRIVERE (issue #267) ─────────────────────────────
+      #
+      # Questo e' il percorso di scrittura, ed e' l'unico punto in cui un corpo
+      # fabbricato puo' essere fermato PRIMA di esistere su `main`. La rete di
+      # sicurezza gemella in `publish-api.yml` ferma l'ANNUNCIO — nessun
+      # `repository_dispatch: articles-published`, nessuna superficie dati nuova
+      # — ma il commit sarebbe gia' su main, e lo `schedule` 2x/giorno di
+      # `sync-articles-sitemaps.yml` del sito potrebbe portarlo di la' comunque,
+      # in ritardo e senza che nessuno colleghi le due cose. Le due meta' non si
+      # sostituiscono: una impedisce di pubblicare, questa impedisce di scrivere.
+      #
+      # Il fatto che rende la coppia necessaria, misurato: `tests.yml` ha girato
+      # 0 volte su `main` nelle ultime 50 run (ha `push: branches-ignore:
+      # [main]`) mentre `main` riceve ~111 commit/giorno tutti su `content/**`
+      # dal push qui sotto. Il gate ignora main, la generazione scrive solo su
+      # main, e la guardia contro le allucinazioni — che conteneva gia' il
+      # pattern giusto — non e' mai stata eseguita sugli artefatti per cui
+      # esiste. Il 2026-08-11 un corpo con «LTL 1995» e' passato di qui e ha
+      # tenuto rosso `main` DEL SITO per ~13 ore, bloccando sei PR.
+      #
+      # LA CONDIZIONE: solo quando un articolo e' stato prodotto davvero. Una
+      # run che non scrive niente sotto content/** non ha niente da validare, e
+      # farla fallire su un difetto preesistente del corpus spegnerebbe la
+      # catena per un articolo che non ha generato lei.
+      #
+      # IL RIFIUTO E' OSSERVABILE, non silenzioso — la DoD di #267 lo chiede
+      # esplicitamente, perche' un articolo scartato in silenzio e' un articolo
+      # perso (#255). Tre canali, nessuno dei quali va cercato: `node --test`
+      # elenca gli offender per path nel log dello step; il job summary porta il
+      # verdetto in cima alla pagina della run; e la run finisce `failure`,
+      # quindi `scan-failed-runs.mjs` la raccoglie (evento `schedule`/`push` +
+      # `failure`, e `Generate Blog Article` non e' in `PR_GATE_WORKFLOWS`) e
+      # apre una «Workflow Failure».
+      #
+      # QUESTO STEP NON RI-SONDA GIT, di proposito, e non e' una rinuncia: c'e'
+      # UNA SOLA definizione di «articolo prodotto» in questo workflow — la
+      # `article_body_added()` dello step sopra — e
+      # `generate-article-chain.test.mjs` la tiene tale contando le occorrenze di
+      # `--diff-filter=A`. Due probe sono due nozioni che possono divergere, ed e'
+      # gia' costato una volta (il summary diceva «Generated: true» sulla run il
+      # cui commit diceva «no article generated»). Il file appena scritto e' gia'
+      # nel log, stampato da quella funzione come «article body added: …».
+      #
+      # NIENTE RIPARAZIONE EURISTICA, sempre per la DoD di #267: se una cifra e'
+      # inventata, riattribuirla a un ente vero fa passare il gate e PEGGIORA
+      # l'articolo. Qui si scarta e basta; la rigenerazione e' il run successivo.
+      - name: Guard — l'articolo generato non raggiunge main se viola le guardie
+        if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
+        env:
+          SECTION: ${{ steps.generate.outputs.section }}
+        run: |
+          set -uo pipefail
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Articolo RIFIUTATO prima del commit — sezione \`${SECTION:-?}\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la generazione."
+            echo "**Niente e' stato committato**: il corpo resta sul runner e sparisce con lui, \`main\` non lo vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con la riga \`article body added:\` dello step «Generate the article»:"
+            echo
+            echo "- se coincidono, il difetto e' **dell'articolo appena generato** e il rimedio e' la rigenerazione (il run successivo), non una modifica al gate;"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima che la generazione possa ripartire — finche' resta li', ogni run che produce un articolo muore qui."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       # Encode the 480w WebP thumbnail for the new hero. This step exists in the
       # main repo's generate-article.yml and was dropped in transport, so every
       # article generated here since the cutover has a hero and no thumbnail.

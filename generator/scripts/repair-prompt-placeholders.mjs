@@ -341,12 +341,39 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
 // Le FAQ marcate `__DROP_FAQ__` vanno rimosse come RIGA, non svuotate: una
 // chiave `faq` con un array vuoto verrebbe letta da ogPagesPlugin come FAQ
 // presente e malformata.
+//
+// ── FAULT ISOLATION, NON TRANSAZIONALITA' (issue #245 item 1) ────────────────
+//
+// Il rimedio ovvio — rendere questo passo transazionale e fare rollback se un
+// file lancia — e' impossibile e sarebbe DANNOSO. Impossibile perche' il passo
+// 2 ha gia' scritto su disco (`sweep()`, `fs.writeFileSync`) molto prima di
+// arrivare qui, quindi non c'e' nessuno stato pulito a cui tornare. Dannoso
+// perche' il rollback del solo post-processo lascerebbe il sentinella LETTERALE
+// — `'blog.article.X.faq': '__DROP_FAQ__'` — dentro un corpo pubblicato, cioe'
+// un difetto piu' grave della FAQ orfana che stava riparando: quel valore
+// arriva al render come testo della FAQ.
+//
+// La proprieta' che serve davvero c'e' gia' per costruzione: il passo e'
+// IDEMPOTENTE. La worklist non e' tenuta in memoria, e' ri-derivata dal disco a
+// ogni esecuzione (`walkBodies` + `src.includes('__DROP_FAQ__')`), quindi
+// rilanciare lo script dopo un errore riprende esattamente da dove si era
+// fermato senza toccare cio' che aveva gia' finito.
+//
+// Quello che mancava e' che un solo file imprevisto (permessi, encoding, file
+// sparito sotto i piedi fra la `readdirSync` e la `readFileSync`) faceva morire
+// il loop e lasciava TUTTI i file successivi col sentinella dentro. Ora l'errore
+// e' confinato al file che lo produce: si accumula in `problems` — che fa
+// uscire lo script non-zero in coda — e gli altri file vengono comunque puliti.
 if (!CHECK_ONLY) {
   for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
-    let src = fs.readFileSync(abs, 'utf-8');
-    if (!src.includes('__DROP_FAQ__')) continue;
-    src = src.replace(/\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'__DROP_FAQ__',?/g, '');
-    fs.writeFileSync(abs, src);
+    try {
+      let src = fs.readFileSync(abs, 'utf-8');
+      if (!src.includes('__DROP_FAQ__')) continue;
+      src = src.replace(/\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'__DROP_FAQ__',?/g, '');
+      fs.writeFileSync(abs, src);
+    } catch (err) {
+      problems.push(`${path.relative(ROOT, abs)}: rimozione della riga __DROP_FAQ__ fallita (${err.message}) — FILE SALTATO`);
+    }
   }
 }
 
@@ -394,35 +421,48 @@ function faqStateOf(abs) {
   return { hasFile: true, hasFaq };
 }
 
+// Stessa fault isolation del post-processo `__DROP_FAQ__` sopra, e per la
+// stessa ragione: e' questo il loop che #245 item 1 nomina per esteso. Un
+// singolo articolo che lancia — `faqStateOf()` legge quattro file per articolo,
+// e uno di quei quattro puo' sparire, essere illeggibile o non decodificare —
+// fermava il passo a meta', lasciando orfane tutte le traduzioni degli articoli
+// non ancora visitati. Il confinamento e' PER ARTICOLO: e' l'unita' su cui il
+// passo decide (`byLocale` mette in relazione i quattro locali fra loro), quindi
+// e' anche la piu' piccola unita' che si possa saltare senza produrre uno stato
+// a meta' fra un locale e l'altro.
 for (const dir of ['blog-body', 'blog-body-ch']) {
   const itDir = path.join(ROOT, 'content', dir, 'it');
   if (!fs.existsSync(itDir)) continue;
   for (const name of fs.readdirSync(itDir)) {
     if (!name.endsWith('.ts')) continue;
     const id = name.slice(0, -3);
-    const byLocale = Object.fromEntries(
-      LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name))]),
-    );
-    for (const locale of orphanFaqLocales(byLocale)) {
-      const rel = path.join('content', dir, locale, name);
-      const abs = path.join(ROOT, rel);
-      const src = fs.readFileSync(abs, 'utf-8');
-      // `g` su FAQ_LINE_RE fa si' che `replace` tolga OGNI occorrenza, non
-      // solo la prima: un file con due chiavi `.faq` (residuo di merge) le
-      // perde entrambe invece di lasciarne una orfana e live.
-      const dropped = [];
-      const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
-        dropped.push(raw);
-        return '';
-      });
-      if (next === src) {
-        residuals.push({ label: rel, id, field: 'faq', locale, value: '', reason: 'chiave faq presente ma non isolabile come riga' });
-        continue;
+    try {
+      const byLocale = Object.fromEntries(
+        LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name))]),
+      );
+      for (const locale of orphanFaqLocales(byLocale)) {
+        const rel = path.join('content', dir, locale, name);
+        const abs = path.join(ROOT, rel);
+        const src = fs.readFileSync(abs, 'utf-8');
+        // `g` su FAQ_LINE_RE fa si' che `replace` tolga OGNI occorrenza, non
+        // solo la prima: un file con due chiavi `.faq` (residuo di merge) le
+        // perde entrambe invece di lasciarne una orfana e live.
+        const dropped = [];
+        const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
+          dropped.push(raw);
+          return '';
+        });
+        if (next === src) {
+          residuals.push({ label: rel, id, field: 'faq', locale, value: '', reason: 'chiave faq presente ma non isolabile come riga' });
+          continue;
+        }
+        if (!CHECK_ONLY) fs.writeFileSync(abs, next);
+        total += dropped.length;
+        const how = dropped.length > 1 ? `faq-orfana rimossa (assente in it, ${dropped.length}×)` : 'faq-orfana rimossa (assente in it)';
+        changes.push({ rel, id, field: 'faq', locale, how, before: dropped[0], after: '(chiave rimossa)' });
       }
-      if (!CHECK_ONLY) fs.writeFileSync(abs, next);
-      total += dropped.length;
-      const how = dropped.length > 1 ? `faq-orfana rimossa (assente in it, ${dropped.length}×)` : 'faq-orfana rimossa (assente in it)';
-      changes.push({ rel, id, field: 'faq', locale, how, before: dropped[0], after: '(chiave rimossa)' });
+    } catch (err) {
+      problems.push(`${path.join('content', dir, '*', name)}: potatura delle faq orfane fallita (${err.message}) — ARTICOLO SALTATO`);
     }
   }
 }
@@ -480,8 +520,38 @@ if (residuals.length) {
   console.log(`\n⚠ RESIDUI — ${residuals.length} campi che questo script NON ha riparato:`);
   for (const r of residuals) console.log(`   ${r.label} [${r.field}] ${r.reason}\n      ${JSON.stringify(r.value)}`);
 }
-if (problems.length) {
-  console.error(`\n✖ ${problems.length} campi SALTATI (escape non round-trippabile):`);
-  for (const p of problems) console.error(`   ${p}`);
-  process.exit(1);
+
+// ── SENTINELLA: nessun `__DROP_FAQ__` puo' sopravvivere su disco ─────────────
+//
+// La meta' che rende utile la fault isolation sopra. Confinare l'errore al
+// singolo file evita che un imprevisto fermi la bonifica, ma da solo trasforma
+// un crash rumoroso in un'uscita SILENZIOSA con il sentinella ancora dentro un
+// corpo — e `__DROP_FAQ__` non e' testo neutro: e' il valore che il render
+// pubblicherebbe come testo della FAQ.
+//
+// Quindi la worklist si ri-deriva dal disco un'ultima volta (stessa sorgente di
+// verita' del passo, non un contatore tenuto in memoria: cio' che conta e' cosa
+// c'e' scritto, non cosa lo script crede di aver scritto) e qualunque
+// sopravvissuto fa uscire lo script non-zero. Vale anche in `--check`, dove il
+// passo non scrive: li' un sentinella su disco e' un residuo di un giro
+// precedente morto a meta', ed e' esattamente cio' che si vuole vedere.
+const dropFaqSurvivors = [];
+for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
+  try {
+    if (fs.readFileSync(abs, 'utf-8').includes('__DROP_FAQ__')) dropFaqSurvivors.push(path.relative(ROOT, abs));
+  } catch (err) {
+    problems.push(`${path.relative(ROOT, abs)}: rilettura per il controllo finale fallita (${err.message}) — sentinella NON verificato`);
+  }
 }
+if (dropFaqSurvivors.length) {
+  console.error(`\n✖ ${dropFaqSurvivors.length} file contengono ancora il sentinella __DROP_FAQ__ e verrebbero pubblicati cosi':`);
+  for (const rel of dropFaqSurvivors.slice(0, 20)) console.error(`   ${rel}`);
+  if (dropFaqSurvivors.length > 20) console.error(`   … e altri ${dropFaqSurvivors.length - 20}`);
+  console.error('   Rilancia lo script (e\' idempotente); se persiste, il file va riparato a mano PRIMA di pubblicare.');
+}
+
+if (problems.length) {
+  console.error(`\n✖ ${problems.length} campi/file SALTATI (escape non round-trippabile, o errore di I/O confinato):`);
+  for (const p of problems) console.error(`   ${p}`);
+}
+if (problems.length || dropFaqSurvivors.length) process.exit(1);

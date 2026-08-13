@@ -191,6 +191,59 @@ jobs:
           PREFLIGHT_CHANGED_FILES: ${{ steps.changed-bodies.outputs.changed-files }}
         run: node scripts/ci/check-blog-body-syntax.mjs
 
+      # ── LA RETE DI SICUREZZA CHE MANCAVA (issue #267, #245 item 2) ──────────
+      #
+      # Fino a qui gli articoli generati non passavano da NESSUNA guardia.
+      # Misurato il 2026-08-12: `tests.yml` ha girato 0 volte su `main` nelle
+      # ultime 50 run — ha `push: branches-ignore: [main]` — mentre `main`
+      # riceve ~111 commit/giorno, tutti su `content/**`, dal push diretto di
+      # `generate-article.yml`. Le due condizioni si annullano a vicenda: il
+      # gate ignora main, la generazione scrive solo su main.
+      #
+      # Il costo di quel buco non e' teorico. Il 2026-08-11 alle 21:42 la
+      # generazione ha prodotto un corpo con una legge inventata («LTL 1995»);
+      # alle 22:38 il sync l'ha portato sul sito, alle 22:45 `main` DEL SITO e'
+      # andato rosso su `article-fabrication-guard`, e da li' ogni PR del sito
+      # e' rimasta bloccata a cascata per ~13 ore — `pr-review-loop` gira solo
+      # su `tests` verde. Un singolo articolo su ~14.700 ha fermato il merge di
+      # un intero repo.
+      #
+      # PERCHE' QUI, e non togliendo `branches-ignore` da `tests.yml`. `tests`
+      # e' il trigger `workflow_run` sia di `pr-review-loop` sia di
+      # `auto-merge-on-lgtm`: 111 completamenti/giorno su main diventerebbero
+      # ~+333 run/giorno, 111 delle quali dispatch a vuoto del reviewer. Questo
+      # workflow invece gira GIA' su ogni push a `content/**` di main — lo step
+      # costa +0 run/giorno, solo i ~5s che le due suite impiegano davvero
+      # (misurato in locale: 4,5s per 71 test sull'intero corpus).
+      #
+      # PERCHE' PROPRIO QUESTE DUE SUITE. Sono le uniche del repo che non
+      # chiedono dipendenze — `node:test` piu' l'expect-shim locale — quindi
+      # girano prima di `npm`, prima delle credenziali, senza allungare il
+      # percorso critico. E hanno gia' dentro i PAVIMENTI anti-falso-verde
+      # (>3000 corpi IT, >10.000 file body, >50.000 campi): uno scan a vuoto su
+      # zero file non puo' passare per verde, che e' il modo piu' facile di
+      # trasformare questa rete in decorazione.
+      #
+      # PERCHE' PRIMA DELLE CREDENZIALI. Un preflight rosso deve fermare la
+      # pubblicazione senza aver toccato R2, Cloudflare o il PAT del sito — e
+      # soprattutto senza raggiungere «Notify the site», cioe' senza
+      # `repository_dispatch: articles-published`. E' quello a rendere il
+      # fallimento OSSERVABILE dal lato giusto: `publish-api` non e' in
+      # `PR_GATE_WORKFLOWS` di `scan-failed-runs.mjs`, quindi `push` + `failure`
+      # e' reportable e apre una «Workflow Failure» QUI. Prima, il primo
+      # osservatore era `main` del sito che andava rosso.
+      #
+      # DELIBERATO: un corpo cattivo congela l'intera superficie dati, non solo
+      # se stesso. E' la scelta giusta nel verso in cui sbaglia — dati fermi di
+      # qualche minuto contro un articolo fabbricato pubblicato e propagato agli
+      # shard. Il rimedio e' riparare il corpo (il run successivo ripubblica
+      # tutto), non allentare il gate.
+      - name: Preflight — le guardie sul corpus generato (fabrication + segnaposto)
+        run: |
+          node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs
+
       # Remote Config holds the R2 and Cloudflare credentials the edge push
       # below needs. Without these two steps that push would find no
       # credentials, warn, and skip — a silent no-op reported as success, which
