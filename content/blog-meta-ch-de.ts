@@ -2446,6 +2446,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.title': 'Die Finanzkontrolle kritisiert das BfS heftig',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.excerpt': 'Die Finanzkontrolle kritisiert das BfS heftig',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.imageAlt': 'Luganer See',
+    'blog.article.reno-siccita-logistica-svizzera.title': 'Dürre und Rhein: Auswirkungen auf die Schweizer Logistik',
+    'blog.article.reno-siccita-logistica-svizzera.excerpt': 'Durch den sinkenden Rheinwasserspiegel sinkt die Schiffslast. Die Schweizer Wirtschaft beobachtet die Situation zwischen steigenden Kosten und infrastrukturellen Herausforderungen.',
+    'blog.article.reno-siccita-logistica-svizzera.imageAlt': 'Niedriger Rheinpegel an einem Schweizer Industriehafen',
 };
 
 export default blogMetaChDe;

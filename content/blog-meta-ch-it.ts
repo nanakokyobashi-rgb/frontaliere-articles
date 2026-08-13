@@ -2446,6 +2446,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.title': 'Il Controllo delle finanze critica duramente l\'Ufsp',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.excerpt': 'Il Controllo delle finanze critica duramente l\'Ufsp',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.imageAlt': 'Immagine di una vista del Lago di Lugano',
+    'blog.article.reno-siccita-logistica-svizzera.title': 'Siccità e Reno: impatti sulla logistica elvetica',
+    'blog.article.reno-siccita-logistica-svizzera.excerpt': 'Il calo del livello delle acque del Reno riduce i carichi delle navi. L\'economia svizzera monitora la situazione tra costi in aumento e sfide infrastrutturali.',
+    'blog.article.reno-siccita-logistica-svizzera.imageAlt': 'Livelli del Reno bassi presso un porto industriale svizzero',
 };
 
 export default blogMetaChIt;

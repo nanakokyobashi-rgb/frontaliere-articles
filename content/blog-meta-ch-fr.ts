@@ -2446,6 +2446,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.title': 'Le Contrôle des finances critique sévèrement l\'OFSP',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.excerpt': 'Le Contrôle des finances critique sévèrement l\'OFSP',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.imageAlt': 'Vue de Lugano',
+    'blog.article.reno-siccita-logistica-svizzera.title': 'Sécheresse et Rhin : impacts sur la logistique suisse',
+    'blog.article.reno-siccita-logistica-svizzera.excerpt': 'La baisse du niveau des eaux du Rhin réduit les charges des navires. L\'économie suisse surveille la situation entre coûts croissants et défis infrastructurels.',
+    'blog.article.reno-siccita-logistica-svizzera.imageAlt': 'Niveaux bas du Rhin dans un port industriel suisse',
 };
 
 export default blogMetaChFr;

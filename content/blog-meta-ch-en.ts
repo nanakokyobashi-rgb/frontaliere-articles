@@ -2446,6 +2446,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.title': 'Financial Control harshly criticizes the Ufsp',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.excerpt': 'Financial Control harshly criticizes the Ufsp',
     'blog.article.il-controllo-delle-finanze-critica-duramente-l-ufsp.imageAlt': 'Lugano view',
+    'blog.article.reno-siccita-logistica-svizzera.title': 'Drought and Rhine: impacts on Swiss logistics',
+    'blog.article.reno-siccita-logistica-svizzera.excerpt': 'The falling water level of the Rhine reduces ship loads. The Swiss economy monitors the situation between rising costs and infrastructure challenges.',
+    'blog.article.reno-siccita-logistica-svizzera.imageAlt': 'Low Rhine river levels at a Swiss industrial port',
 };
 
 export default blogMetaChEn;
