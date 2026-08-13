@@ -9879,6 +9879,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.sussidi-cassa-malati-digitale.title': 'Subventions de caisse-maladie, maintenant la demande est également numérique',
     'blog.article.sussidi-cassa-malati-digitale.excerpt': 'La demande de réduction des primes d\'assurance-maladie (RIPAM) au Tessin peut désormais être également déposée en ligne.',
     'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Un frontalier se rapproche d\'un calculateur en ligne pour la demande de prestations de la caisse maladie.',
+    'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma : « La clause MFN nous met en difficulté »',
+    'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Les entreprises pharmaceutiques suisses freinent l\'arrivée de nouveaux médicaments par crainte de répercussions sur les prix aux États-Unis.',
+    'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'La politique américaine de réduire le prix des médicaments avec la clause MFN est également ressentie en Suisse.',
 };
 
 export default blogMetaFr;

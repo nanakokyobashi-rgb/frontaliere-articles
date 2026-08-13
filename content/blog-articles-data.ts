@@ -29613,6 +29613,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'interpharma-clausola-mfn-difficolta',
+ category: 'fiscale',
+ date: '2026-08-13T10:01:42.785Z',
+ image: '/images/blog/interpharma-clausola-mfn-difficolta.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

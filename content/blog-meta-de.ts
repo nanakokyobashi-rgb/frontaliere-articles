@@ -9876,6 +9876,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.sussidi-cassa-malati-digitale.title': 'Krankenkassen-Subventionen, jetzt ist der Antrag auch digital',
     'blog.article.sussidi-cassa-malati-digitale.excerpt': 'Der Antrag auf Prämienverbilligung der Krankenversicherung (RIPAM) im Tessin kann neu auch online gestellt werden.',
     'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Ein Frontalier sichert sich online bei der Antragstellung von Krankenkassenbeihilfen.',
+    'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: «Die MFN-Klausel bringt uns in Schwierigkeiten»',
+    'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Schweizer Pharmaunternehmen bremsen die Einführung neuer Medikamente aus Angst vor Preisauswirkungen in den USA.',
+    'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'Die US-Politik, die den Preis von Medikamenten mit der MFN-Klausel senken möchte, wird auch in der Schweiz spürbar.',
 };
 
 export default blogMetaDe;

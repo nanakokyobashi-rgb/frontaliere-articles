@@ -9878,6 +9878,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.sussidi-cassa-malati-digitale.title': 'Sussidi di cassa malati, ora la richiesta è anche digitale',
     'blog.article.sussidi-cassa-malati-digitale.excerpt': 'La richiesta per la riduzione dei premi dell\'assicurazione malattia (RIPAM) in Ticino può ora essere presentata anche online.',
     'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'Un frontaliere si avvicina al calcolatore online per la richiesta dei sussidi di cassa malati.',
+    'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: «La clausola MFN ci sta mettendo in difficoltà»',
+    'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Le aziende farmaceutiche svizzere frenano l\'arrivo di nuovi farmaci per timore di ripercussioni sui prezzi negli Stati Uniti.',
+    'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'La politica statunitense di abbassare il prezzo dei medicamenti con la clausola MFN si fa sentire anche in Svizzera.',
 };
 
 export default blogMetaIt;

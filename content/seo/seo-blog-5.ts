@@ -66995,6 +66995,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-interpharma-clausola-mfn-difficolta': {
+    title: 'Interpharma: «La clausola MFN ci sta mettendo in difficoltà»',
+    description: 'Le aziende farmaceutiche svizzere frenano l\'arrivo di nuovi farmaci per timore di ripercussioni sui prezzi negli Stati Uniti. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, interpharma, clausola, mettendo, difficoltà',
+    ogTitle: 'Interpharma: «La clausola MFN ci sta mettendo in difficoltà»',
+    ogDescription: 'Le aziende farmaceutiche svizzere frenano l\'arrivo di nuovi farmaci per timore di ripercussioni sui prezzi negli Stati Uniti.',
+    canonicalPath: '/articoli-frontaliere/interpharma-clausola-mfn-difficolta',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Interpharma: «La clausola MFN ci sta mettendo in difficoltà»",
+      "description": "Le aziende farmaceutiche svizzere frenano l'arrivo di nuovi farmaci per timore di ripercussioni sui prezzi negli Stati Uniti. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/interpharma-clausola-mfn-difficolta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La politica statunitense di abbassare il prezzo dei medicamenti con la clausola MFN si fa sentire anche in Svizzera."
+      },
+      "datePublished": "2026-08-13T10:01:42+00:00",
+      "dateModified": "2026-08-13T10:01:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/interpharma-clausola-mfn-difficolta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

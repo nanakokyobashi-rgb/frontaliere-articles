@@ -9877,6 +9877,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.sussidi-cassa-malati-digitale.title': 'Sick cash subsidies, now the request is also digital',
     'blog.article.sussidi-cassa-malati-digitale.excerpt': 'The application for the reduction of health insurance premiums (RIPAM) in Ticino can now also be submitted online.',
     'blog.article.sussidi-cassa-malati-digitale.imageAlt': 'A frontaliere approaches an online calculator for the application of sickness fund subsidies.',
+    'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: "The MFN clause is putting us in trouble"',
+    'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Swiss pharmaceutical companies are holding back the arrival of new drugs for fear of repercussions on prices in the United States.',
+    'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'The US policy of lowering the price of medications with the MFN clause is also felt in Switzerland.',
 };
 
 export default blogMetaEn;
