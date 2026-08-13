@@ -29211,7 +29211,7 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
         "url": `${BASE_URL}/images/blog/imposta-di-succesione-e-donazione-canton-zurigo-aliquote.webp`,
         "width": 1200,
         "height": 675,
-        "caption": "Immagine di un'immagine editoriale fotorealistica DSLR di una scena svizzera nazionale/cantonale pertinente al tema, che non sembri AI. Max 125 caratteri."
+        "caption": "Immagine editoriale relativa a: Imposte di successione e donazione nel Cantone di Zurigo"
       },
       "datePublished": "2026-08-12T04:05:27+00:00",
       "dateModified": "2026-08-12T04:05:27+00:00",
