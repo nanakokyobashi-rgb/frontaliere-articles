@@ -9887,6 +9887,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-cassa-disoccupazione.title': 'Cassa Disoccupazione: nuove norme per i frontalieri',
     'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Nuove regole per i frontalieri in materia di cassa disoccupazione',
     'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontaliere in una situazione di crisi economica',
+    'blog.article.strumenti-controllo-salari-ticino.title': 'Verifica il tuo salario: strumenti utili per i frontalieri',
+    'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Scopri come utilizzare i calcolatori salariali di Unia e dell\'USS per confrontare la tua retribuzione con i parametri del mercato svizzero e dei CCL.',
+    'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Veduta panoramica di Lugano, centro economico del Canton Ticino.',
 };
 
 export default blogMetaIt;

@@ -9888,6 +9888,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.frontalieri-cassa-disoccupazione.title': 'Caisse de chômage : nouvelles règles pour les frontaliers',
     'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Nouvelles règles pour les frontaliers en matière de caisse de chômage',
     'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier dans une situation de crise économique',
+    'blog.article.strumenti-controllo-salari-ticino.title': 'Vérifiez votre salaire : outils utiles pour les frontaliers',
+    'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Découvrez comment utiliser les calculateurs de salaire d\'Unia et de l\'USS pour comparer votre rémunération avec les paramètres du marché suisse et des CCT.',
+    'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Vue panoramique de Lugano, centre économique du canton du Tessin.',
 };
 
 export default blogMetaFr;

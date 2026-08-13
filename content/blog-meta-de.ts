@@ -9885,6 +9885,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-cassa-disoccupazione.title': 'Arbeitslosenkasse: Neue Regeln für Grenzgänger',
     'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Neue Regeln für Grenzgänger in Bezug auf die Arbeitslosenkasse',
     'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier in einer wirtschaftlichen Krise',
+    'blog.article.strumenti-controllo-salari-ticino.title': 'Überprüfen Sie Ihren Lohn: Nützliche Tools für Grenzgänger',
+    'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Erfahren Sie, wie Sie mit den Lohnrechnern der Unia und des SGB Ihre Vergütung mit den Parametern des Schweizer Marktes und der GAV vergleichen können.',
+    'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Panoramablick auf Lugano, das Wirtschaftszentrum des Kantons Tessin.',
 };
 
 export default blogMetaDe;

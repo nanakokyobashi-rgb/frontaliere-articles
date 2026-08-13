@@ -9886,6 +9886,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.frontalieri-cassa-disoccupazione.title': 'Unemployment Fund: new rules for border workers',
     'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'New rules for frontier workers regarding unemployment funds',
     'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier in a situation of economic crisis',
+    'blog.article.strumenti-controllo-salari-ticino.title': 'Check your salary: useful tools for border workers',
+    'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Learn how to use Unia and USS salary calculators to compare your pay with Swiss market and CCL parameters.',
+    'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Panoramic view of Lugano, the economic center of Canton Ticino.',
 };
 
 export default blogMetaEn;

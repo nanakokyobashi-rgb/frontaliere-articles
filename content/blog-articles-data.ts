@@ -29640,6 +29640,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'strumenti-controllo-salari-ticino',
+ category: 'pratico',
+ date: '2026-08-13T10:24:11.394Z',
+ image: '/images/blog/strumenti-controllo-salari-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
