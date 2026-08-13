@@ -2503,6 +2503,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.title': 'La sécheresse met à rude épreuve les cours d\'eau suisses',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.excerpt': 'Onze stations de mesure ont atteint un plus bas historique en juillet',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.imageAlt': 'Le lac de Lugano en période de sécheresse',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Indice des prix à la production et à l\'importation : baisse de 0,1 %',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'L\'UST signale une baisse des prix à la production et à l\'importation en juillet 2026, tirée par les baisses de pétrole et de gaz naturel.',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Panorama urbain de Lugano par une journée ensoleillée avec des bâtiments financiers.',
 };
 
 export default blogMetaChFr;

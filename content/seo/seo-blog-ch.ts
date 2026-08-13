@@ -32426,6 +32426,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-prezzi-produzione-importazione-luglio-2026': {
+    title: 'Indice prezzi produzione e importazione: calo dello 0,1%',
+    description: 'L\'UST segnala un calo dello 0,1% dell\'indice dei prezzi alla produzione e all\'importazione a luglio 2026. Analisi dei dati e impatto sul mercato svizzero.',
+    keywords: 'frontalieri, ticino, svizzera, italia, indice, prezzi, produzione, importazione',
+    ogTitle: 'Indice prezzi produzione e importazione: calo dello 0,1%',
+    ogDescription: 'L\'UST comunica una flessione dei prezzi alla produzione e all\'importazione nel mese di luglio 2026, trainata dai ribassi di petrolio e gas naturale.',
+    canonicalPath: '/articoli-svizzera/prezzi-produzione-importazione-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indice prezzi produzione e importazione: calo dello 0,1%",
+      "description": "L'UST segnala un calo dello 0,1% dell'indice dei prezzi alla produzione e all'importazione a luglio 2026. Analisi dei dati e impatto sul mercato svizzero.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/prezzi-produzione-importazione-luglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama urbano di Lugano in una giornata di sole con edifici finanziari."
+      },
+      "datePublished": "2026-08-13T09:47:47+00:00",
+      "dateModified": "2026-08-13T09:47:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/prezzi-produzione-importazione-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

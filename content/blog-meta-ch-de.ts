@@ -2503,6 +2503,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.title': 'Trockenheit belastet die Schweizer Fliessgewässer',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.excerpt': 'Elf Messstationen erreichten im Juli ein Allzeittief',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.imageAlt': 'Der See von Lugano bei Dürre',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Herstellungs- und Importpreisindex: Rückgang um 0,1%',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'Das BfS meldet einen Rückgang der Produktions- und Importpreise im Juli 2026, angetrieben durch die Rückgänge bei Öl und Erdgas.',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Stadtpanorama von Lugano an einem sonnigen Tag mit Finanzgebäuden.',
 };
 
 export default blogMetaChDe;

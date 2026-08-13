@@ -2503,6 +2503,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.title': 'Drought puts a strain on Swiss waterways',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.excerpt': 'Eleven measuring stations reached an all-time low in July',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.imageAlt': 'The lake of Lugano with drought',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Production and import price index: 0.1% decrease',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'The UST reports a fall in production and import prices in July 2026, driven by declines in oil and natural gas.',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Urban panorama of Lugano on a sunny day with financial buildings.',
 };
 
 export default blogMetaChEn;

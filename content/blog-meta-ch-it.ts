@@ -2503,6 +2503,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.title': 'La siccità mette a dura prova i corsi d\'acqua svizzeri',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.excerpt': 'Undici stazioni di misurazione hanno raggiunto un minimo storico in luglio',
     'blog.article.la-siccit-mette-a-dura-prova-i-corsi-dacqua-svizzeri.imageAlt': 'Il lago di Lugano con la siccità',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Indice prezzi produzione e importazione: calo dello 0,1%',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'L\'UST comunica una flessione dei prezzi alla produzione e all\'importazione nel mese di luglio 2026, trainata dai ribassi di petrolio e gas naturale.',
+    'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Panorama urbano di Lugano in una giornata di sole con edifici finanziari.',
 };
 
 export default blogMetaChIt;
