@@ -269,7 +269,22 @@ export function detectTruncation(text, opts = {}) {
   const trimmed = text.trimEnd();
   const lastLine = trimmed.split('\n').filter((l) => l.trim()).pop() || '';
   const isStructural = /^\s*([|#\-*>]|\d+\.)/.test(lastLine);
-  const isAttribution = /^\s*\*?\s*(fonte|source|quelle)\s*:/i.test(lastLine);
+  // A "📊 *Fonte: …*"-style footer routinely opens on an emoji before the
+  // asterisk ("📊 *Dati: AFC/ESTV, …*", frontaliere-pensione-complementare-
+  // terzo-pilastro), which the `^` anchor below cannot see past — strip it
+  // first. "Dati"/"Data"/"Daten"/"Données" are this same footer's word for
+  // "Fonte"/"Source"/"Quelle" in the article's own locale (translations of
+  // one generated body, not independent prose), so they carry the same
+  // reference-apparatus meaning and must be exempted identically.
+  //
+  // "Dati"/"Data" are common Italian/German words, so a bare `parola:` prefix
+  // is not enough to identify the footer — "Data: 15 marzo 2024, il Consiglio
+  // federale ha approvato…" is leaked-scaffolding prose, not a source line,
+  // and must still be flagged. The footer is always wrapped in a single
+  // italic span end to end ("*Dati: AFC/ESTV, …*"), so require both the
+  // opening AND closing asterisk to anchor on that shape specifically.
+  const attributionLine = lastLine.replace(/^\s*[\p{Extended_Pictographic}️]+\s*/u, '');
+  const isAttribution = /^\*\s*(fonte|source|quelle|dati|data|daten|données)\s*:.*\*\s*$/i.test(attributionLine);
   // A markdown footnote entry closes on the back-reference glyph "↩" and carries
   // no sentence punctuation of its own. Same call as `isAttribution`: the line is
   // reference apparatus, not prose, so its ending says nothing about truncation.
@@ -1042,6 +1057,7 @@ export const FABRICATED_INSTITUTION_ACRONYMS = new Set([
   'UEF',      // "Ufficio federale delle Entrate" → AFC/ESTV
   'UFEF',     // "Ufficio federale delle finanze" → AFF/EFV
   'UQJ',      // "Ufficio federale delle questioni giuridiche" → UFG/BJ
+  'UJF',      // same invention, letters transposed (#5661) → UFG/BJ
   'UJG',      // same invention, different acronym → UFG/BJ
   'UVMS',     // "Ufficio federale per la migrazione e il soggiorno" → SEM
   'UFIAI',    // "Ufficio federale per l'immigrazione e l'integrazione" → SEM
@@ -1050,6 +1066,7 @@ export const FABRICATED_INSTITUTION_ACRONYMS = new Set([
   'UVAS',     // "Ufficio federale delle assicurazioni sociali" → UFAS/BSV
   'UAS',      // same invention, different acronym → UFAS/BSV
   'UVA',      // same invention, different acronym → UFAS/BSV
+  'UAFS',     // same invention (letters transposed), same body → UFAS/BSV
   'UVSS',     // "Ufficio federale dei servizi sociali" → UFAS/BSV
   'UFP',      // "Ufficio federale delle pensioni" → UFAS/BSV
   'USVP',     // "Ufficio federale per la sanità pubblica" → UFSP/BAG
@@ -1067,6 +1084,7 @@ export const FABRICATED_INSTITUTION_ACRONYMS = new Set([
   'UVTTB',    // "Ufficio federale dei trasporti, ticche e brevetti" → UFT/BAV
   'USGC',     // "Ufficio di Stato per la Gestione dei Conti" — no such body
   'IUSM',     // "Istituto Universitario Svizzero di Santa Maria della Versa" — no such body
+  'OFOS',     // "Ufficio federale della svizzera" (#5661) — not a real office name, no such body
 
   // Invented federal departments. The Swiss federal departments are a closed
   // set of seven, all already in the allowlist (DFI, DFGP, DFF, DFAE, DDPS,
@@ -1081,6 +1099,7 @@ export const FABRICATED_INSTITUTION_ACRONYMS = new Set([
   'DSPSS',    // "Dipartimento federale per la sanità pubblica e la protezione sociale" → DFI
   'DIJ',      // "Dipartimento federale dell'istruzione e della gioventù" → DEFR
   'UGCI',     // "Ufficio del Governo Confederale per la Svizzera italiana" — no such body
+  'UDD',      // "Ufficio delle dogane e dei dazi" → AFD/UDSC/BAZG
 
   // Invented cantonal offices. Ticino's real ones (URC, USTAT, SPAAS, UPAAI,
   // IAS, IFC …) are in the allowlist above.

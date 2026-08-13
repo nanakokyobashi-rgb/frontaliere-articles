@@ -274,11 +274,71 @@ const DECLARED_ABSENT = {
     kind: 'site-only',
     reason: 'Cronaca di un caso del sito che motiva l\'euristica di questo modulo. Descrittiva.',
   },
-  'scripts/ci/close-recovered-failure-issues.mjs :: persist-job-stats.yml': {
+  // NB: la voce `persist-job-stats.yml` di questo stesso file e' stata rimossa nel
+  // riallineamento del 2026-08-14 (issue #234): il sito ha riscritto quel docstring
+  // (#5437 — i tre workflow costruiscono ora il titolo da `${{ github.workflow }}`),
+  // e la citazione non esiste piu'. Il test «nessuna dichiarazione morta» l'ha vista.
+  'scripts/ci/close-recovered-failure-issues.mjs :: scripts/ci/failure-issue-inventory.mjs': {
     kind: 'site-only',
     reason:
-      'Indica dove una fix andrebbe fatta («belongs in persist-job-stats.yml, not here»): ' +
-      'workflow del sito, e la frase e\' una delega, non una dipendenza di questo script.',
+      'Sostituisce la citazione di `persist-job-stats.yml` che il sito ha riscritto con #5437. ' +
+      'Il docstring dice che il conteggio dei workflow dal titolo non risolvibile e\' ora ' +
+      'MISURATO da `node scripts/ci/failure-issue-inventory.mjs --json` e fissato come ' +
+      'baseline shrink-only in `tests/failure-issue-closers.test.ts`: due strumenti del SITO, ' +
+      'entrambi assenti qui. La citazione e\' descrittiva — questo reconciler non invoca ' +
+      'l\'inventario, ne\' legge quella baseline: racconta come il sito ha chiuso la stessa ' +
+      'domanda. Nota per chi porta: il baseline citato e\' EMPTY, quindi non c\'e\' un dato ' +
+      'da replicare qui, solo una misura da rifare se un giorno servisse.',
+  },
+  'scripts/ci/followup-drainer.mjs :: compress-contract-docs.yml': {
+    kind: 'site-only',
+    reason:
+      'L\'UNICA delle sei arrivate col riallineamento #234 che non sia prosa: qui sotto c\'e\' ' +
+      'codice vivo, `detectCompressContractDocsRatchet(title)`, che confronta il titolo con la ' +
+      'costante letterale `COMPRESS_CONTRACT_DOCS_TITLE` per esentare quella issue dal ' +
+      'promote/age-out. Il workflow che quel titolo lo EMETTE sta solo sul sito, quindi qui il ' +
+      'detector non matcha mai e resta inerte. Dichiarato `site-only` e non lasciato scoperto ' +
+      'perche\' la domanda del guard («qualcosa qui DIPENDE della sua esistenza?») ha risposta ' +
+      'NO in senso stretto: un filtro che non matcha lascia la issue al trattamento normale, ' +
+      'che e\' esattamente il comportamento del corpus prima di questa copia — non si perde ' +
+      'nessuna protezione, perche\' non c\'e\' niente da proteggere. Se un giorno questo repo ' +
+      'adottasse il ratchet sui propri contract doc (AGENTS.md/REVIEW.md/ISSUES.md/FOLLOWUP.md ' +
+      'ci sono tutti), il workflow va portato E questa voce va tolta.',
+  },
+  'scripts/ci/mint-app-token.mjs :: .github/workflows/hydrated-article-parity.yml': {
+    kind: 'site-only',
+    reason:
+      'Citazione dentro un messaggio di errore riportato VERBATIM: il `remote rejected` della ' +
+      'issue #5280 del sito, che nomina il workflow che il push dell\'App non poteva scrivere. ' +
+      'E\' cronaca dell\'incidente che motiva `APP_TOKEN_WORKFLOWS`, non un referente. Su questo ' +
+      'repo l\'intero meccanismo e\' inerte per un\'altra ragione ancora: non c\'e\' GitHub App, ' +
+      'lo script warn-exit, e i workflow qui spingono con GITHUB_PAT_NANAKO.',
+  },
+  'scripts/ci/scan-job-timeouts.mjs :: deploy-publish.yml': {
+    kind: 'site-only',
+    reason:
+      'Cronaca della run 31672320271 del sito (#5773/#5772/#5771), che motiva la firma B ' +
+      '(host-kill) di questo scanner: la riga spiega perche\' il leg morto era invisibile, ' +
+      'visto che `deploy-publish.yml` e\' gated su `workflow_run.conclusion == success`. ' +
+      'Descrittiva: la firma B e\' generica e non conosce nessun workflow per nome. La catena ' +
+      'di pubblicazione di questo repo e\' `publish-api.yml`, che non c\'entra con quella.',
+  },
+  'scripts/lib/workflow-scope-detect.mjs :: .github/workflows/content-grounding-audit.yml': {
+    kind: 'example',
+    reason:
+      'NON e\' `site-only`: verificato, quel path non esiste nemmeno sul sito (404 su main). ' +
+      'E\' una bullet copiata verbatim dal CORPO della issue #5595 come fixture del difetto ' +
+      '— un workflow soltanto PIANIFICATO, e la bullet stessa dice «SE il processo risiede ' +
+      'nel repository». Un path immaginato in un piano, citato per mostrare la forma di testo ' +
+      'su cui `CODE_PATH_RE` sbagliava: non deve risolvere da nessuna parte.',
+  },
+  'scripts/lib/workflow-scope-detect.mjs :: .github/workflows/post-deploy-validate-dist.yml': {
+    kind: 'site-only',
+    reason:
+      'Fixture citata per delimitare cio\' che #5595 NON ha cambiato: la issue #1607 del sito ' +
+      '(«in `.github/workflows/post-deploy-validate-dist.yml`, allargare il guard») resta il ' +
+      'caso che deve continuare a bloccare. Il workflow esiste sul sito e li\' e\' coperto da ' +
+      'un test; qui la citazione e\' descrittiva e il rilevatore resta repo-agnostico.',
   },
   'scripts/lib/github-issue-creator.mjs :: orchestrate-crawlers.yml': {
     kind: 'site-only',

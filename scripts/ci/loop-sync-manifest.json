@@ -163,8 +163,8 @@
       "path": "scripts/ci/check-workflows-scope.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4e9cdf43a03efb7e",
-        "corpus": "4e9cdf43a03efb7e",
+        "site": "459a67139071d1ef",
+        "corpus": "459a67139071d1ef",
         "alignedAt": "2026-08-07"
       }
     },
@@ -208,8 +208,8 @@
       "path": "scripts/ci/mint-app-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "74fcea5905fe2b70",
-        "corpus": "74fcea5905fe2b70",
+        "site": "67a3c95f72f9029f",
+        "corpus": "67a3c95f72f9029f",
         "alignedAt": "2026-08-07"
       }
     },
@@ -244,8 +244,8 @@
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0a14e92c9b7e83c3",
-        "corpus": "0a14e92c9b7e83c3",
+        "site": "9685e6f3b05b27af",
+        "corpus": "9685e6f3b05b27af",
         "alignedAt": "2026-08-09"
       }
     },
@@ -253,8 +253,8 @@
       "path": "scripts/ci/lib/prComments.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "69363f2f81925e6b",
-        "corpus": "69363f2f81925e6b",
+        "site": "d704b6847ba24f8d",
+        "corpus": "d704b6847ba24f8d",
         "alignedAt": "2026-08-07"
       }
     },
@@ -271,8 +271,8 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "a21b17334add07fc",
-        "corpus": "a21b17334add07fc",
+        "site": "391784db7fd2712d",
+        "corpus": "391784db7fd2712d",
         "alignedAt": "2026-08-09"
       }
     },
@@ -280,8 +280,8 @@
       "path": "scripts/lib/pr-body-closes-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "1896ec1f1c286bb1",
-        "corpus": "1896ec1f1c286bb1",
+        "site": "217cfab9469cfe03",
+        "corpus": "217cfab9469cfe03",
         "alignedAt": "2026-08-07"
       }
     },
@@ -308,8 +308,8 @@
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "82956457a60d14b2",
-        "corpus": "82956457a60d14b2",
+        "site": "4f079653103adbf2",
+        "corpus": "4f079653103adbf2",
         "alignedAt": "2026-08-07"
       }
     },
@@ -437,8 +437,8 @@
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "985a3c299fa2753a",
-        "corpus": "985a3c299fa2753a",
+        "site": "50b83bd5c3628dc8",
+        "corpus": "50b83bd5c3628dc8",
         "alignedAt": "2026-08-07"
       }
     },
@@ -506,8 +506,8 @@
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "b849f695a95955ba",
-        "corpus": "b849f695a95955ba",
+        "site": "7599bdce6d0efcfb",
+        "corpus": "7599bdce6d0efcfb",
         "alignedAt": "2026-08-07"
       }
     },
@@ -533,8 +533,8 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cb74e3305444dac5",
-        "corpus": "cb74e3305444dac5",
+        "site": "da01199e1c4d265c",
+        "corpus": "da01199e1c4d265c",
         "alignedAt": "2026-08-07"
       }
     },
@@ -808,8 +808,8 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8b022bd8bcb08a44",
-        "corpus": "8b022bd8bcb08a44",
+        "site": "e0dfd3f48748cc14",
+        "corpus": "e0dfd3f48748cc14",
         "alignedAt": "2026-08-07"
       }
     },
@@ -1322,8 +1322,8 @@
       "path": "scripts/lib/upload-cdn-file.sh",
       "mode": "identical",
       "baseline": {
-        "site": "61e284495c142198",
-        "corpus": "61e284495c142198",
+        "site": "b77a196ac412dc13",
+        "corpus": "b77a196ac412dc13",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1332,8 +1332,8 @@
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "404f6338e70d813a",
-        "corpus": "404f6338e70d813a",
+        "site": "abf19f0cc3dff104",
+        "corpus": "abf19f0cc3dff104",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1372,8 +1372,8 @@
       "sitePath": "scripts/lib/article-factuality-gates.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "3adad2e431042688",
-        "corpus": "3adad2e431042688",
+        "site": "0ce4cf3812d58065",
+        "corpus": "0ce4cf3812d58065",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1402,8 +1402,8 @@
       "sitePath": "scripts/lib/article-sanitizers.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f6b2ff0506dbf434",
-        "corpus": "f6b2ff0506dbf434",
+        "site": "642841250cedfe56",
+        "corpus": "642841250cedfe56",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1696,8 +1696,8 @@
       "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "f8d4b6be414dbfe5",
-        "corpus": "f8d4b6be414dbfe5",
+        "site": "8a321b805dc719c3",
+        "corpus": "8a321b805dc719c3",
         "alignedAt": "2026-08-09"
       }
     },
@@ -1756,8 +1756,8 @@
       "sitePath": "scripts/lib/free-translate.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "eb07dcf3a4b0dc6d",
-        "corpus": "eb07dcf3a4b0dc6d",
+        "site": "aeaa602722dd062f",
+        "corpus": "aeaa602722dd062f",
         "alignedAt": "2026-08-09"
       }
     },
@@ -2078,8 +2078,8 @@
       "sitePath": "scripts/lib/translation-glossary.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "443eeda27c3a7f1f",
-        "corpus": "443eeda27c3a7f1f",
+        "site": "e637abb68d4eda7e",
+        "corpus": "e637abb68d4eda7e",
         "alignedAt": "2026-08-09"
       }
     },

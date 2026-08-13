@@ -82,6 +82,12 @@ const RECURRENCE_MARKER = '🔁'; // prefixes every recurrence comment we post
 // routable per-crawler issue. Nobody ever has to close the ledger.
 const TRANSIENT_LEDGER_TITLE = 'Crawler transient failures (rolling ledger)';
 const LEDGER_KEY_PREFIX = 'transient-key:'; // machine-readable per-crawler key in each ledger comment
+// Counter issue: never eligible for followup-drainer's age-out close (#5615).
+// Without this, a stretch of healthy crawlers — no sub-threshold comments to
+// refresh `updatedAt` — makes the ledger look old+idle and the drainer closes
+// it, resetting every in-progress streak. Checked in isAgeOutEligible
+// (scripts/ci/followup-drainer.mjs); keep the literal in sync.
+const LBL_NO_AGE_OUT = 'agent:no-age-out';
 
 /**
  * Run `gh` with explicit args. Returns trimmed stdout, or null on failure.
@@ -249,6 +255,51 @@ function findRecentlyClosedIssueByTitlePrefix(fullTitle, withinHours) {
   return matches[0] || null;
 }
 
+// `gh api` resolves the literal placeholders `{owner}/{repo}` from the cwd's
+// git remote; GH_REPO (when set) must win over that auto-detection, same as
+// repoFlag() does for `gh issue`/`gh pr`.
+function apiRepoPath(suffix) {
+  const repo = process.env.GH_REPO;
+  return repo ? `repos/${repo}${suffix}` : `repos/{owner}/{repo}${suffix}`;
+}
+
+/**
+ * The commit SHA of the event that most recently CLOSED an issue (issue #5539).
+ * GitHub's issue-events API records a `commit_id` on a `closed` event only when
+ * the close happened via a commit/PR merge carrying a closing keyword — exactly
+ * the case here (the fix PR's `Closes #N`). Returns null on any degradation
+ * (no such event, e.g. manually closed; API error; malformed JSON) so the
+ * caller falls back to the pre-#5539 behaviour (reopen unconditionally).
+ */
+function findClosingCommitSha(issueNumber) {
+  const out = gh([
+    'api', apiRepoPath(`/issues/${issueNumber}/events`), '--paginate',
+    '--jq', '[.[] | select(.event == "closed" and .commit_id != null) | .commit_id] | last',
+  ], { allowFailure: true });
+  if (!out) return null;
+  const sha = out.trim();
+  return sha && sha !== 'null' ? sha : null;
+}
+
+/**
+ * True when `earlierSha` is an ANCESTOR of `laterSha` — i.e. a build built at
+ * `earlierSha` cannot possibly contain whatever landed at `laterSha`. Used to
+ * tell "the fix predates this failing build" (latency, not a real recurrence)
+ * apart from "this build already has the fix and still failed" (real
+ * recurrence). `gh compare base...head` returns `status: "ahead"` exactly when
+ * base is an ancestor of head (fast-forwardable) — the same check
+ * `gh api .../compare/<buildSha>...<closingSha>` from the issue body.
+ * Fails CLOSED on any error/identical/diverged/unknown commit (never claims
+ * staleness it can't prove), so the caller falls back to reopening as before.
+ */
+function isAncestorCommit(earlierSha, laterSha) {
+  if (!earlierSha || !laterSha || earlierSha === laterSha) return false;
+  const out = gh([
+    'api', apiRepoPath(`/compare/${earlierSha}...${laterSha}`), '--jq', '.status',
+  ], { allowFailure: true });
+  return out?.trim() === 'ahead';
+}
+
 /**
  * Count failure events recorded on an issue within the rolling window. An
  * "event" is the issue's own creation plus every `🔁`-marked recurrence comment
@@ -316,7 +367,7 @@ function findOrCreateTransientLedger() {
   const byTitle = exactTitle(searchIssuesByTitlePrefix(TRANSIENT_LEDGER_TITLE, 'open'));
   if (byTitle) return byTitle.number;
 
-  ensureLabelsExist([CRAWLER_TRANSIENT_LABEL, PRIORITY_LABEL[4]]);
+  ensureLabelsExist([CRAWLER_TRANSIENT_LABEL, PRIORITY_LABEL[4], LBL_NO_AGE_OUT]);
   const body = [
     'Rolling log of **sub-threshold** crawler failures.',
     '',
@@ -330,6 +381,8 @@ function findOrCreateTransientLedger() {
     'routable issue at full priority — that is the signal worth acting on.',
     '',
     '**Leave this issue open.** It is the counter; closing it resets every streak.',
+    `The \`${LBL_NO_AGE_OUT}\` label keeps followup-drainer's age-out close from`,
+    'doing that automatically during a healthy stretch.',
   ].join('\n');
   const url = gh([
     'issue', 'create',
@@ -337,6 +390,7 @@ function findOrCreateTransientLedger() {
     '--body', body,
     '--label', CRAWLER_TRANSIENT_LABEL,
     '--label', PRIORITY_LABEL[4],
+    '--label', LBL_NO_AGE_OUT,
     ...repoFlag(),
   ], { allowFailure: true });
   if (!url) return null;
@@ -500,6 +554,15 @@ export async function createGithubIssue({
   // have been auto-closed on a green run and then flaps red again. CLI:
   // --reopen-within-hours N. Default 0 = disabled (legacy behaviour preserved).
   reopenWithinHours = 0,
+  // Commit the CURRENT run actually validated (e.g. `deploy_ref` for a
+  // post-deploy validation triggered by workflow_run, NOT `github.sha`).
+  // Optional — only reporters that can tell "build commit" apart from "the run
+  // that observed it" have one to give. When present, the reopen path below
+  // uses it to distinguish "the same broken build observed twice" (a real
+  // recurrence) from "a stale build validated again inside the deploy-latency
+  // window, before a build containing the fix could run" (issue #5539: NOT a
+  // recurrence — the reopener was reporting deploy latency as regression).
+  buildSha = null,
   // Consecutive-failure gate. When > 0, the first (threshold-1) failures within
   // the rolling window land as a low-priority `crawler-transient` breadcrumb
   // instead of the caller's priority; only the Nth failure escalates. Auto-set
@@ -644,6 +707,23 @@ export async function createGithubIssue({
   if (reopenWithinHours > 0) {
     const recentlyClosed = findRecentlyClosedIssueByTitlePrefix(title, reopenWithinHours);
     if (recentlyClosed) {
+      // Deploy-latency guard (#5539): a build started BEFORE the fix that closed
+      // this issue merged cannot possibly contain it — a validation failing on
+      // that stale build is the same pre-fix breakage observed again, not a
+      // recurrence. Only checked when the caller can supply buildSha; degrades
+      // to the pre-#5539 unconditional reopen on any lookup failure.
+      if (buildSha) {
+        const closingSha = findClosingCommitSha(recentlyClosed.number);
+        if (closingSha && isAncestorCommit(buildSha, closingSha)) {
+          gh([
+            'issue', 'comment', String(recentlyClosed.number),
+            '--body', `⏳ Build \`${buildSha}\` precede la fix (commit \`${closingSha}\`) che ha chiuso questa issue — è latenza del deploy dentro la finestra post-merge, non una ricorrenza. In attesa di una build che contenga la fix.\n\n${body}`,
+            ...repoFlag(),
+          ], { allowFailure: true });
+          console.log(`[github-issue-creator] Stale build ${buildSha} predates closing commit ${closingSha} on #${recentlyClosed.number} — not reopening (deploy latency).`);
+          return { number: recentlyClosed.number, title: recentlyClosed.title, url: recentlyClosed.url, staleBuild: true };
+        }
+      }
       const reopened = gh(
         ['issue', 'reopen', String(recentlyClosed.number), ...repoFlag()],
         { allowFailure: true },
