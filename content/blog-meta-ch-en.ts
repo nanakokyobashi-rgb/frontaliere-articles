@@ -2557,6 +2557,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AVS and complementary services in Canton Bern',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'a view of Lake Lugano',
+    'blog.article.avviare-attivita-canton-berna.title': 'Starting a business in the Canton of Bern: a guide to procedures',
+    'blog.article.avviare-attivita-canton-berna.excerpt': 'What it takes to open a company in the Canton of Bern: choice of legal form, registration in the commercial register and essential insurance obligations.',
+    'blog.article.avviare-attivita-canton-berna.imageAlt': 'Modern office in a Swiss city with panoramic view',
 };
 
 export default blogMetaChEn;

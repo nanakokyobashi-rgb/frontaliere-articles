@@ -2557,6 +2557,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AVS e prestazioni complementari nel Cantone Berna',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell\'AVS, ma la fonte non fornisce informazioni specifiche.',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'una vista del lago di Lugano',
+    'blog.article.avviare-attivita-canton-berna.title': 'Avviare un\'attività nel Canton Berna: guida alle procedure',
+    'blog.article.avviare-attivita-canton-berna.excerpt': 'Cosa serve per aprire una ditta nel Canton Berna: scelta della forma giuridica, iscrizione al registro di commercio e obblighi assicurativi essenziali.',
+    'blog.article.avviare-attivita-canton-berna.imageAlt': 'Ufficio moderno in una città svizzera con vista panoramica',
 };
 
 export default blogMetaChIt;

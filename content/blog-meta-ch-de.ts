@@ -2557,6 +2557,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AHV und Ergänzungsleistungen im Kanton Bern',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.',
     'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'ein Blick auf den Luganersee',
+    'blog.article.avviare-attivita-canton-berna.title': 'Ein Unternehmen im Kanton Bern gründen: Verfahrensleitfaden',
+    'blog.article.avviare-attivita-canton-berna.excerpt': 'Was es braucht, um eine Firma im Kanton Bern zu gründen: Wahl der Rechtsform, Handelsregistereintragung und wesentliche Versicherungspflichten.',
+    'blog.article.avviare-attivita-canton-berna.imageAlt': 'Modernes Büro in einer Schweizer Stadt mit Panoramablick',
 };
 
 export default blogMetaChDe;

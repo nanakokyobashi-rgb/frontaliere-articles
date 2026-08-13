@@ -878,6 +878,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pigioni-abusive-iniziativa-raggiunta': { it: 'pigioni-abusive-iniziativa-raggiunta', en: 'abusive-prisons-the-initiative-succeeded-with-over-108-000-signatures', de: 'abusivemietzahlungen-108-000-unterschriften', fr: 'pigiones-abusives-l-initiative-a-reussi-avec-plus-de-108-000-signatures' },
  'modifica-ordinanza-liquidita': { it: 'modifica-ordinanza-liquidita', en: 'modification-of-liquidity-regulation', de: 'modifikation-der-liquiditaetsvorschriften', fr: 'modification-des-reglementations-de-liquidite' },
  'avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione': { it: 'avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione', en: 'avs-and-complementary-benefits-cantone-berna-compensation-fund', de: 'avs-und-zusatzleistungen-cantone-berna-entschadigungsfonds', fr: 'avs-et-benefices-complementaires-cantone-berna-fonds-de-compensation' },
+ 'avviare-attivita-canton-berna': { it: 'avviare-attivita-canton-berna', en: 'starting-business-canton-bern', de: 'unternehmen-gruenden-kanton-bern', fr: 'creer-entreprise-canton-berne' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

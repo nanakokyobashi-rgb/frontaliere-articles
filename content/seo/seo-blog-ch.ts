@@ -33128,6 +33128,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-avviare-attivita-canton-berna': {
+    title: 'Avviare un\'attività nel Canton Berna: guida alle procedure',
+    description: 'Scopri come avviare un\'attività nel Canton Berna: guida pratica alla scelta della forma giuridica, registro di commercio e obblighi assicurativi in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, avviare, attività, canton, berna',
+    ogTitle: 'Avviare un\'attività nel Canton Berna: guida e costi',
+    ogDescription: 'Guida pratica per imprenditori: come aprire una ditta nel Canton Berna, iscrizione al registro di commercio, costi e obblighi previdenziali nel mercato svizzero.',
+    canonicalPath: '/articoli-svizzera/avviare-attivita-canton-berna/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avviare un'attività nel Canton Berna: guida alle procedure",
+      "description": "Scopri come avviare un'attività nel Canton Berna: guida pratica alla scelta della forma giuridica, registro di commercio e obblighi assicurativi in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avviare-attivita-canton-berna.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio moderno in una città svizzera con vista panoramica"
+      },
+      "datePublished": "2026-08-13T16:33:21+00:00",
+      "dateModified": "2026-08-13T16:33:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avviare-attivita-canton-berna/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
