@@ -256,13 +256,24 @@ jobs:
       # pubblicato — un push che tocca solo content/** non puo' farli
       # divergere, e create-article.mjs arriva a main solo via merge di PR,
       # gia' coperto da tests.yml/generator-ci.yml sul branch prima del merge.
-      - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte)
+      # AGGIUNTE 2026-08-13 (cluster contenuto-sporco, issue #222/#220/#204):
+      # seo-digit-residue-guard e faq-locale-consistency sono lo stesso strato
+      # 3 di sopra — un ratchet/scan sul REGISTRO PUBBLICATO — applicato a due
+      # difetti che sfuggivano al detector fino a questa PR: il residuo
+      # cifra-lettera senza piu' il byte C0 ancorato (`sar0`/`3territorio`, un
+      # caso live trovato in content/blog-meta-it.ts, zero C0 nel file) e
+      # un articolo con `.faq` in un locale e non in un altro. Zero
+      # dipendenze npm in piu': entrambi importano solo `scripts/find-dirty-
+      # content-ids.mjs` (node:fs/path/url) o leggono `content/` direttamente.
+      - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte, residuo cifra-lettera, coerenza FAQ)
         run: |
           node --test \
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs \
             generator/tests/article-slug-i18n.test.mjs \
-            generator/tests/article-source-echo.test.mjs
+            generator/tests/article-source-echo.test.mjs \
+            generator/tests/seo-digit-residue-guard.test.mjs \
+            generator/tests/faq-locale-consistency.test.mjs
 
       # Remote Config holds the R2 and Cloudflare credentials the edge push
       # below needs. Without these two steps that push would find no
