@@ -9879,6 +9879,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: «Die MFN-Klausel bringt uns in Schwierigkeiten»',
     'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Schweizer Pharmaunternehmen bremsen die Einführung neuer Medikamente aus Angst vor Preisauswirkungen in den USA.',
     'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'Die US-Politik, die den Preis von Medikamenten mit der MFN-Klausel senken möchte, wird auch in der Schweiz spürbar.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Gesamtarbeitsvertrag: Anleitung zu den Rechten',
+    'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'Was garantiert ein GAV Arbeitnehmenden in der Schweiz? Vom 13. bis zum Mindestlohn - so funktioniert das Instrument zum Schutz der Arbeitsbedingungen.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Panoramablick auf Lugano, Arbeitsort für viele Grenzgänger.',
 };
 
 export default blogMetaDe;

@@ -9880,6 +9880,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: "The MFN clause is putting us in trouble"',
     'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Swiss pharmaceutical companies are holding back the arrival of new drugs for fear of repercussions on prices in the United States.',
     'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'The US policy of lowering the price of medications with the MFN clause is also felt in Switzerland.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Collective Bargaining Agreement: A Guide to Rights',
+    'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'What does a CCL guarantee to workers in Switzerland? From thirteenth to minimum wages, this is how the tool that protects working conditions works.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Panoramic view of Lugano, workplace for many cross-border commuters.',
 };
 
 export default blogMetaEn;

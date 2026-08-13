@@ -9881,6 +9881,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.interpharma-clausola-mfn-difficolta.title': 'Interpharma: «La clausola MFN ci sta mettendo in difficoltà»',
     'blog.article.interpharma-clausola-mfn-difficolta.excerpt': 'Le aziende farmaceutiche svizzere frenano l\'arrivo di nuovi farmaci per timore di ripercussioni sui prezzi negli Stati Uniti.',
     'blog.article.interpharma-clausola-mfn-difficolta.imageAlt': 'La politica statunitense di abbassare il prezzo dei medicamenti con la clausola MFN si fa sentire anche in Svizzera.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Contratto Collettivo di Lavoro: guida ai diritti',
+    'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'Cosa garantisce un CCL ai lavoratori in Svizzera? Dalla tredicesima ai salari minimi, ecco come funziona lo strumento che tutela le condizioni di lavoro.',
+    'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Veduta panoramica di Lugano, luogo di lavoro per molti frontalieri.',
 };
 
 export default blogMetaIt;
