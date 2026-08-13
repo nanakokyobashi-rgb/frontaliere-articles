@@ -2563,6 +2563,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Abusive pensions initiative: the situation in Switzerland',
     'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'The popular initiative \'Yes to protection against illegal rents\' collected 108,437 valid signatures. Here\'s what\'s changing for Swiss tenants.',
     'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Residential buildings in a Swiss city',
+    'blog.article.aprire-attivita-cantone-berna-guida.title': 'Starting a business in the Canton of Bern: a practical guide',
+    'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'From the choice of legal form to insurance obligations and the commercial register: here are the key steps to doing business in Bern.',
+    'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Bern old town with Zytglogge tower',
 };
 
 export default blogMetaChEn;

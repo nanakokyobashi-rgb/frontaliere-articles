@@ -2563,6 +2563,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Missbräuchliche Mietzinsinitiative: Die Situation in der Schweiz',
     'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'Die Volksinitiative \'Ja zum Schutz vor missbräuchlichen Mieten\' hat 108\'437 gültige Unterschriften gesammelt. Das ändert sich für Schweizer Mieter.',
     'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Wohngebäude in einer Schweizer Stadt',
+    'blog.article.aprire-attivita-cantone-berna-guida.title': 'Ein Unternehmen im Kanton Bern gründen: Praktischer Leitfaden',
+    'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Von der Wahl der Rechtsform über die Versicherungsverpflichtungen bis hin zum Handelsregister: Das sind die wichtigsten Schritte, um im Berner Raum ein Unternehmen zu gründen.',
+    'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Berner Altstadt mit Zytglogge',
 };
 
 export default blogMetaChDe;

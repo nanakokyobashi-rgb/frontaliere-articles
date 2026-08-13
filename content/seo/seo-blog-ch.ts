@@ -33206,6 +33206,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-aprire-attivita-cantone-berna-guida': {
+    title: 'Avviare un\'attività nel Cantone di Berna: guida pratica',
+    description: 'Scopri come aprire un\'attività nel Cantone di Berna: guida pratica su registro di commercio, forme giuridiche, tassazione e contributi sociali',
+    keywords: 'frontalieri, ticino, svizzera, italia, avviare, attività, cantone, berna',
+    ogTitle: 'Avviare un\'attività nel Cantone di Berna: guida pratica',
+    ogDescription: 'Guida completa per avviare un\'attività nel Cantone di Berna: dai requisiti del registro di commercio alla gestione di tasse e contributi sociali in Svizzera.',
+    canonicalPath: '/articoli-svizzera/aprire-attivita-cantone-berna-guida/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Avviare un'attività nel Cantone di Berna: guida pratica",
+      "description": "Scopri come aprire un'attività nel Cantone di Berna: guida pratica su registro di commercio, forme giuridiche, tassazione e contributi sociali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/aprire-attivita-cantone-berna-guida.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Centro storico di Berna con la Torre dell'Orologio"
+      },
+      "datePublished": "2026-08-13T16:49:47+00:00",
+      "dateModified": "2026-08-13T16:49:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/aprire-attivita-cantone-berna-guida/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -2563,6 +2563,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Iniziativa pigioni abusive: la situazione in Svizzera',
     'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'L\'iniziativa popolare \'Sì alla protezione contro pigioni abusive\' ha raccolto 108\'437 firme valide. Ecco cosa cambia per gli inquilini svizzeri.',
     'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Palazzi residenziali in una città svizzera',
+    'blog.article.aprire-attivita-cantone-berna-guida.title': 'Avviare un\'attività nel Cantone di Berna: guida pratica',
+    'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Dalla scelta della forma giuridica agli obblighi assicurativi e al registro di commercio: ecco i passaggi chiave per fare impresa nel territorio bernese.',
+    'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Centro storico di Berna con la Torre dell\'Orologio',
 };
 
 export default blogMetaChIt;

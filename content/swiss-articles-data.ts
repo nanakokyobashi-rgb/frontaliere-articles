@@ -7687,6 +7687,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'aprire-attivita-cantone-berna-guida',
+    category: 'fiscale',
+    date: '2026-08-13T16:49:47.493Z',
+    image: '/images/blog/aprire-attivita-cantone-berna-guida.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

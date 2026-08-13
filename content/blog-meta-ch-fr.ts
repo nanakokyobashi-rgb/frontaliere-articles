@@ -2563,6 +2563,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.iniziativa-protezione-pigioni-abusive.title': 'Initiative loyers abusifs : la situation en Suisse',
     'blog.article.iniziativa-protezione-pigioni-abusive.excerpt': 'L\'initiative populaire « Oui à la protection contre les loyers abusifs » a recueilli 108\'437 signatures valables. C\'est ce qui change pour les locataires suisses.',
     'blog.article.iniziativa-protezione-pigioni-abusive.imageAlt': 'Immeubles résidentiels dans une ville suisse',
+    'blog.article.aprire-attivita-cantone-berna-guida.title': 'Démarrer une activité dans le canton de Berne : guide pratique',
+    'blog.article.aprire-attivita-cantone-berna-guida.excerpt': 'Du choix de la forme juridique aux obligations d\'assurance et au registre du commerce : voici les étapes clés pour faire des affaires sur le territoire bernois.',
+    'blog.article.aprire-attivita-cantone-berna-guida.imageAlt': 'Vieille ville de Berne avec la tour Zytglogge',
 };
 
 export default blogMetaChFr;
