@@ -2476,6 +2476,46 @@
         "corpus": "0dea39b417b932d9",
         "alignedAt": "2026-08-13"
       }
+    },
+    {
+      "path": "scripts/ci/orphan-max-turns-work.mjs",
+      "mode": "corpus-only",
+      "reason": "Rilevatore dei branch `fix/issue-N` che una run morta `max-turns` ha pushato senza mai aprire una PR: misurati 10 branch, 12 commit, zero PR (2026-08-13). Nessuno strato del ciclo li vede, perche' stale-pr-rescuer e recycle-stale-prs raccolgono PR e questi branch non ne hanno mai avuta una. Corpus-only perche' la domanda e' sul REPO, non sulla regola: i branch orfani sono diversi nei due repo. Il predicato puro che al sito servirebbe (`classifyMaxTurnsRun`) sta qui e non in `harvest-agent-lessons.mjs`, che e' `identical`: se il sito lo adottera', il grado giusto diventera' `identical`.",
+      "baseline": {
+        "site": null,
+        "corpus": "73e560e3faa36676",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "scripts/ci/exhaustion-reason-report.mjs",
+      "mode": "corpus-only",
+      "reason": "Strumentazione per la issue #203: aggrega per MOTIVO le marcature di `markModelExhausted` gia' emesse nei log, e difende l'invariante che un esaurimento senza motivo distinto non venga mai persistito. Corpus-only perche' `generator/scripts/lib/ai-models.mjs` e' `identical` — la fix va sul sito, mentre la misura, come la issue stessa prescrive, si fa da questo lato — e perche' legge i log di `generate-article.yml`, che e' un workflow di questo repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "4b0e705cc5ae5a91",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "generator/tests/harvest-escalation-rules.test.mjs",
+      "mode": "corpus-only",
+      "reason": "L'osservatore dell'inerzia delle regole dell'harvester: dichiara codice per codice cosa `harvest-agent-lessons.mjs` ne fa, e confronta la dichiarazione col vocabolario FIX_OUTCOME derivato dal repo (ISSUES.md + i marker letterali emessi sotto scripts/ci, scripts/lib, .github/workflows). Corpus-only: il vocabolario asserito e' quello di QUESTO repo, e sul sito i corrispettivi puri sono coperti da un test vitest a un path diverso.",
+      "baseline": {
+        "site": null,
+        "corpus": "bb12b19074f39954",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "generator/tests/exhaustion-reason-report.test.mjs",
+      "mode": "corpus-only",
+      "reason": "L'osservatore della persistenza senza scadenza (issue #203). La meta' che conta e' quella negativa: la quota DEVE avere una scadenza finita e a meno di 24 ore, altrimenti un test che verifica solo «i motivi ignoti non persistono» resta verde mentre la quota diventa eterna — che e' il caso che avvelena i run successivi. Corpus-only come il modulo che sorveglia.",
+      "baseline": {
+        "site": null,
+        "corpus": "69db9db556b30ab2",
+        "alignedAt": "2026-08-13"
+      }
     }
   ]
 }
