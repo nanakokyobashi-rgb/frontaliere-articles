@@ -67268,6 +67268,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cassa-disoccupazione-unia': {
+    title: 'Cassa Disoccupazione Unia: guida per i frontalieri',
+    description: 'Informazioni e supporto sindacale per frontalieri in Ticino riguardo alla cassa disoccupazione Unia. Scopri come gestire le pratiche e i diritti.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cassa, disoccupazione, unia, informazioni',
+    ogTitle: 'Cassa Disoccupazione Unia: guida per frontalieri',
+    ogDescription: 'Hai bisogno di assistenza per la cassa disoccupazione? Il sindacato Unia supporta i lavoratori frontalieri in Ticino. Leggi la guida pratica e scopri i passaggi.',
+    canonicalPath: '/articoli-frontaliere/cassa-disoccupazione-unia',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cassa Disoccupazione Unia: guida per i frontalieri",
+      "description": "Informazioni e supporto sindacale per frontalieri in Ticino riguardo alla cassa disoccupazione Unia. Scopri come gestire le pratiche e i diritti.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cassa-disoccupazione-unia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica su Lugano, sede di uffici e istituzioni finanziarie."
+      },
+      "datePublished": "2026-08-13T12:44:15+00:00",
+      "dateModified": "2026-08-13T12:44:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cassa-disoccupazione-unia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

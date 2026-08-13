@@ -9900,6 +9900,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.verita-immobiliari-ticino.title': 'Vérités immobilières : stratégies pour le marché tessinois',
     'blog.article.verita-immobiliari-ticino.excerpt': 'Analyse de la dynamique du marché immobilier au Tessin et nouvelles perspectives pour la gestion immobilière entre Lugano et Bellinzonese.',
     'blog.article.verita-immobiliari-ticino.imageAlt': 'Vue panoramique de Lugano et du lac, symbole du marché immobilier tessinois.',
+    'blog.article.cassa-disoccupazione-unia.title': 'Caisse de chômage Unia : guide pour les frontaliers',
+    'blog.article.cassa-disoccupazione-unia.excerpt': 'Informations et soutien sur la caisse de chômage Unia pour les travailleurs frontaliers au Tessin.',
+    'blog.article.cassa-disoccupazione-unia.imageAlt': 'Vue panoramique sur Lugano, siège de bureaux et d\'institutions financières.',
 };
 
 export default blogMetaFr;

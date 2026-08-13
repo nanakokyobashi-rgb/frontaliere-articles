@@ -9899,6 +9899,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.verita-immobiliari-ticino.title': 'Verità Immobiliari: strategie per il mercato ticinese',
     'blog.article.verita-immobiliari-ticino.excerpt': 'Analisi sulle dinamiche del mercato immobiliare in Ticino e nuove prospettive per la gestione delle proprietà tra Lugano e il Bellinzonese.',
     'blog.article.verita-immobiliari-ticino.imageAlt': 'Vista panoramica di Lugano e del lago, simbolo del mercato immobiliare ticinese.',
+    'blog.article.cassa-disoccupazione-unia.title': 'Cassa Disoccupazione Unia: guida per i frontalieri',
+    'blog.article.cassa-disoccupazione-unia.excerpt': 'Informazioni e supporto sulla cassa disoccupazione Unia per i lavoratori frontalieri in Ticino.',
+    'blog.article.cassa-disoccupazione-unia.imageAlt': 'Vista panoramica su Lugano, sede di uffici e istituzioni finanziarie.',
 };
 
 export default blogMetaIt;

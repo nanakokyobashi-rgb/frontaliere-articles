@@ -9898,6 +9898,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.verita-immobiliari-ticino.title': 'Real Estate Truths: strategies for the Ticino market',
     'blog.article.verita-immobiliari-ticino.excerpt': 'Analysis of the dynamics of the real estate market in Ticino and new perspectives for property management between Lugano and Bellinzonese.',
     'blog.article.verita-immobiliari-ticino.imageAlt': 'Panoramic view of Lugano and the lake, symbol of the Ticino real estate market.',
+    'blog.article.cassa-disoccupazione-unia.title': 'Unia Unemployment Fund: a guide for border workers',
+    'blog.article.cassa-disoccupazione-unia.excerpt': 'Information and support on the Unia unemployment fund for frontier workers in Ticino.',
+    'blog.article.cassa-disoccupazione-unia.imageAlt': 'Panoramic view of Lugano, home to offices and financial institutions.',
 };
 
 export default blogMetaEn;
