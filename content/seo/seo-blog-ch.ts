@@ -33011,6 +33011,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pigioni-abusive-iniziativa-raggiunta': {
+    title: 'Pigioni abusive, l’iniziativa è riuscita con oltre 108’000 firme',
+    description: 'L’iniziativa popolare “Sì alla protezione contro pigioni abusive” ha raggiunto il numero minimo di firme necessarie per essere presentata al referendum.',
+    keywords: 'frontalieri, ticino, svizzera, italia, pigioni, abusive, iniziativa, riuscita',
+    ogTitle: 'Pigioni abusive, l’iniziativa è riuscita con oltre 108’000 firme',
+    ogDescription: 'L’iniziativa popolare “Sì alla protezione contro pigioni abusive” ha raggiunto il numero minimo di firme necessarie per essere presentata al referendum.',
+    canonicalPath: '/articoli-svizzera/pigioni-abusive-iniziativa-raggiunta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Pigioni abusive, l’iniziativa è riuscita con oltre 108’000 firme",
+      "description": "L’iniziativa popolare “Sì alla protezione contro pigioni abusive” ha raggiunto il numero minimo di firme necessarie per essere presentata al referendum.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pigioni-abusive-iniziativa-raggiunta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere in Svizzera con un affitto eccessivo"
+      },
+      "datePublished": "2026-08-13T13:32:47+00:00",
+      "dateModified": "2026-08-13T13:32:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pigioni-abusive-iniziativa-raggiunta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

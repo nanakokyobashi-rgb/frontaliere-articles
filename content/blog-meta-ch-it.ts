@@ -2548,6 +2548,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tete-de-moine-impatti.title': 'Di più siccità e caldo mettono in difficoltà produzione Tête de Moine',
     'blog.article.tete-de-moine-impatti.excerpt': 'La produzione di Tête de Moine AOP è stata colpita dalla siccità e dal caldo.',
     'blog.article.tete-de-moine-impatti.imageAlt': 'La produzione di Tête de Moine AOP è stata colpita dalla siccità e dal caldo.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Pigioni abusive, l’iniziativa è riuscita con oltre 108’000 firme',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'L’iniziativa popolare “Sì alla protezione contro pigioni abusive” ha raggiunto il numero minimo di firme necessarie per essere presentata al referendum.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontaliere in Svizzera con un affitto eccessivo',
 };
 
 export default blogMetaChIt;

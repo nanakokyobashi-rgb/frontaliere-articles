@@ -7642,6 +7642,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'pigioni-abusive-iniziativa-raggiunta',
+    category: 'fiscale',
+    date: '2026-08-13T13:32:47.355Z',
+    image: '/images/blog/pigioni-abusive-iniziativa-raggiunta.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

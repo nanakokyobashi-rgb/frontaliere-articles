@@ -875,6 +875,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'incendio-nuovo-alloggi-alloggio-cantoni': { it: 'incendio-nuovo-alloggi-alloggio-cantoni', en: 'fire-new-accommodation-rental-cantons', de: 'brand-neue-mietwohnung-kantone', fr: 'incendie-nouveau-logement-rental-cantons' },
  'consiglio-federale-pacchetto-misure': { it: 'consiglio-federale-pacchetto-misure', en: 'federal-council-measures-package', de: 'bundesrat-massnahmen-paket', fr: 'conseil-federal-paquet-de-mesures' },
  'tete-de-moine-impatti': { it: 'tete-de-moine-impatti', en: 'tete-de-moine-impacts', de: 'tete-de-moine-impakte', fr: 'tete-de-moine-impacts' },
+ 'pigioni-abusive-iniziativa-raggiunta': { it: 'pigioni-abusive-iniziativa-raggiunta', en: 'abusive-prisons-the-initiative-succeeded-with-over-108-000-signatures', de: 'abusivemietzahlungen-108-000-unterschriften', fr: 'pigiones-abusives-l-initiative-a-reussi-avec-plus-de-108-000-signatures' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

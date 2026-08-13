@@ -2548,6 +2548,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tete-de-moine-impatti.title': 'Caldo e siccità ostacolano la produzione Tête de Moine',
     'blog.article.tete-de-moine-impatti.excerpt': 'La production de Tête de Moine AOP a été affectée par la sécheresse et la chaleur.',
     'blog.article.tete-de-moine-impatti.imageAlt': 'La production de Tête de Moine AOP a été touchée par la sécheresse et la chaleur.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Pigiones abusives, l’initiative a réussi avec plus de 108’000 signatures',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'L’initiative populaire « Oui à la protection contre les loyers abusifs » a atteint le nombre minimum de signatures nécessaires pour être présentée au référendum.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier en Suisse avec un loyer exagéré',
 };
 
 export default blogMetaChFr;

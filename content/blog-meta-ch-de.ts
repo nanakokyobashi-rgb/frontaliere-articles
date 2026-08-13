@@ -2548,6 +2548,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tete-de-moine-impatti.title': 'Mehr Trockenheit und Hitze erschweren die Produktion von Tête de Moine',
     'blog.article.tete-de-moine-impatti.excerpt': 'Die Produktion von Tête de Moine AOP war von Trockenheit und Hitze betroffen.',
     'blog.article.tete-de-moine-impatti.imageAlt': 'Die Produktion von Tête de Moine AOP ist durch Trockenheit und Hitze betroffen.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Abusivemietzahlungen: 108\'000 Unterschriften',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'Die Volksinitiative «Ja zum Schutz vor missbräuchlichen Mieten» hat die Mindestzahl an Unterschriften erreicht, die nötig ist, um dem Referendum vorgelegt zu werden.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier in der Schweiz mit einer zu hohen Miete',
 };
 
 export default blogMetaChDe;

@@ -2548,6 +2548,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tete-de-moine-impatti.title': 'More drought and heat hamper Tête de Moine production',
     'blog.article.tete-de-moine-impatti.excerpt': 'The production of Tête de Moine AOP has been affected by drought and heat.',
     'blog.article.tete-de-moine-impatti.imageAlt': 'The production of Tête de Moine AOP has been hit by drought and heat.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.title': 'Abusive prisons, the initiative succeeded with over 108,000 signatures',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.excerpt': 'The popular initiative "Yes to protection against illegal rents" has reached the minimum number of signatures needed to be presented to the referendum.',
+    'blog.article.pigioni-abusive-iniziativa-raggiunta.imageAlt': 'Frontalier in Switzerland with an excessive rent',
 };
 
 export default blogMetaChEn;
