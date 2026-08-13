@@ -2533,6 +2533,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.title': 'Swissmedic: efficacia delle ispezioni ospedaliere 2025',
     'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.excerpt': 'Swissmedic ha effettuato 28 ispezioni nei settori ricondizionamento, manutenzione e vigilanza dei dispositivi medici.',
     'blog.article.ispezioni-ospedaliere-swissmedic-2025-ticino.imageAlt': 'Ispezioni ospedaliere Lugano 2025',
+    'blog.article.modifica-legge-banche-2026.title': 'Modifica della legge sulle banche: Dipartimento federale delle finanze',
+    'blog.article.modifica-legge-banche-2026.excerpt': 'Il Consiglio federale ha approvato i parametri di riferimento per l\'elaborazione degli adeguamenti normativi secondo le misure e le raccomandazioni contenute nel rapporto del Consiglio federale sulla stabilità delle banche e nel rapporto della Commissione parlamentare d\'inchiesta.',
+    'blog.article.modifica-legge-banche-2026.imageAlt': 'La modifica della legge sulle banche in Svizzera',
 };
 
 export default blogMetaChIt;
