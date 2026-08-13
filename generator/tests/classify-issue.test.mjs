@@ -89,6 +89,32 @@ test('crawler-transient vince anche su publish (nessuna label salta il guard)', 
   assert.equal(r.route, 'none');
 });
 
+test('backlog instrada a route none qualunque sia il titolo (nanako#28 punto 6)', () => {
+  // Una issue-contenitore puo' nominare "engine" o "publish-api" dentro un
+  // punto elencato senza essere quel guasto: il titolo non deve decidere.
+  for (const title of [
+    'Backlog: cio\' che resta dopo il porting del ciclo autonomo',
+    'Workflow Failure: engine lockstep drift',
+  ]) {
+    const r = classifyIssue(title, ['backlog']);
+    assert.equal(r.category, 'backlog', `"${title}" con la label backlog deve avere categoria backlog`);
+    assert.equal(r.route, 'none');
+    assert.equal(r.fuPrio, null);
+    assert.equal(r.autofix, true, 'nessun guardrail di categoria: solo il route cambia');
+  }
+});
+
+test('backlog + crawler-transient insieme restano none (nessun conflitto fra i due guard)', () => {
+  const r = classifyIssue('Backlog e ledger transiente insieme', ['backlog', 'crawler-transient']);
+  assert.equal(r.route, 'none');
+});
+
+test('un titolo publish SENZA backlog resta route fix (il guard non si allarga da solo)', () => {
+  const r = classifyIssue('Workflow Failure: Publish article data API', ['Bug']);
+  assert.equal(r.category, 'publish');
+  assert.equal(r.route, 'fix');
+});
+
 test('la CLI emette JSON con la forma attesa dallo YAML del triage', async () => {
   // Lo YAML fa `node -e "JSON.parse(...).category"`: se la forma cambia, il
   // triage legge undefined e non instrada nulla, in silenzio.
