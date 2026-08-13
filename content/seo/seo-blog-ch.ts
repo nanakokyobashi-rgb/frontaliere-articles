@@ -33713,6 +33713,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni': {
+    title: 'Di più VS: mezzo agricolo esce di strada, muore bambino di nove anni',
+    description: 'Un bambino di nove anni è morto martedì a seguito di un incidente stradale a Chandonne, in Vallese. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mezzo, agricolo, esce, strada',
+    ogTitle: 'Mezzo agricolo esce di strada, muore bambino di nove anni',
+    ogDescription: 'Un bambino di nove anni è morto martedì a seguito di un incidente stradale a Chandonne, in Vallese.',
+    canonicalPath: '/articoli-svizzera/mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Di più VS: mezzo agricolo esce di strada, muore bambino di nove anni",
+      "description": "Un bambino di nove anni è morto martedì a seguito di un incidente stradale a Chandonne, in Vallese. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veicolo agricolo uscito di strada in Svizzera con un bambino a bordo"
+      },
+      "datePublished": "2026-08-13T21:58:08+00:00",
+      "dateModified": "2026-08-13T21:58:08+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

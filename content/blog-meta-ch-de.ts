@@ -2602,6 +2602,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.porsche-arretra-elettrico-taycan.title': 'Porsche springt auf den Elektroantrieb zurück, Taycan-Produktion eingestellt',
     'blog.article.porsche-arretra-elettrico-taycan.excerpt': 'Die Entscheidung von Porsche, die Produktion des Taycan bis 2030 einzustellen, ist ein Zeichen für einen Markt, in dem die Nachfrage nach elektrischen Modellen nicht ausreicht.',
     'blog.article.porsche-arretra-elettrico-taycan.imageAlt': 'Porsche Taycan',
+    'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.title': 'Mehr VS: Landwirtschaftsfahrzeug geht von der Straße, Neunjähriger stirbt',
+    'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.excerpt': 'Ein neunjähriger Junge starb am Dienstag bei einem Verkehrsunfall in Chandonne im Wallis.',
+    'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.imageAlt': 'Landwirtschaftlicher Fahrzeug verlässt die Fahrbahn in der Schweiz mit einem 9-jährigen Kind an Bord',
 };
 
 export default blogMetaChDe;
