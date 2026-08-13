@@ -104,6 +104,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { findControlChars, sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+// issue #220: due predicati di sporco oltre al C0. Vedi le due sezioni piu'
+// sotto ("SEGNAPOSTO FAQ" e "RESIDUO PROPAGATO") per il perche' di ciascuno.
 // Riuso deliberato: la mappa sezione→shard, l'elenco dei locali e la regola di
 // path della pagina sono gia' definite (e testate) li'. Duplicarle qui
 // significherebbe due sorgenti di verita' per la stessa cosa, e la seconda
@@ -246,12 +248,196 @@ export function residuesInText(text) {
   return out;
 }
 
+// ── SEGNAPOSTO FAQ (issue #220) ─────────────────────────────────────────────
+//
+// I due criteri sopra (C0 grezzo, residuo) riconoscono UN solo tipo di sporco:
+// il byte di controllo. Un difetto di testo LEGALE e sbagliato — il modello
+// che ricopia l'ETICHETTA dello schema del prompt invece di rispondere alla
+// domanda — e' invisibile a entrambi: zero control character, JSON valido.
+//
+// Misurato il 2026-08-11: 55 pagine su 4 locali servivano il template come
+// FAQPage JSON-LD (`"FAQ 1 based on the facts of the article?"` e le sue
+// traduzioni). Bonificate a mano (18 ripubblicazioni, dispatch diretto di
+// fast-publish-article.yml); questo predicato e' la rete che manca perche' non
+// ricapiti sotto CI verde. Verificato mentre si costruiva: l'articolo
+// `domanda-scomoda-razzisti-omofobi` porta ANCORA oggi la stessa etichetta,
+// fusa nella domanda tradotta invece che sostituita per intero — «FAQ 1: Was
+// bedeutet die unbequeme Frage?», «Question Fréquemment Posée 2 : Comment...»
+// — 9 occorrenze su 3 locali (en/de/fr), it pulito. Stessa forma, variante
+// piu' sottile: non l'intero segnaposto del prompt, solo la sua ETICHETTA
+// numerata sopravvissuta alla traduzione.
+//
+// Nessun elenco di letterali copre le quattro lingue — nemmeno le tre
+// traduzioni dello STESSO letterale sono uguali fra loro — quindi il criterio
+// qui e' STRUTTURALE: riconosce la FORMA dell'etichetta numerata dello schema
+// («Domanda frequente N» / «FAQ N» / «Frequently Asked Question N» / «Foire
+// aux questions N» / «Häufig gestellte Frage N»), ancorata all'INIZIO della
+// domanda — dove l'etichetta dello schema compare per davvero, mai in un
+// articolo che PARLA di FAQ a meta' frase.
+//
+// Vale sia sul corpus (passo 1, sul campo `.faq` grezzo del body) sia sulla
+// pagina live (passo 2), dove l'oracolo e' STRUTTURALE anche nella lettura: si
+// fa il parse del JSON-LD FAQPage e si legge `Question.name`, il campo che il
+// crawler legge davvero — non una grep sull'HTML, che sulla grafia italiana
+// («Domanda frequente») si perde le pagine che usano quella forma.
+const FAQ_LABEL_RX =
+  /^\s*\**\s*(?:domanda\s+frequente|faq|frequently\s+asked\s+questions?|foire\s+aux\s+questions?|question\s+fr[eé]quemment\s+pos[eé]e|h[aä]ufig\s+gestellte\s+fragen?)\s*\d+\b/i;
+
+/** Vero se il testo ha la FORMA dell'etichetta numerata dello schema FAQ, in una qualunque delle quattro lingue pubblicate. */
+export function isPlaceholderFaqQuestion(text) {
+  return typeof text === 'string' && FAQ_LABEL_RX.test(text);
+}
+
+/**
+ * Le `Question.name` di ogni blocco FAQPage JSON-LD della pagina.
+ *
+ * Un `<script type="application/ld+json">` per pagina puo' portare un oggetto
+ * singolo o un array; entrambe le forme si vedono nel corpus reale (breadcrumb,
+ * articolo, FAQ sono tag separati). Un blocco che non fa il parse (markup
+ * troncato, un altro script non-JSON con lo stesso attributo) viene ignorato
+ * invece di far cadere l'intera scansione.
+ */
+export function faqQuestionNamesInHtml(html) {
+  if (typeof html !== 'string') return [];
+  const names = [];
+  const rx = /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+  let m;
+  while ((m = rx.exec(html)) !== null) {
+    let data;
+    try {
+      data = JSON.parse(m[1]);
+    } catch {
+      continue;
+    }
+    for (const item of Array.isArray(data) ? data : [data]) {
+      if (!item || item['@type'] !== 'FAQPage' || !Array.isArray(item.mainEntity)) continue;
+      for (const q of item.mainEntity) {
+        if (q && typeof q.name === 'string') names.push(q.name);
+      }
+    }
+  }
+  return names;
+}
+
+/** Vero se la pagina serve almeno una domanda FAQPage segnaposto. */
+export function pageCarriesFaqPlaceholder(html) {
+  return faqQuestionNamesInHtml(html).some(isPlaceholderFaqQuestion);
+}
+
+/**
+ * Le domande del campo `faq` grezzo di un file body
+ * (`content/blog-body{,-ch}/<locale>/<id>.ts`): `[]` se il campo manca o non
+ * e' JSON valido. Stesso schema di escaping degli altri campi letterali TS —
+ * il campo e' JSON dentro una stringa TS fra apici singoli, dove solo l'apice
+ * porta un escape aggiuntivo.
+ */
+export function faqQuestionsInBodyText(text) {
+  const m = /'blog\.article\.[a-z0-9-]+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/.exec(text);
+  if (!m) return [];
+  let pairs;
+  try {
+    pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
+  } catch {
+    return [];
+  }
+  return Array.isArray(pairs) ? pairs.filter((p) => p && typeof p.q === 'string').map((p) => p.q) : [];
+}
+
 function mark(map, section, id, source, residues) {
   const key = `${section}:${id}`;
   const entry = map.get(key) || { section, id, sources: [], residues: [] };
   entry.sources.push(source);
   if (residues) for (const r of residues) if (!entry.residues.includes(r)) entry.residues.push(r);
   map.set(key, entry);
+}
+
+/**
+ * Le righe di un chunk meta che appartengono a un id: serve al residuo
+ * propagato qui sotto, che deve cercare SOLO dentro il testo di QUESTO
+ * articolo — non nell'intero file aggregato, dove una coincidenza su un altro
+ * id sarebbe un falso positivo silenzioso.
+ */
+function metaTextForId(text, id) {
+  const lines = [];
+  for (const line of text.split('\n')) if (extractMetaArticleId(line) === id) lines.push(line);
+  return lines.join('\n');
+}
+
+/**
+ * Il blocco di un chunk SEO che appartiene a un id: dalla sua chiave di
+ * record alla prossima, stessa macchina a stati di `dirtyIdsInSeoText`.
+ */
+function seoTextForId(text, section, id) {
+  const lines = [];
+  let dentro = false;
+  for (const line of text.split('\n')) {
+    const key = extractSeoBlockKey(line);
+    if (key) {
+      dentro = key.section === section && key.id === id;
+      if (dentro) lines.push(line);
+      continue;
+    }
+    if (dentro) lines.push(line);
+  }
+  return lines.join('\n');
+}
+
+// ── RESIDUO PROPAGATO (issue #220 / #222) ───────────────────────────────────
+//
+// `residuesInText` (sopra) richiede che il TOKEN STESSO porti ancora il byte
+// C0: e' cosi' che resta senza falsi positivi. Ma il byte C0 e' un dettaglio
+// del PERCORSO che ha scritto il campo, non del contenuto — lo stesso refuso
+// puo' comparire in piu' campi dello stesso articolo (body, meta, SEO), e
+// ciascuno puo' aver perso il marker in un momento diverso. Misurato dal vivo
+// costruendo questo predicato: `lavena-ponte-tresa-territorio-poroso` porta
+// `<08>3territorio` / `poroso<08>3` ANCORA CON IL BYTE in
+// `content/blog-body/it/…ts` e `content/seo/seo-blog-3.ts`, ma la STESSA coppia
+// senza un solo byte C0 in `content/blog-meta-it.ts` — un file che non ha
+// ALTRO C0 al suo interno, quindi il passo 1 (sopra) lo salta per intero: e'
+// esattamente il caso `sar0` di #222, dal vivo e non ancora riparato.
+//
+// Il criterio resta STRUTTURALE, non un elenco: non cerca "una cifra in mezzo
+// a lettere" (esploderebbe su M5S, CO2, A2, 3mila — misurato: 428 falsi
+// positivi sulla sola content/blog-meta-it.ts con quel criterio, provato e
+// scartato). Cerca una stringa che e' GIA' un residuo CONFERMATO da un byte C0
+// reale altrove nello STESSO articolo — non un indovinello, un fatto gia'
+// stabilito che si controlla di nuovo dove il marker non c'e' piu'. Zero
+// nuovi falsi positivi possibili: se la stringa non e' un residuo vero, non e'
+// mai entrata nell'insieme da propagare.
+function propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles) {
+  const seeds = [...found.entries()].filter(([, e]) => e.residues.length > 0);
+  for (const [, entry] of seeds) {
+    const { section, id, residues } = entry;
+    const already = new Set(entry.sources);
+
+    for (const bf of bodyFiles) {
+      if (bf.section !== section || bf.id !== id) continue;
+      const rel = path.relative(rootDir, bf.file);
+      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      if (residues.some((r) => bf.text.includes(r))) {
+        mark(found, section, id, `${rel} (residuo propagato)`, []);
+        already.add(`${rel} (residuo propagato)`);
+      }
+    }
+    for (const mf of metaFiles) {
+      const rel = path.relative(rootDir, mf.file);
+      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      const scoped = metaTextForId(mf.text, id);
+      if (scoped && residues.some((r) => scoped.includes(r))) {
+        mark(found, section, id, `${rel} (residuo propagato)`, []);
+        already.add(`${rel} (residuo propagato)`);
+      }
+    }
+    for (const sf of seoFiles) {
+      const rel = path.relative(rootDir, sf.file);
+      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      const scoped = seoTextForId(sf.text, section, id);
+      if (scoped && residues.some((r) => scoped.includes(r))) {
+        mark(found, section, id, `${rel} (residuo propagato)`, []);
+        already.add(`${rel} (residuo propagato)`);
+      }
+    }
+  }
 }
 
 /**
@@ -262,27 +448,44 @@ export function scanContentForDirtyIds(rootDir) {
   const found = new Map();
   let totalFiles = 0;
   let totalOccurrences = 0;
+  let totalFaqPlaceholderFiles = 0;
+
+  // Cache di TUTTI i file letti in questo giro, a prescindere dal fatto che
+  // portino C0: il residuo propagato (sotto) deve poterli ricontrollare anche
+  // quando il passo C0 li ha saltati per intero.
+  const bodyFiles = [];
+  const metaFiles = [];
+  const seoFiles = [];
 
   for (const bodyDir of Object.keys(BODY_DIR_SECTIONS)) {
     const section = sectionForBodyDir(bodyDir);
     for (const file of listTsFiles(path.join(rootDir, 'content', bodyDir))) {
       const text = fs.readFileSync(file, 'utf8');
-      const n = findControlChars(text).length;
-      if (n === 0) continue;
-      totalFiles += 1;
-      totalOccurrences += n;
       const id = path.basename(file, '.ts');
-      mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
+      bodyFiles.push({ section, id, file, text });
+      const n = findControlChars(text).length;
+      if (n > 0) {
+        totalFiles += 1;
+        totalOccurrences += n;
+        mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
+      }
+      // Il segnaposto FAQ (sopra) e' indipendente dal C0: si controlla sempre,
+      // non solo sui file gia' segnati sporchi da un byte di controllo.
+      if (faqQuestionsInBodyText(text).some(isPlaceholderFaqQuestion)) {
+        totalFaqPlaceholderFiles += 1;
+        mark(found, section, id, `${path.relative(rootDir, file)} (faq-placeholder)`, []);
+      }
     }
   }
 
   const contentDir = path.join(rootDir, 'content');
-  const metaFiles = fs.existsSync(contentDir)
+  const metaFileNames = fs.existsSync(contentDir)
     ? fs.readdirSync(contentDir).filter((n) => /^blog-meta-[a-z]+\.ts$/.test(n))
     : [];
-  for (const name of metaFiles) {
+  for (const name of metaFileNames) {
     const file = path.join(contentDir, name);
     const text = fs.readFileSync(file, 'utf8');
+    metaFiles.push({ file, text });
     const n = findControlChars(text).length;
     if (n === 0) continue;
     totalFiles += 1;
@@ -294,6 +497,7 @@ export function scanContentForDirtyIds(rootDir) {
   const seoDir = path.join(contentDir, 'seo');
   for (const file of listTsFiles(seoDir)) {
     const text = fs.readFileSync(file, 'utf8');
+    seoFiles.push({ file, text });
     const n = findControlChars(text).length;
     if (n === 0) continue;
     totalFiles += 1;
@@ -302,8 +506,10 @@ export function scanContentForDirtyIds(rootDir) {
     for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, path.relative(rootDir, file), seoResidues);
   }
 
+  propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles);
+
   const ids = [...found.values()].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
-  return { ids, totalFiles, totalOccurrences };
+  return { ids, totalFiles, totalOccurrences, totalFaqPlaceholderFiles };
 }
 
 /** Ordine deterministico (sezione, poi id) + cap. Nessuna priorita' di data: sono un backlog storico, non un evento fresco. */
@@ -397,6 +603,12 @@ export function classifyProbe({ status, body, error, residues }) {
   if (Array.isArray(residues) && typeof body === 'string') {
     for (const r of residues) if (r && body.includes(r)) return 'dirty';
   }
+  // Terzo criterio (issue #220): il segnaposto FAQ. Testo legale e ben
+  // formato — zero control character, nessun residuo — ma structured data
+  // FALSO: il crawler parsa il JSON-LD e legge l'etichetta dello schema che
+  // nessun giornalista ha mai scritto. Vedi l'intestazione sopra
+  // `isPlaceholderFaqQuestion`.
+  if (pageCarriesFaqPlaceholder(body)) return 'dirty';
   return 'clean';
 }
 
@@ -537,7 +749,7 @@ async function main() {
   const apiBase = (process.env.DIRTY_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const skipLive = args.skipLive || process.env.DIRTY_SKIP_LIVE === '1';
 
-  const { ids: candidates, totalFiles, totalOccurrences } = scanContentForDirtyIds(ROOT_DIR);
+  const { ids: candidates, totalFiles, totalOccurrences, totalFaqPlaceholderFiles } = scanContentForDirtyIds(ROOT_DIR);
 
   let ids = candidates;
   let liveFilter = 'skipped';
@@ -573,10 +785,17 @@ async function main() {
   const { selected, leftover } = orderAndCap(ids, cap);
 
   const report = {
-    schema: 2,
+    // schema 3 (issue #220): aggiunge totalFaqPlaceholderFiles e i candidati
+    // trovati dai due predicati nuovi (residuo propagato, segnaposto FAQ),
+    // gia' dentro `selected`/`leftover` coi loro `sources` distintivi
+    // ("(residuo propagato)", "(faq-placeholder)") — nessun campo nuovo li
+    // serve, il consumatore che legga solo `counts`/`selected` come prima
+    // continua a funzionare.
+    schema: 3,
     generatedAt: new Date().toISOString(),
     totalFiles,
     totalOccurrences,
+    totalFaqPlaceholderFiles,
     apiBase,
     apiCommit,
     liveFilter,
@@ -596,7 +815,7 @@ async function main() {
   fs.writeFileSync(args.out, `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(
-    `[find-dirty-content-ids] ${totalFiles} file, ${totalOccurrences} byte C0, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
+    `[find-dirty-content-ids] ${totalFiles} file C0 (${totalOccurrences} byte), ${totalFaqPlaceholderFiles} file con segnaposto FAQ, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
   );
   for (const { section, id, sources, liveReason, dirtyLocales } of selected) {
     const why = liveReason === 'dirty' ? `live sporco: ${dirtyLocales.join(',')}` : `live ${liveReason ?? 'non filtrato'}`;

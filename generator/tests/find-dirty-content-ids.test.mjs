@@ -55,6 +55,10 @@ import {
   mapWithConcurrency,
   filterCandidatesByLivePage,
   residuesInText,
+  isPlaceholderFaqQuestion,
+  faqQuestionNamesInHtml,
+  faqQuestionsInBodyText,
+  pageCarriesFaqPlaceholder,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
@@ -191,6 +195,151 @@ test('scanContentForDirtyIds su un content/ senza corpi sporchi ritorna vuoto, n
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
+});
+
+// ── Il residuo PROPAGATO (issue #220 / #222) ────────────────────────────────
+//
+// Caso reale che ha guidato questo predicato: `lavena-ponte-tresa-territorio-
+// poroso` porta `<08>3territorio` ancora col byte C0 nel body IT e in
+// seo-blog-3.ts, ma la STESSA coppia senza un solo C0 in blog-meta-it.ts — un
+// file che non ha ALTRO C0 al suo interno, quindi il passo 1 lo salta per
+// intero. Questi fixture riproducono la stessa forma in miniatura: il residuo
+// e' CONFERMATO da un byte C0 vero in un file, e va cercato (non indovinato)
+// nelle altre superfici dello STESSO articolo.
+
+test('scanContentForDirtyIds: un residuo confermato da C0 in un file si propaga alle altre superfici dello stesso id, anche senza C0 li\'', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-propag-'));
+  try {
+    writeTree(root, {
+      // Ancora: il body porta ancora il marker C0, residuesInText lo trova.
+      'content/blog-body/it/lavena-ponte-tresa-territorio-poroso.ts':
+        "export default {\n 'blog.article.lavena-ponte-tresa-territorio-poroso.body1': 'descrive il \x083territorio poroso\x083 come';\n};\n",
+      // ZERO C0 in questo file: il passo 1 (findControlChars) non lo tocca.
+      // Il residuo 'poroso3' pero' c'e', dentro il campo title di QUESTO id —
+      // e nello STESSO file, per un ALTRO id, una cifra in mezzo a lettere
+      // che NON e' mai stata confermata da un C0 vero da nessuna parte: il
+      // controllo negativo che la propagazione non deve prendere per
+      // coincidenza testuale.
+      'content/blog-meta-it.ts':
+        "export default {\n" +
+          "  'blog.article.lavena-ponte-tresa-territorio-poroso.title': 'Il 3territorio poroso3 tra Varese',\n" +
+          "  'blog.article.altro-articolo.title': 'Il modello M5S vince a poroso3ville',\n" +
+          '};\n',
+    });
+
+    const { ids } = scanContentForDirtyIds(root);
+    const lavena = ids.find((e) => e.id === 'lavena-ponte-tresa-territorio-poroso');
+    assert.ok(lavena, 'l\'id con C0 deve comunque comparire');
+    assert.ok(
+      lavena.sources.some((s) => s.includes('blog-meta-it.ts') && s.includes('residuo propagato')),
+      `blog-meta-it.ts deve comparire come residuo propagato, sources=${JSON.stringify(lavena.sources)}`,
+    );
+
+    // Il controllo negativo: 'altro-articolo' non ha un byte C0 suo, e
+    // 'poroso3' che gli compare per coincidenza testuale non e' un residuo
+    // CONFERMATO per QUEL id (nessun file di 'altro-articolo' porta mai un C0)
+    // — non deve comparire affatto.
+    assert.ok(
+      !ids.some((e) => e.id === 'altro-articolo'),
+      'un id senza un solo byte C0 proprio non deve comparire per coincidenza testuale',
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('scanContentForDirtyIds: senza un\'ancora C0 da nessuna parte per quell\'id, niente si propaga (fail-closed)', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-propag-none-'));
+  try {
+    writeTree(root, {
+      // 'sar0' e' la FORMA del residuo, ma senza un file gemello che porti
+      // ancora il C0 per QUESTO id non c'e' niente da confermare: indovinare
+      // dalla sola forma (senza prova) e' esattamente il rischio scartato in
+      // fase di design (428 falsi positivi misurati su un solo file reale).
+      'content/blog-meta-it.ts':
+        "export default {\n  'blog.article.trump-intesa-o-inferno.title': 'Trump: sar0 l\\'inferno',\n};\n",
+    });
+    const { ids } = scanContentForDirtyIds(root);
+    assert.deepEqual(ids, []);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+// ── Il segnaposto FAQ (issue #220) ──────────────────────────────────────────
+
+test('isPlaceholderFaqQuestion riconosce l\'etichetta numerata dello schema nelle quattro lingue, non una domanda vera che parla di FAQ', () => {
+  assert.ok(isPlaceholderFaqQuestion('FAQ 1 based on the facts of the article?'));
+  assert.ok(isPlaceholderFaqQuestion('Domanda frequente 2 basata sui fatti?'));
+  assert.ok(isPlaceholderFaqQuestion('Häufig gestellte Frage 3: was bedeutet das?'));
+  assert.ok(isPlaceholderFaqQuestion('Question Fréquemment Posée 2 : Comment ?'));
+  // Caso reale trovato costruendo il predicato: l'etichetta sopravvive fusa
+  // dentro una domanda altrimenti genuina, non il segnaposto intero.
+  assert.ok(isPlaceholderFaqQuestion('FAQ 1: What does the uncomfortable question mean?'));
+  assert.ok(!isPlaceholderFaqQuestion('Quanto costa il diesel in Svizzera nel 2026?'));
+  assert.ok(!isPlaceholderFaqQuestion('Come funzionano le FAQ del sito?'));
+  assert.ok(!isPlaceholderFaqQuestion(''));
+  assert.ok(!isPlaceholderFaqQuestion(null));
+});
+
+test('faqQuestionNamesInHtml legge Question.name dal JSON-LD FAQPage, ignora blocchi non-FAQ o non parsabili', () => {
+  const html = [
+    '<script type="application/ld+json">{"@type":"BreadcrumbList"}</script>',
+    '<script type="application/ld+json">{ questo non e\' json </script>',
+    '<script type="application/ld+json">',
+    JSON.stringify({
+      '@type': 'FAQPage',
+      mainEntity: [{ '@type': 'Question', name: 'Una domanda vera?' }, { '@type': 'Question', name: 'FAQ 2 based on the facts?' }],
+    }),
+    '</script>',
+  ].join('\n');
+  assert.deepEqual(faqQuestionNamesInHtml(html), ['Una domanda vera?', 'FAQ 2 based on the facts?']);
+  assert.deepEqual(faqQuestionNamesInHtml('<html>niente script</html>'), []);
+});
+
+test('pageCarriesFaqPlaceholder: pulita no, con l\'etichetta dello schema si', () => {
+  const clean = '<script type="application/ld+json">' +
+    JSON.stringify({ '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: 'Quanto costa il diesel?' }] }) +
+    '</script>';
+  const dirty = '<script type="application/ld+json">' +
+    JSON.stringify({ '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: 'Domanda frequente 1 basata sui fatti?' }] }) +
+    '</script>';
+  assert.equal(pageCarriesFaqPlaceholder(clean), false);
+  assert.equal(pageCarriesFaqPlaceholder(dirty), true);
+});
+
+test('faqQuestionsInBodyText legge le domande dal campo .faq grezzo del body, [] se assente o non JSON valido', () => {
+  const text = "export default {\n 'blog.article.esempio.faq': '[{\"q\":\"Prima domanda?\",\"a\":\"risposta\"},{\"q\":\"Seconda domanda?\",\"a\":\"risposta\"}]',\n};\n";
+  assert.deepEqual(faqQuestionsInBodyText(text), ['Prima domanda?', 'Seconda domanda?']);
+  assert.deepEqual(faqQuestionsInBodyText("export default {\n 'blog.article.senza-faq.body1': 'niente qui';\n};\n"), []);
+  assert.deepEqual(faqQuestionsInBodyText("'blog.article.rotto.faq': '[non json',"), []);
+});
+
+test('scanContentForDirtyIds: un body con la FORMA dell\'etichetta FAQ e\' sporco anche senza un solo byte C0', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-faq-'));
+  try {
+    writeTree(root, {
+      'content/blog-body/de/domanda-scomoda.ts':
+        "export default {\n 'blog.article.domanda-scomoda.faq': '[{\"q\":\"FAQ 1: Was bedeutet das?\",\"a\":\"...\"}]',\n};\n",
+      'content/blog-body/it/pulito.ts':
+        "export default {\n 'blog.article.pulito.faq': '[{\"q\":\"Una domanda vera?\",\"a\":\"...\"}]',\n};\n",
+    });
+    const { ids, totalFaqPlaceholderFiles } = scanContentForDirtyIds(root);
+    assert.equal(totalFaqPlaceholderFiles, 1);
+    const hit = ids.find((e) => e.id === 'domanda-scomoda');
+    assert.ok(hit, 'l\'id con l\'etichetta FAQ deve comparire');
+    assert.ok(hit.sources.some((s) => s.includes('faq-placeholder')));
+    assert.ok(!ids.some((e) => e.id === 'pulito'));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('classifyProbe: una pagina con l\'etichetta FAQ nel JSON-LD e\' dirty anche a zero control character e zero residui', () => {
+  const dirtyFaqPage = '<script type="application/ld+json">' +
+    JSON.stringify({ '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: 'FAQ 1 based on the facts of the article?' }] }) +
+    '</script>';
+  assert.equal(classifyProbe({ status: 200, body: dirtyFaqPage, residues: [] }), 'dirty');
 });
 
 // ── Il filtro sulla pagina live (issue #73) ─────────────────────────────────
