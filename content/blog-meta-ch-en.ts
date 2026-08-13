@@ -2506,6 +2506,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Production and import price index: 0.1% decrease',
     'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'The UST reports a fall in production and import prices in July 2026, driven by declines in oil and natural gas.',
     'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Urban panorama of Lugano on a sunny day with financial buildings.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Rhine at a minimum, prices skyrocketing: gasoline is also more expensive',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'The exceptionally low level of the Rhine is complicating the transport of fuels to Switzerland and driving up costs.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Image of a car approaching a gas station with a high price',
 };
 
 export default blogMetaChEn;

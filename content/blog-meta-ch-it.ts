@@ -2506,6 +2506,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Indice prezzi produzione e importazione: calo dello 0,1%',
     'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'L\'UST comunica una flessione dei prezzi alla produzione e all\'importazione nel mese di luglio 2026, trainata dai ribassi di petrolio e gas naturale.',
     'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Panorama urbano di Lugano in una giornata di sole con edifici finanziari.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Reno ai minimi, prezzi alle stelle: più cara anche la benzina',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Il livello eccezionalmente basso del Reno sta complicando il trasporto di carburanti verso la Svizzera e facendo lievitare i costi.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Immagine di un\'auto che si avvicina a un distributore di benzina con un prezzo alto',
 };
 
 export default blogMetaChIt;

@@ -2506,6 +2506,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Indice des prix à la production et à l\'importation : baisse de 0,1 %',
     'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'L\'UST signale une baisse des prix à la production et à l\'importation en juillet 2026, tirée par les baisses de pétrole et de gaz naturel.',
     'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Panorama urbain de Lugano par une journée ensoleillée avec des bâtiments financiers.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Reno au plus bas, prix aux étoiles : l\'essence est également plus chère',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Le niveau exceptionnellement bas du Rhin complique le transport des carburants vers la Suisse et fait grimper les coûts.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Image d\'une voiture qui se rapproche d\'une station-service avec un prix élevé',
 };
 
 export default blogMetaChFr;

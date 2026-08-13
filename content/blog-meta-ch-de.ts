@@ -2506,6 +2506,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.prezzi-produzione-importazione-luglio-2026.title': 'Herstellungs- und Importpreisindex: Rückgang um 0,1%',
     'blog.article.prezzi-produzione-importazione-luglio-2026.excerpt': 'Das BfS meldet einen Rückgang der Produktions- und Importpreise im Juli 2026, angetrieben durch die Rückgänge bei Öl und Erdgas.',
     'blog.article.prezzi-produzione-importazione-luglio-2026.imageAlt': 'Stadtpanorama von Lugano an einem sonnigen Tag mit Finanzgebäuden.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.title': 'Rhein auf dem Tiefststand, Preise in die Höhe schießen: Auch Benzin teurer',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.excerpt': 'Das aussergewöhnlich niedrige Rheinniveau erschwert den Treibstofftransport in die Schweiz und treibt die Kosten in die Höhe.',
+    'blog.article.reno-ai-minimi-prezzi-svizzera.imageAlt': 'Bild eines Autos, das sich einem Benzintank mit einem hohen Preis nähert',
 };
 
 export default blogMetaChDe;
