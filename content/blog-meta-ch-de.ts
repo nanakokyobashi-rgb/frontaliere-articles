@@ -2545,6 +2545,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.consiglio-federale-pacchetto-misure.title': 'Der Bundesrat hat die Botschaft zur Kompass-Initiative verabschiedet.',
     'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Der Bundesrat hat die Botschaft zur Kompass-Initiative verabschiedet.',
     'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Der Bundesrat hat ein Paket von Massnahmen zur Sicherstellung der Stabilität des Schweizer Bankensystems angenommen.',
+    'blog.article.tete-de-moine-impatti.title': 'Mehr Trockenheit und Hitze erschweren die Produktion von Tête de Moine',
+    'blog.article.tete-de-moine-impatti.excerpt': 'Die Produktion von Tête de Moine AOP war von Trockenheit und Hitze betroffen.',
+    'blog.article.tete-de-moine-impatti.imageAlt': 'Die Produktion von Tête de Moine AOP ist durch Trockenheit und Hitze betroffen.',
 };
 
 export default blogMetaChDe;

@@ -2545,6 +2545,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.consiglio-federale-pacchetto-misure.title': 'Il Consiglio federale ha adottato il messaggio sull\'Iniziativa Bussola.',
     'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Il Consiglio federale ha adottato il messaggio sull\'Iniziativa Bussola.',
     'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Il Consiglio federale ha adottato un pacchetto di misure per garantire la stabilità del sistema bancario svizzero.',
+    'blog.article.tete-de-moine-impatti.title': 'Di più siccità e caldo mettono in difficoltà produzione Tête de Moine',
+    'blog.article.tete-de-moine-impatti.excerpt': 'La produzione di Tête de Moine AOP è stata colpita dalla siccità e dal caldo.',
+    'blog.article.tete-de-moine-impatti.imageAlt': 'La produzione di Tête de Moine AOP è stata colpita dalla siccità e dal caldo.',
 };
 
 export default blogMetaChIt;

@@ -2545,6 +2545,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.consiglio-federale-pacchetto-misure.title': 'Le Conseil fédéral a adopté le message sur l\'Initiative Boussole.',
     'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'Le Conseil fédéral a adopté le message sur l\'Initiative Boussole.',
     'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'Le Conseil fédéral a adopté un paquet de mesures pour garantir la stabilité du système bancaire suisse.',
+    'blog.article.tete-de-moine-impatti.title': 'Caldo e siccità ostacolano la produzione Tête de Moine',
+    'blog.article.tete-de-moine-impatti.excerpt': 'La production de Tête de Moine AOP a été affectée par la sécheresse et la chaleur.',
+    'blog.article.tete-de-moine-impatti.imageAlt': 'La production de Tête de Moine AOP a été touchée par la sécheresse et la chaleur.',
 };
 
 export default blogMetaChFr;

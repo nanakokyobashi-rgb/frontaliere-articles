@@ -2545,6 +2545,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.consiglio-federale-pacchetto-misure.title': 'The Federal Council adopted the message on the Compass Initiative.',
     'blog.article.consiglio-federale-pacchetto-misure.excerpt': 'The Federal Council adopted the message on the Compass Initiative.',
     'blog.article.consiglio-federale-pacchetto-misure.imageAlt': 'The Swiss Federal Council has adopted a package of measures to ensure the stability of the Swiss banking system.',
+    'blog.article.tete-de-moine-impatti.title': 'More drought and heat hamper Tête de Moine production',
+    'blog.article.tete-de-moine-impatti.excerpt': 'The production of Tête de Moine AOP has been affected by drought and heat.',
+    'blog.article.tete-de-moine-impatti.imageAlt': 'The production of Tête de Moine AOP has been hit by drought and heat.',
 };
 
 export default blogMetaChEn;
