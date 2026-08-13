@@ -2539,6 +2539,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.oro-in-crollo-svizzera.title': 'Dopo il boom, l\'oro inciampa: cosa aspettarsi ora?',
     'blog.article.oro-in-crollo-svizzera.excerpt': 'L\'oro ha chiuso il 2025 con un rialzo del 60%, ma ora sta attraversando una fase più incerta. La direzione futura è aperta.',
     'blog.article.oro-in-crollo-svizzera.imageAlt': 'L\'oro in crollo in Svizzera',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Il rompicapo degli sfollati per trovare un nuovo alloggio dopo un incendio',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 persone devono trovare un nuovo tetto dopo l\'incendio che ha devastato diversi alloggi ad Aigle (VD)',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Immagine di un edificio in fiamme a Lugano',
 };
 
 export default blogMetaChIt;

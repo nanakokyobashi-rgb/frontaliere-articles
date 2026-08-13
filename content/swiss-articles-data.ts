@@ -7615,6 +7615,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'incendio-nuovo-alloggi-alloggio-cantoni',
+    category: 'fiscale',
+    date: '2026-08-13T13:12:47.643Z',
+    image: '/images/blog/incendio-nuovo-alloggi-alloggio-cantoni.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

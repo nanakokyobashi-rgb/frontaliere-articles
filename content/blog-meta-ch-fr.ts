@@ -2539,6 +2539,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.oro-in-crollo-svizzera.title': 'Après le boom, l\'or trébuche : à quoi s\'attendre maintenant ?',
     'blog.article.oro-in-crollo-svizzera.excerpt': 'L\'or a clôturé l\'année 2025 en hausse de 60 %, mais traverse maintenant une phase plus incertaine. La direction future est ouverte.',
     'blog.article.oro-in-crollo-svizzera.imageAlt': 'Prix de l\'or en Suisse en baisse',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Le casse-tête des déplacés pour trouver un nouveau logement après un incendie',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 personnes doivent trouver un nouveau toit après l\'incendie qui a ravagé plusieurs logements à Aigle (VD)',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Image d\'un bâtiment en feu à Lugano',
 };
 
 export default blogMetaChFr;

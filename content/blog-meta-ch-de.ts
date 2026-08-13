@@ -2539,6 +2539,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.oro-in-crollo-svizzera.title': 'Nach dem Boom stolpert Gold: Was ist jetzt zu erwarten?',
     'blog.article.oro-in-crollo-svizzera.excerpt': 'Gold schloss das Jahr 2025 mit einem Plus von 60 Prozent ab, befindet sich nun aber in einer unsichereren Phase. Die zukünftige Richtung ist offen.',
     'blog.article.oro-in-crollo-svizzera.imageAlt': 'Goldpreise in der Schweiz fallen',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'Das Rätsel der Vertriebenen, um nach einem Brand eine neue Unterkunft zu finden',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 Personen müssen nach dem Brand, der mehrere Wohnungen in Aigle (VD) verwüstet hat, ein neues Dach finden',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Bild von einem brennenden Gebäude in Lugano',
 };
 
 export default blogMetaChDe;

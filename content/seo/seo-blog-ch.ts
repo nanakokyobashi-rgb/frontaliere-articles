@@ -32894,6 +32894,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incendio-nuovo-alloggi-alloggio-cantoni': {
+    title: 'Il rompicapo degli sfollati per trovare un nuovo alloggio dopo un incendio',
+    description: '35 persone devono trovare un nuovo tetto dopo l\'incendio che ha devastato diversi alloggi ad Aigle (VD). L\'Associazione svizzera degli inquilini chiede',
+    keywords: 'frontalieri, ticino, svizzera, italia, rompicapo, sfollati, trovare, nuovo',
+    ogTitle: 'Il rompicapo degli sfollati per trovare un nuovo alloggio dopo un incendio',
+    ogDescription: '35 persone devono trovare un nuovo tetto dopo l\'incendio che ha devastato diversi alloggi ad Aigle (VD). L\'Associazione svizzera degli inquilini chiede dei meccanismi che permettano di reinsediare rapidamente molte persone.',
+    canonicalPath: '/articoli-svizzera/incendio-nuovo-alloggi-alloggio-cantoni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il rompicapo degli sfollati per trovare un nuovo alloggio dopo un incendio",
+      "description": "35 persone devono trovare un nuovo tetto dopo l'incendio che ha devastato diversi alloggi ad Aigle (VD). L'Associazione svizzera degli inquilini chiede",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incendio-nuovo-alloggi-alloggio-cantoni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un edificio in fiamme a Lugano"
+      },
+      "datePublished": "2026-08-13T13:12:47+00:00",
+      "dateModified": "2026-08-13T13:12:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/incendio-nuovo-alloggi-alloggio-cantoni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

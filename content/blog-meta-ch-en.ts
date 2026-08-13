@@ -2539,6 +2539,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.oro-in-crollo-svizzera.title': 'After the boom, gold stumbles: what to expect now?',
     'blog.article.oro-in-crollo-svizzera.excerpt': 'Gold closed 2025 up 60%, but is now going through a more uncertain phase. Future direction is open.',
     'blog.article.oro-in-crollo-svizzera.imageAlt': 'Gold prices in Switzerland falling',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.title': 'The puzzle of displaced people to find a new home after a fire',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.excerpt': '35 people have to find a new roof after the fire that devastated several homes in Aigle (VD)',
+    'blog.article.incendio-nuovo-alloggi-alloggio-cantoni.imageAlt': 'Image of a burning building in Lugano',
 };
 
 export default blogMetaChEn;
