@@ -315,6 +315,21 @@ test('faqQuestionsInBodyText legge le domande dal campo .faq grezzo del body, []
   assert.deepEqual(faqQuestionsInBodyText("'blog.article.rotto.faq': '[non json',"), []);
 });
 
+test('faqQuestionsInBodyText con id: ancorata a QUELL\'id, non alla prima .faq del file (#289)', () => {
+  // Un file body oggi porta un solo id per convenzione del generatore, ma
+  // niente nel formato lo impedisce: se mai un file ne portasse due, la
+  // corruzione FAQ sul secondo id non deve sparire dietro la prima occorrenza
+  // nel file — l'invariante che il detector deve reggere senza falsi negativi.
+  const text =
+    "export default {\n" +
+    " 'blog.article.primo.faq': '[{\"q\":\"Domanda pulita?\",\"a\":\"...\"}]',\n" +
+    " 'blog.article.secondo.faq': '[{\"q\":\"Domanda frequente 1 segnaposto?\",\"a\":\"...\"}]',\n" +
+    "};\n";
+  assert.deepEqual(faqQuestionsInBodyText(text, 'primo'), ['Domanda pulita?']);
+  assert.deepEqual(faqQuestionsInBodyText(text, 'secondo'), ['Domanda frequente 1 segnaposto?']);
+  assert.deepEqual(faqQuestionsInBodyText(text, 'assente'), []);
+});
+
 test('scanContentForDirtyIds: un body con la FORMA dell\'etichetta FAQ e\' sporco anche senza un solo byte C0', () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-faq-'));
   try {
@@ -330,6 +345,30 @@ test('scanContentForDirtyIds: un body con la FORMA dell\'etichetta FAQ e\' sporc
     assert.ok(hit, 'l\'id con l\'etichetta FAQ deve comparire');
     assert.ok(hit.sources.some((s) => s.includes('faq-placeholder')));
     assert.ok(!ids.some((e) => e.id === 'pulito'));
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('scanContentForDirtyIds: un file body con DUE id vede il segnaposto FAQ sull\'id del file, non sul primo match nel testo (#289)', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-faq-multi-'));
+  try {
+    writeTree(root, {
+      // Caso di scuola: il formato non impedisce due id nello stesso file. La
+      // PRIMA `.faq` testuale appartiene a un id estraneo ed e' pulita; quella
+      // dell'id vero del file (dal nome del file, 'segnaposto') viene dopo e
+      // porta l'etichetta segnaposto. Prima del fix la regex non ancorata
+      // prendeva la prima occorrenza nel file a prescindere dall'id — qui
+      // quella sbagliata — e il segnaposto vero restava invisibile.
+      'content/blog-body/it/segnaposto.ts':
+        "export default {\n" +
+        " 'blog.article.altro-id.faq': '[{\"q\":\"Una domanda vera?\",\"a\":\"...\"}]',\n" +
+        " 'blog.article.segnaposto.faq': '[{\"q\":\"Domanda frequente 1: cosa significa?\",\"a\":\"...\"}]',\n" +
+        "};\n",
+    });
+    const { ids, totalFaqPlaceholderFiles } = scanContentForDirtyIds(root);
+    assert.equal(totalFaqPlaceholderFiles, 1);
+    assert.ok(ids.some((e) => e.id === 'segnaposto'));
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }
