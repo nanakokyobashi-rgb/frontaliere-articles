@@ -9882,6 +9882,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Gesamtarbeitsvertrag: Anleitung zu den Rechten',
     'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'Was garantiert ein GAV Arbeitnehmenden in der Schweiz? Vom 13. bis zum Mindestlohn - so funktioniert das Instrument zum Schutz der Arbeitsbedingungen.',
     'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Panoramablick auf Lugano, Arbeitsort für viele Grenzgänger.',
+    'blog.article.frontalieri-cassa-disoccupazione.title': 'Arbeitslosenkasse: Neue Regeln für Grenzgänger',
+    'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Neue Regeln für Grenzgänger in Bezug auf die Arbeitslosenkasse',
+    'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier in einer wirtschaftlichen Krise',
 };
 
 export default blogMetaDe;

@@ -29631,6 +29631,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'frontalieri-cassa-disoccupazione',
+ category: 'fiscale',
+ date: '2026-08-13T10:18:11.012Z',
+ image: '/images/blog/frontalieri-cassa-disoccupazione.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

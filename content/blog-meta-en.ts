@@ -9883,6 +9883,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Collective Bargaining Agreement: A Guide to Rights',
     'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'What does a CCL guarantee to workers in Switzerland? From thirteenth to minimum wages, this is how the tool that protects working conditions works.',
     'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Panoramic view of Lugano, workplace for many cross-border commuters.',
+    'blog.article.frontalieri-cassa-disoccupazione.title': 'Unemployment Fund: new rules for border workers',
+    'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'New rules for frontier workers regarding unemployment funds',
+    'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier in a situation of economic crisis',
 };
 
 export default blogMetaEn;

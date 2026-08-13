@@ -9884,6 +9884,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Contratto Collettivo di Lavoro: guida ai diritti',
     'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'Cosa garantisce un CCL ai lavoratori in Svizzera? Dalla tredicesima ai salari minimi, ecco come funziona lo strumento che tutela le condizioni di lavoro.',
     'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Veduta panoramica di Lugano, luogo di lavoro per molti frontalieri.',
+    'blog.article.frontalieri-cassa-disoccupazione.title': 'Cassa Disoccupazione: nuove norme per i frontalieri',
+    'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Nuove regole per i frontalieri in materia di cassa disoccupazione',
+    'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontaliere in una situazione di crisi economica',
 };
 
 export default blogMetaIt;

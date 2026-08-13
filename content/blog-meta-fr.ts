@@ -9885,6 +9885,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.contratto-collettivo-lavoro-svizzera.title': 'Convention collective de travail : guide des droits',
     'blog.article.contratto-collettivo-lavoro-svizzera.excerpt': 'Qu\'est-ce qu\'une CCT garantit aux travailleurs en Suisse ? Du treizième au salaire minimum, voici comment fonctionne l\'outil qui protège les conditions de travail.',
     'blog.article.contratto-collettivo-lavoro-svizzera.imageAlt': 'Vue panoramique de Lugano, lieu de travail pour de nombreux frontaliers.',
+    'blog.article.frontalieri-cassa-disoccupazione.title': 'Caisse de chômage : nouvelles règles pour les frontaliers',
+    'blog.article.frontalieri-cassa-disoccupazione.excerpt': 'Nouvelles règles pour les frontaliers en matière de caisse de chômage',
+    'blog.article.frontalieri-cassa-disoccupazione.imageAlt': 'Frontalier dans une situation de crise économique',
 };
 
 export default blogMetaFr;
