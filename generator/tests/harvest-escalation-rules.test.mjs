@@ -112,6 +112,17 @@ const HARVESTER_DECISION = Object.freeze({
   // Carve-out 2026-08-05: condizione ambientale (quota Max condivisa esaurita),
   // non una regola che un agent ha violato.
   'rate-limited': 'carved-out',
+  // Carve-out #5288, sceso col riallineamento #234. Mode 2 di
+  // `check-workflows-scope.mjs` emetteva lo stesso marker di Mode 1
+  // (`blocked-workflows-scope`), che pero' significa l'opposto: Mode 1 e' una
+  // capability MANCATA, Mode 2 e' la guardia che RIESCE e salta una diagnosi gia'
+  // pagata su una issue di pari titolo, a costo zero. Contarli insieme faceva
+  // alzare a una guardia funzionante proprio il bucket la cui ricorrenza apre
+  // l'escalation — il fix che funziona rifaceva scattare l'allarme. Ora Mode 2 ha
+  // un codice suo, escluso da `isEscalationDriver` (uno skip deterministico
+  // zero-Claude non e' una regola violata) ma tenuto in `NON_RETRYABLE` del
+  // drainer, perche' il verdetto e' deterministico e ri-accodarlo lo riprodurrebbe.
+  'skip-duplicate-diagnosis': 'carved-out',
   // ↓ NESSUN FILTRO. Ognuno di questi conta ogni marker.
   // #229: 11 marker su 11 contati nella finestra 14gg al 2026-08-13, tutti
   // aborti CORRETTI del fixer davanti a una PR aperta sugli stessi file. La fix

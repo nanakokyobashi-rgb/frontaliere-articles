@@ -31,15 +31,19 @@
  * follow-up, gestisce quindi la STESSA coda anche per revenue/tracker/
  * validation-failure/other — vedi `isQueueManaged` sotto, che sostituisce i
  * check hardcoded su `has(iss,'follow-up')`.
+ *
+ * Estensione 2026-08-10 (#5514): i crawler, unica categoria `route='fix'`, erano
+ * per ciò stesso l'unica ESCLUSA dal rescue (`isQueueManaged`) — e una loro run
+ * cancellata dalla coda concurrency non veniva né ri-accodata né parkata né
+ * marcata `needs-human`. Ora hanno un rescue proprio, gemello di quello
+ * queue-managed: vedi `crawlerFixDecision`.
  */
 import { execFileSync } from 'node:child_process';
 import { classifyIssue } from '../lib/classify-issue.mjs';
 import {
-  WORKFLOW_PATH_RE,
-  BARE_YML_RE,
-  NON_WORKFLOW_YML,
   CODE_PATH_RE,
   detectWorkflowScoped,
+  extractWorkflowRefs,
 } from '../lib/workflow-scope-detect.mjs';
 import { detectSecretsScoped, matchSecretsScopedLabel } from '../lib/secrets-scope-detect.mjs';
 import { isBackoffActive, maxQuotaResetsAt } from './claude-rate-limit.mjs';
@@ -87,6 +91,17 @@ const SETTLE_MIN = Number(process.env.FOLLOWUP_SETTLE_MIN || 3);
 const LBL_QUEUED = 'agent:fix-queued';
 const LBL_FIX = 'agent:fix';
 const LBL_PARKED = 'fu-parked';
+// Issue-contatore/tracker permanenti (#5615): il ledger crawler-transient e il
+// tracker loop-health sono queue-managed (category='other' → route='queue',
+// nessuna regex di categoria li riconosce), quindi altrimenti eleggibili
+// all'age-out come qualunque follow-up vecchio+inattivo. La loro "inattività"
+// però è il segnale sano — sopravvivono SOLO perché i fallimenti sub-soglia
+// che contano li ri-commentano; un periodo di crawler sani li lascia fermi e
+// il drainer li chiuderebbe, azzerando lo streak che contano. Riconoscerli dal
+// titolo sarebbe fragile (proxy, non fatto) — una label esplicita applicata
+// alla creazione (github-issue-creator.mjs, loop-health-report.mjs) è verificata
+// qui, indipendente da età/inattività.
+const LBL_NO_AGE_OUT = 'agent:no-age-out';
 
 // Age-out close: il post-merge-followup apre 1 follow-up per PR mergiata e
 // NESSUN workflow le chiude mai → ratchet monotòno (osservate 41 aperte). Un
@@ -109,9 +124,17 @@ const AGEOUT_MAX_PER_RUN = Number(process.env.FOLLOWUP_AGEOUT_MAX_PER_RUN || 20)
 // `overlap-skip`/`pr-already-open` (transienti: la PR bloccante può mergiare →
 // ri-tentabile) e l'ASSENZA di marker (run crashata/max_turns davvero orfana →
 // rescue normale). `pr-created` non arriva qui: `hasFixPR` lo intercetta prima.
+// `skip-duplicate-diagnosis` (#5288): stesso verdetto fermo di
+// `blocked-workflows-scope`, da cui è stato separato solo per non far salire il
+// bucket dell'harvester quando il guard FUNZIONA (vedi check-workflows-scope.mjs,
+// "Two outcome codes, not one"). Deve restare qui: il Mode 2 che l'ha emesso è
+// deterministico sul titolo, quindi ri-accodare la issue riprodurrebbe identico
+// il verdetto bruciando tentativi. Ometterlo sarebbe una regressione silenziosa
+// introdotta dalla sola rinomina del codice.
 export const NON_RETRYABLE = new Set([
   'no-root-cause',
   'blocked-workflows-scope',
+  'skip-duplicate-diagnosis',
   'blocked-secrets',
   'blocked-admin-settings',
   'revenue-tracker-manual',
@@ -293,6 +316,98 @@ export function extractSubIssueNumbers(body) {
   return [...new Set([...section.matchAll(/#(\d+)/g)].map((m) => Number(m[1])))];
 }
 
+// --- BACKLOG-TRACKER PRE-FLIGHT (escalation #5312/#5314/#5283) ---------------
+// Stessa classe dell'epic-tracker sopra, altra forma: le issue di *handoff di
+// sessione* ("Backlog dalla sessione …", "… il residuo") non descrivono UN
+// difetto, elencano il lavoro residuo di una sessione — voci eterogenee (a
+// volte già assegnate ad altre issue) che non hanno una root cause comune né un
+// target-file comune. Promuoverle a `agent:fix` non può che finire in un fix
+// parziale o in un abort: il fixer sceglie una voce delle N, o gira finché non
+// esaurisce i turni. Osservato su #5312 (8 voci), #5314 (7), #5283 (13), tutte
+// già `fu-parked` DOPO aver bruciato i tentativi invece che prima.
+//
+// Perché QUI e non in `classify-issue.mjs`: una categoria `backlog` instradata
+// a `route:'none'` escluderebbe a monte dal routing, che è esattamente ciò che
+// la decisione del proprietario del 2026-07-05 ha rimosso (AGENTS.md → "Issue
+// automation": «nessuna categoria è più opt-in-manuale; supervisione umana =
+// gate `## LGTM`, non esclusione a monte»), ed è asserito da
+// tests/classify-issue.test.ts («nessuna categoria produce più route='none'»).
+// Il pre-flight del drainer è l'altro layer: non tocca la policy di categoria,
+// decide per-issue su evidenza strutturale al momento del drain, ed è la sede
+// che il repo usa già per questa classe di burn (#4517, #5057, #1724, #2291).
+// `classifyIssue(title, labels)` non riceve nemmeno il body, quindi un criterio
+// strutturale lì non sarebbe esprimibile.
+//
+// CONSERVATIVO (bias a PROMUOVERE): serve la combinazione ESATTA marker nel
+// titolo + body che ENUMERA ≥BACKLOG_MIN_ITEMS voci distinte. Il marker da solo
+// non basta, ed è il punto: misurato sulle 2360 issue del repo, il marker
+// compare in 14 titoli ma solo 7 hanno un body enumerato (6-13 voci) — le altre
+// 7 (#3337, #3029, #3030, #3797, #3621, #3342, #5266) sono backlog *in prosa*
+// con UNO scope reale, e restano promuovibili. La separazione è netta: nessuna
+// issue del corpus cade fra 1 e 5 voci, quindi la soglia esatta non è
+// load-bearing (3, 4 o 5 danno lo stesso identico insieme); 3 è il minimo che
+// significhi ancora "più voci eterogenee".
+const BACKLOG_TITLE_RE = /^backlog\b|\bil residuo\b/i;
+const BACKLOG_MIN_ITEMS = 3;
+
+/**
+ * Numero di voci di lavoro DISTINTE enumerate nel body: task-list `- [ ]`/`- [x]`
+ * e sezioni numerate `## N.` (le due forme usate dagli handoff di sessione in
+ * questo repo). Pura → testabile.
+ * @param {string} body
+ * @returns {number}
+ */
+export function countBacklogItems(body) {
+  const b = String(body || '');
+  const checkboxes = (b.match(/^[ \t]*[-*][ \t]+\[[ xX]\]/gm) || []).length;
+  const numberedSections = (b.match(/^##[ \t]*\d+\.[ \t]/gm) || []).length;
+  return checkboxes + numberedSections;
+}
+
+/**
+ * Vero se l'issue è un contenitore di lavoro residuo (marker di handoff nel
+ * titolo + body che enumera ≥BACKLOG_MIN_ITEMS voci), quindi senza un difetto
+ * singolo da fixare. Pura → testabile.
+ * @param {string} title
+ * @param {string} body
+ */
+export function detectBacklogTracker(title, body) {
+  if (!BACKLOG_TITLE_RE.test(String(title || '').trim())) return false;
+  return countBacklogItems(body) >= BACKLOG_MIN_ITEMS;
+}
+
+// --- COMPRESS-CONTRACT-DOCS RATCHET PRE-FLIGHT (escalation #5523) -----------
+// `compress-contract-docs.yml` opens/reopens a SINGLE stable-titled issue whenever a
+// hot contract doc (AGENTS.md/REVIEW.md/ISSUES.md/FOLLOWUP.md) crosses its
+// compress-ceiling, asking for prose-only compression that preserves every heading,
+// rule, table, step, code-block, path and exact string verbatim. Across every
+// occurrence on record (#1112/#1113/#1569/#3039/#3641/#4136/#4567/#5507, spanning
+// 2026-06→08), the autonomous fixer has closed NONE of them — each was eventually
+// closed by a human-authored PR. #5507 measured concretely why: trimming redundant
+// prose alone left ISSUES.md at ~23.0KB, still over the 22000B ceiling — the fix that
+// actually landed (#5519) extracted an appendix into a new file, a structural
+// editorial call a mechanical prose-edit does not reach. Promoting it re-pays the
+// same run (and, once it exhausts the turn budget, the same needs-human park) every
+// time the ratchet re-fires. Park pre-promotion instead — the title is a fixed,
+// machine-generated constant the ratchet itself emits verbatim (never edited by a
+// human), so an exact match carries no false-positive risk.
+//
+// Why here and not `classify-issue.mjs` (same rationale as backlog-tracker above):
+// a category routed to `route:'none'` would exclude it from routing upstream, which
+// is exactly what the 2026-07-05 owner decision removed and what
+// `tests/classify-issue.test.ts` asserts against. The drainer pre-flight is the
+// layer this repo already uses for per-issue structural evidence at drain time.
+const COMPRESS_CONTRACT_DOCS_TITLE = '📏 Contract docs over compress ceiling — gentle-compress needed';
+
+/**
+ * Vero se l'issue è quella aperta dal ratchet `compress-contract-docs.yml` (titolo
+ * fisso, machine-generated — mai editato a mano). Pura → testabile.
+ * @param {string} title
+ */
+export function detectCompressContractDocsRatchet(title) {
+  return String(title || '').trim() === COMPRESS_CONTRACT_DOCS_TITLE;
+}
+
 // --- OVERLAP-FILE PRE-FLIGHT (escalation #3810) ----------------------------------
 // fix-outcome:overlap-skip ricorre 8×/14gg: il fixer Claude rileva l'overlap solo
 // DOPO aver bruciato ~1M token. Questo check zero-Claude rimuove il burn alla fonte:
@@ -352,10 +467,11 @@ export function isQueueManaged(iss) {
 /**
  * Un'issue è eleggibile all'age-out close? Puro (niente gh) → testabile.
  * Vero se: è queue-managed (qualunque categoria autofix ≠ crawler, non più
- * solo follow-up), NON in lavorazione (né `agent:fix` né `agent:fix-queued`),
- * creata da ≥ageOutDays E inattiva da ≥inactiveDays. I `fu-parked` ricadono
- * qui (non sono in coda). Il chiamante aggiunge la guardia "nessuna PR aperta"
- * (impura).
+ * solo follow-up), NON marcata `agent:no-age-out` (issue-contatore/tracker
+ * permanente, #5615), NON in lavorazione (né `agent:fix` né
+ * `agent:fix-queued`), creata da ≥ageOutDays E inattiva da ≥inactiveDays. I
+ * `fu-parked` ricadono qui (non sono in coda). Il chiamante aggiunge la
+ * guardia "nessuna PR aperta" (impura).
  * @param {{title?: string, labels?: Array<{name:string}>, createdAt?: string, updatedAt?: string}} iss
  * @param {{now:number, ageOutDays:number, inactiveDays:number}} opts
  */
@@ -363,6 +479,7 @@ export function isAgeOutEligible(iss, { now, ageOutDays, inactiveDays }) {
   if (!ageOutDays || ageOutDays <= 0) return false;
   if (!isQueueManaged(iss)) return false;
   const ls = (iss?.labels || []).map((l) => l.name);
+  if (ls.includes(LBL_NO_AGE_OUT)) return false; // issue-contatore/tracker permanente, mai eleggibile
   if (ls.includes(LBL_FIX) || ls.includes(LBL_QUEUED)) return false; // in lavorazione/coda
   const created = Date.parse(iss?.createdAt);
   const updated = Date.parse(iss?.updatedAt);
@@ -370,6 +487,137 @@ export function isAgeOutEligible(iss, { now, ageOutDays, inactiveDays }) {
   const ageDays = (now - created) / 86_400_000;
   const idleDays = (now - updated) / 86_400_000;
   return ageDays >= ageOutDays && idleDays >= inactiveDays;
+}
+
+// --- INATTIVITÀ SIGNIFICATIVA vs `updatedAt` (starvation del PARKED-RETRY) ---
+// `updatedAt` di GitHub si alza a OGNI commento, compresi quelli dei bot. I
+// monitor che hanno APERTO queste issue le ri-commentano ogni 2-3 ore («🔁
+// Recurrence on workflow run»), quindi le issue più sorvegliate non raggiungono
+// MAI la quiete richiesta dal cooldown del PARKED-RETRY e restano escluse dalla
+// riparazione per sempre. Il rinfresco automatico è esattamente ciò che le
+// esclude dal venire riparate.
+//
+// Misurato il 2026-08-11 sulle 35 issue aperte del sito: 19 candidate
+// `fu-parked` superano tutti gli altri filtri, **zero** superano il cooldown —
+// nessuna arriva a 5 giorni di `updatedAt` fermo (il massimo osservato è 2,67g,
+// il minimo 0,02g). Le vittime sono le `fu-prio:high` di SEO, cioè le più
+// preziose: #5321 (24 commenti/14gg, gap max 0,86g), #5429 (14, 0,35g), #5323
+// (11, 1,00g), #5341 (9, 0,54g).
+//
+// L'ironia che rende lo stato STABILE invece che transitorio: lo stesso
+// `updatedAt` che le affama le protegge anche dall'age-out close, che legge lo
+// stesso identico campo (`AGEOUT_INACTIVE_DAYS`, vedi `isAgeOutEligible` sopra)
+// → limbo permanente, mai ritentate e mai chiuse.
+//
+// La fix cambia QUALE tempo si misura, non quanto se ne aspetta:
+// `RETRY_COOLDOWN_DAYS`, `MAX_REPARK_GEN` e `RETRY_MAX_PER_RUN` restano
+// invariati (abbassati apposta il 2026-06-30 per frugalità di quota; il cap
+// 1/run resta l'unica protezione che conta sul volume).
+
+// Riconoscere un bot NON è una lista da mantenere a mano — e questo repo lo
+// dimostra da solo. Le due forme in cui GitHub espone lo stesso attore:
+//   • REST   `/issues/N/comments` → `user.login: "github-actions[bot]"`,
+//                                   `user.type: "Bot"`   ← flag AUTORITATIVO
+//   • GraphQL (`gh issue view --json comments`) → `author.login:
+//                                   "github-actions"`, nessun flag, NESSUN suffisso
+// Verificato il 2026-08-11 sulle 19 candidate del pool: 145 commenti di bot su
+// 185, da TRE bot distinti — `github-actions[bot]` (118), `claude[bot]` (24) e
+// `frontaliere-automation[bot]` (3). Il terzo è la prova del perché la sola
+// allowlist non basta: è comparso senza che nessuno lo aggiungesse a niente, e
+// in GraphQL si chiama `frontaliere-automation`, senza suffisso — una regola
+// basata solo sul suffisso lo mancherebbe, una basata solo sull'allowlist pure.
+// Un bot non riconosciuto rimette la sua issue in starvation IN SILENZIO: è
+// esattamente il difetto che questa fix chiude, e non deve poter tornare per il
+// solo fatto che è nato un nuovo workflow.
+//
+// Perciò il cooldown legge i commenti dalla REST (`issueCommentsRest`), dove il
+// flag `user.type` arriva da GitHub e si mantiene da solo. `isBotLogin` resta
+// come fallback per la forma GraphQL, che il resto di questo file usa già.
+export const BOT_COMMENT_LOGINS = new Set(['github-actions', 'claude', 'frontaliere-automation']);
+
+/**
+ * Fallback per la forma GraphQL, dove non esiste alcun flag: suffisso `[bot]`
+ * (regola generale) oppure allowlist dei bot osservati su questo repo (i login
+ * GraphQL sono nudi, quindi il suffisso da solo non li vedrebbe). Login
+ * assente/illeggibile → `false`: non si ignora mai una voce potenzialmente
+ * umana per un campo mancante. Pura → testabile.
+ * @param {string|undefined} login
+ */
+export function isBotLogin(login) {
+  const l = String(login || '').trim().toLowerCase();
+  if (!l) return false;
+  if (l.endsWith('[bot]')) return true;
+  return BOT_COMMENT_LOGINS.has(l);
+}
+
+/**
+ * Vero se il commento è stato scritto da un bot. Accetta entrambe le forme:
+ * REST (`user.type === 'Bot'`, autoritativo → nessuna manutenzione) e GraphQL
+ * (`author.login`, via `isBotLogin`). Pura → testabile.
+ * @param {{user?: {login?: string, type?: string}, author?: {login?: string}}} comment
+ */
+export function isBotComment(comment) {
+  if (String(comment?.user?.type || '') === 'Bot') return true;
+  return isBotLogin(comment?.user?.login ?? comment?.author?.login);
+}
+
+/**
+ * Timestamp (epoch ms) dell'ultimo evento SIGNIFICATIVO della issue — cioè un
+ * evento che dice qualcosa sul suo STATO, invece di limitarsi a rinfrescarla:
+ *
+ *  - un commento di un autore NON-bot (qualcuno ha davvero detto qualcosa);
+ *  - un commento che porta un marker `FIX_OUTCOME`, anche se di un bot: è il
+ *    verdetto con cui il fixer chiude una run, quindi la migliore
+ *    approssimazione DISPONIBILE del momento del park — che è una pura mutazione
+ *    di label e non ha alcun timestamp nel JSON delle issue — e non costa
+ *    nessuna chiamata in più, perché i commenti sono già quelli letti qui.
+ *    Non ricorre: una issue parkata non viene promossa, quindi non produce nuovi
+ *    verdetti. È questo termine a impedire che «ignora i bot» degeneri in
+ *    «ri-accoda subito un park di un'ora fa»;
+ *  - in mancanza di entrambi, la CREAZIONE della issue.
+ *
+ * Fuori resta il rumore che causa la starvation: ping ricorrenti dei monitor,
+ * digest, commenti di aggiornamento automatico.
+ *
+ * INVARIANTE: il valore è sempre ≤ `updatedAt`, perché ognuno di questi eventi
+ * bumpa `updatedAt`. Quindi il pool calcolato con questa funzione è un
+ * SOVRAINSIEME di quello calcolato con `updatedAt`: la fix non può escludere
+ * nulla che oggi entri. Pura (niente gh) → testabile.
+ *
+ * Accetta entrambe le forme di commento: REST (`created_at`, `user`) e GraphQL
+ * (`createdAt`, `author`).
+ *
+ * @param {{createdAt?: string, created_at?: string}} iss
+ * @param {Array<{body?: string, createdAt?: string, created_at?: string, author?: {login?: string}, user?: {login?: string, type?: string}}>} comments
+ * @returns {number|null} epoch ms, o null se nessuna data è leggibile
+ */
+export function lastSignificantActivityAt(iss, comments) {
+  const created = Date.parse(iss?.createdAt ?? iss?.created_at);
+  let at = Number.isNaN(created) ? -Infinity : created;
+  for (const c of comments || []) {
+    const t = Date.parse(c?.createdAt ?? c?.created_at);
+    if (Number.isNaN(t) || t <= at) continue;
+    if (!isBotComment(c) || FIX_OUTCOME_RE.test(String(c?.body || ''))) at = t;
+  }
+  return at === -Infinity ? null : at;
+}
+
+/**
+ * La issue parkata ha superato il cooldown di ri-accodo? Misura l'inattività
+ * dall'ultimo evento significativo (vedi sopra), non da `updatedAt`. Date
+ * tutte illeggibili → `false` (non ri-accodare al buio). Pura → testabile.
+ *
+ * L'interruttore on/off resta del chiamante (`RETRY_COOLDOWN_DAYS > 0` disabilita
+ * l'intero pass): qui `cooldownDays = 0` significa letteralmente «nessuna attesa».
+ *
+ * @param {{createdAt?: string}} iss
+ * @param {Array<{body?: string, createdAt?: string, author?: {login?: string}}>} comments
+ * @param {{now: number, cooldownDays: number}} opts
+ */
+export function isRetryCooldownElapsed(iss, comments, { now, cooldownDays }) {
+  const at = lastSignificantActivityAt(iss, comments);
+  if (at === null) return false;
+  return (now - at) / 86_400_000 >= cooldownDays;
 }
 
 function gh(args, { json = true } = {}) {
@@ -437,7 +685,11 @@ const prioRank = (iss) => (has(iss, 'fu-prio:high') ? 0 : 1); // high prima
 // i parked con il fixer migliorato, BOUNDED (no loop infinito):
 //   - skip WF-scope (capability-guard: il fixer CI non può toccare workflows →
 //     re-fail garantito; restano umani/age-out);
-//   - cooldown: solo parked fermi da ≥ RETRY_COOLDOWN_DAYS (non i freschi);
+//   - cooldown: solo parked fermi da ≥ RETRY_COOLDOWN_DAYS. «Fermi» si misura
+//     sull'ultimo evento SIGNIFICATIVO (`lastSignificantActivityAt`), non su
+//     `updatedAt`: i commenti dei bot rinfrescano `updatedAt` senza dire nulla
+//     sullo stato, e le issue sorvegliate da un monitor non arrivavano mai a
+//     5 giorni di quiete — restavano escluse dalla riparazione per sempre;
 //   - generation-cap: `fu-reparked:N` ≤ MAX_REPARK_GEN (poi resta parked stabile);
 //   - cap/run anti-burst.
 // Token-frugality (2026-06-30): default abbassati per strozzare il ri-burn di
@@ -448,18 +700,45 @@ const prioRank = (iss) => (has(iss, 'fu-prio:high') ? 0 : 1); // high prima
 const RETRY_COOLDOWN_DAYS = Number(process.env.FOLLOWUP_RETRY_COOLDOWN_DAYS || 5);
 const MAX_REPARK_GEN = Number(process.env.FOLLOWUP_MAX_REPARK_GEN || 1);
 const RETRY_MAX_PER_RUN = Number(process.env.FOLLOWUP_RETRY_MAX_PER_RUN || 1);
+// Il cooldown si misura sull'ultimo evento SIGNIFICATIVO, non su `updatedAt`
+// (vedi `lastSignificantActivityAt`), e leggerlo costa una `gh issue view --json
+// comments` per candidata. Due limiti tengono il costo bounded e indipendente
+// dalla lunghezza del backlog:
+//  • si legge SOLO chi `updatedAt` da solo escluderebbe. Chi è già quieto entra
+//    nel pool con zero chiamate in più, esattamente come prima di questa fix
+//    (l'invariante «significativo ≤ updatedAt» rende il salto sicuro);
+//  • cap per run, sullo stesso modello di `QUOTA_SCAN_MAX`. 25 copre con margine
+//    le 19 candidate misurate il 2026-08-11; l'eccedenza è dichiarata nel log e
+//    rivalutata al tick successivo (AGENTS.md "no silent cap").
+const RETRY_COMMENT_SCAN_MAX = Number(process.env.FOLLOWUP_RETRY_COMMENT_SCAN_MAX || 25);
+// Costo di una singola lettura commenti per il budget di run: una `gh issue
+// view`, molto meno della coppia comment+edit di `ITEM_COST_MS`.
+const COMMENT_SCAN_COST_MS = Number(process.env.FOLLOWUP_COMMENT_SCAN_COST_MS || 3_000);
 const reparkGenOf = (iss) => {
   const m = names(iss).map((n) => /^fu-reparked:(\d+)$/.exec(n)).find(Boolean);
   return m ? parseInt(m[1], 10) : 0;
 };
 /** WF-scope = il fix toccherebbe .github/workflows (capability-guard) → non
- * auto-fixabile. Best-effort sul body+titolo; null/errore → conservativo (skip
- * retry, non rischiare un re-fail garantito). */
+ * auto-fixabile. Riusa `detectWorkflowScoped` (stesso detector di
+ * `check-workflows-scope.mjs`, vedi `scripts/lib/workflow-scope-detect.mjs`)
+ * invece di un regex locale sulla parola nuda "workflow": issue come
+ * `Workflow Failure: <name>` (titolo generato da qualunque monitor CI, mai un
+ * vero fix su `.github/workflows/**`) matchavano il bare-word e restavano
+ * escluse per sempre dal PARKED-RETRY → mai ripescate → chiuse per age-out
+ * senza che il loro fix reale (quasi sempre in `scripts/`/codice) fosse mai
+ * ritentato (#5455). `detectWorkflowScoped` richiede un path `.yml`/`.yaml`
+ * concreto E nessun path di codice non-workflow citato — niente falsi
+ * positivi sulla parola da sola. null/errore → conservativo (skip retry, non
+ * rischiare un re-fail garantito). */
 function isWorkflowScoped(num) {
   try {
-    const d = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'title,body']);
-    const t = `${d?.title || ''}\n${d?.body || ''}`;
-    return /\.github\/workflows|\bworkflow(s)?\b/i.test(t);
+    // `labels` is fetched (not just title/body) because the shared detector recognises a
+    // monitor auto-file by the `ci-timeout` label as well as by the title prefix (#5595).
+    const d = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'title,body,labels']);
+    return detectWorkflowScoped(`${d?.title || ''}\n${d?.body || ''}`, {
+      title: d?.title || '',
+      labels: d?.labels,
+    });
   } catch { return true; }
 }
 
@@ -535,25 +814,146 @@ export function isSettlingPromotion({ outcome, ageMin, settleMin }) {
   return outcome === null && ageMin < settleMin;
 }
 
-/** Ultimo verdetto FIX_OUTCOME sulla issue, o null. Best-effort: null su errore
- * gh/parse → fail-open al rescue normale (mai park per un glitch API). */
-function latestFixOutcome(num) {
+// --- CRAWLER RESCUE + PARK (escalation #5514) --------------------------------
+// I crawler sono l'UNICA categoria con `route='fix'` (agent:fix diretto, salta la
+// coda) e sono per questo l'unica categoria che il rescue orfani sotto esclude
+// (`isQueueManaged`). Le due decisioni sono singolarmente ragionevoli e insieme
+// lasciavano un buco che non chiudeva nessuno: una run crawler CANCELLATA dalla
+// coda concurrency (`issue-fix.yml`: group globale + `cancel-in-progress:false`
+// → GitHub tiene UNA sola pending per gruppo e ogni nuova pending sfratta la
+// precedente) non veniva né ri-accodata, né parkata, né marcata `needs-human`.
+// La issue restava `agent:fix` per sempre: `on: issues:[labeled]` è one-shot,
+// l'evento è già stato consumato dalla run sfrattata, e nessun trigger la
+// ri-arma. Misurato 2026-08-10: #5392 #5393 #5394 #5395 ferme da due giorni,
+// etichettate tutte alle 09:02 del 2026-08-08 (1 run su 5 sopravvissuta), più
+// 13 `cancelled` su 100 run `issue-fix`.
+//
+// Il predecessore di questo blocco (`CRAWLER MAX-TURNS PARK`, #3886) copriva
+// SOLO `outcome === 'max-turns'` e faceva `continue` su tutto il resto — quindi
+// proprio sul `cancelled`, che non lascia nessun marker.
+//
+// La risposta giusta al `cancelled` è RI-ARMARE, non parkare: una run cancellata
+// in coda non è mai partita, non ha prodotto NESSUN verdetto, quindi non c'è
+// niente da cui dedurre che il fix sia impossibile. Parkare qui sarebbe la
+// stessa perdita silenziosa in una veste più ordinata. Il ri-arma passa dalla
+// coda (`agent:fix-queued`) invece di togliere+rimettere `agent:fix` a mano: è
+// il DRAIN sotto a rimettere la label, e lo fa solo a slot libero e una alla
+// volta — cioè esattamente la condizione che rende impossibile un secondo
+// sfratto. `fu-prio:high` perché un crawler rotto è production-critical (job
+// persi in silenzio) e non deve drenare dietro ai follow-up.
+//
+// BOUND — `CRAWLER_MAX_ATTEMPTS`, default = `MAX_ATTEMPTS` (3). Un ri-arma senza
+// contatore è un loop infinito, e i crawler non usavano `fu-attempt`. Tre e non
+// altro, per tre ragioni misurabili: (a) è lo stesso guasto delle queue-managed
+// (run morta senza verdetto) e lo stesso budget — un crawler non può consumare
+// più quota Claude condivisa di qualunque altra categoria; (b) le label
+// `fu-attempt:N` esistono nel repo solo per N∈{1,2,3} (vedi ROUTING_LABELS in
+// triage-sweep.mjs) e `gh issue edit --add-label` fallisce su una label
+// inesistente, quindi un tetto più alto sarebbe rotto in produzione, non solo
+// discutibile; (c) col burst disinnescato a monte (triage-sweep: un solo
+// `agent:fix` diretto per run, e solo a slot libero) un secondo tentativo è già
+// raro — se ne servono tre, a uccidere la run è qualcos'altro rispetto alla coda
+// concurrency, ed è esattamente il momento in cui deve guardarla una persona.
+// Al tetto: `fu-parked` + `needs-human` (i crawler non passano dal parked-retry,
+// che filtra su `isQueueManaged` → `fu-parked` da solo sarebbe uno stato
+// terminale che non guarda nessuno).
+export const CRAWLER_MAX_ATTEMPTS = Number(process.env.FOLLOWUP_CRAWLER_MAX_ATTEMPTS || MAX_ATTEMPTS);
+
+/**
+ * Decide cosa fare di una issue crawler (`route='fix'`, non queue-managed) che
+ * porta `agent:fix`. Pura (niente gh) → testabile senza mock.
+ *
+ * Ordine dei rami, e perché:
+ *  1. `hasPR` → la run ha prodotto lavoro, non si tocca.
+ *  2/3/4. VERDETTI (`max-turns`, ZERO_WORK, NON_RETRYABLE): un marker FIX_OUTCOME
+ *     è la prova che la run è TERMINATA (il fixer lo posta in chiusura), quindi
+ *     qui la guardia d'età non serve e agire subito preserva il timing del park
+ *     `max-turns` che c'era prima di questo blocco.
+ *  5. settling: solo con `outcome === null` per costruzione (vedi
+ *     `isSettlingPromotion`) — promozione fresca, run non ancora visibile in
+ *     `gh run list`: rinvia il drain di un tick, non toccare la issue.
+ *  6. troppo giovane: senza verdetto non si distingue una run morta da una che
+ *     non si è ancora registrata → aspetta `orphanMinAgeMin`.
+ *  7. NESSUN VERDETTO e vecchia = run cancellata-in-coda / crashata / mai
+ *     partita → ri-arma con tentativo consumato, park al tetto.
+ *
+ * @param {{outcome: string|null, ageMin: number, attempt?: number, hasPR?: boolean,
+ *          quotaBackoffActive?: boolean, settleMin?: number, orphanMinAgeMin?: number,
+ *          maxAttempts?: number}} args
+ * @returns {{action: 'skip'|'settling'|'hold-quota'|'requeue'|'requeue-zero-work'|'park-max-turns'|'park-verdict'|'park-attempts', nextAttempt: number, reason: string}}
+ */
+export function crawlerFixDecision({
+  outcome,
+  ageMin,
+  attempt = 0,
+  hasPR = false,
+  quotaBackoffActive = false,
+  settleMin = SETTLE_MIN,
+  orphanMinAgeMin = ORPHAN_MIN_AGE_MIN,
+  maxAttempts = CRAWLER_MAX_ATTEMPTS,
+} = {}) {
+  const keep = (action, reason) => ({ action, nextAttempt: attempt, reason });
+  if (hasPR) return keep('skip', 'ha una PR fix aperta');
+  if (outcome === 'max-turns') return keep('park-max-turns', 'error_max_turns (deterministico: stesso cap, stesso esito)');
+  if (outcome && ZERO_WORK.has(outcome)) {
+    // La run è morta prima di leggere la issue (429): 0 turni, $0, issue INTATTA
+    // → ri-accoda SENZA consumare un tentativo. Finestra ancora aperta → non
+    // toccare nulla: la issue resta il beacon del backoff per i tick successivi.
+    return quotaBackoffActive
+      ? keep('hold-quota', `${outcome}, finestra quota ancora aperta`)
+      : keep('requeue-zero-work', `${outcome}, finestra quota chiusa (tentativo NON consumato)`);
+  }
+  if (outcome && NON_RETRYABLE.has(outcome)) return keep('park-verdict', `verdetto non-ri-tentabile: ${outcome}`);
+  if (isSettlingPromotion({ outcome: outcome ?? null, ageMin, settleMin })) return keep('settling', 'promozione fresca, run non ancora visibile');
+  if (ageMin < orphanMinAgeMin) return keep('skip', `senza verdetto ma giovane (${Math.round(ageMin)}min < ${orphanMinAgeMin}min)`);
+  const nextAttempt = attempt + 1;
+  const reason = outcome
+    ? `esito transiente ${outcome}, nessuna PR`
+    : 'nessun verdetto (run cancellata-in-coda / crashata / mai partita)';
+  return nextAttempt >= maxAttempts
+    ? { action: 'park-attempts', nextAttempt, reason: `${reason}, tentativo ${nextAttempt}/${maxAttempts}` }
+    : { action: 'requeue', nextAttempt, reason: `${reason}, tentativo ${nextAttempt}/${maxAttempts}` };
+}
+
+/** Commenti della issue in forma GraphQL (`body`/`createdAt`/`author.login`), o
+ * `null` su errore gh. Il null è informativo e va distinto da `[]`: «non ho
+ * potuto leggerli» non è «non ce ne sono». I chiamanti che non hanno bisogno
+ * della distinzione fanno `|| []`. */
+function issueComments(num) {
   try {
     const data = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'comments']);
-    return latestFixOutcomeFromComments(Array.isArray(data?.comments) ? data.comments : []);
+    return Array.isArray(data?.comments) ? data.comments : [];
   } catch {
     return null;
   }
 }
 
-/** Beacon di quota sulla issue (epoch di reset), o null. Best-effort. */
-function quotaResetsAt(num) {
+/** Commenti della issue in forma REST, o `null` su errore gh. Serve SOLO al
+ * cooldown del PARKED-RETRY, ed è l'unica sorgente che porta `user.type` — il
+ * flag di bot autoritativo, che non richiede alcuna allowlist da mantenere
+ * (vedi `isBotComment`). `--paginate` è obbligatorio: la REST restituisce i
+ * commenti in ordine CRESCENTE, quindi senza paginare una issue con >100
+ * commenti darebbe i più VECCHI e l'ultimo evento significativo risulterebbe
+ * più antico del vero — cioè un ri-accodo troppo eager, l'errore nel verso
+ * sbagliato. `per_page=100` tiene le pagine (e quindi le chiamate) al minimo. */
+function issueCommentsRest(num) {
   try {
-    const data = gh(['issue', 'view', String(num), '--repo', REPO, '--json', 'comments']);
-    return maxQuotaResetsAt(Array.isArray(data?.comments) ? data.comments : []);
+    const out = gh(['api', `repos/${REPO}/issues/${num}/comments?per_page=100`, '--paginate']);
+    return Array.isArray(out) ? out : [];
   } catch {
     return null;
   }
+}
+
+/** Ultimo verdetto FIX_OUTCOME sulla issue, o null. Best-effort: null su errore
+ * gh/parse → fail-open al rescue normale (mai park per un glitch API). */
+function latestFixOutcome(num) {
+  return latestFixOutcomeFromComments(issueComments(num) || []);
+}
+
+/** Beacon di quota sulla issue (epoch di reset), o null. Best-effort. */
+function quotaResetsAt(num) {
+  return maxQuotaResetsAt(issueComments(num) || []);
 }
 
 /**
@@ -657,13 +1057,52 @@ function runDrain() {
   // Ortogonale allo slot (sposta solo fu-parked→queued; il drain promuove dopo).
   if (RETRY_COOLDOWN_DAYS > 0) {
     const now = Date.now();
-    const reparkable = listIssues(LBL_PARKED)
+    const cooldownMin = RETRY_COOLDOWN_DAYS * 1440;
+    const pool = listIssues(LBL_PARKED)
       .filter((iss) => isQueueManaged(iss))
       .filter((iss) => !has(iss, LBL_FIX) && !has(iss, LBL_QUEUED)) // non già in lavoro/coda
       .filter((iss) => !has(iss, 'needs-human'))                    // già escalato (too-large) → fuori dal retry
-      .filter((iss) => reparkGenOf(iss) < MAX_REPARK_GEN)            // generation-cap
-      .filter((iss) => minutesSince(iss.updatedAt) >= RETRY_COOLDOWN_DAYS * 1440) // cooldown
-      .sort((a, b) => prioRank(a) - prioRank(b) || Date.parse(a.updatedAt) - Date.parse(b.updatedAt));
+      .filter((iss) => reparkGenOf(iss) < MAX_REPARK_GEN);           // generation-cap
+    // Cooldown (vedi `lastSignificantActivityAt`): lo scarto è fra chi è quieto
+    // DAVVERO e chi lo sembra soltanto perché nessun bot lo sta ri-commentando.
+    // `updatedAt` è un limite superiore dell'ultimo evento significativo, quindi
+    // chi lo supera è eleggibile per costruzione e non serve leggerne i commenti.
+    let commentScans = 0;
+    let scanCapped = 0;
+    let unreadable = 0;
+    const eligible = [];
+    for (const iss of pool) {
+      if (minutesSince(iss.updatedAt) >= cooldownMin) {
+        // Quieto anche sul campo grezzo → eleggibile senza chiamate extra. La
+        // chiave d'ordine è `updatedAt`, che sovrastima la staleness reale: chi
+        // passa da questo ramo non può quindi scavalcare in coda chi è entrato
+        // con un evento significativo davvero più vecchio.
+        eligible.push({ iss, at: Date.parse(iss.updatedAt) });
+        continue;
+      }
+      if (commentScans >= RETRY_COMMENT_SCAN_MAX) { scanCapped++; continue; }
+      if (!budget.take(`#${iss.number} (cooldown-scan)`, COMMENT_SCAN_COST_MS)) break;
+      commentScans++;
+      const comments = issueCommentsRest(iss.number);
+      if (comments === null) { unreadable++; continue; } // glitch gh → si rivaluta al prossimo tick
+      if (!isRetryCooldownElapsed(iss, comments, { now, cooldownDays: RETRY_COOLDOWN_DAYS })) continue;
+      eligible.push({ iss, at: lastSignificantActivityAt(iss, comments) });
+    }
+    if (commentScans) {
+      // Osservabilità della fix: senza questa riga l'effetto è invisibile nei
+      // log, e «quante ne sblocca davvero» tornerebbe una domanda da misurare a
+      // mano fuori dal loop.
+      console.log(`parked-retry: ${commentScans}/${pool.length} candidate escluse da \`updatedAt\` e rivalutate sull'ultimo evento significativo → ${eligible.length} nel pool.`);
+    }
+    if (scanCapped) {
+      console.log(`parked-retry: cap di scansione commenti ${RETRY_COMMENT_SCAN_MAX}/run raggiunto, ${scanCapped} candidate non valutate in questo tick (no silent cap).`);
+    }
+    if (unreadable) {
+      console.log(`parked-retry: ${unreadable} candidate con commenti illeggibili (glitch gh) → nessuna decisione presa, rivalutate al prossimo tick.`);
+    }
+    const reparkable = eligible
+      .sort((a, b) => prioRank(a.iss) - prioRank(b.iss) || a.at - b.at) // high prima, poi i più stantii
+      .map((e) => e.iss);
     let retried = 0;
     let skippedWf = 0;
     for (const iss of reparkable) {
@@ -693,29 +1132,10 @@ function runDrain() {
     if (skippedWf) console.log(`parked-retry: ${skippedWf} skip WF-scope (capability-guard → restano parked/age-out).`);
   }
 
-  // --- CRAWLER MAX-TURNS PARK (non-queue-managed, escalation #3886) -----------
-  // Crawler issues (route='fix', !isQueueManaged) che colpiscono error_max_turns
-  // sono ESCLUSE dal rescue loop sotto (filtro isQueueManaged → solo queue-managed).
-  // Senza questo pass il marker `max-turns` resta senza park → needs-human non
-  // viene mai aggiunto → isAvoidableMaxTurns() li conta come "loop fixabile"
-  // → harvester escalation ricorre deterministicamente (#3853/#3858/#3862).
-  // Park con needs-human AL PRIMO max-turns: stessa logica del rescue queue-managed
-  // (error_max_turns è deterministico — ri-tentare lo stesso crawler riproduce
-  // identico esito al medesimo cap). I crawler non usano fu-attempt: nessun
-  // bump attempt qui, solo il segnale park + needs-human (human → rigenera parser).
-  // Gira PRIMA del gate slot (park non richiede lo slot libero).
-  {
-    const crawlersFix = listIssues(LBL_FIX).filter(
-      (i) => !isQueueManaged(i) && !has(i, 'needs-human') && !has(i, LBL_PARKED),
-    );
-    for (const iss of crawlersFix) {
-      if (hasFixPR(iss.number)) continue;
-      const outcome = latestFixOutcome(iss.number);
-      if (outcome !== 'max-turns') continue;
-      console.log(`PARK CRAWLER #${iss.number} → fu-parked + needs-human (error_max_turns deterministico, crawler non-queue-managed) — "${iss.title?.slice(0, 50)}"`);
-      edit(iss.number, { add: [LBL_PARKED, 'needs-human'], remove: [LBL_FIX] });
-    }
-  }
+  // (Il pass crawler — ex `CRAWLER MAX-TURNS PARK` #3886, ora rescue completo
+  // #5514 — è sceso SOTTO il gate dello slot, accanto al rescue queue-managed:
+  // il ri-arma non può girare a slot occupato, e i crawler in assestamento
+  // devono contribuire a `settlingPromotions` come tutti gli altri. Vedi lì.)
 
   // Tutto (rescue + drain) gira SOLO a slot issue-fix libero: così il rescue non
   // può mai toccare la issue di una run viva (evita di togliere agent:fix mentre
@@ -735,6 +1155,12 @@ function runDrain() {
   const allFix = listIssues(LBL_FIX);
   const stuckFix = allFix.filter(
     (i) => isQueueManaged(i) && !has(i, LBL_QUEUED) && !has(i, LBL_PARKED)
+  );
+  // Il complemento esatto di `stuckFix` dentro `agent:fix`: i crawler
+  // (`route='fix'`, unica categoria non queue-managed). Erano l'unica categoria
+  // che nessuno strato di recupero guardava — vedi `crawlerFixDecision` (#5514).
+  const crawlerFix = allFix.filter(
+    (i) => !isQueueManaged(i) && !has(i, LBL_QUEUED) && !has(i, LBL_PARKED) && !has(i, 'needs-human')
   );
   // Promozioni "in assestamento": un agent:fix follow-up giovane e senza PR ha
   // la run viva OPPURE non ancora registrata in `gh run list` (latenza
@@ -869,6 +1295,63 @@ function runDrain() {
     }
   }
 
+  // --- CRAWLER RESCUE + PARK (non-queue-managed, escalation #5514) ------------
+  // Il gemello di `stuckFix` per l'unica categoria che il filtro `isQueueManaged`
+  // esclude. La decisione è tutta in `crawlerFixDecision` (pura, testata); qui
+  // resta solo l'I/O. Gira DOPO il gate dello slot per due ragioni:
+  //  • il ri-arma toglie `agent:fix`: farlo a slot occupato significherebbe
+  //    poter yankare la label da una run VIVA (una run in corso non lascia
+  //    marker finché non finisce → `outcome === null` → sembrerebbe un orfano);
+  //  • un crawler appena promosso deve contare in `settlingPromotions`, o il
+  //    DRAIN promuove un secondo candidato mentre la sua run non è ancora
+  //    visibile → due pending → sfratto. È lo stesso incidente del 2026-08-08,
+  //    dove la sesta run cancellata alle 09:02 NON era un crawler.
+  for (const iss of crawlerFix) {
+    const hasPR = hasFixPR(iss.number);
+    const outcome = hasPR ? null : latestFixOutcome(iss.number);
+    const attempt = attemptOf(iss);
+    const prevAttemptLabel = attempt ? `fu-attempt:${attempt}` : null;
+    const d = crawlerFixDecision({
+      outcome,
+      ageMin: minutesSince(iss.updatedAt),
+      attempt,
+      hasPR,
+      quotaBackoffActive: quotaBackoffUntil !== null,
+    });
+    const tag = `#${iss.number} — "${iss.title?.slice(0, 50)}"`;
+    if (d.action === 'skip') continue;
+    if (d.action === 'settling') { settlingPromotions++; continue; }
+    if (d.action === 'hold-quota') {
+      console.log(`HOLD CRAWLER ${tag} (${d.reason}) → resta agent:fix come beacon, nessun tentativo consumato`);
+      continue;
+    }
+    if (d.action === 'requeue-zero-work') {
+      console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued, il DRAIN lo ripromuove a slot libero`);
+      edit(iss.number, { add: [LBL_QUEUED, 'fu-prio:high'], remove: [LBL_FIX] });
+      continue;
+    }
+    if (d.action === 'requeue') {
+      console.log(`RE-ARM CRAWLER ${tag} (${d.reason}) → agent:fix-queued + fu-attempt:${d.nextAttempt}`);
+      edit(iss.number, {
+        add: [LBL_QUEUED, 'fu-prio:high', `fu-attempt:${d.nextAttempt}`],
+        remove: [LBL_FIX, prevAttemptLabel].filter(Boolean),
+      });
+      continue;
+    }
+    // park-max-turns | park-verdict | park-attempts → stato terminale VISIBILE.
+    // `needs-human` e non solo `fu-parked`: i crawler non passano dal
+    // parked-retry (filtra su `isQueueManaged`) né dall'age-out close (idem),
+    // quindi `fu-parked` da solo sarebbe uno stato che non guarda nessuno. Il
+    // contatore dei tentativi resta sulla issue come tracciato forense; solo il
+    // park al tetto lo aggiorna (prev → next).
+    const bumped = d.action === 'park-attempts';
+    console.log(`PARK CRAWLER ${tag} (${d.reason}) → fu-parked + needs-human`);
+    edit(iss.number, {
+      add: [LBL_PARKED, 'needs-human', ...(bumped ? [`fu-attempt:${d.nextAttempt}`] : [])],
+      remove: [LBL_FIX, ...(bumped ? [prevAttemptLabel] : [])].filter(Boolean),
+    });
+  }
+
   // --- DRAIN: promuovi 1 queued a agent:fix (slot già verificato libero) -------
   // Guard QUOTA (misurato 2026-08-05): lo slot può essere libero e la coda piena
   // e comunque promuovere è dannoso, perché il collo di bottiglia non è lo slot
@@ -915,6 +1398,20 @@ function runDrain() {
     // comment+edit di park. Senza tempo per la coppia si esce: la coda resta
     // intatta e il tick successivo riparte dallo stesso primo candidato.
     if (!budget.take(`#${cand.number} (drain)`, ITEM_COST_MS)) break;
+
+    // Check: compress-contract-docs ratchet (escalation #5523) — title-only, gira
+    // PRIMA del fetch del body (nessuna chiamata gh extra). Mai chiusa dal fixer
+    // autonomo in 8 occorrenze storiche, sempre da una PR umana.
+    if (detectCompressContractDocsRatchet(cand.title)) {
+      console.log(`PARK #${cand.number} (compress-contract-docs ratchet) → no promozione, mai chiusa dal fixer autonomo (8/8 storiche via PR umana)`);
+      const note = `⏭️ **Pre-flight drainer (zero-Claude, #5523)**: questa issue è aperta dal ratchet \`compress-contract-docs.yml\` — comprimere un doc "hot" (15-21KB) preservando verbatim heading/regole/tabelle/step/code-block/path/stringhe è un lavoro editoriale, non un difetto meccanico. Nessuna occorrenza storica (#1112 #1113 #1569 #3039 #3641 #4136 #4567 #5507) è mai stata chiusa dal fixer autonomo: tutte hanno richiesto scelte di struttura (es. #5519 ha dovuto estrarre un'appendice in un nuovo file — la sola prosa non bastava a rientrare sotto ceiling) e sono state chiuse da una PR umana. Promuoverla ripaga lo stesso run a vuoto a ogni ri-apertura del ratchet. **Non promuovo**: serve una sessione umana/gentle-compress mirata. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
+      if (DRY) { console.log(`[dry] park #${cand.number} (compress-contract-docs ratchet)`); continue; }
+      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
+      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+      continue; // prova il prossimo in coda
+    }
+
     let body = '';
     try {
       const raw = gh(['issue', 'view', String(cand.number), '--repo', REPO, '--json', 'body'], { json: true });
@@ -961,6 +1458,21 @@ function runDrain() {
       continue; // prova il prossimo in coda
     }
 
+    // Check: backlog-tracker (escalation #5312/#5314/#5283) — handoff di sessione
+    // che ELENCA il lavoro residuo invece di descrivere un difetto singolo. Non ha
+    // una root cause né un target-file propri: il fixer sceglie una voce delle N o
+    // esaurisce i turni, sempre.
+    if (detectBacklogTracker(cand.title, body)) {
+      const itemCount = countBacklogItems(body);
+      console.log(`PARK #${cand.number} (backlog-tracker: ${itemCount} voci enumerate) → no promozione, nessun difetto singolo`);
+      const note = `⏭️ **Pre-flight drainer (zero-Claude, #5312)**: questa issue è un **contenitore di lavoro residuo** (handoff di sessione), non un difetto singolo — il body enumera **${itemCount} voci distinte**, eterogenee e in parte già tracciate altrove. Non ha una root cause comune né un target-file proprio: promuoverla a \`agent:fix\` produce un fix parziale su UNA delle voci, o un run che esaurisce i turni. **Non promuovo**: le voci vanno scorporate in issue singole (una root cause ciascuna), che il loop instrada normalmente. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: revenue-tracker-manual -->`;
+      if (DRY) { console.log(`[dry] park #${cand.number} (backlog-tracker)`); continue; }
+      try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
+      catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }
+      edit(cand.number, { add: [LBL_PARKED], remove: [LBL_QUEUED, LBL_FIX] });
+      continue; // prova il prossimo in coda
+    }
+
     // Check: secrets-scoped category (escalation #5057) — `cloudflare-5xx` /
     // `campaign-goal` / `evergreen-refresh` labels mark issues whose root fix
     // structurally requires a Firebase-RC-loaded credential (CF_API_TOKEN /
@@ -979,22 +1491,34 @@ function runDrain() {
     }
 
     // Il parcheggio workflow-scoped ha senso SOLO se issue-fix non può pushare quei file.
-    // Dal 2026-08-06 può, quando `mint-app-token.mjs` conia (App con `workflows: write`), e
-    // questo stesso workflow conia lo stesso token qualche step più su — quindi la presenza
-    // di APP_TOKEN è il segnale giusto, non una supposizione.
+    // Dal 2026-08-06 può, quando `mint-app-token.mjs` conia un token la cui installazione
+    // ha davvero `workflows: write`, e questo stesso workflow conia lo stesso token qualche
+    // step più su.
+    //
+    // La presenza di APP_TOKEN NON è quel segnale (#5288). Il conio riesce — 201, token
+    // valido — anche quando il permesso `workflows` è stato richiesto ma mai approvato
+    // sull'installazione: semplicemente non compare fra i `permissions`. Leggere la presenza
+    // qui sbagliava nel verso peggiore: SBLOCCAVA la promozione di follow-up che il push
+    // avrebbe poi rifiutato, mandando ciascuna a bruciare ~1M token per morire al `git push`
+    // — cioè esattamente la spesa che questo parcheggio esiste per evitare.
+    // `APP_TOKEN_WORKFLOWS` è la capacità LETTA dalla risposta API, ed è fail-closed:
+    // non scritta o diversa da 'true' → si parcheggia, come prima del 2026-08-06.
     //
     // Senza questa condizione la follow-up verrebbe parcheggiata come TERMINALE con una
     // motivazione ormai falsa («manca lo scope workflows»): non solo non arriverebbe mai alla
     // capability appena sbloccata, ma lascerebbe agli atti una spiegazione sbagliata di
     // perché. Un parcheggio motivato male è peggio di nessun parcheggio — nessuno lo rimette
     // in discussione.
-    const issueFixCanPushWorkflows = Boolean(process.env.APP_TOKEN);
-    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(`${cand.title}\n${body}`)) {
-      const wfRefs = [...new Set((body.match(WORKFLOW_PATH_RE) || []).concat(
-        (body.match(BARE_YML_RE) || []).filter((y) => !NON_WORKFLOW_YML.has(y.toLowerCase())),
-      ))].slice(0, 5).join(', ');
-      console.log(`PARK #${cand.number} (workflow-scoped: ${wfRefs}) → no promozione, evito run bloccato`);
-      const note = `⏭️ **Pre-flight drainer (zero-Claude, #1724)**: il fix di questa follow-up tocca **esclusivamente** file \`.github/workflows/**\` (${wfRefs}), che il token GitHub App di \`issue-fix\` non può pushare (manca lo scope \`workflows\`). Promuoverla a \`agent:fix\` brucerebbe ~1M token in un run che finirebbe comunque \`blocked-workflows-scope\`. **Non promuovo**: serve un PAT abilitato o mano umana. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->`;
+    const issueFixCanPushWorkflows = process.env.APP_TOKEN_WORKFLOWS === 'true';
+    // NB: una riga sola, per contratto — `tests/issue-fix-app-token-wiring.test.ts` asserisce
+    // la forma testuale di questa condizione (`!issueFixCanPushWorkflows && body && detectWorkflowScoped`).
+    if (!issueFixCanPushWorkflows && body && detectWorkflowScoped(`${cand.title}\n${body}`, { title: cand.title, labels: cand.labels })) {
+      // Title INCLUDED (#5595): a monitor auto-file ("Workflow Failure: <name>") names its
+      // workflow subject only there, so a body-only scan renders an empty `(...)` list.
+      const wfRefs = extractWorkflowRefs(`${cand.title}\n${body}`).slice(0, 5).join(', ');
+      const subject = wfRefs || 'workflow indicato dal monitor che ha aperto la issue';
+      console.log(`PARK #${cand.number} (workflow-scoped: ${subject}) → no promozione, evito run bloccato`);
+      const note = `⏭️ **Pre-flight drainer (zero-Claude, #1724/#5595)**: il fix di questa follow-up tocca **esclusivamente** file \`.github/workflows/**\` (${subject}), che il token GitHub App di \`issue-fix\` non può pushare (manca lo scope \`workflows\`). Promuoverla a \`agent:fix\` brucerebbe ~1M token in un run che finirebbe comunque \`blocked-workflows-scope\`. **Non promuovo**: serve un PAT abilitato o mano umana. Rimuovo \`agent:fix-queued\` e parko (riapribile: togli \`fu-parked\` se il contesto cambia).\n\n<!-- FIX_OUTCOME: blocked-workflows-scope -->`;
       if (DRY) { console.log(`[dry] park #${cand.number} (workflow-scoped)`); continue; }
       try { gh(['issue', 'comment', String(cand.number), '--repo', REPO, '--body', note], { json: false }); }
       catch (e) { console.log(`::warning::comment #${cand.number} fallito: ${String(e).slice(0, 120)}`); }

@@ -105,17 +105,58 @@
  *   identity, headroom, Run Claude fix, usage metrics, max-turns telemetry, backstop
  *   telemetry, classify outcome).
  *
+ * ─── Mode 1 delegates to the shared detector (issue #5595) ────────────────────────────
+ *
+ * `isExclusivelyWorkflowScoped` re-derived its verdict here instead of calling
+ * `detectWorkflowScoped`, and the two had drifted apart again — the #4437 asymmetry with
+ * the signs swapped. It also read the BODY alone, so the monitor-auto-file family, whose
+ * workflow subject is stated in the TITLE ("Workflow Failure: <name>"), could not be seen
+ * by Mode 1 at all. Both are fixed by delegating and by passing title+labels. The
+ * false-positive half of the same issue (a planning issue citing one optional workflow
+ * alongside six code targets written as `src/foo/bar.*`) is fixed inside the shared
+ * module — see its docstring, "The bias was DECLARED but not HONOURED".
+ *
  * PROCEED-SAFE (bias to proceed — a false positive silently drops a legitimate fix,
  * far worse than a false negative that lets the pre-commit hook or prose rule handle it):
- *   - Mode 1 only triggers on EXPLICIT .github/workflows/** path mentions in backtick refs
- *     or code blocks. Prose mentions ("the workflow was failing") are ignored.
+ *   - Mode 1 triggers on workflow file reference(s) with NO non-workflow code path
+ *     co-cited, or on a monitor auto-file whose title/label names a failed workflow.
+ *     Prose mentions ("the workflow was failing") are ignored.
  *   - Mode 2 only triggers on an EXACT prior-title match carrying the marker verbatim.
  *   - Any ambiguity or parse failure → emit workflows_blocked=false, proceed normally.
  *   - Aggregate issues are NOT short-circuited (one item non-blocked ≠ all safe).
  *
+ * ─── Two outcome codes, not one (issue #5288) ─────────────────────────────────────────
+ *
+ * Mode 1 and Mode 2 used to post the SAME `<!-- FIX_OUTCOME: blocked-workflows-scope -->`
+ * marker, which made the marker mean two different things:
+ *   - Mode 1 / the agent: "this run genuinely could not push a `.github/workflows/**`
+ *     file" — a capability failure, and legitimate recurring-burn signal.
+ *   - Mode 2: "an identically-titled prior issue already carries that verdict, so this
+ *     run is deliberately NOT re-paying for the same diagnosis" — a guard doing exactly
+ *     its job, at zero cost.
+ * Counting the second as the first makes a WORKING guard raise the very bucket whose
+ * recurrence triggers the escalation, so the escalation can re-fire precisely because the
+ * fix is working. Mode 2 therefore emits its own code, `skip-duplicate-diagnosis`:
+ *   - carved out of `isEscalationDriver` (harvest-agent-lessons.mjs) — a deterministic
+ *     zero-Claude skip is not a rule an agent violated, so it can never drive a proposal;
+ *   - kept in `NON_RETRYABLE` (followup-drainer.mjs) — the verdict is deterministic, so
+ *     re-queueing reproduces it; parking immediately is the pre-existing behaviour and
+ *     must not regress with the rename.
+ * The `blocked-workflows-scope` LABEL stays on both paths on purpose: the durable state
+ * of the issue really is "blocked on workflows scope" either way, and the escalation
+ * buckets on the marker, not on the label.
+ *
+ * Scope note, measured not assumed: harvest-agent-lessons.mjs already skips comments
+ * containing `Pre-flight (auto, zero-Claude)` — this script's own signature — so Mode 2
+ * was NOT inflating the live bucket through the harvester tally today (the 5288 examples
+ * #5222/#5256/#5279/#5282 are all `claude`-authored real runs). The separation removes the
+ * ambiguity at the source rather than leaving it to a substring filter that any comment
+ * rewording would silently defeat.
+ *
  * On detection: removes `agent:fix` label, adds `blocked-workflows-scope` advisory,
  * posts ONE comment (paths found, or the prior-issue link for Mode 2) + FIX_OUTCOME
- * marker. Does NOT close the issue.
+ * marker (`blocked-workflows-scope` for Mode 1, `skip-duplicate-diagnosis` for Mode 2).
+ * Does NOT close the issue.
  *
  * Output (GITHUB_OUTPUT): `workflows_blocked=true|false`.
  * issue-fix.yml gates the Claude step on `workflows_blocked != 'true'`.
@@ -132,12 +173,24 @@ import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { WORKFLOW_PATH_RE, hasNonWorkflowCodeRefs } from '../lib/workflow-scope-detect.mjs';
+import {
+  WORKFLOW_PATH_RE,
+  detectWorkflowScoped,
+  extractWorkflowRefs,
+  isMonitorFiledWorkflowFailure,
+} from '../lib/workflow-scope-detect.mjs';
 
 const DRY_RUN = process.env.DRY_RUN === '1';
 const ISSUE = process.env.ISSUE_NUMBER;
 const OUTCOME_MARKER = '<!-- FIX_OUTCOME: blocked-workflows-scope -->';
 const OUTCOME_MARKER_RE = /<!--\s*FIX_OUTCOME:\s*blocked-workflows-scope\s*-->/i;
+// Mode 2 has its OWN outcome code (issue #5288). See `hasPriorDiagnosisMarker` below for
+// why conflating the two was wrong: `blocked-workflows-scope` means "this run could not
+// push a workflow file", while Mode 2 means "a prior identically-titled issue already
+// carries that verdict, so we are not paying for the diagnosis a second time". The second
+// is a guard WORKING, not a capability failure, and the two must not share a bucket key.
+const DUP_OUTCOME_MARKER = '<!-- FIX_OUTCOME: skip-duplicate-diagnosis -->';
+const DUP_OUTCOME_MARKER_RE = /<!--\s*FIX_OUTCOME:\s*skip-duplicate-diagnosis\s*-->/i;
 const BLOCKED_LABEL = 'blocked-workflows-scope';
 const PARKED_LABEL = 'fu-parked';
 // Signature string scan-job-timeouts.mjs stamps into every issue it auto-files —
@@ -211,9 +264,30 @@ export function extractWorkflowPaths(body) {
  * block→unroute→requeue→promote→block loop (~4h cadence, 51 comments over 9 days) and
  * the real funnel-monetization bug never got a genuine fix attempt.
  * CONSERVATIVE (bias to PROMOTE): mirrors followup-drainer.mjs's `detectWorkflowScoped`.
+ *
+ * "Mirrors" is now literal — this DELEGATES to that detector instead of re-deriving the
+ * verdict from `extractWorkflowPaths` + `hasNonWorkflowCodeRefs` (issue #5595). The
+ * re-derivation had drifted back into an asymmetry of exactly the #4437 shape, only
+ * reversed: the drainer counts a bare `<name>.yml` as a workflow reference and Mode 1 did
+ * not, so the two guards disagreed on every issue that names a workflow without its
+ * `.github/workflows/` prefix. Sharing one function is the property this module was
+ * extracted to guarantee; deriving it twice is how it was lost.
+ *
+ * `meta` carries the issue title and labels, which the shared detector needs for the
+ * monitor-auto-file check (`isMonitorFiledWorkflowFailure`) — Mode 1 used to read the
+ * body alone, so an issue whose workflow subject is stated only in its TITLE
+ * ("Workflow Failure: Generate Blog Article") was invisible to it. Omitting `meta` keeps
+ * the pre-#5595 body-only semantics for callers that have nothing else.
+ *
+ * @param {string} body
+ * @param {{ title?: string, labels?: Array<string|{name?: string}> }} [meta]
  */
-export function isExclusivelyWorkflowScoped(body) {
-  return extractWorkflowPaths(body).length > 0 && !hasNonWorkflowCodeRefs(body);
+export function isExclusivelyWorkflowScoped(body, meta = {}) {
+  const title = (meta && meta.title) || '';
+  return detectWorkflowScoped(`${title}\n${body || ''}`, {
+    title,
+    labels: meta && meta.labels,
+  });
 }
 
 /**
@@ -238,6 +312,29 @@ export function isCiTimeoutIssue({ title, body, labels } = {}) {
 /** True if any comment body carries the blocked-workflows-scope FIX_OUTCOME marker. */
 export function hasBlockedWorkflowsScopeMarker(commentBodies) {
   return (commentBodies || []).some((b) => OUTCOME_MARKER_RE.test(String(b || '')));
+}
+
+/** True if any comment body carries the skip-duplicate-diagnosis FIX_OUTCOME marker. */
+export function hasSkipDuplicateDiagnosisMarker(commentBodies) {
+  return (commentBodies || []).some((b) => DUP_OUTCOME_MARKER_RE.test(String(b || '')));
+}
+
+/**
+ * Mode 2's recurrence test: has this prior issue ALREADY been settled on the
+ * workflows-scope root cause, by either route?
+ *
+ * Both markers count, and the chain breaks without that (issue #5288). The first
+ * occurrence of a recurring failure is settled with `blocked-workflows-scope` — by the
+ * agent itself or by Mode 1. Every later occurrence is now settled with
+ * `skip-duplicate-diagnosis`. If the lookup only accepted the first code, the Nth
+ * recurrence could only be recognised via the ORIGINAL issue, and the original falls out
+ * of view as soon as the newest RECURRENCE_SCAN_CAP same-titled issues are all
+ * skip-marked — at which point the guard would silently stop firing and the full
+ * diagnosis cost would come back. Accepting either marker keeps each recurrence able to
+ * seed the next, which is the behaviour the single shared marker used to provide.
+ */
+export function hasPriorDiagnosisMarker(commentBodies) {
+  return hasBlockedWorkflowsScopeMarker(commentBodies) || hasSkipDuplicateDiagnosisMarker(commentBodies);
 }
 
 /**
@@ -333,7 +430,7 @@ function findRecentBlockedRecurrence(title) {
       continue;
     }
     const bodies = (commentsJson.comments || []).map((c) => c && c.body);
-    if (hasBlockedWorkflowsScopeMarker(bodies)) {
+    if (hasPriorDiagnosisMarker(bodies)) {
       return { issueNumber: cand.number, createdAt: cand.createdAt };
     }
   }
@@ -378,8 +475,9 @@ function main() {
 
   // Extract explicit .github/workflows/** path references from the issue body.
   const workflowPaths = extractWorkflowPaths(body);
+  const monitorFiled = isMonitorFiledWorkflowFailure({ title, labels: iss.labels });
 
-  if (!isExclusivelyWorkflowScoped(body)) {
+  if (!isExclusivelyWorkflowScoped(body, { title, labels: iss.labels })) {
     // Mode 1 found no *exclusive* workflow-scope signal — either no path at all, or a
     // path co-cited with a non-workflow code path (issue #4437: the real fix may live in
     // that code file — see `isExclusivelyWorkflowScoped` docstring). Mode 2: does a PRIOR
@@ -418,7 +516,7 @@ function main() {
             `nuovo l'intero budget del run senza convergere — vedi la diagnosi completa su ` +
             `#${recurrence.issueNumber}.\n\n` +
             `Rimossa la label \`agent:fix\` (no re-dispatch). Gate strutturale #4227/#4749.\n\n` +
-            OUTCOME_MARKER;
+            DUP_OUTCOME_MARKER;
           applyBlockedOutcome(comment);
         }
         setOutput(true);
@@ -444,21 +542,36 @@ function main() {
     return;
   }
 
-  // STRONG SIGNAL: explicit workflow paths found in the issue body.
+  // STRONG SIGNAL: either the monitor that filed this issue named a failing workflow as
+  // its subject, or the body cites workflow file(s) and no non-workflow code path.
+  const wfRefs = extractWorkflowRefs(`${title}\n${body}`);
   console.log(
-    `Issue #${ISSUE}: BLOCKED — explicit .github/workflows/** paths found:\n` +
-      workflowPaths.map((p) => `  ${p}`).join('\n'),
+    monitorFiled
+      ? `Issue #${ISSUE}: BLOCKED — monitor auto-file on a workflow failure (title/label), ` +
+          `subject is a .github/workflows/** file.`
+      : `Issue #${ISSUE}: BLOCKED — workflow file reference(s), no non-workflow code path:\n` +
+          wfRefs.map((p) => `  ${p}`).join('\n'),
   );
 
   if (!DRY_RUN) {
-    const pathList = workflowPaths.map((p) => `- \`${p}\``).join('\n');
+    // `workflowPaths` (full `.github/workflows/**` paths) when we have them, else the
+    // bare `<name>.yml` refs; a monitor auto-file usually has neither in its body — its
+    // subject is the workflow named in the title.
+    const shown = (workflowPaths.length ? workflowPaths : wfRefs).map((p) => `- \`${p}\``).join('\n');
+    const why = monitorFiled
+      ? `Issue aperta automaticamente da un monitor CI su un **fallimento di workflow** ` +
+        `(titolo \`Workflow Failure:\`/\`CI Failure:\` o label \`ci-timeout\`): il soggetto ` +
+        `è un file \`.github/workflows/**\`.${shown ? `\n${shown}` : ''}`
+      : `L'issue cita file di workflow e nessun path di codice non-workflow:\n${shown}`;
     const comment =
       `⏭️ **Pre-flight (auto, zero-Claude) — blocco scope \`workflows\`**\n\n` +
-      `L'issue body cita esplicitamente file in \`.github/workflows/\`:\n${pathList}\n\n` +
+      `${why}\n\n` +
       `L'ambiente \`issue-fix.yml\` usa \`GH_TOKEN\` (GitHub App — nessun scope \`workflows\`): ` +
       `il push di questi file fallisce sempre. Fix richiede una PAT con scope \`workflows\` ` +
       `o intervento manuale.\n\n` +
-      `Rimossa la label \`agent:fix\` (no re-dispatch). Gate strutturale #3887.\n\n` +
+      `Rimossa la label \`agent:fix\` (no re-dispatch). Gate strutturale #3887/#5595. ` +
+      `**Riapribile**: togli \`fu-parked\` se il contesto cambia (PAT abilitato, oppure il ` +
+      `fix si rivela vivere nel codice e non nel workflow).\n\n` +
       OUTCOME_MARKER;
 
     applyBlockedOutcome(comment);
