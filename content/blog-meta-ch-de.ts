@@ -2596,6 +2596,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.title': 'Hitze und Trockenheit: Um den Krisenmodus auszulösen, braucht es mehr',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.excerpt': 'Der Bundesrat verzichtet wegen Trockenheit und Hitze darauf, die ausserordentliche Situation zu erklären.',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.imageAlt': 'Lugano, Sommer, heiß, Dürre.',
+    'blog.article.rientro-scuola-calor.title': 'Zurück in die Schule, die Hitze hält die Bank',
+    'blog.article.rientro-scuola-calor.excerpt': 'Hitzewellen entzünden die Debatte um die Sicherheit und Qualität von Schulgebäuden in der Schweiz neu.',
+    'blog.article.rientro-scuola-calor.imageAlt': 'Schweizer Schule mit Hof, der von der Sonne überschwemmt ist',
 };
 
 export default blogMetaChDe;

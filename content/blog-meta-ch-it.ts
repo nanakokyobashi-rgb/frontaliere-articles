@@ -2596,6 +2596,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.title': 'Caldo e siccità: per far scattare la modalità di crisi ci vuole altro',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.excerpt': 'Il Consiglio federale rinuncia a dichiarare la situazione straordinaria a causa della siccità e del caldo.',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.imageAlt': 'Lugano, estivo, caldo, siccità.',
+    'blog.article.rientro-scuola-calor.title': 'Rientro a scuola, il caldo tiene banco',
+    'blog.article.rientro-scuola-calor.excerpt': 'Le ondate di calore riaccendono il dibattito sulla sicurezza e la qualità degli edifici scolastici in Svizzera.',
+    'blog.article.rientro-scuola-calor.imageAlt': 'Scuola svizzera con cortile inondato di sole',
 };
 
 export default blogMetaChIt;

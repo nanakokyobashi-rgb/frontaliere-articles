@@ -2596,6 +2596,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.title': 'Chaleur et sécheresse : pour déclencher le mode de crise, il faut plus',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.excerpt': 'Le Conseil fédéral renonce à déclarer la situation extraordinaire en raison de la sécheresse et de la chaleur.',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.imageAlt': 'Lugano, été, chaud, sécheresse.',
+    'blog.article.rientro-scuola-calor.title': 'Retour à l\'école, la chaleur tient bon',
+    'blog.article.rientro-scuola-calor.excerpt': 'Les vagues de chaleur relancent le débat sur la sécurité et la qualité des bâtiments scolaires en Suisse.',
+    'blog.article.rientro-scuola-calor.imageAlt': 'École suisse avec cour de soleil',
 };
 
 export default blogMetaChFr;

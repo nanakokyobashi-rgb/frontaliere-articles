@@ -2596,6 +2596,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.title': 'Heat and drought: triggering crisis mode requires more',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.excerpt': 'The Federal Council refuses to declare the extraordinary situation due to the drought and the heat.',
     'blog.article.caldo-e-siccita-senza-modalita-di-crisi.imageAlt': 'Lugano, summer, hot, drought.',
+    'blog.article.rientro-scuola-calor.title': 'Back to school, the heat keeps you warm',
+    'blog.article.rientro-scuola-calor.excerpt': 'Heatwaves reignite the debate over the safety and quality of school buildings in Switzerland.',
+    'blog.article.rientro-scuola-calor.imageAlt': 'Swiss school with courtyard flooded with sun',
 };
 
 export default blogMetaChEn;

@@ -33635,6 +33635,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-rientro-scuola-calor': {
+    title: 'Rientro a scuola, il caldo tiene banco | Frontaliere Ticino',
+    description: 'Le ondate di calore riaccendono il dibattito sulla sicurezza e la qualità degli edifici scolastici in Svizzera. I sindacati chiedono un monitoraggio regolare',
+    keywords: 'frontalieri, ticino, svizzera, italia, rientro, scuola, caldo, tiene',
+    ogTitle: 'Rientro a scuola, il caldo tiene banco',
+    ogDescription: 'Le ondate di calore riaccendono il dibattito sulla sicurezza e la qualità degli edifici scolastici in Svizzera. I sindacati chiedono un monitoraggio regolare delle temperature e della qualità dell\'aria, nonché l\'inverdimento dei cortili',
+    canonicalPath: '/articoli-svizzera/rientro-scuola-calor/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Rientro a scuola, il caldo tiene banco",
+      "description": "Le ondate di calore riaccendono il dibattito sulla sicurezza e la qualità degli edifici scolastici in Svizzera. I sindacati chiedono un monitoraggio regolare",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rientro-scuola-calor.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Scuola svizzera con cortile inondato di sole"
+      },
+      "datePublished": "2026-08-13T21:41:33+00:00",
+      "dateModified": "2026-08-13T21:41:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/rientro-scuola-calor/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
