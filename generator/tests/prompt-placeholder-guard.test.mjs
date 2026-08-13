@@ -695,12 +695,16 @@ describe('gate — SEO pubblicato (content/seo/seo-blog*.ts)', () => {
     assert.ok(files.length >= 5, `trovati solo ${files.length} file seo`);
   });
 
+  // `keywords` e' un campo di testo dello schema (letterale '6-8 keywords IT') e
+  // un leak ci passava indisturbato: #295 misura 0/85 rossi con `sottotitolo`
+  // incollato a `keywords` di `trasferirsi-a-marchirolo-…`, perche' questo gate
+  // non lo guardava affatto — non un problema di regola, un campo mai scansionato.
   it('zero segnaposto in description/ogDescription/caption e nei gemelli JSON', () => {
     const offenders = [];
     for (const f of files) {
       const src = fs.readFileSync(path.join(seoDir, f), 'utf-8');
       let m;
-      const ts = /(?:^|\n)\s*(title|description|ogTitle|ogDescription|twitterTitle|twitterDescription):\s*'((?:\\'|[^'])*)'/g;
+      const ts = /(?:^|\n)\s*(title|description|keywords|ogTitle|ogDescription|twitterTitle|twitterDescription):\s*'((?:\\'|[^'])*)'/g;
       while ((m = ts.exec(src)) !== null) {
         if (hasPromptPlaceholder(unescapeTs(m[2]))) offenders.push(`${f} [${m[1]}] ${JSON.stringify(m[2].slice(0, 70))}`);
       }
