@@ -33,6 +33,17 @@
  *
  *   follow-up → coda, come sul sito.
  *
+ *   backlog   → `route: 'none'`, come `crawler-transient`. Issue-contenitore
+ *               («cosa resta da fare», nessun bug singolo) che il drainer non
+ *               deve mai promuovere al fixer. Prima di questa categoria il
+ *               solo modo di escluderle era applicare `fu-parked` a mano —
+ *               uso improprio della label (significa «parcheggiata dopo
+ *               troppi tentativi», non «non è lavoro per un agente») — vedi
+ *               nanako#28 punto 6 e nanako#40. Con `backlog` il classificatore
+ *               lo fa da solo, sulla sola presenza della label: il titolo non
+ *               conta, perché una issue di backlog può nominare qualunque
+ *               cosa nel corpo (publish, engine, …) senza essere quel guasto.
+ *
  * `route: 'queue'` non è un declassamento: è l'anti-starvation. Le issue in
  * coda vengono promosse UNA alla volta dal drainer, solo a slot del fixer
  * libero, quindi non muoiono cancellate in coda. Sul sito, estendere l'autofix
@@ -72,6 +83,16 @@ export function classifyIssue(title = '', labels = []) {
     category = 'loop-drift';
   }
 
+  // `backlog` vince su qualunque categoria decisa dal titolo, non solo su
+  // 'other': una issue-contenitore può nominare "publish-api" o "engine" nel
+  // corpo di un punto elencato senza essere quel guasto. La label è quindi
+  // presa DOPO la catena title-based, non dentro — a differenza di
+  // `publish-broken`/`engine-contract`/`follow-up`, che sono fallback SOLO
+  // quando il titolo non ha già deciso.
+  if (has('backlog')) {
+    category = 'backlog';
+  }
+
   // Come sul sito: nessuna categoria è human-only. Le safety-valve del fixer
   // (root-cause non determinabile, capability-guard su workflows/secret) sono
   // generiche e restano — non sono guardrail di categoria.
@@ -85,7 +106,8 @@ export function classifyIssue(title = '', labels = []) {
   // instradava comunque, ed è così che la ledger stessa (`crawler-transient`
   // fin dalla nascita) è finita in coda ed è stata promossa al fixer. Il guard
   // vive qui, sorgente unica per entrambi i percorsi.
-  const route = has('crawler-transient') ? 'none' : category === 'publish' ? 'fix' : 'queue';
+  const route =
+    has('backlog') || has('crawler-transient') ? 'none' : category === 'publish' ? 'fix' : 'queue';
   const fuPrio =
     route === 'queue'
       ? has('priority:high') ||

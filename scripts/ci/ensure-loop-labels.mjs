@@ -54,6 +54,7 @@ export const LABELS = [
   ['needs-human', '7057ff', 'Nessun processo automatico la sbloccherà: serve una mano umana'],
   ['autorebase-reopen-failed', 'b60205', 'close+reopen rotto a meta: NON cancellare l head ref, la PR va riaperta a mano'],
   ['maybe-resolved', 'bfd4f2', 'Il pre-flight la ritiene forse gia risolta: verificare prima di rilanciare il fixer'],
+  ['backlog', '5319e7', 'Issue-contenitore: classify-issue.mjs la instrada a route none, mai al fixer'],
   ['blocked-workflows-scope', 'd4c5f9', 'Il fix richiede .github/workflows ma il token non ha lo scope: serve una mano'],
   ['awaiting-production-proof', 'c5def5', 'Merge atterrato, chiusura sospesa: serve la prova di una run su main prima di richiuderla'],
   // Le quattro che seguono le applica il triage post-merge, e sono rimaste
