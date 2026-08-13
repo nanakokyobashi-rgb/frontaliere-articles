@@ -2572,6 +2572,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.patent-canton-bern-conversion-exams.title': 'Patente di guida a Berna: conversione e requisiti',
     'blog.article.patent-canton-bern-conversion-exams.excerpt': 'La conversione della patente di guida estera nel Canton di Berna richiede l\'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L\'ufficio della circolazione competente è responsabile dell\'elaborazione della domanda di conversione.',
     'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Una scena di un test di guida nel Canton Berna, con un focus sull\'esame pratico.',
+    'blog.article.patente-guida-berna-conversione.title': 'Patente di guida nel Canton Berna: conversione ed esami',
+    'blog.article.patente-guida-berna-conversione.excerpt': 'Guida ufficiale alla conversione della licenza estera, esami e procedure presso l\'Ufficio della circolazione del Canton Berna per i nuovi residenti.',
+    'blog.article.patente-guida-berna-conversione.imageAlt': 'Patente di guida svizzera sul tavolo',
 };
 
 export default blogMetaChIt;

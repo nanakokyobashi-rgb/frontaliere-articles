@@ -2572,6 +2572,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.patent-canton-bern-conversion-exams.title': 'Führerschein in Bern: Umstellung und Voraussetzungen',
     'blog.article.patent-canton-bern-conversion-exams.excerpt': 'Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige Strassenverkehrsamt zuständig.',
     'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Eine Szene eines Führerscheintests im Kanton Bern, mit einem Fokus auf den praktischen Test.',
+    'blog.article.patente-guida-berna-conversione.title': 'Führerschein im Kanton Bern: Umschulung und Prüfungen',
+    'blog.article.patente-guida-berna-conversione.excerpt': 'Amtlicher Leitfaden zur Umwandlung des ausländischen Ausweises, Prüfungen und Verfahren beim Strassenverkehrsamt des Kantons Bern für Neubürger.',
+    'blog.article.patente-guida-berna-conversione.imageAlt': 'Schweizer Führerschein auf einem Schreibtisch',
 };
 
 export default blogMetaChDe;

@@ -2572,6 +2572,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.patent-canton-bern-conversion-exams.title': 'Permis de conduire à Berne : conversion et exigences',
     'blog.article.patent-canton-bern-conversion-exams.excerpt': 'La conversion du permis de conduire étranger dans le canton de Berne nécessite l\'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L\'office de la circulation compétent est responsable du traitement de la demande de conversion.',
     'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Une scène de test de conduite dans le canton de Berne, avec un focus sur l\'examen pratique.',
+    'blog.article.patente-guida-berna-conversione.title': 'Permis de conduire dans le canton de Berne : conversion et examens',
+    'blog.article.patente-guida-berna-conversione.excerpt': 'Guide officiel de conversion de la licence étrangère, examens et procédures auprès de l\'Office de la circulation du canton de Berne pour les nouveaux résidents.',
+    'blog.article.patente-guida-berna-conversione.imageAlt': 'Permis de conduire suisse sur un bureau',
 };
 
 export default blogMetaChFr;

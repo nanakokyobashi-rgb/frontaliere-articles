@@ -2572,6 +2572,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.patent-canton-bern-conversion-exams.title': 'Driving licence in Bern: conversion and requirements',
     'blog.article.patent-canton-bern-conversion-exams.excerpt': 'The conversion of the foreign driver\'s license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible for processing the conversion application.',
     'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'A scene of a driving test in the Canton of Bern, with a focus on the practical exam.',
+    'blog.article.patente-guida-berna-conversione.title': 'Driver\'s license in the Canton of Bern: conversion and exams',
+    'blog.article.patente-guida-berna-conversione.excerpt': 'Official Guide to Foreign License Conversion, Examinations and Procedures at the Canton of Bern Traffic Office for New Residents.',
+    'blog.article.patente-guida-berna-conversione.imageAlt': 'Swiss driving license on a desk',
 };
 
 export default blogMetaChEn;
