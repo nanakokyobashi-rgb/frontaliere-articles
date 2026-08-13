@@ -136,6 +136,7 @@ import { decodeGoogleNewsUrl } from './lib/discovery/googleNewsUrlResolver.mjs';
 import { isNearDuplicate as _isNearDuplicateHeadline } from './lib/scheduler/slugSimilarity.mjs';
 import { fetchWordpressSearchHeadlines } from './lib/topic-sources/wordpressSearch.mjs';
 import { extractArticleText } from './lib/extract-article-text.mjs';
+import { truncateSlugAtWordBoundary } from './lib/slug-truncate.mjs';
 import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
@@ -1471,9 +1472,25 @@ const RUN_REPORT = {
   sources: {
     configured: 0,
     scanned: 0,
+    // ── TRE stati, non due (issue #190 punto 3) ──────────────────────────
+    // `succeeded`/`failed` da soli non sanno dire la sola cosa che serve
+    // sapere di una fonte: se ha prodotto qualcosa. Un dominio morto che
+    // risponde 200 non fallisce — santesuisse.ch ha vissuto mesi in lista
+    // 301'ando ogni path su un altro sito, contato fra i successi in OGNI
+    // log, ed e' emerso solo sondando gli URL a mano.
+    //
+    //   failed    → la richiesta non e' arrivata a un corpo utilizzabile
+    //   sterile   → ha risposto, ma 0 headline estratte (200 senza contenuto)
+    //   succeeded → ha risposto e ha prodotto almeno una headline
+    //
+    // `succeeded` ha quindi un significato piu' stretto di prima: e' voluto.
+    // Le tre somme restano `configured`, cosi' un buco si vede sottraendo.
     succeeded: 0,
+    sterile: 0,
     failed: 0,
     domains: [],
+    // Chi ha risposto a vuoto, per nome: e' l'elenco che nessun log produceva.
+    sterileDomains: [],
   },
   headlines: {
     total: 0,
@@ -1481,6 +1498,13 @@ const RUN_REPORT = {
     undated: 0,
     usedRecent: 0,
     usedUndated: 0,
+    // Chi ha riempito il secchio undated, e chi e' stato tagliato dalla quota
+    // (issue #190 punto 1). Dichiarati qui e non fatti spuntare al primo
+    // assegnamento, come il resto del blocco: un report da una run che non ha
+    // mai raggiunto lo scan deve restare distinguibile da uno in cui la quota
+    // non ha tagliato nessuno.
+    undatedBySource: {},
+    undatedCapped: [],
     // ── Pre-spend topic gate (issue #113) ────────────────────────────
     // Declared here rather than sprouted on first assignment so a report
     // from a run that never reached the gate is distinguishable from one
@@ -1495,6 +1519,18 @@ const RUN_REPORT = {
     preSpendGateBackstopRestored: 0,
     preSpendGateTotalRejection: false,
     preSpendGateRecovery: null, // 'news' | 'evergreen' | 'none'
+  },
+  // ── Slug localizzati (issue #191) ────────────────────────────────────────
+  // Il ripiego sullo slug italiano per en/de/fr non lasciava traccia da
+  // nessuna parte: ne' un log, ne' un contatore, ne' un campo. E' cosi' che
+  // 121 articoli su 3.173 sono arrivati a servire l'URL italiano in tutti e
+  // quattro i locali senza che nessuna run risultasse degradata. Un fallback
+  // che non si conta non si accorge di crescere.
+  slugs: {
+    localizedFromTitle: 0,   // slug ricavato dal titolo tradotto: l'esito giusto
+    relocalized: 0,          // provvisorio IT promosso a localizzato dopo la traduzione
+    itFallback: 0,           // ripiego sull'italiano RIMASTO tale a fine pipeline
+    itFallbackDetail: [],    // `${locale}:${causa}` per ciascuno
   },
   selectionUsage: {
     attemptsTotal: 0,
@@ -2005,6 +2041,35 @@ const PRIORITY_EVERGREEN_TOPICS_SVIZZERA = [
   { keyword: 'franco svizzero economia bns politica monetaria', angle: 'Il ruolo della Banca Nazionale Svizzera (BNS): politica monetaria, tassi di interesse, impatto del franco forte su economia e salari' },
 ];
 
+// ── Domini condannati, dichiarati UNA volta per entrambe le liste ─────────
+//
+// Una fonte morta veniva rimossa dalla lista in cui qualcuno l'aveva misurata
+// e restava viva nell'altra: e' successo il 2026-08-10 con `santesuisse.ch` e
+// `bag.admin.ch`, tolti da NEWS_SOURCES_SVIZZERA e rimasti in NEWS_SOURCES per
+// tre giorni, perche' la rimozione e' un'operazione su un array e nessuno dei
+// due array sa dell'altro (issue #190 punto 4).
+//
+// Questa lista e' la dichiarazione unica: un dominio qui dentro non puo'
+// comparire in NESSUNA delle due liste, su nessun path. La verifica sta in
+// generator/tests/news-sources-svizzera.test.mjs, offline, sul testo di questo
+// file — quindi vale anche per la lista che il prossimo che condanna un dominio
+// si dimentichera' di guardare.
+//
+// Il criterio per entrare qui e' che il dominio sia inservibile *in quanto
+// dominio*, non che un singolo path sia 404: un path morto si corregge, un
+// dominio morto si rimuove. La misura che condanna ciascuno sta sulla riga.
+const DEAD_NEWS_DOMAINS = [
+  // Ogni path 301 → santeservices.ch/bildung/ — un altro sito, in tedesco, sulla
+  // formazione professionale. Rispondeva 200 e contava fra i `sources.succeeded`:
+  // e' il caso che ha reso necessario il terzo stato `sterile` piu' sotto.
+  'santesuisse.ch',
+  // 200 con 6 soli tag <a>, tutti di navigazione: SPA Vue/AEM, l'elenco arriva
+  // via JS. Non e' un'estrazione mal riuscita, e' una pagina senza link.
+  'bag.admin.ch',
+  // 200, 2,3 MB, **zero** tag <a>. Stessa SPA, stesso motivo.
+  'bfs.admin.ch',
+];
+
 // ── News sources to auto-scan ───────────────────────────────
 const NEWS_SOURCES = [
   // tvsvizzera
@@ -2076,10 +2141,14 @@ const NEWS_SOURCES = [
   'https://unia.ch/it/media/comunicati-stampa',           // Sindacato Unia (CH) — HTML, RSS not exposed
   'https://www.uil.it/feed',                              // UIL nazionale (frontalieri)
   // Health/insurance cross-border ──
-  // 2026-05-13: comparis.ch returns 403 (active bot block on the RSS); replaced with santésuisse news (same LAMal/health-insurance role, accessible)
-  'https://www.santesuisse.ch/it/temi-e-analisi/news-attuali/',  // santésuisse LAMal news (HTML, replaces 403-blocked comparis RSS)
-  // 2026-05-13: bag.admin.ch RSS path moved/removed (.rss/news.rss now 404); replaced with HTML news listing (same federal health-authority role)
-  'https://www.bag.admin.ch/it/overview/news',            // Bundesamt Gesundheit IT (HTML — RSS retired)
+  // 2026-08-13 (issue #190 punto 4): santesuisse.ch e bag.admin.ch RIMOSSI anche
+  // da qui. Erano stati tolti da NEWS_SOURCES_SVIZZERA il 2026-08-10 con la misura
+  // che li condanna (301 wholesale su un altro dominio il primo, SPA senza <a> il
+  // secondo) e sono rimasti in questa lista, dove producevano lo stesso nulla —
+  // contandosi pero' fra i `sources.succeeded`. Ora stanno in DEAD_NEWS_DOMAINS,
+  // che vale per entrambe le liste. Copertura LAMal/sanita': resta scoperta, e
+  // un sostituto va SONDATO prima di entrare (status + content-type + resa reale
+  // dell'estrattore), non dedotto dal ruolo istituzionale del dominio.
   // Fiscalità tecnica + dossier frontalieri ──
   // 2026-05-13: fiscoetasse.com/rss/articoli.xml 404; /feed is the working RSS endpoint
   'https://www.fiscoetasse.com/feed',
@@ -2130,11 +2199,11 @@ const RSS_FALLBACK_MAP = {
 // the shape of NEWS_SOURCES (RSS where available, HTML fallback via
 // NEWS_SOURCES_SVIZZERA_FALLBACK_MAP otherwise).
 //
-// ── THE ORDER IS LOAD-BEARING (rebuilt 2026-08-10) ──
+// ── THE ORDER WAS LOAD-BEARING (rebuilt 2026-08-10, NON PIU' dal 2026-08-13) ──
 // scanNewsSources() keeps every dated headline from the last
-// MAX_ARTICLE_AGE_DAYS, but caps the *undated* ones at `undated.slice(0, 120)`
-// — a single global budget, filled in the order the sources appear here,
-// because `allHeadlines` is pushed batch-by-batch in list order.
+// MAX_ARTICLE_AGE_DAYS, and used to cap the *undated* ones with a single
+// GLOBAL budget filled in the order the sources appear here, because
+// `allHeadlines` is pushed batch-by-batch in list order.
 // swissinfo.ch used to sit first and emits ~244 undated links per run, most
 // of them chrome ("Vai alla homepage", "Vai alla navigazione"). Measured on
 // 2026-08-10 with the real extractor: it took **120 of 120** undated slots,
@@ -2146,6 +2215,13 @@ const RSS_FALLBACK_MAP = {
 // no undated budget), then HTML pages ordered by *measured* gate-pass density,
 // then the SPA shells that emit mostly chrome. Same probe, same day, same
 // gate: 21 → 55 with laregione's RSS stale, 21 → 72 with it fresh.
+//
+// 2026-08-13 (issue #190 punto 1): il budget undated e' ora una QUOTA PER FONTE
+// in round-robin (`selectUndatedBySourceQuota`), quindi l'ordine di questa
+// lista non decide piu' chi entra nel pool. Il layout resta perche' resta
+// leggibile — le rese misurate per riga sono l'unica cosa che distingue una
+// fonte viva da una morta — ma non e' piu' l'invariante da difendere: lo e'
+// la quota, e la difende generator/tests/news-scan-quality.test.mjs.
 //
 // ── EVERY URL HERE WAS PROBED ON 2026-08-10 ──
 // status + content-type + what the extractor actually returns. Do not add a
@@ -5102,6 +5178,151 @@ function formatStatsBfsPrompt(quarter, data) {
   ].filter(Boolean).join('\n');
 }
 
+// ── Isolamento del contenuto principale della pagina scrapata (issue #202) ──
+//
+// ## Il difetto
+//
+// Tre articoli pubblicati portano nel corpo pezzi interi della pagina sorgente:
+// la firma di redazione della testata, l'invito a registrarsi per commentare,
+// il regolamento dei commenti, l'elenco «ultimi commenti» della spalla. In un
+// caso 1.961 caratteri, il 27% del corpo. Non e' un modello che divaga: e'
+// SOURCE CONTENT che gli e' stato consegnato cosi', e la REGOLA #1 del prompt
+// («ogni fatto DEVE essere presente nel SOURCE CONTENT») lo rende fedele
+// proprio a cio' che non doveva ricevere.
+//
+// ## Perche' l'estrattore non basta
+//
+// `extractArticleText()` prova, in ordine: JSON-LD → <article> → <main> → og +
+// paragrafi → strip ingenuo. I primi tre isolano; gli ultimi DUE no. Il quinto
+// legge i <p> di `document.body`, il sesto toglie i tag da TUTTA la pagina
+// senza nemmeno la potatura di nav/footer/aside/form che i rami precedenti
+// hanno gia' avuto. Su una pagina che non espone ne' JSON-LD ne' un <article>
+// riconoscibile si finisce li', e li' dentro la spalla commenti e la firma di
+// redazione sono testo come un altro.
+//
+// ## Perche' la riparazione non e' una denylist
+//
+// Elencare «Accedi o registrati per commentare» e compagnia riparerebbe
+// VareseNews e nessun'altra testata, e ogni nuova fonte porterebbe il proprio
+// elenco — piu' il rischio, gia' pagato in questo repo, di cancellare testo
+// buono che assomiglia a un marcatore. La causa e' che l'estrazione lavora
+// sull'INTERA pagina; quindi si toglie la pagina intera, non le sue frasi.
+//
+// Isolando qui, PRIMA di chiamare l'estrattore, tutti e sei i suoi rami — cap
+// di fallback compresi — vedono solo la radice editoriale. `<head>` e i blocchi
+// JSON-LD vengono conservati ovunque stiano: sono cio' da cui l'estrattore
+// ricava il ramo migliore (`articleBody`) e la data di pubblicazione della
+// fonte, e buttarli per isolare il corpo sarebbe scambiare un difetto con due.
+//
+// `extract-article-text.mjs` non viene toccato di proposito: e'
+// `mode: identical` nel manifest del ciclo (gemello di scripts/lib/ del sito),
+// e una modifica la' va fatta sul sito e scende col mirror.
+
+// Sotto questa soglia di testo visibile il blocco isolato non e' un corpo
+// d'articolo: si preferisce non isolare affatto, per non regredire sotto il
+// comportamento precedente su pagine con markup inatteso.
+const MIN_ISOLATED_TEXT_CHARS = 400;
+
+/** Testo visibile approssimato di un frammento HTML, per le sole soglie. */
+function visibleTextLength(html) {
+  return String(html || '')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim().length;
+}
+
+/**
+ * Blocco `<tag>…</tag>` di primo livello piu' lungo, con conteggio della
+ * profondita' — una regex greedy prenderebbe dal primo `<article>` all'ultimo
+ * `</article>` (quindi tutti i teaser di una pagina indice), una non-greedy si
+ * fermerebbe al primo `</article>` annidato.
+ *
+ * @returns {string} il blocco piu' lungo, o '' se il tag non c'e'
+ */
+export function extractOutermostTagBlock(html, tag) {
+  const src = String(html || '');
+  const open = new RegExp(`<${tag}(?=[\\s>])[^>]*>`, 'gi');
+  const close = new RegExp(`</${tag}\\s*>`, 'gi');
+  const marks = [];
+  let m;
+  while ((m = open.exec(src)) !== null) marks.push({ at: m.index, end: open.lastIndex, kind: 1 });
+  while ((m = close.exec(src)) !== null) marks.push({ at: m.index, end: close.lastIndex, kind: -1 });
+  if (marks.length === 0) return '';
+  marks.sort((a, b) => a.at - b.at);
+
+  let depth = 0;
+  let start = -1;
+  let best = '';
+  for (const mark of marks) {
+    if (mark.kind === 1) {
+      if (depth === 0) start = mark.at;
+      depth += 1;
+      continue;
+    }
+    if (depth === 0) continue; // chiusura spaiata: markup rotto, si ignora
+    depth -= 1;
+    if (depth === 0 && start !== -1) {
+      const block = src.slice(start, mark.end);
+      if (block.length > best.length) best = block;
+      start = -1;
+    }
+  }
+  // Apertura mai chiusa (accade davvero: `<main>` senza `</main>`): si prende
+  // fino alla fine, che e' comunque meno della pagina intera.
+  if (depth > 0 && start !== -1) {
+    const block = src.slice(start);
+    if (block.length > best.length) best = block;
+  }
+  return best;
+}
+
+/**
+ * Riduce una pagina scrapata alla sua radice editoriale, conservando `<head>`
+ * e ogni blocco JSON-LD ovunque si trovi.
+ *
+ * @param {string} html
+ * @returns {{ html: string, root: 'article'|'main'|'none', isolated: boolean }}
+ */
+export function isolateMainSourceHtml(html) {
+  const src = String(html || '');
+  if (!src) return { html: src, root: 'none', isolated: false };
+
+  // `<article>` prima di `<main>`: su una pagina di articolo singolo il primo
+  // e' il pezzo, il secondo di solito lo contiene INSIEME ai commenti — che e'
+  // esattamente il testo che si sta cercando di non consegnare.
+  const article = extractOutermostTagBlock(src, 'article');
+  const main = extractOutermostTagBlock(src, 'main');
+
+  let chosen = '';
+  let root = 'none';
+  if (visibleTextLength(article) >= MIN_ISOLATED_TEXT_CHARS) {
+    chosen = article;
+    root = 'article';
+  } else if (visibleTextLength(main) >= MIN_ISOLATED_TEXT_CHARS) {
+    chosen = main;
+    root = 'main';
+  }
+  if (!chosen) return { html: src, root: 'none', isolated: false };
+
+  const headMatch = src.match(/<head\b[^>]*>[\s\S]*?<\/head>/i);
+  const head = headMatch ? headMatch[0] : '';
+  // I blocchi JSON-LD stanno tanto in <head> quanto in fondo a <body>: si
+  // riportano tutti quelli che NON sono gia' dentro cio' che si conserva,
+  // perche' `articleBody` e' il ramo migliore dell'estrattore e perderlo
+  // significherebbe scendere di qualita' proprio mentre si isola.
+  const ldBlocks = [...src.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi)]
+    .map((x) => x[0])
+    .filter((block) => !head.includes(block) && !chosen.includes(block));
+
+  return {
+    html: `<!doctype html><html>${head}<body>${ldBlocks.join('')}${chosen}</body></html>`,
+    root,
+    isolated: true,
+  };
+}
+
 // ── Step 1: Fetch web page content ──────────────────────────
 // Publication date of the source page most recently fetched, ISO or ''.
 // fetchPageContent() returns a bare string and has a single call site per
@@ -5182,14 +5403,23 @@ async function fetchPageContent(url) {
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const html = await res.text();
+    // Riduci la pagina alla sua radice editoriale PRIMA di estrarre (issue
+    // #202): gli ultimi due rami dell'estrattore leggono l'intera pagina, ed e'
+    // da li' che firma di redazione, invito a commentare e spalla «ultimi
+    // commenti» sono finiti nel corpo di tre articoli pubblicati.
+    const isolation = isolateMainSourceHtml(html);
     // Use structured extractor (JSON-LD → article → main → og + paragraphs → naive)
     // to feed the generator and fact-checker the actual article body instead of
     // 70%+ nav/footer/ads noise. See scripts/lib/extract-article-text.mjs.
-    const { text, method, paragraphCount, publishedAt } = extractArticleText(html, { maxChars: 8000 });
+    const { text, method, paragraphCount, publishedAt } = extractArticleText(isolation.html, { maxChars: 8000 });
     lastSourcePublishedAt = publishedAt || '';
     const ageNote = lastSourcePublishedAt
       ? ` — fonte del ${lastSourcePublishedAt.slice(0, 10)}`
       : ' — data fonte non rilevata';
+    const isolationNote = isolation.isolated
+      ? `<${isolation.root}> (${html.length} → ${isolation.html.length} chars)`
+      : 'nessuna radice editoriale riconosciuta — pagina intera';
+    console.error(`   🎯 Isolamento: ${isolationNote}`);
     console.error(`   📄 Estratto via ${method}: ${text.length} chars, ${paragraphCount} blocchi${ageNote}`);
     return text;
   } catch (e) {
@@ -5215,6 +5445,136 @@ function extractDateFromUrl(url) {
     return new Date(`${compactDate[1]}-${compactDate[2]}-${compactDate[3]}T00:00:00`);
   }
   return null;
+}
+
+// ── Riconoscimento delle date nelle liste HTML (issue #190 punto 2) ───────
+//
+// `extractDatesFromHtml` riconosceva DUE forme: `<time datetime>` e
+// `DD.MM.YYYY` dentro l'anchor. Verificato sulle fonti reali: cdt, laregione,
+// tio, tvsvizzera, admin.ch e swissinfo non usano ne' l'una ne' l'altra —
+// quindi 9 fonti HTML su 19 non producevano MAI una data, finivano tutte nel
+// secchio `undated` e competevano per gli stessi slot. E' il moltiplicatore
+// che rendeva costoso il cap globale del punto 1: due difetti che si tengono.
+//
+// Sotto ci sono le forme che quelle fonti usano davvero. Ogni parse passa per
+// lo stesso round-trip di validita' calendariale gia' applicato a DD.MM.YYYY
+// (31.04 e 30.02 trabordano in silenzio nel mese dopo con il costruttore
+// Date locale, invece di errore) — vale per TUTTE le forme, non solo per la
+// prima che l'ha imparato.
+//
+// L'elenco e' esportato perche' «quanti formati riconosciamo» sia una domanda
+// con una risposta verificabile invece che una lettura del codice: il gate in
+// generator/tests/news-scan-date-formats.test.mjs lo conta e prova ogni voce.
+export const RECOGNIZED_HEADLINE_DATE_FORMATS = [
+  'time-datetime',   // <time datetime="2026-08-12T09:00:00+02:00">
+  'dd.mm.yyyy',      // 12.08.2026  — ti.ch / USTAT
+  'dd/mm/yyyy',      // 12/08/2026  — testate IT
+  'iso-yyyy-mm-dd',  // 2026-08-12  — admin.ch, microdata
+  'it-textual',      // 12 agosto 2026 / 12 ago 2026
+  'de-textual',      // 12. August 2026 / 12. Aug. 2026
+  'fr-textual',      // 12 août 2026 / 12 aout 2026
+  'en-textual',      // 12 August 2026 / August 12, 2026
+];
+
+// Nome del mese → indice 0-based, per le quattro lingue delle fonti in lista.
+// Le forme abbreviate sono quelle che le testate usano davvero; le accentate
+// sono registrate anche senza accento perche' l'HTML arriva sia con l'entita'
+// sia gia' decodificato.
+const HEADLINE_MONTH_NAMES = new Map(Object.entries({
+  gennaio: 0, gen: 0, febbraio: 1, feb: 1, marzo: 2, mar: 2, aprile: 3, apr: 3,
+  maggio: 4, mag: 4, giugno: 5, giu: 5, luglio: 6, lug: 6, agosto: 7, ago: 7,
+  settembre: 8, set: 8, ott: 9, ottobre: 9, novembre: 10, nov: 10, dicembre: 11, dic: 11,
+  januar: 0, jan: 0, februar: 1, februrar: 1, marz: 2, 'märz': 2, mai: 4,
+  juni: 5, jun: 5, juli: 6, jul: 6, august: 7, aug: 7, september: 8, sep: 8, sept: 8,
+  oktober: 9, okt: 9, november: 10, dezember: 11, dez: 11,
+  janvier: 0, fevrier: 1, 'février': 1, mars: 2, avril: 3, juin: 5, juillet: 6,
+  aout: 7, 'août': 7, septembre: 8, octobre: 9, decembre: 11, 'décembre': 11,
+  january: 0, february: 1, march: 2, april: 3, may: 4, june: 5, july: 6,
+  october: 9, oct: 9, december: 11, dec: 11,
+}));
+
+/**
+ * Costruisce una Date solo se il giorno esiste davvero in quel mese. Il
+ * costruttore locale di Date accetta 31 aprile e lo sposta al 1 maggio senza
+ * dirlo: e' cosi' che una data inventata passava per buona.
+ */
+function buildCalendarDate(year, month0, day) {
+  if (!Number.isInteger(year) || !Number.isInteger(month0) || !Number.isInteger(day)) return null;
+  if (year < 2000 || year > 2100 || month0 < 0 || month0 > 11 || day < 1 || day > 31) return null;
+  const d = new Date(year, month0, day);
+  if (d.getFullYear() !== year || d.getMonth() !== month0 || d.getDate() !== day) return null;
+  if (Number.isNaN(d.getTime())) return null;
+  return d;
+}
+
+/**
+ * Prima data riconoscibile in un frammento di testo, con il nome del formato.
+ *
+ * @param {string} text — testo (i tag possono esserci, vengono tolti qui)
+ * @returns {{ date: Date, format: string } | null}
+ */
+export function parseHeadlineDate(text) {
+  if (!text || typeof text !== 'string') return null;
+
+  // `datetime` PRIMA di togliere i tag, altrimenti sparisce con l'attributo che
+  // lo contiene. Il ciclo globale su `<time datetime>` piu' sotto resta (copre
+  // le date fuori dall'anchor), ma quando l'elemento sta DENTRO l'anchor questa
+  // e' la lettura esatta invece che una finestra di prossimita'.
+  const dt = text.match(/\bdatetime\s*=\s*["']([^"']+)["']/i);
+  if (dt) {
+    const d = new Date(dt[1]);
+    if (!Number.isNaN(d.getTime())) return { date: d, format: 'time-datetime' };
+  }
+
+  const plain = text.replace(/<[^>]+>/g, ' ').replace(/&nbsp;/gi, ' ').replace(/\s+/g, ' ');
+
+  // ISO per primo: e' l'unica forma non ambigua, e `2026-08-12` non puo' essere
+  // letta male da nessuna delle regole successive.
+  const iso = plain.match(/\b(20\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])\b/);
+  if (iso) {
+    const d = buildCalendarDate(Number(iso[1]), Number(iso[2]) - 1, Number(iso[3]));
+    if (d) return { date: d, format: 'iso-yyyy-mm-dd' };
+  }
+
+  // DD.MM.YYYY e DD/MM/YYYY. Il giorno viene PRIMA: sono fonti CH/IT/DE/FR, e
+  // l'ordine americano su questi domini non esiste. Con giorno <= 12 la forma
+  // resta ambigua in astratto — il round-trip non puo' risolverla e non ci
+  // prova: la scelta e' dichiarata qui, non nascosta in una regex.
+  const dmy = plain.match(/\b([0-3]?\d)([./])(0?[1-9]|1[0-2])\2(20\d{2})\b/);
+  if (dmy) {
+    const d = buildCalendarDate(Number(dmy[4]), Number(dmy[3]) - 1, Number(dmy[1]));
+    if (d) return { date: d, format: dmy[2] === '.' ? 'dd.mm.yyyy' : 'dd/mm/yyyy' };
+  }
+
+  // Testuali «12 agosto 2026» / «12. August 2026» / «12 août 2026».
+  const dayFirst = plain.match(/\b([0-3]?\d)\.?\s+([A-Za-zÀ-ÿ]{3,12})\.?\s+(20\d{2})\b/);
+  if (dayFirst) {
+    const month0 = HEADLINE_MONTH_NAMES.get(dayFirst[2].toLowerCase());
+    if (month0 !== undefined) {
+      const d = buildCalendarDate(Number(dayFirst[3]), month0, Number(dayFirst[1]));
+      if (d) return { date: d, format: monthFormatTag(dayFirst[2].toLowerCase()) };
+    }
+  }
+
+  // Testuale anglosassone «August 12, 2026» (la virgola non e' obbligatoria).
+  const monthFirst = plain.match(/\b([A-Za-z]{3,12})\.?\s+([0-3]?\d)(?:st|nd|rd|th)?,?\s+(20\d{2})\b/);
+  if (monthFirst) {
+    const month0 = HEADLINE_MONTH_NAMES.get(monthFirst[1].toLowerCase());
+    if (month0 !== undefined) {
+      const d = buildCalendarDate(Number(monthFirst[3]), month0, Number(monthFirst[2]));
+      if (d) return { date: d, format: 'en-textual' };
+    }
+  }
+
+  return null;
+}
+
+/** A quale lingua attribuire un nome di mese, per la sola etichetta di formato. */
+function monthFormatTag(name) {
+  if (/^(gennaio|gen|febbraio|marzo|aprile|maggio|mag|giugno|giu|luglio|lug|agosto|ago|settembre|set|ottobre|ott|novembre|dicembre|dic)$/.test(name)) return 'it-textual';
+  if (/^(januar|jan|februar|marz|märz|mai|juni|juli|august|aug|september|sep|sept|oktober|okt|november|dezember|dez)$/.test(name)) return 'de-textual';
+  if (/^(janvier|fevrier|février|mars|avril|juin|juillet|aout|août|septembre|octobre|decembre|décembre)$/.test(name)) return 'fr-textual';
+  return 'en-textual';
 }
 
 /** Build a map of URL → date from <time> elements found near <a> links in the HTML */
@@ -5246,28 +5606,47 @@ function extractDatesFromHtml(html, baseUrl) {
   // (then false-matched into the proven pool). Scope the date to the anchor's
   // own inner HTML so the link↔date pairing is exact (proximity windows misfire
   // when the same nwsId appears in multiple sidebars).
+  //
+  // 2026-08-13 (issue #190 punto 2): il parse non e' piu' una sola regex
+  // DD.MM.YYYY ma `parseHeadlineDate`, che copre le otto forme di
+  // RECOGNIZED_HEADLINE_DATE_FORMATS. La validazione calendariale che stava
+  // qui (31.04 / 30.02 traboccano in silenzio nel mese dopo con il costruttore
+  // Date locale) e' dentro `buildCalendarDate`, quindi vale per tutte e otto e
+  // non solo per la prima che l'aveva imparata — stesso anti-pattern gia'
+  // corretto in scripts/lib/postch-job-parser.mjs (parseDdMmYyyy) e
+  // scripts/crawl-ge-agenda.mjs (parseGeneveDateFr / isValidCalendarDate).
   const anchorRe = /<a\s[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi;
   let am;
+  let lastAnchorEnd = 0;
   while ((am = anchorRe.exec(html)) !== null) {
+    const anchorStart = am.index;
+    const anchorEnd = anchorRe.lastIndex;
     const inner = am[2];
-    const dmy = inner.match(/\b([0-3]?\d)\.(0?[1-9]|1[0-2])\.(20\d{2})\b/);
-    if (!dmy) continue;
-    const day = Number(dmy[1]);
-    const month = Number(dmy[2]);
-    const year = Number(dmy[3]);
-    if (day < 1 || day > 31) continue;
     // Resolve to the absolute URL so the key matches extractHeadlines' lookup.
     let href;
-    try { href = new URL(am[1], baseUrl).href; } catch { continue; }
-    if (!href.startsWith('http') || dateMap.has(href)) continue;
-    const d = new Date(year, month - 1, day);
-    // Round-trip: reject calendar-impossible dates (31.04, 30.02) that
-    // Date's local-time constructor silently overflows into the next month
-    // instead of erroring — same anti-pattern fixed in
-    // scripts/lib/postch-job-parser.mjs (parseDdMmYyyy) and
-    // scripts/crawl-ge-agenda.mjs (parseGeneveDateFr / isValidCalendarDate).
-    if (d.getFullYear() !== year || d.getMonth() !== month - 1 || d.getDate() !== day) continue;
-    if (!isNaN(d.getTime())) dateMap.set(href, d);
+    try { href = new URL(am[1], baseUrl).href; } catch { lastAnchorEnd = anchorEnd; continue; }
+    if (!href.startsWith('http') || dateMap.has(href)) { lastAnchorEnd = anchorEnd; continue; }
+
+    // 1) L'inner HTML dell'anchor. E' la sede esatta: il pairing link↔data non
+    //    puo' sbagliare, ed e' la ragione per cui la finestra di prossimita' non
+    //    e' il primo tentativo (fallisce quando lo stesso id compare in piu'
+    //    sidebar).
+    let hit = parseHeadlineDate(inner);
+
+    // 2) Solo se l'anchor non porta data: i due frammenti di testo che stanno
+    //    fra questo anchor e quelli adiacenti. Non e' una finestra a raggio
+    //    fisso — e' delimitata dagli anchor vicini, quindi il testo esaminato
+    //    non appartiene a nessun altro link. E' la forma in cui le testate che
+    //    non usano <time> scrivono la data: fuori dal link, dentro la card.
+    if (!hit) {
+      const before = html.slice(Math.max(lastAnchorEnd, anchorStart - 300), anchorStart);
+      const nextAnchor = html.indexOf('<a', anchorEnd);
+      const after = html.slice(anchorEnd, Math.min(nextAnchor === -1 ? html.length : nextAnchor, anchorEnd + 300));
+      hit = parseHeadlineDate(before) || parseHeadlineDate(after);
+    }
+
+    lastAnchorEnd = anchorEnd;
+    if (hit) dateMap.set(href, hit.date);
   }
 
   return dateMap;
@@ -5385,6 +5764,78 @@ function extractRssItems(xml, feedUrl) {
   });
 }
 
+// ── Quota per-fonte del secchio «undated» (issue #190 punto 1) ────────────
+//
+// Il budget delle headline senza data era una `slice` dei primi 120: un cap
+// GLOBALE, riempito nell'ordine in cui le fonti compaiono nell'array, perche'
+// `allHeadlines` viene concatenato batch per batch in quell'ordine. Misurato
+// il 2026-08-10: swissinfo.ch stava per prima ed emette ~244 link undated,
+// quasi tutti chrome di navigazione — si prendeva **120 slot su 120**. Le 26
+// headline vere di economia svizzera di cdt.ch, i comunicati sul mercato del
+// lavoro di seco.admin.ch e quelli del Consiglio federale non venivano
+// scartati da un gate: non arrivavano.
+//
+// La PR #187 ha riordinato la lista svizzera. E' un rimedio che dura finche'
+// nessuno tocca l'ordine, e l'ordine di un array non e' un invariante che
+// qualcuno difendera' — tanto piu' che la lista frontaliere, con lo stesso
+// difetto, non e' stata riordinata affatto.
+//
+// La forma che lo elimina e' un round-robin a quota per fonte: si prende una
+// headline per fonte a giro, fino a esaurire il budget globale o la quota
+// individuale. Dopo di che l'ORDINE DIVENTA IRRILEVANTE — che e' la proprieta'
+// da difendere, non la classifica del momento. Con 19 fonti e budget 120 ogni
+// fonte arriva a ~6 slot prima che chiunque ne prenda un settimo.
+//
+// Funzione PURA ed esportata di proposito: e' cio' che permette a
+// generator/tests/news-scan-undated-quota.test.mjs di provare l'invariante
+// senza rete e senza importare le 12k righe di questo modulo.
+export const UNDATED_TOTAL_BUDGET = 120;
+export const UNDATED_PER_SOURCE_QUOTA = 12;
+
+export function selectUndatedBySourceQuota(undated, opts = {}) {
+  const total = Number.isFinite(opts.total) ? opts.total : UNDATED_TOTAL_BUDGET;
+  const perSource = Number.isFinite(opts.perSource) ? opts.perSource : UNDATED_PER_SOURCE_QUOTA;
+  const list = Array.isArray(undated) ? undated : [];
+  if (total <= 0 || perSource <= 0 || list.length === 0) {
+    return { picked: [], perSourceCounts: new Map(), capped: [] };
+  }
+
+  // Raggruppa per fonte conservando l'ordine di prima apparizione. Una headline
+  // senza `source` non viene buttata: finisce in un secchio suo, che quindi ha
+  // la stessa quota di chiunque altro invece della quota di tutti gli altri
+  // messi insieme.
+  const bySource = new Map();
+  for (const h of list) {
+    const key = (h && h.source) || '(fonte sconosciuta)';
+    if (!bySource.has(key)) bySource.set(key, []);
+    bySource.get(key).push(h);
+  }
+
+  const picked = [];
+  const perSourceCounts = new Map();
+  const queues = [...bySource.entries()];
+  for (let round = 0; round < perSource && picked.length < total; round += 1) {
+    let movedThisRound = false;
+    for (const [src, items] of queues) {
+      if (picked.length >= total) break;
+      if (items.length <= round) continue;
+      picked.push(items[round]);
+      perSourceCounts.set(src, (perSourceCounts.get(src) || 0) + 1);
+      movedThisRound = true;
+    }
+    if (!movedThisRound) break;
+  }
+
+  // Chi aveva piu' materiale di quanto gli sia stato concesso: e' l'informazione
+  // che il cap globale non poteva produrre, perche' non sapeva di chi fossero
+  // gli slot che stava dando via.
+  const capped = queues
+    .filter(([src, items]) => items.length > (perSourceCounts.get(src) || 0))
+    .map(([src, items]) => ({ source: src, available: items.length, taken: perSourceCounts.get(src) || 0 }));
+
+  return { picked, perSourceCounts, capped };
+}
+
 // ── Step 1c: Scan all news sources for recent headlines ─────
 async function scanNewsSources() {
   // Section-keyed source list: frontaliere → Ticino/frontalieri feeds (default),
@@ -5479,8 +5930,21 @@ async function scanNewsSources() {
         console.error(`  🌐 ${domain}: ${headlines.length} articoli HTML`);
       }
 
+      // ── Il terzo stato (issue #190 punto 3) ──
+      // Fin qui `succeeded` significava «la fetch non ha lanciato»: una fonte
+      // che risponde 200 e non produce una sola headline era indistinguibile
+      // da una che ne produce quaranta. Distinguerle non e' cosmesi — e' la
+      // sola condizione che va misurata, perche' e' quella che NON si annuncia
+      // mai da sola (una fonte rotta almeno alza `failed`).
+      const produced = (headlines || []).length;
+      if (produced === 0) {
+        RUN_REPORT.sources.sterile += 1;
+        RUN_REPORT.sources.sterileDomains.push(domain);
+        console.error(`  🕳️ ${domain}: risposta valida ma 0 headline utilizzabili (STERILE)`);
+        return [];
+      }
       RUN_REPORT.sources.succeeded += 1;
-      return (headlines || []).map(h => ({ ...h, source: domain }));
+      return headlines.map(h => ({ ...h, source: domain }));
     } catch (e) {
       console.error(`  ⚠️ ${domain}: ${e.message}`);
       RUN_REPORT.sources.failed += 1;
@@ -5491,6 +5955,17 @@ async function scanNewsSources() {
   const results = await Promise.all(fetches);
   for (const batch of results) {
     allHeadlines.push(...batch);
+  }
+
+  // Le tre classi in chiaro, sempre — anche a zero sterili, perche' e' la riga
+  // che rende leggibile il giorno in cui non sono zero.
+  console.error(
+    `\n  🧭 Fonti: ${RUN_REPORT.sources.succeeded} produttive, ` +
+      `${RUN_REPORT.sources.sterile} sterili, ${RUN_REPORT.sources.failed} fallite ` +
+      `su ${RUN_REPORT.sources.configured} configurate`,
+  );
+  if (RUN_REPORT.sources.sterileDomains.length > 0) {
+    console.error(`  🕳️ Sterili: ${RUN_REPORT.sources.sterileDomains.join(', ')}`);
   }
 
   // ── Search-based ingestion via WordPress REST API ──
@@ -5610,9 +6085,19 @@ async function scanNewsSources() {
     return prioritizeFrontalieriHeadlines(filterByAnchor(allHeadlines));
   }
 
-  const undatedTop = undated.slice(0, 120).map(h => ({ ...h, _undatedFallback: true }));
+  const { picked, perSourceCounts, capped } = selectUndatedBySourceQuota(undated);
+  const undatedTop = picked.map(h => ({ ...h, _undatedFallback: true }));
   RUN_REPORT.headlines.usedRecent = recent.length;
   RUN_REPORT.headlines.usedUndated = undatedTop.length;
+  RUN_REPORT.headlines.undatedBySource = Object.fromEntries(perSourceCounts);
+  RUN_REPORT.headlines.undatedCapped = capped;
+  if (undated.length > undatedTop.length) {
+    console.error(
+      `  🎚️ Quota undated: ${undatedTop.length}/${undated.length} ammesse ` +
+        `(max ${UNDATED_PER_SOURCE_QUOTA} per fonte, budget ${UNDATED_TOTAL_BUDGET}) — ` +
+        `${[...perSourceCounts].map(([s, n]) => `${s}:${n}`).join(' ')}`,
+    );
+  }
   return prioritizeFrontalieriHeadlines(filterByAnchor([...recent, ...undatedTop]));
 }
 
@@ -7601,21 +8086,50 @@ function validate(data, opts = {}) {
     console.error(`  ℹ️  [national-relevance] Sezione ${SECTION_NAME}: density frontalieri non applicabile (articolo a respiro nazionale).`);
   }
 
-  // Slug validation for translated locales (slugs come from IT generation call)
-  // If the AI model omitted translated slugs, derive them from the IT slug.
+  // ── Slug dei locali tradotti (issue #191) ────────────────────────────────
+  //
+  // Questa riga girava cosi':
+  //
+  //     const title = data.content[locale]?.title || data.content.it?.title;
+  //     const fallback = title ? slugifySlugPart(title) : data.slugs.it;
+  //
+  // e ha due modi di produrre l'URL italiano su en/de/fr, entrambi muti. Il
+  // primo e' il `|| data.content.it?.title`: qui siamo sulla chiamata di
+  // generazione ITALIANA, `translateArticle()` non e' ancora passato, quindi
+  // `data.content[locale]` NON esiste quasi mai — e lo slug "localizzato"
+  // veniva slugificato dal titolo italiano. Il secondo e' il ripiego finale su
+  // `data.slugs.it`, che a valle e' indistinguibile da uno slug scelto.
+  //
+  // Il risultato misurato: 121 articoli su 3.173 (poi 169 su 4.114) servono
+  // l'URL italiano in tutti e quattro i locali, e nessuna run risultava
+  // degradata.
+  //
+  // Ora: il titolo italiano non e' piu' una sorgente per uno slug localizzato,
+  // e cio' che si assegna qui e' dichiaratamente PROVVISORIO. Il valore
+  // definitivo lo mette `relocalizeSlugsAfterTranslation()` dopo
+  // `translateArticle()`, quando i titoli tradotti esistono davvero. Uno slug
+  // deve comunque esserci gia' adesso, perche' `checkTranslatedSlugCollisions()`
+  // gira prima della traduzione e rifiuta uno slug nullo.
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
-      // Fallback: use the translated title if available, otherwise the IT slug
-      const title = String(data.content[locale]?.title || data.content.it?.title || '');
-      const fallback = title ? slugifySlugPart(title) : data.slugs.it;
-      if (fallback) {
-        data.slugs[locale] = fallback;
-        console.warn(`  ⚠️  Slug ${locale} mancante, generato come fallback: "${fallback}"`);
-      } else {
+      const localizedTitle = String(data.content[locale]?.title || '').trim();
+      const fromLocalizedTitle = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+      if (fromLocalizedTitle) {
+        data.slugs[locale] = fromLocalizedTitle;
+        RUN_REPORT.slugs.localizedFromTitle += 1;
+        continue;
+      }
+      if (!data.slugs.it) {
         const err = new Error(`Slug mancante per ${locale}`);
         err.qualityReject = true;
         throw err;
       }
+      data.slugs[locale] = data.slugs.it;
+      markProvisionalItSlug(data, locale);
+      console.warn(
+        `  ⏳ [slug-i18n] Slug ${locale} assente e titolo ${locale} non ancora disponibile: ` +
+          `provvisorio sull'italiano ("${data.slugs.it}"), da rilocalizzare dopo la traduzione.`,
+      );
     }
   }
   if (!CATEGORIES.includes(data.category)) {
@@ -7679,13 +8193,19 @@ function validate(data, opts = {}) {
   for (const locale of ['en', 'de', 'fr']) {
     if (data.slugs[locale]) {
       const original = data.slugs[locale];
-      data.slugs[locale] = String(data.slugs[locale])
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLowerCase()
-        .replace(/[^a-z0-9-]/g, '-')
-        .replace(/-+/g, '-')
-        .replace(/^-|-$/g, '')
-        .slice(0, 80);
+      // Il taglio a 80 e' `truncateSlugAtWordBoundary` e non `.slice(0, 80)`
+      // per la ragione argomentata su `slugifySlugPart` (issue #191): a log si
+      // leggevano slug fr troncati a meta' parola, e un token spezzato e' un
+      // URL diverso, non un URL piu' corto.
+      data.slugs[locale] = truncateSlugAtWordBoundary(
+        String(data.slugs[locale])
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .replace(/[^a-z0-9-]/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-|-$/g, ''),
+        SLUG_MAX_LENGTH,
+      );
       // Same prompt-placeholder leak the id is guarded against above, and the
       // reason this branch no longer strips `kebab-case-` by hand: the schema
       // shown to the model spells the id as "kebab-case-3-5-words-max-40-chars"
@@ -11910,6 +12430,19 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
 
+  // Step 3b.0: Rilocalizza gli slug en/de/fr (issue #191). Questo e' il primo
+  // istante della pipeline in cui i titoli tradotti esistono, quindi e' il
+  // primo istante in cui uno slug localizzato e' ricavabile — prima di qui
+  // `validate()` non poteva fare altro che il provvisorio italiano. Il flusso
+  // AI primario NON chiama `registerArticleFiles()` (scrive i file da se' con
+  // modifyRouterTs/modifyBlogArticlesTsx), quindi la rilocalizzazione dentro
+  // `deriveAndSanitizeArticleSlugs()` non lo copre: va invocata anche qui, ed
+  // e' la stessa forma del difetto #3209 (una derivazione per produttore).
+  relocalizeSlugsAfterTranslation(data, {
+    isTaken: sectionLocaleSlugTaken,
+    onEvent: reportSlugI18nEvent,
+  });
+
   // Step 3b.1: Fabricated-institution check on the EN/DE/FR translations —
   // BLOCKING. assertNoFabricatedReferences() (Step 3a.0b, above) only ever
   // sees contentIt (called before translateArticle() exists), so a
@@ -12137,16 +12670,25 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 /** Strip a string down to a URL-safe slug segment: lowercase, diacritics
  * stripped (NFD-decompose + drop combining marks), non-alphanumerics
  * collapsed to single hyphens, 80-char cap. Same normalization used
- * throughout this file's own (unexported, inline) slug handling. */
+ * throughout this file's own (unexported, inline) slug handling.
+ *
+ * Il cap non e' piu' `.slice(0, 80)` (issue #191, seconda meta'): tagliare a
+ * carattere fisso spezza l'ultimo token e produce URL monchi
+ * \u2014 `\u2026-en-tant-que-travailleur-f` da `\u2026-travailleur-frontalier`. Un token
+ * spezzato non e' un URL piu' corto: e' un URL diverso, che nessun 301 conosce.
+ * `truncateSlugAtWordBoundary` arretra al trattino precedente quando il taglio
+ * cade dentro una parola, e accetta il taglio secco solo se arretrare
+ * costerebbe piu' del 25% del cap. */
+const SLUG_MAX_LENGTH = 80;
 function slugifySlugPart(input) {
-  return String(input || '')
+  const normalized = String(input || '')
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 80);
+    .replace(/^-|-$/g, '');
+  return truncateSlugAtWordBoundary(normalized, SLUG_MAX_LENGTH);
 }
 
 /**
@@ -12251,6 +12793,115 @@ export function inspectSlugForPromptPlaceholder(input) {
   return { slug: usable ? remainder : '', leaked: true, recovered: usable };
 }
 
+// ── Rilocalizzazione degli slug dopo la traduzione (issue #191) ───────────
+//
+// Il campo esiste perche' «questo slug e' l'italiano per ripiego» sia una
+// informazione trasportabile, non una coincidenza da riconoscere confrontando
+// stringhe. Chi lo legge sa che il valore va ancora deciso; chi non lo legge
+// vede comunque uno slug valido e non si rompe.
+export const PROVISIONAL_IT_SLUG_FIELD = '_slugsProvisionalFromIt';
+
+export function markProvisionalItSlug(data, locale) {
+  if (!data || typeof data !== 'object') return;
+  if (!Array.isArray(data[PROVISIONAL_IT_SLUG_FIELD])) data[PROVISIONAL_IT_SLUG_FIELD] = [];
+  if (!data[PROVISIONAL_IT_SLUG_FIELD].includes(locale)) data[PROVISIONAL_IT_SLUG_FIELD].push(locale);
+}
+
+function clearProvisionalItSlug(data, locale) {
+  if (!Array.isArray(data?.[PROVISIONAL_IT_SLUG_FIELD])) return;
+  data[PROVISIONAL_IT_SLUG_FIELD] = data[PROVISIONAL_IT_SLUG_FIELD].filter((l) => l !== locale);
+}
+
+/**
+ * Promuove a slug localizzato ogni slug en/de/fr che sia ancora l'italiano —
+ * marcato provvisorio da `validate()` **oppure** semplicemente byte-identico a
+ * `data.slugs.it`, perche' i produttori che non passano da `validate()`
+ * (publish-journalist-article.mjs, i tre generate-*.mjs) non marcano niente e
+ * il difetto e' lo stesso.
+ *
+ * Va chiamata DOPO `translateArticle()`: prima, `data.content[locale].title`
+ * non esiste, ed e' esattamente il motivo per cui il vecchio codice ripiegava
+ * sull'italiano — non aveva ancora nulla di meglio, e non lo diceva.
+ *
+ * PURA di proposito (nessun RUN_REPORT, nessun console, nessuna lettura di
+ * file): gli effetti passano da `onEvent`, e la collisione da `isTaken`. E'
+ * cio' che permette a generator/tests/article-slug-i18n.test.mjs di provare
+ * l'invariante «uno slug non italiano non e' mai byte-identico all'italiano
+ * quando esiste un titolo tradotto» senza importare questo modulo.
+ *
+ * @param {object} data
+ * @param {{ isTaken?: (locale: string, slug: string) => boolean, onEvent?: (e: object) => void }} [opts]
+ * @returns {{ relocalized: Array<object>, stillItalian: Array<object> }}
+ */
+export function relocalizeSlugsAfterTranslation(data, opts = {}) {
+  const isTaken = typeof opts.isTaken === 'function' ? opts.isTaken : () => false;
+  const onEvent = typeof opts.onEvent === 'function' ? opts.onEvent : () => {};
+  const out = { relocalized: [], stillItalian: [] };
+  if (!data || typeof data !== 'object' || !data.slugs) return out;
+
+  const itSlug = String(data.slugs.it || '');
+  const provisional = Array.isArray(data[PROVISIONAL_IT_SLUG_FIELD]) ? data[PROVISIONAL_IT_SLUG_FIELD] : [];
+
+  for (const locale of ['en', 'de', 'fr']) {
+    const current = String(data.slugs[locale] || '');
+    const needsWork = provisional.includes(locale) || !current || current === itSlug;
+    if (!needsWork) continue;
+
+    const localizedTitle = String(data.content?.[locale]?.title || '').trim();
+    const candidate = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+
+    if (candidate && candidate !== itSlug && !isTaken(locale, candidate)) {
+      data.slugs[locale] = candidate;
+      clearProvisionalItSlug(data, locale);
+      out.relocalized.push({ locale, slug: candidate, from: current });
+      onEvent({ kind: 'relocalized', locale, slug: candidate, from: current });
+      continue;
+    }
+
+    // Nessuna delle tre uscite qui sotto e' un errore da bloccare: un articolo
+    // buono non si butta per uno slug. Ma nessuna e' piu' silenziosa — ognuna
+    // porta la propria causa, ed e' la causa che dice se il difetto sia il
+    // traduttore, il titolo o una collisione.
+    const reason = !localizedTitle
+      ? 'titolo tradotto assente'
+      : !candidate
+        ? 'titolo tradotto non slugificabile'
+        : candidate === itSlug
+          ? 'titolo tradotto identico all\'italiano'
+          : 'slug localizzato gia\' occupato nella sezione';
+    data.slugs[locale] = current || itSlug;
+    out.stillItalian.push({ locale, slug: data.slugs[locale], reason });
+    onEvent({ kind: 'it-fallback', locale, slug: data.slugs[locale], reason });
+  }
+  return out;
+}
+
+/** Ponte fra gli eventi puri di sopra e le due tracce che devono restare: log e RUN_REPORT. */
+function reportSlugI18nEvent(event) {
+  if (event.kind === 'relocalized') {
+    RUN_REPORT.slugs.relocalized += 1;
+    console.error(`  🌍 [slug-i18n] Slug ${event.locale} rilocalizzato: "${event.from}" → "${event.slug}"`);
+    return;
+  }
+  RUN_REPORT.slugs.itFallback += 1;
+  RUN_REPORT.slugs.itFallbackDetail.push(`${event.locale}:${event.reason}`);
+  console.error(
+    `  ❌ [slug-i18n] Lo slug ${event.locale} resta l'URL ITALIANO ("${event.slug}") — ${event.reason}. ` +
+      'Il locale servira\' lo stesso indirizzo dell\'italiano: e\' un ripiego, non una scelta. ' +
+      'Se ricorre, il difetto e\' a monte (traduzione del titolo), non qui.',
+  );
+}
+
+/** Lo slug e' gia' occupato da un altro articolo della sezione? Non lancia: e' una sonda. */
+function sectionLocaleSlugTaken(locale, slug) {
+  try {
+    const src = readSectionSlugData();
+    return new RegExp(`\\b${locale}:\\s*(['"])${escapeRegex(slug)}\\1`).test(src);
+  } catch {
+    return false;
+  }
+}
+
 /**
  * Derive and sanitize the final per-locale slugs for an article: the Italian
  * slug is always locked to `data.id` (routing convention — see `validate()`'s
@@ -12322,9 +12973,19 @@ export function deriveAndSanitizeArticleSlugs(data) {
   data.slugs.it = data.id;
   for (const locale of ['en', 'de', 'fr']) {
     if (!data.slugs[locale]) {
-      const title = String(data.content?.[locale]?.title || data.content?.it?.title || '');
-      const fallback = title ? slugifySlugPart(title) : data.slugs.it;
-      data.slugs[locale] = fallback || data.slugs.it;
+      // Il titolo ITALIANO non e' piu' una sorgente accettabile per uno slug
+      // en/de/fr (issue #191): slugificarlo produce l'URL italiano sotto un
+      // altro locale, che e' precisamente il difetto. Se il titolo tradotto
+      // non c'e', si segna il provvisorio e decide `relocalizeSlugsAfterTranslation()`
+      // in fondo a questa funzione.
+      const localizedTitle = String(data.content?.[locale]?.title || '').trim();
+      const fromLocalizedTitle = localizedTitle ? slugifySlugPart(localizedTitle) : '';
+      if (fromLocalizedTitle) {
+        data.slugs[locale] = fromLocalizedTitle;
+        continue;
+      }
+      data.slugs[locale] = data.slugs.it;
+      markProvisionalItSlug(data, locale);
       continue;
     }
     const raw = String(data.slugs[locale]);
@@ -12344,6 +13005,15 @@ export function deriveAndSanitizeArticleSlugs(data) {
     );
     data.slugs[locale] = replacement;
   }
+
+  // Ultimo passaggio, e il solo che i quattro produttori secondari attraversano
+  // (issue #191): qualunque slug en/de/fr sia rimasto uguale all'italiano viene
+  // ricavato dal titolo tradotto, se un titolo tradotto c'e'. Se non c'e',
+  // l'italiano resta — ma lo dice, e si conta.
+  relocalizeSlugsAfterTranslation(data, {
+    isTaken: sectionLocaleSlugTaken,
+    onEvent: reportSlugI18nEvent,
+  });
   return data.slugs;
 }
 
