@@ -2569,6 +2569,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.eclissi-solare-ospedali.title': 'Decine in ospedale per dolori agli occhi dopo l\'eclissi solare',
     'blog.article.eclissi-solare-ospedali.excerpt': 'Decine di persone in ospedale dopo l\'eclissi solare',
     'blog.article.eclissi-solare-ospedali.imageAlt': 'Decine di persone in ospedale dopo l\'eclissi solare',
+    'blog.article.patent-canton-bern-conversion-exams.title': 'Patente di guida a Berna: conversione e requisiti',
+    'blog.article.patent-canton-bern-conversion-exams.excerpt': 'La conversione della patente di guida estera nel Canton di Berna richiede l\'esame teorico e pratico, nonché la frequentazione di corsi obbligatori. L\'ufficio della circolazione competente è responsabile dell\'elaborazione della domanda di conversione.',
+    'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Una scena di un test di guida nel Canton Berna, con un focus sull\'esame pratico.',
 };
 
 export default blogMetaChIt;

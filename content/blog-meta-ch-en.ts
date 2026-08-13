@@ -2569,6 +2569,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.eclissi-solare-ospedali.title': 'Dozens in hospital for eye pain after solar eclipse',
     'blog.article.eclissi-solare-ospedali.excerpt': 'Dozens of people in hospital after solar eclipse',
     'blog.article.eclissi-solare-ospedali.imageAlt': 'Thousands of people in hospital after the solar eclipse',
+    'blog.article.patent-canton-bern-conversion-exams.title': 'Driving licence in Bern: conversion and requirements',
+    'blog.article.patent-canton-bern-conversion-exams.excerpt': 'The conversion of the foreign driver\'s license in the Canton of Bern requires the theoretical and practical examination, as well as the attendance of compulsory courses. The relevant circulation office is responsible for processing the conversion application.',
+    'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'A scene of a driving test in the Canton of Bern, with a focus on the practical exam.',
 };
 
 export default blogMetaChEn;

@@ -7705,6 +7705,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'patent-canton-bern-conversion-exams',
+    category: 'pratico',
+    date: '2026-08-13T17:49:01.339Z',
+    image: '/images/blog/patent-canton-bern-conversion-exams.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

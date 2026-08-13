@@ -2569,6 +2569,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.eclissi-solare-ospedali.title': 'Des dizaines à l\'hôpital pour des douleurs oculaires après une éclipse solaire',
     'blog.article.eclissi-solare-ospedali.excerpt': 'Des dizaines de personnes hospitalisées après une éclipse solaire',
     'blog.article.eclissi-solare-ospedali.imageAlt': 'Des milliers de personnes en hôpital après l\'éclipse solaire',
+    'blog.article.patent-canton-bern-conversion-exams.title': 'Permis de conduire à Berne : conversion et exigences',
+    'blog.article.patent-canton-bern-conversion-exams.excerpt': 'La conversion du permis de conduire étranger dans le canton de Berne nécessite l\'examen théorique et pratique ainsi que la fréquentation de cours obligatoires. L\'office de la circulation compétent est responsable du traitement de la demande de conversion.',
+    'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Une scène de test de conduite dans le canton de Berne, avec un focus sur l\'examen pratique.',
 };
 
 export default blogMetaChFr;

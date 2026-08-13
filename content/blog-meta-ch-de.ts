@@ -2569,6 +2569,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.eclissi-solare-ospedali.title': 'Dutzende im Krankenhaus wegen Augenschmerzen nach der Sonnenfinsternis',
     'blog.article.eclissi-solare-ospedali.excerpt': 'Dutzende Menschen nach der Sonnenfinsternis im Krankenhaus',
     'blog.article.eclissi-solare-ospedali.imageAlt': 'Viele Menschen im Krankenhaus nach der Sonnenfinsternis',
+    'blog.article.patent-canton-bern-conversion-exams.title': 'Führerschein in Bern: Umstellung und Voraussetzungen',
+    'blog.article.patent-canton-bern-conversion-exams.excerpt': 'Die Umschulung des ausländischen Führerscheins im Kanton Bern erfordert die theoretische und praktische Prüfung sowie die Teilnahme an Pflichtkursen. Für die Bearbeitung des Umwandlungsantrags ist das zuständige Strassenverkehrsamt zuständig.',
+    'blog.article.patent-canton-bern-conversion-exams.imageAlt': 'Eine Szene eines Führerscheintests im Kanton Bern, mit einem Fokus auf den praktischen Test.',
 };
 
 export default blogMetaChDe;
