@@ -29649,6 +29649,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'calcolatore-salariale-edilizia-2026',
+ category: 'pratico',
+ date: '2026-08-13T10:30:51.805Z',
+ image: '/images/blog/calcolatore-salariale-edilizia-2026.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

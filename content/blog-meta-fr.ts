@@ -9891,6 +9891,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.strumenti-controllo-salari-ticino.title': 'Vérifiez votre salaire : outils utiles pour les frontaliers',
     'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Découvrez comment utiliser les calculateurs de salaire d\'Unia et de l\'USS pour comparer votre rémunération avec les paramètres du marché suisse et des CCT.',
     'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Vue panoramique de Lugano, centre économique du canton du Tessin.',
+    'blog.article.calcolatore-salariale-edilizia-2026.title': 'Calculateur de salaire pour la construction : vérifiez la paie',
+    'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Utilisez le calculateur de salaire CNM pour comparer votre salaire avec les indications du Contrat National Manteau 2026.',
+    'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Chantier de construction au Tessin',
 };
 
 export default blogMetaFr;

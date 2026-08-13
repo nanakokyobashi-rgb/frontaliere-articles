@@ -67151,6 +67151,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-calcolatore-salariale-edilizia-2026': {
+    title: 'Calcolatore salariale per l\'edilizia: verifica la busta paga',
+    description: 'Verifica il tuo salario nel settore edile con il calcolatore CNM 2026. Controlla la busta paga e rivolgiti a Unia in caso di discrepanze. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, calcolatore, salariale, edilizia, verifica',
+    ogTitle: 'Calcolatore salariale edilizia: verifica stipendio CNM 2026',
+    ogDescription: 'Usa il calcolatore salariale CNM 2026 per confrontare il tuo stipendio nell\'edilizia. Verifica i dati e ricevi assistenza sindacale.',
+    canonicalPath: '/articoli-frontaliere/calcolatore-salariale-edilizia-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Calcolatore salariale per l'edilizia: verifica la busta paga",
+      "description": "Verifica il tuo salario nel settore edile con il calcolatore CNM 2026. Controlla la busta paga e rivolgiti a Unia in caso di discrepanze. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/calcolatore-salariale-edilizia-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Cantiere edile in Ticino"
+      },
+      "datePublished": "2026-08-13T10:30:51+00:00",
+      "dateModified": "2026-08-13T10:30:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/calcolatore-salariale-edilizia-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

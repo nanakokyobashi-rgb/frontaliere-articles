@@ -9890,6 +9890,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.strumenti-controllo-salari-ticino.title': 'Verifica il tuo salario: strumenti utili per i frontalieri',
     'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Scopri come utilizzare i calcolatori salariali di Unia e dell\'USS per confrontare la tua retribuzione con i parametri del mercato svizzero e dei CCL.',
     'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Veduta panoramica di Lugano, centro economico del Canton Ticino.',
+    'blog.article.calcolatore-salariale-edilizia-2026.title': 'Calcolatore salariale per l\'edilizia: verifica la busta paga',
+    'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Utilizza il calcolatore salariale CNM per confrontare il tuo stipendio con le indicazioni del Contratto nazionale mantello 2026.',
+    'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Cantiere edile in Ticino',
 };
 
 export default blogMetaIt;

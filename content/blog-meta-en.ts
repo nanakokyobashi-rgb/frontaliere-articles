@@ -9889,6 +9889,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.strumenti-controllo-salari-ticino.title': 'Check your salary: useful tools for border workers',
     'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Learn how to use Unia and USS salary calculators to compare your pay with Swiss market and CCL parameters.',
     'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Panoramic view of Lugano, the economic center of Canton Ticino.',
+    'blog.article.calcolatore-salariale-edilizia-2026.title': 'Construction Salary Calculator: Payroll Check',
+    'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Use the CNM salary calculator to compare your salary with the indications of the National Contract mantle 2026.',
+    'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Construction site in Ticino',
 };
 
 export default blogMetaEn;

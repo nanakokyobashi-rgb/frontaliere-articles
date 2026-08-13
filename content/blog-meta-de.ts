@@ -9888,6 +9888,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.strumenti-controllo-salari-ticino.title': 'Überprüfen Sie Ihren Lohn: Nützliche Tools für Grenzgänger',
     'blog.article.strumenti-controllo-salari-ticino.excerpt': 'Erfahren Sie, wie Sie mit den Lohnrechnern der Unia und des SGB Ihre Vergütung mit den Parametern des Schweizer Marktes und der GAV vergleichen können.',
     'blog.article.strumenti-controllo-salari-ticino.imageAlt': 'Panoramablick auf Lugano, das Wirtschaftszentrum des Kantons Tessin.',
+    'blog.article.calcolatore-salariale-edilizia-2026.title': 'Lohnrechner für das Baugewerbe: Gehaltsabrechnung prüfen',
+    'blog.article.calcolatore-salariale-edilizia-2026.excerpt': 'Benutzen Sie den LMV-Lohnrechner, um Ihr Gehalt mit den Angaben des Landesmantelvertrages 2026 zu vergleichen.',
+    'blog.article.calcolatore-salariale-edilizia-2026.imageAlt': 'Baustelle im Tessin',
 };
 
 export default blogMetaDe;
