@@ -2377,6 +2377,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.title': 'Sistema scolastico del Canton Berna: iscrizione e cicli',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.excerpt': 'Sapere cosa accade con l\'iscrizione dei figli ai cicli scolastici nel Canton Berna. Scopri i requisiti, il calendario e le lingue di insegnamento.',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.imageAlt': 'Scena di classe in un istituto scolastico del Canton Berna',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.title': 'Siccità in Svizzera: Rösti esclude misure urgenti e federali',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.excerpt': 'Il Consiglio federale monitora la siccità e il deficit idrico del 46%, escludendo per ora lo stato straordinario e lasciando ai Cantoni le decisioni.',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.imageAlt': 'Paesaggio svizzero colpito dalla siccità con livelli d\'acqua bassi',
 };
 
 export default blogMetaChIt;

@@ -7129,6 +7129,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'siccita-rosti-nessuna-misura-urgente-svizzera',
+    category: 'novita',
+    date: '2026-08-13T00:14:43.921Z',
+    image: '/images/blog/siccita-rosti-nessuna-misura-urgente-svizzera.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

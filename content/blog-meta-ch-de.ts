@@ -2377,6 +2377,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.title': 'Schulsystem des Kantons Bern: Einschreibung und Zyklen',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.excerpt': 'Wissen, was mit der Einschreibung der Kinder in die Schulklassen im Kanton Bern passiert. Informieren Sie sich über die Anforderungen, den Zeitplan und die Unterrichtssprachen.',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.imageAlt': 'Schulklasse im Kanton Bern',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.title': 'Dürre in der Schweiz: Rösti schliesst Dringlichkeits- und Bundesmassnahmen aus',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.excerpt': 'Der Bundesrat überwacht die Dürre und das Wasserdefizit um 46%, schliesst den Ausnahmezustand vorerst aus und überlässt die Entscheide den Kantonen.',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.imageAlt': 'Schweizer Landschaft von Dürre betroffen mit niedrigen Wasserständen',
 };
 
 export default blogMetaChDe;

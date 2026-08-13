@@ -30788,6 +30788,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-siccita-rosti-nessuna-misura-urgente-svizzera': {
+    title: 'Siccità in Svizzera: Rösti esclude misure urgenti e federali',
+    description: 'Il Consiglio federale monitora la siccità in Svizzera con livello 4. Rösti esclude misure straordinarie per ora, lasciando la gestione a Cantoni e Comuni.',
+    keywords: 'frontalieri, ticino, svizzera, italia, siccità, rösti, esclude, misure',
+    ogTitle: 'Siccità in Svizzera: Rösti esclude misure urgenti',
+    ogDescription: 'Il Consiglio federale segue l\'evoluzione della siccità in Svizzera con livello di pericolo 4. Nessuna misura straordinaria per ora, gestione affidata a Cantoni e Comuni.',
+    canonicalPath: '/articoli-svizzera/siccita-rosti-nessuna-misura-urgente-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Siccità in Svizzera: Rösti esclude misure urgenti e federali",
+      "description": "Il Consiglio federale monitora la siccità in Svizzera con livello 4. Rösti esclude misure straordinarie per ora, lasciando la gestione a Cantoni e Comuni.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/siccita-rosti-nessuna-misura-urgente-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio svizzero colpito dalla siccità con livelli d'acqua bassi"
+      },
+      "datePublished": "2026-08-13T00:14:43+00:00",
+      "dateModified": "2026-08-13T00:14:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/siccita-rosti-nessuna-misura-urgente-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

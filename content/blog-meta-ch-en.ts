@@ -2377,6 +2377,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.title': 'School system of the Canton of Bern: enrolment and cycles',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.excerpt': 'Know what happens with the enrolment of children in school in the Canton of Bern. Learn about the requirements, calendar, and languages of instruction.',
     'blog.article.sistema-scolastico-canton-berna-iscrizione-e-cicli.imageAlt': 'Scene of a class in a school of the Canton of Bern',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.title': 'Drought in Switzerland: Rösti excludes urgent and federal measures',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.excerpt': 'The Federal Council monitors the drought and the 46% water deficit, excluding the extraordinary state for now and leaving the decisions to the Cantons.',
+    'blog.article.siccita-rosti-nessuna-misura-urgente-svizzera.imageAlt': 'Swiss landscape affected by drought with low water levels',
 };
 
 export default blogMetaChEn;
