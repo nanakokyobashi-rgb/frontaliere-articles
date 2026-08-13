@@ -29694,6 +29694,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vantaggi-associati-ocst-frontalieri',
+ category: 'pratico',
+ date: '2026-08-13T16:12:44.713Z',
+ image: '/images/blog/vantaggi-associati-ocst-frontalieri.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

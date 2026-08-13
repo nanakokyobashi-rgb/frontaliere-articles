@@ -9905,6 +9905,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.salari-minimi-legali-ticino.title': 'Salari minimi legali in Ticino: sviluppi e prospettive',
     'blog.article.salari-minimi-legali-ticino.excerpt': 'I salari minimi legali in Ticino sono stati oggetto di numerose iniziative e discussioni negli ultimi anni.',
     'blog.article.salari-minimi-legali-ticino.imageAlt': 'Una foto di un edificio storico in Lugano',
+    'blog.article.vantaggi-associati-ocst-frontalieri.title': 'I vantaggi per gli associati OCST: guida ai servizi',
+    'blog.article.vantaggi-associati-ocst-frontalieri.excerpt': 'Scopri come associarsi all\'OCST offre consulenza legale, fiscale e sconti esclusivi per lavoratori frontalieri attivi in Ticino.',
+    'blog.article.vantaggi-associati-ocst-frontalieri.imageAlt': 'Vista panoramica su Lugano, sede di servizi sindacali per lavoratori frontalieri',
 };
 
 export default blogMetaIt;

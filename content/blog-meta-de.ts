@@ -9903,6 +9903,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.salari-minimi-legali-ticino.title': 'Gesetzliche Mindestlöhne im Tessin: Entwicklungen und Perspektiven',
     'blog.article.salari-minimi-legali-ticino.excerpt': 'Die gesetzlichen Mindestlöhne im Tessin waren in den letzten Jahren Gegenstand zahlreicher Initiativen und Diskussionen.',
     'blog.article.salari-minimi-legali-ticino.imageAlt': 'Ein Foto eines historischen Gebäudes in Lugano',
+    'blog.article.vantaggi-associati-ocst-frontalieri.title': 'Vorteile für OCST-Mitglieder: Service-Leitfaden',
+    'blog.article.vantaggi-associati-ocst-frontalieri.excerpt': 'Erfahren Sie, wie Sie dem OCST beitreten können, und bieten Sie Rechts- und Steuerberatung sowie exklusive Rabatte für Grenzgänger, die im Tessin tätig sind.',
+    'blog.article.vantaggi-associati-ocst-frontalieri.imageAlt': 'Panoramablick auf Lugano, Sitz gewerkschaftlicher Dienste für Grenzgänger',
 };
 
 export default blogMetaDe;

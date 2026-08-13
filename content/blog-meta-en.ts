@@ -9904,6 +9904,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.salari-minimi-legali-ticino.title': 'Legal minimum wages in Ticino: developments and prospects',
     'blog.article.salari-minimi-legali-ticino.excerpt': 'Legal minimum wages in Ticino have been the subject of numerous initiatives and discussions in recent years.',
     'blog.article.salari-minimi-legali-ticino.imageAlt': 'A photo of a historic building in Lugano',
+    'blog.article.vantaggi-associati-ocst-frontalieri.title': 'Benefits for OCST Members: Service Guide',
+    'blog.article.vantaggi-associati-ocst-frontalieri.excerpt': 'Find out how joining the OCST offers legal advice, tax advice and exclusive discounts for border workers active in Ticino.',
+    'blog.article.vantaggi-associati-ocst-frontalieri.imageAlt': 'Panoramic view of Lugano, home to union services for cross-border workers',
 };
 
 export default blogMetaEn;
