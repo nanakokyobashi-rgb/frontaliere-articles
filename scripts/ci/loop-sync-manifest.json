@@ -2426,6 +2426,36 @@
         "corpus": "e1389cde15fab19e",
         "alignedAt": "2026-08-10"
       }
+    },
+    {
+      "path": "scripts/ci/lockstep-stall-watch.mjs",
+      "mode": "corpus-only",
+      "reason": "Il guardiano sull'incaglio della lockstep engine (issue #217). Non ha ne' puo' avere un gemello: sorveglia la PR `engine-lockstep-auto` che il mirror del SITO apre QUI, quindi il lato che puo' osservarla e' solo questo. Il manifest tiene `engine/` in scope.outOfScope appoggiandosi a quel canale e dichiarando che il segnale giusto e' un allarme sul mirror: questo file e' quell'allarme, che fino al 2026-08-13 non esisteva.",
+      "baseline": {
+        "site": null,
+        "corpus": "ba8e53c302432851",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "generator/tests/lockstep-stall-watch.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Il guard del file sopra: soglia oltre il periodo del cron di auto-merge, titolo costante (dedup e chiusura devono matchare la stessa issue canonica, vedi #45), e nessun allarme fabbricato da una data illeggibile. Corpus-only come il suo soggetto.",
+      "baseline": {
+        "site": null,
+        "corpus": "421902651134f3e8",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "generator/tests/loop-workflow-triggers.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Asserzioni sui blocchi di testa (`on:`, `concurrency:`, `if:`) di pr-review-loop.yml e generate-article.yml: sono le righe che GitHub interpreta prima che esista uno step, quindi un difetto li' produce un'ASSENZA — una run che non parte, una review mai postata — e non un errore. Corpus-only: pr-review-loop.yml e' `adapted` e generate-article.yml non e' nel manifest, quindi le forme asserite sono quelle di QUESTO repo.",
+      "baseline": {
+        "site": null,
+        "corpus": "0dea39b417b932d9",
+        "alignedAt": "2026-08-13"
+      }
     }
   ]
 }

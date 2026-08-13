@@ -141,19 +141,197 @@ on:
         default: false
         type: boolean
 
-# Never cancel: create-article.mjs registers across ~10 files and a cancelled run
-# can leave the corpus half-written.
-concurrency:
-  group: generate-article
-  cancel-in-progress: false
+# ── LA CONCURRENCY STA SUL JOB, E L'AMMISSIONE STA PRIMA (issue #193, #212) ──
+#
+# La riga che stava qui (`concurrency: group: generate-article` a livello di
+# workflow) è scesa sul job `generate`, e davanti le è stato messo il job
+# `admit`. Le due mosse rispondono a due domande diverse e vanno lette insieme.
+#
+# ## Cosa faceva davvero il gruppo a livello di workflow
+#
+# GitHub non ha una coda: un gruppo di concurrency ammette UNA run in esecuzione
+# e UNA sola in attesa, e ogni nuovo arrivo CANCELLA quella in attesa. Sotto
+# sovra-sottoscrizione non è una coda, è una politica di SCARTO. Misurato il
+# 2026-08-13 sulle ultime 60 run: 16 `cancelled`, e le tre campionate
+# (31680385924, 31676245073, 31675419426) tornano `jobs.total_count == 0` —
+# sfrattate senza aver eseguito un solo step. La #193 lo aveva misurato a
+# 48/142 il 10-08; la #180 non lo ha toccato.
+#
+# ## Perché lo sfratto NON stava proteggendo le scritture
+#
+# È l'argomento che decide il design, ed è verificabile in tre punti:
+#
+#  1. `cancel-in-progress: false` non ha mai cancellato una run IN CORSO. Le run
+#     sfrattate hanno `total_count == 0`: zero step eseguiti, quindi zero righe
+#     scritte. Il rischio dichiarato («un run ucciso a metà lascia il corpus
+#     scritto a metà») non è ciò che lo sfratto produce.
+#  2. Il gruppo non serializzava comunque le scritture su main, perché non è
+#     l'unico scrittore: `batch-faq-articles.yml`, `publish-journalist-articles.yml`,
+#     `generate-border-wait-ranking-weekly.yml`, `fast-publish-article.yml`,
+#     `generate-daily-brief.yml` e `refresh-events-digest.yml` scrivono tutti
+#     `content/**` su main sotto un gruppo PROPRIO. La sovrapposizione fra
+#     produttori è quotidiana e non è mai passata di qui.
+#  3. La mutua esclusione vera vive già dove deve vivere: sull'aggiornamento del
+#     ref. Lo step «Commit and push» ritenta cinque volte con rebase e un
+#     resolver in-place sui file di bookkeeping (vedi `scripts/lib/git-push-with-retry.sh`,
+#     «Survives concurrent pushes from other workflows that also write to main»).
+#     È l'unico strato che possa funzionare, appunto perché è l'unico che vede
+#     anche gli altri sei produttori.
+#
+# Quindi il vincolo «le scritture su main non si sovrappongono» resta soddisfatto
+# dal push, non dallo sfratto — che in cambio buttava via un arrivo su quattro.
+#
+# ## Cosa è stato scelto, e perché non è «togliere cancel-in-progress»
+#
+# `cancel-in-progress` era GIÀ `false`: non c'era nessun flag da togliere. Il
+# difetto è la sovra-sottoscrizione, e si chiude all'INGRESSO, non nella coda:
+#
+#  · `admit` (nessun gruppo, quindi mai in coda e mai sfrattato) risponde a
+#    «serve un'altra generazione ADESSO?». Se una run di questo workflow è già
+#    in volo la risposta è no — per costruzione, non per euristica: il cron è
+#    solo lo STARTER della catena (vedi l'intestazione), e gli altri produttori
+#    che spingono `content/**` sono «one more restart point». Un riavvio mentre
+#    la catena cammina è ridondante: la run in volo, se produce, chaina da sé.
+#    Misurato oggi: 14 delle 16 run sfrattate erano arrivi `schedule`, cioè
+#    proprio i riavvii ridondanti, contro 2 su 36 per gli arrivi `push`.
+#  · il gruppo `generate-article`, ora sul job, resta come RETE: se due arrivi
+#    passano insieme il gate (finestra di corsa fra i due controlli), la
+#    serializzazione è ancora lì. Non è ridondante col push-retry, è lo strato
+#    che evita di pagare due generazioni per un articolo solo.
+#
+# Effetto sulla metrica: ogni run esegue ora almeno il job `admit`, quindi una
+# run con `total_count == 0` non è più producibile; e l'arrivo ridondante esce
+# `skipped`, non `cancelled`, cioè smette di far sparire il lavoro di un altro.
+# Quando la catena è ferma — pool secco, run fallita, niente in volo — il gate
+# lascia passare tutto come prima, che è esattamente il caso in cui il cron
+# serve.
+#
+# Il costo, dichiarato: se la run in volo non produce nulla, l'arrivo scartato
+# non c'è più e la catena riparte al prossimo slot cron (≤15 min). È il prezzo
+# già scelto e già scritto in questa intestazione («needing cron to restart it
+# after a dry spell»), non uno nuovo.
 
 permissions:
   contents: read
 
 jobs:
+  # ── Controllo di AMMISSIONE ────────────────────────────────────────────────
+  # Volutamente senza `concurrency`: un gate che può finire in coda è il difetto
+  # che deve chiudere. Costa una run di ubuntu senza checkout né npm.
+  admit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read # elencare le run di questo workflow
+      contents: read # il compare per distinguere il self-test dal chain link
+    outputs:
+      proceed: ${{ steps.check.outputs.proceed }}
+    steps:
+      - name: Skip when a generation is already in flight
+        id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SELF_ID: ${{ github.run_id }}
+          EVENT_NAME: ${{ github.event_name }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+
+          # ── Chi NON viene mai coalizzato ────────────────────────────────────
+          #
+          # Un dispatch è una richiesta esplicita, spesso con un `url` preciso:
+          # non è il riavvio ridondante di niente, e saltarlo sarebbe l'unica
+          # forma di questo gate che sorprende chi lo usa.
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "Dispatch manuale → si procede sempre."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Un push che non tocca `content/**` è il SELF-TEST dry del workflow
+          # (vedi i `paths` sopra: le altre due voci sono questo file e
+          # create-article.mjs). Non scrive niente, quindi non ha niente da
+          # serializzare — e soprattutto non va saltato: è l'unica prova che il
+          # workflow appena modificato parta ancora, e con il gate cieco
+          # verrebbe saltata quasi sempre, perché una generazione è in volo
+          # quasi sempre.
+          #
+          # NB: NON è una seconda definizione del chain link. Quella resta una
+          # sola, nello step "Resolve run mode and section", che decide col
+          # `git diff` sul checkout. Qui la domanda è più stretta — «questo
+          # arrivo può scrivere?» — e nel dubbio (compare vuoto, `before`
+          # azzerato, errore API) si risponde di sì e si prosegue col
+          # ragionamento sotto, cioè si degrada al comportamento normale.
+          if [ "$EVENT_NAME" = "push" ] && [ -n "${PUSH_BEFORE:-}" ]; then
+            changed=$(gh api "repos/$REPO/compare/$PUSH_BEFORE...$PUSH_SHA" \
+              --jq '.files[].filename' 2>/dev/null || true)
+            if [ -n "${changed:-}" ] && ! printf '%s\n' "$changed" | grep -q '^content/'; then
+              echo "Push senza content/** → self-test dry, nessuna scrittura: si procede."
+              echo "proceed=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+
+          # Una sola chiamata: le run non terminate sono per forza fra le più
+          # recenti, quindi si filtra client-side invece di fare una chiamata
+          # per stato.
+          inflight=$(gh api \
+            "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100" \
+            --jq '[.workflow_runs[]
+                   | select(.status == "queued" or .status == "in_progress" or .status == "waiting")
+                   | {id: .id, created_at: .created_at}]' 2>/dev/null || true)
+          if [ -z "${inflight:-}" ]; then
+            echo "Impossibile leggere le run in volo → si prosegue (fail-open)."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          self_created=$(printf '%s' "$inflight" \
+            | jq -r --argjson me "$SELF_ID" '.[] | select(.id == $me) | .created_at' 2>/dev/null | head -1)
+          if [ -z "${self_created:-}" ]; then
+            self_created=$(gh api "repos/$REPO/actions/runs/$SELF_ID" --jq '.created_at' 2>/dev/null || true)
+          fi
+          if [ -z "${self_created:-}" ]; then
+            echo "Impossibile leggere il createdAt di questa run → si prosegue (fail-open)."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Si cede solo a chi è PIÙ VECCHIO. Il confronto asimmetrico è ciò che
+          # rende impossibile il caso in cui due arrivi simultanei si vedono a
+          # vicenda e si fermano entrambi: fra due run che si osservano, esattamente
+          # una si vede davanti. Il tie-break sull'id copre lo stesso secondo.
+          older=$(printf '%s' "$inflight" \
+            | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" \
+                '[ .[] | select(.id != $me)
+                       | select(.created_at < $mine or (.created_at == $mine and .id < $me)) ] | length' \
+              2>/dev/null || true)
+          case "${older:-}" in
+            ''|*[!0-9]*) older=0 ;;
+          esac
+
+          if [ "$older" -gt 0 ]; then
+            echo "Ci sono $older run di generate-article già in volo e più vecchie di questa ($self_created)."
+            echo "La catena sta già camminando: questo arrivo ($EVENT_NAME) è un riavvio ridondante → skip."
+            echo "proceed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Nessuna generazione più vecchia in volo → si procede."
+          echo "proceed=true" >> "$GITHUB_OUTPUT"
+
   generate:
+    needs: admit
+    if: needs.admit.outputs.proceed == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Never cancel: create-article.mjs registers across ~10 files and a cancelled
+    # run can leave the corpus half-written. Resta come RETE dietro `admit` —
+    # vedi l'intestazione sopra per perché non è più il primo strato.
+    concurrency:
+      group: generate-article
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@v5

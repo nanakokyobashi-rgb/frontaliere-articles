@@ -36,9 +36,59 @@ on:
   workflow_run:
     workflows: ['tests'] # name: di .github/workflows/tests.yml
     types: [completed]
+  # ── LA MANIGLIA MANUALE, E PERCHÉ IL LOOP NE HA BISOGNO (issue #201) ──────
+  #
+  # `workflow_run` porta un evento solo quando `tests` parte per un evento
+  # NUOVO. Un RERUN non ne produce uno utile: verificato su #181 il 2026-08-10,
+  # `gh run rerun` ha portato `tests` a `success` (attempt=2) e nessun run di
+  # questo workflow è comparso per quel branch.
+  #
+  # Non è un ritardo, è un incaglio PERMANENTE, ed è invisibile a ogni gate: la
+  # PR resta verde su tutti i check con una sola review — quella vecchia, i cui
+  # finding il redflag-fixer ha già chiuso. Nessun rosso la segnala e senza un
+  # push nuovo nessuna review ripartirà mai. Su #181 `stale-pr-rescuer` è
+  # passato tre volte nella finestra (17:45, 17:49, 17:51, tutte `success`)
+  # senza raccoglierla; è stata sbloccata a mano con un commit vuoto via API
+  # git-data, cioè fabbricando il push che mancava.
+  #
+  # Colpisce ESATTAMENTE le PR che il ciclo ha già riparato da solo. La issue
+  # proponeva anche di far richiedere la review al redflag-fixer: scartata qui
+  # perché quando il fixer è fermo (quota) l'incaglio è più probabile, non meno,
+  # e quella via sarebbe ferma insieme a lui. Un trigger non dipende dallo stato
+  # di nessun altro agente.
+  workflow_dispatch:
+    inputs:
+      pr:
+        description: 'Numero della PR da revieware (deve avere `tests` verde sulla sua head)'
+        required: true
+        type: string
 
 concurrency:
-  group: pr-review-${{ github.event.workflow_run.head_branch }}
+  # ── L'EVENTO STA NEL GROUP, e non è cosmetica ────────────────────────────
+  # (metà corpus di valerielinc-ops/frontaliere-si-o-no#5614)
+  #
+  # `tests.yml` gira sia su `pull_request` sia su `push` (`branches-ignore:
+  # [main]`), quindi UN push su un branch con PR aperta produce DUE run di
+  # `tests` con lo stesso `head_branch` → due run di questo workflow. Col group
+  # che conteneva solo il branch le due finivano nello stesso slot, e con
+  # `cancel-in-progress: true` la più recente cancellava l'altra.
+  #
+  # Il danno è asimmetrico: la run nata dal `push` viene SEMPRE saltata dal gate
+  # `if:` sotto (che pretende `workflow_run.event == 'pull_request'`), quindi
+  # cancellava la review vera e non lasciava niente al suo posto. Misurato: 25
+  # coppie `cancelled`+`skipped` su 400 run, l'ultima il 2026-08-12T10:49:59Z.
+  # Nessun errore da nessuna parte — la PR resta senza review, che è di nuovo
+  # l'incaglio della #201 per un'altra strada.
+  #
+  # Il sito NON è esposto allo stesso meccanismo: là `tests` è già scopato a
+  # `branches: [main]`, quindi un push sul branch della PR non genera il secondo
+  # run. Per questo la fix vive qui e non scende dal mirror.
+  #
+  # `github.event_name` separa i due trigger di QUESTO workflow;
+  # `workflow_run.event` separa l'evento che ha fatto partire `tests`. Su
+  # dispatch il secondo è vuoto e la chiave cade sul numero di PR, che lì è
+  # l'unico identificatore disponibile.
+  group: pr-review-${{ github.event_name }}-${{ github.event.workflow_run.event }}-${{ github.event.workflow_run.head_branch || inputs.pr }}
   cancel-in-progress: true
 
 permissions:
@@ -65,42 +115,98 @@ jobs:
     # gia' dato, e — peggio — un `## LGTM` negato blocca il suo auto-merge
     # dedicato, cioe' il canale con cui le correzioni all'engine scendono.
     if: >-
-      github.event.workflow_run.conclusion == 'success' &&
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.head_branch != 'engine-lockstep-auto'
+      github.event.workflow_run.head_branch != 'engine-lockstep-auto')
     steps:
       # ── Risolvi la PR dalla head del run di `tests` ──────────────────────
       # Un evento workflow_run NON porta la PR: la si risolve dall'head_sha
       # (il commit testato-verde), con fallback sul branch.
+      #
+      # Su `workflow_dispatch` (issue #201) la PR arriva dall'input e la head è
+      # quella LIVE della PR: non c'è un run di `tests` da cui ereditare uno sha
+      # testato-verde, quindi lo si verifica esplicitamente qui sotto. Da qui in
+      # poi ogni step legge `steps.resolve.outputs.head_sha` e non più
+      # `github.event.workflow_run.head_sha`, che su dispatch è vuoto — se
+      # restasse, il checkout prenderebbe il default branch e il reviewer
+      # leggerebbe `main` al posto della PR.
       - name: Resolve PR from tests run
         id: resolve
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_PR: ${{ inputs.pr }}
           RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           RUN_HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
         run: |
           set -uo pipefail
-          PRN=$(gh api "repos/$REPO/commits/$RUN_HEAD_SHA/pulls" \
-            --jq '[.[] | select(.state == "open")][0].number // empty' 2>/dev/null || true)
-          if [ -z "${PRN:-}" ] && [ -n "${RUN_HEAD_BRANCH:-}" ]; then
-            PRN=$(gh pr list --repo "$REPO" --head "$RUN_HEAD_BRANCH" --state open \
-              --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            PRN="${INPUT_PR:-}"
+            case "$PRN" in
+              ''|*[!0-9]*)
+                echo "::error::input 'pr' non è un numero di PR: '${PRN}'"
+                exit 1
+                ;;
+            esac
+          else
+            PRN=$(gh api "repos/$REPO/commits/$RUN_HEAD_SHA/pulls" \
+              --jq '[.[] | select(.state == "open")][0].number // empty' 2>/dev/null || true)
+            if [ -z "${PRN:-}" ] && [ -n "${RUN_HEAD_BRANCH:-}" ]; then
+              PRN=$(gh pr list --repo "$REPO" --head "$RUN_HEAD_BRANCH" --state open \
+                --json number --jq '.[0].number // empty' 2>/dev/null || true)
+            fi
           fi
           if [ -z "${PRN:-}" ]; then
             echo "Nessuna PR aperta per head_sha=$RUN_HEAD_SHA / branch=$RUN_HEAD_BRANCH — niente da revieware."
-            { echo "pr_number="; echo "should_review=false"; } >> "$GITHUB_OUTPUT"
+            { echo "pr_number="; echo "should_review=false"; echo "head_sha="; } >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          meta=$(gh pr view "$PRN" --repo "$REPO" --json isDraft,title 2>/dev/null || true)
+          meta=$(gh pr view "$PRN" --repo "$REPO" --json isDraft,title,state,headRefName,headRefOid 2>/dev/null || true)
           is_draft=$(echo "$meta" | jq -r '.isDraft // false')
           title=$(echo "$meta" | jq -r '.title // ""')
+          pr_state=$(echo "$meta" | jq -r '.state // ""')
+          pr_branch=$(echo "$meta" | jq -r '.headRefName // ""')
+          live_sha=$(echo "$meta" | jq -r '.headRefOid // ""')
           if [ "$is_draft" = "true" ]; then
             echo "PR #$PRN è draft → skip review."
-            { echo "pr_number=$PRN"; echo "should_review=false"; } >> "$GITHUB_OUTPUT"
+            { echo "pr_number=$PRN"; echo "should_review=false"; echo "head_sha="; } >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          { echo "pr_number=$PRN"; echo "should_review=true"; } >> "$GITHUB_OUTPUT"
+
+          HEAD_SHA="$RUN_HEAD_SHA"
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            if [ "$pr_state" != "OPEN" ]; then
+              echo "::error::PR #$PRN non è aperta (state='${pr_state}') — niente da revieware."
+              exit 1
+            fi
+            # Le due esclusioni del percorso automatico valgono anche a mano:
+            # sono invarianti di quota, non dettagli del trigger. La lockstep in
+            # particolare NON va reviewata qui — un '## LGTM' negato bloccherebbe
+            # il suo auto-merge dedicato, cioè il canale con cui l'engine scende.
+            if [ "$pr_branch" = "engine-lockstep-auto" ]; then
+              echo "PR #$PRN è la lockstep del mirror engine → esclusa dalla review, come sul percorso automatico."
+              { echo "pr_number=$PRN"; echo "should_review=false"; echo "head_sha="; } >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            # LA REVIEW NON PARTE MAI SU CODICE ROSSO, nemmeno a mano. È
+            # l'invariante che l'intestazione chiama "il driver #1 del consumo di
+            # quota": gateare sul completamento-success di `tests` è la ragione
+            # per cui questo workflow non ha il trigger `pull_request`. Un
+            # dispatch che la scavalcasse rimetterebbe in piedi esattamente il
+            # costo doppio che quel gate evita, quindi la condizione si verifica
+            # qui invece di ereditarla dall'evento.
+            concl=$(gh api "repos/$REPO/actions/workflows/tests.yml/runs?head_sha=$live_sha&per_page=1" \
+              --jq '.workflow_runs[0].conclusion // empty' 2>/dev/null || true)
+            if [ "$concl" != "success" ]; then
+              echo "::error::'tests' sulla head $live_sha di #$PRN non è verde (conclusion='${concl:-nessun run}') — la review non parte su codice rosso. Rilancia il dispatch quando è verde."
+              exit 1
+            fi
+            HEAD_SHA="$live_sha"
+            echo "Dispatch manuale: PR #$PRN, head $HEAD_SHA, 'tests' verde."
+          fi
+          { echo "pr_number=$PRN"; echo "should_review=true"; echo "head_sha=$HEAD_SHA"; } >> "$GITHUB_OUTPUT"
           # Il titolo può contenere caratteri speciali → delimitatore heredoc.
           {
             echo "title<<__TITLE_EOF__"
@@ -116,7 +222,7 @@ jobs:
           # Un job triggerato da workflow_run fa checkout del default branch: va
           # preso ESPLICITAMENTE l'head testato-verde, altrimenti il reviewer
           # leggerebbe `main` invece del codice della PR.
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ steps.resolve.outputs.head_sha }}
           # Il reviewer non usa mai la git-history (lavora su `gh pr diff` +
           # Read/Grep sul working tree), e `content/` pesa: depth 1.
           fetch-depth: 1
@@ -140,7 +246,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
@@ -179,7 +285,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REPO: ${{ github.repository }}
         # Il tier si decide SOLO sul codice. Funnel-critical qui significa: ciò
         # che produce o rende la superficie pubblicata che il sito consuma —
@@ -266,7 +372,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PRN: ${{ steps.resolve.outputs.pr_number }}
-          RUN_HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          RUN_HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
         run: |
           set -uo pipefail
           echo "Debounce: attesa 25s per assorbire push in burst prima di invocare Claude..."
@@ -288,7 +394,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
           REPO: ${{ github.repository }}
           CTX_DIR: ${{ runner.temp }}/review-ctx
@@ -324,7 +430,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ steps.resolve.outputs.pr_number }}
           PR_TITLE: ${{ steps.resolve.outputs.title }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          HEAD_SHA: ${{ steps.resolve.outputs.head_sha }}
           REVIEW_TIER: ${{ steps.tier.outputs.tier }}
           INCREMENTAL_BASE: ${{ steps.tier.outputs.incremental_base }}
         with:
@@ -335,11 +441,27 @@ jobs:
           # "non-human actor".
           allowed_bots: 'github-actions[bot], claude[bot]'
           show_full_output: true
-          # `--dangerously-skip-permissions` funziona su questo trigger: il
-          # rollback documentato sul sito riguarda schedule/workflow_dispatch,
-          # dove il flag non produce mai bypassPermissions. Qui il trigger è
-          # workflow_run, lo stesso caso in cui sul sito funziona.
-          claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} --dangerously-skip-permissions"
+          # ── I PERMESSI DIPENDONO DAL TRIGGER, e ora i trigger sono due ─────
+          #
+          # `--dangerously-skip-permissions` funziona su `workflow_run` — è il
+          # caso che il rollback #3269 registra come SANO, insieme a `issues`.
+          # Sullo stesso rollback è scritto anche il resto, ed è il motivo per
+          # cui questa riga non poteva restare com'era quando la #201 ha
+          # aggiunto `workflow_dispatch`: le run `schedule`/`workflow_dispatch`
+          # risolvono `permissionMode` a "default" NONOSTANTE il flag, e quasi
+          # ogni Bash torna "requires approval" (misurato sul run 28594653701:
+          # 36 blocchi, zero comment postato — vedi il blocco `claude_args` di
+          # `post-merge-followup.yml`, che per questo sta su `--allowedTools`).
+          # Il pattern correla con l'event_name, non con la config.
+          #
+          # Una maniglia manuale che apre una sessione incapace di postare la
+          # review non sblocca niente: brucia un run e lascia la PR ferma
+          # esattamente dov'era, cioè riproduce la #201 invece di chiuderla. Sul
+          # ramo dispatch si usa quindi lo scoped `--allowedTools`, con lo stesso
+          # set read-mostly del follow-up: la review si scrive con `gh pr review`
+          # e si documenta leggendo il working tree, e il prompt vieta già
+          # `npm`/`npx`/test runner (il checkout non ha `node_modules`).
+          claude_args: "--max-turns ${{ steps.tier.outputs.max_turns }} --model ${{ steps.tier.outputs.model }} ${{ github.event_name == 'workflow_dispatch' && '--allowedTools ''Bash(gh:*),Read,Grep,Glob''' || '--dangerously-skip-permissions' }}"
           prompt: |
             Reviewer automatico PR #${{ steps.resolve.outputs.pr_number }} ("${{ steps.resolve.outputs.title }}"). Tier: ${{ steps.tier.outputs.tier }}.
 
