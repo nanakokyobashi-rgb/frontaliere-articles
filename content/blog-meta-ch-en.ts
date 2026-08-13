@@ -2554,6 +2554,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.modifica-ordinanza-liquidita.title': 'Federal Council extends liquidity through central banks',
     'blog.article.modifica-ordinanza-liquidita.excerpt': 'The Federal Council has decided to extend the potential for liquidity provision through central banks.',
     'blog.article.modifica-ordinanza-liquidita.imageAlt': 'A scene of Lugano with an ATM in the foreground.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AVS and complementary services in Canton Bern',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'The Canton Bern Compensation Fund affects the supplementary performance of the AVS, but the source does not provide specific information.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'a view of Lake Lugano',
 };
 
 export default blogMetaChEn;

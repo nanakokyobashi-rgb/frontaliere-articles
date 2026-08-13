@@ -33089,6 +33089,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione': {
+    title: 'AVS e prestazioni complementari nel Cantone Berna',
+    description: 'La fonte non fornisce informazioni specifiche sulla data di istituzione della cassa di compensazione del Cantone Berna e sull\'influenza della cassa',
+    keywords: 'frontalieri, ticino, svizzera, italia, prestazioni, complementari, cantone, berna',
+    ogTitle: 'La cassa di compensazione del Cantone Berna e le prestazioni complementari dell\'AVS',
+    ogDescription: 'La fonte non fornisce informazioni specifiche sulla data di istituzione della cassa di compensazione del Cantone Berna e sull\'influenza della cassa di compensazione del Cantone Berna sulle prestazioni complementari dell\'AVS.',
+    canonicalPath: '/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS e prestazioni complementari nel Cantone Berna",
+      "description": "La fonte non fornisce informazioni specifiche sulla data di istituzione della cassa di compensazione del Cantone Berna e sull'influenza della cassa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "una vista del lago di Lugano"
+      },
+      "datePublished": "2026-08-13T16:04:43+00:00",
+      "dateModified": "2026-08-13T16:04:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

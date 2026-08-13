@@ -7660,6 +7660,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione',
+    category: 'fiscale',
+    date: '2026-08-13T16:04:43.335Z',
+    image: '/images/blog/avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.webp',
+    hasCalculator: true,
+    authorSlug: 'laura-bianchi',
+    authorName: 'Laura Bianchi',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

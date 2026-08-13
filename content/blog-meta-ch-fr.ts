@@ -2554,6 +2554,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.modifica-ordinanza-liquidita.title': 'Liquidità estesa attraverso banche centrali',
     'blog.article.modifica-ordinanza-liquidita.excerpt': 'Le Conseil fédéral a décidé d\'étendre le potentiel d\'approvisionnement en liquidités par l\'intermédiaire des banques centrales.',
     'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Une scène de Lugano avec un distributeur automatique de billets en premier plan.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AVS et prestations complémentaires dans le canton de Berne',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'La caisse de compensation du canton de Berne influe sur les prestations complémentaires de l\'AVS, mais la source ne fournit pas d\'informations spécifiques.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'une vue sur le lac de Lugano',
 };
 
 export default blogMetaChFr;

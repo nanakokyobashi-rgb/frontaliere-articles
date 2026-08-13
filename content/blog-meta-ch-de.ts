@@ -2554,6 +2554,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.modifica-ordinanza-liquidita.title': 'Bundesrat erweitert Liquidität durch Zentralbanken',
     'blog.article.modifica-ordinanza-liquidita.excerpt': 'Der Bundesrat hat beschlossen, das Liquiditätsversorgungspotenzial über die Zentralbanken zu erweitern.',
     'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Eine Szene aus Lugano mit einem Geldautomaten im Vordergrund.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AHV und Ergänzungsleistungen im Kanton Bern',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'Die Ausgleichskasse des Kantons Bern beeinflusst die Ergänzungsleistungen der AHV, die Quelle liefert jedoch keine konkreten Angaben.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'ein Blick auf den Luganersee',
 };
 
 export default blogMetaChDe;

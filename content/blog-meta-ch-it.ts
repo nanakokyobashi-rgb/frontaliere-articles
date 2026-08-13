@@ -2554,6 +2554,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.modifica-ordinanza-liquidita.title': 'Consiglio federale estende liquidità attraverso banche centrali',
     'blog.article.modifica-ordinanza-liquidita.excerpt': 'Il Consiglio federale ha deciso di estendere il potenziale di approvvigionamento di liquidità attraverso le banche centrali.',
     'blog.article.modifica-ordinanza-liquidita.imageAlt': 'Una scena di Lugano con un bancomat in primo piano.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.title': 'AVS e prestazioni complementari nel Cantone Berna',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.excerpt': 'La cassa di compensazione del Cantone Berna influenza le prestazioni complementari dell\'AVS, ma la fonte non fornisce informazioni specifiche.',
+    'blog.article.avs-e-prestazioni-complementari-cantone-berna-cassa-di-compensazione.imageAlt': 'una vista del lago di Lugano',
 };
 
 export default blogMetaChIt;
