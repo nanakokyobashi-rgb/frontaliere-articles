@@ -2521,6 +2521,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sestimali-aziende-svizzere.title': 'Estimate them, seven out of ten Swiss companies beat expectations',
     'blog.article.sestimali-aziende-svizzere.excerpt': '70% of the companies examined by AWP exceed revenue estimates. But compared to 2025, the recovery remains gradual and uneven.',
     'blog.article.sestimali-aziende-svizzere.imageAlt': 'A Swiss company with headquarters in Ticino',
+    'blog.article.iniziativa-bussola-governo-boccia.title': 'Compass Initiative: the Government proposes to reject it',
+    'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'The Federal Council recommends that Parliament reject the Compass Initiative without counter-proposals. At the center is the node on future Bilaterals III.',
+    'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Federal Palace in Bern seat of the Swiss government',
 };
 
 export default blogMetaChEn;

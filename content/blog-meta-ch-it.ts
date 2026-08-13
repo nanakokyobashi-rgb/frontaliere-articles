@@ -2521,6 +2521,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sestimali-aziende-svizzere.title': 'Sestimali, sette aziende svizzere su dieci battono le attese',
     'blog.article.sestimali-aziende-svizzere.excerpt': 'Il 70% delle società esaminate da Awp supera le stime sui ricavi. Ma rispetto al 2025 la ripresa resta graduale e disomogenea.',
     'blog.article.sestimali-aziende-svizzere.imageAlt': 'Una società svizzera con sede in Ticino',
+    'blog.article.iniziativa-bussola-governo-boccia.title': 'Iniziativa Bussola: il Governo propone di bocciarla',
+    'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Il Consiglio federale raccomanda al Parlamento di respingere l\'Iniziativa bussola senza controprogetti. Al centro il nodo sui futuri Bilaterali III.',
+    'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Palazzo federale a Berna sede del governo svizzero',
 };
 
 export default blogMetaChIt;

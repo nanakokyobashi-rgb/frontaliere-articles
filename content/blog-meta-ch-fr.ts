@@ -2521,6 +2521,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.sestimali-aziende-svizzere.title': 'Sept entreprises suisses sur dix dépassent les attentes',
     'blog.article.sestimali-aziende-svizzere.excerpt': '70 % des sociétés examinées par Awp dépassent les estimations de chiffre d\'affaires. Mais par rapport à 2025, la reprise reste progressive et inégale.',
     'blog.article.sestimali-aziende-svizzere.imageAlt': 'Une société suisse avec siège à Ticino',
+    'blog.article.iniziativa-bussola-governo-boccia.title': 'Initiative Boussole : le Gouvernement propose de la rejeter',
+    'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Le Conseil fédéral recommande au Parlement de rejeter l\'Initiative boussole sans contre-projet. Au centre, le nœud sur les futurs Bilatéraux III.',
+    'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Palais fédéral à Berne siège du gouvernement suisse',
 };
 
 export default blogMetaChFr;

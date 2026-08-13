@@ -2521,6 +2521,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sestimali-aziende-svizzere.title': 'Sestimali, sieben von zehn Schweizer Unternehmen übertreffen die Erwartungen',
     'blog.article.sestimali-aziende-svizzere.excerpt': '70 % der von Awp untersuchten Unternehmen übertreffen die Umsatzschätzungen. Im Vergleich zu 2025 bleibt die Erholung jedoch schrittweise und inhomogen.',
     'blog.article.sestimali-aziende-svizzere.imageAlt': 'Eine Schweizer Gesellschaft mit Sitz in Ticino',
+    'blog.article.iniziativa-bussola-governo-boccia.title': 'Kompass-Initiative: Die Regierung schlägt vor, sie abzulehnen',
+    'blog.article.iniziativa-bussola-governo-boccia.excerpt': 'Der Bundesrat empfiehlt dem Parlament, die Kompass-Initiative ohne Gegenentwürfe abzulehnen. In der Mitte der Knoten auf den zukünftigen Bilateralen III.',
+    'blog.article.iniziativa-bussola-governo-boccia.imageAlt': 'Bundeshaus in Bern Sitz der Schweizer Regierung',
 };
 
 export default blogMetaChDe;

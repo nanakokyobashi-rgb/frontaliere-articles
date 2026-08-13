@@ -32660,6 +32660,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-iniziativa-bussola-governo-boccia': {
+    title: 'Iniziativa Bussola: il Governo propone di bocciarla',
+    description: 'Il Consiglio federale boccia l\'Iniziativa bussola senza controprogetti. Al centro il nodo sui futuri Bilaterali III tra Svizzera e Unione europea.',
+    keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, bussola, governo, propone',
+    ogTitle: 'Iniziativa Bussola: il Governo propone di bocciarla',
+    ogDescription: 'Il Consiglio federale raccomanda al Parlamento di respingere l\'Iniziativa bussola, puntando a mantenere il referendum facoltativo per gli accordi con l\'UE.',
+    canonicalPath: '/articoli-svizzera/iniziativa-bussola-governo-boccia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Iniziativa Bussola: il Governo propone di bocciarla",
+      "description": "Il Consiglio federale boccia l'Iniziativa bussola senza controprogetti. Al centro il nodo sui futuri Bilaterali III tra Svizzera e Unione europea.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/iniziativa-bussola-governo-boccia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna sede del governo svizzero"
+      },
+      "datePublished": "2026-08-13T10:38:28+00:00",
+      "dateModified": "2026-08-13T10:38:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/iniziativa-bussola-governo-boccia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
