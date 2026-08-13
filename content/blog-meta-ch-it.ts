@@ -2527,6 +2527,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.immigrazione-svizzera-calo-2026.title': 'Immigrazione in Svizzera: il saldo netto cala nel 2026',
     'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'Nei primi sei mesi del 2026, il saldo migratorio netto scende del 12,5%. Diminuiscono anche i nuovi permessi rilasciati ai lavoratori frontalieri.',
     'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Veduta panoramica di un centro urbano svizzero con architettura moderna.',
+    'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote in forte calo in borsa, pesa debolezza mercato cripto',
+    'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'L\'azione di Swissquote è scesa del 11% in seguito ai risultati semestrali inferiori alle attese',
+    'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'L\'azione di Swissquote in calo in borsa',
 };
 
 export default blogMetaChIt;

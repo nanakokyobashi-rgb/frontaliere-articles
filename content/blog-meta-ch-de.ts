@@ -2527,6 +2527,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.immigrazione-svizzera-calo-2026.title': 'Zuwanderung in die Schweiz: Nettosaldo sinkt 2026',
     'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'In den ersten sechs Monaten des Jahres 2026 sinkt der Nettomigrationssaldo um 12,5%. Auch die neuen Genehmigungen für Grenzgänger nehmen ab.',
     'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Panoramablick auf ein modernes Schweizer Stadtzentrum mit zeitgenössischer Architektur.',
+    'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote fällt stark an der Börse, wiegt Kryptomarktschwäche',
+    'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'Die Swissquote-Aktie fiel um 11%, da die Halbjahresergebnisse unter den Erwartungen lagen',
+    'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'Aktie Swissquote in Abwärts',
 };
 
 export default blogMetaChDe;

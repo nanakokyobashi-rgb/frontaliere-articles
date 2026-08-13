@@ -868,6 +868,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'sestimali-aziende-svizzere': { it: 'sestimali-aziende-svizzere', en: 'swiss-companies-semestral', de: 'schweizer-unsere-semestral', fr: 'societes-suisse-semestral' },
  'iniziativa-bussola-governo-boccia': { it: 'iniziativa-bussola-governo-boccia', en: 'compass-initiative-government-rejection', de: 'kompass-initiative-regierung-ablehnung', fr: 'initiative-boussole-rejet-gouvernement' },
  'immigrazione-svizzera-calo-2026': { it: 'immigrazione-svizzera-calo-2026', en: 'immigration-switzerland-decline-2026', de: 'einwanderung-schweiz-rueckgang-2026', fr: 'immigration-suisse-baisse-2026' },
+ 'swissquote-in-fore-calo-in-borsa': { it: 'swissquote-in-fore-calo-in-borsa', en: 'swissquote-en', de: 'swissquote-de', fr: 'swissquote-fr' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

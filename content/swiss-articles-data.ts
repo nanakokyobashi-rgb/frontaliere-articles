@@ -7579,6 +7579,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'swissquote-in-fore-calo-in-borsa',
+    category: 'fiscale',
+    date: '2026-08-13T11:06:00.551Z',
+    image: '/images/blog/swissquote-in-fore-calo-in-borsa.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

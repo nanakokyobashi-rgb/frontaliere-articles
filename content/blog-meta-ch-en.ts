@@ -2527,6 +2527,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.immigrazione-svizzera-calo-2026.title': 'Immigration to Switzerland: the net balance falls in 2026',
     'blog.article.immigrazione-svizzera-calo-2026.excerpt': 'In the first six months of 2026, the net migratory balance fell by 12.5%. The new permits issued to frontier workers are also decreasing.',
     'blog.article.immigrazione-svizzera-calo-2026.imageAlt': 'Panoramic view of a modern Swiss urban center with contemporary architecture.',
+    'blog.article.swissquote-in-fore-calo-in-borsa.title': 'Swissquote falls sharply on the stock market, weighs on crypto market weakness',
+    'blog.article.swissquote-in-fore-calo-in-borsa.excerpt': 'Swissquote\'s share fell 11% following lower-than-expected half-year results',
+    'blog.article.swissquote-in-fore-calo-in-borsa.imageAlt': 'Swissquote stock in decline',
 };
 
 export default blogMetaChEn;
