@@ -265,7 +265,31 @@ jobs:
       # un articolo con `.faq` in un locale e non in un altro. Zero
       # dipendenze npm in piu': entrambi importano solo `scripts/find-dirty-
       # content-ids.mjs` (node:fs/path/url) o leggono `content/` direttamente.
-      - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte, residuo cifra-lettera, coerenza FAQ)
+      # AGGIUNTA 2026-08-13 (issue #251): cross-section-duplicate-ratchet
+      # .test.mjs. Stesso strato 3 delle precedenti — un ratchet sul REGISTRO
+      # PUBBLICATO, qui i due ledger URL→id `data/article-source-urls.json` e
+      # `data/swiss-article-source-urls.json` — applicato al difetto che il
+      # gate di quella issue chiude: la stessa pagina di fonte che genera un
+      # articolo in ENTRAMBE le sezioni. Il PERCHE' QUI e' quello delle altre:
+      # gli articoli generati atterrano con un push diretto su `main`, dove
+      # `tests.yml` non gira (`branches-ignore: [main]`), e i due ledger
+      # vengono riscritti dallo STESSO commit che tocca `content/**` — quindi
+      # il trigger `paths: content/**` sopra li vede. Un sesto duplicato
+      # sarebbe altrimenti intercettato solo alla PR successiva, cioe' dopo la
+      # pubblicazione. Pavimento anti-falso-verde suo (>=50 voci per ledger) e
+      # zero dipendenze npm: legge due JSON e importa
+      # `generator/scripts/lib/cross-section-dedup.mjs`, che non importa
+      # niente. MISURATO al 2026-08-13: 5 duplicati storici in baseline datata,
+      # 0 nuovi.
+      #
+      # NON inclusa qui la meta' gemella, `cross-section-source-dedup.test.mjs`:
+      # e' un contratto sul SORGENTE di `create-article.mjs`, che non e' fra i
+      # `paths` di questo workflow. Una sua modifica arriverebbe su main senza
+      # far partire il preflight, e il primo push di contenuto successivo
+      # congelerebbe l'intera superficie dati per una ragione che col contenuto
+      # pubblicato non c'entra. Stessa distinzione gia' fatta sopra per
+      # `news-scan-quality.test.mjs`.
+      - name: Preflight — le guardie sul corpus generato (fabrication, segnaposto, slug i18n, eco della fonte, residuo cifra-lettera, coerenza FAQ, duplicati cross-sezione)
         run: |
           node --test \
             generator/tests/article-fabrication-guard.test.mjs \
@@ -273,7 +297,8 @@ jobs:
             generator/tests/article-slug-i18n.test.mjs \
             generator/tests/article-source-echo.test.mjs \
             generator/tests/seo-digit-residue-guard.test.mjs \
-            generator/tests/faq-locale-consistency.test.mjs
+            generator/tests/faq-locale-consistency.test.mjs \
+            generator/tests/cross-section-duplicate-ratchet.test.mjs
 
       # Remote Config holds the R2 and Cloudflare credentials the edge push
       # below needs. Without these two steps that push would find no

@@ -1460,6 +1460,26 @@
       }
     },
     {
+      "path": "generator/scripts/lib/headline-selection-protocol.mjs",
+      "mode": "corpus-only",
+      "reason": "Il protocollo di riferimento fra il prompt di selezione headline e la risposta del modello (issue #188). Nasce QUI perche' il difetto e' stato misurato qui (run 31402084443: pool di 2 headline, risposta `3`, e una `reason` che motivava un articolo del corpus mentre si pubblicava una headline di cultura). Sul sito non esiste ancora un omonimo: `scripts/create-article.mjs` e' il gemello `adapted` di questo generatore e ha la stessa forma del difetto, ma nessun mirror copre `generator/`, quindi il rientro e' lavoro manuale sul sito e il segnale giusto e' il `corpus-ahead` su create-article.mjs. Candidato a salire: la logica e' pura e non tocca nessun path del corpus.",
+      "baseline": {
+        "site": null,
+        "corpus": "6df51f3491453068",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/cross-section-dedup.mjs",
+      "mode": "corpus-only",
+      "reason": "Dedup della FONTE fra sezione frontaliere e sezione nazionale (issue #251). Corpus-only per costruzione: la chiave sono i due ledger `data/article-source-urls.json` e `data/swiss-article-source-urls.json`, che il sito non ha — li scrive il generatore qui. Anche la nozione di SEZIONE (`ARTICLE_SECTION_CONFIGS`) e' del corpus. Un omonimo sul sito non avrebbe niente da leggere.",
+      "baseline": {
+        "site": null,
+        "corpus": "d7372834660abcd2",
+        "alignedAt": "2026-08-13"
+      }
+    },
+    {
       "path": "generator/scripts/lib/corpus-paths.mjs",
       "mode": "corpus-only",
       "reason": "L'helper `corpusPath()` che riscrive i path del sito nei path del corpus. E' la meta' di trasporto per cui esistono gli `adapted` di questa cartella: sul sito non ha senso, perche' li' il corpus E' il repo.",
