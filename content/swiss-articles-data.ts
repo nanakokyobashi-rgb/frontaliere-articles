@@ -7813,6 +7813,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ospedali-svizzeri-pulizia-va-migliorata',
+    category: 'fiscale',
+    date: '2026-08-13T22:04:03.340Z',
+    image: '/images/blog/ospedali-svizzeri-pulizia-va-migliorata.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

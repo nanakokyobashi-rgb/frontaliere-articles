@@ -2605,6 +2605,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.title': 'Mehr VS: Landwirtschaftsfahrzeug geht von der Straße, Neunjähriger stirbt',
     'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.excerpt': 'Ein neunjähriger Junge starb am Dienstag bei einem Verkehrsunfall in Chandonne im Wallis.',
     'blog.article.mezzo-agricolo-esce-di-strada-muore-bambino-di-nove-anni.imageAlt': 'Landwirtschaftlicher Fahrzeug verlässt die Fahrbahn in der Schweiz mit einem 9-jährigen Kind an Bord',
+    'blog.article.ospedali-svizzeri-pulizia-va-migliorata.title': 'Schweizer Spitäler, Sauberkeit muss verbessert werden',
+    'blog.article.ospedali-svizzeri-pulizia-va-migliorata.excerpt': 'Die Schweizer Spitäler verbessern die Sauberkeit, aber es gibt immer noch Mängel im Umgang mit Medizinprodukten.',
+    'blog.article.ospedali-svizzeri-pulizia-va-migliorata.imageAlt': 'Schweizer Krankenhäuser mit der Schweizer Flagge',
 };
 
 export default blogMetaChDe;

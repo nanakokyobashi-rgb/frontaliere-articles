@@ -33752,6 +33752,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ospedali-svizzeri-pulizia-va-migliorata': {
+    title: 'Ospedali svizzeri, la pulizia va migliorata | Frontaliere Ticino',
+    description: 'Gli ospedali svizzeri stanno migliorando la pulizia, ma ci sono ancora carenze nella gestione dei dispositivi medici. L\'Istituto svizzero per gli agenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, ospedali, svizzeri, pulizia, migliorata',
+    ogTitle: 'Ospedali svizzeri migliorano la pulizia, ma ci sono ancora carenze nella gestione dei dispositivi medici',
+    ogDescription: 'Gli ospedali svizzeri stanno migliorando la pulizia, ma ci sono ancora carenze nella gestione dei dispositivi medici. L\'Istituto svizzero per gli agenti terapeutici ha condotto ispezioni in 26 ospedali e due società di servizi.',
+    canonicalPath: '/articoli-svizzera/ospedali-svizzeri-pulizia-va-migliorata/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ospedali svizzeri, la pulizia va migliorata",
+      "description": "Gli ospedali svizzeri stanno migliorando la pulizia, ma ci sono ancora carenze nella gestione dei dispositivi medici. L'Istituto svizzero per gli agenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ospedali-svizzeri-pulizia-va-migliorata.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ospedali svizzeri con la bandiera della Svizzera"
+      },
+      "datePublished": "2026-08-13T22:04:03+00:00",
+      "dateModified": "2026-08-13T22:04:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ospedali-svizzeri-pulizia-va-migliorata/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
