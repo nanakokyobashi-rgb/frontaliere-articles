@@ -301,6 +301,19 @@ const DECLARED_ABSENT = {
       'Il mirror del corpus vive sul sito ed e\' dispatch-only, in via di cancellazione. ' +
       'Citato come precedente di un modo di fallire, non come dipendenza.',
   },
+  '.github/workflows/generate-article.yml :: sync-articles-sitemaps.yml': {
+    kind: 'site-only',
+    reason:
+      'Il consumatore a valle, sul SITO: e\' il workflow che riceve il ' +
+      '`repository_dispatch: articles-published` e che, in piu\', ha un cron 2x/giorno come ' +
+      'rete di sicurezza. La riga lo cita per argomentare perche\' la guardia in ' +
+      '`publish-api.yml` da sola non basta — quella ferma l\'annuncio, ma NON il commit, e ' +
+      'quel cron potrebbe portare un articolo gia\' su main al sito comunque, in ritardo. ' +
+      'E\' una citazione descrittiva: niente qui lo invoca ne\' dipende dalla sua esistenza, ' +
+      'e il guard nel percorso di scrittura funziona identico se di la\' quel workflow ' +
+      'venisse rinominato o rimosso — nel qual caso l\'argomento diventerebbe piu\' debole, ' +
+      'non sbagliato.',
+  },
   '.github/workflows/post-merge-followup.yml :: followup-reconcile.yml': {
     kind: 'site-only',
     reason:

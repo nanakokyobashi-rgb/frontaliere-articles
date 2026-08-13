@@ -356,3 +356,77 @@ test('il blocco run del generatore non interpola nulla: niente injection, ed e\'
     'un `url` da dispatch interpolato nella command line e\' shell injection, e rende il blocco non testabile',
   );
 });
+
+// ── La guardia sul percorso di scrittura (issue #267) ─────────────────────────
+//
+// Fino al 2026-08-13 gli articoli generati non passavano da NESSUNA guardia:
+// `tests.yml` ha `push: branches-ignore: [main]` e questo workflow scrive SOLO
+// su main — misurato, 0 run di `tests.yml` su main nelle ultime 50 contro ~111
+// commit/giorno su `content/**`. Il costo non e' stato teorico: il 2026-08-11 un
+// corpo con una legge inventata e' passato di qui e ha tenuto rosso `main` DEL
+// SITO per ~13 ore, bloccando sei PR.
+//
+// Questi test pinnano la STRUTTURA della fix, non il suo esito. Un guard che
+// vive in un blocco `run:` puo' essere spostato dopo il push, reso advisory o
+// ridotto a una sola suite da una modifica che sembra innocua, e nessuno se ne
+// accorgerebbe finche' non ricapita — la stessa forma di silenzio che aveva reso
+// invisibile l'assenza del gate.
+
+test('lo step di guardia esiste, e invoca ENTRAMBE le suite dependency-free', () => {
+  const guard = extractRun('Guard — l\'articolo generato non raggiunge main se viola le guardie');
+  assert.match(guard, /generator\/tests\/article-fabrication-guard\.test\.mjs/);
+  assert.match(
+    guard,
+    /generator\/tests\/prompt-placeholder-guard\.test\.mjs/,
+    'le due suite coprono classi diverse (allucinazioni vs segnaposto del prompt): una sola dimezza il gate senza dirlo',
+  );
+});
+
+test('la guardia gira PRIMA del commit, non dopo', () => {
+  const guardAt = WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main');
+  const commitAt = WF.indexOf('      - name: Commit and push');
+  assert.notEqual(guardAt, -1, 'lo step di guardia e\' sparito');
+  assert.notEqual(commitAt, -1);
+  assert.ok(
+    guardAt < commitAt,
+    'una guardia dopo il commit non impedisce niente: l\'articolo sarebbe gia\' su main, ' +
+      'e il cron 2x/giorno del sync del sito potrebbe portarlo al sito comunque',
+  );
+});
+
+test('la guardia non e\' advisory: un fallimento ferma davvero il push', () => {
+  const block = WF.slice(
+    WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main'),
+    WF.indexOf('      - name: Generate responsive image thumbnail'),
+  );
+  assert.ok(
+    !/continue-on-error/.test(block),
+    'con continue-on-error lo step diventa decorazione: fallisce, si vede rosso, e il commit parte lo stesso',
+  );
+  // Gli step successivi hanno un `if:` senza status function, quindi GitHub vi
+  // applica `success()` implicito: uno step fallito qui li salta entrambi. E'
+  // quella proprieta' — non un `if: failure()` scritto a mano — a impedire il
+  // commit, quindi va pinnata la sua PRECONDIZIONE: nessuno dei due deve
+  // acquisire un `always()`.
+  const after = WF.slice(WF.indexOf('      - name: Generate responsive image thumbnail'), WF.indexOf('      - name: Summary'));
+  assert.ok(
+    !/if: always\(\)/.test(after),
+    'un always() su thumbnail o commit rimetterebbe l\'articolo bocciato sulla strada di main',
+  );
+});
+
+test('la guardia legge lo stesso output degli altri, senza inventarsi un secondo probe', () => {
+  const block = WF.slice(
+    WF.indexOf('      - name: Guard — l\'articolo generato non raggiunge main'),
+    WF.indexOf('      - name: Generate responsive image thumbnail'),
+  );
+  assert.match(
+    block,
+    /steps\.generate\.outputs\.article == 'true'/,
+    'la nozione di «articolo prodotto» resta una sola: quella di article_body_added',
+  );
+  assert.ok(
+    !/--diff-filter=A/.test(block),
+    'un secondo probe qui e\' il difetto che «esiste una sola definizione» esiste per impedire',
+  );
+});
