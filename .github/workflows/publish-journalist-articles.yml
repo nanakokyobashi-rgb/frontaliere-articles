@@ -180,6 +180,14 @@ jobs:
           echo "::error::push failed after 5 attempts — these ids are stamped 'published' in Firestore but NOT committed: ${{ steps.publish.outputs.published_ids }}"
           exit 1
 
+      # Non-blocking on purpose (#291): this is the guard for the race between
+      # this repo's publisher and the sibling site repo's — see the script's
+      # own header for why it warns instead of failing the job.
+      - name: Check for journalist articles lost to the sibling publisher's race
+        id: race-check
+        if: steps.mode.outputs.dry != 'true'
+        run: node generator/scripts/check-journalist-publish-race.mjs
+
       - name: Summary
         if: always()
         run: |
@@ -188,4 +196,5 @@ jobs:
             echo "- Dry run: ${{ steps.mode.outputs.dry }}"
             echo "- Published ids: ${{ steps.publish.outputs.published_ids || 'none' }}"
             echo "- Target ref: ${{ github.ref_name }}"
+            echo "- Lost to sibling publisher's race (#291): ${{ steps.race-check.outputs.lost_ids || 'none' }}"
           } >> "$GITHUB_STEP_SUMMARY"

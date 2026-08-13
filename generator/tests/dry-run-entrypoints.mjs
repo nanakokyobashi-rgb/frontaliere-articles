@@ -49,6 +49,7 @@ const ENTRY_POINTS = [
   'generate-events-digest-article.mjs',
   'refresh-daily-brief-data.mjs',
   'publish-journalist-article.mjs',
+  'check-journalist-publish-race.mjs',
   'generate-journalist-image-catalog.mjs',
   'refresh-border-wait-averages.mjs',
   'refresh-border-wait-window.mjs',
