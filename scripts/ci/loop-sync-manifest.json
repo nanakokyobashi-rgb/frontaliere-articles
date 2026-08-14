@@ -456,11 +456,11 @@
     {
       "path": "scripts/ci/scan-failed-runs.mjs",
       "mode": "corpus-only",
-      "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM).",
+      "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM). Il `## Suggested action` conosce ora tutte e tre le categorie dell'helper di rebase (#255/#281/#285): prima ne descriveva due e rimandava la terza al proprietario, e da quando la terza esiste quel testo avrebbe consigliato di mettere un registro fra le cache — cioe' di cancellare dal registro l'articolo appena generato.",
       "baseline": {
         "site": null,
-        "corpus": "af63f7e93f19dd40",
-        "alignedAt": "2026-08-07"
+        "corpus": "27c8981d860a0e70",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1303,13 +1303,23 @@
       }
     },
     {
-      "path": "scripts/lib/rebase-onto-remote.sh",
+      "path": "scripts/lib/merge-content-registry-conflict.mjs",
       "mode": "corpus-only",
-      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito.",
+      "reason": "Resolver per-record dei conflitti sui registri append-only del corpus (#255, #281, #285). Il sito non ha un file omonimo: la' l'append-only si ripara con scripts/lib/resolve-append-conflicts.sh, che toglie i marker e tiene ENTRAMBI i lati e poi valida — una politica che qui sarebbe sbagliata, perche' sul boundary che git produce davvero (a meta' entry, misurato) quel 'tieni entrambi' salda due articoli in un oggetto solo. Questo unisce i RECORD confrontando i due documenti interi e rifiuta di scrivere cio' che non sa dimostrare sano. Se un giorno il sito volesse la stessa politica, si porta e diventa `identical`.",
       "baseline": {
         "site": null,
-        "corpus": "59731c0256635700",
-        "alignedAt": "2026-08-09"
+        "corpus": "7b4be3ed1d753a46",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "scripts/lib/rebase-onto-remote.sh",
+      "mode": "corpus-only",
+      "reason": "Rebase sul remoto usato dal bookkeeping degli articoli (PR #88). Nessun omonimo sul sito. Da #255/#281/#285 ha un SECONDO ramo: i path passati con `--merge-registry` non si risolvono prendendo upstream ma passando da merge-content-registry-conflict.mjs, perche' sui registri append-only del corpus prendere un lato cancella i record dell'altro. E un TERZO ramo `--take-theirs` per i file per-articolo (corpi, sidecar, immagini), che sono add/add quando due run generano lo stesso slug: prendere il commit rigiocato e' l'unica risoluzione coerente col merge dei registri, che sullo stesso id gia' fa vincere quel lato. Le tre categorie restano tre liste apposta: confonderle toglierebbe dal registro l'articolo appena generato lasciandone i corpi sul posto.",
+      "baseline": {
+        "site": null,
+        "corpus": "fe4d0086b9bfdca7",
+        "alignedAt": "2026-08-14"
       }
     },
     {
