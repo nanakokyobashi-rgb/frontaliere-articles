@@ -116,9 +116,13 @@ export const AI_MODELS = Object.freeze({
   // Gemma models use the same Gemini API endpoint — 14,400 req/day each!
   GEMINI_FLASH:     'gemini-2.5-flash',
   GEMINI_PRO:       'gemini-2.5-pro',
-  // GEMINI_2_FLASH removed — Gemini API HTTP 404 "This model models/gemini-2.0-flash is no longer
-  //                       available. Please update your code to use a newer model" (2026-08-14,
-  //                       run 31823202761: 8 hits in that run alone, and in every run that day).
+  // gemini-2.0-flash e' RITIRATO: l'API risponde HTTP 404 "This model models/gemini-2.0-flash is
+  //                       no longer available" (2026-08-14, run 31823202761, 8 hit). Resta in
+  //                       roster di proposito: dal fix al matcher del 404 qui sotto viene marcato
+  //                       esaurito al PRIMO 404 e non piu' richiamato per il resto della run.
+  //                       Curare il roster a mano e' cio' che ha gia' fallito una volta (vedi
+  //                       GEMINI_31_FLASH_LITE piu' sotto): la lista rimarcisce, il matcher no.
+  GEMINI_2_FLASH:   'gemini-2.0-flash',
   GEMINI_FLASH_LITE:'gemini-2.5-flash-lite',
   // Gemma models via Gemini API — 14,400 req/day each!
   GEMMA_4_31B:      'gemma-4-31b-it',
@@ -131,10 +135,9 @@ export const AI_MODELS = Object.freeze({
   //                       OR_GEMMA_3_12B / CF_GEMMA_3_12B remain available.
   // New Gemini 3.x models (preview)
   GEMINI_3_FLASH:   'gemini-3-flash-preview',
-  // GEMINI_3_PRO removed — Gemini API HTTP 404 "This model models/gemini-3-pro-preview is no longer
-  //                       available" (2026-08-14, run 31823202761, 4 hits). Same Google preview
-  //                       retirement as GEMINI_31_FLASH_LITE below; `gemini-pro-latest` already
-  //                       tracks the current stable Pro endpoint and stays in the chain.
+  // gemini-3-pro-preview e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 4 hit). Stessa
+  //                       nota di GEMINI_2_FLASH sopra: se ne occupa il matcher, non la lista.
+  GEMINI_3_PRO:     'gemini-3-pro-preview',
   // GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                       The GA replacement `gemini-3.1-flash-lite` is exposed below as GEMINI_31_FLASH_LITE_GA and stays in the chain.
   GEMINI_31_PRO:    'gemini-3.1-pro-preview',
@@ -143,10 +146,9 @@ export const AI_MODELS = Object.freeze({
   GEMINI_FLASH_LATEST:        'gemini-flash-latest',
   GEMINI_FLASH_LITE_LATEST:   'gemini-flash-lite-latest',
   GEMINI_PRO_LATEST:          'gemini-pro-latest',
-  // GEMINI_2_FLASH_LITE removed — Gemini API HTTP 404 "This model models/gemini-2.0-flash-lite is no
-  //                       longer available" (2026-08-14, run 31823202761, 10 hits — the single most
-  //                       frequent failure of that run). `gemini-flash-lite-latest` above already
-  //                       tracks the current stable flash-lite endpoint.
+  // gemini-2.0-flash-lite e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 10 hit — il
+  //                       fallimento piu' frequente di quella run). Stessa nota.
+  GEMINI_2_FLASH_LITE:        'gemini-2.0-flash-lite',
   GEMINI_31_FLASH_LITE_GA:    'gemini-3.1-flash-lite',
 
   // ── Groq (OpenAI-compatible, ultra-fast inference) ──
@@ -399,7 +401,7 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.GPT_5 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.LLAMA_4_MAVERICK,   // 4.  Meta Llama 4 flagship  (GitHub Models)
   AI_MODELS.GEMINI_FLASH,       // 5.  Google fast            (Gemini API free)
-  // AI_MODELS.GEMINI_3_PRO removed — Gemini API HTTP 404 "is no longer available" (2026-08-14).
+  AI_MODELS.GEMINI_3_PRO,       // 5b. Gemini 3 Pro preview   (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_3_FLASH,     // 5c. Gemini 3 Flash preview (Gemini API free)
   // AI_MODELS.O3 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.GROK_3 removed — GitHub Models HTTP 400 "unknown_model: grok-3" (2026-05-18)
@@ -433,7 +435,7 @@ export const DEFAULT_CHAIN = [
   // SN_LLAMA_3_3_70B removed — SambaNova HTTP 402 PAYMENT_METHOD_REQUIRED (2026-04)
   // AI_MODELS.O1 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.LLAMA_3_2_90B removed chain — GitHub Models HTTP 400 "unknown_model: Llama-3.2-90B-Vision-Instruct" (2026-07-05, confirmed retired live, 12x in 30-run sample)
-  // AI_MODELS.GEMINI_2_FLASH removed — Gemini API HTTP 404 "is no longer available" (2026-08-14).
+  AI_MODELS.GEMINI_2_FLASH,     // 25. Google 2.0 flash       (ritirato — vedi nota su AI_MODELS)
   // AI_MODELS.GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                                 The deprecated preview kept winning the fallback selector because 404 didn't mark it exhausted, causing the
   //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. The GA non-preview model
@@ -577,7 +579,7 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GEMINI_FLASH_LATEST,        // alias → today's stable flash
   AI_MODELS.GEMINI_FLASH_LITE_LATEST,   // alias → today's stable flash-lite
   AI_MODELS.GEMINI_PRO_LATEST,          // alias → today's stable pro
-  // AI_MODELS.GEMINI_2_FLASH_LITE removed — Gemini API HTTP 404 "is no longer available" (2026-08-14).
+  AI_MODELS.GEMINI_2_FLASH_LITE,        // Gemini 2.0 flash lite (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_31_FLASH_LITE_GA,    // Gemini 3.1 flash lite GA (non-preview)
   // Groq compound full (not just mini)
   AI_MODELS.GROQ_COMPOUND_FULL,
