@@ -263,6 +263,30 @@ function childTestEnv(extra = {}) {
   return env;
 }
 
+/**
+ * Un corpus usa e getta: directory REALI, file symlinkati. Vedi il commento
+ * dello strato 3b per il perche' di ognuna delle tre scelte.
+ */
+function makeCorpusMirror() {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-mirror-'));
+  const mirror = (rel) => {
+    fs.mkdirSync(path.join(tmp, rel), { recursive: true });
+    for (const e of fs.readdirSync(path.join(ROOT, rel), { withFileTypes: true })) {
+      const child = path.join(rel, e.name);
+      if (e.isDirectory()) mirror(child);
+      else fs.symlinkSync(path.join(ROOT, child), path.join(tmp, child));
+    }
+  };
+  mirror('content');
+  mirror('generator');
+  // Le due suite: copie vere, cosi' la loro ROOT e' il mirror.
+  for (const suite of SUITES) {
+    fs.rmSync(path.join(tmp, suite), { force: true });
+    fs.copyFileSync(path.join(ROOT, suite), path.join(tmp, suite));
+  }
+  return tmp;
+}
+
 /** Un repo git usa e getta, con `content/` dentro. */
 function makeTempRepo() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'guard-block-'));
@@ -357,61 +381,71 @@ for (const p of producers.filter((x) => x.file !== 'generate-article.yml')) {
 // ═══════════════════════════════════════════════════════════════════════════
 //
 // E' il test che #275 chiede per nome: «un corpo FABBRICATO passato dal punto
-// di scrittura, e la verifica che venga rifiutato». Qui il corpo viene scritto
-// dove i produttori lo scrivono (`content/blog-body/it/<id>.ts`) e viene
-// lanciato il comando ESATTO dello step di guardia. Se esce 0, la guardia e'
-// decorativa e questo test e' rosso.
+// di scrittura, e la verifica che venga rifiutato». Il corpo viene scritto dove
+// i produttori lo scrivono (`content/blog-body/it/<id>.ts`) e viene lanciato il
+// comando ESATTO dello step di guardia. Se esce 0, la guardia e' decorativa e
+// questo test e' rosso.
 //
 // Le due stringhe piantate sono reali: `LTL 1995` e' l'acronimo inventato che
 // il 2026-08-11 ha tenuto rosso `main` DEL SITO per ~13 ore bloccando sei PR,
 // e la FAQ segnaposto e' quella che 24 articoli hanno pubblicato come
 // FAQPage JSON-LD con «Domanda frequente 1» al posto di una domanda.
 //
-// PULIZIA: il file vive in `finally`. Se questo processo venisse ucciso in
-// mezzo, resterebbe un file NON tracciato in un checkout usa e getta — mai un
-// commit, perche' nessuno step di questi workflow fa `git add` durante un test.
+// ── PERCHE' UN MIRROR E NON IL CORPUS VERO ────────────────────────────────
+//
+// La prima versione piantava il file dentro `content/` e lo toglieva in
+// `finally`. Verde in locale, ROSSA in CI, e la causa e' la ragione per cui
+// questo commento esiste: `node --test 'generator/tests/*.test.mjs'` esegue i
+// file di test IN PARALLELO, e le due suite girano come processi fratelli
+// mentre questo pianta. In CI hanno scansionato il corpus nella finestra in cui
+// il file c'era, e hanno riportato l'articolo di prova come offender vero. Un
+// test che muta uno stato condiviso letto da altri test non e' un test
+// isolato: e' un flake che accusa il repo.
+//
+// Il mirror costa ~1s (16.708 symlink) e toglie la condivisione: `content/` e
+// `generator/` sono ricostruiti in un albero temporaneo di DIRECTORY REALE con
+// FILE symlinkati — reale perche' `walk()` delle suite usa `isDirectory()`, che
+// su un symlink a cartella e' falso e salterebbe l'albero intero. Le due suite
+// vengono COPIATE, non symlinkate: Node risolve i symlink in `import.meta.url`,
+// e una copia symlinkata calcolerebbe la ROOT del repo vero, cioe' esattamente
+// l'isolamento che si sta cercando di ottenere.
 
-test('un corpo FABBRICATO piantato sul corpus fa fallire il comando della guardia, e lo NOMINA', () => {
+test('un corpo FABBRICATO fa fallire il comando della guardia, e il fallimento lo NOMINA', () => {
   const id = `zz-guard-e2e-${process.pid}-${Date.now()}`;
-  const file = path.join(ROOT, 'content', 'blog-body', 'it', `${id}.ts`);
-  assert.ok(fs.existsSync(path.dirname(file)), 'content/blog-body/it non esiste: checkout sparse, questo test non e\' eseguibile qui');
-  assert.ok(!fs.existsSync(file), 'collisione di id: il file di prova esiste gia\'');
-
-  const faqSegnaposto = JSON.stringify([
-    { q: "Domanda frequente 1 basata sui fatti dell'articolo?", a: 'Risposta con dati DALLA FONTE. 50-100 parole.' },
-    { q: 'Domanda frequente 2?', a: 'Risposta pratica basata sulla fonte.' },
-  ]).replace(/'/g, "\\'");
-
-  const corpo =
-    'export const blogBodyItTest: Record<string, string> = {\n' +
-    `    'blog.article.${id}.body1': 'Secondo la LTL 1995 il frontaliere deve annunciarsi entro trenta giorni. ` +
-    "L\\'Ufficio federale del lavoro transfrontaliero conferma la procedura. Max 125 char',\n" +
-    `    'blog.article.${id}.faq': '${faqSegnaposto}',\n` +
-    '};\nexport default blogBodyItTest;\n';
-
+  const mirror = makeCorpusMirror();
   let res;
   try {
-    fs.writeFileSync(file, corpo);
+    const faqSegnaposto = JSON.stringify([
+      { q: "Domanda frequente 1 basata sui fatti dell'articolo?", a: 'Risposta con dati DALLA FONTE. 50-100 parole.' },
+      { q: 'Domanda frequente 2?', a: 'Risposta pratica basata sulla fonte.' },
+    ]).replace(/'/g, "\\'");
+    const corpo =
+      'export const blogBodyItTest: Record<string, string> = {\n' +
+      `    'blog.article.${id}.body1': 'Secondo la LTL 1995 il frontaliere deve annunciarsi entro trenta giorni. ` +
+      "L\\'Ufficio federale del lavoro transfrontaliero conferma la procedura. Max 125 char',\n" +
+      `    'blog.article.${id}.faq': '${faqSegnaposto}',\n` +
+      '};\nexport default blogBodyItTest;\n';
+    fs.writeFileSync(path.join(mirror, 'content', 'blog-body', 'it', `${id}.ts`), corpo);
+
     try {
-      execFileSync(process.execPath, ['--test', ...SUITES], { cwd: ROOT, encoding: 'utf8', stdio: 'pipe', env: childTestEnv() });
+      execFileSync(process.execPath, ['--test', ...SUITES], { cwd: mirror, encoding: 'utf8', stdio: 'pipe', env: childTestEnv() });
       res = { status: 0, out: '' };
     } catch (e) {
       res = { status: e.status, out: `${e.stdout || ''}${e.stderr || ''}` };
     }
   } finally {
-    fs.rmSync(file, { force: true });
+    fs.rmSync(mirror, { recursive: true, force: true });
   }
 
   assert.notEqual(
     res.status,
     0,
-    'il comando della guardia e\' uscito 0 con un corpo fabbricato sul corpus: la guardia e\' DECORATIVA — ' +
+    'il comando della guardia e\' uscito 0 con un corpo fabbricato nel corpus: la guardia e\' DECORATIVA — ' +
       'e\' la stessa risposta che #295 ha misurato sul guard gemello (0 rossi su 85)',
   );
-  // LA CAUSALITA', senza pagare un secondo giro da 5 secondi su corpus pulito:
-  // il fallimento deve NOMINARE il file piantato. Un corpus gia' rotto per
-  // conto suo farebbe uscire !=0 lo stesso, e l'asserzione sopra passerebbe
-  // senza che questa guardia abbia visto il corpo fabbricato.
+  // LA CAUSALITA': il fallimento deve NOMINARE il file piantato. Un corpus gia'
+  // rotto per conto suo farebbe uscire !=0 lo stesso, e l'asserzione sopra
+  // passerebbe senza che questa guardia abbia visto il corpo fabbricato.
   assert.ok(
     res.out.includes(id),
     `il fallimento non nomina ${id}: la guardia e' rossa per un'altra ragione, e questo test starebbe passando per caso`,
