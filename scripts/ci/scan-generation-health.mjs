@@ -244,17 +244,66 @@ export const RUN_LOOKBACK_HOURS_DEFAULT = 12;
 export const MAX_LOG_RUNS_DEFAULT = 60;
 
 /**
- * `news-pool-total-rejection` — la Fase 1 news della sezione esce sempre vuota.
+ * `news-pool-total-rejection` — lo svuotamento della Fase 1 news COSTA un
+ * articolo alla sezione.
  *
- * Quota di run della sezione che HANNO eseguito il pre-spend gate e ne escono
- * `emptied=1`, QUALUNQUE sia `recovered`. Il denominatore sono le sole run in
- * cui il gate è girato davvero: `finalizeRunReport` non emette la riga quando
- * il gate non è stato eseguito (FORCE_EVERGREEN, scan vuoto), e contare quelle
- * come «non svuotate» diluirebbe il segnale con run che non sono evidenza di
- * niente.
+ * Quota di run della sezione che HANNO eseguito il pre-spend gate, ne escono
+ * `emptied=1` **e finiscono con un esito degradato** (`status` in
+ * `DEGRADED_OUTCOMES`). Il denominatore sono le sole run in cui il gate è
+ * girato davvero E ha stampato un `status` leggibile: `finalizeRunReport` non
+ * emette la riga quando il gate non è stato eseguito (FORCE_EVERGREEN, scan
+ * vuoto), e contare quelle come «non svuotate» diluirebbe il segnale con run
+ * che non sono evidenza di niente.
  *
  * Il perché `recovered` non è più un filtro sta su `summarizeRuns`: era il
  * difetto, non la taratura.
+ *
+ * ── Rimisurato il 2026-08-14: `emptied` è uno STADIO INTERMEDIO, non un esito ─
+ *
+ * `emptied=1` dice che il pre-spend gate ha scartato tutte le headline news
+ * della Fase 1. Non dice che la run non ha prodotto: fra il gate e la fine
+ * della run stanno i backstop di sezione e di anchor, il fallback evergreen e
+ * il cascade dei modelli, e **quei meccanismi compensano lo svuotamento nella
+ * maggioranza dei casi**. Misurato sulle 60 run più recenti di
+ * `generate-article.yml` (39 righe `PRESPEND_GATE_OUTCOME` non-cancellate,
+ * finestra 2026-08-13T23:05→2026-08-14T07:17):
+ *
+ *   sezione       gateRuns  emptied=1        di cui `status=generated`
+ *   frontaliere      25      18  (72%) ←ACCESA      9  (50%)
+ *   svizzera         14      12  (86%) ←ACCESA      9  (75%)
+ *
+ * Cioè: **entrambe le condizioni erano accese, e metà o tre quarti delle run
+ * che le accendevano avevano PRODOTTO un articolo**. Sono le issue #311 e #312,
+ * aperte `priority:high` su un sistema che funzionava. Il difetto non era la
+ * soglia e non era il numeratore di #185: era che la misura si fermava a uno
+ * stadio che un meccanismo a valle compensa integralmente.
+ *
+ * Col predicato sull'ESITO, sulla stessa identica finestra:
+ *
+ *   sezione       outcomeRuns  emptied=1 & degradato
+ *   frontaliere       25          9  (36%)  ← spenta
+ *   svizzera          14          3  (21%)  ← spenta
+ *
+ * **0,70 resta il valore giusto anche sul predicato nuovo**, e ha 34 punti di
+ * margine sopra il massimo del lato sano appena misurato (36%). Non è stato
+ * abbassato per «essere più sensibili»: il lato rotto di questa condizione è la
+ * sezione che svuota il pool E non pubblica, cioè un regime che tende a 100% e
+ * che `section-dry` vede solo ore dopo.
+ *
+ * ── `TOTAL_REJECTION_MIN_GATE_RUNS`: da 4 a 12, e non è cosmesi ─────────────
+ *
+ * Con un campione di 4 la condizione si accende a 3/4. Sul lato sano appena
+ * misurato (36% di run svuotate-e-degradate) una finestra di 4 supera 0,70 per
+ * puro caso nel **13,6%** delle passate — cioè circa una passata su sette
+ * aprirebbe una issue `priority:high` senza che niente sia cambiato. A 12 la
+ * stessa probabilità scende sotto lo **0,7%**.
+ *
+ * 12 non allontana l'allarme: alla cadenza misurata (frontaliere 25 righe in
+ * 8,2h = 3,0/h; svizzera 14 = 1,7/h) il campione minimo è soddisfatto in ~4h
+ * sulla sezione frontaliere e in ~7h sulla svizzera, entrambe dentro la
+ * finestra di 12h su cui la soglia è tarata. Il vecchio commento «il gate gira
+ * ~0,38 volte l'ora per sezione» descriveva una cadenza che la pipeline non ha
+ * più: è 4-8 volte più veloce.
  *
  * ── Ritarato il 2026-08-11 (le 69 run non-cancellate delle ultime 12h) ──────
  *
@@ -291,7 +340,37 @@ export const MAX_LOG_RUNS_DEFAULT = 60;
  * soddisfatto in un'ora e mezza e serve solo a scartare le finestre corte.
  */
 export const TOTAL_REJECTION_RATE = 0.70;
-export const TOTAL_REJECTION_MIN_GATE_RUNS = 4;
+export const TOTAL_REJECTION_MIN_GATE_RUNS = 12;
+
+/**
+ * Gli esiti di run che contano come DEGRADATI, cioè «la sezione non ha un
+ * articolo in più per colpa di questa run».
+ *
+ * Sono i valori che `finalizeRunReport` (`generator/scripts/create-article.mjs`)
+ * passa come `status` e che finiscono verbatim in `PRESPEND_GATE_OUTCOME`:
+ *   `generated` → ha pubblicato: NON degradato, qualunque cosa sia successa
+ *                 prima nel pre-spend gate;
+ *   `skipped`   → percorso evergreen esaurito o rigettato dai duplicate check;
+ *   `deferred`  → modelli free esauriti, qualità rigettata, duplicato — non
+ *                 pubblicato di proposito;
+ *   `error`     → guasto tecnico.
+ *
+ * `deferred` è dentro l'insieme e non fuori: dal punto di vista della SERIE (che
+ * è l'unica cosa che questo scanner guarda) una run rimandata e una run fallita
+ * lasciano la sezione nello stesso posto. La distinzione fra le tre cause resta
+ * VISIBILE nel corpo della issue — `gateStatus` le stampa separate — perché è
+ * lì che serve a chi ripara, non nel predicato che decide se aprire.
+ *
+ * Un `status` che non compare qui dentro e non è `generated` (un valore nuovo,
+ * o `unknown`) NON è degradato per default: entra nel denominatore e si vede nel
+ * corpo. Indovinare la direzione di un valore sconosciuto è come contare
+ * `recovered=evergreen` per un recupero — il difetto che #185 ha lasciato in
+ * piedi per quindici giorni.
+ */
+export const DEGRADED_OUTCOMES = new Set(['skipped', 'error', 'deferred']);
+
+/** `true` solo su un `status` LEGGIBILE e degradato. `null`/assente → `false`. */
+export const isDegradedOutcome = (status) => DEGRADED_OUTCOMES.has(String(status || ''));
 
 /**
  * `prompt-oversize` — il prompt supera il tetto di input del roster.
@@ -568,6 +647,26 @@ export function parseRunLog(text) {
  * pubblicato un evergreen invece della news». È una descrizione dell'esito,
  * non un filtro sull'evidenza.
  *
+ * ## `gateEmptiedCostly` è il numeratore, e `gateEmptied` non lo è più
+ *
+ * `gateEmptied` misura uno STADIO INTERMEDIO. Fra il pre-spend gate e la fine
+ * della run stanno il backstop di sezione, il backstop di anchor, il fallback
+ * evergreen e il cascade dei modelli: lo svuotamento del pool news è la
+ * PREMESSA di quei meccanismi, non il loro esito. Misurato il 2026-08-14 sulle
+ * 60 run più recenti (39 righe del gate, finestra 8,2h): frontaliere 18/25
+ * svuotate di cui 9 uscite `generated`, svizzera 12/14 di cui 9 `generated`.
+ * Il watchdog era ACCESO su entrambe (#311, #312) mentre la pipeline produceva.
+ *
+ * Da qui i tre campi nuovi:
+ *   `gateOutcomeRuns`       denominatore — righe del gate con `status` leggibile;
+ *   `gateEmptiedCostly`     numeratore  — `emptied=1` E esito degradato;
+ *   `gateStatus` / `gateStatusWhenEmptied`  diagnostica, mai predicato.
+ *
+ * `gateEmptied` resta calcolato e resta nel corpo: è la misura che dice quanto
+ * lavorano i backstop. Smettere di calcolarlo renderebbe invisibile il caso in
+ * cui i backstop cominciano a cedere, che è la cosa da vedere PRIMA che costi
+ * articoli. Ciò che è cambiato è che non decide più se aprire una issue.
+ *
  * ## Le righe si attribuiscono alla sezione che DICHIARANO
  *
  * `gateRuns`/`gateEmptied`/`totalRejections` sono contati per `section` della
@@ -587,6 +686,19 @@ export function summarizeRuns(runs) {
       saturated: 0,
       gateRuns: 0,
       gateEmptied: 0,
+      // Denominatore del predicato sull'ESITO: le sole righe del gate che
+      // portano uno `status` leggibile. Separato da `gateRuns` di proposito —
+      // una riga senza `status` non è «andata bene», è non misurata, e
+      // metterla al denominatore la conterebbe come sana (fail-safe).
+      gateOutcomeRuns: 0,
+      // Numeratore: svuotamento che è COSTATO un articolo.
+      gateEmptiedCostly: 0,
+      // Diagnostica, non predicato: ogni valore di `status` con il suo
+      // conteggio, e la sua ripartizione per `emptied`. È ciò che distingue
+      // «il gate ha svuotato e la run è riuscita lo stesso» da «il gate ha
+      // svuotato e la sezione ha perso un articolo».
+      gateStatus: {},
+      gateStatusWhenEmptied: {},
       gateRecovered: { none: 0, evergreen: 0, news: 0 },
       totalRejections: 0,
       anchorCandidatesZero: 0,
@@ -595,6 +707,8 @@ export function summarizeRuns(runs) {
     });
   }
   let oversizeRuns = 0;
+  let oversizeGenerated = 0;
+  let oversizeDegraded = 0;
   let maxEstimated = 0;
   const limitsCrossed = new Set();
   const modelsSkipped = new Set();
@@ -603,7 +717,18 @@ export function summarizeRuns(runs) {
     if (!r || r.dryRun === true) continue;
 
     const distinctModels = new Set(r.tokenLimitSkips.map((s) => s.model));
-    if (distinctModels.size >= OVERSIZE_MIN_MODELS) oversizeRuns++;
+    if (distinctModels.size >= OVERSIZE_MIN_MODELS) {
+      oversizeRuns++;
+      // L'esito della run che ha saltato i modelli. Il salto per tetto di token
+      // è il cascade che FUNZIONA: scarta i modelli a contesto piccolo e ricade
+      // su quelli grandi. Senza questa colonna il corpo di `prompt-oversize`
+      // conta i salti e tace sull'unica cosa che dice se sono costati qualcosa.
+      // Le righe del gate di una stessa run portano tutte lo `status` della run
+      // (`finalizeRunReport`), quindi la prima leggibile basta.
+      const st = (r.gates || []).map((g) => g.status).find(Boolean);
+      if (st && isDegradedOutcome(st)) oversizeDegraded++;
+      else if (st) oversizeGenerated++;
+    }
     for (const s of r.tokenLimitSkips) {
       if (s.estimated > maxEstimated) maxEstimated = s.estimated;
       limitsCrossed.add(s.limit);
@@ -616,6 +741,16 @@ export function summarizeRuns(runs) {
       const gAgg = bySection.get(g.section);
       if (!gAgg) continue;
       gAgg.gateRuns++;
+      // L'esito si legge PRIMA del filtro su `emptied`: il corpo della issue
+      // deve poter dire quanto produce la sezione anche quando il gate non
+      // svuota, altrimenti il lettore non ha con cosa confrontare.
+      const st = g.status ? String(g.status) : null;
+      if (st) {
+        gAgg.gateOutcomeRuns++;
+        gAgg.gateStatus[st] = (gAgg.gateStatus[st] || 0) + 1;
+        if (g.emptied) gAgg.gateStatusWhenEmptied[st] = (gAgg.gateStatusWhenEmptied[st] || 0) + 1;
+        if (g.emptied && isDegradedOutcome(st)) gAgg.gateEmptiedCostly++;
+      }
       if (!g.emptied) continue;
       gAgg.gateEmptied++;
       // Nessun `in` a filtrare: un valore nuovo di `recovered` deve COMPARIRE
@@ -643,6 +778,8 @@ export function summarizeRuns(runs) {
     bySection,
     oversize: {
       runs: oversizeRuns,
+      generatedRuns: oversizeGenerated,
+      degradedRuns: oversizeDegraded,
       maxEstimated,
       limitsCrossed: [...limitsCrossed].sort((a, b) => a - b),
       distinctModels: modelsSkipped.size,
@@ -875,46 +1012,69 @@ export const CONDITIONS = [
     evaluate(m, section) {
       if (!m.runs.available) return { available: false };
       const agg = m.runs.bySection.get(section);
-      if (!agg || agg.gateRuns < TOTAL_REJECTION_MIN_GATE_RUNS) {
-        return { available: false, reason: `campione ${agg ? agg.gateRuns : 0} < ${TOTAL_REJECTION_MIN_GATE_RUNS} run col gate` };
+      // Il campione è quello delle righe con `status` LEGGIBILE, che è il
+      // denominatore del predicato. Contarlo su `gateRuns` direbbe «ho un
+      // campione» anche su una finestra di righe tutte senza esito.
+      if (!agg || agg.gateOutcomeRuns < TOTAL_REJECTION_MIN_GATE_RUNS) {
+        return { available: false, reason: `campione ${agg ? agg.gateOutcomeRuns : 0} < ${TOTAL_REJECTION_MIN_GATE_RUNS} run col gate e un esito leggibile` };
       }
-      const rate = agg.gateEmptied / agg.gateRuns;
+      // ⚠ IL PREDICATO. Numeratore: svuotamento del pool news che è COSTATO un
+      // articolo. NON `agg.gateEmptied`: quello è lo stadio intermedio, e i
+      // backstop/fallback a valle lo compensano nella maggioranza delle run —
+      // misurato il 2026-08-14, 18/25 e 12/14 svuotate con metà e tre quarti
+      // uscite `generated`. Chi rimette `gateEmptied` qui riapre #311 e #312.
+      const rate = agg.gateEmptiedCostly / agg.gateOutcomeRuns;
       if (rate < TOTAL_REJECTION_RATE) return { firing: false };
       const rec = agg.gateRecovered;
+      const fmtStatus = (o) => Object.entries(o).sort((a, b) => b[1] - a[1])
+        .map(([k, n]) => `\`${k}\` ${n}`).join(', ') || '—';
       const recExtra = Object.entries(rec).filter(([k]) => !['none', 'evergreen', 'news'].includes(k));
       const backstops = Object.entries(agg.backstopKinds)
         .sort((a, b) => b[1] - a[1]).map(([k, n]) => `\`${k}\` ${n}`).join(', ') || '—';
       return {
         firing: true,
         body: [
-          `Il pre-spend topic gate svuota il pool news della sezione \`${section}\`:`,
-          `**${agg.gateEmptied} run su ${agg.gateRuns}** (${(rate * 100).toFixed(0)}%) fra quelle in cui il gate`,
-          `ha girato, nella finestra di ${m.runs.spanHours.toFixed(1)}h, escono`,
-          '`PRESPEND_GATE_OUTCOME emptied=1`.',
+          `Il pre-spend topic gate svuota il pool news della sezione \`${section}\` **e la sezione ci perde`,
+          `un articolo**: **${agg.gateEmptiedCostly} run su ${agg.gateOutcomeRuns}** (${(rate * 100).toFixed(0)}%)`,
+          'fra quelle in cui il gate ha girato con un esito leggibile, nella finestra di',
+          `${m.runs.spanHours.toFixed(1)}h, escono insieme \`emptied=1\` e uno \`status\` degradato`,
+          '(`skipped`, `error`, `deferred`).',
           '',
-          `- Soglia: ${(TOTAL_REJECTION_RATE * 100).toFixed(0)}% su almeno ${TOTAL_REJECTION_MIN_GATE_RUNS} run in cui il gate è girato.`,
+          `- Soglia: ${(TOTAL_REJECTION_RATE * 100).toFixed(0)}% su almeno ${TOTAL_REJECTION_MIN_GATE_RUNS} run in cui il gate è girato e ha stampato un esito.`,
+          `- **Esito di TUTTE le run col gate**: ${fmtStatus(agg.gateStatus)}.`,
+          `- **Esito delle sole run con \`emptied=1\`** (${agg.gateEmptied} in tutto): ${fmtStatus(agg.gateStatusWhenEmptied)}.`,
           `- **Di cui \`recovered\`**: \`none\` ${rec.none}, \`evergreen\` ${rec.evergreen}, \`news\` ${rec.news}.`,
           `- Righe \`PRESPEND_GATE_TOTAL_REJECTION\` della sezione: ${agg.totalRejections}`,
           `  (\`anchor_candidates=0\` in ${agg.anchorCandidatesZero}, \`restored=0\` in ${agg.restoredZero}; \`backstop\`: ${backstops}).`,
           `- L'altra sezione: ${SECTIONS.filter((s) => s !== section)
-            .map((s) => { const o = m.runs.bySection.get(s); return `${s} ${o.gateEmptied}/${o.gateRuns}`; }).join(', ')}.`,
+            .map((s) => { const o = m.runs.bySection.get(s); return `${s} ${o.gateEmptiedCostly}/${o.gateOutcomeRuns}`; }).join(', ')}.`,
           '',
-          '**`recovered` descrive l\'esito, non filtra l\'evidenza — e la distinzione è tutto il difetto.**',
-          '`resolveRunRecovery()` risponde a «questa run ha pubblicato, e cosa», non a «il pool news si è',
-          'ripreso»: `evergreen` significa che la sezione ha pubblicato un evergreen AL POSTO della news, cioè',
-          'una SOSTITUZIONE con il pool news rimasto vuoto. Contarla come recupero (`recovered === \'none\'`) è',
-          'ciò che ha tenuto muto questo watchdog mentre la sezione si svuotava, e ciò che tiene muta anche',
-          '`section-dry`: la sezione continua a pubblicare, quindi nessuna condizione basata sulla PRODUZIONE',
-          'può vedere il crollo della quota news.',
+          '**Il numeratore è l\'ESITO, non lo svuotamento — ed è ciò che questa condizione ha imparato il',
+          '2026-08-14.** `emptied=1` è uno stadio intermedio: fra il pre-spend gate e la fine della run stanno i',
+          'backstop di sezione e di anchor, il fallback evergreen e il cascade dei modelli, e quei meccanismi',
+          'compensano lo svuotamento nella maggior parte delle run. Misurato sulle 60 run più recenti (39 righe',
+          'del gate, finestra 8,2h): frontaliere 18 su 25 svuotate, di cui 9 uscite `generated`; svizzera 12 su',
+          '14, di cui 9 `generated`. Le due condizioni erano ACCESE mentre la generazione produceva',
+          'regolarmente. Contare lo svuotamento voleva dire aprire una issue su un sistema che funziona; contare',
+          'l\'esito lascia il segnale solo dove la sezione ha davvero perso un articolo.',
           '',
-          '**Il denominatore sono le sole run in cui il gate è girato**: `finalizeRunReport` non emette la riga',
-          'quando il gate non è stato eseguito (FORCE_EVERGREEN, scan vuoto), e quelle run non sono evidenza in',
-          'nessuna direzione.',
+          '**`recovered` descrive quale articolo è uscito, non se ne è uscito uno.** `resolveRunRecovery()`',
+          'risponde a «questa run ha pubblicato, e cosa»: `evergreen` significa che la sezione ha pubblicato un',
+          'evergreen AL POSTO della news. Resta nel corpo come dimensione — dice se la quota NEWS sta calando',
+          'anche quando la produzione totale regge — ma non entra nel predicato, né come filtro né come',
+          'numeratore.',
           '',
-          '**Perché la soglia è 0,70.** Ritarata il 2026-08-11 sulle 69 run non-cancellate di 12h, per passata',
-          'reale del watchdog: lato rotto mai sotto l\'80% (svizzera 12/15 il 10-08 alle 17:25; frontaliere',
-          '30/33, 35/35, 32/34 dall\'11-08), lato sano mai sopra il 14%. La soglia sta 10 punti sotto il minimo',
-          'del lato rotto e 56 sopra il massimo del lato sano.',
+          '**Il denominatore sono le sole run in cui il gate è girato E ha stampato un esito**:',
+          '`finalizeRunReport` non emette la riga quando il gate non è stato eseguito (FORCE_EVERGREEN, scan',
+          'vuoto), e una riga senza `status` non è una run sana — è una run non misurata, che al denominatore',
+          'conterebbe come sana.',
+          '',
+          '**Perché la soglia è 0,70.** Rimisurata il 2026-08-14 col predicato sull\'esito, sulla finestra',
+          '2026-08-13T23:05→08-14T07:17: lato sano frontaliere 9 su 25 (36%) e svizzera 3 su 14 (21%), cioè un',
+          'massimo osservato di 36% e 34 punti di margine. Il campione minimo è passato da 4 a 12 perché a 4 la',
+          'condizione si accende a 3 su 4, e su un lato sano al 36% quella soglia viene superata per puro caso',
+          'nel 13,6% delle passate; a 12 la stessa probabilità sta sotto lo 0,7%, e alla cadenza misurata',
+          '(3,0 righe l\'ora su frontaliere, 1,7 su svizzera) 12 righe arrivano in 4-7 ore.',
           '',
           // ⚠ I numeri di riga vanno FUORI dai backtick, e non è uno stile.
           // `citedTokens()` promuove a «token distintivo» ogni span backtickato
@@ -945,14 +1105,20 @@ export const CONDITIONS = [
           '   arriva vuoto alla Fase 2. La domanda è se la sezione debba avere un backstop di ultima istanza',
           '   proprio suo (un ranking per densità topica sul lessico di sezione, come fa E per quello',
           '   nazionale) o se vada allentato il match di anchor.',
-          '2. **Il prompt del classificatore Ticino-only** — in `generator/scripts/create-article.mjs`, riga',
-          '   564: due prompt distinti per sezione, e il ramo frontaliere è dichiaratamente «focalizzato',
-          '   ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI» con cinque classi di NON rilevanza. Un rigetto al',
-          '   100% ripetuto su ogni run non è una giornata senza notizie: è un criterio che non lascia passare',
-          '   la testata che stiamo scansionando. Va confrontato ciò che il gate scarta (le righe',
-          '   `↪ filtrato:` nei log) con ciò che il prompt dichiara irrilevante.',
+          '2. **Lo `status` che domina la lista qui sopra**, che dice quale meccanismo a valle ha ceduto e non',
+          '   va confuso col gate: `skipped` è il percorso evergreen che si è esaurito o è stato rigettato dai',
+          '   duplicate check, `deferred` sono modelli free esauriti o qualità rigettata, `error` è un guasto',
+          '   tecnico. Sono tre riparazioni diverse, e nessuna delle tre sta nel pre-spend gate.',
           '',
-          'Entrambi i punti stanno in `generator/scripts/create-article.mjs`, che è `adapted` nel',
+          '**Ciò che NON va fatto senza una misura nuova: ritarare il prompt del classificatore di sezione.**',
+          'È la risposta che sembra ovvia — un rigetto vicino al 100% pare un criterio troppo stretto — ed è',
+          'stata esaminata e respinta il 2026-08-14. Il segnale di qualità esiste ma è debole e confuso: la',
+          'regola più selettiva scatta nel 47% delle run svuotate contro il 22% delle non svuotate, ma è',
+          'contata PER RUN e una run prova entrambe le sezioni in sequenza — direzionale, non attribuibile al',
+          'singolo articolo. Toccare un prompt in produzione su quella base è rischio senza prova. Serve prima',
+          'una misura per articolo, cioè un marker che leghi ogni rigetto alla sezione che lo ha prodotto.',
+          '',
+          'Il punto 1 sta in `generator/scripts/create-article.mjs`, che è `adapted` nel',
           '`loop-sync-manifest.json`: la fix si fa **su questo repo**, non sul sito.',
         ].join('\n') + footer(REMEASURE.runs),
       };
@@ -976,9 +1142,18 @@ export const CONDITIONS = [
           'input. Il cascade scivola così su modelli non validati, e il contenuto thin che ne esce viene poi',
           'rigettato a valle — dopo aver speso.',
           '',
+          `- **Esito di quelle ${o.runs} run: ${o.degradedRuns} degradate, ${o.generatedRuns} uscite \`generated\`.**`,
           `- Prompt stimato massimo osservato: **${o.maxEstimated} token**.`,
           `- Tetti dichiarati superati: ${o.limitsCrossed.join(', ')}.`,
           `- Modelli distinti saltati nella finestra: ${o.distinctModels} — ${o.models.slice(0, 12).join(', ')}${o.models.length > 12 ? ', …' : ''}.`,
+          '',
+          '**Leggere la riga dell\'esito PRIMA del conteggio dei salti, ed è la lezione del 2026-08-14.** Un',
+          'salto per tetto di token non è un guasto: è il cap di richiesta che funziona come progettato, scarta',
+          'i modelli a contesto piccolo e fa ricadere il cascade su quelli grandi. Misurato sulle 60 run più',
+          'recenti: 3.404 righe di salto, 11 run oltre la soglia di modelli distinti, e di quelle **4 hanno',
+          'pubblicato lo stesso**. Il conteggio dei salti da solo descrive quanto lavora il cap, non quanto',
+          'costa; se la riga dell\'esito dice che le run degradate sono poche o zero, questa issue sta',
+          'misurando un meccanismo sano e va chiusa senza toccare niente.',
           '',
           `**Perché la soglia è ${OVERSIZE_MIN_RUNS} run con ≥${OVERSIZE_MIN_MODELS} modelli.** Misurato sulle ultime`,
           '200 run: 7 hanno prodotto salti, con 1, 2, 2, 5, 7, 20 e 22 modelli distinti. Le 4 run con ≥5 stanno',

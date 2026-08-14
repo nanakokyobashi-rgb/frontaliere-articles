@@ -47,6 +47,7 @@ import {
   collectCorpus,
   evaluateConditions,
   findDuplicateTopicPairs,
+  isDegradedOutcome,
   pairKeyOf,
   parseGenerationCommit,
   parseRunLog,
@@ -362,8 +363,16 @@ describe('summarizeRuns — i denominatori', () => {
 const agg = (over = {}) => ({
   runs: 30,
   saturated: 0,
-  gateRuns: 10,
+  // 14 e non 10: `TOTAL_REJECTION_MIN_GATE_RUNS` è salito a 12, e una misura di
+  // riferimento sotto il campione minimo renderebbe VACUO il test «nessuna
+  // condizione si accende sulla normalità» — non firing perché sana, ma perché
+  // non misurabile. È la differenza fra un test verde e una guardia viva.
+  gateRuns: 14,
   gateEmptied: 0,
+  gateOutcomeRuns: 14,
+  gateEmptiedCostly: 0,
+  gateStatus: { generated: 14 },
+  gateStatusWhenEmptied: {},
   gateRecovered: { none: 0, evergreen: 0, news: 0 },
   totalRejections: 0,
   anchorCandidatesZero: 0,
@@ -479,9 +488,15 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.equal(verdictFor(m, 'evergreen-pool-saturated', 'frontaliere').firing, false);
   });
 
-  test('news-pool-total-rejection: svizzera 11/13 (85%), frontaliere 0/10', () => {
+  test('news-pool-total-rejection: svizzera 11 svuotate-e-degradate su 13, frontaliere 0', () => {
     const m = healthy();
-    m.runs.bySection.set('svizzera', agg({ runs: 40, saturated: 0, gateRuns: 13, gateEmptied: 11, gateRecovered: { none: 11, evergreen: 0, news: 0 }, totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 } }));
+    m.runs.bySection.set('svizzera', agg({
+      runs: 40, saturated: 0, gateRuns: 13, gateEmptied: 11,
+      gateOutcomeRuns: 13, gateEmptiedCostly: 11,
+      gateStatus: { skipped: 11, generated: 2 }, gateStatusWhenEmptied: { skipped: 11 },
+      gateRecovered: { none: 11, evergreen: 0, news: 0 },
+      totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 },
+    }));
     const v = verdictFor(m, 'news-pool-total-rejection', 'svizzera');
     assert.equal(v.firing, true);
     assert.match(v.body, /11 run su 13/);
@@ -490,26 +505,31 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, false);
   });
 
-  test('IL DIFETTO, dal lato della condizione: frontaliere 32/34 con recovered=evergreen ACCENDE', () => {
-    // La misura reale dell'11-08 (finestra 12h, 69 run non-cancellate). Col
-    // vecchio predicato questa stessa finestra dava 3/34 = 9% e la condizione
-    // taceva, mentre la sezione svuotava il pool news nel 94% delle run.
+  test('IL DIFETTO DI #185, dal lato della condizione: recovered=evergreen non è un recupero', () => {
+    // La misura reale dell'11-08 (finestra 12h, 69 run non-cancellate): 32/34
+    // svuotate, 29 delle quali con `recovered=evergreen`. Col predicato
+    // pre-#185 (`recovered === 'none'`) davano 3/34 = 9% e la condizione
+    // taceva. Resta accesa oggi perché quelle run erano davvero degradate —
+    // `recovered=evergreen` con esito `skipped` è il pool news vuoto che COSTA
+    // la news, non un recupero.
     const m = healthy();
     m.runs.bySection.set('frontaliere', agg({
       runs: 38, gateRuns: 34, gateEmptied: 32,
+      gateOutcomeRuns: 34, gateEmptiedCostly: 29,
+      gateStatus: { skipped: 29, generated: 5 }, gateStatusWhenEmptied: { skipped: 29, generated: 3 },
       gateRecovered: { none: 3, evergreen: 29, news: 0 },
       totalRejections: 35, anchorCandidatesZero: 35, restoredZero: 35, backstopKinds: { none: 35 },
     }));
-    m.runs.bySection.set('svizzera', agg({ runs: 31, gateRuns: 34, gateEmptied: 0 }));
+    m.runs.bySection.set('svizzera', agg({ runs: 31, gateRuns: 34, gateOutcomeRuns: 34, gateEmptied: 0, gateStatus: { generated: 34 } }));
     const v = verdictFor(m, 'news-pool-total-rejection', 'frontaliere');
-    assert.equal(v.firing, true, 'con recovered=evergreen la condizione DEVE accendersi');
-    assert.match(v.body, /32 run su 34/);
+    assert.equal(v.firing, true, 'con recovered=evergreen e esito degradato la condizione DEVE accendersi');
+    assert.match(v.body, /29 run su 34/);
     // `recovered` sopravvive come DIMENSIONE del corpo, non come filtro.
     assert.match(v.body, /`none` 3, `evergreen` 29/);
-    // Il lato sano resta spento: la fix allarga il numeratore, non la soglia.
+    // Il lato sano resta spento: la fix stringe il numeratore, non la soglia.
     assert.equal(verdictFor(m, 'news-pool-total-rejection', 'svizzera').firing, false);
-    assert.ok(32 / 34 >= TOTAL_REJECTION_RATE && 3 / 34 < TOTAL_REJECTION_RATE,
-      'la soglia 0,70 separa il predicato corretto da quello vecchio SULLA STESSA finestra');
+    assert.ok(29 / 34 >= TOTAL_REJECTION_RATE && 3 / 34 < TOTAL_REJECTION_RATE,
+      'la soglia 0,70 separa il predicato corretto da quello pre-#185 SULLA STESSA finestra');
   });
 
   test('il corpo NON fa scattare il gate already-resolved: la issue resta lavorabile', async () => {
@@ -527,6 +547,8 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
     const m = healthy();
     m.runs.bySection.set('frontaliere', agg({
       runs: 38, gateRuns: 34, gateEmptied: 32,
+      gateOutcomeRuns: 34, gateEmptiedCostly: 29,
+      gateStatus: { skipped: 29, generated: 5 }, gateStatusWhenEmptied: { skipped: 29, generated: 3 },
       gateRecovered: { none: 3, evergreen: 29, news: 0 },
       totalRejections: 35, anchorCandidatesZero: 35, restoredZero: 35, backstopKinds: { none: 35 },
     }));
@@ -542,13 +564,18 @@ describe('le condizioni sono ACCESE sui guasti realmente accaduti', () => {
   test('prompt-oversize: 4 run con ≥5 modelli distinti saltati', () => {
     const m = healthy();
     m.runs.oversize = {
-      runs: 4, maxEstimated: 10930, limitsCrossed: [3000, 4000, 6000, 8000],
+      runs: 4, generatedRuns: 1, degradedRuns: 3, maxEstimated: 10930,
+      limitsCrossed: [3000, 4000, 6000, 8000],
       distinctModels: 22, models: ['gpt-4.1', 'Cohere-command-a'],
     };
     const v = verdictFor(m, 'prompt-oversize');
     assert.equal(v.firing, true);
     assert.match(v.body, /10930 token/);
     assert.match(v.body, /3000, 4000, 6000, 8000/);
+    // La parte diagnostica di #313: il corpo deve dire quante di quelle run
+    // hanno pubblicato lo stesso, altrimenti conta quanto lavora il cap di
+    // richiesta e tace su quanto costa.
+    assert.match(v.body, /3 degradate, 1 uscite `generated`/);
   });
 
   test('duplicate-topic-burst: la coppia piastrellista del 2026-08-09 (23 minuti)', () => {
@@ -825,8 +852,8 @@ describe('ogni condizione che si apre si può chiudere — il test del precedent
     m.commits.lastArticleAt = NOW - 19 * H;
     m.commits.perSection.svizzera.lastArticleAt = NOW - 19 * H;
     m.commits.perSection.frontaliere.timestamps = Array.from({ length: 14 }, (_, i) => NOW - i * H);
-    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 13, gateEmptied: 11, gateRecovered: { none: 11, evergreen: 0, news: 0 }, totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 } }));
-    m.runs.oversize = { runs: 4, maxEstimated: 10930, limitsCrossed: [8000], distinctModels: 22, models: [] };
+    m.runs.bySection.set('svizzera', agg({ runs: 18, saturated: 16, gateRuns: 13, gateEmptied: 11, gateOutcomeRuns: 13, gateEmptiedCostly: 11, gateStatus: { skipped: 11, generated: 2 }, gateStatusWhenEmptied: { skipped: 11 }, gateRecovered: { none: 11, evergreen: 0, news: 0 }, totalRejections: 11, anchorCandidatesZero: 11, restoredZero: 11, backstopKinds: { none: 11 } }));
+    m.runs.oversize = { runs: 4, generatedRuns: 0, degradedRuns: 4, maxEstimated: 10930, limitsCrossed: [8000], distinctModels: 22, models: [] };
 
     const created = [];
     const resolved = [];
@@ -967,8 +994,8 @@ describe('le costanti di soglia restano quelle misurate', () => {
     assert.ok(SECTION_DRY_PEER_MIN >= 2, 'con 1 solo articolo dell\'altra sezione la congiunzione non prova che la pipeline è viva');
     assert.ok(SATURATION_RATE >= 0.65 && SATURATION_RATE <= 0.9, 'ultima quota "sana" osservata su svizzera = 64%; prima quota "a secco" = 84%');
     assert.ok(SATURATION_MIN_RUNS >= 10, 'sotto 10 run la quota è rumore');
-    assert.ok(TOTAL_REJECTION_RATE >= 0.6 && TOTAL_REJECTION_RATE <= 0.78, 'minimo osservato sul lato rotto = 78%, massimo sul lato sano = 0%');
-    assert.ok(TOTAL_REJECTION_MIN_GATE_RUNS >= 3, 'il gate gira ~0,38 volte l\'ora per sezione');
+    assert.ok(TOTAL_REJECTION_RATE >= 0.6 && TOTAL_REJECTION_RATE <= 0.78, 'col predicato sull\'esito (2026-08-14): massimo sul lato sano = 36% (frontaliere 9/25), lato rotto verso il 100%');
+    assert.ok(TOTAL_REJECTION_MIN_GATE_RUNS >= 12, 'a campione 4 la condizione si accende a 3/4, e su un lato sano al 36% ci arriva per caso nel 13,6% delle passate; il gate gira 1,7-3,0 volte l\'ora per sezione, quindi 12 righe arrivano in 4-7h');
     assert.ok(OVERSIZE_MIN_MODELS >= 5, 'le run sane ne saltavano 1-2');
     // Rimisurato dopo #184: le 11 coppie uscite dopo il gate #120 distano al
     // massimo 132 minuti (ronago), e fra 180 e 360 minuti il conteggio non si
@@ -976,5 +1003,189 @@ describe('le costanti di soglia restano quelle misurate', () => {
     // di un plateau, non su un fianco.
     assert.ok(PAIR_WINDOW_MINUTES >= 132, 'la coppia post-gate piu larga misurata e a 132 minuti (comune-guide:ronago)');
     assert.ok(PAIR_WINDOW_MINUTES <= 360, 'oltre il plateau si comincerebbe a marcare aggiornamenti legittimi');
+  });
+});
+
+// ── 5. L'OSSERVATORE: il watchdog misura l'ESITO, non lo stadio intermedio ───
+//
+// Il difetto che questo blocco tiene chiuso (#311, #312, 2026-08-14): la
+// condizione `news-pool-total-rejection` contava `PRESPEND_GATE_OUTCOME
+// emptied=1`, che è la PREMESSA dei backstop e del fallback evergreen, non il
+// loro esito. Le due issue erano aperte `priority:high` mentre la generazione
+// produceva regolarmente — metà e tre quarti delle run che le accendevano
+// erano uscite `status=generated`.
+//
+// I test partono da RIGHE DI LOG, non da aggregati costruiti a mano, e passano
+// per `parseRunLog` → `summarizeRuns` → `evaluateConditions`. È la sola forma
+// che rende la mutazione significativa: rimettere `agg.gateEmptied` nel
+// predicato deve far diventare rosso questo blocco, e un aggregato scritto a
+// mano lo lascerebbe verde perché sarebbe il test a decidere il numeratore.
+//
+// Le due direzioni sono OBBLIGATORIE insieme. Un monitor che non spara più non
+// è riparato se non spara nemmeno quando deve: sarebbe la stessa condizione
+// vera resa invisibile, che è peggio del falso positivo che stiamo togliendo.
+
+/** Una run col solo marker del gate, nella forma esatta di `finalizeRunReport`. */
+const runLog = (i, { emptied, status, section, recovered = 'none' }) => [
+  `generate\tResolve run mode and section\t2026-08-14T0${i % 8}:${String(i % 60).padStart(2, '0')}:11.1Z`
+  + ` event=schedule chain=false → section=${section} dry_run=false`,
+  `generate\tGenerate the article\t2026-08-14T0${i % 8}:${String(i % 60).padStart(2, '0')}:59.1Z`
+  + ` PRESPEND_GATE_OUTCOME emptied=${emptied ? 1 : 0} recovered=${recovered}`
+  + ` before=31 kept=${emptied ? 0 : 12}`
+  + (status === null ? '' : ` status=${status}`)
+  + ` section=${section}`,
+].join('\n');
+
+/** `{sezione: [{n, emptied, status}]}` → una misura completa, dai log in su. */
+function measureFromLogs(spec) {
+  const logs = [];
+  let i = 0;
+  for (const [section, buckets] of Object.entries(spec)) {
+    for (const b of buckets) for (let k = 0; k < b.n; k++) logs.push(runLog(i++, { ...b, section }));
+  }
+  const m = healthy();
+  const s = summarizeRuns(logs.map(parseRunLog));
+  m.runs.bySection = s.bySection;
+  m.runs.oversize = s.oversize;
+  return m;
+}
+
+// La distribuzione REALE delle 60 run più recenti di `generate-article.yml`
+// (39 righe `PRESPEND_GATE_OUTCOME` non-cancellate, finestra
+// 2026-08-13T23:05→2026-08-14T07:17). Ricavata col comando in `REMEASURE.runs`.
+// È la finestra su cui #311 e #312 sono state aperte.
+const MISURA_2026_08_14 = {
+  frontaliere: [
+    { n: 9, emptied: true, status: 'generated', recovered: 'news' },
+    { n: 8, emptied: true, status: 'skipped' },
+    { n: 1, emptied: true, status: 'error' },
+    { n: 2, emptied: false, status: 'generated', recovered: 'news' },
+    { n: 3, emptied: false, status: 'skipped' },
+    { n: 2, emptied: false, status: 'error' },
+  ],
+  svizzera: [
+    { n: 9, emptied: true, status: 'generated', recovered: 'news' },
+    { n: 3, emptied: true, status: 'deferred' },
+    { n: 2, emptied: false, status: 'error' },
+  ],
+};
+
+describe('l\'osservatore: emptied=1 con esito buono NON segnala, esito degradato SÌ', () => {
+  test('DIREZIONE 1 — la finestra reale di #311/#312 non accende più niente', () => {
+    const m = measureFromLogs(MISURA_2026_08_14);
+    const front = m.runs.bySection.get('frontaliere');
+    const sviz = m.runs.bySection.get('svizzera');
+
+    // La misura, ri-derivata dai log: è il numero che va nel corpo della PR.
+    assert.equal(front.gateRuns, 25);
+    assert.equal(front.gateEmptied, 18);
+    assert.equal(front.gateEmptiedCostly, 9);
+    assert.equal(sviz.gateRuns, 14);
+    assert.equal(sviz.gateEmptied, 12);
+    assert.equal(sviz.gateEmptiedCostly, 3);
+
+    // ⚠ Il cuore della mutazione. Col predicato VECCHIO entrambe le sezioni
+    // stanno sopra soglia: se qualcuno rimette `gateEmptied` nel numeratore,
+    // le due assert qui sotto continuano a passare e sono le SUCCESSIVE a
+    // diventare rosse. Senza questa coppia il test non proverebbe che la
+    // mutazione è raggiungibile — proverebbe solo che oggi è spento.
+    assert.ok(front.gateEmptied / front.gateRuns >= TOTAL_REJECTION_RATE,
+      'frontaliere 18/25 = 72%: il predicato su `emptied` accendeva, ed è #311');
+    assert.ok(sviz.gateEmptied / sviz.gateRuns >= TOTAL_REJECTION_RATE,
+      'svizzera 12/14 = 86%: il predicato su `emptied` accendeva, ed è #312');
+
+    // E col predicato sull'ESITO tacciono entrambe.
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, false,
+      'frontaliere 9/25 = 36%: 9 delle 18 run svuotate sono uscite `generated`');
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'svizzera').firing, false,
+      'svizzera 3/14 = 21%: 9 delle 12 run svuotate sono uscite `generated`');
+
+    // E il campione è misurato davvero, non «non misurabile»: un silenzio da
+    // campione corto sarebbe indistinguibile da un silenzio da salute, ed è
+    // esattamente ciò che questo scanner esiste per non fare.
+    for (const s of SECTIONS) {
+      assert.equal(verdictFor(m, 'news-pool-total-rejection', s).available, true,
+        `${s}: il silenzio deve venire dalla misura, non dall'assenza di misura`);
+    }
+  });
+
+  test('DIREZIONE 2 — lo stesso svuotamento che COSTA articoli segnala ancora', () => {
+    // 13 run su 14 escono svuotate E senza articolo. È il regime che questa
+    // condizione esiste per vedere, e lo vede ORE prima di `section-dry`.
+    const m = measureFromLogs({
+      frontaliere: [
+        { n: 9, emptied: true, status: 'skipped' },
+        { n: 3, emptied: true, status: 'deferred' },
+        { n: 1, emptied: true, status: 'error' },
+        { n: 1, emptied: true, status: 'generated', recovered: 'evergreen' },
+      ],
+      svizzera: MISURA_2026_08_14.svizzera,
+    });
+    const v = verdictFor(m, 'news-pool-total-rejection', 'frontaliere');
+    assert.equal(v.firing, true, '13/14 = 93% svuotate e degradate: DEVE segnalare');
+    assert.match(v.body, /13 run su 14/);
+    // Il corpo deve portare la ripartizione per esito, che è ciò che dice al
+    // fixer quale meccanismo a valle ha ceduto.
+    assert.match(v.body, /`skipped` 9/);
+    assert.match(v.body, /`deferred` 3/);
+    // Il lato sano della stessa passata resta spento.
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'svizzera').firing, false);
+  });
+
+  test('DIREZIONE 2b — tutti e tre gli esiti degradati contano, uno per uno', () => {
+    for (const status of ['skipped', 'error', 'deferred']) {
+      const m = measureFromLogs({
+        frontaliere: [{ n: 13, emptied: true, status }, { n: 1, emptied: false, status: 'generated', recovered: 'news' }],
+      });
+      assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, true,
+        `status=${status} deve contare come degradato`);
+      assert.ok(isDegradedOutcome(status));
+    }
+    assert.equal(isDegradedOutcome('generated'), false, '`generated` non è degradato, qualunque cosa dica `emptied`');
+  });
+
+  test('la condizione non ha cambiato SOGGETTO: degrado non attribuibile al pool news tace', () => {
+    // 13 run degradate su 14, ma con `emptied=0`: il pre-spend gate ha lasciato
+    // passare le headline e la run è morta dopo, per un'altra causa. Se questa
+    // condizione si accendesse qui sarebbe diventata un duplicato di
+    // `section-dry` e di `scan-failed-runs.mjs`, con due criteri di chiusura
+    // per lo stesso guasto — il difetto che il preambolo dello scanner vieta.
+    const m = measureFromLogs({
+      frontaliere: [
+        { n: 13, emptied: false, status: 'error' },
+        { n: 1, emptied: true, status: 'generated', recovered: 'news' },
+      ],
+    });
+    const front = m.runs.bySection.get('frontaliere');
+    assert.equal(front.gateEmptiedCostly, 0);
+    assert.equal(front.gateStatus.error, 13, 'il degrado resta VISIBILE nell\'aggregato, non sparisce');
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, false);
+  });
+
+  test('una riga senza `status=` non è una run sana: esce dal denominatore', () => {
+    // Fail-safe. Se una riga senza esito restasse al denominatore, una finestra
+    // di log troncati farebbe scendere la quota e spegnerebbe la condizione:
+    // «non ho misurato» letto come «sta bene», che è la classe di difetto per
+    // cui questo scanner esiste.
+    const m = measureFromLogs({
+      frontaliere: [
+        { n: 13, emptied: true, status: 'skipped' },
+        { n: 20, emptied: true, status: null },
+      ],
+    });
+    const front = m.runs.bySection.get('frontaliere');
+    assert.equal(front.gateRuns, 33, 'le righe senza esito restano contate come righe del gate');
+    assert.equal(front.gateOutcomeRuns, 13, 'ma NON entrano nel denominatore dell\'esito');
+    assert.equal(verdictFor(m, 'news-pool-total-rejection', 'frontaliere').firing, true,
+      '13/13 = 100%: le 20 righe mute non devono diluire il segnale');
+  });
+
+  test('sotto il campione minimo non apre e non CHIUDE', () => {
+    const m = measureFromLogs({
+      frontaliere: [{ n: TOTAL_REJECTION_MIN_GATE_RUNS - 1, emptied: true, status: 'skipped' }],
+    });
+    const v = verdictFor(m, 'news-pool-total-rejection', 'frontaliere');
+    assert.equal(v.firing, false);
+    assert.equal(v.available, false, 'un campione corto non è «sano»: non deve chiudere una issue aperta');
   });
 });
