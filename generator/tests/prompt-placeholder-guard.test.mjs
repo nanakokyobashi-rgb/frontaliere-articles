@@ -279,6 +279,34 @@ describe('#344 — budget-parenthetical strutturale: l\'inciso senza verbo "max"
   });
 });
 
+describe('#350 — rischio 1: un inciso lungo che nomina cifra e unita\' senza relazione fra loro', () => {
+  it('un inciso oltre 80 caratteri con un numero 2-4 cifre e "characters" non correlati non e\' un segnaposto', () => {
+    const inciso =
+      '(nota editoriale: il documento cita l\'articolo 42 del regolamento e descrive come i moduli vengano compilati, characters a parte, dal personale)';
+    assert.ok(inciso.length > 80, 'il fixture deve superare il tetto per essere un test valido');
+    assert.deepEqual(findPromptPlaceholders(`Testo introduttivo ${inciso} a seguire.`), []);
+  });
+
+  it('un segnaposto vero, breve, resta visto anche col tetto di lunghezza', () => {
+    assert.equal(findPromptPlaceholders('un sottotitolo (max 160 characters)').length, 1);
+  });
+});
+
+describe('#350 — rischio 2: il segnaposto annidato dentro una parentesi esterna aggiunta dal traduttore', () => {
+  it('un inciso interno non-segnaposto seguito dal vero budget, tutto dentro parentesi esterne', () => {
+    // Con un solo `start` (non uno stack) la chiusura dell'inciso interno
+    // "(vedi doc)" azzerava `start`, e la parentesi esterna non veniva mai
+    // registrata come span: il "max 160 chars" che segue restava invisibile.
+    const valore = 'Sottotitolo (vedi doc) con dati DALLA FONTE (max 160 chars) qui dentro.';
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
+
+  it('il segnaposto interno a una parentesi esterna che lo avvolge per intero', () => {
+    const valore = 'Testo (premessa del traduttore (max 160 chars) fine premessa) resto.';
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
+});
+
 describe('il preambolo del prompt dentro il corpo (ristorni-frontalieri-…)', () => {
   const body = 'Testo giornalistico reale che parla dei ristorni e del tavolo Lombardia-Ticino, abbastanza lungo da non essere un moncone e da superare la soglia dei duecento caratteri che il riparatore pretende prima di riscrivere un campo.\n\nHEADLINE: Italia - Svizzera - Ristorni frontalieri\n\nRECENT ARTICLE IDS (last 50 of 3006 total — do NOT reuse): educatore-infanzia-ticino';
 
