@@ -25,6 +25,15 @@
 // Verificato sul corpus reale (2026-08-09): 32 file, 592 occorrenze — gli
 // stessi numeri del censimento in issue #66 — per 29 id distinti.
 //
+// DUE SPELLING, NON UNA (issue #336). Su quelle stesse tre superfici il C0 si
+// scrive in due modi, e fino al 2026-08-14 questo file ne guardava uno solo:
+// il byte grezzo. L'altro e' la forma ESCAPATA (`\u00XX`) che `JSON.stringify`
+// produce dentro il campo `.faq` di un body, e che il letterale TS scrive sul
+// disco con un backslash in piu'. Misurato: 20 file e 40 occorrenze che
+// l'oracolo dichiarava zero. Vedi la sezione «LA SECONDA SPELLING» piu' sotto —
+// e' la stessa classe di falso negativo di `grep` senza `-a`: uno strumento che
+// risponde «zero» quando la risposta onesta e' «non lo so».
+//
 // COSA CERCA, PASSO 2 — il filtro sulla PAGINA LIVE, e perche' esiste
 // (issue #73). Il passo 1 da solo NON CONVERGE. Ripubblicare una pagina non
 // riscrive `content/` — il corpus lo scrive solo il generatore, e i 592 byte
@@ -103,7 +112,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { findControlChars, sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
+import { findControlChars, isInvalidControlCode, sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 // issue #220: due predicati di sporco oltre al C0. Vedi le due sezioni piu'
 // sotto ("SEGNAPOSTO FAQ" e "RESIDUO PROPAGATO") per il perche' di ciascuno.
 // Riuso deliberato: la mappa sezione→shard, l'elenco dei locali e la regola di
@@ -149,15 +158,88 @@ export function extractSeoBlockKey(line) {
   return { section: m[1] === 'blog' ? 'frontaliere' : 'svizzera', id: m[2] };
 }
 
+// ── LA SECONDA SPELLING: il C0 ESCAPATO (issue #336) ────────────────────────
+//
+// `findControlChars` cerca il BYTE. Dentro `content/**` esiste una seconda
+// spelling dello stesso identico difetto, che quel byte non ce l'ha, e che
+// quindi non veniva contata da nessuno: il campo `.faq` di un body e' JSON
+// dentro un letterale TS, e `JSON.stringify` scrive i C0 come `\u00XX`. Il
+// backslash del JSON e' poi a sua volta escapato dal letterale TS, quindi sul
+// disco si legge `\\u0004`.
+//
+// La catena e' lossless — `\\u0004` sul disco -> `\u0004` (un backslash solo)
+// nel valore della stringa TS -> U+0004 dopo `JSON.parse` — cioe' il control
+// character C'E', arriva alla pagina dentro il `FAQPage` ld+json, e il crawler lo
+// legge. Solo l'oracolo non lo vedeva:
+//
+//   grep -ro '\\u00[0-1][0-9a-fA-F]' content/ | wc -l   →  40 occorrenze
+//   scanContentForDirtyIds (prima di questa fix)        →   0
+//
+// «0 byte C0» significava «0 IN FORMA GREZZA», non «pulito»: un falso negativo
+// dell'oracolo, la stessa classe di `grep` senza `-a` o dell'API GitHub che
+// risponde con contenuto vuoto sopra 1 MB — strumenti che dicono «zero» quando
+// la risposta onesta e' «non lo so». `sanitizeHtmlDocument` la seconda spelling
+// la conosce gia' (pass 2, dentro gli inline `<script>`); era il lato CORPUS a
+// guardare solo la prima.
+//
+// Si accetta QUALUNQUE profondita' di backslash (un backslash o due davanti a
+// `u0004`): sono tutte spelling dello stesso carattere a un livello diverso di
+// escaping, e nessuna di esse ha un uso legittimo in prosa. Il CODICE, invece,
+// e' filtrato da `isInvalidControlCode` — la STESSA sorgente di verita'
+// dell'emitter (AGENTS.md #6) — cosi' le forme escapate di TAB (0009), LF
+// (000a) e CR (000d), che XML e JSON ammettono entrambi, non diventano falsi
+// positivi. E' l'unico punto in cui questo oracolo e' piu' STRETTO della grep
+// dell'issue #336, che quei tre li conterebbe: sul corpus di oggi non ce n'e'
+// nessuno, quindi i due numeri coincidono (40).
+const ESCAPED_C0_RX = /\\+u00([0-1][0-9a-fA-F])/g;
+
+/**
+ * Ogni C0 illegale scritto in forma escapata in `text`, come
+ * `{ index, code, spelling }`. Stessa forma di ritorno di `findControlChars`,
+ * cosi' i due oracoli si sommano senza che il chiamante sappia quale ha visto
+ * cosa; un chiamante che vuole solo un si'/no legge `.length`.
+ */
+export function findEscapedControlChars(text) {
+  const found = [];
+  if (typeof text !== 'string') return found;
+  for (const m of text.matchAll(ESCAPED_C0_RX)) {
+    const code = Number.parseInt(m[1], 16);
+    if (isInvalidControlCode(code)) found.push({ index: m.index, code, spelling: m[0] });
+  }
+  return found;
+}
+
+/**
+ * `text` con ogni C0 escapato riscritto come il carattere che denota.
+ *
+ * NON e' una riparazione — il carattere resta un control character, e resta
+ * sbagliato. Serve a far leggere la seconda spelling ai predicati che sanno
+ * gia' lavorare sul byte (`residuesInText`), invece di duplicarne la logica in
+ * una versione «per la forma escapata» che divergerebbe: e' esattamente il modo
+ * in cui le due spelling sono divergute la prima volta.
+ */
+export function decodeEscapedControlChars(text) {
+  if (typeof text !== 'string') return text;
+  return text.replace(ESCAPED_C0_RX, (whole, hex) => {
+    const code = Number.parseInt(hex, 16);
+    return isInvalidControlCode(code) ? String.fromCharCode(code) : whole;
+  });
+}
+
+/** Quante occorrenze C0 porta `text`, nelle DUE spelling messe insieme. */
+export function countControlCharsBothSpellings(text) {
+  return findControlChars(text).length + findEscapedControlChars(text).length;
+}
+
 /**
  * Id sporchi in un chunk meta (content/blog-meta-<locale>.ts): ogni riga la
- * cui chiave nomina un articolo E porta un byte C0 illegale. I chunk meta
- * esistono solo per la sezione frontaliere.
+ * cui chiave nomina un articolo E porta un C0 illegale, in una qualunque delle
+ * due spelling. I chunk meta esistono solo per la sezione frontaliere.
  */
 export function dirtyIdsInMetaText(text) {
   const ids = new Set();
   for (const line of text.split('\n')) {
-    if (findControlChars(line).length === 0) continue;
+    if (countControlCharsBothSpellings(line) === 0) continue;
     const id = extractMetaArticleId(line);
     if (id) ids.add(id);
   }
@@ -179,7 +261,7 @@ export function dirtyIdsInSeoText(text) {
       current = key;
       continue;
     }
-    if (current && findControlChars(line).length > 0) found.push(current);
+    if (current && countControlCharsBothSpellings(line) > 0) found.push(current);
   }
   return found;
 }
@@ -462,6 +544,27 @@ export function scanContentForDirtyIds(rootDir) {
   let totalFiles = 0;
   let totalOccurrences = 0;
   let totalFaqPlaceholderFiles = 0;
+  // Contato a parte, e riportato a parte (issue #336): finche' le due spelling
+  // stanno nello stesso numero, un ritorno a zero della sola forma escapata e'
+  // indistinguibile da «l'oracolo ha smesso di guardarla». E' esattamente il
+  // modo in cui questo difetto e' vissuto un anno sotto CI verde.
+  let totalEscapedOccurrences = 0;
+
+  /**
+   * Le occorrenze delle due spelling in un file, con l'etichetta con cui il
+   * report dice QUALE oracolo ha visto cosa. Un file che porta SOLO la forma
+   * escapata prende il suffisso: senza, sarebbe indistinguibile da un file col
+   * byte grezzo, cioe' la fix di #336 non sarebbe verificabile dal suo output.
+   */
+  const conta = (text, rel) => {
+    const grezze = findControlChars(text).length;
+    const escapate = findEscapedControlChars(text).length;
+    return {
+      totale: grezze + escapate,
+      escapate,
+      etichetta: grezze > 0 ? rel : `${rel} (c0 escapato)`,
+    };
+  };
 
   // Cache di TUTTI i file letti in questo giro, a prescindere dal fatto che
   // portino C0: il residuo propagato (sotto) deve poterli ricontrollare anche
@@ -476,11 +579,21 @@ export function scanContentForDirtyIds(rootDir) {
       const text = fs.readFileSync(file, 'utf8');
       const id = path.basename(file, '.ts');
       bodyFiles.push({ section, id, file, text });
-      const n = findControlChars(text).length;
-      if (n > 0) {
+      const c = conta(text, path.relative(rootDir, file));
+      if (c.totale > 0) {
         totalFiles += 1;
-        totalOccurrences += n;
-        mark(found, section, id, path.relative(rootDir, file), residuesInText(text));
+        totalOccurrences += c.totale;
+        totalEscapedOccurrences += c.escapate;
+        // I residui restano quelli del BYTE GREZZO, deliberatamente. Un residuo
+        // ricavato dalla forma escapata (`modalit` con U+0001 dentro, che diventa `modalit8`) sarebbe
+        // corretto come diagnosi e sbagliato come criterio di selezione: il
+        // corpus non lo ripara nessuno, quindi la pagina lo porterebbe per
+        // sempre e il filtro live smetterebbe di CONVERGERE — la non-convergenza
+        // che l'issue #73 e' esistita per chiudere. Il C0 escapato invece la
+        // pagina lo perde alla prima ripubblicazione (`sanitizeHtmlDocument`
+        // pass 2 lo toglie in uscita), quindi il candidato esce dalla coda da
+        // solo. La riparazione del testo e' del canale testimone, non di qui.
+        mark(found, section, id, c.etichetta, residuesInText(text));
       }
       // Il segnaposto FAQ (sopra) e' indipendente dal C0: si controlla sempre,
       // non solo sui file gia' segnati sporchi da un byte di controllo.
@@ -499,30 +612,32 @@ export function scanContentForDirtyIds(rootDir) {
     const file = path.join(contentDir, name);
     const text = fs.readFileSync(file, 'utf8');
     metaFiles.push({ file, text });
-    const n = findControlChars(text).length;
-    if (n === 0) continue;
+    const c = conta(text, path.relative(rootDir, file));
+    if (c.totale === 0) continue;
     totalFiles += 1;
-    totalOccurrences += n;
+    totalOccurrences += c.totale;
+    totalEscapedOccurrences += c.escapate;
     const metaResidues = residuesInText(text);
-    for (const id of dirtyIdsInMetaText(text)) mark(found, 'frontaliere', id, path.relative(rootDir, file), metaResidues);
+    for (const id of dirtyIdsInMetaText(text)) mark(found, 'frontaliere', id, c.etichetta, metaResidues);
   }
 
   const seoDir = path.join(contentDir, 'seo');
   for (const file of listTsFiles(seoDir)) {
     const text = fs.readFileSync(file, 'utf8');
     seoFiles.push({ file, text });
-    const n = findControlChars(text).length;
-    if (n === 0) continue;
+    const c = conta(text, path.relative(rootDir, file));
+    if (c.totale === 0) continue;
     totalFiles += 1;
-    totalOccurrences += n;
+    totalOccurrences += c.totale;
+    totalEscapedOccurrences += c.escapate;
     const seoResidues = residuesInText(text);
-    for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, path.relative(rootDir, file), seoResidues);
+    for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, c.etichetta, seoResidues);
   }
 
   propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles);
 
   const ids = [...found.values()].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
-  return { ids, totalFiles, totalOccurrences, totalFaqPlaceholderFiles };
+  return { ids, totalFiles, totalOccurrences, totalEscapedOccurrences, totalFaqPlaceholderFiles };
 }
 
 /** Ordine deterministico (sezione, poi id) + cap. Nessuna priorita' di data: sono un backlog storico, non un evento fresco. */
@@ -762,7 +877,8 @@ async function main() {
   const apiBase = (process.env.DIRTY_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const skipLive = args.skipLive || process.env.DIRTY_SKIP_LIVE === '1';
 
-  const { ids: candidates, totalFiles, totalOccurrences, totalFaqPlaceholderFiles } = scanContentForDirtyIds(ROOT_DIR);
+  const { ids: candidates, totalFiles, totalOccurrences, totalEscapedOccurrences, totalFaqPlaceholderFiles } =
+    scanContentForDirtyIds(ROOT_DIR);
 
   let ids = candidates;
   let liveFilter = 'skipped';
@@ -798,16 +914,24 @@ async function main() {
   const { selected, leftover } = orderAndCap(ids, cap);
 
   const report = {
+    // schema 4 (issue #336): aggiunge totalEscapedOccurrences, la meta' del
+    // conteggio C0 che PRIMA valeva sempre zero perche' nessuno la guardava.
+    // Sta in un campo suo e non sommato dentro totalOccurrences e basta,
+    // perche' e' l'unico modo di accorgersi che l'oracolo ha smesso di
+    // guardarla: un totale che scende puo' voler dire «riparato», un
+    // totalEscapedOccurrences che va a zero mentre la grep dell'issue trova
+    // ancora 40 vuol dire «cieco di nuovo».
     // schema 3 (issue #220): aggiunge totalFaqPlaceholderFiles e i candidati
     // trovati dai due predicati nuovi (residuo propagato, segnaposto FAQ),
     // gia' dentro `selected`/`leftover` coi loro `sources` distintivi
     // ("(residuo propagato)", "(faq-placeholder)") — nessun campo nuovo li
     // serve, il consumatore che legga solo `counts`/`selected` come prima
     // continua a funzionare.
-    schema: 3,
+    schema: 4,
     generatedAt: new Date().toISOString(),
     totalFiles,
     totalOccurrences,
+    totalEscapedOccurrences,
     totalFaqPlaceholderFiles,
     apiBase,
     apiCommit,
@@ -828,7 +952,7 @@ async function main() {
   fs.writeFileSync(args.out, `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(
-    `[find-dirty-content-ids] ${totalFiles} file C0 (${totalOccurrences} byte), ${totalFaqPlaceholderFiles} file con segnaposto FAQ, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
+    `[find-dirty-content-ids] ${totalFiles} file C0 (${totalOccurrences} occorrenze, di cui ${totalEscapedOccurrences} in forma escapata), ${totalFaqPlaceholderFiles} file con segnaposto FAQ, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
   );
   for (const { section, id, sources, liveReason, dirtyLocales } of selected) {
     const why = liveReason === 'dirty' ? `live sporco: ${dirtyLocales.join(',')}` : `live ${liveReason ?? 'non filtrato'}`;
