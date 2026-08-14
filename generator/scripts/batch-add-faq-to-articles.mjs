@@ -406,7 +406,10 @@ function discoverArticles() {
 // Preferred models for FAQ (Gemini free tier — reliable JSON output)
 const FAQ_MODELS = [
   AI_MODELS.GEMINI_FLASH,
-  AI_MODELS.GEMINI_2_FLASH,
+  // GEMINI_2_FLASH removed from AI_MODELS (2026-08-14, Gemini API HTTP 404 "no
+  // longer available"). Left in place it would have resolved to `undefined` and
+  // put a hole in this chain — a shape no test here would have caught.
+  AI_MODELS.GEMINI_FLASH_LITE_LATEST,
   AI_MODELS.GEMINI_FLASH_LITE,
 ];
 
