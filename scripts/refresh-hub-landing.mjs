@@ -66,6 +66,7 @@ import path from 'node:path';
 // See scripts/lib/sanitize-control-chars.mjs for the incident.
 import { sanitizeHtmlDocument } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from '../generator/scripts/lib/control-char-write-report.mjs';
+import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const argv = process.argv.slice(2);
@@ -218,7 +219,7 @@ function readMeta(metaPrefix, locale) {
   let m;
   while ((m = rx.exec(src)) !== null) {
     const [, id, field, raw] = m;
-    const value = raw.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
+    const value = unescapeTsValue(raw);
     const entry = out.get(id) ?? { title: '', desc: '' };
     if (field === 'title') entry.title = value;
     else entry.desc = value;

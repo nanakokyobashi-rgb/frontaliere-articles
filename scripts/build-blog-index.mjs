@@ -45,6 +45,7 @@ import path from 'node:path';
 // blog-index-frontaliere-it-full.json carried five of them.
 import { sanitizeDeep, assertNoControlChars } from './lib/sanitize-control-chars.mjs';
 import { reportStrippedControlCharsDeep } from '../generator/scripts/lib/control-char-write-report.mjs';
+import { unescapeTsValue } from '../generator/scripts/lib/meta-field-regex.mjs';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const outIdx = process.argv.indexOf('--out');
@@ -155,7 +156,7 @@ function readMeta(metaPrefix, locale) {
   let m;
   while ((m = rx.exec(src)) !== null) {
     const [, id, field, raw] = m;
-    const value = raw.replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+    const value = unescapeTsValue(raw);
     if (!out.has(id)) out.set(id, {});
     out.get(id)[field] = value;
   }

@@ -42,6 +42,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
+import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CHECK_ONLY = process.argv.includes('--check');
@@ -54,8 +55,8 @@ const SEO_TS_FIELDS = {
 /** Gemelli JSON dentro `structuredData`. */
 const SEO_JSON_FIELDS = { headline: 'title', description: 'excerpt' };
 
-const unescapeTs = (s) => s.replace(/\\'/g, "'").replace(/\\\\/g, '\\');
-const unescapeJson = (s) => s.replace(/\\"/g, '"').replace(/\\\\/g, '\\');
+const unescapeTs = (s) => unescapeTsString(s, { "'": "'", '\\': '\\' });
+const unescapeJson = (s) => unescapeTsString(s, { '"': '"', '\\': '\\' });
 
 /**
  * Prova, campo per campo, che correggere il testo escapato equivale a

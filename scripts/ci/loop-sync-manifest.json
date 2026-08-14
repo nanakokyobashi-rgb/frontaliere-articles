@@ -272,9 +272,9 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "391784db7fd2712d",
-        "corpus": "391784db7fd2712d",
-        "alignedAt": "2026-08-09"
+        "site": "45113b7cf0b645c1",
+        "corpus": "45113b7cf0b645c1",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -370,8 +370,8 @@
       "reason": "Il rilevatore di divergenza stesso. Vive qui perche' e' questo il lato che riceve il ciclo; il sito e' la sorgente e non ha bisogno di sorvegliare se stesso.",
       "baseline": {
         "site": null,
-        "corpus": "81ab848a828d9979",
-        "alignedAt": "2026-08-07"
+        "corpus": "aba2ea9012e9f48f",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -517,9 +517,9 @@
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7599bdce6d0efcfb",
-        "corpus": "7599bdce6d0efcfb",
-        "alignedAt": "2026-08-07"
+        "site": "6515f996437948e8",
+        "corpus": "6515f996437948e8",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -544,9 +544,9 @@
       "path": "scripts/ci/triage-sweep.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "da01199e1c4d265c",
-        "corpus": "da01199e1c4d265c",
-        "alignedAt": "2026-08-07"
+        "site": "b938c12407740dae",
+        "corpus": "b938c12407740dae",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -663,7 +663,17 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "6146f482025c12f9",
+        "corpus": "9405eae07fdbc04f",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "generator/tests/loop-drift-stranded-twin.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Il guard del verdetto `stranded-twin` (#303). Vive solo qui per la stessa ragione di loop-drift-check.mjs: e' questo il lato che RICEVE il ciclo, il sito e' la sorgente e non ha un manifest da sorvegliare. Pinna la parte pura `strandedVerdict()` con `nowMs` iniettato — un guard che dipende dall'orologio o dalla rete e' un flake — sulla calibrazione reale del 2026-08-14: i cinque gemelli erano fermi da 2,50 / 2,50 / 3,88 / 5,96 / 15,75 giorni, e la soglia di 3 giorni separa la latenza del cron giornaliero dal gemello che non arrivera' mai. Provato per mutazione: 8 mutazioni su 8 lo fanno diventare rosso.",
+      "baseline": {
+        "site": null,
+        "corpus": "9f4d951e8d6ed3e5",
         "alignedAt": "2026-08-14"
       }
     },
@@ -1897,9 +1907,9 @@
       "sitePath": "scripts/lib/meta-field-regex.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0c43d71a4ebb7531",
-        "corpus": "0c43d71a4ebb7531",
-        "alignedAt": "2026-08-09"
+        "site": "782afafe9c39e70f",
+        "corpus": "782afafe9c39e70f",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -2252,11 +2262,11 @@
       "path": "host/shared/localeEmitFilter.ts",
       "sitePath": "build-plugins/shared/localeEmitFilter.ts",
       "mode": "identical",
-      "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. **Oggi i due lati NON coincidono e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, il sito ha corretto dopo (#5327) il caso `dist/<loc>.html` — la homepage di locale sta alla RADICE di dist, non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`. Sul sito questo ha prodotto `/en.html` `/de.html` `/fr.html` a 404 in produzione. Qui la correzione non e' mai scesa. `identical` la fa uscire come `undeclared-drift`.",
+      "reason": "Classificazione per locale dei file emessi, usata per dividere gli shard. Allineato il 2026-08-14 (corpus#303): fino a quel giorno il blob qui era quello del sito a `valerielinc-ops@be6b31d5` e la correzione #5327 non era mai scesa — `dist/<loc>.html` e' la homepage di locale, sta alla RADICE di dist e non sotto `dist/<loc>/`, e classificarla per prefisso la mandava in `it`. Sul sito quel difetto aveva prodotto `/en.html` `/de.html` `/fr.html` a 404 in produzione. La copia porta anche #5709 (`404.html`, trampolino SPA che Pages serve solo alla radice dello shard, ora spedito da OGNI shard). Qui il filtro e' inerte finche' `BUILD_LOCALE` resta vuoto, ma e' la meta' `host/` di un contratto condiviso e deve restare byte-uguale.",
       "baseline": {
-        "site": "291ab28adf5a0e14",
-        "corpus": "8e14c6e58fd7a46d",
-        "alignedAt": "2026-08-09"
+        "site": "cb1eb188340ee39e",
+        "corpus": "cb1eb188340ee39e",
+        "alignedAt": "2026-08-14"
       }
     },
     {
