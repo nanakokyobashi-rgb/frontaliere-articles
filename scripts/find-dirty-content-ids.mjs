@@ -325,11 +325,12 @@ export function pageCarriesFaqPlaceholder(html) {
 }
 
 /**
- * Le domande del campo `faq` grezzo di un file body
- * (`content/blog-body{,-ch}/<locale>/<id>.ts`): `[]` se il campo manca o non
- * e' JSON valido. Stesso schema di escaping degli altri campi letterali TS —
- * il campo e' JSON dentro una stringa TS fra apici singoli, dove solo l'apice
- * porta un escape aggiuntivo.
+ * Le catture GREZZE del campo `'blog.article.<id>.faq': '...'` — il testo
+ * cosi' com'e' nel sorgente, senza NESSUN unescape (nemmeno dell'apice).
+ * Base condivisa fra chi lo legge come JSON (`faqQuestionsInBodyText`, che
+ * scioglie solo `\'` prima del parse) e chi cerca la FORMA dell'escape C0 sul
+ * testo grezzo (`faqEscapedControlCharsInBodyText`, sotto): un JSON.parse
+ * prematuro fraintenderebbe proprio quella forma (vedi il commento li').
  *
  * Con `id`, la chiave e' ANCORATA a quell'id — un file body oggi porta un solo
  * id (il nome del file), ma niente nel formato lo impedisce strutturalmente,
@@ -337,23 +338,77 @@ export function pageCarriesFaqPlaceholder(html) {
  * sarebbe un falso negativo silenzioso (#289). Senza `id` (retrocompat), cerca
  * qualunque id e resta scoped alla PRIMA occorrenza, come prima.
  */
-export function faqQuestionsInBodyText(text, id) {
+function faqFieldRawCaptures(text, id) {
   const idPart = id ? id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : '[a-z0-9-]+';
   const rx = new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, id ? 'g' : undefined);
-  const questions = [];
+  const out = [];
   let m;
   while ((m = rx.exec(text)) !== null) {
+    out.push(m[1]);
+    if (!id) break;
+  }
+  return out;
+}
+
+/**
+ * Le domande del campo `faq` grezzo di un file body
+ * (`content/blog-body{,-ch}/<locale>/<id>.ts`): `[]` se il campo manca o non
+ * e' JSON valido. Stesso schema di escaping degli altri campi letterali TS —
+ * il campo e' JSON dentro una stringa TS fra apici singoli, dove solo l'apice
+ * porta un escape aggiuntivo.
+ */
+export function faqQuestionsInBodyText(text, id) {
+  const questions = [];
+  for (const raw of faqFieldRawCaptures(text, id)) {
     let pairs;
     try {
-      pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
+      pairs = JSON.parse(raw.replace(/\\'/g, "'"));
     } catch {
       if (!id) return [];
       continue;
     }
     if (Array.isArray(pairs)) for (const p of pairs) if (p && typeof p.q === 'string') questions.push(p.q);
-    if (!id) break;
   }
   return questions;
+}
+
+// ── FAQ ESCAPATA (issue #336) ───────────────────────────────────────────────
+//
+// Le 40 occorrenze misurate in #336 sono la STESSA corruzione di #94/#65 (un
+// byte C0 sostituisce un carattere non-ASCII, spesso con una coda che ne
+// conserva l'esadecimale) ma con una spelling diversa: `.faq` e' l'UNICO
+// campo del body che e' esso stesso JSON incorporato in una stringa TS, e li'
+// la pipeline ha scritto l'escape JSON del byte (`\u00XX`) invece del byte
+// grezzo — ASCII stampabile nel sorgente, zero hit per `findControlChars`
+// (che scansiona byte, non testo). Il comando della issue lo conferma:
+// `grep -ro '\u00[0-1][0-9a-fA-F]' content/` trova le stesse 40 occorrenze in
+// 20 file che il predicato sotto trova.
+//
+// PERCHE' NON UN JSON.parse. `faqQuestionsInBodyText` (sopra) fa gia'
+// JSON.parse del campo, ma l'unico unescape che applica prima e' `\'` -> `'`
+// (l'apice del letterale TS che lo contiene) — non tocca il raddoppio di
+// backslash che quello STESSO letterale impone a un backslash vero. Il
+// sorgente porta quindi DUE backslash prima di `u00XX` (uno che sopravvivera'
+// come backslash del JSON, uno che e' il raddoppio del letterale TS), e un
+// JSON.parse su quel testo ancora doppiamente escapato legge le due backslash
+// come UNA backslash letterale seguita dal testo `u00XX` — non uno unicode
+// escape, e il control character non compare mai. Verificato importando il
+// modulo per davvero (`npx tsx`, non la lettura grezza che fa questo script):
+// il valore RUNTIME del campo ha una sola backslash e li' JSON.parse lo
+// decodifica nel control character; il testo che questo file legge da disco
+// (senza passare dal parser del modulo) ne ha ancora due. Cercare la FORMA
+// dell'escape sul testo grezzo — esattamente cio' che fa il grep della issue —
+// non ha questo problema: non serve sapere quante backslash disfare.
+const ESCAPED_C0_RX = /\\u00[0-1][0-9a-fA-F]/g;
+
+/** Le occorrenze dell'escape C0 nel campo `.faq` grezzo di un id (o di ogni id, senza `id`). */
+export function faqEscapedControlCharsInBodyText(text, id) {
+  const out = [];
+  for (const raw of faqFieldRawCaptures(text, id)) {
+    const found = raw.match(ESCAPED_C0_RX);
+    if (found) out.push(...found);
+  }
+  return out;
 }
 
 function mark(map, section, id, source, residues) {
@@ -462,6 +517,8 @@ export function scanContentForDirtyIds(rootDir) {
   let totalFiles = 0;
   let totalOccurrences = 0;
   let totalFaqPlaceholderFiles = 0;
+  let totalFaqEscapedC0Files = 0;
+  let totalFaqEscapedC0Occurrences = 0;
 
   // Cache di TUTTI i file letti in questo giro, a prescindere dal fatto che
   // portino C0: il residuo propagato (sotto) deve poterli ricontrollare anche
@@ -487,6 +544,16 @@ export function scanContentForDirtyIds(rootDir) {
       if (faqQuestionsInBodyText(text, id).some(isPlaceholderFaqQuestion)) {
         totalFaqPlaceholderFiles += 1;
         mark(found, section, id, `${path.relative(rootDir, file)} (faq-placeholder)`, []);
+      }
+      // L'escape C0 nel campo .faq (issue #336): indipendente dal passo sopra
+      // per lo stesso motivo — un file puo' non avere NESSUN byte C0 grezzo
+      // (n === 0) e portare comunque questa corruzione, invisibile a
+      // findControlChars perche' e' testo ASCII, non un byte.
+      const faqEscaped = faqEscapedControlCharsInBodyText(text, id);
+      if (faqEscaped.length > 0) {
+        totalFaqEscapedC0Files += 1;
+        totalFaqEscapedC0Occurrences += faqEscaped.length;
+        mark(found, section, id, `${path.relative(rootDir, file)} (faq-escaped-c0)`, []);
       }
     }
   }
@@ -522,7 +589,7 @@ export function scanContentForDirtyIds(rootDir) {
   propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles);
 
   const ids = [...found.values()].sort((a, b) => (a.section === b.section ? a.id.localeCompare(b.id) : a.section.localeCompare(b.section)));
-  return { ids, totalFiles, totalOccurrences, totalFaqPlaceholderFiles };
+  return { ids, totalFiles, totalOccurrences, totalFaqPlaceholderFiles, totalFaqEscapedC0Files, totalFaqEscapedC0Occurrences };
 }
 
 /** Ordine deterministico (sezione, poi id) + cap. Nessuna priorita' di data: sono un backlog storico, non un evento fresco. */
@@ -762,7 +829,14 @@ async function main() {
   const apiBase = (process.env.DIRTY_API_BASE || API_BASE_DEFAULT).replace(/\/+$/, '');
   const skipLive = args.skipLive || process.env.DIRTY_SKIP_LIVE === '1';
 
-  const { ids: candidates, totalFiles, totalOccurrences, totalFaqPlaceholderFiles } = scanContentForDirtyIds(ROOT_DIR);
+  const {
+    ids: candidates,
+    totalFiles,
+    totalOccurrences,
+    totalFaqPlaceholderFiles,
+    totalFaqEscapedC0Files,
+    totalFaqEscapedC0Occurrences,
+  } = scanContentForDirtyIds(ROOT_DIR);
 
   let ids = candidates;
   let liveFilter = 'skipped';
@@ -798,17 +872,19 @@ async function main() {
   const { selected, leftover } = orderAndCap(ids, cap);
 
   const report = {
-    // schema 3 (issue #220): aggiunge totalFaqPlaceholderFiles e i candidati
-    // trovati dai due predicati nuovi (residuo propagato, segnaposto FAQ),
-    // gia' dentro `selected`/`leftover` coi loro `sources` distintivi
-    // ("(residuo propagato)", "(faq-placeholder)") — nessun campo nuovo li
-    // serve, il consumatore che legga solo `counts`/`selected` come prima
-    // continua a funzionare.
-    schema: 3,
+    // schema 4 (issue #336): aggiunge totalFaqEscapedC0Files/Occurrences per
+    // il C0 scritto come escape \u00XX dentro il campo .faq — i candidati che
+    // trova sono gia' dentro `selected`/`leftover` col sources distintivo
+    // "(faq-escaped-c0)", stesso schema di schema 3 per "(faq-placeholder)":
+    // nessun campo nuovo serve al consumatore che legge solo
+    // `counts`/`selected`.
+    schema: 4,
     generatedAt: new Date().toISOString(),
     totalFiles,
     totalOccurrences,
     totalFaqPlaceholderFiles,
+    totalFaqEscapedC0Files,
+    totalFaqEscapedC0Occurrences,
     apiBase,
     apiCommit,
     liveFilter,
@@ -828,7 +904,7 @@ async function main() {
   fs.writeFileSync(args.out, `${JSON.stringify(report, null, 2)}\n`);
 
   console.log(
-    `[find-dirty-content-ids] ${totalFiles} file C0 (${totalOccurrences} byte), ${totalFaqPlaceholderFiles} file con segnaposto FAQ, ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
+    `[find-dirty-content-ids] ${totalFiles} file C0 (${totalOccurrences} byte), ${totalFaqPlaceholderFiles} file con segnaposto FAQ, ${totalFaqEscapedC0Files} file con C0 escapato in .faq (${totalFaqEscapedC0Occurrences} occorrenze), ${candidates.length} candidati dal corpus → ${ids.length} con pagina live ancora sporca (filtro live: ${liveFilter}, ${probes} pagine viste, ${cleared.length} id gia' puliti; selezionati ${selected.length}, in coda ${leftover.length}, cap ${cap})`,
   );
   for (const { section, id, sources, liveReason, dirtyLocales } of selected) {
     const why = liveReason === 'dirty' ? `live sporco: ${dirtyLocales.join(',')}` : `live ${liveReason ?? 'non filtrato'}`;
