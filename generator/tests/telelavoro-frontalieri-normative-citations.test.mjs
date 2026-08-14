@@ -31,13 +31,18 @@
  * delle sei citazioni fabbricate note ricompare in uno qualunque dei 4
  * locali, il test fallisce.
  */
+import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LOCALES = ['it', 'de', 'en', 'fr'];
+// I corpi stanno in DUE radici, non una: `content/blog-body/` e
+// `content/blog-body-ch/` (stessa mappa di generator/scripts/lib/corpus-paths.mjs
+// e di article-fabrication-guard.test.mjs).
+const BODY_ROOTS = ['blog-body', 'blog-body-ch'];
 
 // Byte-exact strings observed live in the corpus before each fix.
 // Case-insensitive because the DE body carried a lowercase variant of one of
@@ -52,9 +57,16 @@ const LOCALES = ['it', 'de', 'en', 'fr'];
 // dal vivo nell'articolo che il fix ha toccato, mai un'euristica.
 const SLUGS = [
   {
+    // `(Sozialgesetz)` aggiunto da #323: e' la stessa citazione fabbricata del
+    // corpo IT (`(LPS)`), ma nel corpo DE sopravviveva SCIOLTA — l'acronimo
+    // inventato sostituito da un titolo breve altrettanto inventato («das
+    // Bundesgesetz über die soziale Sicherheit (Sozialgesetz)»), che nessuna
+    // delle sei stringhe di #261 poteva intercettare. Le altre tre lingue
+    // avevano gia' la forma senza parentesi dopo #306: era rimasto vivo in una
+    // lingua sola, che e' il modo in cui `LTL 1995` era sopravvissuto a #259.
     slug: 'telelavoro-frontalieri',
     ref: 'corpus#261',
-    citations: ['LTL 1995', 'LF 1995', 'OTC 2001', '(LFW)', '(LPS)', 'BG 1995'],
+    citations: ['LTL 1995', 'LF 1995', 'OTC 2001', '(LFW)', '(LPS)', 'BG 1995', '(Sozialgesetz)'],
   },
   {
     // #317 punto 2. Le due identita' normative erano inventate di sana pianta
@@ -73,10 +85,23 @@ const SLUGS = [
   },
 ];
 
+// Fino a #323 questa funzione era hardcoded su `content/blog-body/` e non
+// guardava MAI `content/blog-body-ch/`: la tabella qui sopra era quindi cieca
+// su meta' corpus, ed e' il motivo per cui `(LFW)` e `(LPS)` — gia' presenti
+// nella denylist di #261 — sono sopravvissuti a #306 in 29 file. Tutte e 12 le
+// `LFW` e 24 delle 31 `LPS` misurate in #323 stavano sotto `blog-body-ch/`.
+// Se lo slug non esiste in nessuna delle due radici si alza: un guard che non
+// trova il corpo non deve passare in silenzio.
 async function loadBody(slug, locale) {
-  const url = new URL(`../../content/blog-body/${locale}/${slug}.ts`, import.meta.url);
-  const mod = await import(url.href);
-  return mod.default;
+  const tried = [];
+  for (const root of BODY_ROOTS) {
+    const file = path.join(ROOT, 'content', root, locale, `${slug}.ts`);
+    tried.push(file);
+    if (!fs.existsSync(file)) continue;
+    const mod = await import(pathToFileURL(file).href);
+    return mod.default;
+  }
+  throw new Error(`corpo non trovato per ${slug}/${locale}; cercato in:\n  ${tried.join('\n  ')}`);
 }
 
 for (const { slug, ref, citations } of SLUGS) {
@@ -95,3 +120,78 @@ for (const { slug, ref, citations } of SLUGS) {
     }
   });
 }
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
+ * corpus#323 — le stesse sigle, ma su TUTTO il corpus e su ENTRAMBE le radici.
+ *
+ * La tabella per slug qui sopra riparava l'articolo appena toccato; il difetto
+ * di #323 e' che nessuno guardava gli ALTRI articoli. `(LFW)` e `(LPS)` erano
+ * nella denylist dal 2026-08-… (#261) e sono comunque ricomparsi in 29 file su
+ * 11 slug e 4 locali, perche' il generatore li rifabbrica e il guard era
+ * scoped a un solo slug per di piu' in una sola radice.
+ *
+ * Questo blocco e' un test SUI DATI: byte-exact, nessuna euristica, nessun
+ * pattern di forma «acronimo + anno» (scartato in #261 con la misura: 41 hit
+ * su 16.676 file, per lo piu' norme e istituzioni VERE). Solo le sei stringhe
+ * gia' osservate dal vivo, cercate ovunque.
+ *
+ * Perche' non in `article-fabrication-guard.test.mjs`, che gia' scandisce
+ * tutto il corpus: quel file e' `adapted` nel manifest del ciclo con il
+ * vincolo esplicito «i PATTERN restano byte-identici al sito, nuove voci si
+ * aggiungono prima la' e si ricopiano qui». Una voce aggiunta li' da questo
+ * repo verrebbe sovrascritta al prossimo riallineamento. Questo file invece
+ * non e' nel manifest: nessun vincolo di lockstep, la sede giusta finche' le
+ * sigle non sono state promosse sul sito.
+ *
+ * Le due sigle nude sono cercate con un confine di parola perche' il corpus
+ * contiene due famiglie di sottostringhe che sono norme VERE e vanno
+ * preservate: `MLPS` (Ministero del Lavoro e delle Politiche Sociali) e
+ * `TULPS` (Testo Unico Leggi Pubblica Sicurezza, 1931). Misurato al momento
+ * del fix: 16 occorrenze fra le due, tutte legittime, tutte fuori match.
+ */
+const CORPUS_WIDE_FABRICATED = [
+  { label: 'LTL 1995', re: /ltl 1995/i },
+  { label: 'LF 1995', re: /lf 1995/i },
+  { label: 'OTC 2001', re: /otc 2001/i },
+  { label: 'BG 1995', re: /bg 1995/i },
+  { label: 'LFW', re: /(?<![a-z])lfw(?![a-z])/i },
+  { label: 'LPS', re: /(?<![a-z])lps(?![a-z])/i },
+];
+
+function allBodyFiles() {
+  const files = [];
+  for (const root of BODY_ROOTS) {
+    for (const locale of LOCALES) {
+      const dir = path.join(ROOT, 'content', root, locale);
+      if (!fs.existsSync(dir)) continue;
+      for (const name of fs.readdirSync(dir)) {
+        if (name.endsWith('.ts')) files.push({ id: `${root}/${locale}/${name}`, file: path.join(dir, name) });
+      }
+    }
+  }
+  return files;
+}
+
+describe('corpus#323: nessuna sigla normativa fabbricata nota, in nessun articolo', () => {
+  const files = allBodyFiles();
+
+  it('scandisce entrambe le radici e tutti i locali (niente falso verde su sparse checkout)', () => {
+    // In un worktree sparse `content/` puo' non esistere: un gate che passa su
+    // zero file scanditi e' il falso verde piu' facile da produrre qui.
+    // Misurato al momento del fix: 16.800 corpi.
+    expect(files.length).toBeGreaterThan(3000);
+    const roots = new Set(files.map((f) => f.id.split('/')[0]));
+    expect([...roots].sort()).toEqual(['blog-body', 'blog-body-ch']);
+  });
+
+  for (const { label, re } of CORPUS_WIDE_FABRICATED) {
+    it(`nessuna occorrenza di «${label}»`, () => {
+      const offenders = [];
+      for (const { id, file } of files) {
+        if (re.test(fs.readFileSync(file, 'utf8'))) offenders.push(id);
+      }
+      expect(offenders).toEqual([]);
+    });
+  }
+});
