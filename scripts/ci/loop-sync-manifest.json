@@ -469,8 +469,8 @@
       "reason": "Watchdog della pipeline di generazione: apre e richiude issue sulle run che escono `success` senza produrre articoli. Sul sito non esiste e non deve: dal cutover del 2026-08-02 e il corpus a generarlo, e ogni soglia qui e misurata sui dati DI QUESTO repo (215 intervalli fra articoli, 200 run di generate-article.yml, 3.846 articoli del corpus dopo #184). Portarlo la senza rimisurare darebbe un tasso di falsi positivi diverso. Il fratello `scan-failed-runs.mjs` copre la meta opposta (`conclusion == failure`) ed e registrato a parte.",
       "baseline": {
         "site": null,
-        "corpus": "1591af7110302446",
-        "alignedAt": "2026-08-10"
+        "corpus": "976f4273dd9ea766",
+        "alignedAt": "2026-08-14"
       }
     },
     {
