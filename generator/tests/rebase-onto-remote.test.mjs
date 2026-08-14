@@ -852,3 +852,30 @@ test('i prefissi --take-theirs coprono i target per-articolo di ENTRAMBE le sezi
     );
   }
 });
+
+test('un conflitto di solo bookkeeping resta risolto anche con le altre due categorie dichiarate', () => {
+  // Le tre categorie convivono nella STESSA invocazione, e il caso piu' comune
+  // (#76, #225) e' un conflitto di sola cache mentre registri e prefissi
+  // per-articolo sono dichiarati ma non toccati. E' l'unica combinazione che i
+  // test sopra non attraversano — quelli sul bookkeeping passano la sola
+  // allowlist, quelli sui registri non hanno cache in conflitto — e una
+  // regressione qui riaprirebbe #76 lasciando verdi tutti gli altri.
+  const w = makeWorld();
+  try {
+    landUpstream(w, [[BOOKKEEPING, '{"other":true}\n', 'concurrent run rewrites the cache']]);
+
+    write(w.work, BOOKKEEPING, '{"mine":true}\n');
+    write(w.work, 'content/blog-body/it/nuovo-articolo.ts', 'export const x = 1\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+
+    const { code, out } = runHelper(w.work, w.upstream, ...helperArgsFromWorkflow());
+    assert.equal(code, 0, `il ramo bookkeeping deve continuare a funzionare con tutte le categorie attive:\n${out}`);
+    assert.match(out, /resolved bookkeeping conflict by taking upstream/);
+
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    assert.ok(existsSync(path.join(w.work, 'content/blog-body/it/nuovo-articolo.ts')));
+    assert.match(git(w.work, 'show', `HEAD:${BOOKKEEPING}`), /other/);
+  } finally {
+    w.cleanup();
+  }
+});
