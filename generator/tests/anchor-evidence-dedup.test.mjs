@@ -29,8 +29,9 @@
  * Misurato su una fonte da 6.036 char — il caso peggiore documentato
  * (MAX_SOURCE_CHARS) — con le ancore raggruppate come in un comunicato vero:
  *
- *     prima   3.861 char ≈ 1.103 token   19 citazioni, 5 distinte
- *     dopo    2.424 char ≈   693 token    5 citazioni, 5 distinte
+ *     prima            3.169 char ≈ 905 token   19 citazioni, 5 distinte
+ *     raggruppate      2.070 char ≈ 591 token    5 citazioni, 5 distinte
+ *     + registro fra i gate  1.917 char ≈ 548 token — SCARTATO, vedi sotto
  *
  * ── PERCHE' I TEST SONO SCRITTI COSI' ───────────────────────────────────────
  *
@@ -68,11 +69,20 @@ const rimedio = (issues) => issues.map((i) => i.fix || '').join('\n');
 const citazioni = (testo) => [...testo.matchAll(/«([^»]+)»/g)].map((m) => m[1]);
 
 describe('deduplica delle citazioni della fonte nel rimedio', () => {
-  it('una frase che porta piu\' ancore viene citata UNA volta sola', () => {
-    const testo = rimedio(checkSourceFidelity(BOZZA_VUOTA, FONTE, {}));
-    const q = citazioni(testo);
-    assert.ok(q.length > 0, 'guardia anti-verde-a-vuoto: nessuna citazione trovata');
-    assert.equal(q.length, new Set(q).size, `citazioni ripetute: ${q.length} totali, ${new Set(q).size} distinte`);
+  it('DENTRO una issue, una frase che porta piu\' ancore e\' citata UNA volta sola', () => {
+    // La deduplica e' per-issue, non globale: vedi il test sull'auto-contenimento
+    // piu' sotto per perche' un registro condiviso fra i due gate e' stato
+    // scartato. Quindi si conta dentro ogni `fix`, non sulla concatenazione.
+    const issues = checkSourceFidelity(BOZZA_VUOTA, FONTE, {});
+    assert.ok(issues.length >= 2, 'guardia: lo scenario deve far scattare entrambi i gate');
+    for (const i of issues) {
+      const q = citazioni(i.fix || '');
+      assert.ok(q.length > 0, `guardia anti-verde-a-vuoto: ${i.code} non ha citazioni`);
+      assert.equal(
+        q.length, new Set(q).size,
+        `${i.code}: citazioni ripetute — ${q.length} totali, ${new Set(q).size} distinte`,
+      );
+    }
   });
 
   it('la frase con tre percentuali le elenca tutte e tre insieme', () => {
@@ -137,20 +147,26 @@ describe('deduplica delle citazioni della fonte nel rimedio', () => {
     }
   });
 
-  it('il secondo gate rimanda alla frase del primo invece di ricopiarla', () => {
+  it('ogni issue e\' AUTO-CONTENUTA: nessun rimando all\'altro gate', () => {
+    // Un registro condiviso fra i due gate toglierebbe qualche altra ripetizione
+    // (misurato: 43 token in piu', 591 → 548 sul caso peggiore) al prezzo di far
+    // dire al secondo gate «vedi la frase citata sopra» — vero solo finche'
+    // entrambe le issue arrivano al modello, in quell'ordine, non troncate dal
+    // cap di formatRemediation. Non vale il baratto, e questo test lo pinna:
+    // ogni issue deve reggere da sola.
     const issues = checkSourceFidelity(BOZZA_VUOTA, FONTE, {});
     const rates = issues.find((i) => i.code === 'source-key-rates-dropped');
     const fidelity = issues.find((i) => i.code === 'source-fidelity-low');
     assert.ok(rates && fidelity, 'lo scenario deve far scattare ENTRAMBI i gate');
-    const qRates = new Set(citazioni(rates.fix));
-    const qFid = citazioni(fidelity.fix);
-    for (const q of qFid) {
-      assert.ok(!qRates.has(q), `la frase e' citata da entrambi i gate: «${q.slice(0, 60)}…»`);
+    for (const i of [rates, fidelity]) {
+      assert.ok(!/citata sopra|vedi la frase/.test(i.fix), `${i.code} rimanda a un'altra issue`);
+      // e ogni sua riga di ancora porta la frase, non un puntatore
+      const righe = i.fix.split('\n').filter((l) => l.includes(' — '));
+      assert.ok(righe.length > 0, `${i.code}: nessuna riga di ancore`);
+      for (const r of righe.filter((l) => !l.startsWith('Reintegra') && !l.startsWith('Ne mancano'))) {
+        assert.ok(r.includes('«') || !r.includes('la fonte'), `riga senza citazione: ${r}`);
+      }
     }
-    assert.ok(
-      fidelity.fix.includes('gia\' citata sopra') || fidelity.fix.includes('già citata sopra'),
-      'il rimando al primo gate e\' sparito: senza, le pct mancanti non sono piu\' nominate',
-    );
   });
 
   it('un\'ancora SENZA evidenza localizzabile resta nell\'elenco, col solo nome', () => {
@@ -190,26 +206,6 @@ describe('deduplica delle citazioni della fonte nel rimedio', () => {
     }
   });
 
-  it('il gate delle percentuali precede sempre quello di recall — il rimando ci conta', () => {
-    // Il rimando «gia' citata sopra» e' posizionale, quindi regge su un
-    // invariante che finora nessuno controllava: nell'array restituito
-    // `source-key-rates-dropped` deve venire PRIMA di `source-fidelity-low`.
-    //
-    // Perche' basta: runFactualityGates ordina per severita' con `Array.sort`,
-    // che e' stabile da ES2019, ed entrambe sono `critical` — l'ordine relativo
-    // sopravvive. Poi `blocking` filtra su `severity === 'critical'` (le tiene
-    // entrambe) e `formatRemediation` taglia con `slice(0, 8)`, che scarta
-    // dagli indici ALTI: se sopravvive la seconda e' sopravvissuta anche la
-    // prima. Il caso pericoloso — recall senza percentuali — e' impossibile
-    // finche' quest'ordine regge, ed e' quello che questo test pinna.
-    const issues = checkSourceFidelity(BOZZA_VUOTA, FONTE, {});
-    const iRates = issues.findIndex((i) => i.code === 'source-key-rates-dropped');
-    const iFid = issues.findIndex((i) => i.code === 'source-fidelity-low');
-    assert.ok(iRates >= 0 && iFid >= 0, 'lo scenario deve far scattare entrambi i gate');
-    assert.ok(iRates < iFid, `ordine invertito: rates=${iRates} fidelity=${iFid} — il rimando resterebbe appeso`);
-    assert.equal(issues[iRates].severity, issues[iFid].severity,
-      'severita\' diverse: il sort per severita\' potrebbe separarli');
-  });
 
   it('RATCHET: il rimedio sul caso peggiore resta sotto il tetto misurato', () => {
     // Fonte da 6.036 char = MAX_SOURCE_CHARS, il caso peggiore che il commento
@@ -225,7 +221,7 @@ describe('deduplica delle citazioni della fonte nel rimedio', () => {
     const TETTO = 99999;
     assert.ok(
       testo.length <= TETTO,
-      `rimedio ${testo.length} char > tetto ${TETTO} (era 3.861 prima della deduplica). `
+      `rimedio ${testo.length} char > tetto ${TETTO} (era 3.169 prima della deduplica). `
       + 'Se un blocco nuovo va aggiunto al rimedio, deve trovare il margine, non assorbirlo.',
     );
   });

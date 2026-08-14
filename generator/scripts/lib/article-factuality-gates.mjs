@@ -1741,10 +1741,17 @@ export function matchedAnchors(articleText, anchors) {
  * anchors: 16 quotations, 5 distinct — 1133 characters, ~283 tokens, of text the
  * writer had already been shown.
  *
- * `seen` carries across BOTH gates below: `source-key-rates-dropped` and
- * `source-fidelity-low` fire together on the same draft and their missing sets
- * overlap by construction (every missing percentage is in both), so without a
- * shared ledger each of those sentences appeared in the prompt twice more.
+ * Deliberately NOT shared across the two gates. `source-key-rates-dropped` and
+ * `source-fidelity-low` fire together and their missing sets overlap by
+ * construction, so a ledger spanning both would drop a few more repeats — but it
+ * was measured at only 43 tokens on top of what grouping already saves (905 →
+ * 591 with grouping alone, → 548 with the shared ledger), and it costs the
+ * property that every issue is self-contained: the second gate would say "see
+ * the sentence quoted above", which is true only while both issues reach the
+ * model, in that order, un-truncated by `formatRemediation`'s cap. Forty-three
+ * tokens is not worth an invariant that holds by luck of ordering — and
+ * `tests/scripts/article-gates-propositive.test.ts` pins the self-containment
+ * on purpose ("hands back the source sentence carrying each dropped fact").
  *
  * The instruction is not weakened: every missing anchor is still named, still in
  * the exact literal form `matchedAnchors` credits (via renderAnchorForPrompt),
@@ -1752,10 +1759,9 @@ export function matchedAnchors(articleText, anchors) {
  *
  * @param sourceText the source body to quote from
  * @param anchorList missing anchors, in the order they should be presented
- * @param seen Set of already-quoted sentences, mutated; shared across gates
  * @param bullet line prefix (the two gates indent differently)
  */
-function groupedAnchorEvidence(sourceText, anchorList, seen, bullet = '') {
+function groupedAnchorEvidence(sourceText, anchorList, bullet = '') {
   /** @type {Map<string, string[]>} evidence sentence → labels it carries */
   const byEvidence = new Map();
   const withoutEvidence = [];
@@ -1768,13 +1774,6 @@ function groupedAnchorEvidence(sourceText, anchorList, seen, bullet = '') {
   }
   const lines = [];
   for (const [evidence, labels] of byEvidence) {
-    if (seen.has(evidence)) {
-      // Already in front of the writer from the other gate — name the anchors
-      // and the form they must take, but do not paste the sentence again.
-      lines.push(`${bullet}${labels.join(', ')} — vedi la frase della fonte già citata sopra`);
-      continue;
-    }
-    seen.add(evidence);
     lines.push(`${bullet}${labels.join(', ')} — la fonte dice: «${evidence}»`);
   }
   // Anchors the matcher could not locate in the source degrade to their name
@@ -1787,9 +1786,6 @@ export function checkSourceFidelity(articleText, sourceText, opts = {}) {
   const issues = [];
   const minRecall = opts.minRecall ?? 0.5;
   const minAnchors = opts.minAnchors ?? 3;
-  // Source sentences already quoted to the writer by an earlier gate in THIS
-  // call. See groupedAnchorEvidence for why it spans both gates.
-  const quotedEvidence = new Set();
 
   const anchors = extractSourceAnchors(sourceText);
   // Too few anchors to judge (thin or narrative source) → not a gate.
@@ -1814,7 +1810,7 @@ export function checkSourceFidelity(articleText, sourceText, opts = {}) {
       // asked the writer for a string that could not satisfy the gate quoting it.
       + `(${missingPct.map(renderAnchorForPrompt).join(', ')}) — senza queste il dato resta incomprensibile`,
       `percentuali fonte: ${srcPct.map(renderAnchorForPrompt).join(', ')}`,
-      `${groupedAnchorEvidence(sourceText, missingPct, quotedEvidence)}\n`
+      `${groupedAnchorEvidence(sourceText, missingPct)}\n`
       + `Reintegra nel testo le percentuali ${missingPct.map(renderAnchorForPrompt).join(' e ')} spiegando a cosa si riferiscono, `
       + `come fa la fonte. Scrivile ESATTAMENTE nella forma indicata qui sopra: il controllo è letterale e vuole la `
       + `virgola decimale, quindi "5,3%" conta e "5.3%" no — anche se la fonte usa il punto. `
@@ -1854,7 +1850,7 @@ export function checkSourceFidelity(articleText, sourceText, opts = {}) {
       + `Per ognuno hai qui sotto la frase della fonte da cui ricavarlo — riusala, non ricostruirla a memoria. `
       + `Scrivi ogni dato nella forma ESATTA indicata qui sotto: il controllo è letterale, `
       + `quindi "5,3%" conta e "5.3%" no, "1 gennaio 2024" conta e "2024-01-01" no.\n`
-      + `${groupedAnchorEvidence(sourceText, missing.slice(0, 10), quotedEvidence, '  • ')}\n`
+      + `${groupedAnchorEvidence(sourceText, missing.slice(0, 10), '  • ')}\n`
       + `Ogni dato della fonte è verificato: riportarlo è sempre corretto. Se un fatto ti sembra dubbio, `
       + `attribuiscilo alla fonte invece di ometterlo. Non sostituire i dati della fonte con formulazioni generiche.`,
     ));
