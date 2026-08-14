@@ -385,6 +385,86 @@ function strandedVerdict({ mode, state, baselineLastSeenAt, nowMs = Date.now(), 
 }
 
 /**
+ * Git blob SHA-1 di un buffer — `sha1("blob <len>\0" + bytes)`, la stessa
+ * identità che GitHub espone nell'albero di un repo. Serve a confrontare un
+ * file LOCALE con l'inventario del sito senza scaricare nemmeno un byte di
+ * contenuto: la sola API `git/trees?recursive=1` porta già gli SHA di tutti i
+ * blob, in UNA richiesta.
+ */
+function gitBlobSha(buf) {
+  return crypto.createHash('sha1').update(`blob ${buf.length}\0`).update(buf).digest('hex');
+}
+
+/**
+ * Il punto cieco che `corpus-only` apre, e che nessuna classe copriva.
+ *
+ * `classify()` esce sul ramo `corpus-only` alla PRIMA riga, senza mai
+ * interrogare il sito: la dichiarazione "non esiste là" viene creduta per
+ * sempre, e se un giorno smette di essere vera nessuno se ne accorge. Il file
+ * resta fuori dalla sorveglianza mentre i due lati sono già gemelli, e una fix
+ * su un lato lascia l'altro rotto in silenzio.
+ *
+ * Misurato il 2026-08-14 su 62 voci `corpus-only`: DUE avevano già un gemello
+ * byte-identico sul sito — `generator/scripts/lib/headline-selection-protocol.mjs`
+ * e `generator/scripts/lib/cross-section-dedup.mjs`, entrambe atterrate in
+ * `scripts/lib/` del sito.
+ *
+ * Il confronto è per CONTENUTO e non per path, ed è questo a renderlo capace di
+ * vedere ciò che un fetch su `path` non vedrebbe: quei due file vivono a un
+ * path DIVERSO sui due lati, quindi un `siteHash(path)` avrebbe risposto 404 e
+ * confermato la classificazione sbagliata. È la stessa forma del punto cieco di
+ * `alert-pat-down.mjs` e di `SiteShellContract`: un legame che non ha la forma
+ * che il guard sa seguire.
+ *
+ * PURA: prende i fatti già raccolti e non fa rete, come `ghostVerdict` e
+ * `strandedVerdict`. È questo a renderla testabile offline e deterministica.
+ *
+ * @param {object} a
+ * @param {string} a.mode          il `mode` della voce di manifest
+ * @param {string|null} a.blobSha  git blob SHA del file in QUESTO repo; null se
+ *   assente o illeggibile → mai un verdetto (fail-open)
+ * @param {Map<string,string[]>|null} a.siteBlobIndex  blobSha → path sul sito.
+ *   null quando l'inventario non è disponibile (rete giù, `--no-provenance`):
+ *   fail-open, come tutto il resto dello script.
+ * @returns {{misclassified: boolean, sitePaths: string[]}}
+ */
+function corpusOnlyTwinVerdict({ mode, blobSha, siteBlobIndex }) {
+  // Solo `corpus-only`. `corpus-only-pending` dichiara GIÀ che il gemello
+  // arriverà e ha il suo stato `-landed`: segnalarla qui sarebbe rumore su un
+  // lavoro già tracciato.
+  if (mode !== 'corpus-only') return { misclassified: false, sitePaths: [] };
+  if (!blobSha || !siteBlobIndex) return { misclassified: false, sitePaths: [] };
+  const sitePaths = siteBlobIndex.get(blobSha);
+  if (!sitePaths || !sitePaths.length) return { misclassified: false, sitePaths: [] };
+  return { misclassified: true, sitePaths: [...sitePaths].sort() };
+}
+
+/**
+ * Inventario dei blob del sito: `blobSha → [path, ...]`. UNA richiesta per
+ * l'intero albero. Fail-open: qualunque problema (rete, troncamento, HTTP)
+ * restituisce null, e `corpusOnlyTwinVerdict` con `siteBlobIndex` null non
+ * emette nessun verdetto. Un inventario a metà darebbe FALSI NEGATIVI
+ * silenziosi, quindi un albero `truncated` viene scartato invece che usato.
+ */
+async function siteBlobIndex() {
+  const url = `https://api.github.com/repos/${SITE_REPO}/git/trees/${SITE_REF}?recursive=1`;
+  const headers = { 'User-Agent': 'loop-drift-check', Accept: 'application/vnd.github+json' };
+  if (process.env.GH_TOKEN) headers.Authorization = `Bearer ${process.env.GH_TOKEN}`;
+  const res = await fetch(url, { headers });
+  if (!res.ok) return null;
+  const tree = await res.json();
+  if (!tree || !Array.isArray(tree.tree) || tree.truncated) return null;
+  const index = new Map();
+  for (const node of tree.tree) {
+    if (node.type !== 'blob' || !node.sha) continue;
+    const at = index.get(node.sha);
+    if (at) at.push(node.path);
+    else index.set(node.sha, [node.path]);
+  }
+  return index;
+}
+
+/**
  * Classifica UN file. Ritorna {state, actionable, headline, detail}.
  *
  * `actionable` distingue ciò che richiede una decisione da ciò che è solo
@@ -614,6 +694,48 @@ async function main() {
     return 0;
   }
 
+  // Passata a parte, DOPO il ciclo principale: le voci `corpus-only` escono da
+  // `classify()` senza mai toccare il sito, quindi la loro classificazione non
+  // è verificata da niente. Qui si verifica per CONTENUTO — l'unica chiave che
+  // regge quando il gemello vive a un path diverso sui due lati, che è proprio
+  // il caso in cui la dichiarazione sbagliata sopravvive. Costo: UNA richiesta
+  // per l'intero albero del sito, non una per file.
+  const corpusOnly = manifest.files.filter((e) => e.mode === 'corpus-only');
+  if (!INIT && corpusOnly.length) {
+    let index = null;
+    try {
+      index = await siteBlobIndex();
+    } catch {
+      index = null; // PROCEED-SAFE: senza inventario nessun verdetto, mai un falso rosso.
+    }
+    for (const entry of corpusOnly) {
+      let blobSha = null;
+      try {
+        const abs = path.join(ROOT, entry.path);
+        if (fs.existsSync(abs)) blobSha = gitBlobSha(fs.readFileSync(abs));
+      } catch {
+        blobSha = null;
+      }
+      const twin = corpusOnlyTwinVerdict({ mode: entry.mode, blobSha, siteBlobIndex: index });
+      if (!twin.misclassified) continue;
+      results.push({
+        path: entry.path,
+        mode: entry.mode,
+        state: 'corpus-only-twin',
+        actionable: true,
+        headline: `dichiarato \`corpus-only\`, ma il sito ha lo STESSO contenuto in ${twin.sitePaths.map((p) => `\`${p}\``).join(', ')}`,
+        detail:
+          "`classify()` esce sul ramo `corpus-only` senza mai interrogare il sito: finche' la voce " +
+          "dice 'non esiste la\'', il file resta fuori da ogni sorveglianza — e qui i due lati sono " +
+          'gia\' byte-identici, quindi una fix su un lato lascerebbe il gemello rotto in silenzio. ' +
+          'Un fetch su `path` non lo avrebbe visto, perche\' il gemello sta a un path DIVERSO: e\' la ' +
+          'stessa forma del punto cieco di `alert-pat-down.mjs`. Riclassifica a `identical` (o ' +
+          '`adapted` se la divergenza e\' voluta) con `sitePath` e la baseline dei due lati.',
+        hashes: { blobSha, sitePaths: twin.sitePaths },
+      });
+    }
+  }
+
   const actionable = results.filter((r) => r.actionable);
 
   if (AS_JSON) {
@@ -628,7 +750,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', 'stranded-twin', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', 'corpus-only-twin', 'stranded-twin', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -657,6 +779,7 @@ async function main() {
       '',
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
       section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
+      section('corpus-only-twin', '🔴 Dichiarato `corpus-only`, ma il gemello esiste identico sul sito'),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
@@ -707,4 +830,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify, ghostVerdict, strandedVerdict };
+export { classify, ghostVerdict, strandedVerdict, corpusOnlyTwinVerdict, gitBlobSha };

@@ -100,9 +100,9 @@ const isoAgo = (hours) => new Date(Date.now() - hours * 3600_000).toISOString().
 function checkRuns({ concl = 'success', pending = 0 } = {}) {
   const runs = [];
   if (concl !== null) {
-    runs.push({ name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: concl });
+    runs.push({ id: 1000, name: CHECK_NAME, status: 'completed', completed_at: isoAgo(3), conclusion: concl });
   }
-  for (let i = 0; i < pending; i++) runs.push({ name: CHECK_NAME, status: 'in_progress', completed_at: null });
+  for (let i = 0; i < pending; i++) runs.push({ id: 2000 + i, name: CHECK_NAME, status: 'in_progress', completed_at: null });
   return { check_runs: runs };
 }
 
@@ -115,7 +115,7 @@ function reviews({ commit = OLD_SHA, body = 'nessun blocco' } = {}) {
  * Esegue il blocco `run:` con `gh` e `date` stubbati e restituisce
  * `{ labeled, comments, stdout }`.
  */
-function runScan({ prs, checks, reviews: revs, dryRun = false }) {
+function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = false }) {
   const dir = mkdtempSync(path.join(tmpdir(), 'stale-pr-rescuer-'));
   try {
     const bin = path.join(dir, 'bin');
@@ -124,13 +124,21 @@ function runScan({ prs, checks, reviews: revs, dryRun = false }) {
     const fixPrs = path.join(dir, 'prs.json');
     const fixChecks = path.join(dir, 'checks.json');
     const fixReviews = path.join(dir, 'reviews.json');
+    const fixComments = path.join(dir, 'comments.json');
     writeFileSync(calls, '');
     writeFileSync(fixPrs, JSON.stringify(prs));
     writeFileSync(fixChecks, JSON.stringify(checks));
     writeFileSync(fixReviews, JSON.stringify(revs));
+    writeFileSync(fixComments, JSON.stringify(posted));
 
-    // `gh`: serve le tre letture del rescuer e registra le due scritture.
-    // Ogni scrittura finisce in `calls` in una forma greppabile dal test.
+    // `gh`: serve le QUATTRO letture del rescuer e registra le tre scritture
+    // (add-label, remove-label, comment). Ogni scrittura finisce in `calls` in
+    // una forma greppabile dal test.
+    //
+    // Il ramo `api` scarta i flag PRIMA di leggere il path: dal fix della #314
+    // ogni chiamata è `gh api --paginate <path>`, e uno stub che prendesse
+    // ciecamente `$1` leggerebbe `--paginate` come path e cadrebbe nel default
+    // `{}` — cioè un test verde su un rescuer che non vede più niente.
     writeFileSync(
       path.join(bin, 'gh'),
       `#!/usr/bin/env bash
@@ -139,8 +147,15 @@ case "$sub" in
   pr)
     action="$1"; shift
     case "$action" in
-      list) cat ${JSON.stringify(fixPrs)} ;;
-      edit) printf 'LABEL %s\\n' "$1" >> ${JSON.stringify(calls)} ;;
+      edit)
+        n="$1"; shift
+        act="LABEL"
+        while [ $# -gt 0 ]; do
+          if [ "$1" = "--remove-label" ]; then act="UNLABEL"; fi
+          shift
+        done
+        printf '%s %s\\n' "$act" "$n" >> ${JSON.stringify(calls)}
+        ;;
       comment)
         n="$1"; shift
         body=""
@@ -153,10 +168,21 @@ case "$sub" in
     esac
     ;;
   api)
-    p="$1"
+    p=""
+    while [ $# -gt 0 ]; do
+      case "$1" in
+        --paginate|--slurp) shift ;;
+        --jq|-H|-f|-F|-X) shift 2 ;;
+        *) if [ -z "$p" ]; then p="$1"; fi; shift ;;
+      esac
+    done
+    # L'ordine dei pattern conta: \`.../pulls/N/reviews\` matcha anche
+    # \`*/pulls*\`, quindi le foglie vanno prima della lista.
     case "$p" in
-      */check-runs) cat ${JSON.stringify(fixChecks)} ;;
-      */reviews) cat ${JSON.stringify(fixReviews)} ;;
+      */check-runs*) cat ${JSON.stringify(fixChecks)} ;;
+      */reviews*)    cat ${JSON.stringify(fixReviews)} ;;
+      */comments*)   cat ${JSON.stringify(fixComments)} ;;
+      */pulls*)      cat ${JSON.stringify(fixPrs)} ;;
       *) echo '{}' ;;
     esac
     ;;
@@ -212,29 +238,40 @@ fi
 
     const raw = readFileSync(calls, 'utf8');
     const labeled = [...raw.matchAll(/^LABEL (\d+)$/gm)].map((m) => Number(m[1]));
+    const unlabeled = [...raw.matchAll(/^UNLABEL (\d+)$/gm)].map((m) => Number(m[1]));
     const comments = [...raw.matchAll(/^COMMENT (\d+)\n([\s\S]*?)\n<<<END>>>$/gm)].map((m) => ({
       pr: Number(m[1]),
       body: m[2],
     }));
-    return { labeled, comments, stdout };
+    return { labeled, unlabeled, comments, stdout };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
 }
 
-/** Una PR aperta, non draft, ferma da 5h (oltre la soglia di 2h del rescuer). */
+/**
+ * Una PR aperta, non draft, ferma da 5h (oltre la soglia di 2h del rescuer).
+ *
+ * Forma REST (`head.ref`, `head.sha`, `updated_at`, `draft`) e non quella di
+ * `gh pr list --json`: dal fix della #314 il rescuer legge
+ * `gh api --paginate repos/:r/pulls` e rimappa i campi in jq. La fixture DEVE
+ * parlare la lingua dell'API vera, altrimenti pinnerebbe una forma che nessuno
+ * riceve più.
+ */
 const openPr = (over = {}) => [
   {
     number: 901,
-    headRefName: 'fix/qualcosa',
-    headRefOid: HEAD_SHA,
-    updatedAt: isoAgo(5),
-    author: { login: 'claude' },
+    head: { ref: 'fix/qualcosa', sha: HEAD_SHA },
+    updated_at: isoAgo(5),
+    user: { login: 'claude' },
     labels: [],
-    isDraft: false,
+    draft: false,
     ...over,
   },
 ];
+
+/** La stessa PR, ma già etichettata `stale-review`. */
+const staleLabelled = (over = {}) => openPr({ labels: [{ name: 'stale-review' }], ...over });
 
 const only = (r) => {
   assert.equal(r.comments.length, 1, `atteso UN commento, ricevuti ${r.comments.length}:\n${r.stdout}`);
@@ -355,7 +392,7 @@ test('una PR toccata da meno di 2h non viene mai etichettata', opts, () => {
   // `updatedAt`, il fallback del workflow renderebbe fresca OGNI PR e tutti i
   // casi sopra sarebbero verdi a vuoto.
   const r = runScan({
-    prs: openPr({ updatedAt: isoAgo(0.5) }),
+    prs: openPr({ updated_at: isoAgo(0.5) }),
     checks: checkRuns({ concl: 'success' }),
     reviews: reviews({ commit: OLD_SHA }),
   });
@@ -392,7 +429,157 @@ test('nessuna cella muta con review più vecchia dell\'head e nessun run in volo
   );
 });
 
-// ── 5. D è un sottoinsieme stretto di A: nessuna PR etichettata in più ──────
+// ── 5. IL CASO #314: la label non deve spegnere la valutazione ─────────────
+//
+// Il rescuer saltava in cima al ciclo ogni PR che avesse già `stale-review`.
+// Il corto circuito è che quella label è ANCHE ciò che fa saltare la PR a
+// `pr-review-loop.yml`: una PR entrata in classe C con i test rossi, riparata
+// dopo, diventa una classe D — verde, con una review più vecchia dell'head —
+// che nessuno poteva più vedere. Verde per ogni gate, senza review, per
+// sempre. Esattamente lo stallo permanente che questo workflow esiste per
+// rompere, prodotto dal workflow stesso.
+
+test('IL CASO #314: una PR già `stale-review` viene RI-VALUTATA, non saltata', opts, () => {
+  const r = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
+  });
+  assert.equal(
+    r.comments.length,
+    1,
+    'La PR ha già `stale-review` e il rescuer non l\'ha classificata: è il corto circuito della ' +
+      `#314. La label che dovrebbe segnalare lo stallo lo rende invisibile.\n${r.stdout}`,
+  );
+  assert.match(
+    r.comments[0].body,
+    /review più vecchia dell'head/,
+    `Ri-valutata, ma non come classe D: è lo stato in cui una classe C riparata finisce.\n${r.comments[0].body}`,
+  );
+});
+
+test('#314 — idempotenza: stessa classe sullo stesso head non ri-commenta', opts, () => {
+  // Il loop che il vecchio salto voleva evitare. Si chiude sulla coppia
+  // (CLASSE, HEAD) invece che sulla sola esistenza della label: più stretto,
+  // e senza spegnere la valutazione.
+  const first = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding' }),
+  });
+  assert.equal(first.comments.length, 1, first.stdout);
+
+  const again = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding' }),
+    comments: [{ body: first.comments[0].body }],
+  });
+  assert.deepEqual(
+    again.comments,
+    [],
+    'Stessa classe e stesso head, e il rescuer ha commentato di nuovo: a un cron orario ' +
+      `sarebbero 24 commenti al giorno sulla stessa PR.\n${again.stdout}`,
+  );
+  assert.deepEqual(again.labeled, [], 'nessuna azione attesa quando il verdetto è già stato consegnato');
+});
+
+test('#314 — classe DIVERSA sullo stesso head: il fatto nuovo viene detto', opts, () => {
+  // È la transizione che il vecchio salto rendeva invisibile: C (test rossi)
+  // → D (riparata, verde, review vecchia). Il marker della classe C non deve
+  // sopprimere il verdetto della classe D.
+  const cComment = `🔧 **stale-review** (automatico)\n<!-- stale-pr-rescuer class=C head=${HEAD_SHA.slice(0, 7)} -->`;
+  const r = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding' }),
+    comments: [{ body: cComment }],
+  });
+  assert.equal(
+    r.comments.length,
+    1,
+    'Il marker di una classe PRECEDENTE ha soppresso il verdetto della classe nuova: ' +
+      `l\'idempotenza sarebbe di nuovo un corto circuito, solo più difficile da vedere.\n${r.stdout}`,
+  );
+  assert.match(r.comments[0].body, /review più vecchia dell'head/, r.comments[0].body);
+});
+
+test('#314 — stallo rientrato: `stale-review` viene TOLTA, non lasciata lì', opts, () => {
+  // L'altra metà. Finché la label resta, `pr-review-loop.yml` salta la PR e
+  // `recycle-stale-prs` la conta fra le chiudibili a 24h: un segnale scaduto
+  // può far chiudere una PR sana. Qui la review è SULL'head, i test sono verdi
+  // e non c'è nessun 🔴 → nessuna classe scatta.
+  const r = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'tutto a posto\n\n## LGTM' }),
+  });
+  assert.deepEqual(r.comments, [], `Nessuno stallo: nessun commento atteso.\n${r.stdout}`);
+  assert.deepEqual(
+    r.unlabeled,
+    [901],
+    'La label `stale-review` non è stata rimossa a stallo rientrato. Nessun altro workflow la ' +
+      `toglie: resta finché la PR non viene chiusa.\n${r.stdout}`,
+  );
+});
+
+test('#314 — con un run in volo la label NON viene tolta: lo stato non è noto', opts, () => {
+  // Fail-safe: `TESTS_PENDING > 0` significa "non lo sappiamo ancora", e
+  // togliere la label lì cancellerebbe un segnale valido per un run che deve
+  // ancora rispondere.
+  const r = runScan({
+    prs: staleLabelled(),
+    checks: checkRuns({ concl: null, pending: 1 }),
+    reviews: reviews({ commit: HEAD_SHA, body: 'ok' }),
+  });
+  assert.deepEqual(r.unlabeled, [], `Label tolta mentre un check è ancora in volo.\n${r.stdout}`);
+});
+
+// ── 6. Troncamento e ordinamento: i due difetti silenziosi della #314 ───────
+
+test('#314 — nessuna lettura `gh` senza `--paginate`', opts, () => {
+  // Metrica della scheda. Una risposta troncata non produce nessun errore: le
+  // PR oltre il taglio semplicemente non esistono per il rescuer, e sono le
+  // più vecchie — cioè quelle che ha il compito di trovare.
+  const offenders = readFileSync(WF_PATH, 'utf8')
+    .split('\n')
+    .map((l, i) => [i + 1, l])
+    .filter(([, l]) => /\bgh (api|pr list)\b/.test(l) && !l.includes('--paginate'));
+  assert.deepEqual(
+    offenders.map(([n, l]) => `${n}: ${l.trim()}`),
+    [],
+    'Letture `gh` senza `--paginate`: troncano in silenzio.',
+  );
+});
+
+test('#314 — due check completati nello STESSO secondo: vince il più recente per `id`', opts, () => {
+  // `completed_at` è ISO8601 risolto al secondo, e due run sullo stesso SHA
+  // che chiudono nello stesso secondo sono ordinari (un rerun parte quando il
+  // primo sta finendo). A parità di chiave `sort_by` è STABILE, quindi senza
+  // tie-break `last` è "l'ultimo che l'API ha elencato" — un ordine che non è
+  // il tempo. Qui il `failure` è elencato per ultimo ma ha l'`id` più BASSO:
+  // è il `success` (id maggiore) il verdetto vero.
+  const sameSecond = isoAgo(3);
+  const r = runScan({
+    prs: openPr(),
+    checks: {
+      check_runs: [
+        { id: 5002, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'success' },
+        { id: 5001, name: CHECK_NAME, status: 'completed', completed_at: sameSecond, conclusion: 'failure' },
+      ],
+    },
+    reviews: reviews({ commit: OLD_SHA, body: 'un finding, niente LGTM' }),
+  });
+  const body = only(r);
+  assert.match(
+    body,
+    /review più vecchia dell'head/,
+    'Con `sort_by(.completed_at)` senza tie-break vince il `failure` stantio elencato per ultimo ' +
+      `e un success reale viene mascherato: la PR cade in classe C invece che in D.\n${body}`,
+  );
+});
+
+// ── 7. D è un sottoinsieme stretto di A: nessuna PR etichettata in più ──────
 
 test('D non allarga l\'insieme delle PR etichettate', opts, () => {
   // Il predicato di D aggiunge tre congiunzioni al predicato di A e non ne
