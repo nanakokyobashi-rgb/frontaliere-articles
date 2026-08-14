@@ -116,7 +116,10 @@ export const AI_MODELS = Object.freeze({
   // Gemma models use the same Gemini API endpoint — 14,400 req/day each!
   GEMINI_FLASH:     'gemini-2.5-flash',
   GEMINI_PRO:       'gemini-2.5-pro',
-  GEMINI_2_FLASH:   'gemini-2.0-flash',
+  // GEMINI_2_FLASH removed — Gemini API HTTP 404 "models/gemini-2.0-flash is no longer available.
+  //                 Please update your code to use a newer model version" (2026-08-14, run 31807331152).
+  //                 Same failure shape as the GEMINI_31_FLASH_LITE removal below: a dead pinned id kept
+  //                 winning the fallback selector every run because 404 doesn't mark it exhausted.
   GEMINI_FLASH_LITE:'gemini-2.5-flash-lite',
   // Gemma models via Gemini API — 14,400 req/day each!
   GEMMA_4_31B:      'gemma-4-31b-it',
@@ -138,7 +141,9 @@ export const AI_MODELS = Object.freeze({
   GEMINI_FLASH_LATEST:        'gemini-flash-latest',
   GEMINI_FLASH_LITE_LATEST:   'gemini-flash-lite-latest',
   GEMINI_PRO_LATEST:          'gemini-pro-latest',
-  GEMINI_2_FLASH_LITE:        'gemini-2.0-flash-lite',
+  // GEMINI_2_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-2.0-flash-lite is no longer
+  //                       available. Please update your code to use a newer model version"
+  //                       (2026-08-14, run 31807331152), same deprecation wave as GEMINI_2_FLASH above.
   GEMINI_31_FLASH_LITE_GA:    'gemini-3.1-flash-lite',
 
   // ── Groq (OpenAI-compatible, ultra-fast inference) ──
@@ -425,7 +430,7 @@ export const DEFAULT_CHAIN = [
   // SN_LLAMA_3_3_70B removed — SambaNova HTTP 402 PAYMENT_METHOD_REQUIRED (2026-04)
   // AI_MODELS.O1 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.LLAMA_3_2_90B removed chain — GitHub Models HTTP 400 "unknown_model: Llama-3.2-90B-Vision-Instruct" (2026-07-05, confirmed retired live, 12x in 30-run sample)
-  AI_MODELS.GEMINI_2_FLASH,     // 25. Google 2.0 flash       (Gemini API free)
+  // AI_MODELS.GEMINI_2_FLASH removed chain — Gemini API HTTP 404 "models/gemini-2.0-flash is no longer available" (2026-08-14, run 31807331152).
   // AI_MODELS.GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                                 The deprecated preview kept winning the fallback selector because 404 didn't mark it exhausted, causing the
   //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. The GA non-preview model
@@ -569,7 +574,7 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GEMINI_FLASH_LATEST,        // alias → today's stable flash
   AI_MODELS.GEMINI_FLASH_LITE_LATEST,   // alias → today's stable flash-lite
   AI_MODELS.GEMINI_PRO_LATEST,          // alias → today's stable pro
-  AI_MODELS.GEMINI_2_FLASH_LITE,        // Gemini 2.0 flash lite (extra quota)
+  // AI_MODELS.GEMINI_2_FLASH_LITE removed chain — Gemini API HTTP 404 "models/gemini-2.0-flash-lite is no longer available" (2026-08-14, run 31807331152).
   AI_MODELS.GEMINI_31_FLASH_LITE_GA,    // Gemini 3.1 flash lite GA (non-preview)
   // Groq compound full (not just mini)
   AI_MODELS.GROQ_COMPOUND_FULL,
