@@ -7268,7 +7268,10 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     },
     {
       label: 'senza fatti-di-dominio + rimedio troncato + fonte al 60%',
-      sourceBody: _clampSourceBody(truncatedContent, Math.round(truncatedContent.length * 0.6)),
+      sourceBody: _clampSourceBody(
+        truncatedContent,
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, Math.round(truncatedContent.length * 0.6)),
+      ),
       domainFacts: '',
       remediation: _remediationShort,
     },
