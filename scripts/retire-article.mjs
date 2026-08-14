@@ -65,7 +65,7 @@ const SECTIONS = {
     seoFiles: null, // scoperti a runtime: content/seo/seo-blog-*.ts
     seoGlobPrefix: 'content/seo/seo-blog-',
     sourceLedger: 'data/article-source-urls.json',
-    sidecarDir: 'data/articles',
+    sidecarDir: 'data/blog-articles',
   },
   svizzera: {
     registryFile: 'content/swiss-articles-data.ts',

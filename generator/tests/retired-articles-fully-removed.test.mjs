@@ -67,7 +67,7 @@ const SURFACES = {
     meta: LOCALES.map((l) => `content/blog-meta-${l}.ts`),
     bodyDir: 'content/blog-body',
     ledger: 'data/article-source-urls.json',
-    sidecarDir: 'data/articles',
+    sidecarDir: 'data/blog-articles',
   },
   svizzera: {
     registry: 'content/swiss-articles-data.ts',
