@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-13T06:19:43.177Z",
-  "dateIso": "2026-08-13",
+  "generatedAt": "2026-08-14T06:17:17.240Z",
+  "dateIso": "2026-08-14",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 22771
+    "jobsActive": 22910
   },
   "blocks": {
     "borderWait": {
@@ -16,23 +16,17 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-13T06:06:25.579Z",
+      "generatedAt": "2026-08-14T06:06:11.759Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 96,
-      "cheaperSwissCount": 46,
-      "tieCount": 3,
+      "cheaperItalyCount": 83,
+      "cheaperSwissCount": 62,
+      "tieCount": 0,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
           "province": "SO",
           "minPriceEur": 1.518,
           "stationName": "TOTAL ERG - LIVIGNO"
-        },
-        {
-          "municipality": "Besozzo",
-          "province": "VA",
-          "minPriceEur": 1.769,
-          "stationName": "BESOZZO SUPERIORE STR.PROV.VERGIATE/LUINO"
         },
         {
           "municipality": "Sondrio",
@@ -51,6 +45,12 @@
           "province": "VA",
           "minPriceEur": 1.854,
           "stationName": "ENI 2904"
+        },
+        {
+          "municipality": "Gera Lario",
+          "province": "CO",
+          "minPriceEur": 1.879,
+          "stationName": "IPERAL CARBURANTI GERA LARIO"
         }
       ],
       "bestSavings": [
@@ -59,56 +59,56 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.518,
-          "swissPriceEur": 2.029,
+          "swissPriceEur": 2.027,
           "swissPriceChf": 1.9,
-          "saving50LEur": 25.55
+          "saving50LEur": 25.45
         },
         {
           "municipality": "Campodolcino",
           "province": "SO",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.175,
-          "swissPriceEur": 1.911,
+          "swissPriceEur": 1.91,
           "swissPriceChf": 1.79,
-          "saving50LEur": 13.2
+          "saving50LEur": 13.25
         },
         {
-          "municipality": "Besozzo",
-          "province": "VA",
+          "municipality": "Aprica",
+          "province": "SO",
           "cheaperCountry": "IT",
-          "italyPriceEur": 1.769,
-          "swissPriceEur": 2.018,
-          "swissPriceChf": 1.89,
-          "saving50LEur": 12.45
+          "italyPriceEur": 1.919,
+          "swissPriceEur": 2.123,
+          "swissPriceChf": 1.99,
+          "saving50LEur": 10.2
         }
       ],
       "cheapestSwissStation": {
         "name": "Alpina Tankstelle",
         "sp95PriceChf": 1.42,
-        "sp95PriceEur": 1.516,
+        "sp95PriceEur": 1.515,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
-      "rate": 1.0685,
-      "lastDate": "2026-08-12",
-      "prevRate": 1.0688,
-      "prevDate": "2026-08-11",
+      "rate": 1.0674,
+      "lastDate": "2026-08-13",
+      "prevRate": 1.0677,
+      "prevDate": "2026-08-12",
       "delta1d": -0.0003,
-      "rate7dAgo": 1.0708,
-      "delta7d": -0.0023,
+      "rate7dAgo": 1.0703,
+      "delta7d": -0.0029,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-13T03:53:53.581Z",
-      "activeJobs": 22771,
-      "activeCompanies": 846,
-      "todayAdded": 457,
-      "yesterdayAdded": 901,
-      "last7dAdded": 4700
+      "generatedAt": "2026-08-14T02:22:37.076Z",
+      "activeJobs": 22910,
+      "activeCompanies": 851,
+      "todayAdded": 413,
+      "yesterdayAdded": 864,
+      "last7dAdded": 4332
     }
   }
 }
