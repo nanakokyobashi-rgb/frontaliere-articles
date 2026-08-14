@@ -305,7 +305,11 @@ function alberoDiProva(fileSporchi) {
   fs.mkdirSync(path.join(radice, 'content'), { recursive: true });
   fs.writeFileSync(path.join(radice, 'content', 'pulito.ts'), FILE_PULITO);
   for (const [nome, testo] of Object.entries(fileSporchi)) {
-    fs.writeFileSync(path.join(radice, 'content', nome), testo);
+    const dove = path.join(radice, 'content', nome);
+    // `nome` puo' essere annidato (`blog-body-ch/de/x.ts`): senza questo mkdir
+    // il test che copre la seconda cartella dei corpi non potrebbe scriverla.
+    fs.mkdirSync(path.dirname(dove), { recursive: true });
+    fs.writeFileSync(dove, testo);
   }
   return radice;
 }
@@ -366,6 +370,56 @@ test('CLI: --apply e\' un alias di --write, non un dry-run travestito', () => {
     const { rapporto } = esegui(radice, ['--apply']);
     assert.equal(rapporto.modalita, 'SCRITTURA');
     assert.equal(fs.readFileSync(path.join(radice, 'content', 'sporco.ts'), 'utf8'), 'les dépenses\n');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+// Le DUE cartelle dei corpi, e perche' serve un test che lo dica.
+//
+// I corpi articolo di questo repo stanno in `content/blog-body/<loc>/` (sezione
+// frontaliere) E in `content/blog-body-ch/<loc>/` (sezione svizzera).  Il
+// walker di questo script scende ricorsivamente in `content/`, quindi le prende
+// entrambe PER COSTRUZIONE — ed e' esattamente la forma di copertura che in
+// questo repo e' gia' fallita in silenzio: un `loadBody()` hardcoded su
+// `content/blog-body/` non ha mai guardato `blog-body-ch/`, dove stavano tutte
+// le occorrenze che si cercavano.
+//
+// Falsificato prima di scriverlo, sul corpus vero di `origin/main`: aggiungendo
+// a `elencaFileDisco` un `if (v.name === 'blog-body-ch') continue;` il dry-run
+// passa da «26 file / 224 occorrenze» a «25 file / 221» — perde
+// `content/blog-body-ch/de/credito-imposta-frontalieri-2026.ts` e i suoi 3
+// marker — e le 46 asserzioni preesistenti restavano TUTTE verdi.  Con questo
+// test quella mutazione e' rossa.
+//
+// Il gemello `scripts/find-dirty-content-ids.mjs` questa prova ce l'ha gia'
+// (togliere `blog-body-ch` da `BODY_DIR_SECTIONS` rompe 2 dei suoi 39 test):
+// qui mancava, ed e' il lato che SCRIVE.
+test('CLI: il walker scende in ENTRAMBE le cartelle dei corpi, blog-body/ e blog-body-ch/', () => {
+  const sporco = `les d${B(0x0e)}9penses\n`;
+  const radice = alberoDiProva({
+    'blog-body/fr/frontaliere.ts': sporco,
+    'blog-body-ch/de/svizzera.ts': sporco,
+  });
+  try {
+    const { rapporto } = esegui(radice, ['--write']);
+    assert.equal(rapporto.fileConMarker, 2, 'il walker deve vedere due file, uno per cartella');
+    assert.equal(rapporto.riparate, 2);
+    const visti = rapporto.perFile.map((f) => f.file).sort();
+    assert.deepEqual(visti, [
+      'content/blog-body-ch/de/svizzera.ts',
+      'content/blog-body/fr/frontaliere.ts',
+    ], 'il rapporto deve nominare tutte e due le cartelle');
+    // La prova che conta e' sul disco: il file della sezione svizzera dev\'essere
+    // stato RISCRITTO, non solo elencato.
+    assert.equal(
+      fs.readFileSync(path.join(radice, 'content', 'blog-body-ch', 'de', 'svizzera.ts'), 'utf8'),
+      'les dépenses\n',
+    );
+    assert.equal(
+      fs.readFileSync(path.join(radice, 'content', 'blog-body', 'fr', 'frontaliere.ts'), 'utf8'),
+      'les dépenses\n',
+    );
   } finally {
     fs.rmSync(radice, { recursive: true, force: true });
   }
