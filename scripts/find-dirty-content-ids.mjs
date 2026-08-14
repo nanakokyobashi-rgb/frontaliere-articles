@@ -34,6 +34,14 @@
 // e' la stessa classe di falso negativo di `grep` senza `-a`: uno strumento che
 // risponde «zero» quando la risposta onesta e' «non lo so».
 //
+// TRE SPELLING, NON DUE (issue #345). La forma escapata di sopra copre i C0
+// che sono SEMPRE illegali (`\u00XX`, `\b`, `\f`). TAB (0x09) e' legale in
+// XML/JSON, quindi non entra li' — ma quando TAB stesso e' il marker di un
+// carattere perduto, la sua forma escapata resta `\t` seguito dalla coda
+// numerica, indistinguibile da un a-capo escapato solo dal CODICE carattere.
+// Vedi «LA TERZA SPELLING» piu' sotto per il criterio (ancorato al residuo,
+// non al codice) e la misura che lo giustifica.
+//
 // COSA CERCA, PASSO 2 — il filtro sulla PAGINA LIVE, e perche' esiste
 // (issue #73). Il passo 1 da solo NON CONVERGE. Ripubblicare una pagina non
 // riscrive `content/` — il corpus lo scrive solo il generatore, e i 592 byte
@@ -246,15 +254,51 @@ export function decodeEscapedControlChars(text) {
   });
 }
 
-/** Quante occorrenze C0 porta `text`, nelle DUE spelling messe insieme. */
+// ── LA TERZA SPELLING: il TAB escapato incollato a una cifra (issue #345) ───
+//
+// TAB (0x09) e' uno dei tre C0 che XML 1.0 e JSON ammettono, quindi
+// `isInvalidControlCode` lo esclude di proposito — vedi la guardia in
+// `ESCAPED_C0_RX` e il test che la difende ("NON conta le forme escapate di
+// TAB, LF e CR"). Un oracolo che contasse OGNI `\t` escapato marcherebbe
+// sporco ogni file con un a-capo escapato legittimo, che nel corpus e' la
+// norma. Per questo il criterio qui non e' sul CODICE carattere ma sul
+// RESIDUO, come per il canale residuo di repair-mangled-chars.mjs: la stessa
+// firma (marker + coda numerica) delle altre due spelling gia' coperte, dove
+// pero' il marker e' gia' nella sua forma "legale" e cio' che lo tradisce e'
+// solo la cifra incollata subito dopo.
+//
+// Misurato sul corpus reale (2026-08-14): OGNI occorrenza di `\+t` (uno o piu'
+// backslash seguiti da "t") dentro `content/` e' seguita da una cifra — 7
+// file, 7 occorrenze, zero file con un `\t` isolato o seguito da altro carattere:
+//
+//   grep -roP '\\+t[0-9]' content/ | wc -l   →  7
+//   grep -roP '\\+t[^0-9]' content/ | wc -l  →  0
+//
+// Cioe' oggi non esiste un solo a-capo escapato legittimo da salvare: il
+// criterio "backslash-t incollato a una cifra" e' gia' esatto senza bisogno di
+// ancorarlo anche a una lettera adiacente (tre delle sette occorrenze, come
+// `Cos\'\\t3e`, la portano; le altre quattro, come `since \\t2 applied?`,
+// hanno spazi da entrambi i lati — la stessa forma osservata nell'issue).
+const ESCAPED_TAB_RESIDUE_RX = /\\+t(?=[0-9])/g;
+
+/** Ogni residuo di TAB escapato in `text`, come `{ index, spelling }`. */
+export function findEscapedTabResidues(text) {
+  const found = [];
+  if (typeof text !== 'string') return found;
+  for (const m of text.matchAll(ESCAPED_TAB_RESIDUE_RX)) found.push({ index: m.index, spelling: m[0] });
+  return found;
+}
+
+/** Quante occorrenze C0 porta `text`, nelle TRE spelling messe insieme (issue #345: il residuo di TAB escapato si somma alle due gia' coperte). */
 export function countControlCharsBothSpellings(text) {
-  return findControlChars(text).length + findEscapedControlChars(text).length;
+  return findControlChars(text).length + findEscapedControlChars(text).length + findEscapedTabResidues(text).length;
 }
 
 /**
  * Id sporchi in un chunk meta (content/blog-meta-<locale>.ts): ogni riga la
  * cui chiave nomina un articolo E porta un C0 illegale, in una qualunque delle
- * due spelling. I chunk meta esistono solo per la sezione frontaliere.
+ * spelling coperte da `countControlCharsBothSpellings`. I chunk meta esistono
+ * solo per la sezione frontaliere.
  */
 export function dirtyIdsInMetaText(text) {
   const ids = new Set();
@@ -578,7 +622,10 @@ export function scanContentForDirtyIds(rootDir) {
    */
   const conta = (text, rel) => {
     const grezze = findControlChars(text).length;
-    const escapate = findEscapedControlChars(text).length;
+    // Il residuo di TAB escapato (issue #345) e' un'ALTRA forma escapata, non
+    // un canale a parte: si somma qui cosi' `totalEscapedOccurrences` resta
+    // "tutto cio' che il byte-scan non vede", la sua definizione dichiarata.
+    const escapate = findEscapedControlChars(text).length + findEscapedTabResidues(text).length;
     return {
       totale: grezze + escapate,
       escapate,
