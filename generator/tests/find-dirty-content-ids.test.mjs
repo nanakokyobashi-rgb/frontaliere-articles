@@ -63,6 +63,7 @@ import {
   decodeEscapedControlChars,
   countControlCharsBothSpellings,
   findEscapedTabResidues,
+  residuesFromEscapedTabResidues,
   BODY_DIR_SECTIONS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
@@ -997,6 +998,19 @@ test("scanContentForDirtyIds vede un body la cui UNICA sporcizia e' il residuo d
     assert.equal(residuesInText(testo).size, 0, 'nessun byte grezzo, quindi nessun residuo per il criterio vecchio');
     assert.equal(findEscapedControlChars(testo).length, 0, 'nessun C0 sempre-illegale in forma escapata: TAB non lo e\'');
     assert.equal(countControlCharsBothSpellings(testo), 1, 'una occorrenza, vista solo dalla terza spelling');
+    // Review PR #352, round 3 (Important): questa asserzione codificava il
+    // difetto. `residuesInText` da solo resta a zero (e' corretto: guarda solo
+    // il byte grezzo), ma il candidato deve comunque ricevere un residuo da
+    // QUALCHE parte, o chi ripubblica non ha nulla su cui decidere quando la
+    // pagina torna pulita. `residuesFromEscapedTabResidues` lo ricava dal
+    // token che resta a cavallo del marker una volta tolto SOLO il marker:
+    // 'Cos\'\\t3e' meno '\\t' e' 'Cos\'3e', e il token '3e' mescola lettera e
+    // cifra, la stessa firma di `residuesInText`.
+    assert.deepEqual(
+      [...residuesFromEscapedTabResidues(testo)],
+      ['3e'],
+      'la terza spelling deve produrre un residuo proprio, non restare a mani vuote',
+    );
 
     const { ids, totalFiles, totalOccurrences, totalEscapedOccurrences } = scanContentForDirtyIds(root);
     assert.deepEqual(ids.map((e) => `${e.section}:${e.id}`), ['frontaliere:permessi-dimora-diversi-opinioni']);
@@ -1006,6 +1020,15 @@ test("scanContentForDirtyIds vede un body la cui UNICA sporcizia e' il residuo d
     assert.ok(
       ids[0].sources.some((s) => s.endsWith('(c0 escapato)')),
       `sorgente senza l'etichetta della forma escapata: ${ids[0].sources.join(', ')}`,
+    );
+    // Il finding della review: prima di questa fix questo era `[]`, perche'
+    // `mark()` riceveva solo `residuesInText(text)`. Ora la scansione unisce
+    // anche `residuesFromEscapedTabResidues`, quindi il candidato porta il
+    // residuo che serve a decidere, dal vivo, quando la pagina e' tornata pulita.
+    assert.deepEqual(
+      ids[0].residues,
+      ['3e'],
+      `entry.residues vuoto per un candidato la cui unica sporcizia e' la terza spelling: ${JSON.stringify(ids[0].residues)}`,
     );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
