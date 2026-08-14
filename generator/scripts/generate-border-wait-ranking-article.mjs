@@ -38,6 +38,7 @@ import { isTicinoCrossing } from '../build-plugins/borderWaitData.ts';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -140,6 +141,11 @@ export function buildData(todayIso, windowPayload = loadWindow()) {
 
 /** Rewrite only the 4 body files (idempotent refresh; registration is append-only). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
+  // Guard in processo, non solo nello step di workflow (follow-up #315 a #309):
+  // i percorsi di scrittura sono DUE — `registerArticleFiles()` alla prima
+  // registrazione, e questo `writeFileSync` a ogni refresh successivo. Il guard
+  // copriva solo il primo. Fail-closed: ripara il riparabile, lancia sul resto.
+  sanitizePromptPlaceholders(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });

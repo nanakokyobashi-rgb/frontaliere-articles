@@ -43,6 +43,7 @@ import { reportStrippedControlChars } from './lib/control-char-write-report.mjs'
 import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
+import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -51,6 +52,17 @@ const SNAPSHOT_PATH = path.join(REPO_ROOT, 'public', 'data', 'daily-brief.json')
 
 /** Rewrite only the 4 body files (idempotent same-day refresh). */
 export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) {
+  // Il guard sui segnaposto sta QUI e non solo nel workflow (follow-up #315 a
+  // #309). L'intestazione di `prompt-placeholder-guard.mjs` dice che gira
+  // «dentro registerArticleFiles(), cioe' sul percorso di scrittura CONDIVISO»
+  // — ma i percorsi di scrittura sono DUE: la prima registrazione passa dal
+  // registrar, il rerun idempotente no, scrive con `writeFileSync` qui sotto.
+  // Finche' la copertura era il solo step di workflow, una chiamata diretta a
+  // questa funzione (o un `main()` che entra nel ramo `exists`) scriveva senza
+  // controllo, e l'offender si vedeva solo dopo, a corpus gia' scritto.
+  // Fail-closed come nel registrar: `sanitizePromptPlaceholders` ripara cio'
+  // che e' riparabile e LANCIA sul primo campo che non lo e'.
+  sanitizePromptPlaceholders(data);
   for (const locale of LOCALES) {
     const dir = path.join(repoRoot, corpusPath('services/locales/blog-body'), locale);
     mkdirSync(dir, { recursive: true });
@@ -80,6 +92,12 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
  * that touched nothing).
  */
 export function refreshMetaAndSeo(data, repoRoot = REPO_ROOT) {
+  // Stessa ragione di `refreshBodyFiles` (follow-up #315): questa e' l'altra
+  // meta' del rerun, e riscrive proprio i campi descrittivi — excerpt,
+  // seoDescription, ogDescription, seo.description — che il guard tratta come
+  // NON riparabili (lancia invece di ricostruire, per non propagare il leak).
+  // Idempotente: su `data` gia' sanificato da `refreshBodyFiles` ritorna [].
+  sanitizePromptPlaceholders(data);
   const localeTexts = {};
   for (const locale of LOCALES) {
     const c = data.content?.[locale];

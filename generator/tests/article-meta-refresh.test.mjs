@@ -40,6 +40,7 @@ import {
   SEO_OG_DESCRIPTION_MAX,
 } from '../scripts/lib/article-meta-refresh.mjs';
 import { buildDescriptiveTexts, buildDailyBriefArticle } from '../scripts/lib/daily-brief-content.mjs';
+import { sanitizePromptPlaceholders } from '../scripts/lib/prompt-placeholder-guard.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const GENERATE_SCRIPT = path.join(HERE, '..', 'scripts', 'generate-daily-brief-article.mjs');
@@ -486,10 +487,14 @@ test('wiring: refreshMetaAndSeo mappa data.content/data.seo su refreshDescriptiv
     return { changed: true, touched: ['stub-file'] };
   };
   const FAKE_ROOT = '/fake/repo/root';
+  // `sanitizePromptPlaceholders` e' iniettata quella VERA (follow-up #315): la
+  // guardia sui segnaposto e' passata in processo, e questo sandbox eseguirebbe
+  // il corpo reale con un identificatore non definito. Il fixture qui sotto e'
+  // pulito, quindi la guardia e' un no-op e la mappatura sotto test non cambia.
   const refreshMetaAndSeo = new Function(
-    'LOCALES', 'refreshDescriptiveTexts', 'REPO_ROOT',
+    'LOCALES', 'refreshDescriptiveTexts', 'REPO_ROOT', 'sanitizePromptPlaceholders',
     `${fnSrc}\n`,
-  )(['it', 'en', 'de', 'fr'], stubRefresh, FAKE_ROOT);
+  )(['it', 'en', 'de', 'fr'], stubRefresh, FAKE_ROOT, sanitizePromptPlaceholders);
 
   const data = {
     id: 'demo-id',
