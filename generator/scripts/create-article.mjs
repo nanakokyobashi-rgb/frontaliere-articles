@@ -152,6 +152,14 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+// Issue #313 — la disposizione di una cascata svuotata (differire vs gridare).
+// Estratta in un modulo perche' questo file non e' importabile da un test; vedi
+// l'intestazione di lib/exhaustion-disposition.mjs per la misura.
+import {
+  EXIT_ROSTER_CANNOT_SERVE_PROMPT,
+  isInputCapDeferralVeto,
+  inputCapVetoSummary,
+} from './lib/exhaustion-disposition.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -10970,6 +10978,16 @@ function isDuplicateError(e) {
   return /DUPLICATO/i.test(String(e.message || ''));
 }
 
+// ── IL VETO SUL DIFFERIMENTO (issue #313 / #348) ───────────────────────────
+//
+// La regola vive in `lib/exhaustion-disposition.mjs` e NON qui, per una ragione
+// sola: questo file non e' importabile da un test (761 KB, e la prima cosa che
+// fa e' una chiamata di rete), quindi una regola scritta qui dentro sarebbe
+// verificabile solo leggendo il sorgente come testo. Nel modulo `node --test`
+// la esegue davvero — vedi `generator/tests/roster-exhaustion-red.test.mjs`.
+// La misura che l'ha resa necessaria (un pareggio 53/53 sulla run 31817957722,
+// dieci ore di run verdi senza un articolo) sta nell'intestazione del modulo.
+
 async function main() {
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
@@ -13455,6 +13473,25 @@ if (invokedDirectly) {
   // back-off retries later instead of marking the run failed and raising a
   // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
   // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  // ISSUE #313 / #348 — il veto viene PRIMA del differimento, non dopo: e' il
+  // solo ordine in cui puo' impedirlo. Vedi isInputCapDeferralVeto() per la
+  // misura (53/53, un pareggio, 10 ore di verde).
+  if (isInputCapDeferralVeto(e)) {
+    const { estimatedRequestTokens, maxSkippedReqLimit, over, refusals } = inputCapVetoSummary(e);
+    const cap = { count: refusals, estimatedRequestTokens, maxSkippedReqLimit };
+    finalizeRunReport('error', {
+      notes: [...RUN_REPORT.notes, `Roster cannot serve this prompt (input cap): ${e.message}`],
+    });
+    console.error(
+      `\n❌ Il roster non puo' servire questo prompt: ${cap.count} modelli hanno rifiutato ~${cap.estimatedRequestTokens} token`
+      + ` contro un cap massimo di ${cap.maxSkippedReqLimit} (oltre di ~${over}).`
+      + ` NON e' un esaurimento di quota: nessuna finestra oraria rimpicciolisce un prompt, quindi differire qui e' un ciclo infinito`
+      + ` (issue #313: 60+ run 'success' consecutive senza un articolo). Accorciare il prompt di almeno ${over} token,`
+      + ` oppure rendere raggiungibile un modello con contesto adeguato (claude-cli/haiku).`,
+    );
+    console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
+    process.exit(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
   if (isQuotaExhaustedError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
     console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera). Riprovo al prossimo run. ${e.message}`);
