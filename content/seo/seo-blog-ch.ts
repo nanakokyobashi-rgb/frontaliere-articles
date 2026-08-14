@@ -23222,44 +23222,6 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-un-matrimonio-che-vale-cento-posti-di-lavoro': {
-    title: 'Un matrimonio che vale cento posti di lavoro | Frontaliere Ticino',
-    description: 'La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di',
-    keywords: 'frontalieri, ticino, svizzera, italia, matrimonio, vale, cento, posti',
-    ogTitle: 'Un matrimonio che vale cento posti di lavoro',
-    ogDescription: 'La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di',
-    canonicalPath: '/articoli-svizzera/un-matrimonio-che-vale-cento-posti-di-lavoro/',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Un matrimonio che vale cento posti di lavoro",
-      "description": "La notizia è stata ufficializzata venerdì scorso a Prato Sornico. In Vallemaggia si celebra un matrimonio che vale complessivamente un centinaio di posti di",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/un-matrimonio-che-vale-cento-posti-di-lavoro.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Un matrimonio tra quattro ditte edili in Vallemaggia"
-      },
-      "datePublished": "2026-08-04T05:05:39+00:00",
-      "dateModified": "2026-08-04T05:05:39+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
-        "name": "Redazione Frontaliere Ticino",
-        "url": "https://frontaliereticino.ch/autori/redazione/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/un-matrimonio-che-vale-cento-posti-di-lavoro/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-angestellte-schweiz-aumento-2027': {
     title: 'Angestellte Schweiz chiede un aumento salariale dell\'1,5% per il 2027',
@@ -25406,44 +25368,6 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-autostrada-riapertura-ticino': {
-    title: 'Davvero servono ore e ore per riaprire un\'autostrada?',
-    description: 'I gran consiglieri leghisti chiedono chiarimenti al Consiglio di Stato dopo il caos sulla A2. Dati aggiornati 2026 per frontalieri in Ticino.',
-    keywords: 'frontalieri, ticino, svizzera, italia, davvero, servono, riaprire, autostrada',
-    ogTitle: 'Davvero servono ore e ore per riaprire un\'autostrada?',
-    ogDescription: 'I gran consiglieri leghisti chiedono chiarimenti al Consiglio di Stato dopo il caos sulla A2.',
-    canonicalPath: '/articoli-svizzera/autostrada-riapertura-ticino/',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Davvero servono ore e ore per riaprire un'autostrada?",
-      "description": "I gran consiglieri leghisti chiedono chiarimenti al Consiglio di Stato dopo il caos sulla A2. Dati aggiornati 2026 per frontalieri in Ticino.",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/autostrada-riapertura-ticino.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Immagine di un tratto congestionato dell'autostrada A2 in Ticino, Svizzera, con didascalia sul lungo atteso dei pendolari."
-      },
-      "datePublished": "2026-08-09T16:24:49+00:00",
-      "dateModified": "2026-08-09T16:24:49+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
-        "name": "Redazione Frontaliere Ticino",
-        "url": "https://frontaliereticino.ch/autori/redazione/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/autostrada-riapertura-ticino/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-sistema-sanitario-svizzero-lamal-guida-2026-canton-basilea': {
     title: 'Guida al sistema sanitario svizzero: LAMal e scelta della cassa malati',
@@ -29813,44 +29737,6 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
-  'blog-effetto-domino-fallite-aziende-svizzera': {
-    title: 'Effetto domino: fallite più aziende che mai dal 1994',
-    description: 'Rispetto allo stesso periodo del 2025 si registra una crescita del 54,7% delle fallite. Le aziende con più di dieci anni di attività rappresentano il 38%',
-    keywords: 'frontalieri, ticino, svizzera, italia, effetto, domino, fallite, aziende',
-    ogTitle: 'Effetto domino: fallite più aziende che mai dal 1994 | Frontaliere Ticino',
-    ogDescription: 'Rispetto allo stesso periodo del 2025 si registra una crescita del 54,7% delle fallite. Le aziende con più di dieci anni di attività rappresentano il 38% dei casi.',
-    canonicalPath: '/articoli-svizzera/effetto-domino-fallite-aziende-svizzera/',
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "NewsArticle",
-      "headline": "Effetto domino: fallite più aziende che mai dal 1994",
-      "description": "Rispetto allo stesso periodo del 2025 si registra una crescita del 54,7% delle fallite. Le aziende con più di dieci anni di attività rappresentano il 38%",
-      "image": {
-        "@type": "ImageObject",
-        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
-        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
-        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
-        "creditText": "Frontaliere Ticino",
-        "url": `${BASE_URL}/images/blog/effetto-domino-fallite-aziende-svizzera.webp`,
-        "width": 1200,
-        "height": 675,
-        "caption": "Immagine di un lago svizzero con una diga in primo piano"
-      },
-      "datePublished": "2026-08-12T13:56:54+00:00",
-      "dateModified": "2026-08-12T13:56:54+00:00",
-      "inLanguage": "it",
-      "author": {
-        "@type": "Person",
-        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
-        "name": "Marco Ferrari",
-        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
-      },
-      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
-      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/effetto-domino-fallite-aziende-svizzera/`,
-      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
-    }
-  },
 
   'blog-aumento-iva-per-la-difesa': {
     title: 'Verso un aumento dell\'IVA per la difesa | Frontaliere Ticino',

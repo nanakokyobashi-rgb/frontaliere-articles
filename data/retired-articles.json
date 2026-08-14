@@ -1,0 +1,53 @@
+{
+  "_doc": "Articoli RITIRATI da questo corpus e i loro slug localizzati, preservati al momento della rimozione. Scritto da scripts/retire-article.mjs, sorvegliato da generator/tests/retired-articles-fully-removed.test.mjs. DUE RAGIONI PER CUI ESISTE. (1) Una rimozione PARZIALE non degrada l'articolo ritirato: scripts/build-api.mjs incrocia registro, mappa slug e meta, e un id presente in uno solo dei tre fa fallire la pubblicazione dell'INTERA superficie dati (news-ticker: article <id> has no <loc> slug — refusing to publish). Il test usa questo elenco per verificare che ogni id ritirato sia sparito da TUTTE le superfici e che il vincitore sia invece ancora al suo posto. (2) I quattro slug localizzati di un articolo vivono solo in content/routerSwissData.ts / routerBlogData.ts: nell'istante in cui l'articolo viene rimosso non sono piu' derivabili da nessun registro, e sono esattamente cio' che serve al repo del SITO per scrivere le voci EDGE_RETIRED_PATHS in infra/cloudflare-worker/locale-router.js — l'unico strato che ritira davvero l'URL, perche' lo shard degli otto prefissi articolo e' append-only e continua a servire le vecchie pagine. Rimuovere qui NON produce un 404: produce una pagina orfana che continua a rispondere 200 finche' la voce edge non atterra. Fonte: nanakokyobashi-rgb/frontaliere-articles#304 item 1.",
+  "retired": [
+    {
+      "id": "autostrada-riapertura-ticino",
+      "section": "svizzera",
+      "winnerId": "autostrada-a2-mezzovico-interrogazione",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-08-14",
+      "duplicateOf": [
+        "https://www.tio.ch/ticino/politica/1942847/davvero-servono-ore-e-ore-per-riaprire-un-autostrada"
+      ],
+      "slugs": {
+        "it": "autostrada-riapertura-ticino",
+        "en": "a2-highway-riopening-ticino",
+        "de": "a2-autobahn-wiedereroffnung-tessin",
+        "fr": "autoroute-a2-ouverture-again-tessin"
+      }
+    },
+    {
+      "id": "effetto-domino-fallite-aziende-svizzera",
+      "section": "svizzera",
+      "winnerId": "fallimenti-aziende-svizzera-1994",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-08-14",
+      "duplicateOf": [
+        "https://www.tio.ch/svizzera/economia/1943399/aziende-settori-fallite-effetto-svizzera"
+      ],
+      "slugs": {
+        "it": "effetto-domino-fallite-aziende-svizzera",
+        "en": "domino-effect-failed-companies-switzerland",
+        "de": "domino-effekt-gefallene-unternehmen-schweiz",
+        "fr": "effet-domino-filiale-dentreprise-suisse"
+      }
+    },
+    {
+      "id": "un-matrimonio-che-vale-cento-posti-di-lavoro",
+      "section": "svizzera",
+      "winnerId": "matrimonio-aziendale-vallemaggia-100",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-08-14",
+      "duplicateOf": [
+        "https://www.tio.ch/ticino/attualita/1941660/sa-lavoro-vallemaggia-posti-matrimonio-vale"
+      ],
+      "slugs": {
+        "it": "un-matrimonio-che-vale-cento-posti-di-lavoro",
+        "en": "a-union-of-four-construction-companies-in-vallemaggia",
+        "de": "eine-verbindung-von-vier-bauunternehmen-in-vallemaggia",
+        "fr": "un-mariage-entre-quatre-entreprises-de-construction-en-vallemaggia"
+      }
+    }
+  ]
+}
