@@ -39,6 +39,25 @@
  *       L'unico caso che richiede davvero un umano: due modifiche indipendenti
  *       sullo stesso file. Nessun merge automatico, per scelta.
  *
+ * ## `stranded-twin`: il `site-ahead` che non arriverà mai (issue #303)
+ *
+ * Le quattro classi sopra dicono CHI si è mosso, mai DA QUANTO — e per
+ * `site-ahead` è la differenza fra due situazioni opposte. Un file che il sito
+ * ha toccato ieri è latenza: qualcuno lo porterà. Uno fermo da due settimane
+ * non aspetta nessuno, perché **non esiste un trasporto che lo porti**.
+ * Producevano la stessa identica riga, ogni giorno, nella stessa issue: e una
+ * riga che non cambia mai smette di essere letta. Cinque gemelli sono rimasti
+ * indietro fino al 2026-08-14 (fino a 15,75 giorni) con questo check verde su
+ * di loro ogni mattina.
+ *
+ * Il punto strutturale, misurato: `mirror-articles-engine.yml` porta giù
+ * `engine/` da solo, e il manifest tiene `engine/` `outOfScope` PROPRIO perché
+ * un trasporto ce l'ha. Sorvegliato e trasportato sono quindi insiemi
+ * disgiunti per costruzione — **122 voci `identical` su 122 senza trasporto
+ * automatico** — e questo script è l'unica cosa che se ne accorge.
+ * `stranded-twin` è quel verdetto con l'età attaccata; l'età arriva dal walk
+ * di storia che la verifica di provenienza paga già.
+ *
  * Un file `mode: "adapted"` non è esente dal confronto: è esente dal
  * REQUISITO DI UGUAGLIANZA. Continua a essere sorvegliato sulla baseline,
  * perché è proprio sui file adattati che una modifica del sito si perde più
@@ -100,6 +119,10 @@
  *                           per i contenuti, e va incontro al rate-limit anonimo
  *                           (60/h) per le chiamate `commits` della provenienza.
  *   PROVENANCE_HISTORY_CAP  default 100 (il `per_page` massimo dell'API commits).
+ *   STRANDED_AFTER_DAYS     default 3; giorni dopo i quali un `identical` fermo
+ *                           in `site-ahead` diventa `stranded-twin`. Con
+ *                           `--no-provenance` l'età non è disponibile e
+ *                           l'escalation non avviene (fail-open).
  */
 
 import fs from 'node:fs';
@@ -125,6 +148,10 @@ const CORPUS_REF = process.env.GITHUB_SHA || 'main';
 // più lunga del cap, un mancato match resta "non verificato", MAI "ghost" —
 // vedi `ghostVerdict`.
 const PROVENANCE_HISTORY_CAP = Number(process.env.PROVENANCE_HISTORY_CAP || 100);
+// Giorni dopo i quali un gemello `identical` fermo in `site-ahead` smette di
+// essere latenza e diventa un `stranded-twin` (issue #303). Vedi
+// `strandedVerdict` per la calibrazione del default.
+const STRANDED_AFTER_DAYS = Number(process.env.STRANDED_AFTER_DAYS || 3);
 
 const ARGS = new Set(process.argv.slice(2));
 const AS_JSON = ARGS.has('--json');
@@ -200,9 +227,19 @@ async function repoHistoryMatch({ repo, ref, filePath, targetHash, cap = PROVENA
     // sotto questo nome. Si prosegue con gli altri commit.
     if (!r.ok) continue;
     const hash = sha256(Buffer.from(await r.arrayBuffer()));
-    if (hash === targetHash) return { match: true, exhausted: true, checked };
+    // `matchedDate` — la data del commit PIÙ RECENTE il cui blob è ancora la
+    // baseline. I commit arrivano dal più nuovo al più vecchio e ci si ferma al
+    // primo match, quindi questo è l'ultimo istante in cui quel lato ERA
+    // allineato: la divergenza è cominciata subito dopo. È la misura che
+    // `strandedVerdict` usa per l'età, e arriva senza una sola chiamata di rete
+    // in più (questo walk lo paga già la verifica di provenienza, che gira
+    // proprio quando un lato si è mosso dalla baseline — cioè nel caso
+    // `site-ahead`).
+    if (hash === targetHash) {
+      return { match: true, exhausted: true, checked, matchedDate: commit?.commit?.committer?.date || null };
+    }
   }
-  return { match: false, exhausted, checked };
+  return { match: false, exhausted, checked, matchedDate: null };
 }
 
 /**
@@ -246,6 +283,11 @@ async function checkBaselineProvenance(entry, now) {
   const base = entry.baseline || {};
   const ghosts = [];
   const notes = [];
+  // Ultimo istante in cui il SITO era ancora sulla baseline (vedi `matchedDate`
+  // in repoHistoryMatch). Resta null quando il lato sito non si è mosso, quando
+  // la baseline non è verificabile, o su errore di rete: in tutti e tre i casi
+  // `strandedVerdict` non escalation, per costruzione.
+  let siteBaselineLastSeenAt = null;
 
   async function checkSide(side, { repo, ref, filePath, baselineHash, currentHash }) {
     if (baselineHash == null) return;
@@ -256,6 +298,7 @@ async function checkBaselineProvenance(entry, now) {
         const r = await repoHistoryMatch({ repo, ref, filePath, targetHash: baselineHash });
         historyMatch = r.match;
         historyExhausted = r.exhausted;
+        if (side === 'site' && r.match) siteBaselineLastSeenAt = r.matchedDate;
         if (!r.match) {
           notes.push(
             `\`baseline.${side}\` (${baselineHash}) non combacia con l'attuale, e non e' stata trovata in ` +
@@ -275,7 +318,70 @@ async function checkBaselineProvenance(entry, now) {
   await checkSide('site', { repo: SITE_REPO, ref: SITE_REF, filePath: sitePath, baselineHash: base.site, currentHash: now.site });
   await checkSide('corpus', { repo: CORPUS_REPO, ref: CORPUS_REF, filePath: rel, baselineHash: base.corpus, currentHash: now.corpus });
 
-  return { ghosts, detail: notes.join(' ') };
+  return { ghosts, detail: notes.join(' '), siteBaselineLastSeenAt };
+}
+
+/**
+ * Un gemello `identical` è fermo in `site-ahead` da troppo tempo? (issue #303)
+ *
+ * ## Il buco che chiude
+ *
+ * `classify()` dice CHI si è mosso, mai DA QUANTO. Per `site-ahead` la
+ * differenza è tutto: un file che il sito ha toccato ieri è latenza normale —
+ * qualcuno lo porterà — mentre uno fermo da due settimane non sta aspettando
+ * nessuno, perché **non esiste un trasporto che lo porti**. I due casi
+ * producono oggi la stessa riga, nella stessa issue, ogni giorno: e una riga
+ * che non cambia mai smette di essere letta. È così che cinque gemelli sono
+ * rimasti indietro fino al 2026-08-14 con il drift check verde su di loro ogni
+ * mattina.
+ *
+ * ## Perché non è un doppione del mirror
+ *
+ * `mirror-articles-engine.yml` porta giù `engine/` da solo, e il manifest lo
+ * dichiara `outOfScope` PROPRIO per quello ("hanno gia' un canale di discesa
+ * AUTOMATICO"). L'insieme sorvegliato e l'insieme trasportato sono quindi
+ * disgiunti per costruzione: misurato il 2026-08-14, **122 voci `identical` su
+ * 122 non hanno nessun trasporto automatico**, e l'unica cosa che si accorge
+ * che una è rimasta indietro è questo script. Che finora non guardava l'età.
+ *
+ * ## La soglia
+ *
+ * Il check gira una volta al giorno, quindi sotto le 24h un `site-ahead` non
+ * significa ancora niente. `STRANDED_AFTER_DAYS` default 3 — sopra la latenza
+ * del cron, sopra un fine settimana, e calibrato sui cinque casi reali del
+ * 2026-08-14: divergenti da 2,50 / 2,50 / 3,88 / 5,96 / 15,75 giorni. A 3
+ * giorni i tre più vecchi si accendono e i due appena mossi restano latenza —
+ * che è esattamente la separazione voluta.
+ *
+ * ## Perché `identical` e basta
+ *
+ * Un `adapted` in `site-ahead` non è "fermo": non è copiabile, e la sua riga
+ * chiede già di rileggere la modifica e riapplicarla a mano. Alzare la voce
+ * sull'età lì produrrebbe rumore su un lavoro che ha un'istruzione diversa.
+ *
+ * Pura, come `ghostVerdict`: prende i fatti raccolti e non fa rete. È questo a
+ * renderla testabile offline.
+ *
+ * @param {object} a
+ * @param {string} a.mode                   il `mode` della voce di manifest
+ * @param {string} a.state                  il verdetto di `classify()`
+ * @param {string|null} a.baselineLastSeenAt data ISO dell'ultimo commit del sito
+ *   ancora sulla baseline; null se sconosciuta → MAI stranded (fail-open, come
+ *   il resto dello script: un dato mancante non deve produrre un rosso).
+ * @param {number} a.nowMs
+ * @param {number} a.thresholdDays
+ * @returns {{stranded: boolean, ageDays: number|null}}
+ */
+function strandedVerdict({ mode, state, baselineLastSeenAt, nowMs = Date.now(), thresholdDays = STRANDED_AFTER_DAYS }) {
+  if (mode !== 'identical' || state !== 'site-ahead') return { stranded: false, ageDays: null };
+  const seenMs = baselineLastSeenAt ? Date.parse(baselineLastSeenAt) : NaN;
+  if (!Number.isFinite(seenMs)) return { stranded: false, ageDays: null };
+  const ageDays = (nowMs - seenMs) / 86_400_000;
+  // Una data nel FUTURO (clock skew, o una baseline registrata da un commit
+  // non ancora visibile) darebbe un'età negativa: non è stranded, è un dato che
+  // non si sa leggere. Stessa fail-open del ramo sopra.
+  if (!(ageDays >= 0)) return { stranded: false, ageDays: null };
+  return { stranded: ageDays >= thresholdDays, ageDays };
 }
 
 /**
@@ -469,7 +575,35 @@ async function main() {
         hashes: { ...now, baseline: base },
       });
     } else {
-      results.push({ path: rel, mode: entry.mode, ...verdict, hashes: { ...now, baseline: base } });
+      // Issue #303: un `identical` in `site-ahead` da oltre la soglia non è
+      // latenza, è un gemello che nessun trasporto porta. Escalation del solo
+      // `state` (headline/detail compresi): il verdetto sottostante resta
+      // vero — il sito è andato avanti — e questo ne aggiunge l'età, che è
+      // l'unica cosa che distingue "arriverà" da "non arriverà mai".
+      const stranded = strandedVerdict({
+        mode: entry.mode,
+        state: verdict.state,
+        baselineLastSeenAt: provenance.siteBaselineLastSeenAt,
+      });
+      if (stranded.stranded) {
+        const days = stranded.ageDays.toFixed(1);
+        results.push({
+          path: rel,
+          mode: entry.mode,
+          state: 'stranded-twin',
+          actionable: true,
+          headline: `dichiarato identico al sito, ma fermo indietro da ${days} giorni`,
+          detail:
+            `Il sito ha lasciato la baseline il ${provenance.siteBaselineLastSeenAt} e qui non e' mai sceso niente ` +
+            `(soglia: ${STRANDED_AFTER_DAYS} giorni, \`STRANDED_AFTER_DAYS\`). Nessun workflow porta questo path: ` +
+            `\`mirror-articles-engine.yml\` si ferma a \`engine/\`, che il manifest tiene \`outOfScope\` proprio perche' ` +
+            "quello un trasporto ce l'ha. Copia la versione del sito (`sitePath`) e aggiorna a mano la baseline di QUESTA voce.",
+          hashes: { ...now, baseline: base },
+          ageDays: stranded.ageDays,
+        });
+      } else {
+        results.push({ path: rel, mode: entry.mode, ...verdict, hashes: { ...now, baseline: base } });
+      }
     }
   }
 
@@ -494,7 +628,7 @@ async function main() {
       console.log('Niente che richieda una decisione: i due cicli sono allineati, o divergono solo dove dichiarato.');
     } else {
       // Ordine per urgenza decisionale, non alfabetico.
-      const ORDER = ['ghost-baseline', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
+      const ORDER = ['ghost-baseline', 'stranded-twin', 'undeclared-drift', 'both-moved', 'site-ahead', 'corpus-only-pending-landed', 'missing-here', 'removed-on-site', 'corpus-ahead', 'corpus-only-pending'];
       actionable.sort((a, b) => ORDER.indexOf(a.state) - ORDER.indexOf(b.state));
       for (const r of actionable) {
         console.log(`  [${r.state}] ${r.path}`);
@@ -522,6 +656,7 @@ async function main() {
       `${results.length} file sorvegliati, **${actionable.length}** richiedono una decisione.`,
       '',
       section('ghost-baseline', '💀 Baseline fantasma — mai esistita nella storia esaminata'),
+      section('stranded-twin', `🚨 Gemello \`identical\` fermo indietro da oltre ${STRANDED_AFTER_DAYS} giorni — nessun trasporto lo porta`),
       section('undeclared-drift', '🔴 Divergenza non dichiarata'),
       section('both-moved', '🔴 Modificato su entrambi i lati'),
       section('site-ahead', '⬇️ Il sito è andato avanti — da portare qui'),
@@ -533,6 +668,8 @@ async function main() {
       '---',
       '',
       'Le classi `site-ahead` e `corpus-ahead` non sono errori: sono le due direzioni in cui il ciclo evolve. La prima è lavoro da portare, la seconda è un miglioramento locale che probabilmente serve a entrambi i cicli.',
+      '',
+      `\`stranded-twin\` (issue #303) è un \`site-ahead\` a cui è stata misurata l'ETÀ: un gemello dichiarato \`identical\` che il sito ha lasciato indietro da più di ${STRANDED_AFTER_DAYS} giorni. La distinzione è la sola cosa che separa "qualcuno lo porterà" da "non lo porterà nessuno", perché **nessuna** voce \`identical\` di questo manifest ha un trasporto automatico: \`mirror-articles-engine.yml\` copre \`engine/\`, e \`engine/\` è \`outOfScope\` qui proprio per quel motivo. I due insiemi sono disgiunti per costruzione, quindi per ogni file di questo manifest il trasporto è una copia a mano — e finché non la si fa, la riga qui sopra è l'unica cosa che lo dice.`,
       '',
       '`ghost-baseline` (issue #148) è diverso da tutte le altre classi: non descrive dove si è mosso il codice, dice che il DATO della baseline non è mai stato reale — verificato contro l\'intera storia disponibile del path su quel lato (o, se la storia supera il cap di ricerca, la entry non compare qui: un mancato match parziale resta silenzioso per non produrre falsi rossi). La correzione è ricalcolare la baseline dal contenuto REALE, non semplicemente rilanciare `--init`, perché `--init` scrive `now`, che per una entry già rotta potrebbe anch\'esso non essere il valore che ci si aspetta.',
       '',
@@ -570,4 +707,4 @@ if (process.argv[1] && process.argv[1].endsWith('loop-drift-check.mjs')) {
   );
 }
 
-export { classify, ghostVerdict };
+export { classify, ghostVerdict, strandedVerdict };

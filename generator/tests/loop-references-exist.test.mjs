@@ -149,6 +149,17 @@ const DECLARED_ABSENT = {
       'correzione andrebbe fatta sul sito per non creare un corpus-ahead su un file ' +
       'dichiarato uguale.',
   },
+  'scripts/ci/loop-drift-check.mjs :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'Citazione CONTRASTIVA, e il contrasto e\' il contenuto del verdetto `stranded-twin` ' +
+      '(#303): il mirror dell\'engine vive nel repo del SITO e la sua allowlist si ferma a ' +
+      '`engine/`, che questo manifest tiene `outOfScope` proprio perche\' quello un trasporto ' +
+      'ce l\'ha. La riga lo nomina per dire che NON copre i path sorvegliati qui — 122 voci ' +
+      '`identical` su 122 senza trasporto automatico, misurato il 2026-08-14. Niente qui ' +
+      'dipende dalla sua esistenza: se comparisse in questo repo, la frase diventerebbe ' +
+      'falsa, non vera.',
+  },
   'scripts/ci/pr-autorebase.mjs :: .github/workflows/worktree-branch-janitor.yml': {
     kind: 'site-only',
     reason:
