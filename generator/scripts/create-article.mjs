@@ -650,6 +650,27 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
   return result;
 }
 
+// Backstops D and E both restore a top-N slice of a ranked candidate list
+// into a pool that is capped at RESTORE_N=3. `extractHeadlines`/`extractRssItems`
+// dedupe only by URL (issue #311): the same story picked up from two source
+// feeds under two different URLs survives as two distinct headline entries
+// with identical text, and without this filter a ranked slice can burn 2 of
+// its 3 restore slots on one duplicated story — measured in production
+// (2026-08-14, run 31762758743 and siblings): "La folle impresa … da Como a
+// Gera Lario" restored twice, "Ticino 2020, nessun rimborso ai Comuni"
+// restored twice on another run, same pattern on svizzera. Keeps the
+// first (highest-ranked) occurrence of each normalized headline text.
+function dedupeByHeadlineText(ranked, getHeadline) {
+  const seen = new Set();
+  return ranked.filter((entry) => {
+    const key = String(getHeadline(entry) || '').toLowerCase().trim();
+    if (!key) return true;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
 /**
  * Pre-spend topic gate — filters a headlines[] array BEFORE the
  * article-generation `Tentativo` loop. Combines fast anchor regex with the
@@ -758,7 +779,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   let backstopKind = 'none';
   if (kept.length === 0 && strictAnchorMatched.length > 0) {
     const RESTORE_N = 3;
-    const restore = strictAnchorMatched.slice(0, RESTORE_N);
+    const restore = dedupeByHeadlineText(strictAnchorMatched, (entry) => entry.h?.headline).slice(0, RESTORE_N);
     const restoreSet = new Set(restore.map(r => String(r.h?.headline || '')));
     for (const { h, anchor } of restore) {
       kept.push(h);
@@ -826,10 +847,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // attempt 1 and the ranker picks another headline.
   if (kept.length === 0 && headlines.length > 0) {
     const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
-    const ranked = headlines
-      .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
-      .sort((a, b) => (b.hits - a.hits) || (a.i - b.i))
-      .slice(0, RESTORE_N);
+    const ranked = dedupeByHeadlineText(
+      headlines
+        .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
+        .sort((a, b) => (b.hits - a.hits) || (a.i - b.i)),
+      (entry) => entry.h?.headline,
+    ).slice(0, RESTORE_N);
     const restoreSet = new Set(ranked.map(r => String(r.h?.headline || '')));
     for (const { h, hits } of ranked) {
       kept.push(h);
