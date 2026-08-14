@@ -8717,6 +8717,24 @@ function optimizeSeoMetadata(data) {
   const it = data.content?.it || {};
   if (!data.seo) data.seo = {};
 
+  // #300 item 2 — sanitizza PRIMA di derivare, non dopo. `seo.keywords` sotto
+  // e' tokenizzato da `it.title`/`it.excerpt` (piu' avanti in questa stessa
+  // funzione): se uno dei due porta ancora un frammento di segnaposto dello
+  // schema (es. "Sottotitolo con dati concreti dalla fonte"), quel frammento
+  // ("sottotitolo") finisce fra i keyword ANCHE quando excerpt/title vengono
+  // ripuliti dopo — perche' il derivato non viene ricalcolato. Chiamata qui,
+  // in testa alla funzione che entrambi i chiamanti (create-article.mjs:
+  // Step 3, e publish-journalist-article.mjs) invocano prima del proprio
+  // `sanitizePromptPlaceholders()`/`registerArticleFiles()` piu' a valle,
+  // cosi' nessun chiamante puo' dimenticarla. Idempotente: il richiamo
+  // successivo su testo gia' pulito non trova nulla da fare.
+  try {
+    sanitizePromptPlaceholders(data);
+  } catch (e) {
+    e.qualityReject = true;
+    throw e;
+  }
+
   // ── Collision prevention (mirror og-pages runtime disambiguator) ──
   // The og-pages plugin appends " (2026)" / " — Bellinzona" / FNV hash at
   // build time when two articles produce the same base <title>. Prevent
