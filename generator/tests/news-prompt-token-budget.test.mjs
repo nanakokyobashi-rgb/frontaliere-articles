@@ -120,10 +120,17 @@ const DEPS = [
   'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'IT_GENERATION_MAX_TOKENS',
 ];
 
+// `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
+// estratto chiama (la scala di riduzione del budget la usa per accorciare la
+// fonte). Non e' esportata, quindi viene ritagliata dal sorgente come gia' si
+// fa per buildArticleJsonSchema: iniettarne una copia scritta a mano qui
+// misurerebbe la copia, non il codice che gira.
+const clampDecl = cutDecl('function _clampRemediation(') + '\n' + cutDecl('function _clampSourceBody(');
+
 const assemblePrompt = new Function(
   '__d',
-  `const { ${DEPS.join(', ')} } = __d;\n${promptBlock}\n`
-  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch };',
+  `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${promptBlock}\n`
+  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget };',
 );
 
 // ── Fixture: il CASO PEGGIORE REALE, non uno comodo ───────────────────────
@@ -243,10 +250,19 @@ test('l\'estrazione produce il prompt VERO (guardia anti-verde-a-vuoto)', () => 
     'DIVIETI ANTI-ALLUCINAZIONE',
     'SOURCE CONTENT:',
     'ARTICLE IDS',
-    'FATTI DI DOMINIO VERIFICATI',
   ]) {
     assert.ok(prompt.includes(marker), `il prompt estratto non contiene «${marker}»: l'anchor e' scivolato`);
   }
+  // `FATTI DI DOMINIO VERIFICATI` non e' in quella lista perche' sul caso
+  // peggiore la scala di riduzione lo toglie — ed e' il comportamento voluto.
+  // Provarlo dove la scala NON morde e' piu' forte che toglierlo dai marker:
+  // distingue «l'ancora e' scivolata» da «la scala l'ha rimosso».
+  const senzaPressione = newsPrompt({ _promptTokenBudget: 999_999 });
+  assert.equal(senzaPressione.shrink, 0, 'con budget illimitato la scala non deve mordere');
+  assert.ok(
+    senzaPressione.prompt.includes('FATTI DI DOMINIO VERIFICATI'),
+    'il blocco dei fatti di dominio non c\'e\' nemmeno senza pressione di budget: l\'anchor e\' scivolato',
+  );
   // La notizia c'e' davvero, ed e' troncata (fonte oltre MAX_SOURCE_CHARS).
   assert.ok(prompt.includes('imposta alla fonte'), 'la fonte non e\' finita nel prompt');
   assert.ok(prompt.includes('[...contenuto troncato per brevità]'), 'il fixture non satura MAX_SOURCE_CHARS');
@@ -496,4 +512,84 @@ test('il tetto non e\' sopra il cap della flotta senza dirlo', () => {
     + 'e le due costanti vanno unificate',
   );
   assert.equal(PROMPT_TOKEN_BUDGET, 8000, 'il cap piu\' alto dichiarato dalla flotta e\' cambiato: verificare DEFAULT_REQUEST_TOKENS_BY_PROVIDER in ai-models.mjs');
+});
+
+// ═══ La scala di riduzione: quanto morde, e su cosa ══════════════════════
+
+test('la scala porta il ramo NEWS sotto il cap REALE della flotta (8000)', () => {
+  // E' il punto di tutta la modifica: prima di questa scala il ramo news
+  // stava a 9402/9488 token contro un cap di 8000, quindi 41 modelli su ~104
+  // venivano saltati dal pre-flight di callLLM senza tentare la chiamata, e
+  // restava solo `claude-cli/haiku` — l'unico senza cap dichiarato.
+  for (const section of ['frontaliere', 'svizzera']) {
+    const { estTokens, overBudget, shrink } = newsPrompt({}, section);
+    assert.ok(
+      estTokens <= PROMPT_TOKEN_BUDGET,
+      `news ${section}: ${estTokens} token, ancora sopra il cap della flotta (${PROMPT_TOKEN_BUDGET}) `
+      + `dopo ${shrink} gradini di riduzione`,
+    );
+    assert.equal(overBudget, false, `news ${section}: il pre-flight segnala ancora fuori budget`);
+    assert.ok(shrink > 0, `news ${section}: la scala non ha morso, ma il prompt pieno non ci starebbe`);
+  }
+});
+
+test('la scala NON morde quando il prompt ci sta gia\' — l\'evergreen resta intatto', () => {
+  // Il ramo evergreen e' gia' sotto il cap: toccarlo sarebbe una regressione
+  // silenziosa (meno contesto a parita' di necessita').
+  for (const section of ['frontaliere', 'svizzera']) {
+    const { shrink, estTokens } = evergreenPrompt(section);
+    assert.equal(shrink, 0, `evergreen ${section}: la scala ha morso a ${estTokens} token, ma non serviva`);
+  }
+});
+
+test('il budget del retry viene LETTO, non ignorato', () => {
+  // `retryRequestTokenBudget` arriva qui come `_promptTokenBudget`. Un target
+  // piu' STRETTO del default deve far mordere di piu': e' l'intera ragione per
+  // cui callLLM calcola quel numero.
+  const largo = newsPrompt({ _promptTokenBudget: 999_999 });
+  const stretto = newsPrompt({ _promptTokenBudget: 6000 });
+  assert.equal(largo.target, 999_999, 'il target non e\' stato letto dal contesto');
+  assert.equal(stretto.target, 6000, 'il target stretto non e\' stato letto dal contesto');
+  assert.ok(
+    stretto.shrink > largo.shrink,
+    `un target piu' stretto deve ridurre di piu': stretto=${stretto.shrink} largo=${largo.shrink}`,
+  );
+  assert.ok(
+    stretto.estTokens < largo.estTokens,
+    `un target piu' stretto deve produrre un prompt piu' corto: ${stretto.estTokens} vs ${largo.estTokens}`,
+  );
+});
+
+test('la fonte non scende sotto il pavimento dichiarato', () => {
+  // Anche con un target impossibile la scala si ferma: sotto una certa soglia
+  // l'articolo non ha piu' sostanza da riscrivere e il gate di fedelta' non e'
+  // soddisfacibile comunque. Meglio restare sopra budget che consegnare al
+  // writer una fonte inutilizzabile.
+  const impossibile = newsPrompt({ _promptTokenBudget: 100 });
+  assert.ok(impossibile.overBudget, 'con un target da 100 token il prompt DEVE restare sopra budget');
+  assert.ok(
+    impossibile.prompt.includes('SOURCE CONTENT:'),
+    'la fonte e\' sparita del tutto dal prompt',
+  );
+  const dopo = impossibile.prompt.split('SOURCE CONTENT:')[1] || '';
+  const corpo = dopo.split('[...contenuto troncato per brevità]')[0] || '';
+  assert.ok(
+    corpo.length >= 2000,
+    `il corpo della fonte e' sceso a ${corpo.length} caratteri, sotto il pavimento`,
+  );
+});
+
+test('il marker pubblica il gradino di riduzione', () => {
+  // Un watchdog deve poter distinguere «non ha ridotto» da «ha ridotto e non
+  // basta»: senza `shrink=` le due situazioni hanno lo stesso `over=1`.
+  const src = readFileSync(CREATE_ARTICLE, 'utf-8');
+  assert.match(
+    src,
+    /\[prompt-budget\] branch=\$\{_promptBudgetBranch\} section=\$\{SECTION_NAME\} /,
+    'il marker ha cambiato forma: i watchdog che lo leggono smettono di matchare',
+  );
+  assert.ok(
+    src.includes('shrink=${_promptShrinkStep}'),
+    'il marker non pubblica il gradino di riduzione',
+  );
 });
