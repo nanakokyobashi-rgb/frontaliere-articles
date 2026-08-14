@@ -757,6 +757,21 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       kept.push(h);
     } else {
       filtered.push({ headline: headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: headlineText });
+      // Per-candidate rejection marker (#346, follow-up to #337) — before this,
+      // a classifier "no" was only visible as part of the per-run aggregate
+      // (`PRESPEND_GATE_TOTAL_REJECTION`, counts only) or truncated to the
+      // first 5 headlines in the "🔍 Pre-spend topic gate" summary below,
+      // neither attributable to a specific candidate across runs. Retuning the
+      // classifier prompt with real data (rather than blind) needs every
+      // rejection tied to the section that produced it — this line is that
+      // record, one per rejection, `key=value` like the other markers so a
+      // future scanner can parse it with `parseMarkerRecords`. `encodeURIComponent`
+      // keeps headline/reason `\S+`-safe despite spaces and punctuation.
+      console.error(
+        `PRESPEND_GATE_REJECTED section=${SECTION_NAME}`
+        + ` headline=${encodeURIComponent(headlineText.slice(0, 160))}`
+        + ` reason=${encodeURIComponent(verdict.reason || '')}`,
+      );
     }
   }
 
