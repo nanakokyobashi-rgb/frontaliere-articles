@@ -2579,6 +2579,16 @@
         "corpus": "ade3e04bb588571d",
         "alignedAt": "2026-08-14"
       }
+    },
+    {
+      "path": "generator/tests/github-issue-creator-reopen-default.test.mjs",
+      "mode": "corpus-only",
+      "reason": "L'osservatore del ramo di RIAPERTURA di scripts/lib/github-issue-creator.mjs, che e' `identical` ed e' sceso allineato con #343 — ma il drift check confronta i file UNO PER UNO e non vede l'assenza di un test da un lato: il ramo e' arrivato qui con zero guardie e ci sarebbe restato in silenzio. Corpus-only perche' il gemello del sito (tests/github-issue-creator-reopen-default.test.ts) e' un .ts in vitest a un path diverso: qui `node --test` non importa TypeScript, e `mock.method(cp,'execFileSync')` NON raggiunge il binding ESM `import { execFileSync }` (verificato: la chiamata reale passa comunque), quindi il seam e' un `gh` finto in testa a PATH — piu' forte del mock, esercita execFileSync e l'argv veri. I tre test finali sono la parte che il gemello del sito non ha: nessuno dei 22 chiamanti di questo repo passa --reopen-within-hours (misurato 2026-08-14), quindi dipendono TUTTI dal default, e un test che chiama solo la funzione resterebbe verde mentre ogni workflow conia numeri nuovi. Provato per mutazione: 15 mutazioni della logica su 15 lo fanno diventare rosso, il controllo innocuo resta verde, e la regressione opt-in della CLI uccide SOLO il test end-to-end (gli altri 13 restano verdi).",
+      "baseline": {
+        "site": null,
+        "corpus": "0ed29e4bdc719363",
+        "alignedAt": "2026-08-14"
+      }
     }
   ]
 }
