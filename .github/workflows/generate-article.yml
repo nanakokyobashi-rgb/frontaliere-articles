@@ -819,10 +819,52 @@ jobs:
             # Taking upstream costs one catalog entry (the new image's), and the
             # image file itself still lands in the commit; a full rescan restores
             # it. Losing the commit costs the whole article.
+            #
+            # ── I REGISTRI sono una categoria diversa (issue #255, #281, #285) ──
+            #
+            # I path sopra sono cache: la risoluzione giusta e' prendere
+            # upstream, perche' al giro dopo vengono riscritte da zero. I path
+            # sotto `--merge-registry` sono REGISTRI APPEND-ONLY, e per loro
+            # prendere un lato non «perde un aggiornamento»: CANCELLA i record
+            # che quel lato non ha. Aggiungerli all'allowlist di sopra avrebbe
+            # tolto dal registro l'articolo appena generato lasciandone i corpi
+            # sul posto — cioe' avrebbe fabbricato un articolo fantasma invece
+            # di perderlo. Sono due semantiche opposte, quindi due liste.
+            #
+            # Senza questa seconda lista non c'era una terza opzione e il
+            # conflitto abortiva: cinque tentativi, poi `exit 1` qui sotto, con
+            # l'articolo — LLM, quattro traduzioni DeepL, immagine hero, tutto
+            # gia' pagato — perso davvero, non ritardato. Tre occorrenze
+            # misurate: #255 sui path FRONTALIERE, #281 e #285 sui gemelli
+            # SVIZZERA. Entrambe le famiglie sono qui sotto, e
+            # `generator/tests/rebase-onto-remote.test.mjs` deriva l'elenco
+            # atteso da `ARTICLE_SECTION_CORE` + `corpusPath()` invece di
+            # ricopiarlo: un target di scrittura nuovo che non arriva qui fa
+            # rosso il test, che e' esattamente cio' che a #225 non successe.
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
               data/blog-images-used.json \
-              public/data/journalist-image-catalog.json || true
+              public/data/journalist-image-catalog.json \
+              --merge-registry content/blog-articles-data.ts \
+              --merge-registry content/routerBlogData.ts \
+              --merge-registry content/blogArticleIds.ts \
+              --merge-registry content/blog-meta-it.ts \
+              --merge-registry content/blog-meta-en.ts \
+              --merge-registry content/blog-meta-de.ts \
+              --merge-registry content/blog-meta-fr.ts \
+              --merge-registry content/seo/seo-blog-5.ts \
+              --merge-registry content/swiss-articles-data.ts \
+              --merge-registry content/routerSwissData.ts \
+              --merge-registry content/blog-meta-ch-it.ts \
+              --merge-registry content/blog-meta-ch-en.ts \
+              --merge-registry content/blog-meta-ch-de.ts \
+              --merge-registry content/blog-meta-ch-fr.ts \
+              --merge-registry content/seo/seo-blog-ch.ts \
+              --take-theirs content/blog-body/ \
+              --take-theirs content/blog-body-ch/ \
+              --take-theirs data/blog-articles/ \
+              --take-theirs data/swiss-articles/ \
+              --take-theirs public/images/blog/ || true
             sleep $((attempt * 3))
           done
           echo "::error::push failed after 5 attempts — the article is registered locally but not pushed"

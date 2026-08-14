@@ -48,20 +48,111 @@
 # ONTO, so `--ours` is the upstream copy and `--theirs` is this run's. That is
 # inverted relative to a merge, and it is the single easiest thing to get
 # backwards here.
+#
+# ── The SECOND branch: merge per record (issue #255, #281, #285) ─────────────
+#
+# "Take upstream" is one resolution, and it is the only one this script had.
+# For the append-only CONTENT REGISTRIES it is the wrong one, and not by a
+# little: `content/blog-articles-data.ts` and its SVIZZERA twin
+# `content/swiss-articles-data.ts` are not caches rebuilt on the next run, they
+# are the record of every published article. Taking a side does not lose an
+# update, it DELETES the records the other side had.
+#
+# That is why they were never put on the allowlist above — correctly — and, with
+# no third option, why a conflict on them aborted. Which is how they were
+# losing articles anyway: `generate-article.yml` retried five times, the helper
+# aborted five times, and the step died on "the article is registered locally
+# but not pushed" with `exit 1` taking the runner down together with the commit.
+# LLM, four DeepL translations and the hero image, all already paid for, thrown
+# away. #255 measured it on the FRONTALIERE paths, #281 and #285 are the same
+# cause on the SVIZZERA ones.
+#
+# So paths passed with `--merge-registry` take a different route: they go to
+# `merge-content-registry-conflict.mjs`, which unions the records of both sides
+# — an id present on one side only is always kept; an id present on both, with
+# different content, resolves to the REBASED commit, since by construction
+# upstream should not have that slug. That helper refuses to write anything it
+# cannot prove safe (a conflict boundary that falls mid-entry FUSES two records,
+# which is worse than losing the article because it is silent), and when it
+# refuses we abort exactly as before.
 set -euo pipefail
 
 REMOTE="${1:?remote url required}"
 TARGET="${2:?target branch required}"
 shift 2
-ALLOWED=" $* "
 
-# Guard against an empty allowlist: with no paths allowed nothing can ever be
-# resolved, and silently degrading to "always abort" would hide a caller bug
-# behind behaviour that looks exactly like the old code.
-if [ "$ALLOWED" = "  " ]; then
-  echo "::error::rebase-onto-remote.sh called with an empty bookkeeping allowlist"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MERGE_RESOLVER="$SCRIPT_DIR/merge-content-registry-conflict.mjs"
+
+# THREE categories, deliberately not one list: they mean different things about
+# the file, and collapsing any two of them resolves a conflict the wrong way.
+#
+#   (bare path)        cache di bookkeeping   → prendi UPSTREAM
+#   --merge-registry   registro append-only   → unisci i RECORD
+#   --take-theirs      file PER-ARTICOLO      → prendi il commit rigiocato
+#
+# Appending a registry to the bookkeeping allowlist would have "resolved" it by
+# taking upstream — i.e. by deleting this run's article from the registry while
+# keeping its body files, which is the ghost-article shape.
+#
+# `--take-theirs` takes PREFIXES, because these paths carry the slug and cannot
+# be enumerated: `content/blog-body{,-ch}/<locale>/<slug>.ts`,
+# `data/{blog,swiss}-articles/<slug>.json`, the hero image and its thumbnail.
+# A conflict here is always an add/add between two runs that generated the SAME
+# slug, and taking the rebased commit is not a preference: it is the only
+# resolution CONSISTENT with the registry merge above, which already resolves a
+# colliding id to the rebased commit. Taking upstream for the body while the
+# registry carries our record would publish our metadata over their text.
+#
+# Measured on issue #281 (run 31705820503): eight registry paths conflicted AND
+# four `content/blog-body-ch/<locale>/modifica-ordinanza-liquidita.ts` plus
+# `data/swiss-articles/modifica-ordinanza-liquidita.json`, all add/add. Declaring
+# only the registries would have left the helper aborting on the first body file,
+# so #281 would have stayed open with the fix in place.
+ALLOWED=" "
+REGISTRIES=" "
+THEIRS_PREFIXES=""
+while [ "$#" -gt 0 ]; do
+  case "$1" in
+    --merge-registry)
+      [ "$#" -ge 2 ] || { echo "::error::--merge-registry requires a path"; exit 2; }
+      REGISTRIES="$REGISTRIES$2 "
+      shift 2
+      ;;
+    --take-theirs)
+      [ "$#" -ge 2 ] || { echo "::error::--take-theirs requires a path prefix"; exit 2; }
+      THEIRS_PREFIXES="$THEIRS_PREFIXES$2
+"
+      shift 2
+      ;;
+    *)
+      ALLOWED="$ALLOWED$1 "
+      shift
+      ;;
+  esac
+done
+
+# Guard against an empty argument list: with no paths declared in any category
+# nothing can ever be resolved, and silently degrading to "always abort" would
+# hide a caller bug behind behaviour that looks exactly like the old code.
+if [ "$ALLOWED" = " " ] && [ "$REGISTRIES" = " " ] && [ -z "$THEIRS_PREFIXES" ]; then
+  echo "::error::rebase-onto-remote.sh called with no bookkeeping allowlist, no --merge-registry and no --take-theirs paths"
   exit 2
 fi
+
+# Vero se $1 comincia con uno dei prefissi dichiarati con --take-theirs.
+is_per_article() {
+  local candidate="$1" prefix
+  while IFS= read -r prefix; do
+    [ -n "$prefix" ] || continue
+    case "$candidate" in
+      "$prefix"*) return 0 ;;
+    esac
+  done <<EOF
+$THEIRS_PREFIXES
+EOF
+  return 1
+}
 
 rebase_in_progress() {
   [ -d "$(git rev-parse --git-path rebase-merge)" ] || [ -d "$(git rev-parse --git-path rebase-apply)" ]
@@ -114,12 +205,22 @@ for _pass in $(seq 1 20); do
       GIT_EDITOR=: git rebase --continue >/dev/null 2>&1 || true
     fi
   else
+    # Classify FIRST, resolve after. A conflicted set with one unlisted path in
+    # it aborts whole, so no partial resolution is ever written.
+    registry_set=""
     while IFS= read -r f; do
       [ -n "$f" ] || continue
+      case "$REGISTRIES" in
+        *" $f "*)
+          registry_set="$registry_set$f "
+          continue
+          ;;
+      esac
+      is_per_article "$f" && continue
       case "$ALLOWED" in
         *" $f "*) ;;
         *)
-          echo "::warning::rebase conflict on '$f', which is not a whole-file bookkeeping cache — aborting, as before"
+          echo "::warning::rebase conflict on '$f', which is not a whole-file bookkeeping cache and not a declared content registry — aborting, as before"
           abort_and_fail || exit 1
           ;;
       esac
@@ -127,8 +228,45 @@ for _pass in $(seq 1 20); do
 $conflicted
 EOF
 
+    # Branch 2 — merge per record. The resolver writes a file only once that
+    # file has passed its own backstop, so a refusal here leaves every registry
+    # still conflicted and the tree exactly as we found it.
+    if [ -n "$registry_set" ]; then
+      # shellcheck disable=SC2086
+      if node "$MERGE_RESOLVER" $registry_set; then
+        # shellcheck disable=SC2086
+        git add -- $registry_set
+      else
+        echo "::warning::the content registries could not be merged per record — aborting rather than committing a fused registry"
+        abort_and_fail || exit 1
+      fi
+    fi
+
+    # Branch 3 — file per-articolo: vince il commit rigiocato. `--theirs` e' la
+    # copia del commit che si sta rigiocando (vedi la nota in testa: durante un
+    # rebase i due sono invertiti rispetto a un merge), cioe' l'articolo appena
+    # generato — lo stesso lato che vince nel merge dei registri.
     while IFS= read -r f; do
       [ -n "$f" ] || continue
+      is_per_article "$f" || continue
+      if git checkout --theirs -- "$f" 2>/dev/null; then
+        git add -- "$f"
+      else
+        # Nessuna copia dal lato rigiocato (upstream lo ha aggiunto e noi no):
+        # tenere quella di upstream e' la stessa decisione vista dall'altro lato.
+        git checkout --ours -- "$f" 2>/dev/null && git add -- "$f"
+      fi
+      echo "resolved per-article conflict by taking the rebased commit: $f"
+    done <<EOF
+$conflicted
+EOF
+
+    while IFS= read -r f; do
+      [ -n "$f" ] || continue
+      case "$REGISTRIES" in
+        *" $f "*) continue ;;  # gia' risolto dal merge per record
+      esac
+      is_per_article "$f" && continue  # gia' risolto dal ramo per-articolo
       # `--ours` is the upstream copy (see the header note). If the file does
       # not exist upstream at all the checkout fails, and dropping it is the
       # same decision: prefer upstream's view of a scratch cache.
