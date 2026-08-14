@@ -563,8 +563,9 @@ function decodificaEscapate(testo) {
  */
 function valutaEscapate(mio, testo, testimoni, cache) {
   const d = decodificaEscapate(testo);
-  if (!d) return { lasciate: [], scelta: null };
+  if (!d) return { lasciate: [], scelta: null, rinviate: [] };
   const lasciate = [];
+  const rinviate = [];
   let scelta = null;
   for (let i = 0; i < d.daEscape.length; i += 1) {
     if (!d.daEscape[i]) continue;
@@ -593,20 +594,28 @@ function valutaEscapate(mio, testo, testimoni, cache) {
       lasciate.push({ offset: a, spelling, motivo: 'testimone: la coda esce dal file' });
       continue;
     }
+    const candidata = {
+      offset: a,
+      fine: d.fineIn[ultimo],
+      prima: testo.slice(a, d.fineIn[ultimo]),
+      dopo: esito.carattere,
+      canale: 'escapata (testimone unanime cross-locale)',
+      freq: esito.testimoni.length,
+      testimoni: esito.testimoni.slice(0, 3),
+      locali: locali.filter(Boolean),
+    };
+    // Una sola riparazione si applica per giro (`riparaEscapate`): le altre
+    // occorrenze gia' risolvibili in QUESTO giro vengono rivalutate al giro
+    // successivo, sugli offset spostati. Vanno tenute qui — non in `lasciate`,
+    // che e' per cio' che NON e' risolvibile — cosi' chi tocca il tetto dei
+    // giri le trova ancora, invece di perderle senza un rifiuto a spiegarlo.
     if (!scelta) {
-      scelta = {
-        offset: a,
-        fine: d.fineIn[ultimo],
-        prima: testo.slice(a, d.fineIn[ultimo]),
-        dopo: esito.carattere,
-        canale: 'escapata (testimone unanime cross-locale)',
-        freq: esito.testimoni.length,
-        testimoni: esito.testimoni.slice(0, 3),
-        locali: locali.filter(Boolean),
-      };
+      scelta = candidata;
+    } else {
+      rinviate.push(candidata);
     }
   }
-  return { lasciate, scelta };
+  return { lasciate, scelta, rinviate };
 }
 
 /**
@@ -627,7 +636,18 @@ function riparaEscapate(percorso, testo, testimoni, cache) {
     riparazioni.push(s);
     esito = valutaEscapate(mio, corrente, testimoni, cache);
   }
-  return { testo: corrente, riparazioni, lasciate: esito.lasciate };
+  // Se il loop si ferma per il tetto dei giri e non per esaurimento, `scelta` e
+  // `rinviate` sono occorrenze GIA' RISOLTE che restano semplicemente non
+  // applicate: senza questo, sparivano sia da `riparazioni` sia da `lasciate`,
+  // cioe' scritte su disco senza contribuire al codice d'uscita (issue #366).
+  const nonApplicate = esito.scelta
+    ? [esito.scelta, ...esito.rinviate].map((c) => ({
+      offset: c.offset,
+      spelling: c.prima,
+      motivo: `testimone: risolvibile ma il tetto di ${TESTIMONE_GIRI_MAX} giri e' stato raggiunto prima`,
+    }))
+    : [];
+  return { testo: corrente, riparazioni, lasciate: [...esito.lasciate, ...nonApplicate] };
 }
 
 // ---------------------------------------------------------------------------
