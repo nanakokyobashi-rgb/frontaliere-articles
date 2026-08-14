@@ -262,6 +262,23 @@ describe('l\'excerpt TRADOTTO in quattro lingue (trasferirsi-a-marchirolo-…)',
   });
 });
 
+describe('#344 — budget-parenthetical strutturale: l\'inciso senza verbo "max" (blog-meta-ch-en.ts, riparato in #341)', () => {
+  it('«(59 characters)», nessuna cifra preceduta da "max"/"massimo": la vecchia finestra fragile lo perdeva', () => {
+    const valore = '… for over 5,000 daily passengers. **Mandatory Constraints** met for title translation (59 characters).';
+    const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+    assert.ok(regole.includes('budget-parenthetical'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+  });
+
+  it('vede anche senza chiusura immediata dopo l\'unita\' (testo fra l\'unita\' e la parentesi chiusa)', () => {
+    assert.equal(findPromptPlaceholders('un sottotitolo (max 160 characters circa)').length, 1);
+  });
+
+  it('resta cieco a un inciso fra parentesi che non nomina l\'unita\' di misura dei caratteri', () => {
+    assert.deepEqual(findPromptPlaceholders('un dato riservato (confidenziale)'), []);
+    assert.deepEqual(findPromptPlaceholders('der Registrierungsdaten (Kennzeichen CH-123-456)'), []);
+  });
+});
+
 describe('il preambolo del prompt dentro il corpo (ristorni-frontalieri-…)', () => {
   const body = 'Testo giornalistico reale che parla dei ristorni e del tavolo Lombardia-Ticino, abbastanza lungo da non essere un moncone e da superare la soglia dei duecento caratteri che il riparatore pretende prima di riscrivere un campo.\n\nHEADLINE: Italia - Svizzera - Ristorni frontalieri\n\nRECENT ARTICLE IDS (last 50 of 3006 total — do NOT reuse): educatore-infanzia-ticino';
 
