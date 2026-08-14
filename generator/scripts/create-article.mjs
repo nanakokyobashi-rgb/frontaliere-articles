@@ -157,8 +157,11 @@ import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 // l'intestazione di lib/exhaustion-disposition.mjs per la misura.
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
+  EXIT_NO_ARTICLE_DECLARED,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
+  isLegitimateQuotaDeferral,
+  quotaDeferralShare,
 } from './lib/exhaustion-disposition.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
@@ -11769,7 +11772,10 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        process.exit(0);
+        // Ragione legittima #1 di sei: niente da pubblicare. Exit 4 e non 0 —
+        // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
+        // e' un percorso che non ha dichiarato niente, ed e' rosso.
+        process.exit(EXIT_NO_ARTICLE_DECLARED);
       }
 
       // Generate article with retry — rotate to next safe keyword on post-generation duplicate.
@@ -11904,7 +11910,8 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            process.exit(0);
+            // Ragione legittima #2 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+            process.exit(EXIT_NO_ARTICLE_DECLARED);
           }
         }
       }
@@ -11912,7 +11919,8 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      process.exit(0);
+      // Ragione legittima #3 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      process.exit(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
   }
@@ -13465,7 +13473,30 @@ if (invokedDirectly) {
   };
   process.stdout.on('error', handleEnospc);
   process.stderr.on('error', handleEnospc);
-  main().catch((e) => {
+  // ── L'USCITA MUTA (issue #313 / #348) ──────────────────────────────────────
+  //
+  // Ogni percorso terminale di questo file passa da `finalizeRunReport(status)`,
+  // e quello status E' la dichiarazione: `generated` = c'e' un articolo; gli
+  // altri quattro rami dichiarano perche' non c'e'. Ma `main()` puo' anche
+  // RITORNARE, e allora nessuno ha dichiarato niente e il processo esce 0 —
+  // indistinguibile, per lo step del workflow, da una generazione riuscita.
+  //
+  // E' la forma piu' pura del difetto di #313, e non e' ipotetica: `main()` ha
+  // un `return` nudo a valle del ramo evergreen, e ogni futuro `return` anticipato
+  // ne aggiunge un altro senza che niente lo segnali. Qui la mutezza diventa un
+  // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
+  // li' lo status e' `generated` e si esce 0, come sempre.
+  main().then(() => {
+    if (RUN_REPORT?.status === 'generated') return;
+    console.error(
+      `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
+      + ' senza aver prodotto un articolo e senza dichiarare una delle sei ragioni legittime'
+      + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
+      + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
+    );
+    console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
+    process.exit(1);
+  }).catch((e) => {
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
   // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
@@ -13492,21 +13523,49 @@ if (invokedDirectly) {
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
     process.exit(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
   }
+  // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
+  // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di
+  // differimento resta quello di prima (`isQuotaExhaustedError`, il voto di
+  // maggioranza a monte), ma per uscire DICHIARANDO un esito legittimo la quota
+  // deve essere davvero la causa dominante della cascata — vedi
+  // isLegitimateQuotaDeferral() per la riclassificazione della run 31823202761,
+  // dove era il 50,0% esatto e il verde e' stato deciso da una riga ambigua.
   if (isQuotaExhaustedError(e)) {
-    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
-    console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera). Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    const share = quotaDeferralShare(e);
+    const pct = (share.share * 100).toFixed(1);
+    if (isLegitimateQuotaDeferral(e)) {
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
+      console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
+      // Ragione legittima #6 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      process.exit(EXIT_NO_ARTICLE_DECLARED);
+    }
+    finalizeRunReport('error', {
+      notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
+    });
+    console.error(
+      `\n❌ NON differibile: solo ${share.transient} fallimenti su ${share.total} (${pct}%) sono transitori`
+      + ` — ne servono piu' del ${(share.required * 100).toFixed(0)}% perche' «riprovo al prossimo run» sia una descrizione vera.`
+      + ` Persistenti: ${share.persistent} (prompt sopra il cap, chiavi assenti, modelli rimossi). Ambigui: ${share.ambiguous}.`
+      + ` Nessuna finestra di quota ripara quella meta' del roster, quindi il run successivo rifarebbe identico. ${e.message}`,
+    );
+    console.error(`::error::roster-down-not-deferrable: transient=${share.transient} persistent=${share.persistent} ambiguous=${share.ambiguous} total=${share.total} share=${pct}%`);
+    process.exit(1);
   }
   // Content/quality rejection that bubbled all the way up (e.g. manual-URL mode,
   // or every headline/keyword in a loop exhausted on quality grounds). The slop
   // was correctly NOT published — but "no acceptable article this run" is a clean
-  // deferral, not an infrastructure failure: exit 0 so the self-trigger back-off
-  // retries later instead of marking the run red and raising a false-positive
-  // "Workflow Failure: Generate Blog Article" Bug issue (run 28000585473 → #2750).
+  // deferral, not an infrastructure failure: exit EXIT_NO_ARTICLE_DECLARED so the
+  // self-trigger back-off retries later instead of marking the run red and raising
+  // a false-positive "Workflow Failure: Generate Blog Article" Bug issue (run
+  // 28000585473 → #2750). Era exit 0, e non lo e' piu' per la ragione scritta in
+  // EXIT_NO_ARTICLE_DECLARED: un exit 0 senza articolo non si distingue da un
+  // percorso che non ha dichiarato niente, ed e' quella indistinguibilita' — non
+  // questo ramo — che ha prodotto le dieci ore di verde.
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    // Ragione legittima #5 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    process.exit(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
   // invocation path (self-trigger chain re-dispatching a single evergreen
@@ -13515,7 +13574,8 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    // Ragione legittima #4 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    process.exit(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });
   console.error(`\n❌ Errore: ${e.message}`);
