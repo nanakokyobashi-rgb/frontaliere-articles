@@ -59,6 +59,10 @@ import {
   faqQuestionNamesInHtml,
   faqQuestionsInBodyText,
   pageCarriesFaqPlaceholder,
+  findEscapedControlChars,
+  decodeEscapedControlChars,
+  countControlCharsBothSpellings,
+  BODY_DIR_SECTIONS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
 test('sectionForBodyDir mappa le due directory dei corpi, null altrove', () => {
@@ -774,3 +778,173 @@ test('i residui di un ALTRO articolo non sporcano questa pagina', () => {
   assert.equal(classifyProbe({ status: 200, body, residues: ['comp9tences', 'situ9e'] }), 'clean');
 });
 
+
+
+// -- LA SECONDA SPELLING: il C0 ESCAPATO (issue #336) -----------------------
+//
+// L'oracolo cercava il BYTE. Nel corpus lo stesso identico difetto esiste anche
+// in forma ESCAPATA -- `JSON.stringify` scrive i C0 come `\u00XX` dentro il
+// campo `.faq`, e il letterale TS raddoppia il backslash -- e quella forma li'
+// non la contava nessuno: misurato il 2026-08-14, 20 file e 40 occorrenze che
+// `scanContentForDirtyIds` dichiarava ZERO. «0 byte C0» voleva dire «0 IN FORMA
+// GREZZA», non «pulito».
+//
+// Questi test sono scritti per FALLIRE se qualcuno riporta l'oracolo alla sola
+// forma grezza, e per fallire se una delle due cartelle dei corpi esce dallo
+// scan -- che e' il buco che la PR #335 ha appena chiuso sul lato che SCRIVE, e
+// che li' lasciava verdi tutte e 46 le asserzioni. Provati per mutazione:
+//   - togliendo la forma escapata dal matcher    -> 5 test rossi;
+//   - rimettendo `blog-body-ch` fuori dallo scan -> 2 test rossi.
+
+// Il testo ESATTO che sta sul disco in `content/blog-body/it/gadda-incalza-
+// governo-frontalieri.ts` (due backslash davanti a `u0004`), preso da li' e non
+// inventato: `String.raw` serve proprio a non perdere il secondo backslash
+// riscrivendo il fixture.
+const CORPO_C0_ESCAPATO = String.raw`export default {
+  'blog.article.ID.faq': '[{"q":"Cos\'\\u00049\\u00103 il problema?","a":"Le modalit\\u00018 di applicazione."}]',
+};
+`;
+
+const corpoPer = (id) => CORPO_C0_ESCAPATO.replace('ID', id);
+
+test("findEscapedControlChars vede il C0 escapato, a qualunque profondita' di backslash", () => {
+  // Un backslash (la forma JSON) e due (la stessa, riscritta in un letterale
+  // TS): sono spelling dello STESSO carattere a due livelli di escaping.
+  const uno = findEscapedControlChars(String.raw`{"q":"Cos\u00049 il"}`);
+  const due = findEscapedControlChars(String.raw`'[{"q":"Cos\\u00049 il"}]'`);
+  assert.deepEqual(uno.map((e) => e.code), [0x04]);
+  assert.deepEqual(due.map((e) => e.code), [0x04]);
+  assert.equal(due[0].spelling, String.raw`\\u0004`);
+});
+
+test("findEscapedControlChars vede anche le forme brevi \\b e \\f, non solo \\u00XX", () => {
+  // `JSON.stringify` non scrive SEMPRE `\u00XX`: per 0x08 e 0x0C usa le forme
+  // brevi `\b`/`\f`, la stessa scelta che fa `stripEscapedControlChars` in
+  // sanitize-control-chars.mjs. Testo preso da
+  // content/blog-body/it/cure-a-domicilio-tassa-ticino.ts ("Cos\\b4e la
+  // tassa..."), non inventato.
+  const uno = findEscapedControlChars(String.raw`{"q":"Cos\b4e la tassa"}`);
+  const due = findEscapedControlChars(String.raw`'[{"q":"Cos\\b4e la tassa"}]'`);
+  assert.deepEqual(uno.map((e) => e.code), [0x08]);
+  assert.deepEqual(due.map((e) => e.code), [0x08]);
+  assert.equal(due[0].spelling, String.raw`\\b`);
+
+  const efFe = findEscapedControlChars(String.raw`x\\fy`);
+  assert.deepEqual(efFe.map((e) => e.code), [0x0c]);
+});
+
+test('decodeEscapedControlChars riscrive anche \\b e \\f come i caratteri che denotano', () => {
+  const decodificato = decodeEscapedControlChars(String.raw`Cos\\b4e la tassa`);
+  assert.equal(decodificato, 'Cos\x084e la tassa');
+});
+
+test('findEscapedControlChars NON conta le forme escapate di TAB, LF e CR', () => {
+  // XML 1.0 e JSON le ammettono entrambe: contarle renderebbe sporco ogni file
+  // che porta un a-capo escapato, cioe' tutti. E' l'unico punto in cui questo
+  // oracolo e' piu' STRETTO della grep dell'issue #336, che quei tre li
+  // conterebbe.
+  const legali = '"a\\u0009b\\u000ac\\u000dd"';
+  assert.deepEqual(findEscapedControlChars(legali), []);
+  assert.equal(decodeEscapedControlChars(legali), legali, 'le legali restano scritte come sono');
+  assert.deepEqual(findEscapedControlChars('"a\\\\u0009b"'), [], 'nemmeno al secondo livello di escaping');
+});
+
+test('countControlCharsBothSpellings somma le due spelling, non ne sceglie una', () => {
+  const misto = `byte grezzo \x08 e ${String.raw`escapato \\u0016`}`;
+  assert.equal(countControlCharsBothSpellings(misto), 2);
+  assert.equal(countControlCharsBothSpellings('niente di sporco'), 0);
+});
+
+test('decodeEscapedControlChars riscrive il carattere e NON ripara la parola', () => {
+  // La distinzione che tiene fuori le euristiche: rendere VISIBILE il difetto
+  // non e' ripararlo. `modalit8` diventa `modalit<01>8`, non `modalita`:
+  // quale lettera fosse lo dice solo un testimone nel corpus, e non e' qui che
+  // si decide.
+  const decodificato = decodeEscapedControlChars(String.raw`Le modalit\\u00018 di`);
+  assert.equal(decodificato, 'Le modalit\x018 di');
+  assert.ok(!decodificato.includes('modalità'), 'nessuna lettera inventata');
+});
+
+test("scanContentForDirtyIds vede un body la cui UNICA sporcizia e' il C0 escapato (#336)", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-esc-'));
+  try {
+    writeTree(root, {
+      'content/blog-body/it/gadda-incalza-governo-frontalieri.ts': corpoPer('gadda-incalza-governo-frontalieri'),
+      'content/blog-body/it/pulito.ts': "export const body = 'tutto a posto';\n",
+    });
+    const testo = fs.readFileSync(path.join(root, 'content/blog-body/it/gadda-incalza-governo-frontalieri.ts'), 'utf8');
+    // Il fixture non porta NEMMENO UN byte C0 grezzo: se questo assert cade, il
+    // caso riprodotto non e' quello dell'issue e il resto non prova niente.
+    assert.equal(residuesInText(testo).size, 0, 'nessun byte grezzo, quindi nessun residuo per il criterio vecchio');
+    assert.equal(countControlCharsBothSpellings(testo), 3, 'tre occorrenze, tutte escapate');
+
+    const { ids, totalFiles, totalOccurrences, totalEscapedOccurrences } = scanContentForDirtyIds(root);
+    assert.deepEqual(ids.map((e) => `${e.section}:${e.id}`), ['frontaliere:gadda-incalza-governo-frontalieri']);
+    assert.equal(totalFiles, 1);
+    assert.equal(totalOccurrences, 3);
+    assert.equal(totalEscapedOccurrences, 3);
+    // L'etichetta dice QUALE oracolo ha visto: senza, la fix non sarebbe
+    // verificabile dal report che il workflow pubblica.
+    assert.ok(
+      ids[0].sources.some((s) => s.endsWith('(c0 escapato)')),
+      `sorgente senza l'etichetta della forma escapata: ${ids[0].sources.join(', ')}`,
+    );
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("la forma escapata e' cercata in ENTRAMBE le cartelle dei corpi e su tutti e quattro i locali", () => {
+  // Il buco che #335 ha chiuso sul lato che SCRIVE: `blog-body-ch` fuori dallo
+  // scan lascia verde tutto, perche' nessun altro test ci mette un file con
+  // questa forma. Qui c'e' un id per cartella e per locale, quindi togliere una
+  // delle due cartelle -- o smettere di ricorrere nelle sottocartelle-locale --
+  // fa cadere la deepEqual, non un conteggio approssimato.
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-esc-due-'));
+  try {
+    writeTree(root, {
+      'content/blog-body/it/uno.ts': corpoPer('uno'),
+      'content/blog-body/en/due.ts': corpoPer('due'),
+      'content/blog-body-ch/de/tre.ts': corpoPer('tre'),
+      'content/blog-body-ch/fr/quattro.ts': corpoPer('quattro'),
+    });
+    const { ids, totalFiles, totalEscapedOccurrences } = scanContentForDirtyIds(root);
+    assert.deepEqual(
+      ids.map((e) => `${e.section}:${e.id}`).sort(),
+      ['frontaliere:due', 'frontaliere:uno', 'svizzera:quattro', 'svizzera:tre'],
+    );
+    assert.equal(totalFiles, 4, 'quattro file, uno per locale, due per cartella');
+    assert.equal(totalEscapedOccurrences, 12);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('BODY_DIR_SECTIONS dichiara ESATTAMENTE le due cartelle dei corpi', () => {
+  // La leva della mutazione precedente, pinnata da sola: una cartella che
+  // sparisce di qui esce dallo scan in silenzio, e il conteggio scende senza
+  // che niente lo chiami un difetto.
+  assert.deepEqual(Object.keys(BODY_DIR_SECTIONS).sort(), ['blog-body', 'blog-body-ch']);
+  assert.equal(BODY_DIR_SECTIONS['blog-body'], 'frontaliere');
+  assert.equal(BODY_DIR_SECTIONS['blog-body-ch'], 'svizzera');
+});
+
+test('anche i chunk meta e SEO sono coperti dalla forma escapata, non solo i corpi', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-esc-meta-'));
+  try {
+    writeTree(root, {
+      'content/blog-meta-it.ts':
+        `export default {\n  'blog.article.trump-intesa-o-inferno.title': '${String.raw`sar\\u00170`}',\n};\n`,
+      'content/seo/seo-blog-3.ts':
+        `export default {\n 'blog-lavena-ponte-tresa-territorio-poroso': {\n  title: 'Il ${String.raw`\\u00083territorio`}',\n },\n};\n`,
+    });
+    const { ids, totalEscapedOccurrences } = scanContentForDirtyIds(root);
+    assert.deepEqual(
+      ids.map((e) => `${e.section}:${e.id}`).sort(),
+      ['frontaliere:lavena-ponte-tresa-territorio-poroso', 'frontaliere:trump-intesa-o-inferno'],
+    );
+    assert.equal(totalEscapedOccurrences, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
