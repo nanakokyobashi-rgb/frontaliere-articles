@@ -6555,6 +6555,53 @@ const PROMPT_TOKEN_CEILING = 9500;
 const IT_GENERATION_MAX_TOKENS = 4000;
 
 // ── Step 2: Generate article via GitHub Models (multi-call) ─
+/**
+ * Accorcia il CORPO della fonte gia' troncato, conservandone il marcatore.
+ *
+ * Usato solo dalla scala di riduzione del budget dentro `callGemini`: il
+ * troncamento ordinario resta quello di `MAX_SOURCE_CHARS`, che non cambia.
+ *
+ * Taglia sull'ultimo confine di frase disponibile invece che a carattere, ma
+ * solo se cade oltre meta' del budget concesso — altrimenti una fonte senza
+ * punteggiatura (le pagine scrapate spesso lo sono) si ridurrebbe a una riga.
+ * Il marcatore `[...contenuto troncato per brevita']` viene riappeso sempre:
+ * e' cio' che dice al writer che il testo non finisce li', e il test del
+ * budget lo verifica esplicitamente.
+ */
+/**
+ * Accorcia il testo di RIMEDIO (refinement di headline e fact-check) che i
+ * tentativi successivi al primo aggiungono al prompt.
+ *
+ * E' il gradino che precede il taglio della fonte nella scala di riduzione,
+ * per una ragione precisa: il rimedio e' testo DERIVATO — lo produciamo noi
+ * riassumendo cosa non andava — mentre la fonte e' il materiale su cui il gate
+ * di fedelta' giudica. A parita' di token risparmiati, toglierne al rimedio
+ * costa meno che toglierne alla notizia.
+ *
+ * Conserva la testa (dove stanno le istruzioni piu' importanti: quante ancore
+ * mancano e in che forma) e dichiara il taglio, cosi' il writer sa che l'elenco
+ * non finisce li'.
+ */
+function _clampRemediation(text, maxChars) {
+  const t = String(text || '');
+  if (t.length <= maxChars) return t;
+  return `${t.slice(0, maxChars)}\n[...elenco correzioni troncato: applica la stessa logica ai punti rimanenti]`;
+}
+
+function _clampSourceBody(body, maxChars) {
+  const MARK = '\n[...contenuto troncato per brevità]';
+  const text = String(body || '');
+  const bare = text.endsWith(MARK) ? text.slice(0, -MARK.length) : text;
+  if (bare.length <= maxChars) return text;
+  const cut = bare.slice(0, maxChars);
+  const lastStop = Math.max(
+    cut.lastIndexOf('. '), cut.lastIndexOf('.\n'),
+    cut.lastIndexOf('! '), cut.lastIndexOf('? '),
+  );
+  const kept = lastStop > maxChars * 0.5 ? cut.slice(0, lastStop + 1) : cut;
+  return kept + MARK;
+}
+
 async function callGemini(pageContent, url, sourceContext = null) {
   // Get existing article IDs to avoid duplicates (all sections — shared id/SEO/i18n namespace)
   const existingIds = getAllArticleIds();
@@ -6881,12 +6928,16 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
     : domainFactsBrief;
   const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${truncatedDomainFactsBrief}\n`;
 
-  const prompt = `${systemRoleLine}
+  // Il template e' una FUNZIONE dei due blocchi elastici invece di una
+  // costante, perche' il pre-flight del budget piu' sotto deve poterlo
+  // riassemblare piu' volte con blocchi piu' corti. Chiamata coi valori pieni
+  // produce esattamente la stringa di prima, byte per byte.
+  const buildPrompt = ({ sourceBody, domainFacts }) => `${systemRoleLine}
 
 SOURCE URL: ${url.startsWith('evergreen://') ? '(editorial research)' : url.startsWith('stats-bfs://') ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html (BFS)' : url}
 SOURCE CONTENT:
-${truncatedContent}
-${domainFactsBlock}
+${sourceBody}
+${domainFacts}
 ${sourceContext?.headline ? `\nHEADLINE: ${sourceContext.headline}` : ''}
 ${relatedContext ? `\nRELATED:\n${relatedContext}` : ''}
 
@@ -7117,7 +7168,7 @@ ISTRUZIONI TASSATIVE per questo tentativo:
   const systemRoleQualifier = IS_FRONTALIERE
     ? 'di lavoro transfrontaliero in Ticino'
     : 'di affari svizzeri a livello nazionale';
-  const llmMessages = [
+  const buildMessages = (promptText, remediation) => [
     { role: 'system', content: `${systemStem} ${systemRoleQualifier} che RISCRIVE articoli basandosi FEDELMENTE sulla fonte originale.
 
 REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Se un'informazione NON è nella fonte, NON includerla. Mai inventare, dedurre o "completare" dati mancanti.
@@ -7131,7 +7182,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // Skipped when data/article-performance.json is missing or empty so the
     // prompt is byte-identical to today's behavior.
     ...(_winnerFingerprintMessage ? [{ role: 'system', content: _winnerFingerprintMessage }] : []),
-    { role: 'user', content: prompt + minWordsInstruction + headlineRefinementInstruction + factCheckRefinementInstruction + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.\n${otherLocalesNote}` }
+    { role: 'user', content: promptText + minWordsInstruction + remediation + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.\n${otherLocalesNote}` }
   ];
 
   // Pass a strict JSON schema so providers that support it (OpenAI/GitHub
@@ -7155,21 +7206,121 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   //   [prompt-budget] branch=<news|evergreen> section=<s> attempt=<n>
   //   est=<token> budget=<token> over=<0|1>
   const _promptBudgetBranch = isSyntheticSource ? 'evergreen' : 'news';
-  const _promptEstTokens = estimateRequestTokens(llmMessages, {
-    jsonSchema: articleSchema,
-    maxTokens: IT_GENERATION_MAX_TOKENS,
-  });
-  const _promptOverBudget = _promptEstTokens > PROMPT_TOKEN_BUDGET;
+
+  // ── Il budget: quello che la flotta ha DETTO, non quello che assumiamo ──
+  //
+  // `callLLM` allega a `ALL_MODELS_EXHAUSTED` il numero esatto sotto cui il
+  // prompt deve rientrare — `err.retryRequestTokenBudget`, cioe' il cap PIU'
+  // PERMISSIVO fra i modelli che hanno rifiutato — e il messaggio dice
+  // testualmente «A retry must rebuild the prompt under N tokens — resending
+  // the same messages cannot succeed». Fino a oggi nessun chiamante lo
+  // leggeva: il ciclo di retry rispediva messaggi identici, sei volte per
+  // sezione, e la libreria aveva gia' dimostrato che non potevano riuscire
+  // (run 31833016113: 28,8 minuti per arrivare a quella conclusione).
+  //
+  // Il retry lo passa qui via `_promptTokenBudget`. Al primo tentativo non
+  // c'e' ancora, e allora vale il cap dichiarato dalla flotta — che serve
+  // comunque, perche' anche l'attempt 1 sfora: misurato est=8274 contro 8000.
+  const _promptTokenTarget = Number(sourceContext?._promptTokenBudget) > 0
+    ? Number(sourceContext._promptTokenBudget)
+    : PROMPT_TOKEN_BUDGET;
+
+  // ── La scala di riduzione, dichiarata e nell'ordine in cui morde ────────
+  //
+  // Ogni gradino e' misurato sul fixture del caso peggiore
+  // (news-prompt-token-budget.test.mjs), non stimato:
+  //
+  //   0. nessuna riduzione                       9488 token
+  //   1. senza domainFactsBlock                  8991  (-497)
+  //   2. + fonte al 60%                          ~8100
+  //   3. + fonte al minimo dichiarato (3000ch)   ~7900
+  //
+  // PERCHE' domainFacts PER PRIMO: e' «materiale di riferimento per
+  // contesto/implicazioni pratiche, SEPARATO dalla notizia», non la fonte, e
+  // il ramo evergreen lo azzera gia' per costruzione. Toglierlo sotto
+  // pressione di budget e' anche piu' SICURO che tenerlo: il commento a
+  // MAX_DOMAIN_FACTS_CHARS registra la contraddizione di grounding che
+  // produceva (scaglioni IRPEF offerti come «fatti» a un articolo svizzero
+  // nazionale, materiale che un modello debole poi usa davvero).
+  //
+  // PERCHE' `sourceContract` NON E' NELLA SCALA, pur pesando 230 token: e'
+  // costruito sulla fonte INTERA apposta, ed e' cio' che rende soddisfacibili
+  // le ancore che stanno oltre il troncamento. Toglierlo mentre si accorcia
+  // il corpo e' la combinazione che rende il gate di recall impossibile —
+  // esattamente il difetto che buildSourceContract esiste per chiudere.
+  //
+  // PERCHE' UN PAVIMENTO SULLA FONTE: sotto una certa soglia l'articolo non
+  // ha piu' sostanza da riscrivere e il gate di fedelta' non e' soddisfacibile
+  // comunque. Meglio restare sopra budget e degradare ai modelli grandi che
+  // consegnare al writer una fonte inutilizzabile.
+  const PROMPT_SOURCE_FLOOR_CHARS = 3000;
+  const PROMPT_REMEDIATION_CAP_CHARS = 1200;
+  const _remediationFull = headlineRefinementInstruction + factCheckRefinementInstruction;
+  const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
+  const _shrinkLadder = [
+    { label: 'intero', sourceBody: truncatedContent, domainFacts: domainFactsBlock, remediation: _remediationFull },
+    { label: 'senza fatti-di-dominio', sourceBody: truncatedContent, domainFacts: '', remediation: _remediationFull },
+    {
+      label: 'senza fatti-di-dominio + rimedio troncato',
+      sourceBody: truncatedContent,
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+    {
+      label: 'senza fatti-di-dominio + rimedio troncato + fonte al 60%',
+      sourceBody: _clampSourceBody(
+        truncatedContent,
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, Math.round(truncatedContent.length * 0.6)),
+      ),
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+    {
+      label: `senza fatti-di-dominio + rimedio troncato + fonte al minimo (${PROMPT_SOURCE_FLOOR_CHARS}ch)`,
+      sourceBody: _clampSourceBody(truncatedContent, PROMPT_SOURCE_FLOOR_CHARS),
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+  ];
+
+  let prompt = null;
+  let llmMessages = null;
+  let _promptEstTokens = 0;
+  let _promptShrinkStep = 0;
+  let _promptShrinkLabel = 'intero';
+  for (let i = 0; i < _shrinkLadder.length; i++) {
+    const step = _shrinkLadder[i];
+    prompt = buildPrompt({ sourceBody: step.sourceBody, domainFacts: step.domainFacts });
+    llmMessages = buildMessages(prompt, step.remediation);
+    _promptEstTokens = estimateRequestTokens(llmMessages, {
+      jsonSchema: articleSchema,
+      maxTokens: IT_GENERATION_MAX_TOKENS,
+    });
+    _promptShrinkStep = i;
+    _promptShrinkLabel = step.label;
+    if (_promptEstTokens <= _promptTokenTarget) break;
+  }
+
+  const _promptOverBudget = _promptEstTokens > _promptTokenTarget;
+  // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
+  // riga, non il testo attorno. `shrink=` e' nuovo e additivo — i campi
+  // preesistenti mantengono nome e posizione.
   console.error(
     `[prompt-budget] branch=${_promptBudgetBranch} section=${SECTION_NAME} `
-    + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${PROMPT_TOKEN_BUDGET} `
-    + `over=${_promptOverBudget ? 1 : 0}`,
+    + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${_promptTokenTarget} `
+    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep}`,
   );
+  if (_promptShrinkStep > 0) {
+    console.error(
+      `  ✂️  [prompt-budget] prompt ridotto per rientrare in ${_promptTokenTarget} token: `
+      + `«${_promptShrinkLabel}» → est=${_promptEstTokens}`,
+    );
+  }
   if (_promptOverBudget) {
     console.warn(
-      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} e' stimato in ${_promptEstTokens} token, `
-      + `oltre il cap piu' alto dichiarato dalla flotta (${PROMPT_TOKEN_BUDGET}): ogni modello `
-      + 'GitHub Models e Groq verra\' saltato dal pre-flight senza tentare la chiamata.',
+      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} resta stimato in ${_promptEstTokens} token `
+      + `dopo tutta la scala di riduzione, oltre il target di ${_promptTokenTarget}: ogni modello `
+      + 'con un cap di input piu\' basso verra\' saltato dal pre-flight senza tentare la chiamata.',
     );
   }
 
@@ -12002,6 +12153,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // generation so callGemini can feed the exact flagged claims back to the model.
   /** @type {string|null} */
   let lastFactCheckErrors = null;
+  // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
+  // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
+  let lastPromptTokenBudget = 0;
 
   const isStatsBfsSource = String(url || '').startsWith('stats-bfs://');
   // La lunghezza che le scale adattive devono misurare. Per una fonte reale è
@@ -12129,6 +12283,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // Surface the previous attempt's fact-check rejections so callGemini can
       // tell the model exactly which invented claims to remove/correct.
       _factCheckRefinement: lastFactCheckErrors || undefined,
+      // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
+      // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
+      _promptTokenBudget: lastPromptTokenBudget || undefined,
     };
 
     let rawData;
@@ -12136,6 +12293,35 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       rawData = await callGemini(pageContent, url, genContext);
     } catch (e) {
       console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);
+      // ── Il numero che la libreria calcola e che nessuno leggeva ──────────
+      //
+      // Quando ogni modello ha rifiutato per DIMENSIONE, `callLLM` allega
+      // all'errore il cap piu' permissivo fra quelli che hanno detto no
+      // (`retryRequestTokenBudget`) e scrive, nel messaggio: «A retry must
+      // rebuild the prompt under N tokens — resending the same messages cannot
+      // succeed». Era vero alla lettera: prima di questo blocco il `continue`
+      // qui sotto rispediva messaggi identici, fino a sei volte per sezione.
+      // Run 31833016113: 28,8 minuti e due sezioni per arrivare a una
+      // conclusione nota al primo tentativo.
+      //
+      // Lo teniamo per il giro successivo, che lo usa come target della scala
+      // di riduzione. `Math.min` perche' il budget puo' STRINGERSI fra un
+      // tentativo e l'altro (la flotta disponibile cambia mentre i modelli si
+      // esauriscono) e allentarlo vanificherebbe la riduzione gia' decisa.
+      const budgetDettato = Number(e?.retryRequestTokenBudget) > 0
+        ? Number(e.retryRequestTokenBudget)
+        : 0;
+      if (budgetDettato > 0) {
+        lastPromptTokenBudget = lastPromptTokenBudget > 0
+          ? Math.min(lastPromptTokenBudget, budgetDettato)
+          : budgetDettato;
+        const cap = e?.inputCapReport;
+        console.error(
+          `  📏 La flotta chiede un prompt sotto ${lastPromptTokenBudget} token`
+          + (cap ? ` (${cap.count} modelli hanno rifiutato ~${cap.estimatedRequestTokens} token)` : '')
+          + ' — il prossimo tentativo lo ricostruisce piu' + '\' corto invece di rispedirlo uguale.',
+        );
+      }
       if (attempt < maxAttempts) continue;
       throw e;
     }
