@@ -31,6 +31,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   riparaTesto, risolviToken, costruisciLessico, riparaResidui, residuiDi, MARKER_G,
+  localeDi,
 } from '../scripts/repair-mangled-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
@@ -785,4 +786,177 @@ test('il testimone non guarda i file che hanno un marker, nemmeno se la frase e\
   );
   assert.equal(rapporto.riparate, 0);
   assert.match(testo, new RegExp(B(0x0e)));
+});
+
+// ---------------------------------------------------------------------------
+// la SPELLING ESCAPATA — issue #345 item 1
+// ---------------------------------------------------------------------------
+//
+// Il difetto e' lo stesso, la scrittura no: dentro un blob `.faq` il control
+// character e' `\\u0016` / `\\b` / `\\f`, e sul disco NON c'e' nessun byte C0.
+// Tutto cio' che parte da `MARKER.test` su queste occorrenze diceva zero.
+//
+// PERCHE' QUI IL LESSICO NON E' UNA PROVA, e perche' i test che contano sono i
+// rifiuti. Misurato sulle quattro copie della stessa FAQ nel corpus reale
+// (`salario-minimo-per-il-controprogetto-la-strada-e-in-discesa`), la STESSA
+// coppia (0x08,'5') sta al posto di quattro cose diverse:
+//
+//   it  `Il salario minimo sociale \b5 una proposta`    -> «è»
+//   de  `Der soziale Mindestlohn \b5 ein Vorschlag`     -> «ist»
+//   en  `The social minimum wage \b5 a proposal`        -> «is»
+//   fr  `Le salaire minimum social \b5 une proposition` -> «est»
+//
+// Tre su quattro non sono nemmeno un carattere: sono una parola. Il marker e'
+// nato nell'italiano ed e' stato PROPAGATO VERBATIM dal traduttore, che l'ha
+// trattato come un token intraducibile. Una prova che guarda la parola
+// ricostruita — lessico, esadecimale, legge del nibble — su questa famiglia non
+// deduce: traduce a occhio. E' la forma esatta del difetto che in un giro
+// precedente ha distrutto i titoli, «riparando» dalla lingua sbagliata.
+//
+// Quindi la sola prova ammessa e' il testimone, UNANIME (una sola lettera fra
+// tutti i riscontri) e CROSS-LOCALE (almeno un testimone fuori dal locale del
+// file sporco). Sul corpus del 2026-08-14 questa precondizione ripara ZERO
+// occorrenze su 45, ed e' il risultato giusto: le 45 restano con la loro ancora
+// e ora sono CONTATE, nel rapporto e nel codice d'uscita.
+
+/** La spelling come sta su disco: due backslash, il JSON e' dentro un letterale TS. */
+const E = (n) => `\\\\u${n.toString(16).padStart(4, '0')}`;
+/** Le forme brevi che `JSON.stringify` usa per 0x08 e 0x0C. */
+const E_BREVE = { 0x08: '\\\\b', 0x0c: '\\\\f' };
+
+const PRIMA_FAQ = 'Il salario minimo sociale ';
+const DOPO_FAQ = ' una proposta che prevede un salario minimo';
+
+/** Nessun byte C0 grezzo puo' finire su disco: la decodifica non deve mai tornare indietro. */
+function senzaByteC0(testo) {
+  return !new RegExp(`[${'\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F'}]`).test(testo);
+}
+
+function riparaEscapataConAlbero(alberi, quale = 'blog-body/it/sporco.ts') {
+  const radice = alberoDiProva(alberi);
+  try {
+    const { codice, rapporto } = esegui(radice, ['--write']);
+    return { codice, rapporto, testo: fs.readFileSync(path.join(radice, 'content', quale), 'utf8') };
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+}
+
+test('escapata: un testimone unanime in un ALTRO locale da\' la lettera perduta', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1, 'l\'occorrenza dev\'essere CONTATA, non solo riparata');
+  assert.equal(rapporto.escapate.riparate, 1);
+  assert.equal(rapporto.escapate.lasciate, 0);
+  assert.equal(testo, `${PRIMA_FAQ}è${DOPO_FAQ}\n`, 'la spelling intera sparisce, coda compresa');
+  assert.ok(senzaByteC0(testo), 'la decodifica e\' interna: su disco non finisce mai un byte C0');
+  const rip = rapporto.riparazioni.find((x) => x.canale.startsWith('escapata'));
+  assert.deepEqual(rip.testimoni, ['content/blog-body/de/testimone.ts']);
+  assert.deepEqual(rip.localiTestimoni, ['de']);
+});
+
+test('escapata: la forma breve \\b e\' la stessa cosa della forma numerica', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E_BREVE[0x08]}5${DOPO_FAQ}\n`,
+    'blog-body/fr/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1);
+  assert.equal(rapporto.escapate.riparate, 1);
+  assert.equal(testo, `${PRIMA_FAQ}è${DOPO_FAQ}\n`);
+});
+
+test('escapata: la coda puo\' contenere a sua volta una spelling, e la mappa regge', () => {
+  // `sc<00>f<16>9narios` -> «scénarios», ma scritto escapato: la coda di tre
+  // caratteri DECODIFICATI vale 1 + 7 + 1 = 9 caratteri di FILE. Un riparatore
+  // che tagliasse `offset + coda` sull'originale lascerebbe mezza spelling nel
+  // testo. Questo test cade se la fine del tratto non passa da `fineIn`.
+  const prima = 'quelques comparaisons entre des sc';
+  const dopo = 'narios pratiques : stages et emplois';
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/fr/sporco.ts': `${prima}${E(0x00)}f${E(0x16)}9${dopo}\n`,
+    'blog-body/it/testimone.ts': `${prima}é${dopo}\n`,
+  }, 'blog-body/fr/sporco.ts');
+  assert.equal(rapporto.escapate.occorrenze, 2, 'due spelling nello stesso punto');
+  assert.equal(testo, `${prima}é${dopo}\n`);
+  assert.ok(senzaByteC0(testo));
+});
+
+test('FAIL-CLOSED — escapata: il testimone e\' nello STESSO locale, non basta', () => {
+  // Il difetto nasce nell'italiano e il traduttore lo propaga verbatim: un
+  // testimone dello stesso locale e' un'altra generazione della stessa
+  // pipeline, che ha visto lo stesso testo corrotto. Conferma la propagazione,
+  // non il carattere. Questo test cade se si toglie il vincolo cross-locale.
+  const { codice, rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/it/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.equal(rapporto.escapate.lasciate, 1);
+  assert.match(rapporto.escapate.elenco[0].motivo, /fuori dal locale "it"/);
+  assert.ok(testo.includes(E(0x16)), 'la spelling resta dov\'e\': e\' l\'ancora');
+  assert.equal(codice, 2, 'un\'occorrenza escapata lasciata e\' un difetto, non testo giusto');
+});
+
+test('FAIL-CLOSED — escapata: due locali che propongono lettere diverse', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+    'blog-body/fr/testimone.ts': `${PRIMA_FAQ}é${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.match(rapporto.escapate.elenco[0].motivo, /lettere diverse/);
+  assert.ok(testo.includes(E(0x16)));
+});
+
+test('FAIL-CLOSED — escapata: nessun testimone, nessuna ipotesi (e il lessico non ha voce)', () => {
+  // «Il salario minimo sociale è una proposta» e' una frase che il lessico
+  // ricostruirebbe senza fatica — «è» esiste nel corpus a migliaia. Qui non
+  // c'e' nessun testimone, e il riparatore non ci prova nemmeno: se un giorno
+  // qualcuno aggiunge il canale del lessico a questa spelling, questo test
+  // diventa rosso ed e' quello che deve succedere.
+  const { codice, rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1);
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.equal(rapporto.escapate.lasciate, 1);
+  assert.ok(testo.includes(E(0x16)));
+  assert.equal(codice, 2);
+});
+
+test('FAIL-CLOSED — escapata: un file con la sola spelling escapata NON testimonia', () => {
+  // Il file «testimone» porta la frase giusta e, altrove, una propria spelling
+  // escapata. `MARKER.test` su di lui e' FALSO — non ha un byte C0 — quindi
+  // finche' il filtro guardava solo il byte questo file testimoniava. Questo
+  // test cade se `costruisciTestimoni` smette di chiamare `haEscapate`.
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\nun altro punto del file: modalit${E(0x01)}8\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.ok(testo.includes(E(0x16)));
+});
+
+test('il lessico non impara le parole dei file con la sola spelling escapata', () => {
+  // Misurato sul corpus reale: `TOKEN_G` non contiene il backslash, quindi
+  // `imparzialit\\u0000a1` si spezza in `imparzialit` + `u0000a1` e il lessico
+  // imparava la PAROLA MUTILATA — e persino un pezzo della spelling — come
+  // vocabolario del corpus pulito. Escludendo i 22 file escapati: 16.806 ->
+  // 16.784 file, 235.758 -> 235.611 token distinti, e fra i 147 spariti ci
+  // sono `imparzialit`, `accadr` e `u00108`.
+  const sporco = `l'imparzialit${E(0x00)}a1 nella CPI ticinese\n`;
+  const lessico = lessicoDiProva({ 'content/blog-body/it/faq.ts': `${sporco}${sporco}` });
+  assert.equal(lessico.get('imparzialit'), undefined, 'la parola mutilata non e\' vocabolario');
+  assert.equal(lessico.get('u0000a1'), undefined, 'nemmeno un pezzo della spelling');
+  assert.ok(lessico.get('dépenses') >= 2, 'il resto del lessico c\'e\' ancora');
+});
+
+test('localeDi legge il locale dalle due forme di percorso, e non inventa', () => {
+  assert.equal(localeDi('content/blog-body/it/cure-a-domicilio-tassa-ticino.ts'), 'it');
+  assert.equal(localeDi('content/blog-body-ch/de/svizzera.ts'), 'de');
+  assert.equal(localeDi('content/blog-meta-fr.ts'), 'fr');
+  assert.equal(localeDi('content/pulito.ts'), null);
+  assert.equal(localeDi('content/blog-body/xx/ignoto.ts'), null, 'due lettere non bastano: dev\'essere un locale del corpus');
 });

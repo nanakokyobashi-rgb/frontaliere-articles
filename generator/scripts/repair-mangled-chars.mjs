@@ -76,6 +76,18 @@
  * parassiti, ma il lessico conosce «s’élèvent» e non «sélèvent»: il primo
  * marker diventa l'apostrofo, il secondo sparisce.
  *
+ * LE DUE SPELLING DELLO STESSO DIFETTO
+ *
+ * Il byte C0 non e' l'unico modo in cui questo difetto sta scritto su disco.
+ * Dentro un blob `.faq` — JSON dentro un letterale TS — lo stesso control
+ * character e' scritto `\\u0016` / `\\b` / `\\f`, senza un byte C0 da nessuna
+ * parte, e arriva intatto dentro il `FAQPage` ld+json della pagina.  Fino a
+ * #345 questo script guardava solo il byte, quindi su quelle occorrenze
+ * riportava zero — la stessa classe di falso negativo che #336 ha chiuso
+ * sull'oracolo.  Il blocco «LA SPELLING ESCAPATA» piu' sotto le vede, e le
+ * ripara con la SOLA prova del testimone unanime cross-locale: li' il lessico
+ * non e' una prova, e il perche' e' misurato in quel blocco.
+ *
  * FAIL-CLOSED
  *
  * Ogni occorrenza che nessuna delle due prove risolve resta INTATTA — col suo
@@ -99,6 +111,12 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import { stripLasciaResiduo } from './lib/control-char-write-report.mjs';
+// L'oracolo della spelling escapata, non una seconda definizione: e' lo stesso
+// `ESCAPED_C0_RX` che conta le occorrenze in `find-dirty-content-ids.mjs`
+// (#336, #338).  Se quella regex cambia — le forme brevi `\b`/`\f` sono state
+// aggiunte dopo — questo riparatore la segue senza saperlo.  Riscriverla qui
+// sarebbe il modo esatto in cui le due spelling sono divergute la prima volta.
+import { findEscapedControlChars } from '../../scripts/find-dirty-content-ids.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const RADICE_DEFAULT = path.resolve(QUI, '..', '..');
@@ -188,7 +206,8 @@ function stampaAiuto() {
   --json              rapporto in JSON invece che a righe
   --max-refusals-shown <n>   quanti rifiuti elencare  (default: 60)
 
-Uscita: 0 tutto risolto, 2 restano rifiuti, 1 errore d'uso.
+Uscita: 0 tutto risolto, 2 restano rifiuti (byte C0 o spelling escapata),
+        1 errore d'uso.
 `);
 }
 
@@ -305,12 +324,24 @@ const TESTIMONE_GIRI_MAX = 4;
 
 const LETTERA = /\p{L}/u;
 
-/** I file senza un solo marker: sono gli unici che possono fare da testimone. */
+/**
+ * I file senza un solo marker: sono gli unici che possono fare da testimone.
+ *
+ * «Senza un solo marker» vuol dire in NESSUNA DELLE DUE SPELLING.  Un file che
+ * porta `imparzialit a1` non ha un byte C0 addosso — `MARKER.test` su di
+ * lui e' falso — ma e' sporco esattamente come gli altri, e finche' passava
+ * questo filtro faceva da testimone e da voce di lessico.  Il danno non e'
+ * teorico: `TOKEN_G` non contiene il backslash, quindi quel token si spezza in
+ * `imparzialit` + `u0000a1` e il lessico impara `imparzialit` come se fosse una
+ * parola del corpus pulito — cioe' la PAROLA MUTILATA diventa la prova con cui
+ * si confermano le ricostruzioni altrove.  Misurato su `content/` al
+ * 2026-08-14: 22 file, 45 occorrenze, tutte dentro un blob `.faq`.
+ */
 function costruisciTestimoni(file, testi) {
   const fuori = [];
   for (const f of file) {
     const testo = testi.get(f.percorso);
-    if (testo === undefined || MARKER.test(testo)) continue;
+    if (testo === undefined || MARKER.test(testo) || haEscapate(testo)) continue;
     fuori.push({ percorso: f.percorso, testo });
   }
   return fuori;
@@ -412,6 +443,191 @@ function riparaConTestimoni(testo, testimoni, cache) {
     if (!fatto) break;
   }
   return { testo: corrente, riparazioni };
+}
+
+// ---------------------------------------------------------------------------
+// LA SPELLING ESCAPATA — lo stesso difetto, scritto `\u00XX` / `\b` / `\f`
+// ---------------------------------------------------------------------------
+//
+// COS'E'.  Il campo `.faq` di un corpo articolo e' JSON dentro un letterale TS,
+// e `JSON.stringify` scrive i C0 come `\u00XX` (o `\b`/`\f` per 0x08 e 0x0C).
+// Il backslash del JSON e' poi escapato dal letterale TS, quindi sul disco si
+// legge `\\u0016`.  La catena e' lossless: il control character c'e', arriva
+// alla pagina dentro il `FAQPage` ld+json, e il crawler lo legge.  Quello che
+// non c'e' e' il BYTE — quindi tutto cio' che sta sopra, che parte da
+// `MARKER.test`, non vedeva niente.  Misurato su `content/` al 2026-08-14: 45
+// occorrenze in 22 file, e il rapporto di questo script diceva zero.
+//
+// COME LA SI VEDE.  Si decodifica il testo — ogni spelling escapata diventa il
+// carattere che denota — e si tiene una mappa verso il testo ORIGINALE, che e'
+// l'unico che si riscrive.  Cosi' il canale testimone lavora sul testo come lo
+// legge un lettore, senza sapere in quale spelling il difetto fosse scritto, e
+// nessun byte C0 finisce mai su disco.
+//
+// PERCHE' SOLO IL TESTIMONE, E PERCHE' UNANIME E CROSS-LOCALE.
+//
+// Il canale del lessico qui non e' una prova, ed e' il corpus a dirlo.  Queste
+// 45 occorrenze non sono 45 caratteri perduti in 45 lingue: sono un difetto
+// nato nell'ITALIANO e poi PROPAGATO VERBATIM dal traduttore, che ha trattato
+// il marker come un token intraducibile.  Misurato sulle quattro copie della
+// stessa FAQ (`salario-minimo-per-il-controprogetto-la-strada-e-in-discesa`):
+//
+//   it  `Il salario minimo sociale \b5 una proposta`   -> «è»
+//   de  `Der soziale Mindestlohn \b5 ein Vorschlag`    -> «ist»
+//   en  `The social minimum wage \b5 a proposal`       -> «is»
+//   fr  `Le salaire minimum social \b5 une proposition` -> «est»
+//
+// La STESSA coppia (0x08,'5') sta al posto di quattro cose diverse, e tre di
+// esse non sono nemmeno un carattere: sono una parola.  Una prova che guarda la
+// parola ricostruita — il lessico, l'esadecimale, la legge del nibble — su
+// questa famiglia non sta deducendo, sta traducendo a occhio.  E' la forma
+// esatta del difetto che in un giro precedente ha DISTRUTTO i titoli: un
+// detector che sbagliava un terzo delle volte e poi «riparava» partendo dalla
+// lingua sbagliata, fabbricando parte del guasto invece di subirlo.
+//
+// Quindi qui la sola prova ammessa e' il testimone, con due strette in piu'
+// rispetto al canale dei byte:
+//
+//   UNANIME     — `risolviConTestimone` accetta gia' solo il caso in cui TUTTI
+//                 i riscontri mettono la STESSA UNICA LETTERA in quel punto
+//                 (`proposte.size === 1`); due lettere diverse sono un rifiuto.
+//   CROSS-LOCALE — almeno un testimone deve stare in un locale DIVERSO da
+//                 quello del file sporco.  Un testimone nello stesso locale e'
+//                 quasi sempre un'altra generazione della stessa pipeline, che
+//                 ha visto lo stesso testo italiano corrotto: conferma la
+//                 propagazione, non il carattere.  Un locale diverso e' un
+//                 ramo di traduzione indipendente.
+//
+// COSA COSTA, DICHIARATO.  Su `content/` al 2026-08-14 questa precondizione
+// ripara ZERO occorrenze su 45: 14 perche' la frase non compare in nessun file
+// pulito (il testo di una FAQ e' per-articolo, i suoi gemelli sono tradotti),
+// 26 perche' nessun testimone mette UNA LETTERA in quel punto, 5 perche'
+// l'ancora a sinistra e' corta o sporca.  Zero riparazioni non e' un canale che
+// non funziona: e' il canale che si ferma dove si fermerebbe un umano onesto.
+// Le 45 restano col loro marker — cioe' con la loro ancora — e ora sono
+// CONTATE nel rapporto e nel codice d'uscita, che e' la differenza fra un
+// residuo dichiarato e un residuo invisibile.
+
+/** I locali del corpus.  Serve a leggere il locale da un percorso, niente piu'. */
+const LOCALI = new Set(['it', 'en', 'de', 'fr']);
+
+/**
+ * Il locale di un file di `content/`, o `null` se il percorso non lo dice.
+ * Due forme: `content/blog-body/<loc>/<slug>.ts` e `content/blog-meta-<loc>.ts`.
+ */
+function localeDi(percorso) {
+  const cartella = /(?:^|\/)([a-z]{2})\/[^/]+$/.exec(percorso);
+  if (cartella && LOCALI.has(cartella[1])) return cartella[1];
+  const suffisso = /-([a-z]{2})\.[A-Za-z]+$/.exec(percorso);
+  return suffisso && LOCALI.has(suffisso[1]) ? suffisso[1] : null;
+}
+
+/** Il file porta almeno un C0 in forma escapata? */
+function haEscapate(testo) {
+  return findEscapedControlChars(testo).length > 0;
+}
+
+/**
+ * `testo` con ogni spelling escapata sostituita dal carattere che denota, piu'
+ * la mappa verso l'originale: per ogni carattere decodificato `inizioIn` e
+ * `fineIn` dicono quale tratto dell'originale lo produce, e `daEscape` se
+ * quel carattere e' uno dei marker che si stanno cercando.
+ * `null` se nel testo non c'e' nessuna spelling escapata.
+ */
+function decodificaEscapate(testo) {
+  const occorrenze = findEscapedControlChars(testo);
+  if (occorrenze.length === 0) return null;
+  let fuori = '';
+  const inizioIn = [];
+  const fineIn = [];
+  const daEscape = [];
+  const aggiungi = (a, b, escapato) => { inizioIn.push(a); fineIn.push(b); daEscape.push(escapato); };
+  let cursore = 0;
+  for (const o of occorrenze) {
+    for (let k = cursore; k < o.index; k += 1) { fuori += testo[k]; aggiungi(k, k + 1, false); }
+    fuori += String.fromCharCode(o.code);
+    aggiungi(o.index, o.index + o.spelling.length, true);
+    cursore = o.index + o.spelling.length;
+  }
+  for (let k = cursore; k < testo.length; k += 1) { fuori += testo[k]; aggiungi(k, k + 1, false); }
+  return { testo: fuori, inizioIn, fineIn, daEscape };
+}
+
+/**
+ * Un giro di sola VALUTAZIONE: cosa si potrebbe riparare in `testo` e cosa no.
+ * Non applica niente, e continua a raccogliere i rifiuti anche dopo aver
+ * trovato la prima riparazione possibile — cosi' `lasciate` e' completo a ogni
+ * giro, tetto dei giri compreso.  Un elenco di residui che si accorcia perche'
+ * il ciclo si e' fermato sarebbe la peggiore delle uscite: dichiarerebbe pulito
+ * cio' che nessuno ha guardato.
+ */
+function valutaEscapate(mio, testo, testimoni, cache) {
+  const d = decodificaEscapate(testo);
+  if (!d) return { lasciate: [], scelta: null };
+  const lasciate = [];
+  let scelta = null;
+  for (let i = 0; i < d.daEscape.length; i += 1) {
+    if (!d.daEscape[i]) continue;
+    const a = d.inizioIn[i];
+    const spelling = testo.slice(a, d.fineIn[i]);
+    const esito = risolviConTestimone(d.testo, i, testimoni, cache);
+    if (!esito.carattere) {
+      lasciate.push({ offset: a, spelling, motivo: esito.motivo });
+      continue;
+    }
+    const locali = [...new Set(esito.testimoni.map(localeDi))];
+    if (!locali.some((l) => l && l !== mio)) {
+      lasciate.push({
+        offset: a,
+        spelling,
+        motivo: `testimone: nessun testimone fuori dal locale ${JSON.stringify(mio)} (${locali.map((l) => JSON.stringify(l)).join(' ')})`,
+      });
+      continue;
+    }
+    // La coda e' contata in caratteri DECODIFICATI: il tratto di originale da
+    // sostituire finisce dove finisce l'ultimo di essi, che NON e' `a + coda`
+    // — un carattere della coda puo' essere a sua volta una spelling escapata,
+    // cioe' sette caratteri di file per uno solo di testo.
+    const ultimo = i + esito.coda;
+    if (ultimo >= d.fineIn.length) {
+      lasciate.push({ offset: a, spelling, motivo: 'testimone: la coda esce dal file' });
+      continue;
+    }
+    if (!scelta) {
+      scelta = {
+        offset: a,
+        fine: d.fineIn[ultimo],
+        prima: testo.slice(a, d.fineIn[ultimo]),
+        dopo: esito.carattere,
+        canale: 'escapata (testimone unanime cross-locale)',
+        freq: esito.testimoni.length,
+        testimoni: esito.testimoni.slice(0, 3),
+        locali: locali.filter(Boolean),
+      };
+    }
+  }
+  return { lasciate, scelta };
+}
+
+/**
+ * Passa il file sulla spelling escapata, fino a punto fisso.  Ritorna il testo
+ * ORIGINALE con le sole occorrenze provate dal testimone unanime cross-locale
+ * sostituite, piu' l'elenco di cio' che si e' lasciato e perche'.  Si applica
+ * una riparazione per giro perche' ognuna sposta tutti gli offset, e perche'
+ * una riparazione puo' ripulire l'ancora della successiva.
+ */
+function riparaEscapate(percorso, testo, testimoni, cache) {
+  const riparazioni = [];
+  const mio = localeDi(percorso);
+  let corrente = testo;
+  let esito = valutaEscapate(mio, corrente, testimoni, cache);
+  for (let giro = 0; giro < TESTIMONE_GIRI_MAX && esito.scelta; giro += 1) {
+    const s = esito.scelta;
+    corrente = corrente.slice(0, s.offset) + s.dopo + corrente.slice(s.fine);
+    riparazioni.push(s);
+    esito = valutaEscapate(mio, corrente, testimoni, cache);
+  }
+  return { testo: corrente, riparazioni, lasciate: esito.lasciate };
 }
 
 // ---------------------------------------------------------------------------
@@ -730,7 +946,9 @@ function costruisciLessico(file, testi) {
   let puliti = 0;
   for (const f of file) {
     const testo = testi.get(f.percorso);
-    if (testo === undefined || MARKER.test(testo)) continue;
+    // Stessa esclusione dei testimoni, e per la ragione scritta li': un file
+    // con la sola spelling escapata insegna al lessico la parola mutilata.
+    if (testo === undefined || MARKER.test(testo) || haEscapate(testo)) continue;
     puliti += 1;
     for (const m of testo.matchAll(TOKEN_G)) {
       const t = ritaglia(m[0]);
@@ -1197,6 +1415,15 @@ function main() {
   const residuiPerFile = [];
   let residuiRiparati = 0;
   let residuiPrefiltrati = 0;
+  // La spelling escapata, contata a parte dai byte grezzi ma con lo stesso
+  // peso: `escapateLasciate` entra nel codice d'uscita.  E' la differenza col
+  // canale del residuo, e non e' arbitraria — un residuo lasciato e' quasi
+  // sempre testo giusto (`l'A9`, uno slug), mentre ognuna di queste 45 e' un
+  // control character che arriva davvero dentro il `FAQPage` ld+json.
+  const escapateElenco = [];
+  const escapatePerFile = [];
+  let escapateOccorrenze = 0;
+  let escapateRiparate = 0;
 
   for (const f of file) {
     const testo = testi.get(f.percorso);
@@ -1239,6 +1466,26 @@ function main() {
         leggeNibble: r.leggeNibble, nibblePro: r.proNibble, nibbleContro: r.controNibble,
       });
     }
+    // La spelling ESCAPATA, prima del residuo: una riparazione qui puo'
+    // ripulire l'ancora di un residuo, e il residuo non ha ancora da restituire.
+    const nEscapate = findEscapedControlChars(corrente).length;
+    if (nEscapate > 0) {
+      escapateOccorrenze += nEscapate;
+      const esc = riparaEscapate(f.percorso, corrente, testimoni, cacheTestimoni);
+      corrente = esc.testo;
+      escapateRiparate += esc.riparazioni.length;
+      for (const rip of esc.riparazioni) {
+        riparazioniElenco.push({
+          file: f.percorso, offset: rip.offset, prima: rip.prima, dopo: rip.dopo,
+          canale: rip.canale, freqNelCorpus: rip.freq,
+          testimoni: rip.testimoni, localiTestimoni: rip.locali,
+        });
+      }
+      for (const l of esc.lasciate) escapateElenco.push({ file: f.percorso, ...l });
+      escapatePerFile.push({
+        file: f.percorso, occorrenze: nEscapate, riparate: esc.riparazioni.length, lasciate: esc.lasciate.length,
+      });
+    }
     // Il canale del residuo gira SU TUTTI I FILE, e non e' un dettaglio: il file
     // che porta il difetto di questo giro — `content/blog-meta-it.ts` — non ha
     // un solo byte C0, ed e' esattamente per questo che nessuno lo trovava.
@@ -1276,6 +1523,15 @@ function main() {
     perCoppia: [...perCoppia].map(([k, v]) => ({ coppia: k, n: v.n, canale: v.canale, esempio: v.esempio })).sort((a, b) => b.n - a.n),
     motiviRifiuto: [...motivi].map(([k, v]) => ({ motivo: k, n: v })).sort((a, b) => b.n - a.n),
     perFile: perFile.sort((a, b) => b.marker - a.marker),
+    // La spelling escapata (#345 item 1), contata a parte dai byte grezzi ma
+    // con lo stesso peso sul codice d'uscita.
+    escapate: {
+      occorrenze: escapateOccorrenze,
+      riparate: escapateRiparate,
+      lasciate: escapateElenco.length,
+      perFile: escapatePerFile,
+      elenco: escapateElenco,
+    },
     // Il canale del residuo, contato a parte: `lasciate` NON entra in
     // `rifiutate` e non tocca il codice d'uscita — vedi il commento sopra.
     residui: {
@@ -1307,6 +1563,14 @@ function main() {
     r.push('   (byte C0 + coda) -> carattere            n   canale            esempio');
     for (const c of rapporto.perCoppia) {
       r.push(`     ${c.coppia.padEnd(28)} ${String(c.n).padStart(4)}   ${c.canale.padEnd(16)} ${c.esempio}`);
+    }
+    r.push('');
+    r.push('   spelling escapata (\\u00XX, \\b, \\f — nessun byte C0 sul disco):');
+    r.push(`     occorrenze: ${escapateOccorrenze}   in ${escapatePerFile.length} file`);
+    r.push(`     riparate:   ${escapateRiparate}   (solo testimone unanime cross-locale)`);
+    r.push(`     lasciate:   ${escapateElenco.length}   (contano nel codice d'uscita: sono difetti, non testo giusto)`);
+    for (const x of escapateElenco.slice(0, opz.maxRifiutiMostrati)) {
+      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.spelling)}  ${x.motivo}`);
     }
     r.push('');
     r.push('   residuo (cifra orfana, marker gia\' strippato):');
@@ -1345,7 +1609,7 @@ function main() {
     process.stdout.write(`${r.join('\n')}\n`);
   }
 
-  process.exit(rifiutate > 0 ? 2 : 0);
+  process.exit(rifiutate > 0 || escapateElenco.length > 0 ? 2 : 0);
 }
 
 // Guardia CLI: importare questo file da un test non deve eseguirlo.
@@ -1356,5 +1620,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
 export {
   riparaTesto, risolviToken, costruisciLessico, ritaglia,
   riparaResidui, residuiDi, costruisciTestimoni,
+  riparaEscapate, decodificaEscapate, localeDi, haEscapate,
   MARKER, MARKER_G, TOKEN_G, ALFABETO,
 };
