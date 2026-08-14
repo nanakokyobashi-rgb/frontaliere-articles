@@ -236,6 +236,62 @@ test('a conflict outside the allowlist aborts and leaves the tree untouched', ()
   }
 });
 
+test('a per-article path with neither a --theirs nor an --ours copy aborts on the first pass (#347)', () => {
+  // The degenerate conflict shape #329's fix never had a real fixture for: a
+  // path git flags as unmerged (present at stage 1) but with NEITHER a stage 2
+  // (--ours) NOR a stage 3 (--theirs) entry to take — e.g. a "both deleted"
+  // conflict, not the add/add this branch is written for. Constructing it
+  // through ordinary commits isn't possible: git auto-resolves a plain
+  // delete/delete with no conflict at all, so the two stages are stripped here
+  // with index plumbing to pin the exact state the resolution loop must
+  // handle, once git itself has produced it.
+  const w = makeWorld();
+  const PER_ARTICLE = 'content/blog-body/it/degenerate.ts';
+  try {
+    write(w.work, PER_ARTICLE, 'base\n');
+    commitAll(w.work, 'seed a per-article file');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const baseBlob = git(w.work, 'rev-parse', `HEAD:${PER_ARTICLE}`).trim();
+
+    landUpstream(w, [[PER_ARTICLE, 'upstream version\n', 'concurrent run rewrites it']]);
+
+    write(w.work, PER_ARTICLE, 'mine version\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+    const before = headSha(w.work);
+
+    // Drive the real conflict, then strip stage 2/3 down to stage 1 only —
+    // the on-disk shape of a "both deleted" conflict (verified separately:
+    // `git status` reports it as `DD`, and `git checkout --ours/--theirs`
+    // both fail with "does not have {our,their} version").
+    try {
+      git(w.work, 'pull', '--rebase', w.upstream, 'main');
+    } catch { /* conflict expected */ }
+    assert.ok(rebaseInProgress(w.work), 'setup failed to produce the conflict this test needs');
+    git(w.work, 'rm', '--cached', '-q', '--', PER_ARTICLE);
+    execFileSync('git', ['update-index', '--index-info'], {
+      cwd: w.work,
+      env: GIT_ENV,
+      input: `100644 ${baseBlob} 1\t${PER_ARTICLE}\n`,
+    });
+    assert.match(git(w.work, 'status', '--porcelain', '--', PER_ARTICLE), /^DD /);
+
+    const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING, '--take-theirs', 'content/blog-body/');
+    assert.equal(code, 1, 'a conflict with neither side to take must fail, not silently proceed');
+    assert.doesNotMatch(
+      out,
+      /resolved per-article conflict/,
+      'must not claim to have resolved a file it never staged — that false claim is the bug: ' +
+        `it hid the fact that nothing was resolved. Output:\n${out}`,
+    );
+    assert.match(out, /neither a --theirs nor an --ours copy/);
+    assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
+    assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('a plain divergence with no conflict rebases cleanly', () => {
   const w = makeWorld();
   try {
