@@ -374,6 +374,31 @@ const DECLARED_ABSENT = {
       'venisse rinominato o rimosso — nel qual caso l\'argomento diventerebbe piu\' debole, ' +
       'non sbagliato.',
   },
+  // Gli altri tre produttori del corpus citano lo stesso consumatore a valle,
+  // per lo stesso argomento e nella stessa forma: la guardia sul percorso di
+  // scrittura serve PERCHE' quel cron del sito puo' portare al sito un articolo
+  // gia' su main senza aspettare il `repository_dispatch`. Vedi la voce di
+  // `generate-article.yml` sopra — nessuno di questi lo invoca.
+  '.github/workflows/publish-journalist-articles.yml :: sync-articles-sitemaps.yml': {
+    kind: 'site-only',
+    reason:
+      'Citazione descrittiva, gemella di quella in generate-article.yml: argomenta perche\' il ' +
+      'preflight di publish-api.yml (che ferma l\'ANNUNCIO) non sostituisce la guardia prima del ' +
+      'commit (che ferma la SCRITTURA). Niente qui lo invoca, e la guardia funziona identica se ' +
+      'di la\' venisse rinominato.',
+  },
+  '.github/workflows/generate-daily-brief.yml :: sync-articles-sitemaps.yml': {
+    kind: 'site-only',
+    reason:
+      'Idem: la riga spiega perche\' un\'edizione committata sopra un corpus sporco arriverebbe al ' +
+      'sito col cron 2x/giorno anche senza dispatch. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/generate-border-wait-ranking-weekly.yml :: sync-articles-sitemaps.yml': {
+    kind: 'site-only',
+    reason:
+      'Idem: stessa argomentazione sul digest evergreen, che dopo la prima registrazione scrive ' +
+      'sempre fuori da registerArticleFiles(). Descrittiva, non una dipendenza.',
+  },
   '.github/workflows/post-merge-followup.yml :: followup-reconcile.yml': {
     kind: 'site-only',
     reason:

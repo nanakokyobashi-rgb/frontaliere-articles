@@ -145,6 +145,55 @@ jobs:
         if: steps.mode.outputs.dry != 'true'
         run: node generator/scripts/publish-journalist-article.mjs
 
+      # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
+      #
+      # PERCHE' ANCHE QUI, dato che questo produttore passa da
+      # registerArticleFiles() e quindi ha gia' `sanitizePromptPlaceholders` in
+      # processo: quella meta' copre i SEGNAPOSTO e nient'altro. La classe
+      # ALLUCINAZIONI — istituzioni e acronimi inventati, che
+      # `article-fabrication-guard` cerca — non ha nessun equivalente in
+      # processo, e questo e' il produttore con l'articolo piu' lungo e piu'
+      # scritto dal modello (excerpt, traduzioni, link interni).
+      #
+      # Il preflight di `publish-api.yml` non sostituisce questo step: quello
+      # impedisce di PUBBLICARE, questo impedisce di SCRIVERE. Restando su main
+      # senza essere annunciato, un corpo fabbricato arriva al sito lo stesso
+      # dal cron 2x/giorno di `sync-articles-sitemaps.yml`, e nel frattempo
+      # tiene rosso ogni gate corpus-wide del repo.
+      #
+      # LA CONDIZIONE E' LA SCRITTURA, non il run: se questo run non ha toccato
+      # `content/`, non ha niente da validare, e farlo morire su un difetto
+      # preesistente spegnerebbe la pubblicazione per un articolo che non ha
+      # scritto lui — con l'aggravante, qui, che Firestore ha gia' marcato
+      # quegli id `published` (vedi l'::error:: dello step sotto).
+      - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
+        id: guard
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna scrittura sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`publish-journalist-articles\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: le modifiche restano sul runner e spariscono con lui, \`main\` non le vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+            echo
+            echo "- se coincidono, il difetto e' di cio' che questo run ha appena scritto: gli id restano \`published\` in Firestore e vanno rimessi in coda a mano;"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni run che scrive muore qui."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       - name: Commit and push registered articles
         id: commit
         if: steps.mode.outputs.dry != 'true'

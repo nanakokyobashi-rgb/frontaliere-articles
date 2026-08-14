@@ -41,6 +41,7 @@ import {
   SCHEMA_PLACEHOLDER_LITERALS,
   SLUG_OWNED_LITERALS,
   PROMPT_SCAFFOLD_LABELS,
+  SOURCE_ECHO_MARKERS,
   PLACEHOLDER_RULES,
   leadOf,
   findPromptPlaceholders,
@@ -134,13 +135,35 @@ describe('la FAQ segnaposto TRADOTTA — cio\' che i letterali italiani non poss
     ],
   };
 
-  // Questa e' la PREMESSA di `orphanFaqLocales`, e va tenuta rossa se cade:
-  // se un giorno `cleanFaqPairs` imparasse le tre lingue, la regola strutturale
-  // resterebbe corretta ma non sarebbe piu' l'unica via.
+  // ── LA PREMESSA DI `orphanFaqLocales`, aggiornata dopo `source-echo-allcaps` ──
+  //
+  // Fino al 2026-08-14 questi tre test pretendevano `dropped == []`: nessuna
+  // delle tre traduzioni era vista, e quella cecita' totale era la motivazione
+  // della regola strutturale. `source-echo-allcaps` (#300) ne ha recuperata
+  // UNA — la prima coppia, che porta il marcatore ALL-CAPS nella RISPOSTA — e
+  // lasciato invisibili le altre due, dove il modello ha tradotto anche il
+  // marcatore in prosa minuscola («based on the source», «basierend auf der
+  // Quelle»).
+  //
+  // La premessa quindi non cade, si affila: due coppie segnaposto su tre
+  // restano indistinguibili da una FAQ vera in en/de/fr, quindi
+  // `orphanFaqLocales` resta l'unica via che le nomina. Il test dice ORA cosa
+  // vede e cosa no, invece di dire «non vede niente», che dal 2026-08-14 e'
+  // falso — un test che afferma il falso e' come quello che codificava la
+  // scappatoia: passa, e mente sul motivo.
   for (const [locale, pairs] of Object.entries(TRADOTTE)) {
-    it(`cleanFaqPairs NON vede il segnaposto in '${locale}': i letterali dello schema sono italiani`, () => {
-      const { dropped } = cleanFaqPairs(pairs, { dropShort: false });
-      assert.deepEqual(dropped, [], `se questo scarta qualcosa, la motivazione di orphanFaqLocales e' cambiata`);
+    it(`cleanFaqPairs vede SOLO la coppia col marcatore ALL-CAPS in '${locale}': le altre due restano invisibili`, () => {
+      const { dropped, pairs: kept } = cleanFaqPairs(pairs, { dropShort: false });
+      assert.deepEqual(
+        dropped.map((d) => d.reason),
+        ['source-echo-allcaps'],
+        'la prima coppia va scartata per il marcatore nella risposta, e per quello soltanto',
+      );
+      assert.equal(
+        kept?.length,
+        2,
+        'le coppie 2 e 3 non hanno marcatore: nessun letterale italiano le vede, ed e\' questa la ragione per cui orphanFaqLocales esiste',
+      );
     });
   }
 
@@ -220,10 +243,21 @@ describe('l\'excerpt TRADOTTO in quattro lingue (trasferirsi-a-marchirolo-…)',
     });
   }
 
-  it('en/de/fr li vede SOLO la regola di forma, non un letterale', () => {
+  it('en/de/fr li vedono SOLO le regole di forma, mai un letterale', () => {
     for (const [locale, valore] of casi.slice(1)) {
       const regole = findPromptPlaceholders(valore).map((h) => h.rule);
-      assert.deepEqual(regole, ['budget-parenthetical'], `${locale}: atteso solo budget-parenthetical, trovato ${regole.join(',')}`);
+      // Il claim non e' «una regola sola»: e' che nessuna regola DERIVATA da un
+      // letterale italiano arriva qui. Dal 2026-08-14 le regole di forma che lo
+      // vedono sono due (`source-echo-allcaps` ha aggiunto la seconda), e
+      // pinnare il conteggio invece del claim avrebbe reso rosso un guard che
+      // migliora.
+      assert.deepEqual(
+        regole.filter((r) => r.startsWith('schema-lead-')),
+        [],
+        `${locale}: un letterale italiano non puo' matchare una traduzione — trovato ${regole.join(',')}`,
+      );
+      assert.ok(regole.includes('budget-parenthetical'), `${locale}: l'inciso col budget resta l'invariante, trovato ${regole.join(',')}`);
+      assert.ok(regole.includes('source-echo-allcaps'), `${locale}: il marcatore ALL-CAPS resta l'altro invariante, trovato ${regole.join(',')}`);
     }
   });
 });
@@ -323,6 +357,131 @@ describe('i falsi positivi misurati sul corpus: `(max ` NON e\' un marcatore', (
 });
 
 // ═══════════════════════════════════════════════════════════════════════════
+// 1c. LE TRE VARIANTI SU CUI IL GUARD ERA VACUO (#295 → piano in #300)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// #295 ha rimesso nel corpus i tre leak reali trovati in #208/#241 e ha
+// rilanciato questa suite: **0 rossi su 85**. Non era un guard debole, era un
+// guard che su quelle tre forme non guardava. #297 ne ha chiusa una (il campo
+// `keywords`, che il gate SEO non scansionava affatto); le altre due sono
+// arrivate qui col terzo matcher che la bonifica richiede per non peggiorare i
+// campi che ripara.
+//
+// Ogni stringa qui sotto e' VERBATIM da produzione: e' la differenza fra
+// provare il guard e provare la propria idea del guard.
+
+describe('#300.1 — il budget in CODA al campo, senza parentesi (imposta-di-succesione… / chi-sono-i-frontalieri…)', () => {
+  const reali = [
+    ['it', 'Un ristorante in Lugano, Ticino, con camerieri in servizio. Max 125 char'],
+    ['en', 'A restaurant in Lugano, Ticino, with waiters in service. Max 125 char'],
+    ['de', 'Ein Restaurant in Lugano, Ticino, mit Bedienungen im Dienst. Max 125 Char'],
+    ['fr', 'Un restaurant à Lugano, Ticino, avec des serveurs en service. Max 125 Char'],
+    ['it/ch', 'Una galleria ferroviaria in Svizzera con una vista panoramica del lago di Lugano, con un treno in arrivo o in partenza. Max 125 char.'],
+  ];
+  for (const [locale, valore] of reali) {
+    it(`${locale}: «…${valore.slice(-28)}»`, () => {
+      const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+      assert.ok(regole.includes('budget-tail'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+    });
+  }
+
+  it('le due regole preesistenti NON lo vedono — e\' questo il buco che #300 nomina', () => {
+    const valore = reali[0][1];
+    const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+    assert.ok(!regole.includes('budget-as-value'), 'il campo non e\' SOLO il budget');
+    assert.ok(!regole.includes('budget-parenthetical'), 'il budget non e\' fra parentesi');
+  });
+
+  it('l\'ancora di sinistra: il budget deve APRIRE la clausola, non starci dentro', () => {
+    // Prosa legittima che una regola senza ancora rigetterebbe. Nessuna di
+    // queste compare oggi nel corpus, ma sono la forma in cui comparirebbe:
+    // un articolo che spiega un modulo con un limite di caratteri.
+    for (const legittimo of [
+      'Il campo note del formulario accetta al massimo 500 caratteri.',
+      'La motivazione va scritta in massimo 200 caratteri.',
+      'Il riassunto deve contenere massimo 160 caratteri di testo utile.',
+    ]) {
+      assert.deepEqual(findPromptPlaceholders(legittimo), [], `falso positivo su: ${legittimo}`);
+    }
+  });
+
+  it('la coda va tolta, non buttato il campo: resta un alt-text vero', () => {
+    // La prova della scelta di `rebuildImageAlt` (repair-prompt-placeholders.mjs):
+    // il testo davanti al budget e' contenuto buono.
+    const stripped = 'Un ristorante in Lugano, Ticino, con camerieri in servizio';
+    assert.deepEqual(findPromptPlaceholders(stripped), []);
+  });
+});
+
+describe('#300.1 — `DALLA FONTE` e le sue traduzioni fuori dai letterali (trasferirsi-a-aprica-…)', () => {
+  // Il template «trasferirsi a X da frontaliere» ha un proprio segnaposto che
+  // non e' mai entrato in SCHEMA_PLACEHOLDER_LITERALS: qui non c'e' la prosa
+  // italiana a cui i letterali sono ancorati, c'e' solo il marcatore.
+  const reali = [
+    ['it', "Trasferirsi ad Aprica da frontaliere: costi, tempi e servizi DALLA FONTE."],
+    ['en', 'Moving to Aprica as a cross-border worker: costs, times and services FROM THE SOURCE.'],
+    ['de', 'Umzug nach Aprica als Grenzgänger: Kosten, Zeiten und Dienstleistungen AUS DER QUELLE.'],
+    ['fr', "Déménager à Aprica en tant que frontalier : coûts, délais et services DE LA SOURCE."],
+  ];
+  for (const [locale, valore] of reali) {
+    it(`${locale}: «…${valore.slice(-24)}»`, () => {
+      const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+      assert.ok(regole.includes('source-echo-allcaps'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+      assert.deepEqual(
+        regole.filter((r) => r.startsWith('schema-lead-')),
+        [],
+        'nessun letterale dello schema arriva qui: e\' il punto della regola',
+      );
+    });
+  }
+
+  it('MINUSCOLO e\' prosa legittima: 168 campi pubblicati lo contengono', () => {
+    // La misura che decide la regola. Se un giorno qualcuno le togliesse il
+    // vincolo di maiuscolo, questi tre diventerebbero rossi in produzione.
+    for (const prosa of [
+      'I dati provengono dalla fonte ufficiale del Cantone.',
+      'Data from the source is public and verifiable.',
+      "Les données de la source sont publiques.",
+    ]) {
+      assert.deepEqual(findPromptPlaceholders(prosa), [], `falso positivo su prosa: ${prosa}`);
+    }
+  });
+});
+
+describe('#300 (residuo misurato qui) — il campo che descrive SE STESSO (terzo-pilastro-3a-vantaggi-2026-basilea)', () => {
+  const reali = [
+    "Descrizione dell'immagine in italiano, massimo 125 caratteri",
+    "Descrizione dell'immagine in tedesco, massimo 125 caratteri",
+    "Descrizione dell'immagine in inglese, massimo 125 caratteri",
+    "Descrizione dell'immagine in francese, massimo 125 caratteri",
+  ];
+  for (const valore of reali) {
+    it(`«${valore.slice(0, 46)}…»`, () => {
+      const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+      assert.ok(regole.includes('alt-field-description'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+    });
+  }
+
+  it('senza questa regola la BONIFICA peggiorerebbe il campo invece di ripararlo', () => {
+    // `budget-tail` da solo toglie la coda e lascia un segnaposto piu' corto
+    // che nessun'altra regola vede. E' la ragione per cui la regola esiste:
+    // cosi' il campo non e' riparabile per sottrazione e si ricade sul titolo.
+    const codaTolta = "Descrizione dell'immagine in tedesco";
+    assert.ok(
+      findPromptPlaceholders(codaTolta).some((h) => h.rule === 'alt-field-description'),
+      'il residuo della sottrazione deve restare visibile, altrimenti la bonifica pubblica un segnaposto',
+    );
+  });
+
+  it('un corpo che PARLA della descrizione di un\'immagine non viene toccato', () => {
+    assert.deepEqual(
+      findPromptPlaceholders("Nel modulo va indicata anche la descrizione dell'immagine allegata alla domanda."),
+      [],
+    );
+  });
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
 // 2. LOCK — il criterio segue il template, non viceversa
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -402,6 +561,30 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
         createArticleSrc.includes(label),
         `"${label}" non compare piu' in create-article.mjs: la regola scaffold punta nel vuoto`,
       );
+    }
+  });
+
+  // Stessa disciplina delle etichette del preambolo: una lista scritta a mano
+  // che non e' ancorata al template invecchia in silenzio. Qui l'ancora e' il
+  // marcatore ITALIANO, che nel template c'e'; le altre tre sono traduzioni
+  // OSSERVATE (#295, articolo `trasferirsi-a-aprica-…`) e per costruzione non
+  // possono comparire in un prompt scritto in italiano.
+  it('il marcatore ALL-CAPS e\' ancora quello che il template urla', () => {
+    const italiano = SOURCE_ECHO_MARKERS[0];
+    assert.ok(
+      SCHEMA_PLACEHOLDER_LITERALS.some((l) => l.includes(italiano)),
+      `"${italiano}" non compare piu' in nessun letterale dello schema: la regola source-echo-allcaps ` +
+        'sta inseguendo un prompt che non esiste piu\', e le tre traduzioni con lei',
+    );
+    assert.ok(
+      createArticleSrc.includes(italiano),
+      `"${italiano}" non compare piu' in create-article.mjs`,
+    );
+  });
+
+  it('ogni marcatore tradotto e\' ALL-CAPS: e\' il maiuscolo a fare il lavoro', () => {
+    for (const marker of SOURCE_ECHO_MARKERS) {
+      assert.equal(marker, marker.toUpperCase(), `${marker} non e' ALL-CAPS: la regola non lo distinguerebbe dalla prosa`);
     }
   });
 

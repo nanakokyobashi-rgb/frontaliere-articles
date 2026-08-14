@@ -121,6 +121,52 @@ jobs:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: npx -y tsx@4 generator/scripts/generate-border-wait-ranking-article.mjs
 
+      # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
+      #
+      # PERCHE' ANCHE SU UN PRODUTTORE DETERMINISTICO, e la ragione e' la stessa
+      # del bollettino ma qui vale al 100% dei run: `classifica-dogane-ticino`
+      # e' un articolo EVERGREEN, registrato una volta sola. Il ramo `!exists`
+      # — l'unico che chiama `registerArticleFiles()`, cioe' l'unico che esegue
+      # `sanitizePromptPlaceholders` in processo — e' gia' stato consumato. Da
+      # allora ogni singolo run passa da `refreshBodyFiles()`, che fa
+      # `writeFileSync` sui quattro body senza nessuna guardia in mezzo.
+      #
+      # Il render e' offline e senza modello, quindi non e' il segnaposto il
+      # rischio atteso: e' che questo sia un push su `content/` che, senza
+      # questo step, arriva a `main` mentre il corpus e' sporco, e di li' al
+      # sito col cron 2x/giorno di `sync-articles-sitemaps.yml` — che non
+      # aspetta il `repository_dispatch` di `publish-api.yml`.
+      #
+      # LA CONDIZIONE E' LA SCRITTURA: una settimana senza finestra di dati
+      # (vedi il refiuto dello step sopra) non tocca `content/` e non scansiona.
+      - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
+        id: guard
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna scrittura sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`generate-border-wait-ranking-weekly\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: il digest resta sul runner e sparisce con lui, \`main\` non lo vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+            echo
+            echo "- se coincidono, il difetto e' del digest appena reso, quindi del template o della finestra di dati;"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — il digest si rifa' col \`workflow_dispatch\`, e' evergreen e non ha una data da perdere."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       # Only the push needs a credential here — the window comes from the public
       # CDN and the render is offline — so Remote Config is loaded only on a run
       # that will actually commit. A dry run never touches it.

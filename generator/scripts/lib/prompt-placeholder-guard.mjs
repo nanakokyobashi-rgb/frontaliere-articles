@@ -69,6 +69,18 @@
  *     schema JSON: sono le etichette del PREAMBOLO, che il modello rispedisce
  *     indietro insieme alla pagina di origine.
  *
+ * Tre altre sono arrivate dopo, dalla misura di #295 su un guard che restava
+ * VERDE su tre varianti reali (0 rossi su 85 test) — il piano e' in #300:
+ *
+ *   · `budget-tail`           — il budget in CODA a un campo vero, senza
+ *     parentesi: `… con camerieri in servizio. Max 125 char`. 15 campi
+ *     pubblicati, che ne' `budget-as-value` ne' `budget-parenthetical` vedono.
+ *   · `source-echo-allcaps`   — `DALLA FONTE` e le sue traduzioni, quando
+ *     arrivano da un template DIVERSO e senza la prosa italiana attorno a cui
+ *     i letterali sono ancorati.
+ *   · `alt-field-description` — il campo che descrive SE STESSO
+ *     («Descrizione dell'immagine in tedesco, massimo 125 caratteri»).
+ *
  * ## Falsi positivi: misurati per TIPO DI CAMPO, perche' il rischio e' diverso
  *
  * Su `imageAlt` un falso positivo costa un alt-text rigenerato; su `body1`
@@ -173,6 +185,48 @@ export const PROMPT_SCAFFOLD_LABELS = Object.freeze([
   'EXISTING ARTICLE IDS',
 ]);
 
+/**
+ * I marcatori ALL-CAPS che sopravvivono alla TRADUZIONE del segnaposto.
+ *
+ * ## Il buco che chiudono, misurato (#295 item 1.3, riportato in #300)
+ *
+ * I matcher derivati dai letterali sono ancorati alla prosa italiana dello
+ * schema (`leadOf('Risposta con dati DALLA FONTE. 50-100 parole.')` →
+ * `Risposta con dati DALLA FONTE`). L'articolo
+ * `trasferirsi-a-aprica-da-frontaliere-pro-e-contro` e' uscito in produzione con
+ * lo stesso segnaposto prodotto da un template DIVERSO (la serie «trasferirsi a
+ * X da frontaliere»), quindi senza quella prosa attorno, e propagato in quattro
+ * lingue: `DALLA FONTE` / `FROM THE SOURCE` / `AUS DER QUELLE` / `DE LA SOURCE`.
+ * Nessun letterale lo vedeva, in nessuna delle quattro locali.
+ *
+ * ## Perche' ALL-CAPS e perche' NON case-insensitive
+ *
+ * E' la stessa forma di `budget-parenthetical`: si cerca cio' che il traduttore
+ * NON riscrive. Qui l'invariante e' il MAIUSCOLO — lo schema urla il vincolo, e
+ * il modello lo ricopia urlando anche quando ne traduce le parole.
+ *
+ * La distinzione porta tutto il peso, ed e' misurata: sui 157.426 campi
+ * pubblicati la variante case-insensitive (`\b(dalla fonte|from the source|…)`)
+ * scatta su **168 campi**, tutti prosa legittima («dati provengono dalla fonte
+ * ufficiale», «données de la source»). La variante ALL-CAPS scatta su **0**.
+ * Un guard costruito sulla prima sarebbe stato spento entro un giorno.
+ *
+ * Il LOCK sul template vive nel test: `DALLA FONTE` dev'essere ancora presente
+ * in `SCHEMA_PLACEHOLDER_LITERALS`, altrimenti questa lista sta inseguendo un
+ * prompt che non esiste piu'. Le altre tre sono le traduzioni OSSERVATE in
+ * produzione (#295), non una lista di lingue immaginate: stessa disciplina di
+ * `PROMPT_SCAFFOLD_LABELS`, che elenca le etichette che il prompt costruisce
+ * davvero.
+ */
+export const SOURCE_ECHO_MARKERS = Object.freeze([
+  'DALLA FONTE',
+  'DALLE FONTI',
+  'FROM THE SOURCE',
+  'FROM SOURCE',
+  'AUS DER QUELLE',
+  'DE LA SOURCE',
+]);
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Derivazione dei matcher
 // ─────────────────────────────────────────────────────────────────────────────
@@ -253,6 +307,74 @@ export const PLACEHOLDER_RULES = Object.freeze([
     // Misurato: 0 falsi positivi su 107.659 campi pubblicati.
     rx: /\(\s*(?:max|max\.|massimo|maximum|maximal|máximo)\s+\d{2,4}\s*(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\s*\)/i,
     why: "Inciso col budget di caratteri dello schema (`(max 160 chars)`): sopravvive alla traduzione del segnaposto in en/de/fr, dove nessun letterale italiano arriva.",
+  },
+  {
+    id: 'budget-tail',
+    kind: 'schema-echo',
+    // ── LA TERZA FORMA DEL BUDGET, e perche' le altre due non la vedono ──
+    //
+    // `budget-as-value` pretende che il budget sia il valore INTERO,
+    // `budget-parenthetical` che stia fra parentesi. Il caso reale non e' ne'
+    // l'uno ne' l'altro: il modello scrive un alt-text VERO e ci appiccica in
+    // coda l'istruzione, senza parentesi. Misurato su `origin/main` il
+    // 2026-08-14, 15 campi pubblicati in 10 file, due articoli piu' uno:
+    //
+    //   it  Un ristorante in Lugano, Ticino, con camerieri in servizio. Max 125 char
+    //   en  A restaurant in Lugano, Ticino, with waiters in service. Max 125 char
+    //   de  Ein Restaurant in Lugano, Ticino, mit Bedienungen im Dienst. Max 125 Char
+    //   fr  Un restaurant à Lugano, Ticino, avec des serveurs en service. Max 125 Char
+    //
+    // piu' i gemelli `structuredData.caption` in content/seo/, che portano lo
+    // stesso testo (vedi l'intestazione di repair-prompt-placeholders.mjs).
+    //
+    // ── L'ANCORA DI SINISTRA, che e' cio' che separa questa regola da `(max ` ──
+    //
+    // Il budget deve aprire la propria CLAUSOLA: inizio campo, oppure dopo
+    // `. ! ? ; : ,` o un a capo. E' quella condizione a escludere l'uso
+    // legittimo, dove il budget e' incastonato in una frase con la sua
+    // preposizione davanti — «il campo note accetta al massimo 500 caratteri.»,
+    // «la domanda va posta in massimo 200 caratteri». Senza l'ancora questa
+    // regola diventerebbe la stessa `(max ` che l'intestazione argomenta di non
+    // usare, con i suoi 48 body legittimi.
+    //
+    // FALSI POSITIVI: 0 su 157.426 campi pubblicati (metadati + corpi/faq +
+    // seo + gemelli JSON-LD). I 15 che scattano sono tutti offender veri.
+    rx: /(?:^|[.!?;:,–—]|\n)\s*\(?\s*(?:max|max\.|massimo|maximum|maximal|máximo)\s+\d{2,4}\s*(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\s*\)?\s*[.!]?\s*$/i,
+    why: "Il budget di caratteri dello schema appiccicato in CODA a un campo altrimenti vero (`… in servizio. Max 125 char`): non e' il valore intero (`budget-as-value`) ne' un inciso fra parentesi (`budget-parenthetical`).",
+  },
+  {
+    id: 'source-echo-allcaps',
+    kind: 'schema-echo',
+    // Vedi `SOURCE_ECHO_MARKERS`: l'invariante e' il MAIUSCOLO, non le parole.
+    // Case-insensitive scatterebbe su 168 campi di prosa legittima; cosi' com'e'
+    // scatta su 0 — e vede il leak del template «trasferirsi a X» in tutte e
+    // quattro le locali, dove nessun letterale italiano arriva.
+    rx: new RegExp(`(?:^|[^\\p{Lu}])(?:${SOURCE_ECHO_MARKERS.map(escapeRx).join('|')})(?![\\p{Lu}])`, 'u'),
+    why: 'Marcatore ALL-CAPS dello schema («dati DALLA FONTE») o una sua traduzione: sopravvive alla traduzione del segnaposto e non dipende dalla prosa italiana che gli sta attorno.',
+  },
+  {
+    id: 'alt-field-description',
+    kind: 'schema-echo',
+    // Il campo DESCRIVE se stesso invece di descrivere l'immagine. Osservato su
+    // `terzo-pilastro-3a-vantaggi-2026-basilea` (imageAlt it/en/de/fr + la
+    // caption gemella): «Descrizione dell'immagine in tedesco, massimo 125
+    // caratteri» — in ITALIANO anche nel file `de`, quindi non e' output del
+    // traduttore ma l'istruzione di un template che non e' piu' in
+    // create-article.mjs (verificato: la stringa non compare in nessun prompt
+    // vivo di questo repo).
+    //
+    // NON e' una regola cosmetica aggiunta per completezza: senza di lei
+    // `rebuildImageAlt()` in repair-prompt-placeholders.mjs toglierebbe la sola
+    // coda `massimo 125 caratteri` — che `budget-tail` vede — e pubblicherebbe
+    // «Descrizione dell'immagine in tedesco» come alt-text, cioe' un segnaposto
+    // che nessuna regola vede piu'. Con la regola il campo non e' riparabile per
+    // sottrazione e si ricade sulla ricetta dal titolo, che e' quella giusta.
+    //
+    // Ancorata all'INIZIO del campo: un corpo che parla della descrizione di
+    // un'immagine («la descrizione dell'immagine allegata al modulo…») non la
+    // apre. Misurato: 5 campi su 157.426, tutti e cinque offender veri.
+    rx: /^\s*(?:descrizione\s+dell'immagine|image\s+description|bildbeschreibung|description\s+de\s+l'image)\b/i,
+    why: "Il campo ricopia la DESCRIZIONE del campo («Descrizione dell'immagine in italiano, massimo 125 caratteri») invece di descrivere l'immagine.",
   },
   {
     id: 'faq-numbered-label',

@@ -652,8 +652,8 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "0efeffb8668fa0a7",
-        "alignedAt": "2026-08-10"
+        "corpus": "c77e7ca83521f417",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1787,8 +1787,8 @@
       "reason": "Guard sui SEGNAPOSTO DEL PROMPT, valido per ogni campo di testo pubblicato (corpo, FAQ, excerpt, imageAlt, title, seo). `corpus-only` per dove sta il difetto, non per comodita: i segnaposto li scrive il generatore, che vive qui, e il criterio e derivato dai letterali dello schema JSON del prompt di generator/scripts/create-article.mjs, che e `adapted`. Chiude una CLASSE che tre fix avevano affrontato un campo alla volta: la PR #121 lo slug, it-microcopy-guard.mjs lo stile di title/excerpt, e il filtro `q.length > 10 && a.length > 20` la sola FORMA della FAQ — quest ultimo stampava «FAQ: 3 coppie valide» mentre le tre coppie ERANO lo schema, e 24 articoli hanno pubblicato FAQPage JSON-LD con «Domanda frequente 1» come domanda. Candidato a risalire al sito insieme a create-article.mjs, che ne e il chiamante: il gemello `scripts/create-article.mjs` esiste ed e vivo (publish-journalist-article lo importa), quindi il percorso del sito resta scoperto finche quel porting non avviene — vedi il bullet in `## Non implementato (ancora)` della PR.",
       "baseline": {
         "site": null,
-        "corpus": "e3a343378fd42a16",
-        "alignedAt": "2026-08-10"
+        "corpus": "2857017bd35c176a",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1807,8 +1807,8 @@
       "reason": "Banco del guard sopra. Quattro strati invece dei tre di it-microcopy-guard.test.mjs, e il quarto e la ragione per cui questo guard non invecchia: il blocco LOCK ri-estrae i valori letterali dallo schema JSON del prompt di create-article.mjs e pretende che coincidano con SCHEMA_PLACEHOLDER_LITERALS del modulo. Un segnaposto nuovo nel template rende rosso il test, invece di comparire nel corpus tre giorni dopo. Gli altri tre sono unit sulle stringhe VERE uscite in produzione, wiring (il guard gira dentro registerArticleFiles, cioe sul percorso di scrittura CONDIVISO dai quattro generatori che non passano da validate()), e gate sui campi pubblicati con i due tassi di falso positivo misurati SEPARATAMENTE su metadati (46.175 campi) e su corpi (61.484 campi). Le soglie di conteggio esistono perche uno sparse checkout senza content/ non possa passare a vuoto.",
       "baseline": {
         "site": null,
-        "corpus": "a170850dda771716",
-        "alignedAt": "2026-08-10"
+        "corpus": "4a01dd31cba1bbbc",
+        "alignedAt": "2026-08-14"
       }
     },
     {
