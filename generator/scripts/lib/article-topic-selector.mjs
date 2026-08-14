@@ -39,6 +39,7 @@ import {
 import { cascadedScore } from './scoring/cascadedScore.mjs';
 import { computeAdaptiveTopicCandidateDupJaccard } from './scoring/constants.mjs';
 import { corpusPath } from './corpus-paths.mjs';
+import { unescapeTsValue } from './meta-field-regex.mjs';
 
 // ── Paths (overridable via opts for tests) ─────────────────────
 export const PERFORMANCE_PATH = 'data/article-performance.json';
@@ -197,7 +198,7 @@ export function extractItTitlesFromMeta(metaSrc) {
   if (!metaSrc) return [];
   const out = [];
   for (const m of metaSrc.matchAll(TITLE_RE)) {
-    out.push(m[1].replace(/\\'/g, "'").replace(/\\"/g, '"').replace(/\\\\/g, '\\'));
+    out.push(unescapeTsValue(m[1]));
   }
   return out;
 }
