@@ -37,7 +37,20 @@ name: Publish Journalist Articles
 
 on:
   schedule:
-    - cron: '15 */2 * * *'  # Every 2 hours at :15 — off the article-gen slots
+    # Every 15 minutes (was '15 */2 * * *' until 2026-08-14). This publisher is
+    # now the ONLY one draining the `journalist_articles` queue: the twin in
+    # valerielinc-ops/frontaliere-si-o-no had its schedule removed in the same
+    # change, because both ran against the same queue and a doc flipped to
+    # status:'published' is never reprocessed — whoever lost the race never saw
+    # that article. The site polled 8x more often, so it won nearly always and
+    # THIS repo never received the article, even though it owns the content.
+    # An article that exists only on the site makes `pull-articles-corpus.mjs`
+    # stop fail-closed there and blocks every merge on that repo until someone
+    # restores it by hand (measured 2026-08-13: ~1h30 blocked, PR #284).
+    # The faster cadence is what preserves the journalist's ~15-minute
+    # expectation now that the article travels corpus → site via the sync.
+    # See valerielinc-ops/frontaliere-si-o-no#5794.
+    - cron: '*/15 * * * *'
   # Self-test on change, always dry. See batch-faq-articles.yml for why this is
   # what makes the workflow dispatchable and keeps the plumbing covered.
   push:
