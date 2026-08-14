@@ -492,16 +492,32 @@ const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const BUDGET_UNIT_WORD_RE = /\b(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\b/i;
 const BUDGET_DIGITS_RE = /\d{2,4}/;
 
-/** Gli span fra parentesi SENZA annidamento — un inciso, non un blocco. */
+// Porta da #350 (follow-up di #349): ogni inciso reale misurato nei test resta
+// sotto i 40 caratteri (`(max 160 characters circa)`, `(59 characters)`, …).
+// 80 lascia margine doppio per le varianti di locale, e resta abbastanza
+// stretto da escludere un inciso lungo che nomini un numero 2-4 cifre e la
+// parola "characters" in punti non correlati fra loro — il rischio #1 di #350.
+const MAX_PARENTHETICAL_SPAN_LENGTH = 80;
+
+/**
+ * Gli span fra parentesi, CON supporto per l'annidamento — uno stack di
+ * aperture, non un singolo `start`. Il rischio #2 di #350: con un solo
+ * `start`, una parentesi interna che si chiude PRIMA di quella esterna
+ * sovrascriveva `start` e poi lo azzerava, cosi' un secondo inciso interno
+ * senza relazione (es. `(vedi (rif. interno) — max 160 chars)`) faceva
+ * perdere lo span esterno che conteneva il vero segnaposto. Con lo stack ogni
+ * `)` chiude la sua apertura piu' recente e le altre restano in attesa della
+ * propria — sia lo span interno sia quello esterno vengono registrati.
+ */
 function parentheticalSpans(text) {
   const out = [];
-  let start = -1;
+  const starts = [];
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
-    if (ch === '(') start = i;
-    else if (ch === ')' && start !== -1) {
-      out.push({ span: text.slice(start, i + 1), index: start });
-      start = -1;
+    if (ch === '(') starts.push(i);
+    else if (ch === ')' && starts.length) {
+      const start = starts.pop();
+      if (i + 1 - start <= MAX_PARENTHETICAL_SPAN_LENGTH) out.push({ span: text.slice(start, i + 1), index: start });
     }
   }
   return out;
