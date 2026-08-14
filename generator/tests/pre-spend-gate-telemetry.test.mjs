@@ -368,6 +368,46 @@ test('pool fully rejected but restored by the anchor backstop → same record, r
   assert.equal(runReport.headlines.preSpendGateKept, 3);
 });
 
+// ── Per-candidate attribution (#346, follow-up to #337) ────────────────────
+//
+// PRESPEND_GATE_TOTAL_REJECTION and PRESPEND_GATE_OUTCOME are per-RUN
+// aggregates (counts). Retuning the classifier prompt with real data needs
+// every individual "no" tied to the section that produced it — this is the
+// record that makes that attributable instead of a per-run signal.
+
+function rejectedLines(logs) {
+  return logs.filter((l) => l.startsWith('PRESPEND_GATE_REJECTED'));
+}
+
+test('every classifier rejection emits its own attributable record — section, headline, reason', async () => {
+  const { gate, logs } = makeGate({
+    relevant: (h) => /ristorni/i.test(h),
+    section: 'frontaliere',
+  });
+  await gate(hl('Ristorni, accordo vicino', 'Festival del film di Locarno'));
+
+  const lines = rejectedLines(logs);
+  assert.equal(lines.length, 1, 'one record per rejected candidate, not one per run');
+  assert.match(lines[0], /\bsection=frontaliere\b/);
+  assert.match(lines[0], new RegExp(`\\bheadline=${encodeURIComponent('Festival del film di Locarno')}\\b`));
+  // The stub reason ('relevant=no; off-topic') has a space and a semicolon —
+  // proof the value is encoded and stays a single \S+ token, matching what
+  // parseMarkerRecords requires of every other marker in this file.
+  assert.match(lines[0], new RegExp(`\\breason=${encodeURIComponent('relevant=no; off-topic')}\\b`));
+  for (const line of lines) {
+    for (const m of line.matchAll(/([A-Za-z_]+)=(\S+)/g)) {
+      assert.doesNotMatch(m[2], /\s/, `field "${m[1]}" must not contain whitespace: ${JSON.stringify(m[2])}`);
+    }
+  }
+});
+
+test('a kept candidate emits no rejection record', async () => {
+  const { gate, logs } = makeGate({ relevant: (h) => /ristorni/i.test(h) });
+  await gate(hl('Ristorni, accordo vicino'));
+
+  assert.equal(rejectedLines(logs).length, 0);
+});
+
 // ── No false positives: a gate that kept something is not a total rejection ─
 
 test('gate keeps at least one candidate → no total-rejection record', async () => {
