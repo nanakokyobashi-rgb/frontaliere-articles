@@ -473,6 +473,16 @@
       }
     },
     {
+      "path": "scripts/ci/ticker-shadow-alert.mjs",
+      "mode": "corpus-only",
+      "reason": "Alert non-bloccante (issue #302, follow-up a #293/#166) quando manifest.json riporta counts.tickerArticlesShadowed > 0, richiamato da publish-api.yml dopo lo step 'Verify artifact'. Il sito non ha un file omonimo: la detection (scripts/lib/ticker-shadow-check.mjs, gia' corpus-only) esiste solo qui, e questo script ne aggiunge solo il canale di notifica (issue dedup'd sul titolo, apertura/chiusura nella stessa valutazione) — nessun gate, nessuna modifica a news-ticker-live.json.",
+      "baseline": {
+        "site": null,
+        "corpus": "bb5d1571ea4b6561",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
       "path": "REVIEW.md",
       "mode": "adapted",
       "reason": "Stessa struttura del contratto del sito (severity, completeness contract, tier, escalation, formato) perche' una modifica la' resti leggibile e riportabile. Cambia il FILTRO DI SCOPO: il sito e' un funnel SEO/AdSense, questo repo pubblica una superficie dati che va live senza deploy del sito. Le tre storie di rottura citate sono di questo repo.",
