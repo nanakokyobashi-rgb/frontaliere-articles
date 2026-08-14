@@ -624,13 +624,48 @@ jobs:
           effective="$TARGET_SECTION"
           tried=0
           # ── L'OSSERVATORE (issue #313 / #348) ────────────────────────────
-          # Alzato SOLO da `create-article.mjs` che esce
-          # EXIT_ROSTER_CANNOT_SERVE_PROMPT (3): «nessun modello del roster ha
-          # accettato il payload». Sta su un CODICE DI USCITA e non su una
-          # stringa dello stdout di proposito — quel flusso e' pieno di ANSI e
-          # di virgolette tipografiche, e un `grep` su di esso e' un oracolo che
-          # si acceca da solo senza dirlo.
+          #
+          # LA REGOLA E' INVERTITA rispetto a com'era, ed e' l'inversione a
+          # essere la fix. Prima: «assorbi ogni uscita tranne quelle nominate»
+          # (all'inizio nessuna, poi il solo exit 3). Una regola di quella forma
+          # lascia passare per costruzione ogni difetto non ancora nominato, ed
+          # e' precisamente cosi' che la run 31823202761 e' uscita verde: la sua
+          # miscela di errori non era il caso nominato. Ora: «se non c'e' un
+          # articolo, FALLISCI, tranne quando ogni tentativo ha DICHIARATO una
+          # ragione legittima» — cioe' e' uscito EXIT_NO_ARTICLE_DECLARED (4).
+          #
+          # Le sei ragioni legittime sono enumerate in
+          # `generator/scripts/lib/exhaustion-disposition.mjs` e sono le UNICHE
+          # cose che questo step assorbe ancora quando article=false: pool
+          # evergreen saturo, nessuna keyword disponibile, tentativi evergreen
+          # esauriti, duplicato, rigetto qualita', quota davvero esaurita.
+          #
+          # Tutto il resto e' rosso, exit 0 compreso: un create-article.mjs che
+          # esce 0 senza scrivere un corpo non ha dichiarato niente, ed e'
+          # indistinguibile da una generazione riuscita. Anche il kill duro a
+          # 2400s: quaranta minuti spesi su un provider che stalla non sono un
+          # differimento, e assorbirli e' lo stesso silenzio verde a un'altra
+          # riga.
+          #
+          # L'ORACOLO E' IL CODICE DI USCITA, mai una stringa dello stdout: quel
+          # flusso e' pieno di sequenze ANSI e di virgolette tipografiche, e un
+          # `grep` su di esso e' un oracolo che si acceca da solo senza dirlo.
+          #
+          # COSA QUESTA REGOLA NON COPRE, dichiarato perche' non venga
+          # ri-derivato: un differimento VERO che si ripete per ore (quota vera
+          # su tutto il roster, o pool secco per una notte intera) resta verde,
+          # run per run, ed e' giusto — la sua patologia e' la DURATA, che un
+          # singolo run non ha il denominatore per vedere. Quel denominatore ce
+          # l'ha gia' `scripts/ci/scan-generation-health.mjs` (condizione
+          # `generation-idle`, soglia 6h, cron ogni 2h): il 2026-08-14 ha
+          # funzionato, ed e' lui ad aver aperto la #348 alle 14:03:36Z.
+          # Duplicarlo qui dentro sarebbe una seconda copia peggiore di un
+          # osservatore che gia' regge.
           roster_blocked=false
+          # `false` appena UN tentativo finisce senza articolo e senza uscire 4.
+          all_declared=true
+          # La prima ragione non dichiarata incontrata, per il messaggio finale.
+          undeclared_why=""
 
           for sec in "${sections[@]}"; do
             remaining=$(( budget_s - SECONDS ))
@@ -656,7 +691,15 @@ jobs:
               # A provider that stalls stalls for the other section too, and the
               # budget is already gone. Stop; do not spend the job's remaining
               # minutes on the same wall.
+              #
+              # NON PIU' ASSORBITO (issue #313 / #348): un kill duro dopo
+              # ${cap}s non e' un differimento — non c'e' niente che si curi da
+              # solo al prossimo giro, e la run che lo assorbe e' verde per
+              # quaranta minuti spesi contro un muro. Il `break` resta (il muro
+              # e' lo stesso per l'altra sezione), il verde no.
               echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
+              all_declared=false
+              [ -n "$undeclared_why" ] || undeclared_why="kill duro dopo ${cap}s sulla sezione $sec (exit $rc): un provider che stalla non e' un differimento"
               break
             fi
             # ISSUE #313 — l'ECCEZIONE all'assorbimento qui sotto, e va valutata
@@ -676,11 +719,6 @@ jobs:
               echo "::warning::create-article.mjs: il roster non puo' servire il prompt della sezione $sec (exit 3)"
               roster_blocked=true
             fi
-            # A run that finds no suitable source is a normal outcome, not a
-            # failure: the scan is quota- and freshness-bound by design.
-            if [ "$rc" != "0" ]; then
-              echo "::warning::create-article.mjs exited $rc on section $sec — treating as no-article-this-run"
-            fi
 
             body="$(article_body_added || true)"
             if [ -n "$body" ]; then
@@ -690,6 +728,28 @@ jobs:
               break
             fi
             echo "section $sec produced no article"
+
+            # ── LA DICHIARAZIONE, valutata DOPO aver constatato che non c'e' un
+            # corpo. L'ordine conta: exit 4 con un articolo scritto non esiste,
+            # ma exit 0 CON articolo e' il caso normale e non deve mai passare
+            # di qui. Sopra c'e' gia' il `break`, quindi qui `$rc` descrive
+            # sempre un tentativo finito a mani vuote.
+            if [ "$rc" = "4" ]; then
+              # Ragione legittima dichiarata: pool secco, duplicato, rigetto
+              # qualita', o quota davvero esaurita. E' l'unico assorbimento
+              # rimasto.
+              echo "::warning::create-article.mjs: nessun articolo sulla sezione $sec, ragione legittima DICHIARATA (exit 4)"
+            elif [ "$rc" = "0" ]; then
+              # Il caso piu' insidioso, e quello che nessuno stava guardando:
+              # uscita 0 senza aver scritto niente. Non e' distinguibile da una
+              # generazione riuscita se non contando i corpi, che e' esattamente
+              # cio' che `article_body_added` fa un attimo sopra.
+              all_declared=false
+              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito 0 sulla sezione $sec senza scrivere un corpo e senza dichiarare una ragione (attesa: exit 4)"
+            else
+              all_declared=false
+              [ -n "$undeclared_why" ] || undeclared_why="create-article.mjs e' uscito $rc sulla sezione $sec (non e' una delle sei ragioni legittime, che escono 4)"
+            fi
           done
 
           # `article` is the signal; `section` is the section that actually
@@ -705,18 +765,36 @@ jobs:
           # Summary) leggono lo stesso verdetto che leggerebbero su una run
           # verde, quindi il fallimento non li rende ciechi.
           #
-          # LA CONGIUNZIONE E' NECESSARIA. `roster_blocked` da solo non basta a
-          # fallire: se la sezione gemella HA prodotto un articolo, il roster ha
-          # comunque servito e la run e' un successo — fallirla getterebbe via
-          # un articolo buono. E `produced=false` da solo non basta nemmeno:
-          # «nessuna fonte adatta» resta un esito normale, ed e' la ragione per
-          # cui questo step assorbe le uscite non-zero. Il difetto sta
-          # esattamente nell'intersezione: niente articolo E il roster che non
-          # ha potuto nemmeno provare.
-          if [ "$produced" != "true" ] && [ "$roster_blocked" = "true" ]; then
+          # `produced=true` CHIUDE LA QUESTIONE, sempre e per primo. Se una
+          # sezione ha scritto un corpo, il roster ha servito e la run e' un
+          # successo qualunque cosa sia successa all'altra sezione: fallirla
+          # getterebbe via un articolo buono, gia' pagato in LLM, traduzioni e
+          # immagine. E' la ragione per cui il roster_blocked di #357 era in
+          # congiunzione, e resta vera parola per parola qui.
+          if [ "$produced" = "true" ]; then
+            exit 0
+          fi
+
+          # Da qui in giu' NON c'e' un articolo. La domanda non e' piu' «quale
+          # errore e' successo» — e' «qualcuno ha dichiarato perche'?».
+          if [ "$tried" = "0" ]; then
+            echo "::error::nessun tentativo eseguito: il budget wall-clock era gia' speso prima del primo. Una run che non prova nemmeno non e' un esito normale."
+            exit 1
+          fi
+          if [ "$roster_blocked" = "true" ]; then
             echo "::error::roster esaurito: nessun modello ha accettato il prompt e nessun articolo e' stato prodotto in $tried tentativi. Una run che non genera niente perche' il roster non puo' servirla NON e' un esito normale — vedi il messaggio 'roster-cannot-serve-prompt' nel log per il numero di token da tagliare."
             exit 1
           fi
+          if [ "$all_declared" != "true" ]; then
+            echo "::error::nessun articolo in $tried tentativi, e la ragione NON e' dichiarata: ${undeclared_why}. Le sei ragioni legittime escono tutte con EXIT_NO_ARTICLE_DECLARED (4) — vedi generator/scripts/lib/exhaustion-disposition.mjs. Un'uscita senza articolo e senza dichiarazione e' il verde silenzioso della #313 (60+ run 'success' consecutive, 06:06Z→16:30Z del 2026-08-14), e da qui in poi e' rossa."
+            exit 1
+          fi
+          # Nessun articolo, ma ogni tentativo ha dichiarato una ragione
+          # legittima: e' l'unico verde senza articolo che resta. Se questo
+          # stato PERSISTE, a vederlo e' `scan-generation-health.mjs`
+          # (`generation-idle`, 6h) — non questo step, che non ha il
+          # denominatore per distinguere una notte secca da un guasto.
+          echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione legittima (exit 4) — verde"
           exit 0
 
       # ── VALIDARE PRIMA DI SCRIVERE (issue #267) ─────────────────────────────

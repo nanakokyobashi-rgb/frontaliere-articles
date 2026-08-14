@@ -35,6 +35,7 @@ import { fileURLToPath } from 'node:url';
 
 import {
   EXIT_ROSTER_CANNOT_SERVE_PROMPT,
+  EXIT_NO_ARTICLE_DECLARED,
   isInputCapDeferralVeto,
   inputCapVetoSummary,
 } from '../scripts/lib/exhaustion-disposition.mjs';
@@ -221,17 +222,29 @@ test('IL DIFETTO: roster esaurito e nessun articolo → lo step esce ROSSO', () 
   assert.match(r.outputs, /article=false/);
 });
 
-test('invariato: un\'uscita non-zero qualunque resta assorbita come no-article-this-run', () => {
-  // E' la ragione per cui lo step assorbe: una fonte inadatta, un rigetto di
-  // qualita'. Farli fallire spegnerebbe la catena.
-  for (const code of [1, 2, 124]) {
-    const r = runGenerateBlock({ nodeExit: code });
-    assert.equal(r.status, 0, `exit ${code} non deve rendere rossa la run`);
-  }
-});
+// ── QUI STAVANO DUE ASSERZIONI CHE ORA SONO FALSE, E VANNO LETTE ───────────
+//
+// Fino alla seconda passata su #313/#348 questo file affermava che «un'uscita
+// non-zero qualunque resta assorbita come no-article-this-run» e che «exit 0
+// senza articolo resta verde». Erano vere, e sono ESATTAMENTE la superficie su
+// cui il difetto e' tornato: la run 31823202761 — la prima genuinamente dopo la
+// #357 — e' uscita `success` senza un articolo perche' la sua miscela di errori
+// non era la condizione nominata dall'exit 3, e una regola della forma «assorbi
+// tutto tranne X» lascia passare per costruzione ogni difetto che non e' X.
+//
+// La regola e' invertita: senza articolo e' rosso, tranne quando OGNI tentativo
+// dichiara una delle sei ragioni legittime uscendo EXIT_NO_ARTICLE_DECLARED (4).
+// Le asserzioni corrispondenti vivono ora in `no-article-not-green.test.mjs`,
+// che copre la matrice intera; qui resta la sola meta' che riguarda l'exit 3.
+//
+// Questa nota NON e' archeologia: chi in futuro rimettesse l'assorbimento
+// generale troverebbe due test verdi a dargli ragione, ed e' successo una volta.
 
-test('invariato: exit 0 senza articolo resta verde', () => {
-  assert.equal(runGenerateBlock({ nodeExit: 0 }).status, 0);
+test('exit 4 (ragione legittima DICHIARATA) resta assorbito', () => {
+  // L'unico assorbimento rimasto. Le sei ragioni: pool evergreen saturo,
+  // nessuna keyword disponibile, tentativi esauriti, duplicato, rigetto
+  // qualita', quota davvero esaurita.
+  assert.equal(runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED }).status, 0);
 });
 
 test('la congiunzione: roster bloccato MA articolo prodotto → verde', () => {

@@ -37,7 +37,7 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { execFileSync } from 'node:child_process';
+import { spawnSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync, existsSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
@@ -152,7 +152,16 @@ exit 0
     const script = path.join(dir, 'step.sh');
     writeFileSync(script, GENERATE_RUN);
 
-    const stdout = execFileSync('bash', [script], {
+    // ── PERCHE' NON PIU' `execFileSync` NUDO (issue #313 / #348) ─────────────
+    // `execFileSync` LANCIA su uscita non-zero, e da quando lo step applica la
+    // regola «nessun articolo ⇒ non verde» quasi ogni scenario di questo file —
+    // due sezioni secche, un kill duro, un budget esaurito — esce 1 di
+    // proposito. Questi test misurano QUALI sezioni sono state tentate e con
+    // quale cap, non se lo step e' verde: quel giudizio vive tutto in
+    // `no-article-not-green.test.mjs`. Catturare lo status invece di lanciare
+    // separa le due domande; incrociarle rendeva rossi sei test su una fix che
+    // non ha toccato la sequenza dei tentativi.
+    const spawned = spawnSync('bash', [script], {
       encoding: 'utf8',
       env: {
         PATH: `${bin}:${process.env.PATH}`,
@@ -178,7 +187,7 @@ exit 0
     const caps = existsSync(capsFile)
       ? readFileSync(capsFile, 'utf8').split('\n').filter(Boolean)
       : [];
-    return { outputs, invocations, caps, stdout };
+    return { outputs, invocations, caps, stdout: spawned.stdout || '', status: spawned.status };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

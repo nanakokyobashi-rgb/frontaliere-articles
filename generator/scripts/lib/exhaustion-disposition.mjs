@@ -105,3 +105,110 @@ export function inputCapVetoSummary(err) {
     refusals: Number(cap.count) || 0,
   };
 }
+
+/**
+ * ── «NESSUN ARTICOLO ⇒ NON VERDE», E L'UNICA ECCEZIONE ──────────────────────
+ *
+ * Exit code dedicato: «questa run non ha prodotto un articolo, E LA RAGIONE E'
+ * DICHIARATA E LEGITTIMA». E' l'UNICO codice che lo step «Generate the article»
+ * assorbe quando `article=false`; qualunque altro esito senza articolo — exit 0
+ * compreso — e' rosso.
+ *
+ * L'inversione e' il punto. Fino a qui la regola era «assorbi tutto tranne un
+ * caso nominato» (prima nessuno, poi il solo exit 3 di #357), e la sua forma
+ * lascia passare per costruzione ogni difetto non ancora nominato: la miscela
+ * di errori che ha prodotto il verde del 2026-08-14 non era il caso nominato, e
+ * infatti e' passata. Ora la regola e' «fallisci tutto tranne i casi nominati»,
+ * e i casi nominati sono SEI, elencati nel catch di primo livello di
+ * `create-article.mjs` e nei tre `finalizeRunReport('skipped')` del ramo
+ * evergreen:
+ *
+ *   1. pool evergreen saturo al pre-flight
+ *   2. nessuna keyword evergreen disponibile al retry
+ *   3. tentativi evergreen esauriti
+ *   4. duplicato rilevato
+ *   5. rigetto qualita' (slop non pubblicato)
+ *   6. quota giornaliera davvero esaurita — vedi isLegitimateQuotaDeferral()
+ *
+ * 4 e non 1/2/3: `node` usa 1 per un'eccezione non gestita e 2 per un uso
+ * errato della CLI, e 3 e' gia' EXIT_ROSTER_CANNOT_SERVE_PROMPT.
+ */
+export const EXIT_NO_ARTICLE_DECLARED = 4;
+
+/**
+ * La frazione di cascata che deve essere transitoria perche' «differisci» sia
+ * una descrizione vera dello stato del roster.
+ *
+ * MISURATO sulla run 31823202761 (2026-08-14T17:45Z), riclassificando i 106
+ * errori del messaggio aggregato con le due regex di `classifyExhaustionCause`:
+ *
+ *     transient  = 53   (tutti e 53 «daily limit» — quota vera)
+ *     persistent = 52   (38 rifiuti su input cap, 12 «no API key», 2 × HTTP 404)
+ *     ambiguo    =  1   (`claude-cli/haiku: claude CLI timed out after 120000ms`)
+ *
+ * `transientExhaustion` e' `transient >= persistent`, cioe' 53 >= 52 → true →
+ * differimento → exit 0 → run VERDE. UN VOTO. E il voto che decide e' quello
+ * che manca: la riga ambigua e' il timeout di Haiku, che `transientRe` non
+ * matcha perche' cerca il letterale `timeout` mentre il messaggio dice `timed
+ * out`. Dieci ore di produzione ferma decise da una `d`.
+ *
+ * IL DIFETTO NON E' LA SOGLIA, E' IL DENOMINATORE. Un confronto fra i due
+ * secchi butta via gli ambigui, quindi puo' dichiarare «transitorio dominante»
+ * uno stato in cui il transitorio e' meta' del roster. Meta' del roster fuori
+ * quota si cura a mezzanotte; l'altra meta' — un prompt sopra ogni cap, una
+ * chiave assente, un modello rimosso — non si cura mai, e differire su di essa
+ * e' il ciclo che #313 descrive.
+ *
+ * Quindi il quoziente si prende sul TOTALE, ambigui inclusi, e la maggioranza
+ * e' STRETTA. Sulla run sopra: 53/106 = 0,500 → non > 0,5 → NON e' un
+ * differimento → rosso. Su una notte di quota vera, dove ogni modello risponde
+ * «daily limit», il rapporto e' ~1,0 → differimento → verde, come prima.
+ *
+ * La polarita' degli ambigui e' deliberata e va nella direzione sicura: un
+ * fallimento che non si sa classificare NON e' prova che aspettare aiutera'.
+ */
+export const QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE = 0.5;
+
+/**
+ * Vero quando «differisci: quota esaurita» descrive davvero il roster.
+ *
+ * Da leggere INSIEME a `isInputCapDeferralVeto`, che resta il primo gate e il
+ * piu' stretto: quello squalifica il differimento appena ≥1 modello ha rifiutato
+ * sulla TAGLIA, questo lo squalifica quando la quota non e' la causa dominante
+ * anche senza un solo rifiuto su taglia (roster mezzo senza chiavi, provider
+ * giu', modelli rimossi).
+ *
+ * @param {unknown} err l'errore risalito fino al catch di primo livello
+ * @returns {boolean} true → differire e' onesto, exit EXIT_NO_ARTICLE_DECLARED
+ */
+export function isLegitimateQuotaDeferral(err) {
+  if (!err || typeof err !== 'object') return false;
+  if (err.code !== 'ALL_MODELS_EXHAUSTED') return false;
+  const breakdown = err.exhaustionBreakdown || {};
+  const transient = Number(breakdown.transient) || 0;
+  const total = Number(breakdown.total) || 0;
+  // Senza denominatore non si puo' affermare niente, e l'affermazione non
+  // dimostrata qui vale «rosso»: e' la direzione in cui l'errore costa meno.
+  if (total <= 0) return false;
+  return transient / total > QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE;
+}
+
+/**
+ * La riga machine-readable che spiega PERCHE' un differimento e' stato rifiutato.
+ * Separata dal predicato per la stessa ragione di `inputCapVetoSummary`: il
+ * numero azionabile non deve dipendere da chi legge la prosa.
+ */
+export function quotaDeferralShare(err) {
+  const breakdown = (err && err.exhaustionBreakdown) || {};
+  const transient = Number(breakdown.transient) || 0;
+  const persistent = Number(breakdown.persistent) || 0;
+  const total = Number(breakdown.total) || 0;
+  return {
+    transient,
+    persistent,
+    ambiguous: Math.max(0, total - transient - persistent),
+    total,
+    share: total > 0 ? transient / total : 0,
+    required: QUOTA_DEFERRAL_MIN_TRANSIENT_SHARE,
+  };
+}
