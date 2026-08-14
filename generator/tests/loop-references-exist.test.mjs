@@ -179,6 +179,30 @@ const DECLARED_ABSENT = {
     kind: 'example',
     reason: 'Placeholder in un docstring che mostra la forma della bullet-list «File di partenza».',
   },
+  'scripts/lib/workflow-scope-detect.mjs :: scripts/create-article.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/create-article.mjs',
+    reason:
+      'Citazione CONTRASTIVA, ed e\' il difetto stesso che il commento descrive: la vecchia ' +
+      '`CODE_PATH_RE` ancorava con `\\b` sulla directory, quindi su un body che cita ' +
+      '`generator/scripts/create-article.mjs` estraeva il SUFFISSO `scripts/create-article.mjs` — ' +
+      'che qui non esiste, ed e\' esattamente il motivo per cui la pre-flight overlap del ' +
+      'drainer (confronto `Set.has` esatto) non trovava mai un match su questo repo. Il path e\' ' +
+      'nominato per dire che e\' SBAGLIATO: niente dipende dalla sua esistenza.',
+  },
+  'scripts/lib/workflow-scope-detect.mjs :: scripts/x.mjs': {
+    kind: 'example',
+    reason:
+      'Placeholder: «la forma del sito `scripts/x.mjs` continua a matchare con zero segmenti ' +
+      'di prefisso». Serve a dire che la meta\' che funziona non deve regredire.',
+  },
+  'scripts/lib/workflow-scope-detect.mjs :: scripts/foo.mjs': {
+    kind: 'example',
+    reason:
+      'Placeholder, e per di piu\' estratto da una NON-citazione: il commento parla di ' +
+      '`descripts/foo.mjs`, la stringa che il lookbehind `(?<![\\w.-])` esiste per NON far ' +
+      'matchare. E\' lo scanner di questo guard a ritagliarne la coda, non il commento a citarla.',
+  },
   'scripts/ci/check-workflows-scope.mjs :: .github/workflows/send-job-alerts.yml': {
     kind: 'site-only',
     reason: 'Cronaca dell\'incidente #4437 del sito, che motiva l\'euristica. Descrittiva.',

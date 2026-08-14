@@ -147,7 +147,7 @@ import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFrom
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
 import { appendCatalogEntry } from './generate-journalist-image-catalog.mjs';
 import { ARTICLE_SECTION_CORE } from '../../engine/shared/articleSectionCore.mjs';
-import { truncateToClause } from '../../host/shared/clauseTail.mjs';
+import { truncateToClause, truncateToClauseNonEmpty } from '../../host/shared/clauseTail.mjs';
 import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.mjs';
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
@@ -8095,7 +8095,18 @@ function validate(data, opts = {}) {
     // cut usually falls exactly on the informative part. The helper is already
     // used four lines below for the description and for breadcrumbName — this
     // call site just never got it.
-    const title = truncateAtWordBoundary(String(it.title || data.id), 57);
+    //
+    // `truncateToClauseNonEmpty`, NOT `truncateAtWordBoundary`: dal 2026-08-10
+    // (site #5452/#5515) `truncateToClause` RIFIUTA — torna `''` — quando il
+    // primo token da solo sfora il budget, perche' nessun suo prefisso e'
+    // insieme <= maxLen e su un confine di parola. E' il contratto giusto per
+    // un campo che puo' restare vuoto e sbagliato per un `<title>`: il
+    // fallback qui e' `data.id`, cioe' uno SLUG, e uno slug non contiene spazi
+    // — il ramo del rifiuto e' la norma, non il caso limite. Il risultato
+    // sarebbe `" | Frontaliere Ticino"` come titolo intero, piu' `ogTitle` e
+    // `headline` vuoti. La versione non-vuota scende di un gradino (taglio a
+    // confine di parola, poi taglio duro) invece di rifiutare.
+    const title = truncateToClauseNonEmpty(String(it.title || data.id), 57);
     const rawDesc = String(it.excerpt || it.title || '').replace(/\s+/g, ' ').trim();
     const desc = truncateAtWordBoundary(rawDesc, 160);
     // ogDescription gets its own cap (SEO_OG_DESCRIPTION_MAX), not the 160
@@ -8765,7 +8776,11 @@ function optimizeSeoMetadata(data) {
   data.seo.title = candidate.length <= TITLE_MAX_CHARS ? candidate : seoTitleCore;
   data.seo.ogTitle = data.seo.ogTitle ? String(data.seo.ogTitle).trim() : seoTitleCore;
   data.seo.headline = data.seo.headline ? String(data.seo.headline).trim() : seoTitleCore;
-  data.seo.breadcrumbName = truncateAtWordBoundary(
+  // Non-vuota per la stessa ragione del `title` sopra: il breadcrumb finisce
+  // nel JSON-LD `BreadcrumbList`, dove una `name` vuota e' un item invalido, e
+  // il budget qui e' 42 — meta' del `title`, quindi il ramo del rifiuto scatta
+  // ancora piu' spesso su un `seoTitleCore` derivato dallo slug.
+  data.seo.breadcrumbName = truncateToClauseNonEmpty(
     data.seo.breadcrumbName || seoTitleCore.split(/[:.–—]/)[0] || 'Articolo',
     42,
   );

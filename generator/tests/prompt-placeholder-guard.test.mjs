@@ -481,6 +481,68 @@ describe('#300 (residuo misurato qui) — il campo che descrive SE STESSO (terzo
   });
 });
 
+describe('#300 punto 2 — il NOME del campo come token nudo della tag-list `keywords`', () => {
+  // Il caso reale (`trasferirsi-a-marchirolo-...`, riparato nei DATI da #296 e
+  // mai rilevabile prima di qui). Il buco non era nei letterali: e' la ricetta
+  // di `optimizeSeoMetadata()`, che riderivano `keywords` da title+excerpt+id
+  // in minuscolo e a token, buttando via la frase-schema attorno alla parola —
+  // cioe' tutto cio' a cui i letterali si agganciano.
+  const leak = 'frontalieri, ticino, svizzera, italia, trasferirsi, marchirolo, sottotitolo, contro';
+
+  it('vede il token nudo dentro la tag-list', () => {
+    const regole = findPromptPlaceholders(leak).map((h) => h.rule);
+    assert.ok(regole.includes('schema-field-name-as-keyword'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+  });
+
+  it('vede anche le tre traduzioni, che sopravvivono alla traduzione del segnaposto', () => {
+    for (const v of [
+      'frontaliers, ticino, suisse, sous-titre, contre',
+      'grenzgaenger, tessin, schweiz, untertitel, gegen',
+      'cross-border, ticino, switzerland, subtitle, against',
+    ]) {
+      const regole = findPromptPlaceholders(v).map((h) => h.rule);
+      assert.ok(regole.includes('schema-field-name-as-keyword'), `non visto su «${v}»: ${regole.join(',') || 'nessuna regola'}`);
+    }
+  });
+
+  it('il gemello SANO dello stesso campo resta verde (la regola non e\' vacua)', () => {
+    // Lo stesso campo dopo la bonifica di #296: sette token invece di otto, e
+    // il buco e' esattamente dove stava la parola. Se questo diventasse rosso,
+    // la regola starebbe matchando la tag-list, non il leak.
+    assert.deepEqual(
+      findPromptPlaceholders('frontalieri, ticino, svizzera, italia, trasferirsi, marchirolo, contro'),
+      [],
+    );
+  });
+
+  it('la prosa che parla DAVVERO di sottotitoli non viene toccata', () => {
+    // Misurato sul corpus: 70 occorrenze legittime, tutte plurale o participio
+    // dentro un corpo (film in lingua originale, HbbTV, corsi di lingua), e
+    // nessuna di quelle nelle `keywords` dei rispettivi articoli.
+    for (const prosa of [
+      "Il film e' proiettato in lingua originale con sottotitoli in italiano.",
+      'Die Sendung wird mit deutschen Untertiteln ausgestrahlt.',
+      'The documentary is available with English subtitles.',
+      'Le film est disponible avec des sous-titres en francais.',
+    ]) {
+      assert.deepEqual(findPromptPlaceholders(prosa), [], `falso positivo su prosa: ${prosa}`);
+    }
+  });
+
+  it('i nomi di campo GENERICI restano fuori, ed e\' una scelta misurata', () => {
+    // Allargare a `titolo`/`title`/`keyword` costerebbe 11 falsi positivi veri
+    // nel corpus di oggi. Sono tag-list legittime: se un giorno qualcuno le
+    // aggiunge alla regola, questi tre diventano rossi in produzione.
+    for (const v of [
+      'friborg-gotteron, allo, spareggio, titolo',
+      'equipollenza, titolo, studio, italiano',
+      'comco, apre, inchieste, keyword',
+    ]) {
+      assert.deepEqual(findPromptPlaceholders(v), [], `falso positivo su tag-list legittima: ${v}`);
+    }
+  });
+});
+
 // ═══════════════════════════════════════════════════════════════════════════
 // 2. LOCK — il criterio segue il template, non viceversa
 // ═══════════════════════════════════════════════════════════════════════════
