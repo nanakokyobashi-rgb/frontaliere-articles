@@ -272,8 +272,8 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "45113b7cf0b645c1",
-        "corpus": "45113b7cf0b645c1",
+        "site": "98bb8dd2ff527a59",
+        "corpus": "98bb8dd2ff527a59",
         "alignedAt": "2026-08-14"
       }
     },
