@@ -107,6 +107,53 @@ jobs:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/generate-events-digest-article.mjs
 
+      # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
+      #
+      # PERCHE' ANCHE QUI, dove il builder dichiara «no AI» in intestazione:
+      # `eventi-weekend-ticino` e' EVERGREEN e registrato una volta sola, quindi
+      # il ramo `!exists` — l'unico che chiama `registerArticleFiles()`, cioe'
+      # l'unico che esegue `sanitizePromptPlaceholders` in processo — non
+      # ripassera' mai. Ogni run di oggi scrive i quattro body con
+      # `refreshBodyFiles()` (`writeFileSync` diretto): senza questo step, il
+      # 100% delle scritture di questo produttore arriva a `main` senza che
+      # nessuna guardia le abbia guardate.
+      #
+      # E il contenuto NON e' interamente nostro: titoli e descrizioni degli
+      # eventi arrivano dal dataset esterno (`data/events.json`) e finiscono nel
+      # corpo verbatim. E' testo di terzi che si pubblica come articolo, che e'
+      # la ragione per cui la coppia include `article-fabrication-guard` e non
+      # solo il guard dei segnaposto.
+      #
+      # LA CONDIZIONE E' LA SCRITTURA: un weekend senza eventi non tocca
+      # `content/` e questo step esce verde senza scansionare niente.
+      - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
+        id: guard
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna scrittura sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`refresh-events-digest\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: il digest resta sul runner e sparisce con lui, \`main\` non lo vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+            echo
+            echo "- se coincidono, il difetto e' entrato col dataset degli eventi di questo giro;"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — il digest si rifa' al giro dopo, e' evergreen e non ha una data da perdere."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       - name: Prepare Firebase credentials
         if: steps.mode.outputs.dry != 'true'
         env:

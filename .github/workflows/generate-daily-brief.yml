@@ -122,6 +122,60 @@ jobs:
           DRY_RUN: ${{ steps.mode.outputs.dry == 'true' && '1' || '0' }}
         run: node generator/scripts/generate-daily-brief-article.mjs
 
+      # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
+      #
+      # PERCHE' ANCHE SU UN PRODUTTORE DETERMINISTICO. Questo workflow non
+      # chiama nessun modello: `lib/daily-brief-content.mjs` e' «zero LLM» e
+      # rende l'edizione dai numeri di `public/data/daily-brief.json`. La classe
+      # segnaposto non nasce dal modello, qui.
+      #
+      # Cio' che la rende necessaria lo stesso e' che la meta' IN PROCESSO non
+      # copre questo produttore quanto sembra. `sanitizePromptPlaceholders` gira
+      # dentro `registerArticleFiles()`, e questo script lo chiama SOLO nel ramo
+      # `!exists` (prima registrazione dell'edizione del giorno). Ogni rerun
+      # dello stesso giorno passa da `refreshBodyFiles()` — `writeFileSync`
+      # diretto sui quattro body — e da `refreshMetaAndSeo()`, che riscrive
+      # excerpt/seoDescription/ogDescription in `blog-meta*` e in `content/seo/`
+      # senza toccare il registrar (e' il percorso nato con la #85, appunto
+      # perche' `registerArticleFiles` scrive quei campi una volta sola).
+      # Su quei due percorsi la guardia in processo NON esiste: questo step e'
+      # l'unico controllo fra il template e `main`.
+      #
+      # E vale anche in ingresso: se il corpus e' gia' sporco, un'edizione
+      # committata sopra lo tiene tale e la porta al sito col cron 2x/giorno di
+      # `sync-articles-sitemaps.yml`, che non aspetta il dispatch.
+      #
+      # LA CONDIZIONE E' LA SCRITTURA: nei giorni senza edizione (snapshot
+      # magro o stantio, vedi lo step sopra) `content/` non viene toccato e
+      # questo step esce verde senza scansionare niente.
+      - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
+        id: guard
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna edizione scritta sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`generate-daily-brief\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: l'edizione resta sul runner e sparisce con lui, \`main\` non la vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+            echo
+            echo "- se coincidono, il difetto e' dell'edizione appena scritta (template o snapshot), e va riparato li';"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus**. L'edizione di oggi non e' persa: dopo la fix si rifa' col \`workflow_dispatch\`, che rientra nel ramo \`exists\` e riscrive gli stessi file."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       # RC is loaded only when there is a commit to push (GITHUB_PAT) and
       # assets to warm on the CDN (R2_*). A dry run never touches it.
       - name: Load secrets from Remote Config

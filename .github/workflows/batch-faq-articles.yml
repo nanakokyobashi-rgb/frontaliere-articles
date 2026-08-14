@@ -190,6 +190,56 @@ jobs:
       # `git add` on the symlink stages nothing. This repository holds the real
       # files at content/blog-body, so the plain path is the correct one — the
       # same reason lib/corpus-paths.mjs replaces resolve-git-add-path.mjs.
+      # ── La guardia sul percorso di scrittura (issue #275) ──────────────────
+      #
+      # QUESTO E' IL PRODUTTORE PIU' ESPOSTO DEI SEI, e la ragione e' misurata,
+      # non stimata: `batch-add-faq-to-articles.mjs` NON passa da
+      # `registerArticleFiles()` — scrive direttamente dentro
+      # `content/blog-body/**` — quindi e' l'unico produttore LLM del repo che
+      # non ha `sanitizePromptPlaceholders` in processo. Il filtro che applica
+      # e' ancora quello di FORMA (`pair.q.length > 10 && pair.a.length > 20`,
+      # riga ~671), cioe' esattamente il filtro che l'intestazione di
+      # `lib/prompt-placeholder-guard.mjs` cita come il piu' costoso di tutti:
+      # stampava «✅ FAQ: 3 coppie valide» mentre le tre coppie ERANO lo schema,
+      # e 24 articoli hanno pubblicato FAQPage JSON-LD con «Domanda frequente 1»
+      # come domanda. La FAQ non resta nel corpo: `engine/ogPagesPlugin.ts` la
+      # trasforma in structured data.
+      #
+      # `fix-faq-locales.mjs` (lo step sopra) traduce quelle stesse coppie e
+      # scrive anch'esso in diretta: un segnaposto tradotto non e' piu' un
+      # letterale italiano, ed e' la forma che `source-echo-allcaps` (#300)
+      # vede e i letterali no.
+      #
+      # LA CONDIZIONE E' LA SCRITTURA, non il run: un giro che non modifica
+      # nulla sotto content/ non ha niente da validare.
+      - name: Guard — cio' che questo run ha scritto non raggiunge main se viola le guardie
+        id: guard
+        if: steps.mode.outputs.dry != 'true'
+        run: |
+          set -uo pipefail
+          if [ -z "$(git status --porcelain -- content/)" ]; then
+            echo "nessuna scrittura sotto content/ in questo run — niente da validare"
+            exit 0
+          fi
+          git status --porcelain -- content/ | head -20 || true
+          if node --test \
+            generator/tests/article-fabrication-guard.test.mjs \
+            generator/tests/prompt-placeholder-guard.test.mjs; then
+            exit 0
+          fi
+          {
+            echo "### ✖ Scrittura RIFIUTATA prima del commit — \`batch-faq-articles\`"
+            echo
+            echo "\`article-fabrication-guard\` / \`prompt-placeholder-guard\` hanno trovato offender nel corpus dopo la scrittura."
+            echo "**Niente e' stato committato**: le FAQ generate restano sul runner e spariscono con lui, \`main\` non le vede."
+            echo
+            echo "Gli offender sono elencati per path nel log di questo step. Confrontali con i path stampati sopra da \`git status\`:"
+            echo
+            echo "- se coincidono, il difetto e' delle FAQ appena generate: il rimedio e' rigenerarle, non rattoppare il gate;"
+            echo "- se NON coincidono, il difetto e' **preesistente nel corpus** e va riparato prima — finche' resta li', ogni giro che scrive muore qui."
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit 1
+
       - name: Count modified files
         id: count
         run: |
