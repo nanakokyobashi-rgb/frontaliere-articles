@@ -1,8 +1,13 @@
 name: Stale PR rescuer (self-healing signal)
 
 # Trasforma gli stalli silenziosi della pipeline PR in un segnale etichettato e
-# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Tre classi:
+# interrogabile entro ~1h, invece di lasciarli fermi per giorni. Quattro classi:
 #
+#   D) REVIEW PIÙ VECCHIA DELL'HEAD (direzione 3 della #201): esiste una review
+#      Claude, non ha chiuso con `## LGTM`, è su un commit che non è più l'head,
+#      e i test sono verdi sull'head. È la PR già riparata — tipicamente dal
+#      redflag-fixer — di cui nessuno chiede più conto. Vedi sotto: la novità
+#      non è la RILEVAZIONE, è il rimedio.
 #   A) test verdi sull'head da >2h ma nessuna review li ha coperti (coda
 #      congestionata, o il workflow file del branch è indietro).
 #   B) 🔴 Important non ripreso: il reviewer l'ha postato sull'head corrente,
@@ -13,6 +18,41 @@ name: Stale PR rescuer (self-healing signal)
 #      reviewer gira solo su test verdi. Senza `stale-review` il gate
 #      near-merge di `pr-autorebase` la salta, quindi niente rebase e niente
 #      re-test, quindi il rosso resta. Ciclo chiuso.
+#
+# ── D: cosa cambia davvero, misurato ────────────────────────────────────────
+# La condizione «ultima review più vecchia dell'ultimo commit» era GIÀ coperta,
+# ma in aggregato e senza saperlo: con `LAST_CID != HEAD` la catena non ha
+# nessuna cella muta — `success` cade in A, non-`success` senza run in volo cade
+# in C, e con un run in volo lo skip è corretto. Replay dell'intera storia del
+# repo (172 PR, commit vs review Claude in ordine temporale): UN solo intervallo
+# oltre le 2h in quello stato, la #122 per 5h35 — e lì i test erano `failure`
+# su ogni head, cioè il predicato di C.
+#
+# Quel che mancava è il RIMEDIO. In quello stato A dice «`git merge origin/main`
+# e push», che è la cura per una coda congestionata, non per una review vecchia:
+# dal 2026-08-13 `pr-review-loop.yml` ha un `workflow_dispatch` con l'input `pr`
+# (#286, direzione 1 della stessa #201) e la cura è UN comando. D non allarga la
+# rete — è un SOTTOINSIEME stretto di A, quindi l'insieme delle PR etichettate
+# non cambia di una — cambia solo l'istruzione che il commento consegna.
+#
+# I tre guard sui falsi positivi, ognuno con la sua misura:
+#   1. `LAST_CID` non vuoto. Una PR mai revisionata non è «revisionata e poi
+#      superata»: resta in A. Sono 25 PR su 172 senza nessuna review Claude.
+#   2. l'ultima review NON deve contenere `## LGTM`. Una LGTM su un commit
+#      precedente seguita da commit di soli content/data è uno stato SANO e
+#      progettato — è il `Re-review guard` di `pr-review-loop.yml`, che salta
+#      Claude apposta e porta avanti la LGTM. Senza questo guard sarebbero
+#      arrivati 2 falsi positivi su 41 intervalli, uno dei quali proprio sulla
+#      #181, la PR da cui nasce la #201.
+#   3. test verdi. Con i test rossi la causa dello stallo È il rosso, e il
+#      rimedio di C (label → `pr-autorebase` → rebase + re-dispatch dei test) è
+#      quello giusto: dirottare lì su un dispatch della review sostituirebbe una
+#      cura corretta con una inefficace.
+#
+# La classificazione è pinnata da `generator/tests/stale-pr-rescuer-classify.test.mjs`,
+# che ESTRAE ED ESEGUE il blocco `run:` qui sotto con `gh` e `date` stubbati —
+# un test a regex su «c'è un ramo in più» passerebbe anche su un ramo
+# irraggiungibile.
 #
 # DETERMINISTICO, zero Claude. L'azione è una label + UN commento idempotente:
 # nessun push automatico, quindi è sicuro girarlo accanto ad agent attivi.
@@ -109,8 +149,19 @@ jobs:
             LAST_BODY=$(echo "$reviews" | jq -r '[.[] | select(.user.login|test("claude";"i"))] | last | .body // ""')
             LAST_CID=$(echo "$reviews" | jq -r '[.[] | select(.user.login|test("claude";"i"))] | last | .commit_id // ""')
 
+            # `case` e non `grep`: `echo "$X" | grep -q` chiude la pipe al primo
+            # match, e sotto `pipefail` un EPIPE sul lato scrivente farebbe
+            # tornare 141 alla pipeline — cioè il contrario di ciò che il test
+            # vuole dire. Con un body di review, che è lungo, non è teorico.
+            case "$LAST_BODY" in *'## LGTM'*) LAST_LGTM=1 ;; *) LAST_LGTM=0 ;; esac
+
             REASON=""; RESCUE=""
-            if [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ]; then
+            if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
+              # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
+              # in più viene etichettata, cambia solo il rimedio consegnato.
+              REASON="ultima review più vecchia dell'head: è su \`${LAST_CID:0:7}\`, l'head è \`${HEAD:0:7}\`, non chiude con \`## LGTM\` e i test sull'head sono verdi — i findings sono stati ripresi da un commit nuovo e nessuno ha ri-revisionato"
+              RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\`. Un rerun di \`tests\` NON produce l'evento \`workflow_run\` che fa ripartire il reviewer, quindi senza questo dispatch (o senza un altro commit sul branch \`$BRANCH\`) la review non riparte mai e la PR resta verde e ferma."
+            elif [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ]; then
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
             elif echo "$LAST_BODY" | grep -qP '🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then

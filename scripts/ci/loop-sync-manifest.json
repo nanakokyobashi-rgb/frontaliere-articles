@@ -2536,6 +2536,16 @@
         "corpus": "070684201ba7caea",
         "alignedAt": "2026-08-10"
       }
+    },
+    {
+      "path": "generator/tests/stale-pr-rescuer-classify.test.mjs",
+      "mode": "corpus-only",
+      "reason": "Estrae ed ESEGUE la catena di classificazione di stale-pr-rescuer.yml (gh e date stubbati, jq reale). Corpus-only perche' il suo soggetto e' `adapted`: la cadenza, il ponte CI_CHECK_NAME e ora la classe D con il dispatch di pr-review-loop.yml sono le forme di QUESTO repo, e un gemello vitest asserirebbe altro. Se la classe D risale al sito, il gemello va scritto li' contro il suo YAML, non copiato.",
+      "baseline": {
+        "site": null,
+        "corpus": "ade3e04bb588571d",
+        "alignedAt": "2026-08-14"
+      }
     }
   ]
 }
