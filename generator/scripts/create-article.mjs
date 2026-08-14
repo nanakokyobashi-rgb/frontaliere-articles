@@ -6283,10 +6283,27 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     const prompt = attempt === 1
       ? basePrompt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
-    const rawText = await callLLM(
-      [{ role: 'user', content: prompt }],
-      { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-    );
+    let rawText;
+    try {
+      rawText = await callLLM(
+        [{ role: 'user', content: prompt }],
+        { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
+      );
+    } catch (e) {
+      // callLLM stessa ha lanciato (rete/HTTP): senza questo catch l'errore
+      // propagava fuori dalla funzione invece di passare dal percorso
+      // qualityReject di selectArticle, e il caller lo trattava come un
+      // errore infrastrutturale che fa fallire l'intero run invece di
+      // scartare questa headline e provare la prossima (issue #304).
+      last = { ok: false, rejection: SELECTION_REJECTION.TRANSPORT_ERROR, detail: `callLLM fallita: ${e?.message || e}` };
+      console.error(
+        `  ⚠️  ${label}: ${last.detail} — tentativo ${attempt}/${maxAttempts}`,
+      );
+      RUN_REPORT.selectionUsage.responsesRejected += 1;
+      RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] =
+        (RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] || 0) + 1;
+      continue;
+    }
     const parsed = parseHeadlineSelection(rawText, candidateCount);
     if (parsed.ok) return { ...parsed, attempts: attempt };
     last = parsed;

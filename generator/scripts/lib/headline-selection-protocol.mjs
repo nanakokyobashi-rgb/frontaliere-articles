@@ -80,6 +80,8 @@ export const SELECTION_REJECTION = {
   UNKNOWN_KEY: 'unknown_key',
   /** Chiave ben formata ma fuori da `H1..H<candidateCount>`. Qui stava il clamp. */
   OUT_OF_RANGE: 'out_of_range',
+  /** `callLLM` stessa ha lanciato (rete/HTTP), non una risposta malformata del modello. */
+  TRANSPORT_ERROR: 'transport_error',
 };
 
 /** La chiave della i-esima candidata (i è 0-based, la chiave è 1-based: `H1` è la prima). */
@@ -218,7 +220,9 @@ export function parseHeadlineSelection(rawText, candidateCount) {
 export function selectionCorrectionNote(rejection, candidateCount) {
   const why = rejection === SELECTION_REJECTION.AMBIGUOUS_REFERENCE
     ? 'Hai risposto con un NUMERO NUDO. Un numero non identifica niente in questo prompt: gli articoli già pubblicati non hanno chiavi e non sono selezionabili.'
-    : 'Il riferimento della risposta precedente non corrisponde a nessuna headline disponibile.';
+    : rejection === SELECTION_REJECTION.TRANSPORT_ERROR
+      ? 'La richiesta precedente non ha ricevuto risposta (errore di rete/HTTP), non è colpa di un riferimento sbagliato.'
+      : 'Il riferimento della risposta precedente non corrisponde a nessuna headline disponibile.';
   return [
     '⚠️ LA RISPOSTA PRECEDENTE È STATA RIGETTATA.',
     why,
