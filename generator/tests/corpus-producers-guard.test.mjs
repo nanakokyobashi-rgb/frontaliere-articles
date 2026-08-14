@@ -289,7 +289,13 @@ function runGuardBlock(block, { dir, nodeExit }) {
   fs.writeFileSync(script, block);
   const res = { status: 0, stdout: '' };
   try {
-    res.stdout = execFileSync('/bin/sh', [script], {
+    // `bash -e`, non `sh`: e' la shell che GitHub usa davvero per un `run:`
+    // (`bash -e {0}`), e la differenza non e' teorica — su Linux `/bin/sh` e'
+    // dash, dove `set -o pipefail` e' un errore di sintassi e il blocco esce 2
+    // PRIMA di arrivare al probe. Il test sarebbe stato rosso in CI e verde su
+    // macOS (dove sh e' bash), cioe' avrebbe misurato la shell del runner
+    // invece della guardia.
+    res.stdout = execFileSync('/bin/bash', ['-e', script], {
       cwd: dir,
       encoding: 'utf8',
       env: childTestEnv({ PATH: `${bin}:${process.env.PATH}`, GITHUB_STEP_SUMMARY: summary }),
