@@ -89,7 +89,10 @@ describe('classifyExhaustionCause — le cause di skip finiscono nel secchio giu
   const PERSISTENTI = [
     'sn/gpt-oss-120b: skipped — exhausted (non-retryable provider error (HTTP 402))',
     'gemini-2.0-flash: skipped — exhausted (non-retryable provider error (HTTP 404))',
-    'hf/Qwen/Qwen2.5-72B-Instruct: skipped — exhausted (stale credentials (HTTP 401))',
+    // `stale` = il provider non offre piu' quell'id nel suo listing live, NON una
+    // credenziale scaduta: vedi il commento su _exhaustSkipCause. Resta persistente
+    // (un modello ritirato non torna alla prossima finestra di quota).
+    'hf/Qwen/Qwen2.5-72B-Instruct: skipped — exhausted (model no longer offered by provider)',
     'groq/compound: skipped — exhausted (repeated unusable content)',
   ];
   const TRANSITORIE = [
