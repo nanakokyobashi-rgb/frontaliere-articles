@@ -103,8 +103,13 @@ const HARVESTER_DECISION = Object.freeze({
   // pre-flight zero-Claude non poteva short-circuitare (root cause #2290).
   'already-fixed': 'filtered',
   // `isAvoidableMaxTurns`: scarta consegnato / `needs-human` / aggregato
-  // (#2439, #2653). NON scarta ancora chi ha lasciato un branch senza PR — vedi
-  // `classifyMaxTurnsRun` e i test in fondo: è la metà mancante, e sta sul sito.
+  // (#2439, #2653) e, dal trasporto di #303, anche chi ha lasciato LAVORO
+  // RECUPERABILE sul branch — commit su `fix/issue-<N>` avanti a `main` dal
+  // checkpoint WIP di issue-fix.yml (#4337). Misurato sul corpus su 31 morti
+  // `max-turns`: consegnate 0, recuperabili 11, vuote 20; due delle undici sono
+  // state riaperte a mano e mergiate (sito #5767 → PR #5774, qui #166 → PR
+  // #293). La firma accetta ora sia il booleano legacy sia
+  // `{hasDeliveredPr, hasRecoverableBranch}`.
   'max-turns': 'filtered',
   // Carve-out #4750: la diagnosi è prosa LLM, spazio d'input illimitato; una
   // riga di doc non può prevenire quante parafrasi esistono di «era transitorio».
@@ -123,12 +128,25 @@ const HARVESTER_DECISION = Object.freeze({
   // zero-Claude non e' una regola violata) ma tenuto in `NON_RETRYABLE` del
   // drainer, perche' il verdetto e' deterministico e ri-accodarlo lo riprodurrebbe.
   'skip-duplicate-diagnosis': 'carved-out',
-  // ↓ NESSUN FILTRO. Ognuno di questi conta ogni marker.
-  // #229: 11 marker su 11 contati nella finestra 14gg al 2026-08-13, tutti
-  // aborti CORRETTI del fixer davanti a una PR aperta sugli stessi file. La fix
-  // sta sul sito (file `identical`).
-  'overlap-skip': 'escalatable',
-  'pr-already-open': 'escalatable',
+  // Carve-out #229, scesa col trasporto di #303 (era: `escalatable`, con 11
+  // marker su 11 contati nella finestra 14gg al 2026-08-13, tutti aborti
+  // CORRETTI del fixer davanti a una PR aperta sugli stessi file). I due codici
+  // sono quelli che `followup-drainer.mjs` dichiara TRANSITORI — li tiene fuori
+  // da `NON_RETRYABLE` apposta, «l'overlap e' transitorio (la PR bloccante puo'
+  // mergiare → ri-tentabile)», e `close-recovered-structural-hold.mjs` si
+  // rifiuta di trattenerli («scheduling, not a fault»). Un'escalation su questo
+  // bucket chiederebbe una regola di prosa contro il fatto che due issue
+  // indipendenti nominino lo stesso file insieme: nessuna riga di doc la
+  // previene. Restano CONTATI come volume nel summary, come `rate-limited`.
+  // Il rimedio strutturale e' la pre-flight zero-Claude (#3810), la cui meta'
+  // corpus era INERTE — `CODE_PATH_RE` matchava dalla directory e mai dal path
+  // completo — ed e' scesa nello stesso giro (`scripts/lib/workflow-scope-detect.mjs`,
+  // `CODE_DIRS` + `repoRelativeTail`).
+  // L'UNICO caso che resta contabile lo tiene `isAvoidableOverlapSkip`: la issue
+  // porta anche un marker `pr-created`, cioe' il fixer e' stato ri-promosso su
+  // una issue che la PR ce l'aveva gia' — quello e' un buco del gate `hasFixPR`.
+  'overlap-skip': 'carved-out',
+  'pr-already-open': 'carved-out',
   // Ha già escalato e la sua escalation (#228) è stata chiusa.
   'blocked-workflows-scope': 'escalatable',
   'blocked-secrets': 'escalatable',

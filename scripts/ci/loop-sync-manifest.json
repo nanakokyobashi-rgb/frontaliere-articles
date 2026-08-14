@@ -309,9 +309,9 @@
       "path": "scripts/lib/workflow-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4f079653103adbf2",
-        "corpus": "4f079653103adbf2",
-        "alignedAt": "2026-08-07"
+        "site": "08dcb09e080c286b",
+        "corpus": "08dcb09e080c286b",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -535,9 +535,9 @@
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e0835498f050dce5",
-        "corpus": "e0835498f050dce5",
-        "alignedAt": "2026-08-07"
+        "site": "24a642499c138e83",
+        "corpus": "24a642499c138e83",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -663,7 +663,7 @@
       "reason": "Fratello di loop-scripts-closure.test.mjs per i riferimenti che NON sono import. Nato dal caso #45: alert-pat-down.mjs e' arrivato qui identical dichiarando che gh-pat-expiry-monitor.yml e' «l'unico punto di chiusura» del suo alert, con quel workflow assente — una issue priority:urgent che niente poteva chiudere, con le voci not-ported a 0 e la CI verde. Stessa forma del SiteShellContract: un contratto senza forma di import non e' coperto dai guard che seguono gli import. Ogni citazione non risolta va DICHIARATA con un kind chiuso e una ragione scritta, perche' l'intento non si indovina dalla prosa (la citazione contrastiva «e' X, non Y» nomina Y proprio per negarlo) — e' lo stesso errore che false-positive-declaration.mjs documenta. Il valore non e' classificare le 29 di oggi ma rendere impossibile aggiungere la 30esima in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "c77e7ca83521f417",
+        "corpus": "6146f482025c12f9",
         "alignedAt": "2026-08-14"
       }
     },
@@ -819,9 +819,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e0dfd3f48748cc14",
-        "corpus": "e0dfd3f48748cc14",
-        "alignedAt": "2026-08-07"
+        "site": "2019ea735ceea114",
+        "corpus": "2019ea735ceea114",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1096,33 +1096,33 @@
       "path": "generator/scripts/create-article.mjs",
       "sitePath": "scripts/create-article.mjs",
       "mode": "adapted",
-      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi.",
+      "reason": "Fork del generatore principale del sito: percorsi (PROJECT_ROOT un livello sopra la', due qui), corpusPath() per il layout content/ vs services/locales/, sanitize-control-chars.mjs al write, whitelist news-sitemap vendorizzata invece che letta da un .ts, niente vitest-import (nessun node_modules). Era fuori dal manifest per omissione, non per scelta: la fix del sito sul cap della meta description (valerielinc-ops#5360, 2026-08-08) non e' mai scesa qui perche' nessuno dei due mirror copre generator/, e il difetto (description a 265 caratteri) e' tornato identico il giorno dopo (issue #81). `adapted` e non `identical` perche' il fork e' cosi' per costruzione; ma resta sorvegliato, che e' cio' che serviva a intercettare #5360 prima del ripresentarsi. 2026-08-14: `baseline.corpus` era un GHOST (3025de18994bdabc, un hash che loop-drift-check non ha trovato in nessuna revisione storica del path) ed e' stata ricalcolata dal contenuto reale. `baseline.site` NON e' stata toccata di proposito: di questo giro e' stata portata solo la meta' legata a clauseTail (i due call site passati a `truncateToClauseNonEmpty`), il resto del delta del sito non e' stato letto — la voce resta quindi `site-ahead`, che e' la verita', invece di dichiarare un allineamento che non c'e' stato.",
       "baseline": {
         "site": "44b4dcb727b012ea",
-        "corpus": "3025de18994bdabc",
-        "alignedAt": "2026-08-10"
+        "corpus": "e48b58a762604895",
+        "alignedAt": "2026-08-14"
       }
     },
     {
       "path": "host/shared/clauseTail.mjs",
       "sitePath": "build-plugins/shared/clauseTail.mjs",
       "mode": "identical",
-      "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso.",
+      "reason": "Primitiva di troncamento su clausola (lista di stopword dei 4 locali + peel della coda). E' arrivata qui con la meta' `host/` del SiteShellContract e non e' coperta da nessuno dei due mirror: mirror-articles-engine.yml ha una allowlist che rifiuta ogni path fuori da engine/. Registrata perche' da ora ci dipende anche generator/scripts/create-article.mjs, che la importa invece di ricopiare la lista (AGENTS.md #6): un `site-ahead` qui significa una stopword aggiunta la' che questo generatore non applica, cioe' il ritorno esatto della divergenza che la fix ha chiuso. RICONCILIATO il 2026-08-14 (#234, classe `both-moved`): era un both-moved APPARENTE. Il blob qui era byte-identico a `valerielinc-ops@8bfe4e3b:build-plugins/shared/clauseTail.mjs`, cioe' la \"modifica del corpus\" ERA la modifica del sito, arrivata col trasporto di #116 senza che la baseline venisse aggiornata; il sito e' poi andato avanti da solo con 79a6b924. Le due modifiche non sono indipendenti — una contiene l'altra — quindi la riconciliazione e' un fast-forward: adottata la versione del sito. Porta un CAMBIO DI COMPORTAMENTO, non solo un export nuovo: `truncateToClause` ora RIFIUTA (torna la stringa vuota) quando il primo token da solo sfora il budget, invece di tagliare duro a `maxLen`. Per questo `generator/scripts/create-article.mjs` e' passato a `truncateToClauseNonEmpty` sui due call site di titolo e breadcrumb, dove il fallback e' lo slug (nessuno spazio) e il rifiuto sarebbe stato la norma, non il caso limite.",
       "baseline": {
-        "site": "4967da4d256e3516",
-        "corpus": "4967da4d256e3516",
-        "alignedAt": "2026-08-09"
+        "site": "eb990c4da4d95a93",
+        "corpus": "eb990c4da4d95a93",
+        "alignedAt": "2026-08-14"
       }
     },
     {
       "path": "host/shared/titleSuffix.ts",
       "sitePath": "build-plugins/shared/titleSuffix.ts",
       "mode": "identical",
-      "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire.",
+      "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`.",
       "baseline": {
-        "site": "557f1f701a297cce",
-        "corpus": "557f1f701a297cce",
-        "alignedAt": "2026-08-09"
+        "site": "6449645c6821c224",
+        "corpus": "6449645c6821c224",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1131,8 +1131,8 @@
       "reason": "Gate del troncamento SEO del generatore. Corpus-only perche' il banco del sito (tests/seo-serp-clause-truncation.test.ts) prova le funzioni del render layer sotto vitest, mentre qui il bersaglio e' il FORK del generatore, che non e' importabile senza node_modules: il test estrae truncateAtWordBoundary e la valuta iniettandole il truncateToClause vero, cosi' le asserzioni restano comportamentali e rimettere il corpo vecchio le fa fallire (verificato: 4 test su 15). Aggiunge il gate sull'output di content/seo/** con ratchet datato sui 3.544 residui storici e zero tolleranza sugli articoli pubblicati dopo la fix.",
       "baseline": {
         "site": null,
-        "corpus": "509feb23d747ff20",
-        "alignedAt": "2026-08-09"
+        "corpus": "8eac4202aafecc05",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1245,11 +1245,11 @@
     {
       "path": "scripts/lib/cf-analytics.mjs",
       "mode": "identical",
-      "reason": "Client GraphQL Cloudflare Analytics. **Oggi i due lati NON coincidono**, e la registrazione lo dichiara apposta: il blob qui e' identico a `valerielinc-ops@be6b31d5:scripts/lib/cf-analytics.mjs`, cioe' e' la copia del trasporto del 2026-08-02 mai piu' toccata; il sito ha aggiunto `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` il 2026-08-05. Non e' un adattamento, e' ritardo: `identical` fa emergere il caso come `undeclared-drift` invece di lasciarlo muto.",
+      "reason": "Client GraphQL Cloudflare Analytics. RIALLINEATO il 2026-08-14: il ritardo dichiarato qui e' stato chiuso copiando il sito, e i due lati ora coincidono byte a byte. Cronaca, perche' la classe si ripete: dal 2026-08-02 al 2026-08-14 il blob qui e' rimasto quello del trasporto (`valerielinc-ops@be6b31d5`) mentre il sito aggiungeva `fetchErrorDiagnostics` + `ERROR_DIAGNOSTICS_QUERY` (2026-08-05). La divergenza era PRE-ESISTENTE alla registrazione della baseline (`baseline.site != baseline.corpus` gia' al 2026-08-09), quindi nessuno dei due lati si muoveva piu' e nessun evento l'avrebbe mai chiusa: `undeclared-drift` era un allarme permanente, non un incidente. `adapted` sarebbe stato falso — non c'e' nessun adattamento, solo ritardo — e infatti la riparazione giusta era copiare, non ri-dichiarare.",
       "baseline": {
         "site": "4e3a87aedeb3b4c0",
-        "corpus": "a0ac96009b459a53",
-        "alignedAt": "2026-08-09"
+        "corpus": "4e3a87aedeb3b4c0",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1265,11 +1265,11 @@
     {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
-      "reason": "Push con retry usato dai job che scrivono sugli shard. **Oggi i due lati NON coincidono** e la ragione e' la stessa di cf-analytics.mjs: il blob qui e' identico a `be6b31d5`, il sito ha aggiunto dopo le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Nota che gia' oggi registra `merge.compat-shard.driver` puntando a `scripts/ci/merge-compat-shard.mjs`, che qui non esiste — innocuo perche' il comando finisce in `|| true` e nessun `.gitattributes` locale marca quei path.",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-14 insieme a cf-analytics.mjs e profession-taxonomy.mjs, stessa classe: ritardo pre-esistente alla baseline, non adattamento. Il sito aveva aggiunto le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`, che ora scendono qui. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Le registrazioni puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo, ed e' gia' vero da prima per `merge.compat-shard.driver`: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
         "site": "643a10e4815e38bc",
-        "corpus": "7dea1006a6223cc2",
-        "alignedAt": "2026-08-09"
+        "corpus": "643a10e4815e38bc",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1343,9 +1343,9 @@
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "abf19f0cc3dff104",
-        "corpus": "abf19f0cc3dff104",
-        "alignedAt": "2026-08-09"
+        "site": "6cc7088bf44c5152",
+        "corpus": "6cc7088bf44c5152",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1946,11 +1946,11 @@
       "path": "generator/scripts/lib/profession-taxonomy.mjs",
       "sitePath": "scripts/lib/profession-taxonomy.mjs",
       "mode": "identical",
-      "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. **Oggi i due lati NON coincidono, e non e' un adattamento**: il blob e' identico a `valerielinc-ops@be6b31d5`, cioe' alla copia del trasporto del 2026-08-02, mentre il sito ha aggiunto il 2026-08-05 (21e2d13d) `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`. Registrarlo `adapted` avrebbe dichiarato deliberato un ritardo: `identical` lo fa uscire come `undeclared-drift`, che e' la verita'.",
+      "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. RIALLINEATA il 2026-08-14: era il terzo ritardo pre-esistente alla baseline (blob fermo al trasporto `valerielinc-ops@be6b31d5` del 2026-08-02, mentre il sito aggiungeva il 2026-08-05 con 21e2d13d `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`). Il ritardo non aveva effetto funzionale qui — misurato prima di copiare: l'unico importatore locale prende `PROFESSION_TAXONOMY` e nessuno dei quattro simboli nuovi compare in un solo file di questo repo — quindi la copia e' additiva e non cambia comportamento. E' pero' proprio il caso in cui il ritardo si sarebbe fatto sentire in silenzio il giorno in cui `evergreen-topic-generator.mjs` (a sua volta `identical`) fosse sceso dal sito gia' usandoli: un import di un export inesistente e' `undefined`, non un errore.",
       "baseline": {
         "site": "d15cfe455f5879b5",
-        "corpus": "2cc826c9a6ed57d7",
-        "alignedAt": "2026-08-09"
+        "corpus": "d15cfe455f5879b5",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -2524,8 +2524,8 @@
       "reason": "L'osservatore dell'inerzia delle regole dell'harvester: dichiara codice per codice cosa `harvest-agent-lessons.mjs` ne fa, e confronta la dichiarazione col vocabolario FIX_OUTCOME derivato dal repo (ISSUES.md + i marker letterali emessi sotto scripts/ci, scripts/lib, .github/workflows). Corpus-only: il vocabolario asserito e' quello di QUESTO repo, e sul sito i corrispettivi puri sono coperti da un test vitest a un path diverso.",
       "baseline": {
         "site": null,
-        "corpus": "bb12b19074f39954",
-        "alignedAt": "2026-08-13"
+        "corpus": "35293727a737dc2d",
+        "alignedAt": "2026-08-14"
       }
     },
     {

@@ -48,7 +48,12 @@ import { fileURLToPath } from 'node:url';
 
 // Import DIRETTO: clauseTail.mjs e' puro e senza dipendenze, quindi qui
 // l'import funziona dove su create-article.mjs no.
-import { truncateToClause, peelDanglingClauseTail, TRAILING_STOPWORDS } from '../../host/shared/clauseTail.mjs';
+import {
+  truncateToClause,
+  truncateToClauseNonEmpty,
+  peelDanglingClauseTail,
+  TRAILING_STOPWORDS,
+} from '../../host/shared/clauseTail.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const CREATE_ARTICLE = path.join(ROOT, 'generator', 'scripts', 'create-article.mjs');
@@ -183,6 +188,60 @@ describe('cablaggio del modulo condiviso', () => {
     };
     walk(path.join(ROOT, 'generator'));
     expect(offenders.filter((f) => !f.endsWith('seo-clause-truncation.test.mjs')), 'importarla, non ricopiarla').toEqual([]);
+  });
+});
+
+// ── Il rifiuto di truncateToClause, e i due call site che non lo tollerano ──
+
+describe('titolo e breadcrumb: il RIFIUTO non deve arrivare fino al <title>', () => {
+  // `truncateToClause` risolve il dilemma «mai a meta' parola, mai oltre il
+  // budget» RIFIUTANDO: quando il primo token da solo sfora, nessun suo
+  // prefisso soddisfa entrambe le condizioni, e la funzione torna ''. E' il
+  // contratto giusto per un campo che puo' restare vuoto, ed e' sbagliato per
+  // un titolo, che qui viene interpolato in un suffisso di brand: '' non
+  // significa «nessun titolo», significa pubblicare " | Frontaliere Ticino"
+  // come titolo intero, con ogTitle e headline vuoti.
+  //
+  // Non e' un caso limite su questo repo: il fallback dei due call site e'
+  // `data.id`, cioe' uno SLUG, e uno slug non contiene spazi. Il ramo del
+  // rifiuto e' la NORMA quando il titolo manca.
+  // Slug reale del corpus, 65 caratteri: il budget del titolo e' 57.
+  const SLUG = 'caldo-non-frene-consumi-carne-ma-siccia-potrebbe-far-salire-prezzi';
+
+  it('lo slug nudo fa rifiutare truncateToClause (la premessa della fix)', () => {
+    assert.ok(!SLUG.includes(' '), 'la premessa e\' che uno slug non abbia spazi');
+    assert.ok(SLUG.length > 57, 'e che sia piu\' lungo del budget del titolo');
+    expect(truncateToClause(SLUG, 57), 'se questo smette di essere \'\', il rifiuto e\' stato rimosso a monte').toBe('');
+  });
+
+  it('la versione non-vuota risponde qualcosa, e sta nel budget', () => {
+    const out = truncateToClauseNonEmpty(SLUG, 57);
+    expect(out.length).toBeGreaterThan(0);
+    expect(out.length).toBeLessThan(58);
+    assert.ok(SLUG.startsWith(out), 'deve restare un prefisso dell\'originale');
+  });
+
+  it('non tocca il caso normale: con uno spazio le due funzioni coincidono', () => {
+    // Se divergessero anche qui, la fix avrebbe cambiato il taglio di ogni
+    // titolo del corpus invece del solo ramo del rifiuto.
+    for (const t of [
+      'Confine Italia-Svizzera: 6 regole doganali per frontalieri',
+      'Imposta alla Fonte Ticino 2026: aliquote, scaglioni e conguaglio',
+    ]) {
+      expect(truncateToClauseNonEmpty(t, 57)).toBe(truncateToClause(t, 57));
+    }
+  });
+
+  // Guard testuale sui due call site: e' l'unica forma possibile, perche'
+  // create-article.mjs non e' importabile da node:test (vedi l'intestazione).
+  it('i due call site di titolo e breadcrumb usano la versione non-vuota', () => {
+    const src = fs.readFileSync(CREATE_ARTICLE, 'utf-8');
+    expect(src, 'il titolo del ramo «campo seo mancante» cade sullo slug: qui il rifiuto pubblicherebbe un title vuoto')
+      .toMatch(/const title = truncateToClauseNonEmpty\(String\(it\.title \|\| data\.id\), 57\)/);
+    expect(src, 'breadcrumbName finisce nel JSON-LD BreadcrumbList, dove una name vuota e\' un item invalido')
+      .toMatch(/data\.seo\.breadcrumbName = truncateToClauseNonEmpty\(/);
+    expect(src, 'senza l\'import il modulo lancia a runtime')
+      .toMatch(/^import\s*\{[^}]*\btruncateToClauseNonEmpty\b[^}]*\}\s*from\s*'\.\.\/\.\.\/host\/shared\/clauseTail\.mjs';$/m);
   });
 });
 

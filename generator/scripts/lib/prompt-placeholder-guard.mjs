@@ -377,6 +377,44 @@ export const PLACEHOLDER_RULES = Object.freeze([
     why: "Il campo ricopia la DESCRIZIONE del campo («Descrizione dell'immagine in italiano, massimo 125 caratteri») invece di descrivere l'immagine.",
   },
   {
+    id: 'schema-field-name-as-keyword',
+    kind: 'schema-echo',
+    // Il NOME del campo dello schema sopravvissuto come token isolato di una
+    // tag-list. E' il residuo che nessun letterale poteva vedere, ed e' il
+    // punto 2 di #300 — dichiarato li' `blocked: serve la ricetta di
+    // generazione`. La ricetta c'e', ed e' deterministica:
+    // `optimizeSeoMetadata()` in create-article.mjs NON usa le `keywords` che
+    // il modello propone, le RIDERIVA da `title + excerpt + id` della locale
+    // IT, minuscole, tokenizzate, filtrate per lunghezza > 3 e per stopword.
+    // Verificata rieseguendola sul corpus: 4.823 campi su 5.134 riprodotti
+    // byte a byte (93,9%; il resto e' keyword-set scritti a mano o drift da
+    // edit successivi di title/excerpt).
+    //
+    // Quindi un `sottotitolo` nudo fra le keywords non e' un'invenzione del
+    // modello su quel campo: e' il letterale «Sottotitolo con dati concreti
+    // DALLA FONTE (max 160 chars)» finito nell'EXCERPT e poi compresso a un
+    // token dalla derivazione, che getta via tutto il resto della frase — cioe'
+    // tutto cio' a cui i letterali si agganciano. Il caso reale (riparato nei
+    // dati da #296, mai rilevabile) e' `trasferirsi-a-marchirolo-...`.
+    //
+    // Solo la famiglia sottotitolo/traduzioni, e per una ragione misurata:
+    // allargare ai nomi di campo generici (`titolo`/`title`/`titel`/`titre`/
+    // `keyword`) produce 11 falsi positivi VERI, tutti legittimi — «spareggio,
+    // titolo» (titolo sportivo), «equipollenza, titolo, studio» (titolo di
+    // studio), «inchieste, keyword». E' lo stesso argomento con cui
+    // `budget-tail` non matcha `(max ` da solo: la parola generica non
+    // distingue il leak dal contenuto.
+    //
+    // Ancorata ai confini della tag-list (inizio campo o virgola), non alla
+    // parola: gli articoli che parlano DAVVERO di sottotitoli usano il plurale
+    // o il participio dentro la prosa (`sottotitoli`, `sottotitolata`,
+    // `Untertiteln`, `sous-titres`) e non hanno mai la parola fra le keywords.
+    // Misurato su tutto il corpus a regola scritta: 0 hit su 5.134 campi
+    // `keywords`, 0 su 25.668 campi seo, 0 su 50.394 campi meta, 0 sui corpi.
+    rx: /(?:^|,)\s*(?:sottotitol[oi]|untertiteln?|sous-titres?|subtitles?)\s*(?:,|$)/i,
+    why: 'Il NOME del campo dello schema («Sottotitolo…») sopravvissuto come token isolato della tag-list `keywords`, che optimizeSeoMetadata deriva da title + excerpt + id invece di prenderla dal modello.',
+  },
+  {
     id: 'faq-numbered-label',
     kind: 'schema-label',
     rx: /(?:^|[\s*#>\-–—.)\]])\**\s*domanda\s+frequente\s+\d+\**\s*[:.?\-–—]/i,
