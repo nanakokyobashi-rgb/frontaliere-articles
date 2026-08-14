@@ -109,10 +109,24 @@ jobs:
           NOW=$(date -u +%s)
           AGE_MIN_S=7200  # 2h: non toccare PR con lavoro recente
 
-          prs=$(gh pr list --repo "$REPO" --state open --limit 50 \
-            --json number,headRefName,headRefOid,updatedAt,author,labels,isDraft)
+          # `gh api --paginate` e non il vecchio `gh pr list --limit 50`: quel
+          # sottocomando NON ha `--paginate` e il suo `--limit` TRONCA in
+          # silenzio, quindi oltre il taglio una PR semplicemente non esiste per
+          # questo workflow. Nessun errore, nessun log: la 51esima PR aperta non
+          # viene classificata e il suo stallo non viene mai visto — che è
+          # esattamente il difetto che questo workflow esiste per non avere.
+          # Con `--paginate` la risposta arriva come una SEQUENZA di array (uno
+          # per pagina): `jq -c '.[]'` la legge come stream, senza `--slurp`.
+          prs=$(gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" 2>/dev/null || echo '[]')
 
-          echo "$prs" | jq -c '.[]' | while read -r pr; do
+          echo "$prs" | jq -c '.[] | {
+              number,
+              headRefName: .head.ref,
+              headRefOid: .head.sha,
+              updatedAt: .updated_at,
+              labels: [.labels[] | { name }],
+              isDraft: .draft
+            }' | while read -r pr; do
             N=$(echo "$pr" | jq -r '.number')
             BRANCH=$(echo "$pr" | jq -r '.headRefName')
             HEAD=$(echo "$pr" | jq -r '.headRefOid')
@@ -120,8 +134,10 @@ jobs:
             HAS_LABEL=$(echo "$pr" | jq -r '[.labels[].name] | index("stale-review") // empty')
             IS_DRAFT=$(echo "$pr" | jq -r '.isDraft')
 
-            # Idempotenza: già segnalata → skip.
-            if [ -n "$HAS_LABEL" ]; then echo "PR #$N già stale-review — skip"; continue; fi
+            # NOTA: qui NON si salta più la PR che ha già `stale-review`.
+            # L'idempotenza si è spostata a valle, sull'AZIONE. Vedi il blocco
+            # `MARKER` dopo la catena di classificazione: quel salto in cima era
+            # il corto circuito della #314.
 
             # Le draft NON vanno toccate, ed è necessario per la classe C: una
             # WIP ha spesso i test rossi o nessun check per giorni, quindi
@@ -134,20 +150,38 @@ jobs:
             UPD_S=$(date -u -d "$UPD" +%s 2>/dev/null || echo "$NOW")
             if [ $((NOW - UPD_S)) -lt $AGE_MIN_S ]; then echo "PR #$N fresca (<2h) — skip"; continue; fi
 
-            checks=$(gh api "repos/$REPO/commits/$HEAD/check-runs" 2>/dev/null || echo '{}')
+            # `--paginate` anche qui: `check-runs` risponde `per_page` 30 di
+            # default, e un SHA con molti check omonimi (rerun manuali) può
+            # spingere il verdetto che conta fuori dalla prima pagina. Con
+            # `--paginate` arriva una sequenza di OGGETTI `{check_runs: [...]}`,
+            # uno per pagina: `jq -s` li raccoglie e `.[].check_runs[]?` li
+            # appiattisce. Il `?` regge anche il fallback `{}`.
+            checks=$(gh api --paginate "repos/$REPO/commits/$HEAD/check-runs?per_page=100" 2>/dev/null || echo '{}')
             # ULTIMO check-run COMPLETATO per `completed_at`, non l'ultimo per
             # ordine API: uno stesso SHA può portare più check omonimi (il run
             # da `pull_request` più un `workflow_dispatch` manuale), e prendere
             # un verdetto arbitrario fa mascherare un `success` reale da un
             # `failure` stantio. Stessa selezione di `vitestCheck.mjs`.
-            TESTS_CONCL=$(echo "$checks" | jq -r --arg n "$CI_CHECK_NAME" \
-              '[.check_runs[] | select(.name==$n and .status=="completed" and .completed_at)] | sort_by(.completed_at) | last | .conclusion // "none"')
-            TESTS_PENDING=$(echo "$checks" | jq -r --arg n "$CI_CHECK_NAME" \
-              '[.check_runs[] | select(.name==$n and .status!="completed")] | length')
+            #
+            # Il tie-break su `.id` non è cosmetico: `completed_at` è un ISO8601
+            # risolto al SECONDO, e due run sullo stesso SHA che chiudono nello
+            # stesso secondo sono ordinariamente possibili — un rerun parte
+            # quando il primo è quasi finito. A parità di chiave `sort_by` è
+            # STABILE, quindi senza tie-break l'ultimo è quello che l'API ha
+            # elencato per ultimo: cioè un ordine che non è il tempo. `.id` dei
+            # check-run è monotono crescente ed è l'unico discriminante che il
+            # payload offre a quella risoluzione.
+            TESTS_CONCL=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" \
+              '[.[].check_runs[]? | select(.name==$n and .status=="completed" and .completed_at)] | sort_by([.completed_at, .id]) | last | .conclusion // "none"')
+            TESTS_PENDING=$(echo "$checks" | jq -rs --arg n "$CI_CHECK_NAME" \
+              '[.[].check_runs[]? | select(.name==$n and .status!="completed")] | length')
 
-            reviews=$(gh api "repos/$REPO/pulls/$N/reviews" 2>/dev/null || echo '[]')
-            LAST_BODY=$(echo "$reviews" | jq -r '[.[] | select(.user.login|test("claude";"i"))] | last | .body // ""')
-            LAST_CID=$(echo "$reviews" | jq -r '[.[] | select(.user.login|test("claude";"i"))] | last | .commit_id // ""')
+            # `--paginate`: una PR molto revisionata supera le 30 review di
+            # default, e qui si legge l'ULTIMA — cioè proprio quella che una
+            # risposta troncata non contiene. Sequenza di ARRAY: `.[][]?`.
+            reviews=$(gh api --paginate "repos/$REPO/pulls/$N/reviews?per_page=100" 2>/dev/null || echo '[]')
+            LAST_BODY=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("claude";"i"))] | last | .body // ""')
+            LAST_CID=$(echo "$reviews" | jq -rs '[.[][]? | select(.user.login|test("claude";"i"))] | last | .commit_id // ""')
 
             # `case` e non `grep`: `echo "$X" | grep -q` chiude la pipe al primo
             # match, e sotto `pipefail` un EPIPE sul lato scrivente farebbe
@@ -155,34 +189,81 @@ jobs:
             # vuole dire. Con un body di review, che è lungo, non è teorico.
             case "$LAST_BODY" in *'## LGTM'*) LAST_LGTM=1 ;; *) LAST_LGTM=0 ;; esac
 
-            REASON=""; RESCUE=""
+            REASON=""; RESCUE=""; CLASS=""
             if [ -n "$LAST_CID" ] && [ "$LAST_CID" != "$HEAD" ] && [ "$TESTS_CONCL" = "success" ] && [ "$LAST_LGTM" = "0" ]; then
+              CLASS="D"
               # D — direzione 3 della #201. Sottoinsieme stretto di A: nessuna PR
               # in più viene etichettata, cambia solo il rimedio consegnato.
               REASON="ultima review più vecchia dell'head: è su \`${LAST_CID:0:7}\`, l'head è \`${HEAD:0:7}\`, non chiude con \`## LGTM\` e i test sull'head sono verdi — i findings sono stati ripresi da un commit nuovo e nessuno ha ri-revisionato"
               RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\`. Un rerun di \`tests\` NON produce l'evento \`workflow_run\` che fa ripartire il reviewer, quindi senza questo dispatch (o senza un altro commit sul branch \`$BRANCH\`) la review non riparte mai e la PR resta verde e ferma."
             elif [ "$TESTS_CONCL" = "success" ] && [ "$LAST_CID" != "$HEAD" ]; then
+              CLASS="A"
               REASON="test verdi sull'head corrente da >2h ma nessuna review li ha coperti"
               RESCUE="\`git fetch origin main && git merge origin/main\` nel branch \`$BRANCH\`, poi push. Se il merge non serve, può essere solo coda congestionata: attendi."
             elif echo "$LAST_BODY" | grep -qP '🔴\s*\*{0,2}\s*Important\s*\*{0,2}\s*[:—-]' && [ "$LAST_CID" = "$HEAD" ]; then
+              CLASS="B"
               # Regex allineata a REDFLAG_IMPORTANT_RE: un `grep -q "🔴"` nudo
               # scatterebbe anche sulla prosa di NEGAZIONE del reviewer ("zero
               # 🔴 Important findings"), segnalando come stallo una PR sana.
               REASON="🔴 Important non ripreso (review sull'head corrente, auto-merge skippato, nessun commit nuovo)"
               RESCUE="applica il fix del 🔴 in un nuovo commit sullo stesso branch \`$BRANCH\` → re-review automatica."
             elif [ "$TESTS_PENDING" = "0" ] && [ "$TESTS_CONCL" != "success" ]; then
+              CLASS="C"
               REASON="check \`$CI_CHECK_NAME\` = \`$TESTS_CONCL\` sull'head da >2h, nessun run in volo e nessun segnale a valle (il reviewer gira solo su test verdi) — stallo silenzioso"
               RESCUE="etichettata \`stale-review\` per riaprire il grafo: \`pr-autorebase\` ora la considera near-merge, la rebasa su main e ri-dispatcha i test. Se il rosso è REALE va fixato a mano sul branch \`$BRANCH\` — la label non lo nasconde, lo rende visibile."
             else
-              echo "PR #$N nessuno stallo noto (check=$TESTS_CONCL pending=$TESTS_PENDING) — skip"; continue
+              echo "PR #$N nessuno stallo noto (check=$TESTS_CONCL pending=$TESTS_PENDING) — skip"
+              # L'altra metà della #314. `stale-review` non veniva TOLTA da
+              # nessuno, e finché resta costa due volte: `pr-review-loop.yml`
+              # salta la PR (quindi verde e mai revisionata), e
+              # `recycle-stale-prs` la conta fra le chiudibili a 24h — cioè un
+              # segnale scaduto può far chiudere una PR sana.
+              #
+              # Si toglie SOLO quando lo stato è noto e sano: `TESTS_PENDING=0`
+              # esclude il caso «non lo sappiamo ancora», dove togliere la label
+              # significherebbe cancellare un segnale valido per un run in volo.
+              if [ -n "$HAS_LABEL" ] && [ "$TESTS_PENDING" = "0" ] && [ "${DRY_RUN:-false}" != "true" ]; then
+                gh pr edit "$N" --repo "$REPO" --remove-label "stale-review" 2>/dev/null \
+                  && echo "PR #$N: stale-review RIMOSSA — nessuno stallo residuo" \
+                  || echo "::warning::rimozione di stale-review fallita su PR #$N"
+              fi
+              continue
             fi
 
             echo "::warning::PR #$N FERMA — $REASON"
             if [ "${DRY_RUN:-false}" = "true" ]; then echo "(dry-run) nessuna azione su PR #$N"; continue; fi
 
+            # ── Idempotenza sull'AZIONE, non sulla VALUTAZIONE (#314) ────────
+            # Prima c'era, in cima al ciclo, `[ -n "$HAS_LABEL" ] && continue`:
+            # bastava una label perché la PR non venisse MAI più classificata.
+            # È la combinazione peggiore, perché `stale-review` è anche ciò che
+            # fa saltare la PR a `pr-review-loop.yml`. Una PR entrata in classe
+            # C (test rossi), riparata dopo, diventa una classe D — verde, con
+            # una review vecchia — che nessuno poteva più vedere: verde per ogni
+            # gate, senza review, per sempre.
+            #
+            # Il loop che quel salto evitava era il RI-COMMENTO a ogni cron, e
+            # si chiude più stretto senza spegnere la valutazione: la chiave di
+            # idempotenza è la coppia (CLASSE, HEAD), scritta come marker HTML
+            # dentro il commento. Stessa classe sullo stesso head → nessun
+            # secondo commento. Classe DIVERSA, o head nuovo → è un fatto nuovo,
+            # e va detto. Il marker è nel corpo e non nella label perché la
+            # label è UNA e non può portare due dimensioni.
+            #
+            # `case` e non `grep -qF`: `echo | grep -q` chiude la pipe al primo
+            # match e sotto `pipefail` l'EPIPE farebbe tornare 141, cioè un
+            # «non trovato» proprio quando il marker C'È. Stessa ragione del
+            # `case` su `## LGTM` qui sopra.
+            MARKER="<!-- stale-pr-rescuer class=$CLASS head=${HEAD:0:7} -->"
+            posted=$(gh api --paginate "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null || echo '[]')
+            POSTED_BODIES=$(echo "$posted" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null || echo "")
+            case "$POSTED_BODIES" in
+              *"$MARKER"*) echo "PR #$N: classe $CLASS su ${HEAD:0:7} già segnalata — nessuna azione"; continue ;;
+            esac
+
             gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null || \
               echo "::warning::label stale-review non applicata (assente? la crea scripts/ci/ensure-loop-labels.mjs)"
-            gh pr comment "$N" --repo "$REPO" --body "$(printf '🔧 **stale-review** (automatico): PR ferma da oltre 2h.\n\nClasse: %s\n\nCome sbloccarla: %s\n\n_Segnale deterministico da stale-pr-rescuer.yml, zero Claude._' "$REASON" "$RESCUE")" \
+            gh pr comment "$N" --repo "$REPO" --body "$(printf '🔧 **stale-review** (automatico): PR ferma da oltre 2h.\n\nClasse: %s\n\nCome sbloccarla: %s\n\n_Segnale deterministico da stale-pr-rescuer.yml, zero Claude._\n%s' "$REASON" "$RESCUE" "$MARKER")" \
               2>/dev/null || echo "commento fallito su PR #$N"
           done
           echo "Scan completo."

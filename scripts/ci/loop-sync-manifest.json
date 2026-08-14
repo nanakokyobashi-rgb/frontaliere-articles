@@ -1482,23 +1482,25 @@
     },
     {
       "path": "generator/scripts/lib/headline-selection-protocol.mjs",
-      "mode": "corpus-only",
-      "reason": "Il protocollo di riferimento fra il prompt di selezione headline e la risposta del modello (issue #188). Nasce QUI perche' il difetto e' stato misurato qui (run 31402084443: pool di 2 headline, risposta `3`, e una `reason` che motivava un articolo del corpus mentre si pubblicava una headline di cultura). Sul sito non esiste ancora un omonimo: `scripts/create-article.mjs` e' il gemello `adapted` di questo generatore e ha la stessa forma del difetto, ma nessun mirror copre `generator/`, quindi il rientro e' lavoro manuale sul sito e il segnale giusto e' il `corpus-ahead` su create-article.mjs. Candidato a salire: la logica e' pura e non tocca nessun path del corpus.",
+      "mode": "identical",
+      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente diceva «sul sito non esiste ancora un omonimo»: era vera al 2026-08-13 e ha smesso di esserlo quando il gemello e' atterrato su `scripts/lib/` del sito — a un path DIVERSO da `path`, che e' esattamente il motivo per cui nessuno se n'e' accorto. `loop-drift-check` esce subito sul ramo `corpus-only` senza mai interrogare il sito, quindi il file e' rimasto non sorvegliato mentre i due lati erano gia' byte-identici: una fix su un lato avrebbe lasciato il gemello rotto in silenzio. Verificato su origin: blob `6cfb5b1a` su entrambi i lati.",
       "baseline": {
-        "site": null,
+        "site": "6df51f3491453068",
         "corpus": "6df51f3491453068",
-        "alignedAt": "2026-08-13"
-      }
+        "alignedAt": "2026-08-14"
+      },
+      "sitePath": "scripts/lib/headline-selection-protocol.mjs"
     },
     {
       "path": "generator/scripts/lib/cross-section-dedup.mjs",
-      "mode": "corpus-only",
-      "reason": "Dedup della FONTE fra sezione frontaliere e sezione nazionale (issue #251). Corpus-only per costruzione: la chiave sono i due ledger `data/article-source-urls.json` e `data/swiss-article-source-urls.json`, che il sito non ha — li scrive il generatore qui. Anche la nozione di SEZIONE (`ARTICLE_SECTION_CONFIGS`) e' del corpus. Un omonimo sul sito non avrebbe niente da leggere.",
+      "mode": "identical",
+      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente lo dava «corpus-only per costruzione» perche' i due ledger `data/article-source-urls.json` e `data/swiss-article-source-urls.json` sono del generatore: la premessa regge sui DATI ma non sul CODICE, e il sito ha comunque copiato il modulo in `scripts/lib/`. Byte-identico verificato su origin (blob `d4798e7d` su entrambi i lati), quindi va sorvegliato come tale: la funzione e' pura e una divergenza qui non produrrebbe nessun errore, solo dedup diverso fra i due lati.",
       "baseline": {
-        "site": null,
+        "site": "d7372834660abcd2",
         "corpus": "d7372834660abcd2",
-        "alignedAt": "2026-08-13"
-      }
+        "alignedAt": "2026-08-14"
+      },
+      "sitePath": "scripts/lib/cross-section-dedup.mjs"
     },
     {
       "path": "generator/scripts/lib/corpus-paths.mjs",
