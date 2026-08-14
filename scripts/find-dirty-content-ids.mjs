@@ -336,23 +336,44 @@ export function pageCarriesFaqPlaceholder(html) {
  * e senza l'ancora una `.faq` corrotta su un id successivo nello stesso file
  * sarebbe un falso negativo silenzioso (#289). Senza `id` (retrocompat), cerca
  * qualunque id e resta scoped alla PRIMA occorrenza, come prima.
+ *
+ * Una `.faq` DUPLICATA per lo stesso id (residuo di merge) risolve
+ * all'ULTIMA occorrenza — semantica dell'object literal JS a runtime, stessa
+ * convenzione di `extractFaqFromContent`/`rawFaqLiteral` nei due script che
+ * scrivono sul corpus (`batch-add-faq-to-articles.mjs`, `fix-faq-locales.mjs`).
+ * Prima di #301 il ramo `id` accumulava le domande di TUTTE le occorrenze
+ * valide invece di tenere solo l'ultima — leggeva anche contenuto morto,
+ * shadowato dalla scrittura successiva — e su un'ultima occorrenza malformata
+ * ripiegava silenziosamente su un'occorrenza precedente invece di riportare
+ * l'assenza di FAQ valide effettivamente live.
  */
 export function faqQuestionsInBodyText(text, id) {
-  const idPart = id ? id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') : '[a-z0-9-]+';
-  const rx = new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, id ? 'g' : undefined);
-  const questions = [];
-  let m;
-  while ((m = rx.exec(text)) !== null) {
+  if (!id) {
+    const rx = new RegExp(`'blog\\.article\\.[a-z0-9-]+\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`);
+    const m = rx.exec(text);
+    if (!m) return [];
     let pairs;
     try {
       pairs = JSON.parse(m[1].replace(/\\'/g, "'"));
     } catch {
-      if (!id) return [];
-      continue;
+      return [];
     }
+    const questions = [];
     if (Array.isArray(pairs)) for (const p of pairs) if (p && typeof p.q === 'string') questions.push(p.q);
-    if (!id) break;
+    return questions;
   }
+  const idPart = id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const rx = new RegExp(`'blog\\.article\\.${idPart}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
+  const matches = [...text.matchAll(rx)];
+  if (!matches.length) return [];
+  let pairs;
+  try {
+    pairs = JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
+  } catch {
+    return [];
+  }
+  const questions = [];
+  if (Array.isArray(pairs)) for (const p of pairs) if (p && typeof p.q === 'string') questions.push(p.q);
   return questions;
 }
 
