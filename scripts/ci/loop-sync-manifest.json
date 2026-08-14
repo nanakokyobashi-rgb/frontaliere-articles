@@ -2127,6 +2127,18 @@
       }
     },
     {
+      "path": "generator/scripts/lib/exhaustion-disposition.mjs",
+      "sitePath": "scripts/lib/exhaustion-disposition.mjs",
+      "mode": "corpus-only-pending",
+      "reason": "La disposizione di una cascata svuotata: differire (quota, si cura da sola a mezzanotte UTC) o gridare (il prompt supera ogni cap dichiarato, e nessuna finestra oraria lo rimpicciolisce). Nato qui con la PR #357 perche' e' qui che la generazione gira, ma il difetto e' condiviso: `classifyExhaustionCause()` in ai-models.mjs (`mode: identical`, quindi byte a byte uguale sui due lati) calcola `transientExhaustion = transient >= persistent` e da' il PAREGGIO al transitorio. Misurato sulla run 31817957722 del 2026-08-14: transient=53, persistent=53, ambiguo=1, di cui 38 rifiuti su input cap per un prompt di ~9.740 token contro un cap massimo di 8.000 — pareggio esatto, differimento, exit 0, e `Generate Blog Article` verde per 60+ run di fila senza un articolo dalle 06:06Z alle 16:30Z. Il gemello `scripts/create-article.mjs` del sito ha lo stesso catch e lo stesso `if (isQuotaExhaustedError(e)) { … process.exit(0) }`: il difetto e' latente la', non assente. `corpus-only-pending` e non `corpus-only` proprio per questo — non e' scaffolding del repo pubblicatore, e' una regola che deve esistere da entrambe le parti. Vedi #359 per cosa serve a promuoverla.",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/359",
+      "baseline": {
+        "site": null,
+        "corpus": "147f8e1cf68b09ed",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
       "path": "host/authors.ts",
       "sitePath": "data/authors.ts",
       "mode": "identical",

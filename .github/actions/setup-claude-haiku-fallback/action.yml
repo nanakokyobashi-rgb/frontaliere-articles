@@ -1,0 +1,65 @@
+name: "Setup Claude CLI Haiku fallback"
+description: >-
+  Installs @anthropic-ai/claude-code and forces ENABLE_HAIKU_ARTICLE_FALLBACK=1
+  (RC kill-switch: set the Remote Config flag to '0' to disable). Model tier
+  AI_MODELS.CLAUDE_CLI_HAIKU in generator/scripts/lib/ai-models.mjs.
+
+  PERCHE' ESISTE IN QUESTO REPO (issue #313 / #348, 2026-08-14). La generazione
+  gira QUI, non sul sito, e il gemello di questa action viveva solo la'
+  (valerielinc-ops/frontaliere-si-o-no, .github/actions/setup-claude-haiku-fallback).
+  Nessuno dei due mirror la porta giu': mirror-articles-engine.yml si ferma a
+  engine/, e il mirror del corpus non tocca .github/. Risultato misurato sulla
+  run 31817957722: `claude-cli/haiku: skipped — no API key for provider
+  claude_cli`, mentre 38 modelli su 107 rifiutavano il payload sull'input cap
+  (`request ~9740 tokens exceeds 8000-token input cap`). L'unico membro del
+  roster con un contesto capace di quel prompt era spento per costruzione, e la
+  produzione e' rimasta ferma dalle 06:06Z alle 16:30Z senza una run rossa.
+
+  Il gate e' DOPPIO in ai-models.mjs (isClaudeCliFallbackEnabled +
+  hasClaudeCodeOauthToken): serve il flag RC E il token. Il chiamante DEVE
+  quindi (a) girare `node generator/scripts/load-rc-env.mjs` prima di questa
+  action, cosi' env.ENABLE_HAIKU_ARTICLE_FALLBACK riflette Remote Config, e
+  (b) passare CLAUDE_CODE_OAUTH_TOKEN via `env:` sullo step che invoca davvero
+  callLLM — passarlo qui non basta, e passarlo su uno step che non raggiunge
+  mai il tier e' innocuo. Il token e' quello del piano Max gia' usato da
+  pr-review-loop.yml/issue-fix.yml, mai ANTHROPIC_API_KEY: costo marginale
+  zero. La quota e' pero' CONDIVISA con quei workflow, quindi il tetto per-run
+  resta CLAUDE_CLI_MAX_CALLS_PER_RUN (default 25 in questa copia di
+  ai-models.mjs; il sito lo ha alzato a 300 nella PR #5885, che qui non e'
+  ancora scesa — vedi il body della PR).
+
+  CLAIM CORRETTA, ereditata dal gemello del sito: env.* NON e' immune alla
+  coercizione null/unset->0 che si attribuiva solo a vars.* — `if: env.X != '0'`
+  vale FALSE anche quando env.X non e' mai stato impostato. Per questo il
+  default si risolve in bash, dove `${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}` tratta
+  l'unset come `1`, PRIMA che l'espressione `if:` lo veda.
+runs:
+  using: "composite"
+  steps:
+    # Incondizionato: risolve il default vero del flag RC (procedi) in bash
+    # invece che nel linguaggio di espressioni di GitHub Actions, che valuta un
+    # env.X davvero non impostato come uguale a '0'. Vedi la nota sopra.
+    - name: Resolve Claude CLI Haiku fallback gate
+      shell: bash
+      run: echo "HAIKU_FALLBACK_GATE=${ENABLE_HAIKU_ARTICLE_FALLBACK:-1}" >> "$GITHUB_ENV"
+
+    - name: Setup Claude CLI Haiku fallback
+      if: env.HAIKU_FALLBACK_GATE != '0'
+      shell: bash
+      run: |
+        npm install -g @anthropic-ai/claude-code
+        echo "ENABLE_HAIKU_ARTICLE_FALLBACK=1" >> "$GITHUB_ENV"
+
+    # Incondizionato (niente `if:`) cosi' parla anche quando lo step sopra e'
+    # stato saltato — un desync flag/binario si legge nel log della run invece
+    # che scavando in job.steps[].conclusion.
+    - name: Diagnose Claude CLI Haiku fallback state
+      shell: bash
+      run: |
+        echo "ENABLE_HAIKU_ARTICLE_FALLBACK=${ENABLE_HAIKU_ARTICLE_FALLBACK:-<unset>} (raw RC value)"
+        echo "HAIKU_FALLBACK_GATE=${HAIKU_FALLBACK_GATE:-<unset>} (resolved gate)"
+        if command -v claude >/dev/null 2>&1; then
+          echo "claude CLI: present ($(claude --version 2>&1 | head -1))"
+        else
+          echo "claude CLI: NOT on PATH — Haiku fallback will hit ENOENT if the runtime gate offers it this run"
+        fi

@@ -445,6 +445,29 @@ jobs:
           fi
           echo "model provider credentials present"
 
+      # ── L'UNICO MODELLO CON UN CONTESTO CAPACE (issue #313 / #348) ─────────
+      #
+      # Va DOPO «Load secrets from Remote Config», e non prima: l'action legge
+      # env.ENABLE_HAIKU_ARTICLE_FALLBACK, che esiste solo dopo quel caricamento
+      # (il ponte RC→env e' load-rc-env.mjs, e un parametro fuori dalla sua mappa
+      # RC_TO_ENV resta undefined per quanto sia impostato in Remote Config).
+      #
+      # MISURATO, run 31817957722: 38 rifiuti su input cap per un prompt stimato
+      # ~9740 token contro un cap massimo di 8000, e l'unico membro del roster
+      # che quel prompt lo regge — claude-cli/haiku — saltato con «no API key
+      # for provider claude_cli». Il gate in ai-models.mjs vuole DUE cose
+      # (isClaudeCliFallbackEnabled + hasClaudeCodeOauthToken): il flag lo
+      # accende questa action, il token lo passa lo step di generazione qui
+      # sotto via `env:`. Passarlo solo qui non basterebbe — la variabile deve
+      # esistere nel processo che chiama callLLM.
+      #
+      # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
+      # del piano Max usato da pr-review-loop.yml/issue-fix.yml): non c'e' nulla
+      # da provisionare, mancava solo il cablaggio.
+      - name: Setup Claude CLI Haiku fallback
+        if: steps.mode.outputs.dry != 'true'
+        uses: ./.github/actions/setup-claude-haiku-fallback
+
       # Dry mode stops here: create-article.mjs has no --dry-run, and its first
       # side effect is a network call to a model provider. Proving it LOADS is as
       # far as a self-test may safely go — which is exactly the failure the
@@ -534,6 +557,12 @@ jobs:
           TARGET_SECTION: ${{ steps.mode.outputs.section }}
           SOURCE_URL: ${{ inputs.url }}
           EVENT_NAME: ${{ github.event_name }}
+          # Issue #313 — la meta' che DEVE stare sul processo che chiama callLLM:
+          # ai-models.mjs offre claude-cli/haiku solo se hasClaudeCodeOauthToken()
+          # e' vero QUI dentro. L'action sopra accende il flag, questo passa il
+          # token; senza entrambi il modello resta «no API key for provider
+          # claude_cli», che e' com'e' stato fino al 2026-08-14.
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
         run: |
           # `set +e` explicitly: GitHub's default shell is `bash -eo pipefail`,
           # so without this the step dies the instant create-article.mjs exits
@@ -594,6 +623,14 @@ jobs:
           produced=false
           effective="$TARGET_SECTION"
           tried=0
+          # ── L'OSSERVATORE (issue #313 / #348) ────────────────────────────
+          # Alzato SOLO da `create-article.mjs` che esce
+          # EXIT_ROSTER_CANNOT_SERVE_PROMPT (3): «nessun modello del roster ha
+          # accettato il payload». Sta su un CODICE DI USCITA e non su una
+          # stringa dello stdout di proposito — quel flusso e' pieno di ANSI e
+          # di virgolette tipografiche, e un `grep` su di esso e' un oracolo che
+          # si acceca da solo senza dirlo.
+          roster_blocked=false
 
           for sec in "${sections[@]}"; do
             remaining=$(( budget_s - SECONDS ))
@@ -622,6 +659,23 @@ jobs:
               echo "::warning::create-article.mjs hard-killed after ${cap}s on section $sec — no article this run"
               break
             fi
+            # ISSUE #313 — l'ECCEZIONE all'assorbimento qui sotto, e va valutata
+            # prima di esso. Exit 3 non vuol dire «nessuna fonte adatta»: vuol
+            # dire che il roster ha rifiutato il payload sulla TAGLIA, cioe' una
+            # condizione che il prossimo run riproduce identica perche' nessuna
+            # finestra di quota rimpicciolisce un prompt. Assorbirla e' il ciclo
+            # che ha tenuto questo workflow `success` per 60+ run consecutive
+            # senza un articolo (06:06Z → 16:30Z del 2026-08-14), senza che
+            # `scan-failed-runs.mjs` — che raccoglie solo le run `failure` —
+            # avesse nulla da raccogliere.
+            #
+            # Non si esce subito: la sezione gemella va comunque tentata (un
+            # prompt e' per-fonte, e l'altra fonte puo' stare sotto il cap). Il
+            # flag decide DOPO il ciclo, e solo se non e' uscito niente.
+            if [ "$rc" = "3" ]; then
+              echo "::warning::create-article.mjs: il roster non puo' servire il prompt della sezione $sec (exit 3)"
+              roster_blocked=true
+            fi
             # A run that finds no suitable source is a normal outcome, not a
             # failure: the scan is quota- and freshness-bound by design.
             if [ "$rc" != "0" ]; then
@@ -645,6 +699,24 @@ jobs:
             echo "section=$effective"
           } >> "$GITHUB_OUTPUT"
           echo "article=$produced section=$effective attempts=$tried/${#sections[@]}"
+
+          # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
+          # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
+          # Summary) leggono lo stesso verdetto che leggerebbero su una run
+          # verde, quindi il fallimento non li rende ciechi.
+          #
+          # LA CONGIUNZIONE E' NECESSARIA. `roster_blocked` da solo non basta a
+          # fallire: se la sezione gemella HA prodotto un articolo, il roster ha
+          # comunque servito e la run e' un successo — fallirla getterebbe via
+          # un articolo buono. E `produced=false` da solo non basta nemmeno:
+          # «nessuna fonte adatta» resta un esito normale, ed e' la ragione per
+          # cui questo step assorbe le uscite non-zero. Il difetto sta
+          # esattamente nell'intersezione: niente articolo E il roster che non
+          # ha potuto nemmeno provare.
+          if [ "$produced" != "true" ] && [ "$roster_blocked" = "true" ]; then
+            echo "::error::roster esaurito: nessun modello ha accettato il prompt e nessun articolo e' stato prodotto in $tried tentativi. Una run che non genera niente perche' il roster non puo' servirla NON e' un esito normale — vedi il messaggio 'roster-cannot-serve-prompt' nel log per il numero di token da tagliare."
+            exit 1
+          fi
           exit 0
 
       # ── VALIDARE PRIMA DI SCRIVERE (issue #267) ─────────────────────────────
