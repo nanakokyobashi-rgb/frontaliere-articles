@@ -497,6 +497,14 @@ const BUDGET_DIGITS_RE = /\d{2,4}/;
 // 80 lascia margine doppio per le varianti di locale, e resta abbastanza
 // stretto da escludere un inciso lungo che nomini un numero 2-4 cifre e la
 // parola "characters" in punti non correlati fra loro — il rischio #1 di #350.
+//
+// Il tetto NON si applica a uno span che contiene un sotto-span annidato
+// (review #355): una premessa del traduttore che avvolge il vero segnaposto
+// puo' superare 80 caratteri per conto proprio, e scartare lo span esterno in
+// quel caso riapre esattamente il rischio #2 — resta visibile solo il
+// sotto-span interno, che tipicamente non porta ne' la cifra ne' l'unita' di
+// misura. L'annidamento stesso e' il segnale che distingue questo caso
+// dall'inciso lungo a singolo livello che il tetto vuole escludere.
 const MAX_PARENTHETICAL_SPAN_LENGTH = 80;
 
 /**
@@ -514,10 +522,14 @@ function parentheticalSpans(text) {
   const starts = [];
   for (let i = 0; i < text.length; i++) {
     const ch = text[i];
-    if (ch === '(') starts.push(i);
+    if (ch === '(') starts.push({ index: i, hasNestedChild: false });
     else if (ch === ')' && starts.length) {
-      const start = starts.pop();
-      if (i + 1 - start <= MAX_PARENTHETICAL_SPAN_LENGTH) out.push({ span: text.slice(start, i + 1), index: start });
+      const entry = starts.pop();
+      if (starts.length) starts[starts.length - 1].hasNestedChild = true;
+      const length = i + 1 - entry.index;
+      if (entry.hasNestedChild || length <= MAX_PARENTHETICAL_SPAN_LENGTH) {
+        out.push({ span: text.slice(entry.index, i + 1), index: entry.index });
+      }
     }
   }
   return out;

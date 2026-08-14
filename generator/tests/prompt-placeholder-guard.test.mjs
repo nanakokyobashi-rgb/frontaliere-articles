@@ -290,19 +290,33 @@ describe('#350 — rischio 1: un inciso lungo che nomina cifra e unita\' senza r
   it('un segnaposto vero, breve, resta visto anche col tetto di lunghezza', () => {
     assert.equal(findPromptPlaceholders('un sottotitolo (max 160 characters)').length, 1);
   });
+
+  it('review #355: il tetto NON si applica a uno span esterno che contiene un sotto-span annidato', () => {
+    // Riapre esattamente il rischio #2: senza l'esenzione, questo span esterno
+    // (oltre 80 caratteri) veniva scartato dal tetto e restava visibile solo
+    // il sotto-span interno "(160)", che non porta l'unita' di misura.
+    const valore =
+      'Testo introduttivo (nota editoriale estesa del traduttore incaricato che spiega il contesto e riporta un identificativo interno (160) per un massimo di characters previsti dallo schema originale del prompt condiviso con la redazione) fine.';
+    const inciso = valore.slice(valore.indexOf('('), valore.lastIndexOf(')') + 1);
+    assert.ok(inciso.length > 80, 'il fixture deve superare il tetto per essere un test valido');
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
 });
 
 describe('#350 — rischio 2: il segnaposto annidato dentro una parentesi esterna aggiunta dal traduttore', () => {
-  it('un inciso interno non-segnaposto seguito dal vero budget, tutto dentro parentesi esterne', () => {
-    // Con un solo `start` (non uno stack) la chiusura dell'inciso interno
-    // "(vedi doc)" azzerava `start`, e la parentesi esterna non veniva mai
-    // registrata come span: il "max 160 chars" che segue restava invisibile.
-    const valore = 'Sottotitolo (vedi doc) con dati DALLA FONTE (max 160 chars) qui dentro.';
+  it('segnaposto nello span esterno, fuori dal sotto-span annidato che lo precede', () => {
+    // Con un solo `start` (non uno stack), l'apertura della parentesi interna
+    // "(rif. interno)" sovrascriveva `start`; alla sua chiusura veniva
+    // registrato SOLO l'inciso interno (senza cifra/unita'), e `start`
+    // veniva azzerato — la parentesi esterna, che contiene il vero
+    // "max 160 chars", non veniva mai registrata come span. Verificato che
+    // questo fixture non trova nulla sull'algoritmo pre-#350 (`let start = -1`).
+    const valore = 'Nota (vedi (rif. interno) — max 160 chars) fine.';
     assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
   });
 
-  it('il segnaposto interno a una parentesi esterna che lo avvolge per intero', () => {
-    const valore = 'Testo (premessa del traduttore (max 160 chars) fine premessa) resto.';
+  it('due incisi consecutivi allo stesso livello (non annidati): il secondo resta visto', () => {
+    const valore = 'Sottotitolo (vedi doc) con dati DALLA FONTE (max 160 chars) qui dentro.';
     assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
   });
 });
