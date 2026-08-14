@@ -156,7 +156,19 @@ import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
 // Vedi l'intestazione del modulo per il perche' non sono tre guard.
-import { cleanFaqPairs, sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+// I tre membri del PROTOCOLLO id/slug (issue #138 punto 3) arrivano dallo
+// stesso modulo di proposito: i segnaposto che il template mostra e il parsing
+// che li rigetta sono due meta' della stessa regola, e il LOCK del test le
+// tiene allineate. I valori restano scritti a mano nello schema qui sotto —
+// `extractSchemaLiterals()` salta le coppie interpolate, quindi interpolarli
+// renderebbe il lock cieco proprio su questi due campi.
+import {
+  cleanFaqPairs,
+  sanitizePromptPlaceholders,
+  IDENTITY_REJECTION,
+  parseArticleIdentityField,
+  identityCorrectionNote,
+} from './lib/prompt-placeholder-guard.mjs';
 // L'emettitore del blocco meta per-locale. Estratto da qui (era `buildMetaBlock`
 // + `escapeForSingleQuoteTS` piu' sotto) perche' e' l'unico punto in cui il
 // corpus decide quali campi per-locale diventano superficie pubblica, e dentro
@@ -6980,13 +6992,13 @@ VIOLAZIONE = verdict=FAIL + critical:fatti_inventati. Il sistema rimuove automat
 
 Genera JSON (no markdown, no code fences):
 {
-  "id": "kebab-case-3-5-words-max-40-chars",
+  "id": "<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>",
   "category": "one of: ${CATEGORIES.join(', ')}",
   "image": "one of: ${AVAILABLE_IMAGES.slice(0, 15).join(', ')}... (scegli la più adatta)",
   "hasCalculator": true,
   ${imagePromptSchemaLine}
   "imageAlt": { "it": "max 125 chars", "en": "max 125 chars", "de": "max 125 chars", "fr": "max 125 chars" },
-  "slugs": { "it": "slug-it", "en": "slug-en", "de": "slug-de", "fr": "slug-fr" },
+  "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },
   "content": {
     "it": {
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
@@ -8036,20 +8048,36 @@ function validate(data, opts = {}) {
   // Stripped rather than rejected: the leak is in the id only, and the title is
   // right there to derive a clean one from. Failing the whole generation would
   // throw away a good article over a prefix.
+  // ISSUE #138 PUNTO 3 — qui si RIFIUTA, non si indovina piu'.
+  //
+  // Questo blocco ricostruiva l'id: toglieva il prefisso `kebab-case-` e
+  // teneva il resto (`kebab-case-turismo-ticino` -> `turismo-ticino`), oppure
+  // slugificava il titolo quando il resto era lo schema. La prima meta' e' un
+  // indovinello: assume che il testo incollato al segnaposto fosse la scelta
+  // del modello, e la stessa stringa e' compatibile con un id legittimo. La
+  // seconda pubblica un id che il modello non ha scelto — l'analogo esatto del
+  // «fallback a indice 0» che #188 ha tolto dalla selezione headline.
+  //
+  // Nessun ripiego: l'errore e' `qualityReject`, quindi il chiamante RIGENERA
+  // (vedi il `catch (validationErr)` attorno a `validate()`), e solo dopo
+  // `maxAttempts` il candidato viene abbandonato. Un id e' un URL pubblico
+  // permanente: rigenerare costa una chiamata, sbagliarlo costa un redirect.
+  //
+  // `EMPTY` e' l'unico rigetto che NON si propaga: un id assente non e'
+  // ambiguo, e il blocco subito sotto lo sintetizza dal titolo italiano da
+  // sempre — comportamento invariato.
   const PROMPT_ID_LEAK_RX = /^kebab[-_]?case[-_]?/i;
-  if (data.id && PROMPT_ID_LEAK_RX.test(data.id)) {
-    const stripped = data.id.replace(PROMPT_ID_LEAK_RX, '');
-    // The verbatim placeholder leaves nothing usable behind ("3-5-words-max-40-chars"),
-    // so prefer the title whenever the remainder looks like the schema hint.
-    const looksLikeHint = !stripped || /^\d+-\d+-words|max-\d+-chars/i.test(stripped);
-    const recovered = looksLikeHint ? slugifySlugPart(itContent.title) : stripped;
-    if (!recovered) {
-      const err = new Error(`id contiene il placeholder del prompt ("${data.id}") e non è ricostruibile dal titolo "${itContent.title}"`);
-      err.qualityReject = true;
-      throw err;
-    }
-    console.error(`⚠️  id conteneva il placeholder del prompt ("${data.id}") — corretto in "${recovered}"`);
-    data.id = recovered;
+  const idVerdict = parseArticleIdentityField(data.id, {
+    field: 'id',
+    legacyLeaked: Boolean(data.id) && PROMPT_ID_LEAK_RX.test(String(data.id)),
+  });
+  if (!idVerdict.ok && idVerdict.rejection !== IDENTITY_REJECTION.EMPTY) {
+    const err = new Error(
+      `id RIGETTATO (${idVerdict.rejection}): ${idVerdict.detail}\n${identityCorrectionNote(idVerdict.rejection, { field: 'id' })}`,
+    );
+    err.qualityReject = true;
+    err.identityRejected = true;
+    throw err;
   }
 
   // Synthesize id from the Italian title if the model omitted it.
@@ -8302,6 +8330,13 @@ function validate(data, opts = {}) {
   for (const locale of ['en', 'de', 'fr']) {
     if (data.slugs[locale]) {
       const original = data.slugs[locale];
+      // ISSUE #138 PUNTO 3 — il protocollo gira sul valore GREZZO, PRIMA della
+      // sanitizzazione qui sotto. E' l'unico momento in cui i delimitatori
+      // esistono ancora: la normalizzazione mangia tutto cio' che non e'
+      // `[a-z0-9-]`, quindi `<<SLUG:en>>` diventa `slug-en` e l'eco CERTA
+      // torna a essere la forma ambigua che questa fix toglie. Sanitizzare
+      // prima di leggere significa buttare via la prova.
+      const rawVerdict = parseArticleIdentityField(original, { field: 'slug', locale });
       // Il taglio a 80 e' `truncateSlugAtWordBoundary` e non `.slice(0, 80)`
       // per la ragione argomentata su `slugifySlugPart` (issue #191): a log si
       // leggevano slug fr troncati a meta' parola, e un token spezzato e' un
@@ -8326,21 +8361,32 @@ function validate(data, opts = {}) {
       // placeholder is. The IT slug is safe by construction (assigned from the
       // already-cleaned id); these three are not.
       const check = inspectSlugForPromptPlaceholder(data.slugs[locale]);
-      if (check.leaked) {
-        console.warn(
-          check.recovered
-            ? `  ❌ [slug-placeholder] Slug ${locale} conteneva il segnaposto del prompt: "${original}" → "${check.slug}"`
-            : `  ❌ [slug-placeholder] Slug ${locale} E' il segnaposto del prompt ("${original}"): niente di recuperabile.`,
-        );
+      const verdict = rawVerdict.ok
+        ? parseArticleIdentityField(data.slugs[locale], { field: 'slug', locale, legacyLeaked: check.leaked })
+        : rawVerdict;
+      if (!verdict.ok) {
+        console.warn(`  ❌ [slug-identity] Slug ${locale} RIGETTATO (${verdict.rejection}): ${verdict.detail}`);
       }
-      // Fall back to the IT slug rather than ship an empty one: an empty slug
-      // routes to the section hub, silently making the article unreachable at
-      // its own URL. The translated title is not an option HERE — this runs on
-      // the Italian generation call, before `translateArticle()` — so the IT
-      // slug is the only deterministic answer at this point, exactly as in the
-      // missing-slug loop above. It is a valid, distinct URL: the locale prefix
-      // and the hub segment already differ.
-      data.slugs[locale] = check.slug || data.slugs.it;
+      // ISSUE #138 PUNTO 3 — qui c'era `check.slug || data.slugs.it`, e
+      // `check.slug` era il resto del segnaposto: `slug-gaggiolo-traffic`
+      // diventava `gaggiolo-traffic`, cioe' si assumeva che il testo incollato
+      // fosse la scelta del modello. Indecidibile, quindi tolto.
+      //
+      // Il ripiego resta lo slug ITALIANO, che non e' un indovinello ma una
+      // costante: e' l'unica risposta deterministica su questa chiamata (siamo
+      // sulla generazione italiana, `translateArticle()` non e' ancora
+      // passato), e' un URL valido e distinto — cambiano prefisso di locale e
+      // segmento di hub — e viene marcato PROVVISORIO, cosi'
+      // `relocalizeSlugsAfterTranslation()` lo rifa' sul titolo tradotto
+      // appena esiste. Senza il marchio restava indistinguibile da uno slug
+      // scelto: e' il difetto di #191, e vale anche qui.
+      //
+      // Il rigetto non fa fallire la generazione come per l'`id`: un URL
+      // en/de/fr provvisorio si ripara da solo dopo la traduzione, un id no.
+      if (!verdict.ok || !data.slugs[locale]) {
+        data.slugs[locale] = data.slugs.it;
+        markProvisionalItSlug(data, locale);
+      }
       if (data.slugs[locale] !== original) {
         console.warn(`  ⚠️  Slug ${locale} sanitizzato: "${original}" → "${data.slugs[locale]}"`);
       }
@@ -12812,11 +12858,21 @@ function slugifySlugPart(input) {
 /**
  * ── PROMPT-PLACEHOLDER SLUG GUARD ──────────────────────────────────────────
  *
- * The JSON schema shown to the model spells the two URL-bearing fields with
- * literal example values:
+ * Until 2026-08-14 (issue #138 item 3) the JSON schema shown to the model
+ * spelled the two URL-bearing fields with literal example values that were
+ * themselves valid slugs:
  *
  *   "id": "kebab-case-3-5-words-max-40-chars",
  *   "slugs": { "it": "slug-it", "en": "slug-en", "de": "slug-de", "fr": "slug-fr" },
+ *
+ * The template now says `<<ID>>` and `<<SLUG:xx>>` — outside the slug
+ * alphabet, so an echo is decidable instead of merely suspicious — and the
+ * parsing rejects rather than recovers (see `parseArticleIdentityField()` in
+ * `lib/prompt-placeholder-guard.mjs`). THIS classifier stays exactly as it
+ * was: it is the net for the values already in the registry and for the
+ * secondary producers that never see the prompt, and its aggressiveness is
+ * pinned to 28 hits over 15.172 published slugs. Widening or narrowing it
+ * here would move that measurement, which is not what #138 item 3 asks for.
  *
  * A model that runs out of attention echoes them back instead of replacing
  * them — either verbatim (`slug-en`), or with the placeholder glued onto a

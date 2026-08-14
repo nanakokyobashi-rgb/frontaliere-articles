@@ -127,12 +127,12 @@
  * qualcuno li copra) ma non producono matcher qui — vedi l'intestazione.
  */
 export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
-  'kebab-case-3-5-words-max-40-chars',
+  '<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>',
   'max 125 chars',
-  'slug-it',
-  'slug-en',
-  'slug-de',
-  'slug-fr',
+  '<<SLUG:it = ID>>',
+  '<<SLUG:en>>',
+  '<<SLUG:de>>',
+  '<<SLUG:fr>>',
   "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
   'Sottotitolo con dati concreti DALLA FONTE (max 160 chars)',
   "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
@@ -161,12 +161,235 @@ export const SCHEMA_PLACEHOLDER_LITERALS = Object.freeze([
  * stesso campo.
  */
 export const SLUG_OWNED_LITERALS = Object.freeze([
-  'kebab-case-3-5-words-max-40-chars',
-  'slug-it',
-  'slug-en',
-  'slug-de',
-  'slug-fr',
+  '<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>',
+  '<<SLUG:it = ID>>',
+  '<<SLUG:en>>',
+  '<<SLUG:de>>',
+  '<<SLUG:fr>>',
 ]);
+
+// ── Il PROTOCOLLO fra lo schema del prompt e i due campi che diventano URL ──
+//
+// ## Il difetto che chiude (issue #138 punto 3)
+//
+// Fino al 2026-08-02 lo schema mostrava i due campi che finiscono in URL con
+// dei valori d'esempio che erano essi stessi SLUG VALIDI:
+//
+//     "id": "kebab-case-3-5-words-max-40-chars",
+//     "slugs": { "it": "slug-it", "en": "slug-en", "de": "slug-de", "fr": "slug-fr" },
+//
+// Due proprieta', entrambe fatali, ed e' esattamente la forma di #188:
+//
+//  1. **Segnaposto e risposta vivevano nello stesso spazio sintattico.** Un
+//     token ASCII minuscolo con trattini e' cio' che il modello deve produrre
+//     E cio' che gli viene mostrato: un'eco e' indistinguibile da una scelta.
+//     In #188 erano le parentesi quadre condivise fra le due liste; qui e' il
+//     kebab-case condiviso fra il segnaposto e la risposta.
+//
+//  2. **`id` e `slugs.it` erano presentati come due campi indipendenti**, con
+//     due segnaposto di forma diversa (`kebab-case-…` contro `slug-it`),
+//     mentre a valle `validate()` fa `data.slugs.it = data.id` e scarta in
+//     silenzio quello che il modello ha scritto in `slugs.it`. Al modello si
+//     chiedevano due valori per un solo URL: e' la conflazione che da' il
+//     titolo alla issue.
+//
+// Il costo misurato e' scritto in `generator/tests/slug-placeholder-guard.test.mjs`:
+// 24 slug vivi su 8 articoli piu' 4 `id`, tutti 200, tutti nelle sitemap. Un
+// URL pubblicato e' la sola parte di un articolo che non si corregge dopo
+// senza un redirect.
+//
+// ## Le due meta' della fix, le stesse di #188
+//
+// 1. **Sintassi disgiunte.** I segnaposto escono dall'alfabeto degli slug:
+//    `<<ID>>` e `<<SLUG:xx>>`. Uno slug sanitizzato e' `[a-z0-9-]+`, quindi
+//    `<`, `>` e `:` non possono comparire in una risposta legittima — un
+//    residuo del delimitatore e' un'eco CERTA, non una somiglianza. E i due
+//    campi non condividono piu' il nome del token (`ID` contro `SLUG:<locale>`),
+//    quindi un'eco dice anche DA QUALE dei due e' arrivata.
+//
+// 2. **Il parsing RIFIUTA, non indovina.** Qui stava il `check.slug` di
+//    `inspectSlugForPromptPlaceholder()`: `slug-gaggiolo-traffic` veniva
+//    "recuperato" a `gaggiolo-traffic`, cioe' si assumeva che il testo
+//    incollato al segnaposto fosse la scelta del modello. E' indecidibile —
+//    la stessa stringa e' compatibile con uno slug legittimo — ed e' l'analogo
+//    esatto del clamp a indice 0 di #188. Non si recupera piu': si rigetta.
+//
+// ## Perche' il verdetto sulla forma LEGACY arriva dal chiamante
+//
+// `legacyLeaked` non viene ricalcolato qui. Il classificatore delle forme
+// vecchie (`slug-…`, `kebab-case-…`) vive in `create-article.mjs` come
+// `inspectSlugForPromptPlaceholder()`, ed e' misurato sui 15.172 slug
+// pubblicati: duplicarne le regex qui creerebbe due verita' su cosa sia un
+// segnaposto, che e' precisamente cio' che l'intestazione di
+// `SLUG_OWNED_LITERALS` vieta. Questo modulo possiede il PROTOCOLLO (i token
+// nuovi, decidibili) e la DISPOSIZIONE (rifiutare); la classificazione delle
+// forme storiche resta di chi ce l'ha gia'.
+
+/** Apertura e chiusura del segnaposto. Fuori dall'alfabeto di uno slug, per costruzione. */
+export const IDENTITY_TOKEN_OPEN = '<<';
+export const IDENTITY_TOKEN_CLOSE = '>>';
+
+/**
+ * Il segnaposto del campo `id`, con dentro la SPECIFICA di formato.
+ *
+ * La specifica sta nel token e non in una riga di prosa accanto allo schema
+ * per una ragione misurata: `generator/tests/news-prompt-token-budget.test.mjs`
+ * tiene `PROMPT_TOKEN_CEILING` come ratchet, e il ramo piu' pesante (news al
+ * retry) aveva 23 token di margine — una spiegazione in prosa ne costava 162 e
+ * sfondava il tetto. Il vecchio segnaposto portava la specifica esattamente
+ * cosi' (`kebab-case-3-5-words-max-40-chars`): il difetto non era che la
+ * dicesse, era che per dirla usava un valore che era ANCHE una risposta
+ * valida. Delimitata, la stessa informazione costa quasi lo stesso e non e'
+ * piu' confondibile.
+ */
+export const ID_PLACEHOLDER = `${IDENTITY_TOKEN_OPEN}ID: kebab-case ASCII, 3-5 parole, max 40 char${IDENTITY_TOKEN_CLOSE}`;
+
+/**
+ * Il segnaposto dello slug di `locale`. Il nome del token e' DIVERSO da quello
+ * dell'id (`SLUG:<locale>` contro `ID`), cosi' un'eco dice da quale dei due
+ * campi e' arrivata.
+ *
+ * L'italiano e' il caso speciale, ed e' la meta' della conflazione che da' il
+ * titolo alla issue: `validate()` fa `data.slugs.it = data.id` sempre, quindi
+ * chiedere al modello un valore indipendente per `slugs.it` significa
+ * chiedergli due valori per un solo URL e buttarne via uno in silenzio. Il
+ * token lo dice invece di lasciarlo dedurre.
+ */
+export function slugPlaceholder(locale) {
+  const l = String(locale);
+  const body = l === 'it' ? 'SLUG:it = ID' : `SLUG:${l}`;
+  return `${IDENTITY_TOKEN_OPEN}${body}${IDENTITY_TOKEN_CLOSE}`;
+}
+
+/** Tutti i segnaposto d'identita' che il template deve mostrare, nell'ordine dello schema. */
+export const IDENTITY_PLACEHOLDERS = Object.freeze([
+  ID_PLACEHOLDER,
+  ...['it', 'en', 'de', 'fr'].map(slugPlaceholder),
+]);
+
+/** Le ragioni per cui un campo d'identita' viene RIGETTATO. Nessuna e' recuperabile indovinando. */
+export const IDENTITY_REJECTION = {
+  /** Valore assente o vuoto. Non e' ambiguo: chi chiama decide se sintetizzarlo. */
+  EMPTY: 'empty',
+  /** Residuo del delimitatore `<<`/`>>`/`:`: il modello ha ricopiato lo schema. Decidibile. */
+  PLACEHOLDER_ECHO: 'placeholder_echo',
+  /** L'`id` porta un token `SLUG`, o uno slug porta il token `ID`: la conflazione di #138, resa visibile. */
+  CROSS_FIELD_ECHO: 'cross_field_echo',
+  /** Forma storica `slug-…`/`kebab-case-…`. Qui stava il recupero del resto: indecidibile, quindi si rigetta. */
+  AMBIGUOUS_LEGACY_SHAPE: 'ambiguous_legacy_shape',
+};
+
+/** Qualunque carattere che uno slug sanitizzato (`[a-z0-9-]`) non puo' contenere e il segnaposto invece si'. */
+const IDENTITY_DELIMITER_RE = /[<>:]/;
+
+function rejectIdentity(rejection, detail) {
+  return { ok: false, rejection, detail: String(detail || '') };
+}
+
+/**
+ * Legge UN campo d'identita' della risposta del modello. **Rifiuta invece di
+ * indovinare.**
+ *
+ * Va chiamata sul valore GREZZO, prima della sanitizzazione: e' li' che i
+ * delimitatori esistono ancora. `slugifySlugPart('<<SLUG:en>>')` da'
+ * `slug-en`, cioe' riporta l'eco esattamente nella forma ambigua che questa
+ * fix toglie — sanitizzare per primi significa buttare via la prova.
+ *
+ * @param {unknown} raw valore restituito dal modello.
+ * @param {{field: 'id'|'slug', locale?: string, legacyLeaked?: boolean}} opts
+ *   `legacyLeaked` e' il verdetto del classificatore storico del chiamante
+ *   (vedi l'intestazione: qui non si ricalcola).
+ * @returns {{ok: true, value: string}|{ok: false, rejection: string, detail: string}}
+ */
+export function parseArticleIdentityField(raw, opts = {}) {
+  const field = opts.field === 'id' ? 'id' : 'slug';
+  const locale = opts.locale ? String(opts.locale) : '';
+  const value = String(raw ?? '').trim();
+  if (!value) return rejectIdentity(IDENTITY_REJECTION.EMPTY, `campo \`${field}\` vuoto`);
+
+  if (IDENTITY_DELIMITER_RE.test(value)) {
+    const upper = value.toUpperCase();
+    const mentionsSlug = upper.includes('SLUG');
+    const mentionsId = /(^|[^A-Z])ID([^A-Z]|$)/.test(upper);
+    // Un `id` che riporta un token SLUG (o viceversa) non e' solo un'eco: e' il
+    // modello che ha scambiato i due campi. Vale la pena dirlo con una ragione
+    // propria, perche' e' la conflazione che la issue nomina.
+    if ((field === 'id' && mentionsSlug) || (field === 'slug' && mentionsId && !mentionsSlug)) {
+      return rejectIdentity(
+        IDENTITY_REJECTION.CROSS_FIELD_ECHO,
+        `\`${field}${locale ? `.${locale}` : ''}\` contiene il segnaposto dell'ALTRO campo: "${value.slice(0, 80)}"`,
+      );
+    }
+    return rejectIdentity(
+      IDENTITY_REJECTION.PLACEHOLDER_ECHO,
+      `\`${field}${locale ? `.${locale}` : ''}\` porta ancora un delimitatore di segnaposto: "${value.slice(0, 80)}"`,
+    );
+  }
+
+  if (opts.legacyLeaked === true) {
+    return rejectIdentity(
+      IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE,
+      `\`${field}${locale ? `.${locale}` : ''}\` ha la forma di un segnaposto storico ("${value.slice(0, 80)}"): ` +
+        'il resto incollato non e\' distinguibile da uno slug scelto, quindi non viene recuperato',
+    );
+  }
+
+  return { ok: true, value };
+}
+
+/** Uno slug legittimo, cioe' cio' che il modello deve produrre: `[a-z0-9]` separati da trattini. */
+const VALID_SLUG_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+
+/**
+ * I segnaposto d'identita' vivono ancora nello spazio delle risposte?
+ *
+ * E' la domanda di #138 punto 3 resa misurabile, come `referenceSyntaxOverlap()`
+ * lo e' per #188: `ok: false` significa che un valore restituito dal modello
+ * potrebbe di nuovo essere letto in due modi. Prende i letterali ESTRATTI dal
+ * template, non quelli del modulo, cosi' la misura riguarda cio' che il modello
+ * vede davvero.
+ *
+ * @param {string[]} idLiterals i valori mostrati per `id`.
+ * @param {string[]} slugLiterals i valori mostrati per `slugs.*`.
+ */
+export function identitySyntaxOverlap(idLiterals, slugLiterals) {
+  const problems = [];
+  const ids = Array.isArray(idLiterals) ? idLiterals.map(String) : [];
+  const slugs = Array.isArray(slugLiterals) ? slugLiterals.map(String) : [];
+  if (!ids.length) problems.push('nessun segnaposto estratto per `id`');
+  if (!slugs.length) problems.push('nessun segnaposto estratto per `slugs`');
+  for (const p of [...ids, ...slugs]) {
+    // Il difetto originale in una riga: il segnaposto ERA una risposta valida.
+    if (VALID_SLUG_RE.test(p)) problems.push(`il segnaposto "${p}" e' esso stesso uno slug valido`);
+    if (!p.includes(IDENTITY_TOKEN_OPEN) || !p.includes(IDENTITY_TOKEN_CLOSE)) {
+      problems.push(`il segnaposto "${p}" non e' delimitato da ${IDENTITY_TOKEN_OPEN}${IDENTITY_TOKEN_CLOSE}`);
+    }
+  }
+  // I due campi non devono condividere il nome del token: e' cio' che rende
+  // un'eco attribuibile a UNO dei due, e la conflazione id/slug visibile.
+  for (const p of ids) if (p.toUpperCase().includes('SLUG')) problems.push(`il segnaposto di \`id\` nomina SLUG: "${p}"`);
+  for (const p of slugs) if (!p.toUpperCase().includes('SLUG')) problems.push(`il segnaposto di \`slugs\` non nomina SLUG: "${p}"`);
+  return { ok: problems.length === 0, problems };
+}
+
+/**
+ * Il promemoria da appendere al prompt quando si rigenera dopo un rigetto.
+ * Stessa funzione di `selectionCorrectionNote()` in headline-selection-protocol.mjs.
+ */
+export function identityCorrectionNote(rejection, opts = {}) {
+  const field = opts.field === 'id' ? 'id' : 'slugs';
+  const why = rejection === IDENTITY_REJECTION.CROSS_FIELD_ECHO
+    ? 'Hai scambiato i due campi: `id` e `slugs` non sono sinonimi.'
+    : rejection === IDENTITY_REJECTION.AMBIGUOUS_LEGACY_SHAPE
+      ? 'Hai risposto con un valore che ha la forma di un segnaposto (`slug-…` / `kebab-case-…`).'
+      : 'Hai ricopiato il segnaposto dello schema invece di sostituirlo.';
+  return [
+    `⚠️ Il campo \`${field}\` della risposta precedente e' stato RIGETTATO.`,
+    why,
+    `\`id\` = identificatore dell'articolo, che e' ANCHE l'URL italiano; \`slugs\` = l'URL nelle quattro lingue, con \`slugs.it\` identico a \`id\`.`,
+    `Scrivi valori REALI ricavati dal titolo: kebab-case ASCII, 3-5 parole, max 40 caratteri. Nessun \`<\`, \`>\` o \`:\`.`,
+  ].join('\n');
+}
 
 /**
  * Le etichette del PREAMBOLO del prompt — non dello schema JSON. Il modello le
