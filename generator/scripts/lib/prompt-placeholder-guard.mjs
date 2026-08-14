@@ -478,6 +478,65 @@ export function leadOf(literal) {
 
 const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// ── `budget-parenthetical`, versione STRUTTURALE ────────────────────────────
+//
+// Porta da `frontaliere-si-o-no#5847` item 2 (`matchBudgetParenthetical`) il
+// controllo che isola lo span fra parentesi e valuta l'invariante sul suo
+// CONTENUTO, non sulla FORMA dell'inciso intero. La vecchia `rx` pretendeva
+// verbo ("max"/"massimo"/…) SUBITO seguito da cifra, unita' e chiusura
+// immediata: `(59 characters)` — offender reale di #341, senza verbo davanti
+// alla cifra — non la superava. Qui basta che cifra e unita' di misura dei
+// caratteri compaiano nello STESSO inciso, in qualunque ordine e posizione al
+// suo interno: e' quello, non il verbo, l'invariante che il traduttore non
+// tocca (vedi il commento sopra la regola, invariato).
+const BUDGET_UNIT_WORD_RE = /\b(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\b/i;
+const BUDGET_DIGITS_RE = /\d{2,4}/;
+
+/** Gli span fra parentesi SENZA annidamento — un inciso, non un blocco. */
+function parentheticalSpans(text) {
+  const out = [];
+  let start = -1;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '(') start = i;
+    else if (ch === ')' && start !== -1) {
+      out.push({ span: text.slice(start, i + 1), index: start });
+      start = -1;
+    }
+  }
+  return out;
+}
+
+/**
+ * @param {string} text
+ * @returns {{ index: number, match: string } | null}
+ */
+export function matchBudgetParenthetical(text) {
+  if (typeof text !== 'string' || !text) return null;
+  for (const { span, index } of parentheticalSpans(text)) {
+    if (BUDGET_DIGITS_RE.test(span) && BUDGET_UNIT_WORD_RE.test(span)) return { index, match: span };
+  }
+  return null;
+}
+
+/**
+ * Adatta `matchBudgetParenthetical` all'interfaccia `RegExp`-like (`exec` +
+ * `test`) che le regole usano: `findPromptPlaceholders` chiama `.exec()`,
+ * `stripSchemaHeadingLine` chiama `.test()` su ogni regola `schema-echo`.
+ */
+const budgetParentheticalMatcher = {
+  exec(value) {
+    const hit = matchBudgetParenthetical(value);
+    if (!hit) return null;
+    const result = [hit.match];
+    result.index = hit.index;
+    return result;
+  },
+  test(value) {
+    return matchBudgetParenthetical(value) !== null;
+  },
+};
+
 /** I letterali che diventano matcher (tutti tranne quelli di competenza dello slug guard). */
 const TEXT_LITERALS = SCHEMA_PLACEHOLDER_LITERALS.filter((l) => !SLUG_OWNED_LITERALS.includes(l));
 
@@ -527,9 +586,10 @@ export const PLACEHOLDER_RULES = Object.freeze([
     // FALSO POSITIVO: e' l'unita' di misura a fare il lavoro. `(max ` da solo
     // compare in 48 campi body legittimi («max 15.000 CHF/anno», «max 9
     // ore/giorno», «max 1 page»), e nessuno di quei 48 nomina caratteri.
-    // Misurato: 0 falsi positivi su 107.659 campi pubblicati.
-    rx: /\(\s*(?:max|max\.|massimo|maximum|maximal|máximo)\s+\d{2,4}\s*(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\s*\)/i,
-    why: "Inciso col budget di caratteri dello schema (`(max 160 chars)`): sopravvive alla traduzione del segnaposto in en/de/fr, dove nessun letterale italiano arriva.",
+    // Misurato: 0 falsi positivi su 107.659 campi pubblicati, e invariato con
+    // la versione strutturale (vedi `matchBudgetParenthetical` sopra).
+    rx: budgetParentheticalMatcher,
+    why: "Inciso col budget di caratteri dello schema (`(59 characters)`, `(max 160 chars)`, …): sopravvive alla traduzione del segnaposto in en/de/fr, dove nessun letterale italiano arriva.",
   },
   {
     id: 'budget-tail',
