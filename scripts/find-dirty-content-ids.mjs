@@ -188,10 +188,30 @@ export function extractSeoBlockKey(line) {
 // e' filtrato da `isInvalidControlCode` — la STESSA sorgente di verita'
 // dell'emitter (AGENTS.md #6) — cosi' le forme escapate di TAB (0009), LF
 // (000a) e CR (000d), che XML e JSON ammettono entrambi, non diventano falsi
-// positivi. E' l'unico punto in cui questo oracolo e' piu' STRETTO della grep
-// dell'issue #336, che quei tre li conterebbe: sul corpus di oggi non ce n'e'
-// nessuno, quindi i due numeri coincidono (40).
-const ESCAPED_C0_RX = /\\+u00([0-1][0-9a-fA-F])/g;
+// positivi: sul corpus di oggi non ce n'e' nessuno da filtrare.
+//
+// NON SOLO LA FORMA NUMERICA. `JSON.stringify` non scrive SEMPRE `\u00XX`: per
+// 0x08 e 0x0C usa le forme brevi `\b`/`\f` (la stessa scelta che fa per ogni
+// altro produttore JSON, engine incluso — vedi la docstring in testa a questo
+// file, gia' corretta su questo punto per il lato PAGINA, e
+// `stripEscapedControlChars` in sanitize-control-chars.mjs:L194-223, che le
+// riconosce entrambe da sempre). Un oracolo che guardasse solo `\u00XX`
+// avrebbe lo stesso buco per cui questa PR esiste: verificato sul corpus reale,
+// `content/blog-body/{de,en,fr,it}/salario-minimo-per-il-controprogetto-la-strada-e-in-discesa.ts`
+// e `content/blog-body/it/cure-a-domicilio-tassa-ticino.ts` portano ciascuno un
+// `\b` (0x08) escapato con ZERO byte grezzo e ZERO forma `\u00XX` — invisibili
+// a un matcher solo-numerico. Questo e' anche il motivo per cui `totale
+// escapate` NON coincide piu' con `grep -ro '\u00[0-1][0-9a-fA-F]'`: la grep
+// dell'issue #336 vede solo la forma numerica (40), l'oracolo qui vede anche
+// le due forme brevi (+5 sul corpus di oggi) — l'oracolo e' piu' LARGO della
+// grep su questo asse, piu' STRETTO di essa solo su TAB/LF/CR.
+const ESCAPED_C0_RX = /\\+u00([0-1][0-9a-fA-F])|\\+([bf])/g;
+
+/** Codice del match di `ESCAPED_C0_RX`: il gruppo hex per `\u00XX`, `\b`/`\f` altrimenti. */
+function escapedMatchCode(hex, shortForm) {
+  if (hex !== undefined) return Number.parseInt(hex, 16);
+  return shortForm === 'b' ? 0x08 : 0x0c;
+}
 
 /**
  * Ogni C0 illegale scritto in forma escapata in `text`, come
@@ -203,7 +223,7 @@ export function findEscapedControlChars(text) {
   const found = [];
   if (typeof text !== 'string') return found;
   for (const m of text.matchAll(ESCAPED_C0_RX)) {
-    const code = Number.parseInt(m[1], 16);
+    const code = escapedMatchCode(m[1], m[2]);
     if (isInvalidControlCode(code)) found.push({ index: m.index, code, spelling: m[0] });
   }
   return found;
@@ -220,8 +240,8 @@ export function findEscapedControlChars(text) {
  */
 export function decodeEscapedControlChars(text) {
   if (typeof text !== 'string') return text;
-  return text.replace(ESCAPED_C0_RX, (whole, hex) => {
-    const code = Number.parseInt(hex, 16);
+  return text.replace(ESCAPED_C0_RX, (whole, hex, shortForm) => {
+    const code = escapedMatchCode(hex, shortForm);
     return isInvalidControlCode(code) ? String.fromCharCode(code) : whole;
   });
 }

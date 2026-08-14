@@ -817,6 +817,27 @@ test("findEscapedControlChars vede il C0 escapato, a qualunque profondita' di ba
   assert.equal(due[0].spelling, String.raw`\\u0004`);
 });
 
+test("findEscapedControlChars vede anche le forme brevi \\b e \\f, non solo \\u00XX", () => {
+  // `JSON.stringify` non scrive SEMPRE `\u00XX`: per 0x08 e 0x0C usa le forme
+  // brevi `\b`/`\f`, la stessa scelta che fa `stripEscapedControlChars` in
+  // sanitize-control-chars.mjs. Testo preso da
+  // content/blog-body/it/cure-a-domicilio-tassa-ticino.ts ("Cos\\b4e la
+  // tassa..."), non inventato.
+  const uno = findEscapedControlChars(String.raw`{"q":"Cos\b4e la tassa"}`);
+  const due = findEscapedControlChars(String.raw`'[{"q":"Cos\\b4e la tassa"}]'`);
+  assert.deepEqual(uno.map((e) => e.code), [0x08]);
+  assert.deepEqual(due.map((e) => e.code), [0x08]);
+  assert.equal(due[0].spelling, String.raw`\\b`);
+
+  const efFe = findEscapedControlChars(String.raw`x\\fy`);
+  assert.deepEqual(efFe.map((e) => e.code), [0x0c]);
+});
+
+test('decodeEscapedControlChars riscrive anche \\b e \\f come i caratteri che denotano', () => {
+  const decodificato = decodeEscapedControlChars(String.raw`Cos\\b4e la tassa`);
+  assert.equal(decodificato, 'Cos\x084e la tassa');
+});
+
 test('findEscapedControlChars NON conta le forme escapate di TAB, LF e CR', () => {
   // XML 1.0 e JSON le ammettono entrambe: contarle renderebbe sporco ogni file
   // che porta un a-capo escapato, cioe' tutti. E' l'unico punto in cui questo
