@@ -47,6 +47,10 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  # `issues: write` is the GITHUB_TOKEN fallback for the "Alert on shadowed
+  # ticker articles" step below — best-effort even without the PAT (see that
+  # step's comment for why the PAT path is preferred).
+  issues: write
 
 jobs:
   publish:
@@ -446,6 +450,24 @@ jobs:
           else
             echo "images-manifest.json: not emitted (no hero images in this repo yet) — expected before cutover"
           fi
+
+      # ── Follow-up to #293/#166 (issue #302) ──────────────────────────────
+      #
+      # #293 made a same-day canonical-override shadowing a news-ticker article
+      # VISIBLE (`counts.tickerArticlesShadowed` above) but deliberately did
+      # not gate the publish on it: `news-ticker-live.json` stays unfiltered on
+      # purpose (see `scripts/build-api.mjs`, the comment above
+      # `findShadowedTickerArticles`) so it does not diverge from the site's
+      # own second producer of the same payload. That decision is unchanged
+      # here — this step never fails the job, it only opens/closes a
+      # low-priority tracking issue so a nonzero count stops being visible
+      # only in this build log. Best-effort by construction (see the script):
+      # it swallows its own errors and always exits 0.
+      - name: Alert on shadowed ticker articles (non-blocking, detect-only per #293)
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/ci/ticker-shadow-alert.mjs
 
       - uses: actions/configure-pages@v5
 
