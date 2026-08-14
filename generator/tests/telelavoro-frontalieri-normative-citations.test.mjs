@@ -39,39 +39,59 @@ import { expect } from './lib/expect-shim.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const LOCALES = ['it', 'de', 'en', 'fr'];
 
-// Byte-exact strings observed live in the corpus before this fix (2026-08-14).
+// Byte-exact strings observed live in the corpus before each fix.
 // Case-insensitive because the DE body carried a lowercase variant of one of
 // them ("otc 2001") — the fabrication survives casing changes, the check
 // should too.
-const KNOWN_FABRICATED_CITATIONS = [
-  'LTL 1995',
-  'LF 1995',
-  'OTC 2001',
-  '(LFW)',
-  '(LPS)',
-  'BG 1995',
+//
+// Una TABELLA per slug e non un file per slug (esteso il 2026-08-14 con
+// `infernieri-frontalieri-ticino`, follow-up #317 punto 2): la forma del test
+// e' identica, cambiano solo lo slug e le stringhe, e un file nuovo per ogni
+// articolo riparato moltiplicherebbe la stessa intestazione senza aggiungere
+// copertura. Il vincolo di merito resta quello sopra: SOLO stringhe osservate
+// dal vivo nell'articolo che il fix ha toccato, mai un'euristica.
+const SLUGS = [
+  {
+    slug: 'telelavoro-frontalieri',
+    ref: 'corpus#261',
+    citations: ['LTL 1995', 'LF 1995', 'OTC 2001', '(LFW)', '(LPS)', 'BG 1995'],
+  },
+  {
+    // #317 punto 2. Le due identita' normative erano inventate di sana pianta
+    // (nessuna «Legge federale sulla tassazione degli stranieri», nessuna
+    // «Ordinanza sul credito d'imposta per gli stranieri»): rimosse, non
+    // sostituite — stessa scelta di #306, perche' una citazione «giusta» al
+    // loro posto sposterebbe soltanto il punto in cui si inventa.
+    // `25 giugno 1978` invece era la data SBAGLIATA di una Convenzione che
+    // esiste davvero, ed e' l'unico caso corretto e non rimosso: il repo ha
+    // gia' il proprio oracolo verificato — `create-article.mjs` ripete in
+    // quattro punti «Convenzione italo-svizzera: firmata 9 DICEMBRE 1976» e
+    // `article-fabrication-guard.test.mjs` ne fa un pattern bloccante.
+    slug: 'infernieri-frontalieri-ticino',
+    ref: 'corpus#317',
+    citations: ['TF 1992', 'OD 1993', '25 giugno 1978'],
+  },
 ];
 
-async function loadBody(locale) {
-  const url = new URL(
-    `../../content/blog-body/${locale}/telelavoro-frontalieri.ts`,
-    import.meta.url,
-  );
+async function loadBody(slug, locale) {
+  const url = new URL(`../../content/blog-body/${locale}/${slug}.ts`, import.meta.url);
   const mod = await import(url.href);
   return mod.default;
 }
 
-describe('telelavoro-frontalieri: nessuna citazione normativa fabbricata nota', () => {
-  for (const locale of LOCALES) {
-    it(`[${locale}] non contiene nessuna delle citazioni rimosse da corpus#261`, async () => {
-      const body = await loadBody(locale);
-      const fullText = Object.values(body).join('\n');
-      expect(fullText.length).toBeGreaterThan(100);
+for (const { slug, ref, citations } of SLUGS) {
+  describe(`${slug}: nessuna citazione normativa fabbricata nota`, () => {
+    for (const locale of LOCALES) {
+      it(`[${locale}] non contiene nessuna delle citazioni rimosse da ${ref}`, async () => {
+        const body = await loadBody(slug, locale);
+        const fullText = Object.values(body).join('\n');
+        expect(fullText.length).toBeGreaterThan(100);
 
-      const offenders = KNOWN_FABRICATED_CITATIONS.filter(
-        (needle) => fullText.toLowerCase().includes(needle.toLowerCase()),
-      );
-      expect(offenders).toEqual([]);
-    });
-  }
-});
+        const offenders = citations.filter(
+          (needle) => fullText.toLowerCase().includes(needle.toLowerCase()),
+        );
+        expect(offenders).toEqual([]);
+      });
+    }
+  });
+}

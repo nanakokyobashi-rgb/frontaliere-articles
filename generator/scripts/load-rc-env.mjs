@@ -283,27 +283,6 @@ export function isTrivialSecret(value) {
   return typeof value !== 'string' || value.length < 6;
 }
 
-
-
-/**
- * Fetch the Remote Config template WITHOUT firebase-admin, using the REST API
- * and a service-account-signed JWT (same technique as scripts/lib/indexing-api.mjs,
- * which is likewise dependency-free by design).
- *
- * Why this exists (issue #4837): `await import('firebase-admin')` needs an
- * installed node_modules. The fast-publish path deliberately runs with NO
- * `npm ci` — a full dependency install is precisely the cost that workflow
- * exists to avoid — so on that path the admin import throws and, before this
- * fallback, the script gave up and silently loaded no secrets at all. The
- * visible symptom would have been R2 credentials never reaching
- * upload-cdn-file.sh, which then skips (by design, exit 0), leaving every
- * fast-published article with an og:image that 404s for social crawlers until
- * the next full deploy.
- *
- * Returns a template shaped like the admin SDK's ({ parameters }), so
- * getRcValue() works unchanged. Returns null on any failure — callers fall
- * back to plain env vars, exactly as before.
- */
 /**
  * Whether an HTTP status from the Remote Config REST fetch is worth retrying.
  *
@@ -342,6 +321,25 @@ export const RC_FETCH_ATTEMPTS = 7;
 // lib/google-service-account-token.mjs, the sibling call one hop upstream.
 export const RC_FETCH_TIMEOUT_MS = 30_000;
 
+/**
+ * Fetch the Remote Config template WITHOUT firebase-admin, using the REST API
+ * and a service-account-signed JWT (same technique as scripts/lib/indexing-api.mjs,
+ * which is likewise dependency-free by design).
+ *
+ * Why this exists (issue #4837): `await import('firebase-admin')` needs an
+ * installed node_modules. The fast-publish path deliberately runs with NO
+ * `npm ci` — a full dependency install is precisely the cost that workflow
+ * exists to avoid — so on that path the admin import throws and, before this
+ * fallback, the script gave up and silently loaded no secrets at all. The
+ * visible symptom would have been R2 credentials never reaching
+ * upload-cdn-file.sh, which then skips (by design, exit 0), leaving every
+ * fast-published article with an og:image that 404s for social crawlers until
+ * the next full deploy.
+ *
+ * Returns a template shaped like the admin SDK's ({ parameters }), so
+ * getRcValue() works unchanged. Returns null on any failure — callers fall
+ * back to plain env vars, exactly as before.
+ */
 async function fetchTemplateViaRest() {
   const { readFileSync } = await import('node:fs');
   const { getServiceAccountAccessToken } = await import('./lib/google-service-account-token.mjs');
@@ -356,13 +354,28 @@ async function fetchTemplateViaRest() {
 
   let lastErr;
   for (let attempt = 1; attempt <= RC_FETCH_ATTEMPTS; attempt++) {
-    const rcRes = await fetch(
-      `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
-      {
-        headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' },
-        signal: AbortSignal.timeout(RC_FETCH_TIMEOUT_MS),
-      },
-    );
+    let rcRes;
+    try {
+      rcRes = await fetch(
+        `https://firebaseremoteconfig.googleapis.com/v1/projects/${encodeURIComponent(creds.project_id)}/remoteConfig`,
+        {
+          headers: { Authorization: `Bearer ${accessToken}`, 'Accept-Encoding': 'gzip' },
+          signal: AbortSignal.timeout(RC_FETCH_TIMEOUT_MS),
+        },
+      );
+    } catch (err) {
+      // Same class of bug as the OAuth exchange one hop upstream (see
+      // exchangeAssertionForToken in lib/google-service-account-token.mjs):
+      // AbortSignal.timeout() rejects the fetch instead of resolving a status,
+      // so without this catch a slow-but-never-erroring endpoint would fail on
+      // the FIRST timeout instead of spending the RC_FETCH_ATTEMPTS/~63s budget.
+      if (err?.name !== 'AbortError' && err?.name !== 'TimeoutError') throw err;
+      lastErr = new Error(`Remote Config REST fetch timed out after ${RC_FETCH_TIMEOUT_MS}ms`);
+      if (attempt < RC_FETCH_ATTEMPTS) {
+        await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
+      }
+      continue;
+    }
     if (rcRes.ok) return rcRes.json();
     lastErr = new Error(`Remote Config REST fetch failed: ${rcRes.status}`);
     if (!isRetryableRcFetchStatus(rcRes.status)) throw lastErr;

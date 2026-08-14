@@ -113,11 +113,12 @@
     },
     {
       "path": "scripts/ci/auto-merge-eval.mjs",
-      "mode": "identical",
+      "mode": "adapted",
+      "reason": "Divergenza a DUE direzioni, nessuna delle quali e' copiabile — per questo non e' piu' `identical` (riconciliazione di nanako#318 punto 2). QUI in piu': il gate 4 `generator-ci` (#242/#252), che esige il check-run del generatore sulle PR che toccano generator/engine/host — sul sito quel workflow non esiste, portarcelo bloccherebbe ogni PR in attesa di un check che nessuno emette. SUL SITO in piu': l'osservazione #5552 (`lib/checkRunObservation.mjs` + `lib/prComments.mjs`, che qui non esistono), che elenca i check-run completati sulla HEAD senza bloccare. Copiare in una delle due direzioni romperebbe l'altro lato, quindi restano diversi apposta; la sorveglianza sulla baseline resta accesa e intercetta comunque una modifica futura su uno dei due lati.",
       "baseline": {
-        "site": "b405aabb5dc8a3b7",
-        "corpus": "b405aabb5dc8a3b7",
-        "alignedAt": "2026-08-07"
+        "site": "10feadc6b55c8e66",
+        "corpus": "fa39cd1f4da86f5c",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -262,9 +263,9 @@
       "path": "scripts/ci/lib/vitestCheck.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ef1d69bc8d64958f",
-        "corpus": "ef1d69bc8d64958f",
-        "alignedAt": "2026-08-07"
+        "site": "67edc765777475b4",
+        "corpus": "67edc765777475b4",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1137,12 +1138,12 @@
     {
       "path": "generator/scripts/load-rc-env.mjs",
       "sitePath": "scripts/load-rc-env.mjs",
-      "mode": "identical",
-      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. E' l'unico dei sette gemelli byte-identico al sito (hash eef68283b8f6f277 su entrambi i lati, verificato), e lo e' legittimamente: non risolve nessun path relativo, quindi lo spostamento in generator/scripts/ non lo tocca. `identical` e non `adapted` proprio per questo — qui una riga aggiunta alla mappa sul sito e' copiabile cosi' com'e', ed e' il caso in cui una divergenza silenziosa costa di piu': un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca.",
+      "mode": "adapted",
+      "reason": "Ponte Remote Config -> env, e l'UNICO: un parametro fuori dalla sua mappa RC_TO_ENV resta `undefined` per chiunque lo legga da process.env, per quanto sia impostato in Remote Config. Era `identical`, non lo e' piu' dal 2026-08-14 (nanako#318 punto 1): la #5809 del sito dichiara la divergenza VOLUTA, e la byte-identita' e' quindi irraggiungibile. Il sito ha in piu' (a) `export const RC_TO_ENV` invece di `const`, per il suo `tests/rc-to-env-secrets-coverage.test.ts` (#5737), che qui non esiste, e (b) sei parametri di soli suoi: NEWSLETTER_AC_{SCHEME,TTL_DAYS,LEGACY_SUNSET} (#5685) e NEWSLETTER_TOKEN_{SCHEME,CONFIRM_TTL_DAYS,LEGACY_SUNSET} (#5704) — la meta' MINTING di credenziali verificate da `functions/`, che qui non c'e'. Il delta FUNZIONALE invece e' stato portato: il catch AbortError/TimeoutError attorno alla fetch di Remote Config (senza, AbortSignal.timeout rigetta la fetch e il budget RC_FETCH_ATTEMPTS/~63s non viene mai speso) e il JSDoc di `fetchTemplateViaRest`, che l'inserimento di #200 aveva staccato dalla sua funzione. Resta il caso in cui una divergenza silenziosa costa di piu' — un secret nuovo mappato solo di la' e' inerte qui, senza che niente fallisca — ed e' esattamente per questo che `adapted` NON e' un'esenzione: la sorveglianza sulla baseline resta accesa.",
       "baseline": {
-        "site": "eef68283b8f6f277",
-        "corpus": "eef68283b8f6f277",
-        "alignedAt": "2026-08-09"
+        "site": "c13e7688b3c1c2e4",
+        "corpus": "f85aa0a4a0bdcd2b",
+        "alignedAt": "2026-08-14"
       }
     },
     {
@@ -1776,9 +1777,9 @@
       "sitePath": "scripts/lib/google-service-account-token.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "ae637dc85730dd2e",
-        "corpus": "ae637dc85730dd2e",
-        "alignedAt": "2026-08-09"
+        "site": "3cd3caf6cb78e3d1",
+        "corpus": "3cd3caf6cb78e3d1",
+        "alignedAt": "2026-08-14"
       }
     },
     {
