@@ -2668,6 +2668,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.economia-recupero-2026.title': 'Économie suisse en forte reprise au deuxième trimestre',
     'blog.article.economia-recupero-2026.excerpt': 'Le PIB suisse croît de 1,5 % entre avril et juin, tiré par les secteurs chimique et pharmaceutique.',
     'blog.article.economia-recupero-2026.imageAlt': 'Économie suisse en récession',
+    'blog.article.finma-allarme-cyberattacchi.title': 'IA, un rischio per la cyber sicurezza',
+    'blog.article.finma-allarme-cyberattacchi.excerpt': 'La Finma met en garde le secteur bancaire et des assurances suisse contre les dangers croissants liés à l\'intelligence artificielle et à la cybersécurité.',
+    'blog.article.finma-allarme-cyberattacchi.imageAlt': 'La Finma met en garde le secteur bancaire et d\'assurance suisse.',
 };
 
 export default blogMetaChFr;

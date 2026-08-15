@@ -8002,6 +8002,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'finma-allarme-cyberattacchi',
+    category: 'pratico',
+    date: '2026-08-15T07:28:40.626Z',
+    image: '/images/blog/finma-allarme-cyberattacchi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -2668,6 +2668,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.economia-recupero-2026.title': 'Schweizer Wirtschaft erholt sich im zweiten Quartal stark',
     'blog.article.economia-recupero-2026.excerpt': 'Das Schweizer BIP wächst zwischen April und Juni um 1,5%, angetrieben vom Chemie- und Pharmasektor.',
     'blog.article.economia-recupero-2026.imageAlt': 'Wirtschaft der Schweiz im Aufschwung',
+    'blog.article.finma-allarme-cyberattacchi.title': 'Finma schlägt Alarm: „Cyberattacken auf dem Vormarsch, KI ist Risiko“',
+    'blog.article.finma-allarme-cyberattacchi.excerpt': 'Die Finma warnt die Schweizer Banken- und Versicherungsbranche vor den wachsenden Gefahren im Zusammenhang mit künstlicher Intelligenz und Cybersicherheit.',
+    'blog.article.finma-allarme-cyberattacchi.imageAlt': 'Die Finma warnt das schweizerische Bank- und Versicherungswesen.',
 };
 
 export default blogMetaChDe;

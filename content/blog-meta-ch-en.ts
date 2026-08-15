@@ -2668,6 +2668,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.economia-recupero-2026.title': 'Swiss economy in great recovery in the second quarter',
     'blog.article.economia-recupero-2026.excerpt': 'Swiss GDP grew by 1.5% between April and June, driven by the chemical and pharmaceutical sectors.',
     'blog.article.economia-recupero-2026.imageAlt': 'Swiss economy in recovery',
+    'blog.article.finma-allarme-cyberattacchi.title': 'Finma raises the alarm: \'cyberattacks on the rise, AI is a risk\'',
+    'blog.article.finma-allarme-cyberattacchi.excerpt': 'Finma warns the Swiss banking and insurance sector against the growing dangers related to artificial intelligence and cybersecurity.',
+    'blog.article.finma-allarme-cyberattacchi.imageAlt': 'The Finma warns the Swiss banking and insurance sector.',
 };
 
 export default blogMetaChEn;

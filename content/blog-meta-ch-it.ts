@@ -2668,6 +2668,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.economia-recupero-2026.title': 'Economia svizzera in gran recupero nel secondo trimestre',
     'blog.article.economia-recupero-2026.excerpt': 'Il PIL elvetico cresce dell\'1,5% tra aprile e giugno, trainato dai settori chimico e farmaceutico.',
     'blog.article.economia-recupero-2026.imageAlt': 'Economia svizzera in recupero',
+    'blog.article.finma-allarme-cyberattacchi.title': 'La Finma lancia l\'allarme: \'cyberattacchi in aumento, IA è un rischio\'',
+    'blog.article.finma-allarme-cyberattacchi.excerpt': 'La Finma mette in guardia il settore bancario e assicurativo svizzero contro i crescenti pericoli legati all\'intelligenza artificiale e alla sicurezza informatica.',
+    'blog.article.finma-allarme-cyberattacchi.imageAlt': 'La Finma allerta il settore bancario e assicurativo svizzero.',
 };
 
 export default blogMetaChIt;

@@ -34574,6 +34574,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finma-allarme-cyberattacchi': {
+    title: 'La Finma lancia l\'allarme: \'cyberattacchi in aumento, IA è un rischio\'',
+    description: 'La Finma ha messo in guardia il settore bancario e assicurativo svizzero contro i crescenti pericoli legati all\'intelligenza artificiale e alla sicurezza',
+    keywords: 'frontalieri, ticino, svizzera, italia, finma, lancia, allarme, cyberattacchi',
+    ogTitle: 'La Finma lancia l\'allarme: \'cyberattacchi in aumento, IA è un rischio\'',
+    ogDescription: 'La Finma ha messo in guardia il settore bancario e assicurativo svizzero contro i crescenti pericoli legati all\'intelligenza artificiale e alla sicurezza informatica.',
+    canonicalPath: '/articoli-svizzera/finma-allarme-cyberattacchi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La Finma lancia l'allarme: 'cyberattacchi in aumento, IA è un rischio'",
+      "description": "La Finma ha messo in guardia il settore bancario e assicurativo svizzero contro i crescenti pericoli legati all'intelligenza artificiale e alla sicurezza",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/finma-allarme-cyberattacchi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La Finma allerta il settore bancario e assicurativo svizzero."
+      },
+      "datePublished": "2026-08-15T07:28:40+00:00",
+      "dateModified": "2026-08-15T07:28:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/finma-allarme-cyberattacchi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
