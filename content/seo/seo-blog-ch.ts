@@ -34496,6 +34496,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-economia-svizzera-crescita-trimestrale': {
+    title: 'Crescita dell\'economia svizzera: +1,5% nel 2° trimestre 2026',
+    description: 'La stima rapida del PIL reale della Svizzera ha rilevato un aumento del 1,5% nel secondo trimestre 2026, grazie al settore industriale e al terziario',
+    keywords: 'frontalieri, ticino, svizzera, italia, crescita, dell, economia, trimestre',
+    ogTitle: 'Crescita dell\'economia svizzera: +1,5% nel 2° trimestre 2026',
+    ogDescription: 'La stima rapida del PIL reale della Svizzera ha rilevato un aumento del 1,5% nel secondo trimestre 2026, grazie al settore industriale e al terziario',
+    canonicalPath: '/articoli-svizzera/economia-svizzera-crescita-trimestrale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Crescita dell'economia svizzera: +1,5% nel 2° trimestre 2026",
+      "description": "La stima rapida del PIL reale della Svizzera ha rilevato un aumento del 1,5% nel secondo trimestre 2026, grazie al settore industriale e al terziario",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/economia-svizzera-crescita-trimestrale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lago di Lugano con vista sulle montagne svizzere"
+      },
+      "datePublished": "2026-08-15T07:05:40+00:00",
+      "dateModified": "2026-08-15T07:05:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/economia-svizzera-crescita-trimestrale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

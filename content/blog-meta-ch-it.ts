@@ -2662,6 +2662,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sisma-colombia-morti-feriti.title': 'Il bilancio del sisma sale: 281 morti e circa 4mila feriti',
     'blog.article.sisma-colombia-morti-feriti.excerpt': 'Il terremoto di magnitudo 7,4 ha colpito la Colombia, causando danni e vittime.',
     'blog.article.sisma-colombia-morti-feriti.imageAlt': 'Un aereo spia in volo sopra la Colombia dopo il terremoto',
+    'blog.article.economia-svizzera-crescita-trimestrale.title': 'Crescita dell\'economia svizzera: +1,5% nel 2° trimestre 2026',
+    'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'La stima rapida del PIL reale della Svizzera ha rilevato un aumento del 1,5% nel secondo trimestre 2026, grazie al settore industriale e al terziario',
+    'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lago di Lugano con vista sulle montagne svizzere',
 };
 
 export default blogMetaChIt;

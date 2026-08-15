@@ -2662,6 +2662,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.sisma-colombia-morti-feriti.title': 'Die Bilanz des Erdbebens steigt: 281 Tote und rund 4.000 Verletzte',
     'blog.article.sisma-colombia-morti-feriti.excerpt': 'Das Erdbeben der Stärke 7,4 traf Kolumbien und verursachte Schäden und Opfer.',
     'blog.article.sisma-colombia-morti-feriti.imageAlt': 'Ein Aufklärungsflugzeug in der Luft über Kolumbien nach dem Erdbeben',
+    'blog.article.economia-svizzera-crescita-trimestrale.title': 'Wachstum der Schweizer Wirtschaft: +1,5% im 2. Quartal 2026',
+    'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'Die schnelle Schätzung des realen BIP der Schweiz ergab einen Anstieg von 1,5% im zweiten Quartal 2026, dank des Industrie- und Dienstleistungssektors',
+    'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lago di Lugano mit Blick auf die Schweizer Berge',
 };
 
 export default blogMetaChDe;

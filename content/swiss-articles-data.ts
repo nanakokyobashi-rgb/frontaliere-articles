@@ -7984,6 +7984,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'economia-svizzera-crescita-trimestrale',
+    category: 'fiscale',
+    date: '2026-08-15T07:05:40.579Z',
+    image: '/images/blog/economia-svizzera-crescita-trimestrale.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -2662,6 +2662,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sisma-colombia-morti-feriti.title': 'The earthquake\'s toll rises: 281 dead and about 4,000 injured',
     'blog.article.sisma-colombia-morti-feriti.excerpt': 'The magnitude 7.4 earthquake hit Colombia, causing damage and casualties.',
     'blog.article.sisma-colombia-morti-feriti.imageAlt': 'An aerial view of the Colombia after the earthquake',
+    'blog.article.economia-svizzera-crescita-trimestrale.title': 'Growth of the Swiss economy: +1.5% in the 2nd quarter of 2026',
+    'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'The rapid estimate of Switzerland\'s real GDP showed a 1.5% increase in the second quarter of 2026, thanks to the industrial and tertiary sectors',
+    'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lago di Lugano with view on the Swiss mountains',
 };
 
 export default blogMetaChEn;
