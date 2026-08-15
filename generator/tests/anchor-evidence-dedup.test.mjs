@@ -206,6 +206,52 @@ describe('deduplica delle citazioni della fonte nel rimedio', () => {
     }
   });
 
+  it('due frasi quasi-identiche che divergono dopo 240 char restano DUE citazioni', () => {
+    // #372: il raggruppamento chiavava la mappa sulla frase GIA' troncata a 240
+    // char. Due frasi che condividono i primi 237+ char e divergono solo dopo
+    // collassavano sulla stessa chiave troncata, fondendo due percentuali
+    // distinte sotto un'unica citazione — quella che avesse perso la
+    // collisione spariva dalla sua prova, pur restando nominata altrove.
+    const PREFIX = "Il rapporto ufficiale descrive in dettaglio la situazione economica della "
+      + "regione, includendo dati su occupazione, produzione industriale, scambi "
+      + "commerciali con i paesi limitrofi e investimenti pubblici, aggiornati al "
+      + "trimestre corrente e comparati con l'anno precedente per fornire un quadro";
+    assert.ok(PREFIX.length > 237, 'guardia: il prefisso condiviso deve superare il taglio a 240');
+    const fonte = [
+      `${PREFIX} completo, il tasso di crescita registrato e' del 5,3% su base annua.`,
+      `${PREFIX} completo, il tasso di crescita registrato e' del 1,1% su base annua.`,
+      // Terzo dato indipendente: checkSourceFidelity richiede minAnchors=3 per
+      // scattare, e qui interessano solo le due percentuali sopra.
+      "La rete si estende per 20 km lungo il confine.",
+    ].join(' ');
+
+    // Le due frasi divergono solo dopo il taglio a 240 char, quindi la
+    // citazione VISUALIZZATA e' identica per entrambe (troncata prima del
+    // punto di divergenza) — non e' quello a dover restare distinto. Quello
+    // che deve restare distinto e' la RIGA: prima della fix, le due
+    // percentuali collassavano su una singola chiave e finivano nella STESSA
+    // etichetta ("5,3%, 1,1% — la fonte dice: «…»"); dopo la fix restano due
+    // righe separate, ciascuna con la propria unica percentuale.
+    //
+    // Ogni gate e' auto-contenuto (vedi il test sopra), quindi si controlla
+    // dentro il `fix` di ciascuna issue, non sulla concatenazione: altrimenti
+    // le due righe legittime — una per gate, entrambe corrette — sembrerebbero
+    // la stessa fusione che il test vuole scongiurare.
+    const SEP = ' — la fonte dice:';
+    for (const i of checkSourceFidelity(BOZZA_VUOTA, fonte, {})) {
+      const righe = (i.fix || '').split('\n').filter((l) => l.includes(SEP));
+      if (righe.length === 0) continue;
+      const rigaCon53 = righe.filter((l) => l.slice(0, l.indexOf(SEP)).includes('5,3%'));
+      const rigaCon11 = righe.filter((l) => l.slice(0, l.indexOf(SEP)).includes('1,1%'));
+      assert.equal(rigaCon53.length, 1, `${i.code}: 5,3% non e' su esattamente una riga: ${JSON.stringify(righe)}`);
+      assert.equal(rigaCon11.length, 1, `${i.code}: 1,1% non e' su esattamente una riga: ${JSON.stringify(righe)}`);
+      assert.notEqual(
+        rigaCon53[0], rigaCon11[0],
+        `${i.code}: le due percentuali sono finite sulla STESSA riga (fuse per collisione di troncamento): ${rigaCon53[0]}`,
+      );
+    }
+  });
+
 
   it('RATCHET: il rimedio sul caso peggiore resta sotto il tetto misurato', () => {
     // Fonte da 6.036 char = MAX_SOURCE_CHARS, il caso peggiore che il commento
