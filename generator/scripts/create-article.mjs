@@ -6318,13 +6318,51 @@ const HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL = 3;
 async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts) {
   let last = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    const prompt = attempt === 1
+    // Dopo un INFRA_ERROR non c'e' nessuna risposta da correggere: appendere il
+    // promemoria direbbe al modello che ha sbagliato quando non ha nemmeno
+    // risposto, e sono ~310 caratteri di contesto falso su ogni ritentativo.
+    const prompt = (attempt === 1 || last?.rejection === SELECTION_REJECTION.INFRA_ERROR)
       ? basePrompt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
-    const rawText = await callLLM(
-      [{ role: 'user', content: prompt }],
-      { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-    );
+    let rawText;
+    try {
+      rawText = await callLLM(
+        [{ role: 'user', content: prompt }],
+        { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
+      );
+    } catch (err) {
+      // Il fallimento di UNA chiamata (payload jsonMode incompleto, retry del
+      // modello esauriti, rete) NON e' una risposta da interpretare, ma non e'
+      // nemmeno la fine della selezione: prima di questa fix si propagava fuori
+      // dal loop, bruciando l'intera selezione invece di UN tentativo.
+      //
+      // ADATTAMENTO RISPETTO AL GEMELLO DEL SITO — la riga qui sotto la' non
+      // c'e', e non va tolta. Un `ALL_MODELS_EXHAUSTED` non e' il fallimento di
+      // una chiamata: e' il roster intero a terra, e porta i campi
+      // (`transientExhaustion`, `inputCapReport`) su cui `main().catch` decide
+      // NELL'ORDINE fra `EXIT_ROSTER_CANNOT_SERVE_PROMPT`, un differimento e un
+      // `exit 1`. Assorbirlo qui lo declasserebbe a `qualityReject` — cioe' a
+      // «nessun articolo per una ragione legittima», run VERDE — proprio nel
+      // caso persistente (chiavi scadute, crediti finiti, prompt sopra ogni
+      // cap) che deve uscire rosso: e' il difetto che
+      // `generator/tests/roster-exhaustion-red.test.mjs` esiste per impedire.
+      // Ritentare non servirebbe comunque, perche' sotto hanno gia' fallito
+      // tutti i modelli della cascata con i loro retry.
+      if (err?.code === 'ALL_MODELS_EXHAUSTED') throw err;
+      last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+      console.error(
+        `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
+      );
+      // NON `responsesRejected`: quel contatore e' documentato sopra come
+      // «risposte del modello RIGETTATE dal protocollo», ed e' cio' che rende
+      // osservabile un prompt che smette di funzionare. Un errore non e' una
+      // risposta; sommarlo li' renderebbe un provider a singhiozzo
+      // indistinguibile da un degrado del prompt. La causa resta contata,
+      // separata, in `rejectionReasons`.
+      RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] =
+        (RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] || 0) + 1;
+      continue;
+    }
     const parsed = parseHeadlineSelection(rawText, candidateCount);
     if (parsed.ok) return { ...parsed, attempts: attempt };
     last = parsed;
