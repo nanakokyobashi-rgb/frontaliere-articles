@@ -6588,7 +6588,16 @@ function _clampRemediation(text, maxChars) {
   return `${t.slice(0, maxChars)}\n[...elenco correzioni troncato: applica la stessa logica ai punti rimanenti]`;
 }
 
-function _clampSourceBody(body, maxChars) {
+// `minChars`, quando passato, e' un PAVIMENTO letterale: il chiamante lo
+// dichiara quando il taglio a fine frase non deve mai scendere sotto una
+// soglia (es. PROMPT_SOURCE_FLOOR_CHARS), non solo restare "vicino" a
+// `maxChars`. Prima del fix il taglio a fine frase accettava qualunque
+// terminatore oltre il 50% di `maxChars`: con `maxChars` == floor (3000),
+// un terminatore a 1501 char produceva un corpo di 1501 char — ben sotto il
+// pavimento dichiarato dal chiamante. Di default `minChars = maxChars`,
+// cosi' il comportamento resta invariato per chi non passa il terzo
+// argomento.
+function _clampSourceBody(body, maxChars, minChars = maxChars) {
   const MARK = '\n[...contenuto troncato per brevità]';
   const text = String(body || '');
   const bare = text.endsWith(MARK) ? text.slice(0, -MARK.length) : text;
@@ -6598,7 +6607,7 @@ function _clampSourceBody(body, maxChars) {
     cut.lastIndexOf('. '), cut.lastIndexOf('.\n'),
     cut.lastIndexOf('! '), cut.lastIndexOf('? '),
   );
-  const kept = lastStop > maxChars * 0.5 ? cut.slice(0, lastStop + 1) : cut;
+  const kept = lastStop + 1 >= minChars ? cut.slice(0, lastStop + 1) : cut;
   return kept + MARK;
 }
 
@@ -7271,13 +7280,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       sourceBody: _clampSourceBody(
         truncatedContent,
         Math.max(PROMPT_SOURCE_FLOOR_CHARS, Math.round(truncatedContent.length * 0.6)),
+        PROMPT_SOURCE_FLOOR_CHARS,
       ),
       domainFacts: '',
       remediation: _remediationShort,
     },
     {
       label: `senza fatti-di-dominio + rimedio troncato + fonte al minimo (${PROMPT_SOURCE_FLOOR_CHARS}ch)`,
-      sourceBody: _clampSourceBody(truncatedContent, PROMPT_SOURCE_FLOOR_CHARS),
+      sourceBody: _clampSourceBody(truncatedContent, PROMPT_SOURCE_FLOOR_CHARS, PROMPT_SOURCE_FLOOR_CHARS),
       domainFacts: '',
       remediation: _remediationShort,
     },
