@@ -60,6 +60,8 @@ import {
   truncateAtPromptScaffold,
   cleanFaqPairs,
   orphanFaqLocales,
+  faqLineRe,
+  faqPresentForId,
 } from './lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -399,26 +401,29 @@ if (!CHECK_ONLY) {
 // Il criterio e' in `orphanFaqLocales()`, ed e' strutturale invece che
 // testuale di proposito: vedi l'intestazione della funzione.
 //
-// `g` e' obbligatorio su entrambe le regex sotto: senza, sia la lettura di
-// stato sia la rimozione si fermano al PRIMO match. Una seconda chiave `.faq`
-// nello stesso file — residuo plausibile di un merge, mai osservato nel
-// corpus attuale ma non escluso da uno futuro — resterebbe cosi' invisibile a
-// `faqStateOf()` e sopravviverebbe alla rimozione: e' pubblicata come
-// FAQPage JSON-LD, quindi orfana e live.
-const FAQ_LINE_RE = /\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)',?/g;
+// `g` e' obbligatorio su entrambe le regex di `faqLineRe`/`faqPresentForId`:
+// senza, sia la lettura di stato sia la rimozione si fermano al PRIMO match.
+// Una seconda chiave `.faq` DELLO STESSO id — residuo plausibile di un merge,
+// mai osservato nel corpus attuale ma non escluso da uno futuro — resterebbe
+// cosi' invisibile a `faqStateOf()` e sopravviverebbe alla rimozione: e'
+// pubblicata come FAQPage JSON-LD, quindi orfana e live.
+//
+// E sono ANCORATE all'id (issue #301 item 2). La forma precedente
+// (`'blog\.article\.[^']+\.faq'`) prendeva la chiave di QUALUNQUE id nel file:
+// in un file a due id `faqStateOf()` leggeva lo stato della chiave sbagliata e
+// la potatura qui sotto toglieva una FAQ viva e non orfana. E' lo stesso
+// ancoraggio con cui #294 ha chiuso i tre gate di sola lettura, applicato dove
+// l'esito non e' un rapporto ma una `writeFileSync` su `content/`.
+//
+// Le due funzioni vivono in `lib/prompt-placeholder-guard.mjs` perche' questo
+// file e' tutto a top level — importarlo lo esegue sul corpus — e la' sono
+// provabili: `generator/tests/faq-key-anchoring.test.mjs`.
 
-function faqStateOf(abs) {
+function faqStateOf(abs, id) {
   if (!fs.existsSync(abs)) return { hasFile: false, hasFaq: false };
-  const src = fs.readFileSync(abs, 'utf-8');
-  const re = /'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/g;
-  let hasFaq = false;
-  let m;
   // Basta UNA occorrenza con contenuto vero: e' la stessa soglia con cui
   // il passo 2b decide se una locale ha ancora una FAQ da orfanare.
-  while ((m = re.exec(src)) !== null) {
-    if (m[1] !== '__DROP_FAQ__') { hasFaq = true; break; }
-  }
-  return { hasFile: true, hasFaq };
+  return { hasFile: true, hasFaq: faqPresentForId(fs.readFileSync(abs, 'utf-8'), id) };
 }
 
 // Stessa fault isolation del post-processo `__DROP_FAQ__` sopra, e per la
@@ -438,17 +443,19 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
     const id = name.slice(0, -3);
     try {
       const byLocale = Object.fromEntries(
-        LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name))]),
+        LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name), id)]),
       );
       for (const locale of orphanFaqLocales(byLocale)) {
         const rel = path.join('content', dir, locale, name);
         const abs = path.join(ROOT, rel);
         const src = fs.readFileSync(abs, 'utf-8');
-        // `g` su FAQ_LINE_RE fa si' che `replace` tolga OGNI occorrenza, non
-        // solo la prima: un file con due chiavi `.faq` (residuo di merge) le
-        // perde entrambe invece di lasciarne una orfana e live.
+        // `g` su `faqLineRe(id)` fa si' che `replace` tolga OGNI occorrenza,
+        // non solo la prima: un file con due chiavi `.faq` DI QUESTO id
+        // (residuo di merge) le perde entrambe invece di lasciarne una orfana
+        // e live. Le chiavi di un altro id non si toccano: non e' questo
+        // l'articolo che le ha rese orfane.
         const dropped = [];
-        const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
+        const next = src.replace(faqLineRe(id), (_m, raw) => {
           dropped.push(raw);
           return '';
         });

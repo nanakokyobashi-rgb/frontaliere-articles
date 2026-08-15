@@ -1025,6 +1025,53 @@ export function orphanFaqLocales(faqByLocale, { sourceLocale = 'it' } = {}) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// La chiave `.faq` di UN id dentro un file body
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Le due meta' che `repair-prompt-placeholders.mjs` usa per decidere se una FAQ
+// e' orfana e per toglierla. Stanno qui, e non nello script, per due ragioni:
+// lo script e' tutto a top level e importarlo lo ESEGUE sul corpus, quindi la
+// sola forma testabile e' questa; e l'ancoraggio all'id e' la parte che va
+// provata (`generator/tests/faq-key-anchoring.test.mjs`).
+//
+// L'ancora e' quella di #294 — `find-dirty-content-ids.mjs`,
+// `faqQuestionsInBodyText()`: la chiave si compone con l'id ESCAPATO per la
+// regex, non si cerca un `.faq` qualunque. Senza, in un file con due id (residuo
+// di merge: mai osservato sui 16.648 file, ma niente nel formato lo impedisce)
+// `faqStateOf` leggeva lo stato della chiave sbagliata e la potatura toglieva
+// una FAQ viva e non orfana. `g` resta obbligatorio: una chiave DUPLICATA dello
+// stesso id e' viva al render (semantica dell'object literal JS) e va tolta
+// tutta, non solo la prima occorrenza.
+
+/** L'id, reso inerte per finire dentro una regex. */
+const escapeIdRx = (id) => String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** Il valore del sentinella che il passo 2 scrive per marcare una FAQ da togliere. */
+export const DROP_FAQ_SENTINEL = '__DROP_FAQ__';
+
+/**
+ * La RIGA `'blog.article.<id>.faq': '...',` di quell'id, con il valore ancora
+ * escapato nel gruppo 1. Globale: prende ogni occorrenza dello stesso id.
+ */
+export function faqLineRe(id) {
+  return new RegExp(`\\n[ \\t]*'blog\\.article\\.${escapeIdRx(id)}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)',?`, 'g');
+}
+
+/**
+ * Vero se in `src` quell'id ha una FAQ con contenuto vero. Il sentinella
+ * `__DROP_FAQ__` conta come ASSENZA: e' una FAQ gia' condannata dal passo 2, e
+ * in `--check` la riga non e' ancora stata tolta dal disco.
+ */
+export function faqPresentForId(src, id) {
+  const re = new RegExp(`'blog\\.article\\.${escapeIdRx(id)}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
+  let m;
+  while ((m = re.exec(src)) !== null) {
+    if (m[1] !== DROP_FAQ_SENTINEL) return true;
+  }
+  return false;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Enforcement sul percorso di scrittura
 // ─────────────────────────────────────────────────────────────────────────────
 
