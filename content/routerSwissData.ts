@@ -918,6 +918,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'finma-allarme-cyberattacchi': { it: 'finma-allarme-cyberattacchi', en: 'finma-cyber-attacks-warning', de: 'finma-warnung-zu-cyberangriffen', fr: 'finma-avertissement-contre-les-attaques-informatiques' },
  'asilo-nuovo-altstaetten': { it: 'asilo-nuovo-altstaetten', en: 'new-asylum-centre-altstaetten', de: 'neues-asylzentrum-altstaetten', fr: 'nouveau-centre-dasile-altstaetten' },
  'svizzero-franco-euro': { it: 'svizzero-franco-euro', en: 'swiss-franc-euro', de: 'schweizer-franken-euro', fr: 'franc-suisse-euro' },
+ 'travail-suisse-ue-accordi': { it: 'travail-suisse-ue-accordi', en: 'travail-suisse-ue-agreements', de: 'travail-suisse-eu-vertrag', fr: 'travail-suisse-accords-eu' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

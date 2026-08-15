@@ -2677,6 +2677,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzero-franco-euro.title': 'Di più Franco: il franco svizzero si indebolisce e l\'euro torna sopra 0,94',
     'blog.article.svizzero-franco-euro.excerpt': 'Il franco svizzero si indebolisce e l\'euro torna sopra 0,94. Le aspettative di un aumento dei tassi d\'interesse nell\'Eurozona mettono la valuta elvetica sotto pressione.',
     'blog.article.svizzero-franco-euro.imageAlt': 'Il franco svizzero',
+    'blog.article.travail-suisse-ue-accordi.title': 'Travail.Suisse: «Il rifiuto del pacchetto di accordi con l\'UE resta un\'opzione"',
+    'blog.article.travail-suisse-ue-accordi.excerpt': 'La Commissione dell\'economia del Consiglio degli Stati ha respinto alcune parti delle misure negoziate dalle parti sociali per tutelare i salari nell\'ambito del pacchetto di accordi con l\'UE.',
+    'blog.article.travail-suisse-ue-accordi.imageAlt': 'Immagine di Adrian Wüthrich',
 };
 
 export default blogMetaChIt;

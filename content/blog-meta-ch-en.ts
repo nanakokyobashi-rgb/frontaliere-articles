@@ -2677,6 +2677,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzero-franco-euro.title': 'More franc: the Swiss franc weakens and the euro returns above 0.94',
     'blog.article.svizzero-franco-euro.excerpt': 'The Swiss franc weakens and the euro returns above 0.94. Expectations of an interest rate increase in the Eurozone put the Swiss currency under pressure.',
     'blog.article.svizzero-franco-euro.imageAlt': 'The Swiss Franc',
+    'blog.article.travail-suisse-ue-accordi.title': 'EU deal rejection remains an option',
+    'blog.article.travail-suisse-ue-accordi.excerpt': 'The Economic Commission of the Council of States rejected parts of the measures negotiated by the social partners to protect wages under the package of agreements with the EU.',
+    'blog.article.travail-suisse-ue-accordi.imageAlt': 'Image of Adrian Wüthrich',
 };
 
 export default blogMetaChEn;

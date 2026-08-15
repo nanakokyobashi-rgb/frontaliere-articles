@@ -2677,6 +2677,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzero-franco-euro.title': 'Franko indebolisce, Euro torna a 0,94',
     'blog.article.svizzero-franco-euro.excerpt': 'Der Schweizer Franken schwächt sich ab und der Euro liegt wieder über 0,94. Die Erwartung einer Zinserhöhung in der Eurozone setzt die Schweizer Währung unter Druck.',
     'blog.article.svizzero-franco-euro.imageAlt': 'Die Schweizer Franken',
+    'blog.article.travail-suisse-ue-accordi.title': 'Travail.Suisse: «Die Ablehnung des EU-Abkommenspakets bleibt eine Option»',
+    'blog.article.travail-suisse-ue-accordi.excerpt': 'Die Wirtschaftskommission des Ständerates hat Teile der von den Sozialpartnern ausgehandelten Massnahmen zum Schutz der Löhne im Rahmen des EU-Abkommenspakets abgelehnt.',
+    'blog.article.travail-suisse-ue-accordi.imageAlt': 'Bild von Adrian Wüthrich',
 };
 
 export default blogMetaChDe;

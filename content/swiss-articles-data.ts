@@ -8029,6 +8029,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'travail-suisse-ue-accordi',
+    category: 'fiscale',
+    date: '2026-08-15T11:03:37.136Z',
+    image: '/images/blog/travail-suisse-ue-accordi.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

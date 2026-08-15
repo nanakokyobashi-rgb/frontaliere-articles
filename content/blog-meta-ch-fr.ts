@@ -2677,6 +2677,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzero-franco-euro.title': 'Plus franc : le franc suisse s\'affaiblit et l\'euro repasse au-dessus de 0,94',
     'blog.article.svizzero-franco-euro.excerpt': 'Le franc suisse s\'affaiblit et l\'euro revient au-dessus de 0,94. Les anticipations d\'une hausse des taux d\'intérêt dans la zone euro mettent la monnaie suisse sous pression.',
     'blog.article.svizzero-franco-euro.imageAlt': 'Le franc suisse',
+    'blog.article.travail-suisse-ue-accordi.title': 'Travail.Suisse : « Le rejet du paquet d\'accords avec l\'UE reste une option »',
+    'blog.article.travail-suisse-ue-accordi.excerpt': 'La Commission de l\'économie du Conseil des États a rejeté certaines parties des mesures négociées par les partenaires sociaux pour protéger les salaires dans le cadre du paquet d\'accords avec l\'UE.',
+    'blog.article.travail-suisse-ue-accordi.imageAlt': 'Image d\'Adrian Wüthrich',
 };
 
 export default blogMetaChFr;
