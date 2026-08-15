@@ -1524,11 +1524,11 @@
     {
       "path": "generator/scripts/lib/headline-selection-protocol.mjs",
       "mode": "identical",
-      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente diceva «sul sito non esiste ancora un omonimo»: era vera al 2026-08-13 e ha smesso di esserlo quando il gemello e' atterrato su `scripts/lib/` del sito — a un path DIVERSO da `path`, che e' esattamente il motivo per cui nessuno se n'e' accorto. `loop-drift-check` esce subito sul ramo `corpus-only` senza mai interrogare il sito, quindi il file e' rimasto non sorvegliato mentre i due lati erano gia' byte-identici: una fix su un lato avrebbe lasciato il gemello rotto in silenzio. Verificato su origin: blob `6cfb5b1a` su entrambi i lati.",
+      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente diceva «sul sito non esiste ancora un omonimo»: era vera al 2026-08-13 e ha smesso di esserlo quando il gemello e' atterrato su `scripts/lib/` del sito — a un path DIVERSO da `path`, che e' esattamente il motivo per cui nessuno se n'e' accorto. `loop-drift-check` esce subito sul ramo `corpus-only` senza mai interrogare il sito, quindi il file e' rimasto non sorvegliato mentre i due lati erano gia' byte-identici: una fix su un lato avrebbe lasciato il gemello rotto in silenzio. Riallineato il 2026-08-15 (site#5849 item 3/4): il sito aveva tolto il flag `i` da `CANDIDATE_KEY_RE` e aggiunto `SELECTION_REJECTION.INFRA_ERROR` — un `site-ahead` che qui e' stato chiuso ricopiando il file (blob sito `bd3bda74`, verificato con `cmp` post-copia).",
       "baseline": {
-        "site": "6df51f3491453068",
-        "corpus": "6df51f3491453068",
-        "alignedAt": "2026-08-14"
+        "site": "0ab2bd13a8f02d25",
+        "corpus": "0ab2bd13a8f02d25",
+        "alignedAt": "2026-08-15"
       },
       "sitePath": "scripts/lib/headline-selection-protocol.mjs"
     },

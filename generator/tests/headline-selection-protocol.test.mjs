@@ -157,15 +157,31 @@ test('accetta una chiave valida e la risolve a una posizione 0-based', () => {
   assert.equal(r.reason, 'rilevante');
 });
 
-test('tollera code fence, minuscole e spazi nella chiave', () => {
+test('tollera code fence e spazi nella chiave', () => {
   for (const raw of [
-    '```json\n{"selectedId":"h1","reason":"x"}\n```',
+    '```json\n{"selectedId":"H1","reason":"x"}\n```',
     '{"selectedId":" H 1 ","reason":"x"}',
   ]) {
     const r = parseHeadlineSelection(raw, 2);
     assert.equal(r.ok, true, `atteso ok per ${raw}`);
     assert.equal(r.index, 0);
   }
+});
+
+test('RIGETTA una chiave minuscola — il parser accetta solo ciò che il prompt mostra (site#5849 item 4)', () => {
+  // Il flag `i` di CANDIDATE_KEY_RE e' stato tolto apposta: `formatCandidateList`
+  // e `selectionCorrectionNote` scrivono solo `H<n>` MAIUSCOLO, quindi `h1` e'
+  // una forma che il modello non vede mai esemplificata. Accettarla era
+  // un'asimmetria fra cio' che il parser tollera e cio' che il prompt promette,
+  // e la meta' tollerante non e' quella osservabile quando la selezione sbaglia.
+  const r = parseHeadlineSelection('{"selectedId":"h1","reason":"x"}', 2);
+  assert.equal(r.ok, false, 'una chiave minuscola non deve piu essere selezionabile');
+  assert.equal(r.rejection, SELECTION_REJECTION.UNKNOWN_KEY);
+  assert.equal(r.index, undefined, 'il rigetto non deve portare una posizione');
+  // Il contrappeso: la forma maiuscola resta accettata. Senza questa riga il
+  // test passerebbe anche se CANDIDATE_KEY_RE smettesse di matchare qualunque
+  // cosa.
+  assert.equal(parseHeadlineSelection('{"selectedId":"H1","reason":"x"}', 2).ok, true);
 });
 
 test('un NUMERO NUDO è ambiguo e viene rigettato — è il difetto di #188', () => {
@@ -278,6 +294,138 @@ test('selectArticle non ha più nessun ripiego che sceglie in silenzio', () => {
   assert.ok(!/fallback a indice 0/.test(selectArticleCode), 'ripiego alla posizione 0 rimesso in selectArticle');
   assert.match(selectArticleCode, /parseHeadlineSelection|requestHeadlineSelection/, 'selectArticle non usa più il parser del protocollo');
   assert.match(selectArticleCode, /SELEZIONE RIGETTATA/, 'la selezione finale non fallisce più: sta di nuovo indovinando');
+});
+
+test('INFRA_ERROR è una causa di rigetto DISTINTA, non un riuso di UNPARSEABLE', () => {
+  // Un errore di rete non e' una risposta illeggibile: e' l'assenza di una
+  // risposta. Riusare `UNPARSEABLE` avrebbe reso i due casi indistinguibili
+  // proprio in `RUN_REPORT.selectionUsage.rejectionReasons`, cioe' nell'unico
+  // posto da cui si vede se un prompt ha smesso di funzionare o se e' la quota.
+  assert.equal(typeof SELECTION_REJECTION.INFRA_ERROR, 'string');
+  const values = Object.values(SELECTION_REJECTION);
+  assert.equal(new Set(values).size, values.length, 'due cause di rigetto condividono lo stesso valore');
+  // E resta una causa che il PARSER non può produrre: nasce solo dal `catch`.
+  for (const raw of ['', 'mi dispiace', '{"reason":"x"}', '{"selectedId":"H9"}', '{"selectedIndex":1}']) {
+    assert.notEqual(
+      parseHeadlineSelection(raw, 2).rejection,
+      SELECTION_REJECTION.INFRA_ERROR,
+      `il parser non deve poter produrre INFRA_ERROR: ${raw}`,
+    );
+  }
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Strato 2 — un errore di callLLM consuma UN tentativo, non la selezione
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * `requestHeadlineSelection` VERO, valutato con le sole dipendenze iniettate.
+ *
+ * Stessa tecnica di `makePrompt`: il file non è importabile (chiama `main()` al
+ * caricamento e importa dipendenze che questo repo non installa), quindi la
+ * dichiarazione viene ritagliata dal sorgente e valutata. È l'unico modo per
+ * misurare il COMPORTAMENTO del loop invece di grep-are la sua forma — e un
+ * grep sulla forma è precisamente ciò che non avrebbe visto il difetto: prima
+ * della fix il loop era sintatticamente corretto, gli mancava solo il `catch`.
+ */
+function buildRequestHeadlineSelection({ callLLM, RUN_REPORT }) {
+  const factory = new Function(
+    '__d',
+    'const { callLLM, GH_MODEL_LIGHT, parseHeadlineSelection, selectionCorrectionNote, SELECTION_REJECTION, RUN_REPORT } = __d;\n'
+    + `${cutDecl('async function requestHeadlineSelection(')}\n`
+    + 'return requestHeadlineSelection;',
+  );
+  return factory({
+    callLLM,
+    GH_MODEL_LIGHT: 'modello-di-prova',
+    parseHeadlineSelection,
+    selectionCorrectionNote,
+    SELECTION_REJECTION,
+    RUN_REPORT,
+  });
+}
+
+const freshRunReport = () => ({ selectionUsage: { responsesRejected: 0, rejectionReasons: {} } });
+
+/** Zittisce il log del loop e restituisce le righe emesse. */
+async function captureStderr(fn) {
+  const lines = [];
+  const original = console.error;
+  console.error = (...args) => { lines.push(args.map(String).join(' ')); };
+  try {
+    return { value: await fn(), lines };
+  } finally {
+    console.error = original;
+  }
+}
+
+test('un errore di callLLM consuma UN tentativo: il successivo può ancora riuscire', async () => {
+  // È la mutazione da tenere rossa: togli il `try/catch` da
+  // requestHeadlineSelection e questo test non fallisce con un'asserzione — si
+  // pianta sull'eccezione che risale, cioè esattamente il difetto. Fuori da
+  // questa funzione non c'è nessuno che riconosca un errore di rete:
+  // `isQualityRejectError()` non matcha quel messaggio, quindi risaliva come
+  // infrastructure failure e faceva fallire il run, mentre il rigetto normale
+  // esce marcato `qualityReject` e si limita a saltare il batch.
+  const RUN_REPORT = freshRunReport();
+  const prompts = [];
+  const callLLM = async (messages) => {
+    prompts.push(messages[0].content);
+    if (prompts.length === 1) throw new Error('429 rate limit exceeded');
+    return '{"selectedId": "H2", "reason": "al secondo giro"}';
+  };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value: r, lines } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 3),
+  );
+
+  assert.equal(r.ok, true, 'un errore transitorio ha bruciato la selezione invece di un tentativo');
+  assert.equal(r.index, 1);
+  assert.equal(r.attempts, 2, "l'errore deve contare come tentativo consumato");
+  assert.equal(prompts.length, 2, 'il loop non ha ritentato dopo l’errore');
+  assert.notEqual(prompts[1], prompts[0], 'il ritentativo non porta il promemoria di correzione');
+  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 1);
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], 1);
+  assert.ok(
+    lines.some((l) => /429 rate limit exceeded/.test(l) && /Batch 1/.test(l)),
+    `l'errore infrastrutturale non è finito nel log con la sua causa:\n${lines.join('\n')}`,
+  );
+});
+
+test('callLLM che fallisce sempre: rigetto pulito a tentativi esauriti, mai un’eccezione fuori', async () => {
+  const RUN_REPORT = freshRunReport();
+  let calls = 0;
+  const callLLM = async () => { calls += 1; throw new Error('cascata modelli esaurita'); };
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value: r } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 4, 'Selezione finale', 3),
+  );
+
+  assert.equal(r.ok, false);
+  assert.equal(r.rejection, SELECTION_REJECTION.INFRA_ERROR, 'il rigetto non nomina la causa vera');
+  assert.match(r.detail, /cascata modelli esaurita/, 'la causa infrastrutturale è stata persa');
+  assert.equal(r.attempts, 3);
+  assert.equal(calls, 3, 'il tetto ai tentativi non vale per gli errori infrastrutturali');
+  assert.equal(r.index, undefined, 'un fallimento infrastrutturale non deve portare una posizione');
+  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 3);
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], 3);
+});
+
+test('un errore di callLLM NON viene mai scambiato per una risposta rigettata', async () => {
+  // Il caso opposto: il `catch` non deve inghiottire anche i rigetti veri,
+  // altrimenti `rejectionReasons` diventa un contatore unico e il run report
+  // torna a non dire perché la selezione è fallita.
+  const RUN_REPORT = freshRunReport();
+  const callLLM = async () => '{"selectedIndex": 1, "reason": "…"}';
+  const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+  const { value: r } = await captureStderr(
+    () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 2),
+  );
+
+  assert.equal(r.ok, false);
+  assert.equal(r.rejection, SELECTION_REJECTION.AMBIGUOUS_REFERENCE);
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], undefined);
+  assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.AMBIGUOUS_REFERENCE], 2);
 });
 
 test('il retry della selezione esiste, è limitato e passa dal parser', () => {

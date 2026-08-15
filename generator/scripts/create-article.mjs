@@ -6321,10 +6321,33 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     const prompt = attempt === 1
       ? basePrompt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
-    const rawText = await callLLM(
-      [{ role: 'user', content: prompt }],
-      { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-    );
+    let rawText;
+    try {
+      rawText = await callLLM(
+        [{ role: 'user', content: prompt }],
+        { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
+      );
+    } catch (err) {
+      // Un errore infrastrutturale (rate limit, rete, cascata modelli esaurita)
+      // NON e' una risposta da interpretare, ma non e' nemmeno la fine della
+      // selezione: prima di questa fix si propagava fuori dal loop, bruciando
+      // l'intera selezione invece di UN tentativo. Fuori di qui non c'e'
+      // nessuno che lo riconosca: `isQualityRejectError()` non matcha un
+      // messaggio di rete, quindi l'errore risaliva come infrastructure
+      // failure e faceva fallire il run — mentre il rigetto normale della
+      // stessa funzione esce marcato `qualityReject` e si limita a saltare il
+      // batch o il candidato. Qui l'errore consuma un tentativo come un
+      // rigetto qualunque, conta nel run report, e se i tentativi finiscono si
+      // esce dalla porta pulita in fondo alla funzione.
+      last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+      console.error(
+        `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
+      );
+      RUN_REPORT.selectionUsage.responsesRejected += 1;
+      RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] =
+        (RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] || 0) + 1;
+      continue;
+    }
     const parsed = parseHeadlineSelection(rawText, candidateCount);
     if (parsed.ok) return { ...parsed, attempts: attempt };
     last = parsed;
