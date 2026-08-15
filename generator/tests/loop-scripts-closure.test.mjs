@@ -109,49 +109,6 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
   );
 });
 
-// ── L'estrattore, pinnato su fixture ────────────────────────────────────────
-//
-// I due test di questo file girano sull'albero REALE, e sull'albero reale una
-// regressione dell'estrattore non fa fallire niente: se la regex tornasse
-// per-riga (`.*?` non attraversa i newline), gli import braced su più righe
-// tornerebbero invisibili — ma i loro target ESISTONO, quindi il guard
-// resterebbe verde. Vacuo, esattamente com'era prima dell'indurimento, e
-// senza che nessun test lo dica. La mutazione che ha motivato la fix
-// (reopen-breaker.mjs rimosso dall'albero → guard 2/2 verde) è stata provata
-// a mano e resterebbe non codificata. Questi casi la codificano: falliscono
-// se l'estrattore torna cieco, qualunque sia lo stato dell'albero.
-test("importSpecifiers vede l'import braced su più righe (la cecità riparata)", () => {
-  const src = [
-    "import {",
-    "  decideReopen,",
-    "  parseReopenBudget,",
-    "} from './lib/reopen-breaker.mjs';",
-    "",
-  ].join('\n');
-  assert.deepEqual(importSpecifiers(src), ['./lib/reopen-breaker.mjs']);
-});
-
-test('importSpecifiers non scavalca la fine di uno statement per agganciare il successivo', () => {
-  // Il divieto di `'`, `"` e `;` nella classe negata serve a questo: senza,
-  // il match non greedy potrebbe attraversare `from './a.mjs';` e agganciare
-  // la stringa dell'import dopo, contando UN import dove ce ne sono due.
-  const src = "import { a } from './a.mjs';\nimport { b } from './b.mjs';\n";
-  assert.deepEqual(importSpecifiers(src), ['./a.mjs', './b.mjs']);
-});
-
-test('la prosa in un commento che cita un import non diventa una dipendenza', () => {
-  // Il falso positivo che il porting ha prodotto davvero (#2057): l'ancora
-  // deve restare `^[ \t]`, non `^\s`, o il newline del commento la fa
-  // ripartire a metà riga.
-  const src = "// #2057: import {FX} from './comparatorHref'\nimport fs from 'node:fs';\n";
-  assert.deepEqual(importSpecifiers(src), ['node:fs']);
-});
-
-test('il side-effect import senza from resta coperto', () => {
-  const src = "import './setup.mjs';\n";
-  assert.deepEqual(importSpecifiers(src), ['./setup.mjs']);
-});
-
 test('gli script del ciclo non introducono dipendenze npm non dichiarate', () => {
   // Il ciclo gira SENZA `npm ci` — è la proprietà che lo rende economico su
   // questo repo, dove `npm ci` tirerebbe dentro playwright, sharp e

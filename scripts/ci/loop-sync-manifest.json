@@ -663,7 +663,7 @@
       "reason": "Guard nato da un difetto reale del porting: node --check valida la sintassi ma non segue gli import, quindi tre file mancanti sono passati indenni da ogni controllo e avrebbero rotto l'auto-merge su ogni PR. Risolve l'albero staticamente (non importa: quasi tutti gli script hanno una modalita' CLI e alcuni chiamano l'API GitHub) e verifica anche che non compaiano dipendenze npm non dichiarate, perche' e' il girare-senza-npm-ci a rendere economico il ciclo su questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "959bba14557efcff",
+        "corpus": "6ce500b9e6754280",
         "alignedAt": "2026-08-15"
       }
     },
