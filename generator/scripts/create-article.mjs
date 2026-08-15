@@ -13171,8 +13171,47 @@ const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;
 const NON_SLUG_REMAINDER_RX =
   /^(?:it|en|de|fr|ita|eng|ger|deu|fra|italiano|inglese|tedesco|francese|italian|english|german|french|slug|placeholder|segnaposto|example|esempio|sample|test|todo|tbd|na|n-a|none|null|undefined|xxx|titolo|title|articolo|article)$/i;
 
-/** `3-5-words-max-40-chars`, `max-40-chars`, `40-chars`, `3-5-words`… */
-const SCHEMA_HINT_SHAPE_RX = /(?:^|-)(?:\d+-\d+-words|max-\d+-chars|\d+-chars|\d+-words)(?:-|$)/i;
+/**
+ * `3-5-words-max-40-chars`, `max-40-chars`, `40-chars`, `3-5-words`… e le
+ * stesse forme in ITALIANO, che sono quelle che il prompt usa davvero.
+ *
+ * Le unita' erano solo inglesi (`words`, `chars`) mentre `ID_PLACEHOLDER` dice
+ * «kebab-case ASCII, 3-5 parole, max 40 char». Normalizzato diventa
+ * `id-kebab-case-ascii-3-5-parole-max-40-char`, che non matcha nessuna delle
+ * quattro alternative: `parole` non e' `words` e `char` non e' `chars`.
+ * Risultato: `inspectSlugForPromptPlaceholder` rispondeva `leaked: false` sul
+ * segnaposto piu' importante che esista — quello del campo `id`.
+ *
+ * Il difetto era IRRAGGIUNGIBILE finche' la generazione non produceva articoli:
+ * lo step «Guard» di generate-article.yml gira solo `if article == 'true'`, e
+ * per dodici ore nessun articolo e' stato generato. Appena la generazione e'
+ * tornata a funzionare (2026-08-15), il guard ha cominciato a bocciare OGNI
+ * articolo: sei run di fila, 04:06→05:12Z, tutte rosse sullo stesso step, con
+ * il corpo generato buttato via sul runner.
+ *
+ * Il numero e la parola stanno separati apposta: `\d+` copre qualunque cifra il
+ * prompt scelga, e l'alternanza copre singolare e plurale in entrambe le
+ * lingue, cosi' una riformulazione del segnaposto non richiede di ritoccare
+ * anche questa riga. Il test gemello parte da `ID_PLACEHOLDER` invece che da
+ * una copia scritta a mano, per la stessa ragione.
+ *
+ * La forma NUDA (un solo numero incollato all'unita', senza `-max` ne' un
+ * secondo numero davanti) usa SOLO le unita' inglesi. `parole`/`caratteri`/
+ * `carattere` sono parole italiane comuni: uno slug vero puo' contenere
+ * legittimamente "5-parole-chiave-…" o "10-caratteri-tipici-…", e la forma
+ * nuda testata come substring li avrebbe scartati come se fossero il
+ * segnaposto. Le forme "range" (`3-5-parole`) e "max" (`max-40-caratteri`)
+ * restano ambigue in entrambe le lingue: sono gia' testate esplicitamente
+ * (vedi il test gemello) e coprono comunque `ID_PLACEHOLDER`, che porta
+ * sempre anche `max-40-char` — inglese, quindi gia' catturato dalla forma
+ * nuda pure senza le unita' italiane li'.
+ */
+const SCHEMA_HINT_UNIT = '(?:words?|chars?|parole|parola|caratteri|carattere|char)';
+const SCHEMA_HINT_UNIT_UNAMBIGUOUS = '(?:words?|chars?|char)';
+const SCHEMA_HINT_SHAPE_RX = new RegExp(
+  `(?:^|-)(?:\\d+-\\d+-${SCHEMA_HINT_UNIT}|max-\\d+-${SCHEMA_HINT_UNIT}|\\d+-${SCHEMA_HINT_UNIT_UNAMBIGUOUS})(?:-|$)`,
+  'i',
+);
 
 /**
  * Classify one slug candidate against the prompt schema.
