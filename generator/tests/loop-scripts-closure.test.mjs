@@ -39,8 +39,30 @@ const DIRS = ['scripts/ci', 'scripts/ci/lib', 'scripts/lib'];
 // Solo import a inizio riga: così una riga di PROSA dentro un commento che
 // cita un import (`// #2057: import {FX} from './comparatorHref'`) non viene
 // scambiata per una dipendenza reale — un falso positivo che il porting ha
-// prodotto davvero.
-const IMPORT_RE = /^\s*import\s+(?:.*?\s+from\s+)?['"](\.[^'"]+)['"]/;
+// prodotto davvero. `^[ \t]` e non `^\s`: `\s` mangia i newline e farebbe
+// ripartire l'ancora a metà di un commento.
+//
+// La clausola fra `import` e `from` è `[^'";]*?`, non `.*?`, per DUE ragioni
+// che vanno insieme:
+//   - niente `\n` nella classe negata ⇒ un import BRACED SU PIÙ RIGHE viene
+//     visto. Con `.*?` (che non attraversa i newline) non lo era, e questa
+//     riga è stata cieca su 6 specificatori reali in 5 file — fra cui
+//     `./lib/reopen-breaker.mjs` e `./lib/vitestCheck.mjs` di pr-autorebase,
+//     cioè esattamente la classe che questo test esiste per chiudere: uno
+//     script copiato dal sito senza una sua dipendenza. Il guard era verde
+//     mentre il buco era aperto.
+//   - vietare `'`, `"` e `;` impedisce al match non greedy di attraversare la
+//     fine dello statement e agganciare la stringa di un import successivo:
+//     una clausola di import contiene solo identificatori, virgole, graffe,
+//     `as` e spazi, mai un apice o un punto e virgola.
+// Il `from` è opzionale, così anche un side-effect import (`import './x.mjs'`)
+// resta coperto.
+const IMPORT_RE = /^[ \t]*import\s+(?:[^'";]*?\sfrom\s+)?(['"])([^'"]+)\1/gm;
+
+/** Tutti gli specificatori importati da `src`, nell'ordine in cui compaiono. */
+function importSpecifiers(src) {
+  return [...src.matchAll(IMPORT_RE)].map((m) => m[2]);
+}
 
 function entryPoints() {
   const out = [];
@@ -63,13 +85,12 @@ test('ogni import relativo degli script del ciclo risolve a un file esistente', 
     if (seen.has(rel)) return;
     seen.add(rel);
     const src = fs.readFileSync(abs, 'utf8');
-    for (const line of src.split('\n')) {
-      const m = IMPORT_RE.exec(line);
-      if (!m) continue;
-      let target = path.normalize(path.join(path.dirname(rel), m[1]));
+    for (const spec of importSpecifiers(src)) {
+      if (!spec.startsWith('.')) continue;
+      let target = path.normalize(path.join(path.dirname(rel), spec));
       if (!path.extname(target)) target += '.mjs';
       if (!fs.existsSync(path.join(ROOT, target))) {
-        broken.push(`${rel} → ${m[1]} (atteso: ${target})`);
+        broken.push(`${rel} → ${spec} (atteso: ${target})`);
         continue;
       }
       walk(target);
@@ -98,16 +119,15 @@ test('gli script del ciclo non introducono dipendenze npm non dichiarate', () =>
     // Risolto a runtime e con skip dichiarato se assente (mergePreviewCheck).
     'typescript',
   ]);
-  const PKG_RE = /^\s*import\s+(?:.*?\s+from\s+)?['"]([^.'"][^'"]*)['"]/;
   const offenders = [];
 
   for (const rel of entryPoints()) {
     const src = fs.readFileSync(path.join(ROOT, rel), 'utf8');
-    for (const line of src.split('\n')) {
-      const m = PKG_RE.exec(line);
-      if (!m) continue;
-      const pkg = m[1];
-      if (pkg.startsWith('node:')) continue;
+    // Stesso estrattore del test sopra: la cecità sugli import braced su più
+    // righe valeva anche qui, e su questo lato un pacchetto non dichiarato
+    // sfuggito rompe il ciclo in CI, dove non c'è `npm ci` a rimediare.
+    for (const pkg of importSpecifiers(src)) {
+      if (pkg.startsWith('.') || pkg.startsWith('node:')) continue;
       const base = pkg.startsWith('@') ? pkg.split('/').slice(0, 2).join('/') : pkg.split('/')[0];
       if (!declared.has(base)) offenders.push(`${rel} → ${pkg}`);
     }
