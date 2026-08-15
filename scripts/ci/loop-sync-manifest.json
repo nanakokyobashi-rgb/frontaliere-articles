@@ -290,8 +290,8 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "4da4a58366ea26ba",
-        "corpus": "4da4a58366ea26ba",
+        "site": "9e2b80a88c1a504a",
+        "corpus": "9e2b80a88c1a504a",
         "alignedAt": "2026-08-15"
       }
     },
@@ -2160,13 +2160,12 @@
     {
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
-      "mode": "corpus-only-pending",
-      "reason": "La disposizione di una cascata svuotata: differire (quota, si cura da sola a mezzanotte UTC) o gridare (il prompt supera ogni cap dichiarato, e nessuna finestra oraria lo rimpicciolisce). Nato qui con la PR #357 perche' e' qui che la generazione gira, ma il difetto e' condiviso: `classifyExhaustionCause()` in ai-models.mjs (`mode: identical`, quindi byte a byte uguale sui due lati) calcola `transientExhaustion = transient >= persistent` e da' il PAREGGIO al transitorio. Misurato sulla run 31817957722 del 2026-08-14: transient=53, persistent=53, ambiguo=1, di cui 38 rifiuti su input cap per un prompt di ~9.740 token contro un cap massimo di 8.000 — pareggio esatto, differimento, exit 0, e `Generate Blog Article` verde per 60+ run di fila senza un articolo dalle 06:06Z alle 16:30Z. Il gemello `scripts/create-article.mjs` del sito ha lo stesso catch e lo stesso `if (isQuotaExhaustedError(e)) { … process.exit(0) }`: il difetto e' latente la', non assente. `corpus-only-pending` e non `corpus-only` proprio per questo — non e' scaffolding del repo pubblicatore, e' una regola che deve esistere da entrambe le parti. Vedi #359 per cosa serve a promuoverla. AGGIORNATO il 2026-08-14 (seconda passata su #313/#348): il modulo porta ora anche EXIT_NO_ARTICLE_DECLARED e isLegitimateQuotaDeferral(), cioe' la regola «nessun articolo ⇒ non verde» e la maggioranza STRETTA sul totale che la sostiene (misurata sulla run 31823202761: transient 53 su 106 = 50,0%, non piu' di meta', quindi non un differimento). Anche questa meta' e' latente sul sito per la stessa ragione dell'altra, e resta tracciata dalla stessa #359; la baseline corpus e' stata riallineata coscientemente qui, non ha driftato.",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/359",
+      "mode": "identical",
+      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking.",
       "baseline": {
-        "site": null,
+        "site": "54ed894b24deaa3f",
         "corpus": "54ed894b24deaa3f",
-        "alignedAt": "2026-08-14"
+        "alignedAt": "2026-08-15"
       }
     },
     {
