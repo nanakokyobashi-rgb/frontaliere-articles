@@ -360,6 +360,16 @@ export function hasFaqKey(fileContent, articleId) {
   return new RegExp(`${faqKeyRx(articleId)}\\s*:`).test(fileContent);
 }
 
+/**
+ * C'e' almeno una chiave `bodyN` per QUESTO id? Gemella di `hasFaqKey`, e serve
+ * a distinguere «corpo corto» (da arricchire) da «nessun corpo per questo id»
+ * (da fermare) — due casi che prima della fix di #393 non potevano essere
+ * distinti, perche' la regex non ancorata trovava sempre qualcosa.
+ */
+export function hasBodyKey(fileContent, articleId) {
+  return new RegExp(`${bodyKeyRx(articleId)}\\s*:`).test(fileContent);
+}
+
 /** Read and concatenate all bodyN keys OF THIS ARTICLE from file content.
  *  Supports both single-quoted ('...') and backtick-quoted (`...`) string values,
  *  and any number of body keys (body1, body2, ..., bodyN).
@@ -369,6 +379,16 @@ export function hasFaqKey(fileContent, articleId) {
  *  rapporto — e' un articolo estraneo che entra nel contenuto pubblicato.
  */
 export function extractBodyContent(fileContent, articleId) {
+  // Rumoroso e non vuoto. Ancorando la chiave, questa funzione ha acquistato un
+  // esito che prima non poteva avere: `''` perche' l'id non compare fra le
+  // chiavi. Il chiamante non lo distingue da «corpo corto», e il ramo che
+  // raccoglie il corpo corto chiama `enrichBodyForFaq`, che fa scrivere all'LLM
+  // 1500-2500 parole a partire dal solo slug: un id sbagliato — o un chiamante
+  // futuro che dimentica il secondo argomento, che senza questa guardia
+  // cercherebbe `'blog.article.undefined.bodyN'` e tornerebbe `''` senza un
+  // fiato — diventerebbe un articolo INVENTATO scritto nel corpus. Meglio
+  // fermarsi: vedi `hasBodyKey`, che i due chiamanti usano per non arrivarci.
+  if (!articleId) throw new Error('extractBodyContent: articleId obbligatorio (issue #393)');
   const bodies = [];
   // Match `'blog.article.<id>.bodyN':` followed by either a single-quoted or
   // backtick-quoted value. `bodyKeyRx` ancora la chiave all'id (vedi il blocco
@@ -434,6 +454,34 @@ function isWrongLocale(faqArray, expectedLocale) {
  * un testo che nessuno ha scritto. Misurato: mappa minima e mappa larga
  * (`\n`/`\r` inclusi) danno 0 illeggibili e 0 divergenze sui 16.676 campi, ma
  * la minima e' quella di cui si puo' dimostrare la regola.
+ *
+ * OMONIMIA DA CONOSCERE PRIMA DI IMPORTARE. `fix-faq-locales.mjs` esporta una
+ * `parseFaqLiteral` con lo STESSO nome, una forma di ritorno DIVERSA
+ * (`{ pairs, legacy }` invece di `Array|null`) e un primo decoder diverso
+ * (`unescapeForSingleQuoteTS`, quello che spoglia ogni `\x`). La stessa trappola
+ * che questo file documenta gia' per `hasFaqKey` qui sopra: due moduli, due
+ * contratti, un nome solo.
+ *
+ * L'ORDINE DEI DECODER RESTA AMBIGUO IN DUE CASI, non uno. Oltre al `\u` di
+ * sopra: un literal scritto dallo scrittore LEGACY il cui testo contenga un
+ * backslash letterale seguito da una lettera di escape JSON (`" \ / b f n r t
+ * u`) viene dimezzato dal decoder 1, `JSON.parse` riesce lo stesso e il
+ * fallback non scatta — array valido, valore sbagliato. Occorrenze oggi: 0.
+ * L'ambiguita' non e' risolvibile dal literal da solo (chi l'ha scritto non e'
+ * scritto da nessuna parte); l'ordine esatto-poi-legacy e' quello che sbaglia
+ * meno, ed e' lo stesso del gemello.
+ *
+ * COSA CAMBIA PER I FILE GIA' LEGGIBILI. Sui 16.676 campi vivi: 377 passano da
+ * illeggibili a leggibili, 16.277 restano identici, e **22 cambiano valore** —
+ * sono i file col control-char mangling gia' noto, dove il sorgente porta
+ * `\\u0000a1`. Li' il decoder legacy leggeva gli otto caratteri letterali
+ * di quell escape e il nuovo restituisce U+0000 seguito da `a1`: la lettura
+ * NUOVA e' quella fedele, perche' quel doppio backslash e' esattamente cio'
+ * che `escapeForSingleQuoteTS` produce per un U+0000 che stava nel documento
+ * JSON. Tutti e 22 introducono un C0 vero nel valore letto. Non e'
+ * un danno introdotto qui, e' danno pre-esistente finalmente visibile — e in
+ * riscrittura la `write()` di questo file lo toglie comunque, perche' applica
+ * `sanitizeText` (issue #66).
  *
  * @param {string} raw - il testo catturato TRA le virgolette.
  * @returns {Array|null} le coppie, o `null` se nessuna decodifica da' un array.
@@ -922,6 +970,13 @@ async function processArticle(articleId, file, itBodyContent) {
   const label = `[${articleId}]`;
 
   // 1. Extract Italian body text
+  // Nessuna chiave `bodyN` per questo id non e' un corpo corto: e' il file
+  // sbagliato, o un id sbagliato. Arricchirlo significherebbe pubblicare un
+  // articolo scritto dall'LLM a partire dal solo slug (#393, review di #397).
+  if (!hasBodyKey(itBodyContent, articleId)) {
+    console.error(`${label} ❌ Nessuna chiave bodyN per questo id: non arricchisco, sarebbe un articolo inventato`);
+    return { success: false, error: 'No bodyN key for this article id' };
+  }
   let bodyText = extractBodyContent(itBodyContent, articleId);
   if (!bodyText || bodyText.length < 200) {
     console.error(`${label} ⚠️  Body text short (${bodyText?.length || 0} chars), enriching before FAQ generation...`);
@@ -1018,6 +1073,12 @@ async function processArticle(articleId, file, itBodyContent) {
 async function processTopUp(articleId, file, itContent, existingFaq) {
   const label = `[${articleId}] [TOP-UP ${existingFaq.length}→${MIN_FAQ_PAIRS}+]`;
 
+  // Stessa guardia di `processArticle`: niente chiave `bodyN` per questo id
+  // significa fermarsi, non arricchire (#393, review di #397).
+  if (!hasBodyKey(itContent, articleId)) {
+    console.error(`${label} ❌ Nessuna chiave bodyN per questo id: non arricchisco, sarebbe un articolo inventato`);
+    return { success: false, error: 'No bodyN key for this article id' };
+  }
   let bodyText = extractBodyContent(itContent, articleId);
   if (!bodyText || bodyText.length < 200) {
     console.error(`${label} ⚠️  Body short (${bodyText?.length || 0} chars), enriching before top-up...`);

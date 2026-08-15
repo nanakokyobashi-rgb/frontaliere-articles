@@ -147,6 +147,43 @@ test('#393 extractBodyContent non lascia che un id matchi un id piu lungo', () =
   assert.ok(!testo.includes('Corpo di alpha-uno'), "l'id 'alpha' non deve matchare 'alpha-uno'");
 });
 
+// L'ancoraggio ha creato un esito che prima non esisteva — «nessuna chiave per
+// questo id» — e il ramo che lo raccoglieva chiamava `enrichBodyForFaq`, cioe'
+// faceva SCRIVERE all'LLM un articolo dal solo slug. Queste due prove sono la
+// ragione per cui quel ramo ora non e' raggiungibile.
+//
+// MUTAZIONE: togliere `if (!articleId) throw` da `extractBodyContent` → rosso;
+// togliere la guardia `hasBodyKey` da processArticle/processTopUp → rosso.
+
+test('#393 extractBodyContent si RIFIUTA di lavorare senza articleId', () => {
+  assert.throws(() => batch.extractBodyContent(DUE_ID), /articleId obbligatorio/,
+    'senza id cercherebbe blog.article.undefined.bodyN e tornerebbe stringa vuota senza un fiato');
+  assert.throws(() => batch.extractBodyContent(DUE_ID, ''), /articleId obbligatorio/);
+});
+
+test('#393 hasBodyKey distingue «corpo corto» da «nessun corpo per questo id»', () => {
+  assert.equal(batch.hasBodyKey(DUE_ID, ALPHA), true);
+  assert.equal(batch.hasBodyKey(DUE_ID, 'articolo-che-non-c-e'), false);
+  assert.equal(batch.extractBodyContent(DUE_ID, 'articolo-che-non-c-e'), '',
+    'il corpo vuoto c e ancora: e la guardia a doverlo intercettare, non l assenza di stringa');
+});
+
+test('#393 i due chiamanti si fermano invece di arricchire un id senza corpo', () => {
+  // Il ramo di arricchimento e' asincrono e chiama un modello: qui si legge il
+  // sorgente, che e' l'unico modo di vedere che la guardia sta PRIMA di lui.
+  const src = fs.readFileSync(SCRIPT, 'utf-8');
+  for (const fn of ['async function processArticle', 'async function processTopUp']) {
+    const inizio = src.indexOf(fn);
+    assert.ok(inizio > 0, `${fn} deve esistere`);
+    const corpo = src.slice(inizio, inizio + 2500);
+    const guardia = corpo.indexOf('hasBodyKey(');
+    const arricchimento = corpo.indexOf('enrichBodyForFaq(');
+    assert.ok(guardia > 0, `${fn}: manca la guardia hasBodyKey`);
+    assert.ok(arricchimento > guardia,
+      `${fn}: enrichBodyForFaq viene prima della guardia, quindi un id senza corpo diventa un articolo inventato`);
+  }
+});
+
 // MUTAZIONE: rimettere `fileContent.match(/…/)` (primo match, senza `g`) e
 // ignorare `fileName` in `extractArticleId` → rosso.
 test('#393 extractArticleId decide per NOME, non per posizione', () => {
@@ -194,13 +231,27 @@ test('#394 i file scritti dallo scrittore LEGACY restano leggibili', () => {
   // Lo scrittore legacy escapava solo l'apostrofo: il `\"` di JSON.stringify
   // finiva nel literal con UN backslash solo. E' la forma in cui stanno i 377
   // campi `.faq` misurati sul corpus, e vanno letti o diventano irreparabili.
+  //
+  // Il backslash letterale nella prima risposta NON e' decorativo: senza,
+  // questo fixture lo legge gia' il decoder ESATTO, il fallback legacy non
+  // viene mai raggiunto e il test resta verde anche togliendolo — cioe' non
+  // proverebbe niente sulla meta' che la docstring dichiara indispensabile.
+  // Con `C:\Users\...` il decoder esatto dimezza i backslash e fallisce, e
+  // passa solo il legacy. Le due asserzioni sotto lo verificano esplicitamente.
   const pairs = [
+    { q: 'Come si scrive un percorso Windows?', a: 'Si scrive C:\\Users\\frontaliere, con i backslash.' },
     { q: 'Che cosa dice la "circolare"?', a: 'Dice cosi\', in modo abbastanza lungo da valere.' },
-    { q: 'E la seconda domanda lunga?', a: 'La seconda risposta, lunga abbastanza per valere.' },
   ];
   const legacy = JSON.stringify(pairs).replace(/'/g, "\\'");
   const src = bodyFile(bodyLine(ALPHA, 1, 'Corpo.'), `    'blog.article.${ALPHA}.faq': '${legacy}',`);
   assert.deepEqual(batch.extractFaqFromContent(src, ALPHA), pairs);
+
+  // Il fixture esercita DAVVERO il fallback: il decoder esatto da solo non lo legge.
+  const soloEsatto = (s) => s.replace(/\\([\s\S])/g, (whole, c) => (c === '\\' || c === "'" ? c : whole));
+  assert.throws(() => JSON.parse(soloEsatto(legacy)),
+    'se il decoder esatto legge gia questo fixture, il test non prova il fallback legacy');
+  const soloLegacy = (s) => s.replace(/\\'/g, "'");
+  assert.deepEqual(JSON.parse(soloLegacy(legacy)), pairs, 'e il legacy da solo deve leggerlo');
 });
 
 test('#394 parseFaqLiteral lascia intatti gli escape del JSON sottostante', () => {
@@ -287,6 +338,15 @@ test('#395 insert e replace producono lo stesso literal per la stessa FAQ', (t) 
 // il cui SECONDO argomento e' un template literal con dentro un `${…}`. Un
 // replacer-funzione e uno letterale non matchano; un template interpolato si',
 // ed e' esattamente la forma del difetto.
+//
+// LIMITE DICHIARATO: riconosce la sola forma «template literal interpolato».
+// `.replace(rx, faqLine)` (identificatore nudo) e `.replace(rx, '...' + faqLine)`
+// (concatenazione) sono lo stesso difetto e passerebbero. Sono state lasciate
+// fuori perche' un identificatore come secondo argomento e' anche la forma di
+// un replacer-funzione passato per nome — distinguerli vuole il tipo, non la
+// sintassi — e allargare lo scanner qui produrrebbe falsi rossi su un test che
+// gira in `tests`, dove un rosso falso ferma l'auto-merge di tutte le PR aperte.
+// Il template interpolato e' la forma che il difetto ha avuto due volte su due.
 //
 // MUTAZIONE: lo scanner e' provato QUI SOTTO contro uno snippet costruito, cosi'
 // un rosso sul file vero non e' l'unica prova che sappia vedere qualcosa.
