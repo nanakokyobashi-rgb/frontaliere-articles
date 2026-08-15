@@ -464,8 +464,19 @@ jobs:
       # Il secret esiste gia' in questo repo (CLAUDE_CODE_OAUTH_TOKEN, lo stesso
       # del piano Max usato da pr-review-loop.yml/issue-fix.yml): non c'e' nulla
       # da provisionare, mancava solo il cablaggio.
+      # continue-on-error: true — issue #367. Gli step delle composite action
+      # non supportano continue-on-error (nulla lo assorbe dentro
+      # setup-claude-haiku-fallback/action.yml), quindi va sullo STEP
+      # CHIAMANTE qui. Il fallback Haiku e' opzionale per costruzione (vedi il
+      # commento sopra): un fallimento di rete su `npm install -g
+      # @anthropic-ai/claude-code` non deve abbattere l'intero job — deve solo
+      # lasciare il flag ENABLE_HAIKU_ARTICLE_FALLBACK non alzato, che e' lo
+      # stato "claude-cli/haiku non disponibile" gia' gestito a valle da
+      # ai-models.mjs. "Generate the article" sotto dipende solo da
+      # steps.mode.outputs.dry, non dall'esito di questo step.
       - name: Setup Claude CLI Haiku fallback
         if: steps.mode.outputs.dry != 'true'
+        continue-on-error: true
         uses: ./.github/actions/setup-claude-haiku-fallback
 
       # Dry mode stops here: create-article.mjs has no --dry-run, and its first
