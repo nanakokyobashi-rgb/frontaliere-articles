@@ -660,15 +660,22 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
     assert.deepEqual(scoperti, [], 'letterali dello schema che nessun guard riconosce');
   });
 
-  it('i letterali delegati allo slug guard sono davvero classificati da lui', async () => {
+  it('i letterali delegati allo slug guard sono davvero classificati da lui', async (t) => {
     // Import dinamico: create-article.mjs ha jsdom fra le dipendenze statiche,
     // quindi si carica solo se il modulo e' risolvibile. Se non lo e', il test
     // si dichiara saltato invece di fingere di aver verificato.
+    //
+    // E «si dichiara» vuol dire `t.skip()`, non `return` (issue #382 item 1).
+    // Con il `return` il salto esisteva solo come riga su stderr: il runner
+    // contava il caso come PASSATO — senza node_modules il file chiudeva 108
+    // pass / 0 fail / 0 skipped — e l'unico strato che verifica davvero il
+    // classificatore degli slug spariva dietro un verde pieno. Chi legge il
+    // riassunto (o il gate che lo legge per lui) non aveva modo di accorgersene.
     let inspect;
     try {
       ({ inspectSlugForPromptPlaceholder: inspect } = await import('../scripts/create-article.mjs'));
     } catch (err) {
-      console.error(`  ⏭️  slug guard non caricabile (${err.code || err.message}) — verifica saltata`);
+      t.skip(`slug guard non caricabile: ${err.code || err.message}`);
       return;
     }
     for (const literal of SLUG_OWNED_LITERALS) {
@@ -785,6 +792,97 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     const repair = path.join(ROOT, 'generator', 'scripts', 'repair-prompt-placeholders.mjs');
     assert.ok(fs.existsSync(repair), 'repair-prompt-placeholders.mjs mancante');
     assert.match(fs.readFileSync(repair, 'utf-8'), /from '\.\/lib\/prompt-placeholder-guard\.mjs'/);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// I TRE PRODUTTORI SENZA SLUG GUARD (issue #382 item 4)
+//
+// `create-article.mjs` chiama `inspectSlugForPromptPlaceholder` perche' li' lo
+// slug lo PROPONE IL MODELLO: e' un campo dell'output JSON, e un segnaposto del
+// prompt puo' uscire al suo posto (e' successo, PR #121). Gli altri tre
+// produttori del corpus non lo chiamano, e la misura di #382 lo registra come
+// 0/3. Ma la copertura mancante si misura sul rischio, non sulle chiamate: in
+// questi tre lo slug non passa da nessun modello, e' scritto nel sorgente —
+// due costanti letterali e un template che interpola solo la data ISO. Una
+// guard aggiunta li' non potrebbe mai scattare: sarebbe rumore che invecchia.
+//
+// Quello che invece serve e' un OSSERVATORE della premessa. Questi test non
+// verificano una guard: verificano che lo slug sia ancora un letterale. Il
+// giorno in cui uno di questi tre lo costruisce da un output di modello, la
+// costante letterale sparisce, questo blocco diventa rosso, e chi fa il cambio
+// e' obbligato a decidere consapevolmente se aggiungere lo slug guard.
+// ───────────────────────────────────────────────────────────────────────────
+
+const SCRIPTS = path.join(ROOT, 'generator', 'scripts');
+const leggiScript = (rel) => fs.readFileSync(path.join(SCRIPTS, rel), 'utf-8');
+/** Le righe di CODICE che assegnano `slugs:` — i commenti non contano. */
+const righeSlugs = (src) => src.split('\n').map((r) => r.trim()).filter((r) => r.startsWith('slugs:'));
+/** Un valore di slug ammissibile: minuscole, cifre e trattini, e nessun segnaposto. */
+function asseriscilSlugLetterale(valore, dove) {
+  assert.match(valore, /^[a-z0-9-]+$/, `${dove}: "${valore}" non e' uno slug in forma canonica`);
+  assert.deepEqual(findPromptPlaceholders(valore), [], `${dove}: segnaposto dentro uno slug letterale`);
+}
+
+describe('wiring — i tre produttori senza slug guard: lo slug non viene da un modello', () => {
+  const EVERGREEN = [
+    {
+      produttore: 'generate-events-digest-article.mjs',
+      contenuto: 'lib/events-digest-content.mjs',
+      costante: 'DIGEST_ARTICLE_SLUGS',
+    },
+    {
+      produttore: 'generate-border-wait-ranking-article.mjs',
+      contenuto: 'lib/border-wait-ranking-content.mjs',
+      costante: 'RANKING_ARTICLE_SLUGS',
+    },
+  ];
+
+  for (const { produttore, contenuto, costante } of EVERGREEN) {
+    it(`${produttore}: lo slug e' la costante letterale ${costante}`, () => {
+      const srcProd = leggiScript(produttore);
+      const srcCont = leggiScript(contenuto);
+      assert.ok(srcProd.length > 1000 && srcCont.length > 1000, 'sorgente vuoto o troncato: il test passerebbe a vuoto');
+      // 1. Il produttore prende gli slug SOLO dal builder, in un punto solo.
+      assert.deepEqual(righeSlugs(srcProd), ['slugs: article.slugs,'],
+        'il produttore assegna `slugs` da qualcosa che non e\' l\'articolo costruito dal builder');
+      assert.ok(srcProd.includes(`from './${contenuto}'`), `il produttore non importa piu' ${contenuto}`);
+      // 2. Il builder li prende dalla costante, senza toccarli.
+      assert.ok(srcCont.includes(`slugs: { ...${costante} }`),
+        `${contenuto} non costruisce piu' gli slug copiando ${costante}`);
+      // 3. E la costante e' un letterale: quattro stringhe, nessuna interpolazione.
+      const m = new RegExp(`export const ${costante} = \\{([^}]*)\\};`).exec(srcCont);
+      assert.ok(m, `${costante} non e' piu' un oggetto letterale in ${contenuto}`);
+      assert.ok(!m[1].includes('${'), `${costante} ha un'interpolazione: lo slug non e' piu' un letterale`);
+      const valori = [...m[1].matchAll(/(\w+):\s*'([^']*)'/g)];
+      assert.deepEqual(valori.map((x) => x[1]), ['it', 'en', 'de', 'fr']);
+      for (const [, locale, valore] of valori) asseriscilSlugLetterale(valore, `${costante}.${locale}`);
+    });
+  }
+
+  it('generate-daily-brief-article.mjs: lo slug e\' un template che interpola solo la data ISO', () => {
+    const srcProd = leggiScript('generate-daily-brief-article.mjs');
+    const srcCont = leggiScript('lib/daily-brief-content.mjs');
+    assert.ok(srcProd.length > 1000 && srcCont.length > 1000, 'sorgente vuoto o troncato');
+    // Il Bollettino e' l'unico dei tre con un id DATATO: il suo slug non puo'
+    // essere una costante, ma resta calcolato — e la sola variabile ammessa e'
+    // la data del giorno, che non viene da nessun modello.
+    assert.ok(srcProd.includes("from './lib/daily-brief-content.mjs'"), 'il produttore non importa piu\' il builder');
+    assert.deepEqual(righeSlugs(srcProd), [], 'il produttore ora assegna `slugs` per conto suo: non e\' piu\' il builder a deciderli');
+    const prefisso = /export const DAILY_BRIEF_ID_PREFIX = '([a-z0-9-]+)';/.exec(srcCont);
+    assert.ok(prefisso, 'DAILY_BRIEF_ID_PREFIX non e\' piu\' una stringa letterale');
+    const corpo = /export function dailyBriefSlugs\(dateIso\) \{\n\s*return \{([\s\S]*?)\n\s*\};/.exec(srcCont);
+    assert.ok(corpo, 'dailyBriefSlugs non ritorna piu\' un oggetto letterale');
+    const interpolazioni = [...new Set([...corpo[1].matchAll(/\$\{([^}]*)\}/g)].map((x) => x[1].trim()))];
+    assert.deepEqual(interpolazioni, ['dateIso'],
+      `dailyBriefSlugs interpola ${JSON.stringify(interpolazioni)}: qualcosa oltre alla data entra nello slug`);
+    const voci = [...corpo[1].matchAll(/(\w+):\s*(?:`([^`]*)`|dailyBriefArticleId\(dateIso\))/g)];
+    assert.deepEqual(voci.map((x) => x[0].split(':')[0]), ['it', 'en', 'de', 'fr']);
+    for (const [, locale, template] of voci) {
+      if (!template) continue; // `it` passa da dailyBriefArticleId, gia' coperto dal prefisso
+      asseriscilSlugLetterale(template.replace('${dateIso}', '2026-01-02'), `dailyBriefSlugs.${locale}`);
+    }
+    asseriscilSlugLetterale(`${prefisso[1]}-2026-01-02`.replace('--', '-'), 'DAILY_BRIEF_ID_PREFIX');
   });
 });
 
