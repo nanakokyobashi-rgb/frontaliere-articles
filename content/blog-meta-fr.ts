@@ -9968,6 +9968,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.storia-sindacale-ticino-ocst.title': 'OCST : plus de cent ans d\'histoire syndicale au Tessin',
     'blog.article.storia-sindacale-ticino-ocst.excerpt': 'Des origines agricoles à la naissance de l\'OCST en 1919 : retraçons les étapes fondamentales du syndicalisme social-chrétien dans le canton du Tessin.',
     'blog.article.storia-sindacale-ticino-ocst.imageAlt': 'Vue historique de Bellinzone, siège de la fondation de l\'OCST.',
+    'blog.article.statistiche-frontalieri-ticino-2026-q2.title': 'Frontaliers Tessin 2026-Q2 : en croissance (+505 unités)',
+    'blog.article.statistiche-frontalieri-ticino-2026-q2.excerpt': 'Le nombre de frontaliers au Tessin a augmenté de 505 unités au cours du trimestre 2026-Q2',
+    'blog.article.statistiche-frontalieri-ticino-2026-q2.imageAlt': 'Le quartier de Paradiso à Lugano',
+    'blog.article.pil-svizzera-crescita-secondo-trimestre.title': 'Le PIB suisse en forte reprise au deuxième trimestre 2026',
+    'blog.article.pil-svizzera-crescita-secondo-trimestre.excerpt': 'Le produit intérieur brut de la Suisse augmente de 1,5% entre avril et juin, tiré par la chimie et la pharmacie au-delà des estimations.',
+    'blog.article.pil-svizzera-crescita-secondo-trimestre.imageAlt': 'Statistiques économiques suisses et PIB',
 };
 
 export default blogMetaFr;

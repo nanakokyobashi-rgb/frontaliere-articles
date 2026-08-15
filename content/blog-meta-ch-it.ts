@@ -2713,6 +2713,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.title': 'avs e prestazioni complementari canton Lucerna cassa di compensazione',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.excerpt': 'Il primo pilastro nel Cantone di Lucerna: cassa di compensazione cantonale, calcolo della rendita AVS, lacune contributive e prestazioni complementari a copertura del minimo vitale.',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.imageAlt': 'Una vista panoramica del lago di Lugano, con le montagne circostanti',
+    'blog.article.aprire-un-attivita-canton-lucerna.title': 'Aprire un\'attività a Lucerna: scelta della forma giuridica e obblighi',
+    'blog.article.aprire-un-attivita-canton-lucerna.excerpt': 'Scegliere la forma giuridica appropriata, iscriversi al registro di commercio, determinare il capitale minimo, pagare le tasse di iscrizione e adempiere gli obblighi assicurativi sono solo alcuni dei passaggi necessari per aprire un\'attività nel Cantone di Lucerna.',
+    'blog.article.aprire-un-attivita-canton-lucerna.imageAlt': 'Vista panoramica di Lucerna, Svizzera',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.title': 'Patente di guida a Lucerna: cosa fare e sapere',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.excerpt': 'La conversione della patente di guida nel Cantone di Lucerna: requisiti, procedure e tempistiche.',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.imageAlt': 'Vista panoramica del Lago di Lucerna in Svizzera, con un focus sull\'infrastruttura e i sistemi di trasporto del Cantone.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.title': 'Abbonamenti trasporti pubblici Canton Lucerna zone e tariffe',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.excerpt': 'La VBL offre diversi tipi di abbonamenti, tra cui il abbonamento mensile e annuale, per i residenti e gli studenti.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.imageAlt': 'Immagine di un trasporto pubblico in Canton Lucerna, con persone che usano autobus e treni',
 };
 
 export default blogMetaChIt;

@@ -68126,6 +68126,84 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-statistiche-frontalieri-ticino-2026-q2': {
+    title: 'Frontalieri Ticino 2026-Q2: in crescita (+505 unità)',
+    description: 'Il numero di frontalieri in Ticino è aumentato di 505 unità nel trimestre 2026-Q2. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, 2026-q2, crescita, unità, numero',
+    ogTitle: 'Frontalieri Ticino 2026-Q2: in crescita (+505 unità)',
+    ogDescription: 'Il numero di frontalieri in Ticino è aumentato di 505 unità nel trimestre 2026-Q2',
+    canonicalPath: '/articoli-frontaliere/statistiche-frontalieri-ticino-2026-q2',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri Ticino 2026-Q2: in crescita (+505 unità)",
+      "description": "Il numero di frontalieri in Ticino è aumentato di 505 unità nel trimestre 2026-Q2. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/statistiche-frontalieri-ticino-2026-q2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il quartiere di Paradiso a Lugano"
+      },
+      "datePublished": "2026-08-15T19:42:20+00:00",
+      "dateModified": "2026-08-15T19:42:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/statistiche-frontalieri-ticino-2026-q2/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-pil-svizzera-crescita-secondo-trimestre': {
+    title: 'PIL Svizzera in forte ripresa nel secondo trimestre 2026',
+    description: 'Il PIL della Svizzera cresce dell’1,5% nel secondo trimestre trainato da chimica e farmaceutica. Tutti i dati ufficiali SECO. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, forte, ripresa, secondo, trimestre',
+    ogTitle: 'PIL Svizzera in forte ripresa nel secondo trimestre',
+    ogDescription: 'Il prodotto interno lordo svizzero registra un incremento dell’1,5% tra aprile e giugno, superando le previsioni degli economisti grazie a chimica e farmaceutica.',
+    canonicalPath: '/articoli-frontaliere/pil-svizzera-crescita-secondo-trimestre',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "PIL Svizzera in forte ripresa nel secondo trimestre 2026",
+      "description": "Il PIL della Svizzera cresce dell’1,5% nel secondo trimestre trainato da chimica e farmaceutica. Tutti i dati ufficiali SECO. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pil-svizzera-crescita-secondo-trimestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Statistiche economiche della Svizzera e PIL"
+      },
+      "datePublished": "2026-08-15T20:32:44+00:00",
+      "dateModified": "2026-08-15T20:32:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pil-svizzera-crescita-secondo-trimestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

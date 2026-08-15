@@ -2713,6 +2713,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.title': 'avs und Ergänzungsleistungen Kanton Luzern Ausgleichskasse',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.excerpt': 'Die erste Säule im Kanton Luzern: kantonale Ausgleichskasse, AHV-Rentenberechnung, Beitragslücken und Ergänzungsleistungen zur Deckung des Existenzminimums.',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.imageAlt': 'Eine Panoramaansicht des Luganer Sees, mit den umliegenden Bergen',
+    'blog.article.aprire-un-attivita-canton-lucerna.title': 'Geschäft in Luzern eröffnen: Wahl der Rechtsform und Pflichten',
+    'blog.article.aprire-un-attivita-canton-lucerna.excerpt': 'Die Wahl der geeigneten Rechtsform, die Eintragung ins Handelsregister, die Festlegung des Mindestkapitals, die Zahlung der Einschreibegebühren und die Erfüllung der Versicherungspflichten sind nur einige der Schritte, die für die Gründung eines Unternehmens im Kanton Luzern erforderlich sind.',
+    'blog.article.aprire-un-attivita-canton-lucerna.imageAlt': 'Panoramablick auf Luzern, Schweiz',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.title': 'Führerschein in Luzern: was zu tun und zu wissen ist',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.excerpt': 'Die Umstellung des Führerscheins im Kanton Luzern: Voraussetzungen, Verfahren und Fristen.',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.imageAlt': 'Panoramische Ansicht des Lago di Lucerna in der Schweiz, mit einem Fokus auf die Infrastruktur und die Verkehrssysteme des Kantons.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.title': 'ÖV-Abos Kanton Luzern Zonen und Tarife',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.excerpt': 'Die VBL bietet verschiedene Arten von Abonnements, einschließlich Monats- und Jahresabonnements, für Bewohner und Studenten an.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.imageAlt': 'Bild eines öffentlichen Verkehrsmittels im Kanton Luzern, mit Menschen, die Busse und Züge benutzen',
 };
 
 export default blogMetaChDe;

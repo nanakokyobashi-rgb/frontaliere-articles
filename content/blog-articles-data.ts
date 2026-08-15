@@ -29874,6 +29874,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'statistiche-frontalieri-ticino-2026-q2',
+ category: 'fiscale',
+ date: '2026-08-15T19:42:20.602Z',
+ image: '/images/blog/statistiche-frontalieri-ticino-2026-q2.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'pil-svizzera-crescita-secondo-trimestre',
+ category: 'pratico',
+ date: '2026-08-15T20:32:43.964Z',
+ image: '/images/blog/pil-svizzera-crescita-secondo-trimestre.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

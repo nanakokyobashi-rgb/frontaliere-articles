@@ -2713,6 +2713,15 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.title': 'avs and complementary services canton Lucerne compensation fund',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.excerpt': 'The first pillar in the Canton of Lucerne: cantonal compensation fund, calculation of the AVS pension, contribution gaps and complementary benefits to cover the minimum living wage.',
     'blog.article.avs-e-prestazioni-complementari-canton-lucerne.imageAlt': 'A panoramic view of Lake Lugano, with surrounding mountains',
+    'blog.article.aprire-un-attivita-canton-lucerna.title': 'Opening a business in Lucerne: choice of legal form and obligations',
+    'blog.article.aprire-un-attivita-canton-lucerna.excerpt': 'Choosing the appropriate legal form, registering with the trade register, determining the minimum capital, paying registration fees and fulfilling insurance obligations are just some of the steps required to open a business in the Canton of Lucerne.',
+    'blog.article.aprire-un-attivita-canton-lucerna.imageAlt': 'Scenic view of Lucerna, Switzerland',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.title': 'Driver\'s license in Lucerne: what to do and know',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.excerpt': 'The conversion of the driving licence in the Canton of Lucerne: requirements, procedures and timelines.',
+    'blog.article.patente-guida-lucerna-conversione-ed-esami.imageAlt': 'Scenic view of Lake Lucerne in Switzerland, with a focus on the canton\'s infrastructure and transportation systems.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.title': 'Public transport passes Canton Lucerne zones and fares',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.excerpt': 'The VBL offers different types of subscriptions, including monthly and annual subscription, for residents and students.',
+    'blog.article.abbonamenti-trasporti-pubblici-canton-lucerna.imageAlt': 'Image of public transportation in Canton Lucerne, with people using buses and trains',
 };
 
 export default blogMetaChEn;
