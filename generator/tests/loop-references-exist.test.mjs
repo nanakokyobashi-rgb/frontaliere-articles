@@ -276,6 +276,81 @@ const DECLARED_ABSENT = {
     kind: 'site-only',
     reason: 'Stessa mappa categoria → script del sito. Descrittiva.',
   },
+  'scripts/lib/secrets-scope-detect.mjs :: scripts/lib/article-factuality-gates.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/lib/article-factuality-gates.mjs',
+    reason:
+      'Arrivata con la riconciliazione `identical` del 2026-08-15 (escalation #5838 del sito). ' +
+      'La frase e\' l\'esempio della VALVOLA di `detectRemoteConfigScoped`: la issue #5696 nomina ' +
+      'Remote Config ma chiede una allowlist in questo file, cioe\' un fix di codice vero, quindi ' +
+      'resta promossa invece di essere parcheggiata. Il file esiste anche qui, sotto ' +
+      '`generator/scripts/lib/` — stessa dislocazione di `load-rc-env.mjs` qui sopra.',
+  },
+  'scripts/lib/pr-body-sections-check.mjs :: scripts/ci/followup-has-candidates.mjs': {
+    kind: 'site-only',
+    reason:
+      'Arrivata con la riconciliazione `identical` del 2026-08-15. Il docblock di `STATE_PATTERNS` ' +
+      'nomina il consumatore che importa la tassonomia degli stati per non riscriverla: sul sito e\' ' +
+      'quello, qui il ruolo lo copre `scripts/ci/followup-drainer.mjs`. Descrittiva — nessun ' +
+      'chiamante di qui dipende dalla sua esistenza, e `scripts/ci/pr-body-contract.mjs` legge solo ' +
+      '`violations`, non le nuove `warnings`.',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/repair-blog-key-marker-corruption.mjs': {
+    kind: 'site-only',
+    reason:
+      'Il docblock CITA il finding del reviewer di #358 alla lettera, ed e\' il caso d\'esempio ' +
+      'del modulo. Nota misurata, perche\' ribalta il finding: i due file ESISTONO sul sito ' +
+      '(`raw.githubusercontent`, HTTP 200 il 2026-08-15) — il reviewer aveva cercato solo qui, e il ' +
+      'body di #358 diceva infatti «il SITO ha una famiglia di gemelli plausibili». Il difetto vero ' +
+      'era la citazione non qualificata, non un path inventato: e\' la ragione per cui il modulo ' +
+      'avvisa invece di bloccare. Descrittiva: niente qui dipende dalla loro esistenza.',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/repair-unicode-escape-titles.mjs': {
+    kind: 'site-only',
+    reason: 'Il secondo dei due path del finding di #358. Stessa nota della voce qui sopra.',
+  },
+  // Le quattro qui sotto sono l'ESEMPIO di cio' che il modulo chiama `DISLOCATIONS`:
+  // il docblock le scrive col nome che hanno SUL SITO proprio per mostrare la
+  // classe che risolve. Che siano `renamed-here` non e' un dettaglio — e' la
+  // dimostrazione che la regola del modulo e la tassonomia di questo registro
+  // stanno dicendo la stessa cosa.
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/create-article.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/create-article.mjs',
+    reason:
+      'Citato nella misura sulle 45 PR mergiate come la dislocazione piu' + "'" +
+      ' frequente (5 PR su 45). Il file esiste qui sotto `generator/scripts/`, ed e\' esattamente ' +
+      'cio\' che `DISLOCATIONS` risolve.',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/load-rc-env.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/load-rc-env.mjs',
+    reason:
+      'Citato come il precedente gia\' dichiarato a mano in questo stesso registro ' +
+      '(`secrets-scope-detect.mjs :: scripts/load-rc-env.mjs`), a cui la regola automatica del ' +
+      'modulo si ispira.',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/lib/ai-models.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/lib/ai-models.mjs',
+    reason: 'Seconda dislocazione per frequenza nella misura (4 PR su 45).',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: scripts/lib/prompt-placeholder-guard.mjs': {
+    kind: 'renamed-here',
+    insteadOf: 'generator/scripts/lib/prompt-placeholder-guard.mjs',
+    reason: 'Terza dislocazione nella misura (1 PR su 45).',
+  },
+  'scripts/lib/pr-body-filepath-check.mjs :: generator/tests/unescape-ts-string.test.mjs': {
+    kind: 'site-only',
+    reason:
+      'L\'unica delle 8 segnalazioni residue che non esiste NEMMENO sul sito, e per questo e\' ' +
+      'citata: il body di #305 la nomina per dichiarare che quel test non lo scrive ' +
+      '(`blocked: il gemello vitest del sito e\' gia\' l\'osservatore`). E\' la prova che perfino ' +
+      'l\'ultimo candidato a «path inventato» era una scelta dichiarata — cioe\' che i path ' +
+      'inventati, nella finestra misurata, sono zero. Il gemello nominato la\' ' +
+      '(`tests/unescape-ts-string.test.ts`) sul sito c\'e\'; questo `.mjs` non esiste da nessuna ' +
+      'parte, per scelta di #305. Descrittiva.',
+  },
   'scripts/ci/loop-drift-check.mjs :: scripts/lib/control-char-publish-gate.mjs': {
     kind: 'site-only',
     reason:
