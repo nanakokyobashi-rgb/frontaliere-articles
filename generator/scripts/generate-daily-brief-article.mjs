@@ -133,6 +133,15 @@ async function main() {
     return; // exit 0 — a day without data must not break the cron
   }
 
+  // Niente `inspectSlugForPromptPlaceholder` su `data.slugs`, e non e' una
+  // dimenticanza (issue #382 item 4): `buildData` li prende da
+  // `dailyBriefSlugs(dateIso)`, quattro template di sole stringhe letterali con
+  // dentro la sola data ISO del giorno. Lo slug guard esiste perche' in
+  // `create-article.mjs` lo slug lo propone il MODELLO, e un segnaposto del
+  // prompt puo' finirci dentro; qui non c'e' nessun modello nella catena —
+  // `wiring — i tre produttori senza slug guard` in
+  // `generator/tests/prompt-placeholder-guard.test.mjs` lo verifica, e diventa
+  // rosso il giorno in cui uno arriva.
   const data = buildData(brief);
   const exists = checkArticleIdExists(data.id);
   const h = data._headline;

@@ -939,6 +939,84 @@ test('FAIL-CLOSED — escapata: un file con la sola spelling escapata NON testim
   assert.ok(testo.includes(E(0x16)));
 });
 
+// ---------------------------------------------------------------------------
+// il tetto dei giri (issue #366)
+// ---------------------------------------------------------------------------
+//
+// `riparaEscapate` applica UNA riparazione per giro e si ferma a
+// `TESTIMONE_GIRI_MAX` (4). Un file con piu' di quattro occorrenze risolvibili
+// usciva quindi dal ciclo con altre risolvibili ancora dentro — e quelle non
+// finivano ne' fra le riparate ne' fra le lasciate: sul disco restavano, nel
+// rapporto sparivano, e il codice d'uscita diceva 0. Il commento di
+// `valutaEscapate` promette il contrario («un elenco di residui che si accorcia
+// perche' il ciclo si e' fermato sarebbe la peggiore delle uscite»), ed e'
+// quella promessa che questi due test tengono in piedi.
+
+/** Sei frasi distinte: l'ancora di 16 caratteri finisce col numero della frase, quindi nessuna e' ambigua. */
+const PRIMA_N = (k) => `frase numero ${k} dello stesso documento, caso ${k}: `;
+const DOPO_N = (k) => ` una faccenda che il lettore numero ${k} conosce bene.`;
+const QUANTE_N = 6;
+const NUMERI = Array.from({ length: QUANTE_N }, (_, i) => i + 1);
+const SPORCO_N = NUMERI.map((k) => `${PRIMA_N(k)}${E(0x16)}5${DOPO_N(k)}`).join('\n').concat('\n');
+const TESTIMONE_N = NUMERI.map((k) => `${PRIMA_N(k)}è${DOPO_N(k)}`).join('\n').concat('\n');
+
+test('escapata: oltre il tetto dei giri nessuna occorrenza risolvibile sparisce dal rapporto', () => {
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': SPORCO_N,
+    'blog-body/de/testimone.ts': TESTIMONE_N,
+  });
+  try {
+    const { codice, rapporto } = esegui(radice, ['--write']);
+    const e = rapporto.escapate;
+    assert.equal(e.occorrenze, QUANTE_N, 'la fixture deve avere piu\' occorrenze del tetto di 4 giri');
+    assert.equal(e.riparate, 4, 'il tetto resta quello: quattro riparazioni per file e non una di piu\'');
+    // L'asserzione che porta la issue: cio' che non e' stato riparato dev'essere
+    // DICHIARATO. Con `if (!scelta)` che scartava le risolvibili successive,
+    // qui `lasciate` era 0 e due occorrenze sparivano senza traccia.
+    assert.equal(
+      e.riparate + e.lasciate, e.occorrenze,
+      `${e.occorrenze - e.riparate - e.lasciate} occorrenze escapate spariscono: ne' riparate ne' lasciate`,
+    );
+    assert.equal(e.lasciate, 2);
+    assert.equal(e.perFile[0].occorrenze, QUANTE_N);
+    assert.equal(e.perFile[0].riparate + e.perFile[0].lasciate, QUANTE_N, 'anche il per-file deve tornare');
+    for (const x of e.elenco) {
+      assert.match(x.motivo, /tetto di 4 riparazioni per file/);
+      assert.equal(x.spelling, E(0x16), 'la spelling dev\'essere quella, non il tratto con la coda');
+    }
+    assert.deepEqual(e.elenco.map((x) => x.offset), [...e.elenco.map((x) => x.offset)].sort((a, b) => a - b),
+      'l\'elenco resta in ordine di offset');
+    assert.equal(codice, 2, 'un\'occorrenza risolvibile e non applicata e\' un difetto: deve tingere l\'uscita');
+    const testo = fs.readFileSync(path.join(radice, 'content', 'blog-body', 'it', 'sporco.ts'), 'utf8');
+    assert.equal(testo.split(E(0x16)).length - 1, 2, 'le due non riparate sono ancora sul disco, con la loro ancora');
+    assert.ok(senzaByteC0(testo));
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('escapata: il motivo dice «rilanciare lo script», e un secondo giro ripara davvero il resto', () => {
+  // Il tetto e' una difesa contro il loop, non un limite del corpus: quello che
+  // avanza dev'essere riparabile al giro dopo. Se cosi' non fosse, dichiararlo
+  // in `lasciate` sarebbe solo un modo piu' onesto di perderlo.
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': SPORCO_N,
+    'blog-body/de/testimone.ts': TESTIMONE_N,
+  });
+  try {
+    esegui(radice, ['--write']);
+    const secondo = esegui(radice, ['--write']);
+    assert.equal(secondo.rapporto.escapate.occorrenze, 2, 'il primo giro ne ha riparate 4');
+    assert.equal(secondo.rapporto.escapate.riparate, 2);
+    assert.equal(secondo.rapporto.escapate.lasciate, 0);
+    assert.equal(secondo.codice, 0);
+    const testo = fs.readFileSync(path.join(radice, 'content', 'blog-body', 'it', 'sporco.ts'), 'utf8');
+    assert.equal(testo, TESTIMONE_N, 'il file finisce identico al testimone');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
 test('il lessico non impara le parole dei file con la sola spelling escapata', () => {
   // Misurato sul corpus reale: `TOKEN_G` non contiene il backslash, quindi
   // `imparzialit\\u0000a1` si spezza in `imparzialit` + `u0000a1` e il lessico

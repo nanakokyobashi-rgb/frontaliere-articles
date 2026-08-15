@@ -62,6 +62,14 @@ export function buildData(todayIso) {
   return {
     id: article.id,
     ...STATIC_META,
+    // Niente `inspectSlugForPromptPlaceholder` qui, e non e' una dimenticanza
+    // (issue #382 item 4): `article.slugs` e' `DIGEST_ARTICLE_SLUGS`, quattro
+    // stringhe letterali nel sorgente di `lib/events-digest-content.mjs`. Lo
+    // slug guard esiste perche' in `create-article.mjs` lo slug lo propone il
+    // MODELLO, e un segnaposto del prompt puo' finirci dentro; qui non c'e'
+    // nessun modello nella catena — `wiring — i tre produttori senza slug
+    // guard` in `generator/tests/prompt-placeholder-guard.test.mjs` lo
+    // verifica, e diventa rosso il giorno in cui uno arriva.
     slugs: article.slugs,
     imageAlt: article.imageAlt,
     content: article.content,

@@ -560,11 +560,21 @@ function decodificaEscapate(testo) {
  * giro, tetto dei giri compreso.  Un elenco di residui che si accorcia perche'
  * il ciclo si e' fermato sarebbe la peggiore delle uscite: dichiarerebbe pulito
  * cio' che nessuno ha guardato.
+ *
+ * Per la stessa ragione le risolvibili che NON vengono scelte in questa passata
+ * escono in `rinviate` (issue #366).  Se ne applica una per giro, quindi le
+ * altre normalmente tornano al giro dopo — ma «normalmente» non e' «sempre»: al
+ * tetto di `TESTIMONE_GIRI_MAX` il giro dopo non c'e', e finche' questa
+ * funzione ritornava solo `{lasciate, scelta}` quelle occorrenze non stavano
+ * in nessuno dei due elenchi.  Restavano sul disco, non contate e senza toccare
+ * il codice d'uscita: sparite in silenzio, che e' esattamente cio' che il
+ * commento qui sopra promette non possa succedere.
  */
 function valutaEscapate(mio, testo, testimoni, cache) {
   const d = decodificaEscapate(testo);
-  if (!d) return { lasciate: [], scelta: null };
+  if (!d) return { lasciate: [], scelta: null, rinviate: [] };
   const lasciate = [];
+  const rinviate = [];
   let scelta = null;
   for (let i = 0; i < d.daEscape.length; i += 1) {
     if (!d.daEscape[i]) continue;
@@ -593,20 +603,21 @@ function valutaEscapate(mio, testo, testimoni, cache) {
       lasciate.push({ offset: a, spelling, motivo: 'testimone: la coda esce dal file' });
       continue;
     }
-    if (!scelta) {
-      scelta = {
-        offset: a,
-        fine: d.fineIn[ultimo],
-        prima: testo.slice(a, d.fineIn[ultimo]),
-        dopo: esito.carattere,
-        canale: 'escapata (testimone unanime cross-locale)',
-        freq: esito.testimoni.length,
-        testimoni: esito.testimoni.slice(0, 3),
-        locali: locali.filter(Boolean),
-      };
-    }
+    const risolvibile = {
+      offset: a,
+      spelling,
+      fine: d.fineIn[ultimo],
+      prima: testo.slice(a, d.fineIn[ultimo]),
+      dopo: esito.carattere,
+      canale: 'escapata (testimone unanime cross-locale)',
+      freq: esito.testimoni.length,
+      testimoni: esito.testimoni.slice(0, 3),
+      locali: locali.filter(Boolean),
+    };
+    if (!scelta) scelta = risolvibile;
+    else rinviate.push(risolvibile);
   }
-  return { lasciate, scelta };
+  return { lasciate, scelta, rinviate };
 }
 
 /**
@@ -615,6 +626,14 @@ function valutaEscapate(mio, testo, testimoni, cache) {
  * sostituite, piu' l'elenco di cio' che si e' lasciato e perche'.  Si applica
  * una riparazione per giro perche' ognuna sposta tutti gli offset, e perche'
  * una riparazione puo' ripulire l'ancora della successiva.
+ *
+ * IL TETTO DEI GIRI NON E' UN PERMESSO A FAR SPARIRE NIENTE (issue #366).  Un
+ * file con piu' di `TESTIMONE_GIRI_MAX` occorrenze risolvibili esce dal ciclo
+ * con `scelta` ancora piena e, dietro di lei, le `rinviate` di quell'ultima
+ * passata: sono ancora sul disco, con la loro spelling, e vanno dichiarate.
+ * Finiscono in `lasciate` col motivo che dice perche' — cosi' contano nel
+ * rapporto e nel codice d'uscita, come ogni altra occorrenza non riparata, e un
+ * secondo giro dello script le ripara davvero invece di ignorarle.
  */
 function riparaEscapate(percorso, testo, testimoni, cache) {
   const riparazioni = [];
@@ -627,7 +646,15 @@ function riparaEscapate(percorso, testo, testimoni, cache) {
     riparazioni.push(s);
     esito = valutaEscapate(mio, corrente, testimoni, cache);
   }
-  return { testo: corrente, riparazioni, lasciate: esito.lasciate };
+  const lasciate = [...esito.lasciate];
+  if (esito.scelta) {
+    const motivo = `testimone: risolvibile, non applicata — tetto di ${TESTIMONE_GIRI_MAX} riparazioni per file raggiunto (rilanciare lo script)`;
+    for (const r of [esito.scelta, ...esito.rinviate]) {
+      lasciate.push({ offset: r.offset, spelling: r.spelling, motivo });
+    }
+  }
+  lasciate.sort((a, b) => a.offset - b.offset);
+  return { testo: corrente, riparazioni, lasciate };
 }
 
 // ---------------------------------------------------------------------------
