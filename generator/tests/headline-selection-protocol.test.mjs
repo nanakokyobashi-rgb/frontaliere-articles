@@ -301,7 +301,6 @@ test('INFRA_ERROR è una causa di rigetto DISTINTA, non un riuso di UNPARSEABLE'
   // risposta. Riusare `UNPARSEABLE` avrebbe reso i due casi indistinguibili
   // proprio in `RUN_REPORT.selectionUsage.rejectionReasons`, cioe' nell'unico
   // posto da cui si vede se un prompt ha smesso di funzionare o se e' la quota.
-  assert.equal(typeof SELECTION_REJECTION.INFRA_ERROR, 'string');
   const values = Object.values(SELECTION_REJECTION);
   assert.equal(new Set(values).size, values.length, 'due cause di rigetto condividono lo stesso valore');
   // E resta una causa che il PARSER non può produrre: nasce solo dal `catch`.
@@ -329,10 +328,12 @@ test('INFRA_ERROR è una causa di rigetto DISTINTA, non un riuso di UNPARSEABLE'
  * della fix il loop era sintatticamente corretto, gli mancava solo il `catch`.
  */
 function buildRequestHeadlineSelection({ callLLM, RUN_REPORT }) {
+  const retrySrc = cutDecl('async function requestHeadlineSelection(');
+  assert.ok(retrySrc.length > 600, 'estrazione di requestHeadlineSelection sospettosamente corta');
   const factory = new Function(
     '__d',
     'const { callLLM, GH_MODEL_LIGHT, parseHeadlineSelection, selectionCorrectionNote, SELECTION_REJECTION, RUN_REPORT } = __d;\n'
-    + `${cutDecl('async function requestHeadlineSelection(')}\n`
+    + `${retrySrc}\n`
     + 'return requestHeadlineSelection;',
   );
   return factory({
@@ -346,6 +347,16 @@ function buildRequestHeadlineSelection({ callLLM, RUN_REPORT }) {
 }
 
 const freshRunReport = () => ({ selectionUsage: { responsesRejected: 0, rejectionReasons: {} } });
+
+/** L'errore che `callLLM` lancia quando l'INTERA cascata di modelli ha fallito. */
+function rosterExhausted({ transient }) {
+  const err = new Error('All models exhausted');
+  err.code = 'ALL_MODELS_EXHAUSTED';
+  err.transientExhaustion = transient;
+  err.inputCapReport = null;
+  err.exhaustionBreakdown = transient ? { transient: 53, persistent: 3 } : { transient: 3, persistent: 53 };
+  return err;
+}
 
 /** Zittisce il log del loop e restituisce le righe emesse. */
 async function captureStderr(fn) {
@@ -383,8 +394,16 @@ test('un errore di callLLM consuma UN tentativo: il successivo può ancora riusc
   assert.equal(r.index, 1);
   assert.equal(r.attempts, 2, "l'errore deve contare come tentativo consumato");
   assert.equal(prompts.length, 2, 'il loop non ha ritentato dopo l’errore');
-  assert.notEqual(prompts[1], prompts[0], 'il ritentativo non porta il promemoria di correzione');
-  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 1);
+  assert.equal(
+    prompts[1],
+    prompts[0],
+    'dopo un errore infrastrutturale il ritentativo NON deve portare il promemoria di correzione: non c’è stata nessuna risposta da correggere, e la nota direbbe al modello che ha sbagliato',
+  );
+  assert.equal(
+    RUN_REPORT.selectionUsage.responsesRejected,
+    0,
+    '`responsesRejected` conta le RISPOSTE rigettate: un errore non è una risposta, e sommarlo lì rende un provider a singhiozzo indistinguibile da un prompt che si degrada',
+  );
   assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], 1);
   assert.ok(
     lines.some((l) => /429 rate limit exceeded/.test(l) && /Batch 1/.test(l)),
@@ -407,8 +426,42 @@ test('callLLM che fallisce sempre: rigetto pulito a tentativi esauriti, mai un�
   assert.equal(r.attempts, 3);
   assert.equal(calls, 3, 'il tetto ai tentativi non vale per gli errori infrastrutturali');
   assert.equal(r.index, undefined, 'un fallimento infrastrutturale non deve portare una posizione');
-  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 3);
+  assert.equal(RUN_REPORT.selectionUsage.responsesRejected, 0);
   assert.equal(RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR], 3);
+});
+
+test('un ALL_MODELS_EXHAUSTED NON viene assorbito: risale intatto con i suoi campi di disposizione', async () => {
+  // È il contrappeso al `catch`, e l'adattamento che questo file ha in più
+  // rispetto al gemello del sito. `callLLM` lancia `ALL_MODELS_EXHAUSTED` solo
+  // quando l'INTERA cascata ha fallito, e ci appende i campi su cui
+  // `main().catch` decide NELL'ORDINE fra EXIT_ROSTER_CANNOT_SERVE_PROMPT, un
+  // differimento e un `exit 1`. Assorbirlo qui lo declasserebbe a
+  // `qualityReject` — «nessun articolo per una ragione legittima», run VERDE —
+  // proprio nel caso persistente che deve uscire ROSSO: è l'invariante di
+  // `roster-exhaustion-red.test.mjs`, bucata da questo call site se il `catch`
+  // non ha la sua uscita.
+  for (const transient of [false, true]) {
+    const RUN_REPORT = freshRunReport();
+    let calls = 0;
+    const callLLM = async () => { calls += 1; throw rosterExhausted({ transient }); };
+    const requestHeadlineSelection = buildRequestHeadlineSelection({ callLLM, RUN_REPORT });
+    const thrown = await captureStderr(
+      () => requestHeadlineSelection('PROMPT-BASE', 2, 'Batch 1', 3).then(
+        (v) => ({ resolved: v }),
+        (e) => ({ err: e }),
+      ),
+    );
+    const { err, resolved } = thrown.value;
+    assert.ok(err, `transient=${transient}: il roster a terra è stato declassato a rigetto (${JSON.stringify(resolved)})`);
+    assert.equal(err.code, 'ALL_MODELS_EXHAUSTED', 'l’errore non risale con il suo codice');
+    assert.equal(err.transientExhaustion, transient, 'il campo su cui si decide fra differire e fallire è stato perso');
+    assert.equal(calls, 1, 'ritentare 101 modelli già falliti brucia il budget del job senza poter riuscire');
+    assert.equal(
+      RUN_REPORT.selectionUsage.rejectionReasons[SELECTION_REJECTION.INFRA_ERROR],
+      undefined,
+      'un roster a terra non è un rigetto della selezione e non va contato come tale',
+    );
+  }
 });
 
 test('un errore di callLLM NON viene mai scambiato per una risposta rigettata', async () => {
