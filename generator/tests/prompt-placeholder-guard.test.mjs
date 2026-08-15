@@ -675,7 +675,12 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
     try {
       ({ inspectSlugForPromptPlaceholder: inspect } = await import('../scripts/create-article.mjs'));
     } catch (err) {
-      t.skip(`slug guard non caricabile: ${err.code || err.message}`);
+      // Solo la dipendenza mancante (jsdom assente nei gate dependency-free) e'
+      // uno skip legittimo: questo import e' l'UNICO punto della suite che
+      // carica create-article.mjs, quindi un SyntaxError o qualunque altro
+      // errore di caricamento deve restare un FAIL, non uno skip silenzioso.
+      if (err.code !== 'ERR_MODULE_NOT_FOUND') throw err;
+      t.skip(`slug guard non caricabile: ${err.code}`);
       return;
     }
     for (const literal of SLUG_OWNED_LITERALS) {
@@ -847,9 +852,12 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       assert.deepEqual(righeSlugs(srcProd), ['slugs: article.slugs,'],
         'il produttore assegna `slugs` da qualcosa che non e\' l\'articolo costruito dal builder');
       assert.ok(srcProd.includes(`from './${contenuto}'`), `il produttore non importa piu' ${contenuto}`);
-      // 2. Il builder li prende dalla costante, senza toccarli.
-      assert.ok(srcCont.includes(`slugs: { ...${costante} }`),
-        `${contenuto} non costruisce piu' gli slug copiando ${costante}`);
+      // 2. Il builder li prende dalla costante, senza toccarli — e quello e'
+      //    l'UNICO punto di assegnazione: un `includes` di sola presenza
+      //    lascerebbe passare un secondo `slugs:` che mischia un campo di
+      //    modello accanto alla costante.
+      assert.deepEqual(righeSlugs(srcCont), [`slugs: { ...${costante} },`],
+        `${contenuto} non assegna piu' gli slug SOLO copiando ${costante}`);
       // 3. E la costante e' un letterale: quattro stringhe, nessuna interpolazione.
       const m = new RegExp(`export const ${costante} = \\{([^}]*)\\};`).exec(srcCont);
       assert.ok(m, `${costante} non e' piu' un oggetto letterale in ${contenuto}`);
@@ -883,6 +891,14 @@ describe('wiring — i tre produttori senza slug guard: lo slug non viene da un 
       asseriscilSlugLetterale(template.replace('${dateIso}', '2026-01-02'), `dailyBriefSlugs.${locale}`);
     }
     asseriscilSlugLetterale(`${prefisso[1]}-2026-01-02`.replace('--', '-'), 'DAILY_BRIEF_ID_PREFIX');
+    // Il punto di CABLAGGIO, non solo la funzione: senza questo pin, buildData
+    // potrebbe assegnare `slugs: { ...dailyBriefSlugs(...), en: campoDiModello }`
+    // e sia questo test sia daily-brief-content.test.mjs resterebbero verdi
+    // (dimostrato in review della PR #386). Le due righe ammesse sono il
+    // passthrough e la chiamata nuda al builder.
+    assert.deepEqual(righeSlugs(srcCont),
+      ['slugs: article.slugs,', 'slugs: dailyBriefSlugs(brief.dateIso),'],
+      'daily-brief-content.mjs assegna `slugs` fuori dai due punti noti: un campo di modello puo\' entrare negli slug');
   });
 });
 
