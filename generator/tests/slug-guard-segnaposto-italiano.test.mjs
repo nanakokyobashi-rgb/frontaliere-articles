@@ -84,6 +84,7 @@ const harness = new Function(
    ${cutDecl('function slugifySlugPart(')}
    ${cut('const NON_SLUG_REMAINDER_RX =', ';')}
    ${cut('const SCHEMA_HINT_UNIT =', ';')}
+   ${cut('const SCHEMA_HINT_UNIT_UNAMBIGUOUS =', ';')}
    ${cut('const SCHEMA_HINT_SHAPE_RX = new RegExp(', "\n);")}
    ${cut('const PROMPT_SLUG_PREFIX_RX =', ';')}
    ${cutDecl('export function inspectSlugForPromptPlaceholder(').replace('export ', '')}
@@ -148,6 +149,13 @@ describe('la forma dello schema e\' riconosciuta anche in italiano', () => {
       'bonus-200-euro-lavoratori',
       'stipendio-medio-infermiere-ticino',
       'accordo-fiscale-2026-cosa-cambia',
+      // Un numero singolo (nessun range, nessun "max-") incollato a una
+      // parola italiana ambigua ("parole"/"caratteri") e' testo vero, non
+      // il segnaposto: review #378, `SCHEMA_HINT_SHAPE_RX` matchava questi
+      // come substring prima che la forma nuda restasse solo alle unita'
+      // inglesi.
+      '5-parole-chiave-del-nuovo-accordo-frontalieri',
+      '10-caratteri-tipici-del-ticinese',
     ]) {
       assert.ok(!riconosciuto(vero), `slug vero scambiato per segnaposto: ${vero}`);
     }

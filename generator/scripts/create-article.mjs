@@ -13194,10 +13194,22 @@ const NON_SLUG_REMAINDER_RX =
  * lingue, cosi' una riformulazione del segnaposto non richiede di ritoccare
  * anche questa riga. Il test gemello parte da `ID_PLACEHOLDER` invece che da
  * una copia scritta a mano, per la stessa ragione.
+ *
+ * La forma NUDA (un solo numero incollato all'unita', senza `-max` ne' un
+ * secondo numero davanti) usa SOLO le unita' inglesi. `parole`/`caratteri`/
+ * `carattere` sono parole italiane comuni: uno slug vero puo' contenere
+ * legittimamente "5-parole-chiave-…" o "10-caratteri-tipici-…", e la forma
+ * nuda testata come substring li avrebbe scartati come se fossero il
+ * segnaposto. Le forme "range" (`3-5-parole`) e "max" (`max-40-caratteri`)
+ * restano ambigue in entrambe le lingue: sono gia' testate esplicitamente
+ * (vedi il test gemello) e coprono comunque `ID_PLACEHOLDER`, che porta
+ * sempre anche `max-40-char` — inglese, quindi gia' catturato dalla forma
+ * nuda pure senza le unita' italiane li'.
  */
 const SCHEMA_HINT_UNIT = '(?:words?|chars?|parole|parola|caratteri|carattere|char)';
+const SCHEMA_HINT_UNIT_UNAMBIGUOUS = '(?:words?|chars?|char)';
 const SCHEMA_HINT_SHAPE_RX = new RegExp(
-  `(?:^|-)(?:\\d+-\\d+-${SCHEMA_HINT_UNIT}|max-\\d+-${SCHEMA_HINT_UNIT}|\\d+-${SCHEMA_HINT_UNIT})(?:-|$)`,
+  `(?:^|-)(?:\\d+-\\d+-${SCHEMA_HINT_UNIT}|max-\\d+-${SCHEMA_HINT_UNIT}|\\d+-${SCHEMA_HINT_UNIT_UNAMBIGUOUS})(?:-|$)`,
   'i',
 );
 
