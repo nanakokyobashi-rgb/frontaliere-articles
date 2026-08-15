@@ -2683,6 +2683,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.frontaliere-ticino-slow-water.title': 'Slow Water: Landwirtschaft bereitet sich auf Klimakrise vor',
     'blog.article.frontaliere-ticino-slow-water.excerpt': 'Das Projekt \'Slow Water\' umfasst rund 110 landwirtschaftliche Betriebe in der Schweiz.',
     'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Colline der Region Napf',
+    'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Arbeiten für die Bundesverwaltung: Chancen und Vorteile',
+    'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Erfahren Sie, wie Sie eine Karriere in der Schweizerischen Bundesverwaltung anstreben, zwischen Berufsausbildungen, Praktika und flexiblen Arbeitsbedingungen.',
+    'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz der schweizerischen Bundesverwaltung.',
 };
 
 export default blogMetaChDe;

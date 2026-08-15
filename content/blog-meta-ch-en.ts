@@ -2683,6 +2683,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.frontaliere-ticino-slow-water.title': 'More "Slow Water", Swiss agriculture prepares for the climate crisis',
     'blog.article.frontaliere-ticino-slow-water.excerpt': 'The \'Slow Water\' project involves around 110 farms in Switzerland.',
     'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Collinare region of the Napf',
+    'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Working for the Federal Administration: opportunities and benefits',
+    'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Learn how to pursue a career in the Swiss Federal Administration, including vocational training, internships and flexible working conditions.',
+    'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Federal Palace in Bern, headquarters of the Swiss Federal Administration.',
 };
 
 export default blogMetaChEn;

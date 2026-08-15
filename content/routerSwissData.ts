@@ -920,6 +920,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'svizzero-franco-euro': { it: 'svizzero-franco-euro', en: 'swiss-franc-euro', de: 'schweizer-franken-euro', fr: 'franc-suisse-euro' },
  'travail-suisse-ue-accordi': { it: 'travail-suisse-ue-accordi', en: 'travail-suisse-ue-agreements', de: 'travail-suisse-eu-vertrag', fr: 'travail-suisse-accords-eu' },
  'frontaliere-ticino-slow-water': { it: 'frontaliere-ticino-slow-water', en: 'more-slow-water-swiss-agriculture-prepares-for-the-climate-crisis', de: 'slow-water-landwirtschaft-bereitet-sich-auf-klimakrise-vor', fr: 'plus-slow-water-l-agriculture-suisse-se-prepare-a-la-crise-climatique' },
+ 'lavorare-amministrazione-federale-svizzera': { it: 'lavorare-amministrazione-federale-svizzera', en: 'working-for-swiss-federal-administration', de: 'arbeiten-bei-der-schweizer-bundesverwaltung', fr: 'travailler-pour-l-administration-federale-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -2683,6 +2683,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.frontaliere-ticino-slow-water.title': 'Di più "Slow Water", l\'agricoltura svizzera si prepara alla crisi climatica',
     'blog.article.frontaliere-ticino-slow-water.excerpt': 'Il progetto \'Slow Water\' coinvolge circa 110 aziende agricole in Svizzera.',
     'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Zona collinare della regione del Napf',
+    'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Lavorare per l’Amministrazione federale: opportunità e vantaggi',
+    'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Scopri come intraprendere una carriera nell\'Amministrazione federale svizzera, tra formazioni professionali, praticantati e condizioni di lavoro flessibili.',
+    'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Palazzo federale a Berna, sede dell\'Amministrazione federale svizzera.',
 };
 
 export default blogMetaChIt;
