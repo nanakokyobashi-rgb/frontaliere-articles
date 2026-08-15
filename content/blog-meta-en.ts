@@ -9963,6 +9963,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.turismo-internazionale-italia-2026.title': 'Italy consolidates surplus in international tourism',
     'blog.article.turismo-internazionale-italia-2026.excerpt': 'Spending by foreign travellers in Italy increased by 4.3% compared to a year earlier, while that of Italians abroad reached 2.7 billion',
     'blog.article.turismo-internazionale-italia-2026.imageAlt': 'Lake Lugano in summer',
+    'blog.article.storia-sindacale-ticino-ocst.title': 'OCST: over one hundred years of trade union history in Ticino',
+    'blog.article.storia-sindacale-ticino-ocst.excerpt': 'From the agricultural origins to the birth of the OCST in 1919: we retrace the fundamental stages of Christian-social trade unionism in Canton Ticino.',
+    'blog.article.storia-sindacale-ticino-ocst.imageAlt': 'Historical view of Bellinzona, where the OCST was founded.',
 };
 
 export default blogMetaEn;

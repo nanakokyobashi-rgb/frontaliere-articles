@@ -9964,6 +9964,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.turismo-internazionale-italia-2026.title': 'L\'Italia consolida il surplus nel turismo internazionale',
     'blog.article.turismo-internazionale-italia-2026.excerpt': 'La spesa dei viaggiatori stranieri in Italia è aumentata del 4,3% rispetto a un anno prima, mentre quella degli italiani all\'estero ha raggiunto 2,7 miliardi',
     'blog.article.turismo-internazionale-italia-2026.imageAlt': 'Lago di Lugano in estate',
+    'blog.article.storia-sindacale-ticino-ocst.title': 'OCST: oltre cento anni di storia sindacale in Ticino',
+    'blog.article.storia-sindacale-ticino-ocst.excerpt': 'Dalle origini agricole alla nascita dell\'OCST nel 1919: ripercorriamo le tappe fondamentali del sindacalismo cristiano-sociale in Canton Ticino.',
+    'blog.article.storia-sindacale-ticino-ocst.imageAlt': 'Veduta storica di Bellinzona, sede della fondazione dell\'OCST.',
 };
 
 export default blogMetaIt;

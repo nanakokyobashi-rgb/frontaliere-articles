@@ -9965,6 +9965,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.turismo-internazionale-italia-2026.title': 'L\'Italie consolide son excédent dans le tourisme international',
     'blog.article.turismo-internazionale-italia-2026.excerpt': 'Les dépenses des voyageurs étrangers en Italie ont augmenté de 4,3% par rapport à l\'année précédente, tandis que celles des Italiens à l\'étranger ont atteint 2,7 milliards',
     'blog.article.turismo-internazionale-italia-2026.imageAlt': 'Lac de Lugano en été',
+    'blog.article.storia-sindacale-ticino-ocst.title': 'OCST : plus de cent ans d\'histoire syndicale au Tessin',
+    'blog.article.storia-sindacale-ticino-ocst.excerpt': 'Des origines agricoles à la naissance de l\'OCST en 1919 : retraçons les étapes fondamentales du syndicalisme social-chrétien dans le canton du Tessin.',
+    'blog.article.storia-sindacale-ticino-ocst.imageAlt': 'Vue historique de Bellinzone, siège de la fondation de l\'OCST.',
 };
 
 export default blogMetaFr;
