@@ -1276,6 +1276,24 @@ const MAX_CONSECUTIVE_429 = 2;
 const _consecutiveContentFailures = new Map();
 const MAX_CONSECUTIVE_CONTENT_FAILURES = 2;
 
+// #380 — "il roster non ha un meccanismo che si accorge di invecchiare": a
+// retired model (HTTP 401/402/404/400 classified 'nonretryable' by
+// classifyNonRetryableError — stale key, depleted credits, model removed by
+// the provider) gets re-attempted and re-discovered dead on EVERY run,
+// forever, with no signal anywhere that it has been dead for weeks. Measured
+// on run 31823202761: gemini-2.0-flash/-flash-lite/gemini-3-pro-preview
+// answered "no longer available" on every single attempt, in every run, and
+// nobody noticed until someone read the log of an unrelated outage by hand.
+// This counts CONSECUTIVE RUNS (not consecutive calls within one run — that's
+// already handled: the first 404 marks the model exhausted for the rest of
+// the run) a model has been nonretryable-exhausted, persisted across process
+// invocations the same way `exhaustedUntil`/`schemaIncompatible` are (see
+// initScoreStore / _persistScoresToFirestore). recordModelSuccess resets it —
+// a model that works again is not aging, whatever its past streak.
+/** @type {Map<string, number>} model → consecutive runs exhausted for a nonretryable reason */
+const _retiredStreak = new Map();
+const RETIREMENT_SIGNAL_RUNS = 3;
+
 // Provider-level cooldown: when a provider returns 429, all its models
 // get a temporary cooldown to avoid wasting retries on sibling models.
 // Maps provider name → cooldown-until timestamp (ms).
@@ -2047,6 +2065,7 @@ export async function initScoreStore() {
     let exhaustedRestored = 0;
     let learnedLimitsRestored = 0;
     let schemaIncompatibleRestored = 0;
+    let retiredModelsSignaled = 0;
     let source = 'aggregate';
 
     const aggregateRef = _firestoreDb
@@ -2131,9 +2150,28 @@ export async function initScoreStore() {
         _learnedSchemaIncompatible.add(modelId);
         schemaIncompatibleRestored++;
       }
+
+      // #380 — consecutive-runs-retired streak (see _bumpRetirementStreak).
+      // Restores unconditionally, same reasoning as maxRequestTokens/
+      // schemaIncompatible above — this is cross-run evidence about the
+      // provider, not a per-account daily quota. Once the streak crosses
+      // RETIREMENT_SIGNAL_RUNS, pre-exhaust the model for THIS run too:
+      // the whole point (#380 — "invece di lasciarlo consumare un tentativo
+      // per sempre") is that a model dead for N straight runs shouldn't cost
+      // this run an attempt just to rediscover the same 404.
+      if (typeof data.retiredStreak === 'number' && data.retiredStreak > 0) {
+        _retiredStreak.set(modelId, data.retiredStreak);
+        if (data.retiredStreak >= RETIREMENT_SIGNAL_RUNS && !_isLastResortProvider(modelId)) {
+          _exhaustedModels.add(modelId);
+          _exhaustReason.set(modelId, 'nonretryable');
+          _exhaustDetail.set(modelId, `retired ${data.retiredStreak} consecutive runs`);
+          retiredModelsSignaled++;
+          console.error(`🪦 [ScoreStore] ${modelId} retired for ${data.retiredStreak} consecutive runs — skipping this run without spending an attempt`);
+        }
+      }
     }
 
-    console.log(`☁️  [ScoreStore] Loaded ${loaded} model scores from Firestore [${source}] (${decayed} decayed, ${exhaustedRestored} still exhausted, ${learnedLimitsRestored} learned token limits, ${schemaIncompatibleRestored} schema-incompatible)`);
+    console.log(`☁️  [ScoreStore] Loaded ${loaded} model scores from Firestore [${source}] (${decayed} decayed, ${exhaustedRestored} still exhausted, ${learnedLimitsRestored} learned token limits, ${schemaIncompatibleRestored} schema-incompatible, ${retiredModelsSignaled} retired)`);
 
     // Register exit hooks for final flush
     _registerExitHooks();
@@ -2223,6 +2261,14 @@ async function _persistScoresToFirestore() {
       entry.schemaIncompatible = true;
     }
 
+    // #380 — consecutive-runs-retired streak (see _bumpRetirementStreak).
+    // Persisted unconditionally like maxRequestTokens/schemaIncompatible: it's
+    // a cross-run observation about the PROVIDER, not a per-process quota, so
+    // it applies to every workflow reading the aggregate doc, local/fallback
+    // included (unlike exhaustedUntil there's no daily-quota concept to be
+    // exempt from — a 404 "no longer available" is equally permanent there).
+    entry.retiredStreak = _retiredStreak.get(modelId) || 0;
+
     modelsDelta[_encodeModelId(modelId)] = entry;
   }
 
@@ -2292,6 +2338,10 @@ export function recordModelSuccess(modelId) {
   d.successes++;
   _modelDetails.set(modelId, d);
   _dirtyModels.add(modelId);
+  // #380 — a model that just worked is not aging, whatever its past
+  // non-retryable streak (e.g. the provider un-retired it, or a transient
+  // outage was mis-shaped as a 404 by an intermediary).
+  _retiredStreak.delete(modelId);
   _schedulePersist();
 }
 
@@ -2528,12 +2578,33 @@ function sortChainByScore(chain) {
 // neutralise those circuit-breakers). Default 'quota' covers the daily-limit and
 // rate-limit paths; the non-quota breakers pass an explicit reason.
 export function markModelExhausted(modelId, reason = 'quota', detail = '') {
+  const wasAlreadyExhausted = _exhaustedModels.has(modelId);
   _exhaustedModels.add(modelId);
   _exhaustReason.set(modelId, reason);
   if (detail) _exhaustDetail.set(modelId, detail);
   _dirtyModels.add(modelId);
+  // Only the FIRST nonretryable exhaustion of a given model in a given run
+  // should count — later calls in the same run were already going to be
+  // skipped via _shouldSkipExhausted, and would otherwise inflate the streak
+  // by a full run's worth of retries in one shot.
+  if (!wasAlreadyExhausted && reason === 'nonretryable') {
+    _bumpRetirementStreak(modelId);
+  }
   _schedulePersist();
   console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
+}
+
+/**
+ * #380 — bump modelId's consecutive-runs-retired streak and, once it crosses
+ * `RETIREMENT_SIGNAL_RUNS`, emit the loud signal the roster used to lack:
+ * this is the "il roster si accorge da solo di invecchiare" mechanism.
+ */
+function _bumpRetirementStreak(modelId) {
+  const streak = (_retiredStreak.get(modelId) || 0) + 1;
+  _retiredStreak.set(modelId, streak);
+  if (streak >= RETIREMENT_SIGNAL_RUNS) {
+    console.error(`🪦 [Roster] ${modelId} has been non-retryable-exhausted for ${streak} consecutive runs — likely retired by the provider for good. Consider dropping it from AI_MODELS/DEFAULT_CHAIN.`);
+  }
 }
 
 /**
@@ -2742,6 +2813,7 @@ export function resetState() {
   _consecutiveContentFailures.clear();
   _learnedRequestTokenLimits.clear();
   _learnedSchemaIncompatible.clear();
+  _retiredStreak.clear();
   _mutationCount = 0;
   if (_persistTimer) { clearTimeout(_persistTimer); _persistTimer = null; }
   _stats.calls = 0;
