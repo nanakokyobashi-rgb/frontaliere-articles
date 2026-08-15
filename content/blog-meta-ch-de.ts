@@ -2671,6 +2671,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.finma-allarme-cyberattacchi.title': 'Finma schlägt Alarm: „Cyberattacken auf dem Vormarsch, KI ist Risiko“',
     'blog.article.finma-allarme-cyberattacchi.excerpt': 'Die Finma warnt die Schweizer Banken- und Versicherungsbranche vor den wachsenden Gefahren im Zusammenhang mit künstlicher Intelligenz und Cybersicherheit.',
     'blog.article.finma-allarme-cyberattacchi.imageAlt': 'Die Finma warnt das schweizerische Bank- und Versicherungswesen.',
+    'blog.article.asilo-nuovo-altstaetten.title': 'Sem eröffnet neues Bundesasylzentrum in Altstätten',
+    'blog.article.asilo-nuovo-altstaetten.excerpt': 'Das neue Bundesasylzentrum in Altstätten wurde am 15. August 2026 eingeweiht.',
+    'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Das neue Bundesflüchtlingszentrum in Altstätten',
 };
 
 export default blogMetaChDe;

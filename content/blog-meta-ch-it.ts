@@ -2671,6 +2671,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.finma-allarme-cyberattacchi.title': 'La Finma lancia l\'allarme: \'cyberattacchi in aumento, IA è un rischio\'',
     'blog.article.finma-allarme-cyberattacchi.excerpt': 'La Finma mette in guardia il settore bancario e assicurativo svizzero contro i crescenti pericoli legati all\'intelligenza artificiale e alla sicurezza informatica.',
     'blog.article.finma-allarme-cyberattacchi.imageAlt': 'La Finma allerta il settore bancario e assicurativo svizzero.',
+    'blog.article.asilo-nuovo-altstaetten.title': 'La SEM apre un nuovo centro federale d\'asilo ad Altstätten',
+    'blog.article.asilo-nuovo-altstaetten.excerpt': 'Il nuovo centro federale d\'asilo ad Altstätten è stato inaugurato il 15 agosto 2026.',
+    'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Il nuovo centro federale d\'asilo ad Altstätten',
 };
 
 export default blogMetaChIt;

@@ -2671,6 +2671,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.finma-allarme-cyberattacchi.title': 'IA, un rischio per la cyber sicurezza',
     'blog.article.finma-allarme-cyberattacchi.excerpt': 'La Finma met en garde le secteur bancaire et des assurances suisse contre les dangers croissants liés à l\'intelligence artificielle et à la cybersécurité.',
     'blog.article.finma-allarme-cyberattacchi.imageAlt': 'La Finma met en garde le secteur bancaire et d\'assurance suisse.',
+    'blog.article.asilo-nuovo-altstaetten.title': 'Le SEM ouvre un nouveau centre fédéral d\'asile à Altstätten',
+    'blog.article.asilo-nuovo-altstaetten.excerpt': 'Le nouveau centre fédéral d\'asile à Altstätten a été inauguré le 15 août 2026.',
+    'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Le nouveau centre fédéral d\'asile d\'Altstätten',
 };
 
 export default blogMetaChFr;

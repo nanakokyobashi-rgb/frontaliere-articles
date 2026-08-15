@@ -2671,6 +2671,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.finma-allarme-cyberattacchi.title': 'Finma raises the alarm: \'cyberattacks on the rise, AI is a risk\'',
     'blog.article.finma-allarme-cyberattacchi.excerpt': 'Finma warns the Swiss banking and insurance sector against the growing dangers related to artificial intelligence and cybersecurity.',
     'blog.article.finma-allarme-cyberattacchi.imageAlt': 'The Finma warns the Swiss banking and insurance sector.',
+    'blog.article.asilo-nuovo-altstaetten.title': 'SEM opens a new federal asylum centre in Altstätten',
+    'blog.article.asilo-nuovo-altstaetten.excerpt': 'The new federal asylum centre in Altstätten was inaugurated on 15 August 2026.',
+    'blog.article.asilo-nuovo-altstaetten.imageAlt': 'The new Federal Asylum Centre in Altstätten',
 };
 
 export default blogMetaChEn;
