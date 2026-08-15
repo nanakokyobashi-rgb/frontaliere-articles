@@ -274,12 +274,22 @@ function commitIfNeeded(currentStep) {
   }
 }
 
-// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill)
-process.on('SIGTERM', () => {
-  console.error('\n⚠️  SIGTERM — saving progress...');
-  gitCommitAndPush('interrupted');
-  process.exit(0);
-});
+// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill).
+// La REGISTRAZIONE sta dentro la guardia sull'entry point in coda al file, non
+// qui: questo modulo viene IMPORTATO — da `publish-journalist-article.mjs` per
+// `generateFaqIT`, e ora dai test — e a module scope l'handler si armava anche
+// li'. Un SIGTERM a quei processi (`tests.yml` ha `cancel-in-progress: true`,
+// e in locale basta un kill) faceva partire `git add content/ && git commit &&
+// git push origin main` da un processo che non stava generando niente. Armarlo
+// solo quando il file E' l'entry point non toglie niente al job vero, che passa
+// sempre di la'.
+function installSigtermCheckpoint() {
+  process.on('SIGTERM', () => {
+    console.error('\n⚠️  SIGTERM — saving progress...');
+    gitCommitAndPush('interrupted');
+    process.exit(0);
+  });
+}
 
 // ── Article discovery ────────────────────────────────────────
 
@@ -289,9 +299,40 @@ function extractArticleId(fileContent) {
   return match ? match[1] : null;
 }
 
-/** Check if a body file already has a .faq key */
-function hasFaqKey(fileContent) {
-  return /\.faq'\s*:/.test(fileContent);
+// ── L'ancora all'id (issue #301 item 2) ──────────────────────
+//
+// La chiave che questo script legge e SCRIVE e' quella dell'articolo che sta
+// trattando, non un `.faq` qualunque nel file. Il pattern e' quello con cui
+// #294 ha ancorato i gate di sola lettura (`find-dirty-content-ids.mjs`,
+// `faqQuestionsInBodyText`): chiave intera piu' id ESCAPATO per la regex.
+//
+// Senza l'ancora, in un file con due id — un residuo di merge: mai osservato
+// sui 16.648 file reali, ma niente nel formato lo impedisce — `hasFaqKey`
+// dichiarava presente una FAQ che per QUEL id non c'era (l'articolo veniva
+// saltato invece di essere generato) e `replaceFaqInBodyFile` scriveva la FAQ
+// di un articolo dentro la chiave di un altro. Su uno script che scrive nel
+// corpus e' una perdita di dato, non un rapporto sbagliato.
+//
+// L'«ultima occorrenza» resta, e resta per la ragione di prima: una chiave
+// DUPLICATA dello stesso id e' vinta dall'ultima nell'object literal JS, quindi
+// e' quella viva al render. Le due regole sono ortogonali — si legge e si
+// scrive l'ultima occorrenza DEL PROPRIO id.
+//
+// Il pattern e' ricopiato invece che condiviso, come in `find-dirty-content-ids.mjs`
+// (#294): questo file e' un gemello `adapted` di uno del sito
+// (`scripts/batch-add-faq-to-articles.mjs`) e importare qui una lib `corpus-only` aggiungerebbe una
+// divergenza in piu' fra i due, per tre righe di regex.
+const faqKeyRx = (id) => `'blog\\.article\\.${String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.faq'`;
+
+/**
+ * Check if a body file already has a .faq key for THIS article id.
+ *
+ * Primo argomento: il CONTENUTO del file. L'omonima di `fix-faq-locales.mjs`
+ * prende invece un PATH — sono due moduli diversi e i due nomi ora sono
+ * entrambi esportati, quindi la differenza va letta qui prima di importare.
+ */
+export function hasFaqKey(fileContent, articleId) {
+  return new RegExp(`${faqKeyRx(articleId)}\\s*:`).test(fileContent);
 }
 
 /** Read and concatenate all bodyN keys from file content.
@@ -327,13 +368,13 @@ function isWrongLocale(faqArray, expectedLocale) {
   return detected !== expectedLocale;
 }
 
-function extractFaqFromContent(fileContent) {
+export function extractFaqFromContent(fileContent, articleId) {
   // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
   // `g` + last match: a duplicate `.faq` key (merge residue) resolves to
   // the LAST occurrence at runtime (JS object literal semantics), so
   // that's the value actually live — matching only the first would read
-  // dead content and mis-detect the locale.
-  const matches = [...fileContent.matchAll(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g)];
+  // dead content and mis-detect the locale. Ancorata all'id: vedi `faqKeyRx`.
+  const matches = [...fileContent.matchAll(new RegExp(`${faqKeyRx(articleId)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g'))];
   if (!matches.length) return null;
   try {
     return JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
@@ -361,7 +402,7 @@ function discoverArticles() {
     const articleId = extractArticleId(itContent);
     if (!articleId) continue;
 
-    const itHasFaq = hasFaqKey(itContent);
+    const itHasFaq = hasFaqKey(itContent, articleId);
 
     if (!itHasFaq) {
       needsGeneration.push({ id: articleId, file, itContent });
@@ -369,7 +410,7 @@ function discoverArticles() {
     }
 
     // IT FAQ exists — check pair count and locale translations
-    const itFaq = extractFaqFromContent(itContent);
+    const itFaq = extractFaqFromContent(itContent, articleId);
     if (!itFaq || itFaq.length === 0) continue;
 
     // Top-up: not enough pairs
@@ -383,10 +424,10 @@ function discoverArticles() {
       const localePath = `${BODY_DIR}/${locale}/${file}`;
       if (!existsSync(resolve(localePath))) continue;
       const locContent = read(localePath);
-      if (!hasFaqKey(locContent)) {
+      if (!hasFaqKey(locContent, articleId)) {
         missingLocales.push(locale);
       } else {
-        const localeFaq = extractFaqFromContent(locContent);
+        const localeFaq = extractFaqFromContent(locContent, articleId);
         if (localeFaq && isWrongLocale(localeFaq, locale)) {
           missingLocales.push(locale);
         }
@@ -682,7 +723,7 @@ function validateFaq(faq) {
 // ── File modification ────────────────────────────────────────
 
 /** Replace existing FAQ value in a body file */
-function replaceFaqInBodyFile(filePath, faqArray) {
+export function replaceFaqInBodyFile(filePath, faqArray, articleId) {
   let content = read(filePath);
   // `escapeForSingleQuoteTS`, non una `.replace()` a mano: quella escapava
   // l'apostrofo e NON il backslash, quindi il `\"` che JSON.stringify produce
@@ -699,7 +740,9 @@ function replaceFaqInBodyFile(filePath, faqArray) {
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime — a duplicate `.faq` key resolves to the last one in a JS
   // object literal, same reasoning as extractFaqFromContent above.
-  const matches = [...content.matchAll(/(\.faq'\s*:\s*')((?:[^'\\]|\\.)*)('\s*,)/g)];
+  // Ancorata all'id (`faqKeyRx`): qui la mancanza dell'ancora non e' un
+  // rapporto sbagliato, e' la FAQ di un articolo scritta sopra quella di un altro.
+  const matches = [...content.matchAll(new RegExp(`(${faqKeyRx(articleId)}\\s*:\\s*')((?:[^'\\\\]|\\\\.)*)('\\s*,)`, 'g'))];
   if (!matches.length) return false;
   const last = matches[matches.length - 1];
   const start = last.index;
@@ -724,8 +767,8 @@ function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
   let content = read(filePath);
 
   // Already has FAQ? Replace instead of insert.
-  if (hasFaqKey(content)) {
-    return replaceFaqInBodyFile(filePath, faqArray);
+  if (hasFaqKey(content, articleId)) {
+    return replaceFaqInBodyFile(filePath, faqArray, articleId);
   }
 
   const faqJsonStr = JSON.stringify(faqArray);
@@ -747,7 +790,7 @@ function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
   );
 
   // Verify the insertion worked
-  if (!hasFaqKey(content)) {
+  if (!hasFaqKey(content, articleId)) {
     // Fallback: more aggressive replacement
     content = read(filePath);
     content = content.replace(
@@ -756,7 +799,7 @@ function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
     );
   }
 
-  if (!hasFaqKey(content)) {
+  if (!hasFaqKey(content, articleId)) {
     console.error(`  ❌ Failed to insert FAQ into ${filePath}`);
     return false;
   }
@@ -918,7 +961,7 @@ async function processTopUp(articleId, file, itContent, existingFaq) {
 
   // 3. Write updated IT FAQ
   const itPath = `${BODY_DIR}/it/${file}`;
-  if (!replaceFaqInBodyFile(itPath, validMerged)) {
+  if (!replaceFaqInBodyFile(itPath, validMerged, articleId)) {
     return { success: false, error: 'Failed to write updated IT FAQ' };
   }
 
@@ -1153,6 +1196,7 @@ async function main() {
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
+  installSigtermCheckpoint();
   main().catch(err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);
