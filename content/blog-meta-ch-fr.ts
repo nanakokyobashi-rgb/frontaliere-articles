@@ -2674,6 +2674,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.asilo-nuovo-altstaetten.title': 'Le SEM ouvre un nouveau centre fédéral d\'asile à Altstätten',
     'blog.article.asilo-nuovo-altstaetten.excerpt': 'Le nouveau centre fédéral d\'asile à Altstätten a été inauguré le 15 août 2026.',
     'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Le nouveau centre fédéral d\'asile d\'Altstätten',
+    'blog.article.svizzero-franco-euro.title': 'Plus franc : le franc suisse s\'affaiblit et l\'euro repasse au-dessus de 0,94',
+    'blog.article.svizzero-franco-euro.excerpt': 'Le franc suisse s\'affaiblit et l\'euro revient au-dessus de 0,94. Les anticipations d\'une hausse des taux d\'intérêt dans la zone euro mettent la monnaie suisse sous pression.',
+    'blog.article.svizzero-franco-euro.imageAlt': 'Le franc suisse',
 };
 
 export default blogMetaChFr;

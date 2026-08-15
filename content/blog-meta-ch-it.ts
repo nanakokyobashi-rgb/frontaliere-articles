@@ -2674,6 +2674,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-nuovo-altstaetten.title': 'La SEM apre un nuovo centro federale d\'asilo ad Altstätten',
     'blog.article.asilo-nuovo-altstaetten.excerpt': 'Il nuovo centro federale d\'asilo ad Altstätten è stato inaugurato il 15 agosto 2026.',
     'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Il nuovo centro federale d\'asilo ad Altstätten',
+    'blog.article.svizzero-franco-euro.title': 'Di più Franco: il franco svizzero si indebolisce e l\'euro torna sopra 0,94',
+    'blog.article.svizzero-franco-euro.excerpt': 'Il franco svizzero si indebolisce e l\'euro torna sopra 0,94. Le aspettative di un aumento dei tassi d\'interesse nell\'Eurozona mettono la valuta elvetica sotto pressione.',
+    'blog.article.svizzero-franco-euro.imageAlt': 'Il franco svizzero',
 };
 
 export default blogMetaChIt;

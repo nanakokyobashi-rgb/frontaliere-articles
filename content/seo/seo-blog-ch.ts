@@ -34652,6 +34652,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-svizzero-franco-euro': {
+    title: 'Di più Franco: il franco svizzero si indebolisce e l\'euro torna sopra 0,94',
+    description: 'Il franco svizzero si indebolisce e l\'euro torna sopra 0,94. Le aspettative di un aumento dei tassi d\'interesse nell\'Eurozona mettono la valuta elvetica sotto',
+    keywords: 'frontalieri, ticino, svizzera, italia, franco, svizzero, indebolisce, euro',
+    ogTitle: 'Il franco svizzero si indebolisce e l\'euro torna sopra 0,94',
+    ogDescription: 'Il franco svizzero si indebolisce e l\'euro torna sopra 0,94. Le aspettative di un aumento dei tassi d\'interesse nell\'Eurozona mettono la valuta elvetica sotto pressione.',
+    canonicalPath: '/articoli-svizzera/svizzero-franco-euro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Di più Franco: il franco svizzero si indebolisce e l'euro torna sopra 0,94",
+      "description": "Il franco svizzero si indebolisce e l'euro torna sopra 0,94. Le aspettative di un aumento dei tassi d'interesse nell'Eurozona mettono la valuta elvetica sotto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzero-franco-euro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il franco svizzero"
+      },
+      "datePublished": "2026-08-15T10:01:49+00:00",
+      "dateModified": "2026-08-15T10:01:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzero-franco-euro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

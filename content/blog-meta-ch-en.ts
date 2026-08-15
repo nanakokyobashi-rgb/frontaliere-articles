@@ -2674,6 +2674,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-nuovo-altstaetten.title': 'SEM opens a new federal asylum centre in Altstätten',
     'blog.article.asilo-nuovo-altstaetten.excerpt': 'The new federal asylum centre in Altstätten was inaugurated on 15 August 2026.',
     'blog.article.asilo-nuovo-altstaetten.imageAlt': 'The new Federal Asylum Centre in Altstätten',
+    'blog.article.svizzero-franco-euro.title': 'More franc: the Swiss franc weakens and the euro returns above 0.94',
+    'blog.article.svizzero-franco-euro.excerpt': 'The Swiss franc weakens and the euro returns above 0.94. Expectations of an interest rate increase in the Eurozone put the Swiss currency under pressure.',
+    'blog.article.svizzero-franco-euro.imageAlt': 'The Swiss Franc',
 };
 
 export default blogMetaChEn;

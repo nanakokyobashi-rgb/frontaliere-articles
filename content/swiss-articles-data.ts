@@ -8020,6 +8020,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'svizzero-franco-euro',
+    category: 'fiscale',
+    date: '2026-08-15T10:01:49.492Z',
+    image: '/images/blog/svizzero-franco-euro.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

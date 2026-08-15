@@ -2674,6 +2674,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-nuovo-altstaetten.title': 'Sem eröffnet neues Bundesasylzentrum in Altstätten',
     'blog.article.asilo-nuovo-altstaetten.excerpt': 'Das neue Bundesasylzentrum in Altstätten wurde am 15. August 2026 eingeweiht.',
     'blog.article.asilo-nuovo-altstaetten.imageAlt': 'Das neue Bundesflüchtlingszentrum in Altstätten',
+    'blog.article.svizzero-franco-euro.title': 'Franko indebolisce, Euro torna a 0,94',
+    'blog.article.svizzero-franco-euro.excerpt': 'Der Schweizer Franken schwächt sich ab und der Euro liegt wieder über 0,94. Die Erwartung einer Zinserhöhung in der Eurozone setzt die Schweizer Währung unter Druck.',
+    'blog.article.svizzero-franco-euro.imageAlt': 'Die Schweizer Franken',
 };
 
 export default blogMetaChDe;
