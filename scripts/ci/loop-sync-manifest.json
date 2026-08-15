@@ -218,9 +218,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "455f0d78fb802a68",
-        "corpus": "455f0d78fb802a68",
-        "alignedAt": "2026-08-07"
+        "site": "0413b7b7675b26b2",
+        "corpus": "0413b7b7675b26b2",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -532,6 +532,16 @@
       }
     },
     {
+      "path": "scripts/ci/lib/reopen-breaker.mjs",
+      "mode": "identical",
+      "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
+      "baseline": {
+        "site": "fdd988244a6fb980",
+        "corpus": "fdd988244a6fb980",
+        "alignedAt": "2026-08-15"
+      }
+    },
+    {
       "path": "scripts/ci/mark-claude-terminal-outcome.mjs",
       "mode": "identical",
       "baseline": {
@@ -653,8 +663,8 @@
       "reason": "Guard nato da un difetto reale del porting: node --check valida la sintassi ma non segue gli import, quindi tre file mancanti sono passati indenni da ogni controllo e avrebbero rotto l'auto-merge su ogni PR. Risolve l'albero staticamente (non importa: quasi tutti gli script hanno una modalita' CLI e alcuni chiamano l'API GitHub) e verifica anche che non compaiano dipendenze npm non dichiarate, perche' e' il girare-senza-npm-ci a rendere economico il ciclo su questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "487404ca92096032",
-        "alignedAt": "2026-08-07"
+        "corpus": "6ce500b9e6754280",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -1028,6 +1038,17 @@
         "site": "edd15f5ad95271d2",
         "corpus": "7592867878443da1",
         "alignedAt": "2026-08-10"
+      }
+    },
+    {
+      "path": "generator/tests/pr-autorebase-reopen-breaker.test.mjs",
+      "sitePath": "tests/pr-autorebase-reopen-breaker.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello di tests/pr-autorebase-reopen-breaker.test.ts sul sito (#5914), riscritto per node --test perche' qui non c'e' vitest; i corpi restano quasi byte-identici grazie a generator/tests/lib/expect-shim.mjs. Lo script e la libreria sotto test sono identical e restano byte-identici; il test no, ed e' giusto cosi': e' il runner a differire, non il comportamento sotto test. In piu' rispetto al sito ha un caso che qui e' l'unico possibile — che il messaggio nomini il check LOCALE (tests (node --test)) e non quello del sito — perche' e' proprio la costante adapted a permettere alla libreria di restare identical. Il manifest sorveglia i file uno per uno e non vede l'ASSENZA di un test da questo lato: e' il punto cieco gia' pagato con pr-collision-detector (#40 punto 1, PR #44).",
+      "baseline": {
+        "site": "d8d7c06048be343b",
+        "corpus": "0e7e653ee69818c7",
+        "alignedAt": "2026-08-15"
       }
     },
     {
