@@ -82,9 +82,20 @@ test('generate-article: "Generate the article" non dipende dall\'esito dello ste
 });
 
 test('generate-article: continue-on-error non è finito, per errore, sull\'intero job', () => {
-  assert.ok(
-    !/^continue-on-error:/m.test(GA),
-    'Un `continue-on-error` a livello di job renderebbe verde l\'intero job anche su un fallimento ' +
-      'reale della generazione — troppo largo. Deve restare sullo step chiamante di Haiku soltanto.',
+  // Non basta cercare la chiave a colonna 0 (lì non può stare in un workflow):
+  // un flag a livello di job vive a 4 spazi sotto `generate:` e renderebbe
+  // verde il job anche su un fallimento reale della generazione. L'invariante
+  // vera è: OGNI occorrenza del flag nel file sta dentro lo step chiamante di
+  // Haiku, e lì ce n'è una sola.
+  const step = callerStepBlock(GA);
+  const inStep = (step.match(/continue-on-error:/g) ?? []).length;
+  const total = (GA.match(/continue-on-error:/g) ?? []).length;
+  assert.equal(inStep, 1, 'lo step chiamante di Haiku deve avere esattamente un `continue-on-error`');
+  assert.equal(
+    total,
+    inStep,
+    'C\'è un `continue-on-error` fuori dallo step chiamante di Haiku (a livello di job, o su un ' +
+      'altro step): renderebbe verdi fallimenti reali. Deve restare sullo step Haiku soltanto — ' +
+      'se un altro step lo acquisisce di proposito, aggiorna questo test dichiarandolo.',
   );
 });
