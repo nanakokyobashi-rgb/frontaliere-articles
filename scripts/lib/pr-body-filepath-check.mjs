@@ -236,18 +236,83 @@ export function candidatePath(span) {
   return s;
 }
 
+/** Come {@link ANNOTATION_RE}, ma scandibile: serve la posizione dei marcatori. */
+const ANNOTATION_GLOBAL_RE = new RegExp(ANNOTATION_RE.source, 'g');
+
 /**
- * True se una delle {@link ANNOTATIONS} sta entro {@link ANNOTATION_WINDOW}
- * caratteri prima o dopo la citazione.
+ * Lega ogni marcatore a UNA sola citazione, e restituisce gli indici delle
+ * citazioni annotate.
  *
- * @param {string} text testo completo
- * @param {number} start indice del backtick di apertura
- * @param {number} end indice DOPO il backtick di chiusura
+ * ## Perche' non basta «c'e' un marcatore entro N caratteri»
+ *
+ * Era la prima stesura, ed era sbagliata — trovata dalla review locale di #387
+ * con questo input, che e' **la forma esatta del bullet di #358**:
+ *
+ *     - `scripts/ci/pr-body-contract.mjs` (sul sito) e `scripts/lib/pr-body-nextstep-check.mjs` no.
+ *
+ * Il marcatore cade dopo `a.mjs` e prima di `b.mjs`, quindi una finestra
+ * simmetrica lo faceva valere per ENTRAMBI: annotarne uno — la remediation che
+ * questo modulo prescrive, «nove caratteri» — faceva sparire l'altro in
+ * silenzio. Con la dedup di {@link extractCitedPaths} il danno si allargava a
+ * tutte le occorrenze di quel path nel body. Lo stesso valeva attraverso il
+ * newline: un `(nuovo)` su un bullet assolveva il bullet successivo.
+ *
+ * ## La regola
+ *
+ * Un marcatore appartiene alla citazione che **segue**, perche' e' cosi' che lo
+ * si scrive: `` `x.mjs` (sul sito) ``. Solo se non ne trova una — cioe' quando
+ * il marcatore apre la frase, `` - (sul sito) `x.mjs` `` — guarda in avanti.
+ * In entrambi i versi resta dentro la propria RIGA e dentro
+ * {@link ANNOTATION_WINDOW}, e il candidato piu' vicino vince. Cosi' ogni
+ * marcatore ha esattamente un destinatario, e nessuna citazione eredita quello
+ * della vicina.
+ *
+ * @param {string} text testo gia' ripulito
+ * @param {Array<{start: number, end: number}>} spans TUTTI gli span di codice,
+ *   in ordine — non solo quelli che sono path: un marcatore consumato da uno
+ *   span qualunque non deve poter raggiungere la citazione oltre.
+ * @returns {Set<number>} indici in `spans` delle citazioni annotate
  */
-export function isAnnotated(text, start, end) {
-  const before = text.slice(Math.max(0, start - ANNOTATION_WINDOW), start);
-  const after = text.slice(end, end + ANNOTATION_WINDOW);
-  return ANNOTATION_RE.test(before) || ANNOTATION_RE.test(after);
+export function bindAnnotations(text, spans) {
+  const annotated = new Set();
+  if (!spans.length) return annotated;
+
+  ANNOTATION_GLOBAL_RE.lastIndex = 0;
+  let mk;
+  while ((mk = ANNOTATION_GLOBAL_RE.exec(text)) !== null) {
+    const mkStart = mk.index;
+    const mkEnd = mkStart + mk[0].length;
+    const lineStart = text.lastIndexOf('\n', Math.max(0, mkStart - 1)) + 1;
+    const nl = text.indexOf('\n', mkEnd);
+    const lineEnd = nl === -1 ? text.length : nl;
+
+    let best = -1;
+    let bestDist = Infinity;
+    // 1) la citazione che il marcatore SEGUE, la piu' vicina all'indietro
+    for (let i = 0; i < spans.length; i += 1) {
+      const s = spans[i];
+      if (s.end > mkStart || s.end < lineStart) continue;
+      const d = mkStart - s.end;
+      if (d <= ANNOTATION_WINDOW && d < bestDist) {
+        best = i;
+        bestDist = d;
+      }
+    }
+    // 2) solo se non ce n'e' nessuna: quella che il marcatore PRECEDE
+    if (best === -1) {
+      for (let i = 0; i < spans.length; i += 1) {
+        const s = spans[i];
+        if (s.start < mkEnd || s.start > lineEnd) continue;
+        const d = s.start - mkEnd;
+        if (d <= ANNOTATION_WINDOW && d < bestDist) {
+          best = i;
+          bestDist = d;
+        }
+      }
+    }
+    if (best !== -1) annotated.add(best);
+  }
+  return annotated;
 }
 
 /**
@@ -261,24 +326,41 @@ export function extractCitedPaths(body = '') {
   // che questo stesso gate incolla nel commento sticky e' un blocco ```markdown,
   // e un gate che si segnalasse da solo sarebbe un anello chiuso.
   const text = stripNonContent(String(body ?? ''));
-  const out = [];
-  const seen = new Set();
+
+  // Prima TUTTI gli span, poi i marcatori: `bindAnnotations` ha bisogno delle
+  // posizioni dei vicini per non lasciare che un marcatore valga per due
+  // citazioni. Anche gli span che non sono path entrano nella lista — servono
+  // come barriera, non come candidati.
+  const spans = [];
   CODE_SPAN_RE.lastIndex = 0;
   let m;
   while ((m = CODE_SPAN_RE.exec(text)) !== null) {
-    const rel = candidatePath(m[1]);
+    spans.push({ start: m.index, end: m.index + m[0].length, inner: m[1] });
+  }
+  const annotatedIdx = bindAnnotations(text, spans);
+
+  const out = [];
+  const byPath = new Map();
+  for (let i = 0; i < spans.length; i += 1) {
+    const rel = candidatePath(spans[i].inner);
     if (!rel) continue;
-    const annotated = isAnnotated(text, m.index, m.index + m[0].length);
+    const annotated = annotatedIdx.has(i);
     // Una citazione ripetuta si conta una volta sola, ma basta UNA occorrenza
     // annotata perche' l'intero path sia dichiarato: chi lo annota una volta
     // non deve annotarlo in ogni frase in cui lo nomina.
-    const prev = seen.has(rel) ? out.find((o) => o.path === rel) : null;
+    const prev = byPath.get(rel);
     if (prev) {
       if (annotated) prev.annotated = true;
       continue;
     }
-    seen.add(rel);
-    out.push({ path: rel, span: m[1].trim(), index: m.index, annotated });
+    // `index` e' un offset nel testo RIPULITO, non nel body originale:
+    // `stripNonContent` sostituisce fence e commenti HTML con uno spazio, quindi
+    // gli offset a valle scalano. Va bene per ordinare e per distinguere due
+    // occorrenze, NON per ancorare un commento inline al body — chi volesse
+    // farlo deve prima rimappare. (Review locale di #387, finding 3.)
+    const rec = { path: rel, span: spans[i].inner.trim(), index: spans[i].start, annotated };
+    byPath.set(rel, rec);
+    out.push(rec);
   }
   return out;
 }

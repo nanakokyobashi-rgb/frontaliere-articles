@@ -18,6 +18,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -28,6 +29,8 @@ import {
   DISLOCATIONS,
   KNOWN_ROOTS,
   ANNOTATIONS,
+  bindAnnotations,
+  trackedFiles,
 } from '../../scripts/lib/pr-body-filepath-check.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -130,6 +133,59 @@ test('il marcatore vale anche PRIMA della citazione, e non oltre la finestra', (
     false,
     'un marcatore a 120 caratteri di distanza non sta dichiarando QUESTA citazione',
   );
+});
+
+// ---------------------------------------------------------------------------
+// Il marcatore ha UN destinatario (review locale di #387, finding 1)
+// ---------------------------------------------------------------------------
+
+test('un marcatore NON assolve la citazione vicina nella stessa frase', () => {
+  // La forma esatta del bullet di #358: due path, una sola annotazione. Con una
+  // finestra simmetrica il secondo spariva in silenzio — cioe' il modulo
+  // falliva proprio applicando la remediation che prescrive.
+  const body = withBody(['- `scripts/ci/a.mjs` (sul sito) e `scripts/ci/b.mjs` non annotato.']);
+  const res = checkCitedFilePaths(body, { exists: () => false });
+  assert.equal(res.ok, false);
+  assert.deepEqual(res.violations.map((v) => v.path), ['scripts/ci/b.mjs']);
+  assert.deepEqual(res.exempted, ['scripts/ci/a.mjs']);
+});
+
+test('un marcatore non scavalca il newline: un bullet non assolve il successivo', () => {
+  const body = withBody([
+    '- `scripts/ci/a.mjs` (nuovo)',
+    '- `scripts/ci/b.mjs` mai dichiarato.',
+  ]);
+  const res = checkCitedFilePaths(body, { exists: () => false });
+  assert.deepEqual(res.violations.map((v) => v.path), ['scripts/ci/b.mjs']);
+});
+
+test('un marcatore in testa alla frase annota la citazione che PRECEDE, non quella prima', () => {
+  const body = withBody([
+    '- `scripts/ci/a.mjs` non annotato.',
+    '- (sul sito) `scripts/ci/b.mjs` questo si\'.',
+  ]);
+  const res = checkCitedFilePaths(body, { exists: () => false });
+  assert.deepEqual(res.violations.map((v) => v.path), ['scripts/ci/a.mjs']);
+  assert.deepEqual(res.exempted, ['scripts/ci/b.mjs']);
+});
+
+test('uno span di codice qualunque fa da barriera: il marcatore non lo scavalca', () => {
+  const body = withBody([
+    '- `scripts/ci/a.mjs` `--json` (sul sito) e poi `scripts/ci/b.mjs`.',
+  ]);
+  // Il marcatore segue `--json`, che non e' un path: non deve ricadere ne' su
+  // `a.mjs` (piu' lontano) ne' su `b.mjs` (che lo precede).
+  const res = checkCitedFilePaths(body, { exists: () => false });
+  assert.deepEqual(res.violations.map((v) => v.path).sort(), ['scripts/ci/a.mjs', 'scripts/ci/b.mjs']);
+});
+
+test('due marcatori, due citazioni: ognuno al suo', () => {
+  const body = withBody([
+    '- `scripts/ci/a.mjs` (nuovo) e `scripts/ci/b.mjs` (sul sito), entrambi dichiarati.',
+  ]);
+  const res = checkCitedFilePaths(body, { exists: () => false });
+  assert.equal(res.ok, true);
+  assert.deepEqual(res.exempted.sort(), ['scripts/ci/a.mjs', 'scripts/ci/b.mjs']);
 });
 
 test('basta annotarlo una volta: la seconda citazione dello stesso path non ritorna', () => {
@@ -272,10 +328,82 @@ test('la prosa «il sito ha…» NON esenta: e\' la frase esatta di #358', () =>
   assert.equal(res.violations[0].path, 'scripts/repair-unicode-escape-titles.mjs');
 });
 
-test('extractCitedPaths riporta la posizione, cosi\' il messaggio si puo\' ancorare', () => {
+test('extractCitedPaths riporta un offset nel testo RIPULITO, non nel body', () => {
   const body = withBody(['- `scripts/ci/x.mjs`']);
   const [c] = extractCitedPaths(body);
   assert.equal(c.path, 'scripts/ci/x.mjs');
   assert.ok(c.index > 0);
   assert.equal(c.annotated, false);
+
+  // Il contratto vero, che il test precedente lasciava implicito: `stripNonContent`
+  // sostituisce ogni commento HTML e ogni fence con UNO spazio, quindi l'offset
+  // scala rispetto al body originale. Chi volesse ancorare un commento inline
+  // deve rimappare prima. (Review locale di #387, finding 3.)
+  const withComment = `<!-- ${'c'.repeat(60)} -->\n\n${body}`;
+  const [c2] = extractCitedPaths(withComment);
+  assert.equal(c2.path, 'scripts/ci/x.mjs');
+  assert.notEqual(
+    withComment.slice(c2.index, c2.index + 18),
+    '`scripts/ci/x.mjs`',
+    'se un giorno gli indici venissero rimappati sul body, questo test va aggiornato assieme al docblock',
+  );
+});
+
+// ---------------------------------------------------------------------------
+// L'oracolo di DEFAULT — quello che gira davvero in CI, e che i test sopra
+// sostituiscono sempre (review locale di #387, finding 4)
+// ---------------------------------------------------------------------------
+
+test('senza `exists` iniettato il modulo interroga l\'albero vero, e lo azzecca', () => {
+  // Nessun oracolo: si usa `trackedFiles()` + il fallback `fs`. Un file che in
+  // questo repo c'e' davvero non deve produrre niente; uno inventato si'.
+  const real = withBody(['- `scripts/ci/pr-body-contract.mjs` e `scripts/lib/pr-body-filepath-check.mjs`.']);
+  const res = checkCitedFilePaths(real);
+  assert.equal(res.ok, true, `l'albero vero doveva risolverli: ${JSON.stringify(res.violations)}`);
+  assert.equal(res.checked, 2);
+
+  const fake = withBody(['- `scripts/ci/questo-non-esiste-davvero-mai.mjs`.']);
+  assert.equal(checkCitedFilePaths(fake).ok, false);
+});
+
+test('il fallback `fs` (niente git) risolve davvero, e la guardia sul traversal tiene', () => {
+  // Fuori da un repo git `trackedFiles()` ritorna null e si passa a `fs`. E' il
+  // ramo che tutti gli altri test scavalcano iniettando `exists`, e senza questo
+  // caso resterebbe a copertura zero.
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'filepath-check-'));
+  try {
+    fs.mkdirSync(path.join(tmp, 'scripts/ci'), { recursive: true });
+    fs.writeFileSync(path.join(tmp, 'scripts/ci/vero.mjs'), '// c\n');
+    assert.equal(trackedFiles(tmp), null, 'la cartella temporanea non deve essere un repo git');
+
+    // (a) il fallback trova un file che c'e' davvero...
+    const ok = checkCitedFilePaths(withBody(['- `scripts/ci/vero.mjs`']), { cwd: tmp });
+    assert.equal(ok.ok, true, 'il fallback fs doveva risolvere il file appena creato');
+
+    // (b) ...e non ne inventa uno che non c'e'
+    assert.equal(checkCitedFilePaths(withBody(['- `scripts/ci/falso.mjs`']), { cwd: tmp }).ok, false);
+
+    // (c) la guardia sul traversal. `..` non e' filtrato da `candidatePath`,
+    // quindi la guardia in `checkCitedFilePaths` e' l'unica cosa che impedisce
+    // lo `stat` fuori dalla cartella. Il bersaglio viene creato DAVVERO appena
+    // fuori: senza guardia `fs.existsSync` lo troverebbe e il test sarebbe verde
+    // al contrario — e' questo a renderlo non vacuo.
+    //
+    // (Serve un file con estensione: `/etc/hosts` non ne ha, e `HAS_EXTENSION_RE`
+    // lo scarterebbe prima, facendo passare il test senza provare la guardia.)
+    const outside = path.join(path.dirname(tmp), `fuori-${path.basename(tmp)}.txt`);
+    fs.writeFileSync(outside, 'x\n');
+    try {
+      const escape = `scripts/../../${path.basename(outside)}`;
+      assert.equal(path.resolve(tmp, escape), outside, 'il path deve puntare al file appena creato');
+      assert.equal(fs.existsSync(outside), true, 'il bersaglio deve esistere, o (c) non prova niente');
+      assert.equal(candidatePath(escape), escape, 'candidatePath non filtra i `..`: tocca alla guardia');
+      const out = checkCitedFilePaths(withBody([`- \`${escape}\``]), { cwd: tmp });
+      assert.equal(out.ok, false, 'un path che esce dalla cartella non puo\' risultare esistente');
+    } finally {
+      fs.rmSync(outside, { force: true });
+    }
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
 });

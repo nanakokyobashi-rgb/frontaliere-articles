@@ -46,7 +46,7 @@ import { execFileSync } from 'node:child_process';
 import { checkPrBodySections } from '../lib/pr-body-sections-check.mjs';
 import { checkClosesLines } from '../lib/pr-body-closes-check.mjs';
 import { checkNextStepStates, suggestedSection } from '../lib/pr-body-nextstep-check.mjs';
-import { checkCitedFilePaths } from '../lib/pr-body-filepath-check.mjs';
+import { checkCitedFilePaths, extractCitedPaths } from '../lib/pr-body-filepath-check.mjs';
 
 const PR = process.argv[2];
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -91,10 +91,14 @@ function main() {
   // RIMUOVE, e che il body nomina proprio per dire che l'ha rimosso. `--jq` su
   // lista vuota o `gh` fallito torna '', e allora la lista e' vuota: il modulo
   // degrada a «solo l'albero», mai a un errore.
-  const touched = gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'])
-    .split('\n')
-    .map((s) => s.trim())
-    .filter(Boolean);
+  // ...ma solo se c'e' qualcosa da risolvere: un body che non cita un solo path
+  // non deve costare una chiamata paginata a ogni run del gate.
+  const touched = extractCitedPaths(body).length
+    ? gh(['api', `repos/${REPO}/pulls/${PR}/files`, '--paginate', '--jq', '.[].filename'])
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : [];
   const filePaths = checkCitedFilePaths(body, { extraExisting: touched });
 
   const problems = [
@@ -149,9 +153,14 @@ function main() {
 
   const comment = [
     MARKER,
+    // L'intestazione deve descrivere gli avvisi che ci sono davvero: con i soli
+    // path citati, «il piano di completamento si può stringere» parlerebbe di
+    // un'altra cosa e manderebbe a cercare nel posto sbagliato.
     problems.length
       ? '🔴 **Il body di questa PR non rispetta il contratto** (`REVIEW.md` → Completeness contract).'
-      : '🟡 **Il body rispetta il contratto**, ma il piano di completamento si può stringere.',
+      : nextStep.advisories.length
+        ? '🟡 **Il body rispetta il contratto**, ma il piano di completamento si può stringere.'
+        : '🟡 **Il body rispetta il contratto.** Restano dei path citati che in questo repo non esistono.',
     '',
     ...(problems.length ? ['**Da correggere:**', '', ...problems, ''] : []),
     ...(advisories.length ? ['**Avvisi** (non bloccano il check):', '', ...advisories, ''] : []),

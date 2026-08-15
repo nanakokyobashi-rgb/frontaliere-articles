@@ -301,7 +301,7 @@
       "reason": "Verifica che i path citati fra backtick nel body di una PR ESISTANO. E' il secondo giro dell'escalation #140: `pr-body-sections-check` guarda la presenza della sezione, `pr-body-nextstep-check` la forma dello stato, e un body puo' essere di forma perfetta e citare file che qui non ci sono — sulla #358 `checkNextStepStates` dava `ok: true` mentre il reviewer spendeva un ciclo per dire che due path non esistevano. Sul sito non esiste, e non e' `corpus-only-pending`: il perimetro (`KNOWN_ROOTS`) e la dislocazione `scripts/` -> `generator/scripts/` sono la topologia di QUESTO repo, e la soglia advisory e' calibrata sulle 45 PR mergiate di qui (misura nel docblock). Sul sito quei due pezzi andrebbero rimisurati da zero, quindi la' e' un modulo diverso, non lo stesso file. Stessa politica del gemello `pr-body-nextstep-check.mjs`, corpus-only per la stessa ragione.",
       "baseline": {
         "site": null,
-        "corpus": "4d5eb1628e0bda0e",
+        "corpus": "31b0d14f22b58836",
         "alignedAt": "2026-08-15"
       }
     },
