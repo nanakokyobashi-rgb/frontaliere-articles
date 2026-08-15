@@ -2162,7 +2162,6 @@
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
       "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking.",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/359",
       "baseline": {
         "site": "54ed894b24deaa3f",
         "corpus": "54ed894b24deaa3f",
