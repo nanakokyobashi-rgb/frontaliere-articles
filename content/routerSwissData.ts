@@ -919,6 +919,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'asilo-nuovo-altstaetten': { it: 'asilo-nuovo-altstaetten', en: 'new-asylum-centre-altstaetten', de: 'neues-asylzentrum-altstaetten', fr: 'nouveau-centre-dasile-altstaetten' },
  'svizzero-franco-euro': { it: 'svizzero-franco-euro', en: 'swiss-franc-euro', de: 'schweizer-franken-euro', fr: 'franc-suisse-euro' },
  'travail-suisse-ue-accordi': { it: 'travail-suisse-ue-accordi', en: 'travail-suisse-ue-agreements', de: 'travail-suisse-eu-vertrag', fr: 'travail-suisse-accords-eu' },
+ 'frontaliere-ticino-slow-water': { it: 'frontaliere-ticino-slow-water', en: 'more-slow-water-swiss-agriculture-prepares-for-the-climate-crisis', de: 'slow-water-landwirtschaft-bereitet-sich-auf-klimakrise-vor', fr: 'plus-slow-water-l-agriculture-suisse-se-prepare-a-la-crise-climatique' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

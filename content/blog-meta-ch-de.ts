@@ -2680,6 +2680,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.travail-suisse-ue-accordi.title': 'Travail.Suisse: «Die Ablehnung des EU-Abkommenspakets bleibt eine Option»',
     'blog.article.travail-suisse-ue-accordi.excerpt': 'Die Wirtschaftskommission des Ständerates hat Teile der von den Sozialpartnern ausgehandelten Massnahmen zum Schutz der Löhne im Rahmen des EU-Abkommenspakets abgelehnt.',
     'blog.article.travail-suisse-ue-accordi.imageAlt': 'Bild von Adrian Wüthrich',
+    'blog.article.frontaliere-ticino-slow-water.title': 'Slow Water: Landwirtschaft bereitet sich auf Klimakrise vor',
+    'blog.article.frontaliere-ticino-slow-water.excerpt': 'Das Projekt \'Slow Water\' umfasst rund 110 landwirtschaftliche Betriebe in der Schweiz.',
+    'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Colline der Region Napf',
 };
 
 export default blogMetaChDe;

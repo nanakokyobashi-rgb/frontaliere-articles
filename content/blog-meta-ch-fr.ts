@@ -2680,6 +2680,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.travail-suisse-ue-accordi.title': 'Travail.Suisse : « Le rejet du paquet d\'accords avec l\'UE reste une option »',
     'blog.article.travail-suisse-ue-accordi.excerpt': 'La Commission de l\'économie du Conseil des États a rejeté certaines parties des mesures négociées par les partenaires sociaux pour protéger les salaires dans le cadre du paquet d\'accords avec l\'UE.',
     'blog.article.travail-suisse-ue-accordi.imageAlt': 'Image d\'Adrian Wüthrich',
+    'blog.article.frontaliere-ticino-slow-water.title': 'Plus « Slow Water », l\'agriculture suisse se prépare à la crise climatique',
+    'blog.article.frontaliere-ticino-slow-water.excerpt': 'Le projet « Slow Water » implique environ 110 exploitations agricoles en Suisse.',
+    'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Région collinare du Napf',
 };
 
 export default blogMetaChFr;

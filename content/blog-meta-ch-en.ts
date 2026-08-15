@@ -2680,6 +2680,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.travail-suisse-ue-accordi.title': 'EU deal rejection remains an option',
     'blog.article.travail-suisse-ue-accordi.excerpt': 'The Economic Commission of the Council of States rejected parts of the measures negotiated by the social partners to protect wages under the package of agreements with the EU.',
     'blog.article.travail-suisse-ue-accordi.imageAlt': 'Image of Adrian Wüthrich',
+    'blog.article.frontaliere-ticino-slow-water.title': 'More "Slow Water", Swiss agriculture prepares for the climate crisis',
+    'blog.article.frontaliere-ticino-slow-water.excerpt': 'The \'Slow Water\' project involves around 110 farms in Switzerland.',
+    'blog.article.frontaliere-ticino-slow-water.imageAlt': 'Collinare region of the Napf',
 };
 
 export default blogMetaChEn;
