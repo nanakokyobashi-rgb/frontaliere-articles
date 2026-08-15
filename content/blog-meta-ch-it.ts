@@ -2665,6 +2665,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.economia-svizzera-crescita-trimestrale.title': 'Crescita dell\'economia svizzera: +1,5% nel 2° trimestre 2026',
     'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'La stima rapida del PIL reale della Svizzera ha rilevato un aumento del 1,5% nel secondo trimestre 2026, grazie al settore industriale e al terziario',
     'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lago di Lugano con vista sulle montagne svizzere',
+    'blog.article.economia-recupero-2026.title': 'Economia svizzera in gran recupero nel secondo trimestre',
+    'blog.article.economia-recupero-2026.excerpt': 'Il PIL elvetico cresce dell\'1,5% tra aprile e giugno, trainato dai settori chimico e farmaceutico.',
+    'blog.article.economia-recupero-2026.imageAlt': 'Economia svizzera in recupero',
 };
 
 export default blogMetaChIt;

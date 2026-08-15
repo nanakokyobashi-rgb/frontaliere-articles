@@ -2665,6 +2665,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.economia-svizzera-crescita-trimestrale.title': 'Growth of the Swiss economy: +1.5% in the 2nd quarter of 2026',
     'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'The rapid estimate of Switzerland\'s real GDP showed a 1.5% increase in the second quarter of 2026, thanks to the industrial and tertiary sectors',
     'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lago di Lugano with view on the Swiss mountains',
+    'blog.article.economia-recupero-2026.title': 'Swiss economy in great recovery in the second quarter',
+    'blog.article.economia-recupero-2026.excerpt': 'Swiss GDP grew by 1.5% between April and June, driven by the chemical and pharmaceutical sectors.',
+    'blog.article.economia-recupero-2026.imageAlt': 'Swiss economy in recovery',
 };
 
 export default blogMetaChEn;

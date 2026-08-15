@@ -7993,6 +7993,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'economia-recupero-2026',
+    category: 'fiscale',
+    date: '2026-08-15T07:14:18.846Z',
+    image: '/images/blog/economia-recupero-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

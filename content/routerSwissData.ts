@@ -914,6 +914,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'laser-vede-ascolta-si-corregge-da-solo': { it: 'laser-vede-ascolta-si-corregge-da-solo', en: 'laser-sees-listens-and-corrects-itself', de: 'lasersystem-erkannt-hoert-und-korrektiert-sichselbst', fr: 'systeme-laser-qui-voyant-entendant-et-corrige' },
  'sisma-colombia-morti-feriti': { it: 'sisma-colombia-morti-feriti', en: 'colombia-earthquake-deaths-injuries', de: 'erdbeben-kolumbien-tote-verletzte', fr: 'seisme-colombie-morts-blesses' },
  'economia-svizzera-crescita-trimestrale': { it: 'economia-svizzera-crescita-trimestrale', en: 'swiss-economy-growth-trimester', de: 'schweizer-wirtschaft-wachstum-trimester', fr: 'economie-suisse-croissance-trimestre' },
+ 'economia-recupero-2026': { it: 'economia-recupero-2026', en: 'economy-recovery-2026', de: 'wirtschaft-aufschwung-2026', fr: 'economie-reprise-2026' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

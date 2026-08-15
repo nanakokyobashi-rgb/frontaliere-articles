@@ -2665,6 +2665,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.economia-svizzera-crescita-trimestrale.title': 'Croissance de l\'économie suisse : +1,5% au 2ème trimestre 2026',
     'blog.article.economia-svizzera-crescita-trimestrale.excerpt': 'L\'estimation rapide du PIB réel de la Suisse a enregistré une hausse de 1,5% au deuxième trimestre 2026, grâce au secteur industriel et tertiaire',
     'blog.article.economia-svizzera-crescita-trimestrale.imageAlt': 'Lac de Lugano avec vue sur les montagnes suisses',
+    'blog.article.economia-recupero-2026.title': 'Économie suisse en forte reprise au deuxième trimestre',
+    'blog.article.economia-recupero-2026.excerpt': 'Le PIB suisse croît de 1,5 % entre avril et juin, tiré par les secteurs chimique et pharmaceutique.',
+    'blog.article.economia-recupero-2026.imageAlt': 'Économie suisse en récession',
 };
 
 export default blogMetaChFr;
