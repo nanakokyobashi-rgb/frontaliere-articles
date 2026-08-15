@@ -6536,7 +6536,21 @@ const PROMPT_TOKEN_BUDGET = 8000;
 // Il margine resta volutamente stretto (~100 token sul caso peggiore
 // misurato): il prossimo blocco che si aggiunge al prompt deve trovarlo, non
 // assorbirlo.
-const PROMPT_TOKEN_CEILING = 9500;
+//
+// 9.500 → 8.500 (2026-08-15, #376). Era esplicitamente `blocked: PR
+// concatenata` in attesa di un giro di produzione con la deduplica di #363
+// live — questo e' quel giro, con anche #375 (la collisione di troncamento a
+// 240 char in `anchorEvidence`) atterrata sopra.
+//
+// Fixture (news al retry, il caso peggiore fra i tre test sopra): 9.402 →
+// 8.410. Produzione (11 run `generate-article.yml` su commit 33b02b6e, tutti
+// successivi al merge di #363 E #375, 106 marker `[prompt-budget]`, finestra
+// 2026-08-15 02:59-05:00): il peggiore mai osservato e' 8.312 — ramo news,
+// dopo tutta la scala di riduzione, ancora sopra `PROMPT_TOKEN_BUDGET` e non
+// ulteriormente comprimibile senza toccare la notizia. Il fixture (8.410)
+// resta sopra la produzione reale (8.312): e' lui il caso peggiore che lega,
+// non il campione.
+const PROMPT_TOKEN_CEILING = 8500;
 
 // Budget di OUTPUT per la chiamata di generazione IT.
 //
