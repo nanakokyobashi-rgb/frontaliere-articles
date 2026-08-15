@@ -2689,6 +2689,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Haus kaufen im Kanton Luzern: Preise und Hypothekendarlehen',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Der Durchschnittspreis einer Wohnung im Kanton Luzern beträgt rund 550 \'000 CHF. Um ein Haus zu kaufen, benötigen Sie ein Hypothekendarlehen von mindestens CHF 200\' 000.',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Immobilienkauf im Kanton Luzern',
+    'blog.article.centro-asilo-altstaetten.title': 'Offene Türen zum neuen Bundesasylzentrum in Altstätten',
+    'blog.article.centro-asilo-altstaetten.excerpt': 'Bundesrat Beat Jans besuchte das neue Bundesasylzentrum in Altstätten, das im September eröffnet wird.',
+    'blog.article.centro-asilo-altstaetten.imageAlt': 'Redaktionelles Bild zu: Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
 };
 
 export default blogMetaChDe;

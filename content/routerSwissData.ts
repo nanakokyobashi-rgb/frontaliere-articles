@@ -922,6 +922,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'frontaliere-ticino-slow-water': { it: 'frontaliere-ticino-slow-water', en: 'more-slow-water-swiss-agriculture-prepares-for-the-climate-crisis', de: 'slow-water-landwirtschaft-bereitet-sich-auf-klimakrise-vor', fr: 'plus-slow-water-l-agriculture-suisse-se-prepare-a-la-crise-climatique' },
  'lavorare-amministrazione-federale-svizzera': { it: 'lavorare-amministrazione-federale-svizzera', en: 'working-for-swiss-federal-administration', de: 'arbeiten-bei-der-schweizer-bundesverwaltung', fr: 'travailler-pour-l-administration-federale-suisse' },
  'comprare-casa-lucerna-prezzi-mutuo': { it: 'comprare-casa-lucerna-prezzi-mutuo', en: 'buy-house-lucerne-prices-mortgage', de: 'immobilienkauf-luzern-preise-mauskredit', fr: 'vente-achat-maison-lucerne-prix-pret-hippique' },
+ 'centro-asilo-altstaetten': { it: 'centro-asilo-altstaetten', en: 'altstaetten-asylum-center', de: 'altstaetten-asylzentrum', fr: 'centre-d-asile-altstaetten' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -2689,6 +2689,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Acheter une maison dans le canton de Lucerne : prix et hypothèque',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Le prix moyen d\'un logement dans le canton de Lucerne est d\'environ 550 000 CHF. Pour acheter une maison, il faut un prêt hypothécaire d\'au moins 200 000 CHF.',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Vente et achat de maisons dans le canton de Lucerne',
+    'blog.article.centro-asilo-altstaetten.title': 'Portes ouvertes au nouveau centre fédéral d\'asile à Altstätten',
+    'blog.article.centro-asilo-altstaetten.excerpt': 'Le Conseiller fédéral Beat Jans a visité le nouveau Centre fédéral d\'asile à Altstätten, qui ouvrira ses portes en septembre.',
+    'blog.article.centro-asilo-altstaetten.imageAlt': 'Image éditoriale relative à: Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
 };
 
 export default blogMetaChFr;

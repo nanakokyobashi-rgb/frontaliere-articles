@@ -2689,6 +2689,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Comprare casa nel Cantone di Lucerna: prezzi e mutuo ipotecario',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Il prezzo medio di un\'abitazione nel Cantone di Lucerna è di circa 550.000 CHF. Per acquistare una casa, è necessario un mutuo ipotecario di almeno 200.000 CHF.',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Compravendita di abitazioni nel Cantone di Lucerna',
+    'blog.article.centro-asilo-altstaetten.title': 'Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
+    'blog.article.centro-asilo-altstaetten.excerpt': 'Il Consigliere federale Beat Jans ha visitato il nuovo Centro federale d\'asilo ad Altstätten, che aprirà i battenti a settembre.',
+    'blog.article.centro-asilo-altstaetten.imageAlt': 'Immagine editoriale relativa a: Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
 };
 
 export default blogMetaChIt;

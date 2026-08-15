@@ -34847,6 +34847,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-centro-asilo-altstaetten': {
+    title: 'Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
+    description: 'Il Consigliere federale Beat Jans ha visitato il nuovo Centro federale d\'asilo ad Altstätten, che aprirà i battenti a settembre. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, porte, aperte, nuovo, centro',
+    ogTitle: 'Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
+    ogDescription: 'Il Consigliere federale Beat Jans ha visitato il nuovo Centro federale d\'asilo ad Altstätten, che aprirà i battenti a settembre.',
+    canonicalPath: '/articoli-svizzera/centro-asilo-altstaetten/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Porte aperte al nuovo centro federale d'asilo ad Altstätten",
+      "description": "Il Consigliere federale Beat Jans ha visitato il nuovo Centro federale d'asilo ad Altstätten, che aprirà i battenti a settembre. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/centro-asilo-altstaetten.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: Porte aperte al nuovo centro federale d'asilo ad Altstätten"
+      },
+      "datePublished": "2026-08-15T15:02:13+00:00",
+      "dateModified": "2026-08-15T15:02:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/centro-asilo-altstaetten/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

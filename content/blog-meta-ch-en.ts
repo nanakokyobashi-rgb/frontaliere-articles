@@ -2689,6 +2689,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Buying a house in the Canton of Lucerne: prices and mortgage',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'The average price of a house in the Canton of Lucerne is about CHF 550,000. To buy a home, you need a mortgage of at least CHF 200,000.',
     'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Buying and selling houses in the Canton of Lucerne',
+    'blog.article.centro-asilo-altstaetten.title': 'Doors open to the new federal asylum centre in Altstätten',
+    'blog.article.centro-asilo-altstaetten.excerpt': 'Federal Councillor Beat Jans visited the new Federal Asylum Centre in Altstätten, which will open in September.',
+    'blog.article.centro-asilo-altstaetten.imageAlt': 'Editorial image related to: Porte aperte al nuovo centro federale d\'asilo ad Altstätten',
 };
 
 export default blogMetaChEn;
