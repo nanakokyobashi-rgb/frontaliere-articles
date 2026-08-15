@@ -2515,6 +2515,60 @@ function sortChainByScore(chain) {
   });
 }
 
+// Default AI_MODELS_PREFER — pins claude-cli/haiku to the front of the chain
+// (owner decision, issue #379 passo 2: "Porta Haiku al primo livello").
+// Without this, claude-cli/haiku sits at DEFAULT_CHAIN's tail (~180 entries
+// in) — being tier-0 (AI_COMPETING_TIERS, above) makes it COMPETE on score
+// against every normal model, but competing isn't winning: every untried
+// model starts at score 0, so sortChainByScore's tiebreak falls to original
+// chain INDEX, and claude-cli/haiku's index put it last among a huge block of
+// score-0 ties. Measured empty in run 31690534255: "46 modelli free
+// esauriti, claude-cli not reached this run, 0 skip" — the run's chain walk
+// never got that far. Tier-0 was necessary but not sufficient; it also needed
+// to win the tiebreak.
+export const DEFAULT_MODELS_PREFER = [AI_MODELS.CLAUDE_CLI_HAIKU];
+
+/**
+ * AI_MODELS_PREFER — CSV of model ids to move to the FRONT of the chain, in
+ * the order given, WITHOUT removing anything else. Unlike
+ * AI_MODELS_FORCE_CHAIN (which truncates the chain down to exactly the listed
+ * ids), this only reorders — every other model stays in the chain, in its
+ * existing relative order, right after the preferred ones.
+ *
+ * Unset → DEFAULT_MODELS_PREFER above. Explicit empty string ("") → no
+ * preference at all, i.e. the exact pre-existing behavior — same
+ * instant-rollback convention as AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER.
+ * Ids absent from the chain are silently dropped (nothing to move); no value
+ * here is "malformed" the way a tier name can be.
+ */
+function _getModelsPrefer() {
+  const raw = process.env.AI_MODELS_PREFER;
+  if (raw === undefined) return DEFAULT_MODELS_PREFER;
+  const trimmed = raw.trim();
+  if (trimmed === '') return []; // explicit empty → rollback lever
+  return trimmed.split(',').map((s) => s.trim()).filter(Boolean);
+}
+
+/**
+ * Apply AI_MODELS_PREFER to a chain, ahead of sortChainByScore(). Because it
+ * runs BEFORE the score sort, it only changes the tiebreak INDEX that sort
+ * falls back on when tier and score are equal — tier and score still decide
+ * first. A preferred model that has genuinely sunk (negative score from real
+ * failures) still sinks below a better-scoring one; this only guarantees it
+ * wins ties, which for a never-tried model (score 0, same as every other
+ * never-tried model) means it goes first.
+ */
+export function applyModelsPrefer(chain) {
+  const preferred = _getModelsPrefer();
+  if (!preferred.length) return chain;
+  const chainSet = new Set(chain);
+  const front = preferred.filter((m) => chainSet.has(m));
+  if (!front.length) return chain;
+  const frontSet = new Set(front);
+  const rest = chain.filter((m) => !frontSet.has(m));
+  return [...front, ...rest];
+}
+
 // ── Public state helpers ─────────────────────────────────────
 /**
  * Mark a model as exhausted (daily limit reached).
@@ -2647,6 +2701,7 @@ export function getPreferredModel({ model: startModel, chain: chainOverride } = 
     if (idx > 0) chain = chain.slice(idx);
     else if (idx < 0) chain = [startModel, ...chain.filter((m) => m !== startModel)];
   }
+  chain = applyModelsPrefer(chain);
   chain = sortChainByScore(chain);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
@@ -4469,8 +4524,11 @@ export async function callLLM(messages, opts = {}) {
   // Sort by accumulated score — models that are working well come first,
   // models that have been failing are pushed down.
   // The initial call uses DEFAULT_CHAIN order (all scores 0, tiebreak by index).
-  // A forced chain keeps its explicit order (no score reshuffle).
+  // A forced chain keeps its explicit order (no score reshuffle, no preference
+  // reorder — the override owns the order verbatim, same as the o.model
+  // skip above).
   if (!_forcedChain.length) {
+    chain = applyModelsPrefer(chain);
     chain = sortChainByScore(chain);
   }
 
