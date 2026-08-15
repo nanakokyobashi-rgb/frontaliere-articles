@@ -2686,6 +2686,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Lavorare per l’Amministrazione federale: opportunità e vantaggi',
     'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Scopri come intraprendere una carriera nell\'Amministrazione federale svizzera, tra formazioni professionali, praticantati e condizioni di lavoro flessibili.',
     'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Palazzo federale a Berna, sede dell\'Amministrazione federale svizzera.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Comprare casa nel Cantone di Lucerna: prezzi e mutuo ipotecario',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Il prezzo medio di un\'abitazione nel Cantone di Lucerna è di circa 550.000 CHF. Per acquistare una casa, è necessario un mutuo ipotecario di almeno 200.000 CHF.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Compravendita di abitazioni nel Cantone di Lucerna',
 };
 
 export default blogMetaChIt;

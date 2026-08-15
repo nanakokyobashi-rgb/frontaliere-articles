@@ -2686,6 +2686,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Travailler pour l’administration fédérale : opportunités et avantages',
     'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Découvrez comment entreprendre une carrière dans l\'Administration fédérale suisse, entre formations professionnelles, stages et conditions de travail flexibles.',
     'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Palais fédéral à Berne, siège de l\'administration fédérale suisse.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Acheter une maison dans le canton de Lucerne : prix et hypothèque',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Le prix moyen d\'un logement dans le canton de Lucerne est d\'environ 550 000 CHF. Pour acheter une maison, il faut un prêt hypothécaire d\'au moins 200 000 CHF.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Vente et achat de maisons dans le canton de Lucerne',
 };
 
 export default blogMetaChFr;

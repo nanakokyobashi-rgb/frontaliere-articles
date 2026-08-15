@@ -8056,6 +8056,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'comprare-casa-lucerna-prezzi-mutuo',
+    category: 'fiscale',
+    date: '2026-08-15T13:21:54.221Z',
+    image: '/images/blog/comprare-casa-lucerna-prezzi-mutuo.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

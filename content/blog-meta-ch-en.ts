@@ -2686,6 +2686,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Working for the Federal Administration: opportunities and benefits',
     'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Learn how to pursue a career in the Swiss Federal Administration, including vocational training, internships and flexible working conditions.',
     'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Federal Palace in Bern, headquarters of the Swiss Federal Administration.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Buying a house in the Canton of Lucerne: prices and mortgage',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'The average price of a house in the Canton of Lucerne is about CHF 550,000. To buy a home, you need a mortgage of at least CHF 200,000.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Buying and selling houses in the Canton of Lucerne',
 };
 
 export default blogMetaChEn;

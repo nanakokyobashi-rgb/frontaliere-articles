@@ -2686,6 +2686,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.lavorare-amministrazione-federale-svizzera.title': 'Arbeiten für die Bundesverwaltung: Chancen und Vorteile',
     'blog.article.lavorare-amministrazione-federale-svizzera.excerpt': 'Erfahren Sie, wie Sie eine Karriere in der Schweizerischen Bundesverwaltung anstreben, zwischen Berufsausbildungen, Praktika und flexiblen Arbeitsbedingungen.',
     'blog.article.lavorare-amministrazione-federale-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz der schweizerischen Bundesverwaltung.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.title': 'Haus kaufen im Kanton Luzern: Preise und Hypothekendarlehen',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.excerpt': 'Der Durchschnittspreis einer Wohnung im Kanton Luzern beträgt rund 550 \'000 CHF. Um ein Haus zu kaufen, benötigen Sie ein Hypothekendarlehen von mindestens CHF 200\' 000.',
+    'blog.article.comprare-casa-lucerna-prezzi-mutuo.imageAlt': 'Immobilienkauf im Kanton Luzern',
 };
 
 export default blogMetaChDe;
