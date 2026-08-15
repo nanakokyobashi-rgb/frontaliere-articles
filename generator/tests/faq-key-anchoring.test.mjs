@@ -199,9 +199,15 @@ test("repair: un id con caratteri di regex non allarga il match", () => {
 test('repair: lo script passa l id alle due funzioni ancorate', () => {
   // `assert.ok` e non `assert.match`: il messaggio di `match` stampa i 25 KB
   // dello script a ogni fallimento e seppellisce l'esito degli altri test.
+  //
+  // Le due positive matchano una FORMA, non la riga verbatim: qui un rosso
+  // falso non costa un test, costa la coda — `tests` rosso su main ferma
+  // `pr-review-loop`, e con lui l'auto-merge di ogni PR aperta. Un `const abs =
+  // path.join(...)` estratto in una locale, o un rename di `dir`/`name`, non
+  // devono farlo scattare: cio' che conta e' che l'id arrivi alle due funzioni.
   const src = fs.readFileSync(path.join(QUI, '..', 'scripts', 'repair-prompt-placeholders.mjs'), 'utf-8');
-  assert.ok(/faqStateOf\(path\.join\(ROOT, 'content', dir, l, name\), id\)/.test(src), 'faqStateOf va chiamata con l id dell articolo');
-  assert.ok(/faqLineRe\(id\)/.test(src), 'la potatura va fatta con faqLineRe(id)');
+  assert.ok(/faqStateOf\([^()]*(?:\([^()]*\))?[^()]*,\s*id\s*\)/.test(src), 'faqStateOf va chiamata con l id dell articolo');
+  assert.ok(/faqLineRe\(\s*id\s*\)/.test(src), 'la potatura va fatta con faqLineRe(id)');
   assert.ok(
     !/'blog\\\.article\\\.\[\^'\]\+\\\.faq'\\s\*:\\s\*'\(\(\?:/.test(src),
     'regex .faq non ancorata all id rimasta nello script',

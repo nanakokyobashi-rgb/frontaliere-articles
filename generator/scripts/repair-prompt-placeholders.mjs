@@ -62,6 +62,7 @@ import {
   orphanFaqLocales,
   faqLineRe,
   faqPresentForId,
+  DROP_FAQ_SENTINEL,
 } from './lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -326,7 +327,7 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
         if (!dropped.length && !repaired) return null;
         // Sotto le 2 coppie il campo va tolto: e' la soglia di
         // ogPagesPlugin.ts:1328. `__DROP__` lo segnala al post-processo sotto.
-        if (!kept) return { value: '__DROP_FAQ__', how: `faq-rimossa (${dropped.length} coppie segnaposto)` };
+        if (!kept) return { value: DROP_FAQ_SENTINEL, how: `faq-rimossa (${dropped.length} coppie segnaposto)` };
         return { value: JSON.stringify(kept), how: `faq-potata (${repaired} riparate, ${dropped.length} scartate)` };
       }
       let out = stripFaqNumberedLabels(value).value;
@@ -370,8 +371,12 @@ if (!CHECK_ONLY) {
   for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
     try {
       let src = fs.readFileSync(abs, 'utf-8');
-      if (!src.includes('__DROP_FAQ__')) continue;
-      src = src.replace(/\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'__DROP_FAQ__',?/g, '');
+      if (!src.includes(DROP_FAQ_SENTINEL)) continue;
+      // Ancorata sul VALORE e non sull'id, di proposito: il sentinella l'ha
+      // scritto il passo 2 solo sulla chiave giusta, e togliere solo quello di
+      // un id lascerebbe su disco quello di un altro — che il gate finale
+      // `dropFaqSurvivors` conta come fallimento.
+      src = src.replace(new RegExp(`\\n[ \\t]*'blog\\.article\\.[^']+\\.faq'\\s*:\\s*'${DROP_FAQ_SENTINEL}',?`, 'g'), '');
       fs.writeFileSync(abs, src);
     } catch (err) {
       problems.push(`${path.relative(ROOT, abs)}: rimozione della riga __DROP_FAQ__ fallita (${err.message}) — FILE SALTATO`);
@@ -550,7 +555,7 @@ if (residuals.length) {
 const dropFaqSurvivors = [];
 for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
   try {
-    if (fs.readFileSync(abs, 'utf-8').includes('__DROP_FAQ__')) dropFaqSurvivors.push(path.relative(ROOT, abs));
+    if (fs.readFileSync(abs, 'utf-8').includes(DROP_FAQ_SENTINEL)) dropFaqSurvivors.push(path.relative(ROOT, abs));
   } catch (err) {
     problems.push(`${path.relative(ROOT, abs)}: rilettura per il controllo finale fallita (${err.message}) — sentinella NON verificato`);
   }

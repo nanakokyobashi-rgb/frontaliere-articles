@@ -274,12 +274,22 @@ function commitIfNeeded(currentStep) {
   }
 }
 
-// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill)
-process.on('SIGTERM', () => {
-  console.error('\n⚠️  SIGTERM — saving progress...');
-  gitCommitAndPush('interrupted');
-  process.exit(0);
-});
+// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill).
+// La REGISTRAZIONE sta dentro la guardia sull'entry point in coda al file, non
+// qui: questo modulo viene IMPORTATO — da `publish-journalist-article.mjs` per
+// `generateFaqIT`, e ora dai test — e a module scope l'handler si armava anche
+// li'. Un SIGTERM a quei processi (`tests.yml` ha `cancel-in-progress: true`,
+// e in locale basta un kill) faceva partire `git add content/ && git commit &&
+// git push origin main` da un processo che non stava generando niente. Armarlo
+// solo quando il file E' l'entry point non toglie niente al job vero, che passa
+// sempre di la'.
+function installSigtermCheckpoint() {
+  process.on('SIGTERM', () => {
+    console.error('\n⚠️  SIGTERM — saving progress...');
+    gitCommitAndPush('interrupted');
+    process.exit(0);
+  });
+}
 
 // ── Article discovery ────────────────────────────────────────
 
@@ -314,7 +324,13 @@ function extractArticleId(fileContent) {
 // divergenza in piu' fra i due, per tre righe di regex.
 const faqKeyRx = (id) => `'blog\\.article\\.${String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.faq'`;
 
-/** Check if a body file already has a .faq key for THIS article id */
+/**
+ * Check if a body file already has a .faq key for THIS article id.
+ *
+ * Primo argomento: il CONTENUTO del file. L'omonima di `fix-faq-locales.mjs`
+ * prende invece un PATH — sono due moduli diversi e i due nomi ora sono
+ * entrambi esportati, quindi la differenza va letta qui prima di importare.
+ */
 export function hasFaqKey(fileContent, articleId) {
   return new RegExp(`${faqKeyRx(articleId)}\\s*:`).test(fileContent);
 }
@@ -1180,6 +1196,7 @@ async function main() {
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
+  installSigtermCheckpoint();
   main().catch(err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);

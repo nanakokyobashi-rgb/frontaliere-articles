@@ -190,6 +190,11 @@ export function extractFaqFromFile(filePath, id = idOfBodyPath(filePath)) {
   return raw === null ? null : parseFaqLiteral(raw).pairs;
 }
 
+/**
+ * Primo argomento: un PATH. L'omonima di `batch-add-faq-to-articles.mjs`
+ * prende invece il CONTENUTO del file: passarle un path (o viceversa) non
+ * lancia, risponde solo `false` in silenzio.
+ */
 export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return false;
   return new RegExp(`${faqKeyRx(id)}\\s*:`).test(readFileSync(filePath, 'utf-8'));
