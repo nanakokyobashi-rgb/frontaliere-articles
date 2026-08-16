@@ -2962,6 +2962,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Premi cassa malati canton Nidvaldo e riduzione premi',
     'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.',
     'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'Un medico svizzero cura un paziente',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.title': 'Tragico incidente stradale ad Amlikon-Bissegg: muore 18enne',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.excerpt': 'Una motociclista diciottenne è deceduta in ospedale in seguito alle gravissime ferite riportate nello scontro tra la sua moto e un furgone.',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.imageAlt': 'Scena di un incidente stradale in Svizzera',
 };
 
 export default blogMetaChIt;

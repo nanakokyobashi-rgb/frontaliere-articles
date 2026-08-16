@@ -2962,6 +2962,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung',
     'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.',
     'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'Ein Schweizer Arzt untersucht einen Patienten',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.title': 'Tragischer Verkehrsunfall in Amlikon-Bissegg: 18-Jähriger stirbt',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.excerpt': 'Eine 18-jährige Motorradfahrerin starb im Krankenhaus an den schweren Verletzungen, die sie bei der Kollision zwischen ihrem Motorrad und einem Lieferwagen erlitten hatte.',
+    'blog.article.incidente-moto-amlikon-bissegg-18-anni.imageAlt': 'Unfallstelle in der Schweiz',
 };
 
 export default blogMetaChDe;
