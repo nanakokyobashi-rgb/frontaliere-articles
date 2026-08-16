@@ -24,7 +24,8 @@ import { detectLanguage } from './lib/detect-language.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
-import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { escapeForSingleQuoteTS } from './lib/article-meta-block.mjs';
+import { unescapeTsString } from './lib/unescape-ts-string.mjs';
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
@@ -131,11 +132,23 @@ export function serializeFaqLiteral(faqArray) {
  * `legacy: true` e' quindi anche il RILEVATORE: e' vero esattamente sui file
  * che vanno riscritti (`--reescape-broken`).
  *
+ * La decodifica esatta (1) passa da `unescapeTsString` con la mappa MINIMA
+ * `{ \\, ' }`, non da `unescapeForSingleQuoteTS` (che spoglia OGNI `\x`).
+ * Il valore di `.faq` e' un documento JSON annidato dentro il literal TS:
+ * ogni `\x` che non e' `\\` o `\'` e' un escape del JSON sottostante (`\"`,
+ * `\n`, `\uXXXX`, ...) e va lasciato INTATTO perche' lo deve vedere
+ * `JSON.parse`, non noi. Un decoder che spoglia anche quelli legge ` `
+ * come la lettera `u` (issue #401): produce `CHF 5u00a0000` invece di
+ * `CHF 5<nbsp>000`, e siccome il risultato resta JSON valido il fallback
+ * legacy sotto non scatta mai — il valore sbagliato passa in silenzio.
+ * Stesso decoder minimo gia' usato dal gemello
+ * `batch-add-faq-to-articles.mjs` (issue #394/#397).
+ *
  * @returns {{ pairs: Array|null, legacy: boolean }}
  */
 export function parseFaqLiteral(raw) {
   const decoders = [
-    [unescapeForSingleQuoteTS, false],
+    [(s) => unescapeTsString(String(s ?? ''), { '\\': '\\', "'": "'" }), false],
     [(s) => s.replace(/\\'/g, "'"), true],
   ];
   for (const [decode, legacy] of decoders) {

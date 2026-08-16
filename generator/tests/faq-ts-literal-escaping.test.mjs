@@ -136,15 +136,39 @@ for (const [label, faq] of CASES) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 test('parseFaqLiteral legge il formato legacy e lo marca', () => {
-  const broken = brokenEscape(FAQ_WITH_QUOTE);
+  // FAQ_WITH_BACKSLASH, non FAQ_WITH_QUOTE (issue #401): il decoder esatto ora
+  // e' `unescapeTsString` con la mappa minima `{ \\, ' }`, che lascia intatto
+  // ogni `\x` che non e' `\\` o `\'` — inclusa la `\"` di JSON.stringify. Su un
+  // testo SENZA backslash letterale la forma legacy (che escapa solo
+  // l'apostrofo) decodifica correttamente anche col decoder esatto, quindi il
+  // fallback non verrebbe mai raggiunto e il test non proverebbe niente. Il
+  // backslash letterale di FAQ_WITH_BACKSLASH forza il decoder esatto a
+  // dimezzarlo e a fallire il parse, esercitando davvero il fallback legacy —
+  // stessa cautela gia' documentata in batch-faq-robustness.test.mjs (#394).
+  const broken = brokenEscape(FAQ_WITH_BACKSLASH);
   const read = parseFaqLiteral(broken);
-  assert.deepEqual(read.pairs, FAQ_WITH_QUOTE, 'il contenuto del file rotto non e\' recuperabile');
+  assert.deepEqual(read.pairs, FAQ_WITH_BACKSLASH, 'il contenuto del file rotto non e\' recuperabile');
   assert.equal(read.legacy, true, 'un literal in formato rotto deve essere marcato legacy');
 
   // Ri-serializzandolo si ottiene il formato corrente: e' la riparazione.
   const repaired = parseFaqLiteral(serializeFaqLiteral(read.pairs));
-  assert.deepEqual(repaired.pairs, FAQ_WITH_QUOTE);
+  assert.deepEqual(repaired.pairs, FAQ_WITH_BACKSLASH);
   assert.equal(repaired.legacy, false);
+});
+
+test('parseFaqLiteral lascia intatti gli escape del JSON sottostante (#401)', () => {
+  // Il caso reale che ha deciso la mappa di decodifica, gia' pinnato lato
+  // `batch-add-faq-to-articles.mjs` da batch-faq-robustness.test.mjs: un
+  // \u00a0 scritto dallo scrittore legacy. Un inverso che spoglia OGNI `\x`
+  // (`unescapeForSingleQuoteTS`, cio' che questo file usava come decoder
+  // esatto prima della fix) legge la `u` come lettera e produce
+  // `CHF 5u00a0000` — e siccome il risultato resta JSON valido, il fallback
+  // legacy sotto non scatta mai: il valore sbagliato passa in silenzio.
+  const raw = String.raw`[{"q":"Quanto vale la deduzione?","a":"Vale CHF 5\u00a0000 pieni, cifra tonda."}]`;
+  const { pairs, legacy } = parseFaqLiteral(raw);
+  assert.equal(pairs[0].a, 'Vale CHF 5\u00a0000 pieni, cifra tonda.');
+  assert.ok(!pairs[0].a.includes('u00a0'), 'il \\u e\' stato spogliato del backslash e letto come lettera');
+  assert.equal(legacy, false, 'un literal ben formato con \\u non e\' legacy');
 });
 
 test('un literal senza caratteri da escapare non e\' legacy', () => {
