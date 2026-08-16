@@ -336,7 +336,8 @@
     "patente di guida canton Svitto conversione ed esami",
     "imposta di successione e donazione canton Svitto aliquote",
     "premi cassa malati canton Obvaldo e riduzione premi",
-    "permesso di dimora B canton Obvaldo requisiti e rinnovo"
+    "permesso di dimora B canton Obvaldo requisiti e rinnovo",
+    "assegni familiari canton Obvaldo importi e domanda"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -511,7 +512,7 @@
     "salari e mercato del lavoro canton Svitto settori e livelli": 1,
     "patente di guida canton Svitto conversione ed esami": 1,
     "imposte cantonali canton Obvaldo aliquote e deduzioni": 1,
-    "permesso di domicilio C canton Obvaldo requisiti e domanda": 2,
-    "permesso L di breve durata canton Obvaldo validità e proroga": 1
+    "permesso di domicilio C canton Obvaldo requisiti e domanda": 3,
+    "permesso L di breve durata canton Obvaldo validità e proroga": 2
   }
 }
