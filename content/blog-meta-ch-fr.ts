@@ -2851,6 +2851,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.title': 'Impôts cantonaux à Schwyz : taux et déductions',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.excerpt': 'Les impôts cantonaux en Schwyz seront déterminés par le canton de Schwyz.',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.imageAlt': 'Une vue d\'ensemble des impôts cantonaux en Svitto, avec un focus sur les nouvelles taux et déductions.',
+    'blog.article.premi-cassa-malati-svitto.title': 'Primes caisse-maladie Schwyz : tranches, franchises et subventions',
+    'blog.article.premi-cassa-malati-svitto.excerpt': 'Analyse des primes de l\'assurance maladie obligatoire dans le canton de Schwyz : fourchettes de primes, franchises, modèles et conditions de réduction.',
+    'blog.article.premi-cassa-malati-svitto.imageAlt': 'Primes d\'assurance-maladie et reduction dans le canton de Schwytz',
 };
 
 export default blogMetaChFr;

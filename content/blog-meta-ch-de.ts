@@ -2851,6 +2851,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.title': 'Kantonale Steuern in Schwyz: Steuersätze und Abzüge',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.excerpt': 'Die Kantonssteuern in Schwyz werden vom Kanton Schwyz festgelegt.',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.imageAlt': 'Eine Übersicht der kantonalen Steuern in Svitto, mit Schwerpunkt auf den neuen Steuersätzen und Abzügen.',
+    'blog.article.premi-cassa-malati-svitto.title': 'Krankenkassenprämien Schwyz: Zeitabschnitte, Franchisen und Zuschüsse',
+    'blog.article.premi-cassa-malati-svitto.excerpt': 'Prämienanalyse der obligatorischen Krankenversicherung im Kanton Schwyz: Prämienspannen, Franchisen, Modelle und Reduktionsvoraussetzungen.',
+    'blog.article.premi-cassa-malati-svitto.imageAlt': 'Krankenkassenpraemien und Praemienverbilligung in Schwyz',
 };
 
 export default blogMetaChDe;

@@ -2851,6 +2851,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.title': 'Imposte cantonali in Svitto: aliquote e deduzioni',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.excerpt': 'Le imposte cantonali in Svitto saranno determinate dal Cantone di Svitto.',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.imageAlt': 'Una panoramica delle imposte cantonali in Svitto, con un focus sulle nuove aliquote e deduzioni.',
+    'blog.article.premi-cassa-malati-svitto.title': 'Premi cassa malati Svitto: fasce, franchigie e sussidi',
+    'blog.article.premi-cassa-malati-svitto.excerpt': 'Analisi dei premi dell\'assicurazione malattia obbligatoria nel Cantone di Svitto: fasce di premio, franchigie, modelli e requisiti per la riduzione.',
+    'blog.article.premi-cassa-malati-svitto.imageAlt': 'Premi cassa malati e riduzione nel cantone Svitto',
 };
 
 export default blogMetaChIt;

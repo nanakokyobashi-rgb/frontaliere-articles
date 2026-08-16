@@ -36953,6 +36953,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-premi-cassa-malati-svitto': {
+    title: 'Premi cassa malati Svitto: fasce, franchigie e sussidi',
+    description: 'Guida ai premi cassa malati nel Cantone di Svitto: franchigie, fasce d\'età, modelli assicurativi alternativi e requisiti per ottenere i sussidi cantonali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, svitto',
+    ogTitle: 'Premi cassa malati Svitto: franchigie, modelli e riduzione',
+    ogDescription: 'Scopri come funzionano i premi LAMal nel Cantone di Svitto, le franchigie disponibili, i modelli assicurativi e le modalità per richiedere la riduzione dei premi.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-svitto/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Svitto: fasce, franchigie e sussidi",
+      "description": "Guida ai premi cassa malati nel Cantone di Svitto: franchigie, fasce d'età, modelli assicurativi alternativi e requisiti per ottenere i sussidi cantonali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-svitto.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Premi cassa malati e riduzione nel cantone Svitto"
+      },
+      "datePublished": "2026-08-16T11:05:05+00:00",
+      "dateModified": "2026-08-16T11:05:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-svitto/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

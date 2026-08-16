@@ -2851,6 +2851,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.title': 'Cantonal taxes in Svitto: rates and deductions',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.excerpt': 'Cantonal taxes in Svitto will be determined by the Canton of Svitto.',
     'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.imageAlt': 'An overview of the cantonal taxes in Svitto, with a focus on the new rates and deductions.',
+    'blog.article.premi-cassa-malati-svitto.title': 'Svitto sick pay premiums: bands, deductibles and subsidies',
+    'blog.article.premi-cassa-malati-svitto.excerpt': 'Analysis of compulsory health insurance premiums in the Canton of Schwyz: premium brackets, deductibles, models and requirements for reduction.',
+    'blog.article.premi-cassa-malati-svitto.imageAlt': 'Health insurance premiums and reduction in Schwyz',
 };
 
 export default blogMetaChEn;
