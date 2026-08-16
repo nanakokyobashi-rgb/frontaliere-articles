@@ -319,8 +319,6 @@ const TESTIMONE_DOPO = 24;
 const TESTIMONE_CODA_MAX = 3;
 /** Tetto sui riscontri esaminati per una singola ancora. */
 const TESTIMONE_RISCONTRI_MAX = 500;
-/** Quante volte si ripassa: una riparazione puo' ripulire l'ancora di un'altra. */
-const TESTIMONE_GIRI_MAX = 4;
 
 const LETTERA = /\p{L}/u;
 
@@ -409,14 +407,22 @@ function risolviConTestimone(testo, i, testimoni, cache) {
 }
 
 /**
- * Passa tutto il file col canale testimone, fino a punto fisso.
+ * Passa tutto il file col canale testimone, fino a punto fisso VERO (issue
+ * #404): si applica UNA riparazione per giro (una riparazione puo' ripulire
+ * l'ancora di un'altra, e gli offset cambiano), ma il numero di giri non e'
+ * piu' un tetto fisso — e' il numero di marker presenti all'inizio. Ogni giro
+ * che ripara consuma esattamente un marker, quindi quel numero e' gia' il
+ * caso peggiore: o il file converge prima (nessun marker piu' risolvibile,
+ * `fatto` resta falso), o si esauriscono i marker da consumare. In nessuno
+ * dei due casi resta una riparazione possibile non applicata.
  * Ritorna { testo, riparazioni } — le riparazioni hanno la stessa forma di
  * quelle di `riparaTesto`, cosi' il rapporto e' uno solo.
  */
 function riparaConTestimoni(testo, testimoni, cache) {
   const riparazioni = [];
   let corrente = testo;
-  for (let giro = 0; giro < TESTIMONE_GIRI_MAX; giro += 1) {
+  const giriMax = (testo.match(MARKER_G) || []).length;
+  for (let giro = 0; giro < giriMax; giro += 1) {
     let fatto = false;
     for (const m of [...corrente.matchAll(MARKER_G)]) {
       const i = m.index;
@@ -563,12 +569,14 @@ function decodificaEscapate(testo) {
  *
  * Per la stessa ragione le risolvibili che NON vengono scelte in questa passata
  * escono in `rinviate` (issue #366).  Se ne applica una per giro, quindi le
- * altre normalmente tornano al giro dopo — ma «normalmente» non e' «sempre»: al
- * tetto di `TESTIMONE_GIRI_MAX` il giro dopo non c'e', e finche' questa
- * funzione ritornava solo `{lasciate, scelta}` quelle occorrenze non stavano
- * in nessuno dei due elenchi.  Restavano sul disco, non contate e senza toccare
- * il codice d'uscita: sparite in silenzio, che e' esattamente cio' che il
- * commento qui sopra promette non possa succedere.
+ * altre tornano al giro dopo — e dal #404 il numero di giri disponibili e' il
+ * numero di occorrenze escapate del file, non un tetto fisso, quindi il giro
+ * dopo c'e' sempre finche' resta qualcosa da consumare.  `rinviate` esiste
+ * comunque come rete: finche' questa funzione ritornava solo `{lasciate,
+ * scelta}`, un giro mancante avrebbe lasciato quelle occorrenze fuori da
+ * entrambi gli elenchi — sul disco, non contate, senza toccare il codice
+ * d'uscita: sparite in silenzio, che e' esattamente cio' che il commento qui
+ * sopra promette non possa succedere.
  */
 function valutaEscapate(mio, testo, testimoni, cache) {
   const d = decodificaEscapate(testo);
@@ -621,26 +629,29 @@ function valutaEscapate(mio, testo, testimoni, cache) {
 }
 
 /**
- * Passa il file sulla spelling escapata, fino a punto fisso.  Ritorna il testo
- * ORIGINALE con le sole occorrenze provate dal testimone unanime cross-locale
- * sostituite, piu' l'elenco di cio' che si e' lasciato e perche'.  Si applica
- * una riparazione per giro perche' ognuna sposta tutti gli offset, e perche'
- * una riparazione puo' ripulire l'ancora della successiva.
+ * Passa il file sulla spelling escapata, fino a punto fisso VERO (issue #404).
+ * Ritorna il testo ORIGINALE con le sole occorrenze provate dal testimone
+ * unanime cross-locale sostituite, piu' l'elenco di cio' che si e' lasciato e
+ * perche'.  Si applica una riparazione per giro perche' ognuna sposta tutti
+ * gli offset, e perche' una riparazione puo' ripulire l'ancora della
+ * successiva — ma il numero di giri non e' un tetto fisso: e' il numero di
+ * occorrenze escapate presenti all'inizio.  Ogni giro che ripara ne consuma
+ * esattamente una, quindi quel numero e' gia' il caso peggiore.
  *
- * IL TETTO DEI GIRI NON E' UN PERMESSO A FAR SPARIRE NIENTE (issue #366).  Un
- * file con piu' di `TESTIMONE_GIRI_MAX` occorrenze risolvibili esce dal ciclo
- * con `scelta` ancora piena e, dietro di lei, le `rinviate` di quell'ultima
- * passata: sono ancora sul disco, con la loro spelling, e vanno dichiarate.
- * Finiscono in `lasciate` col motivo che dice perche' — cosi' contano nel
- * rapporto e nel codice d'uscita, come ogni altra occorrenza non riparata, e un
- * secondo giro dello script le ripara davvero invece di ignorarle.
+ * IL CICLO NON E' UN PERMESSO A FAR SPARIRE NIENTE (issue #366).  Se
+ * `scelta` fosse ancora piena all'uscita del ciclo — cosa che l'argomento sopra
+ * esclude, ma che una futura modifica potrebbe reintrodurre — lei e le
+ * `rinviate` dell'ultima passata andrebbero comunque dichiarate invece di
+ * sparire silenziosamente: e' il ramo sotto, tenuto come rete invece che
+ * rimosso.
  */
 function riparaEscapate(percorso, testo, testimoni, cache) {
   const riparazioni = [];
   const mio = localeDi(percorso);
   let corrente = testo;
   let esito = valutaEscapate(mio, corrente, testimoni, cache);
-  for (let giro = 0; giro < TESTIMONE_GIRI_MAX && esito.scelta; giro += 1) {
+  const giriMax = findEscapedControlChars(testo).length;
+  for (let giro = 0; giro < giriMax && esito.scelta; giro += 1) {
     const s = esito.scelta;
     corrente = corrente.slice(0, s.offset) + s.dopo + corrente.slice(s.fine);
     riparazioni.push(s);
@@ -648,7 +659,7 @@ function riparaEscapate(percorso, testo, testimoni, cache) {
   }
   const lasciate = [...esito.lasciate];
   if (esito.scelta) {
-    const motivo = `testimone: risolvibile, non applicata — tetto di ${TESTIMONE_GIRI_MAX} riparazioni per file raggiunto (rilanciare lo script)`;
+    const motivo = 'testimone: risolvibile, non applicata — punto fisso non raggiunto (bug: segnalare)';
     for (const r of [esito.scelta, ...esito.rinviate]) {
       lasciate.push({ offset: r.offset, spelling: r.spelling, motivo });
     }
