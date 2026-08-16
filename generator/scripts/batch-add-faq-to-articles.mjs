@@ -838,7 +838,14 @@ async function translateFaq(faqArray, targetLang) {
   return results.length > 0 ? results : null;
 }
 
-/** Validate FAQ array: min 1 pair, q>10 chars, a>20 chars */
+/**
+ * Validate FAQ array: min 2 pairs, q>10 chars, a>20 chars.
+ *
+ * The >=2 floor matches the only real consumer, `engine/ogPagesPlugin.ts`,
+ * which drops the WHOLE `.faq` field below 2 surviving pairs. A writer that
+ * accepts 1 pair here can pass validation and still ship a FAQ the engine
+ * silently discards at render time (issue #396).
+ */
 function validateFaq(faq) {
   if (!Array.isArray(faq)) return null;
   const valid = faq
@@ -847,7 +854,7 @@ function validateFaq(faq) {
       pair.q.length > 10 && pair.a.length > 20
     )
     .slice(0, 7); // Cap at 7 pairs
-  return valid.length >= 1 ? valid : null;
+  return valid.length >= 2 ? valid : null;
 }
 
 // ── File modification ────────────────────────────────────────

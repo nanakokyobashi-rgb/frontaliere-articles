@@ -8153,6 +8153,54 @@ ${terminologyByLang[targetLang] || ''}`;
     applyMicrocopyGuard(localeContent, locale);
   }
 
+  // ── Post-translation FAQ length re-validation (issue #396) ──────────
+  //
+  // itContent.faq (set above at the IT-generation step) already passed
+  // cleanFaqPairs's q>10/a>20 gate — but that ran on the ITALIAN text.
+  // Neither translation path (translateContent's AI cascade, nor
+  // translateContentFreeMt) re-checks those lengths on the TRANSLATED
+  // text, and translation can shrink a pair under either threshold with
+  // no error thrown (a date like "Le 3 septembre 2026." is 20 chars,
+  // one under the a>20 gate — measured on
+  // economia-svizzera-crescita-trimestrale, fr locale). Nothing upstream
+  // notices, and `engine/ogPagesPlugin.ts` drops the WHOLE `.faq` below 2
+  // surviving pairs, silently, at render time.
+  //
+  // Retry the FAQ translation once with an explicit length instruction;
+  // if that still doesn't clear the bar, fall back to the Italian pairs
+  // (same graceful-degradation contract as the missing-field loop above)
+  // rather than shipping a `.faq` the engine will discard anyway.
+  if (Array.isArray(itContent.faq) && itContent.faq.length > 0) {
+    for (const locale of ['en', 'de', 'fr']) {
+      const localeContent = data.content[locale];
+      if (!localeContent || !Array.isArray(localeContent.faq)) continue;
+      const { pairs: cleanedPairs } = cleanFaqPairs(localeContent.faq, { dropShort: true });
+      if (cleanedPairs) {
+        localeContent.faq = cleanedPairs;
+        continue;
+      }
+      const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
+      console.error(`  ⚠️  FAQ ${locale.toUpperCase()} sotto soglia dopo traduzione (0/${localeContent.faq.length} coppie ≥2 valide) — retry traduzione mirata...`);
+      try {
+        const retried = await callWithRetry(
+          `Traduci OBBLIGATORIAMENTE in ${langName} le seguenti domande e risposte per il sito Frontaliere Ticino. OGNI risposta tradotta deve avere ALMENO 25 caratteri (una frase completa, non un frammento) e ogni domanda ALMENO 12 caratteri. Rispondi SOLO con JSON (no markdown):\n\nCONTENUTO ITALIANO:\n${JSON.stringify(itContent.faq)}\n\nFormato risposta: {"faq": [{"q": "...", "a": "..."}]}`,
+          1500,
+          `${locale}:faq-length-retry`,
+        );
+        const { pairs: retriedClean } = cleanFaqPairs(retried?.faq, { dropShort: true });
+        if (retriedClean) {
+          localeContent.faq = retriedClean;
+          console.error(`  ✅ FAQ ${locale.toUpperCase()} ritradotta con successo dopo length retry (${retriedClean.length} coppie)`);
+          continue;
+        }
+        console.error(`  ⚠️  Retry FAQ ${locale} non ha prodotto abbastanza coppie valide — fallback IT`);
+      } catch (retryErr) {
+        console.error(`  ⚠️  Retry FAQ ${locale} fallito: ${retryErr.message} — fallback IT`);
+      }
+      localeContent.faq = itContent.faq;
+    }
+  }
+
   console.error(`  ✅ Articolo assemblato — ${Object.keys(data.content).length} lingue`);
 }
 
