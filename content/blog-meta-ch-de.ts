@@ -2824,6 +2824,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.investimenti-elettricit-svizzera.title': 'Die Schweiz investiert, um Stromknappheit zu verhindern',
     'blog.article.investimenti-elettricit-svizzera.excerpt': 'Economiesuisse schätzt, dass vier Milliarden Franken benötigt werden, um Energiereserven zu sichern',
     'blog.article.investimenti-elettricit-svizzera.imageAlt': 'Investitionen in die Schweizer Elektrizität, um Mangel zu verhindern',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Einbürgerung Kanton Uri: Voraussetzungen und Verfahren',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'Die Voraussetzungen und das Verfahren für die Einbürgerung im Kanton Uri.',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'Eine Person, die die Schweizer Staatsbürgerschaft in Lugano erwerben möchte.',
 };
 
 export default blogMetaChDe;

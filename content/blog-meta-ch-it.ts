@@ -2824,6 +2824,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.investimenti-elettricit-svizzera.title': 'La Svizzera investe per prevenire penuria elettricità',
     'blog.article.investimenti-elettricit-svizzera.excerpt': 'Economiesuisse stima che quattro miliardi di franchi siano necessari per garantire riserve energetiche',
     'blog.article.investimenti-elettricit-svizzera.imageAlt': 'Investimenti in elettricità svizzera per prevenire penuria',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Naturalizzazione canton Uri: requisiti e procedura',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'I requisiti e la procedura per la naturalizzazione nel canton Uri.',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'Una persona che cerca di ottenere la cittadinanza svizzera a Lugano.',
 };
 
 export default blogMetaChIt;

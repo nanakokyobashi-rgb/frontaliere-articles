@@ -2824,6 +2824,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.investimenti-elettricit-svizzera.title': 'La Suisse investit pour prévenir les pénuries d\'électricité',
     'blog.article.investimenti-elettricit-svizzera.excerpt': 'Economiesuisse estime que quatre milliards de francs sont nécessaires pour garantir des réserves énergétiques',
     'blog.article.investimenti-elettricit-svizzera.imageAlt': 'Investissements dans l\'électricité suisse pour prévenir les pénuries',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Naturalisation canton d\'Uri : exigences et procédure',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'Les conditions et la procédure de naturalisation dans le canton d\'Uri.',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'Une personne qui cherche à obtenir la citoyenneté suisse à Lugano.',
 };
 
 export default blogMetaChFr;

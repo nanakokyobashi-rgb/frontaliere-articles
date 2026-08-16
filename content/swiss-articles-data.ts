@@ -8470,6 +8470,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'naturalizzazione-canton-uri-requisiti-e-procedura',
+    category: 'pratico',
+    date: '2026-08-16T09:36:56.372Z',
+    image: '/images/blog/naturalizzazione-canton-uri-requisiti-e-procedura.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

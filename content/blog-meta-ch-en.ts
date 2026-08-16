@@ -2824,6 +2824,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.investimenti-elettricit-svizzera.title': 'Switzerland invests to prevent electricity shortages',
     'blog.article.investimenti-elettricit-svizzera.excerpt': 'Economiesuisse estimates that four billion francs are needed to guarantee energy reserves',
     'blog.article.investimenti-elettricit-svizzera.imageAlt': 'Investments in Swiss electricity to prevent shortages',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Naturalization canton Uri: requirements and procedure',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'The requirements and procedure for naturalization in canton Uri.',
+    'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'A person seeking Swiss citizenship in Lugano.',
 };
 
 export default blogMetaChEn;
