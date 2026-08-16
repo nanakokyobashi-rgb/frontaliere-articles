@@ -9984,6 +9984,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.infortunio-lavoro-miglieglia.title': 'Infortunio a Miglieglia: gravi le condizioni dell\'operaio caduto',
     'blog.article.infortunio-lavoro-miglieglia.excerpt': 'Un addetto alla manutenzione stradale di 59 anni è rimasto gravemente ferito durante lavori di decespugliamento lungo la strada cantonale a Miglieglia.',
     'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Strada cantonale nella regione del Luganese in Ticino',
+    'blog.article.calo-soggiorni-irregolari-luglio.title': 'Soggiorni irregolari in calo alla frontiera sud in luglio',
+    'blog.article.calo-soggiorni-irregolari-luglio.excerpt': 'A luglio i casi registrati dall\'Ufficio federale della dogana e della sicurezza dei confini sono scesi a 249 in Ticino.',
+    'blog.article.calo-soggiorni-irregolari-luglio.imageAlt': 'Posto di confine svizzero alla frontiera sud',
 };
 
 export default blogMetaIt;

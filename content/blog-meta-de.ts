@@ -9982,6 +9982,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.infortunio-lavoro-miglieglia.title': 'Migliaglia-Unfall: Ernster Zustand des gefallenen Arbeiters',
     'blog.article.infortunio-lavoro-miglieglia.excerpt': 'Ein 59-jähriger Straßenwartungsmitarbeiter wurde bei Freischneidarbeiten entlang der Kantonsstrasse in Miglieglia schwer verletzt.',
     'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Kantonsstrasse in der Region Lugano im Tessin',
+    'blog.article.calo-soggiorni-irregolari-luglio.title': 'Unregelmäßiger Aufenthalt an der Südgrenze im Juli rückläufig',
+    'blog.article.calo-soggiorni-irregolari-luglio.excerpt': 'Im Juli sank die Zahl der vom Bundesamt für Zoll und Grenzsicherheit registrierten Fälle im Tessin auf 249.',
+    'blog.article.calo-soggiorni-irregolari-luglio.imageAlt': 'Schweizer Grenzübergang an der Südgrenze',
 };
 
 export default blogMetaDe;

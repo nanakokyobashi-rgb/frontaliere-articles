@@ -9985,6 +9985,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.infortunio-lavoro-miglieglia.title': 'Accident à Migliaglia : l\'état de l\'ouvrier tombé est grave',
     'blog.article.infortunio-lavoro-miglieglia.excerpt': 'Un agent d\'entretien routier de 59 ans a été grièvement blessé lors de travaux de débroussaillage le long de la route cantonale de Miglieglia.',
     'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Route cantonale dans la région de Lugano au Tessin',
+    'blog.article.calo-soggiorni-irregolari-luglio.title': 'Séjours irréguliers en baisse à la frontière sud en juillet',
+    'blog.article.calo-soggiorni-irregolari-luglio.excerpt': 'En juillet, les cas enregistrés par l\'Office fédéral des douanes et de la sécurité des frontières sont tombés à 249 au Tessin.',
+    'blog.article.calo-soggiorni-irregolari-luglio.imageAlt': 'Poste frontière suisse à la frontière sud',
 };
 
 export default blogMetaFr;

@@ -9983,6 +9983,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.infortunio-lavoro-miglieglia.title': 'Injury at Miglieglia: the condition of the fallen worker is serious',
     'blog.article.infortunio-lavoro-miglieglia.excerpt': 'A 59-year-old road maintenance worker was seriously injured during brushcutting work along the cantonal road in Miglieglia.',
     'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Cantonal road in the Lugano region of Ticino',
+    'blog.article.calo-soggiorni-irregolari-luglio.title': 'Irregular stays declining at southern border in July',
+    'blog.article.calo-soggiorni-irregolari-luglio.excerpt': 'In July, cases registered by the Federal Office of Customs and Border Security fell to 249 in Ticino.',
+    'blog.article.calo-soggiorni-irregolari-luglio.imageAlt': 'Swiss border checkpoint at the southern border',
 };
 
 export default blogMetaEn;
