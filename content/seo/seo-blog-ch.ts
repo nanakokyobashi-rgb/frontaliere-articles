@@ -39176,6 +39176,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-patente-guida-canton-nidvaldo-conversione-ed-esami': {
+    title: 'Patente di guida nel Cantone di Nidvaldo: conversione e esami',
+    description: 'Per ottenere la patente di guida nel Cantone di Nidvaldo, i frontaliari devono convertire la loro licenza estera e superare un esame teorico e pratico, nonché',
+    keywords: 'frontalieri, ticino, svizzera, italia, patente, cantone, nidvaldo, conversione',
+    ogTitle: 'Patente di guida nel Cantone di Nidvaldo: conversione della licenza estera, esame teorico e pratico, corsi obbligatori e ufficio della circolazione competente',
+    ogDescription: 'Per ottenere la patente di guida nel Cantone di Nidvaldo, i frontaliari devono convertire la loro licenza estera e superare un esame teorico e pratico, nonché iscriversi a corsi obbligatori.',
+    canonicalPath: '/articoli-svizzera/patente-guida-canton-nidvaldo-conversione-ed-esami/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Patente di guida nel Cantone di Nidvaldo: conversione e esami",
+      "description": "Per ottenere la patente di guida nel Cantone di Nidvaldo, i frontaliari devono convertire la loro licenza estera e superare un esame teorico e pratico, nonché",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/patente-guida-canton-nidvaldo-conversione-ed-esami.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere guida in Svizzera con grigio e nuvole"
+      },
+      "datePublished": "2026-08-16T23:55:01+00:00",
+      "dateModified": "2026-08-16T23:55:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/patente-guida-canton-nidvaldo-conversione-ed-esami/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
