@@ -2848,6 +2848,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.patente-di-guida-cantone-uri-conversione-ed-esami.title': 'Führerschein in URI: Umstellung und Prüfungen',
     'blog.article.patente-di-guida-cantone-uri-conversione-ed-esami.excerpt': 'Die Umschulung des ausländischen Führerscheins im Kanton Uri erfordert die Anmeldung zu einem Ausbildungskurs sowie die theoretische und praktische Prüfung. Zuständiges Strassenverkehrsamt ist das Staatsregister.',
     'blog.article.patente-di-guida-cantone-uri-conversione-ed-esami.imageAlt': 'Eine praktische Anleitung für die Umwandlung eines ausländischen Führerscheins im Kanton Uri.',
+    'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.title': 'Kantonale Steuern in Schwyz: Steuersätze und Abzüge',
+    'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.excerpt': 'Die Kantonssteuern in Schwyz werden vom Kanton Schwyz festgelegt.',
+    'blog.article.imposte-cantonal-svitto-aliquote-deduzioni.imageAlt': 'Eine Übersicht der kantonalen Steuern in Svitto, mit Schwerpunkt auf den neuen Steuersätzen und Abzügen.',
 };
 
 export default blogMetaChDe;
