@@ -2830,6 +2830,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.incidente-bici-rapperswil-jona.title': 'Cade dalla bici a Rapperswil-Jona: grave una 43enne',
     'blog.article.incidente-bici-rapperswil-jona.excerpt': 'Una donna di 43 anni ha riportato ferite che ne mettono in pericolo la vita dopo una caduta in bicicletta a Rapperswil-Jona.',
     'blog.article.incidente-bici-rapperswil-jona.imageAlt': 'Elicottero di soccorso in intervento in Svizzera',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.title': 'Avviare un\'attività nel Cantone di Uri: cosa serve',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.excerpt': 'Cosa bisogna sapere per aprire un\'attività nel Cantone di Uri. Istruzioni sulla scelta della forma giuridica, registrazione al registro di commercio, capitale minimo, tasse di iscrizione e obblighi assicurativi.',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.imageAlt': 'Lago di Lugano da nord-est',
 };
 
 export default blogMetaChIt;

@@ -969,6 +969,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'investimenti-elettricit-svizzera': { it: 'investimenti-elettricit-svizzera', en: 'switzerland-electricity-investments', de: 'investitionen-schweizer-elektrizitat', fr: 'investissements-electricite-suisse' },
  'naturalizzazione-canton-uri-requisiti-e-procedura': { it: 'naturalizzazione-canton-uri-requisiti-e-procedura', en: 'naturalization-canton-uri-requisites-and-procedure', de: 'naturalisierung-kanton-uri-anforderungen-und-verfahren', fr: 'naturalisation-canton-uri-exigences-et-procedure' },
  'incidente-bici-rapperswil-jona': { it: 'incidente-bici-rapperswil-jona', en: 'bicycle-accident-rapperswil-jona', de: 'fahrradunfall-rapperswil-jona', fr: 'accident-velo-rapperswil-jona' },
+ 'aprire-attivita-canton-uri-registro-di-commercio-e-costi': { it: 'aprire-attivita-canton-uri-registro-di-commercio-e-costi', en: 'open-activity-canton-uri-commerce-register-and-costs', de: 'unternehmen-in-kanton-uri-handelsregister-und-kosten', fr: 'ouvrir-entreprise-canton-uri-registre-du-commerce-et-couts' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -8488,6 +8488,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'aprire-attivita-canton-uri-registro-di-commercio-e-costi',
+    category: 'fiscale',
+    date: '2026-08-16T09:58:24.486Z',
+    image: '/images/blog/aprire-attivita-canton-uri-registro-di-commercio-e-costi.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

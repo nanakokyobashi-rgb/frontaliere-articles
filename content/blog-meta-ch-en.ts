@@ -2830,6 +2830,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.incidente-bici-rapperswil-jona.title': 'Fall from bike in Rapperswil-Jona: serious 43-year-old',
     'blog.article.incidente-bici-rapperswil-jona.excerpt': 'A 43-year-old woman has sustained life-threatening injuries after a bicycle fall in Rapperswil-Jona.',
     'blog.article.incidente-bici-rapperswil-jona.imageAlt': 'Rescue helicopter on mission in Switzerland',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.title': 'Starting a business in the Canton of Uri: what you need',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.excerpt': 'What you need to know to open a business in the Canton of Uri. Instructions on the choice of legal form, registration in the commercial register, minimum capital, registration fees and insurance obligations.',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.imageAlt': 'Lugano lake view',
 };
 
 export default blogMetaChEn;

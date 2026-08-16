@@ -2830,6 +2830,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.incidente-bici-rapperswil-jona.title': 'Chute de vélo à Rapperswil-Jona : grave une femme de 43 ans',
     'blog.article.incidente-bici-rapperswil-jona.excerpt': 'Une femme de 43 ans a signalé des blessures mettant sa vie en danger après une chute à vélo à Rapperswil-Jona.',
     'blog.article.incidente-bici-rapperswil-jona.imageAlt': 'Hélicoptère de sauvetage en intervention en Suisse',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.title': 'Démarrer une activité dans le canton d\'Uri : ce qu\'il faut',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.excerpt': 'Ce qu\'il faut savoir pour ouvrir une entreprise dans le canton d\'Uri. Instructions sur le choix de la forme juridique, l\'enregistrement au registre du commerce, le capital minimum, les frais d\'inscription et les obligations d\'assurance.',
+    'blog.article.aprire-attivita-canton-uri-registro-di-commercio-e-costi.imageAlt': 'Lac de Lugano vue du nord-est',
 };
 
 export default blogMetaChFr;
