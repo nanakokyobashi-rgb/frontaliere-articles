@@ -314,7 +314,8 @@
     "premi cassa malati canton Uri e riduzione premi",
     "permesso di dimora B canton Uri requisiti e rinnovo",
     "permesso di domicilio C canton Uri requisiti e domanda",
-    "assegni familiari canton Uri importi e domanda"
+    "assegni familiari canton Uri importi e domanda",
+    "apprendistato e formazione professionale canton Uri"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -475,6 +476,7 @@
     "abbonamenti trasporti pubblici canton Lucerna zone e tariffe": 2,
     "salari e mercato del lavoro canton Lucerna settori e livelli": 1,
     "patente di guida canton Lucerna conversione ed esami": 2,
-    "imposte cantonali canton Uri aliquote e deduzioni": 1
+    "imposte cantonali canton Uri aliquote e deduzioni": 1,
+    "borse di studio canton Uri requisiti e importi": 1
   }
 }
