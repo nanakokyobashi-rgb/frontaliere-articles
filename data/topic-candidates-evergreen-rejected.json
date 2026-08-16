@@ -332,7 +332,9 @@
     "mercato degli affitti canton Svitto canoni medi e diritto di locazione",
     "avs e prestazioni complementari canton Svitto cassa di compensazione",
     "aprire un'attività canton Svitto registro di commercio e costi",
-    "salari e mercato del lavoro canton Svitto settori e livelli"
+    "salari e mercato del lavoro canton Svitto settori e livelli",
+    "patente di guida canton Svitto conversione ed esami",
+    "imposta di successione e donazione canton Svitto aliquote"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -505,6 +507,7 @@
     "borse di studio canton Svitto requisiti e importi": 1,
     "aprire un'attività canton Svitto registro di commercio e costi": 1,
     "salari e mercato del lavoro canton Svitto settori e livelli": 1,
-    "patente di guida canton Svitto conversione ed esami": 1
+    "patente di guida canton Svitto conversione ed esami": 1,
+    "imposte cantonali canton Obvaldo aliquote e deduzioni": 1
   }
 }
