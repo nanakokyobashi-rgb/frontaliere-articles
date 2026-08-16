@@ -339,7 +339,8 @@
     "permesso di dimora B canton Obvaldo requisiti e rinnovo",
     "assegni familiari canton Obvaldo importi e domanda",
     "permesso L di breve durata canton Obvaldo validità e proroga",
-    "borse di studio canton Obvaldo requisiti e importi"
+    "borse di studio canton Obvaldo requisiti e importi",
+    "naturalizzazione canton Obvaldo requisiti e procedura"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -517,6 +518,7 @@
     "permesso di domicilio C canton Obvaldo requisiti e domanda": 3,
     "permesso L di breve durata canton Obvaldo validità e proroga": 2,
     "comprare casa canton Obvaldo prezzi e mutuo ipotecario": 1,
-    "naturalizzazione canton Obvaldo requisiti e procedura": 1
+    "naturalizzazione canton Obvaldo requisiti e procedura": 1,
+    "avs e prestazioni complementari canton Obvaldo cassa di compensazione": 1
   }
 }
