@@ -8875,6 +8875,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'premi-cassa-malati-cantone-nidvaldo',
+    category: 'fiscale',
+    date: '2026-08-16T19:00:08.445Z',
+    image: '/images/blog/premi-cassa-malati-cantone-nidvaldo.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

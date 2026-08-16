@@ -1012,6 +1012,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'maccabi-lugano-mobilitazione': { it: 'maccabi-lugano-mobilitazione', en: 'maccabi-lugano-protest', de: 'maccabi-lugano-proteste', fr: 'maccabi-lugano-manifestation' },
  'avs-e-prestazioni-complementari-cantone-obvaldo-cassa-di-compensazione': { it: 'avs-e-prestazioni-complementari-cantone-obvaldo-cassa-di-compensazione', en: 'avs-in-the-canton-of-obvaldo-the-compensation-fund', de: 'ahv-im-kanton-obwalden-die-ausgleichskasse', fr: 'avs-dans-le-canton-d-obwald-la-caisse-de-compensation' },
  'obvaldo-abbonamenti-trasporti': { it: 'obvaldo-abbonamenti-trasporti', en: 'obvaldo-transportation-passes', de: 'obvaldo-verkehrskarte', fr: 'obvaldo-titre-de-transport' },
+ 'premi-cassa-malati-cantone-nidvaldo': { it: 'premi-cassa-malati-cantone-nidvaldo', en: 'canton-nidvaldo-health-insurance-premiums', de: 'kanton-nidvaldo-krankenversicherungspramien', fr: 'canton-nidvaldo-premies-assurance-maladie' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

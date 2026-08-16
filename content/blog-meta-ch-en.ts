@@ -2959,6 +2959,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.obvaldo-abbonamenti-trasporti.title': 'Public transport passes Canton Obvaldo: zones and fares',
     'blog.article.obvaldo-abbonamenti-trasporti.excerpt': 'Information about the subscriptions of the Canton Obvaldo, including zones and rates.',
     'blog.article.obvaldo-abbonamenti-trasporti.imageAlt': 'Image of a frontaliere using a Canton Obvaldo transportation pass',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Canton Nidvaldo health insurance premiums and premium reductions',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'The law on compulsory health insurance in the Canton of Nidvaldo has reduced health insurance premiums.',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'A Swiss doctor examines a patient',
 };
 
 export default blogMetaChEn;

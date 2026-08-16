@@ -340,7 +340,9 @@
     "assegni familiari canton Obvaldo importi e domanda",
     "permesso L di breve durata canton Obvaldo validità e proroga",
     "borse di studio canton Obvaldo requisiti e importi",
-    "naturalizzazione canton Obvaldo requisiti e procedura"
+    "naturalizzazione canton Obvaldo requisiti e procedura",
+    "avs e prestazioni complementari canton Obvaldo cassa di compensazione",
+    "imposta di successione e donazione canton Obvaldo aliquote"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -519,6 +521,10 @@
     "permesso L di breve durata canton Obvaldo validità e proroga": 2,
     "comprare casa canton Obvaldo prezzi e mutuo ipotecario": 1,
     "naturalizzazione canton Obvaldo requisiti e procedura": 1,
-    "avs e prestazioni complementari canton Obvaldo cassa di compensazione": 1
+    "avs e prestazioni complementari canton Obvaldo cassa di compensazione": 1,
+    "aprire un'attività canton Obvaldo registro di commercio e costi": 1,
+    "salari e mercato del lavoro canton Obvaldo settori e livelli": 1,
+    "patente di guida canton Obvaldo conversione ed esami": 1,
+    "imposte cantonali canton Nidvaldo aliquote e deduzioni": 1
   }
 }

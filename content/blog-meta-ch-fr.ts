@@ -2959,6 +2959,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.obvaldo-abbonamenti-trasporti.title': 'Abonnements transports publics Canton Obwald : zones et tarifs',
     'blog.article.obvaldo-abbonamenti-trasporti.excerpt': 'Informations sur les abonnements du canton Obwald, y compris les zones et les tarifs.',
     'blog.article.obvaldo-abbonamenti-trasporti.imageAlt': 'Image d\'un frontalier utilisant un pass du canton d\'Obvaldo',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Primes caisse-maladie canton de Nidwald et réduction des primes',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'La loi sur les assurances-maladie obligatoires dans le canton de Nidwald a réduit les primes pour les assurances-maladie.',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'Un médecin suisse examine un patient',
 };
 
 export default blogMetaChFr;

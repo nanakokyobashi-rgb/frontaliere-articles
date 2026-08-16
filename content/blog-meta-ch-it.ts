@@ -2959,6 +2959,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.obvaldo-abbonamenti-trasporti.title': 'Abbonamenti trasporti pubblici Canton Obvaldo: zone e tariffe',
     'blog.article.obvaldo-abbonamenti-trasporti.excerpt': 'Informazioni sugli abbonamenti del Canton Obvaldo, comprese le zone e le tariffe.',
     'blog.article.obvaldo-abbonamenti-trasporti.imageAlt': 'Immagine di un frontaliere che utilizza un abbonamento del Canton Obvaldo',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Premi cassa malati canton Nidvaldo e riduzione premi',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'La legge sulle assicurazioni malattie obbligatorie nel Cantone di Nidvaldo ha ridotto i premi per le assicurazioni malattie.',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'Un medico svizzero cura un paziente',
 };
 
 export default blogMetaChIt;

@@ -2959,6 +2959,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.obvaldo-abbonamenti-trasporti.title': 'Abonnements für öffentliche Verkehrsmittel Kanton Obwalden: Zonen und Tarife',
     'blog.article.obvaldo-abbonamenti-trasporti.excerpt': 'Informationen zu den Abos des Kantons Obwalden inkl. Zonen und Tarife.',
     'blog.article.obvaldo-abbonamenti-trasporti.imageAlt': 'Bild eines Frontalierers, der ein Pass des Kantons Obvaldo nutzt',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.title': 'Krankenkassenprämien Kanton Nidwalden und Prämienverbilligung',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.excerpt': 'Das Gesetz über die obligatorischen Krankenversicherungen im Kanton Nidwalden hat die Prämien für die Krankenversicherungen gesenkt.',
+    'blog.article.premi-cassa-malati-cantone-nidvaldo.imageAlt': 'Ein Schweizer Arzt untersucht einen Patienten',
 };
 
 export default blogMetaChDe;
