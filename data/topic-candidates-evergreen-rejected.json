@@ -317,7 +317,8 @@
     "assegni familiari canton Uri importi e domanda",
     "apprendistato e formazione professionale canton Uri",
     "mercato degli affitti canton Uri canoni medi e diritto di locazione",
-    "avs e prestazioni complementari canton Uri cassa di compensazione"
+    "avs e prestazioni complementari canton Uri cassa di compensazione",
+    "abbonamenti trasporti pubblici canton Uri zone e tariffe"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -481,6 +482,9 @@
     "imposte cantonali canton Uri aliquote e deduzioni": 1,
     "borse di studio canton Uri requisiti e importi": 1,
     "asilo nido e custodia bambini canton Uri costi": 1,
-    "abbonamenti trasporti pubblici canton Uri zone e tariffe": 2
+    "abbonamenti trasporti pubblici canton Uri zone e tariffe": 2,
+    "aprire un'attività canton Uri registro di commercio e costi": 1,
+    "salari e mercato del lavoro canton Uri settori e livelli": 1,
+    "patente di guida canton Uri conversione ed esami": 1
   }
 }
