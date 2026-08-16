@@ -8479,6 +8479,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'incidente-bici-rapperswil-jona',
+    category: 'novita',
+    date: '2026-08-16T09:44:01.975Z',
+    image: '/images/blog/incidente-bici-rapperswil-jona.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

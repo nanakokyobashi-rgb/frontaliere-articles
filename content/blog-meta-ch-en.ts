@@ -2827,6 +2827,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Naturalization canton Uri: requirements and procedure',
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'The requirements and procedure for naturalization in canton Uri.',
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'A person seeking Swiss citizenship in Lugano.',
+    'blog.article.incidente-bici-rapperswil-jona.title': 'Fall from bike in Rapperswil-Jona: serious 43-year-old',
+    'blog.article.incidente-bici-rapperswil-jona.excerpt': 'A 43-year-old woman has sustained life-threatening injuries after a bicycle fall in Rapperswil-Jona.',
+    'blog.article.incidente-bici-rapperswil-jona.imageAlt': 'Rescue helicopter on mission in Switzerland',
 };
 
 export default blogMetaChEn;

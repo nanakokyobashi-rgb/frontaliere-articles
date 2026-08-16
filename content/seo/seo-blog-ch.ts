@@ -36641,6 +36641,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-incidente-bici-rapperswil-jona': {
+    title: 'Cade dalla bici a Rapperswil-Jona: grave una 43enne',
+    description: 'Grave incidente in bicicletta a Rapperswil-Jona: donna di 43 anni ferita in pericolo di vita trasportata in ospedale dalla Rega. I dettagli della notizia.',
+    keywords: 'frontalieri, ticino, svizzera, italia, cade, dalla, bici, rapperswil-jona',
+    ogTitle: 'Cade dalla bici a Rapperswil-Jona: grave una 43enne soccorsa dalla Rega',
+    ogDescription: 'Drammatico incidente nella notte a Rapperswil-Jona. Una donna di 43 anni è caduta dalla bicicletta senza indossare il casco ed è stata trasportata in ospedale dalla Rega in pericolo di vita.',
+    canonicalPath: '/articoli-svizzera/incidente-bici-rapperswil-jona/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cade dalla bici a Rapperswil-Jona: grave una 43enne",
+      "description": "Grave incidente in bicicletta a Rapperswil-Jona: donna di 43 anni ferita in pericolo di vita trasportata in ospedale dalla Rega. I dettagli della notizia.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/incidente-bici-rapperswil-jona.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Elicottero di soccorso in intervento in Svizzera"
+      },
+      "datePublished": "2026-08-16T09:44:01+00:00",
+      "dateModified": "2026-08-16T09:44:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/incidente-bici-rapperswil-jona/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

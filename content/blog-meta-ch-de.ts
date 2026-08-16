@@ -2827,6 +2827,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.title': 'Einbürgerung Kanton Uri: Voraussetzungen und Verfahren',
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.excerpt': 'Die Voraussetzungen und das Verfahren für die Einbürgerung im Kanton Uri.',
     'blog.article.naturalizzazione-canton-uri-requisiti-e-procedura.imageAlt': 'Eine Person, die die Schweizer Staatsbürgerschaft in Lugano erwerben möchte.',
+    'blog.article.incidente-bici-rapperswil-jona.title': 'Sturz vom Rad in Rapperswil-Jona: 43-Jährige schwer verletzt',
+    'blog.article.incidente-bici-rapperswil-jona.excerpt': 'Eine 43-jährige Frau erlitt nach einem Fahrradsturz in Rapperswil-Jona lebensbedrohliche Verletzungen.',
+    'blog.article.incidente-bici-rapperswil-jona.imageAlt': 'Rettungshubschrauber im Einsatz in der Schweiz',
 };
 
 export default blogMetaChDe;
