@@ -3025,6 +3025,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.title': 'Führerschein im Kanton Nidwalden: Umschulung und Prüfungen',
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.excerpt': 'Um den Führerschein im Kanton Nidwalden zu erhalten, müssen die Frontalangestellten ihren ausländischen Führerschein umtauschen und eine theoretische und praktische Prüfung ablegen sowie sich in Pflichtkursen einschreiben.',
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.imageAlt': 'Ein Ausländer fährt in der Schweiz mit Grau und Wolken',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.title': 'Löhne und Arbeitsmarkt Kanton Nidwalden: Branchen und Niveaus',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.excerpt': 'Arbeitsmarkt im Kanton Nidwalden: Einstellungsbranchen, Lohnniveau nach Bildungsgrad, geltende Tarifverträge und Mindestlohn wo vorgesehen.',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.imageAlt': 'Lago di Lugano',
 };
 
 export default blogMetaChDe;

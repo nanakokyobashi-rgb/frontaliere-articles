@@ -3025,6 +3025,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.title': 'Driver\'s license in the Canton of Nidvaldo: conversion and exams',
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.excerpt': 'To obtain a driving licence in the Canton of Nidvaldo, frontier workers must convert their foreign licence and pass a theoretical and practical exam, as well as enrol in compulsory courses.',
     'blog.article.patente-guida-canton-nidvaldo-conversione-ed-esami.imageAlt': 'A foreigner drives in Switzerland with grey and clouds',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.title': 'Wages and labour market canton Nidvaldo: sectors and levels',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.excerpt': 'Labour market in the Canton of Nidvaldo: hiring sectors, wage levels by level of training, collective agreements in force and minimum wage where applicable.',
+    'blog.article.salari-mercato-lavoro-canton-nidvaldo-settori-livelli.imageAlt': 'View of Lake Lugano',
 };
 
 export default blogMetaChEn;
