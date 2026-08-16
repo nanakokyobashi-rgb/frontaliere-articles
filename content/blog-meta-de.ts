@@ -9979,6 +9979,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.frontalieri-italiani-canton-ticino-calano.title': 'Italienische Grenzgänger im Kanton Tessin sind rückläufig',
     'blog.article.frontalieri-italiani-canton-ticino-calano.excerpt': 'Jüngste Zahlen zeigen einen Rückgang der italienischen Grenzgänger im Kanton Tessin. Aber was bedeutet das für sie?',
     'blog.article.frontalieri-italiani-canton-ticino-calano.imageAlt': 'Italienische Grenzgänger in Kanton Tessin sind rückläufig: was bedeutet das für sie?',
+    'blog.article.infortunio-lavoro-miglieglia.title': 'Migliaglia-Unfall: Ernster Zustand des gefallenen Arbeiters',
+    'blog.article.infortunio-lavoro-miglieglia.excerpt': 'Ein 59-jähriger Straßenwartungsmitarbeiter wurde bei Freischneidarbeiten entlang der Kantonsstrasse in Miglieglia schwer verletzt.',
+    'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Kantonsstrasse in der Region Lugano im Tessin',
 };
 
 export default blogMetaDe;

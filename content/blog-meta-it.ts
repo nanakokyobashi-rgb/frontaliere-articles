@@ -9981,6 +9981,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieri-italiani-canton-ticino-calano.title': 'I frontalieri italiani in Canton Ticino sono in calo',
     'blog.article.frontalieri-italiani-canton-ticino-calano.excerpt': 'Cifre recenti mostrano una diminuzione dei frontalieri italiani in Canton Ticino. Ma cosa significa per loro?',
     'blog.article.frontalieri-italiani-canton-ticino-calano.imageAlt': 'Frontalieri italiani in Canton Ticino sono in calo: cosa significa per loro?',
+    'blog.article.infortunio-lavoro-miglieglia.title': 'Infortunio a Miglieglia: gravi le condizioni dell\'operaio caduto',
+    'blog.article.infortunio-lavoro-miglieglia.excerpt': 'Un addetto alla manutenzione stradale di 59 anni è rimasto gravemente ferito durante lavori di decespugliamento lungo la strada cantonale a Miglieglia.',
+    'blog.article.infortunio-lavoro-miglieglia.imageAlt': 'Strada cantonale nella regione del Luganese in Ticino',
 };
 
 export default blogMetaIt;
