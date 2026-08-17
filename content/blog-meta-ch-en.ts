@@ -3163,6 +3163,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.sanzioni-onu-2026-ch.title': 'UN Sanctions: Restrictions on Persons and Businesses',
     'blog.article.sanzioni-onu-2026-ch.excerpt': 'The UN Sanctions Committee has amended the list of individuals, companies and organisations subject to sanctions. The SESAM database is not mentioned in the source.',
     'blog.article.sanzioni-onu-2026-ch.imageAlt': 'Frontalier consulting the UN sanctions list.',
+    'blog.article.trasporti-pubblici-zugo-abbonamenti.title': 'Public transport passes Canton Zug zones and fares',
+    'blog.article.trasporti-pubblici-zugo-abbonamenti.excerpt': 'The main data on public transport subscription in the Canton of Zurich',
+    'blog.article.trasporti-pubblici-zugo-abbonamenti.imageAlt': 'Map of public transportation in the Canton of Zug',
 };
 
 export default blogMetaChEn;
