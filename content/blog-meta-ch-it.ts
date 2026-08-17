@@ -3202,6 +3202,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.title': 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend',
     'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.excerpt': 'La decisione dell\'amministrazione Trump di sospendere i lavori per il muro anti-migranti a Big Bend, in Texas, potrebbe avere implicazioni per la politica fiscale svizzera.',
     'blog.article.sospensione-lavori-muro-anti-migranti-big-bend-texas.imageAlt': 'L\'amministrazione Trump sospenderà i lavori per il muro anti-migranti a Big Bend, in Texas.',
+    'blog.article.infantino-fifa-lamour-licenziato.title': 'Accusò Infantino di tradimento: licenziato',
+    'blog.article.infantino-fifa-lamour-licenziato.excerpt': 'La FIFA ha licenziato Kevin Lamour, alto funzionario franco-svizzero, dopo le sue critiche pubbliche rivolte a Infantino e ai suoi piani di investimento per il Mondiale',
+    'blog.article.infantino-fifa-lamour-licenziato.imageAlt': 'Frontalieri residenti in Svizzera protestano contro la FIFA e la nomina di Infantino come presidente',
 };
 
 export default blogMetaChIt;

@@ -41516,6 +41516,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-infantino-fifa-lamour-licenziato': {
+    title: 'Accusò Infantino di tradimento: licenziato | Frontaliere Ticino',
+    description: 'La FIFA ha licenziato Kevin Lamour, alto funzionario franco-svizzero, dopo le sue critiche pubbliche rivolte a Infantino e ai suoi piani di investimento',
+    keywords: 'frontalieri, ticino, svizzera, italia, accusò, infantino, tradimento, licenziato',
+    ogTitle: 'Infantino-FIFA-Lamour-Licenziato',
+    ogDescription: 'La FIFA ha licenziato Kevin Lamour, alto funzionario franco-svizzero, dopo le sue critiche pubbliche rivolte a Infantino e ai suoi piani di investimento per il Mondiale',
+    canonicalPath: '/articoli-svizzera/infantino-fifa-lamour-licenziato/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Accusò Infantino di tradimento: licenziato",
+      "description": "La FIFA ha licenziato Kevin Lamour, alto funzionario franco-svizzero, dopo le sue critiche pubbliche rivolte a Infantino e ai suoi piani di investimento",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/infantino-fifa-lamour-licenziato.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontalieri residenti in Svizzera protestano contro la FIFA e la nomina di Infantino come presidente"
+      },
+      "datePublished": "2026-08-17T22:00:45+00:00",
+      "dateModified": "2026-08-17T22:00:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/infantino-fifa-lamour-licenziato/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -9604,6 +9604,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'infantino-fifa-lamour-licenziato',
+    category: 'novita',
+    date: '2026-08-17T22:00:45.252Z',
+    image: '/images/blog/infantino-fifa-lamour-licenziato.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
