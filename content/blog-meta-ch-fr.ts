@@ -3157,6 +3157,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Sécheresse en Suisse : « voleurs d\'eau », 46% inquiets',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Fontaines sèches et rationnements : la crise suisse de l\'eau entre vols et alarmes pour l\'avenir. 60 % prévoient des difficultés dans les 10 ans.',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Lit de réservoir fissuré dans les Alpes suisses pendant la sécheresse',
+    'blog.article.cyberattacco-stadler-rail.title': 'Cyberattaque contre Stadler Rail : un hacker présumé jugé à Zurich',
+    'blog.article.cyberattacco-stadler-rail.excerpt': 'Un procès à Zurich contre un hacker ukrainien présumé accusé de piratage d\'entreprises, dont Stadler Rail.',
+    'blog.article.cyberattacco-stadler-rail.imageAlt': 'Un cas d\'attaque informatique à la Cour de district de Zurich impliquant Stadler Rail.',
 };
 
 export default blogMetaChFr;

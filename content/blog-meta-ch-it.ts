@@ -3157,6 +3157,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Siccità in Svizzera: spuntano i \'ladri di acqua\', preoccupato il 46%',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Fontane a secco e razionamenti: la crisi idrica svizzera tra furti e allarmi per il futuro. Il 60% prevede difficoltà entro 10 anni.',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Bacino idrico screpolato nelle Alpi svizzere durante la siccità',
+    'blog.article.cyberattacco-stadler-rail.title': 'Ciberattacco a Stadler Rail: presunto hacker a processo a Zurigo',
+    'blog.article.cyberattacco-stadler-rail.excerpt': 'Un processo a Zurigo contro un presunto hacker ucraino accusato di hackeraggio di aziende, tra cui Stadler Rail.',
+    'blog.article.cyberattacco-stadler-rail.imageAlt': 'Un processo a Zurigo per hackeraggio di aziende, tra cui Stadler Rail.',
 };
 
 export default blogMetaChIt;

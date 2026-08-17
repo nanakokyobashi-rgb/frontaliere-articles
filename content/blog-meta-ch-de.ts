@@ -3157,6 +3157,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Dürre in der Schweiz: "Wasserdiebe" tauchen auf, 46% sind besorgt',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Trockenbrunnen und Rationierungen: Die Schweizer Wasserkrise zwischen Diebstahl und Alarm für die Zukunft. 60% rechnen mit Schwierigkeiten innerhalb von 10 Jahren.',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Rissiger Stauseeboden in den Schweizer Alpen während der Dürre',
+    'blog.article.cyberattacco-stadler-rail.title': 'Cyberangriff auf Stadler Rail: Mutmaßlicher Hacker vor Gericht in Zürich',
+    'blog.article.cyberattacco-stadler-rail.excerpt': 'Ein Prozess in Zürich gegen einen mutmaßlichen ukrainischen Hacker, der des Hackens von Unternehmen, darunter Stadler Rail, beschuldigt wird.',
+    'blog.article.cyberattacco-stadler-rail.imageAlt': 'Ein Hackerfall vor dem Bezirksgericht Zürich, der auch Stadler Rail betrifft.',
 };
 
 export default blogMetaChDe;

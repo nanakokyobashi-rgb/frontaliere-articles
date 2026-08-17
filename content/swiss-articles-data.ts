@@ -9469,6 +9469,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'cyberattacco-stadler-rail',
+    category: 'pratico',
+    date: '2026-08-17T15:48:23.827Z',
+    image: '/images/blog/cyberattacco-stadler-rail.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

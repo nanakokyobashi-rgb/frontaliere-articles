@@ -3157,6 +3157,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Drought in Switzerland: \'water thieves\' sprout, 46% worried',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Dry fountains and rationing: the Swiss water crisis between theft and alarms for the future. 60% foresee difficulties within 10 years.',
     'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Cracked reservoir bed in Swiss Alps during drought',
+    'blog.article.cyberattacco-stadler-rail.title': 'Cyberattack on Stadler Rail: alleged hacker on trial in Zurich',
+    'blog.article.cyberattacco-stadler-rail.excerpt': 'A trial in Zurich against an alleged Ukrainian hacker accused of hacking companies, including Stadler Rail.',
+    'blog.article.cyberattacco-stadler-rail.imageAlt': 'A cyberattack case at the District Court of Zurich involving Stadler Rail.',
 };
 
 export default blogMetaChEn;
