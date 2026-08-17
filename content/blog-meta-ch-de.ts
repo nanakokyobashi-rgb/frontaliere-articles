@@ -3118,6 +3118,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.independenza-svizzera-sicurezza.title': 'Neutralitätsinitiative gefährdet die Sicherheit der Schweiz',
     'blog.article.independenza-svizzera-sicurezza.excerpt': 'FDP, Mitte, Grünliberale, SP und Grüne unterstützen die Initiative.',
     'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Redaktionelles Bild zu: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.title': 'Schulsystem des Kantons Zürich: Einschreibung und Zyklen',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.excerpt': 'Das Schulsystem des Kantons Zürich zeichnet sich durch einen 9-jährigen Pflichtschulabschluss aus. Die Schüler besuchen die Grundschulen der 1. bis 6. Klasse, gefolgt von der Mittelschule.',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.imageAlt': 'Bildungssystem des Kantons Zürich',
 };
 
 export default blogMetaChDe;

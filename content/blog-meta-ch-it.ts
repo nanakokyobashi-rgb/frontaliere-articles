@@ -3118,6 +3118,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.independenza-svizzera-sicurezza.title': 'L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
     'blog.article.independenza-svizzera-sicurezza.excerpt': 'PLR, Centro, Verdi liberali, PS e Verdi sostengono l\'iniziativa.',
     'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Immagine editoriale relativa a: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.title': 'Sistema scolastico del Cantone di Zurigo: iscrizione e cicli',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.excerpt': 'Il sistema scolastico del Cantone di Zurigo è caratterizzato da un ciclo di istruzione obbligatoria di 9 anni. Gli studenti frequentano le scuole elementari dal 1° al 6° grado, seguiti dalle scuole medie superiori.',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.imageAlt': 'Sistema scolastico del Cantone di Zurigo',
 };
 
 export default blogMetaChIt;

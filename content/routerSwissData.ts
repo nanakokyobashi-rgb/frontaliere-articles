@@ -1065,6 +1065,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'permesso-l-breve-durata-canton-zugo-validita-proroga': { it: 'permesso-l-breve-durata-canton-zugo-validita-proroga', en: 'short-term-l-permit-canton-zug-validity-extension', de: 'kurzfristige-aufenthaltsbewilligung-l-kanton-zug-gultigkeit-verlangerung', fr: 'permis-l-courte-duree-canton-zoug-validite-prolongation' },
  'assegni-familiari-canton-zugo': { it: 'assegni-familiari-canton-zugo', en: 'family-allowances-cantone-zugo', de: 'familienbeihilfe-kanton-zugo', fr: 'allocations-familiales-canton-zugo' },
  'independenza-svizzera-sicurezza': { it: 'independenza-svizzera-sicurezza', en: 'neutrality-initiative-puts-switzerland-s-security-at-risk', de: 'unabhaengigkeit-schweiz-sicherheit', fr: 'independance-suisse-securite' },
+ 'sistema-scolastico-canton-zugo-iscrizione-e-cicli': { it: 'sistema-scolastico-canton-zugo-iscrizione-e-cicli', en: 'school-system-canton-zurich-enrolment-and-grades', de: 'bildungssystem-kanton-zuerich-anmeldung-und-stufen', fr: 'systeme-educatif-canton-de-zurich-inscription-et-niveaux' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

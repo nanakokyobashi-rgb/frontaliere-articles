@@ -3118,6 +3118,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.independenza-svizzera-sicurezza.title': 'Neutrality initiative puts Switzerland\'s security at risk',
     'blog.article.independenza-svizzera-sicurezza.excerpt': 'PLR, Centro, Liberal Greens, PS and Greens support the initiative.',
     'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Editorial image related to: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.title': 'School system of the Canton of Zurich: enrolment and cycles',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.excerpt': 'The school system of the Canton of Zurich is characterized by a 9-year compulsory education cycle. Students attend elementary schools from 1st to 6th grade, followed by middle and high schools.',
+    'blog.article.sistema-scolastico-canton-zugo-iscrizione-e-cicli.imageAlt': 'School system of the Canton of Zurich',
 };
 
 export default blogMetaChEn;
