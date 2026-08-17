@@ -3166,6 +3166,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.trasporti-pubblici-zugo-abbonamenti.title': 'Abbonamenti trasporti pubblici Canton Zugo zone e tariffe',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.excerpt': 'I principali dati sull\'abbonamento dei trasporti pubblici nel Cantone di Zurigo',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.imageAlt': 'Cartina dei trasporti pubblici nel Cantone di Zurigo',
+    'blog.article.minuscoli-droni-sonore-epfl.title': 'Minuscoli droni vanno dove li porta il suono: EPFL crea strutture cave',
+    'blog.article.minuscoli-droni-sonore-epfl.excerpt': 'Ricerca EPFL su mini droni e onde sonore in Svizzera',
+    'blog.article.minuscoli-droni-sonore-epfl.imageAlt': 'Ricerca EPFL su mini droni e onde sonore in Svizzera',
 };
 
 export default blogMetaChIt;

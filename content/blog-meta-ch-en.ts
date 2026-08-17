@@ -3166,6 +3166,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.trasporti-pubblici-zugo-abbonamenti.title': 'Public transport passes Canton Zug zones and fares',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.excerpt': 'The main data on public transport subscription in the Canton of Zurich',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.imageAlt': 'Map of public transportation in the Canton of Zug',
+    'blog.article.minuscoli-droni-sonore-epfl.title': 'Tiny drones go where the sound takes them: EPFL creates hollow structures',
+    'blog.article.minuscoli-droni-sonore-epfl.excerpt': 'EPFL research on mini drones and sound waves in Switzerland',
+    'blog.article.minuscoli-droni-sonore-epfl.imageAlt': 'EPFL research on mini drones and sound waves in Switzerland',
 };
 
 export default blogMetaChEn;

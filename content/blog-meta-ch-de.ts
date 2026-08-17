@@ -3166,6 +3166,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.trasporti-pubblici-zugo-abbonamenti.title': 'Fahrkarten für öffentliche Verkehrsmittel Kanton Zug Zonen und Tarife',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.excerpt': 'Die wichtigsten Fakten zum ÖV-Abo im Kanton Zürich',
     'blog.article.trasporti-pubblici-zugo-abbonamenti.imageAlt': 'Karte der öffentlichen Verkehrsmittel im Kanton Zug',
+    'blog.article.minuscoli-droni-sonore-epfl.title': 'Minuscole droni seguiti dal suono',
+    'blog.article.minuscoli-droni-sonore-epfl.excerpt': 'EPFL-Forschung zu Mini-Drohnen und Schallwellen in der Schweiz',
+    'blog.article.minuscoli-droni-sonore-epfl.imageAlt': 'EPFL-Forschung zu Mini-Drohnen und Schallwellen in der Schweiz',
 };
 
 export default blogMetaChDe;
