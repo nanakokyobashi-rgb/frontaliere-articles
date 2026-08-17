@@ -3115,6 +3115,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assegni-familiari-canton-zugo.title': 'Allocations familiales dans le canton de Zoug : montants et demande',
     'blog.article.assegni-familiari-canton-zugo.excerpt': 'Les conditions de droit et les critères d\'éligibilité pour les allocations familiales dans le canton de Zoug.',
     'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Photo d\'un enfant qui joue dans un parc à Lugano.',
+    'blog.article.independenza-svizzera-sicurezza.title': 'L\'initiative sur la neutralité met en péril la sécurité de la Suisse',
+    'blog.article.independenza-svizzera-sicurezza.excerpt': 'PLR, Centre, Verts libéraux, PS et Verts soutiennent l\'initiative.',
+    'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Image éditoriale relative à: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
 };
 
 export default blogMetaChFr;

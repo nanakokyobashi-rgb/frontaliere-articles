@@ -3115,6 +3115,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assegni-familiari-canton-zugo.title': 'Familienzulagen im Kanton Zug: Beträge und Antrag',
     'blog.article.assegni-familiari-canton-zugo.excerpt': 'Die Rechtsvoraussetzungen und Anspruchsvoraussetzungen für Familienzulagen im Kanton Zug.',
     'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Foto eines Kindes, das in einem Park in Lugano spielt.',
+    'blog.article.independenza-svizzera-sicurezza.title': 'Neutralitätsinitiative gefährdet die Sicherheit der Schweiz',
+    'blog.article.independenza-svizzera-sicurezza.excerpt': 'FDP, Mitte, Grünliberale, SP und Grüne unterstützen die Initiative.',
+    'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Redaktionelles Bild zu: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
 };
 
 export default blogMetaChDe;

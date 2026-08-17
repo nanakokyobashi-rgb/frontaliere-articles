@@ -3115,6 +3115,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assegni-familiari-canton-zugo.title': 'Assegni familiari nel Cantone di Zugo: importi e domanda',
     'blog.article.assegni-familiari-canton-zugo.excerpt': 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo.',
     'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Foto di un bambino giocando in un parco a Lugano.',
+    'blog.article.independenza-svizzera-sicurezza.title': 'L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    'blog.article.independenza-svizzera-sicurezza.excerpt': 'PLR, Centro, Verdi liberali, PS e Verdi sostengono l\'iniziativa.',
+    'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Immagine editoriale relativa a: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
 };
 
 export default blogMetaChIt;

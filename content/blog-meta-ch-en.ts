@@ -3115,6 +3115,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.assegni-familiari-canton-zugo.title': 'Family allowances in the Canton of Zug: amounts and application',
     'blog.article.assegni-familiari-canton-zugo.excerpt': 'The legal conditions and eligibility criteria for family allowances in the Canton of Zug.',
     'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Photo of a child playing in a park at Lugano.',
+    'blog.article.independenza-svizzera-sicurezza.title': 'Neutrality initiative puts Switzerland\'s security at risk',
+    'blog.article.independenza-svizzera-sicurezza.excerpt': 'PLR, Centro, Liberal Greens, PS and Greens support the initiative.',
+    'blog.article.independenza-svizzera-sicurezza.imageAlt': 'Editorial image related to: L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
 };
 
 export default blogMetaChEn;
