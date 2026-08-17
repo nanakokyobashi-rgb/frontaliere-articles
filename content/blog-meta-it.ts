@@ -10010,6 +10010,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-17.imageAlt': 'I numeri del giorno per i frontalieri – 17 agosto 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-08-17.seoDescription': 'Bollettino frontalieri del 17 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-08-17.ogDescription': 'I numeri del 17 agosto 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.title': 'Frontalieri Ticino in crescita nel 2026-Q2',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.excerpt': 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.imageAlt': 'Tendenza frontalieri Ticino 2026-Q2',
+    'blog.article.salari-difficili-discussioni.title': 'Le discussioni salariali per il prossimo anno si preannunciano difficili',
+    'blog.article.salari-difficili-discussioni.excerpt': 'Travail.Suisse chiede un aumento generale del 2% per tutti i lavoratori, ma USI giudica la richiesta scollegata dalla realtà economica.',
+    'blog.article.salari-difficili-discussioni.imageAlt': 'Foto di un valico di confine tra Svizzera e Italia durante l\'inverno',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.title': 'Come va l\'economia di confine con il Canton Ticino? «Regge ma ci sono fragilità»',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.excerpt': 'L\'economia di confine tra il Canton Ticino e l\'Italia è in discussione. Come va?',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.imageAlt': 'Immagine di Lugano con il lago in primo piano',
 };
 
 export default blogMetaIt;

@@ -10008,6 +10008,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-17.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 17. August 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-08-17.seoDescription': 'Grenzgänger-Bulletin vom 17. August 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-08-17.ogDescription': 'Die Zahlen vom 17. August 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.title': 'Grenzgänger Tessin im Wachstum 2026-Q2',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.excerpt': 'Grenzgänger gesamt Kanton Tessin bis 2026-Q2: 79.121',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.imageAlt': 'Tendenza frontalieri Ticino 2026-Q2',
+    'blog.article.salari-difficili-discussioni.title': 'Die Lohngespräche für das kommende Jahr stehen vor schwierigen Herausforderungen',
+    'blog.article.salari-difficili-discussioni.excerpt': 'Travail.Suisse fordert eine allgemeine Erhöhung von 2% für alle Arbeitnehmer, aber USI hält die Forderung FÜR von der wirtschaftlichen Realität abgekoppelt.',
+    'blog.article.salari-difficili-discussioni.imageAlt': 'Fotografie eines Grenzübergangs zwischen Schweiz und Italien im Winter',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.title': 'Wie geht es der Grenzwirtschaft? «Es hält, aber es gibt Zerbrechlichkeit»',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.excerpt': 'Die Grenzwirtschaft zwischen dem Kanton Tessin und Italien steht auf dem Spiel. Wie geht\'s?',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.imageAlt': 'Lugano Seeansicht',
 };
 
 export default blogMetaDe;

@@ -1056,6 +1056,16 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'sorveglianza-mercato-est-2025': { it: 'sorveglianza-mercato-est-2025', en: 'est-market-surveillance-2025', de: 'marktuberwachung-est-2025', fr: 'surveillance-du-marche-est-2025' },
  'imposta-di-succesione-e-donazione-canton-glarona': { it: 'imposta-di-succesione-e-donazione-canton-glarona', en: 'inheritance-and-gift-tax-in-the-canton-of-glarus', de: 'erbschafts-und-schenkungssteuer-im-kanton-glarus', fr: 'impot-de-succes-et-de-donation-dans-le-canton-de-glaris' },
  'imposte-cantonal-zugo-aliquote': { it: 'imposte-cantonal-zugo-aliquote', en: 'zurich-cantonal-taxes-rates', de: 'kantonale-steuern-zuerich-schweiz', fr: 'impots-cantonaux-zurich-suisse' },
+ 'imposte-cantonal-zugo-aliquote-deduzioni': { it: 'imposte-cantonal-zugo-aliquote-deduzioni', en: 'zurich-cantonal-taxes-rates-and-deductions', de: 'zurich-kantonalsteuer-satze-und-abzuge', fr: 'taxes-cantonales-zurich-taux-et-deductions' },
+ 'premi-cassa-malati-cantone-zugo-riduzione-premi': { it: 'premi-cassa-malati-cantone-zugo-riduzione-premi', en: 'premi-cassa-malati-canton-zugo-riduzione-premi', de: 'premi-cassa-malati-kanton-zugo-riduzione-premi', fr: 'premi-cassa-malati-canton-de-zoug-riduzione-premi' },
+ 'salari-svizzera-aumentati-2026': { it: 'salari-svizzera-aumentati-2026', en: 'salaries-switzerland-increased-2026', de: 'lohn-schweiz-zuwachs-2026', fr: 'situation-salariale-suisse-augmentation-2026' },
+ 'costo-elettricit-svizzera': { it: 'costo-elettricit-svizzera', en: 'switzerland-electricity-cost', de: 'schweiz-stromkosten', fr: 'cout-de-l-electricite-en-suisse' },
+ 'giornate-svizzere-statistica-2026': { it: 'giornate-svizzere-statistica-2026', en: 'swiss-statistical-days-2026', de: 'schweizerische-statistiktage-2026', fr: 'journees-suisses-de-statistiques-2026' },
+ 'travailsuisse-aumenti-salariali-2026': { it: 'travailsuisse-aumenti-salariali-2026', en: 'travailsuisse-2026-salary-increases', de: 'travailsuisse-lohne-2026', fr: 'travailsuisse-salaire-2026' },
+ 'permesso-l-breve-durata-canton-zugo-validita-proroga': { it: 'permesso-l-breve-durata-canton-zugo-validita-proroga', en: 'short-term-l-permit-canton-zug-validity-extension', de: 'kurzfristige-aufenthaltsbewilligung-l-kanton-zug-gultigkeit-verlangerung', fr: 'permis-l-courte-duree-canton-zoug-validite-prolongation' },
+ 'assegni-familiari-canton-zugo': { it: 'assegni-familiari-canton-zugo', en: 'family-allowances-cantone-zugo', de: 'familienbeihilfe-kanton-zugo', fr: 'allocations-familiales-canton-zugo' },
+ 'independenza-svizzera-sicurezza': { it: 'independenza-svizzera-sicurezza', en: 'neutrality-initiative-puts-switzerland-s-security-at-risk', de: 'unabhaengigkeit-schweiz-sicherheit', fr: 'independance-suisse-securite' },
+ 'sistema-scolastico-canton-zugo-iscrizione-e-cicli': { it: 'sistema-scolastico-canton-zugo-iscrizione-e-cicli', en: 'school-system-canton-zurich-enrolment-and-grades', de: 'bildungssystem-kanton-zuerich-anmeldung-und-stufen', fr: 'systeme-educatif-canton-de-zurich-inscription-et-niveaux' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

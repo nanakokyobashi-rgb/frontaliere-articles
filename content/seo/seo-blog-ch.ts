@@ -40073,6 +40073,396 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-imposte-cantonal-zugo-aliquote-deduzioni': {
+    title: 'Imposte nel Cantone di Zugo: aliquote e scadenze',
+    description: 'Informazioni sulle imposte cantonali e comunali nel Cantone di Zugo, comprese le aliquote, gli scaglioni, le deduzioni ammesse e le scadenze di consegna.',
+    keywords: 'frontalieri, ticino, svizzera, italia, imposte, cantone, zugo, aliquote',
+    ogTitle: 'Imposte cantonali e comunali nel Cantone di Zugo: aliquote, scaglioni, deduzioni ammesse',
+    ogDescription: 'Informazioni sulle imposte cantonali e comunali nel Cantone di Zugo, comprese le aliquote, gli scaglioni, le deduzioni ammesse e le scadenze di consegna.',
+    canonicalPath: '/articoli-svizzera/imposte-cantonal-zugo-aliquote-deduzioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Imposte nel Cantone di Zugo: aliquote e scadenze",
+      "description": "Informazioni sulle imposte cantonali e comunali nel Cantone di Zugo, comprese le aliquote, gli scaglioni, le deduzioni ammesse e le scadenze di consegna.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/imposte-cantonal-zugo-aliquote-deduzioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un cartello stradale a Lugano con indicazione delle aliquote fiscali."
+      },
+      "datePublished": "2026-08-17T07:51:32+00:00",
+      "dateModified": "2026-08-17T07:51:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/imposte-cantonal-zugo-aliquote-deduzioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-premi-cassa-malati-cantone-zugo-riduzione-premi': {
+    title: 'Premi cassa malati cantone Zugo e riduzione premi',
+    description: 'I premi per l\'assicurazione malattia obbligatoria nel Cantone di Zugo sono ridotti in base alla fascia di reddito. La franchigia per gli adulti è di CHF 300',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, cantone',
+    ogTitle: 'Premi cassa malati cantone Zugo e riduzione premi',
+    ogDescription: 'I premi per l\'assicurazione malattia obbligatoria nel Cantone di Zugo sono ridotti in base alla fascia di reddito. La franchigia per gli adulti è di CHF 300, CHF 500, CHF 1000, CHF 1500, CHF 2000 e CHF 2500.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati cantone Zugo e riduzione premi",
+      "description": "I premi per l'assicurazione malattia obbligatoria nel Cantone di Zugo sono ridotti in base alla fascia di reddito. La franchigia per gli adulti è di CHF 300",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-cantone-zugo-riduzione-premi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Una scena di un frontaliere svizzero con la famiglia in un ambiente naturale vicino al lago di Lugano, dove si trova il Cantone di Zugo."
+      },
+      "datePublished": "2026-08-17T08:03:04+00:00",
+      "dateModified": "2026-08-17T08:03:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-cantone-zugo-riduzione-premi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-svizzera-aumentati-2026': {
+    title: 'Travail.Suisse chiede un aumento generalizzato dei salari in Svizzera',
+    description: 'Travail.Suisse chiede un aumento del 2% per tutti i lavoratori, ma le trattative si preannunciano difficili. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, travail, suisse, chiede, aumento',
+    ogTitle: 'Travail.Suisse chiede un aumento generalizzato dei salari in Svizzera',
+    ogDescription: 'Travail.Suisse chiede un aumento del 2% per tutti i lavoratori, ma le trattative si preannunciano difficili.',
+    canonicalPath: '/articoli-svizzera/salari-svizzera-aumentati-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Travail.Suisse chiede un aumento generalizzato dei salari in Svizzera",
+      "description": "Travail.Suisse chiede un aumento del 2% per tutti i lavoratori, ma le trattative si preannunciano difficili. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-svizzera-aumentati-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La situazione salariale in Svizzera, con aumento del 2% richiesto da Travail.Suisse"
+      },
+      "datePublished": "2026-08-17T09:07:38+00:00",
+      "dateModified": "2026-08-17T09:07:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-svizzera-aumentati-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-costo-elettricit-svizzera': {
+    title: 'Quattro miliardi per non far mancare la luce | Frontaliere Ticino',
+    description: 'La Svizzera dovrebbe investire quattro miliardi di franchi per garantire riserve energetiche stabili. Il solo progetto di quattro nuove centrali di riserva',
+    keywords: 'frontalieri, ticino, svizzera, italia, quattro, miliardi, mancare, luce',
+    ogTitle: 'Quattro miliardi per non far mancare la luce | Frontaliere Ticino',
+    ogDescription: 'La Svizzera dovrebbe investire quattro miliardi di franchi per garantire riserve energetiche stabili. Il solo progetto di quattro nuove centrali di riserva funzionanti con energie fossili dovrebbe costare 2,3 miliardi di franchi.',
+    canonicalPath: '/articoli-svizzera/costo-elettricit-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Quattro miliardi per non far mancare la luce",
+      "description": "La Svizzera dovrebbe investire quattro miliardi di franchi per garantire riserve energetiche stabili. Il solo progetto di quattro nuove centrali di riserva",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/costo-elettricit-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La Svizzera ha bisogno di investire per garantire riserve energetiche stabili."
+      },
+      "datePublished": "2026-08-17T09:15:20+00:00",
+      "dateModified": "2026-08-17T09:15:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/costo-elettricit-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-giornate-svizzere-statistica-2026': {
+    title: 'Dati e statistica nell\'era dell\'intelligenza artificiale',
+    description: 'Le Giornate svizzere della statistica 2026 si terranno dal 25 al 27 agosto 2026 a Rorschach, nel Cantone di San Gallo. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, dati, statistica, nell, dell',
+    ogTitle: 'Giornate svizzere della statistica 2026: dati e statistiche nell\'era dell\'intelligenza artificiale',
+    ogDescription: 'Le Giornate svizzere della statistica 2026 si terranno dal 25 al 27 agosto 2026 a Rorschach, nel Cantone di San Gallo.',
+    canonicalPath: '/articoli-svizzera/giornate-svizzere-statistica-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dati e statistica nell'era dell'intelligenza artificiale",
+      "description": "Le Giornate svizzere della statistica 2026 si terranno dal 25 al 27 agosto 2026 a Rorschach, nel Cantone di San Gallo. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/giornate-svizzere-statistica-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giornate svizzere della statistica 2026"
+      },
+      "datePublished": "2026-08-17T09:21:48+00:00",
+      "dateModified": "2026-08-17T09:21:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/giornate-svizzere-statistica-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-travailsuisse-aumenti-salariali-2026': {
+    title: 'Di più Travail.Suisse chiede aumenti salariali del 2%, USI frena',
+    description: 'Travail.Suisse chiede aumenti salariali del 2% mentre l\'USI frena con un aumento medio dell\'1%. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, travail, suisse, chiede, aumenti',
+    ogTitle: 'Travailsuisse aumenti salariali 2026',
+    ogDescription: 'Travail.Suisse chiede aumenti salariali del 2% mentre l\'USI frena con un aumento medio dell\'1%.',
+    canonicalPath: '/articoli-svizzera/travailsuisse-aumenti-salariali-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Di più Travail.Suisse chiede aumenti salariali del 2%, USI frena",
+      "description": "Travail.Suisse chiede aumenti salariali del 2% mentre l'USI frena con un aumento medio dell'1%. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/travailsuisse-aumenti-salariali-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un evento in Svizzera"
+      },
+      "datePublished": "2026-08-17T09:31:57+00:00",
+      "dateModified": "2026-08-17T09:31:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/travailsuisse-aumenti-salariali-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-l-breve-durata-canton-zugo-validita-proroga': {
+    title: 'Permesso L di breve durata nel Canton Zugo: validità, proroga e passaggio al permesso B',
+    description: 'Guida completa sul permesso L di breve durata nel Canton Zugo: durata massima, condizioni per la proroga, vincoli con il datore di lavoro e requisiti',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, breve, durata, canton',
+    ogTitle: 'Permesso L Canton Zugo: tutto su validità e proroga',
+    ogDescription: 'Durata massima del permesso L a Zugo, procedure per la proroga, vincoli con il datore e requisiti per il permesso B. Guida pratica per lavoratori non UE.',
+    canonicalPath: '/articoli-svizzera/permesso-l-breve-durata-canton-zugo-validita-proroga/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L di breve durata nel Canton Zugo: validità, proroga e passaggio al permesso B",
+      "description": "Guida completa sul permesso L di breve durata nel Canton Zugo: durata massima, condizioni per la proroga, vincoli con il datore di lavoro e requisiti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-breve-durata-canton-zugo-validita-proroga.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama del Canton Zugo con lago e Alpi"
+      },
+      "datePublished": "2026-08-17T09:55:05+00:00",
+      "dateModified": "2026-08-17T09:55:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-breve-durata-canton-zugo-validita-proroga/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-canton-zugo': {
+    title: 'Assegni familiari nel Cantone di Zugo: importi e domanda',
+    description: 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, cantone, zugo',
+    ogTitle: 'Assegni familiari nel Cantone di Zugo: importi e domanda',
+    ogDescription: 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-canton-zugo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari nel Cantone di Zugo: importi e domanda",
+      "description": "Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-canton-zugo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di un bambino giocando in un parco a Lugano."
+      },
+      "datePublished": "2026-08-17T10:07:13+00:00",
+      "dateModified": "2026-08-17T10:07:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-canton-zugo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-independenza-svizzera-sicurezza': {
+    title: 'L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    description: 'L\'iniziativa sulla neutralità è in votazione il prossimo 27 settembre e limita enormemente la capacità della Svizzera di agire in materia di politica estera',
+    keywords: 'frontalieri, ticino, svizzera, italia, iniziativa, sulla, neutralità, mette',
+    ogTitle: 'L\'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera',
+    ogDescription: 'L\'iniziativa sulla neutralità è in votazione il prossimo 27 settembre e limita enormemente la capacità della Svizzera di agire in materia di politica estera e mette in pericolo la nostra sicurezza.',
+    canonicalPath: '/articoli-svizzera/independenza-svizzera-sicurezza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "L'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera",
+      "description": "L'iniziativa sulla neutralità è in votazione il prossimo 27 settembre e limita enormemente la capacità della Svizzera di agire in materia di politica estera",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/independenza-svizzera-sicurezza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine editoriale relativa a: L'iniziativa sulla neutralità mette a rischio la sicurezza della Svizzera"
+      },
+      "datePublished": "2026-08-17T10:13:40+00:00",
+      "dateModified": "2026-08-17T10:13:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/independenza-svizzera-sicurezza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sistema-scolastico-canton-zugo-iscrizione-e-cicli': {
+    title: 'Sistema scolastico del Cantone di Zurigo: iscrizione e cicli',
+    description: 'Il sistema scolastico del Cantone di Zurigo è caratterizzato da un ciclo di istruzione obbligatoria di 9 anni. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sistema, scolastico, cantone, zurigo',
+    ogTitle: 'Sistema scolastico del Cantone di Zurigo: iscrizione e cicli',
+    ogDescription: 'Il sistema scolastico del Cantone di Zurigo è caratterizzato da un ciclo di istruzione obbligatoria di 9 anni.',
+    canonicalPath: '/articoli-svizzera/sistema-scolastico-canton-zugo-iscrizione-e-cicli/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sistema scolastico del Cantone di Zurigo: iscrizione e cicli",
+      "description": "Il sistema scolastico del Cantone di Zurigo è caratterizzato da un ciclo di istruzione obbligatoria di 9 anni. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sistema-scolastico-canton-zugo-iscrizione-e-cicli.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sistema scolastico del Cantone di Zurigo"
+      },
+      "datePublished": "2026-08-17T10:27:42+00:00",
+      "dateModified": "2026-08-17T10:27:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sistema-scolastico-canton-zugo-iscrizione-e-cicli/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

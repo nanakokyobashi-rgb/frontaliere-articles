@@ -68633,6 +68633,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-tendenza-frontalieri-ticino-2026-q2': {
+    title: 'Frontalieri Ticino in crescita nel 2026-Q2 | Frontaliere Ticino',
+    description: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, crescita, 2026-q2, totali, canton',
+    ogTitle: 'Frontalieri Ticino in crescita nel 2026-Q2',
+    ogDescription: 'Frontalieri totali Canton Ticino al 2026-Q2: 79.121',
+    canonicalPath: '/articoli-frontaliere/tendenza-frontalieri-ticino-2026-q2',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri Ticino in crescita nel 2026-Q2",
+      "description": "Frontalieri totali Canton Ticino al 2026-Q2: 79.121. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/tendenza-frontalieri-ticino-2026-q2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tendenza frontalieri Ticino 2026-Q2"
+      },
+      "datePublished": "2026-08-17T08:06:29+00:00",
+      "dateModified": "2026-08-17T08:06:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/tendenza-frontalieri-ticino-2026-q2/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-salari-difficili-discussioni': {
+    title: 'Le discussioni salariali per il prossimo anno si preannunciano difficili',
+    description: 'Travail.Suisse chiede un aumento generale del 2% per tutti i lavoratori, ma USI giudica la richiesta scollegata dalla realtà economica. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, discussioni, salariali, prossimo, anno',
+    ogTitle: 'Le discussioni salariali per il prossimo anno si preannunciano difficili',
+    ogDescription: 'Travail.Suisse chiede un aumento generale del 2% per tutti i lavoratori, ma USI giudica la richiesta scollegata dalla realtà economica.',
+    canonicalPath: '/articoli-frontaliere/salari-difficili-discussioni',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Le discussioni salariali per il prossimo anno si preannunciano difficili",
+      "description": "Travail.Suisse chiede un aumento generale del 2% per tutti i lavoratori, ma USI giudica la richiesta scollegata dalla realtà economica. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-difficili-discussioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di un valico di confine tra Svizzera e Italia durante l'inverno"
+      },
+      "datePublished": "2026-08-17T09:03:26+00:00",
+      "dateModified": "2026-08-17T09:03:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/salari-difficili-discussioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-come-va-leconomia-di-confine-con-il-canton-ticino': {
+    title: 'Come va l\'economia di confine con il Canton Ticino? «Regge ma ci sono fragilità»',
+    description: 'L\'economia di confine tra il Canton Ticino e l\'Italia è in discussione. Come va?. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, economia, confine, canton, regge',
+    ogTitle: 'Come va l\'economia di confine con il Canton Ticino?',
+    ogDescription: 'L\'economia di confine tra il Canton Ticino e l\'Italia è in discussione. Come va?',
+    canonicalPath: '/articoli-frontaliere/come-va-leconomia-di-confine-con-il-canton-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Come va l'economia di confine con il Canton Ticino? «Regge ma ci sono fragilità»",
+      "description": "L'economia di confine tra il Canton Ticino e l'Italia è in discussione. Come va?. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/come-va-leconomia-di-confine-con-il-canton-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di Lugano con il lago in primo piano"
+      },
+      "datePublished": "2026-08-17T10:31:04+00:00",
+      "dateModified": "2026-08-17T10:31:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/come-va-leconomia-di-confine-con-il-canton-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

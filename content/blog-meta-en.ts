@@ -10009,6 +10009,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-17.imageAlt': 'The day\'s numbers for cross-border commuters – August 17, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-08-17.seoDescription': 'Cross-border brief, August 17, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-08-17.ogDescription': 'The numbers for August 17, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.title': 'Ticino frontiers on the rise in 2026-Q2',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.excerpt': 'Total border guards in Ticino as of 2026-Q2: 79,121',
+    'blog.article.tendenza-frontalieri-ticino-2026-q2.imageAlt': 'Tendenza frontalieri Ticino 2026-Q2',
+    'blog.article.salari-difficili-discussioni.title': 'Wage discussions for next year look set to be difficult',
+    'blog.article.salari-difficili-discussioni.excerpt': 'Travail.Suisse asks for a general increase of 2% for all workers, but USI judges the request disconnected from the economic reality.',
+    'blog.article.salari-difficili-discussioni.imageAlt': 'Photo of a border crossing between Switzerland and Italy during winter',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.title': 'Ticino border economy: fragile balance',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.excerpt': 'The border economy between the Canton of Ticino and Italy is in question. How is it going?',
+    'blog.article.come-va-leconomia-di-confine-con-il-canton-ticino.imageAlt': 'Lugano lake view',
 };
 
 export default blogMetaEn;

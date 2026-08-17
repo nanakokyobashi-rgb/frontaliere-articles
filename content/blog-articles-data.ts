@@ -29991,6 +29991,33 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'tendenza-frontalieri-ticino-2026-q2',
+ category: 'novita',
+ date: '2026-08-17T08:06:29.630Z',
+ image: '/images/blog/tendenza-frontalieri-ticino-2026-q2.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'salari-difficili-discussioni',
+ category: 'pratico',
+ date: '2026-08-17T09:03:26.357Z',
+ image: '/images/blog/salari-difficili-discussioni.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'come-va-leconomia-di-confine-con-il-canton-ticino',
+ category: 'fiscale',
+ date: '2026-08-17T10:31:04.455Z',
+ image: '/images/blog/come-va-leconomia-di-confine-con-il-canton-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
