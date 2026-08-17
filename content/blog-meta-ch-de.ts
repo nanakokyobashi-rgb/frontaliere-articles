@@ -3112,6 +3112,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Bewilligung L (Zug): Gültigkeit, Verlängerung, Übergang zu B',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Maximale Dauer der Bewilligung L im Kanton Zug, Bedingungen für die Verlängerung, Bindungen an den Arbeitgeber und Voraussetzungen für den Übergang zur Aufenthaltsbewilligung B.',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama des Kantons Zug mit See und Alpen',
+    'blog.article.assegni-familiari-canton-zugo.title': 'Familienzulagen im Kanton Zug: Beträge und Antrag',
+    'blog.article.assegni-familiari-canton-zugo.excerpt': 'Die Rechtsvoraussetzungen und Anspruchsvoraussetzungen für Familienzulagen im Kanton Zug.',
+    'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Foto eines Kindes, das in einem Park in Lugano spielt.',
 };
 
 export default blogMetaChDe;

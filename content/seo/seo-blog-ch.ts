@@ -40346,6 +40346,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assegni-familiari-canton-zugo': {
+    title: 'Assegni familiari nel Cantone di Zugo: importi e domanda',
+    description: 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, cantone, zugo',
+    ogTitle: 'Assegni familiari nel Cantone di Zugo: importi e domanda',
+    ogDescription: 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-canton-zugo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari nel Cantone di Zugo: importi e domanda",
+      "description": "Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-canton-zugo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di un bambino giocando in un parco a Lugano."
+      },
+      "datePublished": "2026-08-17T10:07:13+00:00",
+      "dateModified": "2026-08-17T10:07:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-canton-zugo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

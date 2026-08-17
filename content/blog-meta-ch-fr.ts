@@ -3112,6 +3112,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Permis L à Zoug : validité, prolongation et permis B',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Durée maximale du permis L dans le canton de Zoug, conditions de prolongation, liens avec l\'employeur et conditions de passage au permis de séjour B.',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama du canton de Zoug avec lac et Alpes',
+    'blog.article.assegni-familiari-canton-zugo.title': 'Allocations familiales dans le canton de Zoug : montants et demande',
+    'blog.article.assegni-familiari-canton-zugo.excerpt': 'Les conditions de droit et les critères d\'éligibilité pour les allocations familiales dans le canton de Zoug.',
+    'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Photo d\'un enfant qui joue dans un parc à Lugano.',
 };
 
 export default blogMetaChFr;

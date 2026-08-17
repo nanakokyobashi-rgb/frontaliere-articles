@@ -3112,6 +3112,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Short-term permit L in Zug: validity, extensions & transfer to B',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Maximum duration of the L permit in the Canton of Zug, conditions for the extension, constraints with the employer and requirements to move to the B residence permit.',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Canton of Zug panorama with lake and Alps',
+    'blog.article.assegni-familiari-canton-zugo.title': 'Family allowances in the Canton of Zug: amounts and application',
+    'blog.article.assegni-familiari-canton-zugo.excerpt': 'The legal conditions and eligibility criteria for family allowances in the Canton of Zug.',
+    'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Photo of a child playing in a park at Lugano.',
 };
 
 export default blogMetaChEn;

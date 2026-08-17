@@ -3112,6 +3112,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Permesso L di breve durata nel Canton Zugo: validità, proroga e passaggio al permesso B',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Durata massima del permesso L nel Canton Zugo, condizioni per la proroga, vincoli con il datore di lavoro e requisiti per passare al permesso di dimora B.',
     'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama del Canton Zugo con lago e Alpi',
+    'blog.article.assegni-familiari-canton-zugo.title': 'Assegni familiari nel Cantone di Zugo: importi e domanda',
+    'blog.article.assegni-familiari-canton-zugo.excerpt': 'Le condizioni di diritto e i criteri di eleggibilità per gli assegni familiari nel Cantone di Zugo.',
+    'blog.article.assegni-familiari-canton-zugo.imageAlt': 'Foto di un bambino giocando in un parco a Lugano.',
 };
 
 export default blogMetaChIt;
