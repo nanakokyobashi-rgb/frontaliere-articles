@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-16T05:31:58.733Z",
-  "dateIso": "2026-08-16",
+  "generatedAt": "2026-08-17T05:38:01.288Z",
+  "dateIso": "2026-08-17",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 22862
+    "jobsActive": 22816
   },
   "blocks": {
     "borderWait": {
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-16T05:06:13.645Z",
+      "generatedAt": "2026-08-17T05:24:41.356Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 69,
-      "cheaperSwissCount": 67,
-      "tieCount": 9,
+      "cheaperItalyCount": 68,
+      "cheaperSwissCount": 69,
+      "tieCount": 8,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -91,24 +91,24 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0655,
-      "lastDate": "2026-08-15",
-      "prevRate": 1.0656,
-      "prevDate": "2026-08-14",
-      "delta1d": -0.0001,
-      "rate7dAgo": 1.0696,
-      "delta7d": -0.0041,
+      "rate": 1.0653,
+      "lastDate": "2026-08-16",
+      "prevRate": 1.0653,
+      "prevDate": "2026-08-15",
+      "delta1d": 0,
+      "rate7dAgo": 1.0695,
+      "delta7d": -0.0042,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-15T20:35:04.751Z",
-      "activeJobs": 22862,
-      "activeCompanies": 848,
-      "todayAdded": 521,
-      "yesterdayAdded": 521,
-      "last7dAdded": 4606
+      "generatedAt": "2026-08-17T02:37:17.785Z",
+      "activeJobs": 22816,
+      "activeCompanies": 852,
+      "todayAdded": 114,
+      "yesterdayAdded": 371,
+      "last7dAdded": 4288
     }
   }
 }
