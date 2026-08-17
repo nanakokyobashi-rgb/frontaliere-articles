@@ -3151,6 +3151,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Loyers dans le canton de Zoug : loyers moyens, dépôts et droits des locataires',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Guide pratique du marché locatif dans le canton de Zoug : redevances moyennes par zone, dépôt de garantie, contestation de la redevance et procédures de résiliation selon le droit fédéral.',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Lac de Zoug avec immeubles résidentiels et bateaux au coucher du soleil',
+    'blog.article.affitti-zugo-cantoni-medi.title': 'Marché locatif dans le canton de Zoug : loyers moyens et droit de location',
+    'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Les loyers dans le canton de Zoug : les loyers moyens et le droit de location.',
+    'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Une scène d\'un marché immobilier à Zug, en Suisse, avec un focus sur les loyers médians cantonaux et le droit de location.',
 };
 
 export default blogMetaChFr;

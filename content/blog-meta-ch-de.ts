@@ -3151,6 +3151,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Mieten im Kanton Zug: Durchschnittsmieten, Kautionen und Mieterrechte',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Praktischer Leitfaden zum Mietmarkt im Kanton Zug: Durchschnittsmieten pro Zone, Kaution, Gebührenbeanstandung und Kündigungsverfahren nach Bundesrecht.',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Zugersee mit Wohnbauten und Booten bei Sonnenuntergang',
+    'blog.article.affitti-zugo-cantoni-medi.title': 'Mietmarkt im Kanton Zug: Durchschnittsmieten und Mietrecht',
+    'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Die Mieten im Kanton Zug: die Durchschnittsmieten und das Mietrecht.',
+    'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Eine Szene eines Immobilienmarktes in Zug, Schweiz, mit Schwerpunkt auf den kantonalen Durchschnittswohnkosten und dem Mietrecht.',
 };
 
 export default blogMetaChDe;

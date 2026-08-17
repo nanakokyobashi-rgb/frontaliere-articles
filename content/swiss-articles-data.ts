@@ -9451,6 +9451,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'affitti-zugo-cantoni-medi',
+    category: 'pratico',
+    date: '2026-08-17T15:34:37.280Z',
+    image: '/images/blog/affitti-zugo-cantoni-medi.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

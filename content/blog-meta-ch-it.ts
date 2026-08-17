@@ -3151,6 +3151,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Affitti nel canton Zugo: canoni medi, depositi e diritti degli inquilini',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Guida pratica al mercato degli affitti nel Canton Zugo: canoni medi per zona, deposito di garanzia, contestazione del canone e procedure di disdetta secondo il diritto federale.',
     'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Lago di Zugo con edifici residenziali e barche al tramonto',
+    'blog.article.affitti-zugo-cantoni-medi.title': 'Mercato degli affitti nel Cantone di Zugo: canoni medi e diritto di locazione',
+    'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Gli affitti nel Cantone di Zugo: i canoni medi e il diritto di locazione.',
+    'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Immagine di un mercato immobiliare in Zug, Svizzera, con enfasi sui canoni medi cantonali e sul diritto di locazione.',
 };
 
 export default blogMetaChIt;

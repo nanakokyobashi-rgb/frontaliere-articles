@@ -1076,6 +1076,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'borse-studio-canton-zugo-requisiti-importi': { it: 'borse-studio-canton-zugo-requisiti-importi', en: 'zug-canton-scholarships-requirements-amounts', de: 'kanton-zug-stipendien-voraussetzungen-betraege', fr: 'canton-zoug-bourses-etudes-exigences-montants' },
  'asilo-nido-e-custodia-bambini-canton-zugo-costi': { it: 'asilo-nido-e-custodia-bambini-canton-zugo-costi', en: 'kindergarten-and-childcare-in-canton-zug-costs', de: 'asilo-nido-e-custodia-bambini-canton-zugo-kosten', fr: 'asilo-nido-e-custodia-bambini-canton-zugo-couts' },
  'affitti-canton-zugo-canoni-medi-diritto-locazione': { it: 'affitti-canton-zugo-canoni-medi-diritto-locazione', en: 'rent-zug-canton-average-rates-rental-law', de: 'mieten-kanton-zug-durchschnittspreise-mietrecht', fr: 'loyers-canton-zoug-prix-moyens-droit-bail' },
+ 'affitti-zugo-cantoni-medi': { it: 'affitti-zugo-cantoni-medi', en: 'affitti-zug-cantonal-rents', de: 'mieten-zug-kantonale-mieten', fr: 'locations-zug-revenus-cantonaux' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
