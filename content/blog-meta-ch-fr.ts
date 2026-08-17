@@ -3178,6 +3178,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.patente-guida-cantone-zugo-conversione.title': 'Permis de conduire dans le canton de Zoug : conversion du permis étranger',
     'blog.article.patente-guida-cantone-zugo-conversione.excerpt': 'La conversion du permis de conduire étranger est obligatoire pour les frontaliers résidant dans le canton de Zoug.',
     'blog.article.patente-guida-cantone-zugo-conversione.imageAlt': 'Image d\'une guide conduisant un frontalier dans le Canton de Zoug.',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.title': 'Droits de succession et de donation à Zoug : taux et délais',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.excerpt': 'Dans le canton de Zoug, l\'impôt sur les successions et les donations est régi par une loi spécifique qui fixe des taux différents en fonction du degré de parenté et des exemptions pour le conjoint et les descendants.',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.imageAlt': 'Une vue panoramique de Lugano, Suisse, avec une vue sur la ville et le lac.',
 };
 
 export default blogMetaChFr;

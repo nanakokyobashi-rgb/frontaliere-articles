@@ -3178,6 +3178,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.patente-guida-cantone-zugo-conversione.title': 'Patente di guida nel Cantone di Zugo: conversione della licenza estera',
     'blog.article.patente-guida-cantone-zugo-conversione.excerpt': 'La conversione della licenza di guida estera è obbligatoria per i frontalieri che risiedono nel Cantone di Zugo.',
     'blog.article.patente-guida-cantone-zugo-conversione.imageAlt': 'Immagine di una guida che guida un frontaliere nel Cantone di Zugo.',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.title': 'Imposte di successione e donazione a Zugo: aliquote e termini',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.excerpt': 'Nel Cantone di Zugo, l\'imposta di successione e donazione è regolata da una legge specifica che stabilisce aliquote differenti in base al grado di parentela e alle esenzioni per coniuge e discendenti.',
+    'blog.article.imposta-di-succesione-e-donazione-canton-zugo-aliquote.imageAlt': 'Una panoramica di Lugano, in Svizzera, con una vista sulla città e il lago.',
 };
 
 export default blogMetaChIt;
