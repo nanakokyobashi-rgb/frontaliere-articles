@@ -3142,6 +3142,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.neutralita-fronte-no-lancia-allarme.title': 'Neutralità, il fronte del',
     'blog.article.neutralita-fronte-no-lancia-allarme.excerpt': 'Un comitato interpartitico chiede di respingere l\'iniziativa il 27 settembre, limiterebbe la politica estera e indebolirebbe la difesa svizzera.',
     'blog.article.neutralita-fronte-no-lancia-allarme.imageAlt': 'Una manifestazione a Lugano contro l\'iniziativa sulla neutralità.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Borse di studio e prestiti nel Canton Zugo: requisiti, importi e scadenze',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Guida completa alle borse di studio e prestiti d\'onore nel Canton Zugo: chi può richiederli, importi massimi, termini di presentazione e ufficio competente.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Campus universitario nel Canton Zugo con studenti e bandiere svizzere',
 };
 
 export default blogMetaChIt;

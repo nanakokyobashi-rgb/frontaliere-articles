@@ -3142,6 +3142,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.neutralita-fronte-no-lancia-allarme.title': 'Neutralität, die Front des',
     'blog.article.neutralita-fronte-no-lancia-allarme.excerpt': 'Ein überparteiliches Komitee fordert die Ablehnung der Initiative am 27. September, würde die Aussenpolitik einschränken und die Schweizer Verteidigung schwächen.',
     'blog.article.neutralita-fronte-no-lancia-allarme.imageAlt': 'Eine Demonstration in Lugano gegen die Neutralitätsinitiative.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Stipendien und Darlehen im Kanton Zug: Voraussetzungen, Beträge und Fristen',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Vollständiger Leitfaden für Stipendien und Ehrendarlehen im Kanton Zug: Wer kann sie beantragen, Höchstbeträge, Bewerbungsfristen und zuständige Stelle.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Universitätscampus im Kanton Zug mit Studenten und Schweizer Flaggen',
 };
 
 export default blogMetaChDe;

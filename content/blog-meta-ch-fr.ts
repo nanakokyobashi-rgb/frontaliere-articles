@@ -3142,6 +3142,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.neutralita-fronte-no-lancia-allarme.title': 'Neutralité, le front du',
     'blog.article.neutralita-fronte-no-lancia-allarme.excerpt': 'Un comité interpartite demande de rejeter l\'initiative le 27 septembre, ce qui limiterait la politique étrangère et affaiblirait la défense suisse.',
     'blog.article.neutralita-fronte-no-lancia-allarme.imageAlt': 'Une manifestation à Lugano contre l\'initiative de neutralité.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Bourses et prêts dans le canton de Zoug : exigences, montants et échéances',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Guide complet des bourses et prêts d\'honneur dans le canton de Zou : qui peut y postuler, montants maximaux, délais de soumission et fonction compétente.',
+    'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Campus universitaire du canton de Zoug avec étudiants et drapeaux suisses',
 };
 
 export default blogMetaChFr;
