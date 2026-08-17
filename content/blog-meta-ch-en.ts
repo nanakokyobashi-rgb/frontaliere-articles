@@ -3148,6 +3148,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Kindergarten and childcare in Canton Zug: costs',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'Costs for childcare and childcare in Canton Zug may vary based on the calculated rate on income and available cantonal subsidies.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Image of a kindergarten in Canton Zug',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Rentals in the canton of Zug: average fees, deposits and tenants\' rights',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Practical guide to the rental market in the Canton of Zug: average rents by area, security deposit, rent dispute and cancellation procedures according to federal law.',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Lake Zug with residential buildings and boats at sunset',
 };
 
 export default blogMetaChEn;

@@ -3148,6 +3148,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Asilo nido e custodia bambini in Canton Zug: costi',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'I costi per l\'asilo nido e la custodia dei bambini in Canton Zug possono variare in base alla tariffa calcolata sul reddito e ai sussidi cantonali disponibili.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Immagine di un asilo nido in Canton Zug',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Affitti nel canton Zugo: canoni medi, depositi e diritti degli inquilini',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Guida pratica al mercato degli affitti nel Canton Zugo: canoni medi per zona, deposito di garanzia, contestazione del canone e procedure di disdetta secondo il diritto federale.',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Lago di Zugo con edifici residenziali e barche al tramonto',
 };
 
 export default blogMetaChIt;

@@ -3148,6 +3148,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Zug: Kosten',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.',
     'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Bild eines Kindergartens im Kanton Zug',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.title': 'Mieten im Kanton Zug: Durchschnittsmieten, Kautionen und Mieterrechte',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.excerpt': 'Praktischer Leitfaden zum Mietmarkt im Kanton Zug: Durchschnittsmieten pro Zone, Kaution, Gebührenbeanstandung und Kündigungsverfahren nach Bundesrecht.',
+    'blog.article.affitti-canton-zugo-canoni-medi-diritto-locazione.imageAlt': 'Zugersee mit Wohnbauten und Booten bei Sonnenuntergang',
 };
 
 export default blogMetaChDe;
