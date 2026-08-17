@@ -3109,6 +3109,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.travailsuisse-aumenti-salariali-2026.title': 'Di più Travail.Suisse chiede aumenti salariali del 2%, USI frena',
     'blog.article.travailsuisse-aumenti-salariali-2026.excerpt': 'Travail.Suisse chiede aumenti salariali del 2%, mentre l\'USI frena con un aumento medio dell\'1%.',
     'blog.article.travailsuisse-aumenti-salariali-2026.imageAlt': 'Immagine di un evento in Svizzera',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Permesso L di breve durata nel Canton Zugo: validità, proroga e passaggio al permesso B',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Durata massima del permesso L nel Canton Zugo, condizioni per la proroga, vincoli con il datore di lavoro e requisiti per passare al permesso di dimora B.',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama del Canton Zugo con lago e Alpi',
 };
 
 export default blogMetaChIt;

@@ -3109,6 +3109,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.travailsuisse-aumenti-salariali-2026.title': 'Mehr Travail.Suisse fordert Lohnerhöhungen von 2%, NUTZUNGEN BREMSEN',
     'blog.article.travailsuisse-aumenti-salariali-2026.excerpt': 'Travail.Suisse fordert Lohnerhöhungen von 2%, während die USI mit einer durchschnittlichen Steigerung von 1% bremst.',
     'blog.article.travailsuisse-aumenti-salariali-2026.imageAlt': 'Bild eines Ereignisses in der Schweiz',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Bewilligung L (Zug): Gültigkeit, Verlängerung, Übergang zu B',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Maximale Dauer der Bewilligung L im Kanton Zug, Bedingungen für die Verlängerung, Bindungen an den Arbeitgeber und Voraussetzungen für den Übergang zur Aufenthaltsbewilligung B.',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama des Kantons Zug mit See und Alpen',
 };
 
 export default blogMetaChDe;

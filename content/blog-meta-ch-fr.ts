@@ -3109,6 +3109,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.travailsuisse-aumenti-salariali-2026.title': 'Travail.Suisse chiede 2% di aumento salariale',
     'blog.article.travailsuisse-aumenti-salariali-2026.excerpt': 'Travail.Suisse demande des augmentations salariales de 2 %, tandis que l\'USI freine avec une augmentation moyenne de 1 %.',
     'blog.article.travailsuisse-aumenti-salariali-2026.imageAlt': 'Image d\'un événement en Suisse',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Permis L à Zoug : validité, prolongation et permis B',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Durée maximale du permis L dans le canton de Zoug, conditions de prolongation, liens avec l\'employeur et conditions de passage au permis de séjour B.',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Panorama du canton de Zoug avec lac et Alpes',
 };
 
 export default blogMetaChFr;

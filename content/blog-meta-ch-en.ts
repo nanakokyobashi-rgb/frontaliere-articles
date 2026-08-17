@@ -3109,6 +3109,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.travailsuisse-aumenti-salariali-2026.title': 'More Travail.Suisse asks for wage increases of 2%, USES BRAKES',
     'blog.article.travailsuisse-aumenti-salariali-2026.excerpt': 'Travail.Suisse asks for wage increases of 2%, while YOU USE it slows down with an average increase of 1%.',
     'blog.article.travailsuisse-aumenti-salariali-2026.imageAlt': 'Image of an event in Switzerland',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.title': 'Short-term permit L in Zug: validity, extensions & transfer to B',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.excerpt': 'Maximum duration of the L permit in the Canton of Zug, conditions for the extension, constraints with the employer and requirements to move to the B residence permit.',
+    'blog.article.permesso-l-breve-durata-canton-zugo-validita-proroga.imageAlt': 'Canton of Zug panorama with lake and Alps',
 };
 
 export default blogMetaChEn;
