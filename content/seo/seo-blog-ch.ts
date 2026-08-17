@@ -41477,6 +41477,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sospensione-lavori-muro-anti-migranti-big-bend-texas': {
+    title: 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend',
+    description: 'La decisione dell\'amministrazione Trump di sospendere i lavori per il muro anti-migranti a Big Bend, in Texas, potrebbe avere implicazioni per la politica',
+    keywords: 'frontalieri, ticino, svizzera, italia, texas, sospesi, lavori, muro',
+    ogTitle: 'Texas, sospesi i lavori per il muro anti-migranti a Big Bend',
+    ogDescription: 'La decisione dell\'amministrazione Trump di sospendere i lavori per il muro anti-migranti a Big Bend, in Texas, potrebbe avere implicazioni per la politica fiscale svizzera.',
+    canonicalPath: '/articoli-svizzera/sospensione-lavori-muro-anti-migranti-big-bend-texas/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Texas, sospesi i lavori per il muro anti-migranti a Big Bend",
+      "description": "La decisione dell'amministrazione Trump di sospendere i lavori per il muro anti-migranti a Big Bend, in Texas, potrebbe avere implicazioni per la politica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sospensione-lavori-muro-anti-migranti-big-bend-texas.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "L'amministrazione Trump sospenderà i lavori per il muro anti-migranti a Big Bend, in Texas."
+      },
+      "datePublished": "2026-08-17T21:50:58+00:00",
+      "dateModified": "2026-08-17T21:50:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sospensione-lavori-muro-anti-migranti-big-bend-texas/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
