@@ -3145,6 +3145,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Scholarships and loans in the Canton of Zug: requirements, amounts and deadlines',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Complete guide to scholarships and honorary loans in the Canton of Zug: who can request them, maximum amounts, presentation deadlines and competent office.',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'University campus in Canton Zug with students and Swiss flags',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Kindergarten and childcare in Canton Zug: costs',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'Costs for childcare and childcare in Canton Zug may vary based on the calculated rate on income and available cantonal subsidies.',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Image of a kindergarten in Canton Zug',
 };
 
 export default blogMetaChEn;

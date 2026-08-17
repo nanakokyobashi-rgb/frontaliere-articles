@@ -3145,6 +3145,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Borse di studio e prestiti nel Canton Zugo: requisiti, importi e scadenze',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Guida completa alle borse di studio e prestiti d\'onore nel Canton Zugo: chi può richiederli, importi massimi, termini di presentazione e ufficio competente.',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Campus universitario nel Canton Zugo con studenti e bandiere svizzere',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Asilo nido e custodia bambini in Canton Zug: costi',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'I costi per l\'asilo nido e la custodia dei bambini in Canton Zug possono variare in base alla tariffa calcolata sul reddito e ai sussidi cantonali disponibili.',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Immagine di un asilo nido in Canton Zug',
 };
 
 export default blogMetaChIt;

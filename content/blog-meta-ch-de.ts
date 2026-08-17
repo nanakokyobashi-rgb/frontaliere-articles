@@ -3145,6 +3145,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Stipendien und Darlehen im Kanton Zug: Voraussetzungen, Beträge und Fristen',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Vollständiger Leitfaden für Stipendien und Ehrendarlehen im Kanton Zug: Wer kann sie beantragen, Höchstbeträge, Bewerbungsfristen und zuständige Stelle.',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Universitätscampus im Kanton Zug mit Studenten und Schweizer Flaggen',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Zug: Kosten',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'Die Kosten für Kindertagesstätte und Kinderbetreuung im Kanton Zug können je nach dem berechneten Einkommenstarif und den verfügbaren kantonalen Leistungen variieren.',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Bild eines Kindergartens im Kanton Zug',
 };
 
 export default blogMetaChDe;

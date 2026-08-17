@@ -3145,6 +3145,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.borse-studio-canton-zugo-requisiti-importi.title': 'Bourses et prêts dans le canton de Zoug : exigences, montants et échéances',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.excerpt': 'Guide complet des bourses et prêts d\'honneur dans le canton de Zou : qui peut y postuler, montants maximaux, délais de soumission et fonction compétente.',
     'blog.article.borse-studio-canton-zugo-requisiti-importi.imageAlt': 'Campus universitaire du canton de Zoug avec étudiants et drapeaux suisses',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.title': 'Garderie et garde d\'enfants dans le canton de Zoug : coûts',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.excerpt': 'Les frais de crèche et de garde d\'enfants dans le canton de Zoug peuvent varier en fonction du tarif calculé sur le revenu et des allocations cantonales disponibles.',
+    'blog.article.asilo-nido-e-custodia-bambini-canton-zugo-costi.imageAlt': 'Image d\'une école maternelle dans le canton de Zug',
 };
 
 export default blogMetaChFr;
