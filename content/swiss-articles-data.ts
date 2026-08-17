@@ -9460,6 +9460,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'siccita-svizzera-ladri-acqua-preoccupazioni',
+    category: 'pratico',
+    date: '2026-08-17T15:43:26.108Z',
+    image: '/images/blog/siccita-svizzera-ladri-acqua-preoccupazioni.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

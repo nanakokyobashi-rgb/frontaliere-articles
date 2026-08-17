@@ -3154,6 +3154,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.affitti-zugo-cantoni-medi.title': 'Mietmarkt im Kanton Zug: Durchschnittsmieten und Mietrecht',
     'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Die Mieten im Kanton Zug: die Durchschnittsmieten und das Mietrecht.',
     'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Eine Szene eines Immobilienmarktes in Zug, Schweiz, mit Schwerpunkt auf den kantonalen Durchschnittswohnkosten und dem Mietrecht.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Dürre in der Schweiz: "Wasserdiebe" tauchen auf, 46% sind besorgt',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Trockenbrunnen und Rationierungen: Die Schweizer Wasserkrise zwischen Diebstahl und Alarm für die Zukunft. 60% rechnen mit Schwierigkeiten innerhalb von 10 Jahren.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Rissiger Stauseeboden in den Schweizer Alpen während der Dürre',
 };
 
 export default blogMetaChDe;

@@ -3154,6 +3154,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.affitti-zugo-cantoni-medi.title': 'Rental market in the Canton of Zug: average fees and rental rights',
     'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Rentals in the Canton of Zug: average rents and rental rights.',
     'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'A scene of a real estate market in Zug, Switzerland, with a focus on cantonal median rents and the right to rent.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Drought in Switzerland: \'water thieves\' sprout, 46% worried',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Dry fountains and rationing: the Swiss water crisis between theft and alarms for the future. 60% foresee difficulties within 10 years.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Cracked reservoir bed in Swiss Alps during drought',
 };
 
 export default blogMetaChEn;

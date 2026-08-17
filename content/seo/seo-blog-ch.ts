@@ -40892,6 +40892,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-siccita-svizzera-ladri-acqua-preoccupazioni': {
+    title: 'Siccità in Svizzera: spuntano i \'ladri di acqua\', preoccupato il 46%',
+    description: 'Siccità record in Svizzera: fontane chiuse per furti, 46% preoccupati. Incendi, agricoltura e salute a rischio. Consumo reale 142 litri/giorno. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, siccità, spuntano, ladri, acqua',
+    ogTitle: 'Svizzera in siccità: furti d\'acqua e allarme sociale | Frontaliere Ticino',
+    ogDescription: 'Fontane a secco, razionamenti e timori per il futuro: la crisi idrica svizzera tra emergenza ecologica e impatti economici. Il 60% prevede difficoltà entro 10 anni.',
+    canonicalPath: '/articoli-svizzera/siccita-svizzera-ladri-acqua-preoccupazioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Siccità in Svizzera: spuntano i 'ladri di acqua', preoccupato il 46%",
+      "description": "Siccità record in Svizzera: fontane chiuse per furti, 46% preoccupati. Incendi, agricoltura e salute a rischio. Consumo reale 142 litri/giorno. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/siccita-svizzera-ladri-acqua-preoccupazioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bacino idrico screpolato nelle Alpi svizzere durante la siccità"
+      },
+      "datePublished": "2026-08-17T15:43:26+00:00",
+      "dateModified": "2026-08-17T15:43:26+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/siccita-svizzera-ladri-acqua-preoccupazioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

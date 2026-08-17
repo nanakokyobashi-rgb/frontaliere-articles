@@ -3154,6 +3154,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.affitti-zugo-cantoni-medi.title': 'Marché locatif dans le canton de Zoug : loyers moyens et droit de location',
     'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Les loyers dans le canton de Zoug : les loyers moyens et le droit de location.',
     'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Une scène d\'un marché immobilier à Zug, en Suisse, avec un focus sur les loyers médians cantonaux et le droit de location.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Sécheresse en Suisse : « voleurs d\'eau », 46% inquiets',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Fontaines sèches et rationnements : la crise suisse de l\'eau entre vols et alarmes pour l\'avenir. 60 % prévoient des difficultés dans les 10 ans.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Lit de réservoir fissuré dans les Alpes suisses pendant la sécheresse',
 };
 
 export default blogMetaChFr;

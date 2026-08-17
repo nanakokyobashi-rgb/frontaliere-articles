@@ -3154,6 +3154,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.affitti-zugo-cantoni-medi.title': 'Mercato degli affitti nel Cantone di Zugo: canoni medi e diritto di locazione',
     'blog.article.affitti-zugo-cantoni-medi.excerpt': 'Gli affitti nel Cantone di Zugo: i canoni medi e il diritto di locazione.',
     'blog.article.affitti-zugo-cantoni-medi.imageAlt': 'Immagine di un mercato immobiliare in Zug, Svizzera, con enfasi sui canoni medi cantonali e sul diritto di locazione.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.title': 'Siccità in Svizzera: spuntano i \'ladri di acqua\', preoccupato il 46%',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.excerpt': 'Fontane a secco e razionamenti: la crisi idrica svizzera tra furti e allarmi per il futuro. Il 60% prevede difficoltà entro 10 anni.',
+    'blog.article.siccita-svizzera-ladri-acqua-preoccupazioni.imageAlt': 'Bacino idrico screpolato nelle Alpi svizzere durante la siccità',
 };
 
 export default blogMetaChIt;
