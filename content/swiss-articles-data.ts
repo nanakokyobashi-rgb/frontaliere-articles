@@ -9523,6 +9523,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'patente-guida-cantone-zugo-conversione',
+    category: 'fiscale',
+    date: '2026-08-17T17:33:42.509Z',
+    image: '/images/blog/patente-guida-cantone-zugo-conversione.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -3175,6 +3175,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.title': 'Geschäft im Kanton Zürich eröffnen: Handelsregister und Kosten',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.excerpt': 'Die Kosten für die Gründung eines Unternehmens im Kanton Zürich und das Verfahren für die Eintragung ins Handelsregister.',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.imageAlt': 'Gründung einer Geschäftstätigkeit im Kanton Zürich, Schweiz',
+    'blog.article.patente-guida-cantone-zugo-conversione.title': 'Führerschein im Kanton Zug: Umtausch des ausländischen Führerscheins',
+    'blog.article.patente-guida-cantone-zugo-conversione.excerpt': 'Der Umtausch des ausländischen Führerscheins ist für Grenzgänger mit Wohnsitz im Kanton Zug obligatorisch.',
+    'blog.article.patente-guida-cantone-zugo-conversione.imageAlt': 'Bild einer Führerin, die einen Frontalier im Kanton Zug lenkt.',
 };
 
 export default blogMetaChDe;

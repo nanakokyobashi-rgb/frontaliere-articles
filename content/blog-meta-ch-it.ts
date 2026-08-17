@@ -3175,6 +3175,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.title': 'Aprire un\'attività nel Cantone di Zurigo: registro di commercio e costi',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.excerpt': 'I costi di apertura di un\'attività nel Cantone di Zurigo e la procedura per l\'iscrizione al registro di commercio.',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.imageAlt': 'Impostazione di un\'attività commerciale nel Cantone di Zurigo, Svizzera',
+    'blog.article.patente-guida-cantone-zugo-conversione.title': 'Patente di guida nel Cantone di Zugo: conversione della licenza estera',
+    'blog.article.patente-guida-cantone-zugo-conversione.excerpt': 'La conversione della licenza di guida estera è obbligatoria per i frontalieri che risiedono nel Cantone di Zugo.',
+    'blog.article.patente-guida-cantone-zugo-conversione.imageAlt': 'Immagine di una guida che guida un frontaliere nel Cantone di Zugo.',
 };
 
 export default blogMetaChIt;

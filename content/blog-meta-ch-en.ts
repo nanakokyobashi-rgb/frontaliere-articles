@@ -3175,6 +3175,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.title': 'Starting a business in the Canton of Zurich: trade register and costs',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.excerpt': 'The costs of opening a business in the Canton of Zurich and the procedure for registration in the commercial register.',
     'blog.article.aprire-un-attivita-canton-zugo-registro-di-commercio-e-costi.imageAlt': 'Business setup in the Canton of Zurich, Switzerland',
+    'blog.article.patente-guida-cantone-zugo-conversione.title': 'Driver\'s license in the Canton of Zug: conversion of the foreign license',
+    'blog.article.patente-guida-cantone-zugo-conversione.excerpt': 'The conversion of the foreign driving license is mandatory for border workers residing in the Canton of Zug.',
+    'blog.article.patente-guida-cantone-zugo-conversione.imageAlt': 'Image of a guide driving a foreigner in the Canton of Zug.',
 };
 
 export default blogMetaChEn;
