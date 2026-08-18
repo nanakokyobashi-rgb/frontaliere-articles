@@ -544,10 +544,30 @@ test('il trigger push chaina ancora solo su content/**, mai sul bookkeeping', ()
   );
 });
 
-test('il workflow non dispatcha se stesso', () => {
+// QUESTO TEST DICEVA IL CONTRARIO fino al 2026-08-18, e la sostituzione e' il
+// punto. Diceva «il workflow non dispatcha se stesso», perche' chainare sul RUN
+// invece che sull'ARTICOLO e' la forma che gira a vuoto: un generatore che
+// fallisce presto la fa girare alla velocita' con cui esce. Quella proprieta'
+// non e' stata abbandonata, e' stata spostata — ora il dispatch esiste ma vive
+// dietro una DICHIARAZIONE, cioe' dietro il fatto che ogni tentativo sia
+// arrivato in fondo ed esca 4. Un generatore che fallisce presto non dichiara
+// niente, quindi il caso che faceva girare a vuoto e' esattamente l'unico che
+// non chaina. La prova comportamentale sta in «LA GUARDIA STRUTTURALE»; qui si
+// tiene la forma: un solo punto di dispatch, e la guardia prima di esso.
+test('il workflow dispatcha se stesso SOLO dietro un esito dichiarato', () => {
+  const hits = ACTIVE.match(/actions\/workflows\/[^\s"]*\/dispatches/g) || [];
+  assert.equal(
+    hits.length,
+    1,
+    'due punti di dispatch sono due posti in cui la condizione di stop puo\' divergere: ' +
+      'e\' la stessa forma del difetto delle «due definizioni di articolo prodotto»',
+  );
+  const declaredAt = CHAIN_RUN.indexOf('esito NON dichiarato');
+  const dispatchAt = CHAIN_RUN.indexOf('/dispatches');
+  assert.ok(declaredAt !== -1, 'la guardia sulla dichiarazione e\' sparita dallo step Chain');
   assert.ok(
-    !/actions\/workflows\/[^\s]*\/dispatches/.test(ACTIVE),
-    'chainare sul RUN invece che sull\'ARTICOLO e\' la forma che gira a vuoto',
+    declaredAt < dispatchAt,
+    'la guardia deve precedere il dispatch, altrimenti e\' decorazione',
   );
 });
 
@@ -630,4 +650,195 @@ test('la guardia legge lo stesso output degli altri, senza inventarsi un secondo
     !/--diff-filter=A/.test(block),
     'un secondo probe qui e\' il difetto che «esiste una sola definizione» esiste per impedire',
   );
+});
+
+// ── L'ANELLO CHE MANCAVA: il dispatch del successore (2026-08-18) ────────────
+//
+// Il buco misurato: 6,8h di tempo davvero morto su 50,2h (14%), perche' un
+// anello che non produce non pusha `content/**` e quindi non ha successore. Lo
+// step «Chain» lo dispatcha, ma SOLO quando l'esito e' stato DICHIARATO — ed e'
+// quella condizione, non un contatore, a rendere impossibile il giro a vuoto:
+// un generatore che fallisce presto non dichiara niente.
+//
+// Come sopra, il blocco `run:` vero viene estratto ed ESEGUITO, con `curl`
+// stubbato. Un test a regex direbbe «c'e' un cap» anche su un cap mai valutato.
+
+const CHAIN_RUN = extractRun('Chain — dispatch the next link');
+
+/**
+ * Esegue lo step «Chain» con `curl` stubbato. `codes` e' la sequenza di codici
+ * HTTP che i `curl` successivi restituiscono, cosi' che il fallback sul secondo
+ * PAT sia osservabile invece che dedotto.
+ */
+function runChainStep({
+  dry = 'false',
+  article = 'false',
+  declared = 'true',
+  rosterBlocked = 'false',
+  sectionProduced = 'frontaliere',
+  sectionRequested = 'frontaliere',
+  depth = '0',
+  streak = '0',
+  armed = null,
+  disabledFile = false,
+  patNanako = 'pat-nanako',
+  pat = 'pat-fallback',
+  codes = ['204'],
+  maxDepth = '40',
+  maxStreak = '6',
+} = {}) {
+  const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-link-'));
+  try {
+    const bin = path.join(dir, 'bin');
+    mkdirSync(bin, { recursive: true });
+    const calls = path.join(dir, 'curl-calls');
+    const codesFile = path.join(dir, 'curl-codes');
+    writeFileSync(codesFile, `${codes.join('\n')}\n`);
+    if (disabledFile) {
+      mkdirSync(path.join(dir, '.github'), { recursive: true });
+      writeFileSync(path.join(dir, '.github', 'CHAIN_DISABLED'), '');
+    }
+    // Registra l'INTERA riga di comando (token e payload compresi) e risponde
+    // con il codice pianificato, come fa `-w '%{http_code}'`.
+    const curlStub = `#!/usr/bin/env bash
+printf '%s\\n' "$*" >> "${calls}"
+n=$(grep -c '' "${calls}")
+code="$(sed -n "\${n}p" "${codesFile}")"
+[ -z "$code" ] && code=204
+printf '%s' "$code"
+exit 0
+`;
+    const p = path.join(bin, 'curl');
+    writeFileSync(p, curlStub);
+    chmodSync(p, 0o755);
+
+    const script = path.join(dir, 'chain.sh');
+    writeFileSync(script, CHAIN_RUN);
+    const spawned = spawnSync('bash', [script], {
+      cwd: dir,
+      encoding: 'utf8',
+      env: {
+        PATH: `${bin}:${process.env.PATH}`,
+        HOME: dir,
+        REPO: 'nanakokyobashi-rgb/frontaliere-articles',
+        SELF_ID: '999',
+        DRY: dry,
+        ARTICLE: article,
+        DECLARED: declared,
+        ROSTER_BLOCKED: rosterBlocked,
+        SECTION_PRODUCED: sectionProduced,
+        SECTION_REQUESTED: sectionRequested,
+        CHAIN_DEPTH: depth,
+        NO_ARTICLE_STREAK: streak,
+        ...(armed === null ? {} : { CHAIN_ARMED: armed }),
+        ...(patNanako === null ? {} : { GITHUB_PAT_NANAKO: patNanako }),
+        ...(pat === null ? {} : { GITHUB_PAT: pat }),
+        // Nessun test aspetta 90 secondi per osservare un `curl`.
+        CHAIN_DELAY_S: '0',
+        CHAIN_MAX_DEPTH: maxDepth,
+        CHAIN_MAX_STREAK: maxStreak,
+      },
+    });
+    const dispatches = existsSync(calls)
+      ? readFileSync(calls, 'utf8').split('\n').filter(Boolean)
+      : [];
+    return { dispatches, stdout: spawned.stdout || '', stderr: spawned.stderr || '', status: spawned.status };
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+}
+
+test('un anello secco ma DICHIARATO dispatcha il successore, con la sezione alternata', () => {
+  const r = runChainStep({ article: 'false', declared: 'true', sectionProduced: 'svizzera', depth: '3', streak: '1' });
+  assert.equal(r.dispatches.length, 1, 'il caso che il buco misurato descrive deve produrre un successore');
+  const cmd = r.dispatches[0];
+  assert.match(cmd, /actions\/workflows\/generate-article\.yml\/dispatches/);
+  assert.match(cmd, /"section":"frontaliere"/, 'la sezione deve alternare, come in ogni anello');
+  assert.match(cmd, /"chain_depth":"4"/);
+  assert.match(cmd, /"no_article_streak":"2"/);
+  assert.match(cmd, /"parent_run_id":"999"/, 'senza il padre, `admit` vedrebbe sempre una generazione in volo e salterebbe l\'anello');
+  assert.match(cmd, /Authorization: Bearer pat-nanako/, 'il primario e\' il PAT del proprietario del repo');
+  assert.equal(r.status, 0);
+});
+
+test('un articolo prodotto NON dispatcha: il successore lo fa gia\' il push', () => {
+  // Due successori per lo stesso anello arrivano a pochi secondi l'uno
+  // dall'altro e `admit` ne scarta uno: raddoppia gli arrivi al gate che esiste
+  // per ridurli, e tira a sorte quale sopravvive.
+  const r = runChainStep({ article: 'true', declared: 'true' });
+  assert.equal(r.dispatches.length, 0);
+  assert.match(r.stdout, /articolo prodotto/);
+  assert.equal(r.status, 0);
+});
+
+test('LA GUARDIA STRUTTURALE: senza dichiarazione la catena si ferma', () => {
+  // E' l'inverso della forma che girava a vuoto nel repo del sito: li' un
+  // generatore che falliva presto chainava alla velocita' con cui usciva, qui
+  // e' l'unico caso che non chaina. Kill duro, kill per stallo, exit 3, uscita
+  // muta e guasti prima del generatore finiscono tutti qui.
+  for (const outcome of [{ declared: 'false' }, { declared: '' }, { declared: 'true', rosterBlocked: 'true' }]) {
+    const r = runChainStep(outcome);
+    assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
+    assert.equal(r.status, 0, 'e comunque non fallisce la run: l\'esito l\'ha gia\' classificato lo step di generazione');
+  }
+});
+
+test('i due cap cedono al cron invece di continuare', () => {
+  const perStreak = runChainStep({ streak: '5', maxStreak: '6' });
+  assert.equal(perStreak.dispatches.length, 0);
+  assert.match(perStreak.stdout, /anelli secchi di fila/);
+  const perDepth = runChainStep({ depth: '39', maxDepth: '40' });
+  assert.equal(perDepth.dispatches.length, 0);
+  assert.match(perDepth.stdout, /profondita'/);
+  // E un anello sotto i cap passa: senza questo, i due sopra passerebbero anche
+  // su uno step che non dispatcha mai.
+  assert.equal(runChainStep({ streak: '4', depth: '38' }).dispatches.length, 1);
+});
+
+test('il kill switch ha due strati, e il primo e\' un file nel repo', () => {
+  // La variabile da sola non basta: fast-publish-article.yml documenta che
+  // l'API delle variabili Actions e' rifiutata dal proxy di questo ambiente,
+  // quindi un interruttore che vive solo in `vars.` non e' azionabile da una
+  // sessione — ed e' cosi' che quella pipeline e' rimasta ferma.
+  assert.equal(runChainStep({ disabledFile: true }).dispatches.length, 0);
+  assert.equal(runChainStep({ armed: 'false' }).dispatches.length, 0);
+  // Non impostata = armato, come `FAST_PUBLISH_ARMED`.
+  assert.equal(runChainStep({ armed: null }).dispatches.length, 1);
+});
+
+test('un self-test dry non e\' un anello', () => {
+  assert.equal(runChainStep({ dry: 'true' }).dispatches.length, 0);
+});
+
+test('il secondo PAT e\' un fallback vero, e senza PAT non si fallisce', () => {
+  // Rimisurato il 2026-08-18: entrambi i token rispondono 422 «No ref found»
+  // alla sonda contro un ref inesistente, cioe' entrambi possono dispatchare.
+  // Il fallback esiste perche' un token puo' scadere, non perche' uno dei due
+  // sia noto per non funzionare.
+  const r = runChainStep({ codes: ['403', '204'] });
+  assert.equal(r.dispatches.length, 2, 'un 403 sul primario deve far ritentare col secondo');
+  assert.match(r.dispatches[1], /Authorization: Bearer pat-fallback/);
+  assert.equal(r.status, 0);
+
+  const senza = runChainStep({ patNanako: null, pat: null });
+  assert.equal(senza.dispatches.length, 0);
+  assert.equal(senza.status, 0, 'nessun PAT non e\' un fallimento della run: e\' un giro di cron in piu\'');
+
+  const rosso = runChainStep({ codes: ['500', '500'] });
+  assert.equal(rosso.status, 0, 'nemmeno un dispatch fallito puo\' rendere rossa una generazione riuscita');
+  assert.match(rosso.stdout, /::warning::dispatch dell'anello fallito/);
+});
+
+test('lo step Chain non interpola nulla: e\' la regola che lo rende eseguibile qui', () => {
+  assert.ok(!/\$\{\{/.test(CHAIN_RUN));
+});
+
+test('lo step di generazione espone declared E roster_blocked, che vanno letti insieme', () => {
+  const gen = extractRun('Generate the article');
+  assert.match(gen, /echo "declared=\$all_declared"/);
+  assert.match(gen, /echo "roster_blocked=\$roster_blocked"/);
+  // `all_declared` resta true quando il roster non serve il prompt (exit 3
+  // imposta solo `roster_blocked`): un successore deciso sul solo `declared`
+  // ripartirebbe contro lo stesso muro.
+  assert.match(CHAIN_RUN, /ROSTER_BLOCKED/);
 });
