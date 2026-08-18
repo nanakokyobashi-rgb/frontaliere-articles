@@ -637,6 +637,39 @@ describe('checkFabricatedNormAcronyms', () => {
     ))).toContain('fabricated-norm-acronym');
   });
 
+  // Gemello di frontaliere-si-o-no#6042 (follow-up #6017, item 2/3 di #6005),
+  // adattato: stessi due casi, `node:test` + expect-shim invece di vitest.
+  // LCL fabbrica due leggi diverse e INCOMPATIBILI nello stesso corpus
+  // (naturalizzazione cantonale 2020 vs legge cantonale sul lavoro 1995);
+  // LCO e' consistente ma inesistente e sopravvive identica a it/en/de/fr.
+  it('flags LCL, whose two spelled-out forms are two different incompatible laws', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge cantonale sulla naturalizzazione del Cantone di Lucerna e\' stata modificata nel 2020 (LCL 2020, art. 15).',
+    ))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 prevede una retribuzione minima.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  it('flags LCO, an invented federal act that survives translation unchanged', () => {
+    const issues = checkFabricatedNormAcronyms(
+      'The key legislation is the Federal Act on Combating Organized Crime (LCO), adopted in 2013.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].message).toContain('LCO');
+  });
+
+  // `LCL` è anche il nome reale di una banca francese (ex Crédit Lyonnais).
+  // Senza un requisito di contesto giuridico, un articolo che la nomina in
+  // ambito bancario (il corpus ne ha già 175 su frontalieri Francia-Svizzera)
+  // verrebbe rigettato come sigla normativa fabbricata. Nessun anno vicino →
+  // non è un contesto giuridico → il gate deve lasciarlo passare.
+  it('leaves a bare mention of the French bank LCL alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Per i frontalieri che vivono in Francia, LCL propone conti correnti dedicati e carte multivaluta.',
+    )).toEqual([]);
+  });
+
   // Il confine è su LETTERE, non `\b`: queste due sono norme VERE e il gate le
   // deve lasciare passare, altrimenti blocca contenuto legittimo. Stessa
   // motivazione, e stessi esempi, del test sui dati di corpus#323.

@@ -1302,6 +1302,21 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // (Ministero del Lavoro e delle Politiche Sociali) e `TULPS` (Testo Unico
 // Leggi Pubblica Sicurezza) sono norme VERE e devono restare fuori match —
 // 8 file al 2026-08-18.
+//
+// LCL e LCO (follow-up nanako gemella di frontaliere-si-o-no#6017, item 2/3
+// di #6005) verificate con la stessa disciplina, misurate QUI su `content/`
+// con la stessa regex a confini di lettera: 3 occorrenze in 2 file (`LCL`),
+// 7 in 4 file (`LCO`). `LCL` fabbrica DUE leggi diverse e incompatibili
+// nello stesso corpus — «legge cantonale sulla naturalizzazione del Cantone
+// di Lucerna... (LCL 2020, art. 15)» in un articolo e «La legge cantonale
+// sul lavoro (LCL) del 15 dicembre 1995» in un altro: stesso acronimo,
+// domini e date che si escludono, la stessa firma di fabbricazione di LFW
+// (quattro date incompatibili). `LCO` («Federal Act on Combating Organized
+// Crime (LCO)», 2013) e' invece consistente ma inesistente, e sopravvive
+// identica a it/en/de/fr in `infiltrazioni-criminali-ticino-grigioni` — lo
+// stesso argomento «sopravvive alla traduzione» gia' usato per LFW/LPS.
+// Zero occorrenze minuscole o miste di `lcl`/`lco`, stessa verifica del
+// paragrafo sopra.
 export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LFW',
@@ -1312,6 +1327,26 @@ export const FABRICATED_NORM_ACRONYMS = [
     acronym: 'LPS',
     re: /(?<![A-Za-z])LPS(?![A-Za-z])/i,
     real: 'non esiste: previdenza → LAVS/LAI/LPP, assicurazione malattie → LAMal/LVAMal, permesso di soggiorno → LStrI (RS 142.20)',
+  },
+  {
+    acronym: 'LCL',
+    re: /(?<![A-Za-z])LCL(?![A-Za-z])/i,
+    real: "non esiste: la legge sul lavoro è LL (RS 822.11); la cittadinanza svizzera è la LCit (RS 141.0) più il diritto cantonale, nessuna sigla ufficiale «LCL»",
+    // A bare substring match on `LCL` also matches the real French bank (ex
+    // Crédit Lyonnais) — a future article mentioning it (this corpus already
+    // has 175 files on frontalieri Francia-Svizzera and 29 naming other
+    // French banks) would be rejected as a fabricated norm. Require a year
+    // nearby, not a language-specific word like "legge": this check runs on
+    // de/fr/en translated text too (see docstring below), and both real
+    // fabrications in the corpus carry a 4-digit year within a few words of
+    // the acronym (`(LCL) del 15 dicembre 1995`, `(LCL 2020, art. 15)`).
+    context: /\b(?:19|20)\d{2}\b/,
+    contextWindow: 80,
+  },
+  {
+    acronym: 'LCO',
+    re: /(?<![A-Za-z])LCO(?![A-Za-z])/i,
+    real: 'non esiste: il contrasto alla criminalità organizzata è nel Codice penale, art. 260ter CP (RS 311.0)',
   },
 ];
 
@@ -1332,11 +1367,16 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   const issues = [];
   if (typeof text !== 'string' || !text) return issues;
   const locale = opts.locale || 'it';
-  for (const { acronym, re, real } of FABRICATED_NORM_ACRONYMS) {
+  for (const { acronym, re, real, context, contextWindow } of FABRICATED_NORM_ACRONYMS) {
     // `re` is deliberately non-global: a `g` regex carries `lastIndex` across
     // calls, and this table is module-level shared state.
     const m = re.exec(text);
     if (!m) continue;
+    if (context) {
+      const w = contextWindow ?? 80;
+      const nearby = text.slice(Math.max(0, m.index - w), m.index + m[0].length + w);
+      if (!context.test(nearby)) continue;
+    }
     issues.push(issue(
       'fabricated-norm-acronym',
       'critical',
