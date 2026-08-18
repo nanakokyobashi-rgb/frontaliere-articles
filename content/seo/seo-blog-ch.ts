@@ -40698,16 +40698,16 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
   },
 
   'blog-neutralita-fronte-no-lancia-allarme': {
-    title: 'Neutralità, il fronte del | Frontaliere Ticino',
+    title: 'Neutralità, il fronte del «No» lancia l\'allarme | Frontaliere Ticino',
     description: 'Un comitato interpartitico chiede di respingere l\'iniziativa sulla neutralità, limiterebbe la politica estera e indebolirebbe la difesa svizzera.',
     keywords: 'frontalieri, ticino, svizzera, italia, neutralità, fronte, comitato, interpartitico',
-    ogTitle: 'Neutralità, il fronte del',
+    ogTitle: 'Neutralità, il fronte del «No» lancia l\'allarme',
     ogDescription: 'Un comitato interpartitico chiede di respingere l\'iniziativa sulla neutralità, limiterebbe la politica estera e indebolirebbe la difesa svizzera.',
     canonicalPath: '/articoli-svizzera/neutralita-fronte-no-lancia-allarme/',
     structuredData: {
       "@context": "https://schema.org",
       "@type": "NewsArticle",
-      "headline": "Neutralità, il fronte del",
+      "headline": "Neutralità, il fronte del «No» lancia l'allarme",
       "description": "Un comitato interpartitico chiede di respingere l'iniziativa sulla neutralità, limiterebbe la politica estera e indebolirebbe la difesa svizzera.",
       "image": {
         "@type": "ImageObject",
@@ -43306,6 +43306,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       },
       "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
       "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/la-fondazione-centro-studi-villa-negroni-si-associa-alla-supsi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-nido-e-custodia-bambini-canton-basilea-citta': {
+    title: 'Asilo nido e custodia bambini nel Cantone di Basilea Città: costi',
+    description: 'Gli asili nido e le famiglie diurne nel Cantone di Basilea Città: prezzi calcolati sul reddito e sussidi cantonali disponibili. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, custodia, bambini',
+    ogTitle: 'Asilo nido e custodia bambini nel Cantone di Basilea Città: costi',
+    ogDescription: 'Gli asili nido e le famiglie diurne nel Cantone di Basilea Città: prezzi calcolati sul reddito e sussidi cantonali disponibili',
+    canonicalPath: '/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-basilea-citta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido e custodia bambini nel Cantone di Basilea Città: costi",
+      "description": "Gli asili nido e le famiglie diurne nel Cantone di Basilea Città: prezzi calcolati sul reddito e sussidi cantonali disponibili. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-nido-e-custodia-bambini-canton-basilea-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Foto di un asilo nido in un quartiere residenziale di Basilea Città"
+      },
+      "datePublished": "2026-08-18T09:33:30+00:00",
+      "dateModified": "2026-08-18T09:33:30+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/asilo-nido-e-custodia-bambini-canton-basilea-citta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-borse-di-studio-basilea-citta': {
+    title: 'Borse di studio Canton Basilea Città requisiti e importi',
+    description: 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città per gli studenti svizzeri e stranieri. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, borse, studio, canton, basilea',
+    ogTitle: 'Borse di studio Canton Basilea Città',
+    ogDescription: 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città',
+    canonicalPath: '/articoli-svizzera/borse-di-studio-basilea-citta/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Borse di studio Canton Basilea Città requisiti e importi",
+      "description": "Requisiti e importi delle borse di studio offerte dal Canton Basilea Città per gli studenti svizzeri e stranieri. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/borse-di-studio-basilea-citta.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Borse di studio offerte dal Canton Basilea Città"
+      },
+      "datePublished": "2026-08-18T09:41:09+00:00",
+      "dateModified": "2026-08-18T09:41:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/borse-di-studio-basilea-citta/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-svizzera-trasferimento-richiedenti-asilo-italia': {
+    title: 'Asilo in Svizzera: riprende il trasferimento verso l\'Italia',
+    description: 'La Svizzera torna a trasferire richiedenti asilo in Italia dopo quattro anni di blocco. Dettagli sui numeri, le percentuali e le nuove regole. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, riprende, trasferimento, verso',
+    ogTitle: 'Asilo Svizzera: riprendono i trasferimenti verso l\'Italia',
+    ogDescription: 'Dopo quattro anni di blocco, la Svizzera riavvia i trasferimenti dei richiedenti asilo verso l\'Italia. Scopri tutti i dati ufficiali della SEM e le nuove regole europee.',
+    canonicalPath: '/articoli-svizzera/svizzera-trasferimento-richiedenti-asilo-italia/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo in Svizzera: riprende il trasferimento verso l'Italia",
+      "description": "La Svizzera torna a trasferire richiedenti asilo in Italia dopo quattro anni di blocco. Dettagli sui numeri, le percentuali e le nuove regole. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/svizzera-trasferimento-richiedenti-asilo-italia.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il Palazzo Federale a Berna sede del governo svizzero"
+      },
+      "datePublished": "2026-08-18T09:44:15+00:00",
+      "dateModified": "2026-08-18T09:44:15+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/svizzera-trasferimento-richiedenti-asilo-italia/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-italia-rimpatrio-asilo': {
+    title: 'Richiedenti l\'asilo, riprendono i trasferimenti verso l\'Italia',
+    description: 'La Svizzera riprenderà i trasferimenti di richiedenti l\'asilo verso l\'Italia, dopo quasi quattro anni di blocco. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, richiedenti, asilo, riprendono, trasferimenti',
+    ogTitle: 'La Svizzera riprenderà i trasferimenti di richiedenti l\'asilo verso l\'Italia',
+    ogDescription: 'La Svizzera riprenderà i trasferimenti di richiedenti l\'asilo verso l\'Italia, dopo quasi quattro anni di blocco.',
+    canonicalPath: '/articoli-svizzera/italia-rimpatrio-asilo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Richiedenti l'asilo, riprendono i trasferimenti verso l'Italia",
+      "description": "La Svizzera riprenderà i trasferimenti di richiedenti l'asilo verso l'Italia, dopo quasi quattro anni di blocco. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/italia-rimpatrio-asilo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Richiedenti l'asilo alla stazione ferroviaria di Chiasso"
+      },
+      "datePublished": "2026-08-18T09:52:42+00:00",
+      "dateModified": "2026-08-18T09:52:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/italia-rimpatrio-asilo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-statistica-luglio-2026': {
+    title: 'Asilo: statistica del mese di luglio 2026 | Frontaliere Ticino',
+    description: 'La Segreteria di Stato della migrazione ha registrato 1915 domande d\'asilo in luglio 2026, con un calo del 22,8% rispetto allo stesso mese dell\'anno precedente.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, statistica, mese, luglio',
+    ogTitle: 'Asilo: statistica del mese di luglio 2026',
+    ogDescription: 'La Segreteria di Stato della migrazione ha registrato 1915 domande d\'asilo in luglio 2026, con un calo del 22,8% rispetto allo stesso mese dell\'anno precedente.',
+    canonicalPath: '/articoli-svizzera/asilo-statistica-luglio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo: statistica del mese di luglio 2026",
+      "description": "La Segreteria di Stato della migrazione ha registrato 1915 domande d'asilo in luglio 2026, con un calo del 22,8% rispetto allo stesso mese dell'anno precedente.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-statistica-luglio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La Svizzera affronta le sfide legate all'immigrazione e all'asilo"
+      },
+      "datePublished": "2026-08-18T10:53:53+00:00",
+      "dateModified": "2026-08-18T10:53:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/asilo-statistica-luglio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cassis-neutralita': {
+    title: 'Votazioni popolari, la prima di Cassis | Frontaliere Ticino',
+    description: 'Il consigliere federale Ignazio Cassis assume la responsabilità per l\'iniziativa sulla neutralità. Il DFAE sarà coinvolto in campagna per promuovere',
+    keywords: 'frontalieri, ticino, svizzera, italia, votazioni, popolari, prima, cassis',
+    ogTitle: 'Votazioni popolari, la prima di Cassis | Frontaliere Ticino',
+    ogDescription: 'Il consigliere federale Ignazio Cassis assume la responsabilità per l\'iniziativa sulla neutralità. Il DFAE sarà coinvolto in campagna per promuovere la neutralità.',
+    canonicalPath: '/articoli-svizzera/cassis-neutralita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Votazioni popolari, la prima di Cassis",
+      "description": "Il consigliere federale Ignazio Cassis assume la responsabilità per l'iniziativa sulla neutralità. Il DFAE sarà coinvolto in campagna per promuovere",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cassis-neutralita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ignazio Cassis in prima linea per l'iniziativa sulla neutralità"
+      },
+      "datePublished": "2026-08-18T11:06:51+00:00",
+      "dateModified": "2026-08-18T11:06:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/cassis-neutralita/`,
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },

@@ -253,10 +253,19 @@ function runGenerateBlock({
         SOURCE_URL: '',
         EVENT_NAME: 'schedule',
         GITHUB_OUTPUT: outFile,
+        // Le diagnostiche del watchdog dello stallo vanno sotto RUNNER_TEMP, e
+        // lo step ne fa `rm -rf` all'avvio: senza questa riga sarebbero
+        // /tmp/generate-diagnostics per tutti, cioe' una cartella condivisa fra
+        // i file di test che `node --test` esegue in parallelo.
+        RUNNER_TEMP: dir,
         // Secondi invece di decine di minuti: il blocco stesso li espone per
         // rendere l'aritmetica del budget guidabile da un test.
         GENERATE_BUDGET_S: budgetS,
         GENERATE_HARD_KILL_S: '32',
+        // Nessuno di questi scenari e' uno stallo: lo stub esce subito. La
+        // soglia resterebbe comunque a 600s, ma fissarla qui rende il file
+        // indipendente dal default.
+        GENERATE_STALL_S: '600',
       },
     });
     return {
@@ -336,6 +345,10 @@ test('zero tentativi eseguiti e\' rosso, non «nessuna ragione da dichiarare»',
   const r = runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED, budgetS: '0' });
   assert.equal(r.attempts, 0, 'la premessa: nessuna invocazione di create-article.mjs');
   assert.equal(r.status, 1, 'una run che non prova nemmeno non e\' un differimento');
+  // Lo step «Chain» legge `declared`, non lo status del job: con `declared`
+  // rimasto vero per vacuita' avrebbe dispatchato il successore su una run che
+  // non ha nemmeno invocato create-article.mjs.
+  assert.match(r.outputs, /declared=false/, 'zero tentativi non e\' una dichiarazione: la Chain non deve dispatchare');
 });
 
 test('UN SOLO tentativo non dichiarato basta a far rosso il paio', () => {
