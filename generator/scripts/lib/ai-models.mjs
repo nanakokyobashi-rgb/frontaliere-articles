@@ -816,6 +816,30 @@ let _omniRouteConsecutiveFailures = 0;
 let _omniRouteFailureStormDetected = false;
 const OMNIROUTE_FAILURE_STORM_THRESHOLD = 5;
 
+// Generic per-PROVIDER timeout breaker (#458), distinct from the two above
+// (which are hardcoded to one provider each) and from the per-MODEL timeout
+// breaker in markModelExhausted (which silences one model at a time). NVIDIA
+// NIM hosts models from 9B to 550B behind one endpoint; when the endpoint
+// degrades, each model pays its OWN full timeout before markModelExhausted
+// silences it — run 32169621635 (2026-08-18): 8 distinct nvidia/* models
+// timed out one at a time before all were silenced, ~900s (~30% of the run)
+// paid to relearn the same fact 8 times. A breaker keyed on the raw model, or
+// one that trips on the FIRST timeout, would be wrong either way: the former
+// is what already exists and is the bug, the latter would silence a healthy
+// 9B model on evidence about an unrelated 550B one. So this counts DISTINCT
+// models that timed out consecutively on the same provider, and trips only
+// once PROVIDER_TIMEOUT_STORM_THRESHOLD of them have. Only the timeout class
+// feeds it — a 404/402 on one model says nothing about a sibling (#449) — and
+// only a success from the same provider resets it, so an isolated slow model
+// interleaved with healthy ones never trips a provider that is fine overall.
+// Applies uniformly to every provider _isLastResortProvider() doesn't already
+// exempt from the per-model timeout breaker (claude-cli/omniroute/local keep
+// their own dedicated breakers above, and their timeouts never reach this
+// counter — see the `!_isLastResortProvider(model)` guard at the call site).
+const _providerConsecutiveTimeoutModels = new Map(); // provider -> Set<modelId>
+const _providerTimeoutStormDetected = new Set(); // provider ids silenced for the rest of this run
+const PROVIDER_TIMEOUT_STORM_THRESHOLD = 3;
+
 // Dedicated in-process concurrency cap for claude-cli subprocesses — separate
 // from any caller's own concurrency (e.g. send-newsletter.mjs's
 // AI_CONCURRENCY=5 pMap, which this file never sees or gates). T2 diagnosis
@@ -1180,6 +1204,10 @@ function getApiModelId(model) {
 
 /** Get the API key for a given provider */
 function getApiKeyForProvider(provider) {
+  // #458: provider-level timeout breaker tripped — same "no key" shape the
+  // claude-cli/omniroute storm flags already use below, so every model on
+  // this provider is skipped pre-flight for the rest of the run.
+  if (_providerTimeoutStormDetected.has(provider)) return '';
   switch (provider) {
     // First available PAT (primary or any extra) — so a config that supplies
     // only GH_MODELS_PAT_2 still registers GitHub as available to the gate.
@@ -3540,6 +3568,8 @@ export function resetState() {
   _claudeCliTimeoutStormDetected = false;
   _omniRouteConsecutiveFailures = 0;
   _omniRouteFailureStormDetected = false;
+  _providerConsecutiveTimeoutModels.clear();
+  _providerTimeoutStormDetected.clear();
   _claudeCliInFlight = 0;
   _claudeCliWaiters.length = 0;
 }
@@ -5698,6 +5728,7 @@ export async function callLLM(messages, opts = {}) {
       recordModelSuccess(model);
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
       _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
+      _providerConsecutiveTimeoutModels.delete(provider); // #458: a live answer clears the provider's timeout streak
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -5801,6 +5832,19 @@ export async function callLLM(messages, opts = {}) {
         markModelExhausted(model, 'timeout');
         _stats.exhausted++;
         markedExhausted = true;
+
+        // Provider-level breaker (#458): count DISTINCT models, so retrying an
+        // already-exhausted model elsewhere in the chain can't inflate it, and
+        // stop counting once the provider has already tripped.
+        if (!_providerTimeoutStormDetected.has(provider)) {
+          const timedOut = _providerConsecutiveTimeoutModels.get(provider) || new Set();
+          timedOut.add(model);
+          _providerConsecutiveTimeoutModels.set(provider, timedOut);
+          if (timedOut.size >= PROVIDER_TIMEOUT_STORM_THRESHOLD) {
+            _providerTimeoutStormDetected.add(provider);
+            console.warn(`🚫 [${provider}] ${timedOut.size} distinct models timed out in a row — silencing provider for the rest of this run`);
+          }
+        }
       }
       // claude-cli's own timeout-storm circuit breaker (see
       // _claudeCliTimeoutStormDetected declaration) — separate from the
