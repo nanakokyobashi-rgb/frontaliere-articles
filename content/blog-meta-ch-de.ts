@@ -3349,6 +3349,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asyl in der Schweiz: Wiederaufnahme des Umzugs nach Italien',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Nach fast vier Jahren Blockade überstellt die Schweiz dank des neuen europäischen Pakts Asylsuchende mit italienischer Zuständigkeit wieder nach Italien.',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Das Bundeshaus in Bern Sitz der Schweizer Regierung',
+    'blog.article.italia-rimpatrio-asilo.title': 'Asylsuchende nehmen die Überstellungen nach Italien wieder auf',
+    'blog.article.italia-rimpatrio-asilo.excerpt': 'Die Schweiz wird die Überstellungen von Asylsuchenden nach Italien nach fast vier Jahren Blockade wieder aufnehmen.',
+    'blog.article.italia-rimpatrio-asilo.imageAlt': 'Asylsuchende an der Bahnhof von Chiasso, Schweiz',
 };
 
 export default blogMetaChDe;

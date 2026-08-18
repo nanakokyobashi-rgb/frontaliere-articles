@@ -3349,6 +3349,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asilo in Svizzera: riprende il trasferimento verso l\'Italia',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Dopo quasi quattro anni di blocco, la Svizzera torna a trasferire verso l\'Italia i richiedenti asilo di competenza italiana grazie al nuovo patto europeo.',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Il Palazzo Federale a Berna sede del governo svizzero',
+    'blog.article.italia-rimpatrio-asilo.title': 'Richiedenti l\'asilo, riprendono i trasferimenti verso l\'Italia',
+    'blog.article.italia-rimpatrio-asilo.excerpt': 'La Svizzera riprenderà i trasferimenti di richiedenti l\'asilo verso l\'Italia, dopo quasi quattro anni di blocco.',
+    'blog.article.italia-rimpatrio-asilo.imageAlt': 'Richiedenti l\'asilo alla stazione ferroviaria di Chiasso',
 };
 
 export default blogMetaChIt;

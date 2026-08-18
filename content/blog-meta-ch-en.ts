@@ -3349,6 +3349,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asylum in Switzerland: transfer to Italy resumed',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'After almost four years of blockade, Switzerland is once again transferring Italian asylum seekers to Italy thanks to the new European pact.',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'The Federal Palace in Bern seat of the Swiss government',
+    'blog.article.italia-rimpatrio-asilo.title': 'Asylum seekers resume transfers to Italy',
+    'blog.article.italia-rimpatrio-asilo.excerpt': 'Switzerland will resume transfers of asylum seekers to Italy, after almost four years of blockade.',
+    'blog.article.italia-rimpatrio-asilo.imageAlt': 'Asylum seekers at the train station of Chiasso, Switzerland',
 };
 
 export default blogMetaChEn;

@@ -3349,6 +3349,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asile en Suisse : reprise du transfert vers l\'Italie',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Après près de quatre ans de blocage, la Suisse transfère à nouveau vers l\'Italie les demandeurs d\'asile relevant de la compétence italienne grâce au nouveau pacte européen.',
     'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Le Palais fédéral à Berne siège du gouvernement suisses',
+    'blog.article.italia-rimpatrio-asilo.title': 'Demandeurs d\'asile, reprennent les transferts vers l\'Italie',
+    'blog.article.italia-rimpatrio-asilo.excerpt': 'La Suisse va reprendre les transferts de demandeurs d\'asile vers l\'Italie, après près de quatre ans de blocage.',
+    'blog.article.italia-rimpatrio-asilo.imageAlt': 'Demandeurs d\'asile à la gare de Chiasso, Suisse',
 };
 
 export default blogMetaChFr;
