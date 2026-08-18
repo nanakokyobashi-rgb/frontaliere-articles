@@ -470,11 +470,59 @@ jobs:
           case "$parent_id" in
             ''|*[!0-9]*) parent_id=0 ;;
           esac
+          # ── LIMITE DI ETA', e perche' senza non bastava ──────────────────
+          # Il confronto qui sopra non aveva un limite SUPERIORE: bastava che
+          # una run piu' vecchia risultasse ancora in volo per far saltare ogni
+          # arrivo successivo, per tutta la sua vita. Quando quella run e'
+          # incastrata il gate trasforma il guasto di UNA run in una finestra
+          # morta lunga quanto il suo timeout.
+          #
+          # Misurato il 2026-08-18 sulle ultime 119 run di questo workflow:
+          #   success  n=111   p50  3,8   p90 11,0   max 24,4 min   (run intera)
+          #   success  n=19    p50  1,2   p90  8,7   max 20,7 min   (job generate)
+          #   failure  n=5                       41,6 - 50,7 min, ZERO articoli
+          # Fra 24,4 e 41,6 minuti non cade NESSUNA run: la soglia sta in quella
+          # banda vuota, quindi non puo' scambiare una run sana per incastrata.
+          # Le 5 incastrate valgono da sole il 30% di una finestra di 12 ore.
+          #
+          # Proseguire NON riapre il buco di sovrapposizione che e' costato
+          # #255/#281/#285: il job `generate` ha `concurrency: generate-article`
+          # con `cancel-in-progress: false`, quindi l'arrivo ammesso si METTE IN
+          # CODA e parte quando l'incastrata muore. Qui si sceglie fra
+          # «aspetta in coda» e «non esistere mai», non fra «una» e «due».
+          #
+          # L'eta' si misura da `$self_created`, non da `now`: e' gia' letto,
+          # rende il verdetto deterministico e non dipende dall'orologio del
+          # runner. Se una data non si lascia leggere, jq esce non-zero e il
+          # `|| true` porta a `older=0`, cioe' si prosegue: stesso fail-open
+          # della lettura di `$self_created` qui sopra.
+          WEDGE_SECONDS=1800
+
           older=$(printf '%s' "$inflight" \
             | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
-                '[ .[] | select(.id != $me) | select($dad == 0 or .id != $dad)
-                       | select(.created_at < $mine or (.created_at == $mine and .id < $me)) ] | length' \
+                   --argjson wedge "$WEDGE_SECONDS" \
+                '($mine | fromdateiso8601) as $t
+                 | [ .[] | select(.id != $me) | select($dad == 0 or .id != $dad)
+                        | select(.created_at < $mine or (.created_at == $mine and .id < $me))
+                        | select($t - (.created_at | fromdateiso8601) < $wedge) ] | length' \
               2>/dev/null || true)
+
+          # Le vecchie OLTRE la soglia non bloccano piu', ma devono restare
+          # VISIBILI: un'incastrata ignorata in silenzio e' esattamente il
+          # guasto che non si nota finche' non si contano gli articoli mancanti.
+          stale=$(printf '%s' "$inflight" \
+            | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
+                   --argjson wedge "$WEDGE_SECONDS" \
+                '($mine | fromdateiso8601) as $t
+                 | [ .[] | select(.id != $me) | select($dad == 0 or .id != $dad)
+                        | select(.created_at < $mine or (.created_at == $mine and .id < $me))
+                        | select($t - (.created_at | fromdateiso8601) >= $wedge)
+                        | "\(.id) (in volo da \((($t - (.created_at | fromdateiso8601)) / 60) | floor) min)" ]
+                 | join(", ")' \
+              2>/dev/null || true)
+          if [ -n "${stale:-}" ]; then
+            echo "::warning title=Generazione incastrata::Run piu' vecchie in volo oltre ${WEDGE_SECONDS}s, trattate come incastrate e NON piu' bloccanti: ${stale}"
+          fi
           case "${older:-}" in
             ''|*[!0-9]*) older=0 ;;
           esac
