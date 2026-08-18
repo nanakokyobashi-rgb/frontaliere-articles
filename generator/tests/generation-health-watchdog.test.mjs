@@ -35,6 +35,11 @@ import {
   OVERSIZE_MIN_MODELS,
   OVERSIZE_MIN_RUNS,
   PAIR_WINDOW_MINUTES,
+  ROSTER_BILLING_CODES,
+  ROSTER_MIN_PROBING_RUNS,
+  ROSTER_MIN_TOUCHED,
+  ROSTER_RETIRED_CODES,
+  ROSTER_RETIRED_RATE,
   RUN_LOOKBACK_HOURS_DEFAULT,
   SATURATION_MIN_RUNS,
   SATURATION_RATE,
@@ -406,6 +411,26 @@ function healthy() {
     runs: {
       available: true, total: 60, logFailures: 0, spanHours: 12, bySection,
       oversize: { runs: 0, maxEstimated: 0, limitsCrossed: [], distinctModels: 0, models: [] },
+      // Lo stato "sano" del roster NON è zero modelli morti: è il livello del
+      // censimento di nanako#380 (run 31823202761), 3 modelli ritirati su ~101
+      // della catena = 0,030. È l'unica ancora sana che esista — nella finestra
+      // del 2026-08-18 ogni run che percorre la catena mostra molto di più — ed
+      // è per questo che sta qui invece che a zero: una fixture a zero
+      // certificherebbe la soglia contro uno stato che la produzione non ha mai
+      // prodotto.
+      roster: {
+        runs: 60,
+        probingRuns: 3,
+        touched: 114,
+        retired: [
+          { model: 'gemini-2.0-flash', runs: 3 },
+          { model: 'gemini-2.0-flash-lite', runs: 3 },
+          { model: 'gemini-3-pro-preview', runs: 2 },
+        ],
+        billing: [],
+        retiredRate: 3 / 114,
+        billingRate: 0,
+      },
     },
     corpus: { available: true, total: 3845, duplicatePairs: [] },
   };
@@ -1285,5 +1310,279 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
       if (claimed && claimed[1] !== declared) offenders.push(`${m[1]}: dichiarato \`${claimed[1]}\`, nel manifest è \`${declared}\``);
     }
     assert.deepEqual(offenders, []);
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// `roster-erosion` — il termometro che deve restare acceso dopo #449.
+//
+// Le righe sotto sono VERBATIM dalla run 32169621635 del 2026-08-18 (copiate da
+// `gh run view … --log`, tabulazioni comprese), non ricostruite a mano. Una
+// fixture riscritta a memoria certifica il parser contro la propria idea del
+// formato: è così che si scopre sei mesi dopo che la riga vera aveva due spazi
+// invece di uno.
+// ─────────────────────────────────────────────────────────────────────────────
+
+const R = (ts, msg) => `generate\tGenerate the article\t2026-08-18T${ts}Z ${msg}`;
+
+// 21 modelli morti (17 in 404/410 + 4 in 402) su 69 osservati nella run vera.
+// Qui ne teniamo un campione che conserva TUTTE le forme di riga, non i conteggi.
+const LOG_ROSTER_ERODED = [
+  'generate\tResolve run mode section\t2026-08-18T18:11:02.1Z event=schedule chain=true → section=frontaliere dry_run=false',
+  R('18:15:35.3478946', '🔄 Falling back to nvidia/meta/llama-3.1-8b-instruct (score: 37774)...'),
+  R('18:15:55.3499622', '🔄 Falling back to mistral/mistral-small-2506 (score: -105)...'),
+  R('18:15:55.4991303', '❌ [mistral/mistral-small-2506] Failed (score → -115): [Mistral/mistral-small-2506] HTTP 402: {"detail":"Check your subscription"}'),
+  R('18:16:39.4713386', '⏭️  [mistral/mistral-small-2506] Skipped — exhausted (non-retryable provider error (HTTP 402), future hits silenced)'),
+  R('18:16:43.7170761', '⏭️  [nvidia/meta/llama-3.1-8b-instruct] Skipped — exhausted (timeout circuit-breaker, future hits silenced)'),
+  R('18:17:16.0822731', '❌ [Ministral-3B] Failed (score → -762): [Ministral-3B] HTTP 404: '),
+  // La STESSA riga, ripetuta: è il round-trip ripagato che #449 elimina. Il
+  // parser deve contarla una volta sola, o questa misura muore con quella fix.
+  R('18:20:40.1876978', '❌ [Ministral-3B] Failed (score → -772): [Ministral-3B] HTTP 404: '),
+  R('18:20:41.1876978', '❌ [gpt-4.1-nano] Failed (score → -12): [gpt-4.1-nano] HTTP 404: '),
+  R('18:20:42.1876978', '❌ [nvidia/mistralai/mistral-small-4-119b-2603] Failed (score → -5): [NVIDIA/mistralai/mistral-small-4-119b-2603] HTTP 410'),
+  R('18:20:43.1876978', '❌ [cerebras/gemma-4-31b] Failed (score → -16): [Cerebras/gemma-4-31b] HTTP 402'),
+  // Vivo ma lento: fallisce per timeout, quindi sta nel DENOMINATORE e non nel
+  // numeratore. Se finisse fra i morti, il watchdog confonderebbe «catalogo
+  // ritirato» con «giornata storta», che sono due riparazioni diverse.
+  R('18:20:44.1876978', '❌ [groq/llama-3.3-70b-versatile] Failed (score → -3): [Groq/llama-3.3-70b-versatile] HTTP 504'),
+  R('18:20:45.1876978', '⏭️  [gpt-4o-mini] Skipped — request would exceed 8000-token limit (estimated 9431)'),
+].join('\n');
+
+/** Una run sintetica con `touched` modelli osservati e `dead` morti in 404. */
+const syntheticRun = (touched, dead, opts = {}) => ({
+  dryRun: opts.dryRun === true,
+  gates: [],
+  totalRejections: [],
+  tokenLimitSkips: [],
+  evergreenSaturated: false,
+  evergreenNone: false,
+  section: 'frontaliere',
+  modelsTouched: Array.from({ length: touched }, (_, i) => `m${i}`),
+  modelFailures: Array.from({ length: dead }, (_, i) => ({ model: `m${i}`, code: opts.code || '404' })),
+});
+
+describe('roster-erosion: si contano i MODELLI, non i round-trip', () => {
+  test('la riga canonica si legge, e la stessa riga ripetuta conta una volta sola', () => {
+    const r = parseRunLog(LOG_ROSTER_ERODED);
+    // `Ministral-3B` compare DUE volte in 404 nella fixture, come nella run vera
+    // (27 volte per `gpt-4.1-nano`). Se il parser contasse le righe, questa
+    // misura crollerebbe da sola quando #449 silenzia le ripetizioni — cioè
+    // mostrerebbe una guarigione mai avvenuta.
+    const ministral = r.modelFailures.filter((f) => f.model === 'Ministral-3B');
+    assert.equal(ministral.length, 1);
+    assert.deepEqual(
+      r.modelFailures.map((f) => `${f.code} ${f.model}`).sort(),
+      [
+        '402 cerebras/gemma-4-31b',
+        '402 mistral/mistral-small-2506',
+        '404 Ministral-3B',
+        '404 gpt-4.1-nano',
+        '410 nvidia/mistralai/mistral-small-4-119b-2603',
+      ],
+    );
+  });
+
+  test('la chiave è la PRIMA parentesi, quella del roster — non `Provider/modello`', () => {
+    const r = parseRunLog(LOG_ROSTER_ERODED);
+    // `[NVIDIA/mistralai/…]` è la seconda parentesi e cambia forma da provider a
+    // provider; `[nvidia/mistralai/…]` è la chiave con cui il modello sta nella
+    // catena, ed è quella che chi ripara deve poter cercare.
+    assert.ok(r.modelFailures.some((f) => f.model === 'nvidia/mistralai/mistral-small-4-119b-2603'));
+    assert.ok(!r.modelFailures.some((f) => f.model.startsWith('NVIDIA/')));
+  });
+
+  test('un HTTP 504 è un modello VIVO: sta nel denominatore, non fra i morti', () => {
+    const r = parseRunLog(LOG_ROSTER_ERODED);
+    assert.ok(!r.modelFailures.some((f) => f.model === 'groq/llama-3.3-70b-versatile'));
+    assert.ok(r.modelsTouched.includes('groq/llama-3.3-70b-versatile'));
+  });
+
+  test('il denominatore raccoglie provati, saltati e falliti — ed è un insieme', () => {
+    const r = parseRunLog(LOG_ROSTER_ERODED);
+    assert.deepEqual(r.modelsTouched, [
+      'Ministral-3B',
+      'cerebras/gemma-4-31b',
+      'gpt-4.1-nano',
+      'gpt-4o-mini',                                  // saltato per tetto di token
+      'groq/llama-3.3-70b-versatile',                 // fallito, ma vivo
+      'mistral/mistral-small-2506',                   // provato + fallito + silenziato
+      'nvidia/meta/llama-3.1-8b-instruct',            // provato + silenziato per timeout
+      'nvidia/mistralai/mistral-small-4-119b-2603',
+    ]);
+    // Superset del numeratore, sempre: un morto è anche un osservato.
+    for (const f of r.modelFailures) assert.ok(r.modelsTouched.includes(f.model));
+  });
+
+  test('un log senza roster non inventa niente', () => {
+    const r = parseRunLog(LOG_FRONTALIERE_OK);
+    assert.deepEqual(r.modelFailures, []);
+    assert.deepEqual(r.modelsTouched, []);
+  });
+
+  test('le due classi restano separate: 401/404/410 accendono, 402 è una dimensione', () => {
+    // Non è una preferenza. Misurato il 2026-08-18 su 104 finestre di 12h
+    // misurabili: la classe 402 vale 0,161-0,207 SEMPRE (nessun lato sano →
+    // qualunque soglia sotto 0,20 è accesa 104 volte su 104), la classe
+    // 401/404/410 va da 0,034 a 0,152 e quindi si separa.
+    assert.deepEqual([...ROSTER_RETIRED_CODES].sort(), ['401', '404', '410']);
+    assert.deepEqual([...ROSTER_BILLING_CODES], ['402']);
+    const s = summarizeRuns([parseRunLog(LOG_ROSTER_ERODED), parseRunLog(LOG_ROSTER_ERODED)]);
+    // La fixture ha 8 modelli osservati, sotto ROSTER_MIN_TOUCHED: nessuna delle
+    // due run entra nel numeratore, e il campione resta zero.
+    assert.equal(s.roster.probingRuns, 0);
+    assert.equal(s.roster.touched, 8);
+  });
+
+  test('una run che non scende nella catena non entra nel numeratore', () => {
+    // 1 morto su 29 osservati è la run 32051739807 vera: un sondaggio corto in
+    // cui il rapporto è dominato dal denominatore. Sopra la soglia di
+    // osservazione, la stessa proporzione conta.
+    const shallow = summarizeRuns([syntheticRun(29, 1)]);
+    assert.equal(shallow.roster.probingRuns, 0);
+    assert.equal(shallow.roster.retired.length, 0);
+    assert.ok(shallow.roster.touched >= 29, 'il denominatore raccoglie comunque i modelli osservati');
+
+    const deep = summarizeRuns([syntheticRun(ROSTER_MIN_TOUCHED, 1)]);
+    assert.equal(deep.roster.probingRuns, 1);
+    assert.equal(deep.roster.retired.length, 1);
+  });
+
+  test('le run `dry_run` restano fuori: lo step di generazione non parte', () => {
+    const s = summarizeRuns([syntheticRun(80, 20, { dryRun: true })]);
+    assert.equal(s.roster.runs, 0);
+    assert.equal(s.roster.probingRuns, 0);
+    assert.equal(s.roster.touched, 0);
+  });
+
+  test('il conteggio per modello dice in quante run è risultato morto', () => {
+    const s = summarizeRuns([syntheticRun(60, 3), syntheticRun(60, 2)]);
+    assert.equal(s.roster.probingRuns, 2);
+    assert.deepEqual(s.roster.retired, [
+      { model: 'm0', runs: 2 },
+      { model: 'm1', runs: 2 },
+      { model: 'm2', runs: 1 },
+    ]);
+  });
+
+  test('il 402 finisce in `billing` e NON nel tasso che accende', () => {
+    const s = summarizeRuns([syntheticRun(100, 30, { code: '402' })]);
+    assert.equal(s.roster.retired.length, 0);
+    assert.equal(s.roster.retiredRate, 0);
+    assert.equal(s.roster.billing.length, 30);
+    assert.equal(s.roster.billingRate, 0.30);
+  });
+});
+
+describe('roster-erosion: la condizione, e le tre trappole di #380', () => {
+  const withRoster = (patch) => {
+    const m = healthy();
+    m.runs.roster = { ...m.runs.roster, ...patch };
+    return m;
+  };
+
+  test('LA CONDIZIONE ESISTE — se sparisce, questo file diventa rosso', () => {
+    // Guardia di mutazione esplicita. Le asserzioni sotto usano `verdictFor`,
+    // che su una condizione assente restituisce `undefined` e fallisce con un
+    // TypeError invece che con un messaggio: questa riga dice PERCHÉ.
+    assert.ok(
+      CONDITIONS.some((c) => c.id === 'roster-erosion'),
+      'la condizione `roster-erosion` non è più nella tabella: il roster torna a marcire in silenzio',
+    );
+  });
+
+  test('il livello del censimento di #380 (3 su ~101) NON accende', () => {
+    // È l'unica ancora "sana" che esista: nella finestra del 2026-08-18 ogni run
+    // che percorre la catena mostra molto di più. La soglia deve stare sopra.
+    const v = verdictFor(withRoster({ touched: 114, retiredRate: 3 / 114 }), 'roster-erosion');
+    assert.equal(v.available, true);
+    assert.equal(v.firing, false);
+    assert.ok(ROSTER_RETIRED_RATE > 3 / 101, 'la soglia deve stare sopra il livello del censimento');
+  });
+
+  test('lo stato misurato il 2026-08-18 (18 su 114) accende', () => {
+    const m = withRoster({
+      probingRuns: 8,
+      runs: 180,
+      touched: 114,
+      retired: [{ model: 'Ministral-3B', runs: 6 }, { model: 'gpt-4.1-nano', runs: 5 }],
+      billing: [{ model: 'mistral/mistral-small-2506', runs: 8 }],
+      retiredRate: 18 / 114,
+      billingRate: 18 / 114,
+    });
+    const v = verdictFor(m, 'roster-erosion');
+    assert.equal(v.firing, true);
+    assert.ok(ROSTER_RETIRED_RATE < 18 / 114, 'la soglia deve stare sotto il picco misurato');
+    // Il campione va DICHIARATO: un gate che campiona in silenzio ha già fatto
+    // danni in questo repo.
+    assert.match(v.body, /180 run non-dry lette/);
+    assert.match(v.body, /\*\*8\*\* hanno percorso/);
+    // La classe 402 c'è, ma dichiarata fuori dal predicato.
+    assert.match(v.body, /NON entra nel predicato/);
+    // Osservare, non rimuovere (#380) — e il perché (#362).
+    assert.match(v.body, /togliere questi modelli dal roster/);
+    assert.match(v.body, /local-llm-fallback\.test\.ts/);
+  });
+
+  test('TRAPPOLA 1 — il predicato non guarda `conclusion`: nessun filtro sui fallimenti', () => {
+    // Dopo #449 un roster eroso produce run `success`. Il numeratore si costruisce
+    // in `summarizeRuns`, che riceve solo log parsati e non ha MAI accesso alla
+    // conclusion: la cecità è impossibile per costruzione, non per disciplina.
+    const s = summarizeRuns([syntheticRun(60, 8), syntheticRun(60, 8)]);
+    assert.equal(s.roster.probingRuns, 2);
+    const source = fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'scan-generation-health.mjs'), 'utf-8');
+    const body = source.slice(source.indexOf('export function summarizeRuns'), source.indexOf('export function pairKeyOf'));
+    assert.ok(!/conclusion/.test(body.replace(/\/\/[^\n]*/g, '')), 'summarizeRuns non deve conoscere la conclusion delle run');
+  });
+
+  test('TRAPPOLA 2 — sotto il campione minimo non apre e NON chiude', () => {
+    // «La cascata non è scesa» non è «il roster è sano». Misurato: 72 finestre
+    // di 12h su 176 (41%) non contengono abbastanza run che percorrono la catena.
+    const v = verdictFor(withRoster({ probingRuns: ROSTER_MIN_PROBING_RUNS - 1, retiredRate: 0.9 }), 'roster-erosion');
+    assert.equal(v.available, false);
+    assert.equal(v.firing, false);
+    assert.match(v.reason, /percorrono la catena/);
+
+    const thin = verdictFor(withRoster({ touched: ROSTER_MIN_TOUCHED - 1, retiredRate: 0.9 }), 'roster-erosion');
+    assert.equal(thin.available, false);
+    assert.match(thin.reason, /denominatore troppo piccolo/);
+  });
+
+  test('TRAPPOLA 3 — il discriminante sta nei primi 60 caratteri del titolo', () => {
+    // `createGithubIssue` deduplica sul prefisso di 60 caratteri: un discriminante
+    // in coda verrebbe buttato, due erosioni diverse collasserebbero sulla stessa
+    // issue e la seconda non si aprirebbe mai.
+    const prefixes = CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]))
+      .map((s, i) => CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]).map((x) => c.title(x)))[i]);
+    const all = CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]).map((s) => c.title(s)));
+    assert.equal(new Set(all.map((t) => t.slice(0, 60))).size, all.length, 'due condizioni condividono i primi 60 caratteri del titolo');
+    assert.ok(prefixes.length > 0);
+    const mine = CONDITIONS.find((c) => c.id === 'roster-erosion').title(null);
+    assert.ok(mine.startsWith('Roster LLM invecchiato'), 'il discriminante deve stare PRIMO');
+    // Fuori dal TITLE_RE di `close-recovered-failure-issues.mjs` e da
+    // MONITOR_FAILURE_TITLE_RE: un secondo closer con un criterio diverso
+    // richiuderebbe questa issue per ragioni sue.
+    assert.ok(!/^(?:Workflow|Crawler|CI) Failure: /.test(mine));
+    assert.ok(!/^\s*(?:workflow|ci)\s+failure\s*:/i.test(mine));
+  });
+
+  test('apre e chiude con la STESSA valutazione: il censimento non scade', async () => {
+    const closed = [];
+    const opened = [];
+    const io = {
+      createIssue: async (i) => { opened.push(i.title); return { number: 1 }; },
+      resolveIssue: (t) => { closed.push(t); return true; },
+      log: () => {},
+    };
+    const title = CONDITIONS.find((c) => c.id === 'roster-erosion').title(null);
+
+    await reconcile(evaluateConditions(withRoster({
+      probingRuns: 8, touched: 114, retiredRate: 18 / 114,
+      retired: [{ model: 'gpt-4.1-nano', runs: 5 }], billing: [],
+    })), io);
+    assert.ok(opened.includes(title), 'non si è aperta sullo stato eroso');
+
+    // I modelli tornano (o ne arrivano di vivi): la stessa passata la richiude.
+    await reconcile(evaluateConditions(withRoster({ probingRuns: 8, touched: 114, retiredRate: 2 / 114 })), io);
+    assert.ok(closed.includes(title), 'non si è richiusa quando il roster è rientrato');
   });
 });
