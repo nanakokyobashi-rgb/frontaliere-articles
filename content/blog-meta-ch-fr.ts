@@ -3343,6 +3343,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.title': 'Garderie et garde d\'enfants dans le canton de Bâle-Ville : coûts',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.excerpt': 'Les crèches et les familles de jour dans le canton de Bâle-Ville : prix calculés sur le revenu et allocations cantonales disponibles',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.imageAlt': 'Photo d\'une garderie d\'enfants dans un quartier résidentiel de Bâle-Ville',
+    'blog.article.borse-di-studio-basilea-citta.title': 'Bourses Canton Bâle-Ville exigences et montants',
+    'blog.article.borse-di-studio-basilea-citta.excerpt': 'Exigences et montants des bourses offertes par le canton de Bâle-Ville pour les étudiants suisses et étrangers.',
+    'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Bourses d\'études offertes par le canton de Bâle-Ville',
 };
 
 export default blogMetaChFr;

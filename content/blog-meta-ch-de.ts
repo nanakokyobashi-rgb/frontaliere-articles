@@ -3343,6 +3343,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.title': 'Kindertagesstätte und Kinderbetreuung im Kanton Basel-Stadt: Kosten',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.excerpt': 'Kindergärten und Tagesfamilien im Kanton Basel-Stadt: Berechnete Einkommenspreise und verfügbare Kantonsbeiträge',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.imageAlt': 'Foto einer Kita in einem Wohngebiet von Basel-Stadt',
+    'blog.article.borse-di-studio-basilea-citta.title': 'Stipendien Kanton Basel-Stadt Anforderungen und Beträge',
+    'blog.article.borse-di-studio-basilea-citta.excerpt': 'Voraussetzungen und Höhe der Stipendien des Kantons Basel-Stadt für in- und ausländische Studierende.',
+    'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Stipendien des Kantons Basel-Stadt',
 };
 
 export default blogMetaChDe;

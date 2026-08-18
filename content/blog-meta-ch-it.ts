@@ -3343,6 +3343,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.title': 'Asilo nido e custodia bambini nel Cantone di Basilea Città: costi',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.excerpt': 'Gli asili nido e le famiglie diurne nel Cantone di Basilea Città: prezzi calcolati sul reddito e sussidi cantonali disponibili',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.imageAlt': 'Foto di un asilo nido in un quartiere residenziale di Basilea Città',
+    'blog.article.borse-di-studio-basilea-citta.title': 'Borse di studio Canton Basilea Città requisiti e importi',
+    'blog.article.borse-di-studio-basilea-citta.excerpt': 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città per gli studenti svizzeri e stranieri.',
+    'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Borse di studio offerte dal Canton Basilea Città',
 };
 
 export default blogMetaChIt;

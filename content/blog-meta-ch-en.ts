@@ -3343,6 +3343,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.title': 'Nursery and childcare in the Canton of Basel-City: costs',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.excerpt': 'Kindergartens and day families in the Canton of Basel-City: prices calculated on income and available cantonal subsidies',
     'blog.article.asilo-nido-e-custodia-bambini-canton-basilea-citta.imageAlt': 'Photo of a nursery in a residential area of Basel City',
+    'blog.article.borse-di-studio-basilea-citta.title': 'Scholarships Canton Basel City requirements and amounts',
+    'blog.article.borse-di-studio-basilea-citta.excerpt': 'Requirements and amounts of scholarships offered by the Canton of Basel-City for Swiss and foreign students.',
+    'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Scholarships offered by the Canton Basel City',
 };
 
 export default blogMetaChEn;
