@@ -1760,8 +1760,8 @@
       "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "689207b4d01294b0",
-        "corpus": "689207b4d01294b0",
+        "site": "3212a3422828b000",
+        "corpus": "3212a3422828b000",
         "alignedAt": "2026-08-18"
       }
     },
