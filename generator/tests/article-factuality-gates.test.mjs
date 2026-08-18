@@ -718,6 +718,42 @@ describe('checkFabricatedNormAcronyms', () => {
     )).toEqual([]);
   });
 
+  // Il test sopra nomina tre parole; la classe ne ha altre cinque, e la coda
+  // del prefisso `legg-` e' fitta di parole ordinarie. Enumerarle qui evita che
+  // un domani si «semplifichi» il cue guardando solo i tre esempi citati.
+  it('leaves the bank LCL alone for the rest of the legg-/lois- family too', () => {
+    const frasiSenzaCitazione = [
+      'Il tariffario LCL resta leggibile online e non prevede spese fisse mensili.',
+      'Un logo leggiadro accompagna la nuova app LCL dedicata ai frontalieri.',
+      'Le commissioni LCL sono leggermente inferiori a quelle della concorrenza.',
+      'Conviene leggere le condizioni del conto LCL prima di aprirlo.',
+      'La carta LCL offre sconti su viaggi e loisir per i frontalieri.',
+    ];
+    for (const frase of frasiSenzaCitazione) {
+      expect(checkFabricatedNormAcronyms(frase), frase).toEqual([]);
+    }
+  });
+
+  // Contro-prova, ed e' la meta' che mancava del tutto: restringere il cue per
+  // chiudere il falso positivo puo' spegnere il gate, e nessun test se ne
+  // accorgerebbe. Le forme vere devono restare cue in italiano e in francese,
+  // al singolare E al plurale — `legislazioni` non lo era: l'alternanza diceva
+  // `legislazione`, che come prefisso non copre il plurale, quindi una sigla
+  // fabbricata citata al plurale passava senza contesto riconosciuto.
+  it('still recognises real citation cues, singular and plural', () => {
+    const frasiConCitazione = [
+      'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 fissa un minimo.',
+      'Le leggi cantonali richiamate dalla LCL fissano un minimo salariale.',
+      'La legislazione richiamata dalla LCL fissa un minimo salariale.',
+      'Le legislazioni cantonali richiamate dalla LCL fissano un minimo salariale.',
+      'La loi cantonale sur le travail (LCL) fixe un salaire minimum.',
+      'Les lois cantonales citees par la LCL fixent un salaire minimum.',
+    ];
+    for (const frase of frasiConCitazione) {
+      expect(codes(checkFabricatedNormAcronyms(frase)), frase).toContain('fabricated-norm-acronym');
+    }
+  });
+
   // Il requisito di contesto non deve diventare una scappatoia. Se il testo
   // nomina PRIMA la banca e POI fabbrica la legge, il gate deve scattare: con
   // una `re.exec` a match singolo la prima occorrenza consumava l'unico match
