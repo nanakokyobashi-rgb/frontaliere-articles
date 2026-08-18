@@ -3286,6 +3286,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-cassa-malati-basilea-citt-riduzione.title': 'Krankenkassenprämien im Kanton Basel-Stadt: Reduktion angekündigt',
     'blog.article.premi-cassa-malati-basilea-citt-riduzione.excerpt': 'Der Kanton Basel-Stadt hat die Senkung der Krankenkassenprämien angekündigt.',
     'blog.article.premi-cassa-malati-basilea-citt-riduzione.imageAlt': 'Bild von Basel-Stadt, Schweiz, mit reduzierten Krankenversicherungsbeiträgen',
+    'blog.article.diritto-locazione-conciliazione-ticino.title': 'Mietrecht in der Schweiz: So vermeiden Sie Gerichte',
+    'blog.article.diritto-locazione-conciliazione-ticino.excerpt': 'Von Mieterhöhungen bis hin zu Streitigkeiten zwischen Mietern und Eigentümern: So gehen Sie mit Mietkonflikten um und vermeiden nach Ansicht von Experten das Amtsgericht.',
+    'blog.article.diritto-locazione-conciliazione-ticino.imageAlt': 'Mietrechts-Handbuch und Schlüssel in der Schweiz',
 };
 
 export default blogMetaChDe;
