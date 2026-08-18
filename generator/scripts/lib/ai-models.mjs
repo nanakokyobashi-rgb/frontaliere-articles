@@ -1750,6 +1750,14 @@ const SCORE_RETRYABLE_FAIL   =  -3;
 const SCORE_NON_RETRYABLE    = -10;
 const SCORE_EXHAUSTED        = -50;
 
+// Laplace prior for `_successRate` (see #435): 1 pseudo-success + 1
+// pseudo-failure, so an untested model reads as a neutral 0.5 (worth trying)
+// instead of 0 (worse than everything). Any small symmetric prior works for
+// the ordering property this exists to guarantee; these two are the smallest
+// integers that keep the neutral point exactly at 0.5.
+const RATE_PRIOR_SUCCESSES   =   1;
+const RATE_PRIOR_TOTAL       =   2;
+
 // ── Time-decay for persisted scores ──────────────────────────
 
 /** Apply time-based decay to a persisted score */
@@ -2910,6 +2918,36 @@ function _recordLastResortOutcome(model, outcome) {
   if (tier) _stats.lastResort[tier][outcome]++;
 }
 
+/**
+ * Laplace-smoothed success rate from the RELIABLE lifetime successes/failures
+ * counters (`_modelDetails`, atomic-increment persisted — see
+ * score-ledger-persistence.test.mjs), not from the decaying additive `score`.
+ *
+ * Why not `score` (see #435): `score` is a sum of +/-N per outcome, decayed by
+ * `_decayScore` at load time and then RE-PERSISTED as the new absolute base —
+ * so the decay compounds every time a model is touched instead of applying
+ * once per elapsed hour. A model reached often never sits in a bucket wide
+ * enough to decay (age-since-last-use stays under 1h) and its penalties sum
+ * without bound, while a model reached rarely gets its penalty repeatedly
+ * multiplied toward zero and stabilizes near a small negative equilibrium
+ * regardless of how badly it fails. Net effect measured in the ledger
+ * 2026-08-18: `gemini-2.0-flash` at 0/1122 (score -41) ranked above `gpt-4.1`
+ * at 2585/1000 = 72% (score -46) — recency of use, not reliability, decided
+ * the order.
+ *
+ * A success RATE has none of that: it depends only on the lifetime counts, is
+ * bounded in [0,1], and a 0-success model can never outrank a model with a
+ * real success rate no matter how many attempts either has accumulated. The
+ * Laplace prior (`RATE_PRIOR_SUCCESSES`/`RATE_PRIOR_TOTAL`) keeps an untested
+ * model at a neutral 0.5 instead of penalizing it for having no history yet.
+ */
+function _successRate(modelId) {
+  const d = _modelDetails.get(modelId);
+  const successes = d?.successes || 0;
+  const failures = d?.failures || 0;
+  return (successes + RATE_PRIOR_SUCCESSES) / (successes + failures + RATE_PRIOR_TOTAL);
+}
+
 function sortChainByScore(chain) {
   // Build index map for tiebreaker (lower index = better in original order)
   const indexMap = new Map(chain.map((m, i) => [m, i]));
@@ -2917,6 +2955,13 @@ function sortChainByScore(chain) {
     const ta = _lastResortTier(a);
     const tb = _lastResortTier(b);
     if (ta !== tb) return ta - tb;
+    // Primary key: lifetime success rate — see _successRate for why this and
+    // not the decaying `score` is what decides reliability ordering.
+    const ra = _successRate(a);
+    const rb = _successRate(b);
+    if (rb !== ra) return rb - ra; // higher success rate first
+    // Tiebreak among equal rates (e.g. both untested, or a tie at volume) on
+    // the recency-weighted score, then on original chain order.
     const sa = _modelScores.get(a) || 0;
     const sb = _modelScores.get(b) || 0;
     if (sb !== sa) return sb - sa; // higher score first
