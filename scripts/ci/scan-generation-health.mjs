@@ -1834,6 +1834,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
     bySection: summary.bySection,
     oversize: summary.oversize,
+    roster: summary.roster,
   };
 }
 
