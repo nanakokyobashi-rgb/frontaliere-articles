@@ -477,13 +477,34 @@ jobs:
           # incastrata il gate trasforma il guasto di UNA run in una finestra
           # morta lunga quanto il suo timeout.
           #
-          # Misurato il 2026-08-18 sulle ultime 119 run di questo workflow:
-          #   success  n=111   p50  3,8   p90 11,0   max 24,4 min   (run intera)
-          #   success  n=19    p50  1,2   p90  8,7   max 20,7 min   (job generate)
-          #   failure  n=5                       41,6 - 50,7 min, ZERO articoli
-          # Fra 24,4 e 41,6 minuti non cade NESSUNA run: la soglia sta in quella
-          # banda vuota, quindi non puo' scambiare una run sana per incastrata.
-          # Le 5 incastrate valgono da sole il 30% di una finestra di 12 ore.
+          # Misurato il 2026-08-18 su 600 run (4 giorni). Il primo campione era
+          # di 119 run e mostrava una «banda vuota» fra 24,4 e 41,6 minuti: a
+          # n=600 quella banda NON esiste, ed e' un errore da non ripetere.
+          #   success  n=548   p50 3,1   p90 11,0   p95 14,0   max 42,6 min
+          #   failure  n=50    p50 42,4  p90 46,0   p95 50,2   max 51,0 min
+          # Le due distribuzioni si SOVRAPPONGONO: la mediana delle fallite
+          # (2543s) sta SOTTO il massimo delle sane (2556s). Nessuna soglia di
+          # durata le separa — ed e' esattamente per questo che il kill non usa
+          # la durata ma il SILENZIO (watchdog di stallo, piu' in basso). Qui
+          # non si uccide niente: si decide solo se AMMETTERE un successore, e
+          # l'asimmetria di costo e' tutta la ragione per cui una soglia di
+          # durata e' accettabile qui e non la' (vedi il prezzo, sotto).
+          #
+          # Da dove viene allora 1800? NON dall'istogramma: i wedge colti sono
+          # 44/50 per OGNI valore fra 1500 e 2400s, quindi la durata non sceglie.
+          # Viene dalla CADENZA DEL CRON, `7 * * * *` e `37 * * * *`, cioe' 30
+          # minuti. Durante un wedge da ~42 min arriva UN solo `schedule`, con
+          # eta' compresa fra 30 e 42 min: 1800s e' il valore piu' ALTO che lo
+          # ammette ancora. A 2100s se ne perde meta', a 2400s quasi tutto; sotto
+          # i 1800s non si guadagna nessun arrivo (non ce ne sono di piu'
+          # giovani) e si pagano solo piu' falsi positivi. Se il cron cambia
+          # cadenza, questa soglia va rifatta con lui.
+          #
+          # Il prezzo, misurato e accettato: 5 run sane su 548 (0,91%) superano
+          # i 1800s, e per quelle il successore viene ammesso a torto. Costa una
+          # run in coda, non un articolo: si mette in CODA dietro la sana (vedi
+          # sotto), non la uccide e non le si sovrappone. E' il verso giusto in
+          # cui sbagliare.
           #
           # Proseguire NON riapre il buco di sovrapposizione che e' costato
           # #255/#281/#285: il job `generate` ha `concurrency: generate-article`
@@ -521,7 +542,7 @@ jobs:
                  | join(", ")' \
               2>/dev/null || true)
           if [ -n "${stale:-}" ]; then
-            echo "::warning title=Generazione incastrata::Run piu' vecchie in volo oltre ${WEDGE_SECONDS}s, trattate come incastrate e NON piu' bloccanti: ${stale}"
+            echo "::warning title=Run in volo oltre la soglia::Run piu' vecchie in volo da oltre ${WEDGE_SECONDS}s, NON piu' bloccanti per l'ammissione: ${stale}. Di norma sono incastrate, ma lo 0,91% delle run sane supera questa soglia: in quel caso il successore aspetta in coda senza disturbarle."
           fi
           case "${older:-}" in
             ''|*[!0-9]*) older=0 ;;
