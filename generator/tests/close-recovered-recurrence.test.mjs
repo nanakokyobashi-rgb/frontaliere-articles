@@ -22,6 +22,7 @@ import {
   TITLE_RE,
   decideRecurrenceHold,
   decideChronicEscalation,
+  decideChronicDeescalation,
   countRecurrences,
   alreadyRecurrenceHeld,
   recurrenceHoldNote,
@@ -247,4 +248,123 @@ test('il titolo dell\'articolo perso resta FUORI dalla famiglia coperta dal clos
 test('i default sono quelli misurati', () => {
   assert.equal(DEFAULT_RECURRENCE_WINDOW_HOURS, 8);
   assert.equal(DEFAULT_CHRONIC_RECURRENCES, 5);
+});
+
+// ── Il marcatore di ricorrenza non si muove ─────────────────────────────────
+//
+// `RECURRENCE_MARKER` qui è una COPIA di una costante PRIVATA del reporter
+// (`scripts/lib/github-issue-creator.mjs:75`). Un contratto senza forma di
+// import: nessun guard che segue gli import lo vede. Se il reporter cambiasse
+// marcatore, `countRecurrences()` tornerebbe 0 su ogni issue, il gate cronico
+// diventerebbe un no-op silenzioso e la CI resterebbe verde. Stessa tecnica del
+// grep che ancora il template del titolo qui sopra.
+test('il marcatore 🔁 è ancora quello che il reporter scrive', () => {
+  const src = fs.readFileSync(
+    path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'scripts', 'lib', 'github-issue-creator.mjs'),
+    'utf8',
+  );
+  assert.ok(
+    src.includes(`const RECURRENCE_MARKER = '${RECURRENCE_MARKER}';`),
+    'il reporter ha cambiato marcatore di ricorrenza: countRecurrences() conta 0 e il gate cronico muore in silenzio',
+  );
+  // Il marcatore deve comparire nei commenti che il reporter posta davvero, non
+  // solo nella costante: sia la riapertura sia il commento su issue già aperta.
+  assert.ok(src.includes('${RECURRENCE_MARKER} Recurrence on workflow run.'), 'commento di ricorrenza su issue aperta');
+  assert.ok(src.includes('${RECURRENCE_MARKER} **Reopened**'), 'commento di riapertura');
+});
+
+// ── De-escalation: `needs-human` non è una porta a senso unico ──────────────
+//
+// `needs-human` è un filtro di ESCLUSIONE, non un selettore: followup-drainer.mjs
+// lo legge per tenere una issue fuori dal pool dei retry parcheggiati (:1091) e
+// fuori dal rescue `agent:fix` dei crawler (:1204). Se l'escalation lo applicasse
+// senza mai toglierlo, una issue rientrata si richiuderebbe ma tornerebbe già
+// esclusa da ogni coda alla riapertura successiva — per sempre.
+const escalated = (n = NOW) => ({ body: `nota\n\n${CHRONIC_MARKER}`, createdAt: new Date(n - 7200e3).toISOString() });
+
+test('rientrata sotto soglia: i label cronici vengono tolti', () => {
+  const decision = decideChronicEscalation([escalated()], opts);
+  assert.equal(decision.hold, false, 'un solo commento senza 🔁 non è cronico');
+  const d = decideChronicDeescalation({
+    comments: [escalated()],
+    labels: ['bug', 'priority:urgent', 'needs-human', 'fu-parked'],
+    decision,
+  });
+  assert.equal(d.clear, true);
+  assert.deepEqual(d.labels, ['priority:urgent', 'needs-human']);
+});
+
+test('ancora cronica: non si tocca niente', () => {
+  const comments = [escalated(), ...Array.from({ length: 6 }, (_, i) => recurrenceComment(i + 1))];
+  const decision = decideChronicEscalation(comments, opts);
+  assert.equal(decision.hold, true);
+  assert.equal(decideChronicDeescalation({ comments, labels: CHRONIC_LABELS.slice(), decision }).clear, false);
+});
+
+test('label già assenti: nessuna chiamata gh sprecata a ogni passata oraria', () => {
+  const comments = [escalated()];
+  const decision = decideChronicEscalation(comments, opts);
+  // Il CHRONIC_MARKER resta nel thread per sempre: senza il controllo sui label
+  // presenti, ogni passata rifarebbe `gh issue edit` su una issue già pulita.
+  assert.equal(decideChronicDeescalation({ comments, labels: ['bug'], decision }).clear, false);
+});
+
+test('mai escalata: la de-escalation non tocca label messi da altri', () => {
+  // `needs-human` arriva anche dal followup-drainer (too-large). Toglierlo senza
+  // aver visto il NOSTRO marker vorrebbe dire disfare la decisione di un altro
+  // strato del ciclo.
+  const comments = [{ body: 'un commento qualsiasi', createdAt: new Date(NOW - 3600e3).toISOString() }];
+  const decision = decideChronicEscalation(comments, opts);
+  assert.equal(decideChronicDeescalation({ comments, labels: ['needs-human'], decision }).clear, false);
+});
+
+test('commenti illeggibili: non si toglie niente', () => {
+  const decision = decideChronicEscalation(null, opts);
+  assert.equal(decideChronicDeescalation({ comments: null, labels: CHRONIC_LABELS.slice(), decision }).clear, false);
+});
+
+// ── La famiglia `Crawler Failure:` NON è esente dal gate cronico ────────────
+//
+// #413 aveva dichiarato che quella famiglia non cambiava comportamento, ma la
+// dichiarazione copriva il solo gate di ricorrenza (no-op per costo: uno storico
+// di run per step di background costerebbe una chiamata Jobs API per run). Il
+// gate cronico legge i COMMENTI e costa uguale per tutte le famiglie, quindi si
+// applica anche ai crawler — misurato sulla famiglia, non presunto.
+//
+// FIXTURE MISURATA: sito #5139 `Crawler Failure: Run grace`, 6 commenti 🔁 fra il
+// 2026-08-15T21:57:39Z e il 2026-08-18T09:55:55Z (letti con
+// `gh api repos/valerielinc-ops/frontaliere-si-o-no/issues/5139/comments --paginate`).
+const CRAWLER_5139_RECURRENCES = [
+  '2026-08-15T21:57:39Z',
+  '2026-08-16T09:45:42Z',
+  '2026-08-16T21:56:32Z',
+  '2026-08-17T10:02:23Z',
+  '2026-08-17T21:48:29Z',
+  '2026-08-18T09:55:55Z',
+].map((createdAt) => ({ body: `${RECURRENCE_MARKER} Recurrence on workflow run.`, createdAt }));
+
+test('#5139 (crawler) è cronica: il gate NON è un no-op su quella famiglia', () => {
+  const now = Date.parse('2026-08-18T10:00:00Z');
+  assert.equal(countRecurrences(CRAWLER_5139_RECURRENCES, { now }), 6);
+  const decision = decideChronicEscalation(CRAWLER_5139_RECURRENCES, { now });
+  assert.equal(decision.hold, true, 'una issue crawler cronica non si auto-chiude più');
+  assert.equal(decision.count, 6);
+  assert.equal(decision.threshold, 5);
+});
+
+test('la soglia 5 resta selettiva sulla famiglia crawler', () => {
+  // Campione delle 60 issue `Crawler Failure:` chiuse più recenti del sito
+  // (2026-08-18): massimo mobile a 168h = 0 per 54/60, poi 1, 2, 2, 4, 6, 9.
+  // Bimodale, stacco fra 2 e 4: a 5 il gate scatta su 2/60 e non sulla coda.
+  const now = Date.parse('2026-08-18T10:00:00Z');
+  const sample = (n) => Array.from({ length: n }, (_, i) => ({
+    body: RECURRENCE_MARKER,
+    createdAt: new Date(now - (i + 1) * 12 * 3600e3).toISOString(),
+  }));
+  for (const n of [0, 1, 2, 4]) {
+    assert.equal(decideChronicEscalation(sample(n), { now }).hold, false, `${n} ricorrenze non è cronica`);
+  }
+  for (const n of [6, 9]) {
+    assert.equal(decideChronicEscalation(sample(n), { now }).hold, true, `${n} ricorrenze è cronica`);
+  }
 });

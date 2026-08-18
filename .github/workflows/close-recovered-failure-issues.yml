@@ -6,9 +6,18 @@ name: Close Recovered Failure Issues
 # smetterebbe di significare qualcosa.
 #
 # Portato dal sito (manifest: `adapted` — solo la cadenza cambia). Lo script
-# `scripts/ci/close-recovered-failure-issues.mjs` è invece byte-identico:
-# riconosce i titoli `Workflow|Crawler|CI Failure: <nome>` ed è per costruzione
-# la controparte del creator, quindi qualunque modifica al sito è copiabile.
+# `scripts/ci/close-recovered-failure-issues.mjs` è dichiarato `identical` nel
+# manifest — il che vuol dire «deve tornare identico», non «lo è adesso»: il
+# manifest tiene tre hash (sito, corpus, baseline) proprio perché i due lati
+# possono divergere, e `loop-drift-check.mjs` chiama quello stato `corpus-ahead`.
+# Prima di dare per scontata l'identità, misurala:
+#
+#   shasum -a 256 scripts/ci/close-recovered-failure-issues.mjs | cut -c1-16
+#
+# e confrontala con `baseline.site` nel manifest del corpus. Lo script riconosce
+# i titoli `Workflow|Crawler|CI Failure: <nome>` ed è per costruzione la
+# controparte del creator, quindi ogni modifica va comunque spedita da entrambi
+# i lati nello stesso giro.
 #
 # Cadenza: :47 di ogni ora, sfasata dal :17 del sito per non sommare i picchi
 # sulla stessa API. Zero Claude.
