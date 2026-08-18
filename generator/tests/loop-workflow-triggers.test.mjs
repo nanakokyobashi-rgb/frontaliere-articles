@@ -216,13 +216,76 @@ test('generate-article: la mutua esclusione resta, ma sul job che scrive', () =>
 test('generate-article: il job `generate` conserva il proprio timeout-minutes', () => {
   const gen = jobBlock(GA, 'generate');
   assert.ok(gen, 'job `generate` non trovato');
-  assert.match(
-    gen,
-    /timeout-minutes: 60/,
+  const tetto = gen.match(/timeout-minutes: (\d+)/);
+  assert.ok(
+    tetto,
     'Il tetto del job è sparito. Il watchdog dello stallo copre il processo di generazione, non ' +
       'la shell che lo lancia né gli step prima: senza questa riga una run incastrata fuori da ' +
       'quello step resta appesa fino al default di GitHub (6h), e con `cancel-in-progress: false` ' +
       'tiene il gruppo di concurrency per tutto il tempo.',
+  );
+  // ── ORDINE OBBLIGATORIO: il tetto del JOB sta SOPRA il kill duro ──────
+  // Lo step ha un watchdog suo, che uccide a `GENERATE_HARD_KILL_S` ed è
+  // l'unico a emettere le diagnostiche del wedge. Se il tetto del job
+  // scendesse sotto quel valore, GitHub ucciderebbe il job PRIMA, e di una
+  // run incastrata resterebbe un log senza la parte che dice perché.
+  //
+  // Questa riga esiste perché la mossa sbagliata sembra quella giusta:
+  // «i wedge durano 42-51 minuti, abbassiamo il tetto a 30 e li accorciamo».
+  // Non li accorcia. I wedge sono GIÀ boundati dal kill duro — muoiono a
+  // 41,6-50,7 min, cioè al kill duro più overhead, e il tetto del job non
+  // è mai scattato nemmeno una volta. Abbassarlo non toglie un minuto a
+  // nessuno: toglie solo la diagnostica.
+  const hardKill = Number((GA.match(/GENERATE_HARD_KILL_S:-(\d+)/) || [])[1]);
+  assert.ok(
+    Number.isFinite(hardKill),
+    'Non si legge più `GENERATE_HARD_KILL_S` dallo step: senza quel numero questo ordine ' +
+      'non è verificabile e il tetto del job torna a essere una costante senza motivo.',
+  );
+  assert.ok(
+    Number(tetto[1]) * 60 > hardKill,
+    `Il tetto del job (${tetto[1]} min = ${Number(tetto[1]) * 60}s) NON sta più sopra il kill ` +
+      `duro dello step (${hardKill}s). In questo ordine GitHub uccide il job prima che il ` +
+      'watchdog interno possa scrivere le diagnostiche del wedge, e una run incastrata diventa ' +
+      'muta proprio nel momento in cui serve leggerla.',
+  );
+});
+
+// ── Il gate di ammissione ha un limite di ETÀ, non solo di ORDINE ────────────
+//
+// Il confronto asimmetrico di `admit` risponde a «chi è arrivato prima», e da
+// solo non ha un limite superiore: finché una run più vecchia risulta in volo,
+// ogni arrivo successivo salta. Quando quella run è incastrata, il guasto di
+// UNA run diventa una finestra morta lunga quanto il suo timeout — misurato il
+// 2026-08-18: 5 run fra 41,6 e 50,7 minuti, zero articoli, il 30% di una
+// finestra di 12 ore.
+//
+// È la stessa classe degli altri test qui: una riga che decide se una run
+// esiste, il cui difetto è un'ASSENZA (l'articolo che non c'è) e non un errore.
+test('generate-article: il gate di ammissione ignora le run OLTRE la soglia di incastro', () => {
+  const admit = jobBlock(GA, 'admit');
+  assert.ok(admit, 'job `admit` non trovato');
+
+  assert.match(
+    admit,
+    /WEDGE_SECONDS=\d+/,
+    'Sparita la soglia di incastro. Senza, `admit` torna a cedere a QUALUNQUE run più ' +
+      'vecchia ancora in volo, incastrata compresa, e una run guasta si porta dietro tutti ' +
+      'i successori fino alla propria morte.',
+  );
+  assert.match(
+    admit,
+    /fromdateiso8601[\s\S]{0,400}<\s*\$wedge/,
+    'Il filtro delle bloccanti non confronta più l\'ETÀ con la soglia. Il conteggio `older` ' +
+      'deve escludere chi è in volo da più di `$wedge`: senza questo `select`, la soglia è ' +
+      'dichiarata e non usata, che è peggio di non averla — sembra un guard e non lo è.',
+  );
+  assert.match(
+    admit,
+    /::warning[^\n]*incastrat/i,
+    'Le run ignorate perché incastrate non vengono più annunciate. Un incastro ignorato in ' +
+      'silenzio è esattamente il guasto che non si nota finché non si contano gli articoli ' +
+      'mancanti: la riga `::warning` è l\'unico punto in cui compare nel log.',
   );
 });
 
