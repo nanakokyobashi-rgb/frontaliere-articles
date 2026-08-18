@@ -31,7 +31,7 @@ const ROOT = resolve(__dirname, '..', '..');
 import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
-import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, flushScoresBeforeExit, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
+import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
@@ -288,17 +288,26 @@ function commitIfNeeded(currentStep) {
 // `topUpTasks` / `transTasks` durante la run, e un SIGTERM a meta' run
 // (workflow cancellato) usciva con `process.exit(0)` sincrono senza mai dare
 // al ledger dei punteggi una finestra per scrivere gli esiti accumulati.
+//
+// Il primo giro di questo fix rendeva l'handler `async` e chiamava lui stesso
+// `flushScoresBeforeExit()` + `process.exit(0)` — ma questo handler si registra
+// PRIMA che `main()` arrivi a `initScoreStore()`, che arma il proprio pair
+// SIGTERM (`_registerExitHooks()` in `ai-models.mjs`). Su un SIGTERM reale
+// correvano entrambi: il nostro restava sospeso al vero `await ref.set()` di
+// rete (`_persistScoresToFirestore()` svuota `_dirtyModels` PRIMA di quell'
+// await), l'altro trovava `_dirtyModels` gia' vuoto, ritornava quasi subito e
+// chiamava `process.exit(143)` mentre la nostra scrittura era ancora in volo —
+// abortendola. Questo handler ora resta sincrono e fa SOLO il checkpoint git:
+// nessun `await` prima del suo ritorno, quindi l'emit di `SIGTERM` non puo'
+// interlacciarsi con l'altro listener, che parte solo a checkpoint concluso e
+// possiede da solo flush + exit(143). Se il SIGTERM arriva prima che
+// `initScoreStore()` abbia armato quel pair, non c'e' ancora niente di sporco
+// da perdere, e il processo termina sul SIGKILL che Actions manda dopo la
+// grace window — lo stesso esito di sempre.
 function installSigtermCheckpoint() {
-  process.on('SIGTERM', async () => {
+  process.on('SIGTERM', () => {
     console.error('\n⚠️  SIGTERM — saving progress...');
     gitCommitAndPush('interrupted');
-    try {
-      await flushScoresBeforeExit();
-    } catch {
-      // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita
-      // non dipenda mai dal ledger — stessa garanzia di exitAfterFlush().
-    }
-    process.exit(0);
   });
 }
 
