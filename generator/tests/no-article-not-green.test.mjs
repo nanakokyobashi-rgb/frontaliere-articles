@@ -126,13 +126,18 @@ test('senza denominatore non si differisce (l\'affermazione non dimostrata vale 
 
 test('le sei ragioni legittime escono TUTTE con la costante, e nessun\'altra', () => {
   const src = fs.readFileSync(CREATE_ARTICLE, 'utf8');
-  const declared = src.match(/process\.exit\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
+  // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
+  // 2026-08-18 le uscite passano da `exitAfterFlush()`, che scrive il ledger
+  // dei punteggi prima di terminare (`process.exit()` non fa scattare
+  // `beforeExit`, quindi i successi dell'ultima finestra si perdevano). Il
+  // conteggio resta 6 e il letterale resta bocciato, sotto.
+  const declared = src.match(/(?:process\.exit|await exitAfterFlush)\(EXIT_NO_ARTICLE_DECLARED\)/g) || [];
   assert.equal(
     declared.length, 6,
     'le sei ragioni legittime (3 evergreen + duplicato + qualita\' + quota) devono uscire con la costante condivisa',
   );
   // Il letterale scritto a mano e' la via con cui le due meta' divergono.
-  assert.ok(!/process\.exit\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
+  assert.ok(!/(?:process\.exit|exitAfterFlush)\(4\)/.test(src), 'nessun `process.exit(4)` letterale: solo la costante');
 });
 
 test('il differimento per quota e\' subordinato alla prova, e il ramo rosso esiste', () => {

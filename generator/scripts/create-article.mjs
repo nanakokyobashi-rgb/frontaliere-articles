@@ -65,7 +65,7 @@ import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -12150,6 +12150,41 @@ function isDuplicateError(e) {
 // La misura che l'ha resa necessaria (un pareggio 53/53 sulla run 31817957722,
 // dieci ore di run verdi senza un articolo) sta nell'intestazione del modulo.
 
+/**
+ * L'UNICA uscita di questo file — `process.exit()` non si chiama piu' a mano.
+ *
+ * Il difetto che chiude (misurato il 2026-08-18 sulla run 32134269129): questo
+ * file importava `flushScores` alla riga 68 e non lo chiamava MAI, e aveva 12
+ * `process.exit(...)`. `process.exit()` non fa scattare `beforeExit`, che e'
+ * l'unico gancio che il ledger dei punteggi aveva per scrivere l'ultima finestra
+ * di mutazioni; il debounce da 30s e' su un timer `unref()`ato, quindi non tiene
+ * vivo il processo. Il risultato era un'asimmetria precisa: dentro
+ * `ai-models.mjs` l'unico `await flushScores()` sta sul ramo «tutti i modelli
+ * hanno fallito», quindi i FALLIMENTI di quel ramo arrivavano al ledger e i
+ * SUCCESSI di una run riuscita no — un ledger sistematicamente pessimista, ed e'
+ * lui a decidere con `sortChainByScore()` chi viene provato per primo.
+ * `claude-cli/haiku` sul doc `ai_model_scores/_all`: score -3, 0 successi, 1
+ * fallimento, mentre quella run gli aveva applicato 4 successi e 4 fallimenti
+ * (score in memoria -207).
+ *
+ * Un solo posto e non dodici perche' il prossimo `process.exit` aggiunto qui
+ * riaprirebbe il buco senza che niente lo dica: il test
+ * `score-ledger-persistence.test.mjs` verifica che chi importa `flushScores` lo
+ * chiami, ed e' questo helper la chiamata.
+ *
+ * Il flush e' limitato nel tempo e non lancia (vedi `flushScoresBeforeExit`):
+ * un ledger non deve poter appendere o far fallire un'uscita.
+ */
+async function exitAfterFlush(code) {
+  try {
+    await flushScoresBeforeExit();
+  } catch {
+    // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
+    // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
+  }
+  process.exit(code);
+}
+
 async function main() {
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
@@ -12169,7 +12204,7 @@ async function main() {
         console.error(`❌ Disk critically low: ${freeMB}MB free with local LLM model "${model}" loaded.`);
         console.error('   Fix: change ARTICLE_LOCAL_MODEL repo variable to qwen2.5:7b');
         console.error('   (GitHub Settings → Secrets and variables → Actions → Variables)');
-        process.exit(1);
+        await exitAfterFlush(1);
       }
     } catch { /* ignore — df unavailable or parse error */ }
   }
@@ -12934,7 +12969,7 @@ async function main() {
         // Ragione legittima #1 di sei: niente da pubblicare. Exit 4 e non 0 —
         // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
         // e' un percorso che non ha dichiarato niente, ed e' rosso.
-        process.exit(EXIT_NO_ARTICLE_DECLARED);
+        await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
       }
 
       // Generate article with retry — rotate to next safe keyword on post-generation duplicate.
@@ -13070,7 +13105,7 @@ async function main() {
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
             // Ragione legittima #2 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
-            process.exit(EXIT_NO_ARTICLE_DECLARED);
+            await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
       }
@@ -13079,7 +13114,7 @@ async function main() {
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
       // Ragione legittima #3 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
-      process.exit(EXIT_NO_ARTICLE_DECLARED);
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
   }
@@ -13088,7 +13123,7 @@ async function main() {
   if (!url || (!url.startsWith('http') && !url.startsWith('evergreen://') && !url.startsWith('stats-bfs://'))) {
     finalizeRunReport('error', { notes: [...RUN_REPORT.notes, 'Invalid URL input'] });
     console.error('❌ URL non valido. Uso: node scripts/create-article.mjs [url]');
-    process.exit(1);
+    await exitAfterFlush(1);
   }
 
   await generateAndValidateArticle(url, null);
@@ -14856,7 +14891,7 @@ if (invokedDirectly) {
   // ne aggiunge un altro senza che niente lo segnali. Qui la mutezza diventa un
   // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
   // li' lo status e' `generated` e si esce 0, come sempre.
-  main().then(() => {
+  main().then(async () => {
     if (RUN_REPORT?.status === 'generated') return;
     console.error(
       `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
@@ -14865,8 +14900,8 @@ if (invokedDirectly) {
       + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
     );
     console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
-    process.exit(1);
-  }).catch((e) => {
+    await exitAfterFlush(1);
+  }).catch(async (e) => {
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
   // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
@@ -14891,7 +14926,7 @@ if (invokedDirectly) {
       + ` oppure rendere raggiungibile un modello con contesto adeguato (claude-cli/haiku).`,
     );
     console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
-    process.exit(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+    await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
   }
   // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
   // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di
@@ -14907,7 +14942,7 @@ if (invokedDirectly) {
       finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
       console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
       // Ragione legittima #6 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
-      process.exit(EXIT_NO_ARTICLE_DECLARED);
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     finalizeRunReport('error', {
       notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
@@ -14919,7 +14954,7 @@ if (invokedDirectly) {
       + ` Nessuna finestra di quota ripara quella meta' del roster, quindi il run successivo rifarebbe identico. ${e.message}`,
     );
     console.error(`::error::roster-down-not-deferrable: transient=${share.transient} persistent=${share.persistent} ambiguous=${share.ambiguous} total=${share.total} share=${pct}%`);
-    process.exit(1);
+    await exitAfterFlush(1);
   }
   // Content/quality rejection that bubbled all the way up (e.g. manual-URL mode,
   // or every headline/keyword in a loop exhausted on quality grounds). The slop
@@ -14935,7 +14970,7 @@ if (invokedDirectly) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
     // Ragione legittima #5 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
-    process.exit(EXIT_NO_ARTICLE_DECLARED);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
   // invocation path (self-trigger chain re-dispatching a single evergreen
@@ -14945,10 +14980,10 @@ if (invokedDirectly) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
     // Ragione legittima #4 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
-    process.exit(EXIT_NO_ARTICLE_DECLARED);
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });
   console.error(`\n❌ Errore: ${e.message}`);
-  process.exit(1);
+  await exitAfterFlush(1);
 });
 }
