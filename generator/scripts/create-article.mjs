@@ -2162,6 +2162,25 @@ const NEWS_SOURCES = [
   'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_aperture.xml',
   'https://media.laregione.ch/files/domains/laregione.ch/rss/feed_rss.xml',
   // Canton Ticino istituzionale (RSS)
+  //
+  // 2026-08-18: `ti.ch` risultava STERILE in 16 scansioni su 16, e i due URL
+  // qui sotto rispondono entrambi 200 con RSS valido — non erano rotti, erano
+  // i feed sbagliati. Sondati oggi, item per item, con il parser di
+  // `extractRssItems`:
+  //   · rss-comunicati-1108.xml → 10 item, 3 negli ultimi 3 giorni, MA `1108`
+  //     e' l'id della **Polizia cantonale**: annegamenti, incidenti,
+  //     accoltellamenti. Passa lo scan e muore nel classificatore, che e' il
+  //     comportamento giusto per quel contenuto.
+  //   · rss-attualita.xml → 10 item, **0 negli ultimi 30 giorni**, il piu'
+  //     recente di 33 giorni: e' il notiziario statistico USTAT, che pubblica di
+  //     rado. Resta perche' USTAT e' la fonte dei dati sui frontalieri, ma con
+  //     `MAX_ARTICLE_AGE_DAYS = 3` non puo' produrre niente.
+  // Il feed istituzionale vero mancava: `rss-comunicati.xml` senza suffisso e'
+  // l'Area media del Cantone (8 item, 3 negli ultimi 3 giorni, 6 negli ultimi
+  // 7 — «Sussidi di cassa malati: la richiesta diventa anche digitale»,
+  // «Chiusura della galleria Vedeggio-Cassarate»). E' linkato dalla home di
+  // www.ti.ch insieme agli altri; e' quello che serviva.
+  'https://www3.ti.ch/xml/rss/rss-comunicati.xml',
   'https://www3.ti.ch/xml/rss/rss-comunicati-1108.xml',
   'https://www3.ti.ch/xml/rss/rss-attualita.xml',
   // comozero
@@ -2172,8 +2191,13 @@ const NEWS_SOURCES = [
   'https://www.varesenews.it/feed/',
   // varesenoi
   'https://www.varesenoi.it/rss.xml',
-  // il giornale del ticino
-  'https://www.ilgiornaledelticino.ch/feed/',
+  // il giornale del ticino — SPENTO il 2026-08-18 dopo `fetch failed` in 8 run
+  // su 8. Non e' un problema di path: il DNS risolve (83.166.147.173) ma la
+  // connessione TCP va in timeout su apex e www, http e https, da rete diversa
+  // da quella dei runner. Il sito e' giu', non spostato. Resta commentato e non
+  // cancellato perche' se torna su basta togliere le due barre; finche' e' qui
+  // costa 15 secondi di `AbortSignal.timeout` per run e una fonte «fallita».
+  // 'https://www.ilgiornaledelticino.ch/feed/',
   // copertura categoria economia per aumentare topic finanziari/lavoro
   'https://www.cdt.ch/news/economia',
   'https://www.cdt.ch/news/svizzera',
@@ -2257,7 +2281,8 @@ const RSS_FALLBACK_MAP = {
   'https://www.varesenews.it/tag/frontalieri/feed/': 'https://www.varesenews.it/tag/frontalieri/',
   'https://www.varesenews.it/feed/': 'https://www.varesenews.it/',
   'https://www.varesenoi.it/rss.xml': 'https://www.varesenoi.it/sommario/argomenti/economia-7.html',
-  'https://www.ilgiornaledelticino.ch/feed/': 'https://www.ilgiornaledelticino.ch',
+  // Spento insieme alla sua voce in NEWS_SOURCES (sito giu' dal 2026-08, TCP timeout).
+  // 'https://www.ilgiornaledelticino.ch/feed/': 'https://www.ilgiornaledelticino.ch',
   'https://www.rsi.ch/info/svizzera/?f=rss': 'https://www.rsi.ch/info/svizzera/',
   // swissinfo.ch removed — 410 Gone (FRO-415)
   // admin.ch removed — WAF challenge (FRO-415)
@@ -2705,6 +2730,11 @@ function normalizeSourceDomain(domain) {
     .replace(/^www\d?\./, '');
 }
 
+// L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
+// che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
+// top-level a tutti gli effetti, quindi resta issata come le altre.
+import { ledgerViewsForLookup, makeLedgerEntry } from './lib/source-url-ledger.mjs';
+
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
   try {
@@ -2740,7 +2770,15 @@ function loadAllSectionSourceUrls() {
 
 function saveSourceUrls(map) {
   try {
-    // Keep only last 500 entries to avoid unbounded growth
+    // Keep only the last 500 entries to avoid unbounded growth.
+    //
+    // Questo cap NON e' la finestra temporale: e' una FIFO, e al ritmo misurato
+    // di ~9 registrazioni al giorno per sezione sfratta solo cio' che supera i
+    // ~55 giorni. La scadenza vera vive in `source-url-ledger.mjs` ed e'
+    // applicata in LETTURA (`isSourceUrlAlreadyUsed`), mai qui: il file resta
+    // il registro completo di cio' che ogni sezione ha gia' usato, perche' e'
+    // anche cio' che l'ALTRA sezione legge per il dedup cross-sezione, dove non
+    // c'e' scadenza. Potare in scrittura cancellerebbe quella garanzia.
     const entries = Object.entries(map);
     const trimmed = entries.length > 500
       ? Object.fromEntries(entries.slice(-500))
@@ -2851,7 +2889,19 @@ function extractUrlSlugWords(rawUrl) {
 function isSourceUrlAlreadyUsed(headlineUrl) {
   const normalized = normalizeNewsUrl(headlineUrl);
   // Exact match — sezione attiva per prima, poi le sorelle.
-  const exact = findCrossSectionSourceDuplicate(normalized, loadAllSectionSourceUrls(), SECTION_NAME);
+  //
+  // `ledgerViewsForLookup` applica la finestra di `SOURCE_URL_TTL_DAYS` alla
+  // SOLA sezione attiva e lascia permanenti le sorelle: il riuso dentro la
+  // sezione ha ancora `preFlightHeadlineCheck`, `checkForDuplicates` e
+  // `checkSemanticNearDuplicate` a valle, la garanzia cross-sezione di #251 no.
+  // Le viste che ne escono hanno valori STRINGA, che e' cio' che
+  // `findCrossSectionSourceDuplicate` sa leggere: il modulo `identical`
+  // `cross-section-dedup.mjs` non cambia forma per questa fix.
+  const exact = findCrossSectionSourceDuplicate(
+    normalized,
+    ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME),
+    SECTION_NAME,
+  );
   if (exact.used) return exact;
   // Fuzzy URL slug vs existing article ID match
   const urlWords = extractUrlSlugWords(headlineUrl);
@@ -2883,7 +2933,11 @@ function recordSourceUrl(sourceUrl, articleId) {
   if (!sourceUrl || sourceUrl.startsWith('evergreen://')) return;
   const map = loadSourceUrls();
   const normalized = normalizeNewsUrl(sourceUrl);
-  map[normalized] = articleId;
+  // `{articleId, ts}` e non la stringa nuda: senza un istante di registrazione
+  // il ledger non ha modo di dire quali voci sono ancora attuali, ed e' cio'
+  // che lo aveva reso un cricchetto. Le voci storiche restano stringhe e
+  // restano permanenti — vedi `source-url-ledger.mjs`.
+  map[normalized] = makeLedgerEntry(articleId);
   saveSourceUrls(map);
   console.error(`  📎 Source URL registrata: ${normalized} → ${articleId}`);
 }
@@ -5542,6 +5596,15 @@ async function fetchPageContent(url) {
 
 // ── Date filtering: only articles from the last 3 days ──────
 const MAX_ARTICLE_AGE_DAYS = 3;
+// Legato a `SOURCE_URL_TTL_DAYS` (`lib/source-url-ledger.mjs`, oggi 5), che deve
+// restare STRETTAMENTE maggiore di questo numero. E' quell'ordine a rendere
+// sicura la scadenza del ledger delle fonti: una headline DATATA piu' vecchia di
+// MAX_ARTICLE_AGE_DAYS e' gia' scartata qui, prima del ledger; una piu' recente
+// non puo' essere scaduta la', perche' la finestra si apre solo dopo. Ne segue
+// che la scadenza puo' riammettere SOLO headline undated, mai riaprire un
+// documento di fonte ancora fresco. Invertire i due numeri toglierebbe la
+// garanzia in silenzio — `generator/tests/source-url-ledger-ttl.test.mjs`
+// verifica la relazione.
 
 /** Try to extract a publication date from a URL path (e.g. /2026/02/18/ or /20260218/) */
 function extractDateFromUrl(url) {
