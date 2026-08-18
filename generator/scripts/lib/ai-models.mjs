@@ -3672,18 +3672,45 @@ export function classifyNonRetryableError(status, bodyText = '') {
   //   2. 2026-08-14, run 31823202761 — three retired Gemini models, 48 futile
   //      404s. Fixed by widening the matcher to Google's wording.
   //   3. 2026-08-18, run 32169621635 — 163 futile 404s over 12 GitHub Models
-  //      endpoints, empty body in all 163. GitHub Models, not Gemini: no wording
-  //      could have been added, because there was no wording.
+  //      endpoints, empty body in all 163.
   // "Deleting the models is the symptom; this line is the cause" said the
   // previous version of this comment, and it was right — the symptom was treated
   // twice while the line stayed. There is no longer a condition to miss.
   //
+  // ── WHAT THE THIRD ONE ACTUALLY IS, AND WHAT THIS LINE DOES NOT FIX ────────
+  //
+  // Case 3 is NOT a retired model, and saying so would send the next reader
+  // hunting the roster again. Measured 2026-08-18, unauthenticated POST:
+  //
+  //   GH_MODELS_BASE (models.inference.ai.azure.com/chat/completions)
+  //     → 404, size=0, identical with and without an Authorization header
+  //   models.github.ai/inference/chat/completions (the successor host)
+  //     → 410 {"error":{"code":"github_models_retirement_brownout", …}}
+  //
+  // A live endpoint answers 401 to a missing token, not 404 with an empty body.
+  // And GitHub Models DOES have wording for a model it retires — a 400 whose
+  // body carries `unknown_model`, recorded in the roster comments above
+  // (Meta-Llama-3.1-405B-Instruct, Cohere-command-r, Llama-3.2-90B). So the
+  // thing without wording is the ROUTE, not the model: every GitHub-hosted id
+  // in the chain 404s, all run long, because the host is gone.
+  //
+  // Which means this branch stops the bleeding — 163 dead round-trips per run
+  // become one per model — but it is NOT the cure. The cure is GH_MODELS_BASE
+  // and, given the brownout, the fate of the whole GitHub Models provider in
+  // the chain. Do not read a quiet log as a recovered provider.
+  //
   // The risk is the one already accepted for 402, and it is bounded: `exhausted`
-  // holds for the CURRENT RUN only. An endpoint that comes back to life is
-  // picked up again on the next run (~13 minutes at the current cadence).
+  // holds for the CURRENT RUN only — it is never persisted, because
+  // _persistScoresToFirestore writes `exhaustedUntil` only when _exhaustReason
+  // is 'quota'. An endpoint that comes back to life is therefore picked up again
+  // on the next run (~17 minutes at the measured cadence); this particular one
+  // will not come back, but that is the property that keeps the rule cheap.
   // Silencing is NOT removal: no model leaves the roster, the score ledger or
   // the tally (constraint from nanako#380 — removing them turns
-  // tests/local-llm-fallback.test.ts deterministically red, nanako#362).
+  // tests/local-llm-fallback.test.ts deterministically red, nanako#362). One
+  // side effect worth knowing: recordModelFailure applies SCORE_NON_RETRYABLE
+  // once per failed CALL, so a dead endpoint now sinks in the ledger 16x slower
+  // than it did while it was being re-called 32 times a run.
   if (status === 404) {
     return { nonRetryable: true, markExhausted: true };
   }
