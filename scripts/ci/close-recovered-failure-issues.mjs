@@ -97,8 +97,15 @@
  *      never to "never closes".
  *
  * The hold posts ONE comment (idempotent via HOLD_MARKER) and leaves the issue open. It
- * never labels, never reopens, never edits: the reconciler's blast radius stays "close
- * or don't close".
+ * never reopens and never closes something it did not decide to close: the structural
+ * hold's blast radius stays "close or don't close".
+ *
+ * IT DOES LABEL, though — since the chronic-recurrence gate (#249). The blast radius is
+ * NOT "never edits" any more, and pretending otherwise is how the next reader gets
+ * surprised: `applyChronicLabels()` runs `gh issue edit --add-label priority:urgent
+ * --add-label needs-human --remove-label priority:high|medium|low` when a failure
+ * recurs past threshold, and `clearChronicLabels()` takes them back off when it stops.
+ * Both are best-effort: a failing `gh` never changes the close/don't-close verdict.
  *
  * ALGORITHM for `Crawler Failure:` issues — DIFFERENT since the crawler-workflow
  * consolidation (2026-07, see scripts/generate-crawler-group-workflows.mjs): 581
@@ -450,6 +457,13 @@ function recurrenceOptions() {
  * a different reporter and a different cadence, on a measurement taken on the workflow
  * family is exactly the kind of unannounced side effect this repo keeps biting on.
  *
+ * SCOPE OF THAT PROMISE: it covers THIS gate only, and it is a cost argument, not a
+ * semantic one. The chronic-recurrence gate further down reads the issue's COMMENTS,
+ * which cost the same single call for every family, so it does apply to
+ * `Crawler Failure:` — measured on that family, see the "SOGLIA" block there. Do not
+ * read "the crawler family is untouched" out of this paragraph: it is not true of the
+ * file as a whole, and #5139 is the issue that proves it.
+ *
  * @param {Array<{conclusion?: string, createdAt?: string}>|null} runs newest-first
  * @param {{ now?: number, windowHours?: number, maxRecurrences?: number,
  *           minGreenStreak?: number, maxFailureRate?: number }} [opts]
@@ -562,11 +576,36 @@ export function recurrenceHoldNote({ workflow, runUrl, decision } = {}) {
 // (`RECURRENCE_MARKER`), sia la riapertura di una issue chiusa sia il commento su
 // una issue già aperta, e `countRecentFailureEvents()` lì conta gli stessi commenti.
 //
-// SOGLIA, misurata sulle 22 issue di fallimento chiuse di questo repo (massimo di
-// commenti `🔁` in una finestra mobile di 168h): #249 → 45; #411 → 3; #62 → 2; le
-// altre 19 → 0. La distribuzione è bimodale, non c'è una coda da tarare: a 5 il gate
-// scatta su #249 e su nessun'altra. #249 avrebbe superato la soglia già alla quinta
-// ricorrenza, cioè giorni prima che il costo arrivasse a 26,6 ore.
+// QUESTO GATE VALE PER TUTTE E TRE LE FAMIGLIE, `Crawler Failure:` COMPRESA.
+// È il punto in cui differisce dal gate di ricorrenza qui sopra, e la differenza non
+// è un'incoerenza: quel gate legge lo STORICO DELLE RUN, che per uno step di
+// background costerebbe una chiamata alla Jobs API per ogni run storica, e per questo
+// lì è un no-op dichiarato. Questo legge i COMMENTI della issue, che costano una sola
+// chiamata identica per ogni famiglia. Non c'è quindi una ragione di costo per
+// esentare i crawler, e la ragione semantica punta nel verso opposto (vedi sotto).
+//
+// SOGLIA — misurata su DUE famiglie, perché sono due popolazioni diverse.
+//
+// Famiglia `Workflow Failure:`, 22 issue di fallimento chiuse di questo repo (massimo
+// di commenti `🔁` in una finestra mobile di 168h): #249 → 45; #411 → 3; #62 → 2; le
+// altre 19 → 0. Bimodale, nessuna coda da tarare: a 5 il gate scatta su #249 e su
+// nessun'altra. #249 avrebbe superato la soglia già alla quinta ricorrenza, cioè
+// giorni prima che il costo arrivasse a 26,6 ore.
+//
+// Famiglia `Crawler Failure:`, campione delle 60 issue chiuse più recenti del sito
+// (`valerielinc-ops/frontaliere-si-o-no`, misurato il 2026-08-18 — è lì che vive
+// questa famiglia: qui il corpus non ha crawler). Stesso massimo mobile a 168h:
+// 54/60 → 0; poi 1, 2, 2, 4, 6, 9. Bimodale anche questa, con lo stacco fra 2 e 4.
+// A 5 il gate scatta su 2/60 (3,3%): #5017 (9) e #4731 (6). La soglia misurata sulla
+// famiglia `Workflow` regge quindi anche qui — ma ora è misurata, non presunta, ed è
+// questa riga il motivo per cui `Crawler Failure:` non è esentata.
+//
+// PERCHÉ NON ESENTARLA. Al 2026-08-18 l'unica issue crawler aperta sul sito è #5139
+// `Crawler Failure: Run grace`: 6 commenti `🔁` fra il 15-08 21:57 e il 18-08 09:55,
+// e già `fu-parked` — cioè il drainer ha esaurito MAX_ATTEMPTS e ha smesso. È il caso
+// #249 esatto su un'altra famiglia: esentare i crawler vorrebbe dire lasciare che il
+// solo guasto cronico oggi osservabile continui a essere auto-chiuso a ogni run verde
+// e riaperto alla ricorrenza dopo, che è il difetto che questo file ripara.
 //
 // I LABEL. `priority:urgent` perché il costo misurato lo è, e `needs-human` perché
 // l'automazione ha già provato e si è fermata da sola: #249 porta `fu-parked`, che il
@@ -574,8 +613,29 @@ export function recurrenceHoldNote({ workflow, runUrl, decision } = {}) {
 // `setIssuePriorityLabel()` nel creator, per non lasciare due priorità in conflitto
 // sulla stessa issue. Best-effort: se un label non esiste nel repo, `gh` fallisce e
 // il gate resta comunque un hold — il label è la visibilità, non la decisione.
+//
+// I LABEL SI TOLGONO. `needs-human` è un filtro di ESCLUSIONE, non un selettore:
+// `scripts/ci/followup-drainer.mjs` lo usa per tenere una issue fuori dal pool dei
+// retry parcheggiati (:1091) e fuori dal rescue `agent:fix` dei crawler (:1204).
+// Applicarlo e non toglierlo mai renderebbe l'escalation una porta a senso unico: la
+// issue si richiuderebbe quando la finestra si svuota, ma una riapertura successiva
+// ripartirebbe già esclusa da ogni coda automatica, per sempre. Quindi quando il
+// conteggio rientra sotto soglia i label cronici vengono rimossi — vedi
+// `decideChronicDeescalation()`. Il `priority:*` non si ripristina perché non serve:
+// alla ricorrenza successiva è il reporter a riscriverlo (`setIssuePriorityLabel()`
+// in github-issue-creator.mjs), e nel frattempo la issue sta per essere chiusa.
 
-/** Lo stesso marker che il reporter scrive su ogni ricorrenza (github-issue-creator.mjs). */
+/**
+ * Lo stesso marker che il reporter scrive su ogni ricorrenza.
+ *
+ * È una COPIA di `RECURRENCE_MARKER` in `scripts/lib/github-issue-creator.mjs:75`, che
+ * lì è privato: un contratto senza forma di import, quindi invisibile a ogni guard che
+ * segue gli import. Se il creator cambiasse marker, `countRecurrences()` tornerebbe 0,
+ * il gate cronico morirebbe in silenzio e la CI resterebbe verde. Lo tiene ancorato una
+ * asserzione grep nella suite `close-recovered-recurrence` — qui
+ * `generator/tests/close-recovered-recurrence.test.mjs`, sul sito la gemella sotto
+ * `tests/` in TypeScript — con la stessa tecnica che ancora il template del titolo.
+ */
 export const RECURRENCE_MARKER = '🔁';
 /** Ricorrenze nella finestra oltre le quali la issue è cronica e non si richiude. */
 export const DEFAULT_CHRONIC_RECURRENCES = 5;
@@ -646,8 +706,51 @@ export function chronicEscalationNote({ workflow, decision } = {}) {
     '',
     `Da adesso resta aperta con \`${CHRONIC_LABELS.join('`, `')}\` finché qualcuno la chiude a mano dopo aver applicato un fix. Le ricorrenze successive continuano ad accumularsi qui, in un thread solo.`,
     '',
+    `Finché \`needs-human\` è applicata la issue compare nel digest giornaliero di \`recycle-stale-prs.yml\`. Se il guasto smette da solo e il conteggio rientra sotto ${d.threshold ?? DEFAULT_CHRONIC_RECURRENCES} nella finestra, questi label vengono tolti automaticamente e la issue torna nel flusso normale — l'escalation non è una porta a senso unico.`,
+    '',
     CHRONIC_MARKER,
   ].join('\n');
+}
+
+/**
+ * Decide se TOGLIERE i label cronici. È la metà mancante di `applyChronicLabels()`.
+ *
+ * `needs-human` non è una segnalazione: è un filtro di esclusione letto da
+ * `followup-drainer.mjs` (:1091 pool dei retry parcheggiati, :1204 rescue `agent:fix`
+ * dei crawler). Lasciarlo appeso dopo che il guasto è rientrato esclude la issue da
+ * ogni coda automatica anche alla riapertura successiva, cioè per sempre.
+ *
+ * Pura. Toglie solo se ci sono tutte e tre le condizioni, così non spende una chiamata
+ * `gh` per passata oraria su ogni issue già pulita:
+ *  1. la decisione corrente NON è un hold cronico (il conteggio è rientrato);
+ *  2. l'escalation c'era davvero (CHRONIC_MARKER nei commenti);
+ *  3. almeno uno dei label cronici è ancora sulla issue ADESSO.
+ *
+ * Il `priority:*` soppresso non viene ripristinato: non lo conosciamo più, e non serve.
+ * Alla ricorrenza successiva lo riscrive il reporter (`setIssuePriorityLabel()` in
+ * github-issue-creator.mjs), e nel frattempo la issue sta per essere chiusa.
+ *
+ * @param {{ comments?: Array|null, labels?: Array<string>|null,
+ *           decision?: { hold?: boolean } }} [input]
+ * @returns {{ clear: boolean, labels: string[], reason: string }}
+ */
+export function decideChronicDeescalation({ comments, labels, decision } = {}) {
+  const none = (reason) => ({ clear: false, labels: [], reason });
+  if (decision?.hold) return none('ancora cronica');
+  const escalated = Array.isArray(comments)
+    && comments.some((c) => String(c?.body || '').includes(CHRONIC_MARKER));
+  // Commenti illeggibili → non togliamo niente: non sapremmo se l'escalation c'è mai
+  // stata, e togliere label a caso è peggio che lasciarli un'ora in più.
+  if (!escalated) return none('nessuna escalation cronica da revocare');
+  const present = Array.isArray(labels)
+    ? CHRONIC_LABELS.filter((l) => labels.includes(l))
+    : [];
+  if (present.length === 0) return none('label cronici già assenti');
+  return {
+    clear: true,
+    labels: present,
+    reason: `rientrata sotto soglia: tolgo ${present.join('+')}`,
+  };
 }
 
 // ──────────────────────────────────────────────────────────────────────────────────────
@@ -668,7 +771,9 @@ function gh(args, { allowFailure = false } = {}) {
 function listFailureIssues() {
   const out = gh([
     'issue', 'list', '--state', 'open', '--limit', '300',
-    '--json', 'number,title,createdAt', ...repoFlag(),
+    // `labels` serve solo alla de-escalation cronica: arriva già in questa chiamata,
+    // così non costa un giro `gh` in più per issue (vedi decideChronicDeescalation).
+    '--json', 'number,title,createdAt,labels', ...repoFlag(),
   ]);
   return JSON.parse(out)
     .map((i) => ({ issue: i, m: TITLE_RE.exec(i.title) }))
@@ -677,6 +782,7 @@ function listFailureIssues() {
       number: issue.number,
       title: issue.title,
       createdAt: issue.createdAt,
+      labels: (issue.labels || []).map((l) => l?.name).filter(Boolean),
       workflow: m[1].trim(),
     }));
 }
@@ -836,6 +942,23 @@ function applyChronicLabels(issueNumber) {
   return true;
 }
 
+/**
+ * Toglie i label cronici quando il guasto è rientrato. Best-effort come l'applicazione:
+ * se `gh` fallisce, la decisione di chiudere (o di tenere aperta) non cambia.
+ */
+function clearChronicLabels(issueNumber, labels) {
+  const out = gh([
+    'issue', 'edit', String(issueNumber),
+    ...labels.flatMap((l) => ['--remove-label', l]),
+    ...repoFlag(),
+  ], { allowFailure: true });
+  if (out === null) {
+    console.error(`  #${issueNumber} label cronici non rimossi (best-effort) — riprovo alla passata successiva`);
+    return false;
+  }
+  return true;
+}
+
 function main() {
   const issues = listFailureIssues();
   const maxDays = holdMaxDays();
@@ -846,6 +969,7 @@ function main() {
   let skipped = 0;
   let held = 0;
   let chronic = 0;
+  let deescalated = 0;
 
   for (const it of issues) {
     const crawlerStepMatch = CRAWLER_STEP_RE.exec(it.workflow);
@@ -897,6 +1021,20 @@ function main() {
         }
         chronic++;
         continue;
+      }
+
+      // Il conteggio è rientrato: se l'escalation c'era, i label cronici se ne vanno
+      // adesso. `needs-human` è un'esclusione dalle code del drainer, quindi lasciarlo
+      // appeso renderebbe l'escalation irreversibile anche dopo la riapertura.
+      const deescalation = decideChronicDeescalation({ comments, labels: it.labels, decision: chronicDecision });
+      if (deescalation.clear) {
+        if (DRY_RUN) {
+          console.log(`  #${it.number} WOULD DE-ESCALATE — ${deescalation.reason}`);
+        } else {
+          clearChronicLabels(it.number, deescalation.labels);
+          console.log(`  #${it.number} de-escalated — ${deescalation.reason}`);
+        }
+        deescalated++;
       }
 
       // Gate 2 — RICORRENZA MISURATA. Una run verde su un guasto intermittente non
@@ -958,7 +1096,7 @@ function main() {
     }
   }
 
-  console.log(`[close-recovered] done: closed=${closed} held=${held} chronic=${chronic} kept=${kept} skipped=${skipped}`);
+  console.log(`[close-recovered] done: closed=${closed} held=${held} chronic=${chronic} de-escalated=${deescalated} kept=${kept} skipped=${skipped}`);
 }
 
 // CLI entry point (guarded so this module can be imported for unit tests without
