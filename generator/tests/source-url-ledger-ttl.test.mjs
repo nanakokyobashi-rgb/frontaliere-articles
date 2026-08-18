@@ -35,6 +35,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import {
+  SOURCE_URL_KEY_FORM,
   SOURCE_URL_TTL_DAYS,
   isLedgerEntryExpired,
   ledgerArticleId,
@@ -65,10 +66,18 @@ const ago = (days) => new Date(NOW - days * DAY).toISOString();
 // ── Strato 1: lettura delle due forme ────────────────────────────────────────
 
 test('readLedgerEntry accetta la stringa storica e la voce datata', () => {
-  assert.deepEqual(readLedgerEntry('permesso-g-2026'), { articleId: 'permesso-g-2026', ts: null });
+  // `keyForm: 1` sulle due forme storiche non è un dettaglio: è ciò che le
+  // rende interrogabili dal ponte verso la chiave path-only. Una voce che
+  // arrivasse dal file con `keyForm` assente e venisse letta come forma 2
+  // uscirebbe dal ponte e riaprirebbe un duplicato cross-sezione.
+  assert.deepEqual(readLedgerEntry('permesso-g-2026'), { articleId: 'permesso-g-2026', ts: null, keyForm: 1 });
   assert.deepEqual(
     readLedgerEntry({ articleId: 'permesso-g-2026', ts: ago(1) }),
-    { articleId: 'permesso-g-2026', ts: ago(1) },
+    { articleId: 'permesso-g-2026', ts: ago(1), keyForm: 1 },
+  );
+  assert.deepEqual(
+    readLedgerEntry({ articleId: 'permesso-g-2026', ts: ago(1), keyForm: 2 }),
+    { articleId: 'permesso-g-2026', ts: ago(1), keyForm: 2 },
   );
   assert.equal(ledgerArticleId({ articleId: 'x-1', ts: ago(1) }), 'x-1');
   assert.equal(ledgerArticleId('x-1'), 'x-1');
@@ -86,6 +95,11 @@ test('makeLedgerEntry scrive SEMPRE un ts — è ciò che rende databile il ledg
   assert.equal(e.articleId, 'nuovo-articolo');
   assert.equal(e.ts, new Date(NOW).toISOString());
   assert.equal(isLedgerEntryExpired(e, { now: NOW }), false);
+  // Senza il marcatore il ponte verso la chiave path-only tratterebbe anche le
+  // voci nuove come forma 1, e ritroverebbe la prima registrazione di un feed
+  // query-identificato dal path nudo di tutte le successive: il collasso
+  // tornerebbe intero, con la CI verde.
+  assert.equal(e.keyForm, SOURCE_URL_KEY_FORM);
 });
 
 // ── Strato 2: la migrazione — un file di sole stringhe non scade ──────────────
