@@ -1451,9 +1451,19 @@ const _exhaustedModels = new Set();
 // subsequent GitHub calls skip them and go straight to a fresh account's PAT.
 // Reset per run (resetState) — daily limits reset on the provider side anyway.
 const _ghExhaustedPats = new Set();
-// modelId → reason it was exhausted ('quota' | 'timeout' | 'content' | 'stale' |
-// 'nonretryable'). Gates the GitHub multi-PAT skip-exemption (quota only).
+// modelId → reason it was exhausted ('quota' | 'account' | 'timeout' | 'content' |
+// 'stale' | 'nonretryable'). Gates the GitHub multi-PAT skip-exemption (quota
+// only) and the cross-process persistence in _persistScoresToFirestore ('quota'
+// and 'account' only — see there).
 const _exhaustReason = new Map();
+// How long an 'account' exhaustion (HTTP 401/402/404/410 — see
+// classifyNonRetryableError) survives across processes. Short and fixed, NOT
+// _persistScoresToFirestore's midnight-UTC quota expiry: a depleted monthly
+// credit or a manual top-up can land at any hour, and "account" facts are not
+// daily-limit facts (issue #446). Kept in sync by hand with the copy in
+// scripts/ci/exhaustion-reason-report.mjs (KNOWN_REASONS has no import path
+// between the two — see generator/tests/exhaustion-reason-report.test.mjs).
+const ACCOUNT_EXHAUST_TTL_MS = 6 * 60 * 60 * 1000;
 // modelId → optional free-text detail for that reason, e.g. 'HTTP 402'. Kept
 // separate from _exhaustReason so the coarse reason values the multi-PAT
 // exemption compares against (`=== 'quota'`) stay a closed set, while the skip
@@ -2495,9 +2505,13 @@ export async function initScoreStore() {
           : new Date(data.exhaustedUntil); // ISO string fallback
         if (resetTime > now) {
           _exhaustedModels.add(modelId);
-          // Persisted exhaustedUntil is the daily-limit (quota) path → eligible
-          // for the GitHub multi-PAT skip-exemption.
-          _exhaustReason.set(modelId, 'quota');
+          // `entry.exhaustReason` distinguishes the two persisted paths
+          // ('quota' → eligible for the GitHub multi-PAT skip-exemption;
+          // 'account' → issue #446, short-TTL account-level ban, never PAT-
+          // exempt). Docs written before that field existed have no
+          // exhaustReason at all — they can only be 'quota', since 'account'
+          // persistence didn't exist yet — so default to 'quota' for them.
+          _exhaustReason.set(modelId, data.exhaustReason === 'account' ? 'account' : 'quota');
           exhaustedRestored++;
           console.warn(`🚫 [ScoreStore] ${modelId} still exhausted until ${resetTime.toISOString().slice(0, 16)}`);
         }
@@ -2625,31 +2639,53 @@ async function _persistScoresToFirestore() {
       }
     }
 
-    // If model is exhausted, persist the reset time (next midnight UTC) —
-    // but ONLY for 'quota' exhaustion, which is the one reason that
-    // genuinely lasts until the provider's daily reset. The other breaker
-    // reasons (timeout / content / nonretryable) describe a single call's
-    // outcome in THIS process: a 20-min article generation that timed out,
-    // or two malformed-JSON replies to one big schema prompt, say nothing
-    // about the model serving a different workflow's small prompt right
-    // now. Persisting those used to ban the model for EVERY workflow until
-    // midnight UTC via the shared aggregate doc, silently shrinking the
+    // If model is exhausted, persist a reset time — but ONLY for the two
+    // reasons that genuinely describe a fact outliving THIS process rather
+    // than one call's outcome:
+    //
+    //   'quota'   next midnight UTC — the provider's daily reset.
+    //   'account' now + ACCOUNT_EXHAUST_TTL_MS (issue #446) — a stale key
+    //             (401), depleted credit (402), retired model (404) or dead
+    //             route (410) is a fact about the ACCOUNT, so re-probing it
+    //             from a fresh process minutes later just re-pays the same
+    //             402 — measured at 12 models paying it twice in one run
+    //             27 minutes apart. It does NOT get quota's midnight-UTC
+    //             expiry: a monthly credit doesn't reset at midnight and a
+    //             manual top-up can land at any hour, so a short fixed TTL
+    //             bounds the cost of a wrong ban instead of pretending to
+    //             know when the account will recover.
+    //
+    // Every other breaker reason (timeout / content / nonretryable) describes
+    // a single call's outcome in THIS process: a 20-min article generation
+    // that timed out, or two malformed-JSON replies to one big schema prompt,
+    // say nothing about the model serving a different workflow's small prompt
+    // right now. Persisting those used to ban the model for EVERY workflow
+    // until midnight UTC via the shared aggregate doc, silently shrinking the
     // free-tier pool on thin evidence — a driver of the recurring
     // "tutti i modelli esauriti" deferrals that zero article production.
     // In-process the ban still holds for the rest of the run (that's the
     // circuit-breaker working); it just doesn't outlive the process.
     // Local CPU fallback is exempt from persistence entirely: it has no
     // daily-quota concept — see the matching restore-path guard above
-    // (initScoreStore), which likewise assumes persisted = quota.
+    // (initScoreStore), which likewise reads exhaustReason off the doc.
+    const exhaustReasonForPersist = _exhaustReason.get(modelId);
     if (
       _exhaustedModels.has(modelId) &&
       !_isLastResortProvider(modelId) &&
-      _exhaustReason.get(modelId) === 'quota'
+      exhaustReasonForPersist === 'quota'
     ) {
       const tomorrow = new Date();
       tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
       tomorrow.setUTCHours(0, 0, 0, 0);
       entry.exhaustedUntil = tomorrow.toISOString();
+      entry.exhaustReason = 'quota';
+    } else if (
+      _exhaustedModels.has(modelId) &&
+      !_isLastResortProvider(modelId) &&
+      exhaustReasonForPersist === 'account'
+    ) {
+      entry.exhaustedUntil = new Date(Date.now() + ACCOUNT_EXHAUST_TTL_MS).toISOString();
+      entry.exhaustReason = 'account';
     } else {
       entry.exhaustedUntil = null;
     }
@@ -3239,11 +3275,20 @@ export function getDeclaredRequestTokenLimit(model) {
  * and persisted to Firestore so other workflows also skip it.
  */
 // `reason` records WHY a model was exhausted so the GitHub multi-PAT exemption
-// only resurrects quota/daily-limit exhaustion (account-specific → rotation to a
-// fresh PAT can fix it), NOT timeout / content-failure / stale / non-retryable
-// exhaustion (account-independent → rotation cannot help, and re-trying would
-// neutralise those circuit-breakers). Default 'quota' covers the daily-limit and
-// rate-limit paths; the non-quota breakers pass an explicit reason.
+// only resurrects quota/daily-limit exhaustion (PAT-specific → rotation to a
+// fresh PAT can fix it), NOT timeout / content-failure / stale / non-retryable /
+// account exhaustion (fixed to the provider account itself, not to which PAT
+// asked → rotation cannot help, and re-trying would neutralise those circuit-
+// breakers). Default 'quota' covers the daily-limit and rate-limit paths; the
+// non-quota breakers pass an explicit reason.
+//
+// 'account' (HTTP 401/402/404/410 — see classifyNonRetryableError) is its own
+// reason, distinct from both 'quota' and 'nonretryable': it persists across
+// processes like 'quota' (see _persistScoresToFirestore), because paying the
+// same dead credential or depleted balance on every process is the bug issue
+// #446 measured — but with a short fixed TTL (ACCOUNT_EXHAUST_TTL_MS), not
+// quota's midnight-UTC reset, since a billing window doesn't reset at midnight
+// and a manual top-up can land at any hour.
 export function markModelExhausted(modelId, reason = 'quota', detail = '') {
   _exhaustedModels.add(modelId);
   _exhaustReason.set(modelId, reason);
@@ -3297,6 +3342,11 @@ function _exhaustSkipCause(model) {
     case 'stale':        return 'model no longer offered by provider';
     case 'content':      return 'repeated unusable content';
     case 'nonretryable': return `non-retryable provider error${detail ? ` (${detail})` : ''}`;
+    // 401/402/404/410 — an account-level fact (stale key, depleted credit,
+    // retired model, retired route), not the outcome of one call. See
+    // classifyNonRetryableError and markModelExhausted for why this is a
+    // separate reason from 'nonretryable' (issue #446).
+    case 'account':      return `account-level error${detail ? ` (${detail})` : ''}`;
     default:             return reason;
   }
 }
@@ -3310,10 +3360,12 @@ function _exhaustSkipCause(model) {
 // earlier today would be skipped on every later run, never reaching rotation.
 function _shouldSkipExhausted(model) {
   if (!_exhaustedModels.has(model)) return false;
-  // Only QUOTA/daily-limit exhaustion is account-specific and thus fixable by
-  // rotating to a fresh PAT. Timeout / content-failure / stale / non-retryable
-  // exhaustion would recur on every account, so those keep skipping (otherwise
-  // the circuit-breaker is neutralised and full timeouts re-incur per attempt).
+  // Only QUOTA/daily-limit exhaustion is PAT-specific and thus fixable by
+  // rotating to a fresh PAT. Timeout / content-failure / stale / non-retryable /
+  // account exhaustion would recur on every PAT (a depleted balance or a
+  // retired model is a fact about the provider account, not about which PAT
+  // asked), so those keep skipping — otherwise the circuit-breaker is
+  // neutralised and full timeouts re-incur per attempt.
   if (getProvider(model) === PROVIDER.GITHUB && _exhaustReason.get(model) === 'quota') {
     const pats = getGhModelsPats();
     if (pats.length > 1 && pats.some((_, i) => !_ghExhaustedPats.has(i))) return false;
@@ -3636,16 +3688,25 @@ export function classifyNonRetryableError(status, bodyText = '') {
   // key against the same endpoint will always 401. Mark the model exhausted for
   // this run so the chain falls through cleanly (e.g. codestral.mistral.ai with
   // a stale Codestral key, HuggingFace with a deprovisioned key, etc.).
+  //
+  // reason: 'account' (issue #446) — a stale key is a fact about the account,
+  // not about this one call. Distinct from the bare 'nonretryable' default so
+  // markModelExhausted persists it across processes with a short TTL instead
+  // of re-paying the same 401 in every subsequent process this run spawns.
+  // See ACCOUNT_EXHAUST_TTL_MS and _persistScoresToFirestore.
   if (status === 401) {
-    return { nonRetryable: true, markExhausted: true };
+    return { nonRetryable: true, markExhausted: true, reason: 'account' };
   }
 
   // HTTP 402 — depleted monthly credits / payment required. The model will not
   // recover until the billing window resets, so mark exhausted for this run.
   // Examples: HuggingFace hf/google/gemma-3-27b-it monthly credit depletion;
   // SambaNova PAYMENT_METHOD_REQUIRED.
+  //
+  // reason: 'account' — same as 401 above: depleted credit is an account fact,
+  // not a call outcome (issue #446).
   if (status === 402) {
-    return { nonRetryable: true, markExhausted: true };
+    return { nonRetryable: true, markExhausted: true, reason: 'account' };
   }
 
   // HTTP 404 — model not found (Cerebras, Groq, OpenRouter return 404 for invalid model IDs)
@@ -3700,19 +3761,29 @@ export function classifyNonRetryableError(status, bodyText = '') {
   // the chain. Do not read a quiet log as a recovered provider.
   //
   // The risk is the one already accepted for 402, and it is bounded: `exhausted`
-  // holds for the CURRENT RUN only — it is never persisted, because
-  // _persistScoresToFirestore writes `exhaustedUntil` only when _exhaustReason
-  // is 'quota'. An endpoint that comes back to life is therefore picked up again
-  // on the next run (~17 minutes at the measured cadence); this particular one
-  // will not come back, but that is the property that keeps the rule cheap.
-  // Silencing is NOT removal: no model leaves the roster, the score ledger or
-  // the tally (constraint from nanako#380 — removing them turns
+  // now persists across processes for reason 'account' (issue #446), but only
+  // for ACCOUNT_EXHAUST_TTL_MS (a few hours, not the 'quota' midnight-UTC
+  // reset) — see _persistScoresToFirestore. An endpoint that comes back to
+  // life inside that window still has to wait it out; the 32-calls-per-run
+  // bleeding this branch stops is worth that bounded delay. Silencing is NOT
+  // removal: no model leaves the roster, the score ledger or the tally
+  // (constraint from nanako#380 — removing them turns
   // tests/local-llm-fallback.test.ts deterministically red, nanako#362). One
   // side effect worth knowing: recordModelFailure applies SCORE_NON_RETRYABLE
   // once per failed CALL, so a dead endpoint now sinks in the ledger 16x slower
   // than it did while it was being re-called 32 times a run.
   if (status === 404) {
-    return { nonRetryable: true, markExhausted: true };
+    return { nonRetryable: true, markExhausted: true, reason: 'account' };
+  }
+
+  // HTTP 410 — the GitHub Models retirement brownout documented above: the
+  // successor host (models.github.ai) answers `github_models_retirement_
+  // brownout` for a route that is gone, not for one model. Same account-level
+  // shape as the 404 case right above it (issue #446): retrying gains nothing,
+  // so mark exhausted with the same short-TTL 'account' reason instead of
+  // falling through to `nonRetryable: false` and re-paying every cascade pass.
+  if (status === 410) {
+    return { nonRetryable: true, markExhausted: true, reason: 'account' };
   }
 
   if (status !== 400) return { nonRetryable: false, markExhausted: false };
@@ -4285,7 +4356,10 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
             _learnSchemaIncompatible(modelForTracking);
           }
           if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
-            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
+            // 'account' for 401/402/404/410 (issue #446): those persist across
+            // processes with a short TTL instead of the plain in-process
+            // 'nonretryable' ban every other non-retryable status gets.
+            markModelExhausted(modelForTracking, nrc.reason === 'account' ? 'account' : 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -5171,14 +5245,16 @@ async function _callGeminiRaw(model, messages, opts) {
             _learnSchemaIncompatible(model);
           }
           if (nrc.markExhausted) {
-            // 'nonretryable', NOT the default 'quota': this is the Gemini twin
-            // of the _callOpenAICompatible non-retryable branch, which already
-            // labels correctly. Left at the default, a 404/unknown-model here
-            // was persisted to the shared Firestore doc until midnight UTC as
-            // if it were a daily quota — exactly the over-persistence #4073
+            // NOT the default 'quota': this is the Gemini twin of the
+            // _callOpenAICompatible non-retryable branch, which already labels
+            // correctly. Left at the default, a 404/unknown-model here was
+            // persisted to the shared Firestore doc until midnight UTC as if
+            // it were a daily quota — exactly the over-persistence #4073
             // removed (quota-only persist gate in _persistScoresToFirestore).
-            // Review 🔴 on #4073.
-            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`);
+            // Review 🔴 on #4073. 'account' for 401/402/404/410 (issue #446)
+            // instead of the plain in-process 'nonretryable': those persist
+            // across processes too, but with a short TTL, not midnight UTC.
+            markModelExhausted(model, nrc.reason === 'account' ? 'account' : 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
