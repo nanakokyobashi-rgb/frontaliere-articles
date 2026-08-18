@@ -130,7 +130,13 @@ export function ledgerArticleIds(map, { maxAgeDays = null, now = Date.now() } = 
     const articleId = ledgerArticleId(value);
     if (!articleId) continue;
     if (maxAgeDays != null && isLedgerEntryExpired(value, { maxAgeDays, now })) continue;
-    out[url] = articleId;
+    // `defineProperty` e non `out[url] = …`: un URL che normalizzasse a
+    // `__proto__` verrebbe ASSORBITO dall'assegnazione semplice — il valore
+    // sparirebbe e la vista perderebbe una voce bloccante senza dirlo.
+    // `JSON.parse` invece quella chiave la crea come proprieta' propria, quindi
+    // la mappa in ingresso ce l'ha davvero. Stessa cura dell'`hasOwnProperty`
+    // in `cross-section-dedup.mjs`, dall'altro capo dello stesso dato.
+    Object.defineProperty(out, url, { value: articleId, enumerable: true, writable: true, configurable: true });
   }
   return out;
 }

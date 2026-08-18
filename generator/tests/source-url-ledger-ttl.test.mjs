@@ -142,6 +142,20 @@ test('senza finestra la vista è completa — è il default, e serve al ratchet'
   assert.equal(Object.keys(ledgerArticleIds(MISTO)).length, 4);
 });
 
+test('una chiave pericolosa sopravvive alla vista invece di essere assorbita', () => {
+  // `JSON.parse('{"__proto__": "x"}')` crea `__proto__` come proprietà PROPRIA,
+  // quindi la mappa in ingresso può averla davvero; `out[url] = …` la
+  // ingoierebbe in silenzio e la voce smetterebbe di bloccare.
+  const map = JSON.parse('{"__proto__": "id-proto", "constructor": "id-ctor", "https://a.ch/1": "id-a"}');
+  const vista = ledgerArticleIds(map);
+  assert.deepEqual(Object.keys(vista).sort(), ['__proto__', 'constructor', 'https://a.ch/1']);
+  assert.equal(Object.getOwnPropertyDescriptor(vista, '__proto__').value, 'id-proto');
+  assert.equal(Object.getPrototypeOf(vista), Object.prototype, 'la vista non deve aver cambiato prototipo');
+  const hit = findCrossSectionSourceDuplicate('__proto__', { frontaliere: vista }, 'frontaliere');
+  assert.equal(hit.used, true);
+  assert.equal(hit.articleId, 'id-proto');
+});
+
 // ── Strato 4: il ramo cross-sezione non scade MAI ────────────────────────────
 
 const URL_CONDIVISO = 'https://www.tio.ch/svizzera/economia/1943399/aziende-settori-fallite-effetto-svizzera';

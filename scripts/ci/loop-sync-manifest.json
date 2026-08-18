@@ -1549,7 +1549,7 @@
       "reason": "Forma delle voci dei due ledger URL->id (`{articleId, ts}` oltre alla stringa storica) e finestra oltre la quale una voce smette di bloccare la PROPRIA sezione. Nasce qui il 2026-08-18 perche' e' qui che la generazione vive: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' — misurato, `data/article-source-urls.json` sul sito e' fermo al 2026-08-07 e non cresce da 11 giorni, mentre il ledger frontaliere di qui ha preso +89 voci in dieci giorni (48 l'08-08, 137 il 18-08). Non e' `corpus-only-pending`: sul sito il difetto non e' operativo, quindi non c'e' un lavoro da tracciare, e una issue li' aprirebbe una PR del fixer su un percorso morto. Il modulo e' tenuto PURO apposta, quindi se un giorno il sito tornasse a generare e' copiabile senza adattamenti. Da non confondere con `cross-section-dedup.mjs`, che e' `identical` e che questa fix NON tocca: le viste URL->id che gli arrivano restano a valori stringa.",
       "baseline": {
         "site": null,
-        "corpus": "311f6c15e0ea64e5",
+        "corpus": "13f65a4e0809abdb",
         "alignedAt": "2026-08-18"
       }
     },
