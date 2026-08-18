@@ -670,6 +670,48 @@ describe('checkFabricatedNormAcronyms', () => {
     )).toEqual([]);
   });
 
+  // Il test sopra usa una frase bancaria SENZA anno, e con quella un contesto
+  // ad anno sembra funzionare. Non funziona: in un articolo su conti e mercati
+  // un anno vicino alla sigla è normale, e questa frase — ordinaria — veniva
+  // rigettata lo stesso. È il caso che ha motivato il passaggio dal contesto
+  // «anno» al contesto «citazione di norma».
+  it('leaves the French bank LCL alone even when a year sits right next to it', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL offre un conto dedicato ai frontalieri che lavorano in Svizzera.',
+    )).toEqual([]);
+  });
+
+  // Il requisito di contesto non deve diventare una scappatoia. Se il testo
+  // nomina PRIMA la banca e POI fabbrica la legge, il gate deve scattare: con
+  // una `re.exec` a match singolo la prima occorrenza consumava l'unico match
+  // e la fabbricazione passava in silenzio. Il difetto nasce con la guardia di
+  // contesto — senza, il primo match era sempre anche l'issue.
+  it('still flags a fabricated LCL that follows a legitimate bank mention', () => {
+    // La finestra della PRIMA occorrenza non deve contenere alcuna cue, o il
+    // test passerebbe anche senza scan multiplo: qui la seconda `LCL` sta 270
+    // caratteri dopo la prima, ben oltre i 120 della finestra.
+    const issues = checkFabricatedNormAcronyms(
+      'Dal 2024 LCL propone ai frontalieri conti correnti in euro, carte multivaluta e prelievi '
+      + 'gratuiti agli sportelli di tutto il gruppo bancario francese, senza spese fisse mensili '
+      + 'per chi accredita lo stipendio. Un altro paragrafo sostiene invece che la legge cantonale '
+      + 'sul lavoro (LCL) del 15 dicembre 1995 fissi un minimo di 3500 franchi.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].message).toContain('LCL');
+  });
+
+  // La tabella deve restare non-global anche ora che lo scan usa un clone
+  // globale: se il flag `g` finisse sull'entry condivisa, `lastIndex`
+  // tornerebbe a viaggiare fra le chiamate.
+  it('keeps the table entries non-global even though the scan clones them', () => {
+    for (const entry of FABRICATED_NORM_ACRONYMS) {
+      expect(entry.re.global).toBe(false);
+    }
+    const t = 'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 prevede il minimo.';
+    expect(codes(checkFabricatedNormAcronyms(t))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(t))).toContain('fabricated-norm-acronym');
+  });
+
   // Il confine è su LETTERE, non `\b`: queste due sono norme VERE e il gate le
   // deve lasciare passare, altrimenti blocca contenuto legittimo. Stessa
   // motivazione, e stessi esempi, del test sui dati di corpus#323.

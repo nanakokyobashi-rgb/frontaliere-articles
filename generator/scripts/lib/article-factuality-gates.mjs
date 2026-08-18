@@ -1317,6 +1317,16 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // stesso argomento «sopravvive alla traduzione» gia' usato per LFW/LPS.
 // Zero occorrenze minuscole o miste di `lcl`/`lco`, stessa verifica del
 // paragrafo sopra.
+// Cue di CITAZIONE GIURIDICA, multilingue per costruzione: serve alle entry
+// che portano un `context` (oggi solo `LCL`, vedi sotto). Copre le quattro
+// lingue del corpus — it `legge/legislazione/articolo/art.`, fr `loi/article`,
+// de `Gesetz/Bundesgesetz/Artikel/Abs.`, en `law on/act on/article` — piu' i
+// riferimenti svizzeri `RS <numero>` e `cpv.`, che sono gia' locale-neutri.
+// L'obiezione «una parola come "legge" non regge su de/fr/en» e' corretta per
+// una singola parola italiana, e infatti qui non ce n'e' una sola.
+const NORM_CITATION_CUE =
+  /\b(?:legg[ei]|legislazione|lois?|Gesetz(?:es|e)?|Bundesgesetz|federal\s+act|act\s+on|law\s+on|articol[oi]|articles?|Artikel|art\.|cpv\.|Abs\.|RS\s*\d)/i;
+
 export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LFW',
@@ -1335,13 +1345,25 @@ export const FABRICATED_NORM_ACRONYMS = [
     // A bare substring match on `LCL` also matches the real French bank (ex
     // Crédit Lyonnais) — a future article mentioning it (this corpus already
     // has 175 files on frontalieri Francia-Svizzera and 29 naming other
-    // French banks) would be rejected as a fabricated norm. Require a year
-    // nearby, not a language-specific word like "legge": this check runs on
-    // de/fr/en translated text too (see docstring below), and both real
-    // fabrications in the corpus carry a 4-digit year within a few words of
-    // the acronym (`(LCL) del 15 dicembre 1995`, `(LCL 2020, art. 15)`).
-    context: /\b(?:19|20)\d{2}\b/,
-    contextWindow: 80,
+    // French banks) would be rejected as a fabricated norm.
+    //
+    // Il primo giro di questa guardia chiedeva un ANNO vicino. Non basta, ed
+    // e' misurato: «Dal 2024 LCL offre un conto dedicato ai frontalieri» —
+    // una frase bancaria del tutto ordinaria — porta un anno a due parole
+    // dalla sigla e veniva rigettata lo stesso. In un articolo su conti e
+    // mercati un anno vicino e' la norma, non l'eccezione, quindi come
+    // discriminante non separa niente.
+    //
+    // Serve invece il segno di una CITAZIONE di norma. L'obiezione con cui
+    // era stato scelto l'anno («non una parola specifica di una lingua, il
+    // check gira anche su de/fr/en») e' giusta contro UNA parola italiana, e
+    // infatti `NORM_CITATION_CUE` e' multilingue per costruzione. Entrambe le
+    // fabbricazioni reali del corpus restano rilevate — `(LCL) del 15
+    // dicembre 1995` ha «legge» 28 caratteri prima, `(LCL 2020, art. 15)` ha
+    // «art.» subito dopo — e le due sono le sole occorrenze vere: negli altri
+    // tre file la sigla e' `LCLoc`, che il lookahead `(?![A-Za-z])` esclude.
+    context: NORM_CITATION_CUE,
+    contextWindow: 120,
   },
   {
     acronym: 'LCO',
@@ -1369,15 +1391,27 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   const locale = opts.locale || 'it';
   for (const { acronym, re, real, context, contextWindow } of FABRICATED_NORM_ACRONYMS) {
     // `re` is deliberately non-global: a `g` regex carries `lastIndex` across
-    // calls, and this table is module-level shared state.
-    const m = re.exec(text);
-    if (!m) continue;
-    if (context) {
-      const w = contextWindow ?? 80;
-      const nearby = text.slice(Math.max(0, m.index - w), m.index + m[0].length + w);
-      if (!context.test(nearby)) continue;
-    }
-    issues.push(issue(
+    // calls, and this table is module-level shared state. Lo scan qui usa un
+    // CLONE globale creato dentro la chiamata, che quello stato condiviso non
+    // ce l'ha.
+    //
+    // Serve perche' `context` puo' SCARTARE un'occorrenza: con una `re.exec`
+    // a match singolo la prima occorrenza consuma l'unico match, quindi una
+    // menzione legittima in cima al testo nascondeva una fabbricazione piu'
+    // in basso. Misurato: «Ho un conto presso LCL... la legge cantonale sul
+    // lavoro (LCL) del 15 dicembre 1995...» passava in silenzio. Senza
+    // `context` il difetto non poteva esistere, perche' il primo match era
+    // sempre anche l'issue: e' nato con la guardia, e va chiuso con lei.
+    const scan = new RegExp(re.source, re.flags.includes('g') ? re.flags : `${re.flags}g`);
+    let m;
+    while ((m = scan.exec(text)) !== null) {
+      if (m[0] === '') { scan.lastIndex += 1; continue; }
+      if (context) {
+        const w = contextWindow ?? 80;
+        const nearby = text.slice(Math.max(0, m.index - w), m.index + m[0].length + w);
+        if (!context.test(nearby)) continue;
+      }
+      issues.push(issue(
       'fabricated-norm-acronym',
       'critical',
       `[${locale}] Sigla normativa inventata: «${acronym}» — ${real}`,
@@ -1385,7 +1419,9 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
       'Cita la norma reale con la sua sigla ufficiale, oppure togli la citazione. '
       + "Una sigla di legge inesistente è una fabbricazione anche quando la frase intorno è corretta, "
       + "e sopravvive alla traduzione: va tolta nell'originale, non nei singoli locali.",
-    ));
+      ));
+      break; // una sola issue per sigla, come prima
+    }
   }
   return issues;
 }
