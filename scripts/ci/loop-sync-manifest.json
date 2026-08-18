@@ -137,8 +137,8 @@
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
         "site": "57f158ab7858270e",
-        "corpus": "d9ab3e73feda5005",
-        "alignedAt": "2026-08-09"
+        "corpus": "f42a7f15c4fdfae2",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -194,6 +194,16 @@
         "site": "e485429ea717dfaf",
         "corpus": "e485429ea717dfaf",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": "scripts/ci/content-gates-main.mjs",
+      "mode": "corpus-only",
+      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
+      "baseline": {
+        "site": null,
+        "corpus": "23f28a70e0f93b4e",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -367,11 +377,11 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome.",
+      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome. Dal 2026-08-18 diverge anche sul TRIGGER: qui gira su `push` senza `branches-ignore`, quindi anche su `main`, perche' `mainTestsRuns()` di `pr-autorebase.mjs` legge `actions/workflows/tests.yml/runs?branch=main` e senza una run `success` li' il rescue `stuck-red` non ha prova da esibire (misurato: `total_count = 0` su 849 run, cinque PR bloccate). Il `concurrency` e' condizionale per la stessa ragione: su `main` `cancel-in-progress: false`, come sul sito, perche' una run cancellata non e' ne' completed ne' success.",
       "baseline": {
         "site": "5fa890e4a23a6619",
-        "corpus": "69fb6e3c4efa522c",
-        "alignedAt": "2026-08-07"
+        "corpus": "7110d899cd4af8c6",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -469,8 +479,8 @@
       "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM). Il `## Suggested action` conosce ora tutte e tre le categorie dell'helper di rebase (#255/#281/#285): prima ne descriveva due e rimandava la terza al proprietario, e da quando la terza esiste quel testo avrebbe consigliato di mettere un registro fra le cache — cioe' di cancellare dal registro l'articolo appena generato.",
       "baseline": {
         "site": null,
-        "corpus": "27c8981d860a0e70",
-        "alignedAt": "2026-08-14"
+        "corpus": "1f316d0cd9576826",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -1922,9 +1932,9 @@
       "sitePath": "scripts/lib/llm-json-repair.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "dd088410f084c844",
-        "corpus": "dd088410f084c844",
-        "alignedAt": "2026-08-09"
+        "site": "524dc16b7d1c0911",
+        "corpus": "524dc16b7d1c0911",
+        "alignedAt": "2026-08-18"
       }
     },
     {

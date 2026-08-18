@@ -25,9 +25,10 @@
  *    deploy del sito, per tutti e quattro i locali, a tempo indeterminato.
  *
  * 2. Un gate sulle PR non vedrebbe mai un articolo.
- *    `.github/workflows/tests.yml` gira su `pull_request` e su
- *    `push: branches-ignore: [main]`. Gli articoli atterrano per PUSH DIRETTO
- *    su `main`: nessuno dei due trigger scatta. In piu' quel workflow e'
+ *    Fino al 2026-08-18 `.github/workflows/tests.yml` girava su `pull_request` e
+ *    su `push: branches-ignore: [main]`. Gli articoli atterrano per PUSH DIRETTO
+ *    su `main`: nessuno dei due trigger scattava. (Il `branches-ignore` ora non
+ *    c'e' piu', ma il punto qui sotto vale identico.) In piu' quel workflow e'
  *    dependency-free PER PROGETTO (nessun `npm ci`, commento esplicito nel
  *    file), mentre questo controllo ha bisogno di un parser TypeScript.
  *

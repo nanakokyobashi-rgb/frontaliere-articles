@@ -401,7 +401,8 @@
     "imposta di successione e donazione canton Soletta aliquote",
     "premi cassa malati canton Basilea Città e riduzione premi",
     "permesso di dimora B canton Basilea Città requisiti e rinnovo",
-    "permesso di domicilio C canton Basilea Città requisiti e domanda"
+    "permesso di domicilio C canton Basilea Città requisiti e domanda",
+    "asilo nido e custodia bambini canton Basilea Città costi"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -617,6 +618,7 @@
     "salari e mercato del lavoro canton Soletta settori e livelli": 1,
     "imposta di successione e donazione canton Soletta aliquote": 1,
     "imposte cantonali canton Basilea Città aliquote e deduzioni": 1,
-    "borse di studio canton Basilea Città requisiti e importi": 1
+    "borse di studio canton Basilea Città requisiti e importi": 1,
+    "comprare casa canton Basilea Città prezzi e mutuo ipotecario": 1
   }
 }

@@ -27,8 +27,9 @@
  *    questo strato dice se serve anche una bonifica, e va rosso al sesto.
  *
  * Il terzo strato è il motivo per cui il file gira anche nel preflight di
- * `publish-api.yml`: `tests.yml` ha `branches-ignore: [main]` e gli articoli
- * generati atterrano con un push diretto su `main`, dove nessuna PR li guarda.
+ * `publish-api.yml`: fino al 2026-08-18 `tests.yml` aveva
+ * `branches-ignore: [main]` e gli articoli generati atterrano con un push diretto
+ * su `main`, dove nessuna PR li guarda.
  *
  * ## La differenza che il gate deve rispettare
  *

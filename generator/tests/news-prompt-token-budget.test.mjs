@@ -86,6 +86,7 @@ function numericConst(name) {
 }
 const PROMPT_TOKEN_BUDGET = numericConst('PROMPT_TOKEN_BUDGET');
 const PROMPT_TOKEN_CEILING = numericConst('PROMPT_TOKEN_CEILING');
+const PROMPT_TOKEN_RAW_CEILING = numericConst('PROMPT_TOKEN_RAW_CEILING');
 const IT_GENERATION_MAX_TOKENS = numericConst('IT_GENERATION_MAX_TOKENS');
 
 // ── I pezzi di create-article.mjs che il prompt usa ───────────────────────
@@ -117,7 +118,8 @@ const DEPS = [
   'buildSourceContract', 'evergreenFactsBriefFor', 'buildArticleJsonSchema',
   'lastSourcePublishedAt', '_winnerFingerprintMessage',
   'AI_MODELS', 'GH_MODEL_HEAVY', 'CATEGORIES', 'AVAILABLE_IMAGES',
-  'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'IT_GENERATION_MAX_TOKENS',
+  'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'PROMPT_TOKEN_RAW_CEILING',
+  'IT_GENERATION_MAX_TOKENS',
   // La preferenza per-chiamata e la funzione che le chiede «hai un cap?».
   // `PREFERRED_GENERATION_MODELS` vuota di default in BASE_DEPS: il ratchet qui
   // sotto misura il ramo SENZA preferenza, cioe' il fallback su modelli capped,
@@ -146,7 +148,7 @@ const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
 const assemblePrompt = new Function(
   '__d',
   `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${preferDecl}\n${promptBlock}\n`
-  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget };',
+  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget, rawEstTokens: _promptRawEstTokens, fonteChars: _promptFonteChars, fattiChars: _promptFattiChars, unsat: _promptTargetInsoddisfacibile, splitMode: _splitMode, splitAttiva: _splitAttiva, splitCall1: _splitCall1, promptSpedito: (_splitAttiva ? _splitCall1.p : prompt) };',
 );
 
 // ── Fixture: il CASO PEGGIORE REALE, non uno comodo ───────────────────────
@@ -181,7 +183,7 @@ const BASE_DEPS = {
   CATEGORIES,
   AVAILABLE_IMAGES,
   estimateRequestTokens,
-  PROMPT_TOKEN_BUDGET,
+  PROMPT_TOKEN_BUDGET, PROMPT_TOKEN_RAW_CEILING,
   IT_GENERATION_MAX_TOKENS,
   _winnerFingerprintMessage: null,
   // Vuota di default: il ratchet misura il ramo SENZA preferenza per un modello
@@ -335,7 +337,18 @@ test('il ramo NEWS regge anche il retry, che e\' il tentativo piu\' pesante', ()
   // I retry riducono la fonte (4500) ma aggiungono il feedback del fact-check
   // e quello sulla headline: il saldo e' in salita, quindi il caso peggiore
   // vero non e' il primo tentativo.
-  const { estTokens } = newsPrompt({
+  //
+  // IL TETTO CONFRONTATO QUI E' CAMBIATO, e vale la pena dire perche'.
+  // `PROMPT_TOKEN_CEILING` (8500) misura il prompt DOPO la scala di riduzione.
+  // Finche' la scala adottava anche il gradino che NON entrava nel budget,
+  // quel numero descriveva davvero il prompt spedito. Ora non piu': una
+  // riduzione che non compra l'ammissione non viene applicata (vedi il
+  // commento sulla scala in create-article.mjs), quindi al retry il prompt
+  // spedito e' quello INTERO, e il tetto che lo delimita e'
+  // `PROMPT_TOKEN_RAW_CEILING`. Non e' un allentamento: 8500 continua a
+  // valere sul primo tentativo, dove la scala entra e funziona (test sopra),
+  // e il tetto nuovo e' anch'esso un ratchet che puo' solo scendere.
+  const { estTokens, rawEstTokens, shrink, overBudget } = newsPrompt({
     _generationAttempt: 4,
     _previousWordCount: 640,
     _factCheckRefinement: '- "Il gettito sale a CHF 2 miliardi nel 2027" — non presente nella fonte\n'
@@ -344,8 +357,28 @@ test('il ramo NEWS regge anche il retry, che e\' il tentativo piu\' pesante', ()
     _headlineRefinement: 'title troppo lungo (128 caratteri) e con punto interrogativo finale',
   });
   assert.ok(
-    estTokens <= PROMPT_TOKEN_CEILING,
-    `il prompt news al retry e' stimato in ${estTokens} token, sopra PROMPT_TOKEN_CEILING (${PROMPT_TOKEN_CEILING})`,
+    estTokens <= PROMPT_TOKEN_RAW_CEILING,
+    `il prompt news al retry e' stimato in ${estTokens} token, sopra PROMPT_TOKEN_RAW_CEILING `
+    + `(${PROMPT_TOKEN_RAW_CEILING}). E' un ratchet come l'altro: se hai aggiunto un blocco al `
+    + 'prompt, il costo va compensato altrove, non assorbito alzando il tetto.',
+  );
+  // L'INVARIANTE NUOVA, ed e' quella che senza la fix non regge: il prompt
+  // spedito o sta nel budget, o e' INTERO. Mai una via di mezzo. Prima della
+  // fix questo caso usciva con shrink=4 e over=1 — cioe' pagava la mutilazione
+  // (fonte a 2862 caratteri, fatti-di-dominio rimossi) senza guadagnare un
+  // solo modello, perche' i cap della flotta sono a gradini {3000, 4000, 8000,
+  // illimitato} e fra 8000 e illimitato non c'e' niente: 8045 e 9020 token
+  // sono ammessi esattamente dagli stessi modelli.
+  assert.ok(
+    !overBudget || shrink === 0,
+    `il prompt e' sopra budget (${estTokens} > 8000) E ridotto al gradino ${shrink}: `
+    + 'e\' la riduzione che non compra l\'ammissione — paga il costo (fonte tagliata, '
+    + 'fatti-di-dominio rimossi, quindi articolo piu\' corto) senza rendere il prompt '
+    + 'accettabile da un solo modello in piu\'.',
+  );
+  assert.equal(
+    estTokens, rawEstTokens,
+    'il prompt sopra budget non e\' quello intero: qualche gradino e\' stato adottato lo stesso',
   );
 });
 
@@ -572,10 +605,22 @@ test('il budget del retry viene LETTO, non ignorato', () => {
   // `retryRequestTokenBudget` arriva qui come `_promptTokenBudget`. Un target
   // piu' STRETTO del default deve far mordere di piu': e' l'intera ragione per
   // cui callLLM calcola quel numero.
+  //
+  // Il target stretto e' 8000 e non piu' 6000 (2026-08-18). 6000 e' sotto la
+  // sola impalcatura del prompt — 7180 token misurati con fonte=0, fatti=0,
+  // rimedio=0 — quindi NESSUN gradino della scala puo' raggiungerlo, e da
+  // quando una riduzione che non fa entrare non viene applicata («il prompt
+  // spedito e' o sotto target o intero») un target irraggiungibile produce
+  // legittimamente shrink=0. Con 6000 questo test misurerebbe l'impossibile e
+  // fallirebbe per il motivo sbagliato: il budget VIENE letto, semplicemente
+  // non e' soddisfacibile. 8000 e' raggiungibile (misurato: shrink=4,
+  // est=7998) ed e' anche il valore vero che `callLLM` detta, visto che
+  // MAX_PREFLIGHT_REQUEST_TOKENS e' 8000 per tutti e cinque i provider con un
+  // cap dichiarato.
   const largo = newsPrompt({ _promptTokenBudget: 999_999 });
-  const stretto = newsPrompt({ _promptTokenBudget: 6000 });
+  const stretto = newsPrompt({ _promptTokenBudget: 8000 });
   assert.equal(largo.target, 999_999, 'il target non e\' stato letto dal contesto');
-  assert.equal(stretto.target, 6000, 'il target stretto non e\' stato letto dal contesto');
+  assert.equal(stretto.target, 8000, 'il target stretto non e\' stato letto dal contesto');
   assert.ok(
     stretto.shrink > largo.shrink,
     `un target piu' stretto deve ridurre di piu': stretto=${stretto.shrink} largo=${largo.shrink}`,
@@ -702,17 +747,70 @@ test('il budget dettato dalla flotta vince sulla preferenza, al retry', () => {
   // momento la preferenza NON deve piu' bastare a saltare la scala, altrimenti
   // il retry rispedirebbe lo stesso prompt che la flotta ha gia' rifiutato —
   // il difetto che PR #373 ha chiuso.
+  //
+  // IL BUDGET DI QUESTO FIXTURE E' CAMBIATO DA 6000 A 8100, e il motivo e' una
+  // misura, non una comodita'. L'impalcatura del prompt news — istruzioni,
+  // schema, contratto sulla fonte, elenco categorie e immagini, con fonte,
+  // fatti e rimedio a ZERO — costa da sola 7180 token. Nessun gradino della
+  // scala puo' quindi far scendere il prompt a 6000: 6000 non e' un target
+  // stretto, e' un target IRRAGGIUNGIBILE. Il vecchio `shrink > 0` passava
+  // perche' la scala adottava l'ultimo gradino anche quando non rientrava —
+  // cioe' il test verificava che la scala si fosse MOSSA, non che avesse
+  // ottenuto qualcosa, e il prompt partiva sopra il budget lo stesso.
+  // 8100 e' il primo valore che la scala raggiunge davvero su questo fixture
+  // (gradino 3, 8045 token): qui `shrink > 0` prova cio' che dice.
   const alRetry = conHaikuDisponibile(() => newsPrompt(
-    { _generationAttempt: 2, _promptTokenBudget: 6000 },
+    { _generationAttempt: 2, _promptTokenBudget: 8100 },
     'frontaliere',
     PREFERISCE_HAIKU,
   ));
-  assert.equal(alRetry.target, 6000, 'il budget dettato non e\' arrivato al target della scala');
+  assert.equal(alRetry.target, 8100, 'il budget dettato non e\' arrivato al target della scala');
   assert.ok(
     alRetry.shrink > 0,
     'la scala non ha morso malgrado il budget dettato dalla flotta: il retry rispedisce '
     + 'un prompt gia\' rifiutato, e la libreria aveva scritto che non puo\' riuscire',
   );
+  assert.ok(
+    alRetry.estTokens <= 8100,
+    `la scala si e' mossa (gradino ${alRetry.shrink}) ma il prompt e' ancora a ${alRetry.estTokens} `
+    + 'token: muoversi senza rientrare e\' il difetto, non il rimedio',
+  );
+});
+
+test('un budget dettato SOTTO l\'impalcatura non fa mutilare il prompt per niente', () => {
+  // Il seguito onesto del test qui sopra, ed e' un difetto adiacente che questa
+  // PR sceglie di ESPORRE invece di nascondere.
+  //
+  // `retryRequestTokenBudget` nasce dai cap veri della flotta, che stanno su
+  // tre gradini: 3000, 4000, 8000 (`MODEL_MAX_REQUEST_TOKENS`, piu' il default
+  // per provider che vale 8000). L'impalcatura del prompt news ne costa 7180
+  // da sola, quindi i gradini 3000 e 4000 sono FUORI PORTATA per costruzione:
+  // nessuna riduzione della fonte, per quanto brutale, ci arriva.
+  //
+  // Prima, la scala adottava lo stesso l'ultimo gradino: fonte a 2862 char e
+  // fatti di dominio rimossi, per un prompt che restava a 8045 token e che il
+  // modello da 4000 avrebbe rifiutato esattamente come quello intero. Costo
+  // pagato, ammissione non comprata — e nei log usciva `shrink=4`, che sembra
+  // un rimedio in funzione.
+  //
+  // Ora il prompt resta intero e il marker dice `over=1`: il tentativo fallisce
+  // comunque, ma fallisce DICENDOLO, e se nella cascata c'e' un modello senza
+  // cap riceve un prompt completo invece di uno mutilato.
+  for (const budget of [3000, 4000]) {
+    const r = conHaikuDisponibile(() => newsPrompt(
+      { _generationAttempt: 2, _promptTokenBudget: budget },
+      'frontaliere',
+      PREFERISCE_HAIKU,
+    ));
+    assert.equal(
+      r.shrink, 0,
+      `budget dettato ${budget}: la scala ha adottato il gradino ${r.shrink} arrivando a `
+      + `${r.estTokens} token, che e' ancora sopra ${budget}. Ha tagliato la fonte e i fatti `
+      + 'di dominio senza rendere il prompt accettabile da un solo modello in piu\'.',
+    );
+    assert.equal(r.estTokens, r.rawEstTokens, 'il prompt spedito non e\' quello intero');
+    assert.ok(r.overBudget, `budget dettato ${budget}: over=0 nasconderebbe un tentativo che non puo' riuscire`);
+  }
 });
 
 test('preferito NON disponibile: la scala morde subito, niente tentativo buttato', () => {
@@ -788,4 +886,111 @@ test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => 
     capLibero.shrink, 0,
     'con cap disponibile la scala non deve mordere: la guardia si e\' rotta nell\'altro verso',
   );
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// L'OSSERVATORE DEL DIFETTO «fatti=0ch»
+//
+// La scheda: con un budget dettato dalla flotta (3000 / 4000 / 8000) il prompt
+// di retry «rientrava» solo azzerando i fatti di dominio e dimezzando la
+// fonte — `shrink=4` sembrava un rimedio, e il prompt che partiva davvero
+// portava `fonte=2862ch fatti=0ch`. Il corpo perdeva proprio il materiale da
+// cui prende lunghezza: 12 chiamate su 12 uscite `[thin-content]`.
+//
+// Questo suite fallisce sulla versione precedente: li' non esiste un prompt
+// che, a budget 8000, porti i fatti di dominio interi.
+// ═══════════════════════════════════════════════════════════════════════════
+test('divisione in due chiamate: un prompt di retry non esce mai con fatti=0ch', async (t) => {
+  await t.test('a budget 8000 i fatti di dominio arrivano INTERI al modello', () => {
+    const intero = newsPrompt({ _promptTokenBudget: 999_999 });
+    const fattiInIngresso = intero.fattiChars;
+    assert.ok(
+      fattiInIngresso > 0,
+      `il fixture deve avere fatti di dominio non vuoti, altrimenti il test e' vacuo (${fattiInIngresso})`,
+    );
+
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const fattiSpediti = stretto.splitAttiva ? stretto.splitCall1.fattiChars : stretto.fattiChars;
+    assert.equal(
+      fattiSpediti, fattiInIngresso,
+      'il prompt effettivamente spedito ha perso i fatti di dominio: e\' esattamente il difetto '
+      + `(in ingresso ${fattiInIngresso}ch, spediti ${fattiSpediti}ch, shrink=${stretto.shrink})`,
+    );
+    assert.ok(
+      stretto.promptSpedito.includes('FATTI DI DOMINIO VERIFICATI'),
+      'il blocco dei fatti di dominio non compare nel prompt spedito',
+    );
+  });
+
+  await t.test('a budget 8000 la fonte spedita non e\' piu\' dimezzata', () => {
+    const intero = newsPrompt({ _promptTokenBudget: 999_999 });
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const fonteSpedita = stretto.splitAttiva ? stretto.splitCall1.fonteChars : stretto.fonteChars;
+    // Il difetto misurato tagliava la fonte da 6036 a 2862 char (-53%).
+    assert.ok(
+      fonteSpedita >= intero.fonteChars * 0.9,
+      `fonte spedita ${fonteSpedita}ch su ${intero.fonteChars}ch in ingresso: `
+      + 'la riduzione e\' tornata a mordere sul materiale, non sull\'impalcatura',
+    );
+  });
+
+  await t.test('la chiamata di scrittura rientra nel budget che la flotta detta', () => {
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const est = stretto.splitAttiva ? stretto.splitCall1.est : stretto.estTokens;
+    assert.ok(
+      est <= 8000,
+      `la chiamata di scrittura pesa ${est} token contro un target di 8000: `
+      + 'non entra, quindi il pre-flight la saltera\' comunque',
+    );
+  });
+
+  await t.test('il flag `off` riporta esattamente il comportamento precedente', () => {
+    const prima = process.env.CREATE_ARTICLE_PROMPT_SPLIT;
+    process.env.CREATE_ARTICLE_PROMPT_SPLIT = 'off';
+    try {
+      const off = newsPrompt({ _promptTokenBudget: 8000 });
+      assert.equal(off.splitMode, 'off');
+      assert.equal(off.splitAttiva, false, 'CREATE_ARTICLE_PROMPT_SPLIT=off deve disattivare la divisione');
+      assert.equal(off.splitCall1, null, 'con `off` la meta\' di scrittura non deve nemmeno essere costruita');
+    } finally {
+      if (prima === undefined) delete process.env.CREATE_ARTICLE_PROMPT_SPLIT;
+      else process.env.CREATE_ARTICLE_PROMPT_SPLIT = prima;
+    }
+  });
+
+  await t.test('un target sotto il pavimento dell\'impalcatura e\' marcato `unsat=1`, non `shrink=N`', () => {
+    // 3000 e 4000 sono cap di modello, non costanti di questo repo: non si
+    // possono togliere. Si puo' solo smettere di fingere di raggiungerli.
+    for (const target of [3000, 4000]) {
+      const res = newsPrompt({ _promptTokenBudget: target });
+      assert.equal(
+        res.unsat, true,
+        `target ${target} deve essere marcato insoddisfacibile: nessuna riduzione lo raggiunge`,
+      );
+      assert.ok(
+        res.logged.some((l) => String(l).includes(`unsat=1`)),
+        `il marker [prompt-budget] deve riportare unsat=1 per il target ${target}`,
+      );
+    }
+    const ottomila = newsPrompt({ _promptTokenBudget: 8000 });
+    assert.equal(ottomila.unsat, false, '8000 e\' raggiungibile dopo la divisione: non va marcato insoddisfacibile');
+  });
+
+  await t.test('le due meta\' dello schema sono disgiunte e complete', () => {
+    const full = buildArticleJsonSchema('it', 'full');
+    const body = buildArticleJsonSchema('it', 'body');
+    const meta = buildArticleJsonSchema('it', 'meta');
+    const cFull = Object.keys(full.schema.properties.content.properties.it.properties);
+    const cBody = Object.keys(body.schema.properties.content.properties.it.properties);
+    const cMeta = Object.keys(meta.schema.properties.content.properties.it.properties);
+    assert.deepEqual(cBody.filter((k) => cMeta.includes(k)), [], 'le due meta\' si sovrappongono');
+    assert.deepEqual(
+      cFull.filter((k) => !cBody.includes(k) && !cMeta.includes(k)), [],
+      'un campo del contenuto non e\' chiesto da nessuna delle due chiamate',
+    );
+    assert.deepEqual(
+      buildArticleJsonSchema('it'), full,
+      'lo schema di default deve restare quello storico, byte a byte',
+    );
+  });
 });

@@ -8,9 +8,9 @@
  * libreria e cablaggio in `create-article.mjs`. Questo è uno scan del REGISTRO
  * PUBBLICATO, e i due hanno bisogni opposti su DOVE girano.
  *
- * `tests.yml` ha `branches-ignore: [main]` e gli articoli generati atterrano
- * con un push diretto su `main`: uno scan del registro che gira solo sulle PR
- * vede il difetto solo dopo che è stato pubblicato. Questo file sta quindi
+ * Fino al 2026-08-18 `tests.yml` aveva `branches-ignore: [main]`, e gli articoli
+ * generati atterrano con un push diretto su `main`: uno scan del registro che
+ * gira solo sulle PR vede il difetto solo dopo che è stato pubblicato. Questo file sta quindi
  * anche nel preflight di `publish-api.yml`, che parte su ogni push a
  * `content/**` di main — e i due ledger URL→id vengono riscritti dallo stesso
  * commit che scrive l'articolo.
