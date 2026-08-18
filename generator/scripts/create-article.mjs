@@ -229,6 +229,14 @@ import {
   inputCapVetoSummary,
   isLegitimateQuotaDeferral,
   quotaDeferralShare,
+  // Issue #452 — l'uscita anticipata quando il bersaglio e' sotto il pavimento
+  // dell'impalcatura del prompt. La costante sta la' dentro, non qui, perche'
+  // due meta' la leggono (il marker `unsat=` e il ciclo di retry) e un
+  // letterale riscritto a mano le farebbe divergere in silenzio.
+  PROMPT_SCAFFOLD_FLOOR_TOKENS,
+  isBudgetBelowScaffoldFloor,
+  isPromptFloorIrreducible,
+  promptFloorSummary,
 } from './lib/exhaustion-disposition.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
@@ -8049,9 +8057,15 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Il rimedio onesto per i due gradini bassi non e' uno `shrink` piu'
   // aggressivo — non esiste — ma dirlo nel marker con `unsat=1`, cosi' che
   // un watchdog distingua «ridotto e rientrato» da «non riducibile».
-  const PROMPT_SCAFFOLD_FLOOR_TOKENS = 5850;
-  const _promptTargetInsoddisfacibile = _promptTokenTarget > 0
-    && _promptTokenTarget < PROMPT_SCAFFOLD_FLOOR_TOKENS;
+  //
+  // ISSUE #452 — dal 2026-08-18 il marker non e' piu' l'unico lettore: il ciclo
+  // di retry esce presto sulla stessa condizione (vedi il blocco «USCITA
+  // ANTICIPATA DICHIARATA» in generateAndValidateArticle). Il numero e' quindi
+  // migrato in lib/exhaustion-disposition.mjs — una sola definizione per due
+  // lettori, e per la prima volta eseguibile da `node --test`, che questo file
+  // non e'. Il predicato e' lo stesso di prima, riscritto con la funzione
+  // condivisa perche' le due meta' non possano divergere sul `<` o sul `> 0`.
+  const _promptTargetInsoddisfacibile = isBudgetBelowScaffoldFloor(_promptTokenTarget);
   // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
   // riga, non il testo attorno. `shrink=` e `raw=` sono additivi — i campi
   // preesistenti mantengono nome e posizione.
@@ -13570,6 +13584,54 @@ async function generateAndValidateArticle(url, sourceContext = null) {
           + ' — il prossimo tentativo lo ricostruisce piu' + '\' corto invece di rispedirlo uguale.',
         );
       }
+      // ── USCITA ANTICIPATA DICHIARATA (issue #452) ───────────────────────
+      //
+      // «Ricostruirlo piu' corto» smette di essere possibile a un certo punto,
+      // e quel punto e' calcolabile: sotto PROMPT_SCAFFOLD_FLOOR_TOKENS il
+      // bersaglio sta sotto il peso del prompt VUOTO — impalcatura, schema
+      // JSON, istruzioni di sezione — quindi nemmeno fonte e fatti a zero ci
+      // rientrano. `callGemini` lo sa gia' e lo scrive nel marker come
+      // `unsat=1`, ma finora l'unica azione era un `console.warn`: il
+      // tentativo partiva lo stesso.
+      //
+      // E il budget non torna indietro. Il `Math.min` qui sopra e' monotono di
+      // proposito, quindi la condizione, una volta entrata, e' STABILE: tutti
+      // i tentativi restanti di questa sezione sono insoddisfacibili per
+      // costruzione, e il ciclo ne macinava fino a sei — ognuno con la cascata
+      // sull'intero roster — fino al `hard-killed after ~1180s` (exit 124).
+      // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
+      // `failure` contro 254s per una `success`.
+      //
+      // NON e' un `success` muto e non e' una delle sei ragioni legittime: si
+      // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
+      // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
+      // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
+      if (isBudgetBelowScaffoldFloor(lastPromptTokenBudget)) {
+        e.promptFloorReport = {
+          budget: lastPromptTokenBudget,
+          floor: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+          attempt,
+          maxAttempts,
+          section: SECTION_NAME,
+        };
+        const { short, attemptsSkipped } = promptFloorSummary(e);
+        console.error(
+          `  ⛔ [prompt-floor] section=${SECTION_NAME} attempt=${attempt}/${maxAttempts} `
+          + `budget=${lastPromptTokenBudget} floor=${PROMPT_SCAFFOLD_FLOOR_TOKENS} short=${short} `
+          + `skipped=${attemptsSkipped}`,
+        );
+        console.error(
+          `  ⛔ Esco adesso: il bersaglio dettato dalla flotta (${lastPromptTokenBudget} token) sta ${short} token`
+          + ` SOTTO il pavimento dell'impalcatura del prompt (${PROMPT_SCAFFOLD_FLOOR_TOKENS}), e il budget non si`
+          + ' riallarga mai (Math.min monotono). I ' + `${attemptsSkipped} tentativi restanti di questa sezione non`
+          + ' possono che ripetere questo esito: spenderli costerebbe minuti per una conclusione gia' + '\' nota.',
+        );
+        RUN_REPORT.notes.push(
+          `Early exit: prompt budget ${lastPromptTokenBudget} below scaffold floor ${PROMPT_SCAFFOLD_FLOOR_TOKENS} `
+          + `(section=${SECTION_NAME}, attempt=${attempt}/${maxAttempts}, skipped=${attemptsSkipped})`,
+        );
+        throw e;
+      }
       if (attempt < maxAttempts) continue;
       throw e;
     }
@@ -15114,6 +15176,46 @@ if (invokedDirectly) {
   // back-off retries later instead of marking the run failed and raising a
   // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
   // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  // ISSUE #452 — l'uscita anticipata, e viene per PRIMA di tutte.
+  //
+  // Non e' prudenza d'ordine: e' che questo ramo descrive una DECISIONE gia'
+  // presa a monte — il ciclo di retry ha smesso di macinare e ha marcato
+  // l'errore — e i rami sotto la descriverebbero al posto suo con un'altra
+  // ragione. Su un errore con quota dominante `isInputCapDeferralVeto` risponde
+  // `false` e `isLegitimateQuotaDeferral` risponde `true`: la run uscirebbe 4,
+  // «ragione legittima dichiarata», e il workflow CHAINEREBBE il successore
+  // contro un muro che il prossimo tentativo trova identico. Il differimento
+  // sarebbe per giunta falso: nessuna finestra di quota alza il cap di un
+  // modello sopra il peso dell'impalcatura del prompt.
+  //
+  // Esce 3 e non un codice nuovo perche' 3 e' gia' esattamente questo esito —
+  // «il roster non puo' servire questo prompt» — e il blocco bash dello step
+  // «Generate the article» lo sa gia' leggere (`roster_blocked=true`, che e' il
+  // segnale che impedisce il chain). La RAGIONE invece e' nuova e separata:
+  // vedi isPromptFloorIrreducible().
+  if (isPromptFloorIrreducible(e)) {
+    const f = promptFloorSummary(e);
+    finalizeRunReport('error', {
+      notes: [
+        ...RUN_REPORT.notes,
+        `Prompt target below scaffold floor (irreducible): budget=${f.budget} floor=${f.floor}`,
+      ],
+    });
+    console.error(
+      `\n❌ Bersaglio del prompt IRRIDUCIBILE: la flotta chiede ${f.budget} token, ${f.short} sotto il pavimento`
+      + ` dell'impalcatura (${f.floor}) — cioe' sotto il peso del prompt a fonte E fatti azzerati.`
+      + ` Nessuna riduzione ci rientra, e il budget non si riallarga (Math.min monotono), quindi i`
+      + ` ${f.attemptsSkipped} tentativi restanti della sezione ${f.section || '(ignota)'} erano insoddisfacibili per`
+      + ' costruzione: usciti al tentativo ' + `${f.attempt}/${f.maxAttempts} invece di macinarli fino al kill di durata.`
+      + ` NON e' un differimento: nessuna finestra di quota alza il cap di un modello. Alzare il cap piu' permissivo del`
+      + ` roster sopra ${f.floor}, oppure alleggerire l'impalcatura del prompt. ${e.message}`,
+    );
+    console.error(
+      `::error::prompt-floor-irreducible: budget=${f.budget} floor=${f.floor} short=${f.short}`
+      + ` attempt=${f.attempt}/${f.maxAttempts} skipped=${f.attemptsSkipped} section=${f.section}`,
+    );
+    await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
   // ISSUE #313 / #348 — il veto viene PRIMA del differimento, non dopo: e' il
   // solo ordine in cui puo' impedirlo. Vedi isInputCapDeferralVeto() per la
   // misura (53/53, un pareggio, 10 ore di verde).
