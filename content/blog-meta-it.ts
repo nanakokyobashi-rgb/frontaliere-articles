@@ -10048,6 +10048,12 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.frontalieriticone2026-q2.title': 'Frontalieri Ticino: +0,64% rispetto al trimestre precedente',
     'blog.article.frontalieriticone2026-q2.excerpt': 'Il numero di frontalieri nel Canton Ticino aumenta di +0,64% rispetto al trimestre precedente, ma diminuisce di -0,57% rispetto allo stesso trimestre dell\'anno precedente.',
     'blog.article.frontalieriticone2026-q2.imageAlt': 'Vista aerea di Lugano, Ticino, Svizzera. Un\'area affollata di promenade con un lago in background.',
+    'blog.article.economia-varese-2024-imposte.title': 'Ecco le imprese che pagano più imposte nel Varesotto',
+    'blog.article.economia-varese-2024-imposte.excerpt': 'La classifica di Made in Varese 2026 sui bilanci 2024 vede al primo posto Bticino, seguita da Sea Esercizi Aeroportuali e Novartis Farma.',
+    'blog.article.economia-varese-2024-imposte.imageAlt': 'Imprese che pagano più imposte nel Varesotto',
+    'blog.article.migros-delica-nuovo-direttore-2027.title': 'Migros Delica: Moritz Werner è il nuovo direttore dal 2027',
+    'blog.article.migros-delica-nuovo-direttore-2027.excerpt': 'Dal 1° gennaio 2027 Moritz Werner guiderà il produttore Migros Delica succedendo a Thomas Gubler.',
+    'blog.article.migros-delica-nuovo-direttore-2027.imageAlt': 'Nuovo direttore di Migros Delica Moritz Werner',
 };
 
 export default blogMetaIt;

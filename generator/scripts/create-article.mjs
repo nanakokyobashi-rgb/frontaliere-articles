@@ -132,7 +132,7 @@ import {
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -12641,6 +12641,27 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       throw fabErr;
     }
 
+    // Step 3a.0b-alt: Fabricated norm acronyms check on the IT title — BLOCKING.
+    // runFactualityGates() below (Step 3a.0b-bis) only sees sections.{body1,body2,body3},
+    // never data.content.it.title, so a fabricated norm acronym landing in the
+    // title alone would ship straight to dist/api/, og:title and JSON-LD headline
+    // with no gate ever looking at it. Same call the en/de/fr path makes after
+    // translateArticle() (Step 3b.1, below) and the journalist IT path makes
+    // (publish-journalist-article.mjs) — assertNoFabricatedNormAcronyms() already
+    // covers title+body1..3 per locale, so this closes the gap without touching
+    // runFactualityGates()'s per-section checks (truncation/scaffolding), which
+    // are tuned for body paragraphs, not a title-length string.
+    try {
+      assertNoFabricatedNormAcronyms({ it: data.content.it });
+    } catch (normErr) {
+      console.error(`  ⚠️  ${normErr.message}`);
+      if (attempt < maxAttempts) {
+        console.error(`  🔄 Rigenero contenuto IT per sigla normativa fabbricata (${attempt}/${maxAttempts})...`);
+        continue;
+      }
+      throw normErr;
+    }
+
     // Step 3a.0b-bis: Deterministic factuality gates — BLOCKING, no model calls
     //
     // Runs BEFORE the LLM verifier on purpose: these checks are free, so a
@@ -12992,6 +13013,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // translation that independently hallucinates this institution in a
   // different language was never checked at all.
   assertNoFabricatedLaborOfficeCrossLocale(data);
+  // Same gap, for fabricated NORM acronyms (LFW/LPS): runFactualityGates()
+  // at Step 3a.0b-bis only ever ran on data.content.it, before this
+  // translateArticle() call existed — an acronym that survives translation
+  // unchanged (it did, byte-identical, for apprendistato-urie-2024-2025)
+  // was never re-checked on the en/de/fr output.
+  assertNoFabricatedNormAcronyms({ en: data.content.en, de: data.content.de, fr: data.content.fr });
 
   // Step 3c: Sanitize bold + URLs + nav links on translated content
   console.error('✂️  Sanitizzazione grassetto (traduzioni):');
