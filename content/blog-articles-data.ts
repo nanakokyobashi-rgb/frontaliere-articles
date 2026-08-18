@@ -30099,6 +30099,24 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'economia-varese-2024-imposte',
+ category: 'fiscale',
+ date: '2026-08-18T10:01:21.892Z',
+ image: '/images/blog/economia-varese-2024-imposte.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'migros-delica-nuovo-direttore-2027',
+ category: 'novita',
+ date: '2026-08-18T11:00:33.610Z',
+ image: '/images/blog/migros-delica-nuovo-direttore-2027.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
