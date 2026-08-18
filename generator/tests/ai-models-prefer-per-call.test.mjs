@@ -44,6 +44,7 @@ import {
   applyModelsPrefer,
   getPreferredModel,
   getDeclaredRequestTokenLimit,
+  isPerRunCallCapReached,
   recordModelSuccess,
   recordModelFailure,
   resetState,
@@ -60,6 +61,7 @@ const ENV_KEYS = [
   'NVIDIA_API_KEY',
   'CLAUDE_CODE_OAUTH_TOKEN',
   'ENABLE_HAIKU_ARTICLE_FALLBACK',
+  'CLAUDE_CLI_MAX_CALLS_PER_RUN',
 ];
 let _envBackup = {};
 
@@ -81,6 +83,7 @@ beforeEach(() => {
   process.env.CLAUDE_CODE_OAUTH_TOKEN = 'dummy-per-test';
   process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = 'true';
   delete process.env.AI_MODELS_FORCE_CHAIN;
+  delete process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN;
 });
 
 afterEach(() => {
@@ -168,6 +171,57 @@ describe('preferenza per-chiamata — sopravvive al sort per punteggio', () => {
     assert.deepEqual(applyModelsPrefer([RIVALE, HAIKU]), [RIVALE, HAIKU]);
     assert.equal(getPreferredModel({ chain: [RIVALE, HAIKU] }), RIVALE);
   });
+
+  it('AI_MODELS_PREFER="" spegne ANCHE il prefer per-chiamata — il percorso di produzione', () => {
+    // ── PERCHE' IL TEST QUI SOPRA NON BASTAVA ────────────────────────────────
+    //
+    // Quello chiama `applyModelsPrefer([RIVALE, HAIKU])` SENZA secondo
+    // argomento, cioe' esercita il ramo env-only. In produzione quel ramo non
+    // viene mai preso: `create-article.mjs` passa `prefer:
+    // PREFERRED_GENERATION_MODELS` su ENTRAMBE le chiamate che generano il
+    // corpo dell'articolo (la principale e il retry repair-aware). Un verde su
+    // un ramo che nessuno percorre e' piu' pericoloso di un test assente,
+    // perche' fa credere coperta la leva di spesa su un modello a pagamento.
+    //
+    // Misurato prima della fix, con AI_MODELS_PREFER="" nell'ambiente:
+    //   applyModelsPrefer(['a','b'], ['claude-cli/haiku'])
+    //     → ['claude-cli/haiku','a','b']
+    // cioe' la leva documentata come «rollback istantaneo» non fermava nulla.
+    process.env.AI_MODELS_PREFER = '';
+    seminaIlDivario();
+
+    // La forma minima, senza catena reale: e' quella che il commento della
+    // funzione documenta, ed e' quella che tornava sbagliata.
+    assert.deepEqual(
+      applyModelsPrefer(['a', 'b'], [HAIKU]),
+      ['a', 'b'],
+      'la leva di rollback non spegne il prefer per-chiamata: e\' l\'unica forma '
+      + 'che la produzione usa, quindi la leva non spegne NIENTE',
+    );
+
+    // E lo stesso attraverso la funzione che rispecchia l'ordine reale di
+    // callLLM (morbida → sort → dura), con il divario di punteggio vero.
+    assert.equal(
+      getPreferredModel({ chain: [RIVALE, HAIKU], prefer: [HAIKU] }),
+      RIVALE,
+      'con la leva tirata callLLM sceglierebbe ancora il modello a pagamento',
+    );
+
+    // Anche in forma CSV, che e' l'altra forma accettata da `opts.prefer`.
+    assert.equal(getPreferredModel({ chain: [RIVALE, HAIKU], prefer: HAIKU }), RIVALE);
+  });
+
+  it('la leva vuota non e\' «env batte per-call»: un valore NON vuoto perde ancora', () => {
+    // Il contro-verso, che tiene onesta l'inversione: solo la stringa VUOTA —
+    // un atto deliberato — vince sul per-call. Un `AI_MODELS_PREFER` valorizzato
+    // resta l'opt-in di processo, meno specifico della preferenza per-chiamata,
+    // esattamente come prima. Senza questa riga la fix del rollback potrebbe
+    // degenerare in «l'ambiente comanda sempre», che romperebbe la ragione
+    // stessa per cui `opts.prefer` esiste.
+    process.env.AI_MODELS_PREFER = RIVALE;
+    seminaIlDivario();
+    assert.equal(getPreferredModel({ chain: [RIVALE, HAIKU], prefer: [HAIKU] }), HAIKU);
+  });
 });
 
 describe('cap di input dichiarato — la domanda che il prompt deve poter fare', () => {
@@ -182,5 +236,47 @@ describe('cap di input dichiarato — la domanda che il prompt deve poter fare',
 
   it('un modello free il cap ce l\'ha, e vale 8000', () => {
     assert.equal(getDeclaredRequestTokenLimit(RIVALE), 8000);
+  });
+});
+
+describe('cap di chiamate per-run — la domanda che la guardia del prompt deve poter fare', () => {
+  it('e\' interrogabile PRIMA di costruire il prompt, e riguarda solo claude-cli', () => {
+    // A inizio run nessuna chiamata e' stata spesa: il cap non e' raggiunto.
+    assert.equal(isPerRunCallCapReached(HAIKU), false);
+    // E per un provider senza cap per-run la risposta e' sempre false, anche
+    // con la variabile impostata: il cap e' di claude-cli, non globale.
+    process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN = '1';
+    assert.equal(isPerRunCallCapReached(RIVALE), false);
+  });
+
+  it('CLAUDE_CLI_MAX_CALLS_PER_RUN=0 NON e\' un kill switch: 0 = illimitato', () => {
+    // ── LA TRAPPOLA, SCRITTA COME TEST ───────────────────────────────────────
+    //
+    // La lettura naturale di «cap = 0» su un modello a pagamento e' «zero
+    // chiamate». La semantica reale e' l'opposto esatto: cap disattivato. Chi
+    // la usa per spegnere Haiku in fretta toglie l'unico tetto che c'era, e non
+    // se ne accorge — il comportamento e' identico a quello nominale finche' la
+    // run non supera le 40 chiamate.
+    //
+    // La convenzione NON e' stata invertita (vedi `_getClaudeCliMaxCallsPerRun`:
+    // e' condivisa col gemello `mode: identical` del sito e con gli altri cap
+    // del file). Al suo posto c'e' un warn-once, e questa riga che impedisce a
+    // un futuro «sistemiamo 0 = spento» di passare per una svista.
+    process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN = '0';
+    assert.equal(
+      isPerRunCallCapReached(HAIKU), false,
+      'con "0" il cap deve risultare DISATTIVATO. Se questa riga diventa true, '
+      + 'la semantica e\' stata invertita qui e non sul gemello del sito: i due '
+      + 'lati di un file `identical` sarebbero d\'accordo sul testo e in '
+      + 'disaccordo sui fatti.',
+    );
+    // La leva che spegne davvero e' un'altra, ed e' quella sopra.
+    process.env.AI_MODELS_PREFER = '';
+    assert.deepEqual(applyModelsPrefer(['a', 'b'], [HAIKU]), ['a', 'b']);
+  });
+
+  it('un valore malformato non spegne il cap: si torna al default', () => {
+    process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN = 'spento';
+    assert.equal(isPerRunCallCapReached(HAIKU), false); // default 40, 0 chiamate spese
   });
 });
