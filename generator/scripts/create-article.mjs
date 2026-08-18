@@ -144,6 +144,7 @@ import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT 
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
+import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
   totalMajorWeight,
@@ -5426,9 +5427,14 @@ async function callLLM(messages, opts = {}) {
       let itContent = null;
       let parseErr = null;
       let repaired = null;
+      // `parsed` vive FUORI dal try: la diagnostica del rigetto deve poter
+      // dire com'era fatto il payload che ha superato JSON.parse() ma non il
+      // normalizzatore — il caso muto, che e' la maggioranza (vedi
+      // ./lib/llm-payload-diagnostics.mjs).
+      let parsed;
       try {
         repaired = repairLlmJson(result);
-        const parsed = JSON.parse(repaired);
+        parsed = JSON.parse(repaired);
         itContent = normalizeItalianContentFromPayload(parsed);
       } catch (e) {
         parseErr = e;
@@ -5442,10 +5448,20 @@ async function callLLM(messages, opts = {}) {
         // was unreproducible (no evidence of what the model actually sent).
         // Log the parse error + a snippet so a recurring malformed-JSON
         // pattern from a specific model can actually be root-caused.
+        //
+        // … ma solo `if (parseErr)`, ed e' li' che la diagnostica finiva.
+        // Misurato il 2026-08-18: su 64 rigetti raccolti dai log, 49 sono
+        // «non normalizzabile» e la maggioranza NON stampava niente, perche'
+        // `JSON.parse` era riuscito e a tornare `null` era il normalizzatore.
+        // Nella run 32134269129 — il 76% dello step speso in rigenerazioni —
+        // erano muti 4 rigetti su 4. La riga sotto e' INCONDIZIONATA apposta:
+        // e' quella che distingue «troncato» da «forma sbagliata», e le due
+        // vogliono rimedi opposti (tetto di uscita vs prompt/normalizzatore).
+        console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
         if (parseErr) {
           console.error(`  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): ${parseErr.message} — ${describeJsonParseError(repaired, parseErr)}`);
-          console.error(`  📄 ${describeRawForDiagnostics(result)}`);
         }
+        console.error(`  📄 ${describeRawForDiagnostics(result)}`);
       } else {
         for (const field of REQUIRED_IT_BODY_FIELDS) {
           if (!itContent?.[field] || itContent[field].length < 1) {
@@ -5468,6 +5484,17 @@ async function callLLM(messages, opts = {}) {
 
       if (missing.length > 0) {
         console.error(`  ⚠️  output JSON incompleto: ${missing.join(', ')} (tentativo ${attempt}/${maxBody2Retries}) — rigenero...`);
+        // Il ramo «campi mancanti» era cieco quanto quello muto sopra: nominava
+        // i campi ma non il modello che ha risposto (l'intestazione
+        // `🤖 [1/5] ... con gpt-4.1` annuncia il PREFERITO, e nella run
+        // 32140039370 a rispondere e' stato nvidia/meta/llama-3.1-8b-instruct
+        // sceso dalla cascata), ne' quanto era lungo l'output, ne' se finiva a
+        // meta'. `body1, body2, body3` da solo e' compatibile sia con un
+        // troncamento sia con un involucro di troppo — e in una run e' costato
+        // 655 s. Stessa riga del ramo sopra, cosi' le due si contano insieme.
+        if (itContent) {
+          console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
+        }
         // Penalize the model only for genuine content failures, not budget-induced
         // exits. When wallBudgetExceeded() is true the throw below is caused by
         // time pressure, not by model output quality; scoring it as a failure would

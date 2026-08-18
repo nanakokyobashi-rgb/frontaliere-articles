@@ -1938,6 +1938,17 @@
       }
     },
     {
+      "path": "generator/scripts/lib/llm-payload-diagnostics.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/434",
+      "baseline": {
+        "site": null,
+        "corpus": "007e5a5b07e0e7d2",
+        "alignedAt": "2026-08-18"
+      },
+      "reason": "La riga unica che rende attribuibile il rigetto di `callLLM()` quando `normalizeItalianContentFromPayload()` torna `null`: famiglia (`troncato` / `forma-sbagliata`), modello che ha DAVVERO risposto, `rawChars`/`repairedChars`/`kept%`, chiavi del payload, stato per campo, verdetto di troncamento. Nasce qui perche' il tempo misurato sta qui (2026-08-18: 905 s su 1189 nella run 32134269129, 76% dello step; la run senza rigenerazioni e' anche la piu' corta, 312 s), ma NON e' `corpus-only`: il gemello del sito `scripts/create-article.mjs` ha lo stesso ramo con la stessa guardia `if (parseErr)`, e `publish-journalist-article` lo importa ogni 15 minuti, quindi li' il punto cieco e' aperto uguale. Non e' arrivato nello stesso giro perche' `create-article.mjs` e' `adapted` (si porta a mano, non si copia) e la suite del sito e' vitest, non `node --test`: il gate va riscritto. Quando atterra la' questa voce diventa `identical`."
+    },
+    {
       "path": "generator/scripts/lib/local-opus-mt.mjs",
       "sitePath": "scripts/lib/local-opus-mt.mjs",
       "mode": "identical",
