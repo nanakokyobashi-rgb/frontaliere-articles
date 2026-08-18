@@ -65,7 +65,41 @@ import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit } from './lib/ai-models.mjs';
+
+// ── Il modello preferito per la SOLA generazione del corpo ──────────────────
+//
+// Decisione del proprietario (issue #379): «Porta Haiku al primo livello — lo
+// paghiamo e funziona», e «solo dove serve davvero, nei punti critici e dove il
+// modello free non e' affidabile». Questo e' quel punto: la generazione del
+// corpo italiano e' l'unica chiamata i cui gate (fedelta' alla fonte, tassi
+// chiave, lunghezza minima) bocciano davvero l'output dei modelli free.
+//
+// `prefer` sposta l'id in testa DOPO l'ordinamento per punteggio, quindi vince
+// malgrado lo score storico (haiku e' a -666 nel ledger, vedi il commento di
+// applyPreferOverride in ai-models.mjs). E' per-chiamata apposta: la quota del
+// piano Max e' CONDIVISA con pr-review-loop.yml e issue-fix.yml, e una
+// preferenza globale la brucerebbe affamando il ciclo dei merge.
+//
+// NON e' passata a: traduzioni, meta, FAQ, classificazione, selezione headline,
+// riformulazione del titolo — li' i modelli free funzionano e i gate lo
+// confermano. E nemmeno al fact-check: quello e' un consenso fra verificatori
+// INDIPENDENTI, e mandarli tutti sullo stesso modello collasserebbe
+// l'indipendenza che il guard «local/fallback cannot self-verify» difende.
+const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
+
+/**
+ * True se almeno un modello preferito NON dichiara un cap di token di input.
+ *
+ * Serve a una decisione sola, e va calcolata sulla stessa funzione che usa il
+ * pre-flight di callLLM (`getDeclaredRequestTokenLimit`): se domani haiku
+ * acquisisce un cap — a mano in MODEL_MAX_REQUEST_TOKENS, o imparato a runtime
+ * da un 413 — questa torna false da sola e il prompt riprende ad accorciarsi,
+ * senza che nessuno debba ricordarsi di aggiornare una costante qui.
+ */
+function _preferisceModelloSenzaCap(prefer) {
+  return (prefer || []).some((m) => getDeclaredRequestTokenLimit(m) === undefined);
+}
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
@@ -7277,6 +7311,40 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     ? Number(sourceContext._promptTokenBudget)
     : PROMPT_TOKEN_BUDGET;
 
+  // ── Le due difese che si combattevano ──────────────────────────────────
+  //
+  // La scala qui sotto accorcia la fonte per rientrare in un budget tarato sul
+  // cap dei modelli free (PROMPT_TOKEN_BUDGET = 8000). Ma la fonte tagliata e'
+  // esattamente quella che poi manca ai gate a valle. Misurato sulla run
+  // 32107646060: `[source-fidelity-low] recall 21-36% < 50%`,
+  // `[source-key-rates-dropped] perse 7-9 percentuali su 11`, `[thin-content]
+  // 818-1480 char contro un minimo di 1900`, e 20 tentativi di generazione in
+  // una sola run (495s su 638). Su 65 run: 688 occorrenze di `thin-content`,
+  // mediana 17 rigenerazioni per «Contenuto IT troppo corto».
+  //
+  // Ci si accorciava per farsi accettare, e si veniva bocciati per aver perso
+  // i fatti che ci si era accorciati per perdere.
+  //
+  // Da quando la generazione del corpo PREFERISCE claude-cli/haiku — l'unico
+  // membro del roster senza cap di input dichiarato — il primo tentativo non
+  // ha piu' motivo di accorciare: il modello che rispondera' per primo non ha
+  // un tetto da rispettare. Quindi gradino 0, prompt intero.
+  //
+  // Non serve un fallback inventato, perche' esiste gia': se haiku non e'
+  // disponibile e la cascata degrada sui modelli capped, `callLLM` lancia
+  // `ALL_MODELS_EXHAUSTED` con `err.retryRequestTokenBudget` — il cap piu'
+  // permissivo fra quelli che hanno rifiutato — il `catch` del ciclo di retry
+  // lo raccoglie in `lastPromptTokenBudget`, e il tentativo successivo entra
+  // qui con `_promptTokenBudget` valorizzato, cioe' con il ramo `> 0` sopra,
+  // cioe' con la scala di nuovo attiva su un target DETTATO dalla flotta.
+  // Percorso verificato end-to-end il 2026-08-18 (callLLM reale, catena di
+  // modelli capped, prompt da 60.500 token → retryRequestTokenBudget=8000).
+  //
+  // Vale SOLO al primo tentativo per costruzione: dal secondo in poi
+  // `_promptTokenBudget` c'e' (se la flotta ne ha dettato uno) e vince.
+  const _preferSenzaCap = _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
+  const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
+
   // ── La scala di riduzione, dichiarata e nell'ordine in cui morde ────────
   //
   // Ogni gradino e' misurato sul fixture del caso peggiore
@@ -7350,10 +7418,17 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     });
     _promptShrinkStep = i;
     _promptShrinkLabel = step.label;
-    if (_promptEstTokens <= _promptTokenTarget) break;
+    // `_saltaScala` esce al gradino 0: il modello che rispondera' per primo non
+    // dichiara un cap, quindi non c'e' niente da rientrare. Vedi il blocco «Le
+    // due difese che si combattevano» sopra.
+    if (_saltaScala || _promptEstTokens <= _promptTokenTarget) break;
   }
 
-  const _promptOverBudget = _promptEstTokens > _promptTokenTarget;
+  // Sopra il target ma DELIBERATAMENTE: non e' la scala che ha fallito, e' la
+  // scala che non e' stata chiamata in causa. Tenerlo distinto conta perche'
+  // `over=1` e' cio' che un watchdog allarma, e allarmare sul caso nominale lo
+  // renderebbe rumore da ignorare.
+  const _promptOverBudget = !_saltaScala && _promptEstTokens > _promptTokenTarget;
   // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
   // riga, non il testo attorno. `shrink=` e' nuovo e additivo — i campi
   // preesistenti mantengono nome e posizione.
@@ -7366,6 +7441,13 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(
       `  ✂️  [prompt-budget] prompt ridotto per rientrare in ${_promptTokenTarget} token: `
       + `«${_promptShrinkLabel}» → est=${_promptEstTokens}`,
+    );
+  } else if (_saltaScala && _promptEstTokens > _promptTokenTarget) {
+    console.error(
+      `  📤 [prompt-budget] prompt INTERO (est=${_promptEstTokens}, oltre ${_promptTokenTarget}) `
+      + `per scelta: la chiamata preferisce ${PREFERRED_GENERATION_MODELS.join(', ')}, senza cap di `
+      + 'input dichiarato. Se la cascata degrada su modelli capped, il retry lo ricostruira\' '
+      + 'sotto il budget che la flotta dettera\' (err.retryRequestTokenBudget).',
     );
   }
   if (_promptOverBudget) {
@@ -7381,7 +7463,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
+    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: PREFERRED_GENERATION_MODELS });
   }
   let itData;
   const itRepaired = repairLlmJson(itRaw);
@@ -7404,7 +7486,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     try {
       const itRaw2 = useGeminiDirect
         ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema })
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema });
+        // Stessa preferenza della chiamata che sta ripetendo: e' lo stesso
+        // prompt e lo stesso gate di qualita' a valle. E' anche la seconda
+        // chiamata preferita per tentativo su cui e' dimensionato
+        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2).
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: PREFERRED_GENERATION_MODELS });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {

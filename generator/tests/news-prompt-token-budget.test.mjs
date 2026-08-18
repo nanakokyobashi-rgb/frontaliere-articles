@@ -49,7 +49,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { estimateRequestTokens } from '../scripts/lib/ai-models.mjs';
+import { estimateRequestTokens, getDeclaredRequestTokenLimit, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from '../scripts/lib/ai-search-template.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs';
@@ -118,6 +118,12 @@ const DEPS = [
   'lastSourcePublishedAt', '_winnerFingerprintMessage',
   'AI_MODELS', 'GH_MODEL_HEAVY', 'CATEGORIES', 'AVAILABLE_IMAGES',
   'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'IT_GENERATION_MAX_TOKENS',
+  // La preferenza per-chiamata e la funzione che le chiede «hai un cap?».
+  // `PREFERRED_GENERATION_MODELS` vuota di default in BASE_DEPS: il ratchet qui
+  // sotto misura il ramo SENZA preferenza, cioe' il fallback su modelli capped,
+  // ed e' li' che il tetto deve continuare a valere. Il ramo CON preferenza ha
+  // il suo test dedicato in fondo.
+  'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -127,9 +133,14 @@ const DEPS = [
 // misurerebbe la copia, non il codice che gira.
 const clampDecl = cutDecl('function _clampRemediation(') + '\n' + cutDecl('function _clampSourceBody(');
 
+// Stesso motivo del clamp sopra: `_preferisceModelloSenzaCap` decide se la
+// scala di riduzione morde al primo tentativo, quindi va RITAGLIATA dal
+// sorgente, non riscritta qui. Una copia a mano direbbe che la copia funziona.
+const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
+
 const assemblePrompt = new Function(
   '__d',
-  `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${promptBlock}\n`
+  `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${preferDecl}\n${promptBlock}\n`
   + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget };',
 );
 
@@ -168,6 +179,11 @@ const BASE_DEPS = {
   PROMPT_TOKEN_BUDGET,
   IT_GENERATION_MAX_TOKENS,
   _winnerFingerprintMessage: null,
+  // Vuota di default: il ratchet misura il ramo SENZA preferenza per un modello
+  // senza cap, cioe' esattamente il fallback su modelli capped. E' li' che il
+  // tetto deve valere, ed e' li' che vale ancora.
+  PREFERRED_GENERATION_MODELS: [],
+  getDeclaredRequestTokenLimit,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
@@ -189,8 +205,9 @@ function assemble(overrides) {
 }
 
 /** Il ramo NEWS: fonte reale scrapata. `section` di default 'frontaliere', come il call-site reale prima di #96 — passala esplicitamente per l'altra sezione. */
-function newsPrompt(extra = {}, section = 'frontaliere') {
+function newsPrompt(extra = {}, section = 'frontaliere', deps = {}) {
   return assemble({
+    ...deps,
     pageContent: NEWS_PAGE_CONTENT,
     url: 'https://www.tio.ch/ticino/economia/1812345/imposta-fonte-frontalieri-nuove-aliquote',
     IS_FRONTALIERE: section === 'frontaliere',
@@ -591,5 +608,75 @@ test('il marker pubblica il gradino di riduzione', () => {
   assert.ok(
     src.includes('shrink=${_promptShrinkStep}'),
     'il marker non pubblica il gradino di riduzione',
+  );
+});
+
+// ═══ LE DUE DIFESE CHE SI COMBATTEVANO ══════════════════════════════════════
+//
+// La scala accorcia la fonte per rientrare nel cap dei modelli free; i gate a
+// valle bocciano l'articolo per aver perso i fatti che stavano nella parte
+// tagliata. Misurato sulla run 32107646060: recall 21-36% contro un minimo del
+// 50%, 7-9 tassi chiave su 11 persi, corpi da 818-1480 char contro un minimo di
+// 1900, e 20 tentativi di generazione in una sola run.
+//
+// Da quando la generazione preferisce claude-cli/haiku — l'unico membro del
+// roster senza cap di input dichiarato — il PRIMO tentativo non accorcia piu'.
+// I test qui sotto bloccano i due versi: che non accorci quando il preferito
+// non ha cap, e che TORNI ad accorciare appena quella condizione cade.
+
+const PREFERISCE_HAIKU = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CLAUDE_CLI_HAIKU] };
+
+test('col preferito senza cap il primo tentativo manda il prompt INTERO', () => {
+  const conPreferenza = newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU);
+  const senzaPreferenza = newsPrompt();
+
+  assert.equal(
+    conPreferenza.shrink, 0,
+    `la scala ha morso lo stesso (gradino ${conPreferenza.shrink}): il prompt viene accorciato `
+    + 'per un cap che il modello che rispondera\' per primo non ha, e i gate di fedelta\' '
+    + 'bocceranno l\'articolo per i fatti tagliati qui',
+  );
+  assert.ok(
+    conPreferenza.estTokens > senzaPreferenza.estTokens,
+    `il prompt intero (${conPreferenza.estTokens} token) non e' piu' ricco di quello ridotto `
+    + `(${senzaPreferenza.estTokens}): la preferenza non sta cambiando niente`,
+  );
+  // La fonte arriva al modello INTERA, non al 60% ne' al pavimento.
+  assert.ok(
+    conPreferenza.prompt.includes('FATTI DI DOMINIO VERIFICATI'),
+    'i fatti di dominio sono stati tolti lo stesso: e\' il primo gradino della scala',
+  );
+});
+
+test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
+  // Non e' un caso di scuola: `_learnedRequestTokenLimits` impara un cap dal
+  // primo 413 e lo persiste su Firestore. Il giorno in cui haiku ne prende uno,
+  // questo ramo deve tornare da solo al comportamento di prima — senza che
+  // nessuno si ricordi di una costante da aggiornare.
+  const conCap = newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/meta/llama-3.1-8b-instruct'] });
+  assert.ok(
+    conCap.estTokens <= PROMPT_TOKEN_BUDGET,
+    `preferito CON cap dichiarato e prompt a ${conCap.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+    + 'la scala non e\' tornata attiva e ogni modello capped verra\' saltato dal pre-flight',
+  );
+});
+
+test('il budget dettato dalla flotta vince sulla preferenza, al retry', () => {
+  // Il rimedio quando haiku non c'e' e la cascata degrada sui capped: callLLM
+  // lancia ALL_MODELS_EXHAUSTED con `retryRequestTokenBudget`, il catch lo
+  // raccoglie e il tentativo dopo entra qui con `_promptTokenBudget`. Da quel
+  // momento la preferenza NON deve piu' bastare a saltare la scala, altrimenti
+  // il retry rispedirebbe lo stesso prompt che la flotta ha gia' rifiutato —
+  // il difetto che PR #373 ha chiuso.
+  const alRetry = newsPrompt(
+    { _generationAttempt: 2, _promptTokenBudget: 6000 },
+    'frontaliere',
+    PREFERISCE_HAIKU,
+  );
+  assert.equal(alRetry.target, 6000, 'il budget dettato non e\' arrivato al target della scala');
+  assert.ok(
+    alRetry.shrink > 0,
+    'la scala non ha morso malgrado il budget dettato dalla flotta: il retry rispedisce '
+    + 'un prompt gia\' rifiutato, e la libreria aveva scritto che non puo\' riuscire',
   );
 });
