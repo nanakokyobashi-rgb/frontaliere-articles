@@ -3283,6 +3283,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.patente-di-guida-canton-soletta-conversione-ed-esami.title': 'Soleta licence: what to do and how to proceed',
     'blog.article.patente-di-guida-canton-soletta-conversione-ed-esami.excerpt': 'Conversion of the foreign driver\'s license in the Canton of Solothurn: how to apply for the conversion and what to do during the exams.',
     'blog.article.patente-di-guida-canton-soletta-conversione-ed-esami.imageAlt': 'A driver in a car on the Swiss road near Lugano.',
+    'blog.article.premi-cassa-malati-basilea-citt-riduzione.title': 'Health insurance premiums in the canton of Basel-City: reduction announced',
+    'blog.article.premi-cassa-malati-basilea-citt-riduzione.excerpt': 'The Canton of Basel-City has announced the reduction of sickness insurance premiums.',
+    'blog.article.premi-cassa-malati-basilea-citt-riduzione.imageAlt': 'Image of Basilea Città, Switzerland, with reduced health insurance premium',
 };
 
 export default blogMetaChEn;
