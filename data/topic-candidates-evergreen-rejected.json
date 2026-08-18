@@ -387,7 +387,8 @@
     "aprire un'attività canton Friburgo registro di commercio e costi",
     "imposta di successione e donazione canton Friburgo aliquote",
     "patente di guida canton Friburgo conversione ed esami",
-    "permesso di dimora B canton Soletta requisiti e rinnovo"
+    "permesso di dimora B canton Soletta requisiti e rinnovo",
+    "sistema scolastico canton Soletta iscrizione e cicli"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -596,6 +597,7 @@
     "patente di guida canton Friburgo conversione ed esami": 1,
     "imposte cantonali canton Soletta aliquote e deduzioni": 3,
     "premi cassa malati canton Soletta e riduzione premi": 1,
-    "assegni familiari canton Soletta importi e domanda": 1
+    "assegni familiari canton Soletta importi e domanda": 1,
+    "apprendistato e formazione professionale canton Soletta": 1
   }
 }
