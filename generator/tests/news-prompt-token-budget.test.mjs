@@ -148,7 +148,7 @@ const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
 const assemblePrompt = new Function(
   '__d',
   `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${preferDecl}\n${promptBlock}\n`
-  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget, rawEstTokens: _promptRawEstTokens };',
+  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget, rawEstTokens: _promptRawEstTokens, fonteChars: _promptFonteChars, fattiChars: _promptFattiChars, unsat: _promptTargetInsoddisfacibile, splitMode: _splitMode, splitAttiva: _splitAttiva, splitCall1: _splitCall1, promptSpedito: (_splitAttiva ? _splitCall1.p : prompt) };',
 );
 
 // ── Fixture: il CASO PEGGIORE REALE, non uno comodo ───────────────────────
@@ -886,4 +886,111 @@ test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => 
     capLibero.shrink, 0,
     'con cap disponibile la scala non deve mordere: la guardia si e\' rotta nell\'altro verso',
   );
+});
+
+// ═══════════════════════════════════════════════════════════════════════════
+// L'OSSERVATORE DEL DIFETTO «fatti=0ch»
+//
+// La scheda: con un budget dettato dalla flotta (3000 / 4000 / 8000) il prompt
+// di retry «rientrava» solo azzerando i fatti di dominio e dimezzando la
+// fonte — `shrink=4` sembrava un rimedio, e il prompt che partiva davvero
+// portava `fonte=2862ch fatti=0ch`. Il corpo perdeva proprio il materiale da
+// cui prende lunghezza: 12 chiamate su 12 uscite `[thin-content]`.
+//
+// Questo suite fallisce sulla versione precedente: li' non esiste un prompt
+// che, a budget 8000, porti i fatti di dominio interi.
+// ═══════════════════════════════════════════════════════════════════════════
+test('divisione in due chiamate: un prompt di retry non esce mai con fatti=0ch', async (t) => {
+  await t.test('a budget 8000 i fatti di dominio arrivano INTERI al modello', () => {
+    const intero = newsPrompt({ _promptTokenBudget: 999_999 });
+    const fattiInIngresso = intero.fattiChars;
+    assert.ok(
+      fattiInIngresso > 0,
+      `il fixture deve avere fatti di dominio non vuoti, altrimenti il test e' vacuo (${fattiInIngresso})`,
+    );
+
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const fattiSpediti = stretto.splitAttiva ? stretto.splitCall1.fattiChars : stretto.fattiChars;
+    assert.equal(
+      fattiSpediti, fattiInIngresso,
+      'il prompt effettivamente spedito ha perso i fatti di dominio: e\' esattamente il difetto '
+      + `(in ingresso ${fattiInIngresso}ch, spediti ${fattiSpediti}ch, shrink=${stretto.shrink})`,
+    );
+    assert.ok(
+      stretto.promptSpedito.includes('FATTI DI DOMINIO VERIFICATI'),
+      'il blocco dei fatti di dominio non compare nel prompt spedito',
+    );
+  });
+
+  await t.test('a budget 8000 la fonte spedita non e\' piu\' dimezzata', () => {
+    const intero = newsPrompt({ _promptTokenBudget: 999_999 });
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const fonteSpedita = stretto.splitAttiva ? stretto.splitCall1.fonteChars : stretto.fonteChars;
+    // Il difetto misurato tagliava la fonte da 6036 a 2862 char (-53%).
+    assert.ok(
+      fonteSpedita >= intero.fonteChars * 0.9,
+      `fonte spedita ${fonteSpedita}ch su ${intero.fonteChars}ch in ingresso: `
+      + 'la riduzione e\' tornata a mordere sul materiale, non sull\'impalcatura',
+    );
+  });
+
+  await t.test('la chiamata di scrittura rientra nel budget che la flotta detta', () => {
+    const stretto = newsPrompt({ _promptTokenBudget: 8000 });
+    const est = stretto.splitAttiva ? stretto.splitCall1.est : stretto.estTokens;
+    assert.ok(
+      est <= 8000,
+      `la chiamata di scrittura pesa ${est} token contro un target di 8000: `
+      + 'non entra, quindi il pre-flight la saltera\' comunque',
+    );
+  });
+
+  await t.test('il flag `off` riporta esattamente il comportamento precedente', () => {
+    const prima = process.env.CREATE_ARTICLE_PROMPT_SPLIT;
+    process.env.CREATE_ARTICLE_PROMPT_SPLIT = 'off';
+    try {
+      const off = newsPrompt({ _promptTokenBudget: 8000 });
+      assert.equal(off.splitMode, 'off');
+      assert.equal(off.splitAttiva, false, 'CREATE_ARTICLE_PROMPT_SPLIT=off deve disattivare la divisione');
+      assert.equal(off.splitCall1, null, 'con `off` la meta\' di scrittura non deve nemmeno essere costruita');
+    } finally {
+      if (prima === undefined) delete process.env.CREATE_ARTICLE_PROMPT_SPLIT;
+      else process.env.CREATE_ARTICLE_PROMPT_SPLIT = prima;
+    }
+  });
+
+  await t.test('un target sotto il pavimento dell\'impalcatura e\' marcato `unsat=1`, non `shrink=N`', () => {
+    // 3000 e 4000 sono cap di modello, non costanti di questo repo: non si
+    // possono togliere. Si puo' solo smettere di fingere di raggiungerli.
+    for (const target of [3000, 4000]) {
+      const res = newsPrompt({ _promptTokenBudget: target });
+      assert.equal(
+        res.unsat, true,
+        `target ${target} deve essere marcato insoddisfacibile: nessuna riduzione lo raggiunge`,
+      );
+      assert.ok(
+        res.logged.some((l) => String(l).includes(`unsat=1`)),
+        `il marker [prompt-budget] deve riportare unsat=1 per il target ${target}`,
+      );
+    }
+    const ottomila = newsPrompt({ _promptTokenBudget: 8000 });
+    assert.equal(ottomila.unsat, false, '8000 e\' raggiungibile dopo la divisione: non va marcato insoddisfacibile');
+  });
+
+  await t.test('le due meta\' dello schema sono disgiunte e complete', () => {
+    const full = buildArticleJsonSchema('it', 'full');
+    const body = buildArticleJsonSchema('it', 'body');
+    const meta = buildArticleJsonSchema('it', 'meta');
+    const cFull = Object.keys(full.schema.properties.content.properties.it.properties);
+    const cBody = Object.keys(body.schema.properties.content.properties.it.properties);
+    const cMeta = Object.keys(meta.schema.properties.content.properties.it.properties);
+    assert.deepEqual(cBody.filter((k) => cMeta.includes(k)), [], 'le due meta\' si sovrappongono');
+    assert.deepEqual(
+      cFull.filter((k) => !cBody.includes(k) && !cMeta.includes(k)), [],
+      'un campo del contenuto non e\' chiesto da nessuna delle due chiamate',
+    );
+    assert.deepEqual(
+      buildArticleJsonSchema('it'), full,
+      'lo schema di default deve restare quello storico, byte a byte',
+    );
+  });
 });
