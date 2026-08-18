@@ -49,6 +49,8 @@ import { readFileSync, writeFileSync, existsSync, unlinkSync, readdirSync } from
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { ledgerArticleId } from '../generator/scripts/lib/source-url-ledger.mjs';
+
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 const rel = (p) => path.join(ROOT, p);
@@ -179,10 +181,18 @@ function removeSeoEntry(file, id) {
   return { changed: true, src: src.slice(0, start) + src.slice(end) };
 }
 
-/** Rimuove da una mappa JSON ogni voce il cui VALORE è l'id (ledger URL→id). */
+/**
+ * Rimuove da una mappa JSON ogni voce il cui VALORE è l'id (ledger URL→id).
+ *
+ * `ledgerArticleId` e non `v === id`: dal 2026-08-18 `recordSourceUrl` scrive
+ * `{articleId, ts}` e le voci storiche restano stringhe nude. Col confronto
+ * diretto le voci nuove non avrebbero MAI corrisposto, e un articolo ritirato
+ * avrebbe lasciato il suo URL di fonte nel ledger — invisibile qui e ancora
+ * bloccante per la sezione.
+ */
 function removeJsonByValue(file, id) {
   const map = JSON.parse(read(file));
-  const hits = Object.entries(map).filter(([, v]) => v === id).map(([k]) => k);
+  const hits = Object.entries(map).filter(([, v]) => ledgerArticleId(v) === id).map(([k]) => k);
   for (const k of hits) delete map[k];
   return { changed: hits.length > 0, text: `${JSON.stringify(map, null, 2)}\n`, hits };
 }
