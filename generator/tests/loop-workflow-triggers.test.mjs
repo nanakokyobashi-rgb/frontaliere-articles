@@ -224,3 +224,69 @@ test('generate-article: il job `generate` conserva il proprio timeout-minutes', 
       'tiene il gruppo di concurrency per tutto il tempo.',
   );
 });
+
+// ── L'esenzione del dispatch dopo l'auto-dispatch (2026-08-18) ───────────────
+//
+// Da quando la catena dispatcha il proprio successore, `workflow_dispatch` non
+// è più una sola cosa. `admit` esentava OGNI dispatch dal gate, e per un umano
+// è giusto — una richiesta esplicita non è il riavvio ridondante di niente. Per
+// un anello le due forme sbagliate sono entrambe rotte, e nessuna delle due
+// produce un errore visibile:
+//
+//   · anello NON esente → non parte MAI. Il dispatch nasce dentro il job del
+//     padre, quindi al momento della domanda il padre è per forza in volo e per
+//     forza più vecchio: il gate vedrebbe sempre «una generazione è già in
+//     volo». La catena sembrerebbe semplicemente non esistere.
+//   · anello esente come un umano → entra nel gruppo di concurrency mentre
+//     un'altra run cammina, e lì GitHub tiene UNA sola pending e cancella la
+//     precedente a ogni arrivo. È la politica di scarto che le #193/#212 hanno
+//     appena chiuso, riaperta da una sorgente di arrivi in più.
+//
+// È esattamente la classe che questo file copre: righe che GitHub interpreta,
+// il cui difetto è un'ASSENZA e non un errore.
+test('generate-article: l\'esenzione del dispatch discrimina un anello da un umano', () => {
+  const admit = jobBlock(GA, 'admit');
+  assert.ok(admit, 'job `admit` non trovato');
+  assert.match(
+    admit,
+    /CHAIN_DEPTH: \$\{\{ inputs\.chain_depth \}\}/,
+    'il marcatore non arriva al gate: senza, il gate non ha modo di distinguere i due casi',
+  );
+  assert.match(
+    admit,
+    /chain_depth" -gt 0/,
+    'l\'esenzione non guarda `chain_depth`: o esenta anche gli anelli (sfratto) o nessuno (catena morta)',
+  );
+  assert.match(
+    admit,
+    /is_link" != "true"/,
+    'il ramo «procedi sempre» deve restare riservato al dispatch umano',
+  );
+  // Il padre va escluso dal confronto, o l'anello cede sempre a chi l'ha
+  // generato — che è ancora in volo per costruzione.
+  assert.match(
+    admit,
+    /PARENT_RUN_ID: \$\{\{ inputs\.parent_run_id \}\}/,
+    'senza il run id del padre non c\'è modo di escluderlo, e ogni anello si ferma',
+  );
+  // Il tetto orario è l'unica guardia che un input sbagliato non aggira: si
+  // calcola dalle run vere, non da un contatore propagato.
+  assert.match(
+    admit,
+    /CHAIN_MAX_RUNS_PER_HOUR/,
+    'il tetto orario è sparito: `chain_depth` e `no_article_streak` viaggiano negli input, quindi un ' +
+      'dispatch che li azzera li aggira entrambi. Questo no.',
+  );
+});
+
+test('generate-article: il cron resta il riavvio della catena, e non scende a uno slot', () => {
+  const on = GA.slice(GA.indexOf('on:'), GA.indexOf('\npermissions:'));
+  const slots = on.match(/- cron: '/g) || [];
+  assert.equal(
+    slots.length,
+    2,
+    'Quattro slot erano la compensazione di una catena che si spezzava a ogni anello secco; con il ' +
+      'successore garantito due bastano. Ma sotto i due il cron smette di essere una rete: è l\'unica ' +
+      'cosa che riaccende dopo un cap esaurito o un kill switch riarmato.',
+  );
+});

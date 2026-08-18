@@ -16,25 +16,46 @@ name: Generate Blog Article
 #   - The site's GitHub App is installed on valerielinc-ops only, and its
 #     APP_ID/APP_PRIVATE_KEY are Actions secrets over there, absent from Remote
 #     Config; secret values cannot be read back.
-#   - Remote Config's GITHUB_PAT answers 403 on
+#   - Remote Config's GITHUB_PAT answered 403 on
 #     POST /actions/workflows/*/dispatches ("Resource not accessible by
-#     integration" — it is an integration token with no Actions write).
+#     integration" — it was read as an integration token with no Actions write).
 #
 # CORRECTION (2026-08-06): the premise was wrong, and the correction matters more
 # than the conclusion. Remote Config carries a SECOND credential, GITHUB_PAT_NANAKO,
 # a classic PAT for this account with `repo` + `workflow` — already mapped in
 # RC_TO_ENV and already loaded by every workflow here. It CAN dispatch: probed with
 # POST .../dispatches against a nonexistent ref, it answers 422 "No ref found"
-# rather than 403, which proves the authorisation without executing anything. The
-# 403 above is real but belongs to GITHUB_PAT, a different token; all six pushing
-# workflows use that one while the capable one sits unused next to it.
+# rather than 403, which proves the authorisation without executing anything.
 #
-# THE CHAIN STAYS ON PUSH ANYWAY, and not for lack of a credential. See the
-# stop-condition argument below: chaining on the ARTICLE rather than on the RUN is
-# what makes a fast-failing generator unable to spin. That property was bought with
-# four days of evidence and is worth more than the credential ever was. This note
-# exists so the next reader does not re-derive "we cannot dispatch" — we can, we
-# choose not to.
+# SECONDA CORREZIONE (2026-08-18), e questa smentisce la riga del 403 qui sopra:
+# rimisurata la stessa sonda contro un ref inesistente, ENTRAMBI i token
+# rispondono 422 «No ref found for: refs/heads/…». Non solo GITHUB_PAT_NANAKO:
+# anche GITHUB_PAT, che questa intestazione dava per incapace. La differenza fra
+# 422 e 403 e' esattamente la differenza fra «autorizzato, ma il ref non esiste»
+# e «non autorizzato», e un token senza Actions write risponde 403 prima ancora
+# di guardare il ref — e' cosi' che il 403 di allora era stato ottenuto. Quindi
+# il 403 descriveva uno stato del token che nel frattempo e' cambiato, e la riga
+# non va ri-derivata come vera: la si legge come storia, non come vincolo.
+#
+# LA CATENA ORA E' DOPPIA, e le due meta' chainano su cose diverse:
+#   - un run che PRODUCE chaina col push (`content/**` nei paths qui sotto).
+#     Resta la meta' storica, e funziona: misurato il 2026-08-18 sulle ultime
+#     100 run, 48 su 51 arrivi `push` hanno eseguito la generazione, contro 7
+#     su 47 arrivi `schedule` — cioe' il push link passa il gate di ammissione
+#     quasi sempre, mentre il cron e' quasi sempre il riavvio ridondante che
+#     `admit` esiste per assorbire.
+#   - un run che NON produce ma DICHIARA perche' (pool secco, duplicato,
+#     rigetto qualita', quota vera: tutti exit 4) chaina con un dispatch, che
+#     e' la meta' nuova. Era il buco: un anello del genere non pusha niente
+#     sotto `content/**`, quindi non aveva nessun successore e la catena si
+#     fermava li' fino al prossimo slot cron.
+#
+# PERCHE' IL DISPATCH NON VA ANCHE SUL CASO «HA PRODOTTO». Sarebbe il secondo
+# successore dello stesso anello: il push ne ha gia' generato uno, i due
+# arrivano a pochi secondi l'uno dall'altro, e uno dei due viene scartato da
+# `admit` — cioe' si raddoppiano gli arrivi al gate che esiste per ridurli, e si
+# tira a sorte quale sopravvive. Il push link e' gia' immediato e gia' misurato
+# al 94%: non c'e' niente da aggiungere li'.
 #
 # The cost of dropping it was measured rather than estimated, and it was far
 # larger than the "loses an immediate retry" note this comment used to carry.
@@ -69,9 +90,35 @@ name: Generate Blog Article
 # The fix does NOT touch the stop condition: it lets a single run try the other
 # section before giving up, so a link ends only when BOTH sections have nothing.
 # See "Generate the article" below for the full argument, including why a
-# counter propagated across runs was rejected. Everything the paragraph above
-# asserts still holds byte for byte: only a push under content/** chains, and a
-# run that writes no article pushes nothing under content/**.
+# counter propagated across runs was rejected.
+#
+# ── L'ANELLO NON E' PIU' SOLO L'ARTICOLO (2026-08-18) ─────────────────────────
+#
+# Il paragrafo sopra non vale piu' parola per parola, ed e' deliberato. L'anello
+# ora e' l'ESITO DICHIARATO: un run che non produce ma esce con una delle sei
+# ragioni legittime (EXIT_NO_ARTICLE_DECLARED, cioe' exit 4 su ogni tentativo)
+# dispatcha il successore dopo 90s. Il buco che chiude e' misurato: 6,8h di
+# tempo davvero morto su 50,2h di finestra (14%), cioe' nessuna run vera attiva,
+# quasi tutto in attesa di uno slot cron dopo un anello secco.
+#
+# LA CONDIZIONE DI STOP E' PIU' LARGA, MA E' ANCORA IMPOSSIBILE DA SBAGLIARE, e
+# la ragione e' la stessa di prima letta al contrario: un generatore che
+# fallisce presto NON dichiara niente — un kill duro, un kill per stallo, un
+# exit 3, un'uscita muta e qualunque guasto infrastrutturale lasciano
+# `declared=false`, e la catena si ferma. Cioe' proprio il caso «gira a vuoto
+# alla velocita' con cui esce» che aveva fatto scartare il dispatch
+# incondizionato del sito e' l'unico caso che NON chaina. Il costo di un anello
+# e' quindi sempre una generazione vera arrivata in fondo.
+#
+# Sopra ci sono quattro tetti, in ordine di autorita':
+#   1. l'esito dichiarato (sopra), che e' l'unico strato che non puo' essere
+#      aggirato da un contatore sbagliato;
+#   2. un tetto orario dentro `admit` (default 20 run/ora, `vars.CHAIN_MAX_RUNS_PER_HOUR`),
+#      calcolato dalla stessa chiamata API che il gate fa gia': zero chiamate in
+#      piu', e agisce PRIMA che il job `generate` esista;
+#   3. `no_article_streak`, cap 6: sei anelli secchi di fila cedono al cron;
+#   4. `chain_depth`, cap 40.
+# Piu' un kill switch a due strati (vedi lo step «Chain»).
 #
 # ALSO DROPPED, each for a reason
 #   - mint-app-token.mjs: the App has no rights here (above).
@@ -88,16 +135,21 @@ name: Generate Blog Article
 
 on:
   schedule:
-    # Four slots, not two. Cron is now only the chain's STARTER — it has to
-    # restart the chain after every dry spell, and GitHub drops slots freely
-    # under load (six consecutive misses observed on 2026-08-03). Two slots an
-    # hour left hours-long holes with nothing to restart from. All four stay
-    # clear of the other producers' minutes (:15 publish-journalist, :30
-    # batch-faq, :50 border-wait).
+    # DUE SLOT, non piu' quattro (2026-08-18). Quattro erano la compensazione di
+    # una catena che si spezzava a ogni anello secco: il cron doveva riaccenderla
+    # da solo, e con GitHub che lascia cadere slot sotto carico (sei mancati di
+    # fila il 2026-08-03) due non bastavano. Ora l'anello secco ha un successore
+    # (vedi «L'ANELLO NON E' PIU' SOLO L'ARTICOLO»), quindi due slot bastano —
+    # e servono ancora: sono l'unica cosa che riaccende dopo un `chain_depth` o
+    # un `no_article_streak` esauriti, o dopo un kill switch riarmato. Per
+    # questo NON si scende a uno.
+    # Misurato il 2026-08-18: 40 dei 47 arrivi `schedule` delle ultime 100 run
+    # sono stati saltati da `admit` come riavvii ridondanti — cioe' i due slot
+    # tolti erano quasi interamente lavoro buttato.
+    # I due rimasti stanno liberi dai minuti degli altri produttori (:15
+    # publish-journalist, :30 batch-faq, :50 border-wait).
     - cron: '7 * * * *'   # frontaliere
-    - cron: '22 * * * *'  # svizzera
     - cron: '37 * * * *'  # svizzera
-    - cron: '52 * * * *'  # frontaliere
   push:
     # Without this, ANY branch touching content/** starts a generation
     # attempt — not just main. Measured (issue #35, same bug class in
@@ -140,6 +192,37 @@ on:
         required: false
         default: false
         type: boolean
+      # ── I TRE INPUT DELLA CATENA ────────────────────────────────────────────
+      # Nessuno di questi va messo a mano: li scrive lo step «Chain» dell'anello
+      # precedente. Un dispatch umano li lascia ai default, ed e' proprio questo
+      # a distinguerlo da un anello.
+      chain_depth:
+        # DOPPIO LAVORO, e va saputo: e' il contatore di profondita' ED e' il
+        # MARCATORE. `admit` esenta ogni dispatch umano dal gate (una richiesta
+        # esplicita non e' il riavvio ridondante di niente), ma NON puo' esentare
+        # un anello: l'anello parte da dentro il job che lo genera, quindi
+        # troverebbe sempre il padre in volo. `chain_depth > 0` e' la sola cosa
+        # che permette al gate di trattare i due casi in modo diverso.
+        description: 'Chain link depth (0 = human dispatch, never set by hand)'
+        required: false
+        default: '0'
+        type: string
+      no_article_streak:
+        description: 'Consecutive links that declared an outcome without writing an article'
+        required: false
+        default: '0'
+        type: string
+      parent_run_id:
+        # Senza questo, l'anello si auto-esclude dal gate «c'e' gia' una
+        # generazione in volo?»: il padre e' per forza piu' vecchio e per forza
+        # ancora `in_progress` quando il figlio chiede, quindi il figlio si
+        # fermerebbe SEMPRE. Non e' un dato ridondante col contatore: dice QUALE
+        # run va tolta dal confronto, e nessuna euristica sull'eta' lo sostituisce
+        # senza sbagliare il caso in cui due anelli esistono davvero.
+        description: 'Run id of the link that dispatched this one (never set by hand)'
+        required: false
+        default: ''
+        type: string
 
 # ── LA CONCURRENCY STA SUL JOB, E L'AMMISSIONE STA PRIMA (issue #193, #212) ──
 #
@@ -236,16 +319,47 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
           PUSH_BEFORE: ${{ github.event.before }}
           PUSH_SHA: ${{ github.sha }}
+          # La catena. Tutto via `env:` come il resto: dentro un `run:` non
+          # entra nessun `${{ }}`.
+          CHAIN_DEPTH: ${{ inputs.chain_depth }}
+          PARENT_RUN_ID: ${{ inputs.parent_run_id }}
+          CHAIN_MAX_RUNS_PER_HOUR: ${{ vars.CHAIN_MAX_RUNS_PER_HOUR }}
         run: |
           set -uo pipefail
 
-          # ── Chi NON viene mai coalizzato ────────────────────────────────────
+          # ── UN DISPATCH ORA PUO' ESSERE DUE COSE DIVERSE (2026-08-18) ───────
           #
-          # Un dispatch è una richiesta esplicita, spesso con un `url` preciso:
-          # non è il riavvio ridondante di niente, e saltarlo sarebbe l'unica
-          # forma di questo gate che sorprende chi lo usa.
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            echo "Dispatch manuale → si procede sempre."
+          # Prima di questa riga il gate esentava OGNI `workflow_dispatch`, e
+          # aveva ragione: era sempre una richiesta esplicita di un umano,
+          # spesso con un `url` preciso, cioè il contrario di un riavvio
+          # ridondante. Da quando la catena dispatcha il proprio successore
+          # quella premessa non copre più il caso nuovo, e va tenuta l'esenzione
+          # SOLO per gli umani.
+          #
+          # Le due forme sbagliate, entrambe rotte, per capire perché serve un
+          # marcatore e non un'euristica:
+          #   - anello NON esente → non partirebbe mai. Il dispatch nasce dentro
+          #     il job del padre, quindi al momento della domanda il padre è per
+          #     forza `in_progress` e per forza più vecchio: il gate vedrebbe
+          #     sempre «una generazione è già in volo» e salterebbe ogni anello.
+          #   - anello esente come un umano → entrerebbe nel gruppo di
+          #     concurrency mentre un'altra run cammina, e lì GitHub tiene UNA
+          #     sola pending e cancella la precedente a ogni arrivo: è la
+          #     politica di scarto che le #193/#212 hanno appena chiuso.
+          # Quindi: `chain_depth > 0` ⇒ anello, e per l'anello valgono il tetto
+          # orario e il confronto con le run in volo, con il solo padre escluso.
+          chain_depth=0
+          case "${CHAIN_DEPTH:-0}" in
+            ''|*[!0-9]*) chain_depth=0 ;;
+            *) chain_depth="${CHAIN_DEPTH:-0}" ;;
+          esac
+          is_link=false
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$chain_depth" -gt 0 ]; then
+            is_link=true
+          fi
+
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] && [ "$is_link" != "true" ]; then
+            echo "Dispatch manuale (chain_depth=$chain_depth) → si procede sempre."
             echo "proceed=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
@@ -276,16 +390,53 @@ jobs:
 
           # Una sola chiamata: le run non terminate sono per forza fra le più
           # recenti, quindi si filtra client-side invece di fare una chiamata
-          # per stato.
-          inflight=$(gh api \
+          # per stato. La stessa risposta serve al tetto orario qui sotto —
+          # ecco perché non si filtra per stato lato server.
+          runs=$(gh api \
             "repos/$REPO/actions/workflows/generate-article.yml/runs?per_page=100" \
-            --jq '[.workflow_runs[]
-                   | select(.status == "queued" or .status == "in_progress" or .status == "waiting")
-                   | {id: .id, created_at: .created_at}]' 2>/dev/null || true)
-          if [ -z "${inflight:-}" ]; then
-            echo "Impossibile leggere le run in volo → si prosegue (fail-open)."
+            --jq '[.workflow_runs[] | {id: .id, created_at: .created_at, status: .status}]' \
+            2>/dev/null || true)
+          if [ -z "${runs:-}" ]; then
+            echo "Impossibile leggere le run → si prosegue (fail-open)."
             echo "proceed=true" >> "$GITHUB_OUTPUT"
             exit 0
+          fi
+          inflight=$(printf '%s' "$runs" \
+            | jq -c '[.[] | select(.status == "queued" or .status == "in_progress" or .status == "waiting")]' \
+            2>/dev/null || true)
+          if [ -z "${inflight:-}" ]; then
+            echo "Impossibile filtrare le run in volo → si prosegue (fail-open)."
+            echo "proceed=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # ── IL TETTO ORARIO, l'unica guardia che un contatore non aggira ────
+          #
+          # `chain_depth` e `no_article_streak` viaggiano NEGLI INPUT: un anello
+          # che li dimentica, o un dispatch fatto a mano con i default, riparte
+          # da zero e i due cap non vedono niente. Questo tetto invece si calcola
+          # dallo stato vero — le run create nell'ultima ora, che sono già nella
+          # risposta qui sopra — quindi costa zero chiamate in più e nessuno può
+          # ripulirlo passando un input sbagliato. Vale solo per gli anelli: un
+          # umano e il cron restano fuori (il cron ha due slot, un umano si
+          # ferma da solo).
+          if [ "$is_link" = "true" ]; then
+            cap="${CHAIN_MAX_RUNS_PER_HOUR:-}"
+            case "$cap" in
+              ''|*[!0-9]*) cap=20 ;;
+            esac
+            last_hour=$(printf '%s' "$runs" \
+              | jq -r '[.[] | select((.created_at | fromdateiso8601) > (now - 3600))] | length' \
+              2>/dev/null || true)
+            case "${last_hour:-}" in
+              ''|*[!0-9]*) last_hour=0 ;;
+            esac
+            if [ "$last_hour" -ge "$cap" ]; then
+              echo "::warning::tetto orario della catena raggiunto: $last_hour run create nell'ultima ora (cap $cap) → anello non ammesso"
+              echo "proceed=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+            echo "Tetto orario: $last_hour run nell'ultima ora su un cap di $cap."
           fi
 
           self_created=$(printf '%s' "$inflight" \
@@ -303,9 +454,25 @@ jobs:
           # rende impossibile il caso in cui due arrivi simultanei si vedono a
           # vicenda e si fermano entrambi: fra due run che si osservano, esattamente
           # una si vede davanti. Il tie-break sull'id copre lo stesso secondo.
+          #
+          # IL PADRE VA ESCLUSO, e solo lui. Un anello nasce da dentro il job che
+          # lo dispatcha: quel run è più vecchio e ancora in volo per
+          # costruzione, quindi senza questa esclusione il confronto
+          # asimmetrico direbbe «cedi» a ogni anello, sempre. Escluderlo NON
+          # apre il buco della sovrapposizione: qualunque ALTRA run in volo fa
+          # ancora saltare l'anello, ed è la risposta voluta — `create-article.mjs`
+          # scrive registri su ~10 file e l'unica mutua esclusione reale è il
+          # rebase-resolver del push; il repo ha già pagato tre volte
+          # (#255, #281, #285) un conflitto su quei path, ogni volta con un
+          # articolo perso, non ritardato. Meglio saltare un anello che
+          # sovrapporre due generazioni.
+          parent_id="${PARENT_RUN_ID:-}"
+          case "$parent_id" in
+            ''|*[!0-9]*) parent_id=0 ;;
+          esac
           older=$(printf '%s' "$inflight" \
-            | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" \
-                '[ .[] | select(.id != $me)
+            | jq -r --argjson me "$SELF_ID" --arg mine "$self_created" --argjson dad "$parent_id" \
+                '[ .[] | select(.id != $me) | select($dad == 0 or .id != $dad)
                        | select(.created_at < $mine or (.created_at == $mine and .id < $me)) ] | length' \
               2>/dev/null || true)
           case "${older:-}" in
@@ -1041,11 +1208,20 @@ jobs:
 
           # `article` is the signal; `section` is the section that actually
           # wrote, which is what the next chain link alternates off.
+          #
+          # `declared` e `roster_blocked` esistono per lo step «Chain», e vanno
+          # letti INSIEME: `all_declared` resta `true` anche quando il roster
+          # non ha potuto servire il prompt (exit 3 non azzera il flag, imposta
+          # `roster_blocked`), quindi un successore deciso sul solo `declared`
+          # ripartirebbe contro un muro che il prossimo tentativo trova
+          # identico. Sono due condizioni, non una.
           {
             echo "article=$produced"
             echo "section=$effective"
+            echo "declared=$all_declared"
+            echo "roster_blocked=$roster_blocked"
           } >> "$GITHUB_OUTPUT"
-          echo "article=$produced section=$effective attempts=$tried/${#sections[@]}"
+          echo "article=$produced section=$effective declared=$all_declared roster_blocked=$roster_blocked attempts=$tried/${#sections[@]}"
 
           # ── LA RUN DIVENTA ROSSA (issue #313 / #348) ──────────────────────
           # Gli output sono gia' scritti sopra: gli step con `if: always()` (il
@@ -1387,3 +1563,161 @@ jobs:
             echo "- Generated: $generated"
             echo "- Target ref: ${{ github.ref_name }}"
           } >> "$GITHUB_STEP_SUMMARY"
+
+      # ── L'ANELLO CHE MANCAVA (2026-08-18) ───────────────────────────────────
+      #
+      # IL BUCO, misurato: su 399 run in 50,2 ore il tempo davvero morto — nessuna
+      # generazione vera attiva — e' 6,8h, il 14% della finestra. Non e' il cron
+      # che manca gli slot: e' che un anello che non produce non pusha niente
+      # sotto `content/**`, quindi non ha successore e la catena aspetta il
+      # prossimo slot. Le run fallite ne occupano altre 15,7h (31%), che e' un
+      # problema diverso e non si chiude qui.
+      #
+      # PERCHE' SOLO IL CASO «NIENTE ARTICOLO, MA DICHIARATO». Il caso «ha
+      # prodotto» ha gia' il suo successore, il push su `content/**`, e funziona:
+      # 48 arrivi `push` su 51 hanno eseguito la generazione (le ultime 100 run,
+      # 2026-08-18). Aggiungere un dispatch li' significherebbe due successori
+      # per lo stesso anello, che arrivano a pochi secondi l'uno dall'altro e di
+      # cui `admit` ne scarta uno: si raddoppiano gli arrivi al gate che esiste
+      # per ridurli, e si tira a sorte quale sopravvive.
+      #
+      # PERCHE' NON PUO' GIRARE A VUOTO. La catena richiede una DICHIARAZIONE:
+      # ogni tentativo deve essere uscito 4 (le sei ragioni legittime). Un kill
+      # duro, un kill per stallo, un exit 3, un'uscita muta, un guasto prima
+      # ancora del generatore — tutti lasciano `declared` diverso da `true`, e
+      # tutti fermano la catena. E' l'inverso esatto della forma che il dispatch
+      # incondizionato del sito aveva: li' un generatore che falliva presto
+      # girava alla velocita' con cui usciva, qui e' l'unico caso che non chaina.
+      #
+      # IL KILL SWITCH E' A DUE STRATI, e il primo e' un FILE nel repo — non e'
+      # gusto, e' il precedente gia' pagato in questo repo: fast-publish-article.yml
+      # documenta che l'API delle variabili Actions e' rifiutata dal proxy di
+      # questo ambiente («Access to this GitHub Actions path is not permitted
+      # through this proxy»), quindi un interruttore che vive SOLO in
+      # `vars.` non e' azionabile da una sessione — ed e' esattamente cosi' che
+      # quella pipeline e' rimasta ferma. Un file e' invece impostabile da qui,
+      # si vede in un diff e si revoca con un revert. La variabile resta come
+      # secondo strato per chi ha admin (che `valerielinc-ops` NON ha su questo
+      # repo: serve `bin/gh-nanako variable set CHAIN_ARMED false`).
+      # `vars.CHAIN_ARMED` non impostata = armato, come `FAST_PUBLISH_ARMED`.
+      #
+      # NIENTE Remote Config per il kill switch: `load-rc-env.mjs` esce 0 anche
+      # quando non carica niente (e' voluto: non deve mai rompere un workflow),
+      # quindi un interruttore letto da li' fallirebbe APERTO proprio quando
+      # l'auth si rompe, cioe' quando spegnerlo serve di piu'.
+      #
+      # I PAT: `GITHUB_PAT_NANAKO` come primario (nanako e' admin qui),
+      # `GITHUB_PAT` come fallback. Rimisurato il 2026-08-18 con la sonda contro
+      # un ref inesistente: ENTRAMBI rispondono 422 «No ref found», cioe' sono
+      # autorizzati a dispatchare — vedi la correzione nell'intestazione. Sono
+      # gia' in `process.env` dopo lo step «Load secrets from Remote Config».
+      #
+      # Le soglie sono overridabili via env perche' generate-article-chain.test.mjs
+      # esegue questo blocco davvero; nulla le imposta in CI.
+      - name: Chain — dispatch the next link
+        if: always()
+        env:
+          REPO: ${{ github.repository }}
+          SELF_ID: ${{ github.run_id }}
+          DRY: ${{ steps.mode.outputs.dry }}
+          ARTICLE: ${{ steps.generate.outputs.article }}
+          DECLARED: ${{ steps.generate.outputs.declared }}
+          ROSTER_BLOCKED: ${{ steps.generate.outputs.roster_blocked }}
+          SECTION_PRODUCED: ${{ steps.generate.outputs.section }}
+          SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
+          CHAIN_DEPTH: ${{ inputs.chain_depth }}
+          NO_ARTICLE_STREAK: ${{ inputs.no_article_streak }}
+          CHAIN_ARMED: ${{ vars.CHAIN_ARMED }}
+        run: |
+          # Questo step NON puo' fallire la run: la classificazione dell'esito e'
+          # gia' avvenuta nello step «Generate the article», e un errore nel
+          # dispatch del successore non e' un difetto dell'articolo appena
+          # prodotto (o non prodotto).
+          set +e
+          set -uo pipefail
+
+          max_depth="${CHAIN_MAX_DEPTH:-40}"
+          max_streak="${CHAIN_MAX_STREAK:-6}"
+          delay_s="${CHAIN_DELAY_S:-90}"
+
+          stop() {
+            echo "catena ferma: $1"
+            exit 0
+          }
+
+          num() {
+            case "${1:-}" in
+              ''|*[!0-9]*) printf '0' ;;
+              *) printf '%s' "$1" ;;
+            esac
+          }
+          depth=$(num "${CHAIN_DEPTH:-0}")
+          streak=$(num "${NO_ARTICLE_STREAK:-0}")
+
+          [ "${DRY:-}" = "true" ] && stop "self-test dry, non e' un anello"
+          [ -f .github/CHAIN_DISABLED ] && stop ".github/CHAIN_DISABLED presente (kill switch in-repo)"
+          [ "${CHAIN_ARMED:-}" = "false" ] && stop "vars.CHAIN_ARMED=false (kill switch)"
+
+          # L'ordine dei tre test sotto e' l'ordine dell'argomento, e non e'
+          # intercambiabile: prima «c'e' un articolo?» (allora il successore
+          # esiste gia'), poi «c'e' una dichiarazione?» (senza, non si chaina
+          # mai), poi «il roster ha servito?».
+          [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
+          [ "${DECLARED:-}" = "true" ] || stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore): e' il caso che non deve mai chainare"
+          [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
+
+          next_depth=$(( depth + 1 ))
+          next_streak=$(( streak + 1 ))
+          [ "$next_streak" -ge "$max_streak" ] && stop "$next_streak anelli secchi di fila (cap $max_streak) — si cede al cron"
+          [ "$next_depth" -ge "$max_depth" ] && stop "profondita' $next_depth (cap $max_depth) — si cede al cron"
+
+          # La sezione alterna, come ogni anello. `section` in uscita dallo step
+          # di generazione e' la sezione che ha SCRITTO; senza articolo e' quella
+          # richiesta, ed e' comunque quella su cui alternare.
+          base="${SECTION_PRODUCED:-}"
+          [ -n "$base" ] || base="${SECTION_REQUESTED:-frontaliere}"
+          if [ "$base" = "svizzera" ]; then next_section=frontaliere; else next_section=svizzera; fi
+
+          token="${GITHUB_PAT_NANAKO:-}"
+          token_name=GITHUB_PAT_NANAKO
+          if [ -z "$token" ]; then
+            token="${GITHUB_PAT:-}"
+            token_name=GITHUB_PAT
+          fi
+          [ -n "$token" ] || stop "nessun PAT in ambiente (Remote Config non caricato?)"
+
+          # Le graffe non sono stile: `$depth→` fa entrare i byte della freccia
+          # nel nome della variabile, e bash muore con «unbound variable» sotto
+          # `set -u`. Lo ha trovato il test che esegue questo blocco.
+          echo "anello: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, sezione ${base}→${next_section}, fra ${delay_s}s"
+          [ "$delay_s" -gt 0 ] && sleep "$delay_s"
+
+          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s"}}' \
+            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}")
+
+          dispatch() {
+            curl -sS -o /tmp/chain-dispatch.json -w '%{http_code}' \
+              -X POST \
+              -H "Authorization: Bearer $1" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$REPO/actions/workflows/generate-article.yml/dispatches" \
+              -d "$payload" 2>/dev/null
+          }
+
+          code=$(dispatch "$token")
+          if [ "$code" != "204" ] && [ "$token_name" = "GITHUB_PAT_NANAKO" ] && [ -n "${GITHUB_PAT:-}" ]; then
+            echo "::warning::dispatch con GITHUB_PAT_NANAKO → HTTP $code, riprovo con GITHUB_PAT"
+            token_name=GITHUB_PAT
+            code=$(dispatch "${GITHUB_PAT}")
+          fi
+
+          if [ "$code" = "204" ]; then
+            echo "anello dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak"
+            exit 0
+          fi
+          # Rosso NO: un successore mancato costa un giro di cron, e far fallire
+          # la run qui renderebbe illeggibile la classificazione dell'esito che
+          # lo step di generazione ha appena scritto.
+          echo "::warning::dispatch dell'anello fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          exit 0
