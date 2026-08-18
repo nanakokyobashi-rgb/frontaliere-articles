@@ -118,8 +118,16 @@ test('il veto e\' cablato PRIMA del differimento nel catch di primo livello', ()
   assert.ok(veto < defer, 'il veto deve precedere isQuotaExhaustedError, altrimenti e\' irraggiungibile');
   // Una sola definizione di «uscita per roster esaurito»: il numero letterale
   // non deve ricomparire scritto a mano, o le due meta' possono divergere.
-  assert.ok(
-    src.includes('process.exit(EXIT_ROSTER_CANNOT_SERVE_PROMPT)'),
+  //
+  // L'invariante e' la COSTANTE, non il nome della funzione che esce: dal
+  // 2026-08-18 le uscite di questo file passano da `exitAfterFlush()`, che
+  // scrive il ledger dei punteggi prima di terminare (`process.exit()` non fa
+  // scattare `beforeExit`, quindi i successi dell'ultima finestra si
+  // perdevano). Il match accetta entrambe le forme e continua a bocciare il
+  // letterale.
+  assert.match(
+    src,
+    /(?:process\.exit|await exitAfterFlush)\(EXIT_ROSTER_CANNOT_SERVE_PROMPT\)/,
     'l\'uscita deve usare la costante condivisa, non un letterale',
   );
 });

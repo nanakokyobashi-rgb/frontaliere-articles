@@ -283,11 +283,31 @@ function commitIfNeeded(currentStep) {
 // git push origin main` da un processo che non stava generando niente. Armarlo
 // solo quando il file E' l'entry point non toglie niente al job vero, che passa
 // sempre di la'.
+// La stessa perdita che #433 chiude in create-article.mjs (`exitAfterFlush`)
+// era ancora viva qui: questo handler chiama `callLLM` da `genTasks` /
+// `topUpTasks` / `transTasks` durante la run, e un SIGTERM a meta' run
+// (workflow cancellato) usciva con `process.exit(0)` sincrono senza mai dare
+// al ledger dei punteggi una finestra per scrivere gli esiti accumulati.
+//
+// Il primo giro di questo fix rendeva l'handler `async` e chiamava lui stesso
+// `flushScoresBeforeExit()` + `process.exit(0)` — ma questo handler si registra
+// PRIMA che `main()` arrivi a `initScoreStore()`, che arma il proprio pair
+// SIGTERM (`_registerExitHooks()` in `ai-models.mjs`). Su un SIGTERM reale
+// correvano entrambi: il nostro restava sospeso al vero `await ref.set()` di
+// rete (`_persistScoresToFirestore()` svuota `_dirtyModels` PRIMA di quell'
+// await), l'altro trovava `_dirtyModels` gia' vuoto, ritornava quasi subito e
+// chiamava `process.exit(143)` mentre la nostra scrittura era ancora in volo —
+// abortendola. Questo handler ora resta sincrono e fa SOLO il checkpoint git:
+// nessun `await` prima del suo ritorno, quindi l'emit di `SIGTERM` non puo'
+// interlacciarsi con l'altro listener, che parte solo a checkpoint concluso e
+// possiede da solo flush + exit(143). Se il SIGTERM arriva prima che
+// `initScoreStore()` abbia armato quel pair, non c'e' ancora niente di sporco
+// da perdere, e il processo termina sul SIGKILL che Actions manda dopo la
+// grace window — lo stesso esito di sempre.
 function installSigtermCheckpoint() {
   process.on('SIGTERM', () => {
     console.error('\n⚠️  SIGTERM — saving progress...');
     gitCommitAndPush('interrupted');
-    process.exit(0);
   });
 }
 
