@@ -1206,6 +1206,16 @@ jobs:
             fi
           done
 
+          # Zero tentativi non e' una dichiarazione vacuamente vera: e' il caso
+          # che il ramo «tried == 0» piu' sotto rende rosso, e senza questa riga
+          # `all_declared` restava `true` per costruzione (nessun giro del loop
+          # lo tocca), quindi lo step «Chain» — che legge `declared` e non lo
+          # status del job — dispatchava il successore esattamente nel caso in
+          # cui il generatore non e' nemmeno partito.
+          if [ "$tried" = "0" ]; then
+            all_declared=false
+          fi
+
           # `article` is the signal; `section` is the section that actually
           # wrote, which is what the next chain link alternates off.
           #

@@ -345,6 +345,10 @@ test('zero tentativi eseguiti e\' rosso, non «nessuna ragione da dichiarare»',
   const r = runGenerateBlock({ nodeExit: EXIT_NO_ARTICLE_DECLARED, budgetS: '0' });
   assert.equal(r.attempts, 0, 'la premessa: nessuna invocazione di create-article.mjs');
   assert.equal(r.status, 1, 'una run che non prova nemmeno non e\' un differimento');
+  // Lo step «Chain» legge `declared`, non lo status del job: con `declared`
+  // rimasto vero per vacuita' avrebbe dispatchato il successore su una run che
+  // non ha nemmeno invocato create-article.mjs.
+  assert.match(r.outputs, /declared=false/, 'zero tentativi non e\' una dichiarazione: la Chain non deve dispatchare');
 });
 
 test('UN SOLO tentativo non dichiarato basta a far rosso il paio', () => {
