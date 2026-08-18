@@ -27,18 +27,64 @@ name: tests
 # tenerli uguali è ciò che permette allo YAML dei due repo di restare allineato
 # (vedi scripts/ci/loop-sync-manifest.json).
 
+# ── Perché `main` è dentro, dal 2026-08-18 ──────────────────────────────────
+#
+# Fino a oggi qui c'era `push: branches-ignore: [main]`. Sembrava innocuo — i
+# file di codice si toccano solo via PR — e invece spegneva un pezzo del ciclo
+# che non nomina questo workflow via import, quindi nessun guard lo copriva.
+#
+# `pr-autorebase.mjs` ha un rescue `stuck-red` per la PR rossa a causa di un
+# dato di `main` e non per colpa sua. Il suo ramo `red-main`
+# (`scripts/ci/lib/vitestCheck.mjs`, `vitestFailureIsNotAttributableToPr`) chiede
+# UNA prova: che esista una run COMPLETATA e `success` di **questo** workflow sul
+# branch `main`, più recente del rosso della PR. La legge `mainTestsRuns()`
+# (`scripts/ci/pr-autorebase.mjs`) da
+# `actions/workflows/tests.yml/runs?branch=main` — l'endpoint è keyed sul NOME DI
+# QUESTO FILE, quindi nessun workflow affiancato può soddisfarlo.
+#
+# Misurato il 2026-08-18: `total_count = 0` su 849 run. Zero, e per costruzione.
+# Con l'altra uscita del rescue (`stale`, >24h) fuori portata, una PR rossa per
+# un dato di `main` entra in uno stato ASSORBENTE: senza verde non parte
+# `pr-review-loop`, quindi niente `## LGTM` e niente label, quindi nessuno dei
+# segnali `near-merge` — e la classe che esiste apposta per romperlo era spenta.
+# Cinque PR bloccate in un giorno; il log della run 32128625124 lo dice in
+# chiaro: «PR #414 non near-merge (no LGTM/collision-risk/stale-review/stuck-red)
+# — skip.»
+#
+# È la stessa forma di `SiteShellContract`: un file `identical`
+# (`pr-autorebase.mjs`) che dipende dal COMPORTAMENTO di un file `adapted`
+# (questo) senza nominarlo via import. `loop-references-exist.test.mjs` segue le
+# citazioni testuali, non questa — ed è il motivo per cui la dipendenza sta
+# scritta qui, accanto al trigger che la soddisfa.
+#
+# Il gate sul CONTENUTO generato è un'altra cosa e vive altrove
+# (`.github/workflows/content-gates-main.yml`): lì gira il sottoinsieme dei gate
+# che leggono `content/**`, con gli offender in una issue. Questo trigger serve
+# al verdetto su `main`, non alla diagnosi.
 on:
   pull_request:
   push:
-    branches-ignore: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# `cancel-in-progress` è vero OVUNQUE TRANNE che su `main`, e la differenza è
+# tutta nel consumatore. Su un branch conta solo l'ultimo push. Su `main` conta
+# che una run ARRIVI IN FONDO: `mainTestsRuns()` filtra `status=completed` e
+# `conclusion == success`, e una run cancellata non è né l'uno né l'altro. Con
+# `main` che avanza ogni ~8 minuti per la generazione articoli, cancellare in
+# corso vorrebbe dire tenere `total_count = 0` esattamente come prima, con un
+# trigger in più a far credere il contrario. È la stessa forma del gemello sul
+# sito (`tests-main`, `cancel-in-progress: false`).
+#
+# Con `cancel-in-progress: false` la coda resta comunque limitata: GitHub tiene
+# al più una run in esecuzione e una in attesa per gruppo, e cancella le pending
+# più vecchie. Il repo è pubblico, quindi i minuti sono gratis; il tetto vero è
+# la coda, e questa forma la limita per costruzione.
 concurrency:
-  group: tests-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.ref == 'refs/heads/main' && 'tests-main' || format('tests-{0}', github.ref) }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   tests:

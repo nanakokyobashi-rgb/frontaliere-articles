@@ -1,0 +1,105 @@
+name: Content gates (main)
+
+# I gate che scandiscono `content/**`, fatti girare DOVE il corpus viene
+# davvero scritto: su `main`, dopo il push di un bot produttore.
+#
+# ── Il buco che chiude, misurato il 2026-08-18 ──────────────────────────────
+#
+# `tests.yml` e `generator-ci.yml` hanno entrambi `push: branches-ignore:
+# [main]`. `generate-article.yml` (e i suoi cinque fratelli produttori) fa
+# `git push "$REMOTE" "HEAD:$TARGET"` con `$TARGET == main` — 88 articoli nelle
+# ultime 24h. Il contenuto generato dai bot non passava quindi da nessun gate,
+# mai.
+#
+# Il costo lo pagava chi non c'entrava: le sei PR aperte quel mattino (#410,
+# #413, #414, #416, #417, #418) erano tutte e sei rosse sugli STESSI tre test —
+# `content/seo/** — code aperte su una parola funzionale`, `nessuna occorrenza
+# di «LFW»`, `nessuna occorrenza di «LPS»` — e un `gh pr update-branch` le ha
+# rese verdi (9/9) senza cambiare una riga, perche' nel frattempo altri articoli
+# generati avevano sostituito quello colpevole. Il precedente e' la issue #267,
+# chiusa senza fix con `<!-- FIX_OUTCOME: max-turns -->`.
+#
+# ── Perche' non basta togliere `branches-ignore` da `tests.yml` ─────────────
+#
+# Perche' quello e' il check-run che l'auto-merge aspetta (il suo `name:` deve
+# combaciare con `CI_CHECK_NAME`), e farebbe girare l'intera suite di 112 file
+# ~90 volte al giorno. Qui girano i 17 gate che LEGGONO `content/` — la lista
+# e' misurata, non indovinata: vedi `CONTENT_GATES` in
+# `scripts/ci/content-gates-main.mjs`.
+#
+# ── Perche' non blocca niente ───────────────────────────────────────────────
+#
+# Non gira su `pull_request`, quindi non puo' essere un required check ne'
+# entrare nel gate dell'auto-merge; la branch protection non la tocca; e su
+# offender trovati lo script esce 0 — il segnale e' UNA issue deduplicata sul
+# titolo, che si richiude da sola al primo push verde. Esce !=0 solo quando il
+# preflight trova `content/` assente o quasi vuoto, cioe' quando il gate non ha
+# guardato niente.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+# ~90 push al giorno collassano in poche run: conta l'ULTIMO stato di `main`,
+# non ognuno dei passaggi intermedi, e una run cancellata a meta' non lascia
+# niente di sporco (lo script non scrive sul repo). Il gruppo e' FISSO, non
+# keyed sul ref: su `main` il ref e' sempre lo stesso, e un gruppo per-ref
+# darebbe la stessa cosa con un nome piu' lungo.
+concurrency:
+  group: content-gates-main
+  cancel-in-progress: true
+
+jobs:
+  gates:
+    name: content gates (node --test)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Nessun `npm ci`: i gate del corpus sono dependency-free (`node:test`,
+      # `node:assert`), e `github-issue-creator.mjs` usa solo builtin + `gh`.
+
+      # ── Perche' serve il PAT per APRIRE la issue ───────────────────────────
+      # Una issue creata dal GITHUB_TOKEN NON emette l'evento `issues: opened`
+      # (anti-ricorsione GitHub): nascerebbe fuori dal triage event-driven e
+      # resterebbe orfana fino allo sweep periodico. Col PAT il triage la
+      # classifica subito e il drainer la promuove al fixer. Senza PAT il
+      # degrado e' morbido, non silenzioso — stessa scelta di
+      # `workflow-failure-issues.yml`.
+      - name: Prepare Firebase credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          if [ -n "$FIREBASE_SERVICE_ACCOUNT_JSON" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      - name: Run content gates on main
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_SHA: ${{ github.sha }}
+        run: node scripts/ci/content-gates-main.mjs
+
+      - name: Cleanup Firebase credentials
+        if: always()
+        run: rm -f /tmp/firebase-sa.json

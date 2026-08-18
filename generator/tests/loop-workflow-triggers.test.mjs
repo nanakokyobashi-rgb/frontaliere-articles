@@ -16,12 +16,13 @@
  *
  * ## Dove girano, e dove NO
  *
- * `tests.yml` ha `pull_request` + `push: branches-ignore: [main]`. Questi test
- * girano quindi su OGNI PR — che è il momento in cui una di queste righe
- * potrebbe regredire — ma NON sui push diretti a `main`. Non è un buco di questo
- * file: è la topologia del repo (vedi la #267 e il commento nel gate di scrittura
- * di `generate-article.yml`), e per file che si toccano solo via PR la copertura
- * coincide.
+ * `tests.yml` ha `pull_request` + `push`. Fino al 2026-08-18 il `push` escludeva
+ * `main` (`branches-ignore`), quindi questi test giravano su OGNI PR — che è il
+ * momento in cui una di queste righe potrebbe regredire — ma non sui push diretti
+ * a `main`; da allora girano anche lì, perché il rescue `stuck-red` di
+ * `pr-autorebase.mjs` legge `actions/workflows/tests.yml/runs?branch=main` e
+ * senza una run `success` lì non ha prova da esibire (vedi il commento accanto al
+ * trigger in `tests.yml`, e la #267).
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';

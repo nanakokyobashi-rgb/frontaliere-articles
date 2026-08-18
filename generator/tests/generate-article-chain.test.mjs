@@ -587,7 +587,8 @@ test('il blocco run del generatore non interpola nulla: niente injection, ed e\'
 // ── La guardia sul percorso di scrittura (issue #267) ─────────────────────────
 //
 // Fino al 2026-08-13 gli articoli generati non passavano da NESSUNA guardia:
-// `tests.yml` ha `push: branches-ignore: [main]` e questo workflow scrive SOLO
+// `tests.yml` aveva `push: branches-ignore: [main]` (tolto il 2026-08-18) e
+// questo workflow scrive SOLO
 // su main — misurato, 0 run di `tests.yml` su main nelle ultime 50 contro ~111
 // commit/giorno su `content/**`. Il costo non e' stato teorico: il 2026-08-11 un
 // corpo con una legge inventata e' passato di qui e ha tenuto rosso `main` DEL

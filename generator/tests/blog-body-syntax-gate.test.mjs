@@ -4,9 +4,13 @@
  * PORTATO da valerielinc-ops/frontaliere-si-o-no `tests/blog-body-typescript-syntax.test.ts`,
  * ma NON come copia: la' il gate E' il test, qui il gate e' un eseguibile e il
  * test copre la sua logica. La ragione e' misurata e sta nell'intestazione dello
- * script — `tests.yml` gira su `pull_request` e `push: branches-ignore: [main]`,
- * mentre gli articoli atterrano per push diretto su main, quindi un gate scritto
- * come test di PR non vedrebbe mai un articolo.
+ * script — fino al 2026-08-18 `tests.yml` girava su `pull_request` e
+ * `push: branches-ignore: [main]`, mentre gli articoli atterrano per push diretto
+ * su main, quindi un gate scritto come test di PR non vedrebbe mai un articolo.
+ * (Da quella data il `branches-ignore` non c'e' piu' — serve il VERDETTO su
+ * `main` a `mainTestsRuns()` di `pr-autorebase.mjs` — ma la diagnosi sul
+ * contenuto generato resta separata, in
+ * `.github/workflows/content-gates-main.yml`.)
  *
  * ## Cosa copre questa suite, e cosa NO
  *
