@@ -1189,3 +1189,101 @@ describe('l\'osservatore: emptied=1 con esito buono NON segnala, esito degradato
     assert.equal(v.available, false, 'un campione corto non è «sano»: non deve chiudere una issue aperta');
   });
 });
+
+// ── 8. Dove si fa la fix: l'istruzione di routing dev'essere VERA ──────────
+//
+// IL DIFETTO CHE COPRE. Ogni body di questo scanner chiude con «punto da cui
+// guardare», e per i file del `loop-sync-manifest.json` dice anche su QUALE
+// repo si corregge. Due di quelle istruzioni dicevano, per un file sotto
+// `generator/`, «è `identical`, quindi la fix va fatta SUL SITO e scende al
+// mirror». La seconda metà è falsa: NESSUN mirror porta `generator/`.
+// `mirror-articles-engine.yml` filtra su `packages/articles/engine/**` più
+// `index.ts` e `articleSections.ts`; `mirror-articles-corpus.yml` porta
+// `content/` ed è dispatch-only. Misurato sul manifest di questo repo: delle
+// 126 voci `identical`, ZERO stanno sotto un prefisso che un mirror porta.
+//
+// Il costo è concreto e già pagato: chi seguisse l'istruzione alla lettera
+// riparerebbe solo il sito, mentre la generazione gira QUI. La CI di
+// entrambi i repo resterebbe verde e il difetto vivo — è esattamente come
+// `engine/` è rimasto senza trasporto dal 2026-08-02 al 2026-08-05.
+//
+// L'invariante testata è data-driven, non un divieto di stringa: se un
+// giorno un mirror portasse davvero `generator/`, basta aggiungerne il
+// prefisso qui sotto e l'istruzione ridiventa lecita.
+
+// Ciò che un mirror porta DAVVERO dal sito a questo repo, path relativi a
+// questa radice (i filtri `paths:` dei due workflow del sito).
+const MIRROR_CARRIED_PREFIXES = ['engine/', 'index.ts', 'articleSections.ts', 'content/'];
+
+const carriedByAMirror = (p) => MIRROR_CARRIED_PREFIXES.some((q) => p === q || p.startsWith(q));
+
+describe('routing della fix: nessun body promette un mirror che non esiste', () => {
+  const SCANNER = path.join(ROOT, 'scripts', 'ci', 'scan-generation-health.mjs');
+  const source = fs.readFileSync(SCANNER, 'utf-8');
+
+  test('nessuna voce `identical` del manifest sta sotto un prefisso mirrorato', () => {
+    // La premessa dell'invariante sotto, misurata invece che assunta: è
+    // questa a rendere «scende al mirror» falsa per costruzione, oggi.
+    const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
+    const identical = manifest.files.filter((f) => f.mode === 'identical');
+    assert.ok(identical.length > 0, 'manifest senza voci identical: la misura sotto sarebbe vacua');
+    const carried = identical.filter((f) => carriedByAMirror(f.path));
+    assert.deepEqual(
+      carried.map((f) => f.path),
+      [],
+      'un file `identical` sotto un prefisso mirrorato: aggiornare MIRROR_CARRIED_PREFIXES e i body che ne parlano',
+    );
+  });
+
+  test('ogni istruzione di routing su un file `identical` manda la fix su ENTRAMBI i repo', () => {
+    // Formulata in POSITIVO di proposito. La versione ovvia — «nessun body
+    // contiene "scende al mirror"» — si spegne da sola nel momento in cui la
+    // riga viene riscritta: sparisce la stringa, sparisce il trigger, e il
+    // test resta verde per sempre senza guardare più niente. È la stessa
+    // forma del gate vacuo di EDGE_PUSHED_FILES. Qui il trigger è invece la
+    // presenza di un'istruzione di routing (il body nomina il manifest), che
+    // non sparisce riscrivendo la frase, e l'asserzione è su cosa deve dire.
+    const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
+    const identical = new Set(manifest.files.filter((f) => f.mode === 'identical').map((f) => f.path));
+    const lines = source.split('\n');
+    const offenders = [];
+    let routingWindows = 0;
+    for (let i = 0; i < lines.length; i += 1) {
+      if (!/loop-sync-manifest/.test(lines[i])) continue;
+      // La frase è spezzata su più righe del literal: il path a cui si
+      // riferisce, e il resto dell'istruzione, stanno nella finestra intorno.
+      const window = lines.slice(Math.max(0, i - 4), i + 5).join('\n');
+      const named = [...window.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`/g)]
+        .map((m) => m[1])
+        .filter((p) => identical.has(p) && !carriedByAMirror(p));
+      if (named.length === 0) continue;
+      routingWindows += 1;
+      if (!/entrambi i repo/i.test(window)) {
+        offenders.push(`L${i + 1} (${named.join(', ')}): l'istruzione non dice di applicare la fix a ENTRAMBI i repo`);
+      }
+      if (/scende al\s*\n?\s*'?,?\s*'?mirror|scende al mirror/.test(window)) {
+        offenders.push(`L${i + 1} (${named.join(', ')}): promette un trasporto via mirror che non esiste per quel path`);
+      }
+    }
+    // Non-vacuità: se un giorno i body smettessero di istradare, questo test
+    // passerebbe senza aver guardato nulla — e non ce ne accorgeremmo.
+    assert.ok(routingWindows >= 2, `esaminate solo ${routingWindows} istruzioni di routing: il test è diventato vacuo`);
+    assert.deepEqual(offenders, []);
+  });
+
+  test('ogni body che nomina un file del manifest ne dichiara il `mode` giusto', () => {
+    // Il secondo modo di sbagliare la stessa istruzione: dire `adapted` di un
+    // file `identical` (o viceversa) manda la fix su un repo solo quando ne
+    // servono due. Copre solo i path che il manifest conosce.
+    const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
+    const modeOf = new Map(manifest.files.map((f) => [f.path, f.mode]));
+    const offenders = [];
+    for (const m of source.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`([^\n]{0,160})/g)) {
+      const declared = modeOf.get(m[1]);
+      if (!declared) continue;
+      const claimed = m[2].match(/`(identical|adapted|corpus-only|not-ported)`/);
+      if (claimed && claimed[1] !== declared) offenders.push(`${m[1]}: dichiarato \`${claimed[1]}\`, nel manifest è \`${declared}\``);
+    }
+    assert.deepEqual(offenders, []);
+  });
+});
