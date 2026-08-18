@@ -185,8 +185,8 @@ export function resolveComuneCanton(m) {
 // 19-22km `distanceKm`), so carrying one commute radius rather than two is
 // the honest reading, not a coincidence being exploited.
 //
-// Measured on this repo's dataset (corpus copy, 2026-08-18) — comuni selected
-// per canton, and the resulting structural pool including the 70 professions:
+// Measured 2026-08-18 on the CORPUS copy of the dataset — comuni selected per
+// canton, and the resulting structural pool including the 70 professions:
 //
 //     radius   Ticino  Grigioni  Vallese   comuni   structural pool
 //      20km     251       50       27       328          398
@@ -198,6 +198,14 @@ export function resolveComuneCanton(m) {
 //
 // So this moves the structural pool 155 → 507 and the runtime pool 382 → 734,
 // well past the 537 the section had before the collapse.
+//
+// This file is `mode: identical` and ships to both repos, but the two copies
+// of municipalities.ts and borderCrossings.ts are NOT manifest-governed and
+// have drifted in both directions: the corpus carries the #211 SO→LC province
+// fix the site lacks, the site carries Graubunden border crossings the corpus
+// lacks. So the same radius selects 437 comuni on the corpus and 446 on the
+// site (Ticino 312, Grigioni 98, Vallese 36). Both are healthy; the gap is the
+// datasets, not this rule. Don't read the two counts as a discrepancy to fix.
 //
 // Why 30km and not "take all 506": the last 69 comuni are the ones with the
 // least plausible search intent, and they are overwhelmingly Vallese —
