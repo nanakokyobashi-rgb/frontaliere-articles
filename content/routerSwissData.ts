@@ -1142,6 +1142,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'asilo-nido-e-custodia-bambini-canton-basilea-citta': { it: 'asilo-nido-e-custodia-bambini-canton-basilea-citta', en: 'nursery-and-childcare-in-basel-city', de: 'kindertagesstatte-und-kindertagespflege-in-basel-stadt', fr: 'garderie-d-enfants-et-soins-d-enfants-a-basel-ville' },
  'borse-di-studio-basilea-citta': { it: 'borse-di-studio-basilea-citta', en: 'scholarships-basel-city', de: 'stipendien-basel-stadt', fr: 'bourses-d-etudes-basel-ville' },
  'svizzera-trasferimento-richiedenti-asilo-italia': { it: 'svizzera-trasferimento-richiedenti-asilo-italia', en: 'switzerland-asylum-seekers-transfer-italy', de: 'schweiz-asylbewerber-rueckfuehrung-italien', fr: 'suisse-transfert-demandeurs-asile-italie' },
+ 'italia-rimpatrio-asilo': { it: 'italia-rimpatrio-asilo', en: 'italy-restarts-asylum-repatriations', de: 'italien-erneuert-asylabgeschobungen', fr: 'italie-reprend-l-expulsion-des-demandeurs-d-asile' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
