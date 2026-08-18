@@ -7539,9 +7539,15 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // Percorso verificato end-to-end il 2026-08-18 (callLLM reale, catena di
   // modelli capped, prompt da 60.500 token → retryRequestTokenBudget=8000).
   //
-  // Vale SOLO al primo tentativo per costruzione: dal secondo in poi
-  // `_promptTokenBudget` c'e' (se la flotta ne ha dettato uno) e vince.
-  const _preferSenzaCap = _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
+  // Vale SOLO al primo tentativo, ed e' applicato anche qui, non solo alla
+  // `prefer` passata a callLLM sotto: dal secondo tentativo in poi il retry
+  // loop min-words (selectMinWordsRetryModel) sceglie deliberatamente un
+  // modello diverso da quello precedente per uscire da un fallimento
+  // ripetuto, e quel modello ha quasi sempre un cap dichiarato — la scala di
+  // riduzione deve tornare a mordere per lui, non restare skippata pensando
+  // ad haiku che non verra' piu' chiamato. Vedi il gate sulla `prefer:` sotto.
+  const _preferActiveThisAttempt = generationAttempt === 1;
+  const _preferSenzaCap = _preferActiveThisAttempt && _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
   const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
 
   // ── La scala di riduzione, dichiarata e nell'ordine in cui morde ────────
@@ -7662,7 +7668,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: PREFERRED_GENERATION_MODELS });
+    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
   }
   let itData;
   const itRepaired = repairLlmJson(itRaw);
@@ -7685,11 +7691,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     try {
       const itRaw2 = useGeminiDirect
         ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema })
-        // Stessa preferenza della chiamata che sta ripetendo: e' lo stesso
-        // prompt e lo stesso gate di qualita' a valle. E' anche la seconda
-        // chiamata preferita per tentativo su cui e' dimensionato
-        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2).
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: PREFERRED_GENERATION_MODELS });
+        // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
+        // `_preferActiveThisAttempt`: solo al primo tentativo del retry loop
+        // min-words, cosi' da non scavalcare la rotazione di diversificazione
+        // (selectMinWordsRetryModel) dal secondo tentativo in poi — vedi il
+        // commento su `_preferSenzaCap` sopra. E' anche la seconda chiamata
+        // preferita per tentativo su cui e' dimensionato
+        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2, upper
+        // bound: con la preferenza confinata all'attempt 1 l'uso reale resta
+        // sotto il tetto, non sopra).
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
