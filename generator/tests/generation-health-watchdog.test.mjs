@@ -1551,11 +1551,12 @@ describe('roster-erosion: la condizione, e le tre trappole di #380', () => {
     // `createGithubIssue` deduplica sul prefisso di 60 caratteri: un discriminante
     // in coda verrebbe buttato, due erosioni diverse collasserebbero sulla stessa
     // issue e la seconda non si aprirebbe mai.
-    const prefixes = CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]))
-      .map((s, i) => CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]).map((x) => c.title(x)))[i]);
     const all = CONDITIONS.flatMap((c) => (c.scope === 'section' ? SECTIONS : [null]).map((s) => c.title(s)));
-    assert.equal(new Set(all.map((t) => t.slice(0, 60))).size, all.length, 'due condizioni condividono i primi 60 caratteri del titolo');
-    assert.ok(prefixes.length > 0);
+    assert.equal(
+      new Set(all.map((t) => t.slice(0, 60))).size,
+      all.length,
+      'due titoli condividono i primi 60 caratteri: la seconda issue non si aprirebbe mai',
+    );
     const mine = CONDITIONS.find((c) => c.id === 'roster-erosion').title(null);
     assert.ok(mine.startsWith('Roster LLM invecchiato'), 'il discriminante deve stare PRIMO');
     // Fuori dal TITLE_RE di `close-recovered-failure-issues.mjs` e da
