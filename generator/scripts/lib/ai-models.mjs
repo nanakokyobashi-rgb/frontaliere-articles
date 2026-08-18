@@ -2571,67 +2571,14 @@ function sortChainByScore(chain) {
   });
 }
 
-// Default AI_MODELS_PREFER — pins claude-cli/haiku to the front of the chain
-// (owner decision, issue #379 passo 2: "Porta Haiku al primo livello").
-// Without this, claude-cli/haiku sits at DEFAULT_CHAIN's tail (~180 entries
-// in) — being tier-0 (AI_COMPETING_TIERS, above) makes it COMPETE on score
-// against every normal model, but competing isn't winning: every untried
-// model starts at score 0, so sortChainByScore's tiebreak falls to original
-// chain INDEX, and claude-cli/haiku's index put it last among a huge block of
-// score-0 ties. Measured empty in run 31690534255: "46 modelli free
-// esauriti, claude-cli not reached this run, 0 skip" — the run's chain walk
-// never got that far. Tier-0 was necessary but not sufficient; it also needed
-// to win the tiebreak.
-export const DEFAULT_MODELS_PREFER = [AI_MODELS.CLAUDE_CLI_HAIKU];
-
-/**
- * AI_MODELS_PREFER — CSV of model ids to move to the FRONT of the chain, in
- * the order given, WITHOUT removing anything else. Unlike
- * AI_MODELS_FORCE_CHAIN (which truncates the chain down to exactly the listed
- * ids), this only reorders — every other model stays in the chain, in its
- * existing relative order, right after the preferred ones.
- *
- * Unset → DEFAULT_MODELS_PREFER above. Explicit empty string ("") → no
- * preference at all, i.e. the exact pre-existing behavior — same
- * instant-rollback convention as AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER.
- * Ids absent from the chain are silently dropped (nothing to move); no value
- * here is "malformed" the way a tier name can be.
- */
-function _getModelsPrefer() {
-  const raw = process.env.AI_MODELS_PREFER;
-  if (raw === undefined) return DEFAULT_MODELS_PREFER;
-  const trimmed = raw.trim();
-  if (trimmed === '') return []; // explicit empty → rollback lever
-  return trimmed.split(',').map((s) => s.trim()).filter(Boolean);
-}
-
-/**
- * Apply AI_MODELS_PREFER to a chain, ahead of sortChainByScore(). Because it
- * runs BEFORE the score sort, it only changes the tiebreak INDEX that sort
- * falls back on when tier and score are equal — tier and score still decide
- * first. A preferred model that has genuinely sunk (negative score from real
- * failures) still sinks below a better-scoring one; this only guarantees it
- * wins ties, which for a never-tried model (score 0, same as every other
- * never-tried model) means it goes first.
- */
-export function applyModelsPrefer(chain) {
-  const preferred = _getModelsPrefer();
-  if (!preferred.length) return chain;
-  const chainSet = new Set(chain);
-  const front = preferred.filter((m) => chainSet.has(m));
-  if (!front.length) return chain;
-  const frontSet = new Set(front);
-  const rest = chain.filter((m) => !frontSet.has(m));
-  return [...front, ...rest];
-}
-
-// ── La preferenza DURA: dopo il sort, e solo dove qualcuno la chiede ────────
+// ── La preferenza: DOPO il sort, e solo dove qualcuno la chiede ─────────────
 //
-// `applyModelsPrefer` sopra e' la preferenza MORBIDE: gira PRIMA di
-// sortChainByScore, quindi sposta solo il tiebreak d'indice a parita' di tier e
-// di punteggio. E' la forma giusta per un default spedito ovunque — non puo'
-// dirottare traffico su un modello a pagamento — ma e' anche la ragione per cui
-// il default non ha mai funzionato:
+// Fino al 2026-08-18 il corpus applicava questa preferenza PRIMA di
+// sortChainByScore, con `[claude-cli/haiku]` come default. Erano due scelte
+// sbagliate insieme, ed e' questa la riconciliazione chiesta dalla issue #402.
+//
+// PRIMA del sort la preferenza sposta solo il tiebreak d'indice, cioe' conta
+// unicamente a parita' di tier e di punteggio. Il punteggio pari non c'e':
 //
 //   ai_model_scores/_all, letto il 2026-08-18
 //     claude-cli/haiku                      35 successi /  41 fallimenti → score   -666
@@ -2662,6 +2609,27 @@ export function applyModelsPrefer(chain) {
 // `opts.model` (che fa `chain.slice(idx)`, quindi chiedere l'ultima voce da'
 // una catena di un modello solo), qui nulla viene rimosso: se il preferito
 // fallisce si cade esattamente sulla catena che si sarebbe usata comunque.
+//
+// ── E PERCHE' IL DEFAULT E' VUOTO ──────────────────────────────────────────
+//
+// Il default `[claude-cli/haiku]` non era solo inefficace: era anche attivo
+// dove non lo si voleva. Con lo score store irraggiungibile (fallback in
+// memoria) TUTTI i punteggi valgono 0, la parita' e' universale, e il tiebreak
+// d'indice diventa decisivo — cioe' il default dirottava OGNI chiamata di OGNI
+// processo su un modello a pagamento esattamente nel momento in cui il ledger
+// non era li' a impedirlo.
+//
+// Il sito lo aveva gia' scritto come gate: `ai-models-competing-tiers.test.ts`
+// pretende che «un tier-0 normale senza punteggio accumulato batta comunque un
+// tier appena promosso in parita' a 0». Promuovere un tier toglie la PENALITA'
+// di tier, non regala priorita'. Il default violava quella riga, ed e' il
+// motivo per cui i due repo non potevano convergere finche' esisteva.
+//
+// Ora la preferenza e' una sola, esplicita, e vive dove serve: sulla chiamata
+// che genera il corpo dell'articolo. `DEFAULT_MODELS_PREFER` resta esportata e
+// vuota, come punto unico in cui un default tornerebbe se mai lo si volesse —
+// ma chi lo riempie riapre esattamente il buco descritto qui sopra.
+export const DEFAULT_MODELS_PREFER = [];
 
 // Set once a prefer list with no usable entries has been warned about — stessa
 // disciplina warn-once di _competingTiersWarned. Azzerato da resetState().
@@ -2690,19 +2658,20 @@ function _normalizePrefer(prefer) {
 }
 
 /**
- * La preferenza dura in vigore per QUESTA chiamata: `opts.prefer` se c'e',
- * altrimenti l'opt-in esplicito via `AI_MODELS_PREFER`.
+ * La preferenza in vigore per QUESTA chiamata: `opts.prefer` se c'e',
+ * altrimenti l'opt-in esplicito via `AI_MODELS_PREFER`, altrimenti
+ * `DEFAULT_MODELS_PREFER` — che e' vuoto, vedi sopra.
  *
- * `AI_MODELS_PREFER` NON impostata → lista vuota, cioe' nessuna preferenza
- * dura. Il default `DEFAULT_MODELS_PREFER` resta confinato al layer morbido
- * pre-sort di `applyModelsPrefer`: e' cio' che impedisce a ogni chiamata di
- * ogni processo di finire su un modello a pagamento.
+ * `AI_MODELS_PREFER=""` resta la leva di rollback istantaneo (stessa convenzione
+ * di AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER): esplicitamente vuota →
+ * nessuna preferenza, senza warning, perche' e' una scelta e non un refuso.
  */
-function _hardPreferFor(optsPrefer) {
+function _preferFor(optsPrefer) {
   const perCall = _normalizePrefer(optsPrefer);
   if (perCall.length) return perCall;
   const raw = process.env.AI_MODELS_PREFER;
-  if (raw === undefined) return []; // unset → nessuna preferenza dura
+  if (raw === undefined) return DEFAULT_MODELS_PREFER;
+  if (raw.trim() === '') return []; // leva di rollback esplicita
   return _normalizePrefer(raw);
 }
 
@@ -2712,14 +2681,18 @@ function _hardPreferFor(optsPrefer) {
  *
  * Un id assente dalla catena viene comunque anteposto — stessa scelta di
  * `opts.model` per un id sconosciuto: preferire un modello che questa catena
- * non elenca e' una preferenza, non un refuso da ignorare in silenzio.
+ * non elenca e' una preferenza, non un refuso da ignorare in silenzio. (Il
+ * corpus lo scartava invece; la scelta del sito vince perche' e' l'unica che
+ * garantisce che il preferito venga davvero tentato.)
  *
  * @param {string[]} chain
- * @param {string[]} preferred lista gia' normalizzata (vedi _hardPreferFor)
+ * @param {string[]|string} [prefer] preferenza per-chiamata; se omessa vale
+ *   l'opt-in via AI_MODELS_PREFER
  * @returns {string[]}
  */
-export function applyPreferOverride(chain, preferred) {
-  if (!preferred || !preferred.length) return chain;
+export function applyModelsPrefer(chain, prefer) {
+  const preferred = _preferFor(prefer);
+  if (!preferred.length) return chain;
   const frontSet = new Set(preferred);
   return [...preferred, ...chain.filter((m) => !frontSet.has(m))];
 }
@@ -2881,12 +2854,11 @@ export function getPreferredModel({ model: startModel, chain: chainOverride, pre
     if (idx > 0) chain = chain.slice(idx);
     else if (idx < 0) chain = [startModel, ...chain.filter((m) => m !== startModel)];
   }
-  chain = applyModelsPrefer(chain);
   chain = sortChainByScore(chain);
-  // Rispecchia esattamente l'ordine di callLLM: morbida prima del sort, dura
-  // dopo. Senza la seconda riga questo peek risponderebbe con il modello che la
+  // Rispecchia esattamente l'ordine di callLLM: prima il sort, poi la
+  // preferenza. Senza questa riga il peek risponderebbe con il modello che la
   // catena avrebbe scelto, non con quello che la preferenza le fa scegliere.
-  chain = applyPreferOverride(chain, _hardPreferFor(prefer));
+  chain = applyModelsPrefer(chain, prefer);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
     if (isProviderCoolingDown(getProvider(m))) continue;
@@ -4713,13 +4685,12 @@ export async function callLLM(messages, opts = {}) {
   // reorder — the override owns the order verbatim, same as the o.model
   // skip above).
   if (!_forcedChain.length) {
-    chain = applyModelsPrefer(chain);
     chain = sortChainByScore(chain);
-    // La preferenza DURA, dopo il sort: e' l'unico punto in cui un modello con
+    // La preferenza DOPO il sort: e' l'unico punto in cui un modello con
     // punteggio negativo puo' comunque uscire primo. Si attiva solo su
-    // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai dal
-    // default. Vedi il blocco di commento su applyPreferOverride.
-    chain = applyPreferOverride(chain, _hardPreferFor(o.prefer));
+    // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
+    // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
+    chain = applyModelsPrefer(chain, o.prefer);
   }
 
   const errors = [];

@@ -42,7 +42,6 @@ import {
   AI_MODELS,
   DEFAULT_MODELS_PREFER,
   applyModelsPrefer,
-  applyPreferOverride,
   getPreferredModel,
   getDeclaredRequestTokenLimit,
   recordModelSuccess,
@@ -94,24 +93,23 @@ afterEach(() => {
 
 describe('preferenza per-chiamata — sopravvive al sort per punteggio', () => {
   it('la sola variabile d\'ambiente NON recupera un modello affondato (il difetto)', () => {
-    delete process.env.AI_MODELS_PREFER; // → DEFAULT_MODELS_PREFER = [haiku]
-    assert.ok(
-      DEFAULT_MODELS_PREFER.includes(HAIKU),
-      'il default non punta piu\' a haiku: questo test misura un\'altra cosa',
+    delete process.env.AI_MODELS_PREFER;
+    assert.deepEqual(
+      DEFAULT_MODELS_PREFER, [],
+      'il default e\' tornato non vuoto: dirotta OGNI chiamata di OGNI processo '
+      + 'sul modello a pagamento appena lo score store non e\' raggiungibile',
     );
     seminaIlDivario();
 
-    // Il layer morbido fa il suo mestiere: haiku E' in testa prima del sort.
-    assert.equal(applyModelsPrefer([RIVALE, HAIKU])[0], HAIKU);
-
-    // Ma dopo il sort per punteggio torna dietro. E' esattamente cio' che
-    // succedeva in produzione: preferenza dichiarata, effetto zero.
+    // Nessuna preferenza esplicita: decide il punteggio, e haiku e' affondato.
+    // E' esattamente cio' che succedeva in produzione con il default pre-sort:
+    // preferenza dichiarata, effetto zero.
     assert.equal(
       getPreferredModel({ chain: [RIVALE, HAIKU] }),
       RIVALE,
-      'la preferenza pre-sort ha recuperato un deficit di punteggio: '
-      + 'o e\' stata resa globale post-sort (brucia la quota Max condivisa con '
-      + 'pr-review-loop.yml/issue-fix.yml) o il divario non e\' stato seminato',
+      'un modello a -666 esce primo senza che nessuno lo abbia chiesto: '
+      + 'la preferenza e\' tornata globale e brucia la quota Max condivisa con '
+      + 'pr-review-loop.yml/issue-fix.yml',
     );
   });
 
@@ -130,15 +128,15 @@ describe('preferenza per-chiamata — sopravvive al sort per punteggio', () => {
   it('la preferenza riordina e non tronca: il fallback resta intero dietro', () => {
     const catena = ['a', 'b', 'c', HAIKU, 'd'];
     assert.deepEqual(
-      applyPreferOverride(catena, [HAIKU]),
+      applyModelsPrefer(catena, [HAIKU]),
       [HAIKU, 'a', 'b', 'c', 'd'],
       'un preferito che fallisce deve cadere sulla catena che si sarebbe usata comunque',
     );
   });
 
   it('accetta CSV oltre all\'array, e degrada a no-op invece di lanciare', () => {
-    assert.deepEqual(applyPreferOverride(['a', 'b'], []), ['a', 'b']);
-    assert.deepEqual(applyPreferOverride(['a', 'b'], undefined), ['a', 'b']);
+    assert.deepEqual(applyModelsPrefer(['a', 'b'], []), ['a', 'b']);
+    assert.deepEqual(applyModelsPrefer(['a', 'b'], undefined), ['a', 'b']);
     // La CSV passa dalla stessa normalizzazione di opts.prefer.
     delete process.env.AI_MODELS_PREFER;
     seminaIlDivario();
