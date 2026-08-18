@@ -831,9 +831,44 @@ async function _withClaudeCliSlot(fn) {
 // could otherwise burn the SAME shared Max-subscription quota those workflows
 // need, stalling the review/auto-merge pipeline. Counted per-process (module
 // state), reset by resetState().
-const DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN = 25;
+//
+// ── 25 → 40 (2026-08-18) ───────────────────────────────────────────────────
+//
+// 25 e' stato dimensionato quando claude-cli era solo un tier promosso che
+// nessuno chiamava mai davvero (vedi applyPreferOverride: «not reached this
+// run» su 6 run su 6). Con `opts.prefer` sulla generazione del corpo, ogni
+// tentativo di generazione lo chiama per davvero, e il numero di tentativi per
+// run e' misurato, non stimato:
+//
+//   run 32107646060 — 20 tentativi di generazione in una sola run
+//                     (news 1..6, news 1..6, evergreen 1..2, evergreen 1..6)
+//
+// 20 tentativi × fino a 2 chiamate preferite ciascuno = 40. Le due chiamate
+// sono la generazione e la sua RIGENERAZIONE repair-aware sullo stesso prompt
+// quando il JSON torna malformato (create-article.mjs, il retry con
+// `maxTokens=retryTokens` subito dopo il `JSON.parse` fallito): stesso call
+// site, stessa preferenza. Da qui il numero — e' il caso peggiore osservato
+// moltiplicato per il fan-out reale del call site, non un margine tondo.
+//
+// A 25 la run peggiore si sarebbe fermata a meta' strada, ricadendo sui modelli
+// free proprio per i tentativi finali — quelli che partono gia' con meno fonte
+// (la scala di riduzione morde di piu' ai retry) e producono il thin-content che
+// la preferenza esiste per evitare.
+//
+// Il fact-check NON entra in questo conto: resta deliberatamente sui modelli
+// free. E' un consenso fra verificatori indipendenti, e preferire un solo
+// modello per tutti i membri collasserebbe l'indipendenza che il guard
+// `local/fallback cannot self-verify` esiste per difendere.
+//
+// NON alzarlo a 300 come `translate-pending.yml` del sito (#5885): li' il tetto
+// e' dimensionato su 900 job in un workflow di traduzione, qui su una singola
+// run di generazione. La quota del piano Max e' CONDIVISA con pr-review-loop.yml
+// e issue-fix.yml, quindi ogni rialzo qui e' quota tolta al ciclo dei merge —
+// e' una leva di costo dichiarata, si alza solo con la misura in mano.
+const DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN = 40;
 let _claudeCliCallsThisRun = 0;
 let _claudeCliMaxCallsWarned = false;
+let _claudeCliUnlimitedWarned = false;
 
 /**
  * CLAUDE_CLI_MAX_CALLS_PER_RUN — max claude-cli/* calls this process attempts
@@ -843,17 +878,81 @@ let _claudeCliMaxCallsWarned = false;
  * + >=0, not `Number.parseInt(x) || default`, because that idiom can't
  * distinguish a real 0 from "unparseable". Malformed value (non-integer,
  * negative) → falls back to the default and warns ONCE per process.
+ *
+ * ── `0` NON E' UN KILL SWITCH, E SEMBRA ESSERLO ────────────────────────────
+ *
+ * E' la trappola di questa variabile: la lettura naturale di «cap = 0» su un
+ * modello a pagamento e' «zero chiamate», e la semantica reale e' l'opposto
+ * esatto — illimitate. Chi la usa per spegnere Haiku in fretta toglie l'unico
+ * tetto che c'era.
+ *
+ * NON e' stata cambiata in «0 = nessuna chiamata», per tre motivi:
+ *   1. e' la convenzione gia' documentata e testata su questo file, che e'
+ *      `mode: identical` col gemello del sito — invertirla di soppiatto qui
+ *      renderebbe i due lati d'accordo sul testo e in disaccordo sui fatti;
+ *   2. `0 = illimitato` e' la stessa convenzione degli altri cap del file, e
+ *      spezzarla in un punto solo e' peggio che tenerla;
+ *   3. spegnere Haiku ha gia' due leve vere (vedi il warn qui sotto), quindi
+ *      questa non deve diventarne una terza con una semantica sua.
+ *
+ * Resta pero' il fatto che un `0` messo per sbaglio non lascia traccia. Da qui
+ * il warn-once: non blocca niente, ma mette nel log della run la riga che
+ * distingue «l'ho voluto» da «pensavo di aver spento».
  */
 function _getClaudeCliMaxCallsPerRun() {
   const raw = (process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN || '').trim();
   if (!raw) return DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN;
   const n = Number(raw);
-  if (Number.isInteger(n) && n >= 0) return n;
+  if (Number.isInteger(n) && n >= 0) {
+    if (n === 0 && !_claudeCliUnlimitedWarned) {
+      _claudeCliUnlimitedWarned = true;
+      console.warn(
+        '⚠️ CLAUDE_CLI_MAX_CALLS_PER_RUN="0" = cap DISATTIVATO (chiamate claude-cli ILLIMITATE '
+        + 'in questa run), non "nessuna chiamata". Per spegnere davvero la preferenza Haiku: '
+        + 'AI_MODELS_PREFER="" (leva di rollback, vale anche sul prefer per-chiamata) oppure '
+        + 'ENABLE_HAIKU_ARTICLE_FALLBACK non impostata (toglie del tutto il provider).',
+      );
+    }
+    return n;
+  }
   if (!_claudeCliMaxCallsWarned) {
     _claudeCliMaxCallsWarned = true;
     console.warn(`⚠️ CLAUDE_CLI_MAX_CALLS_PER_RUN="${raw}" invalid (expected a non-negative integer, 0 = unlimited) — using default ${DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN}.`);
   }
   return DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN;
+}
+
+/**
+ * True se `model` non puo' PIU' essere servito in questa run perche' il cap di
+ * chiamate per-run del suo provider e' esaurito. Oggi solo `claude-cli/*` ha un
+ * cap per-run (CLAUDE_CLI_MAX_CALLS_PER_RUN); per ogni altro provider e' false.
+ *
+ * ── PERCHE' E' ESPORTATA, E NON SOLO UN `if` DENTRO callLLM ────────────────
+ *
+ * Stessa ragione di `getDeclaredRequestTokenLimit`: un chiamante deve poter
+ * chiedere «questo modello mi rispondera' davvero?» PRIMA di costruire il
+ * prompt, e la risposta deve venire da questa stessa funzione — non da una
+ * copia che scivola.
+ *
+ * Il caso concreto e' `_preferisceModelloSenzaCap` in `create-article.mjs`, che
+ * salta la scala di riduzione del prompt quando il preferito non dichiara un
+ * cap di input. `isModelAvailable` non conosce questo cap (guarda solo
+ * exhausted + presenza della chiave), quindi superate le N chiamate haiku
+ * spariva dalla catena mentre la guardia continuava a rispondere «c'e'»: per
+ * ogni headline successiva prompt intero (~9500 token), tutti i modelli free
+ * scartati dal pre-flight, tentativo 1 morto con ALL_MODELS_EXHAUSTED e
+ * recupero solo al tentativo 2 via `err.retryRequestTokenBudget`. Esattamente
+ * il tentativo sprecato che quella guardia esiste per evitare.
+ *
+ * NB: non e' `isModelAvailable` a essere stata estesa. «Disponibile» li'
+ * significa configurato e non bruciato, ed e' letta anche da chi conta i
+ * modelli configurati (`isAnyModelAvailable`): infilarci un contatore che
+ * cambia a meta' run renderebbe quella domanda non piu' rispondibile.
+ */
+export function isPerRunCallCapReached(model) {
+  if (getProvider(model) !== PROVIDER.CLAUDE_CLI) return false;
+  const cap = _getClaudeCliMaxCallsPerRun();
+  return cap > 0 && _claudeCliCallsThisRun >= cap;
 }
 
 // ── API keys (lazy-loaded from environment) ──────────────────
@@ -1069,6 +1168,18 @@ const DEFAULT_OPTS = {
   backoffMs: 2500,
   /** Override the default fallback chain */
   chain: undefined,
+  /**
+   * Preferenza DURA per questa singola chiamata: array di id (o CSV) spostati
+   * in testa alla catena DOPO l'ordinamento per punteggio, quindi vincente
+   * anche contro un modello con storico molto migliore. Riordina e basta: la
+   * catena resta intera dietro, e un preferito che fallisce cade sul fallback
+   * che si sarebbe usato comunque.
+   *
+   * Da usare SOLO sui punti critici dove il modello free non e' affidabile — la
+   * quota del piano Max e' condivisa con pr-review-loop.yml e issue-fix.yml.
+   * Vedi il blocco di commento su applyPreferOverride.
+   */
+  prefer: undefined,
 };
 
 /**
@@ -1399,6 +1510,16 @@ function _responseCacheKey(messages, o) {
     ns: o.cacheNamespace || '',
     bfc: !!o.bypassForceChain,
     fc: (process.env.AI_MODELS_FORCE_CHAIN || '').trim(),
+    // Same argument as `fc` one line up: a preference changes WHICH model
+    // answers an otherwise identical request, so a preferred and a
+    // non-preferred call must not share a cache entry. Both layers are keyed:
+    // `pf` the process-wide env opt-in, `pfo` the per-call opts.prefer. Without
+    // `pfo` the body call (which prefers claude-cli/haiku) and any other call
+    // with the same prompt+params would collide, and the preferred call would
+    // be served a response a free model produced — the exact defect the
+    // preference exists to avoid.
+    pf: (process.env.AI_MODELS_PREFER || '').trim(),
+    pfo: _normalizePrefer(o.prefer).join(','),
   }));
 }
 
@@ -2515,58 +2636,174 @@ function sortChainByScore(chain) {
   });
 }
 
-// Default AI_MODELS_PREFER — pins claude-cli/haiku to the front of the chain
-// (owner decision, issue #379 passo 2: "Porta Haiku al primo livello").
-// Without this, claude-cli/haiku sits at DEFAULT_CHAIN's tail (~180 entries
-// in) — being tier-0 (AI_COMPETING_TIERS, above) makes it COMPETE on score
-// against every normal model, but competing isn't winning: every untried
-// model starts at score 0, so sortChainByScore's tiebreak falls to original
-// chain INDEX, and claude-cli/haiku's index put it last among a huge block of
-// score-0 ties. Measured empty in run 31690534255: "46 modelli free
-// esauriti, claude-cli not reached this run, 0 skip" — the run's chain walk
-// never got that far. Tier-0 was necessary but not sufficient; it also needed
-// to win the tiebreak.
-export const DEFAULT_MODELS_PREFER = [AI_MODELS.CLAUDE_CLI_HAIKU];
+// ── La preferenza: DOPO il sort, e solo dove qualcuno la chiede ─────────────
+//
+// Fino al 2026-08-18 il corpus applicava questa preferenza PRIMA di
+// sortChainByScore, con `[claude-cli/haiku]` come default. Erano due scelte
+// sbagliate insieme, ed e' questa la riconciliazione chiesta dalla issue #402.
+//
+// PRIMA del sort la preferenza sposta solo il tiebreak d'indice, cioe' conta
+// unicamente a parita' di tier e di punteggio. Il punteggio pari non c'e':
+//
+//   ai_model_scores/_all, letto il 2026-08-18
+//     claude-cli/haiku                      35 successi /  41 fallimenti → score   -666
+//     nvidia/meta/llama-3.1-8b-instruct 171.181 successi / 3.276 fall.   → score +35.315
+//
+// Contro un deficit di 35.981 punti il tiebreak d'indice non conta nulla: il
+// sort successivo rimanda haiku in coda. Misurato su 6 run su 6 di
+// generate-article.yml: «last-resort: omniroute/local/claude-cli not reached
+// this run», con il binario `claude 2.1.234` presente sul runner, il token
+// presente e zero ENOENT nei log. Raggiungibile e sano, mai chiamato.
+//
+// Questa e' la preferenza DURA: gira DOPO il sort, quindi vince a prescindere
+// dal punteggio. Proprio per questo NON e' mai un default — si attiva solo se
+// qualcuno la chiede esplicitamente, in uno dei due modi:
+//
+//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla sola
+//      generazione del corpo, non su traduzioni/meta/FAQ/classificazione);
+//   2. `AI_MODELS_PREFER` impostata a mano da UNO step di workflow — oggi
+//      `translate-pending.yml` del sito, che dipende da questa semantica e ha
+//      un gate dedicato (`tests/relocalize-traffic-priority.test.ts`).
+//
+// Il perimetro stretto e' il punto: la quota del piano Max e' CONDIVISA con
+// pr-review-loop.yml e issue-fix.yml, e una preferenza dura globale la
+// brucerebbe affamando la pipeline dei merge.
+//
+// Riordina, non tronca: a differenza di AI_MODELS_FORCE_CHAIN (che pinna la
+// catena esattamente agli id elencati, buttando ~180 modelli di fallback) e di
+// `opts.model` (che fa `chain.slice(idx)`, quindi chiedere l'ultima voce da'
+// una catena di un modello solo), qui nulla viene rimosso: se il preferito
+// fallisce si cade esattamente sulla catena che si sarebbe usata comunque.
+//
+// ── E PERCHE' IL DEFAULT E' VUOTO ──────────────────────────────────────────
+//
+// Il default `[claude-cli/haiku]` non era solo inefficace: era anche attivo
+// dove non lo si voleva. Con lo score store irraggiungibile (fallback in
+// memoria) TUTTI i punteggi valgono 0, la parita' e' universale, e il tiebreak
+// d'indice diventa decisivo — cioe' il default dirottava OGNI chiamata di OGNI
+// processo su un modello a pagamento esattamente nel momento in cui il ledger
+// non era li' a impedirlo.
+//
+// Il sito lo aveva gia' scritto come gate: `ai-models-competing-tiers.test.ts`
+// pretende che «un tier-0 normale senza punteggio accumulato batta comunque un
+// tier appena promosso in parita' a 0». Promuovere un tier toglie la PENALITA'
+// di tier, non regala priorita'. Il default violava quella riga, ed e' il
+// motivo per cui i due repo non potevano convergere finche' esisteva.
+//
+// Ora la preferenza e' una sola, esplicita, e vive dove serve: sulla chiamata
+// che genera il corpo dell'articolo. `DEFAULT_MODELS_PREFER` resta esportata e
+// vuota, come punto unico in cui un default tornerebbe se mai lo si volesse —
+// ma chi lo riempie riapre esattamente il buco descritto qui sopra.
+export const DEFAULT_MODELS_PREFER = [];
+
+// Set once a prefer list with no usable entries has been warned about — stessa
+// disciplina warn-once di _competingTiersWarned. Azzerato da resetState().
+let _preferredModelsWarned = false;
 
 /**
- * AI_MODELS_PREFER — CSV of model ids to move to the FRONT of the chain, in
- * the order given, WITHOUT removing anything else. Unlike
- * AI_MODELS_FORCE_CHAIN (which truncates the chain down to exactly the listed
- * ids), this only reorders — every other model stays in the chain, in its
- * existing relative order, right after the preferred ones.
- *
- * Unset → DEFAULT_MODELS_PREFER above. Explicit empty string ("") → no
- * preference at all, i.e. the exact pre-existing behavior — same
- * instant-rollback convention as AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER.
- * Ids absent from the chain are silently dropped (nothing to move); no value
- * here is "malformed" the way a tier name can be.
+ * Normalizza una preferenza per-chiamata: accetta un array di id o una CSV,
+ * scarta i vuoti, deduplica preservando l'ordine. Mai lancia — una preferenza
+ * malformata degrada a «nessuna preferenza», non a un crash della generazione.
  */
-function _getModelsPrefer() {
-  const raw = process.env.AI_MODELS_PREFER;
-  if (raw === undefined) return DEFAULT_MODELS_PREFER;
-  const trimmed = raw.trim();
-  if (trimmed === '') return []; // explicit empty → rollback lever
-  return trimmed.split(',').map((s) => s.trim()).filter(Boolean);
+function _normalizePrefer(prefer) {
+  if (!prefer) return [];
+  const list = Array.isArray(prefer) ? prefer : String(prefer).split(',');
+  const out = [];
+  for (const item of list) {
+    const id = String(item || '').trim();
+    if (id && !out.includes(id)) out.push(id);
+  }
+  if (!out.length && (Array.isArray(prefer) ? prefer.length : String(prefer).trim())) {
+    if (!_preferredModelsWarned) {
+      _preferredModelsWarned = true;
+      console.warn(`⚠️  prefer=${JSON.stringify(prefer)} non ha voci utilizzabili — ignorato.`);
+    }
+  }
+  return out;
 }
 
 /**
- * Apply AI_MODELS_PREFER to a chain, ahead of sortChainByScore(). Because it
- * runs BEFORE the score sort, it only changes the tiebreak INDEX that sort
- * falls back on when tier and score are equal — tier and score still decide
- * first. A preferred model that has genuinely sunk (negative score from real
- * failures) still sinks below a better-scoring one; this only guarantees it
- * wins ties, which for a never-tried model (score 0, same as every other
- * never-tried model) means it goes first.
+ * La preferenza in vigore per QUESTA chiamata: `opts.prefer` se c'e',
+ * altrimenti l'opt-in esplicito via `AI_MODELS_PREFER`, altrimenti
+ * `DEFAULT_MODELS_PREFER` — che e' vuoto, vedi sopra.
+ *
+ * ── LA LEVA DI ROLLBACK VA LETTA PER PRIMA, O NON E' UNA LEVA ──────────────
+ *
+ * `AI_MODELS_PREFER=""` (esplicitamente vuota, non «non impostata») spegne OGNI
+ * preferenza, compresa quella per-chiamata. Stessa convenzione di
+ * AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER, e nessun warning: e' una scelta,
+ * non un refuso.
+ *
+ * L'ordine conta, ed e' stato sbagliato per un giorno. Con il per-call letto
+ * per primo la leva copriva solo il ramo env-only — che in produzione non
+ * esiste: `create-article.mjs` passa SEMPRE `prefer: PREFERRED_GENERATION_MODELS`
+ * su entrambe le chiamate che generano il corpo. Verificato eseguendo il
+ * codice: con `AI_MODELS_PREFER=""` nell'ambiente,
+ * `applyModelsPrefer(['a','b'], ['claude-cli/haiku'])` tornava
+ * `['claude-cli/haiku','a','b']`. Cioe' l'unica leva documentata come «rollback
+ * istantaneo» su un modello A PAGAMENTO non fermava il percorso che lo paga.
+ *
+ * Il costo dell'inversione e' nullo per gli altri chiamanti: `undefined` (il
+ * caso normale) non tocca nulla, e un valore non vuoto continua a perdere
+ * contro `opts.prefer` — la preferenza per-chiamata resta piu' specifica
+ * dell'opt-in di processo. Solo la stringa vuota, che e' un atto deliberato,
+ * vince su tutto.
+ *
+ * NON confondere con `CLAUDE_CLI_MAX_CALLS_PER_RUN`: quella e' un cap, e `0`
+ * vale ILLIMITATO (vedi `_getClaudeCliMaxCallsPerRun`). Usarla come interruttore
+ * ottiene l'opposto di spegnere.
  */
-export function applyModelsPrefer(chain) {
-  const preferred = _getModelsPrefer();
+function _preferFor(optsPrefer) {
+  const raw = process.env.AI_MODELS_PREFER;
+  if (raw !== undefined && raw.trim() === '') return []; // leva di rollback esplicita
+  const perCall = _normalizePrefer(optsPrefer);
+  if (perCall.length) return perCall;
+  if (raw === undefined) return DEFAULT_MODELS_PREFER;
+  return _normalizePrefer(raw);
+}
+
+/**
+ * Sposta gli id preferiti in TESTA a una catena GIA' ordinata per punteggio,
+ * senza rimuovere nulla. Da applicare DOPO sortChainByScore().
+ *
+ * Un id assente dalla catena viene comunque anteposto — stessa scelta di
+ * `opts.model` per un id sconosciuto: preferire un modello che questa catena
+ * non elenca e' una preferenza, non un refuso da ignorare in silenzio. (Il
+ * corpus lo scartava invece; la scelta del sito vince perche' e' l'unica che
+ * garantisce che il preferito venga davvero tentato.)
+ *
+ * @param {string[]} chain
+ * @param {string[]|string} [prefer] preferenza per-chiamata; se omessa vale
+ *   l'opt-in via AI_MODELS_PREFER
+ * @returns {string[]}
+ */
+export function applyModelsPrefer(chain, prefer) {
+  const preferred = _preferFor(prefer);
   if (!preferred.length) return chain;
-  const chainSet = new Set(chain);
-  const front = preferred.filter((m) => chainSet.has(m));
-  if (!front.length) return chain;
-  const frontSet = new Set(front);
-  const rest = chain.filter((m) => !frontSet.has(m));
-  return [...front, ...rest];
+  const frontSet = new Set(preferred);
+  return [...preferred, ...chain.filter((m) => !frontSet.has(m))];
+}
+
+/**
+ * Il cap di token di INPUT dichiarato per un modello, o `undefined` se nessuna
+ * delle tre fonti ne dichiara uno. Stesso `Math.min` che usa il pre-flight di
+ * callLLM (era inline li' dentro): estratto perche' un chiamante deve poter
+ * chiedere «questo modello ha un tetto?» PRIMA di costruire il prompt.
+ *
+ * `undefined` significa «nessun cap dichiarato», non «illimitato»: e' la
+ * risposta che serve a create-article.mjs per NON accorciare la fonte quando a
+ * servire la chiamata sara' claude-cli/haiku — l'unico membro del roster senza
+ * cap di input dichiarato. Se il modello poi rifiuta davvero per dimensione, il
+ * rimedio esiste gia' ed e' `err.retryRequestTokenBudget` al throw qui sotto.
+ */
+export function getDeclaredRequestTokenLimit(model) {
+  const apiModelId = getApiModelId(model);
+  const knownLimits = [
+    MODEL_MAX_REQUEST_TOKENS[apiModelId],
+    _learnedRequestTokenLimits.get(model),
+    DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(model)],
+  ].filter((v) => typeof v === 'number' && v > 0);
+  return knownLimits.length ? Math.min(...knownLimits) : undefined;
 }
 
 // ── Public state helpers ─────────────────────────────────────
@@ -2690,19 +2927,25 @@ export function isAnyModelAvailable() {
  * higher-priority model comes back online, instead of silently reusing a
  * verdict produced by a lower-tier fallback model forever (#3080).
  *
- * @param {{model?: string, chain?: string[]}} [opts]
+ * @param {{model?: string, chain?: string[], prefer?: string[]|string}} [opts]
+ *   `prefer` va passata dallo stesso chiamante che la passera' a callLLM: senza,
+ *   la chiave di cache verrebbe costruita sul modello che la catena avrebbe
+ *   scelto, non su quello che la preferenza le fa scegliere.
  * @returns {string|null} the model id that would serve the next call, or null
  *   if no configured model is currently available.
  */
-export function getPreferredModel({ model: startModel, chain: chainOverride } = {}) {
+export function getPreferredModel({ model: startModel, chain: chainOverride, prefer } = {}) {
   let chain = chainOverride ? [...chainOverride] : [...DEFAULT_CHAIN];
   if (startModel) {
     const idx = chain.indexOf(startModel);
     if (idx > 0) chain = chain.slice(idx);
     else if (idx < 0) chain = [startModel, ...chain.filter((m) => m !== startModel)];
   }
-  chain = applyModelsPrefer(chain);
   chain = sortChainByScore(chain);
+  // Rispecchia esattamente l'ordine di callLLM: prima il sort, poi la
+  // preferenza. Senza questa riga il peek risponderebbe con il modello che la
+  // catena avrebbe scelto, non con quello che la preferenza le fa scegliere.
+  chain = applyModelsPrefer(chain, prefer);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
     if (isProviderCoolingDown(getProvider(m))) continue;
@@ -2809,6 +3052,7 @@ export function resetState() {
   _stats.lastResort = _freshLastResortStats();
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
+  _preferredModelsWarned = false;
   _claudeCliCallsThisRun = 0;
   _claudeCliMaxCallsWarned = false;
   _responseCache.clear();
@@ -4528,8 +4772,12 @@ export async function callLLM(messages, opts = {}) {
   // reorder — the override owns the order verbatim, same as the o.model
   // skip above).
   if (!_forcedChain.length) {
-    chain = applyModelsPrefer(chain);
     chain = sortChainByScore(chain);
+    // La preferenza DOPO il sort: e' l'unico punto in cui un modello con
+    // punteggio negativo puo' comunque uscire primo. Si attiva solo su
+    // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
+    // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
+    chain = applyModelsPrefer(chain, o.prefer);
   }
 
   const errors = [];
@@ -4633,12 +4881,12 @@ export async function callLLM(messages, opts = {}) {
     // _learnRequestTokenLimit — and persisted across runs via Firestore, so
     // providers nobody has hardcoded yet still get caught after their first
     // failure), and the provider-wide DEFAULT_REQUEST_TOKENS_BY_PROVIDER.
-    const knownLimits = [
-      MODEL_MAX_REQUEST_TOKENS[apiModelId],
-      _learnedRequestTokenLimits.get(model),
-      DEFAULT_REQUEST_TOKENS_BY_PROVIDER[provider],
-    ].filter((v) => typeof v === 'number' && v > 0);
-    const reqLimit = knownLimits.length ? Math.min(...knownLimits) : undefined;
+    //
+    // Il `Math.min` sulle tre fonti vive ora in getDeclaredRequestTokenLimit(),
+    // esportata: un chiamante deve poter chiedere «questo modello ha un tetto?»
+    // PRIMA di costruire il prompt, e la risposta deve venire da questa stessa
+    // funzione — non da una copia che scivola.
+    const reqLimit = getDeclaredRequestTokenLimit(model);
     if (reqLimit) {
       // `provider` + `model` make the jsonSchema term match the body this
       // model will actually receive: providers outside shouldUseSchemaMode()
@@ -4669,7 +4917,11 @@ export async function callLLM(messages, opts = {}) {
     // the counter only tracks real attempts.
     if (provider === PROVIDER.CLAUDE_CLI) {
       const cap = _getClaudeCliMaxCallsPerRun();
-      if (cap > 0 && _claudeCliCallsThisRun >= cap) {
+      // Il confronto passa da `isPerRunCallCapReached`, non da un `>=` scritto
+      // qui: e' la stessa funzione che i chiamanti interrogano PRIMA di
+      // costruire il prompt, e due copie della soglia divergerebbero senza che
+      // niente lo dica. Vedi il commento della funzione.
+      if (isPerRunCallCapReached(model)) {
         _logPreflightSkipOnce(model, 'claudeCliCap', `claude-cli call cap reached (${cap}/run, CLAUDE_CLI_MAX_CALLS_PER_RUN)`);
         errors.push(`${model}: skipped — claude-cli call cap reached (${cap}/run)`);
         _recordLastResortSkip(model, 'claude-cli call cap reached');

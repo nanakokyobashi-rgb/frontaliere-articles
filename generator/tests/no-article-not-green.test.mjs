@@ -262,9 +262,10 @@ function runGenerateBlock({
         // rendere l'aritmetica del budget guidabile da un test.
         GENERATE_BUDGET_S: budgetS,
         GENERATE_HARD_KILL_S: '32',
-        // Nessuno di questi scenari e' uno stallo: lo stub esce subito. La
-        // soglia resterebbe comunque a 600s, ma fissarla qui rende il file
-        // indipendente dal default.
+        // Nessuno di questi scenari e' uno stallo: lo stub esce subito. Il
+        // default non conterebbe comunque, ma fissare la soglia qui rende il
+        // file indipendente da esso — il default vive in
+        // generate-article-chain.test.mjs, che e' il posto dove cambiarlo.
         GENERATE_STALL_S: '600',
       },
     });

@@ -49,7 +49,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { estimateRequestTokens } from '../scripts/lib/ai-models.mjs';
+import { estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from '../scripts/lib/ai-search-template.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs';
@@ -118,6 +118,17 @@ const DEPS = [
   'lastSourcePublishedAt', '_winnerFingerprintMessage',
   'AI_MODELS', 'GH_MODEL_HEAVY', 'CATEGORIES', 'AVAILABLE_IMAGES',
   'estimateRequestTokens', 'PROMPT_TOKEN_BUDGET', 'IT_GENERATION_MAX_TOKENS',
+  // La preferenza per-chiamata e la funzione che le chiede «hai un cap?».
+  // `PREFERRED_GENERATION_MODELS` vuota di default in BASE_DEPS: il ratchet qui
+  // sotto misura il ramo SENZA preferenza, cioe' il fallback su modelli capped,
+  // ed e' li' che il tetto deve continuare a valere. Il ramo CON preferenza ha
+  // il suo test dedicato in fondo.
+  // `isPerRunCallCapReached` e' la terza domanda della guardia: «il cap di
+  // chiamate claude-cli di QUESTA run e' gia' esaurito?». Iniettabile come le
+  // altre due, cosi' il test puo' esercitare la coda di una run lunga senza
+  // spendere 40 chiamate vere.
+  'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit', 'isModelAvailable',
+  'isPerRunCallCapReached',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -127,9 +138,14 @@ const DEPS = [
 // misurerebbe la copia, non il codice che gira.
 const clampDecl = cutDecl('function _clampRemediation(') + '\n' + cutDecl('function _clampSourceBody(');
 
+// Stesso motivo del clamp sopra: `_preferisceModelloSenzaCap` decide se la
+// scala di riduzione morde al primo tentativo, quindi va RITAGLIATA dal
+// sorgente, non riscritta qui. Una copia a mano direbbe che la copia funziona.
+const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
+
 const assemblePrompt = new Function(
   '__d',
-  `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${promptBlock}\n`
+  `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${preferDecl}\n${promptBlock}\n`
   + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget };',
 );
 
@@ -168,6 +184,15 @@ const BASE_DEPS = {
   PROMPT_TOKEN_BUDGET,
   IT_GENERATION_MAX_TOKENS,
   _winnerFingerprintMessage: null,
+  // Vuota di default: il ratchet misura il ramo SENZA preferenza per un modello
+  // senza cap, cioe' esattamente il fallback su modelli capped. E' li' che il
+  // tetto deve valere, ed e' li' che vale ancora.
+  PREFERRED_GENERATION_MODELS: [],
+  getDeclaredRequestTokenLimit,
+  isModelAvailable,
+  // Il predicato VERO: a run appena iniziata nessuna chiamata e' stata spesa,
+  // quindi risponde false e non altera nessuna delle misure gia' in questo file.
+  isPerRunCallCapReached,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
@@ -189,8 +214,9 @@ function assemble(overrides) {
 }
 
 /** Il ramo NEWS: fonte reale scrapata. `section` di default 'frontaliere', come il call-site reale prima di #96 — passala esplicitamente per l'altra sezione. */
-function newsPrompt(extra = {}, section = 'frontaliere') {
+function newsPrompt(extra = {}, section = 'frontaliere', deps = {}) {
   return assemble({
+    ...deps,
     pageContent: NEWS_PAGE_CONTENT,
     url: 'https://www.tio.ch/ticino/economia/1812345/imposta-fonte-frontalieri-nuove-aliquote',
     IS_FRONTALIERE: section === 'frontaliere',
@@ -591,5 +617,175 @@ test('il marker pubblica il gradino di riduzione', () => {
   assert.ok(
     src.includes('shrink=${_promptShrinkStep}'),
     'il marker non pubblica il gradino di riduzione',
+  );
+});
+
+// ═══ LE DUE DIFESE CHE SI COMBATTEVANO ══════════════════════════════════════
+//
+// La scala accorcia la fonte per rientrare nel cap dei modelli free; i gate a
+// valle bocciano l'articolo per aver perso i fatti che stavano nella parte
+// tagliata. Misurato sulla run 32107646060: recall 21-36% contro un minimo del
+// 50%, 7-9 tassi chiave su 11 persi, corpi da 818-1480 char contro un minimo di
+// 1900, e 20 tentativi di generazione in una sola run.
+//
+// Da quando la generazione preferisce claude-cli/haiku — l'unico membro del
+// roster senza cap di input dichiarato — il PRIMO tentativo non accorcia piu'.
+// I test qui sotto bloccano i due versi: che non accorci quando il preferito
+// non ha cap, e che TORNI ad accorciare appena quella condizione cade.
+
+const PREFERISCE_HAIKU = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CLAUDE_CLI_HAIKU] };
+
+/**
+ * Rende claude-cli/haiku DISPONIBILE per la durata di `fn`.
+ *
+ * `_preferisceModelloSenzaCap` chiede anche `isModelAvailable`, non solo
+ * «hai un cap?»: un preferito che non c'e' non deve far costruire il prompt
+ * intero per una flotta che lo rifiutera' tutta. Senza queste due variabili il
+ * ramo con preferenza misurerebbe il ramo SENZA, e passerebbe a vuoto.
+ */
+function conHaikuDisponibile(fn) {
+  const salvate = {
+    tok: process.env.CLAUDE_CODE_OAUTH_TOKEN,
+    flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK,
+  };
+  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'test-token';
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = 'true';
+  try {
+    return fn();
+  } finally {
+    if (salvate.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
+    else process.env.CLAUDE_CODE_OAUTH_TOKEN = salvate.tok;
+    if (salvate.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
+    else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = salvate.flag;
+  }
+}
+
+test('col preferito senza cap il primo tentativo manda il prompt INTERO', () => {
+  const conPreferenza = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+  const senzaPreferenza = newsPrompt();
+
+  assert.equal(
+    conPreferenza.shrink, 0,
+    `la scala ha morso lo stesso (gradino ${conPreferenza.shrink}): il prompt viene accorciato `
+    + 'per un cap che il modello che rispondera\' per primo non ha, e i gate di fedelta\' '
+    + 'bocceranno l\'articolo per i fatti tagliati qui',
+  );
+  assert.ok(
+    conPreferenza.estTokens > senzaPreferenza.estTokens,
+    `il prompt intero (${conPreferenza.estTokens} token) non e' piu' ricco di quello ridotto `
+    + `(${senzaPreferenza.estTokens}): la preferenza non sta cambiando niente`,
+  );
+  // La fonte arriva al modello INTERA, non al 60% ne' al pavimento.
+  assert.ok(
+    conPreferenza.prompt.includes('FATTI DI DOMINIO VERIFICATI'),
+    'i fatti di dominio sono stati tolti lo stesso: e\' il primo gradino della scala',
+  );
+});
+
+test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
+  // Non e' un caso di scuola: `_learnedRequestTokenLimits` impara un cap dal
+  // primo 413 e lo persiste su Firestore. Il giorno in cui haiku ne prende uno,
+  // questo ramo deve tornare da solo al comportamento di prima — senza che
+  // nessuno si ricordi di una costante da aggiornare.
+  const conCap = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/meta/llama-3.1-8b-instruct'] }));
+  assert.ok(
+    conCap.estTokens <= PROMPT_TOKEN_BUDGET,
+    `preferito CON cap dichiarato e prompt a ${conCap.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+    + 'la scala non e\' tornata attiva e ogni modello capped verra\' saltato dal pre-flight',
+  );
+});
+
+test('il budget dettato dalla flotta vince sulla preferenza, al retry', () => {
+  // Il rimedio quando haiku non c'e' e la cascata degrada sui capped: callLLM
+  // lancia ALL_MODELS_EXHAUSTED con `retryRequestTokenBudget`, il catch lo
+  // raccoglie e il tentativo dopo entra qui con `_promptTokenBudget`. Da quel
+  // momento la preferenza NON deve piu' bastare a saltare la scala, altrimenti
+  // il retry rispedirebbe lo stesso prompt che la flotta ha gia' rifiutato —
+  // il difetto che PR #373 ha chiuso.
+  const alRetry = conHaikuDisponibile(() => newsPrompt(
+    { _generationAttempt: 2, _promptTokenBudget: 6000 },
+    'frontaliere',
+    PREFERISCE_HAIKU,
+  ));
+  assert.equal(alRetry.target, 6000, 'il budget dettato non e\' arrivato al target della scala');
+  assert.ok(
+    alRetry.shrink > 0,
+    'la scala non ha morso malgrado il budget dettato dalla flotta: il retry rispedisce '
+    + 'un prompt gia\' rifiutato, e la libreria aveva scritto che non puo\' riuscire',
+  );
+});
+
+test('preferito NON disponibile: la scala morde subito, niente tentativo buttato', () => {
+  // ENABLE_HAIKU_ARTICLE_FALLBACK spento / token assente: il preferito non c'e'.
+  // Costruire il prompt intero qui significherebbe un `ALL_MODELS_EXHAUSTED`
+  // garantito al primo tentativo per OGNI headline — il rimedio del budget
+  // dettato funziona, ma pagarlo quando si sa gia' che il preferito manca e'
+  // spreco. Nessun wrapper `conHaikuDisponibile` qui: e' il punto del test.
+  const orig = { tok: process.env.CLAUDE_CODE_OAUTH_TOKEN, flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK };
+  delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
+  delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
+  try {
+    const senzaHaiku = newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU);
+    assert.ok(
+      senzaHaiku.estTokens <= PROMPT_TOKEN_BUDGET,
+      `preferito assente e prompt a ${senzaHaiku.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+      + 'la scala non ha morso e il primo tentativo di ogni headline e\' buttato',
+    );
+  } finally {
+    if (orig.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN; else process.env.CLAUDE_CODE_OAUTH_TOKEN = orig.tok;
+    if (orig.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK; else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = orig.flag;
+  }
+});
+
+test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => {
+  // ── IL BUCO CHE IL CAP A 40 HA RIAPERTO ───────────────────────────────────
+  //
+  // `_preferisceModelloSenzaCap` chiedeva due cose — «e' disponibile?» e «ha un
+  // cap di INPUT?» — e nessuna delle due conosce il cap di CHIAMATE per-run
+  // (CLAUDE_CLI_MAX_CALLS_PER_RUN, alzato da 25 a 40 dalla PR #418).
+  //
+  // Il 40 e' dimensionato sul caso peggiore di 20 tentativi x 2 chiamate, quindi
+  // e' raggiungibile per costruzione, non in teoria. Superatolo, `callLLM`
+  // esclude haiku dalla catena al pre-flight — ma `isModelAvailable` guarda solo
+  // skip-exhausted e presenza del token, e continuava a rispondere «c'e'». Da
+  // quel punto in poi, per OGNI headline successiva della run: gradino 0, prompt
+  // intero (~9500 token), tutti i modelli free con cap dichiarato scartati dal
+  // pre-flight, tentativo 1 morto con ALL_MODELS_EXHAUSTED, e recupero solo al
+  // tentativo 2 via `err.retryRequestTokenBudget`.
+  //
+  // Si auto-ripara, quindi non rompe niente — ed e' esattamente per questo che
+  // senza un test non lo vede nessuno: e' un costo, non un guasto.
+  //
+  // Il predicato e' INIETTATO invece di spendere 40 chiamate vere: e' la stessa
+  // funzione che `callLLM` interroga (una definizione sola, vedi
+  // `isPerRunCallCapReached` in ai-models.mjs), e qui interessa il ramo «cap
+  // gia' esaurito», non il conteggio che ci arriva.
+  const capEsaurito = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_HAIKU,
+    isPerRunCallCapReached: (m) => m === REAL_AI_MODELS.CLAUDE_CLI_HAIKU,
+  }));
+
+  assert.ok(
+    capEsaurito.shrink > 0,
+    `cap per-run esaurito e la scala non ha morso (gradino ${capEsaurito.shrink}): il prompt `
+    + 'intero viene costruito per un modello che callLLM non chiamera\' piu\' in questa run, '
+    + 'e ogni headline successiva paga un tentativo buttato',
+  );
+  assert.ok(
+    capEsaurito.estTokens <= PROMPT_TOKEN_BUDGET,
+    `cap per-run esaurito e prompt a ${capEsaurito.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+    + 'ogni modello capped verra\' saltato dal pre-flight e il tentativo 1 e\' garantito perso',
+  );
+
+  // Il contro-verso: finche' il cap NON e' esaurito il comportamento nominale
+  // resta quello, cioe' prompt intero. Senza questa riga il test passerebbe
+  // anche se la guardia si fosse rotta del tutto.
+  const capLibero = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_HAIKU,
+    isPerRunCallCapReached: () => false,
+  }));
+  assert.equal(
+    capLibero.shrink, 0,
+    'con cap disponibile la scala non deve mordere: la guardia si e\' rotta nell\'altro verso',
   );
 });
