@@ -4100,10 +4100,17 @@ const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
  *   'meta'  — tutto il resto: id, category, image, hasCalculator, imagePrompt,
  *             imageAlt, slugs, `content.<locale>.{title,excerpt,faq}`, seo.
  *
- * Le due meta' sono DISGIUNTE e la loro unione e' 'full': e' il taglio (b)
- * descritto sopra `_SPLIT_MODE`. Nessuna proprieta' compare in entrambe e
- * nessuna si perde — l'unico modo perche' un merge delle due risposte abbia la
- * stessa forma che il resto della pipeline gia' consuma.
+ * Le due meta' sono DISGIUNTE SULLE FOGLIE e la loro unione e' 'full': e' il
+ * taglio corpo|metadati motivato nel blocco «IL TAGLIO SCELTO», accanto a
+ * `_splitMode` (variabile d'ambiente `CREATE_ARTICLE_PROMPT_SPLIT`). Nessuna foglia si perde e nessuna compare in
+ * entrambe — l'unico modo perche' un merge delle due risposte abbia la stessa
+ * forma che il resto della pipeline gia' consuma.
+ *
+ * L'UNICA CHIAVE CHE STA IN ENTRAMBE E' `content`, e deve starci: e' il
+ * contenitore che viene suddiviso, non un dato duplicato. Le sue sottochiavi
+ * restano disgiunte (`body1..3` di qua, `title`/`excerpt`/`faq` di la'). Chi
+ * legge `ROOT_KEYS_BODY` e `ROOT_KEYS_META` e ci trova `content` in tutte e due
+ * non ha trovato una svista.
  *
  * `abort_topical_relevance`/`reason` stanno nella meta' BODY, non in entrambe:
  * REGOLA #0 decide se l'articolo si scrive, e quella decisione va presa nella
@@ -4137,12 +4144,13 @@ function buildArticleJsonSchema(primaryLocale = 'it', part = 'full') {
   const nullableString = { type: ['string', 'null'] };
   const nullableBoolean = { type: ['boolean', 'null'] };
 
-  // ── Le due meta' del taglio (b), dichiarate UNA volta sola ───────────────
+  // ── Le due meta' del taglio corpo|metadati, dichiarate UNA volta sola ────
   //
   // Tenerle come liste di CHIAVI, e non come due schemi scritti a mano,
   // e' cio' che rende verificabile l'invariante «disgiunte e complete»:
-  // `split-prompt-two-calls.test.mjs` le ricalcola dallo schema 'full' e
-  // fallisce se una chiave nuova non finisce in nessuna delle due meta'.
+  // `news-prompt-token-budget.test.mjs`, sottotest «le due meta' dello schema
+  // sono disgiunte e complete», le ricalcola dallo schema 'full' e fallisce se
+  // una chiave del contenuto non finisce in nessuna delle due meta'.
   // Uno schema copiato a mano invece divergerebbe in silenzio — e' la stessa
   // classe di difetto del contratto senza forma di import.
   const CONTENT_KEYS_BODY = ['body1', 'body2', 'body3'];
