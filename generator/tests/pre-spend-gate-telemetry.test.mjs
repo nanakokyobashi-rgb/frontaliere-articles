@@ -80,6 +80,44 @@ const MAP_CONCURRENCY_SRC = extractFunctionSource('async function mapWithConcurr
 const mapWithConcurrency = new Function(`${MAP_CONCURRENCY_SRC}\nreturn mapWithConcurrency;`)();
 
 /**
+ * Il valore di `DEFAULT_MAX_CLASSIFIER_CALLS` che il MODULO calcolerebbe con un
+ * dato `process.env`, estratto dalla dichiarazione reale invece di essere
+ * riscritto qui.
+ *
+ * Serve perche' il default del tetto e' esattamente cio' che e' regredito il
+ * 2026-08-18: un numero comodo scritto a mano in questo file renderebbe verde
+ * un gate che in produzione classifica un numero diverso di candidate. Il
+ * `process` finto e' passato come argomento, cosi' il test non tocca l'ambiente
+ * reale e i due casi (variabile assente / variabile impostata) sono entrambi
+ * verificabili nello stesso processo.
+ */
+const CAP_RESOLVER_SRC = extractFunctionSource('function resolvePreSpendClassifierCap(raw) {');
+const resolvePreSpendClassifierCap = new Function(
+  `${CAP_RESOLVER_SRC}\nreturn resolvePreSpendClassifierCap;`,
+)();
+
+// The section backstop's RESTORE_N now goes through the same "explicit '0' is
+// not 'assente'" resolver as the classifier cap — extracted from source for
+// the same reason: a hand-rolled copy here would stay green if the real one
+// diverged.
+const POSITIVE_INT_ENV_SRC = extractFunctionSource('function resolvePositiveIntEnv(raw, fallback) {');
+const resolvePositiveIntEnv = new Function(
+  `${POSITIVE_INT_ENV_SRC}\nreturn resolvePositiveIntEnv;`,
+)();
+
+/** Il tetto che il modulo calcolerebbe con quel valore di `PRESPEND_GATE_MAX_CLASSIFIER`. */
+function moduleDefaultMaxClassifier(env = {}) {
+  // Pinna anche il WIRING: che il resolver sia corretto non serve a niente se
+  // la costante non lo usa.
+  assert.match(
+    SRC,
+    /const DEFAULT_MAX_CLASSIFIER_CALLS = resolvePreSpendClassifierCap\(process\.env\.PRESPEND_GATE_MAX_CLASSIFIER\);/,
+    'DEFAULT_MAX_CLASSIFIER_CALLS deve venire dal resolver, altrimenti questo test misura una funzione che nessuno chiama',
+  );
+  return resolvePreSpendClassifierCap(env.PRESPEND_GATE_MAX_CLASSIFIER);
+}
+
+/**
  * Builds a fresh gate with stubbed module-scope dependencies.
  *
  * `topicalHits` is a stub on purpose: here it only has to make the section
@@ -94,7 +132,17 @@ const mapWithConcurrency = new Function(`${MAP_CONCURRENCY_SRC}\nreturn mapWithC
  * @param {(t: string) => number} [o.topicalHits] - topical density scorer
  * @param {boolean} [o.isFrontaliere]
  */
-function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFrontaliere = true, section = 'frontaliere' }) {
+function makeGate({
+  relevant,
+  anchor = () => null,
+  topicalHits = () => 0,
+  isFrontaliere = true,
+  section = 'frontaliere',
+  // Il default di PRODUZIONE con `PRESPEND_GATE_MAX_CLASSIFIER` non impostata,
+  // letto dal sorgente. Un test che vuole misurare il comportamento COL tetto
+  // lo passa esplicito, esattamente come farebbe chi imposta la variabile.
+  maxClassifierDefault = moduleDefaultMaxClassifier({}),
+}) {
   const logs = [];
   // Mirrors the initializer's defaults, so an assertion of `false` here means
   // the gate left the field alone rather than the stub never having had it.
@@ -123,6 +171,7 @@ function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFron
     'mapWithConcurrency',
     'DEFAULT_MAX_CLASSIFIER_CALLS',
     'PRESPEND_GATE_CONCURRENCY',
+    'resolvePositiveIntEnv',
     `${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
   )(
     isFrontaliere,
@@ -137,8 +186,9 @@ function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFron
     mapWithConcurrency,
     // I valori di produzione, non valori comodi: un cap piu' largo qui
     // renderebbe verde un gate che in produzione smette di classificare.
-    12,
+    maxClassifierDefault,
     5,
+    resolvePositiveIntEnv,
   );
   return { gate, logs, runReport };
 }
@@ -497,4 +547,198 @@ test('the run report declares the pre-spend gate fields instead of sprouting the
       `RUN_REPORT.headlines.${field} must be declared in the initializer`,
     );
   }
+});
+
+// ── Il tetto del classifier su un pool piu' grande del tetto (2026-08-18) ──
+//
+// LA LACUNA CHE HA FATTO PASSARE LA REGRESSIONE.
+//
+// Fino a oggi nessun caso di questo file usava un pool sopra le 12 headline: il
+// piu' grande ne aveva 4. Il ramo «budget esaurito» del gate era quindi l'unico
+// comportamento non coperto, ed e' esattamente quello che #416 ha attivato per
+// default nel pomeriggio del 2026-08-18. Con un pool piccolo il tetto non morde
+// mai e la suite resta verde qualunque cosa faccia il default: la copertura
+// c'era in apparenza e mancava nel punto che conta.
+//
+// LA MISURA. Simulando il gate su 20 headline TUTTE fuori tema:
+//
+//   |                              | tetto a 12 | senza tetto |
+//   | tenute                       |          8 |           3 |
+//   | PRESPEND_GATE_REJECTED       |         12 |          20 |
+//   | PRESPEND_GATE_TOTAL_REJECTION|          0 |           1 |
+//   | backstop E (countTopicalHits)|        mai |     restored=3 |
+//
+// Le 8 tenute sono candidate MAI classificate, consegnate alla generazione in
+// ordine di pool: ognuna brucia un tentativo di generazione completo (~5-7k
+// token) prima che REGOLA #0 la abortisca, contro le ~10 chiamate flash-lite
+// che il tetto risparmia. Sulla telemetria `PRESPEND_GATE_OUTCOME` di 22 run
+// reali dello stesso giorno il caso non e' teorico: `section=frontaliere` ha
+// `before=` fra 20 e 23 in tutte e 10 le righe, `section=svizzera` fra 4 e 8 in
+// tutte e 12 — il tetto agisce quasi solo sulla sezione a secco.
+
+const BIG_POOL_SIZE = 20;
+
+// 20 titoli fuori tema in ordine di pool (recency). Il piu' pertinente per il
+// lessico e' in fondo, DENTRO la fascia che un tetto a 12 non classifica mai:
+// se il restore lo trova, sta ordinando per densita' topica e non per posizione.
+const bigPool = () => hl(
+  ...Array.from({ length: BIG_POOL_SIZE - 1 }, (_, i) => `Cronaca locale numero ${i + 1}`),
+  'Frontalieri e ristorni: il nodo del rinnovo',
+);
+
+test('pool sopra il tetto: il default non impone un tetto e ogni candidata viene classificata', async () => {
+  const { gate, logs, runReport } = makeGate({
+    relevant: () => false,
+    topicalHits: (t) => (/frontalier|ristorn/i.test(t) ? 2 : 0),
+  });
+  const kept = await gate(bigPool());
+
+  // Col tetto a 12 questa e' 8: le 12 classificate sono tutte rigettate e le 8
+  // residue entrano per fail-open senza verdetto.
+  assert.equal(
+    kept.length,
+    3,
+    'un pool interamente fuori tema deve arrivare alla generazione con le 3 migliori per densita\' topica, '
+    + `non con le ${BIG_POOL_SIZE - 12} residue non classificate`,
+  );
+  assert.equal(
+    kept[0].headline,
+    'Frontalieri e ristorni: il nodo del rinnovo',
+    'il restore ordina per countTopicalHits: la candidata migliore e\' l\'ultima del pool, che un tetto a 12 non raggiungerebbe mai',
+  );
+
+  assert.equal(
+    rejectedLines(logs).length,
+    BIG_POOL_SIZE,
+    'senza tetto ogni candidata riceve un verdetto, quindi ogni rigetto e\' attribuibile',
+  );
+
+  const line = totalRejectionLine(logs);
+  assert.ok(
+    line,
+    'PRESPEND_GATE_TOTAL_REJECTION e\' il marker che questo stesso file cita come base di prova degli incidenti '
+    + 'del 2026-08-10 e del 2026-08-11: un pool interamente rigettato deve continuare a emetterlo',
+  );
+  assert.match(line, new RegExp(`\\bbefore=${BIG_POOL_SIZE}\\b`));
+  assert.match(line, new RegExp(`\\bclassifier_calls=${BIG_POOL_SIZE}\\b`), 'nessuna candidata resta senza classificazione col default');
+  assert.match(line, /\brestored=3\b/);
+  assert.match(line, /\bbackstop=topical\b/);
+  assert.match(line, /\bkept_after=3\b/);
+  assert.match(line, /\bunclassified=0\b/, 'col default nessuna candidata entra per esaurimento del budget');
+
+  assert.equal(runReport.headlines.preSpendGateTotalRejection, true);
+  assert.equal(runReport.headlines.preSpendGateKept, 3);
+  assert.equal(runReport.headlines.preSpendGateBackstopRestored, 3);
+});
+
+test('pool sopra un tetto ESPLICITO: le keep per budget esaurito non mascherano la rejection totale', async () => {
+  const { gate, logs, runReport } = makeGate({
+    relevant: () => false,
+    topicalHits: (t) => (/frontalier|ristorn/i.test(t) ? 2 : 0),
+    // Chi accende il tetto lo accende cosi': PRESPEND_GATE_MAX_CLASSIFIER=12.
+    // Il valore passa dalla dichiarazione reale del modulo, non da un 12 scritto qui.
+    maxClassifierDefault: moduleDefaultMaxClassifier({ PRESPEND_GATE_MAX_CLASSIFIER: '12' }),
+  });
+  const kept = await gate(bigPool());
+
+  assert.equal(
+    rejectedLines(logs).length,
+    12,
+    'il tetto esplicito deve davvero risparmiare le classificazioni: e\' l\'unica cosa che deve fare',
+  );
+
+  assert.equal(
+    kept.length,
+    3,
+    'le 8 candidate oltre il budget non hanno un verdetto: non possono valere come «tenute dal gate» '
+    + 'e finire in generazione al posto delle 3 migliori per densita\' topica',
+  );
+  assert.equal(
+    kept[0].headline,
+    'Frontalieri e ristorni: il nodo del rinnovo',
+    'anche col tetto, il restore sceglie per pertinenza sull\'INTERO pool, non fra le sole non classificate',
+  );
+
+  const line = totalRejectionLine(logs);
+  assert.ok(
+    line,
+    'un tetto attivo non deve spegnere PRESPEND_GATE_TOTAL_REJECTION: il classifier ha detto no a tutto '
+    + 'cio\' che ha visto, e il marker e\' l\'osservabilita\' che ha motivato l\'esistenza del gate',
+  );
+  assert.match(line, new RegExp(`\\bbefore=${BIG_POOL_SIZE}\\b`));
+  assert.match(line, /\bclassifier_calls=12\b/);
+  assert.match(line, /\brestored=3\b/);
+  assert.match(line, /\bbackstop=topical\b/);
+  assert.match(line, /\bkept_after=3\b/);
+  assert.match(line, /\bunclassified=8\b/, 'il record deve dire quante candidate il tetto ha lasciato senza verdetto');
+
+  assert.equal(runReport.headlines.preSpendGateTotalRejection, true);
+  assert.equal(runReport.headlines.preSpendGateKept, 3);
+});
+
+test('un tetto esplicito che NON morde lascia il gate identico a se stesso', async () => {
+  // Il contrappeso ai due test sopra: la fix non deve trasformare ogni keep in
+  // sospetto. Con 4 headline e tetto 12 nessuna resta senza verdetto, quindi il
+  // percorso e' quello di sempre — e la candidata pertinente viene tenuta.
+  const { gate, logs, runReport } = makeGate({
+    relevant: (h) => /ristorn/i.test(h),
+    maxClassifierDefault: moduleDefaultMaxClassifier({ PRESPEND_GATE_MAX_CLASSIFIER: '12' }),
+  });
+  const kept = await gate(hl(
+    'Incidente sulla A2',
+    'Frontalieri e ristorni: il nodo del rinnovo',
+    'Nuovo ristorante a Lugano',
+    'Festival del film di Locarno',
+  ));
+
+  assert.equal(kept.length, 1);
+  assert.equal(kept[0].headline, 'Frontalieri e ristorni: il nodo del rinnovo');
+  assert.equal(totalRejectionLine(logs), undefined, 'una tenuta con verdetto non e\' una rejection totale');
+  assert.equal(runReport.headlines.preSpendGateTotalRejection, false);
+});
+
+// Il guard di forma. I tre test sopra descrivono il comportamento; questo pinna
+// la ragione per cui e' quello: il default del modulo e' «nessun tetto», e un
+// tetto esiste solo se qualcuno lo chiede. Rimetterci un numero e' una modifica
+// visibile a questa riga, non un cambio silenzioso di regime su una sezione.
+test('il tetto del classifier e\' opt-in: nessun tetto se PRESPEND_GATE_MAX_CLASSIFIER non e\' impostata', () => {
+  assert.equal(
+    moduleDefaultMaxClassifier({}),
+    null,
+    'un tetto per default classifica solo le prime N candidate e consegna le residue alla generazione senza verdetto: '
+    + 'su `frontaliere` (pool 20-23) e\' il regime misurato il 2026-08-18, su `svizzera` (pool 4-8) non cambia nulla — '
+    + 'cioe\' il costo cade tutto sulla sezione a secco',
+  );
+  assert.equal(
+    moduleDefaultMaxClassifier({ PRESPEND_GATE_MAX_CLASSIFIER: '5' }),
+    5,
+    'chi lo chiede esplicitamente lo deve ottenere',
+  );
+  assert.equal(
+    moduleDefaultMaxClassifier({ PRESPEND_GATE_MAX_CLASSIFIER: '0' }),
+    1,
+    'un tetto a 0 spegnerebbe il classifier: resta il minimo di 1, non un 12 arrivato da un `|| 12`',
+  );
+  assert.equal(
+    moduleDefaultMaxClassifier({ PRESPEND_GATE_MAX_CLASSIFIER: 'dodici' }),
+    null,
+    'un valore illeggibile non e\' una richiesta di tetto: si torna al default, non a un numero scelto dal fallback',
+  );
+});
+
+// E il guard sul consumo: `kept` da solo non basta piu' a decidere se il pool e'
+// stato svuotato, perche' un keep per budget esaurito non e' un verdetto. Se
+// questa distinzione sparisce, i backstop tornano a non partire.
+test('la rejection totale si misura sulle candidate CON verdetto, non su kept.length', () => {
+  assert.match(
+    GATE_SRC,
+    /const totalRejection = evidencedKept === 0 && headlines\.length > 0;/,
+    'la condizione deve escludere le keep senza verdetto: contarle rende `totalRejection` falso, '
+    + 'spegne PRESPEND_GATE_TOTAL_REJECTION e impedisce ai backstop D ed E di partire',
+  );
+  assert.match(
+    GATE_SRC,
+    /unclassified: true/,
+    'il ramo «budget esaurito» deve marcare la candidata, altrimenti a valle e\' indistinguibile da un keep per anchor',
+  );
 });

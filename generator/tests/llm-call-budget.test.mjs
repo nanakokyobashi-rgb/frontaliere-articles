@@ -22,7 +22,11 @@
  *     chiuso in 27 secondi.
  *   ③ il cap del classifier pre-spend era codice morto (`?? headlines.length`
  *     con un unico call site che non passa `opts`), mentre il JSDoc dichiarava
- *     12: la documentazione mentiva.
+ *     12: la documentazione mentiva. CORRETTO LA SERA STESSA, nel verso
+ *     opposto a quello scelto qui il pomeriggio: e' il JSDoc ad aver torto, non
+ *     il codice. Imporre il tetto ha una misura contraria — vedi il blocco sul
+ *     test ③ piu' sotto e pre-spend-gate-telemetry.test.mjs — quindi il tetto
+ *     resta opt-in e il JSDoc si allinea al codice.
  *   ④ quattro cicli LLM senza `deadlineMs`, liberi di camminare l'intero
  *     roster, piu' una fase immagini da 9 strategie seriali senza tetto.
  *
@@ -233,19 +237,51 @@ test('② l accettazione al 85% resta un ripiego di ULTIMA spiaggia', () => {
 // ③ Il cap del classifier, la concorrenza, la cache
 // ─────────────────────────────────────────────────────────────────────────────
 
-test('③ il default di maxClassifier e 12, ed e lo stesso numero che il JSDoc promette', () => {
+// COSA ASSERIVA QUESTO TEST FINO AL POMERIGGIO DEL 2026-08-18, E PERCHE ERA
+// SBAGLIATO.
+//
+// Diceva «il default di maxClassifier e 12, ed e lo stesso numero che il JSDoc
+// promette», e pinnava la riga `?? DEFAULT_MAX_CLASSIFIER_CALLS` piu il divieto
+// esplicito di tornare a `headlines.length`. La lettura era corretta sul
+// documento e sbagliata sul comportamento: fra un JSDoc che dichiara 12 e un
+// codice che non applica nessun tetto, la PR ha deciso che avesse ragione il
+// JSDoc senza misurare cosa costa il tetto.
+//
+// Misurato la sera stessa sulla telemetria `PRESPEND_GATE_OUTCOME` di 22 run
+// reali di generate-article.yml: il tetto a 12 e vincolante quasi solo su
+// `section=frontaliere` (pool `before=` 20, 21, 22, 23 in tutte e 10 le righe) e
+// quasi mai su `section=svizzera` (`before=` 4-8 in tutte e 12) — cioe cade
+// tutto sulla sezione a secco, 10 articoli contro 78 nelle ultime 24h. Simulato
+// su un pool da 20 tutte fuori tema, teneva 8 candidate contro 3, smetteva di
+// emettere `PRESPEND_GATE_TOTAL_REJECTION` e consegnava alla generazione le
+// headline in ordine di pool invece delle 3 migliori per densita topica.
+// Bilancio: ~10 chiamate flash-lite risparmiate contro fino a ~8 tentativi di
+// generazione completi bruciati — l inverso dell obiettivo di questa PR, che e
+// contare le chiamate LLM.
+//
+// Quindi il numero non era il difetto: il difetto era la documentazione. Il
+// tetto resta disponibile e non e piu imposto, e il JSDoc dice cio che il codice
+// fa. Il gruppo ③ conserva il resto (concorrenza, cache), che regge la misura.
+test('③ il tetto del classifier e opt-in, e il JSDoc dice cio che il codice fa', () => {
+  // Nessun tetto se la variabile non c e: e la riga che decide il regime.
   assert.match(
     CODE,
-    /const DEFAULT_MAX_CLASSIFIER_CALLS = Math\.max\(\s*1,\s*Number\(process\.env\.PRESPEND_GATE_MAX_CLASSIFIER \?\? '12'\) \|\| 12,\s*\);/,
+    /const DEFAULT_MAX_CLASSIFIER_CALLS = resolvePreSpendClassifierCap\(process\.env\.PRESPEND_GATE_MAX_CLASSIFIER\);/,
   );
-  assert.match(CODE, /const maxClassifier = Number\(opts\.maxClassifier \?\? DEFAULT_MAX_CLASSIFIER_CALLS\);/);
-  assert.doesNotMatch(
+  assert.match(
     CODE,
-    /opts\.maxClassifier \?\? headlines\.length/,
-    'REGRESSIONE: il cap torna a `headlines.length`, cioe torna a essere codice morto',
+    /if \(raw == null \|\| raw === ''\) return null;/,
+    'REGRESSIONE: variabile assente torna a valere un numero, cioe il tetto torna imposto per default',
   );
-  // Il JSDoc non deve tornare a dichiarare un numero che il codice non applica.
+  assert.match(
+    CODE,
+    /const maxClassifier = Number\(opts\.maxClassifier \?\? DEFAULT_MAX_CLASSIFIER_CALLS \?\? headlines\.length\);/,
+    'il fallback finale a `headlines.length` E il «nessun tetto»: senza, `Number(null)` sarebbe 0 e il gate non classificherebbe piu niente',
+  );
+  // Il JSDoc non deve tornare a dichiarare un numero che il codice non applica —
+  // la meta giusta del test precedente, che resta valida.
   assert.doesNotMatch(SRC, /@param \{number\} \[opts\.maxClassifier=12\]/);
+  assert.doesNotMatch(SRC, /@param \{number\} \[opts\.maxClassifier=DEFAULT_MAX_CLASSIFIER_CALLS\]/);
 });
 
 test('③ le classificazioni girano a concorrenza limitata, non piu in serie', () => {

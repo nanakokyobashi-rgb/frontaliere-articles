@@ -793,18 +793,60 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
   return result;
 }
 
-// Tetto di chiamate al classifier per invocazione del gate. E' il numero che il
-// JSDoc di `applyPreSpendTopicGate` dichiara da sempre; dal 2026-08-18 e' anche
-// quello che il codice applica.
-const DEFAULT_MAX_CLASSIFIER_CALLS = Math.max(
-  1,
-  Number(process.env.PRESPEND_GATE_MAX_CLASSIFIER ?? '12') || 12,
-);
+// Tetto di chiamate al classifier per invocazione del gate.
+//
+// `null` = NESSUN tetto, ed e' il default. Un numero arriva soltanto da
+// `PRESPEND_GATE_MAX_CLASSIFIER` impostata ESPLICITAMENTE (o da
+// `opts.maxClassifier` di un chiamante): variabile assente e variabile a '12'
+// non sono piu' la stessa cosa, ed e' esattamente la differenza che il
+// `?? '12'` di prima cancellava.
+//
+// 2026-08-18, la sera — PERCHE' IL DEFAULT E' TORNATO «NESSUN TETTO».
+// Il pomeriggio (#416) il default e' diventato 12, sul ragionamento che il
+// JSDoc lo dichiarasse da sempre e che il codice dovesse adeguarsi. Misurato
+// sulla telemetria `PRESPEND_GATE_OUTCOME` di 22 run reali di
+// generate-article.yml dello stesso giorno, quel tetto agisce quasi solo sulla
+// sezione `frontaliere` (pool `before=` 20, 21, 22, 23 — tutti sopra 12) e
+// quasi mai su `svizzera` (`before=` 4-8, cap mai vincolante): colpisce cioe'
+// la sezione a secco, 10 articoli contro 78 di svizzera nelle ultime 24h.
+// Su un pool da 20 headline tutte fuori tema teneva 8 candidate contro 3, non
+// emetteva piu' `PRESPEND_GATE_TOTAL_REJECTION` (il marker che questo stesso
+// file cita come base di prova degli incidenti del 2026-08-10 e 2026-08-11), e
+// consegnava alla generazione le headline in ordine di pool — le piu' vecchie e
+// mai classificate — invece delle 3 migliori per `countTopicalHits`.
+// Bilancio: ~10 chiamate flash-lite economiche risparmiate contro fino a ~8
+// tentativi di generazione completi (~5-7k token l'uno) bruciati prima che
+// REGOLA #0 li abortisse. Il tetto resta disponibile a chi lo vuole; non e'
+// piu' imposto — e, dal blocco «keep non classificati» dentro il gate, non
+// puo' piu' nascondere una rejection totale nemmeno quando e' acceso.
+//
+// `null` anche su un valore illeggibile: il `|| 12` di prima trasformava
+// `PRESPEND_GATE_MAX_CLASSIFIER=0` — cioe' «non classificare niente», che chi
+// scrive quella riga intende davvero — in un tetto a 12, e un refuso qualunque
+// nello stesso silenzioso 12. Un valore che non si legge non e' una richiesta
+// di tetto. Per spegnere il classifier c'e' `PRESPEND_TOPIC_GATE_CLASSIFIER=0`.
+function resolvePreSpendClassifierCap(raw) {
+  if (raw == null || raw === '') return null;
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return null;
+  return Math.max(1, Math.floor(n));
+}
+// Stesso idioma di `resolvePreSpendClassifierCap`, generalizzato a un fallback
+// non-null: un env var assente o illeggibile ricade sul default, ma un valore
+// ESPLICITO (incluso '0') non viene mai confuso con "assente" da un `|| fallback`
+// — e' esattamente il bug che ha reso PRESPEND_GATE_MAX_CLASSIFIER=0 indistinguibile
+// da variabile assente prima di questa PR.
+function resolvePositiveIntEnv(raw, fallback) {
+  if (raw == null || raw === '') return fallback;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : fallback;
+}
+const DEFAULT_MAX_CLASSIFIER_CALLS = resolvePreSpendClassifierCap(process.env.PRESPEND_GATE_MAX_CLASSIFIER);
 // Classificazioni in volo insieme. Basso di proposito: e' un modello leggero su
 // free tier, e il guadagno fra 1 e 5 e' quasi tutto il guadagno che c'e'.
 const PRESPEND_GATE_CONCURRENCY = Math.max(
   1,
-  Number(process.env.PRESPEND_GATE_CONCURRENCY ?? '5') || 5,
+  Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_CONCURRENCY, 5)),
 );
 
 /**
@@ -814,9 +856,11 @@ const PRESPEND_GATE_CONCURRENCY = Math.max(
  *
  * @param {Array<{headline: string, url?: string, relatedHeadlines?: string[]}>} headlines
  * @param {object} [opts]
- * @param {number} [opts.maxClassifier=DEFAULT_MAX_CLASSIFIER_CALLS] - max LLM
- *   classifier calls per invocation (default 12, override con
- *   PRESPEND_GATE_MAX_CLASSIFIER)
+ * @param {number} [opts.maxClassifier=headlines.length] - max LLM classifier
+ *   calls per invocation. NESSUN tetto per default: si attiva impostando
+ *   PRESPEND_GATE_MAX_CLASSIFIER (o passando questo opts). Col tetto attivo, le
+ *   candidate oltre il budget entrano per fail-open ma restano marcate come non
+ *   classificate e non contano come «tenute» (vedi `keptUnclassified`).
  * @param {number} [opts.concurrency=PRESPEND_GATE_CONCURRENCY] - classificazioni
  *   in volo insieme
  * @returns {Promise<Array>} filtered headlines (preserves order)
@@ -830,19 +874,23 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
-  // 2026-08-18 — IL CAP ERA CODICE MORTO, ORA E' IL CAP CHE IL JSDOC PROMETTE.
-  // `?? headlines.length` rendeva `classifierCalls >= maxClassifier`
-  // irraggiungibile per costruzione, e l'unico call site (`applyPreSpendTopicGate(
-  // headlines)` piu' sotto) non passa `opts` — quindi il ramo «budget esaurito»
-  // non e' mai scattato in produzione mentre il JSDoc dichiarava 12 dal giorno
-  // in cui e' stato scritto. Il default dichiarato diventa il default reale.
-  // Chi resta sopra il cap non viene scartato: cade sul fail-open (`kept.push`),
-  // esattamente come gia' faceva il ramo — REGOLA #0 dentro article-gen resta
-  // la difesa in profondita'.
-  const maxClassifier = Number(opts.maxClassifier ?? DEFAULT_MAX_CLASSIFIER_CALLS);
+  // 2026-08-18 — IL CAP E' DISPONIBILE, NON IMPOSTO.
+  // Il JSDoc dichiarava 12 e il codice usava `?? headlines.length`, cioe' il
+  // ramo «budget esaurito» era irraggiungibile per costruzione. #416 ha
+  // allineato il codice al JSDoc; la telemetria dice che il JSDoc aveva torto,
+  // non il codice — vedi il blocco lungo su `DEFAULT_MAX_CLASSIFIER_CALLS`.
+  // Quindi: nessun tetto per default, tetto reale se qualcuno lo chiede via
+  // `PRESPEND_GATE_MAX_CLASSIFIER` o `opts.maxClassifier`. Chi resta sopra il
+  // tetto non viene scartato: cade sul fail-open (`kind: 'keep'`) — ma da oggi
+  // resta MARCATO come non classificato, perche' un keep senza verdetto non e'
+  // una prova di pertinenza (vedi `keptUnclassified` piu' sotto).
+  const maxClassifier = Number(opts.maxClassifier ?? DEFAULT_MAX_CLASSIFIER_CALLS ?? headlines.length);
   const concurrency = Number(opts.concurrency ?? PRESPEND_GATE_CONCURRENCY);
 
   const kept = [];
+  // Quante delle `kept` sono entrate SENZA verdetto, per esaurimento del tetto.
+  // Zero col default; diverso da zero solo con un tetto esplicito.
+  let keptUnclassified = 0;
   let filtered = []; // { headline, reason, rawHeadline, rawAnchor }
   let classifierCalls = 0;
   let unambiguousBypasses = 0;
@@ -895,10 +943,13 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     }
 
     // Budget exhausted — fail-open, keep the headline. REGOLA #0 stays as
-    // the defense-in-depth backstop. Dal 2026-08-18 il default e' 12 e questo
-    // ramo scatta davvero (prima era irraggiungibile, vedi `maxClassifier`).
+    // the defense-in-depth backstop. Col default (`null` → nessun tetto) questo
+    // ramo resta irraggiungibile; scatta solo se qualcuno ha chiesto un tetto.
+    // `unclassified: true` e' la marcatura che tiene onesto il conteggio a valle:
+    // questa headline non ha ricevuto nessun verdetto, quindi non puo' valere
+    // come «tenuta dal gate».
     if (classifierCalls >= maxClassifier) {
-      plan.push({ h, headlineText, kind: 'keep' });
+      plan.push({ h, headlineText, kind: 'keep', unclassified: true });
       continue;
     }
 
@@ -931,7 +982,11 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
 
   // ── FASE 3: ricomposizione, nell'ordine del pool ──────────────────────
   for (const p of plan) {
-    if (p.kind === 'keep') { kept.push(p.h); continue; }
+    if (p.kind === 'keep') {
+      kept.push(p.h);
+      if (p.unclassified) keptUnclassified += 1;
+      continue;
+    }
     if (p.kind === 'drop') {
       filtered.push({ headline: p.headlineText.slice(0, 80), reason: p.reason, rawHeadline: p.headlineText });
       continue;
@@ -964,7 +1019,33 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // prevents the 100%-rejection failure mode that produced the run
   // 26440805420 no_changes streak. REGOLA #0 inside article-gen stays as
   // the final defense if the restored candidate is actually off-topic.
-  const totalRejection = kept.length === 0 && headlines.length > 0;
+  // 2026-08-18, la sera — UN `keep` SENZA VERDETTO NON CONTA COME TENUTA.
+  //
+  // Con un tetto attivo, le candidate oltre il budget entrano in `kept` per
+  // fail-open senza essere mai state classificate. Contarle qui avrebbe tre
+  // effetti, tutti misurati su un pool da 20 tutte fuori tema con tetto 12:
+  //   1. `totalRejection` diventa falso e `PRESPEND_GATE_TOTAL_REJECTION` non
+  //      viene piu' emesso — si perde il marker su cui poggiano le diagnosi del
+  //      2026-08-10 e del 2026-08-11 scritte poco sopra;
+  //   2. i backstop D ed E non partono, quindi la generazione riceve 8 headline
+  //      in ordine di pool (recency) invece delle 3 migliori per densita'
+  //      topica;
+  //   3. ognuna di quelle 8 brucia un tentativo di generazione completo prima
+  //      che REGOLA #0 la abortisca.
+  // Il tetto e' un budget di CLASSIFICAZIONE, non una prova di pertinenza: le
+  // `keep` per esaurimento budget sono materiale non valutato, e a pool
+  // altrimenti svuotato vengono restituite ai backstop, che ripartono
+  // dall'intero `headlines` e ne scelgono 3 per punteggio. Il risultato e'
+  // identico a quello di un gate senza tetto — cioe' col default — e la
+  // condizione dei backstop qui sotto resta la stessa `kept.length === 0`
+  // che il source guard di pre-spend-gate-telemetry.test.mjs sorveglia.
+  const evidencedKept = kept.length - keptUnclassified;
+  const totalRejection = evidencedKept === 0 && headlines.length > 0;
+  const unclassifiedAtRejection = totalRejection ? keptUnclassified : 0;
+  if (totalRejection && keptUnclassified > 0) {
+    kept.length = 0;
+    keptUnclassified = 0;
+  }
   let restoredByBackstop = 0;
   let backstopKind = 'none';
   if (kept.length === 0 && strictAnchorMatched.length > 0) {
@@ -1036,7 +1117,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // frontaliere a restored candidate with 0 density hits still aborts on
   // attempt 1 and the ranker picks another headline.
   if (kept.length === 0 && headlines.length > 0) {
-    const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
+    const RESTORE_N = Math.max(1, Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_SECTION_RESTORE_N, 3)));
     const ranked = headlines
       .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
       .sort((a, b) => (b.hits - a.hits) || (a.i - b.i))
@@ -1086,7 +1167,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     console.error(
       `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
       + ` anchor_candidates=${strictAnchorMatched.length} restored=${restoredByBackstop}`
-      + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`,
+      + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`
+      // Quante candidate erano entrate solo per esaurimento del tetto e sono
+      // state restituite ai backstop. 0 col default (nessun tetto): un valore
+      // diverso da zero dice che qualcuno ha acceso `PRESPEND_GATE_MAX_CLASSIFIER`
+      // e che quel tetto sta mordendo su questa sezione.
+      + ` unclassified=${unclassifiedAtRejection}`,
     );
   }
 
@@ -10269,7 +10355,7 @@ function _saveUsedImageUrl(articleId, imageUrl) {
 // un'immagine di repertorio su un articolo che altrimenti non esisterebbe.
 const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
-  Number(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS ?? '180000') || 180_000,
+  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 180_000)),
 );
 
 async function generateArticleImage(data) {
@@ -13410,6 +13496,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // di perdere un articolo che oggi si pubblica.
       if (!isLastAttempt && expandGateResult.passed) {
         let expandFactOk = true;
+        let expandFactIssues = null;
         try {
           const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);
           if (!expandFactResult.passed) {
@@ -13419,6 +13506,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
                 (RUN_REPORT.factuality.factCheckRejectionsByCategory[cat] || 0) + 1;
             }
             console.error(`  🚫 Espansione anticipata rigettata dal fact-check: ${(expandFactResult.issues || []).length} problemi`);
+            expandFactIssues = expandFactResult.issues || [];
             expandFactOk = false;
           }
         } catch (expandFcErr) {
@@ -13428,6 +13516,20 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         if (!expandFactOk) {
           console.error(`  ↩️  Torno al testo pre-espansione (già approvato dai gate, ma corto)...`);
           data = preExpansionData;
+          // Il ritorno alla bozza pre-espansione non chiude il tentativo: il
+          // testo e' ancora corto e il loop rigenera. Senza questa riga
+          // rigenerava ALLA CIECA — i problemi appena trovati dal verificatore
+          // venivano scoperti, contati in RUN_REPORT, e poi buttati. E' lo
+          // stesso feedback che Step 3a.0c passa al tentativo successivo, per la
+          // stessa ragione scritta li': una remediation per categoria invece di
+          // un elenco di lamentele, che invita a cancellare invece che a
+          // correggere. Stesso cap, per lo stesso motivo (finestra di input dei
+          // modelli free degradati); `formatRemediation` segnala l'overflow
+          // invece di troncare in silenzio.
+          if (attempt < maxAttempts && expandFactIssues && expandFactIssues.length > 0) {
+            const EXPAND_FACTCHECK_FEEDBACK_CAP = 8; // = FACTCHECK_FEEDBACK_CAP di Step 3a.0c
+            lastFactCheckErrors = formatRemediation(expandFactIssues, { cap: EXPAND_FACTCHECK_FEEDBACK_CAP });
+          }
         }
       }
 
