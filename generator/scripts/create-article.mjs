@@ -555,7 +555,47 @@ function countTopicalHits(text, national) {
 
 // In-process memoisation for the classifier (per-run). Keyed by lowercased
 // headline so duplicates / cross-pool overlap pay once.
+//
+// 2026-08-18 — IL VALORE E' UNA PROMISE, NON UN RISULTATO.
+// Finche' il gate era seriale la sequenza «leggi, chiama, scrivi» era atomica
+// per costruzione: fra la `get` e la `set` non girava altro codice. Da quando
+// le classificazioni partono a gruppi (vedi `mapWithConcurrency` in
+// `applyPreSpendTopicGate`) quella finestra esiste, e due headline identiche
+// in volo insieme troverebbero entrambe la cache vuota pagando entrambe la
+// chiamata — cioe' esattamente il costo che questa Map esiste per evitare.
+// Memoizzando la promise il secondo chiamante si aggancia alla prima chiamata
+// invece di aprirne un'altra. Una promise rifiutata viene rimossa: il percorso
+// interno fallisce fail-open e non rigetta, ma una cache avvelenata da un
+// throw inatteso sopravviverebbe all'intero run.
 const _preSpendGateCache = new Map();
+
+// La chiave della memo. Estratta perche' ora la calcola il wrapper di cache e
+// non piu' il corpo del classifier. Trimmata una volta sola cosi' che la
+// guardia `if (cacheKey)` in scrittura testi esattamente la stessa emptiness
+// che testa quella in lettura: una chiave " " verrebbe scritta e mai riletta.
+function preSpendGateCacheKey(headline, sourceUrl) {
+  return `${String(headline || '').toLowerCase().trim()} ${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
+}
+
+// Esegue `fn` su `items` con al massimo `limit` chiamate in volo, preservando
+// l'ordine dei risultati. Serve al gate pre-spend: 19 classificazioni seriali
+// da ~0,9s l'una sono 16,5s di attesa quasi tutta passata a NON fare niente
+// (misurato sulla run 32111688992, 07:30:33,7 -> 07:30:50,2). Non e' un
+// rate-limiter: `fn` deve gia' fallire fail-open per conto suo.
+async function mapWithConcurrency(items, limit, fn) {
+  const out = new Array(items.length);
+  const width = Math.max(1, Math.min(Number(limit) || 1, items.length));
+  let next = 0;
+  const worker = async () => {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      out[i] = await fn(items[i], i);
+    }
+  };
+  await Promise.all(Array.from({ length: width }, worker));
+  return out;
+}
 
 /**
  * Cheap LLM classifier: "is this news directly relevant to frontalieri
@@ -592,17 +632,25 @@ function classifierSourceHint(url) {
   }
 }
 
-async function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
-  const sourceHint = classifierSourceHint(sourceUrl);
-  // The hint is part of the prompt, so it must be part of the memo key —
-  // otherwise the same title from two different sections of two different
-  // outlets would resolve to whichever verdict was computed first. Trimmed
-  // once so the `if (cacheKey)` guards on the write paths below test exactly
-  // the emptiness this read tests: a key of " " would be written, never read.
-  const cacheKey = `${String(headline || '').toLowerCase().trim()} ${sourceHint.toLowerCase()}`.trim();
+// Wrapper di memoizzazione. The hint is part of the prompt, so it must be part
+// of the memo key — otherwise the same title from two different sections of two
+// different outlets would resolve to whichever verdict was computed first.
+// Memoizza la PROMISE, non il risultato: vedi `_preSpendGateCache`.
+function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+  const cacheKey = preSpendGateCacheKey(headline, sourceUrl);
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
+  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl);
+  if (cacheKey) {
+    _preSpendGateCache.set(cacheKey, pending);
+    pending.catch(() => { _preSpendGateCache.delete(cacheKey); });
+  }
+  return pending;
+}
+
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
+  const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
   const prompt = IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
@@ -646,13 +694,20 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         maxTokens: 80,
         timeout: 30_000,
         jsonMode: false,
+        // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
+        // camminare l'intera catena di fallback di ai-models.mjs. Il roster
+        // parte da GEMINI_FLASH_LITE (indice 45): restano 56 modelli x 2 retry
+        // x 30s = ~56 minuti teorici per un verdetto da 80 token, e il gate ne
+        // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
+        // diretto, quindi il default del wrapper locale `callLLM` (che il
+        // deadlineMs ce l'ha) non si eredita: va passato a mano.
+        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
       },
     );
   } catch (err) {
     // Classifier failed — fail-open. REGOLA #0 will catch anything bad.
-    const fallback = { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
-    if (cacheKey) _preSpendGateCache.set(cacheKey, fallback);
-    return fallback;
+    // La cache la scrive il wrapper `classifyFrontaliereRelevance`.
+    return { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
   }
 
   const verdict = /relevant\s*=\s*(yes|no|s[ìi]|si|true|false)/i.exec(text);
@@ -669,18 +724,35 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
     reason: (reasonMatch ? reasonMatch[1] : text).trim().slice(0, 200),
     parsed,
   };
-  if (cacheKey) _preSpendGateCache.set(cacheKey, result);
   return result;
 }
 
+// Tetto di chiamate al classifier per invocazione del gate. E' il numero che il
+// JSDoc di `applyPreSpendTopicGate` dichiara da sempre; dal 2026-08-18 e' anche
+// quello che il codice applica.
+const DEFAULT_MAX_CLASSIFIER_CALLS = Math.max(
+  1,
+  Number(process.env.PRESPEND_GATE_MAX_CLASSIFIER ?? '12') || 12,
+);
+// Classificazioni in volo insieme. Basso di proposito: e' un modello leggero su
+// free tier, e il guadagno fra 1 e 5 e' quasi tutto il guadagno che c'e'.
+const PRESPEND_GATE_CONCURRENCY = Math.max(
+  1,
+  Number(process.env.PRESPEND_GATE_CONCURRENCY ?? '5') || 5,
+);
+
 /**
- * Pre-spend topic gate — filters a headlines[] array BEFORE the
+ * Pre-spend topic gate — filters the headlines[] array BEFORE the
  * article-generation `Tentativo` loop. Combines fast anchor regex with the
  * cheap LLM classifier. Returns the filtered list.
  *
  * @param {Array<{headline: string, url?: string, relatedHeadlines?: string[]}>} headlines
  * @param {object} [opts]
- * @param {number} [opts.maxClassifier=12]  - max LLM classifier calls per invocation
+ * @param {number} [opts.maxClassifier=DEFAULT_MAX_CLASSIFIER_CALLS] - max LLM
+ *   classifier calls per invocation (default 12, override con
+ *   PRESPEND_GATE_MAX_CLASSIFIER)
+ * @param {number} [opts.concurrency=PRESPEND_GATE_CONCURRENCY] - classificazioni
+ *   in volo insieme
  * @returns {Promise<Array>} filtered headlines (preserves order)
  */
 async function applyPreSpendTopicGate(headlines, opts = {}) {
@@ -692,7 +764,17 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
-  const maxClassifier = Number(opts.maxClassifier ?? headlines.length);
+  // 2026-08-18 — IL CAP ERA CODICE MORTO, ORA E' IL CAP CHE IL JSDOC PROMETTE.
+  // `?? headlines.length` rendeva `classifierCalls >= maxClassifier`
+  // irraggiungibile per costruzione, e l'unico call site (`applyPreSpendTopicGate(
+  // headlines)` piu' sotto) non passa `opts` — quindi il ramo «budget esaurito»
+  // non e' mai scattato in produzione mentre il JSDoc dichiarava 12 dal giorno
+  // in cui e' stato scritto. Il default dichiarato diventa il default reale.
+  // Chi resta sopra il cap non viene scartato: cade sul fail-open (`kept.push`),
+  // esattamente come gia' faceva il ramo — REGOLA #0 dentro article-gen resta
+  // la difesa in profondita'.
+  const maxClassifier = Number(opts.maxClassifier ?? DEFAULT_MAX_CLASSIFIER_CALLS);
+  const concurrency = Number(opts.concurrency ?? PRESPEND_GATE_CONCURRENCY);
 
   const kept = [];
   let filtered = []; // { headline, reason, rawHeadline, rawAnchor }
@@ -703,6 +785,14 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // 39/39 → empty proven pool → 8-cycle no_changes streak).
   const strictAnchorMatched = []; // [{ h, anchor }]
 
+  // ── FASE 1: decisione deterministica, zero await ──────────────────────
+  // Ogni candidato riceve qui il suo verdetto oppure un posto in coda per il
+  // classifier. Nessuna chiamata di rete in questo giro, quindi l'assegnazione
+  // del budget resta ESATTAMENTE quella seriale di prima: i primi
+  // `maxClassifier` candidati che arrivano al ramo classifier lo consumano, in
+  // ordine di pool. Il risultato viene ricomposto nell'ordine originale nella
+  // fase 3 — `kept` deve preservare l'ordine, che e' la recency.
+  const plan = []; // { h, headlineText, summary, kind: 'keep'|'drop'|'classify' }
   for (const h of headlines) {
     const headlineText = String(h?.headline || '');
     const urlText = String(h?.url || '');
@@ -716,9 +806,9 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // Legacy emergency rollback: anchor-only acceptance (no LLM).
     if (!classifierEnabled) {
       if (strictAnchor) {
-        kept.push(h);
+        plan.push({ h, headlineText, kind: 'keep' });
       } else {
-        filtered.push({ headline: headlineText.slice(0, 80), reason: 'anchor-miss (classifier disabled)', rawHeadline: headlineText });
+        plan.push({ h, headlineText, kind: 'drop', reason: 'anchor-miss (classifier disabled)', marker: false });
       }
       continue;
     }
@@ -733,17 +823,16 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // the classifier.
     const unambiguous = IS_FRONTALIERE && matchesFrontaliereUnambiguousAnchor(combined);
     if (unambiguous) {
-      kept.push(h);
+      plan.push({ h, headlineText, kind: 'keep' });
       unambiguousBypasses += 1;
       continue;
     }
 
     // Budget exhausted — fail-open, keep the headline. REGOLA #0 stays as
-    // the defense-in-depth backstop. With the default maxClassifier =
-    // headlines.length this branch is effectively unreachable unless a
-    // caller overrides opts.maxClassifier.
+    // the defense-in-depth backstop. Dal 2026-08-18 il default e' 12 e questo
+    // ramo scatta davvero (prima era irraggiungibile, vedi `maxClassifier`).
     if (classifierCalls >= maxClassifier) {
-      kept.push(h);
+      plan.push({ h, headlineText, kind: 'keep' });
       continue;
     }
 
@@ -755,19 +844,37 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     const summary = Array.isArray(h?.relatedHeadlines) && h.relatedHeadlines.length > 0
       ? h.relatedHeadlines.slice(0, 2).join(' · ')
       : '';
-    let verdict;
+    plan.push({ h, headlineText, urlText, summary, kind: 'classify' });
+  }
+
+  // ── FASE 2: le classificazioni, a concorrenza limitata ────────────────
+  // Il gate e' gia' fail-open (`classifyFrontaliereRelevance` cattura tutto e
+  // torna `relevant: true`), quindi un errore qui non perde una headline: la
+  // tiene. Il `try` resta come belt+suspenders sul throw inatteso.
+  const toClassify = plan.filter(p => p.kind === 'classify');
+  const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
     try {
-      verdict = await classifyFrontaliereRelevance(headlineText, summary, urlText);
+      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.
-      kept.push(h);
+      return { relevant: true, reason: 'classifier-throw', fromError: true };
+    }
+  });
+  toClassify.forEach((p, i) => { p.verdict = verdicts[i]; });
+
+  // ── FASE 3: ricomposizione, nell'ordine del pool ──────────────────────
+  for (const p of plan) {
+    if (p.kind === 'keep') { kept.push(p.h); continue; }
+    if (p.kind === 'drop') {
+      filtered.push({ headline: p.headlineText.slice(0, 80), reason: p.reason, rawHeadline: p.headlineText });
       continue;
     }
+    const verdict = p.verdict;
     if (verdict.relevant) {
-      kept.push(h);
+      kept.push(p.h);
     } else {
-      filtered.push({ headline: headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: headlineText });
+      filtered.push({ headline: p.headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: p.headlineText });
       // Per-candidate rejection marker (#346, follow-up to #337) — before this,
       // a classifier "no" was only visible as part of the per-run aggregate
       // (`PRESPEND_GATE_TOTAL_REJECTION`, counts only) or truncated to the
@@ -780,7 +887,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
       // keeps headline/reason `\S+`-safe despite spaces and punctuation.
       console.error(
         `PRESPEND_GATE_REJECTED section=${SECTION_NAME}`
-        + ` headline=${encodeURIComponent(headlineText.slice(0, 160))}`
+        + ` headline=${encodeURIComponent(p.headlineText.slice(0, 160))}`
         + ` reason=${encodeURIComponent(verdict.reason || '')}`,
       );
     }
@@ -4952,7 +5059,13 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // cache — see buildFactCheckCallOptions() above: DEFAULT ON (kill switch
     // via CREATE_ARTICLE_FACTCHECK_CACHE=0), preserving the production
     // `cache: true` this call already had.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, modelUsedRef })
+    // deadlineMs (2026-08-18): questa e' una chiamata a `_aiCallLLM` DIRETTA —
+    // salta il wrapper locale `callLLM`, che il `deadlineMs` ce l'ha di default
+    // da 2026-07-02. Senza, un singolo fact-check puo' camminare l'intera
+    // cascata dei modelli remoti oltre il budget wall-clock del run, e nessun
+    // guard a monte lo ferma: e' il percorso che paga 2 chiamate per bozza e,
+    // sulla run 32086523370, ne ha spese 91.
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef })
   );
   // Guard: if the full remote cascade is exhausted, callLLM falls through to
   // local/fallback — the same model that may have generated the content.
@@ -6391,6 +6504,15 @@ async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAt
     try {
       rawText = await callLLM(
         [{ role: 'user', content: prompt }],
+        // Nessun `deadlineMs` esplicito, ed e' deliberato (misurato 2026-08-18):
+        // questa passa dal wrapper locale `callLLM`, che dal 2026-07-02
+        // applica gia' `deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS` come
+        // default a tutte le sue chiamate (vedi la sua doc). Aggiungerlo qui
+        // sarebbe un no-op che porta due costanti di modulo dentro la chiusura
+        // di `requestHeadlineSelection` — e headline-selection-protocol.test.mjs
+        // ritaglia ED ESEGUE questa funzione con le sole dipendenze iniettate,
+        // quindi il no-op la romperebbe. Il termine e' pinnato da
+        // llm-call-budget.test.mjs sul wrapper, dove vive davvero.
         { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
       );
     } catch (err) {
@@ -7685,6 +7807,22 @@ function expandEnrichmentLine(isFrontaliere, boundToText = false) {
   return `- Aggiungi: esempi concreti con numeri reali, ${geoRefs}, normative con date e importi, checklist operative, confronti tra scenari pratici`;
 }
 
+// ── Espansione anticipata (2026-08-18) ────────────────────────────────────
+// «Troppo corto» e' una proprieta' della FONTE, non del modello, ma il loop la
+// trattava come se ruotare modello potesse risolverla: sulla run 32111688992 sei
+// modelli diversi (gpt-4.1, gpt-4o, gemini-2.5-flash, gpt-4.1-nano,
+// groq/gpt-oss-120b, gpt-4o-mini) hanno prodotto 179-489 parole contro una
+// soglia di 700, e poi `expandShortItalianContent` ha chiuso in 27 secondi
+// portando 489 parole a 11.439 caratteri. Sotto questa soglia la bozza e' troppo
+// magra perche' l'espansione abbia materiale su cui lavorare e conviene ancora
+// rigenerare; sopra, si espande dal tentativo `EARLY_EXPANSION_MIN_ATTEMPT`.
+const EARLY_EXPANSION_ENABLED = (process.env.CREATE_ARTICLE_EARLY_EXPANSION ?? '1') !== '0';
+const EARLY_EXPANSION_MIN_RATIO = (() => {
+  const raw = Number(process.env.CREATE_ARTICLE_EARLY_EXPANSION_RATIO ?? '0.5');
+  return Number.isFinite(raw) && raw > 0 && raw < 1 ? raw : 0.5;
+})();
+const EARLY_EXPANSION_MIN_ATTEMPT = 2;
+
 /**
  * Expand short Italian body content by asking the LLM to enrich each body field.
  * This is a last-resort fallback that's far more effective than regenerating from scratch,
@@ -7835,6 +7973,30 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   if (faq) out.faq = faq;
   console.error(`  ✅ ${targetLang.toUpperCase()} (MT gratuita) completato`);
   return out;
+}
+
+/**
+ * Prompt per il retry «titolo/excerpt rimasto in italiano».
+ *
+ * Vive a livello di modulo, e non dentro `translateContent` come `makePrompt`,
+ * per la ragione che ha rotto il chiamante: quel retry gira in
+ * `translateArticle`, un livello sopra, dove `makePrompt` non esiste. Funzione
+ * pura, quindi un test puo' provare che il testo contiene la lingua bersaglio,
+ * il campo e lo schema — cosa che con una closure non si poteva fare.
+ */
+export function buildForcedRetranslationPrompt({ langName, field, itValue }) {
+  return `ATTENZIONE: la traduzione precedente è rimasta in ITALIANO. Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino.
+
+CONTENUTO ITALIANO DA TRADURRE:
+- ${field}: ${itValue}
+
+REGOLE:
+- Il risultato NON deve restare in italiano: ogni parola va tradotta in ${langName}.
+- Mantieni i nomi propri, i toponimi e le cifre invariati.
+- Non aggiungere spiegazioni, prefissi o code fences.
+
+Rispondi con un JSON object (no markdown, no code fences):
+{"${field}": "..."}`;
 }
 
 async function translateArticle(data) {
@@ -8157,10 +8319,20 @@ ${terminologyByLang[targetLang] || ''}`;
         const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
         console.error(`  ⚠️  [translation-check] ${locale.toUpperCase()}.${field} identico all'italiano — retry traduzione...`);
         try {
-          const retryResult = await callWithRetry(makePrompt(
-            `ATTENZIONE: la traduzione precedente è rimasta in ITALIANO. Traduci OBBLIGATORIAMENTE in ${langName}.\n\nCONTENUTO ITALIANO DA TRADURRE:\n- ${field}: ${itVal}`,
-            `{"${field}": "..."}`,
-          ), 1000, `${locale}:${field}-retry`);
+          // 2026-08-18 — QUESTO RETRY NON E' MAI PARTITO.
+          // `makePrompt` e' dichiarata dentro `translateContent`; qui siamo in
+          // `translateArticle`, fuori da quella chiusura. La chiamata lanciava
+          // `ReferenceError: makePrompt is not defined`, il `catch` sotto la
+          // ingoiava e la riemetteva come «Retry fallito per xx.title: ...»,
+          // che si legge come un problema di rete. Il prompt e' ora costruito
+          // in loco da `buildForcedRetranslationPrompt`, funzione di modulo
+          // (quindi in scope ovunque e testabile) che replica la forma di
+          // `makePrompt`: campi, regole, schema JSON.
+          const retryResult = await callWithRetry(
+            buildForcedRetranslationPrompt({ langName, field, itValue: itVal }),
+            1000,
+            `${locale}:${field}-retry`,
+          );
           if (retryResult?.[field] && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
@@ -9822,7 +9994,30 @@ function _saveUsedImageUrl(articleId, imageUrl) {
   writeFileSync(trackingFile, JSON.stringify(entries, null, 2) + '\n');
 }
 
+// ── Tetto alla fase immagini (2026-08-18) ─────────────────────────────────
+// `generateArticleImage` prova 9 strategie SERIALI con timeout da 90-120s
+// l'una: ~22 minuti nel caso peggiore. E gira DOPO che tutti i gate sono
+// passati, cioe' nel momento in cui perdere il lavoro costa di piu' — il
+// workflow ha un `timeout ... 2400s` che SIGKILLa il processo e butta
+// l'articolo intero. Allo scadere del budget si torna `null`, che e' il
+// percorso NORMALE quando Imagen non e' disponibile: `findBestFallbackImage`
+// esiste gia' e pesca dal catalogo Ticino. Il peggio che succede e'
+// un'immagine di repertorio su un articolo che altrimenti non esisterebbe.
+const IMAGE_PHASE_BUDGET_MS = Math.max(
+  30_000,
+  Number(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS ?? '180000') || 180_000,
+);
+
 async function generateArticleImage(data) {
+  const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imagePhaseExpired = (label) => {
+    if (Date.now() < imageDeadline) return false;
+    console.error(
+      `  ⏱️  Budget fase immagini (${Math.round(IMAGE_PHASE_BUDGET_MS / 1000)}s) esaurito prima di ${label}`
+      + ` — passo all'immagine di fallback dal catalogo.`,
+    );
+    return true;
+  };
   // Derive concrete English subject clause from TOPIC_SEARCH_MAP so the generator
   // doesn't default to generic "people in a street" when the title says "frontalieri".
   const subjectTitle = _articleTitleLower(data);
@@ -9897,6 +10092,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 1: Gemini native image generation (free tier) ──
+  if (imagePhaseExpired('Strategy 1')) return null;
   const apiKey = process.env.GEMINI_API_KEY;
   if (apiKey) {
     const modelsToTry = [IMAGE_MODEL_FLASH, IMAGE_MODEL_PRO];
@@ -9951,6 +10147,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 2: Pollinations.ai (free, no API key) ──
+  if (imagePhaseExpired('Strategy 2')) return null;
   // https://gen.pollinations.ai — free AI image generation, no auth needed
   // Migrated from image.pollinations.ai/prompt/ → gen.pollinations.ai/image/ (2025)
   // Only try 2 models with 1 retry; if origin is down (530/502/503) skip all.
@@ -10006,6 +10203,7 @@ async function generateArticleImage(data) {
   if (pollinationsOriginDown) console.error('  ⚠️  Pollinations.ai non raggiungibile — origin down');
 
   // ── Strategy 2b: Together.ai (FLUX.1-schnell-Free, free tier with key) ──
+  if (imagePhaseExpired('Strategy 2b')) return null;
   // https://www.together.ai — free model, needs TOGETHER_API_KEY secret in GH
   const togetherKey = process.env.TOGETHER_API_KEY;
   if (togetherKey) {
@@ -10044,6 +10242,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 2c: Fal.ai (FLUX schnell, needs FAL_KEY secret in GH) ──
+  if (imagePhaseExpired('Strategy 2c')) return null;
   // https://fal.ai — pay-per-use with free credits, very fast FLUX inference
   const falKey = process.env.FAL_KEY;
   if (falKey) {
@@ -10082,6 +10281,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 3: HuggingFace Inference API (free, FLUX-schnell) ──
+  if (imagePhaseExpired('Strategy 3')) return null;
   // https://huggingface.co/docs/api-inference — free tier with HF_TOKEN
   // FLUX-1-schnell is one of the fastest open-source text-to-image models
   // NOTE: HF migrated from api-inference.huggingface.co → router.huggingface.co (2025)
@@ -10128,6 +10328,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 4: Wikimedia Commons (free, no API key, keyword search) ──
+  if (imagePhaseExpired('Strategy 4')) return null;
   // Searches Creative Commons licensed photos from Wikimedia. Very reliable.
   // Uses article-specific topic keywords + image URL dedup to avoid repeats.
   {
@@ -10198,6 +10399,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 5: Pixabay API (free, 100 req/min, needs key) ──
+  if (imagePhaseExpired('Strategy 5')) return null;
   // Uses article-specific keyword search for relevant stock photos.
   const pixabayKey = process.env.PIXABAY_API_KEY;
   if (pixabayKey) {
@@ -10245,6 +10447,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 5b: Pexels API (stock foto CC0, needs PEXELS_API_KEY secret in GH) ──
+  if (imagePhaseExpired('Strategy 5b')) return null;
   // https://www.pexels.com/api/ — free tier 200 req/hour, landscape orientation, high quality
   const pexelsKey = process.env.PEXELS_API_KEY;
   if (pexelsKey) {
@@ -10294,6 +10497,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 6: Lorem Picsum (always works, random professional photo) ──
+  if (imagePhaseExpired('Strategy 6')) return null;
   // https://picsum.photos — Reliable service serving random stock photos.
   // Not topic-relevant, but always returns a valid image — last resort before fallback.
   try {
@@ -12733,6 +12937,46 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       }
     }
 
+    // Step 3a.0b-ter: conteggio parole IT — DETERMINISTICO, GRATIS, E PRIMA
+    // DEL FACT-CHECK.
+    //
+    // 2026-08-18 — PERCHE' E' SALITO QUI.
+    // Girava DOPO lo Step 3a.0c, cioe' dopo aver pagato 2 chiamate LLM di
+    // fact-check su una bozza che un `if` gratuito stava per buttare comunque.
+    // Non e' teoria, e' la run 32111688992:
+    //
+    //   07:36:12.190  🔍 LLM fact-check (gpt-4.1): verdict=PASS
+    //   07:36:12.191  🔍 LLM fact-check (gemini-2.5-flash): verdict=PASS
+    //   07:36:12.191  ⚠️  Contenuto IT troppo corto: 227 parole (min 700)
+    //
+    // sei volte di fila (227, 194, 179, 202, 223, 489 parole) = 12 fact-check
+    // pagati e buttati; sulla run 32086523370 sono 64 su 91.
+    //
+    // NON e' un gate abbassato: e' l'ordine di due controlli entrambi
+    // bloccanti. Il percorso di successo (>= soglia) resta DOPO il fact-check,
+    // dove ha sempre dovuto stare — qui sopra sale solo il ramo che rigenera.
+    //
+    // Effetto collaterale dichiarato: una bozza corta non produce piu'
+    // `lastFactCheckErrors`, perche' il verificatore non la vede. Il tentativo
+    // successivo riceve al suo posto `_previousWordCount` — che e' il feedback
+    // corretto per «troppo corto», mentre le rimostranze del fact-check su un
+    // testo che sara' comunque riscritto non lo erano.
+    const itWords = italianBodyWordCount(data);
+    lastWordCount = itWords;
+    const isLastAttempt = attempt >= maxAttempts;
+    // Candidata all'espansione anticipata: abbastanza lunga da avere struttura
+    // su cui lavorare, e non all'ultimo tentativo (li' l'espansione e' gia' il
+    // percorso di ultima spiaggia, invariato).
+    const earlyExpansionEligible = EARLY_EXPANSION_ENABLED
+      && itWords < adaptiveMinWords
+      && !isLastAttempt
+      && attempt >= EARLY_EXPANSION_MIN_ATTEMPT
+      && itWords >= adaptiveMinWords * EARLY_EXPANSION_MIN_RATIO;
+    if (itWords < adaptiveMinWords && !isLastAttempt && !earlyExpansionEligible) {
+      console.error(`  ⚠️  Contenuto IT troppo corto: ${itWords} parole (min ${adaptiveMinWords}) — rigenero (${attempt}/${maxAttempts})...`);
+      continue;
+    }
+
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
       const factResult = await llmFactCheck(data.content.it, pageContent, url);
@@ -12790,8 +13034,8 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       throw fcErr;
     }
 
-    const itWords = italianBodyWordCount(data);
-    lastWordCount = itWords;
+    // `itWords` / `lastWordCount` sono gia' stati calcolati sopra, prima del
+    // fact-check (Step 3a.0b-ter): `data` non e' cambiata da allora.
     if (itWords >= adaptiveMinWords) {
       // ── Repetition check INSIDE the loop — triggers retry if AI looped ──
       const itContentLoop = data.content.it || data.content;
@@ -12812,12 +13056,20 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       console.error(`  ✅ Soglia parole IT raggiunta: ${itWords} (min ${adaptiveMinWords}), nessun loop AI`);
       break;
     }
-    if (attempt < maxAttempts) {
-      console.error(`  ⚠️  Contenuto IT troppo corto: ${itWords} parole (min ${adaptiveMinWords}) — rigenero (${attempt}/${maxAttempts})...`);
-      continue;
+    // ── Espansione ──────────────────────────────────────────────────────
+    // Si arriva qui in due soli casi, entrambi con i gate deterministici E il
+    // fact-check gia' passati su questa bozza:
+    //   - ultima spiaggia (`isLastAttempt`): comportamento invariato;
+    //   - espansione ANTICIPATA (`earlyExpansionEligible`, dal tentativo
+    //     EARLY_EXPANSION_MIN_ATTEMPT): 27 secondi contro cinque rigenerazioni
+    //     da zero che non convergono, perche' la lunghezza dipende dalla fonte.
+    // Ogni altra bozza corta e' gia' stata rigenerata sopra, prima di pagare il
+    // fact-check.
+    if (isLastAttempt) {
+      console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
+    } else {
+      console.error(`  🔧 Espansione anticipata (tentativo ${attempt}/${maxAttempts}): ${itWords} parole ≥ ${Math.round(adaptiveMinWords * EARLY_EXPANSION_MIN_RATIO)} (${EARLY_EXPANSION_MIN_RATIO}× soglia) — espando invece di rigenerare (→ min ${adaptiveMinWords})...`);
     }
-    // ── Last resort: expand existing short content instead of failing ──
-    console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
     try {
       // Snapshot the pre-expansion draft: it already cleared runFactualityGates
       // and llmFactCheck earlier in THIS SAME attempt (Step 3a.0b-bis / 3a.0c
@@ -12882,19 +13134,65 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         data = preExpansionData;
       }
 
+      // 2026-08-18 — L'ESPANSIONE ANTICIPATA RIPASSA IL FACT-CHECK.
+      // L'espansione e' il percorso piu' incline al loop di ripetizione
+      // (incidente 2026-07-21, commento sopra) e il suo output non e' mai
+      // ripassato da `llmFactCheck`: accettabile finche' era l'ultima spiaggia
+      // — l'alternativa era buttare l'articolo — non piu' da quando puo'
+      // scattare al tentativo 2 e produrre l'articolo PUBBLICATO nel caso
+      // normale. Costa 2 chiamate, che la fix di Step 3a.0b-ter ha gia'
+      // ripagato molte volte: il bilancio netto resta negativo.
+      // Sull'ultima spiaggia NON si ripassa, per non introdurre un modo nuovo
+      // di perdere un articolo che oggi si pubblica.
+      if (!isLastAttempt && expandGateResult.passed) {
+        let expandFactOk = true;
+        try {
+          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);
+          if (!expandFactResult.passed) {
+            for (const i of expandFactResult.issues || []) {
+              const cat = String(i?.category || 'uncategorized');
+              RUN_REPORT.factuality.factCheckRejectionsByCategory[cat] =
+                (RUN_REPORT.factuality.factCheckRejectionsByCategory[cat] || 0) + 1;
+            }
+            console.error(`  🚫 Espansione anticipata rigettata dal fact-check: ${(expandFactResult.issues || []).length} problemi`);
+            expandFactOk = false;
+          }
+        } catch (expandFcErr) {
+          console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${expandFcErr.message.slice(0, 120)}`);
+          expandFactOk = false;
+        }
+        if (!expandFactOk) {
+          console.error(`  ↩️  Torno al testo pre-espansione (già approvato dai gate, ma corto)...`);
+          data = preExpansionData;
+        }
+      }
+
       const expandedWords = italianBodyWordCount(data);
       if (expandedWords >= adaptiveMinWords) {
         console.error(`  ✅ Espansione riuscita: ${expandedWords} parole (min ${adaptiveMinWords})`);
         break;
       }
-      console.error(`  ⚠️  Espansione insufficiente: ${expandedWords} parole — fallback accettato`);
-      // Accept the expanded content even if still slightly short (better than failing)
-      if (expandedWords >= adaptiveMinWords * 0.85) {
+      console.error(`  ⚠️  Espansione insufficiente: ${expandedWords} parole (min ${adaptiveMinWords})`);
+      // Accept the expanded content even if still slightly short (better than failing).
+      // 2026-08-18: SOLO sull'ultima spiaggia. «Meglio che fallire» e' un
+      // ragionamento valido quando l'alternativa e' buttare l'articolo; con
+      // tentativi ancora in canna l'alternativa e' un articolo della lunghezza
+      // giusta, e accettare l'85% qui sarebbe una relazione di qualita' che
+      // questa PR non ha nessuna ragione di introdurre.
+      if (isLastAttempt && expandedWords >= adaptiveMinWords * 0.85) {
         console.error(`  ✅ Contenuto accettato (≥85% soglia): ${expandedWords} parole`);
         break;
       }
     } catch (expandErr) {
       console.error(`  ⚠️  Espansione fallita: ${expandErr.message}`);
+    }
+    // Espansione anticipata che non ha raggiunto la soglia (o rigettata dai
+    // gate / dal fact-check e riportata al testo pre-espansione): restano
+    // tentativi, quindi si rigenera come prima di questa fix. Nessun articolo
+    // viene perso per una espansione fallita a meta' del budget.
+    if (!isLastAttempt) {
+      console.error(`  ⚠️  Espansione anticipata senza esito — rigenero (${attempt}/${maxAttempts})...`);
+      continue;
     }
     {
       const shortErr = new Error(`Contenuto IT troppo corto dopo ${maxAttempts} tentativi + espansione (${italianBodyWordCount(data)}/${adaptiveMinWords} parole).`);

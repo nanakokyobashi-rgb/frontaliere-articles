@@ -69,6 +69,16 @@ function extractFunctionSource(signature) {
 const GATE_SRC = extractFunctionSource('async function applyPreSpendTopicGate(headlines, opts = {}) {');
 const RECOVERY_SRC = extractFunctionSource('function resolveRunRecovery() {');
 
+// 2026-08-18 — il gate non e' piu' un `for…await` seriale: le classificazioni
+// partono a gruppi via `mapWithConcurrency`, e il cap del classifier ha un
+// default di modulo (`DEFAULT_MAX_CLASSIFIER_CALLS`, 12) che prima era
+// `headlines.length` e quindi non era un nome libero. Tre dipendenze in piu' da
+// iniettare, e `mapWithConcurrency` viene estratta dallo stesso sorgente invece
+// di essere riscritta qui: una copia divergente farebbe passare questo test su
+// un ordinamento che la produzione non ha.
+const MAP_CONCURRENCY_SRC = extractFunctionSource('async function mapWithConcurrency(items, limit, fn) {');
+const mapWithConcurrency = new Function(`${MAP_CONCURRENCY_SRC}\nreturn mapWithConcurrency;`)();
+
 /**
  * Builds a fresh gate with stubbed module-scope dependencies.
  *
@@ -110,6 +120,9 @@ function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFron
     'recordDiscardedHeadline',
     'RUN_REPORT',
     'console',
+    'mapWithConcurrency',
+    'DEFAULT_MAX_CLASSIFIER_CALLS',
+    'PRESPEND_GATE_CONCURRENCY',
     `${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
   )(
     isFrontaliere,
@@ -121,6 +134,11 @@ function makeGate({ relevant, anchor = () => null, topicalHits = () => 0, isFron
     () => {},
     runReport,
     fakeConsole,
+    mapWithConcurrency,
+    // I valori di produzione, non valori comodi: un cap piu' largo qui
+    // renderebbe verde un gate che in produzione smette di classificare.
+    12,
+    5,
   );
   return { gate, logs, runReport };
 }
