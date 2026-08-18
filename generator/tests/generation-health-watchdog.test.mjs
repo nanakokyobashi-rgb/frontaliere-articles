@@ -1235,23 +1235,40 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     );
   });
 
-  test('nessun body dice «scende al mirror» per un path che nessun mirror porta', () => {
+  test('ogni istruzione di routing su un file `identical` manda la fix su ENTRAMBI i repo', () => {
+    // Formulata in POSITIVO di proposito. La versione ovvia — «nessun body
+    // contiene "scende al mirror"» — si spegne da sola nel momento in cui la
+    // riga viene riscritta: sparisce la stringa, sparisce il trigger, e il
+    // test resta verde per sempre senza guardare più niente. È la stessa
+    // forma del gate vacuo di EDGE_PUSHED_FILES. Qui il trigger è invece la
+    // presenza di un'istruzione di routing (il body nomina il manifest), che
+    // non sparisce riscrivendo la frase, e l'asserzione è su cosa deve dire.
+    const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, 'scripts', 'ci', 'loop-sync-manifest.json'), 'utf-8'));
+    const identical = new Set(manifest.files.filter((f) => f.mode === 'identical').map((f) => f.path));
     const lines = source.split('\n');
     const offenders = [];
+    let routingWindows = 0;
     for (let i = 0; i < lines.length; i += 1) {
-      if (!/scende al\b/.test(lines[i])) continue;
+      if (!/loop-sync-manifest/.test(lines[i])) continue;
       // La frase è spezzata su più righe del literal: il path a cui si
-      // riferisce sta nella finestra intorno, dove il body lo nomina.
-      const window = lines.slice(Math.max(0, i - 4), i + 4).join('\n');
-      for (const m of window.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx|json|yml))(?::[\d-]+)?`/g)) {
-        if (!carriedByAMirror(m[1])) offenders.push(`L${i + 1}: "${m[1]}"`);
+      // riferisce, e il resto dell'istruzione, stanno nella finestra intorno.
+      const window = lines.slice(Math.max(0, i - 4), i + 5).join('\n');
+      const named = [...window.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`/g)]
+        .map((m) => m[1])
+        .filter((p) => identical.has(p) && !carriedByAMirror(p));
+      if (named.length === 0) continue;
+      routingWindows += 1;
+      if (!/entrambi i repo/i.test(window)) {
+        offenders.push(`L${i + 1} (${named.join(', ')}): l'istruzione non dice di applicare la fix a ENTRAMBI i repo`);
+      }
+      if (/scende al\s*\n?\s*'?,?\s*'?mirror|scende al mirror/.test(window)) {
+        offenders.push(`L${i + 1} (${named.join(', ')}): promette un trasporto via mirror che non esiste per quel path`);
       }
     }
-    assert.deepEqual(
-      offenders,
-      [],
-      'un body promette il trasporto via mirror per un file che nessun mirror porta: la fix va fatta a mano su entrambi i repo, corpus per primo',
-    );
+    // Non-vacuità: se un giorno i body smettessero di istradare, questo test
+    // passerebbe senza aver guardato nulla — e non ce ne accorgeremmo.
+    assert.ok(routingWindows >= 2, `esaminate solo ${routingWindows} istruzioni di routing: il test è diventato vacuo`);
+    assert.deepEqual(offenders, []);
   });
 
   test('ogni body che nomina un file del manifest ne dichiara il `mode` giusto', () => {
