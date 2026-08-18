@@ -6870,6 +6870,34 @@ const PROMPT_TOKEN_BUDGET = 8000;
 // non il campione.
 const PROMPT_TOKEN_CEILING = 8500;
 
+// Il tetto sul prompt COME ASSEMBLATO, cioe' al gradino 0 della scala, prima
+// che la riduzione tocchi qualcosa. E' un ratchet come quello sopra: puo' solo
+// SCENDERE, e scende fino a PROMPT_TOKEN_CEILING.
+//
+// PERCHE' NE SERVE UN SECONDO (2026-08-18). `PROMPT_TOKEN_CEILING` pesa il
+// prompt DOPO la scala, e finche' la scala mordeva sempre quel numero non
+// diceva piu' quanto pesa il prompt: diceva quanto taglia la scala. Le due
+// misure si erano gia' separate nella storia della costante — la discesa
+// 10.100 → 9.500 e' raw→raw («news 9.994 → 9.402»), quella 9.500 → 8.500 di
+// #376 e' raw→dopo-la-scala («9.402 → 8.410»). Da li' in poi un blocco nuovo
+// aggiunto al prompt non faceva salire il numero misurato: lo assorbiva la
+// scala tagliando la fonte, in silenzio. E' esattamente cio' che il ratchet
+// esiste per impedire («il prossimo blocco che si aggiunge al prompt deve
+// trovarlo, non assorbirlo»).
+//
+// Da quando una riduzione che non fa entrare non viene applicata, sul ramo
+// news al retry non c'e' piu' un «dopo la scala» da misurare: il prompt
+// spedito E' quello assemblato. Il tetto sul grezzo e' quindi il solo che
+// resti falsificabile su quel ramo.
+//
+// 9500 non e' un numero nuovo ne' un allentamento: e' il valore che
+// PROMPT_TOKEN_CEILING stesso aveva prima di #376, ed e' quello che il
+// commento sopra registra come peso del ramo news («9.402/9.488»). Misurato
+// oggi sul fixture del caso peggiore: news frontaliere attempt=1 9402, news
+// svizzera attempt=1 9337, news frontaliere al retry con entrambi i rimedi
+// 9488, news svizzera al retry 9423.
+const PROMPT_TOKEN_RAW_CEILING = 9500;
+
 // Budget di OUTPUT per la chiamata di generazione IT.
 //
 // Era 8000, hardcoded due volte. Il target e' CREATE_ARTICLE_MIN_IT_WORDS
@@ -7655,25 +7683,88 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     },
   ];
 
+  // ── UNA RIDUZIONE CHE NON FA ENTRARE NON SI APPLICA ───────────────────────
+  //
+  // 2026-08-18 — il difetto che questo blocco chiude, misurato sulla run
+  // 32129053221 (sana, 397s). Sei righe consecutive, letterali:
+  //
+  //   news frontaliere attempt=1 est=8006 budget=8000 over=1 shrink=4
+  //   news frontaliere attempt=2..6 est=8417 budget=8000 over=1 shrink=4
+  //
+  // `shrink=4` e' l'ultimo gradino della scala e `over=1` dice che il prompt
+  // e' fuori budget LO STESSO: la riduzione aveva pagato tutto il suo prezzo
+  // — via i fatti di dominio, fonte tagliata da 6036 a 2862 char (-53%) — e
+  // non aveva comprato niente. E il prezzo si vedeva a valle: 12 chiamate su
+  // 12 sono uscite con `[thin-content] Articolo corto` (1732, 2217, 2134,
+  // 1765, 1319, 1898 char contro un minimo di 2500), perche' il primo blocco
+  // che la scala butta e' proprio il materiale di contesto da cui il corpo
+  // prende lunghezza.
+  //
+  // PERCHE' NON COMPRAVA NIENTE, in aritmetica e non a occhio. Misurato col
+  // fixture del caso peggiore di news-prompt-token-budget.test.mjs:
+  //
+  //   impalcatura sola (fonte=0, fatti=0, rimedio=0)   7180 token
+  //   + fonte al pavimento dichiarato (3000ch → 2862)  +818  = 7998 / 8045
+  //
+  // cioe' l'impalcatura da sola lascia 820 token di spazio (8000 − 7180) e il
+  // pavimento della fonte ne costa 818: al primo tentativo il gradino massimo
+  // rientra per 2 token, e appena il prompt cresce di una riga — la nota di
+  // retry, un rimedio, una headline correlata in piu' — non rientra piu'.
+  // `shrink=4` non e' «il gradino massimo»: e' un gradino che, per come sono
+  // fatti i numeri, non puo' funzionare.
+  //
+  // E SOPRATTUTTO: i cap che il pre-flight fa rispettare sono a gradini
+  // {3000, 4000, 8000} (`MODEL_MAX_REQUEST_TOKENS`) piu' il default di
+  // provider, che vale 8000 per tutti e cinque quelli che ne hanno uno
+  // (`DEFAULT_REQUEST_TOKENS_BY_PROVIDER` = MAX_PREFLIGHT_REQUEST_TOKENS).
+  // Fra 8000 e l'illimitato NON C'E' UN GRADINO. Quindi un prompt stimato
+  // 8045 e uno stimato 9020 sono ammessi esattamente dagli stessi modelli:
+  // scendere da 9020 a 8045 senza arrivare a 8000 non guadagna UN modello, e
+  // consegna a quelli che la chiamata la prendono comunque un prompt mutilato
+  // dei fatti di dominio e con la fonte piu' che dimezzata.
+  //
+  // Da qui la regola: si adotta il PRIMO gradino che rientra nel target; se
+  // NESSUNO rientra, si torna al gradino 0 — intero. Non e' un allentamento
+  // del budget (il target non si muove, il marker continua a dire `over=1`):
+  // e' il rifiuto di pagare un prezzo che nessuno incassa.
   let prompt = null;
   let llmMessages = null;
   let _promptEstTokens = 0;
   let _promptShrinkStep = 0;
   let _promptShrinkLabel = 'intero';
-  for (let i = 0; i < _shrinkLadder.length; i++) {
+  let _promptFits = false;
+  const _buildStep = (i) => {
     const step = _shrinkLadder[i];
-    prompt = buildPrompt({ sourceBody: step.sourceBody, domainFacts: step.domainFacts });
-    llmMessages = buildMessages(prompt, step.remediation);
-    _promptEstTokens = estimateRequestTokens(llmMessages, {
+    const p = buildPrompt({ sourceBody: step.sourceBody, domainFacts: step.domainFacts });
+    const msgs = buildMessages(p, step.remediation);
+    const est = estimateRequestTokens(msgs, {
       jsonSchema: articleSchema,
       maxTokens: IT_GENERATION_MAX_TOKENS,
     });
-    _promptShrinkStep = i;
-    _promptShrinkLabel = step.label;
-    // `_saltaScala` esce al gradino 0: il modello che rispondera' per primo non
-    // dichiara un cap, quindi non c'e' niente da rientrare. Vedi il blocco «Le
-    // due difese che si combattevano» sopra.
-    if (_saltaScala || _promptEstTokens <= _promptTokenTarget) break;
+    return { p, msgs, est, label: step.label };
+  };
+  const _step0 = _buildStep(0);
+  const _promptRawEstTokens = _step0.est;
+  prompt = _step0.p;
+  llmMessages = _step0.msgs;
+  _promptEstTokens = _step0.est;
+  _promptShrinkLabel = _step0.label;
+  _promptFits = _promptEstTokens <= _promptTokenTarget;
+  // `_saltaScala` ferma tutto al gradino 0: il modello che rispondera' per primo
+  // non dichiara un cap, quindi non c'e' niente in cui rientrare. Vedi il blocco
+  // «Le due difese che si combattevano» sopra. Il predicato del ciclo lo dice
+  // esplicitamente invece di uscire con un `break` dentro, perche' qui il corpo
+  // del ciclo non ha piu' effetti collaterali: adotta solo il gradino che entra.
+  for (let i = 1; !_saltaScala && !_promptFits && i < _shrinkLadder.length; i++) {
+    const built = _buildStep(i);
+    if (built.est <= _promptTokenTarget) {
+      prompt = built.p;
+      llmMessages = built.msgs;
+      _promptEstTokens = built.est;
+      _promptShrinkStep = i;
+      _promptShrinkLabel = built.label;
+      _promptFits = true;
+    }
   }
 
   // Sopra il target ma DELIBERATAMENTE: non e' la scala che ha fallito, e' la
@@ -7682,13 +7773,25 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // renderebbe rumore da ignorare.
   const _promptOverBudget = !_saltaScala && _promptEstTokens > _promptTokenTarget;
   // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
-  // riga, non il testo attorno. `shrink=` e' nuovo e additivo — i campi
+  // riga, non il testo attorno. `shrink=` e `raw=` sono additivi — i campi
   // preesistenti mantengono nome e posizione.
+  //
+  // `raw=` e' il peso del prompt COME ASSEMBLATO, prima della scala: e' il
+  // numero che PROMPT_TOKEN_RAW_CEILING ratcheta, e finora non compariva da
+  // nessuna parte nei log. Senza, il ratchet sul grezzo sarebbe verificabile
+  // solo sul fixture — e un fixture, qui, ha gia' mentito una volta.
   console.error(
     `[prompt-budget] branch=${_promptBudgetBranch} section=${SECTION_NAME} `
     + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${_promptTokenTarget} `
-    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep}`,
+    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep} raw=${_promptRawEstTokens}`,
   );
+  if (_promptRawEstTokens > PROMPT_TOKEN_RAW_CEILING) {
+    console.warn(
+      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} assemblato pesa ${_promptRawEstTokens} token, `
+      + `sopra il tetto dichiarato di ${PROMPT_TOKEN_RAW_CEILING}: un blocco e' cresciuto e il costo `
+      + 'non e\' stato compensato altrove. Il tetto e\' un ratchet, non un obiettivo mobile.',
+    );
+  }
   if (_promptShrinkStep > 0) {
     console.error(
       `  ✂️  [prompt-budget] prompt ridotto per rientrare in ${_promptTokenTarget} token: `
@@ -7704,9 +7807,12 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   }
   if (_promptOverBudget) {
     console.warn(
-      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} resta stimato in ${_promptEstTokens} token `
-      + `dopo tutta la scala di riduzione, oltre il target di ${_promptTokenTarget}: ogni modello `
-      + 'con un cap di input piu\' basso verra\' saltato dal pre-flight senza tentare la chiamata.',
+      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} e' stimato in ${_promptEstTokens} token, `
+      + `oltre il target di ${_promptTokenTarget}, e NESSUN gradino della scala lo riporta sotto: `
+      + 'il prompt resta INTERO (shrink=0). Fra il cap di 8000 e l\'illimitato non c\'e\' un gradino, '
+      + 'quindi ridurlo a meta\' strada non guadagnerebbe un modello e toglierebbe i fatti di dominio '
+      + 'a chi la chiamata la prende comunque. I modelli con cap piu\' basso verranno saltati dal '
+      + 'pre-flight senza tentare la chiamata — come sarebbero stati saltati anche col prompt ridotto.',
     );
   }
 
