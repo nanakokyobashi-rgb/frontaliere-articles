@@ -569,3 +569,45 @@ export function fixJsonStringBody(input, { fixAsterisks = false } = {}) {
   }
   return out;
 }
+
+// ── LLM JSON repair (handles the common LLM output quirks) ──────────────────
+//
+// Why: GitHub Models / Groq / Mistral occasionally emit markdown bold markers
+// (`**` / `***`) between JSON properties instead of commas, or wrap the payload
+// in ```json fences, or stick a preamble before the opening `{`, or echo a
+// quoted phrase from the source text unescaped (e.g. a title like
+// `..."tassa sulla salute"...`) which desyncs naive quote-toggle string
+// tracking into `Unterminated string in JSON`. The string-repair walk
+// (preserve asterisks INSIDE quoted strings — markdown bold in body1/body2 is
+// load-bearing — replace a stray `*` OUTSIDE strings with a comma, escape
+// unescaped inner quotes) is `fixJsonStringBody` above, shared with
+// batch-add-faq-to-articles.mjs's repairJsonArray. Truncated payloads still
+// throw — callers detect that via `parseErr.message` and retry with a larger
+// `maxTokens`.
+//
+// Vive QUI dal 2026-08-18, non piu' dentro create-article.mjs. La ragione e' la
+// stessa del modulo del verdetto (./body2-payload-verdict.mjs): create-article.mjs
+// non e' importabile dalle gate del generatore, che girano `node --test` senza
+// `npm ci`. Finche' questa funzione stava la' dentro, l'unico modo di provarne
+// il comportamento era RICOPIARLA nel test — e una copia non ha modo di
+// accorgersi che l'originale e' cambiata. Le sue tre primitive erano gia' tutte
+// in questo file: il trasloco riunisce la funzione alle sue parti.
+export function repairLlmJson(raw) {
+  let c = stripCodeFences(raw);
+  const start = c.indexOf('{');
+  if (start !== -1) {
+    // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
+    // so trailing LLM prose or a foreign '}' from an interior nested object does not
+    // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
+    // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
+    const closeIdx = findMatchingClose(c, start, true);
+    if (closeIdx !== -1) {
+      c = c.slice(start, closeIdx + 1);
+    } else {
+      const end = c.lastIndexOf('}');
+      if (end > start) c = c.slice(start, end + 1);
+    }
+  }
+  const out = fixJsonStringBody(c, { fixAsterisks: true });
+  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
+}
