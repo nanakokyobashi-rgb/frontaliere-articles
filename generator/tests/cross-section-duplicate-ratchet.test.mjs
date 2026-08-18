@@ -37,6 +37,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { listCrossSectionDuplicates } from '../scripts/lib/cross-section-dedup.mjs';
+import { ledgerArticleIds, readLedgerEntry } from '../scripts/lib/source-url-ledger.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
@@ -75,13 +76,33 @@ const KNOWN_CROSS_SECTION_DUPLICATES_2026_08_13 = new Set([
  */
 const MIN_LEDGER_ENTRIES = 50;
 
-function readPublishedLedgers() {
+function readRawLedgers() {
   const out = {};
   for (const [section, rel] of Object.entries(LEDGER_FILES)) {
     const parsed = JSON.parse(readFileSync(path.join(ROOT, rel), 'utf-8'));
     assert.ok(parsed && typeof parsed === 'object' && !Array.isArray(parsed), `${rel} non è una mappa URL→id`);
     out[section] = parsed;
   }
+  return out;
+}
+
+/**
+ * I ledger nella forma che `listCrossSectionDuplicates` sa leggere: valori
+ * STRINGA, senza finestra temporale.
+ *
+ * Il passaggio da `ledgerArticleIds` non è cosmetico ed è la ragione per cui
+ * questo test è stato toccato insieme alla scadenza del ledger. Dal momento in
+ * cui `recordSourceUrl` scrive `{articleId, ts}`, passare la mappa GREZZA a
+ * `listCrossSectionDuplicates` non produce un errore: la funzione salta ogni
+ * valore che non sia una stringa, quindi avrebbe contato **zero duplicati su
+ * qualunque corpus**, per sempre, restando verde. Un ratchet vacuo è peggio di
+ * un ratchet assente, e il pavimento qui sotto non lo avrebbe visto perché
+ * conta le CHIAVI, non i valori leggibili.
+ */
+function readPublishedLedgers() {
+  const raw = readRawLedgers();
+  const out = {};
+  for (const [section, map] of Object.entries(raw)) out[section] = ledgerArticleIds(map);
   return out;
 }
 
@@ -108,6 +129,22 @@ test('nessun NUOVO duplicato cross-sezione nel registro pubblicato', () => {
     + 'Verificare che `isSourceUrlAlreadyUsed` sia ancora sul percorso di pre-filtro delle headline '
     + '(generator/tests/cross-section-source-dedup.test.mjs copre il cablaggio).',
   );
+});
+
+test('ogni voce dei ledger pubblicati porta un id leggibile', () => {
+  // Il pavimento che rende non-vacuo il ratchet sopra: se una forma nuova
+  // entrasse nei file senza passare da `readLedgerEntry`, gli URL corrispondenti
+  // uscirebbero dalla vista e i duplicati su di essi diventerebbero invisibili.
+  for (const [section, map] of Object.entries(readRawLedgers())) {
+    const illeggibili = Object.entries(map)
+      .filter(([, v]) => !readLedgerEntry(v))
+      .map(([url]) => url);
+    assert.deepEqual(
+      illeggibili,
+      [],
+      `ledger ${section}: voci che né stringa né {articleId, ts} — invisibili al dedup cross-sezione`,
+    );
+  }
 });
 
 test('la baseline storica non cresce', () => {
