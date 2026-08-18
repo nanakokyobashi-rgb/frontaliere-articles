@@ -148,7 +148,12 @@ const preferDecl = cutDecl('function _preferisceModelloSenzaCap(');
 const assemblePrompt = new Function(
   '__d',
   `const { ${DEPS.join(', ')} } = __d;\n${clampDecl}\n${preferDecl}\n${promptBlock}\n`
-  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget, rawEstTokens: _promptRawEstTokens, fonteChars: _promptFonteChars, fattiChars: _promptFattiChars, unsat: _promptTargetInsoddisfacibile, splitMode: _splitMode, splitAttiva: _splitAttiva, splitCall1: _splitCall1, promptSpedito: (_splitAttiva ? _splitCall1.p : prompt) };',
+  // `ribracket`: il piano di ri-dimensionamento che la cascata usa quando
+  // abbandona il modello senza cap. `typeof` e non un riferimento diretto —
+  // se il blocco non lo definisce piu' il test dedicato deve fallire DA SOLO
+  // con il suo messaggio, non far esplodere `new Function` e tingere di rosso
+  // tutti gli altri per un ReferenceError.
+  + 'return { llmMessages, articleSchema, estTokens: _promptEstTokens, overBudget: _promptOverBudget, prompt, branch: _promptBudgetBranch, shrink: _promptShrinkStep, target: _promptTokenTarget, rawEstTokens: _promptRawEstTokens, fonteChars: _promptFonteChars, fattiChars: _promptFattiChars, unsat: _promptTargetInsoddisfacibile, splitMode: _splitMode, splitAttiva: _splitAttiva, splitCall1: _splitCall1, promptSpedito: (_splitAttiva ? _splitCall1.p : prompt), ribracket: (typeof _rebracket === \'undefined\' ? null : _rebracket) };',
 );
 
 // ── Fixture: il CASO PEGGIORE REALE, non uno comodo ───────────────────────
@@ -993,4 +998,213 @@ test('divisione in due chiamate: un prompt di retry non esce mai con fatti=0ch',
       'lo schema di default deve restare quello storico, byte a byte',
     );
   });
+});
+
+// ═══ 9. IL RI-BRACKETING SULLA CASCATA ═══════════════════════════════════
+//
+// Il buco che questi test chiudono e' stato misurato sulla run 32147257594
+// (14:15Z, 51 minuti, ZERO articoli): il prompt viene dimensionato UNA VOLTA
+// SOLA, sul modello preferito, e il preferito e' l'unico del roster senza cap
+// di input dichiarato. Quando la cascata lo abbandona — haiku in timeout 3/3 —
+// degrada sui modelli capped portandosi dietro lo STESSO payload da 8208
+// token, e il pre-flight di `callLLM` li salta tutti: nessun modello della
+// catena dichiara un cap sopra 8000. Ogni fallback del tentativo 1 era quindi
+// condannato PRIMA di partire.
+//
+// I test qui sotto osservano il PIANO di ri-dimensionamento, non la chiamata:
+// e' costruibile senza rete, ed e' esattamente cio' che decide se i modelli
+// capped ricevono un payload spedibile o uno gia' bocciato.
+
+test('ri-bracketing: degradando su un modello con cap 8000 il prompt rientra in 8000', () => {
+  const r = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+
+  // Le due premesse del difetto, riaffermate qui cosi' che il test non passi
+  // per il motivo sbagliato (es. una scala che ha ricominciato a mordere).
+  assert.equal(r.shrink, 0, 'la premessa non regge piu\': col preferito senza cap il prompt deve partire INTERO');
+  assert.ok(
+    r.estTokens > PROMPT_TOKEN_BUDGET,
+    `la premessa non regge piu': il prompt intero (${r.estTokens}) non e' sopra il cap della flotta (${PROMPT_TOKEN_BUDGET})`,
+  );
+
+  assert.ok(
+    typeof r.ribracket === 'function',
+    'il blocco non espone nessun ri-dimensionamento: quando la cascata degrada, i modelli capped '
+    + 'ricevono il payload intero e il pre-flight li salta tutti — ogni fallback del tentativo 1 '
+    + 'e\' condannato per costruzione',
+  );
+
+  // 8000 e' il numero che `callLLM` allega al throw come
+  // `err.retryRequestTokenBudget`: il cap piu' permissivo fra i modelli che
+  // hanno rifiutato. Il piano si costruisce su quello, non su una costante.
+  const rb = r.ribracket(PROMPT_TOKEN_BUDGET);
+  assert.ok(
+    rb,
+    `nessun piano di ri-bracketing a ${PROMPT_TOKEN_BUDGET} token: il tentativo 1 continua a spendere `
+    + 'i suoi slot su un prompt che ogni modello con cap rifiutera\'',
+  );
+
+  const scelta = rb.split || rb;
+  assert.ok(
+    scelta.est <= PROMPT_TOKEN_BUDGET,
+    `il prompt ri-dimensionato pesa ${scelta.est} token, sopra il cap ${PROMPT_TOKEN_BUDGET} del modello `
+    + 'su cui la cascata sta degradando: il ri-bracketing non compra un solo slot',
+  );
+  assert.ok(
+    scelta.est < r.estTokens,
+    `il ri-bracketing non ha ridotto niente (${scelta.est} contro ${r.estTokens} di partenza)`,
+  );
+
+  // E lo fa senza rifare il difetto opposto: rientrare buttando i fatti di
+  // dominio e' cio' che la divisione in due chiamate esiste per evitare.
+  //
+  // La garanzia e' condizionata a `CREATE_ARTICLE_PROMPT_SPLIT` perche' il
+  // flag `off` E' la leva di rollback: chi lo mette si ricompra il
+  // comportamento precedente, fatti compresi, e la suite lo registra gia'
+  // (con `off` falliscono anche i test della divisione in due chiamate, sia
+  // prima sia dopo questa PR). Sul default `auto` — l'unico che la CI e la
+  // pipeline usano — la garanzia vale piena.
+  if (r.splitMode !== 'off') {
+    assert.ok(
+      scelta.fattiChars > 0,
+      'il ri-bracketing rientra nel cap buttando i fatti di dominio (fatti=0ch): e\' il difetto che '
+      + 'la divisione in due chiamate ha gia' + '\' chiuso, non va reintrodotto qui',
+    );
+  }
+});
+
+test('ri-bracketing: vale anche sul ramo NEWS SVIZZERA, che e\' il piu\' pesante', () => {
+  // La run misurata sforava di piu' proprio qui: est=8208 contro 8120 del
+  // ramo frontaliere. Un rimedio che entra solo sul ramo leggero non serve.
+  const r = conHaikuDisponibile(() => newsPrompt({}, 'svizzera', PREFERISCE_HAIKU));
+  assert.ok(typeof r.ribracket === 'function', 'il blocco non espone nessun ri-dimensionamento');
+  const rb = r.ribracket(PROMPT_TOKEN_BUDGET);
+  assert.ok(rb, `nessun piano di ri-bracketing a ${PROMPT_TOKEN_BUDGET} sul ramo svizzera`);
+  const scelta = rb.split || rb;
+  assert.ok(
+    scelta.est <= PROMPT_TOKEN_BUDGET,
+    `ramo svizzera: prompt ri-dimensionato a ${scelta.est}, sopra ${PROMPT_TOKEN_BUDGET}`,
+  );
+});
+
+test('ri-bracketing: sotto il pavimento dell\'impalcatura NON finge un rimedio', () => {
+  // Il seguito onesto del test «un budget dettato SOTTO l'impalcatura non fa
+  // mutilare il prompt per niente». I bracket bassi della flotta restano
+  // irraggiungibili per la generazione articoli — l'impalcatura della sola
+  // scrittura costa 5850 token — e il ri-bracketing deve dirlo tornando
+  // `null`, non spendere una seconda chiamata su un prompt che verra' saltato
+  // esattamente come il primo.
+  const r = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
+  assert.ok(typeof r.ribracket === 'function', 'il blocco non espone nessun ri-dimensionamento');
+  for (const budget of [3000, 4000]) {
+    assert.equal(
+      r.ribracket(budget), null,
+      `budget ${budget}: il ri-bracketing ha prodotto un piano per un bracket sotto il pavimento `
+      + 'dell\'impalcatura — una chiamata spesa per niente, e uno `shrink` che sembra un rimedio',
+    );
+  }
+  // E un budget piu' largo del prompt gia' assemblato non e' un cambio di
+  // bracket: non c'e' niente da ricostruire.
+  assert.equal(
+    r.ribracket(999_999), null,
+    'un budget sopra il prompt gia' + '\' assemblato ha prodotto un piano: il ri-bracketing sta ricostruendo a vuoto',
+  );
+});
+
+test('ri-bracketing: senza preferenza attiva il piano non cambia niente di cio\' che gia\' funziona', () => {
+  // Il ramo senza preferenza dimensiona gia' il prompt sul cap della flotta:
+  // il ri-bracketing non deve avere niente da fare, ed e' la prova che il
+  // cambiamento e' inerte su ogni percorso oggi verde.
+  const r = newsPrompt();
+  assert.ok(typeof r.ribracket === 'function', 'il blocco non espone nessun ri-dimensionamento');
+  assert.ok(
+    r.estTokens <= PROMPT_TOKEN_BUDGET,
+    `senza preferenza il prompt dovrebbe gia' rientrare: ${r.estTokens} > ${PROMPT_TOKEN_BUDGET}`,
+  );
+  assert.equal(
+    r.ribracket(PROMPT_TOKEN_BUDGET), null,
+    'il ri-bracketing propone un piano su un prompt che rientra gia\': starebbe accorciando senza motivo',
+  );
+});
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 10. L'ESECUZIONE DEL PIANO, CHE STA FUORI DAL BLOCCO ESTRATTO
+//
+// L'harness qui sopra ritaglia il blocco che finisce a `let itRaw;`: il
+// call-site del ri-bracketing e le sue conseguenze (quale errore si propaga,
+// cosa resta in `llmMessages`) cadono fuori, e quattro difetti di correttezza
+// ci sono stati trovati da una review indipendente proprio li'. Finche' non
+// esiste un harness che possa invocare `callLLM`, questi quattro invarianti si
+// osservano sul SORGENTE — che e' gia' il modo con cui questo file guarda i
+// call-site (vedi la sezione sul letterale 8000).
+// ═══════════════════════════════════════════════════════════════════════════
+
+const _corpoRibracket = () => {
+  const i = src.indexOf('const _eseguiRibracket');
+  assert.ok(i > 0, 'il ri-bracketing non ha piu\' un esecutore: l\'invariante sotto non ha piu\' un soggetto');
+  const j = src.indexOf('\n  let itRaw;', i);
+  assert.ok(j > i, 'non trovo la fine del blocco del prompt');
+  return src.slice(i, j);
+};
+
+test('ri-bracketing: un piano che FALLISCE non sostituisce l\'errore originale', () => {
+  // Aritmetica, non stile. Col prompt rientrato nel bracket i modelli a cap
+  // 8000 non vengono piu' saltati, quindi il nuovo ALL_MODELS_EXHAUSTED porta
+  // un `retryRequestTokenBudget` piu' BASSO (il cap dei soli modelli rimasti
+  // fuori). Il ciclo esterno lo applica con un Math.min monotono: lasciarlo
+  // passare significa mandare i tentativi 2..6 su un bersaglio sotto
+  // PROMPT_SCAFFOLD_FLOOR_TOKENS, cioe' insoddisfacibile per costruzione —
+  // esattamente il fallimento che questo lavoro esiste per togliere, spostato
+  // di un tentativo e reso permanente.
+  const k = src.indexOf('await _eseguiRibracket(');
+  assert.ok(k > 0, 'il call-site del ri-bracketing e\' sparito');
+  const prima = src.slice(Math.max(0, k - 200), k);
+  assert.match(prima, /try\s*\{\s*_out = $/, 'la chiamata al piano non e\' dentro un `try`: un suo throw uscirebbe al posto dell\'errore originale');
+  const dopo = src.slice(k, k + 500);
+  assert.match(dopo, /catch\s*\(\s*e2\s*\)/, 'manca il catch dedicato al fallimento del piano');
+  assert.match(dopo, /throw e;/, 'il catch del piano non ripropaga l\'errore ORIGINALE');
+  assert.ok(
+    !/throw e2;/.test(dopo),
+    'il catch del piano propaga il proprio errore: il suo retryRequestTokenBudget e\' piu\' basso e il '
+    + 'Math.min del ciclo esterno lo rende irreversibile',
+  );
+});
+
+test('ri-bracketing: in `llmMessages` resta il prompt RIDIMENSIONATO, anche quando spedisce lo split', () => {
+  // `llmMessages` e' cio' da cui riparte il retry per JSON malformato. Sul
+  // ramo split veniva riassegnato solo in caduta: un successo lasciava li'
+  // l'assemblato intero, e al primo retry sarebbe tornato fuori cap.
+  const corpo = _corpoRibracket();
+  assert.match(corpo, /const _msgsUnica = rb\.msgs \|\| _buildStep\(/, 'manca la chiamata unica ridimensionata di riserva');
+  const assegnazioni = corpo.match(/llmMessages = [A-Za-z_.]+/g) || [];
+  assert.ok(assegnazioni.length >= 2, `\`llmMessages\` viene riassegnato ${assegnazioni.length} volta/e: il ramo split ne resta scoperto`);
+  for (const a of assegnazioni) {
+    assert.equal(a, 'llmMessages = _msgsUnica', `assegnazione non ridimensionata: \`${a}\``);
+  }
+});
+
+test('ri-bracketing: non rispedisce una meta\' di scrittura gia\' tentata', () => {
+  // Con CREATE_ARTICLE_PROMPT_SPLIT=on la divisione parte anche col prompt
+  // intero, sullo stesso bersaglio che il piano ricostruirebbe: senza guardia
+  // sono due chiamate LLM spese per riottenere lo stesso rifiuto.
+  const corpo = _corpoRibracket();
+  assert.match(
+    corpo, /rb\.split\.p !== _splitPromptTentato/,
+    'manca la guardia sul doppio split: lo stesso prompt puo\' partire due volte nello stesso tentativo',
+  );
+  assert.match(src, /_splitPromptTentato = _splitCall1 \? _splitCall1\.p : null;/, 'nessuno registra la meta\' di scrittura tentata');
+});
+
+test('i marker [prompt-split] dichiarano il budget VERO, non quello di partenza', () => {
+  // Sono marker machine-readable: una riga `call=2/2 budget=8000` emessa
+  // mentre si lavora a un bracket diverso manda fuori strada chi ci costruisce
+  // sopra un watchdog. E il ramo di ri-bracketing deve emettere anche la sua
+  // `call=1/2`, o la coppia resta spaiata.
+  const marker = src.match(/call=1\/2 part=body/g) || [];
+  assert.ok(marker.length >= 2, `il ramo di ri-bracketing non emette la sua riga call=1/2 (trovate ${marker.length})`);
+  assert.ok(
+    !/(call=1\/2|call=2\/2)[^\n]*budget=\$\{_promptTokenTarget\}/.test(src),
+    'un marker [prompt-split] dichiara ancora il budget di partenza invece di quello in corso',
+  );
+  assert.ok((src.match(/budget=\$\{_splitBudgetLog\}/g) || []).length >= 2, 'i marker non leggono il budget corrente');
 });

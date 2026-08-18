@@ -580,9 +580,12 @@ function valutaEscapate(mio, testo, testimoni, cache) {
     if (!d.daEscape[i]) continue;
     const a = d.inizioIn[i];
     const spelling = testo.slice(a, d.fineIn[i]);
+    // L'estrazione, calcolata QUI e non nel rapporto: `testo` e' il testo su cui
+    // l'offset e' valido: ogni riparazione applicata prima sposta tutto.
+    const estratto = { marker: etichettaMarker(d.testo.charCodeAt(i)), contesto: contestoDi(testo, a, d.fineIn[i]) };
     const esito = risolviConTestimone(d.testo, i, testimoni, cache);
     if (!esito.carattere) {
-      lasciate.push({ offset: a, spelling, motivo: esito.motivo });
+      lasciate.push({ offset: a, spelling, ...estratto, motivo: esito.motivo });
       continue;
     }
     const locali = [...new Set(esito.testimoni.map(localeDi))];
@@ -590,6 +593,7 @@ function valutaEscapate(mio, testo, testimoni, cache) {
       lasciate.push({
         offset: a,
         spelling,
+        ...estratto,
         motivo: `testimone: nessun testimone fuori dal locale ${JSON.stringify(mio)} (${locali.map((l) => JSON.stringify(l)).join(' ')})`,
       });
       continue;
@@ -600,12 +604,13 @@ function valutaEscapate(mio, testo, testimoni, cache) {
     // cioe' sette caratteri di file per uno solo di testo.
     const ultimo = i + esito.coda;
     if (ultimo >= d.fineIn.length) {
-      lasciate.push({ offset: a, spelling, motivo: 'testimone: la coda esce dal file' });
+      lasciate.push({ offset: a, spelling, ...estratto, motivo: 'testimone: la coda esce dal file' });
       continue;
     }
     const risolvibile = {
       offset: a,
       spelling,
+      ...estratto,
       fine: d.fineIn[ultimo],
       prima: testo.slice(a, d.fineIn[ultimo]),
       dopo: esito.carattere,
@@ -650,7 +655,7 @@ function riparaEscapate(percorso, testo, testimoni, cache) {
   if (esito.scelta) {
     const motivo = `testimone: risolvibile, non applicata — tetto di ${TESTIMONE_GIRI_MAX} riparazioni per file raggiunto (rilanciare lo script)`;
     for (const r of [esito.scelta, ...esito.rinviate]) {
-      lasciate.push({ offset: r.offset, spelling: r.spelling, motivo });
+      lasciate.push({ offset: r.offset, spelling: r.spelling, marker: r.marker, contesto: r.contesto, motivo });
     }
   }
   lasciate.sort((a, b) => a.offset - b.offset);
@@ -936,7 +941,19 @@ function valutaResidui(testo, testimoni, cache, lessico, freqMinima) {
         break;
       }
     }
-    if (!riparato) lasciate.push({ offset: j, token: token.testo, motivo });
+    if (!riparato) {
+      // Il marker qui non esiste piu': l'unica cosa che dice DOVE stava e' la
+      // cifra rimasta, quindi e' lei a essere delimitata. Senza, `"22il"` non
+      // dice quale delle due cifre ha preso il posto del carattere perduto.
+      lasciate.push({
+        offset: j,
+        token: token.testo,
+        marker: etichettaMarker(null),
+        coda: testo[j],
+        contesto: contestoDi(testo, j, j + 1),
+        motivo,
+      });
+    }
   }
   return { riparazioni, lasciate, prefiltrate };
 }
@@ -1380,7 +1397,14 @@ function riparaTesto(testo, lessico, freqMinima) {
       fuori += t.testo;
       const n = (t.testo.match(MARKER_G) || []).length;
       for (let k = 0; k < n; k += 1) {
-        rifiuti.push({ offset: t.inizio, token: t.testo, motivo: r ? r.motivo : 'non analizzato', candidati: r ? r.candidati : [] });
+        rifiuti.push({
+          offset: t.inizio,
+          token: t.testo,
+          marker: etichettaMarker((t.testo.match(MARKER_G) || [])[k]?.charCodeAt(0)),
+          contesto: contestoDi(testo, t.inizio, t.inizio + t.testo.length),
+          motivo: r ? r.motivo : 'non analizzato',
+          candidati: r ? r.candidati : [],
+        });
       }
     }
     cursore = t.inizio + t.testo.length;
@@ -1402,6 +1426,57 @@ function riparaTesto(testo, lessico, freqMinima) {
 
 function visibile(s) {
   return s.replace(MARKER_G, (c) => `<${c.charCodeAt(0).toString(16).padStart(2, '0').toUpperCase()}>`);
+}
+
+// ---------------------------------------------------------------------------
+// L'ESTRAZIONE DEL MARKER — perche' l'occorrenza da sola non basta (issue #94)
+// ---------------------------------------------------------------------------
+//
+// Le tre grafie del difetto NON arrivavano al rapporto con la stessa quantita'
+// di contesto, e la differenza non e' cosmetica: decide quante occorrenze si
+// possono classificare leggendo il rapporto invece di riaprire i file a mano.
+//
+//   byte grezzo        `"d<0E>9penses"`  — la parola intera, il marker al suo
+//                      posto: si legge, si classifica, si ripara.
+//   spelling escapata  `"\\u0010"`        — il marker E BASTA. Quale parola?
+//                      quale frase?  Il rapporto non lo diceva.
+//   residuo            `"22il"`          — il marker non c'e' piu' e NIENTE
+//                      dice quale delle due cifre ne ha preso il posto.
+//
+// Misurato su `origin/main` il 2026-08-18: delle occorrenze stampate dal
+// rapporto, **91 (45 escapate + 46 residui) uscivano senza un solo carattere
+// di contesto attorno**, e chi conduce la campagna di riparazione ha dovuto
+// riestrarle dai file una per una. Le altre 103 no, perche' il loro token
+// porta gia' il marker in forma `<XX>`.
+//
+// `contestoDi` da' a tutte e tre la stessa finestra ANCORATA: il tratto esatto
+// dell'occorrenza fra `[[` e `]]`, i byte C0 resi `<XX>` come ovunque nel
+// rapporto, e `CONTESTO_INTORNO` caratteri per lato. E' la stessa ancora che
+// usa il canale testimone (16 prima / 24 dopo), presa larga: chi legge il
+// rapporto deve poter riconoscere la frase, non solo il token.
+//
+// Il tratto delimitato NON e' una proposta di riparazione: dice dove guardare,
+// non cosa scrivere. L'unica cosa autorizzata a scrivere resta il testimone.
+const CONTESTO_INTORNO = 32;
+
+function contestoDi(testo, inizio, fine) {
+  const a = Math.max(0, inizio - CONTESTO_INTORNO);
+  const b = Math.min(testo.length, fine + CONTESTO_INTORNO);
+  const puntiPrima = a > 0 ? '...' : '';
+  const puntiDopo = b < testo.length ? '...' : '';
+  return `${puntiPrima}${visibile(testo.slice(a, inizio))}[[${visibile(testo.slice(inizio, fine))}]]${visibile(testo.slice(fine, b))}${puntiDopo}`;
+}
+
+/**
+ * `0x0E` per il byte C0 che si sta guardando, `strippato` per il residuo, dove
+ * il byte non esiste piu'. Il campo c'e' sempre: un rapporto in cui il marker
+ * manca perche' la famiglia non lo espone e' esattamente cio' che ha costretto
+ * a riestrarre 91 occorrenze dai file.
+ */
+function etichettaMarker(code) {
+  return code === null || code === undefined
+    ? 'strippato'
+    : `0x${code.toString(16).padStart(2, '0').toUpperCase()}`;
 }
 
 function main() {
@@ -1597,7 +1672,8 @@ function main() {
     r.push(`     riparate:   ${escapateRiparate}   (solo testimone unanime cross-locale)`);
     r.push(`     lasciate:   ${escapateElenco.length}   (contano nel codice d'uscita: sono difetti, non testo giusto)`);
     for (const x of escapateElenco.slice(0, opz.maxRifiutiMostrati)) {
-      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.spelling)}  ${x.motivo}`);
+      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.spelling)}  ${x.marker}  ${x.motivo}`);
+      r.push(`            ${x.contesto}`);
     }
     r.push('');
     r.push('   residuo (cifra orfana, marker gia\' strippato):');
@@ -1605,7 +1681,8 @@ function main() {
     r.push(`     lasciati:  ${residuiLasciati.length}   (non sono rifiuti: quasi tutti sono testo giusto)`);
     r.push(`     scartati dal prefiltro del lessico: ${residuiPrefiltrati}`);
     for (const x of residuiLasciati.slice(0, opz.maxRifiutiMostrati)) {
-      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.token)}  ${x.motivo}`);
+      r.push(`     ${x.file}:${x.offset}  ${JSON.stringify(x.token)}  ${x.marker}  ${x.motivo}`);
+      r.push(`            ${x.contesto}`);
     }
     r.push('');
     r.push('   motivi di rifiuto:');
@@ -1636,7 +1713,16 @@ function main() {
     process.stdout.write(`${r.join('\n')}\n`);
   }
 
-  process.exit(rifiutate > 0 || escapateElenco.length > 0 ? 2 : 0);
+  // `process.exitCode` e NON `process.exit()`.  Su una pipe la scrittura di
+  // stdout e' asincrona, e `process.exit()` la tronca a meta': misurato su
+  // `content/` il 2026-08-18, `--json | ...` consegnava **65.536 byte** (un
+  // buffer di pipe esatto) dei 124.385 del rapporto, cioe' un JSON che non si
+  // apre — mentre `--json > file` era completo e `--json | head` sembrava
+  // giusto.  Uno strumento che dichiara 314 occorrenze e ne consegna meta' a
+  // chi lo mette in pipeline e' la stessa forma di guasto dell'estrazione
+  // mancante: la misura c'e', chi deve usarla non la riceve.
+  // Il codice d'uscita resta identico — 2 se resta qualcosa, 0 se no.
+  process.exitCode = rifiutate > 0 || escapateElenco.length > 0 ? 2 : 0;
 }
 
 // Guardia CLI: importare questo file da un test non deve eseguirlo.

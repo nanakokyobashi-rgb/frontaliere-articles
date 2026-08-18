@@ -26,7 +26,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -1037,4 +1037,162 @@ test('localeDi legge il locale dalle due forme di percorso, e non inventa', () =
   assert.equal(localeDi('content/blog-meta-fr.ts'), 'fr');
   assert.equal(localeDi('content/pulito.ts'), null);
   assert.equal(localeDi('content/blog-body/xx/ignoto.ts'), null, 'due lettere non bastano: dev\'essere un locale del corpus');
+});
+
+// ---------------------------------------------------------------------------
+// L'ESTRAZIONE DEL MARKER — nessuna occorrenza esce dal rapporto senza contesto
+// ---------------------------------------------------------------------------
+//
+// PERCHE' QUESTO GUARD ESISTE.  Il rapporto dichiara le tre grafie del difetto,
+// e per due di esse NON diceva dove guardare.  Misurato su `origin/main` il
+// 2026-08-18: delle occorrenze stampate, 103 portavano il token col marker in
+// forma `<XX>` e **91 (45 escapate + 46 residui) uscivano cosi'**:
+//
+//     ...:7275  "\\u0010"   <- quale parola?  quale frase?
+//     ...:5185  "22il"      <- quale delle due cifre ha preso il posto?
+//
+// Chi conduce la campagna di riparazione ha dovuto riestrarle dai file una per
+// una — e una campagna che riapre i file a mano e' una campagna che si ferma.
+// Il guard non chiede che lo script RIPARI di piu': chiede che ogni occorrenza
+// che dichiara di aver visto porti con se' l'ancora per andarla a vedere.
+//
+// Falsificato prima di scriverlo, un vincolo per volta, rimettendo il difetto
+// nello script:
+//   - tolto `contesto` dalla famiglia escapata  -> rosso «escapata»
+//   - tolto `contesto` dalla famiglia residuo   -> rosso «residuo»
+//   - tolto `contesto` dai rifiuti del byte C0  -> rosso «byte grezzo»
+//   - delimitato il token invece della cifra    -> rosso «il residuo delimita
+//     ESATTAMENTE la cifra», che e' l'unico modo di dire quale delle due e'.
+
+/** Il tratto che il rapporto delimita fra `[[` e `]]`, o `null` se non c'e'. */
+function delimitato(contesto) {
+  const m = /\[\[([\s\S]*)\]\]/.exec(contesto || '');
+  return m ? m[1] : null;
+}
+
+/** Ogni record dichiarato dal rapporto, di tutte e tre le grafie. */
+function occorrenzeDichiarate(rapporto) {
+  return [
+    ...rapporto.rifiuti.map((x) => ({ ...x, grafia: 'byte grezzo' })),
+    ...rapporto.escapate.elenco.map((x) => ({ ...x, grafia: 'escapata' })),
+    ...rapporto.residui.lasciate.map((x) => ({ ...x, grafia: 'residuo' })),
+  ];
+}
+
+/** Un'occorrenza senza marker, senza tratto delimitato o senza NIENTE intorno. */
+function senzaEstrazione(rapporto) {
+  return occorrenzeDichiarate(rapporto).filter(
+    (x) => !x.marker
+      || delimitato(x.contesto) === null
+      || x.contesto.replace(/\[\[[\s\S]*\]\]/, '').trim() === '',
+  );
+}
+
+test('estrazione — byte grezzo: il contesto delimita il token e rende il marker <XX>', () => {
+  // Il token da solo bastava gia' qui: e' l'unica delle tre grafie che il
+  // rapporto sapeva mostrare.  Il guard c'e' lo stesso, perche' e' la forma di
+  // riferimento a cui le altre due sono state portate.
+  const radice = alberoDiProva({ 'sporco.ts': `un mot inconnu xylo${B(0x0e)}9phone dans la phrase\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    assert.equal(rapporto.rifiutate, 1);
+    const [x] = rapporto.rifiuti;
+    assert.equal(x.marker, '0x0E');
+    assert.equal(delimitato(x.contesto), 'xylo<0E>9phone');
+    assert.match(x.contesto, /un mot inconnu \[\[/);
+    assert.match(x.contesto, /\]\] dans la phrase/);
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione — escapata: il contesto porta la frase, che la sola spelling non diceva', () => {
+  // Prima: `"\\u0016"  testimone: ...` e nient'altro.  La spelling e' identica
+  // in tutte e 45 le occorrenze del corpus: da sola non distingue un'occorrenza
+  // dall'altra, quindi non si puo' ne' classificare ne' andare a vedere.
+  const radice = alberoDiProva({ 'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    assert.equal(rapporto.escapate.lasciate, 1);
+    const [x] = rapporto.escapate.elenco;
+    assert.equal(x.marker, '0x16');
+    assert.equal(delimitato(x.contesto), E(0x16));
+    assert.ok(x.contesto.includes('salario minimo sociale '), 'la frase PRIMA del marker');
+    assert.ok(x.contesto.includes(`5${DOPO_FAQ.slice(0, 12)}`), 'la coda e la frase DOPO');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione — residuo: il contesto delimita ESATTAMENTE la cifra, non il token', () => {
+  // Il vincolo che vale il test.  Il token `'13a` porta DUE cifre e il marker
+  // non c'e' piu': senza sapere quale delle due ha preso il posto del carattere
+  // perduto, l'occorrenza non e' ne' verificabile ne' riparabile a mano.
+  // Delimitare il token intero sarebbe la stessa non-informazione di prima.
+  const frase = "  'blog.article.tredicesima-avs.title': '13a AVS: piu trattenute in busta paga?',";
+  const radice = conTestimoni(`${frase}\n`, [`${frase}\n${frase}\n`, 'ça ça ça ça\n']);
+  try {
+    const { rapporto } = esegui(radice, []);
+    // I testimoni portano la stessa frase, quindi lo stesso residuo: si guarda
+    // quello del file sporco, non il primo che capita.
+    const x = rapporto.residui.lasciate.find((r) => r.file === 'content/sporco.ts');
+    assert.ok(x, 'il residuo del file sporco deve essere dichiarato');
+    assert.equal(x.token, "'13a", 'il token resta quello che era: il contesto si aggiunge, non sostituisce');
+    assert.equal(x.marker, 'strippato', 'qui il byte non c\'e\' piu\', e il rapporto lo dice invece di tacere');
+    assert.equal(x.coda, '3');
+    assert.equal(delimitato(x.contesto), '3', 'la cifra, UNA, e non `13a`');
+    assert.ok(x.contesto.includes('tredicesima-avs'), 'e intorno c\'e\' abbastanza per riconoscere il punto');
+    assert.ok(x.contesto.includes('a AVS: piu'));
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione: ZERO occorrenze dichiarate senza estrazione, su tutte e tre le grafie insieme', () => {
+  // Il censimento, ed e' la metrica della campagna: 91 su 194 prima, 0 dopo.
+  // Una quarta grafia che arrivi al rapporto senza portarsi dietro l'ancora fa
+  // rosso QUI, prima che qualcuno debba riestrarla dai file uno per uno.
+  const frase = "  'blog.article.tredicesima-avs.title': '13a AVS: piu trattenute in busta paga?',";
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/fr/grezzo.ts': `un mot inconnu xylo${B(0x0e)}9phone dans la phrase\n`,
+    'blog-body/it/residuo.ts': `${frase}\n`,
+    'blog-body/it/testimone.ts': `${frase}\n${frase}\n`,
+    'lessico-extra.ts': 'ça ça ça ça\n',
+  });
+  try {
+    const { rapporto } = esegui(radice, []);
+    const tutte = occorrenzeDichiarate(rapporto);
+    assert.deepEqual([...new Set(tutte.map((x) => x.grafia))].sort(), ['byte grezzo', 'escapata', 'residuo'],
+      'il fixture deve produrre tutte e tre le grafie, o il censimento non prova niente');
+    assert.deepEqual(senzaEstrazione(rapporto).map((x) => `${x.grafia} ${x.file}:${x.offset}`), []);
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione: il rapporto JSON sopravvive a una PIPE, non solo a un redirect su file', () => {
+  // Il difetto che rendeva inutile tutto il resto.  `process.exit()` chiude il
+  // processo senza aspettare che stdout sia scritto, e su una pipe stdout e'
+  // ASINCRONO: misurato su `content/` il 2026-08-18, `--json | ...` consegnava
+  // 65.536 byte esatti — un buffer di pipe — dei 124.385 del rapporto.  Cioe'
+  // un JSON che non si apre, mentre `--json > file` era completo: la forma di
+  // guasto si vede solo mettendo lo strumento in pipeline, che e' esattamente
+  // come lo usa chi conduce la campagna.
+  //
+  // Il fixture deve produrre un rapporto piu' grande di un buffer di pipe, o il
+  // test passerebbe anche col difetto rimesso: 400 occorrenze bastano.
+  const molte = Array.from({ length: 400 }, (_, i) => `phrase numero ${i} avec xylo${B(0x0e)}9phone dedans`).join('\n');
+  const radice = alberoDiProva({ 'sporco.ts': `${molte}\n` });
+  try {
+    const grezzo = execSync(`node ${JSON.stringify(SCRIPT)} --root ${JSON.stringify(radice)} --json | cat`, {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    assert.ok(grezzo.length > 65536, `il fixture deve superare un buffer di pipe (${grezzo.length} byte)`);
+    const rapporto = JSON.parse(grezzo);
+    assert.equal(rapporto.rifiutate, 400, 'e il rapporto che arriva in fondo alla pipe e\' quello intero');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
 });
