@@ -382,7 +382,10 @@
     "asilo nido e custodia bambini canton Friburgo costi",
     "mercato degli affitti canton Friburgo canoni medi e diritto di locazione",
     "naturalizzazione canton Friburgo requisiti e procedura",
-    "avs e prestazioni complementari canton Friburgo cassa di compensazione"
+    "avs e prestazioni complementari canton Friburgo cassa di compensazione",
+    "abbonamenti trasporti pubblici canton Friburgo zone e tariffe",
+    "aprire un'attività canton Friburgo registro di commercio e costi",
+    "imposta di successione e donazione canton Friburgo aliquote"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -586,6 +589,10 @@
     "aprire un'attività canton Zugo registro di commercio e costi": 1,
     "salari e mercato del lavoro canton Zugo settori e livelli": 2,
     "patente di guida canton Zugo conversione ed esami": 1,
-    "asilo nido e custodia bambini canton Friburgo costi": 1
+    "asilo nido e custodia bambini canton Friburgo costi": 1,
+    "salari e mercato del lavoro canton Friburgo settori e livelli": 1,
+    "patente di guida canton Friburgo conversione ed esami": 1,
+    "imposte cantonali canton Soletta aliquote e deduzioni": 1,
+    "premi cassa malati canton Soletta e riduzione premi": 1
   }
 }
