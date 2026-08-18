@@ -1771,9 +1771,9 @@
       "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8a321b805dc719c3",
-        "corpus": "8a321b805dc719c3",
-        "alignedAt": "2026-08-09"
+        "site": "28df42a0369a5308",
+        "corpus": "28df42a0369a5308",
+        "alignedAt": "2026-08-18"
       }
     },
     {
