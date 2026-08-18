@@ -3346,6 +3346,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.borse-di-studio-basilea-citta.title': 'Borse di studio Canton Basilea Città requisiti e importi',
     'blog.article.borse-di-studio-basilea-citta.excerpt': 'Requisiti e importi delle borse di studio offerte dal Canton Basilea Città per gli studenti svizzeri e stranieri.',
     'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Borse di studio offerte dal Canton Basilea Città',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asilo in Svizzera: riprende il trasferimento verso l\'Italia',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Dopo quasi quattro anni di blocco, la Svizzera torna a trasferire verso l\'Italia i richiedenti asilo di competenza italiana grazie al nuovo patto europeo.',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Il Palazzo Federale a Berna sede del governo svizzero',
 };
 
 export default blogMetaChIt;

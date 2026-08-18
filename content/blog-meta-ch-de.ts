@@ -3346,6 +3346,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.borse-di-studio-basilea-citta.title': 'Stipendien Kanton Basel-Stadt Anforderungen und Beträge',
     'blog.article.borse-di-studio-basilea-citta.excerpt': 'Voraussetzungen und Höhe der Stipendien des Kantons Basel-Stadt für in- und ausländische Studierende.',
     'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Stipendien des Kantons Basel-Stadt',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asyl in der Schweiz: Wiederaufnahme des Umzugs nach Italien',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Nach fast vier Jahren Blockade überstellt die Schweiz dank des neuen europäischen Pakts Asylsuchende mit italienischer Zuständigkeit wieder nach Italien.',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Das Bundeshaus in Bern Sitz der Schweizer Regierung',
 };
 
 export default blogMetaChDe;

@@ -3346,6 +3346,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.borse-di-studio-basilea-citta.title': 'Bourses Canton Bâle-Ville exigences et montants',
     'blog.article.borse-di-studio-basilea-citta.excerpt': 'Exigences et montants des bourses offertes par le canton de Bâle-Ville pour les étudiants suisses et étrangers.',
     'blog.article.borse-di-studio-basilea-citta.imageAlt': 'Bourses d\'études offertes par le canton de Bâle-Ville',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.title': 'Asile en Suisse : reprise du transfert vers l\'Italie',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.excerpt': 'Après près de quatre ans de blocage, la Suisse transfère à nouveau vers l\'Italie les demandeurs d\'asile relevant de la compétence italienne grâce au nouveau pacte européen.',
+    'blog.article.svizzera-trasferimento-richiedenti-asilo-italia.imageAlt': 'Le Palais fédéral à Berne siège du gouvernement suisses',
 };
 
 export default blogMetaChFr;
