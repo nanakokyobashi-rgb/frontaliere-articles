@@ -1196,3 +1196,23 @@ test('estrazione: il rapporto JSON sopravvive a una PIPE, non solo a un redirect
     fs.rmSync(radice, { recursive: true, force: true });
   }
 });
+
+test('estrazione: il contesto resta UNA riga — a capo, ritorno e TAB si vedono, non spezzano', () => {
+  // `MARKER` non considera marker `\n`, `\r` e `\t`, perche' sono caratteri
+  // legali.  Ma dentro la finestra ci finiscono lo stesso, e se restano grezzi
+  // il rapporto smette di avere una riga per occorrenza: misurato sul corpus,
+  // 27 delle 314 occorrenze hanno un a capo nella finestra.  La piu' istruttiva
+  // e' `bekannt war.\n\n> [[<10>Der]] Hauptzweck`, che mostra il marker a inizio
+  // di una citazione — cioe' che stava al posto della virgoletta aperta, che e'
+  // esattamente la classificazione che serve alla campagna.
+  const radice = alberoDiProva({ 'sporco.ts': `phrase avant\n\n> ${B(0x0e)}9phone\tapres tabulation\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    const [x] = rapporto.rifiuti;
+    assert.ok(!/[\n\r\t]/.test(x.contesto), `il contesto non contiene spaziatura grezza: ${JSON.stringify(x.contesto)}`);
+    assert.ok(x.contesto.includes('avant\\n\\n> '), 'gli a capo si vedono, resi visibili');
+    assert.ok(x.contesto.includes('\\tapres'), 'e il TAB pure: e\' la terza grafia del marker');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});

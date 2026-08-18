@@ -1459,12 +1459,25 @@ function visibile(s) {
 // non cosa scrivere. L'unica cosa autorizzata a scrivere resta il testimone.
 const CONTESTO_INTORNO = 32;
 
+/**
+ * `visibile`, piu' i tre caratteri di controllo che `MARKER` NON considera
+ * marker perche' sono legali: a capo, ritorno e TAB.  Se restano grezzi, un
+ * contesto che ne contiene uno si spezza su piu' righe del rapporto e smette di
+ * essere una riga per occorrenza — misurato: 27 delle 314 occorrenze del corpus
+ * hanno un a capo dentro la finestra.  Il TAB in piu' e' la terza grafia del
+ * marker (7 occorrenze in 7 file, decisione del proprietario del 2026-08-15:
+ * si correggono a mano): renderlo visibile e' il minimo perche' si veda che c'e'.
+ */
+function leggibile(s) {
+  return visibile(s).replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t');
+}
+
 function contestoDi(testo, inizio, fine) {
   const a = Math.max(0, inizio - CONTESTO_INTORNO);
   const b = Math.min(testo.length, fine + CONTESTO_INTORNO);
   const puntiPrima = a > 0 ? '...' : '';
   const puntiDopo = b < testo.length ? '...' : '';
-  return `${puntiPrima}${visibile(testo.slice(a, inizio))}[[${visibile(testo.slice(inizio, fine))}]]${visibile(testo.slice(fine, b))}${puntiDopo}`;
+  return `${puntiPrima}${leggibile(testo.slice(a, inizio))}[[${leggibile(testo.slice(inizio, fine))}]]${leggibile(testo.slice(fine, b))}${puntiDopo}`;
 }
 
 /**

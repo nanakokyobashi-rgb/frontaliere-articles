@@ -285,6 +285,34 @@ test('l\'evidenza finisce anche nel sommario della run, dove sopravvive al runne
   }
 });
 
+test('il sommario: il contesto resta UNA riga di tabella — a capo e TAB non la spezzano', () => {
+  // Stesso difetto di #94 in `repair-mangled-chars.mjs`, qui nel file gemello:
+  // `C0` esclude apposta 0x09/0x0A/0x0D perche' sono legali, ma se restano
+  // grezzi nel contesto un a capo fa traboccare la cella Markdown su piu'
+  // righe e corrompe la resa della tabella per tutte le righe successive.
+  resetCounters();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ccws-'));
+  const summary = path.join(dir, 'summary.md');
+  fs.writeFileSync(summary, '');
+  try {
+    const src = `avant\n\ncomp${B}9tences\tapres`;
+    reportStrippedControlChars('content/x.ts', src, src.replace(B, ''), {
+      log: () => {},
+      reportPath: path.join(dir, 'strips.jsonl'),
+      summaryPath: summary,
+    });
+    const testo = fs.readFileSync(summary, 'utf-8');
+    const righe = testo.split('\n').filter((r) => r.includes('|'));
+    assert.equal(righe.length, 3, 'intestazione + separatore + una riga dati: il contesto non deve aggiungere righe alla tabella');
+    const rigaTabella = righe.find((r) => r.includes('comp<16>9tences'));
+    assert.ok(rigaTabella, 'la riga di tabella con il contesto deve esistere');
+    assert.ok(!rigaTabella.includes('\t'), 'niente TAB grezzo nella riga');
+    assert.match(rigaTabella, /avant\\n\\ncomp<16>9tences\\tapres/, 'a capo e TAB resi visibili, non grezzi');
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('senza GITHUB_STEP_SUMMARY non si scrive niente e non si rompe niente', () => {
   resetCounters();
   const src = `des comp${B}9tences`;

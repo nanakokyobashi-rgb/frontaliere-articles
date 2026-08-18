@@ -61,14 +61,82 @@ describe('classifyNonRetryableError — la ruggine va marcata esaurita', () => {
     assert.equal(r.markExhausted, true);
   });
 
-  it('non marca esaurito un 404 di cui non riconosce la causa', () => {
-    // Un 404 generico puo' essere un typo nell'URL o un guasto transitorio del
-    // routing del provider: marcarlo esaurito toglierebbe il modello dal roster
-    // per tutta la run senza prove. Comportamento invariato, asserito perche'
-    // allargare il matcher e' esattamente il modo di romperlo.
+  it('marca esaurito un 404 col BODY VUOTO — la classe che nessun matcher testuale poteva vedere', () => {
+    // Run 32169621635 (2026-08-18, issue #449): 163 risposte 404 su 163 avevano
+    // il body a lunghezza ZERO. La riga di log e' letteralmente
+    // `[Ministral-3B] HTTP 404: ` e finisce li'. Su una stringa vuota nessun
+    // termine puo' matchare, quindi finche' il ramo guardava il body questa
+    // classe usciva SEMPRE con markExhausted:false: il modello restava
+    // eleggibile e veniva richiamato a ogni passata della cascata.
+    //
+    // Comando della misura (grep -a NON e' opzionale: senza, i log si leggono
+    // come binari e la ricerca torna vuota in silenzio):
+    //   grep -aoE 'HTTP 404: *$' <log> | wc -l   → 163
+    //   grep -aoE 'HTTP 404: +[^ ].*' <log> | wc -l → 0
+    for (const body of ['', '   ', undefined]) {
+      const r = classifyNonRetryableError(404, body);
+      assert.equal(r.nonRetryable, true);
+      assert.equal(r.markExhausted, true,
+        `un 404 con body ${JSON.stringify(body)} deve essere marcato esaurito al primo colpo`);
+    }
+  });
+
+  it('marca esaurito anche un 404 di cui non riconosce la causa — asserzione ROVESCIATA (#449)', () => {
+    // ATTENZIONE: qui c'era `assert.equal(r.markExhausted, false)`, motivato con
+    // «un 404 generico puo' essere un typo nell'URL o un guasto transitorio del
+    // routing del provider». Quell'asserzione era SBAGLIATA e proteggeva il
+    // difetto, non un invariante:
+    //
+    //  - il dubbio non costa «un modello perso»: `exhausted` vale per la RUN
+    //    CORRENTE e basta, quindi al massimo costa quel modello per ~13 minuti,
+    //    dopo di che la run successiva lo ripesca da sola;
+    //  - il ramo opposto costa una cifra misurata: 163 round-trip morti in una
+    //    sola run contro i 24 che spende il criterio del 402 (12 modelli
+    //    distinti x 2 tentativi), cioe' l'85% di traffico buttato;
+    //  - e soprattutto la premessa era falsa in fatto: i 404 di questa classe
+    //    non hanno un body da riconoscere (vedi il test qui sopra), quindi
+    //    «di cui non riconosce la causa» non era un caso limite, era il 100%.
+    //
+    // La stessa logica per cui il 402 non guarda il body vale per il 404.
     const r = classifyNonRetryableError(404, '{"error":"Not Found"}');
     assert.equal(r.nonRetryable, true);
-    assert.equal(r.markExhausted, false);
+    assert.equal(r.markExhausted, true);
+  });
+
+  it('404 e 402 si classificano allo stesso modo, qualunque sia il body', () => {
+    // L'invariante strutturale della fix: due classi permanenti, un solo
+    // comportamento. Se qualcuno rimette una condizione sul body del 404, e'
+    // questo confronto a cadere per primo.
+    for (const body of ['', '{"error":"Not Found"}', GOOGLE_RETIRED_BODY, 'HTML della pagina 404 del provider']) {
+      assert.deepEqual(
+        classifyNonRetryableError(404, body),
+        classifyNonRetryableError(402, body),
+        `404 e 402 devono coincidere sul body ${JSON.stringify(body.slice(0, 40))}`,
+      );
+    }
+  });
+
+  it('i 12 endpoint della run 32169621635 costano 1 chiamata a testa, non 163', () => {
+    // Replay della distribuzione misurata: quante volte OGNI modello e' stato
+    // richiamato dopo aver gia' risposto 404 nella stessa run. Con il ramo
+    // riparato la prima risposta chiude la partita, quindi il totale eleggibile
+    // scende dal numero di round-trip al numero di modelli distinti.
+    const MISURATO = {
+      'Ministral-3B': 32, 'gpt-4.1-nano': 27, 'Phi-4-mini-reasoning': 24,
+      'Codestral-2501': 24, 'gpt-4.1-mini': 17, 'Llama-4-Scout-17B-16E-Instruct': 12,
+      'Llama-3.3-70B-Instruct': 12, 'Cohere-command-a': 11, 'Phi-4-mini-instruct': 1,
+      'Llama-4-Maverick-17B-128E-Instruct-FP8': 1, 'gpt-4o-mini': 1, 'gpt-4.1': 1,
+    };
+    const roundTrip = Object.values(MISURATO).reduce((a, b) => a + b, 0);
+    assert.equal(roundTrip, 163, 'baseline della run: 163 round-trip in 404');
+
+    // Il body vuoto e' quello vero: `[<modello>] HTTP 404: ` senza altro.
+    const esauriti = Object.keys(MISURATO)
+      .filter((m) => classifyNonRetryableError(404, '').markExhausted);
+    assert.equal(esauriti.length, Object.keys(MISURATO).length,
+      'ognuno dei 12 endpoint deve uscire dal giro al primo 404');
+    assert.ok(esauriti.length < roundTrip / 10,
+      `il costo per run passa da ${roundTrip} chiamate a ${esauriti.length}`);
   });
 
   it('402 e 401 restano non-ritentabili ed esauriti', () => {
