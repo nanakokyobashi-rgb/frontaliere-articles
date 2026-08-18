@@ -1332,6 +1332,16 @@ export const FABRICATED_NORM_ACRONYMS = [
     acronym: 'LCL',
     re: /(?<![A-Za-z])LCL(?![A-Za-z])/i,
     real: "non esiste: la legge sul lavoro è LL (RS 822.11); la cittadinanza svizzera è la LCit (RS 141.0) più il diritto cantonale, nessuna sigla ufficiale «LCL»",
+    // A bare substring match on `LCL` also matches the real French bank (ex
+    // Crédit Lyonnais) — a future article mentioning it (this corpus already
+    // has 175 files on frontalieri Francia-Svizzera and 29 naming other
+    // French banks) would be rejected as a fabricated norm. Require a year
+    // nearby, not a language-specific word like "legge": this check runs on
+    // de/fr/en translated text too (see docstring below), and both real
+    // fabrications in the corpus carry a 4-digit year within a few words of
+    // the acronym (`(LCL) del 15 dicembre 1995`, `(LCL 2020, art. 15)`).
+    context: /\b(?:19|20)\d{2}\b/,
+    contextWindow: 80,
   },
   {
     acronym: 'LCO',
@@ -1357,11 +1367,16 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   const issues = [];
   if (typeof text !== 'string' || !text) return issues;
   const locale = opts.locale || 'it';
-  for (const { acronym, re, real } of FABRICATED_NORM_ACRONYMS) {
+  for (const { acronym, re, real, context, contextWindow } of FABRICATED_NORM_ACRONYMS) {
     // `re` is deliberately non-global: a `g` regex carries `lastIndex` across
     // calls, and this table is module-level shared state.
     const m = re.exec(text);
     if (!m) continue;
+    if (context) {
+      const w = contextWindow ?? 80;
+      const nearby = text.slice(Math.max(0, m.index - w), m.index + m[0].length + w);
+      if (!context.test(nearby)) continue;
+    }
     issues.push(issue(
       'fabricated-norm-acronym',
       'critical',

@@ -659,6 +659,17 @@ describe('checkFabricatedNormAcronyms', () => {
     expect(issues[0].message).toContain('LCO');
   });
 
+  // `LCL` è anche il nome reale di una banca francese (ex Crédit Lyonnais).
+  // Senza un requisito di contesto giuridico, un articolo che la nomina in
+  // ambito bancario (il corpus ne ha già 175 su frontalieri Francia-Svizzera)
+  // verrebbe rigettato come sigla normativa fabbricata. Nessun anno vicino →
+  // non è un contesto giuridico → il gate deve lasciarlo passare.
+  it('leaves a bare mention of the French bank LCL alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Per i frontalieri che vivono in Francia, LCL propone conti correnti dedicati e carte multivaluta.',
+    )).toEqual([]);
+  });
+
   // Il confine è su LETTERE, non `\b`: queste due sono norme VERE e il gate le
   // deve lasciare passare, altrimenti blocca contenuto legittimo. Stessa
   // motivazione, e stessi esempi, del test sui dati di corpus#323.
