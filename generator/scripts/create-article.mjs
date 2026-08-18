@@ -8176,19 +8176,25 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // quanto sfora e basta (~250 char, -4%) e non tocca mai i fatti di dominio.
   // Il confronto col difetto e' l'intero punto del cambiamento: prima, per
   // comprare quei 71 token, si pagavano 1739ch di fatti e 3174ch di fonte.
-  const _buildCall1 = () => {
+  //
+  // `target` e' un PARAMETRO, non piu' la costante di chiusura: quando la
+  // cascata cambia bracket (vedi «RI-BRACKETING SULLA CASCATA» sotto) la
+  // meta' di scrittura va ridimensionata sul cap del modello che sta per
+  // essere chiamato, non su quello con cui il tentativo era partito. Il
+  // default riproduce il comportamento precedente byte a byte.
+  const _buildCall1 = (target = _promptTokenTarget) => {
     const intera = _buildHalf('body', truncatedContent, domainFactsBlock, _remediationFull);
-    if (intera.est <= _promptTokenTarget) return intera;
+    if (intera.est <= target) return intera;
     for (const rimedio of [_remediationFull, _remediationShort]) {
       const c = _buildHalf('body', truncatedContent, domainFactsBlock, rimedio);
-      if (c.est <= _promptTokenTarget) return c;
+      if (c.est <= target) return c;
       const fonte = _clampSourceBody(
         truncatedContent,
-        Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil((c.est - _promptTokenTarget) * 3.5) + 64)),
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil((c.est - target) * 3.5) + 64)),
       );
       if (fonte.length < truncatedContent.length) {
         const ridotta = _buildHalf('body', fonte, domainFactsBlock, rimedio);
-        if (ridotta.est <= _promptTokenTarget) return ridotta;
+        if (ridotta.est <= target) return ridotta;
       }
     }
     // Nemmeno cosi' entra: si resta interi. NON si tolgono i fatti — sotto il
@@ -8196,7 +8202,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // farebbe entrare comunque, e il marker lo dice gia' con `unsat=1`.
     return intera;
   };
-  const _splitCall1 = _splitAttiva ? _buildCall1() : null;
+  // `let` e non `const`: il ri-bracketing sulla cascata puo' sostituirla con
+  // una meta' di scrittura ridimensionata sul cap del modello che rispondera'
+  // davvero. `_generateSplit` la legge dalla chiusura, quindi non serve
+  // duplicarne il corpo.
+  let _splitCall1 = _splitAttiva ? _buildCall1() : null;
   if (_splitCall1) {
     console.error(
       `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
@@ -8262,6 +8272,105 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     return JSON.stringify(merged);
   };
 
+  // ── RI-BRACKETING SULLA CASCATA ──────────────────────────────────────────
+  //
+  // IL BUCO. Il prompt viene dimensionato UNA VOLTA SOLA, sul modello
+  // PREFERITO — e il preferito e' l'unico membro del roster che un cap di
+  // input non lo dichiara. Quando la cascata lo abbandona, il payload resta
+  // quello: `callLLM` non sa rimpicciolirlo, sa solo saltare chi non lo
+  // regge. Misurato sulla run 32147257594 (14:15Z, 51 minuti, ZERO articoli):
+  //
+  //   1. tentativo 1, prompt INTERO per scelta, est=8208 (sezione svizzera)
+  //      / 8120 (frontaliere);
+  //   2. claude-cli/haiku fallisce 3/3 («claude CLI timed out after
+  //      120000ms — stdout: 0 bytes»);
+  //   3. la cascata degrada sui modelli capped con lo STESSO payload, e il
+  //      pre-flight li salta tutti: sui 101 della catena, 35 dichiarano un
+  //      cap di 8000 e 4 di 4000, nessuno dichiara piu' di 8000 (misurato il
+  //      2026-08-18). Ogni fallback del tentativo 1 e' quindi condannato
+  //      PRIMA di partire;
+  //   4. il recupero arrivava solo al tentativo 2, via
+  //      `err.retryRequestTokenBudget` — un tentativo intero buttato per
+  //      headline, piu' i 3 timeout da 120s che lo precedono.
+  //
+  // IL RIMEDIO NON E' rinunciare alla preferenza (e' voluta: il modello a
+  // pagamento nei punti critici) ne' accorciare per precauzione — quello era
+  // il difetto opposto, i fatti di dominio buttati per un cap che il modello
+  // che rispondeva non aveva. E' RI-DIMENSIONARE NEL MOMENTO IN CUI SI CAMBIA
+  // BRACKET. Il numero su cui rientrare la libreria lo calcola gia' e lo
+  // allega al throw (`err.retryRequestTokenBudget`, il cap piu' permissivo
+  // fra quelli che hanno rifiutato): arriva in tempo per una seconda chiamata
+  // DENTRO questo stesso tentativo.
+  //
+  // PERCHE' QUI E NON IN `ai-models.mjs`. Ricostruire un prompt vuol dire
+  // sapere com'e' fatto: fonte, fatti di dominio, rimedio, contratto,
+  // schema, e quale meta' sopravvive alla divisione in due chiamate. Quella
+  // conoscenza vive in questo file e ci resta; la libreria continua a
+  // esporre solo numeri (`getDeclaredRequestTokenLimit` in pre-flight,
+  // `retryRequestTokenBudget` al throw). Un hook che le chiedesse di
+  // rimpicciolire il payload le farebbe attraversare quel confine.
+  //
+  // `null` = non c'e' niente da comprare (budget sotto il pavimento
+  // dell'impalcatura, o nessun gradino che rientri): meglio propagare
+  // l'errore che spendere una chiamata su un prompt che verra' saltato
+  // uguale. E' lo stesso principio del `unsat=1` del marker sopra.
+  const _rebracket = (budget) => {
+    const target = Number(budget);
+    if (!(target > 0) || target >= _promptEstTokens) return null;
+    let stepFit = null;
+    for (let i = 0; i < _shrinkLadder.length; i++) {
+      const built = _buildStep(i);
+      if (built.est <= target) { stepFit = built; break; }
+    }
+    // La stessa domanda del predicato di split, riposta sul bracket NUOVO:
+    // la riduzione sta per consegnare un prompt senza fatti di dominio pur
+    // avendone in ingresso? Allora la divisione in due chiamate li salva —
+    // e' esattamente cio' che il tentativo 2 fa gia' oggi con successo
+    // (`motivo=fatti-a-zero`, 8254 → 6888, fatti preservati).
+    const salvaFatti = domainFactsBlock.length > 0 && (!stepFit || stepFit.fattiChars === 0);
+    const call1 = (_splitMode !== 'off' && (salvaFatti || !stepFit)) ? _buildCall1(target) : null;
+    const splitEntra = !!call1 && call1.est <= target;
+    if (!stepFit && !splitEntra) return null;
+    return {
+      target,
+      split: splitEntra ? call1 : null,
+      msgs: stepFit ? stepFit.msgs : null,
+      est: stepFit ? stepFit.est : null,
+      label: stepFit ? stepFit.label : null,
+      fonteChars: stepFit ? stepFit.fonteChars : null,
+      fattiChars: stepFit ? stepFit.fattiChars : null,
+    };
+  };
+
+  // Applica il piano. Marker machine-readable e STABILE, sulla stessa forma
+  // di `[prompt-budget]` e `[prompt-split]` — chi costruisce un watchdog
+  // legge questa riga, non il testo attorno:
+  //
+  //   [prompt-rebracket] section=<s> attempt=<n> budget=<token>
+  //   da=<token> a=<token> via=<split|scala> fonte=<n>ch fatti=<n>ch
+  const _eseguiRibracket = async (rb, opts) => {
+    const scelta = rb.split || rb;
+    console.error(
+      `  ♻️ [prompt-rebracket] section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `budget=${rb.target} da=${_promptEstTokens} a=${scelta.est} `
+      + `via=${rb.split ? 'split' : 'scala'} `
+      + `fonte=${scelta.fonteChars}ch fatti=${scelta.fattiChars}ch`,
+    );
+    if (rb.split) {
+      _splitCall1 = rb.split;
+      const r = await _generateSplit();
+      if (r != null) return r;
+      console.error('  ↩️ [prompt-rebracket] split a vuoto: ricado sulla chiamata unica ridimensionata.');
+    }
+    if (!rb.msgs) return null;
+    // Il prompt ridimensionato diventa QUELLO del tentativo, non una copia
+    // locale: il retry per JSON malformato piu' sotto riparte da
+    // `llmMessages`, e rispedire li' l'assemblato intero rimetterebbe fuori
+    // i modelli appena recuperati.
+    llmMessages = rb.msgs;
+    return callLLM(llmMessages, opts);
+  };
+
   let itRaw;
   if (_splitAttiva) {
     itRaw = await _generateSplit();
@@ -8273,7 +8382,27 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined };
+    try {
+      itRaw = await callLLM(llmMessages, _optsUnica);
+    } catch (e) {
+      // Vedi «RI-BRACKETING SULLA CASCATA». Il ramo si arma SOLO quando il
+      // prompt e' partito intero per scelta (`_saltaScala`) e la flotta ha
+      // detto di quanto sforava: fuori da li' il prompt era gia'
+      // dimensionato sul budget dettato, e un errore senza
+      // `retryRequestTokenBudget` non e' un errore di dimensione. Quindi
+      // nessun percorso oggi verde cambia comportamento.
+      const _budgetDettato = _saltaScala ? Number(e?.retryRequestTokenBudget) : 0;
+      const _rb = _budgetDettato > 0 ? _rebracket(_budgetDettato) : null;
+      if (!_rb) throw e;
+      const _out = await _eseguiRibracket(_rb, _optsUnica);
+      // `null` = nemmeno il piano ha prodotto qualcosa di spedibile: si
+      // propaga l'errore ORIGINALE, cosi' che il ciclo di retry raccolga
+      // `retryRequestTokenBudget` come prima e il tentativo 2 resti la rete
+      // di sicurezza che e' sempre stata.
+      if (_out == null) throw e;
+      itRaw = _out;
+    }
   }
   let itData;
   const itRepaired = repairLlmJson(itRaw);
