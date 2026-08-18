@@ -2906,7 +2906,7 @@ function normalizeSourceDomain(domain) {
 // L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
 // che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
 // top-level a tutti gli effetti, quindi resta issata come le altre.
-import { ledgerViewsForLookup, makeLedgerEntry } from './lib/source-url-ledger.mjs';
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey } from './lib/source-url-ledger.mjs';
 
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
@@ -2962,15 +2962,22 @@ function saveSourceUrls(map) {
   }
 }
 
-/** Normalize a news source URL for dedup: strip query params, hash, trailing slash */
+/**
+ * Chiave del ledger per un URL di fonte.
+ *
+ * Delega a `newsUrlKey` (`lib/source-url-ledger.mjs`), che tiene i parametri di
+ * query IDENTIFICANTI e butta solo quelli di tracciamento. Questa funzione
+ * buttava via tutta la query, e su una fonte che identifica il documento solo
+ * li' — `ti.ch/…/dettaglio-comunicato/?NEWS_ID=<n>`, `uil.it/newssx.asp?ID_News=<n>` —
+ * ogni articolo del feed collassava sulla stessa chiave: 82 item su 1.121
+ * misurati il 2026-08-18 con l'estrattore reale. Il commento «Remove tracking
+ * params» descriveva l'intenzione; il codice toglieva anche l'identita'.
+ *
+ * Resta un wrapper e non un import diretto perche' il nome compare in tre punti
+ * e perche' e' qui che si legge, accanto ai due chiamanti, cosa sia la chiave.
+ */
 function normalizeNewsUrl(rawUrl) {
-  try {
-    const u = new URL(rawUrl);
-    // Remove tracking params, keep the path
-    return `${u.protocol}//${u.hostname}${u.pathname}`.replace(/\/$/, '').toLowerCase();
-  } catch {
-    return rawUrl.toLowerCase().replace(/\/$/, '');
-  }
+  return newsUrlKey(rawUrl);
 }
 
 function isGoogleNewsRssUrl(rawUrl) {
@@ -3076,6 +3083,28 @@ function isSourceUrlAlreadyUsed(headlineUrl) {
     SECTION_NAME,
   );
   if (exact.used) return exact;
+
+  // Ponte verso le voci scritte quando la chiave era il path nudo (forma 1).
+  //
+  // Scatta SOLO quando le due forme differiscono, cioe' quando l'URL porta una
+  // query identificante, ed e' interrogato SOLO contro le voci senza
+  // `keyForm` — quelle scritte prima di questa fix. Senza il filtro, la prima
+  // registrazione di forma 2 su `…/dettaglio-comunicato?news_id=X` verrebbe
+  // ritrovata dal path nudo di `…?news_id=Y` e il collasso tornerebbe intero.
+  //
+  // Serve soprattutto al ramo CROSS-SEZIONE di #251, che e' l'unico senza una
+  // rete a valle: per la durata della transizione una fonte gia' usata
+  // dall'altra sezione sotto la chiave vecchia resta bloccata.
+  const legacyKey = legacyNewsUrlKey(headlineUrl);
+  if (legacyKey !== normalized) {
+    const legacy = findCrossSectionSourceDuplicate(
+      legacyKey,
+      ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME, { keyForm: 1 }),
+      SECTION_NAME,
+    );
+    if (legacy.used) return legacy;
+  }
+
   // Fuzzy URL slug vs existing article ID match
   const urlWords = extractUrlSlugWords(headlineUrl);
   if (urlWords.length < 2) return { used: false };
