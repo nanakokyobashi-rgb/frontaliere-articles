@@ -238,7 +238,14 @@ function appendStepSummary(file, occ, opts = {}) {
   const dest = opts.summaryPath !== undefined ? opts.summaryPath : process.env.GITHUB_STEP_SUMMARY;
   if (!dest) return;
   const io = opts.fsImpl || fs;
-  const visibile = (s) => String(s).replace(C0, (c) => `<${c.charCodeAt(0).toString(16).padStart(2, '0').toUpperCase()}>`);
+  // `C0` esclude apposta 0x09/0x0A/0x0D (sono legali), ma sono proprio quelli
+  // che spezzano una riga di tabella Markdown: un a capo crudo nel contesto
+  // fa traboccare la cella su piu' righe e corrompe la resa per tutte le righe
+  // successive — stesso difetto, stessa fix di `leggibile()` in
+  // `repair-mangled-chars.mjs` (issue #94).
+  const visibile = (s) => String(s)
+    .replace(C0, (c) => `<${c.charCodeAt(0).toString(16).padStart(2, '0').toUpperCase()}>`)
+    .replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t');
   const righe = [
     '',
     `### control-char-strip — \`${file}\``,
