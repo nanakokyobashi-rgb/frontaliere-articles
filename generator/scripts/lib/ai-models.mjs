@@ -3650,28 +3650,42 @@ export function classifyNonRetryableError(status, bodyText = '') {
 
   // HTTP 404 — model not found (Cerebras, Groq, OpenRouter return 404 for invalid model IDs)
   //
-  // `no longer available` / `no longer supported` are GOOGLE's wording for a
-  // retired model — "This model models/gemini-2.0-flash is no longer available.
-  // Please update your code to use a newer model". Without them here a retired
-  // Gemini model is nonRetryable but NOT exhausted, so it is re-attempted on
-  // every pass of every retry instead of being skipped after the first 404.
+  // UNCONDITIONAL, exactly like the 402 above, and for a measured reason: a 404
+  // body is EMPTY. Run 32169621635 (2026-08-18, issue nanako#449): 163 out of
+  // 163 HTTP 404 responses carried a zero-length body — the log line is
+  // literally `[Ministral-3B] HTTP 404: ` and stops there. No textual matcher
+  // can cover this class, because there is no text to match. While this branch
+  // gated on the body (`model_not_found`, `not_found_error`, `does not exist`,
+  // plus `no longer available` / `no longer supported`, which are GOOGLE's
+  // wording for a retired model) every one of those 163 fell through to
+  // markExhausted:false, the model stayed eligible, and it was re-called on
+  // every cascade pass — up to 32 times for a single model in one run. The 402
+  // class in the SAME run, same cascade, same attempts, capped at 2 calls per
+  // model. That asymmetry was never about the provider: it was this branch.
   //
-  // This is the second time. The roster comment on GEMINI_31_FLASH_LITE records
-  // the first (2026-05-27, run 26534353239): "The deprecated preview kept winning
-  // the fallback selector because 404 didn't mark it exhausted, causing the entire
-  // blog-generator workflow to fail with 50+ retries against the dead endpoint."
-  // That was fixed by deleting the one model and leaving the matcher alone, so on
-  // 2026-08-14 it recurred with three others (gemini-2.0-flash, -flash-lite,
-  // gemini-3-pro-preview, 48 futile 404s in run 31823202761). Deleting the models
-  // is the symptom; this line is the cause.
+  // This is the THIRD recurrence, and the first on a different provider:
+  //   1. 2026-05-27, run 26534353239 — the roster comment on GEMINI_31_FLASH_LITE:
+  //      "The deprecated preview kept winning the fallback selector because 404
+  //      didn't mark it exhausted, causing the entire blog-generator workflow to
+  //      fail with 50+ retries against the dead endpoint." Fixed by deleting the
+  //      one model and leaving the matcher alone.
+  //   2. 2026-08-14, run 31823202761 — three retired Gemini models, 48 futile
+  //      404s. Fixed by widening the matcher to Google's wording.
+  //   3. 2026-08-18, run 32169621635 — 163 futile 404s over 12 GitHub Models
+  //      endpoints, empty body in all 163. GitHub Models, not Gemini: no wording
+  //      could have been added, because there was no wording.
+  // "Deleting the models is the symptom; this line is the cause" said the
+  // previous version of this comment, and it was right — the symptom was treated
+  // twice while the line stayed. There is no longer a condition to miss.
+  //
+  // The risk is the one already accepted for 402, and it is bounded: `exhausted`
+  // holds for the CURRENT RUN only. An endpoint that comes back to life is
+  // picked up again on the next run (~13 minutes at the current cadence).
+  // Silencing is NOT removal: no model leaves the roster, the score ledger or
+  // the tally (constraint from nanako#380 — removing them turns
+  // tests/local-llm-fallback.test.ts deterministically red, nanako#362).
   if (status === 404) {
-    if (
-      b.includes('model_not_found') || b.includes('not_found_error') || b.includes('does not exist')
-      || b.includes('no longer available') || b.includes('no longer supported')
-    ) {
-      return { nonRetryable: true, markExhausted: true };
-    }
-    return { nonRetryable: true, markExhausted: false };
+    return { nonRetryable: true, markExhausted: true };
   }
 
   if (status !== 400) return { nonRetryable: false, markExhausted: false };
