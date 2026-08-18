@@ -68750,6 +68750,435 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pernottamenti-alberghieri-a-luglio': {
+    title: 'Lieve ripresa dei pernottamenti alberghieri a luglio',
+    description: 'Il numero di pernottamenti è aumentato dello 0,3% su base annua, secondo quanto comunicato dall\'Ufficio federale di statistica (UST) in occasione di una prima',
+    keywords: 'frontalieri, ticino, svizzera, italia, lieve, ripresa, pernottamenti, alberghieri',
+    ogTitle: 'Aumento pernottamenti luglio 2026 in Ticino',
+    ogDescription: 'Il numero di pernottamenti è aumentato dello 0,3% su base annua, secondo quanto comunicato dall\'Ufficio federale di statistica (UST) in occasione di una prima stima sperimentale.',
+    canonicalPath: '/articoli-frontaliere/pernottamenti-alberghieri-a-luglio',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lieve ripresa dei pernottamenti alberghieri a luglio",
+      "description": "Il numero di pernottamenti è aumentato dello 0,3% su base annua, secondo quanto comunicato dall'Ufficio federale di statistica (UST) in occasione di una prima",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pernottamenti-alberghieri-a-luglio.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un hotel in Ticino con un aumento di pernottamenti nel luglio 2026"
+      },
+      "datePublished": "2026-08-17T13:51:31+00:00",
+      "dateModified": "2026-08-17T13:51:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/pernottamenti-alberghieri-a-luglio/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-saronno-supermercato-evacuati': {
+    title: 'Fumo e odore di bruciato a Saronno | Frontaliere Ticino',
+    description: 'Evacuazione di un supermercato a Saronno dopo l\'allarme antincendio. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, fumo, odore, bruciato, saronno',
+    ogTitle: 'Saronno - A Saronno fumo e odore di bruciato al supermercato: evacuati clienti e personale',
+    ogDescription: 'Evacuazione di un supermercato a Saronno dopo l\'allarme antincendio',
+    canonicalPath: '/articoli-frontaliere/saronno-supermercato-evacuati',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Fumo e odore di bruciato a Saronno",
+      "description": "Evacuazione di un supermercato a Saronno dopo l'allarme antincendio. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/saronno-supermercato-evacuati.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Evacuazione di un supermercato a Saronno"
+      },
+      "datePublished": "2026-08-17T14:07:22+00:00",
+      "dateModified": "2026-08-17T14:07:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/saronno-supermercato-evacuati/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-concorsa-interna-ticino': {
+    title: 'La concorrenza interna in Ticino mobiliterà gli elettori',
+    description: 'La concorrenza interna in Ticino potrebbe influenzare gli elettori, ma come?. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, concorrenza, interna, mobiliterà, elettori',
+    ogTitle: 'La concorrenza interna in Ticino mobiliterà gli elettori',
+    ogDescription: 'La concorrenza interna in Ticino potrebbe influenzare gli elettori, ma non sono ancora specificati i dettagli.',
+    canonicalPath: '/articoli-frontaliere/concorsa-interna-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La concorrenza interna in Ticino mobiliterà gli elettori",
+      "description": "La concorrenza interna in Ticino potrebbe influenzare gli elettori, ma come?. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/concorsa-interna-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "La concorrenza interna in Ticino"
+      },
+      "datePublished": "2026-08-17T21:56:03+00:00",
+      "dateModified": "2026-08-17T21:56:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/concorsa-interna-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-rsi-molestie-lavoro-governo-prevenzione': {
+    title: 'RSI e molestie sul lavoro: il dibattito sulla prevenzione',
+    description: 'Le deputate Tamara Merlo e Maura Mossi Nembrini interpellano il Governo ticinese sulle misure di prevenzione delle molestie alla RSI nel 2026. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, molestie, lavoro, dibattito, sulla',
+    ogTitle: 'RSI e molestie sul lavoro: interpellanza in Ticino',
+    ogDescription: 'Approfondimento sull\'interpellanza presentata al Consiglio di Stato ticinese in merito alle misure di prevenzione delle molestie alla RSI e alla SSR.',
+    canonicalPath: '/articoli-frontaliere/rsi-molestie-lavoro-governo-prevenzione',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "RSI e molestie sul lavoro: il dibattito sulla prevenzione",
+      "description": "Le deputate Tamara Merlo e Maura Mossi Nembrini interpellano il Governo ticinese sulle misure di prevenzione delle molestie alla RSI nel 2026. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/rsi-molestie-lavoro-governo-prevenzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama del Canton Ticino con edifici istituzionali"
+      },
+      "datePublished": "2026-08-18T00:06:01+00:00",
+      "dateModified": "2026-08-18T00:06:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/rsi-molestie-lavoro-governo-prevenzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lugano-mobilita-del-futuro': {
+    title: 'Ticino Lugano, primo passo verso la mobilità del futuro',
+    description: 'I lavori per il Comparto Piazzale ex Scuole a Lugano sono iniziati lunedì 17 agosto. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lugano, primo, passo, verso',
+    ogTitle: 'Lugano, primo passo verso la mobilità del futuro',
+    ogDescription: 'I lavori per il Comparto Piazzale ex Scuole a Lugano sono iniziati lunedì 17 agosto. La prima fase è preparatoria per il cantiere di Piazzale ex Scuole previsto nel 2028.',
+    canonicalPath: '/articoli-frontaliere/lugano-mobilita-del-futuro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ticino Lugano, primo passo verso la mobilità del futuro",
+      "description": "I lavori per il Comparto Piazzale ex Scuole a Lugano sono iniziati lunedì 17 agosto. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lugano-mobilita-del-futuro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Lavori in corso a Lugano per la nuova mobilità pubblica"
+      },
+      "datePublished": "2026-08-18T00:42:44+00:00",
+      "dateModified": "2026-08-18T00:42:44+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lugano-mobilita-del-futuro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-infortuni-lavoro-varese-uil-2026': {
+    title: 'Infortuni sul lavoro a Varese: dati Uil e 7 morti',
+    description: 'I dati Inail del primo semestre 2026 elaborati dalla Uil evidenziano a Varese un aumento degli infortuni del 6% e sette casi mortali. Scopri l\'analisi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, infortuni, lavoro, varese, dati',
+    ogTitle: 'Infortuni sul lavoro a Varese: 7 morti e +6% nel 2026',
+    ogDescription: 'Analisi dei dati Inail del primo semestre 2026 rielaborati dalla Uil Lombardia: crescono gli infortuni a Varese del 6% con sette denunce mortali.',
+    canonicalPath: '/articoli-frontaliere/infortuni-lavoro-varese-uil-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Infortuni sul lavoro a Varese: dati Uil e 7 morti",
+      "description": "I dati Inail del primo semestre 2026 elaborati dalla Uil evidenziano a Varese un aumento degli infortuni del 6% e sette casi mortali. Scopri l'analisi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/infortuni-lavoro-varese-uil-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama industriale e cantieri nella provincia di Varese"
+      },
+      "datePublished": "2026-08-18T04:45:03+00:00",
+      "dateModified": "2026-08-18T04:45:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/infortuni-lavoro-varese-uil-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-08-18': {
+    title: 'Bollettino del frontaliere – 18 agosto 2026: 622 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 18 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 18 agosto 2026: 622 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 18 agosto 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-08-18',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 18 agosto 2026: 622 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 18 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-08-18.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 18 agosto 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-08-18T05:33:28+00:00",
+      "dateModified": "2026-08-18T05:33:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-08-18/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-controlli-lavoratori-irregolari-ticino': {
+    title: 'Controlli di Ferragosto: 9 lavoratori irregolari e sospensioni',
+    description: 'La Guardia di Finanza ha effettuato controlli di Ferragosto nella provincia di Varese, identificando 9 lavoratori irregolari e sospensioni di due attività.',
+    keywords: 'frontalieri, ticino, svizzera, italia, controlli, ferragosto, lavoratori, irregolari',
+    ogTitle: 'Controlli di Ferragosto: 9 lavoratori irregolari e sospensioni',
+    ogDescription: 'La Guardia di Finanza ha effettuato controlli di Ferragosto nella provincia di Varese, identificando 9 lavoratori irregolari e sospensioni di due attività.',
+    canonicalPath: '/articoli-frontaliere/controlli-lavoratori-irregolari-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Controlli di Ferragosto: 9 lavoratori irregolari e sospensioni",
+      "description": "La Guardia di Finanza ha effettuato controlli di Ferragosto nella provincia di Varese, identificando 9 lavoratori irregolari e sospensioni di due attività.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/controlli-lavoratori-irregolari-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di un controllore che verifica i permessi di lavoro di un frontaliere."
+      },
+      "datePublished": "2026-08-18T06:36:07+00:00",
+      "dateModified": "2026-08-18T06:36:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/controlli-lavoratori-irregolari-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-frontalieriticone2026-q2': {
+    title: 'Frontalieri Ticino: +0,64% rispetto al trimestre precedente',
+    description: 'Il numero di frontalieri nel Canton Ticino aumenta di +0,64% rispetto al trimestre precedente, ma diminuisce di -0,57% rispetto allo stesso trimestre dell\'anno',
+    keywords: 'frontalieri, ticino, svizzera, italia, rispetto, trimestre, precedente, numero',
+    ogTitle: 'Frontalieri Ticino: +0,64% rispetto al trimestre precedente, ma -0,57% rispetto allo stesso trimestre dell\'anno precedente',
+    ogDescription: 'Il numero di frontalieri nel Canton Ticino aumenta di +0,64% rispetto al trimestre precedente, ma diminuisce di -0,57% rispetto allo stesso trimestre dell\'anno precedente.',
+    canonicalPath: '/articoli-frontaliere/frontalieriticone2026-q2',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontalieri Ticino: +0,64% rispetto al trimestre precedente",
+      "description": "Il numero di frontalieri nel Canton Ticino aumenta di +0,64% rispetto al trimestre precedente, ma diminuisce di -0,57% rispetto allo stesso trimestre dell'anno",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontalieriticone2026-q2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista aerea di Lugano, Ticino, Svizzera. Un'area affollata di promenade con un lago in background."
+      },
+      "datePublished": "2026-08-18T08:01:07+00:00",
+      "dateModified": "2026-08-18T08:01:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/frontalieriticone2026-q2/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-economia-varese-2024-imposte': {
+    title: 'Ecco le imprese che pagano più imposte nel Varesotto',
+    description: 'La classifica di Made in Varese 2026 sui bilanci 2024 vede al primo posto Bticino, seguita da Sea Esercizi Aeroportuali e Novartis Farma. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, ecco, imprese, pagano, imposte',
+    ogTitle: 'Ecco le imprese che pagano più imposte nel Varesotto',
+    ogDescription: 'La classifica di Made in Varese 2026 sui bilanci 2024 vede al primo posto Bticino, seguita da Sea Esercizi Aeroportuali e Novartis Farma.',
+    canonicalPath: '/articoli-frontaliere/economia-varese-2024-imposte',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ecco le imprese che pagano più imposte nel Varesotto",
+      "description": "La classifica di Made in Varese 2026 sui bilanci 2024 vede al primo posto Bticino, seguita da Sea Esercizi Aeroportuali e Novartis Farma. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/economia-varese-2024-imposte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Imprese che pagano più imposte nel Varesotto"
+      },
+      "datePublished": "2026-08-18T10:01:21+00:00",
+      "dateModified": "2026-08-18T10:01:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/economia-varese-2024-imposte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-migros-delica-nuovo-direttore-2027': {
+    title: 'Migros Delica: Moritz Werner è il nuovo direttore dal 2027',
+    description: 'Cambio al vertice di Migros Delica: dal 1° gennaio 2027 Moritz Werner subentrerà a Thomas Gubler, che va in pensione dopo 40 anni nell\'azienda. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, migros, delica, moritz, werner',
+    ogTitle: 'Migros Delica: Moritz Werner nuovo direttore dal 2027',
+    ogDescription: 'Cambio al vertice di Migros Delica: dal 1° gennaio 2027 Moritz Werner prenderà il posto di Thomas Gubler, in pensione dopo una carriera di 40 anni.',
+    canonicalPath: '/articoli-frontaliere/migros-delica-nuovo-direttore-2027',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Migros Delica: Moritz Werner è il nuovo direttore dal 2027",
+      "description": "Cambio al vertice di Migros Delica: dal 1° gennaio 2027 Moritz Werner subentrerà a Thomas Gubler, che va in pensione dopo 40 anni nell'azienda. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/migros-delica-nuovo-direttore-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuovo direttore di Migros Delica Moritz Werner"
+      },
+      "datePublished": "2026-08-18T11:00:33+00:00",
+      "dateModified": "2026-08-18T11:00:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/migros-delica-nuovo-direttore-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
