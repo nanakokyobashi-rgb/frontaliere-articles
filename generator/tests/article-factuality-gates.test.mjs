@@ -659,6 +659,32 @@ describe('checkFabricatedNormAcronyms', () => {
     expect(issues[0].message).toContain('LCO');
   });
 
+  // `LCL` e' anche il nome commerciale di una banca francese reale (ex Credit
+  // Lyonnais, gruppo Credit Agricole), e il corpus copre attivamente conti
+  // bancari e frontalieri Francia-Svizzera: senza il requisito di contesto
+  // giuridico questo gate BLOCCANTE rigetterebbe un articolo corretto con
+  // «Sigla normativa inventata». E' il finding Important della review su
+  // nanako#455, e questi due test sono cio' che impedisce la regressione.
+  it('does not flag LCL when it names the French bank with no legal citation nearby', () => {
+    const issues = checkFabricatedNormAcronyms(
+      'Molti frontalieri aprono un conto presso LCL oppure BNP Paribas per ricevere lo stipendio in euro.',
+    );
+    expect(codes(issues)).not.toContain('fabricated-norm-acronym');
+  });
+
+  // Il requisito di contesto non deve diventare una scappatoia: se il testo
+  // nomina PRIMA la banca e POI fabbrica la legge, il gate deve comunque
+  // scattare. Con la `re.exec` a match singolo di prima non scatterebbe — la
+  // menzione legittima in cima consumerebbe l'unico match disponibile.
+  it('still flags a fabricated LCL that appears after a legitimate bank mention', () => {
+    const issues = checkFabricatedNormAcronyms(
+      'Ho un conto presso LCL da anni e non ho mai avuto problemi con la banca francese. '
+      + 'In un altro paragrafo si legge che la legge cantonale sul lavoro (LCL) del 1995 direbbe altro.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].message).toContain('LCL');
+  });
+
   // Il confine è su LETTERE, non `\b`: queste due sono norme VERE e il gate le
   // deve lasciare passare, altrimenti blocca contenuto legittimo. Stessa
   // motivazione, e stessi esempi, del test sui dati di corpus#323.

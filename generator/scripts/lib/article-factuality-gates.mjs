@@ -1317,6 +1317,34 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // stesso argomento «sopravvive alla traduzione» gia' usato per LFW/LPS.
 // Zero occorrenze minuscole o miste di `lcl`/`lco`, stessa verifica del
 // paragrafo sopra.
+// Alcune sigle di questa tabella coincidono con un ente REALE non normativo, e
+// per quelle il solo confine di lettera non basta. `LCL` e' anche il nome
+// commerciale di una banca francese (ex Credit Lyonnais, oggi gruppo Credit
+// Agricole), e questo corpus copre attivamente i frontalieri Francia-Svizzera
+// e i conti bancari: «apri un conto presso LCL» e' una frase CORRETTA che il
+// gate rigetterebbe con «Sigla normativa inventata», bloccando un articolo
+// giusto. Il caso e' diverso da MLPS/TULPS: la' la sigla vera CONTIENE quella
+// falsa ed e' il confine di lettera a separarle, qui la sigla intera coincide.
+//
+// Per quelle voci, e SOLO per quelle, l'entry porta un `context`: la sigla
+// conta come fabbricata solo se nella finestra intorno compare un segnale di
+// citazione giuridica. Non e' l'euristica «acronimo + anno» misurata e
+// scartata in #261: quella ALLARGAVA il match a sigle fuori tabella (41 hit,
+// per lo piu' norme e istituzioni vere), questa lo RESTRINGE su una sigla
+// gia' in tabella, quindi puo' solo togliere falsi positivi, non aggiungerne.
+// Le voci senza collisione documentata con un ente reale (LFW, LPS, LCO)
+// restano senza `context`, perche' aggiungerlo li' indebolirebbe il gate
+// senza un caso che lo giustifichi.
+//
+// Finestra di 120 caratteri per lato: copre entrambe le fabbricazioni
+// misurate nel corpus — «La legge cantonale sul lavoro (LCL) del 15 dicembre
+// 1995» (cue a 28 caratteri) e «...del Cantone di Lucerna... (LCL 2020,
+// art. 15)» (cue «art.» subito dopo) — senza sconfinare nel paragrafo
+// successivo, che renderebbe il requisito vacuo su un testo lungo.
+const NORM_CITATION_WINDOW = 120;
+const NORM_CITATION_CONTEXT =
+  /\b(?:legg[ei]|legislazione|lois?|Gesetz(?:es|e)?|Bundesgesetz|federal\s+act|act\s+on|law\s+on|articol[oi]|articles?|Artikel|art\.|cpv\.|Abs\.|RS\s*\d)/i;
+
 export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LFW',
@@ -1331,6 +1359,10 @@ export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LCL',
     re: /(?<![A-Za-z])LCL(?![A-Za-z])/i,
+    // Unica entry con `context`: vedi il blocco sopra — LCL e' anche una banca
+    // francese reale, e senza questo requisito il gate rigetterebbe un articolo
+    // bancario corretto sui frontalieri Francia-Svizzera.
+    context: NORM_CITATION_CONTEXT,
     real: "non esiste: la legge sul lavoro è LL (RS 822.11); la cittadinanza svizzera è la LCit (RS 141.0) più il diritto cantonale, nessuna sigla ufficiale «LCL»",
   },
   {
@@ -1357,12 +1389,23 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   const issues = [];
   if (typeof text !== 'string' || !text) return issues;
   const locale = opts.locale || 'it';
-  for (const { acronym, re, real } of FABRICATED_NORM_ACRONYMS) {
+  for (const { acronym, re, real, context } of FABRICATED_NORM_ACRONYMS) {
     // `re` is deliberately non-global: a `g` regex carries `lastIndex` across
-    // calls, and this table is module-level shared state.
-    const m = re.exec(text);
-    if (!m) continue;
-    issues.push(issue(
+    // calls, and this table is module-level shared state. Lo scan qui usa un
+    // CLONE globale creato nella chiamata, che quello stato non ce l'ha, e che
+    // permette di superare una prima occorrenza scartata da `context` invece
+    // di fermarsi li': con `re.exec` una menzione legittima in cima al testo
+    // avrebbe nascosto una fabbricazione piu' in basso.
+    const scan = new RegExp(re.source, re.flags.includes('g') ? re.flags : `${re.flags}g`);
+    let m;
+    while ((m = scan.exec(text)) !== null) {
+      if (m[0] === '') { scan.lastIndex += 1; continue; }
+      if (context) {
+        const from = Math.max(0, m.index - NORM_CITATION_WINDOW);
+        const to = m.index + m[0].length + NORM_CITATION_WINDOW;
+        if (!context.test(text.slice(from, to))) continue;
+      }
+      issues.push(issue(
       'fabricated-norm-acronym',
       'critical',
       `[${locale}] Sigla normativa inventata: «${acronym}» — ${real}`,
@@ -1370,7 +1413,9 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
       'Cita la norma reale con la sua sigla ufficiale, oppure togli la citazione. '
       + "Una sigla di legge inesistente è una fabbricazione anche quando la frase intorno è corretta, "
       + "e sopravvive alla traduzione: va tolta nell'originale, non nei singoli locali.",
-    ));
+      ));
+      break; // una sola issue per sigla, come prima
+    }
   }
   return issues;
 }
