@@ -4178,7 +4178,25 @@ const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
  * object level. Gemini drops the keyword via `sanitizeSchemaForGemini` so the
  * same shape works on both providers.
  */
-function buildArticleJsonSchema(primaryLocale = 'it') {
+/**
+ * `part` seleziona META' DELLO SCHEMA, per la generazione in due chiamate.
+ *
+ *   'full'  (default) — lo schema storico, invariato byte a byte.
+ *   'body'  — solo `content.<locale>.{body1,body2,body3}` + il gate REGOLA #0.
+ *   'meta'  — tutto il resto: id, category, image, hasCalculator, imagePrompt,
+ *             imageAlt, slugs, `content.<locale>.{title,excerpt,faq}`, seo.
+ *
+ * Le due meta' sono DISGIUNTE e la loro unione e' 'full': e' il taglio (b)
+ * descritto sopra `_SPLIT_MODE`. Nessuna proprieta' compare in entrambe e
+ * nessuna si perde — l'unico modo perche' un merge delle due risposte abbia la
+ * stessa forma che il resto della pipeline gia' consuma.
+ *
+ * `abort_topical_relevance`/`reason` stanno nella meta' BODY, non in entrambe:
+ * REGOLA #0 decide se l'articolo si scrive, e quella decisione va presa nella
+ * chiamata che vede la fonte intera. Se aborta, la chiamata metadati non parte
+ * nemmeno.
+ */
+function buildArticleJsonSchema(primaryLocale = 'it', part = 'full') {
   // OpenAI strict-mode contract:
   //   - Root must be `type: object`
   //   - Every object MUST set `additionalProperties: false`
@@ -4204,6 +4222,23 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
   // covers providers without strict-schema support.
   const nullableString = { type: ['string', 'null'] };
   const nullableBoolean = { type: ['boolean', 'null'] };
+
+  // ── Le due meta' del taglio (b), dichiarate UNA volta sola ───────────────
+  //
+  // Tenerle come liste di CHIAVI, e non come due schemi scritti a mano,
+  // e' cio' che rende verificabile l'invariante «disgiunte e complete»:
+  // `split-prompt-two-calls.test.mjs` le ricalcola dallo schema 'full' e
+  // fallisce se una chiave nuova non finisce in nessuna delle due meta'.
+  // Uno schema copiato a mano invece divergerebbe in silenzio — e' la stessa
+  // classe di difetto del contratto senza forma di import.
+  const CONTENT_KEYS_BODY = ['body1', 'body2', 'body3'];
+  const CONTENT_KEYS_META = ['title', 'excerpt', 'faq'];
+  const ROOT_KEYS_BODY = ['content', 'abort_topical_relevance', 'reason'];
+  const ROOT_KEYS_META = [
+    'id', 'category', 'image', 'hasCalculator', 'imagePrompt',
+    'imageAlt', 'slugs', 'content', 'seo',
+  ];
+  const pick = (obj, keys) => Object.fromEntries(Object.entries(obj).filter(([k]) => keys.includes(k)));
 
   const contentBlock = {
     type: ['object', 'null'],
@@ -4246,7 +4281,7 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
     },
   };
 
-  return {
+  const fullSchema = {
     name: 'article_primary_locale',
     schema: {
       type: 'object',
@@ -4288,6 +4323,30 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
         },
         abort_topical_relevance: nullableBoolean,
         reason: nullableString,
+      },
+    },
+  };
+
+  if (part === 'full') return fullSchema;
+
+  const rootKeys = part === 'body' ? ROOT_KEYS_BODY : ROOT_KEYS_META;
+  const contentKeys = part === 'body' ? CONTENT_KEYS_BODY : CONTENT_KEYS_META;
+  const halfContent = {
+    ...contentBlock,
+    required: contentBlock.required.filter((k) => contentKeys.includes(k)),
+    properties: pick(contentBlock.properties, contentKeys),
+  };
+  return {
+    name: part === 'body' ? 'article_body_only' : 'article_metadata_only',
+    schema: {
+      ...fullSchema.schema,
+      required: fullSchema.schema.required.filter((k) => rootKeys.includes(k)),
+      properties: {
+        ...pick(fullSchema.schema.properties, rootKeys),
+        content: {
+          ...fullSchema.schema.properties.content,
+          properties: { [primaryLocale]: halfContent },
+        },
       },
     },
   };
@@ -7378,20 +7437,37 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
   // costante, perche' il pre-flight del budget piu' sotto deve poterlo
   // riassemblare piu' volte con blocchi piu' corti. Chiamata coi valori pieni
   // produce esattamente la stringa di prima, byte per byte.
-  const buildPrompt = ({ sourceBody, domainFacts }) => `${systemRoleLine}
+  // ── UNA sola copia del template, tre viste ───────────────────────────────
+  //
+  // `part` ('full' | 'body' | 'meta') spegne i blocchi che l'altra meta' della
+  // generazione possiede. NON e' un secondo template: duplicare 15.700 char di
+  // impalcatura vorrebbe dire farli divergere, ed e' la stessa forma di difetto
+  // che il manifest del ciclo esiste per intercettare. Qui la divergenza e'
+  // impossibile per costruzione — c'e' un letterale solo.
+  //
+  // Regola del taglio, applicata blocco per blocco qui sotto:
+  //   body → tutto cio' che serve a SCRIVERE il corpo fedele alla fonte;
+  //   meta → tutto cio' che serve a DERIVARE i metadati dall'articolo scritto.
+  // Un blocco che serve a entrambi (fedelta', divieti di allucinazione) resta
+  // in entrambi: il taglio deve togliere solo cio' che l'altra meta' non usa,
+  // altrimenti e' una riduzione mascherata, cioe' il difetto che chiude.
+  const buildPrompt = ({ sourceBody, domainFacts, part = 'full' }) => {
+    const _isMeta = part === 'meta';
+    const _isBody = part === 'body';
+    return `${systemRoleLine}
 
 SOURCE URL: ${url.startsWith('evergreen://') ? '(editorial research)' : url.startsWith('stats-bfs://') ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html (BFS)' : url}
-SOURCE CONTENT:
+${_isMeta ? 'ARTICOLO GIÀ SCRITTO (è la TUA unica fonte per i metadati: NON aggiungere fatti, cifre, date o istituzioni che non compaiano qui sotto)' : 'SOURCE CONTENT'}:
 ${sourceBody}
 ${domainFacts}
 ${sourceContext?.headline ? `\nHEADLINE: ${sourceContext.headline}` : ''}
 ${relatedContext ? `\nRELATED:\n${relatedContext}` : ''}
 
-${idsSection}
+${_isBody ? '' : `${idsSection}
 ⚠️ The "id" must NOT share >60% words with any existing ID.
-
-${topicalRelevanceGate}
-${sourceContract ? `\n${sourceContract}\n` : ''}
+`}
+${_isMeta ? '' : topicalRelevanceGate}
+${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
 Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
@@ -7400,16 +7476,16 @@ Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo origi
 - Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
 - NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
 
-COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
+${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
 - Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
 - Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
 - Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)
 - NON includere sezioni FAQ nel body — le FAQ vengono generate nel campo "faq" separato e mostrate come accordion
 - Usa tabelle comparative per rendere i dati della fonte più leggibili
-- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire
-${primaryLocaleBlock}${targetKeywordBlock}${peopleAlsoAskBlock}${mustCoverLsiBlock}${AI_SEARCH_PROMPT_BLOCK_IT}
-═══ REGOLE EDITORIALI ═══
+- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`}
+${primaryLocaleBlock}${targetKeywordBlock}${_isBody ? '' : peopleAlsoAskBlock}${_isMeta ? '' : mustCoverLsiBlock}${_isMeta ? '' : AI_SEARCH_PROMPT_BLOCK_IT}
+${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
 
 STILE: Scrivi come giornalista finanziario italiano reale, NON come AI. Varia lunghezza frasi (da 5 a 30 parole). Alterna paragrafi brevi (1-2 frasi) a paragrafi più lunghi. Usa numeri, date, luoghi reali, istituzioni — MA SOLO se presenti nella fonte. ${styleColorLine}
 MAI usare: "In conclusione", "È importante notare", "In questo contesto", "Vale la pena", "È fondamentale", "Alla luce di", "Ecco cosa sapere", "Vediamo nel dettaglio", "Andiamo con ordine", "Non è un caso che", "Un aspetto cruciale", "Sempre più", "In un contesto di".
@@ -7420,7 +7496,7 @@ ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAX 2 emoji callout (📊/💡/⚠️) per INTERO articolo (body1+body2+body3 combinati). Zero è meglio.
 - Varia la struttura: non TUTTI i body devono avere un elenco puntato. Alterna prosa, tabelle, citazioni.
 - NON usare parallelismi strutturali tra body1/body2/body3 (se body1 ha ## + elenco, body2 deve avere ## + prosa + tabella).
-
+`}
 ═══ DIVIETI ANTI-ALLUCINAZIONE (BLOCCANTI — RIGETTO AUTOMATICO) ═══
 
 Un SECONDO modello AI indipendente (fact-checker) confronta OGNI affermazione con la fonte: inventare anche UN SOLO dato = rigetto.
@@ -7445,16 +7521,16 @@ FATTI E DICHIARAZIONI:
 - NON inventare eventi (conferenze, proteste, referendum) non menzionati nella fonte.
 - Se non sei CERTO che un fatto sia nella fonte, OMETTILO.
 
-ANTI-CLICKBAIT (CRITICO — Google Discover compliance):
+${_isBody ? '' : `ANTI-CLICKBAIT (CRITICO — Google Discover compliance):
 - Il titolo DEVE essere DESCRITTIVO e SPECIFICO: soggetto + azione + contesto.
   ✅ Buono: "Aumento stipendi minimi in Ticino: +2.3% dal 1° gennaio 2026"
   ❌ Vietato: "Tutto quello che devi sapere sugli stipendi in Ticino"
 - MAI titoli vaghi: "tutto cambia", "ecco perché", "scopri cosa", "shock", "clamoroso", "incredibile", "non crederai"
 - MAI domande retoriche come titolo ("Ma davvero i frontalieri...?")
-
+`}
 TOPIC GUARD: per articoli su "tassa salute", NON invertire la platea (es. "lavora in Lombardia e risiede in Ticino") se non esplicitamente indicata nella fonte.
 
-${ctaDefaultLine}
+${_isMeta ? '' : `${ctaDefaultLine}
 
 LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
 - 1 in body1 o body2 (contestuale al fatto)
@@ -7512,30 +7588,30 @@ REGOLE OPERATIVE:
 3. Nomi di istituzioni (FINMA, USTAT, UFAS, INSAI, SUVA) sono AMMESSI solo se RILEVANTI per il caso. FINMA = mercati finanziari/banche, NON ospedali/sanità. Non applicare istituzioni a domini sbagliati.
 
 VIOLAZIONE = verdict=FAIL + critical:fatti_inventati. Il sistema rimuove automaticamente le sezioni "Esempi concreti" sospette anche se passano il fact-check.
-
+`}
 Genera JSON (no markdown, no code fences):
-{
+{${_isBody ? '' : `
   "id": "<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>",
   "category": "one of: ${CATEGORIES.join(', ')}",
   "image": "one of: ${AVAILABLE_IMAGES.slice(0, 15).join(', ')}... (scegli la più adatta)",
   "hasCalculator": true,
   ${imagePromptSchemaLine}
   "imageAlt": { "it": "max 125 chars", "en": "max 125 chars", "de": "max 125 chars", "fr": "max 125 chars" },
-  "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },
+  "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },`}
   "content": {
-    "it": {
+    "it": {${_isBody ? '' : `
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
-      "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",
+      "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
       "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
       "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.",
+      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},
         {"q": "Domanda frequente 3?", "a": "Risposta con procedura o scadenza dalla fonte."}
-      ]
+      ]`}
     }
-  },
+  }${_isBody ? '' : `,
   "seo": {
     "title": "SEO Title senza brand suffix (OBBLIGATORIO ≤ 60 caratteri TOTALI; il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo)",
     "description": "Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)",
@@ -7544,15 +7620,16 @@ Genera JSON (no markdown, no code fences):
     "ogDescription": "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
     "headline": "Headline JSON-LD",
     "breadcrumbName": "Breadcrumb 2-3 parole"
-  }
+  }`}
 }
 
 REGOLE FINALI:
 - Contenuto IT primario. EN/DE/FR verranno generati separatamente.
-- Slug: lowercase, trattini, no accenti, max 50 chars
+${_isBody ? '' : `- Slug: lowercase, trattini, no accenti, max 50 chars
 - hasCalculator: true sempre
-- Apostrofi diritti ('), normative 2026
-- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI della fonte. Risposte: 50-100 parole, con dati concreti dalla fonte.`;
+`}- Apostrofi diritti ('), normative 2026
+${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
+  };
 
   const minWordsInstruction = `\n\nMINIMUM LENGTH (CRITICAL — STRICTLY ENFORCED):
 - body1+body2+body3 MUST total ≥${minItalianWords} words. This is HARD-enforced: content below this threshold will be REJECTED.
@@ -7614,7 +7691,11 @@ ISTRUZIONI TASSATIVE per questo tentativo:
   const systemRoleQualifier = IS_FRONTALIERE
     ? 'di lavoro transfrontaliero in Ticino'
     : 'di affari svizzeri a livello nazionale';
-  const buildMessages = (promptText, remediation) => [
+  // `part` seleziona la coda del messaggio utente come `buildPrompt` seleziona
+  // il corpo: il minimo-parole e l'elenco dei campi richiesti valgono per la
+  // meta' che li produce, non per l'altra. Il default 'full' lascia il
+  // messaggio byte-identico a prima.
+  const buildMessages = (promptText, remediation, part = 'full') => [
     { role: 'system', content: `${systemStem} ${systemRoleQualifier} che RISCRIVE articoli basandosi FEDELMENTE sulla fonte originale.
 
 REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Se un'informazione NON è nella fonte, NON includerla. Mai inventare, dedurre o "completare" dati mancanti.
@@ -7628,7 +7709,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // Skipped when data/article-performance.json is missing or empty so the
     // prompt is byte-identical to today's behavior.
     ...(_winnerFingerprintMessage ? [{ role: 'system', content: _winnerFingerprintMessage }] : []),
-    { role: 'user', content: promptText + minWordsInstruction + remediation + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.\n${otherLocalesNote}` }
+    { role: 'user', content: promptText
+      + (part === 'meta' ? '' : minWordsInstruction)
+      + remediation
+      + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: ${
+        part === 'body'
+          ? `content.${primaryLocale} (body1, body2, body3). NON produrre id, category, image, slugs, title, excerpt, faq o seo: verranno chiesti in una chiamata separata.`
+          : part === 'meta'
+            ? `id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, faq), seo. NON riscrivere i body: sono già definitivi.`
+            : `id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.`
+      }\n${otherLocalesNote}` }
   ];
 
   // Pass a strict JSON schema so providers that support it (OpenAI/GitHub
@@ -7827,14 +7917,51 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       jsonSchema: articleSchema,
       maxTokens: IT_GENERATION_MAX_TOKENS,
     });
-    return { p, msgs, est, label: step.label };
+    return {
+      p, msgs, est, label: step.label,
+      fonteChars: step.sourceBody.length,
+      fattiChars: step.domainFacts.length,
+    };
   };
   const _step0 = _buildStep(0);
   const _promptRawEstTokens = _step0.est;
+
+  // ── GRADINO CALCOLATO: TOGLI ESATTAMENTE QUANTO SERVE, E NIENT'ALTRO ─────
+  //
+  // 2026-08-18. I gradini dichiarati sopra hanno un prezzo FISSO, e il primo
+  // costa TUTTI i fatti di dominio: -497 token sul fixture del caso peggiore.
+  // Quando lo sforamento e' di 71 token — il caso reale una volta divisa la
+  // generazione in due chiamate — pagare 497 token per comprarne 71 e'
+  // esattamente il difetto che il blocco sotto registra: una riduzione che
+  // sembra un rimedio e butta il materiale da cui il corpo prende lunghezza.
+  //
+  // Questo gradino accorcia la FONTE di quanto serve e basta: `over * 3.5`
+  // char, perche' `estimateRequestTokens` conta `ceil(chars / 3.5)`, piu' un
+  // margine di arrotondamento. `domainFactsBlock` resta INTATTO. Se il
+  // pavimento della fonte non lascia spazio sufficiente il gradino non
+  // entrera' e il ciclo passa oltre — adotta solo cio' che entra, quindi un
+  // gradino che non serve non ha effetti collaterali.
+  const _overTokens = _step0.est - _promptTokenTarget;
+  if (_overTokens > 0 && truncatedContent.length > PROMPT_SOURCE_FLOOR_CHARS) {
+    const _fonteRidotta = _clampSourceBody(
+      truncatedContent,
+      Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil(_overTokens * 3.5) + 64)),
+    );
+    if (_fonteRidotta.length < truncatedContent.length) {
+      _shrinkLadder.splice(1, 0, {
+        label: `fonte -${truncatedContent.length - _fonteRidotta.length}ch (minimo calcolato), fatti-di-dominio INTATTI`,
+        sourceBody: _fonteRidotta,
+        domainFacts: domainFactsBlock,
+        remediation: _remediationFull,
+      });
+    }
+  }
   prompt = _step0.p;
   llmMessages = _step0.msgs;
   _promptEstTokens = _step0.est;
   _promptShrinkLabel = _step0.label;
+  let _promptFonteChars = _step0.fonteChars;
+  let _promptFattiChars = _step0.fattiChars;
   _promptFits = _promptEstTokens <= _promptTokenTarget;
   // `_saltaScala` ferma tutto al gradino 0: il modello che rispondera' per primo
   // non dichiara un cap, quindi non c'e' niente in cui rientrare. Vedi il blocco
@@ -7849,6 +7976,8 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       _promptEstTokens = built.est;
       _promptShrinkStep = i;
       _promptShrinkLabel = built.label;
+      _promptFonteChars = built.fonteChars;
+      _promptFattiChars = built.fattiChars;
       _promptFits = true;
     }
   }
@@ -7858,6 +7987,36 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // `over=1` e' cio' che un watchdog allarma, e allarmare sul caso nominale lo
   // renderebbe rumore da ignorare.
   const _promptOverBudget = !_saltaScala && _promptEstTokens > _promptTokenTarget;
+
+  // ── QUANDO UN GRADINO E' INSODDISFACIBILE, E PERCHE' NON SI TOGLIE ───────
+  //
+  // I tre gradini che la flotta detta via `err.retryRequestTokenBudget` sono
+  // {3000, 4000, 8000}, e non sono COSTANTI DI QUESTO FILE: sono i cap di
+  // input dichiarati dai modelli (`MODEL_MAX_REQUEST_TOKENS` e
+  // `DEFAULT_REQUEST_TOKENS_BY_PROVIDER` in lib/ai-models.mjs). Non si
+  // possono «togliere» da qui: si puo' solo smettere di fingere di
+  // raggiungerli.
+  //
+  // Misura (news-prompt-token-budget.test.mjs, fixture del caso peggiore):
+  //
+  //   impalcatura del prompt UNICO      (fonte=0, fatti=0)   7180 token
+  //   impalcatura della SOLA scrittura  (fonte=0, fatti=0)   5850 token
+  //
+  // Quindi, dopo la divisione in due chiamate:
+  //   • 8000 diventa raggiungibile CON fonte intera e fatti interi
+  //     (chiamata di scrittura misurata a 8071, dentro col gradino
+  //     calcolato sopra che toglie ~250 char di fonte e zero fatti);
+  //   • 4000 e' raggiungibile solo dalla chiamata dei metadati (3272 di
+  //     impalcatura, 728 di spazio) — MAI dalla scrittura, che ha 5850 di
+  //     pavimento: quindi non e' raggiungibile per l'articolo;
+  //   • 3000 resta sotto entrambe le impalcature: insoddisfacibile.
+  //
+  // Il rimedio onesto per i due gradini bassi non e' uno `shrink` piu'
+  // aggressivo — non esiste — ma dirlo nel marker con `unsat=1`, cosi' che
+  // un watchdog distingua «ridotto e rientrato» da «non riducibile».
+  const PROMPT_SCAFFOLD_FLOOR_TOKENS = 5850;
+  const _promptTargetInsoddisfacibile = _promptTokenTarget > 0
+    && _promptTokenTarget < PROMPT_SCAFFOLD_FLOOR_TOKENS;
   // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
   // riga, non il testo attorno. `shrink=` e `raw=` sono additivi — i campi
   // preesistenti mantengono nome e posizione.
@@ -7869,8 +8028,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   console.error(
     `[prompt-budget] branch=${_promptBudgetBranch} section=${SECTION_NAME} `
     + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${_promptTokenTarget} `
-    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep} raw=${_promptRawEstTokens}`,
+    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep} raw=${_promptRawEstTokens} `
+    + `fonte=${_promptFonteChars}ch fatti=${_promptFattiChars}ch unsat=${_promptTargetInsoddisfacibile ? 1 : 0}`,
   );
+  if (_promptTargetInsoddisfacibile) {
+    console.warn(
+      `⚠️ [prompt-budget] target ${_promptTokenTarget} token SOTTO il pavimento dell'impalcatura `
+      + `(${PROMPT_SCAFFOLD_FLOOR_TOKENS}): nessuna riduzione lo rende raggiungibile, nemmeno con `
+      + 'fonte E fatti a zero. Non e\' un gradino stretto, e\' un gradino INSODDISFACIBILE: i modelli '
+      + 'che lo dettano verranno saltati dal pre-flight comunque. Meglio restare interi che uscire '
+      + 'con uno `shrink=N` che sembra un rimedio e non lo e\'.',
+    );
+  }
   if (_promptRawEstTokens > PROMPT_TOKEN_RAW_CEILING) {
     console.warn(
       `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} assemblato pesa ${_promptRawEstTokens} token, `
@@ -7902,8 +8071,170 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     );
   }
 
+  // ═══ LA GENERAZIONE IN DUE CHIAMATE ══════════════════════════════════════
+  //
+  // PERCHE'. L'impalcatura del prompt unico pesa 7180 token da sola, contro
+  // un target di 8000: restano 820 token per fonte E fatti insieme, e la
+  // fonte al pavimento (3000ch) ne costa gia' 818. Da qui il difetto
+  // registrato sopra: il prompt «rientrava» solo buttando i fatti di dominio
+  // (fatti=0ch) e dimezzando la fonte, e 12 chiamate su 12 uscivano
+  // `[thin-content]`. Non e' una compressione mal tarata: e' un contenitore
+  // piu' piccolo del suo contenuto.
+  //
+  // IL TAGLIO SCELTO: corpo | metadati. L'impalcatura serve DUE lavori
+  // disgiunti. Scrivere vuole la fonte intera, i fatti di dominio, le regole
+  // di stile/anti-AI, i link interni, il minimo di parole, la struttura
+  // AI-search di body1. Etichettare vuole il catalogo immagini, la lista
+  // degli id esistenti, l'anti-clickbait, i blocchi SEO/PAA e lo schema dei
+  // metadati — e lavora sull'ARTICOLO GIA' SCRITTO, non sulla fonte.
+  // Nessuno dei due ha bisogno dell'input dell'altro, quindi il taglio non
+  // perde niente per costruzione.
+  //
+  // Gli altri due tagli considerati perdono entrambi: «pianificazione →
+  // scrittura» e «meta' corpo + meta' corpo» costringono la seconda chiamata
+  // a lavorare su un RIASSUNTO della fonte, cioe' reintroducono la perdita
+  // di fatti che questo cambiamento esiste per eliminare.
+  //
+  // MISURA (news-prompt-token-budget.test.mjs, fixture del caso peggiore):
+  //
+  //             impalcatura sola   con fonte+fatti INTERI
+  //   unico          7180                9402  (adottato 7998 con shrink=4,
+  //                                             fonte -53%, fatti -100%)
+  //   1/2 corpo      5850                8071
+  //   2/2 metadati   3272                4986  (articolo da 6000ch)
+  //
+  // IL FLAG. `CREATE_ARTICLE_PROMPT_SPLIT`, default **`auto`**:
+  //   auto (default) — divide SOLO quando la chiamata unica non entra senza
+  //                    perdere i fatti di dominio, o non entra affatto.
+  //                    Nel caso nominale (nessun cap dettato, modello senza
+  //                    tetto) resta UNA chiamata: la divisione ne costa due.
+  //   on             — divide sempre.
+  //   off            — non divide mai: comportamento identico a prima,
+  //                    reversibile senza rollback.
+  const _splitMode = String(process.env.CREATE_ARTICLE_PROMPT_SPLIT || 'auto').toLowerCase();
+  // Il predicato che conta: la scala stava per consegnare un prompt SENZA
+  // fatti di dominio pur avendone in ingresso. E' letteralmente il difetto
+  // della scheda (`fatti=0ch`), e ora e' anche cio' che il test osserva.
+  const _splitSalvaFatti = domainFactsBlock.length > 0 && _promptFattiChars === 0;
+  const _splitAttiva = _splitMode === 'on'
+    || (_splitMode !== 'off' && !_saltaScala && (_splitSalvaFatti || !_promptFits));
+
+  const _buildHalf = (part, sourceBody, domainFacts, remediation) => {
+    const schema = buildArticleJsonSchema(primaryLocale, part);
+    const p = buildPrompt({ sourceBody, domainFacts, part });
+    const msgs = buildMessages(p, remediation, part);
+    return {
+      p, msgs, schema, part,
+      est: estimateRequestTokens(msgs, { jsonSchema: schema, maxTokens: IT_GENERATION_MAX_TOKENS }),
+      fonteChars: sourceBody.length,
+      fattiChars: domainFacts.length,
+    };
+  };
+
+  // Costruita QUI, non dentro `_generateSplit`, cosi' che il peso e il
+  // contenuto della chiamata di scrittura siano osservabili senza eseguire
+  // una chiamata LLM — e' cio' su cui il test si aggancia.
+  //
+  // La meta' di scrittura entra in 8000 con la fonte INTERA e i fatti INTERI
+  // per un pelo: 8071 misurati sul caso peggiore, cioe' 71 token sopra. Qui
+  // si applica lo stesso gradino calcolato della scala — accorcia la FONTE di
+  // quanto sfora e basta (~250 char, -4%) e non tocca mai i fatti di dominio.
+  // Il confronto col difetto e' l'intero punto del cambiamento: prima, per
+  // comprare quei 71 token, si pagavano 1739ch di fatti e 3174ch di fonte.
+  const _buildCall1 = () => {
+    const intera = _buildHalf('body', truncatedContent, domainFactsBlock, _remediationFull);
+    if (intera.est <= _promptTokenTarget) return intera;
+    for (const rimedio of [_remediationFull, _remediationShort]) {
+      const c = _buildHalf('body', truncatedContent, domainFactsBlock, rimedio);
+      if (c.est <= _promptTokenTarget) return c;
+      const fonte = _clampSourceBody(
+        truncatedContent,
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil((c.est - _promptTokenTarget) * 3.5) + 64)),
+      );
+      if (fonte.length < truncatedContent.length) {
+        const ridotta = _buildHalf('body', fonte, domainFactsBlock, rimedio);
+        if (ridotta.est <= _promptTokenTarget) return ridotta;
+      }
+    }
+    // Nemmeno cosi' entra: si resta interi. NON si tolgono i fatti — sotto il
+    // pavimento dell'impalcatura (PROMPT_SCAFFOLD_FLOOR_TOKENS) toglierli non
+    // farebbe entrare comunque, e il marker lo dice gia' con `unsat=1`.
+    return intera;
+  };
+  const _splitCall1 = _splitAttiva ? _buildCall1() : null;
+  if (_splitCall1) {
+    console.error(
+      `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `call=1/2 part=body est=${_splitCall1.est} budget=${_promptTokenTarget} `
+      + `fonte=${_splitCall1.fonteChars}ch fatti=${_splitCall1.fattiChars}ch `
+      + `motivo=${_splitSalvaFatti ? 'fatti-a-zero' : 'fuori-budget'}`,
+    );
+  }
+
+  // Ritorna la STRINGA JSON che la chiamata unica avrebbe prodotto, cosi' che
+  // tutto cio' che sta a valle (repair, parse, abort, normalizzazione, gate)
+  // resti invariato byte a byte. `null` = ricadi sulla chiamata unica.
+  const _generateSplit = async () => {
+    const rawBody = useGeminiDirect
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema })
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+    let bodyData;
+    try {
+      bodyData = JSON.parse(repairLlmJson(rawBody));
+    } catch (e) {
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      return null;
+    }
+    // L'abort per rilevanza topica vive nella meta' di scrittura ed e'
+    // terminale: non ha senso chiedere i metadati di un articolo che non
+    // verra' scritto. Torna com'e', il chiamante lo riconosce gia'.
+    if (bodyData?.abort_topical_relevance) return JSON.stringify(bodyData);
+
+    const bodyContent = bodyData?.content?.[primaryLocale] || {};
+    const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
+      .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
+    if (articolo.length < 500) {
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 ha reso ${articolo.length}ch di corpo: ricado sulla chiamata unica.`);
+      return null;
+    }
+
+    // La seconda chiamata NON vede la fonte: vede l'articolo. E' la ragione
+    // per cui questo taglio non perde fatti — i metadati devono descrivere
+    // cio' che e' stato scritto, non la notizia di partenza.
+    const _call2 = _buildHalf('meta', articolo, '', '');
+    console.error(
+      `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `call=2/2 part=meta est=${_call2.est} budget=${_promptTokenTarget} `
+      + `articolo=${articolo.length}ch`,
+    );
+    const rawMeta = useGeminiDirect
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+    let metaData;
+    try {
+      metaData = JSON.parse(repairLlmJson(rawMeta));
+    } catch (e) {
+      console.error(`  ⚠️ [prompt-split] chiamata 2/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      return null;
+    }
+    const merged = {
+      ...metaData,
+      content: {
+        ...(metaData?.content || {}),
+        [primaryLocale]: { ...(metaData?.content?.[primaryLocale] || {}), ...bodyContent },
+      },
+    };
+    return JSON.stringify(merged);
+  };
+
   let itRaw;
-  if (useGeminiDirect) {
+  if (_splitAttiva) {
+    itRaw = await _generateSplit();
+    if (itRaw === null) console.error('  ↩️ [prompt-split] fallback: chiamata unica.');
+  }
+  if (itRaw != null) {
+    // gia' generato in due chiamate
+  } else if (useGeminiDirect) {
     itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
