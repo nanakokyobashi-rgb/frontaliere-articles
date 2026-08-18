@@ -52,8 +52,9 @@
  * ## Dove gira
  *
  * `npm test` del corpus (`node --test generator/tests/*.test.mjs`), quindi
- * dentro `tests.yml` — che ha `branches-ignore: [main]`: **gira sulle PR, NON
- * sui push a `main`**.
+ * dentro `tests.yml`. Fino al 2026-08-18 quel workflow aveva
+ * `branches-ignore: [main]` e girava **solo sulle PR**; da allora gira anche sui
+ * push a `main`.
  *
  * ## Cosa questo file NON fa
  *

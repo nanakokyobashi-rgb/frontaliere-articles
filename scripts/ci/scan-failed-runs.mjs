@@ -98,9 +98,15 @@ export function parseIgnoreList(raw) {
 const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
 
 /**
- * Workflow che dichiarano SIA `push: branches-ignore: [main]` SIA
- * `pull_request` sugli stessi path — i gate pre-merge (`tests.yml`,
- * `generator-ci.yml`). Per questi la run innescata da un push su un branch
+ * I gate pre-merge (`tests.yml`, `generator-ci.yml`): dichiarano SIA `pull_request`
+ * SIA `push` sugli stessi path.
+ *
+ * NOTA (2026-08-18): da quando `tests.yml` ha perso `branches-ignore: [main]`
+ * questo filtro esclude anche i suoi rossi SUI PUSH A `main`, dove non c'e'
+ * nessun reviewer a vederli — il filtro guarda `event` e nome del workflow, non
+ * il branch. Non e' stato cambiato qui di proposito: aggiungere un discriminante
+ * su `headBranch` cambia QUALI run diventano issue, ed e' una modifica di
+ * comportamento che merita la propria PR e la propria misura. Per questi la run innescata da un push su un branch
  * non-main è solo un'anteprima: quando (e se) la PR si apre, `pull_request`
  * rigira la stessa suite e quel segnale è già escluso sotto, per lo stesso
  * motivo — "un tests rosso su una PR è un problema della PR, lo vede il
