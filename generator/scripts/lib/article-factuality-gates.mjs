@@ -1350,6 +1350,39 @@ export function checkFabricatedNormAcronyms(text, opts = {}) {
   return issues;
 }
 
+/**
+ * BLOCKING — checkFabricatedNormAcronyms() across every locale a caller
+ * already has content for, in ONE place so every producer wires the same
+ * check the same way instead of each re-deriving it.
+ *
+ * `runFactualityGates()` already runs checkFabricatedNormAcronyms(), but only
+ * where a caller actually invokes runFactualityGates — and that is exactly
+ * where this gate leaked: create-article.mjs's AI-generation path calls it
+ * only on `data.content.it`, before translateArticle() exists, so an acronym
+ * that survives translation unchanged (see checkFabricatedNormAcronyms doc)
+ * was never re-checked on en/de/fr. publish-journalist-article.mjs never
+ * calls runFactualityGates at all — a journalist submission passed through
+ * no norm-acronym check in ANY locale, IT included. Same shape of gap as
+ * assertNoFabricatedLaborOfficeCrossLocale, and wired the same way: called
+ * directly on IT content, and again on en/de/fr after translateArticle().
+ *
+ * @param {Record<string, {title?: string, body1?: string, body2?: string, body3?: string} | undefined>} contentByLocale
+ */
+export function assertNoFabricatedNormAcronyms(contentByLocale) {
+  const issues = [];
+  for (const [locale, content] of Object.entries(contentByLocale || {})) {
+    if (!content) continue;
+    const text = [content.title || '', content.body1 || '', content.body2 || '', content.body3 || ''].join(' ');
+    for (const found of checkFabricatedNormAcronyms(text, { locale })) {
+      issues.push(found.message);
+    }
+  }
+  if (issues.length > 0) {
+    const msg = issues.map((i, idx) => `  ${idx + 1}. ${i}`).join('\n');
+    throw new Error(`Articolo rigettato — sigla normativa fabbricata:\n${msg}`);
+  }
+}
+
 // ─── 6. Contradictory dates for the same named norm ───────────────────
 //
 // "Il Decreto Omnibus è stato varato il 1° gennaio 2023" coexisted with "Il 1°

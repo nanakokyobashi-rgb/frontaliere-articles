@@ -84,7 +84,7 @@ import {
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -12892,6 +12892,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // translation that independently hallucinates this institution in a
   // different language was never checked at all.
   assertNoFabricatedLaborOfficeCrossLocale(data);
+  // Same gap, for fabricated NORM acronyms (LFW/LPS): runFactualityGates()
+  // at Step 3a.0b-bis only ever ran on data.content.it, before this
+  // translateArticle() call existed — an acronym that survives translation
+  // unchanged (it did, byte-identical, for apprendistato-urie-2024-2025)
+  // was never re-checked on the en/de/fr output.
+  assertNoFabricatedNormAcronyms({ en: data.content.en, de: data.content.de, fr: data.content.fr });
 
   // Step 3c: Sanitize bold + URLs + nav links on translated content
   console.error('✂️  Sanitizzazione grassetto (traduzioni):');
