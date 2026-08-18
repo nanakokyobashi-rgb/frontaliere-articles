@@ -133,6 +133,24 @@ const resolveToken = (token) => (token.includes('/') ? token : `${WORKFLOW_DIR}/
  *                    niente, qui o altrove.
  */
 const DECLARED_ABSENT = {
+  'scripts/ci/scan-generation-health.mjs :: mirror-articles-engine.yml': {
+    kind: 'site-only',
+    reason:
+      'Citazione CONTRASTIVA, e per di piu\' di un workflow che vive sul SITO: il body della ' +
+      'condizione `evergreen-pool-saturated` lo nomina per dire quali path il mirror porta ' +
+      '(`packages/articles/engine/**`, `index.ts`, `articleSections.ts`) e quindi che ' +
+      '`generator/` NON e\' fra quelli. Niente qui dipende dalla sua esistenza: l\'istruzione ' +
+      'che ne discende — «fix a mano su entrambi i repo, corpus per primo» — resta vera anche ' +
+      'se quel workflow domani sparisce, perche\' la sua assenza e\' proprio il punto.',
+  },
+  'scripts/ci/scan-generation-health.mjs :: mirror-articles-corpus.yml': {
+    kind: 'site-only',
+    reason:
+      'Stessa citazione contrastiva del gemello `mirror-articles-engine.yml`, e stesso repo: ' +
+      'nominato per dire che porta `content/` ed e\' dispatch-only (in via di cancellazione), ' +
+      'cioe\' che nemmeno lui porta `generator/`. Se venisse cancellato davvero l\'affermazione ' +
+      'del body diventa piu\' vera, non meno: e\' il caso in cui l\'assenza non rompe niente.',
+  },
   '.github/workflows/auto-merge-on-lgtm.yml :: scripts/load-rc-env.mjs': {
     kind: 'renamed-here',
     insteadOf: 'generator/scripts/load-rc-env.mjs',
