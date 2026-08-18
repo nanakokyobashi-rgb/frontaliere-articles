@@ -831,12 +831,22 @@ function resolvePreSpendClassifierCap(raw) {
   if (!Number.isFinite(n)) return null;
   return Math.max(1, Math.floor(n));
 }
+// Stesso idioma di `resolvePreSpendClassifierCap`, generalizzato a un fallback
+// non-null: un env var assente o illeggibile ricade sul default, ma un valore
+// ESPLICITO (incluso '0') non viene mai confuso con "assente" da un `|| fallback`
+// — e' esattamente il bug che ha reso PRESPEND_GATE_MAX_CLASSIFIER=0 indistinguibile
+// da variabile assente prima di questa PR.
+function resolvePositiveIntEnv(raw, fallback) {
+  if (raw == null || raw === '') return fallback;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : fallback;
+}
 const DEFAULT_MAX_CLASSIFIER_CALLS = resolvePreSpendClassifierCap(process.env.PRESPEND_GATE_MAX_CLASSIFIER);
 // Classificazioni in volo insieme. Basso di proposito: e' un modello leggero su
 // free tier, e il guadagno fra 1 e 5 e' quasi tutto il guadagno che c'e'.
 const PRESPEND_GATE_CONCURRENCY = Math.max(
   1,
-  Number(process.env.PRESPEND_GATE_CONCURRENCY ?? '5') || 5,
+  Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_CONCURRENCY, 5)),
 );
 
 /**
@@ -1107,7 +1117,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // frontaliere a restored candidate with 0 density hits still aborts on
   // attempt 1 and the ranker picks another headline.
   if (kept.length === 0 && headlines.length > 0) {
-    const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
+    const RESTORE_N = Math.max(1, Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_SECTION_RESTORE_N, 3)));
     const ranked = headlines
       .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
       .sort((a, b) => (b.hits - a.hits) || (a.i - b.i))
@@ -10239,7 +10249,7 @@ function _saveUsedImageUrl(articleId, imageUrl) {
 // un'immagine di repertorio su un articolo che altrimenti non esisterebbe.
 const IMAGE_PHASE_BUDGET_MS = Math.max(
   30_000,
-  Number(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS ?? '180000') || 180_000,
+  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 180_000)),
 );
 
 async function generateArticleImage(data) {

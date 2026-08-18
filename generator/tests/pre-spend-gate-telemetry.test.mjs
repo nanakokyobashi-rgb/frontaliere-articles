@@ -96,6 +96,15 @@ const resolvePreSpendClassifierCap = new Function(
   `${CAP_RESOLVER_SRC}\nreturn resolvePreSpendClassifierCap;`,
 )();
 
+// The section backstop's RESTORE_N now goes through the same "explicit '0' is
+// not 'assente'" resolver as the classifier cap — extracted from source for
+// the same reason: a hand-rolled copy here would stay green if the real one
+// diverged.
+const POSITIVE_INT_ENV_SRC = extractFunctionSource('function resolvePositiveIntEnv(raw, fallback) {');
+const resolvePositiveIntEnv = new Function(
+  `${POSITIVE_INT_ENV_SRC}\nreturn resolvePositiveIntEnv;`,
+)();
+
 /** Il tetto che il modulo calcolerebbe con quel valore di `PRESPEND_GATE_MAX_CLASSIFIER`. */
 function moduleDefaultMaxClassifier(env = {}) {
   // Pinna anche il WIRING: che il resolver sia corretto non serve a niente se
@@ -162,6 +171,7 @@ function makeGate({
     'mapWithConcurrency',
     'DEFAULT_MAX_CLASSIFIER_CALLS',
     'PRESPEND_GATE_CONCURRENCY',
+    'resolvePositiveIntEnv',
     `${GATE_SRC}\nreturn applyPreSpendTopicGate;`,
   )(
     isFrontaliere,
@@ -178,6 +188,7 @@ function makeGate({
     // renderebbe verde un gate che in produzione smette di classificare.
     maxClassifierDefault,
     5,
+    resolvePositiveIntEnv,
   );
   return { gate, logs, runReport };
 }
