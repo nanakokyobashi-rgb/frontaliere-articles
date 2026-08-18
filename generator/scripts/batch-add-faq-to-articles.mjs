@@ -31,7 +31,7 @@ const ROOT = resolve(__dirname, '..', '..');
 import { corpusPath, resolveGitAddPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
-import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
+import { callLLM, callSingleModel, AI_MODELS, initScoreStore, getStats, flushScores, flushScoresBeforeExit, resetExhaustedModel, printRunSummary } from './lib/ai-models.mjs';
 import { freeTranslateWithRetry, logCascadeSummary } from './lib/free-translate.mjs';
 import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
 import { detectLanguage } from './lib/detect-language.mjs';
@@ -283,10 +283,21 @@ function commitIfNeeded(currentStep) {
 // git push origin main` da un processo che non stava generando niente. Armarlo
 // solo quando il file E' l'entry point non toglie niente al job vero, che passa
 // sempre di la'.
+// La stessa perdita che #433 chiude in create-article.mjs (`exitAfterFlush`)
+// era ancora viva qui: questo handler chiama `callLLM` da `genTasks` /
+// `topUpTasks` / `transTasks` durante la run, e un SIGTERM a meta' run
+// (workflow cancellato) usciva con `process.exit(0)` sincrono senza mai dare
+// al ledger dei punteggi una finestra per scrivere gli esiti accumulati.
 function installSigtermCheckpoint() {
-  process.on('SIGTERM', () => {
+  process.on('SIGTERM', async () => {
     console.error('\n⚠️  SIGTERM — saving progress...');
     gitCommitAndPush('interrupted');
+    try {
+      await flushScoresBeforeExit();
+    } catch {
+      // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita
+      // non dipenda mai dal ledger — stessa garanzia di exitAfterFlush().
+    }
     process.exit(0);
   });
 }
