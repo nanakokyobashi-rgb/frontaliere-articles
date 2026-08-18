@@ -681,6 +681,26 @@ describe('checkFabricatedNormAcronyms', () => {
     )).toEqual([]);
   });
 
+  // `legg[ei]` e `lois?` in `NORM_CITATION_CUE` matchavano come PREFISSO di
+  // parole comuni prive di ogni legame con una citazione di norma — `leggero`,
+  // `leggenda`, `loisir` — perché l'alternanza non chiudeva con `\b`. Una di
+  // queste basta, nel raggio di 120 caratteri da una menzione reale della
+  // banca LCL, a far scattare `context.test()` e bloccare come `critical` un
+  // articolo legittimo: esattamente il difetto che questa PR dichiara di
+  // risolvere, riaperto da un lato diverso della stessa regex.
+  it('leaves the bank LCL alone even when a nearby word merely starts with legg-/lois-', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL offre un servizio leggero e veloce per i frontalieri, pensato per chi cerca leggerezza '
+      + 'nella gestione dei conti correnti in Svizzera.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL, secondo una leggenda metropolitana leggendaria fra i frontalieri, avrebbe conti gratuiti.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Depuis 2024, LCL propose aux frontaliers un service de loisirs bancaires pour la Suisse.',
+    )).toEqual([]);
+  });
+
   // Il requisito di contesto non deve diventare una scappatoia. Se il testo
   // nomina PRIMA la banca e POI fabbrica la legge, il gate deve scattare: con
   // una `re.exec` a match singolo la prima occorrenza consumava l'unico match
