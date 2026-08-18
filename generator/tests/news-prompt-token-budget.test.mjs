@@ -49,7 +49,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { estimateRequestTokens, getDeclaredRequestTokenLimit, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
+import { estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from '../scripts/lib/ai-search-template.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs';
@@ -123,7 +123,7 @@ const DEPS = [
   // sotto misura il ramo SENZA preferenza, cioe' il fallback su modelli capped,
   // ed e' li' che il tetto deve continuare a valere. Il ramo CON preferenza ha
   // il suo test dedicato in fondo.
-  'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit',
+  'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit', 'isModelAvailable',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -184,6 +184,7 @@ const BASE_DEPS = {
   // tetto deve valere, ed e' li' che vale ancora.
   PREFERRED_GENERATION_MODELS: [],
   getDeclaredRequestTokenLimit,
+  isModelAvailable,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
@@ -626,8 +627,33 @@ test('il marker pubblica il gradino di riduzione', () => {
 
 const PREFERISCE_HAIKU = { PREFERRED_GENERATION_MODELS: [REAL_AI_MODELS.CLAUDE_CLI_HAIKU] };
 
+/**
+ * Rende claude-cli/haiku DISPONIBILE per la durata di `fn`.
+ *
+ * `_preferisceModelloSenzaCap` chiede anche `isModelAvailable`, non solo
+ * «hai un cap?»: un preferito che non c'e' non deve far costruire il prompt
+ * intero per una flotta che lo rifiutera' tutta. Senza queste due variabili il
+ * ramo con preferenza misurerebbe il ramo SENZA, e passerebbe a vuoto.
+ */
+function conHaikuDisponibile(fn) {
+  const salvate = {
+    tok: process.env.CLAUDE_CODE_OAUTH_TOKEN,
+    flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK,
+  };
+  process.env.CLAUDE_CODE_OAUTH_TOKEN = 'test-token';
+  process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = 'true';
+  try {
+    return fn();
+  } finally {
+    if (salvate.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
+    else process.env.CLAUDE_CODE_OAUTH_TOKEN = salvate.tok;
+    if (salvate.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
+    else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = salvate.flag;
+  }
+}
+
 test('col preferito senza cap il primo tentativo manda il prompt INTERO', () => {
-  const conPreferenza = newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU);
+  const conPreferenza = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU));
   const senzaPreferenza = newsPrompt();
 
   assert.equal(
@@ -653,7 +679,7 @@ test('appena il preferito dichiara un cap, la scala torna a mordere', () => {
   // primo 413 e lo persiste su Firestore. Il giorno in cui haiku ne prende uno,
   // questo ramo deve tornare da solo al comportamento di prima — senza che
   // nessuno si ricordi di una costante da aggiornare.
-  const conCap = newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/meta/llama-3.1-8b-instruct'] });
+  const conCap = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', { PREFERRED_GENERATION_MODELS: ['nvidia/meta/llama-3.1-8b-instruct'] }));
   assert.ok(
     conCap.estTokens <= PROMPT_TOKEN_BUDGET,
     `preferito CON cap dichiarato e prompt a ${conCap.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
@@ -668,15 +694,37 @@ test('il budget dettato dalla flotta vince sulla preferenza, al retry', () => {
   // momento la preferenza NON deve piu' bastare a saltare la scala, altrimenti
   // il retry rispedirebbe lo stesso prompt che la flotta ha gia' rifiutato —
   // il difetto che PR #373 ha chiuso.
-  const alRetry = newsPrompt(
+  const alRetry = conHaikuDisponibile(() => newsPrompt(
     { _generationAttempt: 2, _promptTokenBudget: 6000 },
     'frontaliere',
     PREFERISCE_HAIKU,
-  );
+  ));
   assert.equal(alRetry.target, 6000, 'il budget dettato non e\' arrivato al target della scala');
   assert.ok(
     alRetry.shrink > 0,
     'la scala non ha morso malgrado il budget dettato dalla flotta: il retry rispedisce '
     + 'un prompt gia\' rifiutato, e la libreria aveva scritto che non puo\' riuscire',
   );
+});
+
+test('preferito NON disponibile: la scala morde subito, niente tentativo buttato', () => {
+  // ENABLE_HAIKU_ARTICLE_FALLBACK spento / token assente: il preferito non c'e'.
+  // Costruire il prompt intero qui significherebbe un `ALL_MODELS_EXHAUSTED`
+  // garantito al primo tentativo per OGNI headline — il rimedio del budget
+  // dettato funziona, ma pagarlo quando si sa gia' che il preferito manca e'
+  // spreco. Nessun wrapper `conHaikuDisponibile` qui: e' il punto del test.
+  const orig = { tok: process.env.CLAUDE_CODE_OAUTH_TOKEN, flag: process.env.ENABLE_HAIKU_ARTICLE_FALLBACK };
+  delete process.env.CLAUDE_CODE_OAUTH_TOKEN;
+  delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK;
+  try {
+    const senzaHaiku = newsPrompt({}, 'frontaliere', PREFERISCE_HAIKU);
+    assert.ok(
+      senzaHaiku.estTokens <= PROMPT_TOKEN_BUDGET,
+      `preferito assente e prompt a ${senzaHaiku.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+      + 'la scala non ha morso e il primo tentativo di ogni headline e\' buttato',
+    );
+  } finally {
+    if (orig.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN; else process.env.CLAUDE_CODE_OAUTH_TOKEN = orig.tok;
+    if (orig.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK; else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = orig.flag;
+  }
 });

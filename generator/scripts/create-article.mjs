@@ -65,7 +65,7 @@ import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable } from './lib/ai-models.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -89,16 +89,30 @@ import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isL
 const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
 
 /**
- * True se almeno un modello preferito NON dichiara un cap di token di input.
+ * True se almeno un modello preferito e' DISPONIBILE ORA e non dichiara un cap
+ * di token di input.
  *
- * Serve a una decisione sola, e va calcolata sulla stessa funzione che usa il
- * pre-flight di callLLM (`getDeclaredRequestTokenLimit`): se domani haiku
- * acquisisce un cap — a mano in MODEL_MAX_REQUEST_TOKENS, o imparato a runtime
- * da un 413 — questa torna false da sola e il prompt riprende ad accorciarsi,
- * senza che nessuno debba ricordarsi di aggiornare una costante qui.
+ * Le due condizioni sono entrambe necessarie, e per ragioni diverse.
+ *
+ * `getDeclaredRequestTokenLimit` va calcolata sulla stessa funzione che usa il
+ * pre-flight di callLLM: se domani haiku acquisisce un cap — a mano in
+ * MODEL_MAX_REQUEST_TOKENS, o imparato a runtime da un 413 via
+ * `_learnedRequestTokenLimits` — questa torna false da sola e il prompt
+ * riprende ad accorciarsi, senza una costante da ricordarsi di aggiornare.
+ *
+ * `isModelAvailable` evita un tentativo buttato per OGNI headline dove il
+ * preferito non c'e'. Senza, un ambiente con `ENABLE_HAIKU_ARTICLE_FALLBACK`
+ * spento o senza `CLAUDE_CODE_OAUTH_TOKEN` costruirebbe il prompt intero
+ * (~9500 token) per una flotta il cui cap piu' permissivo e' 8000: ogni modello
+ * skippato dal pre-flight, `ALL_MODELS_EXHAUSTED`, e solo al tentativo 2 il
+ * budget dettato rimette in moto la scala. Il rimedio funziona — e' verificato —
+ * ma pagarlo su ogni headline quando si sa gia' in partenza che il preferito non
+ * c'e' e' spreco, non robustezza.
  */
 function _preferisceModelloSenzaCap(prefer) {
-  return (prefer || []).some((m) => getDeclaredRequestTokenLimit(m) === undefined);
+  return (prefer || []).some(
+    (m) => isModelAvailable(m) && getDeclaredRequestTokenLimit(m) === undefined,
+  );
 }
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
