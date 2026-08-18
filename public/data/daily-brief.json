@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-17T05:38:01.288Z",
-  "dateIso": "2026-08-17",
+  "generatedAt": "2026-08-18T05:33:26.220Z",
+  "dateIso": "2026-08-18",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 22816
+    "jobsActive": 22964
   },
   "blocks": {
     "borderWait": {
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-17T05:24:41.356Z",
+      "generatedAt": "2026-08-18T05:08:43.965Z",
       "municipalityCount": 518,
       "cheaperItalyCount": 68,
-      "cheaperSwissCount": 69,
-      "tieCount": 8,
+      "cheaperSwissCount": 70,
+      "tieCount": 7,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -59,9 +59,9 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.518,
-          "swissPriceEur": 2.023,
+          "swissPriceEur": 2.024,
           "swissPriceChf": 1.9,
-          "saving50LEur": 25.25
+          "saving50LEur": 25.3
         },
         {
           "municipality": "Campodolcino",
@@ -77,9 +77,9 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.119,
-          "swissPriceChf": 1.99,
-          "saving50LEur": 10
+          "swissPriceEur": 2.109,
+          "swissPriceChf": 1.98,
+          "saving50LEur": 9.5
         }
       ],
       "cheapestSwissStation": {
@@ -103,12 +103,12 @@
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-17T02:37:17.785Z",
-      "activeJobs": 22816,
-      "activeCompanies": 852,
-      "todayAdded": 114,
-      "yesterdayAdded": 371,
-      "last7dAdded": 4288
+      "generatedAt": "2026-08-18T01:24:36.339Z",
+      "activeJobs": 22964,
+      "activeCompanies": 846,
+      "todayAdded": 390,
+      "yesterdayAdded": 622,
+      "last7dAdded": 4424
     }
   }
 }
