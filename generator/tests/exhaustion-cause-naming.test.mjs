@@ -107,36 +107,66 @@ describe('classifyNonRetryableError — la ruggine va marcata esaurita', () => {
     // L'invariante strutturale della fix: due classi permanenti, un solo
     // comportamento. Se qualcuno rimette una condizione sul body del 404, e'
     // questo confronto a cadere per primo.
+    //
+    // I body sono scelti in modo da arrivare DAVVERO ai due rami: `413` e
+    // `tokens_limit_reached` sono intercettati piu' in alto (ramo 413) per
+    // entrambi gli status, quindi un body che li contiene farebbe passare il
+    // confronto anche se i due rami divergessero. Asserito qui sotto perche' la
+    // scelta non e' ovvia leggendo il ciclo.
     for (const body of ['', '{"error":"Not Found"}', GOOGLE_RETIRED_BODY, 'HTML della pagina 404 del provider']) {
+      assert.ok(!body.toLowerCase().includes('tokens_limit_reached'),
+        'il body non deve attivare il ramo 413, che precede sia il 404 sia il 402');
       assert.deepEqual(
         classifyNonRetryableError(404, body),
         classifyNonRetryableError(402, body),
         `404 e 402 devono coincidere sul body ${JSON.stringify(body.slice(0, 40))}`,
       );
     }
+    // E il controllo negativo dell'esenzione: sul body che attiva il 413 il
+    // risultato NON e' `markExhausted: true`, altrimenti il ciclo sopra sarebbe
+    // vero per la ragione sbagliata.
+    assert.equal(classifyNonRetryableError(404, '{"error":"tokens_limit_reached"}').markExhausted, false);
   });
 
-  it('i 12 endpoint della run 32169621635 costano 1 chiamata a testa, non 163', () => {
-    // Replay della distribuzione misurata: quante volte OGNI modello e' stato
-    // richiamato dopo aver gia' risposto 404 nella stessa run. Con il ramo
-    // riparato la prima risposta chiude la partita, quindi il totale eleggibile
-    // scende dal numero di round-trip al numero di modelli distinti.
-    const MISURATO = {
-      'Ministral-3B': 32, 'gpt-4.1-nano': 27, 'Phi-4-mini-reasoning': 24,
-      'Codestral-2501': 24, 'gpt-4.1-mini': 17, 'Llama-4-Scout-17B-16E-Instruct': 12,
-      'Llama-3.3-70B-Instruct': 12, 'Cohere-command-a': 11, 'Phi-4-mini-instruct': 1,
-      'Llama-4-Maverick-17B-128E-Instruct-FP8': 1, 'gpt-4o-mini': 1, 'gpt-4.1': 1,
+  it('la cascata smette di richiamare un endpoint morto dopo il PRIMO 404', () => {
+    // Il test precedente guarda una chiamata sola; questo guarda il ciclo, che
+    // e' dove il difetto costava. Simula la cascata come la fa `callLLM`: a ogni
+    // passata si prova ogni modello ANCORA eleggibile, l'endpoint risponde 404
+    // con body vuoto (il caso reale), e chi torna `markExhausted` esce dal giro.
+    //
+    // Attenzione a cosa NON e' asserito: non i conteggi della run (sono dati
+    // storici, non un comportamento di questa funzione), ma la FORMA della
+    // curva — costante nel numero di passate invece che lineare. Col vecchio
+    // ramo condizionato il totale cresce con le passate e l'asserzione cade.
+    const MODELLI = [
+      'Ministral-3B', 'gpt-4.1-nano', 'Phi-4-mini-reasoning', 'Codestral-2501',
+      'gpt-4.1-mini', 'Llama-4-Scout-17B-16E-Instruct', 'Llama-3.3-70B-Instruct',
+      'Cohere-command-a', 'Phi-4-mini-instruct', 'Llama-4-Maverick-17B-128E-Instruct-FP8',
+      'gpt-4o-mini', 'gpt-4.1',
+    ];
+    const cascata = (passate) => {
+      const esauriti = new Set();
+      let chiamate = 0;
+      for (let p = 0; p < passate; p++) {
+        for (const m of MODELLI) {
+          if (esauriti.has(m)) continue;
+          chiamate++;                                  // il round-trip vero
+          const r = classifyNonRetryableError(404, ''); // `[<m>] HTTP 404: ` e basta
+          if (r.markExhausted) esauriti.add(m);
+        }
+      }
+      return chiamate;
     };
-    const roundTrip = Object.values(MISURATO).reduce((a, b) => a + b, 0);
-    assert.equal(roundTrip, 163, 'baseline della run: 163 round-trip in 404');
 
-    // Il body vuoto e' quello vero: `[<modello>] HTTP 404: ` senza altro.
-    const esauriti = Object.keys(MISURATO)
-      .filter((m) => classifyNonRetryableError(404, '').markExhausted);
-    assert.equal(esauriti.length, Object.keys(MISURATO).length,
-      'ognuno dei 12 endpoint deve uscire dal giro al primo 404');
-    assert.ok(esauriti.length < roundTrip / 10,
-      `il costo per run passa da ${roundTrip} chiamate a ${esauriti.length}`);
+    assert.equal(cascata(1), MODELLI.length, 'la prima passata li prova tutti: e\' l\'informazione che serve');
+    assert.equal(cascata(14), MODELLI.length,
+      'dalla seconda passata in poi non si paga piu' + ' niente: il costo non deve dipendere dalle passate');
+    // La misura che ha aperto #449: 163 round-trip in una run. Il criterio del
+    // 402 nella STESSA run costava 2 chiamate per modello (36 su 9 modelli
+    // distinti + 18 skip silenziati), quindi l'ordine di grandezza atteso qui e'
+    // ~12-24 chiamate, non 163.
+    assert.ok(cascata(14) < 163 / 5,
+      `il costo per run deve crollare di un ordine di grandezza: ${cascata(14)} contro 163`);
   });
 
   it('402 e 401 restano non-ritentabili ed esauriti', () => {
