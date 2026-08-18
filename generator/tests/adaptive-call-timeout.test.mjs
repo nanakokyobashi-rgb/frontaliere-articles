@@ -30,9 +30,33 @@
  * `_callModel`, con la rete sostituita: prima si fanno rispondere in fretta
  * alcune chiamate (l'unica prova che il tetto accetta), poi si fa appendere la
  * successiva e si misura QUANDO muore. Senza la fix muore al numero del
- * chiamante; con la fix muore al tetto adattivo. E' la differenza che il
- * bug produce, quindi e' quella che il test misura — non la presenza di una
+ * chiamante; con la fix muore al tetto adattivo. E' la differenza che il bug
+ * produce, quindi e' quella che il test misura — non la presenza di una
  * costante.
+ *
+ * ── DUE COSE CHE UN FETCH FINTO ROMPE, E COME SONO CHIUSE ───────────────────
+ *
+ * 1. **L'event loop si svuota mentre la chiamata e' appesa.** Tutti i timer di
+ *    `_callModel` sono `unref()` di proposito (il cap duro e l'heartbeat non
+ *    devono tenere vivo il processo), e anche `AbortSignal.timeout()` e'
+ *    unref'd per contratto Node. Con la rete VERA resta comunque vivo il socket
+ *    del fetch; con un fetch finto non resta niente, il runner conclude che il
+ *    loop e' finito e su Node 22 uccide l'intero file con
+ *    «Promise resolution is still pending but the event loop has already
+ *    resolved» — quattro test rossi per un difetto solo. Il `keepAlive` qui
+ *    sotto e' un timer ref'd che rimpiazza esattamente l'handle che il fetch
+ *    finto non ha, e viene spento appena la chiamata si risolve: non sposta di
+ *    un millisecondo il momento in cui l'abort scatta, che e' l'unica cosa che
+ *    questo file misura. (Verificato: Node 26 in locale passava lo stesso, Node
+ *    22 del CI no. Il verde locale non era una prova.)
+ *
+ * 2. **La soglia scritta a mano e' una corsa fra due orologi.** L'asserzione
+ *    non confronta il tempo trascorso con una frazione fissa del numero del
+ *    chiamante — su un runner lento quel confronto si inverte e il test diventa
+ *    flaky. Confronta con il tetto REALMENTE applicato, che il codice espone su
+ *    `err.adaptiveTimeoutMs`, e la precondizione «il tetto guadagnato e' sotto
+ *    il numero del chiamante» e' verificata prima e fallisce con un messaggio
+ *    che dice che la macchina era troppo lenta, invece di dire il falso.
  *
  * Le tre garanzie di degrado sono verificate una per una sulla funzione pura,
  * perche' sono esattamente cio' che rende la fix sicura: prova sottile → il
@@ -59,6 +83,8 @@ const {
 const MODEL = 'groq/llama-3.1-8b-instant';
 /** Il numero del chiamante: cio' che si pagherebbe senza tetto adattivo. */
 const CALLER_TIMEOUT_MS = 8_000;
+/** Margine sopra il tetto applicato: copre lo scheduling, non una corsa. */
+const SLACK_MS = 2_000;
 
 let realFetch;
 /** 'fast' → risponde subito; 'hang' → non risponde mai, muore solo sull'abort. */
@@ -99,6 +125,20 @@ const call = () =>
     cache: false,
   });
 
+/**
+ * Rimpiazza l'handle di rete che il fetch finto non ha. Senza, l'event loop si
+ * svuota mentre la chiamata e' appesa (tutti i timer in gioco sono unref'd) e
+ * il runner cancella il file intero. Non ritarda l'abort: e' un timer vuoto.
+ */
+async function withLoopAlive(fn) {
+  const keepAlive = setInterval(() => {}, 25);
+  try {
+    return await fn();
+  } finally {
+    clearInterval(keepAlive);
+  }
+}
+
 describe('tetto di chiamata adattivo', () => {
   it('uccide la chiamata appesa al tetto guadagnato, non al numero del chiamante', async () => {
     resetState();
@@ -106,39 +146,52 @@ describe('tetto di chiamata adattivo', () => {
 
     // La prova: due risposte vere. Sotto AI_ADAPTIVE_TIMEOUT_MIN_SAMPLES il
     // tetto non ha titolo per dire niente, ed e' quella la prima garanzia.
-    await call();
-    await call();
+    await withLoopAlive(call);
+    await withLoopAlive(call);
 
     const observed = getCallLatencyStats()[MODEL];
     assert.ok(observed, 'le chiamate riuscite devono lasciare una misura di latenza');
     assert.ok(observed.samples >= 2, `attesi >= 2 campioni, visti ${observed.samples}`);
 
+    // Precondizione esplicita invece di una soglia a occhio: se la macchina e'
+    // cosi' lenta che il tetto guadagnato non sta sotto il numero del
+    // chiamante, il test lo DICE — non finge un verdetto sul codice.
+    const expectedCeiling = computeAdaptiveTimeoutMs(observed, CALLER_TIMEOUT_MS);
+    assert.ok(
+      expectedCeiling < CALLER_TIMEOUT_MS,
+      `ambiente troppo lento per questo test: massimo osservato ${observed.maxMs}ms → tetto ${expectedCeiling}ms, non sotto i ${CALLER_TIMEOUT_MS}ms del chiamante`,
+    );
+
     netMode = 'hang';
     const started = Date.now();
     let caught;
     try {
-      await call();
+      await withLoopAlive(call);
       assert.fail('la chiamata appesa doveva fallire');
     } catch (err) {
       caught = err;
     }
     const elapsed = Date.now() - started;
 
-    // Il tetto guadagnato qui e' max(150ms, 4 x latenza massima osservata), che
-    // su una rete sostituita resta ordini di grandezza sotto gli 8s del
-    // chiamante. Senza la fix questo blocco dura CALLER_TIMEOUT_MS.
-    assert.ok(
-      elapsed < CALLER_TIMEOUT_MS / 2,
-      `la chiamata appesa e' durata ${elapsed}ms: il tetto adattivo non e' stato applicato (il chiamante chiedeva ${CALLER_TIMEOUT_MS}ms)`,
-    );
+    // Questa e' la marcatura che il codice mette SOLO quando ha stretto lui il
+    // tetto: senza la fix non esiste, quindi da sola uccide il mutante — e non
+    // dipende da nessun orologio.
     assert.equal(
       caught?.adaptiveTimeoutClamped,
       true,
       'un timeout scattato sotto un tetto che abbiamo stretto NOI va marcato, altrimenti il circuit-breaker bandisce il modello sulla nostra congettura',
     );
+    assert.equal(
+      caught.adaptiveTimeoutMs,
+      expectedCeiling,
+      `il tetto applicato (${caught.adaptiveTimeoutMs}ms) doveva essere quello guadagnato (${expectedCeiling}ms)`,
+    );
+    // E il fatto comportamentale: si e' smesso di aspettare al tetto, non al
+    // numero del chiamante. Il confronto e' col tetto REALE piu' uno slack di
+    // scheduling, non con una frazione fissa degli 8s: cosi' non e' una corsa.
     assert.ok(
-      caught.adaptiveTimeoutMs < CALLER_TIMEOUT_MS,
-      `il tetto applicato (${caught.adaptiveTimeoutMs}ms) doveva essere sotto quello del chiamante`,
+      elapsed < expectedCeiling + SLACK_MS,
+      `la chiamata appesa e' durata ${elapsed}ms contro un tetto di ${expectedCeiling}ms: il tetto adattivo non e' stato applicato (il chiamante chiedeva ${CALLER_TIMEOUT_MS}ms)`,
     );
   });
 
