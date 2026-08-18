@@ -625,6 +625,248 @@ jobs:
           # of in tens of minutes; nothing sets these in CI.
           budget_s="${GENERATE_BUDGET_S:-3000}"
           hard_kill_s="${GENERATE_HARD_KILL_S:-2400}"
+
+          # ── IL WEDGE, E PERCHE' IL CAP DI DURATA NON LO VEDE ──────────────
+          #
+          # Misurato il 2026-08-18 sulle 69 run `failure` dal 13-08: 42 sono lo
+          # STESSO difetto, 26,6 ore in cinque giorni, e dal 16-08 e' l'unica
+          # causa di fallimento rimasta (17-08: 12 su 12; 18-08: 2 su 2). Le
+          # run campione sono 32077204181, 31867246321, 31858140066 (la prima,
+          # 15-08 02:02Z) e 32103362457 (l'ultima).
+          #
+          # LA FORMA DEL DIFETTO, con le tre prove che la fissano — tutte e tre
+          # su 42 run su 42:
+          #   1. il segnale e' SEMPRE SIGKILL, mai SIGTERM (42 «Killed», 0
+          #      «Terminated»), e l'intervallo inizio-sezione → kill sta fra
+          #      2459 e 2460s, cioe' hard_kill_s + il grace di --kill-after=60s
+          #      al secondo. Eppure ai-models.mjs registra un handler SIGTERM
+          #      che esce 143: il processo non l'ha eseguito per 60 secondi.
+          #   2. l'heartbeat da 60s di `_callModel` («⏳ … in-flight Ns») non
+          #      stampa mai (assente in 39 run su 42, mentre altrove nei log
+          #      compare 144 volte);
+          #   3. il cap duro interno «hard cap: no response» non scatta 0 volte
+          #      su 69, e non compare nessun AbortError/TimeoutError/ECONNRESET.
+          # Un timer JS che non parte, un handler di segnale che non gira e
+          # nessun errore di rete: l'event loop e' bloccato da lavoro SINCRONO.
+          #
+          # In 40 run su 42 il silenzio comincia subito dopo una riga
+          # `[prompt-budget]`, che e' un INDIZIO e non una localizzazione: quella
+          # riga e' su stderr, stdout e stderr verso una pipe sono scritti in
+          # modo asincrono e su canali distinti, l'ordinamento fra i due non e'
+          # garantito, e su SIGKILL cio' che e' ancora in coda si perde.
+          # «Ultima riga vista» non e' «ultimo punto eseguito» — ed e' la
+          # ragione per cui questo step ora prende uno STACK, da cui non si
+          # scappa, invece di far dedurre il punto dal log.
+          #
+          # PERCHE' NON SI ABBASSA `hard_kill_s`, che e' la mitigazione ovvia.
+          # E' stata misurata: su 530 run `success` vere (≥90s) le durate sono
+          # p50=460s, p75=704s, p90=1599s, p95=2493s. Un cap a 900s ucciderebbe
+          # 82 run sane su 530 (15,5%), uno a 1200s ne ucciderebbe 63 (11,9%).
+          # La durata NON separa i due regimi. Il SILENZIO si': su cinque run
+          # sane (32051739807, 32069883181, 32074009886, 32086523370 e una da
+          # 677s) il buco fra due righe di log consecutive sta fra 3 e 21s al
+          # p99, con un MASSIMO osservato di 182s; una run incastrata tace 2337s
+          # mediani. Piu' di un ordine di grandezza fra i due, e la soglia sotto
+          # e' 3,3x il massimo legittimo osservato.
+          #
+          # Quindi il cap di durata resta dov'e' — e' lui a coprire il caso
+          # «lento ma vivo» — e questo watchdog copre il caso «muto». Il wedge
+          # costa 10 minuti invece di 40: ~74% delle 26,6 ore.
+          #
+          # LA MISURA E' LA CRESCITA DI UN FILE, non un timestamp per riga: lo
+          # step produce fino a 5.500 righe e un `date` per riga sarebbe una
+          # spesa per ogni riga per osservare un evento che capita una volta.
+          # `wc -c` ogni 30s costa 80 letture in tutto il budget.
+          #
+          # Overridable come i due sopra, cosi' che
+          # generate-article-chain.test.mjs possa provare il kill per stallo in
+          # secondi invece che in dieci minuti; nulla li imposta in CI.
+          stall_s="${GENERATE_STALL_S:-600}"
+          stall_poll_s="${GENERATE_STALL_POLL_S:-30}"
+          stall_grace_s="${GENERATE_STALL_GRACE_S:-10}"
+
+          # Fuori dal workspace di proposito: `article_body_added` fa `git add
+          # -A`, quindi qualunque file diagnostico scritto sotto il repo
+          # finirebbe nel commit e su main. RUNNER_TEMP non e' in git.
+          diag_dir="${RUNNER_TEMP:-/tmp}/generate-diagnostics"
+          rm -rf "$diag_dir"
+          mkdir -p "$diag_dir"
+          stall_flag="$diag_dir/stalled"
+          stall_log="$diag_dir/attempt.log"
+          # Il client sta FUORI dalla cartella caricata: se ci stesse dentro,
+          # `if-no-files-found: ignore` non scatterebbe mai e ogni run
+          # caricherebbe un artifact con dentro solo lo strumento.
+          cdp_client="${RUNNER_TEMP:-/tmp}/cdp-stack.mjs"
+
+          # L'albero dei processi, foglie per prime. `ps -A -o pid=,ppid=` si
+          # comporta identico su Linux e su macOS (questi blocchi girano anche
+          # nei test in locale); `pgrep -P` no.
+          proc_tree() {
+            local root="$1" kid
+            for kid in $(ps -A -o pid= -o ppid= | awk -v p="$root" '$2 == p { print $1 }'); do
+              proc_tree "$kid"
+            done
+            printf '%s\n' "$root"
+          }
+
+          kill_tree() {
+            local sig="$1" root="$2" p
+            case "$root" in ''|0|*[!0-9]*) return 0 ;; esac
+            for p in $(proc_tree "$root"); do
+              kill "-$sig" "$p" 2>/dev/null || true
+            done
+          }
+
+          # ── PRENDERE LO STACK, PERCHE' LA CAUSA NON SI TROVA LEGGENDO ─────
+          #
+          # Il client CDP qui sotto e' la meta' che trasforma il prossimo wedge
+          # in una prova invece che in un silenzio. Sta qui dentro e non in
+          # scripts/ perche' e' inerte finche' il watchdog non scatta.
+          #
+          # VERIFICATO su node v22.23.2 (il `node-version: '22'` di questo
+          # workflow) contro un processo con l'event loop bloccato da un `while`
+          # sincrono, il 2026-08-18:
+          #   - `--report-on-signal --report-signal=SIGUSR2 --report-directory`
+          #     sono accettati, e con l'event loop LIBERO il report viene
+          #     scritto (header, javascriptStack, nativeStack, libuv, heap);
+          #   - con l'event loop BLOCCATO il report NON viene scritto: la
+          #     richiesta resta appesa e il file compare solo quando il loop
+          #     riparte. Misurato: 0 file dopo SIGUSR2 a loop bloccato, 1 file
+          #     appena il blocco finisce. Il report da solo non basta per QUESTO
+          #     difetto — che e' esattamente un loop che non riparte piu'.
+          #   - SIGUSR1 accende l'inspector ANCHE a loop bloccato (lo fa un
+          #     thread dedicato), e `Debugger.pause` restituisce i callFrame:
+          #     lo stack JS del frame incastrato, che e' cio' che serve.
+          # Quindi si mandano entrambi: SIGUSR2 copre il caso in cui il loop si
+          # sblocchi (il report porta anche stack nativo e handle libuv), il
+          # client CDP copre il wedge vero.
+          cat > "$cdp_client" <<'CDP_CLIENT'
+          const fs = await import('node:fs');
+          const outFile = process.argv[2];
+          const port = process.env.STALL_INSPECT_PORT || '9229';
+          const bail = (why) => {
+            try { fs.writeFileSync(outFile, `stack non catturato: ${why}\n`); } catch {}
+            process.exit(0);
+          };
+          setTimeout(() => bail('il client CDP non ha ricevuto Debugger.paused in 8s'), 8000);
+          let target;
+          try {
+            const res = await fetch(`http://127.0.0.1:${port}/json/list`);
+            [target] = await res.json();
+          } catch (e) {
+            bail(`inspector non raggiungibile: ${e && e.message}`);
+          }
+          if (!target || !target.webSocketDebuggerUrl) bail('nessun target inspector');
+          const ws = new WebSocket(target.webSocketDebuggerUrl);
+          const scriptUrls = new Map();
+          let id = 0;
+          const send = (method) => ws.send(JSON.stringify({ id: ++id, method, params: {} }));
+          ws.addEventListener('error', (e) => bail(`websocket: ${(e && e.message) || 'errore'}`));
+          ws.addEventListener('open', () => { send('Debugger.enable'); send('Debugger.pause'); });
+          ws.addEventListener('message', (ev) => {
+            const msg = JSON.parse(ev.data);
+            if (msg.method === 'Debugger.scriptParsed') {
+              scriptUrls.set(msg.params.scriptId, msg.params.url);
+              return;
+            }
+            if (msg.method !== 'Debugger.paused') return;
+            const frames = msg.params.callFrames.map((f) => {
+              const url = f.url || scriptUrls.get(f.location.scriptId) || '(sconosciuto)';
+              return `  at ${f.functionName || '(anonimo)'} (${url}:${f.location.lineNumber + 1}:${f.location.columnNumber + 1})`;
+            });
+            fs.writeFileSync(outFile, `stack JS al momento dello stallo — ${frames.length} frame\n${frames.join('\n')}\n`);
+            process.exit(0);
+          });
+          CDP_CLIENT
+
+          # I pid di create-article.mjs dentro l'albero del tentativo. Serve al
+          # campionamento e ai segnali: `timeout` NON va segnalato al posto suo
+          # (SIGUSR1/2 non sono fra quelli che rilancia, e li prenderebbe come
+          # terminazione, orfanando il figlio).
+          create_article_pids() {
+            local root="$1" p args out=""
+            for p in $(proc_tree "$root"); do
+              args="$(ps -o args= -p "$p" 2>/dev/null || true)"
+              case "$args" in
+                *create-article.mjs*) out="$out $p" ;;
+              esac
+            done
+            printf '%s' "$out"
+          }
+
+          # Il watchdog. Non fallisce mai lo step da solo: alza un flag e
+          # uccide, e chi classifica l'esito resta il codice dopo il ciclo.
+          stall_watchdog() {
+            local root="$1" last=-1 quiet=0 size p node_pids
+            while kill -0 "$root" 2>/dev/null; do
+              sleep "$stall_poll_s"
+              size="$(wc -c < "$stall_log" 2>/dev/null | tr -d ' ')"
+              [ -n "$size" ] || size=0
+
+              # ── LA TRAIETTORIA DELLA MEMORIA, dallo STESSO campione ────────
+              # Costa un `ps` ogni 30s e separa due ipotesi che il silenzio da
+              # solo confonde: un thrash del GC (major collection su heap
+              # saturo — congela l'event loop, non serve SIGTERM, cede solo a
+              # SIGKILL: spiega da sola tutti e tre i segnali osservati) tiene
+              # l'RSS incollato al tetto con la CPU al 100%; un blocco in
+              # codice nativo lascia l'RSS fermo e la CPU a zero. Il workflow
+              # non imposta NODE_OPTIONS ne' --max-old-space-size (verificato:
+              # zero occorrenze in questo file), quindi il tetto e' quello di
+              # default del runner ed e' raggiungibile.
+              # Campionato da FUORI il processo di proposito: un sampler dentro
+              # (worker thread) andrebbe iniettato nel generatore, che questa PR
+              # non tocca — e un worker non vede comunque l'heap del main.
+              [ -s "$diag_dir/resources.log" ] || \
+                echo "# ts elapsed log_bytes | pid rss_kb cpu% state" > "$diag_dir/resources.log"
+              for p in $(create_article_pids "$root"); do
+                echo "$(date -u +%H:%M:%SZ) ${SECONDS}s ${size} | $(ps -o pid=,rss=,%cpu=,state= -p "$p" 2>/dev/null | tr -s ' ')" \
+                  >> "$diag_dir/resources.log" 2>/dev/null || true
+              done
+
+              if [ "$size" != "$last" ]; then
+                last="$size"
+                quiet=0
+                continue
+              fi
+              quiet=$(( quiet + stall_poll_s ))
+              [ "$quiet" -lt "$stall_s" ] && continue
+
+              # Il flag PRIMA di qualunque segnale: da qui in poi qualunque
+              # cosa succeda al processo, l'esito e' «stallo» e non «kill duro».
+              : > "$stall_flag"
+              echo "::warning::watchdog: nessun output per ${quiet}s (soglia ${stall_s}s) sulla sezione ${sec} — l'event loop e' bloccato, non e' lentezza. Prendo lo stack e uccido."
+
+              node_pids="$(create_article_pids "$root")"
+              for p in $node_pids; do kill -USR2 "$p" 2>/dev/null || true; done
+              for p in $node_pids; do kill -USR1 "$p" 2>/dev/null || true; done
+              sleep 2
+              node "$cdp_client" "$diag_dir/stack-${sec}-${tried}.txt" \
+                >> "$diag_dir/cdp-client.log" 2>&1 || true
+
+              # Il grace serve al report di SIGUSR2, che e' scritto dal
+              # processo stesso: ucciderlo subito butterebbe via l'unica cosa
+              # per cui e' stato chiesto.
+              sleep "$stall_grace_s"
+              kill_tree KILL "$root"
+              return 0
+            done
+          }
+
+          watch_pid=""
+          # Il watchdog non sopravvive mai allo step: muore col tentativo (qui
+          # sotto) e comunque all'uscita, qualunque ramo la produca.
+          stall_atexit() {
+            kill_tree KILL "${watch_pid:-}"
+            # Il log del tentativo e la traiettoria si caricano solo quando
+            # servono: su una run che ha prodotto non resta niente da caricare,
+            # e l'artifact sparisce da solo con `if-no-files-found: ignore`.
+            if [ ! -f "$stall_flag" ] && [ "${produced:-false}" = "true" ]; then
+              rm -f "$stall_log" "$diag_dir/resources.log"
+            fi
+            return 0
+          }
+          trap stall_atexit EXIT
+
           # Never start an attempt that cannot finish. A sixteenth of the budget
           # (~3 minutes on the defaults) is the floor; it also keeps the cap
           # strictly positive, and that matters — `timeout 0s` means NO limit,
@@ -689,15 +931,49 @@ jobs:
             tried=$(( tried + 1 ))
             echo "── attempt $tried: section=$sec cap=${cap}s"
 
+            # Il tentativo gira in background con l'output duplicato su
+            # `$stall_log`: e' quel file a crescere (o a non crescere) che il
+            # watchdog campiona. `$!` e' il pid di `timeout`, quindi `wait` piu'
+            # sotto restituisce il suo codice di uscita esattamente come prima.
+            # I flag `--report-*` vanno PRIMA del path dello script, e non
+            # cambiano la forma degli argomenti di `timeout` (tre, come prima).
+            rm -f "$stall_flag"
+            : > "$stall_log"
             if [ -n "${SOURCE_URL:-}" ]; then
               timeout --signal=TERM --kill-after=60s "${cap}s" \
-                node generator/scripts/create-article.mjs --section="$sec" "$SOURCE_URL"
+                node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
+                generator/scripts/create-article.mjs --section="$sec" "$SOURCE_URL" \
+                > >(tee -a "$stall_log") 2>&1 &
             else
               timeout --signal=TERM --kill-after=60s "${cap}s" \
-                node generator/scripts/create-article.mjs --section="$sec"
+                node --report-on-signal --report-signal=SIGUSR2 --report-directory="$diag_dir" \
+                generator/scripts/create-article.mjs --section="$sec" \
+                > >(tee -a "$stall_log") 2>&1 &
             fi
+            attempt_pid=$!
+            stall_watchdog "$attempt_pid" &
+            watch_pid=$!
+            wait "$attempt_pid"
             rc=$?
+            # Il watchdog muore col tentativo, e con lui il suo `sleep`: un
+            # figlio rimasto vivo terrebbe aperto lo stdout dello step.
+            kill_tree KILL "$watch_pid"
+            wait "$watch_pid" 2>/dev/null || true
+            watch_pid=""
 
+            # ── LO STALLO PRIMA DEL KILL DURO, e l'ordine e' obbligatorio ────
+            # Un kill del watchdog esce 137 come il grace di `timeout`, quindi
+            # il codice di uscita da solo non distingue i due difetti. Li
+            # distingue il flag, che il watchdog alza prima di toccare il
+            # processo. Sono due patologie diverse — «bloccato» contro «lento
+            # oltre il cap» — e il prossimo lettore deve poterle contare
+            # separatamente nei log, non stimarle.
+            if [ -f "$stall_flag" ]; then
+              echo "::warning::create-article.mjs muto per ${stall_s}s sulla sezione $sec — ucciso dal watchdog dello stallo, mentre il cap di durata (${cap}s) non era nemmeno vicino"
+              all_declared=false
+              [ -n "$undeclared_why" ] || undeclared_why="stallo: nessun output per ${stall_s}s sulla sezione $sec (kill del watchdog, exit $rc) — l'event loop e' bloccato da lavoro sincrono, ed e' un difetto DIVERSO dal kill duro per budget scaduto. Lo stack e' nell'artifact generate-article-diagnostics."
+              break
+            fi
             if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then
               # A provider that stalls stalls for the other section too, and the
               # budget is already gone. Stop; do not spend the job's remaining
@@ -807,6 +1083,37 @@ jobs:
           # denominatore per distinguere una notte secca da un guasto.
           echo "nessun articolo, ma ogni tentativo ha dichiarato una ragione legittima (exit 4) — verde"
           exit 0
+
+      # ── LO STACK CHE IL SILENZIO NON HA MAI STAMPATO ────────────────────────
+      #
+      # Il wedge ha lasciato 42 run identiche e nessuna prova: heartbeat assente,
+      # nessun errore, nessun handler eseguito. Da qui in poi lascia dei file.
+      # `if: always()` perche' lo step sopra e' ROSSO proprio nel caso che
+      # interessa; senza, l'unica volta che l'artifact serve non verrebbe
+      # caricato.
+      #
+      # `if-no-files-found: ignore` e non `warn`: sulla stragrande maggioranza
+      # delle run la cartella e' vuota per costruzione (il log del tentativo
+      # viene rimosso quando l'articolo c'e'), e un warning per run insegna solo
+      # a ignorare i warning.
+      #
+      # Il path e' sotto `runner.temp` e NON sotto il workspace: `git add -A`
+      # nello step sopra porterebbe un report diagnostico dritto dentro il
+      # commit e su main.
+      #
+      # Si carica la CARTELLA, senza filtri e senza `tail`: il report di Node e'
+      # un JSON solo, e le sue sezioni `javascriptHeap` e `resourceUsage` sono
+      # esattamente quelle che distinguono un thrash del GC da un blocco in
+      # codice nativo. Un filtro qui sarebbe la cecita' che questo step esiste
+      # per togliere.
+      - name: Upload wedge diagnostics (stack, report, log del tentativo)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: generate-article-diagnostics-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/generate-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
 
       # ── VALIDARE PRIMA DI SCRIVERE (issue #267) ─────────────────────────────
       #

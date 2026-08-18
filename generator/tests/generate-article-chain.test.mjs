@@ -38,7 +38,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, mkdirSync, rmSync, chmodSync, existsSync, readdirSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -97,6 +97,10 @@ function runGenerateStep({
   plan = [],
   budget = null,
   hardKill = null,
+  stall = null,
+  stallPoll = null,
+  stallGrace = null,
+  talkForS = 0,
 } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-chain-'));
   try {
@@ -122,7 +126,17 @@ exec "$@"
 `;
     // create-article.mjs. Scrive nell'indice finto quando il piano dice che ha
     // prodotto, cosi' che il probe `git diff --cached --diff-filter=A` lo veda.
+    // `trap '' USR1 USR2`: il watchdog dello stallo manda quei due segnali al
+    // processo prima di ucciderlo, e per bash nudo la loro azione di default e'
+    // TERMINARE — lo stub morirebbe li', prima del kill, e il test misurerebbe
+    // la cosa sbagliata. Il `node` vero non ha questo problema: li gestisce (il
+    // primo accende l'inspector, il secondo chiede il report diagnostico).
+    // La riga su stdout e' il segnale che il watchdog campiona: il log cresce
+    // una volta e poi tace, che e' esattamente la forma del wedge in
+    // produzione.
     const nodeStub = `#!/usr/bin/env bash
+trap '' USR1 USR2
+echo "[prompt-budget] stub in esecuzione"
 n=0
 [ -f "${calls}" ] && n=$(cat "${calls}")
 n=$((n + 1))
@@ -132,6 +146,9 @@ line="$(sed -n "\${n}p" "${planFile}")"
 [ -z "$line" ] && line="0 0 0"
 read -r rc prod slp <<< "$line"
 [ -n "\${slp:-}" ] && [ "$slp" != "0" ] && sleep "$slp"
+talk="\${TALK_FOR_S:-0}"
+i=0
+while [ "$i" -lt "$talk" ]; do sleep 1; echo "[stub] riga $i"; i=$((i + 1)); done
 if [ "$prod" = "1" ]; then echo "content/blog-body/it/articolo-$n.ts" >> "${staged}"; fi
 exit "$rc"
 `;
@@ -151,6 +168,7 @@ exit 0
 
     const script = path.join(dir, 'step.sh');
     writeFileSync(script, GENERATE_RUN);
+    const startedAt = Date.now();
 
     // ── PERCHE' NON PIU' `execFileSync` NUDO (issue #313 / #348) ─────────────
     // `execFileSync` LANCIA su uscita non-zero, e da quando lo step applica la
@@ -170,10 +188,20 @@ exit 0
         EVENT_NAME: event,
         SOURCE_URL: url,
         GITHUB_OUTPUT: ghOutput,
+        // Le diagnostiche dello step vanno sotto RUNNER_TEMP. Senza questa
+        // riga finirebbero in /tmp/generate-diagnostics, condiviso fra i file
+        // di test che `node --test` puo' eseguire in parallelo — e il primo
+        // step che parte fa `rm -rf` di quella cartella.
+        RUNNER_TEMP: dir,
+        TALK_FOR_S: String(talkForS),
         ...(budget === null ? {} : { GENERATE_BUDGET_S: String(budget) }),
         ...(hardKill === null ? {} : { GENERATE_HARD_KILL_S: String(hardKill) }),
+        ...(stall === null ? {} : { GENERATE_STALL_S: String(stall) }),
+        ...(stallPoll === null ? {} : { GENERATE_STALL_POLL_S: String(stallPoll) }),
+        ...(stallGrace === null ? {} : { GENERATE_STALL_GRACE_S: String(stallGrace) }),
       },
     });
+    const elapsedMs = Date.now() - startedAt;
 
     const outputs = Object.fromEntries(
       readFileSync(ghOutput, 'utf8')
@@ -187,7 +215,18 @@ exit 0
     const caps = existsSync(capsFile)
       ? readFileSync(capsFile, 'utf8').split('\n').filter(Boolean)
       : [];
-    return { outputs, invocations, caps, stdout: spawned.stdout || '', status: spawned.status };
+    const diagFiles = existsSync(path.join(dir, 'generate-diagnostics'))
+      ? readdirSync(path.join(dir, 'generate-diagnostics'))
+      : [];
+    return {
+      outputs,
+      invocations,
+      caps,
+      diagFiles,
+      elapsedMs,
+      stdout: spawned.stdout || '',
+      status: spawned.status,
+    };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -338,7 +377,153 @@ test('i default restano quelli del workflow, non quelli del test', () => {
   const gen = extractRun('Generate the article');
   assert.match(gen, /budget_s="\$\{GENERATE_BUDGET_S:-3000\}"/);
   assert.match(gen, /hard_kill_s="\$\{GENERATE_HARD_KILL_S:-2400\}"/);
+  // 600s = 3,3x il silenzio legittimo piu' lungo mai osservato (182s su cinque
+  // run sane campionate il 2026-08-18), contro i 2337s mediani di una run
+  // incastrata. Abbassarlo sotto ~200s rimette in gioco le run sane; alzarlo
+  // ricompra i quaranta minuti che questa soglia esiste per non pagare.
+  assert.match(gen, /stall_s="\$\{GENERATE_STALL_S:-600\}"/);
+  assert.match(gen, /stall_poll_s="\$\{GENERATE_STALL_POLL_S:-30\}"/);
+  assert.match(gen, /stall_grace_s="\$\{GENERATE_STALL_GRACE_S:-10\}"/);
   assert.match(WF, /timeout-minutes: 60/);
+});
+
+// ── IL WEDGE: ucciso dal SILENZIO, non dalla durata ──────────────────────────
+//
+// 42 run su 69 `failure` dal 13-08 sono lo stesso difetto: il processo tace,
+// l'heartbeat da 60s non stampa, nessun handler di segnale gira, e a ucciderlo
+// e' solo il SIGKILL del grace di `timeout`, 2459s dopo. Costo misurato: 26,6
+// ore in cinque giorni. Il cap di durata non puo' vederlo — su 530 run sane il
+// p95 e' 2493s, quindi qualunque cap che prenda il wedge presto uccide run
+// buone. Il silenzio invece separa i due regimi di piu' di un ordine di
+// grandezza (182s peggiore legittimo contro 2337s mediani nel wedge).
+//
+// Questi test guidano la soglia in secondi, come gia' fanno budget e cap.
+
+test('un processo muto viene ucciso dallo STALLO, non dal cap di durata', () => {
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    // Stampa una riga e poi dorme 120s: il log cresce una volta e tace. E' la
+    // forma esatta del wedge, in scala.
+    plan: ['0 0 120'],
+    budget: 600,
+    hardKill: 300,
+    stall: 2,
+    stallPoll: 1,
+    stallGrace: 1,
+  });
+
+  // 1. E' morto molto prima del cap di durata, che era 300s.
+  assert.ok(
+    r.elapsedMs < 60_000,
+    `ucciso dopo ${Math.round(r.elapsedMs / 1000)}s: senza watchdog avrebbe atteso i 300s del cap`,
+  );
+  assert.ok(r.elapsedMs > 2_000, 'ucciso prima ancora della soglia: la soglia non sta misurando niente');
+
+  // 2. Il cap passato a `timeout` non e' stato toccato: la fix aggiunge un
+  //    osservatore, non abbassa il budget — abbassarlo ucciderebbe il 15,5%
+  //    delle run sane (82 su 530 a 900s).
+  assert.equal(r.caps[0], '300s', 'il cap di durata deve restare quello, intatto');
+
+  // 3. L'esito e' rosso e la ragione e' NOMINATA come stallo, distinta dal kill
+  //    duro per budget: escono entrambi 137, quindi il codice di uscita da solo
+  //    non li separa e il prossimo lettore non potrebbe contarli.
+  assert.equal(r.status, 1, 'nessun articolo e nessuna ragione legittima: rosso');
+  assert.match(r.stdout, /watchdog: nessun output per \d+s/);
+  assert.match(r.stdout, /::error::.*stallo: nessun output per 2s/);
+  assert.ok(
+    !/kill duro dopo/.test(r.stdout),
+    'un kill per stallo non deve mai essere raccontato come kill duro per budget scaduto',
+  );
+
+  // 4. Non ha nemmeno provato l'altra sezione: il muro e' lo stesso, e spendere
+  //    il resto del job contro di esso e' quello che costava 40 minuti.
+  const attempts = r.invocations.filter((l) => l.includes('create-article.mjs'));
+  assert.equal(attempts.length, 1);
+
+  // 5. La diagnostica c'e' davvero: il log del tentativo e la traiettoria di
+  //    RSS/CPU restano su disco per l'artifact. Senza, il prossimo wedge
+  //    lascerebbe di nuovo solo silenzio.
+  assert.ok(r.diagFiles.includes('stalled'), `il flag dello stallo manca: ${r.diagFiles.join(', ')}`);
+  assert.ok(r.diagFiles.includes('attempt.log'), `il log del tentativo manca: ${r.diagFiles.join(', ')}`);
+  assert.ok(r.diagFiles.includes('resources.log'), `la traiettoria RSS/CPU manca: ${r.diagFiles.join(', ')}`);
+});
+
+test('una run che parla non viene toccata dal watchdog, e non lascia diagnostiche', () => {
+  // La meta' che protegge dal falso positivo: soglia di 2s, ma lo stub stampa
+  // ogni secondo per 4s. Una run sana e' lenta, non muta.
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['0 1 0'],
+    talkForS: 4,
+    budget: 600,
+    hardKill: 300,
+    stall: 2,
+    stallPoll: 1,
+    stallGrace: 1,
+  });
+  assert.equal(r.outputs.article, 'true', 'una run che parla deve arrivare in fondo');
+  assert.equal(r.status, 0);
+  assert.ok(!/watchdog: nessun output/.test(r.stdout), 'il watchdog ha ucciso una run viva');
+  assert.ok(!r.diagFiles.includes('stalled'));
+  assert.ok(
+    !r.diagFiles.includes('attempt.log'),
+    'su una run che ha prodotto non si carica niente: l\'artifact deve restare vuoto',
+  );
+});
+
+test('il watchdog non sopravvive allo step, e non lo fa fallire da solo', () => {
+  const gen = extractRun('Generate the article');
+  assert.match(gen, /trap stall_atexit EXIT/, 'senza trap un watchdog resta orfano dopo un exit anticipato');
+  assert.match(gen, /kill_tree KILL "\$watch_pid"/, 'il watchdog va ucciso con il tentativo, con tutto il suo albero');
+  // Il verdetto sull'esito resta dove stava: il watchdog alza un flag, non esce
+  // mai per conto proprio.
+  const watchdogBody = gen.slice(gen.indexOf('stall_watchdog() {'), gen.indexOf('watch_pid=""'));
+  assert.ok(!/\bexit [0-9]/.test(watchdogBody), 'il watchdog non deve poter terminare lo step da solo');
+});
+
+test('lo stallo si valuta PRIMA del kill duro: escono entrambi 137', () => {
+  const gen = extractRun('Generate the article');
+  const stallAt = gen.indexOf('if [ -f "$stall_flag" ]; then');
+  const hardAt = gen.indexOf('if [ "$rc" = "124" ] || [ "$rc" = "137" ]; then');
+  assert.notEqual(stallAt, -1, 'il ramo dello stallo e\' sparito');
+  assert.notEqual(hardAt, -1);
+  assert.ok(
+    stallAt < hardAt,
+    'con il kill duro valutato per primo ogni stallo verrebbe contato come budget scaduto, ' +
+      'e i due difetti tornerebbero indistinguibili nei log',
+  );
+});
+
+test('le diagnostiche del wedge si caricano sempre, e da fuori il workspace', () => {
+  const step = WF.slice(WF.indexOf('      - name: Upload wedge diagnostics'), WF.indexOf('      - name: Guard'));
+  assert.ok(step, 'lo step che carica le diagnostiche e\' sparito');
+  assert.match(step, /if: always\(\)/, 'lo step sopra e\' ROSSO proprio quando l\'artifact serve');
+  assert.match(step, /uses: actions\/upload-artifact@v4/);
+  assert.match(
+    step,
+    /path: \$\{\{ runner\.temp \}\}\/generate-diagnostics/,
+    'sotto il workspace il `git add -A` dello step di generazione porterebbe un report diagnostico su main',
+  );
+  assert.match(step, /if-no-files-found: ignore/);
+  // Nessun filtro, nessun tail: `javascriptHeap` e `resourceUsage` del report
+  // sono cio' che distingue un thrash del GC da un blocco in codice nativo.
+  assert.ok(!/\btail\b|head -/.test(step), 'un troncamento qui butta via proprio le sezioni diagnostiche');
+});
+
+test('il generatore gira con i flag di report diagnostico', () => {
+  const gen = extractRun('Generate the article');
+  assert.match(gen, /--report-on-signal --report-signal=SIGUSR2 --report-directory="\$diag_dir"/);
+  // I flag vanno PRIMA del path dello script, o node li passerebbe allo script.
+  const line = gen.split('\n').find((l) => l.includes('--report-on-signal'));
+  assert.ok(
+    gen.indexOf('--report-directory') < gen.indexOf('generator/scripts/create-article.mjs'),
+    `i flag di node devono precedere lo script: ${line}`,
+  );
+  // Il report da solo NON basta per questo difetto (misurato su node v22.23.2:
+  // a event loop bloccato non viene scritto), quindi lo stack arriva
+  // dall'inspector — che SIGUSR1 accende anche a loop bloccato.
+  assert.match(gen, /kill -USR1/, 'senza SIGUSR1 non c\'e\' inspector, e senza inspector non c\'e\' stack');
+  assert.match(gen, /Debugger\.pause/, 'il client CDP e\' la sola meta\' che produce lo stack sotto wedge');
 });
 
 // ── La condizione di stop resta quella progettata ─────────────────────────────

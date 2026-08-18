@@ -197,3 +197,30 @@ test('generate-article: la mutua esclusione resta, ma sul job che scrive', () =>
     'senza `if:` il gate calcola un output che nessuno legge',
   );
 });
+
+// ── Il watchdog dello stallo (2026-08-18) NON sostituisce il tetto del job ───
+//
+// Dal 15-08 il difetto dominante di questo workflow è un wedge: il processo
+// tace, nessun timer JS parte, nessun handler di segnale gira, e solo SIGKILL
+// lo chiude — 42 run su 69 `failure`, 26,6 ore in cinque giorni. La fix è un
+// watchdog sul SILENZIO dentro lo step «Generate the article», e la tentazione
+// che segue sempre una fix così è togliere i cap che ora «non servono più».
+//
+// Servono, e coprono classi diverse: il watchdog vive DENTRO la shell dello
+// step e non può vedere nulla che uccida quella shell o che si incastri prima
+// (npm ci, il checkout, l'action del fallback Haiku). `timeout-minutes` è
+// l'unico strato che GitHub applica da fuori, e come `on:`/`concurrency:` non
+// si esegue mai: se sparisce non produce un errore, produce una run appesa
+// fino ai 6 ore di default del runner.
+test('generate-article: il job `generate` conserva il proprio timeout-minutes', () => {
+  const gen = jobBlock(GA, 'generate');
+  assert.ok(gen, 'job `generate` non trovato');
+  assert.match(
+    gen,
+    /timeout-minutes: 60/,
+    'Il tetto del job è sparito. Il watchdog dello stallo copre il processo di generazione, non ' +
+      'la shell che lo lancia né gli step prima: senza questa riga una run incastrata fuori da ' +
+      'quello step resta appesa fino al default di GitHub (6h), e con `cancel-in-progress: false` ' +
+      'tiene il gruppo di concurrency per tutto il tempo.',
+  );
+});

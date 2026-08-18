@@ -253,10 +253,19 @@ function runGenerateBlock({
         SOURCE_URL: '',
         EVENT_NAME: 'schedule',
         GITHUB_OUTPUT: outFile,
+        // Le diagnostiche del watchdog dello stallo vanno sotto RUNNER_TEMP, e
+        // lo step ne fa `rm -rf` all'avvio: senza questa riga sarebbero
+        // /tmp/generate-diagnostics per tutti, cioe' una cartella condivisa fra
+        // i file di test che `node --test` esegue in parallelo.
+        RUNNER_TEMP: dir,
         // Secondi invece di decine di minuti: il blocco stesso li espone per
         // rendere l'aritmetica del budget guidabile da un test.
         GENERATE_BUDGET_S: budgetS,
         GENERATE_HARD_KILL_S: '32',
+        // Nessuno di questi scenari e' uno stallo: lo stub esce subito. La
+        // soglia resterebbe comunque a 600s, ma fissarla qui rende il file
+        // indipendente dal default.
+        GENERATE_STALL_S: '600',
       },
     });
     return {
