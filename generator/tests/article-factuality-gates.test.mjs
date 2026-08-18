@@ -701,6 +701,23 @@ describe('checkFabricatedNormAcronyms', () => {
     )).toEqual([]);
   });
 
+  // Stesso difetto di `legg[ei]`/`lois?`, riaperto da un terzo lato della
+  // stessa alternanza: `federal\s+act`, `act\s+on` e `law\s+on` non
+  // chiudevano con `\b` e matchavano come PREFISSO di frasi ordinarie senza
+  // alcun legame con una citazione di norma — «federal action plan», «will
+  // act only if requested», «this law only concerns residents».
+  it('leaves the bank LCL alone even when a nearby word merely starts with act-/law-', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL offers a federal action plan discount for cross-border commuters banking in Switzerland.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL support staff will act only if requested by the cross-border commuter opening an account.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL notes that this law only concerns residents opening a new account in Switzerland.',
+    )).toEqual([]);
+  });
+
   // Il requisito di contesto non deve diventare una scappatoia. Se il testo
   // nomina PRIMA la banca e POI fabbrica la legge, il gate deve scattare: con
   // una `re.exec` a match singolo la prima occorrenza consumava l'unico match
