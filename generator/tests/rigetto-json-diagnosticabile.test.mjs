@@ -194,11 +194,24 @@ describe('la riga di rigetto attribuisce la famiglia senza riprodurre l\'inciden
 });
 
 describe('il ramo di rigetto di create-article.mjs resta parlante', () => {
-  /** Il blocco `if (!itContent) { … }`, ritagliato dal sorgente. */
+  /**
+   * Il blocco `if (!itContent) { … }` di callLLM(), ritagliato dal sorgente.
+   *
+   * Le ancore sono cambiate il 2026-08-18 e vale la pena dire perche', perche'
+   * il test ha fatto ESATTAMENTE il suo mestiere: la fix del gate di REGOLA #0
+   * ha spostato `missing.push('content.it non normalizzabile')` dentro
+   * ./lib/body2-payload-verdict.mjs (dove ora vive la classificazione, per
+   * poterla eseguire dai test senza `npm ci`) e ha sciolto il `} else {` in un
+   * secondo `if`. Le vecchie ancore sono sparite dal file, e invece di passare
+   * a vuoto il ritaglio ha fallito rumorosamente, come progettato.
+   *
+   * Le nuove reggono lo stesso invariante — la diagnostica del ramo muto — su
+   * due ancore che appartengono al ramo e non alla sua forma sintattica.
+   */
   function ramoNonNormalizzabile() {
-    const a = SRC.indexOf("missing.push('content.it non normalizzabile');");
+    const a = SRC.indexOf('// Previously swallowed silently');
     assert.notEqual(a, -1, 'ancora iniziale non trovata — aggiornare questo test');
-    const b = SRC.indexOf('      } else {', a);
+    const b = SRC.indexOf('      if (missing.length > 0) {', a);
     assert.notEqual(b, -1, 'ancora finale non trovata — aggiornare questo test');
     const blocco = SRC.slice(a, b);
     assert.ok(blocco.length > 200, `ritaglio troppo corto (${blocco.length}) — ancore sbagliate`);

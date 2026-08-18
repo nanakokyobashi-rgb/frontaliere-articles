@@ -143,7 +143,12 @@ import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
-import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
+import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
+// Il verdetto sul payload di generazione (normalizzatore incluso) vive in un
+// modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
+// e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
+// codice della produzione invece di una copia. Vedi l'intestazione del modulo.
+import { REQUIRED_IT_BODY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -4168,7 +4173,6 @@ async function findStockImageCandidates(data, count = 4) {
   return candidates.slice(0, count);
 }
 
-const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
 
 /**
  * JSON-Schema for the primary-locale article generation call.
@@ -4367,33 +4371,6 @@ function buildArticleJsonSchema(primaryLocale = 'it', part = 'full') {
       },
     },
   };
-}
-
-function normalizeItalianContentFromPayload(payload, locale = 'it') {
-  const content = payload?.content;
-  const candidates = [];
-
-  if (content && typeof content === 'object') {
-    if (content[locale] && typeof content[locale] === 'object') candidates.push(content[locale]);
-    candidates.push(content);
-  }
-  candidates.push(payload);
-
-  for (const candidate of candidates) {
-    if (!candidate || typeof candidate !== 'object') continue;
-    const block = {};
-    let hasAnyField = false;
-
-    for (const field of REQUIRED_IT_BODY_FIELDS) {
-      const value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (value) hasAnyField = true;
-      block[field] = value;
-    }
-
-    if (hasAnyField) return block;
-  }
-
-  return null;
 }
 
 function validateItalianPayload(contentIt, locale = 'it') {
@@ -5367,39 +5344,6 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
 // The LLM understands context ("73,2% dei frontalieri" is likely fabricated vs
 // "5,3% AVS" is a real rate) far better than regex pattern matching.
 
-// ── LLM JSON repair (handles common LLM output quirks) ────────────────
-// Why: GitHub Models / Groq / Mistral occasionally emit markdown bold
-// markers (`**` / `***`) between JSON properties instead of commas, or
-// wrap the payload in ```json fences, or stick a preamble before the
-// opening `{`, or echo a quoted phrase from the source text unescaped
-// (e.g. a title like `..."tassa sulla salute"...`) which desyncs naive
-// quote-toggle string tracking into `Unterminated string in JSON`. The
-// string-repair walk (preserve asterisks INSIDE quoted strings — markdown
-// bold in body1/body2 is load-bearing — replace stray `*` OUTSIDE strings
-// with a comma, escape unescaped inner quotes) lives in
-// ./lib/llm-json-repair.mjs, shared with batch-add-faq-to-articles.mjs's
-// repairJsonArray. Truncated payloads still throw — callers detect that
-// via `parseErr.message` and retry with a larger `maxTokens`.
-function repairLlmJson(raw) {
-  let c = stripCodeFences(raw);
-  const start = c.indexOf('{');
-  if (start !== -1) {
-    // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
-    // so trailing LLM prose or a foreign '}' from an interior nested object does not
-    // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
-    // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
-    const closeIdx = findMatchingClose(c, start, true);
-    if (closeIdx !== -1) {
-      c = c.slice(start, closeIdx + 1);
-    } else {
-      const end = c.lastIndexOf('}');
-      if (end > start) c = c.slice(start, end + 1);
-    }
-  }
-  const out = fixJsonStringBody(c, { fixAsterisks: true });
-  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
-}
-
 // ── LLM call with body2 validation (model fallback via centralized ai-models.mjs) ──
 async function callLLM(messages, opts = {}) {
   const maxBody2Retries = 5;
@@ -5443,15 +5387,53 @@ async function callLLM(messages, opts = {}) {
       try {
         repaired = repairLlmJson(result);
         parsed = JSON.parse(repaired);
-        itContent = normalizeItalianContentFromPayload(parsed);
       } catch (e) {
         parseErr = e;
-        itContent = null;
       }
 
-      const missing = [];
+      // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
+      // vive la regola, ed e' li' che il test la esegue (questo file non e'
+      // importabile senza `npm ci`, vedi l'intestazione del modulo).
+      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr });
+      itContent = _verdictContent;
+
+      // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
+      //
+      // Il prompt ORDINA al modello di rifiutare con
+      // `{"abort_topical_relevance": true, "reason": "…"}` quando la fonte non
+      // ha un vero aggancio frontaliere (difesa dalla classe di allucinazione
+      // «Malpensa»). Il chiamante sa gestire quella forma — il ramo
+      // «REGOLA #0 abort gate» piu' sotto la conta in RUN_REPORT.topicGateAborts
+      // e alza `err.topicGateAbort` — ma prima del 2026-08-18 non la vedeva mai
+      // sul percorso della chiamata unica: `normalizeItalianContentFromPayload`
+      // torna `null` su un abort (il contenuto E' null), e quel `null` cadeva
+      // dritto nel ramo «non normalizzabile».
+      //
+      // Costo misurato, run 32175400548 del 2026-08-18 19:15:09Z sulla sezione
+      // svizzera: `claude-cli/haiku` ha risposto con un abort conforme in 484
+      // caratteri, e la run ha stampato `content.it non normalizzabile
+      // (tentativo 1/5)` e rigenerato — quattro chiamate in piu' da 60-240 s
+      // sul modello che dopo l'evaporazione del free tier e' l'unico percorso
+      // affidabile, quattro `recordModelContentFailure()` contro un modello che
+      // aveva risposto BENE, e la sezione chiusa con «no article generated».
+      // Senza articolo non c'e' push su `content/**`, quindi la catena
+      // auto-invocante non riparte: si aspetta il prossimo `schedule` (:07/:37).
+      //
+      // `return result` e non un throw: la stringa grezza risale al chiamante
+      // esattamente com'e', e il ramo abort che gia' esiste la riconosce e la
+      // classifica. Cosi' l'esito dichiarato resta UNO SOLO, in un posto solo.
+      //
+      // Nessun `recordModelContentFailure` E nessun `recordModelContentSuccess`:
+      // il punteggio in Firestore ordina i modelli per qualita' del CONTENUTO, e
+      // un abort non e' contenuto. Penalizzarlo degradava il primo del roster per
+      // aver obbedito; premiarlo pagherebbe un modello per non scrivere mai —
+      // il rifiuto e' la risposta piu' economica che possa dare.
+      if (verdict === 'topic-gate-abort') {
+        console.error(`  ⏭️  [topic-gate] abort dichiarato da ${modelUsedRef.model || 'unknown'} — risposta conforme al contratto, nessuna rigenerazione.`);
+        return result;
+      }
+
       if (!itContent) {
-        missing.push('content.it non normalizzabile');
         // Previously swallowed silently — every "non normalizzabile" failure
         // was unreproducible (no evidence of what the model actually sent).
         // Log the parse error + a snippet so a recurring malformed-JSON
@@ -5470,24 +5452,6 @@ async function callLLM(messages, opts = {}) {
           console.error(`  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): ${parseErr.message} — ${describeJsonParseError(repaired, parseErr)}`);
         }
         console.error(`  📄 ${describeRawForDiagnostics(result)}`);
-      } else {
-        for (const field of REQUIRED_IT_BODY_FIELDS) {
-          if (!itContent?.[field] || itContent[field].length < 1) {
-            missing.push(field);
-          }
-        }
-        if (itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
-        // Language sanity — fallback models occasionally drift to CJK /
-        // Cyrillic when prompted in Italian. Treat as malformed output:
-        // penalises the model, chain rotates, no budget burned at the
-        // outer headline-validation layer. See run 26446721285.
-        for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
-          const val = itContent?.[field];
-          if (typeof val === 'string' && val.length > 0 && isNonItalianScript(val)) {
-            const ratio = (nonItalianScriptRatio(val) * 100).toFixed(0);
-            missing.push(`${field} non-IT script (${ratio}% non-Latin)`);
-          }
-        }
       }
 
       if (missing.length > 0) {
