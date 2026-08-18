@@ -49,7 +49,7 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
+import { estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached, AI_MODELS as REAL_AI_MODELS } from '../scripts/lib/ai-models.mjs';
 import { AI_SEARCH_PROMPT_BLOCK_IT } from '../scripts/lib/ai-search-template.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs';
@@ -123,7 +123,12 @@ const DEPS = [
   // sotto misura il ramo SENZA preferenza, cioe' il fallback su modelli capped,
   // ed e' li' che il tetto deve continuare a valere. Il ramo CON preferenza ha
   // il suo test dedicato in fondo.
+  // `isPerRunCallCapReached` e' la terza domanda della guardia: «il cap di
+  // chiamate claude-cli di QUESTA run e' gia' esaurito?». Iniettabile come le
+  // altre due, cosi' il test puo' esercitare la coda di una run lunga senza
+  // spendere 40 chiamate vere.
   'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit', 'isModelAvailable',
+  'isPerRunCallCapReached',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -185,6 +190,9 @@ const BASE_DEPS = {
   PREFERRED_GENERATION_MODELS: [],
   getDeclaredRequestTokenLimit,
   isModelAvailable,
+  // Il predicato VERO: a run appena iniziata nessuna chiamata e' stata spesa,
+  // quindi risponde false e non altera nessuna delle misure gia' in questo file.
+  isPerRunCallCapReached,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
@@ -727,4 +735,57 @@ test('preferito NON disponibile: la scala morde subito, niente tentativo buttato
     if (orig.tok === undefined) delete process.env.CLAUDE_CODE_OAUTH_TOKEN; else process.env.CLAUDE_CODE_OAUTH_TOKEN = orig.tok;
     if (orig.flag === undefined) delete process.env.ENABLE_HAIKU_ARTICLE_FALLBACK; else process.env.ENABLE_HAIKU_ARTICLE_FALLBACK = orig.flag;
   }
+});
+
+test('cap di chiamate per-run esaurito: la scala torna a mordere subito', () => {
+  // ── IL BUCO CHE IL CAP A 40 HA RIAPERTO ───────────────────────────────────
+  //
+  // `_preferisceModelloSenzaCap` chiedeva due cose — «e' disponibile?» e «ha un
+  // cap di INPUT?» — e nessuna delle due conosce il cap di CHIAMATE per-run
+  // (CLAUDE_CLI_MAX_CALLS_PER_RUN, alzato da 25 a 40 dalla PR #418).
+  //
+  // Il 40 e' dimensionato sul caso peggiore di 20 tentativi x 2 chiamate, quindi
+  // e' raggiungibile per costruzione, non in teoria. Superatolo, `callLLM`
+  // esclude haiku dalla catena al pre-flight — ma `isModelAvailable` guarda solo
+  // skip-exhausted e presenza del token, e continuava a rispondere «c'e'». Da
+  // quel punto in poi, per OGNI headline successiva della run: gradino 0, prompt
+  // intero (~9500 token), tutti i modelli free con cap dichiarato scartati dal
+  // pre-flight, tentativo 1 morto con ALL_MODELS_EXHAUSTED, e recupero solo al
+  // tentativo 2 via `err.retryRequestTokenBudget`.
+  //
+  // Si auto-ripara, quindi non rompe niente — ed e' esattamente per questo che
+  // senza un test non lo vede nessuno: e' un costo, non un guasto.
+  //
+  // Il predicato e' INIETTATO invece di spendere 40 chiamate vere: e' la stessa
+  // funzione che `callLLM` interroga (una definizione sola, vedi
+  // `isPerRunCallCapReached` in ai-models.mjs), e qui interessa il ramo «cap
+  // gia' esaurito», non il conteggio che ci arriva.
+  const capEsaurito = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_HAIKU,
+    isPerRunCallCapReached: (m) => m === REAL_AI_MODELS.CLAUDE_CLI_HAIKU,
+  }));
+
+  assert.ok(
+    capEsaurito.shrink > 0,
+    `cap per-run esaurito e la scala non ha morso (gradino ${capEsaurito.shrink}): il prompt `
+    + 'intero viene costruito per un modello che callLLM non chiamera\' piu\' in questa run, '
+    + 'e ogni headline successiva paga un tentativo buttato',
+  );
+  assert.ok(
+    capEsaurito.estTokens <= PROMPT_TOKEN_BUDGET,
+    `cap per-run esaurito e prompt a ${capEsaurito.estTokens} token, sopra ${PROMPT_TOKEN_BUDGET}: `
+    + 'ogni modello capped verra\' saltato dal pre-flight e il tentativo 1 e\' garantito perso',
+  );
+
+  // Il contro-verso: finche' il cap NON e' esaurito il comportamento nominale
+  // resta quello, cioe' prompt intero. Senza questa riga il test passerebbe
+  // anche se la guardia si fosse rotta del tutto.
+  const capLibero = conHaikuDisponibile(() => newsPrompt({}, 'frontaliere', {
+    ...PREFERISCE_HAIKU,
+    isPerRunCallCapReached: () => false,
+  }));
+  assert.equal(
+    capLibero.shrink, 0,
+    'con cap disponibile la scala non deve mordere: la guardia si e\' rotta nell\'altro verso',
+  );
 });

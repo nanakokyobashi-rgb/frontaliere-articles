@@ -440,17 +440,17 @@
       "reason": "Solo la cadenza cambia: :47 invece del :17 del sito, per non sommare i picchi sulla stessa API. Lo script sottostante e' identical.",
       "baseline": {
         "site": "f7c6be4644c56dc2",
-        "corpus": "9f0f6678fdaec04d",
-        "alignedAt": "2026-08-07"
+        "corpus": "91fdbb8ee2f6f509",
+        "alignedAt": "2026-08-18"
       }
     },
     {
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "50b83bd5c3628dc8",
-        "corpus": "50b83bd5c3628dc8",
-        "alignedAt": "2026-08-07"
+        "site": "cf0697e05b786586",
+        "corpus": "cf0697e05b786586",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -783,9 +783,9 @@
       "mode": "adapted",
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs.",
       "baseline": {
-        "site": "e74b26d3812bf008",
-        "corpus": "0597af47ae837953",
-        "alignedAt": "2026-08-08"
+        "site": "8e2799b49ef8ad31",
+        "corpus": "a9f721dcc219c572",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -1394,10 +1394,11 @@
       "path": "generator/scripts/lib/ai-models.mjs",
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "identical",
+      "reason": "RICONCILIATO il 2026-08-18. La baseline del 2026-08-14 (`6cc7088bf44c5152` su entrambi i lati) descriveva lo stato PRIMA che sito e corpus implementassero `AI_MODELS_PREFER` in modo indipendente e divergente — la divergenza tracciata dalla issue #402, che `loop-drift-check` classificava correttamente `both-moved` / `actionable: true`. La riconciliazione e' stata fatta: `valerielinc-ops#6004` sul sito e `#418` qui, e i due file sono tornati BYTE-IDENTICI (misurato: `sha256 | head -c16` = `5dbca2532ac754ab`, 269.588 byte per lato, su `origin/main` di entrambi i repo). Senza questo aggiornamento le due meta' sarebbero uguali fra loro e diverse dalla baseline, cioe' un `both-moved` con detail «vanno lette entrambe e riconciliate a mano» su un file gia' allineato: rumore azionabile a vuoto, che costa a chi lo legge la stessa lettura di un drift vero. La baseline NON e' stata rigenerata con `--init`: quel comando riscrive TUTTE le voci del manifest con lo stato corrente, e nel report del 2026-08-18 ce ne sono 40 azionabili (baseline fantasma, both-moved, stranded-twin) che verrebbero dichiarate allineate senza che nessuno le abbia lette. Solo questa voce e' stata toccata, ed e' l'unica di cui l'allineamento e' stato verificato byte a byte.",
       "baseline": {
-        "site": "6cc7088bf44c5152",
-        "corpus": "6cc7088bf44c5152",
-        "alignedAt": "2026-08-14"
+        "site": "5dbca2532ac754ab",
+        "corpus": "5dbca2532ac754ab",
+        "alignedAt": "2026-08-18"
       }
     },
     {

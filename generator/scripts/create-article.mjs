@@ -65,7 +65,7 @@ import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
 
 // ── Il modello preferito per la SOLA generazione del corpo ──────────────────
 //
@@ -108,10 +108,28 @@ const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
  * budget dettato rimette in moto la scala. Il rimedio funziona — e' verificato —
  * ma pagarlo su ogni headline quando si sa gia' in partenza che il preferito non
  * c'e' e' spreco, non robustezza.
+ *
+ * `isPerRunCallCapReached` chiude il buco che le altre due non vedono, ed e' il
+ * caso che questa stessa PR rende raggiungibile alzando
+ * CLAUDE_CLI_MAX_CALLS_PER_RUN a 40 (= 20 tentativi × 2 chiamate). Superate le
+ * 40 chiamate claude-cli, `callLLM` esclude haiku dalla catena — ma
+ * `isModelAvailable` guarda solo skip-exhausted e presenza del token, quindi
+ * continuava a rispondere «c'e'». Da li' in poi, per OGNI headline successiva:
+ * scala saltata al gradino 0, prompt intero (~9500 token), tutti i modelli free
+ * con cap dichiarato scartati dal pre-flight, tentativo 1 morto con
+ * `ALL_MODELS_EXHAUSTED`, recupero solo al tentativo 2 via
+ * `err.retryRequestTokenBudget`. Non rompe niente — si auto-ripara — ma e' lo
+ * stesso tentativo sprecato che questa guardia esiste per evitare, riaperto
+ * dalla coda della run invece che dalla sua testa.
+ *
+ * Le tre domande sono deliberatamente separate e tutte a runtime: nessuna e' una
+ * costante, quindi nessuna va ricordata quando cambia il roster o il cap.
  */
 function _preferisceModelloSenzaCap(prefer) {
   return (prefer || []).some(
-    (m) => isModelAvailable(m) && getDeclaredRequestTokenLimit(m) === undefined,
+    (m) => isModelAvailable(m)
+      && !isPerRunCallCapReached(m)
+      && getDeclaredRequestTokenLimit(m) === undefined,
   );
 }
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /

@@ -834,11 +834,29 @@ jobs:
           # 677s) il buco fra due righe di log consecutive sta fra 3 e 21s al
           # p99, con un MASSIMO osservato di 182s; una run incastrata tace 2337s
           # mediani. Piu' di un ordine di grandezza fra i due, e la soglia sotto
-          # e' 3,3x il massimo legittimo osservato.
+          # e' 1,65x il massimo legittimo osservato.
+          #
+          # ABBASSATA DA 600s A 300s il 2026-08-18, con il watchdog gia' in
+          # produzione e la prima cattura in mano. La run 32130136859 ha taciuto
+          # dai 402s ed e' finita a 1058s: 402 + i 600 di soglia + il poll. La
+          # soglia e' quindi il termine DOMINANTE del costo di un wedge — non
+          # il punto in cui si incastra, che varia — e a 300s la stessa run
+          # sarebbe finita intorno ai 750s.
+          #
+          # Il margine che si spende e' quello fra 182s e 300s, e un argomento
+          # strutturale lo rende piu' largo di quanto il rapporto suggerisca:
+          # durante una chiamata a un modello `_callModel` emette un heartbeat
+          # ogni 60s, quindi una run viva non puo' tacere a lungo mentre aspetta
+          # un provider. I silenzi legittimi lunghi stanno FUORI dalle chiamate
+          # (checkout, encode della thumbnail, git), ed e' li' che sono stati
+          # misurati i 182s. Se una run sana venisse uccisa, si vedrebbe come
+          # un kill per stallo con `stalled` non vuoto e uno stack che NON e'
+          # in lavoro sincrono: e' quello il segnale per risalire, non la
+          # durata della run.
           #
           # Quindi il cap di durata resta dov'e' — e' lui a coprire il caso
           # «lento ma vivo» — e questo watchdog copre il caso «muto». Il wedge
-          # costa 10 minuti invece di 40: ~74% delle 26,6 ore.
+          # costa 5 minuti invece di 40: ~87% delle 26,6 ore.
           #
           # LA MISURA E' LA CRESCITA DI UN FILE, non un timestamp per riga: lo
           # step produce fino a 5.500 righe e un `date` per riga sarebbe una
@@ -848,7 +866,7 @@ jobs:
           # Overridable come i due sopra, cosi' che
           # generate-article-chain.test.mjs possa provare il kill per stallo in
           # secondi invece che in dieci minuti; nulla li imposta in CI.
-          stall_s="${GENERATE_STALL_S:-600}"
+          stall_s="${GENERATE_STALL_S:-300}"
           stall_poll_s="${GENERATE_STALL_POLL_S:-30}"
           stall_grace_s="${GENERATE_STALL_GRACE_S:-10}"
 
