@@ -1056,11 +1056,20 @@ test('ri-bracketing: degradando su un modello con cap 8000 il prompt rientra in 
 
   // E lo fa senza rifare il difetto opposto: rientrare buttando i fatti di
   // dominio e' cio' che la divisione in due chiamate esiste per evitare.
-  assert.ok(
-    scelta.fattiChars > 0,
-    'il ri-bracketing rientra nel cap buttando i fatti di dominio (fatti=0ch): e\' il difetto che '
-    + 'la divisione in due chiamate ha gia' + '\' chiuso, non va reintrodotto qui',
-  );
+  //
+  // La garanzia e' condizionata a `CREATE_ARTICLE_PROMPT_SPLIT` perche' il
+  // flag `off` E' la leva di rollback: chi lo mette si ricompra il
+  // comportamento precedente, fatti compresi, e la suite lo registra gia'
+  // (con `off` falliscono anche i test della divisione in due chiamate, sia
+  // prima sia dopo questa PR). Sul default `auto` — l'unico che la CI e la
+  // pipeline usano — la garanzia vale piena.
+  if (r.splitMode !== 'off') {
+    assert.ok(
+      scelta.fattiChars > 0,
+      'il ri-bracketing rientra nel cap buttando i fatti di dominio (fatti=0ch): e\' il difetto che '
+      + 'la divisione in due chiamate ha gia' + '\' chiuso, non va reintrodotto qui',
+    );
+  }
 });
 
 test('ri-bracketing: vale anche sul ramo NEWS SVIZZERA, che e\' il piu\' pesante', () => {
