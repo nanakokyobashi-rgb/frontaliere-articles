@@ -8206,11 +8206,22 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // una meta' di scrittura ridimensionata sul cap del modello che rispondera'
   // davvero. `_generateSplit` la legge dalla chiusura, quindi non serve
   // duplicarne il corpo.
+  // Il budget che i marker `[prompt-split]` dichiarano. E' `let` perche' il
+  // ri-bracketing sposta il bersaglio: una riga `call=2/2 budget=8000` emessa
+  // mentre si sta lavorando a 4000 mente a chi legge i log.
+  let _splitBudgetLog = _promptTokenTarget;
+  // Il prompt della meta' di scrittura gia' TENTATA in questo attempt. Con
+  // `CREATE_ARTICLE_PROMPT_SPLIT=on` la divisione parte anche quando il
+  // prompt esce intero (`_splitAttiva` ha `_splitMode === 'on'` come
+  // disgiunto), e il piano di ri-bracketing potrebbe ricostruire la STESSA
+  // meta' sullo stesso bersaglio: rispedirla e' spendere due chiamate LLM
+  // per riottenere lo stesso rifiuto.
+  let _splitPromptTentato = null;
   let _splitCall1 = _splitAttiva ? _buildCall1() : null;
   if (_splitCall1) {
     console.error(
       `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
-      + `call=1/2 part=body est=${_splitCall1.est} budget=${_promptTokenTarget} `
+      + `call=1/2 part=body est=${_splitCall1.est} budget=${_splitBudgetLog} `
       + `fonte=${_splitCall1.fonteChars}ch fatti=${_splitCall1.fattiChars}ch `
       + `motivo=${_splitSalvaFatti ? 'fatti-a-zero' : 'fuori-budget'}`,
     );
@@ -8220,6 +8231,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // tutto cio' che sta a valle (repair, parse, abort, normalizzazione, gate)
   // resti invariato byte a byte. `null` = ricadi sulla chiamata unica.
   const _generateSplit = async () => {
+    _splitPromptTentato = _splitCall1 ? _splitCall1.p : null;
     const rawBody = useGeminiDirect
       ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema })
       : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
@@ -8249,7 +8261,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     const _call2 = _buildHalf('meta', articolo, '', '');
     console.error(
       `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
-      + `call=2/2 part=meta est=${_call2.est} budget=${_promptTokenTarget} `
+      + `call=2/2 part=meta est=${_call2.est} budget=${_splitBudgetLog} `
       + `articolo=${articolo.length}ch`,
     );
     const rawMeta = useGeminiDirect
@@ -8356,10 +8368,27 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       + `via=${rb.split ? 'split' : 'scala'} `
       + `fonte=${scelta.fonteChars}ch fatti=${scelta.fattiChars}ch`,
     );
-    if (rb.split) {
+    // Il fallback della chiamata unica ridimensionata: il gradino della scala
+    // se ce n'e' uno che entra, altrimenti il piu' aggressivo che la scala
+    // sappia costruire. Serve anche quando a spedire e' lo split, perche'
+    // `llmMessages` e' cio' da cui riparte il retry per JSON malformato piu'
+    // sotto: lasciarci l'assemblato intero rimetterebbe fuori, proprio al
+    // retry, i modelli che il ri-bracketing ha appena recuperato.
+    const _msgsUnica = rb.msgs || _buildStep(_shrinkLadder.length - 1).msgs;
+    if (rb.split && rb.split.p !== _splitPromptTentato) {
+      _splitBudgetLog = rb.target;
       _splitCall1 = rb.split;
+      console.error(
+        `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+        + `call=1/2 part=body est=${_splitCall1.est} budget=${_splitBudgetLog} `
+        + `fonte=${_splitCall1.fonteChars}ch fatti=${_splitCall1.fattiChars}ch `
+        + `motivo=ri-bracketing`,
+      );
       const r = await _generateSplit();
-      if (r != null) return r;
+      if (r != null) {
+        llmMessages = _msgsUnica;
+        return r;
+      }
       console.error('  ↩️ [prompt-rebracket] split a vuoto: ricado sulla chiamata unica ridimensionata.');
     }
     if (!rb.msgs) return null;
@@ -8367,7 +8396,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // locale: il retry per JSON malformato piu' sotto riparte da
     // `llmMessages`, e rispedire li' l'assemblato intero rimetterebbe fuori
     // i modelli appena recuperati.
-    llmMessages = rb.msgs;
+    llmMessages = _msgsUnica;
     return callLLM(llmMessages, opts);
   };
 
@@ -8395,7 +8424,23 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       const _budgetDettato = _saltaScala ? Number(e?.retryRequestTokenBudget) : 0;
       const _rb = _budgetDettato > 0 ? _rebracket(_budgetDettato) : null;
       if (!_rb) throw e;
-      const _out = await _eseguiRibracket(_rb, _optsUnica);
+      // Il piano puo' anche LANCIARE, e quel lancio va assorbito, mai
+      // propagato al posto di `e`. Ragione aritmetica, non stilistica: un
+      // prompt rientrato nel bracket non fa piu' saltare i modelli a cap
+      // 8000, quindi il nuovo ALL_MODELS_EXHAUSTED porta un
+      // `retryRequestTokenBudget` piu' BASSO (il cap dei soli modelli
+      // rimasti fuori). Il ciclo esterno lo applica con un `Math.min`
+      // monotono, e i tentativi 2..6 partirebbero con un bersaglio sotto
+      // PROMPT_SCAFFOLD_FLOOR_TOKENS — cioe' insoddisfacibile per
+      // costruzione. Meglio l'errore originale, il cui budget e' il solo
+      // che il tentativo 2 sappia soddisfare.
+      let _out;
+      try {
+        _out = await _eseguiRibracket(_rb, _optsUnica);
+      } catch (e2) {
+        console.error(`  ↩️ [prompt-rebracket] anche il piano ha fallito (${e2.message}): propago l'errore originale.`);
+        throw e;
+      }
       // `null` = nemmeno il piano ha prodotto qualcosa di spedibile: si
       // propaga l'errore ORIGINALE, cosi' che il ciclo di retry raccolga
       // `retryRequestTokenBudget` come prima e il tentativo 2 resti la rete
@@ -8431,9 +8476,13 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         // (selectMinWordsRetryModel) dal secondo tentativo in poi — vedi il
         // commento su `_preferSenzaCap` sopra. E' anche la seconda chiamata
         // preferita per tentativo su cui e' dimensionato
-        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2, upper
-        // bound: con la preferenza confinata all'attempt 1 l'uso reale resta
-        // sotto il tetto, non sopra).
+        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2). Non
+        // e' piu' un upper bound stretto: il ri-bracketing puo' aggiungere
+        // 1 chiamata preferita (ramo scala) o 2 (ramo split) e solo
+        // sull'attempt 1, dove la preferenza vive. Il tetto vero lo tiene lo
+        // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
+        // spegne per tutta la run — ed e' proprio il caso in cui il
+        // ri-bracketing si arma.
         : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
