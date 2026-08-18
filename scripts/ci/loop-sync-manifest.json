@@ -1940,7 +1940,7 @@
     {
       "path": "generator/scripts/lib/llm-payload-diagnostics.mjs",
       "mode": "corpus-only-pending",
-      "trackingIssue": "https://github.com/nanakokyobashi-rgb/frontaliere-articles/issues/434",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/6027",
       "baseline": {
         "site": null,
         "corpus": "007e5a5b07e0e7d2",
