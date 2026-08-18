@@ -526,10 +526,11 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "identical",
+      "reason": "Portati i cinque export nuovi di secrets-scope-detect.mjs (#5838, gia' cablati sul sito nel commit c9dd0477) che qui restavano senza chiamante (#388). Allineato esattamente a c9dd0477, non a HEAD del sito: il commit successivo 0d595202 (2026-08-15, capability-guard WF-scope condizionato + tracker fuori dal parked-retry) non c'entra con #339/#140 ed e' rimasto fuori per scelta.",
       "baseline": {
-        "site": "6515f996437948e8",
-        "corpus": "6515f996437948e8",
-        "alignedAt": "2026-08-14"
+        "site": "e9d88f9d86965f15",
+        "corpus": "e9d88f9d86965f15",
+        "alignedAt": "2026-08-15"
       }
     },
     {
