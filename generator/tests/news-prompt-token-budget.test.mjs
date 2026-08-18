@@ -53,6 +53,13 @@ import { estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, 
 import { AI_SEARCH_PROMPT_BLOCK_IT } from '../scripts/lib/ai-search-template.mjs';
 import { JSON_QUOTE_SAFETY_RULE_IT } from '../scripts/lib/llm-json-repair.mjs';
 import { buildSourceContract } from '../scripts/lib/article-factuality-gates.mjs';
+// Issue #452 — il pavimento dell'impalcatura e il suo predicato non sono piu'
+// un `const` locale dentro il blocco estratto: vivono nel modulo della
+// disposizione, perche' li leggono in due (il marker `unsat=` qui e l'uscita
+// anticipata del ciclo di retry). Si iniettano come tutte le altre dipendenze
+// di modulo — e QUI si importano davvero, invece di ritagliarli dal sorgente:
+// il modulo e' importabile, quindi il test misura la funzione vera.
+import { PROMPT_SCAFFOLD_FLOOR_TOKENS, isBudgetBelowScaffoldFloor } from '../scripts/lib/exhaustion-disposition.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -131,6 +138,8 @@ const DEPS = [
   // spendere 40 chiamate vere.
   'PREFERRED_GENERATION_MODELS', 'getDeclaredRequestTokenLimit', 'isModelAvailable',
   'isPerRunCallCapReached',
+  // Issue #452: il pavimento e il predicato che lo legge, importati sopra.
+  'PROMPT_SCAFFOLD_FLOOR_TOKENS', 'isBudgetBelowScaffoldFloor',
 ];
 
 // `_clampSourceBody` e' una dichiarazione a livello di modulo che il blocco
@@ -200,6 +209,8 @@ const BASE_DEPS = {
   // Il predicato VERO: a run appena iniziata nessuna chiamata e' stata spesa,
   // quindi risponde false e non altera nessuna delle misure gia' in questo file.
   isPerRunCallCapReached,
+  PROMPT_SCAFFOLD_FLOOR_TOKENS,
+  isBudgetBelowScaffoldFloor,
   AI_MODELS: { GEMINI_FLASH: 'gemini-2.5-flash' },
   GH_MODEL_HEAVY: 'gpt-4o',
   lastSourcePublishedAt: '2026-03-12T08:00:00.000Z',
