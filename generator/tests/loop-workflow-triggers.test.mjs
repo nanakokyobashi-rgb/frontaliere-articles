@@ -289,6 +289,55 @@ test('generate-article: il gate di ammissione ignora le run OLTRE la soglia di i
   );
 });
 
+// ── La soglia di incastro è derivata dal CRON, non dall'istogramma ───────────
+//
+// `WEDGE_SECONDS` sembra una costante scelta a occhio, e la prima volta lo era:
+// veniva da una «banda vuota» fra le run sane e le incastrate, misurata su 119
+// run. A 600 run quella banda non esiste — la mediana delle fallite (2543s) sta
+// SOTTO il massimo delle sane (2556s), quindi nessun valore separa le due
+// distribuzioni e l'istogramma non può scegliere.
+//
+// Il valore viene invece dalla cadenza del cron. Durante un wedge da ~42 minuti
+// arriva UN solo `schedule`, con età fra un intervallo di cron e la morte della
+// run: la soglia deve stare a un intervallo o sotto, o quell'arrivo — l'unico
+// che c'è da salvare — resta fuori e la fix non fa niente.
+//
+// Questo test lega le due cose. Se un giorno il cron cambia cadenza, o qualcuno
+// alza la soglia «per prudenza», qui si accende invece di scoprirlo contando
+// gli articoli mancanti.
+test('generate-article: la soglia di incastro resta sotto l\'intervallo del cron', () => {
+  const admit = jobBlock(GA, 'admit');
+  assert.ok(admit, 'job `admit` non trovato');
+
+  const wedge = Number((admit.match(/WEDGE_SECONDS=(\d+)/) || [])[1]);
+  assert.ok(Number.isFinite(wedge), 'Soglia di incastro non leggibile da `admit`.');
+
+  // I minuti degli slot cron di questo workflow: `7 * * * *` e `37 * * * *`.
+  const minuti = [...GA.matchAll(/-\s*cron:\s*'(\d+)\s+\*/g)].map((m) => Number(m[1]));
+  assert.ok(
+    minuti.length >= 2,
+    `Slot cron orari leggibili: ${minuti.length}, ne servono almeno 2. O il cron è sceso a uno ` +
+      `slot, o ha cambiato forma (es. non più orario) e questa regex non lo legge più. In ` +
+      `entrambi i casi la cadenza da cui dipende \`WEDGE_SECONDS\` è cambiata e la soglia va ` +
+      `rifatta: meglio rosso qui che un controllo che passa senza controllare niente.`,
+  );
+
+  // L'intervallo peggiore fra due slot consecutivi in un'ora (che si richiude).
+  const ordinati = [...minuti].sort((a, b) => a - b);
+  const gap = Math.max(
+    ...ordinati.map((m, i) => (i === 0 ? m + 60 - ordinati[ordinati.length - 1] : m - ordinati[i - 1])),
+  );
+
+  assert.ok(
+    wedge <= gap * 60,
+    `La soglia di incastro (${wedge}s = ${(wedge / 60).toFixed(0)} min) ha superato l'intervallo ` +
+      `del cron (${gap} min). Durante un wedge arriva un solo \`schedule\`, e con la soglia sopra ` +
+      `l'intervallo quell'arrivo non viene mai ammesso: il gate torna a bloccare tutti i ` +
+      `successori di una run incastrata, che è il difetto che questa soglia esisteva per chiudere. ` +
+      `Se hai cambiato la cadenza del cron, rifai la soglia con lei.`,
+  );
+});
+
 // ── L'esenzione del dispatch dopo l'auto-dispatch (2026-08-18) ───────────────
 //
 // Da quando la catena dispatcha il proprio successore, `workflow_dispatch` non
