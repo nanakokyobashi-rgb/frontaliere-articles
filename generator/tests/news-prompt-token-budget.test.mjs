@@ -1125,3 +1125,86 @@ test('ri-bracketing: senza preferenza attiva il piano non cambia niente di cio\'
     'il ri-bracketing propone un piano su un prompt che rientra gia\': starebbe accorciando senza motivo',
   );
 });
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 10. L'ESECUZIONE DEL PIANO, CHE STA FUORI DAL BLOCCO ESTRATTO
+//
+// L'harness qui sopra ritaglia il blocco che finisce a `let itRaw;`: il
+// call-site del ri-bracketing e le sue conseguenze (quale errore si propaga,
+// cosa resta in `llmMessages`) cadono fuori, e quattro difetti di correttezza
+// ci sono stati trovati da una review indipendente proprio li'. Finche' non
+// esiste un harness che possa invocare `callLLM`, questi quattro invarianti si
+// osservano sul SORGENTE — che e' gia' il modo con cui questo file guarda i
+// call-site (vedi la sezione sul letterale 8000).
+// ═══════════════════════════════════════════════════════════════════════════
+
+const _corpoRibracket = () => {
+  const i = src.indexOf('const _eseguiRibracket');
+  assert.ok(i > 0, 'il ri-bracketing non ha piu\' un esecutore: l\'invariante sotto non ha piu\' un soggetto');
+  const j = src.indexOf('\n  let itRaw;', i);
+  assert.ok(j > i, 'non trovo la fine del blocco del prompt');
+  return src.slice(i, j);
+};
+
+test('ri-bracketing: un piano che FALLISCE non sostituisce l\'errore originale', () => {
+  // Aritmetica, non stile. Col prompt rientrato nel bracket i modelli a cap
+  // 8000 non vengono piu' saltati, quindi il nuovo ALL_MODELS_EXHAUSTED porta
+  // un `retryRequestTokenBudget` piu' BASSO (il cap dei soli modelli rimasti
+  // fuori). Il ciclo esterno lo applica con un Math.min monotono: lasciarlo
+  // passare significa mandare i tentativi 2..6 su un bersaglio sotto
+  // PROMPT_SCAFFOLD_FLOOR_TOKENS, cioe' insoddisfacibile per costruzione —
+  // esattamente il fallimento che questo lavoro esiste per togliere, spostato
+  // di un tentativo e reso permanente.
+  const k = src.indexOf('await _eseguiRibracket(');
+  assert.ok(k > 0, 'il call-site del ri-bracketing e\' sparito');
+  const prima = src.slice(Math.max(0, k - 200), k);
+  assert.match(prima, /try\s*\{\s*_out = $/, 'la chiamata al piano non e\' dentro un `try`: un suo throw uscirebbe al posto dell\'errore originale');
+  const dopo = src.slice(k, k + 500);
+  assert.match(dopo, /catch\s*\(\s*e2\s*\)/, 'manca il catch dedicato al fallimento del piano');
+  assert.match(dopo, /throw e;/, 'il catch del piano non ripropaga l\'errore ORIGINALE');
+  assert.ok(
+    !/throw e2;/.test(dopo),
+    'il catch del piano propaga il proprio errore: il suo retryRequestTokenBudget e\' piu\' basso e il '
+    + 'Math.min del ciclo esterno lo rende irreversibile',
+  );
+});
+
+test('ri-bracketing: in `llmMessages` resta il prompt RIDIMENSIONATO, anche quando spedisce lo split', () => {
+  // `llmMessages` e' cio' da cui riparte il retry per JSON malformato. Sul
+  // ramo split veniva riassegnato solo in caduta: un successo lasciava li'
+  // l'assemblato intero, e al primo retry sarebbe tornato fuori cap.
+  const corpo = _corpoRibracket();
+  assert.match(corpo, /const _msgsUnica = rb\.msgs \|\| _buildStep\(/, 'manca la chiamata unica ridimensionata di riserva');
+  const assegnazioni = corpo.match(/llmMessages = [A-Za-z_.]+/g) || [];
+  assert.ok(assegnazioni.length >= 2, `\`llmMessages\` viene riassegnato ${assegnazioni.length} volta/e: il ramo split ne resta scoperto`);
+  for (const a of assegnazioni) {
+    assert.equal(a, 'llmMessages = _msgsUnica', `assegnazione non ridimensionata: \`${a}\``);
+  }
+});
+
+test('ri-bracketing: non rispedisce una meta\' di scrittura gia\' tentata', () => {
+  // Con CREATE_ARTICLE_PROMPT_SPLIT=on la divisione parte anche col prompt
+  // intero, sullo stesso bersaglio che il piano ricostruirebbe: senza guardia
+  // sono due chiamate LLM spese per riottenere lo stesso rifiuto.
+  const corpo = _corpoRibracket();
+  assert.match(
+    corpo, /rb\.split\.p !== _splitPromptTentato/,
+    'manca la guardia sul doppio split: lo stesso prompt puo\' partire due volte nello stesso tentativo',
+  );
+  assert.match(src, /_splitPromptTentato = _splitCall1 \? _splitCall1\.p : null;/, 'nessuno registra la meta\' di scrittura tentata');
+});
+
+test('i marker [prompt-split] dichiarano il budget VERO, non quello di partenza', () => {
+  // Sono marker machine-readable: una riga `call=2/2 budget=8000` emessa
+  // mentre si lavora a un bracket diverso manda fuori strada chi ci costruisce
+  // sopra un watchdog. E il ramo di ri-bracketing deve emettere anche la sua
+  // `call=1/2`, o la coppia resta spaiata.
+  const marker = src.match(/call=1\/2 part=body/g) || [];
+  assert.ok(marker.length >= 2, `il ramo di ri-bracketing non emette la sua riga call=1/2 (trovate ${marker.length})`);
+  assert.ok(
+    !/(call=1\/2|call=2\/2)[^\n]*budget=\$\{_promptTokenTarget\}/.test(src),
+    'un marker [prompt-split] dichiara ancora il budget di partenza invece di quello in corso',
+  );
+  assert.ok((src.match(/budget=\$\{_splitBudgetLog\}/g) || []).length >= 2, 'i marker non leggono il budget corrente');
+});
