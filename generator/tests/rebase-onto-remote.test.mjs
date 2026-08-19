@@ -369,6 +369,26 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
 });
 
+test('generate-article.yml declares every sourceUrlsFile ledger as bookkeeping (#496)', () => {
+  // The expected set is DERIVED from ARTICLE_SECTION_CONFIGS in create-article.mjs,
+  // not copied here — same reasoning as the registries test below: a section
+  // whose sourceUrlsFile isn't declared here dies the same way #225 did, just on
+  // a different path, and a hardcoded list wouldn't catch a new section adding
+  // one.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
+  const expected = [...src.matchAll(/sourceUrlsFile:\s*'([^']+)'/g)].map((m) => m[1]);
+  assert.ok(expected.length >= 2, `expected at least 2 sourceUrlsFile entries in create-article.mjs, found: ${JSON.stringify(expected)}`);
+  for (const p of expected) {
+    assert.ok(
+      allowlist.includes(p),
+      `${p} is a saveSourceUrls() ledger — loaded whole and rewritten whole every run by create-article.mjs, `
+      + `exactly like ${IMAGE_CATALOG} above — but is missing from the bookkeeping allowlist in generate-article.yml. `
+      + `A conflict there aborts the rebase and the generated article is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+    );
+  }
+});
+
 test('a conflict on the journalist image catalog resolves instead of aborting', () => {
   // Driven with the allowlist READ FROM THE WORKFLOW, not a literal: what this
   // pins is that the real caller declares the path, not that the helper can
