@@ -37,7 +37,9 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   CONTENT_GATES,
+  NON_SONO_CONTENT_GATES,
   REQUIRED_FILES,
+  detectCorpusReaders,
   TITLE,
   buildIssueBody,
   extractOffenders,
@@ -337,6 +339,88 @@ describe('tests.yml: il verdetto su main che il rescue stuck-red legge', () => {
     assert.ok(
       m[1].includes('main'),
       `Il group non distingue più \`main\` dagli altri branch: ${m[1]}`,
+    );
+  });
+});
+
+describe('content-gates-main: la lista e\' COMPLETA, non solo non vuota', () => {
+  // ── IL BUCO CHE QUESTI TEST CHIUDONO ─────────────────────────────────────
+  //
+  // I test qui sopra verificano che la lista non sia vuota, che i file
+  // elencati esistano e che non ci siano duplicati. Sono tutte proprieta'
+  // DELLA LISTA. Nessuna dice niente del suo RAPPORTO con la cartella dei
+  // test — cioe' se qualcosa che legge il corpus sia rimasto fuori.
+  //
+  // Il costo, misurato il 2026-08-19:
+  // `article-topic-coverage-guard.test.mjs` legge il corpus reale e non era
+  // registrato. Alle 07:27Z e' atterrato `vivere-villa-guardia-lavorare-ticino`
+  // — «Villa Guardia» e' un comune, «guardia» l'alias di `agente-sicurezza` —
+  // e il test e' diventato rosso su `main` e su OGNI branch. Nessuna PR poteva
+  // auto-mergiare, e siccome il gate non era registrato NESSUNA ISSUE e' stata
+  // aperta: sei ore di coda ferma in silenzio. Registrato, la stessa
+  // pubblicazione apre una issue a priorita' alta entro minuti e il fixer la
+  // drena da solo.
+  //
+  // «Non e' un content gate» e «nessuno ha guardato» erano indistinguibili. E'
+  // la stessa ambiguita' che `loop-sync-manifest.json` chiude coi `roots`.
+
+  const TESTS_DIR = path.join(ROOT, 'generator/tests');
+  const rilevati = () => detectCorpusReaders(TESTS_DIR);
+
+  test('ogni file che legge il corpus e\' registrato OPPURE esentato con una ragione', () => {
+    const registrati = new Set(CONTENT_GATES);
+    const esentati = new Set(Object.keys(NON_SONO_CONTENT_GATES));
+    const orfani = rilevati()
+      .filter(({ file }) => !registrati.has(file) && !esentati.has(file));
+    assert.deepEqual(
+      orfani.map(({ file, why }) => `${file}  (${why})`),
+      [],
+      'Questi test leggono il corpus REALE e nessuno ha deciso cosa sono.\n' +
+        'Un articolo pubblicato puo\' renderli rossi su main e su ogni branch, e\n' +
+        'senza registrazione la coda di merge si ferma SENZA che si apra una issue.\n' +
+        'Delle due:\n' +
+        '  - e\' un gate sul contenuto  -> aggiungilo a CONTENT_GATES;\n' +
+        '  - i path sono stringhe attese -> aggiungilo a NON_SONO_CONTENT_GATES con la ragione.',
+    );
+  });
+
+  test('il rilevatore non e\' vacuo: vede la maggior parte dei gate registrati', () => {
+    // Senza questo, un regex che smettesse di agganciare renderebbe il test
+    // sopra verde per vacuita' — zero rilevati, zero orfani — proprio mentre
+    // la copertura sparisce. E' la stessa guardia che `CONTENT_GATES.length
+    // >= 10` mette sulla lista, applicata al metodo che la misura.
+    const visti = new Set(rilevati().map(({ file }) => file));
+    const registratiVisti = CONTENT_GATES.filter((g) => visti.has(g));
+    assert.ok(
+      registratiVisti.length >= Math.ceil(CONTENT_GATES.length * 0.8),
+      `Il rilevatore vede solo ${registratiVisti.length} dei ${CONTENT_GATES.length} ` +
+        'gate registrati. Sotto questa soglia non sta piu\' misurando niente, e il ' +
+        'test di completezza sopra diventa una tautologia.',
+    );
+  });
+
+  test('ogni esenzione nomina un file che esiste ED e\' davvero rilevato', () => {
+    // Un\'esenzione per un file che il rilevatore non vede e\' peggio che
+    // inutile: sopravvive a una riscrittura del file e continua a coprirlo
+    // quando magari e\' diventato un lettore vero.
+    const visti = new Set(rilevati().map(({ file }) => file));
+    for (const [file, ragione] of Object.entries(NON_SONO_CONTENT_GATES)) {
+      assert.ok(fs.existsSync(path.join(ROOT, file)), `esentato ma inesistente: ${file}`);
+      assert.ok(visti.has(file), `esentato ma non rilevato — l\'esenzione e\' morta: ${file}`);
+      assert.ok(
+        typeof ragione === 'string' && ragione.length >= 40,
+        `l\'esenzione di ${file} non porta una ragione leggibile`,
+      );
+    }
+  });
+
+  test('contiene il gate che il difetto del 2026-08-19 ha prodotto dal vivo', () => {
+    // Stessa forma del test sui tre gate del 2026-08-18: un caso reale non si
+    // affida a una regola generale per non tornare.
+    assert.ok(
+      CONTENT_GATES.includes('generator/tests/article-topic-coverage-guard.test.mjs'),
+      'article-topic-coverage-guard non e\' piu\' fra i gate: e\' quello che il ' +
+        '2026-08-19 ha tenuto ferma la coda di merge per sei ore senza aprire una issue.',
     );
   });
 });
