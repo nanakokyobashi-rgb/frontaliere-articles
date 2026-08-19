@@ -369,24 +369,49 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
 });
 
-test('generate-article.yml declares every sourceUrlsFile ledger as bookkeeping (#496)', () => {
+test('generate-article.yml declares every sourceUrlsFile/sourceQuotaFile ledger as bookkeeping (#496)', () => {
   // The expected set is DERIVED from ARTICLE_SECTION_CONFIGS in create-article.mjs,
   // not copied here — same reasoning as the registries test below: a section
-  // whose sourceUrlsFile isn't declared here dies the same way #225 did, just on
-  // a different path, and a hardcoded list wouldn't catch a new section adding
-  // one.
+  // whose sourceUrlsFile/sourceQuotaFile isn't declared here dies the same way
+  // #225 did, just on a different path, and a hardcoded list wouldn't catch a
+  // new section adding one. Both keys are pulled from the same regex pass
+  // because they're staged in the exact same git-add block in create-article.mjs
+  // (SOURCE_QUOTA_FILE and SOURCE_URLS_FILE) — same lifecycle, same risk.
   const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
   const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
-  const expected = [...src.matchAll(/sourceUrlsFile:\s*'([^']+)'/g)].map((m) => m[1]);
-  assert.ok(expected.length >= 2, `expected at least 2 sourceUrlsFile entries in create-article.mjs, found: ${JSON.stringify(expected)}`);
+  const expected = [
+    ...src.matchAll(/sourceUrlsFile:\s*'([^']+)'/g),
+    ...src.matchAll(/sourceQuotaFile:\s*'([^']+)'/g),
+  ].map((m) => m[1]);
+  assert.ok(expected.length >= 4, `expected at least 4 sourceUrlsFile/sourceQuotaFile entries in create-article.mjs, found: ${JSON.stringify(expected)}`);
   for (const p of expected) {
     assert.ok(
       allowlist.includes(p),
-      `${p} is a saveSourceUrls() ledger — loaded whole and rewritten whole every run by create-article.mjs, `
-      + `exactly like ${IMAGE_CATALOG} above — but is missing from the bookkeeping allowlist in generate-article.yml. `
-      + `A conflict there aborts the rebase and the generated article is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+      `${p} is a saveSourceUrls()/saveSourceQuotaState() ledger — loaded whole and rewritten whole every run by `
+      + `create-article.mjs, exactly like ${IMAGE_CATALOG} above — but is missing from the bookkeeping allowlist `
+      + `in generate-article.yml. A conflict there aborts the rebase and the generated article is lost (issue #496). `
+      + `Declared: ${JSON.stringify(allowlist)}`,
     );
   }
+});
+
+test('generate-article.yml declares the topic-candidates consumed tracker as bookkeeping (#496)', () => {
+  // CONSUMED_PATH is not per-section like the two ledgers above — it's one
+  // shared tracker imported (as CONSUMED_TRACKER_PATH) into create-article.mjs
+  // from article-topic-selector.mjs, so it's derived from its own source of
+  // truth rather than folded into the sourceUrlsFile/sourceQuotaFile regex.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  const m = /CONSUMED_PATH\s*=\s*'([^']+)'/.exec(selectorSrc);
+  assert.ok(m, 'could not find CONSUMED_PATH in article-topic-selector.mjs');
+  const consumedPath = m[1];
+  assert.ok(
+    allowlist.includes(consumedPath),
+    `${consumedPath} is the persistConsumedTracker() tracker — loaded whole and rewritten whole every run `
+    + `(FIFO-capped in appendConsumedId), staged in the same git-add block as SOURCE_URLS_FILE in create-article.mjs `
+    + `— but is missing from the bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase `
+    + `and the generated article is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+  );
 });
 
 test('a conflict on the journalist image catalog resolves instead of aborting', () => {

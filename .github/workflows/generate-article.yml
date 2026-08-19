@@ -1620,12 +1620,27 @@ jobs:
             # ENTRAMBE le liste, quindi un conflitto qui abortiva il rebase come
             # in #76/#225: la famiglia SVIZZERA e' quella misurata dalla issue,
             # ma il gemello FRONTALIERE ha lo stesso difetto e va chiuso insieme.
+            #
+            # data/article-source-quotas.json e data/swiss-article-source-quotas.json
+            # sono la stessa classe: saveSourceQuotaState() in create-article.mjs
+            # legge SOURCE_QUOTA_FILE intero a inizio run e lo riscrive intero,
+            # staged nella STESSA git add di SOURCE_URLS_FILE sopra (create-article.mjs,
+            # "if (existsSync(resolve(SOURCE_QUOTA_FILE)))"). data/topic-candidates-consumed.json
+            # e' il terzo gemello: persistConsumedTracker() in article-topic-selector.mjs
+            # fa lo stesso whole-file rewrite (FIFO-capped in appendConsumedId),
+            # staged anch'esso condizionalmente nello stesso punto. corpus-paths.mjs
+            # nomina gia' i tre insieme come "generator state ... MOVE with the
+            # generator" — mancavano dall'allowlist per lo stesso motivo dei ledger
+            # sopra: mai stati aggiunti (issue #496).
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
+              data/topic-candidates-consumed.json \
               data/blog-images-used.json \
               public/data/journalist-image-catalog.json \
               data/article-source-urls.json \
               data/swiss-article-source-urls.json \
+              data/article-source-quotas.json \
+              data/swiss-article-source-quotas.json \
               --merge-registry content/blog-articles-data.ts \
               --merge-registry content/routerBlogData.ts \
               --merge-registry content/blogArticleIds.ts \
