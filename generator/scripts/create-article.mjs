@@ -13619,6 +13619,52 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       rawData = await callGemini(pageContent, url, genContext);
     } catch (e) {
       console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);
+
+      // ── REGOLA #0: il verdetto e' sulla FONTE, non sul modello ───────────
+      //
+      // `err.topicGateAbort` dice che il modello ha ESEGUITO il contratto: la
+      // fonte non ha un aggancio frontaliere reale, quindi non c'e' articolo da
+      // scrivere. E' una proprieta' del materiale, non dell'esito di UNA
+      // chiamata — cambiare modello non puo' cambiarla. Il ciclo esterno lo sa
+      // gia' e fa la cosa giusta (`isTopicGateAbort` → `url = null; continue`,
+      // headline successiva); ma per arrivarci l'errore doveva attraversare il
+      // `continue` qui sotto, e ogni giro di questo ciclo e' una cascata
+      // COMPLETA sul roster: i modelli morti (402/404/429/timeout) si ripagano
+      // tutti prima di ricadere sullo stesso `claude-cli/haiku` che aveva gia'
+      // risposto. Sei tentativi per riascoltare sei volte la stessa frase.
+      //
+      // MISURATO sulle quattro run successive a #479 (2026-08-18 dalle 20:19Z:
+      // prima di #479 l'abort era misclassificato come «non normalizzabile» e
+      // non arrivava nemmeno qui). Per singola headline, dall'abort del
+      // tentativo 1 alla resa al ciclo esterno:
+      //   32182923129  20:48:44 → 21:13:18   24m34s
+      //   32187412494  21:24:26 → 21:32:59    8m33s
+      //   32190158524  22:30:14 → 22:39:19    9m05s
+      //   32197078704  23:26:33 → 23:35:01    8m28s
+      //   32197078704  23:40:51 → 23:56:40   15m49s
+      // ~66 minuti in quattro run, e tutte e quattro chiuse con
+      // `section <nome> produced no article`: il cap di sezione (2400s) si
+      // consumava dentro UNA headline, mentre il ciclo esterno ne prevede 8
+      // (MAX_DUPLICATE_RETRIES). La sezione `frontaliere` e' quella che paga,
+      // perche' e' quella dove piu' fonti mancano davvero dell'aggancio.
+      //
+      // E il costo non e' solo tempo: ripetere la domanda finche' un modello
+      // risponde diverso seleziona per il modello piu' disposto a FABBRICARE
+      // l'aggancio — cioe' esattamente l'allucinazione «Malpensa» da cui
+      // REGOLA #0 difende. Arrendersi subito e' la lettura fedele del verdetto,
+      // non una scorciatoia.
+      //
+      // `throw e` e non `break`: il ciclo esterno classifica l'errore
+      // (`isQualityRejectError` legge `e.topicGateAbort`), e un `break` gli
+      // consegnerebbe un esito muto — la stessa forma di #313.
+      if (e?.topicGateAbort === true) {
+        console.error(
+          `  ⏭️  [topic-gate] verdetto sulla FONTE: nessun altro modello puo' ribaltarlo`
+          + ` — cedo l'headline al ciclo esterno senza spendere i ${maxAttempts - attempt}`
+          + ` tentativi restanti di questa fonte.`,
+        );
+        throw e;
+      }
       // ── Il numero che la libreria calcola e che nessuno leggeva ──────────
       //
       // Quando ogni modello ha rifiutato per DIMENSIONE, `callLLM` allega

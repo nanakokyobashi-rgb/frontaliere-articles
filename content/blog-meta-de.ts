@@ -10061,6 +10061,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.title': 'Wohnen in Faloppio und Arbeiten im Tessin als Grenzgänger',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.excerpt': 'Steuereinstellungen, Genehmigungen, Vorteile und Nachteile der Übertragung',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.imageAlt': 'Ein Frontalier, der in Ticino arbeitet und in Faloppio wohnt',
+    'blog.article.vivere-moltrasio-lavorare-ticino.title': 'Leben in Moltrasio und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-moltrasio-lavorare-ticino.excerpt': 'Praktischer Leitfaden für Grenzgänger: Besteuerung, neues Abkommen und Alltag zwischen Moltrasio und dem Kanton Tessin.',
+    'blog.article.vivere-moltrasio-lavorare-ticino.imageAlt': 'Panoramablick auf den Luganersee nahe der italienisch-schweizerischen Grenze',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.title': 'Leben in Brezzo di Bedero und Arbeiten im Tessin',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.excerpt': 'Praktischer Leitfaden für grenzüberschreitende Pendler: G-Genehmigung, Quellensteuer, AHV, BVG, KVG, Rabatte. Alles über Steuern und soziale Sicherheit für diejenigen, die in Brezzo leben und im Tessin arbeiten.',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.imageAlt': 'Lago Maggiore bei Locarno mit Alpengipfeln im Hintergrund und Hafengebiet in frühem Licht',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.title': 'Leben in Malnate und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.excerpt': 'Entdecken Sie die Verbindungen, die Reisezeiten, die Lebenshaltungskosten und die empfohlenen Gebiete für Grenzgänger, die in Malnate leben und im Tessin arbeiten.',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.imageAlt': 'Ein in Ticino arbeitender Frontalier, der in Malnate wohnt.',
 };
 
 export default blogMetaDe;

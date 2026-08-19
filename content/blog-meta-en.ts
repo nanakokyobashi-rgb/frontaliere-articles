@@ -10062,6 +10062,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.title': 'Living in Faloppio and working in Ticino as a border worker',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.excerpt': 'Tax settings, permissions, advantages and disadvantages of the transfer',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.imageAlt': 'A frontaliere who works in Ticino and resides in Faloppio',
+    'blog.article.vivere-moltrasio-lavorare-ticino.title': 'Living in Moltrasio and working in Ticino as a border worker',
+    'blog.article.vivere-moltrasio-lavorare-ticino.excerpt': 'Practical guide for border workers: taxation, new agreement and daily life between Moltrasio and the Canton of Ticino.',
+    'blog.article.vivere-moltrasio-lavorare-ticino.imageAlt': 'Panoramic view of Lake Lugano near the Italian-Swiss border',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.title': 'Living in Brezzo di Bedero and working in Ticino',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.excerpt': 'Practical guide for border workers: G permit, tax at source, AVS, LPP, LAMal, refreshments. All about taxes and social security for those who live in Brezzo and work in Ticino.',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.imageAlt': 'Lake Maggiore shoreline near Locarno with Alpine mountains in distance and morning light over harbor',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.title': 'Living in Malnate and working in Ticino as a border worker',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.excerpt': 'Discover the connections, journey times, cost of living and recommended areas for border workers living in Malnate and working in Ticino.',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.imageAlt': 'A Ticino-based worker residing in Malnate.',
 };
 
 export default blogMetaEn;

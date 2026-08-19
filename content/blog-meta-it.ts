@@ -10063,6 +10063,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.title': 'Vivere a Faloppio e lavorare in Ticino da frontaliere',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.excerpt': 'Impostazioni fiscali, permessi, vantaggi e svantaggi del trasferimento',
     'blog.article.vivere-faloppio-lavorare-ticino-da-frontaliere.imageAlt': 'Un frontaliere che lavora in Ticino e risiede a Faloppio',
+    'blog.article.vivere-moltrasio-lavorare-ticino.title': 'Vivere a Moltrasio e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-moltrasio-lavorare-ticino.excerpt': 'Guida pratica per frontalieri: fiscalità, nuovo accordo e vita quotidiana tra Moltrasio e il Canton Ticino.',
+    'blog.article.vivere-moltrasio-lavorare-ticino.imageAlt': 'Vista panoramica sul Lago di Lugano vicino al confine italo-svizzero',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.title': 'Vivere a Brezzo di Bedero e lavorare in Ticino',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.excerpt': 'Guida pratica per frontalieri: permesso G, imposta alla fonte, AVS, LPP, LAMal, ristorni. Tutto sulle tasse e previdenza per chi vive a Brezzo e lavora in Ticino.',
+    'blog.article.vivere-brezzo-bedero-lavorare-ticino.imageAlt': 'Panorama del lago Maggiore dalla sponda ticinese con Alpi sullo sfondo, porto di Locarno al tramonto',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.title': 'Vivere a Malnate e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.excerpt': 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e le zone consigliate per i frontalieri che vivono a Malnate e lavorano in Ticino.',
+    'blog.article.vivere-malnate-lavorare-ticino-frontaliere.imageAlt': 'Un frontaliere che lavora in Ticino e risiede a Malnate.',
 };
 
 export default blogMetaIt;

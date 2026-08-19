@@ -69296,6 +69296,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-moltrasio-lavorare-ticino': {
+    title: 'Vivere a Moltrasio e lavorare in Ticino da frontaliere',
+    description: 'Guida per frontalieri: fiscalità, nuovo accordo 2024, franchigie e gestione del reddito tra Moltrasio e il Canton Ticino. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, moltrasio, lavorare, pratica',
+    ogTitle: 'Vivere a Moltrasio e lavorare in Ticino da frontaliere',
+    ogDescription: 'Tutto quello che devi sapere sulla fiscalità e la vita da frontaliere tra Moltrasio e la Svizzera con il nuovo accordo 2024.',
+    canonicalPath: '/articoli-frontaliere/vivere-moltrasio-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Moltrasio e lavorare in Ticino da frontaliere",
+      "description": "Guida per frontalieri: fiscalità, nuovo accordo 2024, franchigie e gestione del reddito tra Moltrasio e il Canton Ticino. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-moltrasio-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista panoramica sul Lago di Lugano vicino al confine italo-svizzero"
+      },
+      "datePublished": "2026-08-19T01:53:25+00:00",
+      "dateModified": "2026-08-19T01:53:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-moltrasio-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-brezzo-bedero-lavorare-ticino': {
+    title: 'Vivere a Brezzo di Bedero e lavorare in Ticino',
+    description: 'Guida pratica per frontalieri: permesso G, imposta alla fonte, AVS, LPP, LAMal, ristorni. Tutto sulle tasse e previdenza per chi vive a Brezzo e lavora',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, brezzo, bedero, lavorare',
+    ogTitle: 'Vivere a Brezzo di Bedero e lavorare in Ticino',
+    ogDescription: 'Frontaliere Brezzo-Ticino? Scopri il Nuovo Accordo Frontalieri 2024: imposta alla fonte solo in Svizzera, esenzioni €7.500–€10.000, AVS, LPP, LAMal, ristorni Italia. Procedura permesso G, valichi, dichiarazione redditi.',
+    canonicalPath: '/articoli-frontaliere/vivere-brezzo-bedero-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Brezzo di Bedero e lavorare in Ticino",
+      "description": "Guida pratica per frontalieri: permesso G, imposta alla fonte, AVS, LPP, LAMal, ristorni. Tutto sulle tasse e previdenza per chi vive a Brezzo e lavora",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-brezzo-bedero-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama del lago Maggiore dalla sponda ticinese con Alpi sullo sfondo, porto di Locarno al tramonto"
+      },
+      "datePublished": "2026-08-19T02:35:31+00:00",
+      "dateModified": "2026-08-19T02:35:31+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-brezzo-bedero-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-malnate-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Malnate e lavorare in Ticino da frontaliere',
+    description: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e le zone consigliate per i frontaliere che vivono a Malnate e lavorano in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, malnate, lavorare, scopri',
+    ogTitle: 'Vivere a Malnate e lavorare in Ticino da frontaliere',
+    ogDescription: 'Scopri i collegamenti, i tempi di percorrenza, il costo della vita e le zone consigliate per i frontaliere che vivono a Malnate e lavorano in Ticino.',
+    canonicalPath: '/articoli-frontaliere/vivere-malnate-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Malnate e lavorare in Ticino da frontaliere",
+      "description": "Scopri i collegamenti, i tempi di percorrenza, il costo della vita e le zone consigliate per i frontaliere che vivono a Malnate e lavorano in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-malnate-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere che lavora in Ticino e risiede a Malnate."
+      },
+      "datePublished": "2026-08-19T04:16:52+00:00",
+      "dateModified": "2026-08-19T04:16:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-malnate-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
