@@ -44285,6 +44285,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-sunrise-147-tagli-posti-lavoro': {
+    title: 'Sunrise taglia 147 posti, costi del personale -5%',
+    description: 'Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sunrise, taglia, posti, costi',
+    ogTitle: 'Sunrise taglia 147 posti, costi del personale -5%',
+    ogDescription: 'Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.',
+    canonicalPath: '/articoli-svizzera/sunrise-147-tagli-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sunrise taglia 147 posti, costi del personale -5%",
+      "description": "Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sunrise-147-tagli-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede centrale di Sunrise a Zurigo, operatore telecomunicazioni svizzero che ha ridotto il personale"
+      },
+      "datePublished": "2026-08-19T12:04:42+00:00",
+      "dateModified": "2026-08-19T12:04:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sunrise-147-tagli-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ricovero-assistenza-revisione-2026': {
+    title: 'Consiglio federale rivede il diritto su ricovero assistenza',
+    description: 'Il Consiglio federale avvia revisione 2026 del diritto su ricovero a scopo di assistenza: statistica nazionale, protezioni minori e chiarimenti su provvedimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, rivede, diritto',
+    ogTitle: 'Consiglio federale rivede il diritto su ricovero assistenza',
+    ogDescription: 'Berna, 12 agosto 2026: il Consiglio federale decide di revisionare il Codice civile sui ricoveri involontari. Novità principali: statistica nazionale, chiarimenti su provvedimenti medici, norme specifiche per minori. Avamprogetto entro estate 2028',
+    canonicalPath: '/articoli-svizzera/ricovero-assistenza-revisione-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale rivede il diritto su ricovero assistenza",
+      "description": "Il Consiglio federale avvia revisione 2026 del diritto su ricovero a scopo di assistenza: statistica nazionale, protezioni minori e chiarimenti su provvedimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ricovero-assistenza-revisione-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede del Consiglio federale svizzero a Berna, dove il 12 agosto 2026 è stata decisa la revisione del diritto di ricovero a scopo di assistenza"
+      },
+      "datePublished": "2026-08-19T12:21:17+00:00",
+      "dateModified": "2026-08-19T12:21:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ricovero-assistenza-revisione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-geberit-utili-semestre-2026': {
+    title: 'Geberit: vendite +2,8%, utili +7,4% nel semestre',
+    description: 'Nel primo semestre 2026, Geberit registra fatturato di 1,71 miliardi CHF e utile netto di 364 milioni CHF (+7,4%). Margine EBITDA stabile al 30,9% e previsioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, geberit, vendite, utili, semestre',
+    ogTitle: 'Geberit: crescita accelerata nel primo semestre 2026',
+    ogDescription: 'I risultati semestrali di Geberit: fatturato 1,71 miliardi CHF (+2,8%), utile netto +7,4%, margine EBITDA stabile al 30,9%. Accelerazione nel Q2 (+6,6%) e previsioni per l\'anno in corso. Cosa significano per l\'economia svizzera.',
+    canonicalPath: '/articoli-svizzera/geberit-utili-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Geberit: vendite +2,8%, utili +7,4% nel semestre",
+      "description": "Nel primo semestre 2026, Geberit registra fatturato di 1,71 miliardi CHF e utile netto di 364 milioni CHF (+7,4%). Margine EBITDA stabile al 30,9% e previsioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/geberit-utili-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento di produzione svizzero con macchinari industriali per impianti sanitari e controllo qualità"
+      },
+      "datePublished": "2026-08-19T12:40:41+00:00",
+      "dateModified": "2026-08-19T12:40:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/geberit-utili-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

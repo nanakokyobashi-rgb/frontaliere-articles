@@ -3415,6 +3415,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.burckhardt-compression-tagli-posti.title': 'Burckhardt Compression: 220 posti di lavoro a rischio',
     'blog.article.burckhardt-compression-tagli-posti.excerpt': 'Il produttore svizzero Burckhardt Compression annuncia tagli per 220 impieghi complessivi, di cui 150 a Winterthur e 70 nelle sedi internazionali.',
     'blog.article.burckhardt-compression-tagli-posti.imageAlt': 'Sede dell\'azienda Burckhardt Compression a Winterthur',
+    'blog.article.sunrise-147-tagli-posti-lavoro.title': 'Sunrise taglia 147 posti, costi del personale -5%',
+    'blog.article.sunrise-147-tagli-posti-lavoro.excerpt': 'Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.',
+    'blog.article.sunrise-147-tagli-posti-lavoro.imageAlt': 'Sede centrale di Sunrise a Zurigo, operatore telecomunicazioni svizzero che ha ridotto il personale',
+    'blog.article.ricovero-assistenza-revisione-2026.title': 'Consiglio federale rivede il diritto su ricovero assistenza',
+    'blog.article.ricovero-assistenza-revisione-2026.excerpt': 'Il 12 agosto 2026 il Consiglio federale incarica il DFGP di revisionare le norme sul ricovero involontario: statistica nazionale, chiarimenti su provvedimenti medici e protezioni specifiche per minori. Avamprogetto entro estate 2028.',
+    'blog.article.ricovero-assistenza-revisione-2026.imageAlt': 'Sede del Consiglio federale svizzero a Berna, dove il 12 agosto 2026 è stata decisa la revisione del diritto di ricovero a scopo di assistenza',
+    'blog.article.geberit-utili-semestre-2026.title': 'Geberit: vendite +2,8%, utili +7,4% nel semestre',
+    'blog.article.geberit-utili-semestre-2026.excerpt': 'Nel primo semestre 2026, il gruppo sangallese ha registrato fatturato di 1,71 miliardi CHF e utile netto in crescita del 7,4%. Margini EBITDA stabili e previsioni di crescita 5-6% per l\'anno.',
+    'blog.article.geberit-utili-semestre-2026.imageAlt': 'Stabilimento di produzione svizzero con macchinari industriali per impianti sanitari e controllo qualità',
 };
 
 export default blogMetaChIt;

@@ -30297,6 +30297,33 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'cerano-intelvi-pendolare-ticino',
+ category: 'pratico',
+ date: '2026-08-19T11:58:26.986Z',
+ image: '/images/blog/cerano-intelvi-pendolare-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-lurate-caccivio-lavorare-ticino',
+ category: 'pratico',
+ date: '2026-08-19T12:11:42.456Z',
+ image: '/images/blog/vivere-lurate-caccivio-lavorare-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere',
+ category: 'fiscale',
+ date: '2026-08-19T12:34:04.513Z',
+ image: '/images/blog/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

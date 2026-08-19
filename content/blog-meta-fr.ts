@@ -10117,6 +10117,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-ponna-lavorare-ticino.title': 'Vivre à Ponna et travailler au Tessin : guide frontalier',
     'blog.article.vivere-ponna-lavorare-ticino.excerpt': 'Vivre à Ponna et travailler au Tessin : analyse du trajet frontalier entre coût de la vie, fiscalité, AVS, LPP et considérations pratiques pour le transfert.',
     'blog.article.vivere-ponna-lavorare-ticino.imageAlt': 'Vue du paysage tessinois depuis la frontière, symbolisant la navette entre Ponna, Italie et Tessin, Suisse',
+    'blog.article.cerano-intelvi-pendolare-ticino.title': 'Cerano d\'Intelvi : vivre et travailler au Tessin',
+    'blog.article.cerano-intelvi-pendolare-ticino.excerpt': 'Permis G, taux d\'imposition, cols et rafraîchissements pour ceux qui résident dans la Vallée d\'Intelvi et travaillent dans le canton du Tessin : guide pratique du frontalier 2024-2026',
+    'blog.article.cerano-intelvi-pendolare-ticino.imageAlt': 'Vue de la Vallée d\'Intelvi vers le Tessin et les Alpes suisses, destination quotidienne de milliers de frontaliers',
+    'blog.article.vivere-lurate-caccivio-lavorare-ticino.title': 'Lurate Caccivio : vivre et travailler comme frontalier au Tessin',
+    'blog.article.vivere-lurate-caccivio-lavorare-ticino.excerpt': 'Vivre en Italie frontalière et travailler en Suisse : guide fiscal, de prévoyance et de pratique pour les frontaliers avec permis G. Impôt à la source, AVS/LPP, LAMal et procédures.',
+    'blog.article.vivere-lurate-caccivio-lavorare-ticino.imageAlt': 'Paysage frontalier Tessin-Côme à l\'aube: un travailleur frontalier franchissant la frontière Suisse-Italie lors de son trajet quotidien vers le travail.',
+    'blog.article.vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.title': 'Travailler au Tessin en tant que frontalier : qu\'est-ce qui change ?',
+    'blog.article.vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.excerpt': 'Le nouvel accord frontalier : quelles sont les nouveautés et les conséquences pour les frontaliers qui vivent à Oltrona di San Mamette et travaillent au Tessin ?',
+    'blog.article.vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.imageAlt': 'Image d\'Oltrona di San Mamette avec un frontalier en avant-plan',
 };
 
 export default blogMetaFr;

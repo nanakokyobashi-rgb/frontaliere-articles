@@ -69959,6 +69959,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-cerano-intelvi-pendolare-ticino': {
+    title: 'Cerano d\'Intelvi: vivere e lavorare in Ticino | Frontaliere Ticino',
+    description: 'Permesso G, fiscalità, imposta alla fonte, ristorni e valichi per frontalieri che risiedono a Cerano d\'Intelvi e lavorano nel Canton Ticino. Guida completa',
+    keywords: 'frontalieri, ticino, svizzera, italia, cerano, intelvi, vivere, lavorare',
+    ogTitle: 'Cerano d\'Intelvi: vivere e lavorare in Ticino',
+    ogDescription: 'Guida pratica per frontalieri che vivono a Cerano d\'Intelvi e lavorano in Ticino: aliquote, permesso G, valichi, ristorni fiscali e procedure amministrative 2024-2026.',
+    canonicalPath: '/articoli-frontaliere/cerano-intelvi-pendolare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cerano d'Intelvi: vivere e lavorare in Ticino",
+      "description": "Permesso G, fiscalità, imposta alla fonte, ristorni e valichi per frontalieri che risiedono a Cerano d'Intelvi e lavorano nel Canton Ticino. Guida completa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cerano-intelvi-pendolare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio della Valle d'Intelvi con vista verso il Ticino e le Alpi Svizzere, meta quotidiana di frontalieri che lavorano nel Canton Ticino"
+      },
+      "datePublished": "2026-08-19T11:58:27+00:00",
+      "dateModified": "2026-08-19T11:58:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cerano-intelvi-pendolare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-lurate-caccivio-lavorare-ticino': {
+    title: 'Lurate Caccivio: vivere e lavorare da frontaliere in Ticino',
+    description: 'Vivere a Lurate Caccivio e lavorare in Svizzera: guida a permessi G/B, imposta alla fonte, AVS/LPP, LAMal, costo vita e procedura per frontalieri italiani.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lurate, caccivio, vivere, lavorare',
+    ogTitle: 'Lurate Caccivio: vivere e lavorare da frontaliere in Ticino',
+    ogDescription: 'Trasferissi a Lurate Caccivio per lavorare in Ticino? Guida completa su permesso G, imposta alla fonte (solo Svizzera), AVS/LPP, LAMal, cambio CHF-EUR, ristorni fiscali. Checklist e scadenze per frontalieri italiani.',
+    canonicalPath: '/articoli-frontaliere/vivere-lurate-caccivio-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lurate Caccivio: vivere e lavorare da frontaliere in Ticino",
+      "description": "Vivere a Lurate Caccivio e lavorare in Svizzera: guida a permessi G/B, imposta alla fonte, AVS/LPP, LAMal, costo vita e procedura per frontalieri italiani.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-lurate-caccivio-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio di confine Ticino-Como all'alba: un frontaliere attraversa il valico svizzero-italiano durante la pendolarità quotidiana verso il lavoro."
+      },
+      "datePublished": "2026-08-19T12:11:42+00:00",
+      "dateModified": "2026-08-19T12:11:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-lurate-caccivio-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere': {
+    title: 'Lavorare in Ticino da frontaliere: cosa cambia?',
+    description: 'Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavorare, cosa, cambia, nuovo',
+    ogTitle: 'Vivere a Oltrona di San Mamette e lavorare in Ticino da frontaliere: cosa cambia?',
+    ogDescription: 'Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?',
+    canonicalPath: '/articoli-frontaliere/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavorare in Ticino da frontaliere: cosa cambia?",
+      "description": "Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di Oltrona di San Mamette con un frontaliere in primo piano"
+      },
+      "datePublished": "2026-08-19T12:34:04+00:00",
+      "dateModified": "2026-08-19T12:34:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
