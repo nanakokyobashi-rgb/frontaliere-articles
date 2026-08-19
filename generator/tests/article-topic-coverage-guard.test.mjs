@@ -633,3 +633,78 @@ describe('nessun falso positivo sulle serie legittime (corpus reale del checkout
     expect(hit.value).toBe('piastrellista');
   });
 });
+
+// ══════════════════════════════════════════════════════════════════════════
+// Il nome di un COMUNE non è una prova che l'articolo parli di un MESTIERE
+// ══════════════════════════════════════════════════════════════════════════
+
+/**
+ * `professionTopicKey` lavora su un SACCHETTO di stem: decide se un alias
+ * compare, non DOVE. Quindi non può accorgersi che il token che l'ha convinta
+ * stava dentro un toponimo — ed è la stessa cecità che
+ * `AMBIGUOUS_COMUNE_TOKENS` cura nella direzione opposta.
+ *
+ * IL CASO REALE. `vivere-villa-guardia-lavorare-ticino`, «Villa Guardia:
+ * vivere e lavorare come frontaliere», pubblicato il 2026-08-19T07:27Z.
+ * «lavorare come» accende l'intento-mestiere e «guardia» — metà del nome di un
+ * comune della provincia di Como — risolve sull'alias di `agente-sicurezza`.
+ * L'articolo usciva `profession-guide:agente-sicurezza`: il gate avrebbe
+ * potuto rifiutare una futura guida legittima sulle guardie giurate perché
+ * «già coperta» da una guida su un paese, e non avrebbe protetto Villa Guardia
+ * da un doppione. Ha reso ROSSO questo file su OGNI branch, main compreso, e
+ * con esso ha bloccato la coda di merge del repo.
+ *
+ * PERCHÉ SONO TRE CASI E NON UNO. Il criterio è causale, non lessicale: si
+ * toglie il nome del comune e si richiede la chiave. Un test sul solo caso
+ * rotto passerebbe anche con la regola sbagliata «se c'è un comune, non è mai
+ * un mestiere», che cancellerebbe le guide-mestiere ambientate in un comune.
+ * Il secondo e il terzo caso sono quelli che quella regola ucciderebbe.
+ */
+describe('il nome di un comune non prova un mestiere', () => {
+  const VILLA_GUARDIA_RESIDENZA = {
+    id: 'vivere-villa-guardia-lavorare-ticino',
+    title: 'Villa Guardia: vivere e lavorare come frontaliere',
+  };
+  const GUARDIA_A_VILLA_GUARDIA = {
+    id: 'guardia-giurata-villa-guardia-stipendio',
+    title: 'Fare la guardia giurata a Villa Guardia: stipendio e requisiti',
+  };
+  const GUARDIA_SENZA_COMUNE = {
+    id: 'lavoro-guardia-giurata-ticino-frontaliere',
+    title: 'Lavorare come guardia giurata in Ticino: guida per frontalieri',
+  };
+
+  it('l\'unica prova è il toponimo → non è una guida-mestiere', () => {
+    expect(topicCoverageKey(VILLA_GUARDIA_RESIDENZA)?.kind).not.toBe('profession-guide');
+  });
+
+  it('il mestiere ha prove PROPRIE → resta una guida-mestiere anche col comune', () => {
+    // La riga che impedisce l'ipercorrezione: togliere «villa guardia» lascia
+    // «fare la guardia giurata a», e quella prova sopravvive.
+    expect(keyOf(GUARDIA_A_VILLA_GUARDIA)).toBe('profession-guide:agente-sicurezza');
+  });
+
+  it('senza nessun comune nel testo, niente cambia', () => {
+    expect(keyOf(GUARDIA_SENZA_COMUNE)).toBe('profession-guide:agente-sicurezza');
+  });
+
+  it('il nome va tolto in TUTTE le sue occorrenze, non solo nella prima', () => {
+    // Il testo di decisione è `${title} ${id}`, e l'id ripete quasi sempre
+    // ciò che il titolo dice: qui «villa guardia» compare DUE volte. La prima
+    // stesura ne toglieva una sola, e l'altra bastava a far sopravvivere la
+    // chiave-mestiere — misurato: zero articoli cambiati su 4.498, cioè una
+    // fix che non riparava niente restando verde su ogni test a caso singolo.
+    const text = `${VILLA_GUARDIA_RESIDENZA.title} ${VILLA_GUARDIA_RESIDENZA.id.replace(/-/g, ' ')}`;
+    expect((text.toLowerCase().match(/villa guardia/g) || []).length).toBe(2);
+  });
+
+  it('nel corpus reale la regola tocca UN articolo, non una classe', () => {
+    // Il valore della fix è che sia chirurgica: se una modifica futura la
+    // allargasse, questo conteggio lo direbbe prima della produzione.
+    const persi = CORPUS.filter((a) => {
+      const k = topicCoverageKey(a);
+      return k?.kind === 'profession-guide' && /^(trasferirsi-a-|vivere-)/.test(a.id);
+    });
+    expect(persi).toEqual([]);
+  });
+});

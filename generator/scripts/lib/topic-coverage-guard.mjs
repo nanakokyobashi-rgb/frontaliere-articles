@@ -441,6 +441,20 @@ export function hasResidenceGuideIntent(text) {
  * @returns {string|null} lo slug del comune, o null
  */
 export function comuneTopicKey(text) {
+  return comuneMatch(text)?.value ?? null;
+}
+
+/**
+ * Come `comuneTopicKey`, ma dice anche DOVE il nome ha combaciato.
+ *
+ * La posizione non serve alla chiave — serve a `professionEvidenceIsOnlyAComuneName`,
+ * che deve poter togliere dal testo esattamente quelle parole e nient'altro.
+ * `comuneTopicKey` resta la porta pubblica e continua a rendere il solo slug,
+ * cosi' i chiamanti e i test che la usano non cambiano.
+ *
+ * @returns {{value: string, start: number, words: string[]}|null}
+ */
+function comuneMatch(text) {
   const norm = normalizeText(text);
   if (!norm) return null;
   const index = municipalityIndex();
@@ -454,10 +468,89 @@ export function comuneTopicKey(text) {
       let n = 0;
       while (n < candidate.words.length && tokens[i + n] === candidate.words[n]) n += 1;
       if (n !== candidate.words.length) continue;
-      if (!best || n > best.length) best = { value: candidate.value, length: n };
+      if (!best || n > best.length) best = { value: candidate.value, start: i, words: candidate.words };
     }
   }
-  return best ? best.value : null;
+  return best;
+}
+
+/**
+ * L'unica prova che questo sia un articolo su un MESTIERE e' il nome del
+ * COMUNE di cui parla?
+ *
+ * ── PERCHE' ESISTE ────────────────────────────────────────────────────────
+ *
+ * `professionTopicKey` lavora su un SACCHETTO di stem, non su posizioni:
+ * decide se un alias compare, non dove. Quindi non puo' accorgersi che il
+ * token che lo ha convinto stava dentro un toponimo. E' la stessa cecita' che
+ * `AMBIGUOUS_COMUNE_TOKENS` cura nella direzione opposta — li' un nome di
+ * comune che non e' il comune, qui un nome di mestiere che non e' il mestiere
+ * — con la differenza che quella e' una lista e questa e' una regola: un
+ * elenco di toponimi-che-sembrano-mestieri andrebbe riscritto a ogni comune
+ * nuovo, e i comuni sono 400+.
+ *
+ * ── IL CASO CHE L'HA RESA NECESSARIA ──────────────────────────────────────
+ *
+ * `vivere-villa-guardia-lavorare-ticino`, «Villa Guardia: vivere e lavorare
+ * come frontaliere», pubblicato il 2026-08-19T07:27Z. Testo di decisione:
+ *
+ *     Villa Guardia: vivere e lavorare come frontaliere
+ *     vivere villa guardia lavorare ticino
+ *
+ * «lavorare come» accende `hasProfessionGuideIntent`, e «guardia» — che qui e'
+ * meta' del nome di un comune della provincia di Como — risolve sull'alias di
+ * `agente-sicurezza`. L'articolo veniva classificato
+ * `profession-guide:agente-sicurezza`: significa che il gate avrebbe potuto
+ * bloccare una futura, legittima guida sulle guardie giurate perche' «gia'
+ * coperta» da una guida su un paese, e non avrebbe protetto Villa Guardia da
+ * un doppione. Ha anche reso ROSSO `article-topic-coverage-guard.test.mjs` su
+ * OGNI branch, main compreso, quindi bloccato la coda di merge del repo.
+ *
+ * ── PERCHE' TOGLIERE IL NOME E RIPROVARE, E NON UN'ALLOWLIST ──────────────
+ *
+ * Il criterio e' causale, non lessicale: si toglie dal testo il nome di comune
+ * che ha combaciato e si richiede la chiave-mestiere. Se sopravvive, il
+ * mestiere aveva prove PROPRIE e vince come prima; se sparisce, l'unica prova
+ * era il toponimo. Cosi' «Fare la guardia giurata a Villa Guardia» resta
+ * `profession-guide` (la prova sopravvive alla rimozione) mentre «Villa
+ * Guardia: vivere e lavorare» non lo e' piu'. Nessun mestiere perde una
+ * classificazione che si reggeva su prove sue.
+ */
+function professionEvidenceIsOnlyAComuneName(text, professionId) {
+  const comune = comuneMatch(text);
+  if (!comune) return false;
+  return professionTopicKey(removeWordSequence(normalizeText(text), comune.words)) !== professionId;
+}
+
+/**
+ * Toglie da `norm` OGNI occorrenza della sequenza `words`.
+ *
+ * Due dettagli, ed entrambi sono stati sbagliati prima di essere misurati.
+ *
+ * OGNI occorrenza, non la prima. Il testo di decisione e' `${title} ${id}`, e
+ * l'id ripete quasi sempre cio' che il titolo dice: «Villa Guardia: vivere e
+ * lavorare come frontaliere vivere villa guardia lavorare ticino» contiene il
+ * nome DUE volte. Togliendone una sola, l'altra basta a far sopravvivere la
+ * chiave-mestiere e la guardia non scatta — che e' esattamente il risultato
+ * misurato sulla prima stesura: zero articoli cambiati su 4.498.
+ *
+ * La SEQUENZA, non i token. Togliere i token uno per uno cancellerebbe anche
+ * gli usi legittimi della stessa parola altrove nel testo: «Fare la guardia
+ * giurata a Villa Guardia» perderebbe la prova vera del mestiere e finirebbe
+ * classificato come comune. Togliendo solo «villa guardia» resta «fare la
+ * guardia giurata a», il mestiere sopravvive, e la distinzione regge.
+ */
+function removeWordSequence(norm, words) {
+  const tokens = norm.split(' ');
+  const out = [];
+  for (let i = 0; i < tokens.length;) {
+    let n = 0;
+    while (n < words.length && tokens[i + n] === words[n]) n += 1;
+    if (n === words.length) { i += n; continue; }
+    out.push(tokens[i]);
+    i += 1;
+  }
+  return out.join(' ');
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -630,7 +723,12 @@ export function topicCoverageKey(article) {
 function computeTopicCoverageKey(text) {
   if (hasProfessionGuideIntent(text)) {
     const professionId = professionTopicKey(text);
-    if (professionId) return { kind: 'profession-guide', value: professionId };
+    // Il mestiere vince ancora per primo, ma non piu' quando la sua UNICA
+    // prova e' il nome del comune di cui l'articolo parla — vedi
+    // professionEvidenceIsOnlyAComuneName.
+    if (professionId && !professionEvidenceIsOnlyAComuneName(text, professionId)) {
+      return { kind: 'profession-guide', value: professionId };
+    }
   }
   if (hasResidenceGuideIntent(text)) {
     const comuneId = comuneTopicKey(text);
