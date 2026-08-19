@@ -1156,6 +1156,18 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ticino-neutralita-sondaggio-2026': { it: 'ticino-neutralita-sondaggio-2026', en: 'ticino-neutrality-survey-2026', de: 'tessin-neutralitaet-umfrage-2026', fr: 'tessin-neutralite-sondage-2026' },
  'revisione-lex-koller-immobiliare': { it: 'revisione-lex-koller-immobiliare', en: 'lex-koller-revision-real-estate', de: 'lex-koller-revision-immobilien', fr: 'revision-lex-koller-immobilier' },
  'migros-tre-partenze-vertici': { it: 'migros-tre-partenze-vertici', en: 'migros-three-departures-executives', de: 'migros-drei-abgaenge-spitze', fr: 'migros-trois-departs-direction' },
+ 'industria-costruzione-crescita-q2': { it: 'industria-costruzione-crescita-q2', en: 'industry-construction-growth-q2', de: 'industrie-bau-wachstum-q2', fr: 'industrie-construction-croissance-q2' },
+ 'difesa-aerea-svizzera-investimenti': { it: 'difesa-aerea-svizzera-investimenti', en: 'swiss-air-defense-investments', de: 'schweizer-luftverteidigung-investitionen', fr: 'investissements-defense-aerienne-suisse' },
+ 'indennita-malattia-sistema-funziona-bene': { it: 'indennita-malattia-sistema-funziona-bene', en: 'illness-daily-allowance-system-sufficient', de: 'krankengeld-system-ausreichend', fr: 'indemnite-maladie-systeme-suffisant' },
+ 'bilancio-federale-2026-surplus': { it: 'bilancio-federale-2026-surplus', en: 'federal-budget-2026-surplus', de: 'bundeshaushalt-2026-ueberschuss', fr: 'budget-federal-2026-excedent' },
+ 'furgoni-elettrici-equiparazione-federale': { it: 'furgoni-elettrici-equiparazione-federale', en: 'electric-vans-federal-alignment', de: 'elektro-lieferwagen-bundesgleichstellung', fr: 'fourgons-electriques-egalisation-federale' },
+ 'eccedenza-federale-2026-800-milioni': { it: 'eccedenza-federale-2026-800-milioni', en: 'federal-surplus-2026-800-million', de: 'bundeshaushaltsuberschuss-2026-800-millionen', fr: 'excedent-federal-2026-800-millions' },
+ 'difesa-970-milioni-consiglio-federale': { it: 'difesa-970-milioni-consiglio-federale', en: 'defense-970-million-federal-council', de: 'verteidigung-970-millionen-bundesrat', fr: 'defense-970-millions-conseil-federal' },
+ 'burckhardt-compression-tagli-posti': { it: 'burckhardt-compression-tagli-posti', en: 'burckhardt-compression-job-cuts', de: 'burckhardt-compression-stellenabbau', fr: 'burckhardt-compression-suppression-postes' },
+ 'sunrise-147-tagli-posti-lavoro': { it: 'sunrise-147-tagli-posti-lavoro', en: 'sunrise-147-job-cuts', de: 'sunrise-147-stellenabbau', fr: 'sunrise-147-suppressions-emplois' },
+ 'ricovero-assistenza-revisione-2026': { it: 'ricovero-assistenza-revisione-2026', en: 'assistance-admission-revision-2026', de: 'unterbringung-assistenz-revision-2026', fr: 'placement-assistance-revision-2026' },
+ 'geberit-utili-semestre-2026': { it: 'geberit-utili-semestre-2026', en: 'geberit-earnings-half-year-2026', de: 'geberit-gewinn-halbjahr-2026', fr: 'geberit-benefices-semestre-2026' },
+ 'trasporti-eccezionali-standard-federali': { it: 'trasporti-eccezionali-standard-federali', en: 'exceptional-transport-federal-standards', de: 'aussergewoehliche-transport-standards-bundes', fr: 'transports-exceptionnels-standards-federaux' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

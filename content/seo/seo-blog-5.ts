@@ -69686,6 +69686,435 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ferrera-varese-frontaliere-ticino': {
+    title: 'Vivere a Ferrera di Varese e lavorare in Ticino da frontaliere',
+    description: 'Guida al nuovo accordo frontalieri 2024: tassazione, imposta alla fonte svizzera, franchigie, dichiarazione redditi italiana, Permesso G e credito d\'imposta.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, ferrera, varese, lavorare',
+    ogTitle: 'Vivere a Ferrera di Varese e lavorare in Ticino da frontaliere',
+    ogDescription: 'Nuovo accordo frontalieri 2024 in vigore dal 1° gennaio: scopri come gestire tassazione, contributi AVS/LPP, LAMal, dichiarazione redditi e ristorni se vivi a Ferrera di Varese e lavori nel Canton Ticino. Franchigie €7.500–€10.000, imposta alla fonte',
+    canonicalPath: '/articoli-frontaliere/ferrera-varese-frontaliere-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Ferrera di Varese e lavorare in Ticino da frontaliere",
+      "description": "Guida al nuovo accordo frontalieri 2024: tassazione, imposta alla fonte svizzera, franchigie, dichiarazione redditi italiana, Permesso G e credito d'imposta.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ferrera-varese-frontaliere-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pendolari che si recano al lavoro nel Canton Ticino al mattino dalla regione di confine italiana"
+      },
+      "datePublished": "2026-08-19T08:37:13+00:00",
+      "dateModified": "2026-08-19T08:37:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/ferrera-varese-frontaliere-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-centro-valle-intelvi-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Centro Valle Intelvi e lavorare in Ticino da frontaliere',
+    description: 'Impostazione fiscale, permessi e vantaggi del trasferimento. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, centro, valle, intelvi',
+    ogTitle: 'Vivere a Centro Valle Intelvi e lavorare in Ticino da frontaliere',
+    ogDescription: 'Impostazione fiscale, permessi e vantaggi del trasferimento',
+    canonicalPath: '/articoli-frontaliere/vivere-centro-valle-intelvi-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Centro Valle Intelvi e lavorare in Ticino da frontaliere",
+      "description": "Impostazione fiscale, permessi e vantaggi del trasferimento. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-centro-valle-intelvi-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere che si trasferisce a Centro Valle Intelvi e lavora in Ticino"
+      },
+      "datePublished": "2026-08-19T09:10:36+00:00",
+      "dateModified": "2026-08-19T09:10:36+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-centro-valle-intelvi-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-laglio-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Laglio e lavorare in Ticino da frontaliere',
+    description: 'Impostazioni fiscali, permessi e doppia imposizione: cosa devi sapere se sei frontaliere e vivi a Laglio, ma lavori in Ticino. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, laglio, lavorare, impostazioni',
+    ogTitle: 'Vivere a Laglio e lavorare in Ticino da frontaliere',
+    ogDescription: 'Impostazioni fiscali, permessi e doppia imposizione: cosa devi sapere se sei frontaliere e vivi a Laglio, ma lavori in Ticino.',
+    canonicalPath: '/articoli-frontaliere/vivere-laglio-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Laglio e lavorare in Ticino da frontaliere",
+      "description": "Impostazioni fiscali, permessi e doppia imposizione: cosa devi sapere se sei frontaliere e vivi a Laglio, ma lavori in Ticino. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-laglio-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontalieri in Ticino"
+      },
+      "datePublished": "2026-08-19T09:26:25+00:00",
+      "dateModified": "2026-08-19T09:26:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-laglio-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-masciago-primo-lavorare-ticino': {
+    title: 'Frontaliere a Masciago Primo: lavoro e vita in Ticino',
+    description: 'Vivere a Masciago Primo e lavorare in Ticino: Nuovo Accordo 2024, tassazione, AVS, LAMal, ristorni fiscali €7.500–€10.000 e procedura per frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, masciago, primo, lavoro, vita',
+    ogTitle: 'Frontaliere a Masciago Primo: lavoro e vita in Ticino',
+    ogDescription: 'Guida completa per chi vive a Masciago Primo e lavora in Ticino: Nuovo Accordo 2024, ristorni €7.500–€10.000, tassazione AVS/LPP, LAMal svizzera, procedura Permesso G e scadenze.',
+    canonicalPath: '/articoli-frontaliere/vivere-masciago-primo-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere a Masciago Primo: lavoro e vita in Ticino",
+      "description": "Vivere a Masciago Primo e lavorare in Ticino: Nuovo Accordo 2024, tassazione, AVS, LAMal, ristorni fiscali €7.500–€10.000 e procedura per frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-masciago-primo-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del Lago di Como al confine con il Ticino, con le sponde italiane in primo piano e le montagne svizzere sullo sfondo."
+      },
+      "datePublished": "2026-08-19T10:24:11+00:00",
+      "dateModified": "2026-08-19T10:24:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-masciago-primo-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-posta-riduce-tagli-informatica': {
+    title: 'Posta, ridotti i tagli di personale nell’informatica',
+    description: 'Riorganizzazione informatica della Posta: fino a 40 licenziamenti e 20 modifiche contrattuali dal 1 gennaio 2027. I dettagli del progetto Tech Acceleration.',
+    keywords: 'frontalieri, ticino, svizzera, italia, posta, ridotti, tagli, personale',
+    ogTitle: 'Posta, ridotti i tagli di personale nell’informatica',
+    ogDescription: 'La riorganizzazione Tech Acceleration della Posta prevede fino a 40 licenziamenti e una ventina di modifiche contrattuali nel settore informatico a partire dal 1 gennaio 2027, con misure di mitigazione tramite fluttuazione e prepensionamenti.',
+    canonicalPath: '/articoli-frontaliere/posta-riduce-tagli-informatica',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Posta, ridotti i tagli di personale nell’informatica",
+      "description": "Riorganizzazione informatica della Posta: fino a 40 licenziamenti e 20 modifiche contrattuali dal 1 gennaio 2027. I dettagli del progetto Tech Acceleration.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/posta-riduce-tagli-informatica.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede aziendale della Posta in Svizzera"
+      },
+      "datePublished": "2026-08-19T10:37:20+00:00",
+      "dateModified": "2026-08-19T10:37:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/posta-riduce-tagli-informatica/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-porto-valtravaglia-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Porto Valtravaglia e lavorare in Ticino da frontaliere',
+    description: 'Guida per vivere a Porto Valtravaglia e lavorare in Ticino: collegamenti, imposta alla fonte, nuovo accordo frontalieri, previdenza e aspetti pratici.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, porto, valtravaglia, lavorare',
+    ogTitle: 'Vivere a Porto Valtravaglia e lavorare in Ticino da frontaliere',
+    ogDescription: 'Approfondimento completo per chi sceglie di vivere a Porto Valtravaglia e lavorare in Ticino come frontaliere: fiscalità, accordo 2024, previdenza e servizi.',
+    canonicalPath: '/articoli-frontaliere/vivere-porto-valtravaglia-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Porto Valtravaglia e lavorare in Ticino da frontaliere",
+      "description": "Guida per vivere a Porto Valtravaglia e lavorare in Ticino: collegamenti, imposta alla fonte, nuovo accordo frontalieri, previdenza e aspetti pratici.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-porto-valtravaglia-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Porto Valtravaglia sul Lago Maggiore vicino al confine svizzero"
+      },
+      "datePublished": "2026-08-19T10:56:45+00:00",
+      "dateModified": "2026-08-19T10:56:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-porto-valtravaglia-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-ponna-lavorare-ticino': {
+    title: 'Vivere a Ponna e lavorare in Ticino: guida frontaliere',
+    description: 'Vivere a Ponna e lavorare in Ticino: analisi del pendolarismo frontaliero, tassazione, AVS, LPP, LAMal e checklist pratica per il trasferimento. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, ponna, lavorare, analisi',
+    ogTitle: 'Vivere a Ponna e lavorare in Ticino: guida frontaliere',
+    ogDescription: 'Scopri come vivere a Ponna e lavorare in Ticino da frontaliere. Guida completa su tassazione, imposta alla fonte, AVS, LPP, LAMal, costo della vita, valichi e procedura permesso G. Checklista pratica per il trasferimento.',
+    canonicalPath: '/articoli-frontaliere/vivere-ponna-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Ponna e lavorare in Ticino: guida frontaliere",
+      "description": "Vivere a Ponna e lavorare in Ticino: analisi del pendolarismo frontaliero, tassazione, AVS, LPP, LAMal e checklist pratica per il trasferimento. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-ponna-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del paesaggio ticinese dal confine, simbolo del pendolarismo tra Ponna in Italia e il Ticino in Svizzera"
+      },
+      "datePublished": "2026-08-19T11:29:48+00:00",
+      "dateModified": "2026-08-19T11:29:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-ponna-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-cerano-intelvi-pendolare-ticino': {
+    title: 'Cerano d\'Intelvi: vivere e lavorare in Ticino | Frontaliere Ticino',
+    description: 'Permesso G, fiscalità, imposta alla fonte, ristorni e valichi per frontalieri che risiedono a Cerano d\'Intelvi e lavorano nel Canton Ticino. Guida completa',
+    keywords: 'frontalieri, ticino, svizzera, italia, cerano, intelvi, vivere, lavorare',
+    ogTitle: 'Cerano d\'Intelvi: vivere e lavorare in Ticino',
+    ogDescription: 'Guida pratica per frontalieri che vivono a Cerano d\'Intelvi e lavorano in Ticino: aliquote, permesso G, valichi, ristorni fiscali e procedure amministrative 2024-2026.',
+    canonicalPath: '/articoli-frontaliere/cerano-intelvi-pendolare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cerano d'Intelvi: vivere e lavorare in Ticino",
+      "description": "Permesso G, fiscalità, imposta alla fonte, ristorni e valichi per frontalieri che risiedono a Cerano d'Intelvi e lavorano nel Canton Ticino. Guida completa",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/cerano-intelvi-pendolare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio della Valle d'Intelvi con vista verso il Ticino e le Alpi Svizzere, meta quotidiana di frontalieri che lavorano nel Canton Ticino"
+      },
+      "datePublished": "2026-08-19T11:58:27+00:00",
+      "dateModified": "2026-08-19T11:58:27+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/cerano-intelvi-pendolare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-lurate-caccivio-lavorare-ticino': {
+    title: 'Lurate Caccivio: vivere e lavorare da frontaliere in Ticino',
+    description: 'Vivere a Lurate Caccivio e lavorare in Svizzera: guida a permessi G/B, imposta alla fonte, AVS/LPP, LAMal, costo vita e procedura per frontalieri italiani.',
+    keywords: 'frontalieri, ticino, svizzera, italia, lurate, caccivio, vivere, lavorare',
+    ogTitle: 'Lurate Caccivio: vivere e lavorare da frontaliere in Ticino',
+    ogDescription: 'Trasferissi a Lurate Caccivio per lavorare in Ticino? Guida completa su permesso G, imposta alla fonte (solo Svizzera), AVS/LPP, LAMal, cambio CHF-EUR, ristorni fiscali. Checklist e scadenze per frontalieri italiani.',
+    canonicalPath: '/articoli-frontaliere/vivere-lurate-caccivio-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lurate Caccivio: vivere e lavorare da frontaliere in Ticino",
+      "description": "Vivere a Lurate Caccivio e lavorare in Svizzera: guida a permessi G/B, imposta alla fonte, AVS/LPP, LAMal, costo vita e procedura per frontalieri italiani.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-lurate-caccivio-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio di confine Ticino-Como all'alba: un frontaliere attraversa il valico svizzero-italiano durante la pendolarità quotidiana verso il lavoro."
+      },
+      "datePublished": "2026-08-19T12:11:42+00:00",
+      "dateModified": "2026-08-19T12:11:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-lurate-caccivio-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere': {
+    title: 'Lavorare in Ticino da frontaliere: cosa cambia?',
+    description: 'Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, lavorare, cosa, cambia, nuovo',
+    ogTitle: 'Vivere a Oltrona di San Mamette e lavorare in Ticino da frontaliere: cosa cambia?',
+    ogDescription: 'Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?',
+    canonicalPath: '/articoli-frontaliere/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Lavorare in Ticino da frontaliere: cosa cambia?",
+      "description": "Il nuovo accordo frontalieri: quali sono le novità e le conseguenze per i frontalieri che vivono a Oltrona di San Mamette e lavorano in Ticino?. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Immagine di Oltrona di San Mamette con un frontaliere in primo piano"
+      },
+      "datePublished": "2026-08-19T12:34:04+00:00",
+      "dateModified": "2026-08-19T12:34:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-oltiona-di-san-mamette-e-lavorare-in-ticino-da-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-a-brinzio-e-lavorare-in-ticino': {
+    title: 'Vivere a Brinzio e lavorare in Ticino da frontaliere',
+    description: 'Guida completa per vivere a Brinzio e lavorare in Ticino: imposta alla fonte, nuovo accordo frontalieri, contributi previdenziali e costi. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, brinzio, lavorare, pratica',
+    ogTitle: 'Vivere a Brinzio e lavorare in Ticino da frontaliere',
+    ogDescription: 'Scopri tutte le informazioni utili per chi vive a Brinzio e lavora in Ticino: fiscalità, accordo frontalieri, contributi e aspetti pratici.',
+    canonicalPath: '/articoli-frontaliere/vivere-a-brinzio-e-lavorare-in-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Brinzio e lavorare in Ticino da frontaliere",
+      "description": "Guida completa per vivere a Brinzio e lavorare in Ticino: imposta alla fonte, nuovo accordo frontalieri, contributi previdenziali e costi. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-a-brinzio-e-lavorare-in-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Brinzio vicino al confine con il Ticino per frontalieri"
+      },
+      "datePublished": "2026-08-19T13:05:35+00:00",
+      "dateModified": "2026-08-19T13:05:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-a-brinzio-e-lavorare-in-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

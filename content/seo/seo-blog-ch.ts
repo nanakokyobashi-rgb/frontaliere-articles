@@ -43973,6 +43973,474 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-industria-costruzione-crescita-q2': {
+    title: 'Industria e costruzione crescono: +5,1% nel Q2',
+    description: 'Nel secondo trimestre 2026 la produzione del settore secondario svizzero cresce del 5,1%. Industria +5,5%, costruzione +2,1%. Dati UST e analisi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, industria, costruzione, crescono, secondo',
+    ogTitle: 'Industria e costruzione crescono: +5,1% nel Q2',
+    ogDescription: 'Buone notizie per l\'economia svizzera: nel Q2 la produzione industriale e il settore costruzioni segnano crescita significativa. Industria +5,5%, costruzione +2,1%. Farmaceutico +15,5%, veicoli -15,8%. Dati Ufficio federale di statistica.',
+    canonicalPath: '/articoli-svizzera/industria-costruzione-crescita-q2/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Industria e costruzione crescono: +5,1% nel Q2",
+      "description": "Nel secondo trimestre 2026 la produzione del settore secondario svizzero cresce del 5,1%. Industria +5,5%, costruzione +2,1%. Dati UST e analisi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/industria-costruzione-crescita-q2.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento manifatturiero svizzero con operai che controllano la qualità dei prodotti alla catena di montaggio"
+      },
+      "datePublished": "2026-08-19T08:42:03+00:00",
+      "dateModified": "2026-08-19T08:42:03+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/industria-costruzione-crescita-q2/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-difesa-aerea-svizzera-investimenti': {
+    title: 'Difesa aerea: il Consiglio federale accelera gli investimenti',
+    description: 'Il Consiglio federale stanzia 970 milioni per la difesa aerea e 100 milioni per la sicurezza delle basi militari entro il 2029. Scopri i dettagli del piano.',
+    keywords: 'frontalieri, ticino, svizzera, italia, difesa, aerea, consiglio, federale',
+    ogTitle: 'Difesa aerea: il Consiglio federale accelera gli investimenti',
+    ogDescription: 'Il Consiglio federale ha approvato un piano di investimenti straordinario per la difesa aerea e la sicurezza delle basi militari. Stanziati oltre un miliardo di franchi per far fronte alle minacce internazionali.',
+    canonicalPath: '/articoli-svizzera/difesa-aerea-svizzera-investimenti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Difesa aerea: il Consiglio federale accelera gli investimenti",
+      "description": "Il Consiglio federale stanzia 970 milioni per la difesa aerea e 100 milioni per la sicurezza delle basi militari entro il 2029. Scopri i dettagli del piano.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/difesa-aerea-svizzera-investimenti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del governo svizzero"
+      },
+      "datePublished": "2026-08-19T09:19:00+00:00",
+      "dateModified": "2026-08-19T09:19:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/difesa-aerea-svizzera-investimenti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-indennita-malattia-sistema-funziona-bene': {
+    title: 'Indennità malattia: il sistema funziona bene | Frontaliere Ticino',
+    description: 'Consiglio federale 19 agosto 2026: sistema indennità malattia adeguato. Copertura all\'85-90% nelle aziende, solo lo 0,13% lavoratori escluso. Nessuna modifica',
+    keywords: 'frontalieri, ticino, svizzera, italia, indennità, malattia, sistema, funziona',
+    ogTitle: 'Indennità malattia: Svizzera ha buona copertura',
+    ogDescription: 'Il Consiglio federale conferma che il sistema di protezione per i lavoratori in caso di malattia funziona bene. Copertura all\'85% nelle aziende medie, 90% nelle grandi. Ecco cosa devi sapere se lavori in Svizzera.',
+    canonicalPath: '/articoli-svizzera/indennita-malattia-sistema-funziona-bene/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Indennità malattia: il sistema funziona bene",
+      "description": "Consiglio federale 19 agosto 2026: sistema indennità malattia adeguato. Copertura all'85-90% nelle aziende, solo lo 0,13% lavoratori escluso. Nessuna modifica",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/indennita-malattia-sistema-funziona-bene.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio federale di Berna con bandiere ufficiali di giorno. Lavoratori attraversano la zona amministrativa federale."
+      },
+      "datePublished": "2026-08-19T09:38:20+00:00",
+      "dateModified": "2026-08-19T09:38:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/indennita-malattia-sistema-funziona-bene/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bilancio-federale-2026-surplus': {
+    title: 'Bilancio 2026: da deficit a surplus di 800 milioni',
+    description: 'Il bilancio federale svizzero 2026 passa da un deficit di 700 milioni a un surplus di 800 milioni grazie alle maggiori entrate da imposta sull\'utile',
+    keywords: 'frontalieri, ticino, svizzera, italia, bilancio, deficit, surplus, milioni',
+    ogTitle: 'Bilancio 2026: da deficit a surplus di 800 milioni',
+    ogDescription: 'Conti federali in positivo: il bilancio ordinario 2026 della Confederazione svizzera passa da un deficit di 700 milioni a un surplus di 800 milioni, grazie alle maggiori entrate da imposta sull\'utile delle imprese. Il Consiglio federale destina 970',
+    canonicalPath: '/articoli-svizzera/bilancio-federale-2026-surplus/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bilancio 2026: da deficit a surplus di 800 milioni",
+      "description": "Il bilancio federale svizzero 2026 passa da un deficit di 700 milioni a un surplus di 800 milioni grazie alle maggiori entrate da imposta sull'utile",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilancio-federale-2026-surplus.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta della capitale svizzera Berna, sede della Confederazione e governo federale"
+      },
+      "datePublished": "2026-08-19T10:16:52+00:00",
+      "dateModified": "2026-08-19T10:16:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilancio-federale-2026-surplus/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-furgoni-elettrici-equiparazione-federale': {
+    title: 'Furgoni elettrici equiparati ai tradizionali: le novità dal 1° ottobre 2026',
+    description: 'Il Consiglio federale equipara i veicoli commerciali elettrici fino a 4,25 tonnellate agli autofurgoni tradizionali dal 1° ottobre 2026. Circolazione a 120 km/h',
+    keywords: 'frontalieri, ticino, svizzera, italia, furgoni, elettrici, equiparati, tradizionali',
+    ogTitle: 'Furgoni elettrici equiparati ai tradizionali: le novità',
+    ogDescription: 'Il Consiglio federale equipara i veicoli commerciali elettrici fino a 4,25 tonnellate agli autofurgoni tradizionali dal 1° ottobre 2026. Circolazione a 120 km/h in autostrada, esenzione tachigrafo nazionale: tutto ciò che devi sapere.',
+    canonicalPath: '/articoli-svizzera/furgoni-elettrici-equiparazione-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Furgoni elettrici equiparati ai tradizionali: le novità dal 1° ottobre 2026",
+      "description": "Il Consiglio federale equipara i veicoli commerciali elettrici fino a 4,25 tonnellate agli autofurgoni tradizionali dal 1° ottobre 2026. Circolazione a 120 km/h",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/furgoni-elettrici-equiparazione-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un moderno furgone commerciale elettrico blu in viaggio su un'autostrada svizzera con le Alpi sullo sfondo."
+      },
+      "datePublished": "2026-08-19T10:29:42+00:00",
+      "dateModified": "2026-08-19T10:29:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/furgoni-elettrici-equiparazione-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-eccedenza-federale-2026-800-milioni': {
+    title: 'Eccedenza federale 2026: +800 milioni | Frontaliere Ticino',
+    description: 'La Confederazione attende un\'eccedenza di poco meno di 800 milioni CHF per il 2026, contro il disavanzo di 700 milioni preventivato. Il miglioramento è dovuto',
+    keywords: 'frontalieri, ticino, svizzera, italia, eccedenza, federale, milioni, confederazione',
+    ogTitle: 'Eccedenza federale 2026: +800 milioni',
+    ogDescription: 'La Confederazione attende un\'eccedenza di poco meno di 800 milioni CHF per il 2026, contro il disavanzo di 700 milioni preventivato. Il miglioramento è dovuto all\'aumento dell\'imposta sull\'utile di 1,4 miliardi.',
+    canonicalPath: '/articoli-svizzera/eccedenza-federale-2026-800-milioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Eccedenza federale 2026: +800 milioni",
+      "description": "La Confederazione attende un'eccedenza di poco meno di 800 milioni CHF per il 2026, contro il disavanzo di 700 milioni preventivato. Il miglioramento è dovuto",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/eccedenza-federale-2026-800-milioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna, sede del Consiglio federale svizzero"
+      },
+      "datePublished": "2026-08-19T10:46:57+00:00",
+      "dateModified": "2026-08-19T10:46:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/eccedenza-federale-2026-800-milioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-difesa-970-milioni-consiglio-federale': {
+    title: 'Difesa aerea: 970 milioni dal Consiglio federale',
+    description: 'Il Consiglio federale chiede 970 milioni di franchi al Parlamento per accelerare l\'acquisto di sistemi di difesa aerea. Ripartizione tra difesa terra-aria',
+    keywords: 'frontalieri, ticino, svizzera, italia, difesa, aerea, milioni, consiglio',
+    ogTitle: 'Difesa aerea: 970 milioni dal Consiglio federale',
+    ogDescription: 'Consiglio federale chiede 970 milioni al Parlamento per la difesa aerea svizzera: 250 mln difesa corta gittata, 650 mln media gittata, 60 mln radar, 10 mln anti-droni. Piano di autoprotezione di 60+ basi entro 2029 con ulteriori 100 milioni.',
+    canonicalPath: '/articoli-svizzera/difesa-970-milioni-consiglio-federale/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Difesa aerea: 970 milioni dal Consiglio federale",
+      "description": "Il Consiglio federale chiede 970 milioni di franchi al Parlamento per accelerare l'acquisto di sistemi di difesa aerea. Ripartizione tra difesa terra-aria",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/difesa-970-milioni-consiglio-federale.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aerei da caccia in formazione su paesaggio alpino svizzero, simbolo della difesa aerea nazionale."
+      },
+      "datePublished": "2026-08-19T11:04:28+00:00",
+      "dateModified": "2026-08-19T11:04:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/difesa-970-milioni-consiglio-federale/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-burckhardt-compression-tagli-posti': {
+    title: 'Burckhardt Compression: 220 posti di lavoro a rischio',
+    description: 'Burckhardt Compression annuncia tagli per 220 posti di lavoro, con 150 esuberi a Winterthur e 70 all\'estero. Oneri per 3 milioni di franchi nel 2026/27.',
+    keywords: 'frontalieri, ticino, svizzera, italia, burckhardt, compression, posti, lavoro',
+    ogTitle: 'Burckhardt Compression: 220 posti di lavoro a rischio',
+    ogDescription: 'Il produttore svizzero Burckhardt Compression ha annunciato un taglio di 220 impieghi complessivi tra Winterthur e le sedi estere. Scopri i dettagli finanziari, la riorganizzazione e le tempistiche.',
+    canonicalPath: '/articoli-svizzera/burckhardt-compression-tagli-posti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Burckhardt Compression: 220 posti di lavoro a rischio",
+      "description": "Burckhardt Compression annuncia tagli per 220 posti di lavoro, con 150 esuberi a Winterthur e 70 all'estero. Oneri per 3 milioni di franchi nel 2026/27.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/burckhardt-compression-tagli-posti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede dell'azienda Burckhardt Compression a Winterthur"
+      },
+      "datePublished": "2026-08-19T11:44:57+00:00",
+      "dateModified": "2026-08-19T11:44:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/burckhardt-compression-tagli-posti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-sunrise-147-tagli-posti-lavoro': {
+    title: 'Sunrise taglia 147 posti, costi del personale -5%',
+    description: 'Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, sunrise, taglia, posti, costi',
+    ogTitle: 'Sunrise taglia 147 posti, costi del personale -5%',
+    ogDescription: 'Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.',
+    canonicalPath: '/articoli-svizzera/sunrise-147-tagli-posti-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Sunrise taglia 147 posti, costi del personale -5%",
+      "description": "Sunrise completa la riduzione di 147 posti di lavoro, con costi del personale giù del 5%. Aumenti di prezzo dal mese di agosto 2026 su tutti i servizi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/sunrise-147-tagli-posti-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede centrale di Sunrise a Zurigo, operatore telecomunicazioni svizzero che ha ridotto il personale"
+      },
+      "datePublished": "2026-08-19T12:04:42+00:00",
+      "dateModified": "2026-08-19T12:04:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/sunrise-147-tagli-posti-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-ricovero-assistenza-revisione-2026': {
+    title: 'Consiglio federale rivede il diritto su ricovero assistenza',
+    description: 'Il Consiglio federale avvia revisione 2026 del diritto su ricovero a scopo di assistenza: statistica nazionale, protezioni minori e chiarimenti su provvedimenti',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, rivede, diritto',
+    ogTitle: 'Consiglio federale rivede il diritto su ricovero assistenza',
+    ogDescription: 'Berna, 12 agosto 2026: il Consiglio federale decide di revisionare il Codice civile sui ricoveri involontari. Novità principali: statistica nazionale, chiarimenti su provvedimenti medici, norme specifiche per minori. Avamprogetto entro estate 2028',
+    canonicalPath: '/articoli-svizzera/ricovero-assistenza-revisione-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Consiglio federale rivede il diritto su ricovero assistenza",
+      "description": "Il Consiglio federale avvia revisione 2026 del diritto su ricovero a scopo di assistenza: statistica nazionale, protezioni minori e chiarimenti su provvedimenti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ricovero-assistenza-revisione-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede del Consiglio federale svizzero a Berna, dove il 12 agosto 2026 è stata decisa la revisione del diritto di ricovero a scopo di assistenza"
+      },
+      "datePublished": "2026-08-19T12:21:17+00:00",
+      "dateModified": "2026-08-19T12:21:17+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ricovero-assistenza-revisione-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-geberit-utili-semestre-2026': {
+    title: 'Geberit: vendite +2,8%, utili +7,4% nel semestre',
+    description: 'Nel primo semestre 2026, Geberit registra fatturato di 1,71 miliardi CHF e utile netto di 364 milioni CHF (+7,4%). Margine EBITDA stabile al 30,9% e previsioni',
+    keywords: 'frontalieri, ticino, svizzera, italia, geberit, vendite, utili, semestre',
+    ogTitle: 'Geberit: crescita accelerata nel primo semestre 2026',
+    ogDescription: 'I risultati semestrali di Geberit: fatturato 1,71 miliardi CHF (+2,8%), utile netto +7,4%, margine EBITDA stabile al 30,9%. Accelerazione nel Q2 (+6,6%) e previsioni per l\'anno in corso. Cosa significano per l\'economia svizzera.',
+    canonicalPath: '/articoli-svizzera/geberit-utili-semestre-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Geberit: vendite +2,8%, utili +7,4% nel semestre",
+      "description": "Nel primo semestre 2026, Geberit registra fatturato di 1,71 miliardi CHF e utile netto di 364 milioni CHF (+7,4%). Margine EBITDA stabile al 30,9% e previsioni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/geberit-utili-semestre-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stabilimento di produzione svizzero con macchinari industriali per impianti sanitari e controllo qualità"
+      },
+      "datePublished": "2026-08-19T12:40:41+00:00",
+      "dateModified": "2026-08-19T12:40:41+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/geberit-utili-semestre-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-trasporti-eccezionali-standard-federali': {
+    title: 'Trasporti eccezionali: i nuovi standard federali',
+    description: 'DATEC disciplina uniformemente le scorte private ai trasporti eccezionali a livello federale. Consultazione aperta sino al 20 novembre 2026. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, trasporti, eccezionali, nuovi, standard',
+    ogTitle: 'Trasporti eccezionali: i nuovi standard federali',
+    ogDescription: 'Il DATEC disciplina uniformemente le scorte private ai trasporti eccezionali mediante consultazione federale sino al 20 novembre 2026. Scopri come cambia la regolazione dei servizi di scorta e cosa devi fare se operi nel settore trasporti.',
+    canonicalPath: '/articoli-svizzera/trasporti-eccezionali-standard-federali/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Trasporti eccezionali: i nuovi standard federali",
+      "description": "DATEC disciplina uniformemente le scorte private ai trasporti eccezionali a livello federale. Consultazione aperta sino al 20 novembre 2026. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/trasporti-eccezionali-standard-federali.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un camion con carico eccezionale in transito su autostrada svizzera con veicolo di scorta"
+      },
+      "datePublished": "2026-08-19T13:11:24+00:00",
+      "dateModified": "2026-08-19T13:11:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/trasporti-eccezionali-standard-federali/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
