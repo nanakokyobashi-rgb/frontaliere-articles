@@ -468,7 +468,7 @@ function comuneMatch(text) {
       let n = 0;
       while (n < candidate.words.length && tokens[i + n] === candidate.words[n]) n += 1;
       if (n !== candidate.words.length) continue;
-      if (!best || n > best.length) best = { value: candidate.value, start: i, words: candidate.words };
+      if (!best || n > best.words.length) best = { value: candidate.value, start: i, words: candidate.words };
     }
   }
   return best;

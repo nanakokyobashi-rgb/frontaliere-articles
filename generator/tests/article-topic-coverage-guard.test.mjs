@@ -708,3 +708,27 @@ describe('il nome di un comune non prova un mestiere', () => {
     expect(persi).toEqual([]);
   });
 });
+
+/**
+ * `comuneMatch` (interna a `comuneTopicKey`) sceglie il candidato più lungo
+ * fra due nomi che condividono la prima parola normalizzata — «Tronzano»
+ * contro «Tronzano Lago Maggiore». La selezione confrontava `n` (parole del
+ * candidato in esame) con `best.length`, campo che l'oggetto `best` non ha
+ * mai avuto (ha `value`/`start`/`words`): dopo il primo match `best.length`
+ * è `undefined`, quindi `n > undefined` è sempre falso e vince il PRIMO nome
+ * incontrato scandendo il testo, non il più lungo. Il dataset ha 14 gruppi di
+ * comuni che condividono la prima parola normalizzata (`san` → 6, `villa` →
+ * 3, `saint` → 8, ecc.), quindi qualunque testo che nomini due comuni dello
+ * stesso gruppo nell'ordine sbagliato prendeva lo slug corto.
+ */
+describe('comuneTopicKey — il nome più lungo vince anche su gruppi ambigui', () => {
+  it('due comuni "san …" nel testo: vince il più lungo, non il primo incontrato', () => {
+    expect(comuneTopicKey('guida a San Siro poi parliamo di San Bartolomeo Val Cavargna'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('stesso caso in ordine inverso: il risultato non dipende dall\'ordine nel testo', () => {
+    expect(comuneTopicKey('guida a San Bartolomeo Val Cavargna poi parliamo di San Siro'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+});
