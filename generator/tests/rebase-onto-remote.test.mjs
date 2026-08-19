@@ -369,6 +369,76 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
 });
 
+test('generate-article.yml declares every sourceUrlsFile/sourceQuotaFile ledger as bookkeeping (#496)', () => {
+  // The expected set is DERIVED from ARTICLE_SECTION_CONFIGS in create-article.mjs,
+  // not copied here — same reasoning as the registries test below: a section
+  // whose sourceUrlsFile/sourceQuotaFile isn't declared here dies the same way
+  // #225 did, just on a different path, and a hardcoded list wouldn't catch a
+  // new section adding one. Both keys are pulled from the same regex pass
+  // because they're staged in the exact same git-add block in create-article.mjs
+  // (SOURCE_QUOTA_FILE and SOURCE_URLS_FILE) — same lifecycle, same risk.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
+  const expected = [
+    ...src.matchAll(/sourceUrlsFile:\s*'([^']+)'/g),
+    ...src.matchAll(/sourceQuotaFile:\s*'([^']+)'/g),
+  ].map((m) => m[1]);
+  assert.ok(expected.length >= 4, `expected at least 4 sourceUrlsFile/sourceQuotaFile entries in create-article.mjs, found: ${JSON.stringify(expected)}`);
+  for (const p of expected) {
+    assert.ok(
+      allowlist.includes(p),
+      `${p} is a saveSourceUrls()/saveSourceQuotaState() ledger — loaded whole and rewritten whole every run by `
+      + `create-article.mjs, exactly like ${IMAGE_CATALOG} above — but is missing from the bookkeeping allowlist `
+      + `in generate-article.yml. A conflict there aborts the rebase and the generated article is lost (issue #496). `
+      + `Declared: ${JSON.stringify(allowlist)}`,
+    );
+  }
+});
+
+test('generate-article.yml declares the topic-candidates consumed tracker as bookkeeping (#496)', () => {
+  // CONSUMED_PATH is not per-section like the two ledgers above — it's one
+  // shared tracker imported (as CONSUMED_TRACKER_PATH) into create-article.mjs
+  // from article-topic-selector.mjs, so it's derived from its own source of
+  // truth rather than folded into the sourceUrlsFile/sourceQuotaFile regex.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  const m = /CONSUMED_PATH\s*=\s*'([^']+)'/.exec(selectorSrc);
+  assert.ok(m, 'could not find CONSUMED_PATH in article-topic-selector.mjs');
+  const consumedPath = m[1];
+  assert.ok(
+    allowlist.includes(consumedPath),
+    `${consumedPath} is the persistConsumedTracker() tracker — loaded whole and rewritten whole every run `
+    + `(FIFO-capped in appendConsumedId), staged in the same git-add block as SOURCE_URLS_FILE in create-article.mjs `
+    + `— but is missing from the bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase `
+    + `and the generated article is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+  );
+});
+
+test('generate-article.yml declares the quota-state ledger as bookkeeping (#496)', () => {
+  // QUOTA_STATE_PATH is a fourth sibling in the same class as the two ledgers
+  // and the consumed tracker above, found during this issue's own review: it
+  // is one file SHARED across both sections (no swiss- variant), read whole
+  // by loadQuotaState() and rewritten whole by saveQuotaState() — which
+  // create-article.mjs calls after every successful publish. Derived from its
+  // own source of truth (quotaController.mjs), not copied, for the same
+  // reason as the sourceUrlsFile/sourceQuotaFile regex above.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const quotaControllerSrc = readFileSync(
+    path.resolve(HERE, '../scripts/lib/scheduler/quotaController.mjs'),
+    'utf8',
+  );
+  const m = /QUOTA_STATE_PATH\s*=\s*'([^']+)'/.exec(quotaControllerSrc);
+  assert.ok(m, 'could not find QUOTA_STATE_PATH in quotaController.mjs');
+  const quotaStatePath = m[1];
+  assert.ok(
+    allowlist.includes(quotaStatePath),
+    `${quotaStatePath} is the saveQuotaState() ledger — loaded whole and rewritten whole after every successful `
+    + `publish (create-article.mjs calls _saveQuotaState(_incrementCounter(...))) — but is missing from the `
+    + `bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase and the generated article `
+    + `is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+  );
+});
+
 test('a conflict on the journalist image catalog resolves instead of aborting', () => {
   // Driven with the allowlist READ FROM THE WORKFLOW, not a literal: what this
   // pins is that the real caller declares the path, not that the helper can
