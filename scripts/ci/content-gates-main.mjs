@@ -139,6 +139,7 @@ export const CONTENT_GATES = [
   'generator/tests/article-body-wordcount.test.mjs',
   'generator/tests/article-fabrication-guard.test.mjs',
   'generator/tests/article-slug-i18n.test.mjs',
+  'generator/tests/article-topic-coverage-guard.test.mjs',
   'generator/tests/article-source-echo.test.mjs',
   'generator/tests/blog-headline-validation.test.mjs',
   'generator/tests/blog-title-casing.test.mjs',
@@ -154,6 +155,96 @@ export const CONTENT_GATES = [
   'generator/tests/slug-placeholder-guard.test.mjs',
   'generator/tests/telelavoro-frontalieri-normative-citations.test.mjs',
 ];
+
+/**
+ * ── PERCHE' LA LISTA QUI SOPRA NON BASTA, E COSA LA TIENE COMPLETA ─────────
+ *
+ * La lista e' MISURATA, dice il commento — ed e' vero: e' stata misurata **una
+ * volta**, a mano, il 2026-08-18, facendo girare i test sotto un hook su `fs`.
+ * Nulla la rimisurava. I test esistenti verificavano che non fosse vuota, che i
+ * file elencati esistessero e che non ci fossero duplicati: tutte proprieta'
+ * della lista, nessuna del suo RAPPORTO con la cartella dei test.
+ *
+ * Il costo di quel buco, misurato il 2026-08-19.
+ * `generator/tests/article-topic-coverage-guard.test.mjs` legge il corpus reale
+ * del checkout e non era registrato. Alle 07:27Z e' atterrato l'articolo
+ * `vivere-villa-guardia-lavorare-ticino`: «Villa Guardia» e' un comune, e
+ * «guardia» e' l'alias del mestiere `agente-sicurezza`. Il test e' diventato
+ * rosso su `main` e su OGNI branch, quindi **nessuna PR poteva auto-mergiare**,
+ * e siccome il gate non era registrato **non e' stata aperta nessuna issue**:
+ * sei ore di coda ferma senza un segnale. Con la registrazione, la stessa
+ * pubblicazione avrebbe aperto una issue `bug`/`automation` a priorita' alta
+ * entro pochi minuti, e il fixer l'avrebbe drenata da solo.
+ *
+ * La lezione non e' «aggiungere quel file»: e' che «non e' un content gate» e
+ * «nessuno ha guardato» erano indistinguibili. E' la stessa ambiguita' che
+ * `loop-sync-manifest.json` chiude dichiarando i `roots`, e si chiude allo
+ * stesso modo: RIDERIVANDO la misura invece di fidarsi di un conteggio a mano.
+ *
+ * Il rilevatore qui sotto e' statico e imperfetto per costruzione — un hook su
+ * `fs` sarebbe esatto ma costringerebbe a eseguire 136 file di test dentro un
+ * test. Il patto e' quindi: cio' che il rilevatore VEDE dev'essere registrato
+ * oppure esentato con una ragione. Un falso negativo non fa danno (il file o e'
+ * gia' registrato, o sfugge come sfuggiva prima); un falso positivo costa una
+ * riga di esenzione. Cio' che non e' piu' possibile e' aggiungere in silenzio un
+ * test che legge il corpus senza che nessuno abbia deciso.
+ */
+
+/**
+ * Un file di test che il rilevatore vede come lettore del corpus ma che NON e'
+ * un content gate, con la ragione. Una riga qui e' una decisione presa, non un
+ * silenzio.
+ */
+export const NON_SONO_CONTENT_GATES = Object.freeze({
+  'generator/tests/corpus-paths.test.mjs':
+    "verifica la funzione che MAPPA i path del sito su quelli del corpus: i "
+    + "'content/...' che il rilevatore vede sono i valori ATTESI delle asserzioni, "
+    + 'stringhe confrontate con stringhe. Non apre un file, quindi nessun articolo '
+    + 'pubblicato puo\' renderlo rosso.',
+});
+
+/**
+ * I file di `generator/tests/` che leggono il corpus REALE del checkout.
+ *
+ * «Reale» e non «un albero qualsiasi»: la discriminante e' che il path sia
+ * ancorato alla RADICE DEL REPO, non a una cartella temporanea. E' quella la
+ * differenza fra un test che un articolo pubblicato puo' far diventare rosso e
+ * uno che si costruisce i propri file: mezza dozzina di test scrivono
+ * `path.join(root, 'content', ...)` dentro una `mkdtemp`, e contarli sarebbe
+ * rumore puro.
+ *
+ * Due forme, entrambe misurate sui 18 file che oggi la usano:
+ *   A. `new URL('../../content/...', import.meta.url)`
+ *   B. un identificatore ancorato a `import.meta.url` (di norma `ROOT`), poi
+ *      `path.join(ROOT, 'content', ...)`
+ *
+ * @param {string} dir cartella dei test, assoluta
+ * @param {string} rel prefisso da anteporre ai nomi resi (per confrontarli con CONTENT_GATES)
+ * @returns {{file: string, why: string}[]}
+ */
+export function detectCorpusReaders(dir, rel = 'generator/tests') {
+  const out = [];
+  for (const nome of fs.readdirSync(dir).filter((f) => f.endsWith('.test.mjs')).sort()) {
+    const src = fs.readFileSync(path.join(dir, nome), 'utf-8');
+    const why = corpusReaderReason(src);
+    if (why) out.push({ file: `${rel}/${nome}`, why });
+  }
+  return out;
+}
+
+/** La forma con cui un sorgente raggiunge il corpus reale, o null. */
+function corpusReaderReason(src) {
+  if (/new URL\(\s*[`'"][^`'"]*\.\.\/content\//.test(src)) return 'new URL(../../content/…, import.meta.url)';
+  const ancore = new Set();
+  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*path\.(?:resolve|join)\([^;]*import\.meta\.url[^;]*\)/g)) ancore.add(m[1]);
+  for (const m of src.matchAll(/const\s+(\w+)\s*=\s*(\w+)\s*;/g)) if (ancore.has(m[2])) ancore.add(m[1]);
+  for (const a of ancore) {
+    if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*['"\`](?:\\.\\.\\/)*content`).test(src)) {
+      return `path.join(${a}, 'content', …)`;
+    }
+  }
+  return null;
+}
 
 /**
  * I file singoli che i gate leggono per NOME (non per scansione di cartella):
