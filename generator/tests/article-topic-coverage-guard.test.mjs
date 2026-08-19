@@ -43,6 +43,7 @@ import {
   hasResidenceGuideIntent,
   municipalityNames,
   professionTopicKey,
+  removeWordSequence,
   topicCoverageKey,
 } from '../scripts/lib/topic-coverage-guard.mjs';
 import {
@@ -706,5 +707,29 @@ describe('il nome di un comune non prova un mestiere', () => {
       return k?.kind === 'profession-guide' && /^(trasferirsi-a-|vivere-)/.test(a.id);
     });
     expect(persi).toEqual([]);
+  });
+
+  it('un mestiere DIVERSO che sopravvive alla rimozione resta la chiave', () => {
+    // «guardia» (dal toponimo) e' un alias PIU' LUNGO di «cuoco», quindi sul
+    // testo intero vince lui e la chiave e' agente-sicurezza. Tolto il comune,
+    // resta «cuoco»: l'articolo E' una guida al lavoro, su un altro mestiere.
+    // Una guardia che rendesse solo un booleano avrebbe scartato anche questa
+    // — stesso errore, un gradino piu' in la'.
+    const a = { id: 'cuoco-villa-guardia-stipendio', title: 'Fare il cuoco a Villa Guardia: stipendio e requisiti' };
+    const text = `${a.title} ${a.id.replace(/-/g, ' ')}`;
+    expect(professionTopicKey(text)).toBe('agente-sicurezza');
+    expect(keyOf(a)).toBe('profession-guide:cuoco');
+  });
+
+  it('removeWordSequence termina anche su una sequenza vuota', () => {
+    // Non e' teoria: la prima stesura ci girava per sempre. `n === words.length`
+    // e' vera subito con `words` vuoto, `i += n` avanza di ZERO, e il ciclo
+    // gira in un percorso caldo della generazione — la firma esatta del wedge
+    // (spin sincrono, RSS fermo), la piu' cara da diagnosticare. Nessun input
+    // reale produce oggi una sequenza vuota, ed e' proprio per questo che la
+    // proprieta' va fissata qui: da fuori non e' osservabile.
+    expect(removeWordSequence('a b c', [])).toBe('a b c');
+    expect(removeWordSequence('villa guardia e villa guardia', ['villa', 'guardia'])).toBe('e');
+    expect(removeWordSequence('fare la guardia a villa guardia', ['villa', 'guardia'])).toBe('fare la guardia a');
   });
 });

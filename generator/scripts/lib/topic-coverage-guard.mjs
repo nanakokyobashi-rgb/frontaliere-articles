@@ -475,8 +475,7 @@ function comuneMatch(text) {
 }
 
 /**
- * L'unica prova che questo sia un articolo su un MESTIERE e' il nome del
- * COMUNE di cui parla?
+ * La chiave-mestiere sopravvive alla rimozione del nome del COMUNE?
  *
  * ── PERCHE' ESISTE ────────────────────────────────────────────────────────
  *
@@ -516,14 +515,18 @@ function comuneMatch(text) {
  * Guardia: vivere e lavorare» non lo e' piu'. Nessun mestiere perde una
  * classificazione che si reggeva su prove sue.
  */
-function professionEvidenceIsOnlyAComuneName(text, professionId) {
+function professionKeySurvivingComuneName(text, professionId) {
   const comune = comuneMatch(text);
-  if (!comune) return false;
-  return professionTopicKey(removeWordSequence(normalizeText(text), comune.words)) !== professionId;
+  if (!comune) return professionId;
+  return professionTopicKey(removeWordSequence(normalizeText(text), comune.words));
 }
 
 /**
  * Toglie da `norm` OGNI occorrenza della sequenza `words`.
+ *
+ * Esportata solo per il test: la terminazione di questo ciclo non e'
+ * osservabile da fuori (nessun input reale produce una sequenza vuota), e una
+ * proprieta' che non si puo' provare e' una proprieta' che si perde.
  *
  * Due dettagli, ed entrambi sono stati sbagliati prima di essere misurati.
  *
@@ -540,7 +543,15 @@ function professionEvidenceIsOnlyAComuneName(text, professionId) {
  * classificato come comune. Togliendo solo «villa guardia» resta «fare la
  * guardia giurata a», il mestiere sopravvive, e la distinzione regge.
  */
-function removeWordSequence(norm, words) {
+export function removeWordSequence(norm, words) {
+  // Senza questa riga il ciclo sotto non termina: con `words` vuoto la
+  // condizione `n === words.length` e' vera subito, `i += n` avanza di ZERO, e
+  // il ciclo gira per sempre — bruciando CPU dentro il percorso caldo della
+  // generazione. E' la firma esatta del wedge gia' visto in questo repo
+  // (spin sincrono, stato R, RSS fermo), la piu' cara da diagnosticare.
+  // `comune.words` non e' mai vuoto oggi, ma il costo del guard e' zero e
+  // quello del difetto e' una run intera.
+  if (!words.length) return norm;
   const tokens = norm.split(' ');
   const out = [];
   for (let i = 0; i < tokens.length;) {
@@ -726,8 +737,9 @@ function computeTopicCoverageKey(text) {
     // Il mestiere vince ancora per primo, ma non piu' quando la sua UNICA
     // prova e' il nome del comune di cui l'articolo parla — vedi
     // professionEvidenceIsOnlyAComuneName.
-    if (professionId && !professionEvidenceIsOnlyAComuneName(text, professionId)) {
-      return { kind: 'profession-guide', value: professionId };
+    if (professionId) {
+      const regge = professionKeySurvivingComuneName(text, professionId);
+      if (regge) return { kind: 'profession-guide', value: regge };
     }
   }
   if (hasResidenceGuideIntent(text)) {
