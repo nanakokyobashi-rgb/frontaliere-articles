@@ -77,7 +77,11 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
-import { normalizeItalianContentFromPayload } from '../scripts/lib/body2-payload-verdict.mjs';
+import {
+  normalizeItalianContentFromPayload,
+  BODY_ONLY_FIELDS,
+  META_ONLY_FIELDS,
+} from '../scripts/lib/body2-payload-verdict.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
@@ -107,6 +111,9 @@ const DEPS = [
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
   'normalizeItalianContentFromPayload',
+  // #485: le due chiamate dichiarano a `callLLM` i campi che la loro meta'
+  // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
+  'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
   'primaryLocale', 'RUN_REPORT', '_buildHalf', '_splitMode', 'SECTION_NAME',
   'generationAttempt', '_splitBudgetLog', 'console',
 ];
@@ -181,6 +188,8 @@ async function run({ risposte }) {
     _preferActiveThisAttempt: false,
     repairLlmJson,
     normalizeItalianContentFromPayload,
+    BODY_ONLY_FIELDS,
+    META_ONLY_FIELDS,
     primaryLocale: 'it',
     RUN_REPORT,
     _buildHalf: () => ({ p: 'prompt-meta', msgs: [{ role: 'user', content: 'meta' }], schema: { name: 'meta' }, est: 3272, fonteChars: 0, fattiChars: 0 }),

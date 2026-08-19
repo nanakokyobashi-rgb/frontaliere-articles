@@ -61,6 +61,7 @@ import {
 import {
   classifyBody2Payload,
   normalizeItalianContentFromPayload,
+  resolveBody2Validation,
   REQUIRED_IT_BODY_FIELDS,
 } from '../scripts/lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from '../scripts/lib/llm-payload-diagnostics.mjs';
@@ -169,6 +170,10 @@ function costruisciCallLLM({ risposte, wallBudgetExceeded = () => false }) {
     RUN_WALL_BUDGET_MS: 60 * 60 * 1000,
     repairLlmJson,
     classifyBody2Payload,
+    // #485: `callLLM` non deduce piu' i campi attesi annusando il prompt — la
+    // regola vive in `resolveBody2Validation`, che il ritaglio legge dalla
+    // chiusura come tutto il resto.
+    resolveBody2Validation,
     describePayloadRejection,
     describeJsonParseError,
     describeRawForDiagnostics,

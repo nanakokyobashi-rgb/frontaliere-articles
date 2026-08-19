@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -5347,17 +5347,32 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
 // ── LLM call with body2 validation (model fallback via centralized ai-models.mjs) ──
 async function callLLM(messages, opts = {}) {
   const maxBody2Retries = 5;
-  // Require ALL body/title/excerpt field names present (not just 'body2') so this
-  // only fires for the actual full-article generation prompt (which lists every
-  // REQUIRED_IT_BODY_FIELDS name together, see the "content.${primaryLocale}
-  // (title, excerpt, body1, body2, body3, faq)" instruction). A bare 'body2'
-  // substring also matches translateBodyField's single-field translation calls
-  // (prompt/schema `{"body2": "..."}`), where `missing` is guaranteed non-empty
-  // (title/excerpt/body1/body3 are never in that payload) regardless of
-  // translation quality — the retry-exhaustion path now throws instead of
-  // falling through, which used to ship the (valid) translated JSON anyway but
-  // would now discard it and ship IT-language content under /en /de /fr.
-  const isBody2Check = opts.jsonMode && REQUIRED_IT_BODY_FIELDS.every(f => messages.some(m => m.content?.includes(f)));
+  // ── QUALI CAMPI QUESTA CHIAMATA DOVEVA PRODURRE ──────────────────────────
+  //
+  // La regola vive in ./lib/body2-payload-verdict.mjs (`resolveBody2Validation`),
+  // che e' pura e quindi ESEGUIBILE dal test: questo file non e' importabile
+  // dalle gate del generatore, che girano `node --test` senza `npm ci` e non
+  // hanno `jsdom`. Lasciata inline sarebbe verificabile solo ricopiandola —
+  // una copia che diverge in silenzio, la forma di difetto che il ciclo paga.
+  //
+  // Chi passa `opts.expectedFields` DICHIARA i campi attesi; chi non lo passa
+  // ricade sull'euristica sul testo del prompt di prima, byte per byte. La
+  // ragione per cui il default resta quello — e le due protezioni che quel
+  // ramo tiene in piedi (`translateArticle` a campo singolo, e il throw a
+  // retry esauriti che impedisce l'italiano sotto /en /de /fr) — sta per
+  // esteso sulla funzione. Riassunto: il flag puo' RESTRINGERE i campi
+  // attesi, mai spegnere la validazione.
+  //
+  // `expectedFields` NON scende al provider: e' un'istruzione per il
+  // validatore, e infilarla nell'oggetto della richiesta la spedirebbe a
+  // ~180 modelli come parametro sconosciuto.
+  const { expectedFields: _expectedFieldsOpt, ...llmOpts } = opts;
+  const _body2Validation = resolveBody2Validation({
+    jsonMode: opts.jsonMode,
+    expectedFields: _expectedFieldsOpt,
+    messages,
+  });
+  const isBody2Check = _body2Validation.enabled;
   for (let attempt = 1; attempt <= maxBody2Retries; attempt++) {
     const modelUsedRef = { model: null };
     // Default per-call ceiling 90s (was 120s, 2026-06-15). 90s still comfortably
@@ -5373,7 +5388,7 @@ async function callLLM(messages, opts = {}) {
     // check ever gets a chance to run. See run 28611052353 (109min, single
     // attempt consumed nearly all of it). ...opts still wins if a caller passes
     // its own deadlineMs (or explicit null to opt out of the cap entirely).
-    const result = await _aiCallLLM(messages, { temperature: 0.7, maxTokens: 4000, timeout: 90_000, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, ...opts, modelUsedRef });
+    const result = await _aiCallLLM(messages, { temperature: 0.7, maxTokens: 4000, timeout: 90_000, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, ...llmOpts, modelUsedRef });
     if (modelUsedRef.model === AI_MODELS.LOCAL_FALLBACK) _localFallbackUsedThisHeadline = true;
     if (isBody2Check) {
       let itContent = null;
@@ -5394,7 +5409,7 @@ async function callLLM(messages, opts = {}) {
       // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
       // vive la regola, ed e' li' che il test la esegue (questo file non e'
       // importabile senza `npm ci`, vedi l'intestazione del modulo).
-      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr });
+      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
       itContent = _verdictContent;
 
       // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
@@ -8210,9 +8225,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // resti invariato byte a byte. `null` = ricadi sulla chiamata unica.
   const _generateSplit = async () => {
     _splitPromptTentato = _splitCall1 ? _splitCall1.p : null;
+    // `expectedFields` DICHIARA cio' che questa meta' produce, invece di
+    // lasciarlo dedurre a `callLLM` dalla prosa del prompt. L'istruzione dice
+    // «(body1, body2, body3). NON produrre ... title, excerpt ...»: i cinque
+    // nomi ci sono tutti, e l'euristica per substring li leggeva tutti come
+    // RICHIESTI. Una risposta body-only conforme usciva `output JSON
+    // incompleto: title, excerpt`, cinque rigenerazioni, poi `qualityReject`.
+    // E' per questo che `call=2/2` non e' MAI stato stampato dal #430 (25
+    // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
+    // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
     const rawBody = useGeminiDirect
-      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema })
-      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, expectedFields: BODY_ONLY_FIELDS })
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
     let bodyData;
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
@@ -8252,6 +8276,13 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `callLLM` LANCIA: `_generateSplit` non arriva nemmeno qui, e non stampa
     // fallback perche' un throw non e' un `return null`. Quello e' un difetto
     // separato, con un rimedio separato, e non e' toccato da questa fix.
+    //
+    // AGGIORNAMENTO 2026-08-19 (#485): quel difetto separato ORA E' CHIUSO —
+    // la chiamata 1/2 qui sopra passa `expectedFields: BODY_ONLY_FIELDS`, e
+    // `callLLM` non pretende piu' title/excerpt da una meta' che per contratto
+    // non li produce. Il paragrafo resta perche' spiega perche' il 25 → 0
+    // NON era attribuibile a questa riga; la riga sotto resta corretta per la
+    // ragione che il paragrafo seguente da'.
     //
     // COSA RESTA VERO E PERCHE' QUESTA RIGA VA COMUNQUE CORRETTA: e' la
     // barriera IMMEDIATAMENTE SUCCESSIVA sullo stesso percorso, e sbaglia in
@@ -8342,9 +8373,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       + `call=2/2 part=meta est=${_call2.est} budget=${_splitBudgetLog} `
       + `articolo=${articolo.length}ch`,
     );
+    // La meta' meta era all'estremo OPPOSTO, e nessuno l'aveva visto perche'
+    // non e' mai stata raggiunta: il suo prompt NON nomina `body1/body2/body3`
+    // (sono dentro i blocchi `${_isMeta ? '' : ...}` di `buildPrompt`, e
+    // `minWordsInstruction` e' saltata per `meta`), quindi l'euristica era
+    // FALSA e questa chiamata non veniva validata affatto. Una risposta senza
+    // `title` sarebbe passata liscia fin dentro il merge, per morire dopo su
+    // `validateItalianPayload` — cioe' senza rigenerazione e senza rotazione
+    // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
+    // esattamente i due campi di testo che questa meta' produce.
     const rawMeta = useGeminiDirect
-      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
@@ -8486,10 +8526,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   if (itRaw != null) {
     // gia' generato in due chiamate
   } else if (useGeminiDirect) {
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
+    // La chiamata unica chiede l'articolo INTERO, e lo dichiara come le due
+    // meta' dichiarano il proprio pezzo. Oggi l'euristica arriverebbe alla
+    // stessa lista da sola — il prompt nomina tutti e cinque i campi come
+    // richiesti — ma dedurlo dalla prosa e' esattamente cio' che si e' rotto
+    // sulla meta' body: una riformulazione dell'istruzione non deve poter
+    // cambiare in silenzio COSA viene validato.
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined };
+    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS };
     try {
       itRaw = await callLLM(llmMessages, _optsUnica);
     } catch (e) {
@@ -8547,7 +8593,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema })
+        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS })
         // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
         // `_preferActiveThisAttempt`: solo al primo tentativo del retry loop
         // min-words, cosi' da non scavalcare la rotazione di diversificazione
@@ -8561,7 +8607,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
         // spegne per tutta la run — ed e' proprio il caso in cui il
         // ri-bracketing si arma.
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined });
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
