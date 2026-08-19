@@ -228,9 +228,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0413b7b7675b26b2",
-        "corpus": "0413b7b7675b26b2",
-        "alignedAt": "2026-08-15"
+        "site": "3d66a99ec99d686f",
+        "corpus": "3d66a99ec99d686f",
+        "alignedAt": "2026-08-19"
       }
     },
     {
@@ -255,9 +255,9 @@
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9685e6f3b05b27af",
-        "corpus": "9685e6f3b05b27af",
-        "alignedAt": "2026-08-09"
+        "site": "88976db01c98d1cb",
+        "corpus": "88976db01c98d1cb",
+        "alignedAt": "2026-08-19"
       }
     },
     {
@@ -536,11 +536,11 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "identical",
-      "reason": "Portati i cinque export nuovi di secrets-scope-detect.mjs (#5838, gia' cablati sul sito nel commit c9dd0477) che qui restavano senza chiamante (#388). Allineato esattamente a c9dd0477, non a HEAD del sito: il commit successivo 0d595202 (2026-08-15, capability-guard WF-scope condizionato + tracker fuori dal parked-retry) non c'entra con #339/#140 ed e' rimasto fuori per scelta.",
+      "reason": "Portati i cinque export nuovi di secrets-scope-detect.mjs (#5838, gia' cablati sul sito nel commit c9dd0477) che qui restavano senza chiamante (#388). Riallineato il 2026-08-19 (#339, stranded-twin) a HEAD del sito: include ora anche il commit 0d595202 (capability-guard WF-scope condizionato + tracker fuori dal parked-retry), che l'allineamento precedente aveva lasciato fuori per scelta. Le sue dipendenze (mint-app-token.mjs, APP_TOKEN_WORKFLOWS) erano gia' vendorizzate qui, quindi il file torna byte-identico senza gap di import.",
       "baseline": {
-        "site": "e9d88f9d86965f15",
-        "corpus": "e9d88f9d86965f15",
-        "alignedAt": "2026-08-15"
+        "site": "efa649e80c4df6d3",
+        "corpus": "efa649e80c4df6d3",
+        "alignedAt": "2026-08-19"
       }
     },
     {
