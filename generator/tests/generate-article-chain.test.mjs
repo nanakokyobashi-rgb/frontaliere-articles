@@ -686,6 +686,7 @@ function runChainStep({
   sectionRequested = 'frontaliere',
   depth = '0',
   streak = '0',
+  rescueDepth = '0',
   armed = null,
   disabledFile = false,
   patNanako = 'pat-nanako',
@@ -693,6 +694,7 @@ function runChainStep({
   codes = ['204'],
   maxDepth = '40',
   maxStreak = '6',
+  maxRescue = '1',
 } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-link-'));
   try {
@@ -737,13 +739,16 @@ exit 0
         SECTION_REQUESTED: sectionRequested,
         CHAIN_DEPTH: depth,
         NO_ARTICLE_STREAK: streak,
+        RESCUE_DEPTH: rescueDepth,
         ...(armed === null ? {} : { CHAIN_ARMED: armed }),
         ...(patNanako === null ? {} : { GITHUB_PAT_NANAKO: patNanako }),
         ...(pat === null ? {} : { GITHUB_PAT: pat }),
         // Nessun test aspetta 90 secondi per osservare un `curl`.
         CHAIN_DELAY_S: '0',
+        CHAIN_RESCUE_DELAY_S: '0',
         CHAIN_MAX_DEPTH: maxDepth,
         CHAIN_MAX_STREAK: maxStreak,
+        CHAIN_MAX_RESCUE: maxRescue,
       },
     });
     const dispatches = existsSync(calls)
@@ -763,6 +768,7 @@ test('un anello secco ma DICHIARATO dispatcha il successore, con la sezione alte
   assert.match(cmd, /"section":"frontaliere"/, 'la sezione deve alternare, come in ogni anello');
   assert.match(cmd, /"chain_depth":"4"/);
   assert.match(cmd, /"no_article_streak":"2"/);
+  assert.match(cmd, /"rescue_depth":"0"/, 'un anello NON spende il gettone del soccorso');
   assert.match(cmd, /"parent_run_id":"999"/, 'senza il padre, `admit` vedrebbe sempre una generazione in volo e salterebbe l\'anello');
   assert.match(cmd, /Authorization: Bearer pat-nanako/, 'il primario e\' il PAT del proprietario del repo');
   assert.equal(r.status, 0);
@@ -778,16 +784,71 @@ test('un articolo prodotto NON dispatcha: il successore lo fa gia\' il push', ()
   assert.equal(r.status, 0);
 });
 
-test('LA GUARDIA STRUTTURALE: senza dichiarazione la catena si ferma', () => {
+test('LA GUARDIA STRUTTURALE: senza dichiarazione non parte MAI un anello', () => {
   // E' l'inverso della forma che girava a vuoto nel repo del sito: li' un
   // generatore che falliva presto chainava alla velocita' con cui usciva, qui
   // e' l'unico caso che non chaina. Kill duro, kill per stallo, exit 3, uscita
   // muta e guasti prima del generatore finiscono tutti qui.
-  for (const outcome of [{ declared: 'false' }, { declared: '' }, { declared: 'true', rosterBlocked: 'true' }]) {
+  //
+  // Dal 2026-08-19 questo caso puo' produrre UN dispatch — il soccorso della
+  // #459 — e la distinzione e' l'intero punto: quel dispatch spende un gettone
+  // che l'anello non spende, quindi non puo' ripetersi. Cio' che questa guardia
+  // difende non e' «zero dispatch», e' «zero ANELLI»: il gettone speso e' la
+  // prova meccanica che il successore non e' un anello. Senza questa
+  // assert, un soccorso senza tetto passerebbe per soccorso.
+  for (const outcome of [{ declared: 'false' }, { declared: '' }]) {
     const r = runChainStep(outcome);
-    assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
+    assert.equal(r.dispatches.length, 1, `il soccorso manca su ${JSON.stringify(outcome)}`);
+    assert.match(r.dispatches[0], /"rescue_depth":"1"/, 'un successore non dichiarato DEVE spendere il gettone, o e\' un anello travestito');
+    assert.match(r.stdout, /^rescue: /m, 'il log deve dire quale dei due e\', o il campo non e\' osservabile in produzione');
+    assert.ok(!/^link: /m.test(r.stdout), 'un esito non dichiarato non e\' un anello');
     assert.equal(r.status, 0, 'e comunque non fallisce la run: l\'esito l\'ha gia\' classificato lo step di generazione');
   }
+  // Il roster esaurito resta senza successore di NESSUN tipo: quel muro e'
+  // noto, e il soccorso presume solo che il muro sia di durata ignota.
+  for (const outcome of [{ declared: 'true', rosterBlocked: 'true' }, { declared: 'false', rosterBlocked: 'true' }]) {
+    const r = runChainStep(outcome);
+    assert.equal(r.dispatches.length, 0, `ha dispatchato su ${JSON.stringify(outcome)}`);
+    assert.match(r.stdout, /roster esaurito/);
+    assert.equal(r.status, 0);
+  }
+});
+
+test('IL SOCCORSO E\' UNO PER CATENA: speso il gettone, si cede al cron', () => {
+  // Il tetto non e' «uno per run» — sarebbe inutile, perche' ogni run nasce
+  // con RESCUE_DEPTH dai propri input. E' «uno per catena», e cio' che lo rende
+  // tale e' che il gettone viaggia anche negli ANELLI normali: senza quel
+  // trasporto, wedge → soccorso → anello secco → wedge → soccorso girerebbe
+  // per sempre alternando i due stati, che e' esattamente il giro a vuoto che
+  // la guardia sopra esiste per impedire.
+  const speso = runChainStep({ declared: 'false', rescueDepth: '1' });
+  assert.equal(speso.dispatches.length, 0, 'il secondo wedge della stessa catena non ha successore');
+  assert.match(speso.stdout, /soccorso di questa catena e' gia' speso \(1\/1\)/);
+  assert.equal(speso.status, 0);
+
+  const anello = runChainStep({ declared: 'true', rescueDepth: '1' });
+  assert.equal(anello.dispatches.length, 1, 'un anello dichiarato passa comunque');
+  assert.match(anello.dispatches[0], /"rescue_depth":"1"/, 'l\'anello TRASPORTA il gettone senza spenderlo, o il tetto sarebbe per run');
+  assert.match(anello.stdout, /^link: /m);
+});
+
+test('una catena nuova nasce col gettone intero', () => {
+  // Un push dopo un articolo, o un arrivo cron, non impostano `rescue_depth`:
+  // il default '0' e' cio' che rende «uno per catena» un tetto che si ricarica
+  // invece di spegnere il soccorso per sempre dopo il primo wedge della storia.
+  const r = runChainStep({ declared: 'false', rescueDepth: '' });
+  assert.equal(r.dispatches.length, 1);
+  assert.match(r.dispatches[0], /"rescue_depth":"1"/);
+});
+
+test('il soccorso aspetta piu\' di un anello, e i default stanno nel workflow', () => {
+  // Un anello riparte da un esito dichiarato; il soccorso da un muro di durata
+  // ignota, e ripartirci addosso subito e' il modo di sprecare il gettone.
+  const link = Number(/CHAIN_DELAY_S:-(\d+)/.exec(CHAIN_RUN)?.[1]);
+  const rescue = Number(/CHAIN_RESCUE_DELAY_S:-(\d+)/.exec(CHAIN_RUN)?.[1]);
+  assert.ok(Number.isFinite(link) && Number.isFinite(rescue), 'i default devono stare nel workflow, non nel test');
+  assert.ok(rescue > link, `il soccorso (${rescue}s) deve aspettare piu' dell'anello (${link}s)`);
+  assert.match(CHAIN_RUN, /CHAIN_MAX_RESCUE:-1\b/, 'il tetto del soccorso e\' 1: un secondo riavvio e\' una catena');
 });
 
 test('i due cap cedono al cron invece di continuare', () => {
@@ -833,7 +894,12 @@ test('il secondo PAT e\' un fallback vero, e senza PAT non si fallisce', () => {
 
   const rosso = runChainStep({ codes: ['500', '500'] });
   assert.equal(rosso.status, 0, 'nemmeno un dispatch fallito puo\' rendere rossa una generazione riuscita');
-  assert.match(rosso.stdout, /::warning::dispatch dell'anello fallito/);
+  // Il messaggio nomina QUALE dei due ha fallito: un soccorso mancato e un
+  // anello mancato costano cose diverse (il primo brucia il gettone, il secondo no).
+  assert.match(rosso.stdout, /::warning::dispatch \(link\) fallito/);
+  const rossoSoccorso = runChainStep({ declared: 'false', codes: ['500', '500'] });
+  assert.match(rossoSoccorso.stdout, /::warning::dispatch \(rescue\) fallito/);
+  assert.equal(rossoSoccorso.status, 0);
 });
 
 test('lo step Chain non interpola nulla: e\' la regola che lo rende eseguibile qui', () => {

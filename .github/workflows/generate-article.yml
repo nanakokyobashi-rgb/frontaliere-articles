@@ -117,8 +117,21 @@ name: Generate Blog Article
 #      calcolato dalla stessa chiamata API che il gate fa gia': zero chiamate in
 #      piu', e agisce PRIMA che il job `generate` esista;
 #   3. `no_article_streak`, cap 6: sei anelli secchi di fila cedono al cron;
-#   4. `chain_depth`, cap 40.
+#   4. `chain_depth`, cap 40;
+#   5. `rescue_depth`, cap 1 — il gettone del SOCCORSO, che non e' un anello.
 # Piu' un kill switch a due strati (vedi lo step «Chain»).
+#
+# IL SOCCORSO, che non e' un anello (2026-08-19, #459). Lo stop sopra e' giusto
+# e resta: un esito non dichiarato non chaina. Ma il taglio 4→2 slot ha lasciato
+# proprio quel caso al solo cron, e la latenza di ripartenza oscilla fra ~5 e
+# ~35 minuti secondo la FASE fra il wedge e lo slot — perche' `admit` salta un
+# arrivo che trova una run in volo da meno di 1800s (#442). Il soccorso e' un
+# riavvio SINGOLO per catena: un anello riparte subito e presume che valga la
+# pena riprovare, il soccorso presume solo che il muro possa non essere
+# permanente. Se fallisce anche lui si cede al cron, come prima.
+# NON copre `roster_blocked`: li' il muro e' noto, e il secondo tentativo lo
+# ritroverebbe identico. E non copre la morte del JOB (timeout del runner,
+# runner perso): li' nemmeno questo step gira, e il cron resta l'unica rete.
 #
 # ALSO DROPPED, each for a reason
 #   - mint-app-token.mjs: the App has no rights here (above).
@@ -209,6 +222,18 @@ on:
         type: string
       no_article_streak:
         description: 'Consecutive links that declared an outcome without writing an article'
+        required: false
+        default: '0'
+        type: string
+      rescue_depth:
+        # NON e' un contatore di anelli: e' il gettone del SOCCORSO. Un esito
+        # non dichiarato (wedge) non chaina mai — e resta giusto cosi' — ma il
+        # cron da solo non lo copre piu' da quando gli slot sono due (#459).
+        # Il soccorso e' UN riavvio, e questo gettone e' cio' che lo rende uno:
+        # viaggia anche negli anelli normali, quindi il tetto e' uno per
+        # CATENA, non uno per run. Una catena nuova (cron, o push dopo un
+        # articolo) riparte da 0 perche' quel dispatch non lo imposta.
+        description: 'Rescue restarts already spent by this chain (0 = none, never set by hand)'
         required: false
         default: '0'
         type: string
@@ -1724,6 +1749,7 @@ jobs:
           SECTION_REQUESTED: ${{ steps.mode.outputs.section }}
           CHAIN_DEPTH: ${{ inputs.chain_depth }}
           NO_ARTICLE_STREAK: ${{ inputs.no_article_streak }}
+          RESCUE_DEPTH: ${{ inputs.rescue_depth }}
           CHAIN_ARMED: ${{ vars.CHAIN_ARMED }}
         run: |
           # Questo step NON puo' fallire la run: la classificazione dell'esito e'
@@ -1736,6 +1762,10 @@ jobs:
           max_depth="${CHAIN_MAX_DEPTH:-40}"
           max_streak="${CHAIN_MAX_STREAK:-6}"
           delay_s="${CHAIN_DELAY_S:-90}"
+          # Il soccorso aspetta piu' di un anello: un anello riparte da un esito
+          # dichiarato, il soccorso da un muro di cui non si sa la durata.
+          max_rescue="${CHAIN_MAX_RESCUE:-1}"
+          rescue_delay_s="${CHAIN_RESCUE_DELAY_S:-180}"
 
           stop() {
             echo "catena ferma: $1"
@@ -1750,18 +1780,37 @@ jobs:
           }
           depth=$(num "${CHAIN_DEPTH:-0}")
           streak=$(num "${NO_ARTICLE_STREAK:-0}")
+          rescue=$(num "${RESCUE_DEPTH:-0}")
 
           [ "${DRY:-}" = "true" ] && stop "self-test dry, non e' un anello"
           [ -f .github/CHAIN_DISABLED ] && stop ".github/CHAIN_DISABLED presente (kill switch in-repo)"
           [ "${CHAIN_ARMED:-}" = "false" ] && stop "vars.CHAIN_ARMED=false (kill switch)"
 
-          # L'ordine dei tre test sotto e' l'ordine dell'argomento, e non e'
+          # L'ordine dei test sotto e' l'ordine dell'argomento, e non e'
           # intercambiabile: prima «c'e' un articolo?» (allora il successore
-          # esiste gia'), poi «c'e' una dichiarazione?» (senza, non si chaina
-          # mai), poi «il roster ha servito?».
+          # esiste gia'), poi «il roster ha servito?» (se no, nessun successore
+          # di nessun tipo: il muro e' noto), poi «c'e' una dichiarazione?».
+          #
+          # `roster_blocked` E' SALITO SOPRA `declared` il 2026-08-19, e prima
+          # era sotto. Finche' entrambi erano `stop` lo scambio non cambiava
+          # niente se non il messaggio; ora cambia, ed e' il verso giusto: il
+          # roster esaurito deve poter vietare anche il SOCCORSO, che sta nel
+          # ramo non-dichiarato. Un esito non dichiarato CON il roster bloccato
+          # non e' un muro di durata ignota — e' quello noto.
           [ "${ARTICLE:-}" = "true" ] && stop "articolo prodotto — il successore lo fa gia' il push su content/**"
-          [ "${DECLARED:-}" = "true" ] || stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore): e' il caso che non deve mai chainare"
           [ "${ROSTER_BLOCKED:-}" = "true" ] && stop "roster esaurito: il prossimo tentativo troverebbe lo stesso muro, non una finestra nuova"
+
+          # `kind` tiene distinte due cose che finiscono entrambe in un dispatch.
+          # L'ANELLO presume che valga la pena riprovare, e lo si concede solo a
+          # un esito dichiarato. Il SOCCORSO non presume niente se non che il
+          # muro possa non essere permanente, ed e' uno per catena (#459).
+          kind=link
+          next_rescue="$rescue"
+          if [ "${DECLARED:-}" != "true" ]; then
+            kind=rescue
+            [ "$rescue" -ge "$max_rescue" ] && stop "esito NON dichiarato (kill duro, stallo, exit 3, uscita muta o guasto prima del generatore), e il soccorso di questa catena e' gia' speso ($rescue/$max_rescue) — si cede al cron"
+            next_rescue=$(( rescue + 1 ))
+          fi
 
           next_depth=$(( depth + 1 ))
           next_streak=$(( streak + 1 ))
@@ -1786,11 +1835,13 @@ jobs:
           # Le graffe non sono stile: `$depth→` fa entrare i byte della freccia
           # nel nome della variabile, e bash muore con «unbound variable» sotto
           # `set -u`. Lo ha trovato il test che esegue questo blocco.
-          echo "anello: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, sezione ${base}→${next_section}, fra ${delay_s}s"
-          [ "$delay_s" -gt 0 ] && sleep "$delay_s"
+          wait_s="$delay_s"
+          [ "$kind" = "rescue" ] && wait_s="$rescue_delay_s"
+          echo "${kind}: depth ${depth}→${next_depth}, streak ${streak}→${next_streak}, soccorso ${rescue}→${next_rescue}, sezione ${base}→${next_section}, fra ${wait_s}s"
+          [ "$wait_s" -gt 0 ] && sleep "$wait_s"
 
-          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s"}}' \
-            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}")
+          payload=$(printf '{"ref":"main","inputs":{"section":"%s","chain_depth":"%s","no_article_streak":"%s","parent_run_id":"%s","rescue_depth":"%s"}}' \
+            "$next_section" "$next_depth" "$next_streak" "${SELF_ID:-}" "$next_rescue")
 
           dispatch() {
             curl -sS -o /tmp/chain-dispatch.json -w '%{http_code}' \
@@ -1810,11 +1861,11 @@ jobs:
           fi
 
           if [ "$code" = "204" ]; then
-            echo "anello dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak"
+            echo "$kind dispatchato con $token_name: sezione $next_section, depth $next_depth, streak $next_streak, soccorso $next_rescue"
             exit 0
           fi
           # Rosso NO: un successore mancato costa un giro di cron, e far fallire
           # la run qui renderebbe illeggibile la classificazione dell'esito che
           # lo step di generazione ha appena scritto.
-          echo "::warning::dispatch dell'anello fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
+          echo "::warning::dispatch ($kind) fallito (HTTP $code con $token_name): $(head -c 300 /tmp/chain-dispatch.json 2>/dev/null). La catena si ferma, il cron riprende."
           exit 0
