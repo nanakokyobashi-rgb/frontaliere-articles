@@ -394,7 +394,19 @@ test('④ la selezione headline eredita il deadlineMs dal wrapper callLLM', () =
     /deadlineMs: RUN_START_MS \+ RUN_WALL_BUDGET_MS/,
     'REGRESSIONE: il wrapper callLLM non impone piu un termine — ogni suo chiamante (selezione headline compresa) puo camminare il roster',
   );
-  assert.match(line, /\.\.\.opts/, 'un caller deve poter ancora sovrascrivere il default');
+  // L'invariante e' che le opzioni del CHIAMANTE si spandano DOPO i default,
+  // cosi' che possa ancora sovrascriverli. Dal #485 lo spread si chiama
+  // `llmOpts` e non `opts`: e' `opts` meno `expectedFields`, che e'
+  // un'istruzione per il validatore di `callLLM` e non un parametro di
+  // richiesta — infilarla qui la spedirebbe a ~180 modelli come chiave
+  // sconosciuta. Le due asserzioni pinnano entrambi i fatti: lo spread c'e',
+  // e cio' che spande deriva da `opts`.
+  assert.match(line, /\.\.\.llmOpts\b/, 'un caller deve poter ancora sovrascrivere il default');
+  assert.match(
+    SRC,
+    /const \{ expectedFields: _expectedFieldsOpt, \.\.\.llmOpts \} = opts;/,
+    'REGRESSIONE: `llmOpts` non deriva piu da `opts` — o il caller non sovrascrive piu i default, o `expectedFields` sta scendendo al provider',
+  );
 
   // E la selezione headline deve continuare a passare dal wrapper, non da
   // `_aiCallLLM` diretto: e' quello a darle il termine.

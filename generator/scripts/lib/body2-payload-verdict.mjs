@@ -78,6 +78,123 @@ import { isNonItalianScript, nonItalianScriptRatio } from './itLanguageCheck.mjs
 export const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
 
 /**
+ * I campi che ciascuna meta' dello split PRODUCE DAVVERO.
+ *
+ * Non sono un sottoinsieme arbitrario: sono la proiezione di `CONTENT_KEYS_BODY`
+ * e `CONTENT_KEYS_META` (create-article.mjs, `buildArticleJsonSchema`) sui campi
+ * di testo che questo modulo sa giudicare. La meta' body NON PUO' portare
+ * `title`/`excerpt` — lo schema `article_body_only` non li dichiara nemmeno — e
+ * la meta' meta non puo' portare i body.
+ */
+export const BODY_ONLY_FIELDS = ['body1', 'body2', 'body3'];
+export const META_ONLY_FIELDS = ['title', 'excerpt'];
+
+/**
+ * ── CHI DECIDE QUALI CAMPI SONO ATTESI ─────────────────────────────────────
+ *
+ * `callLLM()` deve sapere due cose prima di giudicare una risposta: SE questa
+ * chiamata e' una generazione da validare, e QUALI campi quella generazione
+ * doveva produrre. Fino al 2026-08-19 le deduceva entrambe annusando il TESTO
+ * del prompt:
+ *
+ *     opts.jsonMode && REQUIRED_IT_BODY_FIELDS.every(f => messages.some(m => m.content?.includes(f)))
+ *
+ * L'euristica cerca la PRESENZA DELLA STRINGA, non la RICHIESTA DEL CAMPO — e
+ * una menzione NEGATIVA la accende. L'istruzione della meta' body dello split
+ * (arrivata con #430) dice testualmente:
+ *
+ *     «content.it (body1, body2, body3). NON produrre id, category, image,
+ *      slugs, title, excerpt, faq o seo: verranno chiesti in una chiamata
+ *      separata.»
+ *
+ * Tutti e cinque i nomi compaiono: tre chiesti, DUE VIETATI. Il predicato
+ * scattava a cinque campi, e una risposta body-only PERFETTAMENTE CONFORME
+ * usciva come `output JSON incompleto: title, excerpt`, veniva rigenerata 5
+ * volte camminando ogni volta la cascata dei modelli, e alla fine `callLLM`
+ * LANCIAVA `qualityReject`.
+ *
+ * MISURA (log GitHub Actions del corpus). Lo split non ha completato una sola
+ * volta da #430: sulle 4 run del 2026-08-18 (32187412494, 32182923129,
+ * 32176062690, 32190158524) `call=1/2` e' stampato 25 volte e `call=2/2` ZERO.
+ * Sulle run del 2026-08-19 32209129247 e 32193289552 `roster_blocked` compare
+ * 12 e 11 volte, e il primo tentativo di ogni run brucia ~31 minuti senza
+ * produrre nulla — modelli penalizzati da `recordModelContentFailure()` per
+ * aver obbedito al contratto.
+ *
+ * ## Perche' un'opzione del chiamante, e non un'euristica migliore
+ *
+ * Qualunque euristica sul testo resta una congettura sulla prosa italiana: la
+ * si puo' rendere piu' furba (cercare «NON produrre», pesare le posizioni) e
+ * resterebbe a un rewording di distanza dal rompersi di nuovo, in silenzio e
+ * con la CI verde. Il chiamante invece SA quale meta' sta chiedendo — e' lui a
+ * scegliere lo schema (`article_body_only` / `article_metadata_only`) — quindi
+ * il dato esiste gia' e va solo propagato: `opts.expectedFields`.
+ *
+ * ## Il default resta l'euristica, ed e' deliberato
+ *
+ * Senza `expectedFields` il comportamento e' BYTE-IDENTICO a prima. Non e'
+ * timidezza: e' cio' che tiene in piedi le due protezioni che quella riga gia'
+ * dava, e che il commento originale in `callLLM()` documenta.
+ *
+ *   (a) `translateArticle` fa chiamate a campo singolo (`{"body2": "..."}`).
+ *       Li' il prompt nomina UN campo solo, l'euristica e' falsa, e la
+ *       risposta non viene giudicata come un articolo. Se il default
+ *       diventasse «valida sempre», `missing` sarebbe garantito non vuoto
+ *       (title/excerpt/body1/body3 non sono in quel payload per costruzione) e
+ *       ogni traduzione morirebbe di `qualityReject`.
+ *
+ *   (b) Il percorso di esaurimento retry LANCIA invece di cadere in fondo.
+ *       Se il default diventasse «non validare senza flag», un chiamante che
+ *       dimentica l'opzione tornerebbe a spedire contenuto in ITALIANO sotto
+ *       /en /de /fr — il baco che quel throw esiste per impedire.
+ *
+ * Quindi il flag puo' solo RESTRINGERE o CONFERMARE cio' che l'euristica gia'
+ * decideva, mai spegnere la validazione: chi non lo passa e' esattamente dove
+ * era prima.
+ *
+ * `jsonMode` resta la condizione necessaria, e il flag NON la scavalca: una
+ * chiamata senza `jsonMode` non produce JSON da giudicare, e accenderle la
+ * validazione addosso vorrebbe dire rigettare del testo libero per «campi
+ * mancanti».
+ *
+ * @param {object}   args
+ * @param {boolean}  [args.jsonMode]       `opts.jsonMode` della chiamata.
+ * @param {string[]} [args.expectedFields] i campi che il chiamante SA di aver chiesto.
+ * @param {Array}    [args.messages]       i messaggi spediti, per il default euristico.
+ * @returns {{ enabled: boolean, fields: string[] }}
+ * @throws {TypeError} se `expectedFields` c'e' ma non e' un elenco valido.
+ *
+ * Il throw e' voluto ed e' un errore di PROGRAMMAZIONE, non di dato: non
+ * dipende da cosa risponde un modello, quindi o sbaglia a ogni run (e il test
+ * lo prende) o non sbaglia mai. L'alternativa — ricadere in silenzio
+ * sull'euristica — ricrearebbe esattamente la classe di difetto che questa
+ * funzione esiste per chiudere: una validazione che dice di guardare una cosa
+ * e ne guarda un'altra.
+ */
+export function resolveBody2Validation({ jsonMode = false, expectedFields = null, messages = [] } = {}) {
+  if (!jsonMode) return { enabled: false, fields: [] };
+
+  if (expectedFields != null) {
+    if (!Array.isArray(expectedFields) || expectedFields.length === 0) {
+      throw new TypeError(
+        `opts.expectedFields deve essere un array non vuoto di REQUIRED_IT_BODY_FIELDS, ricevuto ${JSON.stringify(expectedFields)}`,
+      );
+    }
+    const sconosciuti = expectedFields.filter((f) => !REQUIRED_IT_BODY_FIELDS.includes(f));
+    if (sconosciuti.length > 0) {
+      throw new TypeError(
+        `opts.expectedFields nomina campi che il verdetto non sa giudicare: ${sconosciuti.join(', ')} `
+        + `(ammessi: ${REQUIRED_IT_BODY_FIELDS.join(', ')})`,
+      );
+    }
+    return { enabled: true, fields: [...expectedFields] };
+  }
+
+  const enabled = REQUIRED_IT_BODY_FIELDS.every((f) => messages.some((m) => m?.content?.includes(f)));
+  return { enabled, fields: REQUIRED_IT_BODY_FIELDS };
+}
+
+/**
  * Estrae il blocco di contenuto nella lingua primaria da un payload di
  * generazione, tollerando le tre forme che i modelli producono davvero:
  * `content.it.*`, `content.*` (locale saltato), o i campi alla radice.
@@ -86,8 +203,14 @@ export const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'b
  * il che include, per costruzione, il payload di abort di REGOLA #0. Quel
  * `null` da solo NON significa «malformato»: e' `classifyBody2Payload()` a
  * distinguere i due casi.
+ *
+ * `fields` restringe sia la ricerca del candidato sia il blocco restituito ai
+ * campi che il chiamante ha davvero chiesto (vedi `resolveBody2Validation`).
+ * Il default e' l'articolo completo, quindi i chiamanti a due argomenti — il
+ * gate dello split e i due della normalizzazione a valle in create-article.mjs
+ * — vedono esattamente cio' che vedevano prima.
  */
-export function normalizeItalianContentFromPayload(payload, locale = 'it') {
+export function normalizeItalianContentFromPayload(payload, locale = 'it', fields = REQUIRED_IT_BODY_FIELDS) {
   const content = payload?.content;
   const candidates = [];
 
@@ -102,7 +225,7 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it') {
     const block = {};
     let hasAnyField = false;
 
-    for (const field of REQUIRED_IT_BODY_FIELDS) {
+    for (const field of fields) {
       const value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
       if (value) hasAnyField = true;
       block[field] = value;
@@ -134,6 +257,12 @@ export function isTopicGateAbortPayload(parsed) {
  *                                 oppure undefined se il parse e' fallito.
  * @param {Error|null} args.parseErr l'errore di JSON.parse, se c'e' stato.
  * @param {string}  [args.locale]  la lingua primaria attesa.
+ * @param {string[]} [args.expectedFields] i campi che QUESTA chiamata doveva
+ *                                 produrre — vedi `resolveBody2Validation()`.
+ *                                 Il default e' l'articolo completo; le due
+ *                                 meta' dello split passano `BODY_ONLY_FIELDS`
+ *                                 e `META_ONLY_FIELDS`. Un campo non atteso non
+ *                                 e' «mancante»: non e' stato chiesto.
  *
  * @returns {{ verdict: 'ok'|'topic-gate-abort'|'reject', itContent: object|null, missing: string[] }}
  *
@@ -155,8 +284,13 @@ export function isTopicGateAbortPayload(parsed) {
  * sopra il flag. Fidarsi del flag li' aveva buttato un articolo valido e in
  * tema (osservato su local/fallback qwen2.5:14b).
  */
-export function classifyBody2Payload({ parsed, parseErr = null, locale = 'it' } = {}) {
-  const itContent = parseErr ? null : normalizeItalianContentFromPayload(parsed, locale);
+export function classifyBody2Payload({
+  parsed,
+  parseErr = null,
+  locale = 'it',
+  expectedFields = REQUIRED_IT_BODY_FIELDS,
+} = {}) {
+  const itContent = parseErr ? null : normalizeItalianContentFromPayload(parsed, locale, expectedFields);
 
   // ── Ramo 1: l'abort, riconosciuto PRIMA del ramo «non normalizzabile» ──
   // Solo quando il contenuto e' davvero assente: con `itContent` popolato il
@@ -172,17 +306,21 @@ export function classifyBody2Payload({ parsed, parseErr = null, locale = 'it' } 
     return { verdict: 'reject', itContent: null, missing };
   }
 
-  for (const field of REQUIRED_IT_BODY_FIELDS) {
+  for (const field of expectedFields) {
     if (!itContent?.[field] || itContent[field].length < 1) {
       missing.push(field);
     }
   }
-  if (itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
+  // La soglia sul body2 vale solo dove il body2 e' stato CHIESTO. Sulla meta'
+  // `meta` dello split non lo e': `itContent.body2` sarebbe `undefined` e il
+  // controllo passerebbe comunque, ma tenerlo legato ai campi attesi dice
+  // perche' — non e' un caso fortunato, e' il contratto.
+  if (expectedFields.includes('body2') && itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
   // Language sanity — fallback models occasionally drift to CJK / Cyrillic
   // when prompted in Italian. Treat as malformed output: penalises the model,
   // chain rotates, no budget burned at the outer headline-validation layer.
   // See run 26446721285.
-  for (const field of REQUIRED_IT_BODY_FIELDS) {
+  for (const field of expectedFields) {
     const val = itContent?.[field];
     if (typeof val === 'string' && val.length > 0 && isNonItalianScript(val)) {
       const ratio = (nonItalianScriptRatio(val) * 100).toFixed(0);
