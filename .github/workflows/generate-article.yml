@@ -1632,6 +1632,16 @@ jobs:
             # nomina gia' i tre insieme come "generator state ... MOVE with the
             # generator" — mancavano dall'allowlist per lo stesso motivo dei ledger
             # sopra: mai stati aggiunti (issue #496).
+            #
+            # data/quota-state.json e' un quarto gemello, scoperto durante la
+            # review di questa stessa issue: QUOTA_STATE_PATH in
+            # generator/scripts/lib/scheduler/quotaController.mjs, caricato da
+            # loadQuotaState() e riscritto per intero da saveQuotaState()
+            # (create-article.mjs chiama _saveQuotaState(_incrementCounter(...))
+            # dopo ogni publish riuscito) — stesso pattern whole-file-rewrite dei
+            # ledger sopra, ma UN SOLO file condiviso fra le due sezioni (nessuna
+            # variante swiss-). Era assente dall'allowlist: un conflitto di
+            # rebase su questo file abortiva il run esattamente come #76/#225/#496.
             bash scripts/lib/rebase-onto-remote.sh "$REMOTE" "$TARGET" \
               data/topic-candidates-evergreen-rejected.json \
               data/topic-candidates-consumed.json \
@@ -1641,6 +1651,7 @@ jobs:
               data/swiss-article-source-urls.json \
               data/article-source-quotas.json \
               data/swiss-article-source-quotas.json \
+              data/quota-state.json \
               --merge-registry content/blog-articles-data.ts \
               --merge-registry content/routerBlogData.ts \
               --merge-registry content/blogArticleIds.ts \
