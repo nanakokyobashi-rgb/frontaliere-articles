@@ -8220,16 +8220,116 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       console.error(`  ⚠️ [prompt-split] chiamata 1/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
       return null;
     }
-    // L'abort per rilevanza topica vive nella meta' di scrittura ed e'
-    // terminale: non ha senso chiedere i metadati di un articolo che non
-    // verra' scritto. Torna com'e', il chiamante lo riconosce gia'.
-    if (bodyData?.abort_topical_relevance) return JSON.stringify(bodyData);
-
+    // ── L'ABORT PER RILEVANZA TOPICA, E PERCHE' ORA SI DECIDE DOPO ───────
+    //
+    // L'abort vive nella meta' di scrittura ed e' terminale: non ha senso
+    // chiedere i metadati di un articolo che non verra' scritto. Si torna il
+    // payload com'e', il chiamante lo riconosce gia'.
+    //
+    // MA IL TEST ERA LASCO, E I DUE GATE DECIDEVANO DIVERSO.
+    // Qui c'era `if (bodyData?.abort_topical_relevance) return ...`, cioe'
+    // truthy. Il ramo a valle che decide LA STESSA COSA (« REGOLA #0 abort
+    // gate », ~270 righe sotto) usa invece l'uguaglianza STRETTA
+    // `=== true`. Qualunque valore truthy che non sia `true` — la stringa
+    // `"false"`, `"no"`, un numero, un oggetto — passava di qui e falliva la'.
+    //
+    // MISURA CHE HA APERTO L'INDAGINE (log GitHub Actions, corpus, 2026-08-18,
+    // le 4 run in cui lo split si e' attivato):
+    //
+    //   run           call=1/2   call=2/2   fallback   Exhausted content-quality
+    //   32187412494       5          0          0                5
+    //   32182923129       5          0          0                2
+    //   32176062690       5          0          0                3
+    //   32190158524      10          0          0                6
+    //
+    // ATTENZIONE, PERCHE' E' FACILE ATTRIBUIRLA A QUESTA RIGA E SAREBBE FALSO:
+    // quel 25 → 0 NON e' prodotto da qui. E' prodotto da `isBody2Check` in
+    // `callLLM` (~riga 5360), che pretende i 5 `REQUIRED_IT_BODY_FIELDS`
+    // quando il PROMPT li nomina — e l'istruzione della meta' body li nomina
+    // tutti, perche' dice « NON produrre ... title, excerpt ... ». Una
+    // risposta body-only CONFORME viene quindi giudicata
+    // `output JSON incompleto: title, excerpt`, rigenerata, e alla fine
+    // `callLLM` LANCIA: `_generateSplit` non arriva nemmeno qui, e non stampa
+    // fallback perche' un throw non e' un `return null`. Quello e' un difetto
+    // separato, con un rimedio separato, e non e' toccato da questa fix.
+    //
+    // COSA RESTA VERO E PERCHE' QUESTA RIGA VA COMUNQUE CORRETTA: e' la
+    // barriera IMMEDIATAMENTE SUCCESSIVA sullo stesso percorso, e sbaglia in
+    // un modo che si paga caro appena la prima cade. Cio' che restituisce e'
+    // la meta' BODY (`ROOT_KEYS_BODY = ['content','abort_topical_relevance',
+    // 'reason']`), che per costruzione NON PUO' contenere `title`/`excerpt` —
+    // quelli nascono solo nella chiamata 2/2. A valle il flag lasco non fa
+    // scattare l'abort stretto, il payload viene accettato con la politica
+    // « contract violation, trusting content over the flag », e il gate dei
+    // campi obbligatori stampa `⚠️ output JSON incompleto: title, excerpt`
+    // fino a 5 rigenerazioni, poi `🚫 Exhausted after 2 consecutive
+    // content-quality failures`: cioe' modelli penalizzati per aver obbedito
+    // al contratto. E' la stessa firma per cui il 2026-08-18 sono stati
+    // bruciati 16 modelli (fra gli altri nvidia/meta/llama-3.1-8b-instruct,
+    // gemini-3.1-flash-lite, gemini-flash-lite-latest) CON body1..body8 pieni,
+    // 164-3103 char a blocco. A roster vuoto la run chiude
+    // `declared roster_blocked`, che per progetto non concatena.
+    //
+        // LA POLITICA E' QUELLA DEL VALLE, non una nuova: se il flag e' `true` ma
+    // il contenuto e' utilizzabile, il modello si e' contraddetto e VINCE IL
+    // CONTENUTO. Quindi il corpo si calcola PRIMA di decidere, e l'abort si
+    // restituisce solo quando il corpo non e' utilizzabile — con la soglia
+    // `< 500` che gia' viveva qui sotto, non una nuova.
     const bodyContent = bodyData?.content?.[primaryLocale] || {};
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
       .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
-    if (articolo.length < 500) {
-      console.error(`  ⚠️ [prompt-split] chiamata 1/2 ha reso ${articolo.length}ch di corpo: ricado sulla chiamata unica.`);
+    const _abortDichiarato = bodyData?.abort_topical_relevance === true;
+    const _corpoUsabile = articolo.length >= 500;
+    // ALLINEARE IL FLAG NON BASTA: va allineato anche il PREDICATO DI
+    // USABILITA'. Il valle non chiede «500 char di corpo», chiede
+    // `normalizeItalianContentFromPayload(...)`, che torna truthy con UN SOLO
+    // carattere in uno qualunque di title/excerpt/body1/body2/body3
+    // (body2-payload-verdict.mjs). I due criteri divergono nella finestra
+    // 1..499 char: li' lo split avrebbe restituito il payload come abort, e il
+    // valle — flag `=== true` MA normalize truthy — avrebbe saltato il proprio
+    // throw di abort, preso il ramo di auto-contraddizione, e sarebbe finito
+    // in `validateItalianPayload` con `Campo title mancante per it`. Cioe' di
+    // nuovo un payload consegnato a un gate che non abortira': la stessa forma
+    // del difetto, spostata di un ramo. Quindi l'abort si restituisce solo
+    // quando il valle lo riconoscerebbe come tale, e la soglia dei 500 char
+    // resta a decidere l'ALTRA domanda — proseguire alla 2/2 o ricadere sulla
+    // chiamata unica — che e' cio' per cui e' sempre servita.
+    const _valleAbortirebbe = !normalizeItalianContentFromPayload(bodyData, primaryLocale);
+    if (_abortDichiarato && _valleAbortirebbe) {
+      // NESSUNA USCITA MUTA. E' il silenzio di questo ramo che ha reso il
+      // difetto invisibile per un giorno intero mentre bruciava il roster:
+      // l'unico indizio rimasto era il conteggio a zero delle righe ALTRUI.
+      console.error(
+        `  ⏭️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true con `
+        + `${articolo.length}ch di corpo: abort terminale, nessuna chiamata 2/2 `
+        + `(reason: "${String(bodyData.reason || '').slice(0, 200)}").`,
+      );
+      return JSON.stringify(bodyData);
+    }
+    if (_abortDichiarato) {
+      // Stessa riga del valle, stesso verdetto, stesso contatore. Il contatore
+      // serve QUI e non basta quello del valle: il payload che uscira' dalla
+      // 2/2 (`merged`) nasce da `metaData`, la cui meta' non ha
+      // `abort_topical_relevance`, quindi la contraddizione non arriva mai al
+      // gate di valle e sparirebbe dal run report.
+      console.error(
+        `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA ha `
+        + `anche reso ${articolo.length}ch di corpo — contract violation, trusting content `
+        + `over the flag (reason given: "${String(bodyData.reason || '').slice(0, 200)}").`,
+      );
+      if (RUN_REPORT && typeof RUN_REPORT === 'object') {
+        RUN_REPORT.topicGateSelfContradictions = (RUN_REPORT.topicGateSelfContradictions || 0) + 1;
+      }
+    }
+    if (!_corpoUsabile) {
+      // Il valore ANOMALO del flag va nominato qui, o sparisce: e' l'unico
+      // indizio che il modello ha TENTATO un abort in una forma che nessuno
+      // dei due gate riconosce, ed e' esattamente la classe che questa fix
+      // esiste per rendere visibile.
+      const _flagAnomalo = bodyData?.abort_topical_relevance != null && !_abortDichiarato
+        ? ` (abort_topical_relevance=${JSON.stringify(bodyData.abort_topical_relevance)}, ne' true ne' assente: ignorato da entrambi i gate)`
+        : '';
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 ha reso ${articolo.length}ch di corpo${_flagAnomalo}: ricado sulla chiamata unica.`);
       return null;
     }
 
