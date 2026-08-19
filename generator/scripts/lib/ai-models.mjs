@@ -1497,7 +1497,7 @@ export function shouldUseSchemaMode(providerName, hasSchema = true, modelForTrac
  * PROVIDERS_WITH_STRICT_JSON_SCHEMA or _learnedSchemaIncompatible, so this
  * predicate doesn't either for that provider. If _callClaudeCli's condition
  * changes, this one has to change with it — there's no import to enforce
- * that, only tests/scripts/ai-models-claude-cli-schema-estimate.test.ts
+ * that, only generator/tests/claude-cli-schema-token-estimate.test.mjs
  * asserting the two conditions stay textually in sync.
  */
 function _schemaBytesWillBeSent(providerName, hasSchema, modelForTracking) {
