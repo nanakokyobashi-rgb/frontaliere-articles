@@ -30801,6 +30801,42 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-morazzone-lavorare-ticino-frontaliere',
+ category: 'fiscale',
+ date: '2026-08-20T19:50:23.849Z',
+ image: '/images/blog/vivere-morazzone-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'vivere-carbonate-lavorare-ticino-frontaliere',
+ category: 'fiscale',
+ date: '2026-08-20T20:26:16.211Z',
+ image: '/images/blog/vivere-carbonate-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
+ {
+ id: 'vivere-erba-lavorare-ticino-frontaliere',
+ category: 'pratico',
+ date: '2026-08-20T20:58:10.472Z',
+ image: '/images/blog/vivere-erba-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'eupilio-ticino-frontaliere-guida',
+ category: 'pratico',
+ date: '2026-08-20T21:19:08.212Z',
+ image: '/images/blog/eupilio-ticino-frontaliere-guida.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -10285,6 +10285,18 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.incidente-strada-frontalieri-cantello.title': 'Clash between Varese and Cantello: two injured',
     'blog.article.incidente-strada-frontalieri-cantello.excerpt': 'Clash between two cars on the SP3 between Cantello and Varese: three people involved, two injured in hospital and heavy delays for border workers.',
     'blog.article.incidente-strada-frontalieri-cantello.imageAlt': 'Accident on the provincial road between Varese and Cantello',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.title': 'Border workers in Ticino: transfer from Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.excerpt': 'The new border agreement of 2024 and the benefits for border workers who move to Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.imageAlt': 'Image of a cross-border worker in Lugano',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.title': 'Living in Carbonate and working in Ticino: advantages and disadvantages',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.excerpt': 'Border Ticino residents in Carbonate: new tax agreement, tax at source, double taxation, refunds, double residence, G permit, B permit, LAMal, AVS, LPP.',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.imageAlt': 'Frontalieri Ticino living in Carbonate, with view on Lake Lugano.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.title': 'Living in Erba, working in Ticino as a border worker',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.excerpt': 'Erba is a strategic location for border workers working in Ticino. Discover the G permit, Italy-Swiss taxation, LAMal and management costs.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.imageAlt': 'Aerial view of Mendrisio town and the border region between Como and Ticino, with mountains and Alpine landscape.',
+    'blog.article.eupilio-ticino-frontaliere-guida.title': 'Living in Eupilio and working in Ticino: border guide',
+    'blog.article.eupilio-ticino-frontaliere-guida.excerpt': 'Eupilio 20 km from the Swiss border: time, taxation, G Permit, AVS/LPP and practical checklist of the transfer from border crossing.',
+    'blog.article.eupilio-ticino-frontaliere-guida.imageAlt': 'View of Ticino Alpine landscape with valleys, lakes and residential areas typical of the border zone.',
 };
 
 export default blogMetaEn;

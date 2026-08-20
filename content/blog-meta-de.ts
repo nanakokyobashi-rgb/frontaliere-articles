@@ -10284,6 +10284,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.incidente-strada-frontalieri-cantello.title': 'Zusammenstoß zwischen Varese und Cantello: zwei Verletzte',
     'blog.article.incidente-strada-frontalieri-cantello.excerpt': 'Zusammenstoß zwischen zwei Autos auf der SP3 zwischen Cantello und Varese: drei Beteiligte, zwei Verletzte im Krankenhaus und schwere Verzögerungen für die Grenzgänger.',
     'blog.article.incidente-strada-frontalieri-cantello.imageAlt': 'Unfall auf der Provingialstrasse zwischen Varese und Cantello',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.title': 'Grenzgänger im Tessin: der Umzug von Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.excerpt': 'Das neue Grenzabkommen von 2024 und die Vorteile für Grenzgänger, die nach Morazzone ziehen',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.imageAlt': 'Bild eines Grenzgängers in Lugano',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.title': 'Leben in Carbonate und Arbeiten im Tessin: Vor- und Nachteile',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.excerpt': 'Grenzgänger Tessin mit Wohnsitz in Carbonate: neues Steuerabkommen, Quellensteuer, Doppelbesteuerung, Rückerstattungen, Doppelwohnsitz, Bewilligung G, Bewilligung B, KVG, AHV, BVG.',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.imageAlt': 'Frontalieri Ticino in Carbonate, mit Blick auf den Luganersee.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.title': 'Leben in Gras, Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.excerpt': 'Erba ist ein strategischer Standort für Grenzgänger, die im Tessin arbeiten. Entdecken Sie die G-Bewilligung, die italienisch-schweizerische Besteuerung, das KVG und die Verwaltungskosten.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.imageAlt': 'Luftaufnahme von Mendrisio und der Grenzregion zwischen Como und Tessin mit Bergen und alpiner Landschaft.',
+    'blog.article.eupilio-ticino-frontaliere-guida.title': 'Leben in Eupilio und Arbeiten im Tessin: Grenzüberschreitendes Fahren',
+    'blog.article.eupilio-ticino-frontaliere-guida.excerpt': 'Eupilio 20 km von der Schweizer Grenze entfernt: Zeiten, Besteuerung, Bewilligung G, AHV/BVG und praktische Checkliste des Grenzgängertransfers.',
+    'blog.article.eupilio-ticino-frontaliere-guida.imageAlt': 'Blick auf die Tessiner Alpenlandschaft mit Tälern, Seen und Wohngebieten in der Grenzregion.',
 };
 
 export default blogMetaDe;

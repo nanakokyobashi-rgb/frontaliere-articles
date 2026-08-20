@@ -10286,6 +10286,18 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.incidente-strada-frontalieri-cantello.title': 'Scontro tra Varese e Cantello: due feriti',
     'blog.article.incidente-strada-frontalieri-cantello.excerpt': 'Scontro tra due auto sulla SP3 tra Cantello e Varese: tre persone coinvolte, due feriti in ospedale e pesanti rallentamenti per i frontalieri.',
     'blog.article.incidente-strada-frontalieri-cantello.imageAlt': 'Incidente sulla strada provinciale tra Varese e Cantello',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.title': 'Frontalieri in Ticino: il trasferimento da Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.excerpt': 'Il nuovo accordo frontaliere del 2024 e i benefici per i frontalieri che si trasferiscono a Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.imageAlt': 'Immagine di un frontaliere che lavora a Lugano',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.title': 'Vivere a Carbonate e lavorare in Ticino: vantaggi e svantaggi',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.excerpt': 'Frontalieri Ticino risiedenti a Carbonate: nuovo accordo fiscale, imposta alla fonte, doppia imposizione, ristorni, doppia residenza, permesso G, permesso B, LAMal, AVS, LPP.',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.imageAlt': 'Frontalieri Ticino risiedenti a Carbonate, con vista sul Lago di Lugano.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.title': 'Vivere a Erba, lavorare in Ticino da frontaliere',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.excerpt': 'Erba è una location strategica per frontalieri che lavorano in Ticino. Scopri il permesso G, la fiscalità italia-svizzera, LAMal e i costi di gestione.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.imageAlt': 'Veduta aerea di Mendrisio e della regione frontaliera tra Como (Italia) e Ticino (Svizzera), con montagne e paesaggio alpino.',
+    'blog.article.eupilio-ticino-frontaliere-guida.title': 'Vivere a Eupilio e lavorare in Ticino: guida frontaliere',
+    'blog.article.eupilio-ticino-frontaliere-guida.excerpt': 'Eupilio a 20 km dal confine svizzero: tempi, tassazione, Permesso G, AVS/LPP e checklist pratica del trasferimento da frontaliere.',
+    'blog.article.eupilio-ticino-frontaliere-guida.imageAlt': 'Veduta del paesaggio ticinese con vallata alpina, laghi e insediamenti residenziali tipici della zona di confine.',
 };
 
 export default blogMetaIt;

@@ -3592,6 +3592,21 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.comprare-casa-sciaffusa-mutuo.title': 'Acheter maison Schaffhouse : prix, hypothèque et taxes',
     'blog.article.comprare-casa-sciaffusa-mutuo.excerpt': 'Guide opérationnel pour l\'achat immobilier dans le canton de Schaffhouse : fonds propres requis, viabilité du prêt, taxe sur les passages cantonaux, frais de notaire et procédure étape par étape.',
     'blog.article.comprare-casa-sciaffusa-mutuo.imageAlt': 'Maison résidentielle moderne en paysage alpin suisse avec architecture contemporaine.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.title': 'Location Schaffhouse : caution, résiliation et conciliation',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.excerpt': 'Caution max 3 mois, résiliation sur formulaire cantonal, contestation dans les 30 jours : les règles fédérales de location à Schaffhouse expliquées en détail.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.imageAlt': 'Immeubles et propriétés locatives dans le canton de Schaffhouse',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.title': 'Acheter maison canton Schaffhouse : prix et hypothèque',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.excerpt': 'Guide d\'achat de logements dans le canton de Schaffhouse : fonds propres, viabilité du prêt, taxe de passage et frais de notaire.',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.imageAlt': 'Maison suisse traditionnelle avec jardin et montagnes en arrière-plan dans le canton de la Suisse du nord-est.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.title': 'Location Schaffhouse : caution et droit de location',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.excerpt': 'Dans le canton de Schaffhouse, le droit de location est régi par la loi fédérale. Voici ce qu\'il faut savoir sur le dépôt de garantie, la résiliation et la contestation de la redevance.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.imageAlt': 'Façade de bâtiment résidentiel moderne avec balcons dans une ville suisse, vue immobilière urbaine.',
+    'blog.article.mercato-affitti-schiaffusa.title': 'Marché locatif à Schaffhouse : caution et droit de location',
+    'blog.article.mercato-affitti-schiaffusa.excerpt': 'Le droit de location à Schaffhouse est régi par l\'article 253 du code civil suisse. La caution est liée sur un compte au nom du locataire.',
+    'blog.article.mercato-affitti-schiaffusa.imageAlt': 'Schaffhouse, marché locatif, dépôt, droits des locataires',
+    'blog.article.affitti-sciaffusa-diritto-locazione.title': 'Location Schaffhouse : redevances, caution et droit de location',
+    'blog.article.affitti-sciaffusa-diritto-locazione.excerpt': 'Règles fédérales sur le dépôt de garantie, la résiliation et la contestation des redevances dans le canton de Schaffhouse selon le Code suisse des obligations.',
+    'blog.article.affitti-sciaffusa-diritto-locazione.imageAlt': 'Façade d\'un immeuble résidentiel moderne en Suisse avec fenêtres claires et architecture épurée',
 };
 
 export default blogMetaChFr;

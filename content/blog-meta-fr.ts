@@ -10287,6 +10287,18 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.incidente-strada-frontalieri-cantello.title': 'Collision entre Varèse et Cantello : deux blessés',
     'blog.article.incidente-strada-frontalieri-cantello.excerpt': 'Collision entre deux voitures sur la SP3 entre Cantello et Varèse : trois personnes impliquées, deux blessés à l\'hôpital et de lourds ralentissements pour les frontaliers.',
     'blog.article.incidente-strada-frontalieri-cantello.imageAlt': 'Accident sur la route provinciale entre Varese et Cantello',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.title': 'Frontières au Tessin : le transfert de Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.excerpt': 'Le nouvel accord frontalier de 2024 et les avantages pour les frontaliers qui déménagent à Morazzone',
+    'blog.article.vivere-morazzone-lavorare-ticino-frontaliere.imageAlt': 'Image d\'un travailleur frontalier à Lugano',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.title': 'Vivre à Carbonate et travailler au Tessin : avantages et inconvénients',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.excerpt': 'Frontaliers du Tessin résidant à Carbonate : nouvel accord fiscal, impôt à la source, double imposition, restauration, double résidence, permis G, permis B, LAMal, AVS, LPP.',
+    'blog.article.vivere-carbonate-lavorare-ticino-frontaliere.imageAlt': 'Frontaliers Ticino résidents à Carbonate, avec vue sur le Lac de Lugano.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.title': 'Vivre à Erba, travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.excerpt': 'Erba est un emplacement stratégique pour les frontaliers qui travaillent au Tessin. Découvrez le permis G, la fiscalité italo-suisse, LAMal et les frais de gestion.',
+    'blog.article.vivere-erba-lavorare-ticino-frontaliere.imageAlt': 'Vue aérienne de Mendrisio et de la région frontalière entre Como et le Tessin avec montagnes et paysage alpin.',
+    'blog.article.eupilio-ticino-frontaliere-guida.title': 'Vivre à Eupilio et travailler au Tessin : guide frontalier',
+    'blog.article.eupilio-ticino-frontaliere-guida.excerpt': 'Eupilio à 20 km de la frontière suisse : temps, fiscalité, permis G, AVS/LPP et checklist pratique du transfert de frontalier.',
+    'blog.article.eupilio-ticino-frontaliere-guida.imageAlt': 'Vue du paysage alpin tessinois avec vallées, lacs et zones résidentielles typiques de la région frontalière.',
 };
 
 export default blogMetaFr;

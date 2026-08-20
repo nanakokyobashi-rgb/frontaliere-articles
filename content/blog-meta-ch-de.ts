@@ -3592,6 +3592,21 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.comprare-casa-sciaffusa-mutuo.title': 'Haus kaufen Schaffhausen: Preise, Hypothek und Steuern',
     'blog.article.comprare-casa-sciaffusa-mutuo.excerpt': 'Operativer Leitfaden zum Immobilienkauf im Kanton Schaffhausen: erforderliche Eigenmittel, Tragbarkeit des Darlehens, kantonale Stempelsteuer, Notarkosten und Schritt-für-Schritt-Verfahren.',
     'blog.article.comprare-casa-sciaffusa-mutuo.imageAlt': 'Modernes Schweizer Wohnhaus in Alpenlandschaft mit zeitgenössischer Architektur.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.title': 'Vermietungen Schaffhausen: Kaution, Kündigung und Schlichtung',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.excerpt': 'Kaution max. 3 Monate, Kündigung auf kantonalem Formular, Beanstandung innert 30 Tagen: Die eidgenössischen Mietregeln in Schaffhausen werden im Detail erläutert.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.imageAlt': 'Wohngebäude und Mietobjekte im Kanton Schaffhausen',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.title': 'Haus kaufen Kanton Schaffhausen: Preise und Hypothek',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.excerpt': 'Leitfaden zum Wohnungskauf im Kanton Schaffhausen: Eigenmittel, Tragbarkeit des Darlehens, Ablösesumme und Notargebühren.',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.imageAlt': 'Traditionelles Schweizer Haus mit Garten und Bergen im Hintergrund des Nordostkanton.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.title': 'Vermietungen Schaffhausen: Kaution und Mietzins',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.excerpt': 'Im Kanton Schaffhausen richtet sich das Mietrecht nach dem Bundesgesetz. Hier erfahren Sie, was Sie über Kaution, Kündigung und Gebührenbeanstandung wissen müssen.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.imageAlt': 'Moderne Wohngebäudefassade mit Balkonen in einer Schweizer Stadt, urbane Immobilienansicht.',
+    'blog.article.mercato-affitti-schiaffusa.title': 'Mietmarkt in Schaffhausen: Kaution und Mietrecht',
+    'blog.article.mercato-affitti-schiaffusa.excerpt': 'Das Mietrecht in Schaffhausen richtet sich nach Artikel 253 des Schweizerischen Zivilgesetzbuches. Die Kaution ist auf ein auf den Mieter lautendes Konto gebunden.',
+    'blog.article.mercato-affitti-schiaffusa.imageAlt': 'Schaffhausen, Mietmarkt, Kaution, Mieterrechte',
+    'blog.article.affitti-sciaffusa-diritto-locazione.title': 'Mieten Schaffhausen: Mieten, Kaution und Mietrecht',
+    'blog.article.affitti-sciaffusa-diritto-locazione.excerpt': 'Bundesvorschriften über Kaution, Kündigung und Gebührenbeanstandung im Kanton Schaffhausen gemäss Obligationenrecht.',
+    'blog.article.affitti-sciaffusa-diritto-locazione.imageAlt': 'Außenansicht eines modernen Wohngebäudes in der Schweiz mit klarer Fensterfront',
 };
 
 export default blogMetaChDe;

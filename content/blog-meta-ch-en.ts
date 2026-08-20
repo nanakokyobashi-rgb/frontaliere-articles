@@ -3592,6 +3592,21 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.comprare-casa-sciaffusa-mutuo.title': 'Buying a Schaffhausen Home: Prices, Mortgage and Taxes',
     'blog.article.comprare-casa-sciaffusa-mutuo.excerpt': 'Operational guide for the purchase of real estate in the canton of Schaffhausen: own funds required, sustainability of the mortgage, cantonal transfer tax, notary fees and step-by-step procedure.',
     'blog.article.comprare-casa-sciaffusa-mutuo.imageAlt': 'Modern Swiss home in Alpine landscape with residential architecture.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.title': 'Schaffhausen rentals: deposit, cancellation and conciliation',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.excerpt': 'Maximum security deposit 3 months, cancellation on cantonal form, dispute within 30 days: the federal rental rules in Schaffhausen explained in detail.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.imageAlt': 'Residential buildings and rental properties in Schaffhausen canton',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.title': 'Buy house canton Schaffhausen: prices and mortgage',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.excerpt': 'Guide to buying homes in the Canton of Schaffhausen: own funds, sustainability of the mortgage, transfer tax and notary fees.',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.imageAlt': 'Traditional Swiss house with garden and mountains in northeastern Switzerland\'s canton landscape.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.title': 'Schaffhausen rentals: deposit deposit and rental right',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.excerpt': 'In the canton of Schaffhausen, the right to rent is governed by federal law. Here\'s what you need to know about security deposit, cancellation, and rent dispute.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.imageAlt': 'Modern residential building facade with balconies in a Swiss city, urban real estate view.',
+    'blog.article.mercato-affitti-schiaffusa.title': 'Rental market in Schaffhausen: deposit and rental right',
+    'blog.article.mercato-affitti-schiaffusa.excerpt': 'The right to rent in Schaffhausen is governed by Article 253 of the Swiss Civil Code. The deposit is held on account in the tenant\'s name.',
+    'blog.article.mercato-affitti-schiaffusa.imageAlt': 'Sciaffusa, rental market, deposit, tenant rights',
+    'blog.article.affitti-sciaffusa-diritto-locazione.title': 'Schaffhausen rentals: fees, deposit and right of lease',
+    'blog.article.affitti-sciaffusa-diritto-locazione.excerpt': 'Federal rules on security deposit, cancellation and dispute of fees in the canton of Schaffhausen according to the Swiss Bond Code.',
+    'blog.article.affitti-sciaffusa-diritto-locazione.imageAlt': 'Exterior of a modern residential building in Switzerland with clear windows and clean architecture',
 };
 
 export default blogMetaChEn;

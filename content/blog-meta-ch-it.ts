@@ -3592,6 +3592,21 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.comprare-casa-sciaffusa-mutuo.title': 'Comprare casa Sciaffusa: prezzi, mutuo e imposte',
     'blog.article.comprare-casa-sciaffusa-mutuo.excerpt': 'Guida operativa all\'acquisto immobiliare nel canton Sciaffusa: fondi propri richiesti, sostenibilità del mutuo, imposta sui trapassi cantonale, spese notarili e procedura step-by-step.',
     'blog.article.comprare-casa-sciaffusa-mutuo.imageAlt': 'Casa moderna in paesaggio alpino svizzero con veduta sul territorio.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.title': 'Affitti Sciaffusa: cauzione, disdetta e conciliazione',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.excerpt': 'Deposito cauzionale max 3 mesi, disdetta su modulo cantonale, contestazione entro 30 giorni: le norme federali di locazione a Sciaffusa spiegate in dettaglio.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta-conciliazione.imageAlt': 'Edifici residenziali e proprietà in affitto nel Canton Sciaffusa',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.title': 'Comprare casa canton Sciaffusa: prezzi e mutuo',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.excerpt': 'Guida all\'acquisto di abitazioni nel Cantone Sciaffusa: fondi propri, sostenibilità del mutuo, imposta sui trapassi e spese notarili.',
+    'blog.article.acquisire-casa-sciaffusa-mutuo-fiscale.imageAlt': 'Una tradizionale casa svizzera con giardino e montagne sullo sfondo nel cantone della Svizzera nordorientale.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.title': 'Affitti Sciaffusa: deposito cauzione e diritto di locazione',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.excerpt': 'Nel canton Sciaffusa il diritto di locazione è regolato dalla legge federale. Ecco cosa sapere su deposito cauzionale, disdetta e contestazione del canone.',
+    'blog.article.affitti-sciaffusa-cauzione-disdetta.imageAlt': 'Facciata di edificio residenziale con balconi in una città svizzera, vista urbana di qualità immobiliare.',
+    'blog.article.mercato-affitti-schiaffusa.title': 'Mercato degli affitti a Sciaffusa: cauzione e diritto di locazione',
+    'blog.article.mercato-affitti-schiaffusa.excerpt': 'Il diritto di locazione a Sciaffusa è regolato dall\'articolo 253 del codice civile svizzero. La cauzione è vincolata su conto intestato all\'inquilino.',
+    'blog.article.mercato-affitti-schiaffusa.imageAlt': 'Sciaffusa, mercato degli affitti, cauzione, diritto di locazione',
+    'blog.article.affitti-sciaffusa-diritto-locazione.title': 'Affitti Sciaffusa: canoni, cauzione e diritto di locazione',
+    'blog.article.affitti-sciaffusa-diritto-locazione.excerpt': 'Regole federali su deposito cauzionale, disdetta e contestazione dei canoni nel cantone di Sciaffusa secondo il Codice Obbligazioni svizzero.',
+    'blog.article.affitti-sciaffusa-diritto-locazione.imageAlt': 'Esterno di un edificio residenziale moderno in Svizzera con finestre chiare e architettura pulita',
 };
 
 export default blogMetaChIt;
