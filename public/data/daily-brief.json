@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-19T05:34:21.932Z",
-  "dateIso": "2026-08-19",
+  "generatedAt": "2026-08-20T05:34:28.937Z",
+  "dateIso": "2026-08-20",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 23227
+    "jobsActive": 23173
   },
   "blocks": {
     "borderWait": {
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-19T04:22:17.356Z",
+      "generatedAt": "2026-08-20T05:11:07.698Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 69,
+      "cheaperItalyCount": 65,
       "cheaperSwissCount": 68,
-      "tieCount": 9,
+      "tieCount": 13,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -59,27 +59,27 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.518,
-          "swissPriceEur": 2.02,
+          "swissPriceEur": 2.021,
           "swissPriceChf": 1.9,
-          "saving50LEur": 25.1
+          "saving50LEur": 25.15
         },
         {
           "municipality": "Campodolcino",
           "province": "SO",
           "cheaperCountry": "CH",
           "italyPriceEur": 2.175,
-          "swissPriceEur": 1.903,
+          "swissPriceEur": 1.904,
           "swissPriceChf": 1.79,
-          "saving50LEur": 13.6
+          "saving50LEur": 13.55
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.116,
+          "swissPriceEur": 2.117,
           "swissPriceChf": 1.99,
-          "saving50LEur": 9.85
+          "saving50LEur": 9.9
         }
       ],
       "cheapestSwissStation": {
@@ -91,24 +91,24 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0638,
-      "lastDate": "2026-08-18",
-      "prevRate": 1.0638,
-      "prevDate": "2026-08-17",
-      "delta1d": 0,
-      "rate7dAgo": 1.0686,
-      "delta7d": -0.0048,
+      "rate": 1.0655,
+      "lastDate": "2026-08-19",
+      "prevRate": 1.0656,
+      "prevDate": "2026-08-18",
+      "delta1d": -0.0001,
+      "rate7dAgo": 1.0675,
+      "delta7d": -0.002,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-19T03:19:28.244Z",
-      "activeJobs": 23227,
-      "activeCompanies": 852,
-      "todayAdded": 439,
-      "yesterdayAdded": 935,
-      "last7dAdded": 4507
+      "generatedAt": "2026-08-19T10:35:15.889Z",
+      "activeJobs": 23173,
+      "activeCompanies": 856,
+      "todayAdded": 601,
+      "yesterdayAdded": 601,
+      "last7dAdded": 4669
     }
   }
 }
