@@ -78,3 +78,34 @@ test('exchangeAssertionForToken passa TOKEN_EXCHANGE_TIMEOUT_MS come AbortSignal
     "il fetch verso l'endpoint OAuth di Google non ha (più) un AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS): un endpoint lento senza mai un errore esplicito appenderebbe la richiesta per sempre",
   );
 });
+
+// #247: un `fetch()` rifiutato senza Abort/TimeoutError — cioè un fallimento
+// di rete nudo (DNS, TLS, connection reset: un `TypeError: fetch failed`
+// senza status) — veniva ri-lanciato subito invece di rientrare nel retry
+// loop. Misurato in produzione: un `fetch failed` a 272ms dall'avvio della
+// richiesta, troppo veloce per essere il timeout da 30s ma indistinguibile
+// nell'effetto (nessuna risposta). Questi test pinnano che il catch block di
+// entrambi i gemelli non ri-lanci più incondizionatamente sulla base del solo
+// nome dell'errore.
+test('fetchTemplateViaRest non ri-lancia subito su un fetch() rifiutato senza Abort/TimeoutError', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/load-rc-env.mjs'), 'utf8');
+  const fnBody = src.slice(
+    src.indexOf('async function fetchTemplateViaRest'),
+    src.indexOf('// ─── Main'),
+  );
+  assert.doesNotMatch(
+    fnBody,
+    /if\s*\(err\?\.name\s*!==\s*'AbortError'\s*&&\s*err\?\.name\s*!==\s*'TimeoutError'\)\s*throw err;/,
+    'un fallimento di rete nudo (DNS/TLS/connection reset, nessun Abort/TimeoutError) deve rientrare nel retry loop, non essere ri-lanciato al primo tentativo',
+  );
+});
+
+test('exchangeAssertionForToken non ri-lancia subito su un fetch() rifiutato senza Abort/TimeoutError', () => {
+  const src = fs.readFileSync(path.join(ROOT, 'scripts/lib/google-service-account-token.mjs'), 'utf8');
+  const fnBody = src.slice(src.indexOf('export async function exchangeAssertionForToken'));
+  assert.doesNotMatch(
+    fnBody,
+    /if\s*\(err\?\.name\s*!==\s*'AbortError'\s*&&\s*err\?\.name\s*!==\s*'TimeoutError'\)\s*throw err;/,
+    'un fallimento di rete nudo (DNS/TLS/connection reset, nessun Abort/TimeoutError) deve rientrare nel retry loop, non essere ri-lanciato al primo tentativo',
+  );
+});
