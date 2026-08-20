@@ -10236,6 +10236,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.primo-giorno-single-ticino-2026.title': 'Premier jour au Tessin : checklist pour frontaliers célibataires',
     'blog.article.primo-giorno-single-ticino-2026.excerpt': 'Documents essentiels, permis G, impôt à la source, LAMal, AVS/LPP : guide opérationnel pour le premier jour de travail en tant que frontalier célibataire au Tessin en 2024-2026.',
     'blog.article.primo-giorno-single-ticino-2026.imageAlt': 'Travailleur frontalier premier jour de travail au Tessin: signature de contrat et documents administratifs au bureau.',
+    'blog.article.vivere-cermenate-lavorare-ticino-frontaliere.title': 'Cermenate : vivre en Italie, travailler au Tessin',
+    'blog.article.vivere-cermenate-lavorare-ticino-frontaliere.excerpt': 'Frontière de Cermenate au Tessin : permis G, fiscalité, restauration, AVS, LAMal. Guide pratique et procédures.',
+    'blog.article.vivere-cermenate-lavorare-ticino-frontaliere.imageAlt': 'Vue de Lugano avec le lac au coucher du soleil et les Alpes, destination de travail du frontalier vivant à Cermenate',
 };
 
 export default blogMetaFr;
