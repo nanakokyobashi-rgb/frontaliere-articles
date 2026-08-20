@@ -31,12 +31,12 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CREATE_ARTICLE = path.resolve(HERE, '../scripts/create-article.mjs');
 const src = readFileSync(CREATE_ARTICLE, 'utf-8');
 
-/** Ritaglia il blocco `const CREATE_ARTICLE_MAX_WALL_MS_ENV = ... : 30 * 60_000;`. */
+/** Ritaglia il blocco `const CREATE_ARTICLE_MAX_WALL_MS_ENV = ... : CREATE_ARTICLE_MAX_WALL_MS_PARSED;`. */
 function extractWallBudgetBlock() {
   const anchor = 'const CREATE_ARTICLE_MAX_WALL_MS_ENV = process.env.CREATE_ARTICLE_MAX_WALL_MS;';
   const a = src.indexOf(anchor);
   assert.notEqual(a, -1, 'anchor non trovata — aggiornare questo test');
-  const tail = ': 30 * 60_000;';
+  const tail = ': CREATE_ARTICLE_MAX_WALL_MS_PARSED;';
   const t = src.indexOf(tail, a);
   assert.notEqual(t, -1, 'chiusura del blocco non trovata — aggiornare questo test');
   return src.slice(a, t + tail.length);
@@ -76,4 +76,16 @@ test('senza env var il default resta 30min', () => {
 
 test('un valore non parsabile ricade sul default di 30min, non sul floor di 5min', () => {
   assert.equal(computeRunWallBudgetMs('not-a-number'), 30 * 60_000);
+});
+
+test('cap=60 dalla shell esporta "0" esplicito, e "0" non ricade sul default di 30min (review round 2)', () => {
+  // cap=60s -> export = (60-60)*1000 = "0". Prima del fix round-2 il
+  // `Number.parseInt(...) || 30*60_000` trattava "0" come falsy e ricadeva
+  // sul default: il processo si credeva libero 30min mentre l'esterno lo
+  // stava per killare in ~60s. Deve restare 0.
+  assert.equal(computeRunWallBudgetMs('0'), 0);
+});
+
+test('stringa vuota (env var settata senza valore) ricade sul default di 30min', () => {
+  assert.equal(computeRunWallBudgetMs(''), 30 * 60_000);
 });

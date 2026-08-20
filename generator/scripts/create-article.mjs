@@ -12355,9 +12355,12 @@ const GOOGLE_NEWS_INJECT_MAX = Number(process.env.GOOGLE_NEWS_INJECT_MAX) || 60;
 // external `timeout` actually allows, reintroducing #462's overshoot at a
 // smaller magnitude for any cap under ~6min.
 const CREATE_ARTICLE_MAX_WALL_MS_ENV = process.env.CREATE_ARTICLE_MAX_WALL_MS;
-const RUN_WALL_BUDGET_MS = CREATE_ARTICLE_MAX_WALL_MS_ENV
-  ? (Number.parseInt(CREATE_ARTICLE_MAX_WALL_MS_ENV, 10) || 30 * 60_000)
-  : 30 * 60_000;
+const CREATE_ARTICLE_MAX_WALL_MS_PARSED = CREATE_ARTICLE_MAX_WALL_MS_ENV !== undefined && CREATE_ARTICLE_MAX_WALL_MS_ENV !== ''
+  ? Number.parseInt(CREATE_ARTICLE_MAX_WALL_MS_ENV, 10)
+  : NaN;
+const RUN_WALL_BUDGET_MS = Number.isNaN(CREATE_ARTICLE_MAX_WALL_MS_PARSED)
+  ? 30 * 60_000
+  : CREATE_ARTICLE_MAX_WALL_MS_PARSED;
 const RUN_START_MS = Date.now();
 /** True once the global wall-clock budget is spent (used to stop new topic attempts). */
 function wallBudgetExceeded() {
