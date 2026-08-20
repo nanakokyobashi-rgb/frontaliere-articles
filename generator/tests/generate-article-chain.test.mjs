@@ -101,6 +101,7 @@ function runGenerateStep({
   stallPoll = null,
   stallGrace = null,
   talkForS = 0,
+  clockOffsetS = null,
 } = {}) {
   const dir = mkdtempSync(path.join(tmpdir(), 'generate-article-chain-'));
   try {
@@ -196,6 +197,14 @@ exit 0
         // step che parte fa `rm -rf` di quella cartella.
         RUNNER_TEMP: dir,
         TALK_FOR_S: String(talkForS),
+        // L'OROLOGIO, INIETTATO INVECE CHE ATTESO. `SECONDS` e' una variabile
+        // speciale di bash che, se arriva dall'ambiente, PARTE da quel valore e
+        // poi avanza normalmente (verificato: `SECONDS=400 bash -c 'echo
+        // $SECONDS'` stampa 400). Lo step calcola il cap di ogni tentativo come
+        // `min(hard_kill, budget − SECONDS)`, quindi con questo il «tempo gia'
+        // speso» diventa un dato del test invece dell'esito di uno `sleep` —
+        // che sotto carico misura la macchina, non il codice (#521).
+        ...(clockOffsetS === null ? {} : { SECONDS: String(clockOffsetS) }),
         ...(budget === null ? {} : { GENERATE_BUDGET_S: String(budget) }),
         ...(hardKill === null ? {} : { GENERATE_HARD_KILL_S: String(hardKill) }),
         ...(stall === null ? {} : { GENERATE_STALL_S: String(stall) }),
@@ -348,21 +357,71 @@ test('con un URL esplicito non c\'e\' fallback: l\'URL e\' legato alla sezione',
 });
 
 test('il tempo speso piu\' il cap del tentativo dopo non sfora mai il budget', () => {
-  // Il primo tentativo brucia 3s di un budget da 6; il secondo puo' quindi
-  // valere al massimo 3s, non i 5s del cap per tentativo. Senza il termine
-  // `budget − SECONDS` questo test vede 5s e fallisce — ed e' esattamente cosi'
-  // che ha trovato la prima stesura della fix, dove due tentativi da 2400s
-  // sommavano 4800s contro un `timeout-minutes: 60`.
+  // L'INVARIANTE: il cap di un tentativo e' `min(hard_kill, budget − SECONDS)`.
+  // Senza il termine `budget − SECONDS` ogni tentativo prenderebbe il cap
+  // pieno, e due da 2400s sommerebbero 4800s contro un `timeout-minutes: 60` —
+  // che e' la regressione trovata nella prima stesura della fix.
+  //
+  // COME SI MISURA, E PERCHE' NON PIU' COL CRONOMETRO (#521). La stesura
+  // precedente faceva bruciare 3s reali al primo tentativo su un budget da 6 e
+  // pretendeva che il secondo partisse comunque. Il margine era di 2s: bastava
+  // che la shell ne perdesse due perche' `remaining` scendesse sotto
+  // `min_attempt_s`, il secondo tentativo non partisse affatto e l'asserzione
+  // «entrambi i tentativi devono essere partiti» cadesse senza che il codice
+  // sotto test fosse cambiato. Riprodotto 12 volte su 12 con le CPU sature.
+  // Un cap piu' largo sarebbe stata la non-fix classica: sposta la soglia, il
+  // carico la ritrova. Qui il tempo gia' speso e' INIETTATO (`clockOffsetS` →
+  // `SECONDS`), quindi la finestra utile non e' piu' di 2 secondi ma di
+  // `budget − speso − min_attempt` = 163, e nessuno `sleep` entra nella misura.
+  const BUDGET = 600;
+  const HARD_KILL = 500;
+  const SPESO = 400;
+  const RESIDUO = BUDGET - SPESO; // 200s: meno del cap per tentativo, ed e' il punto
   const r = runGenerateStep({
     section: 'svizzera',
-    plan: ['0 0 3', '0 0'],
-    budget: 6,
-    hardKill: 5,
+    plan: ['0 0', '0 0'],
+    budget: BUDGET,
+    hardKill: HARD_KILL,
+    clockOffsetS: SPESO,
   });
   const caps = r.caps.map((c) => Number(String(c).replace(/s$/, '')));
   assert.equal(caps.length, 2, 'entrambi i tentativi devono essere partiti');
-  assert.equal(caps[0], 5, 'il primo tentativo prende il cap pieno');
-  assert.ok(caps[1] <= 3, `il secondo deve stare nel budget residuo, ha preso ${caps[1]}s`);
+  for (const [i, cap] of caps.entries()) {
+    assert.ok(
+      cap < HARD_KILL,
+      `il tentativo ${i + 1} ha preso il cap pieno (${cap}s): manca il termine \`budget − SECONDS\``,
+    );
+    assert.ok(
+      cap <= RESIDUO,
+      `il tentativo ${i + 1} ha preso ${cap}s, piu' del budget residuo (${RESIDUO}s)`,
+    );
+    // Non degenere: il cap resta dell'ordine del residuo. La tolleranza copre
+    // l'orologio che avanza davvero mentre lo step gira, e resta lontanissima
+    // dal cap per tentativo, che e' cio' che il test deve distinguere.
+    assert.ok(
+      cap > RESIDUO - 120,
+      `il tentativo ${i + 1} ha preso ${cap}s, molto meno del residuo (${RESIDUO}s): cap sospetto`,
+    );
+  }
+});
+
+test('un tentativo che non entra nel budget residuo non parte affatto', () => {
+  // Il floor `min_attempt_s` (un sedicesimo del budget) esiste perche'
+  // `timeout 0s` significa NESSUN limite: un cap sceso a zero regalerebbe il
+  // job invece di proteggerlo. Con 20s di residuo su un minimo di 37 lo step
+  // deve rinunciare PRIMA di invocare create-article.mjs. Deterministico:
+  // l'unico ingrediente e' il tempo iniettato.
+  const r = runGenerateStep({
+    section: 'svizzera',
+    plan: ['0 1'],
+    budget: 600,
+    hardKill: 500,
+    clockOffsetS: 580,
+  });
+  assert.equal(r.invocations.length, 0, 'nessun tentativo puo\' essere partito');
+  assert.equal(r.caps.length, 0, 'e quindi nessun cap e\' stato concesso');
+  assert.match(r.stdout, /time budget spent/);
+  assert.equal(r.outputs.article, 'false');
 });
 
 test('il processo riceve il cap effettivo, non il default RUN_WALL_BUDGET_MS (#462)', () => {
