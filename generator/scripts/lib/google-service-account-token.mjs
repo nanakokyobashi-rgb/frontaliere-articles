@@ -84,13 +84,18 @@ export async function exchangeAssertionForToken(assertion) {
         signal: AbortSignal.timeout(TOKEN_EXCHANGE_TIMEOUT_MS),
       });
     } catch (err) {
-      // AbortSignal.timeout() rejects the fetch instead of resolving a status —
-      // the status-based retry below never runs, so a slow-but-never-erroring
-      // endpoint would fail on the FIRST timeout instead of spending the
-      // 7-attempt/~63s budget this loop exists to provide. Any other thrown
-      // error (DNS, TLS, etc.) is not something a retry can fix — fail fast.
-      if (err?.name !== 'AbortError' && err?.name !== 'TimeoutError') throw err;
-      lastErr = new Error(`OAuth token exchange timed out after ${TOKEN_EXCHANGE_TIMEOUT_MS}ms`);
+      // AbortSignal.timeout() rejects the fetch instead of resolving a status,
+      // and so does a raw network failure (DNS, TLS, connection reset — a bare
+      // "fetch failed" TypeError with no status to check). Both are transient
+      // and non-deterministic: issue #247 measured the network-failure case
+      // landing 272ms after the request started on the sibling RC fetch in
+      // load-rc-env.mjs, which retries every rejection for the same reason.
+      // Re-throwing anything other than Abort/TimeoutError here (as this used
+      // to) skipped the whole TOKEN_EXCHANGE_ATTEMPTS/~63s retry budget on
+      // exactly the failure mode it was built to survive.
+      lastErr = err?.name === 'AbortError' || err?.name === 'TimeoutError'
+        ? new Error(`OAuth token exchange timed out after ${TOKEN_EXCHANGE_TIMEOUT_MS}ms`)
+        : err;
       if (attempt < TOKEN_EXCHANGE_ATTEMPTS) {
         await new Promise((r) => setTimeout(r, 1000 * 2 ** (attempt - 1)));
       }
