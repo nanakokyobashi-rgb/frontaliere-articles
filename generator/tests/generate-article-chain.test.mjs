@@ -356,6 +356,26 @@ test('con un URL esplicito non c\'e\' fallback: l\'URL e\' legato alla sezione',
   assert.match(r.invocations[0], /https:\/\/example\.invalid\/a/);
 });
 
+test('l\'orologio iniettato arriva davvero alla shell dello step', () => {
+  // IL PRESUPPOSTO DEL TEST QUI SOTTO, PROVATO A PARTE. `clockOffsetS` funziona
+  // solo perche' bash, quando trova `SECONDS` nell'ambiente, PARTE da quel
+  // valore invece che da zero. Se un giorno smettesse di farlo, i cap
+  // tornerebbero al valore pieno e il test del budget fallirebbe accusando il
+  // workflow di aver perso il termine `budget − SECONDS` — una diagnosi
+  // sbagliata su un codice intatto. Qui il meccanismo e' isolato dal workflow,
+  // cosi' il fallimento dice subito di chi e' la colpa.
+  // Verificato su bash 3.2.57 e 5.3.15: 400 all'avvio, 401 dopo un secondo.
+  const probe = spawnSync('bash', ['-c', 'echo "$SECONDS"'], {
+    encoding: 'utf8',
+    env: { ...process.env, SECONDS: '400' },
+  });
+  const visto = Number(String(probe.stdout).trim());
+  assert.ok(
+    visto >= 400,
+    `bash non eredita piu' SECONDS dall'ambiente (ha visto ${visto}): clockOffsetS non inietta piu' niente e i test del budget misurano il wall-clock reale`,
+  );
+});
+
 test('il tempo speso piu\' il cap del tentativo dopo non sfora mai il budget', () => {
   // L'INVARIANTE: il cap di un tentativo e' `min(hard_kill, budget − SECONDS)`.
   // Senza il termine `budget − SECONDS` ogni tentativo prenderebbe il cap
