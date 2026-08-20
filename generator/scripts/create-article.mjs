@@ -12346,10 +12346,18 @@ const GOOGLE_NEWS_INJECT_MAX = Number(process.env.GOOGLE_NEWS_INJECT_MAX) || 60;
 // self-trigger chain simply advances to the next run. It is deliberately generous
 // (default 30min) so it never truncates a healthy ~15-20min run — it only fires on
 // the pathological tail. Env-overridable for tuning without a code change.
-const RUN_WALL_BUDGET_MS = Math.max(
-  5 * 60_000,
-  Number.parseInt(process.env.CREATE_ARTICLE_MAX_WALL_MS || String(30 * 60_000), 10) || (30 * 60_000),
-);
+//
+// The 5-min floor below applies ONLY to the unset/unparseable default path.
+// generate-article.yml sets CREATE_ARTICLE_MAX_WALL_MS explicitly to the real
+// per-attempt cap it grants before `timeout` kills the process (issue #462); a
+// caller-provided value must be honored as given, not silently raised to 5min —
+// doing so would make the process believe it has more wall time than the
+// external `timeout` actually allows, reintroducing #462's overshoot at a
+// smaller magnitude for any cap under ~6min.
+const CREATE_ARTICLE_MAX_WALL_MS_ENV = process.env.CREATE_ARTICLE_MAX_WALL_MS;
+const RUN_WALL_BUDGET_MS = CREATE_ARTICLE_MAX_WALL_MS_ENV
+  ? (Number.parseInt(CREATE_ARTICLE_MAX_WALL_MS_ENV, 10) || 30 * 60_000)
+  : 30 * 60_000;
 const RUN_START_MS = Date.now();
 /** True once the global wall-clock budget is spent (used to stop new topic attempts). */
 function wallBudgetExceeded() {
