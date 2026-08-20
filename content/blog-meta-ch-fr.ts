@@ -3541,6 +3541,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.pmi-svizzere-assenze-lavoro.title': 'Les absences du personnel coûtent plus cher aux PME, étude AXA',
     'blog.article.pmi-svizzere-assenze-lavoro.excerpt': 'Une étude AXA révèle que 42% des PME suisses ont souffert d\'absences au cours des cinq dernières années. Le stress psychique est en forte augmentation depuis 2023.',
     'blog.article.pmi-svizzere-assenze-lavoro.imageAlt': 'Vue aérienne d\'une ville suisse moderne avec quartier d\'affaires et immeubles de bureaux, atmosphère professionnelle',
+    'blog.article.benzina-due-franchi-agosto-2026.title': 'Essence au-dessus de 2 francs : première augmentation depuis 2022',
+    'blog.article.benzina-due-franchi-agosto-2026.excerpt': 'Le prix de l\'essence sans plomb 95 dépasse 2 francs le litre pour la première fois depuis 2022. Diesel à 2,27 francs. Les causes : conflits au Moyen-Orient et crise logistique sur le Rhin.',
+    'blog.article.benzina-due-franchi-agosto-2026.imageAlt': 'Station-service suisse au crépuscule avec vue sur les Alpes',
 };
 
 export default blogMetaChFr;

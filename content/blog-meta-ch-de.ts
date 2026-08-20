@@ -3541,6 +3541,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pmi-svizzere-assenze-lavoro.title': 'Personalabwesenheiten kosten KMU mehr, Studie AXA',
     'blog.article.pmi-svizzere-assenze-lavoro.excerpt': 'Eine AXA-Studie zeigt, dass 42% der Schweizer KMU in den letzten fünf Jahren von Absenzen betroffen waren. Psychischer Stress nimmt seit 2023 stark zu.',
     'blog.article.pmi-svizzere-assenze-lavoro.imageAlt': 'Luftaufnahme einer modernen Schweizer Stadt mit Geschäftsviertel und Bürogebäuden, professionelle Atmosphäre',
+    'blog.article.benzina-due-franchi-agosto-2026.title': 'Benzin über 2 Franken: erste Erhöhung ab 2022',
+    'blog.article.benzina-due-franchi-agosto-2026.excerpt': 'Der Preis für bleifreies Benzin 95 übersteigt erstmals seit 2022 2 Franken pro Liter. Diesel für 2,27 Franken. Die Ursachen: Konflikte im Nahen Osten und Logistikkrisen am Rhein.',
+    'blog.article.benzina-due-franchi-agosto-2026.imageAlt': 'Schweizer Tankstelle in der Abenddämmerung mit Alpenblick im Hintergrund',
 };
 
 export default blogMetaChDe;
