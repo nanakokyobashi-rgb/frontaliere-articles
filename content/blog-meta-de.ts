@@ -10198,6 +10198,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.title': 'Lohnabrechnung Grenzgänger 2026: Netto und Familienabzüge',
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.excerpt': 'Neues Frontalieri-Abkommen in Kraft seit dem 1. Januar 2024: Funktionsweise der schweizerischen Lohnabrechnung, AHV/BVG-SÄTZE, Befreiung €7.500/ € 10.000 und italienische Steuergutschrift.',
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.imageAlt': 'Lohnabrechnung eines Grenzgängers auf Schreibtisch mit Schweizer Alpenpanorama im Fenster sichtbar',
+    'blog.article.credito-imposta-2026-calcolo-limiti.title': 'Grenzgängersteuergutschrift 2026: Berechnungsleitfaden',
+    'blog.article.credito-imposta-2026-calcolo-limiti.excerpt': 'So erhalten Sie die Steuergutschrift in der italienischen Erklärung, neue Franchisen 2024 und Übergangsregelung für alte Grenzgänger: praktischer Leitfaden.',
+    'blog.article.credito-imposta-2026-calcolo-limiti.imageAlt': 'Steuerberater prüft Steuererklärung für Grenzgänger in der Grenzregion Tessin-Italien',
 };
 
 export default blogMetaDe;

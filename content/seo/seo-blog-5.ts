@@ -71051,6 +71051,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-credito-imposta-2026-calcolo-limiti': {
+    title: 'Credito d\'imposta frontalieri 2026: guida al calcolo',
+    description: 'Credito d\'imposta 2026 per frontalieri Ticino-Italia: calcolo, franchigie €7.500 e €10.000, quadro CE modello 730, Nuovo Accordo vigore 1° gennaio 2024.',
+    keywords: 'frontalieri, ticino, svizzera, italia, credito, imposta, calcolo, ottenere',
+    ogTitle: 'Credito d\'imposta frontalieri 2026: guida al calcolo',
+    ogDescription: 'Credito d\'imposta frontalieri 2026: calcolo, franchigie vecchi e nuovi frontalieri, compilazione modello 730 con quadro CE, rimborsi e scadenze. Guida pratica al Nuovo Accordo entrato in vigore il 1° gennaio 2024.',
+    canonicalPath: '/articoli-frontaliere/credito-imposta-2026-calcolo-limiti',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Credito d'imposta frontalieri 2026: guida al calcolo",
+      "description": "Credito d'imposta 2026 per frontalieri Ticino-Italia: calcolo, franchigie €7.500 e €10.000, quadro CE modello 730, Nuovo Accordo vigore 1° gennaio 2024.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/credito-imposta-2026-calcolo-limiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Consulente fiscale esamina documenti di dichiarazione imposta per frontaliere al confine Ticino-Italia"
+      },
+      "datePublished": "2026-08-20T05:30:24+00:00",
+      "dateModified": "2026-08-20T05:30:24+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/credito-imposta-2026-calcolo-limiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

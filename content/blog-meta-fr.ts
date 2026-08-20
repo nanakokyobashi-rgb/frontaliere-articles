@@ -10201,6 +10201,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.title': 'Bulletin de paie frontalier 2026 : net et déductions famille',
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.excerpt': 'Nouvel accord frontalier en vigueur depuis le 1er janvier 2024 : comment fonctionne la paie suisse, taux AVS/LPP, exonération €7.500/€ 10.000 et crédit d\'impôt italien.',
     'blog.article.netto-busta-paga-frontaliere-2026-famiglia.imageAlt': 'Document de fiche de paie suisse d\'un travailleur frontalier avec paysage alpin visible à la fenêtre du bureau',
+    'blog.article.credito-imposta-2026-calcolo-limiti.title': 'Crédit d\'impôt frontalier 2026 : guide de calcul',
+    'blog.article.credito-imposta-2026-calcolo-limiti.excerpt': 'Comment obtenir le crédit d\'impôt dans la déclaration italienne, les nouvelles franchises 2024 et le régime transitoire pour les anciens frontaliers : guide pratique.',
+    'blog.article.credito-imposta-2026-calcolo-limiti.imageAlt': 'Conseiller fiscal examinant déclaration fiscale pour travailleur frontalier région Tessin-Italie',
 };
 
 export default blogMetaFr;

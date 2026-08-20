@@ -30549,6 +30549,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'credito-imposta-2026-calcolo-limiti',
+ category: 'fiscale',
+ date: '2026-08-20T05:30:23.931Z',
+ image: '/images/blog/credito-imposta-2026-calcolo-limiti.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
