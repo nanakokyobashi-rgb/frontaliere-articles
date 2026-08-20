@@ -112,6 +112,7 @@ function runGenerateStep({
     const planFile = path.join(dir, 'plan');
     const ghOutput = path.join(dir, 'github_output');
     const capsFile = path.join(dir, 'caps');
+    const wallMsFile = path.join(dir, 'wall_ms');
 
     writeFileSync(planFile, plan.length ? `${plan.join('\n')}\n` : '');
     writeFileSync(ghOutput, '');
@@ -137,6 +138,7 @@ exec "$@"
     const nodeStub = `#!/usr/bin/env bash
 trap '' USR1 USR2
 echo "[prompt-budget] stub in esecuzione"
+echo "\${CREATE_ARTICLE_MAX_WALL_MS:-}" >> "${wallMsFile}"
 n=0
 [ -f "${calls}" ] && n=$(cat "${calls}")
 n=$((n + 1))
@@ -215,6 +217,9 @@ exit 0
     const caps = existsSync(capsFile)
       ? readFileSync(capsFile, 'utf8').split('\n').filter(Boolean)
       : [];
+    const wallMs = existsSync(wallMsFile)
+      ? readFileSync(wallMsFile, 'utf8').split('\n').filter((l) => l !== '')
+      : [];
     const diagFiles = existsSync(path.join(dir, 'generate-diagnostics'))
       ? readdirSync(path.join(dir, 'generate-diagnostics'))
       : [];
@@ -222,6 +227,7 @@ exit 0
       outputs,
       invocations,
       caps,
+      wallMs,
       diagFiles,
       elapsedMs,
       stdout: spawned.stdout || '',
@@ -357,6 +363,44 @@ test('il tempo speso piu\' il cap del tentativo dopo non sfora mai il budget', (
   assert.equal(caps.length, 2, 'entrambi i tentativi devono essere partiti');
   assert.equal(caps[0], 5, 'il primo tentativo prende il cap pieno');
   assert.ok(caps[1] <= 3, `il secondo deve stare nel budget residuo, ha preso ${caps[1]}s`);
+});
+
+test('il processo riceve il cap effettivo, non il default RUN_WALL_BUDGET_MS (#462)', () => {
+  // Misurato sul run 32147257594: la shell aveva concesso cap=1184s, ma
+  // create-article.mjs ragionava sul suo default (1800s) perche' nessuno gli
+  // passava CREATE_ARTICLE_MAX_WALL_MS — sovrastima di 616s sul residuo
+  // dichiarato. Qui il cap e' lo stesso ordine di grandezza della misura reale.
+  const r = runGenerateStep({
+    section: 'frontaliere',
+    plan: ['0 1'],
+    budget: 1184,
+    hardKill: 2400,
+  });
+  assert.equal(r.wallMs.length, 1);
+  assert.equal(
+    Number(r.wallMs[0]),
+    (1184 - 60) * 1000,
+    'CREATE_ARTICLE_MAX_WALL_MS deve riflettere il cap di sezione (meno la grazia di 60s di `timeout --kill-after`), non il default interno del processo',
+  );
+});
+
+test('CREATE_ARTICLE_MAX_WALL_MS segue il cap ricalcolato a ogni tentativo', () => {
+  const r = runGenerateStep({
+    section: 'svizzera',
+    plan: ['0 0 3', '0 0'],
+    budget: 6,
+    hardKill: 5,
+  });
+  const caps = r.caps.map((c) => Number(String(c).replace(/s$/, '')));
+  const wallMs = r.wallMs.map(Number);
+  assert.equal(wallMs.length, 2, 'entrambi i tentativi devono avere ricevuto il proprio cap');
+  caps.forEach((cap, i) => {
+    assert.equal(
+      wallMs[i],
+      (cap - 60) * 1000,
+      `tentativo ${i}: cap=${cap}s deve dare CREATE_ARTICLE_MAX_WALL_MS=${(cap - 60) * 1000}`,
+    );
+  });
 });
 
 test('senza budget residuo il tentativo dopo non parte nemmeno', () => {
