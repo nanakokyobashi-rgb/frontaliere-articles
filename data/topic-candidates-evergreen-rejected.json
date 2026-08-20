@@ -1,9 +1,5 @@
 {
   "keywords": [
-    "vivere a Luino e lavorare in Ticino da frontaliere",
-    "trasporti pubblici svizzera abbonamenti sconti",
-    "imposta cantonale confronto svizzera 2026 canton Ginevra",
-    "vivere a Valsolda e lavorare in Ticino da frontaliere",
     "imposta cantonale confronto svizzera 2026 canton Vaud",
     "costo della vita svizzera 2026 canton Zurigo",
     "costo della vita svizzera 2026 canton Ginevra",
@@ -499,7 +495,11 @@
     "mercato degli affitti canton Sciaffusa canoni medi e diritto di locazione",
     "naturalizzazione canton Sciaffusa requisiti e procedura",
     "vivere a Merone e lavorare in Ticino da frontaliere",
-    "vivere a Plesio e lavorare in Ticino da frontaliere"
+    "vivere a Plesio e lavorare in Ticino da frontaliere",
+    "avs e prestazioni complementari canton Sciaffusa cassa di compensazione",
+    "abbonamenti trasporti pubblici canton Sciaffusa zone e tariffe",
+    "aprire un'attività canton Sciaffusa registro di commercio e costi",
+    "patente di guida canton Sciaffusa conversione ed esami"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -728,6 +728,7 @@
     "mercato del lavoro ticino settori in crescita": 1,
     "frontalieri busta paga svizzera 2026 entro 20 km": 1,
     "frontaliere pensionamento anticipato pianificazione 2026 oltre 20 km": 1,
-    "frontaliere pensionamento anticipato pianificazione 2026 famiglia con figli": 1
+    "frontaliere pensionamento anticipato pianificazione 2026 famiglia con figli": 1,
+    "salari e mercato del lavoro canton Sciaffusa settori e livelli": 1
   }
 }
