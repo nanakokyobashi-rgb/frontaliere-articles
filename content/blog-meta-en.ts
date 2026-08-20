@@ -10202,6 +10202,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.credito-imposta-2026-calcolo-limiti.title': 'Border tax credit 2026: calculation guide',
     'blog.article.credito-imposta-2026-calcolo-limiti.excerpt': 'How to obtain the tax credit in an Italian declaration, new 2024 deductibles and transitional regime for old border workers: practical guide.',
     'blog.article.credito-imposta-2026-calcolo-limiti.imageAlt': 'Financial advisor reviewing tax return documents for cross-border worker in Ticino-Italy region',
+    'blog.article.bollettino-frontaliere-2026-08-20.title': 'Cross-border daily brief – August 20, 2026: 601 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-08-20.excerpt': 'Today\'s numbers, August 20, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-08-20.imageAlt': 'The day\'s numbers for cross-border commuters – August 20, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-08-20.seoDescription': 'Cross-border brief, August 20, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-08-20.ogDescription': 'The numbers for August 20, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;
