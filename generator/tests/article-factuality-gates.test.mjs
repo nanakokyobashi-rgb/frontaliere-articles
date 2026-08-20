@@ -659,6 +659,26 @@ describe('checkFabricatedNormAcronyms', () => {
     expect(issues[0].message).toContain('LCO');
   });
 
+  // Irrobustimento #461 (item 1/3 di #455, gemello del guard LCL): nessuna
+  // collisione nota oggi con un'entità reale sigla "LCO", ma il bare-match
+  // incondizionato era la stessa fragilità strutturale già misurata su LCL —
+  // un futuro articolo che nomini un'entità reale con questa sigla, fuori da
+  // ogni contesto giuridico, andrebbe rigettato senza motivo.
+  it('leaves a bare mention of LCO alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Il gruppo LCO ha aperto una nuova filiale vicino al confine per i frontalieri.',
+    )).toEqual([]);
+  });
+
+  it('still flags LCO with the Italian citation cue actually used in the corpus', () => {
+    // Frase misurata su `infiltrazioni-criminali-ticino-grigioni`: «legge
+    // federale sul contrasto alla criminalità organizzata (LCO)».
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sul contrasto alla criminalità organizzata (LCO), approvata nel 2013, '
+      + 'prevede la creazione di un ufficio federale dedicato.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
   // `LCL` è anche il nome reale di una banca francese (ex Crédit Lyonnais).
   // Senza un requisito di contesto giuridico, un articolo che la nomina in
   // ambito bancario (il corpus ne ha già 175 su frontalieri Francia-Svizzera)

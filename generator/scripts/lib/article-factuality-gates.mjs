@@ -1406,6 +1406,16 @@ export const FABRICATED_NORM_ACRONYMS = [
     acronym: 'LCO',
     re: /(?<![A-Za-z])LCO(?![A-Za-z])/i,
     real: 'non esiste: il contrasto alla criminalità organizzata è nel Codice penale, art. 260ter CP (RS 311.0)',
+    // Stesso irrobustimento di LCL (#461, item 1/3 di #455): nessuna
+    // collisione nota oggi con un'entità reale, ma non verificata in modo
+    // esaustivo, e un bare-match incondizionato è la stessa fragilità
+    // strutturale già misurata su LCL — un futuro articolo che nomini
+    // un'entità reale sigla "LCO" andrebbe rigettato senza motivo. Le due
+    // occorrenze vere nel corpus restano rilevate: entrambe hanno «legge
+    // federale» subito prima della sigla (`infiltrazioni-criminali-ticino-
+    // grigioni`).
+    context: NORM_CITATION_CUE,
+    contextWindow: 120,
   },
 ];
 
