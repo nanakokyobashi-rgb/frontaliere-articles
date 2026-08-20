@@ -197,6 +197,12 @@
       }
     },
     {
+      "path": "scripts/ci/list-pr-gate-tests.mjs",
+      "mode": "corpus-only",
+      "reason": "Compone la lista di test che `tests.yml` esegue su una PR: tutta `generator/tests/` MENO i gate che leggono `content/`, che girano in `generator-ci.yml` (PR che toccano `generator/**`) e in `content-gates-main.yml` (push su `main`). Esiste perche' il corpus cambia senza che nessuna PR lo tocchi — ~90 push al giorno dai bot produttori — e un check rosso per un dato che l'autore non ha scritto e non puo' riparare non sta misurando quella PR. Corpus-only: il sito non ha ne' i bot produttori ne' `content/`, e il suo `tests.yml` e' gia' `adapted`.",
+      "baseline": { "site": null, "corpus": "e147905a05fb6df9", "alignedAt": "2026-08-20" }
+    },
+    {
       "path": "scripts/ci/content-gates-main.mjs",
       "mode": "corpus-only",
       "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
