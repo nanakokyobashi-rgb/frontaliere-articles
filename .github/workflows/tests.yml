@@ -136,4 +136,7 @@ jobs:
       # file, quindi si passano i path uno per uno (stessa nota di
       # generator-ci.yml).
       - name: Unit + closure gates (i gate sul contenuto girano altrove)
-        run: node --test $(node scripts/ci/list-pr-gate-tests.mjs)
+        run: |
+          set -euo pipefail
+          files=$(node scripts/ci/list-pr-gate-tests.mjs)
+          node --test $files

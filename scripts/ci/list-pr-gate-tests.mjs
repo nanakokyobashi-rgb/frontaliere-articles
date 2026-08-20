@@ -48,7 +48,12 @@
  * scende sotto un pavimento. Un elenco troncato spegne un gate; qui deve
  * fermare la run.
  *
- * Uso:  node --test $(node scripts/ci/list-pr-gate-tests.mjs)
+ * Uso:  files=$(node scripts/ci/list-pr-gate-tests.mjs) && node --test $files
+ *
+ * (assegnare PRIMA a una variabile, non passare la substitution come
+ * argomento diretto: sotto `bash -e` un `node --test $(questo script)` non
+ * propaga l'exit !=0 di questo script se stampa la stringa vuota — vedi
+ * `tests.yml`.)
  */
 
 import fs from 'node:fs';

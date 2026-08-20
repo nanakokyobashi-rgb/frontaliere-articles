@@ -95,12 +95,28 @@ describe('la lista che tests.yml esegue', () => {
 describe('la copertura NON si perde: è ciò che rende accettabile l\'esclusione', () => {
   it('tests.yml usa lo script invece della cartella intera', () => {
     const wf = read('.github/workflows/tests.yml');
-    assert.match(wf, /node --test \$\(node scripts\/ci\/list-pr-gate-tests\.mjs\)/);
+    assert.match(wf, /files=\$\(node scripts\/ci\/list-pr-gate-tests\.mjs\)/);
+    assert.match(wf, /node --test \$files/);
     assert.doesNotMatch(
       wf,
       /node --test 'generator\/tests\/\*\.test\.mjs'/,
       'la cartella intera è tornata: i gate sul contenuto tornerebbero a bloccare PR che non c\'entrano',
     );
+  });
+
+  it('tests.yml NON passa la command substitution direttamente come argomento', () => {
+    // Sotto `bash -e`, `node --test $(node list-pr-gate-tests.mjs)` scarta
+    // l'exit !=0 dello script se la substitution e' argomento di un altro
+    // comando: bash prosegue con `node --test` invocato a vuoto, che cade
+    // sulla discovery di default (tutta la cwd) invece di fallire rumorosamente.
+    // Va assegnata prima a una variabile, cosi' il fallimento propaga.
+    const wf = read('.github/workflows/tests.yml');
+    assert.doesNotMatch(
+      wf,
+      /node --test \$\(node scripts\/ci\/list-pr-gate-tests\.mjs\)/,
+      'la substitution e\' di nuovo passata direttamente come argomento: sotto set -e il fallimento non propaga piu\'',
+    );
+    assert.match(wf, /set -euo pipefail/, 'senza set -e l\'assegnazione fallita non ferma lo step');
   });
 
   it('generator-ci.yml esegue ANCORA tutta la cartella, sulle PR che toccano generator/**', () => {
