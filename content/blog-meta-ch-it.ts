@@ -3538,6 +3538,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.statent-2024-occupazione-svizzera.title': 'Statent 2024: 5,68 milioni di impieghi in Svizzera',
     'blog.article.statent-2024-occupazione-svizzera.excerpt': 'Nel 2024 la Svizzera ha registrato 5,68 milioni di impieghi, con una crescita dello 0,6% rispetto all\'anno precedente secondo l\'UST.',
     'blog.article.statent-2024-occupazione-svizzera.imageAlt': 'Panoramica della piazza economica svizzera con dati sull\'occupazione',
+    'blog.article.pmi-svizzere-assenze-lavoro.title': 'Assenze del personale costano più alle PMI, studio AXA',
+    'blog.article.pmi-svizzere-assenze-lavoro.excerpt': 'Uno studio AXA rivela che il 42% delle PMI svizzere ha risentito delle assenze negli ultimi cinque anni. Lo stress psichico è in forte aumento dal 2023.',
+    'blog.article.pmi-svizzere-assenze-lavoro.imageAlt': 'Panoramica di città svizzera moderna con distretti d\'affari e uffici, atmosfera professionale attiva',
 };
 
 export default blogMetaChIt;

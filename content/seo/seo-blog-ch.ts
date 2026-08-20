@@ -45884,6 +45884,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-pmi-svizzere-assenze-lavoro': {
+    title: 'Assenze del personale costano più alle PMI, studio AXA',
+    description: 'Il 42% delle PMI svizzere colpito dalle assenze negli ultimi 5 anni. Stress psichico aumentato dal 25% al 35%. Scopri come la leadership può aiutare.',
+    keywords: 'frontalieri, ticino, svizzera, italia, assenze, personale, costano, alle',
+    ogTitle: 'Assenze del personale costano più alle PMI, studio AXA',
+    ogDescription: 'Uno studio AXA rivela che il 42% delle PMI svizzere è colpito dalle assenze negli ultimi 5 anni, con stress psichico salito dal 25% al 35%. La leadership consapevole riduce il problema del 37%.',
+    canonicalPath: '/articoli-svizzera/pmi-svizzere-assenze-lavoro/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assenze del personale costano più alle PMI, studio AXA",
+      "description": "Il 42% delle PMI svizzere colpito dalle assenze negli ultimi 5 anni. Stress psichico aumentato dal 25% al 35%. Scopri come la leadership può aiutare.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/pmi-svizzere-assenze-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panoramica di città svizzera moderna con distretti d'affari e uffici, atmosfera professionale attiva"
+      },
+      "datePublished": "2026-08-20T09:41:43+00:00",
+      "dateModified": "2026-08-20T09:41:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/pmi-svizzere-assenze-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

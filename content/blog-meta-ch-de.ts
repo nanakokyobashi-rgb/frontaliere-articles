@@ -3538,6 +3538,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.statent-2024-occupazione-svizzera.title': 'Statent 2024: 5,68 Millionen Arbeitsplätze in der Schweiz',
     'blog.article.statent-2024-occupazione-svizzera.excerpt': 'Im Jahr 2024 verzeichnete die Schweiz 5,68 Millionen Arbeitsplätze, was laut BfS einem Wachstum von 0,6% gegenüber dem Vorjahr entspricht.',
     'blog.article.statent-2024-occupazione-svizzera.imageAlt': 'Überblick über den Schweizer Wirtschaftsraum mit Beschäftigungsdaten',
+    'blog.article.pmi-svizzere-assenze-lavoro.title': 'Personalabwesenheiten kosten KMU mehr, Studie AXA',
+    'blog.article.pmi-svizzere-assenze-lavoro.excerpt': 'Eine AXA-Studie zeigt, dass 42% der Schweizer KMU in den letzten fünf Jahren von Absenzen betroffen waren. Psychischer Stress nimmt seit 2023 stark zu.',
+    'blog.article.pmi-svizzere-assenze-lavoro.imageAlt': 'Luftaufnahme einer modernen Schweizer Stadt mit Geschäftsviertel und Bürogebäuden, professionelle Atmosphäre',
 };
 
 export default blogMetaChDe;

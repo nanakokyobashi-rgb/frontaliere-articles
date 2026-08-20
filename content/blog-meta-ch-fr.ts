@@ -3538,6 +3538,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.statent-2024-occupazione-svizzera.title': 'Statent 2024: 5,68 millions d\'emplois en Suisse',
     'blog.article.statent-2024-occupazione-svizzera.excerpt': 'En 2024, la Suisse a enregistré 5,68 millions d\'emplois, soit une croissance de 0,6% par rapport à l\'année précédente selon l\'OFS.',
     'blog.article.statent-2024-occupazione-svizzera.imageAlt': 'Aperçu du marché économique suisse avec des données sur l\'emploi',
+    'blog.article.pmi-svizzere-assenze-lavoro.title': 'Les absences du personnel coûtent plus cher aux PME, étude AXA',
+    'blog.article.pmi-svizzere-assenze-lavoro.excerpt': 'Une étude AXA révèle que 42% des PME suisses ont souffert d\'absences au cours des cinq dernières années. Le stress psychique est en forte augmentation depuis 2023.',
+    'blog.article.pmi-svizzere-assenze-lavoro.imageAlt': 'Vue aérienne d\'une ville suisse moderne avec quartier d\'affaires et immeubles de bureaux, atmosphère professionnelle',
 };
 
 export default blogMetaChFr;
