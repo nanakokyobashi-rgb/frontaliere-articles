@@ -1210,6 +1210,16 @@ jobs:
             tried=$(( tried + 1 ))
             echo "── attempt $tried: section=$sec cap=${cap}s"
 
+            # Il processo ha un suo default (RUN_WALL_BUDGET_MS, 30min) che non
+            # conosce il cap di sezione appena calcolato sopra — issue #462: su
+            # un cap stretto (`remaining` piccolo) il processo si crede libero
+            # fino al default e dichiara centinaia di secondi residui che non
+            # esistono, falsando ogni `deadlineMs` derivato (inclusa l'allowance
+            # di #451). Il -60 rispecchia il `--kill-after=60s` di `timeout`
+            # sotto: il processo deve fermarsi da solo prima del kill duro, non
+            # al secondo esatto in cui il kill duro arriva.
+            export CREATE_ARTICLE_MAX_WALL_MS=$(( (cap - 60) * 1000 ))
+
             # Il tentativo gira in background con l'output duplicato su
             # `$stall_log`: e' quel file a crescere (o a non crescere) che il
             # watchdog campiona. `$!` e' il pid di `timeout`, quindi `wait` piu'
