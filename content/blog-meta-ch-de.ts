@@ -3607,6 +3607,12 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.affitti-sciaffusa-diritto-locazione.title': 'Mieten Schaffhausen: Mieten, Kaution und Mietrecht',
     'blog.article.affitti-sciaffusa-diritto-locazione.excerpt': 'Bundesvorschriften über Kaution, Kündigung und Gebührenbeanstandung im Kanton Schaffhausen gemäss Obligationenrecht.',
     'blog.article.affitti-sciaffusa-diritto-locazione.imageAlt': 'Außenansicht eines modernen Wohngebäudes in der Schweiz mit klarer Fensterfront',
+    'blog.article.avs-prestazioni-complementari-sciaffusa-cassa.title': 'AHV und Ergänzungsleistungen Schaffhausen',
+    'blog.article.avs-prestazioni-complementari-sciaffusa-cassa.excerpt': 'Die kantonale Ausgleichskasse verwaltet die Berechnung der AHV-Rente und den Zugang zu den Ergänzungsleistungen im Kanton Schaffhausen und sichert das Existenzminimum.',
+    'blog.article.avs-prestazioni-complementari-sciaffusa-cassa.imageAlt': 'Schweizer Alpenpanorama aus den Bergen der nördlichen Schweiz',
+    'blog.article.imposta-successione-donazione-sciaffusa.title': 'Erbschafts- und Schenkungssteuer Schaffhausen: Steuersätze',
+    'blog.article.imposta-successione-donazione-sciaffusa.excerpt': 'Entdecken Sie Steuersätze, Befreiungen für Ehepartner und Nachkommen, Verfahren und Fristen für die Erbschaftssteuer im Kanton Schaffhausen. Komplette Anleitung für Erben.',
+    'blog.article.imposta-successione-donazione-sciaffusa.imageAlt': 'Ein Steuerberater prüft Erbschaftsdokumente in einem Schweizer Kantonsamt Schaffhausen',
 };
 
 export default blogMetaChDe;
