@@ -710,6 +710,58 @@ describe('il nome di un comune non prova un mestiere', () => {
 });
 
 /**
+ * LE CINQUE FORME CHE LA PREPOSIZIONE OBBLIGATORIA LASCIAVA FUORI (2026-08-20).
+ *
+ * `RESIDENCE_INTENT_RE` chiedeva `vivere a ` o `vivere in `, con lo spazio.
+ * Il testo di decisione è `${title} ${id-con-trattini-come-spazi}`, e gli slug
+ * del pool comune la preposizione non ce l'hanno: cinque comuni restavano
+ * senza chiave, quindi senza protezione dai doppioni — e due doppioni sono
+ * infatti usciti, lo stesso giorno, sullo stesso comune.
+ *
+ * I casi sono presi dal corpus pubblicato, non inventati: ognuno è una forma
+ * DIVERSA di ciò che sfuggiva (slug senza preposizione, `d` eufonica nel
+ * titolo, «vivere e lavorare»), perché un test su una sola forma passerebbe
+ * anche con una toppa che cura solo quella.
+ */
+describe('intento residenza: la preposizione non è obbligatoria', () => {
+  const REALI = [
+    ['vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere', 'tovo-di-sant-agata',
+      'slug senza preposizione, titolo che non parla del comune'],
+    ['vivere-courmayeur-e-lavorare-vallese-da-frontaliere', 'courmayeur',
+      'slug senza preposizione'],
+    ['vivere-valpelline-lavorare-vallese', 'valpelline',
+      'slug senza preposizione né congiunzione'],
+    ['vivere-villa-guardia-lavorare-ticino', 'villa-guardia',
+      'comune di due parole, «vivere e lavorare» nel titolo'],
+    ['vivere-masciago-primo-lavorare-ticino', 'masciago-primo',
+      'comune di due parole'],
+  ];
+
+  for (const [id, comune, perche] of REALI) {
+    it(`${comune} prende la chiave (${perche})`, () => {
+      // Solo lo slug: è la metà che il generatore produce sempre uguale, ed è
+      // quella su cui la vecchia regex falliva. Il titolo non deve servire.
+      expect(comuneTopicKey(id.replace(/-/g, ' '))).toBe(comune);
+    });
+  }
+
+  it('«vivere e lavorare» da solo esprime intento residenza', () => {
+    expect(hasResidenceGuideIntent('Villa Guardia: vivere e lavorare come frontaliere')).toBe(true);
+  });
+
+  it('la «d» eufonica non fa perdere l\'intento', () => {
+    expect(hasResidenceGuideIntent('Vivere ad Albese con Cassano e lavorare in Ticino')).toBe(true);
+  });
+
+  it('«vivere» da solo NON basta: serve anche il comune', () => {
+    // La congiunzione è ciò che tiene i falsi positivi a zero: allargare
+    // l'intento non allarga la chiave se non c'è un nome di comune.
+    expect(comuneTopicKey('vivere con 2000 euro al mese da frontaliere')).toBe(null);
+    expect(comuneTopicKey('costo della vita in Svizzera: vivere bene con uno stipendio medio')).toBe(null);
+  });
+});
+
+/**
  * `comuneMatch` (interna a `comuneTopicKey`) sceglie il candidato più lungo
  * fra due nomi che condividono la prima parola normalizzata — «Tronzano»
  * contro «Tronzano Lago Maggiore». La selezione confrontava `n` (parole del

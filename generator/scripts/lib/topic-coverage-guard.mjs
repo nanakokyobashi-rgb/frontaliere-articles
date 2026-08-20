@@ -338,8 +338,53 @@ export function hasProfessionGuideIntent(text) {
  * termine che fa entrare la cronaca (l'attacco politico di Carnago, la
  * tragedia di Porlezza, la pedalata dell'Insubria — i tre soli falsi positivi
  * che il corpus produceva). Vedi l'header per i numeri.
+ *
+ * ── LA PREPOSIZIONE NON È PIÙ OBBLIGATORIA (2026-08-20) ───────────────────
+ *
+ * Era `vivere a |vivere in `, e quello spazio dopo la preposizione lasciava
+ * fuori la forma che il generatore produce PIÙ spesso. Il testo di decisione è
+ * `${title} ${id-con-trattini-come-spazi}`, e gli slug del pool comune non
+ * portano la preposizione: `vivere-villa-guardia-lavorare-ticino` normalizza
+ * in «vivere villa guardia lavorare ticino», dove dopo «vivere» c'è il nome
+ * del comune. Restavano fuori anche «vivere ad Albese» (la `d` eufonica) e
+ * «vivere e lavorare», che è la forma di metà dei titoli recenti.
+ *
+ * La misura, sul corpus intero (4.602 articoli, 2026-08-20), non su un
+ * campione — e con lo stesso criterio che ha tarato il resto di questo file:
+ *
+ *   marcati        135 → 144  (+9)
+ *   coppie ≤90g     26 →  28  (+2)
+ *   falsi positivi   0 →   0  (i 9 ispezionati uno per uno)
+ *
+ * I 9 articoli nuovi sono tutti guide-comune vere: cinque erano i comuni
+ * lasciati senza chiave e senza protezione dai doppioni (`tovo-di-sant-agata`,
+ * `courmayeur`, `valpelline`, `villa-guardia`, `masciago-primo`), gli altri
+ * quattro della stessa forma (`cerano-intelvi`, `lurate-caccivio`,
+ * `albese-cassano`, `castelmarte`).
+ *
+ * Le due coppie nuove sono doppioni REALI, entrambi pubblicati lo STESSO
+ * giorno — cioè esattamente ciò per cui questa chiave esiste:
+ *
+ *   tovo-di-sant-agata  vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere
+ *                     ~ vivere-tovo-lavorare-grigioni
+ *   courmayeur          vivere-courmayeur-e-lavorare-vallese-da-frontaliere
+ *                     ~ courmayeur-lavora-vallese-frontaliere
+ *
+ * PERCHÉ «vivere » NUDO NON È TROPPO LARGO. Da solo lo sarebbe («vivere con
+ * 2.000 euro», «costo della vita per vivere bene»), ma la chiave è una
+ * CONGIUNZIONE: serve anche un nome di `data/municipalities.ts` nel testo, con
+ * le due restrizioni già misurate (sequenza completa per i nomi di più parole,
+ * ≥4 caratteri e non in `AMBIGUOUS_COMUNE_TOKENS` per quelli di una). È quella
+ * congiunzione a reggere, ed è la ragione per cui i falsi positivi restano 0.
+ *
+ * Misurata anche l'alternativa più stretta, `vivere e lavorar`: prende 4 dei 9
+ * articoli e **zero** coppie nuove, cioè non chiude nessuno dei due doppioni.
+ * Scartata perché cura il sintomo di un titolo e non la forma dello slug.
+ *
+ * `conviene vivere` e `dove vivere` restano nell'alternanza: `vivere ` esige
+ * lo spazio, e un testo che finisce con «dove vivere?» non ce l'ha.
  */
-const RESIDENCE_INTENT_RE = /(vivere a |vivere in |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
+const RESIDENCE_INTENT_RE = /(vivere |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
 
 /** Il file da cui esce l'elenco dei comuni. Letto come TESTO: vedi sotto. */
 const MUNICIPALITIES_SOURCE = path.resolve(
