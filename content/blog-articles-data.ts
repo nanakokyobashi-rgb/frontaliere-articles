@@ -30981,6 +30981,33 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-bardello-lavorare-ticino-frontaliere',
+ category: 'pratico',
+ date: '2026-08-21T05:10:11.672Z',
+ image: '/images/blog/vivere-bardello-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'bollettino-frontaliere-2026-08-21',
+ category: 'novita',
+ date: '2026-08-21T05:36:20.867Z',
+ image: '/images/blog/bollettino-frontaliere-2026-08-21.webp',
+ hasCalculator: false,
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
+ {
+ id: 'vivere-cantello-lavorare-ticino-da-frontaliere',
+ category: 'fiscale',
+ date: '2026-08-21T05:43:34.295Z',
+ image: '/images/blog/vivere-cantello-lavorare-ticino-da-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

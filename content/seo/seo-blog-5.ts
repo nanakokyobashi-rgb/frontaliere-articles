@@ -72923,6 +72923,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-bardello-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Bardello e lavorare in Ticino da frontaliere',
+    description: 'Frontaliere categoria G: Nuovo Accordo 2024, imposta alla fonte, esenzioni €7.500/€10.000, Permesso G, AVS/LPP/LAMal, dichiarazione 730 e procedura completa.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, bardello, lavorare, categoria',
+    ogTitle: 'Vivere a Bardello e lavorare in Ticino da frontaliere',
+    ogDescription: 'Guida completa: normativa Nuovo Accordo Frontalieri 2024, imposta solo Svizzera, esenzioni fiscali €7.500/€10.000, Permesso G, contributi AVS/LPP/LAMal, dichiarazione 730, procedura step-by-step e strumenti calcolo stipendio frontaliere.',
+    canonicalPath: '/articoli-frontaliere/vivere-bardello-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Bardello e lavorare in Ticino da frontaliere",
+      "description": "Frontaliere categoria G: Nuovo Accordo 2024, imposta alla fonte, esenzioni €7.500/€10.000, Permesso G, AVS/LPP/LAMal, dichiarazione 730 e procedura completa.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-bardello-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta aerea della regione di confine tra Ticino e provincia di Varese con paesaggio montuoso di montagna."
+      },
+      "datePublished": "2026-08-21T05:10:11+00:00",
+      "dateModified": "2026-08-21T05:10:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-bardello-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-bollettino-frontaliere-2026-08-21': {
+    title: 'Bollettino del frontaliere – 21 agosto 2026: 617 nuovi annunci di lavoro ieri',
+    description: 'Bollettino frontalieri del 21 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    keywords: 'bollettino frontaliere, dogana, attesa dogana, code valichi ticino, prezzi benzina confine, cambio franco euro, lavoro svizzera, frontalieri ticino',
+    ogTitle: 'Bollettino del frontaliere – 21 agosto 2026: 617 nuovi annunci di lavoro ieri',
+    ogDescription: 'I numeri del 21 agosto 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/bollettino-frontaliere-2026-08-21',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollettino del frontaliere – 21 agosto 2026: 617 nuovi annunci di lavoro ieri",
+      "description": "Bollettino frontalieri del 21 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bollettino-frontaliere-2026-08-21.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "I numeri del giorno per i frontalieri – 21 agosto 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro"
+      },
+      "datePublished": "2026-08-21T05:36:20+00:00",
+      "dateModified": "2026-08-21T05:36:20+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bollettino-frontaliere-2026-08-21/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-cantello-lavorare-ticino-da-frontaliere': {
+    title: 'Vivere a Cantello e lavorare in Ticino da frontaliere',
+    description: 'I vantaggi e gli svantaggi di vivere a Cantello e lavorare in Ticino da frontaliere, considerazioni pratiche e procedurali. Dati aggiornati 2026 per frontalieri',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, cantello, lavorare, vantaggi',
+    ogTitle: 'Vivere a Cantello e lavorare in Ticino da frontaliere',
+    ogDescription: 'I vantaggi e gli svantaggi di vivere a Cantello e lavorare in Ticino da frontaliere, considerazioni pratiche e procedurali.',
+    canonicalPath: '/articoli-frontaliere/vivere-cantello-lavorare-ticino-da-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Cantello e lavorare in Ticino da frontaliere",
+      "description": "I vantaggi e gli svantaggi di vivere a Cantello e lavorare in Ticino da frontaliere, considerazioni pratiche e procedurali. Dati aggiornati 2026 per frontalieri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-cantello-lavorare-ticino-da-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il lago di Lugano vista dal centro di Lugano."
+      },
+      "datePublished": "2026-08-21T05:43:34+00:00",
+      "dateModified": "2026-08-21T05:43:34+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-cantello-lavorare-ticino-da-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
