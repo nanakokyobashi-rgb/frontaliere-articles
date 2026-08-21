@@ -22,7 +22,12 @@
  * `create-article.mjs` isola quindi la radice PRIMA di chiamarlo, cosi' che
  * tutti e sei i rami — cap di fallback compresi — vedano solo il pezzo.
  * `extract-article-text.mjs` non e' toccato: e' `mode: identical` nel manifest
- * del ciclo, e una modifica la' si fa sul sito e scende col mirror.
+ * del ciclo, ma nessun mirror porta `generator/scripts/lib/**` (i filtri
+ * `paths:` dei mirror del sito coprono solo `engine/`, `index.ts`,
+ * `articleSections.ts`, `content/` — vedi
+ * `generator/tests/generation-health-watchdog.test.mjs` §8), quindi una
+ * modifica la' andrebbe fatta a mano su ENTRAMBI i repo, non "sul sito e
+ * scende col mirror".
  *
  * ## I due strati di questo banco
  *

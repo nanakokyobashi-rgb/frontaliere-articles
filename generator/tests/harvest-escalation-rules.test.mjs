@@ -59,9 +59,13 @@
  * ## Cosa questo file NON fa
  *
  * Non ripara `overlap-skip`. `scripts/ci/harvest-agent-lessons.mjs` è
- * `mode: identical` nel `loop-sync-manifest.json`: la fix va fatta sul sito e
- * scende col mirror. Qui `overlap-skip` è dichiarato `escalatable` perché è ciò
- * che l'harvester fa oggi — e quando la fix del sito atterrerà, questo test
+ * `mode: identical` nel `loop-sync-manifest.json`, ma nessun mirror porta
+ * `scripts/ci/**` (i filtri `paths:` dei mirror del sito coprono solo
+ * `engine/`, `index.ts`, `articleSections.ts`, `content/` — vedi
+ * `generator/tests/generation-health-watchdog.test.mjs` §8): la fix va fatta
+ * a mano su ENTRAMBI i repo, non solo sul sito. Qui `overlap-skip` è
+ * dichiarato `escalatable` perché è ciò che l'harvester fa oggi — e quando la
+ * fix atterrerà su entrambi i lati, questo test
  * diventerà rosso e costringerà ad aggiornare la dichiarazione. È il
  * comportamento voluto: la mappa è un contratto sullo stato reale, non
  * un'approvazione.

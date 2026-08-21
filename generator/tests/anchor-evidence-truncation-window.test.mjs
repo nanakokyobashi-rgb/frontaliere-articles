@@ -30,8 +30,12 @@
  * ── PERCHE' E' QUI E NON SOLO SUL SITO ───────────────────────────────────────
  *
  * `generator/scripts/lib/article-factuality-gates.mjs` e' `mode: identical` in
- * `scripts/ci/loop-sync-manifest.json`, quindi la fix nasce sul sito e scende
- * qui. Ma e' QUI che il gate gira davvero, su questo corpus: senza il gemello
+ * `scripts/ci/loop-sync-manifest.json`, ma nessun mirror porta
+ * `generator/scripts/lib/**` (i filtri `paths:` dei mirror del sito coprono
+ * solo `engine/`, `index.ts`, `articleSections.ts`, `content/` — vedi
+ * `generator/tests/generation-health-watchdog.test.mjs` §8): una fix va
+ * costruita e verificata su ENTRAMBI i repo, non "nasce sul sito e scende
+ * qui". Ed e' QUI che il gate gira davvero, su questo corpus: senza il gemello
  * del test, un futuro drift del troncamento tornerebbe verde da questo lato —
  * ed e' esattamente il punto cieco descritto in CLAUDE.md («il drift check non
  * vede l'assenza di un test da un lato»).
