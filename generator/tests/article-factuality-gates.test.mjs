@@ -1349,6 +1349,62 @@ describe('reviewer follow-ups (PR #4900)', () => {
   });
 });
 
+describe('formatRemediation shape on the early-expansion fact-check path (#470)', () => {
+  // #470 item 2 flagged that create-article.mjs's early-expansion retry
+  // (`expandFactIssues = expandFactResult.issues`, passed to
+  // formatRemediation()) was never independently confirmed to carry the same
+  // issue shape as the primary fact-check retry a few lines above it — both
+  // call formatRemediation, but only the primary path had test coverage.
+  //
+  // It turns out both paths call `llmFactCheck()` — the SAME function — and
+  // neither reshapes its `.issues` before handing them to formatRemediation.
+  // Asserted at the source level (create-article.mjs isn't importable here:
+  // no `npm ci` in CI, see the file header) so a future edit that inserts a
+  // `.map`/remap between the two, or points the expansion path at a
+  // differently-shaped result, breaks this test instead of shipping quietly.
+  const src = readFileSync(
+    new URL('../scripts/create-article.mjs', import.meta.url),
+    'utf-8',
+  );
+
+  it('the early-expansion retry calls the same llmFactCheck() as the primary retry', () => {
+    expect(src).toContain('const factResult = await llmFactCheck(data.content.it, pageContent, url);');
+    expect(src).toContain('const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);');
+  });
+
+  it('expandFactIssues is llmFactCheck().issues passed through unmodified', () => {
+    const anchor = 'expandFactIssues = expandFactResult.issues || [];';
+    expect(src).toContain(anchor);
+    // No `.map(`/`.filter(` sits between the assignment and the
+    // formatRemediation() call below it — a transform there is exactly what
+    // would silently break the shape formatRemediation expects.
+    const start = src.indexOf(anchor);
+    const end = src.indexOf('lastFactCheckErrors = formatRemediation(expandFactIssues', start);
+    expect(end).toBeGreaterThan(start);
+    const between = src.slice(start + anchor.length, end);
+    expect(between).not.toContain('.map(');
+    expect(between).not.toContain('.filter(');
+  });
+
+  it('formatRemediation renders the exact issue shape llmFactCheck().issues has', () => {
+    // Mirrors the prompt schema in llmFactCheck(): { claim, reason, severity,
+    // category, sourceQuote } — no `message`/`evidence`/`fix`, which is what
+    // formatRemediation falls back to for the deterministic-gate call sites.
+    const out = formatRemediation([
+      {
+        claim: 'La Svizzera applica direttive UE sui frontalieri',
+        reason: 'La Svizzera non è membro UE né SEE',
+        severity: 'critical',
+        category: 'eu_svizzera',
+        sourceQuote: '',
+      },
+    ], { cap: 8 });
+    expect(out).toContain('PROBLEMA: La Svizzera non è membro UE né SEE');
+    expect(out).toContain('TESTO: "La Svizzera applica direttive UE sui frontalieri"');
+    expect(out).toContain('CORREZIONE RICHIESTA');
+  });
+});
+
 describe('detectLeakedScaffolding', () => {
   // 2026-07-29: 49 published bodies carried instructions meant for the model.
   // One German article shipped the translator's entire rulebook — terminology
