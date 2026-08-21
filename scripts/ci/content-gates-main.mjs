@@ -218,21 +218,47 @@ export const NON_SONO_CONTENT_GATES = Object.freeze({
  *   B. un identificatore ancorato a `import.meta.url` (di norma `ROOT`), poi
  *      `path.join(ROOT, 'content', ...)`
  *
+ * Ricorsivo: `{fixtures,lib,parity}/` oggi non hanno `.test.mjs` dentro, ma un
+ * file futuro li' andrebbe comunque registrato o esentato, altrimenti e' di
+ * nuovo lo stesso silenzio — un lettore del corpus reale invisibile al
+ * rilevatore che dovrebbe accorgersene.
+ *
  * @param {string} dir cartella dei test, assoluta
  * @param {string} rel prefisso da anteporre ai nomi resi (per confrontarli con CONTENT_GATES)
  * @returns {{file: string, why: string}[]}
  */
 export function detectCorpusReaders(dir, rel = 'generator/tests') {
   const out = [];
-  for (const nome of fs.readdirSync(dir).filter((f) => f.endsWith('.test.mjs')).sort()) {
-    const src = fs.readFileSync(path.join(dir, nome), 'utf-8');
-    const why = corpusReaderReason(src);
-    if (why) out.push({ file: `${rel}/${nome}`, why });
-  }
+  const walk = (abs, relPrefix) => {
+    const entries = fs.readdirSync(abs, { withFileTypes: true })
+      .sort((a, b) => a.name.localeCompare(b.name));
+    for (const entry of entries) {
+      const absChild = path.join(abs, entry.name);
+      const relChild = relPrefix ? `${relPrefix}/${entry.name}` : entry.name;
+      if (entry.isDirectory()) {
+        walk(absChild, relChild);
+        continue;
+      }
+      if (!entry.name.endsWith('.test.mjs')) continue;
+      const src = fs.readFileSync(absChild, 'utf-8');
+      const why = corpusReaderReason(src);
+      if (why) out.push({ file: `${rel}/${relChild}`, why });
+    }
+  };
+  walk(dir, '');
   return out;
 }
 
-/** La forma con cui un sorgente raggiunge il corpus reale, o null. */
+/**
+ * La forma con cui un sorgente raggiunge il corpus reale, o null.
+ *
+ * Tre forme riconosciute, non due: alle due dirette (`new URL(../content/…)`
+ * e `path.join(ancora, 'content', …)`) si aggiunge l'indirezione via template
+ * literal (`` `${ancora}/content/…` ``) sulla stessa `ancora` ancorata a
+ * `import.meta.url`. Un helper importato da un altro modulo che nascondesse
+ * l'accesso resterebbe comunque fuori: e' analisi cross-file, non alla
+ * portata di un rilevatore statico su un singolo sorgente.
+ */
 function corpusReaderReason(src) {
   if (/new URL\(\s*[`'"][^`'"]*\.\.\/content\//.test(src)) return 'new URL(../../content/…, import.meta.url)';
   const ancore = new Set();
@@ -241,6 +267,14 @@ function corpusReaderReason(src) {
   for (const a of ancore) {
     if (new RegExp(`path\\.(?:join|resolve)\\(\\s*${a}\\s*,\\s*['"\`](?:\\.\\.\\/)*content`).test(src)) {
       return `path.join(${a}, 'content', …)`;
+    }
+  }
+  for (const tpl of src.match(/`[^`]*`/gs) || []) {
+    if (!tpl.includes('content/')) continue;
+    for (const a of ancore) {
+      if (new RegExp(`\\$\\{\\s*${a}\\s*\\}`).test(tpl)) {
+        return `\`\${${a}}/content/…\` (template literal)`;
+      }
     }
   }
   return null;
