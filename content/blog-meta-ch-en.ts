@@ -3655,6 +3655,12 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposte-cantonali-appenzello-interno.title': 'Appenzello Interno cantonal taxes: rates and deductions',
     'blog.article.imposte-cantonali-appenzello-interno.excerpt': 'How cantonal taxes work in the Inner Appenzell Canton: the 3 tax levels, allowable deductions, reporting deadlines and portal of the cantonal administration.',
     'blog.article.imposte-cantonali-appenzello-interno.imageAlt': 'Swiss cantonal tax administration office building',
+    'blog.article.franchigie-riduzione-appenzello.title': 'Inner Appenzello sick pay premiums: deductibles and reduction',
+    'blog.article.franchigie-riduzione-appenzello.excerpt': 'Deductibles from CHF 300 to 2,500 and procedures to obtain the cantonal reduction subsidy. Operational guide to LAMal awards and access criteria in Appenzello Interno.',
+    'blog.article.franchigie-riduzione-appenzello.imageAlt': 'Swiss health insurance documents and premium reduction forms on modern office desk',
+    'blog.article.domicilio-c-appenzello-interno.title': 'Address C in Appenzello Interno: complete guide',
+    'blog.article.domicilio-c-appenzello-interno.excerpt': 'Permit C to Appenzello Interno: requirements, integration criteria, language skills and cantonal application procedure — practical guide and deadlines.',
+    'blog.article.domicilio-c-appenzello-interno.imageAlt': 'Swiss administrative panoramic view: symbol of bureaucratic processes and cantonal permits',
 };
 
 export default blogMetaChEn;

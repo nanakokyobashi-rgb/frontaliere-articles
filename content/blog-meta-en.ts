@@ -10339,6 +10339,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.carnago-frontaliere-ticino-guida.title': 'Living in Carnago, working in Ticino: border guide',
     'blog.article.carnago-frontaliere-ticino-guida.excerpt': 'How to live in Carnago and work in Ticino as a border worker: G Permit, tax at source, LAMal, tax refunds, administrative checklist.',
     'blog.article.carnago-frontaliere-ticino-guida.imageAlt': 'Ticino Canton panorama with hills and border crossings towards Varese province, seen from Mendrisio area',
+    'blog.article.vivere-santa-maria-maggiore-frontaliere.title': 'Living in Santa Maria Maggiore as a border crossing Ticino',
+    'blog.article.vivere-santa-maria-maggiore-frontaliere.excerpt': 'Complete guide to moving: G permit, new 2024 tax agreement, savings calculation, administrative procedures and journey times at crossings.',
+    'blog.article.vivere-santa-maria-maggiore-frontaliere.imageAlt': 'Cross-border road at Brogeda crossing between Italy and Ticino, early morning with misty mountains in background',
+    'blog.article.vivere-rogeno-lavorare-ticino.title': 'Living in Rogeno and working in Ticino as a border worker',
+    'blog.article.vivere-rogeno-lavorare-ticino.excerpt': 'Practical guide for those who choose Rogeno: taxation, new border agreement, transitional regime and management of commuting to the Canton of Ticino.',
+    'blog.article.vivere-rogeno-lavorare-ticino.imageAlt': 'Residential landscape near the Italy-Switzerland border',
 };
 
 export default blogMetaEn;
