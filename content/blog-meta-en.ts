@@ -10365,6 +10365,12 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-solbiate-arno-lavorare-ticino.title': 'Living in Solbiate Arno, working in Ticino: key considerations',
     'blog.article.vivere-solbiate-arno-lavorare-ticino.excerpt': 'The advantages and disadvantages of living in Solbiate Arno and working in Ticino as a border worker.',
     'blog.article.vivere-solbiate-arno-lavorare-ticino.imageAlt': 'Frontaliere considering the pros and cons of living in Solbiate Arno and working in Ticino.',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.title': 'Living in Colverde and working in Ticino as a border worker: what to know',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.excerpt': 'Taxes at source, G permit, refunds and other benefits for border workers working in Ticino.',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.imageAlt': 'A frontaliere who relocates to Colverde to work in Ticino.',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.title': 'Living in Fagnano Olona and working in Ticino as a border worker',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.excerpt': 'Italian-Swiss Double Taxation Convention: signed on 9 December 1976',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.imageAlt': 'Frontaliers working in Ticino',
 };
 
 export default blogMetaEn;

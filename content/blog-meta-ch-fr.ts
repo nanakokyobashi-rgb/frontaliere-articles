@@ -3676,6 +3676,15 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bcg-utile-semestrale-record.title': 'BCG bénéfice record : +137,2 millions au semestre',
     'blog.article.bcg-utile-semestrale-record.excerpt': 'La Banca Cantonale Grigione clôture le premier semestre 2026 avec un bénéfice record de CHF 137,2 millions, en hausse de 18,2 %. Solidité confirmée dans les Grisons.',
     'blog.article.bcg-utile-semestrale-record.imageAlt': 'Siège de banque moderne avec architecture en verre et pierre, lumière naturelle',
+    'blog.article.richiedenti-asilo-severe-misure.title': 'Demandeurs d\'asile, Berne demande des mesures plus sévères',
+    'blog.article.richiedenti-asilo-severe-misure.excerpt': 'Le Secrétariat d\'Etat aux migrations (SEM) étudie des modifications de loi pour exclure de la procédure d\'asile les jeunes du Maghreb qui viennent d\'arriver en Suisse.',
+    'blog.article.richiedenti-asilo-severe-misure.imageAlt': 'Jeune personne commettant des crimes en Suisse',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.title': 'Allocations familiales Appenzell Interne : montants et demande',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.excerpt': 'Guide complet des allocations familiales dans le canton d\'Appenzell Interne : système fédéral, montants mensuels par enfant, conditions de droit, caisse de compensation et procédure de demande étape par étape.',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.imageAlt': 'Paysage rural suisse avec bâtiments administratifs illustrant le système des allocations familiales dans le canton Appenzell Rhodes-Intérieures.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.title': 'Le Conseil fédéral sur la planification ferroviaire',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.excerpt': 'Publication de l\'avis gouvernemental du 19 août 2026 sur le rapport de la CdG-S du 18 mai 2026 sur les stratégies pour les infrastructures ferroviaires.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.imageAlt': 'Infrastructure ferroviaire suisse avec un train moderne',
 };
 
 export default blogMetaChFr;

@@ -1,20 +1,5 @@
 {
   "keywords": [
-    "vivere a Colverde e lavorare in Ticino da frontaliere",
-    "trasferirsi a Colverde da frontaliere pro e contro",
-    "vivere a Domaso e lavorare in Ticino da frontaliere",
-    "vivere a Bormio e lavorare in Grigioni da frontaliere",
-    "vivere a Sondalo e lavorare in Grigioni da frontaliere",
-    "vivere a Stelvio e lavorare in Grigioni da frontaliere",
-    "vivere a Sernio e lavorare in Grigioni da frontaliere",
-    "trasferirsi a Sernio da frontaliere pro e contro",
-    "vivere a Teglio e lavorare in Grigioni da frontaliere",
-    "vivere a Ponte in Valtellina e lavorare in Grigioni da frontaliere",
-    "trasferirsi a Ponte in Valtellina da frontaliere pro e contro",
-    "vivere a Aprica e lavorare in Grigioni da frontaliere",
-    "vivere a Morbegno e lavorare in Grigioni da frontaliere",
-    "vivere a Vervio e lavorare in Grigioni da frontaliere",
-    "trasferirsi a Morbegno da frontaliere pro e contro",
     "vivere a Castello Dell'Acqua e lavorare in Grigioni da frontaliere",
     "premi cassa malati canton Zurigo e riduzione premi",
     "permesso di dimora B canton Zurigo requisiti e rinnovo",
@@ -499,7 +484,22 @@
     "vivere a Bardello con Malgesso e Bregano e lavorare in Ticino da frontaliere",
     "vivere a Bodio Lomnago e lavorare in Ticino da frontaliere",
     "vivere a Daverio e lavorare in Ticino da frontaliere",
-    "vivere a Galliate Lombardo e lavorare in Ticino da frontaliere"
+    "vivere a Galliate Lombardo e lavorare in Ticino da frontaliere",
+    "vivere a Bognanco e lavorare in Ticino da frontaliere",
+    "vivere a Bosisio Parini e lavorare in Ticino da frontaliere",
+    "vivere a Cesana Brianza e lavorare in Ticino da frontaliere",
+    "vivere a Costa Masnaga e lavorare in Ticino da frontaliere",
+    "vivere a Nibionno e lavorare in Ticino da frontaliere",
+    "vivere a Barlassina e lavorare in Ticino da frontaliere",
+    "vivere a Cogliate e lavorare in Ticino da frontaliere",
+    "vivere a Giussano e lavorare in Ticino da frontaliere",
+    "vivere a Veduggio con Colzano e lavorare in Ticino da frontaliere",
+    "vivere a Valbrona e lavorare in Ticino da frontaliere",
+    "vivere a Brebbia e lavorare in Ticino da frontaliere",
+    "vivere a Crosio della Valle e lavorare in Ticino da frontaliere",
+    "vivere a Gerenzano e lavorare in Ticino da frontaliere",
+    "vivere a Gorla Maggiore e lavorare in Ticino da frontaliere",
+    "permesso L di breve durata canton Appenzello Interno validità e proroga"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -729,6 +729,7 @@
     "frontalieri busta paga svizzera 2026 entro 20 km": 1,
     "frontaliere pensionamento anticipato pianificazione 2026 oltre 20 km": 1,
     "frontaliere pensionamento anticipato pianificazione 2026 famiglia con figli": 1,
-    "salari e mercato del lavoro canton Sciaffusa settori e livelli": 1
+    "salari e mercato del lavoro canton Sciaffusa settori e livelli": 1,
+    "vivere a Fagnano Olona e lavorare in Ticino da frontaliere": 1
   }
 }

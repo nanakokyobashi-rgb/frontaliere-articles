@@ -3676,6 +3676,15 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bcg-utile-semestrale-record.title': 'BCG utile record: +137,2 milioni nel semestre',
     'blog.article.bcg-utile-semestrale-record.excerpt': 'La Banca Cantonale Grigione chiude il primo semestre 2026 con utile record di 137,2 milioni CHF, in crescita del 18,2%. Solidità confermata nei Grigioni.',
     'blog.article.bcg-utile-semestrale-record.imageAlt': 'Edificio moderno di una banca cantonale svizzera con architettura in vetro e pietra',
+    'blog.article.richiedenti-asilo-severe-misure.title': 'Richiedenti l\'asilo, Berna chiede misure più severe',
+    'blog.article.richiedenti-asilo-severe-misure.excerpt': 'La Segreteria di Stato della migrazione (SEM) studia modifiche di legge per escludere dalla procedura d\'asilo i giovani del Maghreb che delinquono appena arrivati in Svizzera.',
+    'blog.article.richiedenti-asilo-severe-misure.imageAlt': 'Giovane che commette reati in Svizzera',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.title': 'Assegni familiari Appenzello Interno: importi e domanda',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.excerpt': 'Guida completa agli assegni familiari nel Canton Appenzello Interno: sistema federale, importi mensili per figlio, condizioni di diritto, cassa di compensazione e procedura di domanda passo-passo.',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.imageAlt': 'Paesaggio della campagna svizzera con edifici amministrativi, simbolo del sistema di sussidi familiari nel Canton Appenzello Interno.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.title': 'Il Consiglio federale sulla pianificazione ferroviaria',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.excerpt': 'Pubblicato il parere governativo del 19 agosto 2026 sul rapporto della CdG-S del 18 maggio 2026 in merito alle strategie per le infrastrutture su rotaia.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.imageAlt': 'Infrastruttura ferroviaria svizzera con treno moderno',
 };
 
 export default blogMetaChIt;

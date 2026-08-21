@@ -47678,6 +47678,123 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-richiedenti-asilo-severe-misure': {
+    title: 'Richiedenti l\'asilo, Berna chiede misure più severe',
+    description: 'La Svizzera studia misure più severe per i richiedenti asilo del Maghreb che commettono reati. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, richiedenti, asilo, berna, chiede',
+    ogTitle: 'Richiedenti l\'asilo, Berna chiede misure più severe',
+    ogDescription: 'La Svizzera studia misure più severe per i richiedenti asilo del Maghreb che commettono reati',
+    canonicalPath: '/articoli-svizzera/richiedenti-asilo-severe-misure/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Richiedenti l'asilo, Berna chiede misure più severe",
+      "description": "La Svizzera studia misure più severe per i richiedenti asilo del Maghreb che commettono reati. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/richiedenti-asilo-severe-misure.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane che commette reati in Svizzera"
+      },
+      "datePublished": "2026-08-21T08:01:12+00:00",
+      "dateModified": "2026-08-21T08:01:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/richiedenti-asilo-severe-misure/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-appenzello-interno-domanda': {
+    title: 'Assegni familiari Appenzello Interno: importi e domanda',
+    description: 'Guida agli assegni familiari nel Canton Appenzello Interno: sistema federale, importi mensili variabili, condizioni di diritto, cassa di compensazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, appenzello, interno',
+    ogTitle: 'Assegni familiari Appenzello Interno: importi e procedura',
+    ogDescription: 'Scopri come richiedere gli assegni familiari nel Canton Appenzello Interno. Importi mensili, condizioni di diritto, cassa di compensazione competente e procedura completa di domanda. Guida pratica per famiglie svizzere.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-appenzello-interno-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari Appenzello Interno: importi e domanda",
+      "description": "Guida agli assegni familiari nel Canton Appenzello Interno: sistema federale, importi mensili variabili, condizioni di diritto, cassa di compensazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-appenzello-interno-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio della campagna svizzera con edifici amministrativi, simbolo del sistema di sussidi familiari nel Canton Appenzello Interno."
+      },
+      "datePublished": "2026-08-21T08:25:22+00:00",
+      "dateModified": "2026-08-21T08:25:22+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-appenzello-interno-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-parere-governo-infrastrutture-ferroviarie': {
+    title: 'Il Consiglio federale sulla pianificazione ferroviaria',
+    description: 'Il Consiglio federale ha ufficializzato il parere sulla pianificazione ferroviaria in risposta al rapporto della CdG-S del 18 maggio 2026. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, consiglio, federale, sulla, pianificazione',
+    ogTitle: 'Consiglio federale: parere su infrastrutture ferroviarie',
+    ogDescription: 'Il governo svizzero ha pubblicato il proprio parere sulla pianificazione strategica delle infrastrutture ferroviarie in risposta alla Commissione della gestione del Consiglio degli Stati.',
+    canonicalPath: '/articoli-svizzera/parere-governo-infrastrutture-ferroviarie/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Il Consiglio federale sulla pianificazione ferroviaria",
+      "description": "Il Consiglio federale ha ufficializzato il parere sulla pianificazione ferroviaria in risposta al rapporto della CdG-S del 18 maggio 2026. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/parere-governo-infrastrutture-ferroviarie.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Infrastruttura ferroviaria svizzera con treno moderno"
+      },
+      "datePublished": "2026-08-21T08:44:43+00:00",
+      "dateModified": "2026-08-21T08:44:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/parere-governo-infrastrutture-ferroviarie/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

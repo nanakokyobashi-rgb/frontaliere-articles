@@ -3676,6 +3676,15 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bcg-utile-semestrale-record.title': 'BCG Rekordgewinn: +137,2 Mio. im Halbjahr',
     'blog.article.bcg-utile-semestrale-record.excerpt': 'Die Graubündner Kantonalbank schliesst das erste Halbjahr 2026 mit einem Rekordgewinn von CHF 137,2 Mio. ab, ein Plus von 18,2%. Bestätigte Solidität in Graubünden.',
     'blog.article.bcg-utile-semestrale-record.imageAlt': 'Modernes Bankgebäude mit Glas- und Steinarchitektur, Tageslichtsetting',
+    'blog.article.richiedenti-asilo-severe-misure.title': 'Asylsuchende, Bern fordert schärfere Massnahmen',
+    'blog.article.richiedenti-asilo-severe-misure.excerpt': 'Das Staatssekretariat für Migration (sem) prüft Gesetzesänderungen, um Jugendliche aus dem Maghreb, die gerade in der Schweiz angekommen sind, vom Asylverfahren auszuschliessen.',
+    'blog.article.richiedenti-asilo-severe-misure.imageAlt': 'Junge Person, die in der Schweiz Straftaten begeht',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.title': 'Familienzulagen Appenzell Innerrhoden: Beträge und Antrag',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.excerpt': 'Vollständiger Leitfaden zur Familienzulage im Kanton Appenzell Innerrhoden: Bundessystem, monatliche Kinderzulagen, Rechtslage, Ausgleichskasse und Schritt-für-Schritt-Antragsverfahren.',
+    'blog.article.assegni-familiari-appenzello-interno-domanda.imageAlt': 'Alpentäler mit traditioneller Kantonsarchitektur, Symbol des Familienleistungssystems in Appenzell Innerrhoden.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.title': 'Der Bundesrat für Bahnplanung',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.excerpt': 'Veröffentlichung der Regierungsstellungnahme vom 19. August 2026 zum Bericht der GPK-S vom 18. Mai 2026 zu den Strategien für die Schieneninfrastruktur.',
+    'blog.article.parere-governo-infrastrutture-ferroviarie.imageAlt': 'Schweizer Bahninfrastruktur mit modernem Zug',
 };
 
 export default blogMetaChDe;

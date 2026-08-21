@@ -10367,6 +10367,12 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-solbiate-arno-lavorare-ticino.title': 'Travailler à Solbiate Arno, vivre au Tessin : les clés',
     'blog.article.vivere-solbiate-arno-lavorare-ticino.excerpt': 'Les avantages et les inconvénients de vivre à Solbiate Arno et de travailler au Tessin en tant que frontalier.',
     'blog.article.vivere-solbiate-arno-lavorare-ticino.imageAlt': 'Frontaliere qui évalue les avantages et les inconvénients de vivre à Solbiate Arno et de travailler en Suisse',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.title': 'Vivre à Colverde et travailler en Tessin : les clés',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.excerpt': 'Taxes à la source, permis G, rafraîchissements et autres avantages pour les frontaliers qui travaillent au Tessin.',
+    'blog.article.vivere-colverde-lavorare-ticino-frontaliere.imageAlt': 'Un frontalier qui se déplace à Colverde pour travailler en Suisse du Tessin.',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.title': 'Vivre à Fagnano Olona et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.excerpt': 'Convention italo-suisse contre les doubles impositions : signée le 9 décembre 1976',
+    'blog.article.vivere-fagnano-olona-lavorare-ticino.imageAlt': 'Frontalier travaillant en Ticino',
 };
 
 export default blogMetaFr;

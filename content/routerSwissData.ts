@@ -1251,6 +1251,9 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'holcim-acquista-fermacell': { it: 'holcim-acquista-fermacell', en: 'holcim-acquires-fermacell', de: 'holcim-uebernimmt-fermacell', fr: 'holcim-acquiert-fermacell' },
  'votazioni-settembre-neutralita-alimentazione': { it: 'votazioni-settembre-neutralita-alimentazione', en: 'voting-september-neutrality-food', de: 'abstimmung-september-neutralitaet-lebensmittel', fr: 'votations-septembre-neutralite-alimentation' },
  'bcg-utile-semestrale-record': { it: 'bcg-utile-semestrale-record', en: 'bcg-record-half-year-profit', de: 'bcg-rekordhalbjahrsergebnis', fr: 'bcg-resultat-semestriel-record' },
+ 'richiedenti-asilo-severe-misure': { it: 'richiedenti-asilo-severe-misure', en: 'asylum-seekers-severe-measures', de: 'asylsuchende-severe-ma-nahmen', fr: 'requerants-d-asile-mesures-severes' },
+ 'assegni-familiari-appenzello-interno-domanda': { it: 'assegni-familiari-appenzello-interno-domanda', en: 'family-allowances-appenzello-interno-application', de: 'familienleistungen-appenzell-innerrhoden-antrag', fr: 'allocations-familiales-appenzell-rhodes-interieures-demande' },
+ 'parere-governo-infrastrutture-ferroviarie': { it: 'parere-governo-infrastrutture-ferroviarie', en: 'government-opinion-railway-infrastructure', de: 'regierungsstellungnahme-bahninfrastruktur', fr: 'avis-gouvernement-infrastructure-ferroviaire' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

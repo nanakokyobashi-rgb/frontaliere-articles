@@ -11026,6 +11026,33 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'richiedenti-asilo-severe-misure',
+    category: 'fiscale',
+    date: '2026-08-21T08:01:12.254Z',
+    image: '/images/blog/richiedenti-asilo-severe-misure.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'assegni-familiari-appenzello-interno-domanda',
+    category: 'pratico',
+    date: '2026-08-21T08:25:22.014Z',
+    image: '/images/blog/assegni-familiari-appenzello-interno-domanda.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'parere-governo-infrastrutture-ferroviarie',
+    category: 'novita',
+    date: '2026-08-21T08:44:43.582Z',
+    image: '/images/blog/parere-governo-infrastrutture-ferroviarie.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
