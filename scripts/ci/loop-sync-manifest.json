@@ -2064,9 +2064,9 @@
       "mode": "identical",
       "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. RIALLINEATA il 2026-08-14: era il terzo ritardo pre-esistente alla baseline (blob fermo al trasporto `valerielinc-ops@be6b31d5` del 2026-08-02, mentre il sito aggiungeva il 2026-08-05 con 21e2d13d `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`). Il ritardo non aveva effetto funzionale qui — misurato prima di copiare: l'unico importatore locale prende `PROFESSION_TAXONOMY` e nessuno dei quattro simboli nuovi compare in un solo file di questo repo — quindi la copia e' additiva e non cambia comportamento. E' pero' proprio il caso in cui il ritardo si sarebbe fatto sentire in silenzio il giorno in cui `evergreen-topic-generator.mjs` (a sua volta `identical`) fosse sceso dal sito gia' usandoli: un import di un export inesistente e' `undefined`, non un errore.",
       "baseline": {
-        "site": "d15cfe455f5879b5",
-        "corpus": "d15cfe455f5879b5",
-        "alignedAt": "2026-08-14"
+        "site": "f3b22ce1f9c02f1a",
+        "corpus": "f3b22ce1f9c02f1a",
+        "alignedAt": "2026-08-21"
       }
     },
     {
@@ -2551,9 +2551,9 @@
       "path": "scripts/generate-image-thumbnails.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "81218522bca6c226",
-        "corpus": "81218522bca6c226",
-        "alignedAt": "2026-08-09"
+        "site": "df13c576848f88dc",
+        "corpus": "df13c576848f88dc",
+        "alignedAt": "2026-08-21"
       }
     },
     {
