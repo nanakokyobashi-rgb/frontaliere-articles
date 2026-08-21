@@ -10999,6 +10999,24 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'holcim-acquista-fermacell',
+    category: 'novita',
+    date: '2026-08-21T06:35:01.189Z',
+    image: '/images/blog/holcim-acquista-fermacell.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'votazioni-settembre-neutralita-alimentazione',
+    category: 'novita',
+    date: '2026-08-21T06:53:46.671Z',
+    image: '/images/blog/votazioni-settembre-neutralita-alimentazione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

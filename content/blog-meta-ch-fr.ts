@@ -3667,6 +3667,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.voto-27-settembre-neutralita.title': 'Plus Note 27 septembre : neutralité vers non, alimentation plus tirée',
     'blog.article.voto-27-settembre-neutralita.excerpt': 'L\'initiative sur la neutralité va vers un rejet, tandis que celle sur l\'alimentation est en équilibre substantiel.',
     'blog.article.voto-27-settembre-neutralita.imageAlt': 'Électeurs suisses discutent du vote',
+    'blog.article.holcim-acquista-fermacell.title': 'Holcim acquiert Fermacell : opération de 784 millions',
+    'blog.article.holcim-acquista-fermacell.excerpt': 'Le groupe suisse Holcim rachète l\'allemand Fermacell pour 784 millions de francs. L\'opération, finalisée au premier semestre 2027, vise le marché de la construction.',
+    'blog.article.holcim-acquista-fermacell.imageAlt': 'Siège industriel suisse moderne.',
+    'blog.article.votazioni-settembre-neutralita-alimentazione.title': 'Sondage gfs : neutralité proche du non, alimentation 50-50',
+    'blog.article.votazioni-settembre-neutralita-alimentazione.excerpt': 'Le premier sondage gfs.bern sur les votes du 27 septembre : neutralité vis-à-vis du rejet (54%), alimentation en balancier (49% vs 47%). Divergences régionales.',
+    'blog.article.votazioni-settembre-neutralita-alimentazione.imageAlt': 'Citoyens suisses participant à un scrutin fédéral, documents informatifs visibles pour consultation',
 };
 
 export default blogMetaChFr;
