@@ -384,7 +384,18 @@ export function hasProfessionGuideIntent(text) {
  * `conviene vivere` e `dove vivere` restano nell'alternanza: `vivere ` esige
  * lo spazio, e un testo che finisce con «dove vivere?» non ce l'ha.
  */
-const RESIDENCE_INTENT_RE = /(vivere |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «sopravvivere a Besano» e «convivere a Besano»
+// producevano `comune-guide:besano`, e «riabitare» accendeva `abitare`. Il
+// difetto è più vecchio dell'allargamento qui sopra (`vivere a ` matchava già
+// dentro «sopravvivere a»), ma allargare a `vivere ` ne allarga la superficie,
+// quindi si chiude nello stesso posto. Misurato sul corpus intero: 144 marcati
+// e 28 coppie PRIMA e DOPO, zero articoli spostati in una direzione o
+// nell'altra — costa niente e toglie una classe di falsi positivi futuri.
+// Nel corpus di oggi l'unico articolo che contiene «sopravvivere|convivere»
+// («Nottambuli, come convivere con gli orari sociali?») non nomina comuni,
+// quindi non era mai stato marcato: è un rischio sugli articoli futuri.
+const RESIDENCE_INTENT_RE = /\b(vivere |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
 
 /** Il file da cui esce l'elenco dei comuni. Letto come TESTO: vedi sotto. */
 const MUNICIPALITIES_SOURCE = path.resolve(

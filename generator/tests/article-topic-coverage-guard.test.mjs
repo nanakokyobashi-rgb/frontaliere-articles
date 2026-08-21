@@ -753,6 +753,29 @@ describe('intento residenza: la preposizione non è obbligatoria', () => {
     expect(hasResidenceGuideIntent('Vivere ad Albese con Cassano e lavorare in Ticino')).toBe(true);
   });
 
+  it('l\'intento non si accende come SUFFISSO di un\'altra parola', () => {
+    // «sopravvivere»/«convivere» contengono «vivere», e senza `\\b` bastavano a
+    // marcare un articolo che nomina un comune: `comune-guide:besano` su
+    // «Sopravvivere a Besano con 2.000 franchi». Nessuna occorrenza nel corpus
+    // di oggi — è un rischio sugli articoli futuri, chiuso a costo zero.
+    // Sulla CHIAVE, non su `comuneTopicKey`: quest'ultima risponde «besano» a
+    // qualunque testo che nomini il comune, ed è `topicCoverageKey` a esigere
+    // in AND l'intento. È quella la funzione che decide se un articolo è
+    // coperto, quindi è lì che il falso positivo si vedrebbe.
+    expect(hasResidenceGuideIntent('Sopravvivere a Besano con 2000 franchi')).toBe(false);
+    expect(hasResidenceGuideIntent('Convivere a Besano: la guida')).toBe(false);
+    expect(topicCoverageKey({
+      id: 'sopravvivere-besano-2000-franchi',
+      title: 'Sopravvivere a Besano con 2000 franchi',
+    })?.kind).not.toBe('comune-guide');
+    // …e la forma legittima continua a passare, intento e chiave.
+    expect(hasResidenceGuideIntent('Vivere a Besano e lavorare in Ticino')).toBe(true);
+    expect(keyOf({
+      id: 'vivere-besano-lavorare-ticino',
+      title: 'Vivere a Besano e lavorare in Ticino',
+    })).toBe('comune-guide:besano');
+  });
+
   it('«vivere» da solo NON basta: serve anche il comune', () => {
     // La congiunzione è ciò che tiene i falsi positivi a zero: allargare
     // l'intento non allarga la chiave se non c'è un nome di comune.
