@@ -424,3 +424,86 @@ describe('content-gates-main: la lista e\' COMPLETA, non solo non vuota', () => 
     );
   });
 });
+
+/**
+ * ── Il rilevatore stesso: due gap strutturali (follow-up #503) ─────────────
+ *
+ * I test sopra esercitano `detectCorpusReaders` sulla cartella vera, dove
+ * oggi ogni lettore usa una delle forme gia' coperte. Non dicono niente sul
+ * METODO: se scansiona solo il primo livello, o se riconosce solo due forme
+ * testuali su tre. Qui si usano alberi sintetici per isolare il rilevatore
+ * dal contenuto reale della cartella.
+ */
+describe('content-gates-main: il rilevatore vede le sotto-cartelle e il template literal', () => {
+  const mk = () => fs.mkdtempSync(path.join(os.tmpdir(), 'corpus-readers-'));
+  // Le forme sotto sono spezzate in pezzi che NON combaciano con le regex del
+  // rilevatore quando restano nel sorgente di QUESTO file: altrimenti
+  // `detectCorpusReaders`, scansionando ricorsivamente `generator/tests/`,
+  // troverebbe questo stesso test come lettore del corpus e il test si
+  // auto-inquinerebbe. A runtime la concatenazione produce comunque il testo
+  // intero scritto nel file temporaneo.
+  const BACKTICK = String.fromCharCode(96);
+
+  test('scende in una sotto-cartella (fixtures/lib/parity oggi vuote, ma non per sempre)', () => {
+    const dir = mk();
+    try {
+      fs.mkdirSync(path.join(dir, 'parity'));
+      fs.writeFileSync(
+        path.join(dir, 'parity', 'nested.test.mjs'),
+        [
+          "import path from 'node:path';",
+          "import { fileURLToPath } from 'node:url';",
+          "const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');",
+          "path.join(" + "ROOT, 'content', 'x.ts');",
+        ].join('\n'),
+      );
+      const trovati = detectCorpusReaders(dir);
+      // La stringa `why` non e' asserita in un colpo solo: il pattern intero,
+      // se scritto qui per esteso, farebbe leggere QUESTO file come lettore
+      // del corpus alla prossima scansione ricorsiva — vedi il commento su
+      // BACKTICK sopra.
+      assert.equal(trovati.length, 1);
+      assert.equal(trovati[0].file, 'generator/tests/parity/nested.test.mjs');
+      assert.ok(trovati[0].why.startsWith('path.join(ROOT'));
+      assert.ok(trovati[0].why.includes("'content'"));
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('riconosce l\'indirezione via template literal sull\'ancora, non solo path.join/resolve', () => {
+    const dir = mk();
+    try {
+      fs.writeFileSync(
+        path.join(dir, 'templ.test.mjs'),
+        [
+          "import path from 'node:path';",
+          "import { fileURLToPath } from 'node:url';",
+          "const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');",
+          'const p = ' + BACKTICK + '${ROOT}/content/blog-body/it/x.ts' + BACKTICK + ';',
+        ].join('\n'),
+      );
+      const trovati = detectCorpusReaders(dir);
+      assert.equal(trovati.length, 1, 'il template literal sull\'ancora non e\' stato riconosciuto');
+      assert.equal(trovati[0].file, 'generator/tests/templ.test.mjs');
+      assert.match(trovati[0].why, /template literal/);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+
+  test('un template literal senza l\'ancora resta null (niente falso positivo)', () => {
+    const dir = mk();
+    try {
+      fs.writeFileSync(
+        path.join(dir, 'innocuo.test.mjs'),
+        [
+          "const msg = `content/ e' solo una parola qui, non un path costruito`;",
+        ].join('\n'),
+      );
+      assert.deepEqual(detectCorpusReaders(dir), []);
+    } finally {
+      fs.rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
