@@ -101,21 +101,21 @@ const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
  * I gate pre-merge (`tests.yml`, `generator-ci.yml`): dichiarano SIA `pull_request`
  * SIA `push` sugli stessi path.
  *
- * NOTA (2026-08-18): da quando `tests.yml` ha perso `branches-ignore: [main]`
- * questo filtro esclude anche i suoi rossi SUI PUSH A `main`, dove non c'e'
- * nessun reviewer a vederli — il filtro guarda `event` e nome del workflow, non
- * il branch. Non e' stato cambiato qui di proposito: aggiungere un discriminante
- * su `headBranch` cambia QUALI run diventano issue, ed e' una modifica di
- * comportamento che merita la propria PR e la propria misura. Per questi la run innescata da un push su un branch
- * non-main è solo un'anteprima: quando (e se) la PR si apre, `pull_request`
- * rigira la stessa suite e quel segnale è già escluso sotto, per lo stesso
- * motivo — "un tests rosso su una PR è un problema della PR, lo vede il
- * reviewer lì". Vale identico per il push che la precede: un checkpoint WIP
- * del fixer autonomo è per contratto non testato al momento del push
- * (ISSUES.md § "Checkpoint WIP"), e un branch di sviluppo abbandonato prima
- * di aprire PR non ha nessuno che legga la issue. Senza questo filtro
- * entrambi i casi aprono una "Workflow Failure" fantasma — misurato: #112,
- * #135, #178, tutte push su branch mai (ancora) diventati PR.
+ * Un push su un branch non-main è solo un'anteprima: quando (e se) la PR si
+ * apre, `pull_request` rigira la stessa suite e quel segnale è già coperto
+ * sotto, per lo stesso motivo — "un tests rosso su una PR è un problema della
+ * PR, lo vede il reviewer lì". Vale identico per il push che la precede: un
+ * checkpoint WIP del fixer autonomo è per contratto non testato al momento
+ * del push (ISSUES.md § "Checkpoint WIP"), e un branch di sviluppo
+ * abbandonato prima di aprire PR non ha nessuno che legga la issue. Senza
+ * questo filtro entrambi i casi aprono una "Workflow Failure" fantasma —
+ * misurato: #112, #135, #178, tutte push su branch mai (ancora) diventati PR.
+ *
+ * Su `main` non vale nessuna delle due ragioni: da quando `tests.yml` ha
+ * perso `branches-ignore: [main]` (#424) la suite gira davvero sui push
+ * diretti fatti dai produttori di articoli, e lì non c'è nessuna PR e nessun
+ * reviewer — un rosso resterebbe silenzioso per sempre (#476). Il filtro
+ * quindi esclude il push dei gate pre-merge SOLO fuori da `main`.
  *
  * Non generalizzare oltre questi due nomi: gli altri workflow con `push` (i
  * self-test di generazione, es. `batch-faq-articles.yml`) non hanno un
@@ -145,7 +145,7 @@ export function isReportableRun(r, { since, ignore = IGNORE } = {}) {
   return (
     r.conclusion === 'failure' &&
     r.event !== 'pull_request' &&
-    !(r.event === 'push' && PR_GATE_WORKFLOWS.has(r.workflowName)) &&
+    !(r.event === 'push' && PR_GATE_WORKFLOWS.has(r.workflowName) && r.headBranch !== 'main') &&
     (!since || (r.updatedAt || r.createdAt) >= since) &&
     !ignore.has(r.workflowName)
   );
