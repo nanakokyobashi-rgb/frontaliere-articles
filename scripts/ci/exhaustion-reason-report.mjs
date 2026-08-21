@@ -49,9 +49,14 @@
  *     — quindi ogni run rifà lo stesso lavoro e ri-marca gli stessi 22 modelli.
  *     È rumore ricorrente, non avvelenamento dei run successivi.
  *
- * Il rimedio a (2) — potare il roster invece di ri-scoprirlo ogni run — sta in
- * `generator/scripts/lib/ai-models.mjs`, che è `mode: identical` nel
- * `loop-sync-manifest.json`: va fatto SUL SITO. Questo file non lo fa e non deve.
+ * Il rimedio a (2) — potare il roster invece di ri-scoprirlo ogni run — è stato
+ * implementato in `generator/scripts/lib/ai-models.mjs` (`_discoverProvider`,
+ * il ramo `cfg.markStale`), IN QUESTO REPO: la generazione gira qui, quindi è
+ * qui che il rumore si misurava e qui che va tolto. `mode: identical` nel
+ * `loop-sync-manifest.json` non è un'istruzione di routing — dice solo che le
+ * due copie del file vanno tenute allineate, non su quale lato applicare una
+ * fix (vedi generator/tests/generation-health-watchdog.test.mjs §8, che copre
+ * esattamente questa confusione per i body di `scan-generation-health.mjs`).
  *
  * ## L'invariante che questo modulo difende
  *
