@@ -3637,6 +3637,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.asilo-custodia-appenzello-esterno.title': 'Garderie et garde d\'enfants : coûts à Appenzell Extérieur',
     'blog.article.asilo-custodia-appenzello-esterno.excerpt': 'Tarifs calculés sur le revenu, allocations cantonales et déductions fiscales : tout sur les crèches, les familles de jour et après l\'école dans le canton d\'Appenzell Extérieur.',
     'blog.article.asilo-custodia-appenzello-esterno.imageAlt': 'Enfants jouant dehors dans une structure de garde suisse avec vue sur les Alpes',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.title': 'Acheter maison Appenzell Extérieur : hypothèque, prix et taxes',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.excerpt': 'Guide d\'achat immobilier à Appenzell Externe : viabilité du prêt, fonds propres minimaux, taxe de passage, frais de notaire et procédure étape par étape.',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.imageAlt': 'Maison résidentielle en Suisse orientale avec documents hypothécaires sur le bureau',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.title': 'Acheter une maison dans le canton d\'Appenzell Extérieur : hypothèques et taxes',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.excerpt': 'Achat immobilier dans le canton d\'Appenzell Extérieur : guide des procédures, impôts cantonaux et communaux, prêts hypothécaires, frais de notaire.',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.imageAlt': 'Vue d\'une maison et d\'un paysage rural dans le canton d\'Appenzell Rhodes-Extérieures, nord-est de la Suisse.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.title': 'Location à Appenzell Extérieur : loyers et droit de location',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.excerpt': 'Guide du droit locatif dans le canton d\'Appenzell Extérieur : dépôt de garantie, résiliation, contestation et protections fédérales du locataire.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.imageAlt': 'Rue résidentielle suisse avec bâtiments d\'habitation historiques en automne',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.title': 'Marché des loyers à Appenzell Externe : loyers moyens et droit de location',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.excerpt': 'Le marché locatif d\'Appenzell Extérieur suit les règles fédérales et cantonales. Le dépôt de garantie maximal est déterminé par les lois cantonales.',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.imageAlt': 'Un locataire suisse d\'Appenzello Esterno cherche justice pour un bail non résolu.',
 };
 
 export default blogMetaChFr;

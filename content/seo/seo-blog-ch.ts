@@ -47171,6 +47171,162 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-casa-appenzello-esterno-acquisto-mutuo': {
+    title: 'Comprare casa Appenzello Esterno: mutuo, prezzi e tasse',
+    description: 'Guida all\'acquisto di abitazioni ad Appenzello Esterno: sostenibilità mutuo, fondi propri, imposta sui trapassi, spese notarili e procedure pratiche.',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, appenzello, esterno',
+    ogTitle: 'Comprare casa Appenzello Esterno: guida al mutuo ipotecario',
+    ogDescription: 'Scopri come comprare casa ad Appenzello Esterno: valutazione sostenibilità mutuo, fondi propri minimi (20%), tassa di trasferimento cantonale, spese notarili e step-by-step per l\'acquisto immobiliare in Svizzera.',
+    canonicalPath: '/articoli-svizzera/casa-appenzello-esterno-acquisto-mutuo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa Appenzello Esterno: mutuo, prezzi e tasse",
+      "description": "Guida all'acquisto di abitazioni ad Appenzello Esterno: sostenibilità mutuo, fondi propri, imposta sui trapassi, spese notarili e procedure pratiche.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/casa-appenzello-esterno-acquisto-mutuo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa residenziale moderna in Svizzera orientale con documenti di mutuo ipotecario su scrivania"
+      },
+      "datePublished": "2026-08-21T02:05:16+00:00",
+      "dateModified": "2026-08-21T02:05:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/casa-appenzello-esterno-acquisto-mutuo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-comprare-casa-appenzello-esterno-mutui-tasse': {
+    title: 'Comprare casa nel canton Appenzello Esterno: mutui e tasse',
+    description: 'Acquisto immobiliare nel canton Appenzello Esterno: guida alle procedure, imposte cantonali e comunali, mutui ipotecari, spese notarili e sostenibilità',
+    keywords: 'frontalieri, ticino, svizzera, italia, comprare, casa, canton, appenzello',
+    ogTitle: 'Comprare casa nel canton Appenzello Esterno: mutui e tasse',
+    ogDescription: 'Scopri come acquistare una proprietà nel canton Appenzello Esterno: analisi dei costi (imposte, mutui, spese notarili), procedure legali, calcolo della capacità di prestito e sostenibilità finanziaria per nuovi residenti.',
+    canonicalPath: '/articoli-svizzera/comprare-casa-appenzello-esterno-mutui-tasse/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Comprare casa nel canton Appenzello Esterno: mutui e tasse",
+      "description": "Acquisto immobiliare nel canton Appenzello Esterno: guida alle procedure, imposte cantonali e comunali, mutui ipotecari, spese notarili e sostenibilità",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/comprare-casa-appenzello-esterno-mutui-tasse.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di una casa e paesaggio rurale nel canton Appenzello Esterno, Svizzera nord-orientale."
+      },
+      "datePublished": "2026-08-21T02:21:53+00:00",
+      "dateModified": "2026-08-21T02:21:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/comprare-casa-appenzello-esterno-mutui-tasse/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-affitti-appenzello-esterno-canoni-locazione': {
+    title: 'Affitti ad Appenzello Esterno: canoni e diritto di locazione',
+    description: 'Diritto della locazione nel Cantone Appenzello Esterno: deposito cauzionale massimo 3 mesi, disdetta su modulo ufficiale, contestazione entro 30 giorni',
+    keywords: 'frontalieri, ticino, svizzera, italia, affitti, appenzello, esterno, canoni',
+    ogTitle: 'Affitti ad Appenzello Esterno: norme federali e diritti dell\'inquilino',
+    ogDescription: 'Scopri le norme federali sulla locazione nel Cantone Appenzello Esterno: deposito cauzionale massimo 3 mesi, disdetta su modulo cantonale, contestazione entro 30 giorni. Tutte le procedure e scadenze pratiche.',
+    canonicalPath: '/articoli-svizzera/affitti-appenzello-esterno-canoni-locazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Affitti ad Appenzello Esterno: canoni e diritto di locazione",
+      "description": "Diritto della locazione nel Cantone Appenzello Esterno: deposito cauzionale massimo 3 mesi, disdetta su modulo ufficiale, contestazione entro 30 giorni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/affitti-appenzello-esterno-canoni-locazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada residenziale svizzera con edifici storici locatizi nel pomeriggio autunnale"
+      },
+      "datePublished": "2026-08-21T02:46:13+00:00",
+      "dateModified": "2026-08-21T02:46:13+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/affitti-appenzello-esterno-canoni-locazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-mercato-gli-affitti-appenzello-esterno': {
+    title: 'Mercato degli affitti in Appenzello Esterno: canoni medi e diritto di locazione',
+    description: 'Il mercato degli affitti in Appenzello Esterno segue le norme federali e cantonali. Il deposito cauzionale massimo è determinato dalle leggi cantonali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, affitti, appenzello, esterno',
+    ogTitle: 'Mercato degli affitti in Appenzello Esterno: canoni medi e diritto di locazione',
+    ogDescription: 'Il mercato degli affitti in Appenzello Esterno segue le norme federali e cantonali. Il deposito cauzionale massimo è determinato dalle leggi cantonali.',
+    canonicalPath: '/articoli-svizzera/mercato-gli-affitti-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato degli affitti in Appenzello Esterno: canoni medi e diritto di locazione",
+      "description": "Il mercato degli affitti in Appenzello Esterno segue le norme federali e cantonali. Il deposito cauzionale massimo è determinato dalle leggi cantonali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-gli-affitti-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un locatore svizzero di Appenzello Esterno si rivolge alla giustizia per un affitto irrisolto."
+      },
+      "datePublished": "2026-08-21T03:06:42+00:00",
+      "dateModified": "2026-08-21T03:06:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-gli-affitti-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

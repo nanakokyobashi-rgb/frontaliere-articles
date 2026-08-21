@@ -10326,6 +10326,15 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Vivre à Lonate Ceppino : guide frontalier du Tessin',
     'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Structure fiscale, cotisations sociales et procédures pratiques pour ceux qui choisissent de vivre à Varesotto et de travailler au Tessin avec le nouvel accord frontalier.',
     'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Route frontalière entre l\'Italie et la Suisse dans la région tessinoise avec paysage alpin',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.title': 'Vivre à Monvalle, travailler au Tessin : avantages et inconvénients',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.excerpt': 'Monvalle, commune du district de Lugano, est l\'une des destinations les plus populaires pour les frontaliers qui souhaitent vivre au Tessin et travailler en Suisse.',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.imageAlt': 'Un frontaliere travaillant en Suisse et vivant à Monvalle',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.title': 'Vivre à Barni, travailler au Tessin : fiscalité frontalière',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.excerpt': 'Guide pratique pour les frontaliers qui vivent à Barni (IT) et travaillent au Tessin (CH) : Permis G, taxe à la source, restaurations, AVS, LPP et LAMal. Comment calculer le net.',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.imageAlt': 'Vue sur Lugano et le lac, symbole de destination de travail pour les frontaliers de Barni',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.title': 'Vivre à Pusiano et travailler au Tessin : le guide du frontalier',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.excerpt': 'Du nouvel accord frontalier à l\'impôt à la source, des cotisations AVS/LPP au choix de la LAMal : tout ce qu\'il faut savoir pour déménager à Pusiano et travailler au Tessin.',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.imageAlt': 'Vue de Pusiano, commune de la province de Côme, avec les Alpes tessinoises en arrière-plan',
 };
 
 export default blogMetaFr;

@@ -10324,6 +10324,15 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Living in Lonate Ceppino: Ticino border guide',
     'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Tax structure, social contributions and practical procedures for those who choose to live in Varese and work in Ticino with the New Frontier Agreement.',
     'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Highway at Swiss-Italian border in Ticino region with Alpine landscape view',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.title': 'Living in Monvalle, working in Ticino: advantages and disadvantages',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.excerpt': 'Monvalle, a municipality in the district of Lugano, is one of the most popular destinations for border crossers wishing to live in Ticino and work in Switzerland.',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.imageAlt': 'A frontaliere working in Ticino and living in Monvalle',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.title': 'Living in Barni, working in Ticino: border taxation',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.excerpt': 'Practical guide for border workers living in Barni (IT) and working in Ticino (CH): G Permit, tax at source, refills, AVS, LPP and LAMal. How to calculate the net.',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.imageAlt': 'Lugano lakefront view, symbolizing the work destination for Barni commuters in Ticino',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.title': 'Living in Pusiano and working in Ticino: the frontier guide',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.excerpt': 'From the New Frontier Agreement to the tax at source, from AVS/LPP contributions to the choice of LAMal: everything you need to know to move to Pusiano and work in Ticino.',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.imageAlt': 'View of Pusiano village in Como province, Italian border town with Swiss Alps in the background',
 };
 
 export default blogMetaEn;

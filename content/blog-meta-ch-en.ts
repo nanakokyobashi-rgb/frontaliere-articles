@@ -3637,6 +3637,18 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.asilo-custodia-appenzello-esterno.title': 'Nursery and care: costs in the External Appenzello',
     'blog.article.asilo-custodia-appenzello-esterno.excerpt': 'Rates calculated on income, cantonal subsidies and tax deductions: all on kindergartens, day families and after-school in the canton of Appenzello Esterno.',
     'blog.article.asilo-custodia-appenzello-esterno.imageAlt': 'Children playing outdoors at a Swiss daycare facility with alpine mountains in background',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.title': 'Buying a house in Appenzello Esterno: mortgage, prices and taxes',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.excerpt': 'Guide to buying real estate in Appenzell Ausserrhoden: affordability of the mortgage, minimum capital adequacy, transfer tax, notary fees and step-by-step procedure.',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.imageAlt': 'Modern residential house in Eastern Switzerland with mortgage documents on consultant\'s desk',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.title': 'Buying a house in the canton of Appenzello Esterno: mortgages and taxes',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.excerpt': 'Property purchase in the canton of Appenzello Esterno: guide to procedures, cantonal and municipal taxes, mortgage loans, notary fees.',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.imageAlt': 'View of a house and rural landscape in Appenzell Outer Rhodes Canton, northeastern Switzerland.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.title': 'Rentals in Appenzello Externo: fees and rental rights',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.excerpt': 'Guide to tenancy law in the Outer Appenzell Canton: security deposit, cancellation, dispute and federal tenant protections.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.imageAlt': 'Swiss residential street with historic rental buildings in autumn afternoon light',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.title': 'Rental market in the External Appenzell: average fees and rental rights',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.excerpt': 'The rental market in Outer Appenzell follows federal and cantonal regulations. The maximum security deposit is determined by cantonal laws.',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.imageAlt': 'A Swiss tenant in Appenzello Esterno seeks justice for an unresolved rental.',
 };
 
 export default blogMetaChEn;

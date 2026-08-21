@@ -72650,6 +72650,123 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-monvalle-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Monvalle, lavorare in Ticino: vantaggi e svantaggi',
+    description: 'Monvalle, comune del distretto di Lugano, è una delle destinazioni più popolari per i frontalieri che desiderano vivere in Ticino e lavorare in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, monvalle, lavorare, vantaggi',
+    ogTitle: 'Vivere a Monvalle e lavorare in Ticino da frontaliere',
+    ogDescription: 'Monvalle è una delle destinazioni più popolari per i frontalieri che desiderano vivere in Ticino e lavorare in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/vivere-monvalle-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Monvalle, lavorare in Ticino: vantaggi e svantaggi",
+      "description": "Monvalle, comune del distretto di Lugano, è una delle destinazioni più popolari per i frontalieri che desiderano vivere in Ticino e lavorare in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-monvalle-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere che lavora in Ticino e vive a Monvalle"
+      },
+      "datePublished": "2026-08-21T02:13:14+00:00",
+      "dateModified": "2026-08-21T02:13:14+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-monvalle-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-barni-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Barni, lavorare in Ticino: fiscalità frontalieri',
+    description: 'Guida pratica per frontalieri a Barni (IT) che lavorano in Ticino (CH): Permesso G, imposta alla fonte, ristorni, AVS, LPP, LAMal. Calcolate il netto e gestite',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, barni, lavorare, fiscalità',
+    ogTitle: 'Vivere a Barni, lavorare in Ticino: guida fiscale frontalieri',
+    ogDescription: 'Scopri come vivere a Barni e lavorare in Ticino da frontaliere: Permesso G, tassazione, ristorni, contributi AVS e LPP, LAMal, dichiarazione 730. Calcoli pratici e checklist per il trasferimento.',
+    canonicalPath: '/articoli-frontaliere/vivere-barni-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Barni, lavorare in Ticino: fiscalità frontalieri",
+      "description": "Guida pratica per frontalieri a Barni (IT) che lavorano in Ticino (CH): Permesso G, imposta alla fonte, ristorni, AVS, LPP, LAMal. Calcolate il netto e gestite",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-barni-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista di Lugano e il lago, simbolo della destinazione di lavoro per chi vive a Barni come frontaliere"
+      },
+      "datePublished": "2026-08-21T02:39:49+00:00",
+      "dateModified": "2026-08-21T02:39:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-barni-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-pusiano-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Pusiano e lavorare in Ticino: la guida del frontaliere',
+    description: 'Guida pratica per frontalieri: fiscalità, AVS, LPP, LAMal. Procedura per il trasferimento a Pusiano e lavoro in Ticino. Convenzione italo-svizzera e Nuovo',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, pusiano, lavorare, nuovo',
+    ogTitle: 'Vivere a Pusiano, lavorare in Ticino: guida del frontaliere',
+    ogDescription: 'Dal trasferimento a Pusiano all\'imposta alla fonte: scopri come vivere in Italia e lavorare in Svizzera. Fiscalità, permessi, AVS, LPP, LAMal e procedure step-by-step per frontalieri Ticino-Como.',
+    canonicalPath: '/articoli-frontaliere/vivere-pusiano-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Pusiano e lavorare in Ticino: la guida del frontaliere",
+      "description": "Guida pratica per frontalieri: fiscalità, AVS, LPP, LAMal. Procedura per il trasferimento a Pusiano e lavoro in Ticino. Convenzione italo-svizzera e Nuovo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-pusiano-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Panorama di Pusiano, comune della provincia di Como, con le Alpi ticinesi sullo sfondo"
+      },
+      "datePublished": "2026-08-21T02:57:16+00:00",
+      "dateModified": "2026-08-21T02:57:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-pusiano-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

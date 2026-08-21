@@ -3637,6 +3637,18 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.asilo-custodia-appenzello-esterno.title': 'Kindertagesstätte und Obhut: Kosten in Appenzell Ausserrhoden',
     'blog.article.asilo-custodia-appenzello-esterno.excerpt': 'Berechnete Einkommenstarife, Kantonsbeiträge und Steuerabzüge: Alles rund um Kindertagesstätten, Tagesfamilien und Nachmittagsbetreuung im Kanton Appenzell Ausserrhoden.',
     'blog.article.asilo-custodia-appenzello-esterno.imageAlt': 'Kinder spielen im Freien in einer Schweizer Betreuungseinrichtung mit Bergblick',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.title': 'Haus kaufen Appenzell Ausserrhoden: Hypothek, Preise und Steuern',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.excerpt': 'Leitfaden zum Immobilienkauf in Appenzell Ausserrhoden: Tragbarkeit des Darlehens, Mindesteigenmittel, Stempelsteuer, Notarkosten und Schritt-für-Schritt-Verfahren.',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.imageAlt': 'Modernes Wohnhaus in der Ostschweiz mit Hypothekendokumenten auf dem Schreibtisch',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.title': 'Haus kaufen im Kanton Appenzell Ausserrhoden: Hypotheken und Steuern',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.excerpt': 'Immobilienkauf im Kanton Appenzell Ausserrhoden: Verfahrensleitfaden, Kantons- und Gemeindesteuern, Hypothekendarlehen, Notarkosten.',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.imageAlt': 'Aussicht auf ein Haus und die ländliche Landschaft im Kanton Appenzell Ausserrhoden, Nordostschweiz.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.title': 'Mieten in Appenzell Ausserrhoden: Mieten und Mietrecht',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.excerpt': 'Leitfaden zum Mietrecht im Kanton Appenzell Ausserrhoden: Kaution, Kündigung, Anfechtung und Bundesmieterschutz.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.imageAlt': 'Schweizer Wohnstraße mit historischen Mietshäusern im Herbstlicht',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.title': 'Mietmarkt Appenzell Ausserrhoden: Durchschnittsmieten und Mietrecht',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.excerpt': 'Der Mietmarkt in Appenzell Ausserrhoden folgt den Vorgaben von Bund und Kantonen. Die maximale Kaution richtet sich nach den kantonalen Gesetzen.',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.imageAlt': 'Ein Schweizer Mieter in Appenzello Esterno sucht nach Gerechtigkeit für einen ungelösten Mietvertrag.',
 };
 
 export default blogMetaChDe;

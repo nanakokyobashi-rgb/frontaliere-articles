@@ -10909,6 +10909,42 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'casa-appenzello-esterno-acquisto-mutuo',
+    category: 'pratico',
+    date: '2026-08-21T02:05:16.042Z',
+    image: '/images/blog/casa-appenzello-esterno-acquisto-mutuo.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
+   {
+    id: 'comprare-casa-appenzello-esterno-mutui-tasse',
+    category: 'pratico',
+    date: '2026-08-21T02:21:53.154Z',
+    image: '/images/blog/comprare-casa-appenzello-esterno-mutui-tasse.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'affitti-appenzello-esterno-canoni-locazione',
+    category: 'pratico',
+    date: '2026-08-21T02:46:13.445Z',
+    image: '/images/blog/affitti-appenzello-esterno-canoni-locazione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
+   {
+    id: 'mercato-gli-affitti-appenzello-esterno',
+    category: 'fiscale',
+    date: '2026-08-21T03:06:42.397Z',
+    image: '/images/blog/mercato-gli-affitti-appenzello-esterno.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

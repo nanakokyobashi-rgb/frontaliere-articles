@@ -3637,6 +3637,18 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.asilo-custodia-appenzello-esterno.title': 'Asilo nido e custodia: costi in Appenzello Esterno',
     'blog.article.asilo-custodia-appenzello-esterno.excerpt': 'Tariffe calcolate sul reddito, sussidi cantonali e deduzioni fiscali: tutto su asili nido, famiglie diurne e doposcuola nel canton Appenzello Esterno.',
     'blog.article.asilo-custodia-appenzello-esterno.imageAlt': 'Bambini che giocano all\'aperto presso una struttura di custodia svizzera con vista su montagne alpine',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.title': 'Comprare casa Appenzello Esterno: mutuo, prezzi e tasse',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.excerpt': 'Guida all\'acquisto immobiliare ad Appenzello Esterno: sostenibilità del mutuo, fondi propri minimi, imposta sui trapassi, spese notarili e procedura step-by-step.',
+    'blog.article.casa-appenzello-esterno-acquisto-mutuo.imageAlt': 'Casa residenziale moderna in Svizzera orientale con documenti di mutuo ipotecario su scrivania',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.title': 'Comprare casa nel canton Appenzello Esterno: mutui e tasse',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.excerpt': 'Acquisto immobiliare nel canton Appenzello Esterno: guida alle procedure, imposte cantonali e comunali, mutui ipotecari, spese notarili.',
+    'blog.article.comprare-casa-appenzello-esterno-mutui-tasse.imageAlt': 'Vista di una casa e paesaggio rurale nel canton Appenzello Esterno, Svizzera nord-orientale.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.title': 'Affitti ad Appenzello Esterno: canoni e diritto di locazione',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.excerpt': 'Guida al diritto della locazione nel Cantone Appenzello Esterno: deposito cauzionale, disdetta, contestazione e protezioni federali dell\'inquilino.',
+    'blog.article.affitti-appenzello-esterno-canoni-locazione.imageAlt': 'Strada residenziale svizzera con edifici storici locatizi nel pomeriggio autunnale',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.title': 'Mercato degli affitti in Appenzello Esterno: canoni medi e diritto di locazione',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.excerpt': 'Il mercato degli affitti in Appenzello Esterno segue le norme federali e cantonali. Il deposito cauzionale massimo è determinato dalle leggi cantonali.',
+    'blog.article.mercato-gli-affitti-appenzello-esterno.imageAlt': 'Un locatore svizzero di Appenzello Esterno si rivolge alla giustizia per un affitto irrisolto.',
 };
 
 export default blogMetaChIt;

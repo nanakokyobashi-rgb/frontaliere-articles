@@ -10325,6 +10325,15 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Vivere a Lonate Ceppino: guida frontaliere Ticino',
     'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Struttura fiscale, contributi sociali e procedure pratiche per chi sceglie di vivere nel Varesotto e lavorare in Ticino con il Nuovo Accordo Frontalieri.',
     'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Strada frontaliera tra Italia e Svizzera nel Mendrisiotto, con paesaggio alpino ticinese sullo sfondo',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.title': 'Vivere a Monvalle, lavorare in Ticino: vantaggi e svantaggi',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.excerpt': 'Monvalle, comune del distretto di Lugano, è una delle destinazioni più popolari per i frontalieri che desiderano vivere in Ticino e lavorare in Svizzera.',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.imageAlt': 'Un frontaliere che lavora in Ticino e vive a Monvalle',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.title': 'Vivere a Barni, lavorare in Ticino: fiscalità frontalieri',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.excerpt': 'Guida pratica per frontalieri che vivono a Barni (IT) e lavorano in Ticino (CH): Permesso G, imposta alla fonte, ristorni, AVS, LPP e LAMal. Come calcolare il netto.',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.imageAlt': 'Vista di Lugano e il lago, simbolo della destinazione di lavoro per chi vive a Barni come frontaliere',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.title': 'Vivere a Pusiano e lavorare in Ticino: la guida del frontaliere',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.excerpt': 'Dal Nuovo Accordo Frontalieri all\'imposta alla fonte, dai contributi AVS/LPP alla scelta della LAMal: tutto ciò che serve sapere per trasferirsi a Pusiano e lavorare in Ticino.',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.imageAlt': 'Panorama di Pusiano, comune della provincia di Como, con le Alpi ticinesi sullo sfondo',
 };
 
 export default blogMetaIt;

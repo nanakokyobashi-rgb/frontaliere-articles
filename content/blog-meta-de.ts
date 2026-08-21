@@ -10323,6 +10323,15 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Leben in Lonate Ceppino: Grenzführer Tessin',
     'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Steuerstruktur, Sozialbeiträge und praktische Verfahren für diejenigen, die sich entscheiden, im Varesotto zu leben und im Tessin mit dem Neuen Frontalieri-Abkommen zu arbeiten.',
     'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Grenzstrasse zwischen Italien und der Schweiz in der Region Mendrisiotto mit Alpenpanorama',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.title': 'Leben in Monvalle, Arbeiten im Tessin: Vor- und Nachteile',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.excerpt': 'Monvalle, Gemeinde des Bezirks Lugano, ist eines der beliebtesten Reiseziele für Grenzgänger, die im Tessin leben und in der Schweiz arbeiten möchten.',
+    'blog.article.vivere-monvalle-lavorare-ticino-frontaliere.imageAlt': 'Ein Frontalier, der in Ticino arbeitet und in Monvalle lebt',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.title': 'Wohnen in Barni, Arbeiten im Tessin: Grenzbesteuerung',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.excerpt': 'Praktischer Leitfaden für Grenzgänger, die in Barni (IT) leben und im Tessin (CH) arbeiten: Bewilligung G, Quellensteuer, Rückerstattungen, AHV, BVG und KVG. Wie berechnet man das Netto.',
+    'blog.article.vivere-barni-lavorare-ticino-frontaliere.imageAlt': 'Blick auf Lugano und den See, Arbeitsziel für Grenzgänger aus Barni',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.title': 'Leben in Pusiano und Arbeiten im Tessin: Der Grenzgängerführer',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.excerpt': 'Vom Neuen Grenzgängerabkommen über die Quellensteuer, die AHV/BVG-Beiträge bis hin zur WAHL des KVG: Alles, was Sie wissen müssen, um nach Pusiano zu ziehen und im Tessin zu arbeiten.',
+    'blog.article.vivere-pusiano-lavorare-ticino-frontaliere.imageAlt': 'Blick auf Pusiano, Gemeinde in der Provinz Como, mit Tessiner Alpen im Hintergrund',
 };
 
 export default blogMetaDe;
