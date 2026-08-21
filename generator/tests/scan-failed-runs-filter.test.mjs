@@ -45,6 +45,16 @@ test('push fallito su tests/Generator CI in preview di una PR non ancora aperta 
   );
 });
 
+test('push fallito su tests/Generator CI direttamente su main è segnalato (#476)', () => {
+  // Dopo #424 la suite gira davvero sui push a main dei produttori di
+  // articoli: li' non c'e' nessuna PR ne' un reviewer a vedere il rosso.
+  assert.equal(isReportableRun({ ...base, workflowName: 'tests', event: 'push', headBranch: 'main' }), true);
+  assert.equal(
+    isReportableRun({ ...base, workflowName: 'Generator CI', event: 'push', headBranch: 'main' }),
+    true,
+  );
+});
+
 test('pull_request resta escluso per qualunque workflow (invariante preesistente)', () => {
   assert.equal(isReportableRun({ ...base, workflowName: 'tests', event: 'pull_request', headBranch: 'main' }), false);
 });
