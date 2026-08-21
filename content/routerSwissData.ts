@@ -1232,6 +1232,12 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposta-successione-donazione-sciaffusa': { it: 'imposta-successione-donazione-sciaffusa', en: 'shaffhausen-inheritance-donation-tax-rates', de: 'schaffhausen-erbschaft-schenkungsteuer-saetze', fr: 'schaffhouse-impot-succession-donation-taux' },
  'premi-lamal-appenzello-esterno-riduzione': { it: 'premi-lamal-appenzello-esterno-riduzione', en: 'lamal-premiums-appenzell-rhodes-reduction', de: 'krankenkasse-appenzell-ausserrhoden-reduktion', fr: 'primes-lamal-appenzell-rhodes-reduction' },
  'centrale-nucleare-costi-14-43-miliardi': { it: 'centrale-nucleare-costi-14-43-miliardi', en: 'swiss-nuclear-plant-costs-14-43-billion', de: 'schweizer-kernkraftwerk-kosten-14-43-milliarden', fr: 'centrale-nucleaire-suisse-couts-14-43-milliards' },
+ 'premi-franchigie-appenzello-esterno': { it: 'premi-franchigie-appenzello-esterno', en: 'health-insurance-appenzell-outsrhoden-deductibles', de: 'praemien-franchisen-appenzell-ausserrhoden', fr: 'primes-franchises-appenzell-rhodes-exterieures' },
+ 'permesso-dimora-b-appenzello-esterno': { it: 'permesso-dimora-b-appenzello-esterno', en: 'residence-permit-b-appenzell-ausserrhoden', de: 'aufenthaltserlaubnis-b-appenzell-ausserrhoden', fr: 'permis-sejour-b-appenzell-rhodes-exterieures' },
+ 'permesso-c-appenzello-esterno-domanda': { it: 'permesso-c-appenzello-esterno-domanda', en: 'residence-permit-c-appenzell-outer-rhodes-requirements', de: 'aufenthaltserlaubnis-c-appenzell-ausserrhoden-voraussetzungen', fr: 'permis-domicile-c-appenzell-rhodes-exte-conditions-demande' },
+ 'permesso-l-cantone-appenzello-validita': { it: 'permesso-l-cantone-appenzello-validita', en: 'permit-l-short-term-appenzell-ausserrhoden-validity', de: 'kurzaufenthalt-appenzell-ausserrhoden-gultigkeit', fr: 'permis-l-appenzell-rhodes-exterieures-validite' },
+ 'assegni-familiari-appenzello-esterno': { it: 'assegni-familiari-appenzello-esterno', en: 'family-allowances-appenzell-ausserrhoden', de: 'familienzulagen-appenzell-ausserrhoden', fr: 'allocations-familiales-appenzell-rhodes-exterieures' },
+ 'asilo-custodia-appenzello-esterno': { it: 'asilo-custodia-appenzello-esterno', en: 'childcare-daycare-appenzell-rhodes-outer', de: 'kinderbetreuung-appenzell-ausserrhoden-kosten', fr: 'garde-enfants-appenzell-rhodes-exterieures' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

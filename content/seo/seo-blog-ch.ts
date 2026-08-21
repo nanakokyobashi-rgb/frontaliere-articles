@@ -46937,6 +46937,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-premi-franchigie-appenzello-esterno': {
+    title: 'Premi cassa malati Appenzello Esterno: franchigie e sussidi',
+    description: 'Come funziona l\'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, appenzello',
+    ogTitle: 'Premi cassa malati Appenzello Esterno: franchigie',
+    ogDescription: 'Come funziona l\'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.',
+    canonicalPath: '/articoli-svizzera/premi-franchigie-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Appenzello Esterno: franchigie e sussidi",
+      "description": "Come funziona l'assicurazione malattia in Appenzello Esterno: franchigie disponibili, modelli di copertura e procedure per accedere ai sussidi sui premi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-franchigie-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo cantonale svizzero che rappresenta i servizi sanitari regionali"
+      },
+      "datePublished": "2026-08-21T00:08:39+00:00",
+      "dateModified": "2026-08-21T00:08:39+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-franchigie-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-dimora-b-appenzello-esterno': {
+    title: 'Permesso di dimora B Appenzello Esterno: requisiti e rinnovo',
+    description: 'Guida al permesso B svizzero ad Appenzello Esterno: requisiti, documenti, durata, procedura di rinnovo e ufficio della migrazione cantonale. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, dimora, appenzello, esterno',
+    ogTitle: 'Permesso di dimora B Appenzello Esterno: requisiti e rinnovo',
+    ogDescription: 'Procedura completa per richiedere e rinnovare il permesso di dimora B in Svizzera: documentazione necessaria, durata, e come rivolgersi all\'ufficio della migrazione di Appenzello Esterno.',
+    canonicalPath: '/articoli-svizzera/permesso-dimora-b-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso di dimora B Appenzello Esterno: requisiti e rinnovo",
+      "description": "Guida al permesso B svizzero ad Appenzello Esterno: requisiti, documenti, durata, procedura di rinnovo e ufficio della migrazione cantonale. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-dimora-b-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio della migrazione cantonale svizzero: sportello con personale che assiste un richiedente con documentazione per il permesso di dimora."
+      },
+      "datePublished": "2026-08-21T00:16:38+00:00",
+      "dateModified": "2026-08-21T00:16:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-dimora-b-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-c-appenzello-esterno-domanda': {
+    title: 'Permesso C Appenzello Esterno: requisiti e domanda',
+    description: 'Guida ai requisiti, tempi di residenza, criteri di integrazione e procedura di domanda per il permesso di domicilio C nel canton Appenzello Esterno.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, appenzello, esterno, requisiti',
+    ogTitle: 'Permesso C Appenzello Esterno: tutto sulla domanda',
+    ogDescription: 'Scopri i requisiti di residenza, i criteri di integrazione linguistica e la procedura per richiedere il permesso di domicilio C nel canton Appenzello Esterno. Guida step-by-step ai tempi, documenti e esame della domanda.',
+    canonicalPath: '/articoli-svizzera/permesso-c-appenzello-esterno-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C Appenzello Esterno: requisiti e domanda",
+      "description": "Guida ai requisiti, tempi di residenza, criteri di integrazione e procedura di domanda per il permesso di domicilio C nel canton Appenzello Esterno.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-appenzello-esterno-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero durante l'elaborazione di una domanda di permesso di residenza C"
+      },
+      "datePublished": "2026-08-21T00:38:18+00:00",
+      "dateModified": "2026-08-21T00:38:18+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-appenzello-esterno-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-permesso-l-cantone-appenzello-validita': {
+    title: 'Permesso L Appenzello Esterno: validità e rinnovo',
+    description: 'Permesso L di breve durata in Appenzello Esterno: durata 12 mesi, criteri rinnovo, passaggio a permesso B, vincoli datore lavoro. Guida pratica per datori',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, appenzello, esterno, validità',
+    ogTitle: 'Permesso L Appenzello Esterno: validità e rinnovo',
+    ogDescription: 'Scopri come funziona il permesso L in Appenzello Esterno: durata 12 mesi, criteri rinnovo, passaggio a permesso B, procedure SEM e autorità cantonali. Guida per datori e lavoratori stranieri.',
+    canonicalPath: '/articoli-svizzera/permesso-l-cantone-appenzello-validita/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso L Appenzello Esterno: validità e rinnovo",
+      "description": "Permesso L di breve durata in Appenzello Esterno: durata 12 mesi, criteri rinnovo, passaggio a permesso B, vincoli datore lavoro. Guida pratica per datori",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-l-cantone-appenzello-validita.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio SEM per la gestione di permessi L di breve durata per lavoratori stranieri in Appenzello Esterno"
+      },
+      "datePublished": "2026-08-21T01:01:59+00:00",
+      "dateModified": "2026-08-21T01:01:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-l-cantone-appenzello-validita/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-assegni-familiari-appenzello-esterno': {
+    title: 'Assegni familiari Appenzello Esterno: importi e domanda',
+    description: 'Guida completa agli assegni familiari in Appenzello Esterno: come funziona il sistema federale-cantonale, condizioni di diritto, cassa di compensazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, appenzello, esterno',
+    ogTitle: 'Assegni familiari Appenzello Esterno: importi e domanda',
+    ogDescription: 'Guida completa agli assegni familiari in Appenzello Esterno: come funziona il sistema federale-cantonale, condizioni di diritto, cassa di compensazione e procedura di domanda.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari Appenzello Esterno: importi e domanda",
+      "description": "Guida completa agli assegni familiari in Appenzello Esterno: come funziona il sistema federale-cantonale, condizioni di diritto, cassa di compensazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero con documenti di assegni familiari su scrivania"
+      },
+      "datePublished": "2026-08-21T01:22:00+00:00",
+      "dateModified": "2026-08-21T01:22:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-asilo-custodia-appenzello-esterno': {
+    title: 'Asilo nido e custodia: costi in Appenzello Esterno',
+    description: 'Servizi di custodia nel canton Appenzello Esterno: tariffe progressive, sussidi cantonali, deduzioni fiscali e congedi parentali. Guida completa e pratica.',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, nido, custodia, costi',
+    ogTitle: 'Custodia bambini Appenzello Esterno: tariffe, sussidi e deduzioni',
+    ogDescription: 'Scopri come funzionano gli asili nido, famiglie diurne e doposcuola nel canton Appenzello Esterno. Tariffe legate al reddito, sussidi cantonali e deduzioni fiscali per famiglie con bambini piccoli.',
+    canonicalPath: '/articoli-svizzera/asilo-custodia-appenzello-esterno/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo nido e custodia: costi in Appenzello Esterno",
+      "description": "Servizi di custodia nel canton Appenzello Esterno: tariffe progressive, sussidi cantonali, deduzioni fiscali e congedi parentali. Guida completa e pratica.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/asilo-custodia-appenzello-esterno.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bambini che giocano all'aperto presso una struttura di custodia svizzera con vista su montagne alpine"
+      },
+      "datePublished": "2026-08-21T01:51:49+00:00",
+      "dateModified": "2026-08-21T01:51:49+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/asilo-custodia-appenzello-esterno/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

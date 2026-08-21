@@ -10308,6 +10308,21 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.title': 'Wohnen in Buguggiate und Arbeiten im Tessin als Grenzgänger',
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.excerpt': 'Steuerliche Einstellungen, Verbindungen und empfohlene Zonen für Grenzgänger, die in Buguggiate leben und im Tessin arbeiten',
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.imageAlt': 'Landschaft mit See und Bergen im Tessin',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.title': 'Leben in Lasnigo und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.excerpt': 'Quellensteuer in der Schweiz für Grenzgänger: nur in der Schweiz einbehalten.',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.imageAlt': 'Ein Frontalier aus Lasnigo arbeitet in Ticino',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.title': 'Wohnen in Mozzate und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.excerpt': 'Praktischer Leitfaden für diejenigen, die Mozzate als Wohnsitz im Kanton Tessin wählen: Steuern, Mobilität und das neue Abkommen über Grenzgänger.',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.imageAlt': 'Grenzgänger bei der Überquerung der Grenze zwischen Italien und der Schweiz',
+    'blog.article.caronno-varesino-frontaliere-ticino.title': 'Caronno Varesino-Ticino: das Steuersystem 2024',
+    'blog.article.caronno-varesino-frontaliere-ticino.excerpt': 'Was Sie über Quellensteuer, AHV und KVG wissen sollten, wenn Sie in Caronno Varesino leben und im Tessin arbeiten. Die Regeln aus der Neuen Vereinbarung 2024.',
+    'blog.article.caronno-varesino-frontaliere-ticino.imageAlt': 'Wohnstraße in Caronno Varesino mit Blick auf die Alpen im Hintergrund',
+    'blog.article.vivere-castronno-lavorare-ticino.title': 'Wohnen in Castronno und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-castronno-lavorare-ticino.excerpt': 'Praktischer Leitfaden für diejenigen, die sich für Castronno entscheiden: Besteuerung, neues Grenzgängerabkommen, Vorsorge und die Vorteile des Pendelns in den Kanton Tessin.',
+    'blog.article.vivere-castronno-lavorare-ticino.imageAlt': 'Hügellandschaft zwischen Italien und der Schweiz',
+    'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Leben in Lonate Ceppino: Grenzführer Tessin',
+    'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Steuerstruktur, Sozialbeiträge und praktische Verfahren für diejenigen, die sich entscheiden, im Varesotto zu leben und im Tessin mit dem Neuen Frontalieri-Abkommen zu arbeiten.',
+    'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Grenzstrasse zwischen Italien und der Schweiz in der Region Mendrisiotto mit Alpenpanorama',
 };
 
 export default blogMetaDe;

@@ -72455,6 +72455,201 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vivere-lasnigo-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Lasnigo e lavorare in Ticino da frontaliere',
+    description: 'Imposta alla fonte in Svizzera per i frontalieri: trattenuta solo in Svizzera. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, lasnigo, lavorare, imposta',
+    ogTitle: 'Vivere a Lasnigo e lavorare in Ticino da frontaliere',
+    ogDescription: 'Imposta alla fonte in Svizzera per i frontalieri: trattenuta solo in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/vivere-lasnigo-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Lasnigo e lavorare in Ticino da frontaliere",
+      "description": "Imposta alla fonte in Svizzera per i frontalieri: trattenuta solo in Svizzera. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-lasnigo-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un frontaliere di Lasnigo che lavora in Ticino"
+      },
+      "datePublished": "2026-08-21T00:29:11+00:00",
+      "dateModified": "2026-08-21T00:29:11+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-lasnigo-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-mozzate-lavorare-ticino-frontaliere': {
+    title: 'Vivere a Mozzate e lavorare in Ticino da frontaliere',
+    description: 'Guida per frontalieri a Mozzate: scopri come funziona il nuovo accordo fiscale, le tasse e la previdenza lavorando in Ticino. Info pratiche aggiornate.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, mozzate, lavorare, pratica',
+    ogTitle: 'Vivere a Mozzate e lavorare in Ticino da frontaliere',
+    ogDescription: 'Tutto quello che un frontaliere che vive a Mozzate deve sapere: fiscalità, nuovo accordo, previdenza e gestione della busta paga in Canton Ticino.',
+    canonicalPath: '/articoli-frontaliere/vivere-mozzate-lavorare-ticino-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Mozzate e lavorare in Ticino da frontaliere",
+      "description": "Guida per frontalieri a Mozzate: scopri come funziona il nuovo accordo fiscale, le tasse e la previdenza lavorando in Ticino. Info pratiche aggiornate.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-mozzate-lavorare-ticino-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Pendolare frontaliero che attraversa il confine tra Italia e Svizzera"
+      },
+      "datePublished": "2026-08-21T00:49:57+00:00",
+      "dateModified": "2026-08-21T00:49:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-mozzate-lavorare-ticino-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-caronno-varesino-frontaliere-ticino': {
+    title: 'Caronno Varesino-Ticino: il regime fiscale 2024',
+    description: 'Guida pratica: come funziona la tassazione, i contributi AVS e l\'assicurazione malattia per frontalieri che vivono a Caronno Varesino e lavorano in Ticino',
+    keywords: 'frontalieri, ticino, svizzera, italia, caronno, varesino-ticino, regime, fiscale',
+    ogTitle: 'Caronno Varesino-Ticino: regime fiscale 2024 per frontalieri',
+    ogDescription: 'Sei frontaliere da Caronno Varesino e lavori in Ticino? Scopri come funzionano imposta alla fonte, AVS, LPP e LAMal, con i dettagli del Nuovo Accordo 2024 e le procedure annuali di dichiarazione.',
+    canonicalPath: '/articoli-frontaliere/caronno-varesino-frontaliere-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Caronno Varesino-Ticino: il regime fiscale 2024",
+      "description": "Guida pratica: come funziona la tassazione, i contributi AVS e l'assicurazione malattia per frontalieri che vivono a Caronno Varesino e lavorano in Ticino",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/caronno-varesino-frontaliere-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada residenziale a Caronno Varesino, provincia di Varese, con le Alpi sullo sfondo"
+      },
+      "datePublished": "2026-08-21T01:13:01+00:00",
+      "dateModified": "2026-08-21T01:13:01+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/caronno-varesino-frontaliere-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-vivere-castronno-lavorare-ticino': {
+    title: 'Vivere a Castronno e lavorare in Ticino da frontaliere',
+    description: 'Vivi a Castronno e lavori in Ticino? Scopri le regole sul nuovo accordo frontalieri, tassazione, franchigie e previdenza per i lavoratori transfrontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, castronno, lavorare, pratica',
+    ogTitle: 'Vivere a Castronno e lavorare in Ticino da frontaliere',
+    ogDescription: 'Guida completa per i frontalieri residenti a Castronno: fiscale, previdenza e nuovo accordo 2024. Tutto quello che devi sapere per il tuo lavoro in Svizzera.',
+    canonicalPath: '/articoli-frontaliere/vivere-castronno-lavorare-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Castronno e lavorare in Ticino da frontaliere",
+      "description": "Vivi a Castronno e lavori in Ticino? Scopri le regole sul nuovo accordo frontalieri, tassazione, franchigie e previdenza per i lavoratori transfrontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vivere-castronno-lavorare-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Paesaggio collinare tra Italia e Svizzera"
+      },
+      "datePublished": "2026-08-21T01:42:28+00:00",
+      "dateModified": "2026-08-21T01:42:28+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/vivere-castronno-lavorare-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-lonate-ceppino-frontaliere-ticino': {
+    title: 'Vivere a Lonate Ceppino: guida frontaliere Ticino',
+    description: 'Vivere a Lonate Ceppino e lavorare in Ticino: imposta alla fonte, contributi AVS/LPP, Permesso G, dichiarazione redditi. Nuovo Accordo Frontalieri dal 2024.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vivere, lonate, ceppino, struttura',
+    ogTitle: 'Lonate Ceppino: guida pratica frontaliere Ticino 2024',
+    ogDescription: 'Struttura fiscale, contributi sociali e procedure complete per chi vive a Lonate Ceppino e lavora in Ticino. Esenzioni Nuovo Accordo €7.500–€10.000, imposta alla fonte svizzera, permesso G.',
+    canonicalPath: '/articoli-frontaliere/lonate-ceppino-frontaliere-ticino',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Vivere a Lonate Ceppino: guida frontaliere Ticino",
+      "description": "Vivere a Lonate Ceppino e lavorare in Ticino: imposta alla fonte, contributi AVS/LPP, Permesso G, dichiarazione redditi. Nuovo Accordo Frontalieri dal 2024.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/lonate-ceppino-frontaliere-ticino.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Strada frontaliera tra Italia e Svizzera nel Mendrisiotto, con paesaggio alpino ticinese sullo sfondo"
+      },
+      "datePublished": "2026-08-21T01:57:43+00:00",
+      "dateModified": "2026-08-21T01:57:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/lonate-ceppino-frontaliere-ticino/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

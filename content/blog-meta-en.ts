@@ -10309,6 +10309,21 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.title': 'Living in Buguggiate and working in Ticino as a border worker',
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.excerpt': 'Tax settings, connections and recommended areas for border crossers living in Buguggiate and working in Ticino',
     'blog.article.vivere-buguggiate-lavorare-ticino-frontaliere.imageAlt': 'Landscape with lake and mountains in Ticino',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.title': 'Living in Lasnigo and working in Ticino as a border worker',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.excerpt': 'Tax at source in Switzerland for frontier workers: only withheld in Switzerland.',
+    'blog.article.vivere-lasnigo-lavorare-ticino-frontaliere.imageAlt': 'A frontaliere from Lasnigo working in Ticino',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.title': 'Living in Mozzate and working in Ticino as a border worker',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.excerpt': 'Practical guide for those who choose Mozzate as a residence working in the Canton of Ticino: taxes, mobility and the new agreement on border workers.',
+    'blog.article.vivere-mozzate-lavorare-ticino-frontaliere.imageAlt': 'Cross-border worker crossing the border between Italy and Switzerland',
+    'blog.article.caronno-varesino-frontaliere-ticino.title': 'Caronno Varesino-Ticino: the 2024 tax regime',
+    'blog.article.caronno-varesino-frontaliere-ticino.excerpt': 'What to know about tax at source, AVS and LAMal when you live in Caronno Varesino and work in Ticino. The rules from the 2024 New Deal.',
+    'blog.article.caronno-varesino-frontaliere-ticino.imageAlt': 'Residential street in Caronno Varesino, Varese province, with the Alps visible',
+    'blog.article.vivere-castronno-lavorare-ticino.title': 'Living in Castronno and working in Ticino as a border worker',
+    'blog.article.vivere-castronno-lavorare-ticino.excerpt': 'Practical guide for those who choose Castronno: taxation, new border agreements, social security and the advantages of commuting to the Canton of Ticino.',
+    'blog.article.vivere-castronno-lavorare-ticino.imageAlt': 'Hilly landscape between Italy and Switzerland',
+    'blog.article.lonate-ceppino-frontaliere-ticino.title': 'Living in Lonate Ceppino: Ticino border guide',
+    'blog.article.lonate-ceppino-frontaliere-ticino.excerpt': 'Tax structure, social contributions and practical procedures for those who choose to live in Varese and work in Ticino with the New Frontier Agreement.',
+    'blog.article.lonate-ceppino-frontaliere-ticino.imageAlt': 'Highway at Swiss-Italian border in Ticino region with Alpine landscape view',
 };
 
 export default blogMetaEn;
