@@ -1,9 +1,5 @@
 {
   "keywords": [
-    "avs e prestazioni complementari canton Berna cassa di compensazione",
-    "aprire un'attività canton Berna registro di commercio e costi",
-    "salari e mercato del lavoro canton Berna settori e livelli",
-    "imposta di successione e donazione canton Berna aliquote",
     "permesso di dimora B canton Lucerna requisiti e rinnovo",
     "permesso di domicilio C canton Lucerna requisiti e domanda",
     "permesso L di breve durata canton Lucerna validità e proroga",
@@ -499,7 +495,11 @@
     "vivere a Montagna in Valtellina e lavorare in Grigioni da frontaliere",
     "vivere a San Giacomo Filippo e lavorare in Grigioni da frontaliere",
     "vivere a Corteno Golgi e lavorare in Grigioni da frontaliere",
-    "vivere a Faedo Valtellino e lavorare in Grigioni da frontaliere"
+    "vivere a Faedo Valtellino e lavorare in Grigioni da frontaliere",
+    "vivere a Chiesa in Valmalenco e lavorare in Grigioni da frontaliere",
+    "vivere a Glorenza e lavorare in Grigioni da frontaliere",
+    "vivere a Malles Venosta e lavorare in Grigioni da frontaliere",
+    "vivere a Mese e lavorare in Grigioni da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -734,6 +734,9 @@
     "vivere a Jerago con Orago e lavorare in Ticino da frontaliere": 1,
     "vivere a Musso e lavorare in Ticino da frontaliere": 1,
     "vivere a Abbadia Lariana e lavorare in Ticino da frontaliere": 1,
-    "vivere a Tubre e lavorare in Grigioni da frontaliere": 1
+    "vivere a Tubre e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Torre di Santa Maria e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Sluderno e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere": 1
   }
 }
