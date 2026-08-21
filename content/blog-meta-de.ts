@@ -10388,6 +10388,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-cavaria-lavorare-ticino-frontaliere.title': 'Leben in Cavaria, Arbeit im Tessin: Leitführer für grenzüberschreitende Pendler',
     'blog.article.vivere-cavaria-lavorare-ticino-frontaliere.excerpt': 'Steuerrecht, Quellensteuer, AHV- und BVG-Beiträge: der vollständige Leitfaden für grenzüberschreitende Pendler, die sich entscheiden, in Cavaria con Premezzo zu leben und als Angestellte in Tessin zu arbeiten.',
     'blog.article.vivere-cavaria-lavorare-ticino-frontaliere.imageAlt': 'Blick auf Mendrisio, Grenzstadt Tessin an der Grenze Italien-Schweiz mit Alpenpanorama',
+    'blog.article.civate-frontaliere-ticino-lavoro.title': 'Leben in Civate und Arbeiten im Tessin: der Reiseführer',
+    'blog.article.civate-frontaliere-ticino-lavoro.excerpt': 'Bewilligungen, Steuern, AHV und alles, was Sie wissen müssen, um in das Grenzgebiet zu ziehen und im Tessin Grenzgänger zu werden.',
+    'blog.article.civate-frontaliere-ticino-lavoro.imageAlt': 'Panoramaaussicht auf den Comer See, typische Landschaft für Grenzgänger, die im Tessin arbeiten',
+    'blog.article.vivere-lierna-lavorare-ticino.title': 'Leben in Lierna und Arbeiten im Tessin: Praktischer Leitfaden für Grenzgänger',
+    'blog.article.vivere-lierna-lavorare-ticino.excerpt': 'Vollständige Analyse für diejenigen, die sich entscheiden, in Lierna zu leben und im Tessin zu arbeiten: Verbindungen, Quellensteuer, Kosten und Nutzen.',
+    'blog.article.vivere-lierna-lavorare-ticino.imageAlt': 'Malerischer Blick auf den See und die Berge in Grenznot',
 };
 
 export default blogMetaDe;
