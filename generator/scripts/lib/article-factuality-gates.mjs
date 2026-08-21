@@ -1795,6 +1795,17 @@ export function renderAnchorForPrompt(anchor) {
 }
 
 /**
+ * Escapes `value` so it can be dropped into a RegExp source as a literal —
+ * needed for `org` and `pct` anchors, whose value comes from source text
+ * (an acronym with a dot, a malformed multi-dot percentage) rather than from
+ * a controlled vocabulary. `km` and `date` anchors go through `Number(...)`
+ * first, so they can never carry a metacharacter and don't need this.
+ */
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+/**
  * The RegExp that decides whether a piece of text carries `anchor`.
  *
  * One definition, two callers: `findAnchorSentence` uses it to pick the
@@ -1808,9 +1819,9 @@ export function renderAnchorForPrompt(anchor) {
  */
 function anchorNeedle(anchor) {
   const [kind, value] = String(anchor).split(':');
-  if (kind === 'pct') return new RegExp(String.raw`${value.replace('.', '[.,]')}\s*%`);
+  if (kind === 'pct') return new RegExp(String.raw`${escapeRegExp(value).replace(/\\\./g, '[.,]')}\s*%`);
   if (kind === 'km') return new RegExp(String.raw`${Number(value)}\s*km`, 'i');
-  if (kind === 'org') return new RegExp(String.raw`\b${value}\b`);
+  if (kind === 'org') return new RegExp(String.raw`\b${escapeRegExp(value)}\b`);
   if (kind === 'date') {
     const [y, mo, d] = value.split('-');
     const monthName = Object.keys(MONTHS_IT).find((k) => MONTHS_IT[k] === Number(mo));
@@ -2018,7 +2029,7 @@ export function matchedAnchors(articleText, anchors) {
       const monthName = Object.keys(MONTHS_IT).find((k) => MONTHS_IT[k] === Number(mo));
       if (new RegExp(String.raw`${Number(d)}\s*°?\s+${monthName}\s+${y}`, 'i').test(articleText)) found.add(anchor);
     } else if (kind === 'org') {
-      if (new RegExp(String.raw`\b${value}\b`, 'i').test(articleText)) found.add(anchor);
+      if (new RegExp(String.raw`\b${escapeRegExp(value)}\b`, 'i').test(articleText)) found.add(anchor);
     }
   }
   return found;
