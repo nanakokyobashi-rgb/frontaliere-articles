@@ -1,11 +1,5 @@
 {
   "keywords": [
-    "permesso di dimora B canton Lucerna requisiti e rinnovo",
-    "permesso di domicilio C canton Lucerna requisiti e domanda",
-    "permesso L di breve durata canton Lucerna validità e proroga",
-    "assegni familiari canton Lucerna importi e domanda",
-    "apprendistato e formazione professionale canton Lucerna",
-    "comprare casa canton Lucerna prezzi e mutuo ipotecario",
     "naturalizzazione canton Lucerna requisiti e procedura",
     "aprire un'attività canton Lucerna registro di commercio e costi",
     "salari e mercato del lavoro canton Lucerna settori e livelli",
@@ -499,7 +493,13 @@
     "vivere a Chiesa in Valmalenco e lavorare in Grigioni da frontaliere",
     "vivere a Glorenza e lavorare in Grigioni da frontaliere",
     "vivere a Malles Venosta e lavorare in Grigioni da frontaliere",
-    "vivere a Mese e lavorare in Grigioni da frontaliere"
+    "vivere a Mese e lavorare in Grigioni da frontaliere",
+    "vivere a Torre di Santa Maria e lavorare in Grigioni da frontaliere",
+    "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere",
+    "vivere a Albosaggia e lavorare in Grigioni da frontaliere",
+    "vivere a Gordona e lavorare in Grigioni da frontaliere",
+    "vivere a Edolo e lavorare in Grigioni da frontaliere",
+    "vivere a Lasa e lavorare in Grigioni da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -736,7 +736,7 @@
     "vivere a Abbadia Lariana e lavorare in Ticino da frontaliere": 1,
     "vivere a Tubre e lavorare in Grigioni da frontaliere": 1,
     "vivere a Torre di Santa Maria e lavorare in Grigioni da frontaliere": 1,
-    "vivere a Sluderno e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Sluderno e lavorare in Grigioni da frontaliere": 2,
     "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere": 1
   }
 }
