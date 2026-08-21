@@ -10406,6 +10406,12 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-peglione-lavorare-ticino-frontaliere.title': 'Leben in Peglio und Arbeiten im Tessin: Vor- und Nachteile',
     'blog.article.vivere-peglione-lavorare-ticino-frontaliere.excerpt': 'Verbindungen, Reisezeiten, Lebenshaltungskosten, empfohlene Gebiete für Grenzgänger mit Wohnsitz in Peglio und Arbeitnehmer im Tessin',
     'blog.article.vivere-peglione-lavorare-ticino-frontaliere.imageAlt': 'Frontalieri in Peglio, strategische Lage Grenze Ticino-Italia',
+    'blog.article.frontalieri-calo-secondo-trimestre-2026.title': 'Italienische Grenzgänger rückläufig: -0,6% im Tessin im Q2 2026',
+    'blog.article.frontalieri-calo-secondo-trimestre-2026.excerpt': 'Im zweiten Quartal 2026 sanken die Zuflüsse aus Italien um 1,1%. Im Tessin beträgt der Rückgang 0,6%. Neue Steuervereinbarung und bessere Arbeitsbedingungen in Italien unter den Faktoren.',
+    'blog.article.frontalieri-calo-secondo-trimestre-2026.imageAlt': 'Luganoer Seeufer, wirtschaftliches Zentrum des Tessins, das italienische Grenzgänger im Q2 2026 anzieht',
+    'blog.article.beura-cardezza-frontaliere-ticino.title': 'Beura-Cardezza: Leben und Arbeiten als Grenzgänger Tessin',
+    'blog.article.beura-cardezza-frontaliere-ticino.excerpt': 'In Beura-Cardezza leben und als Grenzgänger im Tessin arbeiten: Steuervorschriften, G-Bewilligung, AHV, Vorsorgeansprüche und was Sie vor dem Umzug wissen müssen.',
+    'blog.article.beura-cardezza-frontaliere-ticino.imageAlt': 'Aussicht auf das Tessin in der Verban-Region an der Schweizer-italienischen Grenze mit traditioneller Architektur und Berglandschaft',
 };
 
 export default blogMetaDe;
