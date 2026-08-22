@@ -2731,6 +2731,52 @@ function write(rel, content) {
   }
 }
 
+// ── Multi-file registration lock (issue #562) ─────────────────
+// The 9-file article registration (router, blog list, i18n, three locale
+// files, SEO service, sitemap, sitemap-news — both here and in the primary
+// AI flow's own write step, which duplicates the same sequence instead of
+// calling registerArticleFiles()) has no cross-file transaction: each write()
+// above is atomic on its OWN target (issue #561), but nothing stops a kill —
+// or any other failure — landing BETWEEN two of the nine calls, which leaves
+// the corpus with an id registered in some files and not others.
+// `generate-article.yml`'s two-section retry loop runs this script twice in
+// the SAME checkout, so a killed first attempt's partial writes are still on
+// disk when the second attempt's `git add -A` later sweeps everything into
+// one commit — nothing before this lock ever compared the 9 files against
+// each other to catch it.
+const REGISTER_LOCK_FILE = '.tmp/register-in-progress.json';
+
+function registerLockPath() {
+  return `${PROJECT_ROOT}/${REGISTER_LOCK_FILE}`;
+}
+
+// Called before the FIRST of the 9 writes. Throws instead of silently
+// overwriting a lock left by an interrupted registration — the corpus may
+// already be inconsistent, and layering a new registration on top would only
+// add a second interleaving nobody could untangle afterwards.
+function beginRegisterLock(id) {
+  const lockPath = registerLockPath();
+  if (existsSync(lockPath)) {
+    let stale = lockPath;
+    try { stale = readFileSync(lockPath, 'utf-8'); } catch { /* keep path */ }
+    throw new Error(
+      `registration lock still present at ${REGISTER_LOCK_FILE} — a previous registration ` +
+        `was interrupted mid-write and the corpus may have an id registered in some of the 9 ` +
+        `files but not others (${stale}). Refusing to start a new registration until the ` +
+        'partial write is inspected by hand and the lock file removed.',
+    );
+  }
+  mkdirSync(path.dirname(lockPath), { recursive: true });
+  writeFileSync(lockPath, JSON.stringify({ id, pid: process.pid, startedAt: new Date().toISOString() }, null, 2), 'utf-8');
+}
+
+// Called only after the LAST of the 9 writes succeeds — never from a
+// catch/finally, or a kill/throw mid-sequence would clear the very marker
+// meant to survive it for the next invocation to trip on.
+function endRegisterLock() {
+  try { unlinkSync(registerLockPath()); } catch { /* already gone */ }
+}
+
 // ── Section config (--section=frontaliere|svizzera) ──────────────
 // Single source of truth for the two parallel article hubs. The overlapping
 // fields (hubSlug/registryFile/slugDataFile/slugsConstName/metaPrefix/bodyDir)
@@ -14615,6 +14661,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -14624,6 +14671,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   modifySeoService(data);
   modifySitemap(data);
   modifySitemapNews(data);
+  endRegisterLock();
 
   // Step 4a.2: RSS feeds — NOT regenerated here any more (issue #4974 item 2).
   //
@@ -15298,6 +15346,7 @@ export async function registerArticleFiles(data, opts = {}) {
   sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -15307,6 +15356,7 @@ export async function registerArticleFiles(data, opts = {}) {
   modifySeoService(data);
   modifySitemap(data);
   if (!opts.skipNews) modifySitemapNews(data);
+  endRegisterLock();
   validateStructuredData(data);
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
