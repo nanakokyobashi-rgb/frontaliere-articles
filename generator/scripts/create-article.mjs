@@ -213,7 +213,7 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
-import { assertTopicNotRecentlyCovered, findRecentTopicCoverage } from './lib/topic-coverage-guard.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
@@ -14425,6 +14425,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // OGNI percorso di generazione — news, evergreen, discovery — mentre il
   // pre-flight evergreen vede solo i candidati evergreen.
   assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  // Step 3a.5: «titolo scollegato dallo slug» (#527) — nella serie
+  // vivere-/trasferirsi- lo slug esce da un template che porta il comune per
+  // costruzione; se il titolo non nomina lo stesso comune promette una guida
+  // e ne consegna un'altra. Stesso punto del gate sopra: id e titolo IT sono
+  // già stabili qui, su ogni percorso di generazione.
+  assertComuneTitleMatchesSlug(data);
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);

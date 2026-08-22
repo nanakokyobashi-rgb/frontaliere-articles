@@ -963,3 +963,57 @@ export function assertTopicNotRecentlyCovered(data, existingArticles, opts = {})
   }
   return data;
 }
+
+// ══════════════════════════════════════════════════════════════════════════
+// Titolo scollegato dallo slug — serie comune-guide (#527)
+// ══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Gli slug della serie escono da un template che porta il comune per
+ * costruzione (`buildComuneEvergreenTopics`, evergreen-topic-generator.mjs):
+ *
+ *   vivere a ${name} e lavorare in ${canton} da frontaliere
+ *   trasferirsi a ${name} da frontaliere pro e contro
+ *
+ * Ristretto a `vivere-`/`trasferirsi-`, non a ogni slug che nomina un
+ * comune: fuori da questa serie un nome di comune nello slug è spesso il
+ * capoluogo di una cronaca (`economia-varese-2024-imposte`,
+ * `devastazione-vagone-como-fermo`), e lì il titolo giustamente non lo
+ * ripete — misurato a 53/489 sul corpus intero, rumore scartato. Dentro la
+ * serie invece slug e titolo DEVONO parlare dello stesso comune. Misurato
+ * (corpus 2026-08-20, 134 articoli della serie): 4 rotti su 134 (3,0 %).
+ */
+const COMUNE_SERIES_ID_RE = /^(vivere-|trasferirsi-)/;
+
+/**
+ * Gate bloccante: nella serie comune-guide, il titolo deve nominare lo
+ * stesso comune dello slug. Usa `comuneTopicKey` sia per lo slug sia per il
+ * titolo — un'unica definizione di «nomina un comune», la stessa che regge
+ * la chiave `comune-guide` sopra.
+ *
+ * @param {object} data — legge data.id e data.content.it.title
+ * @returns {object} lo stesso `data`
+ * @throws {Error} quando il titolo non nomina il comune dello slug
+ */
+export function assertComuneTitleMatchesSlug(data) {
+  const id = String(data?.id || '');
+  if (!COMUNE_SERIES_ID_RE.test(id)) return data;
+  const slugComune = comuneTopicKey(id.replace(/-/g, ' '));
+  if (!slugComune) return data;
+  const title = data?.content?.it?.title || '';
+  const titleComune = comuneTopicKey(title);
+  if (titleComune === slugComune) return data;
+
+  const err = new Error(
+    '❌ TITOLO SCOLLEGATO DALLO SLUG:\n'
+    + `   Slug:   "${id}" → comune ${slugComune}\n`
+    + `   Titolo: "${title}" → comune ${titleComune || '(nessuno)'}\n`
+    + '   Lo slug della serie vivere-/trasferirsi- esce da un template che nomina\n'
+    + '   il comune: il titolo deve nominare lo stesso comune, non un altro o\n'
+    + '   nessuno.',
+  );
+  // Stessa semantica di un rifiuto di qualità: il selettore salta questo
+  // candidato e prova il prossimo invece di abortire l'intera run.
+  err.qualityReject = true;
+  throw err;
+}
