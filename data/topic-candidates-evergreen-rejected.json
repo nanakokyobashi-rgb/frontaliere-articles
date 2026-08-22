@@ -1,10 +1,5 @@
 {
   "keywords": [
-    "avs e prestazioni complementari canton Svitto cassa di compensazione",
-    "aprire un'attività canton Svitto registro di commercio e costi",
-    "salari e mercato del lavoro canton Svitto settori e livelli",
-    "patente di guida canton Svitto conversione ed esami",
-    "imposta di successione e donazione canton Svitto aliquote",
     "premi cassa malati canton Obvaldo e riduzione premi",
     "permesso di dimora B canton Obvaldo requisiti e rinnovo",
     "assegni familiari canton Obvaldo importi e domanda",
@@ -499,7 +494,12 @@
     "vivere a Colorina e lavorare in Grigioni da frontaliere",
     "vivere a Morgex e lavorare in Vallese da frontaliere",
     "vivere a Avise e lavorare in Vallese da frontaliere",
-    "vivere a Arvier e lavorare in Vallese da frontaliere"
+    "vivere a Arvier e lavorare in Vallese da frontaliere",
+    "vivere a Vilminore di Scalve e lavorare in Grigioni da frontaliere",
+    "vivere a Jovençan e lavorare in Vallese da frontaliere",
+    "vivere a Villeneuve e lavorare in Vallese da frontaliere",
+    "vivere a Aymavilles e lavorare in Vallese da frontaliere",
+    "vivere a Introd e lavorare in Vallese da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -739,6 +739,7 @@
     "vivere a Sluderno e lavorare in Grigioni da frontaliere": 2,
     "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere": 1,
     "vivere a Caiolo e lavorare in Grigioni da frontaliere": 1,
-    "vivere a Vilminore di Scalve e lavorare in Grigioni da frontaliere": 1
+    "vivere a Vilminore di Scalve e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Saint-Christophe e lavorare in Vallese da frontaliere": 1
   }
 }
