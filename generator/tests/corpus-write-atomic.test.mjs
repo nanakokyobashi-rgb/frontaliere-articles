@@ -133,8 +133,45 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
   // radice pubblicata — il corpus, il registro degli articoli, `public/data`,
   // `dist/api`. Chi entra in quel gruppo o e' atomico, o sta in una delle due
   // liste di esclusione, che sono il posto dove la ragione e' scritta.
+  //
+  // #571: un choke-point puo' scrivere un path che non nomina mai, perche' lo
+  // importa da un modulo condiviso (`import { X } from './lib/paths.mjs'`) —
+  // il criterio sopra e' un match sul TESTO del singolo file, quindi in quel
+  // caso non troverebbe nulla in silenzio. Per questo il match non gira solo
+  // sul file, ma sulla sua sorgente PIU' quella di ogni modulo che importa con
+  // uno specificatore relativo, seguito ricorsivamente: se il path e' definito
+  // in un modulo importato — come gia' avviene per `corpusPath` via
+  // `lib/corpus-paths.mjs` — quel modulo entra comunque nel testo controllato.
   const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
+
+  const importSourceCache = new Map();
+  const resolveRelativeImport = (fromFile, spec) => {
+    const base = path.resolve(path.dirname(fromFile), spec);
+    for (const candidate of [base, `${base}.mjs`, `${base}.js`, path.join(base, 'index.mjs'), path.join(base, 'index.js')]) {
+      if (fs.existsSync(candidate) && fs.statSync(candidate).isFile()) return candidate;
+    }
+    return null;
+  };
+  // Sorgente raggiungibile da `file` seguendo solo import relativi ('./', '../'),
+  // cosi' i pacchetti npm e i builtin di Node restano fuori. `visited` evita di
+  // rientrare in un ciclo import; la cache evita di rileggere lo stesso modulo
+  // condiviso una volta per ogni choke-point che lo importa.
+  const reachableSource = (file, visited = new Set()) => {
+    if (visited.has(file)) return '';
+    visited.add(file);
+    if (importSourceCache.has(file)) return importSourceCache.get(file);
+    let src;
+    try { src = fs.readFileSync(file, 'utf-8'); } catch { return ''; }
+    let combined = src;
+    for (const m of src.matchAll(/\bfrom\s+'(\.[^']+)'/g)) {
+      const resolved = resolveRelativeImport(file, m[1]);
+      if (resolved) combined += `\n${reachableSource(resolved, visited)}`;
+    }
+    importSourceCache.set(file, combined);
+    return combined;
+  };
+
   const found = [];
   const walk = (d) => {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
@@ -142,7 +179,7 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
       const src = fs.readFileSync(p, 'utf-8');
-      if (/writeFileSync\(/.test(src) && PUBLISHED.test(src)) {
+      if (/writeFileSync\(/.test(src) && PUBLISHED.test(reachableSource(p))) {
         found.push(path.relative(root, p));
       }
     }
