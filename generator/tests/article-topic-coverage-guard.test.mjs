@@ -44,6 +44,8 @@ import {
   hasResidenceGuideIntent,
   municipalityNames,
   professionTopicKey,
+  resetTopicCoverageCaches,
+  setMunicipalityIndexForTests,
   topicCoverageKey,
 } from '../scripts/lib/topic-coverage-guard.mjs';
 import {
@@ -996,5 +998,46 @@ describe('assertComuneTitleMatchesSlug — immune fuori dalla serie vivere-/tras
       'Nuove regole fiscali per i frontalieri: cosa cambia nel 2024',
     );
     expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — fail-closed su indice comuni vuoto o troncato (#553)', () => {
+  it('BLOCCA (non ignora silenziosamente) quando municipalityIndex() è vuoto', () => {
+    setMunicipalityIndexForTests(new Map());
+    try {
+      const data = dataWithTitle(
+        'vivere-besano-lavorare-ticino',
+        'Vivere a Besano e lavorare in Ticino: guida per frontalieri',
+      );
+      expect(() => assertComuneTitleMatchesSlug(data)).toThrow(/INDICE COMUNI/);
+    } finally {
+      resetTopicCoverageCaches();
+    }
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — copre i verbi di intento oltre vivere-/trasferirsi- (#553)', () => {
+  it('BLOCCA su slug abitare- quando il titolo nomina un comune diverso', () => {
+    const data = dataWithTitle(
+      'abitare-besano-lavorare-ticino',
+      'Vivere a Mendrisio e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('PASSA su slug abitare- quando il titolo nomina lo stesso comune', () => {
+    const data = dataWithTitle(
+      'abitare-besano-lavorare-ticino',
+      'Abitare a Besano e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+
+  it('BLOCCA su slug risiedere- quando il titolo non nomina alcun comune', () => {
+    const data = dataWithTitle(
+      'risiedere-besano-lavorare-ticino',
+      'Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
   });
 });
