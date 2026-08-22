@@ -283,7 +283,11 @@ export const TOPIC_COVERAGE_WINDOW_DAYS = Number.parseInt(
  * l'unico falso positivo che le 92 coppie a 7 giorni contenessero. Senza di
  * essi il corpus non ne produce nessuno.
  */
-const GUIDE_INTENT_RE = /(stipendi|salari|guadagn|retribuz|requisit|lavorare come|lavoro come|quanto guadagna|diventare|inquadrament|riconoscimento del titolo|riconoscimento del diploma)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «ridiventare celebre» e «prerequisiti per il
+// visto» accendevano rispettivamente `diventare` e `requisit`. Stesso
+// anti-pattern e stesso fix di `RESIDENCE_INTENT_RE` (#530).
+const GUIDE_INTENT_RE = /\b(stipendi|salari|guadagn|retribuz|requisit|lavorare come|lavoro come|quanto guadagna|diventare|inquadrament|riconoscimento del titolo|riconoscimento del diploma)/;
 
 /**
  * Chiave-mestiere deterministica per il testo di un articolo.
@@ -732,7 +736,10 @@ const CANTON_THEMES = [
  * cantonale marcava gli evergreen del pool: «Voto Zurigo: alloggi e premi
  * cassa malati» bloccava `premi-cassa-malati-lamal-2026-canton-zurigo`.
  */
-const CANTON_GUIDE_INTENT_RE = /(guida|confronto|confrontare|come funziona|come scegliere|vantaggi|strategi|quanto costa|calcolo|requisit|funzionamento)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «svantaggi del cantone» accendeva `vantaggi`.
+// Stesso anti-pattern e stesso fix di `RESIDENCE_INTENT_RE` (#530).
+const CANTON_GUIDE_INTENT_RE = /\b(guida|confronto|confrontare|come funziona|come scegliere|vantaggi|strategi|quanto costa|calcolo|requisit|funzionamento)/;
 
 /** Il valore «nessun cantone nominato»: l'articolo nazionale. */
 const NATIONAL_CANTON = 'svizzera';
