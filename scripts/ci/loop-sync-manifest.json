@@ -468,9 +468,9 @@
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "cf0697e05b786586",
-        "corpus": "cf0697e05b786586",
-        "alignedAt": "2026-08-18"
+        "site": "8d41ac44922f6da9",
+        "corpus": "8d41ac44922f6da9",
+        "alignedAt": "2026-08-22"
       }
     },
     {
