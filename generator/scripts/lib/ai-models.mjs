@@ -1056,12 +1056,33 @@ const CLAUDE_CLI_MIN_TIMEOUT_MS = 180_000;
 //   - lo stdout e' letto in flowing mode (`child.stdout.on('data')`), quindi
 //     non esiste backpressure che possa bloccare il figlio.
 //
-// L'anello non e' limitabile da qui: questa CLI non ha `--max-turns`
+// L'anello non e' limitabile DAL CLI: questa CLI non ha `--max-turns`
 // (verificato su 2.1.235). Cio' che si puo' fare, e che questo modulo ora fa,
 // e' non BUTTARE il primo giro: l'articolo del tentativo rifiutato e' completo
 // e pubblicabile — nella riproduzione sopra mancava solo `reason`, che lo
 // schema ammette null. Vedi trace.salvage() e _salvageClaudeCliPayload.
+//
+// Dal lato nostro pero' l'anello E' limitabile: vedi
+// CLAUDE_CLI_MAX_STRUCTURED_ATTEMPTS piu' sotto, che tronca il processo (non
+// il CLI) quando i giri superano il tetto.
 const CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL = 'StructuredOutput';
+
+// ── TETTO AI GIRI DI STRUCTUREDOUTPUT (#505, dati 2026-08-22) ───────────────
+//
+// Finestra post-merge di #491 aperta: 223 chiamate `claude-cli/haiku` sopra la
+// soglia 🐢, run dal 2026-08-20T22:56Z al 2026-08-22T00:06Z. Distribuzione di
+// `structuredAttempts`: 1 giro 178/223 (80%), 2 giri 39/223, 3 giri 3/223,
+// 4 giri 2/223, 5 giri 1/223 — quindi un tetto a 2 lascia passare il 97,3% dei
+// casi senza toccarli e interrompe solo la coda che sta gia' bruciando 3-5
+// giri (~3m30s l'uno, vedi sopra) per un guadagno marginale: il tentativo
+// rifiutato e' gia' un articolo pubblicabile via trace.salvage(), quindi oltre
+// il tetto non c'e' niente da guadagnare che non si abbia gia'.
+const CLAUDE_CLI_MAX_STRUCTURED_ATTEMPTS = (() => {
+  const raw = (process.env.CLAUDE_CLI_MAX_STRUCTURED_ATTEMPTS || '').trim();
+  if (!raw) return 2;
+  const n = Number(raw);
+  return Number.isInteger(n) && n > 0 ? n : 2;
+})();
 
 // Tetto per una singola chiamata al CLI, per quanto grande sia l'allowance
 // residua. Serve a impedire che una sezione lunga (allowance 2400s) regali
@@ -5632,7 +5653,32 @@ async function _runClaudeCliProcess(args, timeoutMs) {
       err.transportFault = true;
       reject(err);
     }, timeoutMs);
-    child.stdout.on('data', (d) => { stdout += d; trace.feed(d); });
+    child.stdout.on('data', (d) => {
+      stdout += d;
+      trace.feed(d);
+      // Tetto ai giri di StructuredOutput (#505): un giro oltre il tetto arriva
+      // sempre a blocco intero (vedi absorbAssistantBlocks), quindi a questo
+      // punto trace.salvage() e' gia' un candidato completo — troncare qui
+      // invece di aspettare il timeout di sezione e' cio' che limita il costo
+      // della coda che l'anello non lascia limitare dal CLI.
+      if (!settled && trace.state.structuredAttempts > CLAUDE_CLI_MAX_STRUCTURED_ATTEMPTS) {
+        settled = true;
+        clearTimeout(timer);
+        child.kill('SIGKILL');
+        const stderrExcerpt = stderr ? ` — stderr: ${stderr.slice(0, 300)}` : '';
+        const stdoutExcerpt = ` — stdout: ${stdout.length} bytes`
+          + (stdout ? `: ${stdout.slice(0, 200)}` : ' (nessun byte scritto dal processo)');
+        const streamExcerpt = trace.describe();
+        const err = new Error(
+          `claude CLI: tetto di ${CLAUDE_CLI_MAX_STRUCTURED_ATTEMPTS} giri-schema superato `
+          + `(${trace.state.structuredAttempts} tentativi)${streamExcerpt}${stderrExcerpt}${stdoutExcerpt}`,
+        );
+        err.name = 'TimeoutError';
+        err.claudeCliSalvage = trace.salvage();
+        err.transportFault = true;
+        reject(err);
+      }
+    });
     child.stderr.on('data', (d) => { stderr += d; });
     child.on('error', (err) => {
       if (settled) return;
