@@ -29,7 +29,7 @@
  */
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync, existsSync, readFileSync, renameSync, unlinkSync } from 'node:fs';
 import { rankingFromStats, trendFromStats, computeFunFacts, computeWeekWindow, computeMovers } from './lib/border-wait-ranking.mjs';
 import { buildBorderWaitRankingArticle } from './lib/border-wait-ranking-content.mjs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
@@ -39,6 +39,18 @@ import { corpusPath } from './lib/corpus-paths.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+
+// Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
+// Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
+// same-day) sotto `generate-border-wait-ranking-weekly.yml`, che ha `timeout-minutes` e quindi uccide con
+// SIGKILL: un `writeFileSync` diretto sul target puo' lasciarlo troncato a
+// meta' scrittura. `renameSync` e' un singolo syscall POSIX, atomico sullo
+// stesso filesystem — e il temp sta accanto al target proprio perche' il
+// rename non attraversi mai un confine di filesystem. Stesso pattern di
+// `writeCorpusFile()` in lib/evergreen-article-refresh.mjs e lib/
+// article-meta-refresh.mjs, che questa PR ha gia' convertito: qui era
+// rimasto scoperto il call-site che li CHIAMA.
+let writeTmpSeq = 0;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // `../..`: the transport moved this from `scripts/` to `generator/scripts/`,
@@ -164,7 +176,14 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     // esatta una riparazione futura (issue #95). Si registra prima, con il
     // contesto che conserva la coppia (byte, carattere seguente).
     reportStrippedControlChars(file, body, clean);
-    writeFileSync(file, clean);
+    const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+    try {
+      writeFileSync(tmp, clean);
+      renameSync(tmp, file);
+    } catch (err) {
+      try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+      throw err;
+    }
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
 }
@@ -228,10 +247,24 @@ async function main() {
   }
 
   mkdirSync(path.dirname(RANKING_JSON_PATH), { recursive: true });
-  writeFileSync(
-    RANKING_JSON_PATH,
-    JSON.stringify(buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart, weekEnd, movers }), null, 2) + '\n',
-  );
+  // Atomico come le scritture del body, e per una ragione PIU' forte: questo
+  // JSON viene ripubblicato verbatim in `dist/api/border-wait-ranking.json` da
+  // scripts/build-api.mjs, che ne fa `JSON.parse` senza catch. Un SIGKILL da
+  // `timeout-minutes` a meta' di questa scrittura lascia un JSON troncato, e
+  // il parse che lancia interrompe l'INTERO build-api: non solo la ranking
+  // chart, ma manifest, articles.json, feed e meta restano fermi alla versione
+  // precedente finche' qualcuno non ripara il file a mano.
+  const rankingTmp = `${RANKING_JSON_PATH}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(
+      rankingTmp,
+      JSON.stringify(buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart, weekEnd, movers }), null, 2) + '\n',
+    );
+    renameSync(rankingTmp, RANKING_JSON_PATH);
+  } catch (err) {
+    try { unlinkSync(rankingTmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
   console.log(`  ✅ ${path.relative(REPO_ROOT, RANKING_JSON_PATH)}`);
 
   if (!exists) {

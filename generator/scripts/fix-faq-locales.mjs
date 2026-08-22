@@ -15,7 +15,7 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync } from 'fs';
 import { resolve, basename } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname } from 'path';
@@ -28,13 +28,29 @@ import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
+//
+// Commits via temp+rename (issue #561, same rule as create-article.mjs's
+// write()): this rewrites an EXISTING content/*.faq body in place, reached
+// from `batch-faq-articles.yml` (`timeout-minutes`, same SIGKILL mechanism
+// issue #561 fixes) — a direct writeFileSync on the target can leave it
+// truncated mid-write. `renameSync` is a single POSIX syscall, atomic on the
+// same filesystem; the temp file lives next to the target so the rename
+// never crosses a filesystem boundary.
+let writeTmpSeq = 0;
 function writeCorpusFile(filePath, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(filePath, content, clean);
-  writeFileSync(filePath, clean, 'utf-8');
+  const tmp = `${filePath}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, filePath);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 const __filename = fileURLToPath(import.meta.url);

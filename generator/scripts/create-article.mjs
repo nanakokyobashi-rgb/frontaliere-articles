@@ -60,7 +60,7 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
@@ -2702,13 +2702,33 @@ function read(rel) {
 // This is the single write choke point for the generator, so stripping here
 // is what makes it IMPOSSIBLE for the corpus to receive one, rather than
 // relying on every future write call site to remember to sanitize.
+//
+// Monotonic counter so two writes in the same process to the same target
+// still get distinct temp files — the pid alone would not disambiguate them
+// (mirrors the counter in lib/atomic-write-json.mjs).
+let writeTmpSeq = 0;
+
+// Commits via temp+rename (issue #561): `generate-article.yml`'s external
+// kill lands as SIGKILL 100% of the time (unhandleable), so only the
+// atomicity of this single write protects a `content/*.ts` file from being
+// left truncated/syntactically broken at its final path. `renameSync` is a
+// single POSIX syscall, atomic on the same filesystem. The temp file lives
+// next to the target so the rename never crosses a filesystem boundary.
 function write(rel, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(rel, content, clean);
-  writeFileSync(resolve(rel), clean, 'utf-8');
+  const target = resolve(rel);
+  const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, target);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 // ── Section config (--section=frontaliere|svizzera) ──────────────

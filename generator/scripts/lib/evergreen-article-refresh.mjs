@@ -7,7 +7,7 @@
  * dogane-ranking digest (and any future evergreen digest) reuses the exact
  * same regex-scoped rewrite logic instead of a copy-pasted sibling.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
@@ -30,13 +30,29 @@ const DEFAULT_REPO_ROOT = path.resolve(__dirname, '..', '..', '..');
 // (a date/timestamp substring), so in practice they can only reintroduce a
 // byte the file already carried; the guard is here anyway so this write
 // choke point can't be the one that's missing it.
+//
+// Commits via temp+rename (issue #561, same rule as create-article.mjs's
+// write()): this rewrites an EXISTING `data/blog-articles-data.ts` entry in
+// place, reached from workflows (generate-events-digest-article.mjs and
+// siblings) with `timeout-minutes` that kill via SIGKILL — a direct
+// writeFileSync on the target can leave it truncated mid-write. `renameSync`
+// is a single POSIX syscall, atomic on the same filesystem; the temp file
+// lives next to the target so the rename never crosses a filesystem boundary.
+let writeTmpSeq = 0;
 function writeCorpusFile(file, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(file, content, clean);
-  writeFileSync(file, clean);
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, file);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 /** Bump (or insert) `updatedAt` on the ARTICLES entry so sitemap lastmod reflects the refresh. */

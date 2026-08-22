@@ -79,6 +79,21 @@ function makeHarness() {
       corpusPath: (p) => p,
       mkdirSync: (d) => mkdirs.push(d),
       writeFileSync: (f, c) => writes.push({ file: f, content: c }),
+      // Il corpus si scrive temp+rename (issue #561): la scrittura atterra sul
+      // temp e il commit e' il rename. La spia rimappa la write sul target,
+      // cosi' `writes` continua a dire dove il contenuto e' finito DAVVERO —
+      // senza, ogni asserzione su un path leggerebbe un `.tmp` e il test
+      // proverebbe una cosa diversa da quella che dice di provare.
+      renameSync: (from, to) => {
+        const w = writes.find((x) => x.file === from);
+        assert.ok(w, `renameSync(${from}) senza una write corrispondente sul temp`);
+        w.file = to;
+      },
+      unlinkSync: () => {},
+      // `writeTmpSeq` e' un contatore module-level nei produttori: qui entra
+      // come parametro iniettato, che `writeTmpSeq++` incrementa allo stesso
+      // modo.
+      writeTmpSeq: 0,
       // Il body prodotto contiene i campi di `data`, cosi' un segnaposto non
       // intercettato finirebbe davvero nel contenuto scritto.
       buildBodyFile: (data, locale) => `export const body = ${JSON.stringify(data.content?.[locale] || {})};\n`,
