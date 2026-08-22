@@ -874,6 +874,15 @@ export function resetTopicCoverageCaches() {
 }
 
 /**
+ * Solo per i test: forza l'indice comuni, per simulare un
+ * `municipalities.ts` vuoto o troncato senza toccare il file reale (#553).
+ * Ricordarsi di richiamare `resetTopicCoverageCaches()` dopo l'uso.
+ */
+export function setMunicipalityIndexForTests(index) {
+  _municipalityIndex = index;
+}
+
+/**
  * Cerca fra gli articoli già pubblicati uno che copra lo stesso argomento
  * entro la finestra.
  *
@@ -982,15 +991,26 @@ export function assertTopicNotRecentlyCovered(data, existingArticles, opts = {})
  *   vivere a ${name} e lavorare in ${canton} da frontaliere
  *   trasferirsi a ${name} da frontaliere pro e contro
  *
- * Ristretto a `vivere-`/`trasferirsi-`, non a ogni slug che nomina un
- * comune: fuori da questa serie un nome di comune nello slug è spesso il
- * capoluogo di una cronaca (`economia-varese-2024-imposte`,
+ * Ristretto ai verbi di intento-residenza che aprono lo slug
+ * (`vivere-`/`trasferirsi-`/`abitare-`/`risiedere-`), non a ogni slug che
+ * nomina un comune: fuori da questa serie un nome di comune nello slug è
+ * spesso il capoluogo di una cronaca (`economia-varese-2024-imposte`,
  * `devastazione-vagone-como-fermo`), e lì il titolo giustamente non lo
  * ripete — misurato a 53/489 sul corpus intero, rumore scartato. Dentro la
  * serie invece slug e titolo DEVONO parlare dello stesso comune. Misurato
  * (corpus 2026-08-20, 134 articoli della serie): 4 rotti su 134 (3,0 %).
+ *
+ * L'alternanza copre `abitare-`/`risiedere-` oltre ai due soli verbi finora
+ * generati: un domani in cui il template cambia verbo (es. un ipotetico
+ * `risiedere-a-${name}-...`) non deve poter sfuggire silenziosamente al gate
+ * (#553). Presi dallo stesso stem di `RESIDENCE_INTENT_RE` sopra — la stessa
+ * famiglia di intento, non un elenco inventato ex-novo — ma solo i verbi che
+ * hanno senso come PRIMO token di uno slug: le frasi multi-parola di
+ * `RESIDENCE_INTENT_RE` (`pro e contro`, `costo della vita`, `zone
+ * consigliate`, …) non aprono mai un template e riattiverebbero il rumore
+ * 53/489 se ancorate qui.
  */
-const COMUNE_SERIES_ID_RE = /^(vivere-|trasferirsi-)/;
+const COMUNE_SERIES_ID_RE = /^(vivere|trasferirsi|abitare|risiedere)-/;
 
 /**
  * Gate bloccante: nella serie comune-guide, il titolo deve nominare lo
@@ -1005,6 +1025,24 @@ const COMUNE_SERIES_ID_RE = /^(vivere-|trasferirsi-)/;
 export function assertComuneTitleMatchesSlug(data) {
   const id = String(data?.id || '');
   if (!COMUNE_SERIES_ID_RE.test(id)) return data;
+  if (municipalityIndex().size === 0) {
+    // Fail-CLOSED qui, al contrario della chiave morbida `comune-guide` più
+    // sopra (quella può spegnersi senza conseguenze, misurato, e il test
+    // `municipalityNames()` la sorveglia). Questo è un gate BLOCCANTE nato
+    // apposta per fermare pubblicazioni rotte (#527): se municipalities.ts è
+    // vuoto o troncato, `comuneTopicKey` tornerebbe sempre null e il gate
+    // diventerebbe un no-op silenzioso — esattamente il difetto che doveva
+    // impedire (#553). Non è `qualityReject`: un indice corrotto non è un
+    // singolo candidato da scartare, è la pipeline intera priva della base
+    // per verificare qualunque candidato di questa serie.
+    throw new Error(
+      '❌ INDICE COMUNI VUOTO O TRONCATO:\n'
+      + `   Impossibile verificare "${id}" contro il titolo: municipalities.ts\n`
+      + `   non ha prodotto almeno ${MIN_MUNICIPALITIES} nomi validi.\n`
+      + '   Il gate titolo/slug della serie comune-guide non può fail-open su\n'
+      + '   un indice corrotto: risolvi municipalities.ts prima di pubblicare.',
+    );
+  }
   const slugComune = comuneTopicKey(id.replace(/-/g, ' '));
   if (!slugComune) return data;
   const title = data?.content?.it?.title || '';
