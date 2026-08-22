@@ -83,6 +83,21 @@ const SLUGS = [
     ref: 'corpus#317',
     citations: ['TF 1992', 'OD 1993', '25 giugno 1978'],
   },
+  {
+    // #556 review round 2. Il corpo IT/FR aveva gia' la forma senza sigla
+    // ("legge federale sul contrasto alla criminalita' organizzata"), ma DE e
+    // EN portavano ciascuno un acronimo inventato PROPRIO — `(Bekämpfungsgesetz)`
+    // in DE, `(OCA)` in EN — mai raggiunti dal fix `(LCO)` di questa stessa PR
+    // perche' il denylist byte-exact di CORPUS_WIDE_FABRICATED cerca solo
+    // `lco`/`lcl`. Stesso schema di `(Sozialgesetz)` sopra: una traduzione puo'
+    // allucinare un proprio acronimo indipendente dall'originale IT.
+    // `(OCA)` non e' promuovibile a CORPUS_WIDE_FABRICATED: collide byte-exact
+    // con una citazione preesistente e non correlata in
+    // `franchigia-doganale-acquisti-svizzera.ts` (IT), fuori scope di questa PR.
+    slug: 'infiltrazioni-criminali-ticino-grigioni',
+    ref: '#556',
+    citations: ['(OCA)', '(Bekämpfungsgesetz)'],
+  },
 ];
 
 // Fino a #323 questa funzione era hardcoded su `content/blog-body/` e non
@@ -150,6 +165,17 @@ for (const { slug, ref, citations } of SLUGS) {
  * `TULPS` (Testo Unico Leggi Pubblica Sicurezza, 1931). Misurato al momento
  * del fix: 16 occorrenze fra le due, tutte legittime, tutte fuori match.
  */
+// LCL e LCO aggiunte da #545 (follow-up di #526/#461): le 6 occorrenze note
+// (2 file `LCL` in blog-body-ch/it, 4 file `LCO` — le 4 traduzioni di
+// infiltrazioni-criminali-ticino-grigioni) sono state bonificate nella stessa
+// PR, scansione a confine di parola per non riprendere il falso positivo
+// bare-substring di `calcolatore` (con*LCO*latore). `LCL` è anche il nome di
+// una banca francese vera: qui non serve il context-guard di
+// article-factuality-gates.mjs perché il confronto è byte-exact contro un
+// corpus già bonificato, non un guard generativo — se una futura menzione
+// legittima della banca dovesse far fallire questo test, e' un segnale che
+// il corpus ha una nuova occorrenza da verificare, non un falso positivo da
+// silenziare.
 const CORPUS_WIDE_FABRICATED = [
   { label: 'LTL 1995', re: /ltl 1995/i },
   { label: 'LF 1995', re: /lf 1995/i },
@@ -157,6 +183,8 @@ const CORPUS_WIDE_FABRICATED = [
   { label: 'BG 1995', re: /bg 1995/i },
   { label: 'LFW', re: /(?<![a-z])lfw(?![a-z])/i },
   { label: 'LPS', re: /(?<![a-z])lps(?![a-z])/i },
+  { label: 'LCL', re: /(?<![a-z])lcl(?![a-z])/i },
+  { label: 'LCO', re: /(?<![a-z])lco(?![a-z])/i },
 ];
 
 function allBodyFiles() {
