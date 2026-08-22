@@ -154,20 +154,28 @@ test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato",
     return null;
   };
   // Sorgente raggiungibile da `file` seguendo solo import relativi ('./', '../'),
-  // cosi' i pacchetti npm e i builtin di Node restano fuori. `visited` evita di
-  // rientrare in un ciclo import; la cache evita di rileggere lo stesso modulo
-  // condiviso una volta per ogni choke-point che lo importa.
-  const reachableSource = (file, visited = new Set()) => {
-    if (visited.has(file)) return '';
-    visited.add(file);
+  // cosi' i pacchetti npm e i builtin di Node restano fuori. `ancestors` e' lo
+  // STACK del ramo di ricorsione corrente (rimosso al backtrack): evita di
+  // rientrare in un ciclo import senza inquinare la cache, che invece e'
+  // globale e vive tra choke-point diversi. Se `ancestors` fosse un set che
+  // cresce solo (o venisse controllato prima della cache), un modulo condiviso
+  // raggiunto da due rami fratelli (A importa B e C, entrambi importano D)
+  // risulterebbe troncato sul secondo ramo: la ricorsione su D vedrebbe D gia'
+  // "visitato" dal primo ramo e tornerebbe '' anche se la cache aveva gia' il
+  // valore giusto, e quel '' verrebbe cacheato per il choke-point del secondo
+  // ramo — perdendo silenziosamente il contenuto di D per lui.
+  const reachableSource = (file, ancestors = new Set()) => {
     if (importSourceCache.has(file)) return importSourceCache.get(file);
+    if (ancestors.has(file)) return ''; // ciclo genuino nel ramo corrente: non cacheare
+    ancestors.add(file);
     let src;
-    try { src = fs.readFileSync(file, 'utf-8'); } catch { return ''; }
+    try { src = fs.readFileSync(file, 'utf-8'); } catch { ancestors.delete(file); return ''; }
     let combined = src;
     for (const m of src.matchAll(/\bfrom\s+'(\.[^']+)'/g)) {
       const resolved = resolveRelativeImport(file, m[1]);
-      if (resolved) combined += `\n${reachableSource(resolved, visited)}`;
+      if (resolved) combined += `\n${reachableSource(resolved, ancestors)}`;
     }
+    ancestors.delete(file);
     importSourceCache.set(file, combined);
     return combined;
   };
