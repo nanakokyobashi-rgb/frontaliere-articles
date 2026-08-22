@@ -48848,6 +48848,240 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-acquistare-abitazione-berna-ipotecario': {
+    title: 'Acquistare casa a Berna: guida ai mutui e costi',
+    description: 'Scopri come acquistare una casa nel Canton Berna: finanziamento ipotecario, tasse federali e cantonali, imposta sui trapassi, spese notarili, e procedura',
+    keywords: 'frontalieri, ticino, svizzera, italia, acquistare, casa, berna, mutui',
+    ogTitle: 'Acquistare casa a Berna: guida ai mutui e costi',
+    ogDescription: 'Scopri come acquistare una casa nel Canton Berna: finanziamento ipotecario svizzero, tasse, imposta sui trapassi, spese notarili, procedura d\'acquisto, e strategie di pianificazione finanziaria per investire in proprietà immobiliari nel Canton Berna.',
+    canonicalPath: '/articoli-svizzera/acquistare-abitazione-berna-ipotecario/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Acquistare casa a Berna: guida ai mutui e costi",
+      "description": "Scopri come acquistare una casa nel Canton Berna: finanziamento ipotecario, tasse federali e cantonali, imposta sui trapassi, spese notarili, e procedura",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/acquistare-abitazione-berna-ipotecario.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Casa moderna nel Canton Berna con architettura residenziale svizzera e paesaggio"
+      },
+      "datePublished": "2026-08-22T00:59:56+00:00",
+      "dateModified": "2026-08-22T00:59:56+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/acquistare-abitazione-berna-ipotecario/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-digitalizzazione-processi-competenze': {
+    title: 'Quando digitalizzazione rima con improvvisazione',
+    description: 'Digitalizzare richiede ripensamento dei processi, non solo cambio tecnologico. Guide per gestire competenze, cambiamento organizzativo e razionalizzazione',
+    keywords: 'frontalieri, ticino, svizzera, italia, quando, digitalizzazione, rima, improvvisazione',
+    ogTitle: 'Quando digitalizzazione rima con improvvisazione',
+    ogDescription: 'La digitalizzazione non è semplice cambio carta-schermo: richiede ripensamento processi, competenze multidisciplinari e gestione consapevole del cambiamento organizzativo nelle amministrazioni e aziende svizzere.',
+    canonicalPath: '/articoli-svizzera/digitalizzazione-processi-competenze/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Quando digitalizzazione rima con improvvisazione",
+      "description": "Digitalizzare richiede ripensamento dei processi, non solo cambio tecnologico. Guide per gestire competenze, cambiamento organizzativo e razionalizzazione",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/digitalizzazione-processi-competenze.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ufficio amministrativo svizzero moderno con postazioni digitali e spazi collaborativi durante la trasformazione"
+      },
+      "datePublished": "2026-08-22T01:15:09+00:00",
+      "dateModified": "2026-08-22T01:15:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/digitalizzazione-processi-competenze/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-richiamo-uova-salmonella-migros': {
+    title: 'Richiamo uova Migros: sospetta contaminazione salmonella',
+    description: 'Migros richiama le uova Nostrani del Ticino, codice 1-CH-603, per rischio salmonella. Scopri come procedere al rimborso e cosa fare in caso di consumo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, richiamo, uova, migros, sospetta',
+    ogTitle: 'Richiamo uova Migros: sospetta contaminazione salmonella',
+    ogDescription: 'Migros ha emesso un avviso di richiamo per le uova Nostrani del Ticino con codice 1-CH-603 a causa di una sospetta contaminazione da salmonella. I consumatori possono richiedere il rimborso presso le filiali.',
+    canonicalPath: '/articoli-svizzera/richiamo-uova-salmonella-migros/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Richiamo uova Migros: sospetta contaminazione salmonella",
+      "description": "Migros richiama le uova Nostrani del Ticino, codice 1-CH-603, per rischio salmonella. Scopri come procedere al rimborso e cosa fare in caso di consumo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/richiamo-uova-salmonella-migros.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Confezioni di uova presso un supermercato svizzero"
+      },
+      "datePublished": "2026-08-22T01:28:58+00:00",
+      "dateModified": "2026-08-22T01:28:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/richiamo-uova-salmonella-migros/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-avs-berna-rendita-lacune-contributive': {
+    title: 'AVS Cantone Berna: rendita, lacune e prestazioni',
+    description: 'Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo',
+    keywords: 'frontalieri, ticino, svizzera, italia, cantone, berna, rendita, lacune',
+    ogTitle: 'AVS Cantone Berna: rendita, lacune e prestazioni',
+    ogDescription: 'Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo vitale.',
+    canonicalPath: '/articoli-svizzera/avs-berna-rendita-lacune-contributive/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "AVS Cantone Berna: rendita, lacune e prestazioni",
+      "description": "Primo pilastro AVS nel Cantone di Berna: cassa di compensazione cantonale, calcolo della rendita, lacune contributive e prestazioni complementari al minimo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/avs-berna-rendita-lacune-contributive.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Edificio amministrativo del Cantone di Berna sede della cassa di compensazione del primo pilastro AVS."
+      },
+      "datePublished": "2026-08-22T02:05:16+00:00",
+      "dateModified": "2026-08-22T02:05:16+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/avs-berna-rendita-lacune-contributive/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-esercito-bilancio-misure-violenza': {
+    title: 'Esercito svizzero: bilancio sulle misure contro la violenza',
+    description: 'Il Comando dell\'esercito presenta il rapporto 2026 sulle 16 misure contro discriminazione e violenza sessualizzata. 8 implementate, 7 in attuazione, indagine',
+    keywords: 'frontalieri, ticino, svizzera, italia, esercito, svizzero, bilancio, sulle',
+    ogTitle: 'Esercito svizzero: bilancio misure contro la violenza',
+    ogDescription: 'Rapporto intermedio 2026 sulle 16 misure contro discriminazione nell\'Esercito. 19.500 reclute hanno completato training obbligatorio. Verifica efficacia prevista nel 2028 con confronto ai dati 2024.',
+    canonicalPath: '/articoli-svizzera/esercito-bilancio-misure-violenza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esercito svizzero: bilancio sulle misure contro la violenza",
+      "description": "Il Comando dell'esercito presenta il rapporto 2026 sulle 16 misure contro discriminazione e violenza sessualizzata. 8 implementate, 7 in attuazione, indagine",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esercito-bilancio-misure-violenza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Soldati dell'Esercito svizzero durante una lezione di formazione, ambiente professionale e istituzionale"
+      },
+      "datePublished": "2026-08-22T02:23:53+00:00",
+      "dateModified": "2026-08-22T02:23:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/esercito-bilancio-misure-violenza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
+  'blog-dimissioni-fondazione-beloved': {
+    title: 'Dimissioni in cascata alla Fondazione Beloved | Frontaliere Ticino',
+    description: 'Crisi di governance alla Fondazione Beloved: dimissioni di member svizzeri, francesi e italiani. Gestisce 24 milioni CHF per le 41 vittime di Crans-Montana',
+    keywords: 'frontalieri, ticino, svizzera, italia, dimissioni, cascata, alla, fondazione',
+    ogTitle: 'Fondazione Beloved in crisi: dimissioni in cascata',
+    ogDescription: 'Crisi di governance alla Fondazione Beloved per le vittime di Crans-Montana. Dimissioni di member svizzeri, francesi e italiani scuotono l\'ente che gestisce 24 milioni CHF. Le famiglie chiedono trasparenza sulla distribuzione degli aiuti.',
+    canonicalPath: '/articoli-svizzera/dimissioni-fondazione-beloved/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Dimissioni in cascata alla Fondazione Beloved",
+      "description": "Crisi di governance alla Fondazione Beloved: dimissioni di member svizzeri, francesi e italiani. Gestisce 24 milioni CHF per le 41 vittime di Crans-Montana",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/dimissioni-fondazione-beloved.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sala riunioni di un edificio amministrativo svizzero, simbolo della governance di enti pubblici"
+      },
+      "datePublished": "2026-08-22T03:29:07+00:00",
+      "dateModified": "2026-08-22T03:29:07+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/dimissioni-fondazione-beloved/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

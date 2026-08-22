@@ -1281,6 +1281,12 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'cherosene-sintetico-aviazione': { it: 'cherosene-sintetico-aviazione', en: 'synthetic-kerosene-aviation', de: 'synthesekerosin-luftfahrt', fr: 'carburant-synthetique-aviation' },
  'asilo-maghreb-reati-80-percento': { it: 'asilo-maghreb-reati-80-percento', en: 'asylum-maghreb-crimes-80-percent', de: 'asyl-maghreb-straftaten-80-prozent', fr: 'asile-maghreb-crimes-80-pour-cent' },
  'discriminazioni-esercito-piano': { it: 'discriminazioni-esercito-piano', en: 'discrimination-military-action-plan', de: 'diskriminierung-armee-aktionsplan', fr: 'discriminations-armee-plan' },
+ 'acquistare-abitazione-berna-ipotecario': { it: 'acquistare-abitazione-berna-ipotecario', en: 'buy-property-bern-mortgage', de: 'haus-kaufen-bern-hypothek', fr: 'acheter-propriete-berne-hypotheque' },
+ 'digitalizzazione-processi-competenze': { it: 'digitalizzazione-processi-competenze', en: 'digitalization-processes-skills', de: 'digitalisierung-prozesse-kompetenzen', fr: 'numerisation-processus-competences' },
+ 'richiamo-uova-salmonella-migros': { it: 'richiamo-uova-salmonella-migros', en: 'egg-recall-salmonella-migros', de: 'eier-rueckruf-salmonellen-migros', fr: 'rappel-oeufs-salmonelle-migros' },
+ 'avs-berna-rendita-lacune-contributive': { it: 'avs-berna-rendita-lacune-contributive', en: 'avs-bern-pension-contribution-gaps', de: 'avs-bern-rente-beitragslucken', fr: 'avs-berne-rente-lacunes-cotisations' },
+ 'esercito-bilancio-misure-violenza': { it: 'esercito-bilancio-misure-violenza', en: 'swiss-army-violence-prevention-interim-report', de: 'schweizer-armee-gewaltpraevention-bilanz', fr: 'armee-suisse-rapport-mesures-violence' },
+ 'dimissioni-fondazione-beloved': { it: 'dimissioni-fondazione-beloved', en: 'beloved-foundation-resignations', de: 'beloved-stiftung-ruecktritt', fr: 'fondation-beloved-demissions' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

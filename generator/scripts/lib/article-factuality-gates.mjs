@@ -1361,19 +1361,43 @@ export function checkFabricatedInstitutionAcronyms(text, opts = {}) {
 // citation cues» codificano le tre scelte insieme, perche' non vengano
 // «riparate» una per giro: chiudere le aperte fa passare il primo e rompe il
 // secondo, e togliere il `(?!t)` rompe il terzo.
+//
+// `Gesetz(?:es|e)?(?!t)` vive FUORI dal gruppo ancorato al `\b` iniziale, a
+// differenza delle altre alternative: e' l'unico caso in cui il composto
+// tedesco attacca `gesetz` come CODA su un prefisso che non e' `Bundes-`
+// letterale — misurato con `(LFW)` in «Nach dem Bundesarbeitsgesetz (LFW)
+// vom 13. März 1943» (stesso corpo che ha portato l'incidente #323 in
+// traduzione tedesca), dove `Bundesarbeitsgesetz` non contiene la sottostringa
+// `Bundesgesetz` (c'e' `arbeits` in mezzo) e un `\b` davanti a `Gesetz` non
+// puo' scattare a meta' parola. Applicare il context-guard a LFW/LPS (item
+// 3/3 di #526, stessa disciplina di LCL/LCO) senza questo aggiustamento
+// avrebbe reso invisibile esattamente la fabbricazione che il test su questa
+// frase gia' misura. Il `(?!t)` resta l'unica esclusione e continua a
+// coprire `gesetzt`/`vorausgesetzt` ovunque compaiano, ancorati o no.
 const NORM_CITATION_CUE =
-  /\b(?:legg[ei]\b|legislazion[ei]\b|lois?\b|Gesetz(?:es|e)?(?!t)|Bundesgesetz|federal\s+act\b|act\s+on\b|law\s+on\b|articol[oi]\b|articles?|Artikeln?\b|art\.|cpv\.|Abs\.|RS\s*\d)/i;
+  /\b(?:legg[ei]\b|legislazion[ei]\b|lois?\b|Bundesgesetz|federal\s+act\b|act\s+on\b|law\s+on\b|articol[oi]\b|articles?|Artikeln?\b|art\.|cpv\.|Abs\.|RS\s*\d)|Gesetz(?:es|e)?(?!t)/i;
 
 export const FABRICATED_NORM_ACRONYMS = [
   {
     acronym: 'LFW',
     re: /(?<![A-Za-z])LFW(?![A-Za-z])/i,
     real: "la legge sul lavoro è LL (RS 822.11, 13 marzo 1964); per l'apprendistato è la LFPr (RS 412.10)",
+    // Stesso irrobustimento di LCL/LCO (#461, #526 item 3/3): nessuna
+    // collisione nota oggi con un'entita' reale sigla "LFW", ma il bare-match
+    // incondizionato e' la stessa fragilita' strutturale gia' misurata due
+    // volte — un futuro articolo che la nomini fuori da ogni contesto
+    // giuridico verrebbe rigettato senza motivo. L'occorrenza vera del
+    // corpus resta rilevata (vedi nota su `NORM_CITATION_CUE` sopra).
+    context: NORM_CITATION_CUE,
+    contextWindow: 120,
   },
   {
     acronym: 'LPS',
     re: /(?<![A-Za-z])LPS(?![A-Za-z])/i,
     real: 'non esiste: previdenza → LAVS/LAI/LPP, assicurazione malattie → LAMal/LVAMal, permesso di soggiorno → LStrI (RS 142.20)',
+    // Stesso irrobustimento di LFW qui sopra.
+    context: NORM_CITATION_CUE,
+    contextWindow: 120,
   },
   {
     acronym: 'LCL',

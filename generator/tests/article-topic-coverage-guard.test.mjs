@@ -35,6 +35,7 @@ import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
 import {
+  assertComuneTitleMatchesSlug,
   assertTopicNotRecentlyCovered,
   cantonThemeTopicKey,
   comuneTopicKey,
@@ -889,5 +890,87 @@ describe('normalizeText — consistenza accenti/trattino fra indice comuni e tes
   it('e trova lo stesso comune anche senza accento né trattino (slug del generatore)', () => {
     expect(comuneTopicKey('vivere saint rhemy en bosses lavorare vallese'))
       .toBe('saint-rhemy-en-bosses');
+  });
+});
+
+/**
+ * #527 — titolo scollegato dallo slug sulla serie comune-guide. I quattro casi
+ * sotto sono verbatim dal corpus (2026-08-11/19), misurati nella issue: due
+ * dove il titolo non nomina alcun comune, due imprecisioni di nome (un comune
+ * di due parole citato monco nel titolo, e uno slug che perde una parola che
+ * il titolo invece ha per intero).
+ */
+const dataWithTitle = (id, title) => ({ id, content: { it: { title } } });
+
+describe('assertComuneTitleMatchesSlug — i 4 casi reali di #527 (2026-08-11/19)', () => {
+  it('BLOCCA quando il titolo non nomina alcun comune (Tovo di Sant\'Agata)', () => {
+    const data = dataWithTitle(
+      'vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere',
+      'Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando il titolo non nomina alcun comune (Valpelline)', () => {
+    const data = dataWithTitle(
+      'vivere-valpelline-lavorare-vallese',
+      'Frontaliere in Vallese: regole e fiscalità',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando il titolo nomina il comune con precisione diversa (Venegono Superiore)', () => {
+    const data = dataWithTitle(
+      'vivere-venegono-superiore-lavorare-ticino-frontaliere',
+      'Vivere a Venegono e lavorare in Ticino: guida fiscale 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando lo slug perde una parola che il titolo invece ha (Villa di Chiavenna)', () => {
+    const data = dataWithTitle(
+      'trasferirsi-villa-chiavenna-frontaliere',
+      'Trasferirsi a Villa di Chiavenna da frontaliere: guida utile',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('l\'errore riporta sia lo slug sia il titolo, per essere leggibile senza rileggere il codice', () => {
+    const data = dataWithTitle(
+      'vivere-valpelline-lavorare-vallese',
+      'Frontaliere in Vallese: regole e fiscalità',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow(/valpelline/);
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — non blocca quando titolo e slug concordano', () => {
+  it('PASSA quando il titolo nomina lo stesso comune dello slug', () => {
+    const data = dataWithTitle(
+      'vivere-besano-lavorare-ticino',
+      'Vivere a Besano e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+
+  it('PASSA quando lo slug non nomina alcun comune (nessuna chiave da difendere)', () => {
+    const data = dataWithTitle(
+      'trasferirsi-in-svizzera-guida-generale-frontaliere',
+      'Trasferirsi in Svizzera: guida generale per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — immune fuori dalla serie vivere-/trasferirsi-', () => {
+  it('PASSA su una cronaca il cui slug cita un capoluogo che il titolo giustamente non ripete', () => {
+    // Rumore misurato sul corpus intero (53/489): il gate è ristretto alla
+    // serie perché fuori da essa lo slug non è un template che promette il
+    // comune nel titolo.
+    const data = dataWithTitle(
+      'economia-varese-2024-imposte',
+      'Nuove regole fiscali per i frontalieri: cosa cambia nel 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
   });
 });
