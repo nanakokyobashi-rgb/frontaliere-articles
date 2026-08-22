@@ -139,7 +139,7 @@ const io = {
 };
 
 /**
- * Aggregate follow-up: never short-circuit on one match (one item resolved ≠ all). Two
+ * Aggregate follow-up: never short-circuit on one match (one item resolved ≠ all). Four
  * detectors, OR'd:
  *   1. Numeric count "N items deferred" with N>=2.
  *   2. Keyword fallback `sweep|batch|bulk` — a sweep enumerates many targets WITHOUT an
@@ -149,6 +149,16 @@ const io = {
  *      false aggregate just lets the normal fixer run (safe), never a false short-circuit.
  *      Mirrors the same fallback in reconcile-followups.mjs / issue-fix.yml (single bug
  *      class across the sibling aggregate detectors).
+ *   3. Numbered top-level sections in the BODY ("## 1. ...", "## 2. ..."), >=2 of them —
+ *      the structural form post-merge-followup.yml itself uses to enumerate items when the
+ *      title carries no count (#374, #505, #553: none say "N items deferred" or sweep/
+ *      batch/bulk, but each has >=2 numbered sections, one per item).
+ *   4. Repeated bold-lead top-level bullets in the BODY ("- **Title**" or "- [ ] **Title**"),
+ *      >=2 of them — the other structural form the same generator uses when items are listed
+ *      instead of headed (#466, #549: 3 and 2 bold-lead bullets, no numbered headers). Bias-
+ *      to-PROCEED still holds for a false positive here (a single-item follow-up that happens
+ *      to use two bold-lead bullets for closely-related sub-points, e.g. #551, just proceeds
+ *      normally instead of short-circuiting — safe, never a false short-circuit).
  */
 export function isAggregate(title, body) {
   const text = `${title}\n${body}`;
@@ -163,7 +173,12 @@ export function isAggregate(title, body) {
   // that wrongly blocked `pr-body-contract` on a fully-completed single item
   // (#3378).
   if (m) return Number(m[1]) >= 2;
-  return /\b(?:sweep|batch|bulk)\b/i.test(text);
+  if (/\b(?:sweep|batch|bulk)\b/i.test(text)) return true;
+  const b = String(body || '');
+  const numberedSections = (b.match(/^#{2,3}\s*\d+[.)]/gm) || []).length;
+  if (numberedSections >= 2) return true;
+  const boldLeadBullets = (b.match(/^[-*]\s*(?:\[[ xX]\]\s*)?\*\*/gm) || []).length;
+  return boldLeadBullets >= 2;
 }
 
 function main() {
