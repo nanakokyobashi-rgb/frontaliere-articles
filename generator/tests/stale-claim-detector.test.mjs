@@ -132,6 +132,11 @@ test('una PR che non nomina nessuna issue non ne protegge nessuna', () => {
   assert.deepEqual([...referencedIssueNumbers(prs)], []);
 });
 
+test('la dichiarazione italiana "Chiude anche la issue #N" è riconosciuta (issue #567, gemello di followup-resolution-match)', () => {
+  const prs = [{ body: 'Chiude anche la issue #402, ferma con `agent:fix` e 6 run del fixer a vuoto.' }];
+  assert.deepEqual([...referencedIssueNumbers(prs)], [402]);
+});
+
 test('più canali sulla stessa PR convergono senza duplicare', () => {
   const prs = [{ headRefName: 'fix/issue-5', title: 'Roba (#5)', body: 'Closes #5' }];
   assert.deepEqual([...referencedIssueNumbers(prs)], [5]);
