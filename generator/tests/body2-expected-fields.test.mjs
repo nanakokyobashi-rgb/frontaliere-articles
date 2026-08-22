@@ -53,6 +53,9 @@
  *   M9  `expectedFields` viene inoltrato al provider dentro le opts           → #8
  *   M10 la validazione di `expectedFields` sparisce (accetta campi ignoti)    → #10
  *   M11 il ramo body-only smette di rigettare un body2 ASSENTE                → #2
+ *   M12 il merge della meta' meta torna a leggere SOLO
+ *       `content[primaryLocale]`, perdendo title/excerpt alla radice
+ *       (issue #494)                                                         → #13
  */
 
 import { test } from 'node:test';
@@ -468,4 +471,49 @@ test('#12 un abort conforme sulla meta body resta un abort, non un payload incom
   assert.equal(provider.length, 1, 'un abort legittimo costa UNA chiamata');
   assert.deepEqual(punteggi.failure, []);
   assert.deepEqual(punteggi.success, [], 'ne penalizzato ne premiato: un abort non e contenuto');
+});
+
+// ── 13. Il merge recupera title/excerpt quando arrivano FUORI da content.it ─
+//
+// Buco lasciato dalla #7 (issue #494): `normalizeItalianContentFromPayload`
+// tollera title/excerpt in `content[locale]`, in `content` senza locale, o
+// ALLA RADICE del payload — e' cosi' che `classifyBody2Payload` giudica `ok`
+// la risposta. Il merge dentro `_generateSplit` leggeva pero' SOLO
+// `metaData.content[primaryLocale]`: una risposta gia' giudicata `ok` con i
+// campi alla radice passava il verdetto (e premiava il modello) per poi
+// perderli comunque nel merge, morendo piu' a valle in
+// `validateItalianPayload` con `Campo title mancante per it` — senza
+// rigenerazione ne' rotazione di modello. Il test #7 copre «meta SENZA
+// title» (giustamente rigettata); questo copre «meta con title FUORI
+// POSTO» (dev'essere ACCETTATA e recuperata, non buttata).
+
+test('#13 un meta con title/excerpt alla radice viene recuperato dal merge, non perso', async () => {
+  const metaRadice = JSON.stringify({
+    id: 'imposta-fonte-frontalieri-messaggio-8412',
+    category: 'fiscalita',
+    title: 'Imposta alla fonte, cosa cambia per i frontalieri',
+    excerpt: 'Il messaggio 8412 rivede le aliquote e introduce una notifica trimestrale.',
+  });
+
+  // Premessa: il verdetto giudica questa forma `ok`, non `reject` — altrimenti
+  // il gap non esisterebbe affatto.
+  const verdetto = classifyBody2Payload({ parsed: JSON.parse(metaRadice), expectedFields: META_ONLY_FIELDS });
+  assert.equal(verdetto.verdict, 'ok', "title/excerpt alla radice devono passare il verdetto: e' qui che si apre il gap");
+
+  const { _generateSplit, provider, log } = await runSplit({
+    risposte: [RISPOSTA_BODY_CONFORME, metaRadice],
+  });
+
+  const out = await _generateSplit();
+
+  assert.equal(provider.length, 2, `nessuna rigenerazione: la risposta e' conforme\n${log()}`);
+  assert.doesNotMatch(log(), /output JSON incompleto/, `rigetto su una risposta che il verdetto giudica ok:\n${log()}`);
+
+  const merged = JSON.parse(out);
+  assert.equal(
+    merged.content.it.title,
+    'Imposta alla fonte, cosa cambia per i frontalieri',
+    'il title alla radice deve arrivare in content.it, non essere perso nel merge',
+  );
+  assert.equal(merged.content.it.excerpt, 'Il messaggio 8412 rivede le aliquote e introduce una notifica trimestrale.');
 });

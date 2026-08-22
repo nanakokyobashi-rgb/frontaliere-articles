@@ -8409,11 +8409,27 @@ Rispondi SOLO con JSON valido, senza markdown.` },
       console.error(`  ⚠️ [prompt-split] chiamata 2/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
       return null;
     }
+    // Il verdetto sopra (via `expectedFields: META_ONLY_FIELDS` dentro
+    // `callLLM`) tollera title/excerpt in una di TRE forme — `content.it`,
+    // `content` senza locale, o alla radice — perche' e' cosi' che
+    // `normalizeItalianContentFromPayload` giudica la risposta usabile. Il
+    // merge leggeva SOLO `metaData.content[primaryLocale]`: una risposta
+    // giudicata `ok` con i campi nelle altre due forme passava il verdetto e
+    // poi li perdeva qui, morendo piu' a valle in `validateItalianPayload`
+    // con `Campo title mancante per it` — senza rigenerazione ne' rotazione
+    // di modello (issue #494). Si normalizza con la stessa funzione che ha
+    // gia' giudicato la risposta, cosi' il merge legge cio' che il verdetto
+    // ha davvero trovato.
+    const metaBlock = normalizeItalianContentFromPayload(metaData, primaryLocale, META_ONLY_FIELDS);
     const merged = {
       ...metaData,
       content: {
         ...(metaData?.content || {}),
-        [primaryLocale]: { ...(metaData?.content?.[primaryLocale] || {}), ...bodyContent },
+        [primaryLocale]: {
+          ...(metaData?.content?.[primaryLocale] || {}),
+          ...(metaBlock || {}),
+          ...bodyContent,
+        },
       },
     };
     return JSON.stringify(merged);
