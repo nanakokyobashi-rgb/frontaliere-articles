@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-21T05:36:17.876Z",
-  "dateIso": "2026-08-21",
+  "generatedAt": "2026-08-22T05:31:02.468Z",
+  "dateIso": "2026-08-22",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 23296
+    "jobsActive": 23217
   },
   "blocks": {
     "borderWait": {
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-21T05:10:23.909Z",
+      "generatedAt": "2026-08-22T05:04:35.841Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 81,
-      "cheaperSwissCount": 59,
-      "tieCount": 5,
+      "cheaperItalyCount": 74,
+      "cheaperSwissCount": 63,
+      "tieCount": 8,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -59,56 +59,56 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.513,
-          "swissPriceEur": 2.036,
-          "swissPriceChf": 1.9,
-          "saving50LEur": 26.15
+          "swissPriceEur": 2.074,
+          "swissPriceChf": 1.94,
+          "saving50LEur": 28.05
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.132,
-          "swissPriceChf": 1.99,
-          "saving50LEur": 10.65
+          "swissPriceEur": 2.117,
+          "swissPriceChf": 1.98,
+          "saving50LEur": 9.9
         },
         {
           "municipality": "Montagna in Valtellina",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.132,
-          "swissPriceChf": 1.99,
-          "saving50LEur": 10.65
+          "swissPriceEur": 2.117,
+          "swissPriceChf": 1.98,
+          "saving50LEur": 9.9
         }
       ],
       "cheapestSwissStation": {
         "name": "Alpha Petrol",
         "sp95PriceChf": 1.35,
-        "sp95PriceEur": 1.446,
+        "sp95PriceEur": 1.443,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
-      "rate": 1.0651,
-      "lastDate": "2026-08-20",
-      "prevRate": 1.0643,
-      "prevDate": "2026-08-19",
-      "delta1d": 0.0008,
-      "rate7dAgo": 1.066,
-      "delta7d": -0.0009,
+      "rate": 1.0695,
+      "lastDate": "2026-08-21",
+      "prevRate": 1.0691,
+      "prevDate": "2026-08-20",
+      "delta1d": 0.0004,
+      "rate7dAgo": 1.0652,
+      "delta7d": 0.0043,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-21T02:55:04.938Z",
-      "activeJobs": 23296,
-      "activeCompanies": 853,
-      "todayAdded": 411,
-      "yesterdayAdded": 617,
-      "last7dAdded": 4317
+      "generatedAt": "2026-08-22T03:03:28.115Z",
+      "activeJobs": 23217,
+      "activeCompanies": 846,
+      "todayAdded": 378,
+      "yesterdayAdded": 781,
+      "last7dAdded": 4544
     }
   }
 }
