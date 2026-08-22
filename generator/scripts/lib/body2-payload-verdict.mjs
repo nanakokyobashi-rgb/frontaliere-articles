@@ -90,6 +90,16 @@ export const BODY_ONLY_FIELDS = ['body1', 'body2', 'body3'];
 export const META_ONLY_FIELDS = ['title', 'excerpt'];
 
 /**
+ * Un modello che emette la stringa letterale `"null"` su un campo di
+ * `content` sta serializzando male il `null` JSON che il payload di abort di
+ * REGOLA #0 dichiara per quello stesso campo — non sta scrivendo contenuto.
+ * Senza questo filtro `normalizeItalianContentFromPayload` la conta come
+ * valore non vuoto, `hasAnyField` diventa `true`, e un vero abort verrebbe
+ * letto come un articolo il cui corpo e' testualmente "null".
+ */
+const LITERAL_NULL_STRING_RE = /^null$/i;
+
+/**
  * ── CHI DECIDE QUALI CAMPI SONO ATTESI ─────────────────────────────────────
  *
  * `callLLM()` deve sapere due cose prima di giudicare una risposta: SE questa
@@ -226,7 +236,8 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
     let hasAnyField = false;
 
     for (const field of fields) {
-      const value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
+      let value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
+      if (LITERAL_NULL_STRING_RE.test(value)) value = '';
       if (value) hasAnyField = true;
       block[field] = value;
     }
