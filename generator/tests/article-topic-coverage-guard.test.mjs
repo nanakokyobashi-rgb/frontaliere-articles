@@ -50,6 +50,7 @@ import {
   normalizeItWord,
   STOP_WORDS_IT,
 } from '../scripts/lib/it-text-similarity.mjs';
+import { normalizeText } from '../scripts/lib/profession-taxonomy.mjs';
 import { computeAdaptiveEvergreenThresholds } from '../scripts/lib/scoring/constants.mjs';
 
 const corpusUrl = (rel) => new URL(`../../content/${rel}`, import.meta.url);
@@ -805,5 +806,88 @@ describe('comuneTopicKey — il nome più lungo vince anche su gruppi ambigui', 
   it('stesso caso in ordine inverso: il risultato non dipende dall\'ordine nel testo', () => {
     expect(comuneTopicKey('guida a San Bartolomeo Val Cavargna poi parliamo di San Siro'))
       .toBe('san-bartolomeo-val-cavargna');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 1: a PARITÀ di lunghezza (non solo quando un
+ * nome è più lungo dell'altro) il confronto stretto `n > best.words.length`
+ * non fa mai scattare un secondo candidato della stessa lunghezza, quindi
+ * vince il primo incontrato scandendo il testo. Non era un bug di
+ * correttezza — è deterministico anche prima di questo fix, dato un testo
+ * fisso — ma il criterio era implicito nell'ordine di scansione e non
+ * dichiarato né testato. `San Bartolomeo Val Cavargna`, `San Fermo della
+ * Battaglia` e `San Nazzaro Val Cavargna` sono i tre comuni da 4 parole del
+ * gruppo `san` in `data/municipalities.ts`: un testo che ne nomina due prende
+ * sempre quello scritto per primo, qualunque coppia si scelga.
+ */
+describe('comuneTopicKey — pareggio di lunghezza: vince il primo nel testo, non l\'ordine del file', () => {
+  it('Bartolomeo prima di Fermo → vince Bartolomeo', () => {
+    expect(comuneTopicKey('guida a San Bartolomeo Val Cavargna poi parliamo di San Fermo della Battaglia'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('Fermo prima di Bartolomeo → vince Fermo (l\'ordine nel testo comanda, non l\'ordine nel file)', () => {
+    expect(comuneTopicKey('guida a San Fermo della Battaglia poi parliamo di San Bartolomeo Val Cavargna'))
+      .toBe('san-fermo-della-battaglia');
+  });
+
+  it('Nazzaro prima di Fermo → vince Nazzaro', () => {
+    expect(comuneTopicKey('San Nazzaro Val Cavargna e poi San Fermo della Battaglia'))
+      .toBe('san-nazzaro-val-cavargna');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 2: `professionEvidenceIsOnlyAComuneName`
+ * chiamava `comuneMatch` (un solo match, il più lungo) e toglieva dal testo
+ * solo QUELLA sequenza. Se un testo nomina DUE comuni e l'evidenza del
+ * mestiere sta nel nome del comune più CORTO (non quello scelto come
+ * "migliore"), la vecchia versione toglieva il comune sbagliato: la sequenza
+ * che fa vincere la chiave-mestiere sopravviveva, e la guardia non scattava.
+ *
+ * Qui `San Bartolomeo Val Cavargna` (4 parole) è il comune più lungo — vince
+ * `comuneMatch` — mentre l'unica prova del mestiere `agente-sicurezza` sta in
+ * `Villa Guardia` (2 parole, alias `guardia`). Verificato contro il codice
+ * pre-fix (`origin/main`): restituiva `profession-guide:agente-sicurezza`.
+ */
+describe('professionEvidenceIsOnlyAComuneName — prova ogni comune trovato, non solo il più lungo', () => {
+  const TESTO = {
+    id: 'san-bartolomeo-val-cavargna-villa-guardia-stipendio-requisiti',
+    title: 'San Bartolomeo Val Cavargna: Villa Guardia, stipendio e requisiti',
+  };
+
+  it('il comune più lungo vince la chiave-comune (non è quello con la prova-mestiere)', () => {
+    expect(comuneTopicKey(`${TESTO.title} ${TESTO.id.replace(/-/g, ' ')}`))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('l\'evidenza-mestiere sta SOLO nel comune più corto → non è una guida-mestiere', () => {
+    expect(topicCoverageKey(TESTO)?.kind).not.toBe('profession-guide');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 3: `normalizeText` (profession-taxonomy.mjs)
+ * indicizza i comuni in `municipalityIndex()` E normalizza il testo articolo
+ * in `comuneMatch` — stessa funzione, entrambi i lati. Non verificato prima
+ * d'ora con un test mirato su un nome che unisce ENTRAMBI i casi che una
+ * normalizzazione divergente romperebbe in silenzio: un accento (`é`) e un
+ * trattino come separatore di parola. `Saint-Rhémy-En-Bosses`
+ * (`data/municipalities.ts`) è il comune reale che li unisce entrambi.
+ */
+describe('normalizeText — consistenza accenti/trattino fra indice comuni e testo articolo', () => {
+  it('accento e trattino normalizzano allo stesso modo sui due lati della stessa funzione', () => {
+    expect(normalizeText('Saint-Rhémy-En-Bosses')).toBe('saint rhemy en bosses');
+  });
+
+  it('il match sul testo articolo trova il comune scritto con accento e trattino', () => {
+    expect(comuneTopicKey('Vivere a Saint-Rhémy-En-Bosses e lavorare in Vallese'))
+      .toBe('saint-rhemy-en-bosses');
+  });
+
+  it('e trova lo stesso comune anche senza accento né trattino (slug del generatore)', () => {
+    expect(comuneTopicKey('vivere saint rhemy en bosses lavorare vallese'))
+      .toBe('saint-rhemy-en-bosses');
   });
 });
