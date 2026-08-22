@@ -5418,9 +5418,10 @@ export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
   function absorbAssistantBlocks(evt) {
     const blocks = evt?.message?.content;
     if (!Array.isArray(blocks)) return;
+    let newText = '';
     for (const b of blocks) {
       if (!b || typeof b !== 'object') continue;
-      if (b.type === 'text' && typeof b.text === 'string') state.text += b.text;
+      if (b.type === 'text' && typeof b.text === 'string') newText += b.text;
       if (b.type === 'tool_use' && b.name === CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL && b.input && typeof b.input === 'object') {
         try {
           state.structured = JSON.stringify(b.input);
@@ -5428,6 +5429,16 @@ export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
         } catch { /* input ciclico: non salvabile, si tiene il precedente */ }
       }
     }
+    // Non verificato contro l'output reale del CLI se il canale `text` fra
+    // eventi `assistant` separati sia incrementale (frammenti) o cumulativo
+    // (snapshot che ripete quanto gia' inviato). Concatenare sempre presume
+    // incrementale: se fosse cumulativo duplicherebbe il contenuto gia'
+    // visto, e per testo non a forma di JSON il guard di `salvage()` non lo
+    // intercetta (non c'e' un `JSON.parse` che possa fallire). L'euristica
+    // sotto regge in entrambi i casi senza bisogno di saperlo a priori: uno
+    // snapshot cumulativo ha sempre l'accumulato corrente come prefisso, un
+    // frammento incrementale no (salvo un raro delta ripetuto identico).
+    if (newText) state.text = newText.startsWith(state.text) ? newText : state.text + newText;
   }
 
   return {
