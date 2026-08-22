@@ -164,6 +164,19 @@ describe('senza schema il canale e\' il testo, ma solo se e\' intero', () => {
     t.feed(`${INIT}\n${THINKING}\n`);
     assert.equal(t.salvage(), null);
   });
+
+  it('non duplica se il canale text e\' cumulativo (snapshot) invece che a delta (#509)', () => {
+    // Non e' verificato contro l'output reale del CLI se un evento `assistant`
+    // successivo ripete da capo quanto gia' inviato (snapshot) o porta solo il
+    // frammento nuovo (delta). Se fosse uno snapshot, concatenare ciecamente
+    // (come fa il ramo delta sopra) duplicherebbe il contenuto — e qui il testo
+    // non ha forma di JSON, quindi il guard sul JSON troncato non se ne accorge.
+    const t = createClaudeCliStreamTrace();
+    const parla = (text) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text }] } });
+    t.feed(`${INIT}\n${parla('Prima parte. ')}\n${parla('Prima parte. Seconda parte.')}\n`);
+    const salvato = t.salvage();
+    assert.equal(salvato.text, 'Prima parte. Seconda parte.');
+  });
 });
 
 describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modello', () => {
