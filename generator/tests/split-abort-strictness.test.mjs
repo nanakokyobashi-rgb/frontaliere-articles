@@ -384,8 +384,12 @@ for (const [nome, builder] of [
     assert.equal(chiamate.length, 2, `la 2/2 non e' partita per la forma "${nome}". Log:\n${log}`);
     assert.notEqual(out, null, `lo split e' caduto in fallback per la forma "${nome}" nonostante contenuto vero. Log:\n${log}`);
     const payload = JSON.parse(out);
+    // Il fallback tollerante passa dal blocco normalizzato — che fa `.trim()`
+    // sui valori — non dal raw object del modello: il confronto e' quindi
+    // sulla versione trimmata, a differenza della forma normale (test 1
+    // sopra), che preserva il raw byte per byte.
     assert.equal(
-      payload.content.it.body1, CORPO_BUONO.body1,
+      payload.content.it.body1, CORPO_BUONO.body1.trim(),
       `il corpo della forma "${nome}" non e' sopravvissuto all'assemblaggio`,
     );
   });

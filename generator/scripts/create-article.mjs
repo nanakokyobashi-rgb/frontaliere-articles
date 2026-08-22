@@ -8312,7 +8312,18 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // payload body-only genuino nelle altre due forme veniva letto come vuoto
     // qui e mandato sul ramo di fallback a chiamata singola nonostante il
     // valle lo avrebbe accettato. Vedi #508.
-    const bodyContent = normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {};
+    //
+    // La forma normale (`content[primaryLocale]` popolato) resta il RAW
+    // object del modello, non il blocco normalizzato: `normalizeItalianContentFromPayload`
+    // fa `.trim()` sui valori, e il corpo della 1/2 deve sopravvivere
+    // all'assemblaggio byte per byte (vedi il test «il corpo della 1/2
+    // sopravvive all'assemblaggio»). Il fallback tollerante scatta solo
+    // quando la forma normale non porta nessuno dei tre campi.
+    const _bodyContentDiretto = bodyData?.content?.[primaryLocale];
+    const bodyContent = (_bodyContentDiretto && typeof _bodyContentDiretto === 'object'
+      && (_bodyContentDiretto.body1 || _bodyContentDiretto.body2 || _bodyContentDiretto.body3))
+      ? _bodyContentDiretto
+      : (normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {});
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
       .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
     const _abortDichiarato = bodyData?.abort_topical_relevance === true;
