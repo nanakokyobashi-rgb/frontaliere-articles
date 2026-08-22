@@ -391,6 +391,63 @@ describe("REGOLA #0: la regola sta nel modulo, e il modulo e' cablato", () => {
     }
   });
 
+  it('la stringa letterale "null" sui campi di content non vale come contenuto (#512)', () => {
+    // Un modello che serializza male il `null` dell'abort come TESTO "null"
+    // invece che come valore JSON null non ha scritto un articolo: se
+    // `normalizeItalianContentFromPayload` la trattasse come contenuto, un
+    // vero abort di REGOLA #0 uscirebbe pubblicato con corpo/titolo "null".
+    const abortConNullTestuale = {
+      abort_topical_relevance: true,
+      reason: 'fonte senza aggancio frontaliere',
+      content: {
+        it: {
+          title: 'null',
+          excerpt: 'null',
+          body1: 'NULL',
+          body2: ' null ',
+          body3: 'null',
+        },
+      },
+    };
+
+    assert.equal(
+      normalizeItalianContentFromPayload(abortConNullTestuale),
+      null,
+      'La stringa "null" (in ogni maiuscola/spaziatura) deve essere trattata come campo assente.',
+    );
+
+    const { verdict, missing } = classifyBody2Payload({ parsed: abortConNullTestuale, parseErr: null });
+    assert.equal(
+      verdict,
+      'topic-gate-abort',
+      'Un abort con content.* letteralmente "null" deve restare un abort, non un articolo ' +
+        'con corpo testuale "null".',
+    );
+    assert.deepEqual(missing, []);
+  });
+
+  it('un campo di content davvero uguale a "null" resta rigettato quando NON e\' un abort', () => {
+    // Non-vacuita': senza il flag di abort, un payload con SOLO testo "null" sui
+    // campi non deve travestirsi da contenuto valido — deve finire in reject
+    // come qualunque altro payload senza contenuto reale.
+    const { verdict, missing } = classifyBody2Payload({
+      parsed: {
+        content: {
+          it: {
+            title: 'null',
+            excerpt: 'null',
+            body1: 'null',
+            body2: 'null',
+            body3: 'null',
+          },
+        },
+      },
+      parseErr: null,
+    });
+    assert.equal(verdict, 'reject');
+    assert.deepEqual(missing, ['content.it non normalizzabile']);
+  });
+
   it('callLLM() consulta il modulo ed esce PRIMA del ramo di rigenerazione', () => {
     // Un classificatore corretto che nessuno chiama e' lo stesso difetto con un
     // file in piu'. Qui si pinna l'ORDINE, che e' l'invariante: l'uscita per
