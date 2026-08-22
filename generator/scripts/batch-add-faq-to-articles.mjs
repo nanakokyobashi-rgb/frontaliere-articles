@@ -18,7 +18,7 @@
  * Progress is saved to data/batch-faq-progress.json for resumability.
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -132,13 +132,29 @@ function read(filePath) {
 
 // Same write-time guard as create-article.mjs write() (issue #66): strip any
 // C0 control character other than TAB/LF/CR before it reaches content/.
+// Scrittura ATOMICA del corpus: temp accanto al target + renameSync. Questo
+// choke-point riscrive un `content/**` GIA' ESISTENTE sotto
+// `batch-faq-articles.yml`, che ha `timeout-minutes` e quindi uccide con
+// SIGKILL: un `writeFileSync` diretto sul target puo' lasciarlo troncato a
+// meta' scrittura. Il temp sta accanto al target perche' il rename non
+// attraversi mai un confine di filesystem. Stesso pattern di `write()` in
+// create-article.mjs.
+let writeTmpSeq = 0;
 function write(filePath, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(filePath, content, clean);
-  writeFileSync(resolve(filePath), clean, 'utf-8');
+  const file = resolve(filePath);
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, file);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 /** Same escaping as create-article.mjs buildBodyFile() */
