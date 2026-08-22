@@ -787,6 +787,30 @@ describe('intento residenza: la preposizione non è obbligatoria', () => {
 });
 
 /**
+ * #551 — stesso anti-pattern di `RESIDENCE_INTENT_RE` (#530), mai corretto in
+ * `GUIDE_INTENT_RE` e `CANTON_GUIDE_INTENT_RE` nonostante 15+ review sulla PR
+ * #530: senza `\b` davanti al gruppo, ogni alternativa matcha anche come
+ * SUFFISSO di una parola più lunga. Misurato sul corpus intero (4.742
+ * articoli): 403 marcati e 187/210 coppie (finestra 7/90 giorni) PRIMA e DOPO
+ * — zero articoli spostati, stesso costo-zero di #530.
+ */
+describe('intento guida-mestiere e guida-cantone: non si accendono come SUFFISSO (#551)', () => {
+  it('GUIDE_INTENT_RE non matcha "diventare"/"requisit" come suffisso', () => {
+    expect(hasProfessionGuideIntent('ridiventare celebre')).toBe(false);
+    expect(hasProfessionGuideIntent('prerequisiti per il visto')).toBe(false);
+    // …e la forma legittima continua a passare.
+    expect(hasProfessionGuideIntent('diventare medico')).toBe(true);
+    expect(hasProfessionGuideIntent('requisiti per il visto')).toBe(true);
+  });
+
+  it('CANTON_GUIDE_INTENT_RE non matcha "vantaggi" come suffisso', () => {
+    expect(cantonThemeTopicKey('svantaggi premi cassa malati nel cantone Zurigo')).toBe(null);
+    // …e la forma legittima continua a passare, stessa chiave del gemello.
+    expect(cantonThemeTopicKey('vantaggi premi cassa malati nel cantone Zurigo')).toBe('lamal-premi:zurigo');
+  });
+});
+
+/**
  * `comuneMatch` (interna a `comuneTopicKey`) sceglie il candidato più lungo
  * fra due nomi che condividono la prima parola normalizzata — «Tronzano»
  * contro «Tronzano Lago Maggiore». La selezione confrontava `n` (parole del
