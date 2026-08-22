@@ -8306,7 +8306,13 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // CONTENUTO. Quindi il corpo si calcola PRIMA di decidere, e l'abort si
     // restituisce solo quando il corpo non e' utilizzabile — con la soglia
     // `< 500` che gia' viveva qui sotto, non una nuova.
-    const bodyContent = bodyData?.content?.[primaryLocale] || {};
+    // Le stesse tre forme che il valle tollera — `content.it`, `content`
+    // senza locale, campi alla radice (normalizeItalianContentFromPayload,
+    // body2-payload-verdict.mjs:213) — non solo `content[primaryLocale]`: un
+    // payload body-only genuino nelle altre due forme veniva letto come vuoto
+    // qui e mandato sul ramo di fallback a chiamata singola nonostante il
+    // valle lo avrebbe accettato. Vedi #508.
+    const bodyContent = normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {};
     const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
       .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
     const _abortDichiarato = bodyData?.abort_topical_relevance === true;
