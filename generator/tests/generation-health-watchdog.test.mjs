@@ -1334,6 +1334,43 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
   });
 });
 
+describe('#549 — paragraphAround isola il blocco, non una finestra a righe fisse', () => {
+  test('una dichiarazione di routing oltre 4 righe dopo la citazione: la vecchia finestra la perdeva', () => {
+    const lines = [
+      'evaluate() {',
+      '  body: [',
+      "    'Punto da cui guardare: `generator/scripts/lib/example.mjs`, che è `identical` nel',",
+      "    '`loop-sync-manifest.json`. Prima riga del paragrafo.',",
+      "    'Seconda riga di riempimento.',",
+      "    'Terza riga di riempimento.',",
+      "    'Quarta riga di riempimento.',",
+      "    'Quinta riga di riempimento.',",
+      "    'La fix va applicata a MANO su entrambi i repo, corpus per primo.',",
+      "  ].join('\\n'),",
+      '}',
+    ];
+    const i = lines.findIndex((l) => l.includes('loop-sync-manifest'));
+    const oldWindow = lines.slice(Math.max(0, i - 4), i + 5).join('\n');
+    assert.ok(!/entrambi i repo/i.test(oldWindow), 'il fixture deve riprodurre il buco della vecchia euristica, o non prova nulla');
+    const window = paragraphAround(lines, i);
+    assert.ok(/entrambi i repo/i.test(window), 'paragraphAround deve isolare l\'intero paragrafo, non una finestra a righe fisse');
+  });
+
+  test('non trabocca nel paragrafo successivo oltre il separatore `\'\',`', () => {
+    const lines = [
+      '  body: [',
+      "    'Punto da cui guardare: `generator/scripts/lib/example.mjs`, che è `identical` nel',",
+      "    '`loop-sync-manifest.json`. Nessuna dichiarazione di routing qui.',",
+      "    '',",
+      "    'Paragrafo successivo, non collegato: la fix va applicata a MANO su entrambi i repo.',",
+      "  ].join('\\n'),",
+    ];
+    const i = lines.findIndex((l) => l.includes('loop-sync-manifest'));
+    const window = paragraphAround(lines, i);
+    assert.ok(!/entrambi i repo/i.test(window), 'il paragrafo successivo, oltre il separatore, non e\' la stessa istruzione di routing');
+  });
+});
+
 // ─────────────────────────────────────────────────────────────────────────────
 // `roster-erosion` — il termometro che deve restare acceso dopo #449.
 //
