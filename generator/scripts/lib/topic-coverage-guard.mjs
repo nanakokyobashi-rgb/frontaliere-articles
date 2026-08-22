@@ -501,6 +501,43 @@ export function comuneTopicKey(text) {
 }
 
 /**
+ * Ogni comune nominato nel testo, uno per posizione di partenza in cui una
+ * sequenza completa combacia. A parità di posizione vince il candidato più
+ * lungo (un nome di più parole non può mai perdere contro un suo prefisso
+ * più corto dello stesso gruppo).
+ *
+ * Serve a due chiamanti con esigenze diverse: `comuneMatch` ne vuole UNO
+ * (il "migliore" del testo intero), `professionEvidenceIsOnlyAComuneName`
+ * li vuole TUTTI perché l'evidenza-mestiere può reggersi su un comune
+ * diverso da quello che vincerebbe la chiave-comune (#504 rischio 2).
+ *
+ * @returns {Array<{value: string, start: number, words: string[]}>}
+ */
+function comuneMatchAll(text) {
+  const norm = normalizeText(text);
+  if (!norm) return [];
+  const index = municipalityIndex();
+  if (index.size === 0) return [];
+  const tokens = norm.split(' ');
+  const matches = [];
+  for (let i = 0; i < tokens.length; i += 1) {
+    const candidates = index.get(tokens[i]);
+    if (!candidates) continue;
+    let atPosition = null;
+    for (const candidate of candidates) {
+      let n = 0;
+      while (n < candidate.words.length && tokens[i + n] === candidate.words[n]) n += 1;
+      if (n !== candidate.words.length) continue;
+      if (!atPosition || n > atPosition.words.length) {
+        atPosition = { value: candidate.value, start: i, words: candidate.words };
+      }
+    }
+    if (atPosition) matches.push(atPosition);
+  }
+  return matches;
+}
+
+/**
  * Come `comuneTopicKey`, ma dice anche DOVE il nome ha combaciato.
  *
  * La posizione non serve alla chiave — serve a `professionEvidenceIsOnlyAComuneName`,
@@ -508,24 +545,23 @@ export function comuneTopicKey(text) {
  * `comuneTopicKey` resta la porta pubblica e continua a rendere il solo slug,
  * cosi' i chiamanti e i test che la usano non cambiano.
  *
+ * Tie-break esplicito (#504 rischio 1): il nome più lungo vince sempre; a
+ * parità di lunghezza vince quello incontrato PRIMA scandendo il testo da
+ * sinistra — `comuneMatchAll` produce i match già in ordine di posizione
+ * crescente, quindi mantenere il primo tenuto da un confronto stretto (`>`,
+ * non `>=`) è la regola, non un effetto collaterale dell'ordine di
+ * iterazione di `municipalityIndex()`. Un vero pareggio di lunghezza può
+ * darsi solo fra comuni DIVERSI a posizioni diverse nel testo (due candidati
+ * con la stessa sequenza di parole sarebbero lo stesso comune), quindi il
+ * criterio è sempre "posizione nel testo", mai l'ordine del file sorgente.
+ *
  * @returns {{value: string, start: number, words: string[]}|null}
  */
 function comuneMatch(text) {
-  const norm = normalizeText(text);
-  if (!norm) return null;
-  const index = municipalityIndex();
-  if (index.size === 0) return null;
-  const tokens = norm.split(' ');
+  const matches = comuneMatchAll(text);
   let best = null;
-  for (let i = 0; i < tokens.length; i += 1) {
-    const candidates = index.get(tokens[i]);
-    if (!candidates) continue;
-    for (const candidate of candidates) {
-      let n = 0;
-      while (n < candidate.words.length && tokens[i + n] === candidate.words[n]) n += 1;
-      if (n !== candidate.words.length) continue;
-      if (!best || n > best.words.length) best = { value: candidate.value, start: i, words: candidate.words };
-    }
+  for (const candidate of matches) {
+    if (!best || candidate.words.length > best.words.length) best = candidate;
   }
   return best;
 }
@@ -571,11 +607,24 @@ function comuneMatch(text) {
  * `profession-guide` (la prova sopravvive alla rimozione) mentre «Villa
  * Guardia: vivere e lavorare» non lo e' piu'. Nessun mestiere perde una
  * classificazione che si reggeva su prove sue.
+ *
+ * ── PERCHE' OGNI COMUNE TROVATO, NON SOLO IL "MIGLIORE" (#504 rischio 2) ──
+ *
+ * Un testo puo' nominare PIU' di un comune, e `comuneMatch` ne sceglie uno
+ * solo (il piu' lungo) per la chiave-comune. Se l'evidenza del mestiere si
+ * regge sul nome di un comune DIVERSO da quello scelto come "migliore",
+ * togliere solo quest'ultimo lascia intatta la sequenza che fa vincere la
+ * chiave-mestiere e la guardia non scatterebbe. Si prova quindi la rimozione
+ * di OGNI comune candidato trovato nel testo: se anche una sola rimozione fa
+ * sparire la chiave-mestiere, l'unica prova era un toponimo.
  */
 function professionEvidenceIsOnlyAComuneName(text, professionId) {
-  const comune = comuneMatch(text);
-  if (!comune) return false;
-  return professionTopicKey(removeWordSequence(normalizeText(text), comune.words)) !== professionId;
+  const comuni = comuneMatchAll(text);
+  if (comuni.length === 0) return false;
+  const norm = normalizeText(text);
+  return comuni.some(
+    (comune) => professionTopicKey(removeWordSequence(norm, comune.words)) !== professionId,
+  );
 }
 
 /**
