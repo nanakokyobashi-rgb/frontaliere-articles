@@ -83,6 +83,21 @@ const SLUGS = [
     ref: 'corpus#317',
     citations: ['TF 1992', 'OD 1993', '25 giugno 1978'],
   },
+  {
+    // #556 review round 2. Il corpo IT/FR aveva gia' la forma senza sigla
+    // ("legge federale sul contrasto alla criminalita' organizzata"), ma DE e
+    // EN portavano ciascuno un acronimo inventato PROPRIO — `(Bekämpfungsgesetz)`
+    // in DE, `(OCA)` in EN — mai raggiunti dal fix `(LCO)` di questa stessa PR
+    // perche' il denylist byte-exact di CORPUS_WIDE_FABRICATED cerca solo
+    // `lco`/`lcl`. Stesso schema di `(Sozialgesetz)` sopra: una traduzione puo'
+    // allucinare un proprio acronimo indipendente dall'originale IT.
+    // `(OCA)` non e' promuovibile a CORPUS_WIDE_FABRICATED: collide byte-exact
+    // con una citazione preesistente e non correlata in
+    // `franchigia-doganale-acquisti-svizzera.ts` (IT), fuori scope di questa PR.
+    slug: 'infiltrazioni-criminali-ticino-grigioni',
+    ref: '#556',
+    citations: ['(OCA)', '(Bekämpfungsgesetz)'],
+  },
 ];
 
 // Fino a #323 questa funzione era hardcoded su `content/blog-body/` e non
