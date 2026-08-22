@@ -53,9 +53,24 @@ function readExistingCatalog() {
   }
 }
 
+// Atomico, e qui il troncamento e' PIU' insidioso che altrove: `appendCatalogEntry`
+// riscrive il catalogo in place da `publish-journalist-article.mjs`, sotto
+// `generate-article.yml` (timeout-minutes → SIGKILL), e la lettura poco sopra
+// ha un `catch { return []; }`. Un file troncato non lancia: torna un catalogo
+// VUOTO, e il run successivo lo riscrive perdendo tutte le voci senza un solo
+// errore. Temp accanto al target + renameSync: o resta il catalogo vecchio
+// intero, o c'e' quello nuovo intero.
+let writeTmpSeq = 0;
 function writeCatalog(catalog) {
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
-  fs.writeFileSync(OUT_PATH, JSON.stringify(catalog));
+  const tmp = `${OUT_PATH}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    fs.writeFileSync(tmp, JSON.stringify(catalog));
+    fs.renameSync(tmp, OUT_PATH);
+  } catch (err) {
+    try { fs.unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 /**

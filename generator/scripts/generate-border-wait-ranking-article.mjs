@@ -247,10 +247,24 @@ async function main() {
   }
 
   mkdirSync(path.dirname(RANKING_JSON_PATH), { recursive: true });
-  writeFileSync(
-    RANKING_JSON_PATH,
-    JSON.stringify(buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart, weekEnd, movers }), null, 2) + '\n',
-  );
+  // Atomico come le scritture del body, e per una ragione PIU' forte: questo
+  // JSON viene ripubblicato verbatim in `dist/api/border-wait-ranking.json` da
+  // scripts/build-api.mjs, che ne fa `JSON.parse` senza catch. Un SIGKILL da
+  // `timeout-minutes` a meta' di questa scrittura lascia un JSON troncato, e
+  // il parse che lancia interrompe l'INTERO build-api: non solo la ranking
+  // chart, ma manifest, articles.json, feed e meta restano fermi alla versione
+  // precedente finche' qualcuno non ripara il file a mano.
+  const rankingTmp = `${RANKING_JSON_PATH}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(
+      rankingTmp,
+      JSON.stringify(buildRankingJson({ ranking, trend, funFacts, todayIso, weekStart, weekEnd, movers }), null, 2) + '\n',
+    );
+    renameSync(rankingTmp, RANKING_JSON_PATH);
+  } catch (err) {
+    try { unlinkSync(rankingTmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
   console.log(`  ✅ ${path.relative(REPO_ROOT, RANKING_JSON_PATH)}`);
 
   if (!exists) {

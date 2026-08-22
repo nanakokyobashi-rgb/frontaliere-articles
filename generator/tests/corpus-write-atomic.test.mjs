@@ -32,6 +32,7 @@ const CHOKE_POINTS = [
   ['generator/scripts/generate-events-digest-article.mjs', 'refresh-events-digest.yml'],
   ['generator/scripts/generate-border-wait-ranking-article.mjs', 'generate-border-wait-ranking-weekly.yml'],
   ['generator/scripts/batch-add-faq-to-articles.mjs', 'batch-faq-articles.yml'],
+  ['generator/scripts/generate-journalist-image-catalog.mjs', 'generate-article.yml'],
 ];
 
 // `create-article.mjs` e' nella classe ed e' gia' atomico dal round 1, ma la
@@ -47,6 +48,19 @@ const COVERED_ELSEWHERE = ['generator/scripts/create-article.mjs'];
 // riparatori che si lanciano a mano, dove un'interruzione la vede la persona
 // che l'ha causata. Se domani un workflow ne chiama uno, il censimento in
 // fondo lo rimette in gioco solo se lo si toglie da qui — deliberatamente.
+// Scrivono sotto `generator/scripts` un artefatto che il criterio del censimento
+// intercetta, ma NON riscrivono in place qualcosa che un altro processo
+// consuma senza poterlo rigenerare: sono contatori di stato e cache. Un
+// troncamento qui si ricostruisce al giro dopo — verificato leggendo cosa
+// scrivono (`article-topic-selector`: tracker e contatori JSON;
+// `refresh-events-dataset`: la cache della fetch). Restano elencati perche' il
+// censimento non li perda di vista: toglierli da qui e' l'unico modo per
+// rimetterli in gioco.
+const REGENERABLE_STATE = [
+  'generator/scripts/lib/article-topic-selector.mjs',
+  'generator/scripts/refresh-events-dataset.mjs',
+];
+
 const NOT_WORKFLOW_DRIVEN = [
   'generator/scripts/repair-mangled-chars.mjs',
   'generator/scripts/repair-prompt-placeholders.mjs',
@@ -56,14 +70,22 @@ const NOT_WORKFLOW_DRIVEN = [
 for (const [rel, workflow] of CHOKE_POINTS) {
   const file = path.join(root, rel);
 
-  test(`${rel} importa renameSync e unlinkSync da node:fs`, () => {
+  test(`${rel} ha accesso a renameSync e unlinkSync`, () => {
     const src = fs.readFileSync(file, 'utf-8');
-    const importLine = src.split('\n').find((l) => /from '(?:node:)?fs'/.test(l));
-    assert.ok(importLine, `import di node:fs non trovato in ${rel}`);
-    assert.match(importLine, /\brenameSync\b/,
-      `renameSync deve essere importato in ${rel}: e' il syscall atomico su cui si basa il commit`);
-    assert.match(importLine, /\bunlinkSync\b/,
-      `unlinkSync deve essere importato in ${rel}: senza, il temp resta a terra quando il rename fallisce`);
+    // Due forme in circolazione nel repo: named import da 'fs'/'node:fs', e
+    // default import usato come `fs.renameSync`. Pretenderne una sola
+    // trasformerebbe il test in una richiesta di stile invece che di sostanza.
+    const namedLine = src.split('\n').find((l) => /^import \{[^}]*\} from '(?:node:)?fs'/.test(l)) || '';
+    const hasDefaultFs = /^import \w+ from '(?:node:)?fs'/m.test(src);
+    for (const fn of ['renameSync', 'unlinkSync']) {
+      const ok = new RegExp(`\\b${fn}\\b`).test(namedLine)
+        || (hasDefaultFs && new RegExp(`\\bfs\\.${fn}\\(`).test(src));
+      assert.ok(ok,
+        `${rel}: ${fn} non e' raggiungibile. `
+        + (fn === 'renameSync'
+          ? "e' il syscall atomico su cui si basa il commit"
+          : 'senza, il temp resta a terra quando il rename fallisce'));
+    }
   });
 
   test(`${rel} non scrive mai il corpus direttamente sul path finale (${workflow})`, () => {
@@ -98,11 +120,20 @@ for (const [rel, workflow] of CHOKE_POINTS) {
   });
 }
 
-test("l'elenco dei choke-point copre ogni scrittura di blog-body in generator/scripts", () => {
+test("l'elenco dei choke-point copre ogni scrittura di un artefatto pubblicato", () => {
   // Il difetto vero del round 1 non e' stato il codice: e' stato un audit a
-  // mano che ha mancato meta' della classe. Qui l'elenco sopra viene
-  // confrontato con cio' che il repo contiene DAVVERO, cosi' un file nuovo che
-  // scrive il corpus non puo' restare fuori dalla copertura in silenzio.
+  // mano che ha mancato meta' della classe. La prima stesura di questo
+  // censimento ne ha mancata un'altra fetta, perche' cercava la stringa
+  // `blog-body` — e il write su `public/data/border-wait-ranking.json`, nello
+  // stesso file gia' corretto, non la contiene. Un criterio che nomina UN
+  // percorso non e' un censimento: e' l'elenco di prima scritto in un altro
+  // modo.
+  //
+  // Ora il criterio e' l'ARTEFATTO: qualunque file che scrive e che nomina una
+  // radice pubblicata — il corpus, il registro degli articoli, `public/data`,
+  // `dist/api`. Chi entra in quel gruppo o e' atomico, o sta in una delle due
+  // liste di esclusione, che sono il posto dove la ragione e' scritta.
+  const PUBLISHED = /blog-body|blog-articles-data|corpusPath\(|'public',\s*'data'|public\/data|dist\/api/;
   const dir = path.join(root, 'generator', 'scripts');
   const found = [];
   const walk = (d) => {
@@ -111,7 +142,7 @@ test("l'elenco dei choke-point copre ogni scrittura di blog-body in generator/sc
       if (e.isDirectory()) { walk(p); continue; }
       if (!e.name.endsWith('.mjs')) continue;
       const src = fs.readFileSync(p, 'utf-8');
-      if (/blog-body/.test(src) && /writeFileSync\(/.test(src)) {
+      if (/writeFileSync\(/.test(src) && PUBLISHED.test(src)) {
         found.push(path.relative(root, p));
       }
     }
@@ -121,11 +152,32 @@ test("l'elenco dei choke-point copre ogni scrittura di blog-body in generator/sc
   const listed = new Set([
     ...CHOKE_POINTS.map(([rel]) => rel),
     ...COVERED_ELSEWHERE,
+    ...REGENERABLE_STATE,
     ...NOT_WORKFLOW_DRIVEN,
   ]);
   const missing = found.filter((f) => !listed.has(f));
   assert.deepEqual(missing, [],
-    `questi file scrivono sotto blog-body ma non sono nell'elenco CHOKE_POINTS: `
-    + `${missing.join(', ')}. Aggiungili (e rendili atomici) invece di lasciarli scoperti — `
-    + `e' esattamente il buco che la review del round 2 ha trovato.`);
+    'questi file scrivono un artefatto pubblicato ma non sono censiti: '
+    + `${missing.join(', ')}. Rendili atomici e aggiungili a CHOKE_POINTS, oppure `
+    + "mettili in REGENERABLE_STATE / NOT_WORKFLOW_DRIVEN con la ragione — "
+    + "e' esattamente il buco che le due review del round 2 hanno trovato.");
+});
+
+test('nel file del ranking sono atomici ENTRAMBI i choke-point, non solo il body', () => {
+  // Il secondo write dello stesso file — `public/data/border-wait-ranking.json`
+  // — era sfuggito sia all'audit sia alla prima stesura del censimento, che
+  // ragiona per FILE e quindi si ferma al primo write corretto che trova.
+  // Questo caso vale una verifica sua: `scripts/build-api.mjs` ripubblica quel
+  // JSON verbatim e ne fa `JSON.parse` senza catch, quindi un file troncato non
+  // ferma la sola ranking chart — interrompe l'intero build-api, e manifest,
+  // articles.json, feed e meta restano alla versione precedente.
+  const src = fs.readFileSync(
+    path.join(root, 'generator/scripts/generate-border-wait-ranking-article.mjs'), 'utf-8');
+  assert.doesNotMatch(src, /writeFileSync\(\s*\n?\s*RANKING_JSON_PATH\s*,/,
+    'writeFileSync scrive direttamente su RANKING_JSON_PATH: sotto '
+    + 'generate-border-wait-ranking-weekly.yml (timeout-minutes → SIGKILL) quel JSON '
+    + "resta troncato, e build-api.mjs muore sul JSON.parse trascinandosi dietro "
+    + "tutta la superficie che quel run avrebbe ripubblicato.");
+  assert.match(src, /renameSync\(\s*rankingTmp\s*,\s*RANKING_JSON_PATH\s*\)/,
+    'il commit su RANKING_JSON_PATH deve passare da renameSync(rankingTmp, RANKING_JSON_PATH)');
 });
