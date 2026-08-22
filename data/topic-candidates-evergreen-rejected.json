@@ -1,11 +1,5 @@
 {
   "keywords": [
-    "premi cassa malati canton Svitto e riduzione premi",
-    "permesso di domicilio C canton Svitto requisiti e domanda",
-    "assegni familiari canton Svitto importi e domanda",
-    "sistema scolastico canton Svitto iscrizione e cicli",
-    "comprare casa canton Svitto prezzi e mutuo ipotecario",
-    "mercato degli affitti canton Svitto canoni medi e diritto di locazione",
     "avs e prestazioni complementari canton Svitto cassa di compensazione",
     "aprire un'attività canton Svitto registro di commercio e costi",
     "salari e mercato del lavoro canton Svitto settori e livelli",
@@ -499,7 +493,13 @@
     "vivere a Cedrasco e lavorare in Grigioni da frontaliere",
     "comprare casa canton Berna prezzi e mutuo ipotecario",
     "naturalizzazione canton Berna requisiti e procedura",
-    "vivere a Schilpario e lavorare in Grigioni da frontaliere"
+    "vivere a Schilpario e lavorare in Grigioni da frontaliere",
+    "vivere a Fusine e lavorare in Grigioni da frontaliere",
+    "vivere a Vione e lavorare in Grigioni da frontaliere",
+    "vivere a Colorina e lavorare in Grigioni da frontaliere",
+    "vivere a Morgex e lavorare in Vallese da frontaliere",
+    "vivere a Avise e lavorare in Vallese da frontaliere",
+    "vivere a Arvier e lavorare in Vallese da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -738,6 +738,7 @@
     "vivere a Torre di Santa Maria e lavorare in Grigioni da frontaliere": 1,
     "vivere a Sluderno e lavorare in Grigioni da frontaliere": 2,
     "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere": 1,
-    "vivere a Caiolo e lavorare in Grigioni da frontaliere": 1
+    "vivere a Caiolo e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Vilminore di Scalve e lavorare in Grigioni da frontaliere": 1
   }
 }
