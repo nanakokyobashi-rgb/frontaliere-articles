@@ -637,6 +637,50 @@ describe('checkFabricatedNormAcronyms', () => {
     ))).toContain('fabricated-norm-acronym');
   });
 
+  // Irrobustimento #526 (item 3/3, adversarial check di #514): LFW e LPS
+  // restavano bare-match incondizionato dopo che LCL (#463) e LCO (#514)
+  // avevano gia' ricevuto il context-guard — stessa fragilita' strutturale
+  // gia' misurata due volte, nessuna collisione nota oggi ma un futuro
+  // articolo che nomini un'entita' reale con una di queste sigle andrebbe
+  // rigettato senza motivo.
+  it('leaves a bare mention of LFW alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Il gruppo LFW ha aperto un nuovo sportello vicino al confine per i frontalieri.',
+    )).toEqual([]);
+  });
+
+  it('leaves a bare mention of LPS alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'La app LPS aiuta i frontalieri a calcolare lo stipendio netto in Svizzera.',
+    )).toEqual([]);
+  });
+
+  it('still flags LFW with the Italian citation cue actually used in the corpus', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sul lavoro (LFW) del 20 marzo 1943 prevede che l\'apprendistato duri 3 anni.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  it('still flags LPS with the Italian citation cue actually used in the corpus', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sulle prestazioni sociali (LPS) stabilisce i requisiti minimi.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  // Caso che ha reso necessario spostare `Gesetz(?:es|e)?(?!t)` fuori dal
+  // gruppo ancorato al `\b` in `NORM_CITATION_CUE`: `(LFW)` e' arrivato
+  // byte-identico anche nel corpo tedesco di `apprendistato-urie-2024-2025`,
+  // dentro un composto (`Bundesarbeitsgesetz`) che non contiene la
+  // sottostringa letterale `Bundesgesetz` — un `\b` davanti a `Gesetz` non
+  // puo' scattare a meta' parola. Senza questo aggiustamento, aggiungere il
+  // context-guard a LFW avrebbe reso invisibile questa fabbricazione gia'
+  // misurata (vedi il test gemello su `runFactualityGates` piu' in basso).
+  it('still flags LFW inside a German compound that embeds -gesetz mid-word', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'Nach dem Bundesarbeitsgesetz (LFW) vom 13. März 1943 ist die Lehre ein Vertrag.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
   // Gemello di frontaliere-si-o-no#6042 (follow-up #6017, item 2/3 di #6005),
   // adattato: stessi due casi, `node:test` + expect-shim invece di vitest.
   // LCL fabbrica due leggi diverse e INCOMPATIBILI nello stesso corpus
