@@ -125,6 +125,27 @@ export function parseExecutionMessages(raw) {
  * comportamento opposto al backoff lungo del 429. Restano quindi failure rosse
  * ri-tentabili, invariate.
  *
+ * GATE sul lavoro effettivamente consegnato (#560): i tre segnali sopra
+ * catturano un 429 apparso IN QUALUNQUE punto dello stream, ma un 429 può
+ * essere transiente — l'SDK lo ritenta e la run PROSEGUE, finendo con turni e
+ * costo reali (e magari un proprio commento di verdetto genuino, es.
+ * `already-fixed`). Il testo che `mark-claude-terminal-outcome.mjs` posta per
+ * `rateLimited: true` afferma un fatto preciso — «l'agent non ha letto questa
+ * issue, 0 turni, $0» — quindi va verificato contro l'ultimo messaggio
+ * `result` prima di dichiararlo, con lo STESSO pattern "ultimo result vince"
+ * già usato da `resultSubtype()` qui sotto e da `claude-usage-summary.mjs`
+ * (che legge num_turns/cost dallo stesso file per la stessa run). Misurato sul
+ * baseline dei 429 reali: num_turns:1, cost:0 — un run con turni>1 o costo>0
+ * ha fatto lavoro vero, quindi NON è la morte a vuoto che il messaggio
+ * descrive, indipendentemente da un 429 transiente incontrato lungo la strada.
+ * Senza questo gate, il commento fittizio "rate-limited" segue di pochi
+ * secondi il verdetto genuino dell'agent (stesso job, step successivo),
+ * `latestFixOutcomeFromComments` legge quello come l'ultimo marker, e il
+ * drainer ri-accoda una issue il cui verdetto (es. `already-fixed`,
+ * NON_RETRYABLE) era già stato consegnato — la issue rifà lo stesso giro,
+ * riproduce lo stesso doppio-post, e il bucket ricorre a oltranza nonostante
+ * la regola di park esista già (root cause dell'escalation #560).
+ *
  * @param {string} raw contenuto dell'execution file
  * @returns {{ rateLimited: boolean, resetsAt: number|null, rateLimitType: string|null }}
  */
@@ -156,6 +177,17 @@ export function detectClaudeRateLimit(raw) {
     }
 
     if (m.error === 'rate_limit') rateLimited = true;
+  }
+
+  // Un 429 in mezzo allo stream non è per forza la morte della run: se il
+  // messaggio `result` TERMINALE mostra turni o costo reali, l'SDK ha
+  // ritentato ed è andato avanti — non è la morte a vuoto che il commento
+  // "rate-limited" descrive. Stesso "ultimo result vince" di resultSubtype().
+  if (rateLimited) {
+    const lastResult = [...msgs].reverse().find((m) => m && m.type === 'result');
+    const turns = Number(lastResult?.num_turns) || 0;
+    const cost = Number(lastResult?.total_cost_usd ?? lastResult?.cost_usd) || 0;
+    if (turns > 1 || cost > 0) rateLimited = false;
   }
 
   return { rateLimited, resetsAt, rateLimitType };
