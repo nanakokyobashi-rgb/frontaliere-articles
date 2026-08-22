@@ -143,6 +143,23 @@ function payloadBody(flag, content) {
   return JSON.stringify(p);
 }
 
+// #508: le altre due forme che `normalizeItalianContentFromPayload` tollera
+// a valle — `content` con la lingua saltata, e i campi alla radice del
+// payload senza `content` affatto — che `payloadBody()` sopra non esercita
+// mai perche' avvolge sempre in `{ content: { it: ... } }`.
+function payloadBodyContentSenzaLocale(flag, content) {
+  const p = { content: content || {} };
+  if (flag !== undefined) p.abort_topical_relevance = flag;
+  if (flag !== undefined && flag !== null) p.reason = 'La fonte non ha un angolo frontaliere reale.';
+  return JSON.stringify(p);
+}
+function payloadBodyRadice(flag, content) {
+  const p = { ...(content || {}) };
+  if (flag !== undefined) p.abort_topical_relevance = flag;
+  if (flag !== undefined && flag !== null) p.reason = 'La fonte non ha un angolo frontaliere reale.';
+  return JSON.stringify(p);
+}
+
 /**
  * Il payload della meta' META. La forma segue lo schema vero: `title` ed
  * `excerpt` stanno in `content.<locale>` (`CONTENT_KEYS_META = ['title',
@@ -341,6 +358,39 @@ for (const [nome, risposte, atteso] of USCITE) {
     assert.match(
       proprie.join('\n'), atteso,
       `la riga non nomina questa uscita: chi legge i log non puo' distinguerla dalle altre. Righe: ${JSON.stringify(righe)}`,
+    );
+  });
+}
+
+// ── 5b. Forme alternative del payload body-only (#508) ────────────────────
+//
+// `_corpoUsabile`/`bodyContent` leggevano solo `content[primaryLocale]`,
+// mentre il predicato di usabilita' che questo file pinna sopra —
+// `normalizeItalianContentFromPayload`, lo stesso che decide `_valleAbortirebbe`
+// — tollera anche `content` senza la lingua e i campi alla radice del
+// payload (body2-payload-verdict.mjs:198). Un body-only genuino in una di
+// queste due forme veniva letto come vuoto e mandato sul ramo di fallback a
+// chiamata singola nonostante contenuto vero: la stessa classe di
+// disallineamento fra i due criteri che questo file pinna sull'asse del
+// flag, riaperta sull'asse della forma del payload.
+for (const [nome, builder] of [
+  ['content senza locale', payloadBodyContentSenzaLocale],
+  ['campi alla radice', payloadBodyRadice],
+]) {
+  test(`corpo buono in forma "${nome}" ⇒ chiamata 2/2, non fallback, corpo sopravvive all'assemblaggio`, async () => {
+    const { out, chiamate, log } = await run({
+      risposte: [builder(undefined, CORPO_BUONO), PAYLOAD_META],
+    });
+    assert.equal(chiamate.length, 2, `la 2/2 non e' partita per la forma "${nome}". Log:\n${log}`);
+    assert.notEqual(out, null, `lo split e' caduto in fallback per la forma "${nome}" nonostante contenuto vero. Log:\n${log}`);
+    const payload = JSON.parse(out);
+    // Il fallback tollerante passa dal blocco normalizzato — che fa `.trim()`
+    // sui valori — non dal raw object del modello: il confronto e' quindi
+    // sulla versione trimmata, a differenza della forma normale (test 1
+    // sopra), che preserva il raw byte per byte.
+    assert.equal(
+      payload.content.it.body1, CORPO_BUONO.body1.trim(),
+      `il corpo della forma "${nome}" non e' sopravvissuto all'assemblaggio`,
     );
   });
 }
