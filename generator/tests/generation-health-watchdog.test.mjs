@@ -1242,6 +1242,27 @@ const MIRROR_CARRIED_PREFIXES = ['engine/', 'index.ts', 'articleSections.ts', 'c
 
 const carriedByAMirror = (p) => MIRROR_CARRIED_PREFIXES.some((q) => p === q || p.startsWith(q));
 
+// I `body` sono array di stringhe unite da `.join('\n')`, con `''` come
+// separatore di paragrafo esplicito nel literal. Una riga è quel separatore,
+// non prosa.
+const isParagraphBreak = (line) => /^\s*''\s*,?\s*$/.test(line);
+
+// Isola il paragrafo/blocco che cita `pattern` in `lines`, non una finestra a
+// righe fisse intorno ad esso: un paragrafo può essere più lungo o più corto
+// di qualunque finestra fissa scelta a priori, ed è esattamente il difetto
+// segnalato in #549 sull'euristica precedente (`lines.slice(i - 4, i + 5)`).
+// I confini sono il separatore di paragrafo più vicino sopra/sotto, oppure —
+// in assenza — l'array literal che contiene la citazione (`body: [` /
+// `].join(`), così lo scan non trabocca nel paragrafo o nella condizione
+// successiva.
+const paragraphAround = (lines, i) => {
+  let start = i;
+  while (start > 0 && !isParagraphBreak(lines[start - 1]) && !/body:\s*\[/.test(lines[start - 1])) start -= 1;
+  let end = i;
+  while (end < lines.length - 1 && !isParagraphBreak(lines[end + 1]) && !/\]\.join\(/.test(lines[end + 1])) end += 1;
+  return lines.slice(start, end + 1).join('\n');
+};
+
 describe('routing della fix: nessun body promette un mirror che non esiste', () => {
   const SCANNER = path.join(ROOT, 'scripts', 'ci', 'scan-generation-health.mjs');
   const source = fs.readFileSync(SCANNER, 'utf-8');
@@ -1276,8 +1297,8 @@ describe('routing della fix: nessun body promette un mirror che non esiste', () 
     for (let i = 0; i < lines.length; i += 1) {
       if (!/loop-sync-manifest/.test(lines[i])) continue;
       // La frase è spezzata su più righe del literal: il path a cui si
-      // riferisce, e il resto dell'istruzione, stanno nella finestra intorno.
-      const window = lines.slice(Math.max(0, i - 4), i + 5).join('\n');
+      // riferisce, e il resto dell'istruzione, stanno nello stesso paragrafo.
+      const window = paragraphAround(lines, i);
       const named = [...window.matchAll(/`([A-Za-z0-9_@./-]+\.(?:mjs|ts|tsx))(?::[\d-]+)?`/g)]
         .map((m) => m[1])
         .filter((p) => identical.has(p) && !carriedByAMirror(p));
