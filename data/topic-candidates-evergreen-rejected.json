@@ -1,6 +1,5 @@
 {
   "keywords": [
-    "vivere a Brunate e lavorare in Ticino da frontaliere",
     "vivere a Carate Urio e lavorare in Ticino da frontaliere",
     "vivere a Grandate e lavorare in Ticino da frontaliere",
     "vivere a Montano Lucino e lavorare in Ticino da frontaliere",
@@ -499,7 +498,8 @@
     "vivere a Gravedona ed Uniti e lavorare in Ticino da frontaliere",
     "vivere a Arcisate e lavorare in Ticino da frontaliere",
     "vivere a Cremenaga e lavorare in Ticino da frontaliere",
-    "premi cassa malati canton Svitto e riduzione premi"
+    "premi cassa malati canton Svitto e riduzione premi",
+    "vivere a Ghiffa e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -740,6 +740,7 @@
     "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere": 1,
     "vivere a Caiolo e lavorare in Grigioni da frontaliere": 1,
     "vivere a Vilminore di Scalve e lavorare in Grigioni da frontaliere": 1,
-    "vivere a Saint-Christophe e lavorare in Vallese da frontaliere": 1
+    "vivere a Saint-Christophe e lavorare in Vallese da frontaliere": 1,
+    "vivere a Verbania e lavorare in Ticino da frontaliere": 1
   }
 }
