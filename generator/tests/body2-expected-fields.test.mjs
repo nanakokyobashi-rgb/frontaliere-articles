@@ -56,6 +56,8 @@
  *   M12 il merge della meta' meta torna a leggere SOLO
  *       `content[primaryLocale]`, perdendo title/excerpt alla radice
  *       (issue #494)                                                         → #13
+ *   M13 il merge spread grezzo della BODY dopo metaBlock fa vincere
+ *       title/excerpt spuri della 1/2 sui META veri (issue #506)             → #14
  */
 
 import { test } from 'node:test';
@@ -516,4 +518,64 @@ test('#13 un meta con title/excerpt alla radice viene recuperato dal merge, non 
     'il title alla radice deve arrivare in content.it, non essere perso nel merge',
   );
   assert.equal(merged.content.it.excerpt, 'Il messaggio 8412 rivede le aliquote e introduce una notifica trimestrale.');
+});
+
+// ── 14. title/excerpt spuri della BODY non prevalgono sui META veri ────────
+//
+// Buco lasciato dalla #3 (issue #506). Con `expectedFields: BODY_ONLY_FIELDS`
+// la 1/2 non viene piu' giudicata su title/excerpt — per costruzione, il
+// prompt li vieta. Un modello che li emette comunque li mette nel RAW
+// `content[primaryLocale]`, e lo spread `{...metaBlock, ...bodyContent}`
+// (bodyContent DOPO) li faceva vincere sui META veri della 2/2. Il titolo
+// pubblicato sarebbe stato quello spurio, senza errore. Il merge shipped
+// deve prendere SOLO BODY_ONLY_FIELDS dalla 1/2 e lasciare metaBlock per
+// ultimo. Questo test gira `_generateSplit` ritagliato dal sorgente, non
+// una replica del merge.
+
+test('#14 title/excerpt spuri della BODY non prevalgono sui META veri', async () => {
+  const titoloSpurio = 'TITOLO SPURIO DELLA META BODY';
+  const excerptSpurio = 'Excerpt spurio della meta body, non deve sopravvivere al merge.';
+  const rispostaBodySpuria = JSON.stringify({
+    content: {
+      it: {
+        body1: BLOCCO,
+        body2: BLOCCO,
+        body3: BLOCCO,
+        title: titoloSpurio,
+        excerpt: excerptSpurio,
+      },
+    },
+  });
+
+  // Premessa: i campi extra non fanno reject sulla 1/2 — altrimenti il gap
+  // non esisterebbe, callLLM non arriverebbe mai al merge.
+  const verdetto = classifyBody2Payload({
+    parsed: JSON.parse(rispostaBodySpuria),
+    expectedFields: BODY_ONLY_FIELDS,
+  });
+  assert.equal(verdetto.verdict, 'ok', 'title/excerpt extra sulla BODY devono passare il verdetto: e qui che si apre il gap');
+
+  const { _generateSplit, provider, log } = await runSplit({
+    risposte: [rispostaBodySpuria, RISPOSTA_META_CONFORME],
+  });
+
+  const out = await _generateSplit();
+
+  assert.equal(provider.length, 2, `nessuna rigenerazione: la BODY con campi extra e' conforme sui campi attesi\n${log()}`);
+  assert.doesNotMatch(log(), /output JSON incompleto/, `rigetto su una BODY che il verdetto giudica ok:\n${log()}`);
+
+  const merged = JSON.parse(out);
+  assert.equal(
+    merged.content.it.title,
+    'Imposta alla fonte, cosa cambia per i frontalieri',
+    'il title META deve vincere sul title spurio della BODY',
+  );
+  assert.equal(
+    merged.content.it.excerpt,
+    'Il messaggio 8412 rivede le aliquote e introduce una notifica trimestrale.',
+    'l excerpt META deve vincere sull excerpt spurio della BODY',
+  );
+  assert.notEqual(merged.content.it.title, titoloSpurio);
+  assert.notEqual(merged.content.it.excerpt, excerptSpurio);
+  assert.equal(merged.content.it.body1, BLOCCO, 'il corpo RAW della 1/2 deve sopravvivere alla whitelist');
 });
