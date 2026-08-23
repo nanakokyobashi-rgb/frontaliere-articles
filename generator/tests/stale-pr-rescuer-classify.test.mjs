@@ -696,6 +696,46 @@ test('#488 — B + marker in dry_run: non dispatcha', opts, () => {
   assert.deepEqual(r.labeled, []);
 });
 
+// ── 9. #576: il marker generale (CLASSE, HEAD) non deve congelare il dispatch ─
+//
+// Se il rescuer commenta la classe B su un head PRIMA che il fixer posti
+// `REDFLAG_FIX_ROUND` (il fixer è un workflow separato, in coda dietro
+// `redflag-fix-$PR` con `cancel-in-progress: false`, e può slittare ore), il
+// marker generale `class=B head=X` finisce nei commenti passati. Quando
+// `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque dispatchare:
+// la chiave del dispatch è (dispatch, HEAD), non (CLASSE, HEAD).
+
+test('#576 — B senza marker poi REDFLAG_FIX_ROUND arriva dopo: il dispatch scatta comunque', opts, () => {
+  const first = classB({ posted: [] });
+  assert.deepEqual(first.workflowRuns, [], `Al primo giro senza marker non deve dispatchare.\n${first.stdout}`);
+  const generalComment = only(first);
+
+  const second = classB({ posted: [{ body: generalComment }, { body: REDFLAG_ROUND }] });
+  assert.equal(
+    second.workflowRuns.length,
+    1,
+    'Il marker generale `class=B head=X`, postato PRIMA che arrivasse REDFLAG_FIX_ROUND, ha ' +
+      `congelato il dispatch anche dopo che il marker del fixer è arrivato: è di nuovo lo stallo ` +
+      `di #484, solo spostato di un giro.\n${second.stdout}`,
+  );
+  assert.match(second.workflowRuns[0], /pr-review-loop\.yml/);
+  assert.match(second.workflowRuns[0], /-f pr=901/);
+});
+
+test('#576 — B con dispatch già fatto su questo head: nessun secondo dispatch', opts, () => {
+  const first = classB({ posted: [{ body: REDFLAG_ROUND }] });
+  assert.equal(first.workflowRuns.length, 1, first.stdout);
+  const dispatchedComment = only(first);
+
+  const second = classB({ posted: [{ body: REDFLAG_ROUND }, { body: dispatchedComment }] });
+  assert.deepEqual(
+    second.workflowRuns,
+    [],
+    `Il dispatch è già avvenuto su questo head: un secondo run non deve ridispatchare.\n${second.stdout}`,
+  );
+  assert.deepEqual(second.comments, [], 'nessuna azione attesa: il verdetto è già stato consegnato e dispatchato');
+});
+
 test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il dispatch resta nel RESCUE)', opts, () => {
   const r = runScan({
     prs: openPr(),

@@ -258,32 +258,60 @@ jobs:
             # match e sotto `pipefail` l'EPIPE farebbe tornare 141, cioè un
             # «non trovato» proprio quando il marker C'È. Stessa ragione del
             # `case` su `## LGTM` qui sopra.
-            MARKER="<!-- stale-pr-rescuer class=$CLASS head=${HEAD:0:7} -->"
             posted=$(gh api --paginate "repos/$REPO/issues/$N/comments?per_page=100" 2>/dev/null || echo '[]')
             POSTED_BODIES=$(echo "$posted" | jq -rs '[.[][]? | .body // ""] | join("\n")' 2>/dev/null || echo "")
-            case "$POSTED_BODIES" in
-              *"$MARKER"*) echo "PR #$N: classe $CLASS su ${HEAD:0:7} già segnalata — nessuna azione"; continue ;;
-            esac
+
+            # #576: la chiave (CLASSE, HEAD) da sola blocca il dispatch di B se
+            # il PRIMO commento su un head esce PRIMA che il fixer posti
+            # `REDFLAG_FIX_ROUND` — il fixer gira su un workflow separato dietro
+            # `redflag-fix-$PR` con `cancel-in-progress: false`, e questo stesso
+            # file documenta che GitHub può metterlo in coda ore. Se il
+            # `continue` generico scattasse su quel marker, il dispatch non
+            # partirebbe più su quell'head neanche dopo che `REDFLAG_FIX_ROUND`
+            # arriva: lo stallo di #484 spostato di un giro. La chiave del
+            # dispatch è quindi SEPARATA da quella del commento — (dispatch,
+            # HEAD) — e va controllata PRIMA del `continue` sull'idempotenza
+            # generica, non dopo.
+            DISPATCH_MARKER="<!-- stale-pr-rescuer dispatch=pr-review-loop head=${HEAD:0:7} -->"
+            NEEDS_DISPATCH=false
+            if [ "$CLASS" = "B" ]; then
+              case "$POSTED_BODIES" in
+                *'<!-- REDFLAG_FIX_ROUND:'*)
+                  case "$POSTED_BODIES" in
+                    *"$DISPATCH_MARKER"*) ;; # già dispatchato su questo head
+                    *) NEEDS_DISPATCH=true ;;
+                  esac
+                  ;;
+              esac
+            fi
+
+            # `case` e non `grep -qF`: `echo | grep -q` chiude la pipe al primo
+            # match e sotto `pipefail` l'EPIPE farebbe tornare 141, cioè un
+            # «non trovato» proprio quando il marker C'È. Stessa ragione del
+            # `case` su `## LGTM` qui sopra.
+            MARKER="<!-- stale-pr-rescuer class=$CLASS head=${HEAD:0:7} -->"
+            if [ "$NEEDS_DISPATCH" != "true" ]; then
+              case "$POSTED_BODIES" in
+                *"$MARKER"*) echo "PR #$N: classe $CLASS su ${HEAD:0:7} già segnalata — nessuna azione"; continue ;;
+              esac
+            fi
 
             # B + marker del fixer: il 🔴 è chiuso senza commit, quindi `tests`
             # non riparte e `pr-review-loop` non si innesca. La maniglia
             # (`workflow_dispatch`, #286) esiste; qui la si chiama. Senza il
             # marker il consiglio resta un commit nuovo. D consegna lo stesso
             # comando nel testo del RESCUE e NON lo esegue.
-            if [ "$CLASS" = "B" ]; then
-              case "$POSTED_BODIES" in
-                *'<!-- REDFLAG_FIX_ROUND:'*)
-                  RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\` — dispatchato da questo run: il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura."
-                  gh workflow run pr-review-loop.yml --repo "$REPO" -f pr="$N" \
-                    && echo "PR #$N: review riaperta via workflow_dispatch (classe B, marker REDFLAG_FIX_ROUND)" \
-                    || echo "::warning::dispatch pr-review-loop fallito su PR #$N"
-                  ;;
-              esac
+            EXTRA_MARKER=""
+            if [ "$NEEDS_DISPATCH" = "true" ]; then
+              RESCUE="\`gh workflow run pr-review-loop.yml --repo $REPO -f pr=$N\` — dispatchato da questo run: il 🔴 è chiuso proceduralmente dal redflag-fixer (nessun commit nuovo), e un commit vuoto non è la cura."
+              gh workflow run pr-review-loop.yml --repo "$REPO" -f pr="$N" \
+                && { echo "PR #$N: review riaperta via workflow_dispatch (classe B, marker REDFLAG_FIX_ROUND)"; EXTRA_MARKER="$DISPATCH_MARKER"; } \
+                || echo "::warning::dispatch pr-review-loop fallito su PR #$N"
             fi
 
             gh pr edit "$N" --repo "$REPO" --add-label "stale-review" 2>/dev/null || \
               echo "::warning::label stale-review non applicata (assente? la crea scripts/ci/ensure-loop-labels.mjs)"
-            gh pr comment "$N" --repo "$REPO" --body "$(printf '🔧 **stale-review** (automatico): PR ferma da oltre 2h.\n\nClasse: %s\n\nCome sbloccarla: %s\n\n_Segnale deterministico da stale-pr-rescuer.yml, zero Claude._\n%s' "$REASON" "$RESCUE" "$MARKER")" \
+            gh pr comment "$N" --repo "$REPO" --body "$(printf '🔧 **stale-review** (automatico): PR ferma da oltre 2h.\n\nClasse: %s\n\nCome sbloccarla: %s\n\n_Segnale deterministico da stale-pr-rescuer.yml, zero Claude._\n%s\n%s' "$REASON" "$RESCUE" "$MARKER" "$EXTRA_MARKER")" \
               2>/dev/null || echo "commento fallito su PR #$N"
           done
           echo "Scan completo."
