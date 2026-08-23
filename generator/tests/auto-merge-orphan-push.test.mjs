@@ -89,6 +89,19 @@ test('(b) esiste uno step/job che parla di MERGED o orphan push', () => {
   );
 });
 
+test('(d) il job warn-orphan-push ignora il push di cancellazione branch del proprio squash-merge', () => {
+  const job = jobBlock(ATTIVE, 'warn-orphan-push');
+  assert.ok(job, 'job `warn-orphan-push` non trovato');
+  assert.match(
+    job,
+    /github\.event\.deleted\s*!=\s*true/,
+    'Il job non esclude `github.event.deleted == true`: ogni squash-merge fatto ' +
+      'da questo stesso workflow (`gh pr merge --delete-branch`) genera un push di ' +
+      'cancellazione branch che il job leggerebbe come push orfano, postando un ' +
+      'falso avviso su OGNI PR auto-mergiata.',
+  );
+});
+
 test('(c) il job auto-merge è gated via dal trigger push', () => {
   const job = jobBlock(ATTIVE, 'auto-merge');
   assert.ok(job, 'job `auto-merge` non trovato');

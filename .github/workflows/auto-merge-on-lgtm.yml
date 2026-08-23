@@ -60,7 +60,12 @@ jobs:
   # il commit resta orfano e nessuno lo viene a sapere — è successo a monte
   # di #524 (commit di fix di #523 atterrato dopo l'auto-merge).
   warn-orphan-push:
-    if: github.event_name == 'push'
+    # `github.event.deleted != true` esclude il push di cancellazione branch
+    # che `gh pr merge --squash --delete-branch` (auto-merge-eval.mjs:667)
+    # genera su OGNI squash-merge fatto da questo stesso workflow: senza
+    # questo guard, quel push (sha tutto-zero) trova la PR appena chiusa come
+    # MERGED e posta l'avviso di "push orfano" su ogni singolo auto-merge.
+    if: github.event_name == 'push' && github.event.deleted != true
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
