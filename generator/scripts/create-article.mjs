@@ -8441,14 +8441,20 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // gia' giudicato la risposta, cosi' il merge legge cio' che il verdetto
     // ha davvero trovato.
     const metaBlock = normalizeItalianContentFromPayload(metaData, primaryLocale, META_ONLY_FIELDS);
+    // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
+    // byte per byte), ma SOLO `BODY_ONLY_FIELDS`. Lo spread grezzo di
+    // bodyContent DOPO metaBlock faceva vincere title/excerpt spuri della
+    // BODY su quelli META (issue #506). metaBlock PER ULTIMO.
     const merged = {
       ...metaData,
       content: {
         ...(metaData?.content || {}),
         [primaryLocale]: {
           ...(metaData?.content?.[primaryLocale] || {}),
+          ...Object.fromEntries(
+            BODY_ONLY_FIELDS.filter((k) => bodyContent?.[k] != null).map((k) => [k, bodyContent[k]]),
+          ),
           ...(metaBlock || {}),
-          ...bodyContent,
         },
       },
     };
