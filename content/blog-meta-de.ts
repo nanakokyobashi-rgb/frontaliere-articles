@@ -10617,6 +10617,18 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.stipendio-frontaliere-single-2026.title': 'Grenzgänger Lohnabrechnung 2026: Netto und Steuern für Singles',
     'blog.article.stipendio-frontaliere-single-2026.excerpt': 'Vollständige Analyse des neuen Abkommens 2024: AHV-, BVG-, KVG-Sätze und italienische Besteuerung für alleinstehende Grenzgänger.',
     'blog.article.stipendio-frontaliere-single-2026.imageAlt': 'Ein Grenzgänger überprüft seine Schweizer Gehaltsabrechnung mit italienischen Steuerdokumenten',
+    'blog.article.cambio-datore-frontaliere-permesso-g.title': 'Arbeitgeberwechsel für Grenzgänger: Genehmigung G und Kontinuität 2026',
+    'blog.article.cambio-datore-frontaliere-permesso-g.excerpt': 'Arbeitgeberwechsel für Grenzgänger: Erneuerung der Bewilligung G, Kontinuität AHV/BVG, Quellensteuer und wesentliche Dokumente innerhalb von 20 km von der Grenze.',
+    'blog.article.cambio-datore-frontaliere-permesso-g.imageAlt': 'Grenzgänger am Schalter mit Arbeitserlaubnispapieren',
+    'blog.article.cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.title': 'Leitfaden zum Arbeitgeberwechsel G',
+    'blog.article.cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.excerpt': 'Kennen Sie die Schritte für den Arbeitgeberwechsel für Grenzgänger: Vorankündigung, Erneuerung der Genehmigung G, Kontinuität der Beiträge und zu aktualisierende Dokumente.',
+    'blog.article.cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.imageAlt': 'Zwei Menschen in einer Schlange an der Grenze zwischen Schweiz und Italien',
+    'blog.article.nuovo-datore-frontaliere-permesso-continuita.title': 'Arbeitgeberwechsel: Ausweis G 2026 Single',
+    'blog.article.nuovo-datore-frontaliere-permesso-continuita.excerpt': 'Erneuerung der Bewilligung G, Kontinuität AHV/BVG, KVG und Rückerstattungen: Kompletter Leitfaden für alleinerziehende Grenzgänger aus der Neuen Grenzgängervereinbarung 2024.',
+    'blog.article.nuovo-datore-frontaliere-permesso-continuita.imageAlt': 'Grenzgänger unterzeichnet Arbeitsvertrag in Tessiner Büro mit Blick auf den Luganersee',
+    'blog.article.lainf-infortunio-checklist-denunzia.title': 'UVG-Unfall: Melde-Checkliste für Grenzgänger',
+    'blog.article.lainf-infortunio-checklist-denunzia.excerpt': 'Wie melde ich einen Unfall beim UVG, wenn ich Grenzgänger bin? Korrektes Vorgehen, Unterschiede bei Berufskrankheiten, operative Checkliste mit Fristen.',
+    'blog.article.lainf-infortunio-checklist-denunzia.imageAlt': 'LAINF-Versicherungsdokumente und Arbeitsunfallformulare auf Schreibtisch in Tessiner Büro',
 };
 
 export default blogMetaDe;

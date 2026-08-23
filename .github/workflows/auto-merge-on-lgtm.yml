@@ -19,11 +19,16 @@ name: Auto-merge on Claude LGTM
 # path-scoped: sotto un CI path-scoped il check sarebbe assente sulla maggior
 # parte delle PR del ciclo, e "assente" qui significa "non mergiare mai".
 #
-# Due trigger per coprire entrambi gli ordini di arrivo:
+# Tre trigger:
 #   - pull_request_review (LGTM appena postato): se i test non sono ancora
 #     verdi esce 0 in silenzio — sarà il completamento di `tests` a ri-valutare.
 #   - workflow_run di `tests` completato: risolve la PR dalla head e ri-valuta
 #     (potrebbe esserci già un `## LGTM` in attesa).
+#   - push (branches-ignore: main): se la head ha una PR già MERGED, commenta
+#     un avviso (numero PR + sha) e esce 0. Non è un blocco git — GitHub non
+#     può rifiutare il push da un workflow — è il segnale che prima mancava
+#     (issue #532: un fix atterrato dopo l'auto-merge restava orfano in
+#     silenzio). Il job `auto-merge` NON gira su questo trigger.
 #
 # ── ADATTAMENTI rispetto al sito (manifest: `adapted`) ──────────────────────
 #  - Identità di merge: `GITHUB_PAT_NANAKO` da Remote Config. Questo repo è di
@@ -40,6 +45,8 @@ on:
   workflow_run:
     workflows: ['tests']
     types: [completed]
+  push:
+    branches-ignore: [main]
 
 permissions:
   contents: write
@@ -48,11 +55,63 @@ permissions:
   actions: write # dispatch di publish-api come rete di sicurezza
 
 jobs:
+  # Segnale, non blocco. Un git push sul branch di una PR già MERGED riesce
+  # comunque: questo job commenta sulla PR (numero + sha) e esce 0. Senza,
+  # il commit resta orfano e nessuno lo viene a sapere — è successo a monte
+  # di #524 (commit di fix di #523 atterrato dopo l'auto-merge).
+  warn-orphan-push:
+    # `github.event.deleted != true` esclude il push di cancellazione branch
+    # che `gh pr merge --squash --delete-branch` (auto-merge-eval.mjs:667)
+    # genera su OGNI squash-merge fatto da questo stesso workflow: senza
+    # questo guard, quel push (sha tutto-zero) trova la PR appena chiusa come
+    # MERGED e posta l'avviso di "push orfano" su ogni singolo auto-merge.
+    if: github.event_name == 'push' && github.event.deleted != true
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Warn if this push is on a MERGED PR branch (orphan push)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          set -uo pipefail
+          # Niente `set -e`: un gh che fallisce non deve rendere rosso il
+          # push. Il job è un segnale; l'exit è sempre 0.
+          if [ -z "${HEAD_REF:-}" ] || [ -z "${REPO:-}" ]; then
+            echo "ref o repo assenti — niente da segnalare."
+            exit 0
+          fi
+          # Una PR aperta sulla stessa head non è orfana: è il ciclo normale.
+          OPEN=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state open \
+            --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -n "${OPEN:-}" ]; then
+            echo "PR #$OPEN aperta su $HEAD_REF — push non orfano."
+            exit 0
+          fi
+          MERGED=$(gh pr list --repo "$REPO" --head "$HEAD_REF" --state merged \
+            --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -z "${MERGED:-}" ]; then
+            echo "Nessuna PR MERGED associata a $HEAD_REF — niente da segnalare."
+            exit 0
+          fi
+          echo "::warning::Push orfano: commit $SHA sul branch $HEAD_REF della PR #$MERGED già MERGED."
+          BODY=$(printf '%s\n\n%s\n\n%s' \
+            "⚠️ Push orfano dopo merge" \
+            "Il commit ${SHA} è atterrato sul branch ${HEAD_REF} della PR #${MERGED}, che è già MERGED. Il commit non è su main e resterebbe orfano in silenzio." \
+            "Recuperalo con una nuova PR (cherry-pick) se deve entrare.")
+          gh pr comment "$MERGED" --repo "$REPO" --body "$BODY" \
+            || echo "Commento su PR #$MERGED fallito — il push resta un segnale, non un blocco."
+          exit 0
+
   auto-merge:
     # Pre-filtro a livello di evento. Il resto dei gate — incluso il check
     # `🔴 Important` negation-aware — sta in auto-merge-eval.mjs, unica fonte di
-    # verità per entrambi i trigger.
+    # verità per entrambi i trigger. `github.event_name != 'push'` è il gate
+    # esplicito sul terzo trigger: un push non deve mai squash-mergiare.
     if: |
+      github.event_name != 'push' && (
       (github.event_name == 'pull_request_review' &&
         github.event.review.user.type == 'Bot' &&
         startsWith(github.event.review.user.login, 'claude') &&
@@ -62,6 +121,7 @@ jobs:
       ||
       (github.event_name == 'workflow_run' &&
         github.event.workflow_run.conclusion == 'success')
+      )
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

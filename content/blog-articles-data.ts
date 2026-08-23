@@ -31782,6 +31782,42 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'cambio-datore-frontaliere-permesso-g',
+ category: 'pratico',
+ date: '2026-08-23T20:13:10.181Z',
+ image: '/images/blog/cambio-datore-frontaliere-permesso-g.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single',
+ category: 'pratico',
+ date: '2026-08-23T20:48:38.825Z',
+ image: '/images/blog/cambio-datore-lavoro-frontaliere-procedura-permesso-2026-single.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'nuovo-datore-frontaliere-permesso-continuita',
+ category: 'pratico',
+ date: '2026-08-23T21:21:09.297Z',
+ image: '/images/blog/nuovo-datore-frontaliere-permesso-continuita.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
+ {
+ id: 'lainf-infortunio-checklist-denunzia',
+ category: 'pratico',
+ date: '2026-08-23T21:52:53.672Z',
+ image: '/images/blog/lainf-infortunio-checklist-denunzia.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

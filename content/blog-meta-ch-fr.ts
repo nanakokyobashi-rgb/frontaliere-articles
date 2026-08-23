@@ -3988,6 +3988,18 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.attivita-zugo-iscrizione-contributi-obblighi.title': 'Ouvrir une entreprise à Zoug : inscription et obligations',
     'blog.article.attivita-zugo-iscrizione-contributi-obblighi.excerpt': 'Enregistrer des activités à Zoug : formes juridiques, inscription au registre du commerce, obligations de sécurité sociale (AVS/AI, LPP) et assurances. Guide fédéral et cantonal.',
     'blog.article.attivita-zugo-iscrizione-contributi-obblighi.imageAlt': 'Bureau d\'administration cantonale avec formulaires d\'inscription au registre du commerce sur un bureau en bois',
+    'blog.article.salari-mercato-zugo-settori.title': 'Salaires et marché du travail : le canton de Zoug',
+    'blog.article.salari-mercato-zugo-settori.excerpt': 'Niveaux de salaire pour la formation, les secteurs, les horaires maximums, les cotisations fédérales et les conventions collectives en vigueur dans le canton de Zoug.',
+    'blog.article.salari-mercato-zugo-settori.imageAlt': 'Skyline d\'une ville suisse, symbole du marché du travail et des opportunités d\'emploi dans le canton de Zoug.',
+    'blog.article.salari-zugo-formazione-livelli.title': 'Salaires et emploi dans le canton de Zoug : formation et niveaux',
+    'blog.article.salari-zugo-formazione-livelli.excerpt': 'Marché du travail suisse : salaires par niveau de formation, horaires légaux, prévoyance obligatoire (AVS, LPP, LAMal) et conventions collectives.',
+    'blog.article.salari-zugo-formazione-livelli.imageAlt': 'Centre de Zoug avec immeubles modernes et panorama alpin',
+    'blog.article.commissioni-twint-piccoli-commercianti.title': 'Commissions Twint double : guerre ouverte avec les commerçants',
+    'blog.article.commissioni-twint-piccoli-commercianti.excerpt': 'Une expertise suisse révèle que les petits magasins paient 1,3% de commissions Twint contre 0,59% des grands. La Swiss Retail Federation demande l\'intervention fédérale.',
+    'blog.article.commissioni-twint-piccoli-commercianti.imageAlt': 'Terminal de paiement numérique et code QR Twint dans une petite boutique suisse',
+    'blog.article.mercato-lavoro-zugo-analisi.title': 'Marché du travail à Zoug : salaires et dynamiques sectorielles',
+    'blog.article.mercato-lavoro-zugo-analisi.excerpt': 'Analyse du marché zugien : secteurs moteurs, dynamique des salaires, fiscalité compétitive et prévoyance obligatoire pour les professionnels et les travailleurs.',
+    'blog.article.mercato-lavoro-zugo-analisi.imageAlt': 'Immeuble de bureaux moderne dans le canton de Zoug',
 };
 
 export default blogMetaChFr;
