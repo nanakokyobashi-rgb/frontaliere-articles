@@ -310,9 +310,9 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9e2b80a88c1a504a",
-        "corpus": "9e2b80a88c1a504a",
-        "alignedAt": "2026-08-15"
+        "site": "d1bef9a16a4152f5",
+        "corpus": "d1bef9a16a4152f5",
+        "alignedAt": "2026-08-23"
       }
     },
     {
@@ -889,9 +889,9 @@
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "220daf74fa503c7f",
-        "corpus": "220daf74fa503c7f",
-        "alignedAt": "2026-08-07"
+        "site": "0d8abb4da520f254",
+        "corpus": "0d8abb4da520f254",
+        "alignedAt": "2026-08-23"
       }
     },
     {
