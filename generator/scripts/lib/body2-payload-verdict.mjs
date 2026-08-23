@@ -96,8 +96,27 @@ export const META_ONLY_FIELDS = ['title', 'excerpt'];
  * Senza questo filtro `normalizeItalianContentFromPayload` la conta come
  * valore non vuoto, `hasAnyField` diventa `true`, e un vero abort verrebbe
  * letto come un articolo il cui corpo e' testualmente "null".
+ *
+ * Una doppia serializzazione lascia le virgolette *dentro* il valore JS
+ * (`'"null"'` o `"\"null\""`): dopo il trim si toglie al piu' UNA coppia
+ * wrapping (single o double) e si ritesta. Testo reale tra virgolette non
+ * viene svuotato ne' riscritto: lo strip serve solo al filtro.
  */
 const LITERAL_NULL_STRING_RE = /^null$/i;
+
+/** Toglie al piu' una coppia wrapping di `'` o `"` dopo il trim. */
+function stripOneWrappingQuotePair(value) {
+  if (value.length < 2) return value;
+  const q = value[0];
+  if ((q === '"' || q === "'") && value[value.length - 1] === q) {
+    return value.slice(1, -1).trim();
+  }
+  return value;
+}
+
+function isLiteralNullString(value) {
+  return LITERAL_NULL_STRING_RE.test(value) || LITERAL_NULL_STRING_RE.test(stripOneWrappingQuotePair(value));
+}
 
 /**
  * ── CHI DECIDE QUALI CAMPI SONO ATTESI ─────────────────────────────────────
@@ -237,7 +256,7 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
 
     for (const field of fields) {
       let value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (LITERAL_NULL_STRING_RE.test(value)) value = '';
+      if (isLiteralNullString(value)) value = '';
       if (value) hasAnyField = true;
       block[field] = value;
     }

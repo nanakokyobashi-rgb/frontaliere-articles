@@ -426,6 +426,72 @@ describe("REGOLA #0: la regola sta nel modulo, e il modulo e' cablato", () => {
     assert.deepEqual(missing, []);
   });
 
+  it('la stringa quoted "null" sui campi di content non vale come contenuto (#554)', () => {
+    // Follow-up di #543/#512: LITERAL_NULL_STRING_RE=/^null$/i non matcha il
+    // valore JS `"null"` (virgolette *dentro* la stringa) che resta dopo un
+    // JSON doppio-serializzato. Lo strip di UNA coppia wrapping vive nel
+    // modulo spedito: il test lo chiama, non lo ricopia.
+    const quotedNull = '"null"';
+    const abortConNullQuoted = {
+      abort_topical_relevance: true,
+      reason: 'fonte senza aggancio frontaliere',
+      content: {
+        it: {
+          title: quotedNull,
+          excerpt: quotedNull,
+          body1: "'null'",
+          body2: ' "NULL" ',
+          body3: quotedNull,
+        },
+      },
+    };
+
+    const normalizzato = normalizeItalianContentFromPayload(abortConNullQuoted);
+    assert.equal(
+      normalizzato,
+      null,
+      'Dopo trim+strip di una coppia wrapping, "null"/\'null\' deve essere campo assente. ' +
+        'Valori restanti: ' + JSON.stringify(normalizzato),
+    );
+    const campiPieni = normalizzato ? Object.values(normalizzato).filter(Boolean).length : 0;
+    assert.equal(campiPieni, 0);
+
+    const { verdict, missing } = classifyBody2Payload({ parsed: abortConNullQuoted, parseErr: null });
+    assert.equal(
+      verdict,
+      'topic-gate-abort',
+      'Un abort con content.* letteralmente "\\"null\\"" deve restare un abort, non un articolo ' +
+        'il cui corpo e\' la stringa quoted "null".',
+    );
+    assert.deepEqual(missing, []);
+  });
+
+  it('testo reale tra virgolette non viene svuotato dallo strip wrapping (#554)', () => {
+    const titoloQuoted = '"Frontalieri, cosa cambia con il nuovo accordo"';
+    const corpo = 'Il nuovo accordo sui frontalieri cambia le regole di imposizione. '.repeat(3);
+    const parsed = {
+      content: {
+        it: {
+          title: titoloQuoted,
+          excerpt: 'Le regole di imposizione cambiano per chi lavora in Ticino.',
+          body1: corpo,
+          body2: corpo,
+          body3: corpo,
+        },
+      },
+    };
+
+    const n = normalizeItalianContentFromPayload(parsed);
+    assert.ok(n, 'Un titolo realmente quoted non deve far cadere il blocco a null.');
+    assert.equal(
+      n.title,
+      titoloQuoted,
+      'Lo strip wrapping e\' solo per il filtro null: il titolo reale resta intatto.',
+    );
+    const { verdict } = classifyBody2Payload({ parsed, parseErr: null });
+    assert.equal(verdict, 'ok');
+  });
+
   it('un campo di content davvero uguale a "null" resta rigettato quando NON e\' un abort', () => {
     // Non-vacuita': senza il flag di abort, un payload con SOLO testo "null" sui
     // campi non deve travestirsi da contenuto valido — deve finire in reject
