@@ -65,6 +65,28 @@ import { execFileSync } from 'node:child_process';
 // ── Contratto dei marker (ISSUES.md «Telemetria degli esiti») ────────────────
 /** L'esito che dice «budget di turni esaurito». */
 export const MAX_TURNS_CODE = 'max-turns';
+
+/**
+ * Marker del commento che questo script posta con `--apply`.
+ *
+ * Serve al dedup, e il dedup e' cio' che rende lo script COLLEGABILE a uno
+ * schedule: senza, `--apply` commenta la stessa issue a ogni giro. Non sarebbe
+ * solo rumore — un commento di bot alza `updatedAt`, e su questo repo e' proprio
+ * quello che affama le uscite della coda: il cooldown del parked-retry e
+ * l'age-out chiedono quiete, e le issue piu' sorvegliate non la raggiungono mai
+ * (misurato il 2026-08-24: 30 candidate nel pool, 2 oltre il cooldown). Un
+ * rilevatore che si ri-annuncia ogni notte diventa la causa del blocco che
+ * dovrebbe aiutare a diagnosticare.
+ */
+export const ORPHAN_NOTE_MARKER = '<!-- orphan-max-turns-work -->';
+
+/**
+ * Vero se questa issue porta gia' l'annotazione di lavoro orfano. Pura.
+ * @param {Array<{body?: string}>} comments
+ */
+export function hasOrphanNote(comments) {
+  return (comments || []).some((c) => String(c?.body || '').includes(ORPHAN_NOTE_MARKER));
+}
 /** L'unico esito che oggi prova una consegna, e l'unico che l'harvester legge. */
 export const DELIVERY_CODE = 'pr-created';
 
@@ -228,7 +250,15 @@ function main() {
       const code = fixOutcomeCode(c.body);
       if (code && !outcomes.includes(code)) outcomes.push(code);
     }
-    if (outcomes.includes(MAX_TURNS_CODE)) collected.push({ number: it.number, title: it.title, outcomes });
+    if (outcomes.includes(MAX_TURNS_CODE)) {
+      // `annotated` viene calcolato QUI e non nel ramo `--apply`: i commenti sono
+      // gia' in mano da questa `issue view`, quindi il dedup e' gratis. Rileggerli
+      // dopo sarebbe una seconda chiamata per issue a ogni giro.
+      collected.push({
+        number: it.number, title: it.title, outcomes,
+        annotated: hasOrphanNote((data && data.comments) || []),
+      });
+    }
   }
   console.log(`issue con un marker \`${MAX_TURNS_CODE}\`: ${collected.length}`);
 
@@ -256,15 +286,28 @@ function main() {
     console.log('(sola lettura: passa --apply per annotare le issue)');
     return;
   }
+  const annotatedByIssue = new Map(collected.map((it) => [it.number, it.annotated]));
+  let posted = 0;
+  let already = 0;
   for (const r of recoverable) {
+    if (annotatedByIssue.get(r.issue)) { already++; continue; }
     const note = `♻️ **Lavoro orfano rilevato (auto, zero-Claude)**: la run del fixer è morta ` +
       `\`${MAX_TURNS_CODE}\` ma aveva già pushato \`${r.branch}\` — **${r.aheadBy}** commit avanti a ` +
       `\`main\`, senza nessuna PR. Nessuno strato del ciclo lo guarda: \`stale-pr-rescuer\` e ` +
       `\`recycle-stale-prs\` raccolgono PR, e questo branch non ne ha mai avuta una. Prima di ` +
-      `ri-tentare da zero, verifica se il commit è recuperabile.`;
-    gh(['issue', 'comment', String(r.issue), ...repoArgs, '--body', note]);
-    console.log(`annotata #${r.issue}`);
+      `ri-tentare da zero, verifica se il commit è recuperabile.\n\n${ORPHAN_NOTE_MARKER}`;
+    try {
+      gh(['issue', 'comment', String(r.issue), ...repoArgs, '--body', note]);
+      posted++;
+      console.log(`annotata #${r.issue}`);
+    } catch (e) {
+      console.log(`::warning::annotazione di #${r.issue} fallita: ${String(e).slice(0, 120)}`);
+    }
   }
+  // Il conteggio delle GIA' annotate va stampato: e' la prova che il dedup morde,
+  // e su uno schedule notturno e' la riga che distingue «niente di nuovo» da
+  // «lo script non gira».
+  console.log(`annotazioni — nuove=${posted} gia'-annotate=${already} su ${recoverable.length} recuperabili.`);
 }
 
 // Esegui solo come CLI (stessa guardia di followup-drainer.mjs): importarlo dai
