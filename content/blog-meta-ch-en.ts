@@ -4084,6 +4084,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.truffe-spoofing-in-calo.title': 'Declining scams thanks to anti-spoofing measures',
     'blog.article.truffe-spoofing-in-calo.excerpt': 'The number of fraudulent calls on behalf of the authorities has clearly decreased thanks to the obligation to mark calls from abroad with spoofed Swiss numbers.',
     'blog.article.truffe-spoofing-in-calo.imageAlt': 'Swiss border crosser checking the origin of a phone call',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.title': 'LAMal Basel City Awards: Deductible and Subsidy Guide',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.excerpt': 'LAMal deductibles in the canton Basel City from CHF 300 to CHF 2,500, private per capita premiums and cantonal subsidies for residents with limited income.',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.imageAlt': 'Swiss medical office with health insurance documents and appointment calendar',
 };
 
 export default blogMetaChEn;

@@ -4084,6 +4084,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.truffe-spoofing-in-calo.title': 'Les escroqueries en baisse grâce aux mesures contre l\'usurpation d\'identité',
     'blog.article.truffe-spoofing-in-calo.excerpt': 'Le nombre d\'appels frauduleux au nom des autorités a nettement diminué grâce à l\'obligation de marquer les appels provenant de l\'étranger avec des numéros suisses usurpés.',
     'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontalier en Suisse qui vérifie l\'origine d\'une appel téléphonique',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.title': 'Prix LAMal Bâle-Ville : guide des franchises et subventions',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.excerpt': 'Franchises LAMal dans le canton de Bâle-Ville de 300 CHF à 2 500 CHF, primes par habitant privées et allocations cantonales pour résidents à revenu limité.',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.imageAlt': 'Cabinet médical suisse avec documents d\'assurance maladie et calendrier de rendez-vous',
 };
 
 export default blogMetaChFr;

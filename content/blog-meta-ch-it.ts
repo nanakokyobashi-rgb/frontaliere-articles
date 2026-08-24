@@ -4084,6 +4084,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.truffe-spoofing-in-calo.title': 'Truffe in calo grazie alle misure contro lo spoofing',
     'blog.article.truffe-spoofing-in-calo.excerpt': 'Il numero di chiamate fraudolente a nome delle autorità è nettamente diminuito grazie all\'obbligo di contrassegnare le chiamate provenienti dall\'estero con numeri svizzeri spoofati.',
     'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontaliere in Svizzera che verifica la provenienza di una chiamata telefonica',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.title': 'Premi LAMal Basilea Città: guida a franchigie e sussidi',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.excerpt': 'Franchigie LAMal nel canton Basilea Città da CHF 300 a CHF 2.500, premi pro capite privati e sussidi cantonali per residenti a reddito limitato.',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.imageAlt': 'Studio medico svizzero con documenti di assicurazione malattia e calendario appuntamenti',
 };
 
 export default blogMetaChIt;

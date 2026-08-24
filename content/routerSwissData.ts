@@ -1387,6 +1387,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'mercato-soletta-occupazione-settori': { it: 'mercato-soletta-occupazione-settori', en: 'soletta-labour-market-sectors-salaries', de: 'soletta-arbeitsmarkt-sektoren-verdienstniveaus', fr: 'soletta-marche-travail-secteurs-salaires' },
  'siccita-2026-risposte': { it: 'siccita-2026-risposte', en: 'siccita-2026-answers', de: 'siccita-2026-antworten', fr: 'siccita-2026-reponses' },
  'truffe-spoofing-in-calo': { it: 'truffe-spoofing-in-calo', en: 'spoofing-calls-in-decline', de: 'spoofing-anrufe-in-abnahme', fr: 'appels-spoofing-en-declin' },
+ 'premi-lamal-basilea-franchigie-sussidi': { it: 'premi-lamal-basilea-franchigie-sussidi', en: 'basel-city-health-insurance-premiums-subsidies', de: 'basel-stadt-krankenkasse-pramien-subventionen', fr: 'bale-assurance-maladie-primes-reductions' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

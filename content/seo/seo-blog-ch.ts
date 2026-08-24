@@ -52982,6 +52982,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-premi-lamal-basilea-franchigie-sussidi': {
+    title: 'Premi LAMal Basilea Città: guida a franchigie e sussidi',
+    description: 'Scopri come funzionano i premi LAMal nel canton Basilea Città, le 6 franchigie disponibili, i modelli di copertura e come richiedere i sussidi cantonali',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, lamal, basilea, città',
+    ogTitle: 'Premi LAMal Basilea Città: franchigie e sussidi per residenti',
+    ogDescription: 'Guida completa ai premi dell\'assicurazione malattia obbligatoria nel canton Basilea Città: franchigie da CHF 300 a 2.500, modelli di copertura, sussidi cantonali per residenti a reddito limitato e procedura di iscrizione.',
+    canonicalPath: '/articoli-svizzera/premi-lamal-basilea-franchigie-sussidi/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi LAMal Basilea Città: guida a franchigie e sussidi",
+      "description": "Scopri come funzionano i premi LAMal nel canton Basilea Città, le 6 franchigie disponibili, i modelli di copertura e come richiedere i sussidi cantonali",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-lamal-basilea-franchigie-sussidi.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Studio medico svizzero con documenti di assicurazione malattia e calendario appuntamenti"
+      },
+      "datePublished": "2026-08-24T10:42:57+00:00",
+      "dateModified": "2026-08-24T10:42:57+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-lamal-basilea-franchigie-sussidi/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

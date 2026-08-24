@@ -4084,6 +4084,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.truffe-spoofing-in-calo.title': 'Schwindende Betrügereien dank Anti-Spoofing-Maßnahmen',
     'blog.article.truffe-spoofing-in-calo.excerpt': 'Die Zahl der betrügerischen Anrufe im Namen der Behörden ist durch die Pflicht, Anrufe aus dem Ausland mit schweizerischen Rufnummern zu kennzeichnen, deutlich gesunken.',
     'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontalier in der Schweiz, der die Herkunft einer Telefonanruf überprüft',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.title': 'KVG-Prämien Basel-Stadt: Leitfaden zu Franchisen und Beiträgen',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.excerpt': 'KVG-Franchisen im Kanton Basel-Stadt von CHF 300 bis CHF 2.500, private Pro-Kopf-Prämien und Kantonsbeiträge für einkommensschwache Einwohner.',
+    'blog.article.premi-lamal-basilea-franchigie-sussidi.imageAlt': 'Schweizer Arztpraxis mit Krankenversicherungsdokumenten und Terminkalender',
 };
 
 export default blogMetaChDe;
