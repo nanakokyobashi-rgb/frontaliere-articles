@@ -1,6 +1,5 @@
 {
   "keywords": [
-    "vivere a Longone al Segrino e lavorare in Ticino da frontaliere",
     "vivere a Lurago d'Erba e lavorare in Ticino da frontaliere",
     "vivere a Monguzzo e lavorare in Ticino da frontaliere",
     "vivere a Novedrate e lavorare in Ticino da frontaliere",
@@ -499,7 +498,8 @@
     "vivere a Venegono Inferiore e lavorare in Ticino da frontaliere",
     "vivere a Villette e lavorare in Ticino da frontaliere",
     "vivere a Bregnano e lavorare in Ticino da frontaliere",
-    "vivere a Brenna e lavorare in Ticino da frontaliere"
+    "vivere a Brenna e lavorare in Ticino da frontaliere",
+    "vivere a Figino Serenza e lavorare in Ticino da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -570,7 +570,7 @@
     "frontaliere licenziamento diritti preavviso indennita 2026 oltre 20 km": 1,
     "frontaliere licenziamento diritti preavviso indennita 2026 errori comuni": 3,
     "frontaliere formazione professionale riqualifica corsi 2026 entro 20 km": 3,
-    "frontaliere formazione professionale riqualifica corsi 2026 oltre 20 km": 2,
+    "frontaliere formazione professionale riqualifica corsi 2026 oltre 20 km": 3,
     "frontaliere formazione professionale riqualifica corsi 2026 errori comuni": 3,
     "frontaliere operatore socio sanitario ticino stipendio requisiti": 2,
     "frontaliere psicologo ticino stipendio requisiti": 2,
