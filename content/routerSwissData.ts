@@ -1384,6 +1384,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'festival-scientifica-zurigo-ricerca': { it: 'festival-scientifica-zurigo-ricerca', en: 'scientifica-festival-zurich-research', de: 'scientifica-festival-zuerich-forschung', fr: 'scientifica-festival-zurich-recherche' },
  'pausa-estiva-apprendimento-scuola': { it: 'pausa-estiva-apprendimento-scuola', en: 'summer-break-learning-school', de: 'sommerferien-lernziele-schule', fr: 'pause-estivale-apprentissage-ecole' },
  'salari-mercato-soletta-formazione': { it: 'salari-mercato-soletta-formazione', en: 'salaries-labor-market-soletta-education', de: 'gehaelter-arbeitsmarkt-solothurn-bildung', fr: 'salaires-marche-travail-soleure-formation' },
+ 'mercato-soletta-occupazione-settori': { it: 'mercato-soletta-occupazione-settori', en: 'soletta-labour-market-sectors-salaries', de: 'soletta-arbeitsmarkt-sektoren-verdienstniveaus', fr: 'soletta-marche-travail-secteurs-salaires' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

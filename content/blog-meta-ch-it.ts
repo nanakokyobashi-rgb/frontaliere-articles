@@ -4075,6 +4075,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.salari-mercato-soletta-formazione.title': 'Salari e mercato: settori, formazione e contratti',
     'blog.article.salari-mercato-soletta-formazione.excerpt': 'Sistema salariale svizzero per grado di formazione e settore. Contratti collettivi, dove esiste il salario minimo cantonale e come calcolare il netto dalla busta paga.',
     'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Team di professionisti svizzeri in riunione per discutere salari e contratti di lavoro in ufficio moderno.',
+    'blog.article.mercato-soletta-occupazione-settori.title': 'Mercato lavoro Soletta: salari, settori e livelli',
+    'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Salari, fasce formative, contratti collettivi e contributi previdenziali nel Canton Soletta. Guida alla ricerca di lavoro e procedure di assunzione in Svizzera.',
+    'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Professionista al lavoro in uno studio moderno svizzero con documenti e computer durante le ore di ufficio.',
 };
 
 export default blogMetaChIt;

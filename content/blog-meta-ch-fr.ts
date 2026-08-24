@@ -4075,6 +4075,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.salari-mercato-soletta-formazione.title': 'Salaires et marché : secteurs, formation et contrats',
     'blog.article.salari-mercato-soletta-formazione.excerpt': 'Système salarial suisse par niveau de formation et secteur. Conventions collectives, où existe le salaire minimum cantonal et comment calculer le net de la paie.',
     'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Professionnels suisses en réunion discutant des contrats de travail et des structures salariales.',
+    'blog.article.mercato-soletta-occupazione-settori.title': 'Marché du travail Soleure : salaires, secteurs et niveaux',
+    'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Salaires, tranches de formation, conventions collectives et cotisations de sécurité sociale dans le canton de Soleure. Guide de recherche d\'emploi et procédures d\'embauche en Suisse.',
+    'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Espace de travail suisse avec documents et ordinateur pendant les heures de bureau, représentant l\'emploi professionnel.',
 };
 
 export default blogMetaChFr;

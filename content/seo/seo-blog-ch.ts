@@ -52865,6 +52865,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mercato-soletta-occupazione-settori': {
+    title: 'Mercato lavoro Soletta: salari, settori e livelli',
+    description: 'Salari, fasce formative, contratti collettivi e contributi previdenziali nel Canton Soletta. Guida alla ricerca di lavoro e procedure di assunzione in Svizzera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, mercato, lavoro, soletta, salari',
+    ogTitle: 'Mercato lavoro Soletta: salari, settori e livelli',
+    ogDescription: 'Nel Canton Soletta il mercato del lavoro si articola su fasce di formazione e livelli salariali. Scopri contratti collettivi, contributi previdenziali (AVS, LPP, LAMal), diritti del lavoratore e procedure di assunzione. Guida pratica con scadenze',
+    canonicalPath: '/articoli-svizzera/mercato-soletta-occupazione-settori/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mercato lavoro Soletta: salari, settori e livelli",
+      "description": "Salari, fasce formative, contratti collettivi e contributi previdenziali nel Canton Soletta. Guida alla ricerca di lavoro e procedure di assunzione in Svizzera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mercato-soletta-occupazione-settori.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Professionista al lavoro in uno studio moderno svizzero con documenti e computer durante le ore di ufficio."
+      },
+      "datePublished": "2026-08-24T10:08:09+00:00",
+      "dateModified": "2026-08-24T10:08:09+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mercato-soletta-occupazione-settori/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

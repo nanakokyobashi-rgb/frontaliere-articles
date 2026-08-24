@@ -4075,6 +4075,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.salari-mercato-soletta-formazione.title': 'Wages and market: sectors, training and contracts',
     'blog.article.salari-mercato-soletta-formazione.excerpt': 'Swiss wage system by level of training and sector. Collective agreements, where the cantonal minimum wage exists and how to calculate the net from the paycheck.',
     'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Swiss professionals in office meeting discussing employment contracts and salary structures.',
+    'blog.article.mercato-soletta-occupazione-settori.title': 'Labour Market Slab: Wages, Sectors and Levels',
+    'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Wages, training bands, collective agreements and social security contributions in the Canton of Solothurn. Guide to job search and recruitment procedures in Switzerland.',
+    'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Swiss professional workspace with documents and computer during working hours, representing career and employment.',
 };
 
 export default blogMetaChEn;

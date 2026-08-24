@@ -4075,6 +4075,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.salari-mercato-soletta-formazione.title': 'Löhne und Markt: Branchen, Ausbildung und Verträge',
     'blog.article.salari-mercato-soletta-formazione.excerpt': 'Schweizer Lohnsystem nach Bildungsabschluss und Branche. Tarifverträge, wo der kantonale Mindestlohn besteht und wie das Netto aus der Lohnabrechnung zu berechnen ist.',
     'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Schweizer Fachleute im Büro bei Besprechung von Arbeitsverträgen und Gehältern.',
+    'blog.article.mercato-soletta-occupazione-settori.title': 'Arbeitsmarkt Solothurn: Löhne, Branchen und Niveaus',
+    'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Löhne, Bildungsstufen, Kollektivverträge und Sozialversicherungsbeiträge im Kanton Solothurn. Leitfaden zur Stellensuche und Einstellungsverfahren in der Schweiz.',
+    'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Schweizer Arbeitsplatz mit Dokumenten und Computer während der Bürozeit, das berufliche Umfeld darstellend.',
 };
 
 export default blogMetaChDe;
