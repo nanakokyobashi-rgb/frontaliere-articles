@@ -2645,6 +2645,16 @@
       }
     },
     {
+      "path": "scripts/ci/handoff-to-site.mjs",
+      "mode": "corpus-only",
+      "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare.",
+      "baseline": {
+        "site": null,
+        "corpus": "5a678af070e06f5c",
+        "alignedAt": "2026-08-24"
+      }
+    },
+    {
       "path": "scripts/ci/exhaustion-reason-report.mjs",
       "mode": "corpus-only",
       "reason": "Strumentazione per la issue #203: aggrega per MOTIVO le marcature di `markModelExhausted` gia' emesse nei log, e difende l'invariante che un esaurimento senza motivo distinto non venga mai persistito. Corpus-only perche' `generator/scripts/lib/ai-models.mjs` e' `identical` — la fix va sul sito, mentre la misura, come la issue stessa prescrive, si fa da questo lato — e perche' legge i log di `generate-article.yml`, che e' un workflow di questo repo.",
