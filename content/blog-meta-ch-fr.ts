@@ -4078,6 +4078,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.mercato-soletta-occupazione-settori.title': 'Marché du travail Soleure : salaires, secteurs et niveaux',
     'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Salaires, tranches de formation, conventions collectives et cotisations de sécurité sociale dans le canton de Soleure. Guide de recherche d\'emploi et procédures d\'embauche en Suisse.',
     'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Espace de travail suisse avec documents et ordinateur pendant les heures de bureau, représentant l\'emploi professionnel.',
+    'blog.article.siccita-2026-risposte.title': 'Sécheresse 2026 : questions fréquentes et réponses',
+    'blog.article.siccita-2026-risposte.excerpt': 'La sécheresse en Suisse en 2026 : causes, conséquences et comment résoudre le problème.',
+    'blog.article.siccita-2026-risposte.imageAlt': 'Un lac avec des niveaux d\'eau historiquement bas.',
 };
 
 export default blogMetaChFr;

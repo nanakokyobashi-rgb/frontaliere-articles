@@ -4078,6 +4078,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.mercato-soletta-occupazione-settori.title': 'Mercato lavoro Soletta: salari, settori e livelli',
     'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Salari, fasce formative, contratti collettivi e contributi previdenziali nel Canton Soletta. Guida alla ricerca di lavoro e procedure di assunzione in Svizzera.',
     'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Professionista al lavoro in uno studio moderno svizzero con documenti e computer durante le ore di ufficio.',
+    'blog.article.siccita-2026-risposte.title': 'Siccità 2026: domande frequenti e risposte',
+    'blog.article.siccita-2026-risposte.excerpt': 'La siccità in Svizzera nel 2026: cause, conseguenze e come risolvere il problema.',
+    'blog.article.siccita-2026-risposte.imageAlt': 'Un lago con livelli di acqua ai minimi storici.',
 };
 
 export default blogMetaChIt;

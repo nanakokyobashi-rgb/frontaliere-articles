@@ -52904,6 +52904,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-siccita-2026-risposte': {
+    title: 'Siccità 2026: domande frequenti e risposte | Frontaliere Ticino',
+    description: 'La siccità in Svizzera nel 2026: cause, conseguenze e come risolvere il problema. Dati aggiornati 2026 per frontalieri in Ticino.',
+    keywords: 'frontalieri, ticino, svizzera, italia, siccità, domande, frequenti, risposte',
+    ogTitle: 'Siccità 2026: domande frequenti e risposte',
+    ogDescription: 'La siccità in Svizzera nel 2026: cause, conseguenze e come risolvere il problema.',
+    canonicalPath: '/articoli-svizzera/siccita-2026-risposte/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Siccità 2026: domande frequenti e risposte",
+      "description": "La siccità in Svizzera nel 2026: cause, conseguenze e come risolvere il problema. Dati aggiornati 2026 per frontalieri in Ticino.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/siccita-2026-risposte.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Un lago con livelli di acqua ai minimi storici."
+      },
+      "datePublished": "2026-08-24T10:17:33+00:00",
+      "dateModified": "2026-08-24T10:17:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/siccita-2026-risposte/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

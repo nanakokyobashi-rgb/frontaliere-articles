@@ -4078,6 +4078,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.mercato-soletta-occupazione-settori.title': 'Arbeitsmarkt Solothurn: Löhne, Branchen und Niveaus',
     'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Löhne, Bildungsstufen, Kollektivverträge und Sozialversicherungsbeiträge im Kanton Solothurn. Leitfaden zur Stellensuche und Einstellungsverfahren in der Schweiz.',
     'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Schweizer Arbeitsplatz mit Dokumenten und Computer während der Bürozeit, das berufliche Umfeld darstellend.',
+    'blog.article.siccita-2026-risposte.title': 'Trockenheit 2026: Häufig gestellte Fragen und Antworten',
+    'blog.article.siccita-2026-risposte.excerpt': 'Die Dürre in der Schweiz im Jahr 2026: Ursachen, Folgen und wie man das Problem löst.',
+    'blog.article.siccita-2026-risposte.imageAlt': 'Ein See mit historisch niedrigen Wasserständen.',
 };
 
 export default blogMetaChDe;

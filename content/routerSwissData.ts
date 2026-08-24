@@ -1385,6 +1385,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'pausa-estiva-apprendimento-scuola': { it: 'pausa-estiva-apprendimento-scuola', en: 'summer-break-learning-school', de: 'sommerferien-lernziele-schule', fr: 'pause-estivale-apprentissage-ecole' },
  'salari-mercato-soletta-formazione': { it: 'salari-mercato-soletta-formazione', en: 'salaries-labor-market-soletta-education', de: 'gehaelter-arbeitsmarkt-solothurn-bildung', fr: 'salaires-marche-travail-soleure-formation' },
  'mercato-soletta-occupazione-settori': { it: 'mercato-soletta-occupazione-settori', en: 'soletta-labour-market-sectors-salaries', de: 'soletta-arbeitsmarkt-sektoren-verdienstniveaus', fr: 'soletta-marche-travail-secteurs-salaires' },
+ 'siccita-2026-risposte': { it: 'siccita-2026-risposte', en: 'siccita-2026-answers', de: 'siccita-2026-antworten', fr: 'siccita-2026-reponses' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

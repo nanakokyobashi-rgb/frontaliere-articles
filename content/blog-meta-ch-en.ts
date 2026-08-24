@@ -4078,6 +4078,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.mercato-soletta-occupazione-settori.title': 'Labour Market Slab: Wages, Sectors and Levels',
     'blog.article.mercato-soletta-occupazione-settori.excerpt': 'Wages, training bands, collective agreements and social security contributions in the Canton of Solothurn. Guide to job search and recruitment procedures in Switzerland.',
     'blog.article.mercato-soletta-occupazione-settori.imageAlt': 'Swiss professional workspace with documents and computer during working hours, representing career and employment.',
+    'blog.article.siccita-2026-risposte.title': 'Drought 2026: Frequently Asked Questions and Answers',
+    'blog.article.siccita-2026-risposte.excerpt': 'The drought in Switzerland in 2026: causes, consequences and how to solve the problem.',
+    'blog.article.siccita-2026-risposte.imageAlt': 'A lake with historically low water levels.',
 };
 
 export default blogMetaChEn;
