@@ -170,16 +170,6 @@
       }
     },
     {
-      "path": "scripts/ci/probe-workflow-scope.mjs",
-      "mode": "identical",
-      "reason": "Introdotta sul sito (PR #6323) e non ancora scesa qui: `baseline.corpus` e' null di proposito, che il drift check tollera («null → niente da verificare») e che dice il vero — non c'e' mai stato un allineamento cosciente, perche' il file qui non esiste ancora. Registrarla subito e' cio' che fa comparire la discesa come segnale invece di lasciarla alla memoria di qualcuno: il wiring in `followup-drainer.yml` e' gia' su questo repo e resta inerte (scrive nulla → `PAT_WORKFLOWS_SCOPE` non impostata → comportamento di oggi) finche' la sonda non arriva.",
-      "baseline": {
-        "site": "86d6097d552f5056",
-        "corpus": null,
-        "alignedAt": null
-      }
-    },
-    {
       "path": "scripts/ci/claim-issue-in-flight.mjs",
       "mode": "identical",
       "baseline": {
