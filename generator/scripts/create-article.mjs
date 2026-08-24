@@ -8441,18 +8441,32 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // gia' giudicato la risposta, cosi' il merge legge cio' che il verdetto
     // ha davvero trovato.
     const metaBlock = normalizeItalianContentFromPayload(metaData, primaryLocale, META_ONLY_FIELDS);
+    // La base dello spread e' la risposta GREZZA del modello per la meta'
+    // meta: con jsonMode+jsonSchema Gemini ottiene una forma permissiva
+    // (`sanitizeSchemaForGemini` toglie `additionalProperties: false`, vedi
+    // `buildArticleJsonSchema`), quindi content.it puo' portare chiavi che lo
+    // schema dichiara ma META_ONLY_FIELDS non giudica (`faq`, issue #578) o
+    // chiavi che nessuno schema dichiara affatto. `faq` va preservata (e' il
+    // solo modo in cui sopravvive: non e' in META_ONLY_FIELDS ne' in
+    // BODY_ONLY_FIELDS), tutto il resto no.
+    const META_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq'];
     // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
-    // byte per byte), ma SOLO `BODY_ONLY_FIELDS`. Lo spread grezzo di
-    // bodyContent DOPO metaBlock faceva vincere title/excerpt spuri della
-    // BODY su quelli META (issue #506). metaBlock PER ULTIMO.
+    // byte per byte), ma SOLO `BODY_ONLY_FIELDS` e SOLO se stringhe: un
+    // modello che risponde con body1 come array/oggetto (invece di stringa)
+    // spedirebbe quel valore grezzo nel content pubblicato senza questo
+    // controllo (issue #578).
     const merged = {
       ...metaData,
       content: {
         ...(metaData?.content || {}),
         [primaryLocale]: {
-          ...(metaData?.content?.[primaryLocale] || {}),
           ...Object.fromEntries(
-            BODY_ONLY_FIELDS.filter((k) => bodyContent?.[k] != null).map((k) => [k, bodyContent[k]]),
+            Object.entries(metaData?.content?.[primaryLocale] || {}).filter(([k]) => META_CONTENT_KEYS.includes(k)),
+          ),
+          ...Object.fromEntries(
+            BODY_ONLY_FIELDS
+              .filter((k) => typeof bodyContent?.[k] === 'string')
+              .map((k) => [k, bodyContent[k]]),
           ),
           ...(metaBlock || {}),
         },
