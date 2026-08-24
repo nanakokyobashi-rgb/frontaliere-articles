@@ -125,6 +125,24 @@ const RC_TO_ENV = {
   LINKEDIN_POST_ACCESS_TOKEN:     ['LINKEDIN_POST_ACCESS_TOKEN'],
   LINKEDIN_ORGANIZATION_ID:       ['LINKEDIN_ORGANIZATION_ID'],
 
+  // LinkedIn auto-posting (PERSONAL profile — the site's
+  // scripts/post-to-linkedin-member.mjs). Distinct from LINKEDIN_POST_* above:
+  // that set authors as `urn:li:organization:<id>` with w_organization_social
+  // (Community Management API, access denied — appeal CAS-11756532-G7J8T5),
+  // this one authors as `urn:li:person:<id>` with w_member_social
+  // ("Share on LinkedIn", already provisioned).
+  //
+  // Mapped here even though the poster lives in the SITE repo, and this is the
+  // point of the `adapted` mode on this file: a secret mapped on one side only
+  // is INERT on the other with nothing failing to say so. Keeping the two maps
+  // in step is what stops the next consumer added on this side from reading
+  // `undefined` out of a Remote Config parameter that is set.
+  LINKEDIN_MEMBER_CLIENT_ID:      ['LINKEDIN_MEMBER_CLIENT_ID'],
+  LINKEDIN_MEMBER_CLIENT_SECRET:  ['LINKEDIN_MEMBER_CLIENT_SECRET'],
+  LINKEDIN_MEMBER_ACCESS_TOKEN:   ['LINKEDIN_MEMBER_ACCESS_TOKEN'],
+  LINKEDIN_MEMBER_REFRESH_TOKEN:  ['LINKEDIN_MEMBER_REFRESH_TOKEN'],
+  LINKEDIN_MEMBER_URN:            ['LINKEDIN_MEMBER_URN'],
+
   // LinkedIn Sign-In (OAuth2 for user authentication)
   LINKEDIN_SIGNIN_CLIENT_ID:      ['LINKEDIN_SIGNIN_CLIENT_ID'],
   LINKEDIN_SIGNIN_CLIENT_SECRET:  ['LINKEDIN_SIGNIN_CLIENT_SECRET'],
