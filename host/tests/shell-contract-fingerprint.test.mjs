@@ -26,7 +26,13 @@ test('transported SiteShellContract scalars match the recorded fingerprint', asy
     if (typeof contract[k] !== 'function') scalars[k] = contract[k];
   }
   assert.equal(Object.keys(scalars).length, expected.scalarFields, 'scalar field count changed');
-  const sha = createHash('sha256').update(JSON.stringify(scalars, null, 2)).digest('hex');
+  // RegExp has no own enumerable properties, so plain JSON.stringify serializes
+  // every RegExp (e.g. contextualLinkRules[].keywordPattern) to `{}` — a source/flags
+  // edit wouldn't move the digest at all. The replacer forces RegExp through
+  // String(v) so regex-only drift is actually covered (main repo issue #6396).
+  const sha = createHash('sha256')
+    .update(JSON.stringify(scalars, (_key, value) => (value instanceof RegExp ? String(value) : value), 2))
+    .digest('hex');
   assert.equal(sha, expected.sha256, 'host chrome drifted from the main repo — re-record in BOTH repos');
 });
 
