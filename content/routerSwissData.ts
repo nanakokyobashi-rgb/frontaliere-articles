@@ -1383,6 +1383,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tassazione-forfettaria-ticino-incassi': { it: 'tassazione-forfettaria-ticino-incassi', en: 'flat-rate-taxation-ticino-record-revenue', de: 'pauschalbesteuerung-tessin-einnahmen', fr: 'imposition-forfaitaire-tessin-recettes' },
  'festival-scientifica-zurigo-ricerca': { it: 'festival-scientifica-zurigo-ricerca', en: 'scientifica-festival-zurich-research', de: 'scientifica-festival-zuerich-forschung', fr: 'scientifica-festival-zurich-recherche' },
  'pausa-estiva-apprendimento-scuola': { it: 'pausa-estiva-apprendimento-scuola', en: 'summer-break-learning-school', de: 'sommerferien-lernziele-schule', fr: 'pause-estivale-apprentissage-ecole' },
+ 'salari-mercato-soletta-formazione': { it: 'salari-mercato-soletta-formazione', en: 'salaries-labor-market-soletta-education', de: 'gehaelter-arbeitsmarkt-solothurn-bildung', fr: 'salaires-marche-travail-soleure-formation' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

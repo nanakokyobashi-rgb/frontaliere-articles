@@ -4072,6 +4072,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.pausa-estiva-apprendimento-scuola.title': 'Pausa estiva e apprendimento: come sfruttarla',
     'blog.article.pausa-estiva-apprendimento-scuola.excerpt': 'Scuole svizzere riaprono tra l\'11 e il 31 agosto. Pausa estiva causa stagnazione temporanea, ma è fondamentale per il riposo cerebrale. Come organizzare l\'estate dei ragazzi efficacemente.',
     'blog.article.pausa-estiva-apprendimento-scuola.imageAlt': 'Vista del Lago di Lugano durante l\'estate, simbolo di riposo e sviluppo dei ragazzi in pausa scolastica',
+    'blog.article.salari-mercato-soletta-formazione.title': 'Salari e mercato: settori, formazione e contratti',
+    'blog.article.salari-mercato-soletta-formazione.excerpt': 'Sistema salariale svizzero per grado di formazione e settore. Contratti collettivi, dove esiste il salario minimo cantonale e come calcolare il netto dalla busta paga.',
+    'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Team di professionisti svizzeri in riunione per discutere salari e contratti di lavoro in ufficio moderno.',
 };
 
 export default blogMetaChIt;

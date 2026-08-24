@@ -4072,6 +4072,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.pausa-estiva-apprendimento-scuola.title': 'Summer break and learning: how to take advantage of it',
     'blog.article.pausa-estiva-apprendimento-scuola.excerpt': 'Swiss schools reopen between 11 and 31 August. Summer break causes temporary stagnation, but it is critical for brain rest. How to organize children\'s summer effectively.',
     'blog.article.pausa-estiva-apprendimento-scuola.imageAlt': 'View of Lake Lugano in summer, symbolizing youth rest and development during school break',
+    'blog.article.salari-mercato-soletta-formazione.title': 'Wages and market: sectors, training and contracts',
+    'blog.article.salari-mercato-soletta-formazione.excerpt': 'Swiss wage system by level of training and sector. Collective agreements, where the cantonal minimum wage exists and how to calculate the net from the paycheck.',
+    'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Swiss professionals in office meeting discussing employment contracts and salary structures.',
 };
 
 export default blogMetaChEn;

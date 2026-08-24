@@ -52826,6 +52826,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-salari-mercato-soletta-formazione': {
+    title: 'Salari e mercato: settori, formazione e contratti',
+    description: 'Sistema salariale svizzero per grado di formazione e settore. Contratti collettivi, salario minimo cantonale, calcolo netto da lordo, contributi AVS e LPP.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, mercato, settori, formazione',
+    ogTitle: 'Salari e mercato: settori, formazione e contratti',
+    ogDescription: 'Scopri come funziona il sistema salariale svizzero: contratti collettivi per settore, livelli retributivi per grado di formazione, dove esiste il salario minimo cantonale e come calcolare il netto da un\'offerta di lavoro.',
+    canonicalPath: '/articoli-svizzera/salari-mercato-soletta-formazione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e mercato: settori, formazione e contratti",
+      "description": "Sistema salariale svizzero per grado di formazione e settore. Contratti collettivi, salario minimo cantonale, calcolo netto da lordo, contributi AVS e LPP.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/salari-mercato-soletta-formazione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Team di professionisti svizzeri in riunione per discutere salari e contratti di lavoro in ufficio moderno."
+      },
+      "datePublished": "2026-08-24T09:52:00+00:00",
+      "dateModified": "2026-08-24T09:52:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/salari-mercato-soletta-formazione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

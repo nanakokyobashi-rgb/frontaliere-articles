@@ -4072,6 +4072,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.pausa-estiva-apprendimento-scuola.title': 'Sommerpause und Lernen: wie man sie nutzt',
     'blog.article.pausa-estiva-apprendimento-scuola.excerpt': 'Schweizer Schulen öffnen vom 11. bis 31. August wieder. Sommerpause verursacht vorübergehende Stagnation, ist aber entscheidend für die Ruhe des Gehirns. So organisieren Sie den Jungs-Sommer effektiv!',
     'blog.article.pausa-estiva-apprendimento-scuola.imageAlt': 'Blick auf den Lugano-See im Sommer, Symbol für Ruhe und Jugendentwicklung in den Schulferien',
+    'blog.article.salari-mercato-soletta-formazione.title': 'Löhne und Markt: Branchen, Ausbildung und Verträge',
+    'blog.article.salari-mercato-soletta-formazione.excerpt': 'Schweizer Lohnsystem nach Bildungsabschluss und Branche. Tarifverträge, wo der kantonale Mindestlohn besteht und wie das Netto aus der Lohnabrechnung zu berechnen ist.',
+    'blog.article.salari-mercato-soletta-formazione.imageAlt': 'Schweizer Fachleute im Büro bei Besprechung von Arbeitsverträgen und Gehältern.',
 };
 
 export default blogMetaChDe;
