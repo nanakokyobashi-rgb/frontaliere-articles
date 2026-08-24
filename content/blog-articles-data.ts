@@ -31917,6 +31917,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'vivere-rezzago-lavorare-ticino',
+ category: 'fiscale',
+ date: '2026-08-24T05:39:47.967Z',
+ image: '/images/blog/vivere-rezzago-lavorare-ticino.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

@@ -10662,6 +10662,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.title': 'Leben in Novedrate und Arbeiten im Tessin',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.excerpt': 'Neue Frontalieri-Vereinbarung, Genehmigung G, Quellensteuer, AHV und BVG: der komplette Leitfaden für das Leben in der Lombardei und das Pendeln ins Tessin.',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.imageAlt': 'Comer See an der Grenze zwischen Novedrate und Kanton Tessin, Symbol des grenzüberschreitenden Pendelverkehrs',
+    'blog.article.vivere-rezzago-lavorare-ticino.title': 'Leben in Rezzago und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-rezzago-lavorare-ticino.excerpt': 'Festlegung der Quellensteuer, neue Steuersätze und Selbstbehalte für Grenzgänger.',
+    'blog.article.vivere-rezzago-lavorare-ticino.imageAlt': 'Bild eines Frontalierers in der Schweiz mit Familie und Arbeit',
 };
 
 export default blogMetaDe;

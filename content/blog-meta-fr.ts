@@ -10665,6 +10665,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.title': 'Vivre à Novedrate et travailler au Tessin',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.excerpt': 'Nouvel accord frontalier, permis G, impôt à la source, AVS et LPP : le guide complet pour vivre en Lombardie et se rendre au Tessin.',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.imageAlt': 'Lac de Côme à la frontière entre Novedrate et le Canton du Tessin, symbole du travail transfrontalier',
+    'blog.article.vivere-rezzago-lavorare-ticino.title': 'Vivre à Rezzago et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-rezzago-lavorare-ticino.excerpt': 'Réglage de la taxe à la source, nouveaux taux et franchises pour les frontaliers.',
+    'blog.article.vivere-rezzago-lavorare-ticino.imageAlt': 'Image d\'un frontalier en Suisse avec sa famille et son travail',
 };
 
 export default blogMetaFr;

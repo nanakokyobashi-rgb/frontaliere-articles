@@ -10663,6 +10663,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.title': 'Living in Novedrate and working in Ticino',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.excerpt': 'New Frontier Agreement, G permit, tax at source, AVS and LPP: the complete guide to living in Lombardy and commuting to Ticino.',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.imageAlt': 'Lake Como at the border between Novedrate and Canton Ticino, symbol of Italian-Swiss cross-border commuting',
+    'blog.article.vivere-rezzago-lavorare-ticino.title': 'Living in Rezzago and working in Ticino as a border worker',
+    'blog.article.vivere-rezzago-lavorare-ticino.excerpt': 'Setting up the tax at source, new rates and deductibles for border workers.',
+    'blog.article.vivere-rezzago-lavorare-ticino.imageAlt': 'Image of a frontaliere in Ticino with family and work',
 };
 
 export default blogMetaEn;

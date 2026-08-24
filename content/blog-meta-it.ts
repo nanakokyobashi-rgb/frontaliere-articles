@@ -10664,6 +10664,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.title': 'Vivere a Novedrate e lavorare in Ticino',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.excerpt': 'Nuovo Accordo Frontalieri, permesso G, imposta alla fonte, AVS e LPP: la guida completa per vivere in Lombardia e pendolare verso il Ticino.',
     'blog.article.vivere-novedrate-lavorare-ticino-frontaliere.imageAlt': 'Lago di Como al confine tra Novedrate e il Canton Ticino, simbolo del pendolarismo frontaliere italiano-svizzero',
+    'blog.article.vivere-rezzago-lavorare-ticino.title': 'Vivere a Rezzago e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-rezzago-lavorare-ticino.excerpt': 'Impostazione dell\'imposta alla fonte, nuove aliquote e franchigie per i frontalieri.',
+    'blog.article.vivere-rezzago-lavorare-ticino.imageAlt': 'Immagine di un frontaliere in Ticino con la famiglia e il lavoro',
 };
 
 export default blogMetaIt;
