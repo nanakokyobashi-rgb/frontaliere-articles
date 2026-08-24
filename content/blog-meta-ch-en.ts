@@ -4081,6 +4081,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.siccita-2026-risposte.title': 'Drought 2026: Frequently Asked Questions and Answers',
     'blog.article.siccita-2026-risposte.excerpt': 'The drought in Switzerland in 2026: causes, consequences and how to solve the problem.',
     'blog.article.siccita-2026-risposte.imageAlt': 'A lake with historically low water levels.',
+    'blog.article.truffe-spoofing-in-calo.title': 'Declining scams thanks to anti-spoofing measures',
+    'blog.article.truffe-spoofing-in-calo.excerpt': 'The number of fraudulent calls on behalf of the authorities has clearly decreased thanks to the obligation to mark calls from abroad with spoofed Swiss numbers.',
+    'blog.article.truffe-spoofing-in-calo.imageAlt': 'Swiss border crosser checking the origin of a phone call',
 };
 
 export default blogMetaChEn;

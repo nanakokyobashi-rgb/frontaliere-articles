@@ -4081,6 +4081,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.siccita-2026-risposte.title': 'Sécheresse 2026 : questions fréquentes et réponses',
     'blog.article.siccita-2026-risposte.excerpt': 'La sécheresse en Suisse en 2026 : causes, conséquences et comment résoudre le problème.',
     'blog.article.siccita-2026-risposte.imageAlt': 'Un lac avec des niveaux d\'eau historiquement bas.',
+    'blog.article.truffe-spoofing-in-calo.title': 'Les escroqueries en baisse grâce aux mesures contre l\'usurpation d\'identité',
+    'blog.article.truffe-spoofing-in-calo.excerpt': 'Le nombre d\'appels frauduleux au nom des autorités a nettement diminué grâce à l\'obligation de marquer les appels provenant de l\'étranger avec des numéros suisses usurpés.',
+    'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontalier en Suisse qui vérifie l\'origine d\'une appel téléphonique',
 };
 
 export default blogMetaChFr;

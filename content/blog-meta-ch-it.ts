@@ -4081,6 +4081,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.siccita-2026-risposte.title': 'Siccità 2026: domande frequenti e risposte',
     'blog.article.siccita-2026-risposte.excerpt': 'La siccità in Svizzera nel 2026: cause, conseguenze e come risolvere il problema.',
     'blog.article.siccita-2026-risposte.imageAlt': 'Un lago con livelli di acqua ai minimi storici.',
+    'blog.article.truffe-spoofing-in-calo.title': 'Truffe in calo grazie alle misure contro lo spoofing',
+    'blog.article.truffe-spoofing-in-calo.excerpt': 'Il numero di chiamate fraudolente a nome delle autorità è nettamente diminuito grazie all\'obbligo di contrassegnare le chiamate provenienti dall\'estero con numeri svizzeri spoofati.',
+    'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontaliere in Svizzera che verifica la provenienza di una chiamata telefonica',
 };
 
 export default blogMetaChIt;

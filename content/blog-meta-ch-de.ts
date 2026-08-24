@@ -4081,6 +4081,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.siccita-2026-risposte.title': 'Trockenheit 2026: Häufig gestellte Fragen und Antworten',
     'blog.article.siccita-2026-risposte.excerpt': 'Die Dürre in der Schweiz im Jahr 2026: Ursachen, Folgen und wie man das Problem löst.',
     'blog.article.siccita-2026-risposte.imageAlt': 'Ein See mit historisch niedrigen Wasserständen.',
+    'blog.article.truffe-spoofing-in-calo.title': 'Schwindende Betrügereien dank Anti-Spoofing-Maßnahmen',
+    'blog.article.truffe-spoofing-in-calo.excerpt': 'Die Zahl der betrügerischen Anrufe im Namen der Behörden ist durch die Pflicht, Anrufe aus dem Ausland mit schweizerischen Rufnummern zu kennzeichnen, deutlich gesunken.',
+    'blog.article.truffe-spoofing-in-calo.imageAlt': 'Frontalier in der Schweiz, der die Herkunft einer Telefonanruf überprüft',
 };
 
 export default blogMetaChDe;
