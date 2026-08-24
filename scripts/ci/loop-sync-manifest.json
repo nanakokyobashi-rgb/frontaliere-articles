@@ -1346,11 +1346,11 @@
     {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
-      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-14 insieme a cf-analytics.mjs e profession-taxonomy.mjs, stessa classe: ritardo pre-esistente alla baseline, non adattamento. Il sito aveva aggiunto le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`, che ora scendono qui. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Le registrazioni puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo, ed e' gia' vero da prima per `merge.compat-shard.driver`: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "643a10e4815e38bc",
-        "corpus": "643a10e4815e38bc",
-        "alignedAt": "2026-08-14"
+        "site": "e28724127cb24a0f",
+        "corpus": "e28724127cb24a0f",
+        "alignedAt": "2026-08-24"
       }
     },
     {
