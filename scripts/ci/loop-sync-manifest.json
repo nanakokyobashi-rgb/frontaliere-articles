@@ -170,6 +170,15 @@
       }
     },
     {
+      "path": "scripts/ci/probe-workflow-scope.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "86d6097d552f5056",
+        "corpus": "86d6097d552f5056",
+        "alignedAt": "2026-08-24"
+      }
+    },
+    {
       "path": "scripts/ci/claim-issue-in-flight.mjs",
       "mode": "identical",
       "baseline": {
