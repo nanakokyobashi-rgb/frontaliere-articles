@@ -1,8 +1,5 @@
 {
   "keywords": [
-    "vivere a Grosio e lavorare in Grigioni da frontaliere",
-    "vivere a Lanzada e lavorare in Grigioni da frontaliere",
-    "vivere a Montagna in Valtellina e lavorare in Grigioni da frontaliere",
     "vivere a San Giacomo Filippo e lavorare in Grigioni da frontaliere",
     "vivere a Corteno Golgi e lavorare in Grigioni da frontaliere",
     "vivere a Faedo Valtellino e lavorare in Grigioni da frontaliere",
@@ -499,7 +496,10 @@
     "vivere a Livo e lavorare in Ticino da frontaliere",
     "vivere a Ponte in Valtellina e lavorare in Grigioni da frontaliere",
     "vivere a Morbegno e lavorare in Grigioni da frontaliere",
-    "vivere a Tresivio e lavorare in Grigioni da frontaliere"
+    "vivere a Tresivio e lavorare in Grigioni da frontaliere",
+    "vivere a Grosotto e lavorare in Grigioni da frontaliere",
+    "vivere a Poggiridenti e lavorare in Grigioni da frontaliere",
+    "vivere a Piateda e lavorare in Grigioni da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -751,6 +751,7 @@
     "sistema sanitario svizzero lamal guida 2026 canton Berna": 1,
     "vivere a Bardello con Malgesso e Bregano e lavorare in Ticino da frontaliere": 1,
     "vivere a Bodio Lomnago e lavorare in Ticino da frontaliere": 1,
-    "mercato degli affitti canton Zurigo canoni medi e diritto di locazione": 1
+    "mercato degli affitti canton Zurigo canoni medi e diritto di locazione": 1,
+    "vivere a Mazzo di Valtellina e lavorare in Grigioni da frontaliere": 1
   }
 }
