@@ -39,6 +39,10 @@
  *      `GH_TOKEN` (per leggere e commentare qui).
  */
 import { execFileSync } from 'node:child_process';
+// Il marker di verdetto ha UNA definizione condivisa: era scritto identico qui e
+// in `close-recovered-failure-issues.mjs`, che gia' lo esporta. Due copie della
+// stessa regex sono due posti dove il contratto puo' divergere in silenzio.
+import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 
 export const SITE_REPO = process.env.SITE_REPO || 'valerielinc-ops/frontaliere-si-o-no';
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
@@ -47,8 +51,6 @@ const DRY = process.argv.includes('--dry-run');
 
 /** I verdetti che possono nascondere un «lato sbagliato del mirror». */
 export const HANDOFF_VERDICTS = new Set(['blocked-admin-settings', 'blocked-workflows-scope']);
-
-const FIX_OUTCOME_RE = /<!--\s*FIX_OUTCOME:\s*([a-z0-9-]+)\s*-->/i;
 
 /** Ultimo verdetto + il corpo che lo porta. Pura. */
 export function lastVerdictComment(comments) {

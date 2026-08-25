@@ -2657,11 +2657,11 @@
     {
       "path": "scripts/ci/handoff-to-site.mjs",
       "mode": "corpus-only",
-      "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare.",
+      "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare. Aggiornato il 2026-08-25: FIX_OUTCOME_RE non e' piu' ridefinita qui ma importata da close-recovered-failure-issues.mjs, che gia' la esportava — due copie identiche della stessa regex erano due posti dove il contratto poteva divergere in silenzio.",
       "baseline": {
         "site": null,
-        "corpus": "5a678af070e06f5c",
-        "alignedAt": "2026-08-24"
+        "corpus": "2d5f60e1130204c3",
+        "alignedAt": "2026-08-25"
       }
     },
     {
@@ -2722,6 +2722,26 @@
         "site": null,
         "corpus": "0ed29e4bdc719363",
         "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": ".github/workflows/needs-human-sweep.yml",
+      "mode": "adapted",
+      "reason": "L'unica porta di rientro da `needs-human`, portata qui il 2026-08-25 (il sito ce l'ha dal 21-08; qui zero workflow nominava `needs-human` o `vision`, e le issue parcheggiate erano 17 con la coda del ciclo VUOTA). Adattamenti che lo rendono non copiabile: (1) VISION.md NON e' duplicato qui — resta sorgente unica sul sito e si recupera via `gh api repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md`, lo stesso comando gia' usato da issue-decompose.yml; entrambi i repo sono pubblici, quindi al GITHUB_TOKEN del run basta. (2) Identita' GITHUB_PAT_NANAKO dal ponte RC generator/scripts/load-rc-env.mjs invece della GitHub App (niente mint-app-token). (3) Pre-flight quota col beacon peer verso il sito, che sul gemello non c'e'. (4) Niente npm ci: gli script del ciclo sono zero-dep. (5) Checkout sparse su content/ invece della lista data/+public/ del sito. (6) Prompt sul dominio del corpus, col vincolo di verificare il `mode` in questo manifest prima di instradare una fix — una issue su un file `identical` si ripara sul SITO. Il job prepass dichiara /scripts/ci/ E /scripts/lib/: la chiusura transitiva degli import del pre-pass esce da scripts/ci (close-recovered-failure-issues.mjs importa scripts/lib/github-issue-creator.mjs), e con la sola prima cartella il job moriva con ERR_MODULE_NOT_FOUND a ogni run — riprodotto, e ora sorvegliato da generator/tests/needs-human-prepass-sparse-closure.test.mjs.",
+      "baseline": {
+        "site": "bbdd364a84c5cdc8",
+        "corpus": "6f81105b61c35e84",
+        "alignedAt": "2026-08-25"
+      }
+    },
+    {
+      "path": "scripts/ci/needs-human-prepass.mjs",
+      "mode": "adapted",
+      "reason": "La meta' deterministica (zero-Claude) dello sweep. La FORMA e' quella del gemello del sito; il CONTENUTO non e' copiabile perche' l'allowlist riconosce i titoli che scrivono i monitor di QUESTO repo: il sito elenca [crawler-health], App Error:, PostHog Exception:, CWV regression — che qui non esistono — mentre qui servono Watchdog generazione, Watchdog news-ticker:, Roster LLM invecchiato:, Loop drift:, gate content su main:, Lockstep engine incagliata:. Due divergenze strutturali in piu': (a) esiste OWNER_ONLY_TITLE_PATTERNS, che il sito non ha, per la famiglia credenziali (`Agent loop down: GITHUB_PAT`, `GH_PAT expiry warning:`) — il sito instrada la sua identita' con una GitHub App, qui il ciclo dipende dal PAT in Remote Config e quelle issue le chiude solo il proprietario, che la rotazione l'ha declinata il 2026-08-18; ri-accodarle e' futile per costruzione, perche' quando l'alert e' acceso il fixer non ha il PAT. (b) Il rilevatore di aggregati e' IMPORTATO da check-issue-already-resolved.mjs (isAggregate) invece di essere una regex locale come sul sito: un terzo rilevatore divergente sarebbe esattamente il difetto della issue #568. Gli si passa il solo titolo — misurato il 2026-08-25 che col body tre issue (#170, #407, #403) finivano in `decompose` per la sola parola «batch» nel testo, senza dichiarare alcun conteggio. Quarta divergenza: FIX_OUTCOME_RE non e' ridefinita come sul sito ma IMPORTATA da close-recovered-failure-issues.mjs, che gia' la esporta — la stessa regex e' scritta identica in tre file di questo repo e una quarta copia renderebbe il drift solo piu' probabile. Le altre tre non si unificano da qui: sono `identical`, quindi quella de-duplicazione e' lavoro del sito.",
+      "baseline": {
+        "site": "fa0bd775c806e14e",
+        "corpus": "39a5509939e3e929",
+        "alignedAt": "2026-08-25"
       }
     }
   ]
