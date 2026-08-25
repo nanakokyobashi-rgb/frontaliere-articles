@@ -87,11 +87,25 @@ jobs:
         uses: actions/checkout@v5
         with:
           filter: blob:none
+          # ATTENZIONE: qui serve la CHIUSURA TRANSITIVA degli import, non le
+          # cartelle «ovvie». Gli import ESM sono statici — il grafo dei moduli
+          # si risolve PRIMA che `main()` giri — quindi un file mancante non è
+          # un ramo che fallisce ogni tanto: è `ERR_MODULE_NOT_FOUND` a ogni
+          # invocazione, e il pre-pass non gira mai.
+          #
           # Il pre-pass importa `check-issue-already-resolved.mjs` (per
-          # `isAggregate`), che a sua volta importa
-          # `followup-resolution-match.mjs`: serve la cartella, non il file solo.
+          # `isAggregate`) e `close-recovered-failure-issues.mjs` (per
+          # `FIX_OUTCOME_RE`); il primo tira `followup-resolution-match.mjs`, il
+          # secondo tira `scripts/lib/github-issue-creator.mjs` — che sta FUORI
+          # da `/scripts/ci/`. Con la sola `/scripts/ci/` questo job crashava a
+          # ogni run (riprodotto, non dedotto).
+          #
+          # `generator/tests/needs-human-prepass-sparse-closure.test.mjs`
+          # ricalcola la chiusura dal sorgente e fallisce se questo blocco non
+          # la copre: la lista qui sotto non va tenuta aggiornata a memoria.
           sparse-checkout: |
             /scripts/ci/
+            /scripts/lib/
           sparse-checkout-cone-mode: false
         timeout-minutes: 10
 

@@ -161,6 +161,22 @@ export function latestVerdict(comments) {
 }
 
 /**
+ * Il verdetto va letto (una `gh api` per issue) oppure il titolo decide da solo?
+ *
+ * Pura, così il risparmio è verificabile invece che dedotto dal codice di
+ * `main()`. Il verdetto conta SOLO nel ramo `STALE_BLOCK_VERDICTS`, che
+ * `prepassDecision` valuta dopo aver già scartato le due famiglie riconosciute
+ * sul titolo: pagarlo per quelle è una chiamata buttata.
+ *
+ * @param {string} title
+ * @returns {boolean} true se serve leggere i commenti
+ */
+export function needsVerdictLookup(title = '') {
+  return !MONITOR_TITLE_PATTERNS.some((re) => re.test(title))
+    && !OWNER_ONLY_TITLE_PATTERNS.some((re) => re.test(title));
+}
+
+/**
  * La decisione, dal solo titolo + labels + ultimo verdetto. Pura → testabile.
  *
  * `keep` è il default e non un ramo di errore: significa «non so dirlo senza
@@ -248,9 +264,9 @@ function main() {
   for (const iss of ordered) {
     const labels = (iss.labels || []).map((l) => l.name);
     // Il verdetto costa una lettura: si paga SOLO quando il titolo non basta,
-    // cioè quando la famiglia non è riconosciuta e la issue finirebbe in `keep`.
+    // cioè quando né la famiglia di monitor né quella owner-only lo decidono.
     let verdict = null;
-    if (!MONITOR_TITLE_PATTERNS.some((re) => re.test(iss.title))) {
+    if (needsVerdictLookup(iss.title)) {
       try {
         const cs = gh(['api', `repos/${REPO}/issues/${iss.number}/comments?per_page=100`, '--paginate']);
         verdict = latestVerdict(Array.isArray(cs) ? cs : []);

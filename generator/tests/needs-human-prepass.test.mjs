@@ -20,6 +20,7 @@ import {
   MONITOR_TITLE_PATTERNS,
   OWNER_ONLY_TITLE_PATTERNS,
   STALE_BLOCK_VERDICTS,
+  needsVerdictLookup,
 } from '../../scripts/ci/needs-human-prepass.mjs';
 
 // ── Le famiglie riconosciute sono QUELLE DI QUESTO REPO ────────────────────
@@ -201,4 +202,25 @@ test('nessuna sovrapposizione fra allowlist e famiglia owner-only', () => {
   for (const owner of ['Agent loop down: GITHUB_PAT failed to load', 'GH_PAT expiry warning: rotate']) {
     assert.equal(MONITOR_TITLE_PATTERNS.some((re) => re.test(owner)), false, owner);
   }
+});
+
+// ── La lettura del verdetto si paga solo quando serve ──────────────────────
+
+test('needsVerdictLookup: le famiglie decise dal titolo non pagano una gh api', () => {
+  // Il verdetto conta SOLO nel ramo `STALE_BLOCK_VERDICTS`, che `prepassDecision`
+  // valuta dopo aver gia' scartato le due famiglie riconosciute sul titolo.
+  // Pagarlo per quelle e' una chiamata buttata (nit della review di #595).
+  for (const t of ['Workflow Failure: Generate Blog Article', 'follow-up(#386): x', 'Loop drift: il ciclo autonomo diverge dal sito']) {
+    assert.equal(needsVerdictLookup(t), false, t);
+  }
+  for (const t of ['Agent loop down: GITHUB_PAT failed to load', 'GH_PAT expiry warning: rotate']) {
+    assert.equal(needsVerdictLookup(t), false, t);
+  }
+});
+
+test('needsVerdictLookup: un titolo non riconosciuto lo paga, ed e\' giusto', () => {
+  // E' l'unico caso in cui il verdetto puo' cambiare l'esito: senza la lettura,
+  // un `blocked-secrets` superato resterebbe parcheggiato per sempre.
+  assert.equal(needsVerdictLookup('breaker timeout per-provider: 8 modelli nvidia'), true);
+  assert.equal(needsVerdictLookup(''), true);
 });
