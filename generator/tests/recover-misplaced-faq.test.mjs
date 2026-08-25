@@ -47,6 +47,18 @@ test('recoverMisplacedFaq returns undefined when faq is absent', () => {
   assert.equal(recoverMisplacedFaq({ content: { it: { title: 'T', excerpt: 'E' } } }, 'it'), undefined);
 });
 
+test('empty array / literal-null in content[locale].faq does not hide a real faq at root', () => {
+  const faq = [{ question: 'Q?', answer: 'A lunga abbastanza da restare.' }];
+  assert.deepEqual(
+    recoverMisplacedFaq({ content: { it: { title: 'T', excerpt: 'E', faq: [] } }, faq }, 'it'),
+    faq,
+  );
+  assert.deepEqual(
+    recoverMisplacedFaq({ content: { it: { title: 'T', excerpt: 'E', faq: 'null' } }, faq }, 'it'),
+    faq,
+  );
+});
+
 test('isPresentFaq rejects empty / literal-null stand-ins', () => {
   assert.equal(isPresentFaq(null), false);
   assert.equal(isPresentFaq(''), false);
@@ -73,5 +85,8 @@ test('the split-meta merge in create-article.mjs calls recoverMisplacedFaq', () 
   // The file may contain NUL bytes; search the raw buffer.
   const text = src.toString('latin1');
   assert.match(text, /recoverMisplacedFaq\(metaData, primaryLocale\)/);
+  assert.match(text, /recoverMisplacedFaq\(bodyContent, primaryLocale\)/);
+  assert.match(text, /recoverMisplacedFaq\(itData, primaryLocale\)/);
   assert.match(text, /recoveredFaq !== undefined \? \{ faq: recoveredFaq \}/);
+  assert.doesNotMatch(text, /itData\?\.content\?\.it\?\.faq \|\|/);
 });

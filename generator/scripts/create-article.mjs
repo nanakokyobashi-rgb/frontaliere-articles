@@ -8450,7 +8450,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // solo modo in cui sopravvive: non e' in META_ONLY_FIELDS ne' in
     // BODY_ONLY_FIELDS), tutto il resto no.
     const META_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq'];
-    const recoveredFaq = recoverMisplacedFaq(metaData, primaryLocale);
+    const recoveredFaq = recoverMisplacedFaq(metaData, primaryLocale) ?? recoverMisplacedFaq(bodyContent, primaryLocale) ?? recoverMisplacedFaq(bodyData, primaryLocale);
     // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
     // byte per byte), ma SOLO `BODY_ONLY_FIELDS` e SOLO se stringhe: un
     // modello che risponde con body1 come array/oggetto (invece di stringa)
@@ -8803,7 +8803,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   applyMicrocopyGuard(itContent, 'it');
 
   // Preserve FAQ from AI response (not in REQUIRED_IT_BODY_FIELDS, extracted separately)
-  const rawFaq = itData?.content?.it?.faq || itData?.content?.faq || itData?.faq;
+  const rawFaq = recoverMisplacedFaq(itData, primaryLocale);
   if (rawFaq) {
     if (!Array.isArray(rawFaq)) {
       console.error('  ⚠️  FAQ non è un array, lo rimuovo');

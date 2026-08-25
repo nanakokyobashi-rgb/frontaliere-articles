@@ -611,3 +611,24 @@ test('#15 faq alla radice della meta sopravvive al merge dello split', async () 
   assert.deepEqual(merged.content.it.faq, faq);
 });
 
+test('#16 faq nella meta BODY sopravvive al merge dello split', async () => {
+  const faq = [{ question: 'Quanto costa il permesso G?', answer: 'Dipende dal cantone.' }];
+  const bodyConFaq = JSON.stringify({
+    content: {
+      it: {
+        body1: BLOCCO,
+        body2: BLOCCO,
+        body3: BLOCCO,
+        faq,
+      },
+    },
+  });
+  const { _generateSplit, provider, log } = await runSplit({
+    risposte: [bodyConFaq, RISPOSTA_META_CONFORME],
+  });
+  const out = await _generateSplit();
+  assert.equal(provider.length, 2, `nessuna rigenerazione:\n${log()}`);
+  const merged = JSON.parse(out);
+  assert.deepEqual(merged.content.it.faq, faq);
+});
+
