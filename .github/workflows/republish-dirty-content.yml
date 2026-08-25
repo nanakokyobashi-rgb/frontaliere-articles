@@ -120,6 +120,23 @@ jobs:
             echo "leftover=$(jq -r '.counts.leftover' "$RUNNER_TEMP/dirty.json")"
           } >> "$GITHUB_OUTPUT"
 
+      # Gemello del fix in reconcile-article-shards.yml (issue #590): l'issue
+      # canonica qui sotto apre/aggiorna quando resta lavoro, ma niente la
+      # richiudeva quando un run successivo (rilancio manuale) trova zero
+      # sporchi. `resolveGithubIssue` e' il no-op sicuro quando non c'e' niente
+      # da chiudere.
+      - name: Close dirty-content issue (coda drenata)
+        if: steps.detect.outcome == 'success' && steps.detect.outputs.distinct == '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node scripts/lib/github-issue-creator.mjs \
+            --title "Articoli con control character C0: ripubblicazione incompleta" \
+            --workflow "republish-dirty-content" \
+            --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --resolve
+
       - name: Resolve backfill mode
         id: mode
         run: |
