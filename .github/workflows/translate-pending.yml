@@ -1,0 +1,81 @@
+# Translate Pending Jobs — cross-repo execution (reusable workflow).
+#
+# Physically hosted here (nanakokyobashi-rgb/frontaliere-articles) instead of
+# frontaliere-si-o-no, so this pipeline's Actions minutes run against this
+# account's separate, less-saturated concurrent-job pool instead of
+# valerielinc-ops' ~20-concurrent-job Free-plan pool.
+#
+# Pattern validated by the crawler-group-23 pilot (frontaliere-si-o-no#6485
+# -> reverted #6517 (composite action rejects background:/wait-all:) ->
+# #6520 (reusable workflow) / frontaliere-articles#594 -> #600 -> #602), then
+# applied to crawler-group-01..22 and to this pipeline in the same batch.
+#
+# The actual pipeline logic (checkout, RC secrets, housekeeping, the
+# translate cascade, deploy trigger) is NOT duplicated here — it lives in
+# valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml
+# (single source of truth, same repo as the crawlers it depends on —
+# data/jobs/by-crawler/*.json).
+#
+# TRIGGER GAP vs the original same-repo workflow (declared here, not hidden):
+# the original had `workflow_run: workflows: ["Orchestrate Job Crawlers"],
+# types: [completed]` — fires as soon as that dispatcher job finishes (it
+# only DISPATCHES the 23 crawler groups, it does not wait for them to crawl).
+# `workflow_run` only observes workflows in the SAME repo, and
+# orchestrate-crawlers.yml stays on frontaliere-si-o-no (it dispatches the
+# crawler-group callers cross-repo, but the orchestrator itself is not
+# migrated) — so this caller cannot replicate that trigger locally. Instead,
+# orchestrate-crawlers.yml's dispatch job fires THIS workflow directly via
+# `gh workflow run translate-pending.yml --repo nanakokyobashi-rgb/frontaliere-articles`
+# (same GITHUB_PAT_NANAKO cross-repo dispatch mechanism already used for
+# every crawler-group target), `if: always()`, as its last step — same
+# timing as the old workflow_run. See that workflow's "Dispatch
+# translate-pending (frontaliere-articles)" step. The 5 daily crons below are
+# unchanged from the original and remain the safety net regardless.
+on:
+  schedule:
+    - cron: '0 7 * * *'     # Daily: housekeeping + translate (replaces cleanup-stale-jobs cron)
+    - cron: '0 13 * * *'    # Midday: translate after 08:00 orchestration
+    - cron: '0 1 * * *'     # Midnight: translate after 20:00 orchestration
+    - cron: '20 1 * * *'    # Nightly retry: after quota reset
+    - cron: '20 4 * * *'    # Backup nightly retry
+  workflow_dispatch:
+    inputs:
+      max_jobs:
+        description: 'Max jobs for the cascade. Wall-clock-bound, not quota-bound — the 90min cascade deadline stops it first.'
+        default: '900'
+      mopup_max_jobs:
+        description: 'Max jobs for the local-MT (Argos) mop-up — free + unlimited, drain the whole backlog'
+        default: '6000'
+      company_key:
+        description: 'Single company key to translate (e.g. a-group). Leave empty for all.'
+        default: ''
+      skip_housekeeping:
+        description: 'Skip housekeeping (URL validation, expired pruning)'
+        type: boolean
+        default: false
+      skip_translate:
+        description: 'Skip translations (only housekeeping + slug hardening)'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run (no commit)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: jobs-data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
+    with:
+      max_jobs: ${{ inputs.max_jobs }}
+      mopup_max_jobs: ${{ inputs.mopup_max_jobs }}
+      company_key: ${{ inputs.company_key }}
+      skip_housekeeping: ${{ inputs.skip_housekeeping || false }}
+      skip_translate: ${{ inputs.skip_translate || false }}
+      dry_run: ${{ inputs.dry_run || false }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

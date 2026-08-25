@@ -556,14 +556,11 @@ const DECLARED_ABSENT = {
       'Descrittiva — nominare dove sta l\'altra meta\' e\' cio\' che rende ricontrollabile ' +
       'l\'affermazione «il porting ha perso il bust», non una dipendenza.',
   },
-  '.github/workflows/crawler-group-23.yml :: translate-pending.yml': {
-    kind: 'site-only',
-    reason:
-      'Pilota di migrazione cross-repo (frontaliere-si-o-no PR #6485): la riga elenca cosa ' +
-      'NON e\' ancora migrato («migrating the other 22 + translate-pending.yml»), ed e\' un ' +
-      'workflow del SITO che qui non esiste per costruzione — non lo dispatcha nessuno da ' +
-      'questo file. Descrittiva: niente qui dipende dalla sua esistenza.',
-  },
+  // La voce 'crawler-group-23.yml :: translate-pending.yml' (site-only) e' stata
+  // RIMOSSA qui: e' diventata stale quando questa stessa PR ha aggiunto
+  // .github/workflows/translate-pending.yml — il caller minimale cross-repo
+  // gemello dei 22 crawler-group — che ora esiste davvero in questo repo. Vedi
+  // le voci per translate-pending.yml piu' sotto.
   '.github/workflows/crawler-group-23.yml :: scripts/generate-crawler-group-workflows.mjs': {
     kind: 'site-only',
     reason:
@@ -605,6 +602,674 @@ const DECLARED_ABSENT = {
       'REF_RE estrae solo la porzione a partire da `.github/`) — stessa ragione: vive ' +
       'ESCLUSIVAMENTE nel sito, referenziato via `uses:` qualificato la cui risoluzione ' +
       'GitHub Actions verifica da solo, niente qui dipende dalla sua esistenza LOCALE.',
+  },
+
+  // Batch che migra crawler-group-01..22 + translate-pending.yml sullo stesso
+  // pattern reusable-workflow cross-repo del pilota crawler-group-23 sopra
+  // (frontaliere-si-o-no#6537 / questa PR). Stesse 3 forme di citazione per
+  // ciascun crawler-group-NN.yml (il reusable workflow che lo ospita, il
+  // generatore, il dispatcher) + 2 per translate-pending.yml (il suo reusable
+  // workflow, il dispatcher) — vedi le voci gemelle di crawler-group-23.yml
+  // sopra per il ragionamento completo, qui abbreviato per non ripetere lo
+  // stesso paragrafo 24 volte.
+  '.github/workflows/crawler-group-01.yml :: .github/workflows/crawler-group-01-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-01-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_01.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-01.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-01.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-01.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-02.yml :: .github/workflows/crawler-group-02-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-02-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_02.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-02.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-02.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-02.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-03.yml :: .github/workflows/crawler-group-03-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-03-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_03.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-03.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-03.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-03.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-04.yml :: .github/workflows/crawler-group-04-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-04-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_04.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-04.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-04.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-04.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-05.yml :: .github/workflows/crawler-group-05-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-05-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_05.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-05.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-05.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-05.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-06.yml :: .github/workflows/crawler-group-06-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-06-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_06.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-06.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-06.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-06.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-07.yml :: .github/workflows/crawler-group-07-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-07-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_07.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-07.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-07.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-07.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-08.yml :: .github/workflows/crawler-group-08-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-08-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_08.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-08.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-08.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-08.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-09.yml :: .github/workflows/crawler-group-09-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-09-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_09.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-09.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-09.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-09.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-10.yml :: .github/workflows/crawler-group-10-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-10-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_10.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-10.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-10.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-10.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-11.yml :: .github/workflows/crawler-group-11-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-11-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_11.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-11.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-11.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-11.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-12.yml :: .github/workflows/crawler-group-12-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-12-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_12.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-12.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-12.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-12.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-13.yml :: .github/workflows/crawler-group-13-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-13-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_13.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-13.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-13.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-13.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-14.yml :: .github/workflows/crawler-group-14-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-14-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_14.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-14.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-14.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-14.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-15.yml :: .github/workflows/crawler-group-15-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-15-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_15.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-15.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-15.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-15.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-16.yml :: .github/workflows/crawler-group-16-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-16-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_16.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-16.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-16.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-16.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-17.yml :: .github/workflows/crawler-group-17-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-17-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_17.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-17.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-17.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-17.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-18.yml :: .github/workflows/crawler-group-18-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-18-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_18.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-18.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-18.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-18.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-19.yml :: .github/workflows/crawler-group-19-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-19-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_19.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-19.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-19.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-19.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-20.yml :: .github/workflows/crawler-group-20-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-20-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_20.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-20.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-20.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-20.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-21.yml :: .github/workflows/crawler-group-21-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-21-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_21.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-21.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-21.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-21.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-22.yml :: .github/workflows/crawler-group-22-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern di crawler-group-23.yml (vedi le sue voci sopra), applicato al batch ' +
+      'che migra i gruppi 01-22 sullo stesso reusable workflow cross-repo: nome col path ' +
+      'completo (REF_RE estrae da `.github/`) del reusable workflow che ospita la logica ' +
+      'reale del gruppo, vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-22-logic.yml. Invocato via `uses: owner/repo/' +
+      'path@ref` qualificato (jobs.crawler_group_22.uses sotto), la cui esistenza GitHub ' +
+      'Actions verifica da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/crawler-group-22.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il generatore che ' +
+      'produce la logica del gruppo lato sito, per spiegare dove sta la sorgente di ' +
+      'verita\'. Il generatore vive ESCLUSIVAMENTE nel sito — qui non esistono crawler ' +
+      'group ne\' un generatore per produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-22.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso motivo della voce gemella su crawler-group-23.yml: nomina il dispatcher del ' +
+      'sito che invoca `gh workflow run crawler-group-22.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno (routing generalizzato a tutti i ' +
+      'crawler-group-*.yml, non piu\' solo al 23 — frontaliere-si-o-no#6537). Il ' +
+      'dispatcher vive ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il ' +
+      'chiamante. Descrittiva.',
+  },
+  '.github/workflows/translate-pending.yml :: .github/workflows/translate-pending-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pattern dei crawler-group-NN.yml: nome col path completo del reusable ' +
+      'workflow che ospita la logica reale della pipeline di traduzione, vive ' +
+      'ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/.github/workflows/' +
+      'translate-pending-logic.yml. Invocato via `uses: owner/repo/path@ref` ' +
+      'qualificato (jobs.translate.uses sotto), la cui esistenza GitHub Actions verifica ' +
+      'da solo al dispatch — niente in QUESTO repo ne dipende.',
+  },
+  '.github/workflows/translate-pending.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Nomina il dispatcher del sito due volte: nella spiegazione del trigger-gap ' +
+      '(workflow_run non replicabile cross-repo) e nel punto dove quel dispatcher ora ' +
+      'invoca esplicitamente `gh workflow run translate-pending.yml --repo ' +
+      'nanakokyobashi-rgb/frontaliere-articles` in coda al proprio job (sostituto del ' +
+      'vecchio trigger workflow_run — frontaliere-si-o-no#6537). Il dispatcher vive ' +
+      'ESCLUSIVAMENTE nel sito; questo file e\' il bersaglio, non il chiamante. ' +
+      'Descrittiva.',
   },
 };
 
