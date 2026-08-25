@@ -16,6 +16,8 @@ import {
   pushRetriesExhausted,
   lostArticleTitle,
   buildLostArticleReport,
+  isDeclaredSkipOnly,
+  DECLARED_SKIP_STEP_RE,
 } from '../../scripts/ci/scan-failed-runs.mjs';
 import { TITLE_RE } from '../../scripts/ci/close-recovered-failure-issues.mjs';
 import { isExclusivelyWorkflowScoped } from '../../scripts/ci/check-workflows-scope.mjs';
@@ -287,4 +289,61 @@ test('il titolo sta FUORI dal TITLE_RE di close-recovered-failure-issues.mjs', (
   // le run passano. E' cosi' che questa classe e' sparita finora senza fix.
   assert.equal(TITLE_RE.exec(lostArticleTitle(CATALOG)), null);
   assert.ok(TITLE_RE.exec('Workflow Failure: Generate Blog Article'), 'il titolo generico resta coperto dal closer');
+});
+
+/* ─────────────────────────────────────────────────────────────────────────────
+ * issue #170 — uno skip DICHIARATO non e' un guasto
+ *
+ * `post-merge-followup.yml` esce 1 quando la quota Claude e' esaurita, e il
+ * rosso e' il meccanismo: il watermark avanza solo sulle run di successo,
+ * quindi un verde li' perderebbe il batch di PR non triagiate. Lo scanner lo
+ * leggeva come qualunque altro rosso, apriva "Workflow Failure: Post-merge
+ * follow-up triage" e la ri-citava a ogni finestra di quota finche' il closer
+ * la promuoveva a `needs-human` per RICORRENZA. Misurato il 2026-08-25: #170
+ * aperta dal 2026-08-10, 2 fallimenti su 10 run recenti, entrambi lo skip.
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+/** Forma reale di `failedJobs()`: `step` e' il PRIMO step fallito del job. */
+const job = (step, name = 'followup') => ({ name, step, url: 'https://example.invalid/job' });
+
+test('#170: la run ferma sul solo skip di quota non e\' segnalabile', () => {
+  assert.equal(
+    isDeclaredSkipOnly([job('Skip on exhausted quota (no false green — watermark must hold)')]),
+    true,
+  );
+});
+
+test('#170: un guasto VERO nello stesso workflow resta segnalato', () => {
+  // E' il fallimento che ha aperto #170 il 2026-08-10: un altro step, stesso
+  // workflow. Se il filtro guardasse il WORKFLOW invece dello STEP, questo
+  // sparirebbe insieme al rumore — ed e' l'unico dei due che vuole un fix.
+  assert.equal(isDeclaredSkipOnly([job('Run Claude follow-up triage (batch)')]), false);
+});
+
+test('#170: basta UN job fallito fuori dallo skip perche\' la run resti segnalata', () => {
+  assert.equal(
+    isDeclaredSkipOnly([
+      job('Skip on exhausted quota (no false green — watermark must hold)'),
+      job('Commit and push', 'publish'),
+    ]),
+    false,
+  );
+});
+
+test('#170: in dubbio si SEGNALA — elenco vuoto o step ignoto non sono uno skip', () => {
+  // Il costo di una issue di troppo e' un triage; quello di una in meno e' un
+  // guasto silenzioso. L'asimmetria decide il default.
+  assert.equal(isDeclaredSkipOnly([]), false, 'nessun job fallito riportato dall\'API');
+  assert.equal(isDeclaredSkipOnly([job(null)]), false, 'step non riportato');
+  assert.equal(isDeclaredSkipOnly([job(undefined)]), false);
+  assert.equal(isDeclaredSkipOnly('non-un-array'), false);
+});
+
+test('#170: il filtro NON e\' un allowlist di workflow — il nome dello step e\' il discriminante', () => {
+  // Guard di forma: se qualcuno domani sostituisse il predicato con un match
+  // sul nome del workflow, questo test cadrebbe. La regex deve restare narrow.
+  assert.ok(DECLARED_SKIP_STEP_RE.test('Skip on exhausted quota (no false green — watermark must hold)'));
+  assert.equal(DECLARED_SKIP_STEP_RE.test('Post-merge follow-up triage'), false);
+  assert.equal(DECLARED_SKIP_STEP_RE.test('Pre-flight — quota backoff gate (zero-Claude)'), false,
+    'il pre-flight e\' PROCEED-SAFE (continue-on-error) e non fallisce mai: non deve entrare nel filtro');
 });

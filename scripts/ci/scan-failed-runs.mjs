@@ -151,6 +151,45 @@ export function isReportableRun(r, { since, ignore = IGNORE } = {}) {
   );
 }
 
+/**
+ * Step di skip DICHIARATI: rossi voluti, non guasti (issue #170).
+ *
+ * `post-merge-followup.yml` esce 1 quando la quota Claude e' esaurita, e lo fa
+ * di proposito: il watermark avanza solo sulle run di SUCCESSO, quindi uscire
+ * verdi li' farebbe scorrere la finestra e perderebbe per sempre il batch di PR
+ * non triagiate. Il rosso e' il meccanismo che tiene il watermark indietro — lo
+ * step lo dice per esteso nel proprio messaggio ("La prossima run schedulata
+ * (<=3h) ri-copre l'intera finestra, nessuna PR persa").
+ *
+ * Ma questo scanner lo leggeva come qualunque altro rosso e apriva una
+ * "Workflow Failure". Poiche' una finestra di quota dura ore e il cron gira ogni
+ * ~3h, la stessa issue veniva ri-citata a ogni giro finche'
+ * `close-recovered-failure-issues.mjs` la promuoveva a `priority:high` +
+ * `needs-human` per RICORRENZA — cioe' esattamente per il fatto di funzionare.
+ * E' il caso di #170: aperta il 2026-08-10, ancora accesa il 2026-08-25 con due
+ * fallimenti su dieci run recenti, entrambi lo skip di quota.
+ *
+ * Il filtro e' volutamente NARROW: agisce sul NOME dello step, non sul workflow,
+ * e solo se OGNI job fallito della run e' fermo su uno step di skip dichiarato.
+ * Un guasto vero nello stesso workflow (la chiamata Claude che muore, il collect
+ * che esplode) fallisce su uno step con un altro nome e resta segnalato.
+ */
+export const DECLARED_SKIP_STEP_RE = /skip on exhausted quota/i;
+
+/**
+ * La run e' rossa SOLO per uno skip dichiarato?
+ *
+ * `jobs` ha la forma prodotta da `failedJobs()`: `{ name, url, step }`, dove
+ * `step` e' il PRIMO step fallito del job (o `null`/assente se l'API non lo
+ * riporta). Un elenco vuoto o uno step ignoto NON e' uno skip dichiarato: in
+ * dubbio si segnala, perche' il costo di una issue di troppo e' un triage, il
+ * costo di una in meno e' un guasto silenzioso.
+ */
+export function isDeclaredSkipOnly(jobs) {
+  if (!Array.isArray(jobs) || jobs.length === 0) return false;
+  return jobs.every((j) => typeof j?.step === 'string' && DECLARED_SKIP_STEP_RE.test(j.step));
+}
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const since = new Date(Date.now() - LOOKBACK_MIN * 60_000).toISOString();
@@ -497,6 +536,17 @@ async function main() {
     }
 
     const jobs = failedJobs(run.databaseId);
+
+    // Rosso VOLUTO (issue #170): la run e' ferma su uno step di skip dichiarato,
+    // non su un guasto. Segnalarla apre una "Workflow Failure" che nessun fix
+    // puo' chiudere — il rosso torna alla finestra di quota successiva — e la
+    // ricorrenza la fa escalare a `needs-human`. Si salta PRIMA della dedup e
+    // prima del rilevatore ricco: non c'e' niente da arricchire.
+    if (isDeclaredSkipOnly(jobs)) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} rossa solo per skip dichiarato (${jobs.map((j) => j.step).join(', ')}) → nessuna issue.`);
+      continue;
+    }
+
     const jobLines = jobs.length
       ? jobs.map((j) => `- \`${j.name}\`${j.step ? ` — step fallito: \`${j.step}\`` : ''}\n  ${j.url}`).join('\n')
       : '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';
