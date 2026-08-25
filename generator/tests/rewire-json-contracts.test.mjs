@@ -43,10 +43,9 @@
  * esercitare anche il ramo di SCRITTURA, che e' quello che produce il file che
  * `borderCrossings.ts` legge davvero.
  *
- * La copia e' fedele solo finche' i tre script importano esclusivamente builtin
- * Node: c'e' un test qui sotto che lo tiene fermo, perche' il giorno in cui uno
- * di loro importasse un modulo locale l'armatura smetterebbe di testare il file
- * vero senza dirlo a nessuno.
+ * La copia e' fedele se gli import relativi vengono copiati insieme allo
+ * script (rewire-fetch.mjs e' il primo). Un import di pacchetto npm resterebbe
+ * invisibile: c'e' un test qui sotto che lo tiene fermo.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -118,15 +117,31 @@ async function serve(body, { status = 200, contentType = 'application/json' } = 
 }
 
 /**
+ * Copia uno script di refresh e i suoi import relativi, stessa profondita'.
+ * Senza questo, `from './lib/rewire-fetch.mjs'` nella copia in temp dir
+ * non risolverebbe e la suite smetterebbe di esercitare il file vero.
+ */
+function copyRefreshTree(root, rel) {
+  const src = path.join(ROOT, rel);
+  const dest = path.join(root, rel);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  const text = fs.readFileSync(src, 'utf8');
+  for (const m of text.matchAll(/^\s*import\s[^\n]*?from\s+['"](\.[^'"]+)['"]/gm)) {
+    const childRel = path.normalize(path.join(path.dirname(rel), m[1]));
+    copyRefreshTree(root, childRel);
+  }
+  return dest;
+}
+
+/**
  * Esegue il `refresh` di un contratto contro un corpo servito in locale.
  * Ritorna `{ status, out, root }` — `root` e' la temp dir, cosi' il chiamante
  * puo' ispezionare la cache scritta.
  */
 async function runRefresh(c, body, { check = true } = {}) {
   const root = fs.mkdtempSync(path.join(tmpdir(), `rewire-${c.id}-`));
-  const script = path.join(root, c.consumer.refresh);
-  fs.mkdirSync(path.dirname(script), { recursive: true });
-  fs.copyFileSync(path.join(ROOT, c.consumer.refresh), script);
+  const script = copyRefreshTree(root, c.consumer.refresh);
 
   const served = await serve(body);
   try {
@@ -177,22 +192,24 @@ test('ogni contratto dichiarato ha i suoi file: refresh, fixture, consumatori', 
   assert.deepEqual(missing, [], `File dichiarati nel registro REWIRE e assenti:\n  ${missing.join('\n  ')}`);
 });
 
-test('i tre refresh importano SOLO builtin Node — altrimenti la copia in temp dir mente', () => {
+test('i tre refresh importano solo builtin Node o path relativi — la copia in temp dir li porta', () => {
   const offenders = [];
   for (const c of REWIRE_CONTRACTS) {
     const src = read(c.consumer.refresh);
     for (const m of src.matchAll(/^\s*import\s[^\n]*?from\s+['"]([^'"]+)['"]/gm)) {
-      if (!m[1].startsWith('node:')) offenders.push(`${c.consumer.refresh} → ${m[1]}`);
+      const spec = m[1];
+      if (spec.startsWith('node:') || spec.startsWith('.')) continue;
+      offenders.push(`${c.consumer.refresh} → ${spec}`);
     }
   }
   assert.deepEqual(
     offenders,
     [],
-    'Un `refresh` ha smesso di essere autoconsistente.\n' +
-      'Questa suite lo COPIA in una temp dir per isolarne la cache: con un import\n' +
-      'relativo la copia non risolve piu\', e il test o esplode o — peggio — smette di\n' +
-      'esercitare il file vero. Se l\'import serve, l\'armatura va cambiata insieme:\n' +
-      `  ${offenders.join('\n  ')}`,
+    'Un `refresh` importa un pacchetto o un path non relativo.\n' +
+      'Questa suite lo COPIA in una temp dir (script + import relativi) per isolarne\n' +
+      'la cache: un `from \'undici\'` (o simile) non verrebbe copiato e il test\n' +
+      'smetterebbe di esercitare il file vero. Se serve una dipendenza, l\'armatura\n' +
+      `va cambiata insieme:\n  ${offenders.join('\n  ')}`,
   );
 });
 

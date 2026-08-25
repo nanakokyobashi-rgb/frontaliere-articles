@@ -1998,6 +1998,16 @@
       }
     },
     {
+      "path": "generator/scripts/lib/rewire-fetch.mjs",
+      "mode": "corpus-only",
+      "reason": "Fetch condiviso dei tre refresh REWIRE (window, averages-ready, events). Vive solo qui: e' il lato CONSUMATORE del contratto HTTP, e il sito e' il produttore (publish-border-wait-window / assemble-events-dataset). Non e' `identical` e non e' `corpus-only-pending`: sul sito non esiste un omonimo da allineare, e copiarlo la' invertirebbe la direzione del REWIRE. Estratto dai refresh perche' GitHub Actions prende HTTP 403 dal WAF Cloudflare sul UA di default di Node, e il ramo `--check` + GITHUB_ACTIONS deve uscire 0 senza indebolire il gate di forma offline. I tre refresh restano i chiamanti; questo file e' la parte testabile.",
+      "baseline": {
+        "site": null,
+        "corpus": "736a11de01223b08",
+        "alignedAt": "2026-08-25"
+      }
+    },
+    {
       "path": "generator/scripts/lib/body2-payload-verdict.mjs",
       "mode": "corpus-only",
       "reason": "Il verdetto sulla risposta di generazione IT (`ok` / `topic-gate-abort` / `reject`), estratto da generator/scripts/create-article.mjs insieme al normalizzatore `normalizeItalianContentFromPayload` che quel verdetto interroga. Nasce il 2026-08-18 dal difetto della run 32175400548: il ciclo `isBody2Check` di `callLLM()` conosceva DUE esiti dove il contratto del prompt ne prevede TRE, e leggeva l'abort di REGOLA #0 (`abort_topical_relevance: true` con i campi di contenuto a null) come «content.it non normalizzabile» — cinque chiamate a `claude-cli/haiku` invece di una, e la sezione chiusa senza articolo. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, gia' registrato `adapted`, quindi un gemello di FILE qui non esiste — stessa forma di article-meta-block.mjs sopra. La ragione dell'estrazione e' verificabilita', non estetica: create-article.mjs non e' importabile dalle gate del generatore, che girano `node --test` senza `npm ci` e non hanno `jsdom` (tirato dentro a module scope da extract-article-text.mjs). Finche' la regola stava inline, l'unico modo di provarla era ricopiarla nel test — una copia che diverge in silenzio. Il modulo e' tenuto PURO e dependency-free apposta: se il gemello del sito tornasse a generare e' copiabile senza adattamenti.",
