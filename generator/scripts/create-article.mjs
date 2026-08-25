@@ -12437,9 +12437,85 @@ const RUN_WALL_BUDGET_MS = Number.isNaN(CREATE_ARTICLE_MAX_WALL_MS_PARSED)
   ? 30 * 60_000
   : CREATE_ARTICLE_MAX_WALL_MS_PARSED;
 const RUN_START_MS = Date.now();
-/** True once the global wall-clock budget is spent (used to stop new topic attempts). */
+
+/**
+ * Cooperative-stop flag armed by SIGTERM (issue #525).
+ *
+ * `generate-article.yml` kills this process with
+ * `timeout --signal=TERM --kill-after=60s "${cap}s"`: SIGTERM first, SIGKILL 60
+ * seconds later. Until now the file had ZERO `process.on(...)` of its own, so
+ * Node's default SIGTERM action applied — immediate termination — and the whole
+ * 60-second grace the workflow deliberately buys was spent on nothing. The kill
+ * also arrived UNDECLARED: the run report carried no reason, so a section lost
+ * to the budget cap looked the same as one lost to a provider outage.
+ *
+ * What this does NOT claim to fix: a truncated `content/*.ts`. That risk was
+ * already closed by #561, which made `write()` commit via temp + `renameSync`
+ * (a single atomic POSIX syscall). A SIGKILL mid-write still cannot leave a
+ * half-written file at the final path, with or without this handler — which is
+ * why the handler stays a *flag*, not a rescue routine. Doing work inside a
+ * signal handler here would only race the very flush that #561 made atomic.
+ *
+ * The flag is read by `wallBudgetExceeded()`, and that is the whole point: the
+ * generation loop already polls it at 11 distinct sites (topic attempts, body2
+ * retries, discovery slots, evergreen pre-scan…). Arming it converts every one
+ * of those polls into an exit point, so the process leaves through its own
+ * declared path — the same one an expired budget uses — instead of being cut
+ * mid-attempt. No new exit path, no new invariant.
+ */
+let _sigtermStopRequested = false;
+
+/** Quanto la fermata cooperativa puo' durare prima dell'uscita forzata (#525). */
+const COOPERATIVE_STOP_GRACE_MS = 45_000;
+
+/** Exposed for the observer test; also what makes the stop visible in the log. */
+function requestCooperativeStop(signal) {
+  if (_sigtermStopRequested) return; // idempotent: a second SIGTERM must not re-log
+  _sigtermStopRequested = true;
+  const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
+  // `::warning` and not `::error`: the run is not broken, it is being stopped.
+  // A declared stop that prints nothing is indistinguishable from a crash, and
+  // that ambiguity is exactly what #525 reports.
+  console.warn(`::warning::create-article.mjs: ricevuto ${signal} dopo ${spentS}s — fermata cooperativa richiesta, nessun nuovo tentativo verra' avviato. Le scritture gia' committate restano valide (temp+rename, #561).`);
+
+  // Registrare un listener SIGTERM DISATTIVA l'azione di default di Node
+  // (terminare subito). Senza questa rete, un SIGTERM che arriva mentre il
+  // processo e' dentro una chiamata provider lunga (il tetto di ai-models.mjs
+  // e' 600s) non raggiungerebbe nessun poll di `wallBudgetExceeded()` e il
+  // processo sopravvivrebbe fino al SIGKILL: la finestra cooperativa avrebbe
+  // ALLUNGATO la vita del processo invece di accorciarla — l'esatto contrario
+  // dell'intento. Il fallback ripristina la garanzia "SIGTERM => il processo
+  // esce", spostandola solo piu' in la' di `COOPERATIVE_STOP_GRACE_MS`.
+  //
+  // 45s e non 60: `--kill-after=60s` e' il grace del `timeout` esterno, e
+  // arrivare al secondo esatto significa farsi prendere dal SIGKILL. 15s di
+  // margine sono sufficienti al flush dei punteggi di ai-models.mjs, che e'
+  // bounded per costruzione.
+  //
+  // `.unref()`: il timer non deve tenere vivo l'event loop. Se la fermata
+  // cooperativa riesce e il processo finisce prima, esce per conto suo e questo
+  // timer non si vede nemmeno.
+  setTimeout(() => {
+    console.warn(`::warning::create-article.mjs: la fermata cooperativa non e' rientrata entro ${COOPERATIVE_STOP_GRACE_MS / 1000}s dal ${signal} — uscita forzata 143 prima del SIGKILL esterno.`);
+    process.exit(143);
+  }, COOPERATIVE_STOP_GRACE_MS).unref();
+}
+
+// Registered at module scope, i.e. BEFORE ai-models.mjs arms its own SIGTERM
+// hook on first use. Node runs signal listeners in registration order and this
+// one is synchronous, so the flag is set before that hook's async score flush
+// gets a chance to `process.exit(143)`. Order matters and is load-bearing: with
+// the registrations swapped, the flag would be armed only after the process had
+// already been told to leave.
+process.on('SIGTERM', () => requestCooperativeStop('SIGTERM'));
+process.on('SIGINT', () => requestCooperativeStop('SIGINT'));
+
+/**
+ * True once the global wall-clock budget is spent (used to stop new topic
+ * attempts), or once a SIGTERM has asked for a cooperative stop (#525).
+ */
 function wallBudgetExceeded() {
-  return (Date.now() - RUN_START_MS) > RUN_WALL_BUDGET_MS;
+  return _sigtermStopRequested || (Date.now() - RUN_START_MS) > RUN_WALL_BUDGET_MS;
 }
 
 /**
