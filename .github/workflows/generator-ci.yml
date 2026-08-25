@@ -183,7 +183,12 @@ jobs:
       # generate-border-wait-ranking-article.mjs now REQUIRES the fetched window
       # (it is the article's data). Fetch it first so the dry-run exercises the
       # real path instead of the missing-cache error branch.
+      # REWIRE_FIXTURE_ON_403: GitHub Actions IPs get HTTP 403 from Cloudflare
+      # on the public CDN (measured 2026-08-25). The weekly generation job
+      # does NOT set this, so a WAF 403 there still fails hard.
       - name: Fetch border-wait ranking window
+        env:
+          REWIRE_FIXTURE_ON_403: '1'
         run: npm run refresh:border-wait-window
 
       - name: Load every generator entry point (writes disabled)
