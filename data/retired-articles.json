@@ -48,6 +48,20 @@
         "de": "eine-verbindung-von-vier-bauunternehmen-in-vallemaggia",
         "fr": "un-mariage-entre-quatre-entreprises-de-construction-en-vallemaggia"
       }
+    },
+    {
+      "id": "vivere-tovo-lavorare-grigioni",
+      "section": "frontaliere",
+      "winnerId": "vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere",
+      "winnerSection": "frontaliere",
+      "retiredOn": "2026-08-25",
+      "duplicateOf": [],
+      "slugs": {
+        "it": "vivere-tovo-lavorare-grigioni",
+        "en": "living-tovo-di-sant-agata-working-grisons",
+        "de": "leben-tovo-di-sant-agata-arbeiten-graubuenden",
+        "fr": "vivre-tovo-di-sant-agata-travailler-grisons"
+      }
     }
   ]
 }
