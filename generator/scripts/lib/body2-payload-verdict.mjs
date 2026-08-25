@@ -268,6 +268,40 @@ export function normalizeItalianContentFromPayload(payload, locale = 'it', field
 }
 
 /**
+ * `faq` is not a string — `normalizeItalianContentFromPayload` would
+ * coerce a misplaced object/array FAQ to `''` and drop it. Walk the same
+ * three candidate locations (content[locale], content, payload root) and
+ * return the first present FAQ so a model that parks it outside
+ * `content[primaryLocale]` does not publish a silent no-FAQ article.
+ */
+export function isPresentFaq(value) {
+  if (value == null || value === '') return false;
+  if (typeof value === 'string') {
+    const trimmed = value.trim();
+    return trimmed.length > 0 && !isLiteralNullString(trimmed);
+  }
+  if (Array.isArray(value)) return value.length > 0;
+  if (typeof value === 'object') return Object.keys(value).length > 0;
+  return false;
+}
+
+export function recoverMisplacedFaq(payload, locale = 'it') {
+  const content = payload?.content;
+  const candidates = [];
+  if (content && typeof content === 'object') {
+    if (content[locale] && typeof content[locale] === 'object') candidates.push(content[locale]);
+    candidates.push(content);
+  }
+  candidates.push(payload);
+  for (const candidate of candidates) {
+    if (candidate && typeof candidate === 'object' && isPresentFaq(candidate.faq)) {
+      return candidate.faq;
+    }
+  }
+  return undefined;
+}
+
+/**
  * Il payload dichiara l'abort di REGOLA #0?
  *
  * Volutamente `=== true` e non truthy: lo schema modella il campo come

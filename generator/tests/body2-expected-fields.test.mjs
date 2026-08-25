@@ -75,6 +75,7 @@ import {
   resolveBody2Validation,
   classifyBody2Payload,
   normalizeItalianContentFromPayload,
+  recoverMisplacedFaq,
   REQUIRED_IT_BODY_FIELDS,
   BODY_ONLY_FIELDS,
   META_ONLY_FIELDS,
@@ -248,7 +249,7 @@ const SPLIT_DEPS = [
   '_splitCall1', 'useGeminiDirect', 'callLLM', 'AI_MODELS', 'temperature',
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
-  'normalizeItalianContentFromPayload', 'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
+  'normalizeItalianContentFromPayload', 'recoverMisplacedFaq', 'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
   'primaryLocale', 'RUN_REPORT', '_buildHalf', '_splitMode', 'SECTION_NAME',
   'generationAttempt', '_splitBudgetLog', 'console',
 ];
@@ -281,6 +282,7 @@ async function runSplit({ risposte }) {
     _preferActiveThisAttempt: false,
     repairLlmJson,
     normalizeItalianContentFromPayload,
+    recoverMisplacedFaq,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
     primaryLocale: 'it',
@@ -579,3 +581,33 @@ test('#14 title/excerpt spuri della BODY non prevalgono sui META veri', async ()
   assert.notEqual(merged.content.it.excerpt, excerptSpurio);
   assert.equal(merged.content.it.body1, BLOCCO, 'il corpo RAW della 1/2 deve sopravvivere alla whitelist');
 });
+
+// ── 15. faq fuori da content[primaryLocale] non si perde nel merge ────────
+//
+// normalizeItalianContentFromPayload copia solo stringhe (title/excerpt).
+// Un FAQ oggetto parcheggiato alla radice della 2/2 spariva. Il merge
+// shipped deve chiamare recoverMisplacedFaq.
+
+test('#15 faq alla radice della meta sopravvive al merge dello split', async () => {
+  const faq = [{ question: 'Quanto costa il permesso G?', answer: 'Dipende dal cantone.' }];
+  const metaConFaqFuori = JSON.stringify({
+    id: 'imposta-fonte-frontalieri-messaggio-8412',
+    category: 'fiscalita',
+    faq,
+    content: {
+      it: {
+        title: 'Imposta alla fonte, cosa cambia per i frontalieri',
+        excerpt: 'Il messaggio 8412 rivede le aliquote e introduce una notifica trimestrale.',
+      },
+    },
+  });
+
+  const { _generateSplit, provider, log } = await runSplit({
+    risposte: [RISPOSTA_BODY_CONFORME, metaConFaqFuori],
+  });
+  const out = await _generateSplit();
+  assert.equal(provider.length, 2, `nessuna rigenerazione:\n${log()}`);
+  const merged = JSON.parse(out);
+  assert.deepEqual(merged.content.it.faq, faq);
+});
+

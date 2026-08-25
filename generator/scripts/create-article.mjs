@@ -148,7 +148,7 @@ import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagno
 // modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
 // e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
 // codice della produzione invece di una copia. Vedi l'intestazione del modulo.
-import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation } from './lib/body2-payload-verdict.mjs';
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
 import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
@@ -8450,6 +8450,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // solo modo in cui sopravvive: non e' in META_ONLY_FIELDS ne' in
     // BODY_ONLY_FIELDS), tutto il resto no.
     const META_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq'];
+    const recoveredFaq = recoverMisplacedFaq(metaData, primaryLocale);
     // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
     // byte per byte), ma SOLO `BODY_ONLY_FIELDS` e SOLO se stringhe: un
     // modello che risponde con body1 come array/oggetto (invece di stringa)
@@ -8469,6 +8470,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
               .map((k) => [k, bodyContent[k]]),
           ),
           ...(metaBlock || {}),
+          ...(recoveredFaq !== undefined ? { faq: recoveredFaq } : {}),
         },
       },
     };
