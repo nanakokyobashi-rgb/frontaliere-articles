@@ -1,9 +1,5 @@
 {
   "keywords": [
-    "vivere a Glorenza e lavorare in Grigioni da frontaliere",
-    "vivere a Malles Venosta e lavorare in Grigioni da frontaliere",
-    "vivere a Mese e lavorare in Grigioni da frontaliere",
-    "vivere a Torre di Santa Maria e lavorare in Grigioni da frontaliere",
     "vivere a Prata Camportaccio e lavorare in Grigioni da frontaliere",
     "vivere a Albosaggia e lavorare in Grigioni da frontaliere",
     "vivere a Gordona e lavorare in Grigioni da frontaliere",
@@ -499,7 +495,11 @@
     "mercato degli affitti canton Zurigo canoni medi e diritto di locazione",
     "avs e prestazioni complementari canton Appenzello Esterno cassa di compensazione",
     "abbonamenti trasporti pubblici canton Appenzello Esterno zone e tariffe",
-    "aprire un'attività canton Appenzello Esterno registro di commercio e costi"
+    "aprire un'attività canton Appenzello Esterno registro di commercio e costi",
+    "vivere a Montagna in Valtellina e lavorare in Grigioni da frontaliere",
+    "vivere a San Giacomo Filippo e lavorare in Grigioni da frontaliere",
+    "vivere a Corteno Golgi e lavorare in Grigioni da frontaliere",
+    "vivere a Chiesa in Valmalenco e lavorare in Grigioni da frontaliere"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,
@@ -752,6 +752,7 @@
     "vivere a Bardello con Malgesso e Bregano e lavorare in Ticino da frontaliere": 1,
     "vivere a Bodio Lomnago e lavorare in Ticino da frontaliere": 1,
     "mercato degli affitti canton Zurigo canoni medi e diritto di locazione": 1,
-    "vivere a Mazzo di Valtellina e lavorare in Grigioni da frontaliere": 1
+    "vivere a Mazzo di Valtellina e lavorare in Grigioni da frontaliere": 1,
+    "vivere a Faedo Valtellino e lavorare in Grigioni da frontaliere": 1
   }
 }
