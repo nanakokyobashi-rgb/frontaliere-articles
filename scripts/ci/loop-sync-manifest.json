@@ -692,9 +692,9 @@
       "path": "scripts/lib/secrets-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "0bd70f8eef8b51df",
-        "corpus": "0bd70f8eef8b51df",
-        "alignedAt": "2026-08-15"
+        "site": "b98c79e19464a968",
+        "corpus": "b98c79e19464a968",
+        "alignedAt": "2026-08-25"
       }
     },
     {
