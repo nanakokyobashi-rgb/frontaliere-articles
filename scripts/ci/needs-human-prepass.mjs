@@ -60,9 +60,21 @@
  *    che #568 descrive, e violerebbe il vincolo «una regex duplicata in ≥2 file
  *    va estratta in UN modulo» (AGENTS.md). Quindi si IMPORTA quello che c'è: se
  *    #568 lo migliora, questo pre-pass migliora con lui, gratis.
+ * 4. **`FIX_OUTCOME_RE`, per la stessa ragione.** Il gemello del sito se lo
+ *    ridefinisce in casa. Qui la stessa regex è già scritta IDENTICA in tre file
+ *    (`followup-drainer.mjs`, `handoff-to-site.mjs`,
+ *    `close-recovered-failure-issues.mjs`, che è l'unico a esportarla): una
+ *    quarta copia renderebbe il drift solo più probabile, quindi si importa
+ *    quella esportata. Le altre tre NON si unificano da qui: sono `identical`
+ *    nel manifest, e una fix su un file `identical` fatta sul corpus viene
+ *    sovrascritta al mirror successivo — quella de-duplicazione è lavoro del
+ *    SITO.
  */
 import { execFileSync } from 'node:child_process';
 import { isAggregate } from './check-issue-already-resolved.mjs';
+// Il marker di verdetto ha UNA definizione, non una quinta copia: vedi il punto
+// 4 dell'intestazione.
+import { FIX_OUTCOME_RE } from './close-recovered-failure-issues.mjs';
 
 const REPO = process.env.GH_REPO || process.env.GITHUB_REPOSITORY || '';
 const DRY = process.argv.includes('--dry-run');
@@ -134,8 +146,6 @@ export const OWNER_ONLY_TITLE_PATTERNS = [
  * runtime e non una decisione superata. Lo valuta il run Claude.
  */
 export const STALE_BLOCK_VERDICTS = new Set(['blocked-secrets']);
-
-const FIX_OUTCOME_RE = /<!--\s*FIX_OUTCOME:\s*([a-z0-9-]+)\s*-->/i;
 
 /** Ultimo verdetto da una lista di commenti (forma REST o GraphQL). Pura. */
 export function latestVerdict(comments) {
