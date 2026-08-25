@@ -54,7 +54,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   crawler_group_23:
-    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-23-logic.yml@crawler-group-23-reusable-workflow
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-23-logic.yml@main
     with:
       skip_ai_translation: ${{ inputs.skip_ai_translation }}
     secrets:
