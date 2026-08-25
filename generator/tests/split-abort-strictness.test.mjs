@@ -79,6 +79,7 @@ import { fileURLToPath } from 'node:url';
 import { repairLlmJson } from '../scripts/lib/llm-json-repair.mjs';
 import {
   normalizeItalianContentFromPayload,
+  recoverMisplacedFaq,
   BODY_ONLY_FIELDS,
   META_ONLY_FIELDS,
 } from '../scripts/lib/body2-payload-verdict.mjs';
@@ -110,7 +111,7 @@ const DEPS = [
   '_splitCall1', 'useGeminiDirect', 'callLLM', 'AI_MODELS', 'temperature',
   'IT_GENERATION_MAX_TOKENS', 'forceModel', 'GH_MODEL_HEAVY',
   'PREFERRED_GENERATION_MODELS', '_preferActiveThisAttempt', 'repairLlmJson',
-  'normalizeItalianContentFromPayload',
+  'normalizeItalianContentFromPayload', 'recoverMisplacedFaq',
   // #485: le due chiamate dichiarano a `callLLM` i campi che la loro meta'
   // produce davvero, invece di lasciarglieli dedurre dal testo del prompt.
   'BODY_ONLY_FIELDS', 'META_ONLY_FIELDS',
@@ -205,6 +206,7 @@ async function run({ risposte }) {
     _preferActiveThisAttempt: false,
     repairLlmJson,
     normalizeItalianContentFromPayload,
+    recoverMisplacedFaq,
     BODY_ONLY_FIELDS,
     META_ONLY_FIELDS,
     primaryLocale: 'it',

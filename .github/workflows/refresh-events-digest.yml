@@ -39,6 +39,7 @@ on:
       - '.github/workflows/refresh-events-digest.yml'
       - 'generator/scripts/generate-events-digest-article.mjs'
       - 'generator/scripts/refresh-events-dataset.mjs'
+      - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/events-digest-content.mjs'
       - 'generator/scripts/lib/events-utils.mjs'
   workflow_dispatch:
@@ -99,7 +100,12 @@ jobs:
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
       # Hard gate — see the header. No dataset, no digest.
+      # Push self-tests are always dry: GitHub Actions IPs get HTTP 403 from
+      # Cloudflare on the public CDN, so copy the offline fixture rather than
+      # fail the PR. Scheduled / dispatch writes still fail hard on 403.
       - name: Fetch the events dataset
+        env:
+          REWIRE_FIXTURE_ON_403: ${{ steps.mode.outputs.dry == 'true' && '1' || '' }}
         run: npm run refresh:events
 
       - name: Refresh the weekend digest

@@ -62,6 +62,8 @@ jobs:
       # Hard gate. E' il dato dell'articolo settimanale della classifica dogane:
       # un publisher fermo o una forma cambiata devono fermare la pipeline, non
       # produrre una classifica sbagliata.
+      # Do NOT set REWIRE_SKIP_WAF_403 here: that env is PR-CI only. A 403
+      # from this job is the signal that the live publisher is unreachable.
       - name: border-wait-ranking-window.json
         run: node generator/scripts/refresh-border-wait-window.mjs --check
 
