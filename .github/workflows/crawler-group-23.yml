@@ -1,0 +1,61 @@
+# Crawler Group 23 — cross-repo execution PILOT (2026-08-25).
+#
+# Physically hosted here (nanakokyobashi-rgb/frontaliere-articles) instead of
+# frontaliere-si-o-no, so this group's Actions minutes run against THIS
+# account's separate, less-saturated concurrent-job pool instead of
+# valerielinc-ops' ~20-concurrent-job Free-plan pool. This is a pilot for ONE
+# of the 23 crawler-group-*.yml workflows (the shortest, ~28-37min/run) to
+# validate the pattern before migrating the other 22 + translate-pending.yml.
+#
+# The actual job logic (checkout, npm ci, Playwright, RC secrets, the 28
+# per-crawler steps) is NOT duplicated here — it lives as a composite action
+# in frontaliere-si-o-no (single source of truth, same repo the generator
+# scripts/generate-crawler-group-workflows.mjs writes into):
+#   valerielinc-ops/frontaliere-si-o-no/.github/actions/crawler-group-23-logic
+#
+# This file only supplies what a composite action cannot: its own `on:`
+# trigger (so the RUN — and therefore the Actions minutes — is owned by
+# THIS repo/account), `concurrency:`, `timeout-minutes:`, job-level `env:`
+# (inherited by every step the composite action contributes), and the
+# secrets the composite action needs (passed explicitly via `with:` —
+# composite actions do NOT inherit the caller's `secrets` context).
+#
+# Rollback: see frontaliere-si-o-no's .github/workflows/crawler-group-23.yml
+# (disabled, kept for fast revert) and orchestrate-crawlers.yml's group-23
+# special case.
+#
+# workflow_dispatch-only for the pilot: no schedule here, so nothing runs
+# automatically until the pattern is validated by hand. Once confirmed,
+# orchestrate-crawlers.yml (frontaliere-si-o-no) dispatches this via
+# `gh workflow run crawler-group-23.yml --repo nanakokyobashi-rgb/frontaliere-articles`
+# on its normal twice-daily cadence.
+
+name: Crawler Group 23 (28 crawlers) — hosted here (pilot)
+on:
+  workflow_dispatch:
+    inputs:
+      skip_ai_translation:
+        description: Skip AI translation (1=yes, cache only)
+        required: false
+        default: "1"
+        type: string
+
+concurrency:
+  group: jobs-crawler-group-23
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  NODE_OPTIONS: --disable-warning=DEP0040 --disable-warning=DEP0169
+
+jobs:
+  crawler_group_23:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: valerielinc-ops/frontaliere-si-o-no/.github/actions/crawler-group-23-logic@main
+        with:
+          firebase-sa: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+          claude-code-oauth-token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
