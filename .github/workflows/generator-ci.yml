@@ -141,6 +141,10 @@ jobs:
       # publisher must stop the pipeline rather than yield an article with no
       # ranking on an evergreen URL that already ranks.
       - name: Border-wait ranking window reachable and fresh
+        env:
+          # PR CI only. rewire-contract-watch.yml (the scheduled hard gate)
+          # must not set this: a 403 there has to stay red.
+          REWIRE_SKIP_WAF_403: '1'
         run: node generator/scripts/refresh-border-wait-window.mjs --check
 
       # Il terzo contratto del REWIRE set, e fino alla issue #101 l'unico senza
@@ -155,6 +159,8 @@ jobs:
       # rewire-contract-watch.yml, e la forma e' inchiodata offline da
       # generator/tests/rewire-json-contracts.test.mjs.
       - name: Events dataset reachable and well-shaped
+        env:
+          REWIRE_SKIP_WAF_403: '1'
         run: node generator/scripts/refresh-events-dataset.mjs --check
 
   dry-run:

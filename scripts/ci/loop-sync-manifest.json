@@ -2003,7 +2003,7 @@
       "reason": "Fetch condiviso dei tre refresh REWIRE (window, averages-ready, events). Vive solo qui: e' il lato CONSUMATORE del contratto HTTP, e il sito e' il produttore (publish-border-wait-window / assemble-events-dataset). Non e' `identical` e non e' `corpus-only-pending`: sul sito non esiste un omonimo da allineare, e copiarlo la' invertirebbe la direzione del REWIRE. Estratto dai refresh perche' GitHub Actions prende HTTP 403 dal WAF Cloudflare sul UA di default di Node, e il ramo `--check` + GITHUB_ACTIONS deve uscire 0 senza indebolire il gate di forma offline. I tre refresh restano i chiamanti; questo file e' la parte testabile.",
       "baseline": {
         "site": null,
-        "corpus": "736a11de01223b08",
+        "corpus": "d98eed3c66417fef",
         "alignedAt": "2026-08-25"
       }
     },

@@ -103,9 +103,9 @@ let SOURCE;
   if (got.ok) {
     raw = got.body;
     SOURCE = got.url;
-  } else if (CHECK_ONLY && isCiWafBlock(got.errors)) {
-    // GitHub Actions IPs get HTTP 403 from Cloudflare (measured 2026-08-25).
-    // Live freshness belongs to rewire-contract-watch.yml, not PR CI.
+  } else if (CHECK_ONLY && process.env.REWIRE_SKIP_WAF_403 === '1' && isCiWafBlock(got.errors)) {
+    // PR-CI only (generator-ci.yml). rewire-contract-watch.yml must NOT set
+    // REWIRE_SKIP_WAF_403: a 403 there is the hard gate for a dead publisher.
     log(
       `publisher unreachable from CI (WAF 403). Shape is gated offline by ` +
         `rewire-json-contracts.test.mjs.\n  ${got.errors.join('\n  ')}`,

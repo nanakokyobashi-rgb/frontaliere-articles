@@ -3,8 +3,10 @@
  * averages, events). Cloudflare returns HTTP 403 to GitHub Actions'
  * default Node/undici User-Agent (measured 2026-08-25 on
  * generator-ci.yml: both CDN and same-origin). A named UA is the
- * first retry; if CI still sees 403, callers fall back (check: skip
- * live freshness; write: optional fixture).
+ * first retry; callers then decide the policy via explicit env:
+ *   REWIRE_SKIP_WAF_403=1   --check may exit 0 (PR CI only)
+ *   REWIRE_FIXTURE_ON_403=1 write may copy the offline fixture (dry self-test)
+ * rewire-contract-watch.yml sets neither: a 403 there stays a hard fail.
  */
 export const REWIRE_FETCH_HEADERS = {
   'user-agent':
@@ -12,6 +14,7 @@ export const REWIRE_FETCH_HEADERS = {
   accept: 'application/json',
 };
 
+/** True when every source failed with HTTP 403 on GitHub Actions. Policy is separate. */
 export function isCiWafBlock(errors, env = process.env) {
   if (env.GITHUB_ACTIONS !== 'true') return false;
   if (!Array.isArray(errors) || errors.length === 0) return false;

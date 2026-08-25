@@ -101,7 +101,7 @@ let SOURCE;
   if (got.ok) {
     raw = got.body;
     SOURCE = got.url;
-  } else if (CHECK_ONLY && isCiWafBlock(got.errors)) {
+  } else if (CHECK_ONLY && process.env.REWIRE_SKIP_WAF_403 === '1' && isCiWafBlock(got.errors)) {
     log(
       `publisher unreachable from CI (WAF 403). Shape is gated offline by ` +
         `rewire-json-contracts.test.mjs.\n${got.errors.join('\n')}`,

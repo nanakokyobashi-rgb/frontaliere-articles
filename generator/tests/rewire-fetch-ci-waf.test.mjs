@@ -5,12 +5,15 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import http from 'node:http';
 import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { isCiWafBlock, REWIRE_FETCH_HEADERS } from '../scripts/lib/rewire-fetch.mjs';
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 
 const SCRIPT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -70,12 +73,28 @@ test('--check against HTTP 403 fails outside Actions', async () => {
   }
 });
 
-test('--check against HTTP 403 exits 0 inside GitHub Actions', async () => {
+test('--check against HTTP 403 still fails on Actions without REWIRE_SKIP_WAF_403', async () => {
+  // rewire-contract-watch.yml is GITHUB_ACTIONS=true and must stay a hard gate.
+  const { server, url } = await listen403();
+  try {
+    const r = await runScript({
+      BORDER_WAIT_WINDOW_URL: url,
+      GITHUB_ACTIONS: 'true',
+    });
+    assert.equal(r.code, 1, r.out || r.err);
+    assert.match(r.err, /no source reachable/);
+  } finally {
+    server.close();
+  }
+});
+
+test('--check against HTTP 403 exits 0 only when PR-CI sets REWIRE_SKIP_WAF_403', async () => {
   const { server, url, seen } = await listen403();
   try {
     const r = await runScript({
       BORDER_WAIT_WINDOW_URL: url,
       GITHUB_ACTIONS: 'true',
+      REWIRE_SKIP_WAF_403: '1',
     });
     assert.equal(r.code, 0, r.err || r.out);
     assert.match(r.out, /unreachable from CI/);
@@ -83,4 +102,14 @@ test('--check against HTTP 403 exits 0 inside GitHub Actions', async () => {
   } finally {
     server.close();
   }
+});
+
+test('rewire-contract-watch.yml does not set REWIRE_SKIP_WAF_403', () => {
+  const src = fs.readFileSync(path.join(ROOT, '.github/workflows/rewire-contract-watch.yml'), 'utf8');
+  assert.doesNotMatch(src, /^\s+REWIRE_SKIP_WAF_403:/m);
+});
+
+test('generator-ci.yml sets REWIRE_SKIP_WAF_403 on the live --check steps', () => {
+  const src = fs.readFileSync(path.join(ROOT, '.github/workflows/generator-ci.yml'), 'utf8');
+  assert.match(src, /REWIRE_SKIP_WAF_403:\s*'1'/);
 });
