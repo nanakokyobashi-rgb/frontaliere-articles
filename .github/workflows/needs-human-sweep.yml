@@ -1,0 +1,225 @@
+name: Needs-human sweep (Claude, weekly)
+
+# L'UNICA porta di rientro dallo stato `needs-human` — adattamento corpus del
+# gemello del sito (manifest: `adapted`), portato qui il 2026-08-25.
+#
+# ## Perché serviva anche qui
+#
+# `needs-human` è ASSORBENTE su questo repo: verificato il 2026-08-25, zero
+# workflow sotto `.github/workflows/` nomina `needs-human` o `vision`. Il sito ha
+# chiuso il buco il 2026-08-21; il corpus non ha mai ricevuto l'infrastruttura,
+# ed è rimasto nello stesso stato che il sito aveva PRIMA di quella data.
+#
+# Misurato il 2026-08-25: **17 issue aperte in `needs-human`**, la più ferma dal
+# 2026-08-18 — e nello stesso istante la coda del ciclo VUOTA (`agent:fix-queued`
+# 0, `agent:decompose-queued` 0, `agent:fix` 0, PR aperte 0) con ~105 PR mergiate
+# nei 7 giorni precedenti. Il fixer girava a vuoto mentre 17 issue erano
+# parcheggiate dove nessuno le andava a prendere.
+#
+# ## La forma (uguale al sito, e per le stesse ragioni)
+#
+# - il **pre-pass deterministico** gira OGNI GIORNO, zero Claude, zero quota:
+#   riconosce POSITIVAMENTE le famiglie aperte dai nostri monitor e le rimette in
+#   coda, così il cap del run Claude si spende solo dove un giudizio serve;
+# - il **run Claude** resta SETTIMANALE (1 run batch: frugalità di quota per
+#   architettura) ed è guidato da `VISION.md`;
+# - è **bounded**: max 15 azioni per run, il resto al giro successivo.
+#
+# Esiti per issue: (A) decisione vera del proprietario → resta `needs-human` ed
+# entra nel digest con la domanda DECIDIBILE; (B) capability oggi disponibile /
+# difetto tecnico → rientra in coda (fix o decompose); (C) claim non più vera →
+# chiusa con la misura; (D) parcheggiata giusta → non si tocca.
+#
+# ── ADATTAMENTI rispetto al sito ────────────────────────────────────────────
+#
+# 1. **`VISION.md` NON viene copiato qui.** Resta sorgente unica sul sito e si
+#    recupera via API, con lo STESSO comando che usa già `issue-decompose.yml`
+#    (vedi il prompt sotto). Le due repo sono PUBBLICHE, quindi il
+#    `GITHUB_TOKEN` del run basta a leggerlo: nessun PAT per la lettura
+#    cross-repo. Una copia locale divergerebbe in silenzio — è esattamente il
+#    modo di rompersi che `loop-drift-check` esiste per intercettare.
+# 2. **Identità: `GITHUB_PAT_NANAKO`** (niente GitHub App qui), caricato dal
+#    ponte Remote Config `generator/scripts/load-rc-env.mjs` — come
+#    `issue-decompose.yml`. È un requisito del solo run Claude, che crea/aggiorna
+#    il digest e deve poter far scattare `issue-triage` sulle issue che tocca.
+#    Il **pre-pass NON ne ha bisogno**: scrive label sul PROPRIO repo
+#    (`issues: write` del `GITHUB_TOKEN`) e a valle lo raccoglie
+#    `followup-drainer` che gira su CRON (`5,30,55 * * * *`), non su
+#    `issues: labeled` — quindi nessuna anti-ricorsione da aggirare.
+# 3. **Pre-flight quota col beacon peer**: cediamo alla quota del sito, come
+#    `issue-fix`/`issue-decompose`. `ISSUE_NUMBER` è opzionale in
+#    `check-quota-backoff.mjs` e qui non c'è (uno sweep non ha una issue sola).
+# 4. **Niente `npm ci`**: gli script del ciclo sono zero-dep (`node:test`).
+# 5. **Checkout sparse su `content/`** (240 MB, 14.748 file generati dai bot),
+#    non sulla lista `data/`+`public/` del sito.
+# 6. **Prompt sul dominio di QUESTO repo** e famiglie di monitor di questo repo
+#    nel pre-pass (vedi `scripts/ci/needs-human-prepass.mjs`).
+
+on:
+  schedule:
+    - cron: '37 5 * * 1' # lunedì 05:37Z, fuori dalle ore di punta del ciclo
+    # Il pre-pass deterministico gira OGNI GIORNO; il run Claude resta
+    # settimanale (vedi l'`if:` del job `sweep`). Lo scarto è la stessa fix del
+    # 2026-08-24 sul sito: un run Claude a settimana con cap 15 non tiene il
+    # passo di una coda che riceve escalation a ogni tick del drainer.
+    # Un'uscita che riceve più di quanto emette non è un'uscita.
+    - cron: '37 4 * * *' # ogni giorno 04:37Z, un'ora prima dello sweep del lunedì
+  workflow_dispatch:
+
+concurrency:
+  group: needs-human-sweep
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  issues: write
+  id-token: write
+
+jobs:
+  # Zero Claude, zero quota. Vedi l'intestazione di
+  # `scripts/ci/needs-human-prepass.mjs` per il perché di una ALLOWLIST e per le
+  # famiglie riconosciute su QUESTO repo (che non sono quelle del sito).
+  prepass:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          filter: blob:none
+          # Il pre-pass importa `check-issue-already-resolved.mjs` (per
+          # `isAggregate`), che a sua volta importa
+          # `followup-resolution-match.mjs`: serve la cartella, non il file solo.
+          sparse-checkout: |
+            /scripts/ci/
+          sparse-checkout-cone-mode: false
+        timeout-minutes: 10
+
+      - name: Pre-pass deterministico (zero-Claude)
+        env:
+          # Basta il token del run: scrive label sul PROPRIO repo, e il drainer
+          # che le raccoglie gira su cron. Vedi ADATTAMENTO 2 in testa al file.
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/needs-human-prepass.mjs
+
+  sweep:
+    # Il run Claude resta SETTIMANALE: è il giudizio, non il drenaggio. Gira sul
+    # cron del lunedì e su dispatch, mai sul cron giornaliero del pre-pass —
+    # altrimenti il costo si moltiplicherebbe per sette senza che il lavoro da
+    # giudicare aumenti.
+    if: github.event_name != 'schedule' || github.event.schedule == '37 5 * * 1'
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          filter: blob:none
+          # `content/` è il corpus generato dai bot: 240 MB e ~14.700 file che
+          # allo sweep non servono mai (legge issue, non articoli).
+          sparse-checkout: |
+            /*
+            !/content/
+          sparse-checkout-cone-mode: false
+        timeout-minutes: 20
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+
+      # Ponte Remote Config → env: da qui arriva `GITHUB_PAT_NANAKO`.
+      # `continue-on-error`: senza PAT lo sweep gira lo stesso col GITHUB_TOKEN,
+      # solo senza poter innescare `issue-triage` sulle issue che ri-accoda.
+      - name: Write Firebase SA (se presente)
+        continue-on-error: true
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+        run: |
+          set -uo pipefail
+          if [ -n "${FIREBASE_SERVICE_ACCOUNT_JSON:-}" ]; then
+            printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > /tmp/firebase-sa.json
+            echo "GOOGLE_APPLICATION_CREDENTIALS=/tmp/firebase-sa.json" >> "$GITHUB_ENV"
+          fi
+
+      - name: Load secrets from Remote Config
+        continue-on-error: true
+        run: node generator/scripts/load-rc-env.mjs
+
+      # Su finestra 429 aperta (anche quella del SITO, via beacon peer) nessuno
+      # step Claude parte: lo sweep è idempotente e il giro successivo recupera.
+      - name: Pre-flight — quota backoff gate (zero-Claude)
+        id: quota
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+          QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
+        run: node scripts/ci/check-quota-backoff.mjs
+
+      - name: Run Claude sweep
+        id: claude_sweep
+        if: steps.quota.outputs.quota_blocked != 'true'
+        continue-on-error: true
+        uses: anthropics/claude-code-action@v1
+        env:
+          GH_TOKEN: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          SITE_REPO: valerielinc-ops/frontaliere-si-o-no
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          github_token: ${{ env.GITHUB_PAT_NANAKO || secrets.GITHUB_TOKEN }}
+          show_full_output: true
+          allowed_bots: 'github-actions[bot], claude[bot]'
+          claude_args: "--max-turns 60 --model claude-sonnet-5 --dangerously-skip-permissions"
+          prompt: |
+            Sei lo sweep settimanale delle issue `needs-human` di questo repo (il CORPUS, `$REPO`). Il tuo compito: separare le decisioni VERE del proprietario dal resto, e rimettere il resto nel ciclo autonomo. NON implementi fix e NON apri PR.
+
+            **Bootstrap:**
+            1. Leggi `VISION.md` PER INTERO. Questo repo NON ne ha una copia, ed è deliberato: la sorgente unica è quella del SITO. Recuperala con lo stesso comando di `issue-decompose.yml`: `gh api repos/$SITE_REPO/contents/VISION.md --jq .content | base64 -d`. I driver di decisione (D1-D8) e il registro delle decisioni già prese sono il tuo criterio di classificazione. La lista «Sempre umano» è stata RIMOSSA il 2026-08-24 (istruzione diretta del proprietario, registro in VISION.md): non esiste più una categoria di business riservata all'umano. Se il recupero fallisce, FERMATI e posta il motivo sul digest: senza i driver non hai criterio, e classificare a intuito è il modo di far implementare al fixer scelte che non gli spettano.
+            2. `gh issue list --repo $REPO --state open --label needs-human --json number,title,labels,createdAt,updatedAt --limit 100` — ordina per updatedAt crescente (le più ferme prima).
+
+            **Per ogni issue (MASSIMO 15 azioni totali in questo run — un'azione = un cambio di label/stato; le issue oltre il cap restano al giro successivo):**
+            1. Leggi body + commenti (`gh issue view N --repo $REPO --json body,comments,labels`). Cerca PRIMA una decisione del proprietario già registrata nel registro di VISION.md: se c'è, la issue non è più una domanda — applicala.
+            2. Classifica in UNA delle quattro:
+               - **A — vero vicolo cieco**: NESSUN driver la copre, e non è un blocco di capacità (quello è B). Con «Sempre umano» rimossa questa classe dovrebbe essere quasi sempre vuota: prima di usarla, verifica che non sia semplicemente una decisione di prodotto/contenuto che ORA il ciclo può prendere da sé citando D1-D8. Se davvero nessun driver risponde, NON toccare le label e aggiungila al digest formulando la domanda in modo DECIDIBILE.
+               - **B — capability/permessi**: era bloccata da una capacità che oggi esiste (i secret sono autorizzati in modo permanente dal 2026-08-24 e `issue-fix.yml` carica Remote Config prima del run; `GITHUB_PAT_NANAKO` dà lo scope `workflows`; lo stadio di decomposizione esiste per le issue grandi). Commento che cita il driver o la capacità + `gh issue edit N --repo $REPO --remove-label needs-human --remove-label fu-parked --add-label agent:fix-queued` (issue singola con causa chiara) oppure `--add-label agent:decompose-queued` (issue grande/contenitore: più cause o più target).
+               - **C — claim scaduta**: il difetto descritto non esiste più (verificalo con la misura più economica che decide: un comando dal body, un grep sul codice, una gh api). Ricorda che i numeri nelle issue scadono: rimisura, non fidarti del body. Commento con la misura osservata e il comando che la riproduce, poi `gh issue close N --repo $REPO`. Se NON riesci a misurare, NON chiudere: trattala come A o lasciala.
+               - **D — parcheggiata giusta**: `needs-human` corretto e già nel digest/registro. Non toccare nulla, non rimetterla nel digest se già presente. Ci rientra la famiglia delle CREDENZIALI (`Agent loop down: GITHUB_PAT…`, `GH_PAT expiry warning:`): la rotazione è stata DECLINATA dal proprietario il 2026-08-18 e il ciclo non può comunque agirci — non riproporla.
+            3. VINCOLI: mai chiudere ciò che non hai misurato; mai rimuovere `agent:no-age-out`; un'issue con PR aperta collegata non si tocca; prima di instradare una fix verifica il `mode` in `scripts/ci/loop-sync-manifest.json` — una issue su un file `identical` si ripara SUL SITO, e ri-accodarla qui produrrebbe una PR che il mirror sovrascrive.
+
+            **Digest (ultima azione, sempre):** una sola issue col titolo ESATTO `🧭 Decisioni del proprietario — digest` (cerca fra le aperte con `gh search issues --repo $REPO`; se non esiste creala con label `needs-human,automation,agent:no-age-out`). Sostituisci/aggiorna il body con: l'elenco delle domande di classe A (numero, domanda decidibile, opzioni), le decisioni applicate in questo run (classe B/C, con issue e driver citato), e il conteggio residuo `needs-human`. Il body deve restare leggibile in 2 minuti: le domande sono POCHE e decidibili, o lo sweep ha fallito il suo compito.
+
+            **Telemetria:** chiudi postando sul digest un commento con l'ultimo marker su riga propria: `<!-- SWEEP_OUTCOME: a=<n> b=<n> c=<n> d=<n> -->`.
+
+      - name: Claude usage metrics
+        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        continue-on-error: true
+        run: node scripts/ci/claude-usage-summary.mjs "${{ steps.claude_sweep.outputs.execution_file }}" "needs-human-sweep"
+
+      # Colore lavoro reale: verde se il marker SWEEP_OUTCOME è stato postato
+      # (anche a cap raggiunto), rosso se la CLI è morta senza produrlo.
+      - name: Classify outcome (work-done, not CLI exit)
+        if: always() && steps.quota.outputs.quota_blocked != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLAUDE_OUTCOME: ${{ steps.claude_sweep.outcome }}
+        run: |
+          set -uo pipefail
+          N=$(gh search issues --repo "$GITHUB_REPOSITORY" --state open --match title "🧭 Decisioni del proprietario — digest" --json number --jq '.[0].number // empty' 2>/dev/null || true)
+          if [ -n "${N:-}" ]; then
+            HAS=$(gh issue view "$N" --repo "$GITHUB_REPOSITORY" --json comments --jq '[.comments[].body | select(test("<!-- SWEEP_OUTCOME:"))] | length' 2>/dev/null || echo 0)
+          else
+            HAS=0
+          fi
+          echo "digest=${N:-<none>} sweep-markers=$HAS claude=$CLAUDE_OUTCOME"
+          if [ "${HAS:-0}" != "0" ]; then
+            echo "✓ marker SWEEP_OUTCOME presente → run SUCCESS."
+            exit 0
+          fi
+          if [ "$CLAUDE_OUTCOME" = "failure" ]; then
+            echo "::error::needs-human-sweep: CLI fallita senza marker → non-delivery. Il prossimo run settimanale (o un dispatch manuale) recupera: lo sweep è idempotente."
+            exit 1
+          fi
+          echo "CLI pulita senza marker (es. zero issue needs-human) → verde."
