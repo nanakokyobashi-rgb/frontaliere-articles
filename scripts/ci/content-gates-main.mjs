@@ -149,6 +149,12 @@ export const CONTENT_GATES = [
   'generator/tests/it-microcopy-guard.test.mjs',
   'generator/tests/meta-localized-seo-description.test.mjs',
   'generator/tests/prompt-placeholder-guard.test.mjs',
+  // Osservatore del tetto `TESTIMONE_GIRI_MAX` (#404): non giudica il corpus,
+  // giudica se il tetto della riparazione caratteri LEGA sul corpus. Sta qui e
+  // non fra i gate di PR per la ragione di tutta questa lista — legge
+  // `content/`, che nessuna PR scrive. E' l'unico che costa ~40s (una passata
+  // su 19.588 file); gli altri diciotto stanno sotto il secondo.
+  'generator/tests/repair-mangled-chars-tetto-corpus.test.mjs',
   'generator/tests/seo-clause-truncation.test.mjs',
   'generator/tests/seo-description-cap.test.mjs',
   'generator/tests/seo-digit-residue-guard.test.mjs',

@@ -1478,6 +1478,29 @@ jobs:
       # stessa famiglia di fabrication/placeholder, non contratti statici sul
       # sorgente — vedi il commento nel preflight di publish-api.yml per i due
       # esclusi (news-scan-quality, news-sources-svizzera) e perche'.
+      #
+      # AGGIUNTO 2026-08-25 (issue #547 item 2): article-topic-coverage-guard.
+      # Era l'assente che contava. L'articolo che ha innescato l'incidente del
+      # 2026-08-19 — `vivere-villa-guardia-lavorare-ticino`, sei ore di coda di
+      # merge ferma — e' passato di qui indisturbato perche' l'unico gate che
+      # lo riconosceva NON era in questa lista: il guard rifiutava fabbricazione,
+      # placeholder, slug e source-echo, non la COLLISIONE di argomento.
+      # #528 ha poi allargato `RESIDENCE_INTENT_RE` perche' il caso fosse
+      # riconosciuto, ma il riconoscimento viveva solo nel gate su `main`, cioe'
+      # DOPO la scrittura: si accorgeva del doppione a doppione pubblicato.
+      # Questa riga e' cio' che rende la prevenzione davvero «a monte», che e'
+      # esattamente cio' che #547 item 2 chiedeva.
+      #
+      # E' sicuro aggiungerlo ORA e non prima: il gate e' verde sul corpus
+      # attuale (82/82, misurato il 2026-08-25). Un gate rosso qui dentro
+      # fermerebbe l'INTERA catena di generazione — il rischio e' quello
+      # dichiarato tre paragrafi sopra («se NON coincidono, il difetto e'
+      # preesistente nel corpus»), e vale per questo gate come per gli altri
+      # quattro. La differenza da conoscere: gli altri quattro giudicano
+      # l'articolo appena scritto, questo giudica una RELAZIONE fra il nuovo e
+      # il corpus — quindi il suo rosso corretto e' «questo articolo e' un
+      # doppione, rigeneralo su altro», e va letto cosi' prima di cercare il
+      # difetto nel gate.
       - name: Guard — l'articolo generato non raggiunge main se viola le guardie
         id: guard
         if: steps.mode.outputs.dry != 'true' && steps.generate.outputs.article == 'true'
@@ -1489,7 +1512,8 @@ jobs:
             generator/tests/article-fabrication-guard.test.mjs \
             generator/tests/prompt-placeholder-guard.test.mjs \
             generator/tests/article-slug-i18n.test.mjs \
-            generator/tests/article-source-echo.test.mjs; then
+            generator/tests/article-source-echo.test.mjs \
+            generator/tests/article-topic-coverage-guard.test.mjs; then
             exit 0
           fi
           {
