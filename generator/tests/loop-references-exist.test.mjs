@@ -567,19 +567,44 @@ const DECLARED_ABSENT = {
   '.github/workflows/crawler-group-23.yml :: scripts/generate-crawler-group-workflows.mjs': {
     kind: 'site-only',
     reason:
-      'Stesso pilota: nomina il generatore del sito che scrive la logica ospitata dalla ' +
-      'composite action invocata qui (valerielinc-ops/frontaliere-si-o-no/.github/actions/ ' +
-      'crawler-group-23-logic), per spiegare dove sta la sorgente di verita\'. Il generatore ' +
-      'vive ESCLUSIVAMENTE nel sito — qui non esistono crawler group ne\' un generatore per ' +
-      'produrli. Descrittiva, non una dipendenza.',
+      'Stesso tentativo di migrazione: nomina il generatore del sito che scrive la logica ' +
+      'ospitata dal reusable workflow invocato qui (valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-23-logic.yml — secondo tentativo, il primo era una ' +
+      'composite action a .github/actions/crawler-group-23-logic, reverta in #6517), per ' +
+      'spiegare dove sta la sorgente di verita\'. Il generatore vive ESCLUSIVAMENTE nel sito ' +
+      '— qui non esistono crawler group ne\' un generatore per produrli. Descrittiva, non ' +
+      'una dipendenza.',
   },
   '.github/workflows/crawler-group-23.yml :: orchestrate-crawlers.yml': {
     kind: 'site-only',
     reason:
-      'Stesso pilota: nomina il dispatcher del sito che, una volta confermato il pattern, ' +
+      'Stesso tentativo: nomina il dispatcher del sito che, una volta confermato il pattern, ' +
       'invochera\' `gh workflow run crawler-group-23.yml --repo nanakokyobashi-rgb/' +
       'frontaliere-articles` sul suo cron 2x/giorno. Il dispatcher vive ESCLUSIVAMENTE nel ' +
       'sito; questo file e\' il bersaglio del dispatch, non il chiamante. Descrittiva.',
+  },
+  '.github/workflows/crawler-group-23.yml :: crawler-group-23-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Nome nudo del reusable workflow (on: workflow_call) che ospita la logica reale dei ' +
+      '28 crawler — vive ESCLUSIVAMENTE in valerielinc-ops/frontaliere-si-o-no/' +
+      '.github/workflows/crawler-group-23-logic.yml, mai in questo repo. Questo file lo ' +
+      'invoca con un `uses: owner/repo/path@ref` completamente qualificato (vedi jobs.' +
+      'crawler_group_23.uses sotto), la cui esistenza GitHub Actions verifica da solo al ' +
+      'momento del dispatch — niente in QUESTO repo ne dipende. Secondo tentativo della ' +
+      'migrazione cross-repo: il primo (composite action, .github/actions/' +
+      'crawler-group-23-logic) e\' stato revertito in frontaliere-si-o-no#6517 dopo che un ' +
+      'dispatch reale ha trovato che lo schema di una composite action rifiuta ' +
+      'background:/wait-all:.',
+  },
+  '.github/workflows/crawler-group-23.yml :: .github/workflows/crawler-group-23-logic.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso referente del nome nudo sopra, questa volta col path completo ' +
+      '(valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-23-logic.yml, ' +
+      'REF_RE estrae solo la porzione a partire da `.github/`) — stessa ragione: vive ' +
+      'ESCLUSIVAMENTE nel sito, referenziato via `uses:` qualificato la cui risoluzione ' +
+      'GitHub Actions verifica da solo, niente qui dipende dalla sua esistenza LOCALE.',
   },
 };
 
