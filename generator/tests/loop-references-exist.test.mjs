@@ -556,6 +556,31 @@ const DECLARED_ABSENT = {
       'Descrittiva — nominare dove sta l\'altra meta\' e\' cio\' che rende ricontrollabile ' +
       'l\'affermazione «il porting ha perso il bust», non una dipendenza.',
   },
+  '.github/workflows/crawler-group-23.yml :: translate-pending.yml': {
+    kind: 'site-only',
+    reason:
+      'Pilota di migrazione cross-repo (frontaliere-si-o-no PR #6485): la riga elenca cosa ' +
+      'NON e\' ancora migrato («migrating the other 22 + translate-pending.yml»), ed e\' un ' +
+      'workflow del SITO che qui non esiste per costruzione — non lo dispatcha nessuno da ' +
+      'questo file. Descrittiva: niente qui dipende dalla sua esistenza.',
+  },
+  '.github/workflows/crawler-group-23.yml :: scripts/generate-crawler-group-workflows.mjs': {
+    kind: 'site-only',
+    reason:
+      'Stesso pilota: nomina il generatore del sito che scrive la logica ospitata dalla ' +
+      'composite action invocata qui (valerielinc-ops/frontaliere-si-o-no/.github/actions/ ' +
+      'crawler-group-23-logic), per spiegare dove sta la sorgente di verita\'. Il generatore ' +
+      'vive ESCLUSIVAMENTE nel sito — qui non esistono crawler group ne\' un generatore per ' +
+      'produrli. Descrittiva, non una dipendenza.',
+  },
+  '.github/workflows/crawler-group-23.yml :: orchestrate-crawlers.yml': {
+    kind: 'site-only',
+    reason:
+      'Stesso pilota: nomina il dispatcher del sito che, una volta confermato il pattern, ' +
+      'invochera\' `gh workflow run crawler-group-23.yml --repo nanakokyobashi-rgb/' +
+      'frontaliere-articles` sul suo cron 2x/giorno. Il dispatcher vive ESCLUSIVAMENTE nel ' +
+      'sito; questo file e\' il bersaglio del dispatch, non il chiamante. Descrittiva.',
+  },
 };
 
 const KINDS = new Set(['site-only', 'renamed-here', 'example', 'data']);
