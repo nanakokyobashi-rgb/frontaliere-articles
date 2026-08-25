@@ -12501,15 +12501,6 @@ function requestCooperativeStop(signal) {
   }, COOPERATIVE_STOP_GRACE_MS).unref();
 }
 
-// Registered at module scope, i.e. BEFORE ai-models.mjs arms its own SIGTERM
-// hook on first use. Node runs signal listeners in registration order and this
-// one is synchronous, so the flag is set before that hook's async score flush
-// gets a chance to `process.exit(143)`. Order matters and is load-bearing: with
-// the registrations swapped, the flag would be armed only after the process had
-// already been told to leave.
-process.on('SIGTERM', () => requestCooperativeStop('SIGTERM'));
-process.on('SIGINT', () => requestCooperativeStop('SIGINT'));
-
 /**
  * True once the global wall-clock budget is spent (used to stop new topic
  * attempts), or once a SIGTERM has asked for a cooperative stop (#525).
@@ -15455,6 +15446,25 @@ const invokedDirectly = (() => {
 })();
 
 if (invokedDirectly) {
+  // Registered as the FIRST thing inside the CLI guard, i.e. BEFORE ai-models.mjs
+  // arms its own SIGTERM hook on first use (lazy, at first score persistence
+  // inside main()). Node runs signal listeners in registration order and this
+  // one is synchronous, so the flag is set before that hook's async score flush
+  // gets a chance to `process.exit(143)`. Order matters and is load-bearing: with
+  // the registrations swapped, the flag would be armed only after the process had
+  // already been told to leave.
+  //
+  // Deliberately NOT at module scope (review round on #525's PR): the four
+  // scripts that import this file only for buildBodyFile/registerArticleFiles/etc.
+  // (publish-journalist-article.mjs, generate-events-digest-article.mjs,
+  // generate-daily-brief-article.mjs, generate-border-wait-ranking-article.mjs)
+  // never call wallBudgetExceeded()'s poller, so a SIGTERM/SIGINT delivered to
+  // them would have hit this handler, printed a misleading "create-article.mjs:
+  // ricevuto..." warning, and made them wait up to COOPERATIVE_STOP_GRACE_MS
+  // before exiting instead of dying immediately on Node's default action.
+  process.on('SIGTERM', () => requestCooperativeStop('SIGTERM'));
+  process.on('SIGINT', () => requestCooperativeStop('SIGINT'));
+
   // When LOCAL_LLM_ENABLED and the model fills the runner disk, even
   // process.stdout/stderr writes fail with ENOSPC — Node.js crashes with an
   // unhandled 'error' event on WriteStream, masking the real cause. Handle it

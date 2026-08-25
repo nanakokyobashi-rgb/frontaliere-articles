@@ -45,15 +45,31 @@ test('#525: il generatore registra un handler SIGTERM (era zero)', () => {
     'il Ctrl-C locale deve seguire la stessa strada del kill di CI, o il comportamento diverge fra i due ambienti');
 });
 
-test('#525: la registrazione sta a module scope, non dentro una funzione', () => {
+test('#525: la registrazione sta nel guard `invokedDirectly`, prima di main()', () => {
   // Load-bearing: ai-models.mjs arma il PROPRIO hook SIGTERM pigramente (alla
-  // prima persistenza dei punteggi) e quell'hook esce `process.exit(143)` dopo
-  // un flush async. Node esegue i listener in ordine di registrazione: questo,
-  // sincrono e registrato all'import, arma il flag PRIMA che l'altro possa
-  // chiudere il processo. A registrazioni invertite il flag verrebbe armato
-  // dopo che al processo e' gia' stato detto di uscire.
-  const riga = SRC.split('\n').findIndex((l) => /^process\.on\(\s*'SIGTERM'/.test(l));
-  assert.ok(riga >= 0, "atteso `process.on('SIGTERM'` in colonna 0 (module scope), non indentato dentro una funzione");
+  // prima persistenza dei punteggi, dentro main()) e quell'hook esce
+  // `process.exit(143)` dopo un flush async. Node esegue i listener in ordine
+  // di registrazione: questa, sincrona, deve restare PRIMA della chiamata a
+  // main() per armare il flag prima che l'altro possa chiudere il processo.
+  //
+  // NON a module scope (round di revisione sulla PR #593 dei follow-up):
+  // i quattro script che importano create-article.mjs solo per
+  // buildBodyFile/registerArticleFiles/ecc. (publish-journalist-article.mjs,
+  // generate-events-digest-article.mjs, generate-daily-brief-article.mjs,
+  // generate-border-wait-ranking-article.mjs) non chiamano mai main(), quindi
+  // un handler a module scope li avrebbe intercettati comunque: un loro
+  // SIGTERM/SIGINT avrebbe stampato un warning fuorviante ("create-article.mjs:
+  // ricevuto...", ma lo script in esecuzione non e' create-article.mjs) e
+  // allungato l'uscita fino a COOPERATIVE_STOP_GRACE_MS senza che nessun poll
+  // ne beneficiasse — prima erano morti subito sul default di Node.
+  const rigaGuard = SRC.split('\n').findIndex((l) => /^if\s*\(invokedDirectly\)\s*\{/.test(l));
+  const rigaSigterm = SRC.split('\n').findIndex((l) => /^\s+process\.on\(\s*'SIGTERM'/.test(l));
+  const rigaMain = SRC.split('\n').findIndex((l) => /main\(\)\.then/.test(l));
+  assert.ok(rigaGuard >= 0, "atteso `if (invokedDirectly) {` in colonna 0");
+  assert.ok(rigaSigterm >= 0, "atteso `process.on('SIGTERM'` indentato, dentro il guard invokedDirectly");
+  assert.ok(rigaMain >= 0, "atteso `main().then` come punto di ingresso della pipeline CLI");
+  assert.ok(rigaSigterm > rigaGuard && rigaSigterm < rigaMain,
+    'la registrazione deve stare DENTRO il guard invokedDirectly e PRIMA di main(), o ai-models.mjs puo\' armare il proprio hook per primo — oppure i quattro script sibling la ricevono comunque');
 });
 
 test('#525: il flag entra in wallBudgetExceeded(), che e\' gia\' pollato ovunque', () => {
