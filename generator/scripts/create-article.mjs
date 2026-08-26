@@ -9095,55 +9095,80 @@ Rispondi con un JSON object (no markdown, no code fences):
 async function translateArticle(data) {
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
-    const raw = await callLLM(
-      [{ role: 'user', content: safePrompt }],
-      { temperature: 0.5, maxTokens, jsonMode: true },
-    );
-    const repaired = repairLlmJson(raw);
-    try {
-      return JSON.parse(repaired);
-    } catch (parseErr) {
-      console.error(`  ⚠️  JSON parse error (${label}): ${parseErr.message}`);
-      console.error(`     ${describeJsonParseError(repaired, parseErr)}`);
-      console.error(`     ${describeRawForDiagnostics(raw)}`);
-      // Detect truncation (model hit output cap): use 3× tokens on retry
-      const isTruncation = parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end');
-      const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
-      console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
-      const raw2 = await callLLM(
-        [{ role: 'user', content: safePrompt }],
-        { temperature: 0.5, maxTokens: retry1Tokens, jsonMode: true },
-      );
+    // Un tentativo: chiama callLLM e prova il parse, senza mai lasciare che un
+    // errore di callLLM (rate limit, rete) salti l'intera cascata qui sotto —
+    // stessa causa di #391 (requestHeadlineSelection): un errore non tassonomizzato
+    // risaliva oltre `translateArticle`, che `generateAndValidateArticle` non
+    // avvolge in un try/catch, e faceva fallire l'intero run al posto di
+    // consumare un tentativo di QUESTA cascata a 3 livelli.
+    // ALL_MODELS_EXHAUSTED resta un'eccezione e risale intatto: e' il roster
+    // intero a terra, non il fallimento di UNA chiamata — ritentare con la
+    // stessa cascata non lo risolverebbe, e assorbirlo declasserebbe un errore
+    // persistente a qualityReject (violando l'invariante di
+    // roster-exhaustion-red.test.mjs, la stessa guardia che #391 ha aggiunto a
+    // requestHeadlineSelection).
+    const attempt = async (tokens, temperature) => {
+      let raw;
       try {
-        const result = JSON.parse(repairLlmJson(raw2));
-        console.error(`  ✅ Retry riuscito per ${label}`);
-        return result;
-      } catch (retryErr) {
-        console.error(`  ⚠️  Retry 1 fallito (${label}): ${retryErr.message} — tentativo 2...`);
-        // Third attempt with maximum tokens
-        const retry2Tokens = 16000;
-        const raw3 = await callLLM(
-          [{ role: 'user', content: safePrompt }],
-          { temperature: 0.3, maxTokens: retry2Tokens, jsonMode: true },
-        );
-        try {
-          const result3 = JSON.parse(repairLlmJson(raw3));
-          console.error(`  ✅ Retry 2 riuscito per ${label}`);
-          return result3;
-        } catch (retry2Err) {
-          console.error(`  ❌ Retry 2 fallito (${label}): ${retry2Err.message}`);
-          // qualityReject=true: same content-quality class as the IT-generation
-          // JSON-parse-exhausted throw above — malformed translation output,
-          // not infrastructure. This propagates straight out of
-          // generateAndValidateArticle (no local catch around translateArticle),
-          // so an untagged message here crashes the whole run instead of
-          // skipping to the next headline.
-          const err = new Error(`JSON non valido dalla traduzione ${label}: ${retry2Err.message}`);
-          err.qualityReject = true;
-          throw err;
-        }
+        raw = await callLLM([{ role: 'user', content: safePrompt }], { temperature, maxTokens: tokens, jsonMode: true });
+      } catch (err) {
+        if (err?.code === 'ALL_MODELS_EXHAUSTED') throw err;
+        return { ok: false, infra: true, error: err };
       }
+      const repaired = repairLlmJson(raw);
+      try {
+        return { ok: true, value: JSON.parse(repaired) };
+      } catch (parseErr) {
+        return { ok: false, infra: false, raw, repaired, error: parseErr };
+      }
+    };
+
+    const r1 = await attempt(maxTokens, 0.5);
+    if (r1.ok) return r1.value;
+    if (r1.infra) {
+      console.error(`  ⚠️  ${label}: errore infrastrutturale al tentativo 1 (${r1.error?.message ?? r1.error}) — tentativo 2...`);
+    } else {
+      console.error(`  ⚠️  JSON parse error (${label}): ${r1.error.message}`);
+      console.error(`     ${describeJsonParseError(r1.repaired, r1.error)}`);
+      console.error(`     ${describeRawForDiagnostics(r1.raw)}`);
     }
+    // Detect truncation (model hit output cap): use 3× tokens on retry. Un
+    // errore infrastrutturale non porta un messaggio di parse da leggere,
+    // quindi non puo' mai contare come troncamento: prende la scala normale.
+    const isTruncation = !r1.infra && (r1.error.message.includes('Unterminated') || r1.error.message.includes('Unexpected end'));
+    const retry1Tokens = isTruncation ? Math.max(maxTokens * 3, 12000) : maxTokens + 4000;
+    console.error(`  🔄 Retry ${label} con maxTokens=${retry1Tokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
+
+    const r2 = await attempt(retry1Tokens, 0.5);
+    if (r2.ok) {
+      console.error(`  ✅ Retry riuscito per ${label}`);
+      return r2.value;
+    }
+    if (r2.infra) {
+      console.error(`  ⚠️  ${label}: errore infrastrutturale al retry 1 (${r2.error?.message ?? r2.error}) — tentativo 2...`);
+    } else {
+      console.error(`  ⚠️  Retry 1 fallito (${label}): ${r2.error.message} — tentativo 2...`);
+    }
+
+    // Third attempt with maximum tokens
+    const retry2Tokens = 16000;
+    const r3 = await attempt(retry2Tokens, 0.3);
+    if (r3.ok) {
+      console.error(`  ✅ Retry 2 riuscito per ${label}`);
+      return r3.value;
+    }
+    const detail = r3.infra ? String(r3.error?.message ?? r3.error) : r3.error.message;
+    console.error(`  ❌ Retry 2 fallito (${label}): ${detail}`);
+    // qualityReject=true: stessa classe della gettata IT-generation a
+    // tentativi esauriti sopra — sia una traduzione malformata sia un errore
+    // infrastrutturale persistente su questo campo restano un fallimento di
+    // QUESTO articolo, non del processo. Risale grezzo fuori da
+    // generateAndValidateArticle (che non avvolge translateArticle in un
+    // try/catch): senza il tag qui, farebbe fallire l'intero run invece di
+    // saltare alla prossima headline.
+    const err = new Error(`Traduzione ${label} fallita dopo 3 tentativi: ${detail}`);
+    err.qualityReject = true;
+    throw err;
   }
 
   async function translateContent(sourceLang, targetLang, targetLabel, sourceContent) {
