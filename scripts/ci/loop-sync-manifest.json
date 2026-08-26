@@ -2243,11 +2243,11 @@
       "path": "generator/scripts/lib/exhaustion-disposition.mjs",
       "sitePath": "scripts/lib/exhaustion-disposition.mjs",
       "mode": "identical",
-      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking.",
+      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking. RIALLINEATA il 2026-08-26 (issue #618): la baseline del 2026-08-15 era stantia da entrambi i lati — il sito aveva portato `PROMPT_SCAFFOLD_FLOOR_TOKENS`, `isBudgetBelowScaffoldFloor`, `isPromptFloorIrreducible` e `promptFloorSummary` con la PR sito #6460 (merged 2026-08-25) — ma i due lati sono di nuovo byte-identici (hash `847866660c4601aa` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare.",
       "baseline": {
-        "site": "54ed894b24deaa3f",
-        "corpus": "54ed894b24deaa3f",
-        "alignedAt": "2026-08-15"
+        "site": "847866660c4601aa",
+        "corpus": "847866660c4601aa",
+        "alignedAt": "2026-08-26"
       }
     },
     {
@@ -2274,10 +2274,11 @@
       "path": "host/blogContextualLinksData.ts",
       "sitePath": "build-plugins/blogContextualLinksData.ts",
       "mode": "identical",
+      "reason": "RIALLINEATA il 2026-08-26 (stesso pattern di #618, trovato in sweep sulla stessa classe): la baseline del 2026-08-09 era stantia da entrambi i lati — la correzione dell'intento transazionale dei link contestuali del blog e' atterrata sia sul sito (PR sito #6343, 2026-08-24) sia qui (#584, portata con `236ee8a69`) — ma i due lati sono di nuovo byte-identici (hash `9622c486d9badc32` su entrambi, verificato ora), quindi non e' un `both-moved` da riconciliare a mano, solo una baseline da rinfrescare.",
       "baseline": {
-        "site": "510e1f9b2546a18a",
-        "corpus": "510e1f9b2546a18a",
-        "alignedAt": "2026-08-09"
+        "site": "9622c486d9badc32",
+        "corpus": "9622c486d9badc32",
+        "alignedAt": "2026-08-26"
       }
     },
     {
