@@ -4405,6 +4405,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.elettricita-gas-meno-cari-2027.title': 'Leichtere Stromrechnungen: sinkende Energiekosten im Jahr 2027',
     'blog.article.elettricita-gas-meno-cari-2027.excerpt': 'AIM senkt die Tarife im Mendrisiotto ab 2027: -6,5%-7,4% für Strom, -9,43% für Gas. Entdecken Sie die jährlichen Einsparungen auf Ihrer Energierechnung.',
     'blog.article.elettricita-gas-meno-cari-2027.imageAlt': 'Energiemessgerät mit Wohnhäusern in der Region Mendrisiotto und sinkenden Tarifen 2027',
+    'blog.article.iniziativa-alimentazione-no.title': 'Ernährungsinitiative: Das Nein des Tessins',
+    'blog.article.iniziativa-alimentazione-no.excerpt': 'Der Tessiner Vorstand warnt vor Kosten und Konsequenzen: Die Abstimmung am 27. September entscheidet über den Antrag auf 70% Selbstversorgung.',
+    'blog.article.iniziativa-alimentazione-no.imageAlt': 'Tessiner Bauernmarkt mit lokalen Produkten, Obst, Gemüse und Milcherzeugnissen unter klarem Himmel.',
 };
 
 export default blogMetaChDe;

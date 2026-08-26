@@ -4405,6 +4405,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.elettricita-gas-meno-cari-2027.title': 'Bollette più leggere: costi energetici in calo nel 2027',
     'blog.article.elettricita-gas-meno-cari-2027.excerpt': 'AIM riduce le tariffe nel Mendrisiotto dal 2027: -6,5%-7,4% per elettricità, -9,43% per il gas. Scopri il risparmio annuale sulla tua bolletta energetica.',
     'blog.article.elettricita-gas-meno-cari-2027.imageAlt': 'Contatore energetico e abitazioni residenziali ticinesi con tariffe energetiche in calo nel 2027',
+    'blog.article.iniziativa-alimentazione-no.title': 'Iniziativa alimentazione: il NO del Ticino',
+    'blog.article.iniziativa-alimentazione-no.excerpt': 'Il Comitato ticinese mette in guardia da costi e conseguenze: votazione il 27 settembre deciderà sulla richiesta di 70% autoapprovvigionamento.',
+    'blog.article.iniziativa-alimentazione-no.imageAlt': 'Mercato agricolo ticinese con prodotti locali, frutta, verdure e latticini sotto cielo sereno.',
 };
 
 export default blogMetaChIt;
