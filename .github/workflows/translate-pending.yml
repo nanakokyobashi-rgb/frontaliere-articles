@@ -79,3 +79,55 @@ jobs:
     secrets:
       FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # A single retry: the observed failure mode (translate-pending run
+  # 32923600325 and 32922277191, 2026-08-26) is the runner's OWN "Download
+  # action repository" step timing out on the codeload tarball of
+  # valerielinc-ops/frontaliere-si-o-no (multi-GB working tree, 100s
+  # HttpClient.Timeout x3) -- before any job step of the reusable workflow
+  # below ever runs. Retrying often succeeds: codeload
+  # appears to cache the generated tarball for a ref after the first request,
+  # so a second attempt tends to hit a warm cache (matches the crawler-group-23
+  # pilot: repeated cold-cache failures, then a success shortly after for the
+  # same SHA).
+  translate_retry:
+    needs: translate
+    if: needs.translate.result == 'failure'
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
+    with:
+      max_jobs: ${{ inputs.max_jobs }}
+      mopup_max_jobs: ${{ inputs.mopup_max_jobs }}
+      company_key: ${{ inputs.company_key }}
+      skip_housekeeping: ${{ inputs.skip_housekeeping || false }}
+      skip_translate: ${{ inputs.skip_translate || false }}
+      dry_run: ${{ inputs.dry_run || false }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # The reusable workflow's own failure reporting (inside the site repo)
+  # never gets to run when the failure is at this outer resolution step -- this
+  # job is the only net that catches it. The 5 daily crons are a safety net for
+  # the translate cascade itself, not for surfacing this class of failure.
+  translate_report_failure:
+    needs: [translate, translate_retry]
+    if: needs.translate_retry.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/lib
+          sparse-checkout-cone-mode: false
+      - name: File/update the dispatch-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/lib/github-issue-creator.mjs \
+            --title "translate-pending: cross-repo dispatch esaurito (2/2 tentativi prima che la logica partisse)" \
+            --description "Sia il tentativo primario sia il retry sono falliti PRIMA che qualunque step di .github/workflows/translate-pending-logic.yml (ospitato su valerielinc-ops/frontaliere-si-o-no) partisse.\n\nSintomo osservato: 'Failed to download action ... HttpClient.Timeout of 100 seconds' nella risoluzione del reusable workflow cross-repo -- il repo del sito e' un working tree di diversi GB, e il download del tarball via codeload a volte eccede il timeout del runner.\n\nLe traduzioni sono ferme almeno fino al prossimo cron che passa entrambi i tentativi.\n\nRun fallito: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --priority 2 \
+            --label Bug \
+            --workflow "Translate Pending (cross-repo dispatch)"
