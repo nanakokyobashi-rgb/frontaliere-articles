@@ -84,6 +84,29 @@ const SLUGS = [
     citations: ['TF 1992', 'OD 1993', '25 giugno 1978'],
   },
   {
+    // #332. Stessa frase-fonte "legge sul soggiorno degli stranieri, 2005"
+    // allucinata con un acronimo diverso per locale (`LSS` in it/en/fr,
+    // `BWG` in de — quest'ultimo aggiunto alla denylist corpus-wide sotto
+    // perche' l'UNICA altra occorrenza, in `permesso-l-canton-lucerna-
+    // validita-e-proroga` DE, era la stessa fabbricazione). `LSS` invece
+    // NON e' bannabile corpus-wide: sopravvive altrove con significati
+    // reali/non verificati (23 file, fuori scope per questo item), quindi
+    // qui si blocca solo la stringa esatta osservata in questo articolo.
+    slug: 'permesso-l-di-breve-durata-canton-berna',
+    ref: 'corpus#332',
+    citations: ['(LSS) del 2005', '(LSS) of 2005', '(LSS) de 2005', '(BWG) von 2005'],
+  },
+  {
+    // #332. «Regolamento sul permesso di soggiorno (RPS)» inventato per il
+    // permesso G, nella stessa frase di «Legge sul lavoro» (LSt) — diverso
+    // dall'uso reale di `RPS` (Registro delle professioni sanitarie) che
+    // sopravvive altrove nel corpus e non va toccato: per questo `RPS` non
+    // e' nella denylist corpus-wide sotto, solo questa stringa esatta lo e'.
+    slug: 'frontaliere-meccanico-ticino-stipendio-requisiti',
+    ref: 'corpus#332',
+    citations: ['Regolamento sul permesso di soggiorno" (RPS) del 2019'],
+  },
+  {
     // #556 review round 2. Il corpo IT/FR aveva gia' la forma senza sigla
     // ("legge federale sul contrasto alla criminalita' organizzata"), ma DE e
     // EN portavano ciascuno un acronimo inventato PROPRIO — `(Bekämpfungsgesetz)`
@@ -159,11 +182,19 @@ for (const { slug, ref, citations } of SLUGS) {
  * non e' nel manifest: nessun vincolo di lockstep, la sede giusta finche' le
  * sigle non sono state promosse sul sito.
  *
- * Le due sigle nude sono cercate con un confine di parola perche' il corpus
+ * Le sigle nude sono cercate con un confine di parola perche' il corpus
  * contiene due famiglie di sottostringhe che sono norme VERE e vanno
  * preservate: `MLPS` (Ministero del Lavoro e delle Politiche Sociali) e
  * `TULPS` (Testo Unico Leggi Pubblica Sicurezza, 1931). Misurato al momento
  * del fix: 16 occorrenze fra le due, tutte legittime, tutte fuori match.
+ *
+ * `LSO` e `BWG` aggiunte da corpus#332 (follow-up di #323): a differenza di
+ * `RPS`/`LSS`, ogni occorrenza misurata sull'intero corpus era fabbricata
+ * (nessun ente o legge reale usa questi acronimi qui), quindi possono stare
+ * nella denylist corpus-wide invece che nella tabella per-slug sopra. `LSO`
+ * citava DUE leggi inventate diverse a seconda dell'articolo (permesso di
+ * soggiorno vs. diritto societario) — la sigla e' fabbricata in entrambi i
+ * casi, il contenuto dietro no.
  */
 // LCL e LCO aggiunte da #545 (follow-up di #526/#461): le 6 occorrenze note
 // (2 file `LCL` in blog-body-ch/it, 4 file `LCO` — le 4 traduzioni di
@@ -195,6 +226,8 @@ const CORPUS_WIDE_FABRICATED = [
   { label: 'BG 1995', re: /bg 1995/i },
   { label: 'LFW', re: /(?<![a-z])lfw(?![a-z])/i },
   { label: 'LPS', re: /(?<![a-z])lps(?![a-z])/i },
+  { label: 'LSO', re: /(?<![a-z])lso(?![a-z])/i },
+  { label: 'BWG', re: /(?<![a-z])bwg(?![a-z])/i },
   { label: 'LCL', re: /(?<![a-z])lcl(?![a-z])/i },
   { label: 'LCO', re: /(?<![a-z])lco(?![a-z])/i },
   { label: 'LFD', re: /(?<![a-z])lfd(?![a-z])/i },
