@@ -4381,6 +4381,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.indennita-parentali-2027.title': 'Elterngeld: Neue Ansprüche ab 1. Juli 2027',
     'blog.article.indennita-parentali-2027.excerpt': 'Der Bundesrat genehmigt die Änderungen des EO-Gesetzes: Ab dem 1. Juli 2027 haben Eltern und Familien Zugang zu Leistungen, die bisher Angehörigen der Armee vorbehalten waren.',
     'blog.article.indennita-parentali-2027.imageAlt': 'Bundesrat-Gebäude in Bern, Sitz des Schweizer Bundesrates und Parlaments',
+    'blog.article.allerte-popolazione-cell-broadcast.title': 'Bevölkerungsalarm: Bern beschleunigt Cell Broadcast',
+    'blog.article.allerte-popolazione-cell-broadcast.excerpt': 'Der Bundesrat fordert 15,8 Mio. CHF für den Mobilfunk-Broadcast, ein Warnsystem, das die Bürgerinnen und Bürger direkt auf ihren Handys erreichen wird.',
+    'blog.article.allerte-popolazione-cell-broadcast.imageAlt': 'Notfallwarnsystem mit Benachrichtigungen auf Schweizer Mobiltelefonen auf einem Stadtplatz',
 };
 
 export default blogMetaChDe;

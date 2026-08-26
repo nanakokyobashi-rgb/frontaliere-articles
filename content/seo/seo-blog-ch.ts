@@ -56843,6 +56843,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-allerte-popolazione-cell-broadcast': {
+    title: 'Allerte popolazione: Berna accelera cell broadcast',
+    description: 'Consiglio federale chiede 15,8 milioni CHF per il cell broadcast, sistema di allerta che raggiungerà i cittadini direttamente sui loro cellulari.',
+    keywords: 'frontalieri, ticino, svizzera, italia, allerte, popolazione, berna, accelera',
+    ogTitle: 'Allerte popolazione: Berna accelera cell broadcast',
+    ogDescription: 'Il Consiglio federale accelera il cell broadcast con un investimento di 15,8 milioni CHF. Nuovo sistema di allerta manderà messaggi direttamente sui cellulari. Integra sirene, radio, web e app Alertswiss per protezione civile più efficace.',
+    canonicalPath: '/articoli-svizzera/allerte-popolazione-cell-broadcast/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Allerte popolazione: Berna accelera cell broadcast",
+      "description": "Consiglio federale chiede 15,8 milioni CHF per il cell broadcast, sistema di allerta che raggiungerà i cittadini direttamente sui loro cellulari.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/allerte-popolazione-cell-broadcast.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dimostrazione di sistema di allerta d'emergenza con messaggi su telefoni mobili in una piazza svizzera"
+      },
+      "datePublished": "2026-08-26T10:54:48+00:00",
+      "dateModified": "2026-08-26T10:54:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/allerte-popolazione-cell-broadcast/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

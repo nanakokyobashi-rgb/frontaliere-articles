@@ -4381,6 +4381,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.indennita-parentali-2027.title': 'Parental allowances: new entitlements from 1 July 2027',
     'blog.article.indennita-parentali-2027.excerpt': 'The Federal Council approves the amendments to the IPG law: from 1 July 2027 parents and families will have access to benefits hitherto reserved for the military.',
     'blog.article.indennita-parentali-2027.imageAlt': 'Federal Palace of Bern, seat of Swiss Federal Council and Parliament',
+    'blog.article.allerte-popolazione-cell-broadcast.title': 'Population alerts: Bern accelerates cell broadcast',
+    'blog.article.allerte-popolazione-cell-broadcast.excerpt': 'The Federal Council is asking for CHF 15.8 million for cell broadcast, an alert system that will reach citizens directly on their mobile phones.',
+    'blog.article.allerte-popolazione-cell-broadcast.imageAlt': 'Emergency alert system demonstration with mobile phone notifications in a Swiss town square',
 };
 
 export default blogMetaChEn;
