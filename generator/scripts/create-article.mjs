@@ -9095,6 +9095,21 @@ Rispondi con un JSON object (no markdown, no code fences):
 async function translateArticle(data) {
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
+    // Niente try/catch attorno a callLLM qui, a differenza del gemello
+    // requestHeadlineSelection (#391) — verificato in review su PR #604
+    // (issue #403 punto 5): per QUESTI prompt (jsonMode senza tutti e 5 i
+    // REQUIRED_IT_BODY_FIELDS nominati — vedi resolveBody2Validation in
+    // ./lib/body2-payload-verdict.mjs) il wrapper locale `callLLM` e' un
+    // passthrough puro sul `callLLM` esportato da ai-models.mjs, il cui
+    // UNICO throw (ai-models.mjs:6491-6519) e' sempre taggato
+    // `ALL_MODELS_EXHAUSTED` — il roster intero a terra, non il fallimento
+    // di una chiamata. Deve risalire grezzo per contratto
+    // (roster-exhaustion-red.test.mjs): un try/catch qui lo ricatturerebbe
+    // solo per rilanciarlo immediatamente, zero cambio di comportamento —
+    // e' esattamente il 🔴 dead-code che la review ha trovato in un
+    // precedente giro di questa PR. Se un giorno il wrapper guadagnasse un
+    // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
+    // cattura qui avrebbe senso; oggi no.
     const raw = await callLLM(
       [{ role: 'user', content: safePrompt }],
       { temperature: 0.5, maxTokens, jsonMode: true },
