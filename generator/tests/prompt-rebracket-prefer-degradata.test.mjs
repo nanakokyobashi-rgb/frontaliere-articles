@@ -12,10 +12,13 @@
  * su un esito gia' noto.
  *
  * Il fix introduce `_preferDegradataDalRibracket` (spento di default, acceso
- * dentro `_eseguiRibracket`) e lo usa per spegnere `prefer` sui TRE call-site
- * del tentativo: la chiamata split, il fallback scala dentro
- * `_eseguiRibracket` stesso, e il retry per JSON malformato piu' sotto.
- * Questo file prova che i tre call-site restano coperti, letti come TESTO
+ * dentro `_eseguiRibracket`) e lo usa per spegnere `prefer` sui QUATTRO
+ * call-site del tentativo: la chiamata 1/2 split, la chiamata 2/2 meta
+ * (`_call2`, raggiunta dallo stesso ramo `_eseguiRibracket` -> `rb.split` ->
+ * `_generateSplit()`, mancante nel primo giro — vedi review PR #616), il
+ * fallback scala dentro `_eseguiRibracket` stesso, e il retry per JSON
+ * malformato piu' sotto.
+ * Questo file prova che i quattro call-site restano coperti, letti come TESTO
  * per lo stesso motivo di `prompt-floor-early-exit.test.mjs` e
  * `prompt-rebracket-determinism.test.mjs`: `create-article.mjs` non e'
  * importabile da un test (contiene byte che lo fanno classificare BINARIO —
@@ -75,23 +78,36 @@ test('il retry per JSON malformato rispetta il flag oltre a `_preferActiveThisAt
   );
 });
 
-test('i tre call-site del tentativo sono TUTTI coperti dal gate, nessuno resta scoperto', () => {
+test('la chiamata 2/2 meta (`_call2`) rispetta il flag oltre a `_preferActiveThisAttempt`', () => {
+  // Raggiunta da `_eseguiRibracket` -> ramo `rb.split` -> `_generateSplit()`,
+  // che accende il flag PRIMA di richiamare la funzione: la 2/2 e' quindi
+  // esposta allo stesso ricontatto sprecato della 1/2, ma nel primo giro del
+  // fix non portava il gate (review PR #616, L8438).
+  assert.match(
+    SRC,
+    /prefer: \(_preferActiveThisAttempt && !_preferDegradataDalRibracket\) \? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS/,
+    'la chiamata 2/2 meta deve spegnere `prefer` quando il ri-bracketing si e\' armato',
+  );
+});
+
+test('i quattro call-site del tentativo sono TUTTI coperti dal gate, nessuno resta scoperto', () => {
   const occorrenze = SRC.match(/!_preferDegradataDalRibracket/g) || [];
   // Una nel commento di dichiarazione del flag non esiste (il commento non usa
-  // il letterale con `!`); le occorrenze reali sono: split, retry malformato,
-  // piu' i riferimenti in prosa nei commenti che accompagnano ciascun sito.
-  // Il numero minimo che conta e' quello dei GATE effettivi in una chiamata a
-  // `callLLM` (non in un commento): split e retry malformato usano il
-  // letterale `(_preferActiveThisAttempt && !_preferDegradataDalRibracket)`,
-  // mentre il fallback scala spegne `prefer` incondizionatamente perche' e'
-  // GIA' dentro `_eseguiRibracket` (verificato nel test sopra).
+  // il letterale con `!`); le occorrenze reali sono: split, meta, retry
+  // malformato, piu' i riferimenti in prosa nei commenti che accompagnano
+  // ciascun sito. Il numero minimo che conta e' quello dei GATE effettivi in
+  // una chiamata a `callLLM` (non in un commento): split, meta e retry
+  // malformato usano il letterale
+  // `(_preferActiveThisAttempt && !_preferDegradataDalRibracket)`, mentre il
+  // fallback scala spegne `prefer` incondizionatamente perche' e' GIA' dentro
+  // `_eseguiRibracket` (verificato nel test sopra).
   const gateInCodice = SRC.match(
     /prefer: \(_preferActiveThisAttempt && !_preferDegradataDalRibracket\) \? PREFERRED_GENERATION_MODELS : undefined/g,
   ) || [];
   assert.ok(occorrenze.length > 0, 'il flag deve comparire almeno una volta nel file');
   assert.equal(
     gateInCodice.length,
-    2,
-    'split e retry malformato devono entrambi portare il gate letterale sul `prefer`',
+    3,
+    'split, meta e retry malformato devono tutti portare il gate letterale sul `prefer`',
   );
 });

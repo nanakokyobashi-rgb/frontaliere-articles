@@ -8435,7 +8435,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // esattamente i due campi di testo che questa meta' produce.
     const rawMeta = useGeminiDirect
       ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
-      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS });
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS });
     let metaData;
     try {
       metaData = JSON.parse(repairLlmJson(rawMeta));
