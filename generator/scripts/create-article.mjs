@@ -8230,6 +8230,20 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   // meta' sullo stesso bersaglio: rispedirla e' spendere due chiamate LLM
   // per riottenere lo stesso rifiuto.
   let _splitPromptTentato = null;
+  // issue #460 — una volta che il ri-bracketing si e' armato (`_eseguiRibracket`
+  // e' stato chiamato), la preferenza va spenta per il resto di QUESTO
+  // tentativo, sulla chiamata split, sulla chiamata scala e sul retry per JSON
+  // malformato piu' sotto. Motivo aritmetico, non di cautela: il ri-bracketing
+  // si arma SOLO quando `err.retryRequestTokenBudget` viene dal roster
+  // (`_budgetDettato`), cioe' quando la libreria ha visto ALMENO un modello
+  // saltato per cap di INPUT — ma l'unico membro di
+  // `PREFERRED_GENERATION_MODELS` (claude-cli/haiku) non dichiara nessun cap
+  // di input (getDeclaredRequestTokenLimit lo salta sempre), quindi non puo'
+  // MAI essere fra i modelli saltati per dimensione. Se ha fallito, ha fallito
+  // per un'altra ragione (timeout, quota, rate-limit) che ridimensionare il
+  // prompt non cambia: ricontattarlo con lo stesso `prefer` e' spendere una
+  // chiamata su un esito gia' noto.
+  let _preferDegradataDalRibracket = false;
   let _splitCall1 = _splitAttiva ? _buildCall1() : null;
   if (_splitCall1) {
     console.error(
@@ -8256,7 +8270,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
     const rawBody = useGeminiDirect
       ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, expectedFields: BODY_ONLY_FIELDS })
-      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
     let bodyData;
     try {
       bodyData = JSON.parse(repairLlmJson(rawBody));
@@ -8554,6 +8568,9 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   //   [prompt-rebracket] section=<s> attempt=<n> budget=<token>
   //   da=<token> a=<token> via=<split|scala> fonte=<n>ch fatti=<n>ch
   const _eseguiRibracket = async (rb, opts) => {
+    // Vedi il commento su `_preferDegradataDalRibracket` sopra: da qui in poi,
+    // in questo tentativo, nessuna chiamata ricontatta piu' il preferito.
+    _preferDegradataDalRibracket = true;
     const scelta = rb.split || rb;
     console.error(
       `  ♻️ [prompt-rebracket] section=${SECTION_NAME} attempt=${generationAttempt} `
@@ -8590,7 +8607,11 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // `llmMessages`, e rispedire li' l'assemblato intero rimetterebbe fuori
     // i modelli appena recuperati.
     llmMessages = _msgsUnica;
-    return callLLM(llmMessages, opts);
+    // `prefer` va tolto qui per la stessa ragione della nota su
+    // `_preferDegradataDalRibracket`: siamo nel ramo scala perche' il budget
+    // e' stato dettato dal roster, e il preferito (senza cap di input) non
+    // puo' averlo causato.
+    return callLLM(llmMessages, { ...opts, prefer: undefined });
   };
 
   let itRaw;
@@ -8682,7 +8703,14 @@ Rispondi SOLO con JSON valido, senza markdown.` },
         // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
         // spegne per tutta la run — ed e' proprio il caso in cui il
         // ri-bracketing si arma.
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
+        //
+        // issue #460: `!_preferDegradataDalRibracket` in piu' rispetto a
+        // prima. Se questo tentativo e' passato dal ri-bracketing,
+        // `llmMessages` puo' essere il gradino piu' aggressivo della scala
+        // (vedi `_msgsUnica` sopra) e non e' garantito che rientri nel
+        // budget: ricontattare il preferito qui rischierebbe di riesaurirlo
+        // una seconda volta per un motivo (dimensione) che non e' il suo.
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: (_preferActiveThisAttempt && !_preferDegradataDalRibracket) ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
