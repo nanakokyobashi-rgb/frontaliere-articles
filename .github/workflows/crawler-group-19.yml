@@ -51,7 +51,7 @@ jobs:
 
   crawler_group_19_retry:
     needs: crawler_group_19
-    if: needs.crawler_group_19.result == 'failure'
+    if: always() && needs.crawler_group_19.result == 'failure'
     uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-19-logic.yml@main
     with:
       skip_ai_translation: ${{ inputs.skip_ai_translation }}
@@ -68,9 +68,10 @@ jobs:
   # reports it. This job is the only net that catches that failure class.
   crawler_group_19_report_failure:
     needs: [crawler_group_19, crawler_group_19_retry]
-    if: needs.crawler_group_19_retry.result == 'failure'
+    if: always() && needs.crawler_group_19_retry.result == 'failure'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       issues: write
     steps:
       - uses: actions/checkout@v5

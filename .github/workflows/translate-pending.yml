@@ -92,7 +92,7 @@ jobs:
   # same SHA).
   translate_retry:
     needs: translate
-    if: needs.translate.result == 'failure'
+    if: always() && needs.translate.result == 'failure'
     uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
     with:
       max_jobs: ${{ inputs.max_jobs }}
@@ -111,9 +111,10 @@ jobs:
   # the translate cascade itself, not for surfacing this class of failure.
   translate_report_failure:
     needs: [translate, translate_retry]
-    if: needs.translate_retry.result == 'failure'
+    if: always() && needs.translate_retry.result == 'failure'
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       issues: write
     steps:
       - uses: actions/checkout@v5
