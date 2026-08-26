@@ -1749,9 +1749,9 @@
       "sitePath": "scripts/lib/discovery/sources/orphanQuerySource.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "e59259eaa6807f71",
-        "corpus": "e59259eaa6807f71",
-        "alignedAt": "2026-08-09"
+        "site": "a7bf06d3eb603f12",
+        "corpus": "a7bf06d3eb603f12",
+        "alignedAt": "2026-08-26"
       }
     },
     {
