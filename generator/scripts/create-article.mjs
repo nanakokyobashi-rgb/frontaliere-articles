@@ -8567,16 +8567,26 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   //
   //   [prompt-rebracket] section=<s> attempt=<n> budget=<token>
   //   da=<token> a=<token> via=<split|scala> fonte=<n>ch fatti=<n>ch
+  //   viaFallbackUnsat=<0|1>
   const _eseguiRibracket = async (rb, opts) => {
     // Vedi il commento su `_preferDegradataDalRibracket` sopra: da qui in poi,
     // in questo tentativo, nessuna chiamata ricontatta piu' il preferito.
     _preferDegradataDalRibracket = true;
     const scelta = rb.split || rb;
+    // `rb.msgs` e' `null` quando NESSUN gradino della scala rientra nel
+    // nuovo target (`stepFit` rimasto `null` in `_rebracket`): `_msgsUnica`
+    // sotto ricade allora sul gradino PIU' aggressivo, che per lo stesso
+    // motivo NON rispetta il budget dettato dalla flotta. Se lo split
+    // riesce, e' questo `_msgsUnica` fuori budget a diventare `llmMessages`
+    // — e quindi il punto di ripartenza del retry per JSON malformato piu'
+    // sotto. Stesso principio del `unsat=1` sul marker `[prompt-budget]`.
+    const viaFallbackUnsat = rb.msgs ? 0 : 1;
     console.error(
       `  ♻️ [prompt-rebracket] section=${SECTION_NAME} attempt=${generationAttempt} `
       + `budget=${rb.target} da=${_promptEstTokens} a=${scelta.est} `
       + `via=${rb.split ? 'split' : 'scala'} `
-      + `fonte=${scelta.fonteChars}ch fatti=${scelta.fattiChars}ch`,
+      + `fonte=${scelta.fonteChars}ch fatti=${scelta.fattiChars}ch `
+      + `viaFallbackUnsat=${viaFallbackUnsat}`,
     );
     // Il fallback della chiamata unica ridimensionata: il gradino della scala
     // se ce n'e' uno che entra, altrimenti il piu' aggressivo che la scala
