@@ -112,11 +112,15 @@ jobs:
       #
       # Perche' QUI e non in tests.yml, con le due misure che lo decidono:
       #
-      #  1. `tests.yml` gira su `pull_request` e `push: branches-ignore: [main]`.
-      #     Gli articoli atterrano per PUSH DIRETTO su main. MISURATO: gli ultimi
-      #     commit su main che toccano content/blog-body ("Generate blog article")
-      #     hanno 0 PR associate, e delle ultime 30 run di tests.yml NESSUNA e' su
-      #     main. Un gate sulle PR non vedrebbe mai un articolo.
+      #  1. Fino al 2026-08-18 `tests.yml` girava su `pull_request` e
+      #     `push: branches-ignore: [main]`. Gli articoli atterrano per PUSH
+      #     DIRETTO su main. MISURATO allora: gli ultimi commit su main che
+      #     toccano content/blog-body ("Generate blog article") hanno 0 PR
+      #     associate, e delle ultime 30 run di tests.yml NESSUNA era su main —
+      #     un gate sulle PR non vedeva mai un articolo. Il `branches-ignore`
+      #     ora non c'e' piu', ma questo preflight resta dov'e': gira PRIMA
+      #     delle credenziali e ferma la pubblicazione, mentre `tests` su main
+      #     giudica DOPO che il contenuto e' gia' li'.
       #  2. `tests.yml` e' dependency-free per progetto (nessun npm ci, commento
       #     esplicito nel file) e questo controllo ha bisogno di un parser.
       #
@@ -199,10 +203,11 @@ jobs:
       #
       # Fino a qui gli articoli generati non passavano da NESSUNA guardia.
       # Misurato il 2026-08-12: `tests.yml` ha girato 0 volte su `main` nelle
-      # ultime 50 run — ha `push: branches-ignore: [main]` — mentre `main`
+      # ultime 50 run — aveva `push: branches-ignore: [main]` — mentre `main`
       # riceve ~111 commit/giorno, tutti su `content/**`, dal push diretto di
-      # `generate-article.yml`. Le due condizioni si annullano a vicenda: il
-      # gate ignora main, la generazione scrive solo su main.
+      # `generate-article.yml`. Le due condizioni si annullavano a vicenda: il
+      # gate ignorava main, la generazione scrive solo su main. Dal 2026-08-18
+      # `tests.yml` non ha piu' `branches-ignore` (vedi il blocco qui sotto).
       #
       # Il costo di quel buco non e' teorico. Il 2026-08-11 alle 21:42 la
       # generazione ha prodotto un corpo con una legge inventata («LTL 1995»);
@@ -212,13 +217,31 @@ jobs:
       # su `tests` verde. Un singolo articolo su ~14.700 ha fermato il merge di
       # un intero repo.
       #
-      # PERCHE' QUI, e non togliendo `branches-ignore` da `tests.yml`. `tests`
-      # e' il trigger `workflow_run` sia di `pr-review-loop` sia di
-      # `auto-merge-on-lgtm`: 111 completamenti/giorno su main diventerebbero
-      # ~+333 run/giorno, 111 delle quali dispatch a vuoto del reviewer. Questo
-      # workflow invece gira GIA' su ogni push a `content/**` di main — lo step
-      # costa +0 run/giorno, solo i ~5s che le due suite impiegano davvero
-      # (misurato in locale: 4,5s per 71 test sull'intero corpus).
+      # PERCHE' QUI. Questo workflow gira GIA' su ogni push a `content/**` di
+      # main, quindi lo step costa +0 run/giorno — solo i ~5s che le due suite
+      # impiegano davvero (misurato in locale: 4,5s per 71 test sull'intero
+      # corpus). Resta il posto giusto anche ora che `tests.yml` gira su main:
+      # e' l'unico dei due che sta PRIMA della pubblicazione.
+      #
+      # AGGIORNAMENTO 2026-08-18. Questo blocco diceva anche di NON togliere
+      # `branches-ignore` da `tests.yml`, perche' `tests` e' il trigger
+      # `workflow_run` di `pr-review-loop` e `auto-merge-on-lgtm` e 111
+      # completamenti/giorno su main sarebbero diventati ~+333 run/giorno, 111
+      # delle quali dispatch a vuoto del reviewer. Il `branches-ignore` e' stato
+      # tolto lo stesso, per una ragione che allora non era in vista: il rescue
+      # `stuck-red` di `pr-autorebase.mjs` chiede una run di `tests.yml`
+      # `completed`+`success` SU MAIN (`mainTestsRuns()`), e senza quella prova
+      # cinque PR sono rimaste bloccate in uno stato assorbente.
+      #
+      # E la stima di +333 e' stata rimisurata, perche' era la sola obiezione
+      # seria: il reviewer NON parte, il suo job ha gia' l'`if`
+      # `workflow_run.event == 'pull_request'` e una run su main ha evento
+      # `push` — la run di `pr-review-loop` viene creata e il job SALTA, zero
+      # quota Claude. Parte invece `auto-merge-on-lgtm`, il cui `if` guarda
+      # solo `conclusion == 'success'`: ~103 run/giorno da ~20s (mediana
+      # misurata su 40 run), job bounded e senza Claude. Il costo reale e'
+      # quindi ~103 run di `tests` (~45s ciascuna in CI) piu' ~103 di
+      # auto-merge, non +333 con il reviewer dentro.
       #
       # PERCHE' PROPRIO QUESTE DUE SUITE. Sono le uniche del repo che non
       # chiedono dipendenze — `node:test` piu' l'expect-shim locale — quindi
@@ -247,8 +270,9 @@ jobs:
       # nate dopo il buco misurato sopra. article-slug-i18n.test.mjs (#191) e
       # article-source-echo.test.mjs (#202) hanno lo stesso strato 3 — un
       # ratchet/scan sul REGISTRO PUBBLICATO, non sul sorgente del generatore
-      # — e girano SOLO su `tests.yml`/`generator-ci.yml`, entrambi con lo
-      # stesso `branches-ignore: [main]` di prima: un articolo che reintroduce
+      # — e girano SOLO su `tests.yml`/`generator-ci.yml`, che fino al
+      # 2026-08-18 avevano lo stesso `branches-ignore: [main]` di prima
+      # (`generator-ci.yml` ce l'ha ancora): un articolo che reintroduce
       # lo slug italiano o un'eco della fonte pubblica lo stesso, e viene
       # intercettato solo alla PR successiva. Stessa ragione di sopra per il
       # PERCHE' QUI: zero dipendenze npm (solo node:fs/path/url + le due lib
@@ -276,7 +300,8 @@ jobs:
       # gate di quella issue chiude: la stessa pagina di fonte che genera un
       # articolo in ENTRAMBE le sezioni. Il PERCHE' QUI e' quello delle altre:
       # gli articoli generati atterrano con un push diretto su `main`, dove
-      # `tests.yml` non gira (`branches-ignore: [main]`), e i due ledger
+      # fino al 2026-08-18 `tests.yml` non girava (`branches-ignore: [main]`;
+      # ora gira, ma DOPO la pubblicazione, non prima), e i due ledger
       # vengono riscritti dallo STESSO commit che tocca `content/**` — quindi
       # il trigger `paths: content/**` sopra li vede. Un sesto duplicato
       # sarebbe altrimenti intercettato solo alla PR successiva, cioe' dopo la

@@ -27,18 +27,64 @@ name: tests
 # tenerli uguali è ciò che permette allo YAML dei due repo di restare allineato
 # (vedi scripts/ci/loop-sync-manifest.json).
 
+# ── Perché `main` è dentro, dal 2026-08-18 ──────────────────────────────────
+#
+# Fino a oggi qui c'era `push: branches-ignore: [main]`. Sembrava innocuo — i
+# file di codice si toccano solo via PR — e invece spegneva un pezzo del ciclo
+# che non nomina questo workflow via import, quindi nessun guard lo copriva.
+#
+# `pr-autorebase.mjs` ha un rescue `stuck-red` per la PR rossa a causa di un
+# dato di `main` e non per colpa sua. Il suo ramo `red-main`
+# (`scripts/ci/lib/vitestCheck.mjs`, `vitestFailureIsNotAttributableToPr`) chiede
+# UNA prova: che esista una run COMPLETATA e `success` di **questo** workflow sul
+# branch `main`, più recente del rosso della PR. La legge `mainTestsRuns()`
+# (`scripts/ci/pr-autorebase.mjs`) da
+# `actions/workflows/tests.yml/runs?branch=main` — l'endpoint è keyed sul NOME DI
+# QUESTO FILE, quindi nessun workflow affiancato può soddisfarlo.
+#
+# Misurato il 2026-08-18: `total_count = 0` su 849 run. Zero, e per costruzione.
+# Con l'altra uscita del rescue (`stale`, >24h) fuori portata, una PR rossa per
+# un dato di `main` entra in uno stato ASSORBENTE: senza verde non parte
+# `pr-review-loop`, quindi niente `## LGTM` e niente label, quindi nessuno dei
+# segnali `near-merge` — e la classe che esiste apposta per romperlo era spenta.
+# Cinque PR bloccate in un giorno; il log della run 32128625124 lo dice in
+# chiaro: «PR #414 non near-merge (no LGTM/collision-risk/stale-review/stuck-red)
+# — skip.»
+#
+# È la stessa forma di `SiteShellContract`: un file `identical`
+# (`pr-autorebase.mjs`) che dipende dal COMPORTAMENTO di un file `adapted`
+# (questo) senza nominarlo via import. `loop-references-exist.test.mjs` segue le
+# citazioni testuali, non questa — ed è il motivo per cui la dipendenza sta
+# scritta qui, accanto al trigger che la soddisfa.
+#
+# Il gate sul CONTENUTO generato è un'altra cosa e vive altrove
+# (`.github/workflows/content-gates-main.yml`): lì gira il sottoinsieme dei gate
+# che leggono `content/**`, con gli offender in una issue. Questo trigger serve
+# al verdetto su `main`, non alla diagnosi.
 on:
   pull_request:
   push:
-    branches-ignore: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
 
+# `cancel-in-progress` è vero OVUNQUE TRANNE che su `main`, e la differenza è
+# tutta nel consumatore. Su un branch conta solo l'ultimo push. Su `main` conta
+# che una run ARRIVI IN FONDO: `mainTestsRuns()` filtra `status=completed` e
+# `conclusion == success`, e una run cancellata non è né l'uno né l'altro. Con
+# `main` che avanza ogni ~8 minuti per la generazione articoli, cancellare in
+# corso vorrebbe dire tenere `total_count = 0` esattamente come prima, con un
+# trigger in più a far credere il contrario. È la stessa forma del gemello sul
+# sito (`tests-main`, `cancel-in-progress: false`).
+#
+# Con `cancel-in-progress: false` la coda resta comunque limitata: GitHub tiene
+# al più una run in esecuzione e una in attesa per gruppo, e cancella le pending
+# più vecchie. Il repo è pubblico, quindi i minuti sono gratis; il tetto vero è
+# la coda, e questa forma la limita per costruzione.
 concurrency:
-  group: tests-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.ref == 'refs/heads/main' && 'tests-main' || format('tests-{0}', github.ref) }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
 
 jobs:
   tests:
@@ -59,8 +105,38 @@ jobs:
         with:
           node-version: '22'
 
-      # Il glob non è decorazione: `node --test <dir>` su Node 22 collassa la
-      # cartella in UN test fallito invece di scoprire i file (stessa nota di
+      # ── PERCHE' NON E' PIU' LA CARTELLA INTERA ───────────────────────────
+      #
+      # Questo è il check-run che l'auto-merge aspetta prima di mergiare
+      # QUALUNQUE PR. Finché eseguiva tutta la cartella, eseguiva anche i gate
+      # che leggono `content/` — il corpus generato dai bot, che cambia senza
+      # che nessuna PR lo tocchi (~90 push al giorno su `main`).
+      #
+      # Misurato il 2026-08-19: l'articolo `vivere-villa-guardia-lavorare-ticino`
+      # («Villa Guardia» è un comune, «guardia» l'alias del mestiere
+      # `agente-sicurezza`) ha reso rosso `article-topic-coverage-guard` su
+      # `main` e su OGNI branch, e **nessuna PR ha potuto auto-mergiare per sei
+      # ore** — per un dato che nessuna di loro aveva scritto e che nessuna
+      # poteva riparare. Il 2026-08-18 era già successo con sei PR e tre gate
+      # diversi (#410, #413, #414, #416, #417, #418): `gh pr update-branch` le
+      # ha rese verdi 9/9 senza cambiare una riga.
+      #
+      # La copertura non si perde, si sposta dove il segnale è azionabile:
+      # `generator-ci.yml` esegue l'INTERA cartella sulle PR che toccano
+      # `generator/**` (quindi una PR che tocca un gate lo esegue comunque, ed è
+      # un check richiesto dall'auto-merge per quelle PR), e
+      # `content-gates-main.yml` li esegue sui push a `main` aprendo UNA issue
+      # deduplicata invece di rendere rossa una PR che non c'entra.
+      #
+      # Lo script esce !=0 senza stampare niente se la lista collassa: un
+      # `node --test` su una lista vuota passerebbe verde avendo eseguito nulla.
+      #
+      # Il glob non c'è più ma la sua ragione resta: `node --test <dir>` su
+      # Node 22 collassa la cartella in UN test fallito invece di scoprire i
+      # file, quindi si passano i path uno per uno (stessa nota di
       # generator-ci.yml).
-      - name: Unit + closure gates
-        run: node --test 'generator/tests/*.test.mjs'
+      - name: Unit + closure gates (i gate sul contenuto girano altrove)
+        run: |
+          set -euo pipefail
+          files=$(node scripts/ci/list-pr-gate-tests.mjs)
+          node --test $files

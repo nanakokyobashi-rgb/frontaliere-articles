@@ -35,6 +35,7 @@ import { readFileSync } from 'node:fs';
 import { describe, it } from 'node:test';
 import { expect } from './lib/expect-shim.mjs';
 import {
+  assertComuneTitleMatchesSlug,
   assertTopicNotRecentlyCovered,
   cantonThemeTopicKey,
   comuneTopicKey,
@@ -43,6 +44,8 @@ import {
   hasResidenceGuideIntent,
   municipalityNames,
   professionTopicKey,
+  resetTopicCoverageCaches,
+  setMunicipalityIndexForTests,
   topicCoverageKey,
 } from '../scripts/lib/topic-coverage-guard.mjs';
 import {
@@ -50,6 +53,7 @@ import {
   normalizeItWord,
   STOP_WORDS_IT,
 } from '../scripts/lib/it-text-similarity.mjs';
+import { normalizeText } from '../scripts/lib/profession-taxonomy.mjs';
 import { computeAdaptiveEvergreenThresholds } from '../scripts/lib/scoring/constants.mjs';
 
 const corpusUrl = (rel) => new URL(`../../content/${rel}`, import.meta.url);
@@ -631,5 +635,409 @@ describe('nessun falso positivo sulle serie legittime (corpus reale del checkout
     const hit = findRecentTopicCoverage(b, CORPUS, { now: Date.parse(b.date) });
     expect(hit).not.toBe(null);
     expect(hit.value).toBe('piastrellista');
+  });
+});
+
+// ══════════════════════════════════════════════════════════════════════════
+// Il nome di un COMUNE non è una prova che l'articolo parli di un MESTIERE
+// ══════════════════════════════════════════════════════════════════════════
+
+/**
+ * `professionTopicKey` lavora su un SACCHETTO di stem: decide se un alias
+ * compare, non DOVE. Quindi non può accorgersi che il token che l'ha convinta
+ * stava dentro un toponimo — ed è la stessa cecità che
+ * `AMBIGUOUS_COMUNE_TOKENS` cura nella direzione opposta.
+ *
+ * IL CASO REALE. `vivere-villa-guardia-lavorare-ticino`, «Villa Guardia:
+ * vivere e lavorare come frontaliere», pubblicato il 2026-08-19T07:27Z.
+ * «lavorare come» accende l'intento-mestiere e «guardia» — metà del nome di un
+ * comune della provincia di Como — risolve sull'alias di `agente-sicurezza`.
+ * L'articolo usciva `profession-guide:agente-sicurezza`: il gate avrebbe
+ * potuto rifiutare una futura guida legittima sulle guardie giurate perché
+ * «già coperta» da una guida su un paese, e non avrebbe protetto Villa Guardia
+ * da un doppione. Ha reso ROSSO questo file su OGNI branch, main compreso, e
+ * con esso ha bloccato la coda di merge del repo.
+ *
+ * PERCHÉ SONO TRE CASI E NON UNO. Il criterio è causale, non lessicale: si
+ * toglie il nome del comune e si richiede la chiave. Un test sul solo caso
+ * rotto passerebbe anche con la regola sbagliata «se c'è un comune, non è mai
+ * un mestiere», che cancellerebbe le guide-mestiere ambientate in un comune.
+ * Il secondo e il terzo caso sono quelli che quella regola ucciderebbe.
+ */
+describe('il nome di un comune non prova un mestiere', () => {
+  const VILLA_GUARDIA_RESIDENZA = {
+    id: 'vivere-villa-guardia-lavorare-ticino',
+    title: 'Villa Guardia: vivere e lavorare come frontaliere',
+  };
+  const GUARDIA_A_VILLA_GUARDIA = {
+    id: 'guardia-giurata-villa-guardia-stipendio',
+    title: 'Fare la guardia giurata a Villa Guardia: stipendio e requisiti',
+  };
+  const GUARDIA_SENZA_COMUNE = {
+    id: 'lavoro-guardia-giurata-ticino-frontaliere',
+    title: 'Lavorare come guardia giurata in Ticino: guida per frontalieri',
+  };
+
+  it('l\'unica prova è il toponimo → non è una guida-mestiere', () => {
+    expect(topicCoverageKey(VILLA_GUARDIA_RESIDENZA)?.kind).not.toBe('profession-guide');
+  });
+
+  it('il mestiere ha prove PROPRIE → resta una guida-mestiere anche col comune', () => {
+    // La riga che impedisce l'ipercorrezione: togliere «villa guardia» lascia
+    // «fare la guardia giurata a», e quella prova sopravvive.
+    expect(keyOf(GUARDIA_A_VILLA_GUARDIA)).toBe('profession-guide:agente-sicurezza');
+  });
+
+  it('senza nessun comune nel testo, niente cambia', () => {
+    expect(keyOf(GUARDIA_SENZA_COMUNE)).toBe('profession-guide:agente-sicurezza');
+  });
+
+  it('il nome va tolto in TUTTE le sue occorrenze, non solo nella prima', () => {
+    // Il testo di decisione è `${title} ${id}`, e l'id ripete quasi sempre
+    // ciò che il titolo dice: qui «villa guardia» compare DUE volte. La prima
+    // stesura ne toglieva una sola, e l'altra bastava a far sopravvivere la
+    // chiave-mestiere — misurato: zero articoli cambiati su 4.498, cioè una
+    // fix che non riparava niente restando verde su ogni test a caso singolo.
+    const text = `${VILLA_GUARDIA_RESIDENZA.title} ${VILLA_GUARDIA_RESIDENZA.id.replace(/-/g, ' ')}`;
+    expect((text.toLowerCase().match(/villa guardia/g) || []).length).toBe(2);
+  });
+
+  it('nel corpus reale la regola tocca UN articolo, non una classe', () => {
+    // Il valore della fix è che sia chirurgica: se una modifica futura la
+    // allargasse, questo conteggio lo direbbe prima della produzione.
+    const persi = CORPUS.filter((a) => {
+      const k = topicCoverageKey(a);
+      return k?.kind === 'profession-guide' && /^(trasferirsi-a-|vivere-)/.test(a.id);
+    });
+    expect(persi).toEqual([]);
+  });
+});
+
+/**
+ * LE CINQUE FORME CHE LA PREPOSIZIONE OBBLIGATORIA LASCIAVA FUORI (2026-08-20).
+ *
+ * `RESIDENCE_INTENT_RE` chiedeva `vivere a ` o `vivere in `, con lo spazio.
+ * Il testo di decisione è `${title} ${id-con-trattini-come-spazi}`, e gli slug
+ * del pool comune la preposizione non ce l'hanno: cinque comuni restavano
+ * senza chiave, quindi senza protezione dai doppioni — e due doppioni sono
+ * infatti usciti, lo stesso giorno, sullo stesso comune.
+ *
+ * I casi sono presi dal corpus pubblicato, non inventati: ognuno è una forma
+ * DIVERSA di ciò che sfuggiva (slug senza preposizione, `d` eufonica nel
+ * titolo, «vivere e lavorare»), perché un test su una sola forma passerebbe
+ * anche con una toppa che cura solo quella.
+ */
+describe('intento residenza: la preposizione non è obbligatoria', () => {
+  const REALI = [
+    ['vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere', 'tovo-di-sant-agata',
+      'slug senza preposizione, titolo che non parla del comune'],
+    ['vivere-courmayeur-e-lavorare-vallese-da-frontaliere', 'courmayeur',
+      'slug senza preposizione'],
+    ['vivere-valpelline-lavorare-vallese', 'valpelline',
+      'slug senza preposizione né congiunzione'],
+    ['vivere-villa-guardia-lavorare-ticino', 'villa-guardia',
+      'comune di due parole, «vivere e lavorare» nel titolo'],
+    ['vivere-masciago-primo-lavorare-ticino', 'masciago-primo',
+      'comune di due parole'],
+  ];
+
+  for (const [id, comune, perche] of REALI) {
+    it(`${comune} prende la chiave (${perche})`, () => {
+      // Solo lo slug: è la metà che il generatore produce sempre uguale, ed è
+      // quella su cui la vecchia regex falliva. Il titolo non deve servire.
+      expect(comuneTopicKey(id.replace(/-/g, ' '))).toBe(comune);
+    });
+  }
+
+  it('«vivere e lavorare» da solo esprime intento residenza', () => {
+    expect(hasResidenceGuideIntent('Villa Guardia: vivere e lavorare come frontaliere')).toBe(true);
+  });
+
+  it('la «d» eufonica non fa perdere l\'intento', () => {
+    expect(hasResidenceGuideIntent('Vivere ad Albese con Cassano e lavorare in Ticino')).toBe(true);
+  });
+
+  it('l\'intento non si accende come SUFFISSO di un\'altra parola', () => {
+    // «sopravvivere»/«convivere» contengono «vivere», e senza `\\b` bastavano a
+    // marcare un articolo che nomina un comune: `comune-guide:besano` su
+    // «Sopravvivere a Besano con 2.000 franchi». Nessuna occorrenza nel corpus
+    // di oggi — è un rischio sugli articoli futuri, chiuso a costo zero.
+    // Sulla CHIAVE, non su `comuneTopicKey`: quest'ultima risponde «besano» a
+    // qualunque testo che nomini il comune, ed è `topicCoverageKey` a esigere
+    // in AND l'intento. È quella la funzione che decide se un articolo è
+    // coperto, quindi è lì che il falso positivo si vedrebbe.
+    expect(hasResidenceGuideIntent('Sopravvivere a Besano con 2000 franchi')).toBe(false);
+    expect(hasResidenceGuideIntent('Convivere a Besano: la guida')).toBe(false);
+    expect(topicCoverageKey({
+      id: 'sopravvivere-besano-2000-franchi',
+      title: 'Sopravvivere a Besano con 2000 franchi',
+    })?.kind).not.toBe('comune-guide');
+    // …e la forma legittima continua a passare, intento e chiave.
+    expect(hasResidenceGuideIntent('Vivere a Besano e lavorare in Ticino')).toBe(true);
+    expect(keyOf({
+      id: 'vivere-besano-lavorare-ticino',
+      title: 'Vivere a Besano e lavorare in Ticino',
+    })).toBe('comune-guide:besano');
+  });
+
+  it('«vivere» da solo NON basta: serve anche il comune', () => {
+    // La congiunzione è ciò che tiene i falsi positivi a zero: allargare
+    // l'intento non allarga la chiave se non c'è un nome di comune.
+    expect(comuneTopicKey('vivere con 2000 euro al mese da frontaliere')).toBe(null);
+    expect(comuneTopicKey('costo della vita in Svizzera: vivere bene con uno stipendio medio')).toBe(null);
+  });
+});
+
+/**
+ * #551 — stesso anti-pattern di `RESIDENCE_INTENT_RE` (#530), mai corretto in
+ * `GUIDE_INTENT_RE` e `CANTON_GUIDE_INTENT_RE` nonostante 15+ review sulla PR
+ * #530: senza `\b` davanti al gruppo, ogni alternativa matcha anche come
+ * SUFFISSO di una parola più lunga. Misurato sul corpus intero (4.742
+ * articoli): 403 marcati e 187/210 coppie (finestra 7/90 giorni) PRIMA e DOPO
+ * — zero articoli spostati, stesso costo-zero di #530.
+ */
+describe('intento guida-mestiere e guida-cantone: non si accendono come SUFFISSO (#551)', () => {
+  it('GUIDE_INTENT_RE non matcha "diventare"/"requisit" come suffisso', () => {
+    expect(hasProfessionGuideIntent('ridiventare celebre')).toBe(false);
+    expect(hasProfessionGuideIntent('prerequisiti per il visto')).toBe(false);
+    // …e la forma legittima continua a passare.
+    expect(hasProfessionGuideIntent('diventare medico')).toBe(true);
+    expect(hasProfessionGuideIntent('requisiti per il visto')).toBe(true);
+  });
+
+  it('CANTON_GUIDE_INTENT_RE non matcha "vantaggi" come suffisso', () => {
+    expect(cantonThemeTopicKey('svantaggi premi cassa malati nel cantone Zurigo')).toBe(null);
+    // …e la forma legittima continua a passare, stessa chiave del gemello.
+    expect(cantonThemeTopicKey('vantaggi premi cassa malati nel cantone Zurigo')).toBe('lamal-premi:zurigo');
+  });
+});
+
+/**
+ * `comuneMatch` (interna a `comuneTopicKey`) sceglie il candidato più lungo
+ * fra due nomi che condividono la prima parola normalizzata — «Tronzano»
+ * contro «Tronzano Lago Maggiore». La selezione confrontava `n` (parole del
+ * candidato in esame) con `best.length`, campo che l'oggetto `best` non ha
+ * mai avuto (ha `value`/`start`/`words`): dopo il primo match `best.length`
+ * è `undefined`, quindi `n > undefined` è sempre falso e vince il PRIMO nome
+ * incontrato scandendo il testo, non il più lungo. Il dataset ha 14 gruppi di
+ * comuni che condividono la prima parola normalizzata (`san` → 6, `villa` →
+ * 3, `saint` → 8, ecc.), quindi qualunque testo che nomini due comuni dello
+ * stesso gruppo nell'ordine sbagliato prendeva lo slug corto.
+ */
+describe('comuneTopicKey — il nome più lungo vince anche su gruppi ambigui', () => {
+  it('due comuni "san …" nel testo: vince il più lungo, non il primo incontrato', () => {
+    expect(comuneTopicKey('guida a San Siro poi parliamo di San Bartolomeo Val Cavargna'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('stesso caso in ordine inverso: il risultato non dipende dall\'ordine nel testo', () => {
+    expect(comuneTopicKey('guida a San Bartolomeo Val Cavargna poi parliamo di San Siro'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 1: a PARITÀ di lunghezza (non solo quando un
+ * nome è più lungo dell'altro) il confronto stretto `n > best.words.length`
+ * non fa mai scattare un secondo candidato della stessa lunghezza, quindi
+ * vince il primo incontrato scandendo il testo. Non era un bug di
+ * correttezza — è deterministico anche prima di questo fix, dato un testo
+ * fisso — ma il criterio era implicito nell'ordine di scansione e non
+ * dichiarato né testato. `San Bartolomeo Val Cavargna`, `San Fermo della
+ * Battaglia` e `San Nazzaro Val Cavargna` sono i tre comuni da 4 parole del
+ * gruppo `san` in `data/municipalities.ts`: un testo che ne nomina due prende
+ * sempre quello scritto per primo, qualunque coppia si scelga.
+ */
+describe('comuneTopicKey — pareggio di lunghezza: vince il primo nel testo, non l\'ordine del file', () => {
+  it('Bartolomeo prima di Fermo → vince Bartolomeo', () => {
+    expect(comuneTopicKey('guida a San Bartolomeo Val Cavargna poi parliamo di San Fermo della Battaglia'))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('Fermo prima di Bartolomeo → vince Fermo (l\'ordine nel testo comanda, non l\'ordine nel file)', () => {
+    expect(comuneTopicKey('guida a San Fermo della Battaglia poi parliamo di San Bartolomeo Val Cavargna'))
+      .toBe('san-fermo-della-battaglia');
+  });
+
+  it('Nazzaro prima di Fermo → vince Nazzaro', () => {
+    expect(comuneTopicKey('San Nazzaro Val Cavargna e poi San Fermo della Battaglia'))
+      .toBe('san-nazzaro-val-cavargna');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 2: `professionEvidenceIsOnlyAComuneName`
+ * chiamava `comuneMatch` (un solo match, il più lungo) e toglieva dal testo
+ * solo QUELLA sequenza. Se un testo nomina DUE comuni e l'evidenza del
+ * mestiere sta nel nome del comune più CORTO (non quello scelto come
+ * "migliore"), la vecchia versione toglieva il comune sbagliato: la sequenza
+ * che fa vincere la chiave-mestiere sopravviveva, e la guardia non scattava.
+ *
+ * Qui `San Bartolomeo Val Cavargna` (4 parole) è il comune più lungo — vince
+ * `comuneMatch` — mentre l'unica prova del mestiere `agente-sicurezza` sta in
+ * `Villa Guardia` (2 parole, alias `guardia`). Verificato contro il codice
+ * pre-fix (`origin/main`): restituiva `profession-guide:agente-sicurezza`.
+ */
+describe('professionEvidenceIsOnlyAComuneName — prova ogni comune trovato, non solo il più lungo', () => {
+  const TESTO = {
+    id: 'san-bartolomeo-val-cavargna-villa-guardia-stipendio-requisiti',
+    title: 'San Bartolomeo Val Cavargna: Villa Guardia, stipendio e requisiti',
+  };
+
+  it('il comune più lungo vince la chiave-comune (non è quello con la prova-mestiere)', () => {
+    expect(comuneTopicKey(`${TESTO.title} ${TESTO.id.replace(/-/g, ' ')}`))
+      .toBe('san-bartolomeo-val-cavargna');
+  });
+
+  it('l\'evidenza-mestiere sta SOLO nel comune più corto → non è una guida-mestiere', () => {
+    expect(topicCoverageKey(TESTO)?.kind).not.toBe('profession-guide');
+  });
+});
+
+/**
+ * follow-up(#492) → #504 rischio 3: `normalizeText` (profession-taxonomy.mjs)
+ * indicizza i comuni in `municipalityIndex()` E normalizza il testo articolo
+ * in `comuneMatch` — stessa funzione, entrambi i lati. Non verificato prima
+ * d'ora con un test mirato su un nome che unisce ENTRAMBI i casi che una
+ * normalizzazione divergente romperebbe in silenzio: un accento (`é`) e un
+ * trattino come separatore di parola. `Saint-Rhémy-En-Bosses`
+ * (`data/municipalities.ts`) è il comune reale che li unisce entrambi.
+ */
+describe('normalizeText — consistenza accenti/trattino fra indice comuni e testo articolo', () => {
+  it('accento e trattino normalizzano allo stesso modo sui due lati della stessa funzione', () => {
+    expect(normalizeText('Saint-Rhémy-En-Bosses')).toBe('saint rhemy en bosses');
+  });
+
+  it('il match sul testo articolo trova il comune scritto con accento e trattino', () => {
+    expect(comuneTopicKey('Vivere a Saint-Rhémy-En-Bosses e lavorare in Vallese'))
+      .toBe('saint-rhemy-en-bosses');
+  });
+
+  it('e trova lo stesso comune anche senza accento né trattino (slug del generatore)', () => {
+    expect(comuneTopicKey('vivere saint rhemy en bosses lavorare vallese'))
+      .toBe('saint-rhemy-en-bosses');
+  });
+});
+
+/**
+ * #527 — titolo scollegato dallo slug sulla serie comune-guide. I quattro casi
+ * sotto sono verbatim dal corpus (2026-08-11/19), misurati nella issue: due
+ * dove il titolo non nomina alcun comune, due imprecisioni di nome (un comune
+ * di due parole citato monco nel titolo, e uno slug che perde una parola che
+ * il titolo invece ha per intero).
+ */
+const dataWithTitle = (id, title) => ({ id, content: { it: { title } } });
+
+describe('assertComuneTitleMatchesSlug — i 4 casi reali di #527 (2026-08-11/19)', () => {
+  it('BLOCCA quando il titolo non nomina alcun comune (Tovo di Sant\'Agata)', () => {
+    const data = dataWithTitle(
+      'vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere',
+      'Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando il titolo non nomina alcun comune (Valpelline)', () => {
+    const data = dataWithTitle(
+      'vivere-valpelline-lavorare-vallese',
+      'Frontaliere in Vallese: regole e fiscalità',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando il titolo nomina il comune con precisione diversa (Venegono Superiore)', () => {
+    const data = dataWithTitle(
+      'vivere-venegono-superiore-lavorare-ticino-frontaliere',
+      'Vivere a Venegono e lavorare in Ticino: guida fiscale 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('BLOCCA quando lo slug perde una parola che il titolo invece ha (Villa di Chiavenna)', () => {
+    const data = dataWithTitle(
+      'trasferirsi-villa-chiavenna-frontaliere',
+      'Trasferirsi a Villa di Chiavenna da frontaliere: guida utile',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('l\'errore riporta sia lo slug sia il titolo, per essere leggibile senza rileggere il codice', () => {
+    const data = dataWithTitle(
+      'vivere-valpelline-lavorare-vallese',
+      'Frontaliere in Vallese: regole e fiscalità',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow(/valpelline/);
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — non blocca quando titolo e slug concordano', () => {
+  it('PASSA quando il titolo nomina lo stesso comune dello slug', () => {
+    const data = dataWithTitle(
+      'vivere-besano-lavorare-ticino',
+      'Vivere a Besano e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+
+  it('PASSA quando lo slug non nomina alcun comune (nessuna chiave da difendere)', () => {
+    const data = dataWithTitle(
+      'trasferirsi-in-svizzera-guida-generale-frontaliere',
+      'Trasferirsi in Svizzera: guida generale per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — immune fuori dalla serie vivere-/trasferirsi-', () => {
+  it('PASSA su una cronaca il cui slug cita un capoluogo che il titolo giustamente non ripete', () => {
+    // Rumore misurato sul corpus intero (53/489): il gate è ristretto alla
+    // serie perché fuori da essa lo slug non è un template che promette il
+    // comune nel titolo.
+    const data = dataWithTitle(
+      'economia-varese-2024-imposte',
+      'Nuove regole fiscali per i frontalieri: cosa cambia nel 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — fail-closed su indice comuni vuoto o troncato (#553)', () => {
+  it('BLOCCA (non ignora silenziosamente) quando municipalityIndex() è vuoto', () => {
+    setMunicipalityIndexForTests(new Map());
+    try {
+      const data = dataWithTitle(
+        'vivere-besano-lavorare-ticino',
+        'Vivere a Besano e lavorare in Ticino: guida per frontalieri',
+      );
+      expect(() => assertComuneTitleMatchesSlug(data)).toThrow(/INDICE COMUNI/);
+    } finally {
+      resetTopicCoverageCaches();
+    }
+  });
+});
+
+describe('assertComuneTitleMatchesSlug — copre i verbi di intento oltre vivere-/trasferirsi- (#553)', () => {
+  it('BLOCCA su slug abitare- quando il titolo nomina un comune diverso', () => {
+    const data = dataWithTitle(
+      'abitare-besano-lavorare-ticino',
+      'Vivere a Mendrisio e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
+  });
+
+  it('PASSA su slug abitare- quando il titolo nomina lo stesso comune', () => {
+    const data = dataWithTitle(
+      'abitare-besano-lavorare-ticino',
+      'Abitare a Besano e lavorare in Ticino: guida per frontalieri',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).not.toThrow();
+  });
+
+  it('BLOCCA su slug risiedere- quando il titolo non nomina alcun comune', () => {
+    const data = dataWithTitle(
+      'risiedere-besano-lavorare-ticino',
+      'Frontalieri Ticino: cosa cambia con il Nuovo Accordo 2024',
+    );
+    expect(() => assertComuneTitleMatchesSlug(data)).toThrow();
   });
 });

@@ -98,18 +98,24 @@ export function parseIgnoreList(raw) {
 const IGNORE = parseIgnoreList(process.env.IGNORE_WORKFLOWS);
 
 /**
- * Workflow che dichiarano SIA `push: branches-ignore: [main]` SIA
- * `pull_request` sugli stessi path — i gate pre-merge (`tests.yml`,
- * `generator-ci.yml`). Per questi la run innescata da un push su un branch
- * non-main è solo un'anteprima: quando (e se) la PR si apre, `pull_request`
- * rigira la stessa suite e quel segnale è già escluso sotto, per lo stesso
- * motivo — "un tests rosso su una PR è un problema della PR, lo vede il
- * reviewer lì". Vale identico per il push che la precede: un checkpoint WIP
- * del fixer autonomo è per contratto non testato al momento del push
- * (ISSUES.md § "Checkpoint WIP"), e un branch di sviluppo abbandonato prima
- * di aprire PR non ha nessuno che legga la issue. Senza questo filtro
- * entrambi i casi aprono una "Workflow Failure" fantasma — misurato: #112,
- * #135, #178, tutte push su branch mai (ancora) diventati PR.
+ * I gate pre-merge (`tests.yml`, `generator-ci.yml`): dichiarano SIA `pull_request`
+ * SIA `push` sugli stessi path.
+ *
+ * Un push su un branch non-main è solo un'anteprima: quando (e se) la PR si
+ * apre, `pull_request` rigira la stessa suite e quel segnale è già coperto
+ * sotto, per lo stesso motivo — "un tests rosso su una PR è un problema della
+ * PR, lo vede il reviewer lì". Vale identico per il push che la precede: un
+ * checkpoint WIP del fixer autonomo è per contratto non testato al momento
+ * del push (ISSUES.md § "Checkpoint WIP"), e un branch di sviluppo
+ * abbandonato prima di aprire PR non ha nessuno che legga la issue. Senza
+ * questo filtro entrambi i casi aprono una "Workflow Failure" fantasma —
+ * misurato: #112, #135, #178, tutte push su branch mai (ancora) diventati PR.
+ *
+ * Su `main` non vale nessuna delle due ragioni: da quando `tests.yml` ha
+ * perso `branches-ignore: [main]` (#424) la suite gira davvero sui push
+ * diretti fatti dai produttori di articoli, e lì non c'è nessuna PR e nessun
+ * reviewer — un rosso resterebbe silenzioso per sempre (#476). Il filtro
+ * quindi esclude il push dei gate pre-merge SOLO fuori da `main`.
  *
  * Non generalizzare oltre questi due nomi: gli altri workflow con `push` (i
  * self-test di generazione, es. `batch-faq-articles.yml`) non hanno un
@@ -139,10 +145,49 @@ export function isReportableRun(r, { since, ignore = IGNORE } = {}) {
   return (
     r.conclusion === 'failure' &&
     r.event !== 'pull_request' &&
-    !(r.event === 'push' && PR_GATE_WORKFLOWS.has(r.workflowName)) &&
+    !(r.event === 'push' && PR_GATE_WORKFLOWS.has(r.workflowName) && r.headBranch !== 'main') &&
     (!since || (r.updatedAt || r.createdAt) >= since) &&
     !ignore.has(r.workflowName)
   );
+}
+
+/**
+ * Step di skip DICHIARATI: rossi voluti, non guasti (issue #170).
+ *
+ * `post-merge-followup.yml` esce 1 quando la quota Claude e' esaurita, e lo fa
+ * di proposito: il watermark avanza solo sulle run di SUCCESSO, quindi uscire
+ * verdi li' farebbe scorrere la finestra e perderebbe per sempre il batch di PR
+ * non triagiate. Il rosso e' il meccanismo che tiene il watermark indietro — lo
+ * step lo dice per esteso nel proprio messaggio ("La prossima run schedulata
+ * (<=3h) ri-copre l'intera finestra, nessuna PR persa").
+ *
+ * Ma questo scanner lo leggeva come qualunque altro rosso e apriva una
+ * "Workflow Failure". Poiche' una finestra di quota dura ore e il cron gira ogni
+ * ~3h, la stessa issue veniva ri-citata a ogni giro finche'
+ * `close-recovered-failure-issues.mjs` la promuoveva a `priority:high` +
+ * `needs-human` per RICORRENZA — cioe' esattamente per il fatto di funzionare.
+ * E' il caso di #170: aperta il 2026-08-10, ancora accesa il 2026-08-25 con due
+ * fallimenti su dieci run recenti, entrambi lo skip di quota.
+ *
+ * Il filtro e' volutamente NARROW: agisce sul NOME dello step, non sul workflow,
+ * e solo se OGNI job fallito della run e' fermo su uno step di skip dichiarato.
+ * Un guasto vero nello stesso workflow (la chiamata Claude che muore, il collect
+ * che esplode) fallisce su uno step con un altro nome e resta segnalato.
+ */
+export const DECLARED_SKIP_STEP_RE = /skip on exhausted quota/i;
+
+/**
+ * La run e' rossa SOLO per uno skip dichiarato?
+ *
+ * `jobs` ha la forma prodotta da `failedJobs()`: `{ name, url, step }`, dove
+ * `step` e' il PRIMO step fallito del job (o `null`/assente se l'API non lo
+ * riporta). Un elenco vuoto o uno step ignoto NON e' uno skip dichiarato: in
+ * dubbio si segnala, perche' il costo di una issue di troppo e' un triage, il
+ * costo di una in meno e' un guasto silenzioso.
+ */
+export function isDeclaredSkipOnly(jobs) {
+  if (!Array.isArray(jobs) || jobs.length === 0) return false;
+  return jobs.every((j) => typeof j?.step === 'string' && DECLARED_SKIP_STEP_RE.test(j.step));
 }
 
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
@@ -491,6 +536,17 @@ async function main() {
     }
 
     const jobs = failedJobs(run.databaseId);
+
+    // Rosso VOLUTO (issue #170): la run e' ferma su uno step di skip dichiarato,
+    // non su un guasto. Segnalarla apre una "Workflow Failure" che nessun fix
+    // puo' chiudere — il rosso torna alla finestra di quota successiva — e la
+    // ricorrenza la fa escalare a `needs-human`. Si salta PRIMA della dedup e
+    // prima del rilevatore ricco: non c'e' niente da arricchire.
+    if (isDeclaredSkipOnly(jobs)) {
+      console.log(`[scan-failed-runs] ${name}: run ${run.databaseId} rossa solo per skip dichiarato (${jobs.map((j) => j.step).join(', ')}) → nessuna issue.`);
+      continue;
+    }
+
     const jobLines = jobs.length
       ? jobs.map((j) => `- \`${j.name}\`${j.step ? ` — step fallito: \`${j.step}\`` : ''}\n  ${j.url}`).join('\n')
       : '_(nessun job fallito riportato dall\'API — possibile fallimento a livello di run)_';

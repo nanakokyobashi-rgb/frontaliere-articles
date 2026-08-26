@@ -81,7 +81,11 @@
   "https://www.rsi.ch/s/3949338": "bernaribadisiposizionereferendumfacoltativo",
   "https://www.varesenews.it/2026/08/amazon-non-si-presenta-in-prefettura-e-questione-di-policy-aziendale/2656564": "amazon-malpensa-montichiari-2026",
   "https://www.varesenews.it/2026/08/il-m5s-provinciale-contro-lo-spostamento-di-amazon-da-malpensa-salvaguardare-i-quasi-200-posti-di-lavoro/2656393": "malpensa-m5s-contre-spostamento-amazon",
-  "stats-bfs://2026-q2": "frontaliere-ticino-statistica-2026-q2",
+  "stats-bfs://2026-q2": {
+    "articleId": "frontalieri-ticino-crescita-q2-2026",
+    "ts": "2026-08-19T20:24:11.490Z",
+    "keyForm": 2
+  },
   "https://www.laregione.ch/cantone/bellinzonese/1943428/votazione-sulla-fortezza-costituito-il-comitato-civico-favorevole": "votazione-sulla-fortezza-2024",
   "https://www.tio.ch/svizzera/economia/1943379/ue-imballaggi-regole-microimprese-spedizioni": "frontaliereticino-chiasso-2026",
   "https://www.varesenews.it/2026/08/di-chi-e-quel-pallet-la-domanda-che-apre-una-zona-dombra-nella-logistica/2656255": "logistica-pallet-analisi-mercato",
@@ -114,5 +118,92 @@
   "https://www.varesenews.it/2026/08/cade-per-dieci-metri-mentre-lavora-in-alpeggio-grave-un-27enne-italiano-in-vallemaggia/2656195": "incidente-alpeggio-vallemaggia-2026",
   "https://www.varesenews.it/2026/08/imballaggi-realizzati-con-il-micelio-listituto-keynes-di-gazzada-premiato-in-europa-per-impresa-azione/2656084": "istituto-keynes-gazzada-micelio-imballaggi",
   "https://www.varesenews.it/2026/08/conclusi-i-lavori-al-rio-dei-gioghi-a-cantello-il-sentiero-riaprira-al-pubblico-dopo-lestate/2656117": "cantello-rio-dei-gioghi-sentiero-riapertura",
-  "https://www.varesenews.it/2026/08/settemila-pigne-e-due-anni-di-lavoro-i-ragazzi-e-le-ragazze-di-iris-gallarate-colorano-una-via-per-la-festa-di-san-tito-a-casorate/2655085": "casorate-sempione-pigne-san-tito"
+  "https://www.varesenews.it/2026/08/settemila-pigne-e-due-anni-di-lavoro-i-ragazzi-e-le-ragazze-di-iris-gallarate-colorano-una-via-per-la-festa-di-san-tito-a-casorate/2655085": "casorate-sempione-pigne-san-tito",
+  "https://www.varesenews.it/2026/08/turismo-internazionale-litalia-consolida-il-surplus-a-maggio-avanzo-di-27-miliardi/2657914": "turismo-internazionale-italia-2026",
+  "https://www.ocst.ch/il-sindacato/piu-di-cento-anni-di-storia": "storia-sindacale-ticino-ocst",
+  "https://www.rsi.ch/info/economia/economia-svizzera-in-gran-recupero-nel-secondo-trimestre--3986376.html": "pil-svizzera-crescita-secondo-trimestre",
+  "https://www.varesenoi.it/2026/08/14/leggi-notizia/argomenti/economia-13/articolo/i-frontalieri-italiani-in-canton-ticino-sono-in-calo.html": "frontalieri-italiani-canton-ticino-calano",
+  "https://www.laregione.ch/cantone/luganese/1943933/infortunio-sul-lavoro-a-miglieglia-gravi-le-condizioni-dell-uomo-caduto-nel-dirupo": "infortunio-lavoro-miglieglia",
+  "https://www.laregione.ch/cantone/mendrisiotto/1943904/ancora-in-calo-i-soggiorni-irregolari-alla-frontiera-sud": "calo-soggiorni-irregolari-luglio",
+  "https://www.laregione.ch/cantone/luganese/1943896/atterra-ad-agno-con-un-bagaglio-carico-di-borse-griffate-false-e-abiti-non-dichiarati": "frontalieri-contraffazioni-svizzera",
+  "https://www.varesenews.it/2026/08/tra-sesto-calende-e-castelletto-ticino-si-e-rinnovato-il-gemellaggio-dellassunta/2658226": "rinnovato-gemellaggio-assunta-ticino",
+  "https://www.varesenews.it/2026/08/controlli-in-tre-locali-di-busto-arsizio-e-gallarate-irregolarita-su-igiene-lavoro-e-sicurezza/2658181": "controlli-locali-busto-arsizio-gallarate",
+  "https://www.laregione.ch/cantone/ticino/1944053/assunzione-di-maria-de-raemy-da-carona-invita-a-essere-caritatevoli": "assunzione-maria-2023-ticino",
+  "https://www.tio.ch/svizzera/economia/1943875/burro-svizzero-venduto-all-estero-a-prezzi-stracciati-persi-27-milioni": "burro-svizzero-esportazioni-perdite",
+  "https://www.rsi.ch/s/3990051": "semafori-grigioni-traffico-parassitario",
+  "https://www.rsi.ch/s/3992937": "salari-difficili-discussioni",
+  "https://www.varesenoi.it/2026/08/17/leggi-notizia/argomenti/economia-13/articolo/come-va-leconomia-di-confine-con-il-canton-ticino-regge-ma-ci-sono-fragilita.html": "come-va-leconomia-di-confine-con-il-canton-ticino",
+  "https://www.tio.ch/svizzera/economia/1944375/pernottamenti-ripresa-luglio-aumento-mercato": "pernottamenti-alberghieri-a-luglio",
+  "https://www.varesenews.it/2026/08/a-saronno-fumo-e-odore-di-bruciato-al-supermercato-evacuati-clienti-e-personale/2658652": "saronno-supermercato-evacuati",
+  "https://www.laregione.ch/cantone/ticino/1944464/la-concorrenza-interna-mobilitera-gli-elettori": "concorsa-interna-ticino",
+  "https://www.ticinonews.ch/ticino/rsi-e-molestie-sul-lavoro-il-governo-deve-prevenire-non-soltanto-reagire-440830": "rsi-molestie-lavoro-governo-prevenzione",
+  "https://www.ticinonews.ch/ticino/lugano-primo-passo-verso-la-mobilita-del-futuro-440831": "lugano-mobilita-del-futuro",
+  "https://www.varesenews.it/2026/08/uil-infortuni-sul-lavoro-a-varese-7-morti-in-6-mesi/2658733": "infortuni-lavoro-varese-uil-2026",
+  "https://www.varesenews.it/2026/08/controlli-di-ferragosto-della-guardia-di-finanza-9-lavoratori-irregolari-e-sospensione-per-due-attivita/2658979": "controlli-lavoratori-irregolari-ticino",
+  "https://www.varesenews.it/2026/08/ecco-le-imprese-che-pagano-piu-imposte-nel-varesotto/2659201": "economia-varese-2024-imposte",
+  "https://www.tio.ch/svizzera/economia/1944568/migros-delica-werner-nuovo-direttore-moritz": "migros-delica-nuovo-direttore-2027",
+  "https://www.varesenoi.it/2026/08/18/leggi-notizia/argomenti/cronaca-20/articolo/cade-dal-ponte-della-ferrovia-a-besnate-in-gravi-condizioni-una-donna-di-68-anni.html": {
+    "articleId": "besnate-ponte-ferrovia-incidente",
+    "ts": "2026-08-18T11:37:53.323Z"
+  },
+  "https://www.rsi.ch/s/3996558": {
+    "articleId": "posta-riduce-tagli-informatica",
+    "ts": "2026-08-19T10:37:20.549Z",
+    "keyForm": 2
+  },
+  "https://www.laregione.ch/cantone/ticino/1944420/bene-il-telelavoro-ma-diminuire-postazioni-superfici-e-spese-immobiliari": {
+    "articleId": "bene-telelavoro-ticino",
+    "ts": "2026-08-20T02:07:20.567Z",
+    "keyForm": 2
+  },
+  "https://www.fiscoetasse.com/approfondimenti/17386-lavoratori-frontalieri-le-novita-del-2026-tra-protocollo-di-modifica-it-ch.html": {
+    "articleId": "novita-frontalieri-legge-217-2025",
+    "ts": "2026-08-20T09:20:04.022Z",
+    "keyForm": 2
+  },
+  "https://www.fiscoetasse.com/approfondimenti/17386-frontaliere-svizzeri-scambio-automatico-dati.html": {
+    "articleId": "frontaliere-svizzera-dati",
+    "ts": "2026-08-20T12:14:10.606Z",
+    "keyForm": 2
+  },
+  "https://www.cdt.ch/news/una-13esima-anche-per-la-cassa-pensione-437142": {
+    "articleId": "svizzera-una-13esima-per-la-cassa-pensione",
+    "ts": "2026-08-20T15:39:07.499Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/08/20/leggi-notizia/argomenti/cronaca-20/articolo/scontro-sulla-strada-dei-frontalieri-tra-varese-e-cantello-due-feriti.html": {
+    "articleId": "incidente-strada-frontalieri-cantello",
+    "ts": "2026-08-20T18:24:33.515Z",
+    "keyForm": 2
+  },
+  "https://www.varesenoi.it/2026/08/21/leggi-notizia/argomenti/salute-3/articolo/carenza-di-infermieri-lordine-professionale-di-varese-chiede-interventi-finanziati-e-tempi-certi.html": {
+    "articleId": "carenza-infermieri-varese",
+    "ts": "2026-08-21T11:44:44.859Z",
+    "keyForm": 2
+  },
+  "https://www.vconews.it/2026/08/21/leggi-notizia/argomenti/economia-e-lavoro-9/articolo/frontalieri-italiani-in-calo-diminuiscono-anche-i-lavoratori-diretti-in-ticino-1.html": {
+    "articleId": "frontalieri-calo-secondo-trimestre-2026",
+    "ts": "2026-08-21T16:15:54.544Z",
+    "keyForm": 2
+  },
+  "https://www.ocst.ch/il-lavoro/411-professioni/401-edilizia/2610-edilizia-un-accordo-per-i-prossimi-sei-anni": {
+    "articleId": "accordo-edilizia-ticino-6-anni",
+    "ts": "2026-08-22T10:53:52.519Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/newsblog/valute-e-frontiere/1942938/lavoro-svizzera-frontalieri-tempo-quali-effetti": {
+    "articleId": "svizzera-lavoro-temporaneo-frontalieri",
+    "ts": "2026-08-24T06:25:23.541Z",
+    "keyForm": 2
+  },
+  "https://www.tio.ch/ticino/attualita/1945877/mappo-minusio-chiusure-rampe-lavori": {
+    "articleId": "a13-chiusure-mappo-minusio-2026",
+    "ts": "2026-08-26T00:40:22.082Z",
+    "keyForm": 2
+  },
+  "https://www.rsi.ch/info/economia/vola-il-prezzo-del-diesel-in-svizzera--4010873.html": {
+    "articleId": "diesel-prezzo-frontalieri-agosto",
+    "ts": "2026-08-26T01:23:04.896Z",
+    "keyForm": 2
+  }
 }

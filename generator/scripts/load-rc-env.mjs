@@ -125,6 +125,24 @@ const RC_TO_ENV = {
   LINKEDIN_POST_ACCESS_TOKEN:     ['LINKEDIN_POST_ACCESS_TOKEN'],
   LINKEDIN_ORGANIZATION_ID:       ['LINKEDIN_ORGANIZATION_ID'],
 
+  // LinkedIn auto-posting (PERSONAL profile — the site's
+  // scripts/post-to-linkedin-member.mjs). Distinct from LINKEDIN_POST_* above:
+  // that set authors as `urn:li:organization:<id>` with w_organization_social
+  // (Community Management API, access denied — appeal CAS-11756532-G7J8T5),
+  // this one authors as `urn:li:person:<id>` with w_member_social
+  // ("Share on LinkedIn", already provisioned).
+  //
+  // Mapped here even though the poster lives in the SITE repo, and this is the
+  // point of the `adapted` mode on this file: a secret mapped on one side only
+  // is INERT on the other with nothing failing to say so. Keeping the two maps
+  // in step is what stops the next consumer added on this side from reading
+  // `undefined` out of a Remote Config parameter that is set.
+  LINKEDIN_MEMBER_CLIENT_ID:      ['LINKEDIN_MEMBER_CLIENT_ID'],
+  LINKEDIN_MEMBER_CLIENT_SECRET:  ['LINKEDIN_MEMBER_CLIENT_SECRET'],
+  LINKEDIN_MEMBER_ACCESS_TOKEN:   ['LINKEDIN_MEMBER_ACCESS_TOKEN'],
+  LINKEDIN_MEMBER_REFRESH_TOKEN:  ['LINKEDIN_MEMBER_REFRESH_TOKEN'],
+  LINKEDIN_MEMBER_URN:            ['LINKEDIN_MEMBER_URN'],
+
   // LinkedIn Sign-In (OAuth2 for user authentication)
   LINKEDIN_SIGNIN_CLIENT_ID:      ['LINKEDIN_SIGNIN_CLIENT_ID'],
   LINKEDIN_SIGNIN_CLIENT_SECRET:  ['LINKEDIN_SIGNIN_CLIENT_SECRET'],
@@ -364,13 +382,20 @@ async function fetchTemplateViaRest() {
         },
       );
     } catch (err) {
-      // Same class of bug as the OAuth exchange one hop upstream (see
-      // exchangeAssertionForToken in lib/google-service-account-token.mjs):
-      // AbortSignal.timeout() rejects the fetch instead of resolving a status,
-      // so without this catch a slow-but-never-erroring endpoint would fail on
-      // the FIRST timeout instead of spending the RC_FETCH_ATTEMPTS/~63s budget.
-      if (err?.name !== 'AbortError' && err?.name !== 'TimeoutError') throw err;
-      lastErr = new Error(`Remote Config REST fetch timed out after ${RC_FETCH_TIMEOUT_MS}ms`);
+      // A rejected fetch() has no HTTP status to gate on, and it means one of
+      // two things: AbortSignal.timeout() firing, or a raw network failure
+      // (DNS, TLS, connection reset) that surfaces as a bare "fetch failed"
+      // TypeError. Issue #247 measured the latter landing 272ms after the
+      // request started — far too fast to be the 30s timeout, but just as
+      // transient and non-deterministic. Retrying only the AbortError/
+      // TimeoutError case (as this used to) left every other rejection
+      // re-thrown on the first attempt, skipping the whole RC_FETCH_ATTEMPTS/
+      // ~63s budget this loop exists to provide. Same class of bug as the
+      // OAuth exchange one hop upstream (see exchangeAssertionForToken in
+      // lib/google-service-account-token.mjs) — both retry every rejection now.
+      lastErr = err?.name === 'AbortError' || err?.name === 'TimeoutError'
+        ? new Error(`Remote Config REST fetch timed out after ${RC_FETCH_TIMEOUT_MS}ms`)
+        : err;
       if (attempt < RC_FETCH_ATTEMPTS) {
         await new Promise((r) => setTimeout(r, rcFetchBackoffMs(attempt)));
       }

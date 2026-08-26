@@ -62,6 +62,8 @@ import {
   findEscapedControlChars,
   decodeEscapedControlChars,
   countControlCharsBothSpellings,
+  findEscapedTabResidues,
+  residuesFromEscapedTabResidues,
   BODY_DIR_SECTIONS,
 } from '../../scripts/find-dirty-content-ids.mjs';
 
@@ -944,6 +946,90 @@ test('anche i chunk meta e SEO sono coperti dalla forma escapata, non solo i cor
       ['frontaliere:lavena-ponte-tresa-territorio-poroso', 'frontaliere:trump-intesa-o-inferno'],
     );
     assert.equal(totalEscapedOccurrences, 2);
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+// ── LA TERZA SPELLING: il residuo di TAB escapato (issue #345) ──────────────
+//
+// Le forme non inventate: la prima e' presa (backslash a parte per
+// `String.raw`) da content/blog-body/it/permessi-dimora-diversi-opinioni.ts
+// ("Cos'\\t3e" al posto di "Cos'è"), la seconda da
+// content/blog-body/en/cure-a-domicilio-tassa-ticino.ts ("since \\t2
+// applied?"): stessa firma (marker + coda numerica), ma la seconda ha spazi
+// da entrambi i lati invece di lettere.
+
+test("findEscapedTabResidues vede backslash-t incollato a una cifra, a qualunque profondita' di backslash", () => {
+  const parola = findEscapedTabResidues(String.raw`Cos\'\\t3e il diritto`);
+  assert.deepEqual(parola.map((e) => e.spelling), [String.raw`\\t`]);
+
+  const isolato = findEscapedTabResidues(String.raw`since \\t2 applied?`);
+  assert.deepEqual(isolato.map((e) => e.spelling), [String.raw`\\t`]);
+
+  const unLivello = findEscapedTabResidues(String.raw`x\t9y`);
+  assert.deepEqual(unLivello.map((e) => e.spelling), [String.raw`\t`]);
+});
+
+test('findEscapedTabResidues NON conta un backslash-t che non e\' incollato a una cifra', () => {
+  // L'a-capo escapato legittimo: nessuna cifra dopo, quindi nessun residuo.
+  assert.deepEqual(findEscapedTabResidues(String.raw`riga uno\triga due`), []);
+  assert.deepEqual(findEscapedTabResidues('niente di sporco'), []);
+  assert.deepEqual(findEscapedTabResidues(''), []);
+});
+
+test('countControlCharsBothSpellings somma anche il residuo di TAB escapato, la terza spelling', () => {
+  const tutteETre = `byte grezzo \x08, escapato ${String.raw`\\u0016`}, e residuo ${String.raw`\\t3`}`;
+  assert.equal(countControlCharsBothSpellings(tutteETre), 3);
+});
+
+test("scanContentForDirtyIds vede un body la cui UNICA sporcizia e' il residuo di TAB escapato (#345)", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'dirty-content-ids-tab-'));
+  const corpo = String.raw`export default {
+  'blog.article.ID.faq': '[{"q":"Cos\'\\t3e il diritto dei cittadini europei?","a":"Risposta."}]',
+};
+`;
+  try {
+    writeTree(root, {
+      'content/blog-body/it/permessi-dimora-diversi-opinioni.ts': corpo.replace('ID', 'permessi-dimora-diversi-opinioni'),
+      'content/blog-body/it/pulito.ts': "export const body = 'tutto a posto';\n",
+    });
+    const testo = fs.readFileSync(path.join(root, 'content/blog-body/it/permessi-dimora-diversi-opinioni.ts'), 'utf8');
+    assert.equal(residuesInText(testo).size, 0, 'nessun byte grezzo, quindi nessun residuo per il criterio vecchio');
+    assert.equal(findEscapedControlChars(testo).length, 0, 'nessun C0 sempre-illegale in forma escapata: TAB non lo e\'');
+    assert.equal(countControlCharsBothSpellings(testo), 1, 'una occorrenza, vista solo dalla terza spelling');
+    // Review PR #352, round 3 (Important): questa asserzione codificava il
+    // difetto. `residuesInText` da solo resta a zero (e' corretto: guarda solo
+    // il byte grezzo), ma il candidato deve comunque ricevere un residuo da
+    // QUALCHE parte, o chi ripubblica non ha nulla su cui decidere quando la
+    // pagina torna pulita. `residuesFromEscapedTabResidues` lo ricava dal
+    // token che resta a cavallo del marker una volta tolto SOLO il marker:
+    // 'Cos\'\\t3e' meno '\\t' e' 'Cos\'3e', e il token '3e' mescola lettera e
+    // cifra, la stessa firma di `residuesInText`.
+    assert.deepEqual(
+      [...residuesFromEscapedTabResidues(testo)],
+      ['3e'],
+      'la terza spelling deve produrre un residuo proprio, non restare a mani vuote',
+    );
+
+    const { ids, totalFiles, totalOccurrences, totalEscapedOccurrences } = scanContentForDirtyIds(root);
+    assert.deepEqual(ids.map((e) => `${e.section}:${e.id}`), ['frontaliere:permessi-dimora-diversi-opinioni']);
+    assert.equal(totalFiles, 1);
+    assert.equal(totalOccurrences, 1);
+    assert.equal(totalEscapedOccurrences, 1);
+    assert.ok(
+      ids[0].sources.some((s) => s.endsWith('(c0 escapato)')),
+      `sorgente senza l'etichetta della forma escapata: ${ids[0].sources.join(', ')}`,
+    );
+    // Il finding della review: prima di questa fix questo era `[]`, perche'
+    // `mark()` riceveva solo `residuesInText(text)`. Ora la scansione unisce
+    // anche `residuesFromEscapedTabResidues`, quindi il candidato porta il
+    // residuo che serve a decidere, dal vivo, quando la pagina e' tornata pulita.
+    assert.deepEqual(
+      ids[0].residues,
+      ['3e'],
+      `entry.residues vuoto per un candidato la cui unica sporcizia e' la terza spelling: ${JSON.stringify(ids[0].residues)}`,
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

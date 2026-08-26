@@ -18,7 +18,7 @@
  * Progress is saved to data/batch-faq-progress.json for resumability.
  */
 
-import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync, renameSync, unlinkSync } from 'fs';
 import { resolve, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { execSync } from 'child_process';
@@ -132,13 +132,29 @@ function read(filePath) {
 
 // Same write-time guard as create-article.mjs write() (issue #66): strip any
 // C0 control character other than TAB/LF/CR before it reaches content/.
+// Scrittura ATOMICA del corpus: temp accanto al target + renameSync. Questo
+// choke-point riscrive un `content/**` GIA' ESISTENTE sotto
+// `batch-faq-articles.yml`, che ha `timeout-minutes` e quindi uccide con
+// SIGKILL: un `writeFileSync` diretto sul target puo' lasciarlo troncato a
+// meta' scrittura. Il temp sta accanto al target perche' il rename non
+// attraversi mai un confine di filesystem. Stesso pattern di `write()` in
+// create-article.mjs.
+let writeTmpSeq = 0;
 function write(filePath, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(filePath, content, clean);
-  writeFileSync(resolve(filePath), clean, 'utf-8');
+  const file = resolve(filePath);
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, file);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 /** Same escaping as create-article.mjs buildBodyFile() */
@@ -274,35 +290,148 @@ function commitIfNeeded(currentStep) {
   }
 }
 
-// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill)
-process.on('SIGTERM', () => {
-  console.error('\n⚠️  SIGTERM — saving progress...');
-  gitCommitAndPush('interrupted');
-  process.exit(0);
-});
+// Graceful shutdown: commit+push on SIGTERM (GitHub Actions sends this before kill).
+// La REGISTRAZIONE sta dentro la guardia sull'entry point in coda al file, non
+// qui: questo modulo viene IMPORTATO — da `publish-journalist-article.mjs` per
+// `generateFaqIT`, e ora dai test — e a module scope l'handler si armava anche
+// li'. Un SIGTERM a quei processi (`tests.yml` ha `cancel-in-progress: true`,
+// e in locale basta un kill) faceva partire `git add content/ && git commit &&
+// git push origin main` da un processo che non stava generando niente. Armarlo
+// solo quando il file E' l'entry point non toglie niente al job vero, che passa
+// sempre di la'.
+// La stessa perdita che #433 chiude in create-article.mjs (`exitAfterFlush`)
+// era ancora viva qui: questo handler chiama `callLLM` da `genTasks` /
+// `topUpTasks` / `transTasks` durante la run, e un SIGTERM a meta' run
+// (workflow cancellato) usciva con `process.exit(0)` sincrono senza mai dare
+// al ledger dei punteggi una finestra per scrivere gli esiti accumulati.
+//
+// Il primo giro di questo fix rendeva l'handler `async` e chiamava lui stesso
+// `flushScoresBeforeExit()` + `process.exit(0)` — ma questo handler si registra
+// PRIMA che `main()` arrivi a `initScoreStore()`, che arma il proprio pair
+// SIGTERM (`_registerExitHooks()` in `ai-models.mjs`). Su un SIGTERM reale
+// correvano entrambi: il nostro restava sospeso al vero `await ref.set()` di
+// rete (`_persistScoresToFirestore()` svuota `_dirtyModels` PRIMA di quell'
+// await), l'altro trovava `_dirtyModels` gia' vuoto, ritornava quasi subito e
+// chiamava `process.exit(143)` mentre la nostra scrittura era ancora in volo —
+// abortendola. Questo handler ora resta sincrono e fa SOLO il checkpoint git:
+// nessun `await` prima del suo ritorno, quindi l'emit di `SIGTERM` non puo'
+// interlacciarsi con l'altro listener, che parte solo a checkpoint concluso e
+// possiede da solo flush + exit(143). Se il SIGTERM arriva prima che
+// `initScoreStore()` abbia armato quel pair, non c'e' ancora niente di sporco
+// da perdere, e il processo termina sul SIGKILL che Actions manda dopo la
+// grace window — lo stesso esito di sempre.
+function installSigtermCheckpoint() {
+  process.on('SIGTERM', () => {
+    console.error('\n⚠️  SIGTERM — saving progress...');
+    gitCommitAndPush('interrupted');
+  });
+}
 
 // ── Article discovery ────────────────────────────────────────
 
-/** Extract article ID from a body file's content by scanning for the key pattern */
-function extractArticleId(fileContent) {
-  const match = fileContent.match(/'blog\.article\.([a-z0-9-]+)\.body1'/);
-  return match ? match[1] : null;
+/**
+ * Extract article ID from a body file's content by scanning for the key pattern.
+ *
+ * `fileName` non e' decorativo (issue #393). La forma precedente prendeva il
+ * PRIMO `body1` del file e basta: in un file a due id — lo scenario che tutto
+ * questo blocco esiste per difendere — l'identita' dell'articolo veniva decisa
+ * dalla POSIZIONE, e il secondo articolo restava invisibile a `discoverArticles`.
+ * Il corpus ha gia' una definizione di identita' che non dipende dall'ordine, ed
+ * e' il nome del file: `fix-faq-locales.mjs` (`basename(file, '.ts')`) e
+ * `repair-prompt-placeholders.mjs` (`name.slice(0, -3)`) usano quella. Qui la si
+ * PREFERISCE quando il file la nomina davvero, e si ricade sul primo `body1`
+ * quando non la nomina — cosi' i fixture sintetici e i file rinominati a mano
+ * continuano a risolvere come prima.
+ */
+export function extractArticleId(fileContent, fileName) {
+  const ids = [...fileContent.matchAll(/'blog\.article\.([a-z0-9-]+)\.body1'/g)].map(m => m[1]);
+  if (!ids.length) return null;
+  const fromName = fileName ? basename(fileName, '.ts') : null;
+  return fromName && ids.includes(fromName) ? fromName : ids[0];
 }
 
-/** Check if a body file already has a .faq key */
-function hasFaqKey(fileContent) {
-  return /\.faq'\s*:/.test(fileContent);
+// ── L'ancora all'id (issue #301 item 2) ──────────────────────
+//
+// La chiave che questo script legge e SCRIVE e' quella dell'articolo che sta
+// trattando, non un `.faq` qualunque nel file. Il pattern e' quello con cui
+// #294 ha ancorato i gate di sola lettura (`find-dirty-content-ids.mjs`,
+// `faqQuestionsInBodyText`): chiave intera piu' id ESCAPATO per la regex.
+//
+// Senza l'ancora, in un file con due id — un residuo di merge: mai osservato
+// sui 16.648 file reali, ma niente nel formato lo impedisce — `hasFaqKey`
+// dichiarava presente una FAQ che per QUEL id non c'era (l'articolo veniva
+// saltato invece di essere generato) e `replaceFaqInBodyFile` scriveva la FAQ
+// di un articolo dentro la chiave di un altro. Su uno script che scrive nel
+// corpus e' una perdita di dato, non un rapporto sbagliato.
+//
+// L'«ultima occorrenza» resta, e resta per la ragione di prima: una chiave
+// DUPLICATA dello stesso id e' vinta dall'ultima nell'object literal JS, quindi
+// e' quella viva al render. Le due regole sono ortogonali — si legge e si
+// scrive l'ultima occorrenza DEL PROPRIO id.
+//
+// Il pattern e' ricopiato invece che condiviso, come in `find-dirty-content-ids.mjs`
+// (#294): questo file e' un gemello `adapted` di uno del sito
+// (`scripts/batch-add-faq-to-articles.mjs`) e importare qui una lib `corpus-only` aggiungerebbe una
+// divergenza in piu' fra i due, per tre righe di regex.
+const rxEscape = (id) => String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const faqKeyRx = (id) => `'blog\\.article\\.${rxEscape(id)}\\.faq'`;
+// Stessa ancora, altra chiave (issue #393). `extractBodyContent` leggeva
+// `\.body\d+'` — qualunque corpo nel file — e il testo cosi' raccolto e' il
+// PROMPT da cui nasce la FAQ. In un file a due id i `bodyN` di entrambi gli
+// articoli finivano concatenati nel prompt: la FAQ generata era il prodotto di
+// due articoli e veniva scritta nella chiave (dal #392 correttamente ancorata)
+// di uno solo. La scrittura finiva nel posto giusto, il contenuto no — un
+// difetto che nessun controllo di sintassi puo' vedere, perche' il file
+// prodotto e' perfettamente valido.
+const bodyKeyRx = (id) => `'blog\\.article\\.${rxEscape(id)}\\.body\\d+'`;
+
+/**
+ * Check if a body file already has a .faq key for THIS article id.
+ *
+ * Primo argomento: il CONTENUTO del file. L'omonima di `fix-faq-locales.mjs`
+ * prende invece un PATH — sono due moduli diversi e i due nomi ora sono
+ * entrambi esportati, quindi la differenza va letta qui prima di importare.
+ */
+export function hasFaqKey(fileContent, articleId) {
+  return new RegExp(`${faqKeyRx(articleId)}\\s*:`).test(fileContent);
 }
 
-/** Read and concatenate all bodyN keys from file content.
+/**
+ * C'e' almeno una chiave `bodyN` per QUESTO id? Gemella di `hasFaqKey`, e serve
+ * a distinguere «corpo corto» (da arricchire) da «nessun corpo per questo id»
+ * (da fermare) — due casi che prima della fix di #393 non potevano essere
+ * distinti, perche' la regex non ancorata trovava sempre qualcosa.
+ */
+export function hasBodyKey(fileContent, articleId) {
+  return new RegExp(`${bodyKeyRx(articleId)}\\s*:`).test(fileContent);
+}
+
+/** Read and concatenate all bodyN keys OF THIS ARTICLE from file content.
  *  Supports both single-quoted ('...') and backtick-quoted (`...`) string values,
  *  and any number of body keys (body1, body2, ..., bodyN).
+ *
+ *  `articleId` e' obbligatorio (issue #393): il testo che esce di qui e' il
+ *  prompt da cui nasce la FAQ, quindi un corpo di troppo non e' rumore in un
+ *  rapporto — e' un articolo estraneo che entra nel contenuto pubblicato.
  */
-function extractBodyContent(fileContent) {
+export function extractBodyContent(fileContent, articleId) {
+  // Rumoroso e non vuoto. Ancorando la chiave, questa funzione ha acquistato un
+  // esito che prima non poteva avere: `''` perche' l'id non compare fra le
+  // chiavi. Il chiamante non lo distingue da «corpo corto», e il ramo che
+  // raccoglie il corpo corto chiama `enrichBodyForFaq`, che fa scrivere all'LLM
+  // 1500-2500 parole a partire dal solo slug: un id sbagliato — o un chiamante
+  // futuro che dimentica il secondo argomento, che senza questa guardia
+  // cercherebbe `'blog.article.undefined.bodyN'` e tornerebbe `''` senza un
+  // fiato — diventerebbe un articolo INVENTATO scritto nel corpus. Meglio
+  // fermarsi: vedi `hasBodyKey`, che i due chiamanti usano per non arrivarci.
+  if (!articleId) throw new Error('extractBodyContent: articleId obbligatorio (issue #393)');
   const bodies = [];
-  // Match `.bodyN':` followed by either a single-quoted or backtick-quoted value.
-  // The capturing group \1 pins the opening quote char to its matching closer.
-  const re = /\.body\d+'\s*:\s*(['`])((?:\\.|(?!\1)[\s\S])*?)\1/g;
+  // Match `'blog.article.<id>.bodyN':` followed by either a single-quoted or
+  // backtick-quoted value. `bodyKeyRx` ancora la chiave all'id (vedi il blocco
+  // sopra); il gruppo di cattura \1 pinza la virgoletta di apertura alla sua
+  // chiusura. L'id e' gia' escapato e non introduce gruppi, quindi \1 continua
+  // a riferirsi alla virgoletta.
+  const re = new RegExp(`${bodyKeyRx(articleId)}\\s*:\\s*(['\`])((?:\\\\.|(?!\\1)[\\s\\S])*?)\\1`, 'g');
   let m;
   while ((m = re.exec(fileContent)) !== null) {
     const quoteChar = m[1];
@@ -327,17 +456,95 @@ function isWrongLocale(faqArray, expectedLocale) {
   return detected !== expectedLocale;
 }
 
-function extractFaqFromContent(fileContent) {
+/**
+ * Il LETTORE simmetrico allo scrittore di questo file (issue #394).
+ *
+ * Chi scrive qui (`replaceFaqInBodyFile`, `insertFaqIntoBodyFile`) passa da
+ * `escapeForSingleQuoteTS`, che RADDOPPIA il backslash. Chi leggeva era rimasto
+ * al decoder legacy — `raw.replace(/\\'/g, "'")` — che conosce solo l'apostrofo:
+ * su cio' che questo script scrive lasciava `\\"` intatto, `JSON.parse` vedeva
+ * finire la stringa a meta' e tornava `null`. Misurato prima della fix sui
+ * 16.676 campi `.faq` del corpus: **377 illeggibili**, e siccome
+ * `discoverArticles` fa `continue` quando l'italiano torna `null`, **96 articoli
+ * IT** (82 in blog-body, 14 in blog-body-ch) venivano saltati in silenzio —
+ * niente top-up, e le loro traduzioni en/de/fr mai controllate. Nessun errore,
+ * nessun contatore. Dopo la fix: 0 illeggibili.
+ *
+ * Due decodifiche in ordine, come `parseFaqLiteral` di `fix-faq-locales.mjs`
+ * (il gemello che ha gia' chiuso la stessa cosa): la prima e' l'inversa dello
+ * scrittore di oggi, la seconda regge i file gia' scritti dallo scrittore
+ * legacy. Vince la prima che produce un array — senza la (1) lo script e' cieco
+ * su cio' che scrive lui stesso, senza la (2) i file gia' prodotti diventano
+ * illeggibili e con essi irreparabili.
+ *
+ * La decodifica esatta passa da `unescapeTsString` (gia' importata) con la
+ * mappa MINIMA `{ \\, ' }`, non da un inverso a tavolino di
+ * `escapeForSingleQuoteTS`. Sono le sole due sequenze che lo scrittore emette,
+ * e ogni altro `\x` va lasciato INTATTO perche' e' un escape del JSON che sta
+ * sotto e lo deve vedere `JSON.parse`, non noi. La differenza non e' teorica:
+ * un inverso che spoglia ogni `\x` (la forma di `unescapeForSingleQuoteTS`)
+ * legge ` ` come la lettera `u`, e su due file reali del corpus —
+ * `aufenthaltsbewilligung-b-quellensteuer-2026` it/fr — produce `CHF 5u00a0000`
+ * al posto di `CHF 5<nbsp>000`. Parsa senza lamentarsi, quindi il fallback
+ * legacy non scatta mai e il valore sbagliato passa: un JSON valido con dentro
+ * un testo che nessuno ha scritto. Misurato: mappa minima e mappa larga
+ * (`\n`/`\r` inclusi) danno 0 illeggibili e 0 divergenze sui 16.676 campi, ma
+ * la minima e' quella di cui si puo' dimostrare la regola.
+ *
+ * OMONIMIA DA CONOSCERE PRIMA DI IMPORTARE. `fix-faq-locales.mjs` esporta una
+ * `parseFaqLiteral` con lo STESSO nome, una forma di ritorno DIVERSA
+ * (`{ pairs, legacy }` invece di `Array|null`) e un primo decoder diverso
+ * (`unescapeForSingleQuoteTS`, quello che spoglia ogni `\x`). La stessa trappola
+ * che questo file documenta gia' per `hasFaqKey` qui sopra: due moduli, due
+ * contratti, un nome solo.
+ *
+ * L'ORDINE DEI DECODER RESTA AMBIGUO IN DUE CASI, non uno. Oltre al `\u` di
+ * sopra: un literal scritto dallo scrittore LEGACY il cui testo contenga un
+ * backslash letterale seguito da una lettera di escape JSON (`" \ / b f n r t
+ * u`) viene dimezzato dal decoder 1, `JSON.parse` riesce lo stesso e il
+ * fallback non scatta — array valido, valore sbagliato. Occorrenze oggi: 0.
+ * L'ambiguita' non e' risolvibile dal literal da solo (chi l'ha scritto non e'
+ * scritto da nessuna parte); l'ordine esatto-poi-legacy e' quello che sbaglia
+ * meno, ed e' lo stesso del gemello.
+ *
+ * COSA CAMBIA PER I FILE GIA' LEGGIBILI. Sui 16.676 campi vivi: 377 passano da
+ * illeggibili a leggibili, 16.277 restano identici, e **22 cambiano valore** —
+ * sono i file col control-char mangling gia' noto, dove il sorgente porta
+ * `\\u0000a1`. Li' il decoder legacy leggeva gli otto caratteri letterali
+ * di quell escape e il nuovo restituisce U+0000 seguito da `a1`: la lettura
+ * NUOVA e' quella fedele, perche' quel doppio backslash e' esattamente cio'
+ * che `escapeForSingleQuoteTS` produce per un U+0000 che stava nel documento
+ * JSON. Tutti e 22 introducono un C0 vero nel valore letto. Non e'
+ * un danno introdotto qui, e' danno pre-esistente finalmente visibile — e in
+ * riscrittura la `write()` di questo file lo toglie comunque, perche' applica
+ * `sanitizeText` (issue #66).
+ *
+ * @param {string} raw - il testo catturato TRA le virgolette.
+ * @returns {Array|null} le coppie, o `null` se nessuna decodifica da' un array.
+ */
+export function parseFaqLiteral(raw) {
+  const decoders = [
+    (s) => unescapeTsString(String(s ?? ''), { '\\': '\\', "'": "'" }),
+    (s) => String(s ?? '').replace(/\\'/g, "'"),
+  ];
+  for (const decode of decoders) {
+    try {
+      const parsed = JSON.parse(decode(raw));
+      if (Array.isArray(parsed)) return parsed;
+    } catch { /* prova la decodifica successiva */ }
+  }
+  return null;
+}
+
+export function extractFaqFromContent(fileContent, articleId) {
   // Use escape-aware regex: (?:[^'\\]|\\.)* correctly skips \' sequences.
   // `g` + last match: a duplicate `.faq` key (merge residue) resolves to
   // the LAST occurrence at runtime (JS object literal semantics), so
   // that's the value actually live — matching only the first would read
-  // dead content and mis-detect the locale.
-  const matches = [...fileContent.matchAll(/\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g)];
+  // dead content and mis-detect the locale. Ancorata all'id: vedi `faqKeyRx`.
+  const matches = [...fileContent.matchAll(new RegExp(`${faqKeyRx(articleId)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g'))];
   if (!matches.length) return null;
-  try {
-    return JSON.parse(matches[matches.length - 1][1].replace(/\\'/g, "'"));
-  } catch { return null; }
+  return parseFaqLiteral(matches[matches.length - 1][1]);
 }
 
 const MIN_FAQ_PAIRS = 3;
@@ -358,10 +565,10 @@ function discoverArticles() {
   for (const file of files) {
     const itPath = `${BODY_DIR}/it/${file}`;
     const itContent = read(itPath);
-    const articleId = extractArticleId(itContent);
+    const articleId = extractArticleId(itContent, file);
     if (!articleId) continue;
 
-    const itHasFaq = hasFaqKey(itContent);
+    const itHasFaq = hasFaqKey(itContent, articleId);
 
     if (!itHasFaq) {
       needsGeneration.push({ id: articleId, file, itContent });
@@ -369,7 +576,7 @@ function discoverArticles() {
     }
 
     // IT FAQ exists — check pair count and locale translations
-    const itFaq = extractFaqFromContent(itContent);
+    const itFaq = extractFaqFromContent(itContent, articleId);
     if (!itFaq || itFaq.length === 0) continue;
 
     // Top-up: not enough pairs
@@ -383,10 +590,10 @@ function discoverArticles() {
       const localePath = `${BODY_DIR}/${locale}/${file}`;
       if (!existsSync(resolve(localePath))) continue;
       const locContent = read(localePath);
-      if (!hasFaqKey(locContent)) {
+      if (!hasFaqKey(locContent, articleId)) {
         missingLocales.push(locale);
       } else {
-        const localeFaq = extractFaqFromContent(locContent);
+        const localeFaq = extractFaqFromContent(locContent, articleId);
         if (localeFaq && isWrongLocale(localeFaq, locale)) {
           missingLocales.push(locale);
         }
@@ -406,7 +613,11 @@ function discoverArticles() {
 // Preferred models for FAQ (Gemini free tier — reliable JSON output)
 const FAQ_MODELS = [
   AI_MODELS.GEMINI_FLASH,
-  AI_MODELS.GEMINI_2_FLASH,
+  // Era AI_MODELS.GEMINI_2_FLASH, ritirato da Google il 2026-08-14 (HTTP 404 "no
+  // longer available"). Resta in AI_MODELS perche' il matcher del 404 lo esaurisce
+  // da solo al primo tentativo, ma non ha senso metterlo QUI come preferenza: una
+  // catena di preferenza dovrebbe nominare modelli vivi.
+  AI_MODELS.GEMINI_FLASH_LITE_LATEST,
   AI_MODELS.GEMINI_FLASH_LITE,
 ];
 
@@ -678,7 +889,7 @@ function validateFaq(faq) {
 // ── File modification ────────────────────────────────────────
 
 /** Replace existing FAQ value in a body file */
-function replaceFaqInBodyFile(filePath, faqArray) {
+export function replaceFaqInBodyFile(filePath, faqArray, articleId) {
   let content = read(filePath);
   // `escapeForSingleQuoteTS`, non una `.replace()` a mano: quella escapava
   // l'apostrofo e NON il backslash, quindi il `\"` che JSON.stringify produce
@@ -695,7 +906,9 @@ function replaceFaqInBodyFile(filePath, faqArray) {
   // `g` + last match: write the occurrence that is actually LIVE at
   // runtime — a duplicate `.faq` key resolves to the last one in a JS
   // object literal, same reasoning as extractFaqFromContent above.
-  const matches = [...content.matchAll(/(\.faq'\s*:\s*')((?:[^'\\]|\\.)*)('\s*,)/g)];
+  // Ancorata all'id (`faqKeyRx`): qui la mancanza dell'ancora non e' un
+  // rapporto sbagliato, e' la FAQ di un articolo scritta sopra quella di un altro.
+  const matches = [...content.matchAll(new RegExp(`(${faqKeyRx(articleId)}\\s*:\\s*')((?:[^'\\\\]|\\\\.)*)('\\s*,)`, 'g'))];
   if (!matches.length) return false;
   const last = matches[matches.length - 1];
   const start = last.index;
@@ -716,12 +929,12 @@ function replaceFaqInBodyFile(filePath, faqArray) {
  * Insert FAQ key into a body file.
  * Finds the last body key line and appends the FAQ key after it, before `};`
  */
-function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
+export function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
   let content = read(filePath);
 
   // Already has FAQ? Replace instead of insert.
-  if (hasFaqKey(content)) {
-    return replaceFaqInBodyFile(filePath, faqArray);
+  if (hasFaqKey(content, articleId)) {
+    return replaceFaqInBodyFile(filePath, faqArray, articleId);
   }
 
   const faqJsonStr = JSON.stringify(faqArray);
@@ -736,23 +949,41 @@ function insertFaqIntoBodyFile(filePath, articleId, faqArray) {
     return false;
   }
 
-  // Insert FAQ line before the `};` line
+  // Insert FAQ line before the `};` line.
+  //
+  // Il replacer e' una FUNZIONE, non una stringa (issue #395). In una stringa
+  // di sostituzione `$1`…`$9`, `$&`, `` $` ``, `$'` e `$$` sono PATTERN, e
+  // `faqLine` porta testo FAQ arbitrario: `escapeForSingleQuoteTS` escapa `\`,
+  // `'` e `\n`, ma non il `$`. Una risposta che dice «un massimo di $2
+  // milioni» si portava dentro il literal il gruppo di cattura 2 — cioe' la
+  // coda `};\nexport default` — e il file risultante poteva anche compilare:
+  // niente errore, solo testo che nessuno ha scritto, sul percorso di scrittura
+  // del corpus pubblicato. Misurato sui 16.676 campi `.faq` vivi: **11**
+  // contengono una sequenza che questa regex a tre gruppi avrebbe espansa
+  // (`$1`/`$2`/`$3`/`$&`/`` $` ``/`$'`/`$$`) — prezzi e cifre in dollari,
+  // «$100,000», «$13.5 billion», «$3.04 billion». Raro, mai rumoroso.
+  //
+  // Un replacer-funzione non interpreta niente: il valore che torna finisce nel
+  // risultato verbatim. E' la stessa forma delle due gemelle che il difetto non
+  // ce l'hanno — `replaceFaqInBodyFile` qui sopra («Escape-aware regex +
+  // function replacer to avoid $-pattern issues») e `insertFaqKey()` di
+  // `fix-faq-locales.mjs`, che ricostruiscono per slicing.
   content = content.replace(
     /(\n)((\s*)\};\s*\n\s*export default)/,
-    `\n${faqLine}\n$2`,
+    (_m, _nl, coda) => `\n${faqLine}\n${coda}`,
   );
 
   // Verify the insertion worked
-  if (!hasFaqKey(content)) {
-    // Fallback: more aggressive replacement
+  if (!hasFaqKey(content, articleId)) {
+    // Fallback: more aggressive replacement (stesso replacer-funzione, stessa ragione)
     content = read(filePath);
     content = content.replace(
       /(\.body3':\s*'(?:[^'\\]|\\.)*',)\n(\};)/s,
-      `$1\n${faqLine}\n$2`,
+      (_m, ultimoBody, chiusura) => `${ultimoBody}\n${faqLine}\n${chiusura}`,
     );
   }
 
-  if (!hasFaqKey(content)) {
+  if (!hasFaqKey(content, articleId)) {
     console.error(`  ❌ Failed to insert FAQ into ${filePath}`);
     return false;
   }
@@ -775,7 +1006,14 @@ async function processArticle(articleId, file, itBodyContent) {
   const label = `[${articleId}]`;
 
   // 1. Extract Italian body text
-  let bodyText = extractBodyContent(itBodyContent);
+  // Nessuna chiave `bodyN` per questo id non e' un corpo corto: e' il file
+  // sbagliato, o un id sbagliato. Arricchirlo significherebbe pubblicare un
+  // articolo scritto dall'LLM a partire dal solo slug (#393, review di #397).
+  if (!hasBodyKey(itBodyContent, articleId)) {
+    console.error(`${label} ❌ Nessuna chiave bodyN per questo id: non arricchisco, sarebbe un articolo inventato`);
+    return { success: false, error: 'No bodyN key for this article id' };
+  }
+  let bodyText = extractBodyContent(itBodyContent, articleId);
   if (!bodyText || bodyText.length < 200) {
     console.error(`${label} ⚠️  Body text short (${bodyText?.length || 0} chars), enriching before FAQ generation...`);
     try {
@@ -871,7 +1109,13 @@ async function processArticle(articleId, file, itBodyContent) {
 async function processTopUp(articleId, file, itContent, existingFaq) {
   const label = `[${articleId}] [TOP-UP ${existingFaq.length}→${MIN_FAQ_PAIRS}+]`;
 
-  let bodyText = extractBodyContent(itContent);
+  // Stessa guardia di `processArticle`: niente chiave `bodyN` per questo id
+  // significa fermarsi, non arricchire (#393, review di #397).
+  if (!hasBodyKey(itContent, articleId)) {
+    console.error(`${label} ❌ Nessuna chiave bodyN per questo id: non arricchisco, sarebbe un articolo inventato`);
+    return { success: false, error: 'No bodyN key for this article id' };
+  }
+  let bodyText = extractBodyContent(itContent, articleId);
   if (!bodyText || bodyText.length < 200) {
     console.error(`${label} ⚠️  Body short (${bodyText?.length || 0} chars), enriching before top-up...`);
     try {
@@ -914,7 +1158,7 @@ async function processTopUp(articleId, file, itContent, existingFaq) {
 
   // 3. Write updated IT FAQ
   const itPath = `${BODY_DIR}/it/${file}`;
-  if (!replaceFaqInBodyFile(itPath, validMerged)) {
+  if (!replaceFaqInBodyFile(itPath, validMerged, articleId)) {
     return { success: false, error: 'Failed to write updated IT FAQ' };
   }
 
@@ -1149,6 +1393,7 @@ async function main() {
 // reuse `generateFaqIT` (e.g. publish-journalist-article.mjs), which would
 // otherwise trigger the entire batch scan as an import side effect.
 if (import.meta.url === `file://${process.argv[1]}`) {
+  installSigtermCheckpoint();
   main().catch(err => {
     console.error(`\n💥 Fatal error: ${err.message}`);
     console.error(err.stack);

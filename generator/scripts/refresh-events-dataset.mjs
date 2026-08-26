@@ -39,6 +39,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { fetchFirstOk, isCiWafBlock } from './lib/rewire-fetch.mjs';
 
 if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log(
@@ -84,45 +85,35 @@ const fail = (msg) => {
   process.exit(1);
 };
 
-/** Retries only the transient classes; a 404 is a real absence and fails now. */
-async function get(url) {
-  let lastErr;
-  for (let i = 1; i <= 4; i++) {
-    try {
-      const res = await fetch(url, { redirect: 'follow' });
-      if (res.ok) {
-        const body = await res.text();
-        if (body.length > 0) return body;
-        lastErr = new Error('empty body');
-      } else {
-        const err = new Error(`HTTP ${res.status}`);
-        if (res.status < 500 && res.status !== 429) throw err;
-        lastErr = err;
-      }
-    } catch (err) {
-      if (/HTTP 4\d\d/.test(err.message)) throw err;
-      lastErr = err;
-    }
-    if (i < 4) await new Promise((r) => setTimeout(r, 1000 * 2 ** (i - 1)));
-  }
-  throw lastErr;
-}
+const FIXTURE = path.join(
+  path.dirname(fileURLToPath(import.meta.url)),
+  '..',
+  'tests',
+  'fixtures',
+  'rewire',
+  FILE,
+);
 
 let raw;
 let SOURCE;
 {
-  const errors = [];
-  for (const url of SOURCES) {
-    try {
-      raw = await get(url);
-      SOURCE = url;
-      break;
-    } catch (err) {
-      errors.push(`  ${url}: ${err.message}`);
-    }
-  }
-  if (raw === undefined) {
-    fail(`no source reachable —\n${errors.join('\n')}`);
+  const got = await fetchFirstOk(SOURCES);
+  if (got.ok) {
+    raw = got.body;
+    SOURCE = got.url;
+  } else if (CHECK_ONLY && process.env.REWIRE_SKIP_WAF_403 === '1' && isCiWafBlock(got.errors)) {
+    log(
+      `publisher unreachable from CI (WAF 403). Shape is gated offline by ` +
+        `rewire-json-contracts.test.mjs.\n${got.errors.join('\n')}`,
+    );
+    process.exit(0);
+  } else if (!CHECK_ONLY && process.env.REWIRE_FIXTURE_ON_403 === '1' && isCiWafBlock(got.errors) && fs.existsSync(FIXTURE)) {
+    fs.mkdirSync(path.dirname(CACHE), { recursive: true });
+    fs.copyFileSync(FIXTURE, CACHE);
+    log(`copied rewire fixture to cache after CI WAF 403`);
+    process.exit(0);
+  } else {
+    fail(`no source reachable —\n${got.errors.join('\n')}`);
   }
 }
 

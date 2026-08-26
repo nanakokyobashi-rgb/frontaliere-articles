@@ -26,11 +26,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 import {
   riparaTesto, risolviToken, costruisciLessico, riparaResidui, residuiDi, MARKER_G,
+  localeDi,
 } from '../scripts/repair-mangled-chars.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
@@ -785,4 +786,433 @@ test('il testimone non guarda i file che hanno un marker, nemmeno se la frase e\
   );
   assert.equal(rapporto.riparate, 0);
   assert.match(testo, new RegExp(B(0x0e)));
+});
+
+// ---------------------------------------------------------------------------
+// la SPELLING ESCAPATA — issue #345 item 1
+// ---------------------------------------------------------------------------
+//
+// Il difetto e' lo stesso, la scrittura no: dentro un blob `.faq` il control
+// character e' `\\u0016` / `\\b` / `\\f`, e sul disco NON c'e' nessun byte C0.
+// Tutto cio' che parte da `MARKER.test` su queste occorrenze diceva zero.
+//
+// PERCHE' QUI IL LESSICO NON E' UNA PROVA, e perche' i test che contano sono i
+// rifiuti. Misurato sulle quattro copie della stessa FAQ nel corpus reale
+// (`salario-minimo-per-il-controprogetto-la-strada-e-in-discesa`), la STESSA
+// coppia (0x08,'5') sta al posto di quattro cose diverse:
+//
+//   it  `Il salario minimo sociale \b5 una proposta`    -> «è»
+//   de  `Der soziale Mindestlohn \b5 ein Vorschlag`     -> «ist»
+//   en  `The social minimum wage \b5 a proposal`        -> «is»
+//   fr  `Le salaire minimum social \b5 une proposition` -> «est»
+//
+// Tre su quattro non sono nemmeno un carattere: sono una parola. Il marker e'
+// nato nell'italiano ed e' stato PROPAGATO VERBATIM dal traduttore, che l'ha
+// trattato come un token intraducibile. Una prova che guarda la parola
+// ricostruita — lessico, esadecimale, legge del nibble — su questa famiglia non
+// deduce: traduce a occhio. E' la forma esatta del difetto che in un giro
+// precedente ha distrutto i titoli, «riparando» dalla lingua sbagliata.
+//
+// Quindi la sola prova ammessa e' il testimone, UNANIME (una sola lettera fra
+// tutti i riscontri) e CROSS-LOCALE (almeno un testimone fuori dal locale del
+// file sporco). Sul corpus del 2026-08-14 questa precondizione ripara ZERO
+// occorrenze su 45, ed e' il risultato giusto: le 45 restano con la loro ancora
+// e ora sono CONTATE, nel rapporto e nel codice d'uscita.
+
+/** La spelling come sta su disco: due backslash, il JSON e' dentro un letterale TS. */
+const E = (n) => `\\\\u${n.toString(16).padStart(4, '0')}`;
+/** Le forme brevi che `JSON.stringify` usa per 0x08 e 0x0C. */
+const E_BREVE = { 0x08: '\\\\b', 0x0c: '\\\\f' };
+
+const PRIMA_FAQ = 'Il salario minimo sociale ';
+const DOPO_FAQ = ' una proposta che prevede un salario minimo';
+
+/** Nessun byte C0 grezzo puo' finire su disco: la decodifica non deve mai tornare indietro. */
+function senzaByteC0(testo) {
+  return !new RegExp(`[${'\\u0000-\\u0008\\u000B\\u000C\\u000E-\\u001F'}]`).test(testo);
+}
+
+function riparaEscapataConAlbero(alberi, quale = 'blog-body/it/sporco.ts') {
+  const radice = alberoDiProva(alberi);
+  try {
+    const { codice, rapporto } = esegui(radice, ['--write']);
+    return { codice, rapporto, testo: fs.readFileSync(path.join(radice, 'content', quale), 'utf8') };
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+}
+
+test('escapata: un testimone unanime in un ALTRO locale da\' la lettera perduta', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1, 'l\'occorrenza dev\'essere CONTATA, non solo riparata');
+  assert.equal(rapporto.escapate.riparate, 1);
+  assert.equal(rapporto.escapate.lasciate, 0);
+  assert.equal(testo, `${PRIMA_FAQ}è${DOPO_FAQ}\n`, 'la spelling intera sparisce, coda compresa');
+  assert.ok(senzaByteC0(testo), 'la decodifica e\' interna: su disco non finisce mai un byte C0');
+  const rip = rapporto.riparazioni.find((x) => x.canale.startsWith('escapata'));
+  assert.deepEqual(rip.testimoni, ['content/blog-body/de/testimone.ts']);
+  assert.deepEqual(rip.localiTestimoni, ['de']);
+});
+
+test('escapata: la forma breve \\b e\' la stessa cosa della forma numerica', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E_BREVE[0x08]}5${DOPO_FAQ}\n`,
+    'blog-body/fr/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1);
+  assert.equal(rapporto.escapate.riparate, 1);
+  assert.equal(testo, `${PRIMA_FAQ}è${DOPO_FAQ}\n`);
+});
+
+test('escapata: la coda puo\' contenere a sua volta una spelling, e la mappa regge', () => {
+  // `sc<00>f<16>9narios` -> «scénarios», ma scritto escapato: la coda di tre
+  // caratteri DECODIFICATI vale 1 + 7 + 1 = 9 caratteri di FILE. Un riparatore
+  // che tagliasse `offset + coda` sull'originale lascerebbe mezza spelling nel
+  // testo. Questo test cade se la fine del tratto non passa da `fineIn`.
+  const prima = 'quelques comparaisons entre des sc';
+  const dopo = 'narios pratiques : stages et emplois';
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/fr/sporco.ts': `${prima}${E(0x00)}f${E(0x16)}9${dopo}\n`,
+    'blog-body/it/testimone.ts': `${prima}é${dopo}\n`,
+  }, 'blog-body/fr/sporco.ts');
+  assert.equal(rapporto.escapate.occorrenze, 2, 'due spelling nello stesso punto');
+  assert.equal(testo, `${prima}é${dopo}\n`);
+  assert.ok(senzaByteC0(testo));
+});
+
+test('FAIL-CLOSED — escapata: il testimone e\' nello STESSO locale, non basta', () => {
+  // Il difetto nasce nell'italiano e il traduttore lo propaga verbatim: un
+  // testimone dello stesso locale e' un'altra generazione della stessa
+  // pipeline, che ha visto lo stesso testo corrotto. Conferma la propagazione,
+  // non il carattere. Questo test cade se si toglie il vincolo cross-locale.
+  const { codice, rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/it/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.equal(rapporto.escapate.lasciate, 1);
+  assert.match(rapporto.escapate.elenco[0].motivo, /fuori dal locale "it"/);
+  assert.ok(testo.includes(E(0x16)), 'la spelling resta dov\'e\': e\' l\'ancora');
+  assert.equal(codice, 2, 'un\'occorrenza escapata lasciata e\' un difetto, non testo giusto');
+});
+
+test('FAIL-CLOSED — escapata: due locali che propongono lettere diverse', () => {
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\n`,
+    'blog-body/fr/testimone.ts': `${PRIMA_FAQ}é${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.match(rapporto.escapate.elenco[0].motivo, /lettere diverse/);
+  assert.ok(testo.includes(E(0x16)));
+});
+
+test('FAIL-CLOSED — escapata: nessun testimone, nessuna ipotesi (e il lessico non ha voce)', () => {
+  // «Il salario minimo sociale è una proposta» e' una frase che il lessico
+  // ricostruirebbe senza fatica — «è» esiste nel corpus a migliaia. Qui non
+  // c'e' nessun testimone, e il riparatore non ci prova nemmeno: se un giorno
+  // qualcuno aggiunge il canale del lessico a questa spelling, questo test
+  // diventa rosso ed e' quello che deve succedere.
+  const { codice, rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+  });
+  assert.equal(rapporto.escapate.occorrenze, 1);
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.equal(rapporto.escapate.lasciate, 1);
+  assert.ok(testo.includes(E(0x16)));
+  assert.equal(codice, 2);
+});
+
+test('FAIL-CLOSED — escapata: un file con la sola spelling escapata NON testimonia', () => {
+  // Il file «testimone» porta la frase giusta e, altrove, una propria spelling
+  // escapata. `MARKER.test` su di lui e' FALSO — non ha un byte C0 — quindi
+  // finche' il filtro guardava solo il byte questo file testimoniava. Questo
+  // test cade se `costruisciTestimoni` smette di chiamare `haEscapate`.
+  const { rapporto, testo } = riparaEscapataConAlbero({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/de/testimone.ts': `${PRIMA_FAQ}è${DOPO_FAQ}\nun altro punto del file: modalit${E(0x01)}8\n`,
+  });
+  assert.equal(rapporto.escapate.riparate, 0);
+  assert.ok(testo.includes(E(0x16)));
+});
+
+// ---------------------------------------------------------------------------
+// il tetto dei giri (issue #366)
+// ---------------------------------------------------------------------------
+//
+// `riparaEscapate` applica UNA riparazione per giro e si ferma a
+// `TESTIMONE_GIRI_MAX` (4). Un file con piu' di quattro occorrenze risolvibili
+// usciva quindi dal ciclo con altre risolvibili ancora dentro — e quelle non
+// finivano ne' fra le riparate ne' fra le lasciate: sul disco restavano, nel
+// rapporto sparivano, e il codice d'uscita diceva 0. Il commento di
+// `valutaEscapate` promette il contrario («un elenco di residui che si accorcia
+// perche' il ciclo si e' fermato sarebbe la peggiore delle uscite»), ed e'
+// quella promessa che questi due test tengono in piedi.
+
+/** Sei frasi distinte: l'ancora di 16 caratteri finisce col numero della frase, quindi nessuna e' ambigua. */
+const PRIMA_N = (k) => `frase numero ${k} dello stesso documento, caso ${k}: `;
+const DOPO_N = (k) => ` una faccenda che il lettore numero ${k} conosce bene.`;
+const QUANTE_N = 6;
+const NUMERI = Array.from({ length: QUANTE_N }, (_, i) => i + 1);
+const SPORCO_N = NUMERI.map((k) => `${PRIMA_N(k)}${E(0x16)}5${DOPO_N(k)}`).join('\n').concat('\n');
+const TESTIMONE_N = NUMERI.map((k) => `${PRIMA_N(k)}è${DOPO_N(k)}`).join('\n').concat('\n');
+
+test('escapata: oltre il tetto dei giri nessuna occorrenza risolvibile sparisce dal rapporto', () => {
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': SPORCO_N,
+    'blog-body/de/testimone.ts': TESTIMONE_N,
+  });
+  try {
+    const { codice, rapporto } = esegui(radice, ['--write']);
+    const e = rapporto.escapate;
+    assert.equal(e.occorrenze, QUANTE_N, 'la fixture deve avere piu\' occorrenze del tetto di 4 giri');
+    assert.equal(e.riparate, 4, 'il tetto resta quello: quattro riparazioni per file e non una di piu\'');
+    // L'asserzione che porta la issue: cio' che non e' stato riparato dev'essere
+    // DICHIARATO. Con `if (!scelta)` che scartava le risolvibili successive,
+    // qui `lasciate` era 0 e due occorrenze sparivano senza traccia.
+    assert.equal(
+      e.riparate + e.lasciate, e.occorrenze,
+      `${e.occorrenze - e.riparate - e.lasciate} occorrenze escapate spariscono: ne' riparate ne' lasciate`,
+    );
+    assert.equal(e.lasciate, 2);
+    assert.equal(e.perFile[0].occorrenze, QUANTE_N);
+    assert.equal(e.perFile[0].riparate + e.perFile[0].lasciate, QUANTE_N, 'anche il per-file deve tornare');
+    for (const x of e.elenco) {
+      assert.match(x.motivo, /tetto di 4 riparazioni per file/);
+      assert.equal(x.spelling, E(0x16), 'la spelling dev\'essere quella, non il tratto con la coda');
+    }
+    assert.deepEqual(e.elenco.map((x) => x.offset), [...e.elenco.map((x) => x.offset)].sort((a, b) => a - b),
+      'l\'elenco resta in ordine di offset');
+    assert.equal(codice, 2, 'un\'occorrenza risolvibile e non applicata e\' un difetto: deve tingere l\'uscita');
+    const testo = fs.readFileSync(path.join(radice, 'content', 'blog-body', 'it', 'sporco.ts'), 'utf8');
+    assert.equal(testo.split(E(0x16)).length - 1, 2, 'le due non riparate sono ancora sul disco, con la loro ancora');
+    assert.ok(senzaByteC0(testo));
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('escapata: il motivo dice «rilanciare lo script», e un secondo giro ripara davvero il resto', () => {
+  // Il tetto e' una difesa contro il loop, non un limite del corpus: quello che
+  // avanza dev'essere riparabile al giro dopo. Se cosi' non fosse, dichiararlo
+  // in `lasciate` sarebbe solo un modo piu' onesto di perderlo.
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': SPORCO_N,
+    'blog-body/de/testimone.ts': TESTIMONE_N,
+  });
+  try {
+    esegui(radice, ['--write']);
+    const secondo = esegui(radice, ['--write']);
+    assert.equal(secondo.rapporto.escapate.occorrenze, 2, 'il primo giro ne ha riparate 4');
+    assert.equal(secondo.rapporto.escapate.riparate, 2);
+    assert.equal(secondo.rapporto.escapate.lasciate, 0);
+    assert.equal(secondo.codice, 0);
+    const testo = fs.readFileSync(path.join(radice, 'content', 'blog-body', 'it', 'sporco.ts'), 'utf8');
+    assert.equal(testo, TESTIMONE_N, 'il file finisce identico al testimone');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('il lessico non impara le parole dei file con la sola spelling escapata', () => {
+  // Misurato sul corpus reale: `TOKEN_G` non contiene il backslash, quindi
+  // `imparzialit\\u0000a1` si spezza in `imparzialit` + `u0000a1` e il lessico
+  // imparava la PAROLA MUTILATA — e persino un pezzo della spelling — come
+  // vocabolario del corpus pulito. Escludendo i 22 file escapati: 16.806 ->
+  // 16.784 file, 235.758 -> 235.611 token distinti, e fra i 147 spariti ci
+  // sono `imparzialit`, `accadr` e `u00108`.
+  const sporco = `l'imparzialit${E(0x00)}a1 nella CPI ticinese\n`;
+  const lessico = lessicoDiProva({ 'content/blog-body/it/faq.ts': `${sporco}${sporco}` });
+  assert.equal(lessico.get('imparzialit'), undefined, 'la parola mutilata non e\' vocabolario');
+  assert.equal(lessico.get('u0000a1'), undefined, 'nemmeno un pezzo della spelling');
+  assert.ok(lessico.get('dépenses') >= 2, 'il resto del lessico c\'e\' ancora');
+});
+
+test('localeDi legge il locale dalle due forme di percorso, e non inventa', () => {
+  assert.equal(localeDi('content/blog-body/it/cure-a-domicilio-tassa-ticino.ts'), 'it');
+  assert.equal(localeDi('content/blog-body-ch/de/svizzera.ts'), 'de');
+  assert.equal(localeDi('content/blog-meta-fr.ts'), 'fr');
+  assert.equal(localeDi('content/pulito.ts'), null);
+  assert.equal(localeDi('content/blog-body/xx/ignoto.ts'), null, 'due lettere non bastano: dev\'essere un locale del corpus');
+});
+
+// ---------------------------------------------------------------------------
+// L'ESTRAZIONE DEL MARKER — nessuna occorrenza esce dal rapporto senza contesto
+// ---------------------------------------------------------------------------
+//
+// PERCHE' QUESTO GUARD ESISTE.  Il rapporto dichiara le tre grafie del difetto,
+// e per due di esse NON diceva dove guardare.  Misurato su `origin/main` il
+// 2026-08-18: delle occorrenze stampate, 103 portavano il token col marker in
+// forma `<XX>` e **91 (45 escapate + 46 residui) uscivano cosi'**:
+//
+//     ...:7275  "\\u0010"   <- quale parola?  quale frase?
+//     ...:5185  "22il"      <- quale delle due cifre ha preso il posto?
+//
+// Chi conduce la campagna di riparazione ha dovuto riestrarle dai file una per
+// una — e una campagna che riapre i file a mano e' una campagna che si ferma.
+// Il guard non chiede che lo script RIPARI di piu': chiede che ogni occorrenza
+// che dichiara di aver visto porti con se' l'ancora per andarla a vedere.
+//
+// Falsificato prima di scriverlo, un vincolo per volta, rimettendo il difetto
+// nello script:
+//   - tolto `contesto` dalla famiglia escapata  -> rosso «escapata»
+//   - tolto `contesto` dalla famiglia residuo   -> rosso «residuo»
+//   - tolto `contesto` dai rifiuti del byte C0  -> rosso «byte grezzo»
+//   - delimitato il token invece della cifra    -> rosso «il residuo delimita
+//     ESATTAMENTE la cifra», che e' l'unico modo di dire quale delle due e'.
+
+/** Il tratto che il rapporto delimita fra `[[` e `]]`, o `null` se non c'e'. */
+function delimitato(contesto) {
+  const m = /\[\[([\s\S]*)\]\]/.exec(contesto || '');
+  return m ? m[1] : null;
+}
+
+/** Ogni record dichiarato dal rapporto, di tutte e tre le grafie. */
+function occorrenzeDichiarate(rapporto) {
+  return [
+    ...rapporto.rifiuti.map((x) => ({ ...x, grafia: 'byte grezzo' })),
+    ...rapporto.escapate.elenco.map((x) => ({ ...x, grafia: 'escapata' })),
+    ...rapporto.residui.lasciate.map((x) => ({ ...x, grafia: 'residuo' })),
+  ];
+}
+
+/** Un'occorrenza senza marker, senza tratto delimitato o senza NIENTE intorno. */
+function senzaEstrazione(rapporto) {
+  return occorrenzeDichiarate(rapporto).filter(
+    (x) => !x.marker
+      || delimitato(x.contesto) === null
+      || x.contesto.replace(/\[\[[\s\S]*\]\]/, '').trim() === '',
+  );
+}
+
+test('estrazione — byte grezzo: il contesto delimita il token e rende il marker <XX>', () => {
+  // Il token da solo bastava gia' qui: e' l'unica delle tre grafie che il
+  // rapporto sapeva mostrare.  Il guard c'e' lo stesso, perche' e' la forma di
+  // riferimento a cui le altre due sono state portate.
+  const radice = alberoDiProva({ 'sporco.ts': `un mot inconnu xylo${B(0x0e)}9phone dans la phrase\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    assert.equal(rapporto.rifiutate, 1);
+    const [x] = rapporto.rifiuti;
+    assert.equal(x.marker, '0x0E');
+    assert.equal(delimitato(x.contesto), 'xylo<0E>9phone');
+    assert.match(x.contesto, /un mot inconnu \[\[/);
+    assert.match(x.contesto, /\]\] dans la phrase/);
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione — escapata: il contesto porta la frase, che la sola spelling non diceva', () => {
+  // Prima: `"\\u0016"  testimone: ...` e nient'altro.  La spelling e' identica
+  // in tutte e 45 le occorrenze del corpus: da sola non distingue un'occorrenza
+  // dall'altra, quindi non si puo' ne' classificare ne' andare a vedere.
+  const radice = alberoDiProva({ 'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    assert.equal(rapporto.escapate.lasciate, 1);
+    const [x] = rapporto.escapate.elenco;
+    assert.equal(x.marker, '0x16');
+    assert.equal(delimitato(x.contesto), E(0x16));
+    assert.ok(x.contesto.includes('salario minimo sociale '), 'la frase PRIMA del marker');
+    assert.ok(x.contesto.includes(`5${DOPO_FAQ.slice(0, 12)}`), 'la coda e la frase DOPO');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione — residuo: il contesto delimita ESATTAMENTE la cifra, non il token', () => {
+  // Il vincolo che vale il test.  Il token `'13a` porta DUE cifre e il marker
+  // non c'e' piu': senza sapere quale delle due ha preso il posto del carattere
+  // perduto, l'occorrenza non e' ne' verificabile ne' riparabile a mano.
+  // Delimitare il token intero sarebbe la stessa non-informazione di prima.
+  const frase = "  'blog.article.tredicesima-avs.title': '13a AVS: piu trattenute in busta paga?',";
+  const radice = conTestimoni(`${frase}\n`, [`${frase}\n${frase}\n`, 'ça ça ça ça\n']);
+  try {
+    const { rapporto } = esegui(radice, []);
+    // I testimoni portano la stessa frase, quindi lo stesso residuo: si guarda
+    // quello del file sporco, non il primo che capita.
+    const x = rapporto.residui.lasciate.find((r) => r.file === 'content/sporco.ts');
+    assert.ok(x, 'il residuo del file sporco deve essere dichiarato');
+    assert.equal(x.token, "'13a", 'il token resta quello che era: il contesto si aggiunge, non sostituisce');
+    assert.equal(x.marker, 'strippato', 'qui il byte non c\'e\' piu\', e il rapporto lo dice invece di tacere');
+    assert.equal(x.coda, '3');
+    assert.equal(delimitato(x.contesto), '3', 'la cifra, UNA, e non `13a`');
+    assert.ok(x.contesto.includes('tredicesima-avs'), 'e intorno c\'e\' abbastanza per riconoscere il punto');
+    assert.ok(x.contesto.includes('a AVS: piu'));
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione: ZERO occorrenze dichiarate senza estrazione, su tutte e tre le grafie insieme', () => {
+  // Il censimento, ed e' la metrica della campagna: 91 su 194 prima, 0 dopo.
+  // Una quarta grafia che arrivi al rapporto senza portarsi dietro l'ancora fa
+  // rosso QUI, prima che qualcuno debba riestrarla dai file uno per uno.
+  const frase = "  'blog.article.tredicesima-avs.title': '13a AVS: piu trattenute in busta paga?',";
+  const radice = alberoDiProva({
+    'blog-body/it/sporco.ts': `${PRIMA_FAQ}${E(0x16)}5${DOPO_FAQ}\n`,
+    'blog-body/fr/grezzo.ts': `un mot inconnu xylo${B(0x0e)}9phone dans la phrase\n`,
+    'blog-body/it/residuo.ts': `${frase}\n`,
+    'blog-body/it/testimone.ts': `${frase}\n${frase}\n`,
+    'lessico-extra.ts': 'ça ça ça ça\n',
+  });
+  try {
+    const { rapporto } = esegui(radice, []);
+    const tutte = occorrenzeDichiarate(rapporto);
+    assert.deepEqual([...new Set(tutte.map((x) => x.grafia))].sort(), ['byte grezzo', 'escapata', 'residuo'],
+      'il fixture deve produrre tutte e tre le grafie, o il censimento non prova niente');
+    assert.deepEqual(senzaEstrazione(rapporto).map((x) => `${x.grafia} ${x.file}:${x.offset}`), []);
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione: il rapporto JSON sopravvive a una PIPE, non solo a un redirect su file', () => {
+  // Il difetto che rendeva inutile tutto il resto.  `process.exit()` chiude il
+  // processo senza aspettare che stdout sia scritto, e su una pipe stdout e'
+  // ASINCRONO: misurato su `content/` il 2026-08-18, `--json | ...` consegnava
+  // 65.536 byte esatti — un buffer di pipe — dei 124.385 del rapporto.  Cioe'
+  // un JSON che non si apre, mentre `--json > file` era completo: la forma di
+  // guasto si vede solo mettendo lo strumento in pipeline, che e' esattamente
+  // come lo usa chi conduce la campagna.
+  //
+  // Il fixture deve produrre un rapporto piu' grande di un buffer di pipe, o il
+  // test passerebbe anche col difetto rimesso: 400 occorrenze bastano.
+  const molte = Array.from({ length: 400 }, (_, i) => `phrase numero ${i} avec xylo${B(0x0e)}9phone dedans`).join('\n');
+  const radice = alberoDiProva({ 'sporco.ts': `${molte}\n` });
+  try {
+    const grezzo = execSync(`node ${JSON.stringify(SCRIPT)} --root ${JSON.stringify(radice)} --json | cat`, {
+      encoding: 'utf8',
+      maxBuffer: 64 * 1024 * 1024,
+    });
+    assert.ok(grezzo.length > 65536, `il fixture deve superare un buffer di pipe (${grezzo.length} byte)`);
+    const rapporto = JSON.parse(grezzo);
+    assert.equal(rapporto.rifiutate, 400, 'e il rapporto che arriva in fondo alla pipe e\' quello intero');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
+});
+
+test('estrazione: il contesto resta UNA riga — a capo, ritorno e TAB si vedono, non spezzano', () => {
+  // `MARKER` non considera marker `\n`, `\r` e `\t`, perche' sono caratteri
+  // legali.  Ma dentro la finestra ci finiscono lo stesso, e se restano grezzi
+  // il rapporto smette di avere una riga per occorrenza: misurato sul corpus,
+  // 27 delle 314 occorrenze hanno un a capo nella finestra.  La piu' istruttiva
+  // e' `bekannt war.\n\n> [[<10>Der]] Hauptzweck`, che mostra il marker a inizio
+  // di una citazione — cioe' che stava al posto della virgoletta aperta, che e'
+  // esattamente la classificazione che serve alla campagna.
+  const radice = alberoDiProva({ 'sporco.ts': `phrase avant\n\n> ${B(0x0e)}9phone\tapres tabulation\n` });
+  try {
+    const { rapporto } = esegui(radice, []);
+    const [x] = rapporto.rifiuti;
+    assert.ok(!/[\n\r\t]/.test(x.contesto), `il contesto non contiene spaziatura grezza: ${JSON.stringify(x.contesto)}`);
+    assert.ok(x.contesto.includes('avant\\n\\n> '), 'gli a capo si vedono, resi visibili');
+    assert.ok(x.contesto.includes('\\tapres'), 'e il TAB pure: e\' la terza grafia del marker');
+  } finally {
+    fs.rmSync(radice, { recursive: true, force: true });
+  }
 });

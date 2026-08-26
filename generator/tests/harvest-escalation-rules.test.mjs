@@ -52,15 +52,20 @@
  * ## Dove gira
  *
  * `npm test` del corpus (`node --test generator/tests/*.test.mjs`), quindi
- * dentro `tests.yml` — che ha `branches-ignore: [main]`: **gira sulle PR, NON
- * sui push a `main`**.
+ * dentro `tests.yml`. Fino al 2026-08-18 quel workflow aveva
+ * `branches-ignore: [main]` e girava **solo sulle PR**; da allora gira anche sui
+ * push a `main`.
  *
  * ## Cosa questo file NON fa
  *
  * Non ripara `overlap-skip`. `scripts/ci/harvest-agent-lessons.mjs` è
- * `mode: identical` nel `loop-sync-manifest.json`: la fix va fatta sul sito e
- * scende col mirror. Qui `overlap-skip` è dichiarato `escalatable` perché è ciò
- * che l'harvester fa oggi — e quando la fix del sito atterrerà, questo test
+ * `mode: identical` nel `loop-sync-manifest.json`, ma nessun mirror porta
+ * `scripts/ci/**` (i filtri `paths:` dei mirror del sito coprono solo
+ * `engine/`, `index.ts`, `articleSections.ts`, `content/` — vedi
+ * `generator/tests/generation-health-watchdog.test.mjs` §8): la fix va fatta
+ * a mano su ENTRAMBI i repo, non solo sul sito. Qui `overlap-skip` è
+ * dichiarato `escalatable` perché è ciò che l'harvester fa oggi — e quando la
+ * fix atterrerà su entrambi i lati, questo test
  * diventerà rosso e costringerà ad aggiornare la dichiarazione. È il
  * comportamento voluto: la mappa è un contratto sullo stato reale, non
  * un'approvazione.
@@ -82,6 +87,8 @@ import {
   branchNameForIssue,
   fixOutcomeCode,
   selectRecoverableWork,
+  hasOrphanNote,
+  ORPHAN_NOTE_MARKER,
 } from '../../scripts/ci/orphan-max-turns-work.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -319,4 +326,43 @@ test('helper: nome del branch e lettura del marker', () => {
   assert.equal(fixOutcomeCode('testo\n<!-- FIX_OUTCOME: max-turns -->\naltro'), 'max-turns');
   assert.equal(fixOutcomeCode('<!-- FIX_OUTCOME: OVERLAP-SKIP -->'), 'overlap-skip');
   assert.equal(fixOutcomeCode('nessun marker'), null);
+});
+
+// ── Dedup dell'annotazione (2026-08-24) ──────────────────────────────────────
+// Il dedup non e' una rifinitura: e' la condizione che rende `--apply`
+// collegabile a uno schedule, ed e' per questo che lo script e' restato scollegato
+// dal 2026-08-13. Senza, il commento torna a ogni giro, e un commento di bot alza
+// `updatedAt` — che e' precisamente cio' che affama il cooldown del parked-retry e
+// l'age-out (misurato il 2026-08-24 sul sito: 30 candidate nel pool del retry, 2
+// oltre il cooldown). Un rilevatore che si ri-annuncia ogni notte diventerebbe la
+// causa del blocco che esiste per diagnosticare.
+test("hasOrphanNote riconosce un'annotazione gia' presente", () => {
+  assert.equal(hasOrphanNote([{ body: `roba\n\n${ORPHAN_NOTE_MARKER}` }]), true);
+});
+
+test('hasOrphanNote e\' falso su un commento che descrive lo stesso fatto senza il marker', () => {
+  // La prova e' il MARKER, non la prosa: un commento umano che dice la stessa
+  // cosa non deve sopprimere l'annotazione automatica, o il dedup diventerebbe
+  // sensibile a come qualcuno ha scritto una frase.
+  assert.equal(hasOrphanNote([{ body: 'lavoro orfano rilevato a mano, branch fix/issue-1' }]), false);
+});
+
+test('hasOrphanNote tollera lista vuota, null e commenti senza body', () => {
+  assert.equal(hasOrphanNote([]), false);
+  assert.equal(hasOrphanNote(null), false);
+  assert.equal(hasOrphanNote(undefined), false);
+  assert.equal(hasOrphanNote([{}, { body: null }]), false);
+});
+
+test("il marker e' un commento HTML, quindi invisibile nel corpo reso", () => {
+  assert.match(ORPHAN_NOTE_MARKER, /^<!--.*-->$/);
+});
+
+test('lo script e\' CITATO da un workflow: la meta\' osservativa non e\' piu\' scollegata', () => {
+  // E' il difetto che questa modifica chiude, e va difeso da un test e non da una
+  // riga di prosa: lo script esisteva dal 2026-08-13 e nessun workflow lo
+  // chiamava. Se qualcuno lo scollega, questo test lo dice.
+  const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/lessons-harvester.yml'), 'utf8');
+  assert.match(wf, /orphan-max-turns-work\.mjs/);
+  assert.match(wf, /--apply/);
 });

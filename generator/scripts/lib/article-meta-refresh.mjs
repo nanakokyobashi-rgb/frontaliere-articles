@@ -67,7 +67,7 @@
  * `clampSeoDescriptions` itself delegates to — the truncation ALGORITHM has
  * one source; only the two threshold numbers are duplicated, and covered.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync, unlinkSync, renameSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { corpusPath } from './corpus-paths.mjs';
@@ -139,10 +139,26 @@ function clampBudgetedFields(fields, budgets) {
 // control character other than TAB/LF/CR (issue #66). Kept as its own small
 // copy rather than an import across module boundaries meant to stay
 // dependency-light — see the header on why this file avoids create-article.mjs.
+//
+// Commits via temp+rename (issue #561, same rule as create-article.mjs's
+// write()): this rewrites an EXISTING `content/*.ts`/`data/blog-articles-
+// data.ts` entry in place, reached from workflows with `timeout-minutes`
+// that kill via SIGKILL — a direct writeFileSync on the target can leave it
+// truncated mid-write. `renameSync` is a single POSIX syscall, atomic on the
+// same filesystem; the temp file lives next to the target so the rename
+// never crosses a filesystem boundary.
+let writeTmpSeq = 0;
 function writeCorpusFile(file, content) {
   const clean = sanitizeText(content);
   reportStrippedControlChars(file, content, clean);
-  writeFileSync(file, clean);
+  const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, file);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 function escapeRegex(s) {

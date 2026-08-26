@@ -116,6 +116,12 @@ export const AI_MODELS = Object.freeze({
   // Gemma models use the same Gemini API endpoint — 14,400 req/day each!
   GEMINI_FLASH:     'gemini-2.5-flash',
   GEMINI_PRO:       'gemini-2.5-pro',
+  // gemini-2.0-flash e' RITIRATO: l'API risponde HTTP 404 "This model models/gemini-2.0-flash is
+  //                       no longer available" (2026-08-14, run 31823202761, 8 hit). Resta in
+  //                       roster di proposito: dal fix al matcher del 404 qui sotto viene marcato
+  //                       esaurito al PRIMO 404 e non piu' richiamato per il resto della run.
+  //                       Curare il roster a mano e' cio' che ha gia' fallito una volta (vedi
+  //                       GEMINI_31_FLASH_LITE piu' sotto): la lista rimarcisce, il matcher no.
   GEMINI_2_FLASH:   'gemini-2.0-flash',
   GEMINI_FLASH_LITE:'gemini-2.5-flash-lite',
   // Gemma models via Gemini API — 14,400 req/day each!
@@ -129,6 +135,8 @@ export const AI_MODELS = Object.freeze({
   //                       OR_GEMMA_3_12B / CF_GEMMA_3_12B remain available.
   // New Gemini 3.x models (preview)
   GEMINI_3_FLASH:   'gemini-3-flash-preview',
+  // gemini-3-pro-preview e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 4 hit). Stessa
+  //                       nota di GEMINI_2_FLASH sopra: se ne occupa il matcher, non la lista.
   GEMINI_3_PRO:     'gemini-3-pro-preview',
   // GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                       The GA replacement `gemini-3.1-flash-lite` is exposed below as GEMINI_31_FLASH_LITE_GA and stays in the chain.
@@ -138,6 +146,8 @@ export const AI_MODELS = Object.freeze({
   GEMINI_FLASH_LATEST:        'gemini-flash-latest',
   GEMINI_FLASH_LITE_LATEST:   'gemini-flash-lite-latest',
   GEMINI_PRO_LATEST:          'gemini-pro-latest',
+  // gemini-2.0-flash-lite e' RITIRATO (HTTP 404 "no longer available", 2026-08-14, 10 hit — il
+  //                       fallimento piu' frequente di quella run). Stessa nota.
   GEMINI_2_FLASH_LITE:        'gemini-2.0-flash-lite',
   GEMINI_31_FLASH_LITE_GA:    'gemini-3.1-flash-lite',
 
@@ -391,7 +401,7 @@ export const DEFAULT_CHAIN = [
   // AI_MODELS.GPT_5 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   AI_MODELS.LLAMA_4_MAVERICK,   // 4.  Meta Llama 4 flagship  (GitHub Models)
   AI_MODELS.GEMINI_FLASH,       // 5.  Google fast            (Gemini API free)
-  AI_MODELS.GEMINI_3_PRO,       // 5b. Gemini 3 Pro preview   (Gemini API free)
+  AI_MODELS.GEMINI_3_PRO,       // 5b. Gemini 3 Pro preview   (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_3_FLASH,     // 5c. Gemini 3 Flash preview (Gemini API free)
   // AI_MODELS.O3 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.GROK_3 removed — GitHub Models HTTP 400 "unknown_model: grok-3" (2026-05-18)
@@ -425,7 +435,7 @@ export const DEFAULT_CHAIN = [
   // SN_LLAMA_3_3_70B removed — SambaNova HTTP 402 PAYMENT_METHOD_REQUIRED (2026-04)
   // AI_MODELS.O1 removed — GitHub Models HTTP 400 "unavailable_model" (2026-05-18)
   // AI_MODELS.LLAMA_3_2_90B removed chain — GitHub Models HTTP 400 "unknown_model: Llama-3.2-90B-Vision-Instruct" (2026-07-05, confirmed retired live, 12x in 30-run sample)
-  AI_MODELS.GEMINI_2_FLASH,     // 25. Google 2.0 flash       (Gemini API free)
+  AI_MODELS.GEMINI_2_FLASH,     // 25. Google 2.0 flash       (ritirato — vedi nota su AI_MODELS)
   // AI_MODELS.GEMINI_31_FLASH_LITE removed — Gemini API HTTP 404 "models/gemini-3.1-flash-lite-preview is no longer available" (2026-05-27, run 26534353239).
   //                                 The deprecated preview kept winning the fallback selector because 404 didn't mark it exhausted, causing the
   //                                 entire blog-generator workflow to fail with 50+ retries against the dead endpoint. The GA non-preview model
@@ -569,7 +579,7 @@ export const DEFAULT_CHAIN = [
   AI_MODELS.GEMINI_FLASH_LATEST,        // alias → today's stable flash
   AI_MODELS.GEMINI_FLASH_LITE_LATEST,   // alias → today's stable flash-lite
   AI_MODELS.GEMINI_PRO_LATEST,          // alias → today's stable pro
-  AI_MODELS.GEMINI_2_FLASH_LITE,        // Gemini 2.0 flash lite (extra quota)
+  AI_MODELS.GEMINI_2_FLASH_LITE,        // Gemini 2.0 flash lite (ritirato — vedi nota su AI_MODELS)
   AI_MODELS.GEMINI_31_FLASH_LITE_GA,    // Gemini 3.1 flash lite GA (non-preview)
   // Groq compound full (not just mini)
   AI_MODELS.GROQ_COMPOUND_FULL,
@@ -705,6 +715,25 @@ function getLocalLlmTimeoutMs() {
   return Number.isFinite(v) && v > 0 ? v : 1_500_000; // 25 min default — see comment above
 }
 
+// Tetto per una singola chiamata locale, per quanto grande sia l'allowance
+// residua — stesso ruolo di CLAUDE_CLI_MAX_TIMEOUT_MS (vedi il commento sopra
+// CLAUDE_CLI_MIN_TIMEOUT_MS: "il floor faceva da soffitto"). Senza un tetto
+// che PUO' crescere sopra getLocalLlmTimeoutMs(), quel floor smette di essere
+// un minimo e torna a essere l'unico valore possibile anche quando
+// l'allowance residua e' molto piu' ampia — stesso pattern segnalato dalla
+// review di #451 su _callClaudeCli, non toccato allora perche' fuori dal
+// finding originale. Piu' alto del tetto CLI perche' l'inferenza CPU locale
+// e' strutturalmente piu' lenta — il floor stesso e' gia' 1.500.000ms (25min)
+// di default, contro i 180.000ms del CLI.
+const LOCAL_LLM_MAX_TIMEOUT_MS = 3_000_000; // 50 min, 2x il floor di default
+
+// Quota dell'allowance residua concessa a UNA chiamata locale — stessa forma
+// e stesso razionale di CLAUDE_CLI_ALLOWANCE_SHARE (vedi quel commento).
+// Nessuna evidenza diagnostica di troncamento live come per claude-cli (la
+// review di #451 lo nota esplicitamente), ma l'asimmetria "floor che non
+// cresce mai dentro l'allowance" e' la stessa per costruzione.
+const LOCAL_LLM_ALLOWANCE_SHARE = 1 / 3;
+
 // ── OmniRoute (self-hosted local AI gateway, OpenAI-compatible) ──────
 // Opt-in: inert unless OMNIROUTE_ENABLED is truthy. OmniRoute runs
 // persistently on the host (Homebrew CLI v3.8.48+, http://localhost:20128)
@@ -755,11 +784,22 @@ let _claudeCliBinaryMissing = false;
 // timeout is a transient blip worth retrying next call. But once several
 // timeouts land back-to-back within one run, that's not a blip — it's the
 // subprocess itself unable to finish in time — and every further attempt is
-// a guaranteed 60s loss for a fallback that already has a template result
+// a guaranteed 120s loss for a fallback that already has a template result
 // ready. Trip after CLAUDE_CLI_TIMEOUT_STORM_THRESHOLD consecutive timeouts.
+//
+// The threshold was 8, sized off the 159/162 incident above where volume was
+// never the constraint. Issue #432 (2026-08-18) measured the opposite shape:
+// runs that only ever offer claude-cli/haiku 2-4 times *total*, each one a
+// 120000ms timeout with zero stdout bytes — the counter never gets anywhere
+// near 8, so the breaker can't trip at the volume these runs actually
+// produce, and every run repays the full storm cost from zero. 3 keeps a
+// single transient blip from tripping it (the exemption above still holds:
+// one timeout is not a storm) while matching the low end of the observed
+// per-run volume, so a 4-attempt storm run now spares its last attempt
+// instead of paying for all of them every time.
 let _claudeCliConsecutiveTimeouts = 0;
 let _claudeCliTimeoutStormDetected = false;
-const CLAUDE_CLI_TIMEOUT_STORM_THRESHOLD = 8;
+const CLAUDE_CLI_TIMEOUT_STORM_THRESHOLD = 3;
 
 // Same in-run, never-persisted breaker shape as _claudeCliTimeoutStormDetected
 // above, omniroute/auto. _isLastResortProvider() exempts OmniRoute from
@@ -792,10 +832,273 @@ const OMNIROUTE_FAILURE_STORM_THRESHOLD = 5;
 // a `finally`, including on throw/reject.
 const CLAUDE_CLI_MAX_CONCURRENCY = 2;
 
+// Soglia oltre la quale una chiamata claude-cli RIUSCITA racconta comunque
+// quanto e' costata e dove.
+//
+// ── PERCHE' SERVE PROPRIO SUL RAMO DI SUCCESSO ─────────────────────────────
+//
+// `createClaudeCliStreamTrace` raccoglie gia' tutto — primo evento,
+// `rate_limit_event`, giri di StructuredOutput — ma `trace.describe()` viene
+// chiamato SOLO dai due rami d'errore di `_callClaudeCli`. Finche' il difetto
+// era «timeout a 120s» quello bastava, perche' il difetto ERA un errore.
+// Non lo e' piu': misurato sulla run 32230961988 (2026-08-19, job `generate`
+// 17m00s), `claude-cli/haiku` ha chiuso 3 chiamate su 3 con successo
+// impiegando 197s, 206s e 253s — 656s, cioe' il 64% dell'intero job — mentre
+// nessun altro modello del roster ha mai superato i 60s. Una diagnostica
+// appesa al fallimento e' muta davanti a un difetto che si manifesta come
+// lentezza CON successo: il riepilogo del roster dice `claude-cli 3 served/0
+// failed` e non una parola su quei 656 secondi.
+//
+// Il commento di `createClaudeCliStreamTrace` nomina gia' il candidato causale
+// piu' forte — lo stesso `CLAUDE_CODE_OAUTH_TOKEN` di piano Max e' condiviso
+// con `pr-review-loop`, `issue-fix` e il redflag-fixer, quindi un limite di
+// sessione spiegherebbe la forma del difetto — e lo dichiara «oggi
+// invisibile». Lo e' ancora, ed e' invisibile per questa ragione qui.
+//
+// LA DISTINZIONE CHE QUESTA RIGA COMPRA, e perche' vale una PR da sola: i
+// rimedi sono opposti e mutuamente esclusivi.
+//
+//   - tempo prima del primo token (`ttft_ms` alto, o un `rate_limit_event`)
+//     → e' CODA, non generazione: il rimedio e' di pianificazione (non far
+//       girare la generazione mentre i workflow agentici consumano la stessa
+//       quota), e ogni intervento su prompt, schema o timeout e' sprecato;
+//   - tempo dopo il primo token (`duration_api_ms` alto con `ttft_ms` basso,
+//     molti `output_tokens`/`thinking_tokens`)
+//     → e' GENERAZIONE: il rimedio e' la dimensione della risposta, e la
+//       pianificazione non c'entra;
+//   - `structuredAttempts > 1`
+//     → e' l'anello di StructuredOutput che rigenera l'articolo intero, cioe'
+//       il cap dichiarato `blocked:` in #487/#6080 «in attesa di una finestra
+//       di run post-merge»: questa e' quella finestra.
+//
+// Questo file ha gia' pagato TRE tentativi alla cieca sullo stesso sintomo
+// (floor 60s→120s, il semaforo qui sopra, la soglia del breaker a 3), tutti
+// senza un dato su cui puntare — sta scritto nel commento di
+// `createClaudeCliStreamTrace`. Questa non e' la quarta: non tocca nessuna
+// delle tre leve, e non cambia il comportamento di una sola chiamata.
+//
+// La soglia e' 60s per allinearsi all'heartbeat `⏳ in-flight Ns` di
+// `_callModel`, che e' la definizione di «lenta» gia' in uso in questo file:
+// sotto quella soglia la riga non compare e il volume di log resta identico a
+// oggi. `0` la spegne del tutto.
+// Budget di THINKING concesso al processo `claude`, in token.
+//
+// ── IL TERMINE DOMINANTE, MISURATO ────────────────────────────────────────
+//
+// La riga 🐢 introdotta dal giro precedente ha risposto alla domanda che tre
+// tentativi alla cieca non avevano potuto porre. Tre chiamate reali di
+// `claude-cli/haiku`, 2026-08-19, dai log di produzione:
+//
+//   run 32261707656   wall 230s   ttft 111s   3 giri   21.166 token out,  9.955 di thinking
+//   run 32260372210   wall 181s   ttft 103s   2 giri   17.017 token out,  9.430 di thinking
+//   run 32260372210   wall  90s   ttft  85s   1 giro    8.147 token out,  7.601 di thinking
+//
+// Due letture, ed entrambe puntano qui:
+//
+//  1. NON e' coda. Il `rate_limit_event` c'e' in tutte e tre, ma dice
+//     `status=allowed`: la quota condivisa con pr-review-loop/issue-fix era
+//     il candidato causale piu' forte, ed e' SCARTATO dal dato.
+//  2. E' generazione, e piu' precisamente e' THINKING. Il rapporto
+//     thinking/ttft e' 89,7 · 91,6 · 89,4 token al secondo — la stessa
+//     costante a tre cifre su tre chiamate indipendenti. Cioe' `ttft_ms` NON
+//     e' attesa: e' il tempo speso a pensare prima di emettere il primo token
+//     di risposta. E vale il 48%, 57% e 94% dell'intera chiamata.
+//
+// Il primo evento dello stream arriva a 637-1213ms in tutte e tre: l'avvio del
+// processo non c'entra niente, come gia' diceva `time_to_request_ms` a 57ms.
+//
+// ── IL TETTO NON LEGA: MISURATO, E IL DEFAULT E' TORNATO A ZERO EFFETTO ───
+//
+// Il giro precedente aveva messo il default a 2048, dichiarando nel corpo
+// della PR che restava una PREVISIONE finche' una run post-merge non l'avesse
+// confermata, e che «se resta a 9.000 non ha legato e va TOLTO, non ritarato a
+// occhio». Dodici campioni dopo, su run verificate `ahead` del merge:
+//
+//    1.444 · 12.602 · 7.728 · 1.517 · 10.474 · 7.766
+//    2.492 ·  2.007 · 3.020 · 5.320 ·  2.504 · 4.767
+//
+// NOVE su dodici superano 2.048, e il massimo (12.602) e' piu' alto di
+// qualunque campione pre-fix. Non lega nemmeno per-giro: 12.602 su 2 giri fa
+// 6.301 a giro. La prima misura, che sembrava confermare, era n=1 su una
+// chiamata gia' povera di thinking.
+//
+// Messo insieme alle prove locali — `MAX_THINKING_TOKENS=0` porta il thinking
+// a ZERO esatti, `=256` ne produce comunque 1.058, `=2048` non morde mai — la
+// lettura coerente e' che la variabile si comporti da INTERRUTTORE e non da
+// budget: `0` spegne il ragionamento, qualunque valore non nullo lascia in
+// piedi il budget di default del modello.
+//
+// Quindi il default qui e' `null`: la variabile NON viene impostata, e il
+// comportamento e' identico a prima che il knob esistesse. Il knob resta come
+// opt-in perche' il valore che AGISCE esiste ed e' `0` — ma spegnere del tutto
+// il ragionamento nella scrittura di un articolo e' una scelta di QUALITA', e
+// va decisa, non dedotta da una misura di latenza.
+//
+// ── COSA RESTA VERO, ED E' LA PARTE CHE CONTA ─────────────────────────────
+//
+// La diagnosi regge. Il thinking e' 5.000-12.600 token per chiamata, e il
+// `ttft` gli sta dietro con lo stesso rapporto di sempre — 12.602/146s = 86,
+// 10.474/111s = 94, 7.766/87s = 89 token al secondo. E' ancora il termine
+// dominante del costo di `claude-cli/haiku`, e NON e' coda: il
+// `rate_limit_event` dice `status=allowed` in tutti e dodici i campioni.
+//
+// Cambia solo la conclusione su COME ridurlo. `CLAUDE_CLI_MAX_THINKING_TOKENS=0`
+// e' l'unico valore che agisce, e la riga 🐢 misura l'effetto al primo giro.
+const CLAUDE_CLI_MAX_THINKING_TOKENS = (() => {
+  const raw = (process.env.CLAUDE_CLI_MAX_THINKING_TOKENS || '').trim();
+  if (!raw) return null;
+  if (/^(off|none|no)$/i.test(raw)) return null;
+  const n = Number(raw);
+  return Number.isInteger(n) && n >= 0 ? n : null;
+})();
+
+const CLAUDE_CLI_SLOW_CALL_LOG_MS = (() => {
+  const raw = (process.env.CLAUDE_CLI_SLOW_CALL_LOG_MS || '').trim();
+  if (!raw) return 60_000;
+  const n = Number(raw);
+  return Number.isFinite(n) && n >= 0 ? n : 60_000;
+})();
+
 // Per-call timeout FLOOR for the claude CLI subprocess (raised 60s → 120s by
 // the T2 diagnosis, see _callClaudeCli). Shared so _hardCallCapMs sizes its
 // backstop off the same floor instead of a second copy of the literal.
-const CLAUDE_CLI_MIN_TIMEOUT_MS = 120_000;
+//
+// ── 120s → 180s, E SOPRATTUTTO: IL FLOOR ERA IL SOFFITTO (2026-08-18) ───────
+//
+// Il nome dice «floor», ma nel percorso dominante questa costante agiva da
+// TETTO. In _callClaudeCli il timeout era
+//
+//     min( max(opts.timeout, FLOOR), remaining )
+//
+// e per la generazione articolo `opts.timeout` e' 90s: il `max` dava sempre
+// 120s, e il `min` con `remaining` non mordeva quasi mai perche' `remaining`
+// e' dell'ordine dei 600-1000s. Risultato: ogni chiamata riceveva 120s tondi
+// mentre l'allowance residua ne offriva quasi mille.
+//
+//   run 32161215947 (corpus, 2026-08-18 16:36Z), tre timeout su tre:
+//     ⏳ in-flight 60s (hard cap 1020s) → ucciso a 120s   ← 900s inutilizzati
+//     ⏳ in-flight 60s (hard cap  630s)
+//
+// Cosa dice la diagnostica di #441/#6034 (`--output-format stream-json`), che
+// prima non c'era. I tre timeout NON erano chiamate mute:
+//
+//     173 eventi, fermo dopo system/thinking_tokens a 119522ms, stdout 3525 B
+//     123 eventi, fermo dopo assistant           a  94721ms, stdout 71169 B
+//     175 eventi, fermo dopo assistant           a  87255ms, stdout 84574 B
+//
+// primo evento a 620-1013ms, `rate_limit_event status=allowed tipo=five_hour`
+// in tutti e tre. Non e' quota, non e' rate limit, non e' un CLI che non
+// parte: e' una chiamata che sta lavorando e viene troncata. Il primo caso
+// emetteva ancora a 478ms dal cap. Il vecchio «stdout: 0 bytes» dei log
+// precedenti era un artefatto del buffering di `--output-format json`, non la
+// prova di un subprocess bloccato — vedi createClaudeCliStreamTrace.
+//
+// Misurato in locale sullo stesso prompt-articolo, flag di produzione, laptop
+// scarico (2026-08-18): una chiamata SANA e riuscita ha impiegato 116,9s
+// (primo byte 1836ms, 72 KB) — 3,1s sotto il cap — e una seconda stava ancora
+// emettendo a 300s (127 KB) quando l'ho fermata io. Il caso sano non e' «~45s»:
+// e' molto variabile e sfiora o supera i 120s gia' senza contesa. Un cap fisso
+// a 120s taglia quindi a meta' la distribuzione dei casi sani.
+//
+// ── PERCHE' NON BASTA UN NUMERO FISSO PIU' GRANDE ──────────────────────────
+//
+// L'allowance non e' una costante: e' `remaining` del budget di sezione, e nello
+// STESSO run vale 1020s e 630s (decade mentre la run brucia budget; la serie
+// osservata nel run 32147257594 e' 1020→900→865→854→775→758→685→586→496→392→
+// 302→136). Un fisso grande sfonda quando l'allowance residua e' piccola, un
+// fisso piccolo spreca quando e' grande. Da qui la forma: la chiamata prende
+// una QUOTA dell'allowance residua, con questo valore come minimo vero e
+// CLAUDE_CLI_MAX_TIMEOUT_MS come tetto. Vedi _callClaudeCli.
+//
+// 180s e non di piu' come minimo: e' il minimo a valere anche quando
+// l'allowance e' quasi finita, dove la quota e' piccola e vince lui. Tenerlo
+// basso e' cio' che impedisce a `CLAUDE_CLI_TIMEOUT_STORM_THRESHOLD` timeout
+// consecutivi di divorare una sezione corta — con 120s il caso peggiore era
+// 3×120=360s, con 180s e' 3×180=540s, e la clamp a `remaining` in
+// _callClaudeCli lo tiene comunque dentro l'allowance per costruzione.
+const CLAUDE_CLI_MIN_TIMEOUT_MS = 180_000;
+
+// ── COSA C'E' DAVVERO DENTRO UN «TIMEOUT» DI claude-cli (2026-08-19) ────────
+//
+// Il nome del tool sintetico che il CLI espone quando gli si passa
+// `--json-schema`. NON e' un tool del progetto: lo crea il CLI, e lo dichiara
+// in `system/init` come `tools: ["StructuredOutput"]` anche quando gli argomenti
+// contengono `--tools ''`.
+//
+// Perche' questa costante esiste. La diagnostica di #441 diceva «fermo dopo
+// assistant a 223671ms» e sembrava uno STALLO dello stream. Non lo e'.
+// Riproduzione locale con i flag esatti di produzione (CLI 2.1.235, haiku,
+// 2026-08-18, prompt-articolo + `--json-schema`), ucciso a 400s:
+//
+//     system/init (tools: ["StructuredOutput"])
+//     assistant  23:46:58  blocks=['thinking']   textlen=0
+//     assistant  23:50:31  blocks=['tool_use']   textlen=0   ← 21.886 byte
+//     user       23:50:31  tool_result is_error:true
+//                          «Output does not match required schema:
+//                           root: must have required property 'reason'»
+//     user       23:52:50  [Request interrupted by user]
+//     result/error_during_execution   num_turns=3  output_tokens=6773
+//
+// Cioe': il modello CHIAMA `StructuredOutput` con l'articolo completo dentro
+// `input`; il CLI valida contro lo schema in locale, e se manca un campo
+// required RIFIUTA con un `tool_result` d'errore e il modello RIGENERA da capo.
+// Ogni giro costa ~3m30s e ~6.800 token di output. 224-288 eventi e 110-160 KB
+// di stdout non sono uno stream che si e' fermato: sono N giri di questo anello.
+//
+// Da cui le tre conseguenze che questo file deve gestire, e che spiegano perche'
+// le ipotesi «evento terminale mancante», «backpressure» e «rate limit» erano
+// tutte da scartare:
+//
+//   - i 17-29s di silenzio prima del SIGKILL non sono uno stallo: fra due
+//     eventi di UN SOLO giro sano ne passano 3m32s (23:46:58 → 23:50:31),
+//     perche' un blocco `tool_use` viene emesso solo a blocco chiuso;
+//   - `rate_limit_event` riporta `status=allowed`: non e' throttling;
+//   - lo stdout e' letto in flowing mode (`child.stdout.on('data')`), quindi
+//     non esiste backpressure che possa bloccare il figlio.
+//
+// L'anello non e' limitabile da qui: questa CLI non ha `--max-turns`
+// (verificato su 2.1.235). Cio' che si puo' fare, e che questo modulo ora fa,
+// e' non BUTTARE il primo giro: l'articolo del tentativo rifiutato e' completo
+// e pubblicabile — nella riproduzione sopra mancava solo `reason`, che lo
+// schema ammette null. Vedi trace.salvage() e _salvageClaudeCliPayload.
+const CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL = 'StructuredOutput';
+
+// Tetto per una singola chiamata al CLI, per quanto grande sia l'allowance
+// residua. Serve a impedire che una sezione lunga (allowance 2400s) regali
+// 800s a UNA chiamata: oltre i 600s una chiamata che non ha finito non e' piu'
+// «lenta», e la cascata ha bisogno del budget che resta per i modelli dopo.
+// Sopra la piu' lunga osservata (>300s in locale) con margine ~2x.
+const CLAUDE_CLI_MAX_TIMEOUT_MS = 600_000;
+
+// Quota dell'allowance residua concessa a UNA chiamata del CLI.
+//
+// 1/2 dal 2026-08-20 (issue del corpus #518); era 1/3. La misura che ha deciso, su 6 run
+// del 19-20/08: 14 chiamate uccise dal timeout, TUTTE ancora vive e in
+// streaming al SIGKILL («fermo dopo assistant a 336821ms» su un kill a
+// 362898ms), e le 5 limitate dalla quota — 205s, 241s, 312s, 355s, 363s —
+// avevano `remaining` 616-1089s: budget in abbondanza, uccise lo stesso. A
+// 1/3 la quota copriva a malapena il range delle chiamate RIUSCITE osservate
+// (90-265s); a 1/2 quelle 5 avrebbero avuto 308-545s. La lentezza di haiku
+// e' thinking legittimo (5.000-12.600 token a chiamata, ~90 tok/s costanti,
+// vedi l'issue del corpus #517, §2), non coda — e la decisione del proprietario (2026-08-20) e'
+// che la qualita' viene prima: meglio dare tempo ad haiku che ucciderlo
+// presto e ricadere sulla cascata, che risponde in <60s ma e' il ripiego.
+// Il costo dichiarato: le run si allungano quando haiku e' lento.
+//
+// Il caso peggiore, che a 1/3 era la ragione per non salire: il breaker
+// scatta a CLAUDE_CLI_TIMEOUT_STORM_THRESHOLD (3) timeout consecutivi, e la
+// serie geometrica a 1/2 vale 1 - (1/2)³ = 0,875 contro 0,704 di 1/3. Ma il
+// consumo vero e' sotto il limite idealizzato — il tetto
+// CLAUDE_CLI_MAX_TIMEOUT_MS taglia la prima chiamata appena l'allowance
+// supera 1200s: a 1620s la tempesta spende l'84% e alla cascata restano
+// 255s, cioe' 4+ chiamate del fallback misurato (<60s l'una). Dove invece
+// morde, il regime medio (720-1020s di allowance: restano 0-75s contro
+// 120-274s di 1/3), una tempesta richiede 3 timeout consecutivi ANCHE con
+// finestre da 300-600s — un haiku rotto, non lento — e trace.salvage() ha
+// comunque recuperato 7 payload su 14 kill. La clamp finale a `remaining`
+// in _callClaudeCli resta cio' che rende impossibile per costruzione
+// sfondare il budget di sezione, qualunque valore prenda questa quota.
+const CLAUDE_CLI_ALLOWANCE_SHARE = 1 / 2;
 let _claudeCliInFlight = 0;
 const _claudeCliWaiters = [];
 
@@ -821,9 +1124,44 @@ async function _withClaudeCliSlot(fn) {
 // could otherwise burn the SAME shared Max-subscription quota those workflows
 // need, stalling the review/auto-merge pipeline. Counted per-process (module
 // state), reset by resetState().
-const DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN = 25;
+//
+// ── 25 → 40 (2026-08-18) ───────────────────────────────────────────────────
+//
+// 25 e' stato dimensionato quando claude-cli era solo un tier promosso che
+// nessuno chiamava mai davvero (vedi applyPreferOverride: «not reached this
+// run» su 6 run su 6). Con `opts.prefer` sulla generazione del corpo, ogni
+// tentativo di generazione lo chiama per davvero, e il numero di tentativi per
+// run e' misurato, non stimato:
+//
+//   run 32107646060 — 20 tentativi di generazione in una sola run
+//                     (news 1..6, news 1..6, evergreen 1..2, evergreen 1..6)
+//
+// 20 tentativi × fino a 2 chiamate preferite ciascuno = 40. Le due chiamate
+// sono la generazione e la sua RIGENERAZIONE repair-aware sullo stesso prompt
+// quando il JSON torna malformato (create-article.mjs, il retry con
+// `maxTokens=retryTokens` subito dopo il `JSON.parse` fallito): stesso call
+// site, stessa preferenza. Da qui il numero — e' il caso peggiore osservato
+// moltiplicato per il fan-out reale del call site, non un margine tondo.
+//
+// A 25 la run peggiore si sarebbe fermata a meta' strada, ricadendo sui modelli
+// free proprio per i tentativi finali — quelli che partono gia' con meno fonte
+// (la scala di riduzione morde di piu' ai retry) e producono il thin-content che
+// la preferenza esiste per evitare.
+//
+// Il fact-check NON entra in questo conto: resta deliberatamente sui modelli
+// free. E' un consenso fra verificatori indipendenti, e preferire un solo
+// modello per tutti i membri collasserebbe l'indipendenza che il guard
+// `local/fallback cannot self-verify` esiste per difendere.
+//
+// NON alzarlo a 300 come `translate-pending.yml` del sito (#5885): li' il tetto
+// e' dimensionato su 900 job in un workflow di traduzione, qui su una singola
+// run di generazione. La quota del piano Max e' CONDIVISA con pr-review-loop.yml
+// e issue-fix.yml, quindi ogni rialzo qui e' quota tolta al ciclo dei merge —
+// e' una leva di costo dichiarata, si alza solo con la misura in mano.
+const DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN = 40;
 let _claudeCliCallsThisRun = 0;
 let _claudeCliMaxCallsWarned = false;
+let _claudeCliUnlimitedWarned = false;
 
 /**
  * CLAUDE_CLI_MAX_CALLS_PER_RUN — max claude-cli/* calls this process attempts
@@ -833,17 +1171,81 @@ let _claudeCliMaxCallsWarned = false;
  * + >=0, not `Number.parseInt(x) || default`, because that idiom can't
  * distinguish a real 0 from "unparseable". Malformed value (non-integer,
  * negative) → falls back to the default and warns ONCE per process.
+ *
+ * ── `0` NON E' UN KILL SWITCH, E SEMBRA ESSERLO ────────────────────────────
+ *
+ * E' la trappola di questa variabile: la lettura naturale di «cap = 0» su un
+ * modello a pagamento e' «zero chiamate», e la semantica reale e' l'opposto
+ * esatto — illimitate. Chi la usa per spegnere Haiku in fretta toglie l'unico
+ * tetto che c'era.
+ *
+ * NON e' stata cambiata in «0 = nessuna chiamata», per tre motivi:
+ *   1. e' la convenzione gia' documentata e testata su questo file, che e'
+ *      `mode: identical` col gemello del sito — invertirla di soppiatto qui
+ *      renderebbe i due lati d'accordo sul testo e in disaccordo sui fatti;
+ *   2. `0 = illimitato` e' la stessa convenzione degli altri cap del file, e
+ *      spezzarla in un punto solo e' peggio che tenerla;
+ *   3. spegnere Haiku ha gia' due leve vere (vedi il warn qui sotto), quindi
+ *      questa non deve diventarne una terza con una semantica sua.
+ *
+ * Resta pero' il fatto che un `0` messo per sbaglio non lascia traccia. Da qui
+ * il warn-once: non blocca niente, ma mette nel log della run la riga che
+ * distingue «l'ho voluto» da «pensavo di aver spento».
  */
 function _getClaudeCliMaxCallsPerRun() {
   const raw = (process.env.CLAUDE_CLI_MAX_CALLS_PER_RUN || '').trim();
   if (!raw) return DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN;
   const n = Number(raw);
-  if (Number.isInteger(n) && n >= 0) return n;
+  if (Number.isInteger(n) && n >= 0) {
+    if (n === 0 && !_claudeCliUnlimitedWarned) {
+      _claudeCliUnlimitedWarned = true;
+      console.warn(
+        '⚠️ CLAUDE_CLI_MAX_CALLS_PER_RUN="0" = cap DISATTIVATO (chiamate claude-cli ILLIMITATE '
+        + 'in questa run), non "nessuna chiamata". Per spegnere davvero la preferenza Haiku: '
+        + 'AI_MODELS_PREFER="" (leva di rollback, vale anche sul prefer per-chiamata) oppure '
+        + 'ENABLE_HAIKU_ARTICLE_FALLBACK non impostata (toglie del tutto il provider).',
+      );
+    }
+    return n;
+  }
   if (!_claudeCliMaxCallsWarned) {
     _claudeCliMaxCallsWarned = true;
     console.warn(`⚠️ CLAUDE_CLI_MAX_CALLS_PER_RUN="${raw}" invalid (expected a non-negative integer, 0 = unlimited) — using default ${DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN}.`);
   }
   return DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN;
+}
+
+/**
+ * True se `model` non puo' PIU' essere servito in questa run perche' il cap di
+ * chiamate per-run del suo provider e' esaurito. Oggi solo `claude-cli/*` ha un
+ * cap per-run (CLAUDE_CLI_MAX_CALLS_PER_RUN); per ogni altro provider e' false.
+ *
+ * ── PERCHE' E' ESPORTATA, E NON SOLO UN `if` DENTRO callLLM ────────────────
+ *
+ * Stessa ragione di `getDeclaredRequestTokenLimit`: un chiamante deve poter
+ * chiedere «questo modello mi rispondera' davvero?» PRIMA di costruire il
+ * prompt, e la risposta deve venire da questa stessa funzione — non da una
+ * copia che scivola.
+ *
+ * Il caso concreto e' `_preferisceModelloSenzaCap` in `create-article.mjs`, che
+ * salta la scala di riduzione del prompt quando il preferito non dichiara un
+ * cap di input. `isModelAvailable` non conosce questo cap (guarda solo
+ * exhausted + presenza della chiave), quindi superate le N chiamate haiku
+ * spariva dalla catena mentre la guardia continuava a rispondere «c'e'»: per
+ * ogni headline successiva prompt intero (~9500 token), tutti i modelli free
+ * scartati dal pre-flight, tentativo 1 morto con ALL_MODELS_EXHAUSTED e
+ * recupero solo al tentativo 2 via `err.retryRequestTokenBudget`. Esattamente
+ * il tentativo sprecato che quella guardia esiste per evitare.
+ *
+ * NB: non e' `isModelAvailable` a essere stata estesa. «Disponibile» li'
+ * significa configurato e non bruciato, ed e' letta anche da chi conta i
+ * modelli configurati (`isAnyModelAvailable`): infilarci un contatore che
+ * cambia a meta' run renderebbe quella domanda non piu' rispondibile.
+ */
+export function isPerRunCallCapReached(model) {
+  if (getProvider(model) !== PROVIDER.CLAUDE_CLI) return false;
+  const cap = _getClaudeCliMaxCallsPerRun();
+  return cap > 0 && _claudeCliCallsThisRun >= cap;
 }
 
 // ── API keys (lazy-loaded from environment) ──────────────────
@@ -1059,6 +1461,18 @@ const DEFAULT_OPTS = {
   backoffMs: 2500,
   /** Override the default fallback chain */
   chain: undefined,
+  /**
+   * Preferenza DURA per questa singola chiamata: array di id (o CSV) spostati
+   * in testa alla catena DOPO l'ordinamento per punteggio, quindi vincente
+   * anche contro un modello con storico molto migliore. Riordina e basta: la
+   * catena resta intera dietro, e un preferito che fallisce cade sul fallback
+   * che si sarebbe usato comunque.
+   *
+   * Da usare SOLO sui punti critici dove il modello free non e' affidabile — la
+   * quota del piano Max e' condivisa con pr-review-loop.yml e issue-fix.yml.
+   * Vedi il blocco di commento su applyPreferOverride.
+   */
+  prefer: undefined,
 };
 
 /**
@@ -1164,16 +1578,30 @@ function getSchemaMode() {
  * ('GitHub') or the PROVIDER.* constant returned by getProvider() ('github').
  * See _normalizeProviderKey.
  *
- * THIS IS THE SINGLE SOURCE OF TRUTH for "does this provider receive the
- * schema". Both halves that need the answer ask it: the send side
- * (_callOpenAICompatible / _callGeminiRaw, which build the request body) and
- * the estimate side (estimateRequestTokens, which sizes that same body for the
- * pre-flight skip-guard). Do not re-derive the answer from
- * PROVIDERS_WITH_STRICT_JSON_SCHEMA at a new call site: the two halves
- * disagreeing is precisely the defect this function was widened to close —
- * the estimator used to add the serialized schema unconditionally, so Groq
- * (not in the set, never sent the schema) was pre-flight-skipped on ~516
- * phantom tokens it would never have received.
+ * THIS IS THE SOURCE OF TRUTH for "does this OpenAI-compat-shaped provider
+ * receive the schema" — the send side (_callOpenAICompatible / _callGeminiRaw,
+ * which build the request body) and the estimate side (estimateRequestTokens,
+ * which sizes that same body for the pre-flight skip-guard) both ask it. Do
+ * not re-derive the answer from PROVIDERS_WITH_STRICT_JSON_SCHEMA at a new
+ * call site: the two halves disagreeing is precisely the defect this function
+ * was widened to close — the estimator used to add the serialized schema
+ * unconditionally, so Groq (not in the set, never sent the schema) was
+ * pre-flight-skipped on ~516 phantom tokens it would never have received.
+ *
+ * NOT a third sender: `claude_cli` isn't OpenAI-compat, isn't in
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA, and this function correctly returns
+ * false for it — yet `_callClaudeCli` sends the (relaxed) schema via
+ * `--json-schema` whenever `getSchemaMode() !== 'off'`, unconditionally on
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA/_learnedSchemaIncompatible. That earlier
+ * claim ("both halves that need the answer ask it") was false the moment
+ * _callClaudeCli started sending a schema: estimateRequestTokens' call to
+ * THIS function under-counted every claude-cli/* request with a schema by
+ * ~1805 bytes ≈ 452 tokens. See `_schemaBytesWillBeSent` below, which is what
+ * estimateRequestTokens actually calls now — it defers to this function for
+ * every OpenAI-compat/Gemini provider and answers the CLI case separately, on
+ * purpose: folding claude_cli into PROVIDERS_WITH_STRICT_JSON_SCHEMA would
+ * change SEND behavior (this function doubles as the send-time gate), not
+ * just the estimate.
  *
  * Exported for tests / smoke probes.
  */
@@ -1186,6 +1614,38 @@ export function shouldUseSchemaMode(providerName, hasSchema = true, modelForTrac
   const key = _normalizeProviderKey(providerName);
   if (key === _normalizeProviderKey(PROVIDER.GEMINI)) return true;
   return PROVIDERS_WITH_STRICT_JSON_SCHEMA.has(key);
+}
+
+/**
+ * Whether the schema bytes a call constructs actually leave the process — the
+ * question estimateRequestTokens needs answered, across EVERY sender, not
+ * just the OpenAI-compat/Gemini one shouldUseSchemaMode() gates.
+ *
+ * Deliberately NOT folded into shouldUseSchemaMode(): that function is also
+ * the SEND-time decision for _callOpenAICompatible/_callGeminiRaw (it builds
+ * `response_format`), so adding `claude_cli` to
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA to make this predicate true for it would
+ * change what those functions send, not just what this counts — and
+ * claude_cli isn't OpenAI-compat in the first place (it takes a CLI flag, not
+ * a `response_format`), so it was never a candidate for that Set on its own
+ * merits. This function exists so the estimate can know a fact the send-time
+ * gate was never meant to encode.
+ *
+ * Mirrors _callClaudeCli's OWN condition for pushing `--json-schema`
+ * (`opts.jsonSchema && getSchemaMode() !== 'off'`) exactly — not
+ * shouldUseSchemaMode()'s: the CLI never consults
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA or _learnedSchemaIncompatible, so this
+ * predicate doesn't either for that provider. If _callClaudeCli's condition
+ * changes, this one has to change with it — there's no import to enforce
+ * that, only tests/scripts/ai-models-claude-cli-schema-estimate.test.ts
+ * asserting the two conditions stay textually in sync.
+ */
+function _schemaBytesWillBeSent(providerName, hasSchema, modelForTracking) {
+  if (!hasSchema) return false;
+  if (_normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.CLAUDE_CLI)) {
+    return getSchemaMode() !== 'off';
+  }
+  return shouldUseSchemaMode(providerName, hasSchema, modelForTracking);
 }
 
 /**
@@ -1220,6 +1680,71 @@ function sanitizeSchemaForGemini(schema) {
   return out;
 }
 
+/**
+ * ── IL `required` CHE FA RIGENERARE L'ARTICOLO DA CAPO (misurato 2026-08-19) ─
+ *
+ * Sotto `--json-schema` il CLI non manda lo schema a un backend: crea un tool
+ * sintetico `StructuredOutput`, e quando il modello lo chiama **valida in
+ * locale**. Se manca una prop `required` non degrada e non tronca — restituisce
+ * un `tool_result` d'errore, e il modello RIGENERA l'articolo intero. La
+ * riproduzione con i flag esatti di produzione (vedi il blocco su
+ * CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL) la mostra per esteso:
+ *
+ *     user  tool_result is_error:true
+ *           «Output does not match required schema:
+ *            root: must have required property 'reason'»
+ *
+ * Ogni giro costa ~3m30s e ~6.800 token di output. E' questo l'anello dietro i
+ * «timeout» del CLI: non uno stream fermo, N rigenerazioni complete.
+ *
+ * PERCHE' LO SCHEMA E' FATTO COSI', E PERCHE' NON SI TOCCA ALLA SORGENTE.
+ * Lo schema `article_primary_locale` deve ammettere DUE payload validi — o
+ * l'articolo pieno, o l'abort di REGOLA #0 `{abort_topical_relevance, reason}` —
+ * e lo fa con l'idioma strict di OpenAI: *ogni* prop in `required`, e
+ * l'opzionalita' espressa come tipo nullable. Li' e' obbligatorio: un provider
+ * OpenAI-compat in strict mode rifiuta con 400 uno schema in cui una prop
+ * dichiarata manca da `required`. Togliere `required` in create-article.mjs
+ * riparerebbe il CLI e romperebbe i quattro provider di
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA. Per questo la rilassatura sta QUI, sul
+ * confine di un solo mittente, come sanitizeSchemaForGemini.
+ *
+ * PERCHE' NON SI PERDE NIENTE. Per una prop nullable il validatore puo'
+ * imporre solo la PRESENZA della chiave: il valore `null` era gia' legale.
+ * `chiave assente` e `chiave a null` portano la stessa informazione a chi
+ * legge — create-article.mjs testa `itData?.abort_topical_relevance === true` e
+ * `String(itData.reason || '')`, che trattano `undefined` e `null` allo stesso
+ * modo. Cio' che il vincolo serviva davvero a garantire NON e' nullable e
+ * resta intatto; misurato sullo schema 'full':
+ *
+ *     root.required              11 prop → 0     (tutte nullable per costruzione)
+ *     content.it.required        title, excerpt, body1, body2, body3, faq  ← invariato
+ *     seo.required               7 prop                                    ← invariato
+ *     imageAlt/slugs.required    it, en, de, fr                            ← invariato
+ *
+ * Cioe' la guardia che lo schema era nato per dare — «il modello non puo'
+ * omettere body2/body3» — sopravvive parola per parola.
+ *
+ * IL SEGNALE E' `type`, NON `anyOf`. Una prop e' considerata opzionale solo se
+ * il suo `type` ammette `'null'`. Uno schema che esprimesse la nullabilita' con
+ * `anyOf: [..., {type: 'null'}]` resterebbe `required`: conservativo di
+ * proposito, perche' l'errore in questa direzione costa un giro di
+ * rigenerazione, nell'altra un vincolo perso in silenzio.
+ */
+export function relaxSchemaForClaudeCli(node) {
+  if (!node || typeof node !== 'object') return node;
+  if (Array.isArray(node)) return node.map(relaxSchemaForClaudeCli);
+  const out = {};
+  for (const [k, v] of Object.entries(node)) out[k] = relaxSchemaForClaudeCli(v);
+  if (Array.isArray(out.required) && out.properties && typeof out.properties === 'object') {
+    out.required = out.required.filter((name) => {
+      const t = out.properties[name]?.type;
+      return !(t === 'null' || (Array.isArray(t) && t.includes('null')));
+    });
+    if (out.required.length === 0) delete out.required;
+  }
+  return out;
+}
+
 // ── Run-level state (reset only between process invocations) ─
 const _exhaustedModels = new Set();
 // GitHub Models PAT indices that hit their per-account daily limit this run, so
@@ -1229,6 +1754,11 @@ const _ghExhaustedPats = new Set();
 // modelId → reason it was exhausted ('quota' | 'timeout' | 'content' | 'stale' |
 // 'nonretryable'). Gates the GitHub multi-PAT skip-exemption (quota only).
 const _exhaustReason = new Map();
+// modelId → optional free-text detail for that reason, e.g. 'HTTP 402'. Kept
+// separate from _exhaustReason so the coarse reason values the multi-PAT
+// exemption compares against (`=== 'quota'`) stay a closed set, while the skip
+// message can still name the actual status. See _exhaustSkipCause.
+const _exhaustDetail = new Map();
 // Tracks which exhausted models have already been logged this run, so a model
 // that's been exhausted since startup doesn't produce a "Skipped — exhausted"
 // line every time the fallback chain ticks past it.
@@ -1260,6 +1790,123 @@ const MAX_CONSECUTIVE_429 = 2;
 /** @type {Map<string, number>} model → consecutive content-quality failure count */
 const _consecutiveContentFailures = new Map();
 const MAX_CONSECUTIVE_CONTENT_FAILURES = 2;
+
+// ── Adaptive per-call timeout ceiling ────────────────────────
+/**
+ * A call that HANGS burns the caller's full per-request timeout before the
+ * cascade is allowed to move on, and that wait is the single largest piece of
+ * dead wall-clock a healthy run still pays.
+ *
+ * The measurement (generate-article.yml, 14 consecutive `success` runs,
+ * 2026-08-18 09:01-11:06 UTC): 4 of the 14 lost 60,0 ± 0,003 s each to ONE
+ * hung call, always on `nvidia/meta/llama-3.1-8b-instruct` — 240 s over 14
+ * runs, 17,1 s/run, 4,3 % of run duration. The 60,0 s is the caller's own
+ * `timeout: 60_000` (the fact-check call), not a retry loop: both provider
+ * retry loops already refuse to retry a timeout, and the hard cap never fired.
+ *
+ * Why the two mechanisms that look like they should catch it do not:
+ *
+ *  - The score ledger DOES record it — the timeout reaches
+ *    `recordModelFailure(model, { exhausted: true })`, i.e. SCORE_EXHAUSTED
+ *    (-50), and that is persisted. It is arithmetically INERT: the same
+ *    model's persisted score is +36819 (172.042 successes / 3.286 failures,
+ *    read from `ai_model_scores/_all` on 2026-08-18 11:25 Z), so -50 moves it
+ *    by 0,14 % and it stays rank 1 of 340 — the runner-up sits at +120.
+ *    Nothing observed recently can outvote an UNBOUNDED cumulative sum, so
+ *    "make the ledger notice" is not available as a fix here.
+ *
+ *  - Banning or demoting the model would be wrong on the evidence: 98,1 %
+ *    lifetime success, ~26 successful calls in the very run that then lost 60 s
+ *    to one hang, and a direct probe of integrate.api.nvidia.com (5 calls,
+ *    ~2400-token prompt, max_tokens 4000) answered 5/5 in 1,2-5,3 s. This is a
+ *    live endpoint that occasionally hangs, not a dead one — exactly the case
+ *    a persisted exhaustion must never be allowed to punish.
+ *
+ * So the recoverable waste is not WHICH model, it is HOW LONG we keep waiting
+ * on a model we have already watched answer fast in this same process. The
+ * ceiling below is derived from that model's own observed successful latency
+ * and is deliberately weak in every direction that could hurt:
+ *
+ *   - it only ever LOWERS the caller's timeout, never raises it;
+ *   - it needs ADAPTIVE_TIMEOUT_MIN_SAMPLES successful calls before it says
+ *     anything at all (an unobserved model keeps the caller's number);
+ *   - it tracks the MAXIMUM successful latency, never a mean, and that maximum
+ *     only ever grows within a process — the ceiling can widen, never narrow;
+ *   - it never goes below ADAPTIVE_TIMEOUT_FLOOR_MS, whatever the samples say;
+ *   - last-resort tiers are exempt: `_callLocal` deliberately raises the
+ *     timeout floor for slow CPU inference and claude-cli has a cold start, so
+ *     "fast so far" is not a promise either of them makes;
+ *   - and a timeout that fires under a ceiling WE narrowed does not mark the
+ *     model exhausted on its own (see ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES
+ *     and the timeout circuit-breaker in callLLM). That is the graceful
+ *     degradation: if the guess is wrong the run loses one call, not its
+ *     best model for the remaining wall-clock budget.
+ *
+ * Expected saving, stated as the conditional it is: the ceiling becomes
+ * `max(FLOOR, MULT × observedMax)`, so it recovers `60 s − that` per hang and
+ * recovers nothing once `MULT × observedMax ≥ 60 s`. With the latency profile
+ * measured above (1,2-5,3 s) the ceiling lands on the 20 s floor, i.e. ~40 s
+ * per event → the 17,1 s/run tax falls to ~5,7 s/run. It is a modest,
+ * bounded win on a 4,3 % problem; it is NOT a fix for a dead endpoint,
+ * because the measurement says there isn't one.
+ */
+const ADAPTIVE_TIMEOUT_MIN_SAMPLES = _envInt('AI_ADAPTIVE_TIMEOUT_MIN_SAMPLES', 10);
+const ADAPTIVE_TIMEOUT_MULT = _envInt('AI_ADAPTIVE_TIMEOUT_MULT', 4);
+const ADAPTIVE_TIMEOUT_FLOOR_MS = _envInt('AI_ADAPTIVE_TIMEOUT_FLOOR_MS', 20_000);
+/**
+ * How many timeouts under a ceiling THIS module narrowed a model may collect
+ * before the normal timeout circuit-breaker applies to it after all. 1 means
+ * "the first one is on us, the second is on the model": a single clamped
+ * timeout is as likely to be our multiplier being too tight as it is to be the
+ * provider hanging, and banning the run's best model on our own guess is the
+ * failure mode this whole block exists to avoid.
+ */
+const ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES = _envInt('AI_ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES', 1);
+
+/** @type {Map<string, {samples: number, maxMs: number}>} model → observed successful-call latency */
+const _callLatency = new Map();
+/** @type {Map<string, number>} model → timeouts served under a ceiling we narrowed */
+const _clampedTimeouts = new Map();
+
+/** Read a positive integer override from the environment, else the default. */
+function _envInt(name, fallback) {
+  const v = parseInt((process.env[name] || '').trim(), 10);
+  return Number.isFinite(v) && v > 0 ? v : fallback;
+}
+
+/**
+ * The per-call timeout a model has EARNED, given what it has been observed to
+ * do. Pure on purpose (no clock, no maps, no env): the whole point of the
+ * block above is that every guard is checkable in isolation.
+ *
+ * @param {{samples: number, maxMs: number}|undefined} observed
+ * @param {number} requestedMs the caller's own timeout — the hard ceiling
+ * @param {{minSamples?: number, mult?: number, floorMs?: number}} [knobs]
+ * @returns {number} ms; equal to `requestedMs` whenever the evidence is thin
+ */
+export function computeAdaptiveTimeoutMs(observed, requestedMs, knobs = {}) {
+  const minSamples = knobs.minSamples ?? ADAPTIVE_TIMEOUT_MIN_SAMPLES;
+  const mult = knobs.mult ?? ADAPTIVE_TIMEOUT_MULT;
+  const floorMs = knobs.floorMs ?? ADAPTIVE_TIMEOUT_FLOOR_MS;
+  if (!(requestedMs > 0)) return requestedMs;
+  if (!observed || !(observed.samples >= minSamples) || !(observed.maxMs > 0)) return requestedMs;
+  const earned = Math.max(floorMs, Math.ceil(observed.maxMs * mult));
+  return Math.min(requestedMs, earned);
+}
+
+/** Record one SUCCESSFUL call's wall-clock latency for a model. */
+function _recordCallLatency(model, ms) {
+  if (!model || !(ms >= 0)) return;
+  const cur = _callLatency.get(model) || { samples: 0, maxMs: 0 };
+  cur.samples++;
+  if (ms > cur.maxMs) cur.maxMs = ms;
+  _callLatency.set(model, cur);
+}
+
+/** Observability + test seam for the latency evidence behind the ceiling. */
+export function getCallLatencyStats() {
+  return Object.fromEntries([..._callLatency.entries()].map(([m, v]) => [m, { ...v }]));
+}
 
 // Provider-level cooldown: when a provider returns 429, all its models
 // get a temporary cooldown to avoid wasting retries on sibling models.
@@ -1384,6 +2031,16 @@ function _responseCacheKey(messages, o) {
     ns: o.cacheNamespace || '',
     bfc: !!o.bypassForceChain,
     fc: (process.env.AI_MODELS_FORCE_CHAIN || '').trim(),
+    // Same argument as `fc` one line up: a preference changes WHICH model
+    // answers an otherwise identical request, so a preferred and a
+    // non-preferred call must not share a cache entry. Both layers are keyed:
+    // `pf` the process-wide env opt-in, `pfo` the per-call opts.prefer. Without
+    // `pfo` the body call (which prefers claude-cli/haiku) and any other call
+    // with the same prompt+params would collide, and the preferred call would
+    // be served a response a free model produced — the exact defect the
+    // preference exists to avoid.
+    pf: (process.env.AI_MODELS_PREFER || '').trim(),
+    pfo: _normalizePrefer(o.prefer).join(','),
   }));
 }
 
@@ -1442,7 +2099,37 @@ const _modelDetails = new Map();
 /** @type {Set<string>} models whose score changed since last persist */
 const _dirtyModels = new Set();
 
+/**
+ * Per-model successes/failures accumulated since the LAST SUCCESSFUL persist —
+ * the delta, not the total. This is what goes to Firestore, as an atomic
+ * `FieldValue.increment`, and it exists because the aggregate doc is shared by
+ * every workflow of both repos while `_modelDetails` is a per-process total.
+ *
+ * The failure mode it removes (measured 2026-08-18 on `claude-cli/haiku`, run
+ * 32134269129): two runs overlap, both load `successes: N`, one adds 4 and
+ * writes N+4, the other adds a failure and writes N — a textbook lost update.
+ * `{merge: true}` does not help here: it merges different FIELDS, so a second
+ * writer naming the same field still wins outright with a stale absolute value.
+ * An increment carries no baseline, so there is nothing stale to write back.
+ *
+ * Cleared only when the write lands; restored on failure, exactly like
+ * `_dirtyModels` (see _persistScoresToFirestore).
+ * @type {Map<string, {successes: number, failures: number}>}
+ */
+const _pendingCounterDeltas = new Map();
+
+/**
+ * Per-model outcomes of THIS run — never cleared by a persist, which is the
+ * whole point: `_modelScores` is preloaded from Firestore at startup, so a
+ * scoreboard built from it lists ~270 models most of which this run never
+ * touched. printRunSummary() reads this map so "which models actually worked"
+ * is answerable from the run log instead of from the ledger.
+ * @type {Map<string, {successes: number, failures: number}>}
+ */
+const _runOutcomes = new Map();
+
 let _firestoreDb = null;     // Firestore instance (null until initScoreStore)
+let _firestoreFieldValue = null; // admin.firestore.FieldValue (atomic increments)
 let _storeInitialized = false;
 let _persistTimer = null;    // Debounce timer
 let _mutationCount = 0;      // Mutations since last persist
@@ -1455,6 +2142,14 @@ const SCORE_SUCCESS          =   2;
 const SCORE_RETRYABLE_FAIL   =  -3;
 const SCORE_NON_RETRYABLE    = -10;
 const SCORE_EXHAUSTED        = -50;
+
+// Laplace prior for `_successRate` (see #435): 1 pseudo-success + 1
+// pseudo-failure, so an untested model reads as a neutral 0.5 (worth trying)
+// instead of 0 (worse than everything). Any small symmetric prior works for
+// the ordering property this exists to guarantee; these two are the smallest
+// integers that keep the neutral point exactly at 0.5.
+const RATE_PRIOR_SUCCESSES   =   1;
+const RATE_PRIOR_TOTAL       =   2;
 
 // ── Time-decay for persisted scores ──────────────────────────
 
@@ -2021,6 +2716,13 @@ export async function initScoreStore() {
       admin.initializeApp({ credential: admin.credential.applicationDefault() });
     }
     _firestoreDb = admin.firestore();
+    // Atomic counter increments (see _pendingCounterDeltas). Captured here and
+    // not re-imported at write time because this is the only place that already
+    // holds the admin module. There is no REST fallback to worry about: unlike
+    // load-rc-env.mjs, this store has NO REST path — when `import('firebase-admin')`
+    // fails the catch below sets `_firestoreDb = null` and the run is memory-only,
+    // so `FieldValue` is available on exactly the paths that persist at all.
+    _firestoreFieldValue = admin.firestore?.FieldValue || null;
 
     // Load all persisted scores from the single aggregate doc (1 read).
     // If the aggregate doesn't exist yet, fall back to the legacy per-model
@@ -2136,6 +2838,31 @@ export async function initScoreStore() {
   }
 }
 
+/**
+ * Test seam: install a stand-in Firestore client without going through
+ * `initScoreStore()`.
+ *
+ * It exists because the store has exactly one door and it is nailed shut for a
+ * test: `initScoreStore()` imports firebase-admin and, when that import or the
+ * credential is missing, sets `_firestoreDb = null` and returns — so a test
+ * process silently exercises the memory-only path and every assertion about
+ * persistence passes vacuously. That is the shape of bug this module just had
+ * (a write that never happened, with nothing red), so the coverage has to reach
+ * the real write path, not a mock of it.
+ *
+ * Deliberately does NOT call `_registerExitHooks()`: a test must not leave
+ * signal handlers behind. Pair it with `resetState()`.
+ *
+ * @param {any} db          object with .collection(name).doc(id).set(data, opts)
+ * @param {any} [fieldValue] object with .increment(n); null exercises the
+ *                           absolute-write degraded path on purpose
+ */
+export function __installScoreStoreForTests(db, fieldValue = null) {
+  _firestoreDb = db;
+  _firestoreFieldValue = fieldValue;
+  _storeInitialized = true;
+}
+
 // ── Firestore persist (debounced) ────────────────────────────
 
 /**
@@ -2152,6 +2879,16 @@ async function _persistScoresToFirestore() {
   const toPersist = [..._dirtyModels];
   _dirtyModels.clear();
   _mutationCount = 0;
+  // Snapshot the counter deltas alongside the dirty set: both are cleared here
+  // and both are restored together if the write fails, so a retry cannot double
+  // count and a failed write cannot silently swallow a success.
+  /** @type {Map<string, {successes: number, failures: number}>} */
+  const deltaSnapshot = new Map();
+  for (const modelId of toPersist) {
+    const d = _pendingCounterDeltas.get(modelId);
+    if (d && (d.successes || d.failures)) deltaSnapshot.set(modelId, { ...d });
+    _pendingCounterDeltas.delete(modelId);
+  }
 
   /** @type {Record<string, any>} */
   const modelsDelta = {};
@@ -2162,11 +2899,31 @@ async function _persistScoresToFirestore() {
     const entry = {
       modelId,                 // Original model ID (with slashes)
       score,
-      successes: details.successes,
-      failures: details.failures,
       lastUsed: now,
       updatedAt: now,
     };
+
+    // successes/failures go out as an ATOMIC INCREMENT of this process's delta,
+    // never as the absolute total (see _pendingCounterDeltas for the measured
+    // lost update this replaces). A model can be dirty for a reason that is not
+    // an outcome — a learned token limit, a schema incompatibility — and then it
+    // has no delta: the counter fields are OMITTED rather than written as 0,
+    // because restating a stale absolute is exactly the defect being removed.
+    const counterDelta = deltaSnapshot.get(modelId);
+    if (counterDelta) {
+      if (_firestoreFieldValue && typeof _firestoreFieldValue.increment === 'function') {
+        if (counterDelta.successes) entry.successes = _firestoreFieldValue.increment(counterDelta.successes);
+        if (counterDelta.failures) entry.failures = _firestoreFieldValue.increment(counterDelta.failures);
+      } else {
+        // Unreachable on the firebase-admin path (initScoreStore captures
+        // FieldValue from the same module that produced the client, and there is
+        // no REST path for this store). Kept so a future client without the
+        // sentinel degrades to the old absolute write instead of dropping the
+        // outcome on the floor.
+        entry.successes = details.successes;
+        entry.failures = details.failures;
+      }
+    }
 
     // If model is exhausted, persist the reset time (next midnight UTC) —
     // but ONLY for 'quota' exhaustion, which is the one reason that
@@ -2218,8 +2975,17 @@ async function _persistScoresToFirestore() {
     await ref.set({ models: modelsDelta, updatedAt: now }, { merge: true });
   } catch (err) {
     console.warn(`⚠️  [ScoreStore] Persist failed: ${err?.message || err}`);
-    // Re-add dirty models so next flush retries them
+    // Re-add dirty models so next flush retries them — and give them back their
+    // counter deltas, merged onto whatever accumulated while this write was in
+    // flight. Without this half the retry would rewrite score and lastUsed while
+    // the outcomes it was carrying vanished with the rejected promise.
     for (const m of toPersist) _dirtyModels.add(m);
+    for (const [m, d] of deltaSnapshot) {
+      const cur = _pendingCounterDeltas.get(m) || { successes: 0, failures: 0 };
+      cur.successes += d.successes;
+      cur.failures += d.failures;
+      _pendingCounterDeltas.set(m, cur);
+    }
   }
 }
 
@@ -2250,22 +3016,64 @@ export async function flushScores() {
   await _persistScoresToFirestore();
 }
 
+/** How long an exit is allowed to wait for the final ledger write. */
+const EXIT_FLUSH_TIMEOUT_MS = 8_000;
+
+/**
+ * Flush before leaving the process — the ONE call every exit path goes through.
+ *
+ * `flushScores()` on its own is the right primitive but the wrong contract for
+ * an exit: it can reject (network), and it can hang as long as the Firestore
+ * client wants to retry. Either would turn "persist my scores" into "fail or
+ * stall the run", which is why the previous exit handlers fired the persist and
+ * did NOT await it. Firing without awaiting is not a compromise, though — it is
+ * a guaranteed loss, because `_persistScoresToFirestore()` clears `_dirtyModels`
+ * before it awaits `ref.set()`: the process leaves with the mutations already
+ * marked clean and never written.
+ *
+ * So: await it, bounded and non-throwing. A timeout logs and gives up rather
+ * than holding the runner. Returns true when the write landed, so a caller (and
+ * a test) can tell "flushed" from "gave up".
+ */
+export async function flushScoresBeforeExit(timeoutMs = EXIT_FLUSH_TIMEOUT_MS) {
+  if (!_firestoreDb || (_dirtyModels.size === 0 && !_persistTimer)) return true;
+  let timer = null;
+  const pending = _dirtyModels.size;
+  try {
+    const timeout = new Promise((resolve) => {
+      timer = setTimeout(() => resolve('timeout'), timeoutMs);
+      // NOT unref'd: this promise races a write we are deliberately waiting for.
+    });
+    const outcome = await Promise.race([flushScores().then(() => 'flushed'), timeout]);
+    if (outcome === 'timeout') {
+      console.warn(`⚠️  [ScoreStore] Final flush timed out after ${timeoutMs}ms — ${pending} model(s) not persisted`);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    console.warn(`⚠️  [ScoreStore] Final flush failed: ${err?.message || err}`);
+    return false;
+  } finally {
+    if (timer) clearTimeout(timer);
+  }
+}
+
 /** Register process exit hooks for final flush */
 function _registerExitHooks() {
   if (_exitHooked) return;
   _exitHooked = true;
 
-  const flush = () => {
-    // Synchronous-ish: we can't truly await in exit handlers,
-    // but we fire the persist and give it a moment
-    if (_dirtyModels.size > 0 && _firestoreDb) {
-      _persistScoresToFirestore().catch(() => {});
-    }
-  };
-
-  process.on('beforeExit', async () => { await flushScores(); });
-  process.on('SIGINT', () => { flush(); process.exit(130); });
-  process.on('SIGTERM', () => { flush(); process.exit(143); });
+  process.on('beforeExit', async () => { await flushScoresBeforeExit(); });
+  // Signal handlers await the same bounded flush before exiting. The old pair
+  // called the persist and then `process.exit()` on the very next statement,
+  // which cannot ever complete a write — the comment claimed it gave the persist
+  // "a moment" and there was no moment. Note this is the LATENT half of the
+  // loss, not the dominant one: on the corpus the hard kill of
+  // generate-article.yml is SIGKILL, measured 42 times out of 42 with zero
+  // SIGTERM, and SIGKILL runs no handler at all. What this fixes is the
+  // cooperative stop (a cancelled workflow, a local Ctrl-C).
+  process.on('SIGINT', async () => { await flushScoresBeforeExit(); process.exit(130); });
+  process.on('SIGTERM', async () => { await flushScoresBeforeExit(); process.exit(143); });
 }
 
 // ── Score mutation (with Firestore persistence) ──────────────
@@ -2276,8 +3084,24 @@ export function recordModelSuccess(modelId) {
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.successes++;
   _modelDetails.set(modelId, d);
+  _bumpOutcome(modelId, 'successes');
   _dirtyModels.add(modelId);
   _schedulePersist();
+}
+
+/**
+ * Record one outcome in both the not-yet-persisted delta and the run tally.
+ * Two maps and not one because they are cleared by different events: the delta
+ * empties on every successful write, the run tally never does (printRunSummary
+ * reads it at the very end).
+ */
+function _bumpOutcome(modelId, field) {
+  const pending = _pendingCounterDeltas.get(modelId) || { successes: 0, failures: 0 };
+  pending[field]++;
+  _pendingCounterDeltas.set(modelId, pending);
+  const run = _runOutcomes.get(modelId) || { successes: 0, failures: 0 };
+  run[field]++;
+  _runOutcomes.set(modelId, run);
 }
 
 /**
@@ -2327,14 +3151,27 @@ export function recordModelContentFailure(modelId) {
 }
 
 /** Record a model failure — lowers its rank and persists to Firestore */
-export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false } = {}) {
-  const penalty = exhausted ? SCORE_EXHAUSTED
+/**
+ * `transportOnly`: il fallimento SI CONTA ma NON si paga. Serve al caso in cui
+ * a interrompere la chiamata siamo stati noi (SIGKILL a scadenza di budget),
+ * dove l'esito non dice niente sulla qualita' del modello — stessa logica della
+ * carve-out `topic-gate-abort`. Contarlo comunque e' deliberato: azzerare anche
+ * il CONTEGGIO farebbe apparire nel ledger un modello che non fallisce mai
+ * (`Nok/0ko`) proprio mentre sta fallendo, che e' il modo piu' rapido per
+ * rendere invisibile il prossimo incidente.
+ */
+export function recordModelFailure(modelId, { nonRetryable = false, exhausted = false, transportOnly = false } = {}) {
+  const penalty = transportOnly ? 0
+                : exhausted ? SCORE_EXHAUSTED
                 : nonRetryable ? SCORE_NON_RETRYABLE
                 : SCORE_RETRYABLE_FAIL;
-  _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
+  // Solo se c'e' davvero una penale: un `+ 0` creerebbe una voce a punteggio 0
+  // per un modello mai visto, spostandolo nell'ordinamento della cascata.
+  if (penalty !== 0) _modelScores.set(modelId, (_modelScores.get(modelId) || 0) + penalty);
   const d = _modelDetails.get(modelId) || { successes: 0, failures: 0 };
   d.failures++;
   _modelDetails.set(modelId, d);
+  _bumpOutcome(modelId, 'failures');
   _dirtyModels.add(modelId);
   _schedulePersist();
 }
@@ -2486,6 +3323,36 @@ function _recordLastResortOutcome(model, outcome) {
   if (tier) _stats.lastResort[tier][outcome]++;
 }
 
+/**
+ * Laplace-smoothed success rate from the RELIABLE lifetime successes/failures
+ * counters (`_modelDetails`, atomic-increment persisted — see
+ * score-ledger-persistence.test.mjs), not from the decaying additive `score`.
+ *
+ * Why not `score` (see #435): `score` is a sum of +/-N per outcome, decayed by
+ * `_decayScore` at load time and then RE-PERSISTED as the new absolute base —
+ * so the decay compounds every time a model is touched instead of applying
+ * once per elapsed hour. A model reached often never sits in a bucket wide
+ * enough to decay (age-since-last-use stays under 1h) and its penalties sum
+ * without bound, while a model reached rarely gets its penalty repeatedly
+ * multiplied toward zero and stabilizes near a small negative equilibrium
+ * regardless of how badly it fails. Net effect measured in the ledger
+ * 2026-08-18: `gemini-2.0-flash` at 0/1122 (score -41) ranked above `gpt-4.1`
+ * at 2585/1000 = 72% (score -46) — recency of use, not reliability, decided
+ * the order.
+ *
+ * A success RATE has none of that: it depends only on the lifetime counts, is
+ * bounded in [0,1], and a 0-success model can never outrank a model with a
+ * real success rate no matter how many attempts either has accumulated. The
+ * Laplace prior (`RATE_PRIOR_SUCCESSES`/`RATE_PRIOR_TOTAL`) keeps an untested
+ * model at a neutral 0.5 instead of penalizing it for having no history yet.
+ */
+function _successRate(modelId) {
+  const d = _modelDetails.get(modelId);
+  const successes = d?.successes || 0;
+  const failures = d?.failures || 0;
+  return (successes + RATE_PRIOR_SUCCESSES) / (successes + failures + RATE_PRIOR_TOTAL);
+}
+
 function sortChainByScore(chain) {
   // Build index map for tiebreaker (lower index = better in original order)
   const indexMap = new Map(chain.map((m, i) => [m, i]));
@@ -2493,11 +3360,188 @@ function sortChainByScore(chain) {
     const ta = _lastResortTier(a);
     const tb = _lastResortTier(b);
     if (ta !== tb) return ta - tb;
+    // Primary key: lifetime success rate — see _successRate for why this and
+    // not the decaying `score` is what decides reliability ordering.
+    const ra = _successRate(a);
+    const rb = _successRate(b);
+    if (rb !== ra) return rb - ra; // higher success rate first
+    // Tiebreak among equal rates (e.g. both untested, or a tie at volume) on
+    // the recency-weighted score, then on original chain order.
     const sa = _modelScores.get(a) || 0;
     const sb = _modelScores.get(b) || 0;
     if (sb !== sa) return sb - sa; // higher score first
     return (indexMap.get(a) || 0) - (indexMap.get(b) || 0); // tiebreak by original order
   });
+}
+
+// ── La preferenza: DOPO il sort, e solo dove qualcuno la chiede ─────────────
+//
+// Fino al 2026-08-18 il corpus applicava questa preferenza PRIMA di
+// sortChainByScore, con `[claude-cli/haiku]` come default. Erano due scelte
+// sbagliate insieme, ed e' questa la riconciliazione chiesta dalla issue #402.
+//
+// PRIMA del sort la preferenza sposta solo il tiebreak d'indice, cioe' conta
+// unicamente a parita' di tier e di punteggio. Il punteggio pari non c'e':
+//
+//   ai_model_scores/_all, letto il 2026-08-18
+//     claude-cli/haiku                      35 successi /  41 fallimenti → score   -666
+//     nvidia/meta/llama-3.1-8b-instruct 171.181 successi / 3.276 fall.   → score +35.315
+//
+// Contro un deficit di 35.981 punti il tiebreak d'indice non conta nulla: il
+// sort successivo rimanda haiku in coda. Misurato su 6 run su 6 di
+// generate-article.yml: «last-resort: omniroute/local/claude-cli not reached
+// this run», con il binario `claude 2.1.234` presente sul runner, il token
+// presente e zero ENOENT nei log. Raggiungibile e sano, mai chiamato.
+//
+// Questa e' la preferenza DURA: gira DOPO il sort, quindi vince a prescindere
+// dal punteggio. Proprio per questo NON e' mai un default — si attiva solo se
+// qualcuno la chiede esplicitamente, in uno dei due modi:
+//
+//   1. `opts.prefer` su UNA chiamata (create-article.mjs la mette sulla sola
+//      generazione del corpo, non su traduzioni/meta/FAQ/classificazione);
+//   2. `AI_MODELS_PREFER` impostata a mano da UNO step di workflow — oggi
+//      `translate-pending.yml` del sito, che dipende da questa semantica e ha
+//      un gate dedicato (`tests/relocalize-traffic-priority.test.ts`).
+//
+// Il perimetro stretto e' il punto: la quota del piano Max e' CONDIVISA con
+// pr-review-loop.yml e issue-fix.yml, e una preferenza dura globale la
+// brucerebbe affamando la pipeline dei merge.
+//
+// Riordina, non tronca: a differenza di AI_MODELS_FORCE_CHAIN (che pinna la
+// catena esattamente agli id elencati, buttando ~180 modelli di fallback) e di
+// `opts.model` (che fa `chain.slice(idx)`, quindi chiedere l'ultima voce da'
+// una catena di un modello solo), qui nulla viene rimosso: se il preferito
+// fallisce si cade esattamente sulla catena che si sarebbe usata comunque.
+//
+// ── E PERCHE' IL DEFAULT E' VUOTO ──────────────────────────────────────────
+//
+// Il default `[claude-cli/haiku]` non era solo inefficace: era anche attivo
+// dove non lo si voleva. Con lo score store irraggiungibile (fallback in
+// memoria) TUTTI i punteggi valgono 0, la parita' e' universale, e il tiebreak
+// d'indice diventa decisivo — cioe' il default dirottava OGNI chiamata di OGNI
+// processo su un modello a pagamento esattamente nel momento in cui il ledger
+// non era li' a impedirlo.
+//
+// Il sito lo aveva gia' scritto come gate: `ai-models-competing-tiers.test.ts`
+// pretende che «un tier-0 normale senza punteggio accumulato batta comunque un
+// tier appena promosso in parita' a 0». Promuovere un tier toglie la PENALITA'
+// di tier, non regala priorita'. Il default violava quella riga, ed e' il
+// motivo per cui i due repo non potevano convergere finche' esisteva.
+//
+// Ora la preferenza e' una sola, esplicita, e vive dove serve: sulla chiamata
+// che genera il corpo dell'articolo. `DEFAULT_MODELS_PREFER` resta esportata e
+// vuota, come punto unico in cui un default tornerebbe se mai lo si volesse —
+// ma chi lo riempie riapre esattamente il buco descritto qui sopra.
+export const DEFAULT_MODELS_PREFER = [];
+
+// Set once a prefer list with no usable entries has been warned about — stessa
+// disciplina warn-once di _competingTiersWarned. Azzerato da resetState().
+let _preferredModelsWarned = false;
+
+/**
+ * Normalizza una preferenza per-chiamata: accetta un array di id o una CSV,
+ * scarta i vuoti, deduplica preservando l'ordine. Mai lancia — una preferenza
+ * malformata degrada a «nessuna preferenza», non a un crash della generazione.
+ */
+function _normalizePrefer(prefer) {
+  if (!prefer) return [];
+  const list = Array.isArray(prefer) ? prefer : String(prefer).split(',');
+  const out = [];
+  for (const item of list) {
+    const id = String(item || '').trim();
+    if (id && !out.includes(id)) out.push(id);
+  }
+  if (!out.length && (Array.isArray(prefer) ? prefer.length : String(prefer).trim())) {
+    if (!_preferredModelsWarned) {
+      _preferredModelsWarned = true;
+      console.warn(`⚠️  prefer=${JSON.stringify(prefer)} non ha voci utilizzabili — ignorato.`);
+    }
+  }
+  return out;
+}
+
+/**
+ * La preferenza in vigore per QUESTA chiamata: `opts.prefer` se c'e',
+ * altrimenti l'opt-in esplicito via `AI_MODELS_PREFER`, altrimenti
+ * `DEFAULT_MODELS_PREFER` — che e' vuoto, vedi sopra.
+ *
+ * ── LA LEVA DI ROLLBACK VA LETTA PER PRIMA, O NON E' UNA LEVA ──────────────
+ *
+ * `AI_MODELS_PREFER=""` (esplicitamente vuota, non «non impostata») spegne OGNI
+ * preferenza, compresa quella per-chiamata. Stessa convenzione di
+ * AI_COMPETING_TIERS / AI_LAST_RESORT_ORDER, e nessun warning: e' una scelta,
+ * non un refuso.
+ *
+ * L'ordine conta, ed e' stato sbagliato per un giorno. Con il per-call letto
+ * per primo la leva copriva solo il ramo env-only — che in produzione non
+ * esiste: `create-article.mjs` passa SEMPRE `prefer: PREFERRED_GENERATION_MODELS`
+ * su entrambe le chiamate che generano il corpo. Verificato eseguendo il
+ * codice: con `AI_MODELS_PREFER=""` nell'ambiente,
+ * `applyModelsPrefer(['a','b'], ['claude-cli/haiku'])` tornava
+ * `['claude-cli/haiku','a','b']`. Cioe' l'unica leva documentata come «rollback
+ * istantaneo» su un modello A PAGAMENTO non fermava il percorso che lo paga.
+ *
+ * Il costo dell'inversione e' nullo per gli altri chiamanti: `undefined` (il
+ * caso normale) non tocca nulla, e un valore non vuoto continua a perdere
+ * contro `opts.prefer` — la preferenza per-chiamata resta piu' specifica
+ * dell'opt-in di processo. Solo la stringa vuota, che e' un atto deliberato,
+ * vince su tutto.
+ *
+ * NON confondere con `CLAUDE_CLI_MAX_CALLS_PER_RUN`: quella e' un cap, e `0`
+ * vale ILLIMITATO (vedi `_getClaudeCliMaxCallsPerRun`). Usarla come interruttore
+ * ottiene l'opposto di spegnere.
+ */
+function _preferFor(optsPrefer) {
+  const raw = process.env.AI_MODELS_PREFER;
+  if (raw !== undefined && raw.trim() === '') return []; // leva di rollback esplicita
+  const perCall = _normalizePrefer(optsPrefer);
+  if (perCall.length) return perCall;
+  if (raw === undefined) return DEFAULT_MODELS_PREFER;
+  return _normalizePrefer(raw);
+}
+
+/**
+ * Sposta gli id preferiti in TESTA a una catena GIA' ordinata per punteggio,
+ * senza rimuovere nulla. Da applicare DOPO sortChainByScore().
+ *
+ * Un id assente dalla catena viene comunque anteposto — stessa scelta di
+ * `opts.model` per un id sconosciuto: preferire un modello che questa catena
+ * non elenca e' una preferenza, non un refuso da ignorare in silenzio. (Il
+ * corpus lo scartava invece; la scelta del sito vince perche' e' l'unica che
+ * garantisce che il preferito venga davvero tentato.)
+ *
+ * @param {string[]} chain
+ * @param {string[]|string} [prefer] preferenza per-chiamata; se omessa vale
+ *   l'opt-in via AI_MODELS_PREFER
+ * @returns {string[]}
+ */
+export function applyModelsPrefer(chain, prefer) {
+  const preferred = _preferFor(prefer);
+  if (!preferred.length) return chain;
+  const frontSet = new Set(preferred);
+  return [...preferred, ...chain.filter((m) => !frontSet.has(m))];
+}
+
+/**
+ * Il cap di token di INPUT dichiarato per un modello, o `undefined` se nessuna
+ * delle tre fonti ne dichiara uno. Stesso `Math.min` che usa il pre-flight di
+ * callLLM (era inline li' dentro): estratto perche' un chiamante deve poter
+ * chiedere «questo modello ha un tetto?» PRIMA di costruire il prompt.
+ *
+ * `undefined` significa «nessun cap dichiarato», non «illimitato»: e' la
+ * risposta che serve a create-article.mjs per NON accorciare la fonte quando a
+ * servire la chiamata sara' claude-cli/haiku — l'unico membro del roster senza
+ * cap di input dichiarato. Se il modello poi rifiuta davvero per dimensione, il
+ * rimedio esiste gia' ed e' `err.retryRequestTokenBudget` al throw qui sotto.
+ */
+export function getDeclaredRequestTokenLimit(model) {
+  const apiModelId = getApiModelId(model);
+  const knownLimits = [
+    MODEL_MAX_REQUEST_TOKENS[apiModelId],
+    _learnedRequestTokenLimits.get(model),
+    DEFAULT_REQUEST_TOKENS_BY_PROVIDER[getProvider(model)],
+  ].filter((v) => typeof v === 'number' && v > 0);
+  return knownLimits.length ? Math.min(...knownLimits) : undefined;
 }
 
 // ── Public state helpers ─────────────────────────────────────
@@ -2512,12 +3556,61 @@ function sortChainByScore(chain) {
 // exhaustion (account-independent → rotation cannot help, and re-trying would
 // neutralise those circuit-breakers). Default 'quota' covers the daily-limit and
 // rate-limit paths; the non-quota breakers pass an explicit reason.
-export function markModelExhausted(modelId, reason = 'quota') {
+export function markModelExhausted(modelId, reason = 'quota', detail = '') {
   _exhaustedModels.add(modelId);
   _exhaustReason.set(modelId, reason);
+  if (detail) _exhaustDetail.set(modelId, detail);
   _dirtyModels.add(modelId);
   _schedulePersist();
   console.warn(`🚫 Model ${modelId} marked as exhausted (${reason}) — will be skipped for rest of run`);
+}
+
+/**
+ * Human-and-classifier readable cause for a model that is being skipped because
+ * it is exhausted.
+ *
+ * ── Why this exists ───────────────────────────────────────────────────────
+ *
+ * The skip below used to push one fixed string for every exhausted model:
+ *
+ *   "skipped — exhausted (daily limit / consecutive 429s / timeout circuit-breaker)"
+ *
+ * A three-way disjunction, of which two branches are NOT transient. Every model
+ * exhausted by a 401 (stale key), a 402 (depleted credits) or a 404 (retired
+ * model) — all three classified `nonretryable` right where they are marked, with
+ * a comment explaining they must not be labelled quota — reappeared in the
+ * aggregate `Errors:` summary claiming a daily limit. `classifyExhaustionCause`
+ * then matched it on `daily limit` and counted it TRANSIENT, and
+ * `transientExhaustion` decides whether create-article.mjs defers (exit 0,
+ * workflow green) or alerts.
+ *
+ * Measured on run 31823202761: of 104 tallied models, all 54 on the transient
+ * side carried this one string, against 49 persistent — so the deferral, and the
+ * green run that produced no article, turned on a message that named the wrong
+ * cause. The reason was already recorded in `_exhaustReason`; only the message
+ * threw it away.
+ *
+ * The returned phrases are chosen to carry vocabulary `classifyExhaustionCause`
+ * already keys on, and the regexes there now name them explicitly rather than
+ * matching them by accident.
+ */
+function _exhaustSkipCause(model) {
+  const reason = _exhaustReason.get(model) || 'quota';
+  const detail = _exhaustDetail.get(model);
+  switch (reason) {
+    case 'quota':        return 'daily limit / consecutive 429s';
+    case 'timeout':      return 'timeout circuit-breaker';
+    // NON "stale credentials": l'unico chiamante che passa 'stale' e'
+    // `prunedStaleModels`, e li' significa che il LISTING LIVE del provider non
+    // offre piu' quell'id — niente a che vedere con una chiave. Chiamarlo
+    // "credenziali" sarebbe una causa inventata, cioe' esattamente il difetto
+    // che questa funzione esiste per chiudere. Trovato in review su
+    // valerielinc-ops#5903.
+    case 'stale':        return 'model no longer offered by provider';
+    case 'content':      return 'repeated unusable content';
+    case 'nonretryable': return `non-retryable provider error${detail ? ` (${detail})` : ''}`;
+    default:             return reason;
+  }
 }
 
 // Whether the chain runner should SKIP a model because it's exhausted.
@@ -2572,11 +3665,14 @@ export function isAnyModelAvailable() {
  * higher-priority model comes back online, instead of silently reusing a
  * verdict produced by a lower-tier fallback model forever (#3080).
  *
- * @param {{model?: string, chain?: string[]}} [opts]
+ * @param {{model?: string, chain?: string[], prefer?: string[]|string}} [opts]
+ *   `prefer` va passata dallo stesso chiamante che la passera' a callLLM: senza,
+ *   la chiave di cache verrebbe costruita sul modello che la catena avrebbe
+ *   scelto, non su quello che la preferenza le fa scegliere.
  * @returns {string|null} the model id that would serve the next call, or null
  *   if no configured model is currently available.
  */
-export function getPreferredModel({ model: startModel, chain: chainOverride } = {}) {
+export function getPreferredModel({ model: startModel, chain: chainOverride, prefer } = {}) {
   let chain = chainOverride ? [...chainOverride] : [...DEFAULT_CHAIN];
   if (startModel) {
     const idx = chain.indexOf(startModel);
@@ -2584,6 +3680,10 @@ export function getPreferredModel({ model: startModel, chain: chainOverride } = 
     else if (idx < 0) chain = [startModel, ...chain.filter((m) => m !== startModel)];
   }
   chain = sortChainByScore(chain);
+  // Rispecchia esattamente l'ordine di callLLM: prima il sort, poi la
+  // preferenza. Senza questa riga il peek risponderebbe con il modello che la
+  // catena avrebbe scelto, non con quello che la preferenza le fa scegliere.
+  chain = applyModelsPrefer(chain, prefer);
   for (const m of chain) {
     if (_shouldSkipExhausted(m)) continue;
     if (isProviderCoolingDown(getProvider(m))) continue;
@@ -2601,9 +3701,26 @@ export function getStats() {
     consecutive429s: Object.fromEntries(_consecutive429),  // FRO-325
     activeCooldowns: Object.fromEntries([..._providerCooldown].map(([p, t]) => [p, Math.max(0, Math.ceil((t - Date.now()) / 1000))])),
     scoreBoard: getScoreBoard(),
+    runOutcomes: getRunOutcomes(),
     storeBackend: _firestoreDb ? 'firestore' : 'memory',
     dirtyModels: _dirtyModels.size,
   };
+}
+
+/**
+ * Models this run actually called, with the outcome of each — busiest first.
+ *
+ * Deliberately NOT `getScoreBoard()`: that one is built from `_modelScores`,
+ * which initScoreStore preloads from Firestore (270 entries on 2026-08-18), so
+ * it describes the ledger and not the run. This describes the run, which is the
+ * question "sta funzionando questo modello?" actually asks.
+ */
+export function getRunOutcomes() {
+  return [..._runOutcomes.entries()]
+    .map(([model, o]) => ({ model, successes: o.successes, failures: o.failures }))
+    .sort((a, b) => (b.successes + b.failures) - (a.successes + a.failures)
+      || b.successes - a.successes
+      || a.model.localeCompare(b.model));
 }
 
 // Formats one last-resort tier's bucket for printRunSummary()'s compact
@@ -2624,6 +3741,37 @@ function _formatLastResortTier(name, t, isCompeting) {
     parts.push(`${t.skipped} skipped(${reasons})`);
   }
   return `${name} ${parts.join('/')}${isCompeting ? ' [competing]' : ''}`;
+}
+
+// Max models named on the `models:` line. A run touches a handful (the run
+// 32134269129 touched 2); the cap exists so a pathological cascade can't emit a
+// 270-entry line into logs that are already large.
+const RUN_OUTCOME_LINE_MAX = 24;
+
+/**
+ * One compact, grep-able line naming the models this run actually called.
+ *
+ * Why it exists: until 2026-08-18 a model that succeeded at position 0 of the
+ * chain logged NOTHING — `✅ Fallback to X succeeded` only prints when `i > 0` —
+ * so "quale modello ha scritto l'articolo" was unanswerable from the run log,
+ * and the ledger that should have answered it was wrong (see
+ * _pendingCounterDeltas). This line answers it from the log alone.
+ *
+ * `ok`/`ko` and not ✓/✗ so the line survives `grep` in a terminal that mangles
+ * the check marks; the `models:` prefix so it can be pulled out of a 5000-line
+ * run with one pattern. The `ledger=` tail is the observer for the loss itself:
+ * `pending>0` at summary time means mutations are still unwritten at the moment
+ * the run is about to end.
+ */
+function _formatRunOutcomesLine(s) {
+  const outcomes = s.runOutcomes || [];
+  const tail = ` [ledger=${s.storeBackend} pending=${s.dirtyModels}]`;
+  if (outcomes.length === 0) return `   models: none called this run${tail}`;
+  const shown = outcomes.slice(0, RUN_OUTCOME_LINE_MAX)
+    .map((o) => `${o.model} ${o.successes}ok/${o.failures}ko`)
+    .join(' · ');
+  const hidden = outcomes.length - Math.min(outcomes.length, RUN_OUTCOME_LINE_MAX);
+  return `   models: ${shown}${hidden > 0 ? ` · +${hidden} more` : ''}${tail}`;
 }
 
 /**
@@ -2656,6 +3804,7 @@ export function printRunSummary() {
   lines.push(lrReached
     ? `   last-resort: ${lrTiers.map((t) => _formatLastResortTier(t, lr[t], competing.includes(t))).join(' · ')}`
     : `   last-resort: ${lrTiers.join('/')} not reached this run`);
+  lines.push(_formatRunOutcomesLine(s));
   if (s.errors.length > 0) {
     lines.push(`   Errors: ${s.errors.length}`);
   }
@@ -2674,7 +3823,11 @@ export function resetState() {
   _modelScores.clear();
   _modelDetails.clear();
   _dirtyModels.clear();
+  _pendingCounterDeltas.clear();
+  _runOutcomes.clear();
   _consecutive429.clear();
+  _callLatency.clear();
+  _clampedTimeouts.clear();
   _consecutiveContentFailures.clear();
   _learnedRequestTokenLimits.clear();
   _learnedSchemaIncompatible.clear();
@@ -2690,6 +3843,7 @@ export function resetState() {
   _stats.lastResort = _freshLastResortStats();
   _lastResortOrderWarned = false;
   _competingTiersWarned = false;
+  _preferredModelsWarned = false;
   _claudeCliCallsThisRun = 0;
   _claudeCliMaxCallsWarned = false;
   _responseCache.clear();
@@ -2779,7 +3933,7 @@ export function isQuotaExhaustedError(err) {
  * - context length / too many tokens: prompt too large for this model
  * Returns { nonRetryable: boolean, markExhausted: boolean }
  */
-function classifyNonRetryableError(status, bodyText = '') {
+export function classifyNonRetryableError(status, bodyText = '') {
   const b = String(bodyText).toLowerCase();
 
   // HTTP 413 — payload too large / token limit reached
@@ -2807,11 +3961,70 @@ function classifyNonRetryableError(status, bodyText = '') {
   }
 
   // HTTP 404 — model not found (Cerebras, Groq, OpenRouter return 404 for invalid model IDs)
+  //
+  // UNCONDITIONAL, exactly like the 402 above, and for a measured reason: a 404
+  // body is EMPTY. Run 32169621635 (2026-08-18, issue nanako#449): 163 out of
+  // 163 HTTP 404 responses carried a zero-length body — the log line is
+  // literally `[Ministral-3B] HTTP 404: ` and stops there. No textual matcher
+  // can cover this class, because there is no text to match. While this branch
+  // gated on the body (`model_not_found`, `not_found_error`, `does not exist`,
+  // plus `no longer available` / `no longer supported`, which are GOOGLE's
+  // wording for a retired model) every one of those 163 fell through to
+  // markExhausted:false, the model stayed eligible, and it was re-called on
+  // every cascade pass — up to 32 times for a single model in one run. The 402
+  // class in the SAME run, same cascade, same attempts, capped at 2 calls per
+  // model. That asymmetry was never about the provider: it was this branch.
+  //
+  // This is the THIRD recurrence, and the first on a different provider:
+  //   1. 2026-05-27, run 26534353239 — the roster comment on GEMINI_31_FLASH_LITE:
+  //      "The deprecated preview kept winning the fallback selector because 404
+  //      didn't mark it exhausted, causing the entire blog-generator workflow to
+  //      fail with 50+ retries against the dead endpoint." Fixed by deleting the
+  //      one model and leaving the matcher alone.
+  //   2. 2026-08-14, run 31823202761 — three retired Gemini models, 48 futile
+  //      404s. Fixed by widening the matcher to Google's wording.
+  //   3. 2026-08-18, run 32169621635 — 163 futile 404s over 12 GitHub Models
+  //      endpoints, empty body in all 163.
+  // "Deleting the models is the symptom; this line is the cause" said the
+  // previous version of this comment, and it was right — the symptom was treated
+  // twice while the line stayed. There is no longer a condition to miss.
+  //
+  // ── WHAT THE THIRD ONE ACTUALLY IS, AND WHAT THIS LINE DOES NOT FIX ────────
+  //
+  // Case 3 is NOT a retired model, and saying so would send the next reader
+  // hunting the roster again. Measured 2026-08-18, unauthenticated POST:
+  //
+  //   GH_MODELS_BASE (models.inference.ai.azure.com/chat/completions)
+  //     → 404, size=0, identical with and without an Authorization header
+  //   models.github.ai/inference/chat/completions (the successor host)
+  //     → 410 {"error":{"code":"github_models_retirement_brownout", …}}
+  //
+  // A live endpoint answers 401 to a missing token, not 404 with an empty body.
+  // And GitHub Models DOES have wording for a model it retires — a 400 whose
+  // body carries `unknown_model`, recorded in the roster comments above
+  // (Meta-Llama-3.1-405B-Instruct, Cohere-command-r, Llama-3.2-90B). So the
+  // thing without wording is the ROUTE, not the model: every GitHub-hosted id
+  // in the chain 404s, all run long, because the host is gone.
+  //
+  // Which means this branch stops the bleeding — 163 dead round-trips per run
+  // become one per model — but it is NOT the cure. The cure is GH_MODELS_BASE
+  // and, given the brownout, the fate of the whole GitHub Models provider in
+  // the chain. Do not read a quiet log as a recovered provider.
+  //
+  // The risk is the one already accepted for 402, and it is bounded: `exhausted`
+  // holds for the CURRENT RUN only — it is never persisted, because
+  // _persistScoresToFirestore writes `exhaustedUntil` only when _exhaustReason
+  // is 'quota'. An endpoint that comes back to life is therefore picked up again
+  // on the next run (~17 minutes at the measured cadence); this particular one
+  // will not come back, but that is the property that keeps the rule cheap.
+  // Silencing is NOT removal: no model leaves the roster, the score ledger or
+  // the tally (constraint from nanako#380 — removing them turns
+  // tests/local-llm-fallback.test.ts deterministically red, nanako#362). One
+  // side effect worth knowing: recordModelFailure applies SCORE_NON_RETRYABLE
+  // once per failed CALL, so a dead endpoint now sinks in the ledger 16x slower
+  // than it did while it was being re-called 32 times a run.
   if (status === 404) {
-    if (b.includes('model_not_found') || b.includes('not_found_error') || b.includes('does not exist')) {
-      return { nonRetryable: true, markExhausted: true };
-    }
-    return { nonRetryable: true, markExhausted: false };
+    return { nonRetryable: true, markExhausted: true };
   }
 
   if (status !== 400) return { nonRetryable: false, markExhausted: false };
@@ -3186,10 +4399,12 @@ function _learnSchemaIncompatible(modelForTracking) {
  *
  * `providerName`, when given, makes the jsonSchema term provider-accurate: the
  * serialized schema is only added for providers that actually RECEIVE it, as
- * decided by shouldUseSchemaMode() — the same call the send side makes when it
- * builds the body. Omit it and the schema is counted unconditionally, which is
- * the conservative upper bound across the fleet and preserves the estimate
- * every existing provider-agnostic caller already relies on.
+ * decided by `_schemaBytesWillBeSent()` — which defers to shouldUseSchemaMode()
+ * for the OpenAI-compat/Gemini send side, and answers claude_cli separately
+ * (see that function's docstring for why it isn't folded in). Omit
+ * `providerName` and the schema is counted unconditionally, which is the
+ * conservative upper bound across the fleet and preserves the estimate every
+ * existing provider-agnostic caller already relies on.
  *
  * Why it matters: this codebase's article schema serializes to ~1805 chars ≈
  * 516 tokens. Groq is deliberately NOT in PROVIDERS_WITH_STRICT_JSON_SCHEMA
@@ -3202,6 +4417,18 @@ function _learnSchemaIncompatible(modelForTracking) {
  * `modelForTracking` extends the same fidelity to the per-model
  * _learnedSchemaIncompatible set and to the AI_MODELS_SCHEMA_MODE=off
  * kill-switch, both of which also stop the schema from being sent.
+ *
+ * claude_cli is the mirror-image bug (2026-08-19): shouldUseSchemaMode()
+ * correctly says false for it (not OpenAI-compat, not in
+ * PROVIDERS_WITH_STRICT_JSON_SCHEMA), but _callClaudeCli sends the schema
+ * anyway via `--json-schema` — so counting via shouldUseSchemaMode() alone
+ * UNDER-counted every claude-cli/* request with a schema by ~1805 bytes ≈
+ * 452 tokens, the same class of defect as the Groq one above with the sign
+ * flipped. And the bytes that actually leave the process for claude_cli
+ * aren't the raw schema: _callClaudeCli passes it through
+ * relaxSchemaForClaudeCli() first (drops nullable props from `required`),
+ * which changes the byte count, so this function mirrors that transform too
+ * — counting the unrelaxed schema would still be the wrong number.
  *
  * Exported for tests / smoke probes.
  */
@@ -3218,13 +4445,23 @@ export function estimateRequestTokens(messages, opts = {}, providerName = undefi
       }
     }
   }
-  // jsonSchema is serialized and sent in response_format → counts toward body,
-  // but ONLY for the providers that receive it. With no providerName the
-  // caller is asking a provider-agnostic question, so keep the upper bound.
+  // jsonSchema is serialized and sent in response_format (or, for claude_cli,
+  // via --json-schema) → counts toward body, but ONLY for the providers that
+  // receive it. With no providerName the caller is asking a provider-agnostic
+  // question, so keep the upper bound.
   const schemaIsSent = providerName === undefined
-    || shouldUseSchemaMode(providerName, true, modelForTracking);
+    || _schemaBytesWillBeSent(providerName, true, modelForTracking);
   if (opts.jsonSchema?.schema && schemaIsSent) {
-    try { chars += JSON.stringify(opts.jsonSchema.schema).length; } catch { /* noop */ }
+    // claude_cli never receives the raw schema — _callClaudeCli relaxes it
+    // first (relaxSchemaForClaudeCli drops nullable props from `required`),
+    // and that changes the byte count. Count the schema each provider
+    // actually gets, not the one every provider might get.
+    const isClaudeCli = providerName !== undefined
+      && _normalizeProviderKey(providerName) === _normalizeProviderKey(PROVIDER.CLAUDE_CLI);
+    const schemaForCount = isClaudeCli
+      ? relaxSchemaForClaudeCli(opts.jsonSchema.schema)
+      : opts.jsonSchema.schema;
+    try { chars += JSON.stringify(schemaForCount).length; } catch { /* noop */ }
   }
   return Math.ceil(chars / 3.5) + SAFETY_MARGIN;
 }
@@ -3384,7 +4621,7 @@ async function _callOpenAICompatible(apiModel, messages, opts, { endpoint, apiKe
             _learnSchemaIncompatible(modelForTracking);
           }
           if (nrc.markExhausted && !_isLastResortProvider(modelForTracking)) {
-            markModelExhausted(modelForTracking, 'nonretryable');
+            markModelExhausted(modelForTracking, 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
           const err = new Error(`[${displayModel}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -3781,7 +5018,7 @@ async function _getLocalDispatcher(timeoutMs) {
 async function _callLocal(model, messages, opts) {
   const apiModel = getApiModelId(model); // = getLocalLlmModelId()
   // Raise the timeout floor for slow CPU inference (caller's timeout may be ~60s).
-  let timeout = Math.max(opts.timeout || 0, getLocalLlmTimeoutMs());
+  const baseTimeoutMs = Math.max(opts.timeout || 0, getLocalLlmTimeoutMs());
   // Cap to the caller's remaining wall-clock budget (opts.deadlineMs, e.g.
   // create-article.mjs's RUN_WALL_BUDGET_MS). Without this, a single
   // local/fallback call can outlive the overall run deadline by its whole
@@ -3793,9 +5030,16 @@ async function _callLocal(model, messages, opts) {
   // svizzera budget, leaving zero time for any later fallback attempt.
   // Floor at 15s so a near-expired deadline still gets one honest last try
   // instead of silently degrading to a 0ms request.
+  //
+  // Stessa forma quota-su-`remaining` di _callClaudeCli (2026-08-18, issue
+  // #451 review): baseTimeoutMs sopra non deve MAI restare un tetto quando
+  // l'allowance residua e' grande. clamp( max(baseTimeoutMs, min(remaining ×
+  // SHARE, MAX)), 15s, remaining ).
+  let timeout = baseTimeoutMs;
   if (opts.deadlineMs) {
     const remaining = opts.deadlineMs - Date.now();
-    timeout = Math.max(15_000, Math.min(timeout, remaining));
+    const quota = Math.min(Math.floor(remaining * LOCAL_LLM_ALLOWANCE_SHARE), LOCAL_LLM_MAX_TIMEOUT_MS);
+    timeout = Math.max(15_000, Math.min(Math.max(baseTimeoutMs, quota), remaining));
   }
   const dispatcher = await _getLocalDispatcher(timeout);
   return _callOpenAICompatible(apiModel, messages, { ...opts, timeout }, {
@@ -3862,6 +5106,10 @@ function _callOmniRoute(model, messages, opts) {
  * on calls that could never finish in time.
  */
 async function _callClaudeCli(model, messages, opts) {
+  // Preso PRIMA di comporre gli argomenti, non allo spawn: il tempo speso in
+  // coda su `_withClaudeCliSlot` e' tempo che il chiamante paga davvero, ed e'
+  // esattamente una delle cause che la riga di riepilogo deve saper mostrare.
+  const startedAt = Date.now();
   const apiModel = getApiModelId(model); // e.g. 'haiku' — CLI resolves the alias to its current model
   const systemPrompt = messages.filter((m) => m.role === 'system').map((m) => m.content).join('\n\n');
   const userPrompt = messages.filter((m) => m.role !== 'system').map((m) => m.content).join('\n\n');
@@ -3869,13 +5117,37 @@ async function _callClaudeCli(model, messages, opts) {
   const args = [
     '-p', userPrompt,
     '--model', apiModel,
-    '--output-format', 'json',
+    // `stream-json` e non `json`: con `json` il CLI non scrive un solo byte
+    // finche' non ha finito, ed e' quello che rende «0 byte a 120s»
+    // indistinguibile fra tre cause che vogliono rimedi opposti. `--verbose` e'
+    // obbligatorio perche' sotto `-p` il CLI emetta davvero gli eventi, ed e'
+    // accettato insieme a `-p` (verificato eseguendolo, CLI 2.1.234). Il perche'
+    // esteso e le latenze misurate stanno su createClaudeCliStreamTrace.
+    '--output-format', 'stream-json', '--verbose',
     '--tools', '',
     '--permission-mode', 'bypassPermissions',
     '--safe-mode',
   ];
   if (systemPrompt) args.push('--system-prompt', systemPrompt);
-  if (opts.jsonSchema) args.push('--json-schema', JSON.stringify(opts.jsonSchema.schema || opts.jsonSchema));
+  // Lo schema passa da relaxSchemaForClaudeCli: `required` su una prop nullable
+  // e' cio' che fa rifiutare il tool_result al validatore locale del CLI, e ogni
+  // rifiuto e' una rigenerazione completa dell'articolo (~3m30s, ~6.800 token).
+  //
+  // E `getSchemaMode()` va chiesto anche qui. Il commento di shouldUseSchemaMode
+  // dice «entrambe le meta' che hanno bisogno della risposta la chiedono» e ne
+  // elenca due, il send OpenAI-compat e l'estimatore — ma i mittenti sono TRE:
+  // questo e' il terzo, e finora era l'unico che `AI_MODELS_SCHEMA_MODE=off` non
+  // spegneva. Cioe' l'interruttore d'emergenza scritto apposta «se una
+  // regressione di schema rompe di nuovo la generazione» non copriva il
+  // provider su cui la regressione e' successa. Qui si chiede getSchemaMode()
+  // direttamente e non shouldUseSchemaMode(): il CLI non e' OpenAI-compat e non
+  // sta in PROVIDERS_WITH_STRICT_JSON_SCHEMA (prende un flag, non un
+  // response_format), quindi entrare in quel Set cambierebbe anche il conteggio
+  // dell'estimatore. Vedi il corpo della PR per quel disallineamento, misurato
+  // e lasciato fuori di proposito.
+  if (opts.jsonSchema && getSchemaMode() !== 'off') {
+    args.push('--json-schema', JSON.stringify(relaxSchemaForClaudeCli(opts.jsonSchema.schema || opts.jsonSchema)));
+  }
 
   // Floor raised 60s -> 120s (T2 diagnosis, 2026-07-28: run 30333856358 /
   // 30243975255, 0/19 production successes, always the hard 60s timeout). A
@@ -3891,28 +5163,114 @@ async function _callClaudeCli(model, messages, opts) {
   // counts against the caller's wall-clock budget (correct) while the actual
   // per-process timeout still reflects the true remaining budget at the
   // moment it starts (not at the moment it was queued).
-  const { code, stdout, stderr } = await _withClaudeCliSlot(async () => {
+  const spawnCall = () => _withClaudeCliSlot(async () => {
     // Same deadline-capping rationale as _callLocal above — cap to the
     // caller's remaining wall-clock budget so a last-resort call can't
     // outlive the run.
+    //
+    // In piu' (2026-08-18): la chiamata CRESCE dentro l'allowance residua
+    // invece di restare inchiodata al minimo. Prima qui c'era
+    // `Math.min(baseTimeoutMs, remaining)`, e siccome `baseTimeoutMs` era 120s
+    // mentre `remaining` valeva 600-1000s, il minimo faceva da tetto e
+    // troncava chiamate che stavano ancora emettendo (vedi il blocco sopra
+    // CLAUDE_CLI_MIN_TIMEOUT_MS). Ora il tempo concesso e'
+    //
+    //     clamp( max(baseTimeoutMs, min(remaining × SHARE, MAX)), 15s, remaining )
+    //
+    // quindi: mai sotto il minimo, mai sopra il tetto, mai oltre l'allowance —
+    // e la clamp finale a `remaining` e' cio' che rende impossibile per
+    // costruzione che una tempesta di timeout sfondi il budget di sezione,
+    // qualunque valore prendano il minimo e la soglia del breaker.
     let timeoutMs = baseTimeoutMs;
     if (opts.deadlineMs) {
       const remaining = opts.deadlineMs - Date.now();
-      timeoutMs = Math.max(15_000, Math.min(timeoutMs, remaining));
+      const quota = Math.min(Math.floor(remaining * CLAUDE_CLI_ALLOWANCE_SHARE), CLAUDE_CLI_MAX_TIMEOUT_MS);
+      timeoutMs = Math.max(15_000, Math.min(Math.max(baseTimeoutMs, quota), remaining));
     }
     return _runClaudeCliProcess(args, timeoutMs);
   });
 
-  let parsed;
+  let code, stdout, stderr, trace;
   try {
-    parsed = JSON.parse(stdout);
-  } catch {
-    throw new Error(`[${model}] claude CLI non-JSON output (exit ${code}): ${(stdout || stderr).slice(0, 300)}`);
+    ({ code, stdout, stderr, trace } = await spawnCall());
+  } catch (err) {
+    // Il timeout ha ucciso il processo, ma il contenuto puo' essere gia'
+    // arrivato: un `tool_use` di StructuredOutput e' emesso a blocco chiuso,
+    // quindi o non c'e' o e' intero. Preferirlo all'errore e' cio' che
+    // trasforma 240s di generazione pagata in un articolo invece che in zero.
+    const recovered = _salvageClaudeCliPayload(model, err?.claudeCliSalvage, `timeout: ${err?.message || ''}`);
+    if (recovered !== null) return recovered;
+    throw err;
+  }
+
+  // La riga `type:"result"` del JSONL, non piu' l'intero stdout: sotto
+  // `stream-json` lo stdout e' una sequenza di eventi e `JSON.parse(stdout)`
+  // fallirebbe su ogni chiamata, anche perfettamente riuscita. La riga ha la
+  // stessa forma esatta dell'oggetto che `--output-format json` restituiva
+  // (`is_error` + `result`), quindi da qui in giu' non cambia niente — ed e'
+  // anche la ragione per cui i mock dei test che gia' emettono
+  // `{type:'result', …}` continuano a valere.
+  const parsed = trace.result;
+  if (!parsed) {
+    // Nessun evento `result`: qui la diagnosi del flusso serve quanto sul
+    // timeout — un processo uscito 0 senza result non e' la stessa cosa di uno
+    // che ha scritto spazzatura.
+    const recovered = _salvageClaudeCliPayload(model, trace.salvage(), `nessun evento result (exit ${code})`);
+    if (recovered !== null) return recovered;
+    throw new Error(`[${model}] claude CLI senza evento result (exit ${code})${trace.describe()}: ${(stdout || stderr).slice(0, 300)}`);
   }
   if (code !== 0 || parsed.is_error) {
+    // `result/error_during_execution` e' l'esito OSSERVATO quando l'anello di
+    // StructuredOutput non converge (riproduzione del 2026-08-18: num_turns=3,
+    // 6.773 token di output, `result` vuoto). Anche qui il primo tentativo
+    // rifiutato e' un articolo completo, e buttarlo costa quanto il timeout.
+    const recovered = _salvageClaudeCliPayload(model, trace.salvage(), `is_error (exit ${code})`);
+    if (recovered !== null) return recovered;
     throw new Error(`[${model}] claude CLI error: ${String(parsed.result || stderr || 'unknown').slice(0, 300)}`);
   }
+  // ── LA CHIAMATA E' RIUSCITA, E PROPRIO PER QUESTO VA RACCONTATA ──────────
+  //
+  // Sopra, i due rami d'errore chiamano `trace.describe()`; qui fino a oggi non
+  // lo chiamava nessuno. Era la ragione per cui 656s di haiku su un job da
+  // 1020s (run 32230961988) non lasciavano una riga di log: tre chiamate
+  // riuscite non sono un errore, e la diagnostica stava tutta di la'.
+  //
+  // Sopra la soglia e non sempre: cosi' una chiamata sana non aggiunge nulla al
+  // log, e la riga compare esattamente nei casi in cui qualcuno la leggerebbe.
+  // `console.warn` e non `console.error` perche' non e' un fallimento — ma
+  // resta su stderr come tutta la diagnostica di questo file, quindi finisce
+  // nel log della run senza toccare stdout, che qui e' il canale del payload.
+  const elapsedMs = Date.now() - startedAt;
+  if (CLAUDE_CLI_SLOW_CALL_LOG_MS > 0 && elapsedMs >= CLAUDE_CLI_SLOW_CALL_LOG_MS) {
+    console.warn(`🐢 [${model}] riuscita in ${Math.round(elapsedMs / 1000)}s${trace.describe()}${trace.describeCost()}`);
+  }
   return parsed.result;
+}
+
+/**
+ * Decide se un payload parziale vale una risposta, e lo dice ad alta voce.
+ *
+ * Restituisce la stringa da consegnare al chiamante, oppure `null` se non c'e'
+ * niente di salvabile — `null` e non un throw perche' ogni ramo che lo chiama
+ * ha gia' il proprio errore, piu' preciso di quello che potrebbe alzare qui.
+ *
+ * PERCHE' NON E' UNA SCOMMESSA. Il candidato arriva da un blocco `tool_use`,
+ * che il CLI emette solo completo, quindi non e' un JSON troncato a meta'; e a
+ * valle il validatore di forma (`famiglia=forma-sbagliata(chiavi)`) rifiuta
+ * comunque un oggetto incompleto esattamente come rifiuta oggi le risposte
+ * riuscite ma malformate. Il caso peggiore del salvataggio e' quindi il caso
+ * NORMALE di oggi; il caso migliore — e nella riproduzione locale era questo —
+ * e' un articolo pubblicabile a cui mancava solo un campo che lo schema
+ * ammette null.
+ */
+function _salvageClaudeCliPayload(model, salvage, why) {
+  if (!salvage || typeof salvage.text !== 'string' || !salvage.text) return null;
+  console.warn(
+    `♻️  [${model}] payload recuperato dallo stream invece di perdere la chiamata `
+    + `(${salvage.text.length} char da ${salvage.source}`
+    + `${salvage.attempts > 1 ? `, ${salvage.attempts} tentativi di schema` : ''}) — ${String(why).slice(0, 160)}`,
+  );
+  return salvage.text;
 }
 
 // Memoize the dynamic import itself (the in-flight promise, not just its
@@ -3933,6 +5291,271 @@ function _getChildProcessModule() {
 }
 
 /**
+ * ── DOVE SI E' FERMATO, NON SOLO CHE SI E' FERMATO ──────────────────────────
+ *
+ * Tracciatore incrementale del flusso `stream-json` del CLI `claude`. Esiste
+ * per una ragione sola: rendere DIAGNOSTICABILE il timeout.
+ *
+ * Con `--output-format json` il CLI non scrive niente su stdout finche' non ha
+ * finito — misurato il 2026-08-18 in locale con la CLI 2.1.234 e gli argomenti
+ * esatti di produzione: primo byte a 8442ms su una chiamata che chiude a
+ * 8995ms. Quindi «0 byte a 120s», la firma IDENTICA di ogni fallimento di
+ * `claude-cli/haiku` in produzione (0 successi in assoluto, run 32140876038:
+ * tre tentativi alle 13:12/13:32/13:34 del 2026-08-18, tutti a 120000ms esatti,
+ * 0 byte, stderr vuoto), non distingue tre cause che vogliono rimedi opposti:
+ *
+ *   - la CLI non e' mai partita        → il floor non c'entra niente
+ *   - l'API stallava dopo l'avvio      → il floor non c'entra niente
+ *   - la risposta era solo lenta       → e allora si', il floor e' stretto
+ *
+ * E' quella cecita' ad aver bruciato tre tentativi alla cieca di fila (floor
+ * 60s→120s, semaforo CLAUDE_CLI_MAX_CONCURRENCY, soglia del breaker portata a 3
+ * da #438): nessuno dei tre aveva un dato su cui puntare. Questa classe non
+ * ripara il difetto, lo rende misurabile — ed e' deliberatamente tutto cio' che
+ * fa: nessuna delle tre leve sopra viene toccata nello stesso giro.
+ *
+ * Con `--output-format stream-json --verbose` il primo byte arriva invece a
+ * 942ms, e la sequenza osservata su una chiamata sana e':
+ *
+ *     942ms  system/init
+ *    2699ms  system/thinking_tokens
+ *    4009ms  rate_limit_event
+ *    5065ms  assistant
+ *    5119ms  result/success
+ *
+ * Da cui le tre risposte che il messaggio di timeout ora puo' dare: «nessun
+ * evento» (non e' partita), «fermo dopo system/init a Nms» (stallo a monte),
+ * «fermo dopo assistant» (generazione lenta).
+ *
+ * PERCHE' `rate_limit_event` E' RIPORTATO A PARTE. E' il candidato causale piu'
+ * forte oggi invisibile: lo stesso `CLAUDE_CODE_OAUTH_TOKEN` di Max plan e'
+ * condiviso con `pr-review-loop`, `issue-fix` e il redflag-fixer, quindi un
+ * limite di sessione spiegherebbe esattamente la forma del difetto — funziona
+ * in locale, mai in CI. Il campo c'e' SEMPRE, anche quando l'evento non e'
+ * comparso ('nessun rate_limit_event'), per la stessa ragione per cui il
+ * conteggio dei byte di stdout c'e' anche a zero (vedi il ramo di timeout piu'
+ * sotto): un campo che appare solo quando c'e' qualcosa costringe chi legge il
+ * prossimo incidente a distinguere «non e' successo» da «non lo guardavamo».
+ *
+ * PERCHE' UN BUFFER. Le righe JSONL possono arrivare spezzate fra due eventi
+ * `data`: un chunk NON e' una riga. Si accumula e si taglia sui `\n`; il
+ * residuo senza `\n` finale e' una riga intera solo a processo chiuso (`end()`),
+ * mentre a timeout e' precisamente il segnale «stava scrivendo quando l'abbiamo
+ * ucciso», e come tale viene riportato invece che parsato.
+ *
+ * @param {{now?: () => number}} [deps] iniezione dell'orologio, per i test.
+ */
+export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
+  const startedAt = now();
+  const state = {
+    events: 0,
+    malformed: 0,
+    firstEventAtMs: null,
+    lastEventAtMs: null,
+    lastEventLabel: null,
+    rateLimit: null,
+    result: null,
+    // ── IL PAYLOAD RECUPERABILE ────────────────────────────────────────────
+    // Sotto `--json-schema` il CLI non fa uscire l'articolo come testo: espone
+    // un tool sintetico `StructuredOutput` (misurato: `system/init` dichiara
+    // `tools: ["StructuredOutput"]`) e il modello lo CHIAMA, quindi il corpo
+    // vive nell'`input` di un blocco `tool_use`, dove `textlen` e' 0. Un
+    // salvataggio che concatenasse i blocchi `text` recupererebbe la stringa
+    // vuota su ogni chiamata di produzione. Vedi _salvageClaudeCliPayload.
+    structured: null,
+    structuredAttempts: 0,
+    text: '',
+  };
+  let buffer = '';
+
+  function absorbLine(raw) {
+    const line = raw.trim();
+    if (!line) return;
+    let evt;
+    try {
+      evt = JSON.parse(line);
+    } catch {
+      state.malformed += 1;
+      return;
+    }
+    if (!evt || typeof evt !== 'object') {
+      state.malformed += 1;
+      return;
+    }
+    const atMs = Math.max(0, now() - startedAt);
+    state.events += 1;
+    if (state.firstEventAtMs === null) state.firstEventAtMs = atMs;
+    state.lastEventAtMs = atMs;
+    const type = typeof evt.type === 'string' ? evt.type : 'sconosciuto';
+    state.lastEventLabel = typeof evt.subtype === 'string' ? `${type}/${evt.subtype}` : type;
+    if (type === 'rate_limit_event') {
+      const info = evt.rate_limit_info && typeof evt.rate_limit_info === 'object' ? evt.rate_limit_info : {};
+      state.rateLimit = {
+        atMs,
+        status: typeof info.status === 'string' ? info.status : 'sconosciuto',
+        kind: typeof info.rateLimitType === 'string' ? info.rateLimitType : 'sconosciuto',
+      };
+    }
+    if (type === 'result') state.result = evt;
+    if (type === 'assistant') absorbAssistantBlocks(evt);
+  }
+
+  /**
+   * Raccoglie da un evento `assistant` cio' che, se la chiamata venisse uccisa
+   * ora, sarebbe comunque contenuto utile gia' pagato.
+   *
+   * DUE CANALI, non uno. Con `--json-schema` il contenuto sta nell'`input` del
+   * `tool_use` di `StructuredOutput`; senza schema sta nei blocchi `text`.
+   * L'ultimo `tool_use` completo vince sui precedenti: il CLI rifiuta i
+   * tentativi non conformi con un `tool_result` d'errore e il modello ritenta,
+   * quindi il piu' recente e' anche il piu' vicino allo schema.
+   *
+   * Un blocco `tool_use` arriva sempre INTERO (il CLI lo emette a blocco
+   * chiuso, non a delta), quindi `input` e' un oggetto gia' valido: e' questo
+   * che rende il salvataggio sicuro invece che una scommessa su un JSON
+   * troncato a meta'.
+   */
+  function absorbAssistantBlocks(evt) {
+    const blocks = evt?.message?.content;
+    if (!Array.isArray(blocks)) return;
+    let newText = '';
+    for (const b of blocks) {
+      if (!b || typeof b !== 'object') continue;
+      if (b.type === 'text' && typeof b.text === 'string') newText += b.text;
+      if (b.type === 'tool_use' && b.name === CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL && b.input && typeof b.input === 'object') {
+        try {
+          state.structured = JSON.stringify(b.input);
+          state.structuredAttempts += 1;
+        } catch { /* input ciclico: non salvabile, si tiene il precedente */ }
+      }
+    }
+    // Non verificato contro l'output reale del CLI se il canale `text` fra
+    // eventi `assistant` separati sia incrementale (frammenti) o cumulativo
+    // (snapshot che ripete quanto gia' inviato). Concatenare sempre presume
+    // incrementale: se fosse cumulativo duplicherebbe il contenuto gia'
+    // visto, e per testo non a forma di JSON il guard di `salvage()` non lo
+    // intercetta (non c'e' un `JSON.parse` che possa fallire). L'euristica
+    // sotto regge in entrambi i casi senza bisogno di saperlo a priori: uno
+    // snapshot cumulativo ha sempre l'accumulato corrente come prefisso, un
+    // frammento incrementale no (salvo un raro delta ripetuto identico).
+    if (newText) state.text = newText.startsWith(state.text) ? newText : state.text + newText;
+  }
+
+  return {
+    state,
+    /** Un chunk non e' una riga: si bufferizza e si taglia sui `\n`. */
+    feed(chunk) {
+      buffer += String(chunk);
+      let nl = buffer.indexOf('\n');
+      while (nl !== -1) {
+        absorbLine(buffer.slice(0, nl));
+        buffer = buffer.slice(nl + 1);
+        nl = buffer.indexOf('\n');
+      }
+    },
+    /**
+     * A processo chiuso il residuo senza `\n` e' una riga intera — e nei mock
+     * dei test e' l'unica forma in cui il payload arriva mai.
+     */
+    end() {
+      if (!buffer) return;
+      const rest = buffer;
+      buffer = '';
+      absorbLine(rest);
+    },
+    /** Byte di una riga non ancora terminata: a timeout vale «stava scrivendo». */
+    get pendingBytes() { return buffer.length; },
+    /** L'evento `type:"result"`, o null se non e' mai arrivato. */
+    get result() { return state.result; },
+    /**
+     * Il contenuto gia' arrivato, nella forma che il chiamante si aspetta da
+     * `result.result` — o null se non c'e' niente da salvare.
+     *
+     * Serve al ramo di timeout: senza, una chiamata uccisa butta via TUTTO
+     * l'output gia' generato (misurato in produzione: 110.868, 122.026,
+     * 133.111 e 160.208 byte di stdout scartati in quattro timeout diversi).
+     */
+    salvage() {
+      if (state.structured) {
+        return { text: state.structured, source: `tool_use/${CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL}`, attempts: state.structuredAttempts };
+      }
+      const t = state.text.trim();
+      // Senza schema il canale e' il testo, che PUO' essere troncato a meta'
+      // (i blocchi `text` arrivano a delta). Si salva solo se e' JSON intero,
+      // oppure se non ha forma di JSON e quindi non c'e' un intero da attendere.
+      if (!t) return null;
+      if (/^[{[]/.test(t)) {
+        try { JSON.parse(t); } catch { return null; }
+      }
+      return { text: t, source: 'assistant/text', attempts: 0 };
+    },
+    /**
+     * La frase che va nel messaggio d'errore. Sempre non vuota: anche «non e'
+     * arrivato niente» e' un'informazione, ed e' quella che serviva.
+     */
+    describe() {
+      if (state.events === 0) {
+        return buffer.length
+          ? ` — stream: nessun evento completo, ${buffer.length} byte di riga a meta' (il CLI aveva iniziato a scrivere)`
+          : ' — stream: nessun evento (il CLI non ne ha scritto uno solo: si e\' fermato prima di partire)';
+      }
+      const parti = [
+        `${state.events} ${state.events === 1 ? 'evento' : 'eventi'}`,
+        `fermo dopo ${state.lastEventLabel} a ${state.lastEventAtMs}ms`,
+      ];
+      if (state.events > 1) parti.push(`primo evento a ${state.firstEventAtMs}ms`);
+      if (buffer.length) parti.push(`${buffer.length} byte di riga a meta'`);
+      if (state.malformed) parti.push(`${state.malformed} righe illeggibili`);
+      parti.push(state.rateLimit
+        ? `rate_limit_event a ${state.rateLimit.atMs}ms (status=${state.rateLimit.status}, tipo=${state.rateLimit.kind})`
+        : 'nessun rate_limit_event');
+      return ` — stream: ${parti.join(', ')}`;
+    },
+
+    /**
+     * Cosa e' costata la chiamata, e DOVE — la meta' che `describe()` non
+     * copre perche' non vive negli eventi ma nell'involucro `result`.
+     *
+     * Il CLI dichiara da solo la scomposizione che serve (campi verificati
+     * eseguendolo, CLI 2.1.235): `ttft_ms` separa l'attesa dalla generazione,
+     * `duration_api_ms` misura la chiamata al netto dell'avvio del processo,
+     * `num_turns` dice se e' stato un giro solo, e `usage.output_tokens` con
+     * `output_tokens_details.thinking_tokens` dice quanto di cio' che e' stato
+     * generato era ragionamento e non articolo.
+     *
+     * Ogni campo e' opzionale per costruzione: i mock dei test emettono un
+     * `{type:'result'}` minimo, e una riga che esplode sul campo assente
+     * varrebbe meno di nessuna riga. Cio' che manca semplicemente non compare,
+     * tranne `giri-schema`, che segue la stessa regola del `rate_limit_event`
+     * in `describe()` — c'e' SEMPRE, perche' «uno solo» e «non lo guardavamo»
+     * sono due letture diverse dello stesso silenzio.
+     */
+    describeCost() {
+      const r = state.result;
+      const u = (r && typeof r.usage === 'object' && r.usage) || {};
+      const d = (typeof u.output_tokens_details === 'object' && u.output_tokens_details) || {};
+      const num = (v) => (typeof v === 'number' && Number.isFinite(v) ? v : null);
+      const parti = [];
+      const ttft = num(r?.ttft_ms);
+      if (ttft !== null) parti.push(`primo token a ${ttft}ms`);
+      const api = num(r?.duration_api_ms);
+      if (api !== null) parti.push(`api ${api}ms`);
+      const turns = num(r?.num_turns);
+      if (turns !== null) parti.push(`${turns} ${turns === 1 ? 'giro' : 'giri'}`);
+      const out = num(u.output_tokens);
+      if (out !== null) {
+        const think = num(d.thinking_tokens);
+        parti.push(`${out} token di output${think !== null ? ` (${think} di thinking)` : ''}`);
+      }
+      const inp = num(u.input_tokens);
+      if (inp !== null) parti.push(`${inp} token di input`);
+      parti.push(`${state.structuredAttempts} giri-schema`);
+      return ` — costo: ${parti.join(', ')}`;
+    },
+  };
+}
+
+/**
  * Spawn the `claude` CLI with stdin closed (its default stdin-wait-then-read
  * behavior adds ~3s latency when nothing is piped in — confirmed via live
  * test) and a hard kill-timeout so a hung subprocess can't outlive the run.
@@ -3940,12 +5563,29 @@ function _getChildProcessModule() {
  * rejection message (truncated) so the next incident isn't diagnostically
  * blind (T2, 2026-07-28).
  */
+/**
+ * L'ambiente del processo `claude`: quello del padre piu' il tetto al thinking.
+ *
+ * NON sovrascrive un valore gia' presente. E' la stessa regola che il ponte
+ * Remote Config applica alle proprie variabili, e per la stessa ragione: chi
+ * imposta `MAX_THINKING_TOKENS` in un workflow lo sta facendo apposta, e una
+ * costante di libreria che glielo cancella e' un override invisibile.
+ *
+ * Esportata per il test: quale ambiente riceva il figlio non e' osservabile
+ * dall'esterno senza spawnare un `claude` vero.
+ */
+export function claudeCliChildEnv(base = process.env) {
+  if (CLAUDE_CLI_MAX_THINKING_TOKENS === null) return base;
+  if (base.MAX_THINKING_TOKENS !== undefined && String(base.MAX_THINKING_TOKENS).trim() !== '') return base;
+  return { ...base, MAX_THINKING_TOKENS: String(CLAUDE_CLI_MAX_THINKING_TOKENS) };
+}
+
 async function _runClaudeCliProcess(args, timeoutMs) {
   const { spawn } = await _getChildProcessModule();
   return new Promise((resolve, reject) => {
     let child;
     try {
-      child = spawn(CLAUDE_CLI_BIN, args, { stdio: ['ignore', 'pipe', 'pipe'], env: process.env });
+      child = spawn(CLAUDE_CLI_BIN, args, { stdio: ['ignore', 'pipe', 'pipe'], env: claudeCliChildEnv() });
     } catch (err) {
       reject(err);
       return;
@@ -3953,6 +5593,9 @@ async function _runClaudeCliProcess(args, timeoutMs) {
     let stdout = '';
     let stderr = '';
     let settled = false;
+    // Il tracciatore parte con il processo, non con il primo byte: e' la
+    // distanza fra lo spawn e il primo evento a dire se la CLI e' mai partita.
+    const trace = createClaudeCliStreamTrace();
     const timer = setTimeout(() => {
       if (settled) return;
       settled = true;
@@ -3961,12 +5604,46 @@ async function _runClaudeCliProcess(args, timeoutMs) {
       // discarded on timeout, which left every production incident
       // (T2 diagnosis, 2026-07-28) blind to whether the subprocess was
       // stuck on auth, context loading, or a genuine hang.
+      //
+      // …e ora anche quanto STDOUT era arrivato, che invece veniva buttato del
+      // tutto. Il 2026-08-14 questo ramo e' scattato 10 volte su 10 nella run
+      // 31823202761, sempre a 120000 ms esatti, e il messaggio diceva solo
+      // «claude CLI timed out after 120000ms»: nessuno stderr (quindi il ramo
+      // sopra taceva) e nessuna informazione su stdout. Indistinguibile fra un
+      // processo che stava generando lentamente e uno che non ha mai scritto un
+      // byte — e le due cose vogliono rimedi opposti.
+      //
+      // La distinzione conta perche' 120s NON sono pochi: misurato in locale con
+      // gli stessi identici flag e un prompt da 10.211 token stimati, una
+      // chiamata sana costa 24 secondi (exit 0, 1.925 token di output). Se il
+      // prossimo incidente riporta bytes=0 la causa e' a monte della generazione
+      // (auth, rete, avvio) e alzare il timeout sarebbe solo tempo sprecato; se
+      // riporta un JSON troncato, allora si' che il floor e' stretto.
       const stderrExcerpt = stderr ? ` — stderr: ${stderr.slice(0, 300)}` : '';
-      const err = new Error(`claude CLI timed out after ${timeoutMs}ms${stderrExcerpt}`);
+      // Sempre presente, anche a zero: e' l'assenza di byte a essere il dato.
+      // Un campo che compare solo quando c'e' qualcosa costringe chi legge a
+      // distinguere «non e' arrivato niente» da «la diagnostica non c'era».
+      const stdoutExcerpt = ` — stdout: ${stdout.length} bytes`
+        + (stdout ? `: ${stdout.slice(0, 200)}` : ' (nessun byte scritto dal processo)');
+      // …e ora anche DOVE si e' fermato, che e' la domanda a cui il conteggio
+      // dei byte da solo non poteva rispondere: sotto `--output-format json` lo
+      // stdout resta a 0 byte fino all'ultimo istante di una chiamata
+      // perfettamente sana (8442ms su 8995ms, misurato), quindi «0 byte» non
+      // era mai stata la prova di «non e' partita». Sotto `stream-json` lo e'.
+      // Va per primo perche' e' il campo su cui si decide il prossimo rimedio.
+      const streamExcerpt = trace.describe();
+      const err = new Error(`claude CLI timed out after ${timeoutMs}ms${streamExcerpt}${stderrExcerpt}${stdoutExcerpt}`);
       err.name = 'TimeoutError';
+      // Cio' che era gia' arrivato quando abbiamo ucciso il processo. Va
+      // sull'errore e non in un resolve() perche' la decisione se un payload
+      // parziale valga una risposta e' del chiamante, non del trasporto.
+      err.claudeCliSalvage = trace.salvage();
+      // Un SIGKILL nostro a scadenza di budget e' un guasto del CANALE, non un
+      // giudizio sul modello: vedi il ramo che legge questo flag in callLLM.
+      err.transportFault = true;
       reject(err);
     }, timeoutMs);
-    child.stdout.on('data', (d) => { stdout += d; });
+    child.stdout.on('data', (d) => { stdout += d; trace.feed(d); });
     child.stderr.on('data', (d) => { stderr += d; });
     child.on('error', (err) => {
       if (settled) return;
@@ -3978,7 +5655,10 @@ async function _runClaudeCliProcess(args, timeoutMs) {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
-      resolve({ code, stdout, stderr });
+      // L'ultima riga puo' non avere il `\n`: senza questo flush il `result`
+      // resterebbe nel buffer e ogni chiamata riuscita passerebbe per fallita.
+      trace.end();
+      resolve({ code, stdout, stderr, trace });
     });
   });
 }
@@ -4058,7 +5738,7 @@ async function _callGeminiRaw(model, messages, opts) {
             // if it were a daily quota — exactly the over-persistence #4073
             // removed (quota-only persist gate in _persistScoresToFirestore).
             // Review 🔴 on #4073.
-            markModelExhausted(model, 'nonretryable');
+            markModelExhausted(model, 'nonretryable', `HTTP ${res.status}`);
             _stats.exhausted++;
           }
           const err = new Error(`[${model}] HTTP ${res.status}: ${raw.slice(0, 300)}`);
@@ -4153,10 +5833,22 @@ const HARD_CALL_CAP_GRACE_MS = 60_000;
 function _hardCallCapMs(model, opts) {
   const provider = getProvider(model);
   let base = Math.max(opts?.timeout || 0, 30_000);
-  // Mirror the per-provider timeout floors _callLocal / _callClaudeCli apply,
-  // otherwise the cap would fire before their own timeout ever could.
-  if (provider === PROVIDER.LOCAL) base = Math.max(base, getLocalLlmTimeoutMs());
-  else if (provider === PROVIDER.CLAUDE_CLI) base = Math.max(base, CLAUDE_CLI_MIN_TIMEOUT_MS);
+  // Mirror the per-provider timeout ceilings _callLocal / _callClaudeCli can
+  // grow to, otherwise the cap would fire before their own timeout ever
+  // could. LOCAL: dimensionato sul MASSIMO che _callLocal puo' concedersi
+  // (LOCAL_LLM_MAX_TIMEOUT_MS), non sul floor — stessa correzione applicata a
+  // CLAUDE_CLI sotto, sizarlo sul floor lascerebbe il backstop sotto il
+  // timeout che deve fare da backstop quando la quota supera il floor.
+  if (provider === PROVIDER.LOCAL) base = Math.max(base, LOCAL_LLM_MAX_TIMEOUT_MS);
+  // CLAUDE_CLI: dimensionato sul MASSIMO che _callClaudeCli puo' concedersi,
+  // non sul minimo. Da quando il timeout cresce dentro l'allowance residua
+  // (vedi CLAUDE_CLI_ALLOWANCE_SHARE) una chiamata puo' legittimamente durare
+  // fino a CLAUDE_CLI_MAX_TIMEOUT_MS: sizarlo sul minimo lascerebbe il backstop
+  // sotto il timeout che deve fare da backstop, cioe' il cap scatterebbe per
+  // primo su ogni chiamata lunga — esattamente il fallimento che il commento
+  // qui sopra («otherwise the cap would fire before their own timeout ever
+  // could») esiste per prevenire.
+  else if (provider === PROVIDER.CLAUDE_CLI) base = Math.max(base, CLAUDE_CLI_MAX_TIMEOUT_MS);
   const attempts = Math.max(1, opts?.maxRetriesPerModel || 1);
   let cap = attempts * (base + MAX_RETRY_AFTER_MS) * 2 + HARD_CALL_CAP_GRACE_MS;
   if (opts?.deadlineMs) {
@@ -4185,11 +5877,19 @@ const HARD_CALL_HEARTBEAT_MS = 60_000;
  * an uncapped model call by construction.
  */
 function _callModel(model, messages, opts) {
-  const capMs = _hardCallCapMs(model, opts || {});
+  // Adaptive ceiling (see ADAPTIVE_TIMEOUT_* above): narrow the caller's
+  // per-request timeout to what THIS model has been observed to need, but only
+  // on real evidence and never below the floor. `_hardCallCapMs` is sized off
+  // the same (possibly narrowed) opts on purpose — it is the backstop for when
+  // the per-request abort does not fire, so it must stay above it, not above a
+  // number we no longer use.
+  const effOpts = _withAdaptiveTimeout(model, opts);
+  const clamped = (effOpts?.timeout || 0) < (opts?.timeout || 0);
+  const capMs = _hardCallCapMs(model, effOpts || {});
   const started = Date.now();
   let heartbeat;
   let capTimer;
-  const call = (async () => _routeModelCall(model, messages, opts))();
+  const call = (async () => _routeModelCall(model, messages, effOpts))();
   const capped = new Promise((_resolve, reject) => {
     capTimer = setTimeout(() => {
       const err = new Error(
@@ -4211,10 +5911,54 @@ function _callModel(model, messages, opts) {
   // swallow its eventual settlement so it can never surface as an
   // unhandledRejection after the cascade has already moved on.
   call.catch(() => {});
-  return Promise.race([call, capped]).finally(() => {
+  return Promise.race([call, capped]).then(
+    (result) => {
+      // Only SUCCESSFUL calls feed the ceiling: a failure's duration says
+      // nothing about how long this model needs to answer. The span measured
+      // is the whole _callModel, so a success that arrived after an in-call
+      // 429 retry + backoff counts its wait too — that inflates the observed
+      // maximum, which WIDENS the ceiling. The error is deliberately on the
+      // permissive side; a narrower one would ban healthy calls.
+      _recordCallLatency(model, Date.now() - started);
+      return result;
+    },
+    (err) => {
+      // Tag a timeout that fired under a ceiling WE narrowed, so the circuit
+      // breaker in callLLM can decline to ban the model on our own guess the
+      // first time. Untagged timeouts (the caller's own number ran out) keep
+      // the pre-existing behaviour exactly.
+      if (clamped && _isTimeoutError(err)) {
+        // Some abort errors arrive as host objects (DOMException); a frozen or
+        // sealed one must not turn a timeout into a different exception.
+        try {
+          err.adaptiveTimeoutClamped = true;
+          err.adaptiveTimeoutMs = effOpts?.timeout;
+        } catch { /* untaggable — falls back to the pre-existing behaviour */ }
+      }
+      throw err;
+    },
+  ).finally(() => {
     clearTimeout(capTimer);
     clearInterval(heartbeat);
   });
+}
+
+/** Is this error the timeout class the retry loops and the breaker recognise? */
+function _isTimeoutError(e) {
+  return e?.name === 'AbortError' || e?.name === 'TimeoutError' || /timeout|aborted/i.test(e?.message || '');
+}
+
+/**
+ * Return `opts` with its per-request timeout narrowed to what `model` has
+ * earned, or `opts` untouched when the evidence is thin, the caller asked for
+ * nothing, or the model is a last-resort tier (whose own floors mean "fast so
+ * far" is not a promise it makes — see `_callLocal` / `_callClaudeCli`).
+ */
+function _withAdaptiveTimeout(model, opts) {
+  if (!opts?.timeout || _isLastResortProvider(model)) return opts;
+  const eff = computeAdaptiveTimeoutMs(_callLatency.get(model), opts.timeout);
+  if (eff >= opts.timeout) return opts;
+  return { ...opts, timeout: eff };
 }
 
 /** Route a model call to the correct provider */
@@ -4367,9 +6111,16 @@ export async function callLLM(messages, opts = {}) {
   // Sort by accumulated score — models that are working well come first,
   // models that have been failing are pushed down.
   // The initial call uses DEFAULT_CHAIN order (all scores 0, tiebreak by index).
-  // A forced chain keeps its explicit order (no score reshuffle).
+  // A forced chain keeps its explicit order (no score reshuffle, no preference
+  // reorder — the override owns the order verbatim, same as the o.model
+  // skip above).
   if (!_forcedChain.length) {
     chain = sortChainByScore(chain);
+    // La preferenza DOPO il sort: e' l'unico punto in cui un modello con
+    // punteggio negativo puo' comunque uscire primo. Si attiva solo su
+    // `opts.prefer` o sull'opt-in esplicito `AI_MODELS_PREFER` — mai da un
+    // default, che e' vuoto. Vedi il blocco di commento su applyModelsPrefer.
+    chain = applyModelsPrefer(chain, o.prefer);
   }
 
   const errors = [];
@@ -4409,16 +6160,21 @@ export async function callLLM(messages, opts = {}) {
     // 300+ times in a single run (one per fallback attempt × per fact-check
     // retry × per generation retry).
     if (_shouldSkipExhausted(model)) {
+      const cause = _exhaustSkipCause(model);
       if (!_exhaustedLogged.has(model)) {
-        console.warn(`⏭️  [${model}] Skipped — exhausted (daily limit, future hits silenced)`);
+        console.warn(`⏭️  [${model}] Skipped — exhausted (${cause}, future hits silenced)`);
         _exhaustedLogged.add(model);
       }
       // Record the skip reason so the aggregate "All AI models failed … Errors:"
       // message is never empty when every candidate is skipped pre-flight (e.g.
       // a single-model chain whose only model is exhausted, as in the smoke
       // test). Without this the harness surfaces a blank cause — undiagnosable.
-      errors.push(`${model}: skipped — exhausted (daily limit / consecutive 429s / timeout circuit-breaker)`);
-      _recordLastResortSkip(model, 'exhausted (daily limit)');
+      //
+      // The cause is the RECORDED one, not a fixed disjunction: see
+      // _exhaustSkipCause for why naming it wrong here turned a persistent-fault
+      // run into a green deferral 60+ times on 2026-08-14.
+      errors.push(`${model}: skipped — exhausted (${cause})`);
+      _recordLastResortSkip(model, `exhausted (${cause})`);
       continue;
     }
 
@@ -4468,12 +6224,12 @@ export async function callLLM(messages, opts = {}) {
     // _learnRequestTokenLimit — and persisted across runs via Firestore, so
     // providers nobody has hardcoded yet still get caught after their first
     // failure), and the provider-wide DEFAULT_REQUEST_TOKENS_BY_PROVIDER.
-    const knownLimits = [
-      MODEL_MAX_REQUEST_TOKENS[apiModelId],
-      _learnedRequestTokenLimits.get(model),
-      DEFAULT_REQUEST_TOKENS_BY_PROVIDER[provider],
-    ].filter((v) => typeof v === 'number' && v > 0);
-    const reqLimit = knownLimits.length ? Math.min(...knownLimits) : undefined;
+    //
+    // Il `Math.min` sulle tre fonti vive ora in getDeclaredRequestTokenLimit(),
+    // esportata: un chiamante deve poter chiedere «questo modello ha un tetto?»
+    // PRIMA di costruire il prompt, e la risposta deve venire da questa stessa
+    // funzione — non da una copia che scivola.
+    const reqLimit = getDeclaredRequestTokenLimit(model);
     if (reqLimit) {
       // `provider` + `model` make the jsonSchema term match the body this
       // model will actually receive: providers outside shouldUseSchemaMode()
@@ -4504,7 +6260,11 @@ export async function callLLM(messages, opts = {}) {
     // the counter only tracks real attempts.
     if (provider === PROVIDER.CLAUDE_CLI) {
       const cap = _getClaudeCliMaxCallsPerRun();
-      if (cap > 0 && _claudeCliCallsThisRun >= cap) {
+      // Il confronto passa da `isPerRunCallCapReached`, non da un `>=` scritto
+      // qui: e' la stessa funzione che i chiamanti interrogano PRIMA di
+      // costruire il prompt, e due copie della soglia divergerebbero senza che
+      // niente lo dica. Vedi il commento della funzione.
+      if (isPerRunCallCapReached(model)) {
         _logPreflightSkipOnce(model, 'claudeCliCap', `claude-cli call cap reached (${cap}/run, CLAUDE_CLI_MAX_CALLS_PER_RUN)`);
         errors.push(`${model}: skipped — claude-cli call cap reached (${cap}/run)`);
         _recordLastResortSkip(model, 'claude-cli call cap reached');
@@ -4524,6 +6284,7 @@ export async function callLLM(messages, opts = {}) {
       // ✅ Success — boost this model's score so it stays near the top
       recordModelSuccess(model);
       _consecutive429.delete(model); // FRO-325: reset 429 counter on success
+      _clampedTimeouts.delete(model); // an answer clears the adaptive-ceiling doubt
       _recordLastResortOutcome(model, 'served');
       if (provider === PROVIDER.CLAUDE_CLI) _claudeCliConsecutiveTimeouts = 0;
       if (provider === PROVIDER.OMNIROUTE) _omniRouteConsecutiveFailures = 0;
@@ -4605,7 +6366,25 @@ export async function callLLM(messages, opts = {}) {
       // timeout there is expected load, not a dead provider.
       const isTimeoutFailure = e.name === 'AbortError' || e.name === 'TimeoutError' || /timeout|aborted/i.test(msg);
       let markedExhausted = false;
-      if (isTimeoutFailure && !_isLastResortProvider(model)) {
+      // A timeout served under a ceiling THIS module narrowed below what the
+      // caller asked for is not yet evidence about the model: it is evidence
+      // about our multiplier. Banning the run's best model on that would be
+      // strictly worse than the 60s it saves — measured 2026-08-18, the model
+      // that hangs is also the one with 172.042 successes and rank 1 of 340.
+      // So the first such timeout costs one call and nothing else; from
+      // ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES onwards the model is treated
+      // exactly as before. Timeouts on the caller's OWN number are untagged
+      // and keep the pre-existing behaviour with no change at all.
+      let spared = false;
+      if (isTimeoutFailure && e.adaptiveTimeoutClamped) {
+        const n = (_clampedTimeouts.get(model) || 0) + 1;
+        _clampedTimeouts.set(model, n);
+        if (n <= ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES) {
+          spared = true;
+          console.warn(`⏱️  [${model}] Timed out at the adaptive ${Math.round((e.adaptiveTimeoutMs || 0) / 1000)}s ceiling (caller asked ${Math.round((o.timeout || 0) / 1000)}s) — not exhausting on our own guess (${n}/${ADAPTIVE_TIMEOUT_MAX_CLAMPED_FAILURES})`);
+        }
+      }
+      if (isTimeoutFailure && !spared && !_isLastResortProvider(model)) {
         markModelExhausted(model, 'timeout');
         _stats.exhausted++;
         markedExhausted = true;
@@ -4633,12 +6412,35 @@ export async function callLLM(messages, opts = {}) {
           console.warn(`🚫 [${model}] ${_omniRouteConsecutiveFailures} consecutive failures — disabling OmniRoute for the rest of this run`);
         }
       }
+      // ── TRASPORTO ≠ CONTENUTO ────────────────────────────────────────────
+      // Un SIGKILL che NOI abbiamo mandato a scadenza di budget non e' un
+      // giudizio sul modello: e' un giudizio sul nostro cap. Misurato il
+      // 2026-08-18, quattro run del corpus: `claude-cli/haiku` ha incassato
+      // -50 per ognuno dei 9 timeout (score -256 → -306 → -356 nella sola run
+      // 32187412494) mentre NELLE STESSE RUN serviva 48 risposte riuscite. Due
+      // di quei timeout hanno ucciso uno stream vivo: cap a 15.000ms con
+      // l'ultimo evento a 14.598ms, e cap a 37.869ms con l'ultimo a 37.457ms —
+      // 402 e 412 ms di margine, cioe' il processo stava ancora scrivendo.
+      // Penalizzare il modello per quello lo spinge in fondo alla cascata
+      // proprio quando e' l'unico rimasto, che e' l'esito che #441 descrive.
+      //
+      // Stessa forma della carve-out `topic-gate-abort`, che deliberatamente
+      // non chiama ne' recordModelContentFailure ne' recordModelContentSuccess:
+      // un esito che non parla della qualita' del modello non tocca il suo
+      // punteggio. Il breaker di trasporto sopra (_claudeCliConsecutiveTimeouts)
+      // NON e' toccato — quello conta i guasti del canale, ed e' il posto
+      // giusto dove contarli.
+      const transportOnly = !!e.transportFault && provider === PROVIDER.CLAUDE_CLI;
       recordModelFailure(model, {
         nonRetryable: !!e.nonRetryable,
         exhausted: isExhausted || isTimeoutFailure,
+        transportOnly,
       });
 
-      console.warn(`❌ [${model}] Failed${markedExhausted ? ' (timeout → exhausted)' : ''} (score → ${_modelScores.get(model) || 0}): ${msg.slice(0, 200)}`);
+      const scoreNote = transportOnly
+        ? `guasto di trasporto, score invariato → ${_modelScores.get(model) || 0}`
+        : `score → ${_modelScores.get(model) || 0}`;
+      console.warn(`❌ [${model}] Failed${markedExhausted ? ' (timeout → exhausted)' : ''} (${scoreNote}): ${msg.slice(0, 200)}`);
       // Continue to next model in chain
     }
   }
@@ -4723,9 +6525,20 @@ export async function callLLM(messages, opts = {}) {
  * (recovers on its own). Persistent = auth/credit/removed-model/payload/no-key
  * (needs intervention). Reasons matching neither are ignored in the tally.
  */
-function classifyExhaustionCause(errors) {
-  const persistentRe = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|payment|insufficient|credit/i;
-  const transientRe = /daily (request )?limit|daily quota|exceeded your current quota|plan and billing|free.?models.?per.?day|\b429\b|rate.?limit|resource.?exhausted|cooling down|timeout|aborted|overloaded|\b5\d\d\b|temporarily/i;
+export function classifyExhaustionCause(errors) {
+  // `non-retryable provider error`, `no longer offered`, `repeated unusable
+  // content` and `no longer available` are the vocabulary _exhaustSkipCause and
+  // classifyNonRetryableError emit. They are named here EXPLICITLY rather than
+  // left to be caught incidentally by the `\b40[124]\b` alternative: a phrase
+  // that classifies correctly only because it happens to contain a status code
+  // is one rewording away from silently flipping a persistent fault to
+  // transient — which is exactly the failure this pair of regexes suffered.
+  const persistentRe = /\b40[124]\b|tokens?_limit_reached|context.?length|maximum context|too many tokens|exceeds .*input cap|max output \d+ <|no API key|unknown.?model|no such model|does not exist|decommissioned|deprecated|no longer supported|no longer available|no longer offered|non-retryable|unusable content|payment|insufficient|credit/i;
+  // `timed out` alongside `timeout`: the claude-CLI provider rejects with
+  // "claude CLI timed out after 120000ms", which matched NEITHER regex and fell
+  // into the ignored ambiguous bucket — leaving the one model that was actually
+  // invoked out of the tally entirely (run 31823202761, 10 timeouts, 0 counted).
+  const transientRe = /daily (request )?limit|daily quota|exceeded your current quota|plan and billing|free.?models.?per.?day|\b429\b|rate.?limit|resource.?exhausted|cooling down|timeout|timed out|aborted|overloaded|\b5\d\d\b|temporarily/i;
   let transient = 0;
   let persistent = 0;
   for (const reason of errors) {

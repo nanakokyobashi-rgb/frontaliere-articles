@@ -262,6 +262,65 @@ describe('l\'excerpt TRADOTTO in quattro lingue (trasferirsi-a-marchirolo-…)',
   });
 });
 
+describe('#344 — budget-parenthetical strutturale: l\'inciso senza verbo "max" (blog-meta-ch-en.ts, riparato in #341)', () => {
+  it('«(59 characters)», nessuna cifra preceduta da "max"/"massimo": la vecchia finestra fragile lo perdeva', () => {
+    const valore = '… for over 5,000 daily passengers. **Mandatory Constraints** met for title translation (59 characters).';
+    const regole = findPromptPlaceholders(valore).map((h) => h.rule);
+    assert.ok(regole.includes('budget-parenthetical'), `non visto: ${regole.join(',') || 'nessuna regola'}`);
+  });
+
+  it('vede anche senza chiusura immediata dopo l\'unita\' (testo fra l\'unita\' e la parentesi chiusa)', () => {
+    assert.equal(findPromptPlaceholders('un sottotitolo (max 160 characters circa)').length, 1);
+  });
+
+  it('resta cieco a un inciso fra parentesi che non nomina l\'unita\' di misura dei caratteri', () => {
+    assert.deepEqual(findPromptPlaceholders('un dato riservato (confidenziale)'), []);
+    assert.deepEqual(findPromptPlaceholders('der Registrierungsdaten (Kennzeichen CH-123-456)'), []);
+  });
+});
+
+describe('#350 — rischio 1: un inciso lungo che nomina cifra e unita\' senza relazione fra loro', () => {
+  it('un inciso oltre 80 caratteri con un numero 2-4 cifre e "characters" non correlati non e\' un segnaposto', () => {
+    const inciso =
+      '(nota editoriale: il documento cita l\'articolo 42 del regolamento e descrive come i moduli vengano compilati, characters a parte, dal personale)';
+    assert.ok(inciso.length > 80, 'il fixture deve superare il tetto per essere un test valido');
+    assert.deepEqual(findPromptPlaceholders(`Testo introduttivo ${inciso} a seguire.`), []);
+  });
+
+  it('un segnaposto vero, breve, resta visto anche col tetto di lunghezza', () => {
+    assert.equal(findPromptPlaceholders('un sottotitolo (max 160 characters)').length, 1);
+  });
+
+  it('review #355: il tetto NON si applica a uno span esterno che contiene un sotto-span annidato', () => {
+    // Riapre esattamente il rischio #2: senza l'esenzione, questo span esterno
+    // (oltre 80 caratteri) veniva scartato dal tetto e restava visibile solo
+    // il sotto-span interno "(160)", che non porta l'unita' di misura.
+    const valore =
+      'Testo introduttivo (nota editoriale estesa del traduttore incaricato che spiega il contesto e riporta un identificativo interno (160) per un massimo di characters previsti dallo schema originale del prompt condiviso con la redazione) fine.';
+    const inciso = valore.slice(valore.indexOf('('), valore.lastIndexOf(')') + 1);
+    assert.ok(inciso.length > 80, 'il fixture deve superare il tetto per essere un test valido');
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
+});
+
+describe('#350 — rischio 2: il segnaposto annidato dentro una parentesi esterna aggiunta dal traduttore', () => {
+  it('segnaposto nello span esterno, fuori dal sotto-span annidato che lo precede', () => {
+    // Con un solo `start` (non uno stack), l'apertura della parentesi interna
+    // "(rif. interno)" sovrascriveva `start`; alla sua chiusura veniva
+    // registrato SOLO l'inciso interno (senza cifra/unita'), e `start`
+    // veniva azzerato — la parentesi esterna, che contiene il vero
+    // "max 160 chars", non veniva mai registrata come span. Verificato che
+    // questo fixture non trova nulla sull'algoritmo pre-#350 (`let start = -1`).
+    const valore = 'Nota (vedi (rif. interno) — max 160 chars) fine.';
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
+
+  it('due incisi consecutivi allo stesso livello (non annidati): il secondo resta visto', () => {
+    const valore = 'Sottotitolo (vedi doc) con dati DALLA FONTE (max 160 chars) qui dentro.';
+    assert.equal(findPromptPlaceholders(valore).filter((h) => h.rule === 'budget-parenthetical').length, 1);
+  });
+});
+
 describe('il preambolo del prompt dentro il corpo (ristorni-frontalieri-…)', () => {
   const body = 'Testo giornalistico reale che parla dei ristorni e del tavolo Lombardia-Ticino, abbastanza lungo da non essere un moncone e da superare la soglia dei duecento caratteri che il riparatore pretende prima di riscrivere un campo.\n\nHEADLINE: Italia - Svizzera - Ristorni frontalieri\n\nRECENT ARTICLE IDS (last 50 of 3006 total — do NOT reuse): educatore-infanzia-ticino';
 
@@ -601,15 +660,27 @@ describe('LOCK — se il template acquisisce un segnaposto, questo test diventa 
     assert.deepEqual(scoperti, [], 'letterali dello schema che nessun guard riconosce');
   });
 
-  it('i letterali delegati allo slug guard sono davvero classificati da lui', async () => {
+  it('i letterali delegati allo slug guard sono davvero classificati da lui', async (t) => {
     // Import dinamico: create-article.mjs ha jsdom fra le dipendenze statiche,
     // quindi si carica solo se il modulo e' risolvibile. Se non lo e', il test
     // si dichiara saltato invece di fingere di aver verificato.
+    //
+    // E «si dichiara» vuol dire `t.skip()`, non `return` (issue #382 item 1).
+    // Con il `return` il salto esisteva solo come riga su stderr: il runner
+    // contava il caso come PASSATO — senza node_modules il file chiudeva 108
+    // pass / 0 fail / 0 skipped — e l'unico strato che verifica davvero il
+    // classificatore degli slug spariva dietro un verde pieno. Chi legge il
+    // riassunto (o il gate che lo legge per lui) non aveva modo di accorgersene.
     let inspect;
     try {
       ({ inspectSlugForPromptPlaceholder: inspect } = await import('../scripts/create-article.mjs'));
     } catch (err) {
-      console.error(`  ⏭️  slug guard non caricabile (${err.code || err.message}) — verifica saltata`);
+      // Solo la dipendenza mancante (jsdom assente nei gate dependency-free) e'
+      // uno skip legittimo: questo import e' l'UNICO punto della suite che
+      // carica create-article.mjs, quindi un SyntaxError o qualunque altro
+      // errore di caricamento deve restare un FAIL, non uno skip silenzioso.
+      if (err.code !== 'ERR_MODULE_NOT_FOUND') throw err;
+      t.skip(`slug guard non caricabile: ${err.code}`);
       return;
     }
     for (const literal of SLUG_OWNED_LITERALS) {
@@ -726,6 +797,108 @@ describe('wiring — il guard e\' cablato sul percorso di scrittura CONDIVISO', 
     const repair = path.join(ROOT, 'generator', 'scripts', 'repair-prompt-placeholders.mjs');
     assert.ok(fs.existsSync(repair), 'repair-prompt-placeholders.mjs mancante');
     assert.match(fs.readFileSync(repair, 'utf-8'), /from '\.\/lib\/prompt-placeholder-guard\.mjs'/);
+  });
+});
+
+// ───────────────────────────────────────────────────────────────────────────
+// I TRE PRODUTTORI SENZA SLUG GUARD (issue #382 item 4)
+//
+// `create-article.mjs` chiama `inspectSlugForPromptPlaceholder` perche' li' lo
+// slug lo PROPONE IL MODELLO: e' un campo dell'output JSON, e un segnaposto del
+// prompt puo' uscire al suo posto (e' successo, PR #121). Gli altri tre
+// produttori del corpus non lo chiamano, e la misura di #382 lo registra come
+// 0/3. Ma la copertura mancante si misura sul rischio, non sulle chiamate: in
+// questi tre lo slug non passa da nessun modello, e' scritto nel sorgente —
+// due costanti letterali e un template che interpola solo la data ISO. Una
+// guard aggiunta li' non potrebbe mai scattare: sarebbe rumore che invecchia.
+//
+// Quello che invece serve e' un OSSERVATORE della premessa. Questi test non
+// verificano una guard: verificano che lo slug sia ancora un letterale. Il
+// giorno in cui uno di questi tre lo costruisce da un output di modello, la
+// costante letterale sparisce, questo blocco diventa rosso, e chi fa il cambio
+// e' obbligato a decidere consapevolmente se aggiungere lo slug guard.
+// ───────────────────────────────────────────────────────────────────────────
+
+const SCRIPTS = path.join(ROOT, 'generator', 'scripts');
+const leggiScript = (rel) => fs.readFileSync(path.join(SCRIPTS, rel), 'utf-8');
+/** Le righe di CODICE che assegnano `slugs:` — i commenti non contano. */
+const righeSlugs = (src) => src.split('\n').map((r) => r.trim()).filter((r) => r.startsWith('slugs:'));
+/** Un valore di slug ammissibile: minuscole, cifre e trattini, e nessun segnaposto. */
+function asseriscilSlugLetterale(valore, dove) {
+  assert.match(valore, /^[a-z0-9-]+$/, `${dove}: "${valore}" non e' uno slug in forma canonica`);
+  assert.deepEqual(findPromptPlaceholders(valore), [], `${dove}: segnaposto dentro uno slug letterale`);
+}
+
+describe('wiring — i tre produttori senza slug guard: lo slug non viene da un modello', () => {
+  const EVERGREEN = [
+    {
+      produttore: 'generate-events-digest-article.mjs',
+      contenuto: 'lib/events-digest-content.mjs',
+      costante: 'DIGEST_ARTICLE_SLUGS',
+    },
+    {
+      produttore: 'generate-border-wait-ranking-article.mjs',
+      contenuto: 'lib/border-wait-ranking-content.mjs',
+      costante: 'RANKING_ARTICLE_SLUGS',
+    },
+  ];
+
+  for (const { produttore, contenuto, costante } of EVERGREEN) {
+    it(`${produttore}: lo slug e' la costante letterale ${costante}`, () => {
+      const srcProd = leggiScript(produttore);
+      const srcCont = leggiScript(contenuto);
+      assert.ok(srcProd.length > 1000 && srcCont.length > 1000, 'sorgente vuoto o troncato: il test passerebbe a vuoto');
+      // 1. Il produttore prende gli slug SOLO dal builder, in un punto solo.
+      assert.deepEqual(righeSlugs(srcProd), ['slugs: article.slugs,'],
+        'il produttore assegna `slugs` da qualcosa che non e\' l\'articolo costruito dal builder');
+      assert.ok(srcProd.includes(`from './${contenuto}'`), `il produttore non importa piu' ${contenuto}`);
+      // 2. Il builder li prende dalla costante, senza toccarli — e quello e'
+      //    l'UNICO punto di assegnazione: un `includes` di sola presenza
+      //    lascerebbe passare un secondo `slugs:` che mischia un campo di
+      //    modello accanto alla costante.
+      assert.deepEqual(righeSlugs(srcCont), [`slugs: { ...${costante} },`],
+        `${contenuto} non assegna piu' gli slug SOLO copiando ${costante}`);
+      // 3. E la costante e' un letterale: quattro stringhe, nessuna interpolazione.
+      const m = new RegExp(`export const ${costante} = \\{([^}]*)\\};`).exec(srcCont);
+      assert.ok(m, `${costante} non e' piu' un oggetto letterale in ${contenuto}`);
+      assert.ok(!m[1].includes('${'), `${costante} ha un'interpolazione: lo slug non e' piu' un letterale`);
+      const valori = [...m[1].matchAll(/(\w+):\s*'([^']*)'/g)];
+      assert.deepEqual(valori.map((x) => x[1]), ['it', 'en', 'de', 'fr']);
+      for (const [, locale, valore] of valori) asseriscilSlugLetterale(valore, `${costante}.${locale}`);
+    });
+  }
+
+  it('generate-daily-brief-article.mjs: lo slug e\' un template che interpola solo la data ISO', () => {
+    const srcProd = leggiScript('generate-daily-brief-article.mjs');
+    const srcCont = leggiScript('lib/daily-brief-content.mjs');
+    assert.ok(srcProd.length > 1000 && srcCont.length > 1000, 'sorgente vuoto o troncato');
+    // Il Bollettino e' l'unico dei tre con un id DATATO: il suo slug non puo'
+    // essere una costante, ma resta calcolato — e la sola variabile ammessa e'
+    // la data del giorno, che non viene da nessun modello.
+    assert.ok(srcProd.includes("from './lib/daily-brief-content.mjs'"), 'il produttore non importa piu\' il builder');
+    assert.deepEqual(righeSlugs(srcProd), [], 'il produttore ora assegna `slugs` per conto suo: non e\' piu\' il builder a deciderli');
+    const prefisso = /export const DAILY_BRIEF_ID_PREFIX = '([a-z0-9-]+)';/.exec(srcCont);
+    assert.ok(prefisso, 'DAILY_BRIEF_ID_PREFIX non e\' piu\' una stringa letterale');
+    const corpo = /export function dailyBriefSlugs\(dateIso\) \{\n\s*return \{([\s\S]*?)\n\s*\};/.exec(srcCont);
+    assert.ok(corpo, 'dailyBriefSlugs non ritorna piu\' un oggetto letterale');
+    const interpolazioni = [...new Set([...corpo[1].matchAll(/\$\{([^}]*)\}/g)].map((x) => x[1].trim()))];
+    assert.deepEqual(interpolazioni, ['dateIso'],
+      `dailyBriefSlugs interpola ${JSON.stringify(interpolazioni)}: qualcosa oltre alla data entra nello slug`);
+    const voci = [...corpo[1].matchAll(/(\w+):\s*(?:`([^`]*)`|dailyBriefArticleId\(dateIso\))/g)];
+    assert.deepEqual(voci.map((x) => x[0].split(':')[0]), ['it', 'en', 'de', 'fr']);
+    for (const [, locale, template] of voci) {
+      if (!template) continue; // `it` passa da dailyBriefArticleId, gia' coperto dal prefisso
+      asseriscilSlugLetterale(template.replace('${dateIso}', '2026-01-02'), `dailyBriefSlugs.${locale}`);
+    }
+    asseriscilSlugLetterale(`${prefisso[1]}-2026-01-02`.replace('--', '-'), 'DAILY_BRIEF_ID_PREFIX');
+    // Il punto di CABLAGGIO, non solo la funzione: senza questo pin, buildData
+    // potrebbe assegnare `slugs: { ...dailyBriefSlugs(...), en: campoDiModello }`
+    // e sia questo test sia daily-brief-content.test.mjs resterebbero verdi
+    // (dimostrato in review della PR #386). Le due righe ammesse sono il
+    // passthrough e la chiamata nuda al builder.
+    assert.deepEqual(righeSlugs(srcCont),
+      ['slugs: article.slugs,', 'slugs: dailyBriefSlugs(brief.dateIso),'],
+      'daily-brief-content.mjs assegna `slugs` fuori dai due punti noti: un campo di modello puo\' entrare negli slug');
   });
 });
 

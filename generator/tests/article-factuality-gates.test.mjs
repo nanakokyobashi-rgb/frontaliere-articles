@@ -49,6 +49,8 @@ import {
   checkTaxPlausibility,
   checkCrossSectionNumericConflicts,
   checkFabricatedInstitutionAcronyms,
+  checkFabricatedNormAcronyms,
+  FABRICATED_NORM_ACRONYMS,
   checkContradictoryNormDates,
   checkSourceFreshness,
   extractSourceAnchors,
@@ -611,6 +613,383 @@ describe('checkFabricatedInstitutionAcronyms', () => {
   });
 });
 
+describe('checkFabricatedNormAcronyms', () => {
+  // NON portato dal sito: aggiunto qui per la recidiva di corpus#323 del
+  // 15-16/08/2026, quando `(LFW)` e `(LPS)` sono ricomparsi in 9 corpi su 4
+  // locali DOPO la chiusura dell'incidente. Il gate sulle ISTITUZIONI non li
+  // vedeva perché `Legge` non è in INSTITUTION_NOUN — è quel buco che questo
+  // describe presidia.
+  it('flags an invented law acronym as blocking', () => {
+    const issues = checkFabricatedNormAcronyms(
+      'La legge federale sul lavoro (LFW) del 20 marzo 1943 prevede che l\'apprendistato duri 3 anni.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].severity).toBe('critical');
+    expect(issues[0].message).toContain('LFW');
+  });
+
+  it('flags LPS, whose two spelled-out forms are both non-existent laws', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sulle prestazioni sociali (LPS) stabilisce i requisiti minimi.',
+    ))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge sul permesso di soggiorno in Svizzera (LPS) stabilisce le norme.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  // Irrobustimento #526 (item 3/3, adversarial check di #514): LFW e LPS
+  // restavano bare-match incondizionato dopo che LCL (#463) e LCO (#514)
+  // avevano gia' ricevuto il context-guard — stessa fragilita' strutturale
+  // gia' misurata due volte, nessuna collisione nota oggi ma un futuro
+  // articolo che nomini un'entita' reale con una di queste sigle andrebbe
+  // rigettato senza motivo.
+  it('leaves a bare mention of LFW alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Il gruppo LFW ha aperto un nuovo sportello vicino al confine per i frontalieri.',
+    )).toEqual([]);
+  });
+
+  it('leaves a bare mention of LPS alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'La app LPS aiuta i frontalieri a calcolare lo stipendio netto in Svizzera.',
+    )).toEqual([]);
+  });
+
+  it('still flags LFW with the Italian citation cue actually used in the corpus', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sul lavoro (LFW) del 20 marzo 1943 prevede che l\'apprendistato duri 3 anni.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  it('still flags LPS with the Italian citation cue actually used in the corpus', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sulle prestazioni sociali (LPS) stabilisce i requisiti minimi.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  // Caso che ha reso necessario spostare `Gesetz(?:es|e)?(?!t)` fuori dal
+  // gruppo ancorato al `\b` in `NORM_CITATION_CUE`: `(LFW)` e' arrivato
+  // byte-identico anche nel corpo tedesco di `apprendistato-urie-2024-2025`,
+  // dentro un composto (`Bundesarbeitsgesetz`) che non contiene la
+  // sottostringa letterale `Bundesgesetz` — un `\b` davanti a `Gesetz` non
+  // puo' scattare a meta' parola. Senza questo aggiustamento, aggiungere il
+  // context-guard a LFW avrebbe reso invisibile questa fabbricazione gia'
+  // misurata (vedi il test gemello su `runFactualityGates` piu' in basso).
+  it('still flags LFW inside a German compound that embeds -gesetz mid-word', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'Nach dem Bundesarbeitsgesetz (LFW) vom 13. März 1943 ist die Lehre ein Vertrag.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  // Gemello di frontaliere-si-o-no#6042 (follow-up #6017, item 2/3 di #6005),
+  // adattato: stessi due casi, `node:test` + expect-shim invece di vitest.
+  // LCL fabbrica due leggi diverse e INCOMPATIBILI nello stesso corpus
+  // (naturalizzazione cantonale 2020 vs legge cantonale sul lavoro 1995);
+  // LCO e' consistente ma inesistente e sopravvive identica a it/en/de/fr.
+  it('flags LCL, whose two spelled-out forms are two different incompatible laws', () => {
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge cantonale sulla naturalizzazione del Cantone di Lucerna e\' stata modificata nel 2020 (LCL 2020, art. 15).',
+    ))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 prevede una retribuzione minima.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  it('flags LCO, an invented federal act that survives translation unchanged', () => {
+    const issues = checkFabricatedNormAcronyms(
+      'The key legislation is the Federal Act on Combating Organized Crime (LCO), adopted in 2013.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].message).toContain('LCO');
+  });
+
+  // Irrobustimento #461 (item 1/3 di #455, gemello del guard LCL): nessuna
+  // collisione nota oggi con un'entità reale sigla "LCO", ma il bare-match
+  // incondizionato era la stessa fragilità strutturale già misurata su LCL —
+  // un futuro articolo che nomini un'entità reale con questa sigla, fuori da
+  // ogni contesto giuridico, andrebbe rigettato senza motivo.
+  it('leaves a bare mention of LCO alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Il gruppo LCO ha aperto una nuova filiale vicino al confine per i frontalieri.',
+    )).toEqual([]);
+  });
+
+  it('still flags LCO with the Italian citation cue actually used in the corpus', () => {
+    // Frase misurata su `infiltrazioni-criminali-ticino-grigioni`: «legge
+    // federale sul contrasto alla criminalità organizzata (LCO)».
+    expect(codes(checkFabricatedNormAcronyms(
+      'La legge federale sul contrasto alla criminalità organizzata (LCO), approvata nel 2013, '
+      + 'prevede la creazione di un ufficio federale dedicato.',
+    ))).toContain('fabricated-norm-acronym');
+  });
+
+  // `LCL` è anche il nome reale di una banca francese (ex Crédit Lyonnais).
+  // Senza un requisito di contesto giuridico, un articolo che la nomina in
+  // ambito bancario (il corpus ne ha già 175 su frontalieri Francia-Svizzera)
+  // verrebbe rigettato come sigla normativa fabbricata. Nessun anno vicino →
+  // non è un contesto giuridico → il gate deve lasciarlo passare.
+  it('leaves a bare mention of the French bank LCL alone — no legal context nearby', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Per i frontalieri che vivono in Francia, LCL propone conti correnti dedicati e carte multivaluta.',
+    )).toEqual([]);
+  });
+
+  // Il test sopra usa una frase bancaria SENZA anno, e con quella un contesto
+  // ad anno sembra funzionare. Non funziona: in un articolo su conti e mercati
+  // un anno vicino alla sigla è normale, e questa frase — ordinaria — veniva
+  // rigettata lo stesso. È il caso che ha motivato il passaggio dal contesto
+  // «anno» al contesto «citazione di norma».
+  it('leaves the French bank LCL alone even when a year sits right next to it', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL offre un conto dedicato ai frontalieri che lavorano in Svizzera.',
+    )).toEqual([]);
+  });
+
+  // `legg[ei]` e `lois?` in `NORM_CITATION_CUE` matchavano come PREFISSO di
+  // parole comuni prive di ogni legame con una citazione di norma — `leggero`,
+  // `leggenda`, `loisir` — perché l'alternanza non chiudeva con `\b`. Una di
+  // queste basta, nel raggio di 120 caratteri da una menzione reale della
+  // banca LCL, a far scattare `context.test()` e bloccare come `critical` un
+  // articolo legittimo: esattamente il difetto che questa PR dichiara di
+  // risolvere, riaperto da un lato diverso della stessa regex.
+  it('leaves the bank LCL alone even when a nearby word merely starts with legg-/lois-', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL offre un servizio leggero e veloce per i frontalieri, pensato per chi cerca leggerezza '
+      + 'nella gestione dei conti correnti in Svizzera.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Dal 2024 LCL, secondo una leggenda metropolitana leggendaria fra i frontalieri, avrebbe conti gratuiti.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Depuis 2024, LCL propose aux frontaliers un service de loisirs bancaires pour la Suisse.',
+    )).toEqual([]);
+  });
+
+  // Stesso difetto di `legg[ei]`/`lois?`, riaperto da un terzo lato della
+  // stessa alternanza: `federal\s+act`, `act\s+on` e `law\s+on` non
+  // chiudevano con `\b` e matchavano come PREFISSO di frasi ordinarie senza
+  // alcun legame con una citazione di norma — «federal action plan», «will
+  // act only if requested», «this law only concerns residents».
+  it('leaves the bank LCL alone even when a nearby word merely starts with act-/law-', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL offers a federal action plan discount for cross-border commuters banking in Switzerland.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL support staff will act only if requested by the cross-border commuter opening an account.',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'Since 2024, LCL notes that this law only concerns residents opening a new account in Switzerland.',
+    )).toEqual([]);
+  });
+
+  // Il test sopra nomina tre parole; la classe ne ha altre cinque, e la coda
+  // del prefisso `legg-` e' fitta di parole ordinarie. Enumerarle qui evita che
+  // un domani si «semplifichi» il cue guardando solo i tre esempi citati.
+  it('leaves the bank LCL alone for the rest of the legg-/lois- family too', () => {
+    const frasiSenzaCitazione = [
+      'Il tariffario LCL resta leggibile online e non prevede spese fisse mensili.',
+      'Un logo leggiadro accompagna la nuova app LCL dedicata ai frontalieri.',
+      'Le commissioni LCL sono leggermente inferiori a quelle della concorrenza.',
+      'Conviene leggere le condizioni del conto LCL prima di aprirlo.',
+      'La carta LCL offre sconti su viaggi e loisir per i frontalieri.',
+    ];
+    for (const frase of frasiSenzaCitazione) {
+      expect(checkFabricatedNormAcronyms(frase), frase).toEqual([]);
+    }
+  });
+
+  // Contro-prova, ed e' la meta' che mancava del tutto: restringere il cue per
+  // chiudere il falso positivo puo' spegnere il gate, e nessun test se ne
+  // accorgerebbe. Le forme vere devono restare cue in italiano e in francese,
+  // al singolare E al plurale — `legislazioni` non lo era: l'alternanza diceva
+  // `legislazione`, che come prefisso non copre il plurale, quindi una sigla
+  // fabbricata citata al plurale passava senza contesto riconosciuto.
+  it('still recognises real citation cues, singular and plural', () => {
+    const frasiConCitazione = [
+      'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 fissa un minimo.',
+      'Le leggi cantonali richiamate dalla LCL fissano un minimo salariale.',
+      'La legislazione richiamata dalla LCL fissa un minimo salariale.',
+      'Le legislazioni cantonali richiamate dalla LCL fissano un minimo salariale.',
+      'La loi cantonale sur le travail (LCL) fixe un salaire minimum.',
+      'Les lois cantonales citees par la LCL fixent un salaire minimum.',
+    ];
+    for (const frase of frasiConCitazione) {
+      expect(codes(checkFabricatedNormAcronyms(frase)), frase).toContain('fabricated-norm-acronym');
+    }
+  });
+  // Il tedesco compone in due direzioni opposte, e il `\b` va messo solo da
+  // una parte. Questi due test codificano la scelta perche' non venga
+  // «riparata» al giro dopo: chiudere `Gesetz`/`Bundesgesetz` farebbe passare
+  // il primo test e romperebbe il secondo.
+  it('leaves the bank LCL alone when the German word is a product or a news article', () => {
+    const frasiSenzaCitazione = [
+      'Die Artikelnummer der LCL-Karte steht auf der Rueckseite.',
+      'Eine Artikelserie ueber die LCL und die Grenzgaenger erscheint woechentlich.',
+      'Das Artikelbild der LCL-Broschuere zeigt eine Filiale in Genf.',
+    ];
+    for (const frase of frasiSenzaCitazione) {
+      expect(checkFabricatedNormAcronyms(frase), frase).toEqual([]);
+    }
+  });
+
+  // Terza domanda adversarial del giro: `RS\s*\d` prenderebbe uno standard
+  // tecnico («RS 232») accanto a LCL. Misurato: no, e per due ragioni
+  // indipendenti. Lo standard seriale si scrive col trattino, e `\s*` non
+  // copre `-`; e «RS 232» col numero puntato E' una citazione vera — RS 232.11
+  // e' la legge sui marchi. Restringere al formato puntato romperebbe `RS 101`
+  // (la Costituzione) e `RS 220` (il CO), che di punto non ne hanno: sarebbe
+  // il falso negativo del caso 2, non una chiusura di falso positivo.
+  it('does not read a hyphenated technical standard as a Swiss RS citation', () => {
+    expect(
+      checkFabricatedNormAcronyms('Il terminale di pagamento LCL usa ancora un cavo RS-232 in cassa.'),
+    ).toEqual([]);
+  });
+
+  it('keeps an unpunctuated RS number as a citation cue', () => {
+    // `RS 101` e' la Costituzione: nessun punto, e deve restare cue.
+    expect(
+      codes(checkFabricatedNormAcronyms('La LCL richiamata in RS 101 fissa un minimo salariale ai frontalieri.')),
+    ).toContain('fabricated-norm-acronym');
+  });
+
+  // Caso 3 del commento: `Gesetz` resta aperto a prefisso per i composti VERI,
+  // ma `gesetzt` non e' un composto — e' il participio di `setzen`, parola
+  // ordinaria in qualunque pezzo de-locale. Senza il `(?!t)` una frase come la
+  // prima qui sotto flaggava `critical` una banca legittima.
+  it('leaves the bank LCL alone when the German word is the participle gesetzt', () => {
+    const frasiSenzaCitazione = [
+      'Der Rahmen fuer die LCL-Karte der Grenzgaenger ist gesetzt.',
+      'Gesetzt den Fall, dass die LCL ihre Gebuehren fuer Grenzgaenger erhoeht.',
+      'Die gesetzte Frist fuer den LCL-Kontowechsel laeuft Ende Monat ab.',
+      'Ein gesetzter Termin bei der LCL-Filiale in Genf dauert rund 30 Minuten.',
+    ];
+    for (const frase of frasiSenzaCitazione) {
+      expect(checkFabricatedNormAcronyms(frase), frase).toEqual([]);
+    }
+  });
+
+  // Stesso difetto dei composti tedeschi, ma in italiano e in inglese: senza
+  // il `\b` la coda di `articol-` prendeva chi SCRIVE sui giornali invece di
+  // chi cita una legge. Nessuna delle due lingue ha l'argomento della
+  // composizione che tiene aperto `Gesetz-`, quindi qui il `\b` va messo.
+  it('leaves the bank LCL alone for articolista and the rest of the articol- tail', () => {
+    const frasiSenzaCitazione = [
+      "L'articolista che segue la LCL sui giornali ticinesi firma una rubrica settimanale.",
+      'La produzione articolistica sulla LCL e i frontalieri e cresciuta molto nel 2024.',
+      'Gli articolisti economici citano la LCL fra le banche piu attive sul confine.',
+    ];
+    for (const frase of frasiSenzaCitazione) {
+      expect(checkFabricatedNormAcronyms(frase), frase).toEqual([]);
+    }
+  });
+
+  it('keeps German legal compounds as citation cues, by design', () => {
+    // `Gesetz-` in testa a un composto e' SEMPRE dominio giuridico: chiudere
+    // l'alternativa con `\b` darebbe falsi negativi, non toglierebbe falsi
+    // positivi. `Artikeln` invece e' il dativo plurale di una citazione vera,
+    // ed e' il motivo della `n?`.
+    const frasiConCitazione = [
+      'Die kantonale Gesetzgebung (LCL) vom 15. Dezember 1995 legt einen Mindestlohn fest.',
+      'Das Bundesgesetzblatt nennt die LCL als Grundlage fuer den Mindestlohn.',
+      'Das Gesetzbuch verweist auf die LCL fuer den Mindestlohn der Grenzgaenger.',
+      'Der Gesetzentwurf zur LCL sieht einen Mindestlohn fuer Grenzgaenger vor.',
+      'Der Gesetzestext der LCL nennt den Mindestlohn fuer Grenzgaenger.',
+      'Die Gesetzeslage rund um die LCL bleibt fuer Grenzgaenger unveraendert.',
+      'Artikel 5 der LCL legt den Mindestlohn fuer Grenzgaenger fest.',
+      'In den Artikeln 5 und 6 der LCL steht der Mindestlohn der Grenzgaenger.',
+    ];
+    for (const frase of frasiConCitazione) {
+      expect(codes(checkFabricatedNormAcronyms(frase)), frase).toContain('fabricated-norm-acronym');
+    }
+  });
+
+  // Il requisito di contesto non deve diventare una scappatoia. Se il testo
+  // nomina PRIMA la banca e POI fabbrica la legge, il gate deve scattare: con
+  // una `re.exec` a match singolo la prima occorrenza consumava l'unico match
+  // e la fabbricazione passava in silenzio. Il difetto nasce con la guardia di
+  // contesto — senza, il primo match era sempre anche l'issue.
+  it('still flags a fabricated LCL that follows a legitimate bank mention', () => {
+    // La finestra della PRIMA occorrenza non deve contenere alcuna cue, o il
+    // test passerebbe anche senza scan multiplo: qui la seconda `LCL` sta 270
+    // caratteri dopo la prima, ben oltre i 120 della finestra.
+    const issues = checkFabricatedNormAcronyms(
+      'Dal 2024 LCL propone ai frontalieri conti correnti in euro, carte multivaluta e prelievi '
+      + 'gratuiti agli sportelli di tutto il gruppo bancario francese, senza spese fisse mensili '
+      + 'per chi accredita lo stipendio. Un altro paragrafo sostiene invece che la legge cantonale '
+      + 'sul lavoro (LCL) del 15 dicembre 1995 fissi un minimo di 3500 franchi.',
+    );
+    expect(codes(issues)).toContain('fabricated-norm-acronym');
+    expect(issues[0].message).toContain('LCL');
+  });
+
+  // La tabella deve restare non-global anche ora che lo scan usa un clone
+  // globale: se il flag `g` finisse sull'entry condivisa, `lastIndex`
+  // tornerebbe a viaggiare fra le chiamate.
+  it('keeps the table entries non-global even though the scan clones them', () => {
+    for (const entry of FABRICATED_NORM_ACRONYMS) {
+      expect(entry.re.global).toBe(false);
+    }
+    const t = 'La legge cantonale sul lavoro (LCL) del 15 dicembre 1995 prevede il minimo.';
+    expect(codes(checkFabricatedNormAcronyms(t))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(t))).toContain('fabricated-norm-acronym');
+  });
+
+  // Il confine è su LETTERE, non `\b`: queste due sono norme VERE e il gate le
+  // deve lasciare passare, altrimenti blocca contenuto legittimo. Stessa
+  // motivazione, e stessi esempi, del test sui dati di corpus#323.
+  it('leaves MLPS and TULPS alone — real norms that contain the letters', () => {
+    expect(checkFabricatedNormAcronyms(
+      'Il Ministero del Lavoro e delle Politiche Sociali (MLPS) e il TULPS del 1931 restano applicabili.',
+    )).toEqual([]);
+  });
+
+  it('accepts the repaired citations', () => {
+    expect(checkFabricatedNormAcronyms(
+      'La legge sul lavoro (LL, RS 822.11) del 13 marzo 1964 regola la durata del lavoro; '
+      + 'la formazione professionale di base è retta dalla LFPr (RS 412.10).',
+    )).toEqual([]);
+    expect(checkFabricatedNormAcronyms(
+      'La legge federale sugli stranieri e la loro integrazione (LStrI, RS 142.20) regola il permesso di soggiorno.',
+    )).toEqual([]);
+  });
+
+  // La ragione per cui il controllo sta FUORI dal ramo `locale === 'it'` di
+  // runFactualityGates: `(LFW)` è arrivato byte-identico anche nei corpi
+  // de/fr/en di `apprendistato-urie-2024-2025`. Un gate solo-italiano avrebbe
+  // lasciato passare le tre traduzioni.
+  it('blocks in a non-Italian locale too, not only in Italian', () => {
+    const de = runFactualityGates({
+      sections: { body1: 'Nach dem Bundesarbeitsgesetz (LFW) vom 13. März 1943 ist die Lehre ein Vertrag.' },
+      locale: 'de',
+      italianSections: { body1: 'Secondo la legge sul lavoro il rapporto di tirocinio è un contratto di formazione.' },
+    });
+    expect(de.passed).toBe(false);
+    expect(codes(de.blocking)).toContain('fabricated-norm-acronym');
+  });
+
+  it('is wired into runFactualityGates as a blocking gate for Italian', () => {
+    const res = runFactualityGates({
+      sections: { body1: 'Secondo la legge federale sul lavoro (LFW) del 1943, il contratto è annuale.' },
+      locale: 'it',
+    });
+    expect(res.passed).toBe(false);
+    expect(codes(res.blocking)).toContain('fabricated-norm-acronym');
+  });
+
+  // Le regex della tabella sono module-level e condivise fra le chiamate: con
+  // il flag `g` porterebbero `lastIndex` da una chiamata all'altra e il gate
+  // salterebbe un articolo sì e uno no. Difetto invisibile a un test a
+  // chiamata singola, quindi va asserito sulla tabella.
+  it('keeps the shared patterns non-global, so no lastIndex leaks between calls', () => {
+    for (const entry of FABRICATED_NORM_ACRONYMS) {
+      expect(entry.re.global).toBe(false);
+    }
+    const text = 'La legge federale sul lavoro (LFW) del 1943 vale ovunque.';
+    expect(codes(checkFabricatedNormAcronyms(text))).toContain('fabricated-norm-acronym');
+    expect(codes(checkFabricatedNormAcronyms(text))).toContain('fabricated-norm-acronym');
+  });
+});
+
 describe('checkContradictoryNormDates', () => {
   // SHIPPED: "Il 1° gennaio 2024 entrerà in vigore il Decreto Omnibus" and
   // "Il Decreto Omnibus è stato varato il 1° gennaio 2023" in the same article.
@@ -1011,6 +1390,62 @@ describe('reviewer follow-ups (PR #4900)', () => {
     for (const noise of ['org:CHF', 'org:PDF', 'org:ANSA', 'org:LEGGI', 'org:ANCHE']) {
       expect(anchors, `token spurio conteggiato: ${noise}`).not.toContain(noise);
     }
+  });
+});
+
+describe('formatRemediation shape on the early-expansion fact-check path (#470)', () => {
+  // #470 item 2 flagged that create-article.mjs's early-expansion retry
+  // (`expandFactIssues = expandFactResult.issues`, passed to
+  // formatRemediation()) was never independently confirmed to carry the same
+  // issue shape as the primary fact-check retry a few lines above it — both
+  // call formatRemediation, but only the primary path had test coverage.
+  //
+  // It turns out both paths call `llmFactCheck()` — the SAME function — and
+  // neither reshapes its `.issues` before handing them to formatRemediation.
+  // Asserted at the source level (create-article.mjs isn't importable here:
+  // no `npm ci` in CI, see the file header) so a future edit that inserts a
+  // `.map`/remap between the two, or points the expansion path at a
+  // differently-shaped result, breaks this test instead of shipping quietly.
+  const src = readFileSync(
+    new URL('../scripts/create-article.mjs', import.meta.url),
+    'utf-8',
+  );
+
+  it('the early-expansion retry calls the same llmFactCheck() as the primary retry', () => {
+    expect(src).toContain('const factResult = await llmFactCheck(data.content.it, pageContent, url);');
+    expect(src).toContain('const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);');
+  });
+
+  it('expandFactIssues is llmFactCheck().issues passed through unmodified', () => {
+    const anchor = 'expandFactIssues = expandFactResult.issues || [];';
+    expect(src).toContain(anchor);
+    // No `.map(`/`.filter(` sits between the assignment and the
+    // formatRemediation() call below it — a transform there is exactly what
+    // would silently break the shape formatRemediation expects.
+    const start = src.indexOf(anchor);
+    const end = src.indexOf('lastFactCheckErrors = formatRemediation(expandFactIssues', start);
+    expect(end).toBeGreaterThan(start);
+    const between = src.slice(start + anchor.length, end);
+    expect(between).not.toContain('.map(');
+    expect(between).not.toContain('.filter(');
+  });
+
+  it('formatRemediation renders the exact issue shape llmFactCheck().issues has', () => {
+    // Mirrors the prompt schema in llmFactCheck(): { claim, reason, severity,
+    // category, sourceQuote } — no `message`/`evidence`/`fix`, which is what
+    // formatRemediation falls back to for the deterministic-gate call sites.
+    const out = formatRemediation([
+      {
+        claim: 'La Svizzera applica direttive UE sui frontalieri',
+        reason: 'La Svizzera non è membro UE né SEE',
+        severity: 'critical',
+        category: 'eu_svizzera',
+        sourceQuote: '',
+      },
+    ], { cap: 8 });
+    expect(out).toContain('PROBLEMA: La Svizzera non è membro UE né SEE');
+    expect(out).toContain('TESTO: "La Svizzera applica direttive UE sui frontalieri"');
+    expect(out).toContain('CORREZIONE RICHIESTA');
   });
 });
 

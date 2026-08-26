@@ -1,0 +1,134 @@
+# Translate Pending Jobs — cross-repo execution (reusable workflow).
+#
+# Physically hosted here (nanakokyobashi-rgb/frontaliere-articles) instead of
+# frontaliere-si-o-no, so this pipeline's Actions minutes run against this
+# account's separate, less-saturated concurrent-job pool instead of
+# valerielinc-ops' ~20-concurrent-job Free-plan pool.
+#
+# Pattern validated by the crawler-group-23 pilot (frontaliere-si-o-no#6485
+# -> reverted #6517 (composite action rejects background:/wait-all:) ->
+# #6520 (reusable workflow) / frontaliere-articles#594 -> #600 -> #602), then
+# applied to crawler-group-01..22 and to this pipeline in the same batch.
+#
+# The actual pipeline logic (checkout, RC secrets, housekeeping, the
+# translate cascade, deploy trigger) is NOT duplicated here — it lives in
+# valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml
+# (single source of truth, same repo as the crawlers it depends on —
+# data/jobs/by-crawler/*.json).
+#
+# TRIGGER GAP vs the original same-repo workflow (declared here, not hidden):
+# the original had `workflow_run: workflows: ["Orchestrate Job Crawlers"],
+# types: [completed]` — fires as soon as that dispatcher job finishes (it
+# only DISPATCHES the 23 crawler groups, it does not wait for them to crawl).
+# `workflow_run` only observes workflows in the SAME repo, and
+# orchestrate-crawlers.yml stays on frontaliere-si-o-no (it dispatches the
+# crawler-group callers cross-repo, but the orchestrator itself is not
+# migrated) — so this caller cannot replicate that trigger locally. Instead,
+# orchestrate-crawlers.yml's dispatch job fires THIS workflow directly via
+# `gh workflow run translate-pending.yml --repo nanakokyobashi-rgb/frontaliere-articles`
+# (same GITHUB_PAT_NANAKO cross-repo dispatch mechanism already used for
+# every crawler-group target), `if: always()`, as its last step — same
+# timing as the old workflow_run. See that workflow's "Dispatch
+# translate-pending (frontaliere-articles)" step. The 5 daily crons below are
+# unchanged from the original and remain the safety net regardless.
+on:
+  schedule:
+    - cron: '0 7 * * *'     # Daily: housekeeping + translate (replaces cleanup-stale-jobs cron)
+    - cron: '0 13 * * *'    # Midday: translate after 08:00 orchestration
+    - cron: '0 1 * * *'     # Midnight: translate after 20:00 orchestration
+    - cron: '20 1 * * *'    # Nightly retry: after quota reset
+    - cron: '20 4 * * *'    # Backup nightly retry
+  workflow_dispatch:
+    inputs:
+      max_jobs:
+        description: 'Max jobs for the cascade. Wall-clock-bound, not quota-bound — the 90min cascade deadline stops it first.'
+        default: '900'
+      mopup_max_jobs:
+        description: 'Max jobs for the local-MT (Argos) mop-up — free + unlimited, drain the whole backlog'
+        default: '6000'
+      company_key:
+        description: 'Single company key to translate (e.g. a-group). Leave empty for all.'
+        default: ''
+      skip_housekeeping:
+        description: 'Skip housekeeping (URL validation, expired pruning)'
+        type: boolean
+        default: false
+      skip_translate:
+        description: 'Skip translations (only housekeeping + slug hardening)'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run (no commit)'
+        type: boolean
+        default: false
+
+concurrency:
+  group: jobs-data-pipeline
+  cancel-in-progress: false
+
+jobs:
+  translate:
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
+    with:
+      max_jobs: ${{ inputs.max_jobs }}
+      mopup_max_jobs: ${{ inputs.mopup_max_jobs }}
+      company_key: ${{ inputs.company_key }}
+      skip_housekeeping: ${{ inputs.skip_housekeeping || false }}
+      skip_translate: ${{ inputs.skip_translate || false }}
+      dry_run: ${{ inputs.dry_run || false }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # A single retry: the observed failure mode (translate-pending run
+  # 32923600325 and 32922277191, 2026-08-26) is the runner's OWN "Download
+  # action repository" step timing out on the codeload tarball of
+  # valerielinc-ops/frontaliere-si-o-no (multi-GB working tree, 100s
+  # HttpClient.Timeout x3) -- before any job step of the reusable workflow
+  # below ever runs. Retrying often succeeds: codeload
+  # appears to cache the generated tarball for a ref after the first request,
+  # so a second attempt tends to hit a warm cache (matches the crawler-group-23
+  # pilot: repeated cold-cache failures, then a success shortly after for the
+  # same SHA).
+  translate_retry:
+    needs: translate
+    if: always() && needs.translate.result == 'failure'
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/translate-pending-logic.yml@main
+    with:
+      max_jobs: ${{ inputs.max_jobs }}
+      mopup_max_jobs: ${{ inputs.mopup_max_jobs }}
+      company_key: ${{ inputs.company_key }}
+      skip_housekeeping: ${{ inputs.skip_housekeeping || false }}
+      skip_translate: ${{ inputs.skip_translate || false }}
+      dry_run: ${{ inputs.dry_run || false }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # The reusable workflow's own failure reporting (inside the site repo)
+  # never gets to run when the failure is at this outer resolution step -- this
+  # job is the only net that catches it. The 5 daily crons are a safety net for
+  # the translate cascade itself, not for surfacing this class of failure.
+  translate_report_failure:
+    needs: [translate, translate_retry]
+    if: always() && needs.translate_retry.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/lib
+          sparse-checkout-cone-mode: false
+      - name: File/update the dispatch-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/lib/github-issue-creator.mjs \
+            --title "translate-pending: cross-repo dispatch esaurito (2/2 tentativi prima che la logica partisse)" \
+            --description "Sia il tentativo primario sia il retry sono falliti PRIMA che qualunque step di .github/workflows/translate-pending-logic.yml (ospitato su valerielinc-ops/frontaliere-si-o-no) partisse.\n\nSintomo osservato: 'Failed to download action ... HttpClient.Timeout of 100 seconds' nella risoluzione del reusable workflow cross-repo -- il repo del sito e' un working tree di diversi GB, e il download del tarball via codeload a volte eccede il timeout del runner.\n\nLe traduzioni sono ferme almeno fino al prossimo cron che passa entrambi i tentativi.\n\nRun fallito: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --priority 2 \
+            --label Bug \
+            --workflow "Translate Pending (cross-repo dispatch)"

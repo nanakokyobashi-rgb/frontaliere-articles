@@ -478,6 +478,93 @@ export function leadOf(literal) {
 
 const escapeRx = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// ── `budget-parenthetical`, versione STRUTTURALE ────────────────────────────
+//
+// Porta da `frontaliere-si-o-no#5847` item 2 (`matchBudgetParenthetical`) il
+// controllo che isola lo span fra parentesi e valuta l'invariante sul suo
+// CONTENUTO, non sulla FORMA dell'inciso intero. La vecchia `rx` pretendeva
+// verbo ("max"/"massimo"/…) SUBITO seguito da cifra, unita' e chiusura
+// immediata: `(59 characters)` — offender reale di #341, senza verbo davanti
+// alla cifra — non la superava. Qui basta che cifra e unita' di misura dei
+// caratteri compaiano nello STESSO inciso, in qualunque ordine e posizione al
+// suo interno: e' quello, non il verbo, l'invariante che il traduttore non
+// tocca (vedi il commento sopra la regola, invariato).
+const BUDGET_UNIT_WORD_RE = /\b(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\b/i;
+const BUDGET_DIGITS_RE = /\d{2,4}/;
+
+// Porta da #350 (follow-up di #349): ogni inciso reale misurato nei test resta
+// sotto i 40 caratteri (`(max 160 characters circa)`, `(59 characters)`, …).
+// 80 lascia margine doppio per le varianti di locale, e resta abbastanza
+// stretto da escludere un inciso lungo che nomini un numero 2-4 cifre e la
+// parola "characters" in punti non correlati fra loro — il rischio #1 di #350.
+//
+// Il tetto NON si applica a uno span che contiene un sotto-span annidato
+// (review #355): una premessa del traduttore che avvolge il vero segnaposto
+// puo' superare 80 caratteri per conto proprio, e scartare lo span esterno in
+// quel caso riapre esattamente il rischio #2 — resta visibile solo il
+// sotto-span interno, che tipicamente non porta ne' la cifra ne' l'unita' di
+// misura. L'annidamento stesso e' il segnale che distingue questo caso
+// dall'inciso lungo a singolo livello che il tetto vuole escludere.
+const MAX_PARENTHETICAL_SPAN_LENGTH = 80;
+
+/**
+ * Gli span fra parentesi, CON supporto per l'annidamento — uno stack di
+ * aperture, non un singolo `start`. Il rischio #2 di #350: con un solo
+ * `start`, una parentesi interna che si chiude PRIMA di quella esterna
+ * sovrascriveva `start` e poi lo azzerava, cosi' un secondo inciso interno
+ * senza relazione (es. `(vedi (rif. interno) — max 160 chars)`) faceva
+ * perdere lo span esterno che conteneva il vero segnaposto. Con lo stack ogni
+ * `)` chiude la sua apertura piu' recente e le altre restano in attesa della
+ * propria — sia lo span interno sia quello esterno vengono registrati.
+ */
+function parentheticalSpans(text) {
+  const out = [];
+  const starts = [];
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === '(') starts.push({ index: i, hasNestedChild: false });
+    else if (ch === ')' && starts.length) {
+      const entry = starts.pop();
+      if (starts.length) starts[starts.length - 1].hasNestedChild = true;
+      const length = i + 1 - entry.index;
+      if (entry.hasNestedChild || length <= MAX_PARENTHETICAL_SPAN_LENGTH) {
+        out.push({ span: text.slice(entry.index, i + 1), index: entry.index });
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * @param {string} text
+ * @returns {{ index: number, match: string } | null}
+ */
+export function matchBudgetParenthetical(text) {
+  if (typeof text !== 'string' || !text) return null;
+  for (const { span, index } of parentheticalSpans(text)) {
+    if (BUDGET_DIGITS_RE.test(span) && BUDGET_UNIT_WORD_RE.test(span)) return { index, match: span };
+  }
+  return null;
+}
+
+/**
+ * Adatta `matchBudgetParenthetical` all'interfaccia `RegExp`-like (`exec` +
+ * `test`) che le regole usano: `findPromptPlaceholders` chiama `.exec()`,
+ * `stripSchemaHeadingLine` chiama `.test()` su ogni regola `schema-echo`.
+ */
+const budgetParentheticalMatcher = {
+  exec(value) {
+    const hit = matchBudgetParenthetical(value);
+    if (!hit) return null;
+    const result = [hit.match];
+    result.index = hit.index;
+    return result;
+  },
+  test(value) {
+    return matchBudgetParenthetical(value) !== null;
+  },
+};
+
 /** I letterali che diventano matcher (tutti tranne quelli di competenza dello slug guard). */
 const TEXT_LITERALS = SCHEMA_PLACEHOLDER_LITERALS.filter((l) => !SLUG_OWNED_LITERALS.includes(l));
 
@@ -527,9 +614,10 @@ export const PLACEHOLDER_RULES = Object.freeze([
     // FALSO POSITIVO: e' l'unita' di misura a fare il lavoro. `(max ` da solo
     // compare in 48 campi body legittimi («max 15.000 CHF/anno», «max 9
     // ore/giorno», «max 1 page»), e nessuno di quei 48 nomina caratteri.
-    // Misurato: 0 falsi positivi su 107.659 campi pubblicati.
-    rx: /\(\s*(?:max|max\.|massimo|maximum|maximal|máximo)\s+\d{2,4}\s*(?:chars?|characters?|caratteri|carattere|caractères|caracteres|Zeichen)\s*\)/i,
-    why: "Inciso col budget di caratteri dello schema (`(max 160 chars)`): sopravvive alla traduzione del segnaposto in en/de/fr, dove nessun letterale italiano arriva.",
+    // Misurato: 0 falsi positivi su 107.659 campi pubblicati, e invariato con
+    // la versione strutturale (vedi `matchBudgetParenthetical` sopra).
+    rx: budgetParentheticalMatcher,
+    why: "Inciso col budget di caratteri dello schema (`(59 characters)`, `(max 160 chars)`, …): sopravvive alla traduzione del segnaposto in en/de/fr, dove nessun letterale italiano arriva.",
   },
   {
     id: 'budget-tail',
@@ -934,6 +1022,53 @@ export function orphanFaqLocales(faqByLocale, { sourceLocale = 'it' } = {}) {
     .filter(([locale, state]) => locale !== sourceLocale && state && state.hasFaq === true)
     .map(([locale]) => locale)
     .sort();
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// La chiave `.faq` di UN id dentro un file body
+// ─────────────────────────────────────────────────────────────────────────────
+//
+// Le due meta' che `repair-prompt-placeholders.mjs` usa per decidere se una FAQ
+// e' orfana e per toglierla. Stanno qui, e non nello script, per due ragioni:
+// lo script e' tutto a top level e importarlo lo ESEGUE sul corpus, quindi la
+// sola forma testabile e' questa; e l'ancoraggio all'id e' la parte che va
+// provata (`generator/tests/faq-key-anchoring.test.mjs`).
+//
+// L'ancora e' quella di #294 — `find-dirty-content-ids.mjs`,
+// `faqQuestionsInBodyText()`: la chiave si compone con l'id ESCAPATO per la
+// regex, non si cerca un `.faq` qualunque. Senza, in un file con due id (residuo
+// di merge: mai osservato sui 16.648 file, ma niente nel formato lo impedisce)
+// `faqStateOf` leggeva lo stato della chiave sbagliata e la potatura toglieva
+// una FAQ viva e non orfana. `g` resta obbligatorio: una chiave DUPLICATA dello
+// stesso id e' viva al render (semantica dell'object literal JS) e va tolta
+// tutta, non solo la prima occorrenza.
+
+/** L'id, reso inerte per finire dentro una regex. */
+const escapeIdRx = (id) => String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+/** Il valore del sentinella che il passo 2 scrive per marcare una FAQ da togliere. */
+export const DROP_FAQ_SENTINEL = '__DROP_FAQ__';
+
+/**
+ * La RIGA `'blog.article.<id>.faq': '...',` di quell'id, con il valore ancora
+ * escapato nel gruppo 1. Globale: prende ogni occorrenza dello stesso id.
+ */
+export function faqLineRe(id) {
+  return new RegExp(`\\n[ \\t]*'blog\\.article\\.${escapeIdRx(id)}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)',?`, 'g');
+}
+
+/**
+ * Vero se in `src` quell'id ha una FAQ con contenuto vero. Il sentinella
+ * `__DROP_FAQ__` conta come ASSENZA: e' una FAQ gia' condannata dal passo 2, e
+ * in `--check` la riga non e' ancora stata tolta dal disco.
+ */
+export function faqPresentForId(src, id) {
+  const re = new RegExp(`'blog\\.article\\.${escapeIdRx(id)}\\.faq'\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'`, 'g');
+  let m;
+  while ((m = re.exec(src)) !== null) {
+    if (m[1] !== DROP_FAQ_SENTINEL) return true;
+  }
+  return false;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

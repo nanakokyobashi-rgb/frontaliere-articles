@@ -48,9 +48,10 @@
  * verde a vuoto in locale e rosso solo in CI. Il caso «PR fresca» qui sotto è
  * anche la prova che lo stub discrimina davvero.
  *
- * La classe B (🔴 Important sull'head) non è esercitata: usa `grep -qP`, che
- * BSD grep non ha. Nessun caso di questo file la attraversa — B pretende
- * `LAST_CID == HEAD`, cioè l'opposto di ciò che qui si misura.
+ * La classe B (🔴 Important sull'head, LAST_CID == HEAD) è esercitata nella
+ * sezione #488: lo YAML usa `grep -qP` (PCRE), che BSD grep non ha, quindi il
+ * harness stubba `grep -P` con un regex JS — senza, B è irraggiungibile in
+ * locale e l'osservatore sarebbe verde a vuoto.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -131,9 +132,9 @@ function runScan({ prs, checks, reviews: revs, comments: posted = [], dryRun = f
     writeFileSync(fixReviews, JSON.stringify(revs));
     writeFileSync(fixComments, JSON.stringify(posted));
 
-    // `gh`: serve le QUATTRO letture del rescuer e registra le tre scritture
-    // (add-label, remove-label, comment). Ogni scrittura finisce in `calls` in
-    // una forma greppabile dal test.
+    // `gh`: serve le QUATTRO letture del rescuer e registra le quattro
+    // scritture (add-label, remove-label, comment, workflow run). Ogni
+    // scrittura finisce in `calls` in una forma greppabile dal test.
     //
     // Il ramo `api` scarta i flag PRIMA di leggere il path: dal fix della #314
     // ogni chiamata è `gh api --paginate <path>`, e uno stub che prendesse
@@ -186,6 +187,9 @@ case "$sub" in
       *) echo '{}' ;;
     esac
     ;;
+  workflow)
+    printf 'WORKFLOW_RUN %s\\n' "$*" >> ${JSON.stringify(calls)}
+    ;;
   *) exit 0 ;;
 esac
 exit 0
@@ -214,8 +218,29 @@ else
 fi
 `,
     );
+    // CLASS=B usa `grep -qP`. BSD grep non ha -P: senza stub il ramo non
+    // scatta mai su macOS e i casi #488 sarebbero verdi senza aver eseguito B.
+    writeFileSync(
+      path.join(bin, 'grep'),
+      `#!/usr/bin/env bash
+p=0
+for a in "$@"; do
+  case "$a" in -P|-qP|-Pq) p=1 ;; esac
+done
+if [ "$p" = "1" ]; then
+  pattern=""
+  for a in "$@"; do
+    case "$a" in -q|-P|-qP|-Pq) continue ;; -*) continue ;; *) pattern="$a"; break ;; esac
+  done
+  node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{try{process.exit(new RegExp(process.argv[1],"u").test(s)?0:1)}catch(e){process.exit(2)}});' "$pattern"
+  exit $?
+fi
+exec /usr/bin/grep "$@"
+`,
+    );
     chmodSync(path.join(bin, 'gh'), 0o755);
     chmodSync(path.join(bin, 'date'), 0o755);
+    chmodSync(path.join(bin, 'grep'), 0o755);
 
     const script = path.join(dir, 'scan.sh');
     writeFileSync(script, SCAN_RUN);
@@ -243,7 +268,8 @@ fi
       pr: Number(m[1]),
       body: m[2],
     }));
-    return { labeled, unlabeled, comments, stdout };
+    const workflowRuns = [...raw.matchAll(/^WORKFLOW_RUN (.+)$/gm)].map((m) => m[1]);
+    return { labeled, unlabeled, comments, stdout, workflowRuns };
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
@@ -303,13 +329,12 @@ test('D — review più vecchia dell\'head con test verdi: la classe scatta', op
 });
 
 test('D — il rimedio è il dispatch della review, non «mergia main e pusha»', opts, () => {
-  const body = only(
-    runScan({
-      prs: openPr(),
-      checks: checkRuns({ concl: 'success' }),
-      reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
-    }),
-  );
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
+  });
+  const body = only(r);
   assert.match(
     body,
     /pr-review-loop\.yml/,
@@ -322,6 +347,9 @@ test('D — il rimedio è il dispatch della review, non «mergia main e pusha»'
     /git merge origin\/main/,
     `Rimedio della classe A su uno stato di classe D: il merge di main non fa ripartire nessuna review.\n${body}`,
   );
+  // #488: D consegna il comando nel RESCUE, non lo esegue. Il dispatch reale
+  // è solo sul ramo B con marker REDFLAG_FIX_ROUND.
+  assert.deepEqual(r.workflowRuns, [], `D non deve dispatchare pr-review-loop: ${r.workflowRuns.join(' | ')}`);
 });
 
 // ── 2. I tre guard sui falsi positivi ──────────────────────────────────────
@@ -596,4 +624,130 @@ test('D non allarga l\'insieme delle PR etichettate', opts, () => {
         `ramo A e comincia a etichettare PR che oggi nessuno etichetta.`,
     );
   }
+});
+
+// ── 8. #488: classe B dispatcha pr-review-loop se il fixer ha già chiuso il 🔴 ─
+//
+// LAST_CID == HEAD + 🔴 Important è lo stato di #484: il fixer ha aperto una
+// issue e aggiornato il body, senza commit. `tests` non riparte, quindi
+// pr-review-loop non si innesca. Il rescuer classificava B e consigliava un
+// commit nuovo — la cura sbagliata, perché il 🔴 è già chiuso proceduralmente.
+// Il segnale deterministico è il marker `<!-- REDFLAG_FIX_ROUND:` sul thread.
+
+const classB = ({ posted = [], dryRun = false } = {}) =>
+  runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({
+      commit: HEAD_SHA,
+      body: '🔴 **Important**: apri una issue di follow-up e linkala prima del merge',
+    }),
+    comments: posted,
+    dryRun,
+  });
+
+const REDFLAG_ROUND = '<!-- REDFLAG_FIX_ROUND: 1 -->\n_🔴-fixer round 1/2 avviato (auto)._';
+
+test('#488 — B + REDFLAG_FIX_ROUND: un dispatch -f pr= della review', opts, () => {
+  const r = classB({ posted: [{ body: REDFLAG_ROUND }] });
+  assert.equal(
+    r.workflowRuns.length,
+    1,
+    `Atteso UN workflow_dispatch, ricevuti ${r.workflowRuns.length}: ${r.workflowRuns.join(' | ')}\n${r.stdout}`,
+  );
+  assert.match(
+    r.workflowRuns[0],
+    /pr-review-loop\.yml/,
+    `Il dispatch deve nominare pr-review-loop.yml, non un altro workflow.\n${r.workflowRuns[0]}`,
+  );
+  assert.match(
+    r.workflowRuns[0],
+    /-f pr=901/,
+    `Il dispatch deve portare -f pr= della PR sotto esame, già valorizzato.\n${r.workflowRuns[0]}`,
+  );
+  const body = only(r);
+  assert.match(
+    body,
+    /pr-review-loop\.yml/,
+    `Il RESCUE deve nominare il dispatch, non un commit finto.\n${body}`,
+  );
+  assert.doesNotMatch(
+    body,
+    /nuovo commit/,
+    `Con il marker del fixer un commit nuovo è la cura sbagliata (#484, #181).\n${body}`,
+  );
+});
+
+test('#488 — B senza marker REDFLAG_FIX_ROUND: zero dispatch, consiglio commit', opts, () => {
+  const r = classB({ posted: [] });
+  assert.deepEqual(
+    r.workflowRuns,
+    [],
+    `Senza REDFLAG_FIX_ROUND il 🔴 è ancora aperto: dispatchare la review la rifarebbe sullo stesso finding.\n${r.stdout}`,
+  );
+  const body = only(r);
+  assert.match(body, /nuovo commit/, `Senza marker il rimedio resta un commit che chiuda il 🔴.\n${body}`);
+});
+
+test('#488 — B + marker in dry_run: non dispatcha', opts, () => {
+  const r = classB({ posted: [{ body: REDFLAG_ROUND }], dryRun: true });
+  assert.deepEqual(r.workflowRuns, [], `dry_run non deve dispatchare.\n${r.stdout}`);
+  assert.deepEqual(r.comments, [], `dry_run non deve commentare.\n${r.stdout}`);
+  assert.deepEqual(r.labeled, []);
+});
+
+// ── 9. #576: il marker generale (CLASSE, HEAD) non deve congelare il dispatch ─
+//
+// Se il rescuer commenta la classe B su un head PRIMA che il fixer posti
+// `REDFLAG_FIX_ROUND` (il fixer è un workflow separato, in coda dietro
+// `redflag-fix-$PR` con `cancel-in-progress: false`, e può slittare ore), il
+// marker generale `class=B head=X` finisce nei commenti passati. Quando
+// `REDFLAG_FIX_ROUND` arriva DOPO, un run successivo deve comunque dispatchare:
+// la chiave del dispatch è (dispatch, HEAD), non (CLASSE, HEAD).
+
+test('#576 — B senza marker poi REDFLAG_FIX_ROUND arriva dopo: il dispatch scatta comunque', opts, () => {
+  const first = classB({ posted: [] });
+  assert.deepEqual(first.workflowRuns, [], `Al primo giro senza marker non deve dispatchare.\n${first.stdout}`);
+  const generalComment = only(first);
+
+  const second = classB({ posted: [{ body: generalComment }, { body: REDFLAG_ROUND }] });
+  assert.equal(
+    second.workflowRuns.length,
+    1,
+    'Il marker generale `class=B head=X`, postato PRIMA che arrivasse REDFLAG_FIX_ROUND, ha ' +
+      `congelato il dispatch anche dopo che il marker del fixer è arrivato: è di nuovo lo stallo ` +
+      `di #484, solo spostato di un giro.\n${second.stdout}`,
+  );
+  assert.match(second.workflowRuns[0], /pr-review-loop\.yml/);
+  assert.match(second.workflowRuns[0], /-f pr=901/);
+});
+
+test('#576 — B con dispatch già fatto su questo head: nessun secondo dispatch', opts, () => {
+  const first = classB({ posted: [{ body: REDFLAG_ROUND }] });
+  assert.equal(first.workflowRuns.length, 1, first.stdout);
+  const dispatchedComment = only(first);
+
+  const second = classB({ posted: [{ body: REDFLAG_ROUND }, { body: dispatchedComment }] });
+  assert.deepEqual(
+    second.workflowRuns,
+    [],
+    `Il dispatch è già avvenuto su questo head: un secondo run non deve ridispatchare.\n${second.stdout}`,
+  );
+  assert.deepEqual(second.comments, [], 'nessuna azione attesa: il verdetto è già stato consegnato e dispatchato');
+});
+
+test('#488 — D + REDFLAG_FIX_ROUND: zero invocazioni extra (il dispatch resta nel RESCUE)', opts, () => {
+  const r = runScan({
+    prs: openPr(),
+    checks: checkRuns({ concl: 'success' }),
+    reviews: reviews({ commit: OLD_SHA, body: '🔴 **Important**: manca il guard' }),
+    comments: [{ body: REDFLAG_ROUND }],
+  });
+  assert.deepEqual(
+    r.workflowRuns,
+    [],
+    'D consegna `gh workflow run pr-review-loop.yml` nel testo del commento e NON lo esegue: ' +
+      `un dispatch extra riaprirebbe una review che il commento ha già chiesto a un umano.\n${r.stdout}`,
+  );
+  assert.match(only(r), /pr-review-loop\.yml/);
 });

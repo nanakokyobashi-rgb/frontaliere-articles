@@ -80,6 +80,8 @@ export const SELECTION_REJECTION = {
   UNKNOWN_KEY: 'unknown_key',
   /** Chiave ben formata ma fuori da `H1..H<candidateCount>`. Qui stava il clamp. */
   OUT_OF_RANGE: 'out_of_range',
+  /** callLLM ha lanciato (rate limit, rete, cascata esaurita): nessuna risposta da interpretare. */
+  INFRA_ERROR: 'infra_error',
 };
 
 /** La chiave della i-esima candidata (i è 0-based, la chiave è 1-based: `H1` è la prima). */
@@ -120,7 +122,17 @@ export function formatPublishedDigest(entries, { excerptChars = 100 } = {}) {
     .join('\n');
 }
 
-const CANDIDATE_KEY_RE = new RegExp(`^\\s*${CANDIDATE_KEY_PREFIX}\\s*(\\d+)\\s*$`, 'i');
+// Case-sensitive apposta (issue #5849 item 4): il prompt di correzione
+// (selectionCorrectionNote) e formatCandidateList mostrano solo `H<n>`
+// maiuscolo — un parser case-insensitive accettava `h1` che il modello non
+// vede mai esemplificato, un'asimmetria fra ciò che il parser tollera e ciò
+// che il prompt promette. Allineare aggiungendo `h1` agli esempi del prompt
+// avrebbe aggiunto byte a un prompt già oltre la soglia token di ogni modello
+// del roster (~3500 token, 2026-08-15 — la stima precedente di 8898 era
+// gonfiata: misurata su un pool di headline non ancora troncato a
+// MAX_HEADLINES_PER_BATCH) — la correzione va sul lato che non
+// costa: il parser accetta esattamente quello che il prompt mostra.
+const CANDIDATE_KEY_RE = new RegExp(`^\\s*${CANDIDATE_KEY_PREFIX}\\s*(\\d+)\\s*$`);
 const BARE_NUMBER_RE = /^\s*[+-]?\d+\s*$/;
 
 function reject(rejection, detail) {

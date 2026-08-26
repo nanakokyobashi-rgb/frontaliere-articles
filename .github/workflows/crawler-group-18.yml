@@ -1,0 +1,91 @@
+# Crawler Group 18 — cross-repo execution (reusable workflow).
+#
+# Physically hosted here (nanakokyobashi-rgb/frontaliere-articles)
+# instead of frontaliere-si-o-no, so this group's Actions minutes run
+# against this account's separate, less-saturated concurrent-job pool
+# instead of valerielinc-ops' ~20-concurrent-job Free-plan pool.
+#
+# Pattern validated by the crawler-group-23 pilot
+# (frontaliere-si-o-no#6485 -> reverted #6517 (composite action rejects
+# background:/wait-all:) -> #6520 (reusable workflow) /
+# frontaliere-articles#594 -> #600 -> #602), dispatch-tested for real
+# end-to-end before this group was migrated on top of it.
+#
+# The actual job logic (checkout, npm ci, RC secrets, the per-crawler
+# steps) is NOT duplicated here — it lives in
+# valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-18-logic.yml
+# (single source of truth, same repo the generator
+# scripts/generate-crawler-group-workflows.mjs writes into).
+#
+# This file only supplies what a workflow_call CALLER must: its own
+# `on:` trigger (this repo's Actions minutes are the ones spent),
+# `concurrency:` (workflow_call doesn't scope concurrency across repos —
+# declared here, on the repo that actually owns the run), and the
+# secrets the callee declares under its own `on.workflow_call.secrets:`
+# (passed explicitly via `secrets:` — a reusable workflow does NOT
+# automatically inherit the caller's secrets context unless `secrets:
+# inherit` is used, and that would forward THIS repo's full secret set
+# for no reason here).
+#
+# Rollback: frontaliere-si-o-no's .github/workflows/crawler-group-18.yml
+# (disabled, kept for fast revert) + orchestrate-crawlers.yml's routing.
+on:
+  workflow_dispatch:
+    inputs:
+      skip_ai_translation:
+        description: Skip AI translation (1=yes, cache only)
+        required: false
+        default: "1"
+        type: string
+concurrency:
+  group: jobs-crawler-group-18
+  cancel-in-progress: false
+jobs:
+  crawler_group_18:
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-18-logic.yml@main
+    with:
+      skip_ai_translation: ${{ inputs.skip_ai_translation }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  crawler_group_18_retry:
+    needs: crawler_group_18
+    if: always() && needs.crawler_group_18.result == 'failure'
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-18-logic.yml@main
+    with:
+      skip_ai_translation: ${{ inputs.skip_ai_translation }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # Both the primary call above and the retry resolve/download
+  # valerielinc-ops/frontaliere-si-o-no as a cross-repo reusable workflow before
+  # any of ITS OWN steps run -- including its own github-issue-creator.mjs
+  # failure reporting. When that download step itself times out (observed:
+  # translate-pending run 32923600325, 2026-08-26 -- "Failed to download action
+  # ... HttpClient.Timeout of 100 seconds"), no step ever executes and nothing
+  # reports it. This job is the only net that catches that failure class.
+  crawler_group_18_report_failure:
+    needs: [crawler_group_18, crawler_group_18_retry]
+    if: always() && needs.crawler_group_18_retry.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/lib
+          sparse-checkout-cone-mode: false
+      - name: File/update the dispatch-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/lib/github-issue-creator.mjs \
+            --title "crawler-group-18: cross-repo dispatch esaurito (2/2 tentativi prima che la logica partisse)" \
+            --description "Sia il tentativo primario sia il retry sono falliti PRIMA che qualunque step di .github/workflows/crawler-group-18-logic.yml (ospitato su valerielinc-ops/frontaliere-si-o-no) partisse.\n\nSintomo osservato: 'Failed to download action ... HttpClient.Timeout of 100 seconds' nella risoluzione del reusable workflow cross-repo -- il repo del sito e' un working tree di diversi GB, e il download del tarball via codeload a volte eccede il timeout del runner.\n\ngithub-issue-creator.mjs vive dentro la logica del crawler (sul sito) e non arriva mai a girare in questo scenario: questo job e' la sola rete che lo cattura.\n\nRun fallito: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --priority 2 \
+            --label Bug \
+            --workflow "Crawler Group 18 (cross-repo dispatch)"

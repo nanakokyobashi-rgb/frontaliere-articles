@@ -31,7 +31,7 @@
  */
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { writeFileSync, mkdirSync } from 'node:fs';
+import { writeFileSync, mkdirSync, renameSync, unlinkSync } from 'node:fs';
 import { registerArticleFiles, checkArticleIdExists, buildBodyFile } from './create-article.mjs';
 import { bumpUpdatedAt, bumpDateModified } from './lib/evergreen-article-refresh.mjs';
 import { corpusPath } from './lib/corpus-paths.mjs';
@@ -44,6 +44,18 @@ import { loadSnapshot, buildData } from './lib/daily-brief-content.mjs';
 import { buildDailyBriefSvg, renderDailyBriefImage } from './lib/daily-brief-image.mjs';
 import { refreshDescriptiveTexts } from './lib/article-meta-refresh.mjs';
 import { sanitizePromptPlaceholders } from './lib/prompt-placeholder-guard.mjs';
+
+// Scrittura ATOMICA del corpus: temp accanto al target + renameSync.
+// Questi file riscrivono un `content/*.ts` GIA' ESISTENTE (rerun idempotente
+// same-day) sotto `generate-daily-brief.yml`, che ha `timeout-minutes` e quindi uccide con
+// SIGKILL: un `writeFileSync` diretto sul target puo' lasciarlo troncato a
+// meta' scrittura. `renameSync` e' un singolo syscall POSIX, atomico sullo
+// stesso filesystem — e il temp sta accanto al target proprio perche' il
+// rename non attraversi mai un confine di filesystem. Stesso pattern di
+// `writeCorpusFile()` in lib/evergreen-article-refresh.mjs e lib/
+// article-meta-refresh.mjs, che questa PR ha gia' convertito: qui era
+// rimasto scoperto il call-site che li CHIAMA.
+let writeTmpSeq = 0;
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..', '..');
@@ -73,7 +85,14 @@ export function refreshBodyFiles(data, repoRoot = REPO_ROOT, log = console.log) 
     // esatta una riparazione futura (issue #95). Si registra prima, con il
     // contesto che conserva la coppia (byte, carattere seguente).
     reportStrippedControlChars(file, body, clean);
-    writeFileSync(file, clean);
+    const tmp = `${file}.${process.pid}.${writeTmpSeq++}.tmp`;
+    try {
+      writeFileSync(tmp, clean);
+      renameSync(tmp, file);
+    } catch (err) {
+      try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+      throw err;
+    }
     log(`  ✅ ${path.relative(repoRoot, file)}`);
   }
 }
@@ -133,6 +152,15 @@ async function main() {
     return; // exit 0 — a day without data must not break the cron
   }
 
+  // Niente `inspectSlugForPromptPlaceholder` su `data.slugs`, e non e' una
+  // dimenticanza (issue #382 item 4): `buildData` li prende da
+  // `dailyBriefSlugs(dateIso)`, quattro template di sole stringhe letterali con
+  // dentro la sola data ISO del giorno. Lo slug guard esiste perche' in
+  // `create-article.mjs` lo slug lo propone il MODELLO, e un segnaposto del
+  // prompt puo' finirci dentro; qui non c'e' nessun modello nella catena —
+  // `wiring — i tre produttori senza slug guard` in
+  // `generator/tests/prompt-placeholder-guard.test.mjs` lo verifica, e diventa
+  // rosso il giorno in cui uno arriva.
   const data = buildData(brief);
   const exists = checkArticleIdExists(data.id);
   const h = data._headline;

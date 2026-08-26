@@ -93,6 +93,32 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: node scripts/ci/alert-pat-down.mjs --workflow "${{ github.workflow }}" --run-url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 
+      # Capacità `workflow` dell'identità con cui il FIXER pusha. Qui è la stessa
+      # con cui gira il drainer — `GITHUB_PAT_NANAKO`, niente GitHub App su
+      # questo repo — ma va passata ESPLICITAMENTE in `PUSH_TOKEN`: la sonda
+      # deve rispondere «il fixer può pushare `.github/workflows/**`?», e
+      # indovinarlo dall'identità ambientale è ciò che sul sito leggerebbe il
+      # token sbagliato (dettagli in scripts/ci/probe-workflow-scope.mjs).
+      #
+      # PERCHÉ SERVE, misurato il 2026-08-24: il pre-flight del drainer
+      # consultava solo `APP_TOKEN_WORKFLOWS`, che su questo repo non esiste,
+      # quindi la capacità risultava assente PER COSTRUZIONE e ogni follow-up il
+      # cui fix toccasse `.github/workflows/**` veniva parcheggiata come
+      # `blocked-workflows-scope`. 8 verdetti in 7 giorni (#547 #532 #529 #464
+      # #447 #409 #405 #170), TUTTI emessi dal pre-flight e non da Claude, con un
+      # messaggio che parla di «token GitHub App» su un repo che non ne ha uno.
+      # Il PAT ha lo scope: `x-oauth-scopes: …, repo, user, workflow, …`.
+      #
+      # Finché `probe-workflow-scope.mjs` non è ancora scesa dal sito (è
+      # `mode: identical`, la porta il drift-check), questo step fallisce, non
+      # scrive nulla, e `PAT_WORKFLOWS_SCOPE` resta non impostata — cioè
+      # `!== 'true'`, cioè il comportamento di oggi. Nessuno stato intermedio.
+      - name: Probe capacità workflow del token di push (zero-Claude)
+        continue-on-error: true
+        env:
+          PUSH_TOKEN: ${{ env.GITHUB_PAT_NANAKO }}
+        run: node scripts/ci/probe-workflow-scope.mjs
+
       - name: Drain follow-up queue (deterministic, no Claude)
         env:
           # Il PAT è obbligatorio, non preferito: il `labeled` che promuove a

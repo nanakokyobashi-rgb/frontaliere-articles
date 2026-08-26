@@ -283,7 +283,11 @@ export const TOPIC_COVERAGE_WINDOW_DAYS = Number.parseInt(
  * l'unico falso positivo che le 92 coppie a 7 giorni contenessero. Senza di
  * essi il corpus non ne produce nessuno.
  */
-const GUIDE_INTENT_RE = /(stipendi|salari|guadagn|retribuz|requisit|lavorare come|lavoro come|quanto guadagna|diventare|inquadrament|riconoscimento del titolo|riconoscimento del diploma)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «ridiventare celebre» e «prerequisiti per il
+// visto» accendevano rispettivamente `diventare` e `requisit`. Stesso
+// anti-pattern e stesso fix di `RESIDENCE_INTENT_RE` (#530).
+const GUIDE_INTENT_RE = /\b(stipendi|salari|guadagn|retribuz|requisit|lavorare come|lavoro come|quanto guadagna|diventare|inquadrament|riconoscimento del titolo|riconoscimento del diploma)/;
 
 /**
  * Chiave-mestiere deterministica per il testo di un articolo.
@@ -338,8 +342,64 @@ export function hasProfessionGuideIntent(text) {
  * termine che fa entrare la cronaca (l'attacco politico di Carnago, la
  * tragedia di Porlezza, la pedalata dell'Insubria — i tre soli falsi positivi
  * che il corpus produceva). Vedi l'header per i numeri.
+ *
+ * ── LA PREPOSIZIONE NON È PIÙ OBBLIGATORIA (2026-08-20) ───────────────────
+ *
+ * Era `vivere a |vivere in `, e quello spazio dopo la preposizione lasciava
+ * fuori la forma che il generatore produce PIÙ spesso. Il testo di decisione è
+ * `${title} ${id-con-trattini-come-spazi}`, e gli slug del pool comune non
+ * portano la preposizione: `vivere-villa-guardia-lavorare-ticino` normalizza
+ * in «vivere villa guardia lavorare ticino», dove dopo «vivere» c'è il nome
+ * del comune. Restavano fuori anche «vivere ad Albese» (la `d` eufonica) e
+ * «vivere e lavorare», che è la forma di metà dei titoli recenti.
+ *
+ * La misura, sul corpus intero (4.602 articoli, 2026-08-20), non su un
+ * campione — e con lo stesso criterio che ha tarato il resto di questo file:
+ *
+ *   marcati        135 → 144  (+9)
+ *   coppie ≤90g     26 →  28  (+2)
+ *   falsi positivi   0 →   0  (i 9 ispezionati uno per uno)
+ *
+ * I 9 articoli nuovi sono tutti guide-comune vere: cinque erano i comuni
+ * lasciati senza chiave e senza protezione dai doppioni (`tovo-di-sant-agata`,
+ * `courmayeur`, `valpelline`, `villa-guardia`, `masciago-primo`), gli altri
+ * quattro della stessa forma (`cerano-intelvi`, `lurate-caccivio`,
+ * `albese-cassano`, `castelmarte`).
+ *
+ * Le due coppie nuove sono doppioni REALI, entrambi pubblicati lo STESSO
+ * giorno — cioè esattamente ciò per cui questa chiave esiste:
+ *
+ *   tovo-di-sant-agata  vivere-tovo-di-sant-agata-e-lavorare-in-grigioni-da-frontaliere
+ *                     ~ vivere-tovo-lavorare-grigioni
+ *   courmayeur          vivere-courmayeur-e-lavorare-vallese-da-frontaliere
+ *                     ~ courmayeur-lavora-vallese-frontaliere
+ *
+ * PERCHÉ «vivere » NUDO NON È TROPPO LARGO. Da solo lo sarebbe («vivere con
+ * 2.000 euro», «costo della vita per vivere bene»), ma la chiave è una
+ * CONGIUNZIONE: serve anche un nome di `data/municipalities.ts` nel testo, con
+ * le due restrizioni già misurate (sequenza completa per i nomi di più parole,
+ * ≥4 caratteri e non in `AMBIGUOUS_COMUNE_TOKENS` per quelli di una). È quella
+ * congiunzione a reggere, ed è la ragione per cui i falsi positivi restano 0.
+ *
+ * Misurata anche l'alternativa più stretta, `vivere e lavorar`: prende 4 dei 9
+ * articoli e **zero** coppie nuove, cioè non chiude nessuno dei due doppioni.
+ * Scartata perché cura il sintomo di un titolo e non la forma dello slug.
+ *
+ * `conviene vivere` e `dove vivere` restano nell'alternanza: `vivere ` esige
+ * lo spazio, e un testo che finisce con «dove vivere?» non ce l'ha.
  */
-const RESIDENCE_INTENT_RE = /(vivere a |vivere in |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «sopravvivere a Besano» e «convivere a Besano»
+// producevano `comune-guide:besano`, e «riabitare» accendeva `abitare`. Il
+// difetto è più vecchio dell'allargamento qui sopra (`vivere a ` matchava già
+// dentro «sopravvivere a»), ma allargare a `vivere ` ne allarga la superficie,
+// quindi si chiude nello stesso posto. Misurato sul corpus intero: 144 marcati
+// e 28 coppie PRIMA e DOPO, zero articoli spostati in una direzione o
+// nell'altra — costa niente e toglie una classe di falsi positivi futuri.
+// Nel corpus di oggi l'unico articolo che contiene «sopravvivere|convivere»
+// («Nottambuli, come convivere con gli orari sociali?») non nomina comuni,
+// quindi non era mai stato marcato: è un rischio sugli articoli futuri.
+const RESIDENCE_INTENT_RE = /\b(vivere |abitare|trasferirsi|trasferirs|pro e contro|conviene vivere|costo della vita|zone consigliate|dove vivere|dove abitare|risiedere|residenza)/;
 
 /** Il file da cui esce l'elenco dei comuni. Letto come TESTO: vedi sotto. */
 const MUNICIPALITIES_SOURCE = path.resolve(
@@ -441,23 +501,165 @@ export function hasResidenceGuideIntent(text) {
  * @returns {string|null} lo slug del comune, o null
  */
 export function comuneTopicKey(text) {
+  return comuneMatch(text)?.value ?? null;
+}
+
+/**
+ * Ogni comune nominato nel testo, uno per posizione di partenza in cui una
+ * sequenza completa combacia. A parità di posizione vince il candidato più
+ * lungo (un nome di più parole non può mai perdere contro un suo prefisso
+ * più corto dello stesso gruppo).
+ *
+ * Serve a due chiamanti con esigenze diverse: `comuneMatch` ne vuole UNO
+ * (il "migliore" del testo intero), `professionEvidenceIsOnlyAComuneName`
+ * li vuole TUTTI perché l'evidenza-mestiere può reggersi su un comune
+ * diverso da quello che vincerebbe la chiave-comune (#504 rischio 2).
+ *
+ * @returns {Array<{value: string, start: number, words: string[]}>}
+ */
+function comuneMatchAll(text) {
   const norm = normalizeText(text);
-  if (!norm) return null;
+  if (!norm) return [];
   const index = municipalityIndex();
-  if (index.size === 0) return null;
+  if (index.size === 0) return [];
   const tokens = norm.split(' ');
-  let best = null;
+  const matches = [];
   for (let i = 0; i < tokens.length; i += 1) {
     const candidates = index.get(tokens[i]);
     if (!candidates) continue;
+    let atPosition = null;
     for (const candidate of candidates) {
       let n = 0;
       while (n < candidate.words.length && tokens[i + n] === candidate.words[n]) n += 1;
       if (n !== candidate.words.length) continue;
-      if (!best || n > best.length) best = { value: candidate.value, length: n };
+      if (!atPosition || n > atPosition.words.length) {
+        atPosition = { value: candidate.value, start: i, words: candidate.words };
+      }
     }
+    if (atPosition) matches.push(atPosition);
   }
-  return best ? best.value : null;
+  return matches;
+}
+
+/**
+ * Come `comuneTopicKey`, ma dice anche DOVE il nome ha combaciato.
+ *
+ * La posizione non serve alla chiave — serve a `professionEvidenceIsOnlyAComuneName`,
+ * che deve poter togliere dal testo esattamente quelle parole e nient'altro.
+ * `comuneTopicKey` resta la porta pubblica e continua a rendere il solo slug,
+ * cosi' i chiamanti e i test che la usano non cambiano.
+ *
+ * Tie-break esplicito (#504 rischio 1): il nome più lungo vince sempre; a
+ * parità di lunghezza vince quello incontrato PRIMA scandendo il testo da
+ * sinistra — `comuneMatchAll` produce i match già in ordine di posizione
+ * crescente, quindi mantenere il primo tenuto da un confronto stretto (`>`,
+ * non `>=`) è la regola, non un effetto collaterale dell'ordine di
+ * iterazione di `municipalityIndex()`. Un vero pareggio di lunghezza può
+ * darsi solo fra comuni DIVERSI a posizioni diverse nel testo (due candidati
+ * con la stessa sequenza di parole sarebbero lo stesso comune), quindi il
+ * criterio è sempre "posizione nel testo", mai l'ordine del file sorgente.
+ *
+ * @returns {{value: string, start: number, words: string[]}|null}
+ */
+function comuneMatch(text) {
+  const matches = comuneMatchAll(text);
+  let best = null;
+  for (const candidate of matches) {
+    if (!best || candidate.words.length > best.words.length) best = candidate;
+  }
+  return best;
+}
+
+/**
+ * L'unica prova che questo sia un articolo su un MESTIERE e' il nome del
+ * COMUNE di cui parla?
+ *
+ * ── PERCHE' ESISTE ────────────────────────────────────────────────────────
+ *
+ * `professionTopicKey` lavora su un SACCHETTO di stem, non su posizioni:
+ * decide se un alias compare, non dove. Quindi non puo' accorgersi che il
+ * token che lo ha convinto stava dentro un toponimo. E' la stessa cecita' che
+ * `AMBIGUOUS_COMUNE_TOKENS` cura nella direzione opposta — li' un nome di
+ * comune che non e' il comune, qui un nome di mestiere che non e' il mestiere
+ * — con la differenza che quella e' una lista e questa e' una regola: un
+ * elenco di toponimi-che-sembrano-mestieri andrebbe riscritto a ogni comune
+ * nuovo, e i comuni sono 400+.
+ *
+ * ── IL CASO CHE L'HA RESA NECESSARIA ──────────────────────────────────────
+ *
+ * `vivere-villa-guardia-lavorare-ticino`, «Villa Guardia: vivere e lavorare
+ * come frontaliere», pubblicato il 2026-08-19T07:27Z. Testo di decisione:
+ *
+ *     Villa Guardia: vivere e lavorare come frontaliere
+ *     vivere villa guardia lavorare ticino
+ *
+ * «lavorare come» accende `hasProfessionGuideIntent`, e «guardia» — che qui e'
+ * meta' del nome di un comune della provincia di Como — risolve sull'alias di
+ * `agente-sicurezza`. L'articolo veniva classificato
+ * `profession-guide:agente-sicurezza`: significa che il gate avrebbe potuto
+ * bloccare una futura, legittima guida sulle guardie giurate perche' «gia'
+ * coperta» da una guida su un paese, e non avrebbe protetto Villa Guardia da
+ * un doppione. Ha anche reso ROSSO `article-topic-coverage-guard.test.mjs` su
+ * OGNI branch, main compreso, quindi bloccato la coda di merge del repo.
+ *
+ * ── PERCHE' TOGLIERE IL NOME E RIPROVARE, E NON UN'ALLOWLIST ──────────────
+ *
+ * Il criterio e' causale, non lessicale: si toglie dal testo il nome di comune
+ * che ha combaciato e si richiede la chiave-mestiere. Se sopravvive, il
+ * mestiere aveva prove PROPRIE e vince come prima; se sparisce, l'unica prova
+ * era il toponimo. Cosi' «Fare la guardia giurata a Villa Guardia» resta
+ * `profession-guide` (la prova sopravvive alla rimozione) mentre «Villa
+ * Guardia: vivere e lavorare» non lo e' piu'. Nessun mestiere perde una
+ * classificazione che si reggeva su prove sue.
+ *
+ * ── PERCHE' OGNI COMUNE TROVATO, NON SOLO IL "MIGLIORE" (#504 rischio 2) ──
+ *
+ * Un testo puo' nominare PIU' di un comune, e `comuneMatch` ne sceglie uno
+ * solo (il piu' lungo) per la chiave-comune. Se l'evidenza del mestiere si
+ * regge sul nome di un comune DIVERSO da quello scelto come "migliore",
+ * togliere solo quest'ultimo lascia intatta la sequenza che fa vincere la
+ * chiave-mestiere e la guardia non scatterebbe. Si prova quindi la rimozione
+ * di OGNI comune candidato trovato nel testo: se anche una sola rimozione fa
+ * sparire la chiave-mestiere, l'unica prova era un toponimo.
+ */
+function professionEvidenceIsOnlyAComuneName(text, professionId) {
+  const comuni = comuneMatchAll(text);
+  if (comuni.length === 0) return false;
+  const norm = normalizeText(text);
+  return comuni.some(
+    (comune) => professionTopicKey(removeWordSequence(norm, comune.words)) !== professionId,
+  );
+}
+
+/**
+ * Toglie da `norm` OGNI occorrenza della sequenza `words`.
+ *
+ * Due dettagli, ed entrambi sono stati sbagliati prima di essere misurati.
+ *
+ * OGNI occorrenza, non la prima. Il testo di decisione e' `${title} ${id}`, e
+ * l'id ripete quasi sempre cio' che il titolo dice: «Villa Guardia: vivere e
+ * lavorare come frontaliere vivere villa guardia lavorare ticino» contiene il
+ * nome DUE volte. Togliendone una sola, l'altra basta a far sopravvivere la
+ * chiave-mestiere e la guardia non scatta — che e' esattamente il risultato
+ * misurato sulla prima stesura: zero articoli cambiati su 4.498.
+ *
+ * La SEQUENZA, non i token. Togliere i token uno per uno cancellerebbe anche
+ * gli usi legittimi della stessa parola altrove nel testo: «Fare la guardia
+ * giurata a Villa Guardia» perderebbe la prova vera del mestiere e finirebbe
+ * classificato come comune. Togliendo solo «villa guardia» resta «fare la
+ * guardia giurata a», il mestiere sopravvive, e la distinzione regge.
+ */
+function removeWordSequence(norm, words) {
+  const tokens = norm.split(' ');
+  const out = [];
+  for (let i = 0; i < tokens.length;) {
+    let n = 0;
+    while (n < words.length && tokens[i + n] === words[n]) n += 1;
+    if (n === words.length) { i += n; continue; }
+    out.push(tokens[i]);
+    i += 1;
+  }
+  return out.join(' ');
 }
 
 // ══════════════════════════════════════════════════════════════════════════
@@ -534,7 +736,10 @@ const CANTON_THEMES = [
  * cantonale marcava gli evergreen del pool: «Voto Zurigo: alloggi e premi
  * cassa malati» bloccava `premi-cassa-malati-lamal-2026-canton-zurigo`.
  */
-const CANTON_GUIDE_INTENT_RE = /(guida|confronto|confrontare|come funziona|come scegliere|vantaggi|strategi|quanto costa|calcolo|requisit|funzionamento)/;
+// `\b` davanti al gruppo: senza, ogni alternativa matcha anche come SUFFISSO
+// di una parola più lunga — «svantaggi del cantone» accendeva `vantaggi`.
+// Stesso anti-pattern e stesso fix di `RESIDENCE_INTENT_RE` (#530).
+const CANTON_GUIDE_INTENT_RE = /\b(guida|confronto|confrontare|come funziona|come scegliere|vantaggi|strategi|quanto costa|calcolo|requisit|funzionamento)/;
 
 /** Il valore «nessun cantone nominato»: l'articolo nazionale. */
 const NATIONAL_CANTON = 'svizzera';
@@ -630,7 +835,12 @@ export function topicCoverageKey(article) {
 function computeTopicCoverageKey(text) {
   if (hasProfessionGuideIntent(text)) {
     const professionId = professionTopicKey(text);
-    if (professionId) return { kind: 'profession-guide', value: professionId };
+    // Il mestiere vince ancora per primo, ma non piu' quando la sua UNICA
+    // prova e' il nome del comune di cui l'articolo parla — vedi
+    // professionEvidenceIsOnlyAComuneName.
+    if (professionId && !professionEvidenceIsOnlyAComuneName(text, professionId)) {
+      return { kind: 'profession-guide', value: professionId };
+    }
   }
   if (hasResidenceGuideIntent(text)) {
     const comuneId = comuneTopicKey(text);
@@ -661,6 +871,15 @@ const _keyCache = new Map();
 export function resetTopicCoverageCaches() {
   _keyCache.clear();
   _municipalityIndex = null;
+}
+
+/**
+ * Solo per i test: forza l'indice comuni, per simulare un
+ * `municipalities.ts` vuoto o troncato senza toccare il file reale (#553).
+ * Ricordarsi di richiamare `resetTopicCoverageCaches()` dopo l'uso.
+ */
+export function setMunicipalityIndexForTests(index) {
+  _municipalityIndex = index;
 }
 
 /**
@@ -759,4 +978,87 @@ export function assertTopicNotRecentlyCovered(data, existingArticles, opts = {})
     log(`  ✅ ${label} "${key.value}" non coperto di recente`);
   }
   return data;
+}
+
+// ══════════════════════════════════════════════════════════════════════════
+// Titolo scollegato dallo slug — serie comune-guide (#527)
+// ══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Gli slug della serie escono da un template che porta il comune per
+ * costruzione (`buildComuneEvergreenTopics`, evergreen-topic-generator.mjs):
+ *
+ *   vivere a ${name} e lavorare in ${canton} da frontaliere
+ *   trasferirsi a ${name} da frontaliere pro e contro
+ *
+ * Ristretto ai verbi di intento-residenza che aprono lo slug
+ * (`vivere-`/`trasferirsi-`/`abitare-`/`risiedere-`), non a ogni slug che
+ * nomina un comune: fuori da questa serie un nome di comune nello slug è
+ * spesso il capoluogo di una cronaca (`economia-varese-2024-imposte`,
+ * `devastazione-vagone-como-fermo`), e lì il titolo giustamente non lo
+ * ripete — misurato a 53/489 sul corpus intero, rumore scartato. Dentro la
+ * serie invece slug e titolo DEVONO parlare dello stesso comune. Misurato
+ * (corpus 2026-08-20, 134 articoli della serie): 4 rotti su 134 (3,0 %).
+ *
+ * L'alternanza copre `abitare-`/`risiedere-` oltre ai due soli verbi finora
+ * generati: un domani in cui il template cambia verbo (es. un ipotetico
+ * `risiedere-a-${name}-...`) non deve poter sfuggire silenziosamente al gate
+ * (#553). Presi dallo stesso stem di `RESIDENCE_INTENT_RE` sopra — la stessa
+ * famiglia di intento, non un elenco inventato ex-novo — ma solo i verbi che
+ * hanno senso come PRIMO token di uno slug: le frasi multi-parola di
+ * `RESIDENCE_INTENT_RE` (`pro e contro`, `costo della vita`, `zone
+ * consigliate`, …) non aprono mai un template e riattiverebbero il rumore
+ * 53/489 se ancorate qui.
+ */
+const COMUNE_SERIES_ID_RE = /^(vivere|trasferirsi|abitare|risiedere)-/;
+
+/**
+ * Gate bloccante: nella serie comune-guide, il titolo deve nominare lo
+ * stesso comune dello slug. Usa `comuneTopicKey` sia per lo slug sia per il
+ * titolo — un'unica definizione di «nomina un comune», la stessa che regge
+ * la chiave `comune-guide` sopra.
+ *
+ * @param {object} data — legge data.id e data.content.it.title
+ * @returns {object} lo stesso `data`
+ * @throws {Error} quando il titolo non nomina il comune dello slug
+ */
+export function assertComuneTitleMatchesSlug(data) {
+  const id = String(data?.id || '');
+  if (!COMUNE_SERIES_ID_RE.test(id)) return data;
+  if (municipalityIndex().size === 0) {
+    // Fail-CLOSED qui, al contrario della chiave morbida `comune-guide` più
+    // sopra (quella può spegnersi senza conseguenze, misurato, e il test
+    // `municipalityNames()` la sorveglia). Questo è un gate BLOCCANTE nato
+    // apposta per fermare pubblicazioni rotte (#527): se municipalities.ts è
+    // vuoto o troncato, `comuneTopicKey` tornerebbe sempre null e il gate
+    // diventerebbe un no-op silenzioso — esattamente il difetto che doveva
+    // impedire (#553). Non è `qualityReject`: un indice corrotto non è un
+    // singolo candidato da scartare, è la pipeline intera priva della base
+    // per verificare qualunque candidato di questa serie.
+    throw new Error(
+      '❌ INDICE COMUNI VUOTO O TRONCATO:\n'
+      + `   Impossibile verificare "${id}" contro il titolo: municipalities.ts\n`
+      + `   non ha prodotto almeno ${MIN_MUNICIPALITIES} nomi validi.\n`
+      + '   Il gate titolo/slug della serie comune-guide non può fail-open su\n'
+      + '   un indice corrotto: risolvi municipalities.ts prima di pubblicare.',
+    );
+  }
+  const slugComune = comuneTopicKey(id.replace(/-/g, ' '));
+  if (!slugComune) return data;
+  const title = data?.content?.it?.title || '';
+  const titleComune = comuneTopicKey(title);
+  if (titleComune === slugComune) return data;
+
+  const err = new Error(
+    '❌ TITOLO SCOLLEGATO DALLO SLUG:\n'
+    + `   Slug:   "${id}" → comune ${slugComune}\n`
+    + `   Titolo: "${title}" → comune ${titleComune || '(nessuno)'}\n`
+    + '   Lo slug della serie vivere-/trasferirsi- esce da un template che nomina\n'
+    + '   il comune: il titolo deve nominare lo stesso comune, non un altro o\n'
+    + '   nessuno.',
+  );
+  // Stessa semantica di un rifiuto di qualità: il selettore salta questo
+  // candidato e prova il prossimo invece di abortire l'intera run.
+  err.qualityReject = true;
+  throw err;
 }

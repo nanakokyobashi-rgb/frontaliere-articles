@@ -137,8 +137,8 @@
       "reason": "Preflight di sintassi TypeScript sui corpi. Gemello di tests/blog-body-typescript-syntax.test.ts del sito: stessa validazione (esbuild transform, loader ts, solo sintassi), adattata al percorso di PUBBLICAZIONE invece che alle PR — la' e' un test su pull_request, qui gli articoli atterrano per push diretto su main, quindi un gate sulle PR non ne vedrebbe mai uno. Registrato 'adapted' e non 'corpus-only': il file sul sito ESISTE, e dichiararlo assente renderebbe loop-drift-check cieco proprio alla divergenza fra i due — il caso peggiore descritto in CLAUDE.md.",
       "baseline": {
         "site": "57f158ab7858270e",
-        "corpus": "d9ab3e73feda5005",
-        "alignedAt": "2026-08-09"
+        "corpus": "f42a7f15c4fdfae2",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -154,11 +154,11 @@
       "path": "scripts/ci/check-quota-backoff.mjs",
       "mode": "adapted",
       "baseline": {
-        "site": "7926b298503c143d",
-        "corpus": "c474b254aff5b326",
-        "alignedAt": "2026-08-07"
+        "site": "a7f167aabfdd636e",
+        "corpus": "fc8539ea6d2ffaae",
+        "alignedAt": "2026-08-21"
       },
-      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead)."
+      "reason": "Aggiunto QUOTA_BEACON_PEER_REPO: i workflow Claude di questo repo onorano ANCHE il beacon 429 del sito e cedono; il sito non legge mai il nostro. Il 429 e' per-account, quindi un limite visto la' predice il nostro. E' cio' che rende 'il corpus non affama il sito' una proprieta' strutturale invece di una speranza sulla cadenza dei cron. La variabile e' opzionale e non impostata sul sito, quindi lo stesso file resterebbe valido anche la': candidato a risalire (classe corpus-ahead). 2026-08-21: entrambi i lati estesi con QUOTA_LBL_ACTIVE/REQUEUE (stadio decompose) e beacon-scan su entrambe le famiglie di label; resta adapted per il peer-beacon che il sito non ha."
     },
     {
       "path": "scripts/ci/check-workflows-scope.mjs",
@@ -167,6 +167,15 @@
         "site": "459a67139071d1ef",
         "corpus": "459a67139071d1ef",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": "scripts/ci/probe-workflow-scope.mjs",
+      "mode": "identical",
+      "baseline": {
+        "site": "86d6097d552f5056",
+        "corpus": "86d6097d552f5056",
+        "alignedAt": "2026-08-24"
       }
     },
     {
@@ -197,6 +206,26 @@
       }
     },
     {
+      "path": "scripts/ci/list-pr-gate-tests.mjs",
+      "mode": "corpus-only",
+      "reason": "Compone la lista di test che `tests.yml` esegue su una PR: tutta `generator/tests/` MENO i gate che leggono `content/`, che girano in `generator-ci.yml` (PR che toccano `generator/**`) e in `content-gates-main.yml` (push su `main`). Esiste perche' il corpus cambia senza che nessuna PR lo tocchi — ~90 push al giorno dai bot produttori — e un check rosso per un dato che l'autore non ha scritto e non puo' riparare non sta misurando quella PR. Corpus-only: il sito non ha ne' i bot produttori ne' `content/`, e il suo `tests.yml` e' gia' `adapted`.",
+      "baseline": {
+        "site": null,
+        "corpus": "e147905a05fb6df9",
+        "alignedAt": "2026-08-20"
+      }
+    },
+    {
+      "path": "scripts/ci/content-gates-main.mjs",
+      "mode": "corpus-only",
+      "reason": "Fa girare su `main` il sottoinsieme MISURATO dei gate che leggono `content/**`, e su offender apre UNA issue deduplicata sul titolo invece di rendere rossa una run. Non ha gemello sul sito e non puo' averlo: il difetto che chiude e' la scrittura diretta su `main` dei produttori di QUESTO repo (`generate-article.yml` e i suoi fratelli fanno `git push HEAD:main` — 88 articoli nelle ultime 24h), mentre sul sito il contenuto non e' versionato e nessun bot scrive su `main`. Anche la lista `CONTENT_GATES` e' topologia locale: sono file sotto `generator/tests/`, cartella che sul sito non esiste. Non e' `corpus-only-pending` — non c'e' niente da portare di la'.",
+      "baseline": {
+        "site": null,
+        "corpus": "23f28a70e0f93b4e",
+        "alignedAt": "2026-08-18"
+      }
+    },
+    {
       "path": "scripts/ci/followup-resolution-match.mjs",
       "mode": "identical",
       "baseline": {
@@ -218,9 +247,9 @@
       "path": "scripts/ci/pr-autorebase.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "455f0d78fb802a68",
-        "corpus": "455f0d78fb802a68",
-        "alignedAt": "2026-08-07"
+        "site": "3d66a99ec99d686f",
+        "corpus": "3d66a99ec99d686f",
+        "alignedAt": "2026-08-19"
       }
     },
     {
@@ -245,9 +274,9 @@
       "path": "scripts/ci/scan-job-timeouts.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "9685e6f3b05b27af",
-        "corpus": "9685e6f3b05b27af",
-        "alignedAt": "2026-08-09"
+        "site": "88976db01c98d1cb",
+        "corpus": "88976db01c98d1cb",
+        "alignedAt": "2026-08-19"
       }
     },
     {
@@ -272,8 +301,8 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "45113b7cf0b645c1",
-        "corpus": "45113b7cf0b645c1",
+        "site": "98bb8dd2ff527a59",
+        "corpus": "98bb8dd2ff527a59",
         "alignedAt": "2026-08-14"
       }
     },
@@ -290,9 +319,19 @@
       "path": "scripts/lib/pr-body-sections-check.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "17654ae277bb9f4d",
-        "corpus": "17654ae277bb9f4d",
-        "alignedAt": "2026-08-07"
+        "site": "d1bef9a16a4152f5",
+        "corpus": "d1bef9a16a4152f5",
+        "alignedAt": "2026-08-23"
+      }
+    },
+    {
+      "path": "scripts/lib/pr-body-filepath-check.mjs",
+      "mode": "corpus-only",
+      "reason": "Verifica che i path citati fra backtick nel body di una PR ESISTANO. E' il secondo giro dell'escalation #140: `pr-body-sections-check` guarda la presenza della sezione, `pr-body-nextstep-check` la forma dello stato, e un body puo' essere di forma perfetta e citare file che qui non ci sono — sulla #358 `checkNextStepStates` dava `ok: true` mentre il reviewer spendeva un ciclo per dire che due path non esistevano. Sul sito non esiste, e non e' `corpus-only-pending`: il perimetro (`KNOWN_ROOTS`) e la dislocazione `scripts/` -> `generator/scripts/` sono la topologia di QUESTO repo, e la soglia advisory e' calibrata sulle 45 PR mergiate di qui (misura nel docblock). Sul sito quei due pezzi andrebbero rimisurati da zero, quindi la' e' un modulo diverso, non lo stesso file. Stessa politica del gemello `pr-body-nextstep-check.mjs`, corpus-only per la stessa ragione.",
+      "baseline": {
+        "site": null,
+        "corpus": "31b0d14f22b58836",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -357,11 +396,11 @@
     {
       "path": ".github/workflows/tests.yml",
       "mode": "adapted",
-      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome.",
+      "reason": "Stesso RUOLO del tests.yml del sito (produce il check-run che l'auto-merge aspetta) ma contenuto interamente diverso: qui e' `node --test` dependency-free, senza vitest, senza shard, senza npm ci. Il `name:` del workflow resta `tests` perche' il trigger workflow_run di auto-merge-on-lgtm lo referenzia per nome. Dal 2026-08-18 diverge anche sul TRIGGER: qui gira su `push` senza `branches-ignore`, quindi anche su `main`, perche' `mainTestsRuns()` di `pr-autorebase.mjs` legge `actions/workflows/tests.yml/runs?branch=main` e senza una run `success` li' il rescue `stuck-red` non ha prova da esibire (misurato: `total_count = 0` su 849 run, cinque PR bloccate). Il `concurrency` e' condizionale per la stessa ragione: su `main` `cancel-in-progress: false`, come sul sito, perche' una run cancellata non e' ne' completed ne' success.",
       "baseline": {
         "site": "5fa890e4a23a6619",
-        "corpus": "69fb6e3c4efa522c",
-        "alignedAt": "2026-08-07"
+        "corpus": "7110d899cd4af8c6",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -430,17 +469,17 @@
       "reason": "Solo la cadenza cambia: :47 invece del :17 del sito, per non sommare i picchi sulla stessa API. Lo script sottostante e' identical.",
       "baseline": {
         "site": "f7c6be4644c56dc2",
-        "corpus": "9f0f6678fdaec04d",
-        "alignedAt": "2026-08-07"
+        "corpus": "91fdbb8ee2f6f509",
+        "alignedAt": "2026-08-18"
       }
     },
     {
       "path": "scripts/ci/close-recovered-failure-issues.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "50b83bd5c3628dc8",
-        "corpus": "50b83bd5c3628dc8",
-        "alignedAt": "2026-08-07"
+        "site": "8d41ac44922f6da9",
+        "corpus": "8d41ac44922f6da9",
+        "alignedAt": "2026-08-22"
       }
     },
     {
@@ -459,8 +498,8 @@
       "reason": "Lo scanner centrale dei fallimenti. Tre filtri misurati su questo repo: solo conclusion=failure (mai cancelled — l'outage GitHub del 2026-08-06 avrebbe generato decine di falsi bug), niente run da pull_request (un tests rosso e' problema della PR, non una issue), e gate sui fallimenti consecutivi (9 Generate Blog Article + 8 fast-publish-article su 18 fallimenti in 7 giorni sono transienti da provider LLM). Il `## Suggested action` conosce ora tutte e tre le categorie dell'helper di rebase (#255/#281/#285): prima ne descriveva due e rimandava la terza al proprietario, e da quando la terza esiste quel testo avrebbe consigliato di mettere un registro fra le cache — cioe' di cancellare dal registro l'articolo appena generato.",
       "baseline": {
         "site": null,
-        "corpus": "27c8981d860a0e70",
-        "alignedAt": "2026-08-14"
+        "corpus": "1f316d0cd9576826",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -516,10 +555,11 @@
     {
       "path": "scripts/ci/followup-drainer.mjs",
       "mode": "identical",
+      "reason": "Portato lo stadio di decomposizione (sito #6228, byte-identico a origin/main del sito): routing agent:decompose-queued, DECOMPOSE-DRAIN/RESCUE, PARENT-CLOSE, rotazione scan parked-retry, fairness env-gated (env solo nel drainer.yml del sito: qui il blocco e' inerte), rimozione park network-audit.",
       "baseline": {
-        "site": "6515f996437948e8",
-        "corpus": "6515f996437948e8",
-        "alignedAt": "2026-08-14"
+        "site": "3bd44bfe8e8f7033",
+        "corpus": "3bd44bfe8e8f7033",
+        "alignedAt": "2026-08-21"
       }
     },
     {
@@ -529,6 +569,16 @@
         "site": "1ce4e20c19a79fdf",
         "corpus": "1ce4e20c19a79fdf",
         "alignedAt": "2026-08-07"
+      }
+    },
+    {
+      "path": "scripts/ci/lib/reopen-breaker.mjs",
+      "mode": "identical",
+      "reason": "Precondizione + circuit breaker del close+reopen di pr-autorebase (valerielinc-ops/frontaliere-si-o-no#5914). Registrata contestualmente allo script che la importa: e' una dipendenza NUOVA introdotta da quella PR e non censita qui, quindi una discesa drift-repair del solo pr-autorebase.mjs — che il manifest sorveglia file per file — avrebbe portato l'import senza il modulo e rotto l'autorebase con ERR_MODULE_NOT_FOUND. E' la stessa forma del punto cieco di loop-scripts-closure.test.mjs. Nessuna stringa e' cablata: il nome del check arriva da lib/constants.mjs, che qui e' adapted, cosi' il file resta identical e il messaggio resta corretto su entrambi i repo.",
+      "baseline": {
+        "site": "fdd988244a6fb980",
+        "corpus": "fdd988244a6fb980",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -577,6 +627,16 @@
         "site": "082c8cfe1e649be2",
         "corpus": "9d96f186232c697b",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": ".github/workflows/issue-decompose.yml",
+      "mode": "adapted",
+      "reason": "Stadio di decomposizione (sito #6228). Adattamenti: sender gate con gli account del progetto; identita' GITHUB_PAT_NANAKO invece della GitHub App; ponte RC generator/scripts/load-rc-env.mjs; QUOTA_BEACON_PEER_REPO verso il sito; ensure-loop-labels; prompt sul dominio del corpus (manifest/identical, node --test) e recupero di VISION.md dal sito se assente qui.",
+      "baseline": {
+        "site": "3bcdb9b32a40a785",
+        "corpus": "fd4e8797614e8b96",
+        "alignedAt": "2026-08-21"
       }
     },
     {
@@ -632,9 +692,9 @@
       "path": "scripts/lib/secrets-scope-detect.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "7de8e2060fb167b2",
-        "corpus": "7de8e2060fb167b2",
-        "alignedAt": "2026-08-07"
+        "site": "b98c79e19464a968",
+        "corpus": "b98c79e19464a968",
+        "alignedAt": "2026-08-25"
       }
     },
     {
@@ -653,8 +713,8 @@
       "reason": "Guard nato da un difetto reale del porting: node --check valida la sintassi ma non segue gli import, quindi tre file mancanti sono passati indenni da ogni controllo e avrebbero rotto l'auto-merge su ogni PR. Risolve l'albero staticamente (non importa: quasi tutti gli script hanno una modalita' CLI e alcuni chiamano l'API GitHub) e verifica anche che non compaiano dipendenze npm non dichiarate, perche' e' il girare-senza-npm-ci a rendere economico il ciclo su questo repo.",
       "baseline": {
         "site": null,
-        "corpus": "487404ca92096032",
-        "alignedAt": "2026-08-07"
+        "corpus": "6ce500b9e6754280",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -762,9 +822,9 @@
       "mode": "adapted",
       "reason": "Niente npm ci, ponte RC del corpus, identita' GITHUB_PAT_NANAKO, cron 50 6 sfasato dal 40 6 del sito. In piu' il Gate 0 su `autorebase-reopen-failed`, che il sito non ha e non gli serve: quella label dice \"non cancellare questo head ref\", e il suo lettore dev'essere il workflow che cancella branch. Sul sito lo fa `worktree-branch-janitor.yml`; qui quel workflow non esiste e l'unico che cancella branch e' questo, quindi e' qui che la label deve avere effetto. Sostituzione dichiarata anche in generator/tests/loop-references-exist.test.mjs, che sorveglia la citazione del janitor in pr-autorebase.mjs.",
       "baseline": {
-        "site": "e74b26d3812bf008",
-        "corpus": "0597af47ae837953",
-        "alignedAt": "2026-08-08"
+        "site": "8e2799b49ef8ad31",
+        "corpus": "a9f721dcc219c572",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -838,9 +898,9 @@
       "path": "scripts/ci/lib/false-positive-declaration.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "220daf74fa503c7f",
-        "corpus": "220daf74fa503c7f",
-        "alignedAt": "2026-08-07"
+        "site": "0d8abb4da520f254",
+        "corpus": "0d8abb4da520f254",
+        "alignedAt": "2026-08-23"
       }
     },
     {
@@ -1031,6 +1091,17 @@
       }
     },
     {
+      "path": "generator/tests/pr-autorebase-reopen-breaker.test.mjs",
+      "sitePath": "tests/pr-autorebase-reopen-breaker.test.ts",
+      "mode": "adapted",
+      "reason": "Gemello di tests/pr-autorebase-reopen-breaker.test.ts sul sito (#5914), riscritto per node --test perche' qui non c'e' vitest; i corpi restano quasi byte-identici grazie a generator/tests/lib/expect-shim.mjs. Lo script e la libreria sotto test sono identical e restano byte-identici; il test no, ed e' giusto cosi': e' il runner a differire, non il comportamento sotto test. In piu' rispetto al sito ha un caso che qui e' l'unico possibile — che il messaggio nomini il check LOCALE (tests (node --test)) e non quello del sito — perche' e' proprio la costante adapted a permettere alla libreria di restare identical. Il manifest sorveglia i file uno per uno e non vede l'ASSENZA di un test da questo lato: e' il punto cieco gia' pagato con pr-collision-detector (#40 punto 1, PR #44).",
+      "baseline": {
+        "site": "d8d7c06048be343b",
+        "corpus": "0e7e653ee69818c7",
+        "alignedAt": "2026-08-15"
+      }
+    },
+    {
       "path": "generator/tests/fast-publish-cdn-offload-order.test.mjs",
       "sitePath": "tests/fast-publish-cdn-offload-order.test.ts",
       "mode": "adapted",
@@ -1130,9 +1201,9 @@
       "mode": "identical",
       "reason": "Riesporta tipizzata clauseTail.mjs e ospita repairSerpSnippet, che l'engine chiama a render time (SiteShellContract) per riparare le description gia' scritte. Stessa ragione di clauseTail.mjs — fuori dall'allowlist del mirror dell'engine — piu' una specifica: generator/tests/seo-clause-truncation.test.mjs lega il letterale della guardia «gia' completo» di repairSerpSnippet, perche' quel .ts non e' importabile da node:test. E' un contratto senza forma di import, la classe che loop-references-exist.test.mjs esiste per coprire. RICONCILIATO il 2026-08-14 insieme a clauseTail.mjs, stessa dinamica (both-moved apparente risolto in fast-forward): qui il delta e' la sola riesportazione tipizzata di `truncateToClauseNonEmpty`.",
       "baseline": {
-        "site": "6449645c6821c224",
-        "corpus": "6449645c6821c224",
-        "alignedAt": "2026-08-14"
+        "site": "a887d8aaf2ddf4bf",
+        "corpus": "a887d8aaf2ddf4bf",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -1275,11 +1346,11 @@
     {
       "path": "scripts/lib/git-push-with-retry.sh",
       "mode": "identical",
-      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-14 insieme a cf-analytics.mjs e profession-taxonomy.mjs, stessa classe: ritardo pre-esistente alla baseline, non adattamento. Il sito aveva aggiunto le registrazioni dei merge driver `known-slugs-shard`, `orphan-enriched-shard` e `ai-cache`, che ora scendono qui. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183): e' un gemello, non un omonimo. Le registrazioni puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo, ed e' gia' vero da prima per `merge.compat-shard.driver`: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
+      "reason": "Push con retry usato dai job che scrivono sugli shard. RIALLINEATO il 2026-08-24 (stranded-twin, 5.2gg): il sito aveva aggiunto il flag opt-in `--soft-fail-exhausted` (warn+exit 0 invece di exit 1 su MAX_ATTEMPTS esaurito, per un caller la cui data e' una recomputation a finestra scorrevole che si riprende da sola al giro dopo — vedi issue del sito #5568). Nessun caller di questo repo lo passa ancora, quindi la copia e' comportamentalmente no-op qui finche' non viene adottato. Il file cita esplicitamente issue del SITO (#2988, #4190, #4557, #3809, #4183, #5568): e' un gemello, non un omonimo. Le registrazioni dei merge driver (`known-slugs-shard`, `orphan-enriched-shard`, `ai-cache`, `compat-shard`) puntano a `scripts/ci/merge-*.mjs` che qui non esistono — innocuo: ogni `git config` finisce in `|| true` e nessun `.gitattributes` locale marca quei path, quindi il driver non viene mai invocato. Se un giorno un `.gitattributes` di questo repo marcasse uno di quei path, il driver mancante diventerebbe un guasto: e' l'unica condizione da tenere d'occhio.",
       "baseline": {
-        "site": "643a10e4815e38bc",
-        "corpus": "643a10e4815e38bc",
-        "alignedAt": "2026-08-14"
+        "site": "e28724127cb24a0f",
+        "corpus": "e28724127cb24a0f",
+        "alignedAt": "2026-08-24"
       }
     },
     {
@@ -1362,10 +1433,11 @@
       "path": "generator/scripts/lib/ai-models.mjs",
       "sitePath": "scripts/lib/ai-models.mjs",
       "mode": "identical",
+      "reason": "RICONCILIATO il 2026-08-18. La baseline del 2026-08-14 (`6cc7088bf44c5152` su entrambi i lati) descriveva lo stato PRIMA che sito e corpus implementassero `AI_MODELS_PREFER` in modo indipendente e divergente — la divergenza tracciata dalla issue #402, che `loop-drift-check` classificava correttamente `both-moved` / `actionable: true`. La riconciliazione e' stata fatta: `valerielinc-ops#6004` sul sito e `#418` qui, e i due file sono tornati BYTE-IDENTICI (misurato: `sha256 | head -c16` = `5dbca2532ac754ab`, 269.588 byte per lato, su `origin/main` di entrambi i repo). Senza questo aggiornamento le due meta' sarebbero uguali fra loro e diverse dalla baseline, cioe' un `both-moved` con detail «vanno lette entrambe e riconciliate a mano» su un file gia' allineato: rumore azionabile a vuoto, che costa a chi lo legge la stessa lettura di un drift vero. La baseline NON e' stata rigenerata con `--init`: quel comando riscrive TUTTE le voci del manifest con lo stato corrente, e nel report del 2026-08-18 ce ne sono 40 azionabili (baseline fantasma, both-moved, stranded-twin) che verrebbero dichiarate allineate senza che nessuno le abbia lette. Solo questa voce e' stata toccata, ed e' l'unica di cui l'allineamento e' stato verificato byte a byte.",
       "baseline": {
-        "site": "6cc7088bf44c5152",
-        "corpus": "6cc7088bf44c5152",
-        "alignedAt": "2026-08-14"
+        "site": "5dbca2532ac754ab",
+        "corpus": "5dbca2532ac754ab",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -1493,11 +1565,11 @@
     {
       "path": "generator/scripts/lib/headline-selection-protocol.mjs",
       "mode": "identical",
-      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente diceva «sul sito non esiste ancora un omonimo»: era vera al 2026-08-13 e ha smesso di esserlo quando il gemello e' atterrato su `scripts/lib/` del sito — a un path DIVERSO da `path`, che e' esattamente il motivo per cui nessuno se n'e' accorto. `loop-drift-check` esce subito sul ramo `corpus-only` senza mai interrogare il sito, quindi il file e' rimasto non sorvegliato mentre i due lati erano gia' byte-identici: una fix su un lato avrebbe lasciato il gemello rotto in silenzio. Verificato su origin: blob `6cfb5b1a` su entrambi i lati.",
+      "reason": "Riclassificato da `corpus-only` il 2026-08-14. La `reason` precedente diceva «sul sito non esiste ancora un omonimo»: era vera al 2026-08-13 e ha smesso di esserlo quando il gemello e' atterrato su `scripts/lib/` del sito — a un path DIVERSO da `path`, che e' esattamente il motivo per cui nessuno se n'e' accorto. `loop-drift-check` esce subito sul ramo `corpus-only` senza mai interrogare il sito, quindi il file e' rimasto non sorvegliato mentre i due lati erano gia' byte-identici: una fix su un lato avrebbe lasciato il gemello rotto in silenzio. Riallineato il 2026-08-15 (site#5849 item 3/4): il sito aveva tolto il flag `i` da `CANDIDATE_KEY_RE` e aggiunto `SELECTION_REJECTION.INFRA_ERROR` — un `site-ahead` che qui e' stato chiuso ricopiando il file (blob sito `bd3bda74`, verificato con `cmp` post-copia). Segnalato `stranded-twin` il 2026-08-18 (issue #339, fermo indietro da 3.6 giorni): il sito il 2026-08-14 aveva corretto un commento (stima token del prompt di `selectionCorrectionNote`, da 8898 gonfiati a ~3500 misurati su un pool troncato a `MAX_HEADLINES_PER_BATCH`) — zero cambi di codice, solo la nota. Riallineato copiando `sitePath` (blob sito `35804c48`, verificato con `cmp` post-copia).",
       "baseline": {
-        "site": "6df51f3491453068",
-        "corpus": "6df51f3491453068",
-        "alignedAt": "2026-08-14"
+        "site": "09730557a8734aaf",
+        "corpus": "09730557a8734aaf",
+        "alignedAt": "2026-08-18"
       },
       "sitePath": "scripts/lib/headline-selection-protocol.mjs"
     },
@@ -1511,6 +1583,16 @@
         "alignedAt": "2026-08-14"
       },
       "sitePath": "scripts/lib/cross-section-dedup.mjs"
+    },
+    {
+      "path": "generator/scripts/lib/source-url-ledger.mjs",
+      "mode": "corpus-only",
+      "reason": "Forma delle voci dei due ledger URL->id (`{articleId, ts}` oltre alla stringa storica) e finestra oltre la quale una voce smette di bloccare la PROPRIA sezione. Nasce qui il 2026-08-18 perche' e' qui che la generazione vive: dopo il cutover del 2026-08-02 il gemello del sito `scripts/create-article.mjs` non produce piu' — misurato, `data/article-source-urls.json` sul sito e' fermo al 2026-08-07 e non cresce da 11 giorni, mentre il ledger frontaliere di qui ha preso +89 voci in dieci giorni (48 l'08-08, 137 il 18-08). Non e' `corpus-only-pending`: sul sito il difetto non e' operativo, quindi non c'e' un lavoro da tracciare, e una issue li' aprirebbe una PR del fixer su un percorso morto. Il modulo e' tenuto PURO apposta, quindi se un giorno il sito tornasse a generare e' copiabile senza adattamenti. Da non confondere con `cross-section-dedup.mjs`, che e' `identical` e che questa fix NON tocca: le viste URL->id che gli arrivano restano a valori stringa.",
+      "baseline": {
+        "site": null,
+        "corpus": "13f65a4e0809abdb",
+        "alignedAt": "2026-08-18"
+      }
     },
     {
       "path": "generator/scripts/lib/corpus-paths.mjs",
@@ -1729,9 +1811,9 @@
       "sitePath": "scripts/lib/evergreen-topic-generator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "8a321b805dc719c3",
-        "corpus": "8a321b805dc719c3",
-        "alignedAt": "2026-08-09"
+        "site": "28df42a0369a5308",
+        "corpus": "28df42a0369a5308",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -1879,10 +1961,21 @@
       "sitePath": "scripts/lib/llm-json-repair.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "dd088410f084c844",
-        "corpus": "dd088410f084c844",
-        "alignedAt": "2026-08-09"
+        "site": "524dc16b7d1c0911",
+        "corpus": "524dc16b7d1c0911",
+        "alignedAt": "2026-08-18"
       }
+    },
+    {
+      "path": "generator/scripts/lib/llm-payload-diagnostics.mjs",
+      "mode": "corpus-only-pending",
+      "trackingIssue": "https://github.com/valerielinc-ops/frontaliere-si-o-no/issues/6027",
+      "baseline": {
+        "site": null,
+        "corpus": "007e5a5b07e0e7d2",
+        "alignedAt": "2026-08-18"
+      },
+      "reason": "La riga unica che rende attribuibile il rigetto di `callLLM()` quando `normalizeItalianContentFromPayload()` torna `null`: famiglia (`troncato` / `forma-sbagliata`), modello che ha DAVVERO risposto, `rawChars`/`repairedChars`/`kept%`, chiavi del payload, stato per campo, verdetto di troncamento. Nasce qui perche' il tempo misurato sta qui (2026-08-18: 905 s su 1189 nella run 32134269129, 76% dello step; la run senza rigenerazioni e' anche la piu' corta, 312 s), ma NON e' `corpus-only`: il gemello del sito `scripts/create-article.mjs` ha lo stesso ramo con la stessa guardia `if (parseErr)`, e `publish-journalist-article` lo importa ogni 15 minuti, quindi li' il punto cieco e' aperto uguale. Non e' arrivato nello stesso giro perche' `create-article.mjs` e' `adapted` (si porta a mano, non si copia) e la suite del sito e' vitest, non `node --test`: il gate va riscritto. Quando atterra la' questa voce diventa `identical`."
     },
     {
       "path": "generator/scripts/lib/local-opus-mt.mjs",
@@ -1902,6 +1995,26 @@
         "site": null,
         "corpus": "b32967d7a7470176",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/rewire-fetch.mjs",
+      "mode": "corpus-only",
+      "reason": "Fetch condiviso dei tre refresh REWIRE (window, averages-ready, events). Vive solo qui: e' il lato CONSUMATORE del contratto HTTP, e il sito e' il produttore (publish-border-wait-window / assemble-events-dataset). Non e' `identical` e non e' `corpus-only-pending`: sul sito non esiste un omonimo da allineare, e copiarlo la' invertirebbe la direzione del REWIRE. Estratto dai refresh perche' GitHub Actions prende HTTP 403 dal WAF Cloudflare sul UA di default di Node, e il ramo `--check` + GITHUB_ACTIONS deve uscire 0 senza indebolire il gate di forma offline. I tre refresh restano i chiamanti; questo file e' la parte testabile.",
+      "baseline": {
+        "site": null,
+        "corpus": "d98eed3c66417fef",
+        "alignedAt": "2026-08-25"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/body2-payload-verdict.mjs",
+      "mode": "corpus-only",
+      "reason": "Il verdetto sulla risposta di generazione IT (`ok` / `topic-gate-abort` / `reject`), estratto da generator/scripts/create-article.mjs insieme al normalizzatore `normalizeItalianContentFromPayload` che quel verdetto interroga. Nasce il 2026-08-18 dal difetto della run 32175400548: il ciclo `isBody2Check` di `callLLM()` conosceva DUE esiti dove il contratto del prompt ne prevede TRE, e leggeva l'abort di REGOLA #0 (`abort_topical_relevance: true` con i campi di contenuto a null) come «content.it non normalizzabile» — cinque chiamate a `claude-cli/haiku` invece di una, e la sezione chiusa senza articolo. `corpus-only` e non `identical`: il sito ha la sua copia inline dentro scripts/create-article.mjs, gia' registrato `adapted`, quindi un gemello di FILE qui non esiste — stessa forma di article-meta-block.mjs sopra. La ragione dell'estrazione e' verificabilita', non estetica: create-article.mjs non e' importabile dalle gate del generatore, che girano `node --test` senza `npm ci` e non hanno `jsdom` (tirato dentro a module scope da extract-article-text.mjs). Finche' la regola stava inline, l'unico modo di provarla era ricopiarla nel test — una copia che diverge in silenzio. Il modulo e' tenuto PURO e dependency-free apposta: se il gemello del sito tornasse a generare e' copiabile senza adattamenti.",
+      "baseline": {
+        "site": null,
+        "corpus": "dc1baf17b73d1cd2",
+        "alignedAt": "2026-08-18"
       }
     },
     {
@@ -1970,9 +2083,9 @@
       "mode": "identical",
       "reason": "Tassonomia delle professioni, importata qui da `evergreen-topic-generator.mjs`. RIALLINEATA il 2026-08-14: era il terzo ritardo pre-esistente alla baseline (blob fermo al trasporto `valerielinc-ops@be6b31d5` del 2026-08-02, mentre il sito aggiungeva il 2026-08-05 con 21e2d13d `SUPPLY_VALIDATED_*`, `FILTER_PRECISION_MAX_RATIO`, `hasPreciseFeedFilter` e `isPromotable`). Il ritardo non aveva effetto funzionale qui — misurato prima di copiare: l'unico importatore locale prende `PROFESSION_TAXONOMY` e nessuno dei quattro simboli nuovi compare in un solo file di questo repo — quindi la copia e' additiva e non cambia comportamento. E' pero' proprio il caso in cui il ritardo si sarebbe fatto sentire in silenzio il giorno in cui `evergreen-topic-generator.mjs` (a sua volta `identical`) fosse sceso dal sito gia' usandoli: un import di un export inesistente e' `undefined`, non un errore.",
       "baseline": {
-        "site": "d15cfe455f5879b5",
-        "corpus": "d15cfe455f5879b5",
-        "alignedAt": "2026-08-14"
+        "site": "f3b22ce1f9c02f1a",
+        "corpus": "f3b22ce1f9c02f1a",
+        "alignedAt": "2026-08-21"
       }
     },
     {
@@ -2124,6 +2237,17 @@
         "site": "e637abb68d4eda7e",
         "corpus": "e637abb68d4eda7e",
         "alignedAt": "2026-08-09"
+      }
+    },
+    {
+      "path": "generator/scripts/lib/exhaustion-disposition.mjs",
+      "sitePath": "scripts/lib/exhaustion-disposition.mjs",
+      "mode": "identical",
+      "reason": "PROMOSSA il 2026-08-15 (sito PR #5935): la regola nata `corpus-only-pending` con la PR #357 e completata il 2026-08-14 (EXIT_NO_ARTICLE_DECLARED + isLegitimateQuotaDeferral, issue #359) e' ora atterrata anche sul sito, byte a byte identica — verificato con `diff` fra `origin/main:scripts/lib/exhaustion-disposition.mjs` del sito e questo file, output vuoto, stesso hash sui due lati. La cronaca del difetto (pareggio transient/persistent, run 31817957722 e 31823202761) resta nella issue #359, ora chiudibile lato tracking.",
+      "baseline": {
+        "site": "54ed894b24deaa3f",
+        "corpus": "54ed894b24deaa3f",
+        "alignedAt": "2026-08-15"
       }
     },
     {
@@ -2446,9 +2570,9 @@
       "path": "scripts/generate-image-thumbnails.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "81218522bca6c226",
-        "corpus": "81218522bca6c226",
-        "alignedAt": "2026-08-09"
+        "site": "df13c576848f88dc",
+        "corpus": "df13c576848f88dc",
+        "alignedAt": "2026-08-21"
       }
     },
     {
@@ -2531,6 +2655,16 @@
       }
     },
     {
+      "path": "scripts/ci/handoff-to-site.mjs",
+      "mode": "corpus-only",
+      "reason": "Porta al SITO la diagnosi che il fixer di QUESTO repo ha pagato e non puo' applicare (il caso «lato sbagliato del mirror»: 4 su 4 dei `blocked-admin-settings` aperti il 2026-08-24). E' `corpus-only` e non `corpus-only-pending`: il gemello sul sito non e' questo file, e' la direzione INVERSA — sito->corpus — che ha gia' il suo meccanismo in `loop-drift-check.mjs`. Un secondo script identico la' non servirebbe a niente, quindi non c'e' nulla da portare. Aggiornato il 2026-08-25: FIX_OUTCOME_RE non e' piu' ridefinita qui ma importata da close-recovered-failure-issues.mjs, che gia' la esportava — due copie identiche della stessa regex erano due posti dove il contratto poteva divergere in silenzio.",
+      "baseline": {
+        "site": null,
+        "corpus": "2d5f60e1130204c3",
+        "alignedAt": "2026-08-25"
+      }
+    },
+    {
       "path": "scripts/ci/exhaustion-reason-report.mjs",
       "mode": "corpus-only",
       "reason": "Strumentazione per la issue #203: aggrega per MOTIVO le marcature di `markModelExhausted` gia' emesse nei log, e difende l'invariante che un esaurimento senza motivo distinto non venga mai persistito. Corpus-only perche' `generator/scripts/lib/ai-models.mjs` e' `identical` — la fix va sul sito, mentre la misura, come la issue stessa prescrive, si fa da questo lato — e perche' legge i log di `generate-article.yml`, che e' un workflow di questo repo.",
@@ -2578,6 +2712,36 @@
         "site": null,
         "corpus": "ade3e04bb588571d",
         "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": "generator/tests/github-issue-creator-reopen-default.test.mjs",
+      "mode": "corpus-only",
+      "reason": "L'osservatore del ramo di RIAPERTURA di scripts/lib/github-issue-creator.mjs, che e' `identical` ed e' sceso allineato con #343 — ma il drift check confronta i file UNO PER UNO e non vede l'assenza di un test da un lato: il ramo e' arrivato qui con zero guardie e ci sarebbe restato in silenzio. Corpus-only perche' il gemello del sito (tests/github-issue-creator-reopen-default.test.ts) e' un .ts in vitest a un path diverso: qui `node --test` non importa TypeScript, e `mock.method(cp,'execFileSync')` NON raggiunge il binding ESM `import { execFileSync }` (verificato: la chiamata reale passa comunque), quindi il seam e' un `gh` finto in testa a PATH — piu' forte del mock, esercita execFileSync e l'argv veri. I tre test finali sono la parte che il gemello del sito non ha: nessuno dei 22 chiamanti di questo repo passa --reopen-within-hours (misurato 2026-08-14), quindi dipendono TUTTI dal default, e un test che chiama solo la funzione resterebbe verde mentre ogni workflow conia numeri nuovi. Provato per mutazione: 15 mutazioni della logica su 15 lo fanno diventare rosso, il controllo innocuo resta verde, e la regressione opt-in della CLI uccide SOLO il test end-to-end (gli altri 13 restano verdi).",
+      "baseline": {
+        "site": null,
+        "corpus": "0ed29e4bdc719363",
+        "alignedAt": "2026-08-14"
+      }
+    },
+    {
+      "path": ".github/workflows/needs-human-sweep.yml",
+      "mode": "adapted",
+      "reason": "L'unica porta di rientro da `needs-human`, portata qui il 2026-08-25 (il sito ce l'ha dal 21-08; qui zero workflow nominava `needs-human` o `vision`, e le issue parcheggiate erano 17 con la coda del ciclo VUOTA). Adattamenti che lo rendono non copiabile: (1) VISION.md NON e' duplicato qui — resta sorgente unica sul sito e si recupera via `gh api repos/valerielinc-ops/frontaliere-si-o-no/contents/VISION.md`, lo stesso comando gia' usato da issue-decompose.yml; entrambi i repo sono pubblici, quindi al GITHUB_TOKEN del run basta. (2) Identita' GITHUB_PAT_NANAKO dal ponte RC generator/scripts/load-rc-env.mjs invece della GitHub App (niente mint-app-token). (3) Pre-flight quota col beacon peer verso il sito, che sul gemello non c'e'. (4) Niente npm ci: gli script del ciclo sono zero-dep. (5) Checkout sparse su content/ invece della lista data/+public/ del sito. (6) Prompt sul dominio del corpus, col vincolo di verificare il `mode` in questo manifest prima di instradare una fix — una issue su un file `identical` si ripara sul SITO. Il job prepass dichiara /scripts/ci/ E /scripts/lib/: la chiusura transitiva degli import del pre-pass esce da scripts/ci (close-recovered-failure-issues.mjs importa scripts/lib/github-issue-creator.mjs), e con la sola prima cartella il job moriva con ERR_MODULE_NOT_FOUND a ogni run — riprodotto, e ora sorvegliato da generator/tests/needs-human-prepass-sparse-closure.test.mjs.",
+      "baseline": {
+        "site": "bbdd364a84c5cdc8",
+        "corpus": "6f81105b61c35e84",
+        "alignedAt": "2026-08-25"
+      }
+    },
+    {
+      "path": "scripts/ci/needs-human-prepass.mjs",
+      "mode": "adapted",
+      "reason": "La meta' deterministica (zero-Claude) dello sweep. La FORMA e' quella del gemello del sito; il CONTENUTO non e' copiabile perche' l'allowlist riconosce i titoli che scrivono i monitor di QUESTO repo: il sito elenca [crawler-health], App Error:, PostHog Exception:, CWV regression — che qui non esistono — mentre qui servono Watchdog generazione, Watchdog news-ticker:, Roster LLM invecchiato:, Loop drift:, gate content su main:, Lockstep engine incagliata:. Due divergenze strutturali in piu': (a) esiste OWNER_ONLY_TITLE_PATTERNS, che il sito non ha, per la famiglia credenziali (`Agent loop down: GITHUB_PAT`, `GH_PAT expiry warning:`) — il sito instrada la sua identita' con una GitHub App, qui il ciclo dipende dal PAT in Remote Config e quelle issue le chiude solo il proprietario, che la rotazione l'ha declinata il 2026-08-18; ri-accodarle e' futile per costruzione, perche' quando l'alert e' acceso il fixer non ha il PAT. (b) Il rilevatore di aggregati e' IMPORTATO da check-issue-already-resolved.mjs (isAggregate) invece di essere una regex locale come sul sito: un terzo rilevatore divergente sarebbe esattamente il difetto della issue #568. Gli si passa il solo titolo — misurato il 2026-08-25 che col body tre issue (#170, #407, #403) finivano in `decompose` per la sola parola «batch» nel testo, senza dichiarare alcun conteggio. Quarta divergenza: FIX_OUTCOME_RE non e' ridefinita come sul sito ma IMPORTATA da close-recovered-failure-issues.mjs, che gia' la esporta — la stessa regex e' scritta identica in tre file di questo repo e una quarta copia renderebbe il drift solo piu' probabile. Le altre tre non si unificano da qui: sono `identical`, quindi quella de-duplicazione e' lavoro del sito.",
+      "baseline": {
+        "site": "fa0bd775c806e14e",
+        "corpus": "39a5509939e3e929",
+        "alignedAt": "2026-08-25"
       }
     }
   ]

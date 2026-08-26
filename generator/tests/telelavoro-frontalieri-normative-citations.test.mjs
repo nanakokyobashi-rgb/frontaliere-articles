@@ -106,6 +106,21 @@ const SLUGS = [
     ref: 'corpus#332',
     citations: ['Regolamento sul permesso di soggiorno" (RPS) del 2019'],
   },
+  {
+    // #556 review round 2. Il corpo IT/FR aveva gia' la forma senza sigla
+    // ("legge federale sul contrasto alla criminalita' organizzata"), ma DE e
+    // EN portavano ciascuno un acronimo inventato PROPRIO — `(Bekämpfungsgesetz)`
+    // in DE, `(OCA)` in EN — mai raggiunti dal fix `(LCO)` di questa stessa PR
+    // perche' il denylist byte-exact di CORPUS_WIDE_FABRICATED cerca solo
+    // `lco`/`lcl`. Stesso schema di `(Sozialgesetz)` sopra: una traduzione puo'
+    // allucinare un proprio acronimo indipendente dall'originale IT.
+    // `(OCA)` non e' promuovibile a CORPUS_WIDE_FABRICATED: collide byte-exact
+    // con una citazione preesistente e non correlata in
+    // `franchigia-doganale-acquisti-svizzera.ts` (IT), fuori scope di questa PR.
+    slug: 'infiltrazioni-criminali-ticino-grigioni',
+    ref: '#556',
+    citations: ['(OCA)', '(Bekämpfungsgesetz)'],
+  },
 ];
 
 // Fino a #323 questa funzione era hardcoded su `content/blog-body/` e non
@@ -181,6 +196,29 @@ for (const { slug, ref, citations } of SLUGS) {
  * soggiorno vs. diritto societario) — la sigla e' fabbricata in entrambi i
  * casi, il contenuto dietro no.
  */
+// LCL e LCO aggiunte da #545 (follow-up di #526/#461): le 6 occorrenze note
+// (2 file `LCL` in blog-body-ch/it, 4 file `LCO` — le 4 traduzioni di
+// infiltrazioni-criminali-ticino-grigioni) sono state bonificate nella stessa
+// PR, scansione a confine di parola per non riprendere il falso positivo
+// bare-substring di `calcolatore` (con*LCO*latore). `LCL` è anche il nome di
+// una banca francese vera: qui non serve il context-guard di
+// article-factuality-gates.mjs perché il confronto è byte-exact contro un
+// corpus già bonificato, non un guard generativo — se una futura menzione
+// legittima della banca dovesse far fallire questo test, e' un segnale che
+// il corpus ha una nuova occorrenza da verificare, non un falso positivo da
+// silenziare.
+//
+// LFD aggiunta da #557 (follow-up di #545/#556): 7 occorrenze in 6 corpi
+// (blog-body-ch/it/cerca-lavoro-svizzera-dal-estero, blog-body/it/
+// frontalieri-ticino-diminuzione, blog-body/it/podologo-frontaliere-ticino-
+// guadagna, blog-body/{it,en,fr}/franchigia-doganale-acquisti-svizzera — il
+// corpo IT di quest'ultimo la portava due volte), ciascuna con soggetto/anno
+// diverso, stesso schema di acronimo-legge inventato. Bonificate rimuovendo,
+// non sostituendo (stesso standard di LCL/LCO): nel corpo IT/EN/FR di
+// franchigia-doganale la citazione era annidata in una frase che introduceva
+// anche la tariffa reale del 10%, gia' ristabilita altrove nello stesso
+// corpo, quindi la rimozione della frase-citazione non lascia il fatto
+// orfano.
 const CORPUS_WIDE_FABRICATED = [
   { label: 'LTL 1995', re: /ltl 1995/i },
   { label: 'LF 1995', re: /lf 1995/i },
@@ -190,6 +228,9 @@ const CORPUS_WIDE_FABRICATED = [
   { label: 'LPS', re: /(?<![a-z])lps(?![a-z])/i },
   { label: 'LSO', re: /(?<![a-z])lso(?![a-z])/i },
   { label: 'BWG', re: /(?<![a-z])bwg(?![a-z])/i },
+  { label: 'LCL', re: /(?<![a-z])lcl(?![a-z])/i },
+  { label: 'LCO', re: /(?<![a-z])lco(?![a-z])/i },
+  { label: 'LFD', re: /(?<![a-z])lfd(?![a-z])/i },
 ];
 
 function allBodyFiles() {

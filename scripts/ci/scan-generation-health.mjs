@@ -399,6 +399,126 @@ export const OVERSIZE_MIN_MODELS = 5;
 export const OVERSIZE_MIN_RUNS = 2;
 
 /**
+ * `roster-erosion` — il roster dei modelli free invecchia, e nessuno se ne
+ * accorge più.
+ *
+ * ## Il termometro che #449 sta per spegnere
+ *
+ * Oggi l'erosione del roster ha UN SOLO segnale, ed è indiretto: le run si
+ * impantanano. Un roster marcio produce wedge da 40-51 minuti a zero articoli,
+ * quelli fanno rumore, qualcuno legge il log a mano e scopre i modelli morti —
+ * è letteralmente così che sono stati trovati i tredici del 2026-08-18
+ * (nanako#380).
+ *
+ * #449 elimina quel rumore, e ha ragione a farlo: silenziando il 404 al primo
+ * colpo, gli stessi endpoint morti costano ~24 round-trip invece di 163, la
+ * cascata scorre e — se resta qualche modello vivo — l'articolo esce lo stesso.
+ * Ottimo per la produzione, pessimo per la diagnosi: **il roster continua a
+ * marcire producendo run veloci e verdi**. È la forma di #313, che questo repo
+ * ha già pagato una volta (un osservatore che raccoglie solo i fallimenti non
+ * ebbe nulla da raccogliere per 60+ run consecutive), ma peggiore, perché qui
+ * il sintomo sparisce PER MERITO DI UNA FIX.
+ *
+ * ## Cosa si conta, e cosa NON si conta
+ *
+ * Si contano i **modelli DISTINTI** che hanno risposto con un errore
+ * permanente. **Non** i round-trip: dopo #449 crollano per costruzione, e un
+ * contatore sui round-trip mostrerebbe una guarigione che non è avvenuta. Il
+ * numero di modelli distinti morti è invece INVARIANTE rispetto al
+ * silenziamento — silenziare cambia quante volte chiami un modello morto, non
+ * quanti ne sono morti. E resta leggibile dopo #449 perché il primo 404 della
+ * run stampa comunque la sua riga `Failed (score → …)`; è la SECONDA a sparire.
+ *
+ * ## Perché 401/404/410 accendono e 402 no — misurato, non scelto
+ *
+ * Le due classi hanno vite diverse e riparazioni diverse. `404`/`410` sono
+ * endpoint ritirati dal provider e `401` una credenziale respinta per sempre:
+ * è la RUGGINE, si ripara solo rinfrescando il roster. `402` è credito
+ * esaurito: si ripara pagando, e l'endpoint torna da solo quando la finestra
+ * di fatturazione si riapre.
+ *
+ * Misurato il 2026-08-18 sulle 200 run di `generate-article.yml`
+ * (2026-08-17T15:11 → 08-18T18:57; 195 completate non-cancellate, 194 log
+ * leggibili, 180 non-dry), su 176 finestre di 12h scorrevoli di cui 104
+ * misurabili — la quota di modelli morti sul totale dei modelli OSSERVATI
+ * nella finestra:
+ *
+ *   401/404/410  →  0,034 · 0,065 · 0,094 · 0,127 · 0,143 · 0,152
+ *   402          →  0,161 · 0,164 · 0,174 · 0,188 · 0,207
+ *
+ * La classe `402` è PIATTA: non ha un lato sano nella finestra, qualunque
+ * soglia sotto 0,20 è accesa in 104 finestre su 104 e qualunque soglia sopra è
+ * vacua. Predicarci sopra darebbe una issue permanentemente accesa su un fatto
+ * che il proprietario ha già deciso di non riparare (i 402 restano nel roster
+ * declassati, #380) — cioè rumore. Resta come DIMENSIONE nel corpo, dove serve.
+ *
+ * La classe `401/404/410` invece SI SEPARA, e la separazione è l'unica cosa che
+ * rende tarabile questa condizione: il censimento di #380 (run 31823202761)
+ * contava 3 modelli ritirati su ~101 della catena, cioè 0,030 — ed è
+ * esattamente il minimo osservato oggi (0,034). Il picco odierno è 0,152, cioè
+ * 18 modelli su 114 osservati.
+ *
+ * ## La soglia: 0,10, e cosa la giustifica
+ *
+ * Sta 3 volte sopra il livello del censimento (0,030-0,034) e 1,5 volte sotto
+ * il picco odierno (0,152); accende in 6 finestre su 104 (5,8%), tutte fra le
+ * più recenti. Cioè è FALSA sullo stato che #380 aveva censito e accettato, e
+ * VERA sul peggioramento che #380 ha poi dovuto scoprire leggendo un log a
+ * mano. È la stessa coppia di criteri delle altre soglie di questo file.
+ *
+ * ⚠ Va detto per intero: **nella finestra misurata non esiste un lato sano
+ * osservato dall'interno**. Ogni run che percorre davvero la catena mostra fra
+ * il 18% e il 30% dei modelli toccati morto per qualche codice permanente.
+ * L'ancora "sana" è il censimento di #380, non una finestra di questo repo, e
+ * quindi 0,10 è la scelta CONSERVATIVA: la soglia più alta che accende ancora
+ * sul guasto realmente accaduto, non la più sensibile che si potesse scegliere.
+ *
+ * ## Il denominatore, e perché non è `DEFAULT_CHAIN`
+ *
+ * `M` è il numero di modelli DISTINTI osservati nella finestra — la somma di
+ * chi è stato provato (`Falling back to …`), saltato (`… Skipped`) o fallito
+ * (`… Failed (score → …)`). Leggere invece la taglia di `DEFAULT_CHAIN` da
+ * `generator/scripts/lib/ai-models.mjs` accoppierebbe questo watchdog alla
+ * SINTASSI di quel file, che è la forma di contratto senza import contro cui
+ * questo repo si è già rotto una volta (`SiteShellContract`). Il log porta il
+ * proprio denominatore: misurato, 114 modelli distinti in 26,9h contro i ~101
+ * della catena dichiarata in #380 — la differenza sono le varianti per
+ * provider, e in ogni caso un denominatore più grande rende la condizione più
+ * silenziosa, non più rumorosa.
+ *
+ * ## I due guard di campione, e perché la condizione non li tratta come salute
+ *
+ * La maggior parte delle run non tocca NESSUN modello oltre il primo: mediana
+ * 0 modelli osservati per run, perché la testa della catena risponde e la
+ * cascata non scende. Solo 8 run su 180 nella finestra percorrono la catena
+ * abbastanza da vedere il fondo del roster. Quindi:
+ *
+ * - una run entra nel numeratore solo se ha osservato almeno
+ *   `ROSTER_MIN_TOUCHED` modelli (sotto quella soglia il rapporto è dominato
+ *   dal denominatore: la sola run scartata dalla regola, 32051739807, aveva 1
+ *   morto su 29 osservati);
+ * - se la finestra non contiene almeno `ROSTER_MIN_PROBING_RUNS` run di quel
+ *   tipo, la condizione è NON MISURABILE — né aperta né chiusa. Misurato: 72
+ *   finestre di 12h su 176 (41%) non lo sono. È scomodo e va tenuto: «la
+ *   cascata non è scesa» non è «il roster è sano», ed è esattamente lo scambio
+ *   che questo watchdog esiste per non fare.
+ *
+ * ## Osservare, non rimuovere
+ *
+ * La condizione apre una issue e basta. Non tocca il roster, non disabilita
+ * modelli, non modifica `ai-models.mjs` — vincolo esplicito del proprietario in
+ * #380: i modelli in 402 e in 404 RESTANO nel roster declassati, perché
+ * toglierli rende rosso `tests/local-llm-fallback.test.ts` in modo
+ * deterministico (#362) e perché un endpoint che torna dev'essere ripescato da
+ * solo.
+ */
+export const ROSTER_RETIRED_CODES = new Set(['401', '404', '410']);
+export const ROSTER_BILLING_CODES = new Set(['402']);
+export const ROSTER_RETIRED_RATE = 0.10;
+export const ROSTER_MIN_TOUCHED = 40;
+export const ROSTER_MIN_PROBING_RUNS = 2;
+
+/**
  * `duplicate-topic-burst` — due articoli sullo stesso argomento a distanza
  * ravvicinata.
  *
@@ -528,6 +648,26 @@ export function parseMarkerRecords(text, marker, required = []) {
 
 const num = (v, fallback = 0) => (Number.isFinite(Number(v)) ? Number(v) : fallback);
 const TOKEN_LIMIT_RE = /\[([^\]\s]+)\] Skipped — request would exceed (\d+)-token limit \(estimated (\d+)\)/g;
+
+// ── I due marker del roster. Nessuna emoji nel pattern, come in TOKEN_LIMIT_RE:
+// il log arriva da `gh run view --log` come flusso di byte e le emoji sono la
+// parte che si corrompe per prima. Il testo ASCII intorno basta a disambiguare.
+//
+// Il modello preso è quello della PRIMA parentesi (`[gpt-4.1-nano]`), che è la
+// chiave del roster: la seconda (`[GitHub/gpt-4.1-nano]`) è `Provider/modello` e
+// cambia forma da provider a provider. La riga canonica, verbatim dalla run
+// 32169621635:
+//   ❌ [Ministral-3B] Failed (score → -762): [Ministral-3B] HTTP 404:
+const MODEL_PERMANENT_FAIL_RE =
+  /\[([^\]\s]+)\] Failed \(score → -?\d+\): \[[^\]]*\] HTTP (401|402|404|410)(?!\d)/g;
+// «Osservato» = provato, saltato o fallito, per QUALUNQUE causa. È il
+// denominatore, e deve restare più largo del numeratore: un modello che fallisce
+// per timeout è vivo e va contato fra i vivi.
+const MODEL_TOUCHED_RES = [
+  /Falling back to (\S+) \(score/g,
+  /\[([^\]\s]+)\] Skipped\b/g,
+  /\[([^\]\s]+)\] Failed \(score/g,
+];
 const EVERGREEN_SATURATED_RE = /Tutte le keyword evergreen risultano già coperte/;
 const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
 
@@ -549,7 +689,9 @@ const EVERGREEN_NONE_RE = /Nessuna keyword evergreen disponibile/;
  *   gates: Array<{emptied: boolean, recovered: string, before: number, kept: number, status: string, section: string}>,
  *   totalRejections: Array<{before: number, classifierCalls: number, anchorCandidates: number, restored: number, backstop: string|null, keptAfter: number, section: string}>,
  *   evergreenSaturated: boolean, evergreenNone: boolean,
- *   tokenLimitSkips: Array<{model: string, limit: number, estimated: number}>
+ *   tokenLimitSkips: Array<{model: string, limit: number, estimated: number}>,
+ *   modelFailures: Array<{model: string, code: string}>,
+ *   modelsTouched: string[]
  * }}
  */
 export function parseRunLog(text) {
@@ -607,6 +749,16 @@ export function parseRunLog(text) {
       limit: Number(m[2]),
       estimated: Number(m[3]),
     })),
+    // Deduplicati QUI, non da chi aggrega: la stessa riga si ripete decine di
+    // volte per run (27 volte per `gpt-4.1-nano` nella run 32169621635), e un
+    // chiamante che dimenticasse il `Set` conterebbe round-trip invece di
+    // modelli — cioè esattamente la misura che #449 fa crollare per costruzione.
+    modelFailures: [...new Map(
+      [...t.matchAll(MODEL_PERMANENT_FAIL_RE)].map((m) => [`${m[1]} ${m[2]}`, { model: m[1], code: m[2] }]),
+    ).values()],
+    modelsTouched: [...new Set(
+      MODEL_TOUCHED_RES.flatMap((re) => [...t.matchAll(re)].map((m) => m[1])),
+    )].sort(),
   };
 }
 
@@ -713,8 +865,38 @@ export function summarizeRuns(runs) {
   const limitsCrossed = new Set();
   const modelsSkipped = new Set();
 
+  // ── Roster. `rosterRuns` conta TUTTE le run non-dry, non solo quelle che
+  // scendono nella catena: è il denominatore onesto della frase «su quante run
+  // ho misurato», e va scritto nel corpo della issue perché il campione sia
+  // dichiarato invece che sottinteso.
+  let rosterRuns = 0;
+  let probingRuns = 0;
+  const modelsTouched = new Set();
+  const retiredIn = new Map();
+  const billingIn = new Map();
+
   for (const r of runs || []) {
     if (!r || r.dryRun === true) continue;
+
+    rosterRuns++;
+    for (const model of r.modelsTouched || []) modelsTouched.add(model);
+    // ⚠ NESSUN filtro su `conclusion`. Il chiamante non lo passa nemmeno, ed è
+    // deliberato: dopo #449 un roster eroso produce run `success`, e filtrare
+    // sui fallimenti renderebbe questa misura cieca esattamente quando la fix
+    // funziona. Misurato sulla finestra del 2026-08-18: delle 9 run che hanno
+    // percorso la catena, 5 sono uscite `success` e 4 `failure`.
+    const failures = r.modelFailures || [];
+    if (failures.length && (r.modelsTouched || []).length >= ROSTER_MIN_TOUCHED) {
+      probingRuns++;
+      const retired = new Set();
+      const billing = new Set();
+      for (const f of failures) {
+        if (ROSTER_RETIRED_CODES.has(f.code)) retired.add(f.model);
+        else if (ROSTER_BILLING_CODES.has(f.code)) billing.add(f.model);
+      }
+      for (const model of retired) retiredIn.set(model, (retiredIn.get(model) || 0) + 1);
+      for (const model of billing) billingIn.set(model, (billingIn.get(model) || 0) + 1);
+    }
 
     const distinctModels = new Set(r.tokenLimitSkips.map((s) => s.model));
     if (distinctModels.size >= OVERSIZE_MIN_MODELS) {
@@ -784,6 +966,20 @@ export function summarizeRuns(runs) {
       limitsCrossed: [...limitsCrossed].sort((a, b) => a - b),
       distinctModels: modelsSkipped.size,
       models: [...modelsSkipped].sort(),
+    },
+    roster: {
+      runs: rosterRuns,
+      probingRuns,
+      touched: modelsTouched.size,
+      // Ordinati per numero di run in cui il modello è risultato morto, poi per
+      // nome: chi legge la issue vuole vedere per primo ciò che è morto sempre,
+      // non ciò che è morto una volta.
+      retired: [...retiredIn].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([model, runs]) => ({ model, runs })),
+      billing: [...billingIn].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([model, runs]) => ({ model, runs })),
+      retiredRate: modelsTouched.size ? retiredIn.size / modelsTouched.size : 0,
+      billingRate: modelsTouched.size ? billingIn.size / modelsTouched.size : 0,
     },
   };
 }
@@ -880,6 +1076,17 @@ const REMEASURE = {
   commits: 'gh api "repos/$REPO/commits?sha=main&per_page=100" --jq \'.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"\'',
   runs: 'gh run list --repo "$REPO" --workflow=generate-article.yml --limit 200 --json databaseId,conclusion,createdAt'
     + ' && gh run view <id> --repo "$REPO" --log | grep -E "PRESPEND_GATE_|would exceed|Tutte le keyword evergreen|→ section="',
+  // `grep -a` NON è opzionale: questi log si leggono come binari e senza torna
+  // vuoto IN SILENZIO — cioè si conclude «nessun modello morto» per un difetto
+  // dello strumento. Vale anche per il primo grep.
+  roster: 'gh run list --repo "$REPO" --workflow=generate-article.yml --limit 200 --json databaseId,conclusion,status,createdAt'
+    + '\n# per ogni run completata e NON cancellata (qualunque conclusion, anche success):'
+    + '\ngh run view <id> --repo "$REPO" --log > /tmp/run.log'
+    + '\n# numeratore — modelli DISTINTI morti (la chiave è la PRIMA parentesi):'
+    + '\ngrep -aoE \'\\[[^]]+\\] Failed \\(score → -?[0-9]+\\): \\[[^]]*\\] HTTP (401|402|404|410)\' /tmp/run.log \\'
+    + '\n  | sed -E \'s/^\\[([^]]+)\\].*HTTP ([0-9]+)/\\2 \\1/\' | sort -u'
+    + '\n# denominatore — modelli DISTINTI osservati (provati, saltati o falliti):'
+    + '\ngrep -aoE \'(Falling back to [^ ]+ \\(score|\\[[^]]+\\] (Skipped|Failed \\(score))\' /tmp/run.log | sort -u',
   corpus: '# rilegge il corpus del checkout e rifà il conto delle coppie, per finestra:\n'
     + 'node -e \'const{findDuplicateTopicPairs,collectCorpus}=await import("./scripts/ci/scan-generation-health.mjs");'
     + 'for(const w of [15,30,60,120,180,240,360]){const c=collectCorpus(process.cwd());'
@@ -995,9 +1202,12 @@ export const CONDITIONS = [
           '(17 articoli il 2026-08-09); da 84% in su è andata a secco. `frontaliere` è a 0 su 62 run in tutte',
           'le finestre. La soglia sta quindi 14 punti sopra l\'ultima quota "sana" osservata e 70 sopra il lato sano.',
           '',
-          'Punto da cui guardare: `generator/scripts/lib/evergreen-topic-generator.mjs` (la costruzione del pool —',
-          '**è `identical` nel `loop-sync-manifest.json`, quindi la fix va fatta SUL SITO e scende al mirror**),',
-          'e `generator/scripts/lib/article-topic-selector.mjs` (`adapted`: qui) per la selezione e le strike.',
+          'Punto da cui guardare: `generator/scripts/lib/evergreen-topic-generator.mjs`, la costruzione del pool.',
+          'È `identical` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: `mirror-articles-engine.yml`',
+          'filtra su `packages/articles/engine/**` (più `index.ts` e `articleSections.ts`) e `mirror-articles-corpus.yml`',
+          'su `content/`, dispatch-only. **La fix va quindi applicata a MANO su entrambi i repo, QUESTO PER PRIMO** — è',
+          'qui che la generazione gira, e una fix solo sul sito lascia il difetto vivo con la CI verde di entrambi.',
+          'Poi `generator/scripts/lib/article-topic-selector.mjs` (`adapted`: qui) per la selezione e le strike.',
           'La domanda concreta è se il pool della sezione abbia ancora keyword non coperte, o se vada allargato.',
         ].join('\n') + footer(REMEASURE.runs),
       };
@@ -1162,10 +1372,102 @@ export const CONDITIONS = [
           '',
           'Punto da cui guardare: `generator/scripts/lib/ai-models.mjs:4250-4270` emette il salto e legge il tetto',
           'da `MODEL_MAX_REQUEST_TOKENS` / `_learnedRequestTokenLimits` / `DEFAULT_REQUEST_TOKENS_BY_PROVIDER`.',
-          '**Il file è `identical` nel `loop-sync-manifest.json`: una fix lì va fatta SUL SITO** e scende al',
-          'mirror. Ciò che si può ridurre da questo lato è la TAGLIA del prompt, che si costruisce in',
+          'Il file è `identical` nel `loop-sync-manifest.json`, **ma nessun mirror porta `generator/`**: una fix lì',
+          'va applicata a MANO su entrambi i repo, **questo per primo**, perché è qui che la generazione gira.',
+          'Ciò che si può ridurre da questo lato soltanto è la TAGLIA del prompt, che si costruisce in',
           '`generator/scripts/create-article.mjs` (`adapted`).',
         ].join('\n') + footer(REMEASURE.runs),
+      };
+    },
+  },
+
+  {
+    id: 'roster-erosion',
+    scope: 'global',
+    priority: 2,
+    // Il discriminante sta PRIMO, e non è stile: la deduplica di
+    // `createGithubIssue` taglia a 60 caratteri (DEDUP_TITLE_PREFIX_LEN), quindi
+    // un discriminante in coda verrebbe buttato e due erosioni diverse
+    // collasserebbero sulla stessa issue — la seconda non si aprirebbe mai.
+    // I primi 60 caratteri di questo titolo sono
+    // «Roster LLM invecchiato: modelli ritirati dal provider (watch», che non
+    // collide con nessun altro titolo di questa tabella.
+    //
+    // CHIUSURA: la richiude `resolveGithubIssue` in questa stessa passata, con
+    // questo stesso titolo (vedi `reconcile`). Sta deliberatamente FUORI dal
+    // `TITLE_RE` di `close-recovered-failure-issues.mjs`
+    // (/^(?:Workflow|Crawler|CI) Failure: /) e da `MONITOR_FAILURE_TITLE_RE` di
+    // `scripts/lib/workflow-scope-detect.mjs`: due closer sullo stesso titolo
+    // con due criteri diversi sono un modo lento di scoprire che uno dei due
+    // sbagliava.
+    title: () => 'Roster LLM invecchiato: modelli ritirati dal provider (watchdog generazione)',
+    evaluate(m) {
+      if (!m.runs.available) return { available: false };
+      const r = m.runs.roster;
+      if (r.probingRuns < ROSTER_MIN_PROBING_RUNS) {
+        // «La cascata non è scesa» non è «il roster è sano». Non aprire — e
+        // nemmeno chiudere una issue aperta su una finestra che era misurabile.
+        return {
+          available: false,
+          reason: `${r.probingRuns} run che percorrono la catena < ${ROSTER_MIN_PROBING_RUNS} (su ${r.runs} run non-dry lette)`,
+        };
+      }
+      if (r.touched < ROSTER_MIN_TOUCHED) {
+        return { available: false, reason: `${r.touched} modelli osservati < ${ROSTER_MIN_TOUCHED}: denominatore troppo piccolo` };
+      }
+      if (r.retiredRate < ROSTER_RETIRED_RATE) return { firing: false };
+
+      const list = (rows) => (rows.length
+        ? rows.slice(0, 25).map((x) => `\`${x.model}\` (${x.runs})`).join(', ')
+          + (rows.length > 25 ? `, … e altri ${rows.length - 25}` : '')
+        : '—');
+      return {
+        firing: true,
+        body: [
+          `**${r.retired.length} modelli distinti su ${r.touched} osservati**`,
+          `(${(r.retiredRate * 100).toFixed(1)}%) hanno risposto con un errore PERMANENTE di endpoint`,
+          '(401 credenziale respinta, 404 modello ritirato, 410 gone) nella finestra di',
+          `${m.runs.spanHours.toFixed(1)}h. Il roster dei modelli free è invecchiato: non è un guasto`,
+          'della pipeline, è un catalogo che il provider ha smesso di servire.',
+          '',
+          `- Soglia: ${(ROSTER_RETIRED_RATE * 100).toFixed(0)}% dei modelli osservati.`,
+          `- **Campione dichiarato**: ${r.runs} run non-dry lette, di cui **${r.probingRuns}** hanno percorso`,
+          `  la catena abbastanza da vedere il fondo del roster (almeno ${ROSTER_MIN_TOUCHED} modelli osservati).`,
+          '  Le altre non sono evidenza: la testa della catena ha risposto e il fondo non è stato provato.',
+          `- Modelli ritirati, col numero di run in cui lo sono risultati: ${list(r.retired)}.`,
+          `- **Credito esaurito (402), che NON entra nel predicato**: ${r.billing.length} modelli`,
+          `  (${(r.billingRate * 100).toFixed(1)}% degli osservati) — ${list(r.billing)}.`,
+          '',
+          'Il numero conta i modelli DISTINTI, non i round-trip. È la scelta che rende questa misura',
+          'sopravvissuta al silenziamento del 404 (corpus #449): silenziare cambia quante volte chiami un',
+          'modello morto, non quanti ne sono morti. Un contatore sui round-trip sarebbe crollato da ~163 a',
+          '~24 mostrando una guarigione che non è avvenuta.',
+          '',
+          '**Cosa NON va fatto**: togliere questi modelli dal roster. È un vincolo esplicito del',
+          'proprietario in nanako#380 — i modelli in 402 e in 404 restano nel registro DECLASSATI, perché',
+          'rimuoverli rende rosso `tests/local-llm-fallback.test.ts` in modo deterministico (nanako#362,',
+          'quel test legge lo stato di quota reale) e perché un endpoint che tornasse dev\'essere ripescato',
+          'dalla discovery da solo. Silenziare non è rimuovere.',
+          '',
+          'Cosa va fatto invece, in questo ordine:',
+          '',
+          '1. **Verificare quali dei modelli elencati sono davvero ritirati** e quali sono un 404 di',
+          '   routing, interrogando il catalogo del provider. Un 404 ripetuto in tutte le run di questa',
+          '   finestra è ruggine; uno che compare in una run sola può essere un instradamento momentaneo.',
+          '2. **Aggiungere modelli VIVI alla catena**, che è la riparazione vera: la catena si accorcia',
+          '   mentre il carico non cala, e sotto una certa lunghezza utile ogni run scende fino in fondo —',
+          '   che è la ragione per cui questa condizione si accende insieme ai wedge di generazione.',
+          '3. Il 402 è una decisione di spesa, non di codice, e ha una vita diversa: si ripara pagando e',
+          '   torna da solo alla riapertura della finestra di fatturazione. Per questo è riportato qui',
+          '   sopra come dimensione e non fa parte del predicato — misurato, quella classe non ha un lato',
+          '   sano nella finestra e una soglia su di essa sarebbe accesa per sempre.',
+          '',
+          'La catena si costruisce in `generator/scripts/lib/ai-models.mjs`, che è `identical` nel',
+          '`loop-sync-manifest.json` e non sta sotto nessun prefisso mirrorato: una fix lì va applicata a',
+          'ENTRAMBI i repo, corpus per primo. Questa condizione, invece, OSSERVA e basta: non tocca il',
+          'roster, non disabilita niente, e si richiude da sola alla prima passata in cui la quota rientra',
+          'sotto la soglia.',
+        ].join('\n') + footer(REMEASURE.roster),
       };
     },
   },
@@ -1532,6 +1834,7 @@ export async function collectRunLogs(repo, { maxRuns, lookbackHours, concurrency
     spanHours: times.length > 1 ? (Math.max(...times) - Math.min(...times)) / 3_600_000 : 0,
     bySection: summary.bySection,
     oversize: summary.oversize,
+    roster: summary.roster,
   };
 }
 

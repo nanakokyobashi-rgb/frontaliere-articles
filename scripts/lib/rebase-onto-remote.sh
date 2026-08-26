@@ -251,12 +251,25 @@ EOF
       is_per_article "$f" || continue
       if git checkout --theirs -- "$f" 2>/dev/null; then
         git add -- "$f"
-      else
+        echo "resolved per-article conflict by taking the rebased commit: $f"
+      elif git checkout --ours -- "$f" 2>/dev/null; then
         # Nessuna copia dal lato rigiocato (upstream lo ha aggiunto e noi no):
         # tenere quella di upstream e' la stessa decisione vista dall'altro lato.
-        git checkout --ours -- "$f" 2>/dev/null && git add -- "$f"
+        git add -- "$f"
+        echo "resolved per-article conflict by taking the rebased commit: $f"
+      else
+        # Ne' --theirs ne' --ours ha una copia da prendere: una forma degenere
+        # di conflitto (es. "entrambi cancellato"), non un vero add/add. Prima
+        # di questo `elif`, questo ramo era un `else` che finiva con
+        # `git checkout --ours ... && git add ...`: sotto `set -e`, un comando
+        # che fallisce NON e' l'ultimo di una lista `&&` (l'ultimo e' quello a
+        # destra, mai eseguito se il primo fallisce), quindi la sua uscita non
+        # innesca errexit. Il file restava non risolto ma lo script continuava,
+        # stampando comunque "resolved" — e solo il controllo progress_marker
+        # al giro successivo lo intercettava, dopo un pass sprecato.
+        echo "::warning::rebase conflict on '$f' has neither a --theirs nor an --ours copy to take — aborting rather than leaving it unresolved"
+        abort_and_fail || exit 1
       fi
-      echo "resolved per-article conflict by taking the rebased commit: $f"
     done <<EOF
 $conflicted
 EOF

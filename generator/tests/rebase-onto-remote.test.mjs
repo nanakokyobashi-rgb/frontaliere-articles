@@ -236,6 +236,62 @@ test('a conflict outside the allowlist aborts and leaves the tree untouched', ()
   }
 });
 
+test('a per-article path with neither a --theirs nor an --ours copy aborts on the first pass (#347)', () => {
+  // The degenerate conflict shape #329's fix never had a real fixture for: a
+  // path git flags as unmerged (present at stage 1) but with NEITHER a stage 2
+  // (--ours) NOR a stage 3 (--theirs) entry to take — e.g. a "both deleted"
+  // conflict, not the add/add this branch is written for. Constructing it
+  // through ordinary commits isn't possible: git auto-resolves a plain
+  // delete/delete with no conflict at all, so the two stages are stripped here
+  // with index plumbing to pin the exact state the resolution loop must
+  // handle, once git itself has produced it.
+  const w = makeWorld();
+  const PER_ARTICLE = 'content/blog-body/it/degenerate.ts';
+  try {
+    write(w.work, PER_ARTICLE, 'base\n');
+    commitAll(w.work, 'seed a per-article file');
+    git(w.work, 'push', '-q', w.upstream, 'HEAD:main');
+    const baseBlob = git(w.work, 'rev-parse', `HEAD:${PER_ARTICLE}`).trim();
+
+    landUpstream(w, [[PER_ARTICLE, 'upstream version\n', 'concurrent run rewrites it']]);
+
+    write(w.work, PER_ARTICLE, 'mine version\n');
+    commitAll(w.work, 'Generate blog article (frontaliere)');
+    const before = headSha(w.work);
+
+    // Drive the real conflict, then strip stage 2/3 down to stage 1 only —
+    // the on-disk shape of a "both deleted" conflict (verified separately:
+    // `git status` reports it as `DD`, and `git checkout --ours/--theirs`
+    // both fail with "does not have {our,their} version").
+    try {
+      git(w.work, 'pull', '--rebase', w.upstream, 'main');
+    } catch { /* conflict expected */ }
+    assert.ok(rebaseInProgress(w.work), 'setup failed to produce the conflict this test needs');
+    git(w.work, 'rm', '--cached', '-q', '--', PER_ARTICLE);
+    execFileSync('git', ['update-index', '--index-info'], {
+      cwd: w.work,
+      env: GIT_ENV,
+      input: `100644 ${baseBlob} 1\t${PER_ARTICLE}\n`,
+    });
+    assert.match(git(w.work, 'status', '--porcelain', '--', PER_ARTICLE), /^DD /);
+
+    const { code, out } = runHelper(w.work, w.upstream, BOOKKEEPING, '--take-theirs', 'content/blog-body/');
+    assert.equal(code, 1, 'a conflict with neither side to take must fail, not silently proceed');
+    assert.doesNotMatch(
+      out,
+      /resolved per-article conflict/,
+      'must not claim to have resolved a file it never staged — that false claim is the bug: ' +
+        `it hid the fact that nothing was resolved. Output:\n${out}`,
+    );
+    assert.match(out, /neither a --theirs nor an --ours copy/);
+    assert.equal(headSha(w.work), before, 'HEAD must be untouched after the abort');
+    assert.equal(git(w.work, 'status', '--porcelain').trim(), '', 'the working tree must be left clean');
+    assert.ok(!rebaseInProgress(w.work), 'no rebase may be left in progress');
+  } finally {
+    w.cleanup();
+  }
+});
+
 test('a plain divergence with no conflict rebases cleanly', () => {
   const w = makeWorld();
   try {
@@ -311,6 +367,76 @@ test('generate-article.yml declares the journalist image catalog as bookkeeping'
   // rewrite that silently drops one would reopen issue #76 without failing here.
   assert.ok(allowlist.includes(BOOKKEEPING), `${BOOKKEEPING} must stay on the allowlist (issue #76)`);
   assert.ok(allowlist.includes('data/blog-images-used.json'), 'data/blog-images-used.json must stay on the allowlist');
+});
+
+test('generate-article.yml declares every sourceUrlsFile/sourceQuotaFile ledger as bookkeeping (#496)', () => {
+  // The expected set is DERIVED from ARTICLE_SECTION_CONFIGS in create-article.mjs,
+  // not copied here — same reasoning as the registries test below: a section
+  // whose sourceUrlsFile/sourceQuotaFile isn't declared here dies the same way
+  // #225 did, just on a different path, and a hardcoded list wouldn't catch a
+  // new section adding one. Both keys are pulled from the same regex pass
+  // because they're staged in the exact same git-add block in create-article.mjs
+  // (SOURCE_QUOTA_FILE and SOURCE_URLS_FILE) — same lifecycle, same risk.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const src = readFileSync(path.resolve(HERE, '../scripts/create-article.mjs'), 'utf8');
+  const expected = [
+    ...src.matchAll(/sourceUrlsFile:\s*'([^']+)'/g),
+    ...src.matchAll(/sourceQuotaFile:\s*'([^']+)'/g),
+  ].map((m) => m[1]);
+  assert.ok(expected.length >= 4, `expected at least 4 sourceUrlsFile/sourceQuotaFile entries in create-article.mjs, found: ${JSON.stringify(expected)}`);
+  for (const p of expected) {
+    assert.ok(
+      allowlist.includes(p),
+      `${p} is a saveSourceUrls()/saveSourceQuotaState() ledger — loaded whole and rewritten whole every run by `
+      + `create-article.mjs, exactly like ${IMAGE_CATALOG} above — but is missing from the bookkeeping allowlist `
+      + `in generate-article.yml. A conflict there aborts the rebase and the generated article is lost (issue #496). `
+      + `Declared: ${JSON.stringify(allowlist)}`,
+    );
+  }
+});
+
+test('generate-article.yml declares the topic-candidates consumed tracker as bookkeeping (#496)', () => {
+  // CONSUMED_PATH is not per-section like the two ledgers above — it's one
+  // shared tracker imported (as CONSUMED_TRACKER_PATH) into create-article.mjs
+  // from article-topic-selector.mjs, so it's derived from its own source of
+  // truth rather than folded into the sourceUrlsFile/sourceQuotaFile regex.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const selectorSrc = readFileSync(path.resolve(HERE, '../scripts/lib/article-topic-selector.mjs'), 'utf8');
+  const m = /CONSUMED_PATH\s*=\s*'([^']+)'/.exec(selectorSrc);
+  assert.ok(m, 'could not find CONSUMED_PATH in article-topic-selector.mjs');
+  const consumedPath = m[1];
+  assert.ok(
+    allowlist.includes(consumedPath),
+    `${consumedPath} is the persistConsumedTracker() tracker — loaded whole and rewritten whole every run `
+    + `(FIFO-capped in appendConsumedId), staged in the same git-add block as SOURCE_URLS_FILE in create-article.mjs `
+    + `— but is missing from the bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase `
+    + `and the generated article is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+  );
+});
+
+test('generate-article.yml declares the quota-state ledger as bookkeeping (#496)', () => {
+  // QUOTA_STATE_PATH is a fourth sibling in the same class as the two ledgers
+  // and the consumed tracker above, found during this issue's own review: it
+  // is one file SHARED across both sections (no swiss- variant), read whole
+  // by loadQuotaState() and rewritten whole by saveQuotaState() — which
+  // create-article.mjs calls after every successful publish. Derived from its
+  // own source of truth (quotaController.mjs), not copied, for the same
+  // reason as the sourceUrlsFile/sourceQuotaFile regex above.
+  const allowlist = allowlistFromWorkflow(readFileSync(WORKFLOW, 'utf8'));
+  const quotaControllerSrc = readFileSync(
+    path.resolve(HERE, '../scripts/lib/scheduler/quotaController.mjs'),
+    'utf8',
+  );
+  const m = /QUOTA_STATE_PATH\s*=\s*'([^']+)'/.exec(quotaControllerSrc);
+  assert.ok(m, 'could not find QUOTA_STATE_PATH in quotaController.mjs');
+  const quotaStatePath = m[1];
+  assert.ok(
+    allowlist.includes(quotaStatePath),
+    `${quotaStatePath} is the saveQuotaState() ledger — loaded whole and rewritten whole after every successful `
+    + `publish (create-article.mjs calls _saveQuotaState(_incrementCounter(...))) — but is missing from the `
+    + `bookkeeping allowlist in generate-article.yml. A conflict there aborts the rebase and the generated article `
+    + `is lost (issue #496). Declared: ${JSON.stringify(allowlist)}`,
+  );
 });
 
 test('a conflict on the journalist image catalog resolves instead of aborting', () => {

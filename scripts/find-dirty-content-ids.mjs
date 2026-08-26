@@ -34,6 +34,14 @@
 // e' la stessa classe di falso negativo di `grep` senza `-a`: uno strumento che
 // risponde «zero» quando la risposta onesta e' «non lo so».
 //
+// TRE SPELLING, NON DUE (issue #345). La forma escapata di sopra copre i C0
+// che sono SEMPRE illegali (`\u00XX`, `\b`, `\f`). TAB (0x09) e' legale in
+// XML/JSON, quindi non entra li' — ma quando TAB stesso e' il marker di un
+// carattere perduto, la sua forma escapata resta `\t` seguito dalla coda
+// numerica, indistinguibile da un a-capo escapato solo dal CODICE carattere.
+// Vedi «LA TERZA SPELLING» piu' sotto per il criterio (ancorato al residuo,
+// non al codice) e la misura che lo giustifica.
+//
 // COSA CERCA, PASSO 2 — il filtro sulla PAGINA LIVE, e perche' esiste
 // (issue #73). Il passo 1 da solo NON CONVERGE. Ripubblicare una pagina non
 // riscrive `content/` — il corpus lo scrive solo il generatore, e i 592 byte
@@ -246,15 +254,98 @@ export function decodeEscapedControlChars(text) {
   });
 }
 
-/** Quante occorrenze C0 porta `text`, nelle DUE spelling messe insieme. */
+// ── LA TERZA SPELLING: il TAB escapato incollato a una cifra (issue #345) ───
+//
+// TAB (0x09) e' uno dei tre C0 che XML 1.0 e JSON ammettono, quindi
+// `isInvalidControlCode` lo esclude di proposito — vedi la guardia in
+// `ESCAPED_C0_RX` e il test che la difende ("NON conta le forme escapate di
+// TAB, LF e CR"). Un oracolo che contasse OGNI `\t` escapato marcherebbe
+// sporco ogni file con un a-capo escapato legittimo, che nel corpus e' la
+// norma. Per questo il criterio qui non e' sul CODICE carattere ma sul
+// RESIDUO, come per il canale residuo di repair-mangled-chars.mjs: la stessa
+// firma (marker + coda numerica) delle altre due spelling gia' coperte, dove
+// pero' il marker e' gia' nella sua forma "legale" e cio' che lo tradisce e'
+// solo la cifra incollata subito dopo.
+//
+// Misurato sul corpus reale (2026-08-14): OGNI occorrenza di `\+t` (uno o piu'
+// backslash seguiti da "t") dentro `content/` e' seguita da una cifra — 7
+// file, 7 occorrenze, zero file con un `\t` isolato o seguito da altro carattere:
+//
+//   grep -roP '\\+t[0-9]' content/ | wc -l   →  7
+//   grep -roP '\\+t[^0-9]' content/ | wc -l  →  0
+//
+// Cioe' oggi non esiste un solo a-capo escapato legittimo da salvare: il
+// criterio "backslash-t incollato a una cifra" e' gia' esatto senza bisogno di
+// ancorarlo anche a una lettera adiacente (tre delle sette occorrenze, come
+// `Cos\'\\t3e`, la portano; le altre quattro, come `since \\t2 applied?`,
+// hanno spazi da entrambi i lati — la stessa forma osservata nell'issue).
+const ESCAPED_TAB_RESIDUE_RX = /\\+t(?=[0-9])/g;
+
+/** Ogni residuo di TAB escapato in `text`, come `{ index, spelling }`. */
+export function findEscapedTabResidues(text) {
+  const found = [];
+  if (typeof text !== 'string') return found;
+  for (const m of text.matchAll(ESCAPED_TAB_RESIDUE_RX)) found.push({ index: m.index, spelling: m[0] });
+  return found;
+}
+
+/**
+ * Le stringhe che la terza spelling lascia SULLA PAGINA, stesso ruolo di
+ * `residuesInText` ma per il residuo di TAB escapato (review PR #352, round 3:
+ * un candidato la cui UNICA sporcizia e' questa spelling tornava `residues: []`,
+ * perche' `residuesInText` guarda solo il byte C0 grezzo — mai questa forma,
+ * che non e' MAI un byte grezzo per costruzione).
+ *
+ * Qui il marker (`\t`, una o piu' profondita' di backslash) e' gia' nella sua
+ * forma legale: cio' che tradisce il residuo e' solo la cifra incollata dopo
+ * (vedi il commento sopra `ESCAPED_TAB_RESIDUE_RX`). Si toglie percio' SOLO il
+ * marker — non un intero token di caratteri di controllo come fa
+ * `residuesInText` — e si guarda il token che resta a cavallo del punto in cui
+ * il marker stava: se mescola lettere e cifre e' un residuo vero (`Cos'\t3e`
+ * diventa `Cos'3e`, residuo `3e`); se la cifra resta isolata fra spazi
+ * (`since \t2 applied?` diventa `since 2 applied?`) non c'e' una parola
+ * visibilmente rotta da cercare, e si scarta con lo stesso criterio di
+ * `residuesInText`.
+ */
+export function residuesFromEscapedTabResidues(text) {
+  const out = new Set();
+  if (typeof text !== 'string') return out;
+  const TOKEN = /[A-Za-zÀ-ɏ0-9]+/g;
+  const HAS_LETTER = /[A-Za-zÀ-ɏ]/;
+  const HAS_DIGIT = /[0-9]/;
+  for (const m of text.matchAll(ESCAPED_TAB_RESIDUE_RX)) {
+    const senzaMarker = text.slice(0, m.index) + text.slice(m.index + m[0].length);
+    TOKEN.lastIndex = 0;
+    let tok;
+    while ((tok = TOKEN.exec(senzaMarker)) !== null) {
+      const start = tok.index;
+      const end = start + tok[0].length;
+      if (start > m.index) break; // i token dopo il punto di rimozione non toccano il marker
+      if (end < m.index) continue;
+      if (HAS_LETTER.test(tok[0]) && HAS_DIGIT.test(tok[0])) out.add(tok[0]);
+      break;
+    }
+  }
+  return out;
+}
+
+/** `residuesInText` piu' `residuesFromEscapedTabResidues`: tutti i residui che una qualunque delle spelling copre. */
+function allResidues(text) {
+  const out = residuesInText(text);
+  for (const r of residuesFromEscapedTabResidues(text)) out.add(r);
+  return out;
+}
+
+/** Quante occorrenze C0 porta `text`, nelle TRE spelling messe insieme (issue #345: il residuo di TAB escapato si somma alle due gia' coperte). */
 export function countControlCharsBothSpellings(text) {
-  return findControlChars(text).length + findEscapedControlChars(text).length;
+  return findControlChars(text).length + findEscapedControlChars(text).length + findEscapedTabResidues(text).length;
 }
 
 /**
  * Id sporchi in un chunk meta (content/blog-meta-<locale>.ts): ogni riga la
  * cui chiave nomina un articolo E porta un C0 illegale, in una qualunque delle
- * due spelling. I chunk meta esistono solo per la sezione frontaliere.
+ * spelling coperte da `countControlCharsBothSpellings`. I chunk meta esistono
+ * solo per la sezione frontaliere.
  */
 export function dirtyIdsInMetaText(text) {
   const ids = new Set();
@@ -519,6 +610,26 @@ function seoTextForId(text, section, id) {
 // stabilito che si controlla di nuovo dove il marker non c'e' piu'. Zero
 // nuovi falsi positivi possibili: se la stringa non e' un residuo vero, non e'
 // mai entrata nell'insieme da propagare.
+/**
+ * Vero se `rel` e' gia' una fonte di `already`, SOTTO QUALUNQUE etichetta
+ * (` (c0 escapato)`, ` (faq-placeholder)`, ` (residuo propagato)`...).
+ *
+ * Prima di questa guardia il confronto era un'uguaglianza esatta con la
+ * stringa nuda `rel`, che non intercetta mai una fonte gia' presente con un
+ * suffisso: un file la cui unica sporcizia e' la forma escapata entra in
+ * `sources` come `"<rel> (c0 escapato)"`, e senza questa guardia
+ * `propagateOrphanResidues` lo ri-marca UNA SECONDA VOLTA come
+ * `"<rel> (residuo propagato)"` — lo stesso file due volte nello stesso
+ * elenco. Esposto dal vivo aggiungendo i residui della terza spelling
+ * (review PR #352): `permessi-dimora-diversi-opinioni` e
+ * `cpi-caso-hospita-rivalutazione-periti` propagavano su se' stessi prima di
+ * questa guardia — misurato con `generator/tests/seo-digit-residue-guard.test.mjs`.
+ */
+function alreadyCovers(already, rel) {
+  for (const s of already) if (s === rel || s.startsWith(`${rel} (`)) return true;
+  return false;
+}
+
 function propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles) {
   const seeds = [...found.entries()].filter(([, e]) => e.residues.length > 0);
   for (const [, entry] of seeds) {
@@ -528,7 +639,7 @@ function propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles)
     for (const bf of bodyFiles) {
       if (bf.section !== section || bf.id !== id) continue;
       const rel = path.relative(rootDir, bf.file);
-      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      if (alreadyCovers(already, rel)) continue;
       if (residues.some((r) => bf.text.includes(r))) {
         mark(found, section, id, `${rel} (residuo propagato)`, []);
         already.add(`${rel} (residuo propagato)`);
@@ -536,7 +647,7 @@ function propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles)
     }
     for (const mf of metaFiles) {
       const rel = path.relative(rootDir, mf.file);
-      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      if (alreadyCovers(already, rel)) continue;
       const scoped = metaTextForId(mf.text, id);
       if (scoped && residues.some((r) => scoped.includes(r))) {
         mark(found, section, id, `${rel} (residuo propagato)`, []);
@@ -545,7 +656,7 @@ function propagateOrphanResidues(found, rootDir, bodyFiles, metaFiles, seoFiles)
     }
     for (const sf of seoFiles) {
       const rel = path.relative(rootDir, sf.file);
-      if (already.has(rel) || already.has(`${rel} (residuo propagato)`)) continue;
+      if (alreadyCovers(already, rel)) continue;
       const scoped = seoTextForId(sf.text, section, id);
       if (scoped && residues.some((r) => scoped.includes(r))) {
         mark(found, section, id, `${rel} (residuo propagato)`, []);
@@ -578,7 +689,10 @@ export function scanContentForDirtyIds(rootDir) {
    */
   const conta = (text, rel) => {
     const grezze = findControlChars(text).length;
-    const escapate = findEscapedControlChars(text).length;
+    // Il residuo di TAB escapato (issue #345) e' un'ALTRA forma escapata, non
+    // un canale a parte: si somma qui cosi' `totalEscapedOccurrences` resta
+    // "tutto cio' che il byte-scan non vede", la sua definizione dichiarata.
+    const escapate = findEscapedControlChars(text).length + findEscapedTabResidues(text).length;
     return {
       totale: grezze + escapate,
       escapate,
@@ -613,7 +727,7 @@ export function scanContentForDirtyIds(rootDir) {
         // pagina lo perde alla prima ripubblicazione (`sanitizeHtmlDocument`
         // pass 2 lo toglie in uscita), quindi il candidato esce dalla coda da
         // solo. La riparazione del testo e' del canale testimone, non di qui.
-        mark(found, section, id, c.etichetta, residuesInText(text));
+        mark(found, section, id, c.etichetta, allResidues(text));
       }
       // Il segnaposto FAQ (sopra) e' indipendente dal C0: si controlla sempre,
       // non solo sui file gia' segnati sporchi da un byte di controllo.
@@ -637,7 +751,7 @@ export function scanContentForDirtyIds(rootDir) {
     totalFiles += 1;
     totalOccurrences += c.totale;
     totalEscapedOccurrences += c.escapate;
-    const metaResidues = residuesInText(text);
+    const metaResidues = allResidues(text);
     for (const id of dirtyIdsInMetaText(text)) mark(found, 'frontaliere', id, c.etichetta, metaResidues);
   }
 
@@ -650,7 +764,7 @@ export function scanContentForDirtyIds(rootDir) {
     totalFiles += 1;
     totalOccurrences += c.totale;
     totalEscapedOccurrences += c.escapate;
-    const seoResidues = residuesInText(text);
+    const seoResidues = allResidues(text);
     for (const { section, id } of dirtyIdsInSeoText(text)) mark(found, section, id, c.etichetta, seoResidues);
   }
 

@@ -20,7 +20,7 @@
  * SOLO i matcher che le suite portate usano davvero (censiti sul sorgente del
  * sito, 2026-08-08): toBe, toEqual, toContain, toBeNaN, toMatch, toBeCloseTo,
  * toBeTruthy, toBeDefined, toBeGreaterThan(OrEqual), toBeLessThan,
- * toHaveLength, e `.not` per TUTTI i matcher. (Questa riga diceva «`.not` per
+ * toHaveLength, toThrow, e `.not` per TUTTI i matcher. (Questa riga diceva «`.not` per
  * toBe/toContain» ed era piu' restrittiva dell'implementazione: `.not` non e'
  * cablato per matcher, ricostruisce l'oggetto con `negated: true` e ogni
  * matcher passa da `maybe()`. Verificato portando article-sanitizers, che usa
@@ -117,6 +117,27 @@ function makeMatchers(actual, message, negated) {
     toHaveLength(n) {
       maybe(actual != null && actual.length === n,
         `to have length ${n} (got ${actual == null ? actual : actual.length})`);
+    },
+    toThrow(expected) {
+      // `actual` è la funzione da invocare, non il valore da confrontare —
+      // come vitest, a differenza di ogni altro matcher qui sopra.
+      let threw = false;
+      let error;
+      try {
+        actual();
+      } catch (e) {
+        threw = true;
+        error = e;
+      }
+      if (expected === undefined) {
+        maybe(threw, 'to throw');
+        return;
+      }
+      const msg = error != null ? (error.message !== undefined ? error.message : String(error)) : '';
+      const matches = threw && (expected instanceof RegExp ? expected.test(msg) : msg.includes(expected));
+      maybe(matches, threw
+        ? `to throw matching ${describeValue(expected)} (got: ${describeValue(msg)})`
+        : `to throw matching ${describeValue(expected)} (did not throw)`);
     },
   };
   if (!negated) {

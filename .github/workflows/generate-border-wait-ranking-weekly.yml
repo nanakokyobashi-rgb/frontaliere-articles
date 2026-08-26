@@ -48,6 +48,7 @@ on:
       - '.github/workflows/generate-border-wait-ranking-weekly.yml'
       - 'generator/scripts/generate-border-wait-ranking-article.mjs'
       - 'generator/scripts/refresh-border-wait-window.mjs'
+      - 'generator/scripts/lib/rewire-fetch.mjs'
       - 'generator/scripts/lib/border-wait-ranking.mjs'
       - 'generator/scripts/lib/border-wait-ranking-content.mjs'
   workflow_dispatch:
@@ -111,7 +112,13 @@ jobs:
         run: bash scripts/lib/npm-ci-retry.sh --no-audit --no-fund --ignore-scripts
 
       # Hard gate, deliberately before anything else: no window, no article.
+      # Push self-tests are always dry: GitHub Actions IPs get HTTP 403 from
+      # Cloudflare on the public CDN, so copy the offline fixture rather than
+      # fail the PR. Scheduled / dispatch writes still fail hard on 403 — a
+      # ranking article from a fixture must not land on the evergreen URL.
       - name: Fetch the border-wait ranking window
+        env:
+          REWIRE_FIXTURE_ON_403: ${{ steps.mode.outputs.dry == 'true' && '1' || '' }}
         run: npm run refresh:border-wait-window
 
       # tsx, not node: this entry point reaches ../build-plugins/borderWaitData.ts

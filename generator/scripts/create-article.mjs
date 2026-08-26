@@ -60,12 +60,78 @@
  * ══════════════════════════════════════════════════════════════
  */
 
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, copyFileSync, existsSync, unlinkSync, renameSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createInterface } from 'node:readline';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScores, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens } from './lib/ai-models.mjs';
+import { callLLM as _aiCallLLM, AI_MODELS, DEFAULT_CHAIN, getPreferredModel, isLocalLlmEnabled, getStats as getAiStats, initScoreStore, flushScoresBeforeExit, recordModelContentFailure, recordModelContentSuccess, isQuotaExhaustedError, printRunSummary, estimateRequestTokens, getDeclaredRequestTokenLimit, isModelAvailable, isPerRunCallCapReached } from './lib/ai-models.mjs';
+
+// ── Il modello preferito per la SOLA generazione del corpo ──────────────────
+//
+// Decisione del proprietario (issue #379): «Porta Haiku al primo livello — lo
+// paghiamo e funziona», e «solo dove serve davvero, nei punti critici e dove il
+// modello free non e' affidabile». Questo e' quel punto: la generazione del
+// corpo italiano e' l'unica chiamata i cui gate (fedelta' alla fonte, tassi
+// chiave, lunghezza minima) bocciano davvero l'output dei modelli free.
+//
+// `prefer` sposta l'id in testa DOPO l'ordinamento per punteggio, quindi vince
+// malgrado lo score storico (haiku e' a -666 nel ledger, vedi il commento di
+// applyPreferOverride in ai-models.mjs). E' per-chiamata apposta: la quota del
+// piano Max e' CONDIVISA con pr-review-loop.yml e issue-fix.yml, e una
+// preferenza globale la brucerebbe affamando il ciclo dei merge.
+//
+// NON e' passata a: traduzioni, meta, FAQ, classificazione, selezione headline,
+// riformulazione del titolo — li' i modelli free funzionano e i gate lo
+// confermano. E nemmeno al fact-check: quello e' un consenso fra verificatori
+// INDIPENDENTI, e mandarli tutti sullo stesso modello collasserebbe
+// l'indipendenza che il guard «local/fallback cannot self-verify» difende.
+const PREFERRED_GENERATION_MODELS = [AI_MODELS.CLAUDE_CLI_HAIKU];
+
+/**
+ * True se almeno un modello preferito e' DISPONIBILE ORA e non dichiara un cap
+ * di token di input.
+ *
+ * Le due condizioni sono entrambe necessarie, e per ragioni diverse.
+ *
+ * `getDeclaredRequestTokenLimit` va calcolata sulla stessa funzione che usa il
+ * pre-flight di callLLM: se domani haiku acquisisce un cap — a mano in
+ * MODEL_MAX_REQUEST_TOKENS, o imparato a runtime da un 413 via
+ * `_learnedRequestTokenLimits` — questa torna false da sola e il prompt
+ * riprende ad accorciarsi, senza una costante da ricordarsi di aggiornare.
+ *
+ * `isModelAvailable` evita un tentativo buttato per OGNI headline dove il
+ * preferito non c'e'. Senza, un ambiente con `ENABLE_HAIKU_ARTICLE_FALLBACK`
+ * spento o senza `CLAUDE_CODE_OAUTH_TOKEN` costruirebbe il prompt intero
+ * (~9500 token) per una flotta il cui cap piu' permissivo e' 8000: ogni modello
+ * skippato dal pre-flight, `ALL_MODELS_EXHAUSTED`, e solo al tentativo 2 il
+ * budget dettato rimette in moto la scala. Il rimedio funziona — e' verificato —
+ * ma pagarlo su ogni headline quando si sa gia' in partenza che il preferito non
+ * c'e' e' spreco, non robustezza.
+ *
+ * `isPerRunCallCapReached` chiude il buco che le altre due non vedono, ed e' il
+ * caso che questa stessa PR rende raggiungibile alzando
+ * CLAUDE_CLI_MAX_CALLS_PER_RUN a 40 (= 20 tentativi × 2 chiamate). Superate le
+ * 40 chiamate claude-cli, `callLLM` esclude haiku dalla catena — ma
+ * `isModelAvailable` guarda solo skip-exhausted e presenza del token, quindi
+ * continuava a rispondere «c'e'». Da li' in poi, per OGNI headline successiva:
+ * scala saltata al gradino 0, prompt intero (~9500 token), tutti i modelli free
+ * con cap dichiarato scartati dal pre-flight, tentativo 1 morto con
+ * `ALL_MODELS_EXHAUSTED`, recupero solo al tentativo 2 via
+ * `err.retryRequestTokenBudget`. Non rompe niente — si auto-ripara — ma e' lo
+ * stesso tentativo sprecato che questa guardia esiste per evitare, riaperto
+ * dalla coda della run invece che dalla sua testa.
+ *
+ * Le tre domande sono deliberatamente separate e tutte a runtime: nessuna e' una
+ * costante, quindi nessuna va ricordata quando cambia il roster o il cap.
+ */
+function _preferisceModelloSenzaCap(prefer) {
+  return (prefer || []).some(
+    (m) => isModelAvailable(m)
+      && !isPerRunCallCapReached(m)
+      && getDeclaredRequestTokenLimit(m) === undefined,
+  );
+}
 // Quota-free MT cascade (DeepL-free / Google / MyMemory / LibreTranslate /
 // local Opus-MT) — the SAME translator the job crawlers + FAQ batch use
 // (scripts/lib/dedicated-crawler-common.mjs, batch-add-faq-to-articles.mjs).
@@ -77,14 +143,20 @@ import { AI_SEARCH_PROMPT_BLOCK_IT } from './lib/ai-search-template.mjs';
 import { tokenizeIt, jaccardSim, containmentSim, normalizeItWord, STOP_WORDS_IT } from './lib/it-text-similarity.mjs';
 import { fixMicrocopy } from './lib/it-microcopy-guard.mjs';
 import { DOMAIN_DUP_STOPLIST, filterDistinctive } from './lib/dup-stoplist.mjs';
-import { stripCodeFences, findMatchingClose, fixJsonStringBody, JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics } from './lib/llm-json-repair.mjs';
+import { JSON_QUOTE_SAFETY_RULE_IT, describeJsonParseError, describeRawForDiagnostics, repairLlmJson } from './lib/llm-json-repair.mjs';
+// Il verdetto sul payload di generazione (normalizzatore incluso) vive in un
+// modulo puro perche' le gate del generatore girano `node --test` senza `npm ci`
+// e non possono importare QUESTO file: cosi' il test esegue lo stesso oggetto
+// codice della produzione invece di una copia. Vedi l'intestazione del modulo.
+import { REQUIRED_IT_BODY_FIELDS, BODY_ONLY_FIELDS, META_ONLY_FIELDS, normalizeItalianContentFromPayload, classifyBody2Payload, resolveBody2Validation, recoverMisplacedFaq } from './lib/body2-payload-verdict.mjs';
+import { describePayloadRejection } from './lib/llm-payload-diagnostics.mjs';
 import {
   factCheckFingerprint,
   totalMajorWeight,
   MAJOR_BLOCK_WEIGHT_THRESHOLD,
   dropSourceContradictedIssues,
 } from './lib/fact-check-consensus.mjs';
-import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES } from './lib/article-factuality-gates.mjs';
+import { runFactualityGates, formatIssues, formatRemediation, buildSourceContract, FACT_CHECK_CATEGORIES, assertNoFabricatedNormAcronyms } from './lib/article-factuality-gates.mjs';
 import { loadDefectMemory, learnedDenylist, learnedSuspects } from './lib/article-defect-memory.mjs';
 import {
   stripCompetitorPromotion,
@@ -141,7 +213,7 @@ import { hasDomainAnchor } from './lib/discovery/domainAnchor.mjs';
 import { matchesFrontaliereAnchor, matchesFrontaliereUnambiguousAnchor } from './lib/discovery/frontaliereAnchor.mjs';
 import { isNonItalianScript, nonItalianScriptRatio } from './lib/itLanguageCheck.mjs';
 import { checkSemanticNearDuplicate } from './lib/scoring/semanticDedup.mjs';
-import { assertTopicNotRecentlyCovered, findRecentTopicCoverage } from './lib/topic-coverage-guard.mjs';
+import { assertTopicNotRecentlyCovered, findRecentTopicCoverage, assertComuneTitleMatchesSlug } from './lib/topic-coverage-guard.mjs';
 import { computeAdaptiveEvergreenThresholds } from './lib/scoring/constants.mjs';
 import { detectBodyRepetition, dedupeRepeatedParagraphs, stripDuplicateTitleFromBody } from './lib/article-body-repetition.mjs';
 import { loadEmbeddingStore, loadEmbeddingMeta } from './lib/scoring/embeddingMatcher.mjs';
@@ -152,6 +224,25 @@ import { buildStructuralEvergreenTopics } from './lib/evergreen-topic-generator.
 import { corpusPath, resolveGitAddPaths } from './lib/corpus-paths.mjs';
 import { NEWS_SITEMAP_WHITELIST } from '../data/news-sitemap-whitelist.mjs';
 import { metaFieldRegex, unescapeTsValue } from './lib/meta-field-regex.mjs';
+// Issue #313 — la disposizione di una cascata svuotata (differire vs gridare).
+// Estratta in un modulo perche' questo file non e' importabile da un test; vedi
+// l'intestazione di lib/exhaustion-disposition.mjs per la misura.
+import {
+  EXIT_ROSTER_CANNOT_SERVE_PROMPT,
+  EXIT_NO_ARTICLE_DECLARED,
+  isInputCapDeferralVeto,
+  inputCapVetoSummary,
+  isLegitimateQuotaDeferral,
+  quotaDeferralShare,
+  // Issue #452 — l'uscita anticipata quando il bersaglio e' sotto il pavimento
+  // dell'impalcatura del prompt. La costante sta la' dentro, non qui, perche'
+  // due meta' la leggono (il marker `unsat=` e il ciclo di retry) e un
+  // letterale riscritto a mano le farebbe divergere in silenzio.
+  PROMPT_SCAFFOLD_FLOOR_TOKENS,
+  isBudgetBelowScaffoldFloor,
+  isPromptFloorIrreducible,
+  promptFloorSummary,
+} from './lib/exhaustion-disposition.mjs';
 // Il guard sui segnaposto del prompt. Copre OGNI campo di testo pubblicato —
 // corpo, FAQ, excerpt, imageAlt, title, seo — con un criterio solo, derivato
 // dai letterali dello schema JSON che il prompt piu' sotto mostra al modello.
@@ -544,7 +635,47 @@ function countTopicalHits(text, national) {
 
 // In-process memoisation for the classifier (per-run). Keyed by lowercased
 // headline so duplicates / cross-pool overlap pay once.
+//
+// 2026-08-18 — IL VALORE E' UNA PROMISE, NON UN RISULTATO.
+// Finche' il gate era seriale la sequenza «leggi, chiama, scrivi» era atomica
+// per costruzione: fra la `get` e la `set` non girava altro codice. Da quando
+// le classificazioni partono a gruppi (vedi `mapWithConcurrency` in
+// `applyPreSpendTopicGate`) quella finestra esiste, e due headline identiche
+// in volo insieme troverebbero entrambe la cache vuota pagando entrambe la
+// chiamata — cioe' esattamente il costo che questa Map esiste per evitare.
+// Memoizzando la promise il secondo chiamante si aggancia alla prima chiamata
+// invece di aprirne un'altra. Una promise rifiutata viene rimossa: il percorso
+// interno fallisce fail-open e non rigetta, ma una cache avvelenata da un
+// throw inatteso sopravviverebbe all'intero run.
 const _preSpendGateCache = new Map();
+
+// La chiave della memo. Estratta perche' ora la calcola il wrapper di cache e
+// non piu' il corpo del classifier. Trimmata una volta sola cosi' che la
+// guardia `if (cacheKey)` in scrittura testi esattamente la stessa emptiness
+// che testa quella in lettura: una chiave " " verrebbe scritta e mai riletta.
+function preSpendGateCacheKey(headline, sourceUrl) {
+  return `${String(headline || '').toLowerCase().trim()} ${classifierSourceHint(sourceUrl).toLowerCase()}`.trim();
+}
+
+// Esegue `fn` su `items` con al massimo `limit` chiamate in volo, preservando
+// l'ordine dei risultati. Serve al gate pre-spend: 19 classificazioni seriali
+// da ~0,9s l'una sono 16,5s di attesa quasi tutta passata a NON fare niente
+// (misurato sulla run 32111688992, 07:30:33,7 -> 07:30:50,2). Non e' un
+// rate-limiter: `fn` deve gia' fallire fail-open per conto suo.
+async function mapWithConcurrency(items, limit, fn) {
+  const out = new Array(items.length);
+  const width = Math.max(1, Math.min(Number(limit) || 1, items.length));
+  let next = 0;
+  const worker = async () => {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      out[i] = await fn(items[i], i);
+    }
+  };
+  await Promise.all(Array.from({ length: width }, worker));
+  return out;
+}
 
 /**
  * Cheap LLM classifier: "is this news directly relevant to frontalieri
@@ -581,17 +712,25 @@ function classifierSourceHint(url) {
   }
 }
 
-async function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
-  const sourceHint = classifierSourceHint(sourceUrl);
-  // The hint is part of the prompt, so it must be part of the memo key —
-  // otherwise the same title from two different sections of two different
-  // outlets would resolve to whichever verdict was computed first. Trimmed
-  // once so the `if (cacheKey)` guards on the write paths below test exactly
-  // the emptiness this read tests: a key of " " would be written, never read.
-  const cacheKey = `${String(headline || '').toLowerCase().trim()} ${sourceHint.toLowerCase()}`.trim();
+// Wrapper di memoizzazione. The hint is part of the prompt, so it must be part
+// of the memo key — otherwise the same title from two different sections of two
+// different outlets would resolve to whichever verdict was computed first.
+// Memoizza la PROMISE, non il risultato: vedi `_preSpendGateCache`.
+function classifyFrontaliereRelevance(headline, summary, sourceUrl) {
+  const cacheKey = preSpendGateCacheKey(headline, sourceUrl);
   if (cacheKey && _preSpendGateCache.has(cacheKey)) {
     return _preSpendGateCache.get(cacheKey);
   }
+  const pending = _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl);
+  if (cacheKey) {
+    _preSpendGateCache.set(cacheKey, pending);
+    pending.catch(() => { _preSpendGateCache.delete(cacheKey); });
+  }
+  return pending;
+}
+
+async function _classifyFrontaliereRelevanceUncached(headline, summary, sourceUrl) {
+  const sourceHint = classifierSourceHint(sourceUrl);
   const model = process.env.PRESPEND_GATE_MODEL || AI_MODELS.GEMINI_FLASH_LITE;
   const prompt = IS_FRONTALIERE
     ? `Sei un editor del sito frontaliereticino.ch, focalizzato ESCLUSIVAMENTE sui FRONTALIERI ITALO-SVIZZERI che lavorano in Ticino.
@@ -635,13 +774,20 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
         maxTokens: 80,
         timeout: 30_000,
         jsonMode: false,
+        // deadlineMs (2026-08-18): senza questo UNA classificazione puo'
+        // camminare l'intera catena di fallback di ai-models.mjs. Il roster
+        // parte da GEMINI_FLASH_LITE (indice 45): restano 56 modelli x 2 retry
+        // x 30s = ~56 minuti teorici per un verdetto da 80 token, e il gate ne
+        // chiede fino a `maxClassifier` di fila. Qui si chiama `_aiCallLLM`
+        // diretto, quindi il default del wrapper locale `callLLM` (che il
+        // deadlineMs ce l'ha) non si eredita: va passato a mano.
+        deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS,
       },
     );
   } catch (err) {
     // Classifier failed — fail-open. REGOLA #0 will catch anything bad.
-    const fallback = { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
-    if (cacheKey) _preSpendGateCache.set(cacheKey, fallback);
-    return fallback;
+    // La cache la scrive il wrapper `classifyFrontaliereRelevance`.
+    return { relevant: true, reason: `classifier-error: ${err?.message || 'unknown'}`, fromError: true };
   }
 
   const verdict = /relevant\s*=\s*(yes|no|s[ìi]|si|true|false)/i.exec(text);
@@ -658,18 +804,79 @@ relevant=<yes|no>; reason=<una frase di massimo 15 parole>`;
     reason: (reasonMatch ? reasonMatch[1] : text).trim().slice(0, 200),
     parsed,
   };
-  if (cacheKey) _preSpendGateCache.set(cacheKey, result);
   return result;
 }
 
+// Tetto di chiamate al classifier per invocazione del gate.
+//
+// `null` = NESSUN tetto, ed e' il default. Un numero arriva soltanto da
+// `PRESPEND_GATE_MAX_CLASSIFIER` impostata ESPLICITAMENTE (o da
+// `opts.maxClassifier` di un chiamante): variabile assente e variabile a '12'
+// non sono piu' la stessa cosa, ed e' esattamente la differenza che il
+// `?? '12'` di prima cancellava.
+//
+// 2026-08-18, la sera — PERCHE' IL DEFAULT E' TORNATO «NESSUN TETTO».
+// Il pomeriggio (#416) il default e' diventato 12, sul ragionamento che il
+// JSDoc lo dichiarasse da sempre e che il codice dovesse adeguarsi. Misurato
+// sulla telemetria `PRESPEND_GATE_OUTCOME` di 22 run reali di
+// generate-article.yml dello stesso giorno, quel tetto agisce quasi solo sulla
+// sezione `frontaliere` (pool `before=` 20, 21, 22, 23 — tutti sopra 12) e
+// quasi mai su `svizzera` (`before=` 4-8, cap mai vincolante): colpisce cioe'
+// la sezione a secco, 10 articoli contro 78 di svizzera nelle ultime 24h.
+// Su un pool da 20 headline tutte fuori tema teneva 8 candidate contro 3, non
+// emetteva piu' `PRESPEND_GATE_TOTAL_REJECTION` (il marker che questo stesso
+// file cita come base di prova degli incidenti del 2026-08-10 e 2026-08-11), e
+// consegnava alla generazione le headline in ordine di pool — le piu' vecchie e
+// mai classificate — invece delle 3 migliori per `countTopicalHits`.
+// Bilancio: ~10 chiamate flash-lite economiche risparmiate contro fino a ~8
+// tentativi di generazione completi (~5-7k token l'uno) bruciati prima che
+// REGOLA #0 li abortisse. Il tetto resta disponibile a chi lo vuole; non e'
+// piu' imposto — e, dal blocco «keep non classificati» dentro il gate, non
+// puo' piu' nascondere una rejection totale nemmeno quando e' acceso.
+//
+// `null` anche su un valore illeggibile: il `|| 12` di prima trasformava
+// `PRESPEND_GATE_MAX_CLASSIFIER=0` — cioe' «non classificare niente», che chi
+// scrive quella riga intende davvero — in un tetto a 12, e un refuso qualunque
+// nello stesso silenzioso 12. Un valore che non si legge non e' una richiesta
+// di tetto. Per spegnere il classifier c'e' `PRESPEND_TOPIC_GATE_CLASSIFIER=0`.
+function resolvePreSpendClassifierCap(raw) {
+  if (raw == null || raw === '') return null;
+  const n = Number(raw);
+  if (!Number.isFinite(n)) return null;
+  return Math.max(1, Math.floor(n));
+}
+// Stesso idioma di `resolvePreSpendClassifierCap`, generalizzato a un fallback
+// non-null: un env var assente o illeggibile ricade sul default, ma un valore
+// ESPLICITO (incluso '0') non viene mai confuso con "assente" da un `|| fallback`
+// — e' esattamente il bug che ha reso PRESPEND_GATE_MAX_CLASSIFIER=0 indistinguibile
+// da variabile assente prima di questa PR.
+function resolvePositiveIntEnv(raw, fallback) {
+  if (raw == null || raw === '') return fallback;
+  const n = Number(raw);
+  return Number.isFinite(n) ? n : fallback;
+}
+const DEFAULT_MAX_CLASSIFIER_CALLS = resolvePreSpendClassifierCap(process.env.PRESPEND_GATE_MAX_CLASSIFIER);
+// Classificazioni in volo insieme. Basso di proposito: e' un modello leggero su
+// free tier, e il guadagno fra 1 e 5 e' quasi tutto il guadagno che c'e'.
+const PRESPEND_GATE_CONCURRENCY = Math.max(
+  1,
+  Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_CONCURRENCY, 5)),
+);
+
 /**
- * Pre-spend topic gate — filters a headlines[] array BEFORE the
+ * Pre-spend topic gate — filters the headlines[] array BEFORE the
  * article-generation `Tentativo` loop. Combines fast anchor regex with the
  * cheap LLM classifier. Returns the filtered list.
  *
  * @param {Array<{headline: string, url?: string, relatedHeadlines?: string[]}>} headlines
  * @param {object} [opts]
- * @param {number} [opts.maxClassifier=12]  - max LLM classifier calls per invocation
+ * @param {number} [opts.maxClassifier=headlines.length] - max LLM classifier
+ *   calls per invocation. NESSUN tetto per default: si attiva impostando
+ *   PRESPEND_GATE_MAX_CLASSIFIER (o passando questo opts). Col tetto attivo, le
+ *   candidate oltre il budget entrano per fail-open ma restano marcate come non
+ *   classificate e non contano come «tenute» (vedi `keptUnclassified`).
+ * @param {number} [opts.concurrency=PRESPEND_GATE_CONCURRENCY] - classificazioni
+ *   in volo insieme
  * @returns {Promise<Array>} filtered headlines (preserves order)
  */
 async function applyPreSpendTopicGate(headlines, opts = {}) {
@@ -681,9 +888,23 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // legacy anchor-only fast-path (pre-2026-05-15 behaviour, accepts on
   // anchor match without LLM confirmation).
   const classifierEnabled = (process.env.PRESPEND_TOPIC_GATE_CLASSIFIER ?? '1') !== '0';
-  const maxClassifier = Number(opts.maxClassifier ?? headlines.length);
+  // 2026-08-18 — IL CAP E' DISPONIBILE, NON IMPOSTO.
+  // Il JSDoc dichiarava 12 e il codice usava `?? headlines.length`, cioe' il
+  // ramo «budget esaurito» era irraggiungibile per costruzione. #416 ha
+  // allineato il codice al JSDoc; la telemetria dice che il JSDoc aveva torto,
+  // non il codice — vedi il blocco lungo su `DEFAULT_MAX_CLASSIFIER_CALLS`.
+  // Quindi: nessun tetto per default, tetto reale se qualcuno lo chiede via
+  // `PRESPEND_GATE_MAX_CLASSIFIER` o `opts.maxClassifier`. Chi resta sopra il
+  // tetto non viene scartato: cade sul fail-open (`kind: 'keep'`) — ma da oggi
+  // resta MARCATO come non classificato, perche' un keep senza verdetto non e'
+  // una prova di pertinenza (vedi `keptUnclassified` piu' sotto).
+  const maxClassifier = Number(opts.maxClassifier ?? DEFAULT_MAX_CLASSIFIER_CALLS ?? headlines.length);
+  const concurrency = Number(opts.concurrency ?? PRESPEND_GATE_CONCURRENCY);
 
   const kept = [];
+  // Quante delle `kept` sono entrate SENZA verdetto, per esaurimento del tetto.
+  // Zero col default; diverso da zero solo con un tetto esplicito.
+  let keptUnclassified = 0;
   let filtered = []; // { headline, reason, rawHeadline, rawAnchor }
   let classifierCalls = 0;
   let unambiguousBypasses = 0;
@@ -692,6 +913,14 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // 39/39 → empty proven pool → 8-cycle no_changes streak).
   const strictAnchorMatched = []; // [{ h, anchor }]
 
+  // ── FASE 1: decisione deterministica, zero await ──────────────────────
+  // Ogni candidato riceve qui il suo verdetto oppure un posto in coda per il
+  // classifier. Nessuna chiamata di rete in questo giro, quindi l'assegnazione
+  // del budget resta ESATTAMENTE quella seriale di prima: i primi
+  // `maxClassifier` candidati che arrivano al ramo classifier lo consumano, in
+  // ordine di pool. Il risultato viene ricomposto nell'ordine originale nella
+  // fase 3 — `kept` deve preservare l'ordine, che e' la recency.
+  const plan = []; // { h, headlineText, summary, kind: 'keep'|'drop'|'classify' }
   for (const h of headlines) {
     const headlineText = String(h?.headline || '');
     const urlText = String(h?.url || '');
@@ -705,9 +934,9 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // Legacy emergency rollback: anchor-only acceptance (no LLM).
     if (!classifierEnabled) {
       if (strictAnchor) {
-        kept.push(h);
+        plan.push({ h, headlineText, kind: 'keep' });
       } else {
-        filtered.push({ headline: headlineText.slice(0, 80), reason: 'anchor-miss (classifier disabled)', rawHeadline: headlineText });
+        plan.push({ h, headlineText, kind: 'drop', reason: 'anchor-miss (classifier disabled)', marker: false });
       }
       continue;
     }
@@ -722,17 +951,19 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     // the classifier.
     const unambiguous = IS_FRONTALIERE && matchesFrontaliereUnambiguousAnchor(combined);
     if (unambiguous) {
-      kept.push(h);
+      plan.push({ h, headlineText, kind: 'keep' });
       unambiguousBypasses += 1;
       continue;
     }
 
     // Budget exhausted — fail-open, keep the headline. REGOLA #0 stays as
-    // the defense-in-depth backstop. With the default maxClassifier =
-    // headlines.length this branch is effectively unreachable unless a
-    // caller overrides opts.maxClassifier.
+    // the defense-in-depth backstop. Col default (`null` → nessun tetto) questo
+    // ramo resta irraggiungibile; scatta solo se qualcuno ha chiesto un tetto.
+    // `unclassified: true` e' la marcatura che tiene onesto il conteggio a valle:
+    // questa headline non ha ricevuto nessun verdetto, quindi non puo' valere
+    // come «tenuta dal gate».
     if (classifierCalls >= maxClassifier) {
-      kept.push(h);
+      plan.push({ h, headlineText, kind: 'keep', unclassified: true });
       continue;
     }
 
@@ -744,19 +975,56 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     const summary = Array.isArray(h?.relatedHeadlines) && h.relatedHeadlines.length > 0
       ? h.relatedHeadlines.slice(0, 2).join(' · ')
       : '';
-    let verdict;
+    plan.push({ h, headlineText, urlText, summary, kind: 'classify' });
+  }
+
+  // ── FASE 2: le classificazioni, a concorrenza limitata ────────────────
+  // Il gate e' gia' fail-open (`classifyFrontaliereRelevance` cattura tutto e
+  // torna `relevant: true`), quindi un errore qui non perde una headline: la
+  // tiene. Il `try` resta come belt+suspenders sul throw inatteso.
+  const toClassify = plan.filter(p => p.kind === 'classify');
+  const verdicts = await mapWithConcurrency(toClassify, concurrency, async (p) => {
     try {
-      verdict = await classifyFrontaliereRelevance(headlineText, summary, urlText);
+      return await classifyFrontaliereRelevance(p.headlineText, p.summary, p.urlText);
     } catch {
       // Should not happen — classifyFrontaliereRelevance already fails open
       // — but belt+suspenders: keep the headline on any unexpected throw.
-      kept.push(h);
+      return { relevant: true, reason: 'classifier-throw', fromError: true };
+    }
+  });
+  toClassify.forEach((p, i) => { p.verdict = verdicts[i]; });
+
+  // ── FASE 3: ricomposizione, nell'ordine del pool ──────────────────────
+  for (const p of plan) {
+    if (p.kind === 'keep') {
+      kept.push(p.h);
+      if (p.unclassified) keptUnclassified += 1;
       continue;
     }
+    if (p.kind === 'drop') {
+      filtered.push({ headline: p.headlineText.slice(0, 80), reason: p.reason, rawHeadline: p.headlineText });
+      continue;
+    }
+    const verdict = p.verdict;
     if (verdict.relevant) {
-      kept.push(h);
+      kept.push(p.h);
     } else {
-      filtered.push({ headline: headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: headlineText });
+      filtered.push({ headline: p.headlineText.slice(0, 80), reason: verdict.reason, rawHeadline: p.headlineText });
+      // Per-candidate rejection marker (#346, follow-up to #337) — before this,
+      // a classifier "no" was only visible as part of the per-run aggregate
+      // (`PRESPEND_GATE_TOTAL_REJECTION`, counts only) or truncated to the
+      // first 5 headlines in the "🔍 Pre-spend topic gate" summary below,
+      // neither attributable to a specific candidate across runs. Retuning the
+      // classifier prompt with real data (rather than blind) needs every
+      // rejection tied to the section that produced it — this line is that
+      // record, one per rejection, `key=value` like the other markers so a
+      // future scanner can parse it with `parseMarkerRecords`. `encodeURIComponent`
+      // keeps headline/reason `\S+`-safe despite spaces and punctuation.
+      console.error(
+        `PRESPEND_GATE_REJECTED section=${SECTION_NAME}`
+        + ` headline=${encodeURIComponent(p.headlineText.slice(0, 160))}`
+        + ` reason=${encodeURIComponent(verdict.reason || '')}`,
+      );
     }
   }
 
@@ -765,7 +1033,33 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // prevents the 100%-rejection failure mode that produced the run
   // 26440805420 no_changes streak. REGOLA #0 inside article-gen stays as
   // the final defense if the restored candidate is actually off-topic.
-  const totalRejection = kept.length === 0 && headlines.length > 0;
+  // 2026-08-18, la sera — UN `keep` SENZA VERDETTO NON CONTA COME TENUTA.
+  //
+  // Con un tetto attivo, le candidate oltre il budget entrano in `kept` per
+  // fail-open senza essere mai state classificate. Contarle qui avrebbe tre
+  // effetti, tutti misurati su un pool da 20 tutte fuori tema con tetto 12:
+  //   1. `totalRejection` diventa falso e `PRESPEND_GATE_TOTAL_REJECTION` non
+  //      viene piu' emesso — si perde il marker su cui poggiano le diagnosi del
+  //      2026-08-10 e del 2026-08-11 scritte poco sopra;
+  //   2. i backstop D ed E non partono, quindi la generazione riceve 8 headline
+  //      in ordine di pool (recency) invece delle 3 migliori per densita'
+  //      topica;
+  //   3. ognuna di quelle 8 brucia un tentativo di generazione completo prima
+  //      che REGOLA #0 la abortisca.
+  // Il tetto e' un budget di CLASSIFICAZIONE, non una prova di pertinenza: le
+  // `keep` per esaurimento budget sono materiale non valutato, e a pool
+  // altrimenti svuotato vengono restituite ai backstop, che ripartono
+  // dall'intero `headlines` e ne scelgono 3 per punteggio. Il risultato e'
+  // identico a quello di un gate senza tetto — cioe' col default — e la
+  // condizione dei backstop qui sotto resta la stessa `kept.length === 0`
+  // che il source guard di pre-spend-gate-telemetry.test.mjs sorveglia.
+  const evidencedKept = kept.length - keptUnclassified;
+  const totalRejection = evidencedKept === 0 && headlines.length > 0;
+  const unclassifiedAtRejection = totalRejection ? keptUnclassified : 0;
+  if (totalRejection && keptUnclassified > 0) {
+    kept.length = 0;
+    keptUnclassified = 0;
+  }
   let restoredByBackstop = 0;
   let backstopKind = 'none';
   if (kept.length === 0 && strictAnchorMatched.length > 0) {
@@ -837,7 +1131,7 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
   // frontaliere a restored candidate with 0 density hits still aborts on
   // attempt 1 and the ranker picks another headline.
   if (kept.length === 0 && headlines.length > 0) {
-    const RESTORE_N = Math.max(1, Number(process.env.PRESPEND_GATE_SECTION_RESTORE_N ?? '3') || 3);
+    const RESTORE_N = Math.max(1, Math.floor(resolvePositiveIntEnv(process.env.PRESPEND_GATE_SECTION_RESTORE_N, 3)));
     const ranked = headlines
       .map((h, i) => ({ h, i, hits: countTopicalHits(`${h?.headline || ''} ${h?.url || ''}`) }))
       .sort((a, b) => (b.hits - a.hits) || (a.i - b.i))
@@ -887,7 +1181,12 @@ async function applyPreSpendTopicGate(headlines, opts = {}) {
     console.error(
       `PRESPEND_GATE_TOTAL_REJECTION before=${headlines.length} classifier_calls=${classifierCalls}`
       + ` anchor_candidates=${strictAnchorMatched.length} restored=${restoredByBackstop}`
-      + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`,
+      + ` backstop=${backstopKind} kept_after=${kept.length} section=${SECTION_NAME}`
+      // Quante candidate erano entrate solo per esaurimento del tetto e sono
+      // state restituite ai backstop. 0 col default (nessun tetto): un valore
+      // diverso da zero dice che qualcuno ha acceso `PRESPEND_GATE_MAX_CLASSIFIER`
+      // e che quel tetto sta mordendo su questa sezione.
+      + ` unclassified=${unclassifiedAtRejection}`,
     );
   }
 
@@ -2136,6 +2435,25 @@ const NEWS_SOURCES = [
   'https://media.laregione.ch/files/domains/laregione.ch/rss/rss_aperture.xml',
   'https://media.laregione.ch/files/domains/laregione.ch/rss/feed_rss.xml',
   // Canton Ticino istituzionale (RSS)
+  //
+  // 2026-08-18: `ti.ch` risultava STERILE in 16 scansioni su 16, e i due URL
+  // qui sotto rispondono entrambi 200 con RSS valido — non erano rotti, erano
+  // i feed sbagliati. Sondati oggi, item per item, con il parser di
+  // `extractRssItems`:
+  //   · rss-comunicati-1108.xml → 10 item, 3 negli ultimi 3 giorni, MA `1108`
+  //     e' l'id della **Polizia cantonale**: annegamenti, incidenti,
+  //     accoltellamenti. Passa lo scan e muore nel classificatore, che e' il
+  //     comportamento giusto per quel contenuto.
+  //   · rss-attualita.xml → 10 item, **0 negli ultimi 30 giorni**, il piu'
+  //     recente di 33 giorni: e' il notiziario statistico USTAT, che pubblica di
+  //     rado. Resta perche' USTAT e' la fonte dei dati sui frontalieri, ma con
+  //     `MAX_ARTICLE_AGE_DAYS = 3` non puo' produrre niente.
+  // Il feed istituzionale vero mancava: `rss-comunicati.xml` senza suffisso e'
+  // l'Area media del Cantone (8 item, 3 negli ultimi 3 giorni, 6 negli ultimi
+  // 7 — «Sussidi di cassa malati: la richiesta diventa anche digitale»,
+  // «Chiusura della galleria Vedeggio-Cassarate»). E' linkato dalla home di
+  // www.ti.ch insieme agli altri; e' quello che serviva.
+  'https://www3.ti.ch/xml/rss/rss-comunicati.xml',
   'https://www3.ti.ch/xml/rss/rss-comunicati-1108.xml',
   'https://www3.ti.ch/xml/rss/rss-attualita.xml',
   // comozero
@@ -2146,8 +2464,13 @@ const NEWS_SOURCES = [
   'https://www.varesenews.it/feed/',
   // varesenoi
   'https://www.varesenoi.it/rss.xml',
-  // il giornale del ticino
-  'https://www.ilgiornaledelticino.ch/feed/',
+  // il giornale del ticino — SPENTO il 2026-08-18 dopo `fetch failed` in 8 run
+  // su 8. Non e' un problema di path: il DNS risolve (83.166.147.173) ma la
+  // connessione TCP va in timeout su apex e www, http e https, da rete diversa
+  // da quella dei runner. Il sito e' giu', non spostato. Resta commentato e non
+  // cancellato perche' se torna su basta togliere le due barre; finche' e' qui
+  // costa 15 secondi di `AbortSignal.timeout` per run e una fonte «fallita».
+  // 'https://www.ilgiornaledelticino.ch/feed/',
   // copertura categoria economia per aumentare topic finanziari/lavoro
   'https://www.cdt.ch/news/economia',
   'https://www.cdt.ch/news/svizzera',
@@ -2231,7 +2554,8 @@ const RSS_FALLBACK_MAP = {
   'https://www.varesenews.it/tag/frontalieri/feed/': 'https://www.varesenews.it/tag/frontalieri/',
   'https://www.varesenews.it/feed/': 'https://www.varesenews.it/',
   'https://www.varesenoi.it/rss.xml': 'https://www.varesenoi.it/sommario/argomenti/economia-7.html',
-  'https://www.ilgiornaledelticino.ch/feed/': 'https://www.ilgiornaledelticino.ch',
+  // Spento insieme alla sua voce in NEWS_SOURCES (sito giu' dal 2026-08, TCP timeout).
+  // 'https://www.ilgiornaledelticino.ch/feed/': 'https://www.ilgiornaledelticino.ch',
   'https://www.rsi.ch/info/svizzera/?f=rss': 'https://www.rsi.ch/info/svizzera/',
   // swissinfo.ch removed — 410 Gone (FRO-415)
   // admin.ch removed — WAF challenge (FRO-415)
@@ -2378,13 +2702,33 @@ function read(rel) {
 // This is the single write choke point for the generator, so stripping here
 // is what makes it IMPOSSIBLE for the corpus to receive one, rather than
 // relying on every future write call site to remember to sanitize.
+//
+// Monotonic counter so two writes in the same process to the same target
+// still get distinct temp files — the pid alone would not disambiguate them
+// (mirrors the counter in lib/atomic-write-json.mjs).
+let writeTmpSeq = 0;
+
+// Commits via temp+rename (issue #561): `generate-article.yml`'s external
+// kill lands as SIGKILL 100% of the time (unhandleable), so only the
+// atomicity of this single write protects a `content/*.ts` file from being
+// left truncated/syntactically broken at its final path. `renameSync` is a
+// single POSIX syscall, atomic on the same filesystem. The temp file lives
+// next to the target so the rename never crosses a filesystem boundary.
 function write(rel, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(rel, content, clean);
-  writeFileSync(resolve(rel), clean, 'utf-8');
+  const target = resolve(rel);
+  const tmp = `${target}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, target);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 // ── Section config (--section=frontaliere|svizzera) ──────────────
@@ -2679,6 +3023,11 @@ function normalizeSourceDomain(domain) {
     .replace(/^www\d?\./, '');
 }
 
+// L'import sta qui e non nel blocco in testa al file perche' e' l'unico punto
+// che lo usa e la sezione sotto e' l'unica che ne parla; e' una dichiarazione
+// top-level a tutti gli effetti, quindi resta issata come le altre.
+import { ledgerViewsForLookup, makeLedgerEntry, newsUrlKey, legacyNewsUrlKey } from './lib/source-url-ledger.mjs';
+
 // ── Source URL tracking: prevent re-using the same news source URL ─────
 function loadSourceUrls() {
   try {
@@ -2714,7 +3063,15 @@ function loadAllSectionSourceUrls() {
 
 function saveSourceUrls(map) {
   try {
-    // Keep only last 500 entries to avoid unbounded growth
+    // Keep only the last 500 entries to avoid unbounded growth.
+    //
+    // Questo cap NON e' la finestra temporale: e' una FIFO, e al ritmo misurato
+    // di ~9 registrazioni al giorno per sezione sfratta solo cio' che supera i
+    // ~55 giorni. La scadenza vera vive in `source-url-ledger.mjs` ed e'
+    // applicata in LETTURA (`isSourceUrlAlreadyUsed`), mai qui: il file resta
+    // il registro completo di cio' che ogni sezione ha gia' usato, perche' e'
+    // anche cio' che l'ALTRA sezione legge per il dedup cross-sezione, dove non
+    // c'e' scadenza. Potare in scrittura cancellerebbe quella garanzia.
     const entries = Object.entries(map);
     const trimmed = entries.length > 500
       ? Object.fromEntries(entries.slice(-500))
@@ -2725,15 +3082,22 @@ function saveSourceUrls(map) {
   }
 }
 
-/** Normalize a news source URL for dedup: strip query params, hash, trailing slash */
+/**
+ * Chiave del ledger per un URL di fonte.
+ *
+ * Delega a `newsUrlKey` (`lib/source-url-ledger.mjs`), che tiene i parametri di
+ * query IDENTIFICANTI e butta solo quelli di tracciamento. Questa funzione
+ * buttava via tutta la query, e su una fonte che identifica il documento solo
+ * li' — `ti.ch/…/dettaglio-comunicato/?NEWS_ID=<n>`, `uil.it/newssx.asp?ID_News=<n>` —
+ * ogni articolo del feed collassava sulla stessa chiave: 82 item su 1.121
+ * misurati il 2026-08-18 con l'estrattore reale. Il commento «Remove tracking
+ * params» descriveva l'intenzione; il codice toglieva anche l'identita'.
+ *
+ * Resta un wrapper e non un import diretto perche' il nome compare in tre punti
+ * e perche' e' qui che si legge, accanto ai due chiamanti, cosa sia la chiave.
+ */
 function normalizeNewsUrl(rawUrl) {
-  try {
-    const u = new URL(rawUrl);
-    // Remove tracking params, keep the path
-    return `${u.protocol}//${u.hostname}${u.pathname}`.replace(/\/$/, '').toLowerCase();
-  } catch {
-    return rawUrl.toLowerCase().replace(/\/$/, '');
-  }
+  return newsUrlKey(rawUrl);
 }
 
 function isGoogleNewsRssUrl(rawUrl) {
@@ -2825,8 +3189,42 @@ function extractUrlSlugWords(rawUrl) {
 function isSourceUrlAlreadyUsed(headlineUrl) {
   const normalized = normalizeNewsUrl(headlineUrl);
   // Exact match — sezione attiva per prima, poi le sorelle.
-  const exact = findCrossSectionSourceDuplicate(normalized, loadAllSectionSourceUrls(), SECTION_NAME);
+  //
+  // `ledgerViewsForLookup` applica la finestra di `SOURCE_URL_TTL_DAYS` alla
+  // SOLA sezione attiva e lascia permanenti le sorelle: il riuso dentro la
+  // sezione ha ancora `preFlightHeadlineCheck`, `checkForDuplicates` e
+  // `checkSemanticNearDuplicate` a valle, la garanzia cross-sezione di #251 no.
+  // Le viste che ne escono hanno valori STRINGA, che e' cio' che
+  // `findCrossSectionSourceDuplicate` sa leggere: il modulo `identical`
+  // `cross-section-dedup.mjs` non cambia forma per questa fix.
+  const exact = findCrossSectionSourceDuplicate(
+    normalized,
+    ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME),
+    SECTION_NAME,
+  );
   if (exact.used) return exact;
+
+  // Ponte verso le voci scritte quando la chiave era il path nudo (forma 1).
+  //
+  // Scatta SOLO quando le due forme differiscono, cioe' quando l'URL porta una
+  // query identificante, ed e' interrogato SOLO contro le voci senza
+  // `keyForm` — quelle scritte prima di questa fix. Senza il filtro, la prima
+  // registrazione di forma 2 su `…/dettaglio-comunicato?news_id=X` verrebbe
+  // ritrovata dal path nudo di `…?news_id=Y` e il collasso tornerebbe intero.
+  //
+  // Serve soprattutto al ramo CROSS-SEZIONE di #251, che e' l'unico senza una
+  // rete a valle: per la durata della transizione una fonte gia' usata
+  // dall'altra sezione sotto la chiave vecchia resta bloccata.
+  const legacyKey = legacyNewsUrlKey(headlineUrl);
+  if (legacyKey !== normalized) {
+    const legacy = findCrossSectionSourceDuplicate(
+      legacyKey,
+      ledgerViewsForLookup(loadAllSectionSourceUrls(), SECTION_NAME, { keyForm: 1 }),
+      SECTION_NAME,
+    );
+    if (legacy.used) return legacy;
+  }
+
   // Fuzzy URL slug vs existing article ID match
   const urlWords = extractUrlSlugWords(headlineUrl);
   if (urlWords.length < 2) return { used: false };
@@ -2857,7 +3255,11 @@ function recordSourceUrl(sourceUrl, articleId) {
   if (!sourceUrl || sourceUrl.startsWith('evergreen://')) return;
   const map = loadSourceUrls();
   const normalized = normalizeNewsUrl(sourceUrl);
-  map[normalized] = articleId;
+  // `{articleId, ts}` e non la stringa nuda: senza un istante di registrazione
+  // il ledger non ha modo di dire quali voci sono ancora attuali, ed e' cio'
+  // che lo aveva reso un cricchetto. Le voci storiche restano stringhe e
+  // restano permanenti — vedi `source-url-ledger.mjs`.
+  map[normalized] = makeLedgerEntry(articleId);
   saveSourceUrls(map);
   console.error(`  📎 Source URL registrata: ${normalized} → ${articleId}`);
 }
@@ -3791,7 +4193,6 @@ async function findStockImageCandidates(data, count = 4) {
   return candidates.slice(0, count);
 }
 
-const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
 
 /**
  * JSON-Schema for the primary-locale article generation call.
@@ -3810,7 +4211,32 @@ const REQUIRED_IT_BODY_FIELDS = ['title', 'excerpt', 'body1', 'body2', 'body3'];
  * object level. Gemini drops the keyword via `sanitizeSchemaForGemini` so the
  * same shape works on both providers.
  */
-function buildArticleJsonSchema(primaryLocale = 'it') {
+/**
+ * `part` seleziona META' DELLO SCHEMA, per la generazione in due chiamate.
+ *
+ *   'full'  (default) — lo schema storico, invariato byte a byte.
+ *   'body'  — solo `content.<locale>.{body1,body2,body3}` + il gate REGOLA #0.
+ *   'meta'  — tutto il resto: id, category, image, hasCalculator, imagePrompt,
+ *             imageAlt, slugs, `content.<locale>.{title,excerpt,faq}`, seo.
+ *
+ * Le due meta' sono DISGIUNTE SULLE FOGLIE e la loro unione e' 'full': e' il
+ * taglio corpo|metadati motivato nel blocco «IL TAGLIO SCELTO», accanto a
+ * `_splitMode` (variabile d'ambiente `CREATE_ARTICLE_PROMPT_SPLIT`). Nessuna foglia si perde e nessuna compare in
+ * entrambe — l'unico modo perche' un merge delle due risposte abbia la stessa
+ * forma che il resto della pipeline gia' consuma.
+ *
+ * L'UNICA CHIAVE CHE STA IN ENTRAMBE E' `content`, e deve starci: e' il
+ * contenitore che viene suddiviso, non un dato duplicato. Le sue sottochiavi
+ * restano disgiunte (`body1..3` di qua, `title`/`excerpt`/`faq` di la'). Chi
+ * legge `ROOT_KEYS_BODY` e `ROOT_KEYS_META` e ci trova `content` in tutte e due
+ * non ha trovato una svista.
+ *
+ * `abort_topical_relevance`/`reason` stanno nella meta' BODY, non in entrambe:
+ * REGOLA #0 decide se l'articolo si scrive, e quella decisione va presa nella
+ * chiamata che vede la fonte intera. Se aborta, la chiamata metadati non parte
+ * nemmeno.
+ */
+function buildArticleJsonSchema(primaryLocale = 'it', part = 'full') {
   // OpenAI strict-mode contract:
   //   - Root must be `type: object`
   //   - Every object MUST set `additionalProperties: false`
@@ -3836,6 +4262,24 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
   // covers providers without strict-schema support.
   const nullableString = { type: ['string', 'null'] };
   const nullableBoolean = { type: ['boolean', 'null'] };
+
+  // ── Le due meta' del taglio corpo|metadati, dichiarate UNA volta sola ────
+  //
+  // Tenerle come liste di CHIAVI, e non come due schemi scritti a mano,
+  // e' cio' che rende verificabile l'invariante «disgiunte e complete»:
+  // `news-prompt-token-budget.test.mjs`, sottotest «le due meta' dello schema
+  // sono disgiunte e complete», le ricalcola dallo schema 'full' e fallisce se
+  // una chiave del contenuto non finisce in nessuna delle due meta'.
+  // Uno schema copiato a mano invece divergerebbe in silenzio — e' la stessa
+  // classe di difetto del contratto senza forma di import.
+  const CONTENT_KEYS_BODY = ['body1', 'body2', 'body3'];
+  const CONTENT_KEYS_META = ['title', 'excerpt', 'faq'];
+  const ROOT_KEYS_BODY = ['content', 'abort_topical_relevance', 'reason'];
+  const ROOT_KEYS_META = [
+    'id', 'category', 'image', 'hasCalculator', 'imagePrompt',
+    'imageAlt', 'slugs', 'content', 'seo',
+  ];
+  const pick = (obj, keys) => Object.fromEntries(Object.entries(obj).filter(([k]) => keys.includes(k)));
 
   const contentBlock = {
     type: ['object', 'null'],
@@ -3878,7 +4322,7 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
     },
   };
 
-  return {
+  const fullSchema = {
     name: 'article_primary_locale',
     schema: {
       type: 'object',
@@ -3923,33 +4367,30 @@ function buildArticleJsonSchema(primaryLocale = 'it') {
       },
     },
   };
-}
 
-function normalizeItalianContentFromPayload(payload, locale = 'it') {
-  const content = payload?.content;
-  const candidates = [];
+  if (part === 'full') return fullSchema;
 
-  if (content && typeof content === 'object') {
-    if (content[locale] && typeof content[locale] === 'object') candidates.push(content[locale]);
-    candidates.push(content);
-  }
-  candidates.push(payload);
-
-  for (const candidate of candidates) {
-    if (!candidate || typeof candidate !== 'object') continue;
-    const block = {};
-    let hasAnyField = false;
-
-    for (const field of REQUIRED_IT_BODY_FIELDS) {
-      const value = typeof candidate[field] === 'string' ? candidate[field].trim() : '';
-      if (value) hasAnyField = true;
-      block[field] = value;
-    }
-
-    if (hasAnyField) return block;
-  }
-
-  return null;
+  const rootKeys = part === 'body' ? ROOT_KEYS_BODY : ROOT_KEYS_META;
+  const contentKeys = part === 'body' ? CONTENT_KEYS_BODY : CONTENT_KEYS_META;
+  const halfContent = {
+    ...contentBlock,
+    required: contentBlock.required.filter((k) => contentKeys.includes(k)),
+    properties: pick(contentBlock.properties, contentKeys),
+  };
+  return {
+    name: part === 'body' ? 'article_body_only' : 'article_metadata_only',
+    schema: {
+      ...fullSchema.schema,
+      required: fullSchema.schema.required.filter((k) => rootKeys.includes(k)),
+      properties: {
+        ...pick(fullSchema.schema.properties, rootKeys),
+        content: {
+          ...fullSchema.schema.properties.content,
+          properties: { [primaryLocale]: halfContent },
+        },
+      },
+    },
+  };
 }
 
 function validateItalianPayload(contentIt, locale = 'it') {
@@ -4872,7 +5313,13 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
     // cache — see buildFactCheckCallOptions() above: DEFAULT ON (kill switch
     // via CREATE_ARTICLE_FACTCHECK_CACHE=0), preserving the production
     // `cache: true` this call already had.
-    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, modelUsedRef })
+    // deadlineMs (2026-08-18): questa e' una chiamata a `_aiCallLLM` DIRETTA —
+    // salta il wrapper locale `callLLM`, che il `deadlineMs` ce l'ha di default
+    // da 2026-07-02. Senza, un singolo fact-check puo' camminare l'intera
+    // cascata dei modelli remoti oltre il budget wall-clock del run, e nessun
+    // guard a monte lo ferma: e' il percorso che paga 2 chiamate per bozza e,
+    // sulla run 32086523370, ne ha spese 91.
+    buildFactCheckCallOptions({ model, temperature: 0.0, maxTokens: 4000, timeout: 60_000, bypassForceChain: true, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, modelUsedRef })
   );
   // Guard: if the full remote cascade is exhausted, callLLM falls through to
   // local/fallback — the same model that may have generated the content.
@@ -4917,53 +5364,35 @@ async function _runSingleFactCheck(model, prompt, opts = {}) {
 // The LLM understands context ("73,2% dei frontalieri" is likely fabricated vs
 // "5,3% AVS" is a real rate) far better than regex pattern matching.
 
-// ── LLM JSON repair (handles common LLM output quirks) ────────────────
-// Why: GitHub Models / Groq / Mistral occasionally emit markdown bold
-// markers (`**` / `***`) between JSON properties instead of commas, or
-// wrap the payload in ```json fences, or stick a preamble before the
-// opening `{`, or echo a quoted phrase from the source text unescaped
-// (e.g. a title like `..."tassa sulla salute"...`) which desyncs naive
-// quote-toggle string tracking into `Unterminated string in JSON`. The
-// string-repair walk (preserve asterisks INSIDE quoted strings — markdown
-// bold in body1/body2 is load-bearing — replace stray `*` OUTSIDE strings
-// with a comma, escape unescaped inner quotes) lives in
-// ./lib/llm-json-repair.mjs, shared with batch-add-faq-to-articles.mjs's
-// repairJsonArray. Truncated payloads still throw — callers detect that
-// via `parseErr.message` and retry with a larger `maxTokens`.
-function repairLlmJson(raw) {
-  let c = stripCodeFences(raw);
-  const start = c.indexOf('{');
-  if (start !== -1) {
-    // Bracket-balanced extraction (mirrors repairJsonArray in batch-add-faq-to-articles.mjs)
-    // so trailing LLM prose or a foreign '}' from an interior nested object does not
-    // pull in the wrong boundary via lastIndexOf. Falls back to lastIndexOf when
-    // findMatchingClose returns -1 (e.g. raw truncated inside a string literal).
-    const closeIdx = findMatchingClose(c, start, true);
-    if (closeIdx !== -1) {
-      c = c.slice(start, closeIdx + 1);
-    } else {
-      const end = c.lastIndexOf('}');
-      if (end > start) c = c.slice(start, end + 1);
-    }
-  }
-  const out = fixJsonStringBody(c, { fixAsterisks: true });
-  return out.replace(/,(\s*,)+/g, ',').replace(/,(\s*[}\]])/g, '$1');
-}
-
 // ── LLM call with body2 validation (model fallback via centralized ai-models.mjs) ──
 async function callLLM(messages, opts = {}) {
   const maxBody2Retries = 5;
-  // Require ALL body/title/excerpt field names present (not just 'body2') so this
-  // only fires for the actual full-article generation prompt (which lists every
-  // REQUIRED_IT_BODY_FIELDS name together, see the "content.${primaryLocale}
-  // (title, excerpt, body1, body2, body3, faq)" instruction). A bare 'body2'
-  // substring also matches translateBodyField's single-field translation calls
-  // (prompt/schema `{"body2": "..."}`), where `missing` is guaranteed non-empty
-  // (title/excerpt/body1/body3 are never in that payload) regardless of
-  // translation quality — the retry-exhaustion path now throws instead of
-  // falling through, which used to ship the (valid) translated JSON anyway but
-  // would now discard it and ship IT-language content under /en /de /fr.
-  const isBody2Check = opts.jsonMode && REQUIRED_IT_BODY_FIELDS.every(f => messages.some(m => m.content?.includes(f)));
+  // ── QUALI CAMPI QUESTA CHIAMATA DOVEVA PRODURRE ──────────────────────────
+  //
+  // La regola vive in ./lib/body2-payload-verdict.mjs (`resolveBody2Validation`),
+  // che e' pura e quindi ESEGUIBILE dal test: questo file non e' importabile
+  // dalle gate del generatore, che girano `node --test` senza `npm ci` e non
+  // hanno `jsdom`. Lasciata inline sarebbe verificabile solo ricopiandola —
+  // una copia che diverge in silenzio, la forma di difetto che il ciclo paga.
+  //
+  // Chi passa `opts.expectedFields` DICHIARA i campi attesi; chi non lo passa
+  // ricade sull'euristica sul testo del prompt di prima, byte per byte. La
+  // ragione per cui il default resta quello — e le due protezioni che quel
+  // ramo tiene in piedi (`translateArticle` a campo singolo, e il throw a
+  // retry esauriti che impedisce l'italiano sotto /en /de /fr) — sta per
+  // esteso sulla funzione. Riassunto: il flag puo' RESTRINGERE i campi
+  // attesi, mai spegnere la validazione.
+  //
+  // `expectedFields` NON scende al provider: e' un'istruzione per il
+  // validatore, e infilarla nell'oggetto della richiesta la spedirebbe a
+  // ~180 modelli come parametro sconosciuto.
+  const { expectedFields: _expectedFieldsOpt, ...llmOpts } = opts;
+  const _body2Validation = resolveBody2Validation({
+    jsonMode: opts.jsonMode,
+    expectedFields: _expectedFieldsOpt,
+    messages,
+  });
+  const isBody2Check = _body2Validation.enabled;
   for (let attempt = 1; attempt <= maxBody2Retries; attempt++) {
     const modelUsedRef = { model: null };
     // Default per-call ceiling 90s (was 120s, 2026-06-15). 90s still comfortably
@@ -4979,54 +5408,100 @@ async function callLLM(messages, opts = {}) {
     // check ever gets a chance to run. See run 28611052353 (109min, single
     // attempt consumed nearly all of it). ...opts still wins if a caller passes
     // its own deadlineMs (or explicit null to opt out of the cap entirely).
-    const result = await _aiCallLLM(messages, { temperature: 0.7, maxTokens: 4000, timeout: 90_000, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, ...opts, modelUsedRef });
+    const result = await _aiCallLLM(messages, { temperature: 0.7, maxTokens: 4000, timeout: 90_000, deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS, ...llmOpts, modelUsedRef });
     if (modelUsedRef.model === AI_MODELS.LOCAL_FALLBACK) _localFallbackUsedThisHeadline = true;
     if (isBody2Check) {
       let itContent = null;
       let parseErr = null;
       let repaired = null;
+      // `parsed` vive FUORI dal try: la diagnostica del rigetto deve poter
+      // dire com'era fatto il payload che ha superato JSON.parse() ma non il
+      // normalizzatore — il caso muto, che e' la maggioranza (vedi
+      // ./lib/llm-payload-diagnostics.mjs).
+      let parsed;
       try {
         repaired = repairLlmJson(result);
-        const parsed = JSON.parse(repaired);
-        itContent = normalizeItalianContentFromPayload(parsed);
+        parsed = JSON.parse(repaired);
       } catch (e) {
         parseErr = e;
-        itContent = null;
       }
 
-      const missing = [];
+      // Il verdetto e' delegato a ./lib/body2-payload-verdict.mjs: e' li' che
+      // vive la regola, ed e' li' che il test la esegue (questo file non e'
+      // importabile senza `npm ci`, vedi l'intestazione del modulo).
+      const { verdict, itContent: _verdictContent, missing } = classifyBody2Payload({ parsed, parseErr, expectedFields: _body2Validation.fields });
+      itContent = _verdictContent;
+
+      // ── REGOLA #0: l'abort e' una risposta VALIDA, non un payload rotto ────
+      //
+      // Il prompt ORDINA al modello di rifiutare con
+      // `{"abort_topical_relevance": true, "reason": "…"}` quando la fonte non
+      // ha un vero aggancio frontaliere (difesa dalla classe di allucinazione
+      // «Malpensa»). Il chiamante sa gestire quella forma — il ramo
+      // «REGOLA #0 abort gate» piu' sotto la conta in RUN_REPORT.topicGateAborts
+      // e alza `err.topicGateAbort` — ma prima del 2026-08-18 non la vedeva mai
+      // sul percorso della chiamata unica: `normalizeItalianContentFromPayload`
+      // torna `null` su un abort (il contenuto E' null), e quel `null` cadeva
+      // dritto nel ramo «non normalizzabile».
+      //
+      // Costo misurato, run 32175400548 del 2026-08-18 19:15:09Z sulla sezione
+      // svizzera: `claude-cli/haiku` ha risposto con un abort conforme in 484
+      // caratteri, e la run ha stampato `content.it non normalizzabile
+      // (tentativo 1/5)` e rigenerato — quattro chiamate in piu' da 60-240 s
+      // sul modello che dopo l'evaporazione del free tier e' l'unico percorso
+      // affidabile, quattro `recordModelContentFailure()` contro un modello che
+      // aveva risposto BENE, e la sezione chiusa con «no article generated».
+      // Senza articolo non c'e' push su `content/**`, quindi la catena
+      // auto-invocante non riparte: si aspetta il prossimo `schedule` (:07/:37).
+      //
+      // `return result` e non un throw: la stringa grezza risale al chiamante
+      // esattamente com'e', e il ramo abort che gia' esiste la riconosce e la
+      // classifica. Cosi' l'esito dichiarato resta UNO SOLO, in un posto solo.
+      //
+      // Nessun `recordModelContentFailure` E nessun `recordModelContentSuccess`:
+      // il punteggio in Firestore ordina i modelli per qualita' del CONTENUTO, e
+      // un abort non e' contenuto. Penalizzarlo degradava il primo del roster per
+      // aver obbedito; premiarlo pagherebbe un modello per non scrivere mai —
+      // il rifiuto e' la risposta piu' economica che possa dare.
+      if (verdict === 'topic-gate-abort') {
+        console.error(`  ⏭️  [topic-gate] abort dichiarato da ${modelUsedRef.model || 'unknown'} — risposta conforme al contratto, nessuna rigenerazione.`);
+        return result;
+      }
+
       if (!itContent) {
-        missing.push('content.it non normalizzabile');
         // Previously swallowed silently — every "non normalizzabile" failure
         // was unreproducible (no evidence of what the model actually sent).
         // Log the parse error + a snippet so a recurring malformed-JSON
         // pattern from a specific model can actually be root-caused.
+        //
+        // … ma solo `if (parseErr)`, ed e' li' che la diagnostica finiva.
+        // Misurato il 2026-08-18: su 64 rigetti raccolti dai log, 49 sono
+        // «non normalizzabile» e la maggioranza NON stampava niente, perche'
+        // `JSON.parse` era riuscito e a tornare `null` era il normalizzatore.
+        // Nella run 32134269129 — il 76% dello step speso in rigenerazioni —
+        // erano muti 4 rigetti su 4. La riga sotto e' INCONDIZIONATA apposta:
+        // e' quella che distingue «troncato» da «forma sbagliata», e le due
+        // vogliono rimedi opposti (tetto di uscita vs prompt/normalizzatore).
+        console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
         if (parseErr) {
           console.error(`  🔎 JSON parse fallito (${modelUsedRef.model || 'unknown'}): ${parseErr.message} — ${describeJsonParseError(repaired, parseErr)}`);
-          console.error(`  📄 ${describeRawForDiagnostics(result)}`);
         }
-      } else {
-        for (const field of REQUIRED_IT_BODY_FIELDS) {
-          if (!itContent?.[field] || itContent[field].length < 1) {
-            missing.push(field);
-          }
-        }
-        if (itContent.body2 && itContent.body2.trim().length < 40) missing.push('body2<40');
-        // Language sanity — fallback models occasionally drift to CJK /
-        // Cyrillic when prompted in Italian. Treat as malformed output:
-        // penalises the model, chain rotates, no budget burned at the
-        // outer headline-validation layer. See run 26446721285.
-        for (const field of ['title', 'excerpt', 'body1', 'body2', 'body3']) {
-          const val = itContent?.[field];
-          if (typeof val === 'string' && val.length > 0 && isNonItalianScript(val)) {
-            const ratio = (nonItalianScriptRatio(val) * 100).toFixed(0);
-            missing.push(`${field} non-IT script (${ratio}% non-Latin)`);
-          }
-        }
+        console.error(`  📄 ${describeRawForDiagnostics(result)}`);
       }
 
       if (missing.length > 0) {
         console.error(`  ⚠️  output JSON incompleto: ${missing.join(', ')} (tentativo ${attempt}/${maxBody2Retries}) — rigenero...`);
+        // Il ramo «campi mancanti» era cieco quanto quello muto sopra: nominava
+        // i campi ma non il modello che ha risposto (l'intestazione
+        // `🤖 [1/5] ... con gpt-4.1` annuncia il PREFERITO, e nella run
+        // 32140039370 a rispondere e' stato nvidia/meta/llama-3.1-8b-instruct
+        // sceso dalla cascata), ne' quanto era lungo l'output, ne' se finiva a
+        // meta'. `body1, body2, body3` da solo e' compatibile sia con un
+        // troncamento sia con un involucro di troppo — e in una run e' costato
+        // 655 s. Stessa riga del ramo sopra, cosi' le due si contano insieme.
+        if (itContent) {
+          console.error(`  🧪 rigetto: ${describePayloadRejection({ raw: result, repaired, parsed, parseErr, model: modelUsedRef.model })}`);
+        }
         // Penalize the model only for genuine content failures, not budget-induced
         // exits. When wallBudgetExceeded() is true the throw below is caused by
         // time pressure, not by model output quality; scoring it as a failure would
@@ -5516,6 +5991,15 @@ async function fetchPageContent(url) {
 
 // ── Date filtering: only articles from the last 3 days ──────
 const MAX_ARTICLE_AGE_DAYS = 3;
+// Legato a `SOURCE_URL_TTL_DAYS` (`lib/source-url-ledger.mjs`, oggi 5), che deve
+// restare STRETTAMENTE maggiore di questo numero. E' quell'ordine a rendere
+// sicura la scadenza del ledger delle fonti: una headline DATATA piu' vecchia di
+// MAX_ARTICLE_AGE_DAYS e' gia' scartata qui, prima del ledger; una piu' recente
+// non puo' essere scaduta la', perche' la finestra si apre solo dopo. Ne segue
+// che la scadenza puo' riammettere SOLO headline undated, mai riaprire un
+// documento di fonte ancora fresco. Invertire i due numeri toglierebbe la
+// garanzia in silenzio — `generator/tests/source-url-ledger-ttl.test.mjs`
+// verifica la relazione.
 
 /** Try to extract a publication date from a URL path (e.g. /2026/02/18/ or /20260218/) */
 function extractDateFromUrl(url) {
@@ -6292,13 +6776,60 @@ const HEADLINE_SELECTION_MAX_ATTEMPTS_FINAL = 3;
 async function requestHeadlineSelection(basePrompt, candidateCount, label, maxAttempts) {
   let last = null;
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-    const prompt = attempt === 1
+    // Dopo un INFRA_ERROR non c'e' nessuna risposta da correggere: appendere il
+    // promemoria direbbe al modello che ha sbagliato quando non ha nemmeno
+    // risposto, e sono ~310 caratteri di contesto falso su ogni ritentativo.
+    const prompt = (attempt === 1 || last?.rejection === SELECTION_REJECTION.INFRA_ERROR)
       ? basePrompt
       : `${basePrompt}\n\n${selectionCorrectionNote(last?.rejection, candidateCount)}`;
-    const rawText = await callLLM(
-      [{ role: 'user', content: prompt }],
-      { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
-    );
+    let rawText;
+    try {
+      rawText = await callLLM(
+        [{ role: 'user', content: prompt }],
+        // Nessun `deadlineMs` esplicito, ed e' deliberato (misurato 2026-08-18):
+        // questa passa dal wrapper locale `callLLM`, che dal 2026-07-02
+        // applica gia' `deadlineMs: RUN_START_MS + RUN_WALL_BUDGET_MS` come
+        // default a tutte le sue chiamate (vedi la sua doc). Aggiungerlo qui
+        // sarebbe un no-op che porta due costanti di modulo dentro la chiusura
+        // di `requestHeadlineSelection` — e headline-selection-protocol.test.mjs
+        // ritaglia ED ESEGUE questa funzione con le sole dipendenze iniettate,
+        // quindi il no-op la romperebbe. Il termine e' pinnato da
+        // llm-call-budget.test.mjs sul wrapper, dove vive davvero.
+        { model: GH_MODEL_LIGHT, temperature: 0.3, maxTokens: 512, jsonMode: true },
+      );
+    } catch (err) {
+      // Il fallimento di UNA chiamata (payload jsonMode incompleto, retry del
+      // modello esauriti, rete) NON e' una risposta da interpretare, ma non e'
+      // nemmeno la fine della selezione: prima di questa fix si propagava fuori
+      // dal loop, bruciando l'intera selezione invece di UN tentativo.
+      //
+      // ADATTAMENTO RISPETTO AL GEMELLO DEL SITO — la riga qui sotto la' non
+      // c'e', e non va tolta. Un `ALL_MODELS_EXHAUSTED` non e' il fallimento di
+      // una chiamata: e' il roster intero a terra, e porta i campi
+      // (`transientExhaustion`, `inputCapReport`) su cui `main().catch` decide
+      // NELL'ORDINE fra `EXIT_ROSTER_CANNOT_SERVE_PROMPT`, un differimento e un
+      // `exit 1`. Assorbirlo qui lo declasserebbe a `qualityReject` — cioe' a
+      // «nessun articolo per una ragione legittima», run VERDE — proprio nel
+      // caso persistente (chiavi scadute, crediti finiti, prompt sopra ogni
+      // cap) che deve uscire rosso: e' il difetto che
+      // `generator/tests/roster-exhaustion-red.test.mjs` esiste per impedire.
+      // Ritentare non servirebbe comunque, perche' sotto hanno gia' fallito
+      // tutti i modelli della cascata con i loro retry.
+      if (err?.code === 'ALL_MODELS_EXHAUSTED') throw err;
+      last = { rejection: SELECTION_REJECTION.INFRA_ERROR, detail: String(err?.message ?? err) };
+      console.error(
+        `  ⚠️  ${label}: errore infrastrutturale (${last.detail}) — tentativo ${attempt}/${maxAttempts}`,
+      );
+      // NON `responsesRejected`: quel contatore e' documentato sopra come
+      // «risposte del modello RIGETTATE dal protocollo», ed e' cio' che rende
+      // osservabile un prompt che smette di funzionare. Un errore non e' una
+      // risposta; sommarlo li' renderebbe un provider a singhiozzo
+      // indistinguibile da un degrado del prompt. La causa resta contata,
+      // separata, in `rejectionReasons`.
+      RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] =
+        (RUN_REPORT.selectionUsage.rejectionReasons[last.rejection] || 0) + 1;
+      continue;
+    }
     const parsed = parseHeadlineSelection(rawText, candidateCount);
     if (parsed.ok) return { ...parsed, attempts: attempt };
     last = parsed;
@@ -6510,7 +7041,49 @@ const PROMPT_TOKEN_BUDGET = 8000;
 // Il margine resta volutamente stretto (~100 token sul caso peggiore
 // misurato): il prossimo blocco che si aggiunge al prompt deve trovarlo, non
 // assorbirlo.
-const PROMPT_TOKEN_CEILING = 9500;
+//
+// 9.500 → 8.500 (2026-08-15, #376). Era esplicitamente `blocked: PR
+// concatenata` in attesa di un giro di produzione con la deduplica di #363
+// live — questo e' quel giro, con anche #375 (la collisione di troncamento a
+// 240 char in `anchorEvidence`) atterrata sopra.
+//
+// Fixture (news al retry, il caso peggiore fra i tre test sopra): 9.402 →
+// 8.410. Produzione (11 run `generate-article.yml` su commit 33b02b6e, tutti
+// successivi al merge di #363 E #375, 106 marker `[prompt-budget]`, finestra
+// 2026-08-15 02:59-05:00): il peggiore mai osservato e' 8.312 — ramo news,
+// dopo tutta la scala di riduzione, ancora sopra `PROMPT_TOKEN_BUDGET` e non
+// ulteriormente comprimibile senza toccare la notizia. Il fixture (8.410)
+// resta sopra la produzione reale (8.312): e' lui il caso peggiore che lega,
+// non il campione.
+const PROMPT_TOKEN_CEILING = 8500;
+
+// Il tetto sul prompt COME ASSEMBLATO, cioe' al gradino 0 della scala, prima
+// che la riduzione tocchi qualcosa. E' un ratchet come quello sopra: puo' solo
+// SCENDERE, e scende fino a PROMPT_TOKEN_CEILING.
+//
+// PERCHE' NE SERVE UN SECONDO (2026-08-18). `PROMPT_TOKEN_CEILING` pesa il
+// prompt DOPO la scala, e finche' la scala mordeva sempre quel numero non
+// diceva piu' quanto pesa il prompt: diceva quanto taglia la scala. Le due
+// misure si erano gia' separate nella storia della costante — la discesa
+// 10.100 → 9.500 e' raw→raw («news 9.994 → 9.402»), quella 9.500 → 8.500 di
+// #376 e' raw→dopo-la-scala («9.402 → 8.410»). Da li' in poi un blocco nuovo
+// aggiunto al prompt non faceva salire il numero misurato: lo assorbiva la
+// scala tagliando la fonte, in silenzio. E' esattamente cio' che il ratchet
+// esiste per impedire («il prossimo blocco che si aggiunge al prompt deve
+// trovarlo, non assorbirlo»).
+//
+// Da quando una riduzione che non fa entrare non viene applicata, sul ramo
+// news al retry non c'e' piu' un «dopo la scala» da misurare: il prompt
+// spedito E' quello assemblato. Il tetto sul grezzo e' quindi il solo che
+// resti falsificabile su quel ramo.
+//
+// 9500 non e' un numero nuovo ne' un allentamento: e' il valore che
+// PROMPT_TOKEN_CEILING stesso aveva prima di #376, ed e' quello che il
+// commento sopra registra come peso del ramo news («9.402/9.488»). Misurato
+// oggi sul fixture del caso peggiore: news frontaliere attempt=1 9402, news
+// svizzera attempt=1 9337, news frontaliere al retry con entrambi i rimedi
+// 9488, news svizzera al retry 9423.
+const PROMPT_TOKEN_RAW_CEILING = 9500;
 
 // Budget di OUTPUT per la chiamata di generazione IT.
 //
@@ -6529,6 +7102,53 @@ const PROMPT_TOKEN_CEILING = 9500;
 const IT_GENERATION_MAX_TOKENS = 4000;
 
 // ── Step 2: Generate article via GitHub Models (multi-call) ─
+/**
+ * Accorcia il CORPO della fonte gia' troncato, conservandone il marcatore.
+ *
+ * Usato solo dalla scala di riduzione del budget dentro `callGemini`: il
+ * troncamento ordinario resta quello di `MAX_SOURCE_CHARS`, che non cambia.
+ *
+ * Taglia sull'ultimo confine di frase disponibile invece che a carattere, ma
+ * solo se cade oltre meta' del budget concesso — altrimenti una fonte senza
+ * punteggiatura (le pagine scrapate spesso lo sono) si ridurrebbe a una riga.
+ * Il marcatore `[...contenuto troncato per brevita']` viene riappeso sempre:
+ * e' cio' che dice al writer che il testo non finisce li', e il test del
+ * budget lo verifica esplicitamente.
+ */
+/**
+ * Accorcia il testo di RIMEDIO (refinement di headline e fact-check) che i
+ * tentativi successivi al primo aggiungono al prompt.
+ *
+ * E' il gradino che precede il taglio della fonte nella scala di riduzione,
+ * per una ragione precisa: il rimedio e' testo DERIVATO — lo produciamo noi
+ * riassumendo cosa non andava — mentre la fonte e' il materiale su cui il gate
+ * di fedelta' giudica. A parita' di token risparmiati, toglierne al rimedio
+ * costa meno che toglierne alla notizia.
+ *
+ * Conserva la testa (dove stanno le istruzioni piu' importanti: quante ancore
+ * mancano e in che forma) e dichiara il taglio, cosi' il writer sa che l'elenco
+ * non finisce li'.
+ */
+function _clampRemediation(text, maxChars) {
+  const t = String(text || '');
+  if (t.length <= maxChars) return t;
+  return `${t.slice(0, maxChars)}\n[...elenco correzioni troncato: applica la stessa logica ai punti rimanenti]`;
+}
+
+function _clampSourceBody(body, maxChars) {
+  const MARK = '\n[...contenuto troncato per brevità]';
+  const text = String(body || '');
+  const bare = text.endsWith(MARK) ? text.slice(0, -MARK.length) : text;
+  if (bare.length <= maxChars) return text;
+  const cut = bare.slice(0, maxChars);
+  const lastStop = Math.max(
+    cut.lastIndexOf('. '), cut.lastIndexOf('.\n'),
+    cut.lastIndexOf('! '), cut.lastIndexOf('? '),
+  );
+  const kept = lastStop > maxChars * 0.5 ? cut.slice(0, lastStop + 1) : cut;
+  return kept + MARK;
+}
+
 async function callGemini(pageContent, url, sourceContext = null) {
   // Get existing article IDs to avoid duplicates (all sections — shared id/SEO/i18n namespace)
   const existingIds = getAllArticleIds();
@@ -6855,20 +7475,41 @@ Se le implicazioni sono DEBOLI o GENERICHE (la fonte non ha un impatto pratico d
     : domainFactsBrief;
   const domainFactsBlock = isSyntheticSource ? '' : `\nFATTI DI DOMINIO VERIFICATI (materiale di riferimento per contesto/implicazioni pratiche, SEPARATO dalla notizia sopra — non attribuirli alla fonte, usali solo se pertinenti al tema):\n${truncatedDomainFactsBrief}\n`;
 
-  const prompt = `${systemRoleLine}
+  // Il template e' una FUNZIONE dei due blocchi elastici invece di una
+  // costante, perche' il pre-flight del budget piu' sotto deve poterlo
+  // riassemblare piu' volte con blocchi piu' corti. Chiamata coi valori pieni
+  // produce esattamente la stringa di prima, byte per byte.
+  // ── UNA sola copia del template, tre viste ───────────────────────────────
+  //
+  // `part` ('full' | 'body' | 'meta') spegne i blocchi che l'altra meta' della
+  // generazione possiede. NON e' un secondo template: duplicare 15.700 char di
+  // impalcatura vorrebbe dire farli divergere, ed e' la stessa forma di difetto
+  // che il manifest del ciclo esiste per intercettare. Qui la divergenza e'
+  // impossibile per costruzione — c'e' un letterale solo.
+  //
+  // Regola del taglio, applicata blocco per blocco qui sotto:
+  //   body → tutto cio' che serve a SCRIVERE il corpo fedele alla fonte;
+  //   meta → tutto cio' che serve a DERIVARE i metadati dall'articolo scritto.
+  // Un blocco che serve a entrambi (fedelta', divieti di allucinazione) resta
+  // in entrambi: il taglio deve togliere solo cio' che l'altra meta' non usa,
+  // altrimenti e' una riduzione mascherata, cioe' il difetto che chiude.
+  const buildPrompt = ({ sourceBody, domainFacts, part = 'full' }) => {
+    const _isMeta = part === 'meta';
+    const _isBody = part === 'body';
+    return `${systemRoleLine}
 
 SOURCE URL: ${url.startsWith('evergreen://') ? '(editorial research)' : url.startsWith('stats-bfs://') ? 'https://www.bfs.admin.ch/bfs/it/home/statistiche/industria-servizi.html (BFS)' : url}
-SOURCE CONTENT:
-${truncatedContent}
-${domainFactsBlock}
+${_isMeta ? 'ARTICOLO GIÀ SCRITTO (è la TUA unica fonte per i metadati: NON aggiungere fatti, cifre, date o istituzioni che non compaiano qui sotto)' : 'SOURCE CONTENT'}:
+${sourceBody}
+${domainFacts}
 ${sourceContext?.headline ? `\nHEADLINE: ${sourceContext.headline}` : ''}
 ${relatedContext ? `\nRELATED:\n${relatedContext}` : ''}
 
-${idsSection}
+${_isBody ? '' : `${idsSection}
 ⚠️ The "id" must NOT share >60% words with any existing ID.
-
-${topicalRelevanceGate}
-${sourceContract ? `\n${sourceContract}\n` : ''}
+`}
+${_isMeta ? '' : topicalRelevanceGate}
+${!_isMeta && sourceContract ? `\n${sourceContract}\n` : ''}
 ═══ REGOLA #1 — FEDELTÀ ALLA FONTE (PRIORITÀ MASSIMA) ═══
 
 Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo originale. Questo significa:
@@ -6877,16 +7518,16 @@ Il tuo articolo è una RISCRITTURA EDITORIALE della fonte, NON un articolo origi
 - Le citazioni dirette devono essere VERBATIM dalla fonte. Se parafrasate, usa il discorso indiretto.
 - NON aggiungere "contesto di background" non verificabile (es. date di trattati, numeri di legge, statistiche) a meno che non sia nella fonte.
 
-COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
+${_isMeta ? '' : `COME RAGGIUNGERE IL MINIMO DI PAROLE SENZA INVENTARE:
 ${reachMinimumImplicationsLine}
 - Descrivi PROCEDURE concrete (cosa fare, dove andare, quali documenti servono)
 - Aggiungi SCENARI "cosa succede se" basati sui fatti della fonte
 - Confronta con la situazione precedente (prima vs dopo il cambiamento descritto nella fonte)
 - NON includere sezioni FAQ nel body — le FAQ vengono generate nel campo "faq" separato e mostrate come accordion
 - Usa tabelle comparative per rendere i dati della fonte più leggibili
-- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire
-${primaryLocaleBlock}${targetKeywordBlock}${peopleAlsoAskBlock}${mustCoverLsiBlock}${AI_SEARCH_PROMPT_BLOCK_IT}
-═══ REGOLE EDITORIALI ═══
+- Collega agli strumenti del sito (calcolatore, comparatore, guide) per approfondire`}
+${primaryLocaleBlock}${targetKeywordBlock}${_isBody ? '' : peopleAlsoAskBlock}${_isMeta ? '' : mustCoverLsiBlock}${_isMeta ? '' : AI_SEARCH_PROMPT_BLOCK_IT}
+${_isMeta ? '' : `═══ REGOLE EDITORIALI ═══
 
 STILE: Scrivi come giornalista finanziario italiano reale, NON come AI. Varia lunghezza frasi (da 5 a 30 parole). Alterna paragrafi brevi (1-2 frasi) a paragrafi più lunghi. Usa numeri, date, luoghi reali, istituzioni — MA SOLO se presenti nella fonte. ${styleColorLine}
 MAI usare: "In conclusione", "È importante notare", "In questo contesto", "Vale la pena", "È fondamentale", "Alla luce di", "Ecco cosa sapere", "Vediamo nel dettaglio", "Andiamo con ordine", "Non è un caso che", "Un aspetto cruciale", "Sempre più", "In un contesto di".
@@ -6897,7 +7538,7 @@ ANTI-AI (CRITICO — il testo DEVE superare l'AI detection):
 - MAX 2 emoji callout (📊/💡/⚠️) per INTERO articolo (body1+body2+body3 combinati). Zero è meglio.
 - Varia la struttura: non TUTTI i body devono avere un elenco puntato. Alterna prosa, tabelle, citazioni.
 - NON usare parallelismi strutturali tra body1/body2/body3 (se body1 ha ## + elenco, body2 deve avere ## + prosa + tabella).
-
+`}
 ═══ DIVIETI ANTI-ALLUCINAZIONE (BLOCCANTI — RIGETTO AUTOMATICO) ═══
 
 Un SECONDO modello AI indipendente (fact-checker) confronta OGNI affermazione con la fonte: inventare anche UN SOLO dato = rigetto.
@@ -6922,16 +7563,16 @@ FATTI E DICHIARAZIONI:
 - NON inventare eventi (conferenze, proteste, referendum) non menzionati nella fonte.
 - Se non sei CERTO che un fatto sia nella fonte, OMETTILO.
 
-ANTI-CLICKBAIT (CRITICO — Google Discover compliance):
+${_isBody ? '' : `ANTI-CLICKBAIT (CRITICO — Google Discover compliance):
 - Il titolo DEVE essere DESCRITTIVO e SPECIFICO: soggetto + azione + contesto.
   ✅ Buono: "Aumento stipendi minimi in Ticino: +2.3% dal 1° gennaio 2026"
   ❌ Vietato: "Tutto quello che devi sapere sugli stipendi in Ticino"
 - MAI titoli vaghi: "tutto cambia", "ecco perché", "scopri cosa", "shock", "clamoroso", "incredibile", "non crederai"
 - MAI domande retoriche come titolo ("Ma davvero i frontalieri...?")
-
+`}
 TOPIC GUARD: per articoli su "tassa salute", NON invertire la platea (es. "lavora in Lombardia e risiede in Ticino") se non esplicitamente indicata nella fonte.
 
-${ctaDefaultLine}
+${_isMeta ? '' : `${ctaDefaultLine}
 
 LINK INTERNI — sintassi ESCLUSIVA \`[testo](nav:azione)\`, MINIMO 3 per articolo (4 se supera 1200 parole):
 - 1 in body1 o body2 (contestuale al fatto)
@@ -6989,30 +7630,30 @@ REGOLE OPERATIVE:
 3. Nomi di istituzioni (FINMA, USTAT, UFAS, INSAI, SUVA) sono AMMESSI solo se RILEVANTI per il caso. FINMA = mercati finanziari/banche, NON ospedali/sanità. Non applicare istituzioni a domini sbagliati.
 
 VIOLAZIONE = verdict=FAIL + critical:fatti_inventati. Il sistema rimuove automaticamente le sezioni "Esempi concreti" sospette anche se passano il fact-check.
-
+`}
 Genera JSON (no markdown, no code fences):
-{
+{${_isBody ? '' : `
   "id": "<<ID: kebab-case ASCII, 3-5 parole, max 40 char>>",
   "category": "one of: ${CATEGORIES.join(', ')}",
   "image": "one of: ${AVAILABLE_IMAGES.slice(0, 15).join(', ')}... (scegli la più adatta)",
   "hasCalculator": true,
   ${imagePromptSchemaLine}
   "imageAlt": { "it": "max 125 chars", "en": "max 125 chars", "de": "max 125 chars", "fr": "max 125 chars" },
-  "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },
+  "slugs": { "it": "<<SLUG:it = ID>>", "en": "<<SLUG:en>>", "de": "<<SLUG:de>>", "fr": "<<SLUG:fr>>" },`}
   "content": {
-    "it": {
+    "it": {${_isBody ? '' : `
       "title": "Titolo giornalistico con keyword (OBBLIGATORIO ≤ 60 caratteri totali, target 50-55. Il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo nel title)",
-      "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",
+      "excerpt": "Sottotitolo con dati concreti DALLA FONTE (max 160 chars)",`}${_isMeta ? '' : `
       "body1": "Inizia con '## In breve' (3-4 bullet TL;DR ≤80 char) + '## Fatti chiave' (5-8 coppie **Cosa/Quando/Dove/Chi/Importo**: valore). Poi il LEAD: FATTI dalla fonte (chi, cosa, dove, quando, perché). Solo cronaca verificabile. 300-400 parole (escluse TL;DR/Fatti chiave). Min 1 ### sotto-sezione.",
       "body2": "Analisi pratica: implicazioni, confronti, scenari. Contenuto DIVERSO da body1. 300-400 parole. Min 1 ### sotto-sezione.",
-      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole.",
+      "body3": "Azione: procedura step-by-step, scadenze, strumenti + CTA finale. NON riassumere body1/body2. 300-400 parole."${_isBody ? '' : ','}`}${_isBody ? '' : `
       "faq": [
         {"q": "Domanda frequente 1 basata sui fatti dell'articolo?", "a": "Risposta con dati DALLA FONTE. 50-100 parole."},
         {"q": "Domanda frequente 2?", "a": "Risposta pratica basata sulla fonte."},
         {"q": "Domanda frequente 3?", "a": "Risposta con procedura o scadenza dalla fonte."}
-      ]
+      ]`}
     }
-  },
+  }${_isBody ? '' : `,
   "seo": {
     "title": "SEO Title senza brand suffix (OBBLIGATORIO ≤ 60 caratteri TOTALI; il suffisso ' | Frontaliere Ticino' viene aggiunto automaticamente — NON includerlo)",
     "description": "Meta description 150-160 chars (HARD CAP: ≤ 160 caratteri)",
@@ -7021,15 +7662,16 @@ Genera JSON (no markdown, no code fences):
     "ogDescription": "OG desc per la card social — 200-250 caratteri, NON una copia della description: Facebook/LinkedIn/WhatsApp mostrano molto piu' di una SERP (HARD CAP: ≤ 250 caratteri)",
     "headline": "Headline JSON-LD",
     "breadcrumbName": "Breadcrumb 2-3 parole"
-  }
+  }`}
 }
 
 REGOLE FINALI:
 - Contenuto IT primario. EN/DE/FR verranno generati separatamente.
-- Slug: lowercase, trattini, no accenti, max 50 chars
+${_isBody ? '' : `- Slug: lowercase, trattini, no accenti, max 50 chars
 - hasCalculator: true sempre
-- Apostrofi diritti ('), normative 2026
-- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI della fonte. Risposte: 50-100 parole, con dati concreti dalla fonte.`;
+`}- Apostrofi diritti ('), normative 2026
+${_isBody ? '' : `- FAQ: genera 3-5 coppie domanda/risposta basate sui FATTI ${_isMeta ? "dell'ARTICOLO qui sopra" : 'della fonte'}. Risposte: 50-100 parole, con dati concreti ${_isMeta ? "dall'articolo" : 'dalla fonte'}.`}`;
+  };
 
   const minWordsInstruction = `\n\nMINIMUM LENGTH (CRITICAL — STRICTLY ENFORCED):
 - body1+body2+body3 MUST total ≥${minItalianWords} words. This is HARD-enforced: content below this threshold will be REJECTED.
@@ -7091,7 +7733,11 @@ ISTRUZIONI TASSATIVE per questo tentativo:
   const systemRoleQualifier = IS_FRONTALIERE
     ? 'di lavoro transfrontaliero in Ticino'
     : 'di affari svizzeri a livello nazionale';
-  const llmMessages = [
+  // `part` seleziona la coda del messaggio utente come `buildPrompt` seleziona
+  // il corpo: il minimo-parole e l'elenco dei campi richiesti valgono per la
+  // meta' che li produce, non per l'altra. Il default 'full' lascia il
+  // messaggio byte-identico a prima.
+  const buildMessages = (promptText, remediation, part = 'full') => [
     { role: 'system', content: `${systemStem} ${systemRoleQualifier} che RISCRIVE articoli basandosi FEDELMENTE sulla fonte originale.
 
 REGOLA FONDAMENTALE: Ogni fatto, dato, legge, data, cifra e istituzione nel tuo articolo DEVE provenire dal testo SOURCE CONTENT fornito. Se un'informazione NON è nella fonte, NON includerla. Mai inventare, dedurre o "completare" dati mancanti.
@@ -7105,7 +7751,16 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     // Skipped when data/article-performance.json is missing or empty so the
     // prompt is byte-identical to today's behavior.
     ...(_winnerFingerprintMessage ? [{ role: 'system', content: _winnerFingerprintMessage }] : []),
-    { role: 'user', content: prompt + minWordsInstruction + headlineRefinementInstruction + factCheckRefinementInstruction + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.\n${otherLocalesNote}` }
+    { role: 'user', content: promptText
+      + (part === 'meta' ? '' : minWordsInstruction)
+      + remediation
+      + `\n\n⚠️ ISTRUZIONE SPECIALE PER QUESTA CHIAMATA:\nGenera SOLO il JSON con questi campi: ${
+        part === 'body'
+          ? `content.${primaryLocale} (body1, body2, body3). NON produrre id, category, image, slugs, title, excerpt, faq o seo: verranno chiesti in una chiamata separata.`
+          : part === 'meta'
+            ? `id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, faq), seo. NON riscrivere i body: sono già definitivi.`
+            : `id, category, image, hasCalculator, imagePrompt, imageAlt (4 lingue), slugs (4 lingue), content.${primaryLocale} (title, excerpt, body1, body2, body3, faq), seo.`
+      }\n${otherLocalesNote}` }
   ];
 
   // Pass a strict JSON schema so providers that support it (OpenAI/GitHub
@@ -7129,30 +7784,869 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   //   [prompt-budget] branch=<news|evergreen> section=<s> attempt=<n>
   //   est=<token> budget=<token> over=<0|1>
   const _promptBudgetBranch = isSyntheticSource ? 'evergreen' : 'news';
-  const _promptEstTokens = estimateRequestTokens(llmMessages, {
-    jsonSchema: articleSchema,
-    maxTokens: IT_GENERATION_MAX_TOKENS,
-  });
-  const _promptOverBudget = _promptEstTokens > PROMPT_TOKEN_BUDGET;
+
+  // ── Il budget: quello che la flotta ha DETTO, non quello che assumiamo ──
+  //
+  // `callLLM` allega a `ALL_MODELS_EXHAUSTED` il numero esatto sotto cui il
+  // prompt deve rientrare — `err.retryRequestTokenBudget`, cioe' il cap PIU'
+  // PERMISSIVO fra i modelli che hanno rifiutato — e il messaggio dice
+  // testualmente «A retry must rebuild the prompt under N tokens — resending
+  // the same messages cannot succeed». Fino a oggi nessun chiamante lo
+  // leggeva: il ciclo di retry rispediva messaggi identici, sei volte per
+  // sezione, e la libreria aveva gia' dimostrato che non potevano riuscire
+  // (run 31833016113: 28,8 minuti per arrivare a quella conclusione).
+  //
+  // Il retry lo passa qui via `_promptTokenBudget`. Al primo tentativo non
+  // c'e' ancora, e allora vale il cap dichiarato dalla flotta — che serve
+  // comunque, perche' anche l'attempt 1 sfora: misurato est=8274 contro 8000.
+  const _promptTokenTarget = Number(sourceContext?._promptTokenBudget) > 0
+    ? Number(sourceContext._promptTokenBudget)
+    : PROMPT_TOKEN_BUDGET;
+
+  // ── Le due difese che si combattevano ──────────────────────────────────
+  //
+  // La scala qui sotto accorcia la fonte per rientrare in un budget tarato sul
+  // cap dei modelli free (PROMPT_TOKEN_BUDGET = 8000). Ma la fonte tagliata e'
+  // esattamente quella che poi manca ai gate a valle. Misurato sulla run
+  // 32107646060: `[source-fidelity-low] recall 21-36% < 50%`,
+  // `[source-key-rates-dropped] perse 7-9 percentuali su 11`, `[thin-content]
+  // 818-1480 char contro un minimo di 1900`, e 20 tentativi di generazione in
+  // una sola run (495s su 638). Su 65 run: 688 occorrenze di `thin-content`,
+  // mediana 17 rigenerazioni per «Contenuto IT troppo corto».
+  //
+  // Ci si accorciava per farsi accettare, e si veniva bocciati per aver perso
+  // i fatti che ci si era accorciati per perdere.
+  //
+  // Da quando la generazione del corpo PREFERISCE claude-cli/haiku — l'unico
+  // membro del roster senza cap di input dichiarato — il primo tentativo non
+  // ha piu' motivo di accorciare: il modello che rispondera' per primo non ha
+  // un tetto da rispettare. Quindi gradino 0, prompt intero.
+  //
+  // Non serve un fallback inventato, perche' esiste gia': se haiku non e'
+  // disponibile e la cascata degrada sui modelli capped, `callLLM` lancia
+  // `ALL_MODELS_EXHAUSTED` con `err.retryRequestTokenBudget` — il cap piu'
+  // permissivo fra quelli che hanno rifiutato — il `catch` del ciclo di retry
+  // lo raccoglie in `lastPromptTokenBudget`, e il tentativo successivo entra
+  // qui con `_promptTokenBudget` valorizzato, cioe' con il ramo `> 0` sopra,
+  // cioe' con la scala di nuovo attiva su un target DETTATO dalla flotta.
+  // Percorso verificato end-to-end il 2026-08-18 (callLLM reale, catena di
+  // modelli capped, prompt da 60.500 token → retryRequestTokenBudget=8000).
+  //
+  // Vale SOLO al primo tentativo, ed e' applicato anche qui, non solo alla
+  // `prefer` passata a callLLM sotto: dal secondo tentativo in poi il retry
+  // loop min-words (selectMinWordsRetryModel) sceglie deliberatamente un
+  // modello diverso da quello precedente per uscire da un fallimento
+  // ripetuto, e quel modello ha quasi sempre un cap dichiarato — la scala di
+  // riduzione deve tornare a mordere per lui, non restare skippata pensando
+  // ad haiku che non verra' piu' chiamato. Vedi il gate sulla `prefer:` sotto.
+  const _preferActiveThisAttempt = generationAttempt === 1;
+  const _preferSenzaCap = _preferActiveThisAttempt && _preferisceModelloSenzaCap(PREFERRED_GENERATION_MODELS);
+  const _saltaScala = _preferSenzaCap && !(Number(sourceContext?._promptTokenBudget) > 0);
+
+  // ── La scala di riduzione, dichiarata e nell'ordine in cui morde ────────
+  //
+  // Ogni gradino e' misurato sul fixture del caso peggiore
+  // (news-prompt-token-budget.test.mjs), non stimato:
+  //
+  //   0. nessuna riduzione                       9488 token
+  //   1. senza domainFactsBlock                  8991  (-497)
+  //   2. + fonte al 60%                          ~8100
+  //   3. + fonte al minimo dichiarato (3000ch)   ~7900
+  //
+  // PERCHE' domainFacts PER PRIMO: e' «materiale di riferimento per
+  // contesto/implicazioni pratiche, SEPARATO dalla notizia», non la fonte, e
+  // il ramo evergreen lo azzera gia' per costruzione. Toglierlo sotto
+  // pressione di budget e' anche piu' SICURO che tenerlo: il commento a
+  // MAX_DOMAIN_FACTS_CHARS registra la contraddizione di grounding che
+  // produceva (scaglioni IRPEF offerti come «fatti» a un articolo svizzero
+  // nazionale, materiale che un modello debole poi usa davvero).
+  //
+  // PERCHE' `sourceContract` NON E' NELLA SCALA, pur pesando 230 token: e'
+  // costruito sulla fonte INTERA apposta, ed e' cio' che rende soddisfacibili
+  // le ancore che stanno oltre il troncamento. Toglierlo mentre si accorcia
+  // il corpo e' la combinazione che rende il gate di recall impossibile —
+  // esattamente il difetto che buildSourceContract esiste per chiudere.
+  //
+  // PERCHE' UN PAVIMENTO SULLA FONTE: sotto una certa soglia l'articolo non
+  // ha piu' sostanza da riscrivere e il gate di fedelta' non e' soddisfacibile
+  // comunque. Meglio restare sopra budget e degradare ai modelli grandi che
+  // consegnare al writer una fonte inutilizzabile.
+  const PROMPT_SOURCE_FLOOR_CHARS = 3000;
+  const PROMPT_REMEDIATION_CAP_CHARS = 1200;
+  const _remediationFull = headlineRefinementInstruction + factCheckRefinementInstruction;
+  const _remediationShort = _clampRemediation(_remediationFull, PROMPT_REMEDIATION_CAP_CHARS);
+  const _shrinkLadder = [
+    { label: 'intero', sourceBody: truncatedContent, domainFacts: domainFactsBlock, remediation: _remediationFull },
+    { label: 'senza fatti-di-dominio', sourceBody: truncatedContent, domainFacts: '', remediation: _remediationFull },
+    {
+      label: 'senza fatti-di-dominio + rimedio troncato',
+      sourceBody: truncatedContent,
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+    {
+      label: 'senza fatti-di-dominio + rimedio troncato + fonte al 60%',
+      sourceBody: _clampSourceBody(
+        truncatedContent,
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, Math.round(truncatedContent.length * 0.6)),
+      ),
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+    {
+      label: `senza fatti-di-dominio + rimedio troncato + fonte al minimo (${PROMPT_SOURCE_FLOOR_CHARS}ch)`,
+      sourceBody: _clampSourceBody(truncatedContent, PROMPT_SOURCE_FLOOR_CHARS),
+      domainFacts: '',
+      remediation: _remediationShort,
+    },
+  ];
+
+  // ── UNA RIDUZIONE CHE NON FA ENTRARE NON SI APPLICA ───────────────────────
+  //
+  // 2026-08-18 — il difetto che questo blocco chiude, misurato sulla run
+  // 32129053221 (sana, 397s). Sei righe consecutive, letterali:
+  //
+  //   news frontaliere attempt=1 est=8006 budget=8000 over=1 shrink=4
+  //   news frontaliere attempt=2..6 est=8417 budget=8000 over=1 shrink=4
+  //
+  // `shrink=4` e' l'ultimo gradino della scala e `over=1` dice che il prompt
+  // e' fuori budget LO STESSO: la riduzione aveva pagato tutto il suo prezzo
+  // — via i fatti di dominio, fonte tagliata da 6036 a 2862 char (-53%) — e
+  // non aveva comprato niente. E il prezzo si vedeva a valle: 12 chiamate su
+  // 12 sono uscite con `[thin-content] Articolo corto` (1732, 2217, 2134,
+  // 1765, 1319, 1898 char contro un minimo di 2500), perche' il primo blocco
+  // che la scala butta e' proprio il materiale di contesto da cui il corpo
+  // prende lunghezza.
+  //
+  // PERCHE' NON COMPRAVA NIENTE, in aritmetica e non a occhio. Misurato col
+  // fixture del caso peggiore di news-prompt-token-budget.test.mjs:
+  //
+  //   impalcatura sola (fonte=0, fatti=0, rimedio=0)   7180 token
+  //   + fonte al pavimento dichiarato (3000ch → 2862)  +818  = 7998 / 8045
+  //
+  // cioe' l'impalcatura da sola lascia 820 token di spazio (8000 − 7180) e il
+  // pavimento della fonte ne costa 818: al primo tentativo il gradino massimo
+  // rientra per 2 token, e appena il prompt cresce di una riga — la nota di
+  // retry, un rimedio, una headline correlata in piu' — non rientra piu'.
+  // `shrink=4` non e' «il gradino massimo»: e' un gradino che, per come sono
+  // fatti i numeri, non puo' funzionare.
+  //
+  // E SOPRATTUTTO: i cap che il pre-flight fa rispettare sono a gradini
+  // {3000, 4000, 8000} (`MODEL_MAX_REQUEST_TOKENS`) piu' il default di
+  // provider, che vale 8000 per tutti e cinque quelli che ne hanno uno
+  // (`DEFAULT_REQUEST_TOKENS_BY_PROVIDER` = MAX_PREFLIGHT_REQUEST_TOKENS).
+  // Fra 8000 e l'illimitato NON C'E' UN GRADINO. Quindi un prompt stimato
+  // 8045 e uno stimato 9020 sono ammessi esattamente dagli stessi modelli:
+  // scendere da 9020 a 8045 senza arrivare a 8000 non guadagna UN modello, e
+  // consegna a quelli che la chiamata la prendono comunque un prompt mutilato
+  // dei fatti di dominio e con la fonte piu' che dimezzata.
+  //
+  // Da qui la regola: si adotta il PRIMO gradino che rientra nel target; se
+  // NESSUNO rientra, si torna al gradino 0 — intero. Non e' un allentamento
+  // del budget (il target non si muove, il marker continua a dire `over=1`):
+  // e' il rifiuto di pagare un prezzo che nessuno incassa.
+  let prompt = null;
+  let llmMessages = null;
+  let _promptEstTokens = 0;
+  let _promptShrinkStep = 0;
+  let _promptShrinkLabel = 'intero';
+  let _promptFits = false;
+  const _buildStep = (i) => {
+    const step = _shrinkLadder[i];
+    const p = buildPrompt({ sourceBody: step.sourceBody, domainFacts: step.domainFacts });
+    const msgs = buildMessages(p, step.remediation);
+    const est = estimateRequestTokens(msgs, {
+      jsonSchema: articleSchema,
+      maxTokens: IT_GENERATION_MAX_TOKENS,
+    });
+    return {
+      p, msgs, est, label: step.label,
+      fonteChars: step.sourceBody.length,
+      fattiChars: step.domainFacts.length,
+    };
+  };
+  const _step0 = _buildStep(0);
+  const _promptRawEstTokens = _step0.est;
+
+  // ── GRADINO CALCOLATO: TOGLI ESATTAMENTE QUANTO SERVE, E NIENT'ALTRO ─────
+  //
+  // 2026-08-18. I gradini dichiarati sopra hanno un prezzo FISSO, e il primo
+  // costa TUTTI i fatti di dominio: -497 token sul fixture del caso peggiore.
+  // Quando lo sforamento e' di 71 token — il caso reale una volta divisa la
+  // generazione in due chiamate — pagare 497 token per comprarne 71 e'
+  // esattamente il difetto che il blocco sotto registra: una riduzione che
+  // sembra un rimedio e butta il materiale da cui il corpo prende lunghezza.
+  //
+  // Questo gradino accorcia la FONTE di quanto serve e basta: `over * 3.5`
+  // char, perche' `estimateRequestTokens` conta `ceil(chars / 3.5)`, piu' un
+  // margine di arrotondamento. `domainFactsBlock` resta INTATTO. Se il
+  // pavimento della fonte non lascia spazio sufficiente il gradino non
+  // entrera' e il ciclo passa oltre — adotta solo cio' che entra, quindi un
+  // gradino che non serve non ha effetti collaterali.
+  const _overTokens = _step0.est - _promptTokenTarget;
+  if (_overTokens > 0 && truncatedContent.length > PROMPT_SOURCE_FLOOR_CHARS) {
+    const _fonteRidotta = _clampSourceBody(
+      truncatedContent,
+      Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil(_overTokens * 3.5) + 64)),
+    );
+    if (_fonteRidotta.length < truncatedContent.length) {
+      _shrinkLadder.splice(1, 0, {
+        label: `fonte -${truncatedContent.length - _fonteRidotta.length}ch (minimo calcolato), fatti-di-dominio INTATTI`,
+        sourceBody: _fonteRidotta,
+        domainFacts: domainFactsBlock,
+        remediation: _remediationFull,
+      });
+    }
+  }
+  prompt = _step0.p;
+  llmMessages = _step0.msgs;
+  _promptEstTokens = _step0.est;
+  _promptShrinkLabel = _step0.label;
+  let _promptFonteChars = _step0.fonteChars;
+  let _promptFattiChars = _step0.fattiChars;
+  _promptFits = _promptEstTokens <= _promptTokenTarget;
+  // `_saltaScala` ferma tutto al gradino 0: il modello che rispondera' per primo
+  // non dichiara un cap, quindi non c'e' niente in cui rientrare. Vedi il blocco
+  // «Le due difese che si combattevano» sopra. Il predicato del ciclo lo dice
+  // esplicitamente invece di uscire con un `break` dentro, perche' qui il corpo
+  // del ciclo non ha piu' effetti collaterali: adotta solo il gradino che entra.
+  for (let i = 1; !_saltaScala && !_promptFits && i < _shrinkLadder.length; i++) {
+    const built = _buildStep(i);
+    if (built.est <= _promptTokenTarget) {
+      prompt = built.p;
+      llmMessages = built.msgs;
+      _promptEstTokens = built.est;
+      _promptShrinkStep = i;
+      _promptShrinkLabel = built.label;
+      _promptFonteChars = built.fonteChars;
+      _promptFattiChars = built.fattiChars;
+      _promptFits = true;
+    }
+  }
+
+  // Sopra il target ma DELIBERATAMENTE: non e' la scala che ha fallito, e' la
+  // scala che non e' stata chiamata in causa. Tenerlo distinto conta perche'
+  // `over=1` e' cio' che un watchdog allarma, e allarmare sul caso nominale lo
+  // renderebbe rumore da ignorare.
+  const _promptOverBudget = !_saltaScala && _promptEstTokens > _promptTokenTarget;
+
+  // ── QUANDO UN GRADINO E' INSODDISFACIBILE, E PERCHE' NON SI TOGLIE ───────
+  //
+  // I tre gradini che la flotta detta via `err.retryRequestTokenBudget` sono
+  // {3000, 4000, 8000}, e non sono COSTANTI DI QUESTO FILE: sono i cap di
+  // input dichiarati dai modelli (`MODEL_MAX_REQUEST_TOKENS` e
+  // `DEFAULT_REQUEST_TOKENS_BY_PROVIDER` in lib/ai-models.mjs). Non si
+  // possono «togliere» da qui: si puo' solo smettere di fingere di
+  // raggiungerli.
+  //
+  // Misura (news-prompt-token-budget.test.mjs, fixture del caso peggiore):
+  //
+  //   impalcatura del prompt UNICO      (fonte=0, fatti=0)   7180 token
+  //   impalcatura della SOLA scrittura  (fonte=0, fatti=0)   5850 token
+  //
+  // Quindi, dopo la divisione in due chiamate:
+  //   • 8000 diventa raggiungibile CON fonte intera e fatti interi
+  //     (chiamata di scrittura misurata a 8071, dentro col gradino
+  //     calcolato sopra che toglie ~250 char di fonte e zero fatti);
+  //   • 4000 e' raggiungibile solo dalla chiamata dei metadati (3272 di
+  //     impalcatura, 728 di spazio) — MAI dalla scrittura, che ha 5850 di
+  //     pavimento: quindi non e' raggiungibile per l'articolo;
+  //   • 3000 resta sotto entrambe le impalcature: insoddisfacibile.
+  //
+  // Il rimedio onesto per i due gradini bassi non e' uno `shrink` piu'
+  // aggressivo — non esiste — ma dirlo nel marker con `unsat=1`, cosi' che
+  // un watchdog distingua «ridotto e rientrato» da «non riducibile».
+  //
+  // ISSUE #452 — dal 2026-08-18 il marker non e' piu' l'unico lettore: il ciclo
+  // di retry esce presto sulla stessa condizione (vedi il blocco «USCITA
+  // ANTICIPATA DICHIARATA» in generateAndValidateArticle). Il numero e' quindi
+  // migrato in lib/exhaustion-disposition.mjs — una sola definizione per due
+  // lettori, e per la prima volta eseguibile da `node --test`, che questo file
+  // non e'. Il predicato e' lo stesso di prima, riscritto con la funzione
+  // condivisa perche' le due meta' non possano divergere sul `<` o sul `> 0`.
+  const _promptTargetInsoddisfacibile = isBudgetBelowScaffoldFloor(_promptTokenTarget);
+  // Marker machine-readable e STABILE: chi costruisce un watchdog legge questa
+  // riga, non il testo attorno. `shrink=` e `raw=` sono additivi — i campi
+  // preesistenti mantengono nome e posizione.
+  //
+  // `raw=` e' il peso del prompt COME ASSEMBLATO, prima della scala: e' il
+  // numero che PROMPT_TOKEN_RAW_CEILING ratcheta, e finora non compariva da
+  // nessuna parte nei log. Senza, il ratchet sul grezzo sarebbe verificabile
+  // solo sul fixture — e un fixture, qui, ha gia' mentito una volta.
   console.error(
     `[prompt-budget] branch=${_promptBudgetBranch} section=${SECTION_NAME} `
-    + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${PROMPT_TOKEN_BUDGET} `
-    + `over=${_promptOverBudget ? 1 : 0}`,
+    + `attempt=${generationAttempt} est=${_promptEstTokens} budget=${_promptTokenTarget} `
+    + `over=${_promptOverBudget ? 1 : 0} shrink=${_promptShrinkStep} raw=${_promptRawEstTokens} `
+    + `fonte=${_promptFonteChars}ch fatti=${_promptFattiChars}ch unsat=${_promptTargetInsoddisfacibile ? 1 : 0}`,
   );
+  if (_promptTargetInsoddisfacibile) {
+    console.warn(
+      `⚠️ [prompt-budget] target ${_promptTokenTarget} token SOTTO il pavimento dell'impalcatura `
+      + `(${PROMPT_SCAFFOLD_FLOOR_TOKENS}): nessuna riduzione lo rende raggiungibile, nemmeno con `
+      + 'fonte E fatti a zero. Non e\' un gradino stretto, e\' un gradino INSODDISFACIBILE: i modelli '
+      + 'che lo dettano verranno saltati dal pre-flight comunque. Meglio restare interi che uscire '
+      + 'con uno `shrink=N` che sembra un rimedio e non lo e\'.',
+    );
+  }
+  if (_promptRawEstTokens > PROMPT_TOKEN_RAW_CEILING) {
+    console.warn(
+      `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} assemblato pesa ${_promptRawEstTokens} token, `
+      + `sopra il tetto dichiarato di ${PROMPT_TOKEN_RAW_CEILING}: un blocco e' cresciuto e il costo `
+      + 'non e\' stato compensato altrove. Il tetto e\' un ratchet, non un obiettivo mobile.',
+    );
+  }
+  if (_promptShrinkStep > 0) {
+    console.error(
+      `  ✂️  [prompt-budget] prompt ridotto per rientrare in ${_promptTokenTarget} token: `
+      + `«${_promptShrinkLabel}» → est=${_promptEstTokens}`,
+    );
+  } else if (_saltaScala && _promptEstTokens > _promptTokenTarget) {
+    console.error(
+      `  📤 [prompt-budget] prompt INTERO (est=${_promptEstTokens}, oltre ${_promptTokenTarget}) `
+      + `per scelta: la chiamata preferisce ${PREFERRED_GENERATION_MODELS.join(', ')}, senza cap di `
+      + 'input dichiarato. Se la cascata degrada su modelli capped, il retry lo ricostruira\' '
+      + 'sotto il budget che la flotta dettera\' (err.retryRequestTokenBudget).',
+    );
+  }
   if (_promptOverBudget) {
     console.warn(
       `⚠️  [prompt-budget] il prompt ${_promptBudgetBranch} e' stimato in ${_promptEstTokens} token, `
-      + `oltre il cap piu' alto dichiarato dalla flotta (${PROMPT_TOKEN_BUDGET}): ogni modello `
-      + 'GitHub Models e Groq verra\' saltato dal pre-flight senza tentare la chiamata.',
+      + `oltre il target di ${_promptTokenTarget}, e NESSUN gradino della scala lo riporta sotto: `
+      + 'il prompt resta INTERO (shrink=0). Fra il cap di 8000 e l\'illimitato non c\'e\' un gradino, '
+      + 'quindi ridurlo a meta\' strada non guadagnerebbe un modello e toglierebbe i fatti di dominio '
+      + 'a chi la chiamata la prende comunque. I modelli con cap piu\' basso verranno saltati dal '
+      + 'pre-flight senza tentare la chiamata — come sarebbero stati saltati anche col prompt ridotto.',
     );
   }
 
+  // ═══ LA GENERAZIONE IN DUE CHIAMATE ══════════════════════════════════════
+  //
+  // PERCHE'. L'impalcatura del prompt unico pesa 7180 token da sola, contro
+  // un target di 8000: restano 820 token per fonte E fatti insieme, e la
+  // fonte al pavimento (3000ch) ne costa gia' 818. Da qui il difetto
+  // registrato sopra: il prompt «rientrava» solo buttando i fatti di dominio
+  // (fatti=0ch) e dimezzando la fonte, e 12 chiamate su 12 uscivano
+  // `[thin-content]`. Non e' una compressione mal tarata: e' un contenitore
+  // piu' piccolo del suo contenuto.
+  //
+  // IL TAGLIO SCELTO: corpo | metadati. L'impalcatura serve DUE lavori
+  // disgiunti. Scrivere vuole la fonte intera, i fatti di dominio, le regole
+  // di stile/anti-AI, i link interni, il minimo di parole, la struttura
+  // AI-search di body1. Etichettare vuole il catalogo immagini, la lista
+  // degli id esistenti, l'anti-clickbait, i blocchi SEO/PAA e lo schema dei
+  // metadati — e lavora sull'ARTICOLO GIA' SCRITTO, non sulla fonte.
+  // Nessuno dei due ha bisogno dell'input dell'altro, quindi il taglio non
+  // perde niente per costruzione.
+  //
+  // Gli altri due tagli considerati perdono entrambi: «pianificazione →
+  // scrittura» e «meta' corpo + meta' corpo» costringono la seconda chiamata
+  // a lavorare su un RIASSUNTO della fonte, cioe' reintroducono la perdita
+  // di fatti che questo cambiamento esiste per eliminare.
+  //
+  // MISURA (news-prompt-token-budget.test.mjs, fixture del caso peggiore):
+  //
+  //             impalcatura sola   con fonte+fatti INTERI
+  //   unico          7180                9402  (adottato 7998 con shrink=4,
+  //                                             fonte -53%, fatti -100%)
+  //   1/2 corpo      5850                8071
+  //   2/2 metadati   3272                4986  (articolo da 6000ch)
+  //
+  // IL FLAG. `CREATE_ARTICLE_PROMPT_SPLIT`, default **`auto`**:
+  //   auto (default) — divide SOLO quando la chiamata unica non entra senza
+  //                    perdere i fatti di dominio, o non entra affatto.
+  //                    Nel caso nominale (nessun cap dettato, modello senza
+  //                    tetto) resta UNA chiamata: la divisione ne costa due.
+  //   on             — divide sempre.
+  //   off            — non divide mai: comportamento identico a prima,
+  //                    reversibile senza rollback.
+  const _splitMode = String(process.env.CREATE_ARTICLE_PROMPT_SPLIT || 'auto').toLowerCase();
+  // Il predicato che conta: la scala stava per consegnare un prompt SENZA
+  // fatti di dominio pur avendone in ingresso. E' letteralmente il difetto
+  // della scheda (`fatti=0ch`), e ora e' anche cio' che il test osserva.
+  const _splitSalvaFatti = domainFactsBlock.length > 0 && _promptFattiChars === 0;
+  const _splitAttiva = _splitMode === 'on'
+    || (_splitMode !== 'off' && !_saltaScala && (_splitSalvaFatti || !_promptFits));
+
+  const _buildHalf = (part, sourceBody, domainFacts, remediation) => {
+    const schema = buildArticleJsonSchema(primaryLocale, part);
+    const p = buildPrompt({ sourceBody, domainFacts, part });
+    const msgs = buildMessages(p, remediation, part);
+    return {
+      p, msgs, schema, part,
+      est: estimateRequestTokens(msgs, { jsonSchema: schema, maxTokens: IT_GENERATION_MAX_TOKENS }),
+      fonteChars: sourceBody.length,
+      fattiChars: domainFacts.length,
+    };
+  };
+
+  // Costruita QUI, non dentro `_generateSplit`, cosi' che il peso e il
+  // contenuto della chiamata di scrittura siano osservabili senza eseguire
+  // una chiamata LLM — e' cio' su cui il test si aggancia.
+  //
+  // La meta' di scrittura entra in 8000 con la fonte INTERA e i fatti INTERI
+  // per un pelo: 8071 misurati sul caso peggiore, cioe' 71 token sopra. Qui
+  // si applica lo stesso gradino calcolato della scala — accorcia la FONTE di
+  // quanto sfora e basta (~250 char, -4%) e non tocca mai i fatti di dominio.
+  // Il confronto col difetto e' l'intero punto del cambiamento: prima, per
+  // comprare quei 71 token, si pagavano 1739ch di fatti e 3174ch di fonte.
+  //
+  // `target` e' un PARAMETRO, non piu' la costante di chiusura: quando la
+  // cascata cambia bracket (vedi «RI-BRACKETING SULLA CASCATA» sotto) la
+  // meta' di scrittura va ridimensionata sul cap del modello che sta per
+  // essere chiamato, non su quello con cui il tentativo era partito. Il
+  // default riproduce il comportamento precedente byte a byte.
+  const _buildCall1 = (target = _promptTokenTarget) => {
+    const intera = _buildHalf('body', truncatedContent, domainFactsBlock, _remediationFull);
+    if (intera.est <= target) return intera;
+    for (const rimedio of [_remediationFull, _remediationShort]) {
+      const c = _buildHalf('body', truncatedContent, domainFactsBlock, rimedio);
+      if (c.est <= target) return c;
+      const fonte = _clampSourceBody(
+        truncatedContent,
+        Math.max(PROMPT_SOURCE_FLOOR_CHARS, truncatedContent.length - (Math.ceil((c.est - target) * 3.5) + 64)),
+      );
+      if (fonte.length < truncatedContent.length) {
+        const ridotta = _buildHalf('body', fonte, domainFactsBlock, rimedio);
+        if (ridotta.est <= target) return ridotta;
+      }
+    }
+    // Nemmeno cosi' entra: si resta interi. NON si tolgono i fatti — sotto il
+    // pavimento dell'impalcatura (PROMPT_SCAFFOLD_FLOOR_TOKENS) toglierli non
+    // farebbe entrare comunque, e il marker lo dice gia' con `unsat=1`.
+    return intera;
+  };
+  // `let` e non `const`: il ri-bracketing sulla cascata puo' sostituirla con
+  // una meta' di scrittura ridimensionata sul cap del modello che rispondera'
+  // davvero. `_generateSplit` la legge dalla chiusura, quindi non serve
+  // duplicarne il corpo.
+  // Il budget che i marker `[prompt-split]` dichiarano. E' `let` perche' il
+  // ri-bracketing sposta il bersaglio: una riga `call=2/2 budget=8000` emessa
+  // mentre si sta lavorando a 4000 mente a chi legge i log.
+  let _splitBudgetLog = _promptTokenTarget;
+  // Il prompt della meta' di scrittura gia' TENTATA in questo attempt. Con
+  // `CREATE_ARTICLE_PROMPT_SPLIT=on` la divisione parte anche quando il
+  // prompt esce intero (`_splitAttiva` ha `_splitMode === 'on'` come
+  // disgiunto), e il piano di ri-bracketing potrebbe ricostruire la STESSA
+  // meta' sullo stesso bersaglio: rispedirla e' spendere due chiamate LLM
+  // per riottenere lo stesso rifiuto.
+  let _splitPromptTentato = null;
+  let _splitCall1 = _splitAttiva ? _buildCall1() : null;
+  if (_splitCall1) {
+    console.error(
+      `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `call=1/2 part=body est=${_splitCall1.est} budget=${_splitBudgetLog} `
+      + `fonte=${_splitCall1.fonteChars}ch fatti=${_splitCall1.fattiChars}ch `
+      + `motivo=${_splitSalvaFatti ? 'fatti-a-zero' : 'fuori-budget'}`,
+    );
+  }
+
+  // Ritorna la STRINGA JSON che la chiamata unica avrebbe prodotto, cosi' che
+  // tutto cio' che sta a valle (repair, parse, abort, normalizzazione, gate)
+  // resti invariato byte a byte. `null` = ricadi sulla chiamata unica.
+  const _generateSplit = async () => {
+    _splitPromptTentato = _splitCall1 ? _splitCall1.p : null;
+    // `expectedFields` DICHIARA cio' che questa meta' produce, invece di
+    // lasciarlo dedurre a `callLLM` dalla prosa del prompt. L'istruzione dice
+    // «(body1, body2, body3). NON produrre ... title, excerpt ...»: i cinque
+    // nomi ci sono tutti, e l'euristica per substring li leggeva tutti come
+    // RICHIESTI. Una risposta body-only conforme usciva `output JSON
+    // incompleto: title, excerpt`, cinque rigenerazioni, poi `qualityReject`.
+    // E' per questo che `call=2/2` non e' MAI stato stampato dal #430 (25
+    // `call=1/2` e 0 `call=2/2` sulle 4 run del 2026-08-18; `roster_blocked`
+    // 12 e 11 volte sulle due del 2026-08-19). Vedi #485.
+    const rawBody = useGeminiDirect
+      ? await callLLM(_splitCall1.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, expectedFields: BODY_ONLY_FIELDS })
+      : await callLLM(_splitCall1.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _splitCall1.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: BODY_ONLY_FIELDS });
+    let bodyData;
+    try {
+      bodyData = JSON.parse(repairLlmJson(rawBody));
+    } catch (e) {
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      return null;
+    }
+    // ── L'ABORT PER RILEVANZA TOPICA, E PERCHE' ORA SI DECIDE DOPO ───────
+    //
+    // L'abort vive nella meta' di scrittura ed e' terminale: non ha senso
+    // chiedere i metadati di un articolo che non verra' scritto. Si torna il
+    // payload com'e', il chiamante lo riconosce gia'.
+    //
+    // MA IL TEST ERA LASCO, E I DUE GATE DECIDEVANO DIVERSO.
+    // Qui c'era `if (bodyData?.abort_topical_relevance) return ...`, cioe'
+    // truthy. Il ramo a valle che decide LA STESSA COSA (« REGOLA #0 abort
+    // gate », ~270 righe sotto) usa invece l'uguaglianza STRETTA
+    // `=== true`. Qualunque valore truthy che non sia `true` — la stringa
+    // `"false"`, `"no"`, un numero, un oggetto — passava di qui e falliva la'.
+    //
+    // MISURA CHE HA APERTO L'INDAGINE (log GitHub Actions, corpus, 2026-08-18,
+    // le 4 run in cui lo split si e' attivato):
+    //
+    //   run           call=1/2   call=2/2   fallback   Exhausted content-quality
+    //   32187412494       5          0          0                5
+    //   32182923129       5          0          0                2
+    //   32176062690       5          0          0                3
+    //   32190158524      10          0          0                6
+    //
+    // ATTENZIONE, PERCHE' E' FACILE ATTRIBUIRLA A QUESTA RIGA E SAREBBE FALSO:
+    // quel 25 → 0 NON e' prodotto da qui. E' prodotto da `isBody2Check` in
+    // `callLLM` (~riga 5360), che pretende i 5 `REQUIRED_IT_BODY_FIELDS`
+    // quando il PROMPT li nomina — e l'istruzione della meta' body li nomina
+    // tutti, perche' dice « NON produrre ... title, excerpt ... ». Una
+    // risposta body-only CONFORME viene quindi giudicata
+    // `output JSON incompleto: title, excerpt`, rigenerata, e alla fine
+    // `callLLM` LANCIA: `_generateSplit` non arriva nemmeno qui, e non stampa
+    // fallback perche' un throw non e' un `return null`. Quello e' un difetto
+    // separato, con un rimedio separato, e non e' toccato da questa fix.
+    //
+    // AGGIORNAMENTO 2026-08-19 (#485): quel difetto separato ORA E' CHIUSO —
+    // la chiamata 1/2 qui sopra passa `expectedFields: BODY_ONLY_FIELDS`, e
+    // `callLLM` non pretende piu' title/excerpt da una meta' che per contratto
+    // non li produce. Il paragrafo resta perche' spiega perche' il 25 → 0
+    // NON era attribuibile a questa riga; la riga sotto resta corretta per la
+    // ragione che il paragrafo seguente da'.
+    //
+    // COSA RESTA VERO E PERCHE' QUESTA RIGA VA COMUNQUE CORRETTA: e' la
+    // barriera IMMEDIATAMENTE SUCCESSIVA sullo stesso percorso, e sbaglia in
+    // un modo che si paga caro appena la prima cade. Cio' che restituisce e'
+    // la meta' BODY (`ROOT_KEYS_BODY = ['content','abort_topical_relevance',
+    // 'reason']`), che per costruzione NON PUO' contenere `title`/`excerpt` —
+    // quelli nascono solo nella chiamata 2/2. A valle il flag lasco non fa
+    // scattare l'abort stretto, il payload viene accettato con la politica
+    // « contract violation, trusting content over the flag », e il gate dei
+    // campi obbligatori stampa `⚠️ output JSON incompleto: title, excerpt`
+    // fino a 5 rigenerazioni, poi `🚫 Exhausted after 2 consecutive
+    // content-quality failures`: cioe' modelli penalizzati per aver obbedito
+    // al contratto. E' la stessa firma per cui il 2026-08-18 sono stati
+    // bruciati 16 modelli (fra gli altri nvidia/meta/llama-3.1-8b-instruct,
+    // gemini-3.1-flash-lite, gemini-flash-lite-latest) CON body1..body8 pieni,
+    // 164-3103 char a blocco. A roster vuoto la run chiude
+    // `declared roster_blocked`, che per progetto non concatena.
+    //
+        // LA POLITICA E' QUELLA DEL VALLE, non una nuova: se il flag e' `true` ma
+    // il contenuto e' utilizzabile, il modello si e' contraddetto e VINCE IL
+    // CONTENUTO. Quindi il corpo si calcola PRIMA di decidere, e l'abort si
+    // restituisce solo quando il corpo non e' utilizzabile — con la soglia
+    // `< 500` che gia' viveva qui sotto, non una nuova.
+    // Le stesse tre forme che il valle tollera — `content.it`, `content`
+    // senza locale, campi alla radice (normalizeItalianContentFromPayload,
+    // body2-payload-verdict.mjs:213) — non solo `content[primaryLocale]`: un
+    // payload body-only genuino nelle altre due forme veniva letto come vuoto
+    // qui e mandato sul ramo di fallback a chiamata singola nonostante il
+    // valle lo avrebbe accettato. Vedi #508.
+    //
+    // La forma normale (`content[primaryLocale]` popolato) resta il RAW
+    // object del modello, non il blocco normalizzato: `normalizeItalianContentFromPayload`
+    // fa `.trim()` sui valori, e il corpo della 1/2 deve sopravvivere
+    // all'assemblaggio byte per byte (vedi il test «il corpo della 1/2
+    // sopravvive all'assemblaggio»). Il fallback tollerante scatta solo
+    // quando la forma normale non porta nessuno dei tre campi.
+    const _bodyContentDiretto = bodyData?.content?.[primaryLocale];
+    const bodyContent = (_bodyContentDiretto && typeof _bodyContentDiretto === 'object'
+      && (_bodyContentDiretto.body1 || _bodyContentDiretto.body2 || _bodyContentDiretto.body3))
+      ? _bodyContentDiretto
+      : (normalizeItalianContentFromPayload(bodyData, primaryLocale, BODY_ONLY_FIELDS) || {});
+    const articolo = [bodyContent.body1, bodyContent.body2, bodyContent.body3]
+      .filter((x) => typeof x === 'string' && x.trim()).join('\n\n');
+    const _abortDichiarato = bodyData?.abort_topical_relevance === true;
+    const _corpoUsabile = articolo.length >= 500;
+    // ALLINEARE IL FLAG NON BASTA: va allineato anche il PREDICATO DI
+    // USABILITA'. Il valle non chiede «500 char di corpo», chiede
+    // `normalizeItalianContentFromPayload(...)`, che torna truthy con UN SOLO
+    // carattere in uno qualunque di title/excerpt/body1/body2/body3
+    // (body2-payload-verdict.mjs). I due criteri divergono nella finestra
+    // 1..499 char: li' lo split avrebbe restituito il payload come abort, e il
+    // valle — flag `=== true` MA normalize truthy — avrebbe saltato il proprio
+    // throw di abort, preso il ramo di auto-contraddizione, e sarebbe finito
+    // in `validateItalianPayload` con `Campo title mancante per it`. Cioe' di
+    // nuovo un payload consegnato a un gate che non abortira': la stessa forma
+    // del difetto, spostata di un ramo. Quindi l'abort si restituisce solo
+    // quando il valle lo riconoscerebbe come tale, e la soglia dei 500 char
+    // resta a decidere l'ALTRA domanda — proseguire alla 2/2 o ricadere sulla
+    // chiamata unica — che e' cio' per cui e' sempre servita.
+    const _valleAbortirebbe = !normalizeItalianContentFromPayload(bodyData, primaryLocale);
+    if (_abortDichiarato && _valleAbortirebbe) {
+      // NESSUNA USCITA MUTA. E' il silenzio di questo ramo che ha reso il
+      // difetto invisibile per un giorno intero mentre bruciava il roster:
+      // l'unico indizio rimasto era il conteggio a zero delle righe ALTRUI.
+      console.error(
+        `  ⏭️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true con `
+        + `${articolo.length}ch di corpo: abort terminale, nessuna chiamata 2/2 `
+        + `(reason: "${String(bodyData.reason || '').slice(0, 200)}").`,
+      );
+      return JSON.stringify(bodyData);
+    }
+    if (_abortDichiarato) {
+      // Stessa riga del valle, stesso verdetto, stesso contatore. Il contatore
+      // serve QUI e non basta quello del valle: il payload che uscira' dalla
+      // 2/2 (`merged`) nasce da `metaData`, la cui meta' non ha
+      // `abort_topical_relevance`, quindi la contraddizione non arriva mai al
+      // gate di valle e sparirebbe dal run report.
+      console.error(
+        `  ⚠️  [prompt-split] chiamata 1/2 ha dichiarato abort_topical_relevance=true MA ha `
+        + `anche reso ${articolo.length}ch di corpo — contract violation, trusting content `
+        + `over the flag (reason given: "${String(bodyData.reason || '').slice(0, 200)}").`,
+      );
+      if (RUN_REPORT && typeof RUN_REPORT === 'object') {
+        RUN_REPORT.topicGateSelfContradictions = (RUN_REPORT.topicGateSelfContradictions || 0) + 1;
+      }
+    }
+    if (!_corpoUsabile) {
+      // Il valore ANOMALO del flag va nominato qui, o sparisce: e' l'unico
+      // indizio che il modello ha TENTATO un abort in una forma che nessuno
+      // dei due gate riconosce, ed e' esattamente la classe che questa fix
+      // esiste per rendere visibile.
+      const _flagAnomalo = bodyData?.abort_topical_relevance != null && !_abortDichiarato
+        ? ` (abort_topical_relevance=${JSON.stringify(bodyData.abort_topical_relevance)}, ne' true ne' assente: ignorato da entrambi i gate)`
+        : '';
+      console.error(`  ⚠️ [prompt-split] chiamata 1/2 ha reso ${articolo.length}ch di corpo${_flagAnomalo}: ricado sulla chiamata unica.`);
+      return null;
+    }
+
+    // La seconda chiamata NON vede la fonte: vede l'articolo. E' la ragione
+    // per cui questo taglio non perde fatti — i metadati devono descrivere
+    // cio' che e' stato scritto, non la notizia di partenza.
+    const _call2 = _buildHalf('meta', articolo, '', '');
+    console.error(
+      `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `call=2/2 part=meta est=${_call2.est} budget=${_splitBudgetLog} `
+      + `articolo=${articolo.length}ch`,
+    );
+    // La meta' meta era all'estremo OPPOSTO, e nessuno l'aveva visto perche'
+    // non e' mai stata raggiunta: il suo prompt NON nomina `body1/body2/body3`
+    // (sono dentro i blocchi `${_isMeta ? '' : ...}` di `buildPrompt`, e
+    // `minWordsInstruction` e' saltata per `meta`), quindi l'euristica era
+    // FALSA e questa chiamata non veniva validata affatto. Una risposta senza
+    // `title` sarebbe passata liscia fin dentro il merge, per morire dopo su
+    // `validateItalianPayload` — cioe' senza rigenerazione e senza rotazione
+    // di modello. `META_ONLY_FIELDS` le da' la validazione che le compete:
+    // esattamente i due campi di testo che questa meta' produce.
+    const rawMeta = useGeminiDirect
+      ? await callLLM(_call2.msgs, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, expectedFields: META_ONLY_FIELDS })
+      : await callLLM(_call2.msgs, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: _call2.schema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: META_ONLY_FIELDS });
+    let metaData;
+    try {
+      metaData = JSON.parse(repairLlmJson(rawMeta));
+    } catch (e) {
+      console.error(`  ⚠️ [prompt-split] chiamata 2/2 senza JSON valido (${e.message}): ricado sulla chiamata unica.`);
+      return null;
+    }
+    // Il verdetto sopra (via `expectedFields: META_ONLY_FIELDS` dentro
+    // `callLLM`) tollera title/excerpt in una di TRE forme — `content.it`,
+    // `content` senza locale, o alla radice — perche' e' cosi' che
+    // `normalizeItalianContentFromPayload` giudica la risposta usabile. Il
+    // merge leggeva SOLO `metaData.content[primaryLocale]`: una risposta
+    // giudicata `ok` con i campi nelle altre due forme passava il verdetto e
+    // poi li perdeva qui, morendo piu' a valle in `validateItalianPayload`
+    // con `Campo title mancante per it` — senza rigenerazione ne' rotazione
+    // di modello (issue #494). Si normalizza con la stessa funzione che ha
+    // gia' giudicato la risposta, cosi' il merge legge cio' che il verdetto
+    // ha davvero trovato.
+    const metaBlock = normalizeItalianContentFromPayload(metaData, primaryLocale, META_ONLY_FIELDS);
+    // La base dello spread e' la risposta GREZZA del modello per la meta'
+    // meta: con jsonMode+jsonSchema Gemini ottiene una forma permissiva
+    // (`sanitizeSchemaForGemini` toglie `additionalProperties: false`, vedi
+    // `buildArticleJsonSchema`), quindi content.it puo' portare chiavi che lo
+    // schema dichiara ma META_ONLY_FIELDS non giudica (`faq`, issue #578) o
+    // chiavi che nessuno schema dichiara affatto. `faq` va preservata (e' il
+    // solo modo in cui sopravvive: non e' in META_ONLY_FIELDS ne' in
+    // BODY_ONLY_FIELDS), tutto il resto no.
+    const META_CONTENT_KEYS = [...META_ONLY_FIELDS, 'faq'];
+    const recoveredFaq = recoverMisplacedFaq(metaData, primaryLocale) ?? recoverMisplacedFaq(bodyContent, primaryLocale) ?? recoverMisplacedFaq(bodyData, primaryLocale);
+    // I campi della 1/2 restano RAW (niente trim: il corpo deve sopravvivere
+    // byte per byte), ma SOLO `BODY_ONLY_FIELDS` e SOLO se stringhe: un
+    // modello che risponde con body1 come array/oggetto (invece di stringa)
+    // spedirebbe quel valore grezzo nel content pubblicato senza questo
+    // controllo (issue #578).
+    const merged = {
+      ...metaData,
+      content: {
+        ...(metaData?.content || {}),
+        [primaryLocale]: {
+          ...Object.fromEntries(
+            Object.entries(metaData?.content?.[primaryLocale] || {}).filter(([k]) => META_CONTENT_KEYS.includes(k)),
+          ),
+          ...Object.fromEntries(
+            BODY_ONLY_FIELDS
+              .filter((k) => typeof bodyContent?.[k] === 'string')
+              .map((k) => [k, bodyContent[k]]),
+          ),
+          ...(metaBlock || {}),
+          ...(recoveredFaq !== undefined ? { faq: recoveredFaq } : {}),
+        },
+      },
+    };
+    return JSON.stringify(merged);
+  };
+
+  // ── RI-BRACKETING SULLA CASCATA ──────────────────────────────────────────
+  //
+  // IL BUCO. Il prompt viene dimensionato UNA VOLTA SOLA, sul modello
+  // PREFERITO — e il preferito e' l'unico membro del roster che un cap di
+  // input non lo dichiara. Quando la cascata lo abbandona, il payload resta
+  // quello: `callLLM` non sa rimpicciolirlo, sa solo saltare chi non lo
+  // regge. Misurato sulla run 32147257594 (14:15Z, 51 minuti, ZERO articoli):
+  //
+  //   1. tentativo 1, prompt INTERO per scelta, est=8208 (sezione svizzera)
+  //      / 8120 (frontaliere);
+  //   2. claude-cli/haiku fallisce 3/3 («claude CLI timed out after
+  //      120000ms — stdout: 0 bytes»);
+  //   3. la cascata degrada sui modelli capped con lo STESSO payload, e il
+  //      pre-flight li salta tutti: sui 101 della catena, 35 dichiarano un
+  //      cap di 8000 e 4 di 4000, nessuno dichiara piu' di 8000 (misurato il
+  //      2026-08-18). Ogni fallback del tentativo 1 e' quindi condannato
+  //      PRIMA di partire;
+  //   4. il recupero arrivava solo al tentativo 2, via
+  //      `err.retryRequestTokenBudget` — un tentativo intero buttato per
+  //      headline, piu' i 3 timeout da 120s che lo precedono.
+  //
+  // IL RIMEDIO NON E' rinunciare alla preferenza (e' voluta: il modello a
+  // pagamento nei punti critici) ne' accorciare per precauzione — quello era
+  // il difetto opposto, i fatti di dominio buttati per un cap che il modello
+  // che rispondeva non aveva. E' RI-DIMENSIONARE NEL MOMENTO IN CUI SI CAMBIA
+  // BRACKET. Il numero su cui rientrare la libreria lo calcola gia' e lo
+  // allega al throw (`err.retryRequestTokenBudget`, il cap piu' permissivo
+  // fra quelli che hanno rifiutato): arriva in tempo per una seconda chiamata
+  // DENTRO questo stesso tentativo.
+  //
+  // PERCHE' QUI E NON IN `ai-models.mjs`. Ricostruire un prompt vuol dire
+  // sapere com'e' fatto: fonte, fatti di dominio, rimedio, contratto,
+  // schema, e quale meta' sopravvive alla divisione in due chiamate. Quella
+  // conoscenza vive in questo file e ci resta; la libreria continua a
+  // esporre solo numeri (`getDeclaredRequestTokenLimit` in pre-flight,
+  // `retryRequestTokenBudget` al throw). Un hook che le chiedesse di
+  // rimpicciolire il payload le farebbe attraversare quel confine.
+  //
+  // `null` = non c'e' niente da comprare (budget sotto il pavimento
+  // dell'impalcatura, o nessun gradino che rientri): meglio propagare
+  // l'errore che spendere una chiamata su un prompt che verra' saltato
+  // uguale. E' lo stesso principio del `unsat=1` del marker sopra.
+  const _rebracket = (budget) => {
+    const target = Number(budget);
+    if (!(target > 0) || target >= _promptEstTokens) return null;
+    let stepFit = null;
+    for (let i = 0; i < _shrinkLadder.length; i++) {
+      const built = _buildStep(i);
+      if (built.est <= target) { stepFit = built; break; }
+    }
+    // La stessa domanda del predicato di split, riposta sul bracket NUOVO:
+    // la riduzione sta per consegnare un prompt senza fatti di dominio pur
+    // avendone in ingresso? Allora la divisione in due chiamate li salva —
+    // e' esattamente cio' che il tentativo 2 fa gia' oggi con successo
+    // (`motivo=fatti-a-zero`, 8254 → 6888, fatti preservati).
+    const salvaFatti = domainFactsBlock.length > 0 && (!stepFit || stepFit.fattiChars === 0);
+    const call1 = (_splitMode !== 'off' && (salvaFatti || !stepFit)) ? _buildCall1(target) : null;
+    const splitEntra = !!call1 && call1.est <= target;
+    if (!stepFit && !splitEntra) return null;
+    return {
+      target,
+      split: splitEntra ? call1 : null,
+      msgs: stepFit ? stepFit.msgs : null,
+      est: stepFit ? stepFit.est : null,
+      label: stepFit ? stepFit.label : null,
+      fonteChars: stepFit ? stepFit.fonteChars : null,
+      fattiChars: stepFit ? stepFit.fattiChars : null,
+    };
+  };
+
+  // Applica il piano. Marker machine-readable e STABILE, sulla stessa forma
+  // di `[prompt-budget]` e `[prompt-split]` — chi costruisce un watchdog
+  // legge questa riga, non il testo attorno:
+  //
+  //   [prompt-rebracket] section=<s> attempt=<n> budget=<token>
+  //   da=<token> a=<token> via=<split|scala> fonte=<n>ch fatti=<n>ch
+  const _eseguiRibracket = async (rb, opts) => {
+    const scelta = rb.split || rb;
+    console.error(
+      `  ♻️ [prompt-rebracket] section=${SECTION_NAME} attempt=${generationAttempt} `
+      + `budget=${rb.target} da=${_promptEstTokens} a=${scelta.est} `
+      + `via=${rb.split ? 'split' : 'scala'} `
+      + `fonte=${scelta.fonteChars}ch fatti=${scelta.fattiChars}ch`,
+    );
+    // Il fallback della chiamata unica ridimensionata: il gradino della scala
+    // se ce n'e' uno che entra, altrimenti il piu' aggressivo che la scala
+    // sappia costruire. Serve anche quando a spedire e' lo split, perche'
+    // `llmMessages` e' cio' da cui riparte il retry per JSON malformato piu'
+    // sotto: lasciarci l'assemblato intero rimetterebbe fuori, proprio al
+    // retry, i modelli che il ri-bracketing ha appena recuperato.
+    const _msgsUnica = rb.msgs || _buildStep(_shrinkLadder.length - 1).msgs;
+    if (rb.split && rb.split.p !== _splitPromptTentato) {
+      _splitBudgetLog = rb.target;
+      _splitCall1 = rb.split;
+      console.error(
+        `[prompt-split] mode=${_splitMode} section=${SECTION_NAME} attempt=${generationAttempt} `
+        + `call=1/2 part=body est=${_splitCall1.est} budget=${_splitBudgetLog} `
+        + `fonte=${_splitCall1.fonteChars}ch fatti=${_splitCall1.fattiChars}ch `
+        + `motivo=ri-bracketing`,
+      );
+      const r = await _generateSplit();
+      if (r != null) {
+        llmMessages = _msgsUnica;
+        return r;
+      }
+      console.error('  ↩️ [prompt-rebracket] split a vuoto: ricado sulla chiamata unica ridimensionata.');
+    }
+    if (!rb.msgs) return null;
+    // Il prompt ridimensionato diventa QUELLO del tentativo, non una copia
+    // locale: il retry per JSON malformato piu' sotto riparte da
+    // `llmMessages`, e rispedire li' l'assemblato intero rimetterebbe fuori
+    // i modelli appena recuperati.
+    llmMessages = _msgsUnica;
+    return callLLM(llmMessages, opts);
+  };
+
   let itRaw;
-  if (useGeminiDirect) {
-    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
+  if (_splitAttiva) {
+    itRaw = await _generateSplit();
+    if (itRaw === null) console.error('  ↩️ [prompt-split] fallback: chiamata unica.');
+  }
+  if (itRaw != null) {
+    // gia' generato in due chiamate
+  } else if (useGeminiDirect) {
+    // La chiamata unica chiede l'articolo INTERO, e lo dichiara come le due
+    // meta' dichiarano il proprio pezzo. Oggi l'euristica arriverebbe alla
+    // stessa lista da sola — il prompt nomina tutti e cinque i campi come
+    // richiesti — ma dedurlo dalla prosa e' esattamente cio' che si e' rotto
+    // sulla meta' body: una riformulazione dell'istruzione non deve poter
+    // cambiare in silenzio COSA viene validato.
+    itRaw = await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS });
     console.error(`  ↪ Completato con Gemini ${AI_MODELS.GEMINI_FLASH}`);
   } else {
-    itRaw = await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema });
+    const _optsUnica = { model: forceModel || GH_MODEL_HEAVY, temperature, maxTokens: IT_GENERATION_MAX_TOKENS, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS };
+    try {
+      itRaw = await callLLM(llmMessages, _optsUnica);
+    } catch (e) {
+      // Vedi «RI-BRACKETING SULLA CASCATA». Il ramo si arma SOLO quando il
+      // prompt e' partito intero per scelta (`_saltaScala`) e la flotta ha
+      // detto di quanto sforava: fuori da li' il prompt era gia'
+      // dimensionato sul budget dettato, e un errore senza
+      // `retryRequestTokenBudget` non e' un errore di dimensione. Quindi
+      // nessun percorso oggi verde cambia comportamento.
+      const _budgetDettato = _saltaScala ? Number(e?.retryRequestTokenBudget) : 0;
+      const _rb = _budgetDettato > 0 ? _rebracket(_budgetDettato) : null;
+      if (!_rb) throw e;
+      // Il piano puo' anche LANCIARE, e quel lancio va assorbito, mai
+      // propagato al posto di `e`. Ragione aritmetica, non stilistica: un
+      // prompt rientrato nel bracket non fa piu' saltare i modelli a cap
+      // 8000, quindi il nuovo ALL_MODELS_EXHAUSTED porta un
+      // `retryRequestTokenBudget` piu' BASSO (il cap dei soli modelli
+      // rimasti fuori). Il ciclo esterno lo applica con un `Math.min`
+      // monotono, e i tentativi 2..6 partirebbero con un bersaglio sotto
+      // PROMPT_SCAFFOLD_FLOOR_TOKENS — cioe' insoddisfacibile per
+      // costruzione. Meglio l'errore originale, il cui budget e' il solo
+      // che il tentativo 2 sappia soddisfare.
+      let _out;
+      try {
+        _out = await _eseguiRibracket(_rb, _optsUnica);
+      } catch (e2) {
+        console.error(`  ↩️ [prompt-rebracket] anche il piano ha fallito (${e2.message}): propago l'errore originale.`);
+        throw e;
+      }
+      // `null` = nemmeno il piano ha prodotto qualcosa di spedibile: si
+      // propaga l'errore ORIGINALE, cosi' che il ciclo di retry raccolga
+      // `retryRequestTokenBudget` come prima e il tentativo 2 resti la rete
+      // di sicurezza che e' sempre stata.
+      if (_out == null) throw e;
+      itRaw = _out;
+    }
   }
   let itData;
   const itRepaired = repairLlmJson(itRaw);
@@ -7174,8 +8668,21 @@ Rispondi SOLO con JSON valido, senza markdown.` },
     console.error(`  🔄 Retry IT con maxTokens=${retryTokens}${isTruncation ? ' (troncamento rilevato)' : ''}...`);
     try {
       const itRaw2 = useGeminiDirect
-        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema })
-        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema });
+        ? await callLLM(llmMessages, { model: AI_MODELS.GEMINI_FLASH, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, expectedFields: REQUIRED_IT_BODY_FIELDS })
+        // Stessa preferenza della chiamata che sta ripetendo, e stesso gate
+        // `_preferActiveThisAttempt`: solo al primo tentativo del retry loop
+        // min-words, cosi' da non scavalcare la rotazione di diversificazione
+        // (selectMinWordsRetryModel) dal secondo tentativo in poi — vedi il
+        // commento su `_preferSenzaCap` sopra. E' anche la seconda chiamata
+        // preferita per tentativo su cui e' dimensionato
+        // DEFAULT_CLAUDE_CLI_MAX_CALLS_PER_RUN (40 = 20 tentativi × 2). Non
+        // e' piu' un upper bound stretto: il ri-bracketing puo' aggiungere
+        // 1 chiamata preferita (ramo scala) o 2 (ramo split) e solo
+        // sull'attempt 1, dove la preferenza vive. Il tetto vero lo tiene lo
+        // storm breaker di claude-cli, che dopo 3 fallimenti consecutivi lo
+        // spegne per tutta la run — ed e' proprio il caso in cui il
+        // ri-bracketing si arma.
+        : await callLLM(llmMessages, { model: forceModel || GH_MODEL_HEAVY, temperature: 0.3, maxTokens: retryTokens, jsonMode: true, jsonSchema: articleSchema, prefer: _preferActiveThisAttempt ? PREFERRED_GENERATION_MODELS : undefined, expectedFields: REQUIRED_IT_BODY_FIELDS });
       itData = JSON.parse(repairLlmJson(itRaw2));
       console.error(`  ✅ Retry IT riuscito`);
     } catch (retryErr) {
@@ -7296,7 +8803,7 @@ Rispondi SOLO con JSON valido, senza markdown.` },
   applyMicrocopyGuard(itContent, 'it');
 
   // Preserve FAQ from AI response (not in REQUIRED_IT_BODY_FIELDS, extracted separately)
-  const rawFaq = itData?.content?.it?.faq || itData?.content?.faq || itData?.faq;
+  const rawFaq = recoverMisplacedFaq(itData, primaryLocale);
   if (rawFaq) {
     if (!Array.isArray(rawFaq)) {
       console.error('  ⚠️  FAQ non è un array, lo rimuovo');
@@ -7392,6 +8899,22 @@ function expandEnrichmentLine(isFrontaliere, boundToText = false) {
     : 'riferimenti a cantoni o città svizzere pertinenti al tema';
   return `- Aggiungi: esempi concreti con numeri reali, ${geoRefs}, normative con date e importi, checklist operative, confronti tra scenari pratici`;
 }
+
+// ── Espansione anticipata (2026-08-18) ────────────────────────────────────
+// «Troppo corto» e' una proprieta' della FONTE, non del modello, ma il loop la
+// trattava come se ruotare modello potesse risolverla: sulla run 32111688992 sei
+// modelli diversi (gpt-4.1, gpt-4o, gemini-2.5-flash, gpt-4.1-nano,
+// groq/gpt-oss-120b, gpt-4o-mini) hanno prodotto 179-489 parole contro una
+// soglia di 700, e poi `expandShortItalianContent` ha chiuso in 27 secondi
+// portando 489 parole a 11.439 caratteri. Sotto questa soglia la bozza e' troppo
+// magra perche' l'espansione abbia materiale su cui lavorare e conviene ancora
+// rigenerare; sopra, si espande dal tentativo `EARLY_EXPANSION_MIN_ATTEMPT`.
+const EARLY_EXPANSION_ENABLED = (process.env.CREATE_ARTICLE_EARLY_EXPANSION ?? '1') !== '0';
+const EARLY_EXPANSION_MIN_RATIO = (() => {
+  const raw = Number(process.env.CREATE_ARTICLE_EARLY_EXPANSION_RATIO ?? '0.5');
+  return Number.isFinite(raw) && raw > 0 && raw < 1 ? raw : 0.5;
+})();
+const EARLY_EXPANSION_MIN_ATTEMPT = 2;
 
 /**
  * Expand short Italian body content by asking the LLM to enrich each body field.
@@ -7545,9 +9068,48 @@ async function translateContentFreeMt(sourceLang, targetLang, targetLabel, sourc
   return out;
 }
 
+/**
+ * Prompt per il retry «titolo/excerpt rimasto in italiano».
+ *
+ * Vive a livello di modulo, e non dentro `translateContent` come `makePrompt`,
+ * per la ragione che ha rotto il chiamante: quel retry gira in
+ * `translateArticle`, un livello sopra, dove `makePrompt` non esiste. Funzione
+ * pura, quindi un test puo' provare che il testo contiene la lingua bersaglio,
+ * il campo e lo schema — cosa che con una closure non si poteva fare.
+ */
+export function buildForcedRetranslationPrompt({ langName, field, itValue }) {
+  return `ATTENZIONE: la traduzione precedente è rimasta in ITALIANO. Traduci OBBLIGATORIAMENTE in ${langName} il seguente campo per il sito Frontaliere Ticino.
+
+CONTENUTO ITALIANO DA TRADURRE:
+- ${field}: ${itValue}
+
+REGOLE:
+- Il risultato NON deve restare in italiano: ogni parola va tradotta in ${langName}.
+- Mantieni i nomi propri, i toponimi e le cifre invariati.
+- Non aggiungere spiegazioni, prefissi o code fences.
+
+Rispondi con un JSON object (no markdown, no code fences):
+{"${field}": "..."}`;
+}
+
 async function translateArticle(data) {
   async function callWithRetry(prompt, maxTokens, label) {
     const safePrompt = `${prompt}\n\n${JSON_QUOTE_SAFETY_RULE_IT}`;
+    // Niente try/catch attorno a callLLM qui, a differenza del gemello
+    // requestHeadlineSelection (#391) — verificato in review su PR #604
+    // (issue #403 punto 5): per QUESTI prompt (jsonMode senza tutti e 5 i
+    // REQUIRED_IT_BODY_FIELDS nominati — vedi resolveBody2Validation in
+    // ./lib/body2-payload-verdict.mjs) il wrapper locale `callLLM` e' un
+    // passthrough puro sul `callLLM` esportato da ai-models.mjs, il cui
+    // UNICO throw (ai-models.mjs:6491-6519) e' sempre taggato
+    // `ALL_MODELS_EXHAUSTED` — il roster intero a terra, non il fallimento
+    // di una chiamata. Deve risalire grezzo per contratto
+    // (roster-exhaustion-red.test.mjs): un try/catch qui lo ricatturerebbe
+    // solo per rilanciarlo immediatamente, zero cambio di comportamento —
+    // e' esattamente il 🔴 dead-code che la review ha trovato in un
+    // precedente giro di questa PR. Se un giorno il wrapper guadagnasse un
+    // secondo throw non taggato ALL_MODELS_EXHAUSTED, reintrodurre la
+    // cattura qui avrebbe senso; oggi no.
     const raw = await callLLM(
       [{ role: 'user', content: safePrompt }],
       { temperature: 0.5, maxTokens, jsonMode: true },
@@ -7865,10 +9427,20 @@ ${terminologyByLang[targetLang] || ''}`;
         const langName = locale === 'en' ? 'inglese' : locale === 'de' ? 'tedesco' : 'francese';
         console.error(`  ⚠️  [translation-check] ${locale.toUpperCase()}.${field} identico all'italiano — retry traduzione...`);
         try {
-          const retryResult = await callWithRetry(makePrompt(
-            `ATTENZIONE: la traduzione precedente è rimasta in ITALIANO. Traduci OBBLIGATORIAMENTE in ${langName}.\n\nCONTENUTO ITALIANO DA TRADURRE:\n- ${field}: ${itVal}`,
-            `{"${field}": "..."}`,
-          ), 1000, `${locale}:${field}-retry`);
+          // 2026-08-18 — QUESTO RETRY NON E' MAI PARTITO.
+          // `makePrompt` e' dichiarata dentro `translateContent`; qui siamo in
+          // `translateArticle`, fuori da quella chiusura. La chiamata lanciava
+          // `ReferenceError: makePrompt is not defined`, il `catch` sotto la
+          // ingoiava e la riemetteva come «Retry fallito per xx.title: ...»,
+          // che si legge come un problema di rete. Il prompt e' ora costruito
+          // in loco da `buildForcedRetranslationPrompt`, funzione di modulo
+          // (quindi in scope ovunque e testabile) che replica la forma di
+          // `makePrompt`: campi, regole, schema JSON.
+          const retryResult = await callWithRetry(
+            buildForcedRetranslationPrompt({ langName, field, itValue: itVal }),
+            1000,
+            `${locale}:${field}-retry`,
+          );
           if (retryResult?.[field] && retryResult[field].trim() !== itVal) {
             data.content[locale][field] = retryResult[field];
             console.error(`  ✅ [translation-check] ${locale.toUpperCase()}.${field} ritradotto con successo`);
@@ -9530,7 +11102,30 @@ function _saveUsedImageUrl(articleId, imageUrl) {
   writeFileSync(trackingFile, JSON.stringify(entries, null, 2) + '\n');
 }
 
+// ── Tetto alla fase immagini (2026-08-18) ─────────────────────────────────
+// `generateArticleImage` prova 9 strategie SERIALI con timeout da 90-120s
+// l'una: ~22 minuti nel caso peggiore. E gira DOPO che tutti i gate sono
+// passati, cioe' nel momento in cui perdere il lavoro costa di piu' — il
+// workflow ha un `timeout ... 2400s` che SIGKILLa il processo e butta
+// l'articolo intero. Allo scadere del budget si torna `null`, che e' il
+// percorso NORMALE quando Imagen non e' disponibile: `findBestFallbackImage`
+// esiste gia' e pesca dal catalogo Ticino. Il peggio che succede e'
+// un'immagine di repertorio su un articolo che altrimenti non esisterebbe.
+const IMAGE_PHASE_BUDGET_MS = Math.max(
+  30_000,
+  Math.floor(resolvePositiveIntEnv(process.env.CREATE_ARTICLE_IMAGE_BUDGET_MS, 180_000)),
+);
+
 async function generateArticleImage(data) {
+  const imageDeadline = Date.now() + IMAGE_PHASE_BUDGET_MS;
+  const imagePhaseExpired = (label) => {
+    if (Date.now() < imageDeadline) return false;
+    console.error(
+      `  ⏱️  Budget fase immagini (${Math.round(IMAGE_PHASE_BUDGET_MS / 1000)}s) esaurito prima di ${label}`
+      + ` — passo all'immagine di fallback dal catalogo.`,
+    );
+    return true;
+  };
   // Derive concrete English subject clause from TOPIC_SEARCH_MAP so the generator
   // doesn't default to generic "people in a street" when the title says "frontalieri".
   const subjectTitle = _articleTitleLower(data);
@@ -9605,6 +11200,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 1: Gemini native image generation (free tier) ──
+  if (imagePhaseExpired('Strategy 1')) return null;
   const apiKey = process.env.GEMINI_API_KEY;
   if (apiKey) {
     const modelsToTry = [IMAGE_MODEL_FLASH, IMAGE_MODEL_PRO];
@@ -9659,6 +11255,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 2: Pollinations.ai (free, no API key) ──
+  if (imagePhaseExpired('Strategy 2')) return null;
   // https://gen.pollinations.ai — free AI image generation, no auth needed
   // Migrated from image.pollinations.ai/prompt/ → gen.pollinations.ai/image/ (2025)
   // Only try 2 models with 1 retry; if origin is down (530/502/503) skip all.
@@ -9714,6 +11311,7 @@ async function generateArticleImage(data) {
   if (pollinationsOriginDown) console.error('  ⚠️  Pollinations.ai non raggiungibile — origin down');
 
   // ── Strategy 2b: Together.ai (FLUX.1-schnell-Free, free tier with key) ──
+  if (imagePhaseExpired('Strategy 2b')) return null;
   // https://www.together.ai — free model, needs TOGETHER_API_KEY secret in GH
   const togetherKey = process.env.TOGETHER_API_KEY;
   if (togetherKey) {
@@ -9752,6 +11350,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 2c: Fal.ai (FLUX schnell, needs FAL_KEY secret in GH) ──
+  if (imagePhaseExpired('Strategy 2c')) return null;
   // https://fal.ai — pay-per-use with free credits, very fast FLUX inference
   const falKey = process.env.FAL_KEY;
   if (falKey) {
@@ -9790,6 +11389,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 3: HuggingFace Inference API (free, FLUX-schnell) ──
+  if (imagePhaseExpired('Strategy 3')) return null;
   // https://huggingface.co/docs/api-inference — free tier with HF_TOKEN
   // FLUX-1-schnell is one of the fastest open-source text-to-image models
   // NOTE: HF migrated from api-inference.huggingface.co → router.huggingface.co (2025)
@@ -9836,6 +11436,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 4: Wikimedia Commons (free, no API key, keyword search) ──
+  if (imagePhaseExpired('Strategy 4')) return null;
   // Searches Creative Commons licensed photos from Wikimedia. Very reliable.
   // Uses article-specific topic keywords + image URL dedup to avoid repeats.
   {
@@ -9906,6 +11507,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 5: Pixabay API (free, 100 req/min, needs key) ──
+  if (imagePhaseExpired('Strategy 5')) return null;
   // Uses article-specific keyword search for relevant stock photos.
   const pixabayKey = process.env.PIXABAY_API_KEY;
   if (pixabayKey) {
@@ -9953,6 +11555,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 5b: Pexels API (stock foto CC0, needs PEXELS_API_KEY secret in GH) ──
+  if (imagePhaseExpired('Strategy 5b')) return null;
   // https://www.pexels.com/api/ — free tier 200 req/hour, landscape orientation, high quality
   const pexelsKey = process.env.PEXELS_API_KEY;
   if (pexelsKey) {
@@ -10002,6 +11605,7 @@ async function generateArticleImage(data) {
   }
 
   // ── Strategy 6: Lorem Picsum (always works, random professional photo) ──
+  if (imagePhaseExpired('Strategy 6')) return null;
   // https://picsum.photos — Reliable service serving random stock photos.
   // Not topic-relevant, but always returns a valid image — last resort before fallback.
   try {
@@ -10832,14 +12436,92 @@ const GOOGLE_NEWS_INJECT_MAX = Number(process.env.GOOGLE_NEWS_INJECT_MAX) || 60;
 // self-trigger chain simply advances to the next run. It is deliberately generous
 // (default 30min) so it never truncates a healthy ~15-20min run — it only fires on
 // the pathological tail. Env-overridable for tuning without a code change.
-const RUN_WALL_BUDGET_MS = Math.max(
-  5 * 60_000,
-  Number.parseInt(process.env.CREATE_ARTICLE_MAX_WALL_MS || String(30 * 60_000), 10) || (30 * 60_000),
-);
+//
+// The 5-min floor below applies ONLY to the unset/unparseable default path.
+// generate-article.yml sets CREATE_ARTICLE_MAX_WALL_MS explicitly to the real
+// per-attempt cap it grants before `timeout` kills the process (issue #462); a
+// caller-provided value must be honored as given, not silently raised to 5min —
+// doing so would make the process believe it has more wall time than the
+// external `timeout` actually allows, reintroducing #462's overshoot at a
+// smaller magnitude for any cap under ~6min.
+const CREATE_ARTICLE_MAX_WALL_MS_ENV = process.env.CREATE_ARTICLE_MAX_WALL_MS;
+const CREATE_ARTICLE_MAX_WALL_MS_PARSED = CREATE_ARTICLE_MAX_WALL_MS_ENV !== undefined && CREATE_ARTICLE_MAX_WALL_MS_ENV !== ''
+  ? Number.parseInt(CREATE_ARTICLE_MAX_WALL_MS_ENV, 10)
+  : NaN;
+const RUN_WALL_BUDGET_MS = Number.isNaN(CREATE_ARTICLE_MAX_WALL_MS_PARSED)
+  ? 30 * 60_000
+  : CREATE_ARTICLE_MAX_WALL_MS_PARSED;
 const RUN_START_MS = Date.now();
-/** True once the global wall-clock budget is spent (used to stop new topic attempts). */
+
+/**
+ * Cooperative-stop flag armed by SIGTERM (issue #525).
+ *
+ * `generate-article.yml` kills this process with
+ * `timeout --signal=TERM --kill-after=60s "${cap}s"`: SIGTERM first, SIGKILL 60
+ * seconds later. Until now the file had ZERO `process.on(...)` of its own, so
+ * Node's default SIGTERM action applied — immediate termination — and the whole
+ * 60-second grace the workflow deliberately buys was spent on nothing. The kill
+ * also arrived UNDECLARED: the run report carried no reason, so a section lost
+ * to the budget cap looked the same as one lost to a provider outage.
+ *
+ * What this does NOT claim to fix: a truncated `content/*.ts`. That risk was
+ * already closed by #561, which made `write()` commit via temp + `renameSync`
+ * (a single atomic POSIX syscall). A SIGKILL mid-write still cannot leave a
+ * half-written file at the final path, with or without this handler — which is
+ * why the handler stays a *flag*, not a rescue routine. Doing work inside a
+ * signal handler here would only race the very flush that #561 made atomic.
+ *
+ * The flag is read by `wallBudgetExceeded()`, and that is the whole point: the
+ * generation loop already polls it at 11 distinct sites (topic attempts, body2
+ * retries, discovery slots, evergreen pre-scan…). Arming it converts every one
+ * of those polls into an exit point, so the process leaves through its own
+ * declared path — the same one an expired budget uses — instead of being cut
+ * mid-attempt. No new exit path, no new invariant.
+ */
+let _sigtermStopRequested = false;
+
+/** Quanto la fermata cooperativa puo' durare prima dell'uscita forzata (#525). */
+const COOPERATIVE_STOP_GRACE_MS = 45_000;
+
+/** Exposed for the observer test; also what makes the stop visible in the log. */
+function requestCooperativeStop(signal) {
+  if (_sigtermStopRequested) return; // idempotent: a second SIGTERM must not re-log
+  _sigtermStopRequested = true;
+  const spentS = Math.round((Date.now() - RUN_START_MS) / 1000);
+  // `::warning` and not `::error`: the run is not broken, it is being stopped.
+  // A declared stop that prints nothing is indistinguishable from a crash, and
+  // that ambiguity is exactly what #525 reports.
+  console.warn(`::warning::create-article.mjs: ricevuto ${signal} dopo ${spentS}s — fermata cooperativa richiesta, nessun nuovo tentativo verra' avviato. Le scritture gia' committate restano valide (temp+rename, #561).`);
+
+  // Registrare un listener SIGTERM DISATTIVA l'azione di default di Node
+  // (terminare subito). Senza questa rete, un SIGTERM che arriva mentre il
+  // processo e' dentro una chiamata provider lunga (il tetto di ai-models.mjs
+  // e' 600s) non raggiungerebbe nessun poll di `wallBudgetExceeded()` e il
+  // processo sopravvivrebbe fino al SIGKILL: la finestra cooperativa avrebbe
+  // ALLUNGATO la vita del processo invece di accorciarla — l'esatto contrario
+  // dell'intento. Il fallback ripristina la garanzia "SIGTERM => il processo
+  // esce", spostandola solo piu' in la' di `COOPERATIVE_STOP_GRACE_MS`.
+  //
+  // 45s e non 60: `--kill-after=60s` e' il grace del `timeout` esterno, e
+  // arrivare al secondo esatto significa farsi prendere dal SIGKILL. 15s di
+  // margine sono sufficienti al flush dei punteggi di ai-models.mjs, che e'
+  // bounded per costruzione.
+  //
+  // `.unref()`: il timer non deve tenere vivo l'event loop. Se la fermata
+  // cooperativa riesce e il processo finisce prima, esce per conto suo e questo
+  // timer non si vede nemmeno.
+  setTimeout(() => {
+    console.warn(`::warning::create-article.mjs: la fermata cooperativa non e' rientrata entro ${COOPERATIVE_STOP_GRACE_MS / 1000}s dal ${signal} — uscita forzata 143 prima del SIGKILL esterno.`);
+    process.exit(143);
+  }, COOPERATIVE_STOP_GRACE_MS).unref();
+}
+
+/**
+ * True once the global wall-clock budget is spent (used to stop new topic
+ * attempts), or once a SIGTERM has asked for a cooperative stop (#525).
+ */
 function wallBudgetExceeded() {
-  return (Date.now() - RUN_START_MS) > RUN_WALL_BUDGET_MS;
+  return _sigtermStopRequested || (Date.now() - RUN_START_MS) > RUN_WALL_BUDGET_MS;
 }
 
 /**
@@ -10955,6 +12637,51 @@ function isDuplicateError(e) {
   return /DUPLICATO/i.test(String(e.message || ''));
 }
 
+// ── IL VETO SUL DIFFERIMENTO (issue #313 / #348) ───────────────────────────
+//
+// La regola vive in `lib/exhaustion-disposition.mjs` e NON qui, per una ragione
+// sola: questo file non e' importabile da un test (761 KB, e la prima cosa che
+// fa e' una chiamata di rete), quindi una regola scritta qui dentro sarebbe
+// verificabile solo leggendo il sorgente come testo. Nel modulo `node --test`
+// la esegue davvero — vedi `generator/tests/roster-exhaustion-red.test.mjs`.
+// La misura che l'ha resa necessaria (un pareggio 53/53 sulla run 31817957722,
+// dieci ore di run verdi senza un articolo) sta nell'intestazione del modulo.
+
+/**
+ * L'UNICA uscita di questo file — `process.exit()` non si chiama piu' a mano.
+ *
+ * Il difetto che chiude (misurato il 2026-08-18 sulla run 32134269129): questo
+ * file importava `flushScores` alla riga 68 e non lo chiamava MAI, e aveva 12
+ * `process.exit(...)`. `process.exit()` non fa scattare `beforeExit`, che e'
+ * l'unico gancio che il ledger dei punteggi aveva per scrivere l'ultima finestra
+ * di mutazioni; il debounce da 30s e' su un timer `unref()`ato, quindi non tiene
+ * vivo il processo. Il risultato era un'asimmetria precisa: dentro
+ * `ai-models.mjs` l'unico `await flushScores()` sta sul ramo «tutti i modelli
+ * hanno fallito», quindi i FALLIMENTI di quel ramo arrivavano al ledger e i
+ * SUCCESSI di una run riuscita no — un ledger sistematicamente pessimista, ed e'
+ * lui a decidere con `sortChainByScore()` chi viene provato per primo.
+ * `claude-cli/haiku` sul doc `ai_model_scores/_all`: score -3, 0 successi, 1
+ * fallimento, mentre quella run gli aveva applicato 4 successi e 4 fallimenti
+ * (score in memoria -207).
+ *
+ * Un solo posto e non dodici perche' il prossimo `process.exit` aggiunto qui
+ * riaprirebbe il buco senza che niente lo dica: il test
+ * `score-ledger-persistence.test.mjs` verifica che chi importa `flushScores` lo
+ * chiami, ed e' questo helper la chiamata.
+ *
+ * Il flush e' limitato nel tempo e non lancia (vedi `flushScoresBeforeExit`):
+ * un ledger non deve poter appendere o far fallire un'uscita.
+ */
+async function exitAfterFlush(code) {
+  try {
+    await flushScoresBeforeExit();
+  } catch {
+    // flushScoresBeforeExit non lancia; il catch e' qui perche' l'uscita non
+    // dipenda mai dal ledger, nemmeno se un domani cambiasse contratto.
+  }
+  process.exit(code);
+}
+
 async function main() {
   // Positional <url> = first non-flag argv (so `--section=` can precede it).
   let url = process.argv.slice(2).find((a) => !a.startsWith('--'));
@@ -10974,7 +12701,7 @@ async function main() {
         console.error(`❌ Disk critically low: ${freeMB}MB free with local LLM model "${model}" loaded.`);
         console.error('   Fix: change ARTICLE_LOCAL_MODEL repo variable to qwen2.5:7b');
         console.error('   (GitHub Settings → Secrets and variables → Actions → Variables)');
-        process.exit(1);
+        await exitAfterFlush(1);
       }
     } catch { /* ignore — df unavailable or parse error */ }
   }
@@ -11736,7 +13463,10 @@ async function main() {
         reportEvergreenPoolSaturation('preflight');
         console.error('\n⚠️  Tutte le keyword evergreen risultano già coperte dal pre-flight. Push prosegue senza nuovo articolo.');
         finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'All evergreen keywords rejected by pre-generation duplicate checks'] });
-        process.exit(0);
+        // Ragione legittima #1 di sei: niente da pubblicare. Exit 4 e non 0 —
+        // vedi EXIT_NO_ARTICLE_DECLARED: da qui in poi un exit 0 SENZA articolo
+        // e' un percorso che non ha dichiarato niente, ed e' rosso.
+        await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
       }
 
       // Generate article with retry — rotate to next safe keyword on post-generation duplicate.
@@ -11871,7 +13601,8 @@ async function main() {
             reportEvergreenPoolSaturation('retry');
             console.error('\n⚠️  Nessuna keyword evergreen disponibile. Push prosegue senza nuovo articolo.');
             finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'No evergreen keyword available after duplicate checks'] });
-            process.exit(0);
+            // Ragione legittima #2 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+            await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
           }
         }
       }
@@ -11879,7 +13610,8 @@ async function main() {
       // All retry attempts exhausted
       console.error('\n⚠️  Tentativi evergreen esauriti. Push prosegue senza nuovo articolo.');
       finalizeRunReport('skipped', { notes: [...RUN_REPORT.notes, 'Evergreen retries exhausted'] });
-      process.exit(0);
+      // Ragione legittima #3 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
     }
     return;
   }
@@ -11888,7 +13620,7 @@ async function main() {
   if (!url || (!url.startsWith('http') && !url.startsWith('evergreen://') && !url.startsWith('stats-bfs://'))) {
     finalizeRunReport('error', { notes: [...RUN_REPORT.notes, 'Invalid URL input'] });
     console.error('❌ URL non valido. Uso: node scripts/create-article.mjs [url]');
-    process.exit(1);
+    await exitAfterFlush(1);
   }
 
   await generateAndValidateArticle(url, null);
@@ -11961,6 +13693,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // generation so callGemini can feed the exact flagged claims back to the model.
   /** @type {string|null} */
   let lastFactCheckErrors = null;
+  // Il cap di input piu' permissivo che la flotta ha dichiarato rifiutando il
+  // prompt. Zero finche' nessun tentativo l'ha detto; vedi il catch piu' sotto.
+  let lastPromptTokenBudget = 0;
 
   const isStatsBfsSource = String(url || '').startsWith('stats-bfs://');
   // La lunghezza che le scale adattive devono misurare. Per una fonte reale è
@@ -12088,6 +13823,9 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       // Surface the previous attempt's fact-check rejections so callGemini can
       // tell the model exactly which invented claims to remove/correct.
       _factCheckRefinement: lastFactCheckErrors || undefined,
+      // Il budget che la FLOTTA ha dichiarato al tentativo precedente, non uno
+      // che assumiamo noi. Vedi il blocco che lo consuma in callGemini.
+      _promptTokenBudget: lastPromptTokenBudget || undefined,
     };
 
     let rawData;
@@ -12095,6 +13833,129 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       rawData = await callGemini(pageContent, url, genContext);
     } catch (e) {
       console.error(`  ⚠️  Tentativo ${attempt} fallito: ${e.message}`);
+
+      // ── REGOLA #0: il verdetto e' sulla FONTE, non sul modello ───────────
+      //
+      // `err.topicGateAbort` dice che il modello ha ESEGUITO il contratto: la
+      // fonte non ha un aggancio frontaliere reale, quindi non c'e' articolo da
+      // scrivere. E' una proprieta' del materiale, non dell'esito di UNA
+      // chiamata — cambiare modello non puo' cambiarla. Il ciclo esterno lo sa
+      // gia' e fa la cosa giusta (`isTopicGateAbort` → `url = null; continue`,
+      // headline successiva); ma per arrivarci l'errore doveva attraversare il
+      // `continue` qui sotto, e ogni giro di questo ciclo e' una cascata
+      // COMPLETA sul roster: i modelli morti (402/404/429/timeout) si ripagano
+      // tutti prima di ricadere sullo stesso `claude-cli/haiku` che aveva gia'
+      // risposto. Sei tentativi per riascoltare sei volte la stessa frase.
+      //
+      // MISURATO sulle quattro run successive a #479 (2026-08-18 dalle 20:19Z:
+      // prima di #479 l'abort era misclassificato come «non normalizzabile» e
+      // non arrivava nemmeno qui). Per singola headline, dall'abort del
+      // tentativo 1 alla resa al ciclo esterno:
+      //   32182923129  20:48:44 → 21:13:18   24m34s
+      //   32187412494  21:24:26 → 21:32:59    8m33s
+      //   32190158524  22:30:14 → 22:39:19    9m05s
+      //   32197078704  23:26:33 → 23:35:01    8m28s
+      //   32197078704  23:40:51 → 23:56:40   15m49s
+      // ~66 minuti in quattro run, e tutte e quattro chiuse con
+      // `section <nome> produced no article`: il cap di sezione (2400s) si
+      // consumava dentro UNA headline, mentre il ciclo esterno ne prevede 8
+      // (MAX_DUPLICATE_RETRIES). La sezione `frontaliere` e' quella che paga,
+      // perche' e' quella dove piu' fonti mancano davvero dell'aggancio.
+      //
+      // E il costo non e' solo tempo: ripetere la domanda finche' un modello
+      // risponde diverso seleziona per il modello piu' disposto a FABBRICARE
+      // l'aggancio — cioe' esattamente l'allucinazione «Malpensa» da cui
+      // REGOLA #0 difende. Arrendersi subito e' la lettura fedele del verdetto,
+      // non una scorciatoia.
+      //
+      // `throw e` e non `break`: il ciclo esterno classifica l'errore
+      // (`isQualityRejectError` legge `e.topicGateAbort`), e un `break` gli
+      // consegnerebbe un esito muto — la stessa forma di #313.
+      if (e?.topicGateAbort === true) {
+        console.error(
+          `  ⏭️  [topic-gate] verdetto sulla FONTE: nessun altro modello puo' ribaltarlo`
+          + ` — cedo l'headline al ciclo esterno senza spendere i ${maxAttempts - attempt}`
+          + ` tentativi restanti di questa fonte.`,
+        );
+        throw e;
+      }
+      // ── Il numero che la libreria calcola e che nessuno leggeva ──────────
+      //
+      // Quando ogni modello ha rifiutato per DIMENSIONE, `callLLM` allega
+      // all'errore il cap piu' permissivo fra quelli che hanno detto no
+      // (`retryRequestTokenBudget`) e scrive, nel messaggio: «A retry must
+      // rebuild the prompt under N tokens — resending the same messages cannot
+      // succeed». Era vero alla lettera: prima di questo blocco il `continue`
+      // qui sotto rispediva messaggi identici, fino a sei volte per sezione.
+      // Run 31833016113: 28,8 minuti e due sezioni per arrivare a una
+      // conclusione nota al primo tentativo.
+      //
+      // Lo teniamo per il giro successivo, che lo usa come target della scala
+      // di riduzione. `Math.min` perche' il budget puo' STRINGERSI fra un
+      // tentativo e l'altro (la flotta disponibile cambia mentre i modelli si
+      // esauriscono) e allentarlo vanificherebbe la riduzione gia' decisa.
+      const budgetDettato = Number(e?.retryRequestTokenBudget) > 0
+        ? Number(e.retryRequestTokenBudget)
+        : 0;
+      if (budgetDettato > 0) {
+        lastPromptTokenBudget = lastPromptTokenBudget > 0
+          ? Math.min(lastPromptTokenBudget, budgetDettato)
+          : budgetDettato;
+        const cap = e?.inputCapReport;
+        console.error(
+          `  📏 La flotta chiede un prompt sotto ${lastPromptTokenBudget} token`
+          + (cap ? ` (${cap.count} modelli hanno rifiutato ~${cap.estimatedRequestTokens} token)` : '')
+          + ' — il prossimo tentativo lo ricostruisce piu' + '\' corto invece di rispedirlo uguale.',
+        );
+      }
+      // ── USCITA ANTICIPATA DICHIARATA (issue #452) ───────────────────────
+      //
+      // «Ricostruirlo piu' corto» smette di essere possibile a un certo punto,
+      // e quel punto e' calcolabile: sotto PROMPT_SCAFFOLD_FLOOR_TOKENS il
+      // bersaglio sta sotto il peso del prompt VUOTO — impalcatura, schema
+      // JSON, istruzioni di sezione — quindi nemmeno fonte e fatti a zero ci
+      // rientrano. `callGemini` lo sa gia' e lo scrive nel marker come
+      // `unsat=1`, ma finora l'unica azione era un `console.warn`: il
+      // tentativo partiva lo stesso.
+      //
+      // E il budget non torna indietro. Il `Math.min` qui sopra e' monotono di
+      // proposito, quindi la condizione, una volta entrata, e' STABILE: tutti
+      // i tentativi restanti di questa sezione sono insoddisfacibili per
+      // costruzione, e il ciclo ne macinava fino a sei — ognuno con la cascata
+      // sull'intero roster — fino al `hard-killed after ~1180s` (exit 124).
+      // MISURATO su 926 run (2026-08-13 → 18): 2510s mediani per una run
+      // `failure` contro 254s per una `success`.
+      //
+      // NON e' un `success` muto e non e' una delle sei ragioni legittime: si
+      // marca l'errore e lo si rilancia, cosi' che il catch di primo livello
+      // esca `EXIT_ROSTER_CANNOT_SERVE_PROMPT`. Vedi isPromptFloorIrreducible()
+      // per il perche' dichiararla «legittima» ricreerebbe il verde di #313.
+      if (isBudgetBelowScaffoldFloor(lastPromptTokenBudget)) {
+        e.promptFloorReport = {
+          budget: lastPromptTokenBudget,
+          floor: PROMPT_SCAFFOLD_FLOOR_TOKENS,
+          attempt,
+          maxAttempts,
+          section: SECTION_NAME,
+        };
+        const { short, attemptsSkipped } = promptFloorSummary(e);
+        console.error(
+          `  ⛔ [prompt-floor] section=${SECTION_NAME} attempt=${attempt}/${maxAttempts} `
+          + `budget=${lastPromptTokenBudget} floor=${PROMPT_SCAFFOLD_FLOOR_TOKENS} short=${short} `
+          + `skipped=${attemptsSkipped}`,
+        );
+        console.error(
+          `  ⛔ Esco adesso: il bersaglio dettato dalla flotta (${lastPromptTokenBudget} token) sta ${short} token`
+          + ` SOTTO il pavimento dell'impalcatura del prompt (${PROMPT_SCAFFOLD_FLOOR_TOKENS}), e il budget non si`
+          + ' riallarga mai (Math.min monotono). I ' + `${attemptsSkipped} tentativi restanti di questa sezione non`
+          + ' possono che ripetere questo esito: spenderli costerebbe minuti per una conclusione gia' + '\' nota.',
+        );
+        RUN_REPORT.notes.push(
+          `Early exit: prompt budget ${lastPromptTokenBudget} below scaffold floor ${PROMPT_SCAFFOLD_FLOOR_TOKENS} `
+          + `(section=${SECTION_NAME}, attempt=${attempt}/${maxAttempts}, skipped=${attemptsSkipped})`,
+        );
+        throw e;
+      }
       if (attempt < maxAttempts) continue;
       throw e;
     }
@@ -12262,6 +14123,27 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       throw fabErr;
     }
 
+    // Step 3a.0b-alt: Fabricated norm acronyms check on the IT title — BLOCKING.
+    // runFactualityGates() below (Step 3a.0b-bis) only sees sections.{body1,body2,body3},
+    // never data.content.it.title, so a fabricated norm acronym landing in the
+    // title alone would ship straight to dist/api/, og:title and JSON-LD headline
+    // with no gate ever looking at it. Same call the en/de/fr path makes after
+    // translateArticle() (Step 3b.1, below) and the journalist IT path makes
+    // (publish-journalist-article.mjs) — assertNoFabricatedNormAcronyms() already
+    // covers title+body1..3 per locale, so this closes the gap without touching
+    // runFactualityGates()'s per-section checks (truncation/scaffolding), which
+    // are tuned for body paragraphs, not a title-length string.
+    try {
+      assertNoFabricatedNormAcronyms({ it: data.content.it });
+    } catch (normErr) {
+      console.error(`  ⚠️  ${normErr.message}`);
+      if (attempt < maxAttempts) {
+        console.error(`  🔄 Rigenero contenuto IT per sigla normativa fabbricata (${attempt}/${maxAttempts})...`);
+        continue;
+      }
+      throw normErr;
+    }
+
     // Step 3a.0b-bis: Deterministic factuality gates — BLOCKING, no model calls
     //
     // Runs BEFORE the LLM verifier on purpose: these checks are free, so a
@@ -12370,6 +14252,46 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       }
     }
 
+    // Step 3a.0b-ter: conteggio parole IT — DETERMINISTICO, GRATIS, E PRIMA
+    // DEL FACT-CHECK.
+    //
+    // 2026-08-18 — PERCHE' E' SALITO QUI.
+    // Girava DOPO lo Step 3a.0c, cioe' dopo aver pagato 2 chiamate LLM di
+    // fact-check su una bozza che un `if` gratuito stava per buttare comunque.
+    // Non e' teoria, e' la run 32111688992:
+    //
+    //   07:36:12.190  🔍 LLM fact-check (gpt-4.1): verdict=PASS
+    //   07:36:12.191  🔍 LLM fact-check (gemini-2.5-flash): verdict=PASS
+    //   07:36:12.191  ⚠️  Contenuto IT troppo corto: 227 parole (min 700)
+    //
+    // sei volte di fila (227, 194, 179, 202, 223, 489 parole) = 12 fact-check
+    // pagati e buttati; sulla run 32086523370 sono 64 su 91.
+    //
+    // NON e' un gate abbassato: e' l'ordine di due controlli entrambi
+    // bloccanti. Il percorso di successo (>= soglia) resta DOPO il fact-check,
+    // dove ha sempre dovuto stare — qui sopra sale solo il ramo che rigenera.
+    //
+    // Effetto collaterale dichiarato: una bozza corta non produce piu'
+    // `lastFactCheckErrors`, perche' il verificatore non la vede. Il tentativo
+    // successivo riceve al suo posto `_previousWordCount` — che e' il feedback
+    // corretto per «troppo corto», mentre le rimostranze del fact-check su un
+    // testo che sara' comunque riscritto non lo erano.
+    const itWords = italianBodyWordCount(data);
+    lastWordCount = itWords;
+    const isLastAttempt = attempt >= maxAttempts;
+    // Candidata all'espansione anticipata: abbastanza lunga da avere struttura
+    // su cui lavorare, e non all'ultimo tentativo (li' l'espansione e' gia' il
+    // percorso di ultima spiaggia, invariato).
+    const earlyExpansionEligible = EARLY_EXPANSION_ENABLED
+      && itWords < adaptiveMinWords
+      && !isLastAttempt
+      && attempt >= EARLY_EXPANSION_MIN_ATTEMPT
+      && itWords >= adaptiveMinWords * EARLY_EXPANSION_MIN_RATIO;
+    if (itWords < adaptiveMinWords && !isLastAttempt && !earlyExpansionEligible) {
+      console.error(`  ⚠️  Contenuto IT troppo corto: ${itWords} parole (min ${adaptiveMinWords}) — rigenero (${attempt}/${maxAttempts})...`);
+      continue;
+    }
+
     // Step 3a.0c: LLM fact verification — PRIMARY BLOCKING GATE
     try {
       const factResult = await llmFactCheck(data.content.it, pageContent, url);
@@ -12427,8 +14349,8 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       throw fcErr;
     }
 
-    const itWords = italianBodyWordCount(data);
-    lastWordCount = itWords;
+    // `itWords` / `lastWordCount` sono gia' stati calcolati sopra, prima del
+    // fact-check (Step 3a.0b-ter): `data` non e' cambiata da allora.
     if (itWords >= adaptiveMinWords) {
       // ── Repetition check INSIDE the loop — triggers retry if AI looped ──
       const itContentLoop = data.content.it || data.content;
@@ -12449,12 +14371,20 @@ async function generateAndValidateArticle(url, sourceContext = null) {
       console.error(`  ✅ Soglia parole IT raggiunta: ${itWords} (min ${adaptiveMinWords}), nessun loop AI`);
       break;
     }
-    if (attempt < maxAttempts) {
-      console.error(`  ⚠️  Contenuto IT troppo corto: ${itWords} parole (min ${adaptiveMinWords}) — rigenero (${attempt}/${maxAttempts})...`);
-      continue;
+    // ── Espansione ──────────────────────────────────────────────────────
+    // Si arriva qui in due soli casi, entrambi con i gate deterministici E il
+    // fact-check gia' passati su questa bozza:
+    //   - ultima spiaggia (`isLastAttempt`): comportamento invariato;
+    //   - espansione ANTICIPATA (`earlyExpansionEligible`, dal tentativo
+    //     EARLY_EXPANSION_MIN_ATTEMPT): 27 secondi contro cinque rigenerazioni
+    //     da zero che non convergono, perche' la lunghezza dipende dalla fonte.
+    // Ogni altra bozza corta e' gia' stata rigenerata sopra, prima di pagare il
+    // fact-check.
+    if (isLastAttempt) {
+      console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
+    } else {
+      console.error(`  🔧 Espansione anticipata (tentativo ${attempt}/${maxAttempts}): ${itWords} parole ≥ ${Math.round(adaptiveMinWords * EARLY_EXPANSION_MIN_RATIO)} (${EARLY_EXPANSION_MIN_RATIO}× soglia) — espando invece di rigenerare (→ min ${adaptiveMinWords})...`);
     }
-    // ── Last resort: expand existing short content instead of failing ──
-    console.error(`  🔧 Ultimo tentativo: espansione contenuto esistente (${itWords} → min ${adaptiveMinWords})...`);
     try {
       // Snapshot the pre-expansion draft: it already cleared runFactualityGates
       // and llmFactCheck earlier in THIS SAME attempt (Step 3a.0b-bis / 3a.0c
@@ -12519,19 +14449,81 @@ async function generateAndValidateArticle(url, sourceContext = null) {
         data = preExpansionData;
       }
 
+      // 2026-08-18 — L'ESPANSIONE ANTICIPATA RIPASSA IL FACT-CHECK.
+      // L'espansione e' il percorso piu' incline al loop di ripetizione
+      // (incidente 2026-07-21, commento sopra) e il suo output non e' mai
+      // ripassato da `llmFactCheck`: accettabile finche' era l'ultima spiaggia
+      // — l'alternativa era buttare l'articolo — non piu' da quando puo'
+      // scattare al tentativo 2 e produrre l'articolo PUBBLICATO nel caso
+      // normale. Costa 2 chiamate, che la fix di Step 3a.0b-ter ha gia'
+      // ripagato molte volte: il bilancio netto resta negativo.
+      // Sull'ultima spiaggia NON si ripassa, per non introdurre un modo nuovo
+      // di perdere un articolo che oggi si pubblica.
+      if (!isLastAttempt && expandGateResult.passed) {
+        let expandFactOk = true;
+        let expandFactIssues = null;
+        try {
+          const expandFactResult = await llmFactCheck(data.content.it, pageContent, url);
+          if (!expandFactResult.passed) {
+            for (const i of expandFactResult.issues || []) {
+              const cat = String(i?.category || 'uncategorized');
+              RUN_REPORT.factuality.factCheckRejectionsByCategory[cat] =
+                (RUN_REPORT.factuality.factCheckRejectionsByCategory[cat] || 0) + 1;
+            }
+            console.error(`  🚫 Espansione anticipata rigettata dal fact-check: ${(expandFactResult.issues || []).length} problemi`);
+            expandFactIssues = expandFactResult.issues || [];
+            expandFactOk = false;
+          }
+        } catch (expandFcErr) {
+          console.error(`  ⚠️  Fact-check dell'espansione anticipata fallito: ${expandFcErr.message.slice(0, 120)}`);
+          expandFactOk = false;
+        }
+        if (!expandFactOk) {
+          console.error(`  ↩️  Torno al testo pre-espansione (già approvato dai gate, ma corto)...`);
+          data = preExpansionData;
+          // Il ritorno alla bozza pre-espansione non chiude il tentativo: il
+          // testo e' ancora corto e il loop rigenera. Senza questa riga
+          // rigenerava ALLA CIECA — i problemi appena trovati dal verificatore
+          // venivano scoperti, contati in RUN_REPORT, e poi buttati. E' lo
+          // stesso feedback che Step 3a.0c passa al tentativo successivo, per la
+          // stessa ragione scritta li': una remediation per categoria invece di
+          // un elenco di lamentele, che invita a cancellare invece che a
+          // correggere. Stesso cap, per lo stesso motivo (finestra di input dei
+          // modelli free degradati); `formatRemediation` segnala l'overflow
+          // invece di troncare in silenzio.
+          if (attempt < maxAttempts && expandFactIssues && expandFactIssues.length > 0) {
+            const EXPAND_FACTCHECK_FEEDBACK_CAP = 8; // = FACTCHECK_FEEDBACK_CAP di Step 3a.0c
+            lastFactCheckErrors = formatRemediation(expandFactIssues, { cap: EXPAND_FACTCHECK_FEEDBACK_CAP });
+          }
+        }
+      }
+
       const expandedWords = italianBodyWordCount(data);
       if (expandedWords >= adaptiveMinWords) {
         console.error(`  ✅ Espansione riuscita: ${expandedWords} parole (min ${adaptiveMinWords})`);
         break;
       }
-      console.error(`  ⚠️  Espansione insufficiente: ${expandedWords} parole — fallback accettato`);
-      // Accept the expanded content even if still slightly short (better than failing)
-      if (expandedWords >= adaptiveMinWords * 0.85) {
+      console.error(`  ⚠️  Espansione insufficiente: ${expandedWords} parole (min ${adaptiveMinWords})`);
+      // Accept the expanded content even if still slightly short (better than failing).
+      // 2026-08-18: SOLO sull'ultima spiaggia. «Meglio che fallire» e' un
+      // ragionamento valido quando l'alternativa e' buttare l'articolo; con
+      // tentativi ancora in canna l'alternativa e' un articolo della lunghezza
+      // giusta, e accettare l'85% qui sarebbe una relazione di qualita' che
+      // questa PR non ha nessuna ragione di introdurre.
+      if (isLastAttempt && expandedWords >= adaptiveMinWords * 0.85) {
         console.error(`  ✅ Contenuto accettato (≥85% soglia): ${expandedWords} parole`);
         break;
       }
     } catch (expandErr) {
       console.error(`  ⚠️  Espansione fallita: ${expandErr.message}`);
+    }
+    // Espansione anticipata che non ha raggiunto la soglia (o rigettata dai
+    // gate / dal fact-check e riportata al testo pre-espansione): restano
+    // tentativi, quindi si rigenera come prima di questa fix. Nessun articolo
+    // viene perso per una espansione fallita a meta' del budget.
+    if (!isLastAttempt) {
+      console.error(`  ⚠️  Espansione anticipata senza esito — rigenero (${attempt}/${maxAttempts})...`);
+      continue;
     }
     {
       const shortErr = new Error(`Contenuto IT troppo corto dopo ${maxAttempts} tentativi + espansione (${italianBodyWordCount(data)}/${adaptiveMinWords} parole).`);
@@ -12590,6 +14582,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // OGNI percorso di generazione — news, evergreen, discovery — mentre il
   // pre-flight evergreen vede solo i candidati evergreen.
   assertTopicNotRecentlyCovered(data, loadExistingArticleSummariesWithDates());
+  // Step 3a.5: «titolo scollegato dallo slug» (#527) — nella serie
+  // vivere-/trasferirsi- lo slug esce da un template che porta il comune per
+  // costruzione; se il titolo non nomina lo stesso comune promette una guida
+  // e ne consegna un'altra. Stesso punto del gate sopra: id e titolo IT sono
+  // già stabili qui, su ogni percorso di generazione.
+  assertComuneTitleMatchesSlug(data);
 
   // Step 3b: Translate to EN/DE/FR (only runs if not a duplicate)
   await translateArticle(data);
@@ -12613,6 +14611,12 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   // translation that independently hallucinates this institution in a
   // different language was never checked at all.
   assertNoFabricatedLaborOfficeCrossLocale(data);
+  // Same gap, for fabricated NORM acronyms (LFW/LPS): runFactualityGates()
+  // at Step 3a.0b-bis only ever ran on data.content.it, before this
+  // translateArticle() call existed — an acronym that survives translation
+  // unchanged (it did, byte-identical, for apprendistato-urie-2024-2025)
+  // was never re-checked on the en/de/fr output.
+  assertNoFabricatedNormAcronyms({ en: data.content.en, de: data.content.de, fr: data.content.fr });
 
   // Step 3c: Sanitize bold + URLs + nav links on translated content
   console.error('✂️  Sanitizzazione grassetto (traduzioni):');
@@ -12930,8 +14934,47 @@ const PROMPT_SLUG_PREFIX_RX = /^(?:slug|kebab[-_]?case)[-_]+/i;
 const NON_SLUG_REMAINDER_RX =
   /^(?:it|en|de|fr|ita|eng|ger|deu|fra|italiano|inglese|tedesco|francese|italian|english|german|french|slug|placeholder|segnaposto|example|esempio|sample|test|todo|tbd|na|n-a|none|null|undefined|xxx|titolo|title|articolo|article)$/i;
 
-/** `3-5-words-max-40-chars`, `max-40-chars`, `40-chars`, `3-5-words`… */
-const SCHEMA_HINT_SHAPE_RX = /(?:^|-)(?:\d+-\d+-words|max-\d+-chars|\d+-chars|\d+-words)(?:-|$)/i;
+/**
+ * `3-5-words-max-40-chars`, `max-40-chars`, `40-chars`, `3-5-words`… e le
+ * stesse forme in ITALIANO, che sono quelle che il prompt usa davvero.
+ *
+ * Le unita' erano solo inglesi (`words`, `chars`) mentre `ID_PLACEHOLDER` dice
+ * «kebab-case ASCII, 3-5 parole, max 40 char». Normalizzato diventa
+ * `id-kebab-case-ascii-3-5-parole-max-40-char`, che non matcha nessuna delle
+ * quattro alternative: `parole` non e' `words` e `char` non e' `chars`.
+ * Risultato: `inspectSlugForPromptPlaceholder` rispondeva `leaked: false` sul
+ * segnaposto piu' importante che esista — quello del campo `id`.
+ *
+ * Il difetto era IRRAGGIUNGIBILE finche' la generazione non produceva articoli:
+ * lo step «Guard» di generate-article.yml gira solo `if article == 'true'`, e
+ * per dodici ore nessun articolo e' stato generato. Appena la generazione e'
+ * tornata a funzionare (2026-08-15), il guard ha cominciato a bocciare OGNI
+ * articolo: sei run di fila, 04:06→05:12Z, tutte rosse sullo stesso step, con
+ * il corpo generato buttato via sul runner.
+ *
+ * Il numero e la parola stanno separati apposta: `\d+` copre qualunque cifra il
+ * prompt scelga, e l'alternanza copre singolare e plurale in entrambe le
+ * lingue, cosi' una riformulazione del segnaposto non richiede di ritoccare
+ * anche questa riga. Il test gemello parte da `ID_PLACEHOLDER` invece che da
+ * una copia scritta a mano, per la stessa ragione.
+ *
+ * La forma NUDA (un solo numero incollato all'unita', senza `-max` ne' un
+ * secondo numero davanti) usa SOLO le unita' inglesi. `parole`/`caratteri`/
+ * `carattere` sono parole italiane comuni: uno slug vero puo' contenere
+ * legittimamente "5-parole-chiave-…" o "10-caratteri-tipici-…", e la forma
+ * nuda testata come substring li avrebbe scartati come se fossero il
+ * segnaposto. Le forme "range" (`3-5-parole`) e "max" (`max-40-caratteri`)
+ * restano ambigue in entrambe le lingue: sono gia' testate esplicitamente
+ * (vedi il test gemello) e coprono comunque `ID_PLACEHOLDER`, che porta
+ * sempre anche `max-40-char` — inglese, quindi gia' catturato dalla forma
+ * nuda pure senza le unita' italiane li'.
+ */
+const SCHEMA_HINT_UNIT = '(?:words?|chars?|parole|parola|caratteri|carattere|char)';
+const SCHEMA_HINT_UNIT_UNAMBIGUOUS = '(?:words?|chars?|char)';
+const SCHEMA_HINT_SHAPE_RX = new RegExp(
+  `(?:^|-)(?:\\d+-\\d+-${SCHEMA_HINT_UNIT}|max-\\d+-${SCHEMA_HINT_UNIT}|\\d+-${SCHEMA_HINT_UNIT_UNAMBIGUOUS})(?:-|$)`,
+  'i',
+);
 
 /**
  * Classify one slug candidate against the prompt schema.
@@ -13418,6 +15461,25 @@ const invokedDirectly = (() => {
 })();
 
 if (invokedDirectly) {
+  // Registered as the FIRST thing inside the CLI guard, i.e. BEFORE ai-models.mjs
+  // arms its own SIGTERM hook on first use (lazy, at first score persistence
+  // inside main()). Node runs signal listeners in registration order and this
+  // one is synchronous, so the flag is set before that hook's async score flush
+  // gets a chance to `process.exit(143)`. Order matters and is load-bearing: with
+  // the registrations swapped, the flag would be armed only after the process had
+  // already been told to leave.
+  //
+  // Deliberately NOT at module scope (review round on #525's PR): the four
+  // scripts that import this file only for buildBodyFile/registerArticleFiles/etc.
+  // (publish-journalist-article.mjs, generate-events-digest-article.mjs,
+  // generate-daily-brief-article.mjs, generate-border-wait-ranking-article.mjs)
+  // never call wallBudgetExceeded()'s poller, so a SIGTERM/SIGINT delivered to
+  // them would have hit this handler, printed a misleading "create-article.mjs:
+  // ricevuto..." warning, and made them wait up to COOPERATIVE_STOP_GRACE_MS
+  // before exiting instead of dying immediately on Node's default action.
+  process.on('SIGTERM', () => requestCooperativeStop('SIGTERM'));
+  process.on('SIGINT', () => requestCooperativeStop('SIGINT'));
+
   // When LOCAL_LLM_ENABLED and the model fills the runner disk, even
   // process.stdout/stderr writes fail with ENOSPC — Node.js crashes with an
   // unhandled 'error' event on WriteStream, masking the real cause. Handle it
@@ -13432,7 +15494,30 @@ if (invokedDirectly) {
   };
   process.stdout.on('error', handleEnospc);
   process.stderr.on('error', handleEnospc);
-  main().catch((e) => {
+  // ── L'USCITA MUTA (issue #313 / #348) ──────────────────────────────────────
+  //
+  // Ogni percorso terminale di questo file passa da `finalizeRunReport(status)`,
+  // e quello status E' la dichiarazione: `generated` = c'e' un articolo; gli
+  // altri quattro rami dichiarano perche' non c'e'. Ma `main()` puo' anche
+  // RITORNARE, e allora nessuno ha dichiarato niente e il processo esce 0 —
+  // indistinguibile, per lo step del workflow, da una generazione riuscita.
+  //
+  // E' la forma piu' pura del difetto di #313, e non e' ipotetica: `main()` ha
+  // un `return` nudo a valle del ramo evergreen, e ogni futuro `return` anticipato
+  // ne aggiunge un altro senza che niente lo segnali. Qui la mutezza diventa un
+  // esito: exit 1, con la ragione. Non copre il caso «articolo prodotto» perche'
+  // li' lo status e' `generated` e si esce 0, come sempre.
+  main().then(async () => {
+    if (RUN_REPORT?.status === 'generated') return;
+    console.error(
+      `\n❌ Uscita non dichiarata: main() e' ritornato con status='${RUN_REPORT?.status ?? '(mai finalizzato)'}'`
+      + ' senza aver prodotto un articolo e senza dichiarare una delle sei ragioni legittime'
+      + ' (vedi EXIT_NO_ARTICLE_DECLARED in lib/exhaustion-disposition.mjs).'
+      + ' Un exit 0 in questo stato e\' esattamente il verde silenzioso di #313.',
+    );
+    console.error(`::error::no-article-undeclared-exit: status=${RUN_REPORT?.status ?? 'unfinalized'}`);
+    await exitAfterFlush(1);
+  }).catch(async (e) => {
   // Transient free-model pool exhaustion (every model in the fallback chain hit
   // its daily quota / rate limit) is NOT a code bug — free-tier daily limits
   // reset at 00:00 UTC, so the next scheduled run normally succeeds. Treat it as
@@ -13440,21 +15525,108 @@ if (invokedDirectly) {
   // back-off retries later instead of marking the run failed and raising a
   // false-positive "Workflow Failure: Generate Blog Article" Bug issue (#1652).
   // Mirrors the graceful quota-exhausted handling in dedicated-crawler-common.mjs.
+  // ISSUE #452 — l'uscita anticipata, e viene per PRIMA di tutte.
+  //
+  // Non e' prudenza d'ordine: e' che questo ramo descrive una DECISIONE gia'
+  // presa a monte — il ciclo di retry ha smesso di macinare e ha marcato
+  // l'errore — e i rami sotto la descriverebbero al posto suo con un'altra
+  // ragione. Su un errore con quota dominante `isInputCapDeferralVeto` risponde
+  // `false` e `isLegitimateQuotaDeferral` risponde `true`: la run uscirebbe 4,
+  // «ragione legittima dichiarata», e il workflow CHAINEREBBE il successore
+  // contro un muro che il prossimo tentativo trova identico. Il differimento
+  // sarebbe per giunta falso: nessuna finestra di quota alza il cap di un
+  // modello sopra il peso dell'impalcatura del prompt.
+  //
+  // Esce 3 e non un codice nuovo perche' 3 e' gia' esattamente questo esito —
+  // «il roster non puo' servire questo prompt» — e il blocco bash dello step
+  // «Generate the article» lo sa gia' leggere (`roster_blocked=true`, che e' il
+  // segnale che impedisce il chain). La RAGIONE invece e' nuova e separata:
+  // vedi isPromptFloorIrreducible().
+  if (isPromptFloorIrreducible(e)) {
+    const f = promptFloorSummary(e);
+    finalizeRunReport('error', {
+      notes: [
+        ...RUN_REPORT.notes,
+        `Prompt target below scaffold floor (irreducible): budget=${f.budget} floor=${f.floor}`,
+      ],
+    });
+    console.error(
+      `\n❌ Bersaglio del prompt IRRIDUCIBILE: la flotta chiede ${f.budget} token, ${f.short} sotto il pavimento`
+      + ` dell'impalcatura (${f.floor}) — cioe' sotto il peso del prompt a fonte E fatti azzerati.`
+      + ` Nessuna riduzione ci rientra, e il budget non si riallarga (Math.min monotono), quindi i`
+      + ` ${f.attemptsSkipped} tentativi restanti della sezione ${f.section || '(ignota)'} erano insoddisfacibili per`
+      + ' costruzione: usciti al tentativo ' + `${f.attempt}/${f.maxAttempts} invece di macinarli fino al kill di durata.`
+      + ` NON e' un differimento: nessuna finestra di quota alza il cap di un modello. Alzare il cap piu' permissivo del`
+      + ` roster sopra ${f.floor}, oppure alleggerire l'impalcatura del prompt. ${e.message}`,
+    );
+    console.error(
+      `::error::prompt-floor-irreducible: budget=${f.budget} floor=${f.floor} short=${f.short}`
+      + ` attempt=${f.attempt}/${f.maxAttempts} skipped=${f.attemptsSkipped} section=${f.section}`,
+    );
+    await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
+  // ISSUE #313 / #348 — il veto viene PRIMA del differimento, non dopo: e' il
+  // solo ordine in cui puo' impedirlo. Vedi isInputCapDeferralVeto() per la
+  // misura (53/53, un pareggio, 10 ore di verde).
+  if (isInputCapDeferralVeto(e)) {
+    const { estimatedRequestTokens, maxSkippedReqLimit, over, refusals } = inputCapVetoSummary(e);
+    const cap = { count: refusals, estimatedRequestTokens, maxSkippedReqLimit };
+    finalizeRunReport('error', {
+      notes: [...RUN_REPORT.notes, `Roster cannot serve this prompt (input cap): ${e.message}`],
+    });
+    console.error(
+      `\n❌ Il roster non puo' servire questo prompt: ${cap.count} modelli hanno rifiutato ~${cap.estimatedRequestTokens} token`
+      + ` contro un cap massimo di ${cap.maxSkippedReqLimit} (oltre di ~${over}).`
+      + ` NON e' un esaurimento di quota: nessuna finestra oraria rimpicciolisce un prompt, quindi differire qui e' un ciclo infinito`
+      + ` (issue #313: 60+ run 'success' consecutive senza un articolo). Accorciare il prompt di almeno ${over} token,`
+      + ` oppure rendere raggiungibile un modello con contesto adeguato (claude-cli/haiku).`,
+    );
+    console.error(`::error::roster-cannot-serve-prompt: est=${cap.estimatedRequestTokens} best_cap=${cap.maxSkippedReqLimit} over=${over} refusals=${cap.count}`);
+    await exitAfterFlush(EXIT_ROSTER_CANNOT_SERVE_PROMPT);
+  }
+  // ISSUE #313 / #348 — «tutti i modelli sono temporaneamente esauriti» va
+  // DIMOSTRATO, non asserito. La condizione ha due meta' ora: il ramo di
+  // differimento resta quello di prima (`isQuotaExhaustedError`, il voto di
+  // maggioranza a monte), ma per uscire DICHIARANDO un esito legittimo la quota
+  // deve essere davvero la causa dominante della cascata — vedi
+  // isLegitimateQuotaDeferral() per la riclassificazione della run 31823202761,
+  // dove era il 50,0% esatto e il verde e' stato deciso da una riga ambigua.
   if (isQuotaExhaustedError(e)) {
-    finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
-    console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera). Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    const share = quotaDeferralShare(e);
+    const pct = (share.share * 100).toFixed(1);
+    if (isLegitimateQuotaDeferral(e)) {
+      finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (all free models exhausted): ${e.message}`] });
+      console.error(`\n⚠️  Differito: tutti i modelli AI gratuiti sono temporaneamente esauriti (quota giornaliera, ${share.transient}/${share.total} = ${pct}%). Riprovo al prossimo run. ${e.message}`);
+      // Ragione legittima #6 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+      await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
+    }
+    finalizeRunReport('error', {
+      notes: [...RUN_REPORT.notes, `Roster down, not deferrable (transient ${share.transient}/${share.total}): ${e.message}`],
+    });
+    console.error(
+      `\n❌ NON differibile: solo ${share.transient} fallimenti su ${share.total} (${pct}%) sono transitori`
+      + ` — ne servono piu' del ${(share.required * 100).toFixed(0)}% perche' «riprovo al prossimo run» sia una descrizione vera.`
+      + ` Persistenti: ${share.persistent} (prompt sopra il cap, chiavi assenti, modelli rimossi). Ambigui: ${share.ambiguous}.`
+      + ` Nessuna finestra di quota ripara quella meta' del roster, quindi il run successivo rifarebbe identico. ${e.message}`,
+    );
+    console.error(`::error::roster-down-not-deferrable: transient=${share.transient} persistent=${share.persistent} ambiguous=${share.ambiguous} total=${share.total} share=${pct}%`);
+    await exitAfterFlush(1);
   }
   // Content/quality rejection that bubbled all the way up (e.g. manual-URL mode,
   // or every headline/keyword in a loop exhausted on quality grounds). The slop
   // was correctly NOT published — but "no acceptable article this run" is a clean
-  // deferral, not an infrastructure failure: exit 0 so the self-trigger back-off
-  // retries later instead of marking the run red and raising a false-positive
-  // "Workflow Failure: Generate Blog Article" Bug issue (run 28000585473 → #2750).
+  // deferral, not an infrastructure failure: exit EXIT_NO_ARTICLE_DECLARED so the
+  // self-trigger back-off retries later instead of marking the run red and raising
+  // a false-positive "Workflow Failure: Generate Blog Article" Bug issue (run
+  // 28000585473 → #2750). Era exit 0, e non lo e' piu' per la ragione scritta in
+  // EXIT_NO_ARTICLE_DECLARED: un exit 0 senza articolo non si distingue da un
+  // percorso che non ha dichiarato niente, ed e' quella indistinguibilita' — non
+  // questo ramo — che ha prodotto le dieci ore di verde.
   if (isQualityRejectError(e)) {
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (content quality rejected, slop not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: nessun articolo conforme prodotto in questa run (rigetto qualità — slop non pubblicato). Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    // Ragione legittima #5 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   // Duplicate rejection that bubbled all the way up from the direct-URL
   // invocation path (self-trigger chain re-dispatching a single evergreen
@@ -13463,10 +15635,11 @@ if (invokedDirectly) {
     captureDuplicateReasons(e.message);
     finalizeRunReport('deferred', { notes: [...RUN_REPORT.notes, `Deferred (duplicate detected, not published): ${e.message}`] });
     console.error(`\n⚠️  Differito: duplicato rilevato, articolo non pubblicato in questa run. Riprovo al prossimo run. ${e.message}`);
-    process.exit(0);
+    // Ragione legittima #4 di sei — vedi EXIT_NO_ARTICLE_DECLARED.
+    await exitAfterFlush(EXIT_NO_ARTICLE_DECLARED);
   }
   finalizeRunReport('error', { notes: [...RUN_REPORT.notes, `Error: ${e.message}`] });
   console.error(`\n❌ Errore: ${e.message}`);
-  process.exit(1);
+  await exitAfterFlush(1);
 });
 }

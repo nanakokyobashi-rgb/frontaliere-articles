@@ -73,6 +73,36 @@ jobs:
           HARVEST_EMIT_ESCALATIONS: 'true'
         run: node scripts/ci/harvest-agent-lessons.mjs
 
+      # Il gemello osservativo dello step qui sopra, e sta qui per un motivo
+      # preciso: `isAvoidableMaxTurns` in harvest-agent-lessons.mjs conta un
+      # `max-turns` come burn evitabile e la sua UNICA prova di «lavoro
+      # consegnato» e' un marker `pr-created`. Una run che ha committato e
+      # pushato ma e' morta prima di aprire la PR non ha quel marker: viene
+      # contata come burn, e il suo branch non compare in nessun altro canale,
+      # perche' `stale-pr-rescuer`, `recycle-stale-prs` e `pr-autorebase`
+      # raccolgono PR e un branch senza PR non ne ha mai avuta una.
+      #
+      # Lo script esisteva dal 2026-08-13 e NESSUN workflow lo chiamava: era la
+      # meta' osservativa costruita e mai collegata. Misurato il 2026-08-24 sul
+      # sito (finestra 30gg, 33 issue col marker): 11 consegnate, **5
+      # recuperabili** — branch con lavoro reale, nessuna PR, invisibili a ogni
+      # strato — e 17 morte a mani vuote.
+      #
+      # `--apply` e' sicuro su uno schedule solo grazie al dedup su
+      # `ORPHAN_NOTE_MARKER`: senza, il commento tornerebbe ogni notte, e un
+      # commento di bot alza `updatedAt`, che e' esattamente cio' che affama il
+      # cooldown del parked-retry e l'age-out. Un rilevatore che si ri-annuncia
+      # diventerebbe la causa del blocco che aiuta a diagnosticare.
+      #
+      # Zero Claude, zero quota: solo `gh api` in lettura piu' un commento per
+      # issue nuova. Best-effort: non deve mai far cadere l'harvester.
+      - name: Annota il lavoro orfano dei max-turns (zero-Claude)
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: node scripts/ci/orphan-max-turns-work.mjs --window 30 --apply
+
       - name: Setup Headroom compression proxy
         if: steps.guard.outputs.open_proposals == '0' && steps.harvest.outputs.has_novel == 'true'
         uses: ./.github/actions/setup-headroom

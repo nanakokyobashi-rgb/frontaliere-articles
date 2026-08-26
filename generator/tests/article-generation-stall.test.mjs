@@ -100,7 +100,19 @@ test('the fidelity gate tells the writer how many more anchors it needs', () => 
   // "the text contains no dot-decimal anywhere": each bullet also quotes the
   // source sentence verbatim, and this source writes "5.3%" — reproducing that
   // faithfully is the whole point of anchorEvidence.
-  assert.match(issue.fix, /• 5,3% — la fonte dice:/);
+  //
+  // The bullet no longer reads `• 5,3% — la fonte dice:`: anchors that share
+  // one source sentence are now listed together on that sentence's single
+  // bullet (`• 5,3%, 1,1%, 1,5%, … — …`), and a sentence already quoted by
+  // `source-key-rates-dropped` is referred back to instead of pasted again.
+  // The reason is the prompt budget: on 2026-08-14 the news branch went from
+  // est=8274 at attempt 1 to est=9434 from attempt 2 on, against a fleet cap of
+  // 8000, and 41 models were skipped pre-flight. See
+  // generator/tests/anchor-evidence-dedup.test.mjs.
+  //
+  // What this test pins is unchanged and is what it was always about: the LABEL
+  // carries the Italian comma form, whichever bullet it ends up on.
+  assert.match(issue.fix, /• (?:[^\n—]*, )?5,3%(?:,|\s+—)/);
   assert.ok(!/• \d+\.\d+%/.test(issue.fix), 'anchor labels must use the Italian comma form');
 });
 

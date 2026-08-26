@@ -4,7 +4,7 @@ name: Generation health watchdog
 # la classe di guasto che `workflow-failure-issues.yml` non può vedere, perché
 # quello filtra su `conclusion == failure` e queste run escono `success`.
 #
-# Il razionale completo (le sei condizioni, la misura che ha scelto ogni soglia,
+# Il razionale completo (le sette condizioni, la misura che ha scelto ogni soglia,
 # perché apertura e chiusura sono la stessa passata) sta in
 # `scripts/ci/scan-generation-health.mjs`. In breve: `generate-article.yml` esce
 # 0 di proposito quando non produce nulla — è un esito normale — quindi il

@@ -15,7 +15,7 @@
  * l'array FAQ»). Opt-in: la run schedulata non la passa.
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, renameSync } from 'fs';
 import { resolve, basename } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import { dirname } from 'path';
@@ -28,13 +28,29 @@ import { escapeForSingleQuoteTS, unescapeForSingleQuoteTS } from './lib/article-
 
 // Write-time guard (issue #66): strip any C0 control character other than
 // TAB/LF/CR before it reaches content/ — same rule as create-article.mjs write().
+//
+// Commits via temp+rename (issue #561, same rule as create-article.mjs's
+// write()): this rewrites an EXISTING content/*.faq body in place, reached
+// from `batch-faq-articles.yml` (`timeout-minutes`, same SIGKILL mechanism
+// issue #561 fixes) — a direct writeFileSync on the target can leave it
+// truncated mid-write. `renameSync` is a single POSIX syscall, atomic on the
+// same filesystem; the temp file lives next to the target so the rename
+// never crosses a filesystem boundary.
+let writeTmpSeq = 0;
 function writeCorpusFile(filePath, content) {
   const clean = sanitizeText(content);
   // Non basta togliere il byte: toglierlo distrugge il MARKER che rende
   // esatta una riparazione futura (issue #95). Si registra prima, con il
   // contesto che conserva la coppia (byte, carattere seguente).
   reportStrippedControlChars(filePath, content, clean);
-  writeFileSync(filePath, clean, 'utf-8');
+  const tmp = `${filePath}.${process.pid}.${writeTmpSeq++}.tmp`;
+  try {
+    writeFileSync(tmp, clean, 'utf-8');
+    renameSync(tmp, filePath);
+  } catch (err) {
+    try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
+    throw err;
+  }
 }
 
 const __filename = fileURLToPath(import.meta.url);
@@ -154,33 +170,61 @@ export function parseFaqLiteral(raw) {
 // the LAST occurrence at runtime (JS object literal semantics), so
 // that's the value actually live — matching only the first would read
 // dead content and mis-detect the locale.
-const FAQ_VALUE_RE = /\.faq['']\s*:\s*[']((?:[^'\\]|\\.)*)[']\s*[,}]/g;
+//
+// ── L'ancora all'id (issue #301 item 2) ─────────────────────
+//
+// La chiave e' quella dell'articolo in corso, non un `.faq` qualunque nel file:
+// stesso pattern con cui #294 ha ancorato i gate di sola lettura
+// (`find-dirty-content-ids.mjs`, `faqQuestionsInBodyText`), id ESCAPATO per la
+// regex. Le due regole non si escludono: si legge e si scrive l'ULTIMA
+// occorrenza DEL PROPRIO id.
+//
+// L'id e' il NOME DEL FILE — e' la definizione che `main()` usa gia'
+// (`basename(file, '.ts')`), quindi ricavarlo dal path che queste funzioni
+// ricevono da' esattamente lo stesso id senza cambiare i chiamanti. Il
+// parametro resta esplicito per i test e per un chiamante futuro che
+// enumeri un file dove i due non coincidono.
+//
+// Il pattern e' ricopiato invece che condiviso, come in `find-dirty-content-ids.mjs`
+// (#294): questo file e' un gemello `adapted` di uno del sito
+// (`scripts/fix-faq-locales.mjs`) e importare qui una lib `corpus-only` aggiungerebbe una
+// divergenza in piu' fra i due, per tre righe di regex.
+const idOfBodyPath = (filePath) => basename(filePath, '.ts');
+const faqKeyRx = (id) => `'blog\\.article\\.${String(id).replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\.faq'`;
+const faqValueRe = (id) => new RegExp(`${faqKeyRx(id)}\\s*:\\s*'((?:[^'\\\\]|\\\\.)*)'\\s*[,}]`, 'g');
 
 /** Il literal `.faq` vivo di un file, ancora escapato. `null` se non c'e'. */
-function rawFaqLiteral(filePath) {
+function rawFaqLiteral(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return null;
   const content = readFileSync(filePath, 'utf-8');
-  const matches = [...content.matchAll(FAQ_VALUE_RE)];
+  const matches = [...content.matchAll(faqValueRe(id))];
   return matches.length ? matches[matches.length - 1][1] : null;
 }
 
-function extractFaqFromFile(filePath) {
-  const raw = rawFaqLiteral(filePath);
+export function extractFaqFromFile(filePath, id = idOfBodyPath(filePath)) {
+  const raw = rawFaqLiteral(filePath, id);
   return raw === null ? null : parseFaqLiteral(raw).pairs;
 }
 
-function hasFaqKey(filePath) {
+/**
+ * Primo argomento: un PATH. L'omonima di `batch-add-faq-to-articles.mjs`
+ * prende invece il CONTENUTO del file: passarle un path (o viceversa) non
+ * lancia, risponde solo `false` in silenzio.
+ */
+export function hasFaqKey(filePath, id = idOfBodyPath(filePath)) {
   if (!existsSync(filePath)) return false;
-  return /\.faq['']\s*:/.test(readFileSync(filePath, 'utf-8'));
+  return new RegExp(`${faqKeyRx(id)}\\s*:`).test(readFileSync(filePath, 'utf-8'));
 }
 
-function replaceFaqInFile(filePath, newFaqArray) {
+export function replaceFaqInFile(filePath, newFaqArray, id = idOfBodyPath(filePath)) {
   let content = readFileSync(filePath, 'utf-8');
   const jsonStr = serializeFaqLiteral(newFaqArray);
   // Escape-aware regex + function replacer to avoid $-pattern issues.
   // `g` + last match: write the occurrence that is actually LIVE at
-  // runtime, same reasoning as extractFaqFromFile above.
-  const matches = [...content.matchAll(/(\.faq['']\s*:\s*[''])((?:[^'\\]|\\.)*)(['']\s*[,}])/g)];
+  // runtime, same reasoning as extractFaqFromFile above. Ancorata all'id:
+  // qui sbagliare chiave non e' un rapporto storto, e' la FAQ di un articolo
+  // scritta sopra quella di un altro.
+  const matches = [...content.matchAll(new RegExp(`(${faqKeyRx(id)}\\s*:\\s*')((?:[^'\\\\]|\\\\.)*)('\\s*[,}])`, 'g'))];
   if (matches.length) {
     const last = matches[matches.length - 1];
     const start = last.index;

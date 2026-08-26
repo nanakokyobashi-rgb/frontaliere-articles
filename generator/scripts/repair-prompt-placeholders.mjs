@@ -60,6 +60,9 @@ import {
   truncateAtPromptScaffold,
   cleanFaqPairs,
   orphanFaqLocales,
+  faqLineRe,
+  faqPresentForId,
+  DROP_FAQ_SENTINEL,
 } from './lib/prompt-placeholder-guard.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -324,7 +327,7 @@ for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...wa
         if (!dropped.length && !repaired) return null;
         // Sotto le 2 coppie il campo va tolto: e' la soglia di
         // ogPagesPlugin.ts:1328. `__DROP__` lo segnala al post-processo sotto.
-        if (!kept) return { value: '__DROP_FAQ__', how: `faq-rimossa (${dropped.length} coppie segnaposto)` };
+        if (!kept) return { value: DROP_FAQ_SENTINEL, how: `faq-rimossa (${dropped.length} coppie segnaposto)` };
         return { value: JSON.stringify(kept), how: `faq-potata (${repaired} riparate, ${dropped.length} scartate)` };
       }
       let out = stripFaqNumberedLabels(value).value;
@@ -368,8 +371,12 @@ if (!CHECK_ONLY) {
   for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
     try {
       let src = fs.readFileSync(abs, 'utf-8');
-      if (!src.includes('__DROP_FAQ__')) continue;
-      src = src.replace(/\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'__DROP_FAQ__',?/g, '');
+      if (!src.includes(DROP_FAQ_SENTINEL)) continue;
+      // Ancorata sul VALORE e non sull'id, di proposito: il sentinella l'ha
+      // scritto il passo 2 solo sulla chiave giusta, e togliere solo quello di
+      // un id lascerebbe su disco quello di un altro — che il gate finale
+      // `dropFaqSurvivors` conta come fallimento.
+      src = src.replace(new RegExp(`\\n[ \\t]*'blog\\.article\\.[^']+\\.faq'\\s*:\\s*'${DROP_FAQ_SENTINEL}',?`, 'g'), '');
       fs.writeFileSync(abs, src);
     } catch (err) {
       problems.push(`${path.relative(ROOT, abs)}: rimozione della riga __DROP_FAQ__ fallita (${err.message}) — FILE SALTATO`);
@@ -399,26 +406,29 @@ if (!CHECK_ONLY) {
 // Il criterio e' in `orphanFaqLocales()`, ed e' strutturale invece che
 // testuale di proposito: vedi l'intestazione della funzione.
 //
-// `g` e' obbligatorio su entrambe le regex sotto: senza, sia la lettura di
-// stato sia la rimozione si fermano al PRIMO match. Una seconda chiave `.faq`
-// nello stesso file — residuo plausibile di un merge, mai osservato nel
-// corpus attuale ma non escluso da uno futuro — resterebbe cosi' invisibile a
-// `faqStateOf()` e sopravviverebbe alla rimozione: e' pubblicata come
-// FAQPage JSON-LD, quindi orfana e live.
-const FAQ_LINE_RE = /\n[ \t]*'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)',?/g;
+// `g` e' obbligatorio su entrambe le regex di `faqLineRe`/`faqPresentForId`:
+// senza, sia la lettura di stato sia la rimozione si fermano al PRIMO match.
+// Una seconda chiave `.faq` DELLO STESSO id — residuo plausibile di un merge,
+// mai osservato nel corpus attuale ma non escluso da uno futuro — resterebbe
+// cosi' invisibile a `faqStateOf()` e sopravviverebbe alla rimozione: e'
+// pubblicata come FAQPage JSON-LD, quindi orfana e live.
+//
+// E sono ANCORATE all'id (issue #301 item 2). La forma precedente
+// (`'blog\.article\.[^']+\.faq'`) prendeva la chiave di QUALUNQUE id nel file:
+// in un file a due id `faqStateOf()` leggeva lo stato della chiave sbagliata e
+// la potatura qui sotto toglieva una FAQ viva e non orfana. E' lo stesso
+// ancoraggio con cui #294 ha chiuso i tre gate di sola lettura, applicato dove
+// l'esito non e' un rapporto ma una `writeFileSync` su `content/`.
+//
+// Le due funzioni vivono in `lib/prompt-placeholder-guard.mjs` perche' questo
+// file e' tutto a top level — importarlo lo esegue sul corpus — e la' sono
+// provabili: `generator/tests/faq-key-anchoring.test.mjs`.
 
-function faqStateOf(abs) {
+function faqStateOf(abs, id) {
   if (!fs.existsSync(abs)) return { hasFile: false, hasFaq: false };
-  const src = fs.readFileSync(abs, 'utf-8');
-  const re = /'blog\.article\.[^']+\.faq'\s*:\s*'((?:[^'\\]|\\.)*)'/g;
-  let hasFaq = false;
-  let m;
   // Basta UNA occorrenza con contenuto vero: e' la stessa soglia con cui
   // il passo 2b decide se una locale ha ancora una FAQ da orfanare.
-  while ((m = re.exec(src)) !== null) {
-    if (m[1] !== '__DROP_FAQ__') { hasFaq = true; break; }
-  }
-  return { hasFile: true, hasFaq };
+  return { hasFile: true, hasFaq: faqPresentForId(fs.readFileSync(abs, 'utf-8'), id) };
 }
 
 // Stessa fault isolation del post-processo `__DROP_FAQ__` sopra, e per la
@@ -438,17 +448,19 @@ for (const dir of ['blog-body', 'blog-body-ch']) {
     const id = name.slice(0, -3);
     try {
       const byLocale = Object.fromEntries(
-        LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name))]),
+        LOCALES.map((l) => [l, faqStateOf(path.join(ROOT, 'content', dir, l, name), id)]),
       );
       for (const locale of orphanFaqLocales(byLocale)) {
         const rel = path.join('content', dir, locale, name);
         const abs = path.join(ROOT, rel);
         const src = fs.readFileSync(abs, 'utf-8');
-        // `g` su FAQ_LINE_RE fa si' che `replace` tolga OGNI occorrenza, non
-        // solo la prima: un file con due chiavi `.faq` (residuo di merge) le
-        // perde entrambe invece di lasciarne una orfana e live.
+        // `g` su `faqLineRe(id)` fa si' che `replace` tolga OGNI occorrenza,
+        // non solo la prima: un file con due chiavi `.faq` DI QUESTO id
+        // (residuo di merge) le perde entrambe invece di lasciarne una orfana
+        // e live. Le chiavi di un altro id non si toccano: non e' questo
+        // l'articolo che le ha rese orfane.
         const dropped = [];
-        const next = src.replace(FAQ_LINE_RE, (_m, raw) => {
+        const next = src.replace(faqLineRe(id), (_m, raw) => {
           dropped.push(raw);
           return '';
         });
@@ -543,7 +555,7 @@ if (residuals.length) {
 const dropFaqSurvivors = [];
 for (const abs of [...walkBodies(path.join(ROOT, 'content', 'blog-body')), ...walkBodies(path.join(ROOT, 'content', 'blog-body-ch'))]) {
   try {
-    if (fs.readFileSync(abs, 'utf-8').includes('__DROP_FAQ__')) dropFaqSurvivors.push(path.relative(ROOT, abs));
+    if (fs.readFileSync(abs, 'utf-8').includes(DROP_FAQ_SENTINEL)) dropFaqSurvivors.push(path.relative(ROOT, abs));
   } catch (err) {
     problems.push(`${path.relative(ROOT, abs)}: rilettura per il controllo finale fallita (${err.message}) — sentinella NON verificato`);
   }

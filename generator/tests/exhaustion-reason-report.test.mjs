@@ -29,8 +29,10 @@
  * ## Dove gira
  *
  * `npm test` del corpus (`node --test generator/tests/*.test.mjs`), quindi dentro
- * `tests.yml` — che ha `branches-ignore: [main]`: **gira sulle PR, NON sui push
- * a `main`**.
+ * `tests.yml`. Fino al 2026-08-18 quel workflow aveva `branches-ignore: [main]` e
+ * girava **solo sulle PR**; da allora gira anche sui push a `main`, perche' il
+ * rescue `stuck-red` di `pr-autorebase.mjs` ha bisogno di una run `success` di
+ * `tests.yml` su `main` da esibire.
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
