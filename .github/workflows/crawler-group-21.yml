@@ -48,3 +48,44 @@ jobs:
     secrets:
       FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
       CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  crawler_group_21_retry:
+    needs: crawler_group_21
+    if: always() && needs.crawler_group_21.result == 'failure'
+    uses: valerielinc-ops/frontaliere-si-o-no/.github/workflows/crawler-group-21-logic.yml@main
+    with:
+      skip_ai_translation: ${{ inputs.skip_ai_translation }}
+    secrets:
+      FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_JSON }}
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+
+  # Both the primary call above and the retry resolve/download
+  # valerielinc-ops/frontaliere-si-o-no as a cross-repo reusable workflow before
+  # any of ITS OWN steps run -- including its own github-issue-creator.mjs
+  # failure reporting. When that download step itself times out (observed:
+  # translate-pending run 32923600325, 2026-08-26 -- "Failed to download action
+  # ... HttpClient.Timeout of 100 seconds"), no step ever executes and nothing
+  # reports it. This job is the only net that catches that failure class.
+  crawler_group_21_report_failure:
+    needs: [crawler_group_21, crawler_group_21_retry]
+    if: always() && needs.crawler_group_21_retry.result == 'failure'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          sparse-checkout: |
+            scripts/lib
+          sparse-checkout-cone-mode: false
+      - name: File/update the dispatch-failure issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/lib/github-issue-creator.mjs \
+            --title "crawler-group-21: cross-repo dispatch esaurito (2/2 tentativi prima che la logica partisse)" \
+            --description "Sia il tentativo primario sia il retry sono falliti PRIMA che qualunque step di .github/workflows/crawler-group-21-logic.yml (ospitato su valerielinc-ops/frontaliere-si-o-no) partisse.\n\nSintomo osservato: 'Failed to download action ... HttpClient.Timeout of 100 seconds' nella risoluzione del reusable workflow cross-repo -- il repo del sito e' un working tree di diversi GB, e il download del tarball via codeload a volte eccede il timeout del runner.\n\ngithub-issue-creator.mjs vive dentro la logica del crawler (sul sito) e non arriva mai a girare in questo scenario: questo job e' la sola rete che lo cattura.\n\nRun fallito: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --priority 2 \
+            --label Bug \
+            --workflow "Crawler Group 21 (cross-repo dispatch)"
