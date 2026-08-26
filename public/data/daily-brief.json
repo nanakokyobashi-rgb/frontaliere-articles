@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T05:35:29.982Z",
-  "dateIso": "2026-08-25",
+  "generatedAt": "2026-08-26T05:38:01.078Z",
+  "dateIso": "2026-08-26",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
     "fuelMunicipalities": 518,
     "exchangePoints": 32,
-    "jobsActive": 26441
+    "jobsActive": 26356
   },
   "blocks": {
     "borderWait": {
@@ -16,10 +16,10 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-25T05:11:25.961Z",
+      "generatedAt": "2026-08-26T05:11:37.043Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 65,
-      "cheaperSwissCount": 69,
+      "cheaperItalyCount": 67,
+      "cheaperSwissCount": 67,
       "tieCount": 6,
       "cheapestItaly": [
         {
@@ -59,9 +59,9 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.508,
-          "swissPriceEur": 2.083,
-          "swissPriceChf": 1.95,
-          "saving50LEur": 28.75
+          "swissPriceEur": 2.072,
+          "swissPriceChf": 1.94,
+          "saving50LEur": 28.2
         },
         {
           "municipality": "Aprica",
@@ -91,24 +91,24 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.069,
-      "lastDate": "2026-08-24",
-      "prevRate": 1.069,
-      "prevDate": "2026-08-23",
-      "delta1d": 0,
-      "rate7dAgo": 1.064,
-      "delta7d": 0.005,
+      "rate": 1.0682,
+      "lastDate": "2026-08-25",
+      "prevRate": 1.0686,
+      "prevDate": "2026-08-24",
+      "delta1d": -0.0004,
+      "rate7dAgo": 1.0654,
+      "delta7d": 0.0028,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-25T03:33:18.182Z",
-      "activeJobs": 26441,
-      "activeCompanies": 865,
-      "todayAdded": 529,
-      "yesterdayAdded": 3779,
-      "last7dAdded": 7561
+      "generatedAt": "2026-08-26T01:56:46.675Z",
+      "activeJobs": 26356,
+      "activeCompanies": 866,
+      "todayAdded": 475,
+      "yesterdayAdded": 1009,
+      "last7dAdded": 7676
     }
   }
 }
