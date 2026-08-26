@@ -4378,6 +4378,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.accesso-facilitato-infortuni-2027.title': 'Easy access to accident insurance from 2027',
     'blog.article.accesso-facilitato-infortuni-2027.excerpt': 'Reduced threshold from CHF 66,690 to CHF 44,460: from January 2027, around 40,000 self-employed workers will be able to insure against accidents with new opportunities.',
     'blog.article.accesso-facilitato-infortuni-2027.imageAlt': 'Swiss independent professional working in a modern office with city view',
+    'blog.article.indennita-parentali-2027.title': 'Parental allowances: new entitlements from 1 July 2027',
+    'blog.article.indennita-parentali-2027.excerpt': 'The Federal Council approves the amendments to the IPG law: from 1 July 2027 parents and families will have access to benefits hitherto reserved for the military.',
+    'blog.article.indennita-parentali-2027.imageAlt': 'Federal Palace of Bern, seat of Swiss Federal Council and Parliament',
 };
 
 export default blogMetaChEn;

@@ -4378,6 +4378,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.accesso-facilitato-infortuni-2027.title': 'Erleichterter Zugang zur Unfallversicherung ab 2027',
     'blog.article.accesso-facilitato-infortuni-2027.excerpt': 'Schwellenwert von CHF 66.690 auf CHF 44.460 gesenkt: Ab Januar 2027 können sich rund 40 \'000 Selbstständige mit neuen Chancen gegen Unfälle versichern.',
     'blog.article.accesso-facilitato-infortuni-2027.imageAlt': 'Schweizer unabhängiger Profi arbeitet in modernem Büro mit Stadtblick',
+    'blog.article.indennita-parentali-2027.title': 'Elterngeld: Neue Ansprüche ab 1. Juli 2027',
+    'blog.article.indennita-parentali-2027.excerpt': 'Der Bundesrat genehmigt die Änderungen des EO-Gesetzes: Ab dem 1. Juli 2027 haben Eltern und Familien Zugang zu Leistungen, die bisher Angehörigen der Armee vorbehalten waren.',
+    'blog.article.indennita-parentali-2027.imageAlt': 'Bundesrat-Gebäude in Bern, Sitz des Schweizer Bundesrates und Parlaments',
 };
 
 export default blogMetaChDe;
