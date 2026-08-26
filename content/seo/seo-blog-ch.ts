@@ -57116,6 +57116,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-elettricita-gas-meno-cari-2027': {
+    title: 'Bollette più leggere: costi energetici in calo nel 2027',
+    description: 'AIM annuncia riduzioni tariffe 2027: -6,5%-7,4% elettricità, -9,43% gas, -13% complessivi. Scopri come risparmiare sulla bolletta energetica nel Mendrisiotto.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bollette, leggere, costi, energetici',
+    ogTitle: 'Bollette più leggere nel 2027: -6,5%-7,4% energia, -9,43% gas',
+    ogDescription: 'Le Aziende Industriali Mendrisio annunciano riduzioni significative per il 2027. Bollette di luce e gas in calo: energia a 10.88 cts/kWh (-13% rispetto a 2026). Scopri il tuo risparmio annuale e come calcolare l\'impatto sul budget familiare.',
+    canonicalPath: '/articoli-svizzera/elettricita-gas-meno-cari-2027/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Bollette più leggere: costi energetici in calo nel 2027",
+      "description": "AIM annuncia riduzioni tariffe 2027: -6,5%-7,4% elettricità, -9,43% gas, -13% complessivi. Scopri come risparmiare sulla bolletta energetica nel Mendrisiotto.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/elettricita-gas-meno-cari-2027.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Contatore energetico e abitazioni residenziali ticinesi con tariffe energetiche in calo nel 2027"
+      },
+      "datePublished": "2026-08-26T15:25:32+00:00",
+      "dateModified": "2026-08-26T15:25:32+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/elettricita-gas-meno-cari-2027/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
