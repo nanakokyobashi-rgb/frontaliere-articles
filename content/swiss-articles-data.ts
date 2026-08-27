@@ -13447,6 +13447,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ffs-passeggeri-crescita-h1-2026',
+    category: 'novita',
+    date: '2026-08-27T09:34:05.425Z',
+    image: '/images/blog/ffs-passeggeri-crescita-h1-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

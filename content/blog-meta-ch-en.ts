@@ -4483,6 +4483,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rosti-difende-politica-climatica.title': 'Rösti defends federal climate policy',
     'blog.article.rosti-difende-politica-climatica.excerpt': 'Federal Council: CHF 73 million for drought. CHF 54m farmers, CHF 17.5M forests until 2031. Round table by the end of October.',
     'blog.article.rosti-difende-politica-climatica.imageAlt': 'Swiss Alpine lake in summer drought with reduced water levels, dry hillsides reflecting climate stress.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'SBB: +4% passengers, punctuality 94% and profit growing',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'The Swiss Federal Railways close H1 2026 with 1.45 M passengers per day (+4%), punctuality 94.1% and profit CHF 126M. The priorities: reliability, innovation, investments.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Swiss railway station platform with departing SBB train',
 };
 
 export default blogMetaChEn;

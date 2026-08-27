@@ -4483,6 +4483,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rosti-difende-politica-climatica.title': 'Rösti défend la politique climatique fédérale',
     'blog.article.rosti-difende-politica-climatica.excerpt': 'Conseil fédéral : 73 millions de francs par sécheresse. 54 M CHF pour les agriculteurs, 17,5 M CHF pour les forêts jusqu\'en 2031. Table ronde fin octobre.',
     'blog.article.rosti-difende-politica-climatica.imageAlt': 'Lac alpin suisse en sécheresse estivale avec niveaux d\'eau réduits, paysage sec montrant le stress climatique.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'CFF : +4% passagers, ponctualité 94% et bénéfice en hausse',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Les Chemins de fer fédéraux suisses ferment H1 2026 avec 1,45M passagers par jour (+4%), ponctualité 94,1% et 126M CHF utiles. Les priorités : fiabilité, innovation, investissements.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Quai de gare suisse avec train SBB en partance',
 };
 
 export default blogMetaChFr;

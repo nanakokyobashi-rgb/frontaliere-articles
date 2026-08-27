@@ -58169,6 +58169,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ffs-passeggeri-crescita-h1-2026': {
+    title: 'FFS: +4% passeggeri, puntualità 94% e utile in crescita',
+    description: 'FFS chiude H1 2026 con 1,45M passeggeri al giorno (+4%), puntualità 94,1%, utile 126M CHF. Priorità: affidabilità, innovazione, capacità finanziaria',
+    keywords: 'frontalieri, ticino, svizzera, italia, passeggeri, puntualità, utile, crescita',
+    ogTitle: 'FFS chiude H1 2026 con crescita passeggeri e utili',
+    ogDescription: 'Le Ferrovie Federali Svizzere registrano il primo semestre 2026 con bilancio positivo: 1,45M passeggeri al giorno (+4%), puntualità 94,1%, utile 126M CHF. Le priorità: affidabilità, innovazione e capacità finanziaria per il rinnovamento delle flotte',
+    canonicalPath: '/articoli-svizzera/ffs-passeggeri-crescita-h1-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "FFS: +4% passeggeri, puntualità 94% e utile in crescita",
+      "description": "FFS chiude H1 2026 con 1,45M passeggeri al giorno (+4%), puntualità 94,1%, utile 126M CHF. Priorità: affidabilità, innovazione, capacità finanziaria",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ffs-passeggeri-crescita-h1-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Banchina di una stazione ferroviaria svizzera con treno SBB in partenza"
+      },
+      "datePublished": "2026-08-27T09:34:05+00:00",
+      "dateModified": "2026-08-27T09:34:05+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ffs-passeggeri-crescita-h1-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

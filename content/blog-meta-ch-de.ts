@@ -4483,6 +4483,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rosti-difende-politica-climatica.title': 'Rösti verteidigt die Bundesklimapolitik',
     'blog.article.rosti-difende-politica-climatica.excerpt': 'Bundesrat: 73 Millionen Franken wegen Dürre. CHF 54 Mio. Landwirte, CHF 17,5 Mio. Wälder bis 2031. Runder Tisch bis Ende Oktober.',
     'blog.article.rosti-difende-politica-climatica.imageAlt': 'Schweizer Alpensee unter Sommerdürre mit reduzierten Wasserständen, Trockenlandschaft unter Klimastress.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'SBB: +4% Fahrgäste, Pünktlichkeit 94% und Gewinnzuwachs',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Die Schweizerischen Bundesbahnen schliessen H1 2026 mit 1,45 Mio. Fahrgästen pro Tag (+4%), Pünktlichkeit 94,1% und Gewinn 126 Mio. CHF ab. Die Prioritäten: Zuverlässigkeit, Innovation, Investitionen.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Schweizer Bahnsteig mit abfahrendem SBB-Zug',
 };
 
 export default blogMetaChDe;

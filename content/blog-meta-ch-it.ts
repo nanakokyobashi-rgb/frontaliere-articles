@@ -4483,6 +4483,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rosti-difende-politica-climatica.title': 'Rösti difende la politica climatica federale',
     'blog.article.rosti-difende-politica-climatica.excerpt': 'Consiglio federale: CHF 73 milioni per siccità. CHF 54 M agricoltori, CHF 17,5 M boschi fino 2031. Tavola rotonda entro fine ottobre.',
     'blog.article.rosti-difende-politica-climatica.imageAlt': 'Lago svizzero in condizioni di siccità estiva con livelli idrici ridotti, paesaggio alpino sotto stress climatico.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'FFS: +4% passeggeri, puntualità 94% e utile in crescita',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Le Ferrovie Federali Svizzere chiudono H1 2026 con 1,45M passeggeri al giorno (+4%), puntualità 94,1% e utile 126M CHF. Le priorità: affidabilità, innovazione, investimenti.',
+    'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Banchina di una stazione ferroviaria svizzera con treno SBB in partenza',
 };
 
 export default blogMetaChIt;
