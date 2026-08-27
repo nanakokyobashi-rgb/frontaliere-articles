@@ -4513,6 +4513,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.vignetta-autostradale-non-subito.title': 'La vignetta autostradale adesiva sparirà, ma non subito',
     'blog.article.vignetta-autostradale-non-subito.excerpt': 'Il Consiglio federale conferma: vignetta adesiva ancora per anni. Abolizione solo quando scenderà sotto il 10% delle vendite. Nel 2026, quota digitale al 50%.',
     'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Veduta di una strada svizzera con circolazione autostradale e paesaggio alpino',
+    'blog.article.formazione-musicale-rette-2026.title': 'Formazione musicale: rette ridotte per i giovani',
+    'blog.article.formazione-musicale-rette-2026.excerpt': 'Dal 2026 rette fino al 90% per famiglie fragili e accesso esteso fino a 25 anni. Il Ticino investe 2,5 milioni CHF annui in formazione musicale extrascolastica.',
+    'blog.article.formazione-musicale-rette-2026.imageAlt': 'Sede amministrativa del Cantone Ticino, rappresentante le politiche educative e culturali',
 };
 
 export default blogMetaChIt;

@@ -4513,6 +4513,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.vignetta-autostradale-non-subito.title': 'La vignette autocollante de l\'autoroute disparaîtra, mais pas tout de suite',
     'blog.article.vignetta-autostradale-non-subito.excerpt': 'Le Conseil fédéral confirme : vignette adhésive encore pendant des années. Abolition uniquement lorsqu\'elle tombe en dessous de 10 % des ventes. En 2026, part numérique à 50 %.',
     'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Route suisse avec circulation automobile et paysage alpin',
+    'blog.article.formazione-musicale-rette-2026.title': 'Formation musicale : tarifs réduits pour les jeunes',
+    'blog.article.formazione-musicale-rette-2026.excerpt': 'À partir de 2026, des lignes droites allant jusqu\'à 90 % pour les familles fragiles et un accès étendu jusqu\'à 25 ans. Le Tessin investit 2,5 millions de CHF par an dans la formation musicale extrascolaire.',
+    'blog.article.formazione-musicale-rette-2026.imageAlt': 'Siège administratif du canton du Tessin, représentant les politiques d\'éducation et de culture',
 };
 
 export default blogMetaChFr;

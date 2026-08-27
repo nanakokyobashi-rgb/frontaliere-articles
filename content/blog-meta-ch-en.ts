@@ -4513,6 +4513,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.vignetta-autostradale-non-subito.title': 'The sticky highway vignette will disappear, but not right away',
     'blog.article.vignetta-autostradale-non-subito.excerpt': 'The Federal Council confirms: vignette still stuck for years. Abolition only when it falls below 10% of sales. In 2026, digital share at 50%.',
     'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Swiss highway with vehicle traffic and Alpine landscape',
+    'blog.article.formazione-musicale-rette-2026.title': 'Musical training: reduced fees for young people',
+    'blog.article.formazione-musicale-rette-2026.excerpt': 'From 2026, fees up to 90% for fragile families and extended access up to 25 years. Ticino invests CHF 2.5 million per year in extracurricular music training.',
+    'blog.article.formazione-musicale-rette-2026.imageAlt': 'Administrative headquarters of Ticino Canton, representing educational and cultural policies',
 };
 
 export default blogMetaChEn;

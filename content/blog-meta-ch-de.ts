@@ -4513,6 +4513,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.vignetta-autostradale-non-subito.title': 'Die selbstklebende Autobahnvignette verschwindet, aber nicht sofort',
     'blog.article.vignetta-autostradale-non-subito.excerpt': 'Der Bundesrat bestätigt: Klebevignette noch jahrelang. Abschaffung erst, wenn sie unter 10% des Umsatzes sinkt. Im Jahr 2026 liegt der digitale Anteil bei 50 %.',
     'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Schweizer Autobahn mit Verkehr und Alpenlandschaft',
+    'blog.article.formazione-musicale-rette-2026.title': 'Musikalische Ausbildung: ermäßigte Gebühren für Jugendliche',
+    'blog.article.formazione-musicale-rette-2026.excerpt': 'Ab 2026 gelten bis zu 90 % für zerbrechliche Familien und erweiterter Zugang bis zu 25 Jahren. Das Tessin investiert jährlich 2,5 Millionen CHF in die ausserschulische Musikausbildung.',
+    'blog.article.formazione-musicale-rette-2026.imageAlt': 'Verwaltungszentrale des Kantons Tessin, die Bildungs- und Kulturpolitik vertritt',
 };
 
 export default blogMetaChDe;

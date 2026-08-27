@@ -1530,6 +1530,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bancasto-ricavi-calo-semestre': { it: 'bancasto-ricavi-calo-semestre', en: 'bancasto-revenues-decline-semester', de: 'bancasto-einnahmen-rueckgang-halbjahr', fr: 'bancasto-revenus-baisse-semestre' },
  'kremlin-voto-neutralita-svizzera': { it: 'kremlin-voto-neutralita-svizzera', en: 'kremlin-vote-neutrality-switzerland', de: 'kremlin-abstimmung-neutralitaet-schweiz', fr: 'kremlin-vote-neutralite-suisse' },
  'vignetta-autostradale-non-subito': { it: 'vignetta-autostradale-non-subito', en: 'vignette-highway-not-immediately', de: 'autobahnvignette-nicht-sofort', fr: 'vignette-autoroute-pas-maintenant' },
+ 'formazione-musicale-rette-2026': { it: 'formazione-musicale-rette-2026', en: 'music-education-fees-2026', de: 'musikausbildung-gebuehren-2026', fr: 'formation-musicale-cotisations-2026' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
