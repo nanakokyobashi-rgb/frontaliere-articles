@@ -10857,6 +10857,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Einreisedokumente Schweiz: Grenzführer 2026',
     'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Reisepass, Ausweis G, Personalausweis: obligatorische Dokumente und Verfahren für den Grenzübertritt. Neues Abkommen 2024, Tessiner Grenzübergänge, Zollkontrollen und Steuererstattungen.',
     'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Schweizer Aufenthaltsbewilligung (Permesso G) und italienischer Reisepass auf Schreibtisch mit Flaggen im Hintergrund',
+    'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Vermietung vs. Immobilien: Die Wahl der Grenzgänger',
+    'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Grenzgänger Richtung Tessin: Vergleich zwischen eigenen Autos und Langzeitmiete. Kosten-Nutzen-Analyse und Auswahl der besten Lösung.',
+    'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Straße zum Tessin mit Schweizer Verkehrsschildern und einem fahrenden Auto',
 };
 
 export default blogMetaDe;

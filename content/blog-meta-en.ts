@@ -10858,6 +10858,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Entry documents Switzerland: border guides 2026',
     'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passport, G permit, identity card: mandatory documents and procedures to cross the border. New 2024 Agreement, Ticino crossings, customs controls and tax rebates.',
     'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Swiss residence permit (Permesso G) and Italian passport on office desk with Italy-Switzerland flags blurred in background',
+    'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Rental vs ownership: the choice of frontiersmen',
+    'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Border crossing to Ticino: comparison between owned cars and long-term rental. Analysis of costs, benefits and how to choose the best solution.',
+    'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Road leading to Ticino canton with Swiss road signs and a car traveling',
 };
 
 export default blogMetaEn;

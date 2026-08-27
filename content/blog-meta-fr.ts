@@ -10860,6 +10860,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Documents d\'entrée Suisse : guide frontaliers 2026',
     'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passeport, permis G, carte d\'identité : documents obligatoires et procédures pour franchir la frontière. Nouvel accord 2024, cols tessinois, contrôles douaniers et dédommagements fiscaux.',
     'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Permis de séjour suisse (Permesso G) et passeport italien sur le bureau avec drapeaux Italie-Suisse en arrière-plan',
+    'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Location vs propriété : le choix des frontaliers',
+    'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Navetteurs transfrontaliers vers le Tessin : comparaison entre voitures possédées et locations longue durée. Analyse des coûts, avantages et comment choisir la meilleure solution.',
+    'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Route vers le canton du Tessin avec panneaux suisses et voiture en transit',
 };
 
 export default blogMetaFr;

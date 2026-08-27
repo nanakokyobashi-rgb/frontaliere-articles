@@ -10859,6 +10859,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Documenti ingresso Svizzera: guida frontalieri 2026',
     'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passaporto, permesso G, carta d\'identità: documenti obbligatori e procedure per varcare il confine. Nuovo Accordo 2024, valichi ticinesi, controlli dogana e ristorni fiscali.',
     'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Passaporto italiano e permesso G svizzero su scrivania con bandiere Italia-Svizzera, ambiente ufficio confine Ticino',
+    'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Noleggio vs proprietà: la scelta dei frontalieri',
+    'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Frontalieri verso Ticino: confronto tra auto di proprietà e noleggio lungo termine. Analisi costi, vantaggi e come scegliere la soluzione migliore.',
+    'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Una strada che porta verso il Canton Ticino con segni stradali svizzeri e un\'auto in viaggio',
 };
 
 export default blogMetaIt;
