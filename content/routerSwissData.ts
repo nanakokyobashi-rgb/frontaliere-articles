@@ -1528,6 +1528,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'disoccupazione-diplomati-svizzera-2025': { it: 'disoccupazione-diplomati-svizzera-2025', en: 'unemployment-graduates-switzerland-2025', de: 'arbeitslosigkeit-absolventen-schweiz-2025', fr: 'chomage-diplomes-suisse-2025' },
  'processo-mirabaud-corruzione': { it: 'processo-mirabaud-corruzione', en: 'mirabaud-trial-corruption', de: 'mirabaud-prozess-korruption', fr: 'mirabaud-proces-corruption' },
  'bancasto-ricavi-calo-semestre': { it: 'bancasto-ricavi-calo-semestre', en: 'bancasto-revenues-decline-semester', de: 'bancasto-einnahmen-rueckgang-halbjahr', fr: 'bancasto-revenus-baisse-semestre' },
+ 'kremlin-voto-neutralita-svizzera': { it: 'kremlin-voto-neutralita-svizzera', en: 'kremlin-vote-neutrality-switzerland', de: 'kremlin-abstimmung-neutralitaet-schweiz', fr: 'kremlin-vote-neutralite-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

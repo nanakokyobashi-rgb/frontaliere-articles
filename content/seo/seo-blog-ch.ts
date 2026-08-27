@@ -58481,6 +58481,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-kremlin-voto-neutralita-svizzera': {
+    title: 'Russia interfiere sulla votazione svizzera di neutralità',
+    description: 'RT.DE e social media usati da Mosca per influenzare il voto sulla neutralità del 27 settembre 2026. Governo riconosce minaccia di disinformazione straniera.',
+    keywords: 'frontalieri, ticino, svizzera, italia, russia, interfiere, sulla, votazione',
+    ogTitle: 'Russia interfiere sulla votazione svizzera di neutralità',
+    ogDescription: 'Il Cremlino usa RT.DE e social media per influenzare l\'iniziativa sulla neutralità svizzera in votazione il 27 settembre 2026. Governo federale e Parlamento riconoscono il rischio di disinformazione straniera.',
+    canonicalPath: '/articoli-svizzera/kremlin-voto-neutralita-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Russia interfiere sulla votazione svizzera di neutralità",
+      "description": "RT.DE e social media usati da Mosca per influenzare il voto sulla neutralità del 27 settembre 2026. Governo riconosce minaccia di disinformazione straniera.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/kremlin-voto-neutralita-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale di Berna, sede del Parlamento svizzero, simbolo della democrazia e della politica nazionale."
+      },
+      "datePublished": "2026-08-27T14:59:47+00:00",
+      "dateModified": "2026-08-27T14:59:47+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/kremlin-voto-neutralita-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -4507,6 +4507,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino: ricavi -6%, pesano tassi',
     'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Nel primo semestre 2026 i ricavi della BancaStato Ticino calano del 6% a 153 milioni CHF. Il risultato d\'esercizio cala del 22%, mentre l\'utile netto rimane stabile grazie a proventi straordinari.',
     'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Vista panoramica del waterfront di Lugano con edifici finanziari, lago e Alpi sullo sfondo',
+    'blog.article.kremlin-voto-neutralita-svizzera.title': 'Russia interfiere sulla votazione svizzera di neutralità',
+    'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE e social media usati da Mosca per influenzare il voto sulla neutralità del 27 settembre. Governo riconosce minaccia di disinformazione.',
+    'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Palazzo federale di Berna, sede del Parlamento svizzero, simbolo della democrazia e della politica nazionale.',
 };
 
 export default blogMetaChIt;

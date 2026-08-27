@@ -4507,6 +4507,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino: Erträge -6%, Zinsen gewichtet',
     'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Im ersten Halbjahr 2026 sanken die Erträge der BancaStato Ticino um 6% auf CHF 153 Mio. Das Betriebsergebnis sinkt um 22%, während der Reingewinn durch ausserordentliche Erträge stabil bleibt.',
     'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Panoramablick auf Luganos Uferpromenade mit Finanzgebäuden, See und Alpen im Hintergrund',
+    'blog.article.kremlin-voto-neutralita-svizzera.title': 'Russland mischt sich in die Schweizer Neutralitätsabstimmung ein',
+    'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE und soziale Medien, die von Moskau genutzt werden, um die Abstimmung über die Neutralität vom 27. September zu beeinflussen. Die Regierung erkennt die Gefahr von Fehlinformationen an.',
+    'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Parlaments, Symbol der Demokratie und nationalen Politik.',
 };
 
 export default blogMetaChDe;

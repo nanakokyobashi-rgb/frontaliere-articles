@@ -4507,6 +4507,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino : chiffre d\'affaires -6 %, taux de pesage',
     'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Au premier semestre 2026, les revenus de BancaStato Ticino chutent de 6 % à 153 millions de CHF. Le résultat d\'exploitation baisse de 22 %, tandis que le bénéfice net reste stable grâce aux produits exceptionnels.',
     'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Vue panoramique du front de lac de Lugano avec le quartier financier et les Alpes en arrière-plan',
+    'blog.article.kremlin-voto-neutralita-svizzera.title': 'La Russie s\'immisce dans le vote suisse de neutralité',
+    'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE et les médias sociaux utilisés par Moscou pour influencer le vote sur la neutralité du 27 septembre. Le gouvernement reconnaît la menace de désinformation.',
+    'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Parlement suisse, symbole de la démocratie et de la politique nationale.',
 };
 
 export default blogMetaChFr;
