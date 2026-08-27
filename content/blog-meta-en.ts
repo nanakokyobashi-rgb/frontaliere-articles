@@ -10896,6 +10896,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.varese-bretella-riapertura-2026.title': 'Varese, brace reopens in mid-September: the details',
     'blog.article.varese-bretella-riapertura-2026.excerpt': 'The Raccordo Gazzada-Varese motorway link reopens in mid-September. Anas works completed at 32%, end of March 2027. Impact on cross-border commuting.',
     'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Varese highway exit with traffic during roadworks, view from Lombardy toward Ticino',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Living in Cremenaga and working in Ticino as a border worker',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Practical guide for Italian border workers: tax, G permit, LAMal, connections and cost of living on the Italy-Swiss side.',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'View of Cremenaga village near the border with Canton Ticino',
 };
 
 export default blogMetaEn;

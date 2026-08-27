@@ -10897,6 +10897,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.varese-bretella-riapertura-2026.title': 'Varese, bretella riapre a metà settembre: i dettagli',
     'blog.article.varese-bretella-riapertura-2026.excerpt': 'La bretella autostradale del Raccordo Gazzada-Varese riapre a metà settembre. Lavori Anas completati al 32%, fine marzo 2027. Impatto sul pendolarismo transfrontaliero.',
     'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Bretella autostradale di Varese con traffico durante i lavori, vista dalla Lombardia verso il Ticino',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Vivere a Cremenaga e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Guida pratica per frontalieri italiani: fisco, permesso G, LAMal, collegamenti e costo della vita lato italia-svizzera.',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'Veduta del paese di Cremenaga vicino al confine con il Canton Ticino',
 };
 
 export default blogMetaIt;

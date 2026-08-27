@@ -10895,6 +10895,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.varese-bretella-riapertura-2026.title': 'Varese, Schultergurt öffnet Mitte September wieder: die Details',
     'blog.article.varese-bretella-riapertura-2026.excerpt': 'Der Autobahngurt des Verbindungsstücks Gazzada-Varese wird Mitte September wiedereröffnet. ANAS-Arbeiten zu 32% abgeschlossen, Ende März 2027. Auswirkungen auf das grenzüberschreitende Pendeln.',
     'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Autobahnauffahrt Varese mit Verkehr während Straßenarbeiten, Blick von der Lombardei zum Tessin',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Wohnen in Cremenaga und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Praktischer Leitfaden für italienische Grenzgänger: Steuern, G-Genehmigung, KVG, Verbindungen und Lebenshaltungskosten auf italienisch-schweizerischer Seite.',
+    'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'Blick auf das Dorf Cremenaga nahe der Grenze zum Kanton Tessin',
 };
 
 export default blogMetaDe;
