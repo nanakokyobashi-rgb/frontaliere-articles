@@ -58832,6 +58832,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanziamento-casa-donne-grigioni': {
+    title: 'Grigioni, finanziamento Casa donne: richiesta respinta',
+    description: 'Il Gran Consiglio grigionese affronta la richiesta di finanziamento aggiuntivo per la Casa per donne; occupazione al 91% e perdita di 182mila franchi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, grigioni, finanziamento, casa, donne',
+    ogTitle: 'Grigioni, finanziamento Casa donne: richiesta respinta',
+    ogDescription: 'La Casa per donne grigionese segnala un\'occupazione del 91% e una perdita di 182mila franchi nel 2025. Il Gran Consiglio ha chiesto più finanziamenti, ma il governo li ha rifiutati. Scopri il dibattito tra il governo e le deputate socialiste',
+    canonicalPath: '/articoli-svizzera/finanziamento-casa-donne-grigioni/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Grigioni, finanziamento Casa donne: richiesta respinta",
+      "description": "Il Gran Consiglio grigionese affronta la richiesta di finanziamento aggiuntivo per la Casa per donne; occupazione al 91% e perdita di 182mila franchi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/finanziamento-casa-donne-grigioni.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula del Gran Consiglio grigionese durante una seduta parlamentare con dibattito sulla Casa per donne"
+      },
+      "datePublished": "2026-08-27T19:47:51+00:00",
+      "dateModified": "2026-08-27T19:47:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/finanziamento-casa-donne-grigioni/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

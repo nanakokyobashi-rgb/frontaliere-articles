@@ -4534,6 +4534,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta di Basilea: utile +2%, ricavi -2%',
     'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'Il colosso agrochimico svizzero chiude il primo semestre con utile operativo in crescita nonostante il calo dei ricavi. La redditività cresce mentre la domanda si contrae.',
     'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Sede di Syngenta a Basilea, simbolo dell\'economia svizzera nel settore agrochimico',
+    'blog.article.finanziamento-casa-donne-grigioni.title': 'Grigioni, finanziamento Casa donne: richiesta respinta',
+    'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Il Gran Consiglio grigionese affronta l\'occupazione al 91% della Casa per donne: la deputata Bischof richiede più finanziamenti, il governo rifiuta.',
+    'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Aula del Gran Consiglio grigionese durante una seduta parlamentare con dibattito sulla Casa per donne',
 };
 
 export default blogMetaChIt;

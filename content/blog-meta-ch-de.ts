@@ -4534,6 +4534,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta Basel: Gewinn +2%, Umsatz -2%',
     'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'Der Schweizer Agrochemie-Gigant schliesst das erste Halbjahr trotz sinkender Erträge mit steigendem operativen Ergebnis ab. Die Rentabilität steigt, während die Nachfrage schrumpft.',
     'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Syngenta-Zentrale in Basel, Symbol der Schweizer Wirtschaft im Agrochemie-Sektor',
+    'blog.article.finanziamento-casa-donne-grigioni.title': 'Graubünden, Finanzierung Frauenhaus: Antrag abgelehnt',
+    'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Der Bündner Grosse Rat stellt sich der Besetzung von 91% des Frauenhauses: Die Abgeordnete Bischof fordert mehr Geld, die Regierung lehnt ab.',
+    'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Plenarsaal des Graubündner Grossrats während einer Debatte zur Finanzierung des Frauenhauses',
 };
 
 export default blogMetaChDe;

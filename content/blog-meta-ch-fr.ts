@@ -4534,6 +4534,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta Bâle : bénéfice +2%, chiffre d\'affaires -2%',
     'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'Le géant agrochimique suisse clôture le premier semestre avec un bénéfice d\'exploitation en hausse malgré la baisse de ses revenus. La rentabilité augmente alors que la demande se contracte.',
     'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Siège de Syngenta à Bâle, symbole de l\'économie suisse dans le secteur agrochimique',
+    'blog.article.finanziamento-casa-donne-grigioni.title': 'Grisons, financement Maison femmes : demande rejetée',
+    'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Le Grand Conseil grison s\'attaque à l\'occupation à 91% de la Maison des femmes : la députée Bischof demande plus de financements, le gouvernement refuse.',
+    'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Salle plénière du Grand Conseil des Grisons lors d\'un débat sur le financement de la maison des femmes',
 };
 
 export default blogMetaChFr;

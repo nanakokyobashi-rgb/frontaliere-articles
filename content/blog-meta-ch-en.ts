@@ -4534,6 +4534,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta of Basel: profit +2%, revenue -2%',
     'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'The Swiss agrochemical giant closed the first half of the year with operating profit up despite the drop in revenues. Profitability grows while demand shrinks.',
     'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Syngenta headquarters in Basel, symbol of Swiss economy in agrochemical sector',
+    'blog.article.finanziamento-casa-donne-grigioni.title': 'Graubünden, Women\'s House funding: application rejected',
+    'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'The Greater Graubünden Council faces 91% employment in the Women\'s House: MP Bischof requests more funding, the government refuses.',
+    'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Grisons cantonal parliament chamber during plenary session discussing women\'s shelter funding',
 };
 
 export default blogMetaChEn;
