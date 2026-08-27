@@ -13618,6 +13618,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ffs-treni-diretti-europa',
+    category: 'novita',
+    date: '2026-08-27T21:01:04.312Z',
+    image: '/images/blog/ffs-treni-diretti-europa.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

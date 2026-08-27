@@ -1539,6 +1539,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'syngenta-utili-ricavi-semestre': { it: 'syngenta-utili-ricavi-semestre', en: 'syngenta-profits-revenue-semester', de: 'syngenta-gewinne-umsatz-halbjahr', fr: 'syngenta-benefices-revenus-semestre' },
  'finanziamento-casa-donne-grigioni': { it: 'finanziamento-casa-donne-grigioni', en: 'funding-womens-shelter-grisons', de: 'finanzierung-frauenhaus-graenbuenden', fr: 'financement-maison-femmes-grisons' },
  'ffs-treni-diretti-europei': { it: 'ffs-treni-diretti-europei', en: 'ffs-direct-trains-european-capitals', de: 'sbb-direktzuege-europaische-hauptstadte', fr: 'ffs-trains-directs-capitales-europeennes' },
+ 'ffs-treni-diretti-europa': { it: 'ffs-treni-diretti-europa', en: 'ffs-direct-trains-europe', de: 'sbb-direktzuege-europa', fr: 'cff-trains-directs-europe' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

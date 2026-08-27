@@ -4540,6 +4540,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europei.title': 'Trains directs CFF vers Barcelone, Amsterdam et Londres',
     'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot annonce le plan CFF : 40 trains internationaux vers les principales capitales européennes. La réalisation d\'ici 2030.',
     'blog.article.ffs-treni-diretti-europei.imageAlt': 'Quai de gare suisse avec des trains CFF modernes prêts pour les trajets vers les capitales européennes',
+    'blog.article.ffs-treni-diretti-europa.title': 'CFF évalue les trains directs pour Barcelone, Amsterdam et Londres',
+    'blog.article.ffs-treni-diretti-europa.excerpt': 'Les CFF évaluent l\'ouverture de services ferroviaires directs vers les principales capitales européennes. Projet de 40 convois pour répondre au chaos aérien et aux prix élevés.',
+    'blog.article.ffs-treni-diretti-europa.imageAlt': 'Train à grande vitesse quittant une gare ferroviaire suisse avec les Alpes en arrière-plan',
 };
 
 export default blogMetaChFr;

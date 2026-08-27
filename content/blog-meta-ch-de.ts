@@ -4540,6 +4540,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europei.title': 'SBB Direktzüge nach barcelona, amsterdam und london',
     'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot kündigt den SBB-Plan an: 40 internationale Züge in die wichtigsten europäischen Hauptstädte. Realisierung bis 2030.',
     'blog.article.ffs-treni-diretti-europei.imageAlt': 'Schweizer Bahnsteig mit modernen SBB-Zuegen fuer internationale Fahrten zu europaeischen Hauptstadten',
+    'blog.article.ffs-treni-diretti-europa.title': 'SBB bewertet Direktzüge nach Barcelona, Amsterdam und London',
+    'blog.article.ffs-treni-diretti-europa.excerpt': 'Die SBB prüft die Eröffnung von Zugverbindungen in die wichtigsten europäischen Hauptstädte. Projekt von 40 Konvois, um auf das Flugzeugchaos und die hohen Preise zu reagieren.',
+    'blog.article.ffs-treni-diretti-europa.imageAlt': 'Hochgeschwindigkeitszug an einem Schweizer Bahnhof mit Alpenbergen im Hintergrund',
 };
 
 export default blogMetaChDe;

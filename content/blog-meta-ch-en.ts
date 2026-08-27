@@ -4540,6 +4540,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europei.title': 'SBB direct trains to Barcelona, Amsterdam and London',
     'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot announces SBB plan: 40 international trains to major European capitals. Implementation by 2030.',
     'blog.article.ffs-treni-diretti-europei.imageAlt': 'Swiss railway platform with modern FFS trains ready for international service to European capitals',
+    'blog.article.ffs-treni-diretti-europa.title': 'SBB evaluates direct trains to Barcelona, Amsterdam and London',
+    'blog.article.ffs-treni-diretti-europa.excerpt': 'SBB is considering opening direct rail services to major European capitals. Project of 40 convoys to respond to air chaos and high prices.',
+    'blog.article.ffs-treni-diretti-europa.imageAlt': 'High-speed train departing a Swiss railway station platform with Alpine mountains in the distance',
 };
 
 export default blogMetaChEn;

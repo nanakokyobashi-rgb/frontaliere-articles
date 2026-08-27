@@ -4540,6 +4540,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europei.title': 'Treni diretti FFS verso barcellona, amsterdam e londra',
     'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot annuncia il piano FFS: 40 treni internazionali verso le principali capitali europee. La realizzazione entro il 2030.',
     'blog.article.ffs-treni-diretti-europei.imageAlt': 'Banchina di una stazione svizzera con moderni treni FFS pronti per il viaggio internazionale verso le capitali europee',
+    'blog.article.ffs-treni-diretti-europa.title': 'FFS valuta treni diretti per Barcellona, Amsterdam e Londra',
+    'blog.article.ffs-treni-diretti-europa.excerpt': 'Le FFS valutano l\'apertura di servizi ferroviari diretti verso le principali capitali europee. Progetto di 40 convogli per rispondere al caos aereo e ai prezzi alti.',
+    'blog.article.ffs-treni-diretti-europa.imageAlt': 'Treno ad alta velocità in partenza da una stazione ferroviaria svizzera con le Alpi sullo sfondo',
 };
 
 export default blogMetaChIt;
