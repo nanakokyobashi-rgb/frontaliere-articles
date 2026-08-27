@@ -13465,6 +13465,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'bilancio-eccedenza-debito-2025',
+    category: 'fiscale',
+    date: '2026-08-27T10:50:38.610Z',
+    image: '/images/blog/bilancio-eccedenza-debito-2025.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

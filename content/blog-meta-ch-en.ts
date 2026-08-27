@@ -4489,6 +4489,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.rimborso-dazi-paura-amministrativa.title': 'US duty reimbursement: administrative fear',
     'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Only a third of Swiss companies ask for reimbursement of improperly collected US duties. The others give up for fear of excessive administrative burdens.',
     'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Swiss precision manufacturing facility with CNC machinery and industrial workstations',
+    'blog.article.bilancio-eccedenza-debito-2025.title': 'Public finances 2025: surplus but debt grows',
+    'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Federal administration: surplus of 4 billion in 2025, gross debt rises to 353.2 billion (40.7% GDP). Impact on taxes and social benefits.',
+    'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Bellinzona Government Palace, seat of Ticino cantonal administration',
 };
 
 export default blogMetaChEn;

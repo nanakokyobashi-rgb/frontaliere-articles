@@ -4489,6 +4489,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.rimborso-dazi-paura-amministrativa.title': 'Rimborso dazi Usa: il timore amministrativo',
     'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Solo un terzo delle aziende svizzere chiede rimborso dazi Usa indebitamente riscossi. Le altre rinunciano per paura degli oneri amministrativi eccessivi.',
     'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Impianto di produzione svizzera con macchinari CNC e stazioni di lavoro industriali',
+    'blog.article.bilancio-eccedenza-debito-2025.title': 'Finanze pubbliche 2025: eccedenza ma debito cresce',
+    'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Amministrazione federale: eccedenza di 4 miliardi nel 2025, debito lordo sale a 353,2 miliardi (40,7% PIL). Impatto su imposte e prestazioni sociali.',
+    'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Palazzo del Governo di Bellinzona, sede amministrativa del Cantone Ticino',
 };
 
 export default blogMetaChIt;

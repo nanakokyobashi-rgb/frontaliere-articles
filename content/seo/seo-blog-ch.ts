@@ -58247,6 +58247,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bilancio-eccedenza-debito-2025': {
+    title: 'Finanze pubbliche 2025: eccedenza ma debito cresce',
+    description: 'Amministrazione federale finanze: eccedenza 4 miliardi nel 2025, debito lordo sale a 353,2 miliardi CHF (40,7% PIL). Dati su imposte e prestazioni sociali.',
+    keywords: 'frontalieri, ticino, svizzera, italia, finanze, pubbliche, eccedenza, debito',
+    ogTitle: 'Bilancio 2025: eccedenza ma debito lordo cresce',
+    ogDescription: 'Svizzera 2025: eccedenza di bilancio pubblico di 4 miliardi, ma debito lordo raggiunge 353,2 miliardi (40,7% PIL). Dati ufficiali AFF per finanze di Confederazione, Cantoni, Comuni e assicurazioni sociali. Impatto fiscale e previdenziale.',
+    canonicalPath: '/articoli-svizzera/bilancio-eccedenza-debito-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Finanze pubbliche 2025: eccedenza ma debito cresce",
+      "description": "Amministrazione federale finanze: eccedenza 4 miliardi nel 2025, debito lordo sale a 353,2 miliardi CHF (40,7% PIL). Dati su imposte e prestazioni sociali.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bilancio-eccedenza-debito-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo del Governo di Bellinzona, sede amministrativa del Cantone Ticino"
+      },
+      "datePublished": "2026-08-27T10:50:38+00:00",
+      "dateModified": "2026-08-27T10:50:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/bilancio-eccedenza-debito-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

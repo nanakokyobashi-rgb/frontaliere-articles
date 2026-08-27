@@ -4489,6 +4489,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.rimborso-dazi-paura-amministrativa.title': 'Remboursement des droits de douane américains : la crainte administrative',
     'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Seulement un tiers des entreprises suisses demandent le remboursement des droits de douane américains indûment perçus. Les autres renoncent par crainte de charges administratives excessives.',
     'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Installation de fabrication suisse de précision avec machines CNC et postes de travail industriels',
+    'blog.article.bilancio-eccedenza-debito-2025.title': 'Finances publiques 2025 : excédent mais dette en hausse',
+    'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Administration fédérale : excédent de 4 milliards en 2025, la dette brute s\'élève à 353,2 milliards (40,7 % du PIB). Impact sur les impôts et les prestations sociales.',
+    'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Palais du Gouvernement de Bellinzone, siège de l\'administration cantonale tessinoise',
 };
 
 export default blogMetaChFr;

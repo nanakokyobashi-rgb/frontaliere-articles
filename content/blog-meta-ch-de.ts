@@ -4489,6 +4489,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.rimborso-dazi-paura-amministrativa.title': 'US-Zollrückerstattung: die administrative Angst',
     'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Nur ein Drittel der Schweizer Unternehmen fordert zu Unrecht erhobene US-Zölle zurück. Die anderen verzichten aus Angst vor übermässigem Verwaltungsaufwand.',
     'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Schweizer Präzisionsfertigung mit CNC-Maschinen und industriellen Arbeitsstationen',
+    'blog.article.bilancio-eccedenza-debito-2025.title': 'Öffentliche Finanzen 2025: Überschuss, aber Schulden wachsen',
+    'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Bundesverwaltung: Überschuss von 4 Milliarden im Jahr 2025, Bruttoverschuldung steigt auf 353,2 Milliarden (40,7% BIP). Auswirkungen auf Steuern und Sozialleistungen.',
+    'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Regierungspalast Bellinzona, Sitz der Kantonsadministration Tessin',
 };
 
 export default blogMetaChDe;
