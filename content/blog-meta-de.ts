@@ -10875,6 +10875,11 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.reddito-record-svizzera-2025.title': 'Schweiz: Einkommen und Sparen auf Rekordhoch im Jahr 2025',
     'blog.article.reddito-record-svizzera-2025.excerpt': '2025 übersteigt das bereinigte verfügbare Pro-Kopf-Einkommen 65\'124 Franken (+36% real gegenüber 1995) und das freiwillige Sparen liegt bei 19,3%.',
     'blog.article.reddito-record-svizzera-2025.imageAlt': 'Einkommen und Sparquote der Schweizer Haushalte 2025 laut BFS',
+    'blog.article.bollettino-frontaliere-2026-08-27.title': 'Grenzgänger-Tagesbulletin – 27. August 2026: 1\'251 neue Stellenangebote gestern',
+    'blog.article.bollettino-frontaliere-2026-08-27.excerpt': 'Die Zahlen von heute, 27. August 2026, für Grenzgänger: die heute Morgen gemessenen Wartezeiten an den Übergängen, die Gemeinden mit dem günstigsten Benzin, der Franken-Euro-Kurs vom Schlusskurs und die neu ausgeschriebenen Stellen in der Schweiz. Täglich aus unserem Monitoring.',
+    'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 27. August 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
+    'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Grenzgänger-Bulletin vom 27. August 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
+    'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'Die Zahlen vom 27. August 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
 };
 
 export default blogMetaDe;

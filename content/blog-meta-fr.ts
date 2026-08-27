@@ -10878,6 +10878,11 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.reddito-record-svizzera-2025.title': 'Suisse : revenu et épargne au plus haut historique en 2025',
     'blog.article.reddito-record-svizzera-2025.excerpt': 'En 2025, le revenu disponible ajusté par habitant dépasse 65\'124 francs (+36% réel en 1995) et l\'épargne volontaire atteint 19,3%.',
     'blog.article.reddito-record-svizzera-2025.imageAlt': 'Revenu et épargne des ménages suisses en 2025 selon l\'OFS',
+    'blog.article.bollettino-frontaliere-2026-08-27.title': 'Bulletin du frontalier – 27 août 2026 : 1 251 nouvelles offres d\'emploi hier',
+    'blog.article.bollettino-frontaliere-2026-08-27.excerpt': 'Les chiffres du jour, 27 août 2026, pour les frontaliers : les attentes relevées ce matin à chaque douane, les communes où l\'essence coûte le moins cher, le taux franc-euro à la clôture et les offres d\'emploi parues en Suisse. Des données de notre suivi, relevées chaque jour.',
+    'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'Les chiffres du jour pour les frontaliers – 27 août 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
+    'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Bulletin du frontalier du 27 août 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
+    'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'Les chiffres du 27 août 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
 };
 
 export default blogMetaFr;

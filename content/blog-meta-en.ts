@@ -10876,6 +10876,11 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.reddito-record-svizzera-2025.title': 'Switzerland: Income and savings at all-time highs in 2025',
     'blog.article.reddito-record-svizzera-2025.excerpt': 'In 2025, adjusted disposable income per capita exceeds CHF 65,124 (+36% real on 1995) and voluntary savings reach 19.3%.',
     'blog.article.reddito-record-svizzera-2025.imageAlt': 'Swiss household income and savings in 2025 according to the FSO',
+    'blog.article.bollettino-frontaliere-2026-08-27.title': 'Cross-border daily brief – August 27, 2026: 1\'251 new job listings yesterday',
+    'blog.article.bollettino-frontaliere-2026-08-27.excerpt': 'Today\'s numbers, August 27, 2026, for cross-border commuters: the waits measured at every crossing this morning, the municipalities where fuel is cheapest, the franc-euro rate at yesterday\'s close and the jobs newly posted in Switzerland. Measured daily by our own monitoring.',
+    'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'The day\'s numbers for cross-border commuters – August 27, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
+    'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Cross-border brief, August 27, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
+    'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'The numbers for August 27, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
 };
 
 export default blogMetaEn;

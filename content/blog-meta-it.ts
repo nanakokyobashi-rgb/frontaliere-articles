@@ -10877,6 +10877,11 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.reddito-record-svizzera-2025.title': 'Svizzera: reddito e risparmio ai massimi storici nel 2025',
     'blog.article.reddito-record-svizzera-2025.excerpt': 'Nel 2025 il reddito disponibile corretto pro capite supera 65\'124 franchi (+36% reale sul 1995) e il risparmio volontario tocca il 19,3%.',
     'blog.article.reddito-record-svizzera-2025.imageAlt': 'Risparmio e reddito delle famiglie svizzere nel 2025 secondo l\'UST',
+    'blog.article.bollettino-frontaliere-2026-08-27.title': 'Bollettino del frontaliere – 27 agosto 2026: 1251 nuovi annunci di lavoro ieri',
+    'blog.article.bollettino-frontaliere-2026-08-27.excerpt': 'I numeri di oggi, 27 agosto 2026, per chi attraversa il confine: le attese ai valichi misurate stamattina, i comuni dove la benzina costa meno, il cambio franco-euro aggiornato e i nuovi annunci di lavoro pubblicati in Svizzera. Dati del nostro monitoraggio, rilevati ogni giorno.',
+    'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'I numeri del giorno per i frontalieri – 27 agosto 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
+    'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Bollettino frontalieri del 27 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
+    'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'I numeri del 27 agosto 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
 };
 
 export default blogMetaIt;
