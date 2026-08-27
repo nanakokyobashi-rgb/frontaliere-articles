@@ -10893,6 +10893,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.lainf-infortunio-confine-frontaliere.title': 'Travelling accident at the border: LAINF coverage',
     'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'You are covered by LAINF insurance during the commute between Italy and Switzerland. Practical Guide to Coverage, Complaint Procedures, and Deadlines.',
     'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Ticino mountain road at sunset with car crossing towards Italian border, mountainous landscape in background',
+    'blog.article.varese-bretella-riapertura-2026.title': 'Varese, brace reopens in mid-September: the details',
+    'blog.article.varese-bretella-riapertura-2026.excerpt': 'The Raccordo Gazzada-Varese motorway link reopens in mid-September. Anas works completed at 32%, end of March 2027. Impact on cross-border commuting.',
+    'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Varese highway exit with traffic during roadworks, view from Lombardy toward Ticino',
 };
 
 export default blogMetaEn;

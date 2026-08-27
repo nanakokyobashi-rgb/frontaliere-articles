@@ -10894,6 +10894,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.lainf-infortunio-confine-frontaliere.title': 'Infortunio in itinere al confine: copertura LAINF',
     'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Sei coperto dall\'assicurazione LAINF durante il tragitto casa-lavoro tra Italia e Svizzera. Guida pratica alla copertura, procedure di denuncia e scadenze.',
     'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Strada di montagna ticinese al tramonto con auto in transito verso il confine italiano, paesaggio montagnoso sullo sfondo',
+    'blog.article.varese-bretella-riapertura-2026.title': 'Varese, bretella riapre a metà settembre: i dettagli',
+    'blog.article.varese-bretella-riapertura-2026.excerpt': 'La bretella autostradale del Raccordo Gazzada-Varese riapre a metà settembre. Lavori Anas completati al 32%, fine marzo 2027. Impatto sul pendolarismo transfrontaliero.',
+    'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Bretella autostradale di Varese con traffico durante i lavori, vista dalla Lombardia verso il Ticino',
 };
 
 export default blogMetaIt;

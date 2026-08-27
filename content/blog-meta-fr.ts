@@ -10895,6 +10895,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.lainf-infortunio-confine-frontaliere.title': 'Accident de trajet à la frontière : couverture LAA',
     'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Vous êtes couvert par l\'assurance LAA pendant le trajet domicile-travail entre l\'Italie et la Suisse. Guide pratique sur la couverture, les procédures de plainte et les délais.',
     'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Route de montagne tessinoise au coucher du soleil avec voiture se dirigeant vers la frontière italienne, paysage montagneux en arrière-plan',
+    'blog.article.varese-bretella-riapertura-2026.title': 'Varese, bretelle rouverte à la mi-septembre : les détails',
+    'blog.article.varese-bretella-riapertura-2026.excerpt': 'La bretelle autoroutière du Raccordo Gazzada-Varese rouvre à la mi-septembre. Travaux Anas achevés à 32 %, fin mars 2027. Impact sur les déplacements transfrontaliers.',
+    'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Bretelle autoroutière de Varèse avec circulation lors des travaux, vue de Lombardie vers le Tessin',
 };
 
 export default blogMetaFr;

@@ -10892,6 +10892,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.lainf-infortunio-confine-frontaliere.title': 'Wegunfall an der Grenze: UVG-Deckung',
     'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Sie sind während der Arbeitsreise zwischen Italien und der Schweiz durch die UVG-Versicherung versichert. Praktischer Leitfaden zur Deckung, Meldeverfahren und Fristen.',
     'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Bergstrasse im Tessin bei Sonnenuntergang mit Auto in Richtung italienische Grenze, Berglandschaft im Hintergrund',
+    'blog.article.varese-bretella-riapertura-2026.title': 'Varese, Schultergurt öffnet Mitte September wieder: die Details',
+    'blog.article.varese-bretella-riapertura-2026.excerpt': 'Der Autobahngurt des Verbindungsstücks Gazzada-Varese wird Mitte September wiedereröffnet. ANAS-Arbeiten zu 32% abgeschlossen, Ende März 2027. Auswirkungen auf das grenzüberschreitende Pendeln.',
+    'blog.article.varese-bretella-riapertura-2026.imageAlt': 'Autobahnauffahrt Varese mit Verkehr während Straßenarbeiten, Blick von der Lombardei zum Tessin',
 };
 
 export default blogMetaDe;

@@ -79865,6 +79865,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-varese-bretella-riapertura-2026': {
+    title: 'Varese, bretella riapre a metà settembre: i dettagli',
+    description: 'La bretella autostradale del Raccordo Gazzada-Varese riapre a metà settembre. Lavori Anas al 32%, fine marzo 2027. Impatto sul traffico per frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, varese, bretella, riapre, metà',
+    ogTitle: 'Varese, bretella riapre a metà settembre: i dettagli',
+    ogDescription: 'A metà settembre riaprirà il Raccordo Gazzada-Varese in entrambi i sensi. Dal 30 giugno era chiusa una corsia, causando lunghe code su via Gasparotto. Leggi le novità e l\'impatto sul pendolarismo dal Ticino.',
+    canonicalPath: '/articoli-frontaliere/varese-bretella-riapertura-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Varese, bretella riapre a metà settembre: i dettagli",
+      "description": "La bretella autostradale del Raccordo Gazzada-Varese riapre a metà settembre. Lavori Anas al 32%, fine marzo 2027. Impatto sul traffico per frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/varese-bretella-riapertura-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Bretella autostradale di Varese con traffico durante i lavori, vista dalla Lombardia verso il Ticino"
+      },
+      "datePublished": "2026-08-27T19:37:00+00:00",
+      "dateModified": "2026-08-27T19:37:00+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/varese-bretella-riapertura-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
