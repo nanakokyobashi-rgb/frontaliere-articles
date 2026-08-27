@@ -4549,6 +4549,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.foraggio-siccita-aiuti-federali.title': 'Feed shortages: 54 million in federal aid',
     'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin visits a company that experiments with anti-drought crops. Confederation disburses CHF 54 million in loans and reduces duties on hay and corn.',
     'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Farmer in a drought-affected field with modern agricultural facilities in the background.',
+    'blog.article.berna-rinnova-festival-cinematografici.title': 'Bern renews support for film festivals',
+    'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'The Federal Office of Culture funds 10 festivals for 2027-2029. Locarno Film Festival confirmed with CHF 1.73 million per year.',
+    'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Outdoor screening at a Swiss film festival with audience watching on the big screen',
 };
 
 export default blogMetaChEn;

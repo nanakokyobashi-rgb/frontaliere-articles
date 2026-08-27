@@ -4549,6 +4549,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.foraggio-siccita-aiuti-federali.title': 'Futterknappheit: 54 Millionen Bundeshilfen',
     'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin besucht ein Unternehmen, das mit Antitrockenheitskulturen experimentiert. Der Bund vergibt Darlehen in Höhe von CHF 54 Mio. und senkt die Zölle auf Heu und Mais.',
     'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Bauer auf einem von Dürre betroffenen Feld mit modernen Agrargebäuden im Hintergrund.',
+    'blog.article.berna-rinnova-festival-cinematografici.title': 'Bern erneuert die Unterstützung für Filmfestivals',
+    'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'Das Bundesamt für Kultur finanziert 10 Festivals für den Zeitraum 2027-2029. Locarno Film Festival mit 1,73 Mio. CHF pro Jahr bestätigt.',
+    'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Freiluftkino bei einem Schweizer Filmfestival mit Publikum',
 };
 
 export default blogMetaChDe;

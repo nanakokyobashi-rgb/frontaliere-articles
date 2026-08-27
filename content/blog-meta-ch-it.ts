@@ -4549,6 +4549,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.foraggio-siccita-aiuti-federali.title': 'Scarsità di foraggio: 54 milioni di aiuti federali',
     'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin visita azienda che sperimenta colture anti-siccità. Confederazione eroga 54 milioni CHF in prestiti e riduce dazi su fieno e mais.',
     'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Agricoltore in un campo colpito da siccità con strutture agricole moderne sullo sfondo.',
+    'blog.article.berna-rinnova-festival-cinematografici.title': 'Berna rinnova il sostegno ai festival cinematografici',
+    'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'L\'Ufficio federale della cultura finanzia 10 festival per il 2027-2029. Locarno Film Festival confermato con 1,73 milioni CHF all\'anno.',
+    'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Proiezione all\'aperto di un festival cinematografico svizzero con pubblico seduto a guardare il grande schermo',
 };
 
 export default blogMetaChIt;

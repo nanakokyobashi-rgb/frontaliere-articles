@@ -4549,6 +4549,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.foraggio-siccita-aiuti-federali.title': 'Pénurie de fourrage : 54 millions d\'aides fédérales',
     'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin visite une entreprise qui expérimente des cultures anti-sécheresse. La Confédération accorde 54 millions de CHF en prêts et réduit les droits sur le foin et le maïs.',
     'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Agriculteur dans un champ affecté par la sécheresse avec installations agricoles modernes.',
+    'blog.article.berna-rinnova-festival-cinematografici.title': 'Berne renouvelle son soutien aux festivals cinématographiques',
+    'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'L\'Office fédéral de la culture finance 10 festivals pour 2027-2029. Locarno Film Festival confirmé avec 1,73 million de CHF par an.',
+    'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Projection en plein air à un festival de cinéma suisse avec spectateurs',
 };
 
 export default blogMetaChFr;

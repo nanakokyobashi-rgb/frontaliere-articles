@@ -13645,6 +13645,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'berna-rinnova-festival-cinematografici',
+    category: 'novita',
+    date: '2026-08-27T22:40:23.419Z',
+    image: '/images/blog/berna-rinnova-festival-cinematografici.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -59027,6 +59027,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-berna-rinnova-festival-cinematografici': {
+    title: 'Berna rinnova il sostegno ai festival cinematografici',
+    description: 'L\'Ufficio federale della cultura finanzia 10 festival per il 2027-2029. Locarno Film Festival confermato con 1,73 milioni CHF all\'anno. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, berna, rinnova, sostegno, festival',
+    ogTitle: 'Berna rinnova il sostegno ai festival cinematografici',
+    ogDescription: 'Dieci festival ricevono contributi strutturali federali per il 2027-2029. Locarno confermato con 1,73 milioni CHF annui. Nuovo: Festival Alpin Les Diablerets entra tra i finanziati dalla Confederazione.',
+    canonicalPath: '/articoli-svizzera/berna-rinnova-festival-cinematografici/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Berna rinnova il sostegno ai festival cinematografici",
+      "description": "L'Ufficio federale della cultura finanzia 10 festival per il 2027-2029. Locarno Film Festival confermato con 1,73 milioni CHF all'anno. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/berna-rinnova-festival-cinematografici.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Proiezione all'aperto di un festival cinematografico svizzero con pubblico seduto a guardare il grande schermo"
+      },
+      "datePublished": "2026-08-27T22:40:23+00:00",
+      "dateModified": "2026-08-27T22:40:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/berna-rinnova-festival-cinematografici/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
