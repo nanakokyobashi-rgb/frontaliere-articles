@@ -79553,6 +79553,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-finanziamento-statuto-s-avs': {
+    title: 'Statuto S e 13esima AVS: il Ticino chiede più fondi',
+    description: 'Il Canton Ticino rivendica co-finanziamento federale per 1.700 rifugiati ucraini e 13esima AVS. Impatto su tasse cantonali, mercato del lavoro e frontalieri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, statuto, 13esima, chiede, fondi',
+    ogTitle: 'Ticino: finanziamento per rifugiati e 13esima AVS',
+    ogDescription: 'Riunione Governo Ticino-Berna su statuto S (1.700 ucraini) e 13esima AVS. Carobbio Guscetti chiede co-finanziamento federale. Impatto: 15 milioni costi AVS, 25% occupazione rifugiati, concorrenza mercato del lavoro ticinese.',
+    canonicalPath: '/articoli-frontaliere/finanziamento-statuto-s-avs',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Statuto S e 13esima AVS: il Ticino chiede più fondi",
+      "description": "Il Canton Ticino rivendica co-finanziamento federale per 1.700 rifugiati ucraini e 13esima AVS. Impatto su tasse cantonali, mercato del lavoro e frontalieri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/finanziamento-statuto-s-avs.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Riunione del Governo cantonale ticinese con deputati federali durante discussione su finanziamenti per rifugiati ucraini e 13esima AVS"
+      },
+      "datePublished": "2026-08-27T10:37:35+00:00",
+      "dateModified": "2026-08-27T10:37:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/finanziamento-statuto-s-avs/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

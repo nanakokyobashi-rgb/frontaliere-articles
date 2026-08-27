@@ -10866,6 +10866,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Summierung AHV-INPS: Wie funktioniert die Frage',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Zusammenrechnung der Beiträge zwischen AHV Schweiz und INPS: Voraussetzungen, Formulare und Berechnung der Rente für Grenzgänger Tessin-Italien.',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'AVS- und INPS-Formulare auf dem Schreibtisch für die Beitragstotalisierung',
+    'blog.article.finanziamento-statuto-s-avs.title': 'Statut S und 13. AHV: Tessin fordert mehr Geld',
+    'blog.article.finanziamento-statuto-s-avs.excerpt': 'Der Kanton Tessin beansprucht eine föderale Kofinanzierung für 1.700 ukrainische Flüchtlinge und die 13. AHV. Kantonsregierung vs. Bern: Auswirkungen auf Steuern und Arbeitsmarkt.',
+    'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Schweizer Kantonsregierung berät über Bundesfinanzierung für ukrainische Flüchtlinge und 13. AVS-Rente',
 };
 
 export default blogMetaDe;

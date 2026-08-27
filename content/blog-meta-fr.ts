@@ -10869,6 +10869,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Totalisation AVS-INPS : comment fonctionne la demande',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Totalisation des cotisations entre l\'AVS suisse et l\'INPS : exigences, formulaires et calcul de la pension pour les frontaliers Tessin-Italie.',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'Formulaires AVS et INPS sur un bureau pour la totalisation des cotisations',
+    'blog.article.finanziamento-statuto-s-avs.title': 'Statuts S et 13e AVS : le Tessin demande plus de fonds',
+    'blog.article.finanziamento-statuto-s-avs.excerpt': 'Le canton du Tessin revendique un cofinancement fédéral pour 1 700 réfugiés ukrainiens et la 13e AVS. Gouvernement cantonal vs Berne : impact sur les impôts et le marché du travail.',
+    'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Réunion du gouvernement cantonal suisse discutant du financement fédéral pour les réfugiés ukrainiens et la 13e rente AVS',
 };
 
 export default blogMetaFr;

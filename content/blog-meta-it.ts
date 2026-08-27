@@ -10868,6 +10868,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Totalizzazione AVS-INPS: come funziona la domanda',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Totalizzazione dei contributi tra AVS svizzera e INPS: requisiti, modulistica e calcolo della pensione per i frontalieri Ticino-Italia.',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'Modulistica AVS e INPS sulla scrivania per la totalizzazione dei contributi',
+    'blog.article.finanziamento-statuto-s-avs.title': 'Statuto S e 13esima AVS: il Ticino chiede più fondi',
+    'blog.article.finanziamento-statuto-s-avs.excerpt': 'Il Canton Ticino rivendica co-finanziamento federale per 1.700 rifugiati ucraini e 13esima AVS. Governo cantonale vs Berna: impatto su tasse e mercato del lavoro.',
+    'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Riunione del Governo cantonale ticinese con deputati federali durante discussione su finanziamenti per rifugiati ucraini e 13esima AVS',
 };
 
 export default blogMetaIt;

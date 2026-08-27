@@ -32511,6 +32511,15 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'finanziamento-statuto-s-avs',
+ category: 'fiscale',
+ date: '2026-08-27T10:37:35.230Z',
+ image: '/images/blog/finanziamento-statuto-s-avs.webp',
+ hasCalculator: true,
+ authorSlug: 'marco-ferrari',
+ authorName: 'Marco Ferrari',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

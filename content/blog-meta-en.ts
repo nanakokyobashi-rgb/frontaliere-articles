@@ -10867,6 +10867,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'AVS-INPS Totalization: How Demand Works',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Total contributions between AVS Switzerland and INPS: requirements, forms and calculation of the pension for border crossers Ticino-Italy.',
     'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'AVS and INPS forms on a desk for contribution totalisation',
+    'blog.article.finanziamento-statuto-s-avs.title': 'Statute S and 13th AVS: Ticino asks for more funds',
+    'blog.article.finanziamento-statuto-s-avs.excerpt': 'Canton Ticino claims federal co-financing for 1,700 Ukrainian refugees and 13th AVS. Cantonal government vs Bern: impact on taxes and the labour market.',
+    'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Swiss cantonal government meeting discussing federal funding for Ukrainian refugees and 13th AVS pension',
 };
 
 export default blogMetaEn;
