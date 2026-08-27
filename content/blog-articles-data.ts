@@ -32556,6 +32556,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'passaggio-ticino-grigioni-frontaliere',
+ category: 'pratico',
+ date: '2026-08-27T17:51:02.014Z',
+ image: '/images/blog/passaggio-ticino-grigioni-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

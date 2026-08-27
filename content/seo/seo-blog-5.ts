@@ -79747,6 +79747,46 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-passaggio-ticino-grigioni-frontaliere': {
+    title: 'Cambio cantone da Ticino a Grigioni per frontalieri',
+    description: 'Guida per frontalieri sul cambio cantone dal Ticino ai Grigioni: permesso G, aliquote imposta alla fonte, accordo fiscale e adempimenti. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, cambio, cantone, grigioni, cosa',
+    ogTitle: 'Cambio cantone da Ticino a Grigioni per frontalieri',
+    ogDescription: 'Tutte le regole per il passaggio di lavoro dal Canton Ticino ai Grigioni: novità su permesso G, aliquote di imposta alla fonte e gestione del pendolarismo.',
+    canonicalPath: '/articoli-frontaliere/passaggio-ticino-grigioni-frontaliere',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Cambio cantone da Ticino a Grigioni per frontalieri",
+      "description": "Guida per frontalieri sul cambio cantone dal Ticino ai Grigioni: permesso G, aliquote imposta alla fonte, accordo fiscale e adempimenti. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/passaggio-ticino-grigioni-frontaliere.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Valico alpino tra Italia e Svizzera per frontalieri tra Ticino e Grigioni"
+      },
+      "datePublished": "2026-08-27T17:51:02+00:00",
+      "dateModified": "2026-08-27T17:51:02+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/passaggio-ticino-grigioni-frontaliere/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

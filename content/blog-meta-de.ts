@@ -10883,6 +10883,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Grenzgänger über 55, Jobwechsel in der Schweiz: Was Sie wissen sollten',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Umzug nach 55 Jahren als Grenzgänger: Auswirkungen auf die Genehmigung G, zweite Säule, Quellensteuer und neue Steuersätze 2024-2033.',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Grenzgänger über 55, der einen Jobwechsel zwischen Italien und Tessin prüft',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Grenzgängerwechsel Kanton Tessin nach Graubünden',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Was ändert sich für Bewilligung G, Quellensteuer, Abzüge und Pendeln, wenn der Arbeitsplatz vom Tessin nach Graubünden verlegt wird.',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Alpen-Grenzübergang zwischen Italien und der Schweiz für Grenzgänger',
 };
 
 export default blogMetaDe;

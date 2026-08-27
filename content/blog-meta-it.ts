@@ -10885,6 +10885,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Frontaliere over 55, cambio lavoro in Svizzera: cosa sapere',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Ricollocarsi dopo i 55 anni da frontaliere: impatto su Permesso G, secondo pilastro, imposta alla fonte e nuove aliquote 2024-2033.',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Frontaliere over 55 che valuta un cambio lavoro tra Italia e Ticino',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Cambio cantone da Ticino a Grigioni per frontalieri',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Cosa cambia per permesso G, imposta alla fonte, trattenute e pendolarismo quando si trasferisce il posto di lavoro dal Ticino ai Grigioni.',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Valico alpino tra Italia e Svizzera per frontalieri tra Ticino e Grigioni',
 };
 
 export default blogMetaIt;

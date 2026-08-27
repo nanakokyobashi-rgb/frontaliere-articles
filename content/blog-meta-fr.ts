@@ -10886,6 +10886,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Frontaliere 55+ : changer de travail en Suisse',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Se réinstaller après 55 ans en tant que frontalier : impact sur le permis G, deuxième pilier, impôt à la source et nouveaux taux 2024-2033.',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Travailleur frontalier de plus de 55 ans envisageant un changement d\'emploi entre l\'Italie et le Tessin',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Changement de canton du Tessin aux Grisons pour les frontaliers',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Ce qui change pour le permis G, l\'impôt à la source, les retenues et les déplacements lors du transfert du lieu de travail du Tessin aux Grisons.',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Poste frontière alpin entre l\'Italie et la Suisse pour les frontaliers',
 };
 
 export default blogMetaFr;

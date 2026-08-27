@@ -10884,6 +10884,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Border worker over 55, job change in Switzerland: what to know',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Relocating after 55 years as a border worker: impact on Permit G, second pillar, tax at source and new rates 2024-2033.',
     'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Cross-border worker over 55 evaluating a job change between Italy and Ticino',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Canton change from Ticino to Graubünden for border workers',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'What changes for G permit, tax at source, withholdings and commuting when you move the workplace from Ticino to Graubünden.',
+    'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Alpine border crossing between Italy and Switzerland for cross-border workers',
 };
 
 export default blogMetaEn;
