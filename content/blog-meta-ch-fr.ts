@@ -4528,6 +4528,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin visite une exploitation agricole : aides contre la sécheresse',
     'blog.article.parmelin-agricoltura-siccita.excerpt': 'Le président de la Confédération visite la recherche sur les cultures résistantes en Vaud. Le gouvernement soutient les agriculteurs avec 54 millions de francs de prêts sans intérêts et suspend les droits de douane.',
     'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Paysage agricole rural de la région du Tessin avec champs cultivés pendant les mois d\'été.',
+    'blog.article.frontiera-asilo-competenze.title': 'Asile et sécurité : coûts sur les communes frontalières',
+    'blog.article.frontiera-asilo-competenze.excerpt': 'Une interpellation à Balerna relance le débat sur la répartition des compétences et le financement entre la Confédération, le canton et les communes dans la gestion de l\'asile.',
+    'blog.article.frontiera-asilo-competenze.imageAlt': 'Vue de Mendrisio dans le Mendrisiotto, commune frontalière tessinoise au centre du débat asile',
 };
 
 export default blogMetaChFr;

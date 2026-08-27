@@ -4528,6 +4528,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin farm visit: aid against drought',
     'blog.article.parmelin-agricoltura-siccita.excerpt': 'The president of the Confederation visits research on resistant crops in Vaud. Government supports farmers with CHF 54 million in interest-free loans and suspends duties.',
     'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Rural agricultural landscape in Ticino region with cultivated fields during summer months.',
+    'blog.article.frontiera-asilo-competenze.title': 'Asylum and security: costs on border municipalities',
+    'blog.article.frontiera-asilo-competenze.excerpt': 'An interpellation in Balerna rekindles the debate on the division of competences and funding between the Confederation, Canton and Municipalities in the management of asylum.',
+    'blog.article.frontiera-asilo-competenze.imageAlt': 'View of Mendrisio in Mendrisiotto region, Swiss frontier municipality at center of asylum debate',
 };
 
 export default blogMetaChEn;

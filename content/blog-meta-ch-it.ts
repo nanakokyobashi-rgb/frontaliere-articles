@@ -4528,6 +4528,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin visita azienda agricola: aiuti contro la siccità',
     'blog.article.parmelin-agricoltura-siccita.excerpt': 'Il presidente della Confederazione visita ricerca su colture resistenti in Vaud. Governo sostiene agricoltori con CHF 54 milioni di prestiti senza interessi e sospende dazi.',
     'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Paesaggio agricolo rurale del Ticino con campi di coltura durante i mesi estivi.',
+    'blog.article.frontiera-asilo-competenze.title': 'Asilo e sicurezza: costi sui comuni di frontiera',
+    'blog.article.frontiera-asilo-competenze.excerpt': 'Un\'interpellanza a Balerna riaccende il dibattito su divisione di competenze e finanziamento fra Confederazione, Cantone e Comuni nella gestione dell\'asilo.',
+    'blog.article.frontiera-asilo-competenze.imageAlt': 'Veduta di Mendrisio nel Mendrisiotto, comune ticinese al centro del dibattito su asilo',
 };
 
 export default blogMetaChIt;

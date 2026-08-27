@@ -4528,6 +4528,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin besucht landwirtschaftlichen Betrieb: Hilfe gegen Dürre',
     'blog.article.parmelin-agricoltura-siccita.excerpt': 'Der Bundespräsident besucht die Erforschung resistenter Kulturen im Waadtland. Die Regierung unterstützt Landwirte mit zinslosen Darlehen von CHF 54 Mio. und setzt Zölle aus.',
     'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Ländliches Agrarlandschaft in der Ticinoregion mit bestellten Feldern in den Sommermonaten.',
+    'blog.article.frontiera-asilo-competenze.title': 'Asyl und Sicherheit: Kosten für Grenzgemeinden',
+    'blog.article.frontiera-asilo-competenze.excerpt': 'Eine Interpellation in Balerna löst die Debatte über Kompetenzteilung und Finanzierung zwischen Bund, Kanton und Gemeinden im Asylwesen wieder aus.',
+    'blog.article.frontiera-asilo-competenze.imageAlt': 'Blick auf Mendrisio im Mendrisiotto, Grenzgemeinde Tessin im Zentrum der Asyldebatte',
 };
 
 export default blogMetaChDe;

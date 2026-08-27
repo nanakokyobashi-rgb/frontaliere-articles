@@ -58754,6 +58754,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-frontiera-asilo-competenze': {
+    title: 'Asilo e sicurezza: costi sui comuni di frontiera',
+    description: 'A Balerna un\'interpellanza affronta divisione di competenze e costi fra Confederazione e Comuni nella gestione dell\'asilo federale. Implicazioni per comuni',
+    keywords: 'frontalieri, ticino, svizzera, italia, asilo, sicurezza, costi, comuni',
+    ogTitle: 'Asilo e sicurezza: costi sui comuni di frontiera',
+    ogDescription: 'Un\'interpellanza ticinese solleva questioni centrali su come sono divisi compiti e costi fra Confederazione, Cantone e Comuni nella gestione dell\'asilo. Scopri il dibattito fra i livelli amministrativi svizzeri.',
+    canonicalPath: '/articoli-svizzera/frontiera-asilo-competenze/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Asilo e sicurezza: costi sui comuni di frontiera",
+      "description": "A Balerna un'interpellanza affronta divisione di competenze e costi fra Confederazione e Comuni nella gestione dell'asilo federale. Implicazioni per comuni",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/frontiera-asilo-competenze.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Mendrisio nel Mendrisiotto, comune ticinese al centro del dibattito su asilo"
+      },
+      "datePublished": "2026-08-27T18:43:45+00:00",
+      "dateModified": "2026-08-27T18:43:45+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/frontiera-asilo-competenze/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
