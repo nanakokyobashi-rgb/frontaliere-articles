@@ -37,6 +37,7 @@ import {
   DEFAULT_CHAIN,
   DEFAULT_MODELS_PREFER,
   applyModelsPrefer,
+  resetState,
 } from '../scripts/lib/ai-models.mjs';
 
 /** Esegue `fn` con AI_MODELS_PREFER impostata a `value` (undefined = cancellata). */
@@ -104,5 +105,26 @@ describe('AI_MODELS_PREFER — riordina senza troncare', () => {
     // dichiarato un preferito per QUESTA chiamata, e' quello che conta.
     const chain = ['a', 'b', 'c'];
     conEnv('c', () => assert.deepEqual(applyModelsPrefer(chain, ['b']), ['b', 'a', 'c']));
+  });
+
+  it('prefer whitespace-only ("   ") avvisa invece di sparire in silenzio (issue #626)', () => {
+    // `'   '` e' truthy al guard `!prefer` (il chiamante ha mandato QUALCOSA),
+    // ma `.trim()` la riduceva a stringa vuota e sopprimeva il warning proprio
+    // nel caso peggiore: nessuna voce utilizzabile, nessun segnale. Il guard
+    // deve leggere `.length`, non `.trim()`.
+    resetState();
+    const chain = ['a', 'b', 'c'];
+    const warnings = [];
+    const origWarn = console.warn;
+    console.warn = (...args) => warnings.push(args.join(' '));
+    try {
+      const out = applyModelsPrefer(chain, '   ');
+      assert.deepEqual(out, chain, 'nessuna voce utilizzabile: la catena non deve cambiare');
+      assert.equal(warnings.length, 1, 'il prefer whitespace-only deve produrre esattamente un warning');
+      assert.match(warnings[0], /non ha voci utilizzabili/);
+    } finally {
+      console.warn = origWarn;
+      resetState();
+    }
   });
 });
