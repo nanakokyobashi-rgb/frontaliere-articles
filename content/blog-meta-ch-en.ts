@@ -4546,6 +4546,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.protezione-consumatori-streaming-svizzera.title': 'CF motion protects Netflix in Switzerland from price hikes',
     'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Federal Council approves Farinelli motion: streaming increases only with transparent criteria, free right of withdrawal, consumer protection.',
     'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Swiss Federal Parliament chamber debating consumer protection regulation for streaming services',
+    'blog.article.foraggio-siccita-aiuti-federali.title': 'Feed shortages: 54 million in federal aid',
+    'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin visits a company that experiments with anti-drought crops. Confederation disburses CHF 54 million in loans and reduces duties on hay and corn.',
+    'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Farmer in a drought-affected field with modern agricultural facilities in the background.',
 };
 
 export default blogMetaChEn;

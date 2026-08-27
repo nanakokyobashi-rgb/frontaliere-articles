@@ -13636,6 +13636,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'foraggio-siccita-aiuti-federali',
+    category: 'novita',
+    date: '2026-08-27T22:06:31.070Z',
+    image: '/images/blog/foraggio-siccita-aiuti-federali.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

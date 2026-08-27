@@ -4546,6 +4546,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.protezione-consumatori-streaming-svizzera.title': 'Mozione CF protegge dai rincari Netflix in Svizzera',
     'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Consiglio federale approva mozione Farinelli: aumenti streaming solo con criteri trasparenti, diritto di recesso gratuito, protezione consumatori.',
     'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Aula del Parlamento federale svizzero durante discussione su normative di protezione dei consumatori',
+    'blog.article.foraggio-siccita-aiuti-federali.title': 'Scarsità di foraggio: 54 milioni di aiuti federali',
+    'blog.article.foraggio-siccita-aiuti-federali.excerpt': 'Parmelin visita azienda che sperimenta colture anti-siccità. Confederazione eroga 54 milioni CHF in prestiti e riduce dazi su fieno e mais.',
+    'blog.article.foraggio-siccita-aiuti-federali.imageAlt': 'Agricoltore in un campo colpito da siccità con strutture agricole moderne sullo sfondo.',
 };
 
 export default blogMetaChIt;
