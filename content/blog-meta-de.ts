@@ -10863,6 +10863,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Summierung AHV-INPS für Grenzgänger: So funktioniert\'s',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Sie kumuliert die Beitragszeiten zwischen der Schweiz und Italien für die Rente. Konvention 1976, Neue Vereinbarung 2024: Praxisleitfaden, Dokumentation und Rentenberechnung.',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Blick auf den Luganersee an der Grenze zwischen der Schweiz und Italien, Symbol der grenzüberschreitenden Verbindung zweier Rentensysteme.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Summierung AHV-INPS: Wie funktioniert die Frage',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Zusammenrechnung der Beiträge zwischen AHV Schweiz und INPS: Voraussetzungen, Formulare und Berechnung der Rente für Grenzgänger Tessin-Italien.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'AVS- und INPS-Formulare auf dem Schreibtisch für die Beitragstotalisierung',
 };
 
 export default blogMetaDe;

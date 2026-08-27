@@ -32502,6 +32502,15 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'totalizzazione-contributi-avs-inps-domanda',
+ category: 'pensione',
+ date: '2026-08-27T09:22:54.291Z',
+ image: '/images/blog/totalizzazione-contributi-avs-inps-domanda.webp',
+ hasCalculator: true,
+ authorSlug: 'laura-bianchi',
+ authorName: 'Laura Bianchi',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

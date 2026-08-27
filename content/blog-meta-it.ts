@@ -10865,6 +10865,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Totalizzazione AVS-INPS per frontalieri: come funziona',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumula i periodi contributivi tra Svizzera e Italia per la pensione. Convenzione 1976, Nuovo Accordo 2024: guida pratica, documentazione e calcolo della rendita.',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Vista del Lago di Lugano al confine tra Svizzera e Italia, che simboleggia il collegamento transfrontaliero dei due sistemi previdenziali.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Totalizzazione AVS-INPS: come funziona la domanda',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Totalizzazione dei contributi tra AVS svizzera e INPS: requisiti, modulistica e calcolo della pensione per i frontalieri Ticino-Italia.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'Modulistica AVS e INPS sulla scrivania per la totalizzazione dei contributi',
 };
 
 export default blogMetaIt;

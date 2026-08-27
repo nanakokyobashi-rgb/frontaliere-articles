@@ -10864,6 +10864,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'AVS-INPS totalisation for border workers: how it works',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumulate the contribution periods between Switzerland and Italy for retirement. 1976 Convention, New Agreement 2024: practical guide, documentation and calculation of annuity.',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Lake Lugano border view between Switzerland and Italy, symbolizing the cross-border connection between two pension systems.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'AVS-INPS Totalization: How Demand Works',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Total contributions between AVS Switzerland and INPS: requirements, forms and calculation of the pension for border crossers Ticino-Italy.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'AVS and INPS forms on a desk for contribution totalisation',
 };
 
 export default blogMetaEn;

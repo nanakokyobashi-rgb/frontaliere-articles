@@ -10866,6 +10866,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Totalisation AVS-INPS pour les frontaliers : comment ça marche',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumule les périodes de cotisation entre la Suisse et l\'Italie pour la retraite. Convention 1976, Nouvel Accord 2024 : guide pratique, documentation et calcul de la rente.',
     'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Vue du lac de Lugano à la frontière Suisse-Italie, symbolisant la connexion transfrontalière des deux régimes de retraite.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.title': 'Totalisation AVS-INPS : comment fonctionne la demande',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.excerpt': 'Totalisation des cotisations entre l\'AVS suisse et l\'INPS : exigences, formulaires et calcul de la pension pour les frontaliers Tessin-Italie.',
+    'blog.article.totalizzazione-contributi-avs-inps-domanda.imageAlt': 'Formulaires AVS et INPS sur un bureau pour la totalisation des cotisations',
 };
 
 export default blogMetaFr;
