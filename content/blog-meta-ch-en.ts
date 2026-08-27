@@ -4519,6 +4519,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ddps-droni-priorita-strategica.title': 'Drones and robotics: DDPS sets strategic priority',
     'blog.article.ddps-droni-priorita-strategica.excerpt': 'DDPS announces a center for unmanned systems, a drone battalion from 2028, and investments to counter hybrid threats on August 27, 2026.',
     'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Swiss military technology center with drones and robotic systems for national defense',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Transport Ordinances: open consultation on video surveillance',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Public consultation from 26 August to 26 November 2026 for two federal ordinances on video surveillance and bodycam in Swiss public transport.',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Swiss train station with passengers and digital information displays',
 };
 
 export default blogMetaChEn;

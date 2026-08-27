@@ -13555,6 +13555,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ordinanze-trasporti-consultazione-videosorveglianza',
+    category: 'novita',
+    date: '2026-08-27T17:13:38.371Z',
+    image: '/images/blog/ordinanze-trasporti-consultazione-videosorveglianza.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

@@ -1532,6 +1532,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'vignetta-autostradale-non-subito': { it: 'vignetta-autostradale-non-subito', en: 'vignette-highway-not-immediately', de: 'autobahnvignette-nicht-sofort', fr: 'vignette-autoroute-pas-maintenant' },
  'formazione-musicale-rette-2026': { it: 'formazione-musicale-rette-2026', en: 'music-education-fees-2026', de: 'musikausbildung-gebuehren-2026', fr: 'formation-musicale-cotisations-2026' },
  'ddps-droni-priorita-strategica': { it: 'ddps-droni-priorita-strategica', en: 'ddps-drones-priority-strategy', de: 'ddps-drohnen-prioritaet-strategie', fr: 'ddps-drones-priorite-strategique' },
+ 'ordinanze-trasporti-consultazione-videosorveglianza': { it: 'ordinanze-trasporti-consultazione-videosorveglianza', en: 'transport-ordinances-public-consultation-video-surveillance', de: 'verordnungen-verkehr-oeffentliche-konsultation-videoueberwachung', fr: 'ordonnances-transports-consultation-publique-videosurveillance' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

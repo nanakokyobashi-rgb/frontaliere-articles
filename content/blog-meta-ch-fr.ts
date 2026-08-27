@@ -4519,6 +4519,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ddps-droni-priorita-strategica.title': 'Drones et robotique : DDPS définit ses priorités stratégiques',
     'blog.article.ddps-droni-priorita-strategica.excerpt': 'Le DDPS annonce le 27 août 2026 un centre pour les systèmes sans pilote, un bataillon de drones dès 2028 et des investissements pour contrer les menaces hybrides.',
     'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Centre technologique militaire suisse avec drones et systèmes robotiques pour la défense nationale',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Ordonnances de transport : consultation ouverte sur la vidéosurveillance',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Consultation publique du 26 août au 26 novembre 2026 pour deux ordonnances fédérales sur la vidéosurveillance et la bodycam dans les transports publics suisses.',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Gare ferroviaire suisse avec voyageurs et panneaux d\'information numériques',
 };
 
 export default blogMetaChFr;

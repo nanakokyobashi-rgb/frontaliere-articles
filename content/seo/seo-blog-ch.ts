@@ -58637,6 +58637,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ordinanze-trasporti-consultazione-videosorveglianza': {
+    title: 'Ordinanze trasporti: aperta consultazione su videosorveglianza',
+    description: 'Consultazione pubblica dal 26 agosto al 26 novembre 2026 per due ordinanze federali su videosorveglianza e bodycam nei trasporti pubblici svizzeri.',
+    keywords: 'frontalieri, ticino, svizzera, italia, ordinanze, trasporti, aperta, consultazione',
+    ogTitle: 'Videosorveglianza nei trasporti: consultazione pubblica aperta',
+    ogDescription: 'Il Governo svizzero apre la consultazione per due ordinanze su videosorveglianza e bodycam nei trasporti pubblici. Scadenza per partecipare: 26 novembre 2026. Come inviare osservazioni.',
+    canonicalPath: '/articoli-svizzera/ordinanze-trasporti-consultazione-videosorveglianza/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ordinanze trasporti: aperta consultazione su videosorveglianza",
+      "description": "Consultazione pubblica dal 26 agosto al 26 novembre 2026 per due ordinanze federali su videosorveglianza e bodycam nei trasporti pubblici svizzeri.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ordinanze-trasporti-consultazione-videosorveglianza.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Stazione ferroviaria svizzera con passeggeri e tabelloni digitali informativi"
+      },
+      "datePublished": "2026-08-27T17:13:38+00:00",
+      "dateModified": "2026-08-27T17:13:38+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ordinanze-trasporti-consultazione-videosorveglianza/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

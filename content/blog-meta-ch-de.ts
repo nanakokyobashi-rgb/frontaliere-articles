@@ -4519,6 +4519,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ddps-droni-priorita-strategica.title': 'Drohnen und Robotik: VBS setzt strategische Prioritäten',
     'blog.article.ddps-droni-priorita-strategica.excerpt': 'Das VBS kündigt am 27. August 2026 ein Zentrum für unbemannte Systeme, ein Drohnenbataillon ab 2028 und Investitionen zur Abwehr hybrider Bedrohungen an.',
     'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Schweizer Militärtechnologiezentrum mit Drohnen und Robotersystemen zur Landesverteidigung',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Transportverordnungen: offene Konsultation über Videoüberwachung',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Öffentliche Konsultation vom 26. August bis 26. November 2026 zu zwei Bundesverordnungen über Videoüberwachung und Bodycams im öffentlichen Verkehr der Schweiz.',
+    'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Schweizer Bahnhof mit Fahrgästen und digitalen Informationstafeln',
 };
 
 export default blogMetaChDe;
