@@ -10852,6 +10852,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vecchi-nuovi-frontalieri-tassazione.title': 'Frontier 2026: taxation, new agreement and exemption',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.excerpt': 'From 2024, the new Italy-Switzerland agreement reduces taxes for border workers: €7,500 exemption for the old, €10,000 for the new. Here\'s how it works.',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.imageAlt': 'Tax office workspace with cross-border taxation documents and CHF/EUR currency symbols',
+    'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen size 180 seats: CHF 60m savings',
+    'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Renovation announced on August 26, 2026. Net profit up 18.9%, but the bank is focused on efficiency. Cuts will affect up to 180 employees out of 10,972. Impact on the Swiss labour market.',
+    'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'Modern banking and financial district in Lugano with contemporary office buildings overlooking the lake',
 };
 
 export default blogMetaEn;

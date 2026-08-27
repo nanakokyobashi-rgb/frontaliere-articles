@@ -10853,6 +10853,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vecchi-nuovi-frontalieri-tassazione.title': 'Frontalieri 2026: tassazione, nuovo accordo e franchigia',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.excerpt': 'Dal 2024 il nuovo accordo Italia-Svizzera riduce le tasse ai frontalieri: €7.500 di esenzione per i vecchi, €10.000 per i nuovi. Ecco come funziona.',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.imageAlt': 'Ufficio fiscale con documenti sulla tassazione frontalieri e simboli di valuta CHF/EUR',
+    'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen taglia 180 posti: 60 mln CHF di risparmi',
+    'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Ristrutturazione annunciata il 26 agosto 2026. Utile netto in crescita del 18,9%, ma la banca punta su efficienza. Tagli interesseranno fino a 180 dipendenti su 10.972. Impatto sul mercato del lavoro svizzero.',
+    'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'Centro finanziario di Lugano con edifici moderni per uffici e vista sul lago',
 };
 
 export default blogMetaIt;

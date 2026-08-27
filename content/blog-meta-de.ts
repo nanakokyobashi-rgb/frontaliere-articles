@@ -10851,6 +10851,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vecchi-nuovi-frontalieri-tassazione.title': 'Grenzgänger 2026: Besteuerung, neues Abkommen und Selbstbehalt',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.excerpt': 'Ab 2024 reduziert das neue Abkommen Italien-Schweiz die Steuern für Grenzgänger: 7.500 € Befreiung für alte, 10.000 € für neue Grenzgänger. So funktioniert es.',
     'blog.article.vecchi-nuovi-frontalieri-tassazione.imageAlt': 'Steuerbüro mit Dokumenten zur Besteuerung von Grenzgängern und CHF/EUR-Währungssymbolen',
+    'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen streicht 180 Stellen: 60 Mio. CHF Ersparnis',
+    'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Renovierung angekündigt am 26. August 2026. Der Nettogewinn stieg um 18,9%, aber die Bank setzt auf Effizienz. Kürzungen betreffen bis zu 180 von 10.972 Mitarbeitern. Auswirkungen auf den Schweizer Arbeitsmarkt.',
+    'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'Modernes Finanzdistrikt in Lugano mit zeitgenössischen Bürogebäuden und Seeufer',
 };
 
 export default blogMetaDe;
