@@ -4480,6 +4480,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.occupazione-cresce-accelera-112mila.title': 'Employment grows:+112,000 jobs in Switzerland',
     'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'In Q2 2025, loans amounted to 5.7 million (+2% per year). Services accelerate (+2.2%), Ticino slows down (-0.7%). 98,700 vacancies but it is difficult to recruit specialists.',
     'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Swiss professionals collaborating in a modern Lugano office during a business meeting',
+    'blog.article.rosti-difende-politica-climatica.title': 'Rösti defends federal climate policy',
+    'blog.article.rosti-difende-politica-climatica.excerpt': 'Federal Council: CHF 73 million for drought. CHF 54m farmers, CHF 17.5M forests until 2031. Round table by the end of October.',
+    'blog.article.rosti-difende-politica-climatica.imageAlt': 'Swiss Alpine lake in summer drought with reduced water levels, dry hillsides reflecting climate stress.',
 };
 
 export default blogMetaChEn;

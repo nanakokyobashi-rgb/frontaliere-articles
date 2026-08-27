@@ -4480,6 +4480,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.occupazione-cresce-accelera-112mila.title': 'Occupazione cresce: +112\'000 posti in Svizzera',
     'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'Nel Q2 2025 impieghi a 5,7 milioni (+2% annuo). Servizi accelerano (+2,2%), Ticino frena (-0,7%). 98\'700 posti liberi ma difficile reclutare specializzati.',
     'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Professionisti svizzeri collaborano in un moderno ufficio di Lugano durante una riunione di lavoro',
+    'blog.article.rosti-difende-politica-climatica.title': 'Rösti difende la politica climatica federale',
+    'blog.article.rosti-difende-politica-climatica.excerpt': 'Consiglio federale: CHF 73 milioni per siccità. CHF 54 M agricoltori, CHF 17,5 M boschi fino 2031. Tavola rotonda entro fine ottobre.',
+    'blog.article.rosti-difende-politica-climatica.imageAlt': 'Lago svizzero in condizioni di siccità estiva con livelli idrici ridotti, paesaggio alpino sotto stress climatico.',
 };
 
 export default blogMetaChIt;

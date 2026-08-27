@@ -4480,6 +4480,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.occupazione-cresce-accelera-112mila.title': 'Beschäftigung wächst: +112\'000 Stellen in der Schweiz',
     'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'Im Q2 2025 beschäftigte er 5,7 Millionen (+2% pro Jahr). Dienste beschleunigen (+2,2%), Tessin bremst (-0,7%). 98\'700 freie Plätze, aber schwierig, Fachkräfte zu rekrutieren.',
     'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Schweizer Fachleute arbeiten in einem modernen Lugano-Büro während eines Geschäftsgesprächs zusammen',
+    'blog.article.rosti-difende-politica-climatica.title': 'Rösti verteidigt die Bundesklimapolitik',
+    'blog.article.rosti-difende-politica-climatica.excerpt': 'Bundesrat: 73 Millionen Franken wegen Dürre. CHF 54 Mio. Landwirte, CHF 17,5 Mio. Wälder bis 2031. Runder Tisch bis Ende Oktober.',
+    'blog.article.rosti-difende-politica-climatica.imageAlt': 'Schweizer Alpensee unter Sommerdürre mit reduzierten Wasserständen, Trockenlandschaft unter Klimastress.',
 };
 
 export default blogMetaChDe;
