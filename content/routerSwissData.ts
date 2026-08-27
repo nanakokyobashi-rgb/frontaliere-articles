@@ -1523,6 +1523,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ffs-passeggeri-crescita-h1-2026': { it: 'ffs-passeggeri-crescita-h1-2026', en: 'sbb-passenger-growth-h1-2026', de: 'sbb-fahrgaeste-wachstum-h1-2026', fr: 'ffs-passagers-hausse-h1-2026' },
  'rimborso-dazi-paura-amministrativa': { it: 'rimborso-dazi-paura-amministrativa', en: 'usa-tariffs-refund-bureaucracy-fear', de: 'usa-zoelle-rueckerstattung-behoerdenangst', fr: 'tarifs-usa-remboursement-crainte-bureaucratique' },
  'bilancio-eccedenza-debito-2025': { it: 'bilancio-eccedenza-debito-2025', en: 'public-budget-surplus-debt-2025', de: 'oeffentliches-budget-2025-ueberschuss', fr: 'budget-public-2025-excedent-dette' },
+ 'neolaureati-disoccupazione-svizzera': { it: 'neolaureati-disoccupazione-svizzera', en: 'unemployment-swiss-graduates', de: 'arbeitslose-hochschulabgaenger-schweiz', fr: 'chomage-diplomes-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

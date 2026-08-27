@@ -4492,6 +4492,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.bilancio-eccedenza-debito-2025.title': 'Finances publiques 2025 : excédent mais dette en hausse',
     'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Administration fédérale : excédent de 4 milliards en 2025, la dette brute s\'élève à 353,2 milliards (40,7 % du PIB). Impact sur les impôts et les prestations sociales.',
     'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Palais du Gouvernement de Bellinzone, siège de l\'administration cantonale tessinoise',
+    'blog.article.neolaureati-disoccupazione-svizzera.title': 'Nouveaux diplômés, chômage en hausse : les données DE l\'OFS',
+    'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master Uni à 6,4 %, baccalauréat sup à 4,9 %. OFS : entre 2023 et 2025, l\'insertion difficile sur le marché augmente. Secteurs touchés et scénarios.',
+    'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Jeune diplômé suisse consultant des offres d\'emploi sur ordinateur portable à la bibliothèque universitaire',
 };
 
 export default blogMetaChFr;

@@ -4492,6 +4492,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.bilancio-eccedenza-debito-2025.title': 'Öffentliche Finanzen 2025: Überschuss, aber Schulden wachsen',
     'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Bundesverwaltung: Überschuss von 4 Milliarden im Jahr 2025, Bruttoverschuldung steigt auf 353,2 Milliarden (40,7% BIP). Auswirkungen auf Steuern und Sozialleistungen.',
     'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Regierungspalast Bellinzona, Sitz der Kantonsadministration Tessin',
+    'blog.article.neolaureati-disoccupazione-svizzera.title': 'Hochschulabsolventen, steigende Arbeitslosigkeit: die BFS-DATEN',
+    'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master Uni zu 6,4%, Bachelor SUP zu 4,9%. USt: Zwischen 2023 und 2025 nimmt die schwierige Markteinführung zu. Betroffene Sektoren und Szenarien.',
+    'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Junger Hochschulabgänger durchsieht Stellenangebote auf Laptop in einer Schweizer Universität',
 };
 
 export default blogMetaChDe;

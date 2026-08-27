@@ -58286,6 +58286,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-neolaureati-disoccupazione-svizzera': {
+    title: 'Neolaureati, disoccupazione in salita: i dati UST',
+    description: 'Master UNI al 6,4%, bachelor SUP al 4,9%. UST: tra 2023-2025 cresce l\'inserimento difficile nel mercato lavoro. Settori colpiti e scenari. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, neolaureati, disoccupazione, salita, dati',
+    ogTitle: 'Disoccupazione neolaureati: +2,5 punti percentuali in due anni',
+    ogDescription: 'UST: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9% tra 2023-2025. Quali settori soffrono di più e come inserirsi nel mercato del lavoro svizzero.',
+    canonicalPath: '/articoli-svizzera/neolaureati-disoccupazione-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Neolaureati, disoccupazione in salita: i dati UST",
+      "description": "Master UNI al 6,4%, bachelor SUP al 4,9%. UST: tra 2023-2025 cresce l'inserimento difficile nel mercato lavoro. Settori colpiti e scenari. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/neolaureati-disoccupazione-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Giovane neolaureato che consulta offerte di lavoro su laptop in biblioteca universitaria svizzera"
+      },
+      "datePublished": "2026-08-27T11:30:55+00:00",
+      "dateModified": "2026-08-27T11:30:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/neolaureati-disoccupazione-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

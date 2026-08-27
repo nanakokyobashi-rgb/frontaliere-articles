@@ -4492,6 +4492,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.bilancio-eccedenza-debito-2025.title': 'Finanze pubbliche 2025: eccedenza ma debito cresce',
     'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Amministrazione federale: eccedenza di 4 miliardi nel 2025, debito lordo sale a 353,2 miliardi (40,7% PIL). Impatto su imposte e prestazioni sociali.',
     'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Palazzo del Governo di Bellinzona, sede amministrativa del Cantone Ticino',
+    'blog.article.neolaureati-disoccupazione-svizzera.title': 'Neolaureati, disoccupazione in salita: i dati UST',
+    'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master UNI al 6,4%, bachelor SUP al 4,9%. UST: tra 2023-2025 cresce l\'inserimento difficile nel mercato. Settori colpiti e scenari.',
+    'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Giovane neolaureato che consulta offerte di lavoro su laptop in biblioteca universitaria svizzera',
 };
 
 export default blogMetaChIt;

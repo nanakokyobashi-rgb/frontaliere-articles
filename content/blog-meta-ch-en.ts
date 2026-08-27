@@ -4492,6 +4492,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.bilancio-eccedenza-debito-2025.title': 'Public finances 2025: surplus but debt grows',
     'blog.article.bilancio-eccedenza-debito-2025.excerpt': 'Federal administration: surplus of 4 billion in 2025, gross debt rises to 353.2 billion (40.7% GDP). Impact on taxes and social benefits.',
     'blog.article.bilancio-eccedenza-debito-2025.imageAlt': 'Bellinzona Government Palace, seat of Ticino cantonal administration',
+    'blog.article.neolaureati-disoccupazione-svizzera.title': 'Recent graduates, rising unemployment: UST DATA',
+    'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master UNI at 6.4%, bachelor sup at 4.9%. UST: between 2023-2025 the difficult insertion in the market grows. Affected sectors and scenarios.',
+    'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Young Swiss graduate reviewing job offers on laptop in university library',
 };
 
 export default blogMetaChEn;
