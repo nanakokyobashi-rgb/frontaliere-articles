@@ -10891,6 +10891,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Campione d\'Italia: vivere nell\'enclave e lavorare in Ticino',
     'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Tempi, valichi, fiscalità e costi per chi vive a Campione d\'Italia e fa il frontaliere in Canton Ticino sotto il nuovo Accordo 2024.',
     'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Vista del Lago di Lugano con Campione d\'Italia sullo sfondo',
+    'blog.article.lainf-infortunio-confine-frontaliere.title': 'Infortunio in itinere al confine: copertura LAINF',
+    'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Sei coperto dall\'assicurazione LAINF durante il tragitto casa-lavoro tra Italia e Svizzera. Guida pratica alla copertura, procedure di denuncia e scadenze.',
+    'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Strada di montagna ticinese al tramonto con auto in transito verso il confine italiano, paesaggio montagnoso sullo sfondo',
 };
 
 export default blogMetaIt;

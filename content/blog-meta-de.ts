@@ -10889,6 +10889,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Campione d \'Italia: Leben in der Enklave und Arbeiten im Tessin',
     'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Zeiten, Grenzübergänge, Steuern und Kosten für diejenigen, die in Campione d \'Italia leben und im Rahmen des neuen Abkommens 2024 als Grenzgänger im Kanton Tessin tätig sind.',
     'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Blick auf den Luganersee mit Campione d\'Italia im Hintergrund',
+    'blog.article.lainf-infortunio-confine-frontaliere.title': 'Wegunfall an der Grenze: UVG-Deckung',
+    'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Sie sind während der Arbeitsreise zwischen Italien und der Schweiz durch die UVG-Versicherung versichert. Praktischer Leitfaden zur Deckung, Meldeverfahren und Fristen.',
+    'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Bergstrasse im Tessin bei Sonnenuntergang mit Auto in Richtung italienische Grenze, Berglandschaft im Hintergrund',
 };
 
 export default blogMetaDe;

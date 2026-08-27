@@ -10890,6 +10890,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Champion of Italy: living in the enclave and working in Ticino',
     'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Time, crossings, taxation and costs for those who live in Campione d \'Italia and work as a border worker in Canton Ticino under the new 2024 Agreement.',
     'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'View of Lake Lugano with Campione d\'Italia in the background',
+    'blog.article.lainf-infortunio-confine-frontaliere.title': 'Travelling accident at the border: LAINF coverage',
+    'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'You are covered by LAINF insurance during the commute between Italy and Switzerland. Practical Guide to Coverage, Complaint Procedures, and Deadlines.',
+    'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Ticino mountain road at sunset with car crossing towards Italian border, mountainous landscape in background',
 };
 
 export default blogMetaEn;

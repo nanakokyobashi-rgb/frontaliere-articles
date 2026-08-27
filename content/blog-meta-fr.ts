@@ -10892,6 +10892,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Champion d\'Italie : vivre dans l\'enclave et travailler au Tessin',
     'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Temps, passages, fiscalité et coûts pour ceux qui vivent à Campione d\'Italia et qui sont frontaliers dans le canton du Tessin en vertu du nouvel accord 2024.',
     'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Vue du lac de Lugano avec Campione d\'Italie en arrière-plan',
+    'blog.article.lainf-infortunio-confine-frontaliere.title': 'Accident de trajet à la frontière : couverture LAA',
+    'blog.article.lainf-infortunio-confine-frontaliere.excerpt': 'Vous êtes couvert par l\'assurance LAA pendant le trajet domicile-travail entre l\'Italie et la Suisse. Guide pratique sur la couverture, les procédures de plainte et les délais.',
+    'blog.article.lainf-infortunio-confine-frontaliere.imageAlt': 'Route de montagne tessinoise au coucher du soleil avec voiture se dirigeant vers la frontière italienne, paysage montagneux en arrière-plan',
 };
 
 export default blogMetaFr;
