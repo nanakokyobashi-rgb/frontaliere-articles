@@ -4543,6 +4543,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europa.title': 'SBB bewertet Direktzüge nach Barcelona, Amsterdam und London',
     'blog.article.ffs-treni-diretti-europa.excerpt': 'Die SBB prüft die Eröffnung von Zugverbindungen in die wichtigsten europäischen Hauptstädte. Projekt von 40 Konvois, um auf das Flugzeugchaos und die hohen Preise zu reagieren.',
     'blog.article.ffs-treni-diretti-europa.imageAlt': 'Hochgeschwindigkeitszug an einem Schweizer Bahnhof mit Alpenbergen im Hintergrund',
+    'blog.article.protezione-consumatori-streaming-svizzera.title': 'Motion CF schützt Netflix in der Schweiz vor Preissteigerungen',
+    'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Bundesrat verabschiedet Motion Farinelli: Streaming-Erhöhungen nur mit transparenten Kriterien, kostenloses Widerrufsrecht, Verbraucherschutz.',
+    'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Schweizer Bundesrat diskutiert Verbraucherschutzregeln für Streaming-Dienste und digitale Abonnements',
 };
 
 export default blogMetaChDe;

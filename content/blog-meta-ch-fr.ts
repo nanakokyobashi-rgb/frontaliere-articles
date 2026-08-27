@@ -4543,6 +4543,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europa.title': 'CFF évalue les trains directs pour Barcelone, Amsterdam et Londres',
     'blog.article.ffs-treni-diretti-europa.excerpt': 'Les CFF évaluent l\'ouverture de services ferroviaires directs vers les principales capitales européennes. Projet de 40 convois pour répondre au chaos aérien et aux prix élevés.',
     'blog.article.ffs-treni-diretti-europa.imageAlt': 'Train à grande vitesse quittant une gare ferroviaire suisse avec les Alpes en arrière-plan',
+    'blog.article.protezione-consumatori-streaming-svizzera.title': 'Motion CF protège Netflix des hausses de prix en Suisse',
+    'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Le Conseil fédéral approuve la motion Farinelli : augmentations en streaming uniquement avec des critères transparents, droit de rétractation gratuit, protection des consommateurs.',
+    'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Parlement fédéral suisse débat de la protection des consommateurs contre les augmentations de tarifs',
 };
 
 export default blogMetaChFr;

@@ -4543,6 +4543,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europa.title': 'FFS valuta treni diretti per Barcellona, Amsterdam e Londra',
     'blog.article.ffs-treni-diretti-europa.excerpt': 'Le FFS valutano l\'apertura di servizi ferroviari diretti verso le principali capitali europee. Progetto di 40 convogli per rispondere al caos aereo e ai prezzi alti.',
     'blog.article.ffs-treni-diretti-europa.imageAlt': 'Treno ad alta velocità in partenza da una stazione ferroviaria svizzera con le Alpi sullo sfondo',
+    'blog.article.protezione-consumatori-streaming-svizzera.title': 'Mozione CF protegge dai rincari Netflix in Svizzera',
+    'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Consiglio federale approva mozione Farinelli: aumenti streaming solo con criteri trasparenti, diritto di recesso gratuito, protezione consumatori.',
+    'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Aula del Parlamento federale svizzero durante discussione su normative di protezione dei consumatori',
 };
 
 export default blogMetaChIt;

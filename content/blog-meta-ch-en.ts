@@ -4543,6 +4543,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ffs-treni-diretti-europa.title': 'SBB evaluates direct trains to Barcelona, Amsterdam and London',
     'blog.article.ffs-treni-diretti-europa.excerpt': 'SBB is considering opening direct rail services to major European capitals. Project of 40 convoys to respond to air chaos and high prices.',
     'blog.article.ffs-treni-diretti-europa.imageAlt': 'High-speed train departing a Swiss railway station platform with Alpine mountains in the distance',
+    'blog.article.protezione-consumatori-streaming-svizzera.title': 'CF motion protects Netflix in Switzerland from price hikes',
+    'blog.article.protezione-consumatori-streaming-svizzera.excerpt': 'Federal Council approves Farinelli motion: streaming increases only with transparent criteria, free right of withdrawal, consumer protection.',
+    'blog.article.protezione-consumatori-streaming-svizzera.imageAlt': 'Swiss Federal Parliament chamber debating consumer protection regulation for streaming services',
 };
 
 export default blogMetaChEn;

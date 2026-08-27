@@ -58948,6 +58948,46 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
       "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
     }
   },
+
+  'blog-protezione-consumatori-streaming-svizzera': {
+    title: 'Mozione CF protegge dai rincari Netflix in Svizzera',
+    description: 'Consiglio federale approva mozione Farinelli per proteggere consumatori dagli aumenti unilaterali di Netflix e streaming. Diritto di recesso gratuito e criteri',
+    keywords: 'frontalieri, ticino, svizzera, italia, mozione, protegge, rincari, netflix',
+    ogTitle: 'Mozione CF protegge dai rincari Netflix in Svizzera',
+    ogDescription: 'Il Consiglio federale approva la mozione di Farinelli per limitare gli aumenti unilaterali di Netflix e servizi streaming. I consumatori avranno diritto di recesso gratuito e aumenti solo con criteri trasparenti. Scopri come cambiano i tuoi diritti.',
+    canonicalPath: '/articoli-svizzera/protezione-consumatori-streaming-svizzera/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mozione CF protegge dai rincari Netflix in Svizzera",
+      "description": "Consiglio federale approva mozione Farinelli per proteggere consumatori dagli aumenti unilaterali di Netflix e streaming. Diritto di recesso gratuito e criteri",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/protezione-consumatori-streaming-svizzera.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Aula del Parlamento federale svizzero durante discussione su normative di protezione dei consumatori"
+      },
+      "datePublished": "2026-08-27T21:38:58+00:00",
+      "dateModified": "2026-08-27T21:38:58+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/protezione-consumatori-streaming-svizzera/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
