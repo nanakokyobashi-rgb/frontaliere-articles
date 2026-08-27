@@ -10875,6 +10875,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.costo-vita-salari-lgn.title': 'Salaires et marchés : la proposition CGIL Tessin pour le travail',
     'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona dénonce l\'inflation et la baisse de la fabrication. Il propose une loi sur les marchés publics pour protéger les salaires à Legnano.',
     'blog.article.costo-vita-salari-lgn.imageAlt': 'Vue d\'ensemble de Lugano avec bureaux et usines, paysage frontalier Tessin-Lombardie',
+    'blog.article.reddito-record-svizzera-2025.title': 'Suisse : revenu et épargne au plus haut historique en 2025',
+    'blog.article.reddito-record-svizzera-2025.excerpt': 'En 2025, le revenu disponible ajusté par habitant dépasse 65\'124 francs (+36% réel en 1995) et l\'épargne volontaire atteint 19,3%.',
+    'blog.article.reddito-record-svizzera-2025.imageAlt': 'Revenu et épargne des ménages suisses en 2025 selon l\'OFS',
 };
 
 export default blogMetaFr;

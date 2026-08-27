@@ -10874,6 +10874,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.costo-vita-salari-lgn.title': 'Salari e appalti: la proposta CGIL Ticino per il lavoro',
     'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona denuncia inflazione e calo della manifattura. Propone legge su appalti per proteggere i salari nel Legnanese.',
     'blog.article.costo-vita-salari-lgn.imageAlt': 'Veduta di Lugano con uffici e aziende, panorama del confine Ticino-Lombardia',
+    'blog.article.reddito-record-svizzera-2025.title': 'Svizzera: reddito e risparmio ai massimi storici nel 2025',
+    'blog.article.reddito-record-svizzera-2025.excerpt': 'Nel 2025 il reddito disponibile corretto pro capite supera 65\'124 franchi (+36% reale sul 1995) e il risparmio volontario tocca il 19,3%.',
+    'blog.article.reddito-record-svizzera-2025.imageAlt': 'Risparmio e reddito delle famiglie svizzere nel 2025 secondo l\'UST',
 };
 
 export default blogMetaIt;

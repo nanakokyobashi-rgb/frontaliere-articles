@@ -10873,6 +10873,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.costo-vita-salari-lgn.title': 'Wages and contracts: the CGIL Ticino proposal for employment',
     'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona denounces inflation and decline in manufacturing. Proposes a law on procurement to protect wages in Legnanese.',
     'blog.article.costo-vita-salari-lgn.imageAlt': 'Lugano overview with offices and factories, Ticino-Lombardy border landscape',
+    'blog.article.reddito-record-svizzera-2025.title': 'Switzerland: Income and savings at all-time highs in 2025',
+    'blog.article.reddito-record-svizzera-2025.excerpt': 'In 2025, adjusted disposable income per capita exceeds CHF 65,124 (+36% real on 1995) and voluntary savings reach 19.3%.',
+    'blog.article.reddito-record-svizzera-2025.imageAlt': 'Swiss household income and savings in 2025 according to the FSO',
 };
 
 export default blogMetaEn;

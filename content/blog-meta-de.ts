@@ -10872,6 +10872,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.costo-vita-salari-lgn.title': 'Löhne und Aufträge: der Vorschlag Cgil Tessin für die Arbeit',
     'blog.article.costo-vita-salari-lgn.excerpt': 'Cgil Ticino Olona klagt über Inflation und Produktionsrückgang. Er schlägt ein Gesetz über die Auftragsvergabe vor, um die Löhne in Legnanese zu schützen.',
     'blog.article.costo-vita-salari-lgn.imageAlt': 'Lugano-Übersicht mit Büros und Fabriken, Grenzlandschaft Tessin-Lombardei',
+    'blog.article.reddito-record-svizzera-2025.title': 'Schweiz: Einkommen und Sparen auf Rekordhoch im Jahr 2025',
+    'blog.article.reddito-record-svizzera-2025.excerpt': '2025 übersteigt das bereinigte verfügbare Pro-Kopf-Einkommen 65\'124 Franken (+36% real gegenüber 1995) und das freiwillige Sparen liegt bei 19,3%.',
+    'blog.article.reddito-record-svizzera-2025.imageAlt': 'Einkommen und Sparquote der Schweizer Haushalte 2025 laut BFS',
 };
 
 export default blogMetaDe;

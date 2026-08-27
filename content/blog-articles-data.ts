@@ -32529,6 +32529,15 @@ const RAW_ARTICLES = [
  authorSlug: 'redazione',
  authorName: 'Redazione Frontaliere Ticino',
  },
+ {
+ id: 'reddito-record-svizzera-2025',
+ category: 'novita',
+ date: '2026-08-27T15:49:07.889Z',
+ image: '/images/blog/reddito-record-svizzera-2025.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
