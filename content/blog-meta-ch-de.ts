@@ -4537,6 +4537,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.finanziamento-casa-donne-grigioni.title': 'Graubünden, Finanzierung Frauenhaus: Antrag abgelehnt',
     'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Der Bündner Grosse Rat stellt sich der Besetzung von 91% des Frauenhauses: Die Abgeordnete Bischof fordert mehr Geld, die Regierung lehnt ab.',
     'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Plenarsaal des Graubündner Grossrats während einer Debatte zur Finanzierung des Frauenhauses',
+    'blog.article.ffs-treni-diretti-europei.title': 'SBB Direktzüge nach barcelona, amsterdam und london',
+    'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot kündigt den SBB-Plan an: 40 internationale Züge in die wichtigsten europäischen Hauptstädte. Realisierung bis 2030.',
+    'blog.article.ffs-treni-diretti-europei.imageAlt': 'Schweizer Bahnsteig mit modernen SBB-Zuegen fuer internationale Fahrten zu europaeischen Hauptstadten',
 };
 
 export default blogMetaChDe;

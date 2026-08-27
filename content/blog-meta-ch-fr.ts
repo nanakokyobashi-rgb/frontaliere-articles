@@ -4537,6 +4537,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.finanziamento-casa-donne-grigioni.title': 'Grisons, financement Maison femmes : demande rejetée',
     'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Le Grand Conseil grison s\'attaque à l\'occupation à 91% de la Maison des femmes : la députée Bischof demande plus de financements, le gouvernement refuse.',
     'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Salle plénière du Grand Conseil des Grisons lors d\'un débat sur le financement de la maison des femmes',
+    'blog.article.ffs-treni-diretti-europei.title': 'Trains directs CFF vers Barcelone, Amsterdam et Londres',
+    'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot annonce le plan CFF : 40 trains internationaux vers les principales capitales européennes. La réalisation d\'ici 2030.',
+    'blog.article.ffs-treni-diretti-europei.imageAlt': 'Quai de gare suisse avec des trains CFF modernes prêts pour les trajets vers les capitales européennes',
 };
 
 export default blogMetaChFr;

@@ -1538,6 +1538,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'frontiera-asilo-competenze': { it: 'frontiera-asilo-competenze', en: 'frontier-asylum-responsibilities', de: 'grenzgemeinden-asyl-kompetenzen', fr: 'frontaliers-asile-responsabilites' },
  'syngenta-utili-ricavi-semestre': { it: 'syngenta-utili-ricavi-semestre', en: 'syngenta-profits-revenue-semester', de: 'syngenta-gewinne-umsatz-halbjahr', fr: 'syngenta-benefices-revenus-semestre' },
  'finanziamento-casa-donne-grigioni': { it: 'finanziamento-casa-donne-grigioni', en: 'funding-womens-shelter-grisons', de: 'finanzierung-frauenhaus-graenbuenden', fr: 'financement-maison-femmes-grisons' },
+ 'ffs-treni-diretti-europei': { it: 'ffs-treni-diretti-europei', en: 'ffs-direct-trains-european-capitals', de: 'sbb-direktzuege-europaische-hauptstadte', fr: 'ffs-trains-directs-capitales-europeennes' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

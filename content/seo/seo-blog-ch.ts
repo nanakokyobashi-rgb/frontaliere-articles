@@ -58871,6 +58871,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-ffs-treni-diretti-europei': {
+    title: 'Treni diretti FFS verso barcellona, amsterdam e londra',
+    description: 'FFS annuncia treni diretti verso Barcellona, Amsterdam e Londra. Piano di espansione con 40 treni europei, realizzazione attorno al 2030. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, treni, diretti, verso, barcellona',
+    ogTitle: 'Treni diretti FFS verso Barcellona, Amsterdam e Londra',
+    ogDescription: 'Le FFS annunciano l\'espansione della rete ferroviaria europea con treni diretti per Barcellona, Amsterdam e Londra. Il progetto prevede fino a 40 treni giornalieri, con realizzazione entro il 2030. Scopri i dettagli dell\'ambizioso piano di mobilità.',
+    canonicalPath: '/articoli-svizzera/ffs-treni-diretti-europei/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Treni diretti FFS verso barcellona, amsterdam e londra",
+      "description": "FFS annuncia treni diretti verso Barcellona, Amsterdam e Londra. Piano di espansione con 40 treni europei, realizzazione attorno al 2030. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/ffs-treni-diretti-europei.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Banchina di una stazione svizzera con moderni treni FFS pronti per il viaggio internazionale verso le capitali europee"
+      },
+      "datePublished": "2026-08-27T20:27:23+00:00",
+      "dateModified": "2026-08-27T20:27:23+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/ffs-treni-diretti-europei/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

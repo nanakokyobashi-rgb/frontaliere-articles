@@ -4537,6 +4537,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.finanziamento-casa-donne-grigioni.title': 'Grigioni, finanziamento Casa donne: richiesta respinta',
     'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'Il Gran Consiglio grigionese affronta l\'occupazione al 91% della Casa per donne: la deputata Bischof richiede più finanziamenti, il governo rifiuta.',
     'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Aula del Gran Consiglio grigionese durante una seduta parlamentare con dibattito sulla Casa per donne',
+    'blog.article.ffs-treni-diretti-europei.title': 'Treni diretti FFS verso barcellona, amsterdam e londra',
+    'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot annuncia il piano FFS: 40 treni internazionali verso le principali capitali europee. La realizzazione entro il 2030.',
+    'blog.article.ffs-treni-diretti-europei.imageAlt': 'Banchina di una stazione svizzera con moderni treni FFS pronti per il viaggio internazionale verso le capitali europee',
 };
 
 export default blogMetaChIt;

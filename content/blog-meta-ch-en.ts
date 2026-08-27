@@ -4537,6 +4537,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.finanziamento-casa-donne-grigioni.title': 'Graubünden, Women\'s House funding: application rejected',
     'blog.article.finanziamento-casa-donne-grigioni.excerpt': 'The Greater Graubünden Council faces 91% employment in the Women\'s House: MP Bischof requests more funding, the government refuses.',
     'blog.article.finanziamento-casa-donne-grigioni.imageAlt': 'Grisons cantonal parliament chamber during plenary session discussing women\'s shelter funding',
+    'blog.article.ffs-treni-diretti-europei.title': 'SBB direct trains to Barcelona, Amsterdam and London',
+    'blog.article.ffs-treni-diretti-europei.excerpt': 'Vincent Ducrot announces SBB plan: 40 international trains to major European capitals. Implementation by 2030.',
+    'blog.article.ffs-treni-diretti-europei.imageAlt': 'Swiss railway platform with modern FFS trains ready for international service to European capitals',
 };
 
 export default blogMetaChEn;
