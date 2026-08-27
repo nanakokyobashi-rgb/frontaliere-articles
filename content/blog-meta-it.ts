@@ -10862,6 +10862,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Noleggio vs proprietà: la scelta dei frontalieri',
     'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Frontalieri verso Ticino: confronto tra auto di proprietà e noleggio lungo termine. Analisi costi, vantaggi e come scegliere la soluzione migliore.',
     'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Una strada che porta verso il Canton Ticino con segni stradali svizzeri e un\'auto in viaggio',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Totalizzazione AVS-INPS per frontalieri: come funziona',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumula i periodi contributivi tra Svizzera e Italia per la pensione. Convenzione 1976, Nuovo Accordo 2024: guida pratica, documentazione e calcolo della rendita.',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Vista del Lago di Lugano al confine tra Svizzera e Italia, che simboleggia il collegamento transfrontaliero dei due sistemi previdenziali.',
 };
 
 export default blogMetaIt;

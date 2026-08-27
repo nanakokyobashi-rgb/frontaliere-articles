@@ -10860,6 +10860,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Vermietung vs. Immobilien: Die Wahl der Grenzgänger',
     'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Grenzgänger Richtung Tessin: Vergleich zwischen eigenen Autos und Langzeitmiete. Kosten-Nutzen-Analyse und Auswahl der besten Lösung.',
     'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Straße zum Tessin mit Schweizer Verkehrsschildern und einem fahrenden Auto',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Summierung AHV-INPS für Grenzgänger: So funktioniert\'s',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Sie kumuliert die Beitragszeiten zwischen der Schweiz und Italien für die Rente. Konvention 1976, Neue Vereinbarung 2024: Praxisleitfaden, Dokumentation und Rentenberechnung.',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Blick auf den Luganersee an der Grenze zwischen der Schweiz und Italien, Symbol der grenzüberschreitenden Verbindung zweier Rentensysteme.',
 };
 
 export default blogMetaDe;

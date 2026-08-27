@@ -79475,6 +79475,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-totalizzazione-pensione-svizzera-italia-frontalieri': {
+    title: 'Totalizzazione AVS-INPS per frontalieri: come funziona',
+    description: 'Totalizzazione contributi AVS-INPS: cumula i periodi tra Svizzera e Italia. Convenzione 1976, Nuovo Accordo 2024. Procedura, documentazione, calcolo',
+    keywords: 'frontalieri, ticino, svizzera, italia, totalizzazione, avs-inps, funziona, cumula',
+    ogTitle: 'Totalizzazione AVS-INPS per frontalieri: come funziona',
+    ogDescription: 'I frontalieri che lavorano in Svizzera ma hanno storia contributiva in Italia possono totalizzare i periodi AVS e INPS per il calcolo della pensione. Scopri procedura, documenti e tempistiche dalla Convenzione 1976 al Nuovo Accordo 2024.',
+    canonicalPath: '/articoli-frontaliere/totalizzazione-pensione-svizzera-italia-frontalieri',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Totalizzazione AVS-INPS per frontalieri: come funziona",
+      "description": "Totalizzazione contributi AVS-INPS: cumula i periodi tra Svizzera e Italia. Convenzione 1976, Nuovo Accordo 2024. Procedura, documentazione, calcolo",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/totalizzazione-pensione-svizzera-italia-frontalieri.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Vista del Lago di Lugano al confine tra Svizzera e Italia, che simboleggia il collegamento transfrontaliero dei due sistemi previdenziali."
+      },
+      "datePublished": "2026-08-27T08:40:48+00:00",
+      "dateModified": "2026-08-27T08:40:48+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/totalizzazione-pensione-svizzera-italia-frontalieri/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

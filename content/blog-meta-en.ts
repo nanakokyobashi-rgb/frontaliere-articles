@@ -10861,6 +10861,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Rental vs ownership: the choice of frontiersmen',
     'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Border crossing to Ticino: comparison between owned cars and long-term rental. Analysis of costs, benefits and how to choose the best solution.',
     'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Road leading to Ticino canton with Swiss road signs and a car traveling',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'AVS-INPS totalisation for border workers: how it works',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumulate the contribution periods between Switzerland and Italy for retirement. 1976 Convention, New Agreement 2024: practical guide, documentation and calculation of annuity.',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Lake Lugano border view between Switzerland and Italy, symbolizing the cross-border connection between two pension systems.',
 };
 
 export default blogMetaEn;

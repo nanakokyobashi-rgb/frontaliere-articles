@@ -10863,6 +10863,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.cambio-mobilita-frontalieri-ticino.title': 'Location vs propriété : le choix des frontaliers',
     'blog.article.cambio-mobilita-frontalieri-ticino.excerpt': 'Navetteurs transfrontaliers vers le Tessin : comparaison entre voitures possédées et locations longue durée. Analyse des coûts, avantages et comment choisir la meilleure solution.',
     'blog.article.cambio-mobilita-frontalieri-ticino.imageAlt': 'Route vers le canton du Tessin avec panneaux suisses et voiture en transit',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.title': 'Totalisation AVS-INPS pour les frontaliers : comment ça marche',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.excerpt': 'Cumule les périodes de cotisation entre la Suisse et l\'Italie pour la retraite. Convention 1976, Nouvel Accord 2024 : guide pratique, documentation et calcul de la rente.',
+    'blog.article.totalizzazione-pensione-svizzera-italia-frontalieri.imageAlt': 'Vue du lac de Lugano à la frontière Suisse-Italie, symbolisant la connexion transfrontalière des deux régimes de retraite.',
 };
 
 export default blogMetaFr;
