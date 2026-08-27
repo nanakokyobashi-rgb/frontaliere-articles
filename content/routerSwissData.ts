@@ -1516,6 +1516,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'imposte-cantonali-san-gallo-aliquote-deduzioni': { it: 'imposte-cantonali-san-gallo-aliquote-deduzioni', en: 'cantonal-taxes-st-gallen-rates-deductions', de: 'kantonale-steuern-st-gallen-satze-abzuege', fr: 'impots-cantonaux-saint-gall-taux-deductions' },
  'permesso-c-san-gallo-residenza-lunga': { it: 'permesso-c-san-gallo-residenza-lunga', en: 'residence-permit-c-canton-st-gallen-requirements', de: 'aufenthaltserlaubnis-c-kanton-st-gallen-bedingungen', fr: 'permis-domicile-c-canton-saint-gall-exigences' },
  'neutralita-ruolo-attivo': { it: 'neutralita-ruolo-attivo', en: 'neutrality-active-role', de: 'neutralitaet-aktive-rolle', fr: 'neutralite-role-actif' },
+ 'disoccupazione-laureati-2025-aumento': { it: 'disoccupazione-laureati-2025-aumento', en: 'unemployment-graduates-2025-increase', de: 'arbeitslosigkeit-absolventen-2025-anstieg', fr: 'chomage-diplomes-2025-hausse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

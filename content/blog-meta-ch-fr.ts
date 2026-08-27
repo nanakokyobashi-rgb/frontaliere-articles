@@ -4471,6 +4471,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.neutralita-ruolo-attivo.title': 'Une neutralité crédible nécessite un rôle actif',
     'blog.article.neutralita-ruolo-attivo.excerpt': 'L\'historien Matthieu Gillabert analyse comment la doctrine de la neutralité suisse a évolué, pour comprendre le rôle actif nécessaire à sa crédibilité.',
     'blog.article.neutralita-ruolo-attivo.imageAlt': 'Bâtiment administratif suisse représentant les institutions fédérales et la neutralité dans la politique étrangère',
+    'blog.article.disoccupazione-laureati-2025-aumento.title': 'Chômage en hausse chez les diplômés en 2025',
+    'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'L\'Office fédéral de la statistique relève une hausse du chômage chez les nouveaux diplômés suisses de 2023 à 2025. Masters universitaires : de 3,9 % à 6,4 %. Analyse par domaine d\'étude.',
+    'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Jeune diplômée analysant les données de chômage dans un bureau moderne avec vue sur la ville',
 };
 
 export default blogMetaChFr;

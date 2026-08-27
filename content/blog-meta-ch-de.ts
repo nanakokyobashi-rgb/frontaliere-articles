@@ -4471,6 +4471,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.neutralita-ruolo-attivo.title': 'Glaubwürdige Neutralität erfordert eine aktive Rolle',
     'blog.article.neutralita-ruolo-attivo.excerpt': 'Der Historiker Matthieu Gillabert analysiert, wie sich die Schweizer Neutralitätsdoktrin entwickelt hat, um die aktive Rolle zu verstehen, die für ihre Glaubwürdigkeit notwendig ist.',
     'blog.article.neutralita-ruolo-attivo.imageAlt': 'Schweizer Verwaltungsgebäude, das föderale Institutionen und Neutralität in der Außenpolitik darstellt',
+    'blog.article.disoccupazione-laureati-2025-aumento.title': 'Steigende Arbeitslosigkeit unter Absolventen im Jahr 2025',
+    'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'Das Bundesamt für Statistik verzeichnet von 2023 bis 2025 einen Anstieg der Arbeitslosigkeit unter den jungen Schweizer Hochschulabsolventen. Master-Abschluss: von 3,9% bis 6,4%. Analyse nach Studienbereich.',
+    'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Junge Absolventin analysiert Arbeitslosendaten in modernem Schweizer Büro mit Blick auf die Stadt',
 };
 
 export default blogMetaChDe;

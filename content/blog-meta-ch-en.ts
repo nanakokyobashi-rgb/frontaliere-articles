@@ -4471,6 +4471,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.neutralita-ruolo-attivo.title': 'Credible neutrality requires an active role',
     'blog.article.neutralita-ruolo-attivo.excerpt': 'Historian Matthieu Gillabert analyzes how the doctrine of Swiss neutrality has evolved, to understand the active role necessary for its credibility.',
     'blog.article.neutralita-ruolo-attivo.imageAlt': 'Swiss administrative building representing federal institutions and neutrality in foreign policy',
+    'blog.article.disoccupazione-laureati-2025-aumento.title': 'Unemployment rising among graduates in 2025',
+    'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'The Federal Statistical Office notes unemployment growth among Swiss recent graduates from 2023 to 2025. Master\'s degrees: from 3.9% to 6.4%. Analysis by field of study.',
+    'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Young graduate analyzing unemployment data in a modern Swiss office with city view in the background',
 };
 
 export default blogMetaChEn;

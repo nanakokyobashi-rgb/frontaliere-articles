@@ -4471,6 +4471,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.neutralita-ruolo-attivo.title': 'Una neutralità credibile richiede ruolo attivo',
     'blog.article.neutralita-ruolo-attivo.excerpt': 'Lo storico Matthieu Gillabert analizza come la dottrina della neutralità svizzera si è evoluta, per comprendere il ruolo attivo necessario alla sua credibilità.',
     'blog.article.neutralita-ruolo-attivo.imageAlt': 'Palazzo amministrativo svizzero che rappresenta le istituzioni federali e la neutralità nella politica estera',
+    'blog.article.disoccupazione-laureati-2025-aumento.title': 'Disoccupazione in aumento tra i diplomati nel 2025',
+    'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'L\'Ufficio federale di statistica rileva crescita della disoccupazione tra i neolaureati svizzeri dal 2023 al 2025. Master universitari: dal 3,9% al 6,4%. Analisi per settore di studio.',
+    'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Una giovane diplomata analizza dati di disoccupazione in uno studio moderno svizzero con vista sulla città',
 };
 
 export default blogMetaChIt;
