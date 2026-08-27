@@ -1518,6 +1518,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'neutralita-ruolo-attivo': { it: 'neutralita-ruolo-attivo', en: 'neutrality-active-role', de: 'neutralitaet-aktive-rolle', fr: 'neutralite-role-actif' },
  'disoccupazione-laureati-2025-aumento': { it: 'disoccupazione-laureati-2025-aumento', en: 'unemployment-graduates-2025-increase', de: 'arbeitslosigkeit-absolventen-2025-anstieg', fr: 'chomage-diplomes-2025-hausse' },
  'gr-imposta-immobiliare-seconde-case-2029': { it: 'gr-imposta-immobiliare-seconde-case-2029', en: 'gr-property-tax-secondary-homes-2029', de: 'gr-grundsteuer-zweithaeuser-2029', fr: 'gr-impot-immobilier-residences-secondaires-2029' },
+ 'occupazione-cresce-accelera-112mila': { it: 'occupazione-cresce-accelera-112mila', en: 'employment-grows-accelerates-112000-switzerland', de: 'beschaeftigung-waechst-beschleunigt-112000-schweiz', fr: 'emploi-croissance-acceleration-112000-suisse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

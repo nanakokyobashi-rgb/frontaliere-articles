@@ -4477,6 +4477,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Grisons : taxe immobilière sur les résidences secondaires à partir de 2029',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Le gouvernement grison propose une taxe de 1,5‰ sur les résidences secondaires pour compenser les pertes de 40,5 millions de CHF. La population votera une modification constitutionnelle.',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Propriétés résidentielles dispersées parmi les forêts et les lacs des Grisons',
+    'blog.article.occupazione-cresce-accelera-112mila.title': 'Croissance de l\'emploi : +112\'000 emplois en Suisse',
+    'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'Au Q2 2025, vous employez à 5,7 millions (+2% par an). Les services accélèrent (+2,2%), le Tessin freine (-0,7%). 98\'700 places libres mais difficile de recruter des spécialistes.',
+    'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Des professionnels suisses collaborent dans un bureau moderne de Lugano lors d\'une réunion d\'affaires',
 };
 
 export default blogMetaChFr;

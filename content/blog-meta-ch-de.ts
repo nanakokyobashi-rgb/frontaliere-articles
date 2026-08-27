@@ -4477,6 +4477,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Graubünden: Grundsteuer auf Zweitwohnungen ab 2029',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Die Bündner Regierung schlägt eine Steuer von 1,5‰ auf Zweitwohnungen vor, um Verluste von 40,5 Mio. CHF auszugleichen. Die Bevölkerung wird für eine Verfassungsänderung stimmen.',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Wohnimmobilien in den Wäldern und Seen der Graubünden verstreut',
+    'blog.article.occupazione-cresce-accelera-112mila.title': 'Beschäftigung wächst: +112\'000 Stellen in der Schweiz',
+    'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'Im Q2 2025 beschäftigte er 5,7 Millionen (+2% pro Jahr). Dienste beschleunigen (+2,2%), Tessin bremst (-0,7%). 98\'700 freie Plätze, aber schwierig, Fachkräfte zu rekrutieren.',
+    'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Schweizer Fachleute arbeiten in einem modernen Lugano-Büro während eines Geschäftsgesprächs zusammen',
 };
 
 export default blogMetaChDe;

@@ -13429,6 +13429,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'occupazione-cresce-accelera-112mila',
+    category: 'pratico',
+    date: '2026-08-27T08:18:36.280Z',
+    image: '/images/blog/occupazione-cresce-accelera-112mila.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

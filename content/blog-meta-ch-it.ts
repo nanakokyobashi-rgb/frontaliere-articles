@@ -4477,6 +4477,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Grigioni: imposta immobiliare su seconde case dal 2029',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Governo grigionese propone tassa del 1,5‰ sulle abitazioni secondarie per compensare perdite di 40,5 milioni CHF. Popolazione voterà modifica costituzionale.',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Proprietà residenziali disperse tra i boschi e i laghi dei Grigioni, paesaggio alpino',
+    'blog.article.occupazione-cresce-accelera-112mila.title': 'Occupazione cresce: +112\'000 posti in Svizzera',
+    'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'Nel Q2 2025 impieghi a 5,7 milioni (+2% annuo). Servizi accelerano (+2,2%), Ticino frena (-0,7%). 98\'700 posti liberi ma difficile reclutare specializzati.',
+    'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Professionisti svizzeri collaborano in un moderno ufficio di Lugano durante una riunione di lavoro',
 };
 
 export default blogMetaChIt;

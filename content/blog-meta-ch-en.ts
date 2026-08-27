@@ -4477,6 +4477,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Graubünden: property tax on second homes from 2029',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'The Government of Grison proposes a tax of 1.5‰ on secondary homes to compensate for losses of CHF 40.5 million. Population will vote on constitutional change.',
     'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Residential properties scattered among forests and lakes in the Grisons alpine region',
+    'blog.article.occupazione-cresce-accelera-112mila.title': 'Employment grows:+112,000 jobs in Switzerland',
+    'blog.article.occupazione-cresce-accelera-112mila.excerpt': 'In Q2 2025, loans amounted to 5.7 million (+2% per year). Services accelerate (+2.2%), Ticino slows down (-0.7%). 98,700 vacancies but it is difficult to recruit specialists.',
+    'blog.article.occupazione-cresce-accelera-112mila.imageAlt': 'Swiss professionals collaborating in a modern Lugano office during a business meeting',
 };
 
 export default blogMetaChEn;
