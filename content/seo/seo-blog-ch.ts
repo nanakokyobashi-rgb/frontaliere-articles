@@ -58520,6 +58520,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-vignetta-autostradale-non-subito': {
+    title: 'La vignetta autostradale adesiva sparirà, ma non subito',
+    description: 'Il Consiglio federale conferma: vignetta adesiva ancora per anni. Abolizione solo quando scenderà sotto il 10% delle vendite. Nel 2026, quota digitale al 50%.',
+    keywords: 'frontalieri, ticino, svizzera, italia, vignetta, autostradale, adesiva, sparirà',
+    ogTitle: 'La vignetta autostradale adesiva sparirà, ma non subito',
+    ogDescription: 'Scopri la decisione del Consiglio federale sulla vignetta svizzera: la versione adesiva resterà ancora per diversi anni, mentre quella digitale raggiunge il 50% nel 2026. Quando avverrà l\'abolizione completa? Leggi i dettagli.',
+    canonicalPath: '/articoli-svizzera/vignetta-autostradale-non-subito/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "La vignetta autostradale adesiva sparirà, ma non subito",
+      "description": "Il Consiglio federale conferma: vignetta adesiva ancora per anni. Abolizione solo quando scenderà sotto il 10% delle vendite. Nel 2026, quota digitale al 50%.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/vignetta-autostradale-non-subito.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di una strada svizzera con circolazione autostradale e paesaggio alpino"
+      },
+      "datePublished": "2026-08-27T15:40:33+00:00",
+      "dateModified": "2026-08-27T15:40:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/vignetta-autostradale-non-subito/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -4510,6 +4510,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.kremlin-voto-neutralita-svizzera.title': 'Russia interfiere sulla votazione svizzera di neutralità',
     'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE e social media usati da Mosca per influenzare il voto sulla neutralità del 27 settembre. Governo riconosce minaccia di disinformazione.',
     'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Palazzo federale di Berna, sede del Parlamento svizzero, simbolo della democrazia e della politica nazionale.',
+    'blog.article.vignetta-autostradale-non-subito.title': 'La vignetta autostradale adesiva sparirà, ma non subito',
+    'blog.article.vignetta-autostradale-non-subito.excerpt': 'Il Consiglio federale conferma: vignetta adesiva ancora per anni. Abolizione solo quando scenderà sotto il 10% delle vendite. Nel 2026, quota digitale al 50%.',
+    'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Veduta di una strada svizzera con circolazione autostradale e paesaggio alpino',
 };
 
 export default blogMetaChIt;

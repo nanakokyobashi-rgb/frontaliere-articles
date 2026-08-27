@@ -13528,6 +13528,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'vignetta-autostradale-non-subito',
+    category: 'novita',
+    date: '2026-08-27T15:40:33.933Z',
+    image: '/images/blog/vignetta-autostradale-non-subito.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

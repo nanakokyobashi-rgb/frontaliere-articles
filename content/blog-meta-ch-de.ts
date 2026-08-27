@@ -4510,6 +4510,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.kremlin-voto-neutralita-svizzera.title': 'Russland mischt sich in die Schweizer Neutralitätsabstimmung ein',
     'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE und soziale Medien, die von Moskau genutzt werden, um die Abstimmung über die Neutralität vom 27. September zu beeinflussen. Die Regierung erkennt die Gefahr von Fehlinformationen an.',
     'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Bundeshaus in Bern, Sitz des Schweizer Parlaments, Symbol der Demokratie und nationalen Politik.',
+    'blog.article.vignetta-autostradale-non-subito.title': 'Die selbstklebende Autobahnvignette verschwindet, aber nicht sofort',
+    'blog.article.vignetta-autostradale-non-subito.excerpt': 'Der Bundesrat bestätigt: Klebevignette noch jahrelang. Abschaffung erst, wenn sie unter 10% des Umsatzes sinkt. Im Jahr 2026 liegt der digitale Anteil bei 50 %.',
+    'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Schweizer Autobahn mit Verkehr und Alpenlandschaft',
 };
 
 export default blogMetaChDe;

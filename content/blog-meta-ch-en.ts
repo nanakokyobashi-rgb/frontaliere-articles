@@ -4510,6 +4510,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.kremlin-voto-neutralita-svizzera.title': 'Russia interferes in Swiss neutrality vote',
     'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE and social media used by Moscow to influence the September 27 neutrality vote. Government acknowledges threat of disinformation.',
     'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Swiss Federal Palace in Bern, seat of the Swiss Parliament, symbolizing democracy and national politics.',
+    'blog.article.vignetta-autostradale-non-subito.title': 'The sticky highway vignette will disappear, but not right away',
+    'blog.article.vignetta-autostradale-non-subito.excerpt': 'The Federal Council confirms: vignette still stuck for years. Abolition only when it falls below 10% of sales. In 2026, digital share at 50%.',
+    'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Swiss highway with vehicle traffic and Alpine landscape',
 };
 
 export default blogMetaChEn;

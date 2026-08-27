@@ -1529,6 +1529,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'processo-mirabaud-corruzione': { it: 'processo-mirabaud-corruzione', en: 'mirabaud-trial-corruption', de: 'mirabaud-prozess-korruption', fr: 'mirabaud-proces-corruption' },
  'bancasto-ricavi-calo-semestre': { it: 'bancasto-ricavi-calo-semestre', en: 'bancasto-revenues-decline-semester', de: 'bancasto-einnahmen-rueckgang-halbjahr', fr: 'bancasto-revenus-baisse-semestre' },
  'kremlin-voto-neutralita-svizzera': { it: 'kremlin-voto-neutralita-svizzera', en: 'kremlin-vote-neutrality-switzerland', de: 'kremlin-abstimmung-neutralitaet-schweiz', fr: 'kremlin-vote-neutralite-suisse' },
+ 'vignetta-autostradale-non-subito': { it: 'vignetta-autostradale-non-subito', en: 'vignette-highway-not-immediately', de: 'autobahnvignette-nicht-sofort', fr: 'vignette-autoroute-pas-maintenant' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -4510,6 +4510,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.kremlin-voto-neutralita-svizzera.title': 'La Russie s\'immisce dans le vote suisse de neutralité',
     'blog.article.kremlin-voto-neutralita-svizzera.excerpt': 'RT.DE et les médias sociaux utilisés par Moscou pour influencer le vote sur la neutralité du 27 septembre. Le gouvernement reconnaît la menace de désinformation.',
     'blog.article.kremlin-voto-neutralita-svizzera.imageAlt': 'Palais fédéral à Berne, siège du Parlement suisse, symbole de la démocratie et de la politique nationale.',
+    'blog.article.vignetta-autostradale-non-subito.title': 'La vignette autocollante de l\'autoroute disparaîtra, mais pas tout de suite',
+    'blog.article.vignetta-autostradale-non-subito.excerpt': 'Le Conseil fédéral confirme : vignette adhésive encore pendant des années. Abolition uniquement lorsqu\'elle tombe en dessous de 10 % des ventes. En 2026, part numérique à 50 %.',
+    'blog.article.vignetta-autostradale-non-subito.imageAlt': 'Route suisse avec circulation automobile et paysage alpin',
 };
 
 export default blogMetaChFr;
