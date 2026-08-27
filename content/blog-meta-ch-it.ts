@@ -4516,6 +4516,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.formazione-musicale-rette-2026.title': 'Formazione musicale: rette ridotte per i giovani',
     'blog.article.formazione-musicale-rette-2026.excerpt': 'Dal 2026 rette fino al 90% per famiglie fragili e accesso esteso fino a 25 anni. Il Ticino investe 2,5 milioni CHF annui in formazione musicale extrascolastica.',
     'blog.article.formazione-musicale-rette-2026.imageAlt': 'Sede amministrativa del Cantone Ticino, rappresentante le politiche educative e culturali',
+    'blog.article.ddps-droni-priorita-strategica.title': 'Droni e robotica: DDPS definisce priorità strategica',
+    'blog.article.ddps-droni-priorita-strategica.excerpt': 'Il DDPS annuncia il 27 agosto 2026 un centro per sistemi senza pilota, un battaglione di droni dal 2028 e investimenti per contrastare le minacce ibride.',
+    'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Centro tecnologico militare svizzero con droni e sistemi robotici per la difesa nazionale',
 };
 
 export default blogMetaChIt;

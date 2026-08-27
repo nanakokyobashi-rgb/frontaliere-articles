@@ -4516,6 +4516,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.formazione-musicale-rette-2026.title': 'Formation musicale : tarifs réduits pour les jeunes',
     'blog.article.formazione-musicale-rette-2026.excerpt': 'À partir de 2026, des lignes droites allant jusqu\'à 90 % pour les familles fragiles et un accès étendu jusqu\'à 25 ans. Le Tessin investit 2,5 millions de CHF par an dans la formation musicale extrascolaire.',
     'blog.article.formazione-musicale-rette-2026.imageAlt': 'Siège administratif du canton du Tessin, représentant les politiques d\'éducation et de culture',
+    'blog.article.ddps-droni-priorita-strategica.title': 'Drones et robotique : DDPS définit ses priorités stratégiques',
+    'blog.article.ddps-droni-priorita-strategica.excerpt': 'Le DDPS annonce le 27 août 2026 un centre pour les systèmes sans pilote, un bataillon de drones dès 2028 et des investissements pour contrer les menaces hybrides.',
+    'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Centre technologique militaire suisse avec drones et systèmes robotiques pour la défense nationale',
 };
 
 export default blogMetaChFr;

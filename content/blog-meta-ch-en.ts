@@ -4516,6 +4516,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.formazione-musicale-rette-2026.title': 'Musical training: reduced fees for young people',
     'blog.article.formazione-musicale-rette-2026.excerpt': 'From 2026, fees up to 90% for fragile families and extended access up to 25 years. Ticino invests CHF 2.5 million per year in extracurricular music training.',
     'blog.article.formazione-musicale-rette-2026.imageAlt': 'Administrative headquarters of Ticino Canton, representing educational and cultural policies',
+    'blog.article.ddps-droni-priorita-strategica.title': 'Drones and robotics: DDPS sets strategic priority',
+    'blog.article.ddps-droni-priorita-strategica.excerpt': 'DDPS announces a center for unmanned systems, a drone battalion from 2028, and investments to counter hybrid threats on August 27, 2026.',
+    'blog.article.ddps-droni-priorita-strategica.imageAlt': 'Swiss military technology center with drones and robotic systems for national defense',
 };
 
 export default blogMetaChEn;

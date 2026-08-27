@@ -13546,6 +13546,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'ddps-droni-priorita-strategica',
+    category: 'novita',
+    date: '2026-08-27T16:30:14.857Z',
+    image: '/images/blog/ddps-droni-priorita-strategica.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
