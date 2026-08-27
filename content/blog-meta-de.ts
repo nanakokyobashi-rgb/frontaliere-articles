@@ -10886,6 +10886,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Grenzgängerwechsel Kanton Tessin nach Graubünden',
     'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Was ändert sich für Bewilligung G, Quellensteuer, Abzüge und Pendeln, wenn der Arbeitsplatz vom Tessin nach Graubünden verlegt wird.',
     'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Alpen-Grenzübergang zwischen Italien und der Schweiz für Grenzgänger',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Campione d \'Italia: Leben in der Enklave und Arbeiten im Tessin',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Zeiten, Grenzübergänge, Steuern und Kosten für diejenigen, die in Campione d \'Italia leben und im Rahmen des neuen Abkommens 2024 als Grenzgänger im Kanton Tessin tätig sind.',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Blick auf den Luganersee mit Campione d\'Italia im Hintergrund',
 };
 
 export default blogMetaDe;

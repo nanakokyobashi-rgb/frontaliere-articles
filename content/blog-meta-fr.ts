@@ -10889,6 +10889,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Changement de canton du Tessin aux Grisons pour les frontaliers',
     'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Ce qui change pour le permis G, l\'impôt à la source, les retenues et les déplacements lors du transfert du lieu de travail du Tessin aux Grisons.',
     'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Poste frontière alpin entre l\'Italie et la Suisse pour les frontaliers',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Champion d\'Italie : vivre dans l\'enclave et travailler au Tessin',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Temps, passages, fiscalité et coûts pour ceux qui vivent à Campione d\'Italia et qui sont frontaliers dans le canton du Tessin en vertu du nouvel accord 2024.',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Vue du lac de Lugano avec Campione d\'Italie en arrière-plan',
 };
 
 export default blogMetaFr;

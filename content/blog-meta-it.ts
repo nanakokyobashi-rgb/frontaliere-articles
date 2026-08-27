@@ -10888,6 +10888,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Cambio cantone da Ticino a Grigioni per frontalieri',
     'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'Cosa cambia per permesso G, imposta alla fonte, trattenute e pendolarismo quando si trasferisce il posto di lavoro dal Ticino ai Grigioni.',
     'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Valico alpino tra Italia e Svizzera per frontalieri tra Ticino e Grigioni',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Campione d\'Italia: vivere nell\'enclave e lavorare in Ticino',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Tempi, valichi, fiscalità e costi per chi vive a Campione d\'Italia e fa il frontaliere in Canton Ticino sotto il nuovo Accordo 2024.',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'Vista del Lago di Lugano con Campione d\'Italia sullo sfondo',
 };
 
 export default blogMetaIt;

@@ -10887,6 +10887,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.passaggio-ticino-grigioni-frontaliere.title': 'Canton change from Ticino to Graubünden for border workers',
     'blog.article.passaggio-ticino-grigioni-frontaliere.excerpt': 'What changes for G permit, tax at source, withholdings and commuting when you move the workplace from Ticino to Graubünden.',
     'blog.article.passaggio-ticino-grigioni-frontaliere.imageAlt': 'Alpine border crossing between Italy and Switzerland for cross-border workers',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.title': 'Champion of Italy: living in the enclave and working in Ticino',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.excerpt': 'Time, crossings, taxation and costs for those who live in Campione d \'Italia and work as a border worker in Canton Ticino under the new 2024 Agreement.',
+    'blog.article.vivere-campione-italia-frontaliere-ticino.imageAlt': 'View of Lake Lugano with Campione d\'Italia in the background',
 };
 
 export default blogMetaEn;
