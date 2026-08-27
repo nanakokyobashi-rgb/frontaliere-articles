@@ -4486,6 +4486,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'FFS: +4% passeggeri, puntualità 94% e utile in crescita',
     'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Le Ferrovie Federali Svizzere chiudono H1 2026 con 1,45M passeggeri al giorno (+4%), puntualità 94,1% e utile 126M CHF. Le priorità: affidabilità, innovazione, investimenti.',
     'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Banchina di una stazione ferroviaria svizzera con treno SBB in partenza',
+    'blog.article.rimborso-dazi-paura-amministrativa.title': 'Rimborso dazi Usa: il timore amministrativo',
+    'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Solo un terzo delle aziende svizzere chiede rimborso dazi Usa indebitamente riscossi. Le altre rinunciano per paura degli oneri amministrativi eccessivi.',
+    'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Impianto di produzione svizzera con macchinari CNC e stazioni di lavoro industriali',
 };
 
 export default blogMetaChIt;

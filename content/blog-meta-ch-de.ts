@@ -4486,6 +4486,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'SBB: +4% Fahrgäste, Pünktlichkeit 94% und Gewinnzuwachs',
     'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Die Schweizerischen Bundesbahnen schliessen H1 2026 mit 1,45 Mio. Fahrgästen pro Tag (+4%), Pünktlichkeit 94,1% und Gewinn 126 Mio. CHF ab. Die Prioritäten: Zuverlässigkeit, Innovation, Investitionen.',
     'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Schweizer Bahnsteig mit abfahrendem SBB-Zug',
+    'blog.article.rimborso-dazi-paura-amministrativa.title': 'US-Zollrückerstattung: die administrative Angst',
+    'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Nur ein Drittel der Schweizer Unternehmen fordert zu Unrecht erhobene US-Zölle zurück. Die anderen verzichten aus Angst vor übermässigem Verwaltungsaufwand.',
+    'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Schweizer Präzisionsfertigung mit CNC-Maschinen und industriellen Arbeitsstationen',
 };
 
 export default blogMetaChDe;

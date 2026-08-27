@@ -4486,6 +4486,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'CFF : +4% passagers, ponctualité 94% et bénéfice en hausse',
     'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'Les Chemins de fer fédéraux suisses ferment H1 2026 avec 1,45M passagers par jour (+4%), ponctualité 94,1% et 126M CHF utiles. Les priorités : fiabilité, innovation, investissements.',
     'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Quai de gare suisse avec train SBB en partance',
+    'blog.article.rimborso-dazi-paura-amministrativa.title': 'Remboursement des droits de douane américains : la crainte administrative',
+    'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Seulement un tiers des entreprises suisses demandent le remboursement des droits de douane américains indûment perçus. Les autres renoncent par crainte de charges administratives excessives.',
+    'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Installation de fabrication suisse de précision avec machines CNC et postes de travail industriels',
 };
 
 export default blogMetaChFr;

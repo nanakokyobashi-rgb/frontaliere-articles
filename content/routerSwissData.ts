@@ -1521,6 +1521,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'occupazione-cresce-accelera-112mila': { it: 'occupazione-cresce-accelera-112mila', en: 'employment-grows-accelerates-112000-switzerland', de: 'beschaeftigung-waechst-beschleunigt-112000-schweiz', fr: 'emploi-croissance-acceleration-112000-suisse' },
  'rosti-difende-politica-climatica': { it: 'rosti-difende-politica-climatica', en: 'rosti-defends-federal-climate-policy', de: 'rosti-verteidigt-bundesklimapolitik', fr: 'rosti-defend-politique-climatique-federale' },
  'ffs-passeggeri-crescita-h1-2026': { it: 'ffs-passeggeri-crescita-h1-2026', en: 'sbb-passenger-growth-h1-2026', de: 'sbb-fahrgaeste-wachstum-h1-2026', fr: 'ffs-passagers-hausse-h1-2026' },
+ 'rimborso-dazi-paura-amministrativa': { it: 'rimborso-dazi-paura-amministrativa', en: 'usa-tariffs-refund-bureaucracy-fear', de: 'usa-zoelle-rueckerstattung-behoerdenangst', fr: 'tarifs-usa-remboursement-crainte-bureaucratique' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -4486,6 +4486,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ffs-passeggeri-crescita-h1-2026.title': 'SBB: +4% passengers, punctuality 94% and profit growing',
     'blog.article.ffs-passeggeri-crescita-h1-2026.excerpt': 'The Swiss Federal Railways close H1 2026 with 1.45 M passengers per day (+4%), punctuality 94.1% and profit CHF 126M. The priorities: reliability, innovation, investments.',
     'blog.article.ffs-passeggeri-crescita-h1-2026.imageAlt': 'Swiss railway station platform with departing SBB train',
+    'blog.article.rimborso-dazi-paura-amministrativa.title': 'US duty reimbursement: administrative fear',
+    'blog.article.rimborso-dazi-paura-amministrativa.excerpt': 'Only a third of Swiss companies ask for reimbursement of improperly collected US duties. The others give up for fear of excessive administrative burdens.',
+    'blog.article.rimborso-dazi-paura-amministrativa.imageAlt': 'Swiss precision manufacturing facility with CNC machinery and industrial workstations',
 };
 
 export default blogMetaChEn;
