@@ -4501,6 +4501,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Per i laureati, dopo il diploma, cresce la disoccupazione',
     'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'L\'Ufficio federale di statistica annuncia un aumento della disoccupazione tra neolaureati: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9% tra 2023-2025.',
     'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Dati UST/BFS: disoccupazione in aumento per neolaureati svizzeri tra 2023 e 2025 per universitari e professionali.',
+    'blog.article.processo-mirabaud-corruzione.title': 'Ex presidente ASB a processo per corruzione e riciclaggio',
+    'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ex presidente dell\'Associazione svizzera dei banchieri, processato dal TPF per corruzione di fondi kuwaitiani. Richiesti 24 mesi di pena sospesa.',
+    'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palazzo di Giustizia di Losanna, sede del Tribunale penale federale, dove è processato Pierre Mirabaud',
 };
 
 export default blogMetaChIt;

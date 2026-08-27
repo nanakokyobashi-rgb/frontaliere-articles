@@ -13501,6 +13501,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'processo-mirabaud-corruzione',
+    category: 'novita',
+    date: '2026-08-27T13:40:12.194Z',
+    image: '/images/blog/processo-mirabaud-corruzione.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

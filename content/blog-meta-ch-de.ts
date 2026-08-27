@@ -4501,6 +4501,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Für Absolventen steigt nach dem Abschluss die Arbeitslosigkeit',
     'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'Das Bundesamt für Statistik meldet einen Anstieg der Arbeitslosigkeit unter Hochschulabsolventen: Master Uni von 3,9% auf 6,4%, Bachelor SUP von 3,4% auf 4,9% zwischen 2023-2025.',
     'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Schweizer Arbeitsmarktstatistiken zeigen steigende Arbeitslosenquoten bei Hochschul- und Berufsabsolventen 2023-2025.',
+    'blog.article.processo-mirabaud-corruzione.title': 'Ehemaliger Vorsitzender der SBVg vor Gericht wegen Korruption und Geldwäsche',
+    'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ehemaliger Präsident der Schweizerischen Bankiervereinigung, vom TPF wegen Korruption kuwaitischer Gelder angeklagt. 24 Monate Bewährungsstrafe beantragt.',
+    'blog.article.processo-mirabaud-corruzione.imageAlt': 'Justizpalast Lausanne, Sitz des Bundesstrafgerichts, wo Pierre Mirabaud vor Gericht steht',
 };
 
 export default blogMetaChDe;

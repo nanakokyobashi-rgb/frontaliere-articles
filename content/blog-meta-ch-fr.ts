@@ -4501,6 +4501,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Pour les diplômés, après l\'obtention du diplôme, le chômage augmente',
     'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'L\'Office fédéral de la statistique annonce une augmentation du chômage chez les nouveaux diplômés : master uni de 3,9% à 6,4%, bachelor sup de 3,4% à 4,9% entre 2023-2025.',
     'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Chômage en hausse pour les diplômés suisses de l\'université et professions supérieures entre 2023 et 2025 selon l\'UST/BFS.',
+    'blog.article.processo-mirabaud-corruzione.title': 'Ancien président d\'ASB jugé pour corruption et blanchiment',
+    'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ancien président de l\'Association suisse des banquiers, poursuivi par le TPF pour corruption de fonds koweïtiens. 24 mois de prison avec sursis requis.',
+    'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palais de Justice de Lausanne, siège de la Cour pénale fédérale, où Pierre Mirabaud est jugé',
 };
 
 export default blogMetaChFr;

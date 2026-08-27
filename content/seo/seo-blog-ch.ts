@@ -58403,6 +58403,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-processo-mirabaud-corruzione': {
+    title: 'Ex presidente ASB a processo per corruzione e riciclaggio',
+    description: 'Pierre Mirabaud, ex presidente ASB, processato per corruzione di fondi kuwaitiani. Richiesti 24 mesi di pena sospesa dal Tribunale penale federale.',
+    keywords: 'frontalieri, ticino, svizzera, italia, presidente, processo, corruzione, riciclaggio',
+    ogTitle: 'Ex presidente banchieri svizzeri a processo per corruzione',
+    ogDescription: 'Pierre Mirabaud, ex presidente ASB, processato per corruzione e riciclaggio di fondi kuwaitiani. Procura chiede 24 mesi di pena sospesa. Ha rimborsato 42 milioni di franchi. TPF giudicherà all\'inizio di settembre 2026.',
+    canonicalPath: '/articoli-svizzera/processo-mirabaud-corruzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Ex presidente ASB a processo per corruzione e riciclaggio",
+      "description": "Pierre Mirabaud, ex presidente ASB, processato per corruzione di fondi kuwaitiani. Richiesti 24 mesi di pena sospesa dal Tribunale penale federale.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/processo-mirabaud-corruzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo di Giustizia di Losanna, sede del Tribunale penale federale, dove è processato Pierre Mirabaud"
+      },
+      "datePublished": "2026-08-27T13:40:12+00:00",
+      "dateModified": "2026-08-27T13:40:12+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/processo-mirabaud-corruzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

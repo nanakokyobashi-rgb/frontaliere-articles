@@ -4501,6 +4501,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'For graduates, unemployment increases after graduation',
     'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'The Federal Statistical Office announces an increase in unemployment among recent graduates: UNI master\'s from 3.9% to 6.4%, sup bachelor\'s from 3.4% to 4.9% between 2023-2025.',
     'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Swiss labor statistics showing rising unemployment rates among university and professional graduates between 2023 and 2025.',
+    'blog.article.processo-mirabaud-corruzione.title': 'Former ASB president on trial for corruption and money laundering',
+    'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, former president of the Swiss Bankers Association, tried by the TPF for bribery of Kuwaiti funds. 24 months suspended sentence requested.',
+    'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palace of Justice in Lausanne, seat of the Federal Criminal Court, where Pierre Mirabaud is on trial',
 };
 
 export default blogMetaChEn;
