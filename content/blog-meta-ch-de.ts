@@ -4522,6 +4522,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Transportverordnungen: offene Konsultation über Videoüberwachung',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Öffentliche Konsultation vom 26. August bis 26. November 2026 zu zwei Bundesverordnungen über Videoüberwachung und Bodycams im öffentlichen Verkehr der Schweiz.',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Schweizer Bahnhof mit Fahrgästen und digitalen Informationstafeln',
+    'blog.article.tasso-riferimento-affitti-2026.title': 'Referenzzinssatz: Stillstand auf Minimum, aber Anstieg in Sicht',
+    'blog.article.tasso-riferimento-affitti-2026.excerpt': 'Das BLW gibt am 1. September bekannt, dass der Zinssatz bei 1,25% bleibt. Kurze Erleichterung: UBS prognostiziert einen Anstieg auf 1,5% per Ende 2027, ZKB 2028. Was zu erwarten ist.',
+    'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'Blick auf Lugano mit Wohngebäuden und See im Hintergrund, Symbol des Schweizer Wohnungsmarkts.',
 };
 
 export default blogMetaChDe;

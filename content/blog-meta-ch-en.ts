@@ -4522,6 +4522,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Transport Ordinances: open consultation on video surveillance',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Public consultation from 26 August to 26 November 2026 for two federal ordinances on video surveillance and bodycam in Swiss public transport.',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Swiss train station with passengers and digital information displays',
+    'blog.article.tasso-riferimento-affitti-2026.title': 'Reference rate: stop at minimum, but increase in sight',
+    'blog.article.tasso-riferimento-affitti-2026.excerpt': 'The FOBA announces on 1 September that the rate remains at 1.25%. Short relief: UBS forecasts rise to 1.5% end 2027, ZKB 2028. What to expect.',
+    'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'View of Lugano with residential buildings and lake in background, symbol of Swiss housing market.',
 };
 
 export default blogMetaChEn;

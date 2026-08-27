@@ -1533,6 +1533,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'formazione-musicale-rette-2026': { it: 'formazione-musicale-rette-2026', en: 'music-education-fees-2026', de: 'musikausbildung-gebuehren-2026', fr: 'formation-musicale-cotisations-2026' },
  'ddps-droni-priorita-strategica': { it: 'ddps-droni-priorita-strategica', en: 'ddps-drones-priority-strategy', de: 'ddps-drohnen-prioritaet-strategie', fr: 'ddps-drones-priorite-strategique' },
  'ordinanze-trasporti-consultazione-videosorveglianza': { it: 'ordinanze-trasporti-consultazione-videosorveglianza', en: 'transport-ordinances-public-consultation-video-surveillance', de: 'verordnungen-verkehr-oeffentliche-konsultation-videoueberwachung', fr: 'ordonnances-transports-consultation-publique-videosurveillance' },
+ 'tasso-riferimento-affitti-2026': { it: 'tasso-riferimento-affitti-2026', en: 'reference-rate-rents-2026', de: 'referenzzins-mieten-2026', fr: 'taux-reference-loyers-2026' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

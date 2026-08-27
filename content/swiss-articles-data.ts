@@ -13564,6 +13564,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'tasso-riferimento-affitti-2026',
+    category: 'novita',
+    date: '2026-08-27T17:59:23.671Z',
+    image: '/images/blog/tasso-riferimento-affitti-2026.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

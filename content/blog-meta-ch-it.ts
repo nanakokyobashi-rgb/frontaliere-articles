@@ -4522,6 +4522,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.title': 'Ordinanze trasporti: aperta consultazione su videosorveglianza',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.excerpt': 'Consultazione pubblica dal 26 agosto al 26 novembre 2026 per due ordinanze federali su videosorveglianza e bodycam nei trasporti pubblici svizzeri.',
     'blog.article.ordinanze-trasporti-consultazione-videosorveglianza.imageAlt': 'Stazione ferroviaria svizzera con passeggeri e tabelloni digitali informativi',
+    'blog.article.tasso-riferimento-affitti-2026.title': 'Tasso di riferimento: fermi al minimo, ma aumento in vista',
+    'blog.article.tasso-riferimento-affitti-2026.excerpt': 'L\'UFAB annuncia il 1° settembre il tasso rimane a 1,25%. Sollievo breve: UBS prevede rialzo a 1,5% fine 2027, ZKB 2028. Cosa attendersi.',
+    'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'Vista di Lugano con edifici residenziali e lago sullo sfondo, simbolo del mercato abitativo svizzero.',
 };
 
 export default blogMetaChIt;
