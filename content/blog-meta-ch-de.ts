@@ -4525,6 +4525,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.tasso-riferimento-affitti-2026.title': 'Referenzzinssatz: Stillstand auf Minimum, aber Anstieg in Sicht',
     'blog.article.tasso-riferimento-affitti-2026.excerpt': 'Das BLW gibt am 1. September bekannt, dass der Zinssatz bei 1,25% bleibt. Kurze Erleichterung: UBS prognostiziert einen Anstieg auf 1,5% per Ende 2027, ZKB 2028. Was zu erwarten ist.',
     'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'Blick auf Lugano mit Wohngebäuden und See im Hintergrund, Symbol des Schweizer Wohnungsmarkts.',
+    'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin besucht landwirtschaftlichen Betrieb: Hilfe gegen Dürre',
+    'blog.article.parmelin-agricoltura-siccita.excerpt': 'Der Bundespräsident besucht die Erforschung resistenter Kulturen im Waadtland. Die Regierung unterstützt Landwirte mit zinslosen Darlehen von CHF 54 Mio. und setzt Zölle aus.',
+    'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Ländliches Agrarlandschaft in der Ticinoregion mit bestellten Feldern in den Sommermonaten.',
 };
 
 export default blogMetaChDe;

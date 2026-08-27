@@ -13573,6 +13573,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'parmelin-agricoltura-siccita',
+    category: 'novita',
+    date: '2026-08-27T18:24:32.104Z',
+    image: '/images/blog/parmelin-agricoltura-siccita.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

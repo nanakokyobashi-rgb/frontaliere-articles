@@ -4525,6 +4525,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.tasso-riferimento-affitti-2026.title': 'Tasso di riferimento: fermi al minimo, ma aumento in vista',
     'blog.article.tasso-riferimento-affitti-2026.excerpt': 'L\'UFAB annuncia il 1° settembre il tasso rimane a 1,25%. Sollievo breve: UBS prevede rialzo a 1,5% fine 2027, ZKB 2028. Cosa attendersi.',
     'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'Vista di Lugano con edifici residenziali e lago sullo sfondo, simbolo del mercato abitativo svizzero.',
+    'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin visita azienda agricola: aiuti contro la siccità',
+    'blog.article.parmelin-agricoltura-siccita.excerpt': 'Il presidente della Confederazione visita ricerca su colture resistenti in Vaud. Governo sostiene agricoltori con CHF 54 milioni di prestiti senza interessi e sospende dazi.',
+    'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Paesaggio agricolo rurale del Ticino con campi di coltura durante i mesi estivi.',
 };
 
 export default blogMetaChIt;

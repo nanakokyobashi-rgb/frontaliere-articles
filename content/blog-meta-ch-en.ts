@@ -4525,6 +4525,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.tasso-riferimento-affitti-2026.title': 'Reference rate: stop at minimum, but increase in sight',
     'blog.article.tasso-riferimento-affitti-2026.excerpt': 'The FOBA announces on 1 September that the rate remains at 1.25%. Short relief: UBS forecasts rise to 1.5% end 2027, ZKB 2028. What to expect.',
     'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'View of Lugano with residential buildings and lake in background, symbol of Swiss housing market.',
+    'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin farm visit: aid against drought',
+    'blog.article.parmelin-agricoltura-siccita.excerpt': 'The president of the Confederation visits research on resistant crops in Vaud. Government supports farmers with CHF 54 million in interest-free loans and suspends duties.',
+    'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Rural agricultural landscape in Ticino region with cultivated fields during summer months.',
 };
 
 export default blogMetaChEn;

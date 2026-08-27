@@ -4525,6 +4525,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.tasso-riferimento-affitti-2026.title': 'Taux de référence : à l\'arrêt au minimum, mais en hausse en vue',
     'blog.article.tasso-riferimento-affitti-2026.excerpt': 'L\'OFAB annonce le 1er septembre le taux restant à 1,25%. Soulagement court : UBS prévoit une hausse à 1,5% fin 2027, ZKB 2028. À quoi s\'attendre.',
     'blog.article.tasso-riferimento-affitti-2026.imageAlt': 'Vue de Lugano avec immeubles résidentiels et lac en arrière-plan, symbole du marché immobilier suisse.',
+    'blog.article.parmelin-agricoltura-siccita.title': 'Parmelin visite une exploitation agricole : aides contre la sécheresse',
+    'blog.article.parmelin-agricoltura-siccita.excerpt': 'Le président de la Confédération visite la recherche sur les cultures résistantes en Vaud. Le gouvernement soutient les agriculteurs avec 54 millions de francs de prêts sans intérêts et suspend les droits de douane.',
+    'blog.article.parmelin-agricoltura-siccita.imageAlt': 'Paysage agricole rural de la région du Tessin avec champs cultivés pendant les mois d\'été.',
 };
 
 export default blogMetaChFr;

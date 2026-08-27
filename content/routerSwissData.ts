@@ -1534,6 +1534,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'ddps-droni-priorita-strategica': { it: 'ddps-droni-priorita-strategica', en: 'ddps-drones-priority-strategy', de: 'ddps-drohnen-prioritaet-strategie', fr: 'ddps-drones-priorite-strategique' },
  'ordinanze-trasporti-consultazione-videosorveglianza': { it: 'ordinanze-trasporti-consultazione-videosorveglianza', en: 'transport-ordinances-public-consultation-video-surveillance', de: 'verordnungen-verkehr-oeffentliche-konsultation-videoueberwachung', fr: 'ordonnances-transports-consultation-publique-videosurveillance' },
  'tasso-riferimento-affitti-2026': { it: 'tasso-riferimento-affitti-2026', en: 'reference-rate-rents-2026', de: 'referenzzins-mieten-2026', fr: 'taux-reference-loyers-2026' },
+ 'parmelin-agricoltura-siccita': { it: 'parmelin-agricoltura-siccita', en: 'parmelin-agriculture-drought', de: 'parmelin-landwirtschaft-duerre', fr: 'parmelin-agriculture-secheresse' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
