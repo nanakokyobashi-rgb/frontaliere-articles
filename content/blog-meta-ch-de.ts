@@ -4465,6 +4465,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.title': 'Steuern St. Gallen: Steuersätze, Staffeln und Abzüge',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.excerpt': 'Wie die Kantons- und Gemeindesteuern im Kanton St. Gallen funktionieren: Sätze, Stufen, zulässige Abzüge und Fristen für die Deklaration.',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.imageAlt': 'Luftaufnahme der Altstadt Sankt Gallen mit Zunfthäusern und traditioneller Schweizer Architektur',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Niederlassungsbewilligung C St. Gallen: Voraussetzungen und Antrag',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Vollständiger Führerschein zur Bewilligung C im Kanton St. Gallen: 10 Jahre Wohnsitz (5 für EU/EFTA), Integrationskriterien, Sprache, Antragsverfahren und Erneuerung.',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Eingang eines Schweizer Gemeindebüros, in dem Aufenthalts- und Domizilerlaubnisse beantragt werden',
 };
 
 export default blogMetaChDe;

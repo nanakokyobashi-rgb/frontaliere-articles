@@ -13393,6 +13393,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'permesso-c-san-gallo-residenza-lunga',
+    category: 'pratico',
+    date: '2026-08-27T05:45:51.936Z',
+    image: '/images/blog/permesso-c-san-gallo-residenza-lunga.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

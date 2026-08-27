@@ -4465,6 +4465,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.title': 'Impôts Saint-Gall : taux, échelonnements et déductions',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.excerpt': 'Comment fonctionnent les impôts cantonaux et communaux dans le canton de Saint-Gall : taux, tranches, déductions admises et délais de déclaration.',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.imageAlt': 'Vue aérienne de la vieille ville de Saint-Gall avec maisons de corporations historiques',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Permis domicile C Saint-Gall : exigences et demande',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Guide complet du permis C dans le canton de Saint-Gall : 10 ans de résidence (5 ans pour l\'UE/AELE), critères d\'intégration, langue, procédure de demande et de renouvellement.',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Entrée d\'un bureau communal suisse où les permis de résidence et de domicile sont demandés',
 };
 
 export default blogMetaChFr;

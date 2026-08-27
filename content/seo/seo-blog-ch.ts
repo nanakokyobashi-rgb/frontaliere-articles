@@ -57935,6 +57935,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-c-san-gallo-residenza-lunga': {
+    title: 'Permesso domicilio C San Gallo: requisiti e domanda',
+    description: 'Guida al permesso C nel canton San Gallo: 10 anni residenza (5 UE/AELS), criteri integrazione, lingua, documenti, procedura step-by-step e rinnovo.',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, domicilio, gallo, requisiti',
+    ogTitle: 'Permesso C San Gallo: come ottenerlo',
+    ogDescription: 'Guida completa al permesso di domicilio C nel canton San Gallo: anni di residenza richiesti, criteri di integrazione, conoscenza lingua, documenti necessari, procedura di domanda e rinnovo quinquennale.',
+    canonicalPath: '/articoli-svizzera/permesso-c-san-gallo-residenza-lunga/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso domicilio C San Gallo: requisiti e domanda",
+      "description": "Guida al permesso C nel canton San Gallo: 10 anni residenza (5 UE/AELS), criteri integrazione, lingua, documenti, procedura step-by-step e rinnovo.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-c-san-gallo-residenza-lunga.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Ingresso di un ufficio comunale svizzero dove si richiedono i permessi di soggiorno e domicilio"
+      },
+      "datePublished": "2026-08-27T05:45:51+00:00",
+      "dateModified": "2026-08-27T05:45:51+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-c-san-gallo-residenza-lunga/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

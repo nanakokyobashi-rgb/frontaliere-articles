@@ -1,8 +1,5 @@
 {
   "keywords": [
-    "premi cassa malati canton Uri e riduzione premi",
-    "permesso di dimora B canton Uri requisiti e rinnovo",
-    "permesso di domicilio C canton Uri requisiti e domanda",
     "assegni familiari canton Uri importi e domanda",
     "apprendistato e formazione professionale canton Uri",
     "spesa alimentare svizzera o italia conviene frontaliere",
@@ -499,7 +496,10 @@
     "patente di guida canton Appenzello Interno conversione ed esami",
     "salari e mercato del lavoro canton Lucerna settori e livelli",
     "patente di guida canton Lucerna conversione ed esami",
-    "imposta di successione e donazione canton Appenzello Interno aliquote"
+    "imposta di successione e donazione canton Appenzello Interno aliquote",
+    "imposte cantonali canton San Gallo aliquote e deduzioni",
+    "premi cassa malati canton San Gallo e riduzione premi",
+    "permesso di dimora B canton San Gallo requisiti e rinnovo"
   ],
   "strikes": {
     "frontaliere farmacista ticino stipendio requisiti": 3,

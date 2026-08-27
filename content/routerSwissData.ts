@@ -1514,6 +1514,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'salari-appenzello-interno-settori': { it: 'salari-appenzello-interno-settori', en: 'salaries-appenzell-rhodes-sectors', de: 'loehne-appenzell-innerrhoden-bereiche', fr: 'salaires-appenzell-rhodes-secteurs' },
  'imposta-successione-appenzello': { it: 'imposta-successione-appenzello', en: 'inheritance-tax-appenzell', de: 'erbschaftsteuer-appenzell', fr: 'impot-succession-appenzelle' },
  'imposte-cantonali-san-gallo-aliquote-deduzioni': { it: 'imposte-cantonali-san-gallo-aliquote-deduzioni', en: 'cantonal-taxes-st-gallen-rates-deductions', de: 'kantonale-steuern-st-gallen-satze-abzuege', fr: 'impots-cantonaux-saint-gall-taux-deductions' },
+ 'permesso-c-san-gallo-residenza-lunga': { it: 'permesso-c-san-gallo-residenza-lunga', en: 'residence-permit-c-canton-st-gallen-requirements', de: 'aufenthaltserlaubnis-c-kanton-st-gallen-bedingungen', fr: 'permis-domicile-c-canton-saint-gall-exigences' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

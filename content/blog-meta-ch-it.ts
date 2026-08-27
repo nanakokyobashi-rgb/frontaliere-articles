@@ -4465,6 +4465,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.title': 'Imposte San Gallo: aliquote, scaglioni e deduzioni',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.excerpt': 'Come funzionano le imposte cantonali e comunali nel Cantone di San Gallo: aliquote, scaglioni, deduzioni ammesse e scadenze per la dichiarazione.',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.imageAlt': 'Vista aerea del centro storico di San Gallo con architettura svizzera tradizionale e case d\'arte',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Permesso domicilio C San Gallo: requisiti e domanda',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Guida completa al permesso C nel cantone di San Gallo: 10 anni residenza (5 per UE/AELS), criteri integrazione, lingua, procedura domanda e rinnovo.',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Ingresso di un ufficio comunale svizzero dove si richiedono i permessi di soggiorno e domicilio',
 };
 
 export default blogMetaChIt;

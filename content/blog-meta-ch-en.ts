@@ -4465,6 +4465,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.title': 'St. Gallen taxes: rates, brackets and deductions',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.excerpt': 'How cantonal and municipal taxes work in the Canton of St. Gallen: rates, brackets, allowable deductions and deadlines for filing.',
     'blog.article.imposte-cantonali-san-gallo-aliquote-deduzioni.imageAlt': 'Aerial view of old town Sankt Gallen with historic guild houses and traditional Swiss architecture',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Residence permit C St. Gallen: requirements and application',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Complete Guide to the C permit in the canton of St. Gallen: 10 years residence (5 for EU/EFTA), integration criteria, language, application and renewal procedure.',
+    'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Entrance to a Swiss municipal office where residence and domicile permits are requested',
 };
 
 export default blogMetaChEn;
