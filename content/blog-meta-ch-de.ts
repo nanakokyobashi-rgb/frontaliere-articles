@@ -4504,6 +4504,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.processo-mirabaud-corruzione.title': 'Ehemaliger Vorsitzender der SBVg vor Gericht wegen Korruption und Geldwäsche',
     'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ehemaliger Präsident der Schweizerischen Bankiervereinigung, vom TPF wegen Korruption kuwaitischer Gelder angeklagt. 24 Monate Bewährungsstrafe beantragt.',
     'blog.article.processo-mirabaud-corruzione.imageAlt': 'Justizpalast Lausanne, Sitz des Bundesstrafgerichts, wo Pierre Mirabaud vor Gericht steht',
+    'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino: Erträge -6%, Zinsen gewichtet',
+    'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Im ersten Halbjahr 2026 sanken die Erträge der BancaStato Ticino um 6% auf CHF 153 Mio. Das Betriebsergebnis sinkt um 22%, während der Reingewinn durch ausserordentliche Erträge stabil bleibt.',
+    'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Panoramablick auf Luganos Uferpromenade mit Finanzgebäuden, See und Alpen im Hintergrund',
 };
 
 export default blogMetaChDe;

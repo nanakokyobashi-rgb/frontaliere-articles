@@ -4504,6 +4504,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.processo-mirabaud-corruzione.title': 'Ancien président d\'ASB jugé pour corruption et blanchiment',
     'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ancien président de l\'Association suisse des banquiers, poursuivi par le TPF pour corruption de fonds koweïtiens. 24 mois de prison avec sursis requis.',
     'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palais de Justice de Lausanne, siège de la Cour pénale fédérale, où Pierre Mirabaud est jugé',
+    'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino : chiffre d\'affaires -6 %, taux de pesage',
+    'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Au premier semestre 2026, les revenus de BancaStato Ticino chutent de 6 % à 153 millions de CHF. Le résultat d\'exploitation baisse de 22 %, tandis que le bénéfice net reste stable grâce aux produits exceptionnels.',
+    'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Vue panoramique du front de lac de Lugano avec le quartier financier et les Alpes en arrière-plan',
 };
 
 export default blogMetaChFr;

@@ -4504,6 +4504,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.processo-mirabaud-corruzione.title': 'Former ASB president on trial for corruption and money laundering',
     'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, former president of the Swiss Bankers Association, tried by the TPF for bribery of Kuwaiti funds. 24 months suspended sentence requested.',
     'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palace of Justice in Lausanne, seat of the Federal Criminal Court, where Pierre Mirabaud is on trial',
+    'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStati Ticino: revenues -6%, weighing rates',
+    'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'In the first half of 2026, BancaStati Ticino\'s revenues fell by 6% to CHF 153 million. The result for the year fell by 22%, while net profit remained stable thanks to extraordinary income.',
+    'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Panoramic view of Lugano\'s lakefront with financial district buildings and Alps in the background',
 };
 
 export default blogMetaChEn;

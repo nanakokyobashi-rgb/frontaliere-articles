@@ -4504,6 +4504,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.processo-mirabaud-corruzione.title': 'Ex presidente ASB a processo per corruzione e riciclaggio',
     'blog.article.processo-mirabaud-corruzione.excerpt': 'Pierre Mirabaud, ex presidente dell\'Associazione svizzera dei banchieri, processato dal TPF per corruzione di fondi kuwaitiani. Richiesti 24 mesi di pena sospesa.',
     'blog.article.processo-mirabaud-corruzione.imageAlt': 'Palazzo di Giustizia di Losanna, sede del Tribunale penale federale, dove è processato Pierre Mirabaud',
+    'blog.article.bancasto-ricavi-calo-semestre.title': 'BancaStato Ticino: ricavi -6%, pesano tassi',
+    'blog.article.bancasto-ricavi-calo-semestre.excerpt': 'Nel primo semestre 2026 i ricavi della BancaStato Ticino calano del 6% a 153 milioni CHF. Il risultato d\'esercizio cala del 22%, mentre l\'utile netto rimane stabile grazie a proventi straordinari.',
+    'blog.article.bancasto-ricavi-calo-semestre.imageAlt': 'Vista panoramica del waterfront di Lugano con edifici finanziari, lago e Alpi sullo sfondo',
 };
 
 export default blogMetaChIt;
