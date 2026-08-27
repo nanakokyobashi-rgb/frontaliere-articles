@@ -1063,6 +1063,24 @@ const CLAUDE_CLI_MIN_TIMEOUT_MS = 180_000;
 // schema ammette null. Vedi trace.salvage() e _salvageClaudeCliPayload.
 const CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL = 'StructuredOutput';
 
+// Il canale `text` di `trace.salvage()` arriva a delta (a differenza del
+// `tool_use`, sempre a blocco intero): senza punteggiatura terminale
+// riconoscibile non c'e' modo di distinguere una frase completa da un
+// frammento tagliato a meta' parola dal SIGKILL. `.`/`!`/`?`/`…`/`:`/`;`/em-dash,
+// seguiti da eventuale chiusura di virgolette/parentesi (incluse le virgolette
+// basse tedesche „…" e ‚…', che chiudono con U+201C/U+2018, non U+201D/U+2019),
+// sono l'unico segnale disponibile. `:`/`;`/em-dash sono terminazioni legittime
+// in liste/markdown, non solo `.!?…`: escluderli scartava testo completo come
+// "troncato" e forzava un fallback DeepL non necessario sui locale non-IT.
+const CLAUDE_CLI_TEXT_SALVAGE_COMPLETE_RE = /[.!?…:;—][)\]'"’”»“‘]*$/;
+
+// Cap sul buffer di `feed()` in createClaudeCliStreamTrace fra due `\n`.
+// Ogni evento `stream-json` legittimo (compreso un `tool_use` con l'intero
+// articolo strutturato) resta ben sotto: oltre questa soglia una riga senza
+// terminatore non e' un evento grande, e' anomala — senza cap crescerebbe
+// senza limite fino al timeout (follow-up #6034 item 3).
+const CLAUDE_CLI_STREAM_LINE_CAP = 1_000_000;
+
 // Tetto per una singola chiamata al CLI, per quanto grande sia l'allowance
 // residua. Serve a impedire che una sezione lunga (allowance 2400s) regali
 // 800s a UNA chiamata: oltre i 600s una chiamata che non ha finito non e' piu'
@@ -5457,6 +5475,13 @@ export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
         buffer = buffer.slice(nl + 1);
         nl = buffer.indexOf('\n');
       }
+      // Nessun `\n` trovato e il residuo ha superato il cap: si scarta come
+      // riga illeggibile invece di continuare ad accumulare — vedi
+      // CLAUDE_CLI_STREAM_LINE_CAP.
+      if (buffer.length > CLAUDE_CLI_STREAM_LINE_CAP) {
+        state.malformed += 1;
+        buffer = '';
+      }
     },
     /**
      * A processo chiuso il residuo senza `\n` e' una riga intera — e nei mock
@@ -5487,10 +5512,14 @@ export function createClaudeCliStreamTrace({ now = Date.now } = {}) {
       const t = state.text.trim();
       // Senza schema il canale e' il testo, che PUO' essere troncato a meta'
       // (i blocchi `text` arrivano a delta). Si salva solo se e' JSON intero,
-      // oppure se non ha forma di JSON e quindi non c'e' un intero da attendere.
+      // oppure se ha una terminazione di frase riconoscibile: senza schema non
+      // c'e' un "intero" da attendere, ma un frammento tagliato a meta' parola
+      // dal SIGKILL non finisce quasi mai su punteggiatura terminale.
       if (!t) return null;
       if (/^[{[]/.test(t)) {
         try { JSON.parse(t); } catch { return null; }
+      } else if (!CLAUDE_CLI_TEXT_SALVAGE_COMPLETE_RE.test(t)) {
+        return null;
       }
       return { text: t, source: 'assistant/text', attempts: 0 };
     },
