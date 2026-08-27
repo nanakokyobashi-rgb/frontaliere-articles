@@ -32520,6 +32520,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'costo-vita-salari-lgn',
+ category: 'novita',
+ date: '2026-08-27T11:43:35.562Z',
+ image: '/images/blog/costo-vita-salari-lgn.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

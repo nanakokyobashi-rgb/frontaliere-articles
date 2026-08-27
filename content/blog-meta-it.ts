@@ -10871,6 +10871,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.finanziamento-statuto-s-avs.title': 'Statuto S e 13esima AVS: il Ticino chiede più fondi',
     'blog.article.finanziamento-statuto-s-avs.excerpt': 'Il Canton Ticino rivendica co-finanziamento federale per 1.700 rifugiati ucraini e 13esima AVS. Governo cantonale vs Berna: impatto su tasse e mercato del lavoro.',
     'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Riunione del Governo cantonale ticinese con deputati federali durante discussione su finanziamenti per rifugiati ucraini e 13esima AVS',
+    'blog.article.costo-vita-salari-lgn.title': 'Salari e appalti: la proposta CGIL Ticino per il lavoro',
+    'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona denuncia inflazione e calo della manifattura. Propone legge su appalti per proteggere i salari nel Legnanese.',
+    'blog.article.costo-vita-salari-lgn.imageAlt': 'Veduta di Lugano con uffici e aziende, panorama del confine Ticino-Lombardia',
 };
 
 export default blogMetaIt;

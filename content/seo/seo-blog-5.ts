@@ -79592,6 +79592,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-costo-vita-salari-lgn': {
+    title: 'Salari e appalti: la proposta CGIL Ticino per il lavoro',
+    description: 'CGIL Ticino Olona denuncia inflazione e crisi dei salari nell\'Alto Milanese. Propone legge su appalti per proteggere i lavoratori e contrastare la precarietà.',
+    keywords: 'frontalieri, ticino, svizzera, italia, salari, appalti, proposta, cgil',
+    ogTitle: 'CGIL Ticino: salari sotto pressione, legge su appalti',
+    ogDescription: 'Benzina oltre 2 euro, manifattura in calo nel Q1 2026, salari non al passo con l\'inflazione. La CGIL Ticino Olona lancia proposta di legge sui subappalti per proteggere i lavoratori nel territorio dell\'Alto Milanese e contrastare la dinamica',
+    canonicalPath: '/articoli-frontaliere/costo-vita-salari-lgn',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Salari e appalti: la proposta CGIL Ticino per il lavoro",
+      "description": "CGIL Ticino Olona denuncia inflazione e crisi dei salari nell'Alto Milanese. Propone legge su appalti per proteggere i lavoratori e contrastare la precarietà.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/costo-vita-salari-lgn.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Veduta di Lugano con uffici e aziende, panorama del confine Ticino-Lombardia"
+      },
+      "datePublished": "2026-08-27T11:43:35+00:00",
+      "dateModified": "2026-08-27T11:43:35+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/costo-vita-salari-lgn/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;

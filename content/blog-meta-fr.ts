@@ -10872,6 +10872,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.finanziamento-statuto-s-avs.title': 'Statuts S et 13e AVS : le Tessin demande plus de fonds',
     'blog.article.finanziamento-statuto-s-avs.excerpt': 'Le canton du Tessin revendique un cofinancement fédéral pour 1 700 réfugiés ukrainiens et la 13e AVS. Gouvernement cantonal vs Berne : impact sur les impôts et le marché du travail.',
     'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Réunion du gouvernement cantonal suisse discutant du financement fédéral pour les réfugiés ukrainiens et la 13e rente AVS',
+    'blog.article.costo-vita-salari-lgn.title': 'Salaires et marchés : la proposition CGIL Tessin pour le travail',
+    'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona dénonce l\'inflation et la baisse de la fabrication. Il propose une loi sur les marchés publics pour protéger les salaires à Legnano.',
+    'blog.article.costo-vita-salari-lgn.imageAlt': 'Vue d\'ensemble de Lugano avec bureaux et usines, paysage frontalier Tessin-Lombardie',
 };
 
 export default blogMetaFr;

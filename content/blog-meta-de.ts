@@ -10869,6 +10869,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.finanziamento-statuto-s-avs.title': 'Statut S und 13. AHV: Tessin fordert mehr Geld',
     'blog.article.finanziamento-statuto-s-avs.excerpt': 'Der Kanton Tessin beansprucht eine föderale Kofinanzierung für 1.700 ukrainische Flüchtlinge und die 13. AHV. Kantonsregierung vs. Bern: Auswirkungen auf Steuern und Arbeitsmarkt.',
     'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Schweizer Kantonsregierung berät über Bundesfinanzierung für ukrainische Flüchtlinge und 13. AVS-Rente',
+    'blog.article.costo-vita-salari-lgn.title': 'Löhne und Aufträge: der Vorschlag Cgil Tessin für die Arbeit',
+    'blog.article.costo-vita-salari-lgn.excerpt': 'Cgil Ticino Olona klagt über Inflation und Produktionsrückgang. Er schlägt ein Gesetz über die Auftragsvergabe vor, um die Löhne in Legnanese zu schützen.',
+    'blog.article.costo-vita-salari-lgn.imageAlt': 'Lugano-Übersicht mit Büros und Fabriken, Grenzlandschaft Tessin-Lombardei',
 };
 
 export default blogMetaDe;

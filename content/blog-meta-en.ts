@@ -10870,6 +10870,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.finanziamento-statuto-s-avs.title': 'Statute S and 13th AVS: Ticino asks for more funds',
     'blog.article.finanziamento-statuto-s-avs.excerpt': 'Canton Ticino claims federal co-financing for 1,700 Ukrainian refugees and 13th AVS. Cantonal government vs Bern: impact on taxes and the labour market.',
     'blog.article.finanziamento-statuto-s-avs.imageAlt': 'Swiss cantonal government meeting discussing federal funding for Ukrainian refugees and 13th AVS pension',
+    'blog.article.costo-vita-salari-lgn.title': 'Wages and contracts: the CGIL Ticino proposal for employment',
+    'blog.article.costo-vita-salari-lgn.excerpt': 'CGIL Ticino Olona denounces inflation and decline in manufacturing. Proposes a law on procurement to protect wages in Legnanese.',
+    'blog.article.costo-vita-salari-lgn.imageAlt': 'Lugano overview with offices and factories, Ticino-Lombardy border landscape',
 };
 
 export default blogMetaEn;
