@@ -10883,6 +10883,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'Les chiffres du jour pour les frontaliers – 27 août 2026 : attentes aux douanes, prix de l\'essence, taux CHF-EUR et offres d\'emploi',
     'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Bulletin du frontalier du 27 août 2026 : les files aux douanes ce matin, l\'essence la moins chère, taux franc-euro et nouvelles offres d\'emploi en Suisse.',
     'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'Les chiffres du 27 août 2026 pour les frontaliers : combien de temps on attend ce matin à chaque douane, où l\'essence coûte le moins cher, ce que vaut le franc aujourd\'hui et combien d\'offres d\'emploi sont parues en Suisse.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Frontaliere 55+ : changer de travail en Suisse',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Se réinstaller après 55 ans en tant que frontalier : impact sur le permis G, deuxième pilier, impôt à la source et nouveaux taux 2024-2033.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Travailleur frontalier de plus de 55 ans envisageant un changement d\'emploi entre l\'Italie et le Tessin',
 };
 
 export default blogMetaFr;

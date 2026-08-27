@@ -10880,6 +10880,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'Die Zahlen des Tages für Grenzgänger – 27. August 2026: Wartezeiten, Benzinpreise, CHF-EUR-Kurs und Stellenangebote',
     'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Grenzgänger-Bulletin vom 27. August 2026: Wartezeiten an den Grenzübergängen, günstigstes Benzin, Franken-Euro-Kurs und neue Stellenangebote in der Schweiz.',
     'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'Die Zahlen vom 27. August 2026 für Grenzgänger: wie lange man heute Morgen an jedem Übergang wartet, in welchen Gemeinden das Benzin am günstigsten ist, was der Franken heute wert ist und wie viele Stellen neu dazugekommen sind.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Grenzgänger über 55, Jobwechsel in der Schweiz: Was Sie wissen sollten',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Umzug nach 55 Jahren als Grenzgänger: Auswirkungen auf die Genehmigung G, zweite Säule, Quellensteuer und neue Steuersätze 2024-2033.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Grenzgänger über 55, der einen Jobwechsel zwischen Italien und Tessin prüft',
 };
 
 export default blogMetaDe;

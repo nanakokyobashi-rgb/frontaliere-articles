@@ -10881,6 +10881,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'The day\'s numbers for cross-border commuters – August 27, 2026: border waits, fuel prices, CHF-EUR rate and job listings',
     'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Cross-border brief, August 27, 2026: queues at the crossings this morning, where fuel is cheapest, the franc-euro rate and new job postings in Switzerland.',
     'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'The numbers for August 27, 2026, for cross-border commuters: how long the queue is at each crossing this morning, which towns have the cheapest fuel, what the franc is worth today and how many Swiss jobs went up.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Border worker over 55, job change in Switzerland: what to know',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Relocating after 55 years as a border worker: impact on Permit G, second pillar, tax at source and new rates 2024-2033.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Cross-border worker over 55 evaluating a job change between Italy and Ticino',
 };
 
 export default blogMetaEn;

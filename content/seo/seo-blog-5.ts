@@ -79709,6 +79709,44 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-over-55-frontaliere-ricollocamento-lavoro': {
+    title: 'Frontaliere over 55, cambio lavoro in Svizzera: cosa sapere',
+    description: 'Cambiare lavoro da frontaliere over 55: impatto su Permesso G, imposta alla fonte, LPP, esenzione €7\'500 e franchigia €10\'000 dal Nuovo Accordo 2024.',
+    keywords: 'frontalieri, ticino, svizzera, italia, over, cambio, lavoro, cosa',
+    ogTitle: 'Frontaliere over 55, cambio lavoro: cosa sapere',
+    ogDescription: 'Ricollocarsi dopo i 55 anni da frontaliere: Permesso G, imposta alla fonte, LPP, esenzione €7\'500 e franchigia €10\'000. Tutto quello che cambia con il Nuovo Accordo in vigore dal 1° gennaio 2024 e il regime transitorio 2024-2033.',
+    canonicalPath: '/articoli-frontaliere/over-55-frontaliere-ricollocamento-lavoro',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Frontaliere over 55, cambio lavoro in Svizzera: cosa sapere",
+      "description": "Cambiare lavoro da frontaliere over 55: impatto su Permesso G, imposta alla fonte, LPP, esenzione €7'500 e franchigia €10'000 dal Nuovo Accordo 2024.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/over-55-frontaliere-ricollocamento-lavoro.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Frontaliere over 55 che valuta un cambio lavoro tra Italia e Ticino"
+      },
+      "datePublished": "2026-08-27T16:17:10+00:00",
+      "dateModified": "2026-08-27T16:17:10+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/over-55-frontaliere-ricollocamento-lavoro/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
 };
 
 export default BLOG_SEO_METADATA_5;

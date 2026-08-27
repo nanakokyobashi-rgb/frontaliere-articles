@@ -32547,6 +32547,15 @@ const RAW_ARTICLES = [
  authorSlug: 'laura-bianchi',
  authorName: 'Laura Bianchi',
  },
+ {
+ id: 'over-55-frontaliere-ricollocamento-lavoro',
+ category: 'pratico',
+ date: '2026-08-27T16:17:10.654Z',
+ image: '/images/blog/over-55-frontaliere-ricollocamento-lavoro.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)

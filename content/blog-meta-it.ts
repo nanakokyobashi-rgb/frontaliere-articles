@@ -10882,6 +10882,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bollettino-frontaliere-2026-08-27.imageAlt': 'I numeri del giorno per i frontalieri – 27 agosto 2026: attese ai valichi, prezzi benzina, cambio franco-euro e annunci di lavoro',
     'blog.article.bollettino-frontaliere-2026-08-27.seoDescription': 'Bollettino frontalieri del 27 agosto 2026: code ai valichi stamattina, dove la benzina costa meno, cambio franco-euro e nuovi annunci di lavoro in Svizzera.',
     'blog.article.bollettino-frontaliere-2026-08-27.ogDescription': 'I numeri del 27 agosto 2026 per i frontalieri: quanto si aspetta a ogni valico stamattina, in quali comuni conviene fare il pieno, quanto vale oggi il franco e quanti annunci di lavoro sono usciti in Svizzera.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.title': 'Frontaliere over 55, cambio lavoro in Svizzera: cosa sapere',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.excerpt': 'Ricollocarsi dopo i 55 anni da frontaliere: impatto su Permesso G, secondo pilastro, imposta alla fonte e nuove aliquote 2024-2033.',
+    'blog.article.over-55-frontaliere-ricollocamento-lavoro.imageAlt': 'Frontaliere over 55 che valuta un cambio lavoro tra Italia e Ticino',
 };
 
 export default blogMetaIt;
