@@ -4468,6 +4468,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Permis domicile C Saint-Gall : exigences et demande',
     'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Guide complet du permis C dans le canton de Saint-Gall : 10 ans de résidence (5 ans pour l\'UE/AELE), critères d\'intégration, langue, procédure de demande et de renouvellement.',
     'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Entrée d\'un bureau communal suisse où les permis de résidence et de domicile sont demandés',
+    'blog.article.neutralita-ruolo-attivo.title': 'Une neutralité crédible nécessite un rôle actif',
+    'blog.article.neutralita-ruolo-attivo.excerpt': 'L\'historien Matthieu Gillabert analyse comment la doctrine de la neutralité suisse a évolué, pour comprendre le rôle actif nécessaire à sa crédibilité.',
+    'blog.article.neutralita-ruolo-attivo.imageAlt': 'Bâtiment administratif suisse représentant les institutions fédérales et la neutralité dans la politique étrangère',
 };
 
 export default blogMetaChFr;

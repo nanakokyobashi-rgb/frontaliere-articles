@@ -4468,6 +4468,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Permesso domicilio C San Gallo: requisiti e domanda',
     'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Guida completa al permesso C nel cantone di San Gallo: 10 anni residenza (5 per UE/AELS), criteri integrazione, lingua, procedura domanda e rinnovo.',
     'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Ingresso di un ufficio comunale svizzero dove si richiedono i permessi di soggiorno e domicilio',
+    'blog.article.neutralita-ruolo-attivo.title': 'Una neutralità credibile richiede ruolo attivo',
+    'blog.article.neutralita-ruolo-attivo.excerpt': 'Lo storico Matthieu Gillabert analizza come la dottrina della neutralità svizzera si è evoluta, per comprendere il ruolo attivo necessario alla sua credibilità.',
+    'blog.article.neutralita-ruolo-attivo.imageAlt': 'Palazzo amministrativo svizzero che rappresenta le istituzioni federali e la neutralità nella politica estera',
 };
 
 export default blogMetaChIt;

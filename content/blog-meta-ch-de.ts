@@ -4468,6 +4468,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Niederlassungsbewilligung C St. Gallen: Voraussetzungen und Antrag',
     'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Vollständiger Führerschein zur Bewilligung C im Kanton St. Gallen: 10 Jahre Wohnsitz (5 für EU/EFTA), Integrationskriterien, Sprache, Antragsverfahren und Erneuerung.',
     'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Eingang eines Schweizer Gemeindebüros, in dem Aufenthalts- und Domizilerlaubnisse beantragt werden',
+    'blog.article.neutralita-ruolo-attivo.title': 'Glaubwürdige Neutralität erfordert eine aktive Rolle',
+    'blog.article.neutralita-ruolo-attivo.excerpt': 'Der Historiker Matthieu Gillabert analysiert, wie sich die Schweizer Neutralitätsdoktrin entwickelt hat, um die aktive Rolle zu verstehen, die für ihre Glaubwürdigkeit notwendig ist.',
+    'blog.article.neutralita-ruolo-attivo.imageAlt': 'Schweizer Verwaltungsgebäude, das föderale Institutionen und Neutralität in der Außenpolitik darstellt',
 };
 
 export default blogMetaChDe;

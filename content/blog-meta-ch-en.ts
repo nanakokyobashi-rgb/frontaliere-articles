@@ -4468,6 +4468,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-c-san-gallo-residenza-lunga.title': 'Residence permit C St. Gallen: requirements and application',
     'blog.article.permesso-c-san-gallo-residenza-lunga.excerpt': 'Complete Guide to the C permit in the canton of St. Gallen: 10 years residence (5 for EU/EFTA), integration criteria, language, application and renewal procedure.',
     'blog.article.permesso-c-san-gallo-residenza-lunga.imageAlt': 'Entrance to a Swiss municipal office where residence and domicile permits are requested',
+    'blog.article.neutralita-ruolo-attivo.title': 'Credible neutrality requires an active role',
+    'blog.article.neutralita-ruolo-attivo.excerpt': 'Historian Matthieu Gillabert analyzes how the doctrine of Swiss neutrality has evolved, to understand the active role necessary for its credibility.',
+    'blog.article.neutralita-ruolo-attivo.imageAlt': 'Swiss administrative building representing federal institutions and neutrality in foreign policy',
 };
 
 export default blogMetaChEn;
