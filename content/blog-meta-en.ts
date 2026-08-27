@@ -10855,6 +10855,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen size 180 seats: CHF 60m savings',
     'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Renovation announced on August 26, 2026. Net profit up 18.9%, but the bank is focused on efficiency. Cuts will affect up to 180 employees out of 10,972. Impact on the Swiss labour market.',
     'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'Modern banking and financial district in Lugano with contemporary office buildings overlooking the lake',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Entry documents Switzerland: border guides 2026',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passport, G permit, identity card: mandatory documents and procedures to cross the border. New 2024 Agreement, Ticino crossings, customs controls and tax rebates.',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Swiss residence permit (Permesso G) and Italian passport on office desk with Italy-Switzerland flags blurred in background',
 };
 
 export default blogMetaEn;

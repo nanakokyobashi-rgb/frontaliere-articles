@@ -10856,6 +10856,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen taglia 180 posti: 60 mln CHF di risparmi',
     'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Ristrutturazione annunciata il 26 agosto 2026. Utile netto in crescita del 18,9%, ma la banca punta su efficienza. Tagli interesseranno fino a 180 dipendenti su 10.972. Impatto sul mercato del lavoro svizzero.',
     'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'Centro finanziario di Lugano con edifici moderni per uffici e vista sul lago',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Documenti ingresso Svizzera: guida frontalieri 2026',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passaporto, permesso G, carta d\'identità: documenti obbligatori e procedure per varcare il confine. Nuovo Accordo 2024, valichi ticinesi, controlli dogana e ristorni fiscali.',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Passaporto italiano e permesso G svizzero su scrivania con bandiere Italia-Svizzera, ambiente ufficio confine Ticino',
 };
 
 export default blogMetaIt;

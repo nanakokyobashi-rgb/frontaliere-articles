@@ -10857,6 +10857,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.raiffeisen-ristrutturazione-2026.title': 'Raiffeisen coupe 180 places : 60 millions CHF d\'économies',
     'blog.article.raiffeisen-ristrutturazione-2026.excerpt': 'Rénovation annoncée le 26 août 2026. Bénéfice net en hausse de 18,9 %, mais la banque mise sur l\'efficacité. Les coupes concerneront jusqu\'à 180 salariés sur 10 972. Impact sur le marché du travail suisse.',
     'blog.article.raiffeisen-ristrutturazione-2026.imageAlt': 'District financier moderne à Lugano avec bâtiments de bureaux contemporains et vue sur le lac',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.title': 'Documents d\'entrée Suisse : guide frontaliers 2026',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.excerpt': 'Passeport, permis G, carte d\'identité : documents obligatoires et procédures pour franchir la frontière. Nouvel accord 2024, cols tessinois, contrôles douaniers et dédommagements fiscaux.',
+    'blog.article.permesso-g-documenti-ingresso-svizzera.imageAlt': 'Permis de séjour suisse (Permesso G) et passeport italien sur le bureau avec drapeaux Italie-Suisse en arrière-plan',
 };
 
 export default blogMetaFr;
