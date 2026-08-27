@@ -4495,6 +4495,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.neolaureati-disoccupazione-svizzera.title': 'Neolaureati, disoccupazione in salita: i dati UST',
     'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master UNI al 6,4%, bachelor SUP al 4,9%. UST: tra 2023-2025 cresce l\'inserimento difficile nel mercato. Settori colpiti e scenari.',
     'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Giovane neolaureato che consulta offerte di lavoro su laptop in biblioteca universitaria svizzera',
+    'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicola e siccità: il Governo vuole più fondi',
+    'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Il Consiglio federale chiede 71,5 milioni di franchi per sostenere foreste e agricoltori colpiti dalla siccità record del 2026.',
+    'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Campo di girasoli completamente secco a causa della siccità estiva in Svizzera, luglio 2026',
 };
 
 export default blogMetaChIt;

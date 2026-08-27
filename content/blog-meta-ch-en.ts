@@ -4495,6 +4495,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.neolaureati-disoccupazione-svizzera.title': 'Recent graduates, rising unemployment: UST DATA',
     'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master UNI at 6.4%, bachelor sup at 4.9%. UST: between 2023-2025 the difficult insertion in the market grows. Affected sectors and scenarios.',
     'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Young Swiss graduate reviewing job offers on laptop in university library',
+    'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicola and drought: the Government wants more funds',
+    'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'The Federal Council is asking for CHF 71.5 million to support forests and farmers affected by the record drought of 2026.',
+    'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Withered sunflower field due to extreme summer drought in Switzerland, July 2026',
 };
 
 export default blogMetaChEn;

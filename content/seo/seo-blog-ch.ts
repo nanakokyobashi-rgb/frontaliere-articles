@@ -58325,6 +58325,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-governo-finanzia-siccita-agricoltura': {
+    title: 'Canicola e siccità: il Governo vuole più fondi',
+    description: 'Il Consiglio federale chiede al Parlamento 71,5 milioni di franchi per sostenere agricoltura e foreste colpite dalla siccità record del 2026: crediti',
+    keywords: 'frontalieri, ticino, svizzera, italia, canicola, siccità, governo, vuole',
+    ogTitle: 'Governo: 71,5 milioni per siccità e agricoltura',
+    ogDescription: 'Consiglio federale stanzia 71,5 milioni CHF contro siccità 2026: 54 milioni agricoltura, 17,5 milioni foreste. Crediti senza interessi, valutazione ulteriori misure entro ottobre. Timeline autunno.',
+    canonicalPath: '/articoli-svizzera/governo-finanzia-siccita-agricoltura/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Canicola e siccità: il Governo vuole più fondi",
+      "description": "Il Consiglio federale chiede al Parlamento 71,5 milioni di franchi per sostenere agricoltura e foreste colpite dalla siccità record del 2026: crediti",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/governo-finanzia-siccita-agricoltura.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Campo di girasoli completamente secco a causa della siccità estiva in Svizzera, luglio 2026"
+      },
+      "datePublished": "2026-08-27T12:01:42+00:00",
+      "dateModified": "2026-08-27T12:01:42+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/governo-finanzia-siccita-agricoltura/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

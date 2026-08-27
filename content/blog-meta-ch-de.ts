@@ -4495,6 +4495,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.neolaureati-disoccupazione-svizzera.title': 'Hochschulabsolventen, steigende Arbeitslosigkeit: die BFS-DATEN',
     'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master Uni zu 6,4%, Bachelor SUP zu 4,9%. USt: Zwischen 2023 und 2025 nimmt die schwierige Markteinführung zu. Betroffene Sektoren und Szenarien.',
     'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Junger Hochschulabgänger durchsieht Stellenangebote auf Laptop in einer Schweizer Universität',
+    'blog.article.governo-finanzia-siccita-agricoltura.title': 'Hitzewallungen und Dürre: Regierung will mehr Geld',
+    'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Der Bundesrat fordert 71,5 Millionen Franken zur Unterstützung von Wäldern und Bauern, die von der Rekordtrockenheit von 2026 betroffen sind.',
+    'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Verdorrtes Sonnenblumenfeld aufgrund extremer Sommertrockentheit in der Schweiz, Juli 2026',
 };
 
 export default blogMetaChDe;

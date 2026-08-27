@@ -4495,6 +4495,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.neolaureati-disoccupazione-svizzera.title': 'Nouveaux diplômés, chômage en hausse : les données DE l\'OFS',
     'blog.article.neolaureati-disoccupazione-svizzera.excerpt': 'Master Uni à 6,4 %, baccalauréat sup à 4,9 %. OFS : entre 2023 et 2025, l\'insertion difficile sur le marché augmente. Secteurs touchés et scénarios.',
     'blog.article.neolaureati-disoccupazione-svizzera.imageAlt': 'Jeune diplômé suisse consultant des offres d\'emploi sur ordinateur portable à la bibliothèque universitaire',
+    'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicule et sécheresse : le gouvernement veut plus de fonds',
+    'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Le Conseil fédéral demande 71,5 millions de francs pour soutenir les forêts et les agriculteurs touchés par la sécheresse record de 2026.',
+    'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Champ de tournesols complètement desséché par sécheresse estivale extrême en Suisse, juillet 2026',
 };
 
 export default blogMetaChFr;
