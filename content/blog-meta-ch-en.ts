@@ -4531,6 +4531,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.frontiera-asilo-competenze.title': 'Asylum and security: costs on border municipalities',
     'blog.article.frontiera-asilo-competenze.excerpt': 'An interpellation in Balerna rekindles the debate on the division of competences and funding between the Confederation, Canton and Municipalities in the management of asylum.',
     'blog.article.frontiera-asilo-competenze.imageAlt': 'View of Mendrisio in Mendrisiotto region, Swiss frontier municipality at center of asylum debate',
+    'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta of Basel: profit +2%, revenue -2%',
+    'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'The Swiss agrochemical giant closed the first half of the year with operating profit up despite the drop in revenues. Profitability grows while demand shrinks.',
+    'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Syngenta headquarters in Basel, symbol of Swiss economy in agrochemical sector',
 };
 
 export default blogMetaChEn;

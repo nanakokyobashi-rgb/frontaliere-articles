@@ -4531,6 +4531,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.frontiera-asilo-competenze.title': 'Asile et sécurité : coûts sur les communes frontalières',
     'blog.article.frontiera-asilo-competenze.excerpt': 'Une interpellation à Balerna relance le débat sur la répartition des compétences et le financement entre la Confédération, le canton et les communes dans la gestion de l\'asile.',
     'blog.article.frontiera-asilo-competenze.imageAlt': 'Vue de Mendrisio dans le Mendrisiotto, commune frontalière tessinoise au centre du débat asile',
+    'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta Bâle : bénéfice +2%, chiffre d\'affaires -2%',
+    'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'Le géant agrochimique suisse clôture le premier semestre avec un bénéfice d\'exploitation en hausse malgré la baisse de ses revenus. La rentabilité augmente alors que la demande se contracte.',
+    'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Siège de Syngenta à Bâle, symbole de l\'économie suisse dans le secteur agrochimique',
 };
 
 export default blogMetaChFr;

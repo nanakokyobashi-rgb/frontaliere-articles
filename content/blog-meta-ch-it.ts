@@ -4531,6 +4531,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.frontiera-asilo-competenze.title': 'Asilo e sicurezza: costi sui comuni di frontiera',
     'blog.article.frontiera-asilo-competenze.excerpt': 'Un\'interpellanza a Balerna riaccende il dibattito su divisione di competenze e finanziamento fra Confederazione, Cantone e Comuni nella gestione dell\'asilo.',
     'blog.article.frontiera-asilo-competenze.imageAlt': 'Veduta di Mendrisio nel Mendrisiotto, comune ticinese al centro del dibattito su asilo',
+    'blog.article.syngenta-utili-ricavi-semestre.title': 'Syngenta di Basilea: utile +2%, ricavi -2%',
+    'blog.article.syngenta-utili-ricavi-semestre.excerpt': 'Il colosso agrochimico svizzero chiude il primo semestre con utile operativo in crescita nonostante il calo dei ricavi. La redditività cresce mentre la domanda si contrae.',
+    'blog.article.syngenta-utili-ricavi-semestre.imageAlt': 'Sede di Syngenta a Basilea, simbolo dell\'economia svizzera nel settore agrochimico',
 };
 
 export default blogMetaChIt;

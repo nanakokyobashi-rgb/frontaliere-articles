@@ -1536,6 +1536,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'tasso-riferimento-affitti-2026': { it: 'tasso-riferimento-affitti-2026', en: 'reference-rate-rents-2026', de: 'referenzzins-mieten-2026', fr: 'taux-reference-loyers-2026' },
  'parmelin-agricoltura-siccita': { it: 'parmelin-agricoltura-siccita', en: 'parmelin-agriculture-drought', de: 'parmelin-landwirtschaft-duerre', fr: 'parmelin-agriculture-secheresse' },
  'frontiera-asilo-competenze': { it: 'frontiera-asilo-competenze', en: 'frontier-asylum-responsibilities', de: 'grenzgemeinden-asyl-kompetenzen', fr: 'frontaliers-asile-responsabilites' },
+ 'syngenta-utili-ricavi-semestre': { it: 'syngenta-utili-ricavi-semestre', en: 'syngenta-profits-revenue-semester', de: 'syngenta-gewinne-umsatz-halbjahr', fr: 'syngenta-benefices-revenus-semestre' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

@@ -13591,6 +13591,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'syngenta-utili-ricavi-semestre',
+    category: 'novita',
+    date: '2026-08-27T19:25:33.676Z',
+    image: '/images/blog/syngenta-utili-ricavi-semestre.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

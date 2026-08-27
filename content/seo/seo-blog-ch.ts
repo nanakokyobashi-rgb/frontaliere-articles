@@ -58793,6 +58793,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-syngenta-utili-ricavi-semestre': {
+    title: 'Syngenta di Basilea: utile +2%, ricavi -2% | Frontaliere Ticino',
+    description: 'Syngenta chiude il primo semestre con utile Ebitda +2% a 2,4 miliardi USD nonostante ricavi in calo del 2%. Analisi dell\'economia svizzera nel settore',
+    keywords: 'frontalieri, ticino, svizzera, italia, syngenta, basilea, utile, ricavi',
+    ogTitle: 'Syngenta: utile +2%, ricavi -2% nel primo semestre',
+    ogDescription: 'Il colosso agrochimico con sede a Basilea cresce gli utili del 2% a 2,4 miliardi di dollari, mentre i ricavi calano del 2% a 12,2 miliardi. Controllata da ChemChina dal 2017, l\'azienda migliora i margini operativi comprimendo i costi.',
+    canonicalPath: '/articoli-svizzera/syngenta-utili-ricavi-semestre/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Syngenta di Basilea: utile +2%, ricavi -2%",
+      "description": "Syngenta chiude il primo semestre con utile Ebitda +2% a 2,4 miliardi USD nonostante ricavi in calo del 2%. Analisi dell'economia svizzera nel settore",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/syngenta-utili-ricavi-semestre.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede di Syngenta a Basilea, simbolo dell'economia svizzera nel settore agrochimico"
+      },
+      "datePublished": "2026-08-27T19:25:33+00:00",
+      "dateModified": "2026-08-27T19:25:33+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/syngenta-utili-ricavi-semestre/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;
