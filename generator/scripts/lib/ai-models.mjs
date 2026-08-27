@@ -2917,7 +2917,6 @@ async function _persistScoresToFirestore() {
     const entry = {
       modelId,                 // Original model ID (with slashes)
       score,
-      lastUsed: now,
       updatedAt: now,
     };
 
@@ -2928,6 +2927,10 @@ async function _persistScoresToFirestore() {
     // has no delta: the counter fields are OMITTED rather than written as 0,
     // because restating a stale absolute is exactly the defect being removed.
     const counterDelta = deltaSnapshot.get(modelId);
+    // lastUsed anchors _decayScore's age-since-success calculation: only a
+    // success moves it forward, so a model that fails on every run ages out
+    // of the >24h decay bucket instead of looking perpetually fresh.
+    if (counterDelta?.successes) entry.lastUsed = now;
     if (counterDelta) {
       if (_firestoreFieldValue && typeof _firestoreFieldValue.increment === 'function') {
         if (counterDelta.successes) entry.successes = _firestoreFieldValue.increment(counterDelta.successes);
