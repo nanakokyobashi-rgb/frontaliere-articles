@@ -165,6 +165,22 @@ describe('senza schema il canale e\' il testo, ma solo se e\' intero', () => {
     assert.equal(t.salvage(), null);
   });
 
+  it('un frammento non-JSON senza punteggiatura terminale NON viene salvato (#628): tagliato a meta\' parola dal SIGKILL', () => {
+    const t = createClaudeCliStreamTrace();
+    const parla = (text) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text }] } });
+    t.feed(`${INIT}\n${parla('Il canone locativo medio a Lugano e\' di circa 1800 franchi al mese, in aum')}\n`);
+    assert.equal(t.salvage(), null, 'senza terminazione riconoscibile un frammento a meta\' frase non e\' distinguibile da uno completo');
+  });
+
+  it('due punti, punto e virgola ed em-dash contano come terminazione legittima (liste/markdown, #628)', () => {
+    const parla = (text) => JSON.stringify({ type: 'assistant', message: { content: [{ type: 'text', text }] } });
+    for (const fine of ['Ecco i punti chiave:', 'Attenzione;', 'Una frase completa—']) {
+      const t = createClaudeCliStreamTrace();
+      t.feed(`${INIT}\n${parla(fine)}\n`);
+      assert.ok(t.salvage(), `"${fine}" deve contare come frase completa, non solo .!?`);
+    }
+  });
+
   it('non duplica se il canale text e\' cumulativo (snapshot) invece che a delta (#509)', () => {
     // Non e' verificato contro l'output reale del CLI se un evento `assistant`
     // successivo ripete da capo quanto gia' inviato (snapshot) o porta solo il
@@ -238,5 +254,22 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
       'il breaker deve essere contato PRIMA della carve-out, altrimenti la carve-out lo salta',
     );
     assert.ok(carve.length > 0);
+  });
+});
+
+describe('il buffer di feed() ha un cap: una riga senza terminatore non cresce senza limite (#628)', () => {
+  it('un residuo oltre 1_000_000 caratteri senza `\\n` viene scartato come riga malformata', () => {
+    const t = createClaudeCliStreamTrace();
+    t.feed(`${INIT}\n`);
+    t.feed('x'.repeat(1_000_001));
+    assert.equal(t.state.malformed, 1, 'oltre il cap il residuo deve contarsi come riga malformata, non restare in attesa');
+    assert.equal(t.pendingBytes, 0, 'il buffer va svuotato: altrimenti continuerebbe a crescere ad ogni chunk successivo fino al timeout');
+  });
+
+  it('un residuo appena sotto il cap resta in attesa, non scartato', () => {
+    const t = createClaudeCliStreamTrace();
+    t.feed('x'.repeat(999_999));
+    assert.equal(t.state.malformed, 0, 'sotto soglia una riga ancora incompleta non e\' anomala, e\' solo grande');
+    assert.equal(t.pendingBytes, 999_999);
   });
 });
