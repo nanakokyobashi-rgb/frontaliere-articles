@@ -4474,6 +4474,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.disoccupazione-laureati-2025-aumento.title': 'Disoccupazione in aumento tra i diplomati nel 2025',
     'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'L\'Ufficio federale di statistica rileva crescita della disoccupazione tra i neolaureati svizzeri dal 2023 al 2025. Master universitari: dal 3,9% al 6,4%. Analisi per settore di studio.',
     'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Una giovane diplomata analizza dati di disoccupazione in uno studio moderno svizzero con vista sulla città',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Grigioni: imposta immobiliare su seconde case dal 2029',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Governo grigionese propone tassa del 1,5‰ sulle abitazioni secondarie per compensare perdite di 40,5 milioni CHF. Popolazione voterà modifica costituzionale.',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Proprietà residenziali disperse tra i boschi e i laghi dei Grigioni, paesaggio alpino',
 };
 
 export default blogMetaChIt;

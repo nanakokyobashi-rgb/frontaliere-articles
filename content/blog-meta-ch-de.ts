@@ -4474,6 +4474,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.disoccupazione-laureati-2025-aumento.title': 'Steigende Arbeitslosigkeit unter Absolventen im Jahr 2025',
     'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'Das Bundesamt für Statistik verzeichnet von 2023 bis 2025 einen Anstieg der Arbeitslosigkeit unter den jungen Schweizer Hochschulabsolventen. Master-Abschluss: von 3,9% bis 6,4%. Analyse nach Studienbereich.',
     'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Junge Absolventin analysiert Arbeitslosendaten in modernem Schweizer Büro mit Blick auf die Stadt',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Graubünden: Grundsteuer auf Zweitwohnungen ab 2029',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Die Bündner Regierung schlägt eine Steuer von 1,5‰ auf Zweitwohnungen vor, um Verluste von 40,5 Mio. CHF auszugleichen. Die Bevölkerung wird für eine Verfassungsänderung stimmen.',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Wohnimmobilien in den Wäldern und Seen der Graubünden verstreut',
 };
 
 export default blogMetaChDe;

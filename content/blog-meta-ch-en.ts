@@ -4474,6 +4474,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.disoccupazione-laureati-2025-aumento.title': 'Unemployment rising among graduates in 2025',
     'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'The Federal Statistical Office notes unemployment growth among Swiss recent graduates from 2023 to 2025. Master\'s degrees: from 3.9% to 6.4%. Analysis by field of study.',
     'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Young graduate analyzing unemployment data in a modern Swiss office with city view in the background',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Graubünden: property tax on second homes from 2029',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'The Government of Grison proposes a tax of 1.5‰ on secondary homes to compensate for losses of CHF 40.5 million. Population will vote on constitutional change.',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Residential properties scattered among forests and lakes in the Grisons alpine region',
 };
 
 export default blogMetaChEn;

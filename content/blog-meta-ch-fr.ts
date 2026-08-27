@@ -4474,6 +4474,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.disoccupazione-laureati-2025-aumento.title': 'Chômage en hausse chez les diplômés en 2025',
     'blog.article.disoccupazione-laureati-2025-aumento.excerpt': 'L\'Office fédéral de la statistique relève une hausse du chômage chez les nouveaux diplômés suisses de 2023 à 2025. Masters universitaires : de 3,9 % à 6,4 %. Analyse par domaine d\'étude.',
     'blog.article.disoccupazione-laureati-2025-aumento.imageAlt': 'Jeune diplômée analysant les données de chômage dans un bureau moderne avec vue sur la ville',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.title': 'Grisons : taxe immobilière sur les résidences secondaires à partir de 2029',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.excerpt': 'Le gouvernement grison propose une taxe de 1,5‰ sur les résidences secondaires pour compenser les pertes de 40,5 millions de CHF. La population votera une modification constitutionnelle.',
+    'blog.article.gr-imposta-immobiliare-seconde-case-2029.imageAlt': 'Propriétés résidentielles dispersées parmi les forêts et les lacs des Grisons',
 };
 
 export default blogMetaChFr;
