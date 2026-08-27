@@ -4498,6 +4498,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicola e siccità: il Governo vuole più fondi',
     'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Il Consiglio federale chiede 71,5 milioni di franchi per sostenere foreste e agricoltori colpiti dalla siccità record del 2026.',
     'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Campo di girasoli completamente secco a causa della siccità estiva in Svizzera, luglio 2026',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Per i laureati, dopo il diploma, cresce la disoccupazione',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'L\'Ufficio federale di statistica annuncia un aumento della disoccupazione tra neolaureati: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9% tra 2023-2025.',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Dati UST/BFS: disoccupazione in aumento per neolaureati svizzeri tra 2023 e 2025 per universitari e professionali.',
 };
 
 export default blogMetaChIt;

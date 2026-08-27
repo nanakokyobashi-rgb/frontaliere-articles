@@ -1525,6 +1525,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'bilancio-eccedenza-debito-2025': { it: 'bilancio-eccedenza-debito-2025', en: 'public-budget-surplus-debt-2025', de: 'oeffentliches-budget-2025-ueberschuss', fr: 'budget-public-2025-excedent-dette' },
  'neolaureati-disoccupazione-svizzera': { it: 'neolaureati-disoccupazione-svizzera', en: 'unemployment-swiss-graduates', de: 'arbeitslose-hochschulabgaenger-schweiz', fr: 'chomage-diplomes-suisse' },
  'governo-finanzia-siccita-agricoltura': { it: 'governo-finanzia-siccita-agricoltura', en: 'government-funds-drought-agriculture', de: 'regierung-finanziert-durre-landwirtschaft', fr: 'gouvernement-finance-secheresse-agriculture' },
+ 'disoccupazione-diplomati-svizzera-2025': { it: 'disoccupazione-diplomati-svizzera-2025', en: 'unemployment-graduates-switzerland-2025', de: 'arbeitslosigkeit-absolventen-schweiz-2025', fr: 'chomage-diplomes-suisse-2025' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

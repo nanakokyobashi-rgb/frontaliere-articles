@@ -58364,6 +58364,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-disoccupazione-diplomati-svizzera-2025': {
+    title: 'Per i laureati, dopo il diploma, cresce la disoccupazione',
+    description: 'L\'Ufficio federale di statistica annuncia un aumento della disoccupazione tra neolaureati: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9%',
+    keywords: 'frontalieri, ticino, svizzera, italia, laureati, dopo, diploma, cresce',
+    ogTitle: 'Per i laureati, dopo il diploma, cresce la disoccupazione',
+    ogDescription: 'L\'Ufficio federale di statistica annuncia un aumento della disoccupazione tra neolaureati: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9% tra 2023-2025.',
+    canonicalPath: '/articoli-svizzera/disoccupazione-diplomati-svizzera-2025/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Per i laureati, dopo il diploma, cresce la disoccupazione",
+      "description": "L'Ufficio federale di statistica annuncia un aumento della disoccupazione tra neolaureati: master UNI dal 3,9% al 6,4%, bachelor SUP dal 3,4% al 4,9%",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/disoccupazione-diplomati-svizzera-2025.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Dati UST/BFS: disoccupazione in aumento per neolaureati svizzeri tra 2023 e 2025 per universitari e professionali."
+      },
+      "datePublished": "2026-08-27T12:47:04+00:00",
+      "dateModified": "2026-08-27T12:47:04+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/disoccupazione-diplomati-svizzera-2025/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

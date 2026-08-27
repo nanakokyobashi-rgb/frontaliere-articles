@@ -4498,6 +4498,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicola and drought: the Government wants more funds',
     'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'The Federal Council is asking for CHF 71.5 million to support forests and farmers affected by the record drought of 2026.',
     'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Withered sunflower field due to extreme summer drought in Switzerland, July 2026',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'For graduates, unemployment increases after graduation',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'The Federal Statistical Office announces an increase in unemployment among recent graduates: UNI master\'s from 3.9% to 6.4%, sup bachelor\'s from 3.4% to 4.9% between 2023-2025.',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Swiss labor statistics showing rising unemployment rates among university and professional graduates between 2023 and 2025.',
 };
 
 export default blogMetaChEn;

@@ -4498,6 +4498,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.governo-finanzia-siccita-agricoltura.title': 'Hitzewallungen und Dürre: Regierung will mehr Geld',
     'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Der Bundesrat fordert 71,5 Millionen Franken zur Unterstützung von Wäldern und Bauern, die von der Rekordtrockenheit von 2026 betroffen sind.',
     'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Verdorrtes Sonnenblumenfeld aufgrund extremer Sommertrockentheit in der Schweiz, Juli 2026',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Für Absolventen steigt nach dem Abschluss die Arbeitslosigkeit',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'Das Bundesamt für Statistik meldet einen Anstieg der Arbeitslosigkeit unter Hochschulabsolventen: Master Uni von 3,9% auf 6,4%, Bachelor SUP von 3,4% auf 4,9% zwischen 2023-2025.',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Schweizer Arbeitsmarktstatistiken zeigen steigende Arbeitslosenquoten bei Hochschul- und Berufsabsolventen 2023-2025.',
 };
 
 export default blogMetaChDe;

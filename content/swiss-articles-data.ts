@@ -13492,6 +13492,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'disoccupazione-diplomati-svizzera-2025',
+    category: 'novita',
+    date: '2026-08-27T12:47:04.046Z',
+    image: '/images/blog/disoccupazione-diplomati-svizzera-2025.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

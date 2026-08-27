@@ -4498,6 +4498,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.governo-finanzia-siccita-agricoltura.title': 'Canicule et sécheresse : le gouvernement veut plus de fonds',
     'blog.article.governo-finanzia-siccita-agricoltura.excerpt': 'Le Conseil fédéral demande 71,5 millions de francs pour soutenir les forêts et les agriculteurs touchés par la sécheresse record de 2026.',
     'blog.article.governo-finanzia-siccita-agricoltura.imageAlt': 'Champ de tournesols complètement desséché par sécheresse estivale extrême en Suisse, juillet 2026',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.title': 'Pour les diplômés, après l\'obtention du diplôme, le chômage augmente',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.excerpt': 'L\'Office fédéral de la statistique annonce une augmentation du chômage chez les nouveaux diplômés : master uni de 3,9% à 6,4%, bachelor sup de 3,4% à 4,9% entre 2023-2025.',
+    'blog.article.disoccupazione-diplomati-svizzera-2025.imageAlt': 'Chômage en hausse pour les diplômés suisses de l\'université et professions supérieures entre 2023 et 2025 selon l\'UST/BFS.',
 };
 
 export default blogMetaChFr;
