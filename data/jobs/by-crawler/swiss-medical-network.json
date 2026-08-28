@@ -1,6 +1,6 @@
 {
   "crawlerKey": "swiss-medical-network",
-  "assembledAt": "2026-08-28T05:38:51.473Z",
+  "assembledAt": "2026-08-28T21:01:32.239Z",
   "jobs": [
     {
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000146022254-it-project-manager-erp-digital-systems",
@@ -1276,7 +1276,8 @@
           "maxValue": 91500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000144497156-technische-n-operationsassistent-in-toa-im-pensum-von-60-",
@@ -3344,62 +3345,6 @@
           "unitText": "YEAR"
         }
       }
-    },
-    {
-      "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000144696018-mitarbeitende-kundenempfang-20-50-",
-      "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000144696018-mitarbeitende-kundenempfang-20-50-?oga=true",
-      "title": "Mitarbeitende Kundenempfang 20 - 50%",
-      "company": "Swiss Medical Network",
-      "companyKey": "swiss-medical-network",
-      "location": "Rapperswil-Jona",
-      "addressLocality": "Rapperswil-Jona",
-      "addressRegion": "SG",
-      "canton": "SG",
-      "country": "CH",
-      "postalCode": "8640",
-      "description": "Zur Verstärkung unseres bestehenden Teams suchen wir eine Mitarbeiterin oder einen Mitarbeiter für 20% - 50%.\nAm Hauptempfang agieren Sie als Visitenkarte der Rosenklinik und erste Ansprechperson für die Anfragen aller Art von internen und externen Stellen. Eine kundenfreundliche Repräsentation unserer Spezialklinik ist uns wichtig. Sie sind die zentrale Anlaufstelle für Kunden, Lieferanten, Geschäftspartner und Dienstleister.\nIhre Aufgaben sind:\n\n• Erste Ansprechperson für Patienten, Besucher, Dienstleister und Lieferanten\n\n• Betreuung der Telefonanlage\n\n• Verteilung der eingehenden Post\n\n• Check-In und Check-Out von Patienten inkl. Inkasso\n\n• Zusammenarbeit mit interner Gastronomie\n\n• Diverse Sekretariatsarbeiten\n\n• Erfahrung im Bereich Klinikempfang oder in ähnlichen kundenorientierten Empfangsstellen ist&#xa0;von Vorteil\n\n• Fröhlicher, freundlicher und positiver Umgang mit Menschen\n\n• Gepflegte Erscheinung\n\n• Verantwortungsbewusste, belastbare und flexible Persönlichkeit\n\n• Bereitschaft im Schichtbetrieb (Früh- und Spätdienst, kein Nachtdienst) und an Wochenenden zu arbeiten\n\n• Fremdsprachenkenntnisse von Vorteil\n\n&#xa0;\n&#xa0;\n\nDie Rosenklinik Rapperswil bietet ein breites Leistungsspektrum mit besonderem Fokus auf die Orthopädie und Prothetik an. Darüber hinaus arbeiten sie schweizweit als erste Klinik ganzheitlich nach agile+®, einem etablierten Behandlungskonzept für die schnelle Rückkehr in den Alltag nach orthopädischen Eingriffen. Die Rosenklinik Rapperswil lebt familiäre Tradition und strebt nach Innovation",
-      "descriptionByLocale": {
-        "it": "Per rafforzare il nostro team esistente, stiamo cercando un dipendente per il 20% - 50%.\nAlla reception principale, si agisce come una carta di visita del Rosenklinik e la prima persona di contatto per richieste di tutti i tipi da corpi interni ed esterni. Per noi è importante una rappresentazione a misura di cliente della nostra clinica speciale. Sono il punto centrale di contatto per clienti, fornitori, partner commerciali e fornitori di servizi.\nI suoi compiti sono:\n\n• Prima persona di contatto per pazienti, visitatori, fornitori di servizi e fornitori\n\n• Servizi di manutenzione del sistema telefonico\n\n• Distribuzione di posta in entrata\n\n• Check-in e check-out dei pazienti inclusi. Raccolta di debito\n\n• Cooperazione con la gastronomia interna\n\n• Vari lavori di segreteria\n\n• L'esperienza nella ricezione dell'ospedale o in punti di ricevimento simili orientati al cliente è un vantaggio\n\n• Trattamento felice, amichevole e positivo delle persone\n\n• Aspetto principale\n\n• personalità responsabile, resiliente e flessibile\n\n• Volontà ai turni di lavoro (primo e tardivo, senza servizio notturno) e nei fine settimana\n\n• La conoscenza delle lingue straniere è vantaggiosa\n\n&#xa0;\n&#xa0;\n\nRosenklinik Rapperswil offre una vasta gamma di servizi con un focus speciale su ortopedia e protesi. Inoltre, sono il primo ospedale in Svizzera a lavorare olistico secondo agile+®, un concetto di trattamento consolidato per il rapido ritorno alla vita quotidiana dopo le procedure ortopediche. Rosenklinik Rapperswil vive una tradizione familiare e si sforza di innovazione",
-        "en": "To strengthen our existing team, we are looking for an employee for 20% - 50%.\nAt the main reception, you act as a visiting card of the Rosenklinik and the first contact person for inquiries of all kinds from internal and external bodies. A customer-friendly representation of our special clinic is important to us. They are the central point of contact for customers, suppliers, business partners and service providers.\nIts tasks are:\n\n• First contact person for patients, visitors, service providers and suppliers\n\n• Telephone system maintenance services\n\n• Distribution of incoming mail\n\n• Check-in and check-out of patients incl. Debt collection\n\n• Cooperation with internal gastronomy\n\n• Miscellaneous secretarial work\n\n• Experience in hospital reception or in similar customer-oriented reception points is an advantage\n\n• Happy, friendly and positive treatment of people\n\n• Maintained Appearance\n\n• Responsible, resilient and flexible personality\n\n• Willingness to work shifts (early and late duty, no night duty) and on weekends\n\n• Knowledge of foreign languages is advantageous\n\n&#xa0;\n&#xa0;\n\nRosenklinik Rapperswil offers a wide range of services with a special focus on orthopaedics and prosthetics. In addition, they are the first hospital in Switzerland to work holistically according to agile+®, an established treatment concept for the rapid return to everyday life after orthopaedic procedures. Rosenklinik Rapperswil lives a family tradition and strives for innovation",
-        "fr": "Pour renforcer notre équipe existante, nous cherchons un employé pour 20% - 50%.\nA la réception principale, vous faites office de carte de visite du Rosenklinik et de première personne de contact pour les demandes de toutes sortes auprès des organismes internes et externes. Une représentation conviviale de notre clinique spéciale est importante pour nous. Ils sont le point de contact central pour les clients, les fournisseurs, les partenaires commerciaux et les fournisseurs de services.\nSes tâches sont les suivantes :\n\n• Première personne-ressource pour les patients, les visiteurs, les fournisseurs de services et les fournisseurs\n\n• Services d'entretien du système téléphonique\n\n• Distribution du courrier entrant\n\n• Enregistrement et départ des patients incl. Recouvrement\n\n• Coopération avec la gastronomie interne\n\n• Travaux divers de secrétariat\n\n• L'expérience dans la réception hospitalière ou dans des points de réception similaires orientés vers le client est un avantage\n\n• Traitement heureux, amical et positif des personnes\n\n• Apparence maintenue\n\n• Personnalité responsable, résistante et flexible\n\n• Volonté de travailler par quarts (début et fin de service, pas de service de nuit) et le week-end\n\n• La connaissance des langues étrangères est avantageuse\n\n&#xa0;\n&#xa0;\n\nRosenklinik Rapperswil offre une large gamme de services avec un accent particulier sur l'orthopédie et la prothèse. En outre, ils sont le premier hôpital en Suisse à travailler de manière holistique selon agile+®, un concept de traitement établi pour le retour rapide à la vie quotidienne après des interventions orthopédiques. Rosenklinik Rapperswil vit une tradition familiale et s'efforce d'innover"
-      },
-      "titleByLocale": {
-        "it": "Ricevimento dei dipendenti 20 - 50 %",
-        "en": "Employee Reception 20 - 50 %",
-        "fr": "Réception des employés 20 - 50 %"
-      },
-      "slug": "mitarbeitende-kundenempfang-20-50-swiss-medical-network",
-      "slugByLocale": {
-        "it": "mitarbeitende-kundenempfang-20-50-swiss-medical-network",
-        "en": "mitarbeitende-kundenempfang-20-50-swiss-medical-network",
-        "fr": "reception-des-employes-20-50-swiss-medical-network-rapperswil-jona"
-      },
-      "category": "healthcare",
-      "datePosted": "2026-08-21",
-      "source": "swiss-medical-smartrecruiters-crawler",
-      "employmentType": "PART_TIME",
-      "experienceLevel": "MID",
-      "sector": "Sanità / Healthcare",
-      "_targetScope": {
-        "canton": "SG",
-        "location": "Rapperswil-Jona"
-      },
-      "sourceLang": "de",
-      "firstSeenAt": "2026-08-21T09:47:06.124Z",
-      "salaryMin": 40800,
-      "salaryMax": 57000,
-      "currency": "CHF",
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 40800,
-          "maxValue": 57000,
-          "unitText": "YEAR"
-        }
-      },
-      "crawlerMissStreak": 2
     }
   ]
 }
