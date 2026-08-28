@@ -1,0 +1,743 @@
+{
+  "crawlerKey": "jsafrasarasin",
+  "assembledAt": "2026-08-28T21:16:31.089Z",
+  "jobs": [
+    {
+      "id": "jsafrasarasin-633fe62884d6",
+      "slug": "team-head-legal-entita-ufficio-gestione-dati-del-cliente-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "team-head-legal-entita-ufficio-gestione-dati-del-cliente-j-safra-sarasin-lugano",
+        "en": "team-head-legal-entities-client-data-management-office-j-safra-sarasin-lugano",
+        "de": "team-head-legal-entities-client-data-management-office-jsafrasarasin-ch",
+        "fr": "team-head-legal-entities-client-data-management-office-jsafrasarasin-ch"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Team-Head Legal Entities / Client Data Management Office",
+      "titleByLocale": {
+        "it": "Team-Head Legal Entità / Ufficio Gestione Dati del Cliente",
+        "en": "Team-Head Legal Entities / Client Data Management Office",
+        "de": "Team-Head Legal Entities / Client Data Management Office",
+        "fr": "Team-Head Legal Entities / Client Data Management Office"
+      },
+      "description": "Team-Head Legal Entities / Client Data Management Office — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "fr": "Team-Head Legal Entities / Client Data Management Office — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/459/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:16:27.730Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Legale",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/459/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "team-head-legal-entities-client-data-management-office-jsafrasarasin-ch",
+        "team-head-legal-entita-ufficio-gestione-dati-del-cliente-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "team-head-legal-entities-client-data-management-office-jsafrasarasin-ch",
+          "team-head-legal-entita-ufficio-gestione-dati-del-cliente-j-safra-sarasin-lugano"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:52.269Z",
+      "salaryMin": 87000,
+      "salaryMax": 149500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 87000,
+          "maxValue": 149500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-2921e30a87e1",
+      "slug": "esperto-di-affari-transfrontaliero-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "esperto-di-affari-transfrontaliero-j-safra-sarasin-lugano",
+        "en": "cross-border-business-expert-jsafrasarasin-ch",
+        "de": "grenzuberschreitender-wirtschaftsexperte-j-safra-sarasin-lugano",
+        "fr": "expert-en-commerce-transfrontalier-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Cross-Border Business Expert",
+      "titleByLocale": {
+        "it": "Esperto di affari transfrontaliero",
+        "en": "Cross-Border Business Expert",
+        "de": "Grenzüberschreitender Wirtschaftsexperte",
+        "fr": "Expert en commerce transfrontalier"
+      },
+      "description": "Cross-Border Business Expert — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "en": "Cross-Border Business Expert — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/472/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T21:16:27.428Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/472/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "cross-border-business-expert-jsafrasarasin-ch",
+        "esperto-di-affari-transfrontaliero-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "cross-border-business-expert-jsafrasarasin-ch",
+          "esperto-di-affari-transfrontaliero-j-safra-sarasin-lugano"
+        ],
+        "de": [
+          "cross-border-business-expert-jsafrasarasin-ch"
+        ],
+        "fr": [
+          "cross-border-business-expert-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:51.967Z",
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-ae76fde355e4",
+      "slug": "senior-banking-systems-integration-ingegnere-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "senior-banking-systems-integration-ingegnere-j-safra-sarasin-lugano",
+        "en": "senior-banking-systems-integration-engineer-jsafrasarasin-ch",
+        "de": "senior-banking-systems-integration-ingenieur-j-safra-sarasin-lugano",
+        "fr": "senior-banking-systems-integration-ingenieur-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Senior Banking Systems Integration Engineer",
+      "titleByLocale": {
+        "it": "Senior Banking Systems Integration Ingegnere",
+        "en": "Senior Banking Systems Integration Engineer",
+        "de": "Senior Banking Systems Integration Ingenieur",
+        "fr": "Senior Banking Systems Integration Ingénieur"
+      },
+      "description": "Senior Banking Systems Integration Engineer — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "en": "Senior Banking Systems Integration Engineer — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/474/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T21:16:27.125Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/474/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "senior-banking-systems-integration-engineer-jsafrasarasin-ch",
+        "senior-banking-systems-integration-ingegnere-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "senior-banking-systems-integration-engineer-jsafrasarasin-ch",
+          "senior-banking-systems-integration-ingegnere-j-safra-sarasin-lugano"
+        ],
+        "de": [
+          "senior-banking-systems-integration-engineer-jsafrasarasin-ch"
+        ],
+        "fr": [
+          "senior-banking-systems-integration-engineer-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:51.665Z",
+      "salaryMin": 79500,
+      "salaryMax": 120500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 79500,
+          "maxValue": 120500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-cd3c5c2dce34",
+      "slug": "senior-backup-ingegnere-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "senior-backup-ingegnere-j-safra-sarasin-lugano",
+        "en": "senior-backup-engineer-j-safra-sarasin-lugano",
+        "de": "senior-backup-engineer-jsafrasarasin-ch",
+        "fr": "senior-backup-ingenieur-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Senior Backup Engineer",
+      "titleByLocale": {
+        "it": "Senior Backup Ingegnere",
+        "en": "Senior Backup Engineer",
+        "de": "Senior Backup Ingenieur",
+        "fr": "Senior Backup Ingénieur"
+      },
+      "description": "Senior Backup Engineer — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "de": "Senior Backup Engineer — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/482/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:16:26.822Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/482/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "senior-backup-engineer-jsafrasarasin-ch",
+        "senior-backup-ingegnere-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "senior-backup-engineer-jsafrasarasin-ch",
+          "senior-backup-ingegnere-j-safra-sarasin-lugano"
+        ],
+        "fr": [
+          "senior-backup-engineer-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:51.363Z",
+      "salaryMin": 79500,
+      "salaryMax": 120500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 79500,
+          "maxValue": 120500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-25089161d553",
+      "slug": "ai-platform-system-ingegnere-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "ai-platform-system-ingegnere-j-safra-sarasin-lugano",
+        "en": "ai-platform-system-engineer-j-safra-sarasin-lugano",
+        "de": "ai-platform-system-engineer-jsafrasarasin-ch",
+        "fr": "ai-platform-system-ingenieur-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "AI Platform System Engineer",
+      "titleByLocale": {
+        "it": "AI Platform System Ingegnere",
+        "en": "AI Platform System Engineer",
+        "de": "AI Platform System Ingenieur",
+        "fr": "AI Platform System Ingénieur"
+      },
+      "description": "AI Platform System Engineer — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "de": "AI Platform System Engineer — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/490/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:16:26.519Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/490/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "ai-platform-system-engineer-jsafrasarasin-ch",
+        "ai-platform-system-ingegnere-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "ai-platform-system-engineer-jsafrasarasin-ch",
+          "ai-platform-system-ingegnere-j-safra-sarasin-lugano"
+        ],
+        "fr": [
+          "ai-platform-system-engineer-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:51.061Z",
+      "salaryMin": 58000,
+      "salaryMax": 88000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 58000,
+          "maxValue": 88000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-0da08d3b61e1",
+      "slug": "treasury-operations-specialista-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "treasury-operations-specialista-j-safra-sarasin-lugano",
+        "en": "treasury-operations-specialist-jsafrasarasin-ch",
+        "de": "treasury-operations-spezialist-j-safra-sarasin-lugano",
+        "fr": "treasury-operations-specialiste-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Treasury Operations Specialist",
+      "titleByLocale": {
+        "it": "Treasury Operations Specialista",
+        "en": "Treasury Operations Specialist",
+        "de": "Treasury Operations Spezialist",
+        "fr": "Treasury Operations Spécialiste"
+      },
+      "description": "Treasury Operations Specialist — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "en": "Treasury Operations Specialist — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/455/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T21:16:26.216Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/455/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "treasury-operations-specialist-jsafrasarasin-ch",
+        "treasury-operations-specialista-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "treasury-operations-specialist-jsafrasarasin-ch",
+          "treasury-operations-specialista-j-safra-sarasin-lugano"
+        ],
+        "de": [
+          "treasury-operations-specialist-jsafrasarasin-ch"
+        ],
+        "fr": [
+          "treasury-operations-specialist-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:50.759Z",
+      "salaryMin": 55500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 55500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-3123c94d9ad3",
+      "slug": "operazioni-special-in-pagamento-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "operazioni-special-in-pagamento-j-safra-sarasin-lugano",
+        "en": "specialist-in-payment-transactions-j-safra-sarasin-lugano",
+        "de": "fachspezialist-in-zahlungsverkehr-jsafrasarasin-ch",
+        "fr": "specialiste-dans-les-operations-de-paiement-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Fachspezialist/in Zahlungsverkehr",
+      "titleByLocale": {
+        "it": "Operazioni special/in pagamento",
+        "en": "Specialist/in payment transactions",
+        "de": "Fachspezialist/in Zahlungsverkehr",
+        "fr": "Spécialiste/dans les opérations de paiement"
+      },
+      "description": "Fachspezialist/in Zahlungsverkehr — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "de": "Fachspezialist/in Zahlungsverkehr — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/498/Description/1",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:16:25.914Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/498/Description/1",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "fachspezialist-in-zahlungsverkehr-jsafrasarasin-ch",
+        "fachspezialist-in-zahlungsverkehr-j-safra-sarasin-lugano",
+        "operazioni-special-in-pagamento-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "fachspezialist-in-zahlungsverkehr-jsafrasarasin-ch",
+          "fachspezialist-in-zahlungsverkehr-j-safra-sarasin-lugano",
+          "operazioni-special-in-pagamento-j-safra-sarasin-lugano"
+        ],
+        "en": [
+          "fachspezialist-in-zahlungsverkehr-j-safra-sarasin-lugano"
+        ],
+        "fr": [
+          "fachspezialist-in-zahlungsverkehr-j-safra-sarasin-lugano"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:50.455Z",
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-ab63e5922660",
+      "slug": "client-service-executive-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "client-service-executive-j-safra-sarasin-lugano",
+        "en": "client-service-executive-jsafrasarasin-ch",
+        "de": "kundenservice-executive-j-safra-sarasin-lugano",
+        "fr": "service-a-la-clientele-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Client Service Executive",
+      "titleByLocale": {
+        "it": "Client Service Executive",
+        "en": "Client Service Executive",
+        "de": "Kundenservice Executive",
+        "fr": "Service à la clientèle"
+      },
+      "description": "Client Service Executive — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "en": "Client Service Executive — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/503/Description/1",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-28T21:16:25.610Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/503/Description/1",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "client-service-executive-jsafrasarasin-ch",
+        "client-service-executive-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "client-service-executive-jsafrasarasin-ch",
+          "client-service-executive-j-safra-sarasin-lugano"
+        ],
+        "de": [
+          "client-service-executive-jsafrasarasin-ch"
+        ],
+        "fr": [
+          "client-service-executive-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:49.545Z",
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-9c72c25f05c4",
+      "slug": "senior-fix-ingegnere-specialista-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "senior-fix-ingegnere-specialista-j-safra-sarasin-lugano",
+        "en": "senior-fix-engineer-specialist-j-safra-sarasin-lugano",
+        "de": "senior-fix-engineer-specialist-jsafrasarasin-ch",
+        "fr": "senior-fix-ingenieur-specialiste-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "(Senior) FIX Engineer Specialist",
+      "titleByLocale": {
+        "it": "(Senior) FIX Ingegnere Specialista",
+        "en": "(Senior) FIX Engineer Specialist",
+        "de": "(Senior) FIX Ingenieur Spezialist",
+        "fr": "(Senior) FIX Ingénieur Spécialiste"
+      },
+      "description": "(Senior) FIX Engineer Specialist — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "de": "(Senior) FIX Engineer Specialist — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/496/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:16:25.306Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/496/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "senior-fix-engineer-specialist-jsafrasarasin-ch",
+        "senior-fix-ingegnere-specialista-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "senior-fix-engineer-specialist-jsafrasarasin-ch",
+          "senior-fix-ingegnere-specialista-j-safra-sarasin-lugano"
+        ],
+        "fr": [
+          "senior-fix-engineer-specialist-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:49.241Z",
+      "salaryMin": 79500,
+      "salaryMax": 120500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 79500,
+          "maxValue": 120500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "jsafrasarasin-d253d8e83f4e",
+      "slug": "stewardship-specialista-j-safra-sarasin-lugano",
+      "slugByLocale": {
+        "it": "stewardship-specialista-j-safra-sarasin-lugano",
+        "en": "stewardship-specialist-jsafrasarasin-ch",
+        "de": "stewardship-spezialist-j-safra-sarasin-lugano",
+        "fr": "stewardship-specialiste-j-safra-sarasin-lugano"
+      },
+      "company": "J. Safra Sarasin",
+      "companyKey": "jsafrasarasin",
+      "companyDomain": "jsafrasarasin.umantis.com",
+      "title": "Stewardship Specialist",
+      "titleByLocale": {
+        "it": "Stewardship Specialista",
+        "en": "Stewardship Specialist",
+        "de": "Stewardship Spezialist",
+        "fr": "Stewardship Spécialiste"
+      },
+      "description": "Stewardship Specialist — J. Safra Sarasin",
+      "descriptionByLocale": {
+        "en": "Stewardship Specialist — J. Safra Sarasin"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://jsafrasarasin.umantis.com/Vacancies/506/Description/2",
+      "source": "J. Safra Sarasin Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T21:16:24.986Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://jsafrasarasin.umantis.com/Vacancies/506/Description/2",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "stewardship-specialist-jsafrasarasin-ch",
+        "stewardship-specialista-j-safra-sarasin-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "stewardship-specialist-jsafrasarasin-ch",
+          "stewardship-specialista-j-safra-sarasin-lugano"
+        ],
+        "de": [
+          "stewardship-specialist-jsafrasarasin-ch"
+        ],
+        "fr": [
+          "stewardship-specialist-jsafrasarasin-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:42:48.633Z",
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    }
+  ]
+}
