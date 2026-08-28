@@ -1,0 +1,617 @@
+[
+  {
+    "slug": "sales-manager-conference-groups-events-accor-ch",
+    "title": "Sales Manager – Conference, Groups & Events",
+    "titleByLocale": {
+      "fr": "Sales Manager – Conference, Groups & Events",
+      "en": "Sales Manager – Conference, Groups & Events",
+      "it": "Sales Manager – Conference, Groups & Events",
+      "de": "Sales Manager – Conference, Groups & Events"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Sales Manager – Conference, Groups & Events — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "sales-manager-conference-groups-events-accor-ch",
+      "it": "sales-manager-conference-groups-events-accor-ch",
+      "en": "sales-manager-conference-groups-events-ibis-budget-lugano",
+      "de": "sales-manager-conference-groups-events-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T21:29:02.735Z",
+    "salaryMin": 82500,
+    "salaryMax": 127000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "directeur-trice-des-ventes-et-marketing-accor-ch",
+    "title": "Directeur(trice) des ventes et marketing",
+    "titleByLocale": {
+      "fr": "Directeur(trice) des ventes et marketing",
+      "en": "Directeur(trice) des ventes et marketing",
+      "it": "Directeur(trice) des ventes et marketing",
+      "de": "Directeur(trice) des ventes et marketing"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Directeur(trice) des ventes et marketing — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "directeur-trice-des-ventes-et-marketing-accor-ch",
+      "it": "directeur-trice-des-ventes-et-marketing-accor-ch",
+      "en": "directeur-trice-des-ventes-et-marketing-ibis-budget-lugano",
+      "de": "directeur-trice-des-ventes-et-marketing-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T21:29:02.735Z",
+    "salaryMin": 50500,
+    "salaryMax": 89000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "housekeeping-villa-attendant-tempo-pieno-ibis-budget-lugano",
+    "title": "Housekeeping Villa Attendant | Full-Time",
+    "titleByLocale": {
+      "fr": "Housekeeping Villa Attendant | Full-Time",
+      "it": "Housekeeping Villa Attendant | Tempo pieno",
+      "en": "Housekeeping Villa Attendant | Full-Time",
+      "de": "Housekeeping Villa Attendant | Vollzeit"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Housekeeping Villa Attendant | Full-Time — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "housekeeping-villa-attendant-full-time-accor-ch",
+      "it": "housekeeping-villa-attendant-tempo-pieno-ibis-budget-lugano",
+      "en": "housekeeping-villa-attendant-full-time-accor-ch",
+      "de": "housekeeping-villa-attendant-vollzeit-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T21:29:02.735Z",
+    "previousSlugs": [
+      "housekeeping-villa-attendant-full-time-accor-ch"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "housekeeping-villa-attendant-full-time-accor-ch"
+      ],
+      "de": [
+        "housekeeping-villa-attendant-full-time-accor-ch"
+      ]
+    },
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "assistant-direttore-of-people-culture-ibis-budget-lugano",
+    "title": "Assistant Director of People & Culture",
+    "titleByLocale": {
+      "fr": "Assistant Director of People & Culture",
+      "it": "Assistant Direttore of People & Culture",
+      "en": "Assistant Director of People & Culture",
+      "de": "Assistent Direktor of People & Culture"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Assistant Director of People & Culture — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "assistant-director-of-people-culture-accor-ch",
+      "it": "assistant-direttore-of-people-culture-ibis-budget-lugano",
+      "en": "assistant-director-of-people-culture-accor-ch",
+      "de": "assistent-direktor-of-people-culture-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:09.039Z",
+    "previousSlugs": [
+      "assistant-director-of-people-culture-accor-ch"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "assistant-director-of-people-culture-accor-ch"
+      ]
+    },
+    "salaryMin": 68000,
+    "salaryMax": 103000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "guest-service-associate-f-b-service-accor-ch",
+    "title": "Guest Service Associate-F&B Service",
+    "titleByLocale": {
+      "fr": "Guest Service Associate-F&B Service",
+      "en": "Guest Service Associate-F&B Service",
+      "it": "Guest Service Associate-F&B Service",
+      "de": "Guest Service Associate-F&B Service"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Guest Service Associate-F&B Service — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "guest-service-associate-f-b-service-accor-ch",
+      "it": "guest-service-associate-f-b-service-accor-ch",
+      "en": "guest-service-associate-f-b-service-ibis-budget-lugano",
+      "de": "guest-service-associate-f-b-service-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:09.039Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "front-office-capo-squadra-ibis-budget-lugano",
+    "title": "Front Office - Team Leader",
+    "titleByLocale": {
+      "de": "Front Office - Team Leader",
+      "it": "Front Office - Capo squadra",
+      "en": "Front Office - Team Leader",
+      "fr": "Front Office - Team Leader"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "de": "Front Office - Team Leader — Ibis Budget"
+    },
+    "slugByLocale": {
+      "de": "front-office-team-leader-accor-ch",
+      "it": "front-office-capo-squadra-ibis-budget-lugano",
+      "en": "front-office-team-leader-accor-ch",
+      "fr": "front-office-team-leader-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "previousSlugs": [
+      "front-office-team-leader-accor-ch"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "front-office-team-leader-accor-ch"
+      ]
+    },
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "serveur-petit-dejeuner-h-f-x-accor-ch",
+    "title": "Serveur petit déjeuner (H/F/X)",
+    "titleByLocale": {
+      "fr": "Serveur petit déjeuner (H/F/X)",
+      "it": "Serveur petit déjeuner (H/F/X)",
+      "en": "Serveur petit déjeuner (H/F/X)",
+      "de": "Serveur petit déjeuner (H/F/X)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Serveur petit déjeuner (H/F/X) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "serveur-petit-dejeuner-h-f-x-accor-ch",
+      "it": "serveur-petit-dejeuner-h-f-x-accor-ch",
+      "en": "serveur-petit-dejeuner-h-f-x-accor-ch",
+      "de": "serveur-petit-dejeuner-h-f-x-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "receptionniste-tournant-h-f-accor-ch",
+    "title": "RECEPTIONNISTE TOURNANT (H/F)",
+    "titleByLocale": {
+      "fr": "RECEPTIONNISTE TOURNANT (H/F)",
+      "it": "RECEPTIONNISTE TOURNANT (H/F)",
+      "en": "RECEPTIONNISTE TOURNANT (H/F)",
+      "de": "RECEPTIONNISTE TOURNANT (H/F)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "RECEPTIONNISTE TOURNANT (H/F) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "receptionniste-tournant-h-f-accor-ch",
+      "it": "receptionniste-tournant-h-f-accor-ch",
+      "en": "receptionniste-tournant-h-f-accor-ch",
+      "de": "receptionniste-tournant-h-f-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "assistant-manager-social-media-accor-ch",
+    "title": "Assistant Manager Social Media",
+    "titleByLocale": {
+      "fr": "Assistant Manager Social Media",
+      "en": "Assistant Manager Social Media",
+      "it": "Assistant Manager Social Media",
+      "de": "Assistent Manager Social Media"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Assistant Manager Social Media — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "assistant-manager-social-media-accor-ch",
+      "it": "assistant-manager-social-media-accor-ch",
+      "en": "assistant-manager-social-media-ibis-budget-lugano",
+      "de": "assistant-manager-social-media-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "salaryMin": 68000,
+    "salaryMax": 103000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "hostess-lagun-beach-restaurant-bar-accor-ch",
+    "title": "Hostess - Lagun Beach Restaurant & Bar",
+    "titleByLocale": {
+      "fr": "Hostess - Lagun Beach Restaurant & Bar",
+      "it": "Hostess - Lagun Beach Restaurant & Bar",
+      "en": "Hostess - Lagun Beach Restaurant & Bar",
+      "de": "Hostess - Lagun Beach Restaurant & Bar"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Hostess - Lagun Beach Restaurant & Bar — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "hostess-lagun-beach-restaurant-bar-accor-ch",
+      "it": "hostess-lagun-beach-restaurant-bar-accor-ch",
+      "en": "hostess-lagun-beach-restaurant-bar-accor-ch",
+      "de": "hostess-lagun-beach-restaurant-bar-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "facility-quality-manager-accor-ch",
+    "title": "Facility & Quality Manager",
+    "titleByLocale": {
+      "en": "Facility & Quality Manager",
+      "it": "Facility & Quality Manager",
+      "de": "Facility & Qualität Manager",
+      "fr": "Facility & Qualité Manager"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "en": "Facility & Quality Manager — Ibis Budget"
+    },
+    "slugByLocale": {
+      "en": "facility-quality-manager-accor-ch",
+      "it": "facility-quality-manager-accor-ch",
+      "de": "facility-qualitat-manager-ibis-budget-lugano",
+      "fr": "facility-qualite-manager-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:32:02.654Z",
+    "salaryMin": 68000,
+    "salaryMax": 103000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "ambassadeur-drice-d-experience-client-h-f-d-accor-ch",
+    "title": "Ambassadeur.drice d'Expérience Client (H/F/D)",
+    "titleByLocale": {
+      "fr": "Ambassadeur.drice d'Expérience Client (H/F/D)",
+      "it": "Ambassadeur.drice d'Expérience Client (f/m/d)",
+      "en": "Ambassadeur.drice d'Expérience Client (H/F/D)",
+      "de": "Ambassadeur.drice d'Expérience Client (H/F/D)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Ambassadeur.drice d'Expérience Client (H/F/D) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "ambassadeur-drice-d-experience-client-h-f-d-accor-ch",
+      "it": "ambassadeur-drice-d-experience-client-h-f-d-accor-ch",
+      "en": "ambassadeur-drice-d-experience-client-h-f-d-accor-ch",
+      "de": "ambassadeur-drice-d-experience-client-h-f-d-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:49.049Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "rooms-controller-front-desk-agent-accor-ch",
+    "title": "Rooms Controller & Front Desk Agent",
+    "titleByLocale": {
+      "fr": "Rooms Controller & Front Desk Agent",
+      "it": "Rooms Controller & Front Desk Agent",
+      "en": "Rooms Controller & Front Desk Agent",
+      "de": "Rooms Controller & Front Desk Agent"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Rooms Controller & Front Desk Agent — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "rooms-controller-front-desk-agent-accor-ch",
+      "it": "rooms-controller-front-desk-agent-accor-ch",
+      "en": "rooms-controller-front-desk-agent-accor-ch",
+      "de": "rooms-controller-front-desk-agent-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:49.049Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "receptionniste-de-nuit-h-f-cdi-temps-partiel-accor-ch",
+    "title": "Réceptionniste de nuit H/F CDI Temps Partiel",
+    "titleByLocale": {
+      "fr": "Réceptionniste de nuit H/F CDI Temps Partiel",
+      "it": "Réceptionniste de nuit H/F CDI Temps Partiel",
+      "en": "Réceptionniste de nuit H/F CDI Temps Partiel",
+      "de": "Réceptionniste de nuit H/F CDI Temps Partiel"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Réceptionniste de nuit H/F CDI Temps Partiel — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "receptionniste-de-nuit-h-f-cdi-temps-partiel-accor-ch",
+      "it": "receptionniste-de-nuit-h-f-cdi-temps-partiel-accor-ch",
+      "en": "receptionniste-de-nuit-h-f-cdi-temps-partiel-accor-ch",
+      "de": "receptionniste-de-nuit-h-f-cdi-temps-partiel-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:49.049Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "assistant-direttore-of-event-sales-ibis-budget-lugano",
+    "title": "Assistant Director of Event Sales",
+    "titleByLocale": {
+      "fr": "Assistant Directeur of Event Sales",
+      "en": "Assistant Director of Event Sales",
+      "it": "Assistant Direttore of Event Sales",
+      "de": "Assistent Direktor of Event Sales"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Assistant Director of Event Sales — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "assistant-director-of-event-sales-accor-ch",
+      "it": "assistant-direttore-of-event-sales-ibis-budget-lugano",
+      "en": "assistant-director-of-event-sales-ibis-budget-lugano",
+      "de": "assistent-direktor-of-event-sales-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:41.580Z",
+    "previousSlugs": [
+      "assistant-director-of-event-sales-accor-ch"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "assistant-director-of-event-sales-accor-ch"
+      ]
+    },
+    "salaryMin": 82500,
+    "salaryMax": 127000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "breakfast-banqueting-team-member-part-time-5x6-accor-ch",
+    "title": "Breakfast & Banqueting Team Member – Part-time 5x6",
+    "titleByLocale": {
+      "fr": "Breakfast & Banqueting Team Member – Part-time 5x6",
+      "it": "Breakfast & Banqueting Team Member – Part-time 5x6",
+      "en": "Breakfast & Banqueting Team Member – Part-time 5x6",
+      "de": "Breakfast & Banqueting Team Member – Teilzeit 5x6"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Breakfast & Banqueting Team Member – Part-time 5x6 — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "breakfast-banqueting-team-member-part-time-5x6-accor-ch",
+      "it": "breakfast-banqueting-team-member-part-time-5x6-accor-ch",
+      "en": "breakfast-banqueting-team-member-part-time-5x6-accor-ch",
+      "de": "breakfast-banqueting-team-member-teilzeit-5x6-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:41.580Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "ski-valet-supervisor-winter-only-ft-accor-ch",
+    "title": "Ski Valet Supervisor (Winter Only - FT)",
+    "titleByLocale": {
+      "it": "Ski Valet Supervisor (Winter Only - FT)",
+      "en": "Ski Valet Supervisor (Winter Only - FT)",
+      "de": "Ski Valet Vorgesetzter (Winter Only - FT)",
+      "fr": "Ski Valet Superviseur (Winter Only - FT)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "it": "Ski Valet Supervisor (Winter Only - FT) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "it": "ski-valet-supervisor-winter-only-ft-accor-ch",
+      "en": "ski-valet-supervisor-winter-only-ft-accor-ch",
+      "de": "ski-valet-vorgesetzter-winter-only-ft-ibis-budget-lugano",
+      "fr": "ski-valet-superviseur-winter-only-ft-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:41.580Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "ski-valet-attendant-nov-april-ft-accor-ch",
+    "title": "Ski Valet Attendant (Nov.-April, FT)",
+    "titleByLocale": {
+      "fr": "Ski Valet Attendant (Nov.-April, FT)",
+      "it": "Ski Valet Attendant (Nov.-April, FT)",
+      "en": "Ski Valet Attendant (Nov.-April, FT)",
+      "de": "Ski Valet Attendant (Nov.-April, FT)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Ski Valet Attendant (Nov.-April, FT) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "ski-valet-attendant-nov-april-ft-accor-ch",
+      "it": "ski-valet-attendant-nov-april-ft-accor-ch",
+      "en": "ski-valet-attendant-nov-april-ft-accor-ch",
+      "de": "ski-valet-attendant-nov-april-ft-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:41.580Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "relief-driver-laundry-attendant-accor-ch",
+    "title": "Relief Driver/Laundry Attendant",
+    "titleByLocale": {
+      "de": "Relief Driver/Laundry Attendant",
+      "it": "Relief Driver/Laundry Attendant",
+      "en": "Relief Driver/Laundry Attendant",
+      "fr": "Relief Driver/Laundry Attendant"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "de": "Relief Driver/Laundry Attendant — Ibis Budget"
+    },
+    "slugByLocale": {
+      "de": "relief-driver-laundry-attendant-accor-ch",
+      "it": "relief-driver-laundry-attendant-accor-ch",
+      "en": "relief-driver-laundry-attendant-accor-ch",
+      "fr": "relief-driver-laundry-attendant-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-27T20:08:41.580Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "bartender-monogram-reign-restaurant-full-time-accor-ch",
+    "title": "Bartender, MONOGRAM & Reign Restaurant (Full-Time)",
+    "titleByLocale": {
+      "de": "Bartender, MONOGRAM & Reign Restaurant (Full-Time)",
+      "it": "Bartender, MONOGRAM & Reign Restaurant (Tempo pieno)",
+      "en": "Bartender, MONOGRAM & Reign Restaurant (Full-Time)",
+      "fr": "Bartender, MONOGRAM & Reign Restaurant (Temps plein)"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "de": "Bartender, MONOGRAM & Reign Restaurant (Full-Time) — Ibis Budget"
+    },
+    "slugByLocale": {
+      "de": "bartender-monogram-reign-restaurant-full-time-accor-ch",
+      "it": "bartender-monogram-reign-restaurant-full-time-accor-ch",
+      "en": "bartender-monogram-reign-restaurant-full-time-accor-ch",
+      "fr": "bartender-monogram-reign-restaurant-full-time-accor-ch"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-25T22:13:32.831Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  }
+]
