@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hopital-la-tour",
-  "assembledAt": "2026-08-28T05:34:28.074Z",
+  "assembledAt": "2026-08-28T21:25:08.608Z",
   "jobs": [
     {
       "id": "hopital-la-tour-882b6ff457f2",
@@ -33,7 +33,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/ergotherapeute-a-80-cdi",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.694Z",
+      "crawledAt": "2026-08-28T21:25:06.208Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -112,7 +112,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/cheffe-de-clinique-en-pneumologie",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.693Z",
+      "crawledAt": "2026-08-28T21:25:06.207Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -190,7 +190,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/infirmier-iere-de-nuit-au-pool-cdm-6-mois-a-90",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.692Z",
+      "crawledAt": "2026-08-28T21:25:06.206Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -272,7 +272,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/infirmier-iere-de-nuit-en-medecine-3-cdi-a-80",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.691Z",
+      "crawledAt": "2026-08-28T21:25:06.205Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -365,7 +365,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/secretaire-medical-e-a-50",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.691Z",
+      "crawledAt": "2026-08-28T21:25:06.205Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -442,7 +442,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/aide-soignant-e-a-lunite-cardio-pulmonaire-cdm-9-mois-a-65",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.690Z",
+      "crawledAt": "2026-08-28T21:25:06.204Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -520,7 +520,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/infirmier-iere-de-nuit-au-pool-cdi-a-90",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.689Z",
+      "crawledAt": "2026-08-28T21:25:06.203Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -601,7 +601,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/infirmier-iere-puericultrice-en-pediatrie-cdm-6-mois-75-a-80",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.688Z",
+      "crawledAt": "2026-08-28T21:25:06.201Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -680,7 +680,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/technicien-ne-en-radiologie-au-service-de-radio-oncologie-a-90",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.685Z",
+      "crawledAt": "2026-08-28T21:25:06.200Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -759,7 +759,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/secretaire-medicale-en-cardiologie-non-invasive-cdmax-10-mois-a-80",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.684Z",
+      "crawledAt": "2026-08-28T21:25:06.198Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -794,27 +794,27 @@
       "id": "hopital-la-tour-e45856b0c326",
       "slug": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin",
       "slugByLocale": {
-        "fr": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin",
         "it": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin",
         "en": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin",
-        "de": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin"
+        "de": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin",
+        "fr": "aide-soignant-e-de-jour-service-pool-de-soins-hopital-la-tour-meyrin"
       },
       "company": "Hôpital de La Tour",
       "companyKey": "hopital-la-tour",
       "companyDomain": "la-tour.ch",
       "title": "Aide-soignant(-e) de jour / Service Pool de soins",
       "titleByLocale": {
-        "fr": "Aide-soignant(-e) de jour / Service Pool de soins",
         "it": "Aide-soignant(-e) de jour / Service Pool de soins",
         "en": "Aide-soignant(-e) de jour / Service Pool de soins",
-        "de": "Aide-soignant(-e) de jour / Service Pool de soins"
+        "de": "Aide-soignant(-e) de jour / Service Pool de soins",
+        "fr": "Aide-soignant(-e) de jour / Service Pool de soins"
       },
-      "description": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers",
+      "description": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins / CDM 3 mois 90% (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : CDM de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers",
       "descriptionByLocale": {
-        "fr": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers",
-        "it": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers",
-        "en": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers",
-        "de": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\n Disponibilité : Au 1er Septembre 2026\n Pourcentage : 90%\n Type d'horaires : Irréguliers"
+        "it": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\nDisponibilité : Au 1er Septembre 2026\nPourcentage : 90%\nType d'horaires : Irréguliers",
+        "en": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\nDisponibilité : Au 1er Septembre 2026\nPourcentage : 90%\nType d'horaires : Irréguliers",
+        "de": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : Contrat à Durée Déterminée de 3 mois\nDisponibilité : Au 1er Septembre 2026\nPourcentage : 90%\nType d'horaires : Irréguliers",
+        "fr": "Nous recrutons un/e\n\nAide-soignant(-e) de jour / Service Pool de soins / CDM 3 mois 90% (ref : 2003)\n\nVotre mission :\n\nDans un établissement de pointe vous occupez un poste varié au sein d'une équipe pluridisciplinaire comprenant des infirmiers(-ères), des aides-soignants(-es), des médecins.\n\nVous devrez assurer l’accueil des patients atteints de pathologies polyvalentes, dans le cadre d’une prise en charge globale en phase aigüe.\n\nA ce titre vous êtes en charge de ;\n\n• Accueillir le patient et sa famille en les rendant acteurs de la prise en charge\n\n• Recueillir les données administratives\n\n• Prendre en charge l’enfant dans sa globalité en collaboration avec l’équipe pluridisciplinaire et répondre à ses besoins fondamentaux (hygiène, douleur, alimentation, confort, ...)\n\n• Assurer l'approvisionnement en matériel, vérifier leur fonctionnement et assurer la prise en charge de la maintenance, appliquer les procédures de nettoyage et de désinfection\n\n• Participer au bon fonctionnement du service, faire des transmissions sur le dossier de soins informatisé\n\n• Mettre à jour ses pratiques professionnelles en fonctions des procédures de soins du service ou institutionnelles\n\nNous recherchons un profil répondant aux critères suivants :\n\n• 1 à 2 années d'expérience minimum auprès d'une structure hospitalière\n\n• Diplôme d’Aide-Soignant\n\n• Autonome, bienveillance, polyvalence, capacité d'adaptation, d'organisation et sens des priorités sont des qualités essentielles\n\nNous vous proposons :\n\nType de contrat : CDM de 3 mois\nDisponibilité : Au 1er Septembre 2026\nPourcentage : 90%\nType d'horaires : Irréguliers"
       },
       "needsRetranslation": true,
       "location": "Meyrin",
@@ -822,7 +822,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/aide-soignant-e-de-jour-service-pool-de-soins",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:24.681Z",
+      "crawledAt": "2026-08-28T21:25:06.195Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -838,9 +838,8 @@
       "postedDate": "2026-08-27",
       "applyUrl": "https://recrutement.latour.ch/nos-offres/aide-soignant-e-de-jour-service-pool-de-soins",
       "requirements": [],
-      "requirementsByLocale": {
-        "fr": []
-      },
+      "requirementsByLocale": {},
+      "firstSeenAt": "2026-08-28T05:34:24.681Z",
       "salaryMin": 86500,
       "salaryMax": 120500,
       "baseSalary": {
@@ -852,8 +851,7 @@
           "maxValue": 120500,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:34:24.681Z"
+      }
     },
     {
       "id": "hopital-la-tour-25f49eb00646",
@@ -930,7 +928,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "hopital-la-tour-df0efbb7bca3",
@@ -994,7 +992,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     }
   ]
 }
