@@ -4573,6 +4573,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.assegni-familiari-uri-importi-domanda.title': 'Familienzulagen im Kanton Uri: Beträge und Antrag',
     'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Übersicht über die Familien- und Ausbildungszulagen im Kanton Uri: Bundesbasis FamZG, kantonale Beträge, zuständige Kassen und Antragsverfahren.',
     'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Familie vor traditionellen Häusern in einem alpinen Dorf in Uri',
+    'blog.article.banconote-svizzere-decima-serie-2030.title': 'SNB, so sehen die neuen Franken ab 2030 aus',
+    'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'Die SNB wählt das Grafikprojekt «J» von Emphase für die zehnte Banknotenserie: sechs Stückelungen zum Thema Höhe, die in den frühen 2030er Jahren im Umlauf waren.',
+    'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Neue Schweizer Banknoten in der Gestaltung in Bern',
 };
 
 export default blogMetaChDe;

@@ -13717,6 +13717,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'banconote-svizzere-decima-serie-2030',
+    category: 'novita',
+    date: '2026-08-28T06:05:25.862Z',
+    image: '/images/blog/banconote-svizzere-decima-serie-2030.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

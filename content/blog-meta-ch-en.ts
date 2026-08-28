@@ -4573,6 +4573,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.assegni-familiari-uri-importi-domanda.title': 'Family allowances in Canton Uri: amounts and application',
     'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Framework of family and training allowances in the Uri Canton: federal base LAFam, cantonal amounts, competent coffers and application procedure.',
     'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Family in front of traditional houses in an alpine Uri village',
+    'blog.article.banconote-svizzere-decima-serie-2030.title': 'SNB, here\'s what the new francs will look like from 2030',
+    'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'The SNB chose the graphic design "J" by Emphase for the tenth series of banknotes: six denominations, with an altitude theme, in circulation in the early 2030s.',
+    'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'New Swiss banknotes being designed in Bern',
 };
 
 export default blogMetaChEn;

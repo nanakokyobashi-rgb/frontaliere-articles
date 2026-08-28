@@ -4573,6 +4573,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.assegni-familiari-uri-importi-domanda.title': 'Allocations familiales dans le canton d\'Uri : montants et demande',
     'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Tableau des allocations familiales et de formation dans le canton d\'Uri : base fédérale LAFam, montants cantonaux, caisses compétentes et procédure de demande.',
     'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Famille devant des maisons traditionnelles dans un village alpin d\'Uri',
+    'blog.article.banconote-svizzere-decima-serie-2030.title': 'BNS, voici à quoi ressembleront les nouveaux francs à partir de 2030',
+    'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'La BNS choisit le projet graphique « J » d\'Emphase pour la dixième série de billets : six coupures, sur le thème de l\'altitude, en circulation au début des années 2030.',
+    'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Nouveaux billets de banque suisses en cours de design à Berne',
 };
 
 export default blogMetaChFr;

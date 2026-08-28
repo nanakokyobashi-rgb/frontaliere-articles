@@ -59339,6 +59339,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-banconote-svizzere-decima-serie-2030': {
+    title: 'BNS, ecco come saranno i nuovi franchi dal 2030',
+    description: 'La BNS sceglie il progetto grafico «J» di Emphase Sagl per la decima serie di banconote svizzere. Tema altitudine, lancio nei primi anni 2030. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, ecco, saranno, nuovi, franchi',
+    ogTitle: 'BNS, le nuove banconote dal 2030: il progetto Emphase',
+    ogDescription: 'La Banca nazionale svizzera ha scelto il progetto grafico «J» di Emphase Sagl per la decima serie di banconote: tema «La Svizzera, varietà in rilievo», lancio nei primi anni 2030. Sei tagli, dalle aree urbane alle vette alpine.',
+    canonicalPath: '/articoli-svizzera/banconote-svizzere-decima-serie-2030/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BNS, ecco come saranno i nuovi franchi dal 2030",
+      "description": "La BNS sceglie il progetto grafico «J» di Emphase Sagl per la decima serie di banconote svizzere. Tema altitudine, lancio nei primi anni 2030. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/banconote-svizzere-decima-serie-2030.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Nuove banconote svizzere in fase di design a Berna"
+      },
+      "datePublished": "2026-08-28T06:05:25+00:00",
+      "dateModified": "2026-08-28T06:05:25+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/banconote-svizzere-decima-serie-2030/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -4573,6 +4573,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.assegni-familiari-uri-importi-domanda.title': 'Assegni familiari nel Canton Uri: importi e domanda',
     'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Quadro degli assegni familiari e di formazione nel Canton Uri: base federale LAFam, importi cantonali, casse competenti e procedura di richiesta.',
     'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Famiglia davanti a case tradizionali nel villaggio alpino di Uri',
+    'blog.article.banconote-svizzere-decima-serie-2030.title': 'BNS, ecco come saranno i nuovi franchi dal 2030',
+    'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'La BNS sceglie il progetto grafico «J» di Emphase per la decima serie di banconote: sei tagli, tema altitudine, in circolazione nei primi anni 2030.',
+    'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Nuove banconote svizzere in fase di design a Berna',
 };
 
 export default blogMetaChIt;
