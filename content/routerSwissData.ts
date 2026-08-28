@@ -1548,6 +1548,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'premi-cassa-malati-uri-sussidi': { it: 'premi-cassa-malati-uri-sussidi', en: 'health-insurance-premiums-uri-subsidies', de: 'krankenkassenpraemien-uri-zuschuesse', fr: 'primes-assurance-maladie-uri-subventions' },
  'permesso-b-canton-uri-requisiti-rinnovo': { it: 'permesso-b-canton-uri-requisiti-rinnovo', en: 'canton-uri-permit-b-requirements-renewal', de: 'aufenthalt-b-kanton-uri-voraussetzungen-verlaengerung', fr: 'permis-sejour-b-canton-uri-conditions-renouvellement' },
  'permesso-domicilio-c-uri-requisiti': { it: 'permesso-domicilio-c-uri-requisiti', en: 'residence-permit-c-uri-requirements', de: 'aufenthaltsbewilligung-c-uri-anforderungen', fr: 'permis-sejour-c-uri-exigences' },
+ 'esposizioni-nazionali-messaggio-2026': { it: 'esposizioni-nazionali-messaggio-2026', en: 'national-exhibitions-message-2026', de: 'nationale-ausstellungen-botschaft-2026', fr: 'expositions-nationales-message-2026' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

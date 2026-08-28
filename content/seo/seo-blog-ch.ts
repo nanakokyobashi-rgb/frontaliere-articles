@@ -59261,6 +59261,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-esposizioni-nazionali-messaggio-2026': {
+    title: 'Esposizioni nazionali: sì al messaggio, niente cofinanziamento fino al 2040',
+    description: 'Il Consiglio federale approva il 26 agosto 2026 il messaggio sulla nuova legge: cofinanziamento federale non prima del 2040, massimo 30% dei costi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, esposizioni, nazionali, messaggio, niente',
+    ogTitle: 'Esposizioni nazionali, messaggio approvato: niente cofinanziamento prima del 2040',
+    ogDescription: 'Approvato il 26 agosto 2026 il messaggio sulla nuova legge per le esposizioni nazionali. Contributo federale massimo al 30%, decisione parlamentare non prima del 2035 e cofinanziamento escluso fino al 2040.',
+    canonicalPath: '/articoli-svizzera/esposizioni-nazionali-messaggio-2026/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Esposizioni nazionali: sì al messaggio, niente cofinanziamento fino al 2040",
+      "description": "Il Consiglio federale approva il 26 agosto 2026 il messaggio sulla nuova legge: cofinanziamento federale non prima del 2040, massimo 30% dei costi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/esposizioni-nazionali-messaggio-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Palazzo federale a Berna con bandiera svizzera, sede del Consiglio federale"
+      },
+      "datePublished": "2026-08-28T04:51:43+00:00",
+      "dateModified": "2026-08-28T04:51:43+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/esposizioni-nazionali-messaggio-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

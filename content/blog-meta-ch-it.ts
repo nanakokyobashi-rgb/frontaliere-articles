@@ -4567,6 +4567,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-domicilio-c-uri-requisiti.title': 'Permesso C Uri: requisiti e domanda',
     'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Guida completa al permesso di domicilio C nel Canton Uri: anni di residenza, integrazione, lingua, procedura di domanda e rilascio anticipato.',
     'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande di Bellinzona, simbolo dell\'amministrazione cantonale svizzera',
+    'blog.article.esposizioni-nazionali-messaggio-2026.title': 'Esposizioni nazionali: sì al messaggio, niente cofinanziamento fino al 2040',
+    'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'Il Consiglio federale approva il 26 agosto 2026 il messaggio sulla nuova legge: contributo federale massimo al 30% e decisione parlamentare non prima del 2035.',
+    'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Palazzo federale a Berna con bandiera svizzera, sede del Consiglio federale',
 };
 
 export default blogMetaChIt;

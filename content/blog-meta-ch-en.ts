@@ -4567,6 +4567,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-domicilio-c-uri-requisiti.title': 'C Uri Permit: Requirements and Application',
     'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Complete guide to residence permit C in Canton Uri: years of residence, integration, language, application procedure and early release.',
     'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande in Bellinzona, symbol of Swiss cantonal administration',
+    'blog.article.esposizioni-nazionali-messaggio-2026.title': 'National exhibitions: yes to the message, no co-financing until 2040',
+    'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'The Federal Council approves on 26 August 2026 the message on the new law: maximum federal contribution at 30% and parliamentary decision no earlier than 2035.',
+    'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Federal Palace in Bern with Swiss flag, seat of the Federal Council',
 };
 
 export default blogMetaChEn;

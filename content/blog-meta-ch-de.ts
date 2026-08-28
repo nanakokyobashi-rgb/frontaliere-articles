@@ -4567,6 +4567,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-domicilio-c-uri-requisiti.title': 'C Uri-Genehmigung: Anforderungen und Antrag',
     'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Uri: Aufenthaltsjahre, Integration, Sprache, Antragsverfahren und vorzeitige Erteilung.',
     'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande in Bellinzona, Symbol der Schweizer Kantonsverwaltung',
+    'blog.article.esposizioni-nazionali-messaggio-2026.title': 'Nationale Ausstellungen: Ja zur Botschaft, keine Kofinanzierung bis 2040',
+    'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'Der Bundesrat verabschiedet am 26. August 2026 die Botschaft zum neuen Gesetz: maximal 30% Bundesbeitrag und parlamentarischer Entscheid frühestens 2035.',
+    'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Bundeshaus in Bern mit Schweizer Flagge, Sitz des Bundesrates',
 };
 
 export default blogMetaChDe;
