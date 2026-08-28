@@ -1,6 +1,6 @@
 {
   "crawlerKey": "sfs-group",
-  "assembledAt": "2026-08-28T05:29:43.295Z",
+  "assembledAt": "2026-08-28T21:08:43.968Z",
   "jobs": [
     {
       "id": "sfs-group-d28e368a8b5c",
@@ -33,7 +33,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/techniker-in-wärmebehandlung-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.797Z",
+      "crawledAt": "2026-08-28T21:08:40.356Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -112,7 +112,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/spécialiste-vente-interne-pour-(epi)-en-équipement-d'atelier-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:29:39.664Z",
+      "crawledAt": "2026-08-28T21:08:40.208Z",
       "addressLocality": "Payerne",
       "addressRegion": "VD",
       "postalCode": "1000",
@@ -190,7 +190,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/polymechaniker-in-–-erosion-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.536Z",
+      "crawledAt": "2026-08-28T21:08:40.061Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -270,7 +270,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/pim-data-governance-manager-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.412Z",
+      "crawledAt": "2026-08-28T21:08:39.918Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -336,7 +336,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/messtechniker-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.290Z",
+      "crawledAt": "2026-08-28T21:08:39.774Z",
       "addressLocality": "Hallau",
       "addressRegion": "SH",
       "postalCode": "8200",
@@ -414,7 +414,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/logistiker-in-kommissionierung-(2-schicht)-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.167Z",
+      "crawledAt": "2026-08-28T21:08:39.630Z",
       "addressLocality": "Rotkreuz",
       "addressRegion": "SG",
       "postalCode": "9000",
@@ -495,7 +495,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/kunststofftechnologe-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:39.045Z",
+      "crawledAt": "2026-08-28T21:08:39.484Z",
       "addressLocality": "Hallau",
       "addressRegion": "SH",
       "postalCode": "8200",
@@ -541,7 +541,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sfs-group-d5628f00a1be",
@@ -574,7 +575,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/kaltmassivumformer-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.923Z",
+      "crawledAt": "2026-08-28T21:08:39.337Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -656,7 +657,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/gebietsverkaufsleiter-in-–-industrie-und-metall-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.797Z",
+      "crawledAt": "2026-08-28T21:08:39.188Z",
       "addressLocality": "Rotkreuz",
       "addressRegion": "SG",
       "postalCode": "9000",
@@ -735,7 +736,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/filialleiter-in-handwerkstadt-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.673Z",
+      "crawledAt": "2026-08-28T21:08:38.897Z",
       "addressLocality": "Hinwil",
       "addressRegion": "ZH",
       "postalCode": "9435",
@@ -780,7 +781,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sfs-group-3c8b7b63ccab",
@@ -813,7 +815,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/data-contentmanager-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.548Z",
+      "crawledAt": "2026-08-28T21:08:38.601Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -895,7 +897,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/conseiller-de-vente-cité-de-l'artisan-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:29:38.427Z",
+      "crawledAt": "2026-08-28T21:08:38.312Z",
       "addressLocality": "Sion",
       "addressRegion": "VS",
       "postalCode": "9435",
@@ -973,7 +975,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/automatiker-in-schichtmodell-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.306Z",
+      "crawledAt": "2026-08-28T21:08:38.165Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1037,7 +1039,7 @@
       "title": "Automatiker/in Instandhaltung (m/f/d)",
       "titleByLocale": {
         "it": "Operatore automatico/in manutenzione (m/f/d)",
-        "en": "Automatician/maintenance (m/f/d)",
+        "en": "Automatiker/in Instandhaltung (m/f/d)",
         "de": "Automatiker/in Instandhaltung (m/f/d)",
         "fr": "Opérateur automatique/en maintenance (m/f/d)"
       },
@@ -1053,7 +1055,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/automatiker-in-instandhaltung-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.174Z",
+      "crawledAt": "2026-08-28T21:08:38.020Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1137,7 +1139,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/anwendungstechniker-in-rainscreen-vhf-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:38.048Z",
+      "crawledAt": "2026-08-28T21:08:37.855Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1217,7 +1219,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/anwendungstechniker-in-hauraton-entwässerungssysteme-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:29:37.888Z",
+      "crawledAt": "2026-08-28T21:08:37.664Z",
       "addressLocality": "Buchs ZH",
       "addressRegion": "ZH",
       "postalCode": "9435",
@@ -1328,7 +1330,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "sfs-group-a0b31a324b8e",
@@ -1408,7 +1411,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "sfs-group-0f7e375a6040",
@@ -1474,74 +1477,209 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
-      "id": "sfs-group-7cf92014fa90",
-      "slug": "polymechaniker-in-schleifen-m-f-d-sfs-group-heerbrugg",
+      "id": "sfs-group-b7ae0a461f4b",
+      "slug": "filialleiter-in-handwerkstadt-m-f-d-sfs-group-aarau",
       "slugByLocale": {
-        "it": "polymechaniker-in-schleifen-m-f-d-sfs-group-heerbrugg",
-        "en": "polymechaniker-in-schleifen-m-f-d-sfs-group-heerbrugg",
-        "de": "polymechaniker-in-schleifen-m-f-d-sfs-group-heerbrugg",
-        "fr": "polymechaniker-in-schleifen-m-f-d-sfs-group-heerbrugg"
+        "de": "filialleiter-in-handwerkstadt-m-f-d-sfs-group-aarau",
+        "it": "filialleiter-in-handwerkstadt-m-f-d-sfs-group-aarau",
+        "en": "filialleiter-in-handwerkstadt-m-f-d-sfs-group-aarau",
+        "fr": "filialleiter-in-handwerkstadt-m-f-d-sfs-group-aarau"
       },
       "company": "SFS Group",
       "companyKey": "sfs-group",
       "companyDomain": "sfs.com",
-      "title": "Polymechaniker/in Schleifen (m/f/d)",
+      "title": "Filialleiter/in Handwerkstadt (m/f/d)",
       "titleByLocale": {
-        "it": "Polymechaniker/in Schleifen (m/f/d)",
-        "en": "Polymechaniker/in Schleifen (m/f/d)",
-        "de": "Polymechaniker/in Schleifen (m/f/d)",
-        "fr": "Polymechaniker/in Schleifen (m/f/d)"
+        "de": "Filialleiter/in Handwerkstadt (m/f/d)",
+        "it": "Filialleiter/in Handwerkstadt (m/f/d)",
+        "en": "Filialleiter/in Handwerkstadt (m/f/d)",
+        "fr": "Filialleiter/in Handwerkstadt (m/f/d)"
       },
-      "description": "Du willst nicht einfach nur Teile fertigen, sondern an hochwertigen Werkzeugen für die Automobilindustrie mitarbeiten? Bei uns in Heerbrugg entwickelst und produzierst du Präzisionsteile, die wirklich etwas bewegen. Für unseren Werkzeugbau suchen wir eine motivierte Persönlichkeit, die gerne Verantwortung übernimmt und ihr Know-how aktiv einbringt. Your Tasks:\n• Einrichten und Bedienen moderner CNC-Schleifmaschinen\n• Finish von Umformwerkzeugen – von einfach bis hochkomplex\n• Selbstständige Qualitätskontrolle der gefertigten Werkstücke\n• Sicherstellen der Einhaltung von Qualitäts-, Umwelt- und Sicherheitsstandards im Arbeitsbereich\n• Aktive Mitgestaltung und Weiterentwicklung unserer Prozesse im kontinuierlichen Verbesserungsprozess (CIP) Your profile:\n• Abgeschlossene technische Grundausbildung (z. B. Polymechaniker/in EFZ)\n• Mehrjährige Erfahrung im CNC-Schleifen zwingend erforderlich\n• Freude an moderner Technik und sicherer Umgang mit CNC-Steuerungen (z. B. StuderWIN)\n• Interesse an verschiedenen Materialien und Werkzeugen sowie präziser Arbeitsweise We offer:\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote & Mitarbeiterevents\n• Flexibles Mobilitätskonzept für deinen Arbeitsweg\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Personalrestaurant mit attraktiven Preisen Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
+      "description": "Mit einem umfassenden und dynamischen Top-Sortiment deckt die SFS Group die Bedürfnisse ihrer Kunden ab: Werkzeuge, Maschinen, Befestigungstechnik, Beschläge und chemisch-technische Produkte. Diese bieten wir online und in unseren 27 Handwerkstadt-Filialen in der Schweiz an. Unsere Detailhändlerinnen und Detailhändler beraten unsere Kunden professionell und stellen ihre Bedürfnisse ins Zentrum. Für unseren Standort Aarau suchen wir nach Absprache eine ambitionierte/n Filialleiter/in Handwerkstadt. Your Tasks:\n• Aktive Kundenbetreuung und persönlicher Verkauf\n• Umsetzung der Umsatz- und Zielvorgaben\n• Führung und Förderung des Filialteams\n• Organisation und Sicherstellung des reibungslosen Filialbetriebs\n• Warenbewirtschaftung und ansprechende Warenpräsentation\n• Pflege und Ausbau lokaler Netzwerke sowie Zusammenarbeit mit internen Stellen\n• Einhaltung der Qualitätsstandards und Mitarbeit an Verbesserungsprozessen Your profile:\n• Abgeschlossene Berufslehre im Detailhandel oder in einem technischen Beruf (z. B. Metallbau, Schreinerei)\n• Weiterbildung im Verkauf oder Marketing (z. B. Verkaufsfachmann/-frau, Technischer Kaufmann/-frau)\n• Fundierte Kenntnisse in Befestigungstechnik, Werkzeugen, Beschlägen und chemisch-technischen Produkten\n• Stilsicheres Deutsch in Wort und Schrift\n• Ausgeprägte Verkaufskompetenz mit sicherer Gesprächsführung und Abschlusstechnik\n• Führungspersönlichkeit mit gepflegtem Auftreten, hoher Belastbarkeit, Motivation und Freude an der Teamförderung We offer:\n• Abwechslungsreiches Aufgabengebiet und Raum für Eigenverantwortung\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote und Mitarbeiterevents, Personalrestaurant mit attraktiven Preisen\n• Jährliche Erfolgsbeteiligung\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Eigene Pensionskasse mit Auswahlmöglichkeit verschiedener Sparpläne\n• Weitere Benefits: Benefits | Join SFS",
       "descriptionByLocale": {
-        "it": "Du willst nicht einfach nur Teile fertigen, sondern an hochwertigen Werkzeugen für die Automobilindustrie mitarbeiten? Bei uns in Heerbrugg entwickelst und produzierst du Präzisionsteile, die wirklich etwas bewegen. Für unseren Werkzeugbau suchen wir eine motivierte Persönlichkeit, die gerne Verantwortung übernimmt und ihr Know-how aktiv einbringt. Your Tasks:\n• Einrichten und Bedienen moderner CNC-Schleifmaschinen\n• Finish von Umformwerkzeugen – von einfach bis hochkomplex\n• Selbstständige Qualitätskontrolle der gefertigten Werkstücke\n• Sicherstellen der Einhaltung von Qualitäts-, Umwelt- und Sicherheitsstandards im Arbeitsbereich\n• Aktive Mitgestaltung und Weiterentwicklung unserer Prozesse im kontinuierlichen Verbesserungsprozess (CIP) Your profile:\n• Abgeschlossene technische Grundausbildung (z. B. Polymechaniker/in EFZ)\n• Mehrjährige Erfahrung im CNC-Schleifen zwingend erforderlich\n• Freude an moderner Technik und sicherer Umgang mit CNC-Steuerungen (z. B. StuderWIN)\n• Interesse an verschiedenen Materialien und Werkzeugen sowie präziser Arbeitsweise We offer:\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote & Mitarbeiterevents\n• Flexibles Mobilitätskonzept für deinen Arbeitsweg\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Personalrestaurant mit attraktiven Preisen Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
-        "en": "Du willst nicht einfach nur Teile fertigen, sondern an hochwertigen Werkzeugen für die Automobilindustrie mitarbeiten? Bei uns in Heerbrugg entwickelst und produzierst du Präzisionsteile, die wirklich etwas bewegen. Für unseren Werkzeugbau suchen wir eine motivierte Persönlichkeit, die gerne Verantwortung übernimmt und ihr Know-how aktiv einbringt. Your Tasks:\n• Einrichten und Bedienen moderner CNC-Schleifmaschinen\n• Finish von Umformwerkzeugen – von einfach bis hochkomplex\n• Selbstständige Qualitätskontrolle der gefertigten Werkstücke\n• Sicherstellen der Einhaltung von Qualitäts-, Umwelt- und Sicherheitsstandards im Arbeitsbereich\n• Aktive Mitgestaltung und Weiterentwicklung unserer Prozesse im kontinuierlichen Verbesserungsprozess (CIP) Your profile:\n• Abgeschlossene technische Grundausbildung (z. B. Polymechaniker/in EFZ)\n• Mehrjährige Erfahrung im CNC-Schleifen zwingend erforderlich\n• Freude an moderner Technik und sicherer Umgang mit CNC-Steuerungen (z. B. StuderWIN)\n• Interesse an verschiedenen Materialien und Werkzeugen sowie präziser Arbeitsweise We offer:\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote & Mitarbeiterevents\n• Flexibles Mobilitätskonzept für deinen Arbeitsweg\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Personalrestaurant mit attraktiven Preisen Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
-        "de": "Du willst nicht einfach nur Teile fertigen, sondern an hochwertigen Werkzeugen für die Automobilindustrie mitarbeiten? Bei uns in Heerbrugg entwickelst und produzierst du Präzisionsteile, die wirklich etwas bewegen. Für unseren Werkzeugbau suchen wir eine motivierte Persönlichkeit, die gerne Verantwortung übernimmt und ihr Know-how aktiv einbringt. Your Tasks:\n• Einrichten und Bedienen moderner CNC-Schleifmaschinen\n• Finish von Umformwerkzeugen – von einfach bis hochkomplex\n• Selbstständige Qualitätskontrolle der gefertigten Werkstücke\n• Sicherstellen der Einhaltung von Qualitäts-, Umwelt- und Sicherheitsstandards im Arbeitsbereich\n• Aktive Mitgestaltung und Weiterentwicklung unserer Prozesse im kontinuierlichen Verbesserungsprozess (CIP) Your profile:\n• Abgeschlossene technische Grundausbildung (z. B. Polymechaniker/in EFZ)\n• Mehrjährige Erfahrung im CNC-Schleifen zwingend erforderlich\n• Freude an moderner Technik und sicherer Umgang mit CNC-Steuerungen (z. B. StuderWIN)\n• Interesse an verschiedenen Materialien und Werkzeugen sowie präziser Arbeitsweise We offer:\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote & Mitarbeiterevents\n• Flexibles Mobilitätskonzept für deinen Arbeitsweg\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Personalrestaurant mit attraktiven Preisen Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
-        "fr": "Du willst nicht einfach nur Teile fertigen, sondern an hochwertigen Werkzeugen für die Automobilindustrie mitarbeiten? Bei uns in Heerbrugg entwickelst und produzierst du Präzisionsteile, die wirklich etwas bewegen. Für unseren Werkzeugbau suchen wir eine motivierte Persönlichkeit, die gerne Verantwortung übernimmt und ihr Know-how aktiv einbringt. Your Tasks:\n• Einrichten und Bedienen moderner CNC-Schleifmaschinen\n• Finish von Umformwerkzeugen – von einfach bis hochkomplex\n• Selbstständige Qualitätskontrolle der gefertigten Werkstücke\n• Sicherstellen der Einhaltung von Qualitäts-, Umwelt- und Sicherheitsstandards im Arbeitsbereich\n• Aktive Mitgestaltung und Weiterentwicklung unserer Prozesse im kontinuierlichen Verbesserungsprozess (CIP) Your profile:\n• Abgeschlossene technische Grundausbildung (z. B. Polymechaniker/in EFZ)\n• Mehrjährige Erfahrung im CNC-Schleifen zwingend erforderlich\n• Freude an moderner Technik und sicherer Umgang mit CNC-Steuerungen (z. B. StuderWIN)\n• Interesse an verschiedenen Materialien und Werkzeugen sowie präziser Arbeitsweise We offer:\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote & Mitarbeiterevents\n• Flexibles Mobilitätskonzept für deinen Arbeitsweg\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Personalrestaurant mit attraktiven Preisen Weitere Benefits: https://join.sfs.com/ch/de/benefits/"
+        "de": "Mit einem umfassenden und dynamischen Top-Sortiment deckt die SFS Group die Bedürfnisse ihrer Kunden ab: Werkzeuge, Maschinen, Befestigungstechnik, Beschläge und chemisch-technische Produkte. Diese bieten wir online und in unseren 27 Handwerkstadt-Filialen in der Schweiz an. Unsere Detailhändlerinnen und Detailhändler beraten unsere Kunden professionell und stellen ihre Bedürfnisse ins Zentrum. Für unseren Standort Aarau suchen wir nach Absprache eine ambitionierte/n Filialleiter/in Handwerkstadt. Your Tasks:\n• Aktive Kundenbetreuung und persönlicher Verkauf\n• Umsetzung der Umsatz- und Zielvorgaben\n• Führung und Förderung des Filialteams\n• Organisation und Sicherstellung des reibungslosen Filialbetriebs\n• Warenbewirtschaftung und ansprechende Warenpräsentation\n• Pflege und Ausbau lokaler Netzwerke sowie Zusammenarbeit mit internen Stellen\n• Einhaltung der Qualitätsstandards und Mitarbeit an Verbesserungsprozessen Your profile:\n• Abgeschlossene Berufslehre im Detailhandel oder in einem technischen Beruf (z. B. Metallbau, Schreinerei)\n• Weiterbildung im Verkauf oder Marketing (z. B. Verkaufsfachmann/-frau, Technischer Kaufmann/-frau)\n• Fundierte Kenntnisse in Befestigungstechnik, Werkzeugen, Beschlägen und chemisch-technischen Produkten\n• Stilsicheres Deutsch in Wort und Schrift\n• Ausgeprägte Verkaufskompetenz mit sicherer Gesprächsführung und Abschlusstechnik\n• Führungspersönlichkeit mit gepflegtem Auftreten, hoher Belastbarkeit, Motivation und Freude an der Teamförderung We offer:\n• Abwechslungsreiches Aufgabengebiet und Raum für Eigenverantwortung\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote und Mitarbeiterevents, Personalrestaurant mit attraktiven Preisen\n• Jährliche Erfolgsbeteiligung\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Eigene Pensionskasse mit Auswahlmöglichkeit verschiedener Sparpläne\n• Weitere Benefits: Benefits | Join SFS",
+        "it": "Mit einem umfassenden und dynamischen Top-Sortiment deckt die SFS Group die Bedürfnisse ihrer Kunden ab: Werkzeuge, Maschinen, Befestigungstechnik, Beschläge und chemisch-technische Produkte. Diese bieten wir online und in unseren 27 Handwerkstadt-Filialen in der Schweiz an. Unsere Detailhändlerinnen und Detailhändler beraten unsere Kunden professionell und stellen ihre Bedürfnisse ins Zentrum. Für unseren Standort Aarau suchen wir nach Absprache eine ambitionierte/n Filialleiter/in Handwerkstadt. Your Tasks:\n• Aktive Kundenbetreuung und persönlicher Verkauf\n• Umsetzung der Umsatz- und Zielvorgaben\n• Führung und Förderung des Filialteams\n• Organisation und Sicherstellung des reibungslosen Filialbetriebs\n• Warenbewirtschaftung und ansprechende Warenpräsentation\n• Pflege und Ausbau lokaler Netzwerke sowie Zusammenarbeit mit internen Stellen\n• Einhaltung der Qualitätsstandards und Mitarbeit an Verbesserungsprozessen Your profile:\n• Abgeschlossene Berufslehre im Detailhandel oder in einem technischen Beruf (z. B. Metallbau, Schreinerei)\n• Weiterbildung im Verkauf oder Marketing (z. B. Verkaufsfachmann/-frau, Technischer Kaufmann/-frau)\n• Fundierte Kenntnisse in Befestigungstechnik, Werkzeugen, Beschlägen und chemisch-technischen Produkten\n• Stilsicheres Deutsch in Wort und Schrift\n• Ausgeprägte Verkaufskompetenz mit sicherer Gesprächsführung und Abschlusstechnik\n• Führungspersönlichkeit mit gepflegtem Auftreten, hoher Belastbarkeit, Motivation und Freude an der Teamförderung We offer:\n• Abwechslungsreiches Aufgabengebiet und Raum für Eigenverantwortung\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote und Mitarbeiterevents, Personalrestaurant mit attraktiven Preisen\n• Jährliche Erfolgsbeteiligung\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Eigene Pensionskasse mit Auswahlmöglichkeit verschiedener Sparpläne\n• Weitere Benefits: Benefits | Join SFS",
+        "en": "Mit einem umfassenden und dynamischen Top-Sortiment deckt die SFS Group die Bedürfnisse ihrer Kunden ab: Werkzeuge, Maschinen, Befestigungstechnik, Beschläge und chemisch-technische Produkte. Diese bieten wir online und in unseren 27 Handwerkstadt-Filialen in der Schweiz an. Unsere Detailhändlerinnen und Detailhändler beraten unsere Kunden professionell und stellen ihre Bedürfnisse ins Zentrum. Für unseren Standort Aarau suchen wir nach Absprache eine ambitionierte/n Filialleiter/in Handwerkstadt. Your Tasks:\n• Aktive Kundenbetreuung und persönlicher Verkauf\n• Umsetzung der Umsatz- und Zielvorgaben\n• Führung und Förderung des Filialteams\n• Organisation und Sicherstellung des reibungslosen Filialbetriebs\n• Warenbewirtschaftung und ansprechende Warenpräsentation\n• Pflege und Ausbau lokaler Netzwerke sowie Zusammenarbeit mit internen Stellen\n• Einhaltung der Qualitätsstandards und Mitarbeit an Verbesserungsprozessen Your profile:\n• Abgeschlossene Berufslehre im Detailhandel oder in einem technischen Beruf (z. B. Metallbau, Schreinerei)\n• Weiterbildung im Verkauf oder Marketing (z. B. Verkaufsfachmann/-frau, Technischer Kaufmann/-frau)\n• Fundierte Kenntnisse in Befestigungstechnik, Werkzeugen, Beschlägen und chemisch-technischen Produkten\n• Stilsicheres Deutsch in Wort und Schrift\n• Ausgeprägte Verkaufskompetenz mit sicherer Gesprächsführung und Abschlusstechnik\n• Führungspersönlichkeit mit gepflegtem Auftreten, hoher Belastbarkeit, Motivation und Freude an der Teamförderung We offer:\n• Abwechslungsreiches Aufgabengebiet und Raum für Eigenverantwortung\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote und Mitarbeiterevents, Personalrestaurant mit attraktiven Preisen\n• Jährliche Erfolgsbeteiligung\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Eigene Pensionskasse mit Auswahlmöglichkeit verschiedener Sparpläne\n• Weitere Benefits: Benefits | Join SFS",
+        "fr": "Mit einem umfassenden und dynamischen Top-Sortiment deckt die SFS Group die Bedürfnisse ihrer Kunden ab: Werkzeuge, Maschinen, Befestigungstechnik, Beschläge und chemisch-technische Produkte. Diese bieten wir online und in unseren 27 Handwerkstadt-Filialen in der Schweiz an. Unsere Detailhändlerinnen und Detailhändler beraten unsere Kunden professionell und stellen ihre Bedürfnisse ins Zentrum. Für unseren Standort Aarau suchen wir nach Absprache eine ambitionierte/n Filialleiter/in Handwerkstadt. Your Tasks:\n• Aktive Kundenbetreuung und persönlicher Verkauf\n• Umsetzung der Umsatz- und Zielvorgaben\n• Führung und Förderung des Filialteams\n• Organisation und Sicherstellung des reibungslosen Filialbetriebs\n• Warenbewirtschaftung und ansprechende Warenpräsentation\n• Pflege und Ausbau lokaler Netzwerke sowie Zusammenarbeit mit internen Stellen\n• Einhaltung der Qualitätsstandards und Mitarbeit an Verbesserungsprozessen Your profile:\n• Abgeschlossene Berufslehre im Detailhandel oder in einem technischen Beruf (z. B. Metallbau, Schreinerei)\n• Weiterbildung im Verkauf oder Marketing (z. B. Verkaufsfachmann/-frau, Technischer Kaufmann/-frau)\n• Fundierte Kenntnisse in Befestigungstechnik, Werkzeugen, Beschlägen und chemisch-technischen Produkten\n• Stilsicheres Deutsch in Wort und Schrift\n• Ausgeprägte Verkaufskompetenz mit sicherer Gesprächsführung und Abschlusstechnik\n• Führungspersönlichkeit mit gepflegtem Auftreten, hoher Belastbarkeit, Motivation und Freude an der Teamförderung We offer:\n• Abwechslungsreiches Aufgabengebiet und Raum für Eigenverantwortung\n• Klar strukturierte Einarbeitungsphase mit abteilungsübergreifendem Onboarding-Programm\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Zahlreiche Sportangebote und Mitarbeiterevents, Personalrestaurant mit attraktiven Preisen\n• Jährliche Erfolgsbeteiligung\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Eigene Pensionskasse mit Auswahlmöglichkeit verschiedener Sparpläne\n• Weitere Benefits: Benefits | Join SFS"
       },
-      "location": "Heerbrugg",
-      "canton": "SG",
-      "url": "https://join.sfs.com/ch/en/vacancies/polymechaniker-in-schleifen-(m-f-d).html",
+      "location": "Aarau",
+      "canton": "AG",
+      "url": "https://join.sfs.com/ch/en/vacancies/filialleiter-in-handwerkstadt-(m-f-d)-2.html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-26T10:10:58.336Z",
-      "addressLocality": "Heerbrugg",
-      "addressRegion": "SG",
-      "streetAddress": "Rosenbergsaustrasse 8",
+      "crawledAt": "2026-08-28T21:08:39.040Z",
+      "addressLocality": "Aarau",
+      "addressRegion": "AG",
       "postalCode": "9435",
       "addressCountry": "CH",
       "country": "CH",
-      "category": "Tecnica",
+      "category": "Altro",
       "contract": "full-time",
       "employmentType": "FULL_TIME",
       "experienceLevel": "mid",
       "sector": "Industria / Meccanica",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-25",
-      "applyUrl": "https://jobapplication.sfs.com/Vacancies/2977/Application/CheckLogin/1?lang=eng",
-      "jobReqId": "2977",
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobapplication.sfs.com/Vacancies/2989/Application/CheckLogin/1?lang=eng",
+      "jobReqId": "2989",
       "legalEntity": "SFS Group Schweiz AG",
       "requirements": [],
-      "requirementsByLocale": {},
+      "requirementsByLocale": {
+        "de": []
+      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-25T10:03:00.863Z",
-      "salaryMin": 67000,
-      "salaryMax": 102000,
+      "salaryMin": 62000,
+      "salaryMax": 94000,
       "baseSalary": {
         "@type": "MonetaryAmount",
         "currency": "CHF",
         "value": {
           "@type": "QuantitativeValue",
-          "minValue": 67000,
-          "maxValue": 102000,
+          "minValue": 62000,
+          "maxValue": 94000,
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 2
+      "firstSeenAt": "2026-08-28T21:08:39.040Z"
+    },
+    {
+      "id": "sfs-group-bd0a7c285f64",
+      "slug": "fachperson-debitorenbuchhaltung-m-f-d-sfs-group-heerbrugg",
+      "slugByLocale": {
+        "de": "fachperson-debitorenbuchhaltung-m-f-d-sfs-group-heerbrugg",
+        "it": "fachperson-debitorenbuchhaltung-m-f-d-sfs-group-heerbrugg",
+        "en": "fachperson-debitorenbuchhaltung-m-f-d-sfs-group-heerbrugg",
+        "fr": "fachperson-debitorenbuchhaltung-m-f-d-sfs-group-heerbrugg"
+      },
+      "company": "SFS Group",
+      "companyKey": "sfs-group",
+      "companyDomain": "sfs.com",
+      "title": "Fachperson Debitorenbuchhaltung (m/f/d)",
+      "titleByLocale": {
+        "de": "Fachperson Debitorenbuchhaltung (m/f/d)",
+        "it": "Fachperson Debitorenbuchhaltung (m/f/d)",
+        "en": "Fachperson Debitorenbuchhaltung (m/f/d)",
+        "fr": "Fachperson Debitorenbuchhaltung (m/f/d)"
+      },
+      "description": "Als Accounts Receivable Specialist verbindest du dein Zahlenflair mit deinem Kommunikationstalent und übernimmst Verantwortung in einem internationalen Umfeld. Dich erwartet ein vielfältiges und abwechslungsreiches Aufgabengebiet, in dem du deine Expertise einbringen und einen echten Mehrwert für unseren Konzern schaffen kannst. Mit deinem Know-how stellst du einen wichtigen Teil unserer Finanzprozesse sicher und leistest damit einen entscheidenden Beitrag zu unserem Unternehmenserfolg. Your Tasks:\n• Prüfung, Kontierung und Buchung der Zahlungseingänge\n• Kontoabstimmungen inkl. Intercompany-Abstimmungen\n• Klärung und Bearbeitung von Differenzen und offenen Posten\n• Durchführung von Bonitätsabfragen sowie Überwachung und Pflege von Kreditlimiten\n• Anlage, Pflege und Prüfung von Kundenstammdaten\n• Überwachung risikobehafteter Kundenforderungen und Information der zuständigen Stellen Your profile:\n• Kaufmännische Ausbildung, idealerweise mit Weiterbildung als Sachbearbeiter/in Rechnungswesen\n• Mindestens 2 Jahre Berufserfahrung in der Debitorenbuchhaltung\n• Erfahrung im Mahnwesen\n• Erfahrung mit SAP S/4HANA von Vorteil\n• Gute Französisch- und Englischkenntnisse sowie fliessende Deutschkenntnisse\n• Analytisches und vernetztes Denken, Zahlenflair, Gewissenhaftigkeit sowie eine strukturierte und effiziente Arbeitsweise We offer:\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Jährliche Erfolgsbeteiligung\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Raum für Eigenverantwortung und Initiative\n• Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
+      "descriptionByLocale": {
+        "de": "Als Accounts Receivable Specialist verbindest du dein Zahlenflair mit deinem Kommunikationstalent und übernimmst Verantwortung in einem internationalen Umfeld. Dich erwartet ein vielfältiges und abwechslungsreiches Aufgabengebiet, in dem du deine Expertise einbringen und einen echten Mehrwert für unseren Konzern schaffen kannst. Mit deinem Know-how stellst du einen wichtigen Teil unserer Finanzprozesse sicher und leistest damit einen entscheidenden Beitrag zu unserem Unternehmenserfolg. Your Tasks:\n• Prüfung, Kontierung und Buchung der Zahlungseingänge\n• Kontoabstimmungen inkl. Intercompany-Abstimmungen\n• Klärung und Bearbeitung von Differenzen und offenen Posten\n• Durchführung von Bonitätsabfragen sowie Überwachung und Pflege von Kreditlimiten\n• Anlage, Pflege und Prüfung von Kundenstammdaten\n• Überwachung risikobehafteter Kundenforderungen und Information der zuständigen Stellen Your profile:\n• Kaufmännische Ausbildung, idealerweise mit Weiterbildung als Sachbearbeiter/in Rechnungswesen\n• Mindestens 2 Jahre Berufserfahrung in der Debitorenbuchhaltung\n• Erfahrung im Mahnwesen\n• Erfahrung mit SAP S/4HANA von Vorteil\n• Gute Französisch- und Englischkenntnisse sowie fliessende Deutschkenntnisse\n• Analytisches und vernetztes Denken, Zahlenflair, Gewissenhaftigkeit sowie eine strukturierte und effiziente Arbeitsweise We offer:\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Jährliche Erfolgsbeteiligung\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Raum für Eigenverantwortung und Initiative\n• Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
+        "it": "Als Accounts Receivable Specialist verbindest du dein Zahlenflair mit deinem Kommunikationstalent und übernimmst Verantwortung in einem internationalen Umfeld. Dich erwartet ein vielfältiges und abwechslungsreiches Aufgabengebiet, in dem du deine Expertise einbringen und einen echten Mehrwert für unseren Konzern schaffen kannst. Mit deinem Know-how stellst du einen wichtigen Teil unserer Finanzprozesse sicher und leistest damit einen entscheidenden Beitrag zu unserem Unternehmenserfolg. Your Tasks:\n• Prüfung, Kontierung und Buchung der Zahlungseingänge\n• Kontoabstimmungen inkl. Intercompany-Abstimmungen\n• Klärung und Bearbeitung von Differenzen und offenen Posten\n• Durchführung von Bonitätsabfragen sowie Überwachung und Pflege von Kreditlimiten\n• Anlage, Pflege und Prüfung von Kundenstammdaten\n• Überwachung risikobehafteter Kundenforderungen und Information der zuständigen Stellen Your profile:\n• Kaufmännische Ausbildung, idealerweise mit Weiterbildung als Sachbearbeiter/in Rechnungswesen\n• Mindestens 2 Jahre Berufserfahrung in der Debitorenbuchhaltung\n• Erfahrung im Mahnwesen\n• Erfahrung mit SAP S/4HANA von Vorteil\n• Gute Französisch- und Englischkenntnisse sowie fliessende Deutschkenntnisse\n• Analytisches und vernetztes Denken, Zahlenflair, Gewissenhaftigkeit sowie eine strukturierte und effiziente Arbeitsweise We offer:\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Jährliche Erfolgsbeteiligung\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Raum für Eigenverantwortung und Initiative\n• Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
+        "en": "Als Accounts Receivable Specialist verbindest du dein Zahlenflair mit deinem Kommunikationstalent und übernimmst Verantwortung in einem internationalen Umfeld. Dich erwartet ein vielfältiges und abwechslungsreiches Aufgabengebiet, in dem du deine Expertise einbringen und einen echten Mehrwert für unseren Konzern schaffen kannst. Mit deinem Know-how stellst du einen wichtigen Teil unserer Finanzprozesse sicher und leistest damit einen entscheidenden Beitrag zu unserem Unternehmenserfolg. Your Tasks:\n• Prüfung, Kontierung und Buchung der Zahlungseingänge\n• Kontoabstimmungen inkl. Intercompany-Abstimmungen\n• Klärung und Bearbeitung von Differenzen und offenen Posten\n• Durchführung von Bonitätsabfragen sowie Überwachung und Pflege von Kreditlimiten\n• Anlage, Pflege und Prüfung von Kundenstammdaten\n• Überwachung risikobehafteter Kundenforderungen und Information der zuständigen Stellen Your profile:\n• Kaufmännische Ausbildung, idealerweise mit Weiterbildung als Sachbearbeiter/in Rechnungswesen\n• Mindestens 2 Jahre Berufserfahrung in der Debitorenbuchhaltung\n• Erfahrung im Mahnwesen\n• Erfahrung mit SAP S/4HANA von Vorteil\n• Gute Französisch- und Englischkenntnisse sowie fliessende Deutschkenntnisse\n• Analytisches und vernetztes Denken, Zahlenflair, Gewissenhaftigkeit sowie eine strukturierte und effiziente Arbeitsweise We offer:\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Jährliche Erfolgsbeteiligung\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Raum für Eigenverantwortung und Initiative\n• Weitere Benefits: https://join.sfs.com/ch/de/benefits/",
+        "fr": "Als Accounts Receivable Specialist verbindest du dein Zahlenflair mit deinem Kommunikationstalent und übernimmst Verantwortung in einem internationalen Umfeld. Dich erwartet ein vielfältiges und abwechslungsreiches Aufgabengebiet, in dem du deine Expertise einbringen und einen echten Mehrwert für unseren Konzern schaffen kannst. Mit deinem Know-how stellst du einen wichtigen Teil unserer Finanzprozesse sicher und leistest damit einen entscheidenden Beitrag zu unserem Unternehmenserfolg. Your Tasks:\n• Prüfung, Kontierung und Buchung der Zahlungseingänge\n• Kontoabstimmungen inkl. Intercompany-Abstimmungen\n• Klärung und Bearbeitung von Differenzen und offenen Posten\n• Durchführung von Bonitätsabfragen sowie Überwachung und Pflege von Kreditlimiten\n• Anlage, Pflege und Prüfung von Kundenstammdaten\n• Überwachung risikobehafteter Kundenforderungen und Information der zuständigen Stellen Your profile:\n• Kaufmännische Ausbildung, idealerweise mit Weiterbildung als Sachbearbeiter/in Rechnungswesen\n• Mindestens 2 Jahre Berufserfahrung in der Debitorenbuchhaltung\n• Erfahrung im Mahnwesen\n• Erfahrung mit SAP S/4HANA von Vorteil\n• Gute Französisch- und Englischkenntnisse sowie fliessende Deutschkenntnisse\n• Analytisches und vernetztes Denken, Zahlenflair, Gewissenhaftigkeit sowie eine strukturierte und effiziente Arbeitsweise We offer:\n• Sechs Wochen Ferien & zusätzlicher Ferienkauf möglich\n• Jährliche Erfolgsbeteiligung\n• Eigene gesunde Pensionskasse mit individuellen Sparplänen\n• Interne Weiterbildungskurse & Unterstützung von externen Weiterbildungen\n• Raum für Eigenverantwortung und Initiative\n• Weitere Benefits: https://join.sfs.com/ch/de/benefits/"
+      },
+      "location": "Heerbrugg",
+      "canton": "SG",
+      "url": "https://join.sfs.com/ch/en/vacancies/fachperson-debitorenbuchhaltung-(m-f-d).html",
+      "source": "SFS Group Dedicated Parser (Umantis/AEM)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:08:38.749Z",
+      "addressLocality": "Heerbrugg",
+      "addressRegion": "SG",
+      "streetAddress": "Rosenbergsaustrasse 8",
+      "postalCode": "9435",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Industria / Meccanica",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobapplication.sfs.com/Vacancies/3009/Application/CheckLogin/1?lang=eng",
+      "jobReqId": "3009",
+      "legalEntity": "SFS Group Schweiz AG",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 57500,
+      "salaryMax": 87000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 57500,
+          "maxValue": 87000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-28T21:08:38.749Z"
+    },
+    {
+      "id": "sfs-group-1c777d348302",
+      "slug": "conseiller-conseillere-de-vente-au-service-externe-m-f-d-sfs-group-plan-les-ouates",
+      "slugByLocale": {
+        "fr": "conseiller-conseillere-de-vente-au-service-externe-m-f-d-sfs-group-plan-les-ouates",
+        "it": "conseiller-conseillere-de-vente-au-service-externe-m-f-d-sfs-group-plan-les-ouates",
+        "en": "conseiller-conseillere-de-vente-au-service-externe-m-f-d-sfs-group-plan-les-ouates",
+        "de": "conseiller-conseillere-de-vente-au-service-externe-m-f-d-sfs-group-plan-les-ouates"
+      },
+      "company": "SFS Group",
+      "companyKey": "sfs-group",
+      "companyDomain": "sfs.com",
+      "title": "Conseiller/Conseillère de vente au service externe (m/f/d)",
+      "titleByLocale": {
+        "fr": "Conseiller/Conseillère de vente au service externe (m/f/d)",
+        "it": "Conseiller/Conseillère de vente au service externe (m/f/d)",
+        "en": "Conseiller/Conseillère de vente au service externe (m/f/d)",
+        "de": "Conseiller/Conseillère de vente au service externe (m/f/d)"
+      },
+      "description": "SFS est un fournisseur de vis et d'outillages, de ferrements, de produits pour la construction et le génie civil, de pièces spéciales et de produits chimico-techniques sur l'ensemble du territoire suisse. Nous offrons à nos clients un conseil professionnel aussi bien en ligne, par visites ainsi que dans nos filiales de ventes locales. De nombreux collaborateurs/trices du service externe s'occupent des clients avec des recommandations et des propositions de solutions compétentes. Cela comprend un assortiment adapté au marché. Dans le secteur de la construction métallique, nous sommes le partenaire de livraison compétent et fiable pour nos clients. Pour le développement du canton de Genève, nous recherchons un conseiller/ère de vente expérimenté(e) au service externe. Your Tasks:\n• Conseils de vente de nos produits auprès des entreprises de la construction métallique\n• Prospection active du marché et suivi de la clientèle\n• Visites régulières des clients et leurs collaborateurs/trices techniques et traitement des demandes\n• Lecture compétente des plans techniques et conseils clients intensifs sur le choix des ferrements\n• Suivi actif et anticipatif des offres et des commandes en collaboration avec le service interne\n• Responsabilité du traitement et suivi des réclamations des clients jusqu'à satisfaction\n• Contact et collaboration régulière avec les fournisseurs clés\n• Formations régulières sur les produits et prestations\n• Collaboration étroite avec le service interne et les collègues du service externe\n• Responsabilité d'une région ainsi que du renforcement de notre présence sur le marché Your profile:\n• Formation technique en construction métallique et/ou dessinateur/trice avec expérience avérée dans le domaine\n• Formation commerciale complémentaire ou gestionnaire du commerce de détail en quincaillerie un atout\n• Expérience au service externe\n• Aisance dans la lecture et interprétation des plans techniques en serrurerie\n• Excellentes aptitudes relationnelles, orienté(e) solution tout en ayant du plaisir dans l'accompagnement de nos clients dans leurs projets et mandats.\n• Excellente connaissance du marché de la construction du canton de Genève We offer:\n• Six semaines de vacances avec possibilité d’achat de jours supplémentaires\n• Véhicule d'entreprise et équipement nécessaire pour la fonction\n• Caisse de pension attractive avec contribution employeur supérieure à la moyenne\n• Participation au succès de l’entreprise\n• Emploi dans une entreprise saine et orientée vers l'avenir\n• Programme d’intégration structuré et possibilités de développement\n• Environnement de travail moderne et missions variées\n• Culture du tutoiement au sein de l'entreprise et à tous les niveaux",
+      "descriptionByLocale": {
+        "fr": "SFS est un fournisseur de vis et d'outillages, de ferrements, de produits pour la construction et le génie civil, de pièces spéciales et de produits chimico-techniques sur l'ensemble du territoire suisse. Nous offrons à nos clients un conseil professionnel aussi bien en ligne, par visites ainsi que dans nos filiales de ventes locales. De nombreux collaborateurs/trices du service externe s'occupent des clients avec des recommandations et des propositions de solutions compétentes. Cela comprend un assortiment adapté au marché. Dans le secteur de la construction métallique, nous sommes le partenaire de livraison compétent et fiable pour nos clients. Pour le développement du canton de Genève, nous recherchons un conseiller/ère de vente expérimenté(e) au service externe. Your Tasks:\n• Conseils de vente de nos produits auprès des entreprises de la construction métallique\n• Prospection active du marché et suivi de la clientèle\n• Visites régulières des clients et leurs collaborateurs/trices techniques et traitement des demandes\n• Lecture compétente des plans techniques et conseils clients intensifs sur le choix des ferrements\n• Suivi actif et anticipatif des offres et des commandes en collaboration avec le service interne\n• Responsabilité du traitement et suivi des réclamations des clients jusqu'à satisfaction\n• Contact et collaboration régulière avec les fournisseurs clés\n• Formations régulières sur les produits et prestations\n• Collaboration étroite avec le service interne et les collègues du service externe\n• Responsabilité d'une région ainsi que du renforcement de notre présence sur le marché Your profile:\n• Formation technique en construction métallique et/ou dessinateur/trice avec expérience avérée dans le domaine\n• Formation commerciale complémentaire ou gestionnaire du commerce de détail en quincaillerie un atout\n• Expérience au service externe\n• Aisance dans la lecture et interprétation des plans techniques en serrurerie\n• Excellentes aptitudes relationnelles, orienté(e) solution tout en ayant du plaisir dans l'accompagnement de nos clients dans leurs projets et mandats.\n• Excellente connaissance du marché de la construction du canton de Genève We offer:\n• Six semaines de vacances avec possibilité d’achat de jours supplémentaires\n• Véhicule d'entreprise et équipement nécessaire pour la fonction\n• Caisse de pension attractive avec contribution employeur supérieure à la moyenne\n• Participation au succès de l’entreprise\n• Emploi dans une entreprise saine et orientée vers l'avenir\n• Programme d’intégration structuré et possibilités de développement\n• Environnement de travail moderne et missions variées\n• Culture du tutoiement au sein de l'entreprise et à tous les niveaux",
+        "it": "SFS est un fournisseur de vis et d'outillages, de ferrements, de produits pour la construction et le génie civil, de pièces spéciales et de produits chimico-techniques sur l'ensemble du territoire suisse. Nous offrons à nos clients un conseil professionnel aussi bien en ligne, par visites ainsi que dans nos filiales de ventes locales. De nombreux collaborateurs/trices du service externe s'occupent des clients avec des recommandations et des propositions de solutions compétentes. Cela comprend un assortiment adapté au marché. Dans le secteur de la construction métallique, nous sommes le partenaire de livraison compétent et fiable pour nos clients. Pour le développement du canton de Genève, nous recherchons un conseiller/ère de vente expérimenté(e) au service externe. Your Tasks:\n• Conseils de vente de nos produits auprès des entreprises de la construction métallique\n• Prospection active du marché et suivi de la clientèle\n• Visites régulières des clients et leurs collaborateurs/trices techniques et traitement des demandes\n• Lecture compétente des plans techniques et conseils clients intensifs sur le choix des ferrements\n• Suivi actif et anticipatif des offres et des commandes en collaboration avec le service interne\n• Responsabilité du traitement et suivi des réclamations des clients jusqu'à satisfaction\n• Contact et collaboration régulière avec les fournisseurs clés\n• Formations régulières sur les produits et prestations\n• Collaboration étroite avec le service interne et les collègues du service externe\n• Responsabilité d'une région ainsi que du renforcement de notre présence sur le marché Your profile:\n• Formation technique en construction métallique et/ou dessinateur/trice avec expérience avérée dans le domaine\n• Formation commerciale complémentaire ou gestionnaire du commerce de détail en quincaillerie un atout\n• Expérience au service externe\n• Aisance dans la lecture et interprétation des plans techniques en serrurerie\n• Excellentes aptitudes relationnelles, orienté(e) solution tout en ayant du plaisir dans l'accompagnement de nos clients dans leurs projets et mandats.\n• Excellente connaissance du marché de la construction du canton de Genève We offer:\n• Six semaines de vacances avec possibilité d’achat de jours supplémentaires\n• Véhicule d'entreprise et équipement nécessaire pour la fonction\n• Caisse de pension attractive avec contribution employeur supérieure à la moyenne\n• Participation au succès de l’entreprise\n• Emploi dans une entreprise saine et orientée vers l'avenir\n• Programme d’intégration structuré et possibilités de développement\n• Environnement de travail moderne et missions variées\n• Culture du tutoiement au sein de l'entreprise et à tous les niveaux",
+        "en": "SFS est un fournisseur de vis et d'outillages, de ferrements, de produits pour la construction et le génie civil, de pièces spéciales et de produits chimico-techniques sur l'ensemble du territoire suisse. Nous offrons à nos clients un conseil professionnel aussi bien en ligne, par visites ainsi que dans nos filiales de ventes locales. De nombreux collaborateurs/trices du service externe s'occupent des clients avec des recommandations et des propositions de solutions compétentes. Cela comprend un assortiment adapté au marché. Dans le secteur de la construction métallique, nous sommes le partenaire de livraison compétent et fiable pour nos clients. Pour le développement du canton de Genève, nous recherchons un conseiller/ère de vente expérimenté(e) au service externe. Your Tasks:\n• Conseils de vente de nos produits auprès des entreprises de la construction métallique\n• Prospection active du marché et suivi de la clientèle\n• Visites régulières des clients et leurs collaborateurs/trices techniques et traitement des demandes\n• Lecture compétente des plans techniques et conseils clients intensifs sur le choix des ferrements\n• Suivi actif et anticipatif des offres et des commandes en collaboration avec le service interne\n• Responsabilité du traitement et suivi des réclamations des clients jusqu'à satisfaction\n• Contact et collaboration régulière avec les fournisseurs clés\n• Formations régulières sur les produits et prestations\n• Collaboration étroite avec le service interne et les collègues du service externe\n• Responsabilité d'une région ainsi que du renforcement de notre présence sur le marché Your profile:\n• Formation technique en construction métallique et/ou dessinateur/trice avec expérience avérée dans le domaine\n• Formation commerciale complémentaire ou gestionnaire du commerce de détail en quincaillerie un atout\n• Expérience au service externe\n• Aisance dans la lecture et interprétation des plans techniques en serrurerie\n• Excellentes aptitudes relationnelles, orienté(e) solution tout en ayant du plaisir dans l'accompagnement de nos clients dans leurs projets et mandats.\n• Excellente connaissance du marché de la construction du canton de Genève We offer:\n• Six semaines de vacances avec possibilité d’achat de jours supplémentaires\n• Véhicule d'entreprise et équipement nécessaire pour la fonction\n• Caisse de pension attractive avec contribution employeur supérieure à la moyenne\n• Participation au succès de l’entreprise\n• Emploi dans une entreprise saine et orientée vers l'avenir\n• Programme d’intégration structuré et possibilités de développement\n• Environnement de travail moderne et missions variées\n• Culture du tutoiement au sein de l'entreprise et à tous les niveaux",
+        "de": "SFS est un fournisseur de vis et d'outillages, de ferrements, de produits pour la construction et le génie civil, de pièces spéciales et de produits chimico-techniques sur l'ensemble du territoire suisse. Nous offrons à nos clients un conseil professionnel aussi bien en ligne, par visites ainsi que dans nos filiales de ventes locales. De nombreux collaborateurs/trices du service externe s'occupent des clients avec des recommandations et des propositions de solutions compétentes. Cela comprend un assortiment adapté au marché. Dans le secteur de la construction métallique, nous sommes le partenaire de livraison compétent et fiable pour nos clients. Pour le développement du canton de Genève, nous recherchons un conseiller/ère de vente expérimenté(e) au service externe. Your Tasks:\n• Conseils de vente de nos produits auprès des entreprises de la construction métallique\n• Prospection active du marché et suivi de la clientèle\n• Visites régulières des clients et leurs collaborateurs/trices techniques et traitement des demandes\n• Lecture compétente des plans techniques et conseils clients intensifs sur le choix des ferrements\n• Suivi actif et anticipatif des offres et des commandes en collaboration avec le service interne\n• Responsabilité du traitement et suivi des réclamations des clients jusqu'à satisfaction\n• Contact et collaboration régulière avec les fournisseurs clés\n• Formations régulières sur les produits et prestations\n• Collaboration étroite avec le service interne et les collègues du service externe\n• Responsabilité d'une région ainsi que du renforcement de notre présence sur le marché Your profile:\n• Formation technique en construction métallique et/ou dessinateur/trice avec expérience avérée dans le domaine\n• Formation commerciale complémentaire ou gestionnaire du commerce de détail en quincaillerie un atout\n• Expérience au service externe\n• Aisance dans la lecture et interprétation des plans techniques en serrurerie\n• Excellentes aptitudes relationnelles, orienté(e) solution tout en ayant du plaisir dans l'accompagnement de nos clients dans leurs projets et mandats.\n• Excellente connaissance du marché de la construction du canton de Genève We offer:\n• Six semaines de vacances avec possibilité d’achat de jours supplémentaires\n• Véhicule d'entreprise et équipement nécessaire pour la fonction\n• Caisse de pension attractive avec contribution employeur supérieure à la moyenne\n• Participation au succès de l’entreprise\n• Emploi dans une entreprise saine et orientée vers l'avenir\n• Programme d’intégration structuré et possibilités de développement\n• Environnement de travail moderne et missions variées\n• Culture du tutoiement au sein de l'entreprise et à tous les niveaux"
+      },
+      "location": "Plan-les-Ouates",
+      "canton": "GE",
+      "url": "https://join.sfs.com/ch/en/vacancies/conseiller-conseillère-de-vente-au-service-externe-(m-f-d).html",
+      "source": "SFS Group Dedicated Parser (Umantis/AEM)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:08:38.456Z",
+      "addressLocality": "Plan-les-Ouates",
+      "addressRegion": "GE",
+      "postalCode": "9435",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Commerciale",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Industria / Meccanica",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobapplication.sfs.com/Vacancies/3014/Application/CheckLogin/1?lang=eng",
+      "jobReqId": "3014",
+      "legalEntity": "SFS Group Schweiz AG",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 72000,
+      "salaryMax": 111000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 72000,
+          "maxValue": 111000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-28T21:08:38.456Z"
     }
   ]
 }
