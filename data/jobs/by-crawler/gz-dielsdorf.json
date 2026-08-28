@@ -1,6 +1,6 @@
 {
   "crawlerKey": "gz-dielsdorf",
-  "assembledAt": "2026-08-28T05:38:24.767Z",
+  "assembledAt": "2026-08-28T21:25:54.631Z",
   "jobs": [
     {
       "id": "gz-dielsdorf-93816c4a3f8c",
@@ -34,7 +34,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/b573d3df-f5f8-4adc-810d-e0c6b79bba7c",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.652Z",
+      "crawledAt": "2026-08-28T21:25:51.849Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -108,7 +108,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/4735e216-71a3-4e3b-bc8d-4135b794af23",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.649Z",
+      "crawledAt": "2026-08-28T21:25:51.847Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -186,7 +186,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/01d03449-2806-4111-b561-6d037f4990a3",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.647Z",
+      "crawledAt": "2026-08-28T21:25:51.845Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -320,7 +320,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "gz-dielsdorf-89f2f397be2c",
@@ -354,7 +355,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/e34f9cb4-6010-4d8a-9380-443befd3f6b4",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.642Z",
+      "crawledAt": "2026-08-28T21:25:51.842Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -434,7 +435,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/55b861eb-bc65-4532-9e55-5f30a5f33885",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.640Z",
+      "crawledAt": "2026-08-28T21:25:51.840Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -514,7 +515,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/b4a3f004-191e-4d7f-a0ec-0a3ceb9440ac",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.638Z",
+      "crawledAt": "2026-08-28T21:25:51.838Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -594,7 +595,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/897f6366-3a66-447a-b85e-f6e296652bd4",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.636Z",
+      "crawledAt": "2026-08-28T21:25:51.836Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -686,7 +687,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/e5c95f59-a715-4eec-a78d-1a6385964be0",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.633Z",
+      "crawledAt": "2026-08-28T21:25:51.833Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -766,7 +767,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/d79d5f19-5e5a-4c9b-a63c-00dcef3c73da",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.627Z",
+      "crawledAt": "2026-08-28T21:25:51.831Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -846,7 +847,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/d915e5b4-cb5d-4b6a-88dc-805e7d649a78",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.623Z",
+      "crawledAt": "2026-08-28T21:25:51.829Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -920,7 +921,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/04fbcd79-75ef-4d5c-bb25-efc2d7a8a3d6",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.620Z",
+      "crawledAt": "2026-08-28T21:25:51.827Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1000,7 +1001,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/a2dc93a9-8497-4645-a300-27e6daa437dd",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.617Z",
+      "crawledAt": "2026-08-28T21:25:51.824Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1080,7 +1081,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/235e85e5-32cf-40da-ad55-3b389ad19a73",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.614Z",
+      "crawledAt": "2026-08-28T21:25:51.820Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1160,7 +1161,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/eabd48e5-84ee-4d19-8697-08af23eb9ff4",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.611Z",
+      "crawledAt": "2026-08-28T21:25:51.818Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1224,7 +1225,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/ef32664f-32dd-4c02-8404-68bc87bb25d4",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.606Z",
+      "crawledAt": "2026-08-28T21:25:51.814Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1282,11 +1283,11 @@
     },
     {
       "id": "gz-dielsdorf-8a6581967ffa",
-      "slug": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf",
+      "slug": "fachperson-gesundheit-cfc-gesundheitszentrum-dielsdorf-regensdorf",
       "slugByLocale": {
-        "de": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf",
-        "it": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf",
+        "it": "fachperson-gesundheit-cfc-gesundheitszentrum-dielsdorf-regensdorf",
         "en": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf",
+        "de": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf",
         "fr": "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf"
       },
       "company": "Gesundheitszentrum Dielsdorf",
@@ -1294,16 +1295,16 @@
       "companyDomain": "gz-dielsdorf.ch",
       "title": "Fachperson Gesundheit EFZ",
       "titleByLocale": {
-        "de": "Fachperson Gesundheit EFZ",
         "it": "Fachperson Gesundheit CFC",
         "en": "Fachperson Gesundheit EFZ",
+        "de": "Fachperson Gesundheit EFZ",
         "fr": "Fachperson Gesundheit EFZ"
       },
       "description": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen.",
       "descriptionByLocale": {
-        "de": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen.",
         "it": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen.",
         "en": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen.",
+        "de": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen.",
         "fr": "<p>Das Gesundheitszentrum Dielsdorf ist ein modernes geriatrisches Kompetenzzentrum mit rund 500 Mitarbeitenden aus 35 Nationen. Unser Angebot reicht vom Beratungsangebot für ältere Menschen und ihre Angehörigen über die allgemeine und spezialisierte Langzeitpflege bis hin zur Pflege und Betreuung zu Hause. Am Standort Regensdorf bieten wir 54 Bewohnenden ein familiäres Umfeld mit professioneller Pflegebetreuung an.</p>\n\nAufgaben:\n• Selbständige Ausführung der Grund- und Behandlungspflege von Bewohnenden im Bezugspersonen- System\n\n• Zusammenarbeit im multiprofessionellen Team\n\n• Übernahme der Tagesverantwortung\n\n• Sicherstellung der Einhaltung innerbetrieblicher Weisungen (Pflegerichtlinien, Weisungen)\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachfrau/Fachmann Gesundheit EFZ\n\n• Gute Deutschkenntnisse in Wort und Schrift\n\n• Zeitgemässe IT-Kenntnisse (MS Office, Perigon)\n\n• Hohe Sozial-, Methoden- und Fachkompetenz\n\n• Selbstständige und verantwortungsbewusste Arbeitsweise\n\nWir bieten:\nWir bieten Ihnen eine verantwortungsvolle und interessante Tätigkeit in einem abwechslungsreichen, zukunftsorientierten und interprofessionellen Umfeld. Wir befinden uns in ländlicher Lage mit guten öffentlichen Verkehrsanbindungen. Sie profitieren von unseren attraktiven Anstellungsbedingungen u.a. mit mind. 5 Wochen Ferien, guten Sozialleistungen, vergünstigten Reka-Checks, individuellen Weiterbildungsmöglichkeiten, günstigen Preisen in unserem Restaurant und Gratisparkplätzen."
       },
       "needsRetranslation": true,
@@ -1312,7 +1313,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/c0bd766a-b33b-4462-91d6-dfb91567611a",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.602Z",
+      "crawledAt": "2026-08-28T21:25:51.811Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1329,9 +1330,16 @@
       "postedDate": "2026-08-26",
       "applyUrl": "https://recruitingapp-2896.umantis.com/Vacancies/709/Application/CheckLogin/1?lang=ger",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
+      "requirementsByLocale": {},
+      "firstSeenAt": "2026-08-28T05:38:21.602Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf"
+        ]
       },
+      "previousSlugs": [
+        "fachperson-gesundheit-efz-gz-dielsdorf-regensdorf"
+      ],
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -1343,8 +1351,7 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:38:21.602Z"
+      }
     },
     {
       "id": "gz-dielsdorf-14da8d4c2599",
@@ -1378,7 +1385,7 @@
       "url": "https://ohws.prospective.ch/public/v1/jobs/cdf67d19-7ead-4813-98aa-8745f8f831ef",
       "source": "Gesundheitszentrum Dielsdorf Dedicated Parser (Prospective medium 1005824)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:21.569Z",
+      "crawledAt": "2026-08-28T21:25:51.785Z",
       "addressLocality": "Regensdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1395,9 +1402,7 @@
       "postedDate": "2026-08-26",
       "applyUrl": "https://recruitingapp-2896.umantis.com/Vacancies/710/Application/CheckLogin/1?lang=ger",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
