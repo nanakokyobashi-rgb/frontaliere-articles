@@ -4555,6 +4555,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.reno-navigabilita-futuro-allarme.title': 'Reno non navigabile: l\'allarme per l\'economia e la Svizzera',
     'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'Entro il 2100 il Reno potrebbe essere impraticabile fino a cinque mesi l\'anno. Pesanti le ricadute sul commercio estero svizzero e sulla Germania.',
     'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'Il livello del Reno in un periodo di secca con impatti sulla logistica',
+    'blog.article.premi-cassa-malati-uri-riduzione.title': 'Premi cassa malati Uri e riduzione premi LAMal',
+    'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guida ai premi della cassa malati obbligatoria nel Cantone di Uri, fasce, franchigie e requisiti per la riduzione dei premi.',
+    'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Assicurazione malattia e premi cassa malati nel Cantone di Uri',
 };
 
 export default blogMetaChIt;

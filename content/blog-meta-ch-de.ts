@@ -4555,6 +4555,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.reno-navigabilita-futuro-allarme.title': 'Nicht schiffbarer Rhein: Alarm für Wirtschaft und Schweiz',
     'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'Bis 2100 könnte der Rhein bis zu fünf Monate im Jahr unpassierbar sein. Schwere Auswirkungen auf den Schweizer Aussenhandel und Deutschland.',
     'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'Der Wasserstand des Rheins während einer Dürreperiode',
+    'blog.article.premi-cassa-malati-uri-riduzione.title': 'Krankenkassenprämien URI und KVG-Prämienverbilligung',
+    'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Prämienleitfaden der obligatorischen Krankenkasse im Kanton Uri, Zeitabschnitte, Franchisen und Voraussetzungen für die Prämienverbilligung.',
+    'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Krankenkassenprämien im Kanton Uri',
 };
 
 export default blogMetaChDe;

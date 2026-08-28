@@ -59105,6 +59105,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-premi-cassa-malati-uri-riduzione': {
+    title: 'Premi cassa malati Uri e riduzione premi LAMal',
+    description: 'Scopri i premi della cassa malati obbligatoria nel Cantone di Uri, le franchigie disponibili, i modelli alternativi e i requisiti per la riduzione.',
+    keywords: 'frontalieri, ticino, svizzera, italia, premi, cassa, malati, riduzione',
+    ogTitle: 'Premi cassa malati Uri e riduzione premi LAMal',
+    ogDescription: 'Guida completa ai premi dell\'assicurazione malattia obbligatoria nel Cantone di Uri, franchigie, modelli alternativi e come richiedere i sussidi.',
+    canonicalPath: '/articoli-svizzera/premi-cassa-malati-uri-riduzione/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Premi cassa malati Uri e riduzione premi LAMal",
+      "description": "Scopri i premi della cassa malati obbligatoria nel Cantone di Uri, le franchigie disponibili, i modelli alternativi e i requisiti per la riduzione.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/premi-cassa-malati-uri-riduzione.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Assicurazione malattia e premi cassa malati nel Cantone di Uri"
+      },
+      "datePublished": "2026-08-28T04:09:53+00:00",
+      "dateModified": "2026-08-28T04:09:53+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/laura-bianchi/#person",
+        "name": "Laura Bianchi",
+        "url": "https://frontaliereticino.ch/autori/laura-bianchi/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/premi-cassa-malati-uri-riduzione/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

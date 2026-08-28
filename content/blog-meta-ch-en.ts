@@ -4555,6 +4555,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.reno-navigabilita-futuro-allarme.title': 'Non-navigable Rhine: the alarm for the economy and Switzerland',
     'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'By 2100 the Rhine could be impassable for up to five months of the year. The repercussions on Swiss foreign trade and Germany are heavy.',
     'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'The Rhine water level during a drought affecting logistics',
+    'blog.article.premi-cassa-malati-uri-riduzione.title': 'Uri sick pay premiums and LAMal premium reductions',
+    'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guide to the compulsory health insurance premiums in the Canton of Uri, bands, deductibles and requirements for the reduction of premiums.',
+    'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Health insurance and premiums in Canton Uri',
 };
 
 export default blogMetaChEn;

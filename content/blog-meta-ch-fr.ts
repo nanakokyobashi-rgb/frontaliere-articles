@@ -4555,6 +4555,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.reno-navigabilita-futuro-allarme.title': 'Rhin non navigable : l\'alarme pour l\'économie et la Suisse',
     'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'D\'ici 2100, le Rhin pourrait être impraticable jusqu\'à cinq mois par an. Les retombées sur le commerce extérieur suisse et sur l\'Allemagne sont lourdes.',
     'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'Le niveau d\'eau du Rhin en période de sécheresse',
+    'blog.article.premi-cassa-malati-uri-riduzione.title': 'Primes caisse-maladie URI et réduction des primes LAMal',
+    'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guide des primes de la caisse-maladie obligatoire dans le canton d\'Uri, des tranches, des franchises et des conditions de réduction des primes.',
+    'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Assurance maladie et primes dans le canton d\'Uri',
 };
 
 export default blogMetaChFr;

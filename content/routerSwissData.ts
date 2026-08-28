@@ -1544,6 +1544,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'foraggio-siccita-aiuti-federali': { it: 'foraggio-siccita-aiuti-federali', en: 'fodder-drought-federal-aid', de: 'futter-durre-bundeshilfe', fr: 'fourrage-secheresse-aide-federale' },
  'berna-rinnova-festival-cinematografici': { it: 'berna-rinnova-festival-cinematografici', en: 'bern-renews-swiss-film-festivals', de: 'bern-erneuert-schweizer-filmfestivals', fr: 'berne-renouvelle-festivals-cinema-suisse' },
  'reno-navigabilita-futuro-allarme': { it: 'reno-navigabilita-futuro-allarme', en: 'rhine-navigability-future-alarm', de: 'rhein-schiffbarkeit-zukunft-alarm', fr: 'rhin-navigabilite-futur-alarme' },
+ 'premi-cassa-malati-uri-riduzione': { it: 'premi-cassa-malati-uri-riduzione', en: 'health-insurance-uri-reduction', de: 'krankenkassenpraemien-uri-reduktion', fr: 'primes-assurance-maladie-uri-reduction' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {
