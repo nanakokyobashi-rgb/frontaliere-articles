@@ -10898,6 +10898,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Wohnen in Cremenaga und Arbeiten im Tessin als Grenzgänger',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Praktischer Leitfaden für italienische Grenzgänger: Steuern, G-Genehmigung, KVG, Verbindungen und Lebenshaltungskosten auf italienisch-schweizerischer Seite.',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'Blick auf das Dorf Cremenaga nahe der Grenze zum Kanton Tessin',
+    'blog.article.bancastato-semestrale-2026.title': 'BancaStat: Halbjahresgewinn von 47,6 Millionen im Jahr 2026',
+    'blog.article.bancastato-semestrale-2026.excerpt': 'Die BancaStato-Gruppe schloss das erste Halbjahr 2026 mit einem Reingewinn von 47,6 Millionen Franken und einem Reingewinn von 152,7 Millionen Franken ab.',
+    'blog.article.bancastato-semestrale-2026.imageAlt': 'Hauptsitz der BancaStato Gruppe in Bellinzona',
 };
 
 export default blogMetaDe;

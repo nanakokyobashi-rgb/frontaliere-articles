@@ -10899,6 +10899,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Living in Cremenaga and working in Ticino as a border worker',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Practical guide for Italian border workers: tax, G permit, LAMal, connections and cost of living on the Italy-Swiss side.',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'View of Cremenaga village near the border with Canton Ticino',
+    'blog.article.bancastato-semestrale-2026.title': 'BancaStat: half-yearly profit at 47.6 million in 2026',
+    'blog.article.bancastato-semestrale-2026.excerpt': 'The BancaStati Group closed the first half of 2026 with a net profit of CHF 47.6 million and net revenues of CHF 152.7 million.',
+    'blog.article.bancastato-semestrale-2026.imageAlt': 'BancaStato Group headquarters building in Bellinzona',
 };
 
 export default blogMetaEn;

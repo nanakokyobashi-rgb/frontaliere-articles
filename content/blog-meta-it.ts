@@ -10900,6 +10900,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.title': 'Vivere a Cremenaga e lavorare in Ticino da frontaliere',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.excerpt': 'Guida pratica per frontalieri italiani: fisco, permesso G, LAMal, collegamenti e costo della vita lato italia-svizzera.',
     'blog.article.vivere-cremenaga-lavorare-ticino-frontaliere.imageAlt': 'Veduta del paese di Cremenaga vicino al confine con il Canton Ticino',
+    'blog.article.bancastato-semestrale-2026.title': 'BancaStato: utile semestrale a 47,6 milioni nel 2026',
+    'blog.article.bancastato-semestrale-2026.excerpt': 'Il Gruppo BancaStato ha chiuso il primo semestre del 2026 con un utile netto di 47,6 milioni di franchi e ricavi netti a 152,7 milioni.',
+    'blog.article.bancastato-semestrale-2026.imageAlt': 'Sede del Gruppo BancaStato a Bellinzona',
 };
 
 export default blogMetaIt;

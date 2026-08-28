@@ -79943,6 +79943,45 @@ const BLOG_SEO_METADATA_5: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-bancastato-semestrale-2026': {
+    title: 'BancaStato: utile semestrale a 47,6 milioni nel 2026',
+    description: 'Scopri i risultati finanziari semestrali 2026 del Gruppo BancaStato a Bellinzona: utile a 47,6 milioni, ricavi a 152,7 milioni e patrimoni a 25,07 miliardi.',
+    keywords: 'frontalieri, ticino, svizzera, italia, bancastato, utile, semestrale, milioni',
+    ogTitle: 'BancaStato: utile semestrale a 47,6 milioni di franchi nel 2026',
+    ogDescription: 'Il Gruppo BancaStato ha diffuso i risultati finanziari del primo semestre 2026 a Bellinzona. Utile a 47,6 milioni, ricavi a 152,7 milioni e crescita dei crediti ipotecari e dei patrimoni gestiti.',
+    canonicalPath: '/articoli-frontaliere/bancastato-semestrale-2026',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "BancaStato: utile semestrale a 47,6 milioni nel 2026",
+      "description": "Scopri i risultati finanziari semestrali 2026 del Gruppo BancaStato a Bellinzona: utile a 47,6 milioni, ricavi a 152,7 milioni e patrimoni a 25,07 miliardi.",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/bancastato-semestrale-2026.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Sede del Gruppo BancaStato a Bellinzona"
+      },
+      "datePublished": "2026-08-28T04:00:55+00:00",
+      "dateModified": "2026-08-28T04:00:55+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/marco-ferrari/#person",
+        "name": "Marco Ferrari",
+        "url": "https://frontaliereticino.ch/autori/marco-ferrari/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-frontaliere/bancastato-semestrale-2026/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_SEO_METADATA_5;
