@@ -1,0 +1,52 @@
+{
+  "key": "galenica",
+  "label": "Galenica",
+  "generatedAt": "2026-08-28T20:55:33.759Z",
+  "total": 379,
+  "newCount": 0,
+  "updatedCount": 1,
+  "removedCount": 0,
+  "unchangedCount": 0,
+  "durationMs": 79409,
+  "avgDurationMs": 79409,
+  "durationHistory": [
+    79409
+  ],
+  "newJobs": [],
+  "updatedJobs": [
+    {
+      "title": "Assistente di farmacia AFC",
+      "company": "Coop Vitality  (Galenica)",
+      "companyKey": "galenica",
+      "url": "https://jobs.galenica.com/it/jobs/#job.id=12692427",
+      "location": "Wettingen",
+      "canton": "AG",
+      "country": "CH",
+      "category": "healthcare",
+      "descriptionIt": "Assistente di farmacia AFC presso Coop Vitality  (Gruppo Galenica), con sede a Wettingen, Tägipark, Jurastrasse 42, Svizzera. Galenica è il principale gruppo svizzero nel settore sanitario e gestisce la più grande rete di farmacie del Paese, con i marchi Amavita, Sun Store e Coop Vitality. Questa posizione offre l'opportunità di lavorare in un ambiente dinamico e orientato al paziente con eccellenti prospettive di sviluppo professionale.",
+      "applyUrl": "https://www.yousty.ch/de-CH/lehrstellen/profile/12692427-fachmann-frau-apotheke-efz-alt-pharma-assistent-in-efz-wettingen-ag-coop-vitality?widget=60fe46a6-e22b-4512-ae18-ab0157fbb01d",
+      "postedDate": "",
+      "source": "company-website",
+      "sourceLang": "en",
+      "slug": "galenica-coop-vitality-assistente-di-farmacia-afc-wettingen",
+      "id": "galenica-14220280d7d7",
+      "firstSeenAt": "2026-04-13T21:44:00.314Z",
+      "salaryMin": 88000,
+      "salaryMax": 123000,
+      "currency": "CHF",
+      "addressLocality": "Wettingen",
+      "addressRegion": "AG",
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2,
+      "_qualityScore": 78,
+      "_qualityBreakdown": {
+        "cleanliness": 25,
+        "richness": 14,
+        "translation": 25,
+        "completeness": 14
+      }
+    }
+  ],
+  "removedJobs": [],
+  "unchangedJobs": []
+}
