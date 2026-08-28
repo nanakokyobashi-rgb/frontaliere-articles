@@ -89,9 +89,9 @@
       "slug": "collaboratore-trice-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-lugano",
       "slugByLocale": {
         "it": "collaboratore-trice-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-lugano",
-        "en": "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch",
+        "en": "laboratory-services-pharmaceuticals-life-science-m-f-d-apleona-schweiz-ag-lugano",
         "de": "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch",
-        "fr": "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch"
+        "fr": "services-de-laboratoire-produits-pharmaceutiques-sciences-de-la-vie-h-f-d-apleona-schweiz-ag-lugano"
       },
       "company": "Apleona Schweiz AG",
       "companyKey": "apleona-schweiz-ag",
@@ -128,13 +128,17 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch",
-        "collaboratore-trice-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-lugano"
+        "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch",
-          "collaboratore-trice-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-lugano"
+          "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch"
+        ],
+        "en": [
+          "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch"
+        ],
+        "fr": [
+          "mitarbeiter-in-labordienstleistungen-pharma-life-science-m-w-d-apleona-schweiz-ag-ch"
         ]
       },
       "needsRetranslation": true,
@@ -197,13 +201,11 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "gebaudetechniker-sanitar-heizungstechnik-m-w-d-du-wahlst-deinen-fixen-standort-apleona",
-        "tecnico-di-costruzione-sanitary-riscaldamento-tecnologia-m-f-d-scegli-la-tua-posizione-fissa-apleona-schweiz-ag-lugano"
+        "gebaudetechniker-sanitar-heizungstechnik-m-w-d-du-wahlst-deinen-fixen-standort-apleona"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "gebaudetechniker-sanitar-heizungstechnik-m-w-d-du-wahlst-deinen-fixen-standort-apleona",
-          "tecnico-di-costruzione-sanitary-riscaldamento-tecnologia-m-f-d-scegli-la-tua-posizione-fissa-apleona-schweiz-ag-lugano"
+          "gebaudetechniker-sanitar-heizungstechnik-m-w-d-du-wahlst-deinen-fixen-standort-apleona"
         ],
         "en": [
           "gebaudetechniker-sanitar-heizungstechnik-m-w-d-du-wahlst-deinen-fixen-standort-apleona"
@@ -230,12 +232,12 @@
     },
     {
       "id": "apleona-schweiz-ag-c79a2a42a614",
-      "slug": "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano",
+      "slug": "responsabile-immobiliare-m-f-d-apleona-schweiz-ag-lugano",
       "slugByLocale": {
-        "it": "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano",
-        "en": "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano",
+        "it": "responsabile-immobiliare-m-f-d-apleona-schweiz-ag-lugano",
+        "en": "real-estate-manager-m-f-d-apleona-schweiz-ag-lugano",
         "de": "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-ch",
-        "fr": "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano"
+        "fr": "directeur-immobilier-h-f-d-apleona-schweiz-ag-lugano"
       },
       "company": "Apleona Schweiz AG",
       "companyKey": "apleona-schweiz-ag",
@@ -282,6 +284,12 @@
           "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-ch",
           "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano-kh0udj",
           "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-ch-2",
+          "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano"
+        ],
+        "en": [
+          "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano"
+        ],
+        "fr": [
           "immobilienbewirtschafter-m-w-d-apleona-schweiz-ag-lugano"
         ]
       },
@@ -345,13 +353,11 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "sachbearbeiter-immobilienbewirtschaftung-m-w-d-apleona-schweiz-ag-ch",
-        "responsabile-della-proprieta-m-f-d-apleona-schweiz-ag-lugano"
+        "sachbearbeiter-immobilienbewirtschaftung-m-w-d-apleona-schweiz-ag-ch"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "sachbearbeiter-immobilienbewirtschaftung-m-w-d-apleona-schweiz-ag-ch",
-          "responsabile-della-proprieta-m-f-d-apleona-schweiz-ag-lugano"
+          "sachbearbeiter-immobilienbewirtschaftung-m-w-d-apleona-schweiz-ag-ch"
         ],
         "en": [
           "sachbearbeiter-immobilienbewirtschaftung-m-w-d-apleona-schweiz-ag-ch"
@@ -420,13 +426,11 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "mitarbeiter-hauswartung-m-w-d-apleona-schweiz-ag-ch",
-        "collaboratore-trice-hauswartung-m-w-d-apleona-schweiz-ag-lugano"
+        "mitarbeiter-hauswartung-m-w-d-apleona-schweiz-ag-ch"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "mitarbeiter-hauswartung-m-w-d-apleona-schweiz-ag-ch",
-          "collaboratore-trice-hauswartung-m-w-d-apleona-schweiz-ag-lugano"
+          "mitarbeiter-hauswartung-m-w-d-apleona-schweiz-ag-ch"
         ]
       },
       "needsRetranslation": true,
@@ -673,16 +677,14 @@
         "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august",
         "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-kh0tqa",
         "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-kh0tpo",
-        "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august-2",
-        "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-per-1-august-2027-apleona-schweiz-ag-lugano"
+        "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august-2"
       ],
       "previousSlugsByLocale": {
         "it": [
           "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august",
           "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-kh0tqa",
           "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-kh0tpo",
-          "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august-2",
-          "apprendistato-come-fachmann-frau-betriebsunterhalt-cfc-specializzazione-hausdienst-per-1-august-2027-apleona-schweiz-ag-lugano"
+          "lehrstelle-als-fachmann-frau-betriebsunterhalt-efz-fachrichtung-hausdienst-per-1-august-2"
         ]
       },
       "needsRetranslation": true,

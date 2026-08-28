@@ -171,9 +171,9 @@
       "requirementsByLocale": {},
       "slugByLocale": {
         "it": "medico-capo-clinica-in-psichiatria-a-tempo-parziale-60-incaricato-a-art-15-e-16-lord-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-213hlt",
-        "en": "medico-capo-clinica-in-psichiatria-a-tempo-parziale-60-incaricato-a-art-15-e-16-lord-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-213hlt",
-        "de": "medico-capo-clinica-in-psichiatria-a-tempo-parziale-60-incaricato-a-art-15-e-16-lord-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-213hlt",
-        "fr": "medico-capo-clinica-in-psichiatria-a-tempo-parziale-60-incaricato-a-art-15-e-16-lord-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-213hlt"
+        "en": "medical-head-in-partial-time-psychiatry-60-instructed-art-15-and-16-gross-at-the-cantonal-sociopsychiatric-organization",
+        "de": "medizinische-leitung-in-teilzeitpsychiatrie-60-beauftragt-art-15-und-16-gross-bei-der-kantonalen-soziopsychiatrischen",
+        "fr": "chef-medical-en-psychiatrie-a-temps-partiel-60-instruit-art-15-et-16-gross-a-l-organisation-sociopsychiatrique-cantonale"
       },
       "sourceLang": "it",
       "previousSlugsByLocale": {
@@ -444,7 +444,7 @@
         "it": "capo-ufficio-iii-a-tempo-parziale-80-a-tempo-pieno-100-presso-l-ufficio-di-sanita-bellinzona-amministrazione-cantonale-ti-bellinzona-213hne",
         "en": "head-of-office-iii-80-full-time-100-at-the-health-office-bellinzona-amministrazione-cantonale-ticino-bellinzona",
         "de": "buroleiter-iii-80-vollzeit-100-im-gesundheitsamt-bellinzona-amministrazione-cantonale-ticino-bellinzona",
-        "fr": "capo-ufficio-iii-a-tempo-parziale-80-a-tempo-pieno-100-presso-l-ufficio-di-sanita-bellinzona-amministrazione-cantonale"
+        "fr": "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-d446d7"
       },
       "requirementsByLocale": {},
       "sourceLang": "it",
@@ -465,8 +465,8 @@
         ],
         "fr": [
           "chef-de-bureau-iii-a-temps-partiel-80-a-temps-plein-100-amministrazione-cantonale-ticino-bellinzona",
-          "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-d446d7",
-          "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-bellinzona"
+          "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-bellinzona",
+          "capo-ufficio-iii-a-tempo-parziale-80-a-tempo-pieno-100-presso-l-ufficio-di-sanita-bellinzona-amministrazione-cantonale"
         ]
       },
       "previousSlugs": [
@@ -475,9 +475,9 @@
         "capo-ufficio-iii-part-time-80-full-time-100-amministrazione-cantonale-ticino-bellinzona",
         "leiter-buro-iii-teilzeit-80-vollzeit-100-amministrazione-cantonale-ticino-camorino",
         "chef-de-bureau-iii-a-temps-partiel-80-a-temps-plein-100-amministrazione-cantonale-ticino-bellinzona",
-        "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-d446d7",
         "capo-ufficio-iii-a-tempo-parziale-80-a-tempo-pieno-100-presso-l-ufficio-di-sanita-bellinzona-organizzazione",
-        "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-bellinzona"
+        "chef-du-bureau-iii-80-temps-plein-100-au-bureau-de-la-sante-de-bellinzona-amministrazione-cantonale-ticino-bellinzona",
+        "capo-ufficio-iii-a-tempo-parziale-80-a-tempo-pieno-100-presso-l-ufficio-di-sanita-bellinzona-amministrazione-cantonale"
       ],
       "baseSalary": {
         "@type": "MonetaryAmount",
