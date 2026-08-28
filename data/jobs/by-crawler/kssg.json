@@ -1,6 +1,6 @@
 {
   "crawlerKey": "kssg",
-  "assembledAt": "2026-08-28T05:40:59.326Z",
+  "assembledAt": "2026-08-28T21:28:07.050Z",
   "jobs": [
     {
       "id": "kssg-72be41635d69",
@@ -78,7 +78,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kssg-8532d00e4c8e",
@@ -111,7 +112,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Unterassistentin-2028/1268986801/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:53.548Z",
+      "crawledAt": "2026-08-28T21:27:48.661Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -191,7 +192,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Kurzpraktikum-im-Berufsfeld-Pflege/1218320801/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:52.508Z",
+      "crawledAt": "2026-08-28T21:27:53.475Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -268,7 +269,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Praktikum-in-der-Pflege/1218321901/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:51.485Z",
+      "crawledAt": "2026-08-28T21:27:50.615Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -347,7 +348,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Unterassistentin-2028/1268985101/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:50.450Z",
+      "crawledAt": "2026-08-28T21:27:47.693Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -425,7 +426,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Gesundheit-60-100/1406417633/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:49.297Z",
+      "crawledAt": "2026-08-28T21:27:57.378Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -502,7 +503,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-Pflegefachfrau-mann-50-100/1406303133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:48.269Z",
+      "crawledAt": "2026-08-28T21:27:52.521Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -580,7 +581,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Lehrstelle-als-K%C3%B6chinKoch-EFZ/1395887433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:47.191Z",
+      "crawledAt": "2026-08-28T21:27:55.399Z",
       "addressLocality": "Lehre",
       "addressCountry": "CH",
       "country": "CH",
@@ -658,7 +659,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Spontanbewerbung-Departement-Pflege-&-Therapeutische-Dienste/1198923401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:46.138Z",
+      "crawledAt": "2026-08-28T21:27:45.778Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -735,7 +736,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Unterassistentin-2028/1268986901/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:45.095Z",
+      "crawledAt": "2026-08-28T21:27:49.654Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -815,7 +816,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Lehrstelle-als-K%C3%B6chinKoch-EFZ/1395888333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:44.033Z",
+      "crawledAt": "2026-08-28T21:27:51.567Z",
       "addressLocality": "Lehre",
       "addressCountry": "CH",
       "country": "CH",
@@ -893,7 +894,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Lehrstelle-als-Fachperson-Gesundheit-EFZ/1395885033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:42.980Z",
+      "crawledAt": "2026-08-28T21:27:54.437Z",
       "addressLocality": "Lehre",
       "addressCountry": "CH",
       "country": "CH",
@@ -909,19 +910,21 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Lehrstelle-als-Fachperson-Gesundheit-EFZ/1395885033/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch"
-        ],
         "de": [
-          "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch"
+          "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch",
+          "lehrstelle-als-fachperson-gesundheit-efz-hoch-health-st-gallen"
+        ],
+        "it": [
+          "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch",
+          "apprendistato-come-fachperson-gesundheit-cfc-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch"
+        "lehrstelle-als-fachperson-gesundheit-efz-kssg-ch",
+        "lehrstelle-als-fachperson-gesundheit-efz-hoch-health-st-gallen",
+        "apprendistato-come-fachperson-gesundheit-cfc-hoch-health-ostschweiz-st-gallen"
       ],
       "needsRetranslation": true,
       "salaryMin": 48000,
@@ -969,7 +972,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Lehrstelle-als-K%C3%B6chinKoch-EFZ/1395889133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:41.938Z",
+      "crawledAt": "2026-08-28T21:28:01.147Z",
       "addressLocality": "Lehre",
       "addressCountry": "CH",
       "country": "CH",
@@ -1035,11 +1038,11 @@
         "de": "Unterassistent/in 2027",
         "fr": "Sous-assistant/en 2027"
       },
-      "description": "Unterassistent/in 2027\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine \n• Aufgaben und Perspektiven\n\nFür die Absolvierung des Praktischen Jahres bei HOCH Health Ostschweiz am Standort Grabs bieten wir dir als Unterassistentin und Unterassistent in den untenstehenden Fachbereichen Unterassistenzstellen an. Bitte beachte, dass der Standort Grabs nur Praktika im Rahmen des Klinisch Praktischen Jahres anbietet.\n\nFachbereich\nverfügbarer Zeitraum\n\nKlinik für Anästhesiologie, Intensiv- und Rettungsmedizin\n(Bieten Famulaturen an)\nBitte wende dich an erika.furger@h-och.ch\n\nKlinik für Innere Medizin\n\nbesetzt\n(Mindesteinsatzdauer: zwei Monate)\n\nKlinik für Chirurgie\nbesetzt\n\nKlinik für Gynäkologie und Geburtshilfe\n(Bieten Famulaturen an)\nBitte wende dich an gertrud.eggenberger-hilty@h-och.ch\n\nKlinik für Orthopädie und Traumatologie\nJanuar bis Mitte März\nJuli bis November\n(Mindesteinsatzdauer Unterassistenz: zwei Monate)",
+      "description": "Unterassistent/in 2027\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine\n• Aufgaben und Perspektiven\n\nFür die Absolvierung des Praktischen Jahres bei HOCH Health Ostschweiz am Standort Grabs bieten wir dir als Unterassistentin und Unterassistent in den untenstehenden Fachbereichen Unterassistenzstellen an. Bitte beachte, dass der Standort Grabs nur Praktika im Rahmen des Klinisch Praktischen Jahres anbietet.\n\nFachbereich\nverfügbarer Zeitraum\n\nKlinik für Anästhesiologie, Intensiv- und Rettungsmedizin\n(Bieten Famulaturen an)\nBitte wende dich an erika.furger@h-och.ch\n\nKlinik für Innere Medizin\n\nbesetzt\n(Mindesteinsatzdauer: zwei Monate)\n\nKlinik für Chirurgie\nbesetzt\n\nKlinik für Gynäkologie und Geburtshilfe\n(Bieten Famulaturen an)\nBitte wende dich an gertrud.eggenberger-hilty@h-och.ch\n\nKlinik für Orthopädie und Traumatologie\nJanuar bis Mitte März\nJuli bis November\n(Mindesteinsatzdauer Unterassistenz: zwei Monate)",
       "descriptionByLocale": {
         "it": "Sub-assistante/in 2027\n\nLuogo di lavoro\n\nElenco dei lavori\n\nIl tuo\n• Compiti e prospettive\n\nPer il completamento dell'anno pratico presso la HOCH Health Eastern Svizzera presso la sede di Grabs, vi offriamo posizioni sub-assistanti e sub-assistanti nelle aree specialistiche qui sotto. Si prega di notare che Grabs offre solo stage come parte dell'Anno pratico clinico.\n\nOggetto\nPeriodo disponibile\n\nClinica per anestesiologia, terapia intensiva e medicina di soccorso\n(Offerte facoltà)\nSi prega di contattare erika.furger@h-och.ch\n\nClinica per la medicina interna\n\nOccupazione\n(Durata minima: due mesi)\n\nClinica per chirurgia\nOccupazione\n\nClinica per Ginecologia e Ostetricia\n(Offerte facoltà)\nSi prega di contattare gertrud.eggenberger-hilty@h-och.ch\n\nClinica per Ortopedia e Traumatologia\nDa gennaio a metà marzo\nLuglio a novembre\n(Durata minima di assistenza: due mesi)",
         "en": "Sub-assistant/in 2027\n\nPlace of work Grabs\n\nJob listing\n\nYour\n• Tasks and perspectives\n\nFor the completion of the practical year at HOCH Health Eastern Switzerland at the Grabs location, we offer you sub-assistant and sub-assistant positions in the specialist areas below. Please note that Grabs only offers internships as part of the Clinical Practical Year.\n\nSubject area\nAvailable period\n\nClinic for anesthesiology, intensive care and rescue medicine\n(Offer faculties)\nPlease contact erika.furger@h-och.ch\n\nClinic for Internal Medicine\n\nOccupied\n(Minimum duration: two months)\n\nClinic for surgery\nOccupied\n\nClinic for Gynecology and Obstetrics\n(Offer faculties)\nPlease contact gertrud.eggenberger-hilty@h-och.ch\n\nClinic for Orthopaedics and Traumatology\nJanuary to mid-March\nJuly to November\n(Minimum duration of sub-assistance: two months)",
-        "de": "Unterassistent/in 2027\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine \n• Aufgaben und Perspektiven\n\nFür die Absolvierung des Praktischen Jahres bei HOCH Health Ostschweiz am Standort Grabs bieten wir dir als Unterassistentin und Unterassistent in den untenstehenden Fachbereichen Unterassistenzstellen an. Bitte beachte, dass der Standort Grabs nur Praktika im Rahmen des Klinisch Praktischen Jahres anbietet.\n\nFachbereich\nverfügbarer Zeitraum\n\nKlinik für Anästhesiologie, Intensiv- und Rettungsmedizin\n(Bieten Famulaturen an)\nBitte wende dich an erika.furger@h-och.ch\n\nKlinik für Innere Medizin\n\nbesetzt\n(Mindesteinsatzdauer: zwei Monate)\n\nKlinik für Chirurgie\nbesetzt\n\nKlinik für Gynäkologie und Geburtshilfe\n(Bieten Famulaturen an)\nBitte wende dich an gertrud.eggenberger-hilty@h-och.ch\n\nKlinik für Orthopädie und Traumatologie\nJanuar bis Mitte März\nJuli bis November\n(Mindesteinsatzdauer Unterassistenz: zwei Monate)",
+        "de": "Unterassistent/in 2027\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine\n• Aufgaben und Perspektiven\n\nFür die Absolvierung des Praktischen Jahres bei HOCH Health Ostschweiz am Standort Grabs bieten wir dir als Unterassistentin und Unterassistent in den untenstehenden Fachbereichen Unterassistenzstellen an. Bitte beachte, dass der Standort Grabs nur Praktika im Rahmen des Klinisch Praktischen Jahres anbietet.\n\nFachbereich\nverfügbarer Zeitraum\n\nKlinik für Anästhesiologie, Intensiv- und Rettungsmedizin\n(Bieten Famulaturen an)\nBitte wende dich an erika.furger@h-och.ch\n\nKlinik für Innere Medizin\n\nbesetzt\n(Mindesteinsatzdauer: zwei Monate)\n\nKlinik für Chirurgie\nbesetzt\n\nKlinik für Gynäkologie und Geburtshilfe\n(Bieten Famulaturen an)\nBitte wende dich an gertrud.eggenberger-hilty@h-och.ch\n\nKlinik für Orthopädie und Traumatologie\nJanuar bis Mitte März\nJuli bis November\n(Mindesteinsatzdauer Unterassistenz: zwei Monate)",
         "fr": "Sous-assistant/en 2027\n\nLieu de travail\n\nListe des emplois\n\nVotre\n• Tâches et perspectives\n\nPour la fin de l'année pratique à HOCH Health Eastern Suisse à l'emplacement de Grabs, nous vous proposons des postes sub-assistants et sub-assistants dans les domaines spécialisés ci-dessous. Veuillez noter que Grabs offre uniquement des stages dans le cadre de l'année clinique pratique.\n\nDomaine\nPériode disponible\n\nClinique d'anesthésiologie, de soins intensifs et de médecine de secours\n(Facultés offertes)\nVeuillez contacter erika.furger@h-och.ch\n\nClinique de médecine interne\n\nOccupés\n(Durée minimale: deux mois)\n\nClinique de chirurgie\nOccupés\n\nClinique de gynécologie et d'obstétrique\n(Facultés offertes)\nVeuillez contacter gertrud.eggenberger-hilty@h-och.ch\n\nClinique d'orthopédie et de traumatologie\nJanvier à mi-mars\nJuillet à novembre\n(Durée minimale de la sous-assistance: deux mois)"
       },
       "location": "Praktikum",
@@ -1092,7 +1095,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kssg-750b4b571b8d",
@@ -1125,7 +1129,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Unterassistentin-2026/1198754401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:39.847Z",
+      "crawledAt": "2026-08-28T21:27:56.394Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -1247,7 +1251,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kssg-bfd05e452dee",
@@ -1280,7 +1285,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Case-Managerin-Zentrales-Patientenmanagement-%28ZPM%29-80/1427024833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:37.756Z",
+      "crawledAt": "2026-08-28T21:27:44.843Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1359,7 +1364,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Elektroinstallateurin-EFZ-Netzbetrieb-&-Energieversorgung-100/1426906433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:36.699Z",
+      "crawledAt": "2026-08-28T21:27:43.900Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1438,7 +1443,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ober%C3%A4rztin-arzt-f%C3%BCr-Medizinische-Onkologie-80-100/1199849601/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:35.663Z",
+      "crawledAt": "2026-08-28T21:27:41.933Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1516,7 +1521,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Ern%C3%A4hrungsberaterin-20-100/1386279333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:34.573Z",
+      "crawledAt": "2026-08-28T21:27:42.913Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1594,7 +1599,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Teamleiterin-Ern%C3%A4hrungs-und-Diabetesberatung-60-100/1386279533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:33.520Z",
+      "crawledAt": "2026-08-28T21:27:40.947Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1672,7 +1677,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Koordinatorin-Administration-Krebszentrum-40-70/1427419533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:32.488Z",
+      "crawledAt": "2026-08-28T21:27:37.017Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1757,7 +1762,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Stomatherapeutin-20-30/1427409033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:31.455Z",
+      "crawledAt": "2026-08-28T21:27:36.068Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -1838,7 +1843,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Praktikum-im-kaufm%C3%A4nnischen-Bereich-%28WMSIMS%29-%28ab-August-2027%29/1427451133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:30.368Z",
+      "crawledAt": "2026-08-28T21:27:39.988Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -1921,7 +1926,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachspezialistin-Datamanagement-und-Tumordokumentation-50-100/1427419033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:29.327Z",
+      "crawledAt": "2026-08-28T21:27:38.000Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2007,7 +2012,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Wundexpertein-SAfW-40/1427329433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:28.311Z",
+      "crawledAt": "2026-08-28T21:27:39.001Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2091,7 +2096,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Unterassistentin-2027/1230043001/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:27.271Z",
+      "crawledAt": "2026-08-28T21:27:32.158Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -2169,7 +2174,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Unterassistentin-2026/1012025401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:26.246Z",
+      "crawledAt": "2026-08-28T21:27:31.208Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -2247,7 +2252,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Ober%C3%A4rztin-arzt-Gyn%C3%A4kologie-und-Geburtshilfe-80-100/1416591533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:25.088Z",
+      "crawledAt": "2026-08-28T21:27:33.141Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2325,7 +2330,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Physiotherapeutin-50-100/1377505533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:24.058Z",
+      "crawledAt": "2026-08-28T21:27:35.100Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2403,7 +2408,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Unterassistentin-2026/1230039901/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:23.023Z",
+      "crawledAt": "2026-08-28T21:27:34.125Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -2493,7 +2498,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Di%C3%A4tk%C3%B6chinDi%C3%A4tkoch-oder-K%C3%B6chinKoch-mit-Interesse-an-Ern%C3%A4hrung-&-Di%C3%A4tetik-80-100/1427717333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:21.972Z",
+      "crawledAt": "2026-08-28T21:27:29.272Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2570,7 +2575,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-Pflegefachfrau-mann-80-100/1427693933/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:20.904Z",
+      "crawledAt": "2026-08-28T21:27:30.234Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2658,7 +2663,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Dipl_-Pflegefachfrau-mann-80-100/1201162601/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:19.854Z",
+      "crawledAt": "2026-08-28T21:27:24.492Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2735,7 +2740,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-70-100/1417110233/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:18.840Z",
+      "crawledAt": "2026-08-28T21:27:26.396Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2814,7 +2819,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-Nachdiplomstudium-%28NDS%29-Intensivpflege-80-100/1417282033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:17.801Z",
+      "crawledAt": "2026-08-28T21:27:25.452Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -2892,7 +2897,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Praktikum-in-der-Pflege/1246915701/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:16.765Z",
+      "crawledAt": "2026-08-28T21:27:28.297Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -2969,7 +2974,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Praktikum-Zusatzmodul-A-Hebamme-80-100/1261910601/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:15.733Z",
+      "crawledAt": "2026-08-28T21:27:27.356Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -3048,7 +3053,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-Nachdiplomstudium-%28NDS%29-Intensivpflege-80-100/1428327433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:14.689Z",
+      "crawledAt": "2026-08-28T21:27:18.661Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3128,7 +3133,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Logistikerin-100/1428304033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:13.642Z",
+      "crawledAt": "2026-08-28T21:27:19.649Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3223,7 +3228,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Leiterin-Pflege-OP-100/1428340333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:12.613Z",
+      "crawledAt": "2026-08-28T21:27:20.604Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3302,7 +3307,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-Nachdiplomkurs-%C3%9Cberwachungspflege-%28%C3%9CWP%29-Intermediate-%28IMC%29-80-100/1428330533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:11.572Z",
+      "crawledAt": "2026-08-28T21:27:21.560Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3379,7 +3384,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachangestellter-neurophysiologische-Diagnostik-40-60/1428227033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:10.524Z",
+      "crawledAt": "2026-08-28T21:27:16.713Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3457,7 +3462,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Mitarbeiterin-Lebensmitteleinkauf-100/1428133533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:09.498Z",
+      "crawledAt": "2026-08-28T21:27:22.569Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3536,7 +3541,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-80-100/1428301633/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:08.477Z",
+      "crawledAt": "2026-08-28T21:27:17.698Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3618,7 +3623,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-ExperteExpertin-Intensivpflege-80-100/1428296433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:07.390Z",
+      "crawledAt": "2026-08-28T21:27:23.537Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3701,7 +3706,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Med_-Praxisassistentin-50/1407332133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:06.357Z",
+      "crawledAt": "2026-08-28T21:27:14.793Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3779,7 +3784,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Assistenz%C3%A4rztin-arzt-80-100/884929201/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:05.276Z",
+      "crawledAt": "2026-08-28T21:27:13.800Z",
       "addressLocality": "Befristete Anstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -3862,7 +3867,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Unterassistentin-2027/1271582401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:04.235Z",
+      "crawledAt": "2026-08-28T21:27:11.877Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -3956,7 +3961,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Unterassistentin-2026/1271583001/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:03.193Z",
+      "crawledAt": "2026-08-28T21:27:12.846Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -4034,7 +4039,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Unterassistentin/1271625501/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:02.137Z",
+      "crawledAt": "2026-08-28T21:27:10.918Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -4111,7 +4116,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ober%C3%A4rztin-arzt-100/1407631933/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:01.115Z",
+      "crawledAt": "2026-08-28T21:27:15.746Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4188,7 +4193,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Datamanagerin-40/1428696333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:40:00.048Z",
+      "crawledAt": "2026-08-28T21:27:08.962Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4271,7 +4276,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Landmaschinenmechanikerin-100/1428639233/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:59.014Z",
+      "crawledAt": "2026-08-28T21:27:07.989Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4345,7 +4350,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-Endoskopie-60/1428646433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:57.972Z",
+      "crawledAt": "2026-08-28T21:27:09.942Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4424,7 +4429,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Gesundheit-60-100/1418188533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:56.937Z",
+      "crawledAt": "2026-08-28T21:27:05.998Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4498,7 +4503,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-ExperteExpertin-Notfallpflege-50-100/1418185933/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:55.904Z",
+      "crawledAt": "2026-08-28T21:27:01.046Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4572,7 +4577,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Pflegeexpertin-APN-70/1418200133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:54.826Z",
+      "crawledAt": "2026-08-28T21:27:03.046Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4651,7 +4656,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Strukturiertes-Praxisjahr-f%C3%BCr-die-Zulassung-zum-Studiengang-Bachelor-of-Science-in-Pflege/1278820101/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:53.783Z",
+      "crawledAt": "2026-08-28T21:27:04.025Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -4724,7 +4729,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Gruppenleiterin-Operationspflege-100/1418195033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:52.756Z",
+      "crawledAt": "2026-08-28T21:27:02.041Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4797,7 +4802,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Fachfrau-mann-Operationstechnik-50-100/1418198033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:51.730Z",
+      "crawledAt": "2026-08-28T21:27:05.007Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4869,7 +4874,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Gesundheit-80-100/1407721333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:50.709Z",
+      "crawledAt": "2026-08-28T21:27:06.982Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -4948,7 +4953,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Unterassistentin/1275439501/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:49.655Z",
+      "crawledAt": "2026-08-28T21:27:00.061Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -5025,7 +5030,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Unterassistentin/1275435401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:48.624Z",
+      "crawledAt": "2026-08-28T21:26:59.081Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -5102,7 +5107,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-80-100/1408218333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:47.562Z",
+      "crawledAt": "2026-08-28T21:26:58.086Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5180,7 +5185,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-als-Ausbildnerin-40-100/1397645633/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:46.541Z",
+      "crawledAt": "2026-08-28T21:26:49.441Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5258,7 +5263,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-ICT-Teamleiterin-Identity-&-Access-Management-80-100/1281072301/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:45.503Z",
+      "crawledAt": "2026-08-28T21:26:51.366Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5328,7 +5333,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Zentrumsleiterin-Hausarztmedizin-80-100/1397756233/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:44.465Z",
+      "crawledAt": "2026-08-28T21:26:50.416Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5406,7 +5411,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-80-100/1280116501/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:43.450Z",
+      "crawledAt": "2026-08-28T21:26:54.260Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5484,7 +5489,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Ober%C3%A4rztin-arzt-100/1378949733/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:42.408Z",
+      "crawledAt": "2026-08-28T21:26:53.284Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5565,7 +5570,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Ober%C3%A4rztin-arzt-50-100/1379095733/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:41.384Z",
+      "crawledAt": "2026-08-28T21:26:52.329Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5644,7 +5649,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Medizintechnikerin-80-100/1388451733/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:40.361Z",
+      "crawledAt": "2026-08-28T21:26:48.433Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5722,7 +5727,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-Pflegefachfrau-mann-60-100/1282546401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:39.322Z",
+      "crawledAt": "2026-08-28T21:26:57.114Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5804,7 +5809,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-60-100/1280115101/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:38.277Z",
+      "crawledAt": "2026-08-28T21:26:56.150Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5883,7 +5888,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Pflegefachfrau-mann-80-100/1279336701/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:37.239Z",
+      "crawledAt": "2026-08-28T21:26:55.204Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -5961,7 +5966,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Pflegehelferin-SRK-Springerpool-50-70/1408898033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:36.215Z",
+      "crawledAt": "2026-08-28T21:26:47.483Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6042,7 +6047,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Betriebs-und-Geb%C3%A4udetechnikerin-100/1379565233/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:35.176Z",
+      "crawledAt": "2026-08-28T21:26:45.490Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6120,7 +6125,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Dipl_-ExpertinExperte-An%C3%A4sthesiepflege-NDS-HF-50-100/1284742001/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:34.128Z",
+      "crawledAt": "2026-08-28T21:26:46.511Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6198,7 +6203,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ausbildung-dipl_-Radiologiefachperson-HF%2C-M%C3%A4rz-2027/1398254033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:33.086Z",
+      "crawledAt": "2026-08-28T21:26:44.522Z",
       "addressLocality": "Höhere Fachschule",
       "addressCountry": "CH",
       "country": "CH",
@@ -6275,7 +6280,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Strukturiertes-Praxisjahr-Fachmaturit%C3%A4t-Gesundheit-2027/1398193533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:32.074Z",
+      "crawledAt": "2026-08-28T21:26:43.524Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -6352,7 +6357,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Strukturiertes-Praxisjahr-Fachmaturit%C3%A4t-Gesundheit/1398053533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:31.029Z",
+      "crawledAt": "2026-08-28T21:26:42.546Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -6429,7 +6434,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Strukturiertes-Praxisjahr-Fachmaturit%C3%A4t-Gesundheit/1398052933/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:29.990Z",
+      "crawledAt": "2026-08-28T21:26:41.584Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -6510,7 +6515,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Gesundheit-80-100/1287008701/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:28.947Z",
+      "crawledAt": "2026-08-28T21:26:40.649Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6587,7 +6592,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Kader%C3%A4rztin-arzt-Gef%C3%A4sschirurgie-100/1398652333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:27.912Z",
+      "crawledAt": "2026-08-28T21:26:36.756Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6664,7 +6669,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Spezialistin-f%C3%BCr-Implementierung-in-der-Infektionspr%C3%A4vention-80-100/1287185101/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:26.885Z",
+      "crawledAt": "2026-08-28T21:26:37.724Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6749,7 +6754,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ober%C3%A4rztin-arzt-80-100/1287185301/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:25.830Z",
+      "crawledAt": "2026-08-28T21:26:38.687Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6828,7 +6833,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-ExperteExpertin-Notfallpflege-80-100/1286579501/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:24.806Z",
+      "crawledAt": "2026-08-28T21:26:39.649Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6910,7 +6915,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Med_-Praxisassistentin-oder-Arztsekret%C3%A4rin-50-100/1429472033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:23.760Z",
+      "crawledAt": "2026-08-28T21:26:35.800Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -6991,7 +6996,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Assistenz%C3%A4rztin-arzt-100/1429665033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:22.716Z",
+      "crawledAt": "2026-08-28T21:26:34.843Z",
       "addressLocality": "Befristete Anstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7064,7 +7069,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Stv_-Teamleiterin-80-100/1288983201/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:21.688Z",
+      "crawledAt": "2026-08-28T21:26:31.933Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7142,7 +7147,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Berufsbildnerin-An%C3%A4sthesiepflege-NDS-HF-40/1285644701/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:20.644Z",
+      "crawledAt": "2026-08-28T21:26:30.949Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7219,7 +7224,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Ergotherapeutin-40-100/1380195833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:19.583Z",
+      "crawledAt": "2026-08-28T21:26:32.911Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7297,7 +7302,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ergebnis-Controllerin-100/1382998833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:18.567Z",
+      "crawledAt": "2026-08-28T21:26:33.872Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7368,7 +7373,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-30/1430466433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:17.509Z",
+      "crawledAt": "2026-08-28T21:26:29.983Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7385,19 +7390,23 @@
       "applyUrl": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-30/1430466433/",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "dipl-pflegefachfrau-mann-30-kssg-ch",
-        "dipl-pflegefachfrau-mann-30-kantonsspital-st-gallen-kssg-hoch-festanstellung"
-      ],
       "previousSlugsByLocale": {
+        "de": [
+          "dipl-pflegefachfrau-mann-30-kssg-ch",
+          "dipl-pflegefachfrau-mann-30-hoch-health-uznach"
+        ],
         "it": [
           "dipl-pflegefachfrau-mann-30-kssg-ch",
-          "dipl-pflegefachfrau-mann-30-kantonsspital-st-gallen-kssg-hoch-festanstellung"
-        ],
-        "de": [
-          "dipl-pflegefachfrau-mann-30-kssg-ch"
+          "dipl-pflegefachfrau-mann-30-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+          "dipl-pflegefachfrau-mann-30-hoch-health-ostschweiz-uznach"
         ]
       },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-30-kssg-ch",
+        "dipl-pflegefachfrau-mann-30-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "dipl-pflegefachfrau-mann-30-hoch-health-uznach",
+        "dipl-pflegefachfrau-mann-30-hoch-health-ostschweiz-uznach"
+      ],
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-27T00:53:54.596Z",
       "salaryMin": 17300,
@@ -7444,7 +7453,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-Springerpool-20-100/1289895401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:16.472Z",
+      "crawledAt": "2026-08-28T21:26:28.046Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7522,7 +7531,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Gruppenleiterin-Operationspflege-100/1419651033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:15.435Z",
+      "crawledAt": "2026-08-28T21:26:29.023Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7595,7 +7604,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Ausbildung-zur-dipl_-Pflegefachperson-HF-%283-j%C3%A4hrige-Ausbildung%29%2C-M%C3%A4rz-2027/1290239601/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:14.367Z",
+      "crawledAt": "2026-08-28T21:26:27.070Z",
       "addressLocality": "Höhere Fachschule",
       "addressCountry": "CH",
       "country": "CH",
@@ -7672,7 +7681,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Sachbearbeiterin-Telefonzentrale-Nachtdienst-30/1419551933/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:13.340Z",
+      "crawledAt": "2026-08-28T21:26:26.093Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7752,7 +7761,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ausbildung-zur-dipl_-Pflegefachperson-HF-%283-j%C3%A4hrige-Ausbildung%29%2C-M%C3%A4rz-2027/1290241201/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:12.294Z",
+      "crawledAt": "2026-08-28T21:26:25.135Z",
       "addressLocality": "Höhere Fachschule",
       "addressCountry": "CH",
       "country": "CH",
@@ -7829,7 +7838,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Ausbildung-zur-dipl_-Pflegefachperson-HF-%283-j%C3%A4hrige-Ausbildung%29%2C-M%C3%A4rz-2027/1290240101/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:11.255Z",
+      "crawledAt": "2026-08-28T21:26:24.141Z",
       "addressLocality": "Höhere Fachschule",
       "addressCountry": "CH",
       "country": "CH",
@@ -7906,7 +7915,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Ausbildung-zur-dipl_-Pflegefachperson-HF-%283-j%C3%A4hrige-Ausbildung%29%2C-M%C3%A4rz-2027/1290240401/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:10.220Z",
+      "crawledAt": "2026-08-28T21:26:23.194Z",
       "addressLocality": "Höhere Fachschule",
       "addressCountry": "CH",
       "country": "CH",
@@ -7956,9 +7965,9 @@
       "id": "kssg-19f848dd89aa",
       "slug": "sachbearbeiter-in-administrativer-support-80-100-kssg-ch",
       "slugByLocale": {
-        "de": "sachbearbeiter-in-administrativer-support-80-100-hoch-health-st-gallen",
         "it": "sachbearbeiter-in-administrativer-support-80-100-kssg-ch",
         "en": "sachbearbeiter-in-administrativer-support-80-100-kssg-ch",
+        "de": "sachbearbeiter-in-administrativer-support-80-100-hoch-health-st-gallen",
         "fr": "sachbearbeiter-in-administrativer-support-80-100-kssg-ch"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
@@ -7966,16 +7975,16 @@
       "companyDomain": "kssg.ch",
       "title": "Sachbearbeiter/in Administrativer Support 80-100%",
       "titleByLocale": {
-        "de": "Sachbearbeiter/in Administrativer Support 80-100%",
-        "en": "Sachbearbeiter/in Administrativer Support 80-100%",
         "it": "Sachbearbeiter/in Administrativer Support 80-100%",
+        "en": "Sachbearbeiter/in Administrativer Support 80-100%",
+        "de": "Sachbearbeiter/in Administrativer Support 80-100%",
         "fr": "Sachbearbeiter/in Administrativer Support 80-100%"
       },
       "description": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
       "descriptionByLocale": {
-        "de": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "it": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "en": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "de": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "fr": "Sachbearbeiter/in Administrativer Support 80-100%\n\nDepartement Immobilien & Betrieb, Technology Management\n\nArbeitsort St. Gallen\n\nDeine Aufgaben und Perspektiven\n\n• Selbstständige Abwicklung von Bestellungen, Rechnungen sowie Vorerfassung von Daten in verschiedenen Fachbereichen\n\n• Administrative Unterstützung verschiedener Fachbereiche sowie Koordination organisatorischer Aufgaben\n\n• Mitwirkung in Personal- und Finanzprozessen\n\n• Mitarbeit in Projekten sowie Übernahme von Aufgaben in der Projektadministration\n\n• Sorgfältige Pflege und Verwaltung von Daten sowie Mitgestaltung bei der Weiterentwicklung und Optimierung von Prozessen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene kaufmännische Grundbildung, abgeschlossene Weiterbildung von Vorteil\n\n• Mehrjährige Berufspraxis in ähnlicher Position, vorzugsweise in der Gesundheitsbranche oder einem Dienstleistungsunternehmen, MS-Office Kenntnisse, SAP Kenntnisse von Vorteil\n\n• Professioneller Auftritt und stilsicheres Deutsch in Wort und Schrift\n\n• Selbstständige und initiative Arbeitsweise, vernetztes Denken, Belastbarkeit, Veränderungsbereitschaft\n\n• Hohe Sozialkompetenz mit ausgeprägter Dienstleistungsorientierung, Teamfähigkeit sowie Freude am Umgang mit Menschen\n\nUnser Angebot an dich\n\n• Flexible Arbeitszeitmodelle und attraktive Anstellungsbedingungen\n\n• Mitgestaltung des Arbeitspakets basierend auf deinen Fähigkeiten\n\n• Individueller Einarbeitungsplan\n\n• Mitarbeiterangebote im Bereich Gesundheitsförderung sowie diverse Vergünstigungen\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Selina Schneider, Gruppenleiterin Business Operations & Support, Telefon +41 71 494 22 98\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Gina Petrarca, Teamleiterin HR Beratung Supportbereich, Telefon +41 71 494 90 76\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu"
       },
       "location": "Festanstellung",
@@ -7983,7 +7992,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Sachbearbeiterin-Administrativer-Support-80-100/1430705833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:09.157Z",
+      "crawledAt": "2026-08-28T21:26:21.229Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -7999,10 +8008,9 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Sachbearbeiterin-Administrativer-Support-80-100/1430705833/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:39:09.157Z",
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -8015,15 +8023,22 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:39:09.157Z"
+      "previousSlugsByLocale": {
+        "de": [
+          "sachbearbeiter-in-administrativer-support-80-100-hoch-health-st-gallen"
+        ]
+      },
+      "previousSlugs": [
+        "sachbearbeiter-in-administrativer-support-80-100-hoch-health-st-gallen"
+      ]
     },
     {
       "id": "kssg-b768cf750abe",
       "slug": "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen",
       "slugByLocale": {
-        "de": "fachfrau-mann-betreuung-80-hoch-health-st-gallen",
         "it": "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen",
         "en": "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen",
+        "de": "fachfrau-mann-betreuung-80-hoch-health-st-gallen",
         "fr": "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
@@ -8031,16 +8046,16 @@
       "companyDomain": "kssg.ch",
       "title": "Fachfrau/-mann Betreuung 80%",
       "titleByLocale": {
-        "de": "Fachfrau/-mann Betreuung 80%",
         "it": "Fachfrau/-mann Betreuung 80%",
         "en": "Fachfrau/-mann Betreuung 80%",
+        "de": "Fachfrau/-mann Betreuung 80%",
         "fr": "Fachfrau/-mann Betreuung 80%"
       },
       "description": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
       "descriptionByLocale": {
-        "de": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "it": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "en": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "de": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "fr": "Fachfrau/-mann Betreuung 80%\n\nKindertagesstätte\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Professionelle Betreuung, Begleitung und individuelle Förderung der Kinder sowie Beobachtung ihrer Entwicklung\n\n• Gruppenübergreifender Einsatz in den drei Kleinstkind- und drei altersgemischten Gruppen mit flexibler Zusammenarbeit in unterschiedlichen Tandems und Teams\n\n• Gestaltung eines alters- und bedürfnisgerechten, abwechslungsreichen Kita-Alltags und gruppenübergreifender Aktivitäten\n\n• Vertrauensvolle Zusammenarbeit mit Erziehungsberechtigten\n\n• Umsetzung des pädagogischen Konzepts sowie der Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Betreuung EFZ, Fachrichtung Kinder, oder eine gleichwertige Ausbildung\n\n• Pädagogische Fachkompetenz und Freude an der Arbeit mit Kindern unterschiedlicher Altersstufen\n\n• Flexibilität und Freude an wechselnden Gruppen- und Teamkonstellationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Ausgeprägte Team- und Kommunikationsfähigkeit sowie Einfühlungsvermögen und professionelles Auftreten gegenüber Kindern und Erziehungsberechtigten\n\nUnser Angebot an dich\n\n• Vielseitige 80%-Stelle mit Einblick und Mitarbeit in allen sechs Gruppen\n\n• Abwechslungsreiche Zusammenarbeit mit verschiedenen Tandems und Teams\n\n• Ein engagiertes und unterstützendes Arbeitsumfeld\n\n• Raum für Eigeninitiative und pädagogische Mitgestaltung\n\n• Fachliche und persönliche Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt per sofort oder nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Cinzia Müller, Leiterin Kindertagesstätte, Telefon +41 71 494 38 62\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Sandra Oertle, Leiterin HR Beratung, Telefon +41 71 494 69 49\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu"
       },
       "location": "Festanstellung",
@@ -8048,7 +8063,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Betreuung-80/1430755733/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:08.094Z",
+      "crawledAt": "2026-08-28T21:26:22.217Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8064,21 +8079,24 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Fachfrau-mann-Betreuung-80/1430755733/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "fachfrau-mann-betreuung-80-kssg-ch"
-        ],
         "de": [
-          "fachfrau-mann-betreuung-80-kssg-ch"
+          "fachfrau-mann-betreuung-80-kssg-ch",
+          "fachfrau-mann-betreuung-80-hoch-health-st-gallen"
+        ],
+        "it": [
+          "fachfrau-mann-betreuung-80-kssg-ch",
+          "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "fachfrau-mann-betreuung-80-kssg-ch"
+        "fachfrau-mann-betreuung-80-kssg-ch",
+        "fachfrau-mann-betreuung-80-hoch-health-st-gallen",
+        "fachfrau-mann-betreuung-80-hoch-health-ostschweiz-st-gallen"
       ],
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:39:08.094Z",
       "salaryMin": 46000,
       "salaryMax": 69600,
       "baseSalary": {
@@ -8090,8 +8108,7 @@
           "maxValue": 69600,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:39:08.094Z"
+      }
     },
     {
       "id": "kssg-59e3b1172d7b",
@@ -8124,7 +8141,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-Pflegefachfrau-mann-Dauernachtwache-50-100/1409656333/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:07.050Z",
+      "crawledAt": "2026-08-28T21:26:15.249Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8140,19 +8157,21 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Grabs-Dipl_-Pflegefachfrau-mann-Dauernachtwache-50-100/1409656333/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch"
-        ],
         "de": [
-          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch"
+          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch",
+          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-hoch-health-grabs"
+        ],
+        "it": [
+          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch",
+          "dipl-pflegefachfrau-mann-dauernachtwache-50-100-hoch-health-ostschweiz-grabs"
         ]
       },
       "previousSlugs": [
-        "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch"
+        "dipl-pflegefachfrau-mann-dauernachtwache-50-100-kssg-ch",
+        "dipl-pflegefachfrau-mann-dauernachtwache-50-100-hoch-health-grabs",
+        "dipl-pflegefachfrau-mann-dauernachtwache-50-100-hoch-health-ostschweiz-grabs"
       ],
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -8172,26 +8191,26 @@
       "id": "kssg-8f9b5bfd3f3f",
       "slug": "medico-senior-neurologia-80-hoch-health-ostschweiz-st-gallen",
       "slugByLocale": {
-        "de": "oberarztin-arzt-neurologie-80-hoch-health-st-gallen",
+        "it": "medico-senior-neurologia-80-hoch-health-ostschweiz-st-gallen",
         "en": "senior-physician-neurology-80-hoch-health-ostschweiz-st-gallen",
-        "fr": "neurologie-chez-le-medecin-principal-80-hoch-health-ostschweiz-st-gallen",
-        "it": "medico-senior-neurologia-80-hoch-health-ostschweiz-st-gallen"
+        "de": "oberarztin-arzt-neurologie-80-hoch-health-st-gallen",
+        "fr": "neurologie-chez-le-medecin-principal-80-hoch-health-ostschweiz-st-gallen"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
       "companyKey": "kssg",
       "companyDomain": "kssg.ch",
       "title": "Oberärztin/-arzt Neurologie 80%",
       "titleByLocale": {
-        "de": "Oberärztin/-arzt Neurologie 80%",
         "it": "Oberärztin/-arzt Neurologie 80%",
         "en": "Oberärztin/-arzt Neurologie 80%",
+        "de": "Oberärztin/-arzt Neurologie 80%",
         "fr": "Oberärztin/-arzt Neurologie 80%"
       },
       "description": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
       "descriptionByLocale": {
-        "de": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "it": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "en": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "de": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
         "fr": "Oberärztin/-arzt Neurologie 80%\n\nMuskelzentrum/ALS Clinic\n\nArbeitsort St. Gallen\n\nStellenanzeige\n\nDeie Aufgaben und Perspektiven\n\n• Betreuung von Patientinnen und Patienten im gesamten Spektrum der neuromuskulären Erkrankungen, insbesondere ALS\n\n• Verantwortung für die Gewährleistung einer qualitativ hochwertigen Patientenversorgung\n\n• Mitarbeit bei Forschungsprojekten (klinische Studien und Investigator Initiated Trials)\n\n• Forschungs- und Publikationstätigkeit\n\n• Möglichkeit zur Habilitation sowie Teilnahme an regelmässigen Fort- und Weiterbildungen\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossener Facharzttitel in Neurologie mit besonderem Interesse an neuromuskulären Erkrankungen\n\n• Kenntnisse in klinischer Neurophysiologie; das EMG/ENG-Zertifikat ist erwünscht\n\n• Freude an interdisziplinärer Zusammenarbeit sowie an einer engagierten, patientenorientierten Betreuung in einem universitären und forschungsaktiven Umfeld\n\n• Interesse an Forschungsprojekten; Erfahrung in klinischen Studien sowie GCP-Qualifikation ist erwünscht\n\n• Belastbare, kooperative und teamfähige Persönlichkeit mit hoher Sozialkompetenz sowie sehr guten Deutsch- und Englischkenntnissen auf Niveau C1\n\nUnser Angebot an dich\n\n• Tätigkeit an einem kosek-akkreditierten Referenzzentrum für seltene neuromuskuläre Erkrankungen mit internationaler Vernetzung\n\n• Teamorientierte Zusammenarbeit in einer hochspezialisierten eigenständigen Organisationseinheit in einem interdisziplinären Umfeld\n\n• Fundierte Fortbildung im Bereich der neuromuskulären Erkrankungen (Fellowship) inklusive klinische Neurophysiologie (Anerkennung E1 SIWF)\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Prof. Dr. Markus Weber, Zentrumsleiter, Telefon +41 71 494 35 81\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Nina Jenni, HR Business Partner, Telefon +41 71 494 67 27\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu"
       },
       "location": "Festanstellung",
@@ -8199,7 +8218,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Ober%C3%A4rztin-arzt-Neurologie-80/1399203533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:06.016Z",
+      "crawledAt": "2026-08-28T21:26:18.248Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8215,21 +8234,24 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Ober%C3%A4rztin-arzt-Neurologie-80/1399203533/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "oberarztin-arzt-neurologie-80-kssg-ch"
-        ],
         "de": [
-          "oberarztin-arzt-neurologie-80-kssg-ch"
+          "oberarztin-arzt-neurologie-80-kssg-ch",
+          "oberarztin-arzt-neurologie-80-hoch-health-st-gallen"
+        ],
+        "it": [
+          "oberarztin-arzt-neurologie-80-kssg-ch",
+          "medico-senior-neurologia-80-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "oberarztin-arzt-neurologie-80-kssg-ch"
+        "oberarztin-arzt-neurologie-80-kssg-ch",
+        "oberarztin-arzt-neurologie-80-hoch-health-st-gallen",
+        "medico-senior-neurologia-80-hoch-health-ostschweiz-st-gallen"
       ],
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:39:06.016Z",
       "salaryMin": 46000,
       "salaryMax": 69600,
       "baseSalary": {
@@ -8241,8 +8263,7 @@
           "maxValue": 69600,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:39:06.016Z"
+      }
     },
     {
       "id": "kssg-49239689de95",
@@ -8275,7 +8296,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Mitarbeiterin-Events-im-Stundenlohn-%28auf-Abruf%29/1420291433/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:04.985Z",
+      "crawledAt": "2026-08-28T21:26:16.257Z",
       "addressLocality": "Befristete Anstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8291,12 +8312,11 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Mitarbeiterin-Events-im-Stundenlohn-%28auf-Abruf%29/1420291433/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
-          "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kssg-ch"
+          "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kssg-ch",
+          "collaboratore-trice-events-im-stundenlohn-auf-abruf-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung"
         ],
         "fr": [
           "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung"
@@ -8304,7 +8324,9 @@
       },
       "previousSlugs": [
         "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kssg-ch",
-        "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung"
+        "mitarbeiter-in-events-im-stundenlohn-auf-abruf-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung",
+        "salaries-horaires-sur-demande-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung",
+        "collaboratore-trice-events-im-stundenlohn-auf-abruf-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung"
       ],
       "needsRetranslation": true,
       "salaryMin": 57500,
@@ -8352,7 +8374,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Sachbearbeiterin-Aufnahme-Spital-Linth-50/1420279233/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:03.914Z",
+      "crawledAt": "2026-08-28T21:26:17.242Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8368,18 +8390,18 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Uznach-Sachbearbeiterin-Aufnahme-Spital-Linth-50/1420279233/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
           "sachbearbeiter-in-aufnahme-spital-linth-50-kssg-ch",
-          "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-uznach"
+          "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-uznach",
+          "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-festanstellung"
         ]
       },
       "previousSlugs": [
         "sachbearbeiter-in-aufnahme-spital-linth-50-kssg-ch",
-        "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-uznach"
+        "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-uznach",
+        "personale-in-ammissione-spital-linth-50-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       ],
       "needsRetranslation": true,
       "salaryMin": 28800,
@@ -8400,26 +8422,26 @@
       "id": "kssg-f804e57ca92e",
       "slug": "dipl-nds-emergency-care-80-100-hoch-health-ostschweiz-uznach",
       "slugByLocale": {
-        "de": "dipl-pflegefachfrau-mann-nds-notfallpflege-80-100-hoch-health-uznach",
+        "it": "dipl-nds-emergency-care-80-100-hoch-health-ostschweiz-uznach",
         "en": "dipl-nurse-nds-emergency-nursing-80-100-hoch-health-ostschweiz-uznach",
-        "fr": "infirmiere-diplomee-en-soins-infirmiers-d-urgence-nds-80-100-hoch-health-ostschweiz-uznach",
-        "it": "dipl-nds-emergency-care-80-100-hoch-health-ostschweiz-uznach"
+        "de": "dipl-pflegefachfrau-mann-nds-notfallpflege-80-100-hoch-health-uznach",
+        "fr": "infirmiere-diplomee-en-soins-infirmiers-d-urgence-nds-80-100-hoch-health-ostschweiz-uznach"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
       "companyKey": "kssg",
       "companyDomain": "kssg.ch",
       "title": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%",
       "titleByLocale": {
-        "de": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%",
         "it": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%",
         "en": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%",
+        "de": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%",
         "fr": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%"
       },
       "description": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
       "descriptionByLocale": {
-        "de": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "it": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "en": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
+        "de": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "fr": "Dipl. Pflegefachfrau/-mann NDS Notfallpflege 40-100%\n\nNotfall\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Aufnahme und Betreuung von Notfallpatientinnen und Notfallpatienten aller Fachdisziplinen im Regionalspital\n\n• Leistungserbringung nach den neusten Erkenntnissen der Notfallmedizin und Notfallpflege\n\n• Anleiten und Fördern der Studierenden NDS als Tagesbezugsperson\n\n• Dokumentation und Leistungserfassung mit den dafür zur Verfügung stehenden Informatik Programmen\n\n• Mitgestaltung und Weiterentwicklung moderner First-Look Strukturen sowie der Triage-Prozesse im Notfall\n\nWas du für diese Stelle mitbringst\n\n• Dipl. Pflegefachfrau/-mann HF/FH oder eine ausländische Ausbildung mit SRK-Anerkennung mit NDS Notfallpflege\n\n• Freude, in einem lebhaften Umfeld mit unvorhersehbaren Situationen zu arbeiten\n\n• Teamorientierte, flexible und belastbare Persönlichkeit\n\nUnser Angebot an dich\n\n• Engagierte Zusammenarbeit in einem spezialisierten, interdisziplinären und interprofessionellen Umfeld\n\n• Abwechslungsreiche Herausforderung in einem dynamischen Arbeitsumfeld\n\n• Ein strukturiertes Einführungsprogramm mit Bezugsperson\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen,etc.\n\n• Pflege mit Herz und Perspektive - in unserem wachsenden Team\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Nicole Anderes, Leiterin Pflege & Therap. Dienste, Telefon +41 55 285 53 66\n\n• Bei Fragen zum Bewerbungsprozess wendest duch dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung"
       },
       "location": "Festanstellung",
@@ -8427,7 +8449,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-NDS-Notfallpflege-40-100/1399411133/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:02.883Z",
+      "crawledAt": "2026-08-28T21:26:13.301Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8443,21 +8465,24 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Uznach-Dipl_-Pflegefachfrau-mann-NDS-Notfallpflege-40-100/1399411133/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch"
-        ],
         "de": [
-          "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch"
+          "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch",
+          "dipl-pflegefachfrau-mann-nds-notfallpflege-80-100-hoch-health-uznach"
+        ],
+        "it": [
+          "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch",
+          "dipl-nds-emergency-care-80-100-hoch-health-ostschweiz-uznach"
         ]
       },
       "previousSlugs": [
-        "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch"
+        "dipl-pflegefachfrau-mann-nds-notfallpflege-40-100-kssg-ch",
+        "dipl-pflegefachfrau-mann-nds-notfallpflege-80-100-hoch-health-uznach",
+        "dipl-nds-emergency-care-80-100-hoch-health-ostschweiz-uznach"
       ],
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:39:02.883Z",
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -8469,8 +8494,7 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:39:02.883Z"
+      }
     },
     {
       "id": "kssg-a3ac955c5fb3",
@@ -8503,7 +8527,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Study-Nurse-Studienkoordinatorin-80-100/1420189833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:01.841Z",
+      "crawledAt": "2026-08-28T21:26:14.277Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8519,22 +8543,22 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Study-Nurse-Studienkoordinatorin-80-100/1420189833/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
           "study-nurse-studienkoordinator-in-80-100-kssg-ch",
           "certified-nurse-60-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
           "infermiera-di-studio-coordinatore-di-studio-in-80-100-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung",
-          "study-nurse-studienkoordinator-in-80-100-kantonsspital-st-gallen-kssg-hoch-st-gallen"
+          "study-nurse-studienkoordinator-in-80-100-kantonsspital-st-gallen-kssg-hoch-st-gallen",
+          "studio-infermiera-coordinatore-di-studio-in-80-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
         ]
       },
       "previousSlugs": [
         "study-nurse-studienkoordinator-in-80-100-kssg-ch",
         "certified-nurse-60-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
         "infermiera-di-studio-coordinatore-di-studio-in-80-100-kantonsspital-st-gallen-kssg-hoch-befristete-anstellung",
-        "study-nurse-studienkoordinator-in-80-100-kantonsspital-st-gallen-kssg-hoch-st-gallen"
+        "study-nurse-studienkoordinator-in-80-100-kantonsspital-st-gallen-kssg-hoch-st-gallen",
+        "studio-infermiera-coordinatore-di-studio-in-80-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       ],
       "needsRetranslation": true,
       "salaryMin": 57500,
@@ -8582,7 +8606,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Case-Managerin-Zentrales-Patientenmanagement-80-100/1420072833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:39:00.796Z",
+      "crawledAt": "2026-08-28T21:26:19.211Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8598,20 +8622,20 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Case-Managerin-Zentrales-Patientenmanagement-80-100/1420072833/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
           "case-manager-in-zentrales-patientenmanagement-80-100-kssg-ch",
           "employee-central-patient-management-60-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
-          "employee-in-central-patient-management-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
+          "employee-in-central-patient-management-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+          "case-manager-in-gestione-del-paziente-centrale-80-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
         ]
       },
       "previousSlugs": [
         "case-manager-in-zentrales-patientenmanagement-80-100-kssg-ch",
         "employee-central-patient-management-60-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
-        "employee-in-central-patient-management-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
+        "employee-in-central-patient-management-100-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "case-manager-in-gestione-del-paziente-centrale-80-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       ],
       "needsRetranslation": true,
       "salaryMin": 79000,
@@ -8659,7 +8683,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Dipl_-ExperteExpertin-Intensivpflege-60-100/1371154033/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:59.712Z",
+      "crawledAt": "2026-08-28T21:26:20.263Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8675,19 +8699,21 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Grabs-Dipl_-ExperteExpertin-Intensivpflege-60-100/1371154033/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "dipl-experte-expertin-intensivpflege-60-100-kssg-ch"
-        ],
         "de": [
-          "dipl-experte-expertin-intensivpflege-60-100-kssg-ch"
+          "dipl-experte-expertin-intensivpflege-60-100-kssg-ch",
+          "dipl-experte-expertin-intensivpflege-60-100-hoch-health-grabs"
+        ],
+        "it": [
+          "dipl-experte-expertin-intensivpflege-60-100-kssg-ch",
+          "esperto-esperta-di-cure-intensive-60-100-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "dipl-experte-expertin-intensivpflege-60-100-kssg-ch"
+        "dipl-experte-expertin-intensivpflege-60-100-kssg-ch",
+        "dipl-experte-expertin-intensivpflege-60-100-hoch-health-grabs",
+        "esperto-esperta-di-cure-intensive-60-100-hoch-health-ostschweiz-st-gallen"
       ],
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -8734,7 +8760,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Fachfrau-mann-Gesundheit-60-100/1410194733/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:58.662Z",
+      "crawledAt": "2026-08-28T21:26:11.340Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8750,25 +8776,27 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Wil-Fachfrau-mann-Gesundheit-60-100/1410194733/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
           "fachfrau-mann-gesundheit-60-100-kssg-ch",
           "fachfrau-mann-gesundheit-80-100-hoch-health-ostschweiz-wil",
           "fachfrau-mann-gesundheit-80-100-hoch-health-wil-2",
-          "sante-professionnelle-80-100-hoch-health-ostschweiz-grabs"
+          "sante-professionnelle-80-100-hoch-health-ostschweiz-grabs",
+          "professionista-sanitario-60-100-hoch-health-ostschweiz-wil"
         ],
         "de": [
-          "fachfrau-mann-gesundheit-60-100-kssg-ch"
+          "fachfrau-mann-gesundheit-60-100-kssg-ch",
+          "fachfrau-mann-gesundheit-60-100-hoch-health-wil"
         ]
       },
       "previousSlugs": [
         "fachfrau-mann-gesundheit-60-100-kssg-ch",
         "fachfrau-mann-gesundheit-80-100-hoch-health-ostschweiz-wil",
         "fachfrau-mann-gesundheit-80-100-hoch-health-wil-2",
-        "sante-professionnelle-80-100-hoch-health-ostschweiz-grabs"
+        "sante-professionnelle-80-100-hoch-health-ostschweiz-grabs",
+        "fachfrau-mann-gesundheit-60-100-hoch-health-wil",
+        "professionista-sanitario-60-100-hoch-health-ostschweiz-wil"
       ],
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -8788,26 +8816,26 @@
       "id": "kssg-4a891dd411d5",
       "slug": "specialista-di-tecnologia-operativa-30-40-hoch-health-ostschweiz-st-gallen",
       "slugByLocale": {
-        "de": "dipl-fachfrau-mann-operationstechnik-30-40-hoch-health-uznach",
+        "it": "specialista-di-tecnologia-operativa-30-40-hoch-health-ostschweiz-st-gallen",
         "en": "operating-room-technology-specialist-30-40-hoch-health-ostschweiz-st-gallen",
-        "fr": "specialiste-en-technologie-operatoire-30-40-hoch-health-ostschweiz-st-gallen",
-        "it": "specialista-di-tecnologia-operativa-30-40-hoch-health-ostschweiz-st-gallen"
+        "de": "dipl-fachfrau-mann-operationstechnik-30-40-hoch-health-uznach",
+        "fr": "specialiste-en-technologie-operatoire-30-40-hoch-health-ostschweiz-st-gallen"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
       "companyKey": "kssg",
       "companyDomain": "kssg.ch",
       "title": "Dipl. Fachfrau/-mann Operationstechnik 40-100%",
       "titleByLocale": {
-        "de": "Dipl. Fachfrau/-mann Operationstechnik 40-100%",
         "it": "Dipl. Fachfrau/-mann Operationstechnik 40-100%",
         "en": "Dipl. Fachfrau/-mann Operationstechnik 40-100%",
+        "de": "Dipl. Fachfrau/-mann Operationstechnik 40-100%",
         "fr": "Dipl. Fachfrau/-mann Operationstechnik 40-100%"
       },
       "description": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
       "descriptionByLocale": {
-        "de": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "it": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "en": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
+        "de": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung",
         "fr": "Dipl. Fachfrau/-mann Operationstechnik 40-100%\n\nOPS\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachgerechte Instrumentation und Assistenz bei elektiven sowie notfallmässigen operativen Eingriffen\n\n• Sicherstellung einer professionellen und qualitativ hochstehenden Betreuung der Patientinnen und Patienten im Operationssaal\n\n• Verantwortung für die fachgerechte Vor- und Nachbereitung der operativen Eingriffe\n\n• Mitverantwortung für die Organisation von Medikamenten, Material, Geräten, Abläufen und Logistik im gesamten OP-Bereich\n\n• Konsequente Einhaltung der geltenden Qualitäts-, Hygiene- und Sicherheitsstandards\n\nWas du für diese Stelle mitbringst\n\n• Abgeschlossene Ausbildung als Dipl. Fachfrau/Fachmann Operationstechnik HF\n\n• Hohe Sozial- und Kommunikationskompetenz sowie ausgeprägte Teamfähigkeit\n\n• Selbstständige, verantwortungsbewusste und strukturierte Arbeitsweise\n\n• Hohe physische und psychische Belastbarkeit sowie Flexibilität\n\n• Technisches Verständnis und ausgeprägtes manuelles Geschick\n\nUnser Angebot an dich\n\n• Moderne und gut ausgebaute Arbeitsplatzinfrastruktur\n\n• Zusammenarbeit in einem motivierten und kollegialen Team\n\n• Abwechslungsreiche und verantwortungsvolle Tätigkeit in einem modernen Operationsbetrieb\n\n• Breites Spektrum an fachlichen Fort- und Weiterbildungsmöglichkeiten\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Lydia Kurillova, Teamleiterin Operationstechnik, Telefon +41 55 285 45 05\n\n• Bei Fragen zum Bewerbungsprozess wendst du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\nVereinbarkeit Beruf und Familie Vergünstigungen Möblierte Unterkünfte Betriebliches Gesundheitsmanagement Aus- und Fortbildung"
       },
       "location": "Festanstellung",
@@ -8815,7 +8843,7 @@
       "url": "https://jobs.h-och.ch/job/Uznach-Dipl_-Fachfrau-mann-Operationstechnik-40-100/1291342901/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:57.611Z",
+      "crawledAt": "2026-08-28T21:26:09.418Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8831,21 +8859,24 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Uznach-Dipl_-Fachfrau-mann-Operationstechnik-40-100/1291342901/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
-        "it": [
-          "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch"
-        ],
         "de": [
-          "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch"
+          "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch",
+          "dipl-fachfrau-mann-operationstechnik-30-40-hoch-health-uznach"
+        ],
+        "it": [
+          "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch",
+          "specialista-di-tecnologia-operativa-30-40-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch"
+        "dipl-fachfrau-mann-operationstechnik-40-100-kssg-ch",
+        "dipl-fachfrau-mann-operationstechnik-30-40-hoch-health-uznach",
+        "specialista-di-tecnologia-operativa-30-40-hoch-health-ostschweiz-st-gallen"
       ],
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:38:57.611Z",
       "salaryMin": 64500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -8857,8 +8888,7 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:38:57.611Z"
+      }
     },
     {
       "id": "kssg-95e0cad01591",
@@ -8891,7 +8921,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Biomedizinischer-Analytikerin-Histopathologie-100/1420819833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:56.537Z",
+      "crawledAt": "2026-08-28T21:26:10.372Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8907,16 +8937,16 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/St_-Gallen-Dipl_-Biomedizinischer-Analytikerin-Histopathologie-100/1420819833/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
-          "dipl-biomedizinische-r-analytiker-in-histopathologie-100-kssg-ch"
+          "dipl-biomedizinische-r-analytiker-in-histopathologie-100-kssg-ch",
+          "dipl-biomedico-analista-istopatologia-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
         ]
       },
       "previousSlugs": [
-        "dipl-biomedizinische-r-analytiker-in-histopathologie-100-kssg-ch"
+        "dipl-biomedizinische-r-analytiker-in-histopathologie-100-kssg-ch",
+        "dipl-biomedico-analista-istopatologia-100-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       ],
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -8963,7 +8993,7 @@
       "url": "https://jobs.h-och.ch/job/Grabs-Psychoonkologe-in-40-80/1420969833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:38:52.567Z",
+      "crawledAt": "2026-08-28T21:26:08.413Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -8979,13 +9009,12 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://jobs.h-och.ch/job/Grabs-Psychoonkologe-in-40-80/1420969833/",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "it": [
           "psychoonkologe-in-40-80-kssg-ch",
-          "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-grabs"
+          "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-grabs",
+          "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung"
         ],
         "en": [
           "psychoonkologe-in-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung"
@@ -8997,7 +9026,10 @@
       "previousSlugs": [
         "psychoonkologe-in-40-80-kssg-ch",
         "psychoonkologe-in-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung",
-        "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-grabs"
+        "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-grabs",
+        "psycho-oncologist-in-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "psycho-oncologue-en-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "psico-oncologa-in-40-80-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       ],
       "needsRetranslation": true,
       "salaryMin": 46000,
@@ -9087,7 +9119,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-7a27eb76641d",
@@ -9183,7 +9215,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-ae3d8db5ab3f",
@@ -9257,7 +9289,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-9c2730dacd6f",
@@ -9340,7 +9372,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-2a4ed1a6a6aa",
@@ -9414,7 +9446,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-e48cf13b45c5",
@@ -9490,7 +9522,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-3c423c60a3e6",
@@ -9567,7 +9599,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-87404d0c3f19",
@@ -9643,7 +9675,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-d56e1e8d3210",
@@ -9717,7 +9749,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-bc80aaa4c3b5",
@@ -9792,7 +9824,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-54b5f1612ce0",
@@ -9867,7 +9899,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-fec51fd40cf7",
@@ -9900,7 +9932,7 @@
       "url": "https://jobs.h-och.ch/job/St_-Gallen-Lehrstelle-als-Medizinproduktetechnologin-technologe-EFZ/1395890533/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T00:55:23.951Z",
+      "crawledAt": "2026-08-28T21:28:02.249Z",
       "addressLocality": "Lehre",
       "addressCountry": "CH",
       "country": "CH",
@@ -9919,14 +9951,18 @@
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "de": [
-          "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch"
+          "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch",
+          "lehrstelle-als-medizinproduktetechnologin-technologe-efz-hoch-health-st-gallen"
         ],
         "it": [
-          "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch"
+          "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch",
+          "apprendistato-come-medizinproduktetechnologin-technologe-cfc-hoch-health-ostschweiz-st-gallen"
         ]
       },
       "previousSlugs": [
-        "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch"
+        "lehrstelle-als-medizinproduktetechnologin-technologe-efz-kssg-ch",
+        "lehrstelle-als-medizinproduktetechnologin-technologe-efz-hoch-health-st-gallen",
+        "apprendistato-come-medizinproduktetechnologin-technologe-cfc-hoch-health-ostschweiz-st-gallen"
       ],
       "firstSeenAt": "2026-08-16T09:54:36.059Z",
       "salaryMin": 48000,
@@ -9940,8 +9976,7 @@
           "maxValue": 73000,
           "unitText": "YEAR"
         }
-      },
-      "crawlerMissStreak": 1
+      }
     },
     {
       "id": "kssg-3ccbbc2ede17",
@@ -9974,7 +10009,7 @@
       "url": "https://jobs.h-och.ch/job/Wil-Unterassistentin-2028/1268987201/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T00:55:22.024Z",
+      "crawledAt": "2026-08-28T21:27:46.731Z",
       "addressLocality": "Praktikum",
       "addressCountry": "CH",
       "country": "CH",
@@ -9993,14 +10028,18 @@
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
         "de": [
-          "unterassistent-in-2028-kssg-ch"
+          "unterassistent-in-2028-kssg-ch",
+          "unterassistent-in-2028-hoch-health-wil"
         ],
         "it": [
-          "unterassistent-in-2028-kssg-ch"
+          "unterassistent-in-2028-kssg-ch",
+          "sub-assistente-2028-hoch-health-ostschweiz-wil"
         ]
       },
       "previousSlugs": [
-        "unterassistent-in-2028-kssg-ch"
+        "unterassistent-in-2028-kssg-ch",
+        "unterassistent-in-2028-hoch-health-wil",
+        "sub-assistente-2028-hoch-health-ostschweiz-wil"
       ],
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-16T09:54:19.845Z",
@@ -10015,8 +10054,7 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      },
-      "crawlerMissStreak": 1
+      }
     },
     {
       "id": "kssg-a40806c803e3",
@@ -10093,7 +10131,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
       "id": "kssg-2aed8d67f46e",
@@ -10167,40 +10205,40 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     },
     {
-      "id": "kssg-fdbbeba69ab9",
-      "slug": "capo-di-stazione-80-100-hoch-health-ostschweiz-st-gallen",
+      "id": "kssg-6dfa65d5e7f1",
+      "slug": "beckenbodennurse-60-kantonsspital-st-gallen-kssg-hoch-festanstellung",
       "slugByLocale": {
-        "it": "capo-di-stazione-80-100-hoch-health-ostschweiz-st-gallen",
-        "en": "head-of-station-80-100-hoch-health-ostschweiz-st-gallen",
-        "de": "stationsleiter-in-80-100-hoch-health-uznach",
-        "fr": "chef-de-service-80-100-hoch-health-ostschweiz-st-gallen"
+        "de": "beckenbodennurse-60-kssg-ch",
+        "it": "beckenbodennurse-60-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "en": "beckenbodennurse-60-kantonsspital-st-gallen-kssg-hoch-festanstellung",
+        "fr": "beckenbodennurse-60-kantonsspital-st-gallen-kssg-hoch-festanstellung"
       },
       "company": "Kantonsspital St. Gallen (KSSG / HOCH)",
       "companyKey": "kssg",
       "companyDomain": "kssg.ch",
-      "title": "Stationsleiter/in 80-100%",
+      "title": "Beckenbodennurse 60%",
       "titleByLocale": {
-        "it": "Responsabile stazione/in 80-100 %",
-        "en": "Station manager/in 80-100 %",
-        "de": "Stationsleiter/in 80-100%",
-        "fr": "Gestionnaire de station/dans 80-100 %"
+        "de": "Beckenbodennurse 60%",
+        "it": "Beckenbodennurse 60%",
+        "en": "Beckenbodennurse 60%",
+        "fr": "Beckenbodennurse 60%"
       },
-      "description": "Stationsleiter/in 80-100%\n\nInterdisziplinäre internistische Bettenabteilung\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachliche und personelle Führung von ca. 20 Mitarbeitenden, inkl. Verantwortung für die Planung, Koordination und Organisation der Abteilung\n\n• Operative Mitarbeit in der Pflege\n\n• Sicherstellen einer qualitativ und quantitativ fachgerechten Pflege\n\n• Mitwirken bei der Weiterentwicklung von unternehmerischen und bereichsspezifischen Projekten\n\n• Mitgestaltung einer aktiven und positiven Team- und Klinikkultur\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachperson HF/FH mit mindestens 5 Jahren Berufserfahrung im Akutbereich in der Schweiz\n\n• Ausgewiesene Führungserfahrung von mindestens 2 Jahren, abgeschlossene Leadership-Ausbildung von Vorteil oder Bereitschaft, die interne Führungsausbildung zu absolvieren\n\n• Innovative, wertschätzende, kooperative und empathische Persönlichkeit\n\n• Freude an selbstständiger Arbeitsweise und Veränderungen zu gestalten\n\n• Hohe Organisations- und Kommunikationsfähigkeit, Verantwortungsbewusstsein, Belastbarkeit und Flexibilität\n\nUnser Angebot an dich\n\n• Ein dynamisches, gut funktionierendes und interprofessionelles Team, welches sich auf Augenhöhe begegnet und kollegial zusammenarbeitet\n\n• Interessantes und anspruchsvolles Aufgabengebiet, in dem du deine Fachkompetenz anwenden und erweitern kannst\n\n• Familiäre Zusammenarbeit in spezialisiertem, interdisziplinären Umfeld\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen, etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Mergime Muqa, Leiterin Bettenabteilungen, Telefon +41 55 285 52 10\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+      "description": "Beckenbodennurse 60%\n\nEntwicklung Pflege\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Durchführung der Beckenbodennurse- Sprechstunde\n\n• Patientinnen- und Patientenberatung, Verhaltensinstruktionen, Patientinnen- und Patientenedukation, z.B. Selbstkatheterismus, Medikamentenmanagement\n\n• Therapeutische Interventionen und Verlaufskontrollen in enger interprofessioneller Zusammenarbeit, z.B. Pessaranpassungen, Instillationstherapien\n\n• Stationäre pflegerische Konsilien\n\n• Unterstützung in der ärztlichen Beckenbodensprechstunde\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachfrau/-mann HF/FH\n\n• Mindestens zweijährige Berufserfahrung in der Pflegepraxis, bevorzugt Gynäkologie und/oder Urologie\n\n• NDK Urotherapie oder Bereitschaft diesen zu absolvieren\n\n• Akademische Ausbildung auf Bachelor- oder Masterniveau von Vorteil\n\n• Freude an selbständiger Arbeitsweise und Eigenverantwortung im interprofessionellen Team\n\n• Beratungskompetenz und didaktische Fähigkeiten\n\n• Offene, motivierende und empathische Kommunikationsfähigkeiten\n\nUnser Angebot an dich\n\n• Zukunftsorientiertes und innovatives Unternehmen\n\n• Abwechslungsreiches und anspruchsvolles Aufgabengebiet, in dem Sie Ihre Fachkompetenz anwenden und erweitern können\n\n• Aktive Förderung der Spezialisierung durch Aus-, Fort- und Weiterbildungen\n\n• Viel Gestaltungsfreiraum\n\n• Anstellung nach kantonalen Richtlinien\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Jennifer Enaux, Leiterin Pflegeentwicklung, Telefon +41 81 772 55 18\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Susanne Scharf, HR Business Partner, Telefon +41 71 494 38 63\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
       "descriptionByLocale": {
-        "it": "Responsabile stazione/in 80-100 %\n\nDipartimento di letto interdisciplinare interdisciplinare\n\nLuogo di lavoro Uznach\n\nElenco dei lavori\n\nI vostri compiti e prospettive\n\n• Gestione professionale e del personale di circa 20 dipendenti, compresa la responsabilità di pianificazione, coordinamento e organizzazione del dipartimento\n\n• Cooperazione operativa nella cura\n\n• Garantire la cura professionale qualitativa e quantitativa\n\n• Partecipazione all'ulteriore sviluppo di progetti imprenditoriali e settoriali\n\n• Creare un team attivo e positivo e la cultura clinica\n\nChe cosa porta per questo lavoro\n\n• Allenamento come Dipl. Specialista HF/FH con almeno 5 anni di esperienza professionale nel settore acuto in Svizzera\n\n• Provata esperienza di leadership di almeno 2 anni, completato formazione di leadership di vantaggio o la volontà di completare la formazione di leadership interna\n\n• Personalità innovativa, apprezzativa, cooperativa ed empatica\n\n• Godetevi il lavoro indipendente e apportate modifiche\n\n• Alte capacità organizzative e di comunicazione, senso di responsabilità, resilienza e flessibilità\n\nLa nostra offerta a voi\n\n• Un team dinamico, ben funzionante e interprofessionale che si incontra a livello degli occhi e collabora in collaborazione\n\n• Area di attività interessante e impegnativa in cui è possibile applicare e ampliare la vostra competenza\n\n• Cooperazione familiare in un ambiente specializzato e interdisciplinare\n\n• Ampia gamma di opportunità di formazione professionale e personale\n\n• Varie offerte per i dipendenti nel campo della promozione della salute, del lavoro e della famiglia, della mobilità, dei vari vantaggi, ecc.\n\nLa tua richiesta\n\n• Entrata per accordo\n\n• Scopri di più su questo entusiasmante lavoro di Mergime Muqa, capo dipartimenti di letto, telefono +41 55 285 52 10\n\n• Per domande sul processo di applicazione, si prega di contattare Lea Zolg, HR Business Partner, telefono +41 71 494 38 17\n\nInformazioni su di noi\n\nL'assistenza sanitaria è la nostra professione e la nostra vocazione. Come il più grande datore di lavoro della Svizzera orientale, ci impegniamo a offrire ai nostri dipendenti un ambiente di lavoro versatile. Promuoviamo lo sviluppo individuale e quindi contribuiamo attivamente al futuro comune. Ci concentriamo sullo spirito di squadra, sulla cooperazione interdisciplinare e sulle soluzioni innovative.\n\n#gerneperDuty #",
-        "en": "Station manager/in 80-100 %\n\nInterdisciplinary Interdisciplinary Bed Department\n\nPlace of work Uznach\n\nJob listing\n\nYour tasks and perspectives\n\n• Professional and personnel management of about 20 employees, including responsibility for planning, coordination and organization of the department\n\n• Operational cooperation in care\n\n• Ensuring qualitative and quantitative professional care\n\n• Participation in the further development of entrepreneurial and sector-specific projects\n\n• Creating an active and positive team and clinic culture\n\nWhat you bring for this job\n\n• Training as a Dipl. Care specialist HF/FH with at least 5 years of professional experience in the acute field in Switzerland\n\n• Proven leadership experience of at least 2 years, completed leadership training of advantage or willingness to complete internal leadership training\n\n• Innovative, appreciative, cooperative and empathetic personality\n\n• Enjoy independent work and make changes\n\n• High organisational and communication skills, sense of responsibility, resilience and flexibility\n\nOur offer to you\n\n• A dynamic, well-functioning and interprofessional team that meets at eye level and collaborates collaboratively\n\n• Interesting and challenging task area in which you can apply and expand your expertise\n\n• Family cooperation in a specialized, interdisciplinary environment\n\n• Broad spectrum of professional and personal training opportunities\n\n• Various offers for employees in the field of health promotion, job and family, mobility, various benefits, etc.\n\nYour application\n\n• Entry by arrangement\n\n• Learn more about this exciting job from Mergime Muqa, Head of Bed Departments, telephone +41 55 285 52 10\n\n• For questions about the application process, please contact Lea Zolg, HR Business Partner, telephone +41 71 494 38 17\n\nAbout us\n\nHealthcare is our profession and our calling. As the largest employer in Eastern Switzerland, we are committed to offering our employees a versatile working environment. We promote individual development and thus make an active contribution to the common future. We focus on team spirit, interdisciplinary cooperation and innovative solutions.\n\n#gerneperDuty",
-        "de": "Stationsleiter/in 80-100%\n\nInterdisziplinäre internistische Bettenabteilung\n\nArbeitsort Uznach\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Fachliche und personelle Führung von ca. 20 Mitarbeitenden, inkl. Verantwortung für die Planung, Koordination und Organisation der Abteilung\n\n• Operative Mitarbeit in der Pflege\n\n• Sicherstellen einer qualitativ und quantitativ fachgerechten Pflege\n\n• Mitwirken bei der Weiterentwicklung von unternehmerischen und bereichsspezifischen Projekten\n\n• Mitgestaltung einer aktiven und positiven Team- und Klinikkultur\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachperson HF/FH mit mindestens 5 Jahren Berufserfahrung im Akutbereich in der Schweiz\n\n• Ausgewiesene Führungserfahrung von mindestens 2 Jahren, abgeschlossene Leadership-Ausbildung von Vorteil oder Bereitschaft, die interne Führungsausbildung zu absolvieren\n\n• Innovative, wertschätzende, kooperative und empathische Persönlichkeit\n\n• Freude an selbstständiger Arbeitsweise und Veränderungen zu gestalten\n\n• Hohe Organisations- und Kommunikationsfähigkeit, Verantwortungsbewusstsein, Belastbarkeit und Flexibilität\n\nUnser Angebot an dich\n\n• Ein dynamisches, gut funktionierendes und interprofessionelles Team, welches sich auf Augenhöhe begegnet und kollegial zusammenarbeitet\n\n• Interessantes und anspruchsvolles Aufgabengebiet, in dem du deine Fachkompetenz anwenden und erweitern kannst\n\n• Familiäre Zusammenarbeit in spezialisiertem, interdisziplinären Umfeld\n\n• Breites Spektrum an fachlichen und persönlichen Fort- und Weiterbildungsmöglichkeiten\n\n• Diverse Angebote für Mitarbeitende im Bereich Gesundheitsförderung, Job und Familie, Mobilität, diverse Vergünstigungen, etc.\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Mergime Muqa, Leiterin Bettenabteilungen, Telefon +41 55 285 52 10\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Lea Zolg, HR Business Partner, Telefon +41 71 494 38 17\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
-        "fr": "Gestionnaire de station/dans 80-100 %\n\nDépartement interdisciplinaire des lits\n\nLieu de travail Uznach\n\nListe des emplois\n\nVos tâches et perspectives\n\n• Gestion professionnelle et du personnel d'une vingtaine d'employés, y compris la planification, la coordination et l'organisation du ministère\n\n• Coopération opérationnelle en matière de soins\n\n• Assurer des soins professionnels qualitatifs et quantitatifs\n\n• Participation à la poursuite du développement de projets d ' entreprise et de projets sectoriels\n\n• Créer une équipe active et positive et une culture clinique\n\nCe que vous apportez pour ce travail\n\n• Formation en tant que Dipl. Spécialiste des soins HF/FH ayant au moins 5 ans d'expérience professionnelle dans le domaine aigu en Suisse\n\n• Expérience de leadership éprouvée d'au moins 2 ans, formation de leadership terminée d'avantage ou volonté de terminer la formation de leadership interne\n\n• Personnalité innovante, reconnaissante, coopérative et empathique\n\n• Profitez d'un travail indépendant et apportez des changements\n\n• Compétences organisationnelles et de communication élevées, sens des responsabilités, résilience et flexibilité\n\nNotre offre à vous\n\n• Une équipe dynamique, performante et interprofessionnelle qui se réunit au niveau des yeux et collabore en collaboration\n\n• Domaine de travail intéressant et stimulant dans lequel vous pouvez appliquer et développer votre expertise\n\n• Coopération familiale dans un environnement spécialisé et interdisciplinaire\n\n• Large éventail de possibilités de formation professionnelle et personnelle\n\n• Diverses offres aux salariés dans le domaine de la promotion de la santé, de l'emploi et de la famille, de la mobilité, de diverses prestations, etc.\n\nVotre demande\n\n• Entrée par arrangement\n\n• En savoir plus sur ce travail passionnant de Mergime Muqa, chef des départements de lit, téléphone +41 55 285 52 10\n\n• Pour toute question concernant le processus de candidature, veuillez contacter Lea Zolg, HR Business Partner, téléphone +41 71 494 38 17\n\nÀ propos de nous\n\nLa santé est notre métier et notre vocation. En tant que plus grand employeur de Suisse orientale, nous nous engageons à offrir à nos employés un environnement de travail polyvalent. Nous encourageons le développement individuel et contribuons ainsi activement à l'avenir commun. Nous nous concentrons sur l'esprit d'équipe, la coopération interdisciplinaire et les solutions innovantes.\n\n#GerneperDuty"
+        "de": "Beckenbodennurse 60%\n\nEntwicklung Pflege\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Durchführung der Beckenbodennurse- Sprechstunde\n\n• Patientinnen- und Patientenberatung, Verhaltensinstruktionen, Patientinnen- und Patientenedukation, z.B. Selbstkatheterismus, Medikamentenmanagement\n\n• Therapeutische Interventionen und Verlaufskontrollen in enger interprofessioneller Zusammenarbeit, z.B. Pessaranpassungen, Instillationstherapien\n\n• Stationäre pflegerische Konsilien\n\n• Unterstützung in der ärztlichen Beckenbodensprechstunde\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachfrau/-mann HF/FH\n\n• Mindestens zweijährige Berufserfahrung in der Pflegepraxis, bevorzugt Gynäkologie und/oder Urologie\n\n• NDK Urotherapie oder Bereitschaft diesen zu absolvieren\n\n• Akademische Ausbildung auf Bachelor- oder Masterniveau von Vorteil\n\n• Freude an selbständiger Arbeitsweise und Eigenverantwortung im interprofessionellen Team\n\n• Beratungskompetenz und didaktische Fähigkeiten\n\n• Offene, motivierende und empathische Kommunikationsfähigkeiten\n\nUnser Angebot an dich\n\n• Zukunftsorientiertes und innovatives Unternehmen\n\n• Abwechslungsreiches und anspruchsvolles Aufgabengebiet, in dem Sie Ihre Fachkompetenz anwenden und erweitern können\n\n• Aktive Förderung der Spezialisierung durch Aus-, Fort- und Weiterbildungen\n\n• Viel Gestaltungsfreiraum\n\n• Anstellung nach kantonalen Richtlinien\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Jennifer Enaux, Leiterin Pflegeentwicklung, Telefon +41 81 772 55 18\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Susanne Scharf, HR Business Partner, Telefon +41 71 494 38 63\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "it": "Beckenbodennurse 60%\n\nEntwicklung Pflege\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Durchführung der Beckenbodennurse- Sprechstunde\n\n• Patientinnen- und Patientenberatung, Verhaltensinstruktionen, Patientinnen- und Patientenedukation, z.B. Selbstkatheterismus, Medikamentenmanagement\n\n• Therapeutische Interventionen und Verlaufskontrollen in enger interprofessioneller Zusammenarbeit, z.B. Pessaranpassungen, Instillationstherapien\n\n• Stationäre pflegerische Konsilien\n\n• Unterstützung in der ärztlichen Beckenbodensprechstunde\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachfrau/-mann HF/FH\n\n• Mindestens zweijährige Berufserfahrung in der Pflegepraxis, bevorzugt Gynäkologie und/oder Urologie\n\n• NDK Urotherapie oder Bereitschaft diesen zu absolvieren\n\n• Akademische Ausbildung auf Bachelor- oder Masterniveau von Vorteil\n\n• Freude an selbständiger Arbeitsweise und Eigenverantwortung im interprofessionellen Team\n\n• Beratungskompetenz und didaktische Fähigkeiten\n\n• Offene, motivierende und empathische Kommunikationsfähigkeiten\n\nUnser Angebot an dich\n\n• Zukunftsorientiertes und innovatives Unternehmen\n\n• Abwechslungsreiches und anspruchsvolles Aufgabengebiet, in dem Sie Ihre Fachkompetenz anwenden und erweitern können\n\n• Aktive Förderung der Spezialisierung durch Aus-, Fort- und Weiterbildungen\n\n• Viel Gestaltungsfreiraum\n\n• Anstellung nach kantonalen Richtlinien\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Jennifer Enaux, Leiterin Pflegeentwicklung, Telefon +41 81 772 55 18\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Susanne Scharf, HR Business Partner, Telefon +41 71 494 38 63\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "en": "Beckenbodennurse 60%\n\nEntwicklung Pflege\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Durchführung der Beckenbodennurse- Sprechstunde\n\n• Patientinnen- und Patientenberatung, Verhaltensinstruktionen, Patientinnen- und Patientenedukation, z.B. Selbstkatheterismus, Medikamentenmanagement\n\n• Therapeutische Interventionen und Verlaufskontrollen in enger interprofessioneller Zusammenarbeit, z.B. Pessaranpassungen, Instillationstherapien\n\n• Stationäre pflegerische Konsilien\n\n• Unterstützung in der ärztlichen Beckenbodensprechstunde\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachfrau/-mann HF/FH\n\n• Mindestens zweijährige Berufserfahrung in der Pflegepraxis, bevorzugt Gynäkologie und/oder Urologie\n\n• NDK Urotherapie oder Bereitschaft diesen zu absolvieren\n\n• Akademische Ausbildung auf Bachelor- oder Masterniveau von Vorteil\n\n• Freude an selbständiger Arbeitsweise und Eigenverantwortung im interprofessionellen Team\n\n• Beratungskompetenz und didaktische Fähigkeiten\n\n• Offene, motivierende und empathische Kommunikationsfähigkeiten\n\nUnser Angebot an dich\n\n• Zukunftsorientiertes und innovatives Unternehmen\n\n• Abwechslungsreiches und anspruchsvolles Aufgabengebiet, in dem Sie Ihre Fachkompetenz anwenden und erweitern können\n\n• Aktive Förderung der Spezialisierung durch Aus-, Fort- und Weiterbildungen\n\n• Viel Gestaltungsfreiraum\n\n• Anstellung nach kantonalen Richtlinien\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Jennifer Enaux, Leiterin Pflegeentwicklung, Telefon +41 81 772 55 18\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Susanne Scharf, HR Business Partner, Telefon +41 71 494 38 63\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu",
+        "fr": "Beckenbodennurse 60%\n\nEntwicklung Pflege\n\nArbeitsort Grabs\n\nStellenanzeige\n\nDeine Aufgaben und Perspektiven\n\n• Durchführung der Beckenbodennurse- Sprechstunde\n\n• Patientinnen- und Patientenberatung, Verhaltensinstruktionen, Patientinnen- und Patientenedukation, z.B. Selbstkatheterismus, Medikamentenmanagement\n\n• Therapeutische Interventionen und Verlaufskontrollen in enger interprofessioneller Zusammenarbeit, z.B. Pessaranpassungen, Instillationstherapien\n\n• Stationäre pflegerische Konsilien\n\n• Unterstützung in der ärztlichen Beckenbodensprechstunde\n\nWas du für diese Stelle mitbringst\n\n• Ausbildung als Dipl. Pflegefachfrau/-mann HF/FH\n\n• Mindestens zweijährige Berufserfahrung in der Pflegepraxis, bevorzugt Gynäkologie und/oder Urologie\n\n• NDK Urotherapie oder Bereitschaft diesen zu absolvieren\n\n• Akademische Ausbildung auf Bachelor- oder Masterniveau von Vorteil\n\n• Freude an selbständiger Arbeitsweise und Eigenverantwortung im interprofessionellen Team\n\n• Beratungskompetenz und didaktische Fähigkeiten\n\n• Offene, motivierende und empathische Kommunikationsfähigkeiten\n\nUnser Angebot an dich\n\n• Zukunftsorientiertes und innovatives Unternehmen\n\n• Abwechslungsreiches und anspruchsvolles Aufgabengebiet, in dem Sie Ihre Fachkompetenz anwenden und erweitern können\n\n• Aktive Förderung der Spezialisierung durch Aus-, Fort- und Weiterbildungen\n\n• Viel Gestaltungsfreiraum\n\n• Anstellung nach kantonalen Richtlinien\n\nDeine Bewerbung\n\n• Eintritt nach Vereinbarung\n\n• Mehr zu dieser spannenden Stelle erfährst du von Jennifer Enaux, Leiterin Pflegeentwicklung, Telefon +41 81 772 55 18\n\n• Bei Fragen zum Bewerbungsprozess wendest du dich bitte an Susanne Scharf, HR Business Partner, Telefon +41 71 494 38 63\n\nÜber uns\n\nGesundheitsversorgung ist unser Beruf und unsere Berufung. Als grösste Arbeitgeberin der Ostschweiz verpflichten wir uns, unseren Mitarbeitenden ein vielseitiges Arbeitsumfeld zu bieten. Wir fördern individuelle Entwicklung und leisten damit einen aktiven Beitrag für die gemeinsame Zukunft. Wir setzen auf Teamgeist, interdisziplinäre Zusammenarbeit und innovative Lösungen.\n\n#gerneperDu"
       },
       "location": "Festanstellung",
       "canton": "SG",
-      "url": "https://jobs.h-och.ch/job/Uznach-Stationsleiterin-80-100/1273868201/",
+      "url": "https://jobs.h-och.ch/job/Grabs-Beckenbodennurse-60/1431477833/",
       "source": "Kantonsspital St. Gallen (KSSG / HOCH) Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-26T10:14:30.265Z",
+      "crawledAt": "2026-08-28T21:26:12.306Z",
       "addressLocality": "Festanstellung",
       "addressCountry": "CH",
       "country": "CH",
@@ -10213,36 +10251,34 @@
       "postalCode": "9000",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-20",
-      "applyUrl": "https://jobs.h-och.ch/job/Uznach-Stationsleiterin-80-100/1273868201/",
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobs.h-och.ch/job/Grabs-Beckenbodennurse-60/1431477833/",
       "requirements": [],
-      "requirementsByLocale": {},
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
-        "de": [
-          "stationsleiter-in-80-100-kssg-ch"
-        ],
         "it": [
-          "stationsleiter-in-80-100-kssg-ch"
+          "beckenbodennurse-60-kssg-ch"
         ]
       },
       "previousSlugs": [
-        "stationsleiter-in-80-100-kssg-ch"
+        "beckenbodennurse-60-kssg-ch"
       ],
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-20T10:17:23.826Z",
-      "salaryMin": 79000,
-      "salaryMax": 120000,
+      "salaryMin": 34500,
+      "salaryMax": 52200,
       "baseSalary": {
         "@type": "MonetaryAmount",
         "currency": "CHF",
         "value": {
           "@type": "QuantitativeValue",
-          "minValue": 79000,
-          "maxValue": 120000,
+          "minValue": 34500,
+          "maxValue": 52200,
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 2
+      "firstSeenAt": "2026-08-28T21:26:12.306Z"
     }
   ]
 }
