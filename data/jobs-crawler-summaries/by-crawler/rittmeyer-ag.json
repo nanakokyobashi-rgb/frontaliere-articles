@@ -1,16 +1,17 @@
 {
   "key": "rittmeyer-ag",
   "label": "Rittmeyer AG",
-  "generatedAt": "2026-08-28T21:22:41.556Z",
+  "generatedAt": "2026-08-28T21:46:54.211Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 8,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 9939,
-  "avgDurationMs": 9939,
+  "durationMs": 11726,
+  "avgDurationMs": 11726,
   "durationHistory": [
-    9939
+    9939,
+    11726
   ],
   "newJobs": [],
   "updatedJobs": [
