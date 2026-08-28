@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ffs-officine-ferrovie-federali",
-  "assembledAt": "2026-08-28T21:19:20.419Z",
+  "assembledAt": "2026-08-28T21:46:25.759Z",
   "jobs": [
     {
       "id": "sbb-f8101238f23f",
@@ -73,15 +73,14 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/unterhaltsfachmann-frau-von-gleisanlagen/8966ef70-b3b8-4700-9dc9-70daf86850a1",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:09:49.729Z",
-      "previousSlugs": [
-        "unterhaltsfachmann-frau-von-gleisanlagen-ffs-officine-ferrovie-federali-sarnen"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "unterhaltsfachmann-frau-von-gleisanlagen-ffs-officine-ferrovie-federali-sarnen"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:27:11.895Z",
+      "previousSlugs": [
+        "unterhaltsfachmann-frau-von-gleisanlagen-ffs-officine-ferrovie-federali-sarnen"
+      ],
       "salaryMin": 74500,
       "salaryMax": 127000,
       "baseSalary": {
@@ -95,7 +94,9 @@
         }
       },
       "addressRegion": "OW",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:27:11.895Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-5d64d9b3dd3c",
@@ -390,15 +391,14 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d/7b22fee5-73c5-4f0f-9e4f-822b3380ff6a",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:10:16.459Z",
-      "previousSlugs": [
-        "specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d-ffs-officine-ferrovie-federali-renens-vd"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d-ffs-officine-ferrovie-federali-renens-vd"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:27:17.705Z",
+      "previousSlugs": [
+        "specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d-ffs-officine-ferrovie-federali-renens-vd"
+      ],
       "salaryMin": 63000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -412,7 +412,9 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:27:17.705Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d2904208229d",
@@ -1452,15 +1454,14 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-kundenbegleiter-in-fuer-frequenzerfassung/06de6ad8-705c-4132-ada4-c527d97632ae",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:10:16.079Z",
-      "previousSlugs": [
-        "quereinstieg-kundenbegleiter-in-fur-frequenzerfassung-ffs-officine-ferrovie-federali-luzern"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "quereinstieg-kundenbegleiter-in-fur-frequenzerfassung-ffs-officine-ferrovie-federali-luzern"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:28:54.621Z",
+      "previousSlugs": [
+        "quereinstieg-kundenbegleiter-in-fur-frequenzerfassung-ffs-officine-ferrovie-federali-luzern"
+      ],
       "salaryMin": 74500,
       "salaryMax": 127000,
       "baseSalary": {
@@ -1474,7 +1475,9 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:28:54.621Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4eb62442660a",
@@ -1546,7 +1549,8 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f3b34e99b6c6",
@@ -1930,7 +1934,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-a372b1346856",
@@ -1996,15 +2001,14 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/technische-r-assistent-in-helpdesk/22e7fd36-651b-4c01-a136-ae1187342413",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:10:20.698Z",
-      "previousSlugs": [
-        "technische-r-assistent-in-helpdesk-ffs-officine-ferrovie-federali-bern"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "technische-r-assistent-in-helpdesk-ffs-officine-ferrovie-federali-bern"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:28:55.886Z",
+      "previousSlugs": [
+        "technische-r-assistent-in-helpdesk-ffs-officine-ferrovie-federali-bern"
+      ],
       "salaryMin": 73000,
       "salaryMax": 124500,
       "baseSalary": {
@@ -2018,7 +2022,9 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:28:55.886Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-ac1815aa616d",
@@ -2104,7 +2110,8 @@
       },
       "addressRegion": "SO",
       "employmentType": "FULL_TIME",
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-0240555d96b6",
@@ -2188,7 +2195,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6f7c2dd8c7d4",
@@ -2260,7 +2268,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-405c77fd8e51",
@@ -2355,7 +2364,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-7255cad4b15b",
@@ -2430,11 +2440,6 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-d-equipe-utilisation-acquisition-region-zurich-metropole/daf6881e-f0bf-4d19-a6ae-818d39e91f58",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:10:40.232Z",
-      "previousSlugs": [
-        "chef-fe-d-equipe-utilisation-e-acquisition-region-zurich-metropole-ffs-officine-ferrovie-federali-zurich-altstetten",
-        "team-leader-regione-utilizzo-e-acquisizione-metropoli-di-zurigo-ffs-officine-ferrovie-federali-zurich-altstetten",
-        "team-leader-usage-e-acquisition-region-zurich-metropolis-ffs-officine-ferrovie-federali-zurich-altstetten"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "chef-fe-d-equipe-utilisation-e-acquisition-region-zurich-metropole-ffs-officine-ferrovie-federali-zurich-altstetten",
@@ -2444,7 +2449,11 @@
           "team-leader-usage-e-acquisition-region-zurich-metropolis-ffs-officine-ferrovie-federali-zurich-altstetten"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:29:34.917Z",
+      "previousSlugs": [
+        "chef-fe-d-equipe-utilisation-e-acquisition-region-zurich-metropole-ffs-officine-ferrovie-federali-zurich-altstetten",
+        "team-leader-regione-utilizzo-e-acquisizione-metropoli-di-zurigo-ffs-officine-ferrovie-federali-zurich-altstetten",
+        "team-leader-usage-e-acquisition-region-zurich-metropolis-ffs-officine-ferrovie-federali-zurich-altstetten"
+      ],
       "salaryMin": 79000,
       "salaryMax": 134500,
       "baseSalary": {
@@ -2458,7 +2467,9 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:29:34.917Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-da0e8fa7d136",
@@ -2555,7 +2566,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4edab479e9da",
@@ -2630,10 +2642,6 @@
       "url": "https://jobs.sbb.ch/v2/offene-stellen/capo-a-team-utilizzo-e-acquisizione-area-metropolitana-di-zurigo/e71e5739-ad45-4de3-ae19-b06878698ede",
       "source": "SBB Dedicated Parser (API + login.org)",
       "crawledAt": "2026-08-28T21:10:59.510Z",
-      "previousSlugs": [
-        "head-of-team-utilization-and-acquisition-of-the-zurich-metropolitan-area-ffs-officine-ferrovie-federali-zurigo-altstetten",
-        "leiter-des-teams-fur-nutzung-und-ubernahme-des-gro-raums-zurich-ffs-officine-ferrovie-federali-zurigo-altstetten"
-      ],
       "previousSlugsByLocale": {
         "en": [
           "head-of-team-utilization-and-acquisition-of-the-zurich-metropolitan-area-ffs-officine-ferrovie-federali-zurigo-altstetten"
@@ -2642,7 +2650,10 @@
           "leiter-des-teams-fur-nutzung-und-ubernahme-des-gro-raums-zurich-ffs-officine-ferrovie-federali-zurigo-altstetten"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:29:43.187Z",
+      "previousSlugs": [
+        "head-of-team-utilization-and-acquisition-of-the-zurich-metropolitan-area-ffs-officine-ferrovie-federali-zurigo-altstetten",
+        "leiter-des-teams-fur-nutzung-und-ubernahme-des-gro-raums-zurich-ffs-officine-ferrovie-federali-zurigo-altstetten"
+      ],
       "salaryMin": 121500,
       "salaryMax": 206500,
       "baseSalary": {
@@ -2656,7 +2667,9 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "firstSeenAt": "2026-08-28T05:29:43.187Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f91c4afac964",
@@ -2739,7 +2752,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f036e5560c89",
@@ -2814,7 +2828,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2b113da142ac",
@@ -2901,7 +2916,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-64d4fb0d7cc1",
@@ -2986,7 +3002,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-262232caca21",
@@ -3075,7 +3092,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4e3020d53f7a",
@@ -3167,7 +3185,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6234e02c761d",
@@ -3260,7 +3279,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d10159347ed6",
@@ -3353,7 +3373,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4904fc12e055",
@@ -3440,7 +3461,8 @@
         }
       },
       "addressRegion": "JU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-9b6b48efb940",
@@ -3513,7 +3535,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-8b358e6f810f",
@@ -3597,7 +3620,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-94a9faee26b1",
@@ -3699,7 +3723,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-95bbc0ce6ad1",
@@ -3784,6 +3809,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2,
       "needsRetranslation": true
     },
     {
@@ -3869,7 +3895,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-efde9e61c129",
@@ -3954,7 +3981,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-b161feaef04d",
@@ -4039,7 +4067,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d90e12aaae86",
@@ -4135,7 +4164,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-aa58dce7faa3",
@@ -4223,117 +4253,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
-    },
-    {
-      "id": "sbb-9681231a716d",
-      "slug": "esperti-in-esame-specialista-del-commercio-al-dettaglio-afc-nel-settore-dei-trasporti-pubblici-ffs-officine-ferrovie-federali-olten",
-      "slugByLocale": {
-        "it": "esperti-in-esame-specialista-del-commercio-al-dettaglio-afc-nel-settore-dei-trasporti-pubblici-ffs-officine-ferrovie-federali-olten",
-        "en": "examination-experts-swc-retail-specialist-in-the-public-transportation-sector-ffs-officine-ferrovie-federali-olten",
-        "de": "prufungsexperten-detailhandelsspezialist-efz-im-offentlichen-verkehr-ffs-officine-ferrovie-federali-olten",
-        "fr": "experts-en-examen-specialiste-du-commerce-de-detail-cfc-dans-le-secteur-des-transports-publics-ffs-officine-ferrovie-federali-olten"
-      },
-      "company": "FFS Officine (Ferrovie Federali)",
-      "companyKey": "ffs-officine-ferrovie-federali",
-      "companyDomain": "jobs.sbb.ch",
-      "title": "Experts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics",
-      "titleByLocale": {
-        "it": "Esperti in esame: Specialista del commercio al dettaglio AFC nel settore dei trasporti pubblici",
-        "en": "Examination Experts: SWC Retail Specialist in the Public Transportation Sector",
-        "de": "Prüfungsexperten: Detailhandelsspezialist EFZ im öffentlichen Verkehr",
-        "fr": "Experts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics"
-      },
-      "description": "Experts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics | login Berufsbildung\n-\n-\n-\n-\n-\n-\n-\n-\nTon poste dans le monde de la mobilité\nEn tant que partenaire de formation des CFF, du BLS, des RhB, de l'Union des transports publics (UTP) et de plus de 80 autres entreprises actives dans le domaine de la mobilité ou proches de celles-ci, login formation professionnelle SA organise des apprentissages professionnels, des stages et des formations complémentaires en phase avec le marché pour environ 2100 personnes en formation dans plus de 35 professions différentes.\nSur mandat des commissions cantonales d'examen, login réalise la procédure de qualification (PQ) pour le secteur des transports publics dans le commerce de détail. Afin de renforcer l'équipe existante, nous recherchons plusieurs\n(total de 2 à 4 jours par an en mai, cours obligatoires en 2026 - 3 jours)\nExperts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics\n\n## Ce que tu peux faire bouger :\n- Responsable, en duo, de la mise en oeuvre et de l'évaluation de l'examen oral final d'apprentissage\n- Préparation individuelle et minutieuse des documents de qualification\n- Assurer une atmosphère d'examen calme et agréable\n- Déroulement des examens oraux\n- Protocole correct et complet de la Procédure de Qualification\n- Évaluation et notation compréhensibles de l'examen oral\n\n## Ce que tu apportes :\n- Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle\n- Bonne capacité d'expression adaptée à la situation\n- Apparence assurée et compétente\n- Méthode de travail minutieuse ainsi que discrétion\n- Comportement et apparence neutres et impartiaux\n- Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires\n- Intérêt pour un engagement sur plusieurs années\n\n## Ce qui t'attend :\nCette fonction est un ajout intéressant à votre domaine de travail et constitue une étape importante dans la vie de nos apprentis. À l'occasion des trois jours de cours obligatoires en 2026, vous apprendrez à connaître en détail les tâches en tant qu'expert en examen et recevrez une formation continue reconnue. Vos jours de travail en tant qu'examinateur sont indemnisés par le canton de Vaud\nAvons-nous éveillé ton intérêt ? Pour de plus amples informations, veuillez contacter Mme Sarah Sommer, Cheffe expert gestionnaire en commerce de détail dans le secteur des transports publics, tél. +41 79 902 22 48.\nNous nous réjouissons de recevoir votre CV ainsi que votre motivation d'ici le 4 septembre 2026 par mail à sarah.sommer@login.org.",
-      "descriptionByLocale": {
-        "it": "Specialista del commercio al dettaglio CFC nel settore dei trasporti pubblici\n-\n-\n-\n-\n-\n-\n-\n-\nLa vostra posizione nel mondo della mobilità\nIn qualità di partner di formazione per le FFS, BLS, RhB, l'Unione dei trasporti pubblici (UTP) e più di 80 altre società attive o vicine alla mobilità, la formazione professionale di login SA organizza apprendisti, tirocini e ulteriori formazioni in linea con il mercato per circa 2100 persone nella formazione in oltre 35 professioni diverse.\nSul mandato delle commissioni cantonali di esame, il login svolge la procedura di qualificazione (PQ) per il settore dei trasporti pubblici nel commercio al dettaglio. Per rafforzare la squadra esistente, stiamo cercando diversi\n(totale da 2 a 4 giorni all'anno in maggio, corsi obbligatori in 2026 - 3 giorni)\nEsperti in esame: CFC Retail Trade Specialist nel settore dei trasporti pubblici\n\n## Cosa puoi muovere:\n- Responsabile per l'attuazione e la valutazione dell'esame finale di apprendimento orale\n- Preparazione individuale e approfondita dei documenti di qualificazione\n- Assicurare un'atmosfera di esame calma e piacevole\n- Conduzione degli esami orali\n- Protocollo corretto e completo alla procedura di qualificazione\n- valutazione comprensibile e marcatura dell'esame orale\n\n## Cosa porti:\n- Occupazione nei trasporti pubblici nelle vendite con almeno 2 anni di esperienza professionale\n- Buona capacità di espressione adattata alla situazione\n- Aspetto sicuro e competente\n- Metodo di lavoro attento e discrezione\n- Comportamento e aspetto neutrali e imparziali\n- Accordo del superiore e della volontà di frequentare corsi obbligatori\n- Interessi in un impegno pluriennale\n\n## Cosa vi aspetta:\nQuesta funzione è un'interessante aggiunta al vostro campo di lavoro ed è un passo importante nella vita dei nostri apprendisti. In occasione dei tre giorni di corsi obbligatori nel 2026, si arriva a conoscere in dettaglio i compiti di esperto in esame e ricevere una formazione continua riconosciuta. I vostri giorni di lavoro come esaminatore sono compensati dal cantone di Vaud\nAbbiamo risvegliato il vostro interesse? Per ulteriori informazioni, rivolgersi a Sarah Sommer, Chief Retail Manager nel settore dei trasporti pubblici, tel. +41 79 902 22 48.\nNon vediamo l'ora di ricevere il tuo CV e motivazione entro il 4 settembre 2026 via e-mail a sarah.summer@login.org.",
-        "en": "Experts under review : Specialist of the CFC retail trade in the public transport sector\n-\n-\n-\n-\n-\n-\n-\n-\nYour position in the world of mobility\nAs a training partner for SBB, BLS, RhB, the Public Transport Union (UTP) and more than 80 other companies active in or close to mobility, login vocational training SA organises vocational apprenticeships, internships and further training in line with the market for approximately 2100 people in training in more than 35 different professions.\nOn the mandate of the cantonal commissions of examination, login carries out the qualification procedure (PQ) for the public transport sector in the retail trade. To strengthen the existing team, we are looking for several\n(total of 2 to 4 days per year in May, compulsory courses in 2026 - 3 days)\nExperts under review: CFC Retail Trade Specialist in the Public Transportation Sector\n\n## What you can move:\n- Responsible for the implementation and evaluation of the final oral learning examination\n- Individual and thorough preparation of qualification documents\n- Ensure a calm and pleasant examination atmosphere\n- Conduct of oral examinations\n- Correct and complete protocol to the Qualification Procedure\n- comprehensible assessment and marking of the oral examination\n\n## What you bring:\n- Employment in public transport in sales with at least 2 years of professional experience\n- Good expression capacity adapted to the situation\n- Assuring and competent appearance\n- Careful working method and discretion\n- Neutral and impartial behaviour and appearance\n- Agreement of the superior and willingness to attend compulsory courses\n- Interest in a multi-year commitment\n\n## What awaits you:\nThis function is an interesting addition to your field of work and is an important step in the lives of our apprentices. On the occasion of the three days of compulsory courses in 2026, you will get to know in detail the tasks as an expert in examination and receive recognized continuing training. Your days of work as examiner are compensated by the canton of Vaud\nHave we awakened your interest? For further information, please contact Sarah Sommer, Chief Retail Manager in the public transport sector, tel. +41 79 902 22 48.\nWe look forward to receiving your CV and motivation by 4 September 2026 by email at sarah.summer@login.org.",
-        "de": "Prüfungsexperten: CFC-Einzelhandelsfachkraft im ÖPNV-Bereich | Login Berufsbildung\n-\n-\n-\n-\n-\n-\n-\n-\nIhre Position in der Welt der Mobilität\nAls Ausbildungspartner der SBB, der BLS, der RhB, der Union des Transports Publiques (UTP) und über 80 weiteren im Mobilitätsbereich tätigen oder nahestehenden Unternehmen organisiert die login professional training SA marktgerechte Berufslehren, Praktika und Zusatzausbildungen für rund 2.100 Lernende in über 35 verschiedenen Berufen.\nIm Auftrag der kantonalen Prüfungskommissionen führt login das Qualifizierungsverfahren (PQ) für den öffentlichen Verkehr im Detailhandel durch. Zur Verstärkung des bestehenden Teams suchen wir mehrere\n(insgesamt 2 bis 4 Tage pro Jahr im Mai, Pflichtkurse im Jahr 2026 - 3 Tage)\nPrüfungsexperten: CFC-Einzelhandelsfachmann im Bereich ÖPNV\n\n## Was Sie bewegen können:\n- Als Duo verantwortlich für die Durchführung und Auswertung der mündlichen Lehrabschlussprüfung\n- Individuelle und sorgfältige Erstellung von Qualifikationsunterlagen\n- Sorgen Sie für eine ruhige und angenehme Prüfungsatmosphäre\n- Durchführung mündlicher Prüfungen\n- Korrektes und vollständiges Protokoll des Qualifizierungsverfahrens\n- Umfassende Beurteilung und Benotung der mündlichen Prüfung\n\n## Was Sie mitbringen:\n- Tätigkeit im ÖPNV im Vertrieb mit mindestens 2 Jahren Berufserfahrung\n- Gute, der Situation angepasste Ausdrucksfähigkeiten\n- Sicheres und kompetentes Auftreten\n- Sorgfältige Arbeitsweise sowie Diskretion\n- Neutrales und unparteiisches Verhalten und Auftreten\n- Zustimmung des Vorgesetzten sowie der Wunsch, an den Pflichtkursen teilzunehmen\n- Interesse an einem mehrjährigen Engagement\n\n## Was erwartet Sie:\nDiese Stelle ist eine spannende Bereicherung für Ihr Berufsfeld und ein wichtiger Schritt im Leben unserer Auszubildenden. An den drei Pflichtkurstagen im Jahr 2026 lernen Sie die Aufgaben als Prüfungsexperte im Detail kennen und erhalten eine anerkannte Weiterbildung. Ihre Arbeitstage als Prüfer werden vom Kanton Waadt vergütet\nHaben wir Ihr Interesse geweckt? Für weitere Informationen wenden Sie sich bitte an Frau Sarah Sommer, Chefexpertin für den Einzelhandel im ÖPNV, Tel. 41 79 902 22 48.\nWir freuen uns auf Ihren Lebenslauf sowie Ihre Motivation bis zum 4. September 2026 per E-Mail an sarah.sommer@login.org.",
-        "fr": "Experts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics | login Berufsbildung\n-\n-\n-\n-\n-\n-\n-\n-\nTon poste dans le monde de la mobilité\nEn tant que partenaire de formation des CFF, du BLS, des RhB, de l'Union des transports publics (UTP) et de plus de 80 autres entreprises actives dans le domaine de la mobilité ou proches de celles-ci, login formation professionnelle SA organise des apprentissages professionnels, des stages et des formations complémentaires en phase avec le marché pour environ 2100 personnes en formation dans plus de 35 professions différentes.\nSur mandat des commissions cantonales d'examen, login réalise la procédure de qualification (PQ) pour le secteur des transports publics dans le commerce de détail. Afin de renforcer l'équipe existante, nous recherchons plusieurs\n(total de 2 à 4 jours par an en mai, cours obligatoires en 2026 - 3 jours)\nExperts en examen : Spécialiste du commerce de détail CFC dans le secteur des transports publics\n\n## Ce que tu peux faire bouger :\n- Responsable, en duo, de la mise en oeuvre et de l'évaluation de l'examen oral final d'apprentissage\n- Préparation individuelle et minutieuse des documents de qualification\n- Assurer une atmosphère d'examen calme et agréable\n- Déroulement des examens oraux\n- Protocole correct et complet de la Procédure de Qualification\n- Évaluation et notation compréhensibles de l'examen oral\n\n## Ce que tu apportes :\n- Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle\n- Bonne capacité d'expression adaptée à la situation\n- Apparence assurée et compétente\n- Méthode de travail minutieuse ainsi que discrétion\n- Comportement et apparence neutres et impartiaux\n- Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires\n- Intérêt pour un engagement sur plusieurs années\n\n## Ce qui t'attend :\nCette fonction est un ajout intéressant à votre domaine de travail et constitue une étape importante dans la vie de nos apprentis. À l'occasion des trois jours de cours obligatoires en 2026, vous apprendrez à connaître en détail les tâches en tant qu'expert en examen et recevrez une formation continue reconnue. Vos jours de travail en tant qu'examinateur sont indemnisés par le canton de Vaud\nAvons-nous éveillé ton intérêt ? Pour de plus amples informations, veuillez contacter Mme Sarah Sommer, Cheffe expert gestionnaire en commerce de détail dans le secteur des transports publics, tél. +41 79 902 22 48.\nNous nous réjouissons de recevoir votre CV ainsi que votre motivation d'ici le 4 septembre 2026 par mail à sarah.sommer@login.org."
-      },
-      "requirements": [
-        "Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle",
-        "Bonne capacité d'expression adaptée à la situation",
-        "Apparence assurée et compétente",
-        "Méthode de travail minutieuse ainsi que discrétion",
-        "Comportement et apparence neutres et impartiaux",
-        "Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires",
-        "Intérêt pour un engagement sur plusieurs années"
-      ],
-      "requirementsByLocale": {
-        "it": [
-          "Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle",
-          "Bonne capacité d'expression adaptée à la situation",
-          "Apparence assurée et compétente",
-          "Méthode de travail minutieuse ainsi que discrétion",
-          "Comportement et apparence neutres et impartiaux",
-          "Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires",
-          "Intérêt pour un engagement sur plusieurs années"
-        ],
-        "en": [
-          "Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle",
-          "Bonne capacité d'expression adaptée à la situation",
-          "Apparence assurée et compétente",
-          "Méthode de travail minutieuse ainsi que discrétion",
-          "Comportement et apparence neutres et impartiaux",
-          "Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires",
-          "Intérêt pour un engagement sur plusieurs années"
-        ],
-        "de": [
-          "Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle",
-          "Bonne capacité d'expression adaptée à la situation",
-          "Apparence assurée et compétente",
-          "Méthode de travail minutieuse ainsi que discrétion",
-          "Comportement et apparence neutres et impartiaux",
-          "Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires",
-          "Intérêt pour un engagement sur plusieurs années"
-        ],
-        "fr": [
-          "Emploi dans les transports publics dans la vente avec au moins 2 ans d'expérience professionnelle",
-          "Bonne capacité d'expression adaptée à la situation",
-          "Apparence assurée et compétente",
-          "Méthode de travail minutieuse ainsi que discrétion",
-          "Comportement et apparence neutres et impartiaux",
-          "Accord du supérieur hiérarchique ainsi que la volonté de suivre les cours obligatoires",
-          "Intérêt pour un engagement sur plusieurs années"
-        ]
-      },
-      "location": "Olten",
-      "canton": "SO",
-      "addressLocality": "Olten",
-      "addressCountry": "CH",
-      "category": "tech",
-      "contract": "part-time",
-      "currency": "CHF",
-      "featured": false,
-      "sourceLang": "fr",
-      "postedDate": "2026-08-19",
-      "url": "https://jobs.sbb.ch/v2/offene-stellen/experts-en-examen-specialiste-du-commerce-de-detail-cfc-dans-le-secteur-des-transports-publics/1413f68b-f9ed-4f48-903c-78be59177e95",
-      "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:12:29.454Z",
-      "previousSlugs": [
-        "experts-en-examen-specialiste-du-commerce-de-detail-cfc-dans-le-secteur-des-transports-publics-ffs-officine-ferrovie-federali-olten"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "experts-en-examen-specialiste-du-commerce-de-detail-cfc-dans-le-secteur-des-transports-publics-ffs-officine-ferrovie-federali-olten"
-        ]
-      },
-      "firstSeenAt": "2026-08-19T21:47:05.528Z",
-      "salaryMin": 73000,
-      "salaryMax": 124500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 73000,
-          "maxValue": 124500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-cb1225573c90",
@@ -4416,7 +4337,7 @@
       "postedDate": "2026-08-19",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/berufsbildner-in-gleisbau/4dafde96-0596-4220-8ca8-4ddc2abba070",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:12:26.186Z",
+      "crawledAt": "2026-08-28T21:44:42.602Z",
       "previousSlugs": [
         "berufsbildner-in-gleisbau-ffs-officine-ferrovie-federali-olten"
       ],
@@ -4545,7 +4466,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-c5af079efacc",
@@ -4616,7 +4538,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-a770d6686d52",
@@ -4687,7 +4610,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-8fce47db82e4",
@@ -4771,7 +4695,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-61de2e9ae79c",
@@ -4851,7 +4776,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-f05e3fe45606",
@@ -4923,7 +4849,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-cf989527afc6",
@@ -5012,7 +4939,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-f3358a608409",
@@ -5082,7 +5010,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-e18cc435c794",
@@ -5153,7 +5082,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-5cd65ebe37e3",
@@ -5224,92 +5154,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
-    },
-    {
-      "id": "sbb-f7a220347890",
-      "slug": "responsabile-di-progetto-in-ingegneria-civile-ffs-officine-ferrovie-federali-renens-vd",
-      "slugByLocale": {
-        "it": "responsabile-di-progetto-in-ingegneria-civile-ffs-officine-ferrovie-federali-renens-vd",
-        "en": "civil-engineering-project-manager-ffs-officine-ferrovie-federali-renens-vd",
-        "de": "projektleiter-in-bauingenieurwesen-ffs-officine-ferrovie-federali-renens-vd",
-        "fr": "chef-de-projet-en-genie-civil-ffs-officine-ferrovie-federali-renens-vd"
-      },
-      "company": "FFS Officine (Ferrovie Federali)",
-      "companyKey": "ffs-officine-ferrovie-federali",
-      "companyDomain": "jobs.sbb.ch",
-      "title": "Projektleiter:in Bauingenieurwesen",
-      "titleByLocale": {
-        "it": "Responsabile di progetto Bauingenieurwesen",
-        "en": "Civil Engineering Project Manager",
-        "de": "Projektleiter:in Bauingenieurwesen",
-        "fr": "Chef de projet en génie civil"
-      },
-      "description": "Projektleiter:in Bauingenieurwesen 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nProjektleiter:in Bauingenieurwesen\nRenens (VD) / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nDu gestaltest sichere und zuverlässige Bahninfrastruktur mit direkter Wirkung für Kundinnen und Kunden. Dich erwartet ein abwechslungsreiches Umfeld im Team Ingenieurbau der Romandie, in dem Zusammenarbeit und Wissenstransfer täglich gelebt werden. In den ersten beiden Jahren erhältst du eine vertiefte bahnspezifische Einarbeitung und du entwickelst dich kontinuierlich weiter.\nAktuell sind zwei Stellen in Renens offen. Eine mit Schwerpunkt Strecke im Wallis einschliesslich Oberwallis. Die zweite mit Schwerpunkt Strecke Jura Neuchâtel.\nWeitere Informationen zu dieser Stelle findest du hier: Projektleiter:in Ingenieurbau , sowie zusätzliche Angaben zu laufenden Projekten in der Romandie: Bauprojekte\nBenefits wie kostenloses GA, vergünstigtes Reisen im Ausland - auch für die Familie - findest du auf unserer Website unter Benefits.\nDas kannst du bewegen.\n- Als Projektleiter:in betreust du ein Portfolio multidisziplinärer Projekte und führst Ingenieurbauwerke von der Vorstudie bis zur Inbetriebnahme.\n- Du übernimmst die Gesamtleitung der Projekte und sorgst für die Einhaltung von Kosten, Terminen, Qualität und Sicherheit.\n- Du koordinierst interne Spezialist:innen sowie externe Auftragnehmende und Anspruchsgruppen und stellst eine effiziente Schnittstelle zum Bahnbetrieb sicher.\n- Du übernimmst die Kontrolle und Validierung von Entwürfen sowie die Dimensionierung von Tragwerken und führst bei Bedarf interne Expertisen durch.\n- Je nach Dossier übernimmst du die Gesamtleitung der Bauausführung und vertrittst die Projekte in Gremien oder externen Instanzen.\nDas bringst du mit.\n- Mit deiner proaktiven und initiativen Arbeitsweise führst du interdisziplinäre Teams und überzeugst unterschiedliche Anspruchsgruppen.\n- In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht.\n- Du bringst mehrjährige Berufserfahrung mit, zum Beispiel aus Planungsbüros, aus der Bauleitung oder aus der Projektführung, und erste Erfahrungen im Bahnprojektmanagement sind ein Vorteil.\n- Du verfügst über fundierte technische Kenntnisse in Berechnung, Planung und Ausführung von Tragwerken, zum Beispiel mit Erfahrung in Stahlbeton und Metallbau.\n- Eine Ausbildung als Bauingenieur:in an ETH, FH oder eine gleichwertige Qualifikation hast du abgeschlossen und setzt Französisch und Deutsch auf Niveau B2 im Berufsalltag ein.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau K, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nBewerbungsfrist bis 13.09.2026\nFinaler Entscheid Octobre 2026\nBewerbungsfrist bis 13.09.2026\nFinaler Entscheid Octobre 2026\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103173\nDamien Luce\nTelefon +41 79 800 91 74\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
-      "descriptionByLocale": {
-        "it": "Project manager: in ingegneria civile 60-100% | FFS\n-\n-\n-\n-\n-\n-\nSposta la Svizzera con noi.\nProject Manager: in Ingegneria Civile\nRenens (VD) / Work Smart, 01.01.2027 o d'accordo, 60-100 %\nApplicare ora\n\n## Non vedo l'ora.\nProgetta infrastrutture ferroviarie sicure e affidabili con effetto diretto per i clienti. Potete aspettarvi un ambiente vario nel team di ingegneria di Romandie, dove la cooperazione e il trasferimento di conoscenze sono vissuti ogni giorno. Nei primi due anni riceverete una formazione specifica del treno approfondita e vi svilupperete continuamente.\nCi sono attualmente due posizioni aperte a Renens. Una linea principale nel Vallese tra cui Oberwallis. Il secondo con il focus route Jura Neuchâtel.\nUlteriori informazioni su questa posizione possono essere trovate qui: Project Manager:in Ingenieurbau, nonché ulteriori informazioni sui progetti in corso in Romandie: Progetti di costruzione\nVantaggi come GA gratuito, viaggi scontati all'estero - anche per la famiglia - possono essere trovati sul nostro sito web sotto Vantaggi.\nPuoi spostarlo.\n- Come project manager: gestisci un portafoglio di progetti multidisciplinari e gestisci strutture ingegneristiche dallo studio preliminare alla messa in servizio.\n- L'utente assume la gestione complessiva dei progetti e garantisce la conformità ai costi, scadenze, qualità e sicurezza.\n- Coordinate gli specialisti interni, gli appaltatori esterni e gli stakeholder e assicurate un'interfaccia efficiente alle operazioni ferroviarie.\n- Si prende il controllo e la validazione dei disegni, nonché la dimensionamento delle strutture e svolgere competenze interne, se necessario.\n- A seconda del dossier, si assume la direzione generale della costruzione e rappresenta i progetti in comitati o organismi esterni.\nLo porti con te.\n- Con il vostro approccio proattivo e di iniziativa, guidi team interdisciplinari e convinci diversi stakeholder.\n- Nelle situazioni di progetto difficili, risolvere i problemi in modo strutturato e comunicare in modo chiaro e appropriato.\n- Porti diversi anni di esperienza professionale, per esempio da uffici di pianificazione, gestione delle costruzioni o gestione del progetto, e l'esperienza iniziale nella gestione dei progetti ferroviari è un vantaggio.\n- Hai una profonda conoscenza tecnica nel calcolo, nella pianificazione e nell'esecuzione delle strutture, per esempio con esperienza nella costruzione di cemento armato e metallo.\n- Un apprendistato come ingegnere civile: a ETH, FH o una qualifica equivalente avete completato e utilizzare francese e tedesco a livello B2 nel lavoro quotidiano.\n\n## La tua ricompensa e i tuoi benefici.\nAbbiamo un sistema salariale equo e progressivo e siamo attivamente impegnati a parità di retribuzione. Per questo motivo, ulteriori e dettagliate informazioni sul sistema salariale possono essere visualizzate in modo trasparente presso le FFS. Questo lavoro è nel livello di requisito K, livello di indennità regionale 1.\n\n## Questo è il punto di partenza.\nIl fatto che si desidera spostare la Svizzera con noi è la più grande motivazione per noi. Pertanto, ci asteniamo da una lettera di motivazione a questo punto. Se volete ancora dirci la vostra motivazione, avete ancora la possibilità di farlo nel nostro strumento di applicazione.\nFare il grande è più facile per te. Questo inizia con la tua applicazione.\n\n## E' cosi' che va.\n×\nTermine per la richiesta fino al 13.09.2026\nDecisione finale Octobre 2026\nTermine per la richiesta fino al 13.09.2026\nDecisione finale Octobre 2026\nAncora domande?\nIl processo di applicazione\nSupporto per il reclutamento delle FFS\nTelefono + 41 51 220 20 29\nreclutamento@sbb.ch\n#SimplyYou #\nFAQ per l'applicazione\nPer lo scopo\nID lavoro 103173\nDamien Luce\nTelefono +41 79 800 91 74\nLe applicazioni via e-mail non possono purtroppo essere considerate.\nPer questa posizione, non accettiamo i fascicoli dei reclutatori.\n\n## Lo offriamo.\nVantaggi\nVantaggi\nScopri di più\nOvunque possibile, ci concentriamo su orari di lavoro flessibili e modelli di tempo di lavoro moderni. Inoltre, come datore di lavoro, siamo anche flessibili quando si tratta di conciliare la vostra vita professionale con la vostra vita privata.\nScopri di più\nScopri di più\nDifferenze benvenuti\nDifferenze benvenuti\nScopri di più\nCon oltre 150 professioni diverse, offriamo una varietà impressionante di opportunità di ingresso e sviluppo. I nostri dipendenti sono altrettanto diversi. Ecco perché ci impegniamo a garantire che tutti i dipendenti possano contribuire ai loro punti di forza e ai loro modi di pensare individuali.\nScopri di più\nScopri di più\nCarriera e sviluppo\nCarriera e sviluppo\nScopri di più\nPromuoviamo i nostri dipendenti in base alle loro esigenze e ambizioni personali. A questo scopo, forniamo una vasta gamma di offerte di formazione interdisciplinare e trasversale. Nella formazione esterna selezionata, partecipiamo finanziariamente e temporalmente.\nScopri di più\nScopri di più",
-        "en": "Project manager: in civil engineering 60-100% | SBB\n-\n-\n-\n-\n-\n-\nMove Switzerland with us.\nProject Manager: in Civil Engineering\nRenens (VD) / Work Smart, 01.01.2027 or by agreement, 60-100 %\nApply now\n\n## You can look forward to that.\nYou design safe and reliable railway infrastructure with direct effect for customers. You can expect a varied environment in the engineering team of Romandie, where cooperation and knowledge transfer are lived every day. In the first two years you will receive an in-depth train-specific training and you will develop continuously.\nThere are currently two open positions in Renens. A main line in the Valais including Oberwallis. The second with focus route Jura Neuchâtel.\nFurther information about this position can be found here: Project Manager:in Ingenieurbau, as well as additional information about ongoing projects in Romandie: Construction projects\nBenefits such as free GA, discounted travel abroad - also for the family - can be found on our website under Benefits.\nYou can move that.\n- As a project manager: you manage a portfolio of multidisciplinary projects and manage engineering structures from the preliminary study to commissioning.\n- You take over the overall management of the projects and ensure compliance with costs, deadlines, quality and security.\n- You coordinate internal specialists as well as external contractors and stakeholders and ensure an efficient interface to railway operations.\n- You take over the control and validation of designs as well as the dimensioning of structures and carry out internal expertise if necessary.\n- Depending on the dossier, you take over the overall management of the construction and represent the projects in committees or external bodies.\nYou bring that with you.\n- With your proactive and initiative approach, you lead interdisciplinary teams and convince different stakeholders.\n- In challenging project situations, you solve problems in a structured manner and communicate clearly and appropriately.\n- You bring several years of professional experience, for example from planning offices, construction management or project management, and initial experience in railway project management is an advantage.\n- You have profound technical knowledge in the calculation, planning and execution of structures, for example with experience in reinforced concrete and metal construction.\n- An apprenticeship as a civil engineer: at ETH, FH or an equivalent qualification you have completed and use French and German at level B2 in everyday work.\n\n## Your reward and benefits.\nWe have a fair and progressive wage system and are actively committed to equal pay. For this reason, further and detailed information on the wage system can be viewed transparently at SBB. This job is in requirement level K, regional allowance level 1.\n\n## This is the starting point.\nThe fact that you want to move Switzerland with us is the greatest motivation for us. Therefore, we refrain from a letter of motivation at this point. If you still want to tell us your motivation, you still have the opportunity to do so in our application tool.\nMaking big is easier for you. This starts with your application.\n\n## That's how it goes.\n×\nApplication deadline until 13.09.2026\nFinal decision Octobre 2026\nApplication deadline until 13.09.2026\nFinal decision Octobre 2026\nStill questions?\nThe application process\nSBB Recruitment Support\nPhone + 41 51 220 20 29\nrecruiting@sbb.ch\n#SimplyYou\nFAQ for Application\nFor the purpose\nJob ID 103173\nDamien Luce\nPhone +41 79 800 91 74\nApplications by e-mail can unfortunately not be considered.\nFor this position, we do not accept dossiers from recruiters.\n\n## We offer that.\nBenefits\nBenefits\nFind out more\nWherever possible, we focus on flexible working hours and modern working time models. In addition, as an employer, we are also flexible when it comes to reconciling your professional life with your private life.\nFind out more\nFind out more\nDifferences welcome\nDifferences welcome\nFind out more\nWith over 150 different professions, we offer an impressive variety of entry and development opportunities. Our employees are just as diverse. That is why we are committed to ensuring that all employees can contribute their individual strengths and ways of thinking.\nFind out more\nFind out more\nCareer and development\nCareer and development\nFind out more\nWe promote our employees according to their personal needs and ambitions. For this purpose, we provide a wide range of interdisciplinary and cross-divisional training offers. In selected external training, we participate financially and temporally.\nFind out more\nFind out more",
-        "de": "Projektleiter:in Bauingenieurwesen 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nProjektleiter:in Bauingenieurwesen\nRenens (VD) / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nDu gestaltest sichere und zuverlässige Bahninfrastruktur mit direkter Wirkung für Kundinnen und Kunden. Dich erwartet ein abwechslungsreiches Umfeld im Team Ingenieurbau der Romandie, in dem Zusammenarbeit und Wissenstransfer täglich gelebt werden. In den ersten beiden Jahren erhältst du eine vertiefte bahnspezifische Einarbeitung und du entwickelst dich kontinuierlich weiter.\nAktuell sind zwei Stellen in Renens offen. Eine mit Schwerpunkt Strecke im Wallis einschliesslich Oberwallis. Die zweite mit Schwerpunkt Strecke Jura Neuchâtel.\nWeitere Informationen zu dieser Stelle findest du hier: Projektleiter:in Ingenieurbau , sowie zusätzliche Angaben zu laufenden Projekten in der Romandie: Bauprojekte\nBenefits wie kostenloses GA, vergünstigtes Reisen im Ausland - auch für die Familie - findest du auf unserer Website unter Benefits.\nDas kannst du bewegen.\n- Als Projektleiter:in betreust du ein Portfolio multidisziplinärer Projekte und führst Ingenieurbauwerke von der Vorstudie bis zur Inbetriebnahme.\n- Du übernimmst die Gesamtleitung der Projekte und sorgst für die Einhaltung von Kosten, Terminen, Qualität und Sicherheit.\n- Du koordinierst interne Spezialist:innen sowie externe Auftragnehmende und Anspruchsgruppen und stellst eine effiziente Schnittstelle zum Bahnbetrieb sicher.\n- Du übernimmst die Kontrolle und Validierung von Entwürfen sowie die Dimensionierung von Tragwerken und führst bei Bedarf interne Expertisen durch.\n- Je nach Dossier übernimmst du die Gesamtleitung der Bauausführung und vertrittst die Projekte in Gremien oder externen Instanzen.\nDas bringst du mit.\n- Mit deiner proaktiven und initiativen Arbeitsweise führst du interdisziplinäre Teams und überzeugst unterschiedliche Anspruchsgruppen.\n- In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht.\n- Du bringst mehrjährige Berufserfahrung mit, zum Beispiel aus Planungsbüros, aus der Bauleitung oder aus der Projektführung, und erste Erfahrungen im Bahnprojektmanagement sind ein Vorteil.\n- Du verfügst über fundierte technische Kenntnisse in Berechnung, Planung und Ausführung von Tragwerken, zum Beispiel mit Erfahrung in Stahlbeton und Metallbau.\n- Eine Ausbildung als Bauingenieur:in an ETH, FH oder eine gleichwertige Qualifikation hast du abgeschlossen und setzt Französisch und Deutsch auf Niveau B2 im Berufsalltag ein.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau K, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nBewerbungsfrist bis 13.09.2026\nFinaler Entscheid Octobre 2026\nBewerbungsfrist bis 13.09.2026\nFinaler Entscheid Octobre 2026\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103173\nDamien Luce\nTelefon +41 79 800 91 74\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
-        "fr": "Chef de projet : en génie civil 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nChef de projet : en génie civil\nRenens (VD) / Work Smart, 1er janvier 2027 ou sur rendez-vous, 60-100%\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. Vous concevez des infrastructures ferroviaires sûres et fiables avec un impact direct sur les clients. Un environnement varié vous attend au sein de l'équipe d'ingénierie francophone, où la collaboration et le transfert de connaissances se pratiquent au quotidien. Au cours des deux premières années, vous recevrez une formation approfondie spécifique au secteur ferroviaire et vous continuerez à vous développer. Il y a actuellement deux postes ouverts à Renens. Un itinéraire axé sur le Valais y compris le Haut-Valais. La seconde se concentre sur la route du Jura Neuchâtel. Vous trouverez ici de plus amples informations sur ce poste : Chef de projet : Génie Civil, ainsi que des informations complémentaires sur les projets en cours en Suisse romande : Projets de construction\nVous pouvez trouver des avantages tels que l'AG gratuite et les voyages à l'étranger à prix réduit - également pour la famille - sur notre site Web sous Avantages. Vous pouvez déplacer cela. - En tant que chef de projet, vous pilotez un portefeuille de projets multidisciplinaires et gérez les ouvrages d'art depuis les études préliminaires jusqu'à la mise en service. - Vous prenez en charge la gestion globale des projets et veillez au respect des coûts, des délais, de la qualité et de la sécurité. - Vous coordonnez les spécialistes internes ainsi que les sous-traitants et parties prenantes externes et assurez une interface efficace avec les opérations ferroviaires. - Vous prendrez en charge le contrôle et la validation des conceptions ainsi que le dimensionnement des structures et réaliserez si nécessaire des expertises internes. - Selon le dossier, vous serez responsable de la gestion globale des travaux de construction et représenterez les projets auprès de commissions ou d'organismes externes. C'est ce que vous apportez avec vous. - Grâce à votre manière de travailler proactive et proactive, vous dirigez des équipes interdisciplinaires et convainquez différentes parties prenantes.\n\n- Dans des situations de projet exigeantes, vous résolvez les problèmes de manière structurée et communiquez de manière claire et appropriée. - Vous disposez de plusieurs années d'expérience professionnelle, par exemple en bureau d'études, en direction de travaux ou en direction de projets, et une première expérience en gestion de projets ferroviaires est un atout. - Vous disposez de connaissances techniques approfondies en calcul, planification et exécution d'ouvrages d'art, avec par exemple une expérience en béton armé et construction métallique. - Vous avez suivi une formation d'ingénieur civil à l'ETH, à la FH ou un diplôme équivalent et utilisez le français et l'allemand au niveau B2 dans votre vie professionnelle quotidienne.\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence K, niveau d'allocation régionale 1. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nLa date limite de candidature est le 13 septembre 2026\nDécision finale octobre 2026\nLa date limite de candidature est le 13 septembre 2026\nDécision finale octobre 2026\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nNuméro de travail 103173\nDamien Lucé\nTéléphone +41 79 800 91 74\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d'opportunités d'entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus"
-      },
-      "requirements": [
-        "Mit deiner proaktiven und initiativen Arbeitsweise führst du interdisziplinäre Teams und überzeugst unterschiedliche Anspruchsgruppen.",
-        "In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht.",
-        "Du bringst mehrjährige Berufserfahrung mit, zum Beispiel aus Planungsbüros, aus der Bauleitung oder aus der Projektführung, und erste Erfahrungen im Bahnprojektmanagement sind ein Vorteil.",
-        "Du verfügst über fundierte technische Kenntnisse in Berechnung, Planung und Ausführung von Tragwerken, zum Beispiel mit Erfahrung in Stahlbeton und Metallbau.",
-        "Eine Ausbildung als Bauingenieur:in an ETH, FH oder eine gleichwertige Qualifikation hast du abgeschlossen und setzt Französisch und Deutsch auf Niveau B2 im Berufsalltag ein."
-      ],
-      "requirementsByLocale": {
-        "it": [
-          "In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht."
-        ],
-        "en": [
-          "In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht."
-        ],
-        "de": [
-          "In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht."
-        ],
-        "fr": [
-          "In anspruchsvollen Projektsituationen löst du Probleme strukturiert und kommunizierst klar und adressatengerecht."
-        ]
-      },
-      "location": "Renens (VD)",
-      "canton": "VD",
-      "addressLocality": "Renens (VD)",
-      "addressCountry": "CH",
-      "category": "tech",
-      "contract": "full-time",
-      "currency": "CHF",
-      "featured": false,
-      "sourceLang": "de",
-      "postedDate": "2026-08-18",
-      "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-bauingenieurwesen/ccec350e-fb40-4a9d-936e-0228894974f7",
-      "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:12:36.324Z",
-      "previousSlugs": [
-        "projektleiter-in-bauingenieurwesen-ffs-officine-ferrovie-federali-renens-vd"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "projektleiter-in-bauingenieurwesen-ffs-officine-ferrovie-federali-renens-vd"
-        ]
-      },
-      "firstSeenAt": "2026-08-19T09:54:41.022Z",
-      "salaryMin": 97500,
-      "salaryMax": 165500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 97500,
-          "maxValue": 165500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "VD",
       "employmentType": "FULL_TIME",
-      "needsRetranslation": true
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-dab42dee579e",
@@ -5393,7 +5239,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-509c3b58e950",
@@ -5480,7 +5327,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-73072604150c",
@@ -5565,7 +5413,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-a7e228deda6f",
@@ -5654,7 +5503,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-7de338ee1c26",
@@ -5743,7 +5593,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-2704bf2ac183",
@@ -5828,7 +5679,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-7f4002416d8f",
@@ -5918,7 +5770,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-4571e2c69410",
@@ -5995,7 +5848,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-4f88a15bf6b0",
@@ -6067,7 +5921,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-97eb8124abe8",
@@ -6155,7 +6010,8 @@
         }
       },
       "addressRegion": "SZ",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-feef1577a361",
@@ -6256,7 +6112,8 @@
         }
       },
       "addressRegion": "SZ",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-c6d7bdf682f2",
@@ -6345,7 +6202,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6e89fafd1fc4",
@@ -6410,7 +6268,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-8d3be0752091",
@@ -6515,7 +6374,8 @@
         }
       },
       "addressRegion": "NW",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-8f6bac720ef1",
@@ -6587,7 +6447,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-c478024a37a8",
@@ -6683,7 +6544,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-72c9e0c3a82f",
@@ -6796,7 +6658,8 @@
       "streetAddress": "Via Officina 3",
       "postalCode": "6500",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-cea0c896a4dd",
@@ -6889,7 +6752,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 2
     },
     {
       "id": "sbb-9a55059e362a",
@@ -6984,7 +6848,8 @@
         }
       },
       "addressRegion": "BL",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2021f731c6df",
@@ -7067,7 +6932,8 @@
       "streetAddress": "Via Officina 3",
       "postalCode": "6500",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-992389b6116e",
@@ -7169,105 +7035,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
-    },
-    {
-      "id": "sbb-4a02d8cdcbf1",
-      "slug": "project-manager-sistemi-tecnici-sistemi-elettrici-50hz-ffs-officine-ferrovie-federali-zurich-altstetten",
-      "slugByLocale": {
-        "it": "project-manager-sistemi-tecnici-sistemi-elettrici-50hz-ffs-officine-ferrovie-federali-zurich-altstetten",
-        "en": "project-manager-technical-systems-electrical-systems-50hz-ffs-officine-ferrovie-federali-zurich-altstetten",
-        "de": "projektleiter-in-technische-anlagen-elektroanlagen-50hz-ffs-officine-ferrovie-federali-zurich-altstetten",
-        "fr": "chef-de-projet-systemes-techniques-systemes-electriques-50hz-ffs-officine-ferrovie-federali-zurich-altstetten"
-      },
-      "company": "FFS Officine (Ferrovie Federali)",
-      "companyKey": "ffs-officine-ferrovie-federali",
-      "companyDomain": "jobs.sbb.ch",
-      "title": "Projektleiter:in Technische Anlagen/Elektroanlagen 50Hz",
-      "titleByLocale": {
-        "it": "Project Manager Sistemi Tecnici/Sistemi Elettrici 50Hz",
-        "en": "Project Manager Technical Systems/Electrical Systems 50Hz",
-        "de": "Projektleiter:in Technische Anlagen/Elektroanlagen 50Hz",
-        "fr": "Chef de projet Systèmes techniques/Systèmes électriques 50Hz"
-      },
-      "description": "Projektleiter:in Technische Anlagen/Elektroanlagen 50Hz 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nProjektleiter:in Technische Anlagen/Elektroanlagen 50Hz\nZürich Altstetten / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nIn dieser vielseitigen Funktion vertrittst du die Interessen der Bauherrschaft in anspruchsvollen Infrastrukturprojekten im Bereich technische Anlagen und Elektroanlagen (50 Hz). Dein Wirkungsfeld umfasst Perronanlagen, Tunnel, bahntechnische Räume sowie Gebäude entlang der Bahninfrastruktur.\nDu übernimmst die Bauherrenrolle in multidisziplinären Projektteams und steuerst externe Planungs- und Ausführungspartner über den gesamten Projektlebenszyklus hinweg. Dabei stellst du sicher, dass Anforderungen hinsichtlich Sicherheit, Qualität, Wirtschaftlichkeit und Nachhaltigkeit erfüllt werden.\nEs erwartet dich ein engagiertes Team von Generalisten mit breitem technischem Hintergrund, das dich bei deinem Einstieg unterstützt und dir ein abwechslungsreiches sowie verantwortungsvolles Arbeitsumfeld bietet.\nBenefits wie kostenloses GA, vergünstigtes Reisen im Ausland - auch für die Familie - findest du auf unserer Website unter Benefits.\nDas kannst du bewegen.\n- In dieser Rolle vertrittst du die Interessen der Bauherrschaft in sämtlichen Projektphasen – von der strategischen Planung über Ausschreibung und Vergabe bis zur Realisierung und Inbetriebnahme.\n- Du verantwortest die Erreichung der Projektziele hinsichtlich Kosten, Termine, Qualität, Sicherheit und Funktionalität.\n- Du steuerst und koordinierst externe Planungsbüros, Unternehmer sowie Fachspezialisten und sorgst für eine effiziente Zusammenarbeit aller Beteiligten.\n- Als zentrale Schnittstelle zwischen Bauherrschaft, Projektteams, Behörden, Betreiberorganisationen und weiteren Stakeholdern sorgst du für klare Kommunikation und abgestimmte Prozesse.\n- Du stellst die Einhaltung von Normen, Richtlinien, gesetzlichen Vorgaben und bauherrenseitigen Anforderungen sicher.\n- Zu deinen Aufgaben gehört ein transparentes Vertrags-, Nachtrags- und Claim-Management: du identifizierst Chancen und Risiken frühzeitig und leitest geeignete Massnahmen zur erfolgreichen Projektsteuerung ein.\nDas bringst du mit.\n- Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.\n- Du verfügst über ausgeprägte analytische, konzeptionelle und organisatorische Fähigkeiten sowie unternehmerisches Denken und agierst eigenverantwortlich, strukturiert und lösungsorientiert.\n- Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen.\n- Du bringst mehrjährige Erfahrung in der Projektleitung, Projektsteuerung oder Bauherrenvertretung von Elektro-, Energie- oder gebäudetechnischen Anlagen mit.\n- Kenntnisse im öffentlichen Beschaffungswesen sowie im Vertrags- und Nachtragsmanagement sind von Vorteil; die Leistungs- und Vertragsmodelle der SIA sowie die relevanten Normen und Richtlinien im Bereich Elektro- und Infrastrukturanlagen sind dir vertraut.\n- Du verfügst über einen Hochschulabschluss (FH/ETH/Universität) oder eine höhere Berufsbildung (HF, eidg. Fachausweis oder eidg. Diplom) im Bereich Elektrotechnik, Energieversorgung oder Gebäudetechnik.\n- Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau J, Regionalzulage Stufe 2. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nBewerbungsfrist bis 31.08.2026\nFinaler Entscheid September 2026\nBewerbungsfrist bis 31.08.2026\nFinaler Entscheid September 2026\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103428\nLoris Martino, Bereichsleiter Technische Anlagen Region Ost\nTelefon +41 79 754 90 11\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
-      "descriptionByLocale": {
-        "it": "Responsabile di progetto: in impianti tecnici/impianti elettrici 50Hz 60-100% | FFS\n-\n-\n-\n-\n-\n-\nMuovi la Svizzera con noi.\nResponsabile progetto: impianti tecnici/impianti elettrici 50Hz\nZurigo Altstetten / Work Smart, 1 gennaio 2027 o previo accordo, 60-100%\nCandidati ora\n\n## Puoi aspettarti questo. In questo ruolo versatile rappresentate gli interessi del cliente in progetti infrastrutturali impegnativi nel campo degli impianti tecnici ed elettrici (50 Hz). Il vostro campo di attività comprende piattaforme, gallerie, locali tecnici ferroviari ed edifici lungo l'infrastruttura ferroviaria. Assumi il ruolo di costruttore in team di progetto multidisciplinari e gestisci partner esterni di pianificazione ed esecuzione durante l'intero ciclo di vita del progetto. In questo modo garantite il rispetto dei requisiti di sicurezza, qualità, redditività e sostenibilità. Ti aspetta un team dedicato di generalisti con un ampio background tecnico, che ti supporterà durante i tuoi inizi e ti offrirà un ambiente di lavoro vario e responsabile. Con “Work Smart” potete organizzare in modo flessibile la vostra vita lavorativa quotidiana – in ufficio, a casa o in viaggio. Puoi spostarlo. - Rappresenti gli interessi del cliente in tutte le fasi del progetto, dalla pianificazione strategica alla gara d'appalto e all'aggiudicazione fino all'implementazione e alla messa in servizio. - Sei responsabile del raggiungimento degli obiettivi del progetto in termini di costi, scadenze, qualità, sicurezza e funzionalità. - Controlli e coordini uffici di pianificazione esterni, imprenditori e specialisti e assicuri una collaborazione efficiente tra tutti i soggetti coinvolti. - Garantisci la conformità agli standard, alle linee guida, ai requisiti legali e ai requisiti del cliente. - Gestite in modo trasparente i contratti, le integrazioni e i sinistri e individuate tempestivamente opportunità e rischi per avviare misure adeguate per una gestione di successo del progetto.\n\n- Agisci come interfaccia centrale tra il cliente, i team di progetto, le autorità, le organizzazioni operative e altre parti interessate. Questo è quello che porti con te. - Per te il lavoro di squadra è la base di progetti di successo e ti piace lavorare in modo interdisciplinare. - Hai forti capacità analitiche, concettuali e organizzative, nonché pensiero imprenditoriale. Agisci in modo indipendente, strutturato e orientato alla soluzione e impressioni con le tue forti capacità comunicative e assertività. - Hai diversi anni di esperienza nella gestione di progetti, nel controllo di progetto o nella rappresentanza del cliente di impianti elettrici, energetici o tecnologici per l'edilizia. - Costituisce titolo preferenziale la conoscenza della materia degli appalti pubblici nonché della gestione contrattuale e accessoria. Conosci i modelli di servizio e contrattuali di SIA, nonché le norme e le linee guida pertinenti nel settore dei sistemi elettrici e infrastrutturali. - Possiedi un titolo universitario (FH/ETH/Università) o una formazione professionale superiore (HF, certificato federale di specializzazione o diploma federale) nel settore dell'elettrotecnica, dell'approvvigionamento energetico o della tecnica edilizia. - Comunichi con stile in tedesco; La conoscenza di un'altra lingua nazionale costituisce un vantaggio.\n\n## Il tuo stipendio e i tuoi benefici.\nAbbiamo un sistema salariale giusto e progressivo e ci impegniamo attivamente per garantire la parità retributiva. Pertanto è possibile visualizzare in modo trasparente ulteriori informazioni dettagliate sul sistema salariale delle FFS. Questa posizione è al livello di requisito J, livello di indennità regionale 2. Maggiori informazioni su salari e benefici.\n\n## Con questo puoi iniziare.\nIl fatto che tu voglia spostare la Svizzera con noi è la nostra più grande motivazione. Ecco perché a questo punto non includiamo una lettera di motivazione. Se vuoi ancora comunicarci la tua motivazione, hai ancora la possibilità di farlo nel nostro strumento di candidatura.\nFare grandi cose è più facile se lo fai da solo. Questo inizia con la tua domanda.\n\n## Ecco come continua.\n×\nLa scadenza per le domande è il 31 agosto 2026\nDecisione finale settembre 2026\nLa scadenza per le domande è il 31 agosto 2026\nDecisione finale settembre 2026\nQualche domanda?\nInformazioni sul processo di candidatura\nSupporto al reclutamento delle FFS\nTelefono + 41 51 220 20 29\nrecruiting@ffs.ch\n#semplicementetu\nDomande frequenti sull'applicazione\nSul posto\nID lavoro 103428\nLoris Martino, Responsabile Sistemi Tecnici Regione Est\nTelefono +41 79 754 90 11\nPurtroppo le candidature via email non possono essere prese in considerazione.\nNon accettiamo dossier dai reclutatori per questa posizione.\n\n## Questo è ciò che offriamo.\nVantaggi\nVantaggi\nScopri di più\nOve possibile, puntiamo su orari di lavoro flessibili e modelli di orario di lavoro moderni. Inoltre, come datore di lavoro, siamo flessibili anche quando si tratta di conciliare la vostra vita professionale con la vostra vita privata.\nScopri di più\nScopri di più\nLe differenze sono benvenute\nLe differenze sono benvenute\nScopri di più\nCon oltre 150 professioni diverse, offriamo un'impressionante varietà di opportunità di ingresso e di sviluppo. I nostri dipendenti sono altrettanto diversi. Ecco perché ci impegniamo a garantire che tutti i dipendenti possano contribuire con i propri punti di forza e modi di pensare individuali.\nScopri di più\nScopri di più\nCarriera e sviluppo\nCarriera e sviluppo\nScopri di più\nSupportiamo i nostri dipendenti in base alle loro esigenze e ambizioni personali. A tal fine, forniamo un’ampia gamma di corsi di formazione interdisciplinari e interdipartimentali. Contribuiamo finanziariamente e temporalmente a selezionati corsi di perfezionamento esterni.\nScopri di più\nScopri di più",
-        "en": "Project manager: in technical systems/electrical systems 50Hz 60-100% | SBB\n-\n-\n-\n-\n-\n-\nMove Switzerland with us.\nProject manager: technical systems/electrical systems 50Hz\nZurich Altstetten / Work Smart, January 1st, 2027 or by arrangement, 60-100%\nApply now\n\n## You can look forward to this. In this versatile role, you represent the interests of the client in demanding infrastructure projects in the area of ​​technical and electrical systems (50 Hz). Your field of activity includes platforms, tunnels, railway technical rooms and buildings along the railway infrastructure. You take on the role of builder in multidisciplinary project teams and manage external planning and execution partners throughout the entire project life cycle. In doing so, you ensure that requirements regarding safety, quality, cost-effectiveness and sustainability are met. A dedicated team of generalists with a broad technical background awaits you, who will support you as you get started and offer you a varied and responsible working environment. With “Work Smart” you can organize your everyday working life flexibly – in the office, in the home office or on the go. You can move that. - You represent the interests of the client in all project phases - from strategic planning through tendering and awarding to implementation and commissioning. - You are responsible for achieving the project goals in terms of costs, deadlines, quality, safety and functionality. - You control and coordinate external planning offices, entrepreneurs and specialists and ensure efficient collaboration between all those involved. - You ensure compliance with standards, guidelines, legal requirements and client requirements. - You conduct transparent contract, supplementary and claims management and identify opportunities and risks at an early stage in order to initiate suitable measures for successful project management.\n\n- You act as a central interface between the client, project teams, authorities, operating organizations and other stakeholders. This is what you bring with you. - For you, teamwork is the basis of successful projects and you enjoy working in an interdisciplinary manner. - You have strong analytical, conceptual and organizational skills as well as entrepreneurial thinking. You act independently, structured and solution-oriented and impress with your strong communication skills and assertiveness. - You have several years of experience in project management, project control or client representation of electrical, energy or building technology systems. - Knowledge of public procurement as well as contract and supplementary management is an advantage. You are familiar with SIA's service and contract models as well as the relevant standards and guidelines in the area of ​​electrical and infrastructure systems. - You have a university degree (FH/ETH/University) or higher vocational training (HF, federal specialist certificate or federal diploma) in the field of electrical engineering, energy supply or building technology. - You communicate stylishly in German; Knowledge of another national language is an advantage.\n\n## Your salary and your benefits.\nWe have a fair and progressive wage system and are actively committed to equal pay. Therefore, further and detailed information about the wage system at SBB can be viewed transparently. This position is at requirement level J, regional allowance level 2. More about wages and benefits.\n\n## This gets you started.\nThe fact that you want to move Switzerland with us is our greatest motivation. That's why we don't include a letter of motivation at this point. If you still want to tell us your motivation, you still have the opportunity to do so in our application tool.\nDoing great things is easier if you do it yourself. This starts with your application.\n\n## This is how it continues.\n×\nApplication deadline is August 31, 2026\nFinal decision September 2026\nApplication deadline is August 31, 2026\nFinal decision September 2026\nAny questions?\nAbout the application process\nSBB Recruiting Support\nTelephone + 41 51 220 20 29\nrecruiting@sbb.ch\n#simplyyou\nFAQ about the application\nOn the spot\nJob ID 103428\nLoris Martino, Head of Technical Systems Region East\nTelephone +41 79 754 90 11\nUnfortunately, applications via email cannot be considered.\nWe do not accept dossiers from recruiters for this position.\n\n## This is what we offer.\nBenefits\nBenefits\nFind out more\nWherever possible, we rely on flexible working hours and modern working time models. In addition, as an employer, we are also flexible when it comes to balancing your professional life with your private life.\nFind out more\nFind out more\nDifferences welcome\nDifferences welcome\nFind out more\nWith over 150 different professions, we offer an impressive variety of entry and development opportunities. Our employees are just as diverse. That is why we are committed to ensuring that all employees can contribute their individual strengths and ways of thinking.\nFind out more\nFind out more\nCareer and development\nCareer and development\nFind out more\nWe support our employees based on their personal needs and ambitions. To this end, we provide a wide range of cross-disciplinary and cross-departmental training courses. We contribute financially and temporally to selected external further training courses.\nFind out more\nFind out more",
-        "de": "Projektleiter:in Technische Anlagen/Elektroanlagen 50Hz 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nProjektleiter:in Technische Anlagen/Elektroanlagen 50Hz\nZürich Altstetten / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nIn dieser vielseitigen Funktion vertrittst du die Interessen der Bauherrschaft in anspruchsvollen Infrastrukturprojekten im Bereich technische Anlagen und Elektroanlagen (50 Hz). Dein Wirkungsfeld umfasst Perronanlagen, Tunnel, bahntechnische Räume sowie Gebäude entlang der Bahninfrastruktur.\nDu übernimmst die Bauherrenrolle in multidisziplinären Projektteams und steuerst externe Planungs- und Ausführungspartner über den gesamten Projektlebenszyklus hinweg. Dabei stellst du sicher, dass Anforderungen hinsichtlich Sicherheit, Qualität, Wirtschaftlichkeit und Nachhaltigkeit erfüllt werden.\nEs erwartet dich ein engagiertes Team von Generalisten mit breitem technischem Hintergrund, das dich bei deinem Einstieg unterstützt und dir ein abwechslungsreiches sowie verantwortungsvolles Arbeitsumfeld bietet.\nBenefits wie kostenloses GA, vergünstigtes Reisen im Ausland - auch für die Familie - findest du auf unserer Website unter Benefits.\nDas kannst du bewegen.\n- In dieser Rolle vertrittst du die Interessen der Bauherrschaft in sämtlichen Projektphasen – von der strategischen Planung über Ausschreibung und Vergabe bis zur Realisierung und Inbetriebnahme.\n- Du verantwortest die Erreichung der Projektziele hinsichtlich Kosten, Termine, Qualität, Sicherheit und Funktionalität.\n- Du steuerst und koordinierst externe Planungsbüros, Unternehmer sowie Fachspezialisten und sorgst für eine effiziente Zusammenarbeit aller Beteiligten.\n- Als zentrale Schnittstelle zwischen Bauherrschaft, Projektteams, Behörden, Betreiberorganisationen und weiteren Stakeholdern sorgst du für klare Kommunikation und abgestimmte Prozesse.\n- Du stellst die Einhaltung von Normen, Richtlinien, gesetzlichen Vorgaben und bauherrenseitigen Anforderungen sicher.\n- Zu deinen Aufgaben gehört ein transparentes Vertrags-, Nachtrags- und Claim-Management: du identifizierst Chancen und Risiken frühzeitig und leitest geeignete Massnahmen zur erfolgreichen Projektsteuerung ein.\nDas bringst du mit.\n- Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.\n- Du verfügst über ausgeprägte analytische, konzeptionelle und organisatorische Fähigkeiten sowie unternehmerisches Denken und agierst eigenverantwortlich, strukturiert und lösungsorientiert.\n- Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen.\n- Du bringst mehrjährige Erfahrung in der Projektleitung, Projektsteuerung oder Bauherrenvertretung von Elektro-, Energie- oder gebäudetechnischen Anlagen mit.\n- Kenntnisse im öffentlichen Beschaffungswesen sowie im Vertrags- und Nachtragsmanagement sind von Vorteil; die Leistungs- und Vertragsmodelle der SIA sowie die relevanten Normen und Richtlinien im Bereich Elektro- und Infrastrukturanlagen sind dir vertraut.\n- Du verfügst über einen Hochschulabschluss (FH/ETH/Universität) oder eine höhere Berufsbildung (HF, eidg. Fachausweis oder eidg. Diplom) im Bereich Elektrotechnik, Energieversorgung oder Gebäudetechnik.\n- Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau J, Regionalzulage Stufe 2. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nBewerbungsfrist bis 31.08.2026\nFinaler Entscheid September 2026\nBewerbungsfrist bis 31.08.2026\nFinaler Entscheid September 2026\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103428\nLoris Martino, Bereichsleiter Technische Anlagen Region Ost\nTelefon +41 79 754 90 11\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
-        "fr": "Chef de projet : en systèmes techniques/systèmes électriques 50Hz 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nChef de projet : systèmes techniques/systèmes électriques 50Hz\nZurich Altstetten / Work Smart, 1er janvier 2027 ou sur rendez-vous, 60-100%\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. Dans ce rôle polyvalent, vous représentez les intérêts du client dans des projets d'infrastructure exigeants dans le domaine des systèmes techniques et électriques (50 Hz). Votre domaine d'activité comprend les quais, les tunnels, les locaux techniques ferroviaires et les bâtiments situés le long de l'infrastructure ferroviaire. Vous assumez le rôle de bâtisseur au sein d’équipes de projet multidisciplinaires et gérez les partenaires externes de planification et d’exécution tout au long du cycle de vie du projet. Ce faisant, vous garantissez que les exigences en matière de sécurité, de qualité, de rentabilité et de durabilité sont respectées. Une équipe dédiée de généralistes avec une large formation technique vous attend, qui vous accompagnera dans vos débuts et vous offrira un environnement de travail varié et responsable. Avec « Work Smart », vous pouvez organiser votre vie professionnelle quotidienne de manière flexible – au bureau, à domicile ou en déplacement. Vous pouvez déplacer cela. - Vous représentez les intérêts du client dans toutes les phases du projet - de la planification stratégique à la mise en œuvre et à la mise en service en passant par l'appel d'offres et l'attribution. - Vous êtes responsable de l'atteinte des objectifs du projet en termes de coûts, de délais, de qualité, de sécurité et de fonctionnalité. - Vous contrôlez et coordonnez les bureaux de planification externes, les entrepreneurs et les spécialistes et assurez une collaboration efficace entre toutes les personnes impliquées. - Vous veillez au respect des normes, des directives, des exigences légales et des exigences des clients. - Vous gérez de manière transparente les contrats, les compléments et les sinistres et identifiez les opportunités et les risques à un stade précoce afin de prendre les mesures appropriées pour une gestion de projet réussie.\n\n- Vous agissez comme interface centrale entre le client, les équipes projet, les autorités, les organismes exploitants et les autres parties prenantes. C'est ce que vous apportez avec vous. - Pour vous, le travail en équipe est la base de projets réussis et vous aimez travailler de manière interdisciplinaire. - Vous possédez de solides compétences analytiques, conceptuelles et organisationnelles ainsi qu'un esprit entrepreneurial. Vous agissez de manière indépendante, structurée et orientée vers les solutions et impressionnez par vos solides compétences en communication et votre assertivité. - Vous disposez de plusieurs années d'expérience en gestion de projet, contrôle de projet ou représentation client de systèmes électriques, énergétiques ou techniques du bâtiment. - La connaissance des marchés publics ainsi que de la gestion contractuelle et complémentaire est un atout. Vous connaissez les modèles de services et de contrats de SIA ainsi que les normes et directives pertinentes dans le domaine des systèmes électriques et des infrastructures. - Vous êtes titulaire d'un diplôme universitaire (FH/ETH/Université) ou d'une formation professionnelle supérieure (HF, certificat fédéral de spécialité ou diplôme fédéral) dans le domaine de l'électrotechnique, de l'approvisionnement en énergie ou de la technique du bâtiment. - Vous communiquez avec style en allemand ; La connaissance d'une autre langue nationale est un avantage.\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence J, niveau d'allocation régionale 2. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nLa date limite de candidature est le 31 août 2026\nDécision finale septembre 2026\nLa date limite de candidature est le 31 août 2026\nDécision finale septembre 2026\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nNuméro de travail 103428\nLoris Martino, responsable de la région des systèmes techniques Est\nTéléphone +41 79 754 90 11\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d'opportunités d'entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus"
-      },
-      "requirements": [
-        "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.",
-        "Du verfügst über ausgeprägte analytische, konzeptionelle und organisatorische Fähigkeiten sowie unternehmerisches Denken und agierst eigenverantwortlich, strukturiert und lösungsorientiert.",
-        "Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen.",
-        "Du bringst mehrjährige Erfahrung in der Projektleitung, Projektsteuerung oder Bauherrenvertretung von Elektro-, Energie- oder gebäudetechnischen Anlagen mit.",
-        "Kenntnisse im öffentlichen Beschaffungswesen sowie im Vertrags- und Nachtragsmanagement sind von Vorteil; die Leistungs- und Vertragsmodelle der SIA sowie die relevanten Normen und Richtlinien im Bereich Elektro- und Infrastrukturanlagen sind dir vertraut.",
-        "Du verfügst über einen Hochschulabschluss (FH/ETH/Universität) oder eine höhere Berufsbildung (HF, eidg. Fachausweis oder eidg. Diplom) im Bereich Elektrotechnik, Energieversorgung oder Gebäudetechnik.",
-        "Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil."
-      ],
-      "requirementsByLocale": {
-        "it": [
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte und du arbeitest gerne interdisziplinär.",
-          "Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.",
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.",
-          "Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen."
-        ],
-        "en": [
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte und du arbeitest gerne interdisziplinär.",
-          "Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.",
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.",
-          "Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen."
-        ],
-        "de": [
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte und du arbeitest gerne interdisziplinär.",
-          "Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.",
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.",
-          "Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen."
-        ],
-        "fr": [
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte und du arbeitest gerne interdisziplinär.",
-          "Du kommunizierst stilsicher auf Deutsch; Kenntnisse einer weiteren Landessprache sind von Vorteil.",
-          "Teamarbeit ist für dich die Grundlage erfolgreicher Projekte; du arbeitest gerne interdisziplinär.",
-          "Du überzeugst durch Kommunikationsstärke und Durchsetzungsvermögen."
-        ]
-      },
-      "location": "Zürich Altstetten",
-      "canton": "ZH",
-      "addressLocality": "Zürich Altstetten",
-      "addressCountry": "CH",
-      "category": "tech",
-      "contract": "full-time",
-      "currency": "CHF",
-      "featured": false,
-      "sourceLang": "de",
-      "postedDate": "2026-08-10",
-      "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-technische-anlagen-elektroanlagen-50hz/693b2d93-18e2-4f4c-98fa-43038e62da6a",
-      "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:12:32.014Z",
-      "previousSlugs": [
-        "projektleiter-in-technische-anlagen-elektroanlagen-50hz-ffs-officine-ferrovie-federali-zurich-altstetten"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "projektleiter-in-technische-anlagen-elektroanlagen-50hz-ffs-officine-ferrovie-federali-zurich-altstetten"
-        ]
-      },
-      "firstSeenAt": "2026-08-11T22:02:25.963Z",
-      "salaryMin": 121500,
-      "salaryMax": 206500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 121500,
-          "maxValue": 206500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-50d35c83c159",
@@ -7355,7 +7124,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-cff604732944",
@@ -7476,7 +7246,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d04dbec377c9",
@@ -7579,7 +7350,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-3d359c11f10c",
@@ -7653,7 +7425,8 @@
       },
       "addressRegion": "SZ",
       "employmentType": "FULL_TIME",
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-82821a83af14",
@@ -7737,7 +7510,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-df3a207e6b6a",
@@ -7820,7 +7594,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-387d1f94c918",
@@ -7908,7 +7683,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d9ebe7926b01",
@@ -7996,7 +7772,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-699572e422b7",
@@ -8085,7 +7862,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-a4e208824744",
@@ -8203,7 +7981,8 @@
         }
       },
       "addressRegion": "NW",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-febadcd41ef4",
@@ -8292,7 +8071,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-16802a3b0bb5",
@@ -8362,7 +8142,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-fb9d13c03800",
@@ -8446,7 +8227,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-526ab511b5bf",
@@ -8547,7 +8329,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-62a3cb51123a",
@@ -8656,7 +8439,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-b3159974ac22",
@@ -8788,7 +8572,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-e8e8b09434bb",
@@ -8871,7 +8656,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-ed70d3847868",
@@ -8941,7 +8727,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f59e6cb0fecd",
@@ -9011,7 +8798,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-90fe7f5dc270",
@@ -9081,7 +8869,8 @@
         }
       },
       "addressRegion": "SH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-3c5bec81acd1",
@@ -9151,7 +8940,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-d0a0f9998ffc",
@@ -9221,7 +9011,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2066c4a2999c",
@@ -9291,7 +9082,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2a82d6211cd5",
@@ -9361,7 +9153,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-3e24df196834",
@@ -9455,7 +9248,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-81bd299eec02",
@@ -9548,7 +9342,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-66644643c79a",
@@ -9635,7 +9430,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-af89ff7b421f",
@@ -9720,7 +9516,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-74bb2d7e906b",
@@ -9833,7 +9630,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-9ac4ac36ccfa",
@@ -9997,7 +9795,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-133b1d32511a",
@@ -10086,7 +9885,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-88e85cd4573d",
@@ -10192,7 +9992,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-063add1eddb2",
@@ -10282,7 +10083,8 @@
       "addressRegion": "SG",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "retranslationAttempts": 0
+      "retranslationAttempts": 0,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6336efb99beb",
@@ -10377,7 +10179,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-7ef97f9a4b99",
@@ -10454,7 +10257,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f817db5e03d9",
@@ -10543,7 +10347,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-ad996d81bfc4",
@@ -10632,7 +10437,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-5efccef21a59",
@@ -10724,7 +10530,8 @@
       },
       "addressRegion": "AG",
       "employmentType": "FULL_TIME",
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-bdfabbba8e3d",
@@ -10829,7 +10636,8 @@
         }
       },
       "addressRegion": "VD",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6147096bebad",
@@ -10934,7 +10742,8 @@
         }
       },
       "addressRegion": "FR",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-7fc7fb9e6fd8",
@@ -11039,7 +10848,8 @@
         }
       },
       "addressRegion": "GE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-543f18e1f009",
@@ -11228,7 +11038,8 @@
       "addressRegion": "SO",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "retranslationAttempts": 0
+      "retranslationAttempts": 0,
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-c0dae318f179",
@@ -11316,7 +11127,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-7ab69bfa9ffb",
@@ -11378,7 +11190,7 @@
       "postedDate": "2026-06-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-zugverkehrsleiter-in/fd78e6ea-6ae5-454d-bdf8-27bfdd1462f8",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:16:25.055Z",
+      "crawledAt": "2026-08-28T21:44:43.179Z",
       "previousSlugs": [
         "quereinstieg-zugverkehrsleiter-in-ffs-officine-ferrovie-federali-muttenz"
       ],
@@ -11501,7 +11313,8 @@
         }
       },
       "addressRegion": "VS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4bf7cab83500",
@@ -11585,7 +11398,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-143375f430a6",
@@ -11669,7 +11483,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-53ea38981009",
@@ -11765,7 +11580,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-28d8067990cd",
@@ -11836,7 +11652,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-61287b0752b6",
@@ -11938,7 +11755,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-17030e33d4a9",
@@ -12026,7 +11844,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-ab9281add8ea",
@@ -12126,7 +11945,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-0eba23290396",
@@ -12215,7 +12035,8 @@
         }
       },
       "addressRegion": "UR",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4ec840bd3f88",
@@ -12303,7 +12124,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-e973dafd3ac1",
@@ -12388,7 +12210,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-74c1d454f76c",
@@ -12472,7 +12295,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-3ea5f0531e97",
@@ -12557,7 +12381,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-714726d1df10",
@@ -12622,7 +12447,7 @@
       "postedDate": "2026-05-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/7848d2ad-6805-4d50-bb1e-a2df3529e2de",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:00.556Z",
+      "crawledAt": "2026-08-28T21:44:43.455Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -12733,7 +12558,8 @@
         }
       },
       "addressRegion": "ZG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4a6dd0fbc095",
@@ -12817,7 +12643,8 @@
         }
       },
       "addressRegion": "LU",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-f390b9334431",
@@ -12906,7 +12733,8 @@
         }
       },
       "addressRegion": "SG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2e44c4c57efd",
@@ -12976,7 +12804,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-8adf511b2383",
@@ -13060,7 +12889,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-6b092c7bf6b8",
@@ -13130,7 +12960,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-63dfd05514f4",
@@ -13238,7 +13069,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-ec3be44a2864",
@@ -13330,7 +13162,8 @@
         }
       },
       "addressRegion": "BS",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-9901df6e9363",
@@ -13437,7 +13270,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-68c3f60d921a",
@@ -13536,7 +13370,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-8e0937191320",
@@ -13601,7 +13436,7 @@
       "postedDate": "2026-03-30",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierlokfuehrer-in-rangierleiter-in-kat-a40/deef1a9b-ef07-4817-8cca-fec0d9b27fcb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:30.947Z",
+      "crawledAt": "2026-08-28T21:44:43.065Z",
       "previousSlugs": [
         "quereinstieg-rangierlokfuhrer-in-e-rangierleiter-in-kat-a40-ffs-officine-ferrovie-federali-hagendorf"
       ],
@@ -13713,7 +13548,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-056b168fb2ca",
@@ -13802,7 +13638,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-95604d8eb223",
@@ -13872,7 +13709,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-80ddc6a8590f",
@@ -13956,7 +13794,8 @@
         }
       },
       "addressRegion": "AG",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-4250634f1bcf",
@@ -14017,7 +13856,7 @@
       "postedDate": "2026-03-22",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/38b5218d-91c9-474d-bb67-28570e713b56",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:48.150Z",
+      "crawledAt": "2026-08-28T21:45:00.787Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-st-gallen"
       ],
@@ -14101,7 +13940,7 @@
       "postedDate": "2026-03-22",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/46d533b8-f18f-45aa-8620-dbabe24bd9c5",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:45.480Z",
+      "crawledAt": "2026-08-28T21:44:49.552Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -14213,7 +14052,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-864e267fa3ee",
@@ -14312,7 +14152,8 @@
         }
       },
       "addressRegion": "BE",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-2f1e4873e1d3",
@@ -14400,7 +14241,8 @@
         }
       },
       "addressRegion": "SO",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "crawlerMissStreak": 1
     },
     {
       "id": "sbb-0ce24cd5b0cc",
@@ -14461,7 +14303,7 @@
       "postedDate": "2025-12-31",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/techniker-in-sicherungsanlagen-innen-elektroinstallateur-in-automatiker-in/615a1b67-f79b-4e0a-98de-7ffffd309378",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:15:32.167Z",
+      "crawledAt": "2026-08-28T21:44:43.487Z",
       "previousSlugs": [
         "techniker-in-sicherungsanlagen-innen-elektroinstallateur-in-automatiker-in-ffs-officine-ferrovie-federali-deutschschweiz",
         "tecnico-in-impianti-di-sicurezza-interni-installatore-elettrico-in-operatore-automatico-in-ffs-officine-ferrovie-federali-deutschschweiz"
@@ -14533,7 +14375,7 @@
       "postedDate": "2025-12-31",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektroinstallateur-in-elektrofachpersonal-in-der-welt-der-technischen-bahnberufe/8d93b023-24ce-47a6-937b-89eebe726968",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:41.749Z",
+      "crawledAt": "2026-08-28T21:44:54.331Z",
       "previousSlugs": [
         "elektroinstallateur-in-elektrofachpersonal-in-der-welt-der-technischen-bahnberufe-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -14625,7 +14467,7 @@
       "postedDate": "2025-12-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-des-cie-pour-les-agentes-de-transport-ferroviaire-cfc/9afa011e-3030-492b-a1d5-6fa693f6d017",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:50.170Z",
+      "crawledAt": "2026-08-28T21:44:58.657Z",
       "previousSlugs": [
         "responsable-des-cie-pour-les-agent-e-s-de-transport-ferroviaire-cfc-ffs-officine-ferrovie-federali-olten"
       ],
@@ -14714,7 +14556,7 @@
       "postedDate": "2025-12-15",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/rangierspezialist-in-infrastruktur/fb317703-f48a-45f3-8688-0bf1b2f96c94",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T21:17:51.730Z",
+      "crawledAt": "2026-08-28T21:45:01.395Z",
       "previousSlugs": [
         "rangierspezialist-in-infrastruktur-ffs-officine-ferrovie-federali-winterthur"
       ],
