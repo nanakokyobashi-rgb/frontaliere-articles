@@ -1,10 +1,10 @@
 {
   "crawlerKey": "pwc",
-  "assembledAt": "2026-08-28T05:31:44.027Z",
+  "assembledAt": "2026-08-28T21:08:14.454Z",
   "jobs": [
     {
       "title": "Regulatory & Audit Specialist Banking",
-      "slug": "regulatory-audit-specialist-banking-pwc-zurich",
+      "slug": "regulatory-audit-specialista-banking-pwc-switzerland-zurich",
       "url": "https://jobs.pwc.ch/job-vacancies/regulatory-audit-specialist-banking/4b09702c-0387-43c5-b7d1-92e34845d1d7",
       "applyUrl": "https://pwc.wd3.myworkdayjobs.com/Global_Experienced_Careers/job/Zrich/FY27---ASR---ASR-FS-ZH-Bnk---Zrich---Senior-Manager---Start-01102026_755233WD/apply",
       "company": "PwC Switzerland",
@@ -38,10 +38,10 @@
         "fr": "Werde Teil des Assurance Financial Services Teams, welches aus erfahrenen Wirtschaftsprüfern und Fachspezialisten im Bereich Banken und Wertpapierhäuser besteht. Gemeinsam arbeiten wir an der Schnittstelle von Regulator, aktuellen regulatorischen Entwicklungen und unseren Audit-Teams. Wir sind Anlaufstelle für Fachfragen zu aufsichtsrechtlichen und finanziellen Prüfungen von Banken und Wertpapierhäusern und unterstützen bei der Gewährleistung von Qualität und Compliance in der Wirtschaftsprüfung.\n\n• Gestalte die Umsetzung neuer regulatorischer Anforderungen mit und übersetze komplexe Vorgaben in pragmatische Lösungen für unsere Audit-Teams.\n\n• Sei Sparringpartner für Bankenprüfungen, wenn es um herausfordernde Fragestellungen im Aufsichtsrecht und in der Rechnungslegung geht.\n\n• Treibe die Weiterentwicklung unserer Prüfungsprozesse voran – von Qualitätssicherung bis Effizienzsteigerung.\n\n• Übernimm Verantwortung für Projekte und entwickle innovative Services, die unseren Mandanten echten Mehrwert bieten.\n\n• Baue deine Banking Expertise im Bereich Regulatory kontinuierlich aus und nutze die Trainingsmöglichkeiten, um auch deine Soft Skills gezielt zu stärken.\n\n• Mehrjährige Erfahrung in einer Bank, Wirtschaftsprüfung oder internen Revision – mit Fokus auf Regulierung, Risk & Compliance oder Audit.\n\n• Freude an komplexen Fragestellungen und Lust, Lösungen mitzugestalten.\n\n• Teamgeist kombiniert mit Eigeninitiative und Flexibilität.\n\n• Idealerweise bist du dipl. Wirtschaftsprüfer:in (oder auf dem Weg dahin) oder du bringst eine vergleichbare Qualifikation mit.\n\n• Sehr gute Deutsch- und Englischkenntnisse, Französisch ist ein Plus."
       },
       "slugByLocale": {
-        "it": "regulatory-audit-specialist-banking-pwc-zurich",
+        "it": "regulatory-audit-specialista-banking-pwc-switzerland-zurich",
         "en": "regulatory-audit-specialist-banking-pwc-zurich",
-        "de": "regulatory-audit-specialist-banking-pwc-zurich",
-        "fr": "regulatory-audit-specialist-banking-pwc-zurich"
+        "de": "regulatory-audit-spezialist-banking-pwc-switzerland-zurich",
+        "fr": "regulatory-audit-specialiste-banking-pwc-switzerland-zurich"
       },
       "id": "pwc-ea30b029cb45",
       "salaryMin": 113000,
@@ -58,11 +58,25 @@
         }
       },
       "firstSeenAt": "2026-08-28T05:26:25.590Z",
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "regulatory-audit-specialist-banking-pwc-zurich"
+        ],
+        "de": [
+          "regulatory-audit-specialist-banking-pwc-zurich"
+        ],
+        "fr": [
+          "regulatory-audit-specialist-banking-pwc-zurich"
+        ]
+      },
+      "previousSlugs": [
+        "regulatory-audit-specialist-banking-pwc-zurich"
+      ]
     },
     {
       "title": "Associate/Senior Associate - Marketing Operations Specialist",
-      "slug": "associate-senior-associate-marketing-operations-specialist-pwc-zurich",
+      "slug": "associate-senior-associate-marketing-operations-specialista-pwc-switzerland-zurich",
       "url": "https://jobs.pwc.ch/job-vacancies/associate-senior-associate-marketing-operations-specialist/2c9d80e6-b378-4007-bde7-d1a314aadeba",
       "applyUrl": "https://pwc.wd3.myworkdayjobs.com/Global_Campus_Careers/job/Zrich/Associate-Senior-Associate---Marketing-Operations-Specialist_754608WD-1/apply",
       "company": "PwC Switzerland",
@@ -96,10 +110,10 @@
         "fr": "The Marketing Operations team enables the efficient planning, execution and continuous improvement of marketing activities across PwC Switzerland. As the operational backbone of the Marketing function, the team drives process excellence, governance, technology adoption and performance transparency. Working closely with business stakeholders, marketers and delivery teams, Marketing Operations ensures seamless collaboration, scalable workflows and consistent delivery across campaigns, events and digital channels.\n\n• Coordinate the delivery of marketing activities across campaigns, client events, web and email channels, ensuring high quality and timely execution.\n\n• Orchestrate collaboration between business stakeholders, marketers, offshore delivery teams and Marketing Operations specialists to create seamless delivery experiences.\n\n• Drive the adoption and continuous optimisation of Adobe Workfront and related marketing technology platforms to increase transparency and efficiency.\n\n• Enhance operational processes, workflows and governance standards to strengthen consistency and scalability across the marketing organisation.\n\n• Develop reporting dashboards and operational metrics that provide actionable insights and support data-driven decision-making.\n\n• Monitor service performance, identify improvement opportunities and contribute to the ongoing evolution of Marketing Operations at PwC Switzerland.\n\n• 3–5 years of experience in marketing operations, marketing coordination or a comparable role.\n\n• Proven experience working with workflow and project management platforms, ideally Adobe Workfront.\n\n• Strong understanding of marketing processes across events, email marketing, web content, campaigns and thought leadership activities.\n\n• Experience coordinating cross-functional stakeholders and collaborating with offshore or distributed delivery teams.\n\n• Strong analytical capabilities with experience developing reports, dashboards and operational performance metrics.\n\n• Structured, proactive and solution-oriented working style with excellent communication skills in English and German."
       },
       "slugByLocale": {
-        "it": "associate-senior-associate-marketing-operations-specialist-pwc-zurich",
+        "it": "associate-senior-associate-marketing-operations-specialista-pwc-switzerland-zurich",
         "en": "associate-senior-associate-marketing-operations-specialist-pwc-zurich",
-        "de": "associate-senior-associate-marketing-operations-specialist-pwc-zurich",
-        "fr": "associate-senior-associate-marketing-operations-specialist-pwc-zurich"
+        "de": "associate-senior-associate-marketing-operations-spezialist-pwc-switzerland-zurich",
+        "fr": "associate-senior-associate-marketing-operations-specialiste-pwc-switzerland-zurich"
       },
       "id": "pwc-5a31210b25b2",
       "salaryMin": 113000,
@@ -115,8 +129,22 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:26:25.590Z"
+      "firstSeenAt": "2026-08-28T05:26:25.590Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "associate-senior-associate-marketing-operations-specialist-pwc-zurich"
+        ],
+        "de": [
+          "associate-senior-associate-marketing-operations-specialist-pwc-zurich"
+        ],
+        "fr": [
+          "associate-senior-associate-marketing-operations-specialist-pwc-zurich"
+        ]
+      },
+      "previousSlugs": [
+        "associate-senior-associate-marketing-operations-specialist-pwc-zurich"
+      ],
+      "needsRetranslation": true
     },
     {
       "title": "(Senior) Associate - U.S. Tax (Financial Services)",
@@ -928,64 +956,6 @@
         "fr": "gestionnaire-gestionnaire-principal-cloud-data-ai-cd-ai-ingenierie-des-donnees-pwc-switzerland-zurich"
       },
       "id": "pwc-60a1f7a2c066",
-      "salaryMin": 113000,
-      "salaryMax": 180000,
-      "currency": "CHF",
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 113000,
-          "maxValue": 180000,
-          "unitText": "YEAR"
-        }
-      },
-      "firstSeenAt": "2026-08-12T21:54:15.110Z",
-      "needsRetranslation": true
-    },
-    {
-      "title": "Associate / Senior Associate - Cloud, Data & AI (Data Engineering)",
-      "slug": "associate-senior-associate-cloud-data-ai-data-engineering-pwc-zurich",
-      "url": "https://jobs.pwc.ch/job-vacancies/associate-senior-associate-cloud-data-ai-data-engineering/54c4e9eb-43d9-4789-87b9-5f55b4eb88ef",
-      "applyUrl": "https://pwc.wd3.myworkdayjobs.com/Global_Experienced_Careers/job/Zrich/Associate---Senior-Associate---Cloud--Data---AI--Data-Engineering-_636377WD/apply",
-      "company": "PwC Switzerland",
-      "companyKey": "pwc",
-      "companyDomain": "pwc.ch",
-      "location": "Zurich",
-      "addressLocality": "Zurich",
-      "addressRegion": "ZH",
-      "addressCountry": "CH",
-      "canton": "ZH",
-      "country": "CH",
-      "category": "consulting",
-      "sector": "Consulenza",
-      "source": "pwc-dedicated-crawler",
-      "sourceLang": "en",
-      "postedDate": "2026-08-11",
-      "validThrough": "2036-08-08",
-      "employmentType": "full-time",
-      "contractType": "full-time",
-      "description": "• Collaborate with your team to deliver high-impact projects and engage with senior stakeholders from high-profile clients in industries such as Pharma & Life Sciences, Financial Services, Retail & Consumer, Industrial Manufacturing, and Public Services.\n\n• Empower your clients to innovatively leverage their data by proposing and developing the most suitable data-driven solutions according to the clients' needs and the availability/properties of their data.\n\n• Assist your clients in advancing digitization with data pipelines and analyzes of various data sources. The projects you are working on include the technical and analytical development of end-to-end data engineering, analytics, and automation solutions.\n\n• Challenge the status quo, seek the information you need, understand the challenge at hand, and devise creative and simple solutions.\n\n• Implement and continue learning best practices in technology, data engineering, analytics, and consulting approaches\n\n• A university degree in fields such as business informatics, computer science, physics, mathematics, or any engineering discipline is preferred.\n\n• Initial work experience in data engineering, data science, visualization, or analytics (including thesis work) adds value.\n\n• Proficiency in multiple programming languages like Python, R, SQL, or similar is required.\n\n• Hands-on experience with Azure, GCP, AWS, or DataBricks is essential.\n\n• Excellent interpersonal, listening, and communication skills, coupled with a proactive attitude towards delivering client value, are vital.\n\n• Fluency in English and German and a willingness to travel within Switzerland, and occasionally internationally, are necessary.",
-      "titleByLocale": {
-        "it": "Associate / Senior Associate - Cloud, Data & AI (Data Engineering)",
-        "en": "Associate / Senior Associate - Cloud, Data & AI (Data Engineering)",
-        "de": "Associate / Senior Associate - Cloud, Data & AI (Data Engineering)",
-        "fr": "Associé / Senior Associate - Cloud, Data & AI (Ingénierie des données)"
-      },
-      "descriptionByLocale": {
-        "it": "• Collabora con il tuo team per fornire progetti ad alto impatto e impegnarsi con gli stakeholder senior di clienti di alto profilo in settori come Pharma & Life Sciences, Financial Services, Retail & Consumer, Industrial Manufacturing e Public Services.\n\n• Incoraggia i tuoi clienti a sfruttare in modo innovativo i loro dati, proponendo e sviluppando le soluzioni più adatte per la gestione dei dati in base alle esigenze dei clienti e alla disponibilità/proprietà dei loro dati.\n\n• Assisti i tuoi clienti ad avanzare la digitalizzazione con datadotti e analisi di varie fonti di dati. I progetti su cui stai lavorando includono lo sviluppo tecnico e analitico delle soluzioni di ingegneria, analisi e automazione dei dati end-to-end.\n\n• Sfidare lo status quo, cercare le informazioni necessarie, capire la sfida a portata di mano, e ideare soluzioni creative e semplici.\n\n• Implementare e continuare a imparare le migliori pratiche in tecnologia, ingegneria dei dati, analisi e approcci di consulenza\n\n• Una laurea in settori come l'informatica aziendale, informatica, fisica, matematica, o qualsiasi disciplina di ingegneria è preferito.\n\n• L'esperienza di lavoro iniziale in ingegneria dei dati, scienza dei dati, visualizzazione o analisi (compreso il lavoro di tesi) aggiunge valore.\n\n• È necessaria la competenza in più linguaggi di programmazione come Python, R, SQL o simili.\n\n• Esperienza pratica con Azure, GCP, AWS o DataBricks è essenziale.\n\n• Le eccellenti capacità interpersonali, di ascolto e di comunicazione, accoppiate con un atteggiamento proattivo verso la fornitura del valore del cliente, sono vitali.\n\n• La fluidità in inglese e tedesco e la volontà di viaggiare in Svizzera, e occasionalmente a livello internazionale, sono necessarie.",
-        "en": "• Collaborate with your team to deliver high-impact projects and engage with senior stakeholders from high-profile clients in industries such as Pharma & Life Sciences, Financial Services, Retail & Consumer, Industrial Manufacturing, and Public Services.\n\n• Empower your clients to innovatively leverage their data by proposing and developing the most suitable data-driven solutions according to the clients' needs and the availability/properties of their data.\n\n• Assist your clients in advancing digitization with data pipelines and analyzes of various data sources. The projects you are working on include the technical and analytical development of end-to-end data engineering, analytics, and automation solutions.\n\n• Challenge the status quo, seek the information you need, understand the challenge at hand, and devise creative and simple solutions.\n\n• Implement and continue learning best practices in technology, data engineering, analytics, and consulting approaches\n\n• A university degree in fields such as business informatics, computer science, physics, mathematics, or any engineering discipline is preferred.\n\n• Initial work experience in data engineering, data science, visualization, or analytics (including thesis work) adds value.\n\n• Proficiency in multiple programming languages like Python, R, SQL, or similar is required.\n\n• Hands-on experience with Azure, GCP, AWS, or DataBricks is essential.\n\n• Excellent interpersonal, listening, and communication skills, coupled with a proactive attitude towards delivering client value, are vital.\n\n• Fluency in English and German and a willingness to travel within Switzerland, and occasionally internationally, are necessary.",
-        "de": "• Arbeiten Sie mit Ihrem Team zusammen, um wirkungsvolle Projekte zu liefern, und engagieren Sie sich mit hochrangigen Stakeholdern von hochkarätigen Kunden aus Branchen wie Pharma & Life Sciences, Financial Services, Retail & Consumer, Industrial Manufacturing und Public Services.\n\n• Befähigen Sie Ihre Kunden, ihre Daten innovativ zu nutzen, indem Sie die am besten geeigneten datengesteuerten Lösungen vorschlagen und entwickeln, die den Bedürfnissen der Kunden und der Verfügbarkeit / den Eigenschaften ihrer Daten entsprechen.\n\n• Unterstützen Sie Ihre Kunden bei der Digitalisierung mit Datenpipelines und Analysen verschiedener Datenquellen. Zu den Projekten, an denen Sie arbeiten, gehört die technische und analytische Entwicklung von End-to-End-Data-Engineering-, Analytics- und Automatisierungslösungen.\n\n• Fordern Sie den Status quo heraus, suchen Sie die Informationen, die Sie benötigen, verstehen Sie die Herausforderung und entwickeln Sie kreative und einfache Lösungen.\n\n• Implementieren und weiter lernen Best Practices in Technologie, Data Engineering, Analytik und Beratungsansätze\n\n• Ein Universitätsabschluss in Bereichen wie Wirtschaftsinformatik, Informatik, Physik, Mathematik oder einer Ingenieurdisziplin wird bevorzugt.\n\n• Erste Berufserfahrung in den Bereichen Data Engineering, Data Science, Visualisierung oder Analytik (einschließlich Abschlussarbeiten) schafft Mehrwert.\n\n• Kenntnisse in mehreren Programmiersprachen wie Python, R, SQL oder ähnliches sind erforderlich.\n\n• Praktische Erfahrungen mit Azure, GCP, AWS oder DataBricks sind unerlässlich.\n\n• Hervorragende zwischenmenschliche, Hör- und Kommunikationsfähigkeiten, gepaart mit einer proaktiven Einstellung zur Bereitstellung von Kundenwert, sind von entscheidender Bedeutung.\n\n• Fließend Englisch und Deutsch und die Bereitschaft, innerhalb der Schweiz und gelegentlich auch international zu reisen, sind notwendig.",
-        "fr": "• Collaborez avec votre équipe à la réalisation de projets à impact élevé et engagez-vous avec des intervenants de haut niveau de clients de premier plan dans des secteurs tels que la pharmacie et les sciences de la vie, les services financiers, le commerce de détail et les consommateurs, la fabrication industrielle et les services publics.\n\n• Donner à vos clients les moyens de tirer parti de leurs données de manière innovante en proposant et en développant les solutions les plus adaptées en fonction des besoins des clients et de la disponibilité/propriété de leurs données.\n\n• Aider vos clients à faire progresser la numérisation grâce à des pipelines de données et à analyser diverses sources de données. Les projets sur lesquels vous travaillez comprennent le développement technique et analytique de solutions d'ingénierie de données de bout en bout, d'analyse et d'automatisation.\n\n• Définer le statu quo, rechercher l'information dont vous avez besoin, comprendre le défi à relever et concevoir des solutions créatives et simples.\n\n• Mettre en oeuvre et poursuivre l'apprentissage des pratiques exemplaires en matière de technologie, d'ingénierie des données, d'analyse et de consultation\n\n• Un diplôme universitaire dans des domaines tels que l'informatique des affaires, l'informatique, la physique, les mathématiques ou toute discipline d'ingénierie est préféré.\n\n• L'expérience de travail initiale en génie des données, en sciences des données, en visualisation ou en analyse (y compris les travaux de thèse) ajoute de la valeur.\n\n• La compétence dans plusieurs langages de programmation comme Python, R, SQL ou similaire est requise.\n\n• Une expérience pratique avec Azure, GCP, AWS ou DataBricks est essentielle.\n\n• Il est essentiel d'avoir d'excellentes compétences en relations interpersonnelles, en écoute et en communication, ainsi qu'une attitude proactive à l'égard de la valeur du client.\n\n• La maîtrise de l'anglais et de l'allemand et la volonté de voyager en Suisse, et parfois à l'étranger, sont nécessaires."
-      },
-      "slugByLocale": {
-        "it": "associate-senior-associate-cloud-data-ai-data-engineering-pwc-zurich",
-        "en": "associate-senior-associate-cloud-data-ai-data-engineering-pwc-zurich",
-        "de": "associate-senior-associate-cloud-data-ai-data-engineering-pwc-zurich",
-        "fr": "associe-senior-associate-cloud-data-ai-ingenierie-des-donnees-pwc-switzerland-zurich"
-      },
-      "id": "pwc-7964c20fa428",
       "salaryMin": 113000,
       "salaryMax": 180000,
       "currency": "CHF",
