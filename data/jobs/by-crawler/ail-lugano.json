@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ail-lugano",
-  "assembledAt": "2026-08-28T21:35:52.935Z",
+  "assembledAt": "2026-08-28T21:50:40.174Z",
   "jobs": [
     {
       "title": "Junior Project Manager - Innovazione e Dati",
@@ -52,7 +52,6 @@
       "previousSlugs": [
         "junior-project-manager-innovazione-e-dati-ail-lugano"
       ],
-      "needsRetranslation": true,
       "id": "ail-lugano-dff5ee00d3ee",
       "salaryMin": 41600,
       "salaryMax": 63000,
@@ -71,7 +70,8 @@
       "postalCode": "6900",
       "addressLocality": "Lugano",
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-28T21:35:52.935Z"
+      "firstSeenAt": "2026-08-28T21:50:40.173Z",
+      "needsRetranslation": true
     }
   ]
 }
