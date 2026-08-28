@@ -1,6 +1,6 @@
 {
   "crawlerKey": "baloise",
-  "assembledAt": "2026-08-28T05:35:49.130Z",
+  "assembledAt": "2026-08-28T21:14:19.686Z",
   "jobs": [
     {
       "id": "baloise-cf98e175f826",
@@ -34,7 +34,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/leiter-assistenz-hub-privatkunden-bank-w-m-d/dcc56b6a-d7dd-4822-a3b4-049768ba24eb",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.816Z",
+      "crawledAt": "2026-08-28T21:14:16.059Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/it-projektleitung-und-business-analyse-m-w-d-finanzieren/8eb5b7f0-af9d-4cea-b198-1217990999dc",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.814Z",
+      "crawledAt": "2026-08-28T21:14:16.058Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -191,7 +191,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/berater-w-m-d-private-banking-solothurn/5b8cd2c4-0f38-4f4b-9ca1-d5138b8d53f1",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.813Z",
+      "crawledAt": "2026-08-28T21:14:16.057Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -265,7 +265,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/senior-legal-counsel-bank-w-m-d/fa867baa-d1e5-409b-ad56-050e99c884a0",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.812Z",
+      "crawledAt": "2026-08-28T21:14:16.056Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -344,7 +344,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/senior-berater-w-m-d-unternehmenskunden-bank/67f9634b-7ceb-40e1-bd3c-a65fd1b56b90",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.809Z",
+      "crawledAt": "2026-08-28T21:14:16.055Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -424,7 +424,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/kreditberater-hypotheken-w-m-d-solothurn/11581789-e807-4670-b05c-82a50e81acf2",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.808Z",
+      "crawledAt": "2026-08-28T21:14:16.051Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -505,7 +505,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/specialiste-hypotheques-tous-genres/873c5e53-b909-466d-9327-c6b335d46d53",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:35:45.807Z",
+      "crawledAt": "2026-08-28T21:14:16.050Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -584,7 +584,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/mitarbeiter-credit-operations-m-w-d/d888371a-ddca-4189-9c37-c9488082f46b",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.806Z",
+      "crawledAt": "2026-08-28T21:14:16.049Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -666,7 +666,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/leiter-kreditberatungs-center-m-w-d/a68daaee-e39b-4ab2-bea0-3c5a381b8813",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.805Z",
+      "crawledAt": "2026-08-28T21:14:16.047Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -718,9 +718,9 @@
       "id": "baloise-cadb94b67318",
       "slug": "leiter-bank-previdenza-m-w-d-baloise-solothurn",
       "slugByLocale": {
-        "de": "leiter-bank-vorsorge-m-w-d-baloise-solothurn",
         "it": "leiter-bank-previdenza-m-w-d-baloise-solothurn",
         "en": "leiter-bank-vorsorge-m-w-d-baloise-solothurn",
+        "de": "leiter-bank-vorsorge-m-w-d-baloise-solothurn",
         "fr": "leiter-bank-vorsorge-m-w-d-baloise-solothurn"
       },
       "company": "Baloise",
@@ -728,16 +728,16 @@
       "companyDomain": "baloise.com",
       "title": "Leiter Bank Vorsorge (m/w/d)",
       "titleByLocale": {
-        "de": "Leiter Bank Vorsorge (m/w/d)",
         "it": "Leiter Bank previdenza (m/w/d)",
         "en": "Leiter Bank Vorsorge (m/w/d)",
+        "de": "Leiter Bank Vorsorge (m/w/d)",
         "fr": "Leiter Bank Vorsorge (m/w/d)"
       },
       "description": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team.",
       "descriptionByLocale": {
-        "de": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team.",
         "it": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team.",
         "en": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team.",
+        "de": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team.",
         "fr": "Wir sind die Bank von Helvetia - einem innovativen Finanzdienstleister, der Banking und Versicherung intelligent verbindet. Gemeinsam neue Massstäbe setzen und die Zukunft gestalten – das bedeutet für uns mehr, als Aufgaben einfach abzuarbeiten. Hier arbeitest du mit Menschen zusammen, die Verantwortung übernehmen, hohe Ansprüche haben und den Mut mitbringen, neue Wege zu gehen. Bei uns findest du ein Umfeld, in dem Vertrauen und Leistung Hand in Hand gehen und deine Ideen, deine Initiative und dein Beitrag zählen. So hast du die Möglichkeit, wirklich etwas zu bewegen für unsere Kundinnen und Kunden, dein Team und deine persönliche Entwicklung.\n\nAufgaben:\nDu bist eine erfahrene Persönlichkeit im Vorsorgebereich und willst Verantwortung übernehmen, ein Team führen und gleichzeitig nah am Tagesgeschäft bleiben? In dieser vielseitigen Führungsfunktion übernimmst du die fachliche und personelle Leitung eines Teams von vier Mitarbeitenden. Dabei verbringst rund drei Viertel deiner Tätigkeit im operativen Tagesgeschäft und bringst dein Fachwissen direkt in die Bearbeitung anspruchsvoller Vorsorgefälle ein. Gleichzeitig entwickelst du dein Team weiter, optimierst Prozesse und gestaltest die Zukunft unserer Vorsorgedienstleistungen aktiv mit. Diese Kombination aus Führungsverantwortung und operativer Expertise macht die Funktion besonders abwechslungsreich.\n\n• Du führst und entwickelst dein Team von vier Mitarbeitenden fachlich und personell.\n\n• Du verantwortest die Verwaltung und Administration der Geschäftsfälle in der gebundenen Vorsorge (2. und 3. Säule) inklusive Buchhaltung und Jahresabschluss.\n\n• Du stellst die korrekte Abwicklung von Auszahlungen sicher, beispielsweise bei Überträgen, Selbständigkeit, Pensionierung, Auswanderung, Invalidität und Todesfall.\n\n• Du bearbeitest WEF- und Scheidungsfälle kompetent und lösungsorientiert.\n\n• Du unterstützt und berätst unsere Kundenberaterinnen und Kundenberater in allen Vorsorgethemen.\n\n• Du entwickelst bestehende Prozesse kontinuierlich weiter und treibst die Digitalisierung im Vorsorgebereich aktiv voran.\n\n• Du sorgst für die Einhaltung der gesetzlichen und regulatorischen Vorgaben im Vorsorgewesen.\n\nAnforderungen:\n• Mehrjährige Erfahrung und fundierte Fachkenntnisse im Bereich der gebundenen Vorsorge (2. und 3. Säule), idealerweise mit entsprechender Weiterbildung\n\n• Erste Führungserfahrung oder nachweisbares Potential und Motivation, eine Führungsrolle zu übernehmen\n\n• Analytisches und vernetztes Denkvermögen, hohe Eigeninitiative und eine schnelle Auffassungsgabe\n\n• Eine strukturierte, selbstständige und qualitätsbewusste Arbeitsweise\n\n• Verhandlungssicheres Deutsch; Französischkenntnisse sind im nationalen Kontext ein klarer Vorteil\n\nWir glauben an Zusammenarbeit auf Augenhöhe, gegenseitiges Vertrauen und Menschen, die Verantwortung übernehmen wollen. Unterschiedliche Perspektiven helfen uns, bessere Lösungen zu entwickeln - für unsere Kundinnen und Kunden genauso wie für uns als Team."
       },
       "needsRetranslation": true,
@@ -746,7 +746,7 @@
       "url": "https://jobs.helvetia.com/offene-stellen/leiter-bank-vorsorge-m-w-d/25ebbd90-fc6e-4437-8380-d862cd37b329",
       "source": "Baloise Dedicated Parser (Prospective medium 1005736)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:45.800Z",
+      "crawledAt": "2026-08-28T21:14:16.041Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -763,17 +763,18 @@
       "postedDate": "2026-08-27",
       "applyUrl": "https://atsconnector.prospective.ch/successfactors/EMEA_PREMIUM/Helvetia/switzerland/de/apply?id=19286",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "leiter-bank-vorsorge-m-w-d-baloise-solothurn",
+        "leiter-bank-previdenza-m-w-d-baloise-solothurn"
+      ],
       "previousSlugsByLocale": {
         "it": [
-          "leiter-bank-vorsorge-m-w-d-baloise-solothurn"
+          "leiter-bank-vorsorge-m-w-d-baloise-solothurn",
+          "leiter-bank-previdenza-m-w-d-baloise-solothurn"
         ]
       },
-      "previousSlugs": [
-        "leiter-bank-vorsorge-m-w-d-baloise-solothurn"
-      ],
+      "firstSeenAt": "2026-08-28T05:35:45.800Z",
       "salaryMin": 115000,
       "salaryMax": 160000,
       "baseSalary": {
@@ -785,8 +786,7 @@
           "maxValue": 160000,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T05:35:45.800Z"
+      }
     }
   ]
 }
