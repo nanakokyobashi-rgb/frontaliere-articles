@@ -1,6 +1,6 @@
 {
   "crawlerKey": "lindenhofgruppe",
-  "assembledAt": "2026-08-28T21:22:36.200Z",
+  "assembledAt": "2026-08-28T21:46:46.533Z",
   "jobs": [
     {
       "id": "lindenhofgruppe-c4d62952eb5b",
@@ -33,7 +33,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/694cd906-d05d-4f2c-ae63-840ec84dc3e0",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.215Z",
+      "crawledAt": "2026-08-28T21:46:41.929Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -133,7 +133,6 @@
         ]
       },
       "firstSeenAt": "2026-05-10T21:57:57.775Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -145,7 +144,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-2d023dadd7eb",
@@ -178,7 +178,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-fachfrau-mann-operationstechnik-hf/bd79ef21-83e1-4b31-8712-c0e047446b6b",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.215Z",
+      "crawledAt": "2026-08-28T21:46:41.929Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -249,7 +249,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/bachelor-of-science-in-pflege-zusatzmodul-b/ce745069-0f27-4caf-b4d6-8b9b9173c51a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.214Z",
+      "crawledAt": "2026-08-28T21:46:41.928Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -327,7 +327,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/lagerungspfleger-in/088f1376-4ff4-4ae7-83f4-309eb3178143",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.214Z",
+      "crawledAt": "2026-08-28T21:46:41.928Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -367,7 +367,6 @@
         "cure-di-stoccaggio-lindenhofgruppe-bern"
       ],
       "firstSeenAt": "2026-05-10T21:57:57.774Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -379,7 +378,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-3b53b88a2897",
@@ -412,7 +412,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/nds-anaesthesie-weiterbildungsstelle/2f3965ca-5b14-4328-9d35-930d08d5d916",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.214Z",
+      "crawledAt": "2026-08-28T21:46:41.929Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -509,7 +509,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-hf-fh-mit-weiterbildung-in-ueberwachungspflege/1e931b67-86f5-415c-b2d8-08390c7dde3e",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.213Z",
+      "crawledAt": "2026-08-28T21:46:41.927Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -587,7 +587,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/pflegefachfrau-mann-hf-in-ausbildung-betriebsanstellung-fruehling-2027/807758b7-3a09-43dc-ae54-b9e6261a4d22",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.213Z",
+      "crawledAt": "2026-08-28T21:46:41.928Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -667,7 +667,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/mitarbeiter-in-patienten-hotellerie/ab8a9551-f216-4484-99e2-87cc305e9949",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.213Z",
+      "crawledAt": "2026-08-28T21:46:41.928Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -746,7 +746,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/techn-sterilisationsassistent-in-oder-medizinproduktetechnologe-login-efz/64b173d5-520a-49f3-885c-ff5f2ba4a7a7",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.212Z",
+      "crawledAt": "2026-08-28T21:46:41.927Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -829,7 +829,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-experte-anaesthesie-nds-hf/ded5d810-044f-4250-96dd-dd60ebfab8cd",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.212Z",
+      "crawledAt": "2026-08-28T21:46:41.927Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -871,7 +871,6 @@
         "dipl-expert-dipl-expert-anesthesia-care-nds-hf-lindenhofgruppe-bern"
       ],
       "firstSeenAt": "2026-05-10T21:57:57.762Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -883,7 +882,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-af98dfc182f5",
@@ -916,7 +916,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-experte-intensivpflege-nds-hf-oder-dipl-pflegefachfrau-mann-mit-imc-kurs/d729996e-84a5-483b-a3d0-e98c11d281f3",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.211Z",
+      "crawledAt": "2026-08-28T21:46:41.926Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -950,7 +950,6 @@
         ]
       },
       "firstSeenAt": "2026-06-09T11:48:51.847Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -962,7 +961,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-1b097bb07b91",
@@ -995,7 +995,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/chefaerztin-chefarzt-allgemeine-innere-medizin/46c96a5c-a4b1-4f78-9ca3-8c19fb1dc1c1",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.209Z",
+      "crawledAt": "2026-08-28T21:46:41.925Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1073,7 +1073,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/0f4376e0-3adb-4d5a-a234-70e94913025a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.207Z",
+      "crawledAt": "2026-08-28T21:46:41.923Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1132,7 +1132,6 @@
         ]
       },
       "firstSeenAt": "2026-06-11T13:03:30.775Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1144,7 +1143,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-1ab06870b97f",
@@ -1177,7 +1177,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/koch-koechin-efz-in-ausbildung/502d4904-f78d-4644-ab66-a79f7cd5591b",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.205Z",
+      "crawledAt": "2026-08-28T21:46:41.921Z",
       "addressLocality": "Engeried",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1211,7 +1211,6 @@
         ]
       },
       "firstSeenAt": "2026-06-11T23:02:32.996Z",
-      "needsRetranslation": true,
       "salaryMin": 67500,
       "salaryMax": 84500,
       "baseSalary": {
@@ -1223,7 +1222,8 @@
           "maxValue": 84500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-57682446f41f",
@@ -1256,7 +1256,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/fachfrau-fachmann-hotellerie-hauswirtschaft-efz-in-ausbildung-schwerpunkt-hotellerie/8727df5a-af23-4ee7-848f-e2ccdbaedb98",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.203Z",
+      "crawledAt": "2026-08-28T21:46:41.920Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1335,7 +1335,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/fachfrau-mann-gesundheit-efz-in-ausbildung-lindenhofspital-oder-sonnenhofspital/6e207f18-cc31-4a93-b690-c030b4f2b98c",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.200Z",
+      "crawledAt": "2026-08-28T21:46:41.918Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1369,7 +1369,6 @@
         ]
       },
       "firstSeenAt": "2026-06-11T23:02:32.968Z",
-      "needsRetranslation": true,
       "salaryMin": 59000,
       "salaryMax": 108500,
       "baseSalary": {
@@ -1381,7 +1380,8 @@
           "maxValue": 108500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-d41865412e99",
@@ -1414,7 +1414,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/7a607ba4-bbff-491b-9d81-e7ca55e6107b",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.198Z",
+      "crawledAt": "2026-08-28T21:46:41.917Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1458,7 +1458,6 @@
         ]
       },
       "firstSeenAt": "2026-06-12T12:31:36.606Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1470,7 +1469,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-2bc572a2d7f6",
@@ -1503,7 +1503,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/e510ac1f-cdc1-42ac-ae56-d88c48b6f4e8",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.196Z",
+      "crawledAt": "2026-08-28T21:46:41.915Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1543,7 +1543,6 @@
         ]
       },
       "firstSeenAt": "2026-07-18T21:58:23.063Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1555,7 +1554,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-f1a78639ecdf",
@@ -1588,7 +1588,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/791ceed8-d154-4785-8cfe-19f032d5baf6",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.194Z",
+      "crawledAt": "2026-08-28T21:46:41.913Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1628,7 +1628,6 @@
         ]
       },
       "firstSeenAt": "2026-07-19T11:09:01.939Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1640,7 +1639,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-62cd2aa90bdf",
@@ -1673,7 +1673,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/17b5a6a9-54eb-410c-902d-3729d668ac6e",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.191Z",
+      "crawledAt": "2026-08-28T21:46:41.910Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1727,7 +1727,6 @@
         ]
       },
       "firstSeenAt": "2026-07-19T22:16:44.389Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1739,7 +1738,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-14da0d4b63e8",
@@ -1772,7 +1772,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/193720a6-297c-46c6-9be6-893c8669c2b6",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.189Z",
+      "crawledAt": "2026-08-28T21:46:41.905Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1812,7 +1812,6 @@
         ]
       },
       "firstSeenAt": "2026-07-20T11:59:40.952Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1824,7 +1823,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-0c9034e68348",
@@ -1857,7 +1857,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-radiologiefachfrau-mann-oder-med-praxisassistent-in/b229f97b-ea46-4da1-8d80-727956e674f0",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.186Z",
+      "crawledAt": "2026-08-28T21:46:41.898Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1934,7 +1934,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fachfrau-mann-gesundheit-fuer-unseren-pflegepool/3a285673-ab11-4c1b-9ae4-28fcb7c44d0f",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.184Z",
+      "crawledAt": "2026-08-28T21:46:41.891Z",
       "addressLocality": "Lindenhofgruppe",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2026,7 +2026,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fokus-f-neonatologie/09d72517-c3ce-47d6-b53a-2737e8edf0a6",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.182Z",
+      "crawledAt": "2026-08-28T21:46:41.888Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2064,7 +2064,6 @@
         ]
       },
       "firstSeenAt": "2026-07-02T11:43:35.711Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -2076,7 +2075,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-b775c646fc35",
@@ -2109,7 +2109,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-fh-hf/f9beb725-7a87-4203-9129-ad85239e50f5",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.180Z",
+      "crawledAt": "2026-08-28T21:46:41.884Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2154,7 +2154,6 @@
         ]
       },
       "firstSeenAt": "2026-07-21T11:55:52.059Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -2166,7 +2165,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-c0edfa0990eb",
@@ -2199,7 +2199,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-radiologiefachfrau-mann/8f89efbb-059a-4b27-9e14-81da0df076d1",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.178Z",
+      "crawledAt": "2026-08-28T21:46:41.880Z",
       "addressLocality": "Engeried",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2237,7 +2237,6 @@
         ]
       },
       "firstSeenAt": "2026-07-06T15:09:50.994Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -2249,7 +2248,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-f8c54c4e1f22",
@@ -2282,7 +2282,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/pflegefachfrau-mann-hf-in-ausbildung-betriebsanstellung-herbst-2027/8a34afda-98fe-4d53-b4cf-f8de42c114fd",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.176Z",
+      "crawledAt": "2026-08-28T21:46:41.877Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2362,7 +2362,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/unterassistenzarzt-aerztin-medizinische-klinik/b062ead3-8ea2-4aa9-960d-b97f01f4e4df",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.174Z",
+      "crawledAt": "2026-08-28T21:46:41.874Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2404,7 +2404,6 @@
         ]
       },
       "firstSeenAt": "2026-07-10T22:44:41.538Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -2416,7 +2415,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-637f1c0559cd",
@@ -2449,7 +2449,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/nds-intensivpflege-weiterbildungsstelle/14584d68-0227-4b64-8de2-c908bc7e1c30",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.172Z",
+      "crawledAt": "2026-08-28T21:46:41.871Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2535,7 +2535,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-experte-anaesthesie-intensiv-oder-notfallpflege-nds-oder-dipl-pflegefachfrau-mann-mit-ndk-ueberwachungspflege/734b2e6d-af14-4c8d-8873-5c8326968451",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.170Z",
+      "crawledAt": "2026-08-28T21:46:41.867Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2620,7 +2620,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-dipl-experte-notfallpflege/278f8287-b7c1-421b-8ba6-4f800dd90365",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.168Z",
+      "crawledAt": "2026-08-28T21:46:41.865Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2653,7 +2653,6 @@
         ]
       },
       "firstSeenAt": "2026-07-29T22:31:34.545Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -2665,7 +2664,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-5add1c70ede9",
@@ -2698,7 +2698,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/teamleiter-in-fuer-fachfrau-mann-apotheke/79795f88-4108-4ee9-9bc8-9c09c5acc25a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.166Z",
+      "crawledAt": "2026-08-28T21:46:41.861Z",
       "addressLocality": "Lindenhofgruppe",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2777,7 +2777,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/praktikant-in-pflege/03ec6256-7d80-4d3b-9cd6-d91104a9d88a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.163Z",
+      "crawledAt": "2026-08-28T21:46:41.857Z",
       "addressLocality": "Lindenhofgruppe",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2855,7 +2855,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/praktikant-in-cand-med/c1f70a97-5b77-41e2-9f90-ecbb0cbf1afb",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.161Z",
+      "crawledAt": "2026-08-28T21:46:41.855Z",
       "addressLocality": "Lindenhofgruppe",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2934,7 +2934,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann/843443ca-b174-4703-b4a1-e4bd5e0a752a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.157Z",
+      "crawledAt": "2026-08-28T21:46:41.852Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3015,7 +3015,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/med-praxisassistent-in-oder-fachfrau-mann-gesundheit/6741af00-8e4c-434a-b4f8-8b7a7bd559cb",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.153Z",
+      "crawledAt": "2026-08-28T21:46:41.850Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3109,7 +3109,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/mitarbeiter-in-sekretariat-radiologie/04c2a51e-f52f-4c27-b084-47e89f6ed0c8",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.151Z",
+      "crawledAt": "2026-08-28T21:46:41.848Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3187,7 +3187,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/abteilungsleiter-in-anaesthesiepflege/29afdb6b-dce6-4a2c-ad69-a90d7a1844d8",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.148Z",
+      "crawledAt": "2026-08-28T21:46:41.846Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3260,7 +3260,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/medizinische-r-codierer-in/277af6a5-2668-4f91-ab72-cd3e8f50c7a6",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.146Z",
+      "crawledAt": "2026-08-28T21:46:41.844Z",
       "addressLocality": "Muristalden",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3288,7 +3288,6 @@
         ]
       },
       "firstSeenAt": "2026-08-19T21:38:12.294Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -3300,7 +3299,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-b6f3dc76ff8e",
@@ -3333,7 +3333,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-dipl-experte-anaesthesiepflege-sonnenhof/a4ccec17-8b63-4976-bcc4-074ad575719a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.144Z",
+      "crawledAt": "2026-08-28T21:46:41.843Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3412,7 +3412,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/pflegeassistent-in/29671368-b503-4f8b-9fde-70d7adbae766",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.142Z",
+      "crawledAt": "2026-08-28T21:46:41.842Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3452,7 +3452,6 @@
         "assistente-infermieristico-lindenhofgruppe-sonnenhofspital"
       ],
       "firstSeenAt": "2026-08-24T10:19:20.378Z",
-      "needsRetranslation": true,
       "salaryMin": 85000,
       "salaryMax": 119000,
       "baseSalary": {
@@ -3464,7 +3463,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "lindenhofgruppe-89849399dc84",
@@ -3497,7 +3497,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/hochschulpraktikant-in-bgm/3698d43a-31e0-4d00-bfba-ba52112676f7",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.139Z",
+      "crawledAt": "2026-08-28T21:46:41.840Z",
       "addressLocality": "Engeried",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3574,7 +3574,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/stv-abteilungsleiter-in-pflege-notfallzentrum/7dbb856f-2b8b-4a93-833c-b498665ee757",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.137Z",
+      "crawledAt": "2026-08-28T21:46:41.838Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3637,7 +3637,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/praktikant-in-informatik/f4eba58c-8ca9-43cc-86f2-1a8ea394505b",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.134Z",
+      "crawledAt": "2026-08-28T21:46:41.836Z",
       "addressLocality": "Lindenhofgruppe",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3700,7 +3700,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/mitarbeiter-in-disposition-und-empfang/b70ec325-68ca-4d5d-bfef-9ea2ee2d5ede",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.127Z",
+      "crawledAt": "2026-08-28T21:46:41.833Z",
       "addressLocality": "Sonnenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3740,7 +3740,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:22:32.127Z"
+      "firstSeenAt": "2026-08-28T21:46:41.833Z"
     },
     {
       "id": "lindenhofgruppe-2331fc83a35c",
@@ -3773,7 +3773,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-pflegefachfrau-mann-mit-fachverantwortung-berufsbildung/2edea35a-c9b7-4e5c-bb20-a2ba89d3642a",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.120Z",
+      "crawledAt": "2026-08-28T21:46:41.831Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3813,7 +3813,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:22:32.120Z"
+      "firstSeenAt": "2026-08-28T21:46:41.831Z"
     },
     {
       "id": "lindenhofgruppe-04592278e2b8",
@@ -3846,7 +3846,7 @@
       "url": "https://karriere.lindenhofgruppe.ch/offene-stellen/dipl-expertin-dipl-experte-notfallpflege/94065847-facb-43fc-8c62-748debe66cd2",
       "source": "Lindenhofgruppe Dedicated Parser (Prospective API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:32.091Z",
+      "crawledAt": "2026-08-28T21:46:41.807Z",
       "addressLocality": "Lindenhofspital",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3878,7 +3878,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:22:32.091Z"
+      "firstSeenAt": "2026-08-28T21:46:41.807Z"
     }
   ]
 }
