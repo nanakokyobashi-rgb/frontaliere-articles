@@ -1,0 +1,1310 @@
+{
+  "crawlerKey": "michaelpage",
+  "assembledAt": "2026-08-28T05:37:08.247Z",
+  "jobs": [
+    {
+      "id": "michaelpage-68e5dff578d0",
+      "slug": "associate-energy-infrastructure-and-natural-resources-michael-page-lugano",
+      "slugByLocale": {
+        "en": "associate-energy-infrastructure-and-natural-resources-michaelpage-ch",
+        "it": "associate-energy-infrastructure-and-natural-resources-michael-page-lugano",
+        "de": "associate-energy-infrastructure-and-natural-resources-michael-page-lugano",
+        "fr": "associe-energie-infrastructure-et-ressources-naturelles-michael-page-lugano"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Associate, Energy, Infrastructure and Natural Resources",
+      "titleByLocale": {
+        "en": "Associate, Energy, Infrastructure and Natural Resources",
+        "it": "Associati, energia, infrastrutture e risorse naturali",
+        "de": "Partner, Energie, Infrastruktur und natürliche Ressourcen",
+        "fr": "Associé, Énergie, Infrastructure et Ressources naturelles"
+      },
+      "description": "Associate, Energy, Infrastructure and Natural Resources — Michael Page",
+      "descriptionByLocale": {
+        "en": "Associate, Energy, Infrastructure and Natural Resources — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/associate-energy-infrastructure-and-natural-resources/ref/jn-082026-7088309",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T05:37:05.661Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/associate-energy-infrastructure-and-natural-resources/ref/jn-082026-7088309",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:05.661Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "associate-energy-infrastructure-and-natural-resources-michaelpage-ch",
+          "associati-energia-infrastrutture-e-risorse-naturali-michael-page-lugano",
+          "associate-energy-infrastructure-and-natural-resources-michael-page-lugano"
+        ],
+        "de": [
+          "partner-energie-infrastruktur-und-naturliche-ressourcen-michael-page-lugano"
+        ],
+        "fr": [
+          "associe-energie-infrastructure-et-ressources-naturelles-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "associate-energy-infrastructure-and-natural-resources-michaelpage-ch",
+        "associati-energia-infrastrutture-e-risorse-naturali-michael-page-lugano",
+        "partner-energie-infrastruktur-und-naturliche-ressourcen-michael-page-lugano",
+        "associate-energy-infrastructure-and-natural-resources-michael-page-lugano",
+        "associe-energie-infrastructure-et-ressources-naturelles-michael-page-lugano"
+      ],
+      "retranslationAttempts": 2
+    },
+    {
+      "id": "michaelpage-ba003a0d255a",
+      "slug": "regional-finanza-direttore-manufacturing-houston-michael-page-lugano",
+      "slugByLocale": {
+        "fr": "regional-finance-director-manufacturing-houston-michaelpage-ch",
+        "it": "regional-finanza-direttore-manufacturing-houston-michael-page-lugano",
+        "de": "regional-finanzen-direktor-manufacturing-houston-michael-page-lugano",
+        "en": "regional-finanza-direttore-manufacturing-houston-michael-page-lugano"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Regional Finance Director - Manufacturing - Houston",
+      "titleByLocale": {
+        "fr": "Regional Finance Director - Manufacturing - Houston",
+        "it": "Regional Finanza Direttore - Manufacturing - Houston",
+        "en": "Regional Finance Director - Manufacturing - Houston",
+        "de": "Regional Finanzen Direktor - Manufacturing - Houston"
+      },
+      "description": "Regional Finance Director - Manufacturing - Houston — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Regional Finance Director - Manufacturing - Houston — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/regional-finance-director-manufacturing-houston/ref/jn-082026-7077383",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T05:37:05.359Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/regional-finance-director-manufacturing-houston/ref/jn-082026-7077383",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "regional-finance-director-manufacturing-houston-michaelpage-ch",
+          "regional-finanza-direttore-manufacturing-houston-michael-page-lugano"
+        ],
+        "de": [
+          "regional-finanzen-direktor-manufacturing-houston-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "regional-finance-director-manufacturing-houston-michaelpage-ch",
+        "regional-finanza-direttore-manufacturing-houston-michael-page-lugano",
+        "regional-finanzen-direktor-manufacturing-houston-michael-page-lugano"
+      ],
+      "needsRetranslation": true,
+      "salaryMin": 98000,
+      "salaryMax": 132000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 98000,
+          "maxValue": 132000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:05.359Z"
+    },
+    {
+      "id": "michaelpage-07835af1bcc4",
+      "slug": "finance-manager-us-manufacturing-houston-tx-michaelpage-ch",
+      "slugByLocale": {
+        "en": "finance-manager-us-manufacturing-houston-tx-michaelpage-ch",
+        "de": "finance-manager-us-manufacturing-houston-tx-michaelpage-ch",
+        "it": "finance-manager-us-manufacturing-houston-tx-michaelpage-ch",
+        "fr": "finance-manager-us-manufacturing-houston-tx-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Finance Manager (US) - Manufacturing - Houston, TX",
+      "titleByLocale": {
+        "en": "Finance Manager (US) - Manufacturing - Houston, TX",
+        "de": "Finanzen Manager (US) - Manufacturing - Houston, TX",
+        "it": "Finanza Manager (US) - Manufacturing - Houston, TX",
+        "fr": "Finance Manager (US) - Manufacturing - Houston, TX"
+      },
+      "description": "Finance Manager (US) - Manufacturing - Houston, TX — Michael Page",
+      "descriptionByLocale": {
+        "en": "Finance Manager (US) - Manufacturing - Houston, TX — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/finance-manager-us-manufacturing-houston-tx/ref/jn-072026-7062467",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:05.057Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/finance-manager-us-manufacturing-houston-tx/ref/jn-072026-7062467",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 98000,
+      "salaryMax": 132000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 98000,
+          "maxValue": 132000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:05.057Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "gestionnaire-des-finances-e-u-fabrication-houston-tx-michael-page-lugano",
+          "finanza-manager-us-manufacturing-houston-tx-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "gestionnaire-des-finances-e-u-fabrication-houston-tx-michael-page-lugano",
+        "finanza-manager-us-manufacturing-houston-tx-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-5fde2633e62a",
+      "slug": "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano",
+      "slugByLocale": {
+        "fr": "director-senior-legal-counsel-asset-backed-securitizations-michaelpage-ch",
+        "it": "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano",
+        "en": "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano",
+        "de": "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Director, Senior Legal Counsel - Asset-Backed Securitizations",
+      "titleByLocale": {
+        "fr": "Director, Senior Legal Counsel - Asset-Backed Securitizations",
+        "it": "Direttore, Senior Legal Counsel - Asset-Backed Securitizations",
+        "en": "Director, Senior Legal Counsel - Asset-Backed Securitizations",
+        "de": "Direktor, Senior Legal Counsel - Asset-Backed Securitizations"
+      },
+      "description": "Director, Senior Legal Counsel - Asset-Backed Securitizations — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Director, Senior Legal Counsel - Asset-Backed Securitizations — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/director-senior-counsel-esoteric-abs-tx/ref/jn-082026-7085935",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T05:37:04.755Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Legale",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/director-senior-counsel-esoteric-abs-tx/ref/jn-082026-7085935",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "director-senior-legal-counsel-asset-backed-securitizations-michaelpage-ch",
+          "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "director-senior-legal-counsel-asset-backed-securitizations-michaelpage-ch",
+        "director-senior-legal-counsel-asset-backed-securitizations-michael-page-lugano"
+      ],
+      "needsRetranslation": true,
+      "salaryMin": 87000,
+      "salaryMax": 149500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 87000,
+          "maxValue": 149500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:04.755Z"
+    },
+    {
+      "id": "michaelpage-037dcb49d8a6",
+      "slug": "head-of-marketing-business-strategy-adium-uruguay-michaelpage-ch",
+      "slugByLocale": {
+        "en": "head-of-marketing-business-strategy-adium-uruguay-michaelpage-ch",
+        "de": "head-of-marketing-business-strategy-adium-uruguay-michaelpage-ch",
+        "it": "head-of-marketing-business-strategy-adium-uruguay-michaelpage-ch",
+        "fr": "head-of-marketing-business-strategy-adium-uruguay-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Head of Marketing & Business Strategy - Adium Uruguay",
+      "titleByLocale": {
+        "en": "Head of Marketing & Business Strategy - Adium Uruguay",
+        "de": "Leiter Marketing & Business Strategy - Adium Uruguay",
+        "it": "Responsabile Marketing & Business Strategy - Adium Uruguay",
+        "fr": "Responsable Marketing & Business Strategy - Adium Uruguay"
+      },
+      "description": "Head of Marketing & Business Strategy - Adium Uruguay — Michael Page",
+      "descriptionByLocale": {
+        "en": "Head of Marketing & Business Strategy - Adium Uruguay — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/head-de-marketing-y-business-strategy-filial-uruguay-adium/ref/jn-082026-7085958",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:04.150Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Marketing",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/head-de-marketing-y-business-strategy-filial-uruguay-adium/ref/jn-082026-7085958",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 75500,
+      "salaryMax": 133000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 75500,
+          "maxValue": 133000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:04.150Z"
+    },
+    {
+      "id": "michaelpage-ee3e538d3740",
+      "slug": "senior-risorse-umane-manager-michael-page-lugano",
+      "slugByLocale": {
+        "fr": "senior-ressources-humaines-manager-michael-page-lugano",
+        "en": "senior-human-resources-manager-michael-page-lugano",
+        "de": "senior-human-resources-manager-michaelpage-ch",
+        "it": "senior-risorse-umane-manager-michael-page-lugano"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Senior Human Resources Manager",
+      "titleByLocale": {
+        "fr": "Senior Ressources Humaines Manager",
+        "en": "Senior Human Resources Manager",
+        "de": "Senior Personalwesen Manager",
+        "it": "Senior Risorse Umane Manager"
+      },
+      "description": "Senior Human Resources Manager — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Senior Human Resources Manager — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/senior-human-resources-manager/ref/jn-082026-7087617",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:03.848Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/senior-human-resources-manager/ref/jn-082026-7087617",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "senior-human-resources-manager-michaelpage-ch",
+          "senior-risorse-umane-manager-michael-page-lugano"
+        ],
+        "fr": [
+          "senior-human-resources-manager-michaelpage-ch",
+          "senior-ressources-humaines-manager-michael-page-lugano"
+        ],
+        "en": [
+          "senior-human-resources-manager-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "senior-human-resources-manager-michaelpage-ch",
+        "senior-risorse-umane-manager-michael-page-lugano",
+        "senior-human-resources-manager-michael-page-lugano",
+        "senior-ressources-humaines-manager-michael-page-lugano"
+      ],
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:03.848Z"
+    },
+    {
+      "id": "michaelpage-a5e9a61862e7",
+      "slug": "managing-director-real-estate-corporate-banking-michaelpage-ch",
+      "slugByLocale": {
+        "en": "managing-director-real-estate-corporate-banking-michaelpage-ch",
+        "it": "managing-director-real-estate-corporate-banking-michaelpage-ch",
+        "de": "managing-director-real-estate-corporate-banking-michaelpage-ch",
+        "fr": "managing-director-real-estate-corporate-banking-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Managing Director, Real Estate Corporate Banking",
+      "titleByLocale": {
+        "en": "Managing Director, Real Estate Corporate Banking",
+        "it": "Managing Direttore, Real Estate Corporate Banking",
+        "de": "Managing Direktor, Real Estate Corporate Banking",
+        "fr": "Managing Directeur, Real Estate Corporate Banking"
+      },
+      "description": "Managing Director, Real Estate Corporate Banking — Michael Page",
+      "descriptionByLocale": {
+        "en": "Managing Director, Real Estate Corporate Banking — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/managing-director-real-estate-corporate-banking/ref/jn-082026-7091139",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T05:37:03.546Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/managing-director-real-estate-corporate-banking/ref/jn-082026-7091139",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:03.546Z"
+    },
+    {
+      "id": "michaelpage-d0f54d4a8718",
+      "slug": "diretore-geral-unidade-de-negocio-michael-page-lugano",
+      "slugByLocale": {
+        "it": "diretore-geral-unidade-de-negocio-michael-page-lugano",
+        "en": "diretor-geral-unidade-de-negocio-michael-page-lugano",
+        "de": "diretor-geral-unidade-de-negocio-michaelpage-ch",
+        "fr": "diretor-geral-unidade-de-negocio-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Diretor Geral - Unidade de Negócio",
+      "titleByLocale": {
+        "it": "Diretore Geral — Unidade de Negócio",
+        "en": "Diretor Geral — Unidade de Negócio",
+        "de": "Diretor Geral - Unidade de Negócio",
+        "fr": "Diretor Geral - Unidade de Negócio"
+      },
+      "description": "Diretor Geral - Unidade de Negócio — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Diretor Geral - Unidade de Negócio — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/diretor-geral-unidade-de-neg%C3%B3cio/ref/jn-042026-7001533",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:03.244Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-23",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/diretor-geral-unidade-de-neg%C3%B3cio/ref/jn-042026-7001533",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "previousSlugs": [
+        "diretor-geral-unidade-de-negocio-michaelpage-ch",
+        "diretore-geral-unidade-de-negocio-michael-page-lugano"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "diretor-geral-unidade-de-negocio-michaelpage-ch",
+          "diretore-geral-unidade-de-negocio-michael-page-lugano"
+        ],
+        "en": [
+          "diretor-geral-unidade-de-negocio-michaelpage-ch"
+        ]
+      },
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-23T09:40:12.248Z",
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "michaelpage-03bdc40e6afc",
+      "slug": "senior-knowledge-management-attorney-private-funds-michaelpage-ch",
+      "slugByLocale": {
+        "de": "senior-knowledge-management-attorney-private-funds-michaelpage-ch",
+        "it": "senior-knowledge-management-attorney-private-funds-michaelpage-ch",
+        "en": "senior-knowledge-management-attorney-private-funds-michaelpage-ch",
+        "fr": "senior-knowledge-management-attorney-private-funds-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Senior Knowledge Management Attorney - Private Funds",
+      "titleByLocale": {
+        "de": "Senior Knowledge Management Attorney - Private Funds",
+        "it": "Senior Knowledge Management Attorney - Private Funds",
+        "en": "Senior Knowledge Management Attorney - Private Funds",
+        "fr": "Senior Knowledge Management Attorney - Private Funds"
+      },
+      "description": "Senior Knowledge Management Attorney - Private Funds — Michael Page",
+      "descriptionByLocale": {
+        "de": "Senior Knowledge Management Attorney - Private Funds — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/senior-knowledge-management-attorney-private-funds/ref/jn-082026-7090935",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:02.942Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/senior-knowledge-management-attorney-private-funds/ref/jn-082026-7090935",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:02.942Z"
+    },
+    {
+      "id": "michaelpage-6f47d51540e8",
+      "slug": "knowledge-management-attorney-registered-funds-michaelpage-ch",
+      "slugByLocale": {
+        "de": "knowledge-management-attorney-registered-funds-michaelpage-ch",
+        "it": "knowledge-management-attorney-registered-funds-michaelpage-ch",
+        "en": "knowledge-management-attorney-registered-funds-michaelpage-ch",
+        "fr": "knowledge-management-attorney-registered-funds-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Knowledge Management Attorney - Registered Funds",
+      "titleByLocale": {
+        "de": "Knowledge Management Attorney - Registered Funds",
+        "it": "Knowledge Management Attorney - Registered Funds",
+        "en": "Knowledge Management Attorney - Registered Funds",
+        "fr": "Knowledge Management Attorney - Registered Funds"
+      },
+      "description": "Knowledge Management Attorney - Registered Funds — Michael Page",
+      "descriptionByLocale": {
+        "de": "Knowledge Management Attorney - Registered Funds — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/knowledge-management-attorney-registered-funds/ref/jn-082026-7091112",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:02.640Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/knowledge-management-attorney-registered-funds/ref/jn-082026-7091112",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:02.640Z"
+    },
+    {
+      "id": "michaelpage-90be0c440929",
+      "slug": "diretor-de-relacoes-governamentais-industria-automotiva-michaelpage-ch",
+      "slugByLocale": {
+        "fr": "diretor-de-relacoes-governamentais-industria-automotiva-michaelpage-ch",
+        "de": "diretor-de-relacoes-governamentais-industria-automotiva-michaelpage-ch",
+        "it": "diretor-de-relacoes-governamentais-industria-automotiva-michaelpage-ch",
+        "en": "diretor-de-relacoes-governamentais-industria-automotiva-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Diretor de Relações Governamentais | Indústria Automotiva",
+      "titleByLocale": {
+        "fr": "Diretor de Relações Governamentais | Indústria Automotiva",
+        "de": "Diretor de Relações Governamentais | Indústria Automotiva",
+        "it": "Diretor de Relações Governamentais | Indústria Automotiva",
+        "en": "Diretor de Relações Governamentais | Indústria Automotiva"
+      },
+      "description": "Diretor de Relações Governamentais | Indústria Automotiva — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Diretor de Relações Governamentais | Indústria Automotiva — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/diretor-de-rela%C3%A7%C3%B5es-governamentais/ref/jn-082026-7084101",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:02.338Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/diretor-de-rela%C3%A7%C3%B5es-governamentais/ref/jn-082026-7084101",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:02.338Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "diretor-de-relacoes-governmentais-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "diretor-de-relacoes-governmentais-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-ca5a0927bf47",
+      "slug": "senior-manager-commercial-finance-fp-a-norwood-ma-michaelpage-ch",
+      "slugByLocale": {
+        "fr": "senior-manager-commercial-finance-fp-a-norwood-ma-michaelpage-ch",
+        "en": "senior-manager-commercial-finance-fp-a-norwood-ma-michael-page-lugano",
+        "de": "senior-manager-commercial-finance-fp-a-norwood-ma-michaelpage-ch",
+        "it": "senior-manager-commercial-finance-fp-a-norwood-ma-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Senior Manager - Commercial Finance & FP&A - Norwood, MA",
+      "titleByLocale": {
+        "fr": "Senior Manager - Commercial Finance & FP&A - Norwood, MA",
+        "en": "Senior Manager - Commercial Finance & FP&A - Norwood, MA",
+        "de": "Senior Manager - Commercial Finanzen & FP&A - Norwood, MA",
+        "it": "Senior Manager - Commercial Finanza & FP&A - Norwood, MA"
+      },
+      "description": "Senior Manager - Commercial Finance & FP&A - Norwood, MA — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Senior Manager - Commercial Finance & FP&A - Norwood, MA — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/senior-manager-commercial-finance-fpa-norwood-ma/ref/jn-082026-7090273",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:02.035Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Finanza",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/senior-manager-commercial-finance-fpa-norwood-ma/ref/jn-082026-7090273",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 142000,
+      "salaryMax": 249500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 142000,
+          "maxValue": 249500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:02.035Z",
+      "previousSlugsByLocale": {
+        "en": [
+          "senior-manager-commercial-finance-fp-a-norwood-ma-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "senior-manager-commercial-finance-fp-a-norwood-ma-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-f5bff3e2268e",
+      "slug": "vice-president-global-strategic-sourcing-chemicals-michaelpage-ch",
+      "slugByLocale": {
+        "fr": "vice-president-global-strategic-sourcing-chemicals-michaelpage-ch",
+        "de": "vice-president-global-strategic-sourcing-chemicals-michaelpage-ch",
+        "it": "vice-president-global-strategic-sourcing-chemicals-michaelpage-ch",
+        "en": "vice-president-global-strategic-sourcing-chemicals-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Vice President Global Strategic Sourcing (Chemicals)",
+      "titleByLocale": {
+        "fr": "Vice President Global Strategic Sourcing (Chemicals)",
+        "de": "Vice President Global Strategic Sourcing (Chemicals)",
+        "it": "Vice President Global Strategic Sourcing (Chemicals)",
+        "en": "Vice President Global Strategic Sourcing (Chemicals)"
+      },
+      "description": "Vice President Global Strategic Sourcing (Chemicals) — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Vice President Global Strategic Sourcing (Chemicals) — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/vice-president-global-strategic-sourcing-chemicals/ref/jn-022026-6936290",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:01.733Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/vice-president-global-strategic-sourcing-chemicals/ref/jn-022026-6936290",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:01.733Z"
+    },
+    {
+      "id": "michaelpage-652236dd8c8f",
+      "slug": "business-development-director-industrial-north-america-michaelpage-ch",
+      "slugByLocale": {
+        "fr": "business-development-director-industrial-north-america-michaelpage-ch",
+        "de": "business-development-director-industrial-north-america-michaelpage-ch",
+        "it": "business-development-director-industrial-north-america-michaelpage-ch",
+        "en": "business-development-director-industrial-north-america-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Business Development Director Industrial - North America",
+      "titleByLocale": {
+        "fr": "Business Development Director Industrial - North America",
+        "de": "Business Development Direktor Industrial - North America",
+        "it": "Business Development Direttore Industrial - North America",
+        "en": "Business Development Director Industrial - North America"
+      },
+      "description": "Business Development Director Industrial - North America — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Business Development Director Industrial - North America — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/business-development-director-industrial-north-america/ref/jn-062026-7040890",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:01.128Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "IT",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/business-development-director-industrial-north-america/ref/jn-062026-7040890",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 79500,
+      "salaryMax": 135000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 79500,
+          "maxValue": 135000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:01.128Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "directeur-du-developpement-des-affaires-industriel-amerique-du-nord-michael-page-lugano",
+          "business-development-director-industrial-north-america-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "directeur-du-developpement-des-affaires-industriel-amerique-du-nord-michael-page-lugano",
+        "business-development-director-industrial-north-america-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-18a61138576f",
+      "slug": "diretor-de-manutencao-e-operacoes-tecnicas-america-latina-michaelpage-ch",
+      "slugByLocale": {
+        "fr": "diretor-de-manutencao-e-operacoes-tecnicas-america-latina-michaelpage-ch",
+        "it": "diretor-de-manutencao-e-operacoes-tecnicas-america-latina-michaelpage-ch",
+        "en": "diretor-de-manutencao-e-operacoes-tecnicas-america-latina-michaelpage-ch",
+        "de": "diretor-de-manutencao-e-operacoes-tecnicas-america-latina-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Diretor de Manutenção e Operações Técnicas - América Latina",
+      "titleByLocale": {
+        "fr": "Diretor de Manutenção e Operações Técnicas - América Latina",
+        "it": "Diretor de Manutenção e Operações Técnicas - América Latina",
+        "en": "Diretor de Manutenção e Operações Técnicas - América Latina",
+        "de": "Diretor de Manutenção e Operações Técnicas - América Latina"
+      },
+      "description": "Diretor de Manutenção e Operações Técnicas - América Latina — Michael Page",
+      "descriptionByLocale": {
+        "fr": "Diretor de Manutenção e Operações Técnicas - América Latina — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/diretor-de-manuten%C3%A7%C3%A3o-e-opera%C3%A7%C3%B5es-t%C3%A9cnicas-am%C3%A9rica-latina/ref/jn-072026-7054376",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T05:37:00.825Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/diretor-de-manuten%C3%A7%C3%A3o-e-opera%C3%A7%C3%B5es-t%C3%A9cnicas-am%C3%A9rica-latina/ref/jn-072026-7054376",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:00.825Z"
+    },
+    {
+      "id": "michaelpage-3c48fdc2eadb",
+      "slug": "vice-president-hr-north-america-michaelpage-ch",
+      "slugByLocale": {
+        "en": "vice-president-hr-north-america-michaelpage-ch",
+        "de": "vice-president-hr-north-america-michael-page-lugano",
+        "it": "vice-president-hr-north-america-michaelpage-ch",
+        "fr": "vice-president-hr-north-america-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Vice President HR - North America",
+      "titleByLocale": {
+        "en": "Vice President HR - North America",
+        "de": "Vice President HR - North America",
+        "it": "Vice President Risorse Umane - North America",
+        "fr": "Vice President Ressources Humaines - North America"
+      },
+      "description": "Vice President HR - North America — Michael Page",
+      "descriptionByLocale": {
+        "en": "Vice President HR - North America — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/vice-president-hr-north-america/ref/jn-062026-7043980",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:00.522Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/vice-president-hr-north-america/ref/jn-062026-7043980",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:00.522Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "vice-president-risorse-umane-north-america-michael-page-lugano"
+        ],
+        "de": [
+          "vice-president-hr-north-america-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "vice-president-risorse-umane-north-america-michael-page-lugano",
+        "vice-president-hr-north-america-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-152aa4f682be",
+      "slug": "business-unit-vice-president-americas-chemicals-michaelpage-ch",
+      "slugByLocale": {
+        "it": "business-unit-vice-president-americas-chemicals-michaelpage-ch",
+        "de": "business-unit-vice-president-americas-chemicals-michaelpage-ch",
+        "en": "business-unit-vice-president-americas-chemicals-michaelpage-ch",
+        "fr": "business-unit-vice-president-americas-chemicals-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Business Unit Vice President - Americas - Chemicals",
+      "titleByLocale": {
+        "it": "Business Unit Vice President - Americas - Chemicals",
+        "de": "Business Unit Vice President - Americas - Chemicals",
+        "en": "Business Unit Vice President - Americas - Chemicals",
+        "fr": "Business Unit Vice President - Americas - Chemicals"
+      },
+      "description": "Business Unit Vice President - Americas - Chemicals — Michael Page",
+      "descriptionByLocale": {
+        "it": "Business Unit Vice President - Americas - Chemicals — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/business-unit-vice-president-americas-chemicals/ref/jn-062026-7048915",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T05:37:00.214Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/business-unit-vice-president-americas-chemicals/ref/jn-062026-7048915",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:37:00.214Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "vice-president-ameriques-produits-chimiques-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "vice-president-ameriques-produits-chimiques-michael-page-lugano"
+      ]
+    },
+    {
+      "id": "michaelpage-fbd3c969e0e1",
+      "slug": "managing-director-south-america-multinacional-michaelpage-ch",
+      "slugByLocale": {
+        "en": "managing-director-south-america-multinacional-michaelpage-ch",
+        "it": "managing-director-south-america-multinacional-michaelpage-ch",
+        "de": "managing-director-south-america-multinacional-michaelpage-ch",
+        "fr": "managing-director-south-america-multinacional-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Managing Director - South America, Multinacional",
+      "titleByLocale": {
+        "en": "Managing Director - South America, Multinacional",
+        "it": "Managing Direttore - South America, Multinacional",
+        "de": "Managing Direktor - South America, Multinacional",
+        "fr": "Managing Directeur - South America, Multinacional"
+      },
+      "description": "Managing Director - South America, Multinacional — Michael Page",
+      "descriptionByLocale": {
+        "en": "Managing Director - South America, Multinacional — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/managing-director-south-america/ref/jn-072026-7055192",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T05:36:59.910Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/managing-director-south-america/ref/jn-072026-7055192",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:36:59.910Z"
+    },
+    {
+      "id": "michaelpage-f7cdbe0a80d1",
+      "slug": "divisional-controller-americas-michael-page-lugano",
+      "slugByLocale": {
+        "en": "divisional-controller-americas-michaelpage-ch",
+        "it": "divisional-controller-americas-michael-page-lugano",
+        "de": "divisional-controller-americas-michaelpage-ch",
+        "fr": "divisional-controller-americas-michaelpage-ch"
+      },
+      "company": "Michael Page",
+      "companyKey": "michaelpage",
+      "companyDomain": "pageexecutive.com",
+      "title": "Divisional Controller - Americas",
+      "titleByLocale": {
+        "en": "Divisional Controller - Americas",
+        "it": "Divisional Controller - Americas",
+        "de": "Divisional Controller - Amerika",
+        "fr": "Contrôleur divisionnaire - Amériques"
+      },
+      "description": "Divisional Controller - Americas — Michael Page",
+      "descriptionByLocale": {
+        "en": "Divisional Controller - Americas — Michael Page"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.pageexecutive.com/job-detail/divisional-controller-americas/ref/jn-072026-7066374",
+      "source": "Michael Page Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-28T05:36:59.591Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.pageexecutive.com/job-detail/divisional-controller-americas/ref/jn-072026-7066374",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "divisional-controller-americas-michaelpage-ch",
+          "divisional-controller-amerika-michael-page-lugano",
+          "controleur-divisionnaire-ameriques-michael-page-lugano",
+          "divisional-controller-americas-michael-page-lugano"
+        ]
+      },
+      "previousSlugs": [
+        "divisional-controller-americas-michaelpage-ch",
+        "divisional-controller-amerika-michael-page-lugano",
+        "controleur-divisionnaire-ameriques-michael-page-lugano",
+        "divisional-controller-americas-michael-page-lugano"
+      ],
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:36:59.591Z"
+    }
+  ]
+}

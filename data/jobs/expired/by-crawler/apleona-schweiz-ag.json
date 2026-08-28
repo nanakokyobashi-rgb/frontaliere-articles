@@ -1,0 +1,71 @@
+[
+  {
+    "slug": "lehrstelle-als-kauffrau-kaufmann-efz-dienstleistung-administration-per-1-august-2027",
+    "title": "Lehrstelle als Kauffrau / Kaufmann EFZ, Dienstleistung & Administration per 1. August 2027",
+    "titleByLocale": {
+      "it": "Apprendistato come Kauffrau / Kaufmann CFC, Dienstleistung & Administration per 1. August 2027",
+      "en": "Lehrstelle als Kauffrau / Kaufmann EFZ, Dienstleistung & Administration per 1. August 2027",
+      "de": "Lehrstelle als Kauffrau / Kaufmann EFZ, Dienstleistung & Administration per 1. August 2027",
+      "fr": "Lehrstelle als Kauffrau / Kaufmann EFZ, Dienstleistung & Administration per 1. August 2027"
+    },
+    "company": "Apleona Schweiz AG",
+    "companyKey": "apleona-schweiz-ag",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "it": "Lehrstelle als Kauffrau / Kaufmann EFZ, Dienstleistung & Administration per 1. August 2027 — Apleona Schweiz AG"
+    },
+    "slugByLocale": {
+      "it": "lehrstelle-als-kauffrau-kaufmann-efz-dienstleistung-administration-per-1-august-2027",
+      "en": "lehrstelle-als-kauffrau-kaufmann-efz-dienstleistung-administration-per-1-august-2027",
+      "de": "lehrstelle-als-kauffrau-kaufmann-efz-dienstleistung-administration-per-1-august-2027",
+      "fr": "lehrstelle-als-kauffrau-kaufmann-efz-dienstleistung-administration-per-1-august-2027"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:31:46.793Z",
+    "salaryMin": 41600,
+    "salaryMax": 63000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-dienstleistung-administration-per-1-august-2027-apleona-schweiz-ag-lugano",
+    "title": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027",
+    "titleByLocale": {
+      "it": "Apprendistato come Kauffrau / Kaufmann CFC, specializzazione Dienstleistung & Administration per 1. August 2027",
+      "en": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027",
+      "de": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027",
+      "fr": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027"
+    },
+    "company": "Apleona Schweiz AG",
+    "companyKey": "apleona-schweiz-ag",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "it": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027 — Apleona Schweiz AG",
+      "en": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027 — Apleona Schweiz AG",
+      "de": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027 — Apleona Schweiz AG",
+      "fr": "Lehrstelle als Kauffrau / Kaufmann EFZ, Fachrichtung Dienstleistung & Administration per 1. August 2027 — Apleona Schweiz AG"
+    },
+    "slugByLocale": {
+      "it": "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-dienstleistung-administration-per-1-august-2027-apleona-schweiz-ag-lugano",
+      "en": "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1",
+      "de": "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1",
+      "fr": "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-28T05:31:46.793Z",
+    "previousSlugs": [
+      "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
+      ]
+    },
+    "salaryMin": 41600,
+    "salaryMax": 63000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  }
+]
