@@ -1,0 +1,774 @@
+{
+  "crawlerKey": "caritas-schweiz",
+  "assembledAt": "2026-08-28T21:01:05.561Z",
+  "jobs": [
+    {
+      "id": "caritas-schweiz-49ee9e1a4c3f",
+      "slug": "lavoratori-sociali-in-fh-60-caritas-schweiz-aarau",
+      "slugByLocale": {
+        "it": "lavoratori-sociali-in-fh-60-caritas-schweiz-aarau",
+        "en": "social-worker-in-fh-60-caritas-schweiz-aarau",
+        "de": "sozialarbeiter-in-fh-60-caritas-schweiz-aarau",
+        "fr": "travailleurs-sociaux-en-fh-60-caritas-schweiz-aarau"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Sozialarbeiter*in FH 60%",
+      "titleByLocale": {
+        "it": "Lavoratori sociali* in FH 60 %",
+        "en": "Social worker* in FH 60 %",
+        "de": "Sozialarbeiter*in FH 60%",
+        "fr": "Travailleurs sociaux* en FH 60 %"
+      },
+      "description": "• Wir helfen Menschen. Caritas Aargau ist ein Hilfswerk mit vielfältigen Aufgaben im ganzen Kanton.\n\nSozialarbeiter*in FH 60%\n\nFür den Bereich Sozialdienst Integration & Migration suchen wir per 01.11.2026 oder nach Vereinbarung eine*n engagierte*n Sozialarbeiter*in.\n\nIhre Aufgaben\n\nIm Auftrag von Gemeinden beraten und begleiten Sie anerkannte und vorläufig aufgenommene Flüchtlinge im Rahmen der wirtschaftlichen Sozialhilfe und ihres Integrationsprozesses. Grundlage bilden die kantonalen Vorgaben sowie die Integrationsagenda.\n\nDazu gehört insbesondere\n\n• Die monatliche Berechnung Ausrichtung wirtschaftlicher Sozialhilfe nach kantonalen Richtlinien\n• Psychosoziale Beratung\n• Beratung und Begleitung von Massnahmen zur sprachlichen, schulischen, beruflichen und sozialen Integration, insbesondere im Rahmen der Integrationsagenda\n• Zusammenarbeit mit den Gemeinden und anderen involvierten Fachstellen\n• Vermittlung, Information und Triage in den Bereichen Familie, Wohnen, Gesundheit, Versicherungen, Finanzen, Ausbildung und Arbeit\n• Information und Orientierung zum sozialen und politischen System der Schweiz",
+      "descriptionByLocale": {
+        "it": "• Aiutiamo le persone. Caritas Aargau è una carità con una vasta gamma di compiti in tutto il cantone.\n\nLavoratori sociali* in FH 60 %\n\nPer il servizio sociale Integrazione e migrazione cerchiamo un lavoratore sociale impegnato a partire dal 01.11.2026 o d'accordo.\n\nI loro compiti\n\nA nome dei comuni, consiglia e accompagna i rifugiati riconosciuti e provvisoriamente accettati nel contesto dell'assistenza sociale economica e del loro processo di integrazione. La base è gli orientamenti cantonali e l'agenda di integrazione.\n\nQuesto include in particolare:\n\n• Il calcolo mensile dell'orientamento dell'assistenza sociale economica secondo gli orientamenti cantonali\n• Consulenza psicosociale\n• Adozione da parte del Parlamento europeo in data 24 aprile.\n• Cooperazione con i comuni e gli altri organismi specializzati coinvolti\n• Luogo, informazione e triage nei settori della famiglia, dell'alloggio, della salute, dell'assicurazione, della finanza, dell'istruzione e del lavoro\n• Informazione e orientamento sul sistema sociale e politico in Svizzera",
+        "en": "• We help people. Caritas Aargau is a charity with a wide range of tasks throughout the canton.\n\nSocial worker* in FH 60 %\n\nFor the social service Integration & Migration we are looking for a committed social worker as of 01.11.2026 or by agreement.\n\nTheir tasks\n\nOn behalf of municipalities, you advise and accompany recognised and provisionally accepted refugees in the context of economic social assistance and their integration process. The basis is the cantonal guidelines and the integration agenda.\n\nThis includes in particular:\n\n• The monthly calculation of the orientation of economic social assistance according to cantonal guidelines\n• Psychosocial counselling\n• Advising and accompanying measures for linguistic, educational, vocational and social integration, in particular in the context of the integration agenda\n• Cooperation with municipalities and other specialist bodies involved\n• Placement, information and triage in the fields of family, housing, health, insurance, finance, education and work\n• Information and orientation on the social and political system in Switzerland",
+        "de": "• Wir helfen Menschen. Caritas Aargau ist ein Hilfswerk mit vielfältigen Aufgaben im ganzen Kanton.\n\nSozialarbeiter*in FH 60%\n\nFür den Bereich Sozialdienst Integration & Migration suchen wir per 01.11.2026 oder nach Vereinbarung eine*n engagierte*n Sozialarbeiter*in.\n\nIhre Aufgaben\n\nIm Auftrag von Gemeinden beraten und begleiten Sie anerkannte und vorläufig aufgenommene Flüchtlinge im Rahmen der wirtschaftlichen Sozialhilfe und ihres Integrationsprozesses. Grundlage bilden die kantonalen Vorgaben sowie die Integrationsagenda.\n\nDazu gehört insbesondere\n\n• Die monatliche Berechnung Ausrichtung wirtschaftlicher Sozialhilfe nach kantonalen Richtlinien\n• Psychosoziale Beratung\n• Beratung und Begleitung von Massnahmen zur sprachlichen, schulischen, beruflichen und sozialen Integration, insbesondere im Rahmen der Integrationsagenda\n• Zusammenarbeit mit den Gemeinden und anderen involvierten Fachstellen\n• Vermittlung, Information und Triage in den Bereichen Familie, Wohnen, Gesundheit, Versicherungen, Finanzen, Ausbildung und Arbeit\n• Information und Orientierung zum sozialen und politischen System der Schweiz",
+        "fr": "• Nous aidons les gens. Caritas Aargau est une organisation caritative qui a un large éventail de tâches dans tout le canton.\n\nTravailleurs sociaux* en FH 60 %\n\nPour le service social Intégration & Migration, nous recherchons un travailleur social engagé au 01.11.2026 ou par accord.\n\nLeurs tâches\n\nAu nom des municipalités, vous conseillez et accompagnez les réfugiés reconnus et provisoirement acceptés dans le cadre de l'assistance sociale économique et de leur processus d'intégration. La base est les orientations cantonales et le programme d'intégration.\n\nCela comprend notamment:\n\n• Calcul mensuel de l'orientation de l'aide sociale économique selon les orientations cantonales\n• Conseil psychosocial\n• Conseil et mesures d'accompagnement pour l'intégration linguistique, éducative, professionnelle et sociale, en particulier dans le cadre du programme d'intégration\n• Coopération avec les municipalités et les autres organismes spécialisés concernés\n• Placement, information et triage dans les domaines de la famille, du logement, de la santé, de l'assurance, des finances, de l'éducation et du travail\n• Information et orientation sur le système social et politique en Suisse"
+      },
+      "needsRetranslation": true,
+      "location": "Aarau",
+      "canton": "AG",
+      "url": "https://apply.refline.ch/126757/2350/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:01:02.514Z",
+      "addressLocality": "Aarau",
+      "addressRegion": "AG",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-21",
+      "applyUrl": "https://apply.refline.ch/126757/2350/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 60,
+      "pensumMax": 60,
+      "pensum": "60%",
+      "previousSlugs": [
+        "sozialarbeiter-in-fh-60-caritas-schweiz-aarau",
+        "lavoratori-sociali-in-fh-60-caritas-schweiz-aarau"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "sozialarbeiter-in-fh-60-caritas-schweiz-aarau",
+          "lavoratori-sociali-in-fh-60-caritas-schweiz-aarau"
+        ],
+        "en": [
+          "sozialarbeiter-in-fh-60-caritas-schweiz-aarau"
+        ],
+        "fr": [
+          "sozialarbeiter-in-fh-60-caritas-schweiz-aarau"
+        ]
+      },
+      "firstSeenAt": "2026-08-21T09:50:16.855Z",
+      "salaryMin": 31500,
+      "salaryMax": 57900,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 31500,
+          "maxValue": 57900,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-a1a16ef177d5",
+      "slug": "conseiller-et-charge-du-pool-d-interpretes-80-h-f-d-caritas-schweiz-fribourg",
+      "slugByLocale": {
+        "it": "conseiller-et-charge-du-pool-d-interpretes-80-h-f-d-caritas-schweiz-fribourg",
+        "en": "conseiller-et-charge-du-pool-d-interpretes-80-h-f-d-caritas-schweiz-fribourg",
+        "de": "conseiller-et-charge-du-pool-d-interpretes-80-h-f-d-caritas-schweiz-fribourg",
+        "fr": "conseiller-et-charge-du-pool-d-interpretes-80-h-f-d-caritas-schweiz-fribourg"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Conseiller et chargé du pool d'interprètes 80% (h/f/d)",
+      "titleByLocale": {
+        "it": "Conseiller et chargé du pool d'interprètes 80% (f/m/d)",
+        "en": "Conseiller et chargé du pool d'interprètes 80% (h/f/d)",
+        "de": "Conseiller et chargé du pool d'interprètes 80% (h/f/d)",
+        "fr": "Conseiller et chargé du pool d'interprètes 80% (h/f/d)"
+      },
+      "description": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nConseiller et chargé du pool d'interprètes 80% (h/f/d)\n\nPartie intégrante du département Migration et Intégration Suisse romande, se comprendre est le service d’interprétariat communautaire de Caritas Suisse : professionnel, accessible et engagé. Nous créons les conditions d’une communication fiable et respectueuse entre les personnes migrantes et les institutions. En garantissant un accès équitable à l’information et en facilitant la compréhension mutuelle, nous contribuons chaque jour à l’équité et à la cohésion sociale. Nous sommes actifs dans les cantons de Fribourg, du Jura et dans la partie francophone du canton de Berne. Notre équipe est composé d'une unité de coordination et de plus de 150 interprètes/médiateurs-trices interculturel-le-s. Nous recherchons une personne dynamique pour piloter le développement stratégique et assurer le suivi opérationnel et humain de notre pool d’interprètes.\n\nVos tâches\n\n• Coordonner et développer le pool d’interprètes selon les besoins et les orientations du service\n• Recruter et intégrer les nouveaux·elles interprètes\n• Être l’interlocuteur·rice de référence des interprètes et assurer la circulation des informations entre le terrain et le service\n• Assurer le suivi du personnel interprète et accompagner les différentes étapes de leur parcours\n• Veiller à la qualité des prestations et traiter les réclamations\n• Conduire et coordonner des projets stratégiques liés à l’activité des interprètes, réaliser des analyses nécessaires et formuler des recommandations\n• Formation supérieure en ressources humaines, management, psychologie du travail, sciences sociales, gestion ou domaine jugé équivalent, complétée idéalement par une formation en gestion du personnel\n• Formation ou expérience en gestion des conflits\n• 3-5 ans d’expérience dans une fonction similaire\n• Expérience en recrutement et développement du personnel\n• Autonomie, sens de l'organisation, rigueur et dynamisme\n• Compétences confirmées en communication et gestion de projet\n• Maîtrise du français et de l’allemand\n• Connaissances souhaitées de la thématique migratoire",
+      "descriptionByLocale": {
+        "it": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nConseiller et chargé du pool d'interprètes 80% (h/f/d)\n\nPartie intégrante du département Migration et Intégration Suisse romande, se comprendre est le service d’interprétariat communautaire de Caritas Suisse : professionnel, accessible et engagé. Nous créons les conditions d’une communication fiable et respectueuse entre les personnes migrantes et les institutions. En garantissant un accès équitable à l’information et en facilitant la compréhension mutuelle, nous contribuons chaque jour à l’équité et à la cohésion sociale. Nous sommes actifs dans les cantons de Fribourg, du Jura et dans la partie francophone du canton de Berne. Notre équipe est composé d'une unité de coordination et de plus de 150 interprètes/médiateurs-trices interculturel-le-s. Nous recherchons une personne dynamique pour piloter le développement stratégique et assurer le suivi opérationnel et humain de notre pool d’interprètes.\n\nVos tâches\n\n• Coordonner et développer le pool d’interprètes selon les besoins et les orientations du service\n• Recruter et intégrer les nouveaux·elles interprètes\n• Être l’interlocuteur·rice de référence des interprètes et assurer la circulation des informations entre le terrain et le service\n• Assurer le suivi du personnel interprète et accompagner les différentes étapes de leur parcours\n• Veiller à la qualité des prestations et traiter les réclamations\n• Conduire et coordonner des projets stratégiques liés à l’activité des interprètes, réaliser des analyses nécessaires et formuler des recommandations\n• Formation supérieure en ressources humaines, management, psychologie du travail, sciences sociales, gestion ou domaine jugé équivalent, complétée idéalement par une formation en gestion du personnel\n• Formation ou expérience en gestion des conflits\n• 3-5 ans d’expérience dans une fonction similaire\n• Expérience en recrutement et développement du personnel\n• Autonomie, sens de l'organisation, rigueur et dynamisme\n• Compétences confirmées en communication et gestion de projet\n• Maîtrise du français et de l’allemand\n• Connaissances souhaitées de la thématique migratoire",
+        "en": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nConseiller et chargé du pool d'interprètes 80% (h/f/d)\n\nPartie intégrante du département Migration et Intégration Suisse romande, se comprendre est le service d’interprétariat communautaire de Caritas Suisse : professionnel, accessible et engagé. Nous créons les conditions d’une communication fiable et respectueuse entre les personnes migrantes et les institutions. En garantissant un accès équitable à l’information et en facilitant la compréhension mutuelle, nous contribuons chaque jour à l’équité et à la cohésion sociale. Nous sommes actifs dans les cantons de Fribourg, du Jura et dans la partie francophone du canton de Berne. Notre équipe est composé d'une unité de coordination et de plus de 150 interprètes/médiateurs-trices interculturel-le-s. Nous recherchons une personne dynamique pour piloter le développement stratégique et assurer le suivi opérationnel et humain de notre pool d’interprètes.\n\nVos tâches\n\n• Coordonner et développer le pool d’interprètes selon les besoins et les orientations du service\n• Recruter et intégrer les nouveaux·elles interprètes\n• Être l’interlocuteur·rice de référence des interprètes et assurer la circulation des informations entre le terrain et le service\n• Assurer le suivi du personnel interprète et accompagner les différentes étapes de leur parcours\n• Veiller à la qualité des prestations et traiter les réclamations\n• Conduire et coordonner des projets stratégiques liés à l’activité des interprètes, réaliser des analyses nécessaires et formuler des recommandations\n• Formation supérieure en ressources humaines, management, psychologie du travail, sciences sociales, gestion ou domaine jugé équivalent, complétée idéalement par une formation en gestion du personnel\n• Formation ou expérience en gestion des conflits\n• 3-5 ans d’expérience dans une fonction similaire\n• Expérience en recrutement et développement du personnel\n• Autonomie, sens de l'organisation, rigueur et dynamisme\n• Compétences confirmées en communication et gestion de projet\n• Maîtrise du français et de l’allemand\n• Connaissances souhaitées de la thématique migratoire",
+        "de": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nConseiller et chargé du pool d'interprètes 80% (h/f/d)\n\nPartie intégrante du département Migration et Intégration Suisse romande, se comprendre est le service d’interprétariat communautaire de Caritas Suisse : professionnel, accessible et engagé. Nous créons les conditions d’une communication fiable et respectueuse entre les personnes migrantes et les institutions. En garantissant un accès équitable à l’information et en facilitant la compréhension mutuelle, nous contribuons chaque jour à l’équité et à la cohésion sociale. Nous sommes actifs dans les cantons de Fribourg, du Jura et dans la partie francophone du canton de Berne. Notre équipe est composé d'une unité de coordination et de plus de 150 interprètes/médiateurs-trices interculturel-le-s. Nous recherchons une personne dynamique pour piloter le développement stratégique et assurer le suivi opérationnel et humain de notre pool d’interprètes.\n\nVos tâches\n\n• Coordonner et développer le pool d’interprètes selon les besoins et les orientations du service\n• Recruter et intégrer les nouveaux·elles interprètes\n• Être l’interlocuteur·rice de référence des interprètes et assurer la circulation des informations entre le terrain et le service\n• Assurer le suivi du personnel interprète et accompagner les différentes étapes de leur parcours\n• Veiller à la qualité des prestations et traiter les réclamations\n• Conduire et coordonner des projets stratégiques liés à l’activité des interprètes, réaliser des analyses nécessaires et formuler des recommandations\n• Formation supérieure en ressources humaines, management, psychologie du travail, sciences sociales, gestion ou domaine jugé équivalent, complétée idéalement par une formation en gestion du personnel\n• Formation ou expérience en gestion des conflits\n• 3-5 ans d’expérience dans une fonction similaire\n• Expérience en recrutement et développement du personnel\n• Autonomie, sens de l'organisation, rigueur et dynamisme\n• Compétences confirmées en communication et gestion de projet\n• Maîtrise du français et de l’allemand\n• Connaissances souhaitées de la thématique migratoire",
+        "fr": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nConseiller et chargé du pool d'interprètes 80% (h/f/d)\n\nPartie intégrante du département Migration et Intégration Suisse romande, se comprendre est le service d’interprétariat communautaire de Caritas Suisse : professionnel, accessible et engagé. Nous créons les conditions d’une communication fiable et respectueuse entre les personnes migrantes et les institutions. En garantissant un accès équitable à l’information et en facilitant la compréhension mutuelle, nous contribuons chaque jour à l’équité et à la cohésion sociale. Nous sommes actifs dans les cantons de Fribourg, du Jura et dans la partie francophone du canton de Berne. Notre équipe est composé d'une unité de coordination et de plus de 150 interprètes/médiateurs-trices interculturel-le-s. Nous recherchons une personne dynamique pour piloter le développement stratégique et assurer le suivi opérationnel et humain de notre pool d’interprètes.\n\nVos tâches\n\n• Coordonner et développer le pool d’interprètes selon les besoins et les orientations du service\n• Recruter et intégrer les nouveaux·elles interprètes\n• Être l’interlocuteur·rice de référence des interprètes et assurer la circulation des informations entre le terrain et le service\n• Assurer le suivi du personnel interprète et accompagner les différentes étapes de leur parcours\n• Veiller à la qualité des prestations et traiter les réclamations\n• Conduire et coordonner des projets stratégiques liés à l’activité des interprètes, réaliser des analyses nécessaires et formuler des recommandations\n• Formation supérieure en ressources humaines, management, psychologie du travail, sciences sociales, gestion ou domaine jugé équivalent, complétée idéalement par une formation en gestion du personnel\n• Formation ou expérience en gestion des conflits\n• 3-5 ans d’expérience dans une fonction similaire\n• Expérience en recrutement et développement du personnel\n• Autonomie, sens de l'organisation, rigueur et dynamisme\n• Compétences confirmées en communication et gestion de projet\n• Maîtrise du français et de l’allemand\n• Connaissances souhaitées de la thématique migratoire"
+      },
+      "needsRetranslation": true,
+      "location": "Fribourg",
+      "canton": "FR",
+      "url": "https://apply.refline.ch/126757/2351/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:01:02.100Z",
+      "addressLocality": "Fribourg",
+      "addressRegion": "FR",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-27",
+      "applyUrl": "https://apply.refline.ch/126757/2351/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 80,
+      "pensumMax": 80,
+      "pensum": "80%",
+      "firstSeenAt": "2026-08-27T19:55:44.365Z",
+      "salaryMin": 47200,
+      "salaryMax": 86800,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 47200,
+          "maxValue": 86800,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-9be3ab9f2922",
+      "slug": "sozialpadagogische-bezugsperson-mna-80-in-zurich-uster-m-w-d-caritas-schweiz-zurich",
+      "slugByLocale": {
+        "it": "sozialpadagogische-bezugsperson-mna-80-in-zurich-uster-m-w-d-caritas-schweiz-zurich",
+        "en": "sozialpadagogische-bezugsperson-mna-80-in-zurich-uster-m-w-d-caritas-schweiz-zurich",
+        "de": "sozialpadagogische-bezugsperson-mna-80-in-zurich-uster-m-w-d-caritas-schweiz-zurich",
+        "fr": "sozialpadagogische-bezugsperson-mna-80-in-zurich-uster-m-w-d-caritas-schweiz-zurich"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Sozialpädagogische Bezugsperson MNA 80 % in Zürich-Uster (m/w/d)",
+      "titleByLocale": {
+        "it": "Sozialpädagogische Bezugsperson MNA 80 % in Zürich-Uster (m/w/d)",
+        "en": "Sozialpädagogische Bezugsperson MNA 80 % in Zürich-Uster (m/w/d)",
+        "de": "Sozialpädagogische Bezugsperson MNA 80 % in Zürich-Uster (m/w/d)",
+        "fr": "Sozialpädagogische Bezugsperson MNA 80 % in Zürich-Uster (m/w/d)"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n80% in Zürich-Uster (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Aathalstrasse in Zürich-Uster verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen in den verschiedenen Lebensbereichen (Schule, Freizeit, Gesundheit, Umgang mit Geld) mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität sowie Etablierung eines verbindlichen Rahmens für das gemeinschaftliche Zusammenleben\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft der minderjährigen Jugendlichen)\n• Budgetverantwortung gemäss der Umsetzungsrichtlinie des Kantons ZH und den Vorgaben der Caritas Schweiz, sowie erstellen der Abrechnungen\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Erfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Sehr gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+      "descriptionByLocale": {
+        "it": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n80% in Zürich-Uster (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Aathalstrasse in Zürich-Uster verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen in den verschiedenen Lebensbereichen (Schule, Freizeit, Gesundheit, Umgang mit Geld) mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität sowie Etablierung eines verbindlichen Rahmens für das gemeinschaftliche Zusammenleben\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft der minderjährigen Jugendlichen)\n• Budgetverantwortung gemäss der Umsetzungsrichtlinie des Kantons ZH und den Vorgaben der Caritas Schweiz, sowie erstellen der Abrechnungen\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Erfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Sehr gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+        "en": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n80% in Zürich-Uster (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Aathalstrasse in Zürich-Uster verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen in den verschiedenen Lebensbereichen (Schule, Freizeit, Gesundheit, Umgang mit Geld) mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität sowie Etablierung eines verbindlichen Rahmens für das gemeinschaftliche Zusammenleben\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft der minderjährigen Jugendlichen)\n• Budgetverantwortung gemäss der Umsetzungsrichtlinie des Kantons ZH und den Vorgaben der Caritas Schweiz, sowie erstellen der Abrechnungen\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Erfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Sehr gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n80% in Zürich-Uster (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Aathalstrasse in Zürich-Uster verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen in den verschiedenen Lebensbereichen (Schule, Freizeit, Gesundheit, Umgang mit Geld) mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität sowie Etablierung eines verbindlichen Rahmens für das gemeinschaftliche Zusammenleben\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft der minderjährigen Jugendlichen)\n• Budgetverantwortung gemäss der Umsetzungsrichtlinie des Kantons ZH und den Vorgaben der Caritas Schweiz, sowie erstellen der Abrechnungen\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Erfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Sehr gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+        "fr": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n80% in Zürich-Uster (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Aathalstrasse in Zürich-Uster verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen in den verschiedenen Lebensbereichen (Schule, Freizeit, Gesundheit, Umgang mit Geld) mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität sowie Etablierung eines verbindlichen Rahmens für das gemeinschaftliche Zusammenleben\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft der minderjährigen Jugendlichen)\n• Budgetverantwortung gemäss der Umsetzungsrichtlinie des Kantons ZH und den Vorgaben der Caritas Schweiz, sowie erstellen der Abrechnungen\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Erfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Sehr gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund"
+      },
+      "needsRetranslation": true,
+      "location": "Zürich",
+      "canton": "ZH",
+      "url": "https://apply.refline.ch/126757/2338/pub/4/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:01:01.685Z",
+      "addressLocality": "Zürich",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-27",
+      "applyUrl": "https://apply.refline.ch/126757/2338/pub/4/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 80,
+      "pensumMax": 80,
+      "pensum": "80%",
+      "firstSeenAt": "2026-08-27T00:41:55.297Z",
+      "salaryMin": 50400,
+      "salaryMax": 93200,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 50400,
+          "maxValue": 93200,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-d1104c038e74",
+      "slug": "centro-di-accoglienza-80-in-winterthur-temporaneo-m-f-d-caritas-schweiz-zurich",
+      "slugByLocale": {
+        "it": "centro-di-accoglienza-80-in-winterthur-temporaneo-m-f-d-caritas-schweiz-zurich",
+        "en": "assistance-asylum-center-80-in-winterthur-temporary-m-f-d-caritas-schweiz-zurich",
+        "de": "betreuung-asylzentrum-80-in-winterthur-befristet-m-w-d-caritas-schweiz-zurich",
+        "fr": "centre-d-assistance-d-asile-80-a-winterthur-temporaire-h-f-d-caritas-schweiz-zurich"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Betreuung Asylzentrum 80 % in Winterthur, befristet (m/w/d)",
+      "titleByLocale": {
+        "it": "Centro di accoglienza 80% in Winterthur, temporaneo (m/f/d)",
+        "en": "Assistance asylum center 80% in Winterthur, temporary (m/f/d)",
+        "de": "Betreuung Asylzentrum 80 % in Winterthur, befristet (m/w/d)",
+        "fr": "Centre d'assistance d'asile 80% à Winterthur, temporaire (h/f/d)"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nBetreuung Asylzentrum 80 % in Winterthur, befristet (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Seit dem 1. Januar 2026 und auf befristeter Basis eröffneten wir im Raum Winterthur ein Durchgangszentrum. Das Zentrum bietet Platz für bis zu 100 Asylsuchende. Es befindet sich in einer unterirdischen Anlage, die den aktuellen Anforderungen an Sicherheit, Infrastruktur und Schutz gerecht wird. Die Räumlichkeiten sind funktional und zweckmässig gestaltet, um eine möglichst angenehme und strukturierte Umgebung für die Bewohnenden zu schaffen.\nFür das Betreuungsteam suchen wir eine flexible und einsatzbereite Person, die bereit ist, verschiedene Schichten inklusive Tag-, Nacht und Wochenenddienste zu übernehmen.\n\nIhre Aufgaben\n\n• Begleitung und Beratung der geflüchteten Personen in verschiedenen Alltagsbelangen\n• Abwicklung von Ein- und Austritten: Bereitstellung der persönlichen Dossiers, Eintrittsmaterial sowie Entgegennahme von Material, Austrittsabrechnung\n• Mitverantwortung bei Konfliktbearbeitung und -bewältigung gemäss den Betreuungsgrundsätze\n• Einführung und Anleitung von Reinigung und Unterhalt der Wohnräume und Umsetzung der Reinigungs- und Hygienekonzepte\n• Planen, Einführen und Anleiten von Hausdienst und Ämtli\n• Mitverantwortung für die Einhaltung der Hausordnung im Zentrum und Umsetzung des Organisationshandbuch bezüglich Sicherheit und Notfall\n• Sicherstellen eines geordneten Zentrumsbetriebes und einer ruhigen Atmosphäre\n• Übernahme von zeitlich variierenden Arbeitsdiensten (inklusive Tag-, Nacht- und Wochenenddienste)\n• Abgeschlossene Ausbildung und Berufserfahrung von Vorteil in der Betreuung oder Hauswirtschaft; Erfahrung im Migrationsbereich wünschenswert\n• Gute Kenntnisse der deutschen Sprache sowie gute mündliche Kenntnisse in Englisch, weitere Fremdsprachenkenntnisse von Vorteil\n• Gute Computeranwenderkenntnisse (v.a. MS-Office und Internet)\n• Hohes Verantwortungs-, Hygiene- und Qualitätsbewusstsein\n• Eigeninitiative, Selbständigkeit und hohes Mass an Arbeitsorganisation\n• Flexibilität, Belastbarkeit und Durchsetzungsvermögen\n• Bereitschaft zeitlich variierende Arbeitsdienste zu leisten\n• Hohes Verantwortungs- und Pflichtbewusstsein\n• Einwandfreier Leumund",
+      "descriptionByLocale": {
+        "it": "• Fare la cosa giusta. In Svizzera e in circa 20 paesi su quattro continenti. Impegnarsi con noi per la visione di una società solidale, come\n\nCentro di accoglienza 80% in Winterthur, temporaneo (m/f/d)\n\nLa Caritas Svizzera opera in diverse sedi del Canton Zurigo dal marzo 2024. Dal 1 ° gennaio 2026 e su base temporanea, abbiamo aperto un centro di transito nella zona di Winterthur. Il centro offre spazio fino a 100 richiedenti asilo. Si trova in una struttura sotterranea che soddisfa i requisiti di sicurezza, infrastruttura e protezione attuali. I locali sono progettati in modo funzionale e conveniente per creare l'ambiente più piacevole e strutturato possibile per i residenti.\nPer il team di supporto, siamo alla ricerca di una persona flessibile e pronta all'uso che è disposta a intraprendere diversi turni, compresi i servizi di giorno, notte e fine settimana.\n\nI loro compiti\n\n• Accompagnamento e consulenza dei rifugiati in varie questioni quotidiane\n• Gestione delle entrate e delle uscite: fornitura di dossier personali, materiale d'ingresso e ricezione del materiale, regolamento di uscita\n• Co-responsabilità nella gestione e nella gestione dei conflitti secondo i principi della cura\n• Introduzione e orientamento della pulizia e manutenzione dei quartieri viventi e implementazione di concetti di pulizia e igiene\n• Pianificazione, introduzione e orientamento del servizio interno e Ämtli\n• Co-responsabilità per il rispetto delle regole di casa al centro e l'attuazione del manuale organizzativo per quanto riguarda la sicurezza e l'emergenza\n• Assicurare un funzionamento ordinato centro e un'atmosfera calma\n• Fornitura di servizi di lavoro a tempo libero (compresi i servizi di giorno, notte e fine settimana)\n• L'istruzione completa e l'esperienza professionale benefica nella cura o nella domesticazione; L'esperienza nella migrazione è auspicabile\n• Buona conoscenza della lingua tedesca e buona conoscenza orale in inglese, ulteriore conoscenza delle lingue straniere vantaggiose\n• Buona conoscenza dell'utente del computer (specialmente MS-Office e Internet)\n• Alto senso di responsabilità, igiene e qualità\n• Auto-iniziativa, autooccupazione e un elevato grado di organizzazione del lavoro\n• Flessibilità, resilienza e applicazione\n• Volontà di fornire servizi di lavoro a tempo pieno\n• Alto senso di responsabilità e dovere\n• Buona reputazione",
+        "en": "• Doing the right thing. In Switzerland and in around 20 countries on four continents. Engage with us for the vision of a solidarity society, as\n\nAssistance asylum center 80% in Winterthur, temporary (m/f/d)\n\nCaritas Switzerland has been operating asylum centres at various locations in the canton of Zurich since March 2024. Since January 1, 2026 and on a temporary basis, we opened a transit centre in the Winterthur area. The centre offers space for up to 100 asylum seekers. It is located in an underground facility that meets current security, infrastructure and protection requirements. The premises are functionally and conveniently designed to create the most pleasant and structured environment possible for the residents.\nFor the support team, we are looking for a flexible and ready-to-use person who is willing to take on different shifts, including day, night and weekend services.\n\nTheir tasks\n\n• Accompaniment and advice of refugees in various everyday matters\n• Handling of entries and exits: provision of personal dossiers, entry material and receipt of material, exit settlement\n• Co-responsibility in conflict management and management in accordance with the principles of care\n• Introduction and guidance of cleaning and maintenance of living quarters and implementation of cleaning and hygiene concepts\n• Planning, introduction and guidance of domestic service and Ämtli\n• Co-responsibility for compliance with the house rules in the center and implementation of the organizational manual regarding safety and emergency\n• Ensuring an orderly center operation and a calm atmosphere\n• Provision of time-varying work services (including day, night and weekend services)\n• Completed education and professional experience beneficial in care or domestication; Experience in migration is desirable\n• Good knowledge of the German language as well as good oral knowledge in English, further knowledge of foreign languages advantageous\n• Good computer user knowledge (especially MS-Office and Internet)\n• High sense of responsibility, hygiene and quality\n• Self-initiative, self-employment and a high degree of work organisation\n• Flexibility, resilience and enforcement\n• Willingness to provide time-varying work services\n• High sense of responsibility and duty\n• Good repute",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nBetreuung Asylzentrum 80 % in Winterthur, befristet (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Seit dem 1. Januar 2026 und auf befristeter Basis eröffneten wir im Raum Winterthur ein Durchgangszentrum. Das Zentrum bietet Platz für bis zu 100 Asylsuchende. Es befindet sich in einer unterirdischen Anlage, die den aktuellen Anforderungen an Sicherheit, Infrastruktur und Schutz gerecht wird. Die Räumlichkeiten sind funktional und zweckmässig gestaltet, um eine möglichst angenehme und strukturierte Umgebung für die Bewohnenden zu schaffen.\nFür das Betreuungsteam suchen wir eine flexible und einsatzbereite Person, die bereit ist, verschiedene Schichten inklusive Tag-, Nacht und Wochenenddienste zu übernehmen.\n\nIhre Aufgaben\n\n• Begleitung und Beratung der geflüchteten Personen in verschiedenen Alltagsbelangen\n• Abwicklung von Ein- und Austritten: Bereitstellung der persönlichen Dossiers, Eintrittsmaterial sowie Entgegennahme von Material, Austrittsabrechnung\n• Mitverantwortung bei Konfliktbearbeitung und -bewältigung gemäss den Betreuungsgrundsätze\n• Einführung und Anleitung von Reinigung und Unterhalt der Wohnräume und Umsetzung der Reinigungs- und Hygienekonzepte\n• Planen, Einführen und Anleiten von Hausdienst und Ämtli\n• Mitverantwortung für die Einhaltung der Hausordnung im Zentrum und Umsetzung des Organisationshandbuch bezüglich Sicherheit und Notfall\n• Sicherstellen eines geordneten Zentrumsbetriebes und einer ruhigen Atmosphäre\n• Übernahme von zeitlich variierenden Arbeitsdiensten (inklusive Tag-, Nacht- und Wochenenddienste)\n• Abgeschlossene Ausbildung und Berufserfahrung von Vorteil in der Betreuung oder Hauswirtschaft; Erfahrung im Migrationsbereich wünschenswert\n• Gute Kenntnisse der deutschen Sprache sowie gute mündliche Kenntnisse in Englisch, weitere Fremdsprachenkenntnisse von Vorteil\n• Gute Computeranwenderkenntnisse (v.a. MS-Office und Internet)\n• Hohes Verantwortungs-, Hygiene- und Qualitätsbewusstsein\n• Eigeninitiative, Selbständigkeit und hohes Mass an Arbeitsorganisation\n• Flexibilität, Belastbarkeit und Durchsetzungsvermögen\n• Bereitschaft zeitlich variierende Arbeitsdienste zu leisten\n• Hohes Verantwortungs- und Pflichtbewusstsein\n• Einwandfreier Leumund",
+        "fr": "• Faire ce qu'il faut. En Suisse et dans une vingtaine de pays sur quatre continents. Engager avec nous la vision d'une société solidaire,\n\nCentre d'assistance d'asile 80% à Winterthur, temporaire (h/f/d)\n\nCaritas Suisse exploite des centres d'asile dans différents endroits du canton de Zurich depuis mars 2024. Depuis le 1er janvier 2026 et à titre temporaire, nous avons ouvert un centre de transit dans la région de Winterthur. Le centre offre un espace pour 100 demandeurs d'asile. Il est situé dans une installation souterraine qui répond aux exigences actuelles en matière de sécurité, d'infrastructure et de protection. Les locaux sont conçus de façon fonctionnelle et pratique pour créer l'environnement le plus agréable et structuré possible pour les résidents.\nPour l'équipe de soutien, nous sommes à la recherche d'une personne flexible et prête à l'emploi qui est prête à prendre différents quarts, y compris les services de jour, de nuit et de fin de semaine.\n\nLeurs tâches\n\n• Accompagnement et conseils des réfugiés dans divers domaines quotidiens\n• Traitement des entrées et sorties: fourniture de dossiers personnels, matériel d'entrée et réception de matériel, règlement des sorties\n• Coresponsabilité en matière de gestion et de gestion des conflits conformément aux principes de soins\n• Introduction et orientation du nettoyage et de l'entretien des logements et mise en œuvre des concepts de nettoyage et d'hygiène\n• Planification, introduction et orientation des services domestiques et Ämtli\n• Coresponsabilité pour le respect des règles de la maison au centre et la mise en œuvre du manuel d'organisation en matière de sécurité et d'urgence\n• Assurer un fonctionnement ordonné du centre et une atmosphère calme\n• Prestation de services de travail à durée variable (y compris les services de jour, de nuit et de fin de semaine)\n• L'éducation et l'expérience professionnelle terminées sont bénéfiques en matière de soins ou de domestication;\n• Bonne connaissance de la langue allemande et bonne connaissance orale de l'anglais, meilleure connaissance des langues étrangères avantageuse\n• Bonne connaissance des utilisateurs d'ordinateurs (en particulier MS-Office et Internet)\n• Haut sens des responsabilités, de l'hygiène et de la qualité\n• L'initiative, le travail indépendant et un haut niveau d'organisation du travail\n• Souplesse, résilience et application\n• Volonté de fournir des services de travail variables en fonction du temps\n• Haut sens des responsabilités et du devoir\n• Bonne réputation"
+      },
+      "needsRetranslation": false,
+      "location": "Zürich",
+      "canton": "ZH",
+      "url": "https://apply.refline.ch/126757/2349/pub/2/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:01:01.268Z",
+      "addressLocality": "Zürich",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-14",
+      "applyUrl": "https://apply.refline.ch/126757/2349/pub/2/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 80,
+      "pensumMax": 80,
+      "pensum": "80%",
+      "previousSlugs": [
+        "betreuung-asylzentrum-80-in-winterthur-befristet-m-w-d-caritas-schweiz-zurich",
+        "centro-di-accoglienza-80-in-winterthur-temporaneo-m-f-d-caritas-schweiz-zurich"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "betreuung-asylzentrum-80-in-winterthur-befristet-m-w-d-caritas-schweiz-zurich",
+          "centro-di-accoglienza-80-in-winterthur-temporaneo-m-f-d-caritas-schweiz-zurich"
+        ],
+        "en": [
+          "betreuung-asylzentrum-80-in-winterthur-befristet-m-w-d-caritas-schweiz-zurich"
+        ],
+        "fr": [
+          "betreuung-asylzentrum-80-in-winterthur-befristet-m-w-d-caritas-schweiz-zurich"
+        ]
+      },
+      "firstSeenAt": "2026-08-14T10:22:40.825Z",
+      "salaryMin": 50400,
+      "salaryMax": 93200,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 50400,
+          "maxValue": 93200,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-911d556dcd18",
+      "slug": "persona-di-riferimento-pedagogico-sociale-mna-100-a-zurigo-oerlikon-m-f-d-caritas-schweiz-zurich",
+      "slugByLocale": {
+        "it": "persona-di-riferimento-pedagogico-sociale-mna-100-a-zurigo-oerlikon-m-f-d-caritas-schweiz-zurich",
+        "en": "social-pedagogical-reference-person-mna-100-in-zurich-oerlikon-m-f-d-caritas-schweiz-zurich",
+        "de": "sozialpadagogische-bezugsperson-mna-100-in-zurich-oerlikon-m-w-d-caritas-schweiz-zurich",
+        "fr": "personne-de-reference-pedagogique-sociale-mna-100-a-zurich-oerlikon-h-f-d-caritas-schweiz-zurich"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Sozialpädagogische Bezugsperson MNA 100 % in Zürich-Oerlikon (m/w/d)",
+      "titleByLocale": {
+        "it": "Persona di riferimento pedagogico sociale MNA 100% a Zurigo-Oerlikon (m/f/d)",
+        "en": "Social pedagogical reference person MNA 100% in Zurich-Oerlikon (m/f/d)",
+        "de": "Sozialpädagogische Bezugsperson MNA 100 % in Zürich-Oerlikon (m/w/d)",
+        "fr": "Personne de référence pédagogique sociale MNA 100% à Zurich-Oerlikon (h/f/d)"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n100 % in Zürich-Oerlikon (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der mehrheitlich weiblichen unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Regensbergstrasse in Zürich-Oerlikon verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen nach den Vorgaben der Förder- und Entwicklungsplanung des Kanton Zürich mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft)\n• Budgetverantwortung gemäss der Umsetzungsrichtline des Kantons Zürich und den Vorgaben der Caritas Schweiz\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Berufserfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Kenntnisse in genderspezifischer Pädagogik\n• Gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+      "descriptionByLocale": {
+        "it": "• Fare la cosa giusta. In Svizzera e in circa 20 paesi su quattro continenti. Impegnarsi con noi per la visione di una società solidale, come\n\nSocial Educational Reference Person MNA\n100% a Zurigo-Oerlikon (m/f/d)\n\nLa Caritas Svizzera opera in diverse sedi del Canton Zurigo dal marzo 2024. Come specialista e responsabile socio-educativo, lei è responsabile della cura, del sostegno e dell'integrazione dei richiedenti asilo minori per lo più femminili presso il Centro MNA sulla Regensbergstrasse di Zurigo-Oerlikon.\n\nI loro compiti\n\n• Sostegno sociale pedagogico e psicosociale e sostegno dei giovani nell'ambito del sistema delle persone di riferimento\n• Promozione dei giovani secondo le specifiche della pianificazione dello sviluppo e dello sviluppo del Cantone di Zurigo con obiettivi individuali e controlli mirati\n• Sviluppo di strutture quotidiane basate sulle esigenze e attività ricreative per e con i giovani\n• Promuovere l'autonomia, l'autooccupazione e l'integrità psicologica e sociale\n• Intervento della crisi e gestione dei conflitti\n• Coordinamento interdisciplinare attivo e pianificazione nel team (compresa la stretta collaborazione con il supporto)\n• Responsabilità di bilancio secondo le linee guida di attuazione del Cantone di Zurigo e le esigenze della Caritas Svizzera\n• Rete esterna con partner di cooperazione e organizzazioni\n• Co-responsabilità per la creazione di una buona atmosfera casa e per il rispetto delle regole della casa e della sicurezza nel centro\n• Formazione socio-pedagogica riconosciuta completa (o equivalente)\n• Esperienza professionale nella migrazione e/o lavoro giovanile auspicabile\n• Conoscenza della pedagogia di genere\n• Buona conoscenza del tedesco, ulteriore conoscenza delle lingue straniere benefico\n• Competenza interculturale\n• Volontà e flessibilità per il tempo di lavoro variabile nel tempo (lavoro di turno/settimana)\n• Alto senso di responsabilità e qualità per lavorare con giovani vulnerabili e vulnerabili\n• Iniziativa, indipendenza, lavoro di squadra e assertività\n• Alta resilienza e resilienza\n• Buona conoscenza di Microsoft Office\n• Buona reputazione",
+        "en": "• Doing the right thing. In Switzerland and in around 20 countries on four continents. Engage with us for the vision of a solidarity society, as\n\nSocial Educational Reference Person MNA\n100% in Zurich-Oerlikon (m/f/d)\n\nCaritas Switzerland has been operating asylum centres at various locations in the canton of Zurich since March 2024. As a socio-educational specialist and caregiver, you are responsible for the personal and age-appropriate care, support and integration of the mostly female unaccompanied minor asylum seekers at the MNA Centre on Regensbergstrasse in Zurich-Oerlikon.\n\nTheir tasks\n\n• Social pedagogical and psychosocial support and support of young people within the framework of the reference person system\n• Promotion of young people according to the specifications of the development and development planning of the Canton of Zurich with individual objectives and target checks\n• Development of needs-based daily structures and leisure activities for and with young people\n• Promoting social and self-skill, self-employment and psychological and social integrity\n• Crisis intervention and conflict management\n• Active interdisciplinary coordination and planning in the team (including close cooperation with support)\n• Budget responsibility in accordance with the implementation guidelines of the Canton of Zurich and the requirements of Caritas Switzerland\n• External networking with cooperation partners and organisations\n• Co-responsibility for the creation of a good house atmosphere and for compliance with house rules and security in the center\n• Completed recognised socio-pedagogical training (or equivalent)\n• Professional experience in migration and/or youth work desirable\n• Knowledge of gender pedagogy\n• Good knowledge of German, further knowledge of foreign languages beneficial\n• Intercultural competence\n• Willingness and flexibility to work time varying in time (shift/weekend work)\n• High sense of responsibility and quality for working with vulnerable, vulnerable young people\n• Initiative, independence, teamwork and assertiveness\n• High resilience and resilience\n• Good Microsoft Office knowledge\n• Good repute",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialpädagogische Bezugsperson MNA\n100 % in Zürich-Oerlikon (m/w/d)\n\nCaritas Schweiz betreibt seit März 2024 im kantonalen Auftrag Asylzentren an unterschiedlichen Standorten im Kanton Zürich. Als sozialpädagogische Fach- und Bezugsperson sind Sie für die persönliche und altersgerechte Betreuung, Begleitung und Integration der mehrheitlich weiblichen unbegleiteten minderjährigen Asylsuchenden im MNA-Zentrum an der Regensbergstrasse in Zürich-Oerlikon verantwortlich.\n\nIhre Aufgaben\n\n• Sozialpädagogische und psychosoziale Begleitung und Betreuung der Jugendlichen im Rahmen des Bezugspersonensystems\n• Förderung der Jugendlichen nach den Vorgaben der Förder- und Entwicklungsplanung des Kanton Zürich mit individuellen Zielsetzungen und Zielüberprüfungen\n• Erarbeitung bedarfsgerechter Tagesstrukturen und Freizeitangeboten für und mit den Jugendlichen\n• Förderung der Sozial- und Selbstkompetenz, der Selbständigkeit und der psychischen und sozialen Integrität\n• Krisenintervention und Konfliktbearbeitung\n• Aktive interdisziplinäre Koordination und Planung im Team (u.a. enge Zusammenarbeit mit Beistandschaft)\n• Budgetverantwortung gemäss der Umsetzungsrichtline des Kantons Zürich und den Vorgaben der Caritas Schweiz\n• Externe Vernetzung mit Kooperationspartnern und Organisationen\n• Mitverantwortung für die Schaffung einer guten Hausatmosphäre und für die Einhaltung der Hausordnung und Sicherheit im Zentrum\n• Abgeschlossene anerkannte sozialpädagogische Ausbildung (oder gleichwertig)\n• Berufserfahrung im Migrationsbereich und/oder Jugendarbeit wünschenswert\n• Kenntnisse in genderspezifischer Pädagogik\n• Gute Deutschkenntnisse, weitere Fremdsprachenkenntnisse von Vorteil\n• Interkulturelle Kompetenz\n• Bereitschaft und Flexibilität zeitlich variierende Arbeitszeiten zu leisten (Schicht-/Wochenendarbeit)\n• Hohes Verantwortungs- und Qualitätsbewusstsein für die Arbeit mit vulnerablen, schutzbedürftigen Jugendlichen\n• Eigeninitiative, Selbständigkeit, Teamfähigkeit sowie Durchsetzungsvermögen\n• Hohe Resilienz und Belastbarkeit\n• Gute Microsoft-Office Kenntnisse\n• Einwandfreier Leumund",
+        "fr": "• Faire ce qu'il faut. En Suisse et dans une vingtaine de pays sur quatre continents. Engager avec nous la vision d'une société solidaire,\n\nPersonne de référence en éducation sociale\n100% à Zurich-Oerlikon (h/f/d)\n\nCaritas Suisse exploite des centres d'asile dans différents endroits du canton de Zurich depuis mars 2024. En tant que spécialiste socioéducatif et soignant, vous êtes responsable des soins, du soutien et de l'intégration personnels et adaptés à l'âge des demandeurs d'asile mineurs non accompagnés pour la plupart au Centre MNA sur Regensbergstrasse de Zurich-Oerlikon.\n\nLeurs tâches\n\n• Soutien sociopédagogique et psychosocial des jeunes dans le cadre du système des personnes de référence\n• Promotion des jeunes selon les spécifications de la planification de développement et de développement du canton de Zurich avec des objectifs individuels et des contrôles ciblés\n• Développement de structures quotidiennes et d'activités de loisirs axées sur les besoins pour et avec les jeunes\n• Promouvoir les compétences sociales et personnelles, le travail indépendant et l'intégrité psychologique et sociale\n• Intervention en cas de crise et gestion des conflits\n• Coordination et planification interdisciplinaires actives au sein de l'équipe (y compris une coopération étroite avec le soutien)\n• Responsabilité budgétaire conformément aux lignes directrices de mise en œuvre du canton de Zurich et aux exigences de Caritas Suisse\n• Mise en réseau externe avec les partenaires et organisations de coopération\n• Coresponsabilité pour la création d'une bonne ambiance house et pour le respect des règles house et de la sécurité dans le centre\n• Formation sociopédagogique reconnue (ou équivalent)\n• Expérience professionnelle en matière de migration et/ou travail des jeunes souhaitable\n• Connaissance de la pédagogie du genre\n• Bonne connaissance de l'allemand, meilleure connaissance des langues étrangères\n• Compétence interculturelle\n• Volonté et flexibilité pour travailler en fonction du temps (travail posté/fin de semaine)\n• Un haut sentiment de responsabilité et de qualité pour travailler avec les jeunes vulnérables\n• Initiative, indépendance, travail d'équipe et assurance\n• Haute résilience et résilience\n• Bonne connaissance de Microsoft Office\n• Bonne réputation"
+      },
+      "needsRetranslation": false,
+      "location": "Zürich",
+      "canton": "ZH",
+      "url": "https://apply.refline.ch/126757/2348/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:01:00.847Z",
+      "addressLocality": "Zürich",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-13",
+      "applyUrl": "https://apply.refline.ch/126757/2348/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 100,
+      "pensumMax": 100,
+      "pensum": "100%",
+      "previousSlugs": [
+        "sozialpadagogische-bezugsperson-mna-100-in-zurich-oerlikon-m-w-d-caritas-schweiz-zurich",
+        "persona-di-riferimento-pedagogico-sociale-mna-100-a-zurigo-oerlikon-m-f-d-caritas-schweiz-zurich"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "sozialpadagogische-bezugsperson-mna-100-in-zurich-oerlikon-m-w-d-caritas-schweiz-zurich",
+          "persona-di-riferimento-pedagogico-sociale-mna-100-a-zurigo-oerlikon-m-f-d-caritas-schweiz-zurich"
+        ],
+        "en": [
+          "sozialpadagogische-bezugsperson-mna-100-in-zurich-oerlikon-m-w-d-caritas-schweiz-zurich"
+        ],
+        "fr": [
+          "sozialpadagogische-bezugsperson-mna-100-in-zurich-oerlikon-m-w-d-caritas-schweiz-zurich"
+        ]
+      },
+      "firstSeenAt": "2026-08-13T10:53:06.661Z",
+      "salaryMin": 63000,
+      "salaryMax": 116500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 63000,
+          "maxValue": 116500,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-d4e9e711316d",
+      "slug": "cura-professionale-hf-fh-80-100-m-f-d-caritas-schweiz-zentralschweiz",
+      "slugByLocale": {
+        "it": "cura-professionale-hf-fh-80-100-m-f-d-caritas-schweiz-zentralschweiz",
+        "en": "care-professional-hf-fh-80-100-m-f-d-caritas-schweiz-zentralschweiz",
+        "de": "pflegefachperson-hf-fh-80-100-m-w-d-caritas-schweiz-zentralschweiz",
+        "fr": "professionnel-de-soins-hf-fh-80-100-h-f-d-caritas-schweiz-zentralschweiz"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Pflegefachperson HF/FH 80-100 % (m/w/d)",
+      "titleByLocale": {
+        "it": "Cura professionale HF/FH 80-100 % (m/f/d)",
+        "en": "Care professional HF/FH 80-100 % (m/f/d)",
+        "de": "Pflegefachperson HF/FH 80-100 % (m/w/d)",
+        "fr": "Professionnel de soins HF/FH 80-100 % (h/f/d)"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nPflegefachperson HF/FH 80-100 % (m/w/d)\n\nIm Angebot \"Angehörige pflegen\" erhalten pflegebedürftige Klientinnen und Klienten eine bestmögliche personenzentrierte Pflege durch ihre Angehörigen. Die pflegenden Angehörigen werden durch Pflegefachpersonen HF/FH beraten, begleitet und unterstützt. Für die geleistete Arbeit werden die pflegenden Angehörigen honoriert sowie versichert.\nWir suchen nach Vereinbarung eine Pflegefachperson HF/FH mit Fallführung für die Region Zentralschweiz.\n\nWir bieten: hohe Autonomie, flexible Arbeitszeiten, Homeoffice und Mitgestaltung beim Ausbau dieses Angebots.\n\nIhre Aufgaben\n\n• Sie leiten den Pflegeprozess und stellen eine bestmögliche personenzentrierte Pflegequalität bei den Klientinnen und Klienten sicher\n• Sie beraten und unterstützen die pflegenden Angehörigen\n• Sie organisieren Entlastungsangebote\n• Sie gestalten den Ausbau des Angebots mit\n• Sie arbeiten gerne selbständig, sind gut organisiert und handeln verantwortungsbewusst\n• Als engagierte Pflegefachperson verfügen Sie über ausgeprägte kommunikative Fähigkeiten\n• Für diese verantwortungsvolle Aufgabe setzen wir einen HF/FH Abschluss und pflegerische Erfahrungen vorzugsweise in der Spitex voraus\n• Sie verfügen über einen gültigen Führerausweis und ein eigenes Auto",
+      "descriptionByLocale": {
+        "it": "• Fare la cosa giusta. In Svizzera e in circa 20 paesi in quattro continenti. Impegnarsi con noi per la visione di una società solidale, come\n\nCura professionale HF/FH 80-100 % (m/f/d)\n\nNell'offerta \"Care per i parenti\" i clienti bisognosi di cura ricevono la migliore cura possibile incentrato sulla persona dai loro parenti. I parenti di cura sono consigliati, accompagnati e supportati da professionisti della cura HF/FH. Per il lavoro svolto, i parenti di cura sono onorati e assicurati.\nPer accordo stiamo cercando un'infermiera HF/FH con la gestione dei casi per la regione della Svizzera centrale.\n\nOffriamo: alta autonomia, orari di lavoro flessibili, ufficio di casa e la partecipazione all'espansione di questa offerta.\n\nI loro compiti\n\n• Si guida il processo di cura e garantire la migliore qualità di cura possibile per i clienti\n• Essi forniscono guida e sostegno alla famiglia.\n• Organizzano offerte di soccorso\n• Aiutano ad espandere l'offerta\n• A loro piace lavorare in modo indipendente, sono ben organizzati e agiscono responsabilmente\n• Come infermiera impegnata, hai forti capacità di comunicazione\n• Per questo compito responsabile, abbiamo bisogno di una laurea HF/FH e un'esperienza di allattamento, preferibilmente in Spitex.\n• Hai una patente di guida valida e la tua auto",
+        "en": "• Doing the right thing. In Switzerland and in around 20 countries on four continents. Engage with us for the vision of a solidarity society, as\n\nCare professional HF/FH 80-100 % (m/f/d)\n\nIn the offer \"Care for relatives\" clients in need of care receive the best possible person-centered care by their relatives. The caring relatives are advised, accompanied and supported by care professionals HF/FH. For the work done, the caring relatives are honored and insured.\nBy agreement we are looking for a nurse HF/FH with case management for the Central Switzerland region.\n\nWe offer: high autonomy, flexible working hours, home office and participation in the expansion of this offer.\n\nTheir tasks\n\n• You lead the care process and ensure the best possible person-centered care quality for clients\n• They provide guidance and support to the family.\n• They organise relief offers\n• They help to expand the offer\n• They like to work independently, are well organised and act responsibly\n• As a committed nurse, you have strong communication skills\n• For this responsible task, we require an HF/FH degree and nursing experience, preferably in Spitex.\n• You have a valid driving license and your own car",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nPflegefachperson HF/FH 80-100 % (m/w/d)\n\nIm Angebot \"Angehörige pflegen\" erhalten pflegebedürftige Klientinnen und Klienten eine bestmögliche personenzentrierte Pflege durch ihre Angehörigen. Die pflegenden Angehörigen werden durch Pflegefachpersonen HF/FH beraten, begleitet und unterstützt. Für die geleistete Arbeit werden die pflegenden Angehörigen honoriert sowie versichert.\nWir suchen nach Vereinbarung eine Pflegefachperson HF/FH mit Fallführung für die Region Zentralschweiz.\n\nWir bieten: hohe Autonomie, flexible Arbeitszeiten, Homeoffice und Mitgestaltung beim Ausbau dieses Angebots.\n\nIhre Aufgaben\n\n• Sie leiten den Pflegeprozess und stellen eine bestmögliche personenzentrierte Pflegequalität bei den Klientinnen und Klienten sicher\n• Sie beraten und unterstützen die pflegenden Angehörigen\n• Sie organisieren Entlastungsangebote\n• Sie gestalten den Ausbau des Angebots mit\n• Sie arbeiten gerne selbständig, sind gut organisiert und handeln verantwortungsbewusst\n• Als engagierte Pflegefachperson verfügen Sie über ausgeprägte kommunikative Fähigkeiten\n• Für diese verantwortungsvolle Aufgabe setzen wir einen HF/FH Abschluss und pflegerische Erfahrungen vorzugsweise in der Spitex voraus\n• Sie verfügen über einen gültigen Führerausweis und ein eigenes Auto",
+        "fr": "• Faire ce qu'il faut. En Suisse et dans une vingtaine de pays sur quatre continents. Engager avec nous la vision d'une société solidaire,\n\nProfessionnel de soins HF/FH 80-100 % (h/f/d)\n\nDans l'offre « Soins pour les proches », les clients qui ont besoin de soins reçoivent les meilleurs soins centrés sur la personne par leurs proches. Les proches aidants sont conseillés, accompagnés et soutenus par des professionnels de la santé. Pour le travail effectué, les proches aidants sont honorés et assurés.\nPar accord, nous recherchons une infirmière HF/FH avec la gestion de cas pour la région de Suisse centrale.\n\nNous offrons: une grande autonomie, des horaires de travail flexibles, le bureau à domicile et la participation à l'expansion de cette offre.\n\nLeurs tâches\n\n• Vous dirigez le processus de soins et assurez la meilleure qualité possible de soins centrés sur la personne pour les clients\n• Ils fournissent conseils et soutien à la famille.\n• Ils organisent des offres de secours\n• Ils aident à élargir l'offre\n• Ils aiment travailler de manière indépendante, sont bien organisés et agissent de manière responsable.\n• En tant qu'infirmière engagée, vous avez de solides compétences en communication\n• Pour cette tâche responsable, nous avons besoin d'un diplôme HF/FH et d'une expérience infirmière, de préférence à Spitex.\n• Vous avez un permis de conduire valide et votre propre voiture"
+      },
+      "needsRetranslation": false,
+      "location": "Zentralschweiz",
+      "canton": "LU",
+      "url": "https://apply.refline.ch/126757/2299/pub/6/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:01:00.428Z",
+      "addressLocality": "Zentralschweiz",
+      "addressRegion": "LU",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sanità / Ospedali",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-12",
+      "applyUrl": "https://apply.refline.ch/126757/2299/pub/6/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 80,
+      "pensumMax": 100,
+      "pensum": "80 - 100%",
+      "previousSlugs": [
+        "pflegefachperson-hf-fh-80-100-m-w-d-caritas-schweiz-zentralschweiz",
+        "cura-professionale-hf-fh-80-100-m-f-d-caritas-schweiz-zentralschweiz"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegefachperson-hf-fh-80-100-m-w-d-caritas-schweiz-zentralschweiz",
+          "cura-professionale-hf-fh-80-100-m-f-d-caritas-schweiz-zentralschweiz"
+        ],
+        "en": [
+          "pflegefachperson-hf-fh-80-100-m-w-d-caritas-schweiz-zentralschweiz"
+        ],
+        "fr": [
+          "pflegefachperson-hf-fh-80-100-m-w-d-caritas-schweiz-zentralschweiz"
+        ]
+      },
+      "firstSeenAt": "2026-08-12T10:22:12.976Z",
+      "salaryMin": 86500,
+      "salaryMax": 120500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 86500,
+          "maxValue": 120500,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-27d2c91fd56c",
+      "slug": "sozialarbeiter-in-60-80-m-w-d-uster-e-zurich-oerlikon-caritas-schweiz-zurich",
+      "slugByLocale": {
+        "it": "sozialarbeiter-in-60-80-m-w-d-uster-e-zurich-oerlikon-caritas-schweiz-zurich",
+        "en": "social-worker-60-80-f-m-d-uster-and-zurich-oerlikon-caritas-schweiz-zurich",
+        "de": "sozialarbeiter-in-60-80-w-m-d-uster-und-zurich-oerlikon-caritas-schweiz-zurich",
+        "fr": "travailleurs-sociaux-60-80-f-m-j-uster-et-zurich-oerlikon-caritas-schweiz-zurich"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Sozialarbeiter/in 60 - 80 % (w/m/d), Uster und Zürich-Oerlikon",
+      "titleByLocale": {
+        "it": "Sozialarbeiter/in 60 - 80 % (w/m/d), Uster e Zürich-Oerlikon",
+        "en": "Social worker 60 - 80% (f/m/d), Uster and Zurich-Oerlikon",
+        "de": "Sozialarbeiter/in 60 - 80 % (w/m/d), Uster und Zürich-Oerlikon",
+        "fr": "Travailleurs sociaux 60 - 80% (f/m/j), Uster et Zurich-Oerlikon"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialarbeiter/in 60 - 80 % (w/m/d), Uster und Zürich-Oerlikon\n\nCaritas Schweiz betreibt seit März 2024 im Auftrag des Kantonalen Sozialamts Zürich unter anderem zwei Asylzentren mit rund 90 unbegleiteten minderjährigen Asylsuchenden. Die sozialpädagogischen Bezugspersonen sind für die Fallführung in der Asylfürsorge und in der öffentlichen Sozialhilfe zuständig. Zur Verstärkung der Bezugspersonenteams suchen wir eine*n Sozialarbeiter*in in beratender Funktion.\n\nIhre Aufgaben\n\n• Ansprechperson für sozialpädagogische Bezugspersonen in spezifischen Fragen in Bezug auf Unterstützungsrichtlinien und Vermittlung der entsprechenden Grundlagen\n• Weiterentwicklung der Prozesse der sozialarbeiterischen Fallführung im MNA Bereich\n• Konzeption von Schulungen insbesondere in Bezug auf sozialhilferechtliche Grundlagen\n• Coaching und Begleitung von Mitarbeitenden in verschiedenen Funktionen in Prozessen der sozialarbeiterischen Fallführung und punktuell in Fallführungsfragen mit Übernahme von operativen Aufgaben nach Absprache mit sozialpädagogischen Bezugsperson\n• Sicherstellung des Subsidiaritätsprinzips (Sozialversicherungen, Unterstützungsleistungen etc.)\n• Aktive Mitgestaltung im Team sowie Teilnahme an Inter- und Supervisionen\n• Diplom in Sozialer Arbeit, Sozialpädagogik (oder vergleichbare Ausbildung)\n• Kenntnisse und Erfahrungen in der Anwendung des Sozialhilfegesetzes und/oder Asylfürsorgeverordnung (zwingende Voraussetzung)\n• Weiterbildung in Case-Management und/oder zu Integrationsthemen von Vorteil\n• Erfahrung in der Sozialberatung und Freude an komplexen Fragestellungen\n• Freude an konzeptioneller Arbeit mit sporadischem Klient*innenkontakt\n• Kenntnisse über die Integrationsangebote im Kanton Zürich von Vorteil\n• Sehr gute mündliche und schriftliche Deutschkenntnisse sowie gute mündliche Kenntnisse einer weiteren Landessprache und/oder Englisch und/oder einer Asylsprache\n• Sicherer Umgang mit digitalen Tools; Erfahrung mit Tutoris von Vorteil\n• Interkulturelle Kompetenz, Verhandlungsgeschick und Teamgeist\n• Strukturierte, belastbare und selbstorganisierte Arbeitsweise",
+      "descriptionByLocale": {
+        "it": "• Fare la cosa giusta. In Svizzera e in circa 20 paesi in quattro continenti. Impegnarsi con noi per la visione di una società solidale, come\n\nLavoratore sociale 60 - 80% (f/m/d), Uster e Zurich-Oerlikon\n\nCaritas Svizzera opera due centri di asilo con circa 90 minori non accompagnati dal marzo 2024 per conto dell'Ufficio Sociale cantonale di Zurigo. Gli assistenti socio-educativi sono responsabili della gestione dei casi in asilo e nel welfare pubblico. Per rafforzare i team del personale di riferimento, stiamo cercando un assistente sociale in una capacità di consulenza.\n\nI loro compiti\n\n• Persona di contatto per gli operatori socio-educativi su questioni specifiche relative alle linee guida di sostegno e alla fornitura delle basi pertinenti\n• Ulteriori sviluppi dei processi di gestione dei casi dei lavoratori sociali nell'area MNA\n• Concepimento della formazione, in particolare per quanto riguarda la legge sull'assistenza sociale\n• Allenamento e sostegno dei dipendenti in varie funzioni nei processi di gestione dei casi dei lavoratori sociali e puntualmente in caso di problemi di gestione con assunzione di compiti operativi dopo accordo con la persona di riferimento socio-pedagogico\n• Assicurare il principio di sussidiarietà (assicurazione sociale, servizi di supporto, ecc.)\n• Partecipazione attiva al team e partecipazione a inter e supervisione\n• Diploma di lavoro sociale, educazione sociale (o formazione comparabile)\n• Conoscenza ed esperienza nell'applicazione della Legge di Assistenza Sociale e/o dell'Ordinanza del Welfare di Asylum (obbligatorio)\n• Ulteriore istruzione in caso di gestione e/o su argomenti di integrazione di vantaggio\n• Esperienza nella consulenza sociale e nel godimento di questioni complesse\n• Divertimento del lavoro concettuale con il cliente sporadico* contatto interno\n• La conoscenza delle offerte di integrazione nel Cantone di Zurigo è un vantaggio\n• Ottima conoscenza orale e scritta del tedesco e buona conoscenza orale di un'altra lingua nazionale e/o inglese e/o lingua di asilo\n• Uso sicuro degli strumenti digitali; L'esperienza con il tutoris è utile\n• Competenza interculturale, competenze di negoziazione e spirito di squadra\n• Metodi di lavoro strutturati, resilienti e autonomi",
+        "en": "• Doing the right thing. In Switzerland and in around 20 countries on four continents. Engage with us for the vision of a solidarity society, as\n\nSocial worker 60 - 80% (f/m/d), Uster and Zurich-Oerlikon\n\nCaritas Switzerland has been operating two asylum centres with around 90 unaccompanied minors since March 2024 on behalf of the Cantonal Social Office Zurich. The socio-educational caregivers are responsible for case management in asylum care and in public welfare. To strengthen the reference personnel teams, we are looking for a social worker in an advisory capacity.\n\nTheir tasks\n\n• Contact person for socio-educational caregivers on specific issues related to support guidelines and the provision of the relevant basics\n• Further development of social worker case management processes in the MNA area\n• Conception of training, in particular with regard to social assistance law\n• Coaching and support of employees in various functions in processes of social worker case management and punctually in case management issues with assumption of operational tasks after agreement with socio-pedagogical reference person\n• Ensuring the principle of subsidiarity (social insurance, support services, etc.)\n• Active participation in the team and participation in inter- and supervision\n• Diploma in Social Work, Social Education (or comparable education)\n• Knowledge and experience in the application of the Social Assistance Act and/or Asylum Welfare Ordinance (mandatory requirement)\n• Further education in case management and/or on integration topics of advantage\n• Experience in social counselling and enjoyment of complex issues\n• Enjoyment of conceptual work with sporadic client*internal contact\n• Knowledge of integration offers in the Canton of Zurich is an advantage\n• Very good oral and written knowledge of German and good oral knowledge of another national language and/or English and/or an asylum language\n• Safe use of digital tools; Experience with tutoris is beneficial\n• Intercultural competence, negotiating skills and team spirit\n• Structured, resilient and self-organised working methods",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nSozialarbeiter/in 60 - 80 % (w/m/d), Uster und Zürich-Oerlikon\n\nCaritas Schweiz betreibt seit März 2024 im Auftrag des Kantonalen Sozialamts Zürich unter anderem zwei Asylzentren mit rund 90 unbegleiteten minderjährigen Asylsuchenden. Die sozialpädagogischen Bezugspersonen sind für die Fallführung in der Asylfürsorge und in der öffentlichen Sozialhilfe zuständig. Zur Verstärkung der Bezugspersonenteams suchen wir eine*n Sozialarbeiter*in in beratender Funktion.\n\nIhre Aufgaben\n\n• Ansprechperson für sozialpädagogische Bezugspersonen in spezifischen Fragen in Bezug auf Unterstützungsrichtlinien und Vermittlung der entsprechenden Grundlagen\n• Weiterentwicklung der Prozesse der sozialarbeiterischen Fallführung im MNA Bereich\n• Konzeption von Schulungen insbesondere in Bezug auf sozialhilferechtliche Grundlagen\n• Coaching und Begleitung von Mitarbeitenden in verschiedenen Funktionen in Prozessen der sozialarbeiterischen Fallführung und punktuell in Fallführungsfragen mit Übernahme von operativen Aufgaben nach Absprache mit sozialpädagogischen Bezugsperson\n• Sicherstellung des Subsidiaritätsprinzips (Sozialversicherungen, Unterstützungsleistungen etc.)\n• Aktive Mitgestaltung im Team sowie Teilnahme an Inter- und Supervisionen\n• Diplom in Sozialer Arbeit, Sozialpädagogik (oder vergleichbare Ausbildung)\n• Kenntnisse und Erfahrungen in der Anwendung des Sozialhilfegesetzes und/oder Asylfürsorgeverordnung (zwingende Voraussetzung)\n• Weiterbildung in Case-Management und/oder zu Integrationsthemen von Vorteil\n• Erfahrung in der Sozialberatung und Freude an komplexen Fragestellungen\n• Freude an konzeptioneller Arbeit mit sporadischem Klient*innenkontakt\n• Kenntnisse über die Integrationsangebote im Kanton Zürich von Vorteil\n• Sehr gute mündliche und schriftliche Deutschkenntnisse sowie gute mündliche Kenntnisse einer weiteren Landessprache und/oder Englisch und/oder einer Asylsprache\n• Sicherer Umgang mit digitalen Tools; Erfahrung mit Tutoris von Vorteil\n• Interkulturelle Kompetenz, Verhandlungsgeschick und Teamgeist\n• Strukturierte, belastbare und selbstorganisierte Arbeitsweise",
+        "fr": "• Faire ce qu'il faut. En Suisse et dans une vingtaine de pays sur quatre continents. Engager avec nous la vision d'une société solidaire,\n\nTravailleurs sociaux 60 - 80% (f/m/j), Uster et Zurich-Oerlikon\n\nCaritas Suisse exploite deux centres d'asile avec environ 90 mineurs non accompagnés depuis mars 2024 au nom de l'Office social cantonal de Zurich. Les aidants socioéducatifs sont responsables de la gestion des cas en matière de soins d'asile et de protection publique. Pour renforcer les équipes de référence, nous cherchons un travailleur social à titre consultatif.\n\nLeurs tâches\n\n• Personne-ressource pour les aidants socioéducatifs sur des questions spécifiques liées aux lignes directrices relatives au soutien et à la fourniture des éléments de base pertinents\n• Poursuite du développement des processus de gestion des cas des travailleurs sociaux dans le domaine de l'AMN\n• Conception de la formation, notamment en matière de droit de l'aide sociale\n• Coaching et soutien des employés dans diverses fonctions dans les processus de gestion de cas des travailleurs sociaux et ponctuellement dans les questions de gestion de cas avec prise en charge des tâches opérationnelles après accord avec la personne de référence sociopédagogique\n• Assurer le principe de subsidiarité (assurance sociale, services de soutien, etc.)\n• Participation active à l'équipe et participation à l'inter- et supervision\n• Diplôme en travail social, éducation sociale (ou enseignement comparable)\n• Connaissance et expérience de l ' application de la loi sur l ' assistance sociale et/ou de l ' ordonnance sur la protection sociale en matière d ' asile (exigence obligatoire)\n• Formation continue en gestion de cas et/ou sur des thèmes d'intégration d'avantage\n• Expérience en matière de conseil social et de jouissance de questions complexes\n• Profitez du travail conceptuel avec un client sporadique* contact interne\n• La connaissance des offres d'intégration dans le canton de Zurich est un avantage\n• Très bonne connaissance orale et écrite de l'allemand et bonne connaissance orale d'une autre langue nationale et/ou de l'anglais et/ou d'une langue d'asile\n• Utilisation sûre des outils numériques; L'expérience avec tutoris est bénéfique\n• Compétence interculturelle, compétences de négociation et esprit d'équipe\n• Méthodes de travail structurées, résistantes et auto-organisées"
+      },
+      "needsRetranslation": true,
+      "location": "Zürich",
+      "canton": "ZH",
+      "url": "https://apply.refline.ch/126757/2341/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:00:59.962Z",
+      "addressLocality": "Zürich",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-10",
+      "applyUrl": "https://apply.refline.ch/126757/2341/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 60,
+      "pensumMax": 80,
+      "pensum": "60 - 80%",
+      "previousSlugs": [
+        "sozialarbeiter-in-60-80-w-m-d-uster-und-zurich-oerlikon-caritas-schweiz-zurich"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "sozialarbeiter-in-60-80-w-m-d-uster-und-zurich-oerlikon-caritas-schweiz-zurich"
+        ],
+        "en": [
+          "sozialarbeiter-in-60-80-w-m-d-uster-und-zurich-oerlikon-caritas-schweiz-zurich"
+        ],
+        "fr": [
+          "sozialarbeiter-in-60-80-w-m-d-uster-und-zurich-oerlikon-caritas-schweiz-zurich"
+        ]
+      },
+      "firstSeenAt": "2026-08-10T10:52:03.340Z",
+      "salaryMin": 50400,
+      "salaryMax": 93200,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 50400,
+          "maxValue": 93200,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-2f633e5c085c",
+      "slug": "apprendista-kauffrau-mann-con-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern",
+      "slugByLocale": {
+        "it": "apprendista-kauffrau-mann-con-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern",
+        "en": "apprentice-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern",
+        "de": "lernende-r-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz",
+        "fr": "apprenti-e-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Lernende/r Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)",
+      "titleByLocale": {
+        "it": "Apprendista Kauffrau/-mann con Lehrbeginn 2027 (Berufsmaturität ist möglich)",
+        "en": "Apprentice Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)",
+        "de": "Lernende/r Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)",
+        "fr": "Apprenti/e Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)"
+      },
+      "description": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nLernende/r Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)\n\nCaritas Schweiz bietet eine vielfältige Lehre an. In den 3 Jahren in denen Sie Ihre Ausbildung zur Kauffrau / zum Kaufmann absolvieren, haben Sie die Möglichkeit in den unterschiedlichen Bereichen von Caritas Schweiz mitzuarbeiten. Neben den klassischen Bereichen wie HR, Rechnungswesen oder Kommunikation lernen Sie auch unser Engagement für eine Welt ohne Armut näher kennen.\n\nIhre Aufgaben\n\n• Selbständige Erledigung administrativer und organisatorischer Aufgaben\n• Beratung, Betreuung und Auftragsausführung externer/interner Kunden, Lieferanten und weiteren Anspruchsgruppen\n• Abteilungsspezifische Sachbearbeitung\n• Verfassen deutsch- und fremdsprachiger Texte nach Vorlage\n• Umsetzung des erworbenen Fachwissens\n• Abgeschlossene Sekundarschule mit guten bis sehr guten Leistungen\n• Sie sind ein Kommunikationstalent in der ersten Landessprache und verfassen gerne deutsch- und fremdsprachige Texte nach Vorlage\n• Sie haben Freude am Erlernen und Vertiefen von Fremdsprachen (Englisch und/oder Französisch)\n• Sie bringen ein breites Verständnis moderner Kommunikations- und Informationstechnologien und -kanäle mit",
+      "descriptionByLocale": {
+        "it": "• Fare la cosa giusta. In Svizzera e in circa 20 paesi in quattro continenti. Impegnarsi con noi per la visione di una società solidale, come\n\nApprendista con apprendistato a partire dal 2027 (la maturità professionale è possibile)\n\nCaritas Svizzera offre una vasta gamma di insegnamenti. Nei 3 anni in cui completi il tuo apprendistato come mercante, hai la possibilità di lavorare nelle diverse aree della Caritas Svizzera. Oltre alle aree classiche come HR, contabilità o comunicazione, si arriva anche a conoscere il nostro impegno per un mondo senza povertà.\n\nI loro compiti\n\n• Gestione indipendente dei compiti amministrativi e organizzativi\n• Consulenza, supporto e esecuzione degli ordini di clienti esterni/interni, fornitori e altri stakeholder\n• Lavori amministrativi specifici della sezione\n• Scrivere testi tedeschi e stranieri dopo la presentazione\n• Attuazione delle competenze acquisite\n• Scuola secondaria con buone prestazioni\n• Sei un talento di comunicazione nella prima lingua nazionale e come scrivere testi di lingua tedesca e straniera dopo la presentazione\n• Ti piace imparare e approfondire le lingue straniere (inglese e / o francese)\n• Essi portano una vasta comprensione delle moderne tecnologie di comunicazione e di informazione e canali",
+        "en": "• Doing the right thing. In Switzerland and in around 20 countries on four continents. Engage with us for the vision of a solidarity society, as\n\nApprentice merchant with apprenticeship beginning in 2027 (professional maturity is possible)\n\nCaritas Switzerland offers a wide range of teaching. In the 3 years in which you complete your apprenticeship as a merchant, you have the opportunity to work in the different areas of Caritas Switzerland. In addition to the classic areas such as HR, accounting or communication, you will also get to know our commitment to a world without poverty.\n\nTheir tasks\n\n• Independent management of administrative and organisational tasks\n• Advice, support and order execution of external/internal customers, suppliers and other stakeholders\n• Section-specific administrative work\n• Writing German and foreign texts after submission\n• Implementation of the acquired expertise\n• Secondary school with good to very good performance\n• You are a communication talent in the first national language and like to write German and foreign language texts after submission\n• You enjoy learning and deepening foreign languages (English and/or French)\n• They bring a broad understanding of modern communication and information technologies and channels",
+        "de": "• Das Richtige tun. In der Schweiz und in rund 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns für die Vision einer solidarischen Gesellschaft, als\n\nLernende/r Kauffrau/-mann mit Lehrbeginn 2027 (Berufsmaturität ist möglich)\n\nCaritas Schweiz bietet eine vielfältige Lehre an. In den 3 Jahren in denen Sie Ihre Ausbildung zur Kauffrau / zum Kaufmann absolvieren, haben Sie die Möglichkeit in den unterschiedlichen Bereichen von Caritas Schweiz mitzuarbeiten. Neben den klassischen Bereichen wie HR, Rechnungswesen oder Kommunikation lernen Sie auch unser Engagement für eine Welt ohne Armut näher kennen.\n\nIhre Aufgaben\n\n• Selbständige Erledigung administrativer und organisatorischer Aufgaben\n• Beratung, Betreuung und Auftragsausführung externer/interner Kunden, Lieferanten und weiteren Anspruchsgruppen\n• Abteilungsspezifische Sachbearbeitung\n• Verfassen deutsch- und fremdsprachiger Texte nach Vorlage\n• Umsetzung des erworbenen Fachwissens\n• Abgeschlossene Sekundarschule mit guten bis sehr guten Leistungen\n• Sie sind ein Kommunikationstalent in der ersten Landessprache und verfassen gerne deutsch- und fremdsprachige Texte nach Vorlage\n• Sie haben Freude am Erlernen und Vertiefen von Fremdsprachen (Englisch und/oder Französisch)\n• Sie bringen ein breites Verständnis moderner Kommunikations- und Informationstechnologien und -kanäle mit",
+        "fr": "• Faire ce qu'il faut. En Suisse et dans une vingtaine de pays sur quatre continents. Engager avec nous la vision d'une société solidaire,\n\nApprentis marchand avec apprentissage à partir de 2027 (la maturité professionnelle est possible)\n\nCaritas Suisse offre un large éventail d'enseignements. Au cours des 3 années d'apprentissage en tant que marchand, vous avez la possibilité de travailler dans les différentes régions de Caritas Suisse. En plus des domaines classiques tels que les RH, la comptabilité ou la communication, vous apprendrez également à connaître notre engagement envers un monde sans pauvreté.\n\nLeurs tâches\n\n• Gestion indépendante des tâches administratives et organisationnelles\n• Conseils, soutien et exécution des commandes de clients externes/internes, fournisseurs et autres parties prenantes\n• Travaux administratifs spécifiques à une section\n• Rédaction de textes allemands et étrangers après soumission\n• Mise en œuvre des compétences acquises\n• École secondaire avec de bonnes à très bonnes performances\n• Vous êtes un talent de communication dans la première langue nationale et aimez écrire des textes en allemand et en langue étrangère après soumission\n• Vous aimez apprendre et approfondir les langues étrangères (anglais et/ou français)\n• Ils permettent de mieux comprendre les technologies et les canaux modernes de communication et d'information."
+      },
+      "needsRetranslation": true,
+      "location": "Luzern",
+      "canton": "LU",
+      "url": "https://apply.refline.ch/126757/2346/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:00:58.914Z",
+      "addressLocality": "Luzern",
+      "addressRegion": "LU",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Formazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "intern",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-10",
+      "applyUrl": "https://apply.refline.ch/126757/2346/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 100,
+      "pensumMax": 100,
+      "pensum": "100%",
+      "previousSlugs": [
+        "lernende-r-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz",
+        "apprendista-kauffrau-mann-con-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "lernende-r-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz",
+          "apprendista-kauffrau-mann-con-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz-luzern"
+        ],
+        "en": [
+          "lernende-r-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz"
+        ],
+        "fr": [
+          "lernende-r-kauffrau-mann-mit-lehrbeginn-2027-berufsmaturitat-ist-moglich-caritas-schweiz"
+        ]
+      },
+      "firstSeenAt": "2026-08-10T21:48:02.420Z",
+      "salaryMin": 51000,
+      "salaryMax": 93500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 51000,
+          "maxValue": 93500,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-12934f3eb02e",
+      "slug": "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-m-w-d-caritas-schweiz-fribourg",
+      "slugByLocale": {
+        "it": "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-m-w-d-caritas-schweiz-fribourg",
+        "en": "apprenti-business-employee-swc-start-learning-2027-in-fribourg-h-f-d-caritas-schweiz-fribourg",
+        "de": "lehrling-business-mitarbeiter-swc-beginnen-zu-lernen-2027-in-freiburg-h-w-d-caritas-schweiz-fribourg",
+        "fr": "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-h-f-d-caritas"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Apprenti Employé de commerce CFC début d’apprentissage 2027 à Fribourg (h/f/d)",
+      "titleByLocale": {
+        "it": "Apprenti Employé de commerce CFC début d’apprentissage 2027 à Fribourg (f/m/d)",
+        "en": "Apprenti Business employee SWC start learning 2027 in Fribourg (h/f/d)",
+        "de": "Lehrling Business Mitarbeiter SWC beginnen zu lernen 2027 in Freiburg (h/w/d)",
+        "fr": "Apprenti Employé de commerce CFC début d’apprentissage 2027 à Fribourg (h/f/d)"
+      },
+      "description": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nApprenti Employé de commerce CFC début d’apprentissage 2027 à Fribourg (h/f/d)\n\nau sein de Caritas Suisse est exactement ce qu’il vous faut. Au cours des trois années de votre formation d’employé·e de commerce, vous aurez l’opportunité de travailler dans les différents services de Caritas Suisse. En plus des domaines classiques tels que l’administration, la réception ou la comptabilité, vous découvrirez également notre engagement en faveur d’un monde sans pauvreté, particulièrement auprès des réfugié·e·s statutaires.\n\nVos tâches\n\n• Exécution autonome de tâches administratives et organisationnelles\n• Conseil, prise en charge et exécution de mandats pour les clients internes et externes, les fournisseurs et d’autres groupes d’intérêt\n• Traitement de dossiers spécifiques à chaque service\n• Rédaction de textes en français et en langues étrangères sur la base de modèles\n• Mise en pratique des connaissances professionnelles acquises\n• Scolarité secondaire terminée avec de bons à très bons résultats\n• Vous êtes talentueux·se en communication dans votre première langue nationale et appréciez rédiger des textes en français et en langues étrangères sur la base de modèles\n• Vous aimez apprendre et approfondir les langues étrangères (anglais et/ou allemand)\n• Vous disposez d’une bonne compréhension des technologies et des canaux modernes de communication et d’information",
+      "descriptionByLocale": {
+        "it": "• Agisci e basta. In Svizzera e in quasi 20 paesi in quattro continenti. Coinvolgetevi con noi per realizzare la visione di una società solidale, come\n\nApprenti Business dipendente SWC iniziare a imparare 2027 a Fribourg (h/f/d)\n\nall'interno della Caritas Svizzera è esattamente quello che ti serve. Durante i tre anni della vostra formazione come dipendente di affari, avrete l'opportunità di lavorare nei vari servizi della Caritas Svizzera. Oltre ai campi tradizionali come l'amministrazione, la ricezione o la contabilità, scoprirete anche il nostro impegno per un mondo libero dalla povertà, in particolare con i rifugiati.\n\nI tuoi compiti\n\n• Autoesecuzione dei compiti amministrativi e organizzativi\n• Consulenza, supporto e esecuzione dei mandati per clienti interni ed esterni, fornitori e altri gruppi di interesse\n• Elaborazione di file specifici per il servizio\n• Testi di scrittura in lingua francese e straniera basati su modelli\n• Applicazione delle conoscenze professionali acquisite\n• Scuola secondaria completata con buoni risultati\n• Hai talento nella comunicazione nella tua prima lingua nazionale e goditi testi di scrittura in lingua francese e straniera basati su modelli\n• Ti piace imparare e approfondire le lingue straniere (inglese e/o tedesco)\n• Hai una buona comprensione delle moderne tecnologie di comunicazione e informazione e canali",
+        "en": "• Just act. In Switzerland and in almost 20 countries on four continents. Get involved with us to realize the vision of a solidarity society, as\n\nApprenti Business employee SWC start learning 2027 in Fribourg (h/f/d)\n\nwithin Caritas Switzerland is exactly what you need. During the three years of your training as a business employee, you will have the opportunity to work in the various services of Caritas Switzerland. In addition to the traditional fields such as administration, reception or accounting, you will also discover our commitment to a world free of poverty, particularly with refugees.\n\nYour tasks\n\n• Self-execution of administrative and organisational tasks\n• Advice, support and execution of mandates for internal and external clients, suppliers and other interest groups\n• Processing of service-specific files\n• Writing texts in French and foreign languages based on models\n• Application of acquired professional knowledge\n• Secondary school completed with good to very good results\n• You are talented in communication in your first national language and enjoy writing texts in French and foreign languages based on models\n• You like to learn and deepen foreign languages (English and/or German)\n• You have a good understanding of modern communication and information technologies and channels",
+        "de": "• Handeln Sie einfach. In der Schweiz und in fast 20 Ländern auf vier Kontinenten. Beteiligen Sie sich mit uns, um die Vision einer solidarischen Gesellschaft zu verwirklichen, wie\n\nLehrling Business Mitarbeiter SWC beginnen zu lernen 2027 in Freiburg (h/w/d)\n\nInnerhalb der Caritas Schweiz ist genau das, was Sie brauchen. In den drei Jahren Ihrer Ausbildung zum kaufmännischen Mitarbeiter haben Sie die Möglichkeit, in den verschiedenen Diensten der Caritas Schweiz zu arbeiten. Neben den traditionellen Bereichen wie Verwaltung, Aufnahme oder Buchhaltung entdecken Sie auch unser Engagement für eine Welt frei von Armut, insbesondere mit Flüchtlingen.\n\nIhre Aufgaben\n\n• Selbstausführung administrativer und organisatorischer Aufgaben\n• Beratung, Unterstützung und Ausführung von Mandaten für interne und externe Kunden, Lieferanten und andere Interessengruppen\n• Verarbeitung dienstspezifischer Dateien\n• Schreiben von Texten in Französisch und Fremdsprachen basierend auf Modellen\n• Anwendung der erworbenen beruflichen Kenntnisse\n• Sekundarschule mit guten bis sehr guten Ergebnissen abgeschlossen\n• Sie sind talentiert in der Kommunikation in Ihrer ersten Landessprache und schreiben gerne Texte in Französisch und Fremdsprachen basierend auf Modellen\n• Sie lernen und vertiefen gerne Fremdsprachen (Englisch und/oder Deutsch)\n• Sie haben ein gutes Verständnis für moderne Kommunikations- und Informationstechnologien und -kanäle",
+        "fr": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nApprenti Employé de commerce CFC début d’apprentissage 2027 à Fribourg (h/f/d)\n\nau sein de Caritas Suisse est exactement ce qu’il vous faut. Au cours des trois années de votre formation d’employé·e de commerce, vous aurez l’opportunité de travailler dans les différents services de Caritas Suisse. En plus des domaines classiques tels que l’administration, la réception ou la comptabilité, vous découvrirez également notre engagement en faveur d’un monde sans pauvreté, particulièrement auprès des réfugié·e·s statutaires.\n\nVos tâches\n\n• Exécution autonome de tâches administratives et organisationnelles\n• Conseil, prise en charge et exécution de mandats pour les clients internes et externes, les fournisseurs et d’autres groupes d’intérêt\n• Traitement de dossiers spécifiques à chaque service\n• Rédaction de textes en français et en langues étrangères sur la base de modèles\n• Mise en pratique des connaissances professionnelles acquises\n• Scolarité secondaire terminée avec de bons à très bons résultats\n• Vous êtes talentueux·se en communication dans votre première langue nationale et appréciez rédiger des textes en français et en langues étrangères sur la base de modèles\n• Vous aimez apprendre et approfondir les langues étrangères (anglais et/ou allemand)\n• Vous disposez d’une bonne compréhension des technologies et des canaux modernes de communication et d’information"
+      },
+      "needsRetranslation": true,
+      "location": "Fribourg",
+      "canton": "FR",
+      "url": "https://apply.refline.ch/126757/2345/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:00:58.497Z",
+      "addressLocality": "Fribourg",
+      "addressRegion": "FR",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Formazione",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "intern",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-06",
+      "applyUrl": "https://apply.refline.ch/126757/2345/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 100,
+      "pensumMax": 100,
+      "pensum": "100%",
+      "previousSlugs": [
+        "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-h-f-d-caritas"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-h-f-d-caritas"
+        ],
+        "en": [
+          "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-h-f-d-caritas"
+        ],
+        "de": [
+          "apprenti-employe-de-commerce-cfc-debut-d-apprentissage-2027-a-fribourg-h-f-d-caritas"
+        ]
+      },
+      "firstSeenAt": "2026-08-06T11:59:20.254Z",
+      "salaryMin": 59000,
+      "salaryMax": 108500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 59000,
+          "maxValue": 108500,
+          "unitText": "YEAR"
+        }
+      }
+    },
+    {
+      "id": "caritas-schweiz-7cbfec5e7ac9",
+      "slug": "collaborateur-pour-notre-service-d-ecoute-et-de-conseil-contre-le-racisme-pour-le-canton",
+      "slugByLocale": {
+        "it": "collaborateur-pour-notre-service-d-ecoute-et-de-conseil-contre-le-racisme-pour-le-canton",
+        "en": "collaborator-for-our-anti-racism-listening-and-advisory-service-for-the-canton-of-fribourg-40-csd-4-5-months-h-f-d",
+        "de": "mitarbeiter-unseres-anti-rassismus-hor-und-beratungsdienstes-fur-den-kanton-freiburg-40-csd-4-5-monate-h-w-d-caritas",
+        "fr": "collaborateur-pour-notre-service-d-ecoute-et-de-conseil-contre-le-racisme-pour-le-canton"
+      },
+      "company": "Caritas Schweiz",
+      "companyKey": "caritas-schweiz",
+      "companyDomain": "caritas.ch",
+      "title": "Collaborateur pour notre Service d’écoute et de conseil contre le racisme pour le canton de Fribourg 40 %, CDD 4-5 mois, (h/f/d)",
+      "titleByLocale": {
+        "it": "Collaborateur pour notre Service d’écoute et de conseil contre le racisme pour le canton de Fribourg 40 %, CDD 4-5 mois, (f/m/d)",
+        "en": "Collaborator for our Anti-Racism Listening and Advisory Service for the Canton of Fribourg 40%, CSD 4-5 months, (h/f/d)",
+        "de": "Mitarbeiter unseres Anti-Rassismus-Hör- und Beratungsdienstes für den Kanton Freiburg 40%, CSD 4-5 Monate, (h/w/d)",
+        "fr": "Collaborateur pour notre Service d’écoute et de conseil contre le racisme pour le canton de Fribourg 40 %, CDD 4-5 mois, (h/f/d)"
+      },
+      "description": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nCollaborateur pour notre Service d’écoute et de conseil contre le racisme pour le canton de Fribourg 40 %, CDD 4-5 mois, (h/f/d)\n\nLe service « Info-Racisme Fribourg » fait partie du Département Migration & Intégration de Caritas Suisse et offre, sur mandat du canton, un lieu d’écoute et de conseil pour les personnes confrontées à des situations de discrimination raciale. Selon leurs besoins, la ou le responsable du service leur offrira un conseil juridique, un accompagnement administratif, une orientation auprès d’un service adapté, une intervention directe auprès d’un tiers ou simplement une information.\nAfin de remplacer la responsable du service temporairement, nous recherchons une personne autonome et motivée, prête à assurer la partie consultation du service afin de répondre aux besoins des personnes victimes ou témoins ainsi que des organisations qui s’adressent au Service.\n\nVos tâches\n\n• Soutien administratif, intervention, médiation, information, conseil social et/ou juridique et orientation aux personnes victimes ou témoins de racisme ; ainsi qu’aux organisations qui sollicitent le Service\n• Participation active au sein des réseaux romand et national des centres de conseil, pour les victimes et témoins de racisme\n• Bachelor en travail social, ou titre jugé équivalent, ou CFC d’assistant(e) Socio-Educatif(ve)\n• Expérience professionnelle attestée dans le conseil, la médiation, de préférence dans le domaine de la prévention du racisme et les enjeux liés aux discriminations\n• Empathie et capacité d'écoute\n• Connaissance du réseau associatif, institutionnel et politique fribourgeois\n• Aisance dans la communication orale et écrite avec les moyens modernes\n• Autonomie, esprit d'initiative et flexibilité concernant les horaires de travail\n• Maîtrise du français ou de l'allemand, avec idéalement de bonnes connaissances de l'autre langue. Toute autre langue constitue un atout.",
+      "descriptionByLocale": {
+        "it": "• Agisci e basta. In Svizzera e in quasi 20 paesi su quattro continenti. Impegnatevi con noi a realizzare la visione di una società solidale, come\n\nCollaboratore per il nostro Servizio di Ascolto Anti-Racismo e Consulente per il Canton Friburgo 40%, CSD 4-5 mesi, (h/f/d)\n\nIl servizio \"Info-Racisme Fribourg\" fa parte del Dipartimento di Migrazione e Integrazione della Caritas Svizzera e offre, sul mandato del cantone, un luogo di ascolto e consulenza per le persone che affrontano situazioni di discriminazione razziale. A seconda delle loro esigenze, il capo del servizio fornirà consulenza legale, supporto amministrativo, orientamento ad un servizio adeguato, intervento diretto con terzi o semplicemente informazioni.\nAl fine di sostituire temporaneamente il capo del servizio, stiamo cercando una persona indipendente e motivata, pronta a fornire la parte di consultazione del servizio al fine di soddisfare le esigenze delle vittime o dei testimoni, nonché le organizzazioni che si rivolgono al Servizio.\n\nI tuoi compiti\n\n• Sostegno amministrativo, intervento, mediazione, informazione, consulenza e orientamento sociale e/o giuridico alle vittime o ai testimoni del razzismo e alle organizzazioni che chiedono il Servizio\n• Partecipazione attiva a Roma e reti nazionali di centri di consulenza per le vittime e i testimoni del razzismo\n• Corso di laurea in lavoro sociale, o equivalente, o Assistente di istruzione sociale SWC\n• Esperienza professionale attestata nella consulenza, nella mediazione, preferibilmente nel campo della prevenzione del razzismo e delle questioni relative alla discriminazione\n• Empatia e capacità di ascolto\n• Conoscenza della rete associativa, istituzionale e politica di Friburgo\n• Aisance nella comunicazione orale e scritta con mezzi moderni\n• Autonomia, iniziativa e flessibilità nelle ore di lavoro\n• Padroneggiare la lingua francese o tedesca con una buona conoscenza orale e scritta dell'altra lingua. Altre lingue sono un bene",
+        "en": "• Just act. In Switzerland and in almost 20 countries on four continents. Engage with us to realize the vision of a solidarity society, as\n\nCollaborator for our Anti-Racism Listening and Advisory Service for the Canton of Fribourg 40%, CSD 4-5 months, (h/f/d)\n\nThe \"Info-Racisme Fribourg\" service is part of Caritas Switzerland's Migration & Integration Department and offers, on the canton's mandate, a listening and counselling place for people facing situations of racial discrimination. Depending on their needs, the head of the service will provide legal advice, administrative support, guidance to a suitable service, direct intervention with a third party or simply information.\nIn order to replace the head of the service temporarily, we are looking for an independent and motivated person, ready to provide the consultation part of the service in order to meet the needs of the victims or witnesses as well as the organizations that address the Service.\n\nYour tasks\n\n• Administrative support, intervention, mediation, information, social and/or legal advice and guidance to victims or witnesses of racism; and organizations requesting the Service\n• Active participation in Roma and national networks of counselling centres for victims and witnesses of racism\n• Bachelor's degree in social work, or equivalent, or SWC Social Education Assistant\n• Attested professional experience in counselling, mediation, preferably in the field of prevention of racism and issues related to discrimination\n• Empathy and listening capacity\n• Knowledge of the associative, institutional and political network in Fribourg\n• Aisance in oral and written communication with modern means\n• Autonomy, initiative and flexibility in working hours\n• Mastering the French or German language with very good oral and written knowledge of the other language. Other languages are an asset",
+        "de": "• Handeln Sie einfach. In der Schweiz und in fast 20 Ländern auf vier Kontinenten. Engagieren Sie sich mit uns, um die Vision einer solidarischen Gesellschaft zu verwirklichen, wie\n\nMitarbeiter unseres Anti-Rassismus-Hör- und Beratungsdienstes für den Kanton Freiburg 40%, CSD 4-5 Monate, (h/w/d)\n\nDer Service \"Info-Racisme Fribourg\" ist Teil der Abteilung Migration & Integration der Caritas Schweiz und bietet im Auftrag des Kantons einen Zuhör- und Beratungsplatz für Menschen, die mit rassistischer Diskriminierung konfrontiert sind. Je nach Bedarf bietet der Leiter des Dienstes Rechtsberatung, administrative Unterstützung, Anleitung zu einem geeigneten Dienst, direktes Eingreifen bei einem Dritten oder einfach nur Informationen.\nUm den Leiter des Dienstes vorübergehend zu ersetzen, suchen wir eine unabhängige und motivierte Person, die bereit ist, den Beratungsteil des Dienstes bereitzustellen, um die Bedürfnisse der Opfer oder Zeugen sowie der Organisationen, die sich mit dem Dienst befassen, zu erfüllen.\n\nIhre Aufgaben\n\n• Administrative Unterstützung, Intervention, Mediation, Information, soziale und / oder rechtliche Beratung und Anleitung für Opfer oder Zeugen von Rassismus und Organisationen, die den Dienst anfordern;\n• Aktive Teilnahme an Roma und nationalen Netzwerken von Beratungsstellen für Opfer und Zeugen von Rassismus\n• Bachelor-Abschluss in Sozialarbeit oder gleichwertig oder SWC Social Education Assistant\n• Beglaubigte Berufserfahrung in der Beratung, Mediation, vorzugsweise im Bereich der Prävention von Rassismus und Fragen im Zusammenhang mit Diskriminierung\n• Empathie und Hörfähigkeit\n• Kenntnisse des assoziativen, institutionellen und politischen Netzwerks in Freiburg\n• Aisance in mündlicher und schriftlicher Kommunikation mit modernen Mitteln\n• Autonomie, Initiative und Flexibilität bei der Arbeitszeit\n• Beherrschung der französischen oder deutschen Sprache mit sehr guten mündlichen und schriftlichen Kenntnissen der anderen Sprache. Andere Sprachen sind ein Asset",
+        "fr": "• Agir, tout simplement. En Suisse et dans près de 20 pays répartis sur quatre continents. Engagez-vous avec nous pour concrétiser la vision d’une société solidaire, en tant que\n\nCollaborateur pour notre Service d’écoute et de conseil contre le racisme pour le canton de Fribourg 40 %, CDD 4-5 mois, (h/f/d)\n\nLe service « Info-Racisme Fribourg » fait partie du Département Migration & Intégration de Caritas Suisse et offre, sur mandat du canton, un lieu d’écoute et de conseil pour les personnes confrontées à des situations de discrimination raciale. Selon leurs besoins, la ou le responsable du service leur offrira un conseil juridique, un accompagnement administratif, une orientation auprès d’un service adapté, une intervention directe auprès d’un tiers ou simplement une information.\nAfin de remplacer la responsable du service temporairement, nous recherchons une personne autonome et motivée, prête à assurer la partie consultation du service afin de répondre aux besoins des personnes victimes ou témoins ainsi que des organisations qui s’adressent au Service.\n\nVos tâches\n\n• Soutien administratif, intervention, médiation, information, conseil social et/ou juridique et orientation aux personnes victimes ou témoins de racisme ; ainsi qu’aux organisations qui sollicitent le Service\n• Participation active au sein des réseaux romand et national des centres de conseil, pour les victimes et témoins de racisme\n• Bachelor en travail social, ou titre jugé équivalent, ou CFC d’assistant(e) Socio-Educatif(ve)\n• Expérience professionnelle attestée dans le conseil, la médiation, de préférence dans le domaine de la prévention du racisme et les enjeux liés aux discriminations\n• Empathie et capacité d'écoute\n• Connaissance du réseau associatif, institutionnel et politique fribourgeois\n• Aisance dans la communication orale et écrite avec les moyens modernes\n• Autonomie, esprit d'initiative et flexibilité concernant les horaires de travail\n• Maîtrise du français ou de l'allemand, avec idéalement de bonnes connaissances de l'autre langue. Toute autre langue constitue un atout."
+      },
+      "needsRetranslation": true,
+      "location": "Fribourg",
+      "canton": "FR",
+      "url": "https://apply.refline.ch/126757/2343/pub/1/index.html",
+      "source": "Caritas Schweiz Dedicated Parser (Refline 126757)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:00:58.079Z",
+      "addressLocality": "Fribourg",
+      "addressRegion": "FR",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6002",
+      "category": "Sociale / Educazione",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sociale / NGO",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-04",
+      "applyUrl": "https://apply.refline.ch/126757/2343/pub/1/index.html",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "pensumMin": 40,
+      "pensumMax": 40,
+      "pensum": "40%",
+      "firstSeenAt": "2026-08-04T22:22:25.295Z",
+      "salaryMin": 23600,
+      "salaryMax": 43400,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 23600,
+          "maxValue": 43400,
+          "unitText": "YEAR"
+        }
+      }
+    }
+  ]
+}
