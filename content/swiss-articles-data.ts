@@ -13726,6 +13726,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'mirabaud-processo-corruzione-tpf',
+    category: 'novita',
+    date: '2026-08-28T06:16:40.883Z',
+    image: '/images/blog/mirabaud-processo-corruzione-tpf.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

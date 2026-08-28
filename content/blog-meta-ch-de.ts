@@ -4576,6 +4576,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.banconote-svizzere-decima-serie-2030.title': 'SNB, so sehen die neuen Franken ab 2030 aus',
     'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'Die SNB wählt das Grafikprojekt «J» von Emphase für die zehnte Banknotenserie: sechs Stückelungen zum Thema Höhe, die in den frühen 2030er Jahren im Umlauf waren.',
     'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Neue Schweizer Banknoten in der Gestaltung in Bern',
+    'blog.article.mirabaud-processo-corruzione-tpf.title': 'Mirabaud vor Gericht gegen TPF wegen Korruption: 82 Millionen beanstandet',
+    'blog.article.mirabaud-processo-corruzione-tpf.excerpt': 'Der ehemalige Präsident der Schweizer Bankiers (2003-2009) wegen angeblicher Retrozessionen zum PIFSS von Kuwait wegen Korruption und Geldwäsche angeklagt.',
+    'blog.article.mirabaud-processo-corruzione-tpf.imageAlt': 'Bundesstrafgericht in Bellinzona, Ort des Mirabaud-Prozesses',
 };
 
 export default blogMetaChDe;

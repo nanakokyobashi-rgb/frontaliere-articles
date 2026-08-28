@@ -4576,6 +4576,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.banconote-svizzere-decima-serie-2030.title': 'BNS, ecco come saranno i nuovi franchi dal 2030',
     'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'La BNS sceglie il progetto grafico «J» di Emphase per la decima serie di banconote: sei tagli, tema altitudine, in circolazione nei primi anni 2030.',
     'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Nuove banconote svizzere in fase di design a Berna',
+    'blog.article.mirabaud-processo-corruzione-tpf.title': 'Mirabaud a processo al TPF per corruzione: 82 milioni contestati',
+    'blog.article.mirabaud-processo-corruzione-tpf.excerpt': 'L\'ex presidente dei banchieri svizzeri (2003-2009) accusato di corruzione e riciclaggio per presunte retrocessioni al PIFSS del Kuwait.',
+    'blog.article.mirabaud-processo-corruzione-tpf.imageAlt': 'Tribunale penale federale di Bellinzona, sede del processo a Pierre Mirabaud',
 };
 
 export default blogMetaChIt;

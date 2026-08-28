@@ -4576,6 +4576,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.banconote-svizzere-decima-serie-2030.title': 'BNS, voici à quoi ressembleront les nouveaux francs à partir de 2030',
     'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'La BNS choisit le projet graphique « J » d\'Emphase pour la dixième série de billets : six coupures, sur le thème de l\'altitude, en circulation au début des années 2030.',
     'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'Nouveaux billets de banque suisses en cours de design à Berne',
+    'blog.article.mirabaud-processo-corruzione-tpf.title': 'Mirabaud jugé au TPF pour corruption : 82 millions contestés',
+    'blog.article.mirabaud-processo-corruzione-tpf.excerpt': 'L\'ancien président des banquiers suisses (2003-2009) accusé de corruption et de blanchiment pour des rétrocessions présumées au PIFSS du Koweït.',
+    'blog.article.mirabaud-processo-corruzione-tpf.imageAlt': 'Tribunal pénal fédéral à Bellinzone, lieu du procès Mirabaud',
 };
 
 export default blogMetaChFr;

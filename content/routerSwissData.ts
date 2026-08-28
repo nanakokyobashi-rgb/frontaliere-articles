@@ -1551,6 +1551,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'esposizioni-nazionali-messaggio-2026': { it: 'esposizioni-nazionali-messaggio-2026', en: 'national-exhibitions-message-2026', de: 'nationale-ausstellungen-botschaft-2026', fr: 'expositions-nationales-message-2026' },
  'assegni-familiari-uri-importi-domanda': { it: 'assegni-familiari-uri-importi-domanda', en: 'family-allowances-uri-amounts-application', de: 'familienzulagen-uri-betraege-antrag', fr: 'allocations-familiales-uri-montants-demande' },
  'banconote-svizzere-decima-serie-2030': { it: 'banconote-svizzere-decima-serie-2030', en: 'swiss-banknotes-tenth-series-2030', de: 'schweizer-banknoten-zehnte-serie-2030', fr: 'billets-suisses-dixieme-serie-2030' },
+ 'mirabaud-processo-corruzione-tpf': { it: 'mirabaud-processo-corruzione-tpf', en: 'mirabaud-corruption-trial-federal-court', de: 'mirabaud-korruptionsprozess-bundesstrafgericht', fr: 'mirabaud-proces-corruption-tribunal-federal' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

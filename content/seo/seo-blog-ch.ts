@@ -59378,6 +59378,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-mirabaud-processo-corruzione-tpf': {
+    title: 'Mirabaud a processo al TPF per corruzione: 82 milioni contestati',
+    description: 'L\'ex presidente ASB Pierre Mirabaud a processo al TPF di Bellinzona per corruzione e riciclaggio: 82 milioni di franchi contestati, 42 già risarciti al PIFSS',
+    keywords: 'frontalieri, ticino, svizzera, italia, mirabaud, processo, corruzione, milioni',
+    ogTitle: 'Mirabaud a processo al TPF per corruzione',
+    ogDescription: 'L\'ex presidente dell\'Associazione svizzera dei banchieri Pierre Mirabaud sarà giudicato a settembre al Tribunale penale federale di Bellinzona per corruzione di pubblici ufficiali stranieri e riciclaggio aggravato. Contestate retrocessioni per 82',
+    canonicalPath: '/articoli-svizzera/mirabaud-processo-corruzione-tpf/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Mirabaud a processo al TPF per corruzione: 82 milioni contestati",
+      "description": "L'ex presidente ASB Pierre Mirabaud a processo al TPF di Bellinzona per corruzione e riciclaggio: 82 milioni di franchi contestati, 42 già risarciti al PIFSS",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/mirabaud-processo-corruzione-tpf.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Tribunale penale federale di Bellinzona, sede del processo a Pierre Mirabaud"
+      },
+      "datePublished": "2026-08-28T06:16:40+00:00",
+      "dateModified": "2026-08-28T06:16:40+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/mirabaud-processo-corruzione-tpf/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

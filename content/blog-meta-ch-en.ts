@@ -4576,6 +4576,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.banconote-svizzere-decima-serie-2030.title': 'SNB, here\'s what the new francs will look like from 2030',
     'blog.article.banconote-svizzere-decima-serie-2030.excerpt': 'The SNB chose the graphic design "J" by Emphase for the tenth series of banknotes: six denominations, with an altitude theme, in circulation in the early 2030s.',
     'blog.article.banconote-svizzere-decima-serie-2030.imageAlt': 'New Swiss banknotes being designed in Bern',
+    'blog.article.mirabaud-processo-corruzione-tpf.title': 'Mirabaud on trial at the TPF for corruption: 82 million disputed',
+    'blog.article.mirabaud-processo-corruzione-tpf.excerpt': 'The former president of the Swiss bankers (2003-2009) accused of corruption and money laundering for alleged demotions to the PIFSS of Kuwait.',
+    'blog.article.mirabaud-processo-corruzione-tpf.imageAlt': 'Federal Criminal Court in Bellinzona, venue of the Mirabaud trial',
 };
 
 export default blogMetaChEn;
