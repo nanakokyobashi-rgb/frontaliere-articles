@@ -1,6 +1,6 @@
 {
   "crawlerKey": "heineken-ch",
-  "assembledAt": "2026-08-28T21:23:43.892Z",
+  "assembledAt": "2026-08-28T21:47:53.211Z",
   "jobs": [
     {
       "id": "heineken-ch-3d1c80a02409",
@@ -48,7 +48,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=149552&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:41.267Z",
+      "crawledAt": "2026-08-28T21:47:51.129Z",
       "previousSlugs": [
         "elektroinstallateur-automatiker-chur-m-w-heineken-ch-chur",
         "installatore-trice-elettrico-a-automatiker-chur-m-w-d-heineken-switzerland-chur"
@@ -60,7 +60,6 @@
         ]
       },
       "firstSeenAt": "2026-08-19T21:39:33.117Z",
-      "needsRetranslation": true,
       "salaryMin": 67000,
       "salaryMax": 102000,
       "currency": "CHF",
@@ -73,7 +72,8 @@
           "maxValue": 102000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "heineken-ch-a716028f91b3",
@@ -121,7 +121,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=149312&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:34.334Z",
+      "crawledAt": "2026-08-28T21:47:43.084Z",
       "previousSlugs": [
         "chauffeur-c-e-heineken-ch-fahrweid",
         "chauffeur-c-e-heineken-switzerland-fahrweid",
@@ -198,7 +198,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=153028&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:26.223Z",
+      "crawledAt": "2026-08-28T21:47:34.989Z",
       "previousSlugs": [
         "mitarbeiterin-brauereifuhrungen-10-auf-abruf-heineken-ch-luzern",
         "personale-in-birrerie-10-su-chiamata-heineken-switzerland-luzern"
@@ -276,7 +276,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=156187&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:17.557Z",
+      "crawledAt": "2026-08-28T21:47:28.130Z",
       "previousSlugs": [
         "chauffeur-kat-c-e-heineken-ch-luzern",
         "autista-cat-c-e-heineken-switzerland-luzern"
@@ -354,7 +354,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=158627&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:09.379Z",
+      "crawledAt": "2026-08-28T21:47:19.465Z",
       "previousSlugs": [
         "agent-customer-service-heineken-ch-luzern",
         "mitarbeiter-in-kundenservice-heineken-ch-luzern",
@@ -382,7 +382,6 @@
         ]
       },
       "firstSeenAt": "2026-05-28T12:46:50.069Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "currency": "CHF",
@@ -395,7 +394,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "heineken-ch-5b1f13bcfca3",
@@ -443,7 +443,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=162611&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:01.925Z",
+      "crawledAt": "2026-08-28T21:47:11.288Z",
       "previousSlugs": [
         "verkaufsberater-in-im-aussendienst-gastronomie-heineken-ch-luzern",
         "consulente-commerciale-nel-settore-gastronomia-heineken-switzerland-chur",
@@ -474,7 +474,6 @@
         ]
       },
       "firstSeenAt": "2026-07-28T22:34:47.887Z",
-      "needsRetranslation": true,
       "salaryMin": 79000,
       "salaryMax": 121500,
       "currency": "CHF",
@@ -487,7 +486,8 @@
           "maxValue": 121500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "heineken-ch-1b390909e913",
@@ -535,7 +535,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=163082&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:54.036Z",
+      "crawledAt": "2026-08-28T21:47:03.198Z",
       "previousSlugs": [
         "betriebsmechaniker-in-heineken-ch-chur",
         "betriebsmechaniker-in-heineken-switzerland-chur",
@@ -619,7 +619,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=164096&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:45.270Z",
+      "crawledAt": "2026-08-28T21:46:55.306Z",
       "previousSlugs": [
         "analyst-qualitatssicherung-50-60-heineken-ch-chur",
         "analista-qualitatssicherung-50-60-heineken-switzerland-chur"
@@ -698,7 +698,7 @@
       "applyUrl": "https://career5.successfactors.eu/careers?company=C0000032666P&career_job_req_id=164139&career_ns=job_application",
       "source": "Heineken Switzerland Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:22:40.416Z",
+      "crawledAt": "2026-08-28T21:46:48.420Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T10:08:51.921Z",
       "salaryMin": 57500,
