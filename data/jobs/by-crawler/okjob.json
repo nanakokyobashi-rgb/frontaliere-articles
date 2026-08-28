@@ -1,0 +1,193 @@
+{
+  "crawlerKey": "okjob",
+  "assembledAt": "2026-08-28T21:20:24.972Z",
+  "jobs": [
+    {
+      "id": "okjob-3661dd3cf3ef",
+      "slug": "28-08-2026-41737-zurich-fixe-dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spatdienst",
+      "slugByLocale": {
+        "de": "28-08-2026-41737-zurich-fixe-dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spatdienst",
+        "it": "28-08-2026-41737-zurich-fixe-dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spatdienst",
+        "en": "28-08-2026-41737-zurich-fixe-dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spatdienst",
+        "fr": "28-08-2026-41737-zurich-fixe-dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spatdienst"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst",
+      "titleByLocale": {
+        "de": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst",
+        "it": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst",
+        "en": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst",
+        "fr": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst"
+      },
+      "description": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "de": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst — OK Job SA, succursale di Mendrisio",
+        "it": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst — OK Job SA, succursale di Mendrisio",
+        "en": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst — OK Job SA, succursale di Mendrisio",
+        "fr": "28.08.2026 / 41737 Zurich / Fixe Dipl. Pflegefachfrau / Pflegefachmann HF/FH/DNII - Spätdienst — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spaetdienst-50-zuerich/?ref=41737",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:20:08.707Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/dipl-pflegefachfrau-pflegefachmann-hf-fh-dnii-spaetdienst-50-zuerich/?ref=41737",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T21:20:08.707Z"
+    },
+    {
+      "id": "okjob-e0cfd8574dc4",
+      "slug": "28-08-2026-41723-bale-fixe-teamleiter-disposition-spanien-m-w-d-okjob-ch",
+      "slugByLocale": {
+        "it": "28-08-2026-41723-bale-fixe-teamleiter-disposition-spanien-m-w-d-okjob-ch",
+        "en": "28-08-2026-41723-bale-fixe-teamleiter-disposition-spanien-m-w-d-okjob-ch",
+        "de": "28-08-2026-41723-bale-fixe-teamleiter-disposition-spanien-m-w-d-okjob-ch",
+        "fr": "28-08-2026-41723-bale-fixe-teamleiter-disposition-spanien-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d)",
+      "titleByLocale": {
+        "it": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d)",
+        "fr": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d)",
+        "en": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d)",
+        "de": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d)"
+      },
+      "description": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d) — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "it": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d) — OK Job SA, succursale di Mendrisio",
+        "fr": "28.08.2026 / 41723 Bâle / Fixe Teamleiter Disposition Spanien (m/w/d) — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/teamleiter-disposition-spanien-m-w-d-basel/?ref=41723",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:20:08.102Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/teamleiter-disposition-spanien-m-w-d-basel/?ref=41723",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T21:20:08.102Z"
+    },
+    {
+      "id": "okjob-372f256f2387",
+      "slug": "28-08-2026-41722-berne-fixe-international-sales-coordinator-60-80-m-w-d-okjob-ch",
+      "slugByLocale": {
+        "fr": "28-08-2026-41722-berne-fixe-international-sales-coordinator-60-80-m-w-d-okjob-ch",
+        "it": "28-08-2026-41722-berne-fixe-international-sales-coordinator-60-80-m-w-d-okjob-ch",
+        "en": "28-08-2026-41722-berne-fixe-international-sales-coordinator-60-80-m-w-d-ok-job-sa-succursale-di-mendrisio-lugano",
+        "de": "28-08-2026-41722-berne-fixe-international-sales-coordinator-60-80-m-w-d-okjob-ch"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinator 60-80% (m/w/d)",
+      "titleByLocale": {
+        "fr": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinateur 60-80% (m/w/d)",
+        "en": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinator 60-80% (m/w/d)",
+        "it": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinatore 60-80% (m/w/d)",
+        "de": "28.08.2026 / 41722 Berne / Fixe International Sales Koordinator 60-80% (m/w/d)"
+      },
+      "description": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinator 60-80% (m/w/d) — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "fr": "28.08.2026 / 41722 Berne / Fixe International Sales Coordinator 60-80% (m/w/d) — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/international-sales-coordinator-60-80-m-w-d-bern/?ref=41722",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T21:20:07.799Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Commerciale",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/international-sales-coordinator-60-80-m-w-d-bern/?ref=41722",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 47200,
+      "salaryMax": 72400,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 47200,
+          "maxValue": 72400,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T21:20:07.799Z"
+    }
+  ]
+}
