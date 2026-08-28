@@ -1,6 +1,6 @@
 {
   "crawlerKey": "recruitingapp-1154",
-  "assembledAt": "2026-08-28T05:28:17.507Z",
+  "assembledAt": "2026-08-28T21:24:54.540Z",
   "jobs": [
     {
       "id": "recruitingapp-1154-f98d1ef85a40",
@@ -30,7 +30,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3780/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:28:13.939Z",
+      "crawledAt": "2026-08-28T21:24:51.940Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -107,7 +107,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3787/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:28:13.637Z",
+      "crawledAt": "2026-08-28T21:24:51.637Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -180,7 +180,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3791/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:28:13.333Z",
+      "crawledAt": "2026-08-28T21:24:51.334Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -278,7 +278,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "crawlerMissStreak": 1
     },
     {
       "id": "recruitingapp-1154-5a29f64d799b",
@@ -309,7 +310,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3790/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:28:12.728Z",
+      "crawledAt": "2026-08-28T21:24:51.031Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -385,7 +386,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3793/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:28:12.425Z",
+      "crawledAt": "2026-08-28T21:24:50.725Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -460,7 +461,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3794/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:28:12.122Z",
+      "crawledAt": "2026-08-28T21:24:50.422Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -519,7 +520,7 @@
       "url": "https://recruitingapp-1154.umantis.com/Vacancies/3795/Description/1",
       "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:28:11.804Z",
+      "crawledAt": "2026-08-28T21:24:50.119Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -567,6 +568,67 @@
         }
       },
       "addressRegion": "TI"
+    },
+    {
+      "id": "recruitingapp-1154-371d64c6320f",
+      "slug": "dein-ziel-fachspezialist-in-finanzieren-50-70-recruitingapp-1154-ch",
+      "slugByLocale": {
+        "de": "dein-ziel-fachspezialist-in-finanzieren-50-70-recruitingapp-1154-ch",
+        "it": "dein-ziel-fachspezialist-in-finanzieren-50-70-recruitingapp-1154-ch",
+        "en": "dein-ziel-fachspezialist-in-finanzieren-50-70-recruitingapp-1154-ch",
+        "fr": "dein-ziel-fachspezialist-in-finanzieren-50-70-recruitingapp-1154-ch"
+      },
+      "company": "SGKB Bewerbermanagement Stellen",
+      "companyKey": "recruitingapp-1154",
+      "companyDomain": "recruitingapp-1154.umantis.com",
+      "title": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70%",
+      "titleByLocale": {
+        "de": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70%",
+        "it": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70%",
+        "en": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70%",
+        "fr": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70%"
+      },
+      "description": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70% — SGKB Bewerbermanagement Stellen",
+      "descriptionByLocale": {
+        "de": "Dein Ziel - Fachspezialist*in Finanzieren 50 – 70% — SGKB Bewerbermanagement Stellen"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://recruitingapp-1154.umantis.com/Vacancies/3797/Description/1",
+      "source": "SGKB Bewerbermanagement Stellen Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:24:49.798Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Finanza",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://recruitingapp-1154.umantis.com/Vacancies/3797/Description/1",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 59800,
+      "salaryMax": 105000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 59800,
+          "maxValue": 105000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T21:24:49.798Z"
     }
   ]
 }
