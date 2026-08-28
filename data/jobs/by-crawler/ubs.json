@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ubs",
-  "assembledAt": "2026-08-28T05:13:31.226Z",
+  "assembledAt": "2026-08-28T20:56:04.191Z",
   "jobs": [
     {
       "id": "ubs-6e4e0f0e4b6e",
@@ -33,7 +33,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=347614&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.089Z",
+      "crawledAt": "2026-08-28T20:55:58.535Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -58,11 +58,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-sponsorship-partnership-intl-culture-zh-ubs-zurich"
+        "2026-off-cycle-internship-sponsorship-partnership-intl-culture-zh-ubs-zurich",
+        "tirocinio-fuori-ciclo-2026-sponsorizzazione-e-partnership-cultura-internazionale-zh-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-sponsorship-partnership-intl-culture-zh-ubs-zurich"
+          "2026-off-cycle-internship-sponsorship-partnership-intl-culture-zh-ubs-zurich",
+          "tirocinio-fuori-ciclo-2026-sponsorizzazione-e-partnership-cultura-internazionale-zh-ubs-zurich"
         ],
         "de": [
           "2026-off-cycle-internship-sponsorship-partnership-intl-culture-zh-ubs-zurich"
@@ -117,7 +119,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=347915&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.086Z",
+      "crawledAt": "2026-08-28T20:55:58.532Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -142,11 +144,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-gwm-business-risk-organization-gfiw-zh-ubs-zurich"
+        "2026-off-cycle-internship-gwm-business-risk-organization-gfiw-zh-ubs-zurich",
+        "tirocinio-fuori-ciclo-2026-gwm-business-risk-organization-gfiw-zh-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-gwm-business-risk-organization-gfiw-zh-ubs-zurich"
+          "2026-off-cycle-internship-gwm-business-risk-organization-gfiw-zh-ubs-zurich",
+          "tirocinio-fuori-ciclo-2026-gwm-business-risk-organization-gfiw-zh-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.859Z",
@@ -162,7 +166,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-d9fb8dfc1dba",
@@ -195,7 +200,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348358&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.078Z",
+      "crawledAt": "2026-08-28T20:55:58.525Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -220,11 +225,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-tech-french-language-expert-zurich-ubs-zurich"
+        "2026-off-cycle-internship-tech-french-language-expert-zurich-ubs-zurich",
+        "2026-internship-off-cycle-tech-esperto-di-lingua-francese-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-tech-french-language-expert-zurich-ubs-zurich"
+          "2026-off-cycle-internship-tech-french-language-expert-zurich-ubs-zurich",
+          "2026-internship-off-cycle-tech-esperto-di-lingua-francese-zurigo-ubs-zurich"
         ],
         "de": [
           "2026-off-cycle-internship-tech-french-language-expert-zurich-ubs-zurich"
@@ -279,7 +286,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348353&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.078Z",
+      "crawledAt": "2026-08-28T20:55:58.525Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -304,11 +311,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-tech-german-language-expert-zurich-ubs-zurich"
+        "2026-off-cycle-internship-tech-german-language-expert-zurich-ubs-zurich",
+        "2026-internship-off-cycle-tech-esperto-di-lingua-tedesca-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-tech-german-language-expert-zurich-ubs-zurich"
+          "2026-off-cycle-internship-tech-german-language-expert-zurich-ubs-zurich",
+          "2026-internship-off-cycle-tech-esperto-di-lingua-tedesca-zurigo-ubs-zurich"
         ],
         "de": [
           "2026-off-cycle-internship-tech-german-language-expert-zurich-ubs-zurich"
@@ -363,7 +372,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348929&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.076Z",
+      "crawledAt": "2026-08-28T20:55:58.523Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -388,6 +397,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-17T21:59:53.752Z",
+      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -433,7 +443,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=349188&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:26.074Z",
+      "crawledAt": "2026-08-28T20:55:58.521Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -458,17 +468,20 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-financial-intermediaries-latam-desk-zh-ubs-zurich"
+        "2026-off-cycle-internship-financial-intermediaries-latam-desk-zh-ubs-zurich",
+        "2026-internship-off-cycle-intermediari-finanziari-latam-desk-zh-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-financial-intermediaries-latam-desk-zh-ubs-zurich"
+          "2026-off-cycle-internship-financial-intermediaries-latam-desk-zh-ubs-zurich",
+          "2026-internship-off-cycle-intermediari-finanziari-latam-desk-zh-ubs-zurich"
         ],
         "de": [
           "2026-off-cycle-internship-financial-intermediaries-latam-desk-zh-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-24T22:05:53.306Z",
+      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -514,7 +527,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=350235&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.960Z",
+      "crawledAt": "2026-08-28T20:55:58.405Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -540,12 +553,14 @@
       },
       "previousSlugs": [
         "2027-internship-program-gwm-emea-cos-client-excellence-zh-ubs-zurich",
-        "2027-internship-program-gwm-emea-cos-client-office-zh-ubs-zurich"
+        "2027-internship-program-gwm-emea-cos-client-office-zh-ubs-zurich",
+        "2027-programma-di-stage-gwm-emea-cos-client-excellence-zh-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "2027-internship-program-gwm-emea-cos-client-excellence-zh-ubs-zurich",
-          "2027-internship-program-gwm-emea-cos-client-office-zh-ubs-zurich"
+          "2027-internship-program-gwm-emea-cos-client-office-zh-ubs-zurich",
+          "2027-programma-di-stage-gwm-emea-cos-client-excellence-zh-ubs-zurich"
         ],
         "fr": [
           "2027-internship-program-gwm-emea-cos-client-excellence-zh-ubs-zurich"
@@ -597,7 +612,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=339452&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.956Z",
+      "crawledAt": "2026-08-28T20:55:58.394Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -622,11 +637,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-internship-web-development-client-reviews-zurich-ubs-zurich"
+        "2026-internship-web-development-client-reviews-zurich-ubs-zurich",
+        "2026-stage-web-development-recensioni-dei-clienti-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-internship-web-development-client-reviews-zurich-ubs-zurich"
+          "2026-internship-web-development-client-reviews-zurich-ubs-zurich",
+          "2026-stage-web-development-recensioni-dei-clienti-zurigo-ubs-zurich"
         ],
         "de": [
           "2026-internship-web-development-client-reviews-zurich-ubs-zurich"
@@ -681,7 +698,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=349179&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.956Z",
+      "crawledAt": "2026-08-28T20:55:58.394Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -706,11 +723,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2026-off-cycle-internship-governmental-affairs-zurich-ubs-zurich"
+        "2026-off-cycle-internship-governmental-affairs-zurich-ubs-zurich",
+        "2026-internship-off-cycle-affari-governativi-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2026-off-cycle-internship-governmental-affairs-zurich-ubs-zurich"
+          "2026-off-cycle-internship-governmental-affairs-zurich-ubs-zurich",
+          "2026-internship-off-cycle-affari-governativi-zurigo-ubs-zurich"
         ],
         "de": [
           "2026-off-cycle-internship-governmental-affairs-zurich-ubs-zurich"
@@ -720,6 +739,7 @@
         ]
       },
       "firstSeenAt": "2026-07-24T22:05:53.306Z",
+      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -815,7 +835,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "ubs-fe024364acad",
@@ -848,7 +869,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346701&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.948Z",
+      "crawledAt": "2026-08-28T20:55:58.383Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -873,11 +894,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ju-mars-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ju-mars-ubs-suisse-romande",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-ju-marzo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ju-mars-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ju-mars-ubs-suisse-romande",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-ju-marzo-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ju-mars-ubs-suisse-romande"
@@ -932,7 +955,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346610&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.946Z",
+      "crawledAt": "2026-08-28T20:55:58.381Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -957,11 +980,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-fr-marz-ubs-westschweiz"
+        "2027-bem-bankeinstieg-nach-matura-fr-marz-ubs-westschweiz",
+        "bem-2027-entrata-bancaria-dopo-la-matura-fr-marzo-ubs-westschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-fr-marz-ubs-westschweiz"
+          "2027-bem-bankeinstieg-nach-matura-fr-marz-ubs-westschweiz",
+          "bem-2027-entrata-bancaria-dopo-la-matura-fr-marzo-ubs-westschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-fr-marz-ubs-westschweiz"
@@ -1015,7 +1040,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346609&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.945Z",
+      "crawledAt": "2026-08-28T20:55:58.379Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -1040,11 +1065,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-ag-so-marz-ubs-aargau-solothurn"
+        "2027-bem-bankeinstieg-nach-matura-ag-so-marz-ubs-aargau-solothurn",
+        "bem-2027-entrata-bancaria-dopo-la-maturita-ag-sun-marzo-ubs-aargau-solothurn"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-ag-so-marz-ubs-aargau-solothurn"
+          "2027-bem-bankeinstieg-nach-matura-ag-so-marz-ubs-aargau-solothurn",
+          "bem-2027-entrata-bancaria-dopo-la-maturita-ag-sun-marzo-ubs-aargau-solothurn"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-ag-so-marz-ubs-aargau-solothurn"
@@ -1099,7 +1126,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346594&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.945Z",
+      "crawledAt": "2026-08-28T20:55:58.379Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -1124,11 +1151,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-wallis-marz-ubs-valais"
+        "2027-bem-bankeinstieg-nach-matura-wallis-marz-ubs-valais",
+        "bem-2027-ingresso-bancario-dopo-matura-vallese-marzo-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-wallis-marz-ubs-valais"
+          "2027-bem-bankeinstieg-nach-matura-wallis-marz-ubs-valais",
+          "bem-2027-ingresso-bancario-dopo-matura-vallese-marzo-ubs-valais"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-wallis-marz-ubs-valais"
@@ -1183,7 +1212,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346535&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.944Z",
+      "crawledAt": "2026-08-28T20:55:58.379Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -1208,11 +1237,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-be-marz-ubs-mittelland"
+        "2027-bem-bankeinstieg-nach-matura-be-marz-ubs-mittelland",
+        "bem-2027-entrata-bancaria-dopo-la-matura-be-marzo-ubs-mittelland"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-be-marz-ubs-mittelland"
+          "2027-bem-bankeinstieg-nach-matura-be-marz-ubs-mittelland",
+          "bem-2027-entrata-bancaria-dopo-la-matura-be-marzo-ubs-mittelland"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-be-marz-ubs-mittelland"
@@ -1266,7 +1297,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346670&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.943Z",
+      "crawledAt": "2026-08-28T20:55:58.377Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1291,11 +1322,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ne-mars-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ne-mars-ubs-suisse-romande",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-ne-marzo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ne-mars-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ne-mars-ubs-suisse-romande",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-ne-marzo-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ne-mars-ubs-suisse-romande"
@@ -1350,7 +1383,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346669&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.941Z",
+      "crawledAt": "2026-08-28T20:55:58.375Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1375,11 +1408,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-fr-mars-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-fr-mars-ubs-suisse-romande",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-en-marzo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-fr-mars-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-fr-mars-ubs-suisse-romande",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-en-marzo-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-fr-mars-ubs-suisse-romande"
@@ -1434,7 +1469,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346668&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.940Z",
+      "crawledAt": "2026-08-28T20:55:58.373Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1459,11 +1494,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-vd-mars-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-vd-mars-ubs-suisse-romande",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-vd-marzo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-vd-mars-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-vd-mars-ubs-suisse-romande",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-vd-marzo-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-vd-mars-ubs-suisse-romande"
@@ -1518,7 +1555,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346666&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.938Z",
+      "crawledAt": "2026-08-28T20:55:58.371Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1543,11 +1580,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ge-mars-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ge-mars-ubs-suisse-romande",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-ge-marzo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ge-mars-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ge-mars-ubs-suisse-romande",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-ge-marzo-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ge-mars-ubs-suisse-romande"
@@ -1602,7 +1641,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346608&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.937Z",
+      "crawledAt": "2026-08-28T20:55:58.368Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1627,11 +1666,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-bs-marz-ubs-nordschweiz"
+        "2027-bem-bankeinstieg-nach-matura-bs-marz-ubs-nordschweiz",
+        "bem-2027-entrata-bancaria-dopo-la-matura-bs-marzo-ubs-nordschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-bs-marz-ubs-nordschweiz"
+          "2027-bem-bankeinstieg-nach-matura-bs-marz-ubs-nordschweiz",
+          "bem-2027-entrata-bancaria-dopo-la-matura-bs-marzo-ubs-nordschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-bs-marz-ubs-nordschweiz"
@@ -1685,7 +1726,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346665&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.937Z",
+      "crawledAt": "2026-08-28T20:55:58.368Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -1710,11 +1751,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-vs-mars-ubs-valais"
+        "2027-bem-formation-bancaire-initiale-post-maturite-vs-mars-ubs-valais",
+        "bem-2027-formazione-bancaria-iniziale-post-scadenza-vs-marzo-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-vs-mars-ubs-valais"
+          "2027-bem-formation-bancaire-initiale-post-maturite-vs-mars-ubs-valais",
+          "bem-2027-formazione-bancaria-iniziale-post-scadenza-vs-marzo-ubs-valais"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-vs-mars-ubs-valais"
@@ -1769,7 +1812,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346601&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.935Z",
+      "crawledAt": "2026-08-28T20:55:58.366Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1794,11 +1837,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-gr-marz-ubs-ostschweiz"
+        "2027-bem-bankeinstieg-nach-matura-gr-marz-ubs-ostschweiz",
+        "bem-2027-entrata-bancaria-dopo-la-maturita-gr-marzo-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-gr-marz-ubs-ostschweiz"
+          "2027-bem-bankeinstieg-nach-matura-gr-marz-ubs-ostschweiz",
+          "bem-2027-entrata-bancaria-dopo-la-maturita-gr-marzo-ubs-ostschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-gr-marz-ubs-ostschweiz"
@@ -1853,7 +1898,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346600&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.934Z",
+      "crawledAt": "2026-08-28T20:55:58.364Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1878,11 +1923,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-os-marz-ubs-ostschweiz"
+        "2027-bem-bankeinstieg-nach-matura-os-marz-ubs-ostschweiz",
+        "bem-2027-entrata-bancaria-dopo-matura-os-marzo-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-os-marz-ubs-ostschweiz"
+          "2027-bem-bankeinstieg-nach-matura-os-marz-ubs-ostschweiz",
+          "bem-2027-entrata-bancaria-dopo-matura-os-marzo-ubs-ostschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-os-marz-ubs-ostschweiz"
@@ -1937,7 +1984,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346597&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.933Z",
+      "crawledAt": "2026-08-28T20:55:58.362Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1962,11 +2009,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-zs-marz-ubs-zentralschweiz"
+        "2027-bem-bankeinstieg-nach-matura-zs-marz-ubs-zentralschweiz",
+        "bem-2027-entrata-bancaria-dopo-matura-zs-marzo-ubs-zentralschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-zs-marz-ubs-zentralschweiz"
+          "2027-bem-bankeinstieg-nach-matura-zs-marz-ubs-zentralschweiz",
+          "bem-2027-entrata-bancaria-dopo-matura-zs-marzo-ubs-zentralschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-zs-marz-ubs-zentralschweiz"
@@ -2020,7 +2069,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348017&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -2045,11 +2094,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-banklehre-kaufmannische-grundbildung-kv-gstaad-ubs-mittelland"
+        "2027-banklehre-kaufmannische-grundbildung-kv-gstaad-ubs-mittelland",
+        "2027-apprendistato-in-banca-formazione-commerciale-di-base-kv-gstaad-ubs-mittelland"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-gstaad-ubs-mittelland"
+          "2027-banklehre-kaufmannische-grundbildung-kv-gstaad-ubs-mittelland",
+          "2027-apprendistato-in-banca-formazione-commerciale-di-base-kv-gstaad-ubs-mittelland"
         ],
         "en": [
           "2027-banklehre-kaufmannische-grundbildung-kv-gstaad-ubs-mittelland"
@@ -2103,7 +2154,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347873&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2128,11 +2179,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-it-lehre-entwicklung-digitales-business-zurich-ubs-zurich"
+        "2027-it-lehre-entwicklung-digitales-business-zurich-ubs-zurich",
+        "2027-apprendistato-it-sviluppo-del-digital-business-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-it-lehre-entwicklung-digitales-business-zurich-ubs-zurich"
+          "2027-it-lehre-entwicklung-digitales-business-zurich-ubs-zurich",
+          "2027-apprendistato-it-sviluppo-del-digital-business-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-it-lehre-entwicklung-digitales-business-zurich-ubs-zurich"
@@ -2187,7 +2240,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347872&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2212,11 +2265,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-it-lehre-mediamatik-zurich-ubs-zurich"
+        "2027-it-lehre-mediamatik-zurich-ubs-zurich",
+        "apprendistato-it-2027-mediamatica-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-it-lehre-mediamatik-zurich-ubs-zurich"
+          "2027-it-lehre-mediamatik-zurich-ubs-zurich",
+          "apprendistato-it-2027-mediamatica-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-it-lehre-mediamatik-zurich-ubs-zurich"
@@ -2271,7 +2326,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347871&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2296,11 +2351,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-it-lehre-plattformentwicklung-zurich-ubs-zurich"
+        "2027-it-lehre-plattformentwicklung-zurich-ubs-zurich",
+        "2027-apprendistato-it-sviluppo-piattaforma-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-it-lehre-plattformentwicklung-zurich-ubs-zurich"
+          "2027-it-lehre-plattformentwicklung-zurich-ubs-zurich",
+          "2027-apprendistato-it-sviluppo-piattaforma-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-it-lehre-plattformentwicklung-zurich-ubs-zurich"
@@ -2355,7 +2412,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347739&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2380,11 +2437,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-it-lehre-applikationsentwicklung-zurich-ubs-zurich"
+        "2027-it-lehre-applikationsentwicklung-zurich-ubs-zurich",
+        "apprendistato-it-2027-sviluppo-applicazioni-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-it-lehre-applikationsentwicklung-zurich-ubs-zurich"
+          "2027-it-lehre-applikationsentwicklung-zurich-ubs-zurich",
+          "apprendistato-it-2027-sviluppo-applicazioni-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-it-lehre-applikationsentwicklung-zurich-ubs-zurich"
@@ -2439,7 +2498,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346333&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2465,31 +2524,31 @@
       },
       "previousSlugs": [
         "2027-banklehre-kaufmannische-grundbildung-kv-zurich-ubs-zurich",
-        "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-zurigo-ubs-zurich",
         "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-schaffhausen-ubs-zurich",
         "2027-banking-commercial-basic-education-kv-schaffhausen-ubs-zurich",
         "2027-banklehre-kaufmannische-grundbildung-kv-schaffhausen-ubs-zurich",
-        "2027-banque-education-de-base-commerciale-kv-schaffhausen-ubs-zurich"
+        "2027-banque-education-de-base-commerciale-kv-schaffhausen-ubs-zurich",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "2027-banklehre-kaufmannische-grundbildung-kv-zurich-ubs-zurich",
-          "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-zurigo-ubs-zurich",
           "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-schaffhausen-ubs-zurich",
           "2027-banking-commercial-basic-education-kv-schaffhausen-ubs-zurich",
           "2027-banklehre-kaufmannische-grundbildung-kv-schaffhausen-ubs-zurich",
-          "2027-banque-education-de-base-commerciale-kv-schaffhausen-ubs-zurich"
+          "2027-banque-education-de-base-commerciale-kv-schaffhausen-ubs-zurich",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-banklehre-kaufmannische-grundbildung-kv-zurich-ubs-zurich",
           "2027-banking-commercial-basic-education-kv-schaffhausen-ubs-zurich"
         ],
+        "de": [
+          "2027-banklehre-kaufmannische-grundbildung-kv-schaffhausen-ubs-zurich"
+        ],
         "fr": [
           "2027-banklehre-kaufmannische-grundbildung-kv-zurich-ubs-zurich",
           "2027-banque-education-de-base-commerciale-kv-schaffhausen-ubs-zurich"
-        ],
-        "de": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-schaffhausen-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.789Z",
@@ -2538,7 +2597,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346592&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.931Z",
+      "crawledAt": "2026-08-28T20:55:58.358Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2563,11 +2622,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-zh-marz-ubs-zurich"
+        "2027-bem-bankeinstieg-nach-matura-zh-marz-ubs-zurich",
+        "bem-2027-entrata-bancaria-dopo-la-maturita-zh-marzo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-zh-marz-ubs-zurich"
+          "2027-bem-bankeinstieg-nach-matura-zh-marz-ubs-zurich",
+          "bem-2027-entrata-bancaria-dopo-la-maturita-zh-marzo-ubs-zurich"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-zh-marz-ubs-zurich"
@@ -2622,7 +2683,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347881&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T05:13:25.929Z",
+      "crawledAt": "2026-08-28T20:55:58.354Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -2692,7 +2753,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346347&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T05:13:25.928Z",
+      "crawledAt": "2026-08-28T20:55:58.353Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -2717,6 +2778,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-03T12:37:47.777Z",
+      "needsRetranslation": true,
       "salaryMin": 59500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -2762,7 +2824,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347876&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.928Z",
+      "crawledAt": "2026-08-28T20:55:58.353Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2787,11 +2849,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-it-lehre-it-way-up-zurich-ubs-zurich"
+        "2027-it-lehre-it-way-up-zurich-ubs-zurich",
+        "apprendistato-it-2027-it-way-up-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-it-lehre-it-way-up-zurich-ubs-zurich"
+          "2027-it-lehre-it-way-up-zurich-ubs-zurich",
+          "apprendistato-it-2027-it-way-up-zurigo-ubs-zurich"
         ],
         "en": [
           "2027-it-lehre-it-way-up-zurich-ubs-zurich"
@@ -2846,7 +2910,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346346&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.927Z",
+      "crawledAt": "2026-08-28T20:55:58.352Z",
       "addressLocality": "Plateau suisse",
       "addressCountry": "CH",
       "country": "CH",
@@ -2871,11 +2935,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-bienne-ubs-plateau-suisse"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-bienne-ubs-plateau-suisse",
+        "2027-apprendistato-in-banca-formazione-di-base-nel-business-biel-ubs-plateau-suisse"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-bienne-ubs-plateau-suisse"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-bienne-ubs-plateau-suisse",
+          "2027-apprendistato-in-banca-formazione-di-base-nel-business-biel-ubs-plateau-suisse"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-bienne-ubs-plateau-suisse"
@@ -2885,6 +2951,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.783Z",
+      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 129000,
       "baseSalary": {
@@ -2930,7 +2997,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346345&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.926Z",
+      "crawledAt": "2026-08-28T20:55:58.350Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -2955,11 +3022,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-fribourg-ubs-suisse-romande"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-fribourg-ubs-suisse-romande",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-friburgo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-fribourg-ubs-suisse-romande"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-fribourg-ubs-suisse-romande",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-friburgo-ubs-suisse-romande"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-fribourg-ubs-suisse-romande"
@@ -2969,6 +3038,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.793Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3014,7 +3084,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346344&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.924Z",
+      "crawledAt": "2026-08-28T20:55:58.349Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3039,11 +3109,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-neuchatel-ubs-suisse-romande"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-neuchatel-ubs-suisse-romande",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-neuchatel-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-neuchatel-ubs-suisse-romande"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-neuchatel-ubs-suisse-romande",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-neuchatel-ubs-suisse-romande"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-neuchatel-ubs-suisse-romande"
@@ -3053,6 +3125,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.791Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3098,7 +3171,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346343&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.923Z",
+      "crawledAt": "2026-08-28T20:55:58.347Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3123,11 +3196,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-vaud-ubs-suisse-romande"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-vaud-ubs-suisse-romande",
+        "2027-apprendistato-in-banca-formazione-commerciale-di-base-vaud-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-vaud-ubs-suisse-romande"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-vaud-ubs-suisse-romande",
+          "2027-apprendistato-in-banca-formazione-commerciale-di-base-vaud-ubs-suisse-romande"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-vaud-ubs-suisse-romande"
@@ -3137,6 +3212,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.785Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3182,7 +3258,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346342&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.922Z",
+      "crawledAt": "2026-08-28T20:55:58.345Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -3207,11 +3283,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-valais-ubs-valais"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-valais-ubs-valais",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-vallese-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-valais-ubs-valais"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-valais-ubs-valais",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-vallese-ubs-valais"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-valais-ubs-valais"
@@ -3221,6 +3299,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.785Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3266,7 +3345,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346341&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.921Z",
+      "crawledAt": "2026-08-28T20:55:58.345Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3291,11 +3370,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-geneve-ubs-suisse-romande"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-geneve-ubs-suisse-romande",
+        "2027-apprendistato-bancario-formazione-base-per-l-impresa-ginevra-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-geneve-ubs-suisse-romande"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-geneve-ubs-suisse-romande",
+          "2027-apprendistato-bancario-formazione-base-per-l-impresa-ginevra-ubs-suisse-romande"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-geneve-ubs-suisse-romande"
@@ -3305,6 +3386,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.795Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3350,7 +3432,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346334&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.920Z",
+      "crawledAt": "2026-08-28T20:55:58.343Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3375,11 +3457,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-apprentissage-bancaire-formation-commerciale-de-base-jura-ubs-suisse-romande"
+        "2027-apprentissage-bancaire-formation-commerciale-de-base-jura-ubs-suisse-romande",
+        "2027-apprendistato-in-banca-formazione-commerciale-di-base-jura-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-apprentissage-bancaire-formation-commerciale-de-base-jura-ubs-suisse-romande"
+          "2027-apprentissage-bancaire-formation-commerciale-de-base-jura-ubs-suisse-romande",
+          "2027-apprendistato-in-banca-formazione-commerciale-di-base-jura-ubs-suisse-romande"
         ],
         "en": [
           "2027-apprentissage-bancaire-formation-commerciale-de-base-jura-ubs-suisse-romande"
@@ -3389,6 +3473,7 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.787Z",
+      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3434,7 +3519,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346326&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.919Z",
+      "crawledAt": "2026-08-28T20:55:58.341Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -3459,11 +3544,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-banklehre-kaufmannische-grundbildung-kv-freiburg-ubs-westschweiz"
+        "2027-banklehre-kaufmannische-grundbildung-kv-freiburg-ubs-westschweiz",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-friburgo-ubs-westschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-freiburg-ubs-westschweiz"
+          "2027-banklehre-kaufmannische-grundbildung-kv-freiburg-ubs-westschweiz",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-friburgo-ubs-westschweiz"
         ],
         "en": [
           "2027-banklehre-kaufmannische-grundbildung-kv-freiburg-ubs-westschweiz"
@@ -3517,7 +3604,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346316&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.917Z",
+      "crawledAt": "2026-08-28T20:55:58.339Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -3542,11 +3629,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-banklehre-kaufmannische-grundbildung-kv-basel-ubs-nordschweiz"
+        "2027-banklehre-kaufmannische-grundbildung-kv-basel-ubs-nordschweiz",
+        "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-basilea-ubs-nordschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-basel-ubs-nordschweiz"
+          "2027-banklehre-kaufmannische-grundbildung-kv-basel-ubs-nordschweiz",
+          "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-basilea-ubs-nordschweiz"
         ],
         "en": [
           "2027-banklehre-kaufmannische-grundbildung-kv-basel-ubs-nordschweiz"
@@ -3600,7 +3689,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346324&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.917Z",
+      "crawledAt": "2026-08-28T20:55:58.339Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -3625,11 +3714,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-banklehre-kaufmannische-grundbildung-kv-oberwallis-ubs-valais"
+        "2027-banklehre-kaufmannische-grundbildung-kv-oberwallis-ubs-valais",
+        "2027-apprendistato-in-banca-formazione-commerciale-di-base-kv-alto-vallese-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-oberwallis-ubs-valais"
+          "2027-banklehre-kaufmannische-grundbildung-kv-oberwallis-ubs-valais",
+          "2027-apprendistato-in-banca-formazione-commerciale-di-base-kv-alto-vallese-ubs-valais"
         ],
         "en": [
           "2027-banklehre-kaufmannische-grundbildung-kv-oberwallis-ubs-valais"
@@ -3670,7 +3761,7 @@
         "it": "2027 BEM – Ingresso in banca dopo la maturità – Ticino – Settembre",
         "en": "2027 BEM – Bank entry after maturity – Ticino – September",
         "de": "2027 BEM – Bankeintritt nach Fälligkeit – Tessin – September",
-        "fr": "2027 BEM – Entrée bancaire après échéance – Tessin – Septembre"
+        "fr": "2027 BEM – Ingresso in banca dopo la maturità – Ticino – Settembre"
       },
       "description": "Il tuo ruolo\nVuoi entrare direttamente nel mondo del lavoro dopo la maturità, assumerti responsabilità e scoprire da vicino il settore bancario?\n\nIn qualità di Junior Talent, inizi il tuo percorso professionale in UBS.\nFin dall’inizio sei coinvolto/a nell’operatività quotidiana, supporti le attività legate a clienti e prodotti, analizzi casi e prepari colloqui. Grazie ai diversi inserimenti acquisisci rapidamente una visione completa del nostro business.\n\nCosa ti aspetta da noi:\n• una formazione di 18 mesi con interessanti approfondimenti nei nostri diversi settori e in differenti sedi\n• tre inserimenti di sei mesi in ambiti che si occupano principalmente di consulenza alla clientela e sui prodotti (in presenza e digitale) dove approfondirai temi come investimenti, crediti, ipoteche e pagamenti\n• in ogni rotazione il supporto di un/una Practical Advisor che ti accompagna e sostiene nel tuo sviluppo\n• un ottimo punto di partenza nel settore bancario, con prospettive concrete per il tuo futuro professionale\n\nLa tua formazione\nLa tua formazione è pratica, varia e orientata al tuo sviluppo personale. Parallelamente al lavoro in team, frequenterai i corsi presso il CYP (cyp.ch), insieme a diplomate e diplomati di altre banche, dove acquisirai le basi teoriche del settore bancario.\nQueste conoscenze vengono approfondite attraverso formazioni specialistiche interne. In questo modo conoscerai nel dettaglio i nostri prodotti e servizi e potrai applicare fin da subito quanto appreso nella tua attività quotidiana – preparandoti in modo ottimale all’esame finale.\n\nAl termine della formazione conseguirai il certificato «Ingresso in banca dopo la maturità (BEM)», rilasciato dall’Associazione Svizzera dei Banchieri (ASB). Molti dei nostri diplomati e delle nostre diplomate BEM continuano successivamente in UBS con un impiego fisso oppure proseguono il loro sviluppo nel nostro programma di perfezionamento biennale (JUNA).\n\nSe desideri saperne di più sul programma BEM e sui documenti necessari per la tua candidatura, fai clic qui.\n\nIl tuo team\nEntrando a far parte della community UBS BEM, diventerai parte di una rete dinamica. Vi incontrerete regolarmente durante formazioni interne ed esterne, eventi di più giorni e attività comuni. Spesso nascono amicizie e relazioni professionali che vanno oltre il periodo di formazione.\nUBS si affida a tecnologie moderne come l'intelligenza artificiale (AI) al fine di migliorare costantemente i propri servizi, anche all'interno del nostro team. In questo modo, rendiamo i processi più efficienti, utilizziamo i dati in modo più intelligente e semplifichiamo il lavoro quotidiano, sia per i dipendenti che per i clienti.\n\nLe tue conoscenze ed esperienze\nCerchiamo giovani persone curiose e autonome, che abbiano voglia di imparare, di assumersi responsabilità e di confrontarsi con gli altri – sia all’interno del team che nel contatto con la clientela.\nÈ importante che tu disponga di uno dei seguenti titoli di studio:\n• Attestato di maturità (preferibilmente in ambito economico)\n• AFC come impiegato/a di commercio con maturità professionale tramite apprendistato in un settore diverso dalla banca\n• AFC come impiegato/a di commercio con maturità professionale tramite stage di 52 settimane - scuola media di commercio (SMC) o in un settore diverso dalla banca\n• Attestato di maturità specializzata (solo nella Svizzera tedesca)\n\nTi riconosci in questo profilo? Allora sei nel posto giusto!\n\nInoltre, ti distingui per:\n\n• piacere nel contatto con le persone e forte spirito di squadra\n• motivazione e atteggiamento positivo\n• grande voglia di imparare e apertura alle novità\n• interesse per il mondo della finanza, per l’utilizzo dell’intelligenza artificiale (AI) e dei moderni strumenti digitali\n\nForse stai già frequentando un percorso di studi e senti la mancanza di esperienza pratica? Oppure hai maturato le prime esperienze nella vendita o in attività a contatto con la clientela? Rifletti su come le tue esperienze e i tuoi successi possano essere in linea con le competenze che cerchiamo.\n\nLa data di assunzione per il nostro programma BEM in Ticino è il 1° settembre (nelle altre regioni sono previste due date: 1° marzo e 1° settembre). Ti ricordiamo che puoi candidarti solo per una data e una regione all’anno.",
       "descriptionByLocale": {
@@ -3684,7 +3775,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348468&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T05:13:25.914Z",
+      "crawledAt": "2026-08-28T20:55:58.337Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -3709,6 +3800,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-01T10:47:00.190Z",
+      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 150000,
       "baseSalary": {
@@ -3754,7 +3846,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348469&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.912Z",
+      "crawledAt": "2026-08-28T20:55:58.335Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3779,11 +3871,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ge-septembre-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ge-septembre-ubs-suisse-romande",
+        "2027-bem-formazione-iniziale-post-maturity-banking-ge-settembre-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ge-septembre-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ge-septembre-ubs-suisse-romande",
+          "2027-bem-formazione-iniziale-post-maturity-banking-ge-settembre-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ge-septembre-ubs-suisse-romande"
@@ -3793,6 +3887,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.188Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -3838,7 +3933,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348471&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.911Z",
+      "crawledAt": "2026-08-28T20:55:58.333Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -3863,11 +3958,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-be-september-ubs-mittelland"
+        "2027-bem-bankeinstieg-nach-matura-be-september-ubs-mittelland",
+        "2027-bem-ingresso-bancario-a-matura-be-settembre-ubs-mittelland"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-be-september-ubs-mittelland"
+          "2027-bem-bankeinstieg-nach-matura-be-september-ubs-mittelland",
+          "2027-bem-ingresso-bancario-a-matura-be-settembre-ubs-mittelland"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-be-september-ubs-mittelland"
@@ -3921,7 +4018,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348472&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.910Z",
+      "crawledAt": "2026-08-28T20:55:58.331Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -3946,11 +4043,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-vs-septembre-ubs-valais"
+        "2027-bem-formation-bancaire-initiale-post-maturite-vs-septembre-ubs-valais",
+        "2027-bem-formazione-iniziale-post-maturity-banking-vs-settembre-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-vs-septembre-ubs-valais"
+          "2027-bem-formation-bancaire-initiale-post-maturite-vs-septembre-ubs-valais",
+          "2027-bem-formazione-iniziale-post-maturity-banking-vs-settembre-ubs-valais"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-vs-septembre-ubs-valais"
@@ -3960,6 +4059,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.184Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4005,7 +4105,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348473&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.909Z",
+      "crawledAt": "2026-08-28T20:55:58.331Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4030,11 +4130,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-vd-septembre-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-vd-septembre-ubs-suisse-romande",
+        "2027-bem-formazione-iniziale-post-maturity-banking-vd-settembre-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-vd-septembre-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-vd-septembre-ubs-suisse-romande",
+          "2027-bem-formazione-iniziale-post-maturity-banking-vd-settembre-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-vd-septembre-ubs-suisse-romande"
@@ -4044,6 +4146,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.184Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4089,7 +4192,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348474&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.908Z",
+      "crawledAt": "2026-08-28T20:55:58.329Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4114,11 +4217,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-fr-septembre-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-fr-septembre-ubs-suisse-romande",
+        "2027-bem-formazione-iniziale-post-maturity-banking-en-settembre-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-fr-septembre-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-fr-septembre-ubs-suisse-romande",
+          "2027-bem-formazione-iniziale-post-maturity-banking-en-settembre-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-fr-septembre-ubs-suisse-romande"
@@ -4128,6 +4233,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.182Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4173,7 +4279,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348477&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.907Z",
+      "crawledAt": "2026-08-28T20:55:58.327Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4198,11 +4304,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ne-septembre-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ne-septembre-ubs-suisse-romande",
+        "2027-bem-formazione-iniziale-post-maturity-banking-ne-settembre-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ne-septembre-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ne-septembre-ubs-suisse-romande",
+          "2027-bem-formazione-iniziale-post-maturity-banking-ne-settembre-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ne-septembre-ubs-suisse-romande"
@@ -4212,6 +4320,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.180Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4257,7 +4366,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348479&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.905Z",
+      "crawledAt": "2026-08-28T20:55:58.326Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4282,11 +4391,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-formation-bancaire-initiale-post-maturite-ju-septembre-ubs-suisse-romande"
+        "2027-bem-formation-bancaire-initiale-post-maturite-ju-septembre-ubs-suisse-romande",
+        "2027-bem-formazione-iniziale-post-maturity-banking-lu-settembre-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-formation-bancaire-initiale-post-maturite-ju-septembre-ubs-suisse-romande"
+          "2027-bem-formation-bancaire-initiale-post-maturite-ju-septembre-ubs-suisse-romande",
+          "2027-bem-formazione-iniziale-post-maturity-banking-lu-settembre-ubs-suisse-romande"
         ],
         "en": [
           "2027-bem-formation-bancaire-initiale-post-maturite-ju-septembre-ubs-suisse-romande"
@@ -4296,6 +4407,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.178Z",
+      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4341,7 +4453,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348482&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.902Z",
+      "crawledAt": "2026-08-28T20:55:58.324Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4366,11 +4478,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-zs-september-ubs-zentralschweiz"
+        "2027-bem-bankeinstieg-nach-matura-zs-september-ubs-zentralschweiz",
+        "2027-bem-ingresso-bancario-a-matura-zs-settembre-ubs-zentralschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-zs-september-ubs-zentralschweiz"
+          "2027-bem-bankeinstieg-nach-matura-zs-september-ubs-zentralschweiz",
+          "2027-bem-ingresso-bancario-a-matura-zs-settembre-ubs-zentralschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-zs-september-ubs-zentralschweiz"
@@ -4424,7 +4538,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348481&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.902Z",
+      "crawledAt": "2026-08-28T20:55:58.324Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -4449,11 +4563,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-wallis-september-ubs-valais"
+        "2027-bem-bankeinstieg-nach-matura-wallis-september-ubs-valais",
+        "2027-bem-ingresso-bancario-a-matura-wallis-settembre-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-wallis-september-ubs-valais"
+          "2027-bem-bankeinstieg-nach-matura-wallis-september-ubs-valais",
+          "2027-bem-ingresso-bancario-a-matura-wallis-settembre-ubs-valais"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-wallis-september-ubs-valais"
@@ -4508,7 +4624,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348480&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.902Z",
+      "crawledAt": "2026-08-28T20:55:58.324Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4534,12 +4650,14 @@
       },
       "previousSlugs": [
         "2027-bem-bankeinstieg-nach-matura-zh-september-ubs-zurich",
-        "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-rolle"
+        "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-rolle",
+        "2027-bem-ingresso-bancario-a-matura-zh-settembre-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "2027-bem-bankeinstieg-nach-matura-zh-september-ubs-zurich",
-          "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-rolle"
+          "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-rolle",
+          "2027-bem-ingresso-bancario-a-matura-zh-settembre-ubs-zurich"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-zh-september-ubs-zurich"
@@ -4594,7 +4712,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348487&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.900Z",
+      "crawledAt": "2026-08-28T20:55:58.322Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4619,11 +4737,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-os-september-ubs-ostschweiz"
+        "2027-bem-bankeinstieg-nach-matura-os-september-ubs-ostschweiz",
+        "2027-bem-ingresso-bancario-a-matura-os-settembre-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-os-september-ubs-ostschweiz"
+          "2027-bem-bankeinstieg-nach-matura-os-september-ubs-ostschweiz",
+          "2027-bem-ingresso-bancario-a-matura-os-settembre-ubs-ostschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-os-september-ubs-ostschweiz"
@@ -4678,7 +4798,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348489&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.897Z",
+      "crawledAt": "2026-08-28T20:55:58.320Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4703,11 +4823,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-gr-september-ubs-ostschweiz"
+        "2027-bem-bankeinstieg-nach-matura-gr-september-ubs-ostschweiz",
+        "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-gr-september-ubs-ostschweiz"
+          "2027-bem-bankeinstieg-nach-matura-gr-september-ubs-ostschweiz",
+          "2027-bem-ingresso-bancario-a-matura-gr-settembre-ubs-ostschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-gr-september-ubs-ostschweiz"
@@ -4762,7 +4884,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348490&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.896Z",
+      "crawledAt": "2026-08-28T20:55:58.318Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4787,11 +4909,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-bs-september-ubs-nordschweiz"
+        "2027-bem-bankeinstieg-nach-matura-bs-september-ubs-nordschweiz",
+        "2027-bem-ingresso-bancario-a-matura-bs-settembre-ubs-nordschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-bs-september-ubs-nordschweiz"
+          "2027-bem-bankeinstieg-nach-matura-bs-september-ubs-nordschweiz",
+          "2027-bem-ingresso-bancario-a-matura-bs-settembre-ubs-nordschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-bs-september-ubs-nordschweiz"
@@ -4845,7 +4969,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348492&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.895Z",
+      "crawledAt": "2026-08-28T20:55:58.316Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4870,11 +4994,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-fr-september-ubs-westschweiz"
+        "2027-bem-bankeinstieg-nach-matura-fr-september-ubs-westschweiz",
+        "2027-bem-ingresso-bancario-a-matura-fr-settembre-ubs-westschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-fr-september-ubs-westschweiz"
+          "2027-bem-bankeinstieg-nach-matura-fr-september-ubs-westschweiz",
+          "2027-bem-ingresso-bancario-a-matura-fr-settembre-ubs-westschweiz"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-fr-september-ubs-westschweiz"
@@ -4928,7 +5054,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348491&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.895Z",
+      "crawledAt": "2026-08-28T20:55:58.316Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -4953,11 +5079,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "2027-bem-bankeinstieg-nach-matura-ag-so-september-ubs-aargau-solothurn"
+        "2027-bem-bankeinstieg-nach-matura-ag-so-september-ubs-aargau-solothurn",
+        "2027-bem-entrata-bancaria-dopo-matura-ag-so-settembre-ubs-aargau-solothurn"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "2027-bem-bankeinstieg-nach-matura-ag-so-september-ubs-aargau-solothurn"
+          "2027-bem-bankeinstieg-nach-matura-ag-so-september-ubs-aargau-solothurn",
+          "2027-bem-entrata-bancaria-dopo-matura-ag-so-settembre-ubs-aargau-solothurn"
         ],
         "en": [
           "2027-bem-bankeinstieg-nach-matura-ag-so-september-ubs-aargau-solothurn"
@@ -4967,6 +5095,7 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.162Z",
+      "needsRetranslation": true,
       "salaryMin": 107000,
       "salaryMax": 187500,
       "baseSalary": {
@@ -5012,7 +5141,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339846&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.861Z",
+      "crawledAt": "2026-08-28T20:55:58.273Z",
       "addressLocality": "Aargau / Solothurn, Switzerland - Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5038,12 +5167,14 @@
       },
       "previousSlugs": [
         "client-advisor-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn",
-        "client-consulente-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn-switzerland-zurich"
+        "client-consulente-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn-switzerland-zurich",
+        "consulente-clienti-wm-apac-ch-sud-est-asiatico-e-giappone-a-zurigo-ginevra-ubs-aargau-solothurn"
       ],
       "previousSlugsByLocale": {
         "it": [
           "client-advisor-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn",
-          "client-consulente-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn-switzerland-zurich"
+          "client-consulente-wm-apac-ch-south-east-asia-japan-in-zurich-geneva-ubs-aargau-solothurn-switzerland-zurich",
+          "consulente-clienti-wm-apac-ch-sud-est-asiatico-e-giappone-a-zurigo-ginevra-ubs-aargau-solothurn"
         ]
       },
       "needsRetranslation": true,
@@ -5093,7 +5224,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=340088&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.861Z",
+      "crawledAt": "2026-08-28T20:55:58.273Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5179,7 +5310,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=343604&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.855Z",
+      "crawledAt": "2026-08-28T20:55:58.264Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -5204,11 +5335,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "privatkundenberater-in-affluent-graubunden-80-100-ubs-ostschweiz"
+        "privatkundenberater-in-affluent-graubunden-80-100-ubs-ostschweiz",
+        "consulente-per-clienti-privati-affluent-grigioni-80-100-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "privatkundenberater-in-affluent-graubunden-80-100-ubs-ostschweiz"
+          "privatkundenberater-in-affluent-graubunden-80-100-ubs-ostschweiz",
+          "consulente-per-clienti-privati-affluent-grigioni-80-100-ubs-ostschweiz"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.636Z",
@@ -5257,7 +5390,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347857&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.776Z",
+      "crawledAt": "2026-08-28T20:55:58.199Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -5282,14 +5415,17 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "sr-wealth-strategy-associate-ubs-missouri"
+        "sr-wealth-strategy-associate-ubs-missouri",
+        "senior-associate-per-strategie-di-wealth-management-ubs-missouri"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "sr-wealth-strategy-associate-ubs-missouri"
+          "sr-wealth-strategy-associate-ubs-missouri",
+          "senior-associate-per-strategie-di-wealth-management-ubs-missouri"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:47.999Z",
+      "needsRetranslation": true,
       "salaryMin": 110500,
       "salaryMax": 169500,
       "baseSalary": {
@@ -5335,7 +5471,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=343612&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.767Z",
+      "crawledAt": "2026-08-28T20:55:58.191Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5360,11 +5496,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "outbound-sales-agent-zurich-40-60-ubs-zurich"
+        "outbound-sales-agent-zurich-40-60-ubs-zurich",
+        "agente-vendite-in-uscita-zurigo-40-60-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "outbound-sales-agent-zurich-40-60-ubs-zurich"
+          "outbound-sales-agent-zurich-40-60-ubs-zurich",
+          "agente-vendite-in-uscita-zurigo-40-60-ubs-zurich"
         ],
         "fr": [
           "outbound-sales-agent-zurich-40-60-ubs-zurich"
@@ -5416,7 +5554,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=345975&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.739Z",
+      "crawledAt": "2026-08-28T20:55:58.167Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5442,11 +5580,13 @@
       },
       "previousSlugs": [
         "spezialist-in-hypotheken-und-grundbuchwesen-80-100-ubs-zurich",
-        "spezialist-in-hypotheken-und-grundbuchwesen-80-100-ubs-2"
+        "spezialist-in-hypotheken-und-grundbuchwesen-80-100-ubs-2",
+        "specialista-in-mutui-e-diritto-fondiario-80-100-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "spezialist-in-hypotheken-und-grundbuchwesen-80-100-ubs-zurich"
+          "spezialist-in-hypotheken-und-grundbuchwesen-80-100-ubs-zurich",
+          "specialista-in-mutui-e-diritto-fondiario-80-100-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.273Z",
@@ -5495,7 +5635,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344976&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.710Z",
+      "crawledAt": "2026-08-28T20:55:58.139Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -5521,12 +5661,14 @@
       },
       "previousSlugs": [
         "conseiller-ere-clientele-privee-affluent-sion-ou-sierre-80-100-ubs-valais",
-        "conseiller-ere-clientele-privee-affluent-sion-80-100-ubs-valais"
+        "conseiller-ere-clientele-privee-affluent-sion-80-100-ubs-valais",
+        "advisor-ere-cliente-privato-affluente-sion-o-sierre-80-100-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
           "conseiller-ere-clientele-privee-affluent-sion-ou-sierre-80-100-ubs-valais",
-          "conseiller-ere-clientele-privee-affluent-sion-80-100-ubs-valais"
+          "conseiller-ere-clientele-privee-affluent-sion-80-100-ubs-valais",
+          "advisor-ere-cliente-privato-affluente-sion-o-sierre-80-100-ubs-valais"
         ],
         "en": [
           "conseiller-ere-clientele-privee-affluent-sion-ou-sierre-80-100-ubs-valais"
@@ -5581,7 +5723,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339844&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.670Z",
+      "crawledAt": "2026-08-28T20:55:58.107Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5652,7 +5794,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339845&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.670Z",
+      "crawledAt": "2026-08-28T20:55:58.107Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5678,11 +5820,13 @@
       },
       "previousSlugs": [
         "client-advisor-wm-apac-switzerland-team-uhnwi-ubs-zurich",
-        "client-consulente-wm-apac-switzerland-team-uhnwi-ubs-zurich"
+        "client-consulente-wm-apac-switzerland-team-uhnwi-ubs-zurich",
+        "consulente-clienti-wm-apac-svizzera-team-uhnwi-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "client-advisor-wm-apac-switzerland-team-uhnwi-ubs-zurich"
+          "client-advisor-wm-apac-switzerland-team-uhnwi-ubs-zurich",
+          "consulente-clienti-wm-apac-svizzera-team-uhnwi-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.694Z",
@@ -5731,7 +5875,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339843&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.670Z",
+      "crawledAt": "2026-08-28T20:55:58.107Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5757,11 +5901,13 @@
       },
       "previousSlugs": [
         "client-advisor-wm-apac-switzerland-china-team-in-zurich-ubs-zurich",
-        "client-consulente-wm-apac-switzerland-china-team-in-zurich-ubs-zurich"
+        "client-consulente-wm-apac-switzerland-china-team-in-zurich-ubs-zurich",
+        "client-advisor-wm-apac-svizzera-team-cina-a-zurigo-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "client-advisor-wm-apac-switzerland-china-team-in-zurich-ubs-zurich"
+          "client-advisor-wm-apac-switzerland-china-team-in-zurich-ubs-zurich",
+          "client-advisor-wm-apac-svizzera-team-cina-a-zurigo-ubs-zurich"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.694Z",
@@ -5810,7 +5956,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348793&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.612Z",
+      "crawledAt": "2026-08-28T20:55:58.066Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5893,7 +6039,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348934&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.577Z",
+      "crawledAt": "2026-08-28T20:55:58.047Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -5921,14 +6067,16 @@
         "client-associate-ubs-missouri",
         "assistente-clienti-ubs-missouri",
         "kundenbetreuer-ubs-missouri",
-        "associe-client-ubs-missouri"
+        "associe-client-ubs-missouri",
+        "cliente-associato-ubs-missouri"
       ],
       "previousSlugsByLocale": {
         "it": [
           "client-associate-ubs-missouri",
           "assistente-clienti-ubs-missouri",
           "kundenbetreuer-ubs-missouri",
-          "associe-client-ubs-missouri"
+          "associe-client-ubs-missouri",
+          "cliente-associato-ubs-missouri"
         ],
         "de": [
           "kundenbetreuer-ubs-missouri"
@@ -5985,7 +6133,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=337262&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.566Z",
+      "crawledAt": "2026-08-28T20:55:58.040Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6056,7 +6204,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348087&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.554Z",
+      "crawledAt": "2026-08-28T20:55:58.032Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -6081,11 +6229,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "senior-wealth-strategy-associate-ubs-missouri"
+        "senior-wealth-strategy-associate-ubs-missouri",
+        "senior-associate-per-strategie-di-gestione-del-patrimonio-ubs-missouri"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "senior-wealth-strategy-associate-ubs-missouri"
+          "senior-wealth-strategy-associate-ubs-missouri",
+          "senior-associate-per-strategie-di-gestione-del-patrimonio-ubs-missouri"
         ],
         "de": [
           "senior-wealth-strategy-associate-ubs-missouri"
@@ -6095,6 +6245,7 @@
         ]
       },
       "firstSeenAt": "2026-07-01T23:34:49.523Z",
+      "needsRetranslation": true,
       "salaryMin": 110500,
       "salaryMax": 169500,
       "baseSalary": {
@@ -6140,7 +6291,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347225&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.481Z",
+      "crawledAt": "2026-08-28T20:55:57.982Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6169,7 +6320,8 @@
         "privatkundenberater-in-affluent-oberland-80-100-ubs-zurich",
         "private-client-advisor-in-affluent-oberland-80-100-ubs-zurich",
         "conseiller-client-prive-en-oberland-80-100-ubs-zurich",
-        "privatkundenberater-in-affluent-zollikon-80-100-ubs-zurich"
+        "privatkundenberater-in-affluent-zollikon-80-100-ubs-zurich",
+        "consulente-cliente-privato-in-affluent-zollikon-80-100-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -6177,7 +6329,8 @@
           "privatkundenberater-in-affluent-oberland-80-100-ubs-zurich",
           "private-client-advisor-in-affluent-oberland-80-100-ubs-zurich",
           "conseiller-client-prive-en-oberland-80-100-ubs-zurich",
-          "privatkundenberater-in-affluent-zollikon-80-100-ubs-zurich"
+          "privatkundenberater-in-affluent-zollikon-80-100-ubs-zurich",
+          "consulente-cliente-privato-in-affluent-zollikon-80-100-ubs-zurich"
         ],
         "en": [
           "private-client-advisor-in-affluent-oberland-80-100-ubs-zurich",
@@ -6237,7 +6390,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346866&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.458Z",
+      "crawledAt": "2026-08-28T20:55:57.966Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6308,7 +6461,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347956&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.445Z",
+      "crawledAt": "2026-08-28T20:55:57.957Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -6333,6 +6486,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-14T11:04:55.875Z",
+      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -6362,7 +6516,7 @@
       "title": "BANK-now - Head Software Development",
       "titleByLocale": {
         "it": "BANK-now - Capo dello sviluppo del software",
-        "en": "BANK-now - Head of Software Development",
+        "en": "BANK-now - Head Software Development",
         "de": "BANK-now - Head Software Development",
         "fr": "BANQUE-maintenant - Chef du développement logiciel"
       },
@@ -6378,7 +6532,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346268&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.391Z",
+      "crawledAt": "2026-08-28T20:55:57.913Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6403,11 +6557,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "bank-now-head-software-development-ubs-zurich"
+        "bank-now-head-software-development-ubs-zurich",
+        "bank-now-capo-dello-sviluppo-del-software-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "bank-now-head-software-development-ubs-zurich"
+          "bank-now-head-software-development-ubs-zurich",
+          "bank-now-capo-dello-sviluppo-del-software-ubs-zurich"
         ],
         "fr": [
           "bank-now-head-software-development-ubs-zurich"
@@ -6460,7 +6616,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=340734&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.362Z",
+      "crawledAt": "2026-08-28T20:55:57.862Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -6485,11 +6641,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "kundenberaterin-kundenberater-affluent-80-100-brig-visp-ubs-valais"
+        "kundenberaterin-kundenberater-affluent-80-100-brig-visp-ubs-valais",
+        "consulente-affluent-80-100-brig-visp-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "kundenberaterin-kundenberater-affluent-80-100-brig-visp-ubs-valais"
+          "kundenberaterin-kundenberater-affluent-80-100-brig-visp-ubs-valais",
+          "consulente-affluent-80-100-brig-visp-ubs-valais"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.476Z",
@@ -6538,7 +6696,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348912&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.345Z",
+      "crawledAt": "2026-08-28T20:55:57.838Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6563,11 +6721,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "senior-sanctions-advisory-officer-ubs-zurich"
+        "senior-sanctions-advisory-officer-ubs-zurich",
+        "senior-sanctions-consigliere-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "senior-sanctions-advisory-officer-ubs-zurich"
+          "senior-sanctions-advisory-officer-ubs-zurich",
+          "senior-sanctions-consigliere-ubs-zurich"
         ],
         "fr": [
           "senior-sanctions-advisory-officer-ubs-zurich"
@@ -6620,7 +6780,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344339&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.340Z",
+      "crawledAt": "2026-08-28T20:55:57.831Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -6646,11 +6806,13 @@
       },
       "previousSlugs": [
         "succession-planner-in-wealth-management-ubs-zentralschweiz",
-        "planificateur-de-releve-gestion-de-la-masse-ubs-zentralschweiz"
+        "planificateur-de-releve-gestion-de-la-masse-ubs-zentralschweiz",
+        "pianificatore-di-successione-gestione-della-ricchezza-ubs-zentralschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "succession-planner-in-wealth-management-ubs-zentralschweiz"
+          "succession-planner-in-wealth-management-ubs-zentralschweiz",
+          "pianificatore-di-successione-gestione-della-ricchezza-ubs-zentralschweiz"
         ],
         "fr": [
           "planificateur-de-releve-gestion-de-la-masse-ubs-zentralschweiz"
@@ -6702,7 +6864,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344009&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.329Z",
+      "crawledAt": "2026-08-28T20:55:57.815Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -6727,6 +6889,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-05T11:33:43.924Z",
+      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -6772,7 +6935,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349648&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.297Z",
+      "crawledAt": "2026-08-28T20:55:57.776Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6843,7 +7006,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348666&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.271Z",
+      "crawledAt": "2026-08-28T20:55:57.747Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -6868,11 +7031,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "cash-manager-private-clients-lausanne-80-100-ubs-suisse-romande"
+        "cash-manager-private-clients-lausanne-80-100-ubs-suisse-romande",
+        "cash-manager-clienti-privati-losanna-80-100-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "cash-manager-private-clients-lausanne-80-100-ubs-suisse-romande"
+          "cash-manager-private-clients-lausanne-80-100-ubs-suisse-romande",
+          "cash-manager-clienti-privati-losanna-80-100-ubs-suisse-romande"
         ]
       },
       "needsRetranslation": true,
@@ -6968,7 +7133,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "crawlerMissStreak": 1
     },
     {
       "id": "ubs-078d1a745067",
@@ -7001,7 +7167,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348321&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.266Z",
+      "crawledAt": "2026-08-28T20:55:57.739Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7072,7 +7238,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348889&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.264Z",
+      "crawledAt": "2026-08-28T20:55:57.737Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7097,11 +7263,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "privatkundenberater-in-affluent-wil-80-100-ubs-ostschweiz"
+        "privatkundenberater-in-affluent-wil-80-100-ubs-ostschweiz",
+        "consulente-clienti-privato-a-affluent-wil-80-100-ubs-ostschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "privatkundenberater-in-affluent-wil-80-100-ubs-ostschweiz"
+          "privatkundenberater-in-affluent-wil-80-100-ubs-ostschweiz",
+          "consulente-clienti-privato-a-affluent-wil-80-100-ubs-ostschweiz"
         ],
         "en": [
           "privatkundenberater-in-affluent-wil-80-100-ubs-ostschweiz"
@@ -7156,7 +7324,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346720&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.262Z",
+      "crawledAt": "2026-08-28T20:55:57.734Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7181,11 +7349,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "conseiller-ere-clientele-privee-retail-payerne-80-100-ubs-suisse-romande"
+        "conseiller-ere-clientele-privee-retail-payerne-80-100-ubs-suisse-romande",
+        "consulente-clienti-privato-retail-payerne-80-100-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "conseiller-ere-clientele-privee-retail-payerne-80-100-ubs-suisse-romande"
+          "conseiller-ere-clientele-privee-retail-payerne-80-100-ubs-suisse-romande",
+          "consulente-clienti-privato-retail-payerne-80-100-ubs-suisse-romande"
         ],
         "en": [
           "conseiller-ere-clientele-privee-retail-payerne-80-100-ubs-suisse-romande"
@@ -7195,6 +7365,7 @@
         ]
       },
       "firstSeenAt": "2026-08-12T10:16:17.679Z",
+      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -7240,7 +7411,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=342095&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.259Z",
+      "crawledAt": "2026-08-28T20:55:57.730Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7287,7 +7458,7 @@
         "it": "addetto-agli-eventi-pagato-a-ore-ubs-western-switzerland",
         "en": "event-attendant-hourly-paid-ubs-western-switzerland",
         "de": "veranstaltungsmitarbeiter-stundenweise-bezahlt-ubs-western-switzerland",
-        "fr": "participant-a-l-evenement-paye-en-heures-ubs-western-switzerland"
+        "fr": "event-attendant-hourly-paid-ubs-western-switzerland"
       },
       "company": "UBS",
       "companyKey": "ubs",
@@ -7297,7 +7468,7 @@
         "it": "Addetto agli eventi (pagato a ore)",
         "en": "Event Attendant (hourly paid)",
         "de": "Veranstaltungsmitarbeiter (stundenweise bezahlt)",
-        "fr": "Participant à l'événement (payé en heures)"
+        "fr": "Event Attendant (hourly paid)"
       },
       "description": "Do you always put clients at the center of everything you do? Are you passionate about creating a welcoming and positive atmosphere?\nAs additional support for our team in Geneva, we are looking for a new colleague (female or male) to join us as an Event Attendant on an hourly, on-call basis (on average, approximately 65 hours per year).\nIn this role, you will be responsible for welcoming guests and providing excellent client service at a variety of events, including client gatherings, press conferences, and third-party events involving UBS. You will support the event manager and play a key role in ensuring each event runs smoothly and safely.",
       "descriptionByLocale": {
@@ -7311,7 +7482,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339987&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.255Z",
+      "crawledAt": "2026-08-28T20:55:57.726Z",
       "addressLocality": "Western Switzerland",
       "addressCountry": "CH",
       "country": "CH",
@@ -7336,17 +7507,22 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "event-attendant-hourly-paid-ubs-western-switzerland"
+        "event-attendant-hourly-paid-ubs-western-switzerland",
+        "participant-a-l-evenement-paye-en-heures-ubs-western-switzerland",
+        "addetto-agli-eventi-pagato-a-ore-ubs-western-switzerland"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "event-attendant-hourly-paid-ubs-western-switzerland"
+          "event-attendant-hourly-paid-ubs-western-switzerland",
+          "addetto-agli-eventi-pagato-a-ore-ubs-western-switzerland"
         ],
         "fr": [
+          "participant-a-l-evenement-paye-en-heures-ubs-western-switzerland",
           "event-attendant-hourly-paid-ubs-western-switzerland"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.362Z",
+      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 150000,
       "baseSalary": {
@@ -7391,7 +7567,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349287&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.249Z",
+      "crawledAt": "2026-08-28T20:55:57.721Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7475,7 +7651,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349285&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.249Z",
+      "crawledAt": "2026-08-28T20:55:57.721Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -7557,7 +7733,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349288&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.248Z",
+      "crawledAt": "2026-08-28T20:55:57.719Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7641,7 +7817,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349289&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.246Z",
+      "crawledAt": "2026-08-28T20:55:57.717Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7666,11 +7842,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "wealth-planner-et-specialiste-en-prevoyance-geneve-80-100-ubs-suisse-romande"
+        "wealth-planner-et-specialiste-en-prevoyance-geneve-80-100-ubs-suisse-romande",
+        "wealth-planner-e-provident-specialist-ginevra-80-100-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "wealth-planner-et-specialiste-en-prevoyance-geneve-80-100-ubs-suisse-romande"
+          "wealth-planner-et-specialiste-en-prevoyance-geneve-80-100-ubs-suisse-romande",
+          "wealth-planner-e-provident-specialist-ginevra-80-100-ubs-suisse-romande"
         ],
         "en": [
           "wealth-planner-et-specialiste-en-prevoyance-geneve-80-100-ubs-suisse-romande"
@@ -7680,6 +7858,7 @@
         ]
       },
       "firstSeenAt": "2026-08-13T21:53:00.347Z",
+      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -7725,7 +7904,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346510&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.226Z",
+      "crawledAt": "2026-08-28T20:55:57.693Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7750,11 +7929,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "bank-now-kundenberater-in-fahrzeugfinanzierung-80-100-ubs-zurich"
+        "bank-now-kundenberater-in-fahrzeugfinanzierung-80-100-ubs-zurich",
+        "bank-now-consulente-del-cliente-nel-finanziamento-del-veicolo-80-100-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "bank-now-kundenberater-in-fahrzeugfinanzierung-80-100-ubs-zurich"
+          "bank-now-kundenberater-in-fahrzeugfinanzierung-80-100-ubs-zurich",
+          "bank-now-consulente-del-cliente-nel-finanziamento-del-veicolo-80-100-ubs-zurich"
         ],
         "en": [
           "bank-now-kundenberater-in-fahrzeugfinanzierung-80-100-ubs-zurich"
@@ -7764,6 +7945,7 @@
         ]
       },
       "firstSeenAt": "2026-08-14T21:27:57.189Z",
+      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -7809,7 +7991,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347613&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.223Z",
+      "crawledAt": "2026-08-28T20:55:57.684Z",
       "addressLocality": "Plateau suisse",
       "addressCountry": "CH",
       "country": "CH",
@@ -7834,11 +8016,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "specialiste-credits-80-100-ubs-plateau-suisse"
+        "specialiste-credits-80-100-ubs-plateau-suisse",
+        "specialista-crediti-80-100-ubs-plateau-suisse"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "specialiste-credits-80-100-ubs-plateau-suisse"
+          "specialiste-credits-80-100-ubs-plateau-suisse",
+          "specialista-crediti-80-100-ubs-plateau-suisse"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.099Z",
@@ -7887,7 +8071,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349709&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.183Z",
+      "crawledAt": "2026-08-28T20:55:57.655Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -7914,12 +8098,14 @@
       "previousSlugs": [
         "privatkundenberater-in-affluent-bern-80-100-ubs-mittelland",
         "consulente-clienti-privato-ad-affluent-bern-80-100-ubs-mittelland",
-        "private-customer-consultant-in-affluent-bern-80-100-ubs-mittelland"
+        "private-customer-consultant-in-affluent-bern-80-100-ubs-mittelland",
+        "consulente-cliente-privato-a-affluent-bern-80-100-ubs-mittelland"
       ],
       "previousSlugsByLocale": {
         "it": [
           "privatkundenberater-in-affluent-bern-80-100-ubs-mittelland",
-          "consulente-clienti-privato-ad-affluent-bern-80-100-ubs-mittelland"
+          "consulente-clienti-privato-ad-affluent-bern-80-100-ubs-mittelland",
+          "consulente-cliente-privato-a-affluent-bern-80-100-ubs-mittelland"
         ],
         "en": [
           "privatkundenberater-in-affluent-bern-80-100-ubs-mittelland",
@@ -7974,7 +8160,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349422&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:25.174Z",
+      "crawledAt": "2026-08-28T20:55:57.646Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -7999,11 +8185,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "conseiller-ere-clientele-privee-affluent-sierre-80-100-ubs-valais"
+        "conseiller-ere-clientele-privee-affluent-sierre-80-100-ubs-valais",
+        "advisor-ere-private-clientele-affifluent-sierre-80-100-ubs-valais"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "conseiller-ere-clientele-privee-affluent-sierre-80-100-ubs-valais"
+          "conseiller-ere-clientele-privee-affluent-sierre-80-100-ubs-valais",
+          "advisor-ere-private-clientele-affifluent-sierre-80-100-ubs-valais"
         ],
         "en": [
           "conseiller-ere-clientele-privee-affluent-sierre-80-100-ubs-valais"
@@ -8058,7 +8246,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349669&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.145Z",
+      "crawledAt": "2026-08-28T20:55:57.629Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8128,7 +8316,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348919&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.145Z",
+      "crawledAt": "2026-08-28T20:55:57.629Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8153,11 +8341,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "privatkundenberater-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich"
+        "privatkundenberater-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich",
+        "consulente-clienti-privato-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "privatkundenberater-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich"
+          "privatkundenberater-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich",
+          "consulente-clienti-privato-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich"
         ],
         "en": [
           "privatkundenberater-in-affluent-bahnhofstrasse-45-80-100-ubs-zurich"
@@ -8212,7 +8402,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347773&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.117Z",
+      "crawledAt": "2026-08-28T20:55:57.605Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8283,7 +8473,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347612&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.107Z",
+      "crawledAt": "2026-08-28T20:55:57.596Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -8308,6 +8498,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-19T09:45:01.242Z",
+      "needsRetranslation": true,
       "salaryMin": 29500,
       "salaryMax": 45300,
       "baseSalary": {
@@ -8352,7 +8543,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348364&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.105Z",
+      "crawledAt": "2026-08-28T20:55:57.595Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8377,6 +8568,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-19T09:45:01.238Z",
+      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -8422,7 +8614,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346337&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.086Z",
+      "crawledAt": "2026-08-28T20:55:57.566Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -8495,7 +8687,7 @@
       "title": "Remote Advisor Mortgage – Remote Sales & Advice Basel, 80-100%",
       "titleByLocale": {
         "it": "Consulente Ipotechario Remoto – Vendite e Consulenza a Distanza",
-        "en": "Remote Advisor Mortgage – Remote Sales & Advice Basel, 80-100 %",
+        "en": "Remote Advisor Mortgage – Remote Sales & Advice Basel, 80-100%",
         "de": "Remote Berater Mortgage – Remote Sales & Advice Basel, 80-100%",
         "fr": "Conseiller Hypothécaire à Distance – Ventes et Conseils à Distance"
       },
@@ -8511,7 +8703,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=342772&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.069Z",
+      "crawledAt": "2026-08-28T20:55:57.567Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -8536,14 +8728,17 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "remote-advisor-mortgage-remote-sales-advice-basel-80-100-ubs-nordschweiz"
+        "remote-advisor-mortgage-remote-sales-advice-basel-80-100-ubs-nordschweiz",
+        "consulente-ipotechario-remoto-vendite-e-consulenza-a-distanza-ubs-nordschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "remote-advisor-mortgage-remote-sales-advice-basel-80-100-ubs-nordschweiz"
+          "remote-advisor-mortgage-remote-sales-advice-basel-80-100-ubs-nordschweiz",
+          "consulente-ipotechario-remoto-vendite-e-consulenza-a-distanza-ubs-nordschweiz"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.239Z",
+      "needsRetranslation": true,
       "salaryMin": 59000,
       "salaryMax": 90500,
       "baseSalary": {
@@ -8588,7 +8783,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349635&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.027Z",
+      "crawledAt": "2026-08-28T20:55:57.537Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8658,7 +8853,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349636&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:25.027Z",
+      "crawledAt": "2026-08-28T20:55:57.537Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8728,7 +8923,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350164&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.025Z",
+      "crawledAt": "2026-08-28T20:55:57.533Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8754,11 +8949,13 @@
       },
       "previousSlugs": [
         "mitarbeiter-in-hypotheken-und-grundbuchwesen-befristet-acht-monate-ubs-zurich",
-        "employes-en-hypotheques-et-registres-fonciers-limite-a-huit-mois-ubs-zurich"
+        "employes-en-hypotheques-et-registres-fonciers-limite-a-huit-mois-ubs-zurich",
+        "collaboratore-trice-hypotheken-e-grundbuchwesen-befristet-acht-monate-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "mitarbeiter-in-hypotheken-und-grundbuchwesen-befristet-acht-monate-ubs-zurich"
+          "mitarbeiter-in-hypotheken-und-grundbuchwesen-befristet-acht-monate-ubs-zurich",
+          "collaboratore-trice-hypotheken-e-grundbuchwesen-befristet-acht-monate-ubs-zurich"
         ],
         "en": [
           "mitarbeiter-in-hypotheken-und-grundbuchwesen-befristet-acht-monate-ubs-zurich"
@@ -8815,7 +9012,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348927&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:25.011Z",
+      "crawledAt": "2026-08-28T20:55:57.478Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8886,7 +9083,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350277&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:24.965Z",
+      "crawledAt": "2026-08-28T20:55:57.485Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -8957,7 +9154,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344272&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:24.954Z",
+      "crawledAt": "2026-08-28T20:55:57.469Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8982,11 +9179,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "head-hospitality-services-ubs-zurich"
+        "head-hospitality-services-ubs-zurich",
+        "servizi-di-accoglienza-ubs-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "head-hospitality-services-ubs-zurich"
+          "head-hospitality-services-ubs-zurich",
+          "servizi-di-accoglienza-ubs-zurich"
         ],
         "fr": [
           "head-hospitality-services-ubs-zurich"
@@ -9039,7 +9238,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347731&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:24.864Z",
+      "crawledAt": "2026-08-28T20:55:57.403Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9064,6 +9263,7 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-21T11:19:29.685Z",
+      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -9109,7 +9309,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346951&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:24.862Z",
+      "crawledAt": "2026-08-28T20:55:57.400Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9134,11 +9334,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "conseiller-ere-clientele-privee-retail-onu-ubs-suisse-romande"
+        "conseiller-ere-clientele-privee-retail-onu-ubs-suisse-romande",
+        "consulente-te-clientela-privata-retail-onu-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "conseiller-ere-clientele-privee-retail-onu-ubs-suisse-romande"
+          "conseiller-ere-clientele-privee-retail-onu-ubs-suisse-romande",
+          "consulente-te-clientela-privata-retail-onu-ubs-suisse-romande"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.077Z",
@@ -9187,7 +9389,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344127&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:24.859Z",
+      "crawledAt": "2026-08-28T20:55:57.397Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9212,11 +9414,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "conseiller-ere-clientele-privee-affluent-fribourg-ubs-suisse-romande"
+        "conseiller-ere-clientele-privee-affluent-fribourg-ubs-suisse-romande",
+        "consulente-consulente-clientela-privata-affluente-friburgo-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "conseiller-ere-clientele-privee-affluent-fribourg-ubs-suisse-romande"
+          "conseiller-ere-clientele-privee-affluent-fribourg-ubs-suisse-romande",
+          "consulente-consulente-clientela-privata-affluente-friburgo-ubs-suisse-romande"
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.336Z",
@@ -9265,7 +9469,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=341821&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:13:24.855Z",
+      "crawledAt": "2026-08-28T20:55:57.394Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9290,11 +9494,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "conseiller-ere-clientele-privee-retail-eaux-vives-ubs-suisse-romande"
+        "conseiller-ere-clientele-privee-retail-eaux-vives-ubs-suisse-romande",
+        "advisor-ere-private-clientele-retail-eaux-vives-ubs-suisse-romande"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "conseiller-ere-clientele-privee-retail-eaux-vives-ubs-suisse-romande"
+          "conseiller-ere-clientele-privee-retail-eaux-vives-ubs-suisse-romande",
+          "advisor-ere-private-clientele-retail-eaux-vives-ubs-suisse-romande"
         ],
         "en": [
           "conseiller-ere-clientele-privee-retail-eaux-vives-ubs-suisse-romande"
@@ -9349,7 +9555,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349059&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:24.840Z",
+      "crawledAt": "2026-08-28T20:55:57.370Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9420,7 +9626,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348915&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:24.839Z",
+      "crawledAt": "2026-08-28T20:55:57.370Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9491,7 +9697,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339314&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:24.837Z",
+      "crawledAt": "2026-08-28T20:55:57.368Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -9516,11 +9722,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "bank-now-kundenberater-in-privatkredit-bern-80-100-ubs-mittelland"
+        "bank-now-kundenberater-in-privatkredit-bern-80-100-ubs-mittelland",
+        "bank-now-consulente-cliente-in-loan-privato-berna-80-100-ubs"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "bank-now-kundenberater-in-privatkredit-bern-80-100-ubs-mittelland"
+          "bank-now-kundenberater-in-privatkredit-bern-80-100-ubs-mittelland",
+          "bank-now-consulente-cliente-in-loan-privato-berna-80-100-ubs"
         ],
         "de": [
           "bank-now-kundenberater-in-privatkredit-bern-80-100-ubs-mittelland"
@@ -9571,7 +9779,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349406&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:13:24.834Z",
+      "crawledAt": "2026-08-28T20:55:57.343Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9642,7 +9850,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348971&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:24.834Z",
+      "crawledAt": "2026-08-28T20:55:57.364Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9713,7 +9921,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348851&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:13:24.822Z",
+      "crawledAt": "2026-08-28T20:55:57.370Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9832,257 +10040,8 @@
         }
       },
       "addressRegion": "ZH",
-      "crawlerMissStreak": 1
-    },
-    {
-      "id": "ubs-aacdca0879f7",
-      "slug": "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-argovia-solothurn-ubs-aargau-solothurn",
-      "slugByLocale": {
-        "it": "2027-apprendistato-bancario-formazione-commerciale-di-base-kv-argovia-solothurn-ubs-aargau-solothurn",
-        "en": "2027-banking-commercial-basic-education-kv-aargau-solothurn-ubs-aargau-solothurn",
-        "de": "2027-banklehre-kaufmannische-grundbildung-kv-aargau-solothurn-ubs-aargau-solothurn",
-        "fr": "2027-banque-education-de-base-commerciale-kv-argovie-solothurn-ubs-aargau-solothurn"
-      },
-      "company": "UBS",
-      "companyKey": "ubs",
-      "companyDomain": "ubs.com",
-      "title": "2027 Banklehre – Kaufmännische Grundbildung (KV) – Aargau/Solothurn",
-      "titleByLocale": {
-        "it": "2027 Apprendistato bancario – formazione commerciale di base (KV) – Argovia/Solothurn",
-        "en": "2027 Banking – Commercial basic education (KV) – Aargau/Solothurn",
-        "de": "2027 Banklehre – Kaufmännische Grundbildung (KV) – Aargau/Solothurn",
-        "fr": "2027 Banque – Éducation de base commerciale (KV) – Argovie/Solothurn"
-      },
-      "description": "Hast du Spass daran, mit Menschen zu arbeiten? Bist du neugierig und offen für Neues? Möchtest du etwas bewegen und herausgefordert werden? Dann werde Teil unseres Teams und gestalte die Zukunft mit uns!\n\nWir bieten dir eine vielseitige kaufmännische Ausbildung mit viel Praxis im Bankgeschäft. Bei uns lernst du alles, was du für eine erfolgreiche Karriere und deinen weiteren beruflichen Weg bei UBS brauchst.\n\nDeine Ausbildung\nWährend deiner dreijährigen Ausbildung wirst du in verschiedenen Teams der Bank arbeiten und die vielen spannenden Bereiche von UBS kennenlernen. Unsere motivierten Praxisausbilderinnen und Praxisausbilder begleiten dich persönlich und stehen dir dabei immer zur Seite.\n\nNeben der Berufsfachschule bekommst du eine praxisorientierte Ausbildung am CYP in deiner Region. Dort triffst du auf andere Lernende von verschiedenen Banken und lernst die theoretischen Grundlagen des Bankwesens. Das CYP bereitet dich perfekt auf die bankfachliche Lehrabschlussprüfung vor. Bei UBS vertiefst du dein Wissen über unsere Produkte und Dienstleistungen und lernst unseren UBS-Beratungsansatz kennen. Ausserdem legen wir grossen Wert darauf, deine sozialen Fähigkeiten wie Verkaufsverhalten und Kommunikation zu stärken.\n\nDeine Lehrzeit endet bei uns nicht einfach mit dem eidgenössischen Fähigkeitszeugnis «Kauffrau/Kaufmann» (EFZ mit oder ohne Berufsmatura Typ Wirtschaft möglich). Viele Lehrabgängerinnen und Lehrabgänger treten bei uns in eine Festanstellung über oder vertiefen ihr Fachwissen in unserem zweijährigen Nachwuchsförderprogramm.\n\nDein Team\nDu bist Teil einer grossen Gruppe von UBS KV-Lernenden. Ihr trefft euch regelmässig bei internen und externen Schulungen, mehrtägigen Events und vielem mehr. Dabei entstehen oft Freundschaften, die über die Arbeit und Ausbildung hinausgehen.\n\nBei UBS setzen wir gezielt auf moderne Technologien wie Künstliche Intelligenz (KI), um unsere Dienstleistungen laufend zu verbessern – auch in deinem Team. So gestalten wir Prozesse effizienter, nutzen Daten intelligenter und erleichtern den Arbeitsalltag – für Mitarbeitende sowie Kundinnen und Kunden.\n\nDeine Kenntnisse und Erfahrungen\n• Du hast die höchste Volksschulstufe mit guten Noten in Mathematik, Deutsch, Englisch und Französisch abgeschlossen. Besonders wichtig sind uns:\n• •Du hast Spass daran, mit Menschen zu arbeiten und bist ein echter Teamplayer.\n• •Du bist motiviert und hast immer eine positive Einstellung.\n• •Du lernst gerne Neues und bist offen für Veränderungen.\n• •Du interessierst dich für die Finanzwelt.\n\nNächste Schritte\n• Bewirb dich schnell und einfach über den folgenden Link .\n• Auf unserer Homepage findest du auch alle Infos zur Lehre und zu Infoveranstaltungen in deiner Nähe.",
-      "descriptionByLocale": {
-        "it": "Ti piace lavorare con le persone? Siete curiosi e aperti a cose nuove? Vuoi fare la differenza ed essere sfidato? Allora diventa parte del nostro team e forma il futuro con noi! Vi offriamo una formazione commerciale versatile con molta pratica nel settore bancario. Con noi, imparerai tutto il necessario per una carriera di successo e il tuo ulteriore percorso professionale presso UBS. La tua istruzione Durante il vostro apprendistato di tre anni, lavorerete in diverse squadre in banca e conoscere le molte aree emozionanti di UBS. I nostri istruttori pratici motivati vi accompagnano personalmente e sono sempre al vostro fianco. Oltre alla scuola professionale, riceverete una formazione pratica presso il CYP nella vostra regione. Lì incontrerai altri studenti provenienti da diverse banche e imparerai le basi teoriche del banking. Il CYP ti prepara perfettamente per l'esame di laurea bancario. A UBS, approfondirete la vostra conoscenza dei nostri prodotti e servizi e conoscere il nostro approccio di consulenza UBS. Alleghiamo anche grande importanza per rafforzare le vostre competenze sociali come il comportamento di vendita e la comunicazione. L'apprendistato non termina semplicemente con il certificato federale di competenza «Kauffrau/Kaufmann» (EFZ con o senza un'economia di tipo professionale possibile). Molti apprendisti si trasferiscono in un lavoro permanente con noi o approfondiscono la loro esperienza nel nostro programma di sviluppo di giovani talenti di due anni. La tua squadra Siete parte di un grande gruppo di studenti UBS KV. Si incontra regolarmente in sessioni di formazione interna ed esterna, eventi multi-day e molto altro. Questo spesso crea amicizie che vanno oltre il lavoro e l'istruzione. A UBS, ci concentriamo sulle tecnologie moderne come l'intelligenza artificiale (AI) per migliorare continuamente i nostri servizi – compreso nel vostro team. In questo modo, rendiamo i processi più efficienti, usiamo i dati in modo più intelligente e facilitiamo il lavoro quotidiano – per i dipendenti e i clienti. La vostra conoscenza ed esperienza\n• Hai completato il più alto livello di scuola elementare con buoni voti in matematica, tedesco, inglese e francese. Particolarmente importante per noi sono:\n• •Ti piace lavorare con le persone e sei un vero giocatore di squadra.\n• •Sei motivato e hai sempre un atteggiamento positivo.\n•\n• Ti piace imparare cose nuove e sono aperti al cambiamento.\n•\n• Sei interessato al mondo finanziario. Prossimo passo\n• Applicare rapidamente e facilmente tramite il seguente link.\n• Sulla nostra homepage troverete anche tutte le informazioni sugli eventi di insegnamento e informazione nella vostra zona.",
-        "en": "Do you enjoy working with people? Are you curious and open to new things? Do you want to make a difference and be challenged? Then become part of our team and shape the future with us! We offer you a versatile commercial education with a lot of practice in banking. With us, you will learn everything you need for a successful career and your further professional path at UBS. Your education During your three-year apprenticeship, you will work in different teams at the bank and get to know the many exciting areas of UBS. Our motivated practical instructors accompany you personally and are always at your side. In addition to the vocational school, you will receive a practical education at the CYP in your region. There you will meet other learners from different banks and learn the theoretical basics of banking. The CYP prepares you perfectly for the banking degree exam. At UBS, you will deepen your knowledge of our products and services and learn about our UBS consulting approach. We also attach great importance to strengthening your social skills such as sales behavior and communication. Your apprenticeship does not simply end with the federal certificate of competence «Kauffrau/Kaufmann» (EFZ with or without professional qualification type economy possible). Many apprentices move into permanent employment with us or deepen their expertise in our two-year young talent development program. Your team You are part of a large group of UBS KV learners. You meet regularly at internal and external training sessions, multi-day events and much more. This often creates friendships that go beyond work and education. At UBS, we focus on modern technologies such as artificial intelligence (AI) to continuously improve our services – including in your team. In this way, we make processes more efficient, use data more intelligently and make everyday work easier – for employees and customers. Your knowledge and experience\n• You have completed the highest elementary school level with good grades in mathematics, German, English and French. Particularly important to us are:\n• •You enjoy working with people and you are a real team player.\n• •You are motivated and always have a positive attitude.\n•\n• You like to learn new things and are open to change.\n•\n• You are interested in the financial world. Next steps\n• Apply quickly and easily via the following link.\n• On our homepage you will also find all information about teaching and information events in your area.",
-        "de": "Hast du Spass daran, mit Menschen zu arbeiten? Bist du neugierig und offen für Neues? Möchtest du etwas bewegen und herausgefordert werden? Dann werde Teil unseres Teams und gestalte die Zukunft mit uns!\n\nWir bieten dir eine vielseitige kaufmännische Ausbildung mit viel Praxis im Bankgeschäft. Bei uns lernst du alles, was du für eine erfolgreiche Karriere und deinen weiteren beruflichen Weg bei UBS brauchst.\n\nDeine Ausbildung\nWährend deiner dreijährigen Ausbildung wirst du in verschiedenen Teams der Bank arbeiten und die vielen spannenden Bereiche von UBS kennenlernen. Unsere motivierten Praxisausbilderinnen und Praxisausbilder begleiten dich persönlich und stehen dir dabei immer zur Seite.\n\nNeben der Berufsfachschule bekommst du eine praxisorientierte Ausbildung am CYP in deiner Region. Dort triffst du auf andere Lernende von verschiedenen Banken und lernst die theoretischen Grundlagen des Bankwesens. Das CYP bereitet dich perfekt auf die bankfachliche Lehrabschlussprüfung vor. Bei UBS vertiefst du dein Wissen über unsere Produkte und Dienstleistungen und lernst unseren UBS-Beratungsansatz kennen. Ausserdem legen wir grossen Wert darauf, deine sozialen Fähigkeiten wie Verkaufsverhalten und Kommunikation zu stärken.\n\nDeine Lehrzeit endet bei uns nicht einfach mit dem eidgenössischen Fähigkeitszeugnis «Kauffrau/Kaufmann» (EFZ mit oder ohne Berufsmatura Typ Wirtschaft möglich). Viele Lehrabgängerinnen und Lehrabgänger treten bei uns in eine Festanstellung über oder vertiefen ihr Fachwissen in unserem zweijährigen Nachwuchsförderprogramm.\n\nDein Team\nDu bist Teil einer grossen Gruppe von UBS KV-Lernenden. Ihr trefft euch regelmässig bei internen und externen Schulungen, mehrtägigen Events und vielem mehr. Dabei entstehen oft Freundschaften, die über die Arbeit und Ausbildung hinausgehen.\n\nBei UBS setzen wir gezielt auf moderne Technologien wie Künstliche Intelligenz (KI), um unsere Dienstleistungen laufend zu verbessern – auch in deinem Team. So gestalten wir Prozesse effizienter, nutzen Daten intelligenter und erleichtern den Arbeitsalltag – für Mitarbeitende sowie Kundinnen und Kunden.\n\nDeine Kenntnisse und Erfahrungen\n• Du hast die höchste Volksschulstufe mit guten Noten in Mathematik, Deutsch, Englisch und Französisch abgeschlossen. Besonders wichtig sind uns:\n• •Du hast Spass daran, mit Menschen zu arbeiten und bist ein echter Teamplayer.\n• •Du bist motiviert und hast immer eine positive Einstellung.\n• •Du lernst gerne Neues und bist offen für Veränderungen.\n• •Du interessierst dich für die Finanzwelt.\n\nNächste Schritte\n• Bewirb dich schnell und einfach über den folgenden Link .\n• Auf unserer Homepage findest du auch alle Infos zur Lehre und zu Infoveranstaltungen in deiner Nähe.",
-        "fr": "Vous aimez travailler avec les gens ? Êtes-vous curieux et ouvert à de nouvelles choses ? Voulez-vous faire une différence et être défié? Faites ensuite partie de notre équipe et façonnez l'avenir avec nous! Nous vous offrons une éducation commerciale polyvalente avec beaucoup de pratique dans le secteur bancaire. Avec nous, vous apprendrez tout ce dont vous avez besoin pour réussir votre carrière et votre parcours professionnel chez UBS. Votre éducation Pendant votre apprentissage de trois ans, vous travaillerez dans différentes équipes de la banque et apprendrez à connaître les nombreux domaines passionnants de UBS. Nos instructeurs pratiques motivés vous accompagnent personnellement et sont toujours à vos côtés. En plus de l'école professionnelle, vous recevrez une formation pratique au CYP dans votre région. Vous y rencontrerez d'autres apprenants de différentes banques et apprendrez les bases théoriques de la banque. Le CYP vous prépare parfaitement pour l'examen de diplôme bancaire. Chez UBS, vous approfondirez votre connaissance de nos produits et services et vous en apprendrez davantage sur notre approche de consultation UBS. Nous attachons également une grande importance au renforcement de vos compétences sociales telles que le comportement des ventes et la communication. Votre apprentissage ne se termine pas simplement par le certificat fédéral de compétence «Kauffrau/Kaufmann» (EFZ avec ou sans l'économie de type qualification professionnelle possible). Beaucoup d'apprentis passent à l'emploi permanent chez nous ou approfondissent leur expertise dans notre programme de développement des jeunes talents de deux ans. Votre équipe Vous faites partie d'un grand groupe d'apprenants UBS KV. Vous vous réunissez régulièrement lors de sessions de formation internes et externes, d'événements de plusieurs jours et bien plus encore. Cela crée souvent des amitiés qui vont au-delà du travail et de l'éducation. Chez UBS, nous nous concentrons sur les technologies modernes comme l'intelligence artificielle (IA) pour améliorer continuellement nos services, y compris dans votre équipe. Ainsi, nous rendons les processus plus efficaces, utilisons les données plus intelligemment et facilitons le travail quotidien – pour les employés et les clients. Vos connaissances et votre expérience\n• Vous avez terminé le plus haut niveau de l'école primaire avec de bonnes notes en mathématiques, allemand, anglais et français. Pour nous, il est particulièrement important:\n• •Vous aimez travailler avec les gens et vous êtes un vrai joueur d'équipe.\n• •Vous êtes motivé et avez toujours une attitude positive.\n•\n• Vous aimez apprendre de nouvelles choses et êtes ouvert au changement.\n•\n• Vous êtes intéressé par le monde financier. Prochaines étapes\n• Appliquer rapidement et facilement via le lien suivant.\n• Sur notre page d'accueil, vous trouverez également toutes les informations sur les événements d'enseignement et d'information dans votre région."
-      },
-      "location": "Aargau / Solothurn",
-      "canton": "AG",
-      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346318&PageType=jobdetails",
-      "source": "UBS Dedicated Parser (Taleo API)",
-      "sourceLang": "de",
-      "crawledAt": "2026-08-27T00:37:43.250Z",
-      "addressLocality": "Aargau / Solothurn",
-      "addressCountry": "CH",
-      "country": "CH",
-      "postalCode": "",
-      "category": "Finanza",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "mid",
-      "sector": "Finanza / Banca",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-07-01",
-      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346318&PageType=jobdetails",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "_ubsMeta": {
-        "reqId": "346318",
-        "department": "",
-        "region": "Schweiz - Aargau / Solothurn",
-        "cities": "",
-        "categoryRaw": "",
-        "jobType": ""
-      },
-      "previousSlugs": [
-        "2027-banklehre-kaufmannische-grundbildung-kv-aargau-solothurn-ubs-aargau-solothurn"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-aargau-solothurn-ubs-aargau-solothurn"
-        ],
-        "en": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-aargau-solothurn-ubs-aargau-solothurn"
-        ],
-        "fr": [
-          "2027-banklehre-kaufmannische-grundbildung-kv-aargau-solothurn-ubs-aargau-solothurn"
-        ]
-      },
-      "firstSeenAt": "2026-07-03T12:37:47.779Z",
-      "salaryMin": 74500,
-      "salaryMax": 131000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 74500,
-          "maxValue": 131000,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "AG",
-      "crawlerMissStreak": 2
-    },
-    {
-      "id": "ubs-3c1d041b2ba0",
-      "slug": "vendite-a-reddito-fisso-ugm-clienti-professionali-di-accesso-al-mercato-wm-ubs-zurich",
-      "slugByLocale": {
-        "it": "vendite-a-reddito-fisso-ugm-clienti-professionali-di-accesso-al-mercato-wm-ubs-zurich",
-        "en": "ugm-fixed-income-sales-professional-market-access-clients-wm-ubs-zurich",
-        "de": "ugm-fixed-income-sales-professionelle-marktzugangskunden-wm-ubs-zurich",
-        "fr": "ventes-a-revenu-fixe-ugm-clients-professionnels-d-acces-au-marche-wm-ubs-zurich"
-      },
-      "company": "UBS",
-      "companyKey": "ubs",
-      "companyDomain": "ubs.com",
-      "title": "UGM Fixed Income Sales – Professional Market Access Clients WM",
-      "titleByLocale": {
-        "it": "Vendite a reddito fisso UGM – Clienti professionali di accesso al mercato WM",
-        "en": "UGM Fixed Income Sales – Professional Market Access Clients WM",
-        "de": "UGM Fixed Income Sales – Professionelle Marktzugangskunden WM",
-        "fr": "Ventes à revenu fixe UGM – Clients professionnels d'accès au marché WM"
-      },
-      "description": "Are you enthusiastic about financial markets and client interaction? Do you enjoy working in a dynamic environment where collaboration and performance go hand in hand?\n\nWe are looking for a Fixed Income Sales professional to join our UGM team in Zurich, focusing on Professional Market Access (PMA) clients within Wealth Management. In this role, you will:\n• provide Fixed Income coverage and act as the primary point of contact for a designated Front business area\n• deliver a broad range of cash Fixed Income solutions, including Investment Grade, High Yield, Emerging Markets, Subordinated debt and Rates\n• engage with end-clients across UHNW and GFIW segments\n• translate market developments and CIO research into client-ready investment ideas\n• distribute Fixed Income ideas and provide execution services\n• partner closely with Client Advisors, CIO, the Execution Hub and IB trading desks\n• contribute to franchise growth by strengthening existing relationships and supporting client acquisition\n• manage the end-to-end sales process, from idea generation through execution and follow-up",
-      "descriptionByLocale": {
-        "it": "Sei entusiasta dei mercati finanziari e dell'interazione con i clienti? Ti piace lavorare in un ambiente dinamico dove collaborazione e performance vanno di pari passo? Siamo alla ricerca di un professionista di vendite di reddito fisso per unire il nostro team UGM a Zurigo, concentrandosi sui clienti Professional Market Access (PMA) all'interno di Wealth Management. In questo ruolo, voi:\n• fornire copertura di reddito fisso e agire come punto di contatto principale per un'area di business designata Front\n• fornire una vasta gamma di contanti soluzioni di reddito fisso, tra cui grado di investimento, alto rendimento, mercati emergenti, debito subordinato e tariffe\n• coinvolgere i clienti finali in segmenti UHNW e GFIW\n• tradurre gli sviluppi del mercato e la ricerca CIO in idee di investimento pronte al cliente\n• distribuire idee di reddito fisso e fornire servizi di esecuzione\n• partner a stretto contatto con Client Advisors, CIO, Execution Hub e IB\n• contribuire alla crescita del franchising rafforzando le relazioni esistenti e sostenendo l'acquisizione del cliente\n• gestire il processo di vendita end-to-end, dalla generazione di idee attraverso l'esecuzione e il follow-up",
-        "en": "Are you enthusiastic about financial markets and client interaction? Do you enjoy working in a dynamic environment where collaboration and performance go hand in hand?\n\nWe are looking for a Fixed Income Sales professional to join our UGM team in Zurich, focusing on Professional Market Access (PMA) clients within Wealth Management. In this role, you will:\n• provide Fixed Income coverage and act as the primary point of contact for a designated Front business area\n• deliver a broad range of cash Fixed Income solutions, including Investment Grade, High Yield, Emerging Markets, Subordinated debt and Rates\n• engage with end-clients across UHNW and GFIW segments\n• translate market developments and CIO research into client-ready investment ideas\n• distribute Fixed Income ideas and provide execution services\n• partner closely with Client Advisors, CIO, the Execution Hub and IB trading desks\n• contribute to franchise growth by strengthening existing relationships and supporting client acquisition\n• manage the end-to-end sales process, from idea generation through execution and follow-up",
-        "de": "Sind Sie begeistert von Finanzmärkten und Kundeninteraktion? Arbeiten Sie gerne in einem dynamischen Umfeld, in dem Zusammenarbeit und Leistung Hand in Hand gehen? Wir suchen einen Fixed Income Sales Professional, der sich unserem UGM-Team in Zürich anschließt und sich auf Professional Market Access (PMA)-Kunden im Wealth Management konzentriert. In dieser Rolle werden Sie:\n• Bereitstellung einer Fixed-Income-Abdeckung und als primärer Ansprechpartner für einen bestimmten Front-Geschäftsbereich\n• Bereitstellung einer breiten Palette von Cash Fixed Income-Lösungen, einschließlich Investment Grade, High Yield, Emerging Markets, Subordinated Debt und Rates\n• Kontaktieren Sie Endkunden in UHNW- und GFIW-Segmenten\n• Übersetzen von Marktentwicklungen und CIO-Research in kundenbereite Anlageideen\n• Verteilen von Fixed Income Ideen und bieten Ausführungsdienste\n• enge Partnerschaft mit Client Advisors, CIO, dem Execution Hub und IB Trading Desks\n• Beitrag zum Franchise-Wachstum durch Stärkung bestehender Beziehungen und Unterstützung der Kundenakquise\n• Verwalten des End-to-End-Verkaufsprozesses, von der Ideengenerierung bis zur Ausführung und Nachverfolgung",
-        "fr": "Êtes-vous enthousiaste à l'égard des marchés financiers et de l'interaction avec les clients? Vous aimez travailler dans un environnement dynamique où la collaboration et la performance vont de pair ? Nous sommes à la recherche d'un professionnel des ventes à revenu fixe pour rejoindre notre équipe UGM à Zurich, en mettant l'accent sur les clients Professional Market Access (PMA) de Gestion de patrimoine. Dans ce rôle, vous :\n• fournir la couverture du revenu fixe et agir comme point de contact principal pour un secteur d'activité principal désigné\n• offrir un large éventail de solutions en espèces à revenu fixe, y compris le niveau d'investissement, le rendement élevé, les marchés émergents, la dette subordonnée et les taux\n• s'engager avec les clients finaux dans les segments UHNW et GFIW\n• traduire les développements du marché et les recherches du CIO en idées d'investissement prêtes à la clientèle\n• distribuer des idées sur les revenus fixes et fournir des services d'exécution\n• partenaire en étroite collaboration avec les conseillers clients, la DPI, le centre d'exécution et les bureaux de négociation de l'IB\n• contribuer à la croissance des franchises en renforçant les relations existantes et en soutenant l'acquisition de clients\n• gérer le processus de vente de bout en bout, de la génération d'idées à l'exécution et au suivi"
-      },
-      "location": "Zürich",
-      "canton": "ZH",
-      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346356&PageType=jobdetails",
-      "source": "UBS Dedicated Parser (Taleo API)",
-      "sourceLang": "en",
-      "crawledAt": "2026-08-27T00:37:43.140Z",
-      "addressLocality": "Zürich",
-      "addressCountry": "CH",
-      "country": "CH",
-      "postalCode": "",
-      "category": "Commerciale",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "mid",
-      "sector": "Finanza / Banca",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-07-01",
-      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346356&PageType=jobdetails",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "_ubsMeta": {
-        "reqId": "346356",
-        "department": "Investment Bank",
-        "region": "Switzerland - Zürich",
-        "cities": "",
-        "categoryRaw": "Sales, Sales and trading",
-        "jobType": ""
-      },
-      "previousSlugs": [
-        "ugm-fixed-income-sales-professional-market-access-clients-wm-ubs-zurich"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "ugm-fixed-income-sales-professional-market-access-clients-wm-ubs-zurich"
-        ],
-        "de": [
-          "ugm-fixed-income-sales-professional-market-access-clients-wm-ubs-zurich"
-        ],
-        "fr": [
-          "ugm-fixed-income-sales-professional-market-access-clients-wm-ubs-zurich"
-        ]
-      },
-      "firstSeenAt": "2026-07-01T23:34:49.539Z",
-      "salaryMin": 83000,
-      "salaryMax": 127500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 83000,
-          "maxValue": 127500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "ZH",
-      "crawlerMissStreak": 2
-    },
-    {
-      "id": "ubs-8f7d9c143f2e",
-      "slug": "hub-head-ge-romandie-vs-pianificazione-finanziaria-bancaria-personale-80-100-ubs-suisse-romande",
-      "slugByLocale": {
-        "it": "hub-head-ge-romandie-vs-pianificazione-finanziaria-bancaria-personale-80-100-ubs-suisse-romande",
-        "en": "hub-head-ge-romandie-vs-financial-planning-personal-banking-80-100-ubs-suisse-romande",
-        "de": "hub-head-ge-romandie-vs-financial-planning-personal-banking-80-100-ubs-suisse-romande",
-        "fr": "hub-head-ge-romandie-vs-financial-planning-personal-banking-80-100-ubs-suisse-romande"
-      },
-      "company": "UBS",
-      "companyKey": "ubs",
-      "companyDomain": "ubs.com",
-      "title": "Hub Head GE/Romandie/VS Financial Planning Personal Banking, 80-100%",
-      "titleByLocale": {
-        "it": "Hub Head GE/Romandie/VS Pianificazione Finanziaria Bancaria Personale, 80-100%",
-        "en": "Hub Head GE/Romandie/VS Financial Planning Personal Banking, 80-100%",
-        "de": "Hub Head GE/Romandie/VS Financial Planning Personal Banking, 80-100%",
-        "fr": "Hub Head GE/Romandie/VS Financial Planning Personal Banking, 80-100%"
-      },
-      "description": "Êtes-vous un expert de la planification financière et patrimoniale en Suisse ? Le pilotage commercial, la gestion des parties prenantes et la pensée transversale comptent-ils parmi vos points forts ? Pour notre nouveau département Financial Planning Personal Banking, nous recherchons une personnalité de leadership capable d’assumer les responsabilités suivantes :\n\n• Diriger et développer l’équipe Financial Planning dans votre région, notamment dans les domaines de la prévoyance, de la vente et du développement des équipes.\n• Assurer le pilotage commercial dans le domaine de la planification financière, y compris l’identification de leads, la mise en œuvre des plans d’action ainsi qu’un suivi rigoureux des opportunités.\n• Promouvoir une culture proactive, orientée client, axée sur la vente et le conseil, tout en élaborant des plans financiers individualisés et globaux dans le respect des exigences réglementaires.\n• Soutenir les conseillères et conseillers à la clientèle lors des entretiens clients et des activités d’acquisition, et collaborer étroitement avec les équipes régionales de Personal Banking.\n• Développer des initiatives commerciales et renforcer le positionnement de la planification financière au sein de l’organisation.\n• Soutenir les équipes centrales dans les domaines du développement de produits, de l’innovation et de l’informatique.",
-      "descriptionByLocale": {
-        "it": "Sei un esperto nella pianificazione finanziaria e patrimoniale in Svizzera? Sono leadership commerciale, gestione delle parti interessate e pensiero trasversale tra i vostri punti di forza? Per il nostro nuovo dipartimento di Financial Planning Personal Banking, stiamo cercando una personalità di leadership che possa assumere le seguenti responsabilità:\n\n• Guidare e sviluppare il team di pianificazione finanziaria nella tua zona, in particolare nelle aree di previsione, vendite e sviluppo di team.\n• Assicurare la leadership aziendale nel settore della pianificazione finanziaria, tra cui l'identificazione dei lead, l'attuazione dei piani di azione e il monitoraggio rigoroso delle opportunità.\n• Promuovere una cultura proattiva, orientata al cliente, vendite e consulenza, sviluppando piani finanziari individuali e completi che soddisfano i requisiti normativi.\n• Sostenere i consulenti e i consulenti dei clienti nelle interviste ai clienti e nelle attività di acquisizione, e lavorare a stretto contatto con i team regionali di Personal Banking.\n• Sviluppare iniziative di business e rafforzare il posizionamento della pianificazione finanziaria all'interno dell'organizzazione.\n• Sostenere i team centrali nelle aree di sviluppo del prodotto, innovazione e IT.",
-        "en": "Are you an expert in financial and heritage planning in Switzerland? Are commercial leadership, stakeholder management and cross-cutting thinking among your strengths? For our new Financial Planning Personal Banking department, we are looking for a leadership personality that can assume the following responsibilities:\n\n• Lead and develop the Financial Planning team in your area, especially in the areas of foresight, sales and team development.\n• Ensure business leadership in the area of financial planning, including identification of leads, implementation of action plans and rigorous monitoring of opportunities.\n• Promote a proactive, customer-oriented, sales and advisory culture, while developing individualized and comprehensive financial plans that meet regulatory requirements.\n• Support customer advisors and advisors in customer interviews and acquisition activities, and work closely with the regional Personal Banking teams.\n• Develop business initiatives and strengthen the positioning of financial planning within the organisation.\n• Support central teams in the areas of product development, innovation and IT.",
-        "de": "Sind Sie Experte für Finanz- und Kulturerbeplanung in der Schweiz? Gehören kaufmännische Führung, Stakeholdermanagement und Querschnittsdenken zu Ihren Stärken? Für unsere neue Abteilung Financial Planning Personal Banking suchen wir eine Führungspersönlichkeit, die folgende Aufgaben übernehmen kann:\n\n• Führen und entwickeln Sie das Finanzplanungsteam in Ihrer Region, insbesondere in den Bereichen Vorausschau, Vertrieb und Teamentwicklung.\n• Gewährleistung der Unternehmensführung im Bereich der Finanzplanung, einschließlich der Identifizierung von Leads, der Umsetzung von Aktionsplänen und der strengen Überwachung von Chancen.\n• Förderung einer proaktiven, kundenorientierten Vertriebs- und Beratungskultur und Entwicklung individueller und umfassender Finanzpläne, die die regulatorischen Anforderungen erfüllen.\n• Unterstützen Sie Kundenberater und Berater bei Kundeninterviews und Akquisitionsaktivitäten und arbeiten Sie eng mit den regionalen Personal Banking Teams zusammen.\n• Entwicklung von Geschäftsinitiativen und Stärkung der Positionierung der Finanzplanung innerhalb der Organisation.\n• Unterstütze zentrale Teams in den Bereichen Produktentwicklung, Innovation und IT.",
-        "fr": "Êtes-vous un expert de la planification financière et patrimoniale en Suisse ? Le pilotage commercial, la gestion des parties prenantes et la pensée transversale comptent-ils parmi vos points forts ? Pour notre nouveau département Financial Planning Personal Banking, nous recherchons une personnalité de leadership capable d’assumer les responsabilités suivantes :\n\n• Diriger et développer l’équipe Financial Planning dans votre région, notamment dans les domaines de la prévoyance, de la vente et du développement des équipes.\n• Assurer le pilotage commercial dans le domaine de la planification financière, y compris l’identification de leads, la mise en œuvre des plans d’action ainsi qu’un suivi rigoureux des opportunités.\n• Promouvoir une culture proactive, orientée client, axée sur la vente et le conseil, tout en élaborant des plans financiers individualisés et globaux dans le respect des exigences réglementaires.\n• Soutenir les conseillères et conseillers à la clientèle lors des entretiens clients et des activités d’acquisition, et collaborer étroitement avec les équipes régionales de Personal Banking.\n• Développer des initiatives commerciales et renforcer le positionnement de la planification financière au sein de l’organisation.\n• Soutenir les équipes centrales dans les domaines du développement de produits, de l’innovation et de l’informatique."
-      },
-      "location": "Suisse romande",
-      "canton": "VS",
-      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348366&PageType=jobdetails",
-      "source": "UBS Dedicated Parser (Taleo API)",
-      "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:37:42.947Z",
-      "addressLocality": "Suisse romande",
-      "addressCountry": "CH",
-      "country": "CH",
-      "postalCode": "",
-      "category": "Commerciale",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "senior",
-      "sector": "Finanza / Banca",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-07-28",
-      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348366&PageType=jobdetails",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "_ubsMeta": {
-        "reqId": "348366",
-        "department": "Personal & Corporate Banking",
-        "region": "Suisse - Suisse romande, Suisse - Valais",
-        "cities": "",
-        "categoryRaw": "Conseil clientèle / Relationship management",
-        "jobType": ""
-      },
-      "previousSlugs": [
-        "hub-head-ge-romandie-vs-financial-planning-personal-banking-80-100-ubs-suisse-romande"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "hub-head-ge-romandie-vs-financial-planning-personal-banking-80-100-ubs-suisse-romande"
-        ]
-      },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-07-28T11:27:55.957Z",
-      "salaryMin": 101500,
-      "salaryMax": 156000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 101500,
-          "maxValue": 156000,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "VS",
-      "crawlerMissStreak": 2
+      "crawlerMissStreak": 2,
+      "needsRetranslation": true
     },
     {
       "id": "ubs-28e4d7bafe32",
@@ -10115,7 +10074,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=345780&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T00:37:42.885Z",
+      "crawledAt": "2026-08-28T20:55:57.315Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -10140,11 +10099,13 @@
         "jobType": ""
       },
       "previousSlugs": [
-        "steuerexperte-in-wealth-management-ubs-zentralschweiz"
+        "steuerexperte-in-wealth-management-ubs-zentralschweiz",
+        "esperto-fiscale-gestione-della-ricchezza-ubs-zentralschweiz"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "steuerexperte-in-wealth-management-ubs-zentralschweiz"
+          "steuerexperte-in-wealth-management-ubs-zentralschweiz",
+          "esperto-fiscale-gestione-della-ricchezza-ubs-zentralschweiz"
         ],
         "en": [
           "steuerexperte-in-wealth-management-ubs-zentralschweiz"
@@ -10165,90 +10126,153 @@
           "maxValue": 90500,
           "unitText": "YEAR"
         }
-      },
-      "crawlerMissStreak": 2
+      }
     },
     {
-      "id": "ubs-16ba6fbf07f3",
-      "slug": "consulente-al-dettaglio-st-gallen-80-100-ubs-ostschweiz",
+      "id": "ubs-3d136abdcbbe",
+      "slug": "ubs-card-center-product-owner-with-api-know-how-80-100-w-m-d-ubs-zurich",
       "slugByLocale": {
-        "it": "consulente-al-dettaglio-st-gallen-80-100-ubs-ostschweiz",
-        "en": "privatkundenberater-in-retail-st-gallen-80-100-ubs-ostschweiz",
-        "de": "privatkundenberater-in-retail-st-gallen-80-100-ubs-ostschweiz",
-        "fr": "consultant-au-detail-st-gallen-80-100-ubs-ostschweiz"
+        "de": "ubs-card-center-product-owner-with-api-know-how-80-100-w-m-d-ubs-zurich",
+        "it": "ubs-card-center-product-owner-with-api-know-how-80-100-w-m-d-ubs-zurich",
+        "en": "ubs-card-center-product-owner-with-api-know-how-80-100-w-m-d-ubs-zurich",
+        "fr": "ubs-card-center-product-owner-with-api-know-how-80-100-w-m-d-ubs-zurich"
       },
       "company": "UBS",
       "companyKey": "ubs",
       "companyDomain": "ubs.com",
-      "title": "Privatkundenberater/in Retail, St.Gallen (80-100%)",
+      "title": "UBS Card Center - Product Owner with API Know-How 80-100% (w/m/d)",
       "titleByLocale": {
-        "it": "Consulente al dettaglio, St.Gallen (80-100%)",
-        "en": "Retail consultant, St.Gallen (80-100%)",
-        "de": "Privatkundenberater/in Retail, St.Gallen (80-100%)",
-        "fr": "Consultant au détail, St.Gallen (80-100%)"
+        "de": "UBS Card Center - Product Owner with API Know-How 80-100% (w/m/d)",
+        "en": "UBS Card Center - Product Owner with API Know-How 80-100% (w/m/d)",
+        "it": "UBS Card Center - Product Owner with API Know-How 80-100% (w/m/d)",
+        "fr": "UBS Card Center - Product Owner with API Know-How 80-100% (w/m/d)"
       },
-      "description": "Du schätzt den persönlichen Kontakt? Du kennst die Grundlagen des Bankgeschäftes und möchtest Dich in der Beratung oder in andere Bereiche der Bank weiterentwickeln? Du fühlst Dich in der digitalen Welt wohl? Dann melde Dich bei uns!\n\nDas sind Deine Kernaufgaben:\n• In der Geschäftsstelle repräsentierst Du UBS, begrüsst die Kundinnen und Kunden warmherzig und übernimmst die Gastgeberrolle.\n• Du berätst Kundinnen und Kunden zu den Themen Vorsorgen sowie Anlegen und entwickelst dein Fachwissen in diesen Bereichen weiter.\n• Und schliesslich begeisterst Du die Kundinnen und Kunden für die digitale Welt und hilfst ihnen im Umgang mit E-Banking, Mobile Banking oder TWINT.",
+      "description": "• Verantwortung für Produktvision, Strategie, Roadmap und OKRs der Crew Client Solutions – ausgerichtet an Kundenbedürfnissen, Geschäftszielen, Technologie- und Regulatorik-Anforderungen\n• End-to-End-Verantwortung für das Product Backlog: Anforderungen aufnehmen, priorisieren und in User Stories mit Akzeptanzkriterien überführen – fokussiert auf Kundenwert, Business Impact und Compliance\n• primärer Produktentscheider: Stakeholder ausrichten, Prioritäten steuern und wertorientierte Entscheidungen treffen\n• enge Zusammenarbeit mit Business, Kunden und IT-Partnern, um Kundenbedürfnisse zu identifizieren und in wertstiftende Features, Releases und Produktverbesserungen umzusetzen\n• Steuerung der Produktentwicklung auf Basis von Daten und Feedback durch Kundenresearch, Analysen, Experimente sowie Definition und Monitoring relevanter KPIs\n• Sicherstellung einer effizienten, sicheren und qualitativ hochwertigen Delivery durch die Balance von Business-Anforderungen, technischer Exzellenz sowie Compliance-, Governance- und Security-by-Design-Vorgaben",
       "descriptionByLocale": {
-        "it": "Apprezzi il contatto personale? Conoscete le basi bancarie e desiderate svilupparsi ulteriormente in consulenza o in altre aree della banca? Ti senti a tuo agio nel mondo digitale? Allora contattaci.\n\nQuesti sono i vostri compiti principali:\n• In ufficio, Lei rappresenta UBS, accoglie calorosamente i clienti e assume il ruolo di ospite.\n• Si consiglia ai clienti sui temi delle precauzioni e investire e sviluppare ulteriormente la vostra esperienza in queste aree.\n• E infine, entusiasta Sei il cliente per il mondo digitale e aiutarli a trattare con e-banking, mobile banking o TWINT.",
-        "en": "Do you appreciate personal contact? You know the basics of banking and would like to develop further in consulting or in other areas of the bank? Do you feel comfortable in the digital world? Then contact us.\n\nThese are your core tasks:\n• In the office, you represent UBS, warmly welcome customers and take on the role of host.\n• You advise customers on the topics of precautions and investing and develop your expertise in these areas further.\n• And finally, thrilled You are the customer for the digital world and help them in dealing with e-banking, mobile banking or TWINT.",
-        "de": "Du schätzt den persönlichen Kontakt? Du kennst die Grundlagen des Bankgeschäftes und möchtest Dich in der Beratung oder in andere Bereiche der Bank weiterentwickeln? Du fühlst Dich in der digitalen Welt wohl? Dann melde Dich bei uns!\n\nDas sind Deine Kernaufgaben:\n• In der Geschäftsstelle repräsentierst Du UBS, begrüsst die Kundinnen und Kunden warmherzig und übernimmst die Gastgeberrolle.\n• Du berätst Kundinnen und Kunden zu den Themen Vorsorgen sowie Anlegen und entwickelst dein Fachwissen in diesen Bereichen weiter.\n• Und schliesslich begeisterst Du die Kundinnen und Kunden für die digitale Welt und hilfst ihnen im Umgang mit E-Banking, Mobile Banking oder TWINT.",
-        "fr": "Vous appréciez les contacts personnels ? Vous connaissez les bases de la banque et souhaitez développer davantage dans le conseil ou dans d'autres domaines de la banque? Vous sentez-vous à l'aise dans le monde numérique? Alors contactez-nous.\n\nVoici vos tâches principales :\n• Au bureau, vous représentez UBS, accueillez chaleureusement les clients et prenez le rôle d'hôte.\n• Vous conseillez vos clients sur les sujets des précautions et des investissements et développez votre expertise dans ces domaines.\n• Et enfin, ravi Vous êtes le client du monde numérique et aidez-les à gérer les transactions bancaires électroniques, les services bancaires mobiles ou TWINT."
+        "de": "• Verantwortung für Produktvision, Strategie, Roadmap und OKRs der Crew Client Solutions – ausgerichtet an Kundenbedürfnissen, Geschäftszielen, Technologie- und Regulatorik-Anforderungen\n• End-to-End-Verantwortung für das Product Backlog: Anforderungen aufnehmen, priorisieren und in User Stories mit Akzeptanzkriterien überführen – fokussiert auf Kundenwert, Business Impact und Compliance\n• primärer Produktentscheider: Stakeholder ausrichten, Prioritäten steuern und wertorientierte Entscheidungen treffen\n• enge Zusammenarbeit mit Business, Kunden und IT-Partnern, um Kundenbedürfnisse zu identifizieren und in wertstiftende Features, Releases und Produktverbesserungen umzusetzen\n• Steuerung der Produktentwicklung auf Basis von Daten und Feedback durch Kundenresearch, Analysen, Experimente sowie Definition und Monitoring relevanter KPIs\n• Sicherstellung einer effizienten, sicheren und qualitativ hochwertigen Delivery durch die Balance von Business-Anforderungen, technischer Exzellenz sowie Compliance-, Governance- und Security-by-Design-Vorgaben",
+        "it": "• Verantwortung für Produktvision, Strategie, Roadmap und OKRs der Crew Client Solutions – ausgerichtet an Kundenbedürfnissen, Geschäftszielen, Technologie- und Regulatorik-Anforderungen\n• End-to-End-Verantwortung für das Product Backlog: Anforderungen aufnehmen, priorisieren und in User Stories mit Akzeptanzkriterien überführen – fokussiert auf Kundenwert, Business Impact und Compliance\n• primärer Produktentscheider: Stakeholder ausrichten, Prioritäten steuern und wertorientierte Entscheidungen treffen\n• enge Zusammenarbeit mit Business, Kunden und IT-Partnern, um Kundenbedürfnisse zu identifizieren und in wertstiftende Features, Releases und Produktverbesserungen umzusetzen\n• Steuerung der Produktentwicklung auf Basis von Daten und Feedback durch Kundenresearch, Analysen, Experimente sowie Definition und Monitoring relevanter KPIs\n• Sicherstellung einer effizienten, sicheren und qualitativ hochwertigen Delivery durch die Balance von Business-Anforderungen, technischer Exzellenz sowie Compliance-, Governance- und Security-by-Design-Vorgaben",
+        "en": "• Verantwortung für Produktvision, Strategie, Roadmap und OKRs der Crew Client Solutions – ausgerichtet an Kundenbedürfnissen, Geschäftszielen, Technologie- und Regulatorik-Anforderungen\n• End-to-End-Verantwortung für das Product Backlog: Anforderungen aufnehmen, priorisieren und in User Stories mit Akzeptanzkriterien überführen – fokussiert auf Kundenwert, Business Impact und Compliance\n• primärer Produktentscheider: Stakeholder ausrichten, Prioritäten steuern und wertorientierte Entscheidungen treffen\n• enge Zusammenarbeit mit Business, Kunden und IT-Partnern, um Kundenbedürfnisse zu identifizieren und in wertstiftende Features, Releases und Produktverbesserungen umzusetzen\n• Steuerung der Produktentwicklung auf Basis von Daten und Feedback durch Kundenresearch, Analysen, Experimente sowie Definition und Monitoring relevanter KPIs\n• Sicherstellung einer effizienten, sicheren und qualitativ hochwertigen Delivery durch die Balance von Business-Anforderungen, technischer Exzellenz sowie Compliance-, Governance- und Security-by-Design-Vorgaben",
+        "fr": "• Verantwortung für Produktvision, Strategie, Roadmap und OKRs der Crew Client Solutions – ausgerichtet an Kundenbedürfnissen, Geschäftszielen, Technologie- und Regulatorik-Anforderungen\n• End-to-End-Verantwortung für das Product Backlog: Anforderungen aufnehmen, priorisieren und in User Stories mit Akzeptanzkriterien überführen – fokussiert auf Kundenwert, Business Impact und Compliance\n• primärer Produktentscheider: Stakeholder ausrichten, Prioritäten steuern und wertorientierte Entscheidungen treffen\n• enge Zusammenarbeit mit Business, Kunden und IT-Partnern, um Kundenbedürfnisse zu identifizieren und in wertstiftende Features, Releases und Produktverbesserungen umzusetzen\n• Steuerung der Produktentwicklung auf Basis von Daten und Feedback durch Kundenresearch, Analysen, Experimente sowie Definition und Monitoring relevanter KPIs\n• Sicherstellung einer effizienten, sicheren und qualitativ hochwertigen Delivery durch die Balance von Business-Anforderungen, technischer Exzellenz sowie Compliance-, Governance- und Security-by-Design-Vorgaben"
       },
-      "location": "Ostschweiz",
-      "canton": "SG",
-      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348060&PageType=jobdetails",
+      "location": "Zürich",
+      "canton": "ZH",
+      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348965&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T00:37:42.596Z",
-      "addressLocality": "Ostschweiz",
+      "crawledAt": "2026-08-28T20:55:57.348Z",
+      "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
       "postalCode": "",
-      "category": "Commerciale",
+      "category": "IT",
       "contract": "full-time",
       "employmentType": "OTHER",
       "experienceLevel": "mid",
       "sector": "Finanza / Banca",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-12",
-      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348060&PageType=jobdetails",
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348965&PageType=jobdetails",
       "requirements": [],
-      "requirementsByLocale": {},
+      "requirementsByLocale": {
+        "de": []
+      },
       "_ubsMeta": {
-        "reqId": "348060",
+        "reqId": "348965",
         "department": "Personal & Corporate Banking",
-        "region": "Schweiz - Ostschweiz",
+        "region": "Schweiz - Zürich",
         "cities": "",
-        "categoryRaw": "Kundenberatung / Relationship Management",
+        "categoryRaw": "Information Technology (IT)",
         "jobType": ""
       },
-      "previousSlugs": [
-        "privatkundenberater-in-retail-st-gallen-80-100-ubs-ostschweiz"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "privatkundenberater-in-retail-st-gallen-80-100-ubs-ostschweiz"
-        ],
-        "fr": [
-          "privatkundenberater-in-retail-st-gallen-80-100-ubs-ostschweiz"
-        ]
-      },
-      "firstSeenAt": "2026-08-12T10:16:17.686Z",
-      "salaryMin": 68500,
-      "salaryMax": 105000,
+      "needsRetranslation": true,
+      "salaryMin": 79000,
+      "salaryMax": 134500,
       "baseSalary": {
         "@type": "MonetaryAmount",
         "currency": "CHF",
         "value": {
           "@type": "QuantitativeValue",
-          "minValue": 68500,
-          "maxValue": 105000,
+          "minValue": 79000,
+          "maxValue": 134500,
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SG",
-      "crawlerMissStreak": 2
+      "addressRegion": "ZH",
+      "firstSeenAt": "2026-08-28T20:55:57.348Z"
+    },
+    {
+      "id": "ubs-b2e946c9bf66",
+      "slug": "real-estate-valuation-specialist-ubs-suisse-romande",
+      "slugByLocale": {
+        "fr": "real-estate-valuation-specialist-ubs-suisse-romande",
+        "it": "real-estate-valuation-specialist-ubs-suisse-romande",
+        "en": "real-estate-valuation-specialist-ubs-suisse-romande",
+        "de": "real-estate-valuation-specialist-ubs-suisse-romande"
+      },
+      "company": "UBS",
+      "companyKey": "ubs",
+      "companyDomain": "ubs.com",
+      "title": "Real Estate Valuation Specialist",
+      "titleByLocale": {
+        "fr": "Real Estate Valuation Spécialiste",
+        "en": "Real Estate Valuation Specialist",
+        "it": "Real Estate Valuation Specialista",
+        "de": "Real Estate Valuation Spezialist"
+      },
+      "description": "Etes-vous un expert immobilier expérimenté ? Etes-vous fasciné par l'évaluation immobilière, comme par la planification foncière, la construction, l'économie, les différents marchés des immeubles et par tout ce qui touche à l'immobilier ? Etes-vous à la recherche d'un job passionnant qui vous offre la possibilité de vous développer professionnellement et personnellement ? A ce poste exigeant et exposé, nous cherchons une personne correspondant à ce profil pour :\n- évoluer dans le domaine des financements hypothécaires pour lesquels vous seriez responsable de l'évaluation immobilière\n- conseiller vos mandants dans le domaine de l'expertise immobilière\n- analyser les données des immeubles, les évaluer par l'application de méthodes d'expertises standards, en tenant compte des règles en matière d'estimations immobilières normées et dans le respect des instructions d'UBS\n- vous investir dans des projets interdisciplinaires d'estimation d'immeubles dans le cadre de grandes transactions\n- prendre la tête de projets d'ampleur nationale d'évaluation d'immeubles particuliers, ou sur des spécificités techniques dans le domaine de l'expertise immobilière et de son évolution.",
+      "descriptionByLocale": {
+        "fr": "Etes-vous un expert immobilier expérimenté ? Etes-vous fasciné par l'évaluation immobilière, comme par la planification foncière, la construction, l'économie, les différents marchés des immeubles et par tout ce qui touche à l'immobilier ? Etes-vous à la recherche d'un job passionnant qui vous offre la possibilité de vous développer professionnellement et personnellement ? A ce poste exigeant et exposé, nous cherchons une personne correspondant à ce profil pour :\n- évoluer dans le domaine des financements hypothécaires pour lesquels vous seriez responsable de l'évaluation immobilière\n- conseiller vos mandants dans le domaine de l'expertise immobilière\n- analyser les données des immeubles, les évaluer par l'application de méthodes d'expertises standards, en tenant compte des règles en matière d'estimations immobilières normées et dans le respect des instructions d'UBS\n- vous investir dans des projets interdisciplinaires d'estimation d'immeubles dans le cadre de grandes transactions\n- prendre la tête de projets d'ampleur nationale d'évaluation d'immeubles particuliers, ou sur des spécificités techniques dans le domaine de l'expertise immobilière et de son évolution.",
+        "it": "Etes-vous un expert immobilier expérimenté ? Etes-vous fasciné par l'évaluation immobilière, comme par la planification foncière, la construction, l'économie, les différents marchés des immeubles et par tout ce qui touche à l'immobilier ? Etes-vous à la recherche d'un job passionnant qui vous offre la possibilité de vous développer professionnellement et personnellement ? A ce poste exigeant et exposé, nous cherchons une personne correspondant à ce profil pour :\n- évoluer dans le domaine des financements hypothécaires pour lesquels vous seriez responsable de l'évaluation immobilière\n- conseiller vos mandants dans le domaine de l'expertise immobilière\n- analyser les données des immeubles, les évaluer par l'application de méthodes d'expertises standards, en tenant compte des règles en matière d'estimations immobilières normées et dans le respect des instructions d'UBS\n- vous investir dans des projets interdisciplinaires d'estimation d'immeubles dans le cadre de grandes transactions\n- prendre la tête de projets d'ampleur nationale d'évaluation d'immeubles particuliers, ou sur des spécificités techniques dans le domaine de l'expertise immobilière et de son évolution.",
+        "en": "Etes-vous un expert immobilier expérimenté ? Etes-vous fasciné par l'évaluation immobilière, comme par la planification foncière, la construction, l'économie, les différents marchés des immeubles et par tout ce qui touche à l'immobilier ? Etes-vous à la recherche d'un job passionnant qui vous offre la possibilité de vous développer professionnellement et personnellement ? A ce poste exigeant et exposé, nous cherchons une personne correspondant à ce profil pour :\n- évoluer dans le domaine des financements hypothécaires pour lesquels vous seriez responsable de l'évaluation immobilière\n- conseiller vos mandants dans le domaine de l'expertise immobilière\n- analyser les données des immeubles, les évaluer par l'application de méthodes d'expertises standards, en tenant compte des règles en matière d'estimations immobilières normées et dans le respect des instructions d'UBS\n- vous investir dans des projets interdisciplinaires d'estimation d'immeubles dans le cadre de grandes transactions\n- prendre la tête de projets d'ampleur nationale d'évaluation d'immeubles particuliers, ou sur des spécificités techniques dans le domaine de l'expertise immobilière et de son évolution.",
+        "de": "Etes-vous un expert immobilier expérimenté ? Etes-vous fasciné par l'évaluation immobilière, comme par la planification foncière, la construction, l'économie, les différents marchés des immeubles et par tout ce qui touche à l'immobilier ? Etes-vous à la recherche d'un job passionnant qui vous offre la possibilité de vous développer professionnellement et personnellement ? A ce poste exigeant et exposé, nous cherchons une personne correspondant à ce profil pour :\n- évoluer dans le domaine des financements hypothécaires pour lesquels vous seriez responsable de l'évaluation immobilière\n- conseiller vos mandants dans le domaine de l'expertise immobilière\n- analyser les données des immeubles, les évaluer par l'application de méthodes d'expertises standards, en tenant compte des règles en matière d'estimations immobilières normées et dans le respect des instructions d'UBS\n- vous investir dans des projets interdisciplinaires d'estimation d'immeubles dans le cadre de grandes transactions\n- prendre la tête de projets d'ampleur nationale d'évaluation d'immeubles particuliers, ou sur des spécificités techniques dans le domaine de l'expertise immobilière et de son évolution."
+      },
+      "location": "Suisse romande",
+      "canton": "VD",
+      "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350010&PageType=jobdetails",
+      "source": "UBS Dedicated Parser (Taleo API)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-28T20:55:57.340Z",
+      "addressLocality": "Suisse romande",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "",
+      "category": "Finanza",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Finanza / Banca",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350010&PageType=jobdetails",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "_ubsMeta": {
+        "reqId": "350010",
+        "department": "Group Functions",
+        "region": "Suisse - Suisse romande",
+        "cities": "",
+        "categoryRaw": "Risk",
+        "jobType": ""
+      },
+      "needsRetranslation": true,
+      "salaryMin": 104500,
+      "salaryMax": 183500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 104500,
+          "maxValue": 183500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "VD",
+      "firstSeenAt": "2026-08-28T20:55:57.340Z"
     }
   ]
 }
