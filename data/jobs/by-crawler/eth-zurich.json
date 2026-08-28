@@ -1,6 +1,6 @@
 {
   "crawlerKey": "eth-zurich",
-  "assembledAt": "2026-08-28T21:34:20.479Z",
+  "assembledAt": "2026-08-28T21:53:32.852Z",
   "jobs": [
     {
       "id": "eth-zurich-8b3038243257",
@@ -33,7 +33,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_PeBFLlVSXBQT8tuOqj",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:16.690Z",
+      "crawledAt": "2026-08-28T21:53:29.310Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -112,7 +112,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_pPQbOEVFpuNEe6dwGQ",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:16.203Z",
+      "crawledAt": "2026-08-28T21:53:28.788Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -183,7 +183,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_WutDHRW09osQjhn0JB",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:15.718Z",
+      "crawledAt": "2026-08-28T21:53:28.259Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -260,7 +260,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_yD8SBG1VJIv6DUeuOI",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:15.233Z",
+      "crawledAt": "2026-08-28T21:53:27.726Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -343,7 +343,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_hkSa6WxM6WZBjeh5nk",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:14.749Z",
+      "crawledAt": "2026-08-28T21:53:27.204Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -415,7 +415,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_AY3hccIricAb6VIQkw",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:14.259Z",
+      "crawledAt": "2026-08-28T21:53:26.686Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -486,7 +486,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_SEsDjBg4yDbJBXzxEY",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:13.775Z",
+      "crawledAt": "2026-08-28T21:53:26.163Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -520,7 +520,6 @@
         ]
       },
       "firstSeenAt": "2026-06-15T14:48:31.631Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -533,7 +532,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-4056bc578fc5",
@@ -566,7 +566,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Bner0qEzUweIGYHkB2",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:13.291Z",
+      "crawledAt": "2026-08-28T21:53:25.644Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -646,7 +646,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_gnIOUQw6F6A9A48NAB",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:12.809Z",
+      "crawledAt": "2026-08-28T21:53:25.122Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -719,7 +719,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_EvLC9fvRCMCVvNKGRU",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:12.325Z",
+      "crawledAt": "2026-08-28T21:53:24.601Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -790,7 +790,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_LeUhF2WveK4IuFRTxh",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:11.841Z",
+      "crawledAt": "2026-08-28T21:53:24.071Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -862,7 +862,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_KpOW7lYfI0yXlUiUCo",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:11.352Z",
+      "crawledAt": "2026-08-28T21:53:23.554Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -935,7 +935,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_0ZAkW6S2JIQMm2zZZQ",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:10.866Z",
+      "crawledAt": "2026-08-28T21:53:23.029Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1006,7 +1006,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_8mKiqyt08ncBT4Vjmf",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:10.382Z",
+      "crawledAt": "2026-08-28T21:53:22.508Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1032,7 +1032,6 @@
         ]
       },
       "firstSeenAt": "2026-06-24T21:57:04.655Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1045,7 +1044,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-883df3667a32",
@@ -1078,7 +1078,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_JYD685xNuBZ4Ds3FgG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:09.893Z",
+      "crawledAt": "2026-08-28T21:53:21.983Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1149,7 +1149,7 @@
       "url": "https://jobs.ethz.ch/job/view/11834",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:09.406Z",
+      "crawledAt": "2026-08-28T21:53:21.457Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1220,7 +1220,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_ru7RpFRzKZm3MClgKG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:08.926Z",
+      "crawledAt": "2026-08-28T21:53:20.939Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1246,7 +1246,6 @@
         ]
       },
       "firstSeenAt": "2026-06-26T11:22:09.120Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -1259,7 +1258,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-f0e7e53bb50c",
@@ -1292,7 +1292,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_7oUtjwnVoYxd8NGYgj",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:08.442Z",
+      "crawledAt": "2026-08-28T21:53:20.414Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1318,7 +1318,6 @@
         ]
       },
       "firstSeenAt": "2026-06-29T13:16:56.059Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1331,7 +1330,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-a73706fac709",
@@ -1364,7 +1364,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_JYURpNrAy4gEVrjRK9",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:07.961Z",
+      "crawledAt": "2026-08-28T21:53:19.894Z",
       "addressLocality": "Basel",
       "addressCountry": "CH",
       "country": "CH",
@@ -1440,7 +1440,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_xpOmzLaAVjq5m0O8YT",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:07.478Z",
+      "crawledAt": "2026-08-28T21:53:19.370Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1512,7 +1512,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Z5I9yqQ4vhLPoBUFau",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:06.985Z",
+      "crawledAt": "2026-08-28T21:53:18.847Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1583,7 +1583,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_cgSe8mqjjebWWNz6pE",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:06.497Z",
+      "crawledAt": "2026-08-28T21:53:18.321Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1671,7 +1671,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_J9xGaOpqKFyghevOXG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:06.012Z",
+      "crawledAt": "2026-08-28T21:53:17.797Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1742,7 +1742,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_qDQkbNBtYII2OKLXG6",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:05.525Z",
+      "crawledAt": "2026-08-28T21:53:17.278Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1813,7 +1813,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_CZZmSG9yJgKWE3cbaA",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:05.040Z",
+      "crawledAt": "2026-08-28T21:53:16.759Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1889,7 +1889,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_fV3FNoofTG427Xo88T",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:04.556Z",
+      "crawledAt": "2026-08-28T21:53:16.239Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -1915,7 +1915,6 @@
         ]
       },
       "firstSeenAt": "2026-07-06T13:42:41.705Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1928,7 +1927,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-98ab096b1868",
@@ -1961,7 +1961,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_6enmNr7YZt4xBDIPFj",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:04.067Z",
+      "crawledAt": "2026-08-28T21:53:15.719Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2037,7 +2037,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_u5Zz9bp0g9TPLFcePL",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:03.584Z",
+      "crawledAt": "2026-08-28T21:53:15.198Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2115,7 +2115,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_UAEcifTuTTah7RdGSV",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:03.100Z",
+      "crawledAt": "2026-08-28T21:53:14.677Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2196,7 +2196,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_7fnNYGEQBYxvwLABPA",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:02.612Z",
+      "crawledAt": "2026-08-28T21:53:14.152Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2273,7 +2273,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_YyrM54BXEpzTO7nM0c",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:02.129Z",
+      "crawledAt": "2026-08-28T21:53:13.631Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2351,7 +2351,7 @@
       "url": "https://jobs.ethz.ch/job/view/11902",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:01.644Z",
+      "crawledAt": "2026-08-28T21:53:13.104Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2428,7 +2428,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_i7PMRuJOFpNZcNw8rq",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:34:01.159Z",
+      "crawledAt": "2026-08-28T21:53:12.586Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2505,7 +2505,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_DomSH3wt6fZbt1AwGk",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:34:00.674Z",
+      "crawledAt": "2026-08-28T21:53:12.064Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2581,7 +2581,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_tw2NqKjprjOKgicyhv",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:59.796Z",
+      "crawledAt": "2026-08-28T21:53:11.084Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2659,7 +2659,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_3GbLlhfKdn9Fnpl2iw",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:59.313Z",
+      "crawledAt": "2026-08-28T21:53:10.556Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2692,7 +2692,6 @@
         ]
       },
       "firstSeenAt": "2026-07-13T12:29:38.259Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -2705,7 +2704,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-80872bef0637",
@@ -2738,7 +2738,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_F9OMMLCxFXrZnitx0m",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:58.827Z",
+      "crawledAt": "2026-08-28T21:53:10.034Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2815,7 +2815,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_ZFh1EQy7dSPVVYp5Fe",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:58.339Z",
+      "crawledAt": "2026-08-28T21:53:09.513Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2892,7 +2892,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_rsIyqqZyef4ShWNwZs",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:57.853Z",
+      "crawledAt": "2026-08-28T21:53:08.988Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2970,7 +2970,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_lc6GjNrrlKgHF0efWx",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:57.365Z",
+      "crawledAt": "2026-08-28T21:53:08.465Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3002,7 +3002,6 @@
         ]
       },
       "firstSeenAt": "2026-07-13T12:29:36.855Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -3015,7 +3014,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-d91e9e05dc2b",
@@ -3048,7 +3048,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_1bvIMyoiRO2P5VgfZ8",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:56.878Z",
+      "crawledAt": "2026-08-28T21:53:07.942Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3084,7 +3084,6 @@
         ]
       },
       "firstSeenAt": "2026-07-13T12:29:36.384Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -3097,7 +3096,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-d3aa724bac10",
@@ -3130,7 +3130,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_KQZ7RBImfmwNfC3Vua",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:56.392Z",
+      "crawledAt": "2026-08-28T21:53:07.419Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3208,7 +3208,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_2QuEXdyqJIFt1XOmpk",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:55.910Z",
+      "crawledAt": "2026-08-28T21:53:06.897Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3288,7 +3288,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_KNScGkMQXFtpEkjjIm",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:55.422Z",
+      "crawledAt": "2026-08-28T21:53:06.374Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3365,7 +3365,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_OC9dWYNfh3EIigPqzl",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:54.934Z",
+      "crawledAt": "2026-08-28T21:53:05.853Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3410,7 +3410,6 @@
         ]
       },
       "firstSeenAt": "2026-07-14T22:23:12.958Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -3423,7 +3422,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-e2be3dd37916",
@@ -3456,7 +3456,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_kWhKpJAIZB2OmXNQEH",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:54.452Z",
+      "crawledAt": "2026-08-28T21:53:05.331Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3533,7 +3533,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_pak56jURZkEEEFJw9E",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:53.968Z",
+      "crawledAt": "2026-08-28T21:53:04.807Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3565,7 +3565,6 @@
         ]
       },
       "firstSeenAt": "2026-07-17T22:24:28.839Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -3578,7 +3577,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-3cc2da0e83fd",
@@ -3611,7 +3611,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_NaTV2sk8Mxq1xCVqd4",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:53.481Z",
+      "crawledAt": "2026-08-28T21:53:04.287Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3643,7 +3643,6 @@
         ]
       },
       "firstSeenAt": "2026-07-17T22:24:28.354Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -3656,7 +3655,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-c31d48df63b6",
@@ -3689,7 +3689,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_lMTabnHvONSKdSqWKD",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:52.996Z",
+      "crawledAt": "2026-08-28T21:53:03.765Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3767,7 +3767,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_qxOBufoUNykCjfjiWk",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:52.504Z",
+      "crawledAt": "2026-08-28T21:53:03.242Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3796,7 +3796,6 @@
         ]
       },
       "firstSeenAt": "2026-07-20T11:59:54.080Z",
-      "needsRetranslation": true,
       "salaryMin": 113000,
       "salaryMax": 198500,
       "baseSalary": {
@@ -3809,7 +3808,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-0325bf5d2f3a",
@@ -3842,7 +3842,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_St7prKjLrjS4zALDej",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:52.016Z",
+      "crawledAt": "2026-08-28T21:53:02.716Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3919,7 +3919,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Rp9mpVoD5mNmE8408j",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:51.531Z",
+      "crawledAt": "2026-08-28T21:53:02.192Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -3996,7 +3996,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_P9v49K34WzF1yE3Son",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:51.042Z",
+      "crawledAt": "2026-08-28T21:53:01.671Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4067,7 +4067,7 @@
       "url": "https://jobs.ethz.ch/job/view/11961",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:50.558Z",
+      "crawledAt": "2026-08-28T21:53:01.145Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4138,7 +4138,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_dGnRTfaN2XEfIHfoyn",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:50.076Z",
+      "crawledAt": "2026-08-28T21:53:00.617Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4172,7 +4172,6 @@
         ]
       },
       "firstSeenAt": "2026-07-23T11:18:33.346Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -4185,7 +4184,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-a7f7c25c2864",
@@ -4218,7 +4218,7 @@
       "url": "https://jobs.ethz.ch/job/view/11967",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:49.589Z",
+      "crawledAt": "2026-08-28T21:53:00.083Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4295,7 +4295,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_pcajQWt1V21wOnczvo",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:49.106Z",
+      "crawledAt": "2026-08-28T21:52:59.559Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4371,7 +4371,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_VLtNEC6HFLUrmk6007",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:48.625Z",
+      "crawledAt": "2026-08-28T21:52:59.030Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4448,7 +4448,7 @@
       "url": "https://jobs.ethz.ch/job/view/11973",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:48.140Z",
+      "crawledAt": "2026-08-28T21:52:58.507Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4477,7 +4477,6 @@
         ]
       },
       "firstSeenAt": "2026-07-28T11:27:17.511Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -4490,7 +4489,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-f49c8ee549e4",
@@ -4523,7 +4523,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_CSxQxJrqbuRsjvCUTm",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:47.656Z",
+      "crawledAt": "2026-08-28T21:52:57.983Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4600,7 +4600,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_2dwBQFhUMqEeTdQMIG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:47.168Z",
+      "crawledAt": "2026-08-28T21:52:57.461Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4677,7 +4677,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_hwDvOzym2YrcXREjNs",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:46.683Z",
+      "crawledAt": "2026-08-28T21:52:56.938Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4754,7 +4754,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_SiQphhbwRBQb2YMLBE",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:46.196Z",
+      "crawledAt": "2026-08-28T21:52:56.409Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4831,7 +4831,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Dg1pAVDTJJvVAzylyw",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:45.713Z",
+      "crawledAt": "2026-08-28T21:52:55.885Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4907,7 +4907,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_ZT1Mdr52EQ9ntI0Ysv",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:45.228Z",
+      "crawledAt": "2026-08-28T21:52:55.360Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4939,7 +4939,6 @@
         ]
       },
       "firstSeenAt": "2026-07-30T22:11:57.106Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -4952,7 +4951,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-b61cb2e05059",
@@ -4985,7 +4985,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_3Mx3L1edmOpnV1iiJU",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:44.744Z",
+      "crawledAt": "2026-08-28T21:52:54.836Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5081,7 +5081,7 @@
       "url": "https://jobs.ethz.ch/job/view/11983",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:44.259Z",
+      "crawledAt": "2026-08-28T21:52:54.312Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5160,7 +5160,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_dNMnYNvPddidwz8TUy",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:43.783Z",
+      "crawledAt": "2026-08-28T21:52:53.791Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5238,7 +5238,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_CRdGXGajLEsa8nA73N",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:43.287Z",
+      "crawledAt": "2026-08-28T21:52:53.266Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5327,7 +5327,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_pzqGvEgJlSWqKJSTiA",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:42.802Z",
+      "crawledAt": "2026-08-28T21:52:52.742Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5405,7 +5405,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_oLcCpTQZUjEG7byV8Y",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:42.320Z",
+      "crawledAt": "2026-08-28T21:52:52.219Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5483,7 +5483,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_IWFceVLUf7lSD9TI2n",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:41.837Z",
+      "crawledAt": "2026-08-28T21:52:51.692Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5555,7 +5555,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_VUTfDCIHI707Adya7s",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:41.351Z",
+      "crawledAt": "2026-08-28T21:52:51.164Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5627,7 +5627,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_xl2UrDWV978Ej7gXIY",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:40.866Z",
+      "crawledAt": "2026-08-28T21:52:50.640Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5699,7 +5699,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_XVIkXSHRCgAgGYoDTG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:40.371Z",
+      "crawledAt": "2026-08-28T21:52:50.116Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5774,7 +5774,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_JljSxe71PrbQYnXQoB",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:39.885Z",
+      "crawledAt": "2026-08-28T21:52:49.593Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5851,7 +5851,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_WWFu7i2di7aDSu27w8",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:39.399Z",
+      "crawledAt": "2026-08-28T21:52:49.070Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5928,7 +5928,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_fchK2inlRA0D5eO7z0",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:38.914Z",
+      "crawledAt": "2026-08-28T21:52:48.548Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6005,7 +6005,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Jpk5hTbut4X6uJlGRu",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:38.432Z",
+      "crawledAt": "2026-08-28T21:52:48.025Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6082,7 +6082,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_DW7Kl8ya2L0ym0P1lU",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:37.950Z",
+      "crawledAt": "2026-08-28T21:52:47.498Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6156,7 +6156,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_vo5Fa7oRMs6iedVJ1F",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:37.470Z",
+      "crawledAt": "2026-08-28T21:52:46.975Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6234,7 +6234,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_w33T6D45OAbECL32WL",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:36.984Z",
+      "crawledAt": "2026-08-28T21:52:46.455Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6263,7 +6263,6 @@
         ]
       },
       "firstSeenAt": "2026-08-04T22:15:18.098Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -6276,7 +6275,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-df3a5a369008",
@@ -6309,7 +6309,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_1n0qWTs7lYLeerNmzu",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:36.501Z",
+      "crawledAt": "2026-08-28T21:52:45.929Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6394,7 +6394,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_x8OEdar9kwd7fzO7Ao",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:36.018Z",
+      "crawledAt": "2026-08-28T21:52:45.407Z",
       "addressLocality": "Singapore",
       "addressCountry": "CH",
       "country": "CH",
@@ -6470,7 +6470,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Is1bVBODD9M9q9o4U7",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:35.531Z",
+      "crawledAt": "2026-08-28T21:52:44.879Z",
       "addressLocality": "Singapore",
       "addressCountry": "CH",
       "country": "CH",
@@ -6546,7 +6546,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_9QREZzi9U2fptRtMRx",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:35.043Z",
+      "crawledAt": "2026-08-28T21:52:44.355Z",
       "addressLocality": "Singapore",
       "addressCountry": "CH",
       "country": "CH",
@@ -6622,7 +6622,7 @@
       "url": "https://jobs.ethz.ch/job/view/11996",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:34.549Z",
+      "crawledAt": "2026-08-28T21:52:43.832Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6654,7 +6654,6 @@
         ]
       },
       "firstSeenAt": "2026-08-06T11:31:30.019Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -6667,7 +6666,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-4b092d22aa0c",
@@ -6700,7 +6700,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Y3HjOZ86G5P5ss3eqg",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:34.063Z",
+      "crawledAt": "2026-08-28T21:52:43.312Z",
       "addressLocality": "Basel",
       "addressCountry": "CH",
       "country": "CH",
@@ -6777,7 +6777,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_RTMPGwiYkBhlRIeUnI",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:33.581Z",
+      "crawledAt": "2026-08-28T21:52:42.786Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6853,7 +6853,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_N5adwDR63ei5mvEd2z",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:33.093Z",
+      "crawledAt": "2026-08-28T21:52:42.257Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6930,7 +6930,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_FlYaAZOnlZv2RahPpG",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:32.600Z",
+      "crawledAt": "2026-08-28T21:52:41.736Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6992,7 +6992,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Z7OndPgBOm7sbpwkNC",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:32.117Z",
+      "crawledAt": "2026-08-28T21:52:41.215Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7068,7 +7068,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_vhY5CIAbQKoZeJKDlp",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:31.634Z",
+      "crawledAt": "2026-08-28T21:52:40.694Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7130,7 +7130,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_PItOe6oQJFLOGTo0rn",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:31.151Z",
+      "crawledAt": "2026-08-28T21:52:40.164Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7207,7 +7207,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_qLpTBYBKn2DIsruf36",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:30.666Z",
+      "crawledAt": "2026-08-28T21:52:39.636Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7284,7 +7284,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_CQ4FarG7443S0Xuox1",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:30.174Z",
+      "crawledAt": "2026-08-28T21:52:39.107Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7362,7 +7362,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_zqMdn6OeN8wS7ZDRfz",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:29.689Z",
+      "crawledAt": "2026-08-28T21:52:38.582Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7439,7 +7439,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_GBb3OdHnnRIPeSabrX",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:29.198Z",
+      "crawledAt": "2026-08-28T21:52:38.061Z",
       "addressLocality": "Singapore",
       "addressCountry": "CH",
       "country": "CH",
@@ -7515,7 +7515,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Ztb8yMz2qN1JyezuM9",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:28.687Z",
+      "crawledAt": "2026-08-28T21:52:37.513Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7593,7 +7593,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_SZRoALlxCo3zztZ4am",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:28.201Z",
+      "crawledAt": "2026-08-28T21:52:36.978Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7671,7 +7671,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_f1da9InQiozVieFweN",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:27.710Z",
+      "crawledAt": "2026-08-28T21:52:36.454Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7703,7 +7703,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:34.659Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -7716,7 +7715,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-45e39f8dd4dc",
@@ -7749,7 +7749,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_0z7L6XHbhhGWTMZS1r",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:27.228Z",
+      "crawledAt": "2026-08-28T21:52:35.932Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7826,7 +7826,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_sxRoRpn3c2dMnSPe0I",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:26.746Z",
+      "crawledAt": "2026-08-28T21:52:35.406Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7858,7 +7858,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T21:29:34.253Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -7871,7 +7870,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-c3398b76d551",
@@ -7904,7 +7904,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_eB7YadA8OsfYmqD1u4",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:26.260Z",
+      "crawledAt": "2026-08-28T21:52:34.858Z",
       "addressLocality": "Singapore",
       "addressCountry": "CH",
       "country": "CH",
@@ -7936,7 +7936,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:33.712Z",
-      "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -7948,7 +7947,8 @@
           "maxValue": 75000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-b7c0af125c1c",
@@ -7981,7 +7981,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_4LviIHzRgsOBAvOoB0",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:25.756Z",
+      "crawledAt": "2026-08-28T21:52:34.313Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8058,7 +8058,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_kzU3Bx2lE8HT9YtVg4",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:25.269Z",
+      "crawledAt": "2026-08-28T21:52:33.790Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8090,7 +8090,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:32.683Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -8103,7 +8102,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-db5ea911342b",
@@ -8136,7 +8136,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_g0XuxC18u21Mu6iBB3",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:24.784Z",
+      "crawledAt": "2026-08-28T21:52:33.265Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8212,7 +8212,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_wGCeDfRpbQMNLdfYbN",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:24.298Z",
+      "crawledAt": "2026-08-28T21:52:32.744Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8286,7 +8286,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_QZ1l2kJekLcmFjooxh",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:23.811Z",
+      "crawledAt": "2026-08-28T21:52:32.220Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8364,7 +8364,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_SdeM55IRwLKf81q60O",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:23.327Z",
+      "crawledAt": "2026-08-28T21:52:31.692Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8396,7 +8396,6 @@
         ]
       },
       "firstSeenAt": "2026-08-18T09:57:50.347Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -8409,7 +8408,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-c7fc53fb80eb",
@@ -8442,7 +8442,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_evgABYXJThcT0gNxgF",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:22.844Z",
+      "crawledAt": "2026-08-28T21:52:31.164Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8512,7 +8512,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_jERkOb4LZv8CS4y3PL",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:22.357Z",
+      "crawledAt": "2026-08-28T21:52:30.640Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8616,7 +8616,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_OhoKsplsc1UZw1xe3i",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:21.871Z",
+      "crawledAt": "2026-08-28T21:52:30.116Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8693,7 +8693,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_vupL5965uBrAoVnyi7",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:21.386Z",
+      "crawledAt": "2026-08-28T21:52:29.590Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8724,7 +8724,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T21:35:27.395Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -8737,7 +8736,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-583becbc6b43",
@@ -8770,7 +8770,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_mZ7lFXZluUIyWaON1N",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:20.899Z",
+      "crawledAt": "2026-08-28T21:52:29.065Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8847,7 +8847,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_RXOaQH0DOpiNTKwE75",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:20.411Z",
+      "crawledAt": "2026-08-28T21:52:28.544Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8924,7 +8924,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_yMx0O4OoFn5tWTAyLJ",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:19.928Z",
+      "crawledAt": "2026-08-28T21:52:28.021Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9001,7 +9001,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_5elvuozdzVg5aqETTm",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:19.441Z",
+      "crawledAt": "2026-08-28T21:52:27.497Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9079,7 +9079,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_b7ZZZCsHxJS5KGYI1Y",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:18.955Z",
+      "crawledAt": "2026-08-28T21:52:26.973Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9157,7 +9157,7 @@
       "url": "https://jobs.ethz.ch/job/view/12048",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:18.468Z",
+      "crawledAt": "2026-08-28T21:52:26.451Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9189,7 +9189,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T21:30:35.000Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -9202,7 +9201,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-0de554a74e2f",
@@ -9235,7 +9235,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_QpwSDjGTFrOfniEFrV",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:17.984Z",
+      "crawledAt": "2026-08-28T21:52:25.928Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9267,7 +9267,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T21:30:34.535Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -9280,7 +9279,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-8fd25959af10",
@@ -9313,7 +9313,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_w2h5ILIaxY2wODvsWo",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:17.495Z",
+      "crawledAt": "2026-08-28T21:52:25.407Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9390,7 +9390,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_zABS2w3av3jvVewVb9",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:17.009Z",
+      "crawledAt": "2026-08-28T21:52:24.884Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9462,7 +9462,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_d3lDgHgDI4ewDFQ1Fb",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:16.519Z",
+      "crawledAt": "2026-08-28T21:52:24.358Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9538,7 +9538,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_Ih97fhUFUHgau6p6vS",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:16.032Z",
+      "crawledAt": "2026-08-28T21:52:23.830Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9600,7 +9600,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_VICQKrWgFLEoyEPTP7",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:15.542Z",
+      "crawledAt": "2026-08-28T21:52:23.304Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9632,7 +9632,6 @@
         ]
       },
       "firstSeenAt": "2026-08-25T10:10:37.215Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -9645,7 +9644,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "eth-zurich-ac63676eb326",
@@ -9678,7 +9678,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_0Dk3rwrfGt0kHlu7Rh",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:15.058Z",
+      "crawledAt": "2026-08-28T21:52:22.781Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9754,7 +9754,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_cJ2T2rEws9MRTFqKU8",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:14.573Z",
+      "crawledAt": "2026-08-28T21:52:22.251Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9816,7 +9816,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_4pQ2q5Y9qBeuGF9aBv",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:14.085Z",
+      "crawledAt": "2026-08-28T21:52:21.730Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9878,7 +9878,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_jVxdXjmNFDGRqoECY8",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:13.601Z",
+      "crawledAt": "2026-08-28T21:52:21.203Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9917,7 +9917,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:33:13.601Z"
+      "firstSeenAt": "2026-08-28T21:52:21.203Z"
     },
     {
       "id": "eth-zurich-be6fee1ad1bc",
@@ -9950,7 +9950,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_6stX9I9i0zxAcRPpcP",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:13.113Z",
+      "crawledAt": "2026-08-28T21:52:20.680Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9981,7 +9981,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:33:13.113Z"
+      "firstSeenAt": "2026-08-28T21:52:20.680Z"
     },
     {
       "id": "eth-zurich-5201dcabc3a0",
@@ -10014,7 +10014,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_xPEbTe5DV76cK9b0qO",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:12.625Z",
+      "crawledAt": "2026-08-28T21:52:20.155Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -10045,7 +10045,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:33:12.625Z"
+      "firstSeenAt": "2026-08-28T21:52:20.155Z"
     },
     {
       "id": "eth-zurich-755efefb0b2e",
@@ -10078,7 +10078,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_7qpUJghiPxjjg3LgH1",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:12.140Z",
+      "crawledAt": "2026-08-28T21:52:19.628Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -10109,7 +10109,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:33:12.140Z"
+      "firstSeenAt": "2026-08-28T21:52:19.628Z"
     },
     {
       "id": "eth-zurich-035d2a98de11",
@@ -10142,7 +10142,7 @@
       "url": "https://jobs.ethz.ch/job/view/JOPG_ethz_sKGJYv288uud0RYkmK",
       "source": "ETH Zürich Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:11.648Z",
+      "crawledAt": "2026-08-28T21:52:19.093Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -10173,7 +10173,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:33:11.648Z"
+      "firstSeenAt": "2026-08-28T21:52:19.093Z"
     },
     {
       "id": "eth-zurich-ed51755fee0b",
