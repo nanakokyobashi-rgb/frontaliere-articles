@@ -59066,6 +59066,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-reno-navigabilita-futuro-allarme': {
+    title: 'Reno non navigabile: l\'allarme per l\'economia e la Svizzera',
+    description: 'Allarme sul futuro del Reno: entro il 2100 potrebbe restare impraticabile fino a 5 mesi l\'anno. Impatti sul commercio svizzero e sulla Germania. Dati aggiornati',
+    keywords: 'frontalieri, ticino, svizzera, italia, reno, navigabile, allarme, economia',
+    ogTitle: 'Reno non navigabile: l\'allarme per l\'economia e la Svizzera',
+    ogDescription: 'Le proiezioni del WSL indicano che il livello critico del Reno potrebbe estendersi fino a cinque mesi l\'anno entro il 2100, con pesanti conseguenze sul commercio estero e sulla logistica svizzera ed europea.',
+    canonicalPath: '/articoli-svizzera/reno-navigabilita-futuro-allarme/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Reno non navigabile: l'allarme per l'economia e la Svizzera",
+      "description": "Allarme sul futuro del Reno: entro il 2100 potrebbe restare impraticabile fino a 5 mesi l'anno. Impatti sul commercio svizzero e sulla Germania. Dati aggiornati",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/reno-navigabilita-futuro-allarme.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Il livello del Reno in un periodo di secca con impatti sulla logistica"
+      },
+      "datePublished": "2026-08-28T03:54:52+00:00",
+      "dateModified": "2026-08-28T03:54:52+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/reno-navigabilita-futuro-allarme/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

@@ -4552,6 +4552,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.berna-rinnova-festival-cinematografici.title': 'Berna rinnova il sostegno ai festival cinematografici',
     'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'L\'Ufficio federale della cultura finanzia 10 festival per il 2027-2029. Locarno Film Festival confermato con 1,73 milioni CHF all\'anno.',
     'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Proiezione all\'aperto di un festival cinematografico svizzero con pubblico seduto a guardare il grande schermo',
+    'blog.article.reno-navigabilita-futuro-allarme.title': 'Reno non navigabile: l\'allarme per l\'economia e la Svizzera',
+    'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'Entro il 2100 il Reno potrebbe essere impraticabile fino a cinque mesi l\'anno. Pesanti le ricadute sul commercio estero svizzero e sulla Germania.',
+    'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'Il livello del Reno in un periodo di secca con impatti sulla logistica',
 };
 
 export default blogMetaChIt;

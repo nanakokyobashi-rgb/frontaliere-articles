@@ -13654,6 +13654,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'redazione',
     authorName: 'Redazione Frontaliere Ticino',
    },
+   {
+    id: 'reno-navigabilita-futuro-allarme',
+    category: 'pratico',
+    date: '2026-08-28T03:54:52.223Z',
+    image: '/images/blog/reno-navigabilita-futuro-allarme.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

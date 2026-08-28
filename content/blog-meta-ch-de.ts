@@ -4552,6 +4552,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.berna-rinnova-festival-cinematografici.title': 'Bern erneuert die Unterstützung für Filmfestivals',
     'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'Das Bundesamt für Kultur finanziert 10 Festivals für den Zeitraum 2027-2029. Locarno Film Festival mit 1,73 Mio. CHF pro Jahr bestätigt.',
     'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Freiluftkino bei einem Schweizer Filmfestival mit Publikum',
+    'blog.article.reno-navigabilita-futuro-allarme.title': 'Nicht schiffbarer Rhein: Alarm für Wirtschaft und Schweiz',
+    'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'Bis 2100 könnte der Rhein bis zu fünf Monate im Jahr unpassierbar sein. Schwere Auswirkungen auf den Schweizer Aussenhandel und Deutschland.',
+    'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'Der Wasserstand des Rheins während einer Dürreperiode',
 };
 
 export default blogMetaChDe;

@@ -4552,6 +4552,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.berna-rinnova-festival-cinematografici.title': 'Bern renews support for film festivals',
     'blog.article.berna-rinnova-festival-cinematografici.excerpt': 'The Federal Office of Culture funds 10 festivals for 2027-2029. Locarno Film Festival confirmed with CHF 1.73 million per year.',
     'blog.article.berna-rinnova-festival-cinematografici.imageAlt': 'Outdoor screening at a Swiss film festival with audience watching on the big screen',
+    'blog.article.reno-navigabilita-futuro-allarme.title': 'Non-navigable Rhine: the alarm for the economy and Switzerland',
+    'blog.article.reno-navigabilita-futuro-allarme.excerpt': 'By 2100 the Rhine could be impassable for up to five months of the year. The repercussions on Swiss foreign trade and Germany are heavy.',
+    'blog.article.reno-navigabilita-futuro-allarme.imageAlt': 'The Rhine water level during a drought affecting logistics',
 };
 
 export default blogMetaChEn;
