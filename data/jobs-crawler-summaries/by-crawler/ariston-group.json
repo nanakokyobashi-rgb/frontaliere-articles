@@ -1,16 +1,17 @@
 {
   "key": "ariston-group",
   "label": "Ariston Group",
-  "generatedAt": "2026-08-28T21:33:47.306Z",
+  "generatedAt": "2026-08-28T21:52:54.461Z",
   "total": 16,
   "newCount": 0,
   "updatedCount": 15,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 8532,
-  "avgDurationMs": 8532,
+  "durationMs": 11003,
+  "avgDurationMs": 11003,
   "durationHistory": [
-    8532
+    8532,
+    11003
   ],
   "newJobs": [],
   "updatedJobs": [
