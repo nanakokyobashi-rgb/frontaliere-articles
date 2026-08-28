@@ -1,6 +1,6 @@
 {
   "crawlerKey": "apleona-schweiz-ag",
-  "assembledAt": "2026-08-28T05:31:52.285Z",
+  "assembledAt": "2026-08-28T21:11:30.325Z",
   "jobs": [
     {
       "id": "apleona-schweiz-ag-a73063427430",
@@ -30,7 +30,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2542/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:46.471Z",
+      "crawledAt": "2026-08-28T21:11:25.349Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -44,9 +44,7 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2542/Description/1",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
@@ -55,7 +53,8 @@
           "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-treuhand-immobilien-per-1-kh0ucq",
           "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-treuhand-immobilien-per-1-august-2027-2",
           "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-dienstleistung-administration-per-1-august-2027-apleona-schweiz-ag-lugano",
-          "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
+          "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1",
+          "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-treuhand-immobilien-per-1-august-2027-apleona-schweiz-ag-lugano"
         ],
         "fr": [
           "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
@@ -67,7 +66,8 @@
         "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-treuhand-immobilien-per-1-kh0ucq",
         "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-treuhand-immobilien-per-1-august-2027-2",
         "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-dienstleistung-administration-per-1-august-2027-apleona-schweiz-ag-lugano",
-        "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1"
+        "lehrstelle-als-kauffrau-kaufmann-efz-fachrichtung-dienstleistung-administration-per-1",
+        "apprendistato-come-kauffrau-kaufmann-cfc-specializzazione-treuhand-immobilien-per-1-august-2027-apleona-schweiz-ag-lugano"
       ],
       "salaryMin": 41600,
       "salaryMax": 63000,
@@ -112,7 +112,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2505/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:46.168Z",
+      "crawledAt": "2026-08-28T21:11:25.047Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -185,7 +185,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2546/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:45.866Z",
+      "crawledAt": "2026-08-28T21:11:24.744Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -258,7 +258,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2548/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:45.563Z",
+      "crawledAt": "2026-08-28T21:11:24.440Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -337,7 +337,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2549/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:45.260Z",
+      "crawledAt": "2026-08-28T21:11:24.138Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -410,7 +410,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2530/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:44.956Z",
+      "crawledAt": "2026-08-28T21:11:23.834Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -461,23 +461,82 @@
       "company": "Apleona Schweiz AG",
       "companyKey": "apleona-schweiz-ag",
       "companyDomain": "recruitingapp-2765.umantis.com",
-      "title": "Teamleiter Immobilienbewirtschaftung (m/w/d)",
+      "title": "Teamleiter Immobilienbewirtschaftung / Senior Immobilienbewirtschafter (m/w/d)",
       "titleByLocale": {
         "it": "Teamleiter Immobilienbewirtschaftung (m/w/d)",
         "en": "Teamleiter Immobilienbewirtschaftung (m/w/d)",
-        "de": "Teamleiter Immobilienbewirtschaftung (m/w/d)",
+        "de": "Teamleiter Immobilienbewirtschaftung / Senior Immobilienbewirtschafter (m/w/d)",
         "fr": "Teamleiter Immobilienbewirtschaftung (m/w/d)"
       },
-      "description": "Teamleiter Immobilienbewirtschaftung (m/w/d) — Apleona Schweiz AG",
+      "description": "Teamleiter Immobilienbewirtschaftung / Senior Immobilienbewirtschafter (m/w/d) — Apleona Schweiz AG",
       "descriptionByLocale": {
-        "de": "Teamleiter Immobilienbewirtschaftung (m/w/d) — Apleona Schweiz AG"
+        "de": "Teamleiter Immobilienbewirtschaftung / Senior Immobilienbewirtschafter (m/w/d) — Apleona Schweiz AG"
       },
       "location": "Lugano",
       "canton": "TI",
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2551/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:44.349Z",
+      "crawledAt": "2026-08-28T21:11:23.228Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-26",
+      "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2551/Description/1",
+      "requirements": [],
+      "requirementsByLocale": {},
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-26T10:17:04.294Z",
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI"
+    },
+    {
+      "id": "apleona-schweiz-ag-019220954ade",
+      "slug": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
+      "slugByLocale": {
+        "it": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
+        "en": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
+        "de": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
+        "fr": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch"
+      },
+      "company": "Apleona Schweiz AG",
+      "companyKey": "apleona-schweiz-ag",
+      "companyDomain": "recruitingapp-2765.umantis.com",
+      "title": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
+      "titleByLocale": {
+        "it": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
+        "en": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
+        "de": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
+        "fr": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)"
+      },
+      "description": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d) — Apleona Schweiz AG",
+      "descriptionByLocale": {
+        "de": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d) — Apleona Schweiz AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://recruitingapp-2765.umantis.com/Vacancies/2481/Description/1",
+      "source": "Apleona Schweiz AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:11:22.925Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -488,12 +547,12 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-26",
-      "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2551/Description/1",
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2481/Description/1",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-26T10:17:04.294Z",
+      "firstSeenAt": "2026-08-28T05:31:44.046Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -509,73 +568,12 @@
       "addressRegion": "TI"
     },
     {
-      "id": "apleona-schweiz-ag-019220954ade",
-      "slug": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
-      "slugByLocale": {
-        "de": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
-        "it": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
-        "en": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch",
-        "fr": "sachbearbeiter-immobilienbewirtschaftung-wohnen-gewerbe-m-w-d-apleona-schweiz-ag-ch"
-      },
-      "company": "Apleona Schweiz AG",
-      "companyKey": "apleona-schweiz-ag",
-      "companyDomain": "recruitingapp-2765.umantis.com",
-      "title": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
-      "titleByLocale": {
-        "de": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
-        "it": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
-        "en": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)",
-        "fr": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d)"
-      },
-      "description": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d) — Apleona Schweiz AG",
-      "descriptionByLocale": {
-        "de": "Sachbearbeiter Immobilienbewirtschaftung Wohnen/Gewerbe (m/w/d) — Apleona Schweiz AG"
-      },
-      "location": "Lugano",
-      "canton": "TI",
-      "url": "https://recruitingapp-2765.umantis.com/Vacancies/2481/Description/1",
-      "source": "Apleona Schweiz AG Dedicated Parser",
-      "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:44.046Z",
-      "addressLocality": "Lugano",
-      "addressCountry": "CH",
-      "country": "CH",
-      "category": "Altro",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "mid",
-      "sector": "Altro",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-08-28",
-      "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2481/Description/1",
-      "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
-      "needsRetranslation": true,
-      "salaryMin": 49500,
-      "salaryMax": 75000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 49500,
-          "maxValue": 75000,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "TI",
-      "firstSeenAt": "2026-08-28T05:31:44.046Z"
-    },
-    {
       "id": "apleona-schweiz-ag-a7c1145530c4",
       "slug": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch",
       "slugByLocale": {
-        "de": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch",
         "it": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch",
         "en": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch",
+        "de": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch",
         "fr": "hr-business-partner-mit-schwerpunkt-aus-weiterbildung-m-w-d-80-100-apleona-schweiz-ag-ch"
       },
       "company": "Apleona Schweiz AG",
@@ -583,9 +581,9 @@
       "companyDomain": "recruitingapp-2765.umantis.com",
       "title": "HR Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %",
       "titleByLocale": {
-        "de": "HR Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %",
         "it": "Risorse Umane Business Partner con Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %",
         "en": "HR Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %",
+        "de": "HR Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %",
         "fr": "Ressources Humaines Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 %"
       },
       "description": "HR Business Partner mit Schwerpunkt Aus- & Weiterbildung (m/w/d) 80–100 % — Apleona Schweiz AG",
@@ -597,7 +595,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2547/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:31:43.730Z",
+      "crawledAt": "2026-08-28T21:11:22.606Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -611,10 +609,9 @@
       "postedDate": "2026-08-28",
       "applyUrl": "https://recruitingapp-2765.umantis.com/Vacancies/2547/Description/1",
       "requirements": [],
-      "requirementsByLocale": {
-        "de": []
-      },
+      "requirementsByLocale": {},
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:31:43.730Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -627,8 +624,7 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI",
-      "firstSeenAt": "2026-08-28T05:31:43.730Z"
+      "addressRegion": "TI"
     },
     {
       "id": "apleona-schweiz-ag-dbbeef7f2dd9",
@@ -702,7 +698,7 @@
         }
       },
       "addressRegion": "TI",
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     }
   ]
 }
