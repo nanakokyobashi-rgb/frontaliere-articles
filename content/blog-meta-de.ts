@@ -10901,6 +10901,9 @@ const blogMetaDe: Record<string, string> = {
     'blog.article.bancastato-semestrale-2026.title': 'BancaStat: Halbjahresgewinn von 47,6 Millionen im Jahr 2026',
     'blog.article.bancastato-semestrale-2026.excerpt': 'Die BancaStato-Gruppe schloss das erste Halbjahr 2026 mit einem Reingewinn von 47,6 Millionen Franken und einem Reingewinn von 152,7 Millionen Franken ab.',
     'blog.article.bancastato-semestrale-2026.imageAlt': 'Hauptsitz der BancaStato Gruppe in Bellinzona',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.title': 'Leben in Ghiffa und Arbeiten im Tessin als Grenzgänger',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.excerpt': 'Ghiffa am Lago Maggiore ist nur wenige Kilometer von den Pässen in Richtung Kanton Tessin entfernt: Was Sie vor dem Umzug wissen sollten.',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.imageAlt': 'Blick auf den Lago Maggiore von Ghiffa Richtung Schweiz, Pendlerroute',
 };
 
 export default blogMetaDe;

@@ -10904,6 +10904,9 @@ const blogMetaFr: Record<string, string> = {
     'blog.article.bancastato-semestrale-2026.title': 'BancaStat : bénéfice semestriel à 47,6 millions en 2026',
     'blog.article.bancastato-semestrale-2026.excerpt': 'Le Groupe BancaStato a clôturé le premier semestre 2026 avec un bénéfice net de 47,6 millions de francs et un chiffre d\'affaires net de 152,7 millions.',
     'blog.article.bancastato-semestrale-2026.imageAlt': 'Siege du Groupe BancaStato a Bellinzona',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.title': 'Vivre à Ghiffa et travailler au Tessin en tant que frontalier',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.excerpt': 'Ghiffa sur le lac Majeur se trouve à quelques kilomètres des points de passage vers le canton du Tessin : que savoir avant de déménager.',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.imageAlt': 'Vue du lac Majeur depuis Ghiffa vers la Suisse, route frontalière',
 };
 
 export default blogMetaFr;

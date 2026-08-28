@@ -10902,6 +10902,9 @@ const blogMetaEn: Record<string, string> = {
     'blog.article.bancastato-semestrale-2026.title': 'BancaStat: half-yearly profit at 47.6 million in 2026',
     'blog.article.bancastato-semestrale-2026.excerpt': 'The BancaStati Group closed the first half of 2026 with a net profit of CHF 47.6 million and net revenues of CHF 152.7 million.',
     'blog.article.bancastato-semestrale-2026.imageAlt': 'BancaStato Group headquarters building in Bellinzona',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.title': 'Living in Ghiffa and working in Ticino as a border worker',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.excerpt': 'Ghiffa on Lake Maggiore is a few kilometres from the passes towards the Canton of Ticino: what to know before moving.',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.imageAlt': 'View of Lake Maggiore from Ghiffa toward Switzerland, commuter route',
 };
 
 export default blogMetaEn;

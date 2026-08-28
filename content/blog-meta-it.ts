@@ -10903,6 +10903,9 @@ const blogMetaIt: Record<string, string> = {
     'blog.article.bancastato-semestrale-2026.title': 'BancaStato: utile semestrale a 47,6 milioni nel 2026',
     'blog.article.bancastato-semestrale-2026.excerpt': 'Il Gruppo BancaStato ha chiuso il primo semestre del 2026 con un utile netto di 47,6 milioni di franchi e ricavi netti a 152,7 milioni.',
     'blog.article.bancastato-semestrale-2026.imageAlt': 'Sede del Gruppo BancaStato a Bellinzona',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.title': 'Vivere a Ghiffa e lavorare in Ticino da frontaliere',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.excerpt': 'Ghiffa sul Lago Maggiore dista pochi chilometri dai valichi verso il Canton Ticino: cosa sapere prima di trasferirsi.',
+    'blog.article.vivere-ghiffa-lavorare-ticino-frontaliere.imageAlt': 'Vista del Lago Maggiore da Ghiffa verso la Svizzera, percorso frontaliere',
 };
 
 export default blogMetaIt;

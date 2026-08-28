@@ -32610,6 +32610,15 @@ const RAW_ARTICLES = [
  authorSlug: 'marco-ferrari',
  authorName: 'Marco Ferrari',
  },
+ {
+ id: 'vivere-ghiffa-lavorare-ticino-frontaliere',
+ category: 'pratico',
+ date: '2026-08-28T04:17:35.625Z',
+ image: '/images/blog/vivere-ghiffa-lavorare-ticino-frontaliere.webp',
+ hasCalculator: true,
+ authorSlug: 'redazione',
+ authorName: 'Redazione Frontaliere Ticino',
+ },
 ] satisfies Article[];
 
 // Full blog hero images are served from jsDelivr (git-backed CDN, SHA-pinned)
