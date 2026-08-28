@@ -1,6 +1,6 @@
 {
   "crawlerKey": "bewerbungsmanagement-spital-davos",
-  "assembledAt": "2026-08-28T21:16:04.738Z",
+  "assembledAt": "2026-08-28T21:49:17.876Z",
   "jobs": [
     {
       "id": "bewerbungsmanagement-spital-davos-720a55bb21c0",
@@ -30,7 +30,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/724/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:16:00.963Z",
+      "crawledAt": "2026-08-28T21:49:15.492Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -45,14 +45,6 @@
       "applyUrl": "https://recruitingapp-2966.umantis.com/Vacancies/724/Description/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "rettungssanitater-in-wintersaison-2027-28-50-100-bewerbungsmanagement-spital-davos-ch",
-        "technicien-de-secours-medical-saison-hivernale-2026-27-50-100-spital-davos-davos",
-        "rettungssanitater-in-wintersaison-2026-27-50-100-spital-davos-ch",
-        "emergency-medical-technician-winter-season-2026-27-50-100-spital-davos-davos",
-        "sanitario-di-emergenza-stagionale-2026-27-50-100-spital-davos-davos",
-        "paramedici-nella-stagione-invernale-2027-28-50-100-spital-davos-davos"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "rettungssanitater-in-wintersaison-2027-28-50-100-bewerbungsmanagement-spital-davos-ch",
@@ -73,8 +65,15 @@
           "technicien-de-secours-medical-saison-hivernale-2026-27-50-100-spital-davos-davos"
         ]
       },
+      "previousSlugs": [
+        "rettungssanitater-in-wintersaison-2027-28-50-100-bewerbungsmanagement-spital-davos-ch",
+        "technicien-de-secours-medical-saison-hivernale-2026-27-50-100-spital-davos-davos",
+        "rettungssanitater-in-wintersaison-2026-27-50-100-spital-davos-ch",
+        "emergency-medical-technician-winter-season-2026-27-50-100-spital-davos-davos",
+        "sanitario-di-emergenza-stagionale-2026-27-50-100-spital-davos-davos",
+        "paramedici-nella-stagione-invernale-2027-28-50-100-spital-davos-davos"
+      ],
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:29:15.752Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -87,7 +86,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:29:15.752Z"
     },
     {
       "id": "bewerbungsmanagement-spital-davos-7af1dde5b7ac",
@@ -117,7 +117,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/652/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:16:00.660Z",
+      "crawledAt": "2026-08-28T21:49:15.188Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -189,7 +189,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/650/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:16:00.356Z",
+      "crawledAt": "2026-08-28T21:49:14.883Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -261,7 +261,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/649/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:16:00.051Z",
+      "crawledAt": "2026-08-28T21:49:14.580Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -333,7 +333,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/727/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:15:59.745Z",
+      "crawledAt": "2026-08-28T21:49:14.277Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -407,7 +407,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/729/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:15:59.442Z",
+      "crawledAt": "2026-08-28T21:49:13.975Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -481,7 +481,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/723/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:15:59.139Z",
+      "crawledAt": "2026-08-28T21:49:13.672Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -551,7 +551,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/699/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:15:58.836Z",
+      "crawledAt": "2026-08-28T21:49:13.369Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -623,7 +623,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/689/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:15:58.529Z",
+      "crawledAt": "2026-08-28T21:49:13.067Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -697,7 +697,7 @@
       "url": "https://recruitingapp-2966.umantis.com/Vacancies/694/Description/1",
       "source": "Bewerbungsmanagement Spital Davos Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:15:58.203Z",
+      "crawledAt": "2026-08-28T21:49:12.743Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
