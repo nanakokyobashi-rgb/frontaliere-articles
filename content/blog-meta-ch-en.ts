@@ -4564,6 +4564,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permit B in Canton Uri: Requirements and Renewal',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'How to apply for and renew residence permit B in Canton Uri: documents, duration, cantonal migration office and full procedure.',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documents for a B residence permit in Canton Uri',
+    'blog.article.permesso-domicilio-c-uri-requisiti.title': 'C Uri Permit: Requirements and Application',
+    'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Complete guide to residence permit C in Canton Uri: years of residence, integration, language, application procedure and early release.',
+    'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande in Bellinzona, symbol of Swiss cantonal administration',
 };
 
 export default blogMetaChEn;

@@ -4564,6 +4564,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permis B dans le canton d\'Uri : exigences et renouvellement',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'Comment demander et renouveler le permis de séjour B dans le canton d\'Uri : documents, durée, office cantonal des migrations et parcours complet.',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documents pour le permis de séjour B dans le canton d\'Uri',
+    'blog.article.permesso-domicilio-c-uri-requisiti.title': 'Permis C URI : exigences et demande',
+    'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Guide complet du permis de séjour C dans le canton d\'Uri : années de résidence, intégration, langue, procédure de demande et délivrance anticipée.',
+    'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Château de Bellinzone, symbole de l\'administration cantonale suisse',
 };
 
 export default blogMetaChFr;

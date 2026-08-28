@@ -59222,6 +59222,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-domicilio-c-uri-requisiti': {
+    title: 'Permesso C Uri: requisiti e domanda | Frontaliere Ticino',
+    description: 'Guida completa al permesso di domicilio C nel Canton Uri. Scopri i requisiti di residenza, i criteri di integrazione, le conoscenze linguistiche e la procedura',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, requisiti, domanda, completa',
+    ogTitle: 'Permesso C Uri: requisiti, domanda e integrazione',
+    ogDescription: 'Tutto quello che devi sapere sul permesso di domicilio C nel Canton Uri: anni di residenza necessari, criteri di integrazione, requisiti linguistici e come presentare la domanda. Informazioni pratiche per residenti.',
+    canonicalPath: '/articoli-svizzera/permesso-domicilio-c-uri-requisiti/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso C Uri: requisiti e domanda",
+      "description": "Guida completa al permesso di domicilio C nel Canton Uri. Scopri i requisiti di residenza, i criteri di integrazione, le conoscenze linguistiche e la procedura",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-domicilio-c-uri-requisiti.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Castel Grande di Bellinzona, simbolo dell'amministrazione cantonale svizzera"
+      },
+      "datePublished": "2026-08-28T04:42:59+00:00",
+      "dateModified": "2026-08-28T04:42:59+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-domicilio-c-uri-requisiti/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

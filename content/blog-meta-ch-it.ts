@@ -4564,6 +4564,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permesso B nel Canton Uri: requisiti e rinnovo',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo.',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documenti per il permesso di dimora B nel Canton Uri',
+    'blog.article.permesso-domicilio-c-uri-requisiti.title': 'Permesso C Uri: requisiti e domanda',
+    'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Guida completa al permesso di domicilio C nel Canton Uri: anni di residenza, integrazione, lingua, procedura di domanda e rilascio anticipato.',
+    'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande di Bellinzona, simbolo dell\'amministrazione cantonale svizzera',
 };
 
 export default blogMetaChIt;

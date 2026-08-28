@@ -4564,6 +4564,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'B-Bewilligung im Kanton Uri: Voraussetzungen und Erneuerung',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'So beantragen und erneuern Sie die Aufenthaltsbewilligung B im Kanton Uri: Dokumente, Dauer, kantonale Migrationsstelle und vollständiger Ablauf.',
     'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Unterlagen für die Aufenthaltsbewilligung B im Kanton Uri',
+    'blog.article.permesso-domicilio-c-uri-requisiti.title': 'C Uri-Genehmigung: Anforderungen und Antrag',
+    'blog.article.permesso-domicilio-c-uri-requisiti.excerpt': 'Vollständiger Leitfaden zur Niederlassungsbewilligung C im Kanton Uri: Aufenthaltsjahre, Integration, Sprache, Antragsverfahren und vorzeitige Erteilung.',
+    'blog.article.permesso-domicilio-c-uri-requisiti.imageAlt': 'Castel Grande in Bellinzona, Symbol der Schweizer Kantonsverwaltung',
 };
 
 export default blogMetaChDe;
