@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hospice-general",
-  "assembledAt": "2026-08-27T00:58:26.517Z",
+  "assembledAt": "2026-08-28T21:18:36.071Z",
   "jobs": [
     {
       "id": "hospice-general-d954eb42574a",
@@ -33,7 +33,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000112674907-des-civilistes-aide-socio-administratif-100-min-6-mois-differents-lieux?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.557Z",
+      "crawledAt": "2026-08-28T21:18:33.448Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -111,7 +111,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000113099616-un-civiliste-aide-animateur-100-min-6-mois-maison-de-vacances-pour-seniors-la-nouvelle-roseraie-saint-legier-vd?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.555Z",
+      "crawledAt": "2026-08-28T21:18:33.440Z",
       "addressLocality": "Saint Légier",
       "addressRegion": "GE",
       "streetAddress": "Saint Légier",
@@ -189,7 +189,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000113099246-un-civiliste-aide-animateur-100-min-4-mois-au-cad-centre-d-animation-pour-les-seniors-a-lancy?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.521Z",
+      "crawledAt": "2026-08-28T21:18:33.446Z",
       "addressLocality": "Lancy",
       "addressRegion": "GE",
       "streetAddress": "Lancy",
@@ -267,7 +267,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000112673546-civiliste-aide-manutentionnaire-100-min-6-mois-aide-aux-migrants?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.521Z",
+      "crawledAt": "2026-08-28T21:18:33.446Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -345,7 +345,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000140712549-chef-de-service-securite-humaine-incendie-h-f-80-100-cdi-direction-immobilier-?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.519Z",
+      "crawledAt": "2026-08-28T21:18:33.389Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -423,7 +423,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000145492408-chef-de-service-ressources-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.517Z",
+      "crawledAt": "2026-08-28T21:18:33.444Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -547,7 +547,8 @@
           "maxValue": 306000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "hospice-general-ddb8e3c083ae",
@@ -580,7 +581,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000145493058-chef-de-service-sante-social-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.511Z",
+      "crawledAt": "2026-08-28T21:18:33.443Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -659,7 +660,7 @@
       "url": "https://jobs.smartrecruiters.com/Hospicegeneral/744000145429762-comptable-h-f-100-cdi-unite-debiteurs-direction-des-finances?oga=true",
       "source": "Hospice général Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-27T00:58:22.507Z",
+      "crawledAt": "2026-08-28T21:18:33.402Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Genève",
@@ -769,7 +770,8 @@
           "maxValue": 126500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     }
   ]
 }
