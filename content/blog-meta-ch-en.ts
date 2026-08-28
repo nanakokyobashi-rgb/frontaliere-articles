@@ -4561,6 +4561,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-sussidi.title': 'Uri: specific sick pay premiums and subsidies',
     'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'The Canton of Uri applies specific rates for compulsory health insurance premiums (LAMal). Access to the subsidies takes place through the reduction of premiums, with flexible deductibles for adults.',
     'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Bellinzona castles on a sunny day, symbolizing the Canton of Uri and Switzerland.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permit B in Canton Uri: Requirements and Renewal',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'How to apply for and renew residence permit B in Canton Uri: documents, duration, cantonal migration office and full procedure.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documents for a B residence permit in Canton Uri',
 };
 
 export default blogMetaChEn;

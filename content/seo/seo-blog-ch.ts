@@ -59183,6 +59183,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-permesso-b-canton-uri-requisiti-rinnovo': {
+    title: 'Permesso B nel Canton Uri: requisiti e rinnovo',
+    description: 'Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo. Dati aggiornati 2026',
+    keywords: 'frontalieri, ticino, svizzera, italia, permesso, canton, requisiti, rinnovo',
+    ogTitle: 'Permesso B nel Canton Uri: requisiti e rinnovo',
+    ogDescription: 'Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo.',
+    canonicalPath: '/articoli-svizzera/permesso-b-canton-uri-requisiti-rinnovo/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Permesso B nel Canton Uri: requisiti e rinnovo",
+      "description": "Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo. Dati aggiornati 2026",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/permesso-b-canton-uri-requisiti-rinnovo.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Documenti per il permesso di dimora B nel Canton Uri"
+      },
+      "datePublished": "2026-08-28T04:32:29+00:00",
+      "dateModified": "2026-08-28T04:32:29+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/permesso-b-canton-uri-requisiti-rinnovo/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

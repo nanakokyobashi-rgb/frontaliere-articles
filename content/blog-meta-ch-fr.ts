@@ -4561,6 +4561,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-sussidi.title': 'URI : primes de caisse-maladie spécifiques et subventions',
     'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Le canton d\'Uri applique des tarifs spécifiques pour les primes de l\'assurance maladie obligatoire (LAMal). L\'accès aux subventions se fait par la réduction des primes, avec des franchises flexibles pour les adultes.',
     'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Châteaux de Bellinzone par temps ensoleillé, symbolisant le canton d\'Uri et la Suisse.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permis B dans le canton d\'Uri : exigences et renouvellement',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'Comment demander et renouveler le permis de séjour B dans le canton d\'Uri : documents, durée, office cantonal des migrations et parcours complet.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documents pour le permis de séjour B dans le canton d\'Uri',
 };
 
 export default blogMetaChFr;

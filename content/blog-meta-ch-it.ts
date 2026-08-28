@@ -4561,6 +4561,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-sussidi.title': 'Uri: premi cassa malati specifici e sussidi',
     'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Il Cantone di Uri applica tariffe specifiche per i premi dell\'assicurazione malattia obbligatoria (LAMal). L\'accesso ai sussidi avviene tramite la riduzione dei premi, con franchigie flessibili per gli adulti.',
     'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Castelli di Bellinzona in una giornata di sole, simbolo del Canton Uri e della Svizzera.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'Permesso B nel Canton Uri: requisiti e rinnovo',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'Come richiedere e rinnovare il permesso di dimora B nel Canton Uri: documenti, durata, ufficio cantonale della migrazione e iter completo.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Documenti per il permesso di dimora B nel Canton Uri',
 };
 
 export default blogMetaChIt;

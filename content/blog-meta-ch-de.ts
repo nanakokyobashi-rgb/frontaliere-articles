@@ -4561,6 +4561,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-sussidi.title': 'URI: Spezifische Krankenkassenprämien und Zuschüsse',
     'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Der Kanton Uri wendet spezifische Tarife für die Prämien der obligatorischen Krankenversicherung (KVG) an. Der Zugang zu den Beiträgen erfolgt durch Prämienverbilligung mit flexiblen Franchisen für Erwachsene.',
     'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Burgen von Bellinzona an einem sonnigen Tag, Symbol des Kantons Uri und der Schweiz.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.title': 'B-Bewilligung im Kanton Uri: Voraussetzungen und Erneuerung',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.excerpt': 'So beantragen und erneuern Sie die Aufenthaltsbewilligung B im Kanton Uri: Dokumente, Dauer, kantonale Migrationsstelle und vollständiger Ablauf.',
+    'blog.article.permesso-b-canton-uri-requisiti-rinnovo.imageAlt': 'Unterlagen für die Aufenthaltsbewilligung B im Kanton Uri',
 };
 
 export default blogMetaChDe;

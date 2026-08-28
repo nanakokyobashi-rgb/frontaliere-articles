@@ -13681,6 +13681,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'marco-ferrari',
     authorName: 'Marco Ferrari',
    },
+   {
+    id: 'permesso-b-canton-uri-requisiti-rinnovo',
+    category: 'pratico',
+    date: '2026-08-28T04:32:29.395Z',
+    image: '/images/blog/permesso-b-canton-uri-requisiti-rinnovo.webp',
+    hasCalculator: true,
+    authorSlug: 'redazione',
+    authorName: 'Redazione Frontaliere Ticino',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the
