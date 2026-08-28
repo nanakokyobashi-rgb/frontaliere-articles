@@ -1,0 +1,59 @@
+{
+  "key": "csvp-poschiavo",
+  "label": "Centro Sanitario Valposchiavo (CSVP)",
+  "generatedAt": "2026-08-28T21:45:09.444Z",
+  "total": 1,
+  "discovered": null,
+  "written": 1,
+  "newCount": 0,
+  "updatedCount": 1,
+  "removedCount": 0,
+  "unchangedCount": 0,
+  "durationMs": 5257,
+  "avgDurationMs": 5257,
+  "durationHistory": [
+    5257
+  ],
+  "newJobs": [],
+  "updatedJobs": [
+    {
+      "id": "csvp-poschiavo-4229ad282e88",
+      "slug": "infermiere-sss-operatore-sociosanitario-fage-csvp-poschiavo-poschiavo",
+      "company": "Centro Sanitario Valposchiavo (CSVP)",
+      "companyKey": "csvp-poschiavo",
+      "companyDomain": "csvp.ch",
+      "title": "Infermiere SSS/Operatore sociosanitario (FaGe)",
+      "needsRetranslation": false,
+      "location": "Poschiavo",
+      "canton": "GR",
+      "url": "https://www.csvp.ch/it/lavora-con-noi/cerchiamo/922-infermiere-sss-oss-fage",
+      "source": "CSVP Dedicated Parser (Joomla HTML)",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-28T21:45:06.208Z",
+      "addressLocality": "Poschiavo",
+      "addressRegion": "GR",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "7742",
+      "category": "Sanità / Ospedali",
+      "contract": "full-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sanità / Ospedali",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-25",
+      "applyUrl": "https://www.csvp.ch/it/lavora-con-noi/cerchiamo/922-infermiere-sss-oss-fage",
+      "firstSeenAt": "2026-08-25T09:56:31.307Z",
+      "_qualityScore": 80,
+      "_qualityBreakdown": {
+        "cleanliness": 25,
+        "richness": 20,
+        "translation": 18,
+        "completeness": 17
+      }
+    }
+  ],
+  "removedJobs": [],
+  "unchangedJobs": []
+}
