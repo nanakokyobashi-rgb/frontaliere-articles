@@ -1,7 +1,7 @@
 {
   "key": "klinik-seeschau",
   "label": "Klinik Seeschau",
-  "generatedAt": "2026-08-28T21:32:31.881Z",
+  "generatedAt": "2026-08-28T21:51:41.120Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,10 +9,11 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 2825,
-  "avgDurationMs": 2825,
+  "durationMs": 3988,
+  "avgDurationMs": 3988,
   "durationHistory": [
-    2825
+    2825,
+    3988
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -29,7 +30,7 @@
       "url": "https://www.klinik-seeschau.ch/karriere/offene-stellen.html/59#job-00cb0e8ba1bb",
       "source": "Klinik Seeschau Dedicated Parser (Joomla SPB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:29.882Z",
+      "crawledAt": "2026-08-28T21:51:37.979Z",
       "addressLocality": "Kreuzlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
