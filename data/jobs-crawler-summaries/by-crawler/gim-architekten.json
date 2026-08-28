@@ -1,0 +1,60 @@
+{
+  "key": "gim-architekten",
+  "label": "GIM Architekten AG",
+  "generatedAt": "2026-08-28T21:07:13.141Z",
+  "total": 1,
+  "discovered": null,
+  "written": 1,
+  "newCount": 0,
+  "updatedCount": 1,
+  "removedCount": 0,
+  "unchangedCount": 0,
+  "durationMs": 4284,
+  "avgDurationMs": 4284,
+  "durationHistory": [
+    4284
+  ],
+  "newJobs": [],
+  "updatedJobs": [
+    {
+      "id": "gim-architekten-dfcd34dca23b",
+      "slug": "dipl-architekt-in-gim-gim-architekten-bern",
+      "company": "GIM Architekten AG",
+      "companyKey": "gim-architekten",
+      "companyDomain": "gim.ch",
+      "title": "Dipl. Architekt/In - GIM",
+      "needsRetranslation": false,
+      "location": "Bern",
+      "canton": "BE",
+      "url": "https://www.jobs.ch/en/vacancies/detail/1d796c78-bfb5-4f59-abbc-afa0ee492061/",
+      "source": "GIM Architekten AG Dedicated Parser (jobs.ch)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-28T21:07:09.716Z",
+      "addressLocality": "Bern",
+      "addressRegion": "BE",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "2905",
+      "streetAddress": "Bern",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Architettura / Edilizia",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2025-05-06",
+      "applyUrl": "https://www.jobs.ch/en/vacancies/detail/1d796c78-bfb5-4f59-abbc-afa0ee492061/",
+      "firstSeenAt": "2026-07-04T10:49:57.418Z",
+      "_qualityScore": 88,
+      "_qualityBreakdown": {
+        "cleanliness": 25,
+        "richness": 18,
+        "translation": 25,
+        "completeness": 20
+      }
+    }
+  ],
+  "removedJobs": [],
+  "unchangedJobs": []
+}
