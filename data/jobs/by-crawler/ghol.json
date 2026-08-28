@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ghol",
-  "assembledAt": "2026-08-28T05:34:34.344Z",
+  "assembledAt": "2026-08-28T21:47:18.963Z",
   "jobs": [
     {
       "id": "ghol-0fd5acb09556",
@@ -47,7 +47,7 @@
       "applyUrl": "https://app.beehire.com/invite/R0-rziyv4",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.855Z",
+      "crawledAt": "2026-08-28T21:47:16.104Z",
       "requirementsByLocale": {
         "it": [
           "Esperienza significativa in sala operatoria",
@@ -145,7 +145,7 @@
       "applyUrl": "https://app.beehire.com/invite/Ya8SgPnfs",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.853Z",
+      "crawledAt": "2026-08-28T21:47:16.103Z",
       "requirementsByLocale": {
         "it": [
           "Almeno 3 anni di esperienza in cucina ospedaliera o in EMS (ambiente medico-sociale)",
@@ -247,7 +247,7 @@
       "applyUrl": "https://app.beehire.com/invite/Wn7TRyXkp",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.850Z",
+      "crawledAt": "2026-08-28T21:47:16.102Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "aide-en-soins-et-accompagnement-groupement-hospitalier-de-l-ouest-lemanique-rolle",
@@ -322,7 +322,7 @@
       "applyUrl": "https://app.beehire.com/invite/AWZGWt1g8",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.849Z",
+      "crawledAt": "2026-08-28T21:47:16.102Z",
       "previousSlugs": [
         "assistant-technique-en-sterilisation-groupement-hospitalier-de-l-ouest-lemanique-nyon"
       ],
@@ -396,7 +396,7 @@
       "applyUrl": "https://app.beehire.com/invite/iMHZFWFWX",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.848Z",
+      "crawledAt": "2026-08-28T21:47:16.101Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "sage-femme-groupement-hospitalier-de-l-ouest-lemanique-nyon",
@@ -506,7 +506,7 @@
       "applyUrl": "https://app.beehire.com/invite/iNewpVG3m",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.846Z",
+      "crawledAt": "2026-08-28T21:47:16.099Z",
       "previousSlugs": [
         "infirmier-ere-urgentiste-groupement-hospitalier-de-l-ouest-lemanique-nyon",
         "infermiera-in-privato-servizio-privato-groupement-hospitalier-de-l-ouest-lemanique-nyon",
@@ -595,7 +595,7 @@
       "applyUrl": "https://app.beehire.com/invite/v6aaZampn",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.844Z",
+      "crawledAt": "2026-08-28T21:47:16.099Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "infirmier-ere-anesthesiste-certifie-e-groupement-hospitalier-de-l-ouest-lemanique-nyon"
@@ -670,7 +670,7 @@
       "applyUrl": "https://app.beehire.com/invite/CsBCCNTDM",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.843Z",
+      "crawledAt": "2026-08-28T21:47:16.098Z",
       "previousSlugs": [
         "infirmier-ere-en-pneumologie-groupement-hospitalier-de-l-ouest-lemanique-rolle"
       ],
@@ -744,7 +744,7 @@
       "applyUrl": "https://app.beehire.com/invite/FbUuocJWF",
       "source": "GHOL Dedicated Parser (Beehire public API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T05:34:30.842Z",
+      "crawledAt": "2026-08-28T21:47:16.097Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T21:49:26.103Z",
       "salaryMin": 86500,
@@ -820,7 +820,7 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
     }
   ]
 }
