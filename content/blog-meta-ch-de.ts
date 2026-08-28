@@ -4570,6 +4570,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.esposizioni-nazionali-messaggio-2026.title': 'Nationale Ausstellungen: Ja zur Botschaft, keine Kofinanzierung bis 2040',
     'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'Der Bundesrat verabschiedet am 26. August 2026 die Botschaft zum neuen Gesetz: maximal 30% Bundesbeitrag und parlamentarischer Entscheid frühestens 2035.',
     'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Bundeshaus in Bern mit Schweizer Flagge, Sitz des Bundesrates',
+    'blog.article.assegni-familiari-uri-importi-domanda.title': 'Familienzulagen im Kanton Uri: Beträge und Antrag',
+    'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Übersicht über die Familien- und Ausbildungszulagen im Kanton Uri: Bundesbasis FamZG, kantonale Beträge, zuständige Kassen und Antragsverfahren.',
+    'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Familie vor traditionellen Häusern in einem alpinen Dorf in Uri',
 };
 
 export default blogMetaChDe;

@@ -4570,6 +4570,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.esposizioni-nazionali-messaggio-2026.title': 'Expositions nationales : oui au message, pas de cofinancement jusqu\'en 2040',
     'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'Le Conseil fédéral approuve le 26 août 2026 le message sur la nouvelle loi : contribution fédérale maximale à 30 % et décision parlementaire pas avant 2035.',
     'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Palais fédéral à Berne avec drapeau suisse, siège du Conseil fédéral',
+    'blog.article.assegni-familiari-uri-importi-domanda.title': 'Allocations familiales dans le canton d\'Uri : montants et demande',
+    'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Tableau des allocations familiales et de formation dans le canton d\'Uri : base fédérale LAFam, montants cantonaux, caisses compétentes et procédure de demande.',
+    'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Famille devant des maisons traditionnelles dans un village alpin d\'Uri',
 };
 
 export default blogMetaChFr;

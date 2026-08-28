@@ -4570,6 +4570,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.esposizioni-nazionali-messaggio-2026.title': 'National exhibitions: yes to the message, no co-financing until 2040',
     'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'The Federal Council approves on 26 August 2026 the message on the new law: maximum federal contribution at 30% and parliamentary decision no earlier than 2035.',
     'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Federal Palace in Bern with Swiss flag, seat of the Federal Council',
+    'blog.article.assegni-familiari-uri-importi-domanda.title': 'Family allowances in Canton Uri: amounts and application',
+    'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Framework of family and training allowances in the Uri Canton: federal base LAFam, cantonal amounts, competent coffers and application procedure.',
+    'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Family in front of traditional houses in an alpine Uri village',
 };
 
 export default blogMetaChEn;

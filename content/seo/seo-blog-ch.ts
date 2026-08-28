@@ -59300,6 +59300,45 @@ const BLOG_CH_SEO_METADATA: Record<string, SEOMetadata> = {
     }
   },
 
+  'blog-assegni-familiari-uri-importi-domanda': {
+    title: 'Assegni familiari nel Canton Uri: importi e domanda',
+    description: 'Assegni familiari nel Canton Uri: quadro LAFam, importi cantonali, casse di compensazione e procedura di domanda per salariati, indipendenti e persone',
+    keywords: 'frontalieri, ticino, svizzera, italia, assegni, familiari, canton, importi',
+    ogTitle: 'Assegni familiari Canton Uri: importi e domanda',
+    ogDescription: 'Come funzionano gli assegni familiari nel Canton Uri: la base federale LAFam, gli importi cantonali, chi ha diritto, a quale cassa rivolgersi e come presentare la domanda, passo dopo passo.',
+    canonicalPath: '/articoli-svizzera/assegni-familiari-uri-importi-domanda/',
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "NewsArticle",
+      "headline": "Assegni familiari nel Canton Uri: importi e domanda",
+      "description": "Assegni familiari nel Canton Uri: quadro LAFam, importi cantonali, casse di compensazione e procedura di domanda per salariati, indipendenti e persone",
+      "image": {
+        "@type": "ImageObject",
+        "acquireLicensePage": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "copyrightNotice": "© 2024–2026 Frontaliere Ticino. Tutti i diritti riservati.",
+        "license": "https://frontaliereticino.ch/termini-di-servizio/#licenza-immagini",
+        "creator": { "@type": "Organization", "name": "Frontaliere Ticino", "url": "https://frontaliereticino.ch/" },
+        "creditText": "Frontaliere Ticino",
+        "url": `${BASE_URL}/images/blog/assegni-familiari-uri-importi-domanda.webp`,
+        "width": 1200,
+        "height": 675,
+        "caption": "Famiglia davanti a case tradizionali nel villaggio alpino di Uri"
+      },
+      "datePublished": "2026-08-28T05:05:21+00:00",
+      "dateModified": "2026-08-28T05:05:21+00:00",
+      "inLanguage": "it",
+      "author": {
+        "@type": "Person",
+        "@id": "https://frontaliereticino.ch/autori/redazione/#person",
+        "name": "Redazione Frontaliere Ticino",
+        "url": "https://frontaliereticino.ch/autori/redazione/"
+      },
+      "publisher": {"@id": "https://frontaliereticino.ch/#organization"},
+      "mainEntityOfPage": `${BASE_URL}/articoli-svizzera/assegni-familiari-uri-importi-domanda/`,
+      "speakable": { "@type": "SpeakableSpecification", "cssSelector": ["article h1", "article h2", "article p"] }
+    }
+  },
+
 };
 
 export default BLOG_CH_SEO_METADATA;

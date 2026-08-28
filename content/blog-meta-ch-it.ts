@@ -4570,6 +4570,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.esposizioni-nazionali-messaggio-2026.title': 'Esposizioni nazionali: sì al messaggio, niente cofinanziamento fino al 2040',
     'blog.article.esposizioni-nazionali-messaggio-2026.excerpt': 'Il Consiglio federale approva il 26 agosto 2026 il messaggio sulla nuova legge: contributo federale massimo al 30% e decisione parlamentare non prima del 2035.',
     'blog.article.esposizioni-nazionali-messaggio-2026.imageAlt': 'Palazzo federale a Berna con bandiera svizzera, sede del Consiglio federale',
+    'blog.article.assegni-familiari-uri-importi-domanda.title': 'Assegni familiari nel Canton Uri: importi e domanda',
+    'blog.article.assegni-familiari-uri-importi-domanda.excerpt': 'Quadro degli assegni familiari e di formazione nel Canton Uri: base federale LAFam, importi cantonali, casse competenti e procedura di richiesta.',
+    'blog.article.assegni-familiari-uri-importi-domanda.imageAlt': 'Famiglia davanti a case tradizionali nel villaggio alpino di Uri',
 };
 
 export default blogMetaChIt;
