@@ -1,0 +1,15 @@
+{
+  "companyKey": "bracco",
+  "companyName": "Bracco Suisse S.A.",
+  "companyHost": "bracco.wd103.myworkdayjobs.com",
+  "enabled": true,
+  "priority": 10,
+  "crawlerModes": [
+    "api"
+  ],
+  "seedUrls": [
+    "https://bracco.wd103.myworkdayjobs.com/it-IT/BraccoCareers"
+  ],
+  "notes": "Workday REST API at bracco.wd103.myworkdayjobs.com — all postings fetched, Swiss ones (Cadempino TI / Plan-les-Ouates GE / other CH) kept by location text (no brittle location UUIDs).",
+  "updatedAt": "2026-08-28T20:58:58.404Z"
+}
