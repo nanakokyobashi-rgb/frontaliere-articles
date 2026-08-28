@@ -4558,6 +4558,9 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-riduzione.title': 'Primes caisse-maladie URI et réduction des primes LAMal',
     'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guide des primes de la caisse-maladie obligatoire dans le canton d\'Uri, des tranches, des franchises et des conditions de réduction des primes.',
     'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Assurance maladie et primes dans le canton d\'Uri',
+    'blog.article.premi-cassa-malati-uri-sussidi.title': 'URI : primes de caisse-maladie spécifiques et subventions',
+    'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Le canton d\'Uri applique des tarifs spécifiques pour les primes de l\'assurance maladie obligatoire (LAMal). L\'accès aux subventions se fait par la réduction des primes, avec des franchises flexibles pour les adultes.',
+    'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Châteaux de Bellinzone par temps ensoleillé, symbolisant le canton d\'Uri et la Suisse.',
 };
 
 export default blogMetaChFr;

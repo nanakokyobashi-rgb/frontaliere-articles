@@ -4558,6 +4558,9 @@ const blogMetaChDe: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-riduzione.title': 'Krankenkassenprämien URI und KVG-Prämienverbilligung',
     'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Prämienleitfaden der obligatorischen Krankenkasse im Kanton Uri, Zeitabschnitte, Franchisen und Voraussetzungen für die Prämienverbilligung.',
     'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Krankenkassenprämien im Kanton Uri',
+    'blog.article.premi-cassa-malati-uri-sussidi.title': 'URI: Spezifische Krankenkassenprämien und Zuschüsse',
+    'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Der Kanton Uri wendet spezifische Tarife für die Prämien der obligatorischen Krankenversicherung (KVG) an. Der Zugang zu den Beiträgen erfolgt durch Prämienverbilligung mit flexiblen Franchisen für Erwachsene.',
+    'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Burgen von Bellinzona an einem sonnigen Tag, Symbol des Kantons Uri und der Schweiz.',
 };
 
 export default blogMetaChDe;

@@ -4558,6 +4558,9 @@ const blogMetaChIt: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-riduzione.title': 'Premi cassa malati Uri e riduzione premi LAMal',
     'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guida ai premi della cassa malati obbligatoria nel Cantone di Uri, fasce, franchigie e requisiti per la riduzione dei premi.',
     'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Assicurazione malattia e premi cassa malati nel Cantone di Uri',
+    'blog.article.premi-cassa-malati-uri-sussidi.title': 'Uri: premi cassa malati specifici e sussidi',
+    'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'Il Cantone di Uri applica tariffe specifiche per i premi dell\'assicurazione malattia obbligatoria (LAMal). L\'accesso ai sussidi avviene tramite la riduzione dei premi, con franchigie flessibili per gli adulti.',
+    'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Castelli di Bellinzona in una giornata di sole, simbolo del Canton Uri e della Svizzera.',
 };
 
 export default blogMetaChIt;

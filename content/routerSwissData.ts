@@ -1545,6 +1545,7 @@ export const SWISS_SLUGS: Record<string, Record<ArticleLocale, string>> = {
  'berna-rinnova-festival-cinematografici': { it: 'berna-rinnova-festival-cinematografici', en: 'bern-renews-swiss-film-festivals', de: 'bern-erneuert-schweizer-filmfestivals', fr: 'berne-renouvelle-festivals-cinema-suisse' },
  'reno-navigabilita-futuro-allarme': { it: 'reno-navigabilita-futuro-allarme', en: 'rhine-navigability-future-alarm', de: 'rhein-schiffbarkeit-zukunft-alarm', fr: 'rhin-navigabilite-futur-alarme' },
  'premi-cassa-malati-uri-riduzione': { it: 'premi-cassa-malati-uri-riduzione', en: 'health-insurance-uri-reduction', de: 'krankenkassenpraemien-uri-reduktion', fr: 'primes-assurance-maladie-uri-reduction' },
+ 'premi-cassa-malati-uri-sussidi': { it: 'premi-cassa-malati-uri-sussidi', en: 'health-insurance-premiums-uri-subsidies', de: 'krankenkassenpraemien-uri-zuschuesse', fr: 'primes-assurance-maladie-uri-subventions' },
 };
 
 export const REVERSE_SWISS: Record<ArticleLocale, Record<string, string>> = (() => {

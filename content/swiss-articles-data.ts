@@ -13672,6 +13672,15 @@ const RAW_SWISS_ARTICLES: Article[] = [
     authorSlug: 'laura-bianchi',
     authorName: 'Laura Bianchi',
    },
+   {
+    id: 'premi-cassa-malati-uri-sussidi',
+    category: 'fiscale',
+    date: '2026-08-28T04:24:42.361Z',
+    image: '/images/blog/premi-cassa-malati-uri-sussidi.webp',
+    hasCalculator: true,
+    authorSlug: 'marco-ferrari',
+    authorName: 'Marco Ferrari',
+   },
 ];
 
 // Full blog hero images are served from jsDelivr (CDN) and deleted from the

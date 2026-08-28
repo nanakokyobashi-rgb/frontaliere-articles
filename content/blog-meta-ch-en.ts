@@ -4558,6 +4558,9 @@ const blogMetaChEn: Record<string, string> = {
     'blog.article.premi-cassa-malati-uri-riduzione.title': 'Uri sick pay premiums and LAMal premium reductions',
     'blog.article.premi-cassa-malati-uri-riduzione.excerpt': 'Guide to the compulsory health insurance premiums in the Canton of Uri, bands, deductibles and requirements for the reduction of premiums.',
     'blog.article.premi-cassa-malati-uri-riduzione.imageAlt': 'Health insurance and premiums in Canton Uri',
+    'blog.article.premi-cassa-malati-uri-sussidi.title': 'Uri: specific sick pay premiums and subsidies',
+    'blog.article.premi-cassa-malati-uri-sussidi.excerpt': 'The Canton of Uri applies specific rates for compulsory health insurance premiums (LAMal). Access to the subsidies takes place through the reduction of premiums, with flexible deductibles for adults.',
+    'blog.article.premi-cassa-malati-uri-sussidi.imageAlt': 'Bellinzona castles on a sunny day, symbolizing the Canton of Uri and Switzerland.',
 };
 
 export default blogMetaChEn;
