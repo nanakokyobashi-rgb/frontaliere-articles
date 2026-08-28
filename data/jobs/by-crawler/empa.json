@@ -1,6 +1,6 @@
 {
   "crawlerKey": "empa",
-  "assembledAt": "2026-08-28T05:35:44.340Z",
+  "assembledAt": "2026-08-28T21:13:58.525Z",
   "jobs": [
     {
       "id": "empa-8d5a51c62388",
@@ -33,7 +33,7 @@
       "url": "https://apply.refline.ch/673276/2176/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.162Z",
+      "crawledAt": "2026-08-28T21:13:54.224Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -112,7 +112,7 @@
       "url": "https://apply.refline.ch/673276/2181/pub/4/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.160Z",
+      "crawledAt": "2026-08-28T21:13:54.215Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -191,7 +191,7 @@
       "url": "https://apply.refline.ch/673276/2199/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.159Z",
+      "crawledAt": "2026-08-28T21:13:54.214Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -306,7 +306,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "empa-0f9fc065f003",
@@ -339,7 +340,7 @@
       "url": "https://apply.refline.ch/673276/2206/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.154Z",
+      "crawledAt": "2026-08-28T21:13:54.212Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -419,7 +420,7 @@
       "url": "https://apply.refline.ch/673276/2207/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.153Z",
+      "crawledAt": "2026-08-28T21:13:54.207Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "streetAddress": "Feuerwerkerstrasse 39",
@@ -484,7 +485,7 @@
       "url": "https://apply.refline.ch/673276/2209/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.150Z",
+      "crawledAt": "2026-08-28T21:13:54.205Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -565,7 +566,7 @@
       "url": "https://apply.refline.ch/673276/2179/pub/5/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.148Z",
+      "crawledAt": "2026-08-28T21:13:54.201Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -643,7 +644,7 @@
       "url": "https://apply.refline.ch/673276/2197/pub/2/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.146Z",
+      "crawledAt": "2026-08-28T21:13:54.196Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "streetAddress": "Feuerwerkerstrasse 39",
@@ -731,7 +732,7 @@
       "url": "https://apply.refline.ch/673276/2217/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.144Z",
+      "crawledAt": "2026-08-28T21:13:54.194Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Lerchenfeldstrasse 5",
@@ -810,7 +811,7 @@
       "url": "https://apply.refline.ch/673276/2218/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.143Z",
+      "crawledAt": "2026-08-28T21:13:54.191Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Lerchenfeldstrasse 5",
@@ -875,7 +876,7 @@
       "url": "https://apply.refline.ch/673276/2219/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.140Z",
+      "crawledAt": "2026-08-28T21:13:54.189Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -948,7 +949,7 @@
       "url": "https://apply.refline.ch/673276/2220/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.136Z",
+      "crawledAt": "2026-08-28T21:13:54.185Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -1028,7 +1029,7 @@
       "url": "https://apply.refline.ch/673276/2222/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.134Z",
+      "crawledAt": "2026-08-28T21:13:54.183Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Lerchenfeldstrasse 5",
@@ -1107,7 +1108,7 @@
       "url": "https://apply.refline.ch/673276/2221/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T05:35:40.131Z",
+      "crawledAt": "2026-08-28T21:13:54.181Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -1187,7 +1188,7 @@
       "url": "https://apply.refline.ch/673276/2223/pub/1/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.127Z",
+      "crawledAt": "2026-08-28T21:13:54.175Z",
       "addressLocality": "Dübendorf",
       "addressRegion": "ZH",
       "streetAddress": "Ueberlandstrasse 129",
@@ -1267,7 +1268,7 @@
       "url": "https://apply.refline.ch/673276/2204/pub/2/index.html",
       "source": "Empa Dedicated Parser (Refline 673276)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:35:40.123Z",
+      "crawledAt": "2026-08-28T21:13:54.170Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Lerchenfeldstrasse 5",
@@ -1388,7 +1389,75 @@
           "unitText": "YEAR"
         }
       },
-      "crawlerMissStreak": 1
+      "crawlerMissStreak": 2
+    },
+    {
+      "id": "empa-7f9454ea111f",
+      "slug": "tenure-track-group-leader-position-metal-additive-manufacturing-empa-thun",
+      "slugByLocale": {
+        "en": "tenure-track-group-leader-position-metal-additive-manufacturing-empa-thun",
+        "it": "tenure-track-group-leader-position-metal-additive-manufacturing-empa-thun",
+        "de": "tenure-track-group-leader-position-metal-additive-manufacturing-empa-thun",
+        "fr": "tenure-track-group-leader-position-metal-additive-manufacturing-empa-thun"
+      },
+      "company": "Empa",
+      "companyKey": "empa",
+      "companyDomain": "empa.ch",
+      "title": "Tenure Track Group Leader Position Metal Additive Manufacturing",
+      "titleByLocale": {
+        "en": "Tenure Track Group Leader Position Metal Additive Manufacturing",
+        "it": "Tenure Track Group Leader Position Metal Additive Manufacturing",
+        "de": "Tenure Track Group Leader Position Metal Additive Manufacturing",
+        "fr": "Tenure Track Group Leader Position Metal Additive Manufacturing"
+      },
+      "description": "Materials science and technology are our passion. With our cutting-edge research, Empa's around 1,100 employees make essential contributions to the well-being of society for a future worth living. Empa is a research institution of the ETH Domain.\n\nTenure Track Group Leader Position Metal Additive Manufacturing\n\nOur newly established Laboratory for Advanced Metallurgy and Manufacturing of Metals (AM3) develops new metallic materials for high-performance applications and advanced manufacturing processes and operates across Empa's Dübendorf and Thun site. A key focus of our activities is metal additive manufacturing. Our research covers the entire process chain, from alloy design and powder development to manufacturing, process monitoring, microstructure engineering, and material properties.\n For our Thun site, we are seeking an outstanding and highly motivated early career researcher for a Tenure-Track Group Leader Position in Metal Additive Manufacturing. The successful candidate will establish an innovative research agenda and lead an internationally recognized research group.\n\nYour responsibilities\n\n• Establish a strong research profile in metal additive manufacturing within the laboratory's broader activities (including materials development, powder engineering, process development and monitoring, process modelling and simulation, and materials characterization)\n\n• Acquire and manage competitive research funding from national and international funding agencies and industrial partners\n\n• Develop and maintain strong collaborations with academic and industrial partners in Switzerland and internationally\n\n• Lead research projects and supervise PhD students, postdoctoral researchers, and MSc students\n\n• Publish high-quality research in leading international journals and present results at major scientific conferences\n\n• Contribute actively to the strategic development and long-term growth of the laboratory\n\n• Promote technology transfer and strengthen collaboration with industry\n\nYour profile\n\n• PhD in Materials Science, Metallurgy, Mechanical Engineering, Applied Physics, or a related field\n\n• Demonstrated expertise in the science and technology of metals, and particularly in metal additive manufacturing (LPBF, DED, BJ etc.)\n\n• Excellent publication record relative to career stage\n\n• Strong potential to acquire competitive research funding and develop an independent research profile\n\n• Ability to work across disciplines and bridge fundamental research, technology development, and industrial applications\n\n• Experience in research project management and supervision of junior researchers\n\n• Excellent communication, networking, and leadership skills\n\n• Excellent command of English; knowledge of German and/or French is an advantage\n\nOur offer\n\nEmpa offers a highly attractive research environment with state-of-the-art infrastructure and substantial freedom to develop an independent research program. The position is offered as a tenure-track ap-pointment with an initial contract of 3 years and with the opportunity to progress to a permanent Group Leader position following a successful evaluation.\n\nWe live a culture of inclusion and respect. We welcome all people who are interested in innovative, sustainable and meaningful activities - that's what counts.\n\nWe look forward to receiving your complete online application, including a one-page motivation letter with a brief outline of your planned research activities, a CV including a list of publications and conference presentations, relevant certificates and diplomas, as well as contact details for at least two academic or industry references. Please submit your application exclusively via our job portal by 30 September 2026 . Applications submitted by e-mail or post cannot be considered.",
+      "descriptionByLocale": {
+        "en": "Materials science and technology are our passion. With our cutting-edge research, Empa's around 1,100 employees make essential contributions to the well-being of society for a future worth living. Empa is a research institution of the ETH Domain.\n\nTenure Track Group Leader Position Metal Additive Manufacturing\n\nOur newly established Laboratory for Advanced Metallurgy and Manufacturing of Metals (AM3) develops new metallic materials for high-performance applications and advanced manufacturing processes and operates across Empa's Dübendorf and Thun site. A key focus of our activities is metal additive manufacturing. Our research covers the entire process chain, from alloy design and powder development to manufacturing, process monitoring, microstructure engineering, and material properties.\n For our Thun site, we are seeking an outstanding and highly motivated early career researcher for a Tenure-Track Group Leader Position in Metal Additive Manufacturing. The successful candidate will establish an innovative research agenda and lead an internationally recognized research group.\n\nYour responsibilities\n\n• Establish a strong research profile in metal additive manufacturing within the laboratory's broader activities (including materials development, powder engineering, process development and monitoring, process modelling and simulation, and materials characterization)\n\n• Acquire and manage competitive research funding from national and international funding agencies and industrial partners\n\n• Develop and maintain strong collaborations with academic and industrial partners in Switzerland and internationally\n\n• Lead research projects and supervise PhD students, postdoctoral researchers, and MSc students\n\n• Publish high-quality research in leading international journals and present results at major scientific conferences\n\n• Contribute actively to the strategic development and long-term growth of the laboratory\n\n• Promote technology transfer and strengthen collaboration with industry\n\nYour profile\n\n• PhD in Materials Science, Metallurgy, Mechanical Engineering, Applied Physics, or a related field\n\n• Demonstrated expertise in the science and technology of metals, and particularly in metal additive manufacturing (LPBF, DED, BJ etc.)\n\n• Excellent publication record relative to career stage\n\n• Strong potential to acquire competitive research funding and develop an independent research profile\n\n• Ability to work across disciplines and bridge fundamental research, technology development, and industrial applications\n\n• Experience in research project management and supervision of junior researchers\n\n• Excellent communication, networking, and leadership skills\n\n• Excellent command of English; knowledge of German and/or French is an advantage\n\nOur offer\n\nEmpa offers a highly attractive research environment with state-of-the-art infrastructure and substantial freedom to develop an independent research program. The position is offered as a tenure-track ap-pointment with an initial contract of 3 years and with the opportunity to progress to a permanent Group Leader position following a successful evaluation.\n\nWe live a culture of inclusion and respect. We welcome all people who are interested in innovative, sustainable and meaningful activities - that's what counts.\n\nWe look forward to receiving your complete online application, including a one-page motivation letter with a brief outline of your planned research activities, a CV including a list of publications and conference presentations, relevant certificates and diplomas, as well as contact details for at least two academic or industry references. Please submit your application exclusively via our job portal by 30 September 2026 . Applications submitted by e-mail or post cannot be considered.",
+        "it": "Materials science and technology are our passion. With our cutting-edge research, Empa's around 1,100 employees make essential contributions to the well-being of society for a future worth living. Empa is a research institution of the ETH Domain.\n\nTenure Track Group Leader Position Metal Additive Manufacturing\n\nOur newly established Laboratory for Advanced Metallurgy and Manufacturing of Metals (AM3) develops new metallic materials for high-performance applications and advanced manufacturing processes and operates across Empa's Dübendorf and Thun site. A key focus of our activities is metal additive manufacturing. Our research covers the entire process chain, from alloy design and powder development to manufacturing, process monitoring, microstructure engineering, and material properties.\n For our Thun site, we are seeking an outstanding and highly motivated early career researcher for a Tenure-Track Group Leader Position in Metal Additive Manufacturing. The successful candidate will establish an innovative research agenda and lead an internationally recognized research group.\n\nYour responsibilities\n\n• Establish a strong research profile in metal additive manufacturing within the laboratory's broader activities (including materials development, powder engineering, process development and monitoring, process modelling and simulation, and materials characterization)\n\n• Acquire and manage competitive research funding from national and international funding agencies and industrial partners\n\n• Develop and maintain strong collaborations with academic and industrial partners in Switzerland and internationally\n\n• Lead research projects and supervise PhD students, postdoctoral researchers, and MSc students\n\n• Publish high-quality research in leading international journals and present results at major scientific conferences\n\n• Contribute actively to the strategic development and long-term growth of the laboratory\n\n• Promote technology transfer and strengthen collaboration with industry\n\nYour profile\n\n• PhD in Materials Science, Metallurgy, Mechanical Engineering, Applied Physics, or a related field\n\n• Demonstrated expertise in the science and technology of metals, and particularly in metal additive manufacturing (LPBF, DED, BJ etc.)\n\n• Excellent publication record relative to career stage\n\n• Strong potential to acquire competitive research funding and develop an independent research profile\n\n• Ability to work across disciplines and bridge fundamental research, technology development, and industrial applications\n\n• Experience in research project management and supervision of junior researchers\n\n• Excellent communication, networking, and leadership skills\n\n• Excellent command of English; knowledge of German and/or French is an advantage\n\nOur offer\n\nEmpa offers a highly attractive research environment with state-of-the-art infrastructure and substantial freedom to develop an independent research program. The position is offered as a tenure-track ap-pointment with an initial contract of 3 years and with the opportunity to progress to a permanent Group Leader position following a successful evaluation.\n\nWe live a culture of inclusion and respect. We welcome all people who are interested in innovative, sustainable and meaningful activities - that's what counts.\n\nWe look forward to receiving your complete online application, including a one-page motivation letter with a brief outline of your planned research activities, a CV including a list of publications and conference presentations, relevant certificates and diplomas, as well as contact details for at least two academic or industry references. Please submit your application exclusively via our job portal by 30 September 2026 . Applications submitted by e-mail or post cannot be considered.",
+        "de": "Materials science and technology are our passion. With our cutting-edge research, Empa's around 1,100 employees make essential contributions to the well-being of society for a future worth living. Empa is a research institution of the ETH Domain.\n\nTenure Track Group Leader Position Metal Additive Manufacturing\n\nOur newly established Laboratory for Advanced Metallurgy and Manufacturing of Metals (AM3) develops new metallic materials for high-performance applications and advanced manufacturing processes and operates across Empa's Dübendorf and Thun site. A key focus of our activities is metal additive manufacturing. Our research covers the entire process chain, from alloy design and powder development to manufacturing, process monitoring, microstructure engineering, and material properties.\n For our Thun site, we are seeking an outstanding and highly motivated early career researcher for a Tenure-Track Group Leader Position in Metal Additive Manufacturing. The successful candidate will establish an innovative research agenda and lead an internationally recognized research group.\n\nYour responsibilities\n\n• Establish a strong research profile in metal additive manufacturing within the laboratory's broader activities (including materials development, powder engineering, process development and monitoring, process modelling and simulation, and materials characterization)\n\n• Acquire and manage competitive research funding from national and international funding agencies and industrial partners\n\n• Develop and maintain strong collaborations with academic and industrial partners in Switzerland and internationally\n\n• Lead research projects and supervise PhD students, postdoctoral researchers, and MSc students\n\n• Publish high-quality research in leading international journals and present results at major scientific conferences\n\n• Contribute actively to the strategic development and long-term growth of the laboratory\n\n• Promote technology transfer and strengthen collaboration with industry\n\nYour profile\n\n• PhD in Materials Science, Metallurgy, Mechanical Engineering, Applied Physics, or a related field\n\n• Demonstrated expertise in the science and technology of metals, and particularly in metal additive manufacturing (LPBF, DED, BJ etc.)\n\n• Excellent publication record relative to career stage\n\n• Strong potential to acquire competitive research funding and develop an independent research profile\n\n• Ability to work across disciplines and bridge fundamental research, technology development, and industrial applications\n\n• Experience in research project management and supervision of junior researchers\n\n• Excellent communication, networking, and leadership skills\n\n• Excellent command of English; knowledge of German and/or French is an advantage\n\nOur offer\n\nEmpa offers a highly attractive research environment with state-of-the-art infrastructure and substantial freedom to develop an independent research program. The position is offered as a tenure-track ap-pointment with an initial contract of 3 years and with the opportunity to progress to a permanent Group Leader position following a successful evaluation.\n\nWe live a culture of inclusion and respect. We welcome all people who are interested in innovative, sustainable and meaningful activities - that's what counts.\n\nWe look forward to receiving your complete online application, including a one-page motivation letter with a brief outline of your planned research activities, a CV including a list of publications and conference presentations, relevant certificates and diplomas, as well as contact details for at least two academic or industry references. Please submit your application exclusively via our job portal by 30 September 2026 . Applications submitted by e-mail or post cannot be considered.",
+        "fr": "Materials science and technology are our passion. With our cutting-edge research, Empa's around 1,100 employees make essential contributions to the well-being of society for a future worth living. Empa is a research institution of the ETH Domain.\n\nTenure Track Group Leader Position Metal Additive Manufacturing\n\nOur newly established Laboratory for Advanced Metallurgy and Manufacturing of Metals (AM3) develops new metallic materials for high-performance applications and advanced manufacturing processes and operates across Empa's Dübendorf and Thun site. A key focus of our activities is metal additive manufacturing. Our research covers the entire process chain, from alloy design and powder development to manufacturing, process monitoring, microstructure engineering, and material properties.\n For our Thun site, we are seeking an outstanding and highly motivated early career researcher for a Tenure-Track Group Leader Position in Metal Additive Manufacturing. The successful candidate will establish an innovative research agenda and lead an internationally recognized research group.\n\nYour responsibilities\n\n• Establish a strong research profile in metal additive manufacturing within the laboratory's broader activities (including materials development, powder engineering, process development and monitoring, process modelling and simulation, and materials characterization)\n\n• Acquire and manage competitive research funding from national and international funding agencies and industrial partners\n\n• Develop and maintain strong collaborations with academic and industrial partners in Switzerland and internationally\n\n• Lead research projects and supervise PhD students, postdoctoral researchers, and MSc students\n\n• Publish high-quality research in leading international journals and present results at major scientific conferences\n\n• Contribute actively to the strategic development and long-term growth of the laboratory\n\n• Promote technology transfer and strengthen collaboration with industry\n\nYour profile\n\n• PhD in Materials Science, Metallurgy, Mechanical Engineering, Applied Physics, or a related field\n\n• Demonstrated expertise in the science and technology of metals, and particularly in metal additive manufacturing (LPBF, DED, BJ etc.)\n\n• Excellent publication record relative to career stage\n\n• Strong potential to acquire competitive research funding and develop an independent research profile\n\n• Ability to work across disciplines and bridge fundamental research, technology development, and industrial applications\n\n• Experience in research project management and supervision of junior researchers\n\n• Excellent communication, networking, and leadership skills\n\n• Excellent command of English; knowledge of German and/or French is an advantage\n\nOur offer\n\nEmpa offers a highly attractive research environment with state-of-the-art infrastructure and substantial freedom to develop an independent research program. The position is offered as a tenure-track ap-pointment with an initial contract of 3 years and with the opportunity to progress to a permanent Group Leader position following a successful evaluation.\n\nWe live a culture of inclusion and respect. We welcome all people who are interested in innovative, sustainable and meaningful activities - that's what counts.\n\nWe look forward to receiving your complete online application, including a one-page motivation letter with a brief outline of your planned research activities, a CV including a list of publications and conference presentations, relevant certificates and diplomas, as well as contact details for at least two academic or industry references. Please submit your application exclusively via our job portal by 30 September 2026 . Applications submitted by e-mail or post cannot be considered."
+      },
+      "location": "Thun",
+      "canton": "BE",
+      "url": "https://apply.refline.ch/673276/2224/pub/1/index.html",
+      "source": "Empa Dedicated Parser (Refline 673276)",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-28T21:13:54.166Z",
+      "addressLocality": "Thun",
+      "addressRegion": "BE",
+      "streetAddress": "Feuerwerkerstrasse 39",
+      "postalCode": "3602",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ricerca",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "senior",
+      "sector": "Università / Ricerca",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-25",
+      "applyUrl": "https://apply.refline.ch/673276/2224/pub/1/index.html",
+      "hiringOrganizationName": "Empa",
+      "jobReqId": "2224",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68500,
+      "salaryMax": 104000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68500,
+          "maxValue": 104000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-28T21:13:54.166Z"
     }
   ]
 }
