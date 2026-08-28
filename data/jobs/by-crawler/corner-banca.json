@@ -1,6 +1,6 @@
 {
   "crawlerKey": "corner-banca",
-  "assembledAt": "2026-08-28T21:33:07.572Z",
+  "assembledAt": "2026-08-28T21:52:15.593Z",
   "jobs": [
     {
       "id": "corner-banca-62309aa78f00",
@@ -74,7 +74,7 @@
       "url": "https://jobs.corner.ch/o/employee-collection-team-zurich-ref-1068",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.724Z",
+      "crawledAt": "2026-08-28T21:52:13.301Z",
       "previousSlugs": [
         "employee-collection-team-zurich-ref-1068-corner-banca-wallisellen",
         "team-recupero-dipendenti-di-zurigo-corner-banca-wallisellen"
@@ -174,7 +174,7 @@
       "url": "https://jobs.corner.ch/o/legal-collection-case-manager-ref-1095",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.724Z",
+      "crawledAt": "2026-08-28T21:52:13.301Z",
       "previousSlugs": [
         "gestionnaire-de-dossier-de-recouvrement-juridique-corner-banca-wallisellen",
         "fallmanager-fur-rechtssammlung-corner-banca-wallisellen",
@@ -279,7 +279,7 @@
       "url": "https://jobs.corner.ch/o/risk-manager-asset-liability-management-alm-and-liquidity-risk-ref-1086",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.724Z",
+      "crawledAt": "2026-08-28T21:52:13.302Z",
       "previousSlugsByLocale": {
         "it": [
           "risk-manager-asset-liability-management-alm-and-liquidity-risk-ref-1086-corner-banca-lugano",
@@ -381,7 +381,7 @@
       "url": "https://jobs.corner.ch/o/unsolicited-application-apprenticeship",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.724Z",
+      "crawledAt": "2026-08-28T21:52:13.302Z",
       "previousSlugs": [
         "initiativbewerbung-lehre-corner-banca-switzerland"
       ],
@@ -391,7 +391,6 @@
         ]
       },
       "firstSeenAt": "2026-07-08T22:13:15.988Z",
-      "needsRetranslation": true,
       "salaryMin": 59500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -405,7 +404,8 @@
         }
       },
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-5c5ec31e11d9",
@@ -476,7 +476,7 @@
       "url": "https://jobs.corner.ch/o/fi-administration-business-support-ref-1116",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.723Z",
+      "crawledAt": "2026-08-28T21:52:13.299Z",
       "previousSlugs": [
         "fi-administration-e-business-support-2-corner-banca-lugano"
       ],
@@ -570,7 +570,7 @@
       "url": "https://jobs.corner.ch/o/information-security-specialist-ref-1108",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.723Z",
+      "crawledAt": "2026-08-28T21:52:13.300Z",
       "previousSlugs": [
         "information-security-specialist-ref-1108-corner-banca-lugano"
       ],
@@ -580,7 +580,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:28.230Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 150000,
       "baseSalary": {
@@ -596,7 +595,8 @@
       "streetAddress": "Via Canova 16",
       "postalCode": "6901",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-701736bd33cc",
@@ -663,7 +663,7 @@
       "url": "https://jobs.corner.ch/o/employee-backoffice-ref-1110",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.722Z",
+      "crawledAt": "2026-08-28T21:52:13.298Z",
       "previousSlugs": [
         "employee-backoffice-ref-1110-corner-banca-lugano"
       ],
@@ -673,7 +673,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:28.210Z",
-      "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -689,7 +688,8 @@
       "streetAddress": "Via Canova 16",
       "postalCode": "6901",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-c2be30cf246d",
@@ -755,7 +755,7 @@
       "url": "https://jobs.corner.ch/o/employee-consumer-dispute-management-ref-1103",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.722Z",
+      "crawledAt": "2026-08-28T21:52:13.299Z",
       "previousSlugs": [
         "employee-consumer-dispute-management-ref-1103-corner-banca-wallisellen"
       ],
@@ -765,7 +765,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:28.211Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -779,7 +778,8 @@
         }
       },
       "addressRegion": "ZH",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-72b82d085ee9",
@@ -859,7 +859,7 @@
       "url": "https://jobs.corner.ch/o/senior-devops-engineer-ref-1114",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:04.721Z",
+      "crawledAt": "2026-08-28T21:52:13.297Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-19T21:44:21.463Z",
       "salaryMin": 79500,
@@ -944,7 +944,7 @@
       "url": "https://jobs.corner.ch/o/employee-underwriting-e-cash-ref-1113",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.721Z",
+      "crawledAt": "2026-08-28T21:52:13.297Z",
       "previousSlugs": [
         "employee-underwriting-e-cash-ref-1113-corner-banca-lugano"
       ],
@@ -954,7 +954,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T10:12:28.201Z",
-      "needsRetranslation": true,
       "salaryMin": 59000,
       "salaryMax": 90500,
       "baseSalary": {
@@ -970,7 +969,8 @@
       "streetAddress": "Via Canova 16",
       "postalCode": "6901",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-9edf9a711b5c",
@@ -1039,7 +1039,7 @@
       "url": "https://jobs.corner.ch/o/senior-compliance-officer-ref-1111",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.718Z",
+      "crawledAt": "2026-08-28T21:52:13.296Z",
       "previousSlugsByLocale": {
         "it": [
           "senior-compliance-officer-ref-1111-corner-banca-lugano",
@@ -1136,7 +1136,7 @@
       "url": "https://jobs.corner.ch/o/tax-consultant-private-banking-ref-1117",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.717Z",
+      "crawledAt": "2026-08-28T21:52:13.293Z",
       "previousSlugs": [
         "tax-consultant-private-banking-ref-1117-corner-banca-lugano"
       ],
@@ -1146,7 +1146,6 @@
         ]
       },
       "firstSeenAt": "2026-08-04T11:44:57.049Z",
-      "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -1162,7 +1161,8 @@
       "streetAddress": "Via Canova 16",
       "postalCode": "6901",
       "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      "employmentType": "FULL_TIME",
+      "needsRetranslation": true
     },
     {
       "id": "corner-banca-333d7573e186",
@@ -1217,7 +1217,7 @@
       "url": "https://jobs.corner.ch/o/customer-retention-growth-ref-1118",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.716Z",
+      "crawledAt": "2026-08-28T21:52:13.292Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-27T20:12:11.446Z",
       "salaryMin": 59000,
@@ -1303,7 +1303,7 @@
       "url": "https://jobs.corner.ch/o/online-campaign-manager-ref-1102",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:33:04.715Z",
+      "crawledAt": "2026-08-28T21:52:13.291Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T21:51:32.218Z",
       "salaryMin": 68000,
