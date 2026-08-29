@@ -1,6 +1,6 @@
 {
   "crawlerKey": "accor",
-  "assembledAt": "2026-08-28T21:29:05.920Z",
+  "assembledAt": "2026-08-29T04:04:52.081Z",
   "jobs": [
     {
       "id": "accor-1c6744df6976",
@@ -903,6 +903,433 @@
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-27T20:08:39.082Z",
       "crawlerMissStreak": 2
+    },
+    {
+      "id": "accor-93557969ac31",
+      "slug": "line-cook-flexible-am-and-pm-shift-accor-ch",
+      "slugByLocale": {
+        "en": "line-cook-flexible-am-and-pm-shift-accor-ch",
+        "it": "line-cook-flexible-am-and-pm-shift-accor-ch",
+        "de": "line-cook-flexible-am-and-pm-shift-accor-ch",
+        "fr": "line-cook-flexible-am-and-pm-shift-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Line Cook - Flexible AM and PM Shift",
+      "titleByLocale": {
+        "en": "Line Cook - Flexible AM and PM Shift",
+        "it": "Line Cook - Flexible AM and PM Shift",
+        "de": "Line Cook - Flexible AM and PM Shift",
+        "fr": "Line Cook - Flexible AM and PM Shift"
+      },
+      "description": "Line Cook - Flexible AM and PM Shift — Ibis Budget",
+      "descriptionByLocale": {
+        "en": "Line Cook - Flexible AM and PM Shift — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/line-cook-flexible-am-and-pm-shift-in-sofitel-philadelphia-at-rittenhouse-square-philade-jid-108099",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T04:04:48.830Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/line-cook-flexible-am-and-pm-shift-in-sofitel-philadelphia-at-rittenhouse-square-philade-jid-108099",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:48.830Z"
+    },
+    {
+      "id": "accor-7a0d9b009683",
+      "slug": "christmas-at-the-princess-event-parking-staff-accor-ch",
+      "slugByLocale": {
+        "en": "christmas-at-the-princess-event-parking-staff-accor-ch",
+        "it": "christmas-at-the-princess-event-parking-staff-accor-ch",
+        "de": "christmas-at-the-princess-event-parking-staff-accor-ch",
+        "fr": "christmas-at-the-princess-event-parking-staff-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Christmas at the Princess | Event Parking Staff",
+      "titleByLocale": {
+        "en": "Christmas at the Princess | Event Parking Staff",
+        "it": "Christmas at the Princess | Event Parking Staff",
+        "de": "Christmas at the Princess | Event Parking Staff",
+        "fr": "Christmas at the Princess | Event Parking Staff"
+      },
+      "description": "Christmas at the Princess | Event Parking Staff — Ibis Budget",
+      "descriptionByLocale": {
+        "en": "Christmas at the Princess | Event Parking Staff — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/christmas-at-the-princess-event-parking-staff-in-fairmont-scottsdale-princess-scottsdale-united-sta-jid-108100",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T04:04:48.527Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/christmas-at-the-princess-event-parking-staff-in-fairmont-scottsdale-princess-scottsdale-united-sta-jid-108100",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:48.527Z"
+    },
+    {
+      "id": "accor-2b04cf0acf1c",
+      "slug": "assistant-director-of-housekeeping-accor-ch",
+      "slugByLocale": {
+        "fr": "assistant-director-of-housekeeping-accor-ch",
+        "it": "assistant-director-of-housekeeping-accor-ch",
+        "en": "assistant-director-of-housekeeping-accor-ch",
+        "de": "assistant-director-of-housekeeping-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Assistant Director of Housekeeping",
+      "titleByLocale": {
+        "fr": "Assistant Director of Housekeeping",
+        "it": "Assistant Direttore of Housekeeping",
+        "en": "Assistant Director of Housekeeping",
+        "de": "Assistent Direktor of Housekeeping"
+      },
+      "description": "Assistant Director of Housekeeping — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Assistant Director of Housekeeping — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/assistant-director-of-housekeeping-in-fairmont-grand-del-mar-san-diego-united-states-jid-103971",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T04:04:47.920Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/assistant-director-of-housekeeping-in-fairmont-grand-del-mar-san-diego-united-states-jid-103971",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 68000,
+      "salaryMax": 103000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 68000,
+          "maxValue": 103000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:47.920Z"
+    },
+    {
+      "id": "accor-a79cd15ec3fe",
+      "slug": "guest-service-ambassador-full-time-accor-ch",
+      "slugByLocale": {
+        "fr": "guest-service-ambassador-full-time-accor-ch",
+        "it": "guest-service-ambassador-full-time-accor-ch",
+        "en": "guest-service-ambassador-full-time-accor-ch",
+        "de": "guest-service-ambassador-full-time-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Guest Service Ambassador (Full Time)",
+      "titleByLocale": {
+        "fr": "Guest Service Ambassador (Full Time)",
+        "it": "Guest Service Ambassador (Tempo pieno)",
+        "en": "Guest Service Ambassador (Full Time)",
+        "de": "Guest Service Ambassador (Vollzeit)"
+      },
+      "description": "Guest Service Ambassador (Full Time) — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Guest Service Ambassador (Full Time) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/guest-service-ambassador-full-time-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-80954",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T04:04:47.314Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/guest-service-ambassador-full-time-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-80954",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:47.314Z"
+    },
+    {
+      "id": "accor-ab3dacf81dde",
+      "slug": "massage-therapist-casual-accor-ch",
+      "slugByLocale": {
+        "en": "massage-therapist-casual-accor-ch",
+        "it": "massage-therapist-casual-accor-ch",
+        "de": "massage-therapist-casual-accor-ch",
+        "fr": "massage-therapist-casual-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Massage Therapist (Casual)",
+      "titleByLocale": {
+        "en": "Massage Therapist (Casual)",
+        "it": "Massage Therapist (Casual)",
+        "de": "Massage Therapist (Casual)",
+        "fr": "Massage Therapist (Casual)"
+      },
+      "description": "Massage Therapist (Casual) — Ibis Budget",
+      "descriptionByLocale": {
+        "en": "Massage Therapist (Casual) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/massage-therapist-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-92346",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T04:04:47.010Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/massage-therapist-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-92346",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:47.010Z"
+    },
+    {
+      "id": "accor-4833629d0c55",
+      "slug": "captain-server-banquets-t-casual-accor-ch",
+      "slugByLocale": {
+        "fr": "captain-server-banquets-t-casual-accor-ch",
+        "it": "captain-server-banquets-t-casual-accor-ch",
+        "en": "captain-server-banquets-t-casual-accor-ch",
+        "de": "captain-server-banquets-t-casual-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Captain Server Banquets (T) (Casual)",
+      "titleByLocale": {
+        "fr": "Captain Server Banquets (T) (Casual)",
+        "it": "Captain Server Banquets (T) (Casual)",
+        "en": "Captain Server Banquets (T) (Casual)",
+        "de": "Captain Server Banquets (T) (Casual)"
+      },
+      "description": "Captain Server Banquets (T) (Casual) — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Captain Server Banquets (T) (Casual) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/captain-server-banquets-t-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-101721",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T04:04:46.707Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/captain-server-banquets-t-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-101721",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:46.707Z"
+    },
+    {
+      "id": "accor-2db4cf35cb6f",
+      "slug": "director-of-marketing-communications-accor-ch",
+      "slugByLocale": {
+        "fr": "director-of-marketing-communications-accor-ch",
+        "it": "director-of-marketing-communications-accor-ch",
+        "en": "director-of-marketing-communications-ibis-budget-lugano",
+        "de": "director-of-marketing-communications-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Director of Marketing & Communications",
+      "titleByLocale": {
+        "fr": "Directeur of Marketing & Communications",
+        "en": "Director of Marketing & Communications",
+        "it": "Direttore of Marketing & Communications",
+        "de": "Direktor of Marketing & Communications"
+      },
+      "description": "Director of Marketing & Communications — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Director of Marketing & Communications — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/director-of-marketing-and-communications-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-102027",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T04:04:46.379Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Marketing",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/director-of-marketing-and-communications-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-102027",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 75500,
+      "salaryMax": 133000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 75500,
+          "maxValue": 133000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T04:04:46.379Z"
     }
   ]
 }
