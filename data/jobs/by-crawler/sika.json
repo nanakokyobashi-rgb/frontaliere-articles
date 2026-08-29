@@ -1,6 +1,6 @@
 {
   "crawlerKey": "sika",
-  "assembledAt": "2026-08-28T21:33:05.304Z",
+  "assembledAt": "2026-08-29T03:25:50.664Z",
   "jobs": [
     {
       "id": "sika-830dc4ea55aa",
@@ -33,7 +33,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-801917fc-80ba-4766-a2ec-8beac8c4bb54.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:02.815Z",
+      "crawledAt": "2026-08-29T03:25:48.427Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -62,7 +62,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:52:50.424Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -74,7 +73,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-e66722b3cd6c",
@@ -107,7 +107,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-940b711a-b652-4ad9-aef0-f29229b8a9d8.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:02.138Z",
+      "crawledAt": "2026-08-29T03:25:47.508Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -136,7 +136,6 @@
         ]
       },
       "firstSeenAt": "2026-08-04T11:40:53.416Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -148,7 +147,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-bfc6f75a4bf8",
@@ -181,7 +181,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-f1183c9e-17fe-4fdf-b9c9-94baffe60d35.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:01.469Z",
+      "crawledAt": "2026-08-29T03:25:47.126Z",
       "addressLocality": "Düdingen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -216,7 +216,6 @@
         ]
       },
       "firstSeenAt": "2026-06-17T13:57:38.750Z",
-      "needsRetranslation": true,
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -228,7 +227,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-a5c998e21afd",
@@ -261,7 +261,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-044292c9-b524-45f0-9eb3-903addfac2a1.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:33:01.111Z",
+      "crawledAt": "2026-08-29T03:25:46.749Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -296,7 +296,6 @@
         ]
       },
       "firstSeenAt": "2026-06-17T13:57:36.947Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -308,7 +307,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-feac34a42cc0",
@@ -341,7 +341,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-1ebb94c2-698c-4541-a56f-c33e667c41f9.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:33:00.109Z",
+      "crawledAt": "2026-08-29T03:25:46.369Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -420,7 +420,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-5c159c3b-6f5e-407d-ac74-ef35ffc50d29.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:59.759Z",
+      "crawledAt": "2026-08-29T03:25:45.418Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -455,7 +455,6 @@
         ]
       },
       "firstSeenAt": "2026-06-17T13:57:32.932Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -467,7 +466,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-931b92f5e4c0",
@@ -500,7 +500,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-a83ab262-97a6-4d10-a5a4-e2269c5bfc4a.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:58.928Z",
+      "crawledAt": "2026-08-29T03:25:44.484Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -580,7 +580,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-c1fddc77-8f3c-4c3f-b470-7b0b7fb8e0d7.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:58.565Z",
+      "crawledAt": "2026-08-29T03:25:43.564Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -616,7 +616,6 @@
         ]
       },
       "firstSeenAt": "2026-06-24T12:15:47.893Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -628,7 +627,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-3c1a14efb7ef",
@@ -661,7 +661,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-a11659e3-20a3-4431-b3d4-d7f960b34916.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:57.862Z",
+      "crawledAt": "2026-08-29T03:25:42.357Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -740,7 +740,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-03295a71-729c-4904-8b5e-f2574649a9c0.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:57.181Z",
+      "crawledAt": "2026-08-29T03:25:41.454Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -775,7 +775,6 @@
         ]
       },
       "firstSeenAt": "2026-07-01T12:46:37.005Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -787,7 +786,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-15d11e8b7603",
@@ -820,7 +820,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-14ec562b-e189-4f29-a2f7-af58ab74c7f4.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:56.254Z",
+      "crawledAt": "2026-08-29T03:25:40.604Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -855,7 +855,6 @@
         ]
       },
       "firstSeenAt": "2026-06-17T13:57:19.553Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -867,7 +866,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-d379683015d6",
@@ -900,7 +900,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-5deb4953-a448-4e1f-8090-10c715bad5df.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:28.409Z",
+      "crawledAt": "2026-08-29T03:25:39.744Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -979,7 +979,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-f6406866-8261-42b2-b18c-75a219d69ce1.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:27.497Z",
+      "crawledAt": "2026-08-29T03:25:38.330Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1020,7 +1020,6 @@
         "automatico-m-f-d-sika-romanshorn-thurgau-switzerland"
       ],
       "firstSeenAt": "2026-06-17T13:57:12.304Z",
-      "needsRetranslation": true,
       "salaryMin": 60000,
       "salaryMax": 102000,
       "baseSalary": {
@@ -1032,7 +1031,8 @@
           "maxValue": 102000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-f29f6c1b2d83",
@@ -1065,7 +1065,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-e62349e4-b260-46b1-b5b1-558137b84dfa.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:27.145Z",
+      "crawledAt": "2026-08-29T03:25:37.379Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1145,7 +1145,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-f60aaabf-46d6-48de-bd14-7b67aa95a9ba.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:32:25.893Z",
+      "crawledAt": "2026-08-29T03:25:36.329Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1219,7 +1219,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-465ec003-7a5e-4cd9-881a-2b492edbf36f.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:25.198Z",
+      "crawledAt": "2026-08-29T03:25:35.438Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1299,7 +1299,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-00070f8e-b43c-46c7-9d5d-94e7dab3912d.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:24.840Z",
+      "crawledAt": "2026-08-29T03:25:35.057Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1379,7 +1379,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-aaa2ca3a-8fad-44a2-9748-f838280ae5a4.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:24.164Z",
+      "crawledAt": "2026-08-29T03:25:33.917Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1459,7 +1459,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-bdfb0e95-97e0-4a0d-af2c-174bfdd23681.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:23.484Z",
+      "crawledAt": "2026-08-29T03:25:33.043Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1540,7 +1540,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-0923cb82-640a-4fe7-a00e-b8832c0307a9.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:22.812Z",
+      "crawledAt": "2026-08-29T03:25:32.660Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1617,7 +1617,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-132e0bae-d015-457d-a224-321c9ed67d15.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:21.746Z",
+      "crawledAt": "2026-08-29T03:25:31.274Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1697,7 +1697,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-d49d212d-425b-4df8-b472-647e7f47b720.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:21.070Z",
+      "crawledAt": "2026-08-29T03:25:30.887Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1777,7 +1777,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-16cc041b-642b-405a-8c8b-1eb258ed05ba.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:20.216Z",
+      "crawledAt": "2026-08-29T03:25:30.050Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1859,7 +1859,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-9b6bfb1d-bd31-45c4-ba52-1678901ee794.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:19.547Z",
+      "crawledAt": "2026-08-29T03:25:29.227Z",
       "addressLocality": "Altstätten",
       "postalCode": "6341",
       "streetAddress": "",
@@ -1896,7 +1896,6 @@
         ]
       },
       "firstSeenAt": "2026-06-23T12:33:58.578Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1908,7 +1907,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-757e4a7d8e68",
@@ -1941,7 +1941,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-3e5739e9-cee4-4b47-92c7-67b01f151b2e.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:19.194Z",
+      "crawledAt": "2026-08-29T03:25:28.317Z",
       "addressLocality": "Widen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2022,7 +2022,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-d60c6ce1-5511-421d-bb24-b7240688f0c5.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:18.521Z",
+      "crawledAt": "2026-08-29T03:25:27.008Z",
       "addressLocality": "Düdingen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2102,7 +2102,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-6a2c4b22-d8ce-4c8f-a8ae-ebef8bb94bb6.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:17.829Z",
+      "crawledAt": "2026-08-29T03:25:26.146Z",
       "addressLocality": "Düdingen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2181,7 +2181,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-3cbc69e7-e55b-46ad-bd21-83adbb7da047.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:17.136Z",
+      "crawledAt": "2026-08-29T03:25:25.763Z",
       "addressLocality": "Widen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2255,7 +2255,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-b26a7049-1fd2-4606-8870-548ed50bdbbe.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:16.100Z",
+      "crawledAt": "2026-08-29T03:25:24.664Z",
       "addressLocality": "Sarnen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2332,7 +2332,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-4f40f20f-63b6-4ab9-8a6b-5cacf7ed4132.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:15.426Z",
+      "crawledAt": "2026-08-29T03:25:23.645Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2409,7 +2409,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-f6219ca1-f42f-4e64-8889-27137b4bfc59.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:14.737Z",
+      "crawledAt": "2026-08-29T03:25:22.314Z",
       "addressLocality": "Düdingen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2489,7 +2489,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-84394ce8-7a82-4266-a4ed-e5430c33a22c.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:14.386Z",
+      "crawledAt": "2026-08-29T03:25:21.364Z",
       "addressLocality": "Widen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2521,7 +2521,6 @@
         ]
       },
       "firstSeenAt": "2026-06-24T12:15:17.810Z",
-      "needsRetranslation": true,
       "salaryMin": 52000,
       "salaryMax": 78500,
       "baseSalary": {
@@ -2533,7 +2532,8 @@
           "maxValue": 78500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-3f197cf5d358",
@@ -2566,7 +2566,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-cb1b006a-a18d-481f-973b-31615a51b9c3.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:13.194Z",
+      "crawledAt": "2026-08-29T03:25:20.537Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2603,7 +2603,6 @@
         ]
       },
       "firstSeenAt": "2026-07-14T11:11:04.975Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -2615,7 +2614,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-692c9d955a6a",
@@ -2648,7 +2648,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-4c8be4c9-5540-4cd2-9ff3-d6d70466bad7.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:12.514Z",
+      "crawledAt": "2026-08-29T03:25:19.604Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2683,7 +2683,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T23:05:05.667Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -2695,7 +2694,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-f3e9f574d6a5",
@@ -2728,7 +2728,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-45904dda-5b8d-4a2b-b3fd-623a5dbddd43.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:11.138Z",
+      "crawledAt": "2026-08-29T03:25:19.223Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2807,7 +2807,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-9c76864a-9d47-46eb-af82-10893fcfc91e.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:09.878Z",
+      "crawledAt": "2026-08-29T03:25:18.349Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2883,7 +2883,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-bfefbf0c-3d35-4ba1-a6f6-aac1eac03c15.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:09.193Z",
+      "crawledAt": "2026-08-29T03:25:17.463Z",
       "addressLocality": "Baar",
       "postalCode": "6341",
       "streetAddress": "",
@@ -2915,7 +2915,6 @@
         ]
       },
       "firstSeenAt": "2026-07-17T12:00:20.292Z",
-      "needsRetranslation": true,
       "salaryMin": 74500,
       "salaryMax": 127000,
       "baseSalary": {
@@ -2927,7 +2926,8 @@
           "maxValue": 127000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-5b05a15eb9e7",
@@ -2960,7 +2960,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-134ed372-066e-4aa3-8b2a-97296865cf47.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:08.632Z",
+      "crawledAt": "2026-08-29T03:25:16.129Z",
       "addressLocality": "Widen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3035,7 +3035,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-b560e1d0-48fe-4f9d-8e78-f6e8e542baaa.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:07.362Z",
+      "crawledAt": "2026-08-29T03:25:15.266Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3114,7 +3114,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-de410b81-f519-49db-80e6-988453da3db1.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:32:06.363Z",
+      "crawledAt": "2026-08-29T03:25:14.878Z",
       "addressLocality": "Widen",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3146,7 +3146,6 @@
         ]
       },
       "firstSeenAt": "2026-08-10T22:04:22.447Z",
-      "needsRetranslation": true,
       "salaryMin": 99500,
       "salaryMax": 169500,
       "baseSalary": {
@@ -3158,7 +3157,8 @@
           "maxValue": 169500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-9dc36e096aa5",
@@ -3191,7 +3191,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-598b5ba4-0f88-44a2-a6f6-3f57a14b3489.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:05.682Z",
+      "crawledAt": "2026-08-29T03:25:14.041Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3271,7 +3271,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-a59da0b4-eae8-4a6a-bbe8-eb7b46d5097a.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:05.338Z",
+      "crawledAt": "2026-08-29T03:25:12.649Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3306,7 +3306,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T01:29:23.952Z",
-      "needsRetranslation": true,
       "salaryMin": 48000,
       "salaryMax": 73000,
       "baseSalary": {
@@ -3318,7 +3317,8 @@
           "maxValue": 73000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-fc585964520e",
@@ -3351,7 +3351,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-20c6a9ab-10e9-4574-b3da-f46b36088efb.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:04.072Z",
+      "crawledAt": "2026-08-29T03:25:11.815Z",
       "addressLocality": "Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3386,7 +3386,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T01:29:22.601Z",
-      "needsRetranslation": true,
       "salaryMin": 48000,
       "salaryMax": 73000,
       "baseSalary": {
@@ -3398,7 +3397,8 @@
           "maxValue": 73000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-279a84ce4477",
@@ -3431,7 +3431,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-40cd3de7-667b-42a1-8711-7f423ba87261.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:03.144Z",
+      "crawledAt": "2026-08-29T03:25:10.886Z",
       "addressLocality": "Arbon / Romanshorn",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3468,7 +3468,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T11:43:39.273Z",
-      "needsRetranslation": true,
       "salaryMin": 48000,
       "salaryMax": 73000,
       "baseSalary": {
@@ -3480,7 +3479,8 @@
           "maxValue": 73000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sika-ee031c065902",
@@ -3513,7 +3513,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-fb414f0f-92ed-454d-b817-0ce5a4e49072.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:01.830Z",
+      "crawledAt": "2026-08-29T03:25:09.967Z",
       "addressLocality": "Zürich",
       "postalCode": "6341",
       "streetAddress": "",
@@ -3593,7 +3593,7 @@
       "url": "https://www.sika.com/en/career/jobs/job-posting-page/jid-f8c274e8-611d-4253-9602-49e5c5a31e35.html",
       "source": "Sika Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:32:01.474Z",
+      "crawledAt": "2026-08-29T03:25:09.578Z",
       "addressLocality": "Birr",
       "postalCode": "6341",
       "streetAddress": "",
