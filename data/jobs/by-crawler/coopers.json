@@ -1,6 +1,6 @@
 {
   "crawlerKey": "coopers",
-  "assembledAt": "2026-08-28T21:43:50.803Z",
+  "assembledAt": "2026-08-29T03:26:03.990Z",
   "jobs": [
     {
       "id": "coopers-4c65b0608cd3",
@@ -33,7 +33,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=P121CU",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:46.629Z",
+      "crawledAt": "2026-08-29T03:26:01.113Z",
       "addressLocality": "Bern Grossraum",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -75,7 +75,6 @@
         ]
       },
       "firstSeenAt": "2026-06-02T23:12:53.050Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 124500,
       "baseSalary": {
@@ -87,7 +86,8 @@
           "maxValue": 124500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-ab1752bb6b8f",
@@ -120,7 +120,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=5QI3F8",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:45.754Z",
+      "crawledAt": "2026-08-29T03:26:00.214Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -188,7 +188,6 @@
         ]
       },
       "firstSeenAt": "2026-05-27T22:41:36.318Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -200,7 +199,8 @@
           "maxValue": 107500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-e422145c5708",
@@ -233,7 +233,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=E4R7W1",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:44.889Z",
+      "crawledAt": "2026-08-29T03:25:59.327Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -319,7 +319,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=OL0A91",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:43.998Z",
+      "crawledAt": "2026-08-29T03:25:58.427Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -368,7 +368,6 @@
         ]
       },
       "firstSeenAt": "2026-06-11T12:27:51.132Z",
-      "needsRetranslation": true,
       "salaryMin": 94500,
       "salaryMax": 143000,
       "baseSalary": {
@@ -380,7 +379,8 @@
           "maxValue": 143000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-a5bcf8433526",
@@ -413,7 +413,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=L3Y71M",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:43.037Z",
+      "crawledAt": "2026-08-29T03:25:57.518Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -459,7 +459,6 @@
         ]
       },
       "firstSeenAt": "2026-07-06T13:27:39.678Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -471,7 +470,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-76e7d5c21035",
@@ -585,7 +585,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=E6S38Z",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:41.299Z",
+      "crawledAt": "2026-08-29T03:25:55.635Z",
       "addressLocality": "Aargau",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -673,7 +673,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=3MQ82W",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:39.547Z",
+      "crawledAt": "2026-08-29T03:25:53.832Z",
       "addressLocality": "Aargau",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -721,7 +721,6 @@
         ]
       },
       "firstSeenAt": "2026-07-02T21:38:19.523Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 129500,
       "baseSalary": {
@@ -733,7 +732,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-2836b2cb5815",
@@ -766,7 +766,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=B4I17W",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:38.678Z",
+      "crawledAt": "2026-08-29T03:25:52.932Z",
       "addressLocality": "Luzern",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -808,7 +808,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T10:24:27.749Z",
-      "needsRetranslation": true,
       "salaryMin": 78500,
       "salaryMax": 119000,
       "baseSalary": {
@@ -820,7 +819,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-0938e49a409a",
@@ -853,7 +853,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=WN66X7",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:37.775Z",
+      "crawledAt": "2026-08-29T03:25:52.022Z",
       "addressLocality": "Basel-Stadt",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -896,7 +896,6 @@
         ]
       },
       "firstSeenAt": "2026-07-08T22:27:29.965Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -908,7 +907,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-3de59a224f5d",
@@ -941,7 +941,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=3N22VU",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:36.908Z",
+      "crawledAt": "2026-08-29T03:25:51.112Z",
       "addressLocality": "Basel-Landschaft",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -994,7 +994,6 @@
         ]
       },
       "firstSeenAt": "2026-07-10T10:28:45.542Z",
-      "needsRetranslation": true,
       "salaryMin": 64500,
       "salaryMax": 110000,
       "baseSalary": {
@@ -1006,7 +1005,8 @@
           "maxValue": 110000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-e2bf5b2d46bc",
@@ -1039,7 +1039,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=5T0BU4",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:36.025Z",
+      "crawledAt": "2026-08-29T03:25:50.222Z",
       "addressLocality": "Zug",
       "addressRegion": "ZG",
       "addressCountry": "CH",
@@ -1071,7 +1071,6 @@
         ]
       },
       "firstSeenAt": "2026-07-27T22:23:50.233Z",
-      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "ict-infrastructure-engineer-microsoft-network-80-bis-100-m-w-d-coopers-zug",
@@ -1097,7 +1096,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-b48f8814694a",
@@ -1130,7 +1130,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=C05OD2",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:35.097Z",
+      "crawledAt": "2026-08-29T03:25:49.315Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1191,7 +1191,6 @@
         "zabbix-ingegnere-m-w-d-coopers-group-ag-bern"
       ],
       "firstSeenAt": "2026-07-10T10:28:37.373Z",
-      "needsRetranslation": true,
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -1203,7 +1202,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-74d1dcd9cf29",
@@ -1236,7 +1236,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=C17UR4",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:34.089Z",
+      "crawledAt": "2026-08-29T03:25:48.407Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1330,7 +1330,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=42QOW9",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:33.099Z",
+      "crawledAt": "2026-08-29T03:25:47.495Z",
       "addressLocality": "Genf",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1380,7 +1380,6 @@
         ]
       },
       "firstSeenAt": "2026-08-04T11:40:23.949Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 126500,
       "baseSalary": {
@@ -1392,7 +1391,8 @@
           "maxValue": 126500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-ba5b830ac60d",
@@ -1425,7 +1425,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=49GUV9",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:32.115Z",
+      "crawledAt": "2026-08-29T03:25:46.517Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1496,7 +1496,6 @@
         ]
       },
       "firstSeenAt": "2026-06-03T23:17:39.897Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -1508,7 +1507,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-8a5c61ceba7a",
@@ -1541,7 +1541,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=4BG26A",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:31.243Z",
+      "crawledAt": "2026-08-29T03:25:45.612Z",
       "addressLocality": "Basel-Landschaft",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -1620,7 +1620,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=P5J50Y",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:29.360Z",
+      "crawledAt": "2026-08-29T03:25:44.622Z",
       "addressLocality": "Basel-Landschaft",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -1654,7 +1654,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T10:18:31.261Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 129500,
       "baseSalary": {
@@ -1666,7 +1665,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-eda0ec3027d8",
@@ -1699,7 +1699,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=010VGG",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:28.400Z",
+      "crawledAt": "2026-08-29T03:25:43.622Z",
       "addressLocality": "Basel-Stadt",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -1782,7 +1782,6 @@
         ]
       },
       "firstSeenAt": "2026-07-23T22:40:23.525Z",
-      "needsRetranslation": true,
       "salaryMin": 72500,
       "salaryMax": 110500,
       "baseSalary": {
@@ -1794,7 +1793,8 @@
           "maxValue": 110500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-1f0b26337c57",
@@ -1827,7 +1827,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=DE041O",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:27.456Z",
+      "crawledAt": "2026-08-29T03:25:42.661Z",
       "addressLocality": "Thurgau",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -1874,7 +1874,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T10:53:35.533Z",
-      "needsRetranslation": true,
       "salaryMin": 92000,
       "salaryMax": 156500,
       "baseSalary": {
@@ -1886,7 +1885,8 @@
           "maxValue": 156500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-d6f3782d4212",
@@ -1919,7 +1919,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=GS86S5",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:26.548Z",
+      "crawledAt": "2026-08-29T03:25:41.673Z",
       "addressLocality": "Thurgau",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -1999,7 +1999,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=F26HA4",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:25.578Z",
+      "crawledAt": "2026-08-29T03:25:40.773Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2102,7 +2102,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=5JT9F3",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:24.682Z",
+      "crawledAt": "2026-08-29T03:25:39.869Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2146,7 +2146,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T21:36:55.197Z",
-      "needsRetranslation": true,
       "salaryMin": 113000,
       "salaryMax": 192000,
       "baseSalary": {
@@ -2158,7 +2157,8 @@
           "maxValue": 192000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-c68e2289405f",
@@ -2280,7 +2280,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=2MD21V",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:23.806Z",
+      "crawledAt": "2026-08-29T03:25:38.939Z",
       "addressLocality": "Waadt",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -2357,7 +2357,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=W060PD",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:22.919Z",
+      "crawledAt": "2026-08-29T03:25:38.046Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2406,7 +2406,6 @@
         ]
       },
       "firstSeenAt": "2026-08-21T09:53:46.212Z",
-      "needsRetranslation": true,
       "salaryMin": 22600,
       "salaryMax": 38400,
       "baseSalary": {
@@ -2418,7 +2417,8 @@
           "maxValue": 38400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-09f02839ee27",
@@ -2451,7 +2451,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=40CS4S",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:22.002Z",
+      "crawledAt": "2026-08-29T03:25:37.157Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -2499,7 +2499,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T21:46:55.422Z",
-      "needsRetranslation": true,
       "salaryMin": 63000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -2511,7 +2510,8 @@
           "maxValue": 107500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-4659236876d2",
@@ -2636,7 +2636,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=UC6N58",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:21.123Z",
+      "crawledAt": "2026-08-29T03:25:36.255Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2727,7 +2727,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=B0G2E7",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:20.186Z",
+      "crawledAt": "2026-08-29T03:25:35.339Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -2775,7 +2775,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T10:36:13.566Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 126500,
       "baseSalary": {
@@ -2787,7 +2786,8 @@
           "maxValue": 126500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-0732f02c2230",
@@ -2820,7 +2820,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=4QDT87",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:19.227Z",
+      "crawledAt": "2026-08-29T03:25:34.348Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2913,7 +2913,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=M95W3M",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:18.260Z",
+      "crawledAt": "2026-08-29T03:25:33.331Z",
       "addressLocality": "Basel-Stadt",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -3001,7 +3001,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=8Y16NP",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:17.375Z",
+      "crawledAt": "2026-08-29T03:25:32.436Z",
       "addressLocality": "Aargau",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -3094,7 +3094,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=ST8C15",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:16.435Z",
+      "crawledAt": "2026-08-29T03:25:31.521Z",
       "addressLocality": "Aargau",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -3171,7 +3171,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=W6TR28",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:15.516Z",
+      "crawledAt": "2026-08-29T03:25:30.616Z",
       "addressLocality": "Basel-Stadt",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -3231,7 +3231,6 @@
         "chef-de-la-gestion-de-projet-et-de-la-construction-m-w-d-coopers-group-ag-basel-stadt"
       ],
       "firstSeenAt": "2026-06-02T23:12:40.650Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 129500,
       "baseSalary": {
@@ -3243,7 +3242,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "coopers-d792cdb1c519",
@@ -3276,7 +3276,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=FG97O1",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:14.574Z",
+      "crawledAt": "2026-08-29T03:25:29.714Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3378,7 +3378,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=EF5U29",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:13.693Z",
+      "crawledAt": "2026-08-29T03:25:28.809Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3456,7 +3456,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=A121LY",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:12.761Z",
+      "crawledAt": "2026-08-29T03:25:27.898Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3534,7 +3534,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=Q90A8Z",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:11.794Z",
+      "crawledAt": "2026-08-29T03:25:26.971Z",
       "addressLocality": "Zug",
       "addressRegion": "ZG",
       "addressCountry": "CH",
@@ -3630,7 +3630,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=FA417O",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:40.422Z",
+      "crawledAt": "2026-08-29T03:25:54.735Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3677,7 +3677,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:40.422Z"
+      "firstSeenAt": "2026-08-29T03:25:54.735Z"
     },
     {
       "id": "coopers-8be6320dcff1",
@@ -3710,7 +3710,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=V3LO54",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:10.829Z",
+      "crawledAt": "2026-08-29T03:25:26.052Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3755,7 +3755,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:10.829Z"
+      "firstSeenAt": "2026-08-29T03:25:26.052Z"
     },
     {
       "id": "coopers-99a408ba1bdf",
@@ -3788,7 +3788,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=C81D9P",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:09.853Z",
+      "crawledAt": "2026-08-29T03:25:25.106Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -3833,7 +3833,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:09.853Z"
+      "firstSeenAt": "2026-08-29T03:25:25.106Z"
     },
     {
       "id": "coopers-358417cdda78",
@@ -3866,7 +3866,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=06P8UJ",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:08.913Z",
+      "crawledAt": "2026-08-29T03:25:24.199Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -3913,7 +3913,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:08.913Z"
+      "firstSeenAt": "2026-08-29T03:25:24.199Z"
     },
     {
       "id": "coopers-bb3eb792f1bd",
@@ -3946,7 +3946,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=FEW938",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:08.008Z",
+      "crawledAt": "2026-08-29T03:25:23.284Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -3991,7 +3991,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:08.008Z"
+      "firstSeenAt": "2026-08-29T03:25:23.284Z"
     },
     {
       "id": "coopers-ccf73a24bf13",
@@ -4024,7 +4024,7 @@
       "url": "https://www.coopers.ch/en/jobs/detail.php?refCode=83RDH5",
       "source": "Coopers Group AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:43:07.127Z",
+      "crawledAt": "2026-08-29T03:25:22.378Z",
       "addressLocality": "Wallis",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -4069,7 +4069,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:43:07.127Z"
+      "firstSeenAt": "2026-08-29T03:25:22.378Z"
     }
   ]
 }
