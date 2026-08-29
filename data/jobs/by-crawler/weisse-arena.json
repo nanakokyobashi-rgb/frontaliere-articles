@@ -1,6 +1,6 @@
 {
   "crawlerKey": "weisse-arena",
-  "assembledAt": "2026-08-29T03:17:06.409Z",
+  "assembledAt": "2026-08-29T14:28:19.377Z",
   "jobs": [
     {
       "id": "weisse-arena-f1a98cf75e9e",
@@ -33,7 +33,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4533&jobTitle=Squad+Lead+Marketing+%26+Product-Communication",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.801Z",
+      "crawledAt": "2026-08-29T14:28:14.592Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -113,7 +113,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4524&jobTitle=Nachtportier%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.802Z",
+      "crawledAt": "2026-08-29T14:28:14.596Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -201,7 +201,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4546&jobTitle=Mitarbeiter%3Ain+Vermietung",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.800Z",
+      "crawledAt": "2026-08-29T14:28:14.591Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -284,7 +284,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4545&jobTitle=Mitarbeiter%3Ain+Werkstatt",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.800Z",
+      "crawledAt": "2026-08-29T14:28:14.592Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -367,7 +367,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4573&jobTitle=Guest+Experience+Host",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.798Z",
+      "crawledAt": "2026-08-29T14:28:14.588Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -442,7 +442,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4586&jobTitle=Mitarbeiter%3Ain+Kasse%2FBuffet+Restauration",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.798Z",
+      "crawledAt": "2026-08-29T14:28:14.588Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -479,7 +479,6 @@
         ]
       },
       "firstSeenAt": "2026-08-12T21:53:19.762Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -492,7 +491,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "weisse-arena-0970f167630a",
@@ -525,7 +525,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4575&jobTitle=R%C3%A9ceptionist%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.799Z",
+      "crawledAt": "2026-08-29T14:28:14.588Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -618,7 +618,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4571&jobTitle=Mitarbeiter%3Ain+Sp%C3%BClk%C3%BCche",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.799Z",
+      "crawledAt": "2026-08-29T14:28:14.589Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -701,7 +701,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4559&jobTitle=Sous+Chef%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.799Z",
+      "crawledAt": "2026-08-29T14:28:14.590Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -873,7 +873,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4597&jobTitle=Allrounder%3Ain+Hangar",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.797Z",
+      "crawledAt": "2026-08-29T14:28:14.584Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -940,7 +940,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4592&jobTitle=Restaurantleiter%3Ain+Capalari",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.797Z",
+      "crawledAt": "2026-08-29T14:28:14.585Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1023,7 +1023,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4590&jobTitle=Servicefachmitarbeiter%3Ain+Capalari",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.798Z",
+      "crawledAt": "2026-08-29T14:28:14.585Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1106,7 +1106,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4577&jobTitle=Co-Lead+Guest+Experience",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.798Z",
+      "crawledAt": "2026-08-29T14:28:14.588Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1264,7 +1264,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4625&jobTitle=K%C3%BCchenallrounder%3Ain+Galaaxy",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.796Z",
+      "crawledAt": "2026-08-29T14:28:14.584Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1347,7 +1347,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4610&jobTitle=K%C3%BCchenverantwortliche%3Ar+Galaaxy",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.796Z",
+      "crawledAt": "2026-08-29T14:28:14.584Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1429,7 +1429,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4602&jobTitle=Stv.+Chef+de+Service+Galaaxy",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.797Z",
+      "crawledAt": "2026-08-29T14:28:14.584Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1579,7 +1579,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4641&jobTitle=Koch%2FK%C3%B6chin+Capalari",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.795Z",
+      "crawledAt": "2026-08-29T14:28:14.583Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1661,7 +1661,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4639&jobTitle=Serviceverantwortliche%3Ar+Abendservice+Capalari",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.796Z",
+      "crawledAt": "2026-08-29T14:28:14.583Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1698,7 +1698,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T21:33:53.073Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 105000,
       "baseSalary": {
@@ -1711,7 +1710,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "weisse-arena-0a3c9196fd41",
@@ -1744,7 +1744,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4629&jobTitle=Mitarbeiter%3Ain+Bahn%C3%BCberwachung",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.796Z",
+      "crawledAt": "2026-08-29T14:28:14.583Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1833,7 +1833,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4622&jobTitle=Allrounder%3Ain+Galaaxy",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.796Z",
+      "crawledAt": "2026-08-29T14:28:14.583Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1900,7 +1900,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4647&jobTitle=Hilfskoch%2FHilfsk%C3%B6chin",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.794Z",
+      "crawledAt": "2026-08-29T14:28:14.578Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -1987,7 +1987,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4649&jobTitle=Koch%2FK%C3%B6chin",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.794Z",
+      "crawledAt": "2026-08-29T14:28:14.579Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2074,7 +2074,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4645&jobTitle=Mitarbeiter%3Ain+Sp%C3%BClk%C3%BCche+Galaaxy",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.795Z",
+      "crawledAt": "2026-08-29T14:28:14.579Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2157,7 +2157,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4637&jobTitle=Hilfskoch%2F-K%C3%B6chin+Vorab",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.795Z",
+      "crawledAt": "2026-08-29T14:28:14.582Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2194,7 +2194,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T21:33:53.069Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -2207,7 +2206,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "weisse-arena-b9c99a08dc28",
@@ -2240,7 +2240,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4643&jobTitle=Hilfskoch%2FHilfsk%C3%B6chin+Capalari",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.795Z",
+      "crawledAt": "2026-08-29T14:28:14.582Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2327,7 +2327,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4652&jobTitle=Bar-Service+Mitarbeiter%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.794Z",
+      "crawledAt": "2026-08-29T14:28:14.578Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2364,7 +2364,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T21:37:06.893Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -2377,7 +2376,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "weisse-arena-d45b9b30ed53",
@@ -2410,7 +2410,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4698&jobTitle=Shiftleader%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.789Z",
+      "crawledAt": "2026-08-29T14:28:14.572Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2490,7 +2490,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4689&jobTitle=Stv.+Betriebsleitung",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.790Z",
+      "crawledAt": "2026-08-29T14:28:14.572Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2557,7 +2557,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4695&jobTitle=Revenue+%26+Distribution+Coordinator%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.788Z",
+      "crawledAt": "2026-08-29T14:28:14.570Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2577,10 +2577,8 @@
       "jobNumber": "WAG02475",
       "pensum": "60 - 80%",
       "contractLabel": "Festanstellung",
-      "previousSlugs": [
-        "revenue-distribution-coordinator-in-weisse-arena-ch",
-        "revenue-distribution-coordinatore-in-weisse-arena-gruppe-laax"
-      ],
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-27T00:40:02.622Z",
       "previousSlugsByLocale": {
         "it": [
           "revenue-distribution-coordinator-in-weisse-arena-ch",
@@ -2590,8 +2588,10 @@
           "revenue-distribution-coordinator-in-weisse-arena-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:40:02.622Z",
+      "previousSlugs": [
+        "revenue-distribution-coordinator-in-weisse-arena-ch",
+        "revenue-distribution-coordinatore-in-weisse-arena-gruppe-laax"
+      ],
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -2637,7 +2637,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4688&jobTitle=Service-+%2F+Barmitarbeiter%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.788Z",
+      "crawledAt": "2026-08-29T14:28:14.570Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2704,7 +2704,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4680&jobTitle=Service-%2FBarmitarbeiter%3Ain+Plaun",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.789Z",
+      "crawledAt": "2026-08-29T14:28:14.571Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2771,7 +2771,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4696&jobTitle=Shiftleader%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.789Z",
+      "crawledAt": "2026-08-29T14:28:14.571Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2792,7 +2792,6 @@
       "pensum": "60 - 100%",
       "contractLabel": "Saisonanstellung",
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.708Z",
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -2805,7 +2804,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.708Z"
     },
     {
       "id": "weisse-arena-a0b4c14bf6d1",
@@ -2838,7 +2838,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4703&jobTitle=Betriebsassistent%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.787Z",
+      "crawledAt": "2026-08-29T14:28:14.566Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2915,7 +2915,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4671&jobTitle=Guest+Experience+Manager",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.787Z",
+      "crawledAt": "2026-08-29T14:28:14.566Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -2982,7 +2982,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4708&jobTitle=Koch%2FK%C3%B6chin%2F+Sous+Chef%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.787Z",
+      "crawledAt": "2026-08-29T14:28:14.566Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3049,7 +3049,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4683&jobTitle=K%C3%BCchenverantwortliche%3Ar",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.787Z",
+      "crawledAt": "2026-08-29T14:28:14.567Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3126,7 +3126,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4678&jobTitle=Mitarbeiter%3Ain+Logistik+%26+Infrastruktur+%2F+Allrounder%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.788Z",
+      "crawledAt": "2026-08-29T14:28:14.567Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3209,7 +3209,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4686&jobTitle=Allrounder%3Ain+Restauration",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.786Z",
+      "crawledAt": "2026-08-29T14:28:14.565Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3287,7 +3287,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4673&jobTitle=Barist%3Aa",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.786Z",
+      "crawledAt": "2026-08-29T14:28:14.565Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3362,7 +3362,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4724&jobTitle=Mitarbeiter%3Ain+Reinigung+Aushilfe",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.784Z",
+      "crawledAt": "2026-08-29T14:28:14.563Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3382,10 +3382,7 @@
       "jobNumber": "WAG02470",
       "pensum": "20%",
       "contractLabel": "Saisonanstellung",
-      "previousSlugs": [
-        "mitarbeiter-in-reinigung-aushilfe-weisse-arena-ch",
-        "collaboratore-trice-reinigung-aushilfe-weisse-arena-gruppe-laax"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-reinigung-aushilfe-weisse-arena-ch",
@@ -3398,8 +3395,10 @@
           "mitarbeiter-in-reinigung-aushilfe-weisse-arena-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.701Z",
+      "previousSlugs": [
+        "mitarbeiter-in-reinigung-aushilfe-weisse-arena-ch",
+        "collaboratore-trice-reinigung-aushilfe-weisse-arena-gruppe-laax"
+      ],
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -3412,7 +3411,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.701Z"
     },
     {
       "id": "weisse-arena-42e11a5f7476",
@@ -3445,7 +3445,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4723&jobTitle=Mitarbeiter%3Ain+Reinigung+Winter",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.784Z",
+      "crawledAt": "2026-08-29T14:28:14.563Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3465,10 +3465,7 @@
       "jobNumber": "WAG02474",
       "pensum": "80 - 100%",
       "contractLabel": "Saisonanstellung",
-      "previousSlugs": [
-        "mitarbeiter-in-reinigung-winter-weisse-arena-ch",
-        "collaboratore-trice-reinigung-winter-weisse-arena-gruppe-laax"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-reinigung-winter-weisse-arena-ch",
@@ -3481,8 +3478,10 @@
           "mitarbeiter-in-reinigung-winter-weisse-arena-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.701Z",
+      "previousSlugs": [
+        "mitarbeiter-in-reinigung-winter-weisse-arena-ch",
+        "collaboratore-trice-reinigung-winter-weisse-arena-gruppe-laax"
+      ],
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -3495,7 +3494,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.701Z"
     },
     {
       "id": "weisse-arena-09beb9537530",
@@ -3528,7 +3528,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4719&jobTitle=Stv.+Barchef%3Ain+Alp+Sogn+Martin",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.784Z",
+      "crawledAt": "2026-08-29T14:28:14.563Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3549,7 +3549,6 @@
       "pensum": "60 - 100%",
       "contractLabel": "Saisonanstellung",
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.701Z",
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -3562,7 +3561,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.701Z"
     },
     {
       "id": "weisse-arena-0f2e3e6907cb",
@@ -3595,7 +3595,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4706&jobTitle=Allrounder%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.785Z",
+      "crawledAt": "2026-08-29T14:28:14.564Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3662,7 +3662,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4725&jobTitle=Mitarbeiter%3Ain+Facility+Reinigung",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.783Z",
+      "crawledAt": "2026-08-29T14:28:14.562Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3682,10 +3682,7 @@
       "jobNumber": "WAG02471",
       "pensum": "80 - 100%",
       "contractLabel": "Saisonanstellung",
-      "previousSlugs": [
-        "mitarbeiter-in-facility-reinigung-weisse-arena-ch",
-        "collaboratore-trice-facility-reinigung-weisse-arena-gruppe-laax"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-facility-reinigung-weisse-arena-ch",
@@ -3698,8 +3695,10 @@
           "mitarbeiter-in-facility-reinigung-weisse-arena-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.700Z",
+      "previousSlugs": [
+        "mitarbeiter-in-facility-reinigung-weisse-arena-ch",
+        "collaboratore-trice-facility-reinigung-weisse-arena-gruppe-laax"
+      ],
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -3712,7 +3711,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.700Z"
     },
     {
       "id": "weisse-arena-485c5f96093d",
@@ -3745,7 +3745,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4722&jobTitle=Allrounder%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.782Z",
+      "crawledAt": "2026-08-29T14:28:14.561Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -3765,21 +3765,7 @@
       "jobNumber": "WAG02549",
       "pensum": "40 - 60%",
       "contractLabel": "Saisonanstellung",
-      "previousSlugsByLocale": {
-        "de": [
-          "allrounder-in-weisse-arena-ch-0ifo07",
-          "allrounder-in-weisse-arena-ch"
-        ],
-        "it": [
-          "allrounder-in-weisse-arena-ch"
-        ]
-      },
-      "previousSlugs": [
-        "allrounder-in-weisse-arena-ch",
-        "allrounder-in-weisse-arena-ch-0ifo07"
-      ],
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:20:26.698Z",
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -3792,7 +3778,21 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:20:26.698Z",
+      "previousSlugsByLocale": {
+        "de": [
+          "allrounder-in-weisse-arena-ch-0ifo07",
+          "allrounder-in-weisse-arena-ch"
+        ],
+        "it": [
+          "allrounder-in-weisse-arena-ch"
+        ]
+      },
+      "previousSlugs": [
+        "allrounder-in-weisse-arena-ch",
+        "allrounder-in-weisse-arena-ch-0ifo07"
+      ]
     },
     {
       "id": "weisse-arena-bd13d85efb91",
@@ -4065,7 +4065,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4728&jobTitle=Mitarbeiter%3Ain+Kaffeebar+%2F+Allrounder%3Ain",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.781Z",
+      "crawledAt": "2026-08-29T14:28:14.561Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -4109,7 +4109,7 @@
         }
       },
       "addressRegion": "GR",
-      "firstSeenAt": "2026-08-29T03:17:00.781Z"
+      "firstSeenAt": "2026-08-29T14:28:14.561Z"
     },
     {
       "id": "weisse-arena-70691f52b3f1",
@@ -4142,7 +4142,7 @@
       "url": "https://www.weissearena.com/jobs/details.html?jobId=4730&jobTitle=Mitarbeiter%3Ain+GuestCare",
       "source": "Weisse Arena Gruppe Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:17:00.780Z",
+      "crawledAt": "2026-08-29T14:28:14.556Z",
       "addressLocality": "Laax",
       "postalCode": "7031",
       "addressCountry": "CH",
@@ -4186,7 +4186,101 @@
         }
       },
       "addressRegion": "GR",
-      "firstSeenAt": "2026-08-29T03:17:00.780Z"
+      "firstSeenAt": "2026-08-29T14:28:14.556Z"
+    },
+    {
+      "id": "weisse-arena-a7169823ff53",
+      "slug": "servicemitarbeiter-in-weisse-arena-gruppe-laax",
+      "slugByLocale": {
+        "de": "servicemitarbeiter-in-weisse-arena-ch",
+        "it": "servicemitarbeiter-in-weisse-arena-gruppe-laax",
+        "en": "servicemitarbeiter-in-weisse-arena-gruppe-laax",
+        "fr": "servicemitarbeiter-in-weisse-arena-gruppe-laax"
+      },
+      "company": "Weisse Arena Gruppe",
+      "companyKey": "weisse-arena",
+      "companyDomain": "weissearena.com",
+      "title": "Servicemitarbeiter:in",
+      "titleByLocale": {
+        "de": "Servicemitarbeiter:in",
+        "it": "Servicemitarbeiter:in",
+        "en": "Servicemitarbeiter:in",
+        "fr": "Servicemitarbeiter:in"
+      },
+      "description": "Die Weisse Arena Gruppe in LAAX ist Vorreiter im alpinen Tourismus und eine begeisterte Community für einmalige Bergabenteuer. Mit Bergbahnen, Hotels, Gastronomie, Sport- und Rental-Shops sowie der LAAX School schaffen wir unvergessliche Erlebnisse für unsere Gäste - und attraktive Arbeitsplätze für unsere Mitarbeitenden. | Im Restaurant IKIGAI mit seinen 100 Sitzplätzen und Aussenbereich im Sommer laden wir unsere Gäste ein auf eine kulinarische Reise durch Asien – mit Gerichten aus der japanischen, koreanischen, thailändischen, chinesischen und indischen Küche. In entspannter, urbaner Atmosphäre verarbeiten wir authentische Aromen sowie frische Zutaten zu klassischen Speisen und kreativen Interpretationen. Ob würzige Currys, dampfende Dumplings, knuspriges Streetfood oder farbenfrohe Bowls – im IKIGAI findet jeder sein neues asiatisches Lieblingsgericht. | Stell dir vor, du bist als Servicemitarbeiter:in Teil unseres Serviceteams und begeisterst unsere Gäste mit deinem Gespür für Genuss, Herzlichkeit und einem Service, der im Gedächtnis bleibt. | Was du bewegst:\n• Du betreust unsere Gäste mit Freundlichkeit, Aufmerksamkeit und einem hohen Mass an Professionalität.\n• Du unterstützt unsere Gäste bei der Auswahl von Speisen und Getränken und überzeugst durch aktiven Verkauf unserer Spezialitäten.\n• Du sorgst für einen organisierten Service und ein gepflegtes, einladendes Ambiente.\n• Du kümmerst dich um einen perfekt vorbereiteten Servicebereich (Mise en Place) und gewährleistest Sauberkeit und Ordnung.\n• Du bedienst unser Kassensystem sicher und zuverlässig und führst eigenständig das Inkasso durch.\n• Du achtest konsequent auf die Einhaltung unserer Qualitäts- und Hygienestandards (HACCP). | Was dich ausmacht:\n• Du bringst bereits praktische Erfahrung im Servicebereich mit\n• Du sorgst mit deiner positiven Ausstrahlung und deinem Teamgeist für eine angenehme Atmosphäre.\n• Du behältst auch in stressigen Situationen einen kühlen Kopf und passt dich flexibel an unterschiedliche Anforderungen an\n• Du verfügst über gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil – weitere Fremdsprachen sind ein Plus\n• Du arbeitest zuverlässig und eigenverantwortlich | Ein attraktiver Arbeitsplatz inmitten einer aussergewöhnlichen Bergwelt ist dir gewiss. Du wirst Teil eines dynamischen, aufgeweckten Teams und kannst die Weiterentwicklung von LAAX mitprägen. Bei uns findest du ein Umfeld, in dem Professionalität, Tempo, Pragmatismus und Menschlichkeit zusammengehören. Freue dich auf zahlreiche Mitarbeitervergünstigungen , wie freie Bergfahrten, Vergünstigungen in unseren Shops, Hotels und Gastronomiebetrieben sowie Vorteile für deine Familie. Starte dein berufliches Abenteuer bei der Weissen Arena Gruppe mit deiner vollständigen Online-Bewerbung. Wir freuen uns auf dich. | Weisse Arena Hospitality AG Restaurant IKIGAI Vanessa Becker www.weissearena.com I www.laax.com I IKIGAI",
+      "descriptionByLocale": {
+        "de": "Die Weisse Arena Gruppe in LAAX ist Vorreiter im alpinen Tourismus und eine begeisterte Community für einmalige Bergabenteuer. Mit Bergbahnen, Hotels, Gastronomie, Sport- und Rental-Shops sowie der LAAX School schaffen wir unvergessliche Erlebnisse für unsere Gäste - und attraktive Arbeitsplätze für unsere Mitarbeitenden. | Im Restaurant IKIGAI mit seinen 100 Sitzplätzen und Aussenbereich im Sommer laden wir unsere Gäste ein auf eine kulinarische Reise durch Asien – mit Gerichten aus der japanischen, koreanischen, thailändischen, chinesischen und indischen Küche. In entspannter, urbaner Atmosphäre verarbeiten wir authentische Aromen sowie frische Zutaten zu klassischen Speisen und kreativen Interpretationen. Ob würzige Currys, dampfende Dumplings, knuspriges Streetfood oder farbenfrohe Bowls – im IKIGAI findet jeder sein neues asiatisches Lieblingsgericht. | Stell dir vor, du bist als Servicemitarbeiter:in Teil unseres Serviceteams und begeisterst unsere Gäste mit deinem Gespür für Genuss, Herzlichkeit und einem Service, der im Gedächtnis bleibt. | Was du bewegst:\n• Du betreust unsere Gäste mit Freundlichkeit, Aufmerksamkeit und einem hohen Mass an Professionalität.\n• Du unterstützt unsere Gäste bei der Auswahl von Speisen und Getränken und überzeugst durch aktiven Verkauf unserer Spezialitäten.\n• Du sorgst für einen organisierten Service und ein gepflegtes, einladendes Ambiente.\n• Du kümmerst dich um einen perfekt vorbereiteten Servicebereich (Mise en Place) und gewährleistest Sauberkeit und Ordnung.\n• Du bedienst unser Kassensystem sicher und zuverlässig und führst eigenständig das Inkasso durch.\n• Du achtest konsequent auf die Einhaltung unserer Qualitäts- und Hygienestandards (HACCP). | Was dich ausmacht:\n• Du bringst bereits praktische Erfahrung im Servicebereich mit\n• Du sorgst mit deiner positiven Ausstrahlung und deinem Teamgeist für eine angenehme Atmosphäre.\n• Du behältst auch in stressigen Situationen einen kühlen Kopf und passt dich flexibel an unterschiedliche Anforderungen an\n• Du verfügst über gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil – weitere Fremdsprachen sind ein Plus\n• Du arbeitest zuverlässig und eigenverantwortlich | Ein attraktiver Arbeitsplatz inmitten einer aussergewöhnlichen Bergwelt ist dir gewiss. Du wirst Teil eines dynamischen, aufgeweckten Teams und kannst die Weiterentwicklung von LAAX mitprägen. Bei uns findest du ein Umfeld, in dem Professionalität, Tempo, Pragmatismus und Menschlichkeit zusammengehören. Freue dich auf zahlreiche Mitarbeitervergünstigungen , wie freie Bergfahrten, Vergünstigungen in unseren Shops, Hotels und Gastronomiebetrieben sowie Vorteile für deine Familie. Starte dein berufliches Abenteuer bei der Weissen Arena Gruppe mit deiner vollständigen Online-Bewerbung. Wir freuen uns auf dich. | Weisse Arena Hospitality AG Restaurant IKIGAI Vanessa Becker www.weissearena.com I www.laax.com I IKIGAI",
+        "it": "Die Weisse Arena Gruppe in LAAX ist Vorreiter im alpinen Tourismus und eine begeisterte Community für einmalige Bergabenteuer. Mit Bergbahnen, Hotels, Gastronomie, Sport- und Rental-Shops sowie der LAAX School schaffen wir unvergessliche Erlebnisse für unsere Gäste - und attraktive Arbeitsplätze für unsere Mitarbeitenden. | Im Restaurant IKIGAI mit seinen 100 Sitzplätzen und Aussenbereich im Sommer laden wir unsere Gäste ein auf eine kulinarische Reise durch Asien – mit Gerichten aus der japanischen, koreanischen, thailändischen, chinesischen und indischen Küche. In entspannter, urbaner Atmosphäre verarbeiten wir authentische Aromen sowie frische Zutaten zu klassischen Speisen und kreativen Interpretationen. Ob würzige Currys, dampfende Dumplings, knuspriges Streetfood oder farbenfrohe Bowls – im IKIGAI findet jeder sein neues asiatisches Lieblingsgericht. | Stell dir vor, du bist als Servicemitarbeiter:in Teil unseres Serviceteams und begeisterst unsere Gäste mit deinem Gespür für Genuss, Herzlichkeit und einem Service, der im Gedächtnis bleibt. | Was du bewegst:\n• Du betreust unsere Gäste mit Freundlichkeit, Aufmerksamkeit und einem hohen Mass an Professionalität.\n• Du unterstützt unsere Gäste bei der Auswahl von Speisen und Getränken und überzeugst durch aktiven Verkauf unserer Spezialitäten.\n• Du sorgst für einen organisierten Service und ein gepflegtes, einladendes Ambiente.\n• Du kümmerst dich um einen perfekt vorbereiteten Servicebereich (Mise en Place) und gewährleistest Sauberkeit und Ordnung.\n• Du bedienst unser Kassensystem sicher und zuverlässig und führst eigenständig das Inkasso durch.\n• Du achtest konsequent auf die Einhaltung unserer Qualitäts- und Hygienestandards (HACCP). | Was dich ausmacht:\n• Du bringst bereits praktische Erfahrung im Servicebereich mit\n• Du sorgst mit deiner positiven Ausstrahlung und deinem Teamgeist für eine angenehme Atmosphäre.\n• Du behältst auch in stressigen Situationen einen kühlen Kopf und passt dich flexibel an unterschiedliche Anforderungen an\n• Du verfügst über gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil – weitere Fremdsprachen sind ein Plus\n• Du arbeitest zuverlässig und eigenverantwortlich | Ein attraktiver Arbeitsplatz inmitten einer aussergewöhnlichen Bergwelt ist dir gewiss. Du wirst Teil eines dynamischen, aufgeweckten Teams und kannst die Weiterentwicklung von LAAX mitprägen. Bei uns findest du ein Umfeld, in dem Professionalität, Tempo, Pragmatismus und Menschlichkeit zusammengehören. Freue dich auf zahlreiche Mitarbeitervergünstigungen , wie freie Bergfahrten, Vergünstigungen in unseren Shops, Hotels und Gastronomiebetrieben sowie Vorteile für deine Familie. Starte dein berufliches Abenteuer bei der Weissen Arena Gruppe mit deiner vollständigen Online-Bewerbung. Wir freuen uns auf dich. | Weisse Arena Hospitality AG Restaurant IKIGAI Vanessa Becker www.weissearena.com I www.laax.com I IKIGAI",
+        "en": "Die Weisse Arena Gruppe in LAAX ist Vorreiter im alpinen Tourismus und eine begeisterte Community für einmalige Bergabenteuer. Mit Bergbahnen, Hotels, Gastronomie, Sport- und Rental-Shops sowie der LAAX School schaffen wir unvergessliche Erlebnisse für unsere Gäste - und attraktive Arbeitsplätze für unsere Mitarbeitenden. | Im Restaurant IKIGAI mit seinen 100 Sitzplätzen und Aussenbereich im Sommer laden wir unsere Gäste ein auf eine kulinarische Reise durch Asien – mit Gerichten aus der japanischen, koreanischen, thailändischen, chinesischen und indischen Küche. In entspannter, urbaner Atmosphäre verarbeiten wir authentische Aromen sowie frische Zutaten zu klassischen Speisen und kreativen Interpretationen. Ob würzige Currys, dampfende Dumplings, knuspriges Streetfood oder farbenfrohe Bowls – im IKIGAI findet jeder sein neues asiatisches Lieblingsgericht. | Stell dir vor, du bist als Servicemitarbeiter:in Teil unseres Serviceteams und begeisterst unsere Gäste mit deinem Gespür für Genuss, Herzlichkeit und einem Service, der im Gedächtnis bleibt. | Was du bewegst:\n• Du betreust unsere Gäste mit Freundlichkeit, Aufmerksamkeit und einem hohen Mass an Professionalität.\n• Du unterstützt unsere Gäste bei der Auswahl von Speisen und Getränken und überzeugst durch aktiven Verkauf unserer Spezialitäten.\n• Du sorgst für einen organisierten Service und ein gepflegtes, einladendes Ambiente.\n• Du kümmerst dich um einen perfekt vorbereiteten Servicebereich (Mise en Place) und gewährleistest Sauberkeit und Ordnung.\n• Du bedienst unser Kassensystem sicher und zuverlässig und führst eigenständig das Inkasso durch.\n• Du achtest konsequent auf die Einhaltung unserer Qualitäts- und Hygienestandards (HACCP). | Was dich ausmacht:\n• Du bringst bereits praktische Erfahrung im Servicebereich mit\n• Du sorgst mit deiner positiven Ausstrahlung und deinem Teamgeist für eine angenehme Atmosphäre.\n• Du behältst auch in stressigen Situationen einen kühlen Kopf und passt dich flexibel an unterschiedliche Anforderungen an\n• Du verfügst über gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil – weitere Fremdsprachen sind ein Plus\n• Du arbeitest zuverlässig und eigenverantwortlich | Ein attraktiver Arbeitsplatz inmitten einer aussergewöhnlichen Bergwelt ist dir gewiss. Du wirst Teil eines dynamischen, aufgeweckten Teams und kannst die Weiterentwicklung von LAAX mitprägen. Bei uns findest du ein Umfeld, in dem Professionalität, Tempo, Pragmatismus und Menschlichkeit zusammengehören. Freue dich auf zahlreiche Mitarbeitervergünstigungen , wie freie Bergfahrten, Vergünstigungen in unseren Shops, Hotels und Gastronomiebetrieben sowie Vorteile für deine Familie. Starte dein berufliches Abenteuer bei der Weissen Arena Gruppe mit deiner vollständigen Online-Bewerbung. Wir freuen uns auf dich. | Weisse Arena Hospitality AG Restaurant IKIGAI Vanessa Becker www.weissearena.com I www.laax.com I IKIGAI",
+        "fr": "Die Weisse Arena Gruppe in LAAX ist Vorreiter im alpinen Tourismus und eine begeisterte Community für einmalige Bergabenteuer. Mit Bergbahnen, Hotels, Gastronomie, Sport- und Rental-Shops sowie der LAAX School schaffen wir unvergessliche Erlebnisse für unsere Gäste - und attraktive Arbeitsplätze für unsere Mitarbeitenden. | Im Restaurant IKIGAI mit seinen 100 Sitzplätzen und Aussenbereich im Sommer laden wir unsere Gäste ein auf eine kulinarische Reise durch Asien – mit Gerichten aus der japanischen, koreanischen, thailändischen, chinesischen und indischen Küche. In entspannter, urbaner Atmosphäre verarbeiten wir authentische Aromen sowie frische Zutaten zu klassischen Speisen und kreativen Interpretationen. Ob würzige Currys, dampfende Dumplings, knuspriges Streetfood oder farbenfrohe Bowls – im IKIGAI findet jeder sein neues asiatisches Lieblingsgericht. | Stell dir vor, du bist als Servicemitarbeiter:in Teil unseres Serviceteams und begeisterst unsere Gäste mit deinem Gespür für Genuss, Herzlichkeit und einem Service, der im Gedächtnis bleibt. | Was du bewegst:\n• Du betreust unsere Gäste mit Freundlichkeit, Aufmerksamkeit und einem hohen Mass an Professionalität.\n• Du unterstützt unsere Gäste bei der Auswahl von Speisen und Getränken und überzeugst durch aktiven Verkauf unserer Spezialitäten.\n• Du sorgst für einen organisierten Service und ein gepflegtes, einladendes Ambiente.\n• Du kümmerst dich um einen perfekt vorbereiteten Servicebereich (Mise en Place) und gewährleistest Sauberkeit und Ordnung.\n• Du bedienst unser Kassensystem sicher und zuverlässig und führst eigenständig das Inkasso durch.\n• Du achtest konsequent auf die Einhaltung unserer Qualitäts- und Hygienestandards (HACCP). | Was dich ausmacht:\n• Du bringst bereits praktische Erfahrung im Servicebereich mit\n• Du sorgst mit deiner positiven Ausstrahlung und deinem Teamgeist für eine angenehme Atmosphäre.\n• Du behältst auch in stressigen Situationen einen kühlen Kopf und passt dich flexibel an unterschiedliche Anforderungen an\n• Du verfügst über gute Deutschkenntnisse, Englischkenntnisse sind von Vorteil – weitere Fremdsprachen sind ein Plus\n• Du arbeitest zuverlässig und eigenverantwortlich | Ein attraktiver Arbeitsplatz inmitten einer aussergewöhnlichen Bergwelt ist dir gewiss. Du wirst Teil eines dynamischen, aufgeweckten Teams und kannst die Weiterentwicklung von LAAX mitprägen. Bei uns findest du ein Umfeld, in dem Professionalität, Tempo, Pragmatismus und Menschlichkeit zusammengehören. Freue dich auf zahlreiche Mitarbeitervergünstigungen , wie freie Bergfahrten, Vergünstigungen in unseren Shops, Hotels und Gastronomiebetrieben sowie Vorteile für deine Familie. Starte dein berufliches Abenteuer bei der Weissen Arena Gruppe mit deiner vollständigen Online-Bewerbung. Wir freuen uns auf dich. | Weisse Arena Hospitality AG Restaurant IKIGAI Vanessa Becker www.weissearena.com I www.laax.com I IKIGAI"
+      },
+      "location": "Laax",
+      "canton": "GR",
+      "url": "https://www.weissearena.com/jobs/details.html?jobId=4663&jobTitle=Servicemitarbeiter%3Ain",
+      "source": "Weisse Arena Gruppe Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T14:28:14.578Z",
+      "addressLocality": "Laax",
+      "postalCode": "7031",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ristorazione",
+      "contract": "full-time",
+      "employmentType": "CONTRACTOR",
+      "experienceLevel": "mid",
+      "sector": "Turismo / Sport",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-24",
+      "applyUrl": "https://emea3.recruitmentplatform.com/apply-app/pages/application-form?jobId=PD6FK026203F3VBQBLO8NV79D-4663&langCode=de_DE",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "department": "Restaurant IKIGAI",
+      "jobNumber": "WAG02493",
+      "pensum": "60 - 100%",
+      "contractLabel": "Saisonanstellung",
+      "previousSlugs": [
+        "servicemitarbeiter-in-im-fruhstuckservice-weisse-arena-ch",
+        "breakfast-service-attendant-weisse-arena-gruppe-laax",
+        "employe-de-service-de-petit-dejeuner-weisse-arena-gruppe-laax",
+        "addetto-al-servizio-di-colazione-weisse-arena-gruppe-laax",
+        "servicemitarbeiter-in-weisse-arena-ch"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "servicemitarbeiter-in-im-fruhstuckservice-weisse-arena-ch",
+          "breakfast-service-attendant-weisse-arena-gruppe-laax",
+          "employe-de-service-de-petit-dejeuner-weisse-arena-gruppe-laax",
+          "addetto-al-servizio-di-colazione-weisse-arena-gruppe-laax",
+          "servicemitarbeiter-in-weisse-arena-ch"
+        ],
+        "en": [
+          "breakfast-service-attendant-weisse-arena-gruppe-laax"
+        ],
+        "de": [
+          "servicemitarbeiter-in-im-fruhstuckservice-weisse-arena-ch"
+        ],
+        "fr": [
+          "employe-de-service-de-petit-dejeuner-weisse-arena-gruppe-laax"
+        ]
+      },
+      "needsRetranslation": true,
+      "salaryMin": 62000,
+      "salaryMax": 78000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 62000,
+          "maxValue": 78000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-29T14:28:14.578Z"
     }
   ]
 }
