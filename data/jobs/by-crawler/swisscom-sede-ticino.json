@@ -1,6 +1,6 @@
 {
   "crawlerKey": "swisscom-sede-ticino",
-  "assembledAt": "2026-08-29T03:27:26.925Z",
+  "assembledAt": "2026-08-29T14:37:21.750Z",
   "jobs": [
     {
       "url": "https://swisscom.wd103.myworkdayjobs.com/it-IT/SwisscomExternalCareers/job/Zurich/Microsoft-Licensing-Sales-Specialist_R-0006153",
@@ -193,24 +193,10 @@
       },
       "sourceLang": "en",
       "jobReqId": "R-0006221",
-      "crawledAt": "",
-      "needsRetranslation": true,
       "id": "swisscom-sede-ticino-24807d093bf8",
-      "salaryMin": 73000,
-      "salaryMax": 124500,
-      "currency": "CHF",
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 73000,
-          "maxValue": 124500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "BE",
+      "needsRetranslation": true,
       "firstSeenAt": "2026-08-28T05:27:23.915Z",
+      "crawledAt": "",
       "previousSlugsByLocale": {
         "it": [
           "site-reliability-engineer-swisscom-bern-drxfz0"
@@ -224,7 +210,21 @@
       },
       "previousSlugs": [
         "site-reliability-engineer-swisscom-bern-drxfz0"
-      ]
+      ],
+      "salaryMin": 73000,
+      "salaryMax": 124500,
+      "currency": "CHF",
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 73000,
+          "maxValue": 124500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "BE"
     },
     {
       "url": "https://swisscom.wd103.myworkdayjobs.com/it-IT/SwisscomExternalCareers/job/Zurich/Business-Process-Engineer_R-0004251-1",

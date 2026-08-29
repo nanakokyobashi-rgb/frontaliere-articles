@@ -1,17 +1,18 @@
 {
   "key": "swisscom-sede-ticino",
   "label": "Swisscom Ticino",
-  "generatedAt": "2026-08-29T03:27:26.936Z",
+  "generatedAt": "2026-08-29T14:37:21.756Z",
   "total": 37,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 28443,
-  "avgDurationMs": 28443,
+  "durationMs": 29301,
+  "avgDurationMs": 29301,
   "durationHistory": [
     37198,
-    28443
+    28443,
+    29301
   ],
   "newJobs": [],
   "updatedJobs": [],
