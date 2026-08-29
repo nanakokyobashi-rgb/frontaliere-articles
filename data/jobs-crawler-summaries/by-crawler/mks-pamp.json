@@ -1,19 +1,20 @@
 {
   "key": "mks-pamp",
   "label": "MKS PAMP",
-  "generatedAt": "2026-08-29T04:09:41.802Z",
+  "generatedAt": "2026-08-29T14:52:49.107Z",
   "total": 5,
   "newCount": 0,
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 3,
-  "durationMs": 11564,
-  "avgDurationMs": 11564,
+  "durationMs": 11278,
+  "avgDurationMs": 11278,
   "durationHistory": [
     12144,
     10904,
     11584,
-    11564
+    11564,
+    11278
   ],
   "newJobs": [],
   "updatedJobs": [
