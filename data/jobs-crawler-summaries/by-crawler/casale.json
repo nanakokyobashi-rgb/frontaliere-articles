@@ -1,16 +1,17 @@
 {
   "key": "casale",
   "label": "Casale SA",
-  "generatedAt": "2026-08-28T20:56:26.350Z",
+  "generatedAt": "2026-08-29T04:01:58.584Z",
   "total": 2,
   "newCount": 0,
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 2541,
-  "avgDurationMs": 2541,
+  "durationMs": 1963,
+  "avgDurationMs": 1963,
   "durationHistory": [
-    2541
+    2541,
+    1963
   ],
   "newJobs": [],
   "updatedJobs": [
