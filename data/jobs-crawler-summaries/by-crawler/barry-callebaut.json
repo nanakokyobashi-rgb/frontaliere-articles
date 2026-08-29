@@ -1,7 +1,7 @@
 {
   "key": "barry-callebaut",
   "label": "Barry Callebaut",
-  "generatedAt": "2026-08-28T21:12:15.055Z",
+  "generatedAt": "2026-08-29T04:10:09.356Z",
   "total": 6,
   "discovered": null,
   "written": 6,
@@ -9,10 +9,11 @@
   "updatedCount": 3,
   "removedCount": 2,
   "unchangedCount": 1,
-  "durationMs": 4350,
-  "avgDurationMs": 4350,
+  "durationMs": 3299,
+  "avgDurationMs": 3299,
   "durationHistory": [
-    4350
+    4350,
+    3299
   ],
   "newJobs": [
     {
@@ -27,7 +28,7 @@
       "url": "https://jobs.barry-callebaut.com/job/Zurich-Manager-FP&amp;A-Cocoa-Sourcing-8005/1411992200/",
       "source": "Barry Callebaut Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:12:10.986Z",
+      "crawledAt": "2026-08-29T04:10:06.944Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -61,7 +62,7 @@
       "url": "https://jobs.barry-callebaut.com/job/Zurich-Business-Development-Manager-CEE&amp;MEA-8005/1407656600/",
       "source": "Barry Callebaut Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:12:10.997Z",
+      "crawledAt": "2026-08-29T04:10:06.942Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -97,7 +98,7 @@
       "url": "https://jobs.barry-callebaut.com/job/Zurich-Commercial-Excellence-Manager-Gourmet-Business-8005/1421035000/",
       "source": "Barry Callebaut Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:12:10.980Z",
+      "crawledAt": "2026-08-29T04:10:06.946Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -131,7 +132,7 @@
       "url": "https://jobs.barry-callebaut.com/job/Zurich-Global-Brand-Manager-8005/1420013500/",
       "source": "Barry Callebaut Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:12:10.991Z",
+      "crawledAt": "2026-08-29T04:10:06.937Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -165,7 +166,7 @@
       "url": "https://jobs.barry-callebaut.com/job/Zurich-Executive-Assistant-CPCO-8005/1405562000/",
       "source": "Barry Callebaut Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:12:10.996Z",
+      "crawledAt": "2026-08-29T04:10:06.941Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
