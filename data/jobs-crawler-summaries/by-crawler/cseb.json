@@ -1,7 +1,7 @@
 {
   "key": "cseb",
   "label": "Center da Sanadad Engiadina Bassa",
-  "generatedAt": "2026-08-28T21:37:57.829Z",
+  "generatedAt": "2026-08-29T03:47:22.911Z",
   "total": 21,
   "discovered": null,
   "written": 21,
@@ -9,10 +9,11 @@
   "updatedCount": 20,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 4925,
-  "avgDurationMs": 4925,
+  "durationMs": 4008,
+  "avgDurationMs": 4008,
   "durationHistory": [
-    4925
+    4925,
+    4008
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -28,7 +29,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/f910b490-39a2-ff4d-6a4e-cd4be69a89dc",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.484Z",
+      "crawledAt": "2026-08-29T03:47:20.308Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -69,7 +70,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/4e778dc6-464f-c653-3085-bb6b8ee9fda3",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.482Z",
+      "crawledAt": "2026-08-29T03:47:20.307Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -109,7 +110,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/503105ab-ee65-b500-19e8-988c5592f6c5",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.481Z",
+      "crawledAt": "2026-08-29T03:47:20.305Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -149,7 +150,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/8547edd4-1bb9-2695-7194-8bf5fc43cd96",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.479Z",
+      "crawledAt": "2026-08-29T03:47:20.303Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -168,7 +169,6 @@
       "pensumMax": 80,
       "pensum": "70 - 80%",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-27T12:44:06.185Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -176,7 +176,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-e54bb7dc202c",
@@ -190,7 +191,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/e85699a6-f2e8-24ee-fc5b-541e90c75e7d",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.478Z",
+      "crawledAt": "2026-08-29T03:47:20.301Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -230,7 +231,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/08090cea-a5af-e391-1b01-d1e40cf402a3",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.474Z",
+      "crawledAt": "2026-08-29T03:47:20.298Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -271,7 +272,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/d42b368b-500b-999e-0f77-ed4017b03b98",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.429Z",
+      "crawledAt": "2026-08-29T03:47:20.251Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -308,7 +309,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/b572e71d-482e-bc3a-6aef-b24595f38cb4",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.445Z",
+      "crawledAt": "2026-08-29T03:47:20.269Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -346,7 +347,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/9b888521-c84d-59c9-4222-e9cc2d551af6",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.449Z",
+      "crawledAt": "2026-08-29T03:47:20.272Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -383,7 +384,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/e9f51ab1-b60e-a609-9b43-ea1cde468af8",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.453Z",
+      "crawledAt": "2026-08-29T03:47:20.276Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -402,7 +403,6 @@
       "pensumMax": 100,
       "pensum": "70 - 100%",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -410,7 +410,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-52167726eb87",
@@ -424,7 +425,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/1ef3689c-79c6-eae7-139e-1ad10eb84ac7",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.455Z",
+      "crawledAt": "2026-08-29T03:47:20.278Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -440,7 +441,6 @@
       "applyUrl": "https://jobs.cseb.ch/application-process/d9c5a048-f665-4e64-a2c7-cdd8231bac77/1ef3689c-79c6-eae7-139e-1ad10eb84ac7",
       "streetAddress": "Via da l'Ospidal 280",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -448,7 +448,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-62814af0ac8f",
@@ -462,7 +463,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/4fd73428-f73e-6f49-2855-8204b00cbdc0",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.457Z",
+      "crawledAt": "2026-08-29T03:47:20.280Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -478,7 +479,6 @@
       "applyUrl": "https://jobs.cseb.ch/application-process/d9c5a048-f665-4e64-a2c7-cdd8231bac77/4fd73428-f73e-6f49-2855-8204b00cbdc0",
       "streetAddress": "Via da l'Ospidal 280",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -486,7 +486,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-e8ed71fb8165",
@@ -500,7 +501,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/9789088f-9f3e-b7a4-bf69-6d9c765dbea3",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.459Z",
+      "crawledAt": "2026-08-29T03:47:20.282Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -538,7 +539,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/a356d4be-f8e0-8a97-0c2c-121cd5f89c14",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.460Z",
+      "crawledAt": "2026-08-29T03:47:20.284Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -557,7 +558,6 @@
       "pensumMax": 100,
       "pensum": "40 - 100%",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -565,7 +565,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-af45cb1ba821",
@@ -579,7 +580,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/14b338b2-6622-bade-427a-7760f0bba7f7",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.463Z",
+      "crawledAt": "2026-08-29T03:47:20.286Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -598,7 +599,6 @@
       "pensumMax": 90,
       "pensum": "50 - 90%",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -606,7 +606,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-2badd2d6bd27",
@@ -620,7 +621,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/18e63da7-2e49-eb9c-601d-b22238e3ef49",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.464Z",
+      "crawledAt": "2026-08-29T03:47:20.288Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -636,7 +637,6 @@
       "applyUrl": "https://jobs.cseb.ch/application-process/d9c5a048-f665-4e64-a2c7-cdd8231bac77/18e63da7-2e49-eb9c-601d-b22238e3ef49",
       "streetAddress": "Via da l'Ospidal 280",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -644,7 +644,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "cseb-6e595e5e5892",
@@ -658,7 +659,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/de22c979-5108-b752-c983-e0d5bc4bf2bf",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.466Z",
+      "crawledAt": "2026-08-29T03:47:20.290Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -698,7 +699,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/bf759db0-2db8-5938-ee9f-f182be500ecd",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.470Z",
+      "crawledAt": "2026-08-29T03:47:20.292Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -739,7 +740,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/0aae7b8e-6401-ca9e-3f64-552a05cd547d",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.472Z",
+      "crawledAt": "2026-08-29T03:47:20.296Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -780,7 +781,7 @@
       "url": "https://jobs.cseb.ch/job-advertisement/d9c5a048-f665-4e64-a2c7-cdd8231bac77/439cb41c-0371-94c9-6c59-909203c12844",
       "source": "Center da Sanadad Engiadina Bassa Dedicated Parser (Abacus Job Portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:37:54.476Z",
+      "crawledAt": "2026-08-29T03:47:20.299Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -799,7 +800,6 @@
       "pensumMax": 100,
       "pensum": "50 - 100%",
       "contactPerson": "Corsina Feuerstein Betschart",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-13T10:23:37.991Z",
       "_qualityScore": 90,
       "_qualityBreakdown": {
@@ -807,7 +807,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 20
-      }
+      },
+      "needsRetranslation": false
     }
   ],
   "removedJobs": [],
