@@ -1,7 +1,7 @@
 {
   "key": "pdgr",
   "label": "Psychiatrische Dienste Graubünden",
-  "generatedAt": "2026-08-28T21:11:27.211Z",
+  "generatedAt": "2026-08-29T04:09:59.275Z",
   "total": 38,
   "discovered": null,
   "written": 38,
@@ -9,10 +9,11 @@
   "updatedCount": 38,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 48718,
-  "avgDurationMs": 48718,
+  "durationMs": 54510,
+  "avgDurationMs": 54510,
   "durationHistory": [
-    48718
+    48718,
+    54510
   ],
   "newJobs": [
     {
@@ -27,7 +28,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-9-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:54.620Z",
+      "crawledAt": "2026-08-29T04:09:23.386Z",
       "addressLocality": "Samedan / Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -66,7 +67,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-11/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:56.708Z",
+      "crawledAt": "2026-08-29T04:09:25.602Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -105,7 +106,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-2-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:00.977Z",
+      "crawledAt": "2026-08-29T04:09:30.758Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -144,7 +145,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-4-5/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:06.220Z",
+      "crawledAt": "2026-08-29T04:09:36.315Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -185,7 +186,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-oder-dipl-sozialpaedagoge-in-hf-fh/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:40.948Z",
+      "crawledAt": "2026-08-29T04:09:07.489Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -225,7 +226,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-oder-dipl-sozialpaedagoge-in-hf-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:42.007Z",
+      "crawledAt": "2026-08-29T04:09:08.627Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -266,7 +267,7 @@
       "url": "https://www.pdgr.ch/jobs/mitarbeiter-in-gastronomie/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:43.045Z",
+      "crawledAt": "2026-08-29T04:09:09.740Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -284,7 +285,6 @@
       "pensumMin": 40,
       "pensumMax": 50,
       "pensum": "40 - 50%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-08-14T10:31:32.052Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -292,7 +292,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-c4564f6211da",
@@ -306,7 +307,7 @@
       "url": "https://www.pdgr.ch/jobs/senior-controller-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:44.142Z",
+      "crawledAt": "2026-08-29T04:09:10.866Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -346,7 +347,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-fuer-den-tag-und-oder-nachtdienst/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:45.164Z",
+      "crawledAt": "2026-08-29T04:09:11.991Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -387,7 +388,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-5-5/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:46.215Z",
+      "crawledAt": "2026-08-29T04:09:13.113Z",
       "addressLocality": "Cazis / Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -427,7 +428,7 @@
       "url": "https://www.pdgr.ch/jobs/fachperson-gesundheit-fuer-die-nachtwache-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:47.285Z",
+      "crawledAt": "2026-08-29T04:09:14.219Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -468,7 +469,7 @@
       "url": "https://www.pdgr.ch/jobs/florist-in-2-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:48.324Z",
+      "crawledAt": "2026-08-29T04:09:16.399Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -508,7 +509,7 @@
       "url": "https://www.pdgr.ch/jobs/nachtaerztin-nachtarzt-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:49.369Z",
+      "crawledAt": "2026-08-29T04:09:17.539Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -548,7 +549,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-fuer-die-nachtwache-3-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:50.415Z",
+      "crawledAt": "2026-08-29T04:09:18.652Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -589,7 +590,7 @@
       "url": "https://www.pdgr.ch/jobs/psychologiepraktikant-in/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:51.476Z",
+      "crawledAt": "2026-08-29T04:09:19.771Z",
       "addressLocality": "Cazis / Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -630,7 +631,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-6-8/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:52.523Z",
+      "crawledAt": "2026-08-29T04:09:20.866Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -670,7 +671,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-oder-dipl-sozialpaedagogen-in-hf/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:53.567Z",
+      "crawledAt": "2026-08-29T04:09:22.250Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -711,7 +712,7 @@
       "url": "https://www.pdgr.ch/jobs/ergotherapeut-in-4/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:55.657Z",
+      "crawledAt": "2026-08-29T04:09:24.510Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -730,7 +731,6 @@
       "pensumMin": 10,
       "pensumMax": 10,
       "pensum": "10%",
-      "needsRetranslation": true,
       "firstSeenAt": "2026-05-28T13:42:07.525Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -738,7 +738,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "pdgr-138450293b05",
@@ -752,7 +753,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-8-4/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:57.764Z",
+      "crawledAt": "2026-08-29T04:09:26.720Z",
       "addressLocality": "Samedan / Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -792,7 +793,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-6-3/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:58.849Z",
+      "crawledAt": "2026-08-29T04:09:27.835Z",
       "addressLocality": "Ilanz",
       "postalCode": "7130",
       "addressCountry": "CH",
@@ -832,7 +833,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-3-9/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:10:59.909Z",
+      "crawledAt": "2026-08-29T04:09:28.931Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -872,7 +873,7 @@
       "url": "https://www.pdgr.ch/jobs/assistenz-oder-fachpsychologe-in-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:02.057Z",
+      "crawledAt": "2026-08-29T04:09:31.877Z",
       "addressLocality": "Samedan",
       "postalCode": "7503",
       "addressCountry": "CH",
@@ -913,7 +914,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-5-6/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:03.101Z",
+      "crawledAt": "2026-08-29T04:09:32.985Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -932,7 +933,6 @@
       "pensumMin": 80,
       "pensumMax": 100,
       "pensum": "80 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -940,7 +940,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-80501bd9710d",
@@ -954,7 +955,7 @@
       "url": "https://www.pdgr.ch/jobs/fachfrau-fachmann-gesundheit-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:04.168Z",
+      "crawledAt": "2026-08-29T04:09:34.091Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -973,7 +974,6 @@
       "pensumMin": 40,
       "pensumMax": 60,
       "pensum": "40 - 60%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -981,7 +981,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-72c42eafd6ec",
@@ -995,7 +996,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-7-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:05.214Z",
+      "crawledAt": "2026-08-29T04:09:35.211Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1014,7 +1015,6 @@
       "pensumMin": 80,
       "pensumMax": 100,
       "pensum": "80 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-05-22T23:10:25.817Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1022,7 +1022,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-14b4c467e91e",
@@ -1036,7 +1037,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-4__trashed/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:07.254Z",
+      "crawledAt": "2026-08-29T04:09:37.451Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -1055,7 +1056,6 @@
       "pensumMin": 80,
       "pensumMax": 100,
       "pensum": "80 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1063,7 +1063,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-9a01055d3a01",
@@ -1077,7 +1078,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-2-8/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:08.281Z",
+      "crawledAt": "2026-08-29T04:09:38.603Z",
       "addressLocality": "Scuol",
       "postalCode": "7550",
       "addressCountry": "CH",
@@ -1096,7 +1097,6 @@
       "pensumMin": 20,
       "pensumMax": 50,
       "pensum": "20 - 50%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1104,7 +1104,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-c9fc518561fc",
@@ -1118,7 +1119,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-fuer-die-nachtwache-9/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:09.336Z",
+      "crawledAt": "2026-08-29T04:09:39.719Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1137,7 +1138,6 @@
       "pensumMin": 30,
       "pensumMax": 80,
       "pensum": "30 - 80%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1145,7 +1145,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-6c4e56b4412e",
@@ -1159,7 +1160,7 @@
       "url": "https://www.pdgr.ch/jobs/oberpsychologe-in-3-2/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:10.384Z",
+      "crawledAt": "2026-08-29T04:09:40.831Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1178,7 +1179,6 @@
       "pensumMin": 80,
       "pensumMax": 100,
       "pensum": "80 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1186,7 +1186,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-6bea78edbd79",
@@ -1200,7 +1201,7 @@
       "url": "https://www.pdgr.ch/jobs/oberaerztin-oberarzt-4-7/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:11.429Z",
+      "crawledAt": "2026-08-29T04:09:41.947Z",
       "addressLocality": "Cazis",
       "postalCode": "7408",
       "addressCountry": "CH",
@@ -1219,7 +1220,6 @@
       "pensumMin": 60,
       "pensumMax": 100,
       "pensum": "60 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1227,7 +1227,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-1229ad41add2",
@@ -1241,7 +1242,7 @@
       "url": "https://www.pdgr.ch/jobs/fachfrau-fachmann-betriebsunterhalt-efz-chur/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:12.479Z",
+      "crawledAt": "2026-08-29T04:09:43.042Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1281,7 +1282,7 @@
       "url": "https://www.pdgr.ch/jobs/dipl-pflegefachperson-hf-10/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:13.516Z",
+      "crawledAt": "2026-08-29T04:09:44.174Z",
       "addressLocality": "Cazis / Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1300,7 +1301,6 @@
       "pensumMin": 20,
       "pensumMax": 100,
       "pensum": "20 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-05-17T10:52:07.219Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1308,7 +1308,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "pdgr-1ee4b4ff95de",
@@ -1322,7 +1323,7 @@
       "url": "https://www.pdgr.ch/jobs/unterassistent-in/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:14.551Z",
+      "crawledAt": "2026-08-29T04:09:46.300Z",
       "addressLocality": "Cazis / Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1362,7 +1363,7 @@
       "url": "https://www.pdgr.ch/jobs/fachpsychologe-in-5/",
       "source": "Psychiatrische Dienste Graubünden Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:15.583Z",
+      "crawledAt": "2026-08-29T04:09:47.426Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -1381,7 +1382,6 @@
       "pensumMin": 50,
       "pensumMax": 100,
       "pensum": "50 - 100%",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-04-14T10:28:30.371Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -1389,7 +1389,8 @@
         "richness": 22,
         "translation": 25,
         "completeness": 17
-      }
+      },
+      "needsRetranslation": false
     }
   ],
   "removedJobs": [],
