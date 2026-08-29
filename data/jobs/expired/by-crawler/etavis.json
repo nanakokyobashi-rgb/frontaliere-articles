@@ -25,7 +25,7 @@
       "fr": "monteur-de-service-m-j-80-100-etavis-jag-jakob-biel"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "servicemonteur-w-m-d-80-100-etavis-biel",
       "tecnico-di-assistenza-f-m-d-80-100-etavis-jag-jakob-biel"
@@ -75,7 +75,7 @@
       "fr": "gestionnaire-de-projet-en-planification-electrique-f-m-d-80-100-etavis-kriegel-schaffner-ag-basel"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "projektleiter-in-elektroplanung-w-m-d-80-100-etavis-basel",
       "projektleiter-in-elektroplanung-m-w-d-80-100-etavis-kriegel-schaffner-ag-basel",
@@ -127,7 +127,7 @@
       "fr": "junior-project-manager-installation-electrique-f-m-d-80-100-etavis-kriegel-schaffner-ag-basel"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "junior-projektleiter-elektroinstallation-w-m-d-80-100-etavis-basel",
       "junior-projektleiter-elektroinstallation-m-w-d-80-100-etavis-kriegel-schaffner-ag-basel",
@@ -183,7 +183,7 @@
       "fr": "chef-de-projet-etavis-fribourg"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "chef-de-projet-etavis-fribourg",
       "project-manager-etavis-romandie-sa-fribourg",
@@ -237,7 +237,7 @@
       "fr": "apprenti-e-elektroinstallateure-efz-w-m-d-2027-etavis-beutler-burgdorf"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "lernende-elektroinstallateure-efz-w-m-d-2027-etavis-burgdorf",
       "apprendista-elektroinstallateure-cfc-w-m-d-2027-etavis-beutler-burgdorf"
@@ -287,7 +287,7 @@
       "fr": "apprenti-e-elektroinstallateure-efz-w-m-d-2027-etavis-beutler-ruegsau"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.746Z",
     "previousSlugs": [
       "lernende-elektroinstallateure-efz-w-m-d-2027-etavis-ruegsau",
       "apprendista-elektroinstallateure-cfc-w-m-d-2027-etavis-beutler-ruegsau"
@@ -337,7 +337,7 @@
       "fr": "apprenti-e-montage-elektriker-efz-w-m-d-2027-etavis-beutler-burgdorf"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.747Z",
     "previousSlugs": [
       "lernende-montage-elektriker-efz-w-m-d-2027-etavis-burgdorf",
       "apprendista-montage-elektriker-cfc-w-m-d-2027-etavis-beutler-burgdorf"
@@ -387,7 +387,7 @@
       "fr": "apprenti-e-montage-elektriker-efz-w-m-d-2027-etavis-beutler-ruegsau"
     },
     "sector": "Impiantistica elettrica",
-    "expiredAt": "2026-08-29T03:50:37.732Z",
+    "expiredAt": "2026-08-29T15:12:21.747Z",
     "previousSlugs": [
       "lernende-montage-elektriker-efz-w-m-d-2027-etavis-ruegsau",
       "apprendista-montage-elektriker-cfc-w-m-d-2027-etavis-beutler-ruegsau"
@@ -892,6 +892,61 @@
     "streetAddress": "Route de l'Aéroport 4c",
     "salaryMin": 60500,
     "salaryMax": 91500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "projektleiter-telematica-ict-m-w-d-80-100-gfeller-elektro-wohlen-bei-bern",
+    "title": "Projektleiter Telematik/ICT (w/m/d) 80 - 100%",
+    "titleByLocale": {
+      "it": "Projektleiter telematica/ICT (w/m/d) 80 - 100%",
+      "en": "Projektleiter Telematics/ICT (w/m/d) 80 - 100%",
+      "de": "Projektleiter Telematik/ICT (w/m/d) 80 - 100%",
+      "fr": "Projektleiter télématique/ICT (w/m/d) 80 - 100%"
+    },
+    "company": "Gfeller Elektro",
+    "companyKey": "etavis",
+    "location": "Wohlen bei Bern",
+    "addressLocality": "Wohlen bei Bern",
+    "descriptionByLocale": {
+      "it": "gfeller elektro fa parte di ETAVIS Bern-Mittelland AG e di una delle aziende leader nel mercato svizzero dell'installazione elettrica e delle telecomunicazioni. Forniamo tutti i servizi per la consulenza, la pianificazione del progetto, l'esecuzione, il supporto e la manutenzione per la tecnologia elettrica e di costruzione, la telematica, l'infrastruttura ICT e l'automazione. E' quello che fai.\n• Attuazione costante dei progetti ICT di piccole e medie dimensioni\n• Consulenza del cliente nel settore delle telecomunicazioni e della conduzione dei negoziati dei fornitori\n• Creazione di offerte, contratti e insediamenti\n• Leadership e sostegno dei dipendenti sotto la sua diretta autorità\n• Portare idee fresche, guidare nuove tecnologie e sostenere l'ulteriore sviluppo dei nostri sistemi Questo renderà più facile per voi per iniziare.\n• Formazione completata con successo come EFZ telematico o installatore elettrico EFZ con ulteriore formazione nel settore delle telecomunicazioni o una formazione equivalente ICT\n• Esperienza nella gestione dei progetti, idealmente nell'ambiente ICT\n• Metodo di lavoro indipendente e strutturato con grande responsabilità personale\n• Buona conoscenza del tedesco in parola e scrittura così come buona conoscenza dell'inglese benefico\n• Esperienza con piattaforme di telefonia moderne come Teams, Mitel, 3CX e Swisscom Hosted e conoscenza della tecnologia di rete Questo è ciò che vi aspetta\n• Il vostro sviluppo professionale e personale è attivamente sostenuto con l'ulteriore formazione mirata\n• Cultura aziendale sostenibile e affidabile\n• Ambiente di lavoro aperto, familiare e collegiale con dipendenti consolidati\n• I responsabili competenti assicurano interessanti progetti e flussi di lavoro funzionanti\n• La condivisione dei profitti, le azioni dei dipendenti e un ottimo fondo pensionistico aziendale rendono il pacchetto complessivo particolarmente attraente Domande ancora? Il tuo manager, André Lüthi, ha le risposte (+41 79 948 91 57). Applicare con noi, siamo in uno spirito di ottimismo e alla ricerca di te! ETAVIS ha la giusta competenza per tutti gli argomenti nel campo dell'ingegneria elettrica. Se impianti elettrici, automazione degli edifici, servizio eventi, energie rinnovabili, ecc. - siamo il partner ideale per tutti questi servizi in Svizzera. Nell'ambito del Gruppo internazionale VINCI Energies, abbiamo il potere per l'innovazione di rimanere il miglior fornitore di soluzioni in futuro. Siamo fortemente ancorati a livello locale e conosciamo le persone, le culture e il mercato in tutte le regioni della Svizzera e del Liechtenstein. Siamo orgogliosi di poter formare diverse centinaia di studenti a 57 uffici e di lavorare con circa 2.300 dipendenti ogni giorno per un mondo più sostenibile e connesso.",
+      "en": "gfeller elektro is part of ETAVIS Bern-Mittelland AG and one of the leading companies in the Swiss electrical installation and telecommunications market. We provide all services for consulting, project planning, execution, support and maintenance for electrical and building technology, telematics, ICT infrastructure and automation. That's what you do.\n• Constant implementation of small and medium-sized ICT projects\n• Customer advice in the field of telecommunications and conduct of supplier negotiations\n• Creating offers, contracts and settlements\n• Leadership and support of the employees under his direct authority\n• Bringing fresh ideas, driving new technologies and supporting the further development of our systems This will make it easier for you to get started.\n• Successfully completed training as a telematician EFZ or electrical installer EFZ with further training in the field of telecommunications or an equivalent ICT training\n• Experience in project management, ideally in the ICT environment\n• Independent and structured working method with great personal responsibility\n• Good knowledge of German in word and writing as well as good knowledge of English beneficial\n• Experience with modern telephony platforms such as Teams, Mitel, 3CX and Swisscom Hosted as well as knowledge of network technology This is what awaits you\n• Your professional and personal development is actively supported with targeted further education\n• Sustainable and trusting corporate culture\n• Open, family and collegial working environment with established employees\n• Competent managers ensure exciting projects and functioning workflows\n• Profit sharing, employee shares and a very good company pension fund make the overall package particularly attractive Still questions? Your manager, André Lüthi, has the answers (+41 79 948 91 57). Apply with us, we are in a spirit of optimism and looking for you! ETAVIS has the right expertise for all topics in the field of electrical engineering. Whether electrical installations, building automation, event service, renewable energies, etc. - we are the ideal partner for all these services in Switzerland. As part of the international VINCI Energies Group, we have power for innovation to remain the best solution provider in the future. We are strongly anchored locally and know the people, cultures and the market in all regions of Switzerland and Liechtenstein. We are proud to be able to train several hundred learners at 57 offices and to work with around 2,300 employees every day for a more sustainable and better connected world.",
+      "de": "Sei Teil der Energiewende gfeller elektro ist ein Teil der ETAVIS Bern-Mittelland AG und eines der führenden Unternehmen im Schweizerischen Elektroinstallations- und Telekommunikationsmarkt. Wir erbringen sämtliche Leistungen zur Beratung, Projektierung, Ausführung, Support und Wartung für Elektro- und Gebäudetechnik, Telematik, ICT-Infrastruktur und Automation. Das bewirkst du\n• S elbstständiges Umsetzen von kleineren und mittleren ICT-Projekten\n• Kundenberatung im Bereich Telekommunikation und Führung von Lieferantenverhandlungen\n• Erstellen von Offerten, Verträgen und Abrechnungen\n• Führung und Unterstützung der ihm direkt unterstellten Mitarbeitenden\n• Einbringen frischer Ideen, Vorantreiben neuer Technologien und Unterstützung bei der Weiterentwicklung unserer Systeme Das erleichtert dir den Einstieg\n• Erfolgreich abgeschlossene Ausbildung als Telematiker EFZ oder Elektroinstallateur EFZ mit Weiterbildungen im Bereich Telekomunikation oder eine gleichwertige ICT-Ausbildung\n• Erfahrung in der Projektleitung, idealerweise im ICT-Umfeld\n• Selbstständige und strukturierte Arbeitsweise mit grosser Eigenverantwortung\n• Gute Deutsch Kenntnisse in Wort und Schrift sowie gute Englisch Kenntnisse von Vorteil\n• Erfahrung mit modernen Telefonie-Plattformen wie z. Bsp. mit Teams, Mitel, 3CX und Swisscom Hosted sowie Kenntnis im Bereich Netzwerktechnik Das erwartet dich\n• Deine fachliche und persönliche Entwicklung wird mit gezielten Weiterbildungen aktiv unterstützt\n• Nachhaltige und vertrauensvolle Unternehmenskultur\n• Offenes, familiäres und kollegiales Arbeitsumfeld mit aufgestellten Mitarbeitenden\n• Kompetente Führungskräfte sorgen für spannende Projekte und funktionierende Arbeitsabläufe\n• Gewinnbeteiligung, Mitarbeitenden-Aktien sowie eine sehr gute firmeneigene Pensionskasse machen das Gesamtpaket besonders attraktiv Noch Fragen? Dein Vorgesetzter André Lüthi, Geschäftsleiter, hat die Antworten (+41 79 948 91 57). Bewirb dich bei uns, wir sind in Aufbruchstimmung und suchen dich! Das sind wir ETAVIS hat für alle Themen im Bereich der Elektrotechnik die richtige Expertise. Ob Elektroinstallationen, Gebäudeautomation, Eventservice, erneuerbare Energien etc. - für all diese Dienstleistungen sind wir in der Schweiz die optimale Partnerin. Als Teil der internationalen VINCI Energies - Gruppe haben wir Power für Innovation, um auch in Zukunft die beste Lösungsanbieterin zu sein. Wir sind lokal stark verankert und kennen die Menschen, Kulturen und den Markt in allen Regionen der Schweiz und im Liechtenstein. Wir sind stolz, an 57 Geschäftsstellen mehrere hundert Lernende ausbilden zu können und mit rund 2'300 Mitarbeitenden täglich an einer nachhaltigeren und besser vernetzten Welt zu arbeiten.",
+      "fr": "gfeller elektro fait partie d'ETAVIS Bern-Mittelland AG et de l'une des principales entreprises du marché suisse de l'installation électrique et des télécommunications. Nous fournissons tous les services de conseil, de planification de projets, d'exécution, de soutien et d'entretien pour les technologies électriques et de construction, la télématique, l'infrastructure TIC et l'automatisation. C'est ce que tu fais.\n• Mise en œuvre constante de projets de petite et moyenne dimension dans le domaine des TIC\n• Conseils aux clients dans le domaine des télécommunications et conduite des négociations avec les fournisseurs\n• Création d'offres, de contrats et de règlements\n• Leadership et soutien des employés sous son autorité directe\n• Apporter de nouvelles idées, conduire de nouvelles technologies et soutenir le développement de nos systèmes Cela vous facilitera le démarrage.\n• Une formation réussie en tant que télématique EFZ ou installateur électrique EFZ avec une formation continue dans le domaine des télécommunications ou une formation équivalente en TIC\n• Expérience en gestion de projet, idéalement dans l'environnement TIC\n• Méthode de travail indépendante et structurée avec une grande responsabilité personnelle\n• Bonne connaissance de l'allemand dans la parole et l'écriture ainsi que bonne connaissance de l'anglais bénéfique\n• Expérience avec les plateformes de téléphonie modernes telles que Teams, Mitel, 3CX et Swisscom Hôté ainsi que connaissance de la technologie réseau C'est ce qui vous attend\n• Votre développement professionnel et personnel est activement soutenu par une éducation complémentaire ciblée\n• Une culture d'entreprise durable et confiante\n• Milieu de travail ouvert, familial et collégial avec les employés établis\n• Les gestionnaires compétents veillent à ce que les projets et les flux de travail soient passionnants\n• Le partage des bénéfices, les actions des salariés et un très bon fonds de pension d'entreprise rendent l'ensemble particulièrement attrayant. Votre manager, André Lüthi, a les réponses (+41 79 948 91 57). Postulez avec nous, nous sommes dans un esprit d'optimisme et de recherche pour vous! ETAVIS dispose de la bonne expertise pour tous les sujets dans le domaine de l'ingénierie électrique. Que ce soit les installations électriques, l'automatisation du bâtiment, le service événementiel, les énergies renouvelables, etc., nous sommes le partenaire idéal pour tous ces services en Suisse. Dans le cadre du groupe international VINCI Energies, nous avons le pouvoir pour l'innovation de rester le meilleur fournisseur de solutions à l'avenir. Nous sommes fortement ancrés localement et connaissons la population, les cultures et le marché dans toutes les régions de la Suisse et du Liechtenstein. Nous sommes fiers de pouvoir former plusieurs centaines d'apprenants dans 57 bureaux et travailler avec environ 2300 employés chaque jour pour un monde plus durable et mieux connecté."
+    },
+    "slugByLocale": {
+      "it": "projektleiter-telematica-ict-m-w-d-80-100-gfeller-elektro-wohlen-bei-bern",
+      "en": "projektleiter-telematics-ict-w-m-d-80-100-gfeller-elektro-wohlen-bei-bern",
+      "de": "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern",
+      "fr": "projektleiter-telematique-ict-w-m-d-80-100-gfeller-elektro-wohlen-bei-bern"
+    },
+    "sector": "Impiantistica elettrica",
+    "expiredAt": "2026-08-29T15:12:21.747Z",
+    "previousSlugs": [
+      "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern",
+      "projektleiter-telematik-ict-w-m-d-80-100-gfeller-elektro-wohlen-bei-bern",
+      "projektleiter-telematica-ict-m-w-d-80-100-gfeller-elektro-wohlen-bei-bern"
+    ],
+    "previousSlugsByLocale": {
+      "de": [
+        "projektleiter-telematik-ict-w-m-d-80-100-gfeller-elektro-wohlen-bei-bern",
+        "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern"
+      ],
+      "it": [
+        "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern",
+        "projektleiter-telematica-ict-m-w-d-80-100-gfeller-elektro-wohlen-bei-bern"
+      ],
+      "en": [
+        "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern"
+      ],
+      "fr": [
+        "projektleiter-telematik-ict-w-m-d-80-100-etavis-wohlen-bei-bern"
+      ]
+    },
+    "postalCode": "3032",
+    "streetAddress": "Kappelenring 69",
+    "salaryMin": 77000,
+    "salaryMax": 116500,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
