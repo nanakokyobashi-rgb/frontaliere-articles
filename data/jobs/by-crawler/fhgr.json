@@ -1,6 +1,6 @@
 {
   "crawlerKey": "fhgr",
-  "assembledAt": "2026-08-28T21:06:17.092Z",
+  "assembledAt": "2026-08-29T03:27:05.645Z",
   "jobs": [
     {
       "id": "fhgr-b96495651fa4",
@@ -33,7 +33,7 @@
       "url": "https://jobs.fhgr.ch/Vacancies/749/Description/1",
       "source": "Fachhochschule Graubünden Dedicated Parser (Umantis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:06:14.020Z",
+      "crawledAt": "2026-08-29T03:27:01.988Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -95,7 +95,6 @@
         "ingegnere-civile-fachhochschule-graubunden-chur"
       ],
       "firstSeenAt": "2026-04-13T10:32:26.327Z",
-      "needsRetranslation": true,
       "salaryMin": 48500,
       "salaryMax": 89500,
       "baseSalary": {
@@ -108,7 +107,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "fhgr-b052f8397abe",
@@ -141,7 +141,7 @@
       "url": "https://jobs.fhgr.ch/Vacancies/797/Description/1",
       "source": "Fachhochschule Graubünden Dedicated Parser (Umantis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:06:12.905Z",
+      "crawledAt": "2026-08-29T03:27:00.778Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -159,18 +159,17 @@
       "requirementsByLocale": {},
       "department": "Zentrale Dienste",
       "contractDuration": "permanent",
-      "previousSlugs": [
-        "projektleiter-in-verwaltungsdirektion-fhgr-ch",
-        "projektleiter-in-verwaltungsdirektion-fachhochschule-graubunden-chur"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "projektleiter-in-verwaltungsdirektion-fhgr-ch",
           "projektleiter-in-verwaltungsdirektion-fachhochschule-graubunden-chur"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:26:57.952Z",
+      "previousSlugs": [
+        "projektleiter-in-verwaltungsdirektion-fhgr-ch",
+        "projektleiter-in-verwaltungsdirektion-fachhochschule-graubunden-chur"
+      ],
       "salaryMin": 48500,
       "salaryMax": 89500,
       "baseSalary": {
@@ -183,7 +182,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "firstSeenAt": "2026-08-28T05:26:57.952Z"
     }
   ]
 }
