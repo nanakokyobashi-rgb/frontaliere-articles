@@ -1,6 +1,6 @@
 {
   "crawlerKey": "novelis",
-  "assembledAt": "2026-08-29T03:22:00.820Z",
+  "assembledAt": "2026-08-29T14:34:02.214Z",
   "jobs": [
     {
       "id": "novelis-c7cf8d2f877c",
@@ -49,7 +49,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52223/electricien---automaticien/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:21:57.327Z",
+      "crawledAt": "2026-08-29T14:33:58.358Z",
       "previousSlugs": [
         "electrician-automatician-novelis-sierre",
         "elektriker-automatiker-novelis-sierre",
@@ -136,7 +136,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52599/plant-hr-manager-%28f-m-d%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:56.405Z",
+      "crawledAt": "2026-08-29T14:33:57.546Z",
       "previousSlugs": [
         "plant-hr-manager-f-m-d-novelis-ch",
         "plant-risorse-umane-manager-f-m-d-novelis-sierre"
@@ -215,7 +215,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52764/m%c3%a9canicien-de-maintenance/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:21:55.531Z",
+      "crawledAt": "2026-08-29T14:33:56.705Z",
       "previousSlugs": [
         "mecanicien-de-maintenance-novelis-ch",
         "ingegnere-di-manutenzione-novelis-sierre"
@@ -293,7 +293,7 @@
       "applyUrl": "https://de-careers-novelis.icims.com/jobs/52802/it-solutions-lead-%28m-w-d%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:54.669Z",
+      "crawledAt": "2026-08-29T14:33:55.876Z",
       "previousSlugs": [
         "it-solutions-lead-m-w-d-novelis-ch",
         "soluzioni-it-piombo-m-w-d-novelis-ticino"
@@ -371,7 +371,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52860/internship-%28m-f-d%29-internal-communications-%2840%25-60%25%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:53.047Z",
+      "crawledAt": "2026-08-29T14:33:54.931Z",
       "previousSlugs": [
         "internship-m-f-d-internal-communications-40-60-novelis-ch",
         "internship-m-f-d-comunicazioni-interne-40-60-novelis-kusnacht"
