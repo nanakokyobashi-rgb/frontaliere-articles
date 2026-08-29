@@ -1,18 +1,19 @@
 {
   "key": "caseificio-gottardo",
   "label": "Caseificio del Gottardo",
-  "generatedAt": "2026-08-29T14:27:04.351Z",
+  "generatedAt": "2026-08-29T23:13:31.085Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4908,
-  "avgDurationMs": 4908,
+  "durationMs": 5022,
+  "avgDurationMs": 5022,
   "durationHistory": [
     4225,
     4143,
-    4908
+    4908,
+    5022
   ],
   "newJobs": [],
   "updatedJobs": [],
