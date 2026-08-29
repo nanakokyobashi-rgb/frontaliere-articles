@@ -1,17 +1,18 @@
 {
   "key": "ferrovia-retica",
   "label": "Ferrovia Retica (RhB)",
-  "generatedAt": "2026-08-29T03:15:04.394Z",
+  "generatedAt": "2026-08-29T14:30:58.554Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 9,
-  "durationMs": 24716,
-  "avgDurationMs": 24716,
+  "durationMs": 21998,
+  "avgDurationMs": 21998,
   "durationHistory": [
     18910,
-    24716
+    24716,
+    21998
   ],
   "newJobs": [],
   "updatedJobs": [
