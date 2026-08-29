@@ -1,18 +1,19 @@
 {
   "key": "agie-charmilles",
   "label": "AGIE Charmilles",
-  "generatedAt": "2026-08-29T15:09:07.429Z",
+  "generatedAt": "2026-08-29T23:38:39.558Z",
   "total": 33,
   "newCount": 0,
   "updatedCount": 27,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 52175,
-  "avgDurationMs": 52175,
+  "durationMs": 54115,
+  "avgDurationMs": 54115,
   "durationHistory": [
     50019,
     53507,
-    52175
+    52175,
+    54115
   ],
   "newJobs": [],
   "updatedJobs": [
