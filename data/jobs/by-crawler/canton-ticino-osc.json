@@ -1,6 +1,6 @@
 {
   "crawlerKey": "canton-ticino-osc",
-  "assembledAt": "2026-08-29T03:33:09.177Z",
+  "assembledAt": "2026-08-29T15:08:46.010Z",
   "jobs": [
     {
       "id": "canton-ticino-osc-4225-88e3240f5907",
@@ -33,7 +33,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4225",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:05.658Z",
+      "crawledAt": "2026-08-29T15:08:42.060Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -130,7 +130,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4099",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:05.028Z",
+      "crawledAt": "2026-08-29T15:08:41.422Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -272,7 +272,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4094",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:04.395Z",
+      "crawledAt": "2026-08-29T15:08:40.785Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -406,7 +406,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4091",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:03.760Z",
+      "crawledAt": "2026-08-29T15:08:40.158Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -543,7 +543,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4265",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:02.213Z",
+      "crawledAt": "2026-08-29T15:08:38.585Z",
       "addressLocality": "Bellinzona",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -614,7 +614,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4264",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:01.570Z",
+      "crawledAt": "2026-08-29T15:08:37.954Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -676,7 +676,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4263",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:00.939Z",
+      "crawledAt": "2026-08-29T15:08:37.325Z",
       "addressLocality": "Bellinzona",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -761,7 +761,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4251",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:00.029Z",
+      "crawledAt": "2026-08-29T15:08:36.418Z",
       "addressLocality": "Bellinzona",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -845,7 +845,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4248",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:32:59.109Z",
+      "crawledAt": "2026-08-29T15:08:35.495Z",
       "addressLocality": "Bellinzona",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -934,7 +934,7 @@
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4266",
       "source": "Canton Ticino OSC Dedicated Parser (rexx-systems jobportal, DSS filter)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:33:02.846Z",
+      "crawledAt": "2026-08-29T15:08:39.222Z",
       "addressLocality": "Mendrisio",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -965,7 +965,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:33:02.846Z"
+      "firstSeenAt": "2026-08-29T15:08:39.222Z"
     }
   ]
 }
