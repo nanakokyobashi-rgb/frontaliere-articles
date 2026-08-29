@@ -1,6 +1,6 @@
 {
   "crawlerKey": "grace-la-margna",
-  "assembledAt": "2026-08-29T03:35:41.356Z",
+  "assembledAt": "2026-08-29T14:45:21.832Z",
   "jobs": [
     {
       "title": "Back of House Clerk - be the backbone of the operations",
@@ -38,13 +38,13 @@
         "fr": "QUI avons-nous BESOIN Nous recherchons des talents ambitieux qui deviendront les créateurs du nouvel hôtel légendaire renaissant dans l'une des stations alpines les plus prestigieuses du monde. Vous attendez plus qu'un emploi ? Alors faisons la GRÂCE ensemble à partir de l'hiver 2026/27 ! QUE FEREZ-VOUS ? Maintenir des normes élevées de propreté, d'organisation et de propreté dans toutes les zones de l'arrière de la maison Fournir un soutien opérationnel à tous les départements, au besoin, en contribuant au bon fonctionnement quotidien de l'opération Aider à la configuration, à l'exécution et à la répartition des événements, en veillant à ce que toutes les zones et tous les équipements soient préparés et nettoyés efficacement Charger et décharger les fourgonnettes de restauration, en veillant à ce que tous les équipements, fournitures et matériaux nécessaires soient préparés, transportés et correctement stockés Soutenir la configuration et la répartition des lieux de restauration pendant les événements, s'assurer que les matériaux et l'équipement sont manipulés de manière sûre et efficace Aider l'équipe de maintenance à effectuer des tâches opérationnelles pendant les périodes de charge de travail accrue S'approprier les tâches opérationnelles assignées et soutenir de manière proactive l'équipe au sens large chaque fois que nécessaire Aider à la gestion des stocks, y compris l'organisation, le suivi et le stockage des stocks et des matériaux opérationnels VOS +côtés Votre sourire est contagieux et vous traitez les gens comme s'ils étaient vos meilleurs amis Vous faites un effort supplémentaire pour faire la meilleure première et dernière impression Vous êtes un joueur d'équipe et aimez aider les autres Vous avez un fort intérêt dans l'hospitalité et vous êtes impatient d'apprendre Vous pouvez effectuer plusieurs tâches et travailler"
       },
       "slugByLocale": {
-        "en": "back-of-house-clerk-be-the-backbone-of-the-operations",
         "it": "back-of-house-clerk-essere-la-spina-dorsale-delle-operazioni-grace-la-margna-st-moritz-st-moritz",
+        "en": "back-of-house-clerk-be-the-backbone-of-the-operations",
         "de": "back-of-house-clerk-sei-das-ruckgrat-des-betriebs-grace-la-margna-st-moritz-st-moritz",
         "fr": "greffier-de-l-arriere-de-la-chambre-etre-l-epine-dorsale-des-operations-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:06.412Z",
+      "crawledAt": "2026-08-29T14:44:35.740Z",
       "id": "grace-la-margna-8c67600e0104",
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -120,7 +120,7 @@
         "fr": "gestionnaire-d-evenements-soyez-l-etincelle-derriere-chaque-celebration-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:10.681Z",
+      "crawledAt": "2026-08-29T14:44:40.823Z",
       "id": "grace-la-margna-d29647cbfed5",
       "salaryMin": 83500,
       "salaryMax": 105000,
@@ -189,13 +189,13 @@
         "fr": "QUI avons-nous BESOIN Nous recherchons des talents ambitieux qui deviendront les créateurs du nouvel hôtel légendaire renaissant dans l'une des stations alpines les plus prestigieuses du monde. Vous attendez plus qu'un emploi ? Alors faisons la GRÂCE ensemble à partir de l'automne 2026 ! QUE FEREZ-VOUS ? Fournir de la nourriture et des boissons avec précision, soin et attention aux détails Fournir un service personnalisé et attentionné adapté à chaque client Fournir un service personnalisé et attentionné adapté à chaque client Créer des expériences culinaires mémorables, durables et individualisées Créer des expériences culinaires mémorables, durables et individualisées Prendre la responsabilité de tous les aspects du processus opérationnel et soutenir le bon fonctionnement du restaurant Prendre la responsabilité de tous les aspects du processus opérationnel et soutenir le bon fonctionnement du restaurant Aider à la préparation et à l'exécution sans faille des événements Aider à la préparation et à l'exécution sans faille des événements Maintenir les normes les plus élevées de service, de présentation et d'environnement de restaurant Maintenir les normes les plus élevées de service, de présentation et d'environnement de restaurant Anticiper les besoins des clients et résoudre les défis de manière indépendante, assurer une satisfaction complète Anticiper les besoins des clients et résoudre les défis de manière indépendante, assurer une satisfaction complète Démontrer la positivité, la fiabilité et le professionnalisme dans chaque tâche Démontrer la positivité, la fiabilité et le professionnalisme dans chaque tâche Améliorer la réputation de"
       },
       "slugByLocale": {
-        "en": "f-b-trainee-kickstart-your-career-with-us",
         "it": "tirocinante-f-b-inizia-la-tua-carriera-con-noi-grace-la-margna-st-moritz-st-moritz",
+        "en": "f-b-trainee-kickstart-your-career-with-us",
         "de": "f-b-auszubildender-kickstart-your-career-with-us-grace-la-margna-st-moritz-st-moritz",
         "fr": "f-b-apprenti-kickstart-your-career-with-us-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:14.756Z",
+      "crawledAt": "2026-08-29T14:44:45.257Z",
       "id": "grace-la-margna-37be54b5c05d",
       "salaryMin": 48000,
       "salaryMax": 73000,
@@ -271,7 +271,7 @@
         "fr": "front-office-apprenti-m-w-kickstart-your-career-with-us-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:18.799Z",
+      "crawledAt": "2026-08-29T14:44:57.279Z",
       "id": "grace-la-margna-3a693cb7389a",
       "salaryMin": 48000,
       "salaryMax": 73000,
@@ -346,7 +346,7 @@
         "fr": "portier-housekeeping-h-f-soyez-la-star-de-la-course-a-pied-dans-la-maison-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:22.788Z",
+      "crawledAt": "2026-08-29T14:45:01.805Z",
       "id": "grace-la-margna-b4f6437e14a4",
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -421,7 +421,7 @@
         "fr": "reservation-superviseur-be-the-master-in-filling-the-house-at-the-best-price-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:26.818Z",
+      "crawledAt": "2026-08-29T14:45:06.479Z",
       "id": "grace-la-margna-ba221949eef3",
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -513,7 +513,7 @@
         "fr": "prepose-aux-chambres-h-f-soyez-la-fee-du-nettoyage-de-la-maison-grace-la-margna-st-moritz-st-moritz"
       },
       "source": "dedicated-crawler",
-      "crawledAt": "2026-08-29T03:35:30.799Z",
+      "crawledAt": "2026-08-29T14:45:11.037Z",
       "id": "grace-la-margna-e4f2b02066fe",
       "salaryMin": 57500,
       "salaryMax": 87000,
