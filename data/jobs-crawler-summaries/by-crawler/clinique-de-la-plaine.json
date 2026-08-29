@@ -1,7 +1,7 @@
 {
   "key": "clinique-de-la-plaine",
   "label": "Clinique de la Plaine",
-  "generatedAt": "2026-08-29T15:02:27.566Z",
+  "generatedAt": "2026-08-29T23:44:37.153Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,12 +9,13 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4679,
-  "avgDurationMs": 4679,
+  "durationMs": 3742,
+  "avgDurationMs": 3742,
   "durationHistory": [
     4234,
     4342,
-    4679
+    4679,
+    3742
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://laplaine.ch/emploi/responsable-du-bloc-operatoire-et-des-soins-100/",
       "source": "Clinique de la Plaine Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T15:02:24.120Z",
+      "crawledAt": "2026-08-29T23:44:34.475Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -68,7 +69,7 @@
       "url": "https://laplaine.ch/emploi/une-aide-de-salle-agent-de-sterilisation-a-80-100/",
       "source": "Clinique de la Plaine Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T15:02:24.631Z",
+      "crawledAt": "2026-08-29T23:44:34.951Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "addressCountry": "CH",
