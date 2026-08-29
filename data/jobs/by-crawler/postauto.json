@@ -1,6 +1,6 @@
 {
   "crawlerKey": "postauto",
-  "assembledAt": "2026-08-29T14:52:39.047Z",
+  "assembledAt": "2026-08-29T23:28:22.389Z",
   "jobs": [
     {
       "id": "postauto-318dbdb3c660",
@@ -33,7 +33,7 @@
       "url": "https://job.post.ch/default/job/Ticketkontrolleurin-und-Kundenberatung/74193-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:35.247Z",
+      "crawledAt": "2026-08-29T23:28:19.368Z",
       "addressLocality": "Chur",
       "addressRegion": "GR",
       "streetAddress": "",
@@ -117,7 +117,7 @@
       "url": "https://job.post.ch/default/job/Ticketkontrolleurin-und-Kundenberatung/74422-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:34.240Z",
+      "crawledAt": "2026-08-29T23:28:17.982Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Wankdorfallee 4",
@@ -211,7 +211,7 @@
       "url": "https://job.post.ch/default/job/Ticketkontrolleurin-und-Kundenberatung/74425-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:33.196Z",
+      "crawledAt": "2026-08-29T23:28:16.597Z",
       "addressLocality": "Interlaken",
       "addressRegion": "BE",
       "streetAddress": "",
@@ -292,7 +292,7 @@
       "url": "https://job.post.ch/default/job/Sicherheitsspezialistin-%C3%96ffentlicher-Verkehr/74239-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:32.180Z",
+      "crawledAt": "2026-08-29T23:28:15.211Z",
       "addressLocality": "Wallisellen",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -380,7 +380,7 @@
       "url": "https://job.post.ch/default/job/Sicherheitsspezialistin-%C3%96ffentlicher-Verkehr/74240-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:31.109Z",
+      "crawledAt": "2026-08-29T23:28:13.826Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -519,7 +519,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "postauto-b4474cae4aea",
@@ -552,7 +553,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Fahrerin/74494-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:29.010Z",
+      "crawledAt": "2026-08-29T23:28:12.416Z",
       "addressLocality": "Reichenburg",
       "addressRegion": "SZ",
       "streetAddress": "",
@@ -633,7 +634,7 @@
       "url": "https://job.post.ch/default/job/Ticketkontrolleurin-und-Kundenberatung/74207-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:28.001Z",
+      "crawledAt": "2026-08-29T23:28:11.028Z",
       "addressLocality": "Brugg AG",
       "addressRegion": "AG",
       "streetAddress": "",
@@ -793,7 +794,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Chauffeurin/74549-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:26.939Z",
+      "crawledAt": "2026-08-29T23:28:09.644Z",
       "addressLocality": "Bad Ragaz",
       "addressRegion": "SG",
       "streetAddress": "",
@@ -868,7 +869,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Fahrerin-im-Stundenlohn/74565-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:25.897Z",
+      "crawledAt": "2026-08-29T23:28:08.254Z",
       "addressLocality": "Einsiedeln",
       "addressRegion": "SZ",
       "streetAddress": "",
@@ -949,7 +950,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Chauffeurin/74566-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:24.830Z",
+      "crawledAt": "2026-08-29T23:28:06.865Z",
       "addressLocality": "Einsiedeln",
       "addressRegion": "SZ",
       "streetAddress": "",
@@ -1016,7 +1017,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Fahrerin/74295-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:23.822Z",
+      "crawledAt": "2026-08-29T23:28:05.474Z",
       "addressLocality": "Ilanz",
       "addressRegion": "GR",
       "streetAddress": "",
@@ -1094,7 +1095,7 @@
       "url": "https://job.post.ch/default/job/Fachspezialistin-Kundenservice-Inkasso/74547-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:22.770Z",
+      "crawledAt": "2026-08-29T23:28:04.037Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -1175,7 +1176,7 @@
       "url": "https://job.post.ch/default/job/PostAuto-Chauffeurin/74626-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:21.757Z",
+      "crawledAt": "2026-08-29T23:28:02.638Z",
       "addressLocality": "Klosters",
       "addressRegion": "GR",
       "streetAddress": "",
@@ -1242,7 +1243,7 @@
       "url": "https://job.post.ch/default/job/Kundenbetreuerin-Flottenmanagement-Gesch%C3%A4ftskunden/74619-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:20.673Z",
+      "crawledAt": "2026-08-29T23:28:01.267Z",
       "addressLocality": "Moosseedorf",
       "addressRegion": "BE",
       "streetAddress": "",
@@ -1328,7 +1329,7 @@
       "url": "https://job.post.ch/default/job/Bid-Managerin-Markt-%28financial%2C-technical%29/74562-de_DE",
       "source": "PostAuto Dedicated Parser (job.post.ch, brand=PostAuto)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:52:19.017Z",
+      "crawledAt": "2026-08-29T23:27:59.001Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Wankdorfallee 4",
@@ -1364,7 +1365,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:52:19.017Z"
+      "firstSeenAt": "2026-08-29T23:27:59.001Z"
     }
   ]
 }
