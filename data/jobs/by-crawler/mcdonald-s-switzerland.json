@@ -1,6 +1,6 @@
 {
   "crawlerKey": "mcdonald-s-switzerland",
-  "assembledAt": "2026-08-29T14:59:49.776Z",
+  "assembledAt": "2026-08-29T23:33:38.913Z",
   "jobs": [
     {
       "title": "Hôte / Hôtesse",
@@ -22,7 +22,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.930Z",
+      "crawledAt": "2026-08-29T23:33:31.143Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -79,7 +79,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.929Z",
+      "crawledAt": "2026-08-29T23:33:31.142Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -136,7 +136,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.929Z",
+      "crawledAt": "2026-08-29T23:33:31.142Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -193,7 +193,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.929Z",
+      "crawledAt": "2026-08-29T23:33:31.142Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -250,7 +250,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.929Z",
+      "crawledAt": "2026-08-29T23:33:31.142Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -307,7 +307,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.928Z",
+      "crawledAt": "2026-08-29T23:33:31.141Z",
       "titleByLocale": {
         "it": "Hôte / Hôtesse",
         "en": "Hôte / Hôtesse",
@@ -365,7 +365,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.928Z",
+      "crawledAt": "2026-08-29T23:33:31.141Z",
       "titleByLocale": {
         "it": "Host / Hostess",
         "en": "Host / Hostess",
@@ -422,7 +422,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.928Z",
+      "crawledAt": "2026-08-29T23:33:31.141Z",
       "titleByLocale": {
         "it": "Guest Experience Leader",
         "en": "Guest Experience Leader",
@@ -488,7 +488,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.927Z",
+      "crawledAt": "2026-08-29T23:33:31.140Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -559,7 +559,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.928Z",
+      "crawledAt": "2026-08-29T23:33:31.141Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -630,7 +630,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.927Z",
+      "crawledAt": "2026-08-29T23:33:31.140Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -701,7 +701,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.926Z",
+      "crawledAt": "2026-08-29T23:33:31.138Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -772,7 +772,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.926Z",
+      "crawledAt": "2026-08-29T23:33:31.138Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -843,7 +843,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.927Z",
+      "crawledAt": "2026-08-29T23:33:31.138Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -914,7 +914,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.927Z",
+      "crawledAt": "2026-08-29T23:33:31.140Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -998,7 +998,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.926Z",
+      "crawledAt": "2026-08-29T23:33:31.137Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -1069,7 +1069,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.925Z",
+      "crawledAt": "2026-08-29T23:33:31.137Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -1140,7 +1140,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.925Z",
+      "crawledAt": "2026-08-29T23:33:31.136Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1198,7 +1198,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:59:41.925Z",
+      "crawledAt": "2026-08-29T23:33:31.137Z",
       "titleByLocale": {
         "it": "Leader dell'esperienza degli ospiti",
         "en": "Guest Experience Leader",
@@ -1269,7 +1269,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.925Z",
+      "crawledAt": "2026-08-29T23:33:31.136Z",
       "titleByLocale": {
         "it": "Dipendente di pulizia (Cleaner Restaurant)",
         "en": "Cleaning employee (Cleaner Restaurant)",
@@ -1326,7 +1326,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.924Z",
+      "crawledAt": "2026-08-29T23:33:31.134Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1384,7 +1384,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.924Z",
+      "crawledAt": "2026-08-29T23:33:31.135Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1453,85 +1453,6 @@
       "company": "McDonald's Switzerland",
       "companyKey": "mcdonald-s-switzerland",
       "companyDomain": "mcdonalds.ch",
-      "url": "https://jobs.mcdonalds.ch/fr-ch/crew/job/P8-319396-6",
-      "slug": "crew-mcdonalds-switzerland-zurich-p8-319396-6",
-      "location": "ZURICH",
-      "canton": "ZH",
-      "country": "CH",
-      "postalCode": "8005",
-      "streetAddress": "LANGSTRASSE 201",
-      "description": "Teilzeit 40% (Mittag /Nacht)\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
-      "postedDate": "2026-07-14",
-      "validThrough": "",
-      "employmentType": "PART_TIME",
-      "jobReqId": "P8-319396-6",
-      "sector": "Ristorazione / Fast Food",
-      "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
-      "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.924Z",
-      "titleByLocale": {
-        "it": "Crew",
-        "en": "Crew",
-        "de": "Crew",
-        "fr": "Crew"
-      },
-      "slugByLocale": {
-        "it": "crew-mcdonalds-switzerland-zurich-p8-319396-6",
-        "en": "crew-mcdonalds-switzerland-zurich-p8-319396-6",
-        "de": "crew-mcdonalds-switzerland-zurich-p8-319396-6",
-        "fr": "crew-mcdonald-s-switzerland-zurich"
-      },
-      "descriptionByLocale": {
-        "it": "Teilzeit 40% (Mittag /Nacht)\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\nQualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\nAvantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\nComment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
-        "en": "Teilzeit 40% (Mittag /Nacht)\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\nQualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\nAvantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\nComment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
-        "de": "Teilzeit 40% (Mittag /Nacht)\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\nQualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\nAvantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\nComment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
-        "fr": "Teilzeit 40% (Mittag /Nacht)\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\nQualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\nAvantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\nComment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons"
-      },
-      "previousSlugsByLocale": {
-        "it": [
-          "crew-mcdonalds-switzerland-zurich-p8-319398-8",
-          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
-          "crew-mcdonalds-switzerland-zurich-p8-318022-1"
-        ],
-        "en": [
-          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
-          "crew-mcdonalds-switzerland-zurich-p8-318022-1"
-        ],
-        "de": [
-          "crew-mcdonalds-switzerland-zurich-p8-319398-8",
-          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
-          "crew-mcdonalds-switzerland-zurich-p8-318022-1"
-        ]
-      },
-      "previousSlugs": [
-        "crew-mcdonalds-switzerland-zurich-p8-319398-8",
-        "crew-mcdonalds-switzerland-zurich-p8-318021-1",
-        "crew-mcdonalds-switzerland-zurich-p8-318022-1"
-      ],
-      "needsRetranslation": true,
-      "id": "mcdonald-s-switzerland-aa884415d60a",
-      "salaryMin": 73500,
-      "salaryMax": 111500,
-      "currency": "CHF",
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 73500,
-          "maxValue": 111500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressLocality": "ZURICH",
-      "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-27T00:58:24.960Z"
-    },
-    {
-      "title": "Crew",
-      "company": "McDonald's Switzerland",
-      "companyKey": "mcdonald-s-switzerland",
-      "companyDomain": "mcdonalds.ch",
       "url": "https://jobs.mcdonalds.ch/fr-ch/crew/job/P8-318879-1",
       "slug": "crew-mcdonalds-switzerland-sion-p8-318879-1",
       "location": "SION",
@@ -1547,7 +1468,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.923Z",
+      "crawledAt": "2026-08-29T23:33:31.133Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1605,7 +1526,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.923Z",
+      "crawledAt": "2026-08-29T23:33:31.133Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1663,7 +1584,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.922Z",
+      "crawledAt": "2026-08-29T23:33:31.133Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1721,7 +1642,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.924Z",
+      "crawledAt": "2026-08-29T23:33:31.134Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1779,7 +1700,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.921Z",
+      "crawledAt": "2026-08-29T23:33:31.130Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1837,7 +1758,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.921Z",
+      "crawledAt": "2026-08-29T23:33:31.131Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1895,7 +1816,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.922Z",
+      "crawledAt": "2026-08-29T23:33:31.132Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -1953,7 +1874,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.922Z",
+      "crawledAt": "2026-08-29T23:33:31.131Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2011,7 +1932,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.922Z",
+      "crawledAt": "2026-08-29T23:33:31.132Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2069,7 +1990,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.921Z",
+      "crawledAt": "2026-08-29T23:33:31.129Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2127,7 +2048,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.921Z",
+      "crawledAt": "2026-08-29T23:33:31.130Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2185,7 +2106,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:21.251Z",
+      "crawledAt": "2026-08-29T23:33:31.129Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -2243,7 +2164,7 @@
       },
       "addressLocality": "WINTERTHUR",
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:18:21.251Z"
+      "firstSeenAt": "2026-08-29T23:33:31.129Z"
     },
     {
       "title": "Crew",
@@ -2265,7 +2186,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.920Z",
+      "crawledAt": "2026-08-29T23:33:31.127Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2323,7 +2244,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:21.249Z",
+      "crawledAt": "2026-08-29T23:33:31.126Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -2373,7 +2294,7 @@
       },
       "addressLocality": "BUELACH",
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T21:18:21.249Z"
+      "firstSeenAt": "2026-08-29T23:33:31.126Z"
     },
     {
       "title": "Crew",
@@ -2395,7 +2316,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.919Z",
+      "crawledAt": "2026-08-29T23:33:31.126Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2453,7 +2374,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.917Z",
+      "crawledAt": "2026-08-29T23:33:31.125Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2511,7 +2432,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.917Z",
+      "crawledAt": "2026-08-29T23:33:31.125Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2569,7 +2490,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.916Z",
+      "crawledAt": "2026-08-29T23:33:31.124Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2627,7 +2548,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.916Z",
+      "crawledAt": "2026-08-29T23:33:31.124Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2685,7 +2606,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.916Z",
+      "crawledAt": "2026-08-29T23:33:31.124Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2743,7 +2664,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.912Z",
+      "crawledAt": "2026-08-29T23:33:31.123Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2801,7 +2722,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.912Z",
+      "crawledAt": "2026-08-29T23:33:31.123Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2859,7 +2780,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.915Z",
+      "crawledAt": "2026-08-29T23:33:31.123Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -2942,7 +2863,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.911Z",
+      "crawledAt": "2026-08-29T23:33:31.122Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3000,7 +2921,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.911Z",
+      "crawledAt": "2026-08-29T23:33:31.122Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3069,7 +2990,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.910Z",
+      "crawledAt": "2026-08-29T23:33:31.121Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3127,7 +3048,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.910Z",
+      "crawledAt": "2026-08-29T23:33:31.122Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3185,7 +3106,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.909Z",
+      "crawledAt": "2026-08-29T23:33:31.121Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3243,7 +3164,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.909Z",
+      "crawledAt": "2026-08-29T23:33:31.121Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3301,7 +3222,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.898Z",
+      "crawledAt": "2026-08-29T23:33:31.119Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -3337,7 +3258,7 @@
       },
       "addressLocality": "MORBIO INFERIORE",
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T14:59:41.898Z"
+      "firstSeenAt": "2026-08-29T23:33:31.119Z"
     },
     {
       "title": "Crew",
@@ -3359,7 +3280,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.898Z",
+      "crawledAt": "2026-08-29T23:33:31.119Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3417,7 +3338,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.906Z",
+      "crawledAt": "2026-08-29T23:33:31.120Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -3467,7 +3388,7 @@
       },
       "addressLocality": "NYON",
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T14:59:41.906Z"
+      "firstSeenAt": "2026-08-29T23:33:31.120Z"
     },
     {
       "title": "Crew",
@@ -3489,7 +3410,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.905Z",
+      "crawledAt": "2026-08-29T23:33:31.120Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3547,7 +3468,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.897Z",
+      "crawledAt": "2026-08-29T23:33:31.119Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3605,7 +3526,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.896Z",
+      "crawledAt": "2026-08-29T23:33:31.118Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3663,7 +3584,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.896Z",
+      "crawledAt": "2026-08-29T23:33:31.118Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3721,7 +3642,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.897Z",
+      "crawledAt": "2026-08-29T23:33:31.118Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3779,7 +3700,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.893Z",
+      "crawledAt": "2026-08-29T23:33:31.117Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3837,7 +3758,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.894Z",
+      "crawledAt": "2026-08-29T23:33:31.117Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3903,7 +3824,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.895Z",
+      "crawledAt": "2026-08-29T23:33:31.117Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -3977,7 +3898,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.893Z",
+      "crawledAt": "2026-08-29T23:33:31.116Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4035,7 +3956,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.892Z",
+      "crawledAt": "2026-08-29T23:33:31.116Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -4071,7 +3992,7 @@
       },
       "addressLocality": "GAMSEN",
       "addressRegion": "VS",
-      "firstSeenAt": "2026-08-29T14:59:41.892Z"
+      "firstSeenAt": "2026-08-29T23:33:31.116Z"
     },
     {
       "title": "Crew",
@@ -4093,7 +4014,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.890Z",
+      "crawledAt": "2026-08-29T23:33:31.115Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4151,7 +4072,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.891Z",
+      "crawledAt": "2026-08-29T23:33:31.116Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4209,7 +4130,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.891Z",
+      "crawledAt": "2026-08-29T23:33:31.116Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4267,7 +4188,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.892Z",
+      "crawledAt": "2026-08-29T23:33:31.116Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4325,7 +4246,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.889Z",
+      "crawledAt": "2026-08-29T23:33:31.115Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4397,7 +4318,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.888Z",
+      "crawledAt": "2026-08-29T23:33:31.115Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4455,7 +4376,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.888Z",
+      "crawledAt": "2026-08-29T23:33:31.114Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4513,7 +4434,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.887Z",
+      "crawledAt": "2026-08-29T23:33:31.114Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4571,7 +4492,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.884Z",
+      "crawledAt": "2026-08-29T23:33:31.113Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4629,7 +4550,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.884Z",
+      "crawledAt": "2026-08-29T23:33:31.113Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4687,7 +4608,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.885Z",
+      "crawledAt": "2026-08-29T23:33:31.113Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4745,7 +4666,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.883Z",
+      "crawledAt": "2026-08-29T23:33:31.112Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4803,7 +4724,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.881Z",
+      "crawledAt": "2026-08-29T23:33:31.112Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4861,7 +4782,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.882Z",
+      "crawledAt": "2026-08-29T23:33:31.112Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4919,7 +4840,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.883Z",
+      "crawledAt": "2026-08-29T23:33:31.112Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -4977,7 +4898,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.880Z",
+      "crawledAt": "2026-08-29T23:33:31.111Z",
       "titleByLocale": {
         "de": "Crew",
         "fr": "Crew",
@@ -5036,7 +4957,7 @@
       },
       "addressLocality": "BERN",
       "addressRegion": "BE",
-      "firstSeenAt": "2026-08-29T14:59:41.880Z"
+      "firstSeenAt": "2026-08-29T23:33:31.111Z"
     },
     {
       "title": "Crew",
@@ -5058,7 +4979,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.878Z",
+      "crawledAt": "2026-08-29T23:33:31.111Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5116,7 +5037,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.877Z",
+      "crawledAt": "2026-08-29T23:33:31.110Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5174,7 +5095,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.877Z",
+      "crawledAt": "2026-08-29T23:33:31.111Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5232,7 +5153,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.872Z",
+      "crawledAt": "2026-08-29T23:33:31.108Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5290,7 +5211,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.873Z",
+      "crawledAt": "2026-08-29T23:33:31.108Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5348,7 +5269,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.873Z",
+      "crawledAt": "2026-08-29T23:33:31.109Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5406,7 +5327,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.871Z",
+      "crawledAt": "2026-08-29T23:33:31.108Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5464,7 +5385,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.872Z",
+      "crawledAt": "2026-08-29T23:33:31.108Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5522,7 +5443,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.871Z",
+      "crawledAt": "2026-08-29T23:33:31.108Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5580,7 +5501,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.870Z",
+      "crawledAt": "2026-08-29T23:33:31.107Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5638,7 +5559,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.869Z",
+      "crawledAt": "2026-08-29T23:33:31.107Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5696,7 +5617,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.869Z",
+      "crawledAt": "2026-08-29T23:33:31.106Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5754,7 +5675,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.869Z",
+      "crawledAt": "2026-08-29T23:33:31.107Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5823,7 +5744,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.867Z",
+      "crawledAt": "2026-08-29T23:33:31.105Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5881,7 +5802,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.868Z",
+      "crawledAt": "2026-08-29T23:33:31.106Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5939,7 +5860,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.868Z",
+      "crawledAt": "2026-08-29T23:33:31.106Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -5997,7 +5918,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.865Z",
+      "crawledAt": "2026-08-29T23:33:31.104Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6055,7 +5976,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.866Z",
+      "crawledAt": "2026-08-29T23:33:31.105Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6113,7 +6034,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.866Z",
+      "crawledAt": "2026-08-29T23:33:31.105Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6171,7 +6092,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.867Z",
+      "crawledAt": "2026-08-29T23:33:31.105Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6229,7 +6150,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.864Z",
+      "crawledAt": "2026-08-29T23:33:31.103Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6287,7 +6208,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.865Z",
+      "crawledAt": "2026-08-29T23:33:31.104Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6345,7 +6266,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.864Z",
+      "crawledAt": "2026-08-29T23:33:31.103Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6403,7 +6324,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.863Z",
+      "crawledAt": "2026-08-29T23:33:31.102Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6461,7 +6382,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.862Z",
+      "crawledAt": "2026-08-29T23:33:31.102Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6518,7 +6439,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.861Z",
+      "crawledAt": "2026-08-29T23:33:31.101Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6648,7 +6569,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.860Z",
+      "crawledAt": "2026-08-29T23:33:31.101Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6706,7 +6627,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.861Z",
+      "crawledAt": "2026-08-29T23:33:31.101Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6764,7 +6685,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.860Z",
+      "crawledAt": "2026-08-29T23:33:31.100Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6822,7 +6743,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.858Z",
+      "crawledAt": "2026-08-29T23:33:31.100Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6880,7 +6801,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.858Z",
+      "crawledAt": "2026-08-29T23:33:31.100Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6938,7 +6859,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.859Z",
+      "crawledAt": "2026-08-29T23:33:31.100Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -6996,7 +6917,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.857Z",
+      "crawledAt": "2026-08-29T23:33:31.099Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7054,7 +6975,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.856Z",
+      "crawledAt": "2026-08-29T23:33:31.099Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7112,7 +7033,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.857Z",
+      "crawledAt": "2026-08-29T23:33:31.099Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7253,7 +7174,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.856Z",
+      "crawledAt": "2026-08-29T23:33:31.099Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7311,7 +7232,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.854Z",
+      "crawledAt": "2026-08-29T23:33:31.098Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7369,7 +7290,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.847Z",
+      "crawledAt": "2026-08-29T23:33:31.097Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7427,7 +7348,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.848Z",
+      "crawledAt": "2026-08-29T23:33:31.097Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -7485,7 +7406,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.846Z",
+      "crawledAt": "2026-08-29T23:33:31.097Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7560,7 +7481,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.847Z",
+      "crawledAt": "2026-08-29T23:33:31.097Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7618,7 +7539,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.843Z",
+      "crawledAt": "2026-08-29T23:33:31.096Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7676,7 +7597,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.842Z",
+      "crawledAt": "2026-08-29T23:33:31.096Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7734,7 +7655,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.843Z",
+      "crawledAt": "2026-08-29T23:33:31.096Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7792,7 +7713,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.840Z",
+      "crawledAt": "2026-08-29T23:33:31.095Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7850,7 +7771,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.841Z",
+      "crawledAt": "2026-08-29T23:33:31.095Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7908,7 +7829,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.837Z",
+      "crawledAt": "2026-08-29T23:33:31.094Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -7966,7 +7887,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.839Z",
+      "crawledAt": "2026-08-29T23:33:31.094Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -8024,7 +7945,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.838Z",
+      "crawledAt": "2026-08-29T23:33:31.094Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -8082,7 +8003,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.833Z",
+      "crawledAt": "2026-08-29T23:33:31.093Z",
       "titleByLocale": {
         "it": "Assistente responsabile del ristorante",
         "en": "Restaurant Manager Assistant",
@@ -8140,7 +8061,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.836Z",
+      "crawledAt": "2026-08-29T23:33:31.093Z",
       "titleByLocale": {
         "it": "Coordinatore/Coordinatore del trimestre",
         "en": "Coordinator/Quarter Coordinator",
@@ -8198,7 +8119,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.836Z",
+      "crawledAt": "2026-08-29T23:33:31.093Z",
       "titleByLocale": {
         "it": "Assistente responsabile del ristorante",
         "en": "Restaurant Manager Assistant",
@@ -8256,7 +8177,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.832Z",
+      "crawledAt": "2026-08-29T23:33:31.092Z",
       "titleByLocale": {
         "it": "Apprendistato nel ripristino del sistema CFC",
         "en": "Apprenticeship in CFC System Restoration",
@@ -8313,7 +8234,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.833Z",
+      "crawledAt": "2026-08-29T23:33:31.092Z",
       "titleByLocale": {
         "it": "Assistente responsabile del ristorante",
         "en": "Restaurant Manager Assistant",
@@ -8371,7 +8292,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.830Z",
+      "crawledAt": "2026-08-29T23:33:31.091Z",
       "titleByLocale": {
         "it": "Apprendistato nel ripristino del sistema CFC",
         "en": "Apprenticeship in CFC System Restoration",
@@ -8428,7 +8349,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.832Z",
+      "crawledAt": "2026-08-29T23:33:31.091Z",
       "titleByLocale": {
         "it": "Apprendistato nel ripristino del sistema CFC",
         "en": "Apprenticeship in CFC System Restoration",
@@ -8485,7 +8406,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.829Z",
+      "crawledAt": "2026-08-29T23:33:31.090Z",
       "titleByLocale": {
         "it": "Apprendistato nel ripristino del sistema CFC",
         "en": "Apprenticeship in CFC System Restoration",
@@ -8542,7 +8463,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.825Z",
+      "crawledAt": "2026-08-29T23:33:31.089Z",
       "titleByLocale": {
         "it": "Apprendistato nel restauro del sistema AFP",
         "en": "Apprenticeship in AFP system restoration",
@@ -8599,7 +8520,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.825Z",
+      "crawledAt": "2026-08-29T23:33:31.089Z",
       "titleByLocale": {
         "it": "Apprendistato nel restauro del sistema AFP",
         "en": "Apprenticeship in AFP system restoration",
@@ -8656,7 +8577,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.823Z",
+      "crawledAt": "2026-08-29T23:33:31.088Z",
       "titleByLocale": {
         "it": "Responsabile della manutenzione",
         "en": "Maintenance Officer",
@@ -8814,7 +8735,7 @@
       "sector": "Ristorazione / Fast Food",
       "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:59:41.897Z",
+      "crawledAt": "2026-08-29T23:33:31.119Z",
       "titleByLocale": {
         "it": "Crew",
         "en": "Crew",
@@ -8869,6 +8790,86 @@
       },
       "addressLocality": "LUGANO",
       "addressRegion": "TI"
+    },
+    {
+      "title": "Crew",
+      "company": "McDonald's Switzerland",
+      "companyKey": "mcdonald-s-switzerland",
+      "companyDomain": "mcdonalds.ch",
+      "url": "https://jobs.mcdonalds.ch/fr-ch/crew/job/P8-319398-8",
+      "slug": "crew-mcdonalds-switzerland-zurich-p8-319398-8",
+      "location": "ZURICH",
+      "canton": "ZH",
+      "country": "CH",
+      "postalCode": "8045",
+      "streetAddress": "HAUS OMEGA KALANDERPLATZ 1",
+      "description": "Teilzeit 40%\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
+      "postedDate": "2026-07-14",
+      "validThrough": "",
+      "employmentType": "PART_TIME",
+      "jobReqId": "P8-319398-8",
+      "sector": "Ristorazione / Fast Food",
+      "source": "McDonald's Dedicated Parser (vacancies listing + JSON-LD)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T23:33:31.136Z",
+      "titleByLocale": {
+        "de": "Crew",
+        "fr": "Crew",
+        "it": "Crew",
+        "en": "Crew"
+      },
+      "slugByLocale": {
+        "de": "crew-mcdonalds-switzerland-zurich-p8-319398-8",
+        "it": "crew-mcdonalds-switzerland-zurich-p8-319398-8",
+        "en": "crew-mcdonalds-switzerland-zurich-p8-319398-8",
+        "fr": "crew-mcdonald-s-switzerland-zurich"
+      },
+      "descriptionByLocale": {
+        "de": "Teilzeit 40%\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
+        "fr": "Teilzeit 40%\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
+        "it": "Teilzeit 40%\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons",
+        "en": "Teilzeit 40%\n\nPrésentation de l’entreprise\n\nChez McDonald’s, nous créons un environnement où chacun se sent accueilli, valorisé et inspiré. Rejoins une équipe qui célèbre les caractéristiques individuelles de chacun, encourage le développement et rend chaque journée enrichissante. Si tu aimes rendre les gens heureux et cherches un emploi adapté à ta vie, tu es au bon endroit !\n\nDescription du poste\n\nEn tant que Crew, tu es au cœur de notre restaurant. Tu travailles avec des collègues formidables, sers nos hôtes avec le sourire et crées des moments mémorables. Que ce soit au comptoir, en cuisine ou en soutien à l’équipe, ton énergie et ton enthousiasme font toute la différence.\n\nResponsabilités principales\n\n• Offrir un service amical et efficace à notre clientèle\n\n• Préparer et servir de délicieux plats et boissons\n\n• Collaborer avec l’équipe pour atteindre les objectifs\n\n• Maintenir un environnement propre et accueillant\n\n• S’adapter aux différentes tâches et aux moments animés avec une attitude positive\n Qualifications requises\n\n• Passion pour rendre les gens heureux\n\n• Esprit d’équipe et fiabilité\n\n• Envie d’apprendre et d’évoluer\n\n• Énergie et enthousiasme pour un travail dynamique\n\n• Aucune expérience préalable requise – la motivation suffit !\n Avantages\n\n• Horaires flexibles pour un meilleur équilibre vie privée - vie professionnelle\n\n• Tâches variées en service, cuisine et comptoir – jamais de routine\n\n• Environnement d’équipe solidaire et opportunités d'apprentissage qui te seront utiles dans ta vie et la suite de ta carrière\n\n• Rémunération et conditions d’emploi conformes aux dispositions de la CCNT\n\n• 50% sur nos produits dans les restaurants en Suisse\n\n• Abonnements Sunrise à prix réduits\n\n• Accès à la plateforme Corporate Benefits\n\n• Vacances supplémentaires offertes aux plus de 50 ans\n\n• Accès gratuit à la plus grande bibliothèque de formation en ligne\n Comment postuler\n\nPrête à rejoindre notre équipe ? Postule dès maintenant et commence ton aventure chez McDonald’s ! Nous avons"
+      },
+      "previousSlugs": [
+        "crew-mcdonalds-switzerland-zurich-p8-318021-1",
+        "crew-mcdonalds-switzerland-zurich-p8-318022-1",
+        "crew-mcdonalds-switzerland-zurich-p8-319396-6"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
+          "crew-mcdonalds-switzerland-zurich-p8-318022-1",
+          "crew-mcdonalds-switzerland-zurich-p8-319396-6"
+        ],
+        "en": [
+          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
+          "crew-mcdonalds-switzerland-zurich-p8-318022-1",
+          "crew-mcdonalds-switzerland-zurich-p8-319396-6"
+        ],
+        "de": [
+          "crew-mcdonalds-switzerland-zurich-p8-318021-1",
+          "crew-mcdonalds-switzerland-zurich-p8-318022-1",
+          "crew-mcdonalds-switzerland-zurich-p8-319396-6"
+        ]
+      },
+      "needsRetranslation": true,
+      "id": "mcdonald-s-switzerland-d1d0c7822142",
+      "salaryMin": 73500,
+      "salaryMax": 111500,
+      "currency": "CHF",
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 73500,
+          "maxValue": 111500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressLocality": "ZURICH",
+      "addressRegion": "ZH",
+      "firstSeenAt": "2026-08-29T23:33:31.136Z"
     }
   ]
 }
