@@ -1,6 +1,6 @@
 {
   "crawlerKey": "strabag",
-  "assembledAt": "2026-08-28T21:12:08.448Z",
+  "assembledAt": "2026-08-29T03:53:37.056Z",
   "jobs": [
     {
       "id": "strabag-0fb2d8770e1b",
@@ -34,7 +34,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/1a74fa72-67f8-4d0c-964d-6f853a79fc46/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.690Z",
+      "crawledAt": "2026-08-29T03:53:32.067Z",
       "addressLocality": "CH- 8315 Lindau, Rigacher 1",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -112,7 +112,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/66086708-9ca4-44b9-a136-82c22dfbf9b7/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.463Z",
+      "crawledAt": "2026-08-29T03:53:31.608Z",
       "addressLocality": "Rothenburg",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -190,7 +190,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/531ad36d-6332-4bd9-9953-ca29caac8902/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.371Z",
+      "crawledAt": "2026-08-29T03:53:31.530Z",
       "addressLocality": "Lindau",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -322,7 +322,8 @@
           "maxValue": 98500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "strabag-2407aecb1085",
@@ -356,7 +357,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/80748808-c17f-4544-a490-7dadb245d973/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.136Z",
+      "crawledAt": "2026-08-29T03:53:31.372Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -458,7 +459,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/53756f83-23a6-4b6d-8958-71d55ee14465/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.087Z",
+      "crawledAt": "2026-08-29T03:53:30.934Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -536,7 +537,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/2a2c7c43-353e-4123-be37-cd52ac30722d/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:04.035Z",
+      "crawledAt": "2026-08-29T03:53:30.782Z",
       "addressLocality": "Schlieren",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -600,7 +601,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/e9529195-87d4-4da8-ab92-89c68cf21d9f/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:03.979Z",
+      "crawledAt": "2026-08-29T03:53:30.615Z",
       "addressLocality": "Erstfeld",
       "addressRegion": "UR",
       "addressCountry": "CH",
@@ -710,7 +711,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/11a7ff1a-f1f2-4688-84d2-cf6380687e43/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:03.379Z",
+      "crawledAt": "2026-08-29T03:53:30.453Z",
       "addressLocality": "Lindau bei Effretikon",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -788,7 +789,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/0d3bf68a-5ce3-4e9d-87ad-d9c05c6fbee8/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:03.305Z",
+      "crawledAt": "2026-08-29T03:53:30.295Z",
       "addressLocality": "Schlieren",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -879,7 +880,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/46203f04-ef01-442e-8422-378dbc8c87dc/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:03.129Z",
+      "crawledAt": "2026-08-29T03:53:30.113Z",
       "addressLocality": "Olten",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -957,7 +958,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/ce797f39-cb8d-44ae-9053-d439c6a7b02a/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:02.576Z",
+      "crawledAt": "2026-08-29T03:53:29.948Z",
       "addressLocality": "Lindau (bei Effretikon)",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1021,7 +1022,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/4eac428d-6522-42cc-b1d6-2d6edf97f16d/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:02.395Z",
+      "crawledAt": "2026-08-29T03:53:29.791Z",
       "addressLocality": "Erstfeld",
       "addressRegion": "UR",
       "addressCountry": "CH",
@@ -1099,7 +1100,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/d1da854d-6c64-44d9-a25f-3e06252073ec/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:02.216Z",
+      "crawledAt": "2026-08-29T03:53:29.615Z",
       "addressLocality": "Lindau (bei Effretikon)",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1163,7 +1164,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/bd642fad-1329-482a-9173-13542ce77b15/",
       "source": "STRABAG AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:12:01.577Z",
+      "crawledAt": "2026-08-29T03:53:29.440Z",
       "addressLocality": "Schlieren",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1208,6 +1209,80 @@
       "previousSlugs": [
         "baumaschinenfuhrer-in-drehbohranlagen-spezialtiefbau-strabag-schlieren"
       ]
+    },
+    {
+      "id": "strabag-d7cd7355d17a",
+      "slug": "responsabile-di-progetto-ingegneria-civile-strabag-ag-schlieren",
+      "slugByLocale": {
+        "de": "projektleiter-in-ingenieurbau-strabag-schlieren",
+        "it": "responsabile-di-progetto-ingegneria-civile-strabag-ag-schlieren",
+        "en": "projektleiter-in-ingenieurbau-strabag-schlieren",
+        "fr": "projektleiter-in-ingenieurbau-strabag-schlieren"
+      },
+      "company": "STRABAG AG",
+      "companyKey": "strabag",
+      "companyDomain": "strabag.ch",
+      "title": "Projektleiter:in Ingenieurbau",
+      "titleByLocale": {
+        "de": "Projektleiter:in Ingenieurbau",
+        "it": "Responsabile di progetto ingegneria civile",
+        "en": "Project Manager Ingenieurbau",
+        "fr": "Chef de projet Ingenieurbau"
+      },
+      "description": "Bei STRABAG bauen rund 89.000 Menschen an mehr als 2.400 Standorten weltweit am Fortschritt. Einzigartigkeit und individuelle Stärken kennzeichnen dabei nicht nur unsere Projekte, sondern auch jede:n Einzelne:n von uns. Ob im Hoch- und Ingenieurbau, Straßen- und Tiefbau, Brücken- und Tunnelbau, in der Baustoffproduktion, Projektentwicklung oder im Gebäudemanagement - wir denken Bauen weiter, um der innovativste und nachhaltigste Bautechnologiekonzern Europas zu werden. Chancengleichheit, Vielfalt und Inklusion sind integrale Bestandteile dessen, was uns als Unternehmen ausmacht und wie wir arbeiten.\n Gemeinsam setzen wir Vorhaben erfolgreich und partnerschaftlich um und wachsen an neuen Aufgaben. Gemeinsam erschaffen wir Großes. Let's progress!\n\nProjektleiter:in Ingenieurbau\n Dein Beitrag bei uns\n\n• Gesamtleitung von anspruchsvollen Projekten im Ingenieurbau mit hoher technischer Komplexität\n\n• Fachliche und personelle Führung der Projektteams sowie professionelle Steuerung aller internen und externen Schnittstellen\n\n• Sicherstellung einer effizienten Projektabwicklung unter Einhaltung von Kosten, Terminen, Qualitäts und Sicherheitsvorgaben\n\n• Verantwortung für eine vorausschauende Vertrags, Risiko und Nachtragssteuerung\n\n• Proaktive, lösungsorientierte Zusammenarbeit mit Auftraggebenden, Behörden und weiteren Anspruchsgruppen\n\n• Strategische Ressourcenplanung sowie Begleitung der Bauausführung bis zur erfolgreichen Übergabe\n Was für uns zählt\n\n• Mehrjährige Erfahrung als Projektleiter:in im Ingenieurbau\n\n• Erfolgreiche Leitung komplexer Bauvorhaben als Hauptprojektleiter:in oder erfahrene:r Bauführer:in mit einem signifikanten Investitionsvolumen\n\n• Höhere technische Ausbildung im Bauwesen als Bauingenieur:in oder eine gleichwertige Qualifikation\n\n• Ausgeprägte Führungsstärke und Kommunikationskompetenz im Umgang mit diversen Stakeholdern\n\n• Entscheidungsfreude, Verhandlungsgeschick, Durchsetzungsvermögen und eine hohe Eigenverantwortung\n\n• Verhandlungssichere Deutschkenntnisse runden Dein Profil ab\n\nUnser Mehrwert für dich\n Bei uns erwartet dich mehr als nur ein Job - ein beruflicher Weg voller Herausforderungen, Erfolge und die Möglichkeit, die Zukunft innovativ und nachhaltig mitzugestalten. In einem spannenden Arbeitsumfeld bieten wir dir die Chance, an zukunftsweisenden Projekten teilzunehmen und dein Engagement täglich einzubringen. Werde Teil eines motivierten Teams, das gemeinsam Grosses erreichen möchte. Wir legen Wert auf kontinuierliche Weiterbildung und bieten individuelle Entwicklungsmöglichkeiten, um deine Karriere auf das nächste Level zu bringen. Bewirb dich noch heute ganz einfach über unser Online-Formular! Wir freuen uns auf dich!\n:::\n\n• vielfältige Weiterbildungsmöglichkeiten\n\n• Parkplatz\n\n• kostenlose Getränke\n\n• Sportangebote\n\n• wettbewerbsfähige Vergütung\n\n• Mitarbeiterrabatte\n\n• Vereinbarkeit von Familie und Beruf\n\n• Gesundheitsförderung\n\n• Mitarbeiterevents\n\n• gute Verkehrsanbindung\n\nKontakt\n Rexhep Elmazi\n\n+41 44 874 26 00\n Für diese Position ist ein Pre-Employment Screening vorgesehen. Nähere Informationen dazu auf unserer Karrierewebsite .\n\nJetzt bewerben",
+      "descriptionByLocale": {
+        "de": "Bei STRABAG bauen rund 89.000 Menschen an mehr als 2.400 Standorten weltweit am Fortschritt. Einzigartigkeit und individuelle Stärken kennzeichnen dabei nicht nur unsere Projekte, sondern auch jede:n Einzelne:n von uns. Ob im Hoch- und Ingenieurbau, Straßen- und Tiefbau, Brücken- und Tunnelbau, in der Baustoffproduktion, Projektentwicklung oder im Gebäudemanagement - wir denken Bauen weiter, um der innovativste und nachhaltigste Bautechnologiekonzern Europas zu werden. Chancengleichheit, Vielfalt und Inklusion sind integrale Bestandteile dessen, was uns als Unternehmen ausmacht und wie wir arbeiten.\n Gemeinsam setzen wir Vorhaben erfolgreich und partnerschaftlich um und wachsen an neuen Aufgaben. Gemeinsam erschaffen wir Großes. Let's progress!\n\nProjektleiter:in Ingenieurbau\n Dein Beitrag bei uns\n\n• Gesamtleitung von anspruchsvollen Projekten im Ingenieurbau mit hoher technischer Komplexität\n\n• Fachliche und personelle Führung der Projektteams sowie professionelle Steuerung aller internen und externen Schnittstellen\n\n• Sicherstellung einer effizienten Projektabwicklung unter Einhaltung von Kosten, Terminen, Qualitäts und Sicherheitsvorgaben\n\n• Verantwortung für eine vorausschauende Vertrags, Risiko und Nachtragssteuerung\n\n• Proaktive, lösungsorientierte Zusammenarbeit mit Auftraggebenden, Behörden und weiteren Anspruchsgruppen\n\n• Strategische Ressourcenplanung sowie Begleitung der Bauausführung bis zur erfolgreichen Übergabe\n Was für uns zählt\n\n• Mehrjährige Erfahrung als Projektleiter:in im Ingenieurbau\n\n• Erfolgreiche Leitung komplexer Bauvorhaben als Hauptprojektleiter:in oder erfahrene:r Bauführer:in mit einem signifikanten Investitionsvolumen\n\n• Höhere technische Ausbildung im Bauwesen als Bauingenieur:in oder eine gleichwertige Qualifikation\n\n• Ausgeprägte Führungsstärke und Kommunikationskompetenz im Umgang mit diversen Stakeholdern\n\n• Entscheidungsfreude, Verhandlungsgeschick, Durchsetzungsvermögen und eine hohe Eigenverantwortung\n\n• Verhandlungssichere Deutschkenntnisse runden Dein Profil ab\n\nUnser Mehrwert für dich\n Bei uns erwartet dich mehr als nur ein Job - ein beruflicher Weg voller Herausforderungen, Erfolge und die Möglichkeit, die Zukunft innovativ und nachhaltig mitzugestalten. In einem spannenden Arbeitsumfeld bieten wir dir die Chance, an zukunftsweisenden Projekten teilzunehmen und dein Engagement täglich einzubringen. Werde Teil eines motivierten Teams, das gemeinsam Grosses erreichen möchte. Wir legen Wert auf kontinuierliche Weiterbildung und bieten individuelle Entwicklungsmöglichkeiten, um deine Karriere auf das nächste Level zu bringen. Bewirb dich noch heute ganz einfach über unser Online-Formular! Wir freuen uns auf dich!\n:::\n\n• vielfältige Weiterbildungsmöglichkeiten\n\n• Parkplatz\n\n• kostenlose Getränke\n\n• Sportangebote\n\n• wettbewerbsfähige Vergütung\n\n• Mitarbeiterrabatte\n\n• Vereinbarkeit von Familie und Beruf\n\n• Gesundheitsförderung\n\n• Mitarbeiterevents\n\n• gute Verkehrsanbindung\n\nKontakt\n Rexhep Elmazi\n\n+41 44 874 26 00\n Für diese Position ist ein Pre-Employment Screening vorgesehen. Nähere Informationen dazu auf unserer Karrierewebsite .\n\nJetzt bewerben",
+        "it": "Bei STRABAG bauen rund 89.000 Menschen an mehr als 2.400 Standorten weltweit am Fortschritt. Einzigartigkeit und individuelle Stärken kennzeichnen dabei nicht nur unsere Projekte, sondern auch jede:n Einzelne:n von uns. Ob im Hoch- und Ingenieurbau, Straßen- und Tiefbau, Brücken- und Tunnelbau, in der Baustoffproduktion, Projektentwicklung oder im Gebäudemanagement - wir denken Bauen weiter, um der innovativste und nachhaltigste Bautechnologiekonzern Europas zu werden. Chancengleichheit, Vielfalt und Inklusion sind integrale Bestandteile dessen, was uns als Unternehmen ausmacht und wie wir arbeiten.\n Gemeinsam setzen wir Vorhaben erfolgreich und partnerschaftlich um und wachsen an neuen Aufgaben. Gemeinsam erschaffen wir Großes. Let's progress!\n\nProjektleiter:in Ingenieurbau\n Dein Beitrag bei uns\n\n• Gesamtleitung von anspruchsvollen Projekten im Ingenieurbau mit hoher technischer Komplexität\n\n• Fachliche und personelle Führung der Projektteams sowie professionelle Steuerung aller internen und externen Schnittstellen\n\n• Sicherstellung einer effizienten Projektabwicklung unter Einhaltung von Kosten, Terminen, Qualitäts und Sicherheitsvorgaben\n\n• Verantwortung für eine vorausschauende Vertrags, Risiko und Nachtragssteuerung\n\n• Proaktive, lösungsorientierte Zusammenarbeit mit Auftraggebenden, Behörden und weiteren Anspruchsgruppen\n\n• Strategische Ressourcenplanung sowie Begleitung der Bauausführung bis zur erfolgreichen Übergabe\n Was für uns zählt\n\n• Mehrjährige Erfahrung als Projektleiter:in im Ingenieurbau\n\n• Erfolgreiche Leitung komplexer Bauvorhaben als Hauptprojektleiter:in oder erfahrene:r Bauführer:in mit einem signifikanten Investitionsvolumen\n\n• Höhere technische Ausbildung im Bauwesen als Bauingenieur:in oder eine gleichwertige Qualifikation\n\n• Ausgeprägte Führungsstärke und Kommunikationskompetenz im Umgang mit diversen Stakeholdern\n\n• Entscheidungsfreude, Verhandlungsgeschick, Durchsetzungsvermögen und eine hohe Eigenverantwortung\n\n• Verhandlungssichere Deutschkenntnisse runden Dein Profil ab\n\nUnser Mehrwert für dich\n Bei uns erwartet dich mehr als nur ein Job - ein beruflicher Weg voller Herausforderungen, Erfolge und die Möglichkeit, die Zukunft innovativ und nachhaltig mitzugestalten. In einem spannenden Arbeitsumfeld bieten wir dir die Chance, an zukunftsweisenden Projekten teilzunehmen und dein Engagement täglich einzubringen. Werde Teil eines motivierten Teams, das gemeinsam Grosses erreichen möchte. Wir legen Wert auf kontinuierliche Weiterbildung und bieten individuelle Entwicklungsmöglichkeiten, um deine Karriere auf das nächste Level zu bringen. Bewirb dich noch heute ganz einfach über unser Online-Formular! Wir freuen uns auf dich!\n:::\n\n• vielfältige Weiterbildungsmöglichkeiten\n\n• Parkplatz\n\n• kostenlose Getränke\n\n• Sportangebote\n\n• wettbewerbsfähige Vergütung\n\n• Mitarbeiterrabatte\n\n• Vereinbarkeit von Familie und Beruf\n\n• Gesundheitsförderung\n\n• Mitarbeiterevents\n\n• gute Verkehrsanbindung\n\nKontakt\n Rexhep Elmazi\n\n+41 44 874 26 00\n Für diese Position ist ein Pre-Employment Screening vorgesehen. Nähere Informationen dazu auf unserer Karrierewebsite .\n\nJetzt bewerben",
+        "en": "Bei STRABAG bauen rund 89.000 Menschen an mehr als 2.400 Standorten weltweit am Fortschritt. Einzigartigkeit und individuelle Stärken kennzeichnen dabei nicht nur unsere Projekte, sondern auch jede:n Einzelne:n von uns. Ob im Hoch- und Ingenieurbau, Straßen- und Tiefbau, Brücken- und Tunnelbau, in der Baustoffproduktion, Projektentwicklung oder im Gebäudemanagement - wir denken Bauen weiter, um der innovativste und nachhaltigste Bautechnologiekonzern Europas zu werden. Chancengleichheit, Vielfalt und Inklusion sind integrale Bestandteile dessen, was uns als Unternehmen ausmacht und wie wir arbeiten.\n Gemeinsam setzen wir Vorhaben erfolgreich und partnerschaftlich um und wachsen an neuen Aufgaben. Gemeinsam erschaffen wir Großes. Let's progress!\n\nProjektleiter:in Ingenieurbau\n Dein Beitrag bei uns\n\n• Gesamtleitung von anspruchsvollen Projekten im Ingenieurbau mit hoher technischer Komplexität\n\n• Fachliche und personelle Führung der Projektteams sowie professionelle Steuerung aller internen und externen Schnittstellen\n\n• Sicherstellung einer effizienten Projektabwicklung unter Einhaltung von Kosten, Terminen, Qualitäts und Sicherheitsvorgaben\n\n• Verantwortung für eine vorausschauende Vertrags, Risiko und Nachtragssteuerung\n\n• Proaktive, lösungsorientierte Zusammenarbeit mit Auftraggebenden, Behörden und weiteren Anspruchsgruppen\n\n• Strategische Ressourcenplanung sowie Begleitung der Bauausführung bis zur erfolgreichen Übergabe\n Was für uns zählt\n\n• Mehrjährige Erfahrung als Projektleiter:in im Ingenieurbau\n\n• Erfolgreiche Leitung komplexer Bauvorhaben als Hauptprojektleiter:in oder erfahrene:r Bauführer:in mit einem signifikanten Investitionsvolumen\n\n• Höhere technische Ausbildung im Bauwesen als Bauingenieur:in oder eine gleichwertige Qualifikation\n\n• Ausgeprägte Führungsstärke und Kommunikationskompetenz im Umgang mit diversen Stakeholdern\n\n• Entscheidungsfreude, Verhandlungsgeschick, Durchsetzungsvermögen und eine hohe Eigenverantwortung\n\n• Verhandlungssichere Deutschkenntnisse runden Dein Profil ab\n\nUnser Mehrwert für dich\n Bei uns erwartet dich mehr als nur ein Job - ein beruflicher Weg voller Herausforderungen, Erfolge und die Möglichkeit, die Zukunft innovativ und nachhaltig mitzugestalten. In einem spannenden Arbeitsumfeld bieten wir dir die Chance, an zukunftsweisenden Projekten teilzunehmen und dein Engagement täglich einzubringen. Werde Teil eines motivierten Teams, das gemeinsam Grosses erreichen möchte. Wir legen Wert auf kontinuierliche Weiterbildung und bieten individuelle Entwicklungsmöglichkeiten, um deine Karriere auf das nächste Level zu bringen. Bewirb dich noch heute ganz einfach über unser Online-Formular! Wir freuen uns auf dich!\n:::\n\n• vielfältige Weiterbildungsmöglichkeiten\n\n• Parkplatz\n\n• kostenlose Getränke\n\n• Sportangebote\n\n• wettbewerbsfähige Vergütung\n\n• Mitarbeiterrabatte\n\n• Vereinbarkeit von Familie und Beruf\n\n• Gesundheitsförderung\n\n• Mitarbeiterevents\n\n• gute Verkehrsanbindung\n\nKontakt\n Rexhep Elmazi\n\n+41 44 874 26 00\n Für diese Position ist ein Pre-Employment Screening vorgesehen. Nähere Informationen dazu auf unserer Karrierewebsite .\n\nJetzt bewerben",
+        "fr": "Bei STRABAG bauen rund 89.000 Menschen an mehr als 2.400 Standorten weltweit am Fortschritt. Einzigartigkeit und individuelle Stärken kennzeichnen dabei nicht nur unsere Projekte, sondern auch jede:n Einzelne:n von uns. Ob im Hoch- und Ingenieurbau, Straßen- und Tiefbau, Brücken- und Tunnelbau, in der Baustoffproduktion, Projektentwicklung oder im Gebäudemanagement - wir denken Bauen weiter, um der innovativste und nachhaltigste Bautechnologiekonzern Europas zu werden. Chancengleichheit, Vielfalt und Inklusion sind integrale Bestandteile dessen, was uns als Unternehmen ausmacht und wie wir arbeiten.\n Gemeinsam setzen wir Vorhaben erfolgreich und partnerschaftlich um und wachsen an neuen Aufgaben. Gemeinsam erschaffen wir Großes. Let's progress!\n\nProjektleiter:in Ingenieurbau\n Dein Beitrag bei uns\n\n• Gesamtleitung von anspruchsvollen Projekten im Ingenieurbau mit hoher technischer Komplexität\n\n• Fachliche und personelle Führung der Projektteams sowie professionelle Steuerung aller internen und externen Schnittstellen\n\n• Sicherstellung einer effizienten Projektabwicklung unter Einhaltung von Kosten, Terminen, Qualitäts und Sicherheitsvorgaben\n\n• Verantwortung für eine vorausschauende Vertrags, Risiko und Nachtragssteuerung\n\n• Proaktive, lösungsorientierte Zusammenarbeit mit Auftraggebenden, Behörden und weiteren Anspruchsgruppen\n\n• Strategische Ressourcenplanung sowie Begleitung der Bauausführung bis zur erfolgreichen Übergabe\n Was für uns zählt\n\n• Mehrjährige Erfahrung als Projektleiter:in im Ingenieurbau\n\n• Erfolgreiche Leitung komplexer Bauvorhaben als Hauptprojektleiter:in oder erfahrene:r Bauführer:in mit einem signifikanten Investitionsvolumen\n\n• Höhere technische Ausbildung im Bauwesen als Bauingenieur:in oder eine gleichwertige Qualifikation\n\n• Ausgeprägte Führungsstärke und Kommunikationskompetenz im Umgang mit diversen Stakeholdern\n\n• Entscheidungsfreude, Verhandlungsgeschick, Durchsetzungsvermögen und eine hohe Eigenverantwortung\n\n• Verhandlungssichere Deutschkenntnisse runden Dein Profil ab\n\nUnser Mehrwert für dich\n Bei uns erwartet dich mehr als nur ein Job - ein beruflicher Weg voller Herausforderungen, Erfolge und die Möglichkeit, die Zukunft innovativ und nachhaltig mitzugestalten. In einem spannenden Arbeitsumfeld bieten wir dir die Chance, an zukunftsweisenden Projekten teilzunehmen und dein Engagement täglich einzubringen. Werde Teil eines motivierten Teams, das gemeinsam Grosses erreichen möchte. Wir legen Wert auf kontinuierliche Weiterbildung und bieten individuelle Entwicklungsmöglichkeiten, um deine Karriere auf das nächste Level zu bringen. Bewirb dich noch heute ganz einfach über unser Online-Formular! Wir freuen uns auf dich!\n:::\n\n• vielfältige Weiterbildungsmöglichkeiten\n\n• Parkplatz\n\n• kostenlose Getränke\n\n• Sportangebote\n\n• wettbewerbsfähige Vergütung\n\n• Mitarbeiterrabatte\n\n• Vereinbarkeit von Familie und Beruf\n\n• Gesundheitsförderung\n\n• Mitarbeiterevents\n\n• gute Verkehrsanbindung\n\nKontakt\n Rexhep Elmazi\n\n+41 44 874 26 00\n Für diese Position ist ein Pre-Employment Screening vorgesehen. Nähere Informationen dazu auf unserer Karrierewebsite .\n\nJetzt bewerben"
+      },
+      "needsRetranslation": true,
+      "location": "Schlieren",
+      "canton": "ZH",
+      "url": "https://www.jobs.ch/en/vacancies/detail/1407ac71-526e-4e37-8ab6-b1ff309db3ef/",
+      "source": "STRABAG AG Dedicated Parser (jobs.ch)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:53:29.179Z",
+      "addressLocality": "Schlieren",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "8652",
+      "streetAddress": "Schlieren",
+      "category": "Ingegneria",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "senior",
+      "sector": "Edilizia / Costruzioni",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://www.jobs.ch/en/vacancies/detail/1407ac71-526e-4e37-8ab6-b1ff309db3ef/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "projektleiter-in-ingenieurbau-strabag-schlieren"
+        ]
+      },
+      "previousSlugs": [
+        "projektleiter-in-ingenieurbau-strabag-schlieren"
+      ],
+      "salaryMin": 113500,
+      "salaryMax": 172000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 113500,
+          "maxValue": 172000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T03:53:29.179Z"
     }
   ]
 }
