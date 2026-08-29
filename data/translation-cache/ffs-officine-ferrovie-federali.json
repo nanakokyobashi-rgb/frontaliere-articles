@@ -4553,9 +4553,7 @@
     },
     "cachedAt": "2026-06-24T12:14:42.816Z"
   },
-  "responsabile-del-treno-cross-entry-in-ffs-officine-ferrovie-federali-muttenz": {
-    "cachedAt": "2026-08-29T15:23:52.587Z"
-  },
+  "responsabile-del-treno-cross-entry-in-ffs-officine-ferrovie-federali-muttenz": {},
   "assistente-al-cliente-ffs-officine-ferrovie-federali-luzern": {
     "hash": "62eaabc00af9b09b0003d95f50ff4ca994f9cb094906b5ad9b10c9b1b41eef35",
     "translations": {
@@ -10046,12 +10044,8 @@
     },
     "cachedAt": "2026-08-29T15:23:52.533Z"
   },
-  "responsabile-di-progetto-in-ingegneria-civile-ffs-officine-ferrovie-federali-renens-vd": {
-    "cachedAt": "2026-08-29T15:23:52.560Z"
-  },
-  "elettricista-a-automatico-a-per-l-ingresso-nel-settore-degli-impianti-di-sicurezza-ferroviaria-ffs-officine-ferrovie-federali-sargans": {
-    "cachedAt": "2026-08-29T15:23:52.582Z"
-  },
+  "responsabile-di-progetto-in-ingegneria-civile-ffs-officine-ferrovie-federali-renens-vd": {},
+  "elettricista-a-automatico-a-per-l-ingresso-nel-settore-degli-impianti-di-sicurezza-ferroviaria-ffs-officine-ferrovie-federali-sargans": {},
   "tecnico-in-impianti-di-sicurezza-all-esterno-meccanico-di-produzione-in-polimeccanico-in-fabbro-in-ffs-officine-ferrovie-federali-deutschschweiz": {
     "hash": "f2d34b16e79a8a530e3434da4573bdf90fe889fc318cef9c729ab0575611ea4a",
     "translations": {
@@ -10070,9 +10064,7 @@
     },
     "cachedAt": "2026-08-29T15:23:52.584Z"
   },
-  "responsabile-del-treno-cross-entry-in-ffs-officine-ferrovie-federali-olten": {
-    "cachedAt": "2026-08-29T15:23:52.589Z"
-  },
+  "responsabile-del-treno-cross-entry-in-ffs-officine-ferrovie-federali-olten": {},
   "responsabile-di-progetto-gestione-aziendale-ffs-officine-ferrovie-federali-bern": {
     "hash": "26c8ab270b1df2281db2ce1bda4ade95e4facaed51d695da8e62d57d6aef632b",
     "translations": {

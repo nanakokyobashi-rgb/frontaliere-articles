@@ -14072,5 +14072,161 @@
         "pending": 211
       }
     ]
+  },
+  {
+    "timestamp": "2026-08-29T12:20:32.277Z",
+    "label": "before",
+    "total": 30386,
+    "needsRetranslation": 17073,
+    "suppressed": 57,
+    "incomplete": 16435,
+    "complete": 13951,
+    "slotsPresent": 13951,
+    "flaggedAmongSlotsPresent": 1771,
+    "verifiedTranslated": 12180,
+    "sourceCopyExcused": 626,
+    "languageVerified": null,
+    "missingByLocale": {
+      "it": 3295,
+      "en": 2763,
+      "de": 962,
+      "fr": 3002
+    },
+    "queueAge": {
+      "count": 17073,
+      "withTimestamp": 17073,
+      "oldestAgeDays": 138.1,
+      "p50AgeDays": 15.6,
+      "p90AgeDays": 72.9,
+      "buckets": {
+        "0-7d": 6413,
+        "7-30d": 5649,
+        "30-90d": 4071,
+        "90-180d": 940,
+        "180d+": 0
+      },
+      "alert": false,
+      "alertDays": 150
+    },
+    "topPending": [
+      {
+        "company": "fachkraft.ch GmbH",
+        "pending": 3521
+      },
+      {
+        "company": "Coop",
+        "pending": 1379
+      },
+      {
+        "company": "Roche",
+        "pending": 754
+      },
+      {
+        "company": "Fitnesspark",
+        "pending": 411
+      },
+      {
+        "company": "TRAVECO Transporte AG",
+        "pending": 332
+      },
+      {
+        "company": "Stadt Zürich",
+        "pending": 283
+      },
+      {
+        "company": "Confederazione Svizzera",
+        "pending": 282
+      },
+      {
+        "company": "BKW",
+        "pending": 226
+      },
+      {
+        "company": "Coop Genossenschaft",
+        "pending": 214
+      },
+      {
+        "company": "Sulzer",
+        "pending": 211
+      }
+    ]
+  },
+  {
+    "timestamp": "2026-08-29T14:43:30.001Z",
+    "label": "after",
+    "total": 30386,
+    "needsRetranslation": 15323,
+    "suppressed": 62,
+    "incomplete": 16435,
+    "complete": 13951,
+    "slotsPresent": 13951,
+    "flaggedAmongSlotsPresent": 0,
+    "verifiedTranslated": 13951,
+    "sourceCopyExcused": 626,
+    "languageVerified": null,
+    "missingByLocale": {
+      "it": 3295,
+      "en": 2763,
+      "de": 962,
+      "fr": 3002
+    },
+    "queueAge": {
+      "count": 15323,
+      "withTimestamp": 15323,
+      "oldestAgeDays": 138.2,
+      "p50AgeDays": 12.2,
+      "p90AgeDays": 59.1,
+      "buckets": {
+        "0-7d": 6297,
+        "7-30d": 4995,
+        "30-90d": 3419,
+        "90-180d": 612,
+        "180d+": 0
+      },
+      "alert": false,
+      "alertDays": 150
+    },
+    "topPending": [
+      {
+        "company": "fachkraft.ch GmbH",
+        "pending": 3521
+      },
+      {
+        "company": "Coop",
+        "pending": 1379
+      },
+      {
+        "company": "Roche",
+        "pending": 754
+      },
+      {
+        "company": "Fitnesspark",
+        "pending": 411
+      },
+      {
+        "company": "TRAVECO Transporte AG",
+        "pending": 332
+      },
+      {
+        "company": "Stadt Zürich",
+        "pending": 283
+      },
+      {
+        "company": "Confederazione Svizzera",
+        "pending": 282
+      },
+      {
+        "company": "BKW",
+        "pending": 226
+      },
+      {
+        "company": "Coop Genossenschaft",
+        "pending": 214
+      },
+      {
+        "company": "Sulzer",
+        "pending": 211
+      }
+    ]
   }
 ]
