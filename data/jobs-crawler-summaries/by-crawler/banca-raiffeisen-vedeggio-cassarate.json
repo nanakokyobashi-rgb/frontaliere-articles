@@ -1,17 +1,18 @@
 {
   "key": "banca-raiffeisen-vedeggio-cassarate",
   "label": "Raiffeisen VC",
-  "generatedAt": "2026-08-29T03:13:56.803Z",
+  "generatedAt": "2026-08-29T14:22:38.524Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 34455,
-  "avgDurationMs": 34455,
+  "durationMs": 39360,
+  "avgDurationMs": 39360,
   "durationHistory": [
     58698,
-    34455
+    34455,
+    39360
   ],
   "newJobs": [],
   "updatedJobs": [],
