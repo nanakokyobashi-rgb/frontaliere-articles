@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hermes",
-  "assembledAt": "2026-08-28T21:17:05.075Z",
+  "assembledAt": "2026-08-29T03:14:40.000Z",
   "jobs": [
     {
       "id": "hermes-c29e4ff59493",
@@ -33,7 +33,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/21421/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:17:02.469Z",
+      "crawledAt": "2026-08-29T03:14:37.194Z",
       "addressLocality": "Zurich, Switzerland",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -60,7 +60,6 @@
         ]
       },
       "firstSeenAt": "2026-06-11T07:53:06.117Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -72,7 +71,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hermes-72295ebf73a5",
@@ -105,7 +105,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/21857/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:17:01.868Z",
+      "crawledAt": "2026-08-29T03:14:36.541Z",
       "addressLocality": "Zurich, Switzerland",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -197,7 +197,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/22458/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:17:01.270Z",
+      "crawledAt": "2026-08-29T03:14:35.879Z",
       "addressLocality": "Geneve, Geneva, Switzerland",
       "postalCode": "1204",
       "addressRegion": "Genève",
@@ -269,7 +269,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/23011/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:17:00.664Z",
+      "crawledAt": "2026-08-29T03:14:35.234Z",
       "addressLocality": "Zurich, Switzerland",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -300,7 +300,6 @@
         ]
       },
       "firstSeenAt": "2026-07-26T10:53:20.130Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -312,7 +311,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hermes-da512457b984",
@@ -345,7 +345,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/23533/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:17:00.038Z",
+      "crawledAt": "2026-08-29T03:14:34.550Z",
       "addressLocality": "Brügg BE, Bern, Switzerland",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -407,7 +407,7 @@
       "url": "https://talents.hermes.com/en/sites/CX/jobs/23530/",
       "source": "Hermès Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:16:59.446Z",
+      "crawledAt": "2026-08-29T03:14:33.874Z",
       "addressLocality": "Brügg BE, Bern, Switzerland",
       "addressRegion": "AG",
       "addressCountry": "CH",
