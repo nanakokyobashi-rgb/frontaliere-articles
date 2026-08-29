@@ -318,7 +318,7 @@
     "https://team.lidl.ch/it/jobs/ch_venditore-venditrice-con-responsabilita-del-turno-m-f-d-60-80-st.-moritz-728439"
   ],
   "notes": "Dedicated Lidl crawler seeds from team.lidl.ch LiCa search API (/it/api/v1/search), fetched UNFILTERED and paginated CH-wide (all 26 cantons); per-job canton inferred from the city signal.",
-  "updatedAt": "2026-08-28T20:55:06.060Z",
+  "updatedAt": "2026-08-29T03:13:13.255Z",
   "seedMetaByUrl": {
     "https://team.lidl.ch/de/jobs/lehrstelle-detailhandel-eba-oder-efz-kreuzlingen-727482": {
       "location": "Kreuzlingen",
@@ -2030,15 +2030,6 @@
       "companyDomain": "lidl.ch",
       "contract": "Part-time"
     },
-    "https://team.lidl.ch/de/jobs/mitarbeiter-mitarbeiterin-reinigung-m-w-d-20-seewen-685896": {
-      "location": "Seewen",
-      "addressLocality": "Seewen",
-      "canton": "SO",
-      "country": "CH",
-      "company": "Lidl Svizzera",
-      "companyDomain": "lidl.ch",
-      "contract": "Part-time"
-    },
     "https://team.lidl.ch/de/jobs/verkaeufer-verkaeuferin-mit-schichtverantwortung-m-w-d-60-80-seewen-685900": {
       "location": "Seewen",
       "addressLocality": "Seewen",
@@ -2058,6 +2049,15 @@
       "contract": "Part-time"
     },
     "https://team.lidl.ch/de/jobs/verkaeufer-verkaeuferin-mit-schichtverantwortung-m-w-d-60-80-seewen-685906": {
+      "location": "Seewen",
+      "addressLocality": "Seewen",
+      "canton": "SO",
+      "country": "CH",
+      "company": "Lidl Svizzera",
+      "companyDomain": "lidl.ch",
+      "contract": "Part-time"
+    },
+    "https://team.lidl.ch/de/jobs/mitarbeiter-mitarbeiterin-reinigung-m-w-d-20-seewen-685896": {
       "location": "Seewen",
       "addressLocality": "Seewen",
       "canton": "SO",
