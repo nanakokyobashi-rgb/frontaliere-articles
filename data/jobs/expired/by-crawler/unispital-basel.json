@@ -25,7 +25,7 @@
       "fr": "dipl-pflegefachfrau-pflegefachmann-hf-fh-unispital-basel-ch"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T15:14:10.894Z",
+    "expiredAt": "2026-08-29T23:19:47.419Z",
     "previousSlugs": [
       "dipl-pflegefachfrau-pflegefachmann-hf-fh-unispital-basel-ch",
       "dipl-pflegefachfrau-pflegefachmann-hf-fh-universitatsspital-basel-basel"
@@ -68,7 +68,7 @@
       "fr": "dipl-pflegefachfrau-pflegefachmann-hf-fh-unispital-basel-ch-2"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T15:14:10.894Z",
+    "expiredAt": "2026-08-29T23:19:47.419Z",
     "previousSlugs": [
       "dipl-pflegefachfrau-pflegefachmann-hf-fh-unispital-basel-ch-2",
       "dipl-pflegefachfrau-pflegefachmann-hf-fh-unispital-basel-ch",
@@ -1470,44 +1470,6 @@
     "previousSlugsByLocale": {
       "it": [
         "informatikerin-informatiker-efz-fachrichtung-applikationsentwicklung-lehrstelle-unispital"
-      ]
-    },
-    "postalCode": "4031",
-    "salaryMin": 52000,
-    "salaryMax": 78500,
-    "salaryCurrency": "CHF",
-    "salaryPeriod": "YEAR"
-  },
-  {
-    "slug": "praktikantin-praktikant-wms-lohnadministration-universitatsspital-basel-basel",
-    "title": "Praktikantin / Praktikant WMS Lohnadministration",
-    "titleByLocale": {
-      "it": "Internship / Internship WMS Wage Amministrazione",
-      "en": "Internship / Internship WMS Wage Administration",
-      "de": "Praktikantin / Praktikant WMS Lohnadministration",
-      "fr": "Administration des salaires des stagiaires et des stagiaires"
-    },
-    "company": "Universitätsspital Basel",
-    "companyKey": "unispital-basel",
-    "location": "Basel",
-    "addressLocality": "Basel",
-    "descriptionByLocale": {
-      "it": "Compiti:\n• Preparazione di forme e applicazioni\n• Elaborazione di varie indennità salariali in SAP HCM\n• Sostegno al trattamento delle variazioni salariali in SAP HCM\n• Trattamento amministrativo dei certificati di uscita e degli straordinari nonché dei certificati del datore di lavoro\n• Lavorazione e distribuzione postali agli organismi competenti\n• Archiviazione di documenti (file del personale elettronico) in SAP HCM\n• Compiti amministrativi generali, come la gestione della casella di posta centrale\n• Contatto con clienti interni ed esterni Requisiti\n• Attualmente stai completando il terzo anno della scuola media economica\n• Hai un tocco per i numeri\n• Sei flessibile e piace lavorare in un team\n• Ti piace il contatto con le persone\n• Buona conoscenza dei programmi di ufficio comuni Offriamo:\n• corsi sportivi gratuiti (compresa la palestra), sconti per lo shopping, lo sport e il tempo libero, feste dei dipendenti, eventi di apprendimento e, e, e!\n• Inizio morbido grazie alla settimana introduttiva con conoscere l'USB e gli altri studenti\n• Supporto attivo dei formatori professionali, della tua squadra e degli studenti più anziani – #TeamUSB è lì per te\n• Posizione nel centro della città – veloce sulle rive del Reno e nel centro della città\n• un bellissimo giardino ospedaliero per rilassarsi e confueling\n• Accoglienti ristoranti e caffè con prezzi scontati per voi",
-      "en": "Tasks:\n• Preparation of forms and applications\n• Processing of various wage allowances in SAP HCM\n• Support in the processing of wage-related changes in SAP HCM\n• Administrative processing of exit certificates and overtime as well as employer certificates\n• Postal processing and distribution to relevant bodies\n• Document storage (electronic personnel file) in SAP HCM\n• General administrative tasks, such as handling the central e-mailbox\n• Contact with internal and external customers Requirements\n• You are currently completing the third year of the economic middle school\n• You have a flair for numbers\n• You are flexible and like to work in a team\n• You enjoy contact with people\n• Good knowledge of common office programs We offer:\n• free sports courses (including gym), discounts for shopping, sports and leisure, employee parties, learning events and, and, and!\n• Soft start thanks to introductory week with getting to know the USB and the other learners\n• Active support from the vocational trainers, your team and older learners – #TeamUSB is there for you\n• Location in the middle of the city – fast on the banks of the Rhine and in the city centre\n• a beautiful hospital garden for chilling and refueling\n• Cozy restaurants & cafes with discounted prices for you",
-      "de": "Aufgaben:\n• Erstellen von Formularen und Anträgen\n• Bearbeitung von diversen Lohnzulagen im SAP HCM\n• Unterstützung bei der Verarbeitung von lohnrelevanten Umbuchungen im SAP HCM\n• Administrative Bearbeitung von Austrittsscheinen und Überstunden sowie Arbeitgeberbescheinigungen\n• Postverarbeitung und Verteilung an die entsprechenden Stellen\n• Dokumentenablage (elektronische Personalakte) im SAP HCM\n• Allgemeine administrative Aufgaben, wie die Bearbeitung des zentralen E-Mailpostfachs\n• Kontakt zu internen und externen Kunden Anforderungen:\n• Du absolvierst zurzeit das dritte Jahr der Wirtschaftsmittelschule\n• Du hast ein Flair für Zahlen\n• Du bist flexibel und arbeitest gerne in einem Team\n• Du hast Freude am Kontakt mit Menschen\n• Gute Kenntnisse der gängigen Office-Programme Wir bieten:\n• gratis Sportkurse (inkl. Fitnessstudio), Vergünstigungen für Shopping, Sport und Freizeit, Mitarbeitendenfeste, Lernenden-Event und, und, und!\n• sanfter Start dank Einführungswoche mit Kennenlernen des USB und der anderen Lernenden\n• tatkräftige Unterstützung durch die Berufsbildner*innen, dein Team und die älteren Lernenden – #TeamUSB ist für dich da\n• Standort mitten in der Stadt – schnell am Rheinufer und in der Innenstadt\n• ein wunderschöner Spitalgarten zum Chillen und Auftanken\n• gemütliche Restaurants & Cafés mit für dich vergünstigten Preisen",
-      "fr": "Tâches :\n• Préparation des formulaires et des demandes\n• Traitement de diverses indemnités salariales dans SAP HCM\n• Soutien au traitement des changements liés aux salaires dans SAP HCM\n• Traitement administratif des certificats de sortie et des heures supplémentaires ainsi que des certificats d'employeur\n• Traitement postal et distribution aux organes compétents\n• Stockage de documents (fichier personnel électronique) dans SAP HCM\n• Tâches administratives générales, telles que le traitement de la boîte électronique centrale\n• Contact avec les clients internes et externes Exigences\n• Vous terminez actuellement la troisième année du collège économique\n• Vous avez un flair pour les chiffres\n• Vous êtes flexible et aimez travailler en équipe\n• Vous aimez le contact avec les gens\n• Bonne connaissance des programmes communs de bureau Nous offrons:\n• des cours de sport gratuits (y compris la gym), des réductions pour le shopping, les sports et les loisirs, des fêtes d'employés, des événements d'apprentissage et, et!\n• Début doux grâce à la semaine d'introduction avec apprendre à connaître l'USB et les autres apprenants\n• Soutien actif des formateurs professionnels, de votre équipe et des apprenants plus âgés – #TeamUSB est là pour vous\n• Emplacement au milieu de la ville – rapide sur les rives du Rhin et dans le centre-ville\n• un beau jardin hospitalier pour le refroidissement et le ravitaillement\n• Restaurants et cafés confortables avec des prix réduits pour vous"
-    },
-    "slugByLocale": {
-      "de": "praktikantin-praktikant-wms-lohnadministration-unispital-basel-ch"
-    },
-    "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-07-03T10:52:30.643Z",
-    "previousSlugs": [
-      "praktikantin-praktikant-wms-lohnadministration-unispital-basel-ch"
-    ],
-    "previousSlugsByLocale": {
-      "it": [
-        "praktikantin-praktikant-wms-lohnadministration-unispital-basel-ch"
       ]
     },
     "postalCode": "4031",
