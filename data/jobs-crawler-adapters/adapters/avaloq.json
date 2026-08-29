@@ -11,13 +11,19 @@
     "https://www.avaloq.com/careers/job-openings"
   ],
   "notes": "Dedicated Avaloq crawler parses the public careers listing and job detail pages, filtering vacancies in Ticino and Grigioni.",
-  "updatedAt": "2026-08-29T03:38:44.877Z",
+  "updatedAt": "2026-08-29T15:05:06.316Z",
   "seedMetaByUrl": {
     "https://www.avaloq.com/careers/job-openings/744000146132529": {
       "location": "Bioggio",
       "canton": "TI",
       "company": "Avaloq",
       "postedDate": "2026-08-28"
+    },
+    "https://www.avaloq.com/careers/job-openings/744000145300780": {
+      "location": "Bioggio",
+      "canton": "TI",
+      "company": "Avaloq",
+      "postedDate": "2026-08-24"
     },
     "https://www.avaloq.com/careers/job-openings/744000146128259": {
       "location": "Zurich",
@@ -37,12 +43,6 @@
       "company": "Avaloq",
       "postedDate": "2026-08-21"
     },
-    "https://www.avaloq.com/careers/job-openings/744000145300780": {
-      "location": "Bioggio",
-      "canton": "TI",
-      "company": "Avaloq",
-      "postedDate": "2026-08-24"
-    },
     "https://www.avaloq.com/careers/job-openings/744000144490099": {
       "location": "Bioggio",
       "canton": "TI",
@@ -54,12 +54,6 @@
       "canton": "ZH",
       "company": "Avaloq",
       "postedDate": "2026-08-21"
-    },
-    "https://www.avaloq.com/careers/job-openings/744000142696689": {
-      "location": "Bioggio",
-      "canton": "TI",
-      "company": "Avaloq",
-      "postedDate": "2026-08-10"
     },
     "https://www.avaloq.com/careers/job-openings/744000144473281": {
       "location": "Bioggio",
@@ -73,17 +67,17 @@
       "company": "Avaloq",
       "postedDate": "2026-08-10"
     },
+    "https://www.avaloq.com/careers/job-openings/744000142696689": {
+      "location": "Bioggio",
+      "canton": "TI",
+      "company": "Avaloq",
+      "postedDate": "2026-08-10"
+    },
     "https://www.avaloq.com/careers/job-openings/744000142059569": {
       "location": "Bioggio",
       "canton": "TI",
       "company": "Avaloq",
       "postedDate": "2026-08-07"
-    },
-    "https://www.avaloq.com/careers/job-openings/744000141854799": {
-      "location": "Bioggio",
-      "canton": "TI",
-      "company": "Avaloq",
-      "postedDate": "2026-08-06"
     },
     "https://www.avaloq.com/careers/job-openings/744000142058785": {
       "location": "Bioggio",
@@ -92,6 +86,12 @@
       "postedDate": "2026-08-07"
     },
     "https://www.avaloq.com/careers/job-openings/744000141922129": {
+      "location": "Bioggio",
+      "canton": "TI",
+      "company": "Avaloq",
+      "postedDate": "2026-08-06"
+    },
+    "https://www.avaloq.com/careers/job-openings/744000141854799": {
       "location": "Bioggio",
       "canton": "TI",
       "company": "Avaloq",
@@ -109,6 +109,12 @@
       "company": "Avaloq",
       "postedDate": "2026-08-05"
     },
+    "https://www.avaloq.com/careers/job-openings/744000140870500": {
+      "location": "Bioggio",
+      "canton": "TI",
+      "company": "Avaloq",
+      "postedDate": "2026-07-31"
+    },
     "https://www.avaloq.com/careers/job-openings/744000141509120": {
       "location": "Bioggio",
       "canton": "TI",
@@ -121,25 +127,19 @@
       "company": "Avaloq",
       "postedDate": "2026-07-29"
     },
-    "https://www.avaloq.com/careers/job-openings/744000140870500": {
-      "location": "Bioggio",
-      "canton": "TI",
-      "company": "Avaloq",
-      "postedDate": "2026-07-31"
-    },
     "https://www.avaloq.com/careers/job-openings/744000138866430": {
       "location": "Zurich",
       "canton": "ZH",
       "company": "Avaloq",
       "postedDate": "2026-07-21"
     },
-    "https://www.avaloq.com/careers/job-openings/744000135518292": {
+    "https://www.avaloq.com/careers/job-openings/744000135525805": {
       "location": "Bioggio",
       "canton": "TI",
       "company": "Avaloq",
       "postedDate": "2026-07-02"
     },
-    "https://www.avaloq.com/careers/job-openings/744000135525805": {
+    "https://www.avaloq.com/careers/job-openings/744000135518292": {
       "location": "Bioggio",
       "canton": "TI",
       "company": "Avaloq",
