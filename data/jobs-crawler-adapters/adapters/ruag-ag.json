@@ -70,7 +70,7 @@
     "https://jobs.ruag.ch/offene-stellen/lead-architekt-network-und-richtfunk-engineering/ffebe23e-4a70-4cd5-9182-f9a260671e86"
   ],
   "notes": "Dedicated RUAG crawler uses official jobs.ruag.ch detail pages and recursive discovery from internal similar-job links because the public listing often returns 400.",
-  "updatedAt": "2026-08-28T21:17:13.835Z",
+  "updatedAt": "2026-08-29T03:37:38.486Z",
   "seedMetaByUrl": {
     "https://jobs.ruag.ch/offene-stellen/betriebselektrikerin-faciliy-manager-technics/190b7508-d7e8-403d-b49f-7c2f57a59965": {
       "location": "Altdorf",
