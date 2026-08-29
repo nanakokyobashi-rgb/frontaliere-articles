@@ -1,6 +1,6 @@
 {
   "crawlerKey": "tally-weijl",
-  "assembledAt": "2026-08-28T21:03:10.434Z",
+  "assembledAt": "2026-08-29T03:22:34.434Z",
   "jobs": [
     {
       "id": "tally-weijl-7934e67f86db",
@@ -33,7 +33,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0pkc9/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:07.203Z",
+      "crawledAt": "2026-08-29T03:22:31.719Z",
       "addressLocality": "Aarau",
       "addressCountry": "CH",
       "country": "CH",
@@ -111,7 +111,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zdzl/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:06.629Z",
+      "crawledAt": "2026-08-29T03:22:31.154Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -189,7 +189,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0vblw/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:05.870Z",
+      "crawledAt": "2026-08-29T03:22:30.580Z",
       "addressLocality": "Thun",
       "addressCountry": "CH",
       "country": "CH",
@@ -267,7 +267,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0plk3/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:05.282Z",
+      "crawledAt": "2026-08-29T03:22:30.027Z",
       "addressLocality": "Schaffhausen",
       "addressCountry": "CH",
       "country": "CH",
@@ -345,7 +345,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0pqvj/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:04.735Z",
+      "crawledAt": "2026-08-29T03:22:29.357Z",
       "addressLocality": "Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -407,7 +407,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:50.216Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -420,7 +419,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SO"
+      "addressRegion": "SO",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-f4dd9e184bb9",
@@ -453,7 +453,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0p815/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:04.191Z",
+      "crawledAt": "2026-08-29T03:22:28.674Z",
       "addressLocality": "Basel",
       "addressCountry": "CH",
       "country": "CH",
@@ -517,7 +517,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:50.870Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -530,7 +529,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BS"
+      "addressRegion": "BS",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-acd4bfc45a27",
@@ -563,7 +563,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zh5o/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:03.621Z",
+      "crawledAt": "2026-08-29T03:22:28.015Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -627,7 +627,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:51.502Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -640,7 +639,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-8adfd90046bb",
@@ -673,7 +673,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zdzo/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:03.040Z",
+      "crawledAt": "2026-08-29T03:22:27.420Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -735,7 +735,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0ptv7/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:02.484Z",
+      "crawledAt": "2026-08-29T03:22:26.877Z",
       "addressLocality": "Aarau",
       "addressCountry": "CH",
       "country": "CH",
@@ -795,7 +795,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:46.588Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -808,7 +807,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-a19dcc58f55c",
@@ -841,7 +841,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0ptvi/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:01.668Z",
+      "crawledAt": "2026-08-29T03:22:26.217Z",
       "addressLocality": "Thun",
       "addressCountry": "CH",
       "country": "CH",
@@ -899,7 +899,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:47.230Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -912,7 +911,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-13e4d44ef67f",
@@ -945,7 +945,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0pc25/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:01.006Z",
+      "crawledAt": "2026-08-29T03:22:25.659Z",
       "addressLocality": "Olten",
       "addressCountry": "CH",
       "country": "CH",
@@ -1004,7 +1004,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:47.809Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -1017,7 +1016,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SO"
+      "addressRegion": "SO",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-cbb38c20b361",
@@ -1050,7 +1050,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zhvv/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:00.432Z",
+      "crawledAt": "2026-08-29T03:22:24.994Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1109,7 +1109,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:48.369Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -1122,7 +1121,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "LU"
+      "addressRegion": "LU",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-1f4bede8f068",
@@ -1155,7 +1155,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zs9i/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:59.827Z",
+      "crawledAt": "2026-08-29T03:22:24.404Z",
       "addressLocality": "Winterthur",
       "addressCountry": "CH",
       "country": "CH",
@@ -1184,7 +1184,6 @@
         ]
       },
       "firstSeenAt": "2026-07-10T12:01:48.556Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1197,7 +1196,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-4a9ab1655229",
@@ -1230,7 +1230,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0z2y8/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:59.314Z",
+      "crawledAt": "2026-08-29T03:22:23.811Z",
       "addressLocality": "Baden",
       "addressCountry": "CH",
       "country": "CH",
@@ -1262,7 +1262,6 @@
         ]
       },
       "firstSeenAt": "2026-04-17T22:21:29.384Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -1275,7 +1274,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-bf3e64bf2328",
@@ -1308,7 +1308,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0z2yl/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:58.777Z",
+      "crawledAt": "2026-08-29T03:22:23.161Z",
       "addressLocality": "Chur",
       "addressCountry": "CH",
       "country": "CH",
@@ -1340,7 +1340,6 @@
         ]
       },
       "firstSeenAt": "2026-05-04T22:44:04.893Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1353,7 +1352,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GR"
+      "addressRegion": "GR",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-d2036b97781a",
@@ -1386,7 +1386,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zrsv/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:58.219Z",
+      "crawledAt": "2026-08-29T03:22:22.615Z",
       "addressLocality": "St. Gallen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1418,7 +1418,6 @@
         ]
       },
       "firstSeenAt": "2026-07-11T10:26:08.976Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1431,7 +1430,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SG"
+      "addressRegion": "SG",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-69ea15cf6002",
@@ -1464,7 +1464,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zrsp/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:57.662Z",
+      "crawledAt": "2026-08-29T03:22:22.028Z",
       "addressLocality": "Wil",
       "addressCountry": "CH",
       "country": "CH",
@@ -1496,7 +1496,6 @@
         ]
       },
       "firstSeenAt": "2026-07-11T10:26:08.409Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1509,7 +1508,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SG"
+      "addressRegion": "SG",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-ce4ee4fffcb3",
@@ -1542,7 +1542,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zdzc/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:57.090Z",
+      "crawledAt": "2026-08-29T03:22:21.479Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1620,7 +1620,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zs9r/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:56.433Z",
+      "crawledAt": "2026-08-29T03:22:20.817Z",
       "addressLocality": "Aarau",
       "addressCountry": "CH",
       "country": "CH",
@@ -1689,7 +1689,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:45.359Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -1702,7 +1701,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-4b18b5fa4e7e",
@@ -1735,7 +1735,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0pi2p/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:55.915Z",
+      "crawledAt": "2026-08-29T03:22:20.220Z",
       "addressLocality": "Thun",
       "addressCountry": "CH",
       "country": "CH",
@@ -1751,7 +1751,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-06T15:31:43.670Z",
-      "needsRetranslation": true,
       "salaryMin": 94500,
       "salaryMax": 143000,
       "baseSalary": {
@@ -1764,7 +1763,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-70705703e3d0",
@@ -1797,7 +1797,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0z2qx/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:55.261Z",
+      "crawledAt": "2026-08-29T03:22:19.635Z",
       "addressLocality": "Emmen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1860,7 +1860,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:44.122Z",
-      "needsRetranslation": true,
       "salaryMin": 96000,
       "salaryMax": 146000,
       "baseSalary": {
@@ -1873,7 +1872,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "LU"
+      "addressRegion": "LU",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-bfa30ecffc38",
@@ -1906,7 +1906,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0zmal/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:02:54.692Z",
+      "crawledAt": "2026-08-29T03:22:19.088Z",
       "addressLocality": "Conthey",
       "addressCountry": "CH",
       "country": "CH",
@@ -1971,7 +1971,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:42.270Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 126500,
       "baseSalary": {
@@ -1984,7 +1983,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-8e5687719d49",
@@ -2017,7 +2017,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0z1af/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:54.073Z",
+      "crawledAt": "2026-08-29T03:22:18.437Z",
       "addressLocality": "Schaffhausen",
       "addressCountry": "CH",
       "country": "CH",
@@ -2079,7 +2079,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:39.789Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -2092,7 +2091,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "SH"
+      "addressRegion": "SH",
+      "needsRetranslation": true
     },
     {
       "id": "tally-weijl-6dfb4331c1aa",
@@ -2125,7 +2125,7 @@
       "url": "https://tallyweijl.hire.trakstar.com/jobs/fk0pftv/",
       "source": "TALLY WEiJL Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:02:53.499Z",
+      "crawledAt": "2026-08-29T03:22:17.874Z",
       "addressLocality": "Basel",
       "addressCountry": "CH",
       "country": "CH",
@@ -2188,7 +2188,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:23:39.249Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -2201,7 +2200,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BS"
+      "addressRegion": "BS",
+      "needsRetranslation": true
     }
   ]
 }
