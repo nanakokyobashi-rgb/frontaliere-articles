@@ -1,6 +1,6 @@
 {
   "crawlerKey": "msc-cargo",
-  "assembledAt": "2026-08-28T21:42:35.423Z",
+  "assembledAt": "2026-08-29T03:25:20.413Z",
   "jobs": [
     {
       "id": "msc-cargo-b06079cfe661",
@@ -33,7 +33,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17632EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:30.988Z",
+      "crawledAt": "2026-08-29T03:25:15.356Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -109,7 +109,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB16918EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:30.185Z",
+      "crawledAt": "2026-08-29T03:25:14.032Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -180,7 +180,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB10623EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:29.383Z",
+      "crawledAt": "2026-08-29T03:25:12.787Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -197,18 +197,7 @@
       "jobReqId": "10623",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "strategie-d-analyse-numerique-test-et-gestionnaire-cro-msc-group-geneva",
-        "strategia-test-e-cro-manager-di-digital-analytics-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "strategie-d-analyse-numerique-test-et-gestionnaire-cro-msc-group-geneva",
-          "strategia-test-e-cro-manager-di-digital-analytics-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:42.055Z",
       "salaryMin": 92000,
       "salaryMax": 163000,
       "baseSalary": {
@@ -220,7 +209,18 @@
           "maxValue": 163000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:42.055Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "strategie-d-analyse-numerique-test-et-gestionnaire-cro-msc-group-geneva",
+          "strategia-test-e-cro-manager-di-digital-analytics-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "strategie-d-analyse-numerique-test-et-gestionnaire-cro-msc-group-geneva",
+        "strategia-test-e-cro-manager-di-digital-analytics-msc-group-geneva"
+      ]
     },
     {
       "id": "msc-cargo-37ffd0de68db",
@@ -253,7 +253,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB12112EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:28.611Z",
+      "crawledAt": "2026-08-29T03:25:11.956Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -328,7 +328,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17643EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:27.808Z",
+      "crawledAt": "2026-08-29T03:25:11.106Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -415,7 +415,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17096EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:26.687Z",
+      "crawledAt": "2026-08-29T03:25:10.252Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -511,20 +511,7 @@
       "jobReqId": "17630",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "responsabile-dell-apprendimento-e-dello-sviluppo-al-dettaglio-msc-group-geneva",
-        "gestionnaire-de-l-apprentissage-et-du-developpement-au-detail-msc-group-geneva",
-        "responsabile-dell-apprendimento-al-dettaglio-e-dello-sviluppo-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "responsabile-dell-apprendimento-e-dello-sviluppo-al-dettaglio-msc-group-geneva",
-          "gestionnaire-de-l-apprentissage-et-du-developpement-au-detail-msc-group-geneva",
-          "responsabile-dell-apprendimento-al-dettaglio-e-dello-sviluppo-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:38.447Z",
       "salaryMin": 97500,
       "salaryMax": 165500,
       "baseSalary": {
@@ -536,7 +523,21 @@
           "maxValue": 165500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:38.447Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "responsabile-dell-apprendimento-e-dello-sviluppo-al-dettaglio-msc-group-geneva",
+          "gestionnaire-de-l-apprentissage-et-du-developpement-au-detail-msc-group-geneva",
+          "responsabile-dell-apprendimento-al-dettaglio-e-dello-sviluppo-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "responsabile-dell-apprendimento-e-dello-sviluppo-al-dettaglio-msc-group-geneva",
+        "gestionnaire-de-l-apprentissage-et-du-developpement-au-detail-msc-group-geneva",
+        "responsabile-dell-apprendimento-al-dettaglio-e-dello-sviluppo-msc-group-geneva"
+      ],
+      "crawlerMissStreak": 1
     },
     {
       "id": "msc-cargo-1271772d19b8",
@@ -586,18 +587,7 @@
       "jobReqId": "17631",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "responsabile-analisi-aziendale-retail-msc-group-geneva",
-        "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "responsabile-analisi-aziendale-retail-msc-group-geneva",
-          "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:37.504Z",
       "salaryMin": 88000,
       "salaryMax": 110500,
       "baseSalary": {
@@ -609,7 +599,19 @@
           "maxValue": 110500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:37.504Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "responsabile-analisi-aziendale-retail-msc-group-geneva",
+          "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "responsabile-analisi-aziendale-retail-msc-group-geneva",
+        "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
+      ],
+      "crawlerMissStreak": 1
     },
     {
       "id": "msc-cargo-b97d5d608b1c",
@@ -659,16 +661,7 @@
       "jobReqId": "17627",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "gestionnaire-de-marchandises-visuelles-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "gestionnaire-de-marchandises-visuelles-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:36.665Z",
       "salaryMin": 88000,
       "salaryMax": 110500,
       "baseSalary": {
@@ -680,7 +673,17 @@
           "maxValue": 110500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:36.665Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "gestionnaire-de-marchandises-visuelles-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "gestionnaire-de-marchandises-visuelles-msc-group-geneva"
+      ],
+      "crawlerMissStreak": 1
     },
     {
       "id": "msc-cargo-1f1a72644d47",
@@ -730,18 +733,7 @@
       "jobReqId": "17629",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "responsabile-marketing-al-dettaglio-msc-group-geneva",
-        "directeur-du-marketing-de-detail-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "responsabile-marketing-al-dettaglio-msc-group-geneva",
-          "directeur-du-marketing-de-detail-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:35.418Z",
       "salaryMin": 92000,
       "salaryMax": 163000,
       "baseSalary": {
@@ -753,7 +745,19 @@
           "maxValue": 163000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:35.418Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "responsabile-marketing-al-dettaglio-msc-group-geneva",
+          "directeur-du-marketing-de-detail-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "responsabile-marketing-al-dettaglio-msc-group-geneva",
+        "directeur-du-marketing-de-detail-msc-group-geneva"
+      ],
+      "crawlerMissStreak": 1
     },
     {
       "id": "msc-cargo-a95b474e5904",
@@ -786,7 +790,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17639EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:22.141Z",
+      "crawledAt": "2026-08-29T03:25:09.401Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -803,16 +807,7 @@
       "jobReqId": "17639",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "temporary-senior-accountant-progetti-infrastrutturali-strategici-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "temporary-senior-accountant-progetti-infrastrutturali-strategici-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:28:34.018Z",
       "salaryMin": 174500,
       "salaryMax": 306000,
       "baseSalary": {
@@ -824,7 +819,16 @@
           "maxValue": 306000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:28:34.018Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "temporary-senior-accountant-progetti-infrastrutturali-strategici-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "temporary-senior-accountant-progetti-infrastrutturali-strategici-msc-group-geneva"
+      ]
     },
     {
       "id": "msc-cargo-2c13ff3f3d54",
@@ -857,7 +861,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17565EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:21.285Z",
+      "crawledAt": "2026-08-29T03:25:08.561Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -933,7 +937,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17211EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:20.456Z",
+      "crawledAt": "2026-08-29T03:25:07.743Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -952,7 +956,24 @@
       "requirementsByLocale": {
         "en": []
       },
+      "previousSlugs": [
+        "product-innovation-manager-nuove-costruzioni-msc-group-geneva",
+        "product-innovation-manager-nouvelles-constructions-msc-group-geneva",
+        "gestionnaire-d-innovation-de-produits-new-builds-analytics-msc-group-geneva",
+        "product-innovation-manager-new-builds-analytics-msc-geneva",
+        "product-innovation-manager-neue-builds-msc-group-geneva"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "product-innovation-manager-nuove-costruzioni-msc-group-geneva",
+          "product-innovation-manager-nouvelles-constructions-msc-group-geneva",
+          "gestionnaire-d-innovation-de-produits-new-builds-analytics-msc-group-geneva",
+          "product-innovation-manager-new-builds-analytics-msc-geneva",
+          "product-innovation-manager-neue-builds-msc-group-geneva"
+        ]
+      },
       "needsRetranslation": true,
+      "firstSeenAt": "2026-08-29T03:25:07.743Z",
       "salaryMin": 92000,
       "salaryMax": 163000,
       "baseSalary": {
@@ -964,24 +985,7 @@
           "maxValue": 163000,
           "unitText": "YEAR"
         }
-      },
-      "firstSeenAt": "2026-08-28T21:42:20.456Z",
-      "previousSlugsByLocale": {
-        "it": [
-          "product-innovation-manager-nuove-costruzioni-msc-group-geneva",
-          "product-innovation-manager-nouvelles-constructions-msc-group-geneva",
-          "gestionnaire-d-innovation-de-produits-new-builds-analytics-msc-group-geneva",
-          "product-innovation-manager-new-builds-analytics-msc-geneva",
-          "product-innovation-manager-neue-builds-msc-group-geneva"
-        ]
-      },
-      "previousSlugs": [
-        "product-innovation-manager-nuove-costruzioni-msc-group-geneva",
-        "product-innovation-manager-nouvelles-constructions-msc-group-geneva",
-        "gestionnaire-d-innovation-de-produits-new-builds-analytics-msc-group-geneva",
-        "product-innovation-manager-new-builds-analytics-msc-geneva",
-        "product-innovation-manager-neue-builds-msc-group-geneva"
-      ]
+      }
     },
     {
       "id": "msc-cargo-b9f77471cd4e",
@@ -1014,7 +1018,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17119EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:19.250Z",
+      "crawledAt": "2026-08-29T03:25:06.933Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1067,11 +1071,11 @@
     },
     {
       "id": "msc-cargo-50d293b9d6b0",
-      "slug": "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva",
+      "slug": "sr-director-of-guest-experience-development-delivery-msc-geneva",
       "slugByLocale": {
-        "it": "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva",
         "en": "sr-director-of-guest-experience-development-delivery-msc-geneva",
-        "de": "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva",
+        "it": "sr-director-of-guest-experience-development-delivery-msc-geneva",
+        "de": "sr-director-of-guest-experience-development-delivery-msc-geneva",
         "fr": "sr-director-of-guest-experience-development-delivery-msc-geneva"
       },
       "company": "MSC Group",
@@ -1096,7 +1100,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17209EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:18.132Z",
+      "crawledAt": "2026-08-29T03:25:05.697Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1113,27 +1117,7 @@
       "jobReqId": "17209",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva",
-        "directeur-principal-developpement-et-prestation-de-l-experience-des-invites-msc-group-geneva",
-        "directeur-principal-du-developpement-et-de-la-prestation-de-l-experience-client-msc-group-geneva",
-        "sr-director-of-guest-experience-development-delivery-msc-geneva",
-        "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva",
-          "directeur-principal-developpement-et-prestation-de-l-experience-des-invites-msc-group-geneva",
-          "directeur-principal-du-developpement-et-de-la-prestation-de-l-experience-client-msc-group-geneva",
-          "sr-director-of-guest-experience-development-delivery-msc-geneva",
-          "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva"
-        ],
-        "de": [
-          "sr-director-of-guest-experience-development-delivery-msc-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:45:18.212Z",
       "salaryMin": 97500,
       "salaryMax": 165500,
       "baseSalary": {
@@ -1145,7 +1129,25 @@
           "maxValue": 165500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-29T03:25:05.697Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "directeur-principal-du-developpement-et-de-la-prestation-de-l-experience-client-msc-group-geneva",
+          "directeur-principal-developpement-et-prestation-de-l-experience-des-invites-msc-group-geneva",
+          "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva",
+          "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva"
+        ],
+        "de": [
+          "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "directeur-principal-du-developpement-et-de-la-prestation-de-l-experience-client-msc-group-geneva",
+        "directeur-principal-developpement-et-prestation-de-l-experience-des-invites-msc-group-geneva",
+        "sr-direktor-of-guest-experience-development-delivery-msc-group-geneva",
+        "sr-direttore-of-guest-experience-development-delivery-msc-group-geneva"
+      ]
     },
     {
       "id": "msc-cargo-2e9827752273",
@@ -1178,7 +1180,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17227EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:17.031Z",
+      "crawledAt": "2026-08-29T03:25:04.658Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1195,20 +1197,7 @@
       "jobReqId": "17227",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "copywriter-6-mesi-msc-group-geneva",
-        "texter-6-monate-vertrag-msc-group-geneva",
-        "redacteur-contrat-de-6-mois-msc-group-geneva"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "copywriter-6-mesi-msc-group-geneva",
-          "texter-6-monate-vertrag-msc-group-geneva",
-          "redacteur-contrat-de-6-mois-msc-group-geneva"
-        ]
-      },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:45:17.455Z",
       "salaryMin": 61500,
       "salaryMax": 109000,
       "baseSalary": {
@@ -1220,7 +1209,20 @@
           "maxValue": 109000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-29T03:25:04.658Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "redacteur-contrat-de-6-mois-msc-group-geneva",
+          "texter-6-monate-vertrag-msc-group-geneva",
+          "copywriter-6-mesi-msc-group-geneva"
+        ]
+      },
+      "previousSlugs": [
+        "redacteur-contrat-de-6-mois-msc-group-geneva",
+        "texter-6-monate-vertrag-msc-group-geneva",
+        "copywriter-6-mesi-msc-group-geneva"
+      ]
     },
     {
       "id": "msc-cargo-7a52f19823fe",
@@ -1253,7 +1255,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17642EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:42:15.101Z",
+      "crawledAt": "2026-08-29T03:25:16.298Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1270,12 +1272,6 @@
       "jobReqId": "17642",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "merchandiseur-de-montres-senior-msc-group-geneva",
-        "orologio-senior-merchandiser-msc-group-geneva",
-        "senior-category-manager-watch-msc-geneva",
-        "senior-watch-merchandiser-msc-geneva"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "merchandiseur-de-montres-senior-msc-group-geneva",
@@ -1290,6 +1286,12 @@
           "senior-watch-merchandiser-msc-geneva"
         ]
       },
+      "previousSlugs": [
+        "merchandiseur-de-montres-senior-msc-group-geneva",
+        "orologio-senior-merchandiser-msc-group-geneva",
+        "senior-category-manager-watch-msc-geneva",
+        "senior-watch-merchandiser-msc-geneva"
+      ],
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T10:22:24.334Z",
       "salaryMin": 88000,
