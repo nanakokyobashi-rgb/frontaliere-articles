@@ -13,6 +13,30 @@
   "notes": "Dedicated AFRY crawler. Uses Drupal proxy to SmartRecruiters API. Returns all global jobs in one JSON call; filters by country=CH then keeps CH-wide jobs whose city resolves to a Swiss canton (all 26). ~18000 employees globally, major presence in Swiss engineering/infrastructure. Swiss HQ in Zurich, offices nationwide incl. Bellinzona/Airolo.",
   "updatedAt": "2026-08-29T23:23:03.490Z",
   "seedMetaByUrl": {
+    "https://afry.com/en/career/available-jobs/REF14262I-directeur-adjoint-de-la-region-ouest-business-unit-civil-f-h-d-80-100-lausanne-fribourg-delemont": {
+      "location": "Lausanne",
+      "canton": "VD",
+      "company": "AFRY",
+      "postedDate": "2026-08-29"
+    },
+    "https://afry.com/en/career/available-jobs/REF13331F-leiterin-abteilung-bahnbau-bahntiefbau-80-100-zurich": {
+      "location": "Zürich",
+      "canton": "ZH",
+      "company": "AFRY",
+      "postedDate": "2026-08-29"
+    },
+    "https://afry.com/en/career/available-jobs/REF15489B-initiativbewerbung-energy": {
+      "location": "Zürich",
+      "canton": "ZH",
+      "company": "AFRY",
+      "postedDate": "2026-08-29"
+    },
+    "https://afry.com/en/career/available-jobs/REF15478T-projektleiterin-bahnbau-mit-potenzial-abteilungsleiterin-80-100-zurich": {
+      "location": "Zürich",
+      "canton": "ZH",
+      "company": "AFRY",
+      "postedDate": "2026-08-29"
+    },
     "https://afry.com/en/career/available-jobs/REF15446R-projektleiterin-bauingenieurwesen-im-bereich-wasser-abwasser-80-100-zurich": {
       "location": "Zürich",
       "canton": "ZH",
@@ -265,12 +289,6 @@
       "company": "AFRY",
       "postedDate": "2026-08-29"
     },
-    "https://afry.com/en/career/available-jobs/REF13331F-leiterin-abteilung-bahnbau-bahntiefbau-80-100-zurich": {
-      "location": "Zürich",
-      "canton": "ZH",
-      "company": "AFRY",
-      "postedDate": "2026-08-29"
-    },
     "https://afry.com/en/career/available-jobs/REF13487C-leiterin-abteilung-gesamtplanung-80-100-zurich": {
       "location": "Zürich",
       "canton": "ZH",
@@ -374,24 +392,6 @@
       "postedDate": "2026-08-29"
     },
     "https://afry.com/en/career/available-jobs/REF1241C-gesamtprojektleiterin-infrastruktur-80-100-zurich": {
-      "location": "Zürich",
-      "canton": "ZH",
-      "company": "AFRY",
-      "postedDate": "2026-08-29"
-    },
-    "https://afry.com/en/career/available-jobs/REF14262I-directeur-adjoint-de-la-region-ouest-business-unit-civil-f-h-d-80-100-lausanne-fribourg-delemont": {
-      "location": "Lausanne",
-      "canton": "VD",
-      "company": "AFRY",
-      "postedDate": "2026-08-29"
-    },
-    "https://afry.com/en/career/available-jobs/REF15489B-initiativbewerbung-energy": {
-      "location": "Zürich",
-      "canton": "ZH",
-      "company": "AFRY",
-      "postedDate": "2026-08-29"
-    },
-    "https://afry.com/en/career/available-jobs/REF15478T-projektleiterin-bahnbau-mit-potenzial-abteilungsleiterin-80-100-zurich": {
       "location": "Zürich",
       "canton": "ZH",
       "company": "AFRY",
