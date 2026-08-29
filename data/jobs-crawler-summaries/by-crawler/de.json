@@ -1,7 +1,7 @@
 {
   "key": "de",
   "label": "MPI AGE",
-  "generatedAt": "2026-08-28T21:38:20.682Z",
+  "generatedAt": "2026-08-29T03:22:07.937Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,10 +9,11 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5282,
-  "avgDurationMs": 5282,
+  "durationMs": 4545,
+  "avgDurationMs": 4545,
   "durationHistory": [
-    5282
+    5282,
+    4545
   ],
   "newJobs": [
     {
@@ -27,7 +28,7 @@
       "url": "https://mpi-age.de.umantis.com/Vacancies/506/Description/1",
       "source": "MPI AGE Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:38:16.826Z",
+      "crawledAt": "2026-08-29T03:22:04.654Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -38,7 +39,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://mpi-age.de.umantis.com/Vacancies/506/Description/1",
       "_qualityScore": 43,
       "_qualityBreakdown": {
@@ -62,7 +63,7 @@
       "url": "https://mpi-age.de.umantis.com/Vacancies/504/Description/1",
       "source": "MPI AGE Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:38:17.147Z",
+      "crawledAt": "2026-08-29T03:22:04.983Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -97,7 +98,7 @@
       "url": "https://mpi-age.de.umantis.com/Vacancies/505/Description/1",
       "source": "MPI AGE Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:38:17.450Z",
+      "crawledAt": "2026-08-29T03:22:05.287Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
