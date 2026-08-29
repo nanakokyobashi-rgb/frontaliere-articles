@@ -1,6 +1,6 @@
 {
   "crawlerKey": "prada",
-  "assembledAt": "2026-08-29T03:26:56.085Z",
+  "assembledAt": "2026-08-29T23:20:30.894Z",
   "jobs": [
     {
       "id": "prada-7c9fb42c6646",
@@ -299,7 +299,7 @@
       "url": "https://jobs.pradagroup.com/job/Metzingen-PRADA-Retail-Support-%28mfd%29/1410903833/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:26:51.371Z",
+      "crawledAt": "2026-08-29T23:20:26.024Z",
       "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
@@ -314,7 +314,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:26:51.371Z"
+      "firstSeenAt": "2026-08-29T23:20:26.024Z"
     }
   ]
 }
