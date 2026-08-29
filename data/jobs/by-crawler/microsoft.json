@@ -1,6 +1,6 @@
 {
   "crawlerKey": "microsoft",
-  "assembledAt": "2026-08-29T14:23:22.167Z",
+  "assembledAt": "2026-08-29T23:07:23.793Z",
   "jobs": [
     {
       "id": "microsoft-200045205",
@@ -33,7 +33,7 @@
       "url": "https://apply.careers.microsoft.com/careers/job/1970393556943701",
       "source": "Microsoft Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:19.860Z",
+      "crawledAt": "2026-08-29T23:07:21.286Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -188,7 +188,7 @@
       "url": "https://apply.careers.microsoft.com/careers/job/1970393556978892",
       "source": "Microsoft Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:19.859Z",
+      "crawledAt": "2026-08-29T23:07:21.287Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -346,7 +346,7 @@
       "url": "https://apply.careers.microsoft.com/careers/job/1970393556978844",
       "source": "Microsoft Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:19.857Z",
+      "crawledAt": "2026-08-29T23:07:21.292Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -637,7 +637,7 @@
       "url": "https://apply.careers.microsoft.com/careers/job/1970393556979683",
       "source": "Microsoft Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:19.859Z",
+      "crawledAt": "2026-08-29T23:07:21.289Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -670,7 +670,7 @@
       },
       "streetAddress": "The Circle 02",
       "postalCode": "8058",
-      "firstSeenAt": "2026-08-29T14:23:19.859Z"
+      "firstSeenAt": "2026-08-29T23:07:21.289Z"
     }
   ]
 }
