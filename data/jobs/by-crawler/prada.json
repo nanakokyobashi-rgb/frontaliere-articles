@@ -1,6 +1,6 @@
 {
   "crawlerKey": "prada",
-  "assembledAt": "2026-08-28T21:20:47.635Z",
+  "assembledAt": "2026-08-29T03:26:56.085Z",
   "jobs": [
     {
       "id": "prada-7c9fb42c6646",
@@ -45,7 +45,6 @@
       "sourceLang": "en",
       "crawledAt": "2026-08-28T21:20:44.522Z",
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:13.263Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -58,14 +57,16 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:27:13.263Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "prada-9c2343e37a3b",
       "slug": "prada-client-consulente-bicester-prada-group-bicester",
       "slugByLocale": {
-        "it": "prada-client-consulente-bicester-prada-group-bicester",
         "en": "prada-client-advisor-bicester-prada-group-bicester",
+        "it": "prada-client-consulente-bicester-prada-group-bicester",
         "de": "prada-client-berater-bicester-prada-group-bicester",
         "fr": "prada-client-conseiller-bicester-prada-group-bicester"
       },
@@ -103,6 +104,19 @@
       "sourceLang": "en",
       "crawledAt": "2026-08-28T21:20:43.812Z",
       "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
       "firstSeenAt": "2026-08-28T05:27:11.922Z",
       "previousSlugsByLocale": {
         "it": [
@@ -118,19 +132,7 @@
       "previousSlugs": [
         "prada-client-advisor-bicester-prada-group-bicester"
       ],
-      "salaryMin": 49500,
-      "salaryMax": 75000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 49500,
-          "maxValue": 75000,
-          "unitText": "YEAR"
-        }
-      },
-      "addressRegion": "TI"
+      "crawlerMissStreak": 1
     },
     {
       "id": "prada-1a13eb321c1f",
@@ -253,6 +255,66 @@
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-25T21:43:31.799Z",
       "crawlerMissStreak": 2
+    },
+    {
+      "id": "prada-486ad2c4e076",
+      "slug": "prada-retail-support-m-f-d-prada-group-metzingen",
+      "slugByLocale": {
+        "en": "prada-retail-support-m-f-d-prada-group-metzingen",
+        "it": "prada-retail-support-m-f-d-prada-group-metzingen",
+        "de": "prada-retail-support-m-f-d-prada-group-metzingen",
+        "fr": "prada-retail-support-m-f-d-prada-group-metzingen"
+      },
+      "company": "Prada Group",
+      "companyKey": "prada",
+      "companyDomain": "pradagroup.com",
+      "title": "PRADA Retail Support (m/f/d)",
+      "titleByLocale": {
+        "en": "PRADA Retail Support (m/f/d)",
+        "it": "PRADA Retail Support (m/f/d)",
+        "de": "PRADA Retail Support (m/f/d)",
+        "fr": "PRADA Retail Support (m/f/d)"
+      },
+      "description": "Founded in 1913 in Italy, the Prada Group was built on a tradition of excellence and with a vision of innovation. The Group, a world leader in the luxury sector, operates in more than 45 countries with the PRADA, Miu Miu, Versace, Church’s, Car Shoe and Luna Rossa brands, and has employees of over 100 nationalities.\n\nJOB DETAILS\n\nWe are seeking a passionate and dedicated Retail Support (m/f/d) for max. 20h/week to support our Sales Team in our PRADA Outlet Store in Metzingen. You will be responsible to help the sales team in all aspects of the store and stock activities. To be part of a team and helping with every-day activities by ensuring customer satisfaction.\n\nAt PRADA, we are renowned for our unwavering commitment to luxury, style, and innovation. As one of the global leaders in the fashion industry, we are dedicated to delivering exceptional experiences to our esteemed clientele. Our brand represents a fusion of tradition and modernity, and our Client Advisors play a pivotal role in providing personalized service and creating memorable moments for our discerning customers.\n\nRESPONSABILITIES\n\n• Welcome and serve the customer always providing an excellent in-store experience.\n\n• Support the team in all aspects of the Store.\n\n• Maintain goods from the warehouse and to process orders from the Sales team.\n\nKNOWLEDGE AND SKILLS\n\nExcellent communication and interpersonal skills with the ability to connect with a diverse clientele.\n\nPassion for luxury fashion trends, and an understanding of the luxury retail market.\n\nFluent spoken German and English expected.\n\nJoining our Company means working in a creative and international environment, with teams of people motivated by curiosity and the quest for excellence. The engine of our success is the importance and value that we place on the talent and passion of our people leading to their own professional growth.\n Prada Group promotes an inclusive work environment, ensuring equal opportunities for all candidates, regardless of gender, ethnicity, sexual orientation, disability, or other personal characteristics. We believe that diversity is a value and we are committed to build a fair and respectful workplace for all.",
+      "descriptionByLocale": {
+        "en": "Founded in 1913 in Italy, the Prada Group was built on a tradition of excellence and with a vision of innovation. The Group, a world leader in the luxury sector, operates in more than 45 countries with the PRADA, Miu Miu, Versace, Church’s, Car Shoe and Luna Rossa brands, and has employees of over 100 nationalities.\n\nJOB DETAILS\n\nWe are seeking a passionate and dedicated Retail Support (m/f/d) for max. 20h/week to support our Sales Team in our PRADA Outlet Store in Metzingen. You will be responsible to help the sales team in all aspects of the store and stock activities. To be part of a team and helping with every-day activities by ensuring customer satisfaction.\n\nAt PRADA, we are renowned for our unwavering commitment to luxury, style, and innovation. As one of the global leaders in the fashion industry, we are dedicated to delivering exceptional experiences to our esteemed clientele. Our brand represents a fusion of tradition and modernity, and our Client Advisors play a pivotal role in providing personalized service and creating memorable moments for our discerning customers.\n\nRESPONSABILITIES\n\n• Welcome and serve the customer always providing an excellent in-store experience.\n\n• Support the team in all aspects of the Store.\n\n• Maintain goods from the warehouse and to process orders from the Sales team.\n\nKNOWLEDGE AND SKILLS\n\nExcellent communication and interpersonal skills with the ability to connect with a diverse clientele.\n\nPassion for luxury fashion trends, and an understanding of the luxury retail market.\n\nFluent spoken German and English expected.\n\nJoining our Company means working in a creative and international environment, with teams of people motivated by curiosity and the quest for excellence. The engine of our success is the importance and value that we place on the talent and passion of our people leading to their own professional growth.\n Prada Group promotes an inclusive work environment, ensuring equal opportunities for all candidates, regardless of gender, ethnicity, sexual orientation, disability, or other personal characteristics. We believe that diversity is a value and we are committed to build a fair and respectful workplace for all.",
+        "it": "Founded in 1913 in Italy, the Prada Group was built on a tradition of excellence and with a vision of innovation. The Group, a world leader in the luxury sector, operates in more than 45 countries with the PRADA, Miu Miu, Versace, Church’s, Car Shoe and Luna Rossa brands, and has employees of over 100 nationalities.\n\nJOB DETAILS\n\nWe are seeking a passionate and dedicated Retail Support (m/f/d) for max. 20h/week to support our Sales Team in our PRADA Outlet Store in Metzingen. You will be responsible to help the sales team in all aspects of the store and stock activities. To be part of a team and helping with every-day activities by ensuring customer satisfaction.\n\nAt PRADA, we are renowned for our unwavering commitment to luxury, style, and innovation. As one of the global leaders in the fashion industry, we are dedicated to delivering exceptional experiences to our esteemed clientele. Our brand represents a fusion of tradition and modernity, and our Client Advisors play a pivotal role in providing personalized service and creating memorable moments for our discerning customers.\n\nRESPONSABILITIES\n\n• Welcome and serve the customer always providing an excellent in-store experience.\n\n• Support the team in all aspects of the Store.\n\n• Maintain goods from the warehouse and to process orders from the Sales team.\n\nKNOWLEDGE AND SKILLS\n\nExcellent communication and interpersonal skills with the ability to connect with a diverse clientele.\n\nPassion for luxury fashion trends, and an understanding of the luxury retail market.\n\nFluent spoken German and English expected.\n\nJoining our Company means working in a creative and international environment, with teams of people motivated by curiosity and the quest for excellence. The engine of our success is the importance and value that we place on the talent and passion of our people leading to their own professional growth.\n Prada Group promotes an inclusive work environment, ensuring equal opportunities for all candidates, regardless of gender, ethnicity, sexual orientation, disability, or other personal characteristics. We believe that diversity is a value and we are committed to build a fair and respectful workplace for all.",
+        "de": "Founded in 1913 in Italy, the Prada Group was built on a tradition of excellence and with a vision of innovation. The Group, a world leader in the luxury sector, operates in more than 45 countries with the PRADA, Miu Miu, Versace, Church’s, Car Shoe and Luna Rossa brands, and has employees of over 100 nationalities.\n\nJOB DETAILS\n\nWe are seeking a passionate and dedicated Retail Support (m/f/d) for max. 20h/week to support our Sales Team in our PRADA Outlet Store in Metzingen. You will be responsible to help the sales team in all aspects of the store and stock activities. To be part of a team and helping with every-day activities by ensuring customer satisfaction.\n\nAt PRADA, we are renowned for our unwavering commitment to luxury, style, and innovation. As one of the global leaders in the fashion industry, we are dedicated to delivering exceptional experiences to our esteemed clientele. Our brand represents a fusion of tradition and modernity, and our Client Advisors play a pivotal role in providing personalized service and creating memorable moments for our discerning customers.\n\nRESPONSABILITIES\n\n• Welcome and serve the customer always providing an excellent in-store experience.\n\n• Support the team in all aspects of the Store.\n\n• Maintain goods from the warehouse and to process orders from the Sales team.\n\nKNOWLEDGE AND SKILLS\n\nExcellent communication and interpersonal skills with the ability to connect with a diverse clientele.\n\nPassion for luxury fashion trends, and an understanding of the luxury retail market.\n\nFluent spoken German and English expected.\n\nJoining our Company means working in a creative and international environment, with teams of people motivated by curiosity and the quest for excellence. The engine of our success is the importance and value that we place on the talent and passion of our people leading to their own professional growth.\n Prada Group promotes an inclusive work environment, ensuring equal opportunities for all candidates, regardless of gender, ethnicity, sexual orientation, disability, or other personal characteristics. We believe that diversity is a value and we are committed to build a fair and respectful workplace for all.",
+        "fr": "Founded in 1913 in Italy, the Prada Group was built on a tradition of excellence and with a vision of innovation. The Group, a world leader in the luxury sector, operates in more than 45 countries with the PRADA, Miu Miu, Versace, Church’s, Car Shoe and Luna Rossa brands, and has employees of over 100 nationalities.\n\nJOB DETAILS\n\nWe are seeking a passionate and dedicated Retail Support (m/f/d) for max. 20h/week to support our Sales Team in our PRADA Outlet Store in Metzingen. You will be responsible to help the sales team in all aspects of the store and stock activities. To be part of a team and helping with every-day activities by ensuring customer satisfaction.\n\nAt PRADA, we are renowned for our unwavering commitment to luxury, style, and innovation. As one of the global leaders in the fashion industry, we are dedicated to delivering exceptional experiences to our esteemed clientele. Our brand represents a fusion of tradition and modernity, and our Client Advisors play a pivotal role in providing personalized service and creating memorable moments for our discerning customers.\n\nRESPONSABILITIES\n\n• Welcome and serve the customer always providing an excellent in-store experience.\n\n• Support the team in all aspects of the Store.\n\n• Maintain goods from the warehouse and to process orders from the Sales team.\n\nKNOWLEDGE AND SKILLS\n\nExcellent communication and interpersonal skills with the ability to connect with a diverse clientele.\n\nPassion for luxury fashion trends, and an understanding of the luxury retail market.\n\nFluent spoken German and English expected.\n\nJoining our Company means working in a creative and international environment, with teams of people motivated by curiosity and the quest for excellence. The engine of our success is the importance and value that we place on the talent and passion of our people leading to their own professional growth.\n Prada Group promotes an inclusive work environment, ensuring equal opportunities for all candidates, regardless of gender, ethnicity, sexual orientation, disability, or other personal characteristics. We believe that diversity is a value and we are committed to build a fair and respectful workplace for all."
+      },
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "location": "Metzingen",
+      "canton": "TI",
+      "addressLocality": "Metzingen",
+      "addressCountry": "CH",
+      "category": "fashion",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "url": "https://jobs.pradagroup.com/job/Metzingen-PRADA-Retail-Support-%28mfd%29/1410903833/",
+      "source": "Prada Group Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T03:26:51.371Z",
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:26:51.371Z"
     }
   ]
 }
