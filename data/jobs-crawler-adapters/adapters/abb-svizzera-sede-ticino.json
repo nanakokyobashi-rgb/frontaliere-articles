@@ -58,6 +58,9 @@
     "https://careers.abb/global/en/job/ABB1GLOBALJR00041259EXTERNALENGLOBAL/Head-of-Innovation",
     "https://careers.abb/global/en/job/ABB1GLOBALJR00017046EXTERNALENGLOBAL/Sales-Specialist---French-speaking--80-100",
     "https://careers.abb/global/en/job/ABB1GLOBALJR00041256EXTERNALENGLOBAL/Head-of-Portfolio-Management",
+    "https://careers.abb/global/en/job/ABB1GLOBALJR00041259EXTERNALENGLOBAL/Head-of-Innovation",
+    "https://careers.abb/global/en/job/ABB1GLOBALJR00017046EXTERNALENGLOBAL/Sales-Specialist---French-speaking--80-100",
+    "https://careers.abb/global/en/job/ABB1GLOBALJR00041256EXTERNALENGLOBAL/Head-of-Portfolio-Management",
     "https://careers.abb/global/en/job/ABB1GLOBALJR00041259EXTERNALENGLOBAL/Head-of-Innovation"
   ],
   "notes": "Dedicated ABB crawler seeds from the careers.abb Phenom refineSearch API (country=Switzerland, CH-wide / all cantons), then resolves canonical careers.abb job detail URLs.",
