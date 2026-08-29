@@ -1,6 +1,6 @@
 {
   "crawlerKey": "kulm-hotel",
-  "assembledAt": "2026-08-28T21:03:45.555Z",
+  "assembledAt": "2026-08-29T03:21:46.016Z",
   "jobs": [
     {
       "id": "kulm-hotel-6d5358fd2a15",
@@ -33,7 +33,7 @@
       "url": "https://careers.kulm.com/en/vacancies/708",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:38.617Z",
+      "crawledAt": "2026-08-29T03:21:40.338Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -116,7 +116,7 @@
       "url": "https://careers.kulm.com/en/vacancies/692",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:38.410Z",
+      "crawledAt": "2026-08-29T03:21:40.183Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -181,7 +181,7 @@
       "url": "https://careers.kulm.com/en/vacancies/723",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:37.404Z",
+      "crawledAt": "2026-08-29T03:21:39.235Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -263,7 +263,7 @@
       "url": "https://careers.kulm.com/en/vacancies/712",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:35.391Z",
+      "crawledAt": "2026-08-29T03:21:37.334Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -310,7 +310,6 @@
         "prenotazione-agente-m-w-d-kulm-hotel-st-moritz-st-moritz"
       ],
       "firstSeenAt": "2026-07-29T11:39:14.690Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -322,7 +321,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-1d646a28ad4f",
@@ -355,7 +355,7 @@
       "url": "https://careers.kulm.com/en/vacancies/691",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:34.390Z",
+      "crawledAt": "2026-08-29T03:21:36.377Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -375,7 +375,6 @@
       "requirementsByLocale": {},
       "department": "Kulm Hotel",
       "pensum": "100%",
-      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "sauna-master-m-w-d-kulm-hotel-st-moritz",
@@ -410,7 +409,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-23606c6fadb0",
@@ -443,7 +443,7 @@
       "url": "https://careers.kulm.com/en/vacancies/720",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:33.388Z",
+      "crawledAt": "2026-08-29T03:21:35.434Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -527,7 +527,7 @@
       "url": "https://careers.kulm.com/en/vacancies/697",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:32.375Z",
+      "crawledAt": "2026-08-29T03:21:34.487Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -547,7 +547,6 @@
       "requirementsByLocale": {},
       "department": "Kulm Hotel",
       "pensum": "100%",
-      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "de": [
           "laundry-employee-m-w-d-kulm-hotel-st-moritz",
@@ -586,7 +585,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-30d9a4628931",
@@ -619,7 +619,7 @@
       "url": "https://careers.kulm.com/en/vacancies/690",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:31.365Z",
+      "crawledAt": "2026-08-29T03:21:33.543Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -639,7 +639,6 @@
       "requirementsByLocale": {},
       "department": "Kulm Hotel",
       "pensum": "100%",
-      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "fr": [
           "laundry-attendant-press-ironer-tournant-m-w-d-kulm-hotel-st-moritz",
@@ -672,7 +671,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-ba2aa180cacb",
@@ -705,7 +705,7 @@
       "url": "https://careers.kulm.com/en/vacancies/722",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:30.353Z",
+      "crawledAt": "2026-08-29T03:21:32.602Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -780,7 +780,7 @@
       "url": "https://careers.kulm.com/en/vacancies/678",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:29.352Z",
+      "crawledAt": "2026-08-29T03:21:31.654Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -842,7 +842,6 @@
         ]
       },
       "firstSeenAt": "2026-06-05T22:23:49.839Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -854,7 +853,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-03fbfcf3b646",
@@ -887,7 +887,7 @@
       "url": "https://careers.kulm.com/en/vacancies/689",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:28.339Z",
+      "crawledAt": "2026-08-29T03:21:30.712Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -934,7 +934,6 @@
         ]
       },
       "firstSeenAt": "2026-07-31T22:19:00.177Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -946,7 +945,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-fe14f6cf94b1",
@@ -979,7 +979,7 @@
       "url": "https://careers.kulm.com/en/vacancies/679",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:27.318Z",
+      "crawledAt": "2026-08-29T03:21:29.764Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1059,7 +1059,7 @@
       "url": "https://careers.kulm.com/en/vacancies/636",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:26.318Z",
+      "crawledAt": "2026-08-29T03:21:28.821Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -1141,7 +1141,7 @@
       "url": "https://careers.kulm.com/en/vacancies/719",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:36.403Z",
+      "crawledAt": "2026-08-29T03:21:38.288Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -1180,7 +1180,6 @@
         ]
       },
       "firstSeenAt": "2026-08-11T22:01:56.519Z",
-      "needsRetranslation": true,
       "salaryMin": 79000,
       "salaryMax": 120000,
       "baseSalary": {
@@ -1192,7 +1191,8 @@
           "maxValue": 120000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-33cf5a12b4cb",
@@ -1225,7 +1225,7 @@
       "url": "https://careers.kulm.com/en/vacancies/710",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:25.311Z",
+      "crawledAt": "2026-08-29T03:21:27.878Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -1317,7 +1317,7 @@
       "url": "https://careers.kulm.com/en/vacancies/718",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:24.302Z",
+      "crawledAt": "2026-08-29T03:21:26.927Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1337,7 +1337,6 @@
       "requirementsByLocale": {},
       "department": "Grand Hotel Kronenhof",
       "pensum": "100%",
-      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "de": [
           "fahrer-m-w-d-kulm-hotel-st-moritz-pontresina",
@@ -1365,7 +1364,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-9d02174bb4ef",
@@ -1398,7 +1398,7 @@
       "url": "https://careers.kulm.com/en/vacancies/717",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:23.286Z",
+      "crawledAt": "2026-08-29T03:21:25.978Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1419,7 +1419,6 @@
       "department": "Grand Hotel Kronenhof",
       "pensum": "100%",
       "firstSeenAt": "2026-08-05T22:29:25.104Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 78000,
       "baseSalary": {
@@ -1431,7 +1430,8 @@
           "maxValue": 78000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-0168e8aece90",
@@ -1464,7 +1464,7 @@
       "url": "https://careers.kulm.com/en/vacancies/682",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:22.276Z",
+      "crawledAt": "2026-08-29T03:21:25.035Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1515,7 +1515,6 @@
         "commis-di-sala-assistente-cameriere-m-f-d-kulm-hotel-st-moritz-pontresina"
       ],
       "firstSeenAt": "2026-07-02T22:34:26.552Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1527,7 +1526,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-764f76c9f8f7",
@@ -1560,7 +1560,7 @@
       "url": "https://careers.kulm.com/en/vacancies/695",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:21.263Z",
+      "crawledAt": "2026-08-29T03:21:24.097Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -1641,7 +1641,7 @@
       "url": "https://careers.kulm.com/en/vacancies/698",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:20.253Z",
+      "crawledAt": "2026-08-29T03:21:23.149Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1717,7 +1717,7 @@
       "url": "https://careers.kulm.com/en/vacancies/699",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:19.233Z",
+      "crawledAt": "2026-08-29T03:21:22.187Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1798,7 +1798,7 @@
       "url": "https://careers.kulm.com/en/vacancies/716",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:18.226Z",
+      "crawledAt": "2026-08-29T03:21:21.243Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -1883,7 +1883,7 @@
       "url": "https://careers.kulm.com/en/vacancies/665",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:16.178Z",
+      "crawledAt": "2026-08-29T03:21:19.349Z",
       "addressLocality": "Pontresina",
       "postalCode": "7504",
       "addressRegion": "GR",
@@ -2002,7 +2002,6 @@
         "assistenz-reservierungsleitung-m-w-d-kulm-hotel-st-moritz-pontresina"
       ],
       "firstSeenAt": "2026-04-13T22:00:28.646Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 105000,
       "baseSalary": {
@@ -2014,7 +2013,8 @@
           "maxValue": 105000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-0ee3898b990e",
@@ -2047,7 +2047,7 @@
       "url": "https://careers.kulm.com/en/vacancies/702",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:15.154Z",
+      "crawledAt": "2026-08-29T03:21:18.387Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -2078,7 +2078,6 @@
         ]
       },
       "firstSeenAt": "2026-07-20T12:57:40.439Z",
-      "needsRetranslation": true,
       "salaryMin": 79000,
       "salaryMax": 120000,
       "baseSalary": {
@@ -2090,7 +2089,8 @@
           "maxValue": 120000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kulm-hotel-552c641c6dc7",
@@ -2123,7 +2123,7 @@
       "url": "https://careers.kulm.com/en/vacancies/724",
       "source": "Kulm Hotel St. Moritz Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:17.187Z",
+      "crawledAt": "2026-08-29T03:21:20.296Z",
       "addressLocality": "St. Moritz",
       "postalCode": "7500",
       "addressRegion": "GR",
@@ -2158,7 +2158,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:03:17.187Z"
+      "firstSeenAt": "2026-08-29T03:21:20.296Z"
     }
   ]
 }
