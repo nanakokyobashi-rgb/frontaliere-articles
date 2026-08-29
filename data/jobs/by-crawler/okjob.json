@@ -1,6 +1,6 @@
 {
   "crawlerKey": "okjob",
-  "assembledAt": "2026-08-28T21:20:24.972Z",
+  "assembledAt": "2026-08-29T03:34:55.650Z",
   "jobs": [
     {
       "id": "okjob-3661dd3cf3ef",
@@ -188,6 +188,67 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-28T21:20:07.799Z"
+    },
+    {
+      "id": "okjob-4477bb84633a",
+      "slug": "29-08-2026-41778-berne-fixe-dachdecker-in-m-w-d-okjob-ch",
+      "slugByLocale": {
+        "de": "29-08-2026-41778-berne-fixe-dachdecker-in-m-w-d-okjob-ch",
+        "it": "29-08-2026-41778-berne-fixe-dachdecker-in-m-w-d-okjob-ch",
+        "en": "29-08-2026-41778-berne-fixe-dachdecker-in-m-w-d-okjob-ch",
+        "fr": "29-08-2026-41778-berne-fixe-dachdecker-in-m-w-d-okjob-ch"
+      },
+      "company": "OK Job SA, succursale di Mendrisio",
+      "companyKey": "okjob",
+      "companyDomain": "okjob.ch",
+      "title": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d)",
+      "titleByLocale": {
+        "de": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d)",
+        "it": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d)",
+        "en": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d)",
+        "fr": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d)"
+      },
+      "description": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d) — OK Job SA, succursale di Mendrisio",
+      "descriptionByLocale": {
+        "de": "29.08.2026 / 41778 Berne / Fixe Dachdecker*in (m/w/d) — OK Job SA, succursale di Mendrisio"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://www.okjob.ch/de/jobangebote/dachdeckerin-m-w-d-bern/?ref=41778",
+      "source": "OK Job SA, succursale di Mendrisio Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:34:39.160Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://www.okjob.ch/de/jobangebote/dachdeckerin-m-w-d-bern/?ref=41778",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:34:39.160Z"
     }
   ]
 }
