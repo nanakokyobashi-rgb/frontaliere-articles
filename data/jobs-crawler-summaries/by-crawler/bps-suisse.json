@@ -1,18 +1,19 @@
 {
   "key": "bps-suisse",
   "label": "BPS Suisse",
-  "generatedAt": "2026-08-29T14:58:13.756Z",
+  "generatedAt": "2026-08-29T23:40:40.999Z",
   "total": 4,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 4,
-  "durationMs": 5348,
-  "avgDurationMs": 5348,
+  "durationMs": 5951,
+  "avgDurationMs": 5951,
   "durationHistory": [
     5673,
     5411,
-    5348
+    5348,
+    5951
   ],
   "newJobs": [],
   "updatedJobs": [],
