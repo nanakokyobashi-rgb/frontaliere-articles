@@ -1,6 +1,6 @@
 {
   "crawlerKey": "swiss-life",
-  "assembledAt": "2026-08-28T21:03:23.328Z",
+  "assembledAt": "2026-08-29T03:22:50.702Z",
   "jobs": [
     {
       "id": "swiss-life-e12b28060b4c",
@@ -33,7 +33,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Sion/Conseiller-en-immobilier--f-h-d-----Agence-gnrale-Sion-Valais-romand--Rgion-Sion---Sierre-_R11696",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:10.757Z",
+      "crawledAt": "2026-08-29T03:22:36.570Z",
       "addressLocality": "Sion",
       "addressCountry": "CH",
       "country": "CH",
@@ -104,7 +104,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:38.624Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -117,7 +116,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "swiss-life-733ff068b71f",
@@ -150,7 +150,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Sion/Conseiller-conseillre-en-prvoyance-et-en-finance--f-h-d--dans-le-cadre-du-rglement-de-la-succession---Agence-gnrale-Sion-Valais-romand---rgion-Val-de-Bagnes_R09487",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:10.037Z",
+      "crawledAt": "2026-08-29T03:22:35.887Z",
       "addressLocality": "Sion",
       "addressCountry": "CH",
       "country": "CH",
@@ -266,7 +266,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Sion/Conseiller-conseillre-en-prvoyance-et-en-finance--f-h-d--dans-le-cadre-du-rglement-de-la-succession---Agence-gnrale-Sion-Valais-romand---rgion-Val-d-Anniviers_R09486",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:03:09.276Z",
+      "crawledAt": "2026-08-29T03:22:34.995Z",
       "addressLocality": "Sion",
       "addressCountry": "CH",
       "country": "CH",
@@ -332,7 +332,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:37.334Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -345,7 +344,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "swiss-life-a86fd26bef3f",
@@ -378,7 +378,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Sion/Conseiller-conseillre-en-prvoyance-et-en-finance--f-h-d--avec-exprience-professionnelle---Agence-gnrale-Sion-Valais-romand_R09485",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:08.590Z",
+      "crawledAt": "2026-08-29T03:22:34.212Z",
       "addressLocality": "Sion",
       "addressCountry": "CH",
       "country": "CH",
@@ -497,7 +497,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Visp/Immobilienberater--w-m-d----Generalagentur-Visp-Oberwallis_R11690",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:07.914Z",
+      "crawledAt": "2026-08-29T03:22:33.516Z",
       "addressLocality": "Visp",
       "addressCountry": "CH",
       "country": "CH",
@@ -560,7 +560,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:40.576Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -573,7 +572,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "swiss-life-925a50eb1c92",
@@ -606,7 +606,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Visp/Vorsorge--und-Finanzberatende--w-m-d----im-Rahmen-einer-Nachfolgeregelung---Generalagentur-Visp-Oberwallis_R09488",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:07.265Z",
+      "crawledAt": "2026-08-29T03:22:32.840Z",
       "addressLocality": "Visp",
       "addressCountry": "CH",
       "country": "CH",
@@ -674,7 +674,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:39.938Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -687,7 +686,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "swiss-life-a8186e2c72af",
@@ -720,7 +720,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Visp/Vorsorge--und-Finanzberatende--w-m-d----Quereinsteigende-willkommen--Generalagentur-Visp-Oberwallis_R08506-1",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:06.608Z",
+      "crawledAt": "2026-08-29T03:22:32.150Z",
       "addressLocality": "Visp",
       "addressCountry": "CH",
       "country": "CH",
@@ -796,7 +796,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:39.261Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -809,7 +808,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "swiss-life-d19c34b9869e",
@@ -842,7 +842,7 @@
       "url": "https://swisslife.wd3.myworkdayjobs.com/en-US/Swiss_Life_Career_Site/job/Lausanne/Conseiller-conseillre-en-prvoyance-et-en-finance--f-h-d----Romandie_R08713",
       "source": "Swiss Life Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:02:57.952Z",
+      "crawledAt": "2026-08-29T03:22:22.476Z",
       "addressLocality": "Sion",
       "addressCountry": "CH",
       "country": "CH",
@@ -914,7 +914,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:22:35.812Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -927,7 +926,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     }
   ]
 }
