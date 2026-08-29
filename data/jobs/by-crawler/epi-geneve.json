@@ -1,6 +1,6 @@
 {
   "crawlerKey": "epi-geneve",
-  "assembledAt": "2026-08-28T20:54:51.583Z",
+  "assembledAt": "2026-08-29T14:23:58.604Z",
   "jobs": [
     {
       "id": "epi-geneve-4e34dd1f9026",
@@ -33,7 +33,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000133855729-un-e-assistant-e-socio-educatif-tive-service-b-residence-du-tram-jaune-80-cdm-jusqu-au-31-12-2026?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.641Z",
+      "crawledAt": "2026-08-29T14:23:52.692Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de Chêne 48",
@@ -90,7 +90,7 @@
         "it": "un-socio-educatore-piscina-d-70-hom-1-settembre-2026-al-31-gennaio-2027-etablissements-publics-pour-l-integration",
         "en": "a-socio-educator-pool-d-70-hom-september-1-2026-to-january-31-2027-etablissements-publics-pour-l-integration-collonge",
         "de": "ein-sozialpadagoge-pool-d-70-hom-1-september-2026-bis-31-januar-2027-etablissements-publics-pour-l-integration-collonge",
-        "fr": "un-e-socio-educateur-trice-pool-d-70-cdm-du-1er-septembre-2026-au-31-janvier-2027-etablissements-publics-pour-l"
+        "fr": "un-e-socio-educateur-trice-pool-d-70-cdm-du-1er-septembre-2026-au-31-janvier-2027-epi"
       },
       "company": "Établissements publics pour l'intégration",
       "companyKey": "epi-geneve",
@@ -114,7 +114,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000133017305--un-e-socio-educateur-trice-pool-d-70-cdm-du-1er-septembre-2026-au-31-janvier-2027?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.632Z",
+      "crawledAt": "2026-08-29T14:23:52.734Z",
       "addressLocality": "Collonge-Bellerive",
       "addressRegion": "GE",
       "streetAddress": "Route d'Hermance",
@@ -199,7 +199,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000140904589-un-e-analyste-rh-a-70-cdi?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.627Z",
+      "crawledAt": "2026-08-29T14:23:52.738Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de Chêne 48",
@@ -238,7 +238,6 @@
         ]
       },
       "firstSeenAt": "2026-07-31T22:07:06.667Z",
-      "needsRetranslation": true,
       "salaryMin": 42400,
       "salaryMax": 64000,
       "baseSalary": {
@@ -250,7 +249,8 @@
           "maxValue": 64000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "epi-geneve-43f367a7bcb3",
@@ -259,7 +259,7 @@
         "it": "un-assistente-socio-educativo-piscina-di-rinforzo-e-80-cdi-etablissements-publics-pour-l-integration-collonge-bellerive",
         "en": "a-socio-educational-assistant-reinforcement-pool-e-80-cdi-etablissements-publics-pour-l-integration-collonge-bellerive",
         "de": "un-e-assistent-e-socio-educatif-tive-pool-de-renforcement-e-80-cdi-etablissements-publics-pour-l-integration-collonge",
-        "fr": "un-e-assistant-e-socio-educatif-tive-pool-de-renforcement-e-80-cdi-etablissements-publics-pour-l-integration-collonge"
+        "fr": "un-e-assistant-e-socio-educatif-tive-pool-de-renforcement-e-80-cdi-epi-geneve-collonge"
       },
       "company": "Établissements publics pour l'intégration",
       "companyKey": "epi-geneve",
@@ -283,7 +283,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000110722240-un-e-assistant-e-socio-educatif-tive-pool-de-renforcement-e-80-cdi?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.621Z",
+      "crawledAt": "2026-08-29T14:23:52.753Z",
       "addressLocality": "Collonge-Bellerive",
       "addressRegion": "GE",
       "streetAddress": "Route d'Hermance 63",
@@ -337,7 +337,6 @@
         "un-assistente-socio-educativo-piscina-di-rinforzo-e-80-cdi-etablissements-publics-pour-l-integration-collonge-bellerive"
       ],
       "firstSeenAt": "2026-07-03T22:53:33.321Z",
-      "needsRetranslation": true,
       "salaryMin": 48400,
       "salaryMax": 73200,
       "baseSalary": {
@@ -349,7 +348,8 @@
           "maxValue": 73200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "epi-geneve-f0b0f2420013",
@@ -358,7 +358,7 @@
         "it": "assistente-socio-educativo-upsa-70-8-mesi-hom-etablissements-publics-pour-l-integration-collonge-bellerive-ge",
         "en": "a-socio-educational-assistant-upsa-70-8-month-hom-etablissements-publics-pour-l-integration-collonge-bellerive-ge",
         "de": "un-e-assistent-e-socio-educatif-tive-upsa-70-cdm-de-8-mois-etablissements-publics-pour-l-integration-collonge-bellerive",
-        "fr": "un-e-assistant-e-socio-educatif-tive-upsa-70-cdm-de-8-mois-etablissements-publics-pour-l-integration-collonge-bellerive"
+        "fr": "un-e-assistant-e-socio-educatif-tive-upsa-70-cdm-de-8-mois-epi-geneve-collonge-bellerive"
       },
       "company": "Établissements publics pour l'intégration",
       "companyKey": "epi-geneve",
@@ -382,7 +382,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000110721167-un-e-assistant-e-socio-educatif-tive-upsa-70-cdm-de-8-mois?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.615Z",
+      "crawledAt": "2026-08-29T14:23:52.747Z",
       "addressLocality": "Collonge-Bellerive",
       "addressRegion": "GE",
       "streetAddress": "Route d'Hermance 63",
@@ -423,7 +423,6 @@
         "assistente-socio-educativo-upsa-70-8-mesi-hom-etablissements-publics-pour-l-integration-collonge-bellerive-ge"
       ],
       "firstSeenAt": "2026-07-03T22:53:33.328Z",
-      "needsRetranslation": true,
       "salaryMin": 42400,
       "salaryMax": 64000,
       "baseSalary": {
@@ -435,7 +434,8 @@
           "maxValue": 64000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "epi-geneve-495deddc8982",
@@ -516,7 +516,8 @@
           "maxValue": 92000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "epi-geneve-21263f327c90",
@@ -601,7 +602,8 @@
           "maxValue": 73200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "epi-geneve-9b2424cf5847",
@@ -610,7 +612,7 @@
         "it": "diversi-assistenti-socio-educativi-ves-gardeurs-ses-50-85-microstruttura-cdi-etablissements-publics-pour-l-integration",
         "en": "several-socio-educational-assistants-ves-gardeurs-ses-50-85-microstructure-cdi-etablissements-publics-pour-l-integration",
         "de": "mehrere-sozialpadagogische-assistenten-ves-gardeurs-ses-50-85-mikrostruktur-cdi-etablissements-publics-pour-l",
-        "fr": "plusieurs-assistants-es-socio-educatifs-ves-veilleurs-ses-50-85-microstructure-cdi-etablissements-publics-pour-l"
+        "fr": "plusieurs-assistants-es-socio-educatifs-ves-veilleurs-ses-50-85-microstructure-cdi-epi"
       },
       "company": "Établissements publics pour l'intégration",
       "companyKey": "epi-geneve",
@@ -634,7 +636,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000145220455--plusieurs-assistants-es-socio-educatifs-ves-veilleurs-ses-50-85-microstructure-cdi?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.574Z",
+      "crawledAt": "2026-08-29T14:23:52.716Z",
       "addressLocality": "Collonge-Bellerive",
       "addressRegion": "GE",
       "streetAddress": "Route d'Hermance 63",
@@ -771,7 +773,8 @@
       },
       "previousSlugs": [
         "un-e-assistant-e-socio-educatif-tive-amethyste-80-cdi-etablissements-publics-pour-l-integration-collonge-bellerive"
-      ]
+      ],
+      "crawlerMissStreak": 1
     },
     {
       "id": "epi-geneve-412cf8986674",
@@ -804,7 +807,7 @@
       "url": "https://jobs.smartrecruiters.com/EtablissementsPublicsPourLIntegration/744000143292499-un-e-agent-e-technico-commercial-e-services-socioprofessionnels-secteur-commercial-80-a-100-cdi?oga=true",
       "source": "EPI Genève Dedicated Parser (SmartRecruiters)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:45.510Z",
+      "crawledAt": "2026-08-29T14:23:52.725Z",
       "addressLocality": "Plan-les-Ouates",
       "addressRegion": "GE",
       "streetAddress": "Chemin du Champ-des-Filles 4A",
