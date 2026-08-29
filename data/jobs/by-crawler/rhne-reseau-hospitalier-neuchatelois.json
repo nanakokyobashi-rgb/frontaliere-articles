@@ -1,6 +1,6 @@
 {
   "crawlerKey": "rhne-reseau-hospitalier-neuchatelois",
-  "assembledAt": "2026-08-29T14:35:00.603Z",
+  "assembledAt": "2026-08-29T23:22:22.477Z",
   "jobs": [
     {
       "id": "rhne-reseau-hospitalier-neuchatelois-5b5761aa97bd",
@@ -34,7 +34,7 @@
       "url": "https://www.rhne.ch/espace-emploi/emploi/postuler/tous-les-postes?jobId=18e393cd-c6eb-4fc6-bc7f-497a18acd7c4&cat=all",
       "source": "RHNE Réseau hospitalier neuchâtelois Dedicated Parser (Liferay HTML listing)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:34:52.836Z",
+      "crawledAt": "2026-08-29T23:22:16.894Z",
       "addressLocality": "Neuchâtel",
       "addressRegion": "NE",
       "addressCountry": "CH",
@@ -74,7 +74,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:34:52.836Z"
+      "firstSeenAt": "2026-08-29T23:22:16.894Z"
     },
     {
       "id": "rhne-reseau-hospitalier-neuchatelois-9f9f89f8d0a7",
@@ -108,7 +108,7 @@
       "url": "https://www.rhne.ch/espace-emploi/emploi/postuler/tous-les-postes?jobId=29e6659d-1c0b-41c2-b8ca-0aa28bcb044a&cat=all",
       "source": "RHNE Réseau hospitalier neuchâtelois Dedicated Parser (Liferay HTML listing)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:34:50.682Z",
+      "crawledAt": "2026-08-29T23:22:14.649Z",
       "addressLocality": "Neuchâtel",
       "addressRegion": "NE",
       "addressCountry": "CH",
@@ -140,7 +140,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:34:50.682Z"
+      "firstSeenAt": "2026-08-29T23:22:14.649Z"
     },
     {
       "id": "rhne-reseau-hospitalier-neuchatelois-c97f96bbadab",
@@ -174,7 +174,7 @@
       "url": "https://www.rhne.ch/espace-emploi/emploi/postuler/tous-les-postes?jobId=04e52545-432d-426f-8008-99d12759beb7&cat=all",
       "source": "RHNE Réseau hospitalier neuchâtelois Dedicated Parser (Liferay HTML listing)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:34:55.013Z",
+      "crawledAt": "2026-08-29T23:22:19.164Z",
       "addressLocality": "Le Locle",
       "addressRegion": "NE",
       "addressCountry": "CH",
@@ -214,7 +214,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:34:55.013Z"
+      "firstSeenAt": "2026-08-29T23:22:19.164Z"
     },
     {
       "id": "rhne-reseau-hospitalier-neuchatelois-0a7fe4f1c7a2",
@@ -248,7 +248,7 @@
       "url": "https://www.rhne.ch/espace-emploi/emploi/postuler/tous-les-postes?jobId=7d8be38b-93e4-4258-b4a0-47a77e6250c1&cat=all",
       "source": "RHNE Réseau hospitalier neuchâtelois Dedicated Parser (Liferay HTML listing)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T14:34:57.221Z",
+      "crawledAt": "2026-08-29T23:22:12.448Z",
       "addressLocality": "La Chaux-de-Fonds",
       "addressRegion": "NE",
       "addressCountry": "CH",
@@ -280,7 +280,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:34:57.221Z"
+      "firstSeenAt": "2026-08-29T23:22:12.448Z"
     },
     {
       "id": "rhne-reseau-hospitalier-neuchatelois-c80c7de3f0a7",
