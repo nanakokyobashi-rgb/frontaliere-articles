@@ -1,17 +1,18 @@
 {
   "key": "knowledge-lab",
   "label": "Knowledge Lab",
-  "generatedAt": "2026-08-28T21:43:43.411Z",
+  "generatedAt": "2026-08-29T03:25:38.460Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 590,
-  "avgDurationMs": 590,
+  "durationMs": 822,
+  "avgDurationMs": 822,
   "durationHistory": [
     712,
-    590
+    590,
+    822
   ],
   "newJobs": [],
   "updatedJobs": [
