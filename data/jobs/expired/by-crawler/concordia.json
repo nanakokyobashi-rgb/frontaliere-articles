@@ -25,7 +25,7 @@
       "fr": "specialiste-en-recouvrement-de-creances-d-f-80-100-concordia-luzern"
     },
     "sector": "Assicurazioni",
-    "expiredAt": "2026-08-28T21:38:31.393Z",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
     "previousSlugs": [
       "specialist-in-debt-collection-d-f-80-100-concordia-luzern",
       "specialiste-en-recouvrement-des-creances-d-f-80-100-concordia-luzern",
@@ -1683,6 +1683,619 @@
     "streetAddress": "Bahnhofstrasse 12",
     "salaryMin": 69500,
     "salaryMax": 106000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-assicurativo-in-100-in-zug-concordia-zug",
+    "title": "Versicherungsberater:in, 100 % in Zug",
+    "titleByLocale": {
+      "it": "Consulente assicurativo:in, 100% in Zug",
+      "en": "Insurance consultant:in, 100% in Zug",
+      "de": "Versicherungsberater:in, 100 % in Zug",
+      "fr": "Consultant en assurance:in, 100% en Zug"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Zug",
+    "addressLocality": "Zug",
+    "descriptionByLocale": {
+      "it": "Sei un talento di vendita e ti piace progettare la tua giornata da solo? Poi entrare a far parte della famiglia CONCORDIA e conquistare la regione di vendita Zug.\nQuesto è ciò che vi aspetta\n\n• Sei il nostro esperto di vendita e consulenza in campo con un focus sulla nuova acquisizione dei clienti.\n• Proattivamente programma appuntamenti, creare offerte e vendere le soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Realizzi attivamente varie promozioni di vendita – il vostro successo è ricompensato da un modello di commissione attraente.\n• Si organizzano fiere e stand azioni e partecipare al fine di fare nuovi contatti e costruire una rete.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Contatti, vendite e consulenza sono la vostra passione.\n• Hai una buona conoscenza di tedesco e inglese, ogni altra lingua è un vantaggio.\n• Siete anche in possesso della patente di guida Kat. B e hanno la loro auto.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nPrimavera Chantal\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, squadre versatili e una relazione familiare. Inoltre invitiamo i nostri dipendenti a sviluppare e andare avanti. Le persone che si divertono al lavoro e vogliono progredire professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "You are a sales talent and like to design your day yourself? Then become part of the CONCORDIA family and conquer the sales region Zug.\nThis is what awaits you\n\n• You are our sales and consulting expert in the field with a focus on new customer acquisition.\n• You proactively schedule appointments, create offers and sell needs-based health insurance and pension solutions.\n• You actively implement various sales promotions – your success is rewarded by an attractive commission model.\n• You organize trade fair and stand actions and participate in order to make new contacts and build a network.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion.\n• You have very good knowledge of German and English, every other language is an advantage.\n• You are also in possession of the driving license Kat. B and have their own car.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nChantal Spring\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who have fun at work and want to progress professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Du bist ein Verkaufstalent und gestaltest deinen Tag gerne selbst? Dann werde Teil der CONCORDIA-Familie und erobere die Verkaufsregion Zug.\nDas erwartet dich\n\n• Du bist unser Verkaufs- und Beratungsexperte im Aussendienst mit Fokus auf die Neukundengewinnung.\n• Du vereinbarst proaktiv Termine, erstellst Offerten und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Verschiedene Verkaufsaktionen setzt du aktiv um – dein Erfolg wird durch ein attraktives Provisionsmodell belohnt.\n• Du organisierst Messe- und Standaktionen und nimmst dran teil, um neue Kontakte zu knüpfen und ein Netzwerk aufzubauen.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft.\n• Du verfügst über sehr gute Deutsch- und Englischkenntnisse, jede weitere Sprache von Vorteil.\n• Ebenfalls bist du im Besitz des Führerausweises Kat. B und hast ein eigenes Auto.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nChantal Spring\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Vous êtes un talent de vente et aimez concevoir votre journée vous-même? Puis faire partie de la famille CONCORDIA et conquérir la région de vente Zug.\nC'est ce qui vous attend\n\n• Vous êtes notre expert en ventes et conseil dans le domaine avec un accent sur l'acquisition de nouveaux clients.\n• Vous planifiez des rendez-vous, créez des offres et vendez des solutions d'assurance-maladie et de retraite axées sur les besoins.\n• Vous appliquez activement diverses promotions de vente – votre succès est récompensé par un modèle de commission attrayant.\n• Vous organisez des foires et des stands et participez pour établir de nouveaux contacts et construire un réseau.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion.\n• Vous avez une très bonne connaissance de l'allemand et de l'anglais, toutes les autres langues sont un avantage.\n• Vous êtes également en possession du permis de conduire Kat. B et avez leur propre voiture.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPrintemps Chantal\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Il se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui s'amusent au travail et veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-assicurativo-in-100-in-zug-concordia-zug",
+      "en": "insurance-consultant-in-100-in-zug-concordia-zug",
+      "de": "versicherungsberater-in-100-in-zug-concordia-zug",
+      "fr": "consultant-en-assurance-in-100-en-zug-concordia-zug"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "insurance-consultant-in-100-in-zug-concordia-zug",
+      "consultant-en-assurance-in-100-en-zug-concordia-zug",
+      "versicherungsberater-in-100-in-zug-concordia-zug",
+      "consulente-assicurativo-100-a-zug-concordia-zug",
+      "consulente-assicurativo-100-a-zug-concordia-zug-3ba523",
+      "consultant-en-assurance-in-100-en-zug-concordia-zug-3ba523",
+      "insurance-consultant-in-100-in-zug-concordia-zug-3ba523",
+      "consulente-assicurativo-in-100-in-zug-concordia-zug"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "insurance-consultant-in-100-in-zug-concordia-zug",
+        "consultant-en-assurance-in-100-en-zug-concordia-zug",
+        "versicherungsberater-in-100-in-zug-concordia-zug",
+        "consulente-assicurativo-100-a-zug-concordia-zug",
+        "consulente-assicurativo-100-a-zug-concordia-zug-3ba523",
+        "consultant-en-assurance-in-100-en-zug-concordia-zug-3ba523",
+        "insurance-consultant-in-100-in-zug-concordia-zug-3ba523",
+        "consulente-assicurativo-in-100-in-zug-concordia-zug"
+      ],
+      "en": [
+        "versicherungsberater-in-100-in-zug-concordia-zug"
+      ],
+      "fr": [
+        "versicherungsberater-in-100-in-zug-concordia-zug"
+      ]
+    },
+    "postalCode": "6302",
+    "streetAddress": "Poststrasse 26",
+    "salaryMin": 74500,
+    "salaryMax": 123500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-80-100-in-chur-concordia-chur",
+    "title": "Kundenberater:in, 80–100 % in Chur",
+    "titleByLocale": {
+      "it": "Consulente clienti:in, 80-100% in Chur",
+      "en": "Customer Advisor:in, 80-100% in Chur",
+      "de": "Kundenberater:in, 80–100 % in Chur",
+      "fr": "Conseiller client:in, 80-100% à Chur"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Chur",
+    "addressLocality": "Chur",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia a Chur stiamo cercando una personalità versatile e aperta come te.\nQuesto è ciò che vi aspetta\n\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si prende in considerazione indipendentemente le persone assicurate esistenti e mantenere il contatto quotidiano del cliente.\n• Si crea offerte, eseguire il lavoro amministrativo e programmare proattivamente appuntamenti.\n• Lavori su fiere e azioni stand e rappresenti CONCORDIA in loco.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nKarin Durazzo\nSpecialista di reclutamento\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, squadre versatili e una relazione familiare. Inoltre invitiamo i nostri dipendenti a sviluppare e andare avanti. Le persone che si divertono al lavoro e vogliono progredire professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency in Chur we are looking for a versatile and open-minded personality like you.\nThis is what awaits you\n\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You independently look after existing insured persons and maintain daily customer contact.\n• You create offers, perform administrative work and proactively schedule appointments.\n• You work on trade fairs and stand actions and represent CONCORDIA on site.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nKarin Durrer\nRecruitment specialist\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who have fun at work and want to progress professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur in Chur suchen wir eine vielseitige und aufgeschlossene Persönlichkeit wie dich.\nDas erwartet dich\n\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Bestehende Versicherte betreust du eigenständig und pflegst den täglichen Kundenkontakt.\n• Du erstellst Offerten, führst administrative Arbeiten aus und vereinbarst proaktiv Termine.\n• An Messe- und Standaktionen arbeitest du mit und vertrittst die CONCORDIA vor Ort.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nMichael Bättig\nTeamleiter HR Beratung\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE rassemble des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence à Chur, nous recherchons une personnalité polyvalente et ouverte comme vous.\nC'est ce qui vous attend\n\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance maladie et de retraite basées sur les besoins.\n• Vous vous occupez indépendamment des assurés existants et gardez le contact quotidien avec le client.\n• Vous créez des offres, effectuez des tâches administratives et planifiez des rendez-vous de façon proactive.\n• Vous travaillez sur des salons et des stand actions et représentez CONCORDIA sur place.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toutes les autres langues sont un avantage.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nKarin Durrer\nSpécialiste du recrutement\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Il se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui s'amusent au travail et veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-80-100-in-chur-concordia-chur",
+      "en": "customer-advisor-in-80-100-in-chur-concordia-chur",
+      "de": "kundenberater-in-80-100-in-chur-concordia-chur",
+      "fr": "conseiller-client-in-80-100-a-chur-concordia-chur"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-advisor-in-80-100-in-chur-concordia-chur",
+      "conseiller-client-in-80-100-a-chur-concordia-chur",
+      "kundenberater-in-80-100-in-chur-concordia-chur",
+      "conseiller-client-dans-80-100-a-chur-concordia-chur",
+      "consulente-clienti-80-100-a-coira-concordia-chur",
+      "consulente-clienti-in-80-100-in-chur-concordia-chur"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-advisor-in-80-100-in-chur-concordia-chur",
+        "conseiller-client-in-80-100-a-chur-concordia-chur",
+        "kundenberater-in-80-100-in-chur-concordia-chur",
+        "conseiller-client-dans-80-100-a-chur-concordia-chur",
+        "consulente-clienti-80-100-a-coira-concordia-chur",
+        "consulente-clienti-in-80-100-in-chur-concordia-chur"
+      ],
+      "en": [
+        "kundenberater-in-80-100-in-chur-concordia-chur"
+      ],
+      "fr": [
+        "kundenberater-in-80-100-in-chur-concordia-chur"
+      ]
+    },
+    "postalCode": "7000",
+    "streetAddress": "Masanserstrasse 2",
+    "salaryMin": 68500,
+    "salaryMax": 105000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "specialista-nella-raccolta-del-debito-80-100-concordia-luzern",
+    "title": "Fachspezialist:in Inkasso, 80–100 %",
+    "titleByLocale": {
+      "it": "Specialista: nella raccolta del debito, 80-100%",
+      "en": "Specialist:in debt collection, 80-100%",
+      "de": "Fachspezialist:in Inkasso, 80–100 %",
+      "fr": "Spécialiste: en recouvrement de dettes, 80-100%"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Luzern",
+    "addressLocality": "Luzern",
+    "descriptionByLocale": {
+      "it": "Ti piacciono i numeri e le telefonate esigenti? Diventa poi parte della famiglia CONCORDIA: Noi rafforziamo la nostra divisione debitori clienti e stiamo cercando persone orientate al servizio come voi.\nQuesto è ciò che vi aspetta\n\n• Elaborerai promemoria e azioni nei cantoni assegnati a te\n• Sei responsabile della gestione del debito (contabilità dei pagamenti, rebooking, ammortamento)\n• Mantenete il contatto telefonico e scritto con clienti, uffici, autorità e organi interni\n• Il trattamento dei reclami fa parte anche del vostro mandato\nLo porti con te.\n\n• Hai una formazione commerciale di base (Profilo E) o un'istruzione equivalente con esperienza professionale in un lavoro amministrativo\n• I numeri sono la tua forza\n• Hai una gestione sicura, sapiente e fattiva di conversazioni telefoniche esigenti\n• Hai tedesco elegante e professionale in parola e scrittura\n• La conoscenza del francese o dell'italiano è un altro vantaggio\n• Resilienza e assertività vi hanno separati\nIl prossimo passo\nMirjam Bäbi\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, squadre versatili e una relazione familiare. Inoltre invitiamo i nostri dipendenti a sviluppare e andare avanti. Le persone che si divertono al lavoro e vogliono progredire professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Do you love numbers and demanding phone calls? Then become part of the CONCORDIA family: We strengthen our customer debtors division and are looking for service-oriented people like you.\nThis is what awaits you\n\n• You will process reminders and actions in the cantons assigned to you\n• You are responsible for debt management (accounting of payments, rebookings, depreciation)\n• You maintain telephone and written contact with customers, offices, authorities and internal bodies\n• Processing complaints is also part of your remit\nYou bring that with you\n\n• You have a basic commercial education (E-profile) or an equivalent education with professional experience in an administrative job\n• Numbers are your strength\n• You have a safe, skilful and factual handling of demanding telephone customer conversations\n• You have stylish, professional German in word and writing\n• Knowledge of French or Italian is another advantage\n• Resilience and assertiveness set you apart\nYour next step\nMirjam Bäbi\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who have fun at work and want to progress professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Du liebst Zahlen und anspruchsvolle Telefonate? Dann werde Teil der CONCORDIA-Familie: Wir verstärken unseren Bereich Kunden-Debitoren und suchen dienstleistungsorientierte Personen wie dich.\nDas erwartet dich\n\n• Du bearbeitest Mahnungen und Betreibungen in den dir zugeteilten Kantonen\n• Du bist zuständig für die Debitorenbewirtschaftung (Verbuchung von Zahlungen, Umbuchungen, Abschreibungen)\n• Du hältst telefonischen sowie schriftlichen Kontakt mit Kunden, Ämtern, Behörden und internen Stellen\n• Die Bearbeitung von Beschwerden gehört ebenfalls in deinen Aufgabenbereich\nDas bringst du mit\n\n• Du verfügst über eine kaufmännische Grundausbildung (E-Profil) oder über eine gleichwertige Ausbildung mit Berufserfahrung in einer administrativen Tätigkeit\n• Zahlen sind deine Stärke\n• Du hast einen sicheren, geschickten und sachlichen Umgang mit anspruchsvollen telefonischen Kundengesprächen\n• Du verfügst über stilsicheres, professionelles Deutsch in Wort und Schrift\n• Französisch- oder Italienischkenntnisse sind weitere Vorteile\n• Belastbarkeit und Durchsetzungsvermögen zeichnen dich aus\nDein nächster Schritt\nMirjam Bäbi\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Vous aimez les numéros et les appels exigeants ? Puis devenez membre de la famille CONCORDIA : Nous renforçons notre division clients débiteurs et sommes à la recherche de personnes orientées vers le service comme vous.\nC'est ce qui vous attend\n\n• Vous traiterez les rappels et les actions dans les cantons qui vous sont assignés\n• Vous êtes responsable de la gestion de la dette (comptabilisation des paiements, rebookings, dépréciation)\n• Vous entretenez des contacts téléphoniques et écrits avec les clients, les bureaux, les autorités et les organismes internes\n• Le traitement des plaintes fait également partie de votre mandat\nApporte ça avec toi.\n\n• Vous avez une éducation commerciale de base (profil E) ou une formation équivalente avec une expérience professionnelle dans un emploi administratif\n• Les chiffres sont votre force\n• Vous avez un traitement sûr, habile et factuel des conversations exigeantes des clients du téléphone\n• Vous avez l'allemand élégant et professionnel en paroles et en écriture\n• La connaissance du français ou de l'italien est un autre avantage\n• La résilience et l'affirmation vous séparent\nVotre prochaine étape\nMirjam Bäbi\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Il se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui s'amusent au travail et veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "specialista-nella-raccolta-del-debito-80-100-concordia-luzern",
+      "en": "specialist-in-debt-collection-80-100-concordia-luzern",
+      "de": "fachspezialist-in-inkasso-80-100-concordia-luzern",
+      "fr": "specialiste-en-recouvrement-de-dettes-80-100-concordia-luzern"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "specialist-in-debt-collection-80-100-concordia-luzern",
+      "specialiste-en-recouvrement-de-dettes-80-100-concordia-luzern",
+      "fachspezialist-in-inkasso-80-100-concordia-luzern",
+      "specialista-nella-raccolta-del-debito-80-100-concordia-luzern"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "specialist-in-debt-collection-80-100-concordia-luzern",
+        "specialiste-en-recouvrement-de-dettes-80-100-concordia-luzern",
+        "fachspezialist-in-inkasso-80-100-concordia-luzern",
+        "specialista-nella-raccolta-del-debito-80-100-concordia-luzern"
+      ],
+      "en": [
+        "fachspezialist-in-inkasso-80-100-concordia-luzern"
+      ],
+      "fr": [
+        "fachspezialist-in-inkasso-80-100-concordia-luzern"
+      ]
+    },
+    "postalCode": "6003",
+    "streetAddress": "Hirschmattstrasse 64",
+    "salaryMin": 74500,
+    "salaryMax": 123500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "responsabile-agenzia-100-a-willisau-concordia-willisau",
+    "title": "Agenturleiter:in 100 % in Willisau",
+    "titleByLocale": {
+      "it": "Responsabile Agenzia: 100% a Willisau",
+      "en": "Head of Agency: 100% in Willisau",
+      "de": "Agenturleiter:in 100 % in Willisau",
+      "fr": "Chef de l'agence: 100% à Willisau"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Willisau",
+    "addressLocality": "Willisau",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia Willisau ti stiamo cercando come una personalità di vendita e leadership.\nQuesto è ciò che vi aspetta\n\n• Guida il tuo team con sette dipendenti e si assume la responsabilità di raggiungere obiettivi, soddisfare gli standard di servizio e implementare varie misure di vendita.\n• Supporti i dipendenti nel raggiungimento dei loro obiettivi e nello sviluppo del loro potenziale.\n• Acquisire nuovi clienti in modo indipendente, organizzare proattivo appuntamenti e vendere soluzioni di salute e prevenzione basate sulle esigenze.\n• Mantenete partnership con aziende e associazioni e espandete continuamente la vostra rete.\n• Nella vostra regione, rappresentate CONCORDIA professionalmente e con passione.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Idealmente, si porta esperienza di leadership e sono una personalità motivante.\n• Comunicante, socievole e con un modo vincente, convinci i clienti.\n• Come talento organizzativo e giocatore di squadra, si contribuisce alla crescita di successo dell'agenzia.\n• Hai già completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nAdriana Sigrist\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency Willisau we are looking for you as a sales and leadership personality.\nThis is what awaits you\n\n• You lead your team with seven employees and take responsibility for achieving goals, meeting service standards and implementing various sales measures.\n• You support employees in achieving their goals and developing their potential.\n• You acquire new customers independently, proactively arrange appointments and sell needs-based health and prevention solutions.\n• You maintain partnerships with companies and associations and continuously expand your network.\n• In your region, you represent CONCORDIA professionally and with passion.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Ideally, you bring leadership experience and are a motivating personality.\n• Communicative, sociable and with a winning way, you convince customers.\n• As an organizational talent and team player, you contribute to the successful growth of the agency.\n• You have already completed the VBV training or are ready to complete it - we support you.\nYour next step\nAdriana Sigrist\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur Willisau suchen wir dich als Verkaufs- und Führungspersönlichkeit.\nDas erwartet dich\n\n• Du führst dein Team mit sieben Mitarbeitenden und trägst die Verantwortung für die Zielerreichung, die Einhaltung der Servicestandards und setzt verschiedene Verkaufs-massnahmen um.\n• Die Mitarbeitenden unterstützt du dabei, ihre Ziele zu erreichen und ihr Potenzial zu entfalten.\n• Neukunden akquirierst du selbstständig, vereinbarst proaktiv Termine und verkaufst bedarfsgerechte Kranken- und Vorsorgelösungen.\n• Du pflegst Partnerschaften mit Firmen und Vereinen und baust dein Netzwerk kontinuierlich aus.\n• In deiner Region repräsentierst du die CONCORDIA professionell und mit Leidenschaft.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Idealerweise bringst du Führungserfahrung mit und bist eine motivierende Persönlichkeit.\n• Kommunikativ, kontaktfreudig und mit einer gewinnenden Art überzeugst du Kundinnen und Kunden.\n• Als Organisationstalent und Teamplayer trägst du dazu bei, dass die Agentur erfolgreich wächst.\n• Die VBV Ausbildung hast du bereits abgeschlossen oder bist bereit, sie zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nAdriana Sigrist\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence Willisau, nous vous recherchons comme une personnalité de vente et de leadership.\nC'est ce qui vous attend.\n\n• Vous dirigez votre équipe avec sept employés et prenez la responsabilité d'atteindre les objectifs, de respecter les normes de service et de mettre en oeuvre diverses mesures de vente.\n• Vous aidez les employés à atteindre leurs objectifs et à développer leur potentiel.\n• Vous achetez de nouveaux clients indépendamment, organisez des rendez-vous proactifs et vendez des solutions de santé et de prévention basées sur les besoins.\n• Vous maintenez des partenariats avec des entreprises et des associations et élargissez continuellement votre réseau.\n• Dans votre région, vous représentez la CONCORDIE professionnellement et avec passion.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Idéalement, vous apportez une expérience de leadership et êtes une personnalité motivante.\n• Communicative, sociable et avec une façon gagnante, vous convainquez les clients.\n• En tant que talent organisationnel et joueur d'équipe, vous contribuez à la croissance réussie de l'agence.\n• Vous avez déjà terminé la formation VBV ou êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nAdriana Sigrist\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "responsabile-agenzia-100-a-willisau-concordia-willisau",
+      "en": "head-of-agency-100-in-willisau-concordia-willisau",
+      "de": "agenturleiter-in-100-in-willisau-concordia-willisau",
+      "fr": "chef-de-l-agence-100-a-willisau-concordia-willisau"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "head-of-agency-100-in-willisau-concordia-willisau",
+      "chef-de-l-agence-100-a-willisau-concordia-willisau",
+      "agenturleiter-in-100-in-willisau-concordia-willisau",
+      "responsabile-agenzia-100-a-willisau-concordia-willisau"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "head-of-agency-100-in-willisau-concordia-willisau",
+        "chef-de-l-agence-100-a-willisau-concordia-willisau",
+        "agenturleiter-in-100-in-willisau-concordia-willisau",
+        "responsabile-agenzia-100-a-willisau-concordia-willisau"
+      ],
+      "en": [
+        "agenturleiter-in-100-in-willisau-concordia-willisau"
+      ],
+      "fr": [
+        "agenturleiter-in-100-in-willisau-concordia-willisau"
+      ]
+    },
+    "postalCode": "6130",
+    "streetAddress": "Bahnhofplatz 5",
+    "salaryMin": 110500,
+    "salaryMax": 169500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-80-100-a-erlenbach-concordia-erlenbach",
+    "title": "Kundenberater:in, 80–100 % in Erlenbach",
+    "titleByLocale": {
+      "it": "Consulente clienti: in, 80-100% a Erlenbach",
+      "en": "Customer consultant: in, 80-100% in Erlenbach",
+      "de": "Kundenberater:in, 80–100 % in Erlenbach",
+      "fr": "Consultant client: en, 80-100% à Erlenbach"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Erlenbach",
+    "addressLocality": "Erlenbach",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia di Erlenbach cerchiamo una personalità versatile e aperta come te.\nQuesto è ciò che vi aspetta\n\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si occupa in modo indipendente di persone assicurate esistenti e mantenere il contatto con il cliente quotidiano.\n• Si crea offerte, eseguire il lavoro amministrativo e programmare proattivamente appuntamenti.\n• Si lavora su fiere e stand azioni e rappresentano CONCORDIA in loco.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nIrina pescatore\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency in Erlenbach we are looking for a versatile and open-minded personality like you.\nThis is what awaits you\n\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You independently look after existing insured persons and maintain daily customer contact.\n• You create offers, perform administrative work and proactively schedule appointments.\n• You work on trade fairs and stand actions and represent CONCORDIA on site.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nIrina fisherman\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur in Erlenbach suchen wir eine vielseitige und aufgeschlossene Persönlichkeit wie dich.\nDas erwartet dich\n\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Bestehende Versicherte betreust du eigenständig und pflegst den täglichen Kundenkontakt.\n• Du erstellst Offerten, führst administrative Arbeiten aus und vereinbarst proaktiv Termine.\n• An Messe- und Standaktionen arbeitest du mit und vertrittst die CONCORDIA vor Ort.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nIrina Fischer\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence à Erlenbach, nous recherchons une personnalité polyvalente et ouverte comme vous.\nC'est ce qui vous attend.\n\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous vous occupez indépendamment des assurés existants et gardez le contact quotidien avec le client.\n• Vous créez des offres, effectuez un travail administratif et planifiez des rendez-vous proactifs.\n• Vous travaillez sur des salons et des stand actions et représentez CONCORDIA sur place.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPêcheur Irina\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-80-100-a-erlenbach-concordia-erlenbach",
+      "en": "customer-consultant-in-80-100-in-erlenbach-concordia-erlenbach",
+      "de": "kundenberater-in-80-100-in-erlenbach-concordia-erlenbach",
+      "fr": "consultant-client-en-80-100-a-erlenbach-concordia-erlenbach"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-consultant-in-80-100-in-erlenbach-concordia-erlenbach",
+      "consultant-client-in-80-100-a-erlenbach-concordia-erlenbach",
+      "kundenberater-in-80-100-in-erlenbach-concordia-erlenbach",
+      "consulente-clienti-in-80-100-a-erlenbach-concordia-erlenbach"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-consultant-in-80-100-in-erlenbach-concordia-erlenbach",
+        "consultant-client-in-80-100-a-erlenbach-concordia-erlenbach",
+        "kundenberater-in-80-100-in-erlenbach-concordia-erlenbach",
+        "consulente-clienti-in-80-100-a-erlenbach-concordia-erlenbach"
+      ],
+      "en": [
+        "kundenberater-in-80-100-in-erlenbach-concordia-erlenbach"
+      ],
+      "fr": [
+        "kundenberater-in-80-100-in-erlenbach-concordia-erlenbach",
+        "consultant-client-in-80-100-a-erlenbach-concordia-erlenbach"
+      ]
+    },
+    "postalCode": "8703",
+    "streetAddress": "Bahnhofstrasse 33B",
+    "salaryMin": 83000,
+    "salaryMax": 127500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-ufficio-60-70-a-laufenburg-concordia-laufenburg",
+    "title": "Kundenberater:in Geschäftsstelle, 60–70 % in Laufenburg",
+    "titleByLocale": {
+      "it": "Consulente clienti: in ufficio, 60-70% a Laufenburg",
+      "en": "Customer consultant: in office, 60-70% in Laufenburg",
+      "de": "Kundenberater:in Geschäftsstelle, 60–70 % in Laufenburg",
+      "fr": "Consultant client : en bureau, 60-70% à Laufenburg"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Laufenburg",
+    "addressLocality": "Laufenburg",
+    "descriptionByLocale": {
+      "it": "Sei ambizioso e ti piace educare te stesso? Inizia la tua carriera a CONCORDIA. Per il nostro ufficio a Laufenburg, stiamo cercando persone efficienti e motivate come te.\nQuesto è ciò che vi aspetta\n\n• È possibile consigliare e badare ai nostri clienti indipendentemente nel vostro ufficio o a casa loro.\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si programma proattivamente appuntamenti, creare offerte e completare i compiti amministrativi corrispondenti.\n• Attui le misure di vendita, costruisci una rete e rappresenti CONCORDIA a Laufenburg e dintorni.\nLo porti con te.\n\n• Hai completato la formazione professionale in un ambiente di servizio o di vendita e vivi nella regione.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Siete comunicativi e socievoli e godetevi il lavoro indipendentemente.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nIrina pescatore\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Are you ambitious and like to educate yourself? Start your career at CONCORDIA. For our office in Laufenburg, we are looking for efficient and motivated people like you.\nThis is what awaits you\n\n• You can advise and look after our customers independently in your office or at their home.\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You proactively schedule appointments, create offers and complete the corresponding administrative tasks.\n• You implement sales measures, build up a network and represent CONCORDIA in Laufenburg and the surrounding area.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment and live in the region.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You are communicative and sociable and enjoy working independently.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nIrina fisherman\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Du bist ehrgeizig und bildest dich gerne weiter? Dann starte deine Karriere bei der CONCORDIA. Für unsere Geschäftsstelle in Laufenburg suchen wir leistungsbereite und motivierte Menschen wie dich.\nDas erwartet dich\n\n• Unsere Kundinnen und Kunden berätst und betreust du selbständig in deiner Geschäftsstelle oder bei ihnen zu Hause.\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Du vereinbarst proaktiv Termine, erstellst Offerten und erledigst die dazugehörigen administrativen Aufgaben.\n• Verkaufsmassnahmen setzt du um, baust ein Netzwerk auf und repräsentierst die CONCORDIA in Laufenburg und Umgebung.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld und wohnst in der Region.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Du bist kommunikativ sowie kontaktfreudig und arbeitest gerne selbstständig.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nIrina Fischer\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Êtes-vous ambitieux et aimez-vous vous éduquer ? Commencez votre carrière chez CONCORDIA. Pour notre bureau à Laufenburg, nous recherchons des gens efficaces et motivés comme vous.\nC'est ce qui vous attend.\n\n• Vous pouvez conseiller et prendre soin de nos clients indépendamment dans votre bureau ou chez eux.\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous planifiez les rendez-vous de façon proactive, créez des offres et accomplissez les tâches administratives correspondantes.\n• Vous mettez en œuvre des mesures de vente, créez un réseau et représentez CONCORDIA à Laufenburg et dans les environs.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente et vous vivez dans la région.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous êtes communicatif et sociable et aimez travailler indépendamment.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPêcheur Irina\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-ufficio-60-70-a-laufenburg-concordia-laufenburg",
+      "en": "customer-consultant-in-office-60-70-in-laufenburg-concordia-laufenburg",
+      "de": "kundenberater-in-geschaftsstelle-60-70-in-laufenburg-concordia-laufenburg",
+      "fr": "consultant-client-en-bureau-60-70-a-laufenburg-concordia-laufenburg"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-consultant-in-office-60-70-in-laufenburg-concordia-laufenburg",
+      "consultant-client-en-bureau-60-70-a-laufenburg-concordia-laufenburg",
+      "kundenberater-in-geschaftsstelle-60-70-in-laufenburg-concordia-laufenburg",
+      "consulente-clienti-in-ufficio-60-70-a-laufenburg-concordia-laufenburg"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-consultant-in-office-60-70-in-laufenburg-concordia-laufenburg",
+        "consultant-client-en-bureau-60-70-a-laufenburg-concordia-laufenburg",
+        "kundenberater-in-geschaftsstelle-60-70-in-laufenburg-concordia-laufenburg",
+        "consulente-clienti-in-ufficio-60-70-a-laufenburg-concordia-laufenburg"
+      ],
+      "en": [
+        "kundenberater-in-geschaftsstelle-60-70-in-laufenburg-concordia-laufenburg"
+      ],
+      "fr": [
+        "kundenberater-in-geschaftsstelle-60-70-in-laufenburg-concordia-laufenburg"
+      ]
+    },
+    "postalCode": "5080",
+    "streetAddress": "Neuhofstrasse 1",
+    "salaryMin": 51800,
+    "salaryMax": 79500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-ufficio-80-a-laufen-concordia-laufen",
+    "title": "Kundenberater:in Geschäftsstelle, 80 % in Laufen",
+    "titleByLocale": {
+      "it": "Consulente clienti: in ufficio, 80% a Laufen",
+      "en": "Customer advisor: in office, 80% in Laufen",
+      "de": "Kundenberater:in Geschäftsstelle, 80 % in Laufen",
+      "fr": "Conseiller client: au bureau, 80% à Laufen"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Laufen",
+    "addressLocality": "Laufen",
+    "descriptionByLocale": {
+      "it": "La rete è la tua cosa e vuoi essere imprenditoriale? Benvenuti nella famiglia CONCORDIA! Per il nostro ufficio a Laufen ti stiamo cercando.\nQuesto è ciò che vi aspetta\n\n• È possibile consigliare e badare ai nostri clienti indipendentemente nel vostro ufficio o a casa loro.\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si programma proattivamente appuntamenti, creare offerte e completare i compiti amministrativi corrispondenti.\n• Attui le misure di vendita, costruisci una rete e rappresenti CONCORDIA nelle piste e nei dintorni.\nLo porti con te.\n\n• Hai completato la formazione professionale in un ambiente di servizio o di vendita e vivi nella regione.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Siete comunicativi e socievoli e godetevi il lavoro indipendentemente.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nIrina pescatore\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Networking is your thing and you want to be entrepreneurial? Welcome to the CONCORDIA family! For our office in Laufen we are looking for you.\nThis is what awaits you\n\n• You can advise and look after our customers independently in your office or at their home.\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You proactively schedule appointments, create offers and complete the corresponding administrative tasks.\n• You implement sales measures, build a network and represent CONCORDIA in runs and surroundings.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment and live in the region.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You are communicative and sociable and enjoy working independently.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nIrina fisherman\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Netzwerken ist dein Ding und du willst unternehmerisch tätig sein? Willkommen bei der CONCORDIA-Familie! Für unsere Geschäftsstelle in Laufen suchen wir dich.\nDas erwartet dich\n\n• Unsere Kundinnen und Kunden berätst und betreust du selbständig in deiner Geschäftsstelle oder bei ihnen zu Hause.\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Du vereinbarst proaktiv Termine, erstellst Offerten und erledigst die dazugehörigen administrativen Aufgaben.\n• Verkaufsmassnahmen setzt du um, baust ein Netzwerk auf und repräsentierst die CONCORDIA in Laufen und Umgebung.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld und wohnst in der Region.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Du bist kommunikativ sowie kontaktfreudig und arbeitest gerne selbstständig.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nIrina Fischer\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Le réseautage est votre truc et vous voulez être entrepreneur ? Bienvenue dans la famille CONCORDIA ! Pour notre bureau à Laufen, nous vous cherchons.\nC'est ce qui vous attend.\n\n• Vous pouvez conseiller et prendre soin de nos clients indépendamment dans votre bureau ou chez eux.\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous planifiez les rendez-vous de façon proactive, créez des offres et accomplissez les tâches administratives correspondantes.\n• Vous mettez en œuvre des mesures de vente, construisez un réseau et représentez CONCORDIA dans les pistes et les environs.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente et vous vivez dans la région.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous êtes communicatif et sociable et aimez travailler indépendamment.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPêcheur Irina\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-ufficio-80-a-laufen-concordia-laufen",
+      "en": "customer-advisor-in-office-80-in-laufen-concordia-laufen",
+      "de": "kundenberater-in-geschaftsstelle-80-in-laufen-concordia-laufen",
+      "fr": "conseiller-client-au-bureau-80-a-laufen-concordia-laufen"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-consultant-in-office-80-in-laufen-concordia-laufen",
+      "consultant-client-en-bureau-80-a-laufen-concordia-laufen",
+      "kundenberater-in-geschaftsstelle-80-in-laufen-concordia-laufen",
+      "consulente-clienti-in-ufficio-80-a-laufen-concordia-laufen"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-consultant-in-office-80-in-laufen-concordia-laufen",
+        "consultant-client-en-bureau-80-a-laufen-concordia-laufen",
+        "kundenberater-in-geschaftsstelle-80-in-laufen-concordia-laufen",
+        "consulente-clienti-in-ufficio-80-a-laufen-concordia-laufen"
+      ],
+      "en": [
+        "kundenberater-in-geschaftsstelle-80-in-laufen-concordia-laufen",
+        "customer-consultant-in-office-80-in-laufen-concordia-laufen"
+      ],
+      "fr": [
+        "kundenberater-in-geschaftsstelle-80-in-laufen-concordia-laufen",
+        "consultant-client-en-bureau-80-a-laufen-concordia-laufen"
+      ]
+    },
+    "postalCode": "4242",
+    "streetAddress": "Delsbergerstrasse 9",
+    "salaryMin": 59200,
+    "salaryMax": 90800,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-80-100-a-schaffhausen-concordia-schaffhausen",
+    "title": "Kundenberater:in, 80–100 % in Schaffhausen",
+    "titleByLocale": {
+      "it": "Consulente clienti: in, 80-100% a Schaffhausen",
+      "en": "Customer consultant: in, 80-100% in Schaffhausen",
+      "de": "Kundenberater:in, 80–100 % in Schaffhausen",
+      "fr": "Consultant client: en, 80-100% à Schaffhausen"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Schaffhausen",
+    "addressLocality": "Schaffhausen",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia a Schaffhausen stiamo cercando una personalità versatile e aperta come te.\nQuesto è ciò che vi aspetta\n\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si occupa in modo indipendente di persone assicurate esistenti e mantenere il contatto con il cliente quotidiano.\n• Si crea offerte, eseguire il lavoro amministrativo e programmare proattivamente appuntamenti.\n• Si lavora su fiere e stand azioni e rappresentano CONCORDIA in loco.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nIrina pescatore\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency in Schaffhausen we are looking for a versatile and open-minded personality like you.\nThis is what awaits you\n\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You independently look after existing insured persons and maintain daily customer contact.\n• You create offers, perform administrative work and proactively schedule appointments.\n• You work on trade fairs and stand actions and represent CONCORDIA on site.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nIrina fisherman\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur in Schaffhausen suchen wir eine vielseitige und aufgeschlossene Persönlichkeit wie dich.\nDas erwartet dich\n\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Bestehende Versicherte betreust du eigenständig und pflegst den täglichen Kundenkontakt.\n• Du erstellst Offerten, führst administrative Arbeiten aus und vereinbarst proaktiv Termine.\n• An Messe- und Standaktionen arbeitest du mit und vertrittst die CONCORDIA vor Ort.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nIrina Fischer\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence à Schaffhausen, nous recherchons une personnalité polyvalente et ouverte comme vous.\nC'est ce qui vous attend.\n\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous vous occupez indépendamment des assurés existants et gardez le contact quotidien avec le client.\n• Vous créez des offres, effectuez un travail administratif et planifiez des rendez-vous proactifs.\n• Vous travaillez sur des salons et des stand actions et représentez CONCORDIA sur place.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPêcheur Irina\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-80-100-a-schaffhausen-concordia-schaffhausen",
+      "en": "customer-consultant-in-80-100-in-schaffhausen-concordia-schaffhausen",
+      "de": "kundenberater-in-80-100-in-schaffhausen-concordia-schaffhausen",
+      "fr": "consultant-client-en-80-100-a-schaffhausen-concordia-schaffhausen"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-consultant-in-80-100-in-schaffhausen-concordia-schaffhausen",
+      "consultant-client-en-80-100-a-schaffhausen-concordia-schaffhausen",
+      "kundenberater-in-80-100-in-schaffhausen-concordia-schaffhausen",
+      "consulente-clienti-in-80-100-a-schaffhausen-concordia-schaffhausen"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-consultant-in-80-100-in-schaffhausen-concordia-schaffhausen",
+        "consultant-client-en-80-100-a-schaffhausen-concordia-schaffhausen",
+        "kundenberater-in-80-100-in-schaffhausen-concordia-schaffhausen",
+        "consulente-clienti-in-80-100-a-schaffhausen-concordia-schaffhausen"
+      ],
+      "en": [
+        "kundenberater-in-80-100-in-schaffhausen-concordia-schaffhausen"
+      ],
+      "fr": [
+        "kundenberater-in-80-100-in-schaffhausen-concordia-schaffhausen"
+      ]
+    },
+    "postalCode": "8201",
+    "streetAddress": "Oberstadt 18",
+    "salaryMin": 68500,
+    "salaryMax": 105000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-100-in-schwyz-concordia-schwyz",
+    "title": "Kundenberater:in, 100 % in Schwyz",
+    "titleByLocale": {
+      "it": "Consulente clienti:in, 100% in Schwyz",
+      "en": "Customer Advisor:in, 100% in Schwyz",
+      "de": "Kundenberater:in, 100 % in Schwyz",
+      "fr": "Conseiller client:in, 100% à Schwyz"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Schwyz",
+    "addressLocality": "Schwyz",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia di Schwyz cerchiamo una personalità versatile e aperta come te.\nQuesto è ciò che vi aspetta\n\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si occupa in modo indipendente di persone assicurate esistenti e mantenere il contatto con il cliente quotidiano.\n• Si crea offerte, eseguire il lavoro amministrativo e programmare proattivamente appuntamenti.\n• Si lavora su fiere e stand azioni e rappresentano CONCORDIA in loco.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nPrimavera Chantal\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency in Schwyz we are looking for a versatile and open-minded personality like you.\nThis is what awaits you\n\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You independently look after existing insured persons and maintain daily customer contact.\n• You create offers, perform administrative work and proactively schedule appointments.\n• You work on trade fairs and stand actions and represent CONCORDIA on site.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nChantal Spring\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur in Schwyz suchen wir eine vielseitige und aufgeschlossene Persönlichkeit wie dich.\nDas erwartet dich\n\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Bestehende Versicherte betreust du eigenständig und pflegst den täglichen Kundenkontakt.\n• Du erstellst Offerten, führst administrative Arbeiten aus und vereinbarst proaktiv Termine.\n• An Messe- und Standaktionen arbeitest du mit und vertrittst die CONCORDIA vor Ort.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nChantal Spring\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence à Schwyz, nous recherchons une personnalité polyvalente et ouverte comme vous.\nC'est ce qui vous attend.\n\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous vous occupez indépendamment des assurés existants et gardez le contact quotidien avec le client.\n• Vous créez des offres, effectuez un travail administratif et planifiez des rendez-vous proactifs.\n• Vous travaillez sur des salons et des stand actions et représentez CONCORDIA sur place.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nPrintemps Chantal\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-100-in-schwyz-concordia-schwyz",
+      "en": "customer-advisor-in-100-in-schwyz-concordia-schwyz",
+      "de": "kundenberater-in-100-in-schwyz-concordia-schwyz",
+      "fr": "conseiller-client-in-100-a-schwyz-concordia-schwyz"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-service-in-100-in-schwyz-concordia-schwyz",
+      "service-client-in-100-en-schwyz-concordia-schwyz",
+      "kundenberater-in-100-in-schwyz-concordia-schwyz",
+      "servizio-clienti-in-100-in-schwyz-concordia-schwyz",
+      "consulente-clienti-in-100-in-schwyz-concordia-schwyz"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-service-in-100-in-schwyz-concordia-schwyz",
+        "service-client-in-100-en-schwyz-concordia-schwyz",
+        "kundenberater-in-100-in-schwyz-concordia-schwyz",
+        "servizio-clienti-in-100-in-schwyz-concordia-schwyz",
+        "consulente-clienti-in-100-in-schwyz-concordia-schwyz"
+      ],
+      "en": [
+        "kundenberater-in-100-in-schwyz-concordia-schwyz",
+        "customer-service-in-100-in-schwyz-concordia-schwyz"
+      ],
+      "fr": [
+        "kundenberater-in-100-in-schwyz-concordia-schwyz",
+        "service-client-in-100-en-schwyz-concordia-schwyz"
+      ]
+    },
+    "postalCode": "6431",
+    "streetAddress": "Schmittenmattstrasse 3",
+    "salaryMin": 79000,
+    "salaryMax": 121500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "responsabile-agenzia-in-100-in-chur-concordia-chur",
+    "title": "Agenturleiter:in, 100 % in Chur",
+    "titleByLocale": {
+      "it": "Responsabile Agenzia:in, 100% in Chur",
+      "en": "Head of Agency:in, 100% in Chur",
+      "de": "Agenturleiter:in, 100 % in Chur",
+      "fr": "Chef de l'agence:in, 100% à Chur"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Chur",
+    "addressLocality": "Chur",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia Chur ti stiamo cercando come una personalità di vendita e leadership.\nQuesto è ciò che vi aspetta\n\n• Guida il tuo team con tre dipendenti e si assume la responsabilità di raggiungere obiettivi, rispettare gli standard di servizio e implementare varie misure di vendita.\n• Supporti i dipendenti nel raggiungimento dei loro obiettivi e nello sviluppo del loro potenziale.\n• Acquisire nuovi clienti in modo indipendente, organizzare proattivo appuntamenti e vendere soluzioni di salute e prevenzione basate sulle esigenze.\n• Mantenete partnership con aziende e associazioni e espandete continuamente la vostra rete.\n• Nella vostra regione, rappresentate CONCORDIA professionalmente e con passione.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Idealmente, si porta esperienza di leadership e sono una personalità motivante.\n• Comunicante, socievole e con un modo vincente, convinci i clienti.\n• Come talento organizzativo e giocatore di squadra, si contribuisce alla crescita di successo dell'agenzia.\n• Hai già completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nMichael Bätig\nTeam Leader HR Consulting\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency Chur we are looking for you as a sales and leadership personality.\nThis is what awaits you\n\n• You lead your team with three employees and take responsibility for achieving goals, meeting service standards and implementing various sales measures.\n• You support employees in achieving their goals and developing their potential.\n• You acquire new customers independently, proactively arrange appointments and sell needs-based health and prevention solutions.\n• You maintain partnerships with companies and associations and continuously expand your network.\n• In your region, you represent CONCORDIA professionally and with passion.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Ideally, you bring leadership experience and are a motivating personality.\n• Communicative, sociable and with a winning way, you convince customers.\n• As an organizational talent and team player, you contribute to the successful growth of the agency.\n• You have already completed the VBV training or are ready to complete it - we support you.\nYour next step\nMichael Bätig\nTeam Leader HR Consulting\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur Chur suchen wir dich als Verkaufs- und Führungspersönlichkeit.\nDas erwartet dich\n\n• Du führst dein Team mit drei Mitarbeitenden und trägst die Verantwortung für die Zielerreichung, die Einhaltung der Servicestandards und setzt verschiedene Verkaufsmassnahmen um.\n• Die Mitarbeitenden unterstützt du dabei, ihre Ziele zu erreichen und ihr Potenzial zu entfalten.\n• Neukunden akquirierst du selbstständig, vereinbarst proaktiv Termine und verkaufst bedarfsgerechte Kranken- und Vorsorgelösungen.\n• Du pflegst Partnerschaften mit Firmen und Vereinen und baust dein Netzwerk kontinuierlich aus.\n• In deiner Region repräsentierst du die CONCORDIA professionell und mit Leidenschaft.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Idealerweise bringst du Führungserfahrung mit und bist eine motivierende Persönlichkeit.\n• Kommunikativ, kontaktfreudig und mit einer gewinnenden Art überzeugst du Kundinnen und Kunden.\n• Als Organisationstalent und Teamplayer trägst du dazu bei, dass die Agentur erfolgreich wächst.\n• Die VBV‑Ausbildung hast du bereits abgeschlossen oder bist bereit, sie zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nMichael Bättig\nTeamleiter HR Beratung\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence Chur, nous vous recherchons comme une personnalité de vente et de leadership.\nC'est ce qui vous attend.\n\n• Vous dirigez votre équipe avec trois employés et prenez la responsabilité d'atteindre les objectifs, de respecter les normes de service et de mettre en oeuvre diverses mesures de vente.\n• Vous aidez les employés à atteindre leurs objectifs et à développer leur potentiel.\n• Vous achetez de nouveaux clients indépendamment, organisez des rendez-vous proactifs et vendez des solutions de santé et de prévention basées sur les besoins.\n• Vous maintenez des partenariats avec des entreprises et des associations et élargissez continuellement votre réseau.\n• Dans votre région, vous représentez la CONCORDIE professionnellement et avec passion.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Idéalement, vous apportez une expérience de leadership et êtes une personnalité motivante.\n• Communicative, sociable et avec une façon gagnante, vous convainquez les clients.\n• En tant que talent organisationnel et joueur d'équipe, vous contribuez à la croissance réussie de l'agence.\n• Vous avez déjà terminé la formation VBV ou êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nMichael Bätig\nChef d'équipe Conseils RH\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "responsabile-agenzia-in-100-in-chur-concordia-chur",
+      "en": "head-of-agency-in-100-in-chur-concordia-chur",
+      "de": "agenturleiter-in-100-in-chur-concordia-chur",
+      "fr": "chef-de-l-agence-in-100-a-chur-concordia-chur"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "head-of-agency-in-100-in-chur-concordia-chur",
+      "chef-de-l-agence-in-100-a-chur-concordia-chur",
+      "agenturleiter-in-100-in-chur-concordia-chur",
+      "responsabile-agenzia-in-100-in-chur-concordia-chur"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "head-of-agency-in-100-in-chur-concordia-chur",
+        "chef-de-l-agence-in-100-a-chur-concordia-chur",
+        "agenturleiter-in-100-in-chur-concordia-chur",
+        "responsabile-agenzia-in-100-in-chur-concordia-chur"
+      ],
+      "en": [
+        "agenturleiter-in-100-in-chur-concordia-chur"
+      ],
+      "fr": [
+        "agenturleiter-in-100-in-chur-concordia-chur"
+      ]
+    },
+    "postalCode": "7000",
+    "streetAddress": "Masanserstrasse 2",
+    "salaryMin": 96000,
+    "salaryMax": 147500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "consulente-clienti-in-70-a-lucerna-concordia-luzern",
+    "title": "Kundenberater:in, 70 % in Luzern",
+    "titleByLocale": {
+      "it": "Consulente clienti:in, 70% a Lucerna",
+      "en": "Customer advisor:in, 70% in Lucerne",
+      "de": "Kundenberater:in, 70 % in Luzern",
+      "fr": "Conseiller client:in, 70% in Lucerne"
+    },
+    "company": "Concordia",
+    "companyKey": "concordia",
+    "location": "Luzern",
+    "addressLocality": "Luzern",
+    "descriptionByLocale": {
+      "it": "La nostra diversità è la nostra capitale: CONCORDIA riunisce persone provenienti da diverse culture, professioni e settori di responsabilità. Potrai anche arricchire il nostro team presto? Per la nostra agenzia a Lucerna, stiamo cercando una personalità versatile e aperta come te.\nQuesto è ciò che vi aspetta\n\n• Acquisire nuovi clienti e vendere soluzioni di assicurazione sanitaria e pensione basate sulle esigenze.\n• Si occupa in modo indipendente di persone assicurate esistenti e mantenere il contatto con il cliente quotidiano.\n• Si crea offerte, eseguire il lavoro amministrativo e programmare proattivamente appuntamenti.\n• Si lavora su fiere e stand azioni e rappresentano CONCORDIA in loco.\nLo porti con te.\n\n• Avete completato la formazione professionale in un ambiente di servizio o di vendita.\n• Il contatto con i clienti, le vendite e la consulenza sono la vostra passione e competenze amministrative completano il vostro profilo.\n• Hai una buona conoscenza del tedesco, ogni altra lingua è un vantaggio.\n• Hai completato l'allenamento VBV o sei pronto a completarlo - ti supportiamo.\nIl prossimo passo\nMirjam Bäbi\nConsulente HR\nPertanto CONCORDIA\nCome esperto di salute, CONCORDIA si impegna in un ambiente di lavoro in cui i dipendenti si sentono a proprio agio e possono realizzare. È caratterizzato da varie attività, team versatili e una relazione familiare. Inoltre motivamo i nostri dipendenti a sviluppare e andare avanti. Le persone che amano lavorare e vogliono avanzare professionalmente troveranno quello che stanno cercando: posti di lavoro che sono 100% sani.",
+      "en": "Our diversity is our capital: CONCORDIA brings together people from different cultures, professions and areas of responsibility. Will you also enrich our team soon? For our agency in Lucerne, we are looking for a versatile and open-minded personality like you.\nThis is what awaits you\n\n• You acquire new customers and sell needs-based health insurance and pension solutions.\n• You independently look after existing insured persons and maintain daily customer contact.\n• You create offers, perform administrative work and proactively schedule appointments.\n• You work on trade fairs and stand actions and represent CONCORDIA on site.\nYou bring that with you\n\n• You have completed vocational training in a service or sales-oriented environment.\n• Customer contact, sales and consulting are your passion and administrative skills round off your profile.\n• You have very good knowledge of German, every other language is an advantage.\n• You have completed the VBV training or you are ready to complete it - we support you.\nYour next step\nMirjam Bäbi\nHR consultant\nTherefore CONCORDIA\nAs an expert in health, CONCORDIA is committed to a working environment in which employees feel comfortable and can realize. It is characterized by varied tasks, versatile teams and a family relationship. We also motivate our employees to develop and move forward. People who enjoy working and want to advance professionally will find what they are looking for: jobs that are 100% healthy.",
+      "de": "Unsere Vielfalt ist unser Kapital: Die CONCORDIA vereint Menschen aus verschiedenen Kulturen, Berufen und Aufgabengebieten. Bereicherst auch du bald unser Team? Für unsere Agentur in Luzern suchen wir eine vielseitige und aufgeschlossene Persönlichkeit wie dich.\nDas erwartet dich\n\n• Du akquirierst Neukunden und verkaufst bedarfsgerechte Krankenversicherungs- und Vorsorgelösungen.\n• Bestehende Versicherte betreust du eigenständig und pflegst den täglichen Kundenkontakt.\n• Du erstellst Offerten, führst administrative Arbeiten aus und vereinbarst proaktiv Termine.\n• An Messe- und Standaktionen arbeitest du mit und vertrittst die CONCORDIA vor Ort.\nDas bringst du mit\n\n• Du verfügst über eine abgeschlossene Berufsausbildung in einem dienstleistungs- oder verkaufsorientierten Umfeld.\n• Kundenkontakt, Verkauf und Beratung sind deine Leidenschaft und administrative Fähigkeiten runden dein Profil ab.\n• Du verfügst über sehr gute Deutschkenntnisse, jede weitere Sprache ist von Vorteil.\n• Die VBV-Ausbildung hast du abgeschlossen oder du bist bereit, diese zu absolvieren - wir unterstützen dich dabei.\nDein nächster Schritt\nMirjam Bäbi\nHR-Beraterin\nDarum CONCORDIA\nAls Expertin für Gesundheit setzt sich die CONCORDIA für ein Arbeitsumfeld ein, in dem sich Mitarbeitende wohlfühlen und verwirklichen können. Es ist geprägt von abwechslungsreichen Aufgaben, vielseitigen Teams und einem familiären Umgang. Zudem motivieren wir unsere Mitarbeitenden, sich weiterzuentwickeln und voranzukommen. Menschen, die Spass an der Arbeit haben und beruflich vorwärtskommen wollen, finden bei uns, was sie suchen: Jobs, die zu 100 % gesund sind.",
+      "fr": "Notre diversité est notre capitale : la CONCORDIE réunit des personnes de différentes cultures, professions et domaines de responsabilité. Vous enrichirez notre équipe bientôt ? Pour notre agence à Lucerne, nous recherchons une personnalité polyvalente et ouverte comme vous.\nC'est ce qui vous attend.\n\n• Vous achetez de nouveaux clients et vendez des solutions d'assurance-maladie et de retraite basées sur les besoins.\n• Vous vous occupez indépendamment des assurés existants et gardez le contact quotidien avec le client.\n• Vous créez des offres, effectuez un travail administratif et planifiez des rendez-vous proactifs.\n• Vous travaillez sur des salons et des stand actions et représentez CONCORDIA sur place.\nApporte ça avec toi.\n\n• Vous avez suivi une formation professionnelle dans un environnement de service ou de vente.\n• Le contact client, les ventes et les conseils sont votre passion et vos compétences administratives complètent votre profil.\n• Vous avez une très bonne connaissance de l'allemand, toute autre langue est un avantage.\n• Vous avez terminé la formation VBV ou vous êtes prêt à la terminer - nous vous soutenons.\nVotre prochaine étape\nMirjam Bäbi\nConsultant en ressources humaines\nPar conséquent, CONCORDIE\nEn tant qu'expert en santé, CONCORDIA est engagée dans un environnement de travail dans lequel les employés se sentent à l'aise et peuvent se réaliser. Elle se caractérise par des tâches variées, des équipes polyvalentes et une relation familiale. Nous encourageons également nos employés à se développer et à aller de l'avant. Les gens qui aiment travailler et qui veulent progresser professionnellement trouveront ce qu'ils recherchent : des emplois 100% sains."
+    },
+    "slugByLocale": {
+      "it": "consulente-clienti-in-70-a-lucerna-concordia-luzern",
+      "en": "customer-advisor-in-70-in-lucerne-concordia-luzern",
+      "de": "kundenberater-in-70-in-luzern-concordia-luzern",
+      "fr": "conseiller-client-in-70-in-lucerne-concordia-luzern"
+    },
+    "sector": "Assicurazioni",
+    "expiredAt": "2026-08-29T03:52:26.690Z",
+    "previousSlugs": [
+      "customer-advisor-in-70-in-lucerne-concordia-luzern",
+      "conseiller-client-in-70-in-lucerne-concordia-luzern",
+      "kundenberater-in-70-in-luzern-concordia-luzern",
+      "consulente-clienti-in-70-a-lucerna-concordia-luzern"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "customer-advisor-in-70-in-lucerne-concordia-luzern",
+        "conseiller-client-in-70-in-lucerne-concordia-luzern",
+        "kundenberater-in-70-in-luzern-concordia-luzern",
+        "consulente-clienti-in-70-a-lucerna-concordia-luzern"
+      ],
+      "en": [
+        "kundenberater-in-70-in-luzern-concordia-luzern"
+      ],
+      "fr": [
+        "kundenberater-in-70-in-luzern-concordia-luzern"
+      ]
+    },
+    "postalCode": "6002",
+    "streetAddress": "Pilatusstrasse 20",
+    "salaryMin": 55300,
+    "salaryMax": 85100,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
