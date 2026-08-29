@@ -1,18 +1,19 @@
 {
   "key": "relewant",
   "label": "ReleWant",
-  "generatedAt": "2026-08-29T15:02:50.654Z",
+  "generatedAt": "2026-08-29T23:25:37.600Z",
   "total": 19,
   "newCount": 5,
   "updatedCount": 2,
   "removedCount": 17,
   "unchangedCount": 0,
-  "durationMs": 8714,
-  "avgDurationMs": 8714,
+  "durationMs": 8089,
+  "avgDurationMs": 8089,
   "durationHistory": [
     10120,
     7538,
-    8714
+    8714,
+    8089
   ],
   "newJobs": [
     {
