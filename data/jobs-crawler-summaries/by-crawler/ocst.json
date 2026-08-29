@@ -1,7 +1,7 @@
 {
   "key": "ocst",
   "label": "OCST",
-  "generatedAt": "2026-08-29T15:02:09.777Z",
+  "generatedAt": "2026-08-29T23:44:20.934Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,12 +9,13 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4959,
-  "avgDurationMs": 4959,
+  "durationMs": 4471,
+  "avgDurationMs": 4471,
   "durationHistory": [
     4832,
     4081,
-    4959
+    4959,
+    4471
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -30,7 +31,7 @@
       "url": "https://www.ocst.ch/il-lavoro/548-approfondimenti/2608-salute-in-azienda-il-benessere-organizzativo-e-possibile",
       "source": "OCST Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T15:02:05.804Z",
+      "crawledAt": "2026-08-29T23:44:17.185Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -65,7 +66,7 @@
       "url": "https://www.ocst.ch/il-lavoro/548-approfondimenti/2607-ladi-un-fondo-ricco-e-troppi-bisogni-ignorati",
       "source": "OCST Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T15:02:06.131Z",
+      "crawledAt": "2026-08-29T23:44:17.511Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
