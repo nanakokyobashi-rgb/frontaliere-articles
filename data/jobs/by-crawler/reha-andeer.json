@@ -1,12 +1,12 @@
 {
   "crawlerKey": "reha-andeer",
-  "assembledAt": "2026-08-29T14:24:57.557Z",
+  "assembledAt": "2026-08-29T23:08:22.903Z",
   "jobs": [
     {
       "id": "reha-andeer-stelleninserat-pflegehelferin-223c33846989",
-      "slug": "pflegehelferin-reha-andeer",
+      "slug": "pflegehelferin-reha-andeer-andeer",
       "slugByLocale": {
-        "it": "pflegehelferin-reha-andeer",
+        "it": "pflegehelferin-reha-andeer-andeer",
         "en": "nursing-assistant-reha-andeer-andeer",
         "de": "pflegehelferin-reha-andeer-andeer",
         "fr": "assistant-infirmier-reha-andeer-andeer"
@@ -34,7 +34,7 @@
       "applyUrl": "https://reha-andeer.ch/offene-stellen/",
       "source": "Reha Andeer Dedicated Parser (WordPress HTML + PDF)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:53.408Z",
+      "crawledAt": "2026-08-29T23:08:18.324Z",
       "addressLocality": "Andeer",
       "addressRegion": "GR",
       "addressCountry": "CH",
