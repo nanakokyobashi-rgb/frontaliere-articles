@@ -1,17 +1,18 @@
 {
   "key": "damiani-group",
   "label": "Damiani Group",
-  "generatedAt": "2026-08-29T03:31:12.364Z",
+  "generatedAt": "2026-08-29T14:29:36.709Z",
   "total": 7,
   "newCount": 0,
   "updatedCount": 6,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 7305,
-  "avgDurationMs": 7305,
+  "durationMs": 4712,
+  "avgDurationMs": 4712,
   "durationHistory": [
     4899,
-    7305
+    7305,
+    4712
   ],
   "newJobs": [],
   "updatedJobs": [
