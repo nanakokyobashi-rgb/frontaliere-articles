@@ -1,16 +1,17 @@
 {
   "key": "goline",
   "label": "GOLINE SA",
-  "generatedAt": "2026-08-28T21:20:13.062Z",
+  "generatedAt": "2026-08-29T03:34:40.581Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 2173,
-  "avgDurationMs": 2173,
+  "durationMs": 1812,
+  "avgDurationMs": 1812,
   "durationHistory": [
-    2173
+    2173,
+    1812
   ],
   "newJobs": [],
   "updatedJobs": [
