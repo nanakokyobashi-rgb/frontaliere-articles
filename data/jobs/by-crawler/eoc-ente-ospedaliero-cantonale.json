@@ -1,6 +1,6 @@
 {
   "crawlerKey": "eoc-ente-ospedaliero-cantonale",
-  "assembledAt": "2026-08-29T03:32:13.209Z",
+  "assembledAt": "2026-08-29T14:41:51.959Z",
   "jobs": [
     {
       "id": "company-fefpqo",
@@ -20,7 +20,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-26T10:11:42.321Z",
       "titleByLocale": {
         "it": "Responsabile sviluppo organizzativo e delle competenze (100%)",
@@ -91,7 +91,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-25T21:51:24.719Z",
       "titleByLocale": {
         "it": "Tecnici di neurofisiopatologia (50-100%)",
@@ -166,7 +166,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-23T21:46:13.856Z",
       "slugByLocale": {
         "it": "collaboratrice-ore-dell-economia-domestica-a-ore-collaboratrice-ore-dell-eoc-candidati",
@@ -226,7 +226,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-20T10:16:26.789Z",
       "titleByLocale": {
         "it": "Addetto/a alla manutenzione (100%)",
@@ -308,7 +308,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-19T10:19:24.229Z",
       "titleByLocale": {
         "it": "Impiegato/a amministrativo/a (100%)",
@@ -406,7 +406,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-17T10:06:15.263Z",
       "titleByLocale": {
         "it": "Responsabile Segretariati medici (80-100%)",
@@ -501,7 +501,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-15T09:58:01.352Z",
       "titleByLocale": {
         "it": "Medico assistente in formazione - Medicina intensiva (100%)",
@@ -592,7 +592,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-14T21:38:41.885Z",
       "titleByLocale": {
         "it": "Ricezionista - centralinista (60%)",
@@ -688,7 +688,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-08-05T11:45:36.827Z",
       "titleByLocale": {
         "it": "Capo Area Ricerca e Insegnamento (ARI) (50%-80%)",
@@ -759,7 +759,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-30T11:32:56.947Z",
       "titleByLocale": {
         "it": "Medico capoclinica (100%)",
@@ -857,7 +857,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-30T11:32:56.947Z",
       "titleByLocale": {
         "it": "Medico specialista (100%)",
@@ -945,7 +945,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-28T12:03:14.927Z",
       "titleByLocale": {
         "it": "Assistente di farmacia (80%)",
@@ -1021,7 +1021,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-27T22:14:56.925Z",
       "titleByLocale": {
         "it": "Collaboratore/trice economia domestica",
@@ -1100,7 +1100,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-27T22:14:56.925Z",
       "titleByLocale": {
         "it": "Stage servizio infermieristico",
@@ -1199,7 +1199,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-10T10:26:53.151Z",
       "titleByLocale": {
         "it": "Medico capoclinica di pronto soccorso (100%)",
@@ -1299,7 +1299,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-01T11:34:38.146Z",
       "titleByLocale": {
         "it": "Medico assistente (100%)",
@@ -1392,7 +1392,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-07-01T11:34:38.146Z",
       "titleByLocale": {
         "it": "Medico capoclinica (70-100%)",
@@ -1495,7 +1495,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-06-24T11:29:28.038Z",
       "titleByLocale": {
         "it": "Medici assistenti in formazione (Medicina interna)",
@@ -1586,7 +1586,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-cura-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -1708,7 +1708,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-cura-o-addetto-a-alle-cure-sociosanitarie-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -1794,7 +1794,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-cura-o-addetto-a-alle-cure-sociosanitarie-eoc-ente-ospedaliero-cantonale-locarno",
@@ -1876,7 +1876,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-cura-o-addetto-a-alle-cure-sociosanitarie-eoc-ente-ospedaliero-cantonale-lugano",
@@ -1967,7 +1967,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-studio-medico-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -2061,7 +2061,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-studio-medico-eoc-ente-ospedaliero-cantonale-locarno",
@@ -2182,7 +2182,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "assistente-di-studio-medico-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -2275,7 +2275,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ausiliaria-o-di-cucina-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -2359,7 +2359,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ausiliario-a-di-cucina-a-ore-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -2448,7 +2448,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ausiliario-a-ristorazione-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -2532,7 +2532,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "candidato-a-medico-anestesiologia-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -2620,7 +2620,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "candidato-medico-chirurgia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -2696,7 +2696,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "candidato-medico-ginecologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -2764,7 +2764,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "candidato-medico-medicina-interna-e-o-medicina-intensiva-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -2851,7 +2851,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "collaboratore-trice-dell-economia-domestica-a-ore-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -2968,7 +2968,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "collaboratore-trice-di-ristorazione-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3081,7 +3081,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "collaboratore-trice-manutenzione-elettricista-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3171,7 +3171,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "cuoca-o-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3272,7 +3272,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "fisioterapista-diplomata-o-eoc-ente-ospedaliero-cantonale-locarno",
@@ -3351,7 +3351,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "fisioterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3493,7 +3493,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "impiegato-a-amministrativo-a-eoc-ente-ospedaliero-cantonale-lugano",
@@ -3621,7 +3621,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "impiegato-a-amministrativo-a-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -3727,7 +3727,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "impiegato-a-amministrativo-a-per-il-servizio-centrale-di-contabilita-e-fatturazione-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3808,7 +3808,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-di-ricerca-clinica-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -3915,7 +3915,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-attualmente-in-formazione-diploma-ancora-da-ottenere-eoc-ente-ospedaliero-cantonale-locarno",
@@ -3989,7 +3989,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-attualmente-in-formazione-diploma-ancora-da-ottenere-eoc-ente-ospedaliero-cantonale-lugano",
@@ -4078,7 +4078,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-diploma-in-corso-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -4169,7 +4169,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-locarno",
@@ -4245,7 +4245,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-lugano",
@@ -4352,7 +4352,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -4435,7 +4435,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-iosi-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -4511,7 +4511,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-ipsi-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -4589,7 +4589,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-in-cure-generali-orbv-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -4674,7 +4674,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-eoc-ente-ospedaliero-cantonale-locarno",
@@ -4768,7 +4768,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-eoc-ente-ospedaliero-cantonale-lugano",
@@ -4880,7 +4880,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-in-anestesia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -4975,7 +4975,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-in-anestesia-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -5062,7 +5062,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-in-cure-intense-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -5153,7 +5153,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-in-cure-urgenti-e-pronto-soccorso-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -5244,7 +5244,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "infermiere-a-specializzato-a-in-gerontologia-e-geriatria-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -5332,7 +5332,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "informatico-a-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -5438,7 +5438,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-anestesia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -5524,7 +5524,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-chirurgia-eoc-ente-ospedaliero-cantonale-locarno",
@@ -5603,7 +5603,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-chirurgia-ortopedica-eoc-ente-ospedaliero-cantonale-lugano",
@@ -5682,7 +5682,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-eoc-ente-ospedaliero-cantonale-lugano",
@@ -5778,7 +5778,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-geriatria-eoc-ente-ospedaliero-cantonale-lugano",
@@ -5866,7 +5866,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-ginecologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -5959,7 +5959,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-ginecologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -6050,7 +6050,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-chirurgia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6127,7 +6127,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-chirurgia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6204,7 +6204,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-medicina-interna-generale-eoc-ente-ospedaliero-cantonale-locarno",
@@ -6292,7 +6292,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-pronto-soccorso-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6375,7 +6375,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-malattie-infettive-e-medicina-di-viaggio-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6466,7 +6466,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-medicina-intensiva-del-sottoceneri-eoc-ente-ospedaliero-cantonale-lugano",
@@ -6557,7 +6557,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-medicina-interna-eoc-ente-ospedaliero-cantonale-lugano",
@@ -6627,7 +6627,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-medicina-interna-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -6709,7 +6709,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-neurochirurgia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -6794,7 +6794,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-oftalmologia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6885,7 +6885,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-otorinolaringoiatria-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -6970,7 +6970,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-pneumologia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -7045,7 +7045,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-urologia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7131,7 +7131,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-anestesia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7240,7 +7240,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-anestesiologia-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -7334,7 +7334,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-chirurgia-ortopedica-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7414,7 +7414,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-endocrinologia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7496,7 +7496,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-geriatria-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7585,7 +7585,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-ginecologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -7671,7 +7671,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-malattie-infettive-e-medicina-di-viaggio-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7752,7 +7752,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-medicina-intensiva-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7841,7 +7841,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-medicina-interna-eoc-ente-ospedaliero-cantonale-lugano",
@@ -7927,7 +7927,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-medicina-interna-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -8014,7 +8014,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-otorinolaringoiatria-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8098,7 +8098,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-pneumologia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8172,7 +8172,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-urologia-eoc-ente-ospedaliero-cantonale-lugano",
@@ -8256,7 +8256,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-perito-sam-con-specializzazione-in-psichiatria-e-psicoterapia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8342,7 +8342,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-specialista-in-urologia-80-100-eoc-ente-ospedaliero-cantonale-locarno",
@@ -8426,7 +8426,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "operatore-trice-sociosanitario-a-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -8531,7 +8531,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ostetrica-eoc-ente-ospedaliero-cantonale-locarno",
@@ -8625,7 +8625,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ostetrica-eoc-ente-ospedaliero-cantonale-lugano",
@@ -8699,7 +8699,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "ostetrica-o-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8777,7 +8777,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "praticante-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8855,7 +8855,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "psicologo-a-assistente-per-l-abilitazione-cantonale-80-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -8939,7 +8939,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-aiuto-amministrazione-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9017,7 +9017,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-aiuto-cucina-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9098,7 +9098,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-aiuto-manutenzione-e-servizio-tecnico-aiuto-magazzino-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9194,7 +9194,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-aiuto-nel-servizio-alberghiero-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9273,7 +9273,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-ausiliario-di-cura-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9357,7 +9357,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-diversi-mansionari-100-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9435,7 +9435,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "servizio-civile-svizzero-diversi-mansionari-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9513,7 +9513,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "stage-di-pratica-in-cure-studente-medicina-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9590,7 +9590,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "stage-formativo-pre-supsi-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -9675,7 +9675,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "stage-formativo-pre-supsi-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -9757,7 +9757,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-locarno",
@@ -9887,7 +9887,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-lugano",
@@ -9972,7 +9972,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tecnico-a-di-radiologia-medica-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -10070,7 +10070,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tecnico-di-sala-operatoria-tso-e-o-infermiere-a-strumentista-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -10163,7 +10163,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tecnico-di-sala-operatoria-tso-e-o-infermiere-a-strumentista-eoc-ente-ospedaliero-cantonale-locarno",
@@ -10254,7 +10254,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tecnico-di-sala-operatoria-tso-e-o-infermiere-a-strumentista-eoc-ente-ospedaliero-cantonale-lugano",
@@ -10337,7 +10337,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tirocinio-formativo-pre-supsi-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -10416,7 +10416,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "candidato-a-medico-medicina-interna-eoc-ente-ospedaliero-cantonale-mendrisio",
@@ -10503,7 +10503,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-ginecologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-locarno",
@@ -10593,7 +10593,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-specialista-in-medicina-della-riproduzione-80-100-eoc-ente-ospedaliero-cantonale-locarno",
@@ -10678,7 +10678,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "cuoco-a-e-o-cuoco-a-in-dietetica-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -10792,7 +10792,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-pediatria-di-base-100-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -10880,7 +10880,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-per-l-attivita-clinica-100-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -10968,7 +10968,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-borsista-in-medicina-nucleare-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11065,7 +11065,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-del-pronto-soccorso-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11145,7 +11145,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-di-dermatologia-da-50-a-100-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11222,7 +11222,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-capoclinica-in-medicina-interna-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11322,7 +11322,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-radiologo-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11408,7 +11408,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "posto-di-formazione-come-medico-assistente-al-100-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11475,7 +11475,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "psicoterapeuta-in-formazione-40-o-60-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11556,7 +11556,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "tecnico-a-in-analisi-biomediche-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11662,7 +11662,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "collaboratore-trice-dell-amministrazione-del-personale-locale-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11737,7 +11737,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-gineologia-e-ostetricia-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11828,7 +11828,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-assistente-in-formazione-in-oncologia-medica-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -11927,7 +11927,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
       "firstSeenAt": "2026-05-21T11:53:54.295Z",
       "slugByLocale": {
         "it": "medico-borsista-in-oncologia-medica-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -14004,8 +14004,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "medico-perito-sam-con-specializzazione-in-medicina-interna-generale-percentuale-lavorativa-da-definire-eoc-ente-ospedaliero-cantonale-bellinzona",
         "en": "sam-medical-expert-with-specialization-in-general-internal-medicine-work-percentage-to-be-defined-eoc-ente-ospedaliero",
@@ -14073,8 +14073,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "collaboratore-trice-dell-economia-domestica-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "collaboratore-trice-dell-economia-domestica-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14148,8 +14148,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "collaboratore-trice-della-ristorazione-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "collaboratore-trice-della-ristorazione-eoc-ente-ospedaliero-cantonale-novaggio-x29n46",
@@ -14224,8 +14224,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "angestellte-r-amministrativo-a-eoc-ente-ospedaliero-cantonale-bellinzona",
         "en": "administrative-employee-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -14296,8 +14296,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "assistente-di-studio-medico-eoc-ente-ospedaliero-cantonale-lugano",
         "en": "assistente-di-studio-medico-eoc-ente-ospedaliero-cantonale-lugano-uil2r1",
@@ -14377,8 +14377,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona",
         "en": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -14455,8 +14455,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14531,8 +14531,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "medico-assistente-medico-ospedaliero-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "medico-assistente-medico-ospedaliero-eoc-ente-ospedaliero-cantonale-novaggio-x29n4c",
@@ -14608,8 +14608,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "operatore-trice-socio-sanitario-a-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "operatore-trice-socio-sanitario-a-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14681,8 +14681,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "assistente-di-cura-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "assistente-di-cura-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14754,8 +14754,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14826,8 +14826,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "fisioterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "fisioterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14909,8 +14909,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "ergoterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio",
         "en": "ergoterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio",
@@ -14989,8 +14989,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "angestellte-r-amministrativo-eoc-ente-ospedaliero-cantonale-bellinzona",
         "en": "administrative-employee-eoc-ente-ospedaliero-cantonale-bellinzona",
@@ -15056,8 +15056,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "eoc-ente-ospedaliero-cantonale",
       "companyDomain": "eoc.ch",
-      "crawledAt": "2026-08-29T03:30:41.484Z",
-      "firstSeenAt": "2026-08-29T03:30:41.484Z",
+      "crawledAt": "2026-08-29T14:40:22.313Z",
+      "firstSeenAt": "2026-08-29T14:40:22.313Z",
       "slugByLocale": {
         "de": "collaboratore-trice-economia-domestica-eoc-ente-ospedaliero-cantonale-bellinzona",
         "en": "collaboratore-trice-economia-domestica-eoc-ente-ospedaliero-cantonale-bellinzona-uil171",
