@@ -1,6 +1,6 @@
 {
   "crawlerKey": "svar-spitalverbund-ar",
-  "assembledAt": "2026-08-28T20:56:23.563Z",
+  "assembledAt": "2026-08-29T03:16:38.199Z",
   "jobs": [
     {
       "id": "svar-spitalverbund-ar-4b0bb44b4392",
@@ -80,7 +80,8 @@
           "maxValue": 113000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "svar-spitalverbund-ar-89267a5e23c7",
@@ -114,7 +115,7 @@
       "url": "https://live.solique.ch/svar/job/details/4056221",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:17.949Z",
+      "crawledAt": "2026-08-29T03:16:33.089Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -214,7 +215,7 @@
       "url": "https://live.solique.ch/svar/job/details/4058390",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:17.299Z",
+      "crawledAt": "2026-08-29T03:16:32.504Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -296,7 +297,7 @@
       "url": "https://live.solique.ch/svar/job/details/4056088",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:16.651Z",
+      "crawledAt": "2026-08-29T03:16:31.920Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -395,7 +396,7 @@
       "url": "https://live.solique.ch/svar/job/details/4056188",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:16.005Z",
+      "crawledAt": "2026-08-29T03:16:31.336Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -475,7 +476,7 @@
       "url": "https://live.solique.ch/svar/job/details/4056152",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:15.363Z",
+      "crawledAt": "2026-08-29T03:16:30.739Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -554,13 +555,12 @@
         "de": "Ihre Aufgaben\n• Sie sind mitverantwortlich für die Triage der Patienten in Bezug auf das Risikomanagement\n• Sie stellen selbständig und in Delegation des ärztlichen Dienstes die Erstbeurteilung, Aufnahme, Diagnostik, Therapie, sowie die Pflege und Betreuung der Notfallpatienten sicher für einfache sowie komplexe Aufnahme- und Betreuungssituationen\n• Aktive Mitarbeit in der Weiterentwicklung unserer interdisziplinären Notfallstation\n• Mitarbeit in Arbeitsgruppen zur Qualitätssicherung und –Förderung\n\nIhr Profil\n• Abgeschlossene Ausbildung als Dipl. Experte Notfallpflege NDS, als Dipl. Expertin Notfallpflege NDS oder als Gesundheits- und Krankenpflegerin, als Gesundheits- und Krankenpfleger\n• Alternativ bringen Sie die Fachweiterbildung Intensiv- und Notfallpflege mit\n• Flexible, aufgestellte und motivierte Persönlichkeit\n• Teamfähige und patientenorientierte Grundhaltung\n• Sehr gute Deutschkenntnisse in Wort und Schrift\n\nZusätzlich profitieren Sie von\n\nEintritt: 24. Juni 2026",
         "fr": "Leurs tâches\n• Ils sont conjointement responsables du triage des patients en termes de gestion des risques\n• Ils assurent, indépendamment et en délégation du service médical, l'évaluation initiale, l'admission, le diagnostic, la thérapie, ainsi que les soins et soins des patients d'urgence pour des situations d'admission et de soins simples et complexes.\n• Participation active au développement de notre unité interdisciplinaire d'urgence\n• Coopération dans les groupes de travail sur l ' assurance et la promotion de la qualité\n\nVotre profil\n• Formation terminée en tant que diplômé. Expert en soins d'urgence NDS, en tant que Dipl. Expert en soins d'urgence NDS ou en tant que santé et infirmière, en tant que santé et infirmière\n• Alternativement, apportez la formation spécialisée intensive et les soins d'urgence avec vous\n• Personnalité flexible, positionnée et motivée\n• Une attitude de base adaptée aux équipes et axée sur le patient\n• Très bonne connaissance de l'allemand en paroles et en écriture\n\nEn outre, vous bénéficiez\n\nEntrée : 24. juin 2026"
       },
-      "needsRetranslation": true,
       "location": "Herisau",
       "canton": "AR",
       "url": "https://live.solique.ch/svar/job/details/4056199",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:14.658Z",
+      "crawledAt": "2026-08-29T03:16:30.141Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -603,7 +603,8 @@
           "maxValue": 113000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "svar-spitalverbund-ar-d07ac8f1a78d",
@@ -631,13 +632,12 @@
         "de": "Ihre Aufgaben\n• Selbstständige Betreuung stationärer und ambulanter chirurgischer Patientinnen und Patienten\n• Durchführung und Assistenz chirurgischer Eingriffe entsprechend Ihrer Erfahrung und Qualifikation\n• Teilnahme am oberärztlichen Dienstsystem\n• Interdisziplinäre Zusammenarbeit mit allen beteiligten Fachbereichen\n• Supervision und Weiterbildung der Assistenzärztinnen und Assistenzärzte\n• Aktive Mitwirkung an Qualitätsprojekten sowie an der Weiterentwicklung der Klinik\n\nIhr Profil\n• Facharzttitel Chirurgie (FMH oder äquivalente Anerkennung)\n• Fundierte Erfahrung in der Allgemein- und Viszeralchirurgie\n• Hohe fachliche Kompetenz sowie eine patientenorientierte Arbeitsweise\n• Freude an interdisziplinärer Zusammenarbeit und Ausbildung junger Kolleginnen und Kollegen\n• Verantwortungsbewusstsein, Eigeninitiative und Organisationsgeschick\n• Ausgeprägte Teamfähigkeit und hohe Sozialkompetenz\n• Sehr gute Deutschkenntnisse in Wort und Schrift\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2026",
         "fr": "Leurs tâches\n• Soins indépendants des patients hospitalisés et externes en chirurgie\n• Mise en œuvre et assistance des interventions chirurgicales selon votre expérience et votre qualification\n• Participation au système de services supranationaux\n• Coopération interdisciplinaire avec toutes les facultés participantes\n• Supervision et perfectionnement des médecins auxiliaires\n• Participation active à des projets de qualité et au développement de la clinique\n\nVotre profil\n• Titre du spécialiste Chirurgie (FMH ou reconnaissance équivalente)\n• Son expérience en chirurgie générale et viscérale\n• Haute compétence professionnelle et méthode de travail axée sur le patient\n• Profitez de la coopération interdisciplinaire et de la formation de jeunes collègues\n• Responsabilité, initiative et compétences organisationnelles\n• Des compétences solides en équipe et des compétences sociales élevées\n• Très bonne connaissance de l'allemand en paroles et en écriture\n\nEn outre, vous bénéficiez\n\nEntrée : 1er janvier 2026"
       },
-      "needsRetranslation": true,
       "location": "Herisau",
       "canton": "AR",
       "url": "https://live.solique.ch/svar/job/details/4059251",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:13.995Z",
+      "crawledAt": "2026-08-29T03:16:29.556Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -698,7 +698,8 @@
           "maxValue": 152500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "svar-spitalverbund-ar-dc0aecd1df03",
@@ -732,7 +733,7 @@
       "url": "https://live.solique.ch/svar/job/details/4047061",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:13.360Z",
+      "crawledAt": "2026-08-29T03:16:28.974Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -796,7 +797,7 @@
       "url": "https://live.solique.ch/svar/job/details/4061274",
       "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:12.527Z",
+      "crawledAt": "2026-08-29T03:16:28.392Z",
       "addressLocality": "Herisau",
       "addressRegion": "AR",
       "addressCountry": "CH",
@@ -809,7 +810,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://live.solique.ch/svar/job/details/4061274",
       "requirements": [],
       "requirementsByLocale": {
@@ -828,7 +829,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:56:12.527Z"
+      "firstSeenAt": "2026-08-29T03:16:28.392Z"
     },
     {
       "id": "svar-spitalverbund-ar-bf375ec44c7c",
@@ -913,6 +914,80 @@
         }
       },
       "crawlerMissStreak": 1
+    },
+    {
+      "id": "svar-spitalverbund-ar-b8142270bbc4",
+      "slug": "oberarztin-oberarzt-per-unsere-anasthesiologie-m-w-d-spitalverbund-appenzell-ausserrhoden-svar-herisau",
+      "slugByLocale": {
+        "de": "oberarztin-oberarzt-fur-unsere-anasthesiologie-m-w-d-svar-spitalverbund-ar-herisau",
+        "it": "oberarztin-oberarzt-per-unsere-anasthesiologie-m-w-d-spitalverbund-appenzell-ausserrhoden-svar-herisau",
+        "en": "oberarztin-oberarzt-fur-unsere-anasthesiologie-m-w-d-svar-spitalverbund-ar-herisau",
+        "fr": "oberarztin-oberarzt-fur-unsere-anasthesiologie-m-w-d-svar-spitalverbund-ar-herisau"
+      },
+      "company": "Spitalverbund Appenzell Ausserrhoden (SVAR)",
+      "companyKey": "svar-spitalverbund-ar",
+      "companyDomain": "svar.ch",
+      "title": "Oberärztin / Oberarzt für unsere Anästhesiologie (m,w,d)",
+      "titleByLocale": {
+        "de": "Oberärztin / Oberarzt für unsere Anästhesiologie (m,w,d)",
+        "it": "Oberärztin / Oberarzt per unsere Anästhesiologie (m,w,d)",
+        "en": "Oberärztin / Oberarzt für unsere Anästhesiologie (m,w,d)",
+        "fr": "Oberärztin / Oberarzt für unsere Anästhesiologie (m,w,d)"
+      },
+      "description": "Ihre Aufgaben\n• Persönliche Wirksamkeit in unserer Abteilung als Mensch und Ärztin/Arzt – Sie tragen dazu bei, dass unsere Patientinnen und Patienten bei uns jederzeit bestens aufgehoben sind\n• Sie sichern die Einhaltung unserer Standards und entwickeln diese gemeinsam mit uns weiter – mit Professionalität, Verantwortungsbewusstsein und Vorbildwirkung\n• Sie begleiten unsere Patientinnen und Patienten einfühlsam und kompetent während der gesamten perioperativen Phase\n• Sie tragen aktiv zur Weiterbildung unserer Kolleginnen, Kollegen und Pflegefachpersonen bei und bringen Ihre Expertise auch im interdisziplinären Umfeld sowie bei internen Fortbildungen ein\n\nIhr Profil\n• Neugierde und anhaltende Freude an unserem Fachgebiet\n• Einen eidgenössischen oder in der Schweiz anerkannten Facharzttitel in Anästhesiologie\n• Mehrjährige Berufserfahrung auf Facharztniveau\n• Fundierte Kenntnisse in allen gängigen Allgemein- und Regionalanästhesieverfahren inklusive moderner Schmerztherapie\n• Bereitschaft zur persönlichen Entwicklung und zur Gestaltung der Klinik\n• Sehr gute Deutschkenntnisse in Wort und Schrift (Muttersprache oder mindestens Niveau C1)\n• Freude an interdisziplinärer Zusammenarbeit, Kommunikationsstärke und eine patientenzentrierte Haltung\n• Persönliche Flexibilität und Belastbarkeit\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2027",
+      "descriptionByLocale": {
+        "de": "Ihre Aufgaben\n• Persönliche Wirksamkeit in unserer Abteilung als Mensch und Ärztin/Arzt – Sie tragen dazu bei, dass unsere Patientinnen und Patienten bei uns jederzeit bestens aufgehoben sind\n• Sie sichern die Einhaltung unserer Standards und entwickeln diese gemeinsam mit uns weiter – mit Professionalität, Verantwortungsbewusstsein und Vorbildwirkung\n• Sie begleiten unsere Patientinnen und Patienten einfühlsam und kompetent während der gesamten perioperativen Phase\n• Sie tragen aktiv zur Weiterbildung unserer Kolleginnen, Kollegen und Pflegefachpersonen bei und bringen Ihre Expertise auch im interdisziplinären Umfeld sowie bei internen Fortbildungen ein\n\nIhr Profil\n• Neugierde und anhaltende Freude an unserem Fachgebiet\n• Einen eidgenössischen oder in der Schweiz anerkannten Facharzttitel in Anästhesiologie\n• Mehrjährige Berufserfahrung auf Facharztniveau\n• Fundierte Kenntnisse in allen gängigen Allgemein- und Regionalanästhesieverfahren inklusive moderner Schmerztherapie\n• Bereitschaft zur persönlichen Entwicklung und zur Gestaltung der Klinik\n• Sehr gute Deutschkenntnisse in Wort und Schrift (Muttersprache oder mindestens Niveau C1)\n• Freude an interdisziplinärer Zusammenarbeit, Kommunikationsstärke und eine patientenzentrierte Haltung\n• Persönliche Flexibilität und Belastbarkeit\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2027",
+        "it": "Ihre Aufgaben\n• Persönliche Wirksamkeit in unserer Abteilung als Mensch und Ärztin/Arzt – Sie tragen dazu bei, dass unsere Patientinnen und Patienten bei uns jederzeit bestens aufgehoben sind\n• Sie sichern die Einhaltung unserer Standards und entwickeln diese gemeinsam mit uns weiter – mit Professionalität, Verantwortungsbewusstsein und Vorbildwirkung\n• Sie begleiten unsere Patientinnen und Patienten einfühlsam und kompetent während der gesamten perioperativen Phase\n• Sie tragen aktiv zur Weiterbildung unserer Kolleginnen, Kollegen und Pflegefachpersonen bei und bringen Ihre Expertise auch im interdisziplinären Umfeld sowie bei internen Fortbildungen ein\n\nIhr Profil\n• Neugierde und anhaltende Freude an unserem Fachgebiet\n• Einen eidgenössischen oder in der Schweiz anerkannten Facharzttitel in Anästhesiologie\n• Mehrjährige Berufserfahrung auf Facharztniveau\n• Fundierte Kenntnisse in allen gängigen Allgemein- und Regionalanästhesieverfahren inklusive moderner Schmerztherapie\n• Bereitschaft zur persönlichen Entwicklung und zur Gestaltung der Klinik\n• Sehr gute Deutschkenntnisse in Wort und Schrift (Muttersprache oder mindestens Niveau C1)\n• Freude an interdisziplinärer Zusammenarbeit, Kommunikationsstärke und eine patientenzentrierte Haltung\n• Persönliche Flexibilität und Belastbarkeit\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2027",
+        "en": "Ihre Aufgaben\n• Persönliche Wirksamkeit in unserer Abteilung als Mensch und Ärztin/Arzt – Sie tragen dazu bei, dass unsere Patientinnen und Patienten bei uns jederzeit bestens aufgehoben sind\n• Sie sichern die Einhaltung unserer Standards und entwickeln diese gemeinsam mit uns weiter – mit Professionalität, Verantwortungsbewusstsein und Vorbildwirkung\n• Sie begleiten unsere Patientinnen und Patienten einfühlsam und kompetent während der gesamten perioperativen Phase\n• Sie tragen aktiv zur Weiterbildung unserer Kolleginnen, Kollegen und Pflegefachpersonen bei und bringen Ihre Expertise auch im interdisziplinären Umfeld sowie bei internen Fortbildungen ein\n\nIhr Profil\n• Neugierde und anhaltende Freude an unserem Fachgebiet\n• Einen eidgenössischen oder in der Schweiz anerkannten Facharzttitel in Anästhesiologie\n• Mehrjährige Berufserfahrung auf Facharztniveau\n• Fundierte Kenntnisse in allen gängigen Allgemein- und Regionalanästhesieverfahren inklusive moderner Schmerztherapie\n• Bereitschaft zur persönlichen Entwicklung und zur Gestaltung der Klinik\n• Sehr gute Deutschkenntnisse in Wort und Schrift (Muttersprache oder mindestens Niveau C1)\n• Freude an interdisziplinärer Zusammenarbeit, Kommunikationsstärke und eine patientenzentrierte Haltung\n• Persönliche Flexibilität und Belastbarkeit\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2027",
+        "fr": "Ihre Aufgaben\n• Persönliche Wirksamkeit in unserer Abteilung als Mensch und Ärztin/Arzt – Sie tragen dazu bei, dass unsere Patientinnen und Patienten bei uns jederzeit bestens aufgehoben sind\n• Sie sichern die Einhaltung unserer Standards und entwickeln diese gemeinsam mit uns weiter – mit Professionalität, Verantwortungsbewusstsein und Vorbildwirkung\n• Sie begleiten unsere Patientinnen und Patienten einfühlsam und kompetent während der gesamten perioperativen Phase\n• Sie tragen aktiv zur Weiterbildung unserer Kolleginnen, Kollegen und Pflegefachpersonen bei und bringen Ihre Expertise auch im interdisziplinären Umfeld sowie bei internen Fortbildungen ein\n\nIhr Profil\n• Neugierde und anhaltende Freude an unserem Fachgebiet\n• Einen eidgenössischen oder in der Schweiz anerkannten Facharzttitel in Anästhesiologie\n• Mehrjährige Berufserfahrung auf Facharztniveau\n• Fundierte Kenntnisse in allen gängigen Allgemein- und Regionalanästhesieverfahren inklusive moderner Schmerztherapie\n• Bereitschaft zur persönlichen Entwicklung und zur Gestaltung der Klinik\n• Sehr gute Deutschkenntnisse in Wort und Schrift (Muttersprache oder mindestens Niveau C1)\n• Freude an interdisziplinärer Zusammenarbeit, Kommunikationsstärke und eine patientenzentrierte Haltung\n• Persönliche Flexibilität und Belastbarkeit\n\nZusätzlich profitieren Sie von\n\nEintritt: 01. Januar 2027"
+      },
+      "needsRetranslation": true,
+      "location": "Herisau",
+      "canton": "AR",
+      "url": "https://live.solique.ch/svar/job/details/4050519",
+      "source": "Spitalverbund Appenzell Ausserrhoden (SVAR) Dedicated Parser (Solique careers portal)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:16:27.690Z",
+      "addressLocality": "Herisau",
+      "addressRegion": "AR",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "9100",
+      "category": "Sanità / Ospedali",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Sanità / Ospedali",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://live.solique.ch/svar/job/details/4050519",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "externalId": "4050519",
+      "previousSlugsByLocale": {
+        "it": [
+          "oberarztin-oberarzt-fur-unsere-anasthesiologie-m-w-d-svar-spitalverbund-ar-herisau"
+        ]
+      },
+      "previousSlugs": [
+        "oberarztin-oberarzt-fur-unsere-anasthesiologie-m-w-d-svar-spitalverbund-ar-herisau"
+      ],
+      "salaryMin": 81000,
+      "salaryMax": 113000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 81000,
+          "maxValue": 113000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T03:16:27.690Z"
     }
   ]
 }
