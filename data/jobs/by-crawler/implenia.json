@@ -1,6 +1,6 @@
 {
   "crawlerKey": "implenia",
-  "assembledAt": "2026-08-28T21:09:01.866Z",
+  "assembledAt": "2026-08-29T04:03:05.824Z",
   "jobs": [
     {
       "id": "implenia-292b9155221c",
@@ -33,7 +33,7 @@
       "url": "https://jobs.implenia.com/job/%28Senior%29-Immobilienbewirtschafter-%28mwd%29%2C-Basel-oder-Rheinfelden%2C-80-100-befristet/13294-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:51.881Z",
+      "crawledAt": "2026-08-29T04:02:52.026Z",
       "addressLocality": "Basel",
       "postalCode": "4052",
       "streetAddress": "Grosspeteranlage 5+7",
@@ -113,7 +113,7 @@
       "url": "https://jobs.implenia.com/job/Senior-Transaction-Advisory-Manager-%28mwd%29%2C-Opfikon%2C-80-100/13101-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:51.149Z",
+      "crawledAt": "2026-08-29T04:02:50.859Z",
       "addressLocality": "Thurgauerstrasse 101A",
       "postalCode": "",
       "streetAddress": "",
@@ -230,7 +230,8 @@
           "maxValue": 146000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-df84023f100d",
@@ -263,7 +264,7 @@
       "url": "https://jobs.implenia.com/job/Sachbearbeiter-Immobilienbewirtschaftung-Vermietungsspezialist-%28mwd%29%2C-Basel%2C-50/13560-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:49.709Z",
+      "crawledAt": "2026-08-29T04:02:52.807Z",
       "addressLocality": "Basilea Città",
       "postalCode": "",
       "streetAddress": "",
@@ -373,7 +374,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-b1477be2b20d",
@@ -406,7 +408,7 @@
       "url": "https://jobs.implenia.com/job/Bauf%C3%BChrer-%28mwd%29%2C-Gisikon%2C-80-100/12487-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:48.851Z",
+      "crawledAt": "2026-08-29T04:02:48.973Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -477,7 +479,7 @@
       "url": "https://jobs.implenia.com/job/Bauf%C3%BChrer-Neubau-Gisikon/13685-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:48.638Z",
+      "crawledAt": "2026-08-29T04:02:48.678Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -541,7 +543,7 @@
       "url": "https://jobs.implenia.com/job/IT-Demand-Lead-%28mwd%29%2C-Opfikon%2C-80-100/13563-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:48.415Z",
+      "crawledAt": "2026-08-29T04:02:49.281Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -658,7 +660,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-b173cfda0ae9",
@@ -758,7 +761,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-69a8937f3d84",
@@ -830,7 +834,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-6bb583834287",
@@ -863,7 +868,7 @@
       "url": "https://jobs.implenia.com/job/Juniorprojektleiterin-Elektro-%28Gisikon-Opfikon%29/13043-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:47.144Z",
+      "crawledAt": "2026-08-29T04:02:47.434Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -935,7 +940,7 @@
       "url": "https://jobs.implenia.com/job/Leitung-Kundenbuchhaltung-%28mwd%29%2C-Opfikon%2C-Bern-oder-Winterthur%2C-80-100/13298-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:53.672Z",
+      "crawledAt": "2026-08-29T04:02:55.218Z",
       "addressLocality": "Thurgauerstrasse 101A-8152 Opfikon",
       "postalCode": "",
       "streetAddress": "",
@@ -1013,7 +1018,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiterin-Elektroplanung-%28Gisikon-Opfikon-Bern%29/13041-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:46.935Z",
+      "crawledAt": "2026-08-29T04:02:47.180Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -1091,7 +1096,7 @@
       "url": "https://jobs.implenia.com/job/Sicherheitsw%C3%A4rter-Sicherheitschef/12496-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:46.677Z",
+      "crawledAt": "2026-08-29T04:02:46.663Z",
       "addressLocality": "Opfikon",
       "postalCode": "8152",
       "streetAddress": "",
@@ -1170,7 +1175,7 @@
       "url": "https://jobs.implenia.com/job/Kalkulator-Baumeister-Neu-undoder-Umbau-%28wmd%29/11598-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:46.530Z",
+      "crawledAt": "2026-08-29T04:02:46.500Z",
       "addressLocality": "Opfikon",
       "postalCode": "8152",
       "streetAddress": "",
@@ -1243,7 +1248,7 @@
       "url": "https://jobs.implenia.com/job/Leiterin-Technisches-B%C3%BCro-80-100-%28wmd%29/12462-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:46.324Z",
+      "crawledAt": "2026-08-29T04:02:45.952Z",
       "addressLocality": "Opfikon",
       "postalCode": "8152",
       "streetAddress": "",
@@ -1318,7 +1323,7 @@
       "url": "https://jobs.implenia.com/job/Kalkulator-Ingenieurtiefbau-%28mwd%29-80-100/11117-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:45.997Z",
+      "crawledAt": "2026-08-29T04:02:45.696Z",
       "addressLocality": "Opfikon",
       "postalCode": "8152",
       "streetAddress": "",
@@ -1409,7 +1414,7 @@
       "url": "https://jobs.implenia.com/job/Senior-Projektleiterin-Spezialtiefbau%2C-80-100/11845-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:45.781Z",
+      "crawledAt": "2026-08-29T04:02:45.053Z",
       "addressLocality": "Opfikon",
       "postalCode": "8152",
       "streetAddress": "",
@@ -1500,7 +1505,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiter-Baumeister-Luzern-%28wmd%29/12839-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:49.066Z",
+      "crawledAt": "2026-08-29T04:02:44.790Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -1573,7 +1578,7 @@
       "url": "https://jobs.implenia.com/job/Modellierer-AVORKalkulation-%28wmd%29%2C-80-100/13349-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:44.618Z",
+      "crawledAt": "2026-08-29T04:02:44.264Z",
       "addressLocality": "Aarau",
       "postalCode": "",
       "streetAddress": "",
@@ -1650,7 +1655,7 @@
       "url": "https://jobs.implenia.com/job/Senior-Bauleiter-Umbau-%28wmd%29/13378-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:44.362Z",
+      "crawledAt": "2026-08-29T04:02:43.894Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -1727,7 +1732,7 @@
       "url": "https://jobs.implenia.com/job/Gesamtplanungsleiter-%28wmd%29/13518-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:43.300Z",
+      "crawledAt": "2026-08-29T04:02:43.391Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -1897,7 +1902,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiter-Neubau-GUTU-Gisikon-%28wmd%29/12695-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:43.067Z",
+      "crawledAt": "2026-08-29T04:02:42.446Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -1970,7 +1975,7 @@
       "url": "https://jobs.implenia.com/job/Bauleiter-Neubau-GUTU-Gisikon-%28wmd%29/12704-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:42.838Z",
+      "crawledAt": "2026-08-29T04:02:38.038Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -2057,7 +2062,7 @@
       "url": "https://jobs.implenia.com/job/Akquisiteur-Grundst%C3%BCcke-&-Entwicklungspotenziale-%28wmd%29-50-100/13639-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:42.600Z",
+      "crawledAt": "2026-08-29T04:02:36.501Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2134,7 +2139,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Immobilien-EFZ-%28mwd%29/13501-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:39.561Z",
+      "crawledAt": "2026-08-29T04:02:31.475Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "streetAddress": "Gäuggelistrasse 7",
@@ -2210,7 +2215,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Immobilien-EFZ-%28mwd%29/13497-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:39.031Z",
+      "crawledAt": "2026-08-29T04:02:30.636Z",
       "addressLocality": "St. Leonhardstrasse 74 Postfach-9001 St. Gallen",
       "postalCode": "",
       "streetAddress": "",
@@ -2284,7 +2289,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiterin-Lehrger%C3%BCstbau-und-Br%C3%BCckenbau%2C-80-100/12594-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:38.693Z",
+      "crawledAt": "2026-08-29T04:02:30.070Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2362,7 +2367,7 @@
       "url": "https://jobs.implenia.com/job/Polier-im-Lehrger%C3%BCst-und-Br%C3%BCckenbau-100-%28wm%29/12585-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:38.559Z",
+      "crawledAt": "2026-08-29T04:02:29.908Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2440,7 +2445,7 @@
       "url": "https://jobs.implenia.com/job/Vermietungsspezialist-Immobilien-%28mwd%29%2C-St_-Gallen%2C-100/13280-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:37.940Z",
+      "crawledAt": "2026-08-29T04:02:28.971Z",
       "addressLocality": "St. Leonhardstrasse 74 Postfach-9001 St. Gallen",
       "postalCode": "",
       "streetAddress": "",
@@ -2519,7 +2524,7 @@
       "url": "https://jobs.implenia.com/job/Mitarbeiter-Bauablaufplanung-AVOR-%28mwd%29%2C-80-100/12998-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:34.607Z",
+      "crawledAt": "2026-08-29T04:02:35.493Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2598,7 +2603,7 @@
       "url": "https://jobs.implenia.com/job/Customer-Consultant-Bewirtschaftung-%28mwd%29%2C-Winterthur%2C-60-100/12689-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:53.059Z",
+      "crawledAt": "2026-08-29T04:02:54.400Z",
       "addressLocality": "Winterthur (Roter Turm)",
       "postalCode": "8400",
       "streetAddress": "Theaterstrasse 17",
@@ -2674,7 +2679,7 @@
       "url": "https://jobs.implenia.com/job/Junior-Fachspezialist-Prozesssteuerung-AOU-%28mwd%29-80-100/13323-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:33.299Z",
+      "crawledAt": "2026-08-29T04:02:32.985Z",
       "addressLocality": "Thurgauerstrasse 101A",
       "postalCode": "",
       "streetAddress": "",
@@ -2810,7 +2815,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-ef52a7f77a5d",
@@ -2843,7 +2849,7 @@
       "url": "https://jobs.implenia.com/job/Senior-ServiceNow-Administrator-%28mwd%29%2C-Opfikon%2C-80-100/12992-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:42.354Z",
+      "crawledAt": "2026-08-29T04:02:33.970Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2914,7 +2920,7 @@
       "url": "https://jobs.implenia.com/job/ICT-Workplace-Engineer-%28mwd%29-80-100/13439-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:52.492Z",
+      "crawledAt": "2026-08-29T04:02:53.994Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -2988,7 +2994,7 @@
       "url": "https://jobs.implenia.com/job/Team-Lead-SAP-Finance-&-Reporting-%28mwd%29-80-100/12991-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:42.135Z",
+      "crawledAt": "2026-08-29T04:02:34.237Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -3106,7 +3112,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-84fab217db27",
@@ -3139,7 +3146,7 @@
       "url": "https://jobs.implenia.com/job/EPC-Proposal-Manager-%28wmd%29/13086-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:29.342Z",
+      "crawledAt": "2026-08-29T04:02:35.233Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -3216,7 +3223,7 @@
       "url": "https://jobs.implenia.com/job/Planungsleiter-Umbauprojekt-Jelmoli-%28wmd%29/12963-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:29.102Z",
+      "crawledAt": "2026-08-29T04:02:34.851Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -3300,7 +3307,7 @@
       "url": "https://jobs.implenia.com/job/Elektroinstallateur-Elektroservicemonteur-EFZ-%28wmd%29%2C-100/13367-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:40.942Z",
+      "crawledAt": "2026-08-29T04:02:36.260Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -3374,7 +3381,7 @@
       "url": "https://jobs.implenia.com/job/Bauf%C3%BChrer-Schadstoffsanierung-%28wmd%29/12750-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:41.183Z",
+      "crawledAt": "2026-08-29T04:02:34.600Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -3457,7 +3464,7 @@
       "url": "https://jobs.implenia.com/job/Immobilienbuchhalter-%28mwd%29%2C-Olten%2C-60/13663-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:57.903Z",
+      "crawledAt": "2026-08-29T04:03:01.537Z",
       "addressLocality": "Aarauerstrasse 11 Postfach-4601 Olten",
       "postalCode": "",
       "streetAddress": "",
@@ -3536,7 +3543,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Fachfrau-mann-Kundendialog/13491-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:54.304Z",
+      "crawledAt": "2026-08-29T04:02:56.492Z",
       "addressLocality": "Winterthur (Roter Turm)",
       "postalCode": "8400",
       "streetAddress": "Theaterstrasse 17",
@@ -3608,7 +3615,7 @@
       "url": "https://jobs.implenia.com/job/Leiter-Ausf%C3%BChrung-Instandsetzung-%28wmd%29/13602-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:40.733Z",
+      "crawledAt": "2026-08-29T04:02:35.996Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -3726,7 +3733,8 @@
           "maxValue": 78500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-7f909357ebdd",
@@ -3802,7 +3810,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "implenia-1fad18a5ef56",
@@ -3835,7 +3844,7 @@
       "url": "https://jobs.implenia.com/job/Kaufm%C3%A4nnischer-Leiter-Senior-Bewirtschafter-%28mwd%29%2C-Zentrum-Regensdorf%2C-80-100/13557-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:54.916Z",
+      "crawledAt": "2026-08-29T04:02:57.379Z",
       "addressLocality": "Einkaufszentrum Regensdorf Zentrum 1-8105 Zentrum Regensdorf",
       "postalCode": "",
       "streetAddress": "",
@@ -3914,7 +3923,7 @@
       "url": "https://jobs.implenia.com/job/Regionalleiter-Kommerzielle-Immobilien-Region-Ost-%28mwd%29%2C-Z%C3%BCrich-%28Opfikon%29%2C-80-100/13553-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:24.632Z",
+      "crawledAt": "2026-08-29T04:02:37.035Z",
       "addressLocality": "Thurgauerstrasse 101A",
       "postalCode": "",
       "streetAddress": "",
@@ -3994,7 +4003,7 @@
       "url": "https://jobs.implenia.com/job/Sachbearbeiter-Prozessbuchhaltung-%28mwd%29%2C-Winterthur-oder-Z%C3%BCrich-%28Opfikon%29%2C-40-100/13675-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:56.093Z",
+      "crawledAt": "2026-08-29T04:02:59.197Z",
       "addressLocality": "Technikumstrasse 61 Postfach-8400 Winterthur",
       "postalCode": "",
       "streetAddress": "",
@@ -4072,7 +4081,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiter-Neubau-Baumeister-Aarau-%28mwd%29/11078-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:37.679Z",
+      "crawledAt": "2026-08-29T04:02:28.518Z",
       "addressLocality": "Aarau",
       "postalCode": "",
       "streetAddress": "",
@@ -4147,7 +4156,7 @@
       "url": "https://jobs.implenia.com/job/Zimmermann-EFZ%2C-Feinarbeiten-Montage-Service%2C-80-100/12022-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:37.461Z",
+      "crawledAt": "2026-08-29T04:02:28.264Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "Wibachstrasse 12",
@@ -4222,7 +4231,7 @@
       "url": "https://jobs.implenia.com/job/Vorarbeiter-Holzbau-%28mwd%29%2C-80-100/12920-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:37.239Z",
+      "crawledAt": "2026-08-29T04:02:27.999Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "",
@@ -4308,7 +4317,7 @@
       "url": "https://jobs.implenia.com/job/Polier-Holzbau-%28mwd%29%2C-80-100/12918-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:33:22.607Z",
+      "crawledAt": "2026-08-29T04:02:27.744Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "Wibachstrasse 12",
@@ -4373,7 +4382,7 @@
       "url": "https://jobs.implenia.com/job/Ingenieur-Holzbau%2C-%28mwd%29-80-100/9584-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:37.012Z",
+      "crawledAt": "2026-08-29T04:02:27.500Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "",
@@ -4450,7 +4459,7 @@
       "url": "https://jobs.implenia.com/job/Leiter-Kalkulation-Zentralschweiz-%28wmd%29%2C-80-100/12911-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:36.791Z",
+      "crawledAt": "2026-08-29T04:02:27.240Z",
       "addressLocality": "Gisikon",
       "postalCode": "6038",
       "streetAddress": "",
@@ -4523,7 +4532,7 @@
       "url": "https://jobs.implenia.com/job/Senior-Kalkulator-Holzbau%2C-%28mwd%29%2C-80-100/12872-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:36.548Z",
+      "crawledAt": "2026-08-29T04:02:26.993Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "Wibachstrasse 12",
@@ -4597,7 +4606,7 @@
       "url": "https://jobs.implenia.com/job/Bauf%C3%BChrer-Holzbau%2C-%28mwd%29%2C-80-100/10512-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:36.221Z",
+      "crawledAt": "2026-08-29T04:02:26.573Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "",
@@ -4668,7 +4677,7 @@
       "url": "https://jobs.implenia.com/job/Zimmermann-EFZ-%28mwd%29%2C-80-100/13057-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:35.996Z",
+      "crawledAt": "2026-08-29T04:02:26.338Z",
       "addressLocality": "Rümlang",
       "postalCode": "8153",
       "streetAddress": "",
@@ -4739,7 +4748,7 @@
       "url": "https://jobs.implenia.com/job/Immobilienbuchhalter-%28mwd%29%2C-Opfikon%2C-80/12861-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:35.347Z",
+      "crawledAt": "2026-08-29T04:02:25.442Z",
       "addressLocality": "Thurgauerstrasse 101A",
       "postalCode": "",
       "streetAddress": "",
@@ -4823,7 +4832,7 @@
       "url": "https://jobs.implenia.com/job/Leiter-Transaction-Advisory%2C-Opfikon%2C-80-100/13531-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:34.588Z",
+      "crawledAt": "2026-08-29T04:02:24.468Z",
       "addressLocality": "Thurgauerstrasse 101A",
       "postalCode": "",
       "streetAddress": "",
@@ -4902,7 +4911,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Immobilien-EFZ-%28mwd%29/13499-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:55.470Z",
+      "crawledAt": "2026-08-29T04:02:58.398Z",
       "addressLocality": "Technikumstrasse 61 Postfach-8400 Winterthur",
       "postalCode": "",
       "streetAddress": "",
@@ -4976,7 +4985,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Dienstleistung-&-Administration-%28Profil-EM%29-mit-Schwerpunkt-Buchhaltung/13503-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:58.626Z",
+      "crawledAt": "2026-08-29T04:03:02.362Z",
       "addressLocality": "Technikumstrasse 61 Postfach-8400 Winterthur",
       "postalCode": "",
       "streetAddress": "",
@@ -5048,7 +5057,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Immobilien-EFZ-%28mwd%29/13498-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:33.221Z",
+      "crawledAt": "2026-08-29T04:02:22.630Z",
       "addressLocality": "Zürich",
       "postalCode": "8001",
       "streetAddress": "Weinbergstrasse 5 / Stampfenbachstrasse 6",
@@ -5120,7 +5129,7 @@
       "url": "https://jobs.implenia.com/job/Lernender-Kauffrau-mann-Immobilien-EFZ-%28mwd%29/13502-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:57.377Z",
+      "crawledAt": "2026-08-29T04:03:00.816Z",
       "addressLocality": "Zug",
       "postalCode": "6300",
       "streetAddress": "Feldpark 3",
@@ -5192,7 +5201,7 @@
       "url": "https://jobs.implenia.com/job/Senior-Bewirtschafter-Gewerbe-%28mwd%29%2C-Z%C3%BCrich%2C-80-100/13598-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:33.908Z",
+      "crawledAt": "2026-08-29T04:02:23.472Z",
       "addressLocality": "Zürich",
       "postalCode": "8001",
       "streetAddress": "Weinbergstrasse 5 / Stampfenbachstrasse 6",
@@ -5263,7 +5272,7 @@
       "url": "https://jobs.implenia.com/job/Sachbearbeiter-Immobilienbewirtschaftung-%28mwd%29%2C-Zug%2C-80-100/13437-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:56.727Z",
+      "crawledAt": "2026-08-29T04:02:59.989Z",
       "addressLocality": "Zug",
       "postalCode": "6300",
       "streetAddress": "Feldpark 3",
@@ -5334,7 +5343,7 @@
       "url": "https://jobs.implenia.com/job/Immobilienbewirtschafter-%28mwd%29%2C-Z%C3%BCrich-Central%2C-80-100/13689-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:43.739Z",
+      "crawledAt": "2026-08-29T04:02:50.181Z",
       "addressLocality": "Zürich",
       "postalCode": "8001",
       "streetAddress": "Weinbergstrasse 5 / Stampfenbachstrasse 6",
@@ -5398,7 +5407,7 @@
       "url": "https://jobs.implenia.com/job/Bewirtschafter-Gewerbeimmobilien-%28mwd%29%2C-Bern-PostParc%2C-60-80/12436-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:45.026Z",
+      "crawledAt": "2026-08-29T04:02:47.955Z",
       "addressLocality": "Bern",
       "postalCode": "3008",
       "streetAddress": "Bogenschützenstrasse 9B",
@@ -5471,7 +5480,7 @@
       "url": "https://jobs.implenia.com/job/Projektleiter-Real-Estate-Development-%2880-100/13390-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T20:05:12.702Z",
+      "crawledAt": "2026-08-29T04:02:32.320Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -5490,11 +5499,13 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "projektleiter-real-estate-development-80-100-implenia-ch"
+        "projektleiter-real-estate-development-80-100-implenia-ch",
+        "project-manager-sviluppo-immobiliare-80-100-implenia-glattpark-opfikon"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "projektleiter-real-estate-development-80-100-implenia-ch"
+          "projektleiter-real-estate-development-80-100-implenia-ch",
+          "project-manager-sviluppo-immobiliare-80-100-implenia-glattpark-opfikon"
         ]
       },
       "firstSeenAt": "2026-08-14T10:36:36.094Z",
@@ -5509,8 +5520,7 @@
           "maxValue": 206500,
           "unitText": "YEAR"
         }
-      },
-      "crawlerMissStreak": 2
+      }
     },
     {
       "id": "implenia-63806d318f4f",
@@ -5608,7 +5618,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 2
     },
     {
       "id": "implenia-c9519875b0da",
@@ -5641,7 +5652,7 @@
       "url": "https://jobs.implenia.com/job/Bauleiter-Umbau-%28wmd%29/13114-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-27T20:05:11.747Z",
+      "crawledAt": "2026-08-29T04:02:35.737Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -5676,7 +5687,8 @@
         "senior-construction-manager-conversion-f-m-d-implenia-glattpark-opfikon",
         "senior-bauleiter-umbau-w-m-d-implenia-ch",
         "transformation-du-directeur-principal-des-travaux-f-m-d-implenia-glattpark-opfikon",
-        "senior-bauleiter-umbau-m-w-d-implenia-glattpark-opfikon"
+        "senior-bauleiter-umbau-m-w-d-implenia-glattpark-opfikon",
+        "conversione-construction-manager-f-m-d-implenia-glattpark-opfikon"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -5693,7 +5705,8 @@
           "senior-construction-manager-conversion-f-m-d-implenia-glattpark-opfikon",
           "senior-bauleiter-umbau-w-m-d-implenia-ch",
           "transformation-du-directeur-principal-des-travaux-f-m-d-implenia-glattpark-opfikon",
-          "senior-bauleiter-umbau-m-w-d-implenia-glattpark-opfikon"
+          "senior-bauleiter-umbau-m-w-d-implenia-glattpark-opfikon",
+          "conversione-construction-manager-f-m-d-implenia-glattpark-opfikon"
         ],
         "en": [
           "bauleiter-umbau-w-m-d-implenia-ch",
@@ -5723,8 +5736,7 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      },
-      "crawlerMissStreak": 2
+      }
     },
     {
       "id": "implenia-76aa7b55e391",
@@ -5757,7 +5769,7 @@
       "url": "https://jobs.implenia.com/job/Werktstudent-Praktikant-Laborbau-NW-%28mwd%29%2C-80-100/13402-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:32.879Z",
+      "crawledAt": "2026-08-29T04:02:22.138Z",
       "addressLocality": "Glattpark (Opfikon)",
       "postalCode": "8152",
       "streetAddress": "Thurgauerstrasse 101A",
@@ -5837,7 +5849,7 @@
       "url": "https://jobs.implenia.com/job/Leiter-Region-Westschweiz%2C-Equipment-&-Technology-Services-Schweiz-%28ETS%29/13026-de_DE",
       "source": "Implenia Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:08:52.641Z",
+      "crawledAt": "2026-08-29T04:02:53.754Z",
       "addressLocality": "Echandens",
       "postalCode": "1026",
       "streetAddress": "",
@@ -5878,7 +5890,155 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:08:52.641Z"
+      "firstSeenAt": "2026-08-29T04:02:53.754Z"
+    },
+    {
+      "id": "implenia-be4d589a15c3",
+      "slug": "finanzbuchhalter-w-m-d-implenia-glattpark-opfikon",
+      "slugByLocale": {
+        "de": "finanzbuchhalter-w-m-d-implenia-ch",
+        "it": "finanzbuchhalter-w-m-d-implenia-glattpark-opfikon",
+        "en": "finanzbuchhalter-w-m-d-implenia-glattpark-opfikon",
+        "fr": "finanzbuchhalter-w-m-d-implenia-glattpark-opfikon"
+      },
+      "company": "Implenia",
+      "companyKey": "implenia",
+      "companyDomain": "implenia.com",
+      "title": "Finanzbuchhalter (w/m/d)",
+      "titleByLocale": {
+        "de": "Finanzbuchhalter (w/m/d)",
+        "it": "Finanzbuchhalter (w/m/d)",
+        "en": "Finanzbuchhalter (w/m/d)",
+        "fr": "Finanzbuchhalter (w/m/d)"
+      },
+      "description": "Zur Verstärkung des Finanzteams suchen wir einen Finanzbuchhalter ARGEN (m/w/d). Dein Arbeitsplatz ist etwas ganz Besonderes: Wir suchen deine Unterstützung für das Gotthard-Projekt (2. Gotthard-Röhre) in Göschenen (Kanton Uri). Das bedeutet: Du bist mitten in der AKTION! Aufgaben: Finanzbuchhalter (w/m/d)\n• Buchhalterische Führung der Arbeitsgemeinschaft (ARGE):\n• Hauptbuch, Debitoren, Kreditoren\n• MWST-Abrechnungen\n• Anlagebuchhaltung / Inventarbewertung\n• Zahlungsverkehr / Kreditorenworkflow\n• Selbstständiges Erstellen von Quartals- und Jahresabschlüssen für die ARGE\n• Eröffnung und Betreuung der Bankbeziehung\n• Beantragen von Bürgschaften und Garantien bei Banken und Versicherungen\n• Beratung von Bauführern und Projektleitern in buchhalterischen Belangen\n• Liquiditätsplanung\n• Weitere Aufgaben nach Bedarf (z.B. im Bereich Controlling) Anforderungen: Finanzbuchhalter (w/m/d)\n• Kaufmännische Ausbildung mit Weiterbildung im Bereich Finanz- und Rechnungswesen\n• Einige Jahre Erfahrung im Bereich Buchhaltung\n• Gute Kenntnisse in SAP FI/CO und Excel\n• Sehr gute Deutsch Kenntnisse in Wort und Schrift\n• Lösungsorientiertes Denken, selbständige Arbeitsweise sowie gutes Durchsetzungsvermögen\n• Teamfähigkeit, freundlicher Auftritt, hohe Eigeninitiative\n• Interesse an den komplexen Abläufen einer Grossbaustelle mit einem Auftragsvolumen zwischen 400 und 500 MCHF Benefits: Finanzbuchhalter (w/m/d)\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+      "descriptionByLocale": {
+        "de": "Zur Verstärkung des Finanzteams suchen wir einen Finanzbuchhalter ARGEN (m/w/d). Dein Arbeitsplatz ist etwas ganz Besonderes: Wir suchen deine Unterstützung für das Gotthard-Projekt (2. Gotthard-Röhre) in Göschenen (Kanton Uri). Das bedeutet: Du bist mitten in der AKTION! Aufgaben: Finanzbuchhalter (w/m/d)\n• Buchhalterische Führung der Arbeitsgemeinschaft (ARGE):\n• Hauptbuch, Debitoren, Kreditoren\n• MWST-Abrechnungen\n• Anlagebuchhaltung / Inventarbewertung\n• Zahlungsverkehr / Kreditorenworkflow\n• Selbstständiges Erstellen von Quartals- und Jahresabschlüssen für die ARGE\n• Eröffnung und Betreuung der Bankbeziehung\n• Beantragen von Bürgschaften und Garantien bei Banken und Versicherungen\n• Beratung von Bauführern und Projektleitern in buchhalterischen Belangen\n• Liquiditätsplanung\n• Weitere Aufgaben nach Bedarf (z.B. im Bereich Controlling) Anforderungen: Finanzbuchhalter (w/m/d)\n• Kaufmännische Ausbildung mit Weiterbildung im Bereich Finanz- und Rechnungswesen\n• Einige Jahre Erfahrung im Bereich Buchhaltung\n• Gute Kenntnisse in SAP FI/CO und Excel\n• Sehr gute Deutsch Kenntnisse in Wort und Schrift\n• Lösungsorientiertes Denken, selbständige Arbeitsweise sowie gutes Durchsetzungsvermögen\n• Teamfähigkeit, freundlicher Auftritt, hohe Eigeninitiative\n• Interesse an den komplexen Abläufen einer Grossbaustelle mit einem Auftragsvolumen zwischen 400 und 500 MCHF Benefits: Finanzbuchhalter (w/m/d)\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "it": "Zur Verstärkung des Finanzteams suchen wir einen Finanzbuchhalter ARGEN (m/w/d). Dein Arbeitsplatz ist etwas ganz Besonderes: Wir suchen deine Unterstützung für das Gotthard-Projekt (2. Gotthard-Röhre) in Göschenen (Kanton Uri). Das bedeutet: Du bist mitten in der AKTION! Aufgaben: Finanzbuchhalter (w/m/d)\n• Buchhalterische Führung der Arbeitsgemeinschaft (ARGE):\n• Hauptbuch, Debitoren, Kreditoren\n• MWST-Abrechnungen\n• Anlagebuchhaltung / Inventarbewertung\n• Zahlungsverkehr / Kreditorenworkflow\n• Selbstständiges Erstellen von Quartals- und Jahresabschlüssen für die ARGE\n• Eröffnung und Betreuung der Bankbeziehung\n• Beantragen von Bürgschaften und Garantien bei Banken und Versicherungen\n• Beratung von Bauführern und Projektleitern in buchhalterischen Belangen\n• Liquiditätsplanung\n• Weitere Aufgaben nach Bedarf (z.B. im Bereich Controlling) Anforderungen: Finanzbuchhalter (w/m/d)\n• Kaufmännische Ausbildung mit Weiterbildung im Bereich Finanz- und Rechnungswesen\n• Einige Jahre Erfahrung im Bereich Buchhaltung\n• Gute Kenntnisse in SAP FI/CO und Excel\n• Sehr gute Deutsch Kenntnisse in Wort und Schrift\n• Lösungsorientiertes Denken, selbständige Arbeitsweise sowie gutes Durchsetzungsvermögen\n• Teamfähigkeit, freundlicher Auftritt, hohe Eigeninitiative\n• Interesse an den komplexen Abläufen einer Grossbaustelle mit einem Auftragsvolumen zwischen 400 und 500 MCHF Benefits: Finanzbuchhalter (w/m/d)\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "en": "Zur Verstärkung des Finanzteams suchen wir einen Finanzbuchhalter ARGEN (m/w/d). Dein Arbeitsplatz ist etwas ganz Besonderes: Wir suchen deine Unterstützung für das Gotthard-Projekt (2. Gotthard-Röhre) in Göschenen (Kanton Uri). Das bedeutet: Du bist mitten in der AKTION! Aufgaben: Finanzbuchhalter (w/m/d)\n• Buchhalterische Führung der Arbeitsgemeinschaft (ARGE):\n• Hauptbuch, Debitoren, Kreditoren\n• MWST-Abrechnungen\n• Anlagebuchhaltung / Inventarbewertung\n• Zahlungsverkehr / Kreditorenworkflow\n• Selbstständiges Erstellen von Quartals- und Jahresabschlüssen für die ARGE\n• Eröffnung und Betreuung der Bankbeziehung\n• Beantragen von Bürgschaften und Garantien bei Banken und Versicherungen\n• Beratung von Bauführern und Projektleitern in buchhalterischen Belangen\n• Liquiditätsplanung\n• Weitere Aufgaben nach Bedarf (z.B. im Bereich Controlling) Anforderungen: Finanzbuchhalter (w/m/d)\n• Kaufmännische Ausbildung mit Weiterbildung im Bereich Finanz- und Rechnungswesen\n• Einige Jahre Erfahrung im Bereich Buchhaltung\n• Gute Kenntnisse in SAP FI/CO und Excel\n• Sehr gute Deutsch Kenntnisse in Wort und Schrift\n• Lösungsorientiertes Denken, selbständige Arbeitsweise sowie gutes Durchsetzungsvermögen\n• Teamfähigkeit, freundlicher Auftritt, hohe Eigeninitiative\n• Interesse an den komplexen Abläufen einer Grossbaustelle mit einem Auftragsvolumen zwischen 400 und 500 MCHF Benefits: Finanzbuchhalter (w/m/d)\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "fr": "Zur Verstärkung des Finanzteams suchen wir einen Finanzbuchhalter ARGEN (m/w/d). Dein Arbeitsplatz ist etwas ganz Besonderes: Wir suchen deine Unterstützung für das Gotthard-Projekt (2. Gotthard-Röhre) in Göschenen (Kanton Uri). Das bedeutet: Du bist mitten in der AKTION! Aufgaben: Finanzbuchhalter (w/m/d)\n• Buchhalterische Führung der Arbeitsgemeinschaft (ARGE):\n• Hauptbuch, Debitoren, Kreditoren\n• MWST-Abrechnungen\n• Anlagebuchhaltung / Inventarbewertung\n• Zahlungsverkehr / Kreditorenworkflow\n• Selbstständiges Erstellen von Quartals- und Jahresabschlüssen für die ARGE\n• Eröffnung und Betreuung der Bankbeziehung\n• Beantragen von Bürgschaften und Garantien bei Banken und Versicherungen\n• Beratung von Bauführern und Projektleitern in buchhalterischen Belangen\n• Liquiditätsplanung\n• Weitere Aufgaben nach Bedarf (z.B. im Bereich Controlling) Anforderungen: Finanzbuchhalter (w/m/d)\n• Kaufmännische Ausbildung mit Weiterbildung im Bereich Finanz- und Rechnungswesen\n• Einige Jahre Erfahrung im Bereich Buchhaltung\n• Gute Kenntnisse in SAP FI/CO und Excel\n• Sehr gute Deutsch Kenntnisse in Wort und Schrift\n• Lösungsorientiertes Denken, selbständige Arbeitsweise sowie gutes Durchsetzungsvermögen\n• Teamfähigkeit, freundlicher Auftritt, hohe Eigeninitiative\n• Interesse an den komplexen Abläufen einer Grossbaustelle mit einem Auftragsvolumen zwischen 400 und 500 MCHF Benefits: Finanzbuchhalter (w/m/d)\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com"
+      },
+      "location": "Glattpark (Opfikon)",
+      "canton": "ZH",
+      "url": "https://jobs.implenia.com/job/Finanzbuchhalter-%28wmd%29/13725-de_DE",
+      "source": "Implenia Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T04:02:49.779Z",
+      "addressLocality": "Glattpark (Opfikon)",
+      "postalCode": "8152",
+      "streetAddress": "Thurgauerstrasse 101A",
+      "addressRegion": "Zürich",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Finanza",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Construction & Construction Services (civil engineering, building construction, real estate)",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobs.implenia.com/job/Finanzbuchhalter-%28wmd%29/13725-de_DE",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "finanzbuchhalter-w-m-d-implenia-ch"
+        ]
+      },
+      "previousSlugs": [
+        "finanzbuchhalter-w-m-d-implenia-ch"
+      ],
+      "salaryMin": 113000,
+      "salaryMax": 198500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 113000,
+          "maxValue": 198500,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T04:02:49.779Z"
+    },
+    {
+      "id": "implenia-ff888470088e",
+      "slug": "responsabile-modernisierung-deutschschweiz-implenia-glattpark-opfikon",
+      "slugByLocale": {
+        "de": "leiter-in-modernisierung-deutschschweiz-implenia-ch",
+        "it": "responsabile-modernisierung-deutschschweiz-implenia-glattpark-opfikon",
+        "en": "leiter-in-modernisierung-deutschschweiz-implenia-ch",
+        "fr": "leiter-in-modernisierung-deutschschweiz-implenia-ch"
+      },
+      "company": "Implenia",
+      "companyKey": "implenia",
+      "companyDomain": "implenia.com",
+      "title": "Leiter:in Modernisierung Deutschschweiz",
+      "titleByLocale": {
+        "de": "Leiter:in Modernisierung Deutschschweiz",
+        "it": "Responsabile Modernisierung Deutschschweiz",
+        "en": "Leiter:in Modernisierung Deutschschweiz",
+        "fr": "Leiter:in Modernisierung Deutschschweiz"
+      },
+      "description": "Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia.com Wir suchen den/die Leiterin Modernisierung Deutschschweiz innerhalb der Division «Buildings». Dein Arbeitsort wird unser Hauptsitz «Connect» in Opfikon sein. Funktion Sie sind dem Gesamtleiter Modernisierung unterstellt und unterstützen ihn bei der Leitung der Modernisierungseinheit in der Region ZH, NW und Mitte, die Gebäudemodernisierungen von der ersten Idee bis zur Fertigstellung anbietet. Verantwortlichkeiten der Stelle Sie sind verantwortlich für die Akquisitionen für Renovierungsmaßnahmen unterschiedlicher Größenordnung in der beschriebenen Region. Sie steuern Projekte für anspruchsvolle Renovierungen. Sie identifizieren Gebäude, welche eine Aufwertung benötigen und erstellen entsprechende Immobiliendiagnosen. Sie sind verantwortlich für die Finanzen der Abteilung und überwachen die Projektausführungen mit dem Projektteam. Sie führen ca. 20 Mitarbeiter:innen, zum Teil matrixorganisiert. Sie fungieren als Implenia Ambassador auf dem Markt und pflegen in diesem Zusammenhang den Ausbau der Beziehungen zu verschiedenen externen Partnern. Sie wirken an der Ausarbeitung und Integration der Strategie auf regionaler Ebene mit. Sie erstellen den Businessplan und das Budget für ihre Region und überwachen die Entwicklung und Sicherstellung der Einhaltung der finanziellen Ziele. Sie überprüfen und hinterfragen kritisch die Planung und den Einsatz von Ressourcen und führen entsprechende Managementkontrollen gemäß den Richtlinien der Gruppe durch. Sie stellen den unternehmerischen Erfolg der Region sicher, legen finanzielle Ziele und Ergebnisse fest und verfolgen die Entwicklung der Akquisition. Sie sind Träger der 4 Unternehmenswerte von Implenia und vertreten diese sowohl intern als auch extern. Das bewegen Sie\n• Erarbeitet und setzt die Geschäftsbereichsstrategie auf Stufe Region um\n• Erstellt für die Region den Businessplan inkl. der Ressourcenplanung und das Budget, überwacht die Entwicklung und ist verantwortlich für die Einhaltung\n• Hat die Gesamtverantwortung über das P&L der Region\n• Überprüft die Ressourcenplanung und –Einsatz der Teams\n• Setzt das Finanzcontrolling nach Vorgabe des Konzerns durch\n• Wahrt die Führungsgrundsätze sowie die Unternehmungskultur der Implenia\n• Stellt das Riskmanagement sicher und setzt diese in der Region durch\n• Ist verantwortlich für die Auftragsbeschaffung inkl. Plausibilitätskontrollen bei komplexen Offerteingaben\n• Erkennt die Bedürfnisse der Kunden, weiss diese zu deuten, lässt Verträge ausarbeiten (integral), verhandelt diese und schliesst sie gem. Kompetenzdiagramm Implenia ab\n• Unterhält aktiv Verbindungen zu potentiellen Auftraggebern, Bauherren, Kunden, Investoren, Wirtschaftsvertreten, Verbänden, Behörden und Unternehmern\n• Stellt die Einhaltung der Prozesse nach IMS 2.0sicher\n• Setzt die Konzernvorgaben und –ziele um, vertritt und lebt diese (z.B. Code of Conduct)\n• Ist für die Ausbildung der MA in der Region, in Absprache mit dem HR, verantwortlich\n• Stellt die Portfolio-Bewertungen in der Region in Absprache mit dem HR sicher\n• Überprüft und fördert aktive die Nachwuchsplanung in der Region\n• Führt und coacht die direkt unterstellten Mitarbeiter\n• Deshalb gelingt es Ihnen\n• Architekt ETH / FH\n• Bauingenieur ETH / FH\n• Zusatzausbildung in BWL oder gleichwertig (EMBA) FH\n• Zusatzausbildung Projektmanagement Bau oder MAS Baumanagement\n• 5 – 10 Jahre Leiter Ausführung / Teamleiter oder äquivalente Funktion\n• Mind. 6 – 8 Jahre Führungserfahrung Teams > 50 MA\n• Umbauerfahrung oder Erfahrung als Projektleiter Neubau\n• 5 Jahre Erfahrung im GU Umfeld\n• Ausgewiesener Ausführungsgeneralist\n• Umfassendes betriebswirtschaftliches Wissen\n• Ausgewiesener Networker (intern/extern) Das bieten wir\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+      "descriptionByLocale": {
+        "de": "Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia.com Wir suchen den/die Leiterin Modernisierung Deutschschweiz innerhalb der Division «Buildings». Dein Arbeitsort wird unser Hauptsitz «Connect» in Opfikon sein. Funktion Sie sind dem Gesamtleiter Modernisierung unterstellt und unterstützen ihn bei der Leitung der Modernisierungseinheit in der Region ZH, NW und Mitte, die Gebäudemodernisierungen von der ersten Idee bis zur Fertigstellung anbietet. Verantwortlichkeiten der Stelle Sie sind verantwortlich für die Akquisitionen für Renovierungsmaßnahmen unterschiedlicher Größenordnung in der beschriebenen Region. Sie steuern Projekte für anspruchsvolle Renovierungen. Sie identifizieren Gebäude, welche eine Aufwertung benötigen und erstellen entsprechende Immobiliendiagnosen. Sie sind verantwortlich für die Finanzen der Abteilung und überwachen die Projektausführungen mit dem Projektteam. Sie führen ca. 20 Mitarbeiter:innen, zum Teil matrixorganisiert. Sie fungieren als Implenia Ambassador auf dem Markt und pflegen in diesem Zusammenhang den Ausbau der Beziehungen zu verschiedenen externen Partnern. Sie wirken an der Ausarbeitung und Integration der Strategie auf regionaler Ebene mit. Sie erstellen den Businessplan und das Budget für ihre Region und überwachen die Entwicklung und Sicherstellung der Einhaltung der finanziellen Ziele. Sie überprüfen und hinterfragen kritisch die Planung und den Einsatz von Ressourcen und führen entsprechende Managementkontrollen gemäß den Richtlinien der Gruppe durch. Sie stellen den unternehmerischen Erfolg der Region sicher, legen finanzielle Ziele und Ergebnisse fest und verfolgen die Entwicklung der Akquisition. Sie sind Träger der 4 Unternehmenswerte von Implenia und vertreten diese sowohl intern als auch extern. Das bewegen Sie\n• Erarbeitet und setzt die Geschäftsbereichsstrategie auf Stufe Region um\n• Erstellt für die Region den Businessplan inkl. der Ressourcenplanung und das Budget, überwacht die Entwicklung und ist verantwortlich für die Einhaltung\n• Hat die Gesamtverantwortung über das P&L der Region\n• Überprüft die Ressourcenplanung und –Einsatz der Teams\n• Setzt das Finanzcontrolling nach Vorgabe des Konzerns durch\n• Wahrt die Führungsgrundsätze sowie die Unternehmungskultur der Implenia\n• Stellt das Riskmanagement sicher und setzt diese in der Region durch\n• Ist verantwortlich für die Auftragsbeschaffung inkl. Plausibilitätskontrollen bei komplexen Offerteingaben\n• Erkennt die Bedürfnisse der Kunden, weiss diese zu deuten, lässt Verträge ausarbeiten (integral), verhandelt diese und schliesst sie gem. Kompetenzdiagramm Implenia ab\n• Unterhält aktiv Verbindungen zu potentiellen Auftraggebern, Bauherren, Kunden, Investoren, Wirtschaftsvertreten, Verbänden, Behörden und Unternehmern\n• Stellt die Einhaltung der Prozesse nach IMS 2.0sicher\n• Setzt die Konzernvorgaben und –ziele um, vertritt und lebt diese (z.B. Code of Conduct)\n• Ist für die Ausbildung der MA in der Region, in Absprache mit dem HR, verantwortlich\n• Stellt die Portfolio-Bewertungen in der Region in Absprache mit dem HR sicher\n• Überprüft und fördert aktive die Nachwuchsplanung in der Region\n• Führt und coacht die direkt unterstellten Mitarbeiter\n• Deshalb gelingt es Ihnen\n• Architekt ETH / FH\n• Bauingenieur ETH / FH\n• Zusatzausbildung in BWL oder gleichwertig (EMBA) FH\n• Zusatzausbildung Projektmanagement Bau oder MAS Baumanagement\n• 5 – 10 Jahre Leiter Ausführung / Teamleiter oder äquivalente Funktion\n• Mind. 6 – 8 Jahre Führungserfahrung Teams > 50 MA\n• Umbauerfahrung oder Erfahrung als Projektleiter Neubau\n• 5 Jahre Erfahrung im GU Umfeld\n• Ausgewiesener Ausführungsgeneralist\n• Umfassendes betriebswirtschaftliches Wissen\n• Ausgewiesener Networker (intern/extern) Das bieten wir\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "it": "Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia.com Wir suchen den/die Leiterin Modernisierung Deutschschweiz innerhalb der Division «Buildings». Dein Arbeitsort wird unser Hauptsitz «Connect» in Opfikon sein. Funktion Sie sind dem Gesamtleiter Modernisierung unterstellt und unterstützen ihn bei der Leitung der Modernisierungseinheit in der Region ZH, NW und Mitte, die Gebäudemodernisierungen von der ersten Idee bis zur Fertigstellung anbietet. Verantwortlichkeiten der Stelle Sie sind verantwortlich für die Akquisitionen für Renovierungsmaßnahmen unterschiedlicher Größenordnung in der beschriebenen Region. Sie steuern Projekte für anspruchsvolle Renovierungen. Sie identifizieren Gebäude, welche eine Aufwertung benötigen und erstellen entsprechende Immobiliendiagnosen. Sie sind verantwortlich für die Finanzen der Abteilung und überwachen die Projektausführungen mit dem Projektteam. Sie führen ca. 20 Mitarbeiter:innen, zum Teil matrixorganisiert. Sie fungieren als Implenia Ambassador auf dem Markt und pflegen in diesem Zusammenhang den Ausbau der Beziehungen zu verschiedenen externen Partnern. Sie wirken an der Ausarbeitung und Integration der Strategie auf regionaler Ebene mit. Sie erstellen den Businessplan und das Budget für ihre Region und überwachen die Entwicklung und Sicherstellung der Einhaltung der finanziellen Ziele. Sie überprüfen und hinterfragen kritisch die Planung und den Einsatz von Ressourcen und führen entsprechende Managementkontrollen gemäß den Richtlinien der Gruppe durch. Sie stellen den unternehmerischen Erfolg der Region sicher, legen finanzielle Ziele und Ergebnisse fest und verfolgen die Entwicklung der Akquisition. Sie sind Träger der 4 Unternehmenswerte von Implenia und vertreten diese sowohl intern als auch extern. Das bewegen Sie\n• Erarbeitet und setzt die Geschäftsbereichsstrategie auf Stufe Region um\n• Erstellt für die Region den Businessplan inkl. der Ressourcenplanung und das Budget, überwacht die Entwicklung und ist verantwortlich für die Einhaltung\n• Hat die Gesamtverantwortung über das P&L der Region\n• Überprüft die Ressourcenplanung und –Einsatz der Teams\n• Setzt das Finanzcontrolling nach Vorgabe des Konzerns durch\n• Wahrt die Führungsgrundsätze sowie die Unternehmungskultur der Implenia\n• Stellt das Riskmanagement sicher und setzt diese in der Region durch\n• Ist verantwortlich für die Auftragsbeschaffung inkl. Plausibilitätskontrollen bei komplexen Offerteingaben\n• Erkennt die Bedürfnisse der Kunden, weiss diese zu deuten, lässt Verträge ausarbeiten (integral), verhandelt diese und schliesst sie gem. Kompetenzdiagramm Implenia ab\n• Unterhält aktiv Verbindungen zu potentiellen Auftraggebern, Bauherren, Kunden, Investoren, Wirtschaftsvertreten, Verbänden, Behörden und Unternehmern\n• Stellt die Einhaltung der Prozesse nach IMS 2.0sicher\n• Setzt die Konzernvorgaben und –ziele um, vertritt und lebt diese (z.B. Code of Conduct)\n• Ist für die Ausbildung der MA in der Region, in Absprache mit dem HR, verantwortlich\n• Stellt die Portfolio-Bewertungen in der Region in Absprache mit dem HR sicher\n• Überprüft und fördert aktive die Nachwuchsplanung in der Region\n• Führt und coacht die direkt unterstellten Mitarbeiter\n• Deshalb gelingt es Ihnen\n• Architekt ETH / FH\n• Bauingenieur ETH / FH\n• Zusatzausbildung in BWL oder gleichwertig (EMBA) FH\n• Zusatzausbildung Projektmanagement Bau oder MAS Baumanagement\n• 5 – 10 Jahre Leiter Ausführung / Teamleiter oder äquivalente Funktion\n• Mind. 6 – 8 Jahre Führungserfahrung Teams > 50 MA\n• Umbauerfahrung oder Erfahrung als Projektleiter Neubau\n• 5 Jahre Erfahrung im GU Umfeld\n• Ausgewiesener Ausführungsgeneralist\n• Umfassendes betriebswirtschaftliches Wissen\n• Ausgewiesener Networker (intern/extern) Das bieten wir\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "en": "Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia.com Wir suchen den/die Leiterin Modernisierung Deutschschweiz innerhalb der Division «Buildings». Dein Arbeitsort wird unser Hauptsitz «Connect» in Opfikon sein. Funktion Sie sind dem Gesamtleiter Modernisierung unterstellt und unterstützen ihn bei der Leitung der Modernisierungseinheit in der Region ZH, NW und Mitte, die Gebäudemodernisierungen von der ersten Idee bis zur Fertigstellung anbietet. Verantwortlichkeiten der Stelle Sie sind verantwortlich für die Akquisitionen für Renovierungsmaßnahmen unterschiedlicher Größenordnung in der beschriebenen Region. Sie steuern Projekte für anspruchsvolle Renovierungen. Sie identifizieren Gebäude, welche eine Aufwertung benötigen und erstellen entsprechende Immobiliendiagnosen. Sie sind verantwortlich für die Finanzen der Abteilung und überwachen die Projektausführungen mit dem Projektteam. Sie führen ca. 20 Mitarbeiter:innen, zum Teil matrixorganisiert. Sie fungieren als Implenia Ambassador auf dem Markt und pflegen in diesem Zusammenhang den Ausbau der Beziehungen zu verschiedenen externen Partnern. Sie wirken an der Ausarbeitung und Integration der Strategie auf regionaler Ebene mit. Sie erstellen den Businessplan und das Budget für ihre Region und überwachen die Entwicklung und Sicherstellung der Einhaltung der finanziellen Ziele. Sie überprüfen und hinterfragen kritisch die Planung und den Einsatz von Ressourcen und führen entsprechende Managementkontrollen gemäß den Richtlinien der Gruppe durch. Sie stellen den unternehmerischen Erfolg der Region sicher, legen finanzielle Ziele und Ergebnisse fest und verfolgen die Entwicklung der Akquisition. Sie sind Träger der 4 Unternehmenswerte von Implenia und vertreten diese sowohl intern als auch extern. Das bewegen Sie\n• Erarbeitet und setzt die Geschäftsbereichsstrategie auf Stufe Region um\n• Erstellt für die Region den Businessplan inkl. der Ressourcenplanung und das Budget, überwacht die Entwicklung und ist verantwortlich für die Einhaltung\n• Hat die Gesamtverantwortung über das P&L der Region\n• Überprüft die Ressourcenplanung und –Einsatz der Teams\n• Setzt das Finanzcontrolling nach Vorgabe des Konzerns durch\n• Wahrt die Führungsgrundsätze sowie die Unternehmungskultur der Implenia\n• Stellt das Riskmanagement sicher und setzt diese in der Region durch\n• Ist verantwortlich für die Auftragsbeschaffung inkl. Plausibilitätskontrollen bei komplexen Offerteingaben\n• Erkennt die Bedürfnisse der Kunden, weiss diese zu deuten, lässt Verträge ausarbeiten (integral), verhandelt diese und schliesst sie gem. Kompetenzdiagramm Implenia ab\n• Unterhält aktiv Verbindungen zu potentiellen Auftraggebern, Bauherren, Kunden, Investoren, Wirtschaftsvertreten, Verbänden, Behörden und Unternehmern\n• Stellt die Einhaltung der Prozesse nach IMS 2.0sicher\n• Setzt die Konzernvorgaben und –ziele um, vertritt und lebt diese (z.B. Code of Conduct)\n• Ist für die Ausbildung der MA in der Region, in Absprache mit dem HR, verantwortlich\n• Stellt die Portfolio-Bewertungen in der Region in Absprache mit dem HR sicher\n• Überprüft und fördert aktive die Nachwuchsplanung in der Region\n• Führt und coacht die direkt unterstellten Mitarbeiter\n• Deshalb gelingt es Ihnen\n• Architekt ETH / FH\n• Bauingenieur ETH / FH\n• Zusatzausbildung in BWL oder gleichwertig (EMBA) FH\n• Zusatzausbildung Projektmanagement Bau oder MAS Baumanagement\n• 5 – 10 Jahre Leiter Ausführung / Teamleiter oder äquivalente Funktion\n• Mind. 6 – 8 Jahre Führungserfahrung Teams > 50 MA\n• Umbauerfahrung oder Erfahrung als Projektleiter Neubau\n• 5 Jahre Erfahrung im GU Umfeld\n• Ausgewiesener Ausführungsgeneralist\n• Umfassendes betriebswirtschaftliches Wissen\n• Ausgewiesener Networker (intern/extern) Das bieten wir\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com",
+        "fr": "Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia.com Wir suchen den/die Leiterin Modernisierung Deutschschweiz innerhalb der Division «Buildings». Dein Arbeitsort wird unser Hauptsitz «Connect» in Opfikon sein. Funktion Sie sind dem Gesamtleiter Modernisierung unterstellt und unterstützen ihn bei der Leitung der Modernisierungseinheit in der Region ZH, NW und Mitte, die Gebäudemodernisierungen von der ersten Idee bis zur Fertigstellung anbietet. Verantwortlichkeiten der Stelle Sie sind verantwortlich für die Akquisitionen für Renovierungsmaßnahmen unterschiedlicher Größenordnung in der beschriebenen Region. Sie steuern Projekte für anspruchsvolle Renovierungen. Sie identifizieren Gebäude, welche eine Aufwertung benötigen und erstellen entsprechende Immobiliendiagnosen. Sie sind verantwortlich für die Finanzen der Abteilung und überwachen die Projektausführungen mit dem Projektteam. Sie führen ca. 20 Mitarbeiter:innen, zum Teil matrixorganisiert. Sie fungieren als Implenia Ambassador auf dem Markt und pflegen in diesem Zusammenhang den Ausbau der Beziehungen zu verschiedenen externen Partnern. Sie wirken an der Ausarbeitung und Integration der Strategie auf regionaler Ebene mit. Sie erstellen den Businessplan und das Budget für ihre Region und überwachen die Entwicklung und Sicherstellung der Einhaltung der finanziellen Ziele. Sie überprüfen und hinterfragen kritisch die Planung und den Einsatz von Ressourcen und führen entsprechende Managementkontrollen gemäß den Richtlinien der Gruppe durch. Sie stellen den unternehmerischen Erfolg der Region sicher, legen finanzielle Ziele und Ergebnisse fest und verfolgen die Entwicklung der Akquisition. Sie sind Träger der 4 Unternehmenswerte von Implenia und vertreten diese sowohl intern als auch extern. Das bewegen Sie\n• Erarbeitet und setzt die Geschäftsbereichsstrategie auf Stufe Region um\n• Erstellt für die Region den Businessplan inkl. der Ressourcenplanung und das Budget, überwacht die Entwicklung und ist verantwortlich für die Einhaltung\n• Hat die Gesamtverantwortung über das P&L der Region\n• Überprüft die Ressourcenplanung und –Einsatz der Teams\n• Setzt das Finanzcontrolling nach Vorgabe des Konzerns durch\n• Wahrt die Führungsgrundsätze sowie die Unternehmungskultur der Implenia\n• Stellt das Riskmanagement sicher und setzt diese in der Region durch\n• Ist verantwortlich für die Auftragsbeschaffung inkl. Plausibilitätskontrollen bei komplexen Offerteingaben\n• Erkennt die Bedürfnisse der Kunden, weiss diese zu deuten, lässt Verträge ausarbeiten (integral), verhandelt diese und schliesst sie gem. Kompetenzdiagramm Implenia ab\n• Unterhält aktiv Verbindungen zu potentiellen Auftraggebern, Bauherren, Kunden, Investoren, Wirtschaftsvertreten, Verbänden, Behörden und Unternehmern\n• Stellt die Einhaltung der Prozesse nach IMS 2.0sicher\n• Setzt die Konzernvorgaben und –ziele um, vertritt und lebt diese (z.B. Code of Conduct)\n• Ist für die Ausbildung der MA in der Region, in Absprache mit dem HR, verantwortlich\n• Stellt die Portfolio-Bewertungen in der Region in Absprache mit dem HR sicher\n• Überprüft und fördert aktive die Nachwuchsplanung in der Region\n• Führt und coacht die direkt unterstellten Mitarbeiter\n• Deshalb gelingt es Ihnen\n• Architekt ETH / FH\n• Bauingenieur ETH / FH\n• Zusatzausbildung in BWL oder gleichwertig (EMBA) FH\n• Zusatzausbildung Projektmanagement Bau oder MAS Baumanagement\n• 5 – 10 Jahre Leiter Ausführung / Teamleiter oder äquivalente Funktion\n• Mind. 6 – 8 Jahre Führungserfahrung Teams > 50 MA\n• Umbauerfahrung oder Erfahrung als Projektleiter Neubau\n• 5 Jahre Erfahrung im GU Umfeld\n• Ausgewiesener Ausführungsgeneralist\n• Umfassendes betriebswirtschaftliches Wissen\n• Ausgewiesener Networker (intern/extern) Das bieten wir\n• Ein multikulturelles Arbeitsumfeld mit der Chance, eine lebenswerte Zukunft mitzugestalten\n• Modernste Technologien und einen zeitgemässen Arbeitsplatz bei einem nachhaltigen Unternehmen\n• Ein Unternehmen, das Talente und die Weiterbildung seiner Mitarbeitenden fördert\n• Die Sicherheit eines finanziell gesunden, breit aufgestellten Konzerns mit starken Wurzeln in der Schweiz\n• Flexible Arbeitsmodelle und moderne Arbeitsmittel mit Homeoffice Möglichkeit\n• Eine spannende Auswahl an Benefits:\n• 5 Wochen Ferien und 9 bezahlte Brückentage\n• eine hauseigene Pensionskasse mit sehr gutem Deckungsgrad und 3 Beitragsstufen\n• zahlreiche Preisnachlässe auf namhafte Anbieter von Produkt- und Dienstleistungen Wieso unsere Mitarbeitenden gerne bei uns arbeiten, sagen sie dir gleich selbst in folgendem Video: https://youtu.be/wtuhlIfjJq8. Wie läuft der Bewerbungsprozess bei Implenia ab? Bei Implenia erwartet dich ein einfacher und transparenter Bewerbungsprozess:\n• Online-Bewerbung mit Lebenslauf\n• Persönliches Erstgespräch per Telefon, digital oder vor Ort\n• Zweitgespräch und Angebotsphase Was uns noch wichtig ist Bei Implenia schätzen und leben wir Diversität. Unser Rekrutierungsprozess ist daher auf die Förderung von Vielfalt, Gleichberechtigung und Inklusion ausgerichtet. Über Implenia Als führender Schweizer Bau- und Immobiliendienstleister entwickelt, realisiert und bewirtschaftet Implenia Lebensräume, Arbeitswelten und Infrastruktur für künftige Generationen in der Schweiz und in Deutschland. Zudem bietet Implenia in weiteren Märkten Tunnelbau- und damit verbundene Infrastrukturprojekte. Das Unternehmen fasst das Know-how aus hochqualifizierten Beratungs-, Entwicklungs-, Planungs- und Ausführungseinheiten unter einem Dach zu einem integrierten, multinational führenden Bau- und Immobiliendienstleister zusammen. Mit Hauptsitz in Opfikon bei Zürich beschäftigt Implenia europaweit über 8 000 Mitarbeitende (FTE) und erzielte im Jahr 2025 einen Umsatz von CHF 3,5 Mrd. Weitere Informationen unter implenia .com"
+      },
+      "location": "Glattpark (Opfikon)",
+      "canton": "ZH",
+      "url": "https://jobs.implenia.com/job/Leiterin-Modernisierung-Deutschschweiz/13667-de_DE",
+      "source": "Implenia Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T04:02:49.525Z",
+      "addressLocality": "Glattpark (Opfikon)",
+      "postalCode": "8152",
+      "streetAddress": "Thurgauerstrasse 101A",
+      "addressRegion": "Zürich",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Construction & Construction Services (civil engineering, building construction, real estate)",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-28",
+      "applyUrl": "https://jobs.implenia.com/job/Leiterin-Modernisierung-Deutschschweiz/13667-de_DE",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "leiter-in-modernisierung-deutschschweiz-implenia-ch"
+        ]
+      },
+      "previousSlugs": [
+        "leiter-in-modernisierung-deutschschweiz-implenia-ch"
+      ],
+      "salaryMin": 101500,
+      "salaryMax": 154000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 101500,
+          "maxValue": 154000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T04:02:49.525Z"
     }
   ]
 }
