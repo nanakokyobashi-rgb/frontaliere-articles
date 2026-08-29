@@ -1,6 +1,6 @@
 {
   "crawlerKey": "schindler",
-  "assembledAt": "2026-08-28T21:19:50.944Z",
+  "assembledAt": "2026-08-29T03:50:21.717Z",
   "jobs": [
     {
       "id": "schindler-76c469d8faf2",
@@ -33,7 +33,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Le-Mont-sur-Lausanne-Apprentissage-de-Polym%C3%A9canicien-ne-CFC-Monteur-euse-d'ascenseurs-pour-2027-Vaud/1413387633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:42.242Z",
+      "crawledAt": "2026-08-29T03:50:08.293Z",
       "addressLocality": "Le Mont-sur-Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -107,7 +107,7 @@
       "url": "https://job.schindler.com/ASZ/job/Le-Mont-sur-Lausanne-Chef-d'%C3%A9quipe-maintenance-r%C3%A9gion-fribourgeoise-%28hfd%29-80-100-Vaud/1425621733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:41.623Z",
+      "crawledAt": "2026-08-29T03:50:09.093Z",
       "addressLocality": "Le Mont-sur-Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -177,7 +177,7 @@
       "url": "https://job.schindler.com/ASZ/job/La-Chaux-de-Fonds-Monteur-d'ascenseurs-exp%C3%A9riment%C3%A9-pour-la-r%C3%A9gion-Neuch%C3%A2telJura-%28hfd%29-80-100-Neuc/1413415833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:40.985Z",
+      "crawledAt": "2026-08-29T03:50:09.897Z",
       "addressLocality": "La Chaux-de-Fonds",
       "addressRegion": "NE",
       "addressCountry": "CH",
@@ -247,7 +247,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Le-Mont-sur-Lausanne-Apprentissage-d'Employ%C3%A9-e-de-commerce-CFC-pour-2027-Vaud/1410237633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:40.353Z",
+      "crawledAt": "2026-08-29T03:50:07.486Z",
       "addressLocality": "Le Mont-sur-Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -322,7 +322,7 @@
       "url": "https://job.schindler.com/ASZ/job/St_-Gallen-Junior-Verkaufstalent-Region-St_-Gallen-%28mwd%29-80-100-St_/1410728433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:39.710Z",
+      "crawledAt": "2026-08-29T03:49:56.920Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -400,7 +400,7 @@
       "url": "https://job.schindler.com/Schindler/job/St_-Gallen-Sales-Support-Service-Region-St_-Gallen-%28mwd%29-80-St_/1431536833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:39.076Z",
+      "crawledAt": "2026-08-29T03:50:03.507Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -432,7 +432,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:39.076Z"
+      "firstSeenAt": "2026-08-29T03:50:03.507Z"
     },
     {
       "id": "schindler-c408a41134a3",
@@ -465,7 +465,7 @@
       "url": "https://job.schindler.com/Schindler/job/St_-Gallen-Elektrikerin-als-Aufzugsmonteurin-Region-St_-Gallen-%28mwd%29-80-100-St_/1424070233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:38.449Z",
+      "crawledAt": "2026-08-29T03:50:01.728Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -542,7 +542,7 @@
       "url": "https://job.schindler.com/Schindler/job/St_-Gallen-Landmaschinenmechanikerin-als-Aufzugsmonteurin-Region-St_-Gallen-%28mwd%29-80-100-St_/1424072033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:37.789Z",
+      "crawledAt": "2026-08-29T03:50:02.562Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -619,7 +619,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/K%C3%BCssnacht-a_-R_-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Schw/1375698933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:37.127Z",
+      "crawledAt": "2026-08-29T03:50:05.110Z",
       "addressLocality": "Küssnacht a",
       "addressRegion": "SZ",
       "addressCountry": "CH",
@@ -692,7 +692,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/K%C3%BCssnacht-a_-R_-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Schw/1375697933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:36.500Z",
+      "crawledAt": "2026-08-29T03:50:00.088Z",
       "addressLocality": "Küssnacht a",
       "addressRegion": "SZ",
       "addressCountry": "CH",
@@ -843,7 +843,7 @@
       "url": "https://job.schindler.com/Schindler/job/St_-Gallen-Aufzugsmonteurin-in-St_-Gallen-%28mwd%29-80-100-St_/1376813233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:33.981Z",
+      "crawledAt": "2026-08-29T03:50:06.693Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -918,7 +918,7 @@
       "url": "https://job.schindler.com/ASZ/job/St_-Gallen-Leadmonteur-Boltshauser-Region-Ost-%28mwd%29-80-100-St_/1415752033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:33.351Z",
+      "crawledAt": "2026-08-29T03:50:05.911Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -946,7 +946,6 @@
         ]
       },
       "firstSeenAt": "2026-07-16T22:43:26.122Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -958,7 +957,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-1085922c4581",
@@ -991,7 +991,7 @@
       "url": "https://job.schindler.com/SBB/job/St_-Gallen-Schnupperlehre-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-St_/1254155001/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:32.723Z",
+      "crawledAt": "2026-08-29T03:49:57.709Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1077,7 +1077,7 @@
       "url": "https://job.schindler.com/ASZ/job/Castione-Arbedo-Assistente-vendite-riparazioni-%28mfd%29-80-100-Tici/1427100433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:19:31.458Z",
+      "crawledAt": "2026-08-29T03:49:52.971Z",
       "addressLocality": "Castione-Arbedo",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -1095,7 +1095,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-17T21:34:54.602Z",
-      "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -1107,7 +1106,8 @@
           "maxValue": 75000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-c87babeb3468",
@@ -1140,7 +1140,7 @@
       "url": "https://job.schindler.com/ASZ/job/Steinach-Aufzugsmonteurin-Region-Thurgau-%28mwd%29-80-100-St_/1413854033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:30.835Z",
+      "crawledAt": "2026-08-29T03:49:55.346Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1178,7 +1178,6 @@
         ]
       },
       "firstSeenAt": "2026-07-10T22:17:35.545Z",
-      "needsRetranslation": true,
       "salaryMin": 67000,
       "salaryMax": 102000,
       "baseSalary": {
@@ -1190,7 +1189,8 @@
           "maxValue": 102000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-49d79c6d04ce",
@@ -1223,7 +1223,7 @@
       "url": "https://job.schindler.com/ASZ/job/Steinach-Aufzugsmonteurin-Region-Z%C3%BCri-Oberland-Winterthur-%28mwd%29-80-100-St_/1416229733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:30.199Z",
+      "crawledAt": "2026-08-29T03:49:54.552Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1299,7 +1299,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Steinach-Schnupperlehre-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-St_/1254185401/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:29.570Z",
+      "crawledAt": "2026-08-29T03:49:53.749Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1372,7 +1372,7 @@
       "url": "https://job.schindler.com/ASZ/job/Steinach-Montage-Koordinatorin-%28mwd%29-80-100-Steinach-St_/1422070333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:28.937Z",
+      "crawledAt": "2026-08-29T03:49:56.129Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1450,7 +1450,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Steinach-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-St_/1375705933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:28.283Z",
+      "crawledAt": "2026-08-29T03:49:52.180Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1523,7 +1523,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Steinach-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-St_/1375703633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:27.650Z",
+      "crawledAt": "2026-08-29T03:49:51.378Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1598,7 +1598,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-Stadt-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1387781733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:27.014Z",
+      "crawledAt": "2026-08-29T03:49:45.765Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1699,7 +1699,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Aufzugsmonteurin-Modernisierungen-Region-Z%C3%BCrich-und-Aargau-%28mwd%29-80-100-Z%C3%BCri/1389603133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:26.392Z",
+      "crawledAt": "2026-08-29T03:49:11.597Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1776,7 +1776,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Warehouse-Agent-%28mwd%29-50-Luze/1430445133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:25.755Z",
+      "crawledAt": "2026-08-29T03:49:12.384Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -1808,7 +1808,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:25.755Z"
+      "firstSeenAt": "2026-08-29T03:49:12.384Z"
     },
     {
       "id": "schindler-db2f56e4dfd8",
@@ -1841,7 +1841,7 @@
       "url": "https://job.schindler.com/Schindler/job/Bussigny-Chef-Monteur-Bussigny-%28hfd%29-80-100-Vaud/1423209233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:25.126Z",
+      "crawledAt": "2026-08-29T03:49:37.057Z",
       "addressLocality": "Bussigny",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -1859,7 +1859,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-05T11:28:19.039Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -1871,7 +1870,8 @@
           "maxValue": 107500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-cb0bf5e67133",
@@ -1904,7 +1904,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Thun-Servicetechnikerin-im-Raum-ThunInterlaken-%28mwd%29-80-100-Bern/1423449433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:24.503Z",
+      "crawledAt": "2026-08-29T03:49:04.352Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1982,7 +1982,7 @@
       "url": "https://job.schindler.com/Schindler/job/Winterthur-Montagekoordinatorin-%28mwd%29%2C-100-Z%C3%BCri/1427603733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:23.884Z",
+      "crawledAt": "2026-08-29T03:49:19.554Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2063,7 +2063,7 @@
       "url": "https://job.schindler.com/Schindler/job/Z%C3%BCrich-Servicetechnikerin-Fahrtreppen-in-der-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1423274633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:23.261Z",
+      "crawledAt": "2026-08-29T03:49:14.752Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2141,7 +2141,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Teamleader-Service-Raum-Sempachersee-%28mwd%29-80-100-Luze/1413083533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:22.639Z",
+      "crawledAt": "2026-08-29T03:49:42.599Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -2159,7 +2159,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-17T22:19:31.338Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -2171,7 +2170,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-3b0eeec16cf9",
@@ -2204,7 +2204,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Z%C3%BCrich-Reparaturtechnikerin-in-der-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1277224001/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:22.009Z",
+      "crawledAt": "2026-08-29T03:49:41.800Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2281,7 +2281,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Supply-Chain-Quality-Specialist-%28mwd%29-60-Luze/1431347733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:21.366Z",
+      "crawledAt": "2026-08-29T03:49:26.750Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -2313,7 +2313,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:21.366Z"
+      "firstSeenAt": "2026-08-29T03:49:26.750Z"
     },
     {
       "id": "schindler-f3f87c900c4e",
@@ -2346,7 +2346,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Head-Technical-Training-&-Information-%28mwd%29-80-100-Luze/1392171333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:20.734Z",
+      "crawledAt": "2026-08-29T03:49:25.942Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -2423,7 +2423,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Z%C3%BCrich-Servicetechnikerin-in-der-Stadt-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1423997433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:20.100Z",
+      "crawledAt": "2026-08-29T03:49:18.736Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2499,7 +2499,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-Region-KnonaueramtSteinhausen-%28mwd%29-80-100-Z%C3%BCri/1426037033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:19.438Z",
+      "crawledAt": "2026-08-29T03:49:02.737Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2578,7 +2578,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-in-Region-FislisbachNiederrohrdorf-%28mwd%29-80-100-Z%C3%BCri/1424793833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:18.819Z",
+      "crawledAt": "2026-08-29T03:49:16.346Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2610,7 +2610,6 @@
         ]
       },
       "firstSeenAt": "2026-08-10T21:44:59.241Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -2622,7 +2621,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-d70e3c5c452c",
@@ -2655,7 +2655,7 @@
       "url": "https://job.schindler.com/Schindler/job/Z%C3%BCrich-Verkaufssupport-Reparaturen-%28mwd%29%2C-80-100-Z%C3%BCri/1417953833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:18.181Z",
+      "crawledAt": "2026-08-29T03:49:48.171Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2733,7 +2733,7 @@
       "url": "https://job.schindler.com/SBB/job/Bern-Schnupperlehre-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-%28Lehrstart-2027%29-Bern/1263538601/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:17.557Z",
+      "crawledAt": "2026-08-29T03:49:47.382Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2776,7 +2776,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:17.557Z"
+      "firstSeenAt": "2026-08-29T03:49:47.382Z"
     },
     {
       "id": "schindler-6515abb2e0ce",
@@ -2809,7 +2809,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Z%C3%BCrich-Monteur-f%C3%BCr-Aufzugsanlagen-in-der-Region-Z%C3%BCrich-%28mwd%29%2C-80-100-Z%C3%BCri/1129812001/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:16.293Z",
+      "crawledAt": "2026-08-29T03:49:17.156Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2889,7 +2889,7 @@
       "url": "https://job.schindler.com/ASZ/job/Sch%C3%B6nb%C3%BChl-Aufzugsmonteurin-Region-Aargau-Solothurn-%28mwd%29-80-100-Bern/1431521133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:15.659Z",
+      "crawledAt": "2026-08-29T03:49:38.635Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2921,7 +2921,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:15.659Z"
+      "firstSeenAt": "2026-08-29T03:49:38.635Z"
     },
     {
       "id": "schindler-81fc438808d0",
@@ -2954,7 +2954,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Fachspezialistin-Haustechnik-HLKKS-%28mwd%29-80-100-Luze/1430453433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:15.037Z",
+      "crawledAt": "2026-08-29T03:49:35.500Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -2972,7 +2972,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:59:31.455Z",
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -2984,7 +2983,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-27T00:59:31.455Z"
     },
     {
       "id": "schindler-3597bc5ec697",
@@ -3017,7 +3017,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Service-Technikerin-Region-KilchbergHorgen-%28mfd%29-80-100-Z%C3%BCri/1403270433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:14.389Z",
+      "crawledAt": "2026-08-29T03:49:10.013Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -3090,7 +3090,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Fribourg-Monteur-d'ascenseurs-%28hfd%29-80-100-Frib/1430259733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:13.771Z",
+      "crawledAt": "2026-08-29T03:49:43.396Z",
       "addressLocality": "Fribourg",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -3108,7 +3108,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:59:21.104Z",
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -3120,7 +3119,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-27T00:59:21.104Z"
     },
     {
       "id": "schindler-d5179197fde9",
@@ -3153,7 +3153,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Z%C3%BCrich-Elektroinstallateurin-f%C3%BCr-die-Liftmontage-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1189247101/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:13.141Z",
+      "crawledAt": "2026-08-29T03:49:09.239Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -3237,7 +3237,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-Region-Stadt-Z%C3%BCrichGoldk%C3%BCste-%28mwd%29-80-100-Z%C3%BCri/1431542833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:12.502Z",
+      "crawledAt": "2026-08-29T03:49:39.422Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -3269,7 +3269,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:19:12.502Z"
+      "firstSeenAt": "2026-08-29T03:49:39.422Z"
     },
     {
       "id": "schindler-ab67fe3550af",
@@ -3302,7 +3302,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Head-Employee-Safety-%28mwd%29-80-100-Luze/1411416833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:11.878Z",
+      "crawledAt": "2026-08-29T03:49:37.838Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -3330,7 +3330,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T23:07:08.421Z",
-      "needsRetranslation": true,
       "salaryMin": 96000,
       "salaryMax": 146000,
       "baseSalary": {
@@ -3342,7 +3341,8 @@
           "maxValue": 146000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-e549070dfda6",
@@ -3375,7 +3375,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Oberentfelden-Aufzugsmonteur-in-der-Region-Aarau-%28mwd%29-80-100-Aarg/1368065233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:11.224Z",
+      "crawledAt": "2026-08-29T03:49:29.929Z",
       "addressLocality": "Oberentfelden",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -3448,7 +3448,7 @@
       "url": "https://job.schindler.com/SBB/job/Bussigny-Apprentissage-d'Employ%C3%A9-e-de-commerce-CFC-pour-2027-Vaud/1413388433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:10.594Z",
+      "crawledAt": "2026-08-29T03:49:05.966Z",
       "addressLocality": "Bussigny",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -3482,7 +3482,6 @@
         "cookie-consent-manager-schindler-bussigny"
       ],
       "firstSeenAt": "2026-08-24T21:32:21.267Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -3494,7 +3493,8 @@
           "maxValue": 111000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-9574921475f9",
@@ -3527,7 +3527,7 @@
       "url": "https://job.schindler.com/ASZ/job/Sch%C3%B6nb%C3%BChl-Aufzugsmonteurin-Region-Berner-Oberland-%28mwd%29-80-100-Bern/1395822333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:09.958Z",
+      "crawledAt": "2026-08-29T03:49:03.559Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3609,7 +3609,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Z%C3%BCrich-Servicetechnikerin-mit-Springerfunktion-in-der-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1428769533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:09.316Z",
+      "crawledAt": "2026-08-29T03:49:05.163Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -3686,7 +3686,7 @@
       "url": "https://job.schindler.com/Schindler/job/Fribourg-Monteur-d'ascenseurs-%28hfd%29-80-100-Frib/1415876233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:08.692Z",
+      "crawledAt": "2026-08-29T03:49:50.587Z",
       "addressLocality": "Fribourg",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -3771,7 +3771,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Visp-Aufzugsmonteurin-im-Oberwallis-%28mwd%29-80-100-Wall/1380428233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:08.067Z",
+      "crawledAt": "2026-08-29T03:49:31.522Z",
       "addressLocality": "Visp",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -3856,7 +3856,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Technischer-Sachbearbeiter-Ersatzteile-%28mwd%29-80-100-Luze/1423401333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:07.437Z",
+      "crawledAt": "2026-08-29T03:49:33.905Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -3934,7 +3934,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Bern-Servicetechnikerin-Region-Bern-%28mwd%29-80-100-Bern/1417064833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:06.809Z",
+      "crawledAt": "2026-08-29T03:49:34.698Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -3968,7 +3968,6 @@
         ]
       },
       "firstSeenAt": "2026-07-21T11:22:44.794Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -3980,7 +3979,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-a5aaa6f1fffa",
@@ -4013,7 +4013,7 @@
       "url": "https://job.schindler.com/Schindler/job/Bussigny-Project-Manager-Bussigny-%28hfd%29-80-100-Vaud/1423208933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:06.190Z",
+      "crawledAt": "2026-08-29T03:49:33.119Z",
       "addressLocality": "Bussigny",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -4031,7 +4031,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-13T10:19:58.866Z",
-      "needsRetranslation": true,
       "salaryMin": 83500,
       "salaryMax": 126500,
       "baseSalary": {
@@ -4043,7 +4042,8 @@
           "maxValue": 126500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-96d7fcf70e53",
@@ -4076,7 +4076,7 @@
       "url": "https://job.schindler.com/Schindler/job/Z%C3%BCrich-Projektleiterin-%28mwd%29-80-100-Z%C3%BCri/1415420933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:05.567Z",
+      "crawledAt": "2026-08-29T03:49:29.140Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4110,7 +4110,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:01:56.085Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -4122,7 +4121,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-bd906bff3804",
@@ -4155,7 +4155,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-Region-MuriBremgarten-%28mwd%29-80-100-Z%C3%BCri/1412417733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:04.934Z",
+      "crawledAt": "2026-08-29T03:49:28.347Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4189,7 +4189,6 @@
         ]
       },
       "firstSeenAt": "2026-07-07T22:16:02.327Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -4201,7 +4200,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-2b8181a77030",
@@ -4234,7 +4234,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Compliance-Officer-Schweiz-%28mfd%29-80-100-Luze/1415632733/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:04.297Z",
+      "crawledAt": "2026-08-29T03:49:30.722Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -4252,7 +4252,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-16T11:24:30.837Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -4264,7 +4263,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-0f6091e94181",
@@ -4297,7 +4297,7 @@
       "url": "https://job.schindler.com/Schindler/job/Fribourg-Technicien-de-projets-Chef-de-projets-%28mfd%29-80-100-Frib/1394585833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:19:03.669Z",
+      "crawledAt": "2026-08-29T03:49:27.540Z",
       "addressLocality": "Fribourg",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -4331,7 +4331,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T01:07:54.237Z",
-      "needsRetranslation": true,
       "salaryMin": 105500,
       "salaryMax": 160000,
       "baseSalary": {
@@ -4343,7 +4342,8 @@
           "maxValue": 160000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-be84eedefbe4",
@@ -4376,7 +4376,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Montagechef-Raum-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1423241833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:03.038Z",
+      "crawledAt": "2026-08-29T03:49:32.331Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4410,7 +4410,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T11:28:23.430Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -4422,7 +4421,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-5afb061ad9c4",
@@ -4455,7 +4455,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Einstieg-als-Aufzugsmonteur-Region-ZHAG-%28mwd%29-80-100-Z%C3%BCri/1123499901/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:02.426Z",
+      "crawledAt": "2026-08-29T03:49:41.007Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4527,7 +4527,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Servicetechnikerin-WalisellenDietlikon-%28mwd%29-80-100-Z%C3%BCri/1416305933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:01.799Z",
+      "crawledAt": "2026-08-29T03:49:40.208Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4606,7 +4606,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Z%C3%BCrich-Reparaturtechnikerin-im-Bereich-Fahrtreppen-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1413411233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:01.173Z",
+      "crawledAt": "2026-08-29T03:49:25.125Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4684,7 +4684,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Project-Manager-%28mwd%29-80-100-Luze/1417146333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:19:00.532Z",
+      "crawledAt": "2026-08-29T03:49:17.944Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -4702,7 +4702,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-21T11:22:11.412Z",
-      "needsRetranslation": true,
       "salaryMin": 96000,
       "salaryMax": 146000,
       "baseSalary": {
@@ -4714,7 +4713,8 @@
           "maxValue": 146000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-edc98ed818c3",
@@ -4747,7 +4747,7 @@
       "url": "https://job.schindler.com/ASZ/job/Brig-Servicetechnikerin-im-Oberwallis-%28mwd%29-80-100-Wall/1421809533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:59.912Z",
+      "crawledAt": "2026-08-29T03:49:10.797Z",
       "addressLocality": "Brig",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -4825,7 +4825,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Aufzugsmonteur-Modernisierungen-Region-Zentralschweiz-%28mwd%29-80-100-Z%C3%BCri/1392687533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:59.232Z",
+      "crawledAt": "2026-08-29T03:49:48.992Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -4918,7 +4918,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Konstrukteurin-EFZ-f%C3%BCr-2027-Luze/1374679133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:58.600Z",
+      "crawledAt": "2026-08-29T03:49:22.739Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -4965,7 +4965,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:18:58.600Z"
+      "firstSeenAt": "2026-08-29T03:49:22.739Z"
     },
     {
       "id": "schindler-b3e33745ba1a",
@@ -5079,7 +5079,7 @@
       "url": "https://job.schindler.com/SCH_Fitter/job/Z%C3%BCrich-Monteurin-f%C3%BCr-Aufzugsanlagen-im-Grossraum-Z%C3%BCrich-mit-F%C3%BChrungspotenzial-%28mwd%29-80-100-Z%C3%BCri/1159664001/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:56.696Z",
+      "crawledAt": "2026-08-29T03:49:24.329Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5161,7 +5161,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Wettswil-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Z%C3%BCri/1375693533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:56.061Z",
+      "crawledAt": "2026-08-29T03:49:36.282Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5244,7 +5244,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Wettswil-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Z%C3%BCri/1375696233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:55.441Z",
+      "crawledAt": "2026-08-29T03:49:15.545Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5317,7 +5317,7 @@
       "url": "https://job.schindler.com/ASZ/job/Bern-Leadmonteur-Boltshauser-Region-Bern-%28mwd%29-80-100-Bern/1192926601/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:54.139Z",
+      "crawledAt": "2026-08-29T03:49:21.135Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -5356,7 +5356,6 @@
         ]
       },
       "firstSeenAt": "2026-05-19T12:34:17.660Z",
-      "needsRetranslation": true,
       "salaryMin": 94500,
       "salaryMax": 143000,
       "baseSalary": {
@@ -5368,7 +5367,8 @@
           "maxValue": 143000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-47ceac9eb796",
@@ -5401,7 +5401,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Contract-Specialist-%28mwd%29-40-Luze/1418266433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:53.515Z",
+      "crawledAt": "2026-08-29T03:49:20.342Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -5432,7 +5432,6 @@
         ]
       },
       "firstSeenAt": "2026-07-23T22:07:31.318Z",
-      "needsRetranslation": true,
       "salaryMin": 27800,
       "salaryMax": 42400,
       "baseSalary": {
@@ -5444,7 +5443,8 @@
           "maxValue": 42400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-1020d8fe1109",
@@ -5477,7 +5477,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Reparaturtechikerin-Regionen-ZH%2C-LU%2C-AG-%28mwd%29-80-100-Z%C3%BCri/1405604033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:52.884Z",
+      "crawledAt": "2026-08-29T03:49:08.434Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5550,7 +5550,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Z%C3%BCrich-Servicetechnikerin-mit-Potenzial-in-der-Region-Z%C3%BCrich-%28mwd%29-80-100-Z%C3%BCri/1239281901/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:50.966Z",
+      "crawledAt": "2026-08-29T03:49:49.792Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5621,7 +5621,7 @@
       "url": "https://job.schindler.com/ASZ/job/Wettswil-Projektleiterin-%28mwd%29-80-100-Z%C3%BCri/1424293533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:50.317Z",
+      "crawledAt": "2026-08-29T03:49:44.188Z",
       "addressLocality": "Wettswil",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -5655,7 +5655,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:49:50.154Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -5667,7 +5666,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-791dbe8e2ecf",
@@ -5700,7 +5700,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Controller-%28mwd%29-80-100-Luze/1431498233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:49.692Z",
+      "crawledAt": "2026-08-29T03:49:13.965Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -5732,7 +5732,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:18:49.692Z"
+      "firstSeenAt": "2026-08-29T03:49:13.965Z"
     },
     {
       "id": "schindler-b2a53076a29b",
@@ -5765,7 +5765,7 @@
       "url": "https://job.schindler.com/ASZ/job/Sch%C3%B6nb%C3%BChl-Aufzugsmonteurin-Region-Basel-%28mwd%29-80-100-Bern/1389964833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:49.041Z",
+      "crawledAt": "2026-08-29T03:49:46.562Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -5861,7 +5861,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Sch%C3%B6nb%C3%BChl-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Bern/1410210233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:48.415Z",
+      "crawledAt": "2026-08-29T03:49:01.934Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -5944,7 +5944,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Sch%C3%B6nb%C3%BChl-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Bern/1410210633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:47.764Z",
+      "crawledAt": "2026-08-29T03:49:01.132Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -6017,7 +6017,7 @@
       "url": "https://job.schindler.com/SBB/job/Basel-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Base/1410234933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:45.865Z",
+      "crawledAt": "2026-08-29T03:48:58.748Z",
       "addressLocality": "Basel",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -6100,7 +6100,7 @@
       "url": "https://job.schindler.com/SBB/job/Basel-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Base/1410234633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:43.298Z",
+      "crawledAt": "2026-08-29T03:48:55.587Z",
       "addressLocality": "Basel",
       "addressRegion": "BS",
       "addressCountry": "CH",
@@ -6181,7 +6181,7 @@
       "url": "https://job.schindler.com/SBB/job/Sion-Apprentissage-d'Employ%C3%A9-e-de-commerce-CFC-pour-2027-Vala/1410238433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:42.673Z",
+      "crawledAt": "2026-08-29T03:48:54.778Z",
       "addressLocality": "Sion",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -6210,7 +6210,6 @@
         "apprentissage-d-employe-e-de-commerce-cfc-pour-2027-schindler-sion"
       ],
       "firstSeenAt": "2026-08-24T21:32:06.358Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -6222,7 +6221,8 @@
           "maxValue": 111000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-7807a9a8ea51",
@@ -6255,7 +6255,7 @@
       "url": "https://job.schindler.com/SBB/job/Bussigny-Apprentissage-de-Constructeur-d'appareils-industriels-CFC-monteur-d'ascenseurs-Vaud/1410236633/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:42.033Z",
+      "crawledAt": "2026-08-29T03:48:53.987Z",
       "addressLocality": "Bussigny",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -6328,7 +6328,7 @@
       "url": "https://job.schindler.com/SBB/job/Sion-Apprentissage-de-Polym%C3%A9canicien-ne-CFC-Monteur-euse-d'ascenseurs-pour-2027-Vala/1410236133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:41.389Z",
+      "crawledAt": "2026-08-29T03:48:53.189Z",
       "addressLocality": "Sion",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -6412,7 +6412,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Sch%C3%B6nb%C3%BChl-Schnupperlehre-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-%28Lehrstart-2027%29-Bern/1263540601/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:39.444Z",
+      "crawledAt": "2026-08-29T03:48:50.802Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -6485,7 +6485,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Sch%C3%B6nb%C3%BChl-Schnupperlehre-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-%28Lehrstart-2027%29-Bern/1263539701/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:38.788Z",
+      "crawledAt": "2026-08-29T03:48:50.019Z",
       "addressLocality": "Schönbühl",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -6558,7 +6558,7 @@
       "url": "https://job.schindler.com/SBB_AS/job/Steinach-Schnupperlehre-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-St_/1254183401/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:38.125Z",
+      "crawledAt": "2026-08-29T03:48:49.235Z",
       "addressLocality": "Steinach",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -6635,7 +6635,7 @@
       "url": "https://job.schindler.com/SCH_Service_TechnikerIn/job/Ebikon-Servicetechnikerin-Region-SurseeDagmersellen-%28mwd%29-80-100-Luze/1253809101/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:37.507Z",
+      "crawledAt": "2026-08-29T03:48:48.415Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -6708,7 +6708,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Polymechanikerin-EFZ-Way-Up-f%C3%BCr-2027-Luze/1403715433/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:36.889Z",
+      "crawledAt": "2026-08-29T03:48:47.631Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -6787,7 +6787,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Polymechanikerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Luze/1403713833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:36.271Z",
+      "crawledAt": "2026-08-29T03:48:46.827Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -6866,7 +6866,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-f%C3%BCr-2027-Luze/1403710033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:35.646Z",
+      "crawledAt": "2026-08-29T03:48:46.013Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -6949,7 +6949,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Polymechanikerin-EFZ-f%C3%BCr-2027-Luze/1403712833/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:35.028Z",
+      "crawledAt": "2026-08-29T03:48:45.223Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7028,7 +7028,7 @@
       "url": "https://job.schindler.com/SBB/job/Ebikon-Lehrstelle-als-Anlagen-und-Apparatebauerin-EFZ-mit-Schwerpunkt-Liftmontage-f%C3%BCr-2027-Luze/1403711933/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:34.360Z",
+      "crawledAt": "2026-08-29T03:48:44.431Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7103,7 +7103,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Werkstudentin-Visual-Content-&-Marketing-%28mwd%29-60-80-Luze/1404927533/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:33.723Z",
+      "crawledAt": "2026-08-29T03:48:43.622Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7137,7 +7137,6 @@
         ]
       },
       "firstSeenAt": "2026-06-16T14:09:38.189Z",
-      "needsRetranslation": true,
       "salaryMin": 58000,
       "salaryMax": 102800,
       "baseSalary": {
@@ -7149,7 +7148,8 @@
           "maxValue": 102800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-e1d2c35884cb",
@@ -7182,7 +7182,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Working-Student-IT-Application-Support-%28mwd%29-50-60-Luce/1416306233/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:33.100Z",
+      "crawledAt": "2026-08-29T03:48:40.175Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7260,7 +7260,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Recruiter-%28mfd%29-100-Luce/1277874401/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:32.471Z",
+      "crawledAt": "2026-08-29T03:48:39.392Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7299,7 +7299,6 @@
         "esperto-di-attrazione-di-talenti-lun-f-d-80-100-schindler-ebikon"
       ],
       "firstSeenAt": "2026-07-06T14:56:44.631Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -7311,7 +7310,8 @@
           "maxValue": 106000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-e66bf297a8d0",
@@ -7344,7 +7344,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Global-Finance-Transformation-Manager-%28mfd%29-100-Luce/1431143333/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:31.854Z",
+      "crawledAt": "2026-08-29T03:48:42.820Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7376,7 +7376,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:18:31.854Z"
+      "firstSeenAt": "2026-08-29T03:48:42.820Z"
     },
     {
       "id": "schindler-00dcb9f70f2f",
@@ -7409,7 +7409,7 @@
       "url": "https://job.schindler.com/Schindler/job/Hergiswil-Legal-Counsel-Transactions-and-Competition-Law-%28mfd%29-80-100-Nidw/1416262033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:31.233Z",
+      "crawledAt": "2026-08-29T03:48:40.969Z",
       "addressLocality": "Hergiswil",
       "addressRegion": "NW",
       "addressCountry": "CH",
@@ -7443,7 +7443,6 @@
         ]
       },
       "firstSeenAt": "2026-07-17T22:18:28.542Z",
-      "needsRetranslation": true,
       "salaryMin": 80000,
       "salaryMax": 137000,
       "baseSalary": {
@@ -7455,7 +7454,8 @@
           "maxValue": 137000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-b710746d0dd3",
@@ -7488,7 +7488,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Sustainability-Trainee-%28mfd%29-80-100-Luce/1411621133/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:30.574Z",
+      "crawledAt": "2026-08-29T03:48:41.762Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7566,7 +7566,7 @@
       "url": "https://job.schindler.com/Schindler/job/Ebikon-Global-Communications-Manager-%28mfd%29-80-100-Luce/1413793033/",
       "source": "Schindler Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:29.938Z",
+      "crawledAt": "2026-08-29T03:48:38.593Z",
       "addressLocality": "Ebikon",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -7584,7 +7584,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-10T22:16:31.314Z",
-      "needsRetranslation": true,
       "salaryMin": 96000,
       "salaryMax": 146000,
       "baseSalary": {
@@ -7596,7 +7595,8 @@
           "maxValue": 146000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "schindler-35e16a423217",
