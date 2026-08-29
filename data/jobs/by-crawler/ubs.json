@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ubs",
-  "assembledAt": "2026-08-28T20:56:04.191Z",
+  "assembledAt": "2026-08-29T03:46:00.869Z",
   "jobs": [
     {
       "id": "ubs-6e4e0f0e4b6e",
@@ -33,7 +33,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=347614&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.535Z",
+      "crawledAt": "2026-08-29T03:45:55.875Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -119,7 +119,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=347915&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.532Z",
+      "crawledAt": "2026-08-29T03:45:55.872Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -200,7 +200,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348358&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.525Z",
+      "crawledAt": "2026-08-29T03:45:55.865Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -286,7 +286,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348353&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.525Z",
+      "crawledAt": "2026-08-29T03:45:55.866Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -372,7 +372,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=348929&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.523Z",
+      "crawledAt": "2026-08-29T03:45:55.864Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -397,7 +397,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-17T21:59:53.752Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -410,7 +409,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-9e7f226b41cc",
@@ -443,7 +443,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=349188&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.521Z",
+      "crawledAt": "2026-08-29T03:45:55.862Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -481,7 +481,6 @@
         ]
       },
       "firstSeenAt": "2026-07-24T22:05:53.306Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -494,7 +493,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-802aa731ef7f",
@@ -527,7 +527,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=350235&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.405Z",
+      "crawledAt": "2026-08-29T03:45:55.751Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -612,7 +612,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=339452&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.394Z",
+      "crawledAt": "2026-08-29T03:45:55.731Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -698,7 +698,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5131&jobid=349179&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.394Z",
+      "crawledAt": "2026-08-29T03:45:55.731Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -739,7 +739,6 @@
         ]
       },
       "firstSeenAt": "2026-07-24T22:05:53.306Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -752,7 +751,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-543b2a65a198",
@@ -869,7 +869,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346701&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.383Z",
+      "crawledAt": "2026-08-29T03:45:55.724Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -955,7 +955,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346610&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.381Z",
+      "crawledAt": "2026-08-29T03:45:55.722Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1040,7 +1040,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346609&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.379Z",
+      "crawledAt": "2026-08-29T03:45:55.721Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -1126,7 +1126,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346594&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.379Z",
+      "crawledAt": "2026-08-29T03:45:55.721Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -1212,7 +1212,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346535&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.379Z",
+      "crawledAt": "2026-08-29T03:45:55.720Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -1297,7 +1297,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346670&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.377Z",
+      "crawledAt": "2026-08-29T03:45:55.718Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1383,7 +1383,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346669&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.375Z",
+      "crawledAt": "2026-08-29T03:45:55.716Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1469,7 +1469,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346668&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.373Z",
+      "crawledAt": "2026-08-29T03:45:55.714Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1555,7 +1555,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346666&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.371Z",
+      "crawledAt": "2026-08-29T03:45:55.712Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -1641,7 +1641,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346608&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.368Z",
+      "crawledAt": "2026-08-29T03:45:55.710Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1726,7 +1726,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346665&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.368Z",
+      "crawledAt": "2026-08-29T03:45:55.711Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -1812,7 +1812,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346601&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.366Z",
+      "crawledAt": "2026-08-29T03:45:55.708Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1898,7 +1898,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346600&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.364Z",
+      "crawledAt": "2026-08-29T03:45:55.707Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1984,7 +1984,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346597&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.362Z",
+      "crawledAt": "2026-08-29T03:45:55.705Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -2069,7 +2069,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348017&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -2154,7 +2154,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347873&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2240,7 +2240,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347872&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2326,7 +2326,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347871&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2412,7 +2412,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347739&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2498,7 +2498,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346333&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.702Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2597,7 +2597,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346592&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.358Z",
+      "crawledAt": "2026-08-29T03:45:55.703Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2683,7 +2683,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347881&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T20:55:58.354Z",
+      "crawledAt": "2026-08-29T03:45:55.699Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -2753,7 +2753,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346347&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T20:55:58.353Z",
+      "crawledAt": "2026-08-29T03:45:55.698Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -2778,7 +2778,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-03T12:37:47.777Z",
-      "needsRetranslation": true,
       "salaryMin": 59500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -2791,7 +2790,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-1c76ac72df05",
@@ -2824,7 +2824,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=347876&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.353Z",
+      "crawledAt": "2026-08-29T03:45:55.698Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -2910,7 +2910,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346346&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.352Z",
+      "crawledAt": "2026-08-29T03:45:55.697Z",
       "addressLocality": "Plateau suisse",
       "addressCountry": "CH",
       "country": "CH",
@@ -2951,7 +2951,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.783Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 129000,
       "baseSalary": {
@@ -2964,7 +2963,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-5c883516e038",
@@ -2997,7 +2997,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346345&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.350Z",
+      "crawledAt": "2026-08-29T03:45:55.695Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3038,7 +3038,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.793Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3051,7 +3050,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-d665b23c2984",
@@ -3084,7 +3084,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346344&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.349Z",
+      "crawledAt": "2026-08-29T03:45:55.693Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3125,7 +3125,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.791Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3138,7 +3137,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-cb53bfc8e542",
@@ -3171,7 +3171,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346343&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.347Z",
+      "crawledAt": "2026-08-29T03:45:55.691Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3212,7 +3212,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.785Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3225,7 +3224,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-0248c9fe1939",
@@ -3258,7 +3258,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346342&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.345Z",
+      "crawledAt": "2026-08-29T03:45:55.689Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -3299,7 +3299,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.785Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3312,7 +3311,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-a0e45cbd3d53",
@@ -3345,7 +3345,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346341&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.345Z",
+      "crawledAt": "2026-08-29T03:45:55.689Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3386,7 +3386,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.795Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3399,7 +3398,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-efca9faecf62",
@@ -3432,7 +3432,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346334&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.343Z",
+      "crawledAt": "2026-08-29T03:45:55.687Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3473,7 +3473,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T12:37:47.787Z",
-      "needsRetranslation": true,
       "salaryMin": 73000,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3486,7 +3485,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-9b7b9e35f576",
@@ -3519,7 +3519,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346326&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.341Z",
+      "crawledAt": "2026-08-29T03:45:55.685Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -3604,7 +3604,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346316&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.339Z",
+      "crawledAt": "2026-08-29T03:45:55.683Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -3689,7 +3689,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=346324&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.339Z",
+      "crawledAt": "2026-08-29T03:45:55.683Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -3775,7 +3775,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348468&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T20:55:58.337Z",
+      "crawledAt": "2026-08-29T03:45:55.681Z",
       "addressLocality": "Ticino",
       "addressCountry": "CH",
       "country": "CH",
@@ -3800,7 +3800,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-01T10:47:00.190Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 150000,
       "baseSalary": {
@@ -3813,7 +3812,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-28959776b135",
@@ -3846,7 +3846,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348469&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.335Z",
+      "crawledAt": "2026-08-29T03:45:55.678Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -3887,7 +3887,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.188Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -3900,7 +3899,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-b53ed8fadce1",
@@ -3933,7 +3933,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348471&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.333Z",
+      "crawledAt": "2026-08-29T03:45:55.676Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -4018,7 +4018,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348472&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.331Z",
+      "crawledAt": "2026-08-29T03:45:55.675Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -4059,7 +4059,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.184Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4072,7 +4071,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-b58f060bb79a",
@@ -4105,7 +4105,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348473&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.331Z",
+      "crawledAt": "2026-08-29T03:45:55.674Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4146,7 +4146,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.184Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4159,7 +4158,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-d71f276b5789",
@@ -4192,7 +4192,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348474&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.329Z",
+      "crawledAt": "2026-08-29T03:45:55.673Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4233,7 +4233,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.182Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4246,7 +4245,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-df4de6e34052",
@@ -4279,7 +4279,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348477&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.327Z",
+      "crawledAt": "2026-08-29T03:45:55.671Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4320,7 +4320,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.180Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4333,7 +4332,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-dc349db91173",
@@ -4366,7 +4366,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348479&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.326Z",
+      "crawledAt": "2026-08-29T03:45:55.669Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -4407,7 +4407,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.178Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -4420,7 +4419,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-e3557a6d404c",
@@ -4453,7 +4453,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348482&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.324Z",
+      "crawledAt": "2026-08-29T03:45:55.666Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4538,7 +4538,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348481&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.324Z",
+      "crawledAt": "2026-08-29T03:45:55.666Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -4624,7 +4624,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348480&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.324Z",
+      "crawledAt": "2026-08-29T03:45:55.666Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -4712,7 +4712,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348487&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.322Z",
+      "crawledAt": "2026-08-29T03:45:55.664Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4798,7 +4798,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348489&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.320Z",
+      "crawledAt": "2026-08-29T03:45:55.662Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4884,7 +4884,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348490&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.318Z",
+      "crawledAt": "2026-08-29T03:45:55.661Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -4969,7 +4969,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348492&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.316Z",
+      "crawledAt": "2026-08-29T03:45:55.658Z",
       "addressLocality": "Westschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -5054,7 +5054,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5054&jobid=348491&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.316Z",
+      "crawledAt": "2026-08-29T03:45:55.658Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -5095,7 +5095,6 @@
         ]
       },
       "firstSeenAt": "2026-08-01T10:47:00.162Z",
-      "needsRetranslation": true,
       "salaryMin": 107000,
       "salaryMax": 187500,
       "baseSalary": {
@@ -5108,7 +5107,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-62e2d23efa5d",
@@ -5141,7 +5141,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339846&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.273Z",
+      "crawledAt": "2026-08-29T03:45:55.613Z",
       "addressLocality": "Aargau / Solothurn, Switzerland - Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5224,7 +5224,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=340088&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.273Z",
+      "crawledAt": "2026-08-29T03:45:55.613Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5310,7 +5310,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=343604&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.264Z",
+      "crawledAt": "2026-08-29T03:45:55.599Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -5425,7 +5425,6 @@
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:47.999Z",
-      "needsRetranslation": true,
       "salaryMin": 110500,
       "salaryMax": 169500,
       "baseSalary": {
@@ -5438,7 +5437,9 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "UR"
+      "addressRegion": "UR",
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "ubs-cd326f66be9f",
@@ -5471,7 +5472,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=343612&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.191Z",
+      "crawledAt": "2026-08-29T03:45:55.524Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5554,7 +5555,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=345975&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.167Z",
+      "crawledAt": "2026-08-29T03:45:55.501Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5635,7 +5636,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344976&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:58.139Z",
+      "crawledAt": "2026-08-29T03:45:55.483Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -5723,7 +5724,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339844&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.107Z",
+      "crawledAt": "2026-08-29T03:45:55.443Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5794,7 +5795,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339845&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.107Z",
+      "crawledAt": "2026-08-29T03:45:55.443Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5875,7 +5876,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339843&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.107Z",
+      "crawledAt": "2026-08-29T03:45:55.443Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -5956,7 +5957,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348793&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.066Z",
+      "crawledAt": "2026-08-29T03:45:55.399Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6039,7 +6040,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348934&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.047Z",
+      "crawledAt": "2026-08-29T03:45:55.386Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -6133,7 +6134,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=337262&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.040Z",
+      "crawledAt": "2026-08-29T03:45:55.384Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6204,7 +6205,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348087&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:58.032Z",
+      "crawledAt": "2026-08-29T03:45:55.363Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -6245,7 +6246,6 @@
         ]
       },
       "firstSeenAt": "2026-07-01T23:34:49.523Z",
-      "needsRetranslation": true,
       "salaryMin": 110500,
       "salaryMax": 169500,
       "baseSalary": {
@@ -6258,7 +6258,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "UR"
+      "addressRegion": "UR",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-d01b1640bc62",
@@ -6291,7 +6292,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347225&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.982Z",
+      "crawledAt": "2026-08-29T03:45:55.327Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6390,7 +6391,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346866&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.966Z",
+      "crawledAt": "2026-08-29T03:45:55.306Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6461,7 +6462,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347956&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.957Z",
+      "crawledAt": "2026-08-29T03:45:55.316Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -6486,7 +6487,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-14T11:04:55.875Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -6499,7 +6499,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-60658b9fb3a2",
@@ -6532,7 +6533,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346268&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.913Z",
+      "crawledAt": "2026-08-29T03:45:55.267Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6616,7 +6617,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=340734&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.862Z",
+      "crawledAt": "2026-08-29T03:45:55.244Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -6696,7 +6697,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348912&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.838Z",
+      "crawledAt": "2026-08-29T03:45:55.213Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -6780,7 +6781,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344339&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.831Z",
+      "crawledAt": "2026-08-29T03:45:55.195Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -6864,7 +6865,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344009&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.815Z",
+      "crawledAt": "2026-08-29T03:45:55.199Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -6889,7 +6890,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-05T11:33:43.924Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -6902,7 +6902,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-2c19ec96a93d",
@@ -6935,7 +6936,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349648&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.776Z",
+      "crawledAt": "2026-08-29T03:45:55.141Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7006,7 +7007,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348666&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.747Z",
+      "crawledAt": "2026-08-29T03:45:55.098Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7167,7 +7168,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348321&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.739Z",
+      "crawledAt": "2026-08-29T03:45:55.102Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7238,7 +7239,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348889&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.737Z",
+      "crawledAt": "2026-08-29T03:45:55.100Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7324,7 +7325,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346720&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.734Z",
+      "crawledAt": "2026-08-29T03:45:55.105Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7365,7 +7366,6 @@
         ]
       },
       "firstSeenAt": "2026-08-12T10:16:17.679Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -7378,7 +7378,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-66b224160609",
@@ -7411,7 +7412,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=342095&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.730Z",
+      "crawledAt": "2026-08-29T03:45:55.071Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7482,7 +7483,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339987&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.726Z",
+      "crawledAt": "2026-08-29T03:45:55.071Z",
       "addressLocality": "Western Switzerland",
       "addressCountry": "CH",
       "country": "CH",
@@ -7522,7 +7523,6 @@
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.362Z",
-      "needsRetranslation": true,
       "salaryMin": 85500,
       "salaryMax": 150000,
       "baseSalary": {
@@ -7534,7 +7534,8 @@
           "maxValue": 150000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ubs-db58cd39325a",
@@ -7567,7 +7568,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349287&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.721Z",
+      "crawledAt": "2026-08-29T03:45:55.068Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7651,7 +7652,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349285&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.721Z",
+      "crawledAt": "2026-08-29T03:45:55.069Z",
       "addressLocality": "Aargau / Solothurn",
       "addressCountry": "CH",
       "country": "CH",
@@ -7733,7 +7734,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349288&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.719Z",
+      "crawledAt": "2026-08-29T03:45:55.066Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -7817,7 +7818,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349289&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.717Z",
+      "crawledAt": "2026-08-29T03:45:55.064Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -7858,7 +7859,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T21:53:00.347Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -7871,7 +7871,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-5f650f7a4dc6",
@@ -7904,7 +7905,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346510&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.693Z",
+      "crawledAt": "2026-08-29T03:45:55.037Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -7945,7 +7946,6 @@
         ]
       },
       "firstSeenAt": "2026-08-14T21:27:57.189Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -7958,7 +7958,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-9439d0860951",
@@ -7991,7 +7992,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347613&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.684Z",
+      "crawledAt": "2026-08-29T03:45:55.032Z",
       "addressLocality": "Plateau suisse",
       "addressCountry": "CH",
       "country": "CH",
@@ -8071,7 +8072,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349709&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.655Z",
+      "crawledAt": "2026-08-29T03:45:54.986Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -8160,7 +8161,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349422&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.646Z",
+      "crawledAt": "2026-08-29T03:45:54.996Z",
       "addressLocality": "Valais",
       "addressCountry": "CH",
       "country": "CH",
@@ -8246,7 +8247,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349669&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.629Z",
+      "crawledAt": "2026-08-29T03:45:54.982Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8316,7 +8317,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348919&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.629Z",
+      "crawledAt": "2026-08-29T03:45:54.983Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8402,7 +8403,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347773&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.605Z",
+      "crawledAt": "2026-08-29T03:45:54.954Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8473,7 +8474,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347612&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.596Z",
+      "crawledAt": "2026-08-29T03:45:54.951Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -8498,7 +8499,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-19T09:45:01.242Z",
-      "needsRetranslation": true,
       "salaryMin": 29500,
       "salaryMax": 45300,
       "baseSalary": {
@@ -8510,7 +8510,8 @@
           "maxValue": 45300,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ubs-37c0dff33ca2",
@@ -8543,7 +8544,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348364&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.595Z",
+      "crawledAt": "2026-08-29T03:45:54.949Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8568,7 +8569,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-08-19T09:45:01.238Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -8581,7 +8581,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "ZH"
+      "addressRegion": "ZH",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-05ddf4b9059c",
@@ -8614,7 +8615,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346337&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.566Z",
+      "crawledAt": "2026-08-29T03:45:54.903Z",
       "addressLocality": "Ostschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -8703,7 +8704,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=342772&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.567Z",
+      "crawledAt": "2026-08-29T03:45:54.915Z",
       "addressLocality": "Nordschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -8738,7 +8739,6 @@
         ]
       },
       "firstSeenAt": "2026-07-02T15:04:48.239Z",
-      "needsRetranslation": true,
       "salaryMin": 59000,
       "salaryMax": 90500,
       "baseSalary": {
@@ -8750,7 +8750,8 @@
           "maxValue": 90500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ubs-c5c0eae60cc3",
@@ -8783,7 +8784,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349635&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.537Z",
+      "crawledAt": "2026-08-29T03:45:54.898Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8853,7 +8854,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349636&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.537Z",
+      "crawledAt": "2026-08-29T03:45:54.898Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -8923,7 +8924,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350164&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.533Z",
+      "crawledAt": "2026-08-29T03:45:54.881Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9012,7 +9013,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348927&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.478Z",
+      "crawledAt": "2026-08-29T03:45:54.863Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9083,7 +9084,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350277&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.485Z",
+      "crawledAt": "2026-08-29T03:45:54.844Z",
       "addressLocality": "Missouri",
       "addressCountry": "CH",
       "country": "CH",
@@ -9154,7 +9155,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344272&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.469Z",
+      "crawledAt": "2026-08-29T03:45:54.813Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9238,7 +9239,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=347731&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.403Z",
+      "crawledAt": "2026-08-29T03:45:54.773Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9263,7 +9264,6 @@
         "jobType": ""
       },
       "firstSeenAt": "2026-07-21T11:19:29.685Z",
-      "needsRetranslation": true,
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -9276,7 +9276,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VD"
+      "addressRegion": "VD",
+      "needsRetranslation": true
     },
     {
       "id": "ubs-d20329aa92fc",
@@ -9309,7 +9310,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=346951&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.400Z",
+      "crawledAt": "2026-08-29T03:45:54.769Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9389,7 +9390,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=344127&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.397Z",
+      "crawledAt": "2026-08-29T03:45:54.767Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9469,7 +9470,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=341821&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.394Z",
+      "crawledAt": "2026-08-29T03:45:54.765Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -9555,7 +9556,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349059&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.370Z",
+      "crawledAt": "2026-08-29T03:45:54.778Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9626,7 +9627,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348915&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.370Z",
+      "crawledAt": "2026-08-29T03:45:54.778Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9697,7 +9698,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=339314&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.368Z",
+      "crawledAt": "2026-08-29T03:45:54.775Z",
       "addressLocality": "Mittelland",
       "addressCountry": "CH",
       "country": "CH",
@@ -9779,7 +9780,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=349406&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:55:57.343Z",
+      "crawledAt": "2026-08-29T03:45:54.733Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9850,7 +9851,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348971&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.364Z",
+      "crawledAt": "2026-08-29T03:45:54.773Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -9921,7 +9922,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348851&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.370Z",
+      "crawledAt": "2026-08-29T03:45:54.742Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -10074,7 +10075,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=345780&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.315Z",
+      "crawledAt": "2026-08-29T03:45:54.711Z",
       "addressLocality": "Zentralschweiz",
       "addressCountry": "CH",
       "country": "CH",
@@ -10159,7 +10160,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=348965&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.348Z",
+      "crawledAt": "2026-08-29T03:45:54.672Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -10199,7 +10200,7 @@
         }
       },
       "addressRegion": "ZH",
-      "firstSeenAt": "2026-08-28T20:55:57.348Z"
+      "firstSeenAt": "2026-08-29T03:45:54.672Z"
     },
     {
       "id": "ubs-b2e946c9bf66",
@@ -10232,7 +10233,7 @@
       "url": "https://jobs.ubs.com/TGnewUI/Search/Home/HomeWithPreLoad?partnerid=25008&siteid=5012&jobid=350010&PageType=jobdetails",
       "source": "UBS Dedicated Parser (Taleo API)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:55:57.340Z",
+      "crawledAt": "2026-08-29T03:45:54.735Z",
       "addressLocality": "Suisse romande",
       "addressCountry": "CH",
       "country": "CH",
@@ -10272,7 +10273,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-28T20:55:57.340Z"
+      "firstSeenAt": "2026-08-29T03:45:54.735Z"
     }
   ]
 }
