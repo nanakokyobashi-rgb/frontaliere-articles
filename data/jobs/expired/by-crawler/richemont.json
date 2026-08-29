@@ -25,7 +25,7 @@
       "fr": "responsable-developpement-montres-panerai-neuchatel"
     },
     "sector": "Lusso / Orologeria",
-    "expiredAt": "2026-08-29T14:38:22.069Z",
+    "expiredAt": "2026-08-29T23:25:26.952Z",
     "previousSlugs": [
       "responsable-developpement-montres-richemont-neuchatel",
       "leiter-uhrentwicklung-panerai-neuchatel",
@@ -74,7 +74,7 @@
       "fr": "gestionnaire-de-relations-client-haute-horlogerie-vacheron-constantin-plan-les-ouates"
     },
     "sector": "Lusso / Orologeria",
-    "expiredAt": "2026-08-29T14:38:22.070Z",
+    "expiredAt": "2026-08-29T23:25:26.952Z",
     "previousSlugs": [
       "high-watchmaking-client-relationship-manager-richemont-plan-les-ouates",
       "gestione-delle-relazioni-con-i-clienti-in-europa-vacheron-constantin-plan-les-ouates",
@@ -126,7 +126,7 @@
       "fr": "europe-fp-a-controller-richemont-meyrin"
     },
     "sector": "Lusso / Orologeria",
-    "expiredAt": "2026-08-29T14:38:22.070Z",
+    "expiredAt": "2026-08-29T23:25:26.952Z",
     "previousSlugs": [
       "europe-fp-a-controller-richemont-meyrin",
       "controller-fp-a-europa-richemont-meyrin",
@@ -173,7 +173,7 @@
       "fr": "sales-associate-richemont-geneva"
     },
     "sector": "Lusso / Orologeria",
-    "expiredAt": "2026-08-29T14:38:22.070Z",
+    "expiredAt": "2026-08-29T23:25:26.952Z",
     "salaryMin": 72000,
     "salaryMax": 111000,
     "salaryCurrency": "CHF",
@@ -12119,6 +12119,53 @@
     },
     "salaryMin": 41600,
     "salaryMax": 63000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "press-relations-tirocinante-jaeger-lecoultre-meyrin",
+    "title": "Press Relations Intern",
+    "titleByLocale": {
+      "it": "Press Relations Tirocinante",
+      "en": "Press Relations Intern",
+      "de": "Press Relations Praktikant",
+      "fr": "Press Relations Stagiaire"
+    },
+    "company": "Jaeger-LeCoultre",
+    "companyKey": "richemont",
+    "location": "Meyrin",
+    "addressLocality": "Meyrin",
+    "descriptionByLocale": {
+      "it": "Codice di riferimento: JR131905 Dal 1833, guidato da una sete incrollabile di innovazione e creatività, e ispirato dal tranquillo ambiente naturale della sua casa nella Vallée de Joux, Jaeger-LeCoultre si distingue per la sua padronanza delle complicazioni e la precisione dei suoi meccanismi. Conosciuto come Watchmaker of Watchmakers, la Manifattura ha espresso il suo spirito incessantemente inventivo attraverso la creazione di oltre 1.400 diversi calibri e il riconoscimento di oltre 430 brevetti. Sfruttando 190 anni di esperienza accumulata, i produttori orologiai La Grande Maison progettano, producono, rifiniscono e ornano i meccanismi più avanzati e precisi, fondendo la passione con la savoir-faire secolare, collegando il passato al futuro, senza tempo ma sempre al passo con i tempi. Con 180 competenze riunite sotto un unico tetto, la Manifattura crea orologi pregiati che combinano l'ingegno tecnico con la bellezza estetica e una sofisticazione contraddistinta. Siamo alla ricerca di uno stagista dinamico ed entusiasta per unire il nostro fiorente reparto relazioni stampa per uno stage di 6 mesi. All'interno del dipartimento, la vostra missione sarà di assistere il team nell'organizzazione e nella pianificazione delle attività di stampa. Come fai a fare un'infezione? Secondo il calendario Marketing, fornirete un valido supporto sui seguenti argomenti: Assistere il team di stampa alla produzione, alla traduzione e alla distribuzione di materiale di stampa Coordinate con i mercati e i dipartimenti interni per le richieste di interviste e di tiro Portate il supporto logistico e operativo relativo alla presenza della stampa durante il quartier generale con i principali eventi internazionali Assicurare la presenza senza soluzione di continuità di stampa durante i viaggi di stampa, tra cui la pianificazione, le modalità di viaggio e le sistemazioni Che cosa vi riguardano? Attualmente perseguendo una laurea in Comunicazione, Marketing, Relazioni Pubbliche, o un campo correlato, si sta cercando uno stage a partire da settembre 2026. Hai esperienza nella gestione del progetto nelle relazioni pubbliche e una prima esperienza nel settore del lusso, l'orologeria fine e l'alta conoscenza dei gioielli è un plus. Sei fluente in inglese e francese, tra cui eccellenti capacità di scrittura in entrambe le lingue, e sei competente in Word, Excel e PowerPoint. Organizzato e orientato al dettaglio, con la capacità di gestire più compiti e priorità, sei dinamico e entusiasta di conoscere PR, gestione del marchio e marketing. Cosa puoi aspettarti da noi? Tutti i nostri tirocinanti hanno un ruolo chiave nel nostro successo di affari di giorno per giorno. Inoltre, la stretta collaborazione con un team impegnato e dedicato è lì per aiutarvi a riuscire in questo ruolo impegnativo ed emozionante. Durante il vostro tempo con noi, avrete familiarità con il nostro know-how e ottenere informazioni pratiche in diverse aree di business. Meglio di tutti, crescerai in un ambiente stimolante con eccellenti condizioni di lavoro e benefici attraenti! Responsabile PR Save Meyrin, Svizzera Jaeger-LeCoultre Marketing Manager Save Sydney, Australia Jaeger-LeCoultre Produzione Visite Coordinatore Save Le Sentier, Svizzera Jaeger-LeCoultre",
+      "en": "Reference code: JR131905 Since 1833, driven by an unquenchable thirst for innovation and creativity, and inspired by the peaceful natural surroundings of its home in the Vallée de Joux, Jaeger-LeCoultre has been distinguished by its mastery of complications and the precision of its mechanisms. Known as the Watchmaker of Watchmakers, the Manufacture has expressed its relentlessly inventive spirit through the creation of more than 1,400 different calibres and the award of more than 430 patents. Harnessing 190 years of accumulated expertise, La Grande Maison’s watchmakers design, produce, finish and ornament the most advanced and precise mechanisms, blending passion with centuries-old savoir-faire, linking the past to the future, timeless but always up with the times. With 180 skills brought together under one roof, the Manufacture creates fine timepieces that combine technical ingenuity with aesthetic beauty and a distinctively understated sophistication. YOUR MISSION: We are looking for a dynamic and enthusiastic intern to join our thriving Press Relations department for a 6-month internship. Within the department, your mission will be to assist the team in the organization and planning of press activities. HOW WILL YOU MAKE AN IMPACT? According to the Marketing calendar, you will provide valuable support on the following topics: Assist the press team on the production, translation, and distribution of press material Coordinate with markets and internal departments for interview and shooting requests Bring logistical and operational support related to press attendance during HQ lead international events Ensure the seamless presence of press at press trips, including scheduling, travel arrangements and accommodations WHAT ABOUT YOU ? Currently pursuing a degree in Communications, Marketing, Public Relations, or a related field, you are looking for an internship as of September 2026. You have experience in project management in public relations and a first experience in the luxury industry, fine watchmaking and high jewelry knowledge is a plus. You are fluent in English and French including excellent writing skills in both languages, and you are proficient in Word, Excel and PowerPoint. Organized and detail-oriented, with the ability to manage multiple tasks and priorities, you are dynamic and enthusiastic to learn about PR, brand management, and marketing. WHAT CAN YOU EXPECT FROM US? All of our interns have a key role in our day-to-day business success. Moreover, the close collaboration with an engaged and dedicated team is there to support you to succeed in this challenging and exciting role. During your time with us, you will get familiar with our know-how and gain practical insights into different business areas. Best of all, you will grow in a stimulating environment with excellent working conditions and attractive benefits! Similar Jobs Head of PR Save Meyrin, Switzerland Jaeger-LeCoultre Marketing Manager Save Sydney, Australia Jaeger-LeCoultre Manufacture Visits Coordinator Save Le Sentier, Switzerland Jaeger-LeCoultre",
+      "de": "Bezugscode: JR131905 Seit 1833, angetrieben von einem unstillbaren Durst nach Innovation und Kreativität und inspiriert von der ruhigen natürlichen Umgebung seines Hauses im Vallée de Joux, zeichnet sich Jaeger-LeCoultre durch seine Beherrschung der Komplikationen und die Präzision seiner Mechanismen aus. Bekannt als Uhrmacher der Uhrmacher, hat die Manufaktur ihren unerbittlichen Erfindergeist durch die Schaffung von mehr als 1.400 verschiedenen Kalibern und die Vergabe von mehr als 430 Patenten zum Ausdruck gebracht. Mit 190 Jahren gesammelter Expertise entwerfen, produzieren, fertigen und verzieren die Uhrmacher von La Grande Maison die fortschrittlichsten und präzisesten Mechanismen, verbinden Leidenschaft mit jahrhundertealtem Know-how und verbinden die Vergangenheit mit der Zukunft, zeitlos, aber immer mit der Zeit. Mit 180 Fähigkeiten, die unter einem Dach vereint sind, kreiert die Manufaktur feine Zeitmesser, die technischen Einfallsreichtum mit ästhetischer Schönheit und einer ausgeprägt dezenten Raffinesse verbinden. IHRE MISSION: Wir suchen einen dynamischen und enthusiastischen Praktikanten, der sich unserer florierenden Presseabteilung für ein 6-monatiges Praktikum anschließt. Innerhalb der Abteilung besteht Ihre Aufgabe darin, das Team bei der Organisation und Planung von Presseaktivitäten zu unterstützen. WIE WERDEN SIE EINEN AUSWIRKEN SIND? Gemäß dem Marketing-Kalender leisten Sie wertvolle Unterstützung zu folgenden Themen: Unterstützen Sie das Presseteam bei der Produktion, Übersetzung und Verteilung von Pressematerial Koordinieren Sie sich mit Märkten und internen Abteilungen für Interview- und Shooting-Anfragen Bringen Sie logistische und operative Unterstützung im Zusammenhang mit der Anwesenheit der Presse während internationaler Veranstaltungen des Hauptquartiers Sicherstellen Sie die nahtlose Präsenz der Presse auf Pressereisen, einschließlich Planung, Reisearrangements und Unterkünfte WAS ÜBER SIE? Derzeit verfolgen einen Abschluss in Kommunikation, Marketing, Public Relations oder einem verwandten Bereich, suchen Sie ein Praktikum ab September 2026. Sie haben Erfahrung im Projektmanagement in der Öffentlichkeitsarbeit und eine erste Erfahrung in der Luxusbranche, feine Uhrmacherei und hohe Schmuckkenntnisse sind ein Plus. Sie sprechen fließend Englisch und Französisch, einschließlich hervorragender Schreibkenntnisse in beiden Sprachen, und Sie beherrschen Word, Excel und PowerPoint. Organisiert und detailorientiert, mit der Fähigkeit, mehrere\n• Aufgaben und Prioritäten zu verwalten, sind Sie dynamisch und begeistert, über PR, Markenmanagement und Marketing zu lernen. Was können Sie von uns erwarten? Alle unsere Praktikanten spielen eine Schlüsselrolle für unseren täglichen Geschäftserfolg. Darüber hinaus ist die enge Zusammenarbeit mit einem engagierten und engagierten Team da, um Sie zu unterstützen, um in dieser herausfordernden und aufregenden Rolle erfolgreich zu sein. Während Ihrer Zeit bei uns lernen Sie unser Know-how kennen und erhalten praktische Einblicke in verschiedene Geschäftsbereiche. Das Beste ist, dass Sie in einem anregenden Umfeld mit hervorragenden Arbeitsbedingungen und attraktiven Vorteilen wachsen! Ähnliche Jobs Leiter PR Save Meyrin, Schweiz Jaeger-LeCoultre Marketing Manager Save Sydney, Australien Jaeger-LeCoultre Manufacture Visits Koordinator Save Le Sentier, Schweiz Jaeger-LeCoultre",
+      "fr": "Code de référence: JR131905 Depuis 1833, mue par une soif inépuisable d'innovation et de créativité, et inspirée par l'environnement naturel paisible de sa maison dans la Vallée de Joux, Jaeger-LeCoultre se distingue par sa maîtrise des complications et la précision de ses mécanismes. Connue comme l'horloger des horlogers, la Manufacture a exprimé son esprit inventif sans relâche par la création de plus de 1 400 calibres différents et l'attribution de plus de 430 brevets. Tirant parti de 190 ans d'expertise accumulée, les horlogers de La Grande Maison conçoivent, produisent, terminent et ornent les mécanismes les plus avancés et précis, mélangeant passion et savoir-faire séculaires, reliant le passé au futur, intemporel mais toujours à l'époque. Avec 180 compétences réunies sous un même toit, la Manufacture crée de beaux garde-temps qui allient ingéniosité technique, beauté esthétique et sophistication singulièrement sous-estimée. VOTRE MISSION : Nous recherchons un stagiaire dynamique et enthousiaste pour rejoindre notre service des relations avec la presse pour un stage de 6 mois. Au sein du département, votre mission sera d'aider l'équipe dans l'organisation et la planification des activités de presse. Comment allez-vous avoir un impact ? Selon le calendrier Marketing, vous fournirez un soutien précieux sur les sujets suivants: Aider l'équipe de presse sur la production, la traduction et la distribution de matériel de presse Coordonner avec les marchés et les services internes pour les demandes d'entretien et de tir Apporter un soutien logistique et opérationnel pour la participation à la presse lors des événements internationaux du siège Assurer la présence transparente de la presse lors des voyages de presse, y compris l'horaire, l'organisation des voyages et l'hébergement. Actuellement titulaire d'un diplôme en communication, marketing, relations publiques ou dans un domaine connexe, vous recherchez un stage en septembre 2026. Vous avez de l'expérience en gestion de projet dans les relations publiques et une première expérience dans l'industrie du luxe, l'horlogerie fine et la haute connaissance de bijoux est un plus. Vous maîtrisez couramment l'anglais et le français, y compris d'excellentes compétences d'écriture dans les deux langues, et vous maîtrisez Word, Excel et PowerPoint. Organisé et axé sur le détail, avec la capacité de gérer plusieurs tâches et priorités, vous êtes dynamique et enthousiaste à apprendre sur les relations publiques, la gestion de la marque et le marketing. Que pouvez-vous attendre de nous ? Tous nos stagiaires ont un rôle clé à jouer dans le succès quotidien de notre entreprise. De plus, la collaboration étroite avec une équipe engagée et dévouée est là pour vous aider à réussir dans ce rôle stimulant et passionnant. Au cours de votre séjour chez nous, vous vous familiariserez avec notre savoir-faire et aurez des idées pratiques sur différents domaines d'activité. Mieux que tout, vous grandirez dans un environnement stimulant avec d'excellentes conditions de travail et des avantages attrayants! Emplois similaires CLIENT EXPERIENCE PROJECT MANAGER Save Meyrin, Switzerland Jaeger-LeCoultre Customer Experience Coordinator Save New York, États-Unis Jaeger-LeCoultre Manufacture VIC Lounge Sales & Operations Manager Save Le Sentier, Switzerland Jaeger-LeCoultre"
+    },
+    "slugByLocale": {
+      "it": "press-relations-tirocinante-jaeger-lecoultre-meyrin",
+      "en": "press-relations-intern-jaeger-lecoultre-meyrin",
+      "de": "press-relations-praktikant-jaeger-lecoultre-meyrin",
+      "fr": "press-relations-intern-richemont-meyrin"
+    },
+    "sector": "Lusso / Orologeria",
+    "expiredAt": "2026-08-29T23:25:26.952Z",
+    "previousSlugs": [
+      "press-relations-intern-richemont-meyrin",
+      "press-relations-stagiaire-jaeger-lecoultre-meyrin"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "press-relations-intern-richemont-meyrin"
+      ],
+      "de": [
+        "press-relations-intern-richemont-meyrin"
+      ],
+      "fr": [
+        "press-relations-stagiaire-jaeger-lecoultre-meyrin"
+      ]
+    },
+    "salaryMin": 51100,
+    "salaryMax": 77500,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
