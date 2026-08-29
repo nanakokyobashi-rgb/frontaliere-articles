@@ -1,6 +1,6 @@
 {
   "crawlerKey": "kzu-recruiting",
-  "assembledAt": "2026-08-29T14:23:13.055Z",
+  "assembledAt": "2026-08-29T23:07:14.888Z",
   "jobs": [
     {
       "id": "kzu-recruiting-bd9b969abcfa",
@@ -30,7 +30,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2075/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:10.239Z",
+      "crawledAt": "2026-08-29T23:07:11.755Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -99,7 +99,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/1949/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:23:09.937Z",
+      "crawledAt": "2026-08-29T23:07:11.451Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -173,7 +173,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2067/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:09.635Z",
+      "crawledAt": "2026-08-29T23:07:11.148Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -242,7 +242,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2086/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:23:09.333Z",
+      "crawledAt": "2026-08-29T23:07:10.845Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -319,7 +319,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2090/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:23:09.027Z",
+      "crawledAt": "2026-08-29T23:07:10.542Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -394,7 +394,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2029/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:08.725Z",
+      "crawledAt": "2026-08-29T23:07:10.238Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -463,7 +463,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2011/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:23:08.422Z",
+      "crawledAt": "2026-08-29T23:07:09.930Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -532,7 +532,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2103/Description/1",
       "source": "KZU Recruiting Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:23:08.105Z",
+      "crawledAt": "2026-08-29T23:07:09.606Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -571,7 +571,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T14:23:08.105Z"
+      "firstSeenAt": "2026-08-29T23:07:09.606Z"
     },
     {
       "id": "kzu-recruiting-48fabefee15d",
