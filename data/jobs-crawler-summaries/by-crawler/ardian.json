@@ -1,7 +1,7 @@
 {
   "key": "ardian",
   "label": "Ardian",
-  "generatedAt": "2026-08-29T14:58:25.060Z",
+  "generatedAt": "2026-08-29T23:40:51.000Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -23,7 +23,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:58:21.365Z",
+      "crawledAt": "2026-08-29T23:40:47.563Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -58,7 +58,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:58:22.036Z",
+      "crawledAt": "2026-08-29T23:40:48.239Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -123,11 +123,12 @@
       }
     }
   ],
-  "durationMs": 5080,
-  "avgDurationMs": 5080,
+  "durationMs": 4785,
+  "avgDurationMs": 4785,
   "durationHistory": [
     5047,
     4338,
-    5080
+    5080,
+    4785
   ]
 }
