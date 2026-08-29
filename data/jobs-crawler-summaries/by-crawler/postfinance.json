@@ -1,16 +1,17 @@
 {
   "key": "postfinance",
   "label": "PostFinance",
-  "generatedAt": "2026-08-29T03:22:54.541Z",
+  "generatedAt": "2026-08-29T14:32:22.362Z",
   "total": 19,
   "newCount": 0,
   "updatedCount": 18,
   "removedCount": 1,
   "unchangedCount": 0,
-  "durationMs": 37916,
-  "avgDurationMs": 37916,
+  "durationMs": 39396,
+  "avgDurationMs": 39396,
   "durationHistory": [
-    37916
+    37916,
+    39396
   ],
   "newJobs": [],
   "updatedJobs": [],
