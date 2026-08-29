@@ -11,14 +11,8 @@
     "https://jobs.skyguide.ch/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_department=&optionsFacetsDD_location=&startrow=0"
   ],
   "notes": "Dedicated Skyguide crawler parses the national SuccessFactors listing (all cantons, paginated) and extracts full detail pages; canton derived per-job.",
-  "updatedAt": "2026-08-28T21:00:23.492Z",
+  "updatedAt": "2026-08-29T03:18:27.684Z",
   "seedMetaByUrl": {
-    "https://jobs.skyguide.ch/job/Wangen-b_-D%C3%BCb_-&or-Geneva-Category-Leader-IT-Procurement-%28100%29/1431347833/": {
-      "location": "Wangen b. Düb. &/or Geneva",
-      "canton": "GE",
-      "company": "Skyguide",
-      "postedDate": "2026-08-28"
-    },
     "https://jobs.skyguide.ch/job/Wangen-b_-D%C3%BCbendorf-APS-&-ADC-Rated-%28ATCO%29-Instructor-%28100%29/1418247333/": {
       "location": "Wangen b. Dübendorf",
       "canton": "ZH",
@@ -89,7 +83,13 @@
       "location": "Dübendorf",
       "canton": "ZH",
       "company": "Skyguide",
-      "postedDate": "2026-07-31"
+      "postedDate": "2026-08-29"
+    },
+    "https://jobs.skyguide.ch/job/Wangen-b_-D%C3%BCb_-&or-Geneva-Category-Leader-IT-Procurement-%28100%29/1431347833/": {
+      "location": "Wangen b. Düb. &/or Geneva",
+      "canton": "GE",
+      "company": "Skyguide",
+      "postedDate": "2026-08-28"
     }
   }
 }
