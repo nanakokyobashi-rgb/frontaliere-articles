@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hess-carrosserie",
-  "assembledAt": "2026-08-28T21:39:57.045Z",
+  "assembledAt": "2026-08-29T03:22:49.387Z",
   "jobs": [
     {
       "id": "hess-carrosserie-f7daf95cfb41",
@@ -33,7 +33,7 @@
       "url": "https://jobs.hess-ag.ch/publication/carrosseriespengler/jcxfkduwb7hw872kevj67iv7pycb2jbdeo3fvgbhdei6473x8hvy361dqxt2rqep",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:53.535Z",
+      "crawledAt": "2026-08-29T03:22:45.494Z",
       "addressLocality": "Rothenburg",
       "addressRegion": "LU",
       "streetAddress": "Stationsstrasse 88",
@@ -88,7 +88,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:37.519Z",
-      "needsRetranslation": true,
       "salaryMin": 78500,
       "salaryMax": 119000,
       "baseSalary": {
@@ -100,7 +99,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-23ff36e5c28c",
@@ -133,7 +133,7 @@
       "url": "https://jobs.hess-ag.ch/publication/fahrzeugelektriker-nutzfahrzeuge/dhujcozfzpocrjxvkkgsciw5q3r5l3lgguw5786xthuv74rta2veskfekb64esfe",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:53.057Z",
+      "crawledAt": "2026-08-29T03:22:45.017Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -170,7 +170,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:37.094Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -182,7 +181,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-41be2347df5c",
@@ -215,7 +215,7 @@
       "url": "https://jobs.hess-ag.ch/publication/fahrzeugschlosser/jeko2k44k8kouv0f5ehi7lj8iq5zp008rbz86tljmzmb7ou5go4v0cac10ejwmqc",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:52.576Z",
+      "crawledAt": "2026-08-29T03:22:44.528Z",
       "addressLocality": "Rothenburg",
       "addressRegion": "LU",
       "streetAddress": "Stationsstrasse 88",
@@ -298,7 +298,7 @@
       "url": "https://jobs.hess-ag.ch/publication/automobilmechatroniker-nutzfahrzeuge/ibfe6zdqn4jc2lz3rjac2zhe8abdx3onblfx2k0p7cgtcett0g2agz3zf5pq78mi",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:52.108Z",
+      "crawledAt": "2026-08-29T03:22:44.053Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -364,7 +364,7 @@
       "url": "https://jobs.hess-ag.ch/publication/mechatroniker-oder-automatiker-inbetriebnahme-elektrobusse/ou0ygiwfa5jyc4ve8a4s7cyzgl3c3t9t6ed6215t44faqq7xmcqr5irr58qzzvt0",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:51.616Z",
+      "crawledAt": "2026-08-29T03:22:43.553Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -444,7 +444,7 @@
       "url": "https://jobs.hess-ag.ch/publication/projektleiter-homologation/6qwlim2ob7h4ammxdyhx6uq20bmw7knsf3s1gipjwop0nvcf5z7hryffxbo2frif",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:51.124Z",
+      "crawledAt": "2026-08-29T03:22:43.055Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -495,7 +495,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:33.724Z",
-      "needsRetranslation": true,
       "salaryMin": 105500,
       "salaryMax": 160000,
       "baseSalary": {
@@ -507,7 +506,8 @@
           "maxValue": 160000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-ed09311050a6",
@@ -540,7 +540,7 @@
       "url": "https://jobs.hess-ag.ch/publication/stv-leiter-einkauf/0y7700v54crw3bokpo1qn5ouia9tkt5synnydvl6dm6d1lfs1segirasojmfsh2i",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:50.629Z",
+      "crawledAt": "2026-08-29T03:22:42.552Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -640,7 +640,7 @@
       "url": "https://jobs.hess-ag.ch/publication/bus-fluesterer-als-servicetechniker/lflbii3v0dsxjrzie641koeqyz0ieu1bo5lpn8bs224zqdj8ncqncflo052n22pm",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:50.147Z",
+      "crawledAt": "2026-08-29T03:22:42.060Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -720,7 +720,7 @@
       "url": "https://jobs.hess-ag.ch/publication/werkstattmueder-mechaniker-als-keyboard-hero/odidxxfdvr4zl16pxw4omfne5tw9l4d7ddyg266j8aeo1y2uoo95ji0xuste3rci",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:49.658Z",
+      "crawledAt": "2026-08-29T03:22:41.560Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -800,7 +800,7 @@
       "url": "https://jobs.hess-ag.ch/publication/werkstattmueder-mechaniker-als-after-sales-solutions-expert/mzclooxzv0n2xh4jmzd6ccnlxbk3803qih4fkb15f5oqv0up6feercnb6thnrmyr",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:49.165Z",
+      "crawledAt": "2026-08-29T03:22:41.054Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -882,7 +882,7 @@
       "url": "https://jobs.hess-ag.ch/publication/system-detektiv-als-traktionsingenieur/75fm335fhsz46mn1hpbz3v6vtgd0aymh7gz6q50qa7sqiklo5ucttz0f7yv7e33t",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:48.666Z",
+      "crawledAt": "2026-08-29T03:22:40.543Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -921,7 +921,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:31.087Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -933,7 +932,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-4d6976229a19",
@@ -966,7 +966,7 @@
       "url": "https://jobs.hess-ag.ch/publication/projektleiter-process-improvement/r5sxjy5ssjl8l6jlou5lmroom36onphwjiceef5c2lbmfq440cx3pd2cfbd1jkzg",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:48.176Z",
+      "crawledAt": "2026-08-29T03:22:40.047Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1006,7 +1006,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:30.219Z",
-      "needsRetranslation": true,
       "salaryMin": 105500,
       "salaryMax": 160000,
       "baseSalary": {
@@ -1018,7 +1017,8 @@
           "maxValue": 160000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-f70e30423f0c",
@@ -1051,7 +1051,7 @@
       "url": "https://jobs.hess-ag.ch/publication/fahrzeugschlosser-nutzfahrzeuge/mec06ha3o2t82dtbwoejw3t4qgv647ym6be9hqjtxuhsnsrs3vrgsis487pxii1d",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:47.686Z",
+      "crawledAt": "2026-08-29T03:22:39.551Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1145,7 +1145,7 @@
       "url": "https://jobs.hess-ag.ch/publication/e-product-security-engineer/delfid3dirok4kog8dg241xs20k150v67vsv06qxw3nj0zyr4lwt2ty232dspa4x",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:47.214Z",
+      "crawledAt": "2026-08-29T03:22:39.064Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1179,7 +1179,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:29.353Z",
-      "needsRetranslation": true,
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -1191,7 +1190,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-c680d74df853",
@@ -1224,7 +1224,7 @@
       "url": "https://jobs.hess-ag.ch/publication/schlosser-metallbauer-vormontage-interne-fertigung/us34tqclbkvzqiktciofqz3bv7kqjmoqjszkmm5vehpyzc5sjqestumil5aw0zo7",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:46.705Z",
+      "crawledAt": "2026-08-29T03:22:38.557Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1306,7 +1306,7 @@
       "url": "https://jobs.hess-ag.ch/publication/techniker-fuer-die-inbetriebnahme-von-elektrobussen/sw38ulglko7lv4etrdkxtakqu3mn556v4b8ue9f8awm563ascbyi6dix4i8fcz8w",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:46.216Z",
+      "crawledAt": "2026-08-29T03:22:38.056Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1388,7 +1388,7 @@
       "url": "https://jobs.hess-ag.ch/publication/elektroinstallateur-oder-elektromonteur-mit-lust-zur-veraenderung/w3mbxqtmgzvpqyx3hyo7z4y53dcs4ibb0i346bl6hqcoh5chfpsxxxsh07ayuhyi",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:45.725Z",
+      "crawledAt": "2026-08-29T03:22:37.556Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1470,7 +1470,7 @@
       "url": "https://jobs.hess-ag.ch/publication/spezialist-aftersales-garantieabwicklung/wdcc2kcqzoi5oyxaqpzj9d0jx0gt7mbdk0r8u4ipjwkb0axdg7h2wkl0v6fh3gjv",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:45.240Z",
+      "crawledAt": "2026-08-29T03:22:37.059Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1511,7 +1511,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:53:26.240Z",
-      "needsRetranslation": true,
       "salaryMin": 77500,
       "salaryMax": 118500,
       "baseSalary": {
@@ -1523,7 +1522,8 @@
           "maxValue": 118500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-f304163f401f",
@@ -1556,7 +1556,7 @@
       "url": "https://jobs.hess-ag.ch/publication/teamleiter-wareneingang-spedition/wlsu2vzrwvdflxhybzblqbh166o7ijv8tkb6o5rfjk0b5rh3zjvjrlveasyxhfoy",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:44.745Z",
+      "crawledAt": "2026-08-29T03:22:36.553Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1593,7 +1593,6 @@
         ]
       },
       "firstSeenAt": "2026-07-28T11:31:30.183Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -1605,7 +1604,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-135153cce8c7",
@@ -1638,7 +1638,7 @@
       "url": "https://jobs.hess-ag.ch/publication/sachbearbeiterin-personenwagen-reparaturen/bassntrbtywixy22vxt7srhqzuwr7yd2tejpi3chbxemdre2t648wzhyri674ec2",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:44.250Z",
+      "crawledAt": "2026-08-29T03:22:36.047Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1721,7 +1721,7 @@
       "url": "https://jobs.hess-ag.ch/publication/leiter-montagelinie-bus-trolley/n57yyejdqs5dly7kctb237hvfikjefb0rc8wl5faldf3agqdw0qjuh8zpd55w3t4",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:43.772Z",
+      "crawledAt": "2026-08-29T03:22:35.556Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1741,16 +1741,15 @@
       "requirements": [],
       "requirementsByLocale": {},
       "department": "Bus und Trolley",
-      "previousSlugs": [
-        "leiter-montagelinie-bus-trolley-m-w-d-hess-bellach"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "leiter-montagelinie-bus-trolley-m-w-d-hess-bellach"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:26:02.830Z",
+      "previousSlugs": [
+        "leiter-montagelinie-bus-trolley-m-w-d-hess-bellach"
+      ],
       "salaryMin": 124000,
       "salaryMax": 167500,
       "baseSalary": {
@@ -1762,7 +1761,8 @@
           "maxValue": 167500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:26:02.830Z"
     },
     {
       "id": "hess-carrosserie-3c26c2d49943",
@@ -1795,7 +1795,7 @@
       "url": "https://jobs.hess-ag.ch/publication/inbetriebnahmespezialist-hot-commissioning/cuwbzf30l5dbo0dpvywcpzrme217y1wyimkprryrzyuf7ts3zqfruz47lfbq2lze",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:39:43.278Z",
+      "crawledAt": "2026-08-29T03:22:35.045Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1861,7 +1861,7 @@
       "url": "https://jobs.hess-ag.ch/publication/entwicklungsingenieur-mechatronik-schwerpunkt-software/peaqlnduf6apm1ytfcjvu3zd8pjux7c5beqzwtxrgp0y24yhgpxuiyxcqa2aqv55",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:42.776Z",
+      "crawledAt": "2026-08-29T03:22:34.520Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -1898,7 +1898,6 @@
         ]
       },
       "firstSeenAt": "2026-07-10T12:19:07.058Z",
-      "needsRetranslation": true,
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -1910,7 +1909,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-6cfb79206139",
@@ -1943,7 +1943,7 @@
       "url": "https://jobs.hess-ag.ch/publication/teamleiter-leitstand-in-logistik/pot41t2mmuq4zvyc2le3ncvmzbp6yxoe7edfw0vvoqpo51b65jbt7brg6xao4qt4",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:42.291Z",
+      "crawledAt": "2026-08-29T03:22:34.018Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2024,7 +2024,7 @@
       "url": "https://jobs.hess-ag.ch/publication/stv-leiter-logistik/nw7n0imb8afiyf6wpd0q6nvedikjol2au6nqkdxqg3i7cxfcfh3ccn2wmm6b8our",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:41.797Z",
+      "crawledAt": "2026-08-29T03:22:33.502Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2107,7 +2107,7 @@
       "url": "https://jobs.hess-ag.ch/publication/reisefreudiger-allrounder/ohydxf5255z1efsjbbqhf0o09n82q4ahnsk0n1fif2y60ax15s33zssgokydu2kh",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:41.307Z",
+      "crawledAt": "2026-08-29T03:22:33.004Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2141,7 +2141,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:34:41.073Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -2153,7 +2152,8 @@
           "maxValue": 104000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hess-carrosserie-554a215b2d68",
@@ -2186,7 +2186,7 @@
       "url": "https://jobs.hess-ag.ch/publication/strategischer-einkaeufer-scm/pk2izroxskfxp00p0g63p1zbbutyltr0op4sbgs4h5ofws5cd8a7kd5romb1re6i",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:40.822Z",
+      "crawledAt": "2026-08-29T03:22:32.517Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2280,7 +2280,7 @@
       "url": "https://jobs.hess-ag.ch/publication/projekteinkaeufer-scm/8j554cjigcpv8x6kcr5e6sdhsqpqpb2gth14lkr1covm8q3w2kkv516kq4sz7g2h",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:40.326Z",
+      "crawledAt": "2026-08-29T03:22:32.013Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2361,7 +2361,7 @@
       "url": "https://jobs.hess-ag.ch/publication/montageelektriker-fuer-den-busbau/gptinsnsbxk9qvv28avd0s72oil64dol3xs7oxqv6xtez5c7ufm2dycwfvctbcvk",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:39.816Z",
+      "crawledAt": "2026-08-29T03:22:31.514Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2454,7 +2454,7 @@
       "url": "https://jobs.hess-ag.ch/publication/projektleiter-industrialisierung/edeccfft5u2cnddmmlyaqxdbqca7ebgsf6nrqydcfgps9y1q5xre5c7lrwyltqvq",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:39.330Z",
+      "crawledAt": "2026-08-29T03:22:31.023Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2537,7 +2537,7 @@
       "url": "https://jobs.hess-ag.ch/publication/chauffeur-fuer-das-rangieren-von-elektrobussen/0pjw6df5yq3cihgz5n4xvmrs5sorrypw4kcnlbvj0wi1orf86hwdfjt3ig60fyrd",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:38.845Z",
+      "crawledAt": "2026-08-29T03:22:30.530Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2617,7 +2617,7 @@
       "url": "https://jobs.hess-ag.ch/publication/schlosser-spengler-fuer-den-dachbau-in-der-bus-montage/o2khztlkncxfrfstdub4nrmhi23mjmw0af8ymb7cg454bhztjcq6yvmjcyztbpeg",
       "source": "Carrosserie HESS AG Dedicated Parser (Ostendis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:39:38.360Z",
+      "crawledAt": "2026-08-29T03:22:30.033Z",
       "addressLocality": "Bellach",
       "addressRegion": "SO",
       "streetAddress": "Bielstrasse 7",
@@ -2637,16 +2637,15 @@
       "requirements": [],
       "requirementsByLocale": {},
       "department": "Bus und Trolley",
-      "previousSlugs": [
-        "schlosser-spengler-fur-den-dachbau-in-der-bus-montage-m-w-d-hess-bellach"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "schlosser-spengler-fur-den-dachbau-in-der-bus-montage-m-w-d-hess-bellach"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:25:56.897Z",
+      "previousSlugs": [
+        "schlosser-spengler-fur-den-dachbau-in-der-bus-montage-m-w-d-hess-bellach"
+      ],
       "salaryMin": 77000,
       "salaryMax": 116500,
       "baseSalary": {
@@ -2658,7 +2657,8 @@
           "maxValue": 116500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:25:56.897Z"
     },
     {
       "id": "hess-carrosserie-51869df27d3b",
