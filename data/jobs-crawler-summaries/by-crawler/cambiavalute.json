@@ -1,14 +1,12 @@
 {
   "key": "cambiavalute",
   "label": "Cambiavalute",
-  "generatedAt": "2026-08-29T03:58:18.467Z",
+  "generatedAt": "2026-08-29T14:59:09.927Z",
   "total": 0,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 174398,
-  "avgDurationMs": 174398,
   "durationHistory": [
     174398
   ],
