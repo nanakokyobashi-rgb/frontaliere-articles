@@ -1,6 +1,6 @@
 {
   "crawlerKey": "scandit",
-  "assembledAt": "2026-08-29T03:50:34.878Z",
+  "assembledAt": "2026-08-29T04:09:36.015Z",
   "jobs": [
     {
       "id": "scandit-fd9be409e48d",
@@ -33,7 +33,7 @@
       "url": "https://www.scandit.com/careers/job-description/?gh_jid=8093936",
       "source": "Scandit AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:29.199Z",
+      "crawledAt": "2026-08-29T04:09:30.382Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -116,7 +116,7 @@
       "url": "https://www.scandit.com/careers/job-description/?gh_jid=7588975",
       "source": "Scandit AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:28.885Z",
+      "crawledAt": "2026-08-29T04:09:30.046Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
