@@ -1,6 +1,6 @@
 {
   "crawlerKey": "huntsman",
-  "assembledAt": "2026-08-28T21:51:49.379Z",
+  "assembledAt": "2026-08-29T03:57:09.875Z",
   "jobs": [
     {
       "id": "huntsman-24b5023af669",
@@ -47,7 +47,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Basel/Measurement-Engineer_J-019405",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:51:46.197Z",
+      "crawledAt": "2026-08-29T03:57:06.997Z",
       "jobReqId": "J-019405",
       "previousSlugs": [
         "engineer-measurement-technology-electrical-physical-testing-of-plastics-huntsman-ch",
@@ -125,7 +125,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Monthey/Electricien-ou-automaticien--Mtrologie-_J-019937",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:51:45.623Z",
+      "crawledAt": "2026-08-29T03:57:06.433Z",
       "jobReqId": "J-019937",
       "previousSlugs": [
         "electricien-ou-automaticien-metrologie-huntsman-ch",
@@ -203,7 +203,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Monthey/LOGISTICIEN--H-F-_J-020013",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:51:45.073Z",
+      "crawledAt": "2026-08-29T03:57:05.891Z",
       "jobReqId": "J-020013",
       "previousSlugs": [
         "logisticien-h-f-huntsman-ch",
@@ -305,7 +305,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Basel/Material-Scientist---PCB-Materials_J-020112",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:51:44.514Z",
+      "crawledAt": "2026-08-29T03:57:05.358Z",
       "jobReqId": "J-020112",
       "previousSlugs": [
         "material-scientist-pcb-materials-huntsman-ch",
@@ -383,7 +383,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Basel/Laboratory-Technician---PCB-Materials_J-020110",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:51:43.945Z",
+      "crawledAt": "2026-08-29T03:57:04.832Z",
       "jobReqId": "J-020110",
       "previousSlugs": [
         "laboratory-technician-pcb-materials-huntsman-ch",
@@ -461,7 +461,7 @@
       "applyUrl": "https://huntsman.wd1.myworkdayjobs.com/en/Huntsman/job/Switzerland---Basel/Intern-Digital-Engineer_J-020117",
       "source": "Huntsman Corporation Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:51:43.252Z",
+      "crawledAt": "2026-08-29T03:57:04.313Z",
       "jobReqId": "J-020117",
       "previousSlugs": [
         "tirocinante-digital-ingegnere-huntsman-corporation-basel",
