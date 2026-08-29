@@ -1,6 +1,6 @@
 {
   "crawlerKey": "gmo",
-  "assembledAt": "2026-08-28T21:09:01.852Z",
+  "assembledAt": "2026-08-29T03:18:15.242Z",
   "jobs": [
     {
       "id": "gmo-45ad69cc39fe",
@@ -33,7 +33,7 @@
       "url": "https://www.arsante.ch/emploi/un-e-infirmier-iere-responsable-du-service-d-urgences-88",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:58.520Z",
+      "crawledAt": "2026-08-29T03:18:12.151Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -49,7 +49,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:26.557Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -62,7 +61,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:26.557Z"
     },
     {
       "id": "gmo-fdf6239fe3ec",
@@ -95,7 +95,7 @@
       "url": "https://www.arsante.ch/emploi/infirmier-ere-chef-fe-89",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:58.215Z",
+      "crawledAt": "2026-08-29T03:18:11.848Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -111,7 +111,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:26.253Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -124,7 +123,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:26.253Z"
     },
     {
       "id": "gmo-2e392bc89d01",
@@ -157,7 +157,7 @@
       "url": "https://www.arsante.ch/emploi/medecin-specialiste-fmh-en-gynecologie-et-obstetrique-90",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:57.913Z",
+      "crawledAt": "2026-08-29T03:18:11.546Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -173,7 +173,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:25.951Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -186,7 +185,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:25.951Z"
     },
     {
       "id": "gmo-69ead8a8b120",
@@ -219,7 +219,7 @@
       "url": "https://www.arsante.ch/emploi/pharmacien-ne-92",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:57.610Z",
+      "crawledAt": "2026-08-29T03:18:11.242Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -235,7 +235,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:25.649Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -248,7 +247,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:25.649Z"
     },
     {
       "id": "gmo-4b5a5ae3e4b8",
@@ -281,7 +281,7 @@
       "url": "https://www.arsante.ch/emploi/experts-medicaux-93",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:57.308Z",
+      "crawledAt": "2026-08-29T03:18:10.938Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -297,7 +297,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:25.346Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -310,7 +309,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:25.346Z"
     },
     {
       "id": "gmo-ac7868278538",
@@ -343,7 +343,7 @@
       "url": "https://www.arsante.ch/emploi/psychologue-psychotherapeute-fsp-94",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:57.005Z",
+      "crawledAt": "2026-08-29T03:18:10.635Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -359,7 +359,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:25.044Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -372,7 +371,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:25.044Z"
     },
     {
       "id": "gmo-576ebe7aaad6",
@@ -405,7 +405,7 @@
       "url": "https://www.arsante.ch/emploi/infirmier-ere-pediatrique-95",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:56.694Z",
+      "crawledAt": "2026-08-29T03:18:10.331Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -421,7 +421,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:24.741Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -434,7 +433,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:24.741Z"
     },
     {
       "id": "gmo-287e39d62086",
@@ -467,7 +467,7 @@
       "url": "https://www.arsante.ch/emploi/comptable-96",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:56.391Z",
+      "crawledAt": "2026-08-29T03:18:10.028Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -483,7 +483,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:24.438Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -496,7 +495,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:24.438Z"
     },
     {
       "id": "gmo-f1bf9caf6800",
@@ -529,7 +529,7 @@
       "url": "https://www.arsante.ch/emploi/conducteur-rice-de-travaux-junior-97",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:56.087Z",
+      "crawledAt": "2026-08-29T03:18:09.726Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -545,7 +545,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:24.134Z",
       "salaryMin": 41600,
       "salaryMax": 63000,
       "baseSalary": {
@@ -558,7 +557,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:24.134Z"
     },
     {
       "id": "gmo-2d73a3ff1c4a",
@@ -591,7 +591,7 @@
       "url": "https://www.arsante.ch/emploi/assistant-e-medical-e-98",
       "source": "gmo Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:08:55.763Z",
+      "crawledAt": "2026-08-29T03:18:09.400Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -607,7 +607,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:19:23.816Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -620,7 +619,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:19:23.816Z"
     }
   ]
 }
