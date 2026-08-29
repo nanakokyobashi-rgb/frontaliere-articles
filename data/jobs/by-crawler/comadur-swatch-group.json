@@ -1,6 +1,6 @@
 {
   "crawlerKey": "comadur-swatch-group",
-  "assembledAt": "2026-08-28T21:14:48.874Z",
+  "assembledAt": "2026-08-29T03:23:48.178Z",
   "jobs": [
     {
       "id": "company-7ubixe",
@@ -22,7 +22,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "comadur-swatch-group",
       "companyDomain": "swatchgroup.com",
-      "crawledAt": "2026-08-28T21:14:42.479Z",
+      "crawledAt": "2026-08-29T03:23:42.003Z",
       "firstSeenAt": "2026-08-27T01:14:05.544Z",
       "titleByLocale": {
         "it": "Chef de Projet Industriel",
