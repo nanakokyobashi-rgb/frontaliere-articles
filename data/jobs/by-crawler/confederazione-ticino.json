@@ -1,6 +1,6 @@
 {
   "crawlerKey": "confederazione-ticino",
-  "assembledAt": "2026-08-28T21:26:23.891Z",
+  "assembledAt": "2026-08-29T03:58:08.387Z",
   "jobs": [
     {
       "title": "Techniker/-in Aufklärungsdrohnensystem (ADS)",
@@ -8732,7 +8732,8 @@
       "retranslationAttempts": 1,
       "previousSlugsByLocale": {
         "it": [
-          "spezialist-in-betrieb-fuhrungsanlagen-confederazione-kandersteg"
+          "spezialist-in-betrieb-fuhrungsanlagen-confederazione-kandersteg",
+          "attrezzature-di-guida-specialistiche-in-servizio-confederazione-svizzera-kandersteg"
         ],
         "en": [
           "spezialist-in-betrieb-fuhrungsanlagen-confederazione-kandersteg"
@@ -8742,7 +8743,8 @@
         ]
       },
       "previousSlugs": [
-        "spezialist-in-betrieb-fuhrungsanlagen-confederazione-kandersteg"
+        "spezialist-in-betrieb-fuhrungsanlagen-confederazione-kandersteg",
+        "attrezzature-di-guida-specialistiche-in-servizio-confederazione-svizzera-kandersteg"
       ]
     },
     {
@@ -16423,77 +16425,6 @@
       ]
     },
     {
-      "title": "Untersuchende/r Beamtin/Beamter",
-      "slug": "ispettore-ufficiale-confederazione-svizzera-gudo",
-      "url": "https://jobs.admin.ch/posti-vacanti/untersuchende-r-beamtin-beamter/7ed14ad9-0159-4d88-b9dc-f95ceefa1ac5",
-      "applyUrl": "https://career74.sapsf.eu/career?company=bundesamtf&career_ns=job_application&career_job_req_id=19798",
-      "company": "Confederazione Svizzera",
-      "companyKey": "confederazione-ticino",
-      "companyDomain": "admin.ch",
-      "location": "Gudo",
-      "addressLocality": "Gudo",
-      "addressRegion": "TI",
-      "addressCountry": "CH",
-      "canton": "TI",
-      "country": "CH",
-      "category": "engineering",
-      "sector": "Pubblica amministrazione",
-      "source": "confederazione-dedicated-crawler",
-      "sourceLang": "de",
-      "postedDate": "2026-07-24",
-      "validThrough": "2026-08-28",
-      "employmentType": "full-time",
-      "contractType": "full-time",
-      "description": "• Widerhandlungen gegen das Fernmeldegesetz und das Elektrizitätsgesetz nach den Vorschriften des Verwaltungsstrafrechts verfolgen\n\n• Kontrolloperationen zur Durchsetzung der gesetzlichen Bestimmungen über das Anbieten und die Bereitstellung auf dem Markt von Fernmeldeanlagen (inkl. Cybersicherheit) und elektrischen Geräten (Aspekt der elektromagnetischen Verträglichkeit, EMV) nach den Vorschriften des Verwaltungsrechts durchführen\n\n• Kontrolloperationen zur Durchsetzung der gesetzlichen Bestimmungen im Bereich der Nutzung von Fernmeldeanlagen nach den Bestimmungen des Verwaltungsrechts durchführen\n\n• Allgemeine Informationen an Behörden und Marktakteure im Bereich der Fernmeldeanlagen, elektrischer Geräte und der Spektrumsnutzung, im Besonderen über die Funkkonzessionen, erteilen\n\n• Selbständig Verwaltungs- und Verwaltungsstrafverfahren in italienischer und deutscher Sprache durchführen\n\n• Fundierte technische oder kaufmännische Ausbildung oder abgeschlossene Polizei- oder Zollschule und mehrjährige Berufserfahrung\n\n• Gute redaktionelle Fähigkeiten und Interesse an juristischen und technischen Fragestellungen\n\n• Sicheres Auftreten, Kontaktfreudigkeit und Durchsetzungsvermögen\n\n• Selbständige Arbeitsweise, Flexibilität und Teamfähigkeit\n\n• Aktive Kenntnisse einer zweiten Amtssprache, Englischkenntnisse sind von Vorteil",
-      "titleByLocale": {
-        "it": "Ispettore/ufficiale",
-        "en": "Inspector/official",
-        "de": "Untersuchende/r Beamtin/Beamter",
-        "fr": "Inspecteur/officiel"
-      },
-      "descriptionByLocale": {
-        "it": "• Violazione della legge sulle telecomunicazioni e della legge sull'elettricità secondo le disposizioni del diritto penale amministrativo\n\n• Effettuare operazioni di controllo per far rispettare le disposizioni legali relative all'offerta e rendere disponibili sul mercato delle apparecchiature di telecomunicazione (compresa la sicurezza informatica) e delle apparecchiature elettriche (aspetto CES) in conformità con il diritto amministrativo\n\n• Attuazione delle operazioni di controllo per l'applicazione delle disposizioni legali relative all'uso delle apparecchiature di telecomunicazione in conformità con le disposizioni del diritto amministrativo\n\n• Informazioni generali alle autorità pubbliche e agli operatori di mercato nel settore delle telecomunicazioni, delle apparecchiature elettriche e dell'uso dello spettro, in particolare sulle concessioni radio\n\n• Eseguire procedimenti penali amministrativi e amministrativi autonomi in italiano e tedesco\n\n• Formazione tecnica o commerciale ben fondata o scuola di polizia o doganale completata e diversi anni di esperienza professionale\n\n• Buone competenze editoriali e interesse per questioni legali e tecniche\n\n• Aspetto sicuro, socievolezza e assertività\n\n• Metodi di lavoro indipendenti, flessibilità e lavoro di squadra\n\n• Conoscenza attiva di una seconda lingua ufficiale, le competenze in inglese sono utili",
-        "en": "• Prosecute infringements of the Telecommunications Act and the Electricity Act according to the provisions of administrative criminal law\n\n• Carry out control operations to enforce the legal provisions on the offering and making available on the market of telecommunications equipment (including cybersecurity) and electrical equipment (EMC aspects) in accordance with administrative law\n\n• Implement control operations to enforce the legal provisions relating to the use of telecommunications equipment in accordance with the provisions of administrative law\n\n• General information to public authorities and market players in the field of telecommunications, electrical equipment and spectrum use, in particular on radio concessions\n\n• Perform self-employed administrative and administrative criminal proceedings in Italian and German\n\n• Well-founded technical or commercial training or completed police or customs school and several years of professional experience\n\n• Good editorial skills and interest in legal and technical issues\n\n• Safe appearance, sociability and assertiveness\n\n• Independent working methods, flexibility and teamwork\n\n• Active knowledge of a second official language, English skills are beneficial",
-        "de": "• Widerhandlungen gegen das Fernmeldegesetz und das Elektrizitätsgesetz nach den Vorschriften des Verwaltungsstrafrechts verfolgen\n\n• Kontrolloperationen zur Durchsetzung der gesetzlichen Bestimmungen über das Anbieten und die Bereitstellung auf dem Markt von Fernmeldeanlagen (inkl. Cybersicherheit) und elektrischen Geräten (Aspekt der elektromagnetischen Verträglichkeit, EMV) nach den Vorschriften des Verwaltungsrechts durchführen\n\n• Kontrolloperationen zur Durchsetzung der gesetzlichen Bestimmungen im Bereich der Nutzung von Fernmeldeanlagen nach den Bestimmungen des Verwaltungsrechts durchführen\n\n• Allgemeine Informationen an Behörden und Marktakteure im Bereich der Fernmeldeanlagen, elektrischer Geräte und der Spektrumsnutzung, im Besonderen über die Funkkonzessionen, erteilen\n\n• Selbständig Verwaltungs- und Verwaltungsstrafverfahren in italienischer und deutscher Sprache durchführen\n\n• Fundierte technische oder kaufmännische Ausbildung oder abgeschlossene Polizei- oder Zollschule und mehrjährige Berufserfahrung\n\n• Gute redaktionelle Fähigkeiten und Interesse an juristischen und technischen Fragestellungen\n\n• Sicheres Auftreten, Kontaktfreudigkeit und Durchsetzungsvermögen\n\n• Selbständige Arbeitsweise, Flexibilität und Teamfähigkeit\n\n• Aktive Kenntnisse einer zweiten Amtssprache, Englischkenntnisse sind von Vorteil",
-        "fr": "• Poursuite des infractions à la loi sur les télécommunications et à la loi sur l ' électricité conformément aux dispositions du droit pénal administratif\n\n• Effectuer des opérations de contrôle pour faire respecter les dispositions légales relatives à l'offre et à la mise à disposition sur le marché d'équipements de télécommunications (y compris la cybersécurité) et d'équipements électriques (aspects du CEM) conformément au droit administratif\n\n• Mettre en œuvre des opérations de contrôle pour faire respecter les dispositions légales relatives à l'utilisation du matériel de télécommunication conformément aux dispositions du droit administratif\n\n• Informations générales aux autorités publiques et aux acteurs du marché dans le domaine des télécommunications, des équipements électriques et de l'utilisation du spectre, en particulier sur les concessions radio\n\n• Exécuter des procédures pénales administratives et administratives indépendantes en italien et en allemand\n\n• Formation technique ou commerciale bien fondée ou école de police ou de douane achevée et plusieurs années d'expérience professionnelle\n\n• Bonnes compétences rédactionnelles et intérêt pour les questions juridiques et techniques\n\n• Aspect sûr, sociabilité et assurance\n\n• Méthodes de travail indépendantes, flexibilité et travail d'équipe\n\n• Connaissance active d'une seconde langue officielle, compétences en anglais sont bénéfiques"
-      },
-      "slugByLocale": {
-        "it": "ispettore-ufficiale-confederazione-svizzera-gudo",
-        "en": "inspector-official-confederazione-svizzera-gudo",
-        "de": "untersuchende-r-beamtin-beamter-confederazione-gudo",
-        "fr": "inspecteur-officiel-confederazione-svizzera-gudo"
-      },
-      "id": "confederazione-ticino-8a898410d285",
-      "salaryMin": 58000,
-      "salaryMax": 88000,
-      "currency": "CHF",
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 58000,
-          "maxValue": 88000,
-          "unitText": "YEAR"
-        }
-      },
-      "firstSeenAt": "2026-07-24T22:06:27.475Z",
-      "previousSlugsByLocale": {
-        "it": [
-          "untersuchende-r-beamtin-beamter-confederazione-gudo"
-        ],
-        "en": [
-          "untersuchende-r-beamtin-beamter-confederazione-gudo"
-        ],
-        "fr": [
-          "untersuchende-r-beamtin-beamter-confederazione-gudo"
-        ]
-      },
-      "previousSlugs": [
-        "untersuchende-r-beamtin-beamter-confederazione-gudo"
-      ]
-    },
-    {
       "title": "ICT-Berater/-in Expert SAP Analytics (1207,1290)",
       "slug": "consulente-esperto-delle-tic-1207-1290-confederazione-svizzera-zollikofen",
       "url": "https://jobs.admin.ch/posti-vacanti/ict-berater-in-expert-sap-analytics-1207-1290/83892861-0330-4c69-85b3-ddd45b1b5593",
@@ -19182,7 +19113,8 @@
       "previousSlugsByLocale": {
         "it": [
           "gebaudebetreiber-in-confederazione-svizzera-bern",
-          "gebaudebetreiber-in-confederazione-bern"
+          "gebaudebetreiber-in-confederazione-bern",
+          "tecnico-r-gestione-oggetti-in-confederazione-svizzera-bern"
         ],
         "en": [
           "building-operator-in-confederazione-svizzera-bern"
@@ -19987,8 +19919,8 @@
       "descriptionByLocale": {
         "de": "• In den Teams der Abteilungen Führungsdienst, Militärbüro, Finanzen, Human Resources und Auftragssteuerung mitarbeiten und einen Einblick in den Bereich persönliche Ausrüstung sowie in das Ersatzteillager gewinnen\n\n• Verschiedene kaufmännische Tätigkeiten und spannende administrative und organisatorische Aufgaben übernehmen; wie zum Beispiel bei der Organisation von Anlässen und kleineren Events sowie Sitzungsvorbereitungen unterstützen\n\n• Projekte und Abläufe koordinieren, Kunden beraten, Aufträge abwickeln und mit der Kassenkontrolle sowie der Personaladministration vertraut werden\n\n• E-Mails, Briefe, Protokolle und Verträge verfassen, Berichte und Statistiken erstellen, Büromaterial bewirtschaften und die Telefonzentrale betreuen\n\n• Im 3. Lehrjahr wird die Vertiefungsmöglichkeit in Kommunikation mit Anspruchsgruppen in der Landessprache angeboten\n\n• Abgeschlossene Sekundarschule Niveau A oder sehr guter Sekundarschulabschluss Niveau B (Realschule) mit 10. Schuljahr, Multicheck erwünscht\n\n• Freude an Sprachen (Deutsch und Englisch, optional Französisch), an Zahlen und der Arbeit am Computer\n\n• Zuverlässigkeit, Verantwortungsbewusstsein und Selbständigkeit\n\n• Gute Umgangsformen und Freude am Kontakt mit Menschen\n\n• Organisationstalent mit einer raschen Auffassungsgabe und ausgeprägter Lern- und Leistungsbereitschaft",
         "it": "• Lavorare nelle squadre dei dipartimenti del servizio di leadership, ufficio militare, finanza, risorse umane e gestione degli ordini e ottenere informazioni sull'area delle attrezzature personali e nel magazzino pezzi di ricambio\n\n• Assumere varie attività commerciali e interessanti compiti amministrativi e organizzativi; ad esempio, sostenere l'organizzazione di eventi e eventi più piccoli, nonché i preparativi per le riunioni\n\n• Coordinare i progetti e i processi, consigliare i clienti, elaborare gli ordini e familiarizzare con il controllo dei contanti e l'amministrazione del personale\n\n• Scrivere e-mail, lettere, minuti e contratti, produrre report e statistiche, gestire forniture di ufficio e gestire lo scambio telefonico\n\n• Nel 3° anno di formazione, la possibilità di specializzazione è offerta in comunicazione con gli stakeholder nella lingua nazionale\n\n• Completato livello di scuola secondaria A o molto buono livello di scuola secondaria B (scuola reale) con 10. Anno scolastico, multicheck desiderato\n\n• Lingue (tedesco e inglese, francese opzionale), numeri e lavoro sul computer\n\n• Affidabilità, responsabilità e indipendenza\n\n• Buone maniere e piacere a contatto con le persone\n\n• Il talento organizzativo con una rapida comprensione e una forte volontà di imparare e di eseguire",
-        "en": "• Work in the teams of the departments of leadership service, military office, finance, human resources and order management and gain insight into the area of personal equipment as well as into the spare parts warehouse\n\n• Take on various commercial activities and exciting administrative and organisational tasks; for example, supporting the organisation of events and smaller events as well as meeting preparations\n\n• Coordinate projects and processes, advise customers, process orders and be familiar with cash control and personnel administration\n\n• Write emails, letters, minutes and contracts, produce reports and statistics, manage office supplies and manage the telephone exchange\n\n• In the 3rd year of training, the specialisation opportunity is offered in communication with stakeholders in the national language\n\n• Completed secondary school level A or very good secondary school degree level B (real school) with 10. School year, multicheck desired\n\n• Enjoying languages (German and English, optional French), numbers and working on the computer\n\n• Reliability, responsibility and independence\n\n• Good manners and pleasure in contact with people\n\n• Organizational talent with a rapid comprehension and a strong willingness to learn and perform",
-        "fr": "• Travail dans les équipes des départements du service de la direction, du bureau militaire, des finances, des ressources humaines et de la gestion des commandes et de mieux comprendre le domaine du matériel personnel ainsi que l'entrepôt de pièces détachées\n\n• Entreprendre diverses activités commerciales et des tâches administratives et organisationnelles passionnantes; par exemple, soutenir l'organisation d'événements et de plus petites manifestations ainsi que la préparation de réunions\n\n• Coordonner les projets et les processus, conseiller les clients, traiter les commandes et se familiariser avec le contrôle de la trésorerie et l'administration du personnel\n\n• Écrire des courriels, des lettres, des procès-verbaux et des contrats, produire des rapports et des statistiques, gérer les fournitures de bureau et gérer l'échange téléphonique\n\n• En 3ème année de formation, la possibilité de spécialisation est offerte en communication avec les parties prenantes dans la langue nationale\n\n• Niveau A ou très bon niveau B (école réelle) avec 10. Année scolaire, multicheck souhaité\n\n• Appréciation des langues (allemand et anglais, français optionnel), nombres et travail sur ordinateur\n\n• Fiabilité, responsabilité et indépendance\n\n• Bonnes manières et plaisir en contact avec les gens\n\n• Un talent organisationnel avec une compréhension rapide et une forte volonté d'apprendre et de jouer"
+        "en": "• In den Teams der Abteilungen Führungsdienst, Militärbüro, Finanzen, Human Resources und Auftragssteuerung mitarbeiten und einen Einblick in den Bereich persönliche Ausrüstung sowie in das Ersatzteillager gewinnen\n\n• Verschiedene kaufmännische Tätigkeiten und spannende administrative und organisatorische Aufgaben übernehmen; wie zum Beispiel bei der Organisation von Anlässen und kleineren Events sowie Sitzungsvorbereitungen unterstützen\n\n• Projekte und Abläufe koordinieren, Kunden beraten, Aufträge abwickeln und mit der Kassenkontrolle sowie der Personaladministration vertraut werden\n\n• E-Mails, Briefe, Protokolle und Verträge verfassen, Berichte und Statistiken erstellen, Büromaterial bewirtschaften und die Telefonzentrale betreuen\n\n• Im 3. Lehrjahr wird die Vertiefungsmöglichkeit in Kommunikation mit Anspruchsgruppen in der Landessprache angeboten\n\n• Abgeschlossene Sekundarschule Niveau A oder sehr guter Sekundarschulabschluss Niveau B (Realschule) mit 10. Schuljahr, Multicheck erwünscht\n\n• Freude an Sprachen (Deutsch und Englisch, optional Französisch), an Zahlen und der Arbeit am Computer\n\n• Zuverlässigkeit, Verantwortungsbewusstsein und Selbständigkeit\n\n• Gute Umgangsformen und Freude am Kontakt mit Menschen\n\n• Organisationstalent mit einer raschen Auffassungsgabe und ausgeprägter Lern- und Leistungsbereitschaft",
+        "fr": "• In den Teams der Abteilungen Führungsdienst, Militärbüro, Finanzen, Human Resources und Auftragssteuerung mitarbeiten und einen Einblick in den Bereich persönliche Ausrüstung sowie in das Ersatzteillager gewinnen\n\n• Verschiedene kaufmännische Tätigkeiten und spannende administrative und organisatorische Aufgaben übernehmen; wie zum Beispiel bei der Organisation von Anlässen und kleineren Events sowie Sitzungsvorbereitungen unterstützen\n\n• Projekte und Abläufe koordinieren, Kunden beraten, Aufträge abwickeln und mit der Kassenkontrolle sowie der Personaladministration vertraut werden\n\n• E-Mails, Briefe, Protokolle und Verträge verfassen, Berichte und Statistiken erstellen, Büromaterial bewirtschaften und die Telefonzentrale betreuen\n\n• Im 3. Lehrjahr wird die Vertiefungsmöglichkeit in Kommunikation mit Anspruchsgruppen in der Landessprache angeboten\n\n• Abgeschlossene Sekundarschule Niveau A oder sehr guter Sekundarschulabschluss Niveau B (Realschule) mit 10. Schuljahr, Multicheck erwünscht\n\n• Freude an Sprachen (Deutsch und Englisch, optional Französisch), an Zahlen und der Arbeit am Computer\n\n• Zuverlässigkeit, Verantwortungsbewusstsein und Selbständigkeit\n\n• Gute Umgangsformen und Freude am Kontakt mit Menschen\n\n• Organisationstalent mit einer raschen Auffassungsgabe und ausgeprägter Lern- und Leistungsbereitschaft"
       },
       "slugByLocale": {
         "de": "lernende-r-kaufmann-frau-efz-confederazione-hinwil",
@@ -20423,7 +20355,9 @@
         ]
       },
       "previousSlugs": [
-        "portfoliomanager-in-it-confederazione-bern"
+        "portfoliomanager-in-it-confederazione-bern",
+        "it-portfolio-manager-confederazione-svizzera-bern",
+        "responsable-de-portefeuille-it-confederazione-svizzera-bern"
       ]
     },
     {
@@ -25126,7 +25060,7 @@
         }
       },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Juristische/-r Praktikant/-in (Wirtschaftskriminalität)",
@@ -25184,7 +25118,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Fachexperte/in Informations-Sicherheit",
@@ -25242,7 +25176,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "ICT-Berater/-in Senior (1313, 1338)",
@@ -25370,7 +25304,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Leiter/-in Immobilien Gruppe Verteidigung",
@@ -25495,7 +25429,7 @@
         }
       },
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Lernende/-r Logistiker/-in EFZ, Berufsfeld Lager",
@@ -25563,7 +25497,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Wirtschaftsprüfer/-in",
@@ -25632,7 +25566,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Lernende/-r Kauffrau/-mann EFZ",
@@ -25697,7 +25631,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     },
     {
       "title": "Product Owner SAP Front-End Technologie (889)",
@@ -25763,7 +25697,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:18.752Z"
+      "firstSeenAt": "2026-08-29T03:55:34.250Z"
     }
   ]
 }
