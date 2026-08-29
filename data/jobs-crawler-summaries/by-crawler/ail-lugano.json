@@ -1,18 +1,19 @@
 {
   "key": "ail-lugano",
   "label": "AIL SA",
-  "generatedAt": "2026-08-29T03:41:20.741Z",
+  "generatedAt": "2026-08-29T15:05:49.305Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3780,
-  "avgDurationMs": 3780,
+  "durationMs": 4969,
+  "avgDurationMs": 4969,
   "durationHistory": [
     4608,
     3978,
-    3780
+    3780,
+    4969
   ],
   "newJobs": [],
   "updatedJobs": [],
