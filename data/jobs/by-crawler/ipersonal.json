@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ipersonal",
-  "assembledAt": "2026-08-29T14:25:52.811Z",
+  "assembledAt": "2026-08-29T23:09:43.613Z",
   "jobs": [
     {
       "id": "ipersonal-7f14d039da7d",
@@ -4301,6 +4301,1009 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-29T14:25:44.775Z"
+    },
+    {
+      "id": "ipersonal-5eac6a04eb5f",
+      "slug": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-o-festanstellung-con-optionaler-leitungsfunktion-in-interlaken-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung",
+        "it": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-o-festanstellung-con-optionaler-leitungsfunktion-in-interlaken-ipersonal-ag-lugano",
+        "en": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung",
+        "fr": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken",
+      "titleByLocale": {
+        "de": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken",
+        "it": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire o Festanstellung con optionaler Leitungsfunktion in Interlaken",
+        "en": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken",
+        "fr": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken"
+      },
+      "description": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken — iPersonal AG",
+        "it": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken — iPersonal AG",
+        "en": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken — iPersonal AG",
+        "fr": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Interlaken — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-mit-optionaler-leitungsfunktion-in-interlaken/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:39.951Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-mit-optionaler-leitungsfunktion-in-interlaken/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung"
+        ]
+      },
+      "previousSlugs": [
+        "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:39.951Z"
+    },
+    {
+      "id": "ipersonal-abe947e71f23",
+      "slug": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-o-festanstellung-con-optionaler-leitungsfunktion-in-wangen-an-der-aare-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung",
+        "it": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-o-festanstellung-con-optionaler-leitungsfunktion-in-wangen-an-der-aare-ipersonal-ag-lugano",
+        "en": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-2",
+        "fr": "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-2"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare",
+      "titleByLocale": {
+        "de": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare",
+        "it": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire o Festanstellung con optionaler Leitungsfunktion in Wangen an der Aare",
+        "en": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare",
+        "fr": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare"
+      },
+      "description": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare — iPersonal AG",
+        "it": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare — iPersonal AG",
+        "en": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare — iPersonal AG",
+        "fr": "Gesucht: Dipl. Pflegefachfrau / Dipl. Pflegefachmann HF/FH 80–100% – Try & Hire oder Festanstellung mit optionaler Leitungsfunktion in Wangen an der Aare — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-mit-optionaler-leitungsfunktion-in-wangen-an-der-aare/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:39.647Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-mit-optionaler-leitungsfunktion-in-wangen-an-der-aare/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-2",
+          "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung"
+        ]
+      },
+      "previousSlugs": [
+        "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung-2",
+        "gesucht-dipl-pflegefachfrau-dipl-pflegefachmann-hf-fh-80-100-try-hire-oder-festanstellung"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:39.647Z"
+    },
+    {
+      "id": "ipersonal-3bb812b98256",
+      "slug": "fachfrau-fachmann-gesundheit-cfc-fage-per-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "fachfrau-fachmann-gesundheit-efz-fage-fur-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ch",
+        "it": "fachfrau-fachmann-gesundheit-cfc-fage-per-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ag-lugano",
+        "en": "fachfrau-fachmann-gesundheit-efz-fage-fur-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ch",
+        "fr": "fachfrau-fachmann-gesundheit-efz-fage-fur-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht",
+      "titleByLocale": {
+        "de": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht",
+        "it": "Fachfrau/Fachmann Gesundheit CFC (FaGe) per Nachtschicht fest in Wohlen gesucht",
+        "en": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht",
+        "fr": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht"
+      },
+      "description": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) für Nachtschicht fest in Wohlen gesucht — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/fachfrau-fachmann-gesundheit-efz-fage-fuer-nachtschicht-fest-in-wohlen-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:39.345Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/fachfrau-fachmann-gesundheit-efz-fage-fuer-nachtschicht-fest-in-wohlen-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "fachfrau-fachmann-gesundheit-efz-fage-fur-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "fachfrau-fachmann-gesundheit-efz-fage-fur-nachtschicht-fest-in-wohlen-gesucht-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:39.345Z"
+    },
+    {
+      "id": "ipersonal-1a4809d2958a",
+      "slug": "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "en": "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ch",
+        "it": "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ag-lugano",
+        "de": "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ch",
+        "fr": "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht.",
+      "titleByLocale": {
+        "en": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht.",
+        "it": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht.",
+        "de": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht.",
+        "fr": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht."
+      },
+      "description": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht. — iPersonal AG",
+      "descriptionByLocale": {
+        "en": "Dipl. Pflegefachmann /-frau HF gesucht (m/w/d) 100% in Region Binningen gesucht. — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T23:09:39.042Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachmann-frau-hf-gesucht-m-w-d-100-in-region-binningen-gesucht-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:39.042Z"
+    },
+    {
+      "id": "ipersonal-c3cbcd4b71e2",
+      "slug": "angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil-ipersonal-ch",
+      "slugByLocale": {
+        "de": "angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil-ipersonal-ch",
+        "it": "angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil-ipersonal-ch",
+        "en": "angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil-ipersonal-ch",
+        "fr": "angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil",
+      "titleByLocale": {
+        "de": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil",
+        "en": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil",
+        "it": "Angiologie Facharzt CFC gesucht (m/w/d) 100% in Region Adliswil",
+        "fr": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil"
+      },
+      "description": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Angiologie Facharzt EFZ gesucht (m/w/d) 100% in Region Adliswil — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T23:09:38.740Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/angiologie-facharzt-efz-gesucht-m-w-d-100-in-region-adliswil/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:38.740Z"
+    },
+    {
+      "id": "ipersonal-8977dd6cf4a1",
+      "slug": "dipl-pflegefachkraft-cfc-per-notfallpool-80-100-in-suhr-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachkraft-efz-fur-notfallpool-80-100-in-suhr-gesucht-ipersonal-ch",
+        "it": "dipl-pflegefachkraft-cfc-per-notfallpool-80-100-in-suhr-gesucht-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachkraft-efz-fur-notfallpool-80-100-in-suhr-gesucht-ipersonal-ch",
+        "fr": "dipl-pflegefachkraft-efz-fur-notfallpool-80-100-in-suhr-gesucht-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht",
+        "en": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht",
+        "it": "Dipl. Pflegefachkraft CFC per Notfallpool 80-100% in Suhr gesucht",
+        "fr": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht"
+      },
+      "description": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht — iPersonal AG",
+        "en": "Dipl. Pflegefachkraft EFZ für Notfallpool 80-100% in Suhr gesucht — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachkraft-efz-fuer-notfallpool-80-100-in-suhr-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T23:09:38.437Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachkraft-efz-fuer-notfallpool-80-100-in-suhr-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachkraft-efz-fur-notfallpool-80-100-in-suhr-gesucht-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachkraft-efz-fur-notfallpool-80-100-in-suhr-gesucht-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:38.437Z"
+    },
+    {
+      "id": "ipersonal-d8ef5e6a14a7",
+      "slug": "anasthesistin-anasthesist-per-intensiv-e-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "anasthesistin-anasthesist-fur-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden",
+        "it": "anasthesistin-anasthesist-per-intensiv-e-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht-ipersonal-ag-lugano",
+        "en": "anasthesistin-anasthesist-fur-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden",
+        "fr": "anasthesistin-anasthesist-fur-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht",
+      "titleByLocale": {
+        "de": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht",
+        "it": "Anästhesistin/Anästhesist per Intensiv- e Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht",
+        "en": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht",
+        "fr": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht"
+      },
+      "description": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Anästhesistin/Anästhesist für Intensiv- und Notfallmedizin 80-100% in Appenzell Ausserrhoden gesucht — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/anaesthesistin-anaesthesist-fuer-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:38.133Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/anaesthesistin-anaesthesist-fuer-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "anasthesistin-anasthesist-fur-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden"
+        ]
+      },
+      "previousSlugs": [
+        "anasthesistin-anasthesist-fur-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:38.133Z"
+    },
+    {
+      "id": "ipersonal-21dee6d70e63",
+      "slug": "personalberater-in-per-la-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "personalberater-in-fur-die-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal",
+        "it": "personalberater-in-per-la-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal-ag-lugano",
+        "en": "personalberater-in-fur-die-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal",
+        "fr": "personalberater-in-fur-die-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil",
+      "titleByLocale": {
+        "de": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil",
+        "it": "Personalberater/in per la Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil",
+        "en": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil",
+        "fr": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil"
+      },
+      "description": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Personalberater/in für die Medizinbranche gesucht (m/w/d) 100% in Region Wädenswil — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/personalberater-in-fuer-die-medizinbranche-gesucht-m-w-d-100-in-region-waedenswil/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:37.830Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/personalberater-in-fuer-die-medizinbranche-gesucht-m-w-d-100-in-region-waedenswil/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "personalberater-in-fur-die-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal"
+        ]
+      },
+      "previousSlugs": [
+        "personalberater-in-fur-die-medizinbranche-gesucht-m-w-d-100-in-region-wadenswil-ipersonal"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:37.830Z"
+    },
+    {
+      "id": "ipersonal-0cd4d66cabbe",
+      "slug": "dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten-ipersonal-ch",
+      "slugByLocale": {
+        "de": "dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten-ipersonal-ch",
+        "it": "dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten-ipersonal-ch",
+        "en": "dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten-ipersonal-ch",
+        "fr": "dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten",
+        "it": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam la Zukunft gestalten",
+        "en": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten",
+        "fr": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachperson HF/FH 80-100% in Kloten – Gemeinsam die Zukunft gestalten — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:37.528Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:37.528Z"
+    },
+    {
+      "id": "ipersonal-468c91016335",
+      "slug": "dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie",
+      "slugByLocale": {
+        "de": "dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie",
+        "it": "dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie",
+        "en": "dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie",
+        "fr": "dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege",
+        "it": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie con uns la Zukunft der Pflege",
+        "en": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege",
+        "fr": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege — iPersonal AG",
+        "it": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege — iPersonal AG",
+        "en": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege — iPersonal AG",
+        "fr": "Dipl. Pflegefachperson HF/FH & Teamleiter/in Pflegeabteilung 80-100% in Zumikon – Gestalten Sie mit uns die Zukunft der Pflege — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie-mit-uns-die-zukunft-der-pflege/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:37.226Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie-mit-uns-die-zukunft-der-pflege/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:37.226Z"
+    },
+    {
+      "id": "ipersonal-e0c1123199a6",
+      "slug": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-stafa-ihre-kompetenz",
+      "slugByLocale": {
+        "it": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-stafa-ihre-kompetenz",
+        "en": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-stafa-ihre-kompetenz",
+        "de": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-stafa-ihre-kompetenz",
+        "fr": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-stafa-ihre-kompetenz"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt",
+      "titleByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH per Spitäler o Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt — iPersonal AG",
+      "descriptionByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Stäfa – Ihre Kompetenz ist gefragt — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-staefa-ihre-kompetenz-ist-gefragt/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T23:09:36.923Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-staefa-ihre-kompetenz-ist-gefragt/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:36.923Z"
+    },
+    {
+      "id": "ipersonal-2ba49af09172",
+      "slug": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-wadenswil-werden-sie",
+      "slugByLocale": {
+        "it": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-wadenswil-werden-sie",
+        "en": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-wadenswil-werden-sie",
+        "de": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-wadenswil-werden-sie",
+        "fr": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-wadenswil-werden-sie"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams",
+      "titleByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH per Spitäler o Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+      "descriptionByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Wädenswil – Werden Sie Teil eines professionellen Teams — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-waedenswil-werden-sie-teil-eines-professionellen-teams/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T23:09:36.619Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-waedenswil-werden-sie-teil-eines-professionellen-teams/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:36.619Z"
+    },
+    {
+      "id": "ipersonal-6334915b6410",
+      "slug": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-freienbach-werden-sie",
+      "slugByLocale": {
+        "it": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-freienbach-werden-sie",
+        "en": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-freienbach-werden-sie",
+        "de": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-freienbach-werden-sie",
+        "fr": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-freienbach-werden-sie"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams",
+      "titleByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH per Spitäler o Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+      "descriptionByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams — iPersonal AG",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Freienbach – Werden Sie Teil eines professionellen Teams — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-freienbach-werden-sie-teil-eines-professionellen-teams/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T23:09:36.316Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-freienbach-werden-sie-teil-eines-professionellen-teams/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:36.316Z"
+    },
+    {
+      "id": "ipersonal-03d01cfffccb",
+      "slug": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-horgen-exzellente",
+      "slugByLocale": {
+        "it": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-horgen-exzellente",
+        "en": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-horgen-exzellente",
+        "de": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-horgen-exzellente",
+        "fr": "dipl-pflegefachperson-hf-fh-fur-spitaler-oder-altersheime-80-100-in-horgen-exzellente"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie",
+      "titleByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH per Spitäler o Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie"
+      },
+      "description": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie — iPersonal AG",
+      "descriptionByLocale": {
+        "it": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie — iPersonal AG",
+        "en": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie — iPersonal AG",
+        "de": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie — iPersonal AG",
+        "fr": "Dipl. Pflegefachperson HF/FH für Spitäler oder Altersheime 80-100% in Horgen – Exzellente Pflege braucht Sie — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-horgen-exzellente-pflege-braucht-sie/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T23:09:36.011Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-horgen-exzellente-pflege-braucht-sie/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:36.011Z"
+    },
+    {
+      "id": "ipersonal-a5fece1ffe54",
+      "slug": "anasthesiepflege-experte-m-w-d-per-la-schweiz-arbeiten-in-dietikon-con-unterstutzung-bei-der-relocation-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-dietikon-mit-unterstutzung-bei",
+        "it": "anasthesiepflege-experte-m-w-d-per-la-schweiz-arbeiten-in-dietikon-con-unterstutzung-bei-der-relocation-ipersonal-ag-lugano",
+        "en": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-dietikon-mit-unterstutzung-bei",
+        "fr": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-dietikon-mit-unterstutzung-bei"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation",
+      "titleByLocale": {
+        "de": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation",
+        "it": "Anästhesiepflege-Experte (m/w/d) per la Schweiz – Arbeiten in Dietikon con Unterstützung bei der Relocation",
+        "en": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation",
+        "fr": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation"
+      },
+      "description": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation — iPersonal AG",
+        "it": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation — iPersonal AG",
+        "en": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation — iPersonal AG",
+        "fr": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Dietikon mit Unterstützung bei der Relocation — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-dietikon-mit-unterstuetzung-bei-der-relocation/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:09:35.690Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-dietikon-mit-unterstuetzung-bei-der-relocation/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-dietikon-mit-unterstutzung-bei"
+        ]
+      },
+      "previousSlugs": [
+        "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-dietikon-mit-unterstutzung-bei"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:09:35.690Z"
     }
   ]
 }
