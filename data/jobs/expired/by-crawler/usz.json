@@ -25,7 +25,7 @@
       "fr": "praktikant-in-klinik-fur-gastroenterologie-und-hepatologie-80-100-usz-ch"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:58:39.994Z",
+    "expiredAt": "2026-08-29T23:28:10.630Z",
     "previousSlugs": [
       "praktikant-in-klinik-fur-gastroenterologie-und-hepatologie-80-100-usz-ch",
       "praktikant-in-klinik-per-gastroenterologie-e-hepatologie-80-100-universitatsspital-zurich-usz-campus"
@@ -161,7 +161,7 @@
       "fr": "medecin-adjoint-h-f-d-clinique-d-immunologie-80-100-universitatsspital-zurich-usz-campus"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:58:39.994Z",
+    "expiredAt": "2026-08-29T23:28:10.630Z",
     "previousSlugs": [
       "assistenzarztin-assistenzarzt-w-m-d-klinik-fur-immunologie-80-100-usz-ch",
       "assistenzarztin-assistenzarzt-m-w-d-klinik-per-immunologie-80-100-universitatsspital-zurich-usz-campus"
@@ -12655,7 +12655,7 @@
       "fr": "fage-pour-la-station-lit-interdisciplinaire-internal-medicine-50-100-universitatsspital-zurich-usz-campus"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:58:39.994Z",
+    "expiredAt": "2026-08-29T23:28:10.629Z",
     "previousSlugs": [
       "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
       "pflegefachperson-per-la-interdisziplinare-bettenstation-con-schwerpunkt-innere-medizin-50-100-universitatsspital-zurich-usz-campus",
@@ -12688,6 +12688,53 @@
     "postalCode": "8091",
     "salaryMin": 73500,
     "salaryMax": 111500,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "senior-applikationsmanager-in-sap-mm-wm-e-sd-im-s-4hana-umfeld-80-100-universitatsspital-zurich-usz-stettbach",
+    "title": "Senior Applikationsmanager:in SAP MM, WM und SD im S/4HANA Umfeld 80-100%",
+    "titleByLocale": {
+      "it": "Senior Applikationsmanager:in SAP MM, WM e SD im S/4HANA Umfeld 80-100%",
+      "en": "Senior Application Manager: in SAP MM, WM and SD in the S/4HANA environment 80-100 %",
+      "de": "Senior Applikationsmanager:in SAP MM, WM und SD im S/4HANA Umfeld 80-100%",
+      "fr": "Gestionnaire d'applications seniors: dans SAP MM, WM et SD dans l'environnement S/4HANA 80-100 %"
+    },
+    "company": "Universitätsspital Zürich (USZ)",
+    "companyKey": "usz",
+    "location": "Stettbach",
+    "addressLocality": "Stettbach",
+    "descriptionByLocale": {
+      "it": "Con il vostro know-how SAP, formate attivamente il futuro digitale della supply chain a USZ. Ottimizzare e sviluppare le nostre soluzioni SAP, si crea la base per processi efficienti in un ambiente altamente rilevante in cui ogni miglioramento fa una notevole differenza. >L'Ospedale Universitario di Zurigo è uno dei più grandi ospedali in Svizzera. I nostri oltre 8.600 dipendenti e circa 700 tirocinanti lavorano ogni giorno per il benessere dei nostri pazienti.\n\nCompiti:\n• Partecipazione decisa all'ulteriore sviluppo dei processi di gestione della supply chain (procurement, intralogistica, distribuzione)\n\n• Supporto nell'ambiente SD e nell'ulteriore sviluppo delle interfacce\n\n• Responsabile per le specifiche tecniche, la concezione e la documentazione delle soluzioni e il supporto nelle specifiche tecniche in collaborazione con il reparto\n\n• Sviluppo delle roadmap applicative in coordinamento con il dipartimento\n\n• Coordinamento tra utenti, centri IT interni e fornitori di servizi software esterni\n\n• Gestione del progetto IT o parziale gestione del progetto\n\nRequisiti\n• Esperienza approfondita nella pianificazione, nel controllo e nell'implementazione di SAP MM, WM (gestione di camere incluse unità di gestione)\n\n• Diversi anni di esperienza professionale nella gestione della supply chain\n\n• Personalizzazione delle conoscenze richieste in SAP MM/WM e vantaggiose in SAP SD\n\n• Conoscenza di EWM, SD e PP e la conoscenza di debug\n\n• Esperienza con interfacce ai sottosistemi SAP ERP come sistemi di gestione del magazzino e sistemi robotici\n\n• Esperienza pratica nella gestione dei requisiti (ingegneria dei requisiti) è un vantaggio\n\n• Personalità collaborativa, orientata al servizio e comunicativa con una buona conoscenza del tedesco nella parola e nella scrittura\n\nOffriamo:\nCome uno dei 10 migliori ospedali di tutto il mondo, sviluppiamo continuamente i nostri processi. Ci concentriamo su soluzioni innovative e sostenibili e ci impegniamo alla formazione di specialisti. Approfittate di condizioni di lavoro interessanti, orari di lavoro flessibili e l'opportunità di lavorare fino al 50% del vostro lavoro dall'ufficio di casa.\n\nSe trovi la combinazione di tecnologia e salute in un ambiente caratterizzato dalla trasformazione SAFe eccitante e il tuo cuore batte per la tecnologia in uso per le persone, allora sei nel posto giusto con noi. Non vediamo l'ora di incontrarti.",
+      "en": "With your SAP know-how, you actively shape the digital future of the supply chain at USZ. By optimizing and developing our SAP solutions, you create the basis for efficient processes in a highly relevant environment where every improvement makes a noticeable difference. >The University Hospital Zurich is one of the largest hospitals in Switzerland. Our more than 8,600 employees and around 700 trainees work every day for the well-being of our patients.\n\nTasks:\n• Decisive participation in the further development of supply chain management processes (procurement, intralogistics, distribution)\n\n• Support in the SD environment and in the further development of interfaces\n\n• Responsible for the technical requirements specification, solution conception and documentation as well as support in the technical requirements specification in cooperation with the department\n\n• Development of application roadmaps in coordination with the department\n\n• Coordination between users, internal IT centres and external software service providers\n\n• IT project management or partial project management\n\nRequirements\n• In-depth experience in planning, controlling and implementing SAP MM, WM (Stockroom management including handling units)\n\n• Several years of professional experience in supply chain management\n\n• Customizing knowledge required in SAP MM/WM and advantageous in SAP SD\n\n• Knowledge of EWM, SD and PP as well as debugging knowledge\n\n• Experience with interfaces to SAP ERP subsystems such as warehouse management systems and robotics systems\n\n• Practical experience in requirements management (requirements engineering) is an advantage\n\n• Team-capable, service-oriented and communicative personality with very good knowledge of German in word and writing\n\nWe offer:\nAs one of the 10 best hospitals worldwide, we continuously develop our processes. We focus on innovative and sustainable solutions and are committed to the training of specialists. Benefit from attractive employment conditions, flexible working hours and the opportunity to work up to 50% of your work from the home office.\n\nIf you find the combination of technology and healthcare in an environment characterized by the SAFe transformation exciting and your heart beats for technology in use for people, then you are in the right place with us. We look forward to meeting you.",
+      "de": "Mit deinem SAP Knowhow gestaltest du die digitale Zukunft der Supply Chain am USZ aktiv mit. Durch die Optimierung und Weiterentwicklung unserer SAP-Lösungen schaffst du die Grundlage für effiziente Prozesse in einem hochrelevanten Umfeld, in dem jede Verbesserung einen spürbaren Unterschied macht.<br/>Das Universitätsspital Zürich ist eines der grössten Spitäler in der Schweiz. Unsere über 8'600 Mitarbeitenden und rund 700 Auszubildende setzen sich täglich für das Wohl unserer Patient:innen ein.\n\nAufgaben:\n• Massgebende Mitarbeit bei der Weiterentwicklung der Supply Chain Management Prozesse (Beschaffung, Intralogistik, Distribution)\n\n• Unterstützung im SD-Umfeld und bei der Weiterentwicklung von Schnittstellen\n\n• Verantwortlich für die technische Anforderungsspezifikation, die Lösungskonzeption und -dokumentation sowie Unterstützung bei der fachlichen Anforderungsspezifikation in Zusammenarbeit mit dem Fachbereich\n\n• Ausarbeitung von Applikations-Roadmaps in Abstimmung mit dem Fachbereich\n\n• Koordination zwischen Anwendern, internen Informatikstellen und externen Softwaredienstleistern\n\n• IT-Projektleitung oder -Teilprojektleitung\n\nAnforderungen:\n• Fundierte Erfahrung in der Planung, Steuerung und Umsetzung SAP MM, WM (Stockroom-Management inklusive Handling Units)\n\n• Mehrjährige Berufserfahrung im Bereich Supply Chain Management\n\n• Customizing Kenntnisse in SAP MM/WM erforderlich und in SAP SD von Vorteil\n\n• Kenntnisse in EWM, SD und PP sowie Debugging Kenntnisse von Vorteil\n\n• Erfahrung mit Schnittstellen zu SAP ERP Subsysteme wie Lagerverwaltungssysteme und Robotik Systeme von Vorteil\n\n• Praktische Erfahrung im Anforderungsmanagement (Requirements Engineering) von Vorteil\n\n• Teamfähige, dienstleistungsorientierte und kommunikative Persönlichkeit mit sehr guten Deutschkenntnissen in Wort und Schrift\n\nWir bieten:\nAls eines der 10 besten Spitäler weltweit entwickeln wir unsere Prozesse laufend weiter. Dabei setzen wir auf innovative und nachhaltige Lösungen und engagieren uns in der Ausbildung von Fachkräften. Profitiere von attraktiven Anstellungsbedingungen, flexiblen Arbeitszeiten und der Möglichkeit, bis zu 50% deiner Tätigkeit aus dem Homeoffice zu arbeiten.\n\nWenn du die Kombination von Technik und Gesundheitswesen in einem von der SAFe-Transformation geprägten Umfeld spannend findest und dein Herz für Technik im Einsatz für Menschen schlägt, dann bist du bei uns an der richtigen Stelle. Wir freuen uns darauf, dich kennenzulernen.",
+      "fr": "Avec votre savoir-faire SAP, vous façonnez activement l'avenir numérique de la chaîne d'approvisionnement à USZ. En optimisant et en développant nos solutions SAP, vous créez la base de processus efficaces dans un environnement très pertinent où chaque amélioration fait une différence notable. >L'hôpital universitaire de Zurich est l'un des plus grands hôpitaux de Suisse. Nos plus de 8 600 employés et quelque 700 stagiaires travaillent chaque jour pour le bien-être de nos patients.\n\nTâches :\n• Participation décisive au développement des processus de gestion de la chaîne d'approvisionnement (approvisionnement, intralogistique, distribution)\n\n• Soutien dans l ' environnement du développement durable et poursuite du développement des interfaces\n\n• Responsable de la spécification des exigences techniques, de la conception des solutions et de la documentation ainsi que de l'appui à la spécification des exigences techniques en coopération avec le département\n\n• Élaboration de feuilles de route d'application en coordination avec le ministère\n\n• Coordination entre les utilisateurs, les centres informatiques internes et les fournisseurs externes de services logiciels\n\n• Gestion de projet informatique ou gestion partielle de projet\n\nExigences\n• Expérience approfondie de la planification, du contrôle et de la mise en œuvre de SAP MM, WM (gestion des salles de stockage, y compris les unités de manutention)\n\n• Plusieurs années d'expérience professionnelle en gestion de la chaîne d'approvisionnement\n\n• Personnaliser les connaissances requises dans SAP MM/WM et avantageux dans SAP SD\n\n• Connaissance du GTE, du DD et du PP ainsi que des connaissances de débogage\n\n• Expérience des interfaces avec les sous-systèmes SAP ERP tels que les systèmes de gestion des entrepôts et les systèmes robotiques\n\n• Expérience pratique en gestion des besoins (exigences techniques) est un avantage\n\n• Personnalité d'équipe, orientée vers le service et communicative avec une très bonne connaissance de l'allemand en paroles et en écriture\n\nNous offrons:\nEn tant qu'un des 10 meilleurs hôpitaux du monde, nous développons continuellement nos processus. Nous nous concentrons sur des solutions innovantes et durables et sommes engagés dans la formation de spécialistes. Bénéficiez de conditions d'emploi attrayantes, d'horaires flexibles et de la possibilité de travailler jusqu'à 50 % de votre travail à domicile.\n\nSi vous trouvez la combinaison de la technologie et des soins de santé dans un environnement caractérisé par la transformation Safe passionnante et vos battements cardiaques pour la technologie en usage pour les gens, alors vous êtes au bon endroit avec nous. Nous sommes impatients de vous rencontrer."
+    },
+    "slugByLocale": {
+      "it": "senior-applikationsmanager-in-sap-mm-wm-e-sd-im-s-4hana-umfeld-80-100-universitatsspital-zurich-usz-stettbach",
+      "en": "senior-application-manager-in-sap-mm-wm-and-sd-in-the-s-4hana-environment-80-100-universitatsspital-zurich-usz-stettbach",
+      "de": "senior-applikationsmanager-in-sap-mm-wm-und-sd-im-s-4hana-umfeld-80-100-usz-ch",
+      "fr": "gestionnaire-d-applications-seniors-dans-sap-mm-wm-et-sd-dans-l-environnement-s-4hana-80-100-universitatsspital-zurich"
+    },
+    "sector": "Sanità / Ospedali",
+    "expiredAt": "2026-08-29T23:28:10.629Z",
+    "previousSlugs": [
+      "senior-applikationsmanager-in-sap-mm-wm-und-sd-im-s-4hana-umfeld-80-100-usz-ch"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "senior-applikationsmanager-in-sap-mm-wm-und-sd-im-s-4hana-umfeld-80-100-usz-ch"
+      ],
+      "en": [
+        "senior-applikationsmanager-in-sap-mm-wm-und-sd-im-s-4hana-umfeld-80-100-usz-ch"
+      ],
+      "fr": [
+        "senior-applikationsmanager-in-sap-mm-wm-und-sd-im-s-4hana-umfeld-80-100-usz-ch"
+      ]
+    },
+    "postalCode": "8091",
+    "salaryMin": 101500,
+    "salaryMax": 154000,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
