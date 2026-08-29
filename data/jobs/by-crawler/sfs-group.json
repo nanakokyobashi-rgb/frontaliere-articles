@@ -1,6 +1,6 @@
 {
   "crawlerKey": "sfs-group",
-  "assembledAt": "2026-08-29T03:33:02.704Z",
+  "assembledAt": "2026-08-29T14:40:14.751Z",
   "jobs": [
     {
       "id": "sfs-group-d28e368a8b5c",
@@ -33,7 +33,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/techniker-in-wärmebehandlung-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:59.395Z",
+      "crawledAt": "2026-08-29T14:40:11.268Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -112,7 +112,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/spécialiste-vente-interne-pour-(epi)-en-équipement-d'atelier-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:32:59.279Z",
+      "crawledAt": "2026-08-29T14:40:11.143Z",
       "addressLocality": "Payerne",
       "addressRegion": "VD",
       "postalCode": "1000",
@@ -190,7 +190,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/polymechaniker-in-–-erosion-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:59.164Z",
+      "crawledAt": "2026-08-29T14:40:11.015Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -270,7 +270,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/pim-data-governance-manager-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:59.044Z",
+      "crawledAt": "2026-08-29T14:40:10.889Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -336,7 +336,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/messtechniker-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.928Z",
+      "crawledAt": "2026-08-29T14:40:10.763Z",
       "addressLocality": "Hallau",
       "addressRegion": "SH",
       "postalCode": "8200",
@@ -414,7 +414,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/logistiker-in-kommissionierung-(2-schicht)-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.808Z",
+      "crawledAt": "2026-08-29T14:40:10.636Z",
       "addressLocality": "Rotkreuz",
       "addressRegion": "SG",
       "postalCode": "9000",
@@ -495,7 +495,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/kunststofftechnologe-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.691Z",
+      "crawledAt": "2026-08-29T14:40:10.511Z",
       "addressLocality": "Hallau",
       "addressRegion": "SH",
       "postalCode": "8200",
@@ -575,7 +575,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/kaltmassivumformer-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.574Z",
+      "crawledAt": "2026-08-29T14:40:10.382Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -657,7 +657,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/gebietsverkaufsleiter-in-–-industrie-und-metall-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.458Z",
+      "crawledAt": "2026-08-29T14:40:10.251Z",
       "addressLocality": "Rotkreuz",
       "addressRegion": "SG",
       "postalCode": "9000",
@@ -736,7 +736,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/filialleiter-in-handwerkstadt-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.226Z",
+      "crawledAt": "2026-08-29T14:40:09.988Z",
       "addressLocality": "Hinwil",
       "addressRegion": "ZH",
       "postalCode": "9435",
@@ -815,7 +815,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/data-contentmanager-in-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:57.991Z",
+      "crawledAt": "2026-08-29T14:40:09.715Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -897,7 +897,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/conseiller-de-vente-cité-de-l'artisan-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:32:57.760Z",
+      "crawledAt": "2026-08-29T14:40:09.462Z",
       "addressLocality": "Sion",
       "addressRegion": "VS",
       "postalCode": "9435",
@@ -975,7 +975,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/automatiker-in-schichtmodell-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:57.644Z",
+      "crawledAt": "2026-08-29T14:40:09.336Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1055,7 +1055,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/automatiker-in-instandhaltung-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:57.528Z",
+      "crawledAt": "2026-08-29T14:40:09.205Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1139,7 +1139,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/anwendungstechniker-in-rainscreen-vhf-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:57.388Z",
+      "crawledAt": "2026-08-29T14:40:09.038Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1219,7 +1219,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/anwendungstechniker-in-hauraton-entwässerungssysteme-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:57.205Z",
+      "crawledAt": "2026-08-29T14:40:08.791Z",
       "addressLocality": "Buchs ZH",
       "addressRegion": "ZH",
       "postalCode": "9435",
@@ -1510,7 +1510,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/filialleiter-in-handwerkstadt-(m-f-d)-2.html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.341Z",
+      "crawledAt": "2026-08-29T14:40:10.114Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "postalCode": "9435",
@@ -1544,7 +1544,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:32:58.341Z"
+      "firstSeenAt": "2026-08-29T14:40:10.114Z"
     },
     {
       "id": "sfs-group-bd0a7c285f64",
@@ -1577,7 +1577,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/fachperson-debitorenbuchhaltung-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:32:58.107Z",
+      "crawledAt": "2026-08-29T14:40:09.852Z",
       "addressLocality": "Heerbrugg",
       "addressRegion": "SG",
       "streetAddress": "Rosenbergsaustrasse 8",
@@ -1612,7 +1612,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:32:58.107Z"
+      "firstSeenAt": "2026-08-29T14:40:09.852Z"
     },
     {
       "id": "sfs-group-1c777d348302",
@@ -1645,7 +1645,7 @@
       "url": "https://join.sfs.com/ch/en/vacancies/conseiller-conseillère-de-vente-au-service-externe-(m-f-d).html",
       "source": "SFS Group Dedicated Parser (Umantis/AEM)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:32:57.877Z",
+      "crawledAt": "2026-08-29T14:40:09.589Z",
       "addressLocality": "Plan-les-Ouates",
       "addressRegion": "GE",
       "postalCode": "9435",
@@ -1679,7 +1679,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:32:57.877Z"
+      "firstSeenAt": "2026-08-29T14:40:09.589Z"
     }
   ]
 }
