@@ -1,6 +1,6 @@
 {
   "crawlerKey": "postfinance",
-  "assembledAt": "2026-08-29T14:32:22.352Z",
+  "assembledAt": "2026-08-29T23:16:40.256Z",
   "jobs": [
     {
       "url": "https://jobs.postfinance.ch/job/Fachverantwortlicher-Data-Leakage-Prevention/74398-de_DE",
@@ -1513,7 +1513,8 @@
       },
       "addressLocality": "Niederurnen",
       "addressRegion": "GL",
-      "postedDate": "28.07.26"
+      "postedDate": "28.07.26",
+      "crawlerMissStreak": 1
     }
   ]
 }
