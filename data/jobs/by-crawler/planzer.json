@@ -1,6 +1,6 @@
 {
   "crawlerKey": "planzer",
-  "assembledAt": "2026-08-29T14:25:02.632Z",
+  "assembledAt": "2026-08-29T23:08:29.602Z",
   "jobs": [
     {
       "id": "planzer-72cb59d3ac49",
@@ -75,7 +75,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "planzer-225778d65bea",
@@ -109,7 +110,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057266",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:57.430Z",
+      "crawledAt": "2026-08-29T23:08:24.089Z",
       "addressLocality": "Kallnach",
       "addressRegion": "BE",
       "streetAddress": "Brühlgasse 9",
@@ -190,7 +191,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060240",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:56.732Z",
+      "crawledAt": "2026-08-29T23:08:23.479Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Murtenstrasse 85",
@@ -255,7 +256,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058103",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:56.125Z",
+      "crawledAt": "2026-08-29T23:08:22.846Z",
       "addressLocality": "Villmergen",
       "addressRegion": "AG",
       "streetAddress": "Allmendstrasse 14",
@@ -330,7 +331,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060246",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:55.514Z",
+      "crawledAt": "2026-08-29T23:08:22.195Z",
       "addressLocality": "Dällikon",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -461,7 +462,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059605",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:54.860Z",
+      "crawledAt": "2026-08-29T23:08:21.549Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "streetAddress": "Klosterstrasse 38",
@@ -526,7 +527,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058655",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:54.248Z",
+      "crawledAt": "2026-08-29T23:08:20.928Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Piccardstrasse 13",
@@ -614,7 +615,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059479",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:53.638Z",
+      "crawledAt": "2026-08-29T23:08:20.322Z",
       "addressLocality": "Seewen",
       "addressRegion": "SO",
       "streetAddress": "Seewernstrasse 203",
@@ -689,7 +690,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058819",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:53.023Z",
+      "crawledAt": "2026-08-29T23:08:19.699Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -772,7 +773,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4061919",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:24:52.289Z",
+      "crawledAt": "2026-08-29T23:08:19.089Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -805,7 +806,74 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:24:52.289Z"
+      "firstSeenAt": "2026-08-29T23:08:19.089Z"
+    },
+    {
+      "id": "planzer-d55ae7a0dfe4",
+      "slug": "ausbildner-lkw-nutzfahrzeugtechnik-m-w-d-planzer-dallikon",
+      "slugByLocale": {
+        "de": "ausbildner-lkw-nutzfahrzeugtechnik-m-w-d-planzer-dallikon",
+        "it": "ausbildner-lkw-nutzfahrzeugtechnik-m-w-d-planzer-dallikon",
+        "en": "ausbildner-lkw-nutzfahrzeugtechnik-m-w-d-planzer-dallikon",
+        "fr": "ausbildner-lkw-nutzfahrzeugtechnik-m-w-d-planzer-dallikon"
+      },
+      "company": "Planzer",
+      "companyKey": "planzer",
+      "companyDomain": "planzer.ch",
+      "title": "Ausbildner LKW-/Nutzfahrzeugtechnik (m/w/d)",
+      "titleByLocale": {
+        "de": "Ausbildner LKW-/Nutzfahrzeugtechnik (m/w/d)",
+        "it": "Ausbildner LKW-/Nutzfahrzeugtechnik (m/w/d)",
+        "en": "Ausbildner LKW-/Nutzfahrzeugtechnik (m/w/d)",
+        "fr": "Ausbildner LKW-/Nutzfahrzeugtechnik (m/w/d)"
+      },
+      "description": "Bei uns sind echte Profis gefragt – nicht nur auf der Strasse, sondern auch in der Logistik und unseren eigenen Werkstätten. Unsere topmoderne Flotte mit rund 1'800 Fahrzeugen verdient regelmässige Wartung und präzise Reparaturen. Packst du mit an?\n\nAufgaben:\n• Du begleitest und förderst Lernende in ihrer fachlichen und persönlichen Entwicklung\n• Die Vermittlung von praxisnahem Fachwissen in Diagnose, Wartung und Reparatur von Nutzfahrzeugen gehört zu deinen Aufgaben\n• Du planst und koordinierst die Ausbildungsinhalte und stellst eine hochwertige Ausbildung sicher\n• Bei der Vorbereitung auf das Qualifikationsverfahren unterstützt du die Lernenden und förderst ihre Selbstständigkeit\n• Als fachliches sowie persönliches Vorbild arbeitest du aktiv im Werkstattbetrieb mit\n\nProfil:\n• Eine abgeschlossene Berufsausbildung als Automobil-Mechatroniker EFZ Fachrichtung Nutzfahrzeuge, Lastwagen-, Land- oder Baumaschinenmechaniker bildet deine Basis\n• Idealerweise bringst du bereits Erfahrung als Berufsbildner mit oder bist bereit, die entsprechende Weiterbildung zu absolvieren\n• Du hast Freude an der Ausbildung und Förderung junger Berufsleute\n• Empathie, Verantwortungsbewusstsein und Lösungsorientierung zeichnen dich aus\n• Eine selbständige und strukturierte Arbeitsweise ist für dich selbstverständlich – Qualität und Sicherheit stehen bei dir an erster Stelle\n\nBenefits:\n• Bei uns startest du mit 5 Wochen Ferien und profitierst ab dem 5. Dienstjahr sogar von 6 Wochen!\n• Du wirst Teil unserer familiären Unternehmenskultur - Respekt, Vertrauen und Anstand sind uns wichtig\n• Wir gehen mit der Zeit - dir stehen moderne und sichere Arbeitsgeräte zur Verfügung\n• Auf die Parkplätze fertig los - bei uns kannst du gratis parkieren\n\nFür uns als Unternehmen stehen ein unterstützendes Miteinander und eine positive Arbeitsatmosphäre im Mittelpunkt. Deshalb schätzen wir Eigenschaften wie Teamgeist, Hilfsbereitschaft und Motivation besonders. Zudem legen wir grossen Wert auf Pünktlichkeit, Loyalität und Genauigkeit, da diese Werte die Grundlage für eine zuverlässige und kundenorientierte Arbeitsweise bilden.",
+      "descriptionByLocale": {
+        "de": "Bei uns sind echte Profis gefragt – nicht nur auf der Strasse, sondern auch in der Logistik und unseren eigenen Werkstätten. Unsere topmoderne Flotte mit rund 1'800 Fahrzeugen verdient regelmässige Wartung und präzise Reparaturen. Packst du mit an?\n\nAufgaben:\n• Du begleitest und förderst Lernende in ihrer fachlichen und persönlichen Entwicklung\n• Die Vermittlung von praxisnahem Fachwissen in Diagnose, Wartung und Reparatur von Nutzfahrzeugen gehört zu deinen Aufgaben\n• Du planst und koordinierst die Ausbildungsinhalte und stellst eine hochwertige Ausbildung sicher\n• Bei der Vorbereitung auf das Qualifikationsverfahren unterstützt du die Lernenden und förderst ihre Selbstständigkeit\n• Als fachliches sowie persönliches Vorbild arbeitest du aktiv im Werkstattbetrieb mit\n\nProfil:\n• Eine abgeschlossene Berufsausbildung als Automobil-Mechatroniker EFZ Fachrichtung Nutzfahrzeuge, Lastwagen-, Land- oder Baumaschinenmechaniker bildet deine Basis\n• Idealerweise bringst du bereits Erfahrung als Berufsbildner mit oder bist bereit, die entsprechende Weiterbildung zu absolvieren\n• Du hast Freude an der Ausbildung und Förderung junger Berufsleute\n• Empathie, Verantwortungsbewusstsein und Lösungsorientierung zeichnen dich aus\n• Eine selbständige und strukturierte Arbeitsweise ist für dich selbstverständlich – Qualität und Sicherheit stehen bei dir an erster Stelle\n\nBenefits:\n• Bei uns startest du mit 5 Wochen Ferien und profitierst ab dem 5. Dienstjahr sogar von 6 Wochen!\n• Du wirst Teil unserer familiären Unternehmenskultur - Respekt, Vertrauen und Anstand sind uns wichtig\n• Wir gehen mit der Zeit - dir stehen moderne und sichere Arbeitsgeräte zur Verfügung\n• Auf die Parkplätze fertig los - bei uns kannst du gratis parkieren\n\nFür uns als Unternehmen stehen ein unterstützendes Miteinander und eine positive Arbeitsatmosphäre im Mittelpunkt. Deshalb schätzen wir Eigenschaften wie Teamgeist, Hilfsbereitschaft und Motivation besonders. Zudem legen wir grossen Wert auf Pünktlichkeit, Loyalität und Genauigkeit, da diese Werte die Grundlage für eine zuverlässige und kundenorientierte Arbeitsweise bilden.",
+        "it": "Bei uns sind echte Profis gefragt – nicht nur auf der Strasse, sondern auch in der Logistik und unseren eigenen Werkstätten. Unsere topmoderne Flotte mit rund 1'800 Fahrzeugen verdient regelmässige Wartung und präzise Reparaturen. Packst du mit an?\n\nAufgaben:\n• Du begleitest und förderst Lernende in ihrer fachlichen und persönlichen Entwicklung\n• Die Vermittlung von praxisnahem Fachwissen in Diagnose, Wartung und Reparatur von Nutzfahrzeugen gehört zu deinen Aufgaben\n• Du planst und koordinierst die Ausbildungsinhalte und stellst eine hochwertige Ausbildung sicher\n• Bei der Vorbereitung auf das Qualifikationsverfahren unterstützt du die Lernenden und förderst ihre Selbstständigkeit\n• Als fachliches sowie persönliches Vorbild arbeitest du aktiv im Werkstattbetrieb mit\n\nProfil:\n• Eine abgeschlossene Berufsausbildung als Automobil-Mechatroniker EFZ Fachrichtung Nutzfahrzeuge, Lastwagen-, Land- oder Baumaschinenmechaniker bildet deine Basis\n• Idealerweise bringst du bereits Erfahrung als Berufsbildner mit oder bist bereit, die entsprechende Weiterbildung zu absolvieren\n• Du hast Freude an der Ausbildung und Förderung junger Berufsleute\n• Empathie, Verantwortungsbewusstsein und Lösungsorientierung zeichnen dich aus\n• Eine selbständige und strukturierte Arbeitsweise ist für dich selbstverständlich – Qualität und Sicherheit stehen bei dir an erster Stelle\n\nBenefits:\n• Bei uns startest du mit 5 Wochen Ferien und profitierst ab dem 5. Dienstjahr sogar von 6 Wochen!\n• Du wirst Teil unserer familiären Unternehmenskultur - Respekt, Vertrauen und Anstand sind uns wichtig\n• Wir gehen mit der Zeit - dir stehen moderne und sichere Arbeitsgeräte zur Verfügung\n• Auf die Parkplätze fertig los - bei uns kannst du gratis parkieren\n\nFür uns als Unternehmen stehen ein unterstützendes Miteinander und eine positive Arbeitsatmosphäre im Mittelpunkt. Deshalb schätzen wir Eigenschaften wie Teamgeist, Hilfsbereitschaft und Motivation besonders. Zudem legen wir grossen Wert auf Pünktlichkeit, Loyalität und Genauigkeit, da diese Werte die Grundlage für eine zuverlässige und kundenorientierte Arbeitsweise bilden.",
+        "en": "Bei uns sind echte Profis gefragt – nicht nur auf der Strasse, sondern auch in der Logistik und unseren eigenen Werkstätten. Unsere topmoderne Flotte mit rund 1'800 Fahrzeugen verdient regelmässige Wartung und präzise Reparaturen. Packst du mit an?\n\nAufgaben:\n• Du begleitest und förderst Lernende in ihrer fachlichen und persönlichen Entwicklung\n• Die Vermittlung von praxisnahem Fachwissen in Diagnose, Wartung und Reparatur von Nutzfahrzeugen gehört zu deinen Aufgaben\n• Du planst und koordinierst die Ausbildungsinhalte und stellst eine hochwertige Ausbildung sicher\n• Bei der Vorbereitung auf das Qualifikationsverfahren unterstützt du die Lernenden und förderst ihre Selbstständigkeit\n• Als fachliches sowie persönliches Vorbild arbeitest du aktiv im Werkstattbetrieb mit\n\nProfil:\n• Eine abgeschlossene Berufsausbildung als Automobil-Mechatroniker EFZ Fachrichtung Nutzfahrzeuge, Lastwagen-, Land- oder Baumaschinenmechaniker bildet deine Basis\n• Idealerweise bringst du bereits Erfahrung als Berufsbildner mit oder bist bereit, die entsprechende Weiterbildung zu absolvieren\n• Du hast Freude an der Ausbildung und Förderung junger Berufsleute\n• Empathie, Verantwortungsbewusstsein und Lösungsorientierung zeichnen dich aus\n• Eine selbständige und strukturierte Arbeitsweise ist für dich selbstverständlich – Qualität und Sicherheit stehen bei dir an erster Stelle\n\nBenefits:\n• Bei uns startest du mit 5 Wochen Ferien und profitierst ab dem 5. Dienstjahr sogar von 6 Wochen!\n• Du wirst Teil unserer familiären Unternehmenskultur - Respekt, Vertrauen und Anstand sind uns wichtig\n• Wir gehen mit der Zeit - dir stehen moderne und sichere Arbeitsgeräte zur Verfügung\n• Auf die Parkplätze fertig los - bei uns kannst du gratis parkieren\n\nFür uns als Unternehmen stehen ein unterstützendes Miteinander und eine positive Arbeitsatmosphäre im Mittelpunkt. Deshalb schätzen wir Eigenschaften wie Teamgeist, Hilfsbereitschaft und Motivation besonders. Zudem legen wir grossen Wert auf Pünktlichkeit, Loyalität und Genauigkeit, da diese Werte die Grundlage für eine zuverlässige und kundenorientierte Arbeitsweise bilden.",
+        "fr": "Bei uns sind echte Profis gefragt – nicht nur auf der Strasse, sondern auch in der Logistik und unseren eigenen Werkstätten. Unsere topmoderne Flotte mit rund 1'800 Fahrzeugen verdient regelmässige Wartung und präzise Reparaturen. Packst du mit an?\n\nAufgaben:\n• Du begleitest und förderst Lernende in ihrer fachlichen und persönlichen Entwicklung\n• Die Vermittlung von praxisnahem Fachwissen in Diagnose, Wartung und Reparatur von Nutzfahrzeugen gehört zu deinen Aufgaben\n• Du planst und koordinierst die Ausbildungsinhalte und stellst eine hochwertige Ausbildung sicher\n• Bei der Vorbereitung auf das Qualifikationsverfahren unterstützt du die Lernenden und förderst ihre Selbstständigkeit\n• Als fachliches sowie persönliches Vorbild arbeitest du aktiv im Werkstattbetrieb mit\n\nProfil:\n• Eine abgeschlossene Berufsausbildung als Automobil-Mechatroniker EFZ Fachrichtung Nutzfahrzeuge, Lastwagen-, Land- oder Baumaschinenmechaniker bildet deine Basis\n• Idealerweise bringst du bereits Erfahrung als Berufsbildner mit oder bist bereit, die entsprechende Weiterbildung zu absolvieren\n• Du hast Freude an der Ausbildung und Förderung junger Berufsleute\n• Empathie, Verantwortungsbewusstsein und Lösungsorientierung zeichnen dich aus\n• Eine selbständige und strukturierte Arbeitsweise ist für dich selbstverständlich – Qualität und Sicherheit stehen bei dir an erster Stelle\n\nBenefits:\n• Bei uns startest du mit 5 Wochen Ferien und profitierst ab dem 5. Dienstjahr sogar von 6 Wochen!\n• Du wirst Teil unserer familiären Unternehmenskultur - Respekt, Vertrauen und Anstand sind uns wichtig\n• Wir gehen mit der Zeit - dir stehen moderne und sichere Arbeitsgeräte zur Verfügung\n• Auf die Parkplätze fertig los - bei uns kannst du gratis parkieren\n\nFür uns als Unternehmen stehen ein unterstützendes Miteinander und eine positive Arbeitsatmosphäre im Mittelpunkt. Deshalb schätzen wir Eigenschaften wie Teamgeist, Hilfsbereitschaft und Motivation besonders. Zudem legen wir grossen Wert auf Pünktlichkeit, Loyalität und Genauigkeit, da diese Werte die Grundlage für eine zuverlässige und kundenorientierte Arbeitsweise bilden."
+      },
+      "needsRetranslation": true,
+      "location": "Dällikon",
+      "canton": "ZH",
+      "url": "https://live.solique.ch/planzer/job/details/4059599",
+      "source": "Planzer Dedicated Parser (Solique)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:08:18.364Z",
+      "addressLocality": "Dällikon",
+      "addressRegion": "ZH",
+      "streetAddress": "Industriestrasse 10",
+      "postalCode": "8108",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Trasporti / Autisti",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Trasporti / Logistica",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://live.solique.ch/planzer/job/details/4059599",
+      "externalId": "4059599",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "salaryMin": 73500,
+      "salaryMax": 111500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 73500,
+          "maxValue": 111500,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T23:08:18.364Z"
     }
   ]
 }
