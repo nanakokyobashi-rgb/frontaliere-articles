@@ -1,17 +1,18 @@
 {
   "key": "supsi-dti",
   "label": "SUPSI",
-  "generatedAt": "2026-08-29T03:54:53.374Z",
+  "generatedAt": "2026-08-29T14:47:46.328Z",
   "total": 8,
   "newCount": 8,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 83442,
-  "avgDurationMs": 83442,
+  "durationMs": 77749,
+  "avgDurationMs": 77749,
   "durationHistory": [
     80638,
-    83442
+    83442,
+    77749
   ],
   "newJobs": [
     {
@@ -35,7 +36,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-08-24T10:32:03.546Z",
       "country": "CH",
       "sourceLang": "it",
@@ -45,11 +46,11 @@
       "addressRegion": "TI",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 85,
+      "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 19
       }
     },
@@ -74,7 +75,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-08-24T10:32:03.546Z",
       "country": "CH",
       "sourceLang": "it",
@@ -84,11 +85,11 @@
       "addressRegion": "TI",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 85,
+      "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 19
       }
     },
@@ -113,7 +114,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-08-10T22:05:09.095Z",
       "country": "CH",
       "sourceLang": "it",
@@ -123,11 +124,11 @@
       "addressRegion": "TI",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 85,
+      "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 19
       }
     },
@@ -152,7 +153,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-08-05T11:37:27.494Z",
       "country": "CH",
       "sourceLang": "it",
@@ -165,11 +166,11 @@
       "addressCountry": "CH",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 91,
+      "_qualityScore": 95,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 25
       }
     },
@@ -194,7 +195,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-06-11T13:41:02.453Z",
       "country": "CH",
       "sourceLang": "it",
@@ -207,11 +208,11 @@
       "addressCountry": "CH",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 88,
+      "_qualityScore": 92,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 22
       }
     },
@@ -236,7 +237,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-05-30T00:49:50.919Z",
       "country": "CH",
       "sourceLang": "it",
@@ -249,11 +250,11 @@
       "addressCountry": "CH",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 88,
+      "_qualityScore": 92,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 22
       }
     },
@@ -278,7 +279,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-05-30T00:49:50.919Z",
       "country": "CH",
       "sourceLang": "it",
@@ -291,11 +292,11 @@
       "addressCountry": "CH",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 88,
+      "_qualityScore": 92,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 22
       }
     },
@@ -320,7 +321,7 @@
       },
       "companyKey": "supsi-dti",
       "companyDomain": "supsi.ch",
-      "crawledAt": "2026-08-29T03:54:31.141Z",
+      "crawledAt": "2026-08-29T14:47:25.823Z",
       "firstSeenAt": "2026-05-18T13:18:46.785Z",
       "country": "CH",
       "sourceLang": "it",
@@ -333,11 +334,11 @@
       "addressCountry": "CH",
       "employmentType": "FULL_TIME",
       "needsRetranslation": true,
-      "_qualityScore": 88,
+      "_qualityScore": 92,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
-        "translation": 16,
+        "translation": 20,
         "completeness": 22
       }
     }
