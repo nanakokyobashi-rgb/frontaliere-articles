@@ -1,17 +1,18 @@
 {
   "key": "banca-sempione",
   "label": "Banca del Sempione",
-  "generatedAt": "2026-08-29T03:39:45.789Z",
+  "generatedAt": "2026-08-29T23:21:37.892Z",
   "total": 5,
   "newCount": 0,
   "updatedCount": 5,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4238,
-  "avgDurationMs": 4238,
+  "durationMs": 4288,
+  "avgDurationMs": 4288,
   "durationHistory": [
     4638,
-    4238
+    4238,
+    4288
   ],
   "newJobs": [],
   "updatedJobs": [
