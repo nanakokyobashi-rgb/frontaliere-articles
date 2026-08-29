@@ -1,7 +1,7 @@
 {
   "key": "omega",
   "label": "OMEGA SA",
-  "generatedAt": "2026-08-29T03:57:27.050Z",
+  "generatedAt": "2026-08-29T15:06:16.451Z",
   "total": 0,
   "discovered": null,
   "written": 0,
@@ -9,8 +9,11 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
+  "durationMs": 541453,
+  "avgDurationMs": 541453,
   "durationHistory": [
-    541250
+    541250,
+    541453
   ],
   "newJobs": [],
   "updatedJobs": [],
