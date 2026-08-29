@@ -1,16 +1,17 @@
 {
   "key": "hitachi-energy",
   "label": "Hitachi Energy",
-  "generatedAt": "2026-08-28T20:59:21.243Z",
+  "generatedAt": "2026-08-29T03:17:30.344Z",
   "total": 70,
   "newCount": 2,
   "updatedCount": 67,
   "removedCount": 1,
   "unchangedCount": 1,
-  "durationMs": 270746,
-  "avgDurationMs": 270746,
+  "durationMs": 276160,
+  "avgDurationMs": 276160,
   "durationHistory": [
-    270746
+    270746,
+    276160
   ],
   "newJobs": [
     {
