@@ -1,7 +1,7 @@
 {
   "key": "suchthilfe-region-basel",
   "label": "Suchthilfe Region Basel",
-  "generatedAt": "2026-08-28T21:02:57.878Z",
+  "generatedAt": "2026-08-29T03:22:22.870Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,10 +9,11 @@
   "updatedCount": 3,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5607,
-  "avgDurationMs": 5607,
+  "durationMs": 6268,
+  "avgDurationMs": 6268,
   "durationHistory": [
-    5607
+    5607,
+    6268
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -29,7 +30,7 @@
       "url": "https://www.suchthilfe.ch/wp-content/uploads/2026/07/Coach_2026.pdf",
       "source": "Suchthilfe Region Basel Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:55.174Z",
+      "crawledAt": "2026-08-29T03:22:19.731Z",
       "addressLocality": "Reinach",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -66,7 +67,7 @@
       "url": "https://www.suchthilfe.ch/wp-content/uploads/2026/02/Pflege-Fachp-Nacht_2026.pdf",
       "source": "Suchthilfe Region Basel Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:53.876Z",
+      "crawledAt": "2026-08-29T03:22:18.254Z",
       "addressLocality": "Reinach",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -103,7 +104,7 @@
       "url": "https://www.suchthilfe.ch/wp-content/uploads/2020/09/Gastfamilien_2020.pdf",
       "source": "Suchthilfe Region Basel Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:02:54.499Z",
+      "crawledAt": "2026-08-29T03:22:19.021Z",
       "addressLocality": "Basel",
       "addressRegion": "BS",
       "addressCountry": "CH",
