@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ikea",
-  "assembledAt": "2026-08-28T20:54:38.744Z",
+  "assembledAt": "2026-08-29T03:16:27.235Z",
   "jobs": [
     {
       "id": "ikea-8b34b0550dfe",
@@ -33,7 +33,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/apprentissage-en-logistique-01-08-2027-31-07-2030/24107/98667710768",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.058Z",
+      "crawledAt": "2026-08-29T03:16:23.563Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -109,7 +109,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/apprentissage-dans-la-vente-commerce-de-detail-01-08-2027-31-07-2030/24107/98667711136",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.058Z",
+      "crawledAt": "2026-08-29T03:16:23.562Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -182,7 +182,7 @@
       "url": "https://jobs.ikea.com/en/job/riddes/apprenti-e-polydesigner-3d-cfc-01-08-2027-31-07-2031/24107/98667711216",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.057Z",
+      "crawledAt": "2026-08-29T03:16:23.561Z",
       "addressLocality": "Riddes",
       "postalCode": "",
       "addressRegion": "VS",
@@ -225,82 +225,6 @@
       }
     },
     {
-      "id": "ikea-5b129c096098",
-      "slug": "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon",
-      "slugByLocale": {
-        "it": "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon",
-        "en": "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-dietlikon",
-        "de": "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von",
-        "fr": "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-se-concentrer-sur-la-conception-d-experiences-d-achat"
-      },
-      "company": "IKEA",
-      "companyKey": "ikea",
-      "companyDomain": "ikea.ch",
-      "title": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
-      "titleByLocale": {
-        "it": "Apprendistato Impiegato/a del commercio al dettaglio (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
-        "en": "Apprenticeship Detailhandelfachfrau/-mann (01.08.2027-31.07.2030, focus on designing shopping experiences)",
-        "de": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
-        "fr": "Apprenticeship Detailhandelfachfrau/-mann (01.08.2027-31.07.2030, se concentrer sur la conception d'expériences d'achat)"
-      },
-      "description": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen) — IKEA",
-      "descriptionByLocale": {
-        "de": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen) — IKEA"
-      },
-      "location": "Dietlikon, Zürich, Switzerland",
-      "canton": "ZH",
-      "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserleb/24107/98637312688",
-      "source": "IKEA Dedicated Parser",
-      "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.055Z",
-      "addressLocality": "Dietlikon",
-      "postalCode": "",
-      "addressRegion": "ZH",
-      "addressCountry": "CH",
-      "country": "CH",
-      "category": "Altro",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "mid",
-      "sector": "Retail / Furniture",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-08-02",
-      "applyUrl": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserleb/24107/98637312688",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "previousSlugs": [
-        "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-pratteln-1",
-        "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-pratteln-1",
-        "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von",
-        "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-pratteln-1",
-          "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von",
-          "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon"
-        ],
-        "en": [
-          "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-pratteln-1"
-        ]
-      },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-25T21:30:23.653Z",
-      "salaryMin": 62000,
-      "salaryMax": 94000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 62000,
-          "maxValue": 94000,
-          "unitText": "YEAR"
-        }
-      }
-    },
-    {
       "id": "ikea-2a01ae57ed31",
       "slug": "apprendistato-polydesigner-in-3d-cfc-01-08-2027-31-07-2031-schwerpunkt-styling-ikea-dietlikon",
       "slugByLocale": {
@@ -331,7 +255,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/lehrstelle-polydesigner-in-3d-efz-01-08-2027-31-07-2031-schwerpunkt-styling/24107/98667712912",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.055Z",
+      "crawledAt": "2026-08-29T03:16:23.559Z",
       "addressLocality": "Dietlikon",
       "postalCode": "",
       "addressRegion": "ZH",
@@ -407,7 +331,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/lehrstelle-logistiker-in-efz-01-08-2027-31-07-2030/24107/98637317184",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T20:54:34.054Z",
+      "crawledAt": "2026-08-29T03:16:23.558Z",
       "addressLocality": "Dietlikon",
       "postalCode": "",
       "addressRegion": "ZH",
@@ -467,7 +391,7 @@
       "url": "https://jobs.ikea.com/en/job/st-gallen/lehrstelle-logistiker-in-efz-fachrichtung-lager/24107/98642340448",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.054Z",
+      "crawledAt": "2026-08-29T03:16:23.558Z",
       "addressLocality": "St. Gallen",
       "postalCode": "",
       "addressRegion": "SG",
@@ -546,7 +470,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/mitarbeiter-in-ikea-bistro-and-schwedenshop-20/24107/96013037360",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:33.997Z",
+      "crawledAt": "2026-08-29T03:16:23.518Z",
       "addressLocality": "Dietlikon",
       "postalCode": "8305",
       "addressRegion": "ZH",
@@ -660,7 +584,7 @@
       "url": "https://jobs.ikea.com/en/job/st-gallen/mitabeiter-in-logistik-50/24107/97768200528",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.053Z",
+      "crawledAt": "2026-08-29T03:16:23.557Z",
       "addressLocality": "St. Gallen",
       "postalCode": "9015",
       "addressRegion": "SG",
@@ -749,7 +673,7 @@
       "url": "https://jobs.ikea.com/en/job/st-gallen/mitarbeiter-in-ikea-bistro-and-schwedenshop-20-50-befristet-bis-31-01-2027/24107/96579587600",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.052Z",
+      "crawledAt": "2026-08-29T03:16:23.557Z",
       "addressLocality": "St. Gallen",
       "postalCode": "9015",
       "addressRegion": "SG",
@@ -828,7 +752,7 @@
       "url": "https://jobs.ikea.com/en/job/lyssach/mitarbeiter-in-verkauf-kuche-und-essplatzabteilung-80-100/24107/95345133584",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.051Z",
+      "crawledAt": "2026-08-29T03:16:23.556Z",
       "addressLocality": "Lyssach",
       "postalCode": "3421",
       "addressRegion": "BE",
@@ -901,7 +825,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/regionale-r-berufsbildungsverantwortliche-r-50/24107/98912524112",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.002Z",
+      "crawledAt": "2026-08-29T03:16:23.523Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -973,7 +897,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-aufbewahrungs-und-beleuchtungsabteilung-40/24107/94289960816",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.052Z",
+      "crawledAt": "2026-08-29T03:16:23.556Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -1058,7 +982,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-dekoration-lampen-and-heimtextilien-40-befristet-bis-ende-januar-2027/24107/99064963888",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.049Z",
+      "crawledAt": "2026-08-29T03:16:23.554Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -1092,7 +1016,6 @@
         ]
       },
       "firstSeenAt": "2026-08-11T21:53:45.042Z",
-      "needsRetranslation": true,
       "salaryMin": 29600,
       "salaryMax": 45400,
       "baseSalary": {
@@ -1104,7 +1027,8 @@
           "maxValue": 45400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-bc42771c16ea",
@@ -1137,7 +1061,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-dekoration-lampen-and-heimtextilien-80/24107/99064963840",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.050Z",
+      "crawledAt": "2026-08-29T03:16:23.555Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -1171,7 +1095,6 @@
         ]
       },
       "firstSeenAt": "2026-08-11T21:53:45.044Z",
-      "needsRetranslation": true,
       "salaryMin": 59200,
       "salaryMax": 90800,
       "baseSalary": {
@@ -1183,7 +1106,8 @@
           "maxValue": 90800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-541fb3518d39",
@@ -1216,7 +1140,7 @@
       "url": "https://jobs.ikea.com/en/job/vernier/unit-people-planning-specialist-80-limited-contract/24107/97518689888",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.049Z",
+      "crawledAt": "2026-08-29T03:16:23.554Z",
       "addressLocality": "Vernier",
       "postalCode": "1214",
       "addressRegion": "GE",
@@ -1289,7 +1213,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-ikea-bistro-and-schwedenshop-80-100/24107/98070020928",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.048Z",
+      "crawledAt": "2026-08-29T03:16:23.553Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -1359,7 +1283,7 @@
       "url": "https://jobs.ikea.com/en/job/riddes/collaborateur-trice-visual-merchandising-and-activity-et-interieur-design-100/24107/99420293328",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.046Z",
+      "crawledAt": "2026-08-29T03:16:23.551Z",
       "addressLocality": "Riddes",
       "postalCode": "",
       "addressRegion": "VS",
@@ -1435,7 +1359,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/construction-project-manager/24107/99393497568",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.047Z",
+      "crawledAt": "2026-08-29T03:16:23.552Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -1515,7 +1439,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-ikea-restaurant-and-kuche-40-60-befristet-bis-31-01-2027/24107/99191308864",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.047Z",
+      "crawledAt": "2026-08-29T03:16:23.552Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -1607,7 +1531,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitabeiter-in-logistik-auffullteam-50-befristet-bis-31-dezember-2026/24107/97866976048",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.045Z",
+      "crawledAt": "2026-08-29T03:16:23.550Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -1678,7 +1602,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/collaborateur-trice-en-design-interior-100/24107/99420341552",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.046Z",
+      "crawledAt": "2026-08-29T03:16:23.551Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -1741,7 +1665,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/senior-resolutions-generalist-80-100/24107/99445725056",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.043Z",
+      "crawledAt": "2026-08-29T03:16:23.549Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -1814,7 +1738,7 @@
       "url": "https://jobs.ikea.com/en/job/riddes/collaborateur-trice-relations-clients-80/24107/92199982528",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.044Z",
+      "crawledAt": "2026-08-29T03:16:23.549Z",
       "addressLocality": "Riddes",
       "postalCode": "1908",
       "addressRegion": "VS",
@@ -1892,7 +1816,7 @@
       "url": "https://jobs.ikea.com/en/job/vernier/collaborateur-trice-service-clientele-60/24107/99477459856",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.042Z",
+      "crawledAt": "2026-08-29T03:16:23.547Z",
       "addressLocality": "Vernier",
       "postalCode": "1214",
       "addressRegion": "GE",
@@ -1964,7 +1888,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-20-bis-ende-februar-2027/24107/99445726224",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.043Z",
+      "crawledAt": "2026-08-29T03:16:23.548Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -2000,7 +1924,6 @@
         ]
       },
       "firstSeenAt": "2026-08-19T21:36:28.734Z",
-      "needsRetranslation": true,
       "salaryMin": 14800,
       "salaryMax": 22700,
       "baseSalary": {
@@ -2012,7 +1935,8 @@
           "maxValue": 22700,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-44b7d5c2880c",
@@ -2045,7 +1969,7 @@
       "url": "https://jobs.ikea.com/en/job/vernier/collaborateur-trice-de-vente-80/24107/99477459952",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.041Z",
+      "crawledAt": "2026-08-29T03:16:23.547Z",
       "addressLocality": "Vernier",
       "postalCode": "1214",
       "addressRegion": "GE",
@@ -2086,8 +2010,6 @@
           "collaborateur-trice-de-vente-60-ikea-ch"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:16:49.620Z",
-      "needsRetranslation": true,
       "salaryMin": 48400,
       "salaryMax": 73200,
       "baseSalary": {
@@ -2099,7 +2021,9 @@
           "maxValue": 73200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.620Z",
+      "needsRetranslation": true
     },
     {
       "id": "ikea-e99156238bd5",
@@ -2132,7 +2056,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/mitarbeiter-in-verkauf-schlafzimmerabteilung-40/24107/99484561904",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.039Z",
+      "crawledAt": "2026-08-29T03:16:23.545Z",
       "addressLocality": "Dietlikon",
       "postalCode": "8305",
       "addressRegion": "ZH",
@@ -2211,7 +2135,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/collaborateur-trice-logistique-cfc-100/24107/95356933312",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.040Z",
+      "crawledAt": "2026-08-29T03:16:23.546Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -2247,7 +2171,6 @@
         ]
       },
       "firstSeenAt": "2026-08-12T21:50:31.111Z",
-      "needsRetranslation": true,
       "salaryMin": 60500,
       "salaryMax": 91500,
       "baseSalary": {
@@ -2259,7 +2182,8 @@
           "maxValue": 91500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-7a5c34cac6f0",
@@ -2292,7 +2216,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-teppiche-20-samstags-befristet-bis-28-02-2027/24107/99496915680",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.036Z",
+      "crawledAt": "2026-08-29T03:16:23.543Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -2339,7 +2263,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T21:32:19.518Z",
-      "needsRetranslation": true,
       "salaryMin": 14800,
       "salaryMax": 22700,
       "baseSalary": {
@@ -2351,7 +2274,8 @@
           "maxValue": 22700,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-3922b070eb3c",
@@ -2384,7 +2308,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-mit-potential-im-verkauf-in-der-markthalle-80-100/24107/99496915648",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.037Z",
+      "crawledAt": "2026-08-29T03:16:23.544Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -2460,7 +2384,7 @@
       "url": "https://jobs.ikea.com/en/job/lyssach/mitarbeiter-in-visual-merchandising-80-100/24107/99489271424",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.038Z",
+      "crawledAt": "2026-08-29T03:16:23.544Z",
       "addressLocality": "Lyssach",
       "postalCode": "",
       "addressRegion": "BE",
@@ -2533,7 +2457,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/mitarbeiter-in-verkauf-teppiche-60/24107/98231475296",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.034Z",
+      "crawledAt": "2026-08-29T03:16:23.542Z",
       "addressLocality": "Dietlikon",
       "postalCode": "8305",
       "addressRegion": "ZH",
@@ -2564,7 +2488,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T21:32:32.631Z",
-      "needsRetranslation": true,
       "salaryMin": 49800,
       "salaryMax": 76500,
       "baseSalary": {
@@ -2576,7 +2499,8 @@
           "maxValue": 76500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ikea-26b7a062ee04",
@@ -2609,7 +2533,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-schlafzimmerabteilung-60/24107/99541250736",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.035Z",
+      "crawledAt": "2026-08-29T03:16:23.543Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -2688,7 +2612,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/cariste-h-f-experimente-80/24107/99700325136",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.033Z",
+      "crawledAt": "2026-08-29T03:16:23.542Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -2751,7 +2675,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-ikea-restaurant-and-bistro-80-100-befristet-bis-31-12-2026/24107/99736547552",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.031Z",
+      "crawledAt": "2026-08-29T03:16:23.540Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -2827,7 +2751,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-administration-fur-haustechnik-und-instandhaltung-schwerpunkt-elektrik-100/24107/96290294016",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.031Z",
+      "crawledAt": "2026-08-29T03:16:23.540Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "",
       "addressRegion": "BL",
@@ -2906,7 +2830,7 @@
       "url": "https://jobs.ikea.com/en/job/lyssach/mitarbeiter-in-verkauf-in-der-markthalle-und-selbstbedienungshalle-100/24107/96224165360",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.032Z",
+      "crawledAt": "2026-08-29T03:16:23.541Z",
       "addressLocality": "Lyssach",
       "postalCode": "3421",
       "addressRegion": "BE",
@@ -2993,7 +2917,7 @@
       "url": "https://jobs.ikea.com/en/job/riddes/collaborateur-trice-logistique-60/24107/99736557760",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.030Z",
+      "crawledAt": "2026-08-29T03:16:23.540Z",
       "addressLocality": "Riddes",
       "postalCode": "1908",
       "addressRegion": "VS",
@@ -3056,7 +2980,7 @@
       "url": "https://jobs.ikea.com/en/job/riddes/collaborateur-trice-logistique-40/24107/99736557808",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.029Z",
+      "crawledAt": "2026-08-29T03:16:23.539Z",
       "addressLocality": "Riddes",
       "postalCode": "1908",
       "addressRegion": "VS",
@@ -3137,7 +3061,7 @@
       "url": "https://jobs.ikea.com/en/job/st-gallen/unit-facility-management-manager/24107/99387775936",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.024Z",
+      "crawledAt": "2026-08-29T03:16:23.538Z",
       "addressLocality": "St. Gallen",
       "postalCode": "9015",
       "addressRegion": "SG",
@@ -3230,7 +3154,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/service-fulfilment-operations-specialist/24107/99753269824",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.023Z",
+      "crawledAt": "2026-08-29T03:16:23.536Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -3247,10 +3171,8 @@
       "applyUrl": "https://jobs.ikea.com/en/job/spreitenbach/service-fulfilment-operations-specialist/24107/99753269824",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "service-fulfilment-operations-specialist-ikea-ch",
-        "service-fulfilment-operations-specialista-ikea-spreitenbach"
-      ],
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-27T00:33:28.336Z",
       "previousSlugsByLocale": {
         "it": [
           "service-fulfilment-operations-specialist-ikea-ch",
@@ -3263,8 +3185,10 @@
           "service-fulfilment-operations-specialist-ikea-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:33:28.336Z",
+      "previousSlugs": [
+        "service-fulfilment-operations-specialist-ikea-ch",
+        "service-fulfilment-operations-specialista-ikea-spreitenbach"
+      ],
       "salaryMin": 69500,
       "salaryMax": 93500,
       "baseSalary": {
@@ -3309,7 +3233,7 @@
       "url": "https://jobs.ikea.com/en/job/lyssach/mitarbeiter-in-visuelle-kommunikation-werbetechnik-60-80/24107/97799682576",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.018Z",
+      "crawledAt": "2026-08-29T03:16:23.534Z",
       "addressLocality": "Lyssach",
       "postalCode": "3421",
       "addressRegion": "BE",
@@ -3370,9 +3294,9 @@
         "de": "Technical Support Spezialist 80-100%",
         "fr": "Technical Support Spécialiste 80-100%"
       },
-      "description": "Who you are\n\nAs a Technical Support Specialist, you ensure the smooth operation and business continuity of digital products and IT services across the store in Dietlikon. You combine hands-on support with proactive maintenance and stakeholder collaboration.\n\n• Experience in IT support, technical services, or high passion within this Field\n• Solid understanding of hardware, software, and IT infrastructure\n• Familiarity with IT service management, IKEA processes and tools\n• Strong problem-solving skills and ability to work independently\n• Customer-oriented with excellent communication skills\n• Ability to manage multiple priorities in a dynamic environment\n• Basic understanding of project and change management\n• Interest in digital innovation and emerging technologies\n• Fluent in German and good understanding in English\n\nYour responsibilities\n\n• Ensure availability of digital products and platforms\n• Manage IT asset lifecycle (inventory, procurement, deployment)\n• Provide 2nd-level support for hardware and software\n• Support rollouts, upgrades, and new site setups\n• Perform monitoring and preventive maintenance\n• Resolve and prioritize incidents, escalate when needed\n• Support projects and global deployments\n• Train on-site staff and new hires\n\nDo you think that would work for you?\n\nWe want our employees to be happy and healthy.\n\nIt also means saying 'thank you'!\n\nOur way of saying thank you:\n\n•28 vacation days (based on a 100% workload)\n•8 weeks paid parental leave for fathers; 20 weeks paid parental leave for mothers\n•Very attractive social benefits\n•15% staff discount on your purchase - in every Swiss IKEA store\n•You would rather travel to work by public transport? We pay between 85% and 100% of your yearly travel ticket\n•Free parking facilities\n•Unlimited access to the LinkedIn learning platform\n•Affordable and healthy meals in our staff canteen (CHF 4.50 for meat dishes and CHF 3.50 for veggie dishes)\n•Bonus payments for all employees\n\nThere are many opportunities for career development at IKEA. We encourage and support our employees to try out different roles, move between functions or even go abroad.  Please submit your full application online via our website, please note however that we cannot consider applications and documents sent by email or post.\n\nThat's it from us.\n\nThat was a lot of information. We'd love to find out more about you. Just click on 'Apply now' and off you go.\nWe review applications on an ongoing basis and may stop the application process as soon as we have found the right person. So please apply as soon as possible.",
+      "description": "Technical Support Specialist 80-100% — IKEA",
       "descriptionByLocale": {
-        "it": "Who you are\n\nAs a Technical Support Specialist, you ensure the smooth operation and business continuity of digital products and IT services across the store in Dietlikon. You combine hands-on support with proactive maintenance and stakeholder collaboration.\n\n• Experience in IT support, technical services, or high passion within this Field\n• Solid understanding of hardware, software, and IT infrastructure\n• Familiarity with IT service management, IKEA processes and tools\n• Strong problem-solving skills and ability to work independently\n• Customer-oriented with excellent communication skills\n• Ability to manage multiple priorities in a dynamic environment\n• Basic understanding of project and change management\n• Interest in digital innovation and emerging technologies\n• Fluent in German and good understanding in English\n\nYour responsibilities\n\n• Ensure availability of digital products and platforms\n• Manage IT asset lifecycle (inventory, procurement, deployment)\n• Provide 2nd-level support for hardware and software\n• Support rollouts, upgrades, and new site setups\n• Perform monitoring and preventive maintenance\n• Resolve and prioritize incidents, escalate when needed\n• Support projects and global deployments\n• Train on-site staff and new hires\n\nDo you think that would work for you?\n\nWe want our employees to be happy and healthy.\n\nIt also means saying 'thank you'!\n\nOur way of saying thank you:\n\n•28 vacation days (based on a 100% workload)\n•8 weeks paid parental leave for fathers; 20 weeks paid parental leave for mothers\n•Very attractive social benefits\n•15% staff discount on your purchase - in every Swiss IKEA store\n•You would rather travel to work by public transport? We pay between 85% and 100% of your yearly travel ticket\n•Free parking facilities\n•Unlimited access to the LinkedIn learning platform\n•Affordable and healthy meals in our staff canteen (CHF 4.50 for meat dishes and CHF 3.50 for veggie dishes)\n•Bonus payments for all employees\n\nThere are many opportunities for career development at IKEA. We encourage and support our employees to try out different roles, move between functions or even go abroad. Please submit your full application online via our website, please note however that we cannot consider applications and documents sent by email or post.\n\nThat's it from us.\n\nThat was a lot of information. We'd love to find out more about you. Just click on 'Apply now' and off you go.\nWe review applications on an ongoing basis and may stop the application process as soon as we have found the right person. So please apply as soon as possible.",
+        "it": "Technical Support Specialist 80-100% — IKEA",
         "en": "Who you are\n\nAs a Technical Support Specialist, you ensure the smooth operation and business continuity of digital products and IT services across the store in Dietlikon. You combine hands-on support with proactive maintenance and stakeholder collaboration.\n\n• Experience in IT support, technical services, or high passion within this Field\n• Solid understanding of hardware, software, and IT infrastructure\n• Familiarity with IT service management, IKEA processes and tools\n• Strong problem-solving skills and ability to work independently\n• Customer-oriented with excellent communication skills\n• Ability to manage multiple priorities in a dynamic environment\n• Basic understanding of project and change management\n• Interest in digital innovation and emerging technologies\n• Fluent in German and good understanding in English\n\nYour responsibilities\n\n• Ensure availability of digital products and platforms\n• Manage IT asset lifecycle (inventory, procurement, deployment)\n• Provide 2nd-level support for hardware and software\n• Support rollouts, upgrades, and new site setups\n• Perform monitoring and preventive maintenance\n• Resolve and prioritize incidents, escalate when needed\n• Support projects and global deployments\n• Train on-site staff and new hires\n\nDo you think that would work for you?\n\nWe want our employees to be happy and healthy.\n\nIt also means saying 'thank you'!\n\nOur way of saying thank you:\n\n•28 vacation days (based on a 100% workload)\n•8 weeks paid parental leave for fathers; 20 weeks paid parental leave for mothers\n•Very attractive social benefits\n•15% staff discount on your purchase - in every Swiss IKEA store\n•You would rather travel to work by public transport? We pay between 85% and 100% of your yearly travel ticket\n•Free parking facilities\n•Unlimited access to the LinkedIn learning platform\n•Affordable and healthy meals in our staff canteen (CHF 4.50 for meat dishes and CHF 3.50 for veggie dishes)\n•Bonus payments for all employees\n\nThere are many opportunities for career development at IKEA. We encourage and support our employees to try out different roles, move between functions or even go abroad. Please submit your full application online via our website, please note however that we cannot consider applications and documents sent by email or post.\n\nThat's it from us.\n\nThat was a lot of information. We'd love to find out more about you. Just click on 'Apply now' and off you go.\nWe review applications on an ongoing basis and may stop the application process as soon as we have found the right person. So please apply as soon as possible.",
         "de": "Who you are\n\nAs a Technical Support Specialist, you ensure the smooth operation and business continuity of digital products and IT services across the store in Dietlikon. You combine hands-on support with proactive maintenance and stakeholder collaboration.\n\n• Experience in IT support, technical services, or high passion within this Field\n• Solid understanding of hardware, software, and IT infrastructure\n• Familiarity with IT service management, IKEA processes and tools\n• Strong problem-solving skills and ability to work independently\n• Customer-oriented with excellent communication skills\n• Ability to manage multiple priorities in a dynamic environment\n• Basic understanding of project and change management\n• Interest in digital innovation and emerging technologies\n• Fluent in German and good understanding in English\n\nYour responsibilities\n\n• Ensure availability of digital products and platforms\n• Manage IT asset lifecycle (inventory, procurement, deployment)\n• Provide 2nd-level support for hardware and software\n• Support rollouts, upgrades, and new site setups\n• Perform monitoring and preventive maintenance\n• Resolve and prioritize incidents, escalate when needed\n• Support projects and global deployments\n• Train on-site staff and new hires\n\nDo you think that would work for you?\n\nWe want our employees to be happy and healthy.\n\nIt also means saying 'thank you'!\n\nOur way of saying thank you:\n\n•28 vacation days (based on a 100% workload)\n•8 weeks paid parental leave for fathers; 20 weeks paid parental leave for mothers\n•Very attractive social benefits\n•15% staff discount on your purchase - in every Swiss IKEA store\n•You would rather travel to work by public transport? We pay between 85% and 100% of your yearly travel ticket\n•Free parking facilities\n•Unlimited access to the LinkedIn learning platform\n•Affordable and healthy meals in our staff canteen (CHF 4.50 for meat dishes and CHF 3.50 for veggie dishes)\n•Bonus payments for all employees\n\nThere are many opportunities for career development at IKEA. We encourage and support our employees to try out different roles, move between functions or even go abroad. Please submit your full application online via our website, please note however that we cannot consider applications and documents sent by email or post.\n\nThat's it from us.\n\nThat was a lot of information. We'd love to find out more about you. Just click on 'Apply now' and off you go.\nWe review applications on an ongoing basis and may stop the application process as soon as we have found the right person. So please apply as soon as possible.",
         "fr": "Who you are\n\nAs a Technical Support Specialist, you ensure the smooth operation and business continuity of digital products and IT services across the store in Dietlikon. You combine hands-on support with proactive maintenance and stakeholder collaboration.\n\n• Experience in IT support, technical services, or high passion within this Field\n• Solid understanding of hardware, software, and IT infrastructure\n• Familiarity with IT service management, IKEA processes and tools\n• Strong problem-solving skills and ability to work independently\n• Customer-oriented with excellent communication skills\n• Ability to manage multiple priorities in a dynamic environment\n• Basic understanding of project and change management\n• Interest in digital innovation and emerging technologies\n• Fluent in German and good understanding in English\n\nYour responsibilities\n\n• Ensure availability of digital products and platforms\n• Manage IT asset lifecycle (inventory, procurement, deployment)\n• Provide 2nd-level support for hardware and software\n• Support rollouts, upgrades, and new site setups\n• Perform monitoring and preventive maintenance\n• Resolve and prioritize incidents, escalate when needed\n• Support projects and global deployments\n• Train on-site staff and new hires\n\nDo you think that would work for you?\n\nWe want our employees to be happy and healthy.\n\nIt also means saying 'thank you'!\n\nOur way of saying thank you:\n\n•28 vacation days (based on a 100% workload)\n•8 weeks paid parental leave for fathers; 20 weeks paid parental leave for mothers\n•Very attractive social benefits\n•15% staff discount on your purchase - in every Swiss IKEA store\n•You would rather travel to work by public transport? We pay between 85% and 100% of your yearly travel ticket\n•Free parking facilities\n•Unlimited access to the LinkedIn learning platform\n•Affordable and healthy meals in our staff canteen (CHF 4.50 for meat dishes and CHF 3.50 for veggie dishes)\n•Bonus payments for all employees\n\nThere are many opportunities for career development at IKEA. We encourage and support our employees to try out different roles, move between functions or even go abroad. Please submit your full application online via our website, please note however that we cannot consider applications and documents sent by email or post.\n\nThat's it from us.\n\nThat was a lot of information. We'd love to find out more about you. Just click on 'Apply now' and off you go.\nWe review applications on an ongoing basis and may stop the application process as soon as we have found the right person. So please apply as soon as possible."
@@ -3381,10 +3305,10 @@
       "canton": "ZH",
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/technical-support-specialist-80-100/24107/99753272736",
       "source": "IKEA Dedicated Parser",
-      "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.021Z",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T03:16:23.535Z",
       "addressLocality": "Dietlikon",
-      "postalCode": "8305",
+      "postalCode": "",
       "addressRegion": "ZH",
       "addressCountry": "CH",
       "country": "CH",
@@ -3399,10 +3323,8 @@
       "applyUrl": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/technical-support-specialist-80-100/24107/99753272736",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "technical-support-specialist-80-100-ikea-ch",
-        "technical-support-specialista-80-100-ikea-dietlikon"
-      ],
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-27T00:33:28.330Z",
       "previousSlugsByLocale": {
         "it": [
           "technical-support-specialist-80-100-ikea-ch",
@@ -3415,8 +3337,10 @@
           "technical-support-specialist-80-100-ikea-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:33:28.330Z",
+      "previousSlugs": [
+        "technical-support-specialist-80-100-ikea-ch",
+        "technical-support-specialista-80-100-ikea-dietlikon"
+      ],
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -3461,7 +3385,7 @@
       "url": "https://jobs.ikea.com/en/job/lyssach/mitarbeiter-in-verkauf-schlafzimmerabteilung-100/24107/99766122032",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.016Z",
+      "crawledAt": "2026-08-29T03:16:23.532Z",
       "addressLocality": "Lyssach",
       "postalCode": "3421",
       "addressRegion": "BE",
@@ -3540,7 +3464,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-kuchenplanung-und-essplatz-80/24107/98705494976",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.017Z",
+      "crawledAt": "2026-08-29T03:16:23.533Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -3615,7 +3539,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/digital-marketing-specialist-80-100-temporary-position-until-july-31st-2027/24107/99797695600",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:34.001Z",
+      "crawledAt": "2026-08-29T03:16:23.522Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -3633,6 +3557,18 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
+      "salaryMin": 63000,
+      "salaryMax": 112000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 63000,
+          "maxValue": 112000,
+          "unitText": "YEAR"
+        }
+      },
       "firstSeenAt": "2026-08-28T05:16:49.609Z",
       "previousSlugsByLocale": {
         "it": [
@@ -3647,19 +3583,7 @@
       },
       "previousSlugs": [
         "digital-marketing-specialist-80-100-temporary-position-until-july-31st-2027-ikea-ch"
-      ],
-      "salaryMin": 63000,
-      "salaryMax": 112000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 63000,
-          "maxValue": 112000,
-          "unitText": "YEAR"
-        }
-      }
+      ]
     },
     {
       "id": "ikea-8cba667bc114",
@@ -3692,7 +3616,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/mitarbeiter-in-verkauf-schlafzimmerabteilung-80/24107/98795233328",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.015Z",
+      "crawledAt": "2026-08-29T03:16:23.532Z",
       "addressLocality": "Dietlikon",
       "postalCode": "8305",
       "addressRegion": "ZH",
@@ -3791,7 +3715,7 @@
       "url": "https://jobs.ikea.com/en/job/dietlikon-dietlikon-dorf/mitarbeiter-in-zweite-chance-markt-60-80/24107/99138537136",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.014Z",
+      "crawledAt": "2026-08-29T03:16:23.531Z",
       "addressLocality": "Dietlikon",
       "postalCode": "",
       "addressRegion": "ZH",
@@ -3870,7 +3794,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80/24107/99797711216",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.011Z",
+      "crawledAt": "2026-08-29T03:16:23.529Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -3887,10 +3811,7 @@
       "applyUrl": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80/24107/99797711216",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80-ikea-ch",
-        "addetto-a-alle-vendite-teppiche-e-dekorationsabteilung-80-ikea-spreitenbach"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80-ikea-ch",
@@ -3903,8 +3824,10 @@
           "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80-ikea-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.605Z",
+      "previousSlugs": [
+        "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-80-ikea-ch",
+        "addetto-a-alle-vendite-teppiche-e-dekorationsabteilung-80-ikea-spreitenbach"
+      ],
       "salaryMin": 59200,
       "salaryMax": 90800,
       "baseSalary": {
@@ -3916,7 +3839,8 @@
           "maxValue": 90800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.605Z"
     },
     {
       "id": "ikea-7b1fcf8b2fb0",
@@ -3949,7 +3873,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30/24107/99797711232",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.010Z",
+      "crawledAt": "2026-08-29T03:16:23.528Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -3966,10 +3890,7 @@
       "applyUrl": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30/24107/99797711232",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30-ikea-ch",
-        "addetto-a-alle-vendite-teppiche-e-dekorationsabteilung-30-ikea-spreitenbach"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30-ikea-ch",
@@ -3982,8 +3903,10 @@
           "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30-ikea-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.604Z",
+      "previousSlugs": [
+        "mitarbeiter-in-verkauf-teppiche-und-dekorationsabteilung-30-ikea-ch",
+        "addetto-a-alle-vendite-teppiche-e-dekorationsabteilung-30-ikea-spreitenbach"
+      ],
       "salaryMin": 22200,
       "salaryMax": 34100,
       "baseSalary": {
@@ -3995,7 +3918,8 @@
           "maxValue": 34100,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.604Z"
     },
     {
       "id": "ikea-d75acabae724",
@@ -4028,7 +3952,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027/24107/99797711696",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.010Z",
+      "crawledAt": "2026-08-29T03:16:23.528Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -4045,10 +3969,7 @@
       "applyUrl": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027/24107/99797711696",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-ch",
-        "addetto-a-alle-vendite-kuchen-e-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-pratteln-1"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-ch",
@@ -4061,8 +3982,10 @@
           "mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.603Z",
+      "previousSlugs": [
+        "mitarbeiter-in-verkauf-kuchen-und-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-ch",
+        "addetto-a-alle-vendite-kuchen-e-essplatzabteilung-20-befristet-bis-28-02-2027-ikea-pratteln-1"
+      ],
       "salaryMin": 14800,
       "salaryMax": 22700,
       "baseSalary": {
@@ -4074,7 +3997,8 @@
           "maxValue": 22700,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.603Z"
     },
     {
       "id": "ikea-f699ff0e11d3",
@@ -4107,7 +4031,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-ikea-kuche-60/24107/95568407168",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.009Z",
+      "crawledAt": "2026-08-29T03:16:23.527Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -4124,14 +4048,6 @@
       "applyUrl": "https://jobs.ikea.com/en/job/spreitenbach/mitarbeiter-in-ikea-kuche-60/24107/95568407168",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "mitarbeiter-in-ikea-kuche-60-ikea-ch",
-        "employee-ikea-restaurant-kitchen-60-ikea-spreitenbach",
-        "employe-ikea-restaurant-cuisine-60-ikea-spreitenbach",
-        "dipendente-ikea-ristorante-cucina-60-ikea-spreitenbach",
-        "associate-ikea-kuche-60-ikea-spreitenbach",
-        "collaborateur-trice-ikea-kuche-60-ikea-spreitenbach"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-ikea-kuche-60-ikea-ch",
@@ -4146,8 +4062,15 @@
           "collaborateur-trice-ikea-kuche-60-ikea-spreitenbach"
         ]
       },
+      "previousSlugs": [
+        "mitarbeiter-in-ikea-kuche-60-ikea-ch",
+        "employee-ikea-restaurant-kitchen-60-ikea-spreitenbach",
+        "employe-ikea-restaurant-cuisine-60-ikea-spreitenbach",
+        "dipendente-ikea-ristorante-cucina-60-ikea-spreitenbach",
+        "associate-ikea-kuche-60-ikea-spreitenbach",
+        "collaborateur-trice-ikea-kuche-60-ikea-spreitenbach"
+      ],
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.602Z",
       "salaryMin": 37200,
       "salaryMax": 56400,
       "baseSalary": {
@@ -4159,7 +4082,8 @@
           "maxValue": 56400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.602Z"
     },
     {
       "id": "ikea-e741f59dece0",
@@ -4192,7 +4116,7 @@
       "url": "https://jobs.ikea.com/en/job/aubonne/collaborateur-trice-logistique-cdd-60/24107/99826786752",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:34.008Z",
+      "crawledAt": "2026-08-29T03:16:23.526Z",
       "addressLocality": "Aubonne",
       "postalCode": "1170",
       "addressRegion": "VD",
@@ -4210,7 +4134,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.601Z",
       "salaryMin": 36300,
       "salaryMax": 54900,
       "baseSalary": {
@@ -4222,7 +4145,8 @@
           "maxValue": 54900,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.601Z"
     },
     {
       "id": "ikea-aaefbd407eee",
@@ -4255,7 +4179,7 @@
       "url": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-ikea-bistro-and-schwedenshop-samstags-30/24107/99477473184",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.004Z",
+      "crawledAt": "2026-08-29T03:16:23.524Z",
       "addressLocality": "Pratteln 1",
       "postalCode": "4133",
       "addressRegion": "BL",
@@ -4272,18 +4196,17 @@
       "applyUrl": "https://jobs.ikea.com/en/job/pratteln/mitarbeiter-in-ikea-bistro-and-schwedenshop-samstags-30/24107/99477473184",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "mitarbeiter-in-ikea-bistro-schwedenshop-samstags-30-ikea-ch",
-        "collaboratore-trice-ikea-bistro-schwedenshop-samstags-30-ikea-pratteln-1"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "mitarbeiter-in-ikea-bistro-schwedenshop-samstags-30-ikea-ch",
           "collaboratore-trice-ikea-bistro-schwedenshop-samstags-30-ikea-pratteln-1"
         ]
       },
+      "previousSlugs": [
+        "mitarbeiter-in-ikea-bistro-schwedenshop-samstags-30-ikea-ch",
+        "collaboratore-trice-ikea-bistro-schwedenshop-samstags-30-ikea-pratteln-1"
+      ],
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:16:49.598Z",
       "salaryMin": 18600,
       "salaryMax": 28200,
       "baseSalary": {
@@ -4295,7 +4218,8 @@
           "maxValue": 28200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:16:49.598Z"
     },
     {
       "id": "ikea-8b096d259139",
@@ -4325,7 +4249,7 @@
       "url": "https://jobs.ikea.com/en/job/lucerne/lehrstelle-logistiker-in-01-08-2027-31-07-2030/24107/98637316384",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T20:54:34.054Z",
+      "crawledAt": "2026-08-29T03:16:23.558Z",
       "addressLocality": "Rothenburg",
       "postalCode": "",
       "addressRegion": "LU",
@@ -4357,7 +4281,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:54:34.054Z"
+      "firstSeenAt": "2026-08-29T03:16:23.558Z"
     },
     {
       "id": "ikea-70ca72d473a2",
@@ -4387,7 +4311,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/lehrstelle-polydesigner-in-3d-01-08-2027-31-07-2031-schwerpunkt-styling/24107/98637316016",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:34.048Z",
+      "crawledAt": "2026-08-29T03:16:23.553Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -4444,7 +4368,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:54:34.048Z"
+      "firstSeenAt": "2026-08-29T03:16:23.553Z"
     },
     {
       "id": "ikea-6ebf0146e0e1",
@@ -4477,7 +4401,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/real-estate-development-leader-focus-expansion-and-development-at-ch-m-f-d/24107/99840115744",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:33.998Z",
+      "crawledAt": "2026-08-29T03:16:23.520Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -4509,7 +4433,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:54:33.998Z"
+      "firstSeenAt": "2026-08-29T03:16:23.520Z"
     },
     {
       "id": "ikea-34b97a34a341",
@@ -4542,7 +4466,7 @@
       "url": "https://jobs.ikea.com/en/job/spreitenbach/payroll-specialist-50-temporary-until-august-31st-2027/24107/99844875216",
       "source": "IKEA Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:33.987Z",
+      "crawledAt": "2026-08-29T03:16:23.512Z",
       "addressLocality": "Spreitenbach",
       "postalCode": "8957",
       "addressRegion": "Aargau",
@@ -4574,7 +4498,83 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:54:33.987Z"
+      "firstSeenAt": "2026-08-29T03:16:23.512Z"
+    },
+    {
+      "id": "ikea-02ba94fb8052",
+      "slug": "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon",
+      "slugByLocale": {
+        "de": "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von",
+        "it": "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-dietlikon",
+        "en": "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-dietlikon",
+        "fr": "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-se-concentrer-sur-la-conception-d-experiences-d-achat"
+      },
+      "company": "IKEA",
+      "companyKey": "ikea",
+      "companyDomain": "ikea.ch",
+      "title": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
+      "titleByLocale": {
+        "de": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
+        "it": "Apprendistato Impiegato/a del commercio al dettaglio (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
+        "en": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)",
+        "fr": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen)"
+      },
+      "description": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen) — IKEA",
+      "descriptionByLocale": {
+        "de": "Lehrstelle Detailhandelsfachfrau/-mann (01.08.2027-31.07.2030, Schwerpunkt Gestalten von Einkaufserlebnissen) — IKEA"
+      },
+      "location": "Lyssach, Bern, Switzerland",
+      "canton": "BE",
+      "url": "https://jobs.ikea.com/en/job/lyssach/lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserleb/24107/98642337728",
+      "source": "IKEA Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:16:23.559Z",
+      "addressLocality": "Lyssach",
+      "postalCode": "",
+      "addressRegion": "BE",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Retail / Furniture",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-02",
+      "applyUrl": "https://jobs.ikea.com/en/job/lyssach/lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserleb/24107/98642337728",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "previousSlugs": [
+        "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-pratteln-1",
+        "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-pratteln-1",
+        "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von"
+      ],
+      "previousSlugsByLocale": {
+        "it": [
+          "apprendistato-impiegato-a-del-commercio-al-dettaglio-01-08-2027-31-07-2030-schwerpunkt-gestalten-von-einkaufserlebnissen-ikea-pratteln-1",
+          "lehrstelle-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-schwerpunkt-gestalten-von"
+        ],
+        "en": [
+          "apprenticeship-detailhandelsfachfrau-mann-01-08-2027-31-07-2030-focus-on-designing-shopping-experiences-ikea-pratteln-1"
+        ]
+      },
+      "needsRetranslation": true,
+      "salaryMin": 57500,
+      "salaryMax": 87000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 57500,
+          "maxValue": 87000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T03:16:23.559Z"
     }
   ]
 }
