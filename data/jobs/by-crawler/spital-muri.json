@@ -1,6 +1,6 @@
 {
   "crawlerKey": "spital-muri",
-  "assembledAt": "2026-08-29T14:28:17.320Z",
+  "assembledAt": "2026-08-29T23:13:25.052Z",
   "jobs": [
     {
       "id": "spital-muri-f630033e83b2",
@@ -34,7 +34,7 @@
       "url": "https://recruitingapp-2997.umantis.com/Vacancies/239/Description/1",
       "source": "Spital Muri Dedicated Parser (Umantis listing tenant 2997)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:28:14.149Z",
+      "crawledAt": "2026-08-29T23:13:21.296Z",
       "addressLocality": "Muri",
       "addressRegion": "AG",
       "addressCountry": "CH",
