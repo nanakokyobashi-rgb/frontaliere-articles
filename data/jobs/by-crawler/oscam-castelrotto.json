@@ -1,6 +1,6 @@
 {
   "crawlerKey": "oscam-castelrotto",
-  "assembledAt": "2026-08-29T14:25:05.580Z",
+  "assembledAt": "2026-08-29T23:08:10.431Z",
   "jobs": [
     {
       "id": "oscam-castelrotto-concorso-generale-2025-per-medici-assistenti-be80f019a870",
@@ -33,7 +33,7 @@
       "url": "https://www.oscam.ch/lavoraconnoi/#concorso-generale-2025-per-medici-assistenti",
       "source": "OSCAM Castelrotto Dedicated Parser (WordPress HTML, PDF concorsi)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:25:01.983Z",
+      "crawledAt": "2026-08-29T23:08:01.761Z",
       "addressLocality": "Castelrotto",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -97,7 +97,7 @@
       "url": "https://www.oscam.ch/lavoraconnoi/#concorso-generale-2026",
       "source": "OSCAM Castelrotto Dedicated Parser (WordPress HTML, PDF concorsi)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:25:01.344Z",
+      "crawledAt": "2026-08-29T23:08:01.318Z",
       "addressLocality": "Castelrotto",
       "addressRegion": "TI",
       "addressCountry": "CH",
@@ -159,7 +159,7 @@
       "url": "https://www.oscam.ch/lavoraconnoi/#2026-08-psi-psicologo-assistente-1",
       "source": "OSCAM Castelrotto Dedicated Parser (WordPress HTML, PDF concorsi)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:25:00.147Z",
+      "crawledAt": "2026-08-29T23:08:00.353Z",
       "addressLocality": "Castelrotto",
       "addressRegion": "TI",
       "addressCountry": "CH",
