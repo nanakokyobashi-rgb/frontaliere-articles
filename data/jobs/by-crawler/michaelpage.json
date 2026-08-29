@@ -1,6 +1,6 @@
 {
   "crawlerKey": "michaelpage",
-  "assembledAt": "2026-08-29T03:55:07.664Z",
+  "assembledAt": "2026-08-29T14:57:29.698Z",
   "jobs": [
     {
       "id": "michaelpage-ee3e538d3740",
@@ -30,7 +30,7 @@
       "url": "https://www.pageexecutive.com/job-detail/senior-human-resources-manager/ref/jn-082026-7087617",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:04.410Z",
+      "crawledAt": "2026-08-29T14:57:26.986Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -72,7 +72,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:04.410Z"
+      "firstSeenAt": "2026-08-29T14:57:26.986Z"
     },
     {
       "id": "michaelpage-a5e9a61862e7",
@@ -102,7 +102,7 @@
       "url": "https://www.pageexecutive.com/job-detail/managing-director-real-estate-corporate-banking/ref/jn-082026-7091139",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:55:04.107Z",
+      "crawledAt": "2026-08-29T14:57:26.683Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -133,7 +133,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:04.107Z"
+      "firstSeenAt": "2026-08-29T14:57:26.683Z"
     },
     {
       "id": "michaelpage-d0f54d4a8718",
@@ -163,7 +163,7 @@
       "url": "https://www.pageexecutive.com/job-detail/diretor-geral-unidade-de-neg%C3%B3cio/ref/jn-042026-7001533",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:03.804Z",
+      "crawledAt": "2026-08-29T14:57:26.380Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -233,7 +233,7 @@
       "url": "https://www.pageexecutive.com/job-detail/senior-knowledge-management-attorney-private-funds/ref/jn-082026-7090935",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:03.502Z",
+      "crawledAt": "2026-08-29T14:57:26.077Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -264,7 +264,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:03.502Z"
+      "firstSeenAt": "2026-08-29T14:57:26.077Z"
     },
     {
       "id": "michaelpage-6f47d51540e8",
@@ -294,7 +294,7 @@
       "url": "https://www.pageexecutive.com/job-detail/knowledge-management-attorney-registered-funds/ref/jn-082026-7091112",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:03.199Z",
+      "crawledAt": "2026-08-29T14:57:25.775Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -325,7 +325,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:03.199Z"
+      "firstSeenAt": "2026-08-29T14:57:25.775Z"
     },
     {
       "id": "michaelpage-90be0c440929",
@@ -355,7 +355,7 @@
       "url": "https://www.pageexecutive.com/job-detail/diretor-de-rela%C3%A7%C3%B5es-governamentais/ref/jn-082026-7084101",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:02.595Z",
+      "crawledAt": "2026-08-29T14:57:23.053Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -386,7 +386,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:02.595Z",
+      "firstSeenAt": "2026-08-29T14:57:23.053Z",
       "previousSlugsByLocale": {
         "it": [
           "diretor-de-relacoes-governmentais-michael-page-lugano"
@@ -424,7 +424,7 @@
       "url": "https://www.pageexecutive.com/job-detail/senior-manager-commercial-finance-fpa-norwood-ma/ref/jn-082026-7090273",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:02.897Z",
+      "crawledAt": "2026-08-29T14:57:25.472Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -455,7 +455,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:02.897Z"
+      "firstSeenAt": "2026-08-29T14:57:25.472Z"
     },
     {
       "id": "michaelpage-f5bff3e2268e",
@@ -485,7 +485,7 @@
       "url": "https://www.pageexecutive.com/job-detail/vice-president-global-strategic-sourcing-chemicals/ref/jn-022026-6936290",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:54:59.873Z",
+      "crawledAt": "2026-08-29T14:57:22.446Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -516,7 +516,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:59.873Z"
+      "firstSeenAt": "2026-08-29T14:57:22.446Z"
     },
     {
       "id": "michaelpage-652236dd8c8f",
@@ -546,7 +546,7 @@
       "url": "https://www.pageexecutive.com/job-detail/business-development-director-industrial-north-america/ref/jn-062026-7040890",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:54:59.269Z",
+      "crawledAt": "2026-08-29T14:57:21.839Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -577,7 +577,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:59.269Z",
+      "firstSeenAt": "2026-08-29T14:57:21.839Z",
       "previousSlugsByLocale": {
         "it": [
           "business-development-director-industrial-north-america-michael-page-lugano",
@@ -617,7 +617,7 @@
       "url": "https://www.pageexecutive.com/job-detail/diretor-de-manuten%C3%A7%C3%A3o-e-opera%C3%A7%C3%B5es-t%C3%A9cnicas-am%C3%A9rica-latina/ref/jn-072026-7054376",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:54:58.966Z",
+      "crawledAt": "2026-08-29T14:57:21.536Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -648,7 +648,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:58.966Z"
+      "firstSeenAt": "2026-08-29T14:57:21.536Z"
     },
     {
       "id": "michaelpage-152aa4f682be",
@@ -678,7 +678,7 @@
       "url": "https://www.pageexecutive.com/job-detail/business-unit-vice-president-americas-chemicals/ref/jn-062026-7048915",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:54:58.664Z",
+      "crawledAt": "2026-08-29T14:57:21.233Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -709,7 +709,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:58.664Z",
+      "firstSeenAt": "2026-08-29T14:57:21.233Z",
       "previousSlugsByLocale": {
         "it": [
           "vice-president-ameriques-produits-chimiques-michael-page-lugano"
@@ -747,7 +747,7 @@
       "url": "https://www.pageexecutive.com/job-detail/managing-director-south-america/ref/jn-072026-7055192",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:54:58.360Z",
+      "crawledAt": "2026-08-29T14:57:20.927Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -778,7 +778,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:58.360Z"
+      "firstSeenAt": "2026-08-29T14:57:20.927Z"
     },
     {
       "id": "michaelpage-f7cdbe0a80d1",
@@ -808,7 +808,7 @@
       "url": "https://www.pageexecutive.com/job-detail/divisional-controller-americas/ref/jn-072026-7066374",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:54:58.043Z",
+      "crawledAt": "2026-08-29T14:57:20.601Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -829,13 +829,15 @@
         "it": [
           "divisional-controller-americas-michaelpage-ch",
           "divisional-controller-amerika-michael-page-lugano",
-          "controleur-divisionnaire-ameriques-michael-page-lugano"
+          "controleur-divisionnaire-ameriques-michael-page-lugano",
+          "divisional-controller-americas-michael-page-lugano"
         ]
       },
       "previousSlugs": [
         "divisional-controller-americas-michaelpage-ch",
         "divisional-controller-amerika-michael-page-lugano",
-        "controleur-divisionnaire-ameriques-michael-page-lugano"
+        "controleur-divisionnaire-ameriques-michael-page-lugano",
+        "divisional-controller-americas-michael-page-lugano"
       ],
       "needsRetranslation": true,
       "salaryMin": 49500,
@@ -851,7 +853,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:54:58.043Z"
+      "firstSeenAt": "2026-08-29T14:57:20.601Z"
     },
     {
       "id": "michaelpage-43cc2e06b52e",
@@ -881,7 +883,7 @@
       "url": "https://www.pageexecutive.com/job-detail/director-senior-counsel-esoteric-abs-securitizations/ref/jn-082026-7085929",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:55:02.292Z",
+      "crawledAt": "2026-08-29T14:57:25.170Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -920,7 +922,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:02.292Z"
+      "firstSeenAt": "2026-08-29T14:57:25.170Z"
     },
     {
       "id": "michaelpage-446211f3bf85",
@@ -950,7 +952,7 @@
       "url": "https://www.pageexecutive.com/job-detail/senior-equity-finance-counsel/ref/jn-082026-7082322",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:01.989Z",
+      "crawledAt": "2026-08-29T14:57:24.868Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -981,7 +983,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:01.989Z"
+      "firstSeenAt": "2026-08-29T14:57:24.868Z"
     },
     {
       "id": "michaelpage-0ac8cd742c95",
@@ -1011,7 +1013,7 @@
       "url": "https://www.pageexecutive.com/job-detail/executive-director-senior-managing-counsel/ref/jn-072026-7072559",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:01.686Z",
+      "crawledAt": "2026-08-29T14:57:24.565Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1042,7 +1044,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:01.686Z"
+      "firstSeenAt": "2026-08-29T14:57:24.565Z"
     },
     {
       "id": "michaelpage-e3b3a3165248",
@@ -1072,7 +1074,7 @@
       "url": "https://www.pageexecutive.com/job-detail/associate-general-counsel-real-estate-funds/ref/jn-072026-7067513",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:01.384Z",
+      "crawledAt": "2026-08-29T14:57:24.263Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1103,7 +1105,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:01.384Z"
+      "firstSeenAt": "2026-08-29T14:57:24.263Z"
     },
     {
       "id": "michaelpage-6fde12d26f37",
@@ -1133,7 +1135,7 @@
       "url": "https://www.pageexecutive.com/job-detail/director-managing-counsel/ref/jn-072026-7075463",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:01.082Z",
+      "crawledAt": "2026-08-29T14:57:23.961Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1164,7 +1166,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:01.082Z"
+      "firstSeenAt": "2026-08-29T14:57:23.961Z"
     },
     {
       "id": "michaelpage-3209646a7953",
@@ -1194,7 +1196,7 @@
       "url": "https://www.pageexecutive.com/job-detail/vp-structured-investments-counsel/ref/jn-072026-7064439",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:55:00.780Z",
+      "crawledAt": "2026-08-29T14:57:23.658Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1225,7 +1227,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:00.780Z"
+      "firstSeenAt": "2026-08-29T14:57:23.658Z"
     },
     {
       "id": "michaelpage-8d39e70f9cd6",
@@ -1255,7 +1257,7 @@
       "url": "https://www.pageexecutive.com/job-detail/director-structured-products-senior-counsel/ref/jn-072026-7070298",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:55:00.478Z",
+      "crawledAt": "2026-08-29T14:57:23.356Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1286,7 +1288,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:00.478Z"
+      "firstSeenAt": "2026-08-29T14:57:23.356Z"
     },
     {
       "id": "michaelpage-56d53f72756a",
@@ -1316,7 +1318,7 @@
       "url": "https://www.pageexecutive.com/job-detail/directorsenior-director-business-development/ref/jn-082026-7091809",
       "source": "Michael Page Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:55:00.175Z",
+      "crawledAt": "2026-08-29T14:57:22.749Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1347,7 +1349,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T03:55:00.175Z"
+      "firstSeenAt": "2026-08-29T14:57:22.749Z"
     }
   ]
 }
