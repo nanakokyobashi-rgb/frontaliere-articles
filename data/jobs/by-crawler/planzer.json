@@ -1,6 +1,6 @@
 {
   "crawlerKey": "planzer",
-  "assembledAt": "2026-08-28T20:56:04.587Z",
+  "assembledAt": "2026-08-29T03:15:54.061Z",
   "jobs": [
     {
       "id": "planzer-72cb59d3ac49",
@@ -34,7 +34,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057379",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:59.204Z",
+      "crawledAt": "2026-08-29T03:15:48.062Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "streetAddress": "Hermetschloostrasse 12",
@@ -109,7 +109,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057266",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:58.565Z",
+      "crawledAt": "2026-08-29T03:15:47.371Z",
       "addressLocality": "Kallnach",
       "addressRegion": "BE",
       "streetAddress": "Brühlgasse 9",
@@ -190,7 +190,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060240",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.919Z",
+      "crawledAt": "2026-08-29T03:15:46.702Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Murtenstrasse 85",
@@ -255,7 +255,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058103",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:57.221Z",
+      "crawledAt": "2026-08-29T03:15:46.109Z",
       "addressLocality": "Villmergen",
       "addressRegion": "AG",
       "streetAddress": "Allmendstrasse 14",
@@ -330,7 +330,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060246",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:56.536Z",
+      "crawledAt": "2026-08-29T03:15:45.513Z",
       "addressLocality": "Dällikon",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -461,7 +461,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059605",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:55.842Z",
+      "crawledAt": "2026-08-29T03:15:44.885Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "streetAddress": "Klosterstrasse 38",
@@ -526,7 +526,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058655",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:55.169Z",
+      "crawledAt": "2026-08-29T03:15:44.280Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Piccardstrasse 13",
@@ -614,7 +614,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059479",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:54.511Z",
+      "crawledAt": "2026-08-29T03:15:43.615Z",
       "addressLocality": "Seewen",
       "addressRegion": "SO",
       "streetAddress": "Seewernstrasse 203",
@@ -689,7 +689,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058819",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:53.856Z",
+      "crawledAt": "2026-08-29T03:15:42.967Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -772,7 +772,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4061919",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:55:53.075Z",
+      "crawledAt": "2026-08-29T03:15:42.228Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -786,7 +786,7 @@
       "sector": "Trasporti / Logistica",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://live.solique.ch/planzer/job/details/4061919",
       "externalId": "4061919",
       "requirements": [],
@@ -805,7 +805,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:55:53.075Z"
+      "firstSeenAt": "2026-08-29T03:15:42.228Z"
     }
   ]
 }
