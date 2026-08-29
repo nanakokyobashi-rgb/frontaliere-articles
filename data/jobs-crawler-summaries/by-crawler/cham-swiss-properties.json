@@ -1,7 +1,7 @@
 {
   "key": "cham-swiss-properties",
   "label": "Cham Swiss Properties",
-  "generatedAt": "2026-08-29T03:31:38.228Z",
+  "generatedAt": "2026-08-29T15:10:15.631Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,11 +9,12 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5542,
-  "avgDurationMs": 5542,
+  "durationMs": 4573,
+  "avgDurationMs": 4573,
   "durationHistory": [
     4318,
-    5542
+    5542,
+    4573
   ],
   "newJobs": [
     {
@@ -29,7 +30,7 @@
       "url": "https://jobs.dualoo.com/portal/6j9quii0/e92babc9-d7a7-43ad-90f7-d07c64aae4f0/detail?lang=DE",
       "source": "Cham Swiss Properties Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:31:34.924Z",
+      "crawledAt": "2026-08-29T15:10:12.489Z",
       "addressLocality": "Cham",
       "addressRegion": "ZG",
       "streetAddress": "Fabrikstrasse 5",
@@ -69,7 +70,7 @@
       "url": "https://jobs.dualoo.com/portal/6j9quii0/157f7d95-d715-4a8f-a480-6f8601ffec1d/detail?lang=DE",
       "source": "Cham Swiss Properties Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:31:34.385Z",
+      "crawledAt": "2026-08-29T15:10:11.983Z",
       "addressLocality": "Cham",
       "addressRegion": "ZG",
       "streetAddress": "Fabrikstrasse 5",
