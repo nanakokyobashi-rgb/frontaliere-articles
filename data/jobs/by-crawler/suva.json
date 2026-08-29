@@ -1,6 +1,6 @@
 {
   "crawlerKey": "suva",
-  "assembledAt": "2026-08-28T21:00:33.557Z",
+  "assembledAt": "2026-08-29T03:17:35.131Z",
   "jobs": [
     {
       "id": "suva-2b23aa246214",
@@ -33,7 +33,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Senior-Business-Consultant-%28alle-Geschlechter%29-80-100-LU-6004/1430131133/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:28.175Z",
+      "crawledAt": "2026-08-29T03:17:29.470Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -97,7 +97,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Spezialistin-Arbeitssicherheit-und-Gesundheitsschutz-60-100-LU-6004/1430437233/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:26.842Z",
+      "crawledAt": "2026-08-29T03:17:28.464Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -169,7 +169,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Projektmanagerin-Baumanagement-Bauherrenvertretung-80-100-LU-6004/1409638533/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:25.749Z",
+      "crawledAt": "2026-08-29T03:17:27.487Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -249,7 +249,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Quereinsteigerin-Pr%C3%A4vention-100-LU-6004/1422839033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:24.542Z",
+      "crawledAt": "2026-08-29T03:17:26.477Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -334,7 +334,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Praktikantin-WMS-HR-Nachwuchsentwicklung-100-LU-6004/1423913433/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:23.438Z",
+      "crawledAt": "2026-08-29T03:17:25.295Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -398,7 +398,7 @@
       "url": "https://jobs.suva.ch/job/St_-Gallen-Fach%C3%A4rztin-Facharzt-Psychiatrie-%28alle-Geschlechter%29-80-100-SG-9000/1371896633/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:22.230Z",
+      "crawledAt": "2026-08-29T03:17:24.264Z",
       "addressLocality": "San Gallo",
       "addressCountry": "CH",
       "country": "CH",
@@ -477,7 +477,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Bauingenieurin-Baumeisterin-80%C2%A0-%C2%A0100%C2%A0-LU-6004/1383023233/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:20.783Z",
+      "crawledAt": "2026-08-29T03:17:23.253Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -557,7 +557,7 @@
       "url": "https://jobs.suva.ch/job/Z%C3%BCrich-Fach%C3%A4rztin-Facharzt-Neurologie-80-100-ZH-8002/1387059033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:19.625Z",
+      "crawledAt": "2026-08-29T03:17:22.245Z",
       "addressLocality": "Winterthur | Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -636,7 +636,7 @@
       "url": "https://jobs.suva.ch/job/Lausanne-Teamleiterin-Versicherungsmedizin-80-100-VD-1003/1399745833/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:18.477Z",
+      "crawledAt": "2026-08-29T03:17:21.140Z",
       "addressLocality": "Lausanne",
       "addressCountry": "CH",
       "country": "CH",
@@ -722,7 +722,7 @@
       "url": "https://jobs.suva.ch/job/Lausanne-Chef%E2%88%99fe-de-team-m%C3%A9decine-d'assurance-80-100-VD-1003/1398235133/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:00:17.237Z",
+      "crawledAt": "2026-08-29T03:17:20.104Z",
       "addressLocality": "Lausanne",
       "addressCountry": "CH",
       "country": "CH",
@@ -804,7 +804,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Social-Media-Managerin-60-LU-6004/1423914033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:15.964Z",
+      "crawledAt": "2026-08-29T03:17:18.958Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -868,7 +868,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Praktikantin-WMS-Kundenmanagement-und-Kommunikation-100-LU-6004/1423912633/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:14.908Z",
+      "crawledAt": "2026-08-29T03:17:17.942Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -946,7 +946,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Praktikantin-WMS-Unternehmenskommunikation-100-LU-6004/1423913033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:13.768Z",
+      "crawledAt": "2026-08-29T03:17:16.889Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1026,7 +1026,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Praktikantin-WMS-Customer-Service-Center-100-LU-6004/1423913333/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:12.445Z",
+      "crawledAt": "2026-08-29T03:17:15.890Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1100,7 +1100,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Medizinischer-Praxisassistentin-60-LU-6004/1417839633/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:11.159Z",
+      "crawledAt": "2026-08-29T03:17:14.866Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1180,7 +1180,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Produktmanagerin-Projektleiterin-Pr%C3%A4vention-80-100-LU-6004/1407285633/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:09.921Z",
+      "crawledAt": "2026-08-29T03:17:13.750Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1254,7 +1254,7 @@
       "url": "https://jobs.suva.ch/job/Fribourg-Sp%C3%A9cialiste-en-s%C3%A9curit%C3%A9-int%C3%A9gr%C3%A9e-80-100-FR-1700/1409237433/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:00:08.767Z",
+      "crawledAt": "2026-08-29T03:17:12.689Z",
       "addressLocality": "Fribourg",
       "addressCountry": "CH",
       "country": "CH",
@@ -1288,7 +1288,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T12:22:37.715Z",
-      "needsRetranslation": true,
       "salaryMin": 68500,
       "salaryMax": 104000,
       "baseSalary": {
@@ -1301,7 +1300,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "FR"
+      "addressRegion": "FR",
+      "needsRetranslation": true
     },
     {
       "id": "suva-78368263c2f8",
@@ -1334,7 +1334,7 @@
       "url": "https://jobs.suva.ch/job/Bern-Rechtsanw%C3%A4ltin-Rechtsanwalt-Milit%C3%A4rversicherung-%28alle-Geschlechter%29-80-100-BE-3008/1415800833/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:07.662Z",
+      "crawledAt": "2026-08-29T03:17:11.704Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1413,7 +1413,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-Praktikantin-WMS-Kundenbetreuung-Rentenleistungen-100-LU-6004/1425534333/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:05.621Z",
+      "crawledAt": "2026-08-29T03:17:10.567Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1493,7 +1493,7 @@
       "url": "https://jobs.suva.ch/job/Root-Leiterin-Centermanagement-D4-Business-Village-80-100-LU-6039/1424797533/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:01.290Z",
+      "crawledAt": "2026-08-29T03:17:09.594Z",
       "addressLocality": "Root",
       "addressCountry": "CH",
       "country": "CH",
@@ -1569,7 +1569,7 @@
       "url": "https://jobs.suva.ch/job/Del%C3%A9mont-Gestionnaire-centre-de-comp%C3%A9tence-80-100-JU-2800/1424773133/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:00:00.155Z",
+      "crawledAt": "2026-08-29T03:17:08.603Z",
       "addressLocality": "Delémont",
       "addressCountry": "CH",
       "country": "CH",
@@ -1605,7 +1605,6 @@
         ]
       },
       "firstSeenAt": "2026-08-10T21:44:29.606Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -1618,7 +1617,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "JU"
+      "addressRegion": "JU",
+      "needsRetranslation": true
     },
     {
       "id": "suva-3af12fdf4707",
@@ -1651,7 +1651,7 @@
       "url": "https://jobs.suva.ch/job/Bern-Spezialistin-Fallf%C3%BChrung-80-100-BE-3008/1426861633/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:59:58.832Z",
+      "crawledAt": "2026-08-29T03:17:07.484Z",
       "addressLocality": "Bern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1731,7 +1731,7 @@
       "url": "https://jobs.suva.ch/job/Aarau-Spezialistin-Bek%C3%A4mpfung-Versicherungsmissbrauch-80-100-AG-5000/1424876233/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:59:57.736Z",
+      "crawledAt": "2026-08-29T03:17:06.504Z",
       "addressLocality": "Argovia",
       "addressCountry": "CH",
       "country": "CH",
@@ -1813,7 +1813,7 @@
       "url": "https://jobs.suva.ch/job/Luzern-SAP-Basis-Engineer-%28all-genders%29-80-100-LU-6004/1428590033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:59:56.605Z",
+      "crawledAt": "2026-08-29T03:17:05.200Z",
       "addressLocality": "Luzern",
       "addressCountry": "CH",
       "country": "CH",
@@ -1831,7 +1831,6 @@
       "pensum": "80-100%",
       "sfJobId": "1428590033",
       "firstSeenAt": "2026-08-24T10:06:55.900Z",
-      "needsRetranslation": true,
       "salaryMin": 78500,
       "salaryMax": 119000,
       "baseSalary": {
@@ -1844,7 +1843,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "LU"
+      "addressRegion": "LU",
+      "needsRetranslation": true
     },
     {
       "id": "suva-5ffeae5e7435",
@@ -1877,7 +1877,7 @@
       "url": "https://jobs.suva.ch/job/Gen%C3%A8ve-Chef%E2%88%99fe-de-team-pilotage-des-cas-80-100-GE-1207/1424788433/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:59:55.574Z",
+      "crawledAt": "2026-08-29T03:17:04.183Z",
       "addressLocality": "Genève",
       "addressCountry": "CH",
       "country": "CH",
@@ -1911,7 +1911,6 @@
         ]
       },
       "firstSeenAt": "2026-08-10T21:44:30.642Z",
-      "needsRetranslation": true,
       "salaryMin": 65500,
       "salaryMax": 109000,
       "baseSalary": {
@@ -1924,7 +1923,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "GE"
+      "addressRegion": "GE",
+      "needsRetranslation": true
     },
     {
       "id": "suva-cb7515ebdfcf",
@@ -1957,7 +1957,7 @@
       "url": "https://jobs.suva.ch/job/Wetzikon-Spezialistin-Kurzfristgeldleistungen-80-100-ZH-8620/1420760933/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:59:54.575Z",
+      "crawledAt": "2026-08-29T03:17:03.109Z",
       "addressLocality": "Wetzikon | Ziegelbrücke",
       "addressCountry": "CH",
       "country": "CH",
@@ -2037,7 +2037,7 @@
       "url": "https://jobs.suva.ch/job/Lucerne-Sp%C3%A9cialiste-oppositions-60-100-LU-6004/1426867233/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:59:53.481Z",
+      "crawledAt": "2026-08-29T03:17:02.131Z",
       "addressLocality": "Lucerne",
       "addressCountry": "CH",
       "country": "CH",
@@ -2070,7 +2070,6 @@
         ]
       },
       "firstSeenAt": "2026-08-17T10:10:04.766Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 106000,
       "baseSalary": {
@@ -2083,7 +2082,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "LU"
+      "addressRegion": "LU",
+      "needsRetranslation": true
     },
     {
       "id": "suva-3b96995a9ca6",
@@ -2116,7 +2116,7 @@
       "url": "https://jobs.suva.ch/job/Gen%C3%A8ve-Chef%E2%88%99fe-de-secteur-assurance-militaire-80-100-GE-1207/1426208033/",
       "source": "Suva Dedicated Parser (SuccessFactors — jobs2web/CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:59:52.285Z",
+      "crawledAt": "2026-08-29T03:17:00.900Z",
       "addressLocality": "Genève",
       "addressCountry": "CH",
       "country": "CH",
