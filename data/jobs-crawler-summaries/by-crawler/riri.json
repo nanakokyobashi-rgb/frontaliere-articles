@@ -1,7 +1,7 @@
 {
   "key": "riri",
   "label": "Riri Group",
-  "generatedAt": "2026-08-29T03:39:01.122Z",
+  "generatedAt": "2026-08-29T23:20:52.103Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,10 +9,11 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3433,
-  "avgDurationMs": 3433,
+  "durationMs": 3303,
+  "avgDurationMs": 3303,
   "durationHistory": [
-    3433
+    3433,
+    3303
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -41,7 +42,7 @@
       "applyUrl": "https://careers.oerlikon.com/job/Mendrisio-Customer-Service-Specialist-Riri-Zippers-WM-TI-6850/1398158033/?feedId=null&utm_source=J2WRSS&utm_medium=rss&utm_campaign=J2W_RSS",
       "source": "Riri Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:38:58.536Z",
+      "crawledAt": "2026-08-29T23:20:49.665Z",
       "firstSeenAt": "2026-07-08T11:41:22.541Z",
       "_qualityScore": 85,
       "_qualityBreakdown": {
