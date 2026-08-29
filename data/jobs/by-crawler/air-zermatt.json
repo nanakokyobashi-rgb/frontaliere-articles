@@ -1,6 +1,6 @@
 {
   "crawlerKey": "air-zermatt",
-  "assembledAt": "2026-08-29T03:52:11.923Z",
+  "assembledAt": "2026-08-29T14:34:16.309Z",
   "jobs": [
     {
       "id": "air-zermatt-dfbbe85d1afb",
@@ -46,7 +46,7 @@
       "applyUrl": "https://www.air-zermatt.ch/de/service/offene-stellen/stipendium-atc-amp-swiss-sherpa-foundation-442",
       "source": "Air Zermatt Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:52:09.236Z",
+      "crawledAt": "2026-08-29T14:34:13.887Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-26T10:00:52.736Z",
       "salaryMin": 60500,
@@ -130,7 +130,7 @@
       "applyUrl": "https://www.air-zermatt.ch/de/service/offene-stellen/transport-oder-rettungssanitaeterin-mit-anteil-flugbetrieb-100--571",
       "source": "Air Zermatt Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:52:08.950Z",
+      "crawledAt": "2026-08-29T14:34:13.431Z",
       "previousSlugs": [
         "transport-oder-rettungssanitater-in-mit-anteil-flugbetrieb-100-raron-air-zermatt",
         "panitatives-de-transport-ou-de-resultat-un-fonctionnement-aerien-de-proportion-100-air-zermatt-ag-raron"
