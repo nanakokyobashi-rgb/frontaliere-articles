@@ -1,17 +1,18 @@
 {
   "key": "amag-group",
   "label": "AMAG Group",
-  "generatedAt": "2026-08-29T03:23:26.411Z",
+  "generatedAt": "2026-08-29T14:42:00.241Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5210,
-  "avgDurationMs": 5210,
+  "durationMs": 5090,
+  "avgDurationMs": 5090,
   "durationHistory": [
     4924,
-    5210
+    5210,
+    5090
   ],
   "newJobs": [],
   "updatedJobs": [
