@@ -1,16 +1,17 @@
 {
   "key": "berit-klinik",
   "label": "Berit Klinik",
-  "generatedAt": "2026-08-28T21:04:27.154Z",
+  "generatedAt": "2026-08-29T03:26:20.489Z",
   "total": 15,
   "newCount": 0,
   "updatedCount": 15,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5640,
-  "avgDurationMs": 5640,
+  "durationMs": 3861,
+  "avgDurationMs": 3861,
   "durationHistory": [
-    5640
+    5640,
+    3861
   ],
   "newJobs": [],
   "updatedJobs": [
