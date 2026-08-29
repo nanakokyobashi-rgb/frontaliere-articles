@@ -1,7 +1,7 @@
 {
   "key": "liebherr",
   "label": "Liebherr",
-  "generatedAt": "2026-08-28T21:23:33.137Z",
+  "generatedAt": "2026-08-29T03:55:47.948Z",
   "total": 78,
   "discovered": null,
   "written": 78,
@@ -9,10 +9,11 @@
   "updatedCount": 74,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 30288,
-  "avgDurationMs": 30288,
+  "durationMs": 29534,
+  "avgDurationMs": 29534,
   "durationHistory": [
-    30288
+    30288,
+    29534
   ],
   "newJobs": [
     {
@@ -27,7 +28,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Test-Benches-%28ST%29/1431522933/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:13.369Z",
+      "crawledAt": "2026-08-29T03:55:26.472Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -39,7 +40,7 @@
       "sector": "Manufacturing / Machinery (construction equipment, engines, hydraulics, aerospace, refrigeration)",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Test-Benches-%28ST%29/1431522933/",
       "jobReqId": "1431522933",
       "_qualityScore": 63,
@@ -62,7 +63,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Subsystem-Owner-Oil-System-%28mwx%29/1431600333/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:13.625Z",
+      "crawledAt": "2026-08-29T03:55:27.665Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -74,7 +75,7 @@
       "sector": "Manufacturing / Machinery (construction equipment, engines, hydraulics, aerospace, refrigeration)",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Subsystem-Owner-Oil-System-%28mwx%29/1431600333/",
       "jobReqId": "1431600333",
       "_qualityScore": 63,
@@ -97,7 +98,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Bancs-d'Essai/1431522833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:28.739Z",
+      "crawledAt": "2026-08-29T03:55:35.870Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -109,7 +110,7 @@
       "sector": "Manufacturing / Machinery (construction equipment, engines, hydraulics, aerospace, refrigeration)",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Bancs-d'Essai/1431522833/",
       "jobReqId": "1431522833",
       "_qualityScore": 63,
@@ -132,7 +133,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Pr%C3%BCfst%C3%A4nde/1431523033/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:29.009Z",
+      "crawledAt": "2026-08-29T03:55:40.514Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -144,7 +145,7 @@
       "sector": "Manufacturing / Machinery (construction equipment, engines, hydraulics, aerospace, refrigeration)",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Technical-Project-Leader-Pr%C3%BCfst%C3%A4nde/1431523033/",
       "jobReqId": "1431523033",
       "_qualityScore": 63,
@@ -169,7 +170,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Pricing-Analyst-Specialist-%28mfx%29/1430869433/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:08.310Z",
+      "crawledAt": "2026-08-29T03:55:22.717Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -206,7 +207,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Gas-Engine-Specialist-%28mfx%29/1429039233/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:07.395Z",
+      "crawledAt": "2026-08-29T03:55:28.618Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -242,7 +243,7 @@
       "url": "https://careers.liebherr.com/job/Daillens-Conseiller-technique-SAV-terrassement-%28hf%29/1428742133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:19.566Z",
+      "crawledAt": "2026-08-29T03:55:41.862Z",
       "addressLocality": "Daillens",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -278,7 +279,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Sachbearbeiter-Betontechnik-%28mw%29/1428563833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:19.831Z",
+      "crawledAt": "2026-08-29T03:55:42.379Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -314,7 +315,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Data-Architect-Enterprise-Data-Catalogue-Lead-%28mwd%29/1428194533/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:06.874Z",
+      "crawledAt": "2026-08-29T03:55:22.445Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -351,7 +352,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Harness-Designer-%28mfx%29-Temporary-Contract/1428400133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:08.024Z",
+      "crawledAt": "2026-08-29T03:55:28.223Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -366,7 +367,6 @@
       "postedDate": "2026-08-20",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Harness-Designer-%28mfx%29-Temporary-Contract/1428400133/",
       "jobReqId": "1428400133",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-08-20T21:32:13.231Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -374,7 +374,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-806e1e823c66",
@@ -388,7 +389,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Team-Leader-Logistique-%28hfx%29-Projets%2C-Packaging-et-Formation/1428340633/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:24.581Z",
+      "crawledAt": "2026-08-29T03:55:38.640Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -425,7 +426,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Service-Techniker-Elektriker-f%C3%BCr-Turmdrehkrane-%28mw%29/1275818101/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:20.477Z",
+      "crawledAt": "2026-08-29T03:55:39.172Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -462,7 +463,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Service-Techniker-Monteur-f%C3%BCr-Turmdrehkrane-%28mw%29/1275818001/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:20.765Z",
+      "crawledAt": "2026-08-29T03:55:36.421Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -477,7 +478,6 @@
       "postedDate": "2026-08-17",
       "applyUrl": "https://careers.liebherr.com/job/Reiden-Service-Techniker-Monteur-f%C3%BCr-Turmdrehkrane-%28mw%29/1275818001/",
       "jobReqId": "1275818001",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-08-17T21:29:08.707Z",
       "_qualityScore": 82,
       "_qualityBreakdown": {
@@ -485,7 +485,8 @@
         "richness": 18,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-8f25019da137",
@@ -499,7 +500,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Young-Talent-Market-Intelligence-&-Aftermarket-Solutions/1426040433/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:07.142Z",
+      "crawledAt": "2026-08-29T03:55:27.928Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -536,7 +537,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Key-Account-Manager-Defense-%28mfx%29/1421353833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:09.752Z",
+      "crawledAt": "2026-08-29T03:55:29.237Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -551,7 +552,6 @@
       "postedDate": "2026-07-31",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Key-Account-Manager-Defense-%28mfx%29/1421353833/",
       "jobReqId": "1421353833",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-31T22:10:08.557Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -559,7 +559,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-0143b8bc44e0",
@@ -573,7 +574,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Key-Account-Manager-Defense-%28mfx%29/1421353733/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:24.268Z",
+      "crawledAt": "2026-08-29T03:55:43.250Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -610,7 +611,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-M%C3%A9canicien-Prototypes-%28wmx%29-%28ED%29/1420288033/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:10.029Z",
+      "crawledAt": "2026-08-29T03:55:25.067Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -646,7 +647,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Customer-Claim-Manager-%28mfx%29/1420062833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:13.115Z",
+      "crawledAt": "2026-08-29T03:55:25.951Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -661,7 +662,6 @@
       "postedDate": "2026-07-29",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Customer-Claim-Manager-%28mfx%29/1420062833/",
       "jobReqId": "1420062833",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-29T11:35:17.960Z",
       "_qualityScore": 82,
       "_qualityBreakdown": {
@@ -669,7 +669,8 @@
         "richness": 18,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-36c8b25356df",
@@ -683,7 +684,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Agent-de-processus-%28hfx%29-Assemblage-moteurs-%C3%A0-combustion/1420395033/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:21.316Z",
+      "crawledAt": "2026-08-29T03:55:36.676Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -719,7 +720,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Tagetik-Expert-Group-Consolidation-&-Planning-%28mfd%29/1418770933/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:10.591Z",
+      "crawledAt": "2026-08-29T03:55:27.051Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -734,7 +735,6 @@
       "postedDate": "2026-07-24",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Tagetik-Expert-Group-Consolidation-&-Planning-%28mfd%29/1418770933/",
       "jobReqId": "1418770933",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-24T22:06:24.418Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -742,7 +742,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-c44657dce6ee",
@@ -756,7 +757,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Operator-Trainer-%28mfx%29/1418736133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:10.901Z",
+      "crawledAt": "2026-08-29T03:55:24.814Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -771,7 +772,6 @@
       "postedDate": "2026-07-24",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Operator-Trainer-%28mfx%29/1418736133/",
       "jobReqId": "1418736133",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-24T22:06:23.724Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -779,7 +779,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-943c37e66cde",
@@ -793,7 +794,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Junior-Konsolidierer-%28mwd%29-100/1418804133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:23.087Z",
+      "crawledAt": "2026-08-29T03:55:38.028Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -829,7 +830,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Junior-Group-Controller-%28mwd%29-100/1418804833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:23.969Z",
+      "crawledAt": "2026-08-29T03:55:37.747Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -844,7 +845,6 @@
       "postedDate": "2026-07-24",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Junior-Group-Controller-%28mwd%29-100/1418804833/",
       "jobReqId": "1418804833",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-24T22:06:48.393Z",
       "_qualityScore": 80,
       "_qualityBreakdown": {
@@ -852,7 +852,8 @@
         "richness": 18,
         "translation": 23,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-3daf471d0ba8",
@@ -866,7 +867,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Operator-Trainer-%28mwd%29/1418736033/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:24.893Z",
+      "crawledAt": "2026-08-29T03:55:41.330Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -881,7 +882,6 @@
       "postedDate": "2026-07-24",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Operator-Trainer-%28mwd%29/1418736033/",
       "jobReqId": "1418736033",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-24T22:06:47.736Z",
       "_qualityScore": 82,
       "_qualityBreakdown": {
@@ -889,7 +889,8 @@
         "richness": 18,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-914c2e803e46",
@@ -903,7 +904,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Data-Domain-Manager-Product-%28mwd%29/1417792133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:11.746Z",
+      "crawledAt": "2026-08-29T03:55:27.364Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -918,7 +919,6 @@
       "postedDate": "2026-07-22",
       "applyUrl": "https://careers.liebherr.com/job/Bulle-Data-Domain-Manager-Product-%28mwd%29/1417792133/",
       "jobReqId": "1417792133",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-22T22:12:45.831Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -926,7 +926,8 @@
         "richness": 20,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-f9f51e8cbbcd",
@@ -940,7 +941,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Bid-&-Capture-Manager-Defense-%28mfx%29/1417873633/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:12.039Z",
+      "crawledAt": "2026-08-29T03:55:24.504Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -955,7 +956,6 @@
       "postedDate": "2026-07-22",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Bid-&-Capture-Manager-Defense-%28mfx%29/1417873633/",
       "jobReqId": "1417873633",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-22T22:12:46.196Z",
       "_qualityScore": 82,
       "_qualityBreakdown": {
@@ -963,7 +963,8 @@
         "richness": 18,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-fe7aa8b60a44",
@@ -977,7 +978,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Bid-&-Capture-Manager-Defense-%28mwd%29/1417873733/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:25.471Z",
+      "crawledAt": "2026-08-29T03:55:38.343Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -992,7 +993,6 @@
       "postedDate": "2026-07-22",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Bid-&-Capture-Manager-Defense-%28mwd%29/1417873733/",
       "jobReqId": "1417873733",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-22T22:13:10.991Z",
       "_qualityScore": 82,
       "_qualityBreakdown": {
@@ -1000,7 +1000,8 @@
         "richness": 18,
         "translation": 25,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-6b67210584f0",
@@ -1014,7 +1015,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Service-Techniker-Mobilbaukrane-%28mw%29/1415091533/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:25.185Z",
+      "crawledAt": "2026-08-29T03:55:39.713Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -1050,7 +1051,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Group-Senior-Internal-Auditor-%28mfd%29/1414668333/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:07.720Z",
+      "crawledAt": "2026-08-29T03:55:23.605Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -1065,7 +1066,6 @@
       "postedDate": "2026-07-14",
       "applyUrl": "https://careers.liebherr.com/job/Nussbaumen-Group-Senior-Internal-Auditor-%28mfd%29/1414668333/",
       "jobReqId": "1414668333",
-      "needsRetranslation": false,
       "firstSeenAt": "2026-07-14T11:05:27.685Z",
       "_qualityScore": 80,
       "_qualityBreakdown": {
@@ -1073,7 +1073,8 @@
         "richness": 18,
         "translation": 23,
         "completeness": 14
-      }
+      },
+      "needsRetranslation": false
     },
     {
       "id": "liebherr-36c429a046d5",
@@ -1087,7 +1088,7 @@
       "url": "https://careers.liebherr.com/job/Nussbaumen-Group-Senior-Internal-Auditor-%28mwd%29/1171934501/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:22.197Z",
+      "crawledAt": "2026-08-29T03:55:40.770Z",
       "addressLocality": "Nussbaumen",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -1124,7 +1125,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Service-Techniker-Autokrane-%28mw%29/1413840133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:23:27.209Z",
+      "crawledAt": "2026-08-29T03:55:41.601Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -1160,7 +1161,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Internship-Data-Product-Value-Analyst-%28mwd%29/1413369133/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:11.174Z",
+      "crawledAt": "2026-08-29T03:55:25.654Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -1196,7 +1197,7 @@
       "url": "https://careers.liebherr.com/job/Reiden-Initialbewerbung-Liebherr-Baumaschinen-AG/1399715833/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:12.834Z",
+      "crawledAt": "2026-08-29T03:55:22.179Z",
       "addressLocality": "Reiden",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -1233,7 +1234,7 @@
       "url": "https://careers.liebherr.com/job/Bulle-Peintre-polyvalent-%28hfx%29-Production-moteurs-%C3%A0-combustion-Temporaire/1249898101/",
       "source": "Liebherr Dedicated Parser (jobs2web)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:23:26.871Z",
+      "crawledAt": "2026-08-29T03:55:40.252Z",
       "addressLocality": "Bulle",
       "addressRegion": "FR",
       "addressCountry": "CH",
