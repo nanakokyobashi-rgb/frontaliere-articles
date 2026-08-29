@@ -1,17 +1,18 @@
 {
   "key": "citta-di-mendrisio",
   "label": "Città di Mendrisio",
-  "generatedAt": "2026-08-29T03:13:09.473Z",
+  "generatedAt": "2026-08-29T14:24:00.233Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 7840,
-  "avgDurationMs": 7840,
+  "durationMs": 8646,
+  "avgDurationMs": 8646,
   "durationHistory": [
     8267,
-    7840
+    7840,
+    8646
   ],
   "newJobs": [],
   "updatedJobs": [],
