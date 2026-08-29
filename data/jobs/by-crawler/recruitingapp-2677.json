@@ -1,6 +1,6 @@
 {
   "crawlerKey": "recruitingapp-2677",
-  "assembledAt": "2026-08-28T21:21:18.134Z",
+  "assembledAt": "2026-08-29T03:38:58.189Z",
   "jobs": [
     {
       "id": "recruitingapp-2677-890fd0f8436e",
@@ -31,7 +31,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1936/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:14.711Z",
+      "crawledAt": "2026-08-29T03:38:55.104Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -101,7 +101,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1901/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:14.107Z",
+      "crawledAt": "2026-08-29T03:38:54.500Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -174,7 +174,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1909/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:21:13.805Z",
+      "crawledAt": "2026-08-29T03:38:54.197Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -241,7 +241,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1950/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:13.503Z",
+      "crawledAt": "2026-08-29T03:38:53.895Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -311,7 +311,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1961/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:13.199Z",
+      "crawledAt": "2026-08-29T03:38:53.592Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -381,7 +381,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1966/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:21:12.895Z",
+      "crawledAt": "2026-08-29T03:38:53.289Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -451,7 +451,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1967/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:21:12.593Z",
+      "crawledAt": "2026-08-29T03:38:52.987Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -510,7 +510,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1958/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:12.290Z",
+      "crawledAt": "2026-08-29T03:38:52.685Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -584,7 +584,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1957/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:11.987Z",
+      "crawledAt": "2026-08-29T03:38:52.382Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -657,7 +657,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1973/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:11.685Z",
+      "crawledAt": "2026-08-29T03:38:52.079Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -716,7 +716,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1977/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:11.383Z",
+      "crawledAt": "2026-08-29T03:38:51.777Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -786,7 +786,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1978/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:11.079Z",
+      "crawledAt": "2026-08-29T03:38:51.475Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -861,7 +861,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1980/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:10.777Z",
+      "crawledAt": "2026-08-29T03:38:51.172Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -936,7 +936,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1981/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:10.475Z",
+      "crawledAt": "2026-08-29T03:38:50.870Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1006,7 +1006,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1976/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:10.172Z",
+      "crawledAt": "2026-08-29T03:38:50.568Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1080,7 +1080,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1933/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:09.870Z",
+      "crawledAt": "2026-08-29T03:38:50.266Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1154,7 +1154,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1908/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:09.567Z",
+      "crawledAt": "2026-08-29T03:38:49.963Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1224,7 +1224,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1983/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:09.265Z",
+      "crawledAt": "2026-08-29T03:38:49.661Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1297,7 +1297,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1927/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:21:08.961Z",
+      "crawledAt": "2026-08-29T03:38:49.358Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1356,7 +1356,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1986/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:08.657Z",
+      "crawledAt": "2026-08-29T03:38:49.055Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1431,7 +1431,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1987/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:08.354Z",
+      "crawledAt": "2026-08-29T03:38:48.752Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1498,7 +1498,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1988/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:21:08.050Z",
+      "crawledAt": "2026-08-29T03:38:48.450Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1513,18 +1513,17 @@
       "applyUrl": "https://recruitingapp-2677.umantis.com/Vacancies/1988/Description/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "fachspezialist-in-wertpapierabwicklung-recruitingapp-2677-ch",
-        "fachspezialist-in-wertpapierabwicklung-e-recruiting-llb-gruppe-stellen-lugano"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "fachspezialist-in-wertpapierabwicklung-recruitingapp-2677-ch",
           "fachspezialist-in-wertpapierabwicklung-e-recruiting-llb-gruppe-stellen-lugano"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:14.492Z",
+      "previousSlugs": [
+        "fachspezialist-in-wertpapierabwicklung-recruitingapp-2677-ch",
+        "fachspezialist-in-wertpapierabwicklung-e-recruiting-llb-gruppe-stellen-lugano"
+      ],
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -1537,7 +1536,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:27:14.492Z"
     },
     {
       "id": "recruitingapp-2677-d51834a95e3a",
@@ -1567,7 +1567,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1982/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:21:07.748Z",
+      "crawledAt": "2026-08-29T03:38:48.147Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1583,7 +1583,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:14.179Z",
       "salaryMin": 51500,
       "salaryMax": 88000,
       "baseSalary": {
@@ -1596,7 +1595,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:27:14.179Z"
     },
     {
       "id": "recruitingapp-2677-0c8ec39e30ec",
@@ -1626,7 +1626,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1989/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:21:07.444Z",
+      "crawledAt": "2026-08-29T03:38:47.842Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1641,18 +1641,17 @@
       "applyUrl": "https://recruitingapp-2677.umantis.com/Vacancies/1989/Description/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "spezialist-in-fondsadministration-llb-swiss-investment-ag-recruitingapp-2677-ch",
-        "spezialist-in-fondsadministration-llb-swiss-investment-ag-e-recruiting-llb-gruppe-stellen-lugano"
-      ],
+      "needsRetranslation": true,
       "previousSlugsByLocale": {
         "it": [
           "spezialist-in-fondsadministration-llb-swiss-investment-ag-recruitingapp-2677-ch",
           "spezialist-in-fondsadministration-llb-swiss-investment-ag-e-recruiting-llb-gruppe-stellen-lugano"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:13.870Z",
+      "previousSlugs": [
+        "spezialist-in-fondsadministration-llb-swiss-investment-ag-recruitingapp-2677-ch",
+        "spezialist-in-fondsadministration-llb-swiss-investment-ag-e-recruiting-llb-gruppe-stellen-lugano"
+      ],
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -1665,7 +1664,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:27:13.870Z"
     },
     {
       "id": "recruitingapp-2677-9fee5317d7b3",
@@ -1695,7 +1695,7 @@
       "url": "https://recruitingapp-2677.umantis.com/Vacancies/1991/Description/1",
       "source": "E-Recruiting LLB-Gruppe Stellen Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:21:07.126Z",
+      "crawledAt": "2026-08-29T03:38:47.525Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1711,7 +1711,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:13.458Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -1724,7 +1723,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:27:13.458Z"
     }
   ]
 }
