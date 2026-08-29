@@ -1,6 +1,6 @@
 {
   "crawlerKey": "spitex-ch",
-  "assembledAt": "2026-08-29T14:31:08.543Z",
+  "assembledAt": "2026-08-29T23:18:06.560Z",
   "jobs": [
     {
       "id": "spitex-ch-f7b64db24c9b",
@@ -34,7 +34,7 @@
       "url": "https://www.spitexjobs.ch/job/herzlich-willkommen-bei-rebeno/J988181",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:31:00.389Z",
+      "crawledAt": "2026-08-29T23:17:56.451Z",
       "addressLocality": "Zollikofen",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "url": "https://www.spitexjobs.ch/job/geschaeftsfuehrerin-geschaeftsfuehrer-80-100-prozent/J989020",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:45.144Z",
+      "crawledAt": "2026-08-29T23:17:55.583Z",
       "addressLocality": "Oberhofen am Thunersee",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -195,7 +195,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf/J989321",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:31:01.781Z",
+      "crawledAt": "2026-08-29T23:17:58.877Z",
       "addressLocality": "Lenzerheide/Lai",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -269,7 +269,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-30-70-prozent/J986303",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:43.739Z",
+      "crawledAt": "2026-08-29T23:17:41.651Z",
       "addressLocality": "Lenzburg",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -352,7 +352,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-m-w-d-40-prozent-80-prozent/J986599",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:59.432Z",
+      "crawledAt": "2026-08-29T23:17:40.346Z",
       "addressLocality": "Grosshöchstetten",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -542,7 +542,8 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:24:36.466Z"
+      "firstSeenAt": "2026-08-28T05:24:36.466Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-9e36163d20be",
@@ -623,7 +624,8 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:24:35.079Z"
+      "firstSeenAt": "2026-08-28T05:24:35.079Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-3e05657df163",
@@ -657,7 +659,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-wattenwil/J991535",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:56.440Z",
+      "crawledAt": "2026-08-29T23:17:54.715Z",
       "addressLocality": "Wattenwil",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -731,7 +733,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-thun/J991536",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:55.513Z",
+      "crawledAt": "2026-08-29T23:17:54.118Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -805,7 +807,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-thun/J991540",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:54.658Z",
+      "crawledAt": "2026-08-29T23:17:53.522Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -879,7 +881,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-spiez/J991541",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:53.828Z",
+      "crawledAt": "2026-08-29T23:17:52.745Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -953,7 +955,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-spiez/J991542",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:52.937Z",
+      "crawledAt": "2026-08-29T23:17:51.918Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1027,7 +1029,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-assistentin-gesundheit-und-soziales-eba/J991543",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:52.001Z",
+      "crawledAt": "2026-08-29T23:17:51.123Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1111,7 +1113,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-zusammenarbeit-mit-solina-ziegelei/J991548",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:51.107Z",
+      "crawledAt": "2026-08-29T23:17:50.301Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1185,7 +1187,7 @@
       "url": "https://www.spitexjobs.ch/job/studium-dipl-pflegefachperson-hf-in-betriebsanstellung-fokus-p-k/J991549",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:50.415Z",
+      "crawledAt": "2026-08-29T23:17:49.405Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1248,7 +1250,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-abenddienst-40-70-prozent/J980875",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:48.544Z",
+      "crawledAt": "2026-08-29T23:17:47.403Z",
       "addressLocality": "Muttenz",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -1323,7 +1325,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachfrau-pflegefachmann-hf-im-tagdienst-mo-fr/J982990",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:47.630Z",
+      "crawledAt": "2026-08-29T23:17:46.595Z",
       "addressLocality": "Untersiggenthal",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -1397,7 +1399,7 @@
       "url": "https://www.spitexjobs.ch/job/du-moechtest-als-dipl-pflegefachperson-einfach-wieder-zeit-fuer-menschen-haben/J977488",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:46.817Z",
+      "crawledAt": "2026-08-29T23:17:45.710Z",
       "addressLocality": "Affoltern am Albis",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1482,7 +1484,7 @@
       "url": "https://www.spitexjobs.ch/job/fage-hauspflegerin-40-90-prozent/J982962",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:45.848Z",
+      "crawledAt": "2026-08-29T23:17:44.847Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1522,7 +1524,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:30:45.848Z"
+      "firstSeenAt": "2026-08-29T23:17:44.847Z"
     },
     {
       "id": "spitex-ch-6ed2ea4a768c",
@@ -1556,7 +1558,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachpersonen-hf-40-100-prozent/J982960",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:45.214Z",
+      "crawledAt": "2026-08-29T23:17:44.254Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1596,7 +1598,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:30:45.214Z"
+      "firstSeenAt": "2026-08-29T23:17:44.254Z"
     },
     {
       "id": "spitex-ch-dd12b0fe86c8",
@@ -1630,7 +1632,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-fabe-efz-50-80-prozent/J974896",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:44.273Z",
+      "crawledAt": "2026-08-29T23:17:43.660Z",
       "addressLocality": "Olten",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -1662,7 +1664,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:30:44.273Z"
+      "firstSeenAt": "2026-08-29T23:17:43.660Z"
     },
     {
       "id": "spitex-ch-0b0d61a0ed9c",
@@ -1696,7 +1698,7 @@
       "url": "https://www.spitexjobs.ch/job/mitarbeiter-in-fallfuehrung-demenz-50-70-prozent/J991672",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:43.624Z",
+      "crawledAt": "2026-08-29T23:17:42.745Z",
       "addressLocality": "Zug",
       "addressRegion": "ZG",
       "addressCountry": "CH",
@@ -1736,7 +1738,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T14:30:43.624Z"
+      "firstSeenAt": "2026-08-29T23:17:42.745Z"
     },
     {
       "id": "spitex-ch-db747145e83c",
@@ -1770,7 +1772,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-m-w-d-40100-prozent-zuerich/J990941",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:31:01.147Z",
+      "crawledAt": "2026-08-29T23:17:39.221Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1832,86 +1834,6 @@
       }
     },
     {
-      "id": "spitex-ch-0a7863599955",
-      "slug": "esperto-in-safw-40-50-spitex-region-uzwil-niederuzwil",
-      "slugByLocale": {
-        "it": "esperto-in-safw-40-50-spitex-region-uzwil-niederuzwil",
-        "en": "wound-expert-in-safw-40-50-spitex-region-uzwil-niederuzwil",
-        "de": "wundexperte-in-safw-40-50-spitex-ch-niederuzwil",
-        "fr": "expert-in-safw-40-50-spitex-region-uzwil-niederuzwil"
-      },
-      "company": "Spitex Region Uzwil",
-      "companyKey": "spitex-ch",
-      "companyDomain": "spitexjobs.ch",
-      "title": "Wundexperte/In SAfW (40-50%)",
-      "titleByLocale": {
-        "it": "Esperto/In SAfW (40-50%)",
-        "en": "Wundexperte/In SAfW (40-50%)",
-        "de": "Wundexperte/In SAfW (40-50%)",
-        "fr": "Expert/In SAfW (40-50%)"
-      },
-      "description": "Zur Ergänzung der Spitex Region Uzwil suchen wir\nper sofort oder nach Vereinbarung eine/n\n Wundexperte/In SAfW (40-50%)\n Unser moderner Spitex-Betrieb gewährleistet in acht Vertragsgemeinden der Region Uzwil für rund 40'000 Einwohnerinnen und Einwohner die ambulante Versorgung mit pflegerischen und hauswirtschaftlichen Dienstleistungen. Mit rund 60 Mitarbeitenden stellen wir diese Leistungen sicher.\n Ihre Aufgaben\n\n• Sie übernehmen in der gesamten Spitex Region Uzwil die Verantwortung für das\nWundmanagement und stehen allen Teams beratend und instruierend zur Verfügung.\n\n• Sie pflegen, begleiten und beraten Klienten und ihre Angehörigen.\n\n• Durchführen und sicherstellen der Umsetzung des Pflegeprozesses.\n\n• Gewährleistung von wirksamer, zweckmässiger und wirtschaftlicher Pflege.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als diplomierte Pflegefachfrau/Pflegefachmann HF/FH und abgeschlossene Weiterbildung als Wundexpertin SAfW oder gleichwertige Ausbildung\n\n• Berufserfahrung in der Wundpflege und in der ambulanten Versorgung\n\n• Bereitschaft ihr Fachwissen zu vermitteln\n\n• Sie kennen Pflegematerialien in der Wundversorgung und können die Wirtschaftlichkeit in der Anwendung überprüfen\n\n• Verantwortungsbewusstsein, physische und psychische Belastbarkeit\n\n• Flexibilität und organisatorische Fähigkeiten\n\n• Führerschein Kat. B\n Es erwartet Sie ein Umfeld, in dem\n\n• Ihr Mitgestalten und selbständiges Handeln gefragt und möglich sind.\n\n• ein betriebliches Wundkonzept vorhanden ist.\n\n• Ihr Fachwissen an Fort- und Weiterbildungen erweitert werden kann.\n\n• ein offenes und herzliches Betriebsklima selbstverständlich ist.\n\n• Sie von fairen Anstellungsbedingungen, umfassenden Sozialleistungen und einem modernen Arbeitsplatz profitieren.\n Fühlen Sie sich angesprochen?\n Für nähere Auskunft steht Ihnen Yvonne Würth, Geschäftsführung, gerne telefonisch zur Verfügung. 071 951 50 00\n Wir freuen uns auf Ihre vollständigen Bewerbungsunterlagen an:\nTina Lutz, Leitung Finanzwesen & HR, t.lutz@spitex-uzwil.ch\n Besuchen Sie auch unsere Website unter www.spitex-uzwil.ch.\n Spitex Region Uzwil, Waldburgstrasse 10, 9244 Niederuzwil",
-      "descriptionByLocale": {
-        "it": "Per completare la regione Spitex Uzwil stiamo cercando\nimmediatamente o per accordo\nEsperto/In SAfW (40-50%)\nL'operazione Spitex all'avanguardia garantisce assistenza ambulatoria e servizi domestici per circa 40.000 abitanti in otto comuni contratti nella regione di Uzwil. Con circa 60 dipendenti, garantiamo questi servizi.\nI loro compiti\n\n• Si assume la responsabilità di tutta la regione Spitex Uzwil\nGestione del tessuto e sono disponibili a tutte le squadre in consulenza e istruzione.\n\n• Si preoccupano, accompagnano e consigliano i clienti e i loro parenti.\n\n• Eseguire l'esecuzione del processo di cura.\n\n• Assicurare cure efficaci, appropriate ed economiche.\nPortano con loro\n\n• Formazione completa come specialista qualificato in infermiera / nurse HF/FH e completato ulteriore formazione come esperto di ferite SAfW o formazione equivalente\n\n• Esperienza professionale nella cura delle ferite e nella cura ambulatoria\n\n• Volontà a fornire le loro competenze\n\n• Conosci i materiali di cura nella cura delle ferite e puoi controllare la convenienza nell'applicazione\n\n• Responsabilità, resistenza fisica e psicologica\n\n• Flessibilità e capacità organizzative\n\n• Patente di guida Cat. B\nStanno aspettando un ambiente in cui\n\n• La loro partecipazione e l'azione indipendente sono necessari e possibili.\n\n• è presente un concetto di ferita operativa.\n\n• La vostra competenza in materia di istruzione e formazione può essere estesa.\n\n• Un'atmosfera di lavoro aperta e calda è ovviamente una questione.\n\n• Essi beneficiano di condizioni di lavoro eque, benefici sociali completi e un posto di lavoro moderno.\nTi senti indirizzato?\nPer ulteriori informazioni, Yvonne Würth, Managing Director, è a vostra disposizione per telefono. 071 951 50 00\nAttendiamo con ansia i vostri documenti applicativi completi:\nTina Lutz, Responsabile Finanza & HR, t.lutz@spitex-uzwil.ch\nVisita anche il nostro sito www.spitex-uzwil.ch.\nSpitex Regione Uzwil, Waldburgstrasse 10, 9244 Niederuzwil",
-        "en": "To complement the Spitex region Uzwil we are looking for\nimmediately or by agreement\nWound expert/In SAfW (40-50%)\nOur state-of-the-art Spitex operation ensures ambulatory care and domestic services for around 40,000 inhabitants in eight contracted municipalities in the Uzwil region. With around 60 employees, we ensure these services.\nTheir tasks\n\n• You assume responsibility for the entire Spitex region Uzwil\nWound management and are available to all teams in advisory and instruction.\n\n• They care for, accompany and advise clients and their relatives.\n\n• Carry out and ensure the implementation of the care process.\n\n• Ensure effective, appropriate and economical care.\nThey bring with them\n\n• Completed training as a qualified nurse/nurse specialist HF/FH and completed further training as wound expert SAfW or equivalent training\n\n• Professional experience in wound care and ambulatory care\n\n• Willingness to provide their expertise\n\n• You know care materials in wound care and can check the cost-effectiveness in the application\n\n• Responsibility, physical and psychological resilience\n\n• Flexibility and organizational skills\n\n• Driving licence Cat. B\nThey are waiting for an environment in which\n\n• Their participation and independent action are required and possible.\n\n• an operational wound concept is present.\n\n• Your expertise in further education and training can be extended.\n\n• An open and warm working atmosphere is a matter of course.\n\n• They benefit from fair employment conditions, comprehensive social benefits and a modern workplace.\nDo you feel addressed?\nFor more information, Yvonne Würth, Managing Director, is at your disposal by telephone. 071 951 50 00\nWe look forward to your complete application documents:\nTina Lutz, Head of Finance & HR, t.lutz@spitex-uzwil.ch\nAlso visit our website at www.spitex-uzwil.ch.\nSpitex Region Uzwil, Waldburgstrasse 10, 9244 Niederuzwil",
-        "de": "Zur Ergänzung der Spitex Region Uzwil suchen wir\nper sofort oder nach Vereinbarung eine/n\nWundexperte/In SAfW (40-50%)\nUnser moderner Spitex-Betrieb gewährleistet in acht Vertragsgemeinden der Region Uzwil für rund 40'000 Einwohnerinnen und Einwohner die ambulante Versorgung mit pflegerischen und hauswirtschaftlichen Dienstleistungen. Mit rund 60 Mitarbeitenden stellen wir diese Leistungen sicher.\nIhre Aufgaben\n\n• Sie übernehmen in der gesamten Spitex Region Uzwil die Verantwortung für das\nWundmanagement und stehen allen Teams beratend und instruierend zur Verfügung.\n\n• Sie pflegen, begleiten und beraten Klienten und ihre Angehörigen.\n\n• Durchführen und sicherstellen der Umsetzung des Pflegeprozesses.\n\n• Gewährleistung von wirksamer, zweckmässiger und wirtschaftlicher Pflege.\nSie bringen mit\n\n• Abgeschlossene Ausbildung als diplomierte Pflegefachfrau/Pflegefachmann HF/FH und abgeschlossene Weiterbildung als Wundexpertin SAfW oder gleichwertige Ausbildung\n\n• Berufserfahrung in der Wundpflege und in der ambulanten Versorgung\n\n• Bereitschaft ihr Fachwissen zu vermitteln\n\n• Sie kennen Pflegematerialien in der Wundversorgung und können die Wirtschaftlichkeit in der Anwendung überprüfen\n\n• Verantwortungsbewusstsein, physische und psychische Belastbarkeit\n\n• Flexibilität und organisatorische Fähigkeiten\n\n• Führerschein Kat. B\nEs erwartet Sie ein Umfeld, in dem\n\n• Ihr Mitgestalten und selbständiges Handeln gefragt und möglich sind.\n\n• ein betriebliches Wundkonzept vorhanden ist.\n\n• Ihr Fachwissen an Fort- und Weiterbildungen erweitert werden kann.\n\n• ein offenes und herzliches Betriebsklima selbstverständlich ist.\n\n• Sie von fairen Anstellungsbedingungen, umfassenden Sozialleistungen und einem modernen Arbeitsplatz profitieren.\nFühlen Sie sich angesprochen?\nFür nähere Auskunft steht Ihnen Yvonne Würth, Geschäftsführung, gerne telefonisch zur Verfügung. 071 951 50 00\nWir freuen uns auf Ihre vollständigen Bewerbungsunterlagen an:\nTina Lutz, Leitung Finanzwesen & HR, t.lutz@spitex-uzwil.ch\nBesuchen Sie auch unsere Website unter www.spitex-uzwil.ch.\nSpitex Region Uzwil, Waldburgstrasse 10, 9244 Niederuzwil",
-        "fr": "Pour compléter la région Spitex Uzwil que nous recherchons\nimmédiatement ou par accord\nExpert/In SAfW (40-50%)\nNotre exploitation de pointe de Spitex assure des soins ambulatoires et des services domestiques pour environ 40 000 habitants dans huit municipalités sous contrat de la région d'Uzwil. Avec environ 60 employés, nous assurons ces services.\nLeurs tâches\n\n• Vous assumez la responsabilité de toute la région de Spitex Uzwil\nGestion des blessures et sont à la disposition de toutes les équipes en matière de conseils et d'instruction.\n\n• Ils s'occupent, accompagnent et conseillent les clients et leurs proches.\n\n• Mener et assurer la mise en oeuvre du processus de soins.\n\n• Assurer des soins efficaces, appropriés et économiques.\nIls apportent avec eux\n\n• Achevé la formation en tant qu'infirmière/spécialiste infirmière HF/FH et complété la formation en tant qu'expert en blessures SAfW ou formation équivalente\n\n• Expérience professionnelle en soins des plaies et ambulatoires\n\n• Volonté de fournir leur expertise\n\n• Vous connaissez le matériel de soins en soin des plaies et pouvez vérifier le rapport coût-efficacité dans l'application\n\n• Responsabilité, résilience physique et psychologique\n\n• Flexibilité et compétences organisationnelles\n\n• Permis de conduire Cat. B\nIls attendent un environnement dans lequel\n\n• Leur participation et leur action indépendante sont nécessaires et possibles.\n\n• un concept de blessure opérationnelle est présent.\n\n• Votre expertise en matière de formation continue peut être étendue.\n\n• Une atmosphère de travail ouverte et chaleureuse est bien sûr une question.\n\n• Ils bénéficient de conditions d'emploi équitables, d'avantages sociaux complets et d'un milieu de travail moderne.\nVous sentez-vous adressé ?\nPour plus d'informations, Yvonne Würth, directrice générale, est à votre disposition par téléphone. 071 951 50 00\nNous attendons avec intérêt vos documents de candidature complets :\nTina Lutz, directrice des finances et des ressources humaines, t.lutz@spitex-uzwil.ch\nVisitez également notre site Web à www.spitex-uzwil.ch.\nRégion Spitex Uzwil, Waldburgstrasse 10, 9244 Niederuzwil"
-      },
-      "needsRetranslation": true,
-      "location": "Niederuzwil",
-      "canton": "SG",
-      "url": "https://www.spitexjobs.ch/job/wundexperte-in-safw-40-50-prozent/J988794",
-      "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
-      "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:42.295Z",
-      "addressLocality": "Niederuzwil",
-      "addressRegion": "SG",
-      "addressCountry": "CH",
-      "country": "CH",
-      "postalCode": "9244",
-      "category": "Sanità / Ospedali",
-      "contract": "part-time",
-      "employmentType": "PART_TIME",
-      "experienceLevel": "mid",
-      "sector": "Sanità / Ospedali",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-07-30",
-      "validThrough": "2026-08-29",
-      "applyUrl": "https://www.spitexjobs.ch/job/wundexperte-in-safw-40-50-prozent/J988794",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "previousSlugs": [
-        "wundexperte-in-safw-40-50-spitex-ch-niederuzwil",
-        "esperto-in-safw-40-50-spitex-region-uzwil-niederuzwil"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "wundexperte-in-safw-40-50-spitex-ch-niederuzwil",
-          "esperto-in-safw-40-50-spitex-region-uzwil-niederuzwil"
-        ],
-        "en": [
-          "wundexperte-in-safw-40-50-spitex-ch-niederuzwil"
-        ],
-        "fr": [
-          "wundexperte-in-safw-40-50-spitex-ch-niederuzwil"
-        ]
-      },
-      "firstSeenAt": "2026-07-30T11:17:43.757Z",
-      "salaryMin": 40800,
-      "salaryMax": 57000,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 40800,
-          "maxValue": 57000,
-          "unitText": "YEAR"
-        }
-      }
-    },
-    {
       "id": "spitex-ch-c0b0c87ce800",
       "slug": "apprendistato-come-fachfrau-o-fachmann-gesundheit-fage-cfc-spitex-region-lenzburg",
       "slugByLocale": {
@@ -1943,7 +1865,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-als-fachfrau-oder-fachmann-gesundheit-fage-efz/J991394",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:40.953Z",
+      "crawledAt": "2026-08-29T23:17:58.115Z",
       "addressLocality": "Lenzburg",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -2017,7 +1939,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit/J985849",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:41.538Z",
+      "crawledAt": "2026-08-29T23:17:39.784Z",
       "addressLocality": "Riggisberg",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2095,7 +2017,7 @@
       "url": "https://www.spitexjobs.ch/job/fachmann-fachfrau-gesundheit-mit-einsatzplanung-70-100-prozent/J989339",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:41.723Z",
+      "crawledAt": "2026-08-29T23:17:38.746Z",
       "addressLocality": "Glattbrugg",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2245,7 +2167,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf-50-prozent-wiedereinsteigerin-wiedereinsteiger-willkommen/J990010",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:30:43.138Z",
+      "crawledAt": "2026-08-29T23:17:59.646Z",
       "addressLocality": "Bauma",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2326,7 +2248,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-fage-efz-psychiatrie-50-60-prozent-montag-freitag/J989337",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T05:24:22.542Z",
+      "crawledAt": "2026-08-29T23:17:57.299Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -3012,6 +2934,165 @@
       },
       "firstSeenAt": "2026-08-27T00:42:03.161Z",
       "crawlerMissStreak": 2
+    },
+    {
+      "id": "spitex-ch-97b85d8bfd93",
+      "slug": "pflegefachperson-hf-con-berufsbildungsaufgaben-per-hf-studierende-spitex-gau-oensingen",
+      "slugByLocale": {
+        "de": "pflegefachperson-hf-mit-berufsbildungsaufgaben-fur-hf-studierende-spitex-ch-oensingen",
+        "en": "pflegefachperson-hf-mit-berufsbildungsaufgaben-fur-hf-studierende-spitex-gau-oensingen",
+        "fr": "pflegefachperson-hf-mit-berufsbildungsaufgaben-fur-hf-studierende-spitex-gau-oensingen",
+        "it": "pflegefachperson-hf-con-berufsbildungsaufgaben-per-hf-studierende-spitex-gau-oensingen"
+      },
+      "company": "Spitex Gäu",
+      "companyKey": "spitex-ch",
+      "companyDomain": "spitexjobs.ch",
+      "title": "Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende",
+      "titleByLocale": {
+        "de": "Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende",
+        "it": "Pflegefachperson HF con Berufsbildungsaufgaben per HF Studierende",
+        "en": "Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende",
+        "fr": "Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende"
+      },
+      "description": "Die Spitex Gäu ist eine gemeinnützige Organisation und leistet im Auftrag div. Einwohnergemeinden eine professionelle und umfassende Pflege und Betreuung zu Hause.\n Seit vielen Jahren sind wir Ausbildungsbetrieb. Aufgrund der steigenden Anzahl Ausbildungsplätze suchen wir per sofort oder nach Vereinbarung eine weitere\n Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende\n Ihre Aufgaben:\n\n• Begleitung und Betreuung von Studierenden HF\n\n• Mitverantwortung für die Erreichung der Lernziele\n\n• Vermittlung beruflicher Handlungskompetenzen sowie Begleitung beim Qualifikationsverfahren\n\n• Führen und dokumentieren der Beurteilungs- und Qualifikationsgespräche im Portal Skillpartout\n\n• Je nach Pensum Übernahme von Kundeneinsätzen mit Fallführungen (Betreuung und Begleitung von Kunden)\n Ihr Profil:\n\n• Abschluss als Dipl. Pflegefachperson HF/FH\n\n• Kursausweis als Berufsbildner/in: 100 Lernstunden oder Bereitschaft, diesen zu erwerben\n\n• mindestens 2 Jahren berufliche Praxis im Lehrgebiet\n\n• Sie sind teamfähig, flexibel und belastbar\n Das bieten wir Ihnen:\n\n• Kollegiales, wertschätzendes Arbeitsklima mit einer transparenten und offenen Kommunikation\n\n• Abwechslungsreiche, selbständige und verantwortungsvolle Tätigkeit\n\n• Möglichkeit zur individuellen Weiterentwicklung und Mitgestaltung\n\n• Moderne Infrastruktur sowie attraktive Vergünstigungen\n\n• Zeitgemässe Anstellungsbedingungen nach kantonalen Richtlinien\n Bereit für den nächsten Schritt? Senden Sie uns Ihre vollständige Bewerbung (Motivationsbrief, Lebenslauf, Arbeitszeugnisse, Diplome) auf personal@spitex-gaeu.ch - wir freuen uns auf Sie.\n Für Fragen kontaktieren Sie Michaela Strub, Teamleiterin Fachpflege (062 544 71 60).",
+      "descriptionByLocale": {
+        "de": "Die Spitex Gäu ist eine gemeinnützige Organisation und leistet im Auftrag div. Einwohnergemeinden eine professionelle und umfassende Pflege und Betreuung zu Hause.\n Seit vielen Jahren sind wir Ausbildungsbetrieb. Aufgrund der steigenden Anzahl Ausbildungsplätze suchen wir per sofort oder nach Vereinbarung eine weitere\n Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende\n Ihre Aufgaben:\n\n• Begleitung und Betreuung von Studierenden HF\n\n• Mitverantwortung für die Erreichung der Lernziele\n\n• Vermittlung beruflicher Handlungskompetenzen sowie Begleitung beim Qualifikationsverfahren\n\n• Führen und dokumentieren der Beurteilungs- und Qualifikationsgespräche im Portal Skillpartout\n\n• Je nach Pensum Übernahme von Kundeneinsätzen mit Fallführungen (Betreuung und Begleitung von Kunden)\n Ihr Profil:\n\n• Abschluss als Dipl. Pflegefachperson HF/FH\n\n• Kursausweis als Berufsbildner/in: 100 Lernstunden oder Bereitschaft, diesen zu erwerben\n\n• mindestens 2 Jahren berufliche Praxis im Lehrgebiet\n\n• Sie sind teamfähig, flexibel und belastbar\n Das bieten wir Ihnen:\n\n• Kollegiales, wertschätzendes Arbeitsklima mit einer transparenten und offenen Kommunikation\n\n• Abwechslungsreiche, selbständige und verantwortungsvolle Tätigkeit\n\n• Möglichkeit zur individuellen Weiterentwicklung und Mitgestaltung\n\n• Moderne Infrastruktur sowie attraktive Vergünstigungen\n\n• Zeitgemässe Anstellungsbedingungen nach kantonalen Richtlinien\n Bereit für den nächsten Schritt? Senden Sie uns Ihre vollständige Bewerbung (Motivationsbrief, Lebenslauf, Arbeitszeugnisse, Diplome) auf personal@spitex-gaeu.ch - wir freuen uns auf Sie.\n Für Fragen kontaktieren Sie Michaela Strub, Teamleiterin Fachpflege (062 544 71 60).",
+        "it": "Die Spitex Gäu ist eine gemeinnützige Organisation und leistet im Auftrag div. Einwohnergemeinden eine professionelle und umfassende Pflege und Betreuung zu Hause.\n Seit vielen Jahren sind wir Ausbildungsbetrieb. Aufgrund der steigenden Anzahl Ausbildungsplätze suchen wir per sofort oder nach Vereinbarung eine weitere\n Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende\n Ihre Aufgaben:\n\n• Begleitung und Betreuung von Studierenden HF\n\n• Mitverantwortung für die Erreichung der Lernziele\n\n• Vermittlung beruflicher Handlungskompetenzen sowie Begleitung beim Qualifikationsverfahren\n\n• Führen und dokumentieren der Beurteilungs- und Qualifikationsgespräche im Portal Skillpartout\n\n• Je nach Pensum Übernahme von Kundeneinsätzen mit Fallführungen (Betreuung und Begleitung von Kunden)\n Ihr Profil:\n\n• Abschluss als Dipl. Pflegefachperson HF/FH\n\n• Kursausweis als Berufsbildner/in: 100 Lernstunden oder Bereitschaft, diesen zu erwerben\n\n• mindestens 2 Jahren berufliche Praxis im Lehrgebiet\n\n• Sie sind teamfähig, flexibel und belastbar\n Das bieten wir Ihnen:\n\n• Kollegiales, wertschätzendes Arbeitsklima mit einer transparenten und offenen Kommunikation\n\n• Abwechslungsreiche, selbständige und verantwortungsvolle Tätigkeit\n\n• Möglichkeit zur individuellen Weiterentwicklung und Mitgestaltung\n\n• Moderne Infrastruktur sowie attraktive Vergünstigungen\n\n• Zeitgemässe Anstellungsbedingungen nach kantonalen Richtlinien\n Bereit für den nächsten Schritt? Senden Sie uns Ihre vollständige Bewerbung (Motivationsbrief, Lebenslauf, Arbeitszeugnisse, Diplome) auf personal@spitex-gaeu.ch - wir freuen uns auf Sie.\n Für Fragen kontaktieren Sie Michaela Strub, Teamleiterin Fachpflege (062 544 71 60).",
+        "en": "Die Spitex Gäu ist eine gemeinnützige Organisation und leistet im Auftrag div. Einwohnergemeinden eine professionelle und umfassende Pflege und Betreuung zu Hause.\n Seit vielen Jahren sind wir Ausbildungsbetrieb. Aufgrund der steigenden Anzahl Ausbildungsplätze suchen wir per sofort oder nach Vereinbarung eine weitere\n Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende\n Ihre Aufgaben:\n\n• Begleitung und Betreuung von Studierenden HF\n\n• Mitverantwortung für die Erreichung der Lernziele\n\n• Vermittlung beruflicher Handlungskompetenzen sowie Begleitung beim Qualifikationsverfahren\n\n• Führen und dokumentieren der Beurteilungs- und Qualifikationsgespräche im Portal Skillpartout\n\n• Je nach Pensum Übernahme von Kundeneinsätzen mit Fallführungen (Betreuung und Begleitung von Kunden)\n Ihr Profil:\n\n• Abschluss als Dipl. Pflegefachperson HF/FH\n\n• Kursausweis als Berufsbildner/in: 100 Lernstunden oder Bereitschaft, diesen zu erwerben\n\n• mindestens 2 Jahren berufliche Praxis im Lehrgebiet\n\n• Sie sind teamfähig, flexibel und belastbar\n Das bieten wir Ihnen:\n\n• Kollegiales, wertschätzendes Arbeitsklima mit einer transparenten und offenen Kommunikation\n\n• Abwechslungsreiche, selbständige und verantwortungsvolle Tätigkeit\n\n• Möglichkeit zur individuellen Weiterentwicklung und Mitgestaltung\n\n• Moderne Infrastruktur sowie attraktive Vergünstigungen\n\n• Zeitgemässe Anstellungsbedingungen nach kantonalen Richtlinien\n Bereit für den nächsten Schritt? Senden Sie uns Ihre vollständige Bewerbung (Motivationsbrief, Lebenslauf, Arbeitszeugnisse, Diplome) auf personal@spitex-gaeu.ch - wir freuen uns auf Sie.\n Für Fragen kontaktieren Sie Michaela Strub, Teamleiterin Fachpflege (062 544 71 60).",
+        "fr": "Die Spitex Gäu ist eine gemeinnützige Organisation und leistet im Auftrag div. Einwohnergemeinden eine professionelle und umfassende Pflege und Betreuung zu Hause.\n Seit vielen Jahren sind wir Ausbildungsbetrieb. Aufgrund der steigenden Anzahl Ausbildungsplätze suchen wir per sofort oder nach Vereinbarung eine weitere\n Pflegefachperson HF mit Berufsbildungsaufgaben für HF Studierende\n Ihre Aufgaben:\n\n• Begleitung und Betreuung von Studierenden HF\n\n• Mitverantwortung für die Erreichung der Lernziele\n\n• Vermittlung beruflicher Handlungskompetenzen sowie Begleitung beim Qualifikationsverfahren\n\n• Führen und dokumentieren der Beurteilungs- und Qualifikationsgespräche im Portal Skillpartout\n\n• Je nach Pensum Übernahme von Kundeneinsätzen mit Fallführungen (Betreuung und Begleitung von Kunden)\n Ihr Profil:\n\n• Abschluss als Dipl. Pflegefachperson HF/FH\n\n• Kursausweis als Berufsbildner/in: 100 Lernstunden oder Bereitschaft, diesen zu erwerben\n\n• mindestens 2 Jahren berufliche Praxis im Lehrgebiet\n\n• Sie sind teamfähig, flexibel und belastbar\n Das bieten wir Ihnen:\n\n• Kollegiales, wertschätzendes Arbeitsklima mit einer transparenten und offenen Kommunikation\n\n• Abwechslungsreiche, selbständige und verantwortungsvolle Tätigkeit\n\n• Möglichkeit zur individuellen Weiterentwicklung und Mitgestaltung\n\n• Moderne Infrastruktur sowie attraktive Vergünstigungen\n\n• Zeitgemässe Anstellungsbedingungen nach kantonalen Richtlinien\n Bereit für den nächsten Schritt? Senden Sie uns Ihre vollständige Bewerbung (Motivationsbrief, Lebenslauf, Arbeitszeugnisse, Diplome) auf personal@spitex-gaeu.ch - wir freuen uns auf Sie.\n Für Fragen kontaktieren Sie Michaela Strub, Teamleiterin Fachpflege (062 544 71 60)."
+      },
+      "needsRetranslation": true,
+      "location": "Oensingen",
+      "canton": "SO",
+      "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf-mit-berufsbildungsaufgaben-fuer-hf-studierende/J985626",
+      "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:17:42.293Z",
+      "addressLocality": "Oensingen",
+      "addressRegion": "SO",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "4702",
+      "category": "Sanità / Ospedali",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sanità / Ospedali",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "validThrough": "2026-09-19",
+      "applyUrl": "https://www.spitexjobs.ch/job/pflegefachperson-hf-mit-berufsbildungsaufgaben-fuer-hf-studierende/J985626",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegefachperson-hf-mit-berufsbildungsaufgaben-fur-hf-studierende-spitex-ch-oensingen"
+        ],
+        "en": [
+          "nurse-hf-with-vocational-training-tasks-for-hf-students-spitex-gau-oensingen"
+        ],
+        "fr": [
+          "infirmiere-hf-avec-des-taches-de-formation-professionnelle-pour-les-etudiants-hf-spitex-gau-oensingen"
+        ]
+      },
+      "previousSlugs": [
+        "pflegefachperson-hf-mit-berufsbildungsaufgaben-fur-hf-studierende-spitex-ch-oensingen",
+        "nurse-hf-with-vocational-training-tasks-for-hf-students-spitex-gau-oensingen",
+        "infirmiere-hf-avec-des-taches-de-formation-professionnelle-pour-les-etudiants-hf-spitex-gau-oensingen"
+      ],
+      "salaryMin": 85000,
+      "salaryMax": 119000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 85000,
+          "maxValue": 119000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T23:17:42.293Z"
+    },
+    {
+      "id": "spitex-ch-2e203e3ab611",
+      "slug": "fachperson-hauswirtschaft-cfc-40-80-spitex-horw-horw",
+      "slugByLocale": {
+        "de": "fachperson-hauswirtschaft-efz-40-80-spitex-ch-horw",
+        "en": "housekeeping-specialist-efz-40-80-spitex-horw-horw",
+        "fr": "agent-e-d-entretien-efz-40-80-spitex-horw-horw",
+        "it": "fachperson-hauswirtschaft-cfc-40-80-spitex-horw-horw"
+      },
+      "company": "Spitex Horw",
+      "companyKey": "spitex-ch",
+      "companyDomain": "spitexjobs.ch",
+      "title": "Fachperson Hauswirtschaft EFZ (50-100%)",
+      "titleByLocale": {
+        "de": "Fachperson Hauswirtschaft EFZ (50-100%)",
+        "it": "Fachperson Hauswirtschaft CFC (50-100%)",
+        "en": "Fachperson Hauswirtschaft EFZ (50-100%)",
+        "fr": "Fachperson Hauswirtschaft EFZ (50-100%)"
+      },
+      "description": "Herzlich willkommen in unserem Team!\n Die Spitex Horw ist ein zukunftsorientiertes Unternehmen mit rund 50 Mitarbeitenden. Unseren Klientinnen und Klienten ein selbstbestimmtes Leben zu Hause zu ermöglichen, ist unser zentrales Anliegen. Kompetent und einfühlsam beraten und unterstützen wir Menschen jeden Alters. Möchten Sie sich aktiv engagieren und weiterentwickeln? Haben Sie Freude an einer vielseitigen, anspruchsvollen und selbständigen Tätigkeit?\n Wir suchen nach Vereinbarung:\n Fachperson Hauswirtschaft EFZ (50-100%)\n Ihr Aufgabengebiet\n\n• Begleitung, Unterstützung und Entlastung von betagten, kranken und hilfsbedürftigen Personen im hauswirtschaftlichen Bereich.\n\n• Primäre Einsatzgebiete: Wohnungsreinigung, Textilpflege (Waschen, Bügeln), Nahrungsmittel einkaufen. Alle Arbeiten werden wenn möglich zusammen mit den Klientinnen und Klienten erledigt.\n\n• Interdisziplinäre Zusammenarbeit mit Pflegefachkräften, Angehörigen und anderen Diensten.\n\n• Bei Interesse an SRK-Pflegeeinsätzen: Sie pflegen und betreuen unserer Klientinnen und Klienten in ihrem gewohnten Umfeld. Sie unterstützen das Pflegeteam und bringen sich aktiv ein.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Hauswirtschaft EFZ (zwingend).\n\n• Bei SRK-Einsätzen: SRK-Ausbildung als Pflegehelfer/-in (zwingend).\n\n• Freude am Umgang mit Menschen, Flexibilität und Offenheit für Neues.\n\n• Sie besitzen einen gültigen Fahrausweis und haben ein Auto zur Verfügung.\n\n• Gute Deutschkenntnisse.\n\n• Eine selbständige, verantwortungsbewusste Arbeitsweise.\n Wir bieten Ihnen\n\n• Eine abwechslungsreiche Aufgabe in einem dynamischen Betrieb.\n\n• Umfassende Einführung in Ihren Aufgabenbereich.\n\n• Die Chance, Ihre fachlichen und persönlichen Fähigkeiten zu entfalten.\n\n• Im Bereich Hauswirtschaft haben Sie geregelte Arbeitszeiten (Montag bis Freitag im Tagdienst) und profitieren von guten Weiterbildungsmöglichkeiten. Im Bereich Pflege arbeiten Sie ab und zu auch am Wochenende und am Abend.\n\n• Ein kollegiales, wertschätzendes Arbeitsklima.\n\n• Es erwartet Sie ein aufgestelltes Team Hauswirtschaft (18 Personen).\n\n• Auch als Wiedereinsteiger/-in sind bei uns herzlich willkommen.\n\n• Fortschrittliche, familienfreundliche Anstellungsbedingungen (u.a. 5 Wochen Ferien).\n Haben wir Ihr Interesse geweckt? Weitere Auskünfte erteilt Ihnen gerne Markus Clerc, Geschäftsleiter, 041 340 40 70. Wir freuen uns auf Ihre Bewerbung an markus.clerc@spitex-horw.ch.",
+      "descriptionByLocale": {
+        "de": "Herzlich willkommen in unserem Team!\n Die Spitex Horw ist ein zukunftsorientiertes Unternehmen mit rund 50 Mitarbeitenden. Unseren Klientinnen und Klienten ein selbstbestimmtes Leben zu Hause zu ermöglichen, ist unser zentrales Anliegen. Kompetent und einfühlsam beraten und unterstützen wir Menschen jeden Alters. Möchten Sie sich aktiv engagieren und weiterentwickeln? Haben Sie Freude an einer vielseitigen, anspruchsvollen und selbständigen Tätigkeit?\n Wir suchen nach Vereinbarung:\n Fachperson Hauswirtschaft EFZ (50-100%)\n Ihr Aufgabengebiet\n\n• Begleitung, Unterstützung und Entlastung von betagten, kranken und hilfsbedürftigen Personen im hauswirtschaftlichen Bereich.\n\n• Primäre Einsatzgebiete: Wohnungsreinigung, Textilpflege (Waschen, Bügeln), Nahrungsmittel einkaufen. Alle Arbeiten werden wenn möglich zusammen mit den Klientinnen und Klienten erledigt.\n\n• Interdisziplinäre Zusammenarbeit mit Pflegefachkräften, Angehörigen und anderen Diensten.\n\n• Bei Interesse an SRK-Pflegeeinsätzen: Sie pflegen und betreuen unserer Klientinnen und Klienten in ihrem gewohnten Umfeld. Sie unterstützen das Pflegeteam und bringen sich aktiv ein.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Hauswirtschaft EFZ (zwingend).\n\n• Bei SRK-Einsätzen: SRK-Ausbildung als Pflegehelfer/-in (zwingend).\n\n• Freude am Umgang mit Menschen, Flexibilität und Offenheit für Neues.\n\n• Sie besitzen einen gültigen Fahrausweis und haben ein Auto zur Verfügung.\n\n• Gute Deutschkenntnisse.\n\n• Eine selbständige, verantwortungsbewusste Arbeitsweise.\n Wir bieten Ihnen\n\n• Eine abwechslungsreiche Aufgabe in einem dynamischen Betrieb.\n\n• Umfassende Einführung in Ihren Aufgabenbereich.\n\n• Die Chance, Ihre fachlichen und persönlichen Fähigkeiten zu entfalten.\n\n• Im Bereich Hauswirtschaft haben Sie geregelte Arbeitszeiten (Montag bis Freitag im Tagdienst) und profitieren von guten Weiterbildungsmöglichkeiten. Im Bereich Pflege arbeiten Sie ab und zu auch am Wochenende und am Abend.\n\n• Ein kollegiales, wertschätzendes Arbeitsklima.\n\n• Es erwartet Sie ein aufgestelltes Team Hauswirtschaft (18 Personen).\n\n• Auch als Wiedereinsteiger/-in sind bei uns herzlich willkommen.\n\n• Fortschrittliche, familienfreundliche Anstellungsbedingungen (u.a. 5 Wochen Ferien).\n Haben wir Ihr Interesse geweckt? Weitere Auskünfte erteilt Ihnen gerne Markus Clerc, Geschäftsleiter, 041 340 40 70. Wir freuen uns auf Ihre Bewerbung an markus.clerc@spitex-horw.ch.",
+        "it": "Herzlich willkommen in unserem Team!\n Die Spitex Horw ist ein zukunftsorientiertes Unternehmen mit rund 50 Mitarbeitenden. Unseren Klientinnen und Klienten ein selbstbestimmtes Leben zu Hause zu ermöglichen, ist unser zentrales Anliegen. Kompetent und einfühlsam beraten und unterstützen wir Menschen jeden Alters. Möchten Sie sich aktiv engagieren und weiterentwickeln? Haben Sie Freude an einer vielseitigen, anspruchsvollen und selbständigen Tätigkeit?\n Wir suchen nach Vereinbarung:\n Fachperson Hauswirtschaft EFZ (50-100%)\n Ihr Aufgabengebiet\n\n• Begleitung, Unterstützung und Entlastung von betagten, kranken und hilfsbedürftigen Personen im hauswirtschaftlichen Bereich.\n\n• Primäre Einsatzgebiete: Wohnungsreinigung, Textilpflege (Waschen, Bügeln), Nahrungsmittel einkaufen. Alle Arbeiten werden wenn möglich zusammen mit den Klientinnen und Klienten erledigt.\n\n• Interdisziplinäre Zusammenarbeit mit Pflegefachkräften, Angehörigen und anderen Diensten.\n\n• Bei Interesse an SRK-Pflegeeinsätzen: Sie pflegen und betreuen unserer Klientinnen und Klienten in ihrem gewohnten Umfeld. Sie unterstützen das Pflegeteam und bringen sich aktiv ein.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Hauswirtschaft EFZ (zwingend).\n\n• Bei SRK-Einsätzen: SRK-Ausbildung als Pflegehelfer/-in (zwingend).\n\n• Freude am Umgang mit Menschen, Flexibilität und Offenheit für Neues.\n\n• Sie besitzen einen gültigen Fahrausweis und haben ein Auto zur Verfügung.\n\n• Gute Deutschkenntnisse.\n\n• Eine selbständige, verantwortungsbewusste Arbeitsweise.\n Wir bieten Ihnen\n\n• Eine abwechslungsreiche Aufgabe in einem dynamischen Betrieb.\n\n• Umfassende Einführung in Ihren Aufgabenbereich.\n\n• Die Chance, Ihre fachlichen und persönlichen Fähigkeiten zu entfalten.\n\n• Im Bereich Hauswirtschaft haben Sie geregelte Arbeitszeiten (Montag bis Freitag im Tagdienst) und profitieren von guten Weiterbildungsmöglichkeiten. Im Bereich Pflege arbeiten Sie ab und zu auch am Wochenende und am Abend.\n\n• Ein kollegiales, wertschätzendes Arbeitsklima.\n\n• Es erwartet Sie ein aufgestelltes Team Hauswirtschaft (18 Personen).\n\n• Auch als Wiedereinsteiger/-in sind bei uns herzlich willkommen.\n\n• Fortschrittliche, familienfreundliche Anstellungsbedingungen (u.a. 5 Wochen Ferien).\n Haben wir Ihr Interesse geweckt? Weitere Auskünfte erteilt Ihnen gerne Markus Clerc, Geschäftsleiter, 041 340 40 70. Wir freuen uns auf Ihre Bewerbung an markus.clerc@spitex-horw.ch.",
+        "en": "Herzlich willkommen in unserem Team!\n Die Spitex Horw ist ein zukunftsorientiertes Unternehmen mit rund 50 Mitarbeitenden. Unseren Klientinnen und Klienten ein selbstbestimmtes Leben zu Hause zu ermöglichen, ist unser zentrales Anliegen. Kompetent und einfühlsam beraten und unterstützen wir Menschen jeden Alters. Möchten Sie sich aktiv engagieren und weiterentwickeln? Haben Sie Freude an einer vielseitigen, anspruchsvollen und selbständigen Tätigkeit?\n Wir suchen nach Vereinbarung:\n Fachperson Hauswirtschaft EFZ (50-100%)\n Ihr Aufgabengebiet\n\n• Begleitung, Unterstützung und Entlastung von betagten, kranken und hilfsbedürftigen Personen im hauswirtschaftlichen Bereich.\n\n• Primäre Einsatzgebiete: Wohnungsreinigung, Textilpflege (Waschen, Bügeln), Nahrungsmittel einkaufen. Alle Arbeiten werden wenn möglich zusammen mit den Klientinnen und Klienten erledigt.\n\n• Interdisziplinäre Zusammenarbeit mit Pflegefachkräften, Angehörigen und anderen Diensten.\n\n• Bei Interesse an SRK-Pflegeeinsätzen: Sie pflegen und betreuen unserer Klientinnen und Klienten in ihrem gewohnten Umfeld. Sie unterstützen das Pflegeteam und bringen sich aktiv ein.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Hauswirtschaft EFZ (zwingend).\n\n• Bei SRK-Einsätzen: SRK-Ausbildung als Pflegehelfer/-in (zwingend).\n\n• Freude am Umgang mit Menschen, Flexibilität und Offenheit für Neues.\n\n• Sie besitzen einen gültigen Fahrausweis und haben ein Auto zur Verfügung.\n\n• Gute Deutschkenntnisse.\n\n• Eine selbständige, verantwortungsbewusste Arbeitsweise.\n Wir bieten Ihnen\n\n• Eine abwechslungsreiche Aufgabe in einem dynamischen Betrieb.\n\n• Umfassende Einführung in Ihren Aufgabenbereich.\n\n• Die Chance, Ihre fachlichen und persönlichen Fähigkeiten zu entfalten.\n\n• Im Bereich Hauswirtschaft haben Sie geregelte Arbeitszeiten (Montag bis Freitag im Tagdienst) und profitieren von guten Weiterbildungsmöglichkeiten. Im Bereich Pflege arbeiten Sie ab und zu auch am Wochenende und am Abend.\n\n• Ein kollegiales, wertschätzendes Arbeitsklima.\n\n• Es erwartet Sie ein aufgestelltes Team Hauswirtschaft (18 Personen).\n\n• Auch als Wiedereinsteiger/-in sind bei uns herzlich willkommen.\n\n• Fortschrittliche, familienfreundliche Anstellungsbedingungen (u.a. 5 Wochen Ferien).\n Haben wir Ihr Interesse geweckt? Weitere Auskünfte erteilt Ihnen gerne Markus Clerc, Geschäftsleiter, 041 340 40 70. Wir freuen uns auf Ihre Bewerbung an markus.clerc@spitex-horw.ch.",
+        "fr": "Herzlich willkommen in unserem Team!\n Die Spitex Horw ist ein zukunftsorientiertes Unternehmen mit rund 50 Mitarbeitenden. Unseren Klientinnen und Klienten ein selbstbestimmtes Leben zu Hause zu ermöglichen, ist unser zentrales Anliegen. Kompetent und einfühlsam beraten und unterstützen wir Menschen jeden Alters. Möchten Sie sich aktiv engagieren und weiterentwickeln? Haben Sie Freude an einer vielseitigen, anspruchsvollen und selbständigen Tätigkeit?\n Wir suchen nach Vereinbarung:\n Fachperson Hauswirtschaft EFZ (50-100%)\n Ihr Aufgabengebiet\n\n• Begleitung, Unterstützung und Entlastung von betagten, kranken und hilfsbedürftigen Personen im hauswirtschaftlichen Bereich.\n\n• Primäre Einsatzgebiete: Wohnungsreinigung, Textilpflege (Waschen, Bügeln), Nahrungsmittel einkaufen. Alle Arbeiten werden wenn möglich zusammen mit den Klientinnen und Klienten erledigt.\n\n• Interdisziplinäre Zusammenarbeit mit Pflegefachkräften, Angehörigen und anderen Diensten.\n\n• Bei Interesse an SRK-Pflegeeinsätzen: Sie pflegen und betreuen unserer Klientinnen und Klienten in ihrem gewohnten Umfeld. Sie unterstützen das Pflegeteam und bringen sich aktiv ein.\n Sie bringen mit\n\n• Abgeschlossene Ausbildung als Fachfrau/-mann Hauswirtschaft EFZ (zwingend).\n\n• Bei SRK-Einsätzen: SRK-Ausbildung als Pflegehelfer/-in (zwingend).\n\n• Freude am Umgang mit Menschen, Flexibilität und Offenheit für Neues.\n\n• Sie besitzen einen gültigen Fahrausweis und haben ein Auto zur Verfügung.\n\n• Gute Deutschkenntnisse.\n\n• Eine selbständige, verantwortungsbewusste Arbeitsweise.\n Wir bieten Ihnen\n\n• Eine abwechslungsreiche Aufgabe in einem dynamischen Betrieb.\n\n• Umfassende Einführung in Ihren Aufgabenbereich.\n\n• Die Chance, Ihre fachlichen und persönlichen Fähigkeiten zu entfalten.\n\n• Im Bereich Hauswirtschaft haben Sie geregelte Arbeitszeiten (Montag bis Freitag im Tagdienst) und profitieren von guten Weiterbildungsmöglichkeiten. Im Bereich Pflege arbeiten Sie ab und zu auch am Wochenende und am Abend.\n\n• Ein kollegiales, wertschätzendes Arbeitsklima.\n\n• Es erwartet Sie ein aufgestelltes Team Hauswirtschaft (18 Personen).\n\n• Auch als Wiedereinsteiger/-in sind bei uns herzlich willkommen.\n\n• Fortschrittliche, familienfreundliche Anstellungsbedingungen (u.a. 5 Wochen Ferien).\n Haben wir Ihr Interesse geweckt? Weitere Auskünfte erteilt Ihnen gerne Markus Clerc, Geschäftsleiter, 041 340 40 70. Wir freuen uns auf Ihre Bewerbung an markus.clerc@spitex-horw.ch."
+      },
+      "needsRetranslation": true,
+      "location": "Horw",
+      "canton": "LU",
+      "url": "https://www.spitexjobs.ch/job/fachperson-hauswirtschaft-efz-50-100-prozent/J981161",
+      "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:17:41.077Z",
+      "addressLocality": "Horw",
+      "addressRegion": "LU",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "6048",
+      "category": "Ospitalità",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sanità / Ospedali",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "validThrough": "2026-09-29",
+      "applyUrl": "https://www.spitexjobs.ch/job/fachperson-hauswirtschaft-efz-50-100-prozent/J981161",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "fachperson-hauswirtschaft-efz-50-100-spitex-ch-horw"
+        ],
+        "de": [
+          "fachperson-hauswirtschaft-efz-50-100-spitex-ch-horw"
+        ]
+      },
+      "previousSlugs": [
+        "fachperson-hauswirtschaft-efz-50-100-spitex-ch-horw"
+      ],
+      "salaryMin": 69000,
+      "salaryMax": 86500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 69000,
+          "maxValue": 86500,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T23:17:41.077Z"
     }
   ]
 }
