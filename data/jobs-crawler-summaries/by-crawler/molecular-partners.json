@@ -1,7 +1,7 @@
 {
   "key": "molecular-partners",
   "label": "Molecular Partners",
-  "generatedAt": "2026-08-28T20:57:38.592Z",
+  "generatedAt": "2026-08-29T03:16:49.069Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,10 +9,11 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4928,
-  "avgDurationMs": 4928,
+  "durationMs": 5348,
+  "avgDurationMs": 5348,
   "durationHistory": [
-    4928
+    4928,
+    5348
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -28,7 +29,7 @@
       "url": "https://molecularpartners-career.talent-soft.com/job/job-senior-accounting-manager_179.aspx",
       "source": "Molecular Partners Dedicated Parser (Talentsoft)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:57:35.120Z",
+      "crawledAt": "2026-08-29T03:16:45.627Z",
       "addressLocality": "Schlieren",
       "addressRegion": "ZH",
       "addressCountry": "CH",
