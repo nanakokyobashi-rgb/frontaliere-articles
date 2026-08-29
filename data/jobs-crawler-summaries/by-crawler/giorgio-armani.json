@@ -1,18 +1,19 @@
 {
   "key": "giorgio-armani",
   "label": "giorgio-armani",
-  "generatedAt": "2026-08-29T15:08:11.342Z",
+  "generatedAt": "2026-08-29T23:30:34.412Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 42200,
-  "avgDurationMs": 42200,
+  "durationMs": 40154,
+  "avgDurationMs": 40154,
   "durationHistory": [
     46777,
     33329,
-    42200
+    42200,
+    40154
   ],
   "newJobs": [],
   "updatedJobs": [
