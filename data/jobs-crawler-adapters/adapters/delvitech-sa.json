@@ -11,7 +11,7 @@
     "https://legacy.delvi.tech/career/"
   ],
   "notes": "Dedicated Delvitech crawler parses the legacy WordPress career page and detail pages, excluding Germany roles and publishing TI + GR vacancies.",
-  "updatedAt": "2026-08-29T03:31:46.809Z",
+  "updatedAt": "2026-08-29T15:10:24.617Z",
   "seedMetaByUrl": {
     "https://legacy.delvi.tech/application-engineer-2/": {
       "location": "Mendrisio",
