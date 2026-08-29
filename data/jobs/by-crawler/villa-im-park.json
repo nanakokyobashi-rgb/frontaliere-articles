@@ -1,6 +1,6 @@
 {
   "crawlerKey": "villa-im-park",
-  "assembledAt": "2026-08-28T21:05:31.872Z",
+  "assembledAt": "2026-08-29T03:28:36.276Z",
   "jobs": [
     {
       "id": "villa-im-park-2e1ad74d807b",
@@ -33,7 +33,7 @@
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000124593045-lehrstelle-fachperson-gesundheit-fur-sommer-2027?oga=true",
       "source": "Privatklinik Villa im Park Dedicated Parser (SmartRecruiters)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:05:28.939Z",
+      "crawledAt": "2026-08-29T03:28:33.550Z",
       "addressLocality": "Rothrist",
       "addressRegion": "AG",
       "streetAddress": "Bernstrasse 84",
