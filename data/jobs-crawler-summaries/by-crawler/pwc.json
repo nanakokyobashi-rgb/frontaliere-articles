@@ -1,16 +1,17 @@
 {
   "key": "pwc",
   "label": "PwC Switzerland",
-  "generatedAt": "2026-08-28T21:02:43.694Z",
+  "generatedAt": "2026-08-29T03:24:50.444Z",
   "total": 135,
   "newCount": 0,
   "updatedCount": 84,
   "removedCount": 1,
   "unchangedCount": 12,
-  "durationMs": 3376,
-  "avgDurationMs": 3376,
+  "durationMs": 2945,
+  "avgDurationMs": 2945,
   "durationHistory": [
-    3376
+    3376,
+    2945
   ],
   "newJobs": [],
   "updatedJobs": [
