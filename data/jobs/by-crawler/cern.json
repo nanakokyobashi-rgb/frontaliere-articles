@@ -1,6 +1,6 @@
 {
   "crawlerKey": "cern",
-  "assembledAt": "2026-08-29T03:39:39.206Z",
+  "assembledAt": "2026-08-29T23:21:31.687Z",
   "jobs": [
     {
       "id": "cern-fbd8a0f91c10",
@@ -34,7 +34,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000117226307-theoretical-physicist-th-sp-2026-68-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.276Z",
+      "crawledAt": "2026-08-29T23:21:25.773Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -114,7 +114,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000080108845-non-member-state-postdoc-fellowship-programme-theoretical-physics-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.275Z",
+      "crawledAt": "2026-08-29T23:21:25.773Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -196,7 +196,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000135168039-cern-pension-fund-governing-board-external-professional-expert?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.274Z",
+      "crawledAt": "2026-08-29T23:21:25.772Z",
       "addressLocality": "Meyrin",
       "addressRegion": "ch-ge",
       "streetAddress": "No. 1 Esplanade des Particules",
@@ -270,7 +270,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000135742239-research-fellowship-applied-physics-and-engineering?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.274Z",
+      "crawledAt": "2026-08-29T23:21:25.771Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -399,7 +399,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "cern-af640ded4f28",
@@ -408,7 +409,7 @@
         "it": "professionisti-della-carriera-campo-tecnico-applicazioni-spontanee-cern-geneva-ge-switzerland",
         "en": "early-career-professionals-technical-field-spontaneous-applications-cern-geneva-ge",
         "de": "early-career-professionals-technisches-feld-spontane-anwendungen-cern-geneva-ge-switzerland",
-        "fr": "professionnels-en-debut-de-carriere-domaine-technique-applications-spontanees-cern-geneva-ge-switzerland"
+        "fr": "early-career-professionals-technical-field-spontaneous-applications-cern-geneva"
       },
       "company": "CERN",
       "companyKey": "cern",
@@ -432,7 +433,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000139041215-early-career-professionals-technical-field-spontaneous-applications?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.273Z",
+      "crawledAt": "2026-08-29T23:21:25.771Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -453,8 +454,9 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "early-career-professionals-technical-field-spontaneous-applications-cern-geneva-ge",
-        "early-career-professionals-technical-field-spontaneous-applications-cern-geneva",
-        "professionisti-della-carriera-campo-tecnico-applicazioni-spontanee-cern-geneva-ge-switzerland"
+        "professionnels-en-debut-de-carriere-domaine-technique-applications-spontanees-cern-geneva-ge-switzerland",
+        "professionisti-della-carriera-campo-tecnico-applicazioni-spontanee-cern-geneva-ge-switzerland",
+        "early-career-professionals-technical-field-spontaneous-applications-cern-geneva"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -466,6 +468,7 @@
         ],
         "fr": [
           "early-career-professionals-technical-field-spontaneous-applications-cern-geneva-ge",
+          "professionnels-en-debut-de-carriere-domaine-technique-applications-spontanees-cern-geneva-ge-switzerland",
           "early-career-professionals-technical-field-spontaneous-applications-cern-geneva"
         ]
       },
@@ -515,7 +518,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000140211788-research-fellowship-experimental-physics-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.272Z",
+      "crawledAt": "2026-08-29T23:21:25.770Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -578,7 +581,7 @@
       "slugByLocale": {
         "it": "assistente-amministrativo-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland",
         "en": "administrative-assistant-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland",
-        "de": "administrative-assistant-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland",
+        "de": "administrative-assistent-sy-ar-2026-167-ld-cern-geneva",
         "fr": "administrative-assistant-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland"
       },
       "company": "CERN",
@@ -603,7 +606,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141222829-administrative-assistant-sy-ar-2026-167-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.271Z",
+      "crawledAt": "2026-08-29T23:21:25.770Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -630,6 +633,9 @@
         "it": [
           "administrative-assistant-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland",
           "assistente-amministrativo-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland"
+        ],
+        "de": [
+          "administrative-assistant-sy-ar-2026-167-ld-cern-geneva-geneva-switzerland"
         ]
       },
       "firstSeenAt": "2026-08-03T12:46:46.451Z",
@@ -679,7 +685,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000140678620-fundraising-partnerships-officer-sr-se-fp-2026-165-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.272Z",
+      "crawledAt": "2026-08-29T23:21:25.769Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -764,7 +770,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141237895-scientific-associateship-experimental-physics-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.268Z",
+      "crawledAt": "2026-08-29T23:21:25.768Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -845,7 +851,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141240306-scientific-associateship-theoretical-physics-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.266Z",
+      "crawledAt": "2026-08-29T23:21:25.767Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -926,7 +932,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141238697-corresponding-associateship-in-theoretical-physics?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.268Z",
+      "crawledAt": "2026-08-29T23:21:25.768Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -1007,7 +1013,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141239527-test-measurement-engineer-be-cem-mta-2026-168-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.265Z",
+      "crawledAt": "2026-08-29T23:21:25.767Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1088,7 +1094,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141243079-corresponding-associateship-in-experimental-physics?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.264Z",
+      "crawledAt": "2026-08-29T23:21:25.766Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -1168,7 +1174,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141249029-equipment-management-database-specialist-ep-cms-ssi-2026-166-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.262Z",
+      "crawledAt": "2026-08-29T23:21:25.765Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1234,7 +1240,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141482012-structural-civil-engineer-sce-tod-do-2026-170-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.259Z",
+      "crawledAt": "2026-08-29T23:21:25.762Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1309,13 +1315,13 @@
         "de": "Einleitung\nSie werden zu Dekontaminationsaktivitäten für Gefahrstoffe und Bauarbeiten und Projekten in den Gebäuden und unterirdischen Infrastrukturen des CERN beitragen. In dieser Funktion verwalten Sie die Vorbereitung, Koordination und Nachbereitung von Interventionen und arbeiten eng mit Ingenieuren, Technikern, Beratern und Auftragnehmern zusammen, um einen sicheren und konformen Betrieb zu gewährleisten. Sie sind sowohl an der Planung als auch an den Aktivitäten vor Ort beteiligt und kombinieren technische Koordination mit praktischer Nachverfolgung. Sie werden der Sektion Bauingenieurwesen (CE) innerhalb der Site Asset Management (SAM) Gruppe beitreten.\nFunktionen\n\n• Handeln Sie als Referent für schadstoffbezogene Arbeiten innerhalb der SCE-SAM-Gruppe und leiten Sie die Dekontamination von Gefahrstoffen am CERN.\n\n• Handeln Sie als Vertragsmanager für die Dekontamination gefährlicher Stoffe Rahmenverträge, überwachen Sie Budget, Qualität, Zeitplan und Sicherheit und verwalten Sie finanzielle Variationen, Forderungen und Vergleiche mit Auftragnehmern.\n\n• Als Referent der Abteilung Bauingenieurwesen für Arbeiten und Projekte in technischen Galerien und der Anlage Proton Synchrotron Komplex dienen.\n\n• Verwalten Sie die Projektplanungsschritte (Vorbereitung, Konzeptgestaltung, entwickelte Projektgestaltung, Baugenehmigung, technische Spezifikationen und relevante Dokumentation für Ausschreibungen und Ausführungsplanung) in Zusammenarbeit mit internen CERN-Stellen sowie den benannten Beratern und Auftragnehmern.\n\n• Planen und verwalten Sie die Durchführung von Bau- und Renovierungsprojekten, einschließlich der Koordination verschiedener Gewerke, der Nutzung von Service- und Rahmenverträgen und des Vertragsmanagements, des Vorsitzes und der Koordinierungssitzungen sowie der Überwachung von Kosten, Qualität, Zeitplan und Sicherheit bis zur endgültigen Annahme.\n\n• Gewährleistung der Einhaltung der Sicherheits- und Umweltvorschriften und Förderung einer starken Sicherheitskultur an den Arbeitsplätzen.\n\n• Berichterstattung und regelmäßige Dokumentation der Tätigkeiten.\n\nMaster-Abschluss oder gleichwertige einschlägige Erfahrung im Bereich des Bauingenieurwesens oder eines verwandten Bereichs.\nZertifizierung als Schadstoffentsorger, konform mit Schweizer Vorschriften und registriert bei SUVA und idealerweise eine gültige Zertifizierung im \"SS3 Technical Management\" nach französischen Vorschriften und Arbeitsgesetzbuch.\nErfahrung:\n\n• Nachgewiesene Erfahrung in der Durchführung und / oder Überwachung von Dekontaminationsarbeiten für gefährliche Stoffe.\n\n• Nachgewiesene bautechnische Erfahrung in der Instandhaltung und dem Betrieb von Gebäuden oder Infrastrukturen.\n\n• Erfahrung in der Koordination multitechnischer Gewerke über Projekte hinweg.\n\n• Erfahrungen mit großen Standorten in industriellen und/oder wissenschaftlichen Umgebungen wären von Vorteil.\n\n• Nachgewiesene Erfahrung in Bau- oder Renovierungsprojekten wäre ein Gewinn.\n\n• Erfahrung in Beton- und Stahlkonstruktionen wäre ein Gewinn.\nTechnische Kompetenzen:\n\n• Reaktionen auf gefährliche Stoffe.\n\n• Kenntnisse des Hochbaus, der Konsolidierung und Renovierung.\n\n• Vertragsmanagement.\n\n• Organisation, Planung und Kontrolle.\n\n• Kosten- und Zeitplanmanagement.\nVerhaltenskompetenzen:\n\n• Selbstmanagement: Initiative ergreifen, die über normale Aufgaben hinausgeht und Dinge möglich macht.\n\n• Ergebnisse erzielen: Einen strukturierten und organisierten Ansatz für die Arbeit haben; in der Lage sein, Prioritäten zu setzen und Aufgaben unter Berücksichtigung der Ergebnisse zu planen.\n\n• Demonstrierende Flexibilität: bereitwillig neue Aufgaben oder Arbeiten / Projekte annehmen.\n\n• Effektive Kommunikation: Nutzung effektiver Verhandlungstechniken, um langfristige Ergebnisse zu erzielen, die für alle Beteiligten akzeptabel sind.\n\n• Arbeiten in Teams: gut in Gruppen arbeiten und sich leicht in ein Team einfügen; vollständig teilnehmen und eine aktive Rolle bei Teamaktivitäten übernehmen.\nSprachkenntnisse:\nGesprochen und geschrieben Französisch, mit der Verpflichtung, Englisch zu lernen.\n\nFörderfähigkeit und Stichtag:\nVielfalt ist seit ihrer Gründung ein integraler Bestandteil der Mission des CERN und ist ein fester Wert der Organisation. Die Beschäftigung einer vielfältigen Belegschaft ist zentral für unseren Erfolg. Wir begrüßen Bewerbungen aus allen Mitgliedstaaten und assoziierten Mitgliedstaaten.\nDiese freie Stelle wird so schnell wie möglich besetzt, und Anträge sollten uns normalerweise spätestens am 06.09.2026 um 23:59 Uhr MESZ erreichen.\nBeschäftigungsbedingungen\nVertragsart: Befristeter Vertrag (3 Jahre). Unter bestimmten Bedingungen können Inhaber von befristeten Verträgen eine unbefristete Position beantragen.\nArbeitszeit: 40 Stunden pro Woche\nArbeitsplatzflexibilität: Vollständig vor Ort\nDiese Position umfasst:\n\n• Arbeiten in Strahlungsgebieten.\n\n• Eingriffe in unterirdische Anlagen.\n\n• Ein gültiger Führerschein.\n\n• Arbeiten in den Nächten, Sonntagen und offiziellen Feiertagen, wenn es die Bedürfnisse der Organisation erfordern.\n\n• Exposition gegenüber Asbest.\n\n• Bleiexposition.\n\n• Exposition gegenüber Karzinogenen, Mutagenen oder fortpflanzungsgefährdenden Stoffen.\n\n• Strahlenschutzpersonal, Kategorie A.\n\n• Exposition gegenüber elektromagnetischen Feldern unter bestimmten Expositionsbedingungen.\n\n• Angesichts der mit dieser Position verbundenen beruflichen Gesundheitsrisiken muss der ausgewählte Kandidat eine ärztliche Genehmigung einholen, bevor ein Vertragsangebot bestätigt wird.\nJob Grade: 6-7\nBerufsbezeichnung: SCE-SAM-CE-2026-169-LD\nArbeitsgebiet: Bauingenieurwesen\nBenchmark Job Title: Bauingenieur\n\nGlobale Vorteile\n\n• Ein wettbewerbsfähiges Gehalt (steuerfrei), das im Einklang mit Ihrer jahrelangen relevanten Erfahrung steigt.\n\n• 30 Tage bezahlter Urlaub pro Jahr plus 2 Wochen jährliche Schließung.\n\n• Deckung durch die umfassende Krankenversicherung des CERN (für Sie, Ihren Ehepartner und Ihre Kinder) und die Mitgliedschaft in der CERN-Pensionskasse.\n\n• Familien-, Kinder- und Säuglingszulagen, abhängig von Ihren individuellen Umständen.\n\n• Ein Umzugspaket (Installationszuschuss, Umzug, Reisekosten) abhängig von Ihren individuellen Umständen.\n\n• Möglichkeit, Ihren Vertrag bis zu 8 Jahre + Anspruch auf unbefristete Vertragsdauer zu verlängern.\nÜberblick über CERN - Entdecken Sie eine Welt, in der das Unmögliche möglich gemacht wird!\nBei CERN, der Europäischen Organisation für Kernforschung, erweitern wir die Grenzen von Wissenschaft und Technologie. Unsere bahnbrechende Arbeit bringt nicht nur Physiker zusammen, sondern auch eine Vielzahl von Fachleuten aus den Bereichen Ingenieurwesen, Technik, Wissenschaft und Verwaltung. Gemeinsam fördern wir ein Umfeld, in dem Innovation und Zusammenarbeit gedeihen.\nJeden Tag stehen wir vor spannenden neuen Herausforderungen und Möglichkeiten, einen Beitrag zur Spitzenforschung zu leisten, die unser Verständnis des Universums prägt. Wir begegnen diesen Herausforderungen durch die vielfältigen Perspektiven in unseren Teams, stellen sicher, dass jeder Beitrag wertgeschätzt wird und fördern unser gemeinsames Gefühl von Inklusion und Zweck. Vielfalt ist seit ihrer Gründung ein zentraler Wert des CERN und bleibt für unsere Mission und unseren anhaltenden Erfolg von zentraler Bedeutung.\nWenn Sie bereit sind, Teil einer dynamischen, integrativen Gemeinschaft zu sein, die die Grenzen des Wissens überschreitet, ist CERN der Ort, an dem Ihre Neugier und Ihre Fähigkeiten gedeihen können. Seien Sie Teil unserer Mission, das aufzudecken, was im Herzen des Universums liegt! TEIL!\nMehr Informationen über uns, hier: careers.cern",
         "fr": "Présentation\nVous contribuerez aux activités de décontamination des matières dangereuses ainsi qu'aux travaux et projets de génie civil dans les bâtiments du CERN et les infrastructures souterraines. Dans ce rôle, vous gérez la préparation, la coordination et le suivi des interventions, en travaillant en étroite collaboration avec les ingénieurs, les techniciens, les consultants et les entrepreneurs pour assurer des opérations sûres et conformes. Vous participez à la planification et aux activités sur place, en combinant coordination technique et suivi pratique. Vous rejoindrez la section Génie civil (CE) du Groupe Gestion d'actifs du site (SAM).\nFonctions\n\n• Agir comme référent pour les travaux liés aux polluants au sein du groupe SCE-SAM, gérer les activités de décontamination des matières dangereuses au CERN.\n\n• Agir à titre de gestionnaire de contrats pour la décontamination des substances dangereuses.\n\n• Servir de référent de la section du génie civil pour les travaux et projets dans les galeries techniques et l'installation du complexe Proton Synchrotron.\n\n• Gérer les étapes de conception du projet (préliminaire, conception de concept, conception de projet développée, permis de construire, spécifications techniques et documentation pertinente pour les appels d'offres et la conception d'exécution) en collaboration avec les entités internes du CERN ainsi que les consultants et entrepreneurs nommés.\n\n• Planifier et gérer l'exécution des projets de construction et de rénovation, y compris la coordination de divers métiers, l'utilisation des contrats de service et d'encadrement et la gestion des contrats, les réunions de la présidence et de la coordination et le suivi des coûts, de la qualité, du calendrier et de la sécurité jusqu'à l'acceptation définitive.\n\n• Assurer le respect des règles en matière de sécurité et d'environnement et promouvoir une solide culture de sécurité sur les lieux de travail.\n\n• Faire rapport et documenter régulièrement les activités.\n\nMaîtrise ou expérience équivalente pertinente dans le domaine du génie civil ou dans un domaine connexe.\nCertification en tant que spécialiste de l'élimination des polluants, conforme à la réglementation suisse et enregistrée auprès de VUSA et idéalement une certification valide en \"SS3 Technical Management\" conformément à la réglementation et au code du travail français.\nExpérience :\n\n• Expérience éprouvée dans l'exécution et/ou la supervision de travaux de décontamination de substances dangereuses.\n\n• Expérience démontrée du génie civil dans l'entretien et l'exploitation des bâtiments ou des infrastructures.\n\n• Expérience dans la coordination des métiers multitechniques entre les projets.\n\n• L'expérience sur des sites à grande échelle dans des environnements industriels et/ou scientifiques serait un atout.\n\n• Une expérience éprouvée dans les projets de construction ou de rénovation serait un atout.\n\n• L'expérience des ouvrages en béton et en acier serait un atout.\nCompétences techniques:\n\n• Opérations d'intervention en matière dangereuse.\n\n• Connaissance de la construction, de la consolidation et de la rénovation de bâtiments.\n\n• Gestion des contrats.\n\n• Organisation, planification et contrôle.\n\n• Gestion des coûts et des horaires.\nCompétences comportementales :\n\n• Gérer soi: prendre des initiatives au-delà des tâches régulières et faire les choses arriver.\n\n• Atteindre des résultats: avoir une approche structurée et organisée du travail; être en mesure de fixer des priorités et de planifier des tâches en tenant compte des résultats.\n\n• Démontrer la souplesse : accepter facilement de nouvelles tâches ou travaux/projets.\n\n• Communiquer efficacement : utiliser des techniques de négociation efficaces pour obtenir des résultats à long terme acceptables pour toutes les parties concernées.\n\n• Travailler en équipe : bien travailler en groupe et s'intégrer facilement dans une équipe; participer pleinement et jouer un rôle actif dans les activités de l'équipe.\nCompétences linguistiques :\nLe français parlé et écrit, avec un engagement à apprendre l'anglais.\n\nAdmissibilité et date de clôture:\nLa diversité fait partie intégrante de la mission du CERN depuis sa fondation et constitue une valeur établie pour l'Organisation. Notre réussite repose sur l'emploi d'une main-d'oeuvre diversifiée. Nous accueillons favorablement les candidatures de tous les États membres et États membres associés .\nCe poste sera pourvu dès que possible, et les candidatures devraient normalement nous parvenir au plus tard le 06.09.2026 à 23:59 CEST .\nConditions d'emploi\nType de contrat: Contrat à durée limitée (3 ans). Sous réserve de certaines conditions, les titulaires de contrats à durée limitée peuvent demander un emploi pour une durée indéterminée.\nHeures de travail: 40 heures par semaine\nFlexibilité de l'emploi : entièrement sur place\nCette position implique:\n\n• Travail dans les zones de rayonnement.\n\n• Interventions dans des installations souterraines.\n\n• Un permis de conduire valide.\n\n• Travaillez pendant les nuits, les dimanches et les jours fériés, lorsque les besoins de l ' Organisation l ' exigent.\n\n• Exposition à l'amiante.\n\n• Exposition au plomb.\n\n• Exposition à des agents cancérogènes, mutagènes ou toxiques pour la reproduction.\n\n• Travailleurs des rayonnements, catégorie A.\n\n• Exposition aux champs électromagnétiques dans certaines conditions d'exposition.\n\n• Compte tenu des risques pour la santé au travail associés à ce poste, le candidat sélectionné doit obtenir une attestation médicale avant de confirmer une offre de contrat.\nNiveau d'emploi: 6-7\nRéférence de l'emploi: SCE-SAM-CE-2026-169-LD\nDomaine de travail: Génie civil\nTitre du poste-repère : Ingénieur civil\n\nAvantages globaux\n\n• Un salaire compétitif (sans impôt), augmentant en fonction de vos années d'expérience pertinente.\n\n• 30 jours de congé payé par an plus 2 semaines de fermeture annuelle.\n\n• Couverture par le régime général d'assurance maladie du CERN (pour vous-même, votre conjoint et vos enfants) et affiliation à la Caisse de retraite du CERN.\n\n• Allocations mensuelles pour la famille, l'enfant et l'enfant selon votre situation personnelle.\n\n• Un forfait de réinstallation (subvention d'installation, déménagement, frais de déplacement) selon votre situation personnelle.\n\n• Possibilité de prolonger votre contrat jusqu'à 8 ans + éligibilité à un contrat de durée indéterminée.\nAperçu du CERN - Découvrez un monde où l'impossible est rendu possible !\nAu CERN, l'Organisation européenne pour la recherche nucléaire, nous repoussons les frontières de la science et de la technologie. Notre travail novateur rassemble non seulement des physiciens, mais aussi des professionnels de l'ingénierie, de la technique, de la science et de l'administration. Ensemble, nous favorisons un environnement où l'innovation et la collaboration prospèrent.\nChaque jour, nous faisons face à de nouveaux défis passionnants et à de nouvelles occasions de contribuer à la recherche de pointe qui façonne notre compréhension de l'univers. Nous relevons ces défis grâce aux diverses perspectives au sein de nos équipes, en veillant à ce que chaque contribution soit valorisée et à ce que notre sens commun de l'inclusion et de l'objectif soit déterminé. La diversité est une valeur fondamentale du CERN depuis sa fondation, et elle demeure au cœur de notre mission et de notre succès continu.\nSi vous êtes prêt à faire partie d'une communauté dynamique et inclusive qui repousse les limites du savoir, le CERN est l'endroit où votre curiosité et vos compétences peuvent prospérer. Faites partie de notre mission de découvrir ce qui est au cœur de l'univers ! S'il vous plaît !\nPlus d'informations sur nous, ici: carriers.cern"
       },
-      "needsRetranslation": false,
+      "needsRetranslation": true,
       "location": "Geneva, GENEVA, Switzerland",
       "canton": "GE",
       "url": "https://jobs.smartrecruiters.com/CERN/744000141273519-hazardous-material-decontamination-engineer-sce-sam-ce-2026-169-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.261Z",
+      "crawledAt": "2026-08-29T23:21:25.764Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1380,7 +1386,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141472909-mechanical-technician-for-cms-detector-upgrades-ep-cms-ic-2026-97-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.260Z",
+      "crawledAt": "2026-08-29T23:21:25.763Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1461,7 +1467,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141649630-geodesist-be-gm-fp-2026-29-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.258Z",
+      "crawledAt": "2026-08-29T23:21:25.761Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1540,7 +1546,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141714699-telecom-and-network-infrastructure-technician-it-fcs-do-2026-173-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.256Z",
+      "crawledAt": "2026-08-29T23:21:25.760Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1615,7 +1621,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141663849-materials-engineer-polymers-and-composites-te-msc-smt-2026-172-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.257Z",
+      "crawledAt": "2026-08-29T23:21:25.761Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1680,7 +1686,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141910971-doctoral-student-programme-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.252Z",
+      "crawledAt": "2026-08-29T23:21:25.757Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -1761,7 +1767,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141717060-database-infrastructure-engineer-it-da-db-2026-174-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.255Z",
+      "crawledAt": "2026-08-29T23:21:25.759Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1842,7 +1848,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141901179-data-reporting-specialist-fap-bc-dl-2026-203-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.253Z",
+      "crawledAt": "2026-08-29T23:21:25.758Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -1923,7 +1929,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141917339-administrative-student-programme-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.252Z",
+      "crawledAt": "2026-08-29T23:21:25.757Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -1979,7 +1985,7 @@
         "it": "tecnico-studentship-material-surface-science-2027-1-cern-geneva",
         "en": "technical-studentship-material-surface-science-2027-1-cern-geneva-ge-switzerland",
         "de": "technisches-studium-material-oberflachenwissenschaft-2027-1-cern-geneva-ge-switzerland",
-        "fr": "etudiants-techniques-sciences-des-materiaux-et-de-la-surface-2027-1-cern-geneva-ge-switzerland"
+        "fr": "technical-studentship-material-surface-science-2027-1-cern-geneva"
       },
       "company": "CERN",
       "companyKey": "cern",
@@ -2004,7 +2010,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141919014-technical-studentship-material-surface-science-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.249Z",
+      "crawledAt": "2026-08-29T23:21:25.755Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2025,12 +2031,16 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "technical-studentship-material-surface-science-2027-1-cern-geneva-ge-switzerland",
+        "etudiants-techniques-sciences-des-materiaux-et-de-la-surface-2027-1-cern-geneva-ge-switzerland",
         "tecnico-studentship-material-surface-science-2027-1-cern-geneva"
       ],
       "previousSlugsByLocale": {
         "it": [
           "technical-studentship-material-surface-science-2027-1-cern-geneva-ge-switzerland",
           "tecnico-studentship-material-surface-science-2027-1-cern-geneva"
+        ],
+        "fr": [
+          "etudiants-techniques-sciences-des-materiaux-et-de-la-surface-2027-1-cern-geneva-ge-switzerland"
         ]
       },
       "firstSeenAt": "2026-08-07T01:36:38.293Z",
@@ -2053,7 +2063,7 @@
       "slugByLocale": {
         "it": "studentship-tecnica-generale-ingegneria-civile-2027-1-cern-geneva-ge-switzerland",
         "en": "technical-studentship-general-civil-engineering-2027-1-cern-geneva-ge-switzerland",
-        "de": "technisches-studium-general-bauingenieurwesen-2027-1-cern-geneva-ge-switzerland",
+        "de": "technical-studentship-general-civil-engineering-2027-1-cern-geneva",
         "fr": "stage-technique-general-genie-civil-2027-1-cern-geneva-ge-switzerland"
       },
       "company": "CERN",
@@ -2078,7 +2088,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141917594-technical-studentship-general-civil-engineering-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.251Z",
+      "crawledAt": "2026-08-29T23:21:25.756Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2099,6 +2109,7 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "technical-studentship-general-civil-engineering-2027-1-cern-geneva-ge-switzerland",
+        "technisches-studium-general-bauingenieurwesen-2027-1-cern-geneva-ge-switzerland",
         "studentship-tecnica-generale-ingegneria-civile-2027-1-cern-geneva-ge-switzerland"
       ],
       "previousSlugsByLocale": {
@@ -2107,7 +2118,8 @@
           "studentship-tecnica-generale-ingegneria-civile-2027-1-cern-geneva-ge-switzerland"
         ],
         "de": [
-          "technical-studentship-general-civil-engineering-2027-1-cern-geneva-ge-switzerland"
+          "technical-studentship-general-civil-engineering-2027-1-cern-geneva-ge-switzerland",
+          "technisches-studium-general-bauingenieurwesen-2027-1-cern-geneva-ge-switzerland"
         ],
         "fr": [
           "technical-studentship-general-civil-engineering-2027-1-cern-geneva-ge-switzerland"
@@ -2134,7 +2146,7 @@
       "slugByLocale": {
         "it": "studentship-tecnica-ingegneria-elettrica-elettronica-2027-1-cern-geneva-ge-switzerland",
         "en": "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva-ge-switzerland",
-        "de": "technisches-studium-elektrotechnik-elektronik-2027-1-cern-geneva-ge-switzerland",
+        "de": "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva",
         "fr": "stage-technique-genie-electrique-electronique-2027-1-cern-geneva-ge-switzerland"
       },
       "company": "CERN",
@@ -2159,7 +2171,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141918320-technical-studentship-electrical-electronics-engineering-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.250Z",
+      "crawledAt": "2026-08-29T23:21:25.756Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2180,6 +2192,7 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva-ge-switzerland",
+        "technisches-studium-elektrotechnik-elektronik-2027-1-cern-geneva-ge-switzerland",
         "studentship-tecnica-ingegneria-elettrica-elettronica-2027-1-cern-geneva-ge-switzerland"
       ],
       "previousSlugsByLocale": {
@@ -2188,7 +2201,8 @@
           "studentship-tecnica-ingegneria-elettrica-elettronica-2027-1-cern-geneva-ge-switzerland"
         ],
         "de": [
-          "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva-ge-switzerland"
+          "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva-ge-switzerland",
+          "technisches-studium-elektrotechnik-elektronik-2027-1-cern-geneva-ge-switzerland"
         ],
         "fr": [
           "technical-studentship-electrical-electronics-engineering-2027-1-cern-geneva-ge-switzerland"
@@ -2241,7 +2255,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141918950-technical-studentship-it-mathematics-robotics-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.247Z",
+      "crawledAt": "2026-08-29T23:21:25.754Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2296,7 +2310,7 @@
       "slugByLocale": {
         "it": "studentship-tecnica-fisica-applicata-2027-1-cern-geneva-ge-switzerland",
         "en": "technical-studentship-applied-physics-2027-1-cern-geneva-ge-switzerland",
-        "de": "technisches-studium-angewandte-physik-2027-1-cern-geneva-ge-switzerland",
+        "de": "technical-studentship-applied-physics-2027-1-cern-geneva",
         "fr": "stage-technique-physique-appliquee-2027-1-cern-geneva-ge-switzerland"
       },
       "company": "CERN",
@@ -2322,7 +2336,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141920009-technical-studentship-applied-physics-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.249Z",
+      "crawledAt": "2026-08-29T23:21:25.755Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2343,6 +2357,7 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "technical-studentship-applied-physics-2027-1-cern-geneva-ge-switzerland",
+        "technisches-studium-angewandte-physik-2027-1-cern-geneva-ge-switzerland",
         "studentship-tecnica-fisica-applicata-2027-1-cern-geneva-ge-switzerland"
       ],
       "previousSlugsByLocale": {
@@ -2351,7 +2366,8 @@
           "studentship-tecnica-fisica-applicata-2027-1-cern-geneva-ge-switzerland"
         ],
         "de": [
-          "technical-studentship-applied-physics-2027-1-cern-geneva-ge-switzerland"
+          "technical-studentship-applied-physics-2027-1-cern-geneva-ge-switzerland",
+          "technisches-studium-angewandte-physik-2027-1-cern-geneva-ge-switzerland"
         ],
         "fr": [
           "technical-studentship-applied-physics-2027-1-cern-geneva-ge-switzerland"
@@ -2403,7 +2419,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141929260-software-engineer-sy-bi-sw-2026-175-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.248Z",
+      "crawledAt": "2026-08-29T23:21:25.752Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2458,7 +2474,7 @@
       "slugByLocale": {
         "it": "studentship-tecnica-ingegneria-meccanica-2027-1-cern-geneva-ge-switzerland",
         "en": "technical-studentship-mechanical-engineering-2027-1-cern-geneva-ge-switzerland",
-        "de": "technisches-studium-maschinenbau-2027-1-cern-geneva-ge-switzerland",
+        "de": "technical-studentship-mechanical-engineering-2027-1-cern-geneva",
         "fr": "etudiants-techniques-genie-mecanique-2027-1-cern-geneva-ge-switzerland"
       },
       "company": "CERN",
@@ -2483,7 +2499,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141922647-technical-studentship-mechanical-engineering-2027-1?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.245Z",
+      "crawledAt": "2026-08-29T23:21:25.753Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -2504,6 +2520,7 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "technical-studentship-mechanical-engineering-2027-1-cern-geneva-ge-switzerland",
+        "technisches-studium-maschinenbau-2027-1-cern-geneva-ge-switzerland",
         "studentship-tecnica-ingegneria-meccanica-2027-1-cern-geneva-ge-switzerland"
       ],
       "previousSlugsByLocale": {
@@ -2512,7 +2529,8 @@
           "studentship-tecnica-ingegneria-meccanica-2027-1-cern-geneva-ge-switzerland"
         ],
         "de": [
-          "technical-studentship-mechanical-engineering-2027-1-cern-geneva-ge-switzerland"
+          "technical-studentship-mechanical-engineering-2027-1-cern-geneva-ge-switzerland",
+          "technisches-studium-maschinenbau-2027-1-cern-geneva-ge-switzerland"
         ],
         "fr": [
           "technical-studentship-mechanical-engineering-2027-1-cern-geneva-ge-switzerland"
@@ -2565,7 +2583,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000141933839-electromechanical-technician-for-cryogenics-te-crg-ic-2026-176-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.246Z",
+      "crawledAt": "2026-08-29T23:21:25.752Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2639,7 +2657,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000142108470-project-engineer-building-projects-sce-ppm-2026-110-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.244Z",
+      "crawledAt": "2026-08-29T23:21:25.750Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2721,7 +2739,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000142592815-isolde-system-engineer-sy-sti-tsp-2026-131-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.242Z",
+      "crawledAt": "2026-08-29T23:21:25.749Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2802,7 +2820,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000142130613-data-storage-r-d-engineer-it-sd-tab-2026-130-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.243Z",
+      "crawledAt": "2026-08-29T23:21:25.749Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2882,7 +2900,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000142648619-software-developer-beam-optics-be-abp-lno-2026-132-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.243Z",
+      "crawledAt": "2026-08-29T23:21:25.747Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -2963,7 +2981,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143065799-digital-asic-designer-ep-ese-me-2026-134-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.241Z",
+      "crawledAt": "2026-08-29T23:21:25.748Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3042,7 +3060,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143050369-thin-film-materials-scientist-te-vsc-scc-2026-133-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.240Z",
+      "crawledAt": "2026-08-29T23:21:25.747Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3119,7 +3137,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143086329-full-stack-software-engineer-it-ca-ir-2026-198-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.240Z",
+      "crawledAt": "2026-08-29T23:21:25.746Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3200,7 +3218,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143092030-full-stack-software-engineer-it-ca-ir-2026-199-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.237Z",
+      "crawledAt": "2026-08-29T23:21:25.744Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3282,7 +3300,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143461559-machine-learning-engineer-for-next-generation-triggers-ngt-it-cd-pi-2026-177-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.237Z",
+      "crawledAt": "2026-08-29T23:21:25.742Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3363,7 +3381,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143097109-computational-physicist-for-accelerators-be-op-sps-2026-135-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.239Z",
+      "crawledAt": "2026-08-29T23:21:25.745Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3444,7 +3462,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143250205-electromechanical-engineer-normal-conducting-magnets-te-msc-ncm-2026-180-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.238Z",
+      "crawledAt": "2026-08-29T23:21:25.743Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3509,7 +3527,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144085379-accelerator-physicist-be-abp-cei-2026-136-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.231Z",
+      "crawledAt": "2026-08-29T23:21:25.740Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3574,7 +3592,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000143836779-cern-stfc-non-member-state-doctoral-student-programme?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.236Z",
+      "crawledAt": "2026-08-29T23:21:25.741Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -3655,7 +3673,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144096269-deep-learning-developer-it-ce-cds-2026-137-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.230Z",
+      "crawledAt": "2026-08-29T23:21:25.739Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3736,7 +3754,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144245974-junior-automation-controls-engineer-be-ics-acs-2026-206-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.235Z",
+      "crawledAt": "2026-08-29T23:21:25.739Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3801,7 +3819,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144310299-short-term-internship-2026?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.226Z",
+      "crawledAt": "2026-08-29T23:21:25.737Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "streetAddress": "Esplanade des Particules 1",
@@ -3882,7 +3900,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144248640-full-stack-software-developer-it-ca-osi-2026-208-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.228Z",
+      "crawledAt": "2026-08-29T23:21:25.738Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -3963,7 +3981,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144324877-computing-engineer-s3-storage-backup-it-sd-tab-2026-209-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.224Z",
+      "crawledAt": "2026-08-29T23:21:25.736Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4028,7 +4046,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144550109-experienced-industrial-electrical-technician-en-el-mo-2026-164-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.225Z",
+      "crawledAt": "2026-08-29T23:21:25.735Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4103,7 +4121,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144325467-full-stack-software-developer-it-ca-osi-2026-207-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.222Z",
+      "crawledAt": "2026-08-29T23:21:25.736Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4159,7 +4177,7 @@
         "it": "procurement-and-contracts-officer-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland",
         "en": "procurement-and-contracts-officer-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland",
         "de": "auftragsverarbeiter-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland",
-        "fr": "specialiste-des-achats-et-des-marches-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland"
+        "fr": "procurement-and-contracts-officer-ipt-pi-su-2026-184-ld-cern-geneva"
       },
       "company": "CERN",
       "companyKey": "cern",
@@ -4184,7 +4202,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000145298389-procurement-and-contracts-officer-ipt-pi-su-2026-184-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.218Z",
+      "crawledAt": "2026-08-29T23:21:25.732Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4215,7 +4233,15 @@
           "maxValue": 91500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "previousSlugsByLocale": {
+        "fr": [
+          "specialiste-des-achats-et-des-marches-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland"
+        ]
+      },
+      "previousSlugs": [
+        "specialiste-des-achats-et-des-marches-ipt-pi-su-2026-184-ld-cern-geneva-geneva-switzerland"
+      ]
     },
     {
       "id": "cern-2de728145d17",
@@ -4249,7 +4275,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000144335285-accelerator-physicist-be-abp-lno-2026-138-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.221Z",
+      "crawledAt": "2026-08-29T23:21:25.734Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4314,7 +4340,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000145187769-atlas-detector-installation-technician-ep-atl-po-2026-178-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.219Z",
+      "crawledAt": "2026-08-29T23:21:25.731Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4379,7 +4405,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000145938559-electromechanical-technician-te-mpe-mp-2026-210-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.220Z",
+      "crawledAt": "2026-08-29T23:21:25.731Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4444,7 +4470,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146155219-electro-mechanical-technician-te-msc-hsd-2026-193-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.216Z",
+      "crawledAt": "2026-08-29T23:21:25.733Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4477,7 +4503,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.216Z"
+      "firstSeenAt": "2026-08-29T23:21:25.733Z"
     },
     {
       "id": "cern-90b6e014e642",
@@ -4511,7 +4537,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000145967675-experimental-physicist-ep-di-2026-29-ld-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.215Z",
+      "crawledAt": "2026-08-29T23:21:25.729Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4576,7 +4602,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146160670-mechanical-technical-engineer-vacuum-equipment-te-vsc-bvo-2026-211-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.203Z",
+      "crawledAt": "2026-08-29T23:21:25.728Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4609,7 +4635,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.203Z"
+      "firstSeenAt": "2026-08-29T23:21:25.728Z"
     },
     {
       "id": "cern-bc7d4282c822",
@@ -4643,7 +4669,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146161339-electrical-or-electronics-technical-engineer-te-mpe-mp-2026-214-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.213Z",
+      "crawledAt": "2026-08-29T23:21:25.727Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4676,7 +4702,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.213Z"
+      "firstSeenAt": "2026-08-29T23:21:25.727Z"
     },
     {
       "id": "cern-97cc54b9f746",
@@ -4710,7 +4736,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146173779-instrumentation-engineer-te-crg-ic-2026-94-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.206Z",
+      "crawledAt": "2026-08-29T23:21:25.725Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4743,7 +4769,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.206Z"
+      "firstSeenAt": "2026-08-29T23:21:25.725Z"
     },
     {
       "id": "cern-413a64bae5e9",
@@ -4777,7 +4803,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146178969-mechanical-technician-te-vsc-scc-2026-212-grae-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.214Z",
+      "crawledAt": "2026-08-29T23:21:25.726Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4810,7 +4836,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.214Z"
+      "firstSeenAt": "2026-08-29T23:21:25.726Z"
     },
     {
       "id": "cern-ded727a19f62",
@@ -4844,7 +4870,7 @@
       "url": "https://jobs.smartrecruiters.com/CERN/744000146207369-cern-courier-magazine-associate-editor-sr-eco-co-2026-143-grap-?oga=true",
       "source": "CERN Dedicated Parser (SmartRecruiters)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:39:34.208Z",
+      "crawledAt": "2026-08-29T23:21:25.722Z",
       "addressLocality": "Geneva",
       "addressRegion": "GENEVA",
       "streetAddress": "Esplanade des Particules 1",
@@ -4877,7 +4903,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:34.208Z"
+      "firstSeenAt": "2026-08-29T23:21:25.722Z"
     },
     {
       "id": "cern-82f18e60758a",
