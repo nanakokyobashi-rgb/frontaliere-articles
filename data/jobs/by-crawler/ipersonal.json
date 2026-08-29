@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ipersonal",
-  "assembledAt": "2026-08-28T20:58:23.018Z",
+  "assembledAt": "2026-08-29T03:45:11.948Z",
   "jobs": [
     {
       "id": "ipersonal-7f14d039da7d",
@@ -3266,6 +3266,1041 @@
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-27T19:50:20.520Z",
       "crawlerMissStreak": 2
+    },
+    {
+      "id": "ipersonal-355c744a6807",
+      "slug": "fachmann-fachfrau-gesundheit-cfc-m-w-d-deine-chance-per-pflege-in-frauenfeld-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-frauenfeld-ipersonal-ch",
+        "it": "fachmann-fachfrau-gesundheit-cfc-m-w-d-deine-chance-per-pflege-in-frauenfeld-ipersonal-ag-lugano",
+        "en": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-frauenfeld-ipersonal-ch",
+        "fr": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-frauenfeld-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld!",
+      "titleByLocale": {
+        "de": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld!",
+        "it": "Fachmann / Fachfrau Gesundheit CFC (m/w/d) – Deine Chance per Pflege in Frauenfeld!",
+        "en": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld!",
+        "fr": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld!"
+      },
+      "description": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Frauenfeld! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fuer-pflege-in-frauenfeld/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:07.844Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fuer-pflege-in-frauenfeld/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-frauenfeld-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-frauenfeld-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:07.844Z"
+    },
+    {
+      "id": "ipersonal-d228823a8e1e",
+      "slug": "fachmann-fachfrau-gesundheit-cfc-m-w-d-deine-chance-per-pflege-in-uznach-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-uznach-ipersonal-ch",
+        "it": "fachmann-fachfrau-gesundheit-cfc-m-w-d-deine-chance-per-pflege-in-uznach-ipersonal-ag-lugano",
+        "en": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-uznach-ipersonal-ch",
+        "fr": "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-uznach-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach!",
+      "titleByLocale": {
+        "de": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach!",
+        "it": "Fachmann / Fachfrau Gesundheit CFC (m/w/d) – Deine Chance per Pflege in Uznach!",
+        "en": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach!",
+        "fr": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach!"
+      },
+      "description": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Fachmann / Fachfrau Gesundheit EFZ (m/w/d) – Deine Chance für Pflege in Uznach! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fuer-pflege-in-uznach/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:07.542Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fuer-pflege-in-uznach/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-uznach-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "fachmann-fachfrau-gesundheit-efz-m-w-d-deine-chance-fur-pflege-in-uznach-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:07.542Z"
+    },
+    {
+      "id": "ipersonal-fd102edf92d4",
+      "slug": "offene-stellen-per-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "offene-stellen-fur-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ch",
+        "it": "offene-stellen-per-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ag-lugano",
+        "en": "offene-stellen-fur-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ch",
+        "fr": "offene-stellen-fur-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams!",
+      "titleByLocale": {
+        "de": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams!",
+        "it": "Offene Stellen per Betreuung in Belp – Werde Teil eines engagierten Teams!",
+        "en": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams!",
+        "fr": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams!"
+      },
+      "description": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Offene Stellen für Betreuung in Belp – Werde Teil eines engagierten Teams! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/offene-stellen-fuer-betreuung-in-belp-werde-teil-eines-engagierten-teams/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:07.239Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/offene-stellen-fuer-betreuung-in-belp-werde-teil-eines-engagierten-teams/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "offene-stellen-fur-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "offene-stellen-fur-betreuung-in-belp-werde-teil-eines-engagierten-teams-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:07.239Z"
+    },
+    {
+      "id": "ipersonal-71aecf9d7e95",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt!",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt!",
+        "it": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt!",
+        "en": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt!",
+        "fr": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt!"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF (80-100%) St. Moritz – Deine Pflegekompetenz ist gefragt! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:06.936Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-st-moritz-deine-pflegekompetenz-ist-gefragt-ipersonal"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:06.936Z"
+    },
+    {
+      "id": "ipersonal-6153be46517b",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ch",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ch",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben!",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben!",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben!",
+        "it": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben!",
+        "fr": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben!"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben! — iPersonal AG",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Binningen gesucht – Jetzt bewerben! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T03:45:06.634Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-binningen-gesucht-jetzt-bewerben-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:06.634Z"
+    },
+    {
+      "id": "ipersonal-618257228e67",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ch",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ch",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben!",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben!",
+        "it": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben!",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben!",
+        "fr": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben!"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Niederbipp gesucht – Jetzt bewerben! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:06.331Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-niederbipp-gesucht-jetzt-bewerben-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:06.331Z"
+    },
+    {
+      "id": "ipersonal-e9f43f6b916e",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ch",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ch",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben!",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben!",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben!",
+        "it": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben!",
+        "fr": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben!"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben! — iPersonal AG",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Davos gesucht – Jetzt bewerben! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T03:45:06.028Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-davos-gesucht-jetzt-bewerben-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:06.028Z"
+    },
+    {
+      "id": "ipersonal-781bbb009501",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ch",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ch",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen!",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen!",
+        "it": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen!",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen!",
+        "fr": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen!"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Leuggern gesucht – Jetzt Karriere machen! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:05.726Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-leuggern-gesucht-jetzt-karriere-machen-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:05.726Z"
+    },
+    {
+      "id": "ipersonal-460a660bb1b7",
+      "slug": "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ch",
+        "it": "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ch",
+        "fr": "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen",
+        "it": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen",
+        "en": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen",
+        "fr": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen"
+      },
+      "description": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann FH 80-100% Wettingen gesucht – Jetzt Karriere machen — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:05.423Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-fh-80-100-wettingen-gesucht-jetzt-karriere-machen-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:05.423Z"
+    },
+    {
+      "id": "ipersonal-4ea8580cc91d",
+      "slug": "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege",
+        "it": "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege",
+        "fr": "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege",
+        "it": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege",
+        "en": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege",
+        "fr": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF 80-100% Speicher gesucht – Verantwortung übernehmen in der Pflege — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-uebernehmen-in-der-pflege/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:05.120Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-uebernehmen-in-der-pflege/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-80-100-speicher-gesucht-verantwortung-ubernehmen-in-der-pflege"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:05.120Z"
+    },
+    {
+      "id": "ipersonal-3ac932509599",
+      "slug": "dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen",
+      "slugByLocale": {
+        "it": "dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen",
+        "en": "dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen",
+        "de": "dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen",
+        "fr": "dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams",
+      "titleByLocale": {
+        "it": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams",
+        "en": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams",
+        "de": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams",
+        "fr": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams"
+      },
+      "description": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams — iPersonal AG",
+      "descriptionByLocale": {
+        "it": "Dipl. Pflegefachfrau/mann FH 80-100% Wittinsburg gesucht – Werde Teil eines professionellen Teams — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen-teams/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-29T03:45:04.818Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-fh-80-100-wittinsburg-gesucht-werde-teil-eines-professionellen-teams/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:04.818Z"
+    },
+    {
+      "id": "ipersonal-04f900c706e9",
+      "slug": "dipl-pflegefachfrau-mann-hf-dn1-80-100-per-kussnacht-am-rigi-gesucht-gestalte-la-pflege-von-morgen-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-kussnacht-am-rigi-gesucht-gestalte-die-pflege",
+        "it": "dipl-pflegefachfrau-mann-hf-dn1-80-100-per-kussnacht-am-rigi-gesucht-gestalte-la-pflege-von-morgen-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-kussnacht-am-rigi-gesucht-gestalte-die-pflege",
+        "fr": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-kussnacht-am-rigi-gesucht-gestalte-die-pflege"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen",
+        "it": "Dipl. Pflegefachfrau/mann HF DN1 80-100% per Küssnacht am Rigi gesucht – Gestalte la Pflege von morgen",
+        "en": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen",
+        "fr": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Küssnacht am Rigi gesucht – Gestalte die Pflege von morgen — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-dn1-80-100-fuer-kuessnacht-am-rigi-gesucht-gestalte-die-pflege-von-morgen/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:04.516Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-dn1-80-100-fuer-kuessnacht-am-rigi-gesucht-gestalte-die-pflege-von-morgen/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-kussnacht-am-rigi-gesucht-gestalte-die-pflege"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-kussnacht-am-rigi-gesucht-gestalte-die-pflege"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:04.516Z"
+    },
+    {
+      "id": "ipersonal-7c5ec5812a74",
+      "slug": "dipl-pflegefachfrau-mann-hf-dn1-80-100-per-lutzenberg-gesucht-gestalte-la-pflege-von-morgen-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-lutzenberg-gesucht-gestalte-die-pflege-von",
+        "it": "dipl-pflegefachfrau-mann-hf-dn1-80-100-per-lutzenberg-gesucht-gestalte-la-pflege-von-morgen-ipersonal-ag-lugano",
+        "en": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-lutzenberg-gesucht-gestalte-die-pflege-von",
+        "fr": "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-lutzenberg-gesucht-gestalte-die-pflege-von"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen",
+      "titleByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen",
+        "it": "Dipl. Pflegefachfrau/mann HF DN1 80-100% per Lutzenberg gesucht – Gestalte la Pflege von morgen",
+        "en": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen",
+        "fr": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen"
+      },
+      "description": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Pflegefachfrau/mann HF DN1 80-100% für Lutzenberg gesucht – Gestalte die Pflege von morgen — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-dn1-80-100-fuer-lutzenberg-gesucht-gestalte-die-pflege-von-morgen/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:04.213Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-mann-hf-dn1-80-100-fuer-lutzenberg-gesucht-gestalte-die-pflege-von-morgen/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-lutzenberg-gesucht-gestalte-die-pflege-von"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-pflegefachfrau-mann-hf-dn1-80-100-fur-lutzenberg-gesucht-gestalte-die-pflege-von"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:04.213Z"
+    },
+    {
+      "id": "ipersonal-b9ac1eb8191c",
+      "slug": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-per-meggen-gesucht-pflege-auf-hochstem-niveau-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur-meggen",
+        "it": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-per-meggen-gesucht-pflege-auf-hochstem-niveau-ipersonal-ag-lugano",
+        "en": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur-meggen",
+        "fr": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur-meggen"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau",
+      "titleByLocale": {
+        "de": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau",
+        "it": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% per Meggen gesucht – Pflege auf höchstem Niveau",
+        "en": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau",
+        "fr": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau"
+      },
+      "description": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "it": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "en": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "fr": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Meggen gesucht – Pflege auf höchstem Niveau — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fuer-meggen-gesucht-pflege-auf-hoechstem-niveau/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:03.911Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fuer-meggen-gesucht-pflege-auf-hoechstem-niveau/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur-meggen"
+        ]
+      },
+      "previousSlugs": [
+        "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur-meggen"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:03.911Z"
+    },
+    {
+      "id": "ipersonal-42769aa45b6f",
+      "slug": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-per-rorschach-gesucht-pflege-auf-hochstem-niveau-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur",
+        "it": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-per-rorschach-gesucht-pflege-auf-hochstem-niveau-ipersonal-ag-lugano",
+        "en": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur",
+        "fr": "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau",
+      "titleByLocale": {
+        "de": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau",
+        "it": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% per Rorschach gesucht – Pflege auf höchstem Niveau",
+        "en": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau",
+        "fr": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau"
+      },
+      "description": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "it": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "en": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau — iPersonal AG",
+        "fr": "Pflegefachfrau/mann Advance Practice Nurse (Master of Science in Pflege) 80-100% für Rorschach gesucht – Pflege auf höchstem Niveau — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fuer-rorschach-gesucht-pflege-auf-hoechstem-niveau/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T03:45:03.594Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://med-ipersonal.ch/jobs/pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fuer-rorschach-gesucht-pflege-auf-hoechstem-niveau/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur"
+        ]
+      },
+      "previousSlugs": [
+        "pflegefachfrau-mann-advance-practice-nurse-master-of-science-in-pflege-80-100-fur"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T03:45:03.594Z"
     }
   ]
 }
