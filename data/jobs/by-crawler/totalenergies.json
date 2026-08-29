@@ -1,6 +1,6 @@
 {
   "crawlerKey": "totalenergies",
-  "assembledAt": "2026-08-28T20:54:52.879Z",
+  "assembledAt": "2026-08-29T03:13:51.620Z",
   "jobs": [
     {
       "id": "totalenergies-743aafd004c6",
@@ -33,7 +33,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Corporate-Compliance-Officer-Fixed-Term-contract-6-months/82946",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.990Z",
+      "crawledAt": "2026-08-29T03:13:46.821Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -109,7 +109,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Legal-Operations-Artificial-Intelligence-Intern/81726",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.987Z",
+      "crawledAt": "2026-08-29T03:13:46.798Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -130,7 +130,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-04T12:38:28.345Z",
-      "needsRetranslation": true,
       "salaryMin": 55000,
       "salaryMax": 94500,
       "baseSalary": {
@@ -142,7 +141,8 @@
           "maxValue": 94500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "totalenergies-0b82b3ba3c6b",
@@ -175,7 +175,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Derivative-Market-Risk-Analyst/82555",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.985Z",
+      "crawledAt": "2026-08-29T03:13:46.818Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -240,7 +240,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Business-Analyst-Finance-Shared-Services/82058",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.983Z",
+      "crawledAt": "2026-08-29T03:13:46.816Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -271,7 +271,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T12:38:28.341Z",
-      "needsRetranslation": true,
       "salaryMin": 63000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -283,7 +282,8 @@
           "maxValue": 107500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "totalenergies-1ef2251589d7",
@@ -316,7 +316,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Structured-Origination-Finance-Junior-Analyst-Intern/82708",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.981Z",
+      "crawledAt": "2026-08-29T03:13:46.814Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -397,7 +397,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/CDD-TGI-Comptable-polyvalent/82348",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:46.979Z",
+      "crawledAt": "2026-08-29T03:13:46.780Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -434,7 +434,6 @@
         ]
       },
       "firstSeenAt": "2026-07-13T21:57:28.103Z",
-      "needsRetranslation": true,
       "salaryMin": 104500,
       "salaryMax": 183500,
       "baseSalary": {
@@ -446,7 +445,8 @@
           "maxValue": 183500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "totalenergies-3a5ebdb5474a",
@@ -479,7 +479,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Tech-Lead-Advanced-Analytics/83204",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.977Z",
+      "crawledAt": "2026-08-29T03:13:46.812Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -558,7 +558,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Trading-Operator/83309",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.973Z",
+      "crawledAt": "2026-08-29T03:13:46.809Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -595,7 +595,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T21:48:43.472Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -607,7 +606,8 @@
           "maxValue": 107500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "totalenergies-565cb9385227",
@@ -640,7 +640,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Power-Trading-New-Ventures-Regulatory-Affairs-Intern/82734",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.968Z",
+      "crawledAt": "2026-08-29T03:13:46.806Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -706,7 +706,7 @@
       "url": "https://jobs.totalenergies.com/en_US/careers/JobDetail/Administrative-Assistant-Fixed-Term-Contract/83184",
       "source": "TotalEnergies Dedicated Parser (Avature)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:54:46.951Z",
+      "crawledAt": "2026-08-29T03:13:46.795Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "streetAddress": "Route de l'Aéroport 10",
@@ -740,7 +740,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T10:09:17.503Z",
-      "needsRetranslation": true,
       "salaryMin": 60500,
       "salaryMax": 91500,
       "baseSalary": {
@@ -752,7 +751,8 @@
           "maxValue": 91500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     }
   ]
 }
