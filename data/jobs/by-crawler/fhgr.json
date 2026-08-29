@@ -1,6 +1,6 @@
 {
   "crawlerKey": "fhgr",
-  "assembledAt": "2026-08-29T03:27:05.645Z",
+  "assembledAt": "2026-08-29T14:36:58.446Z",
   "jobs": [
     {
       "id": "fhgr-b96495651fa4",
@@ -33,7 +33,7 @@
       "url": "https://jobs.fhgr.ch/Vacancies/749/Description/1",
       "source": "Fachhochschule Graubünden Dedicated Parser (Umantis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:27:01.988Z",
+      "crawledAt": "2026-08-29T14:36:55.375Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
@@ -141,7 +141,7 @@
       "url": "https://jobs.fhgr.ch/Vacancies/797/Description/1",
       "source": "Fachhochschule Graubünden Dedicated Parser (Umantis)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:27:00.778Z",
+      "crawledAt": "2026-08-29T14:36:54.328Z",
       "addressLocality": "Chur",
       "postalCode": "7000",
       "addressCountry": "CH",
