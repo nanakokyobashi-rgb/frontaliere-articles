@@ -2838,7 +2838,7 @@
         "it": "senior-lead-copywriter-apparel-on-running-ch",
         "en": "senior-lead-copywriter-apparel-on-running-ch",
         "de": "senior-lead-copywriter-apparel-on-running-ch",
-        "fr": "redacteur-principal-en-chef-appareil-on-running-zurich"
+        "fr": "redacteur-principal-appareil-on-running-zurich"
       },
       "company": "On Running",
       "companyKey": "on-running",
@@ -2898,7 +2898,15 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "previousSlugsByLocale": {
+        "fr": [
+          "redacteur-principal-en-chef-appareil-on-running-zurich"
+        ]
+      },
+      "previousSlugs": [
+        "redacteur-principal-en-chef-appareil-on-running-zurich"
+      ]
     },
     {
       "id": "on-running-0a85f24fef2c",

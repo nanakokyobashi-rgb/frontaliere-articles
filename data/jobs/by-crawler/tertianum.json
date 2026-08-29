@@ -4028,9 +4028,7 @@
       "previousSlugsByLocale": {
         "it": [
           "fachfrau-fachmann-gesundheit-cfc-80-100-tertianum-kirchdorf",
-          "fachfrau-fachmann-gesundheit-efz-80-100-tertianum-weesen",
-          "salute-professionale-tertianum-weesen",
-          "fachfrau-fachmann-gesundheit-cfc-80-100-tertianum-weesen"
+          "fachfrau-fachmann-gesundheit-efz-80-100-tertianum-weesen"
         ],
         "de": [
           "fachfrau-fachmann-gesundheit-efz-80-100-tertianum-weesen"
@@ -4044,10 +4042,7 @@
       },
       "previousSlugs": [
         "fachfrau-fachmann-gesundheit-cfc-80-100-tertianum-kirchdorf",
-        "fachfrau-fachmann-gesundheit-efz-80-100-tertianum-weesen",
-        "salute-professionale-tertianum-weesen",
-        "fachfrau-mann-gesundheit-tertianum-weesen",
-        "fachfrau-fachmann-gesundheit-cfc-80-100-tertianum-weesen"
+        "fachfrau-fachmann-gesundheit-efz-80-100-tertianum-weesen"
       ],
       "firstSeenAt": "2026-07-16T22:58:03.987Z",
       "salaryMin": 60000,

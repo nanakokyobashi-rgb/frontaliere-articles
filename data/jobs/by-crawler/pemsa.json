@@ -2021,7 +2021,7 @@
         "it": "idraulico-impianti-sanitari-pemsa-manno",
         "en": "hydraulic-health-plants-pemsa-manno",
         "de": "hydraulische-heilpflanzen-pemsa-manno",
-        "fr": "installations-de-sante-hydraulique-pemsa-manno"
+        "fr": "installations-sanitaires-hydrauliques-pemsa-manno"
       },
       "id": "pemsa-e5aafae0b0db",
       "needsRetranslation": true,
@@ -2038,7 +2038,15 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-25T09:53:25.177Z"
+      "firstSeenAt": "2026-08-25T09:53:25.177Z",
+      "previousSlugsByLocale": {
+        "fr": [
+          "installations-de-sante-hydraulique-pemsa-manno"
+        ]
+      },
+      "previousSlugs": [
+        "installations-de-sante-hydraulique-pemsa-manno"
+      ]
     },
     {
       "title": "Operatore di macchinari M2 con esperienza",

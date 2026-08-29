@@ -2269,12 +2269,12 @@
     },
     {
       "id": "kanton-zuerich-6db518eced6d",
-      "slug": "allenatore-operativo-kantonale-verwaltung-zurich-zurich",
+      "slug": "operatore-tecnico-kantonale-verwaltung-zurich-zurich",
       "slugByLocale": {
-        "it": "allenatore-operativo-kantonale-verwaltung-zurich-zurich",
-        "en": "operational-coach-kantonale-verwaltung-zurich-zurich",
+        "it": "operatore-tecnico-kantonale-verwaltung-zurich-zurich",
+        "en": "operating-coach-kantonale-verwaltung-zurich-zurich",
         "de": "betriebscoach-kanton-zuerich-zurich",
-        "fr": "entraineur-operationnel-kantonale-verwaltung-zurich-zurich"
+        "fr": "entraineur-d-exploitation-kantonale-verwaltung-zurich-zurich"
       },
       "company": "Kantonale Verwaltung Zürich",
       "companyKey": "kanton-zuerich",
@@ -2334,18 +2334,24 @@
       },
       "previousSlugsByLocale": {
         "it": [
-          "betriebscoach-kanton-zuerich-zurich"
+          "betriebscoach-kanton-zuerich-zurich",
+          "allenatore-operativo-kantonale-verwaltung-zurich-zurich"
         ],
         "en": [
-          "betriebscoach-kantonale-verwaltung-zurich-zurich"
+          "betriebscoach-kantonale-verwaltung-zurich-zurich",
+          "operational-coach-kantonale-verwaltung-zurich-zurich"
         ],
         "fr": [
-          "betriebscoach-kanton-zuerich-zurich"
+          "betriebscoach-kanton-zuerich-zurich",
+          "entraineur-operationnel-kantonale-verwaltung-zurich-zurich"
         ]
       },
       "previousSlugs": [
         "betriebscoach-kanton-zuerich-zurich",
-        "betriebscoach-kantonale-verwaltung-zurich-zurich"
+        "betriebscoach-kantonale-verwaltung-zurich-zurich",
+        "allenatore-operativo-kantonale-verwaltung-zurich-zurich",
+        "operational-coach-kantonale-verwaltung-zurich-zurich",
+        "entraineur-operationnel-kantonale-verwaltung-zurich-zurich"
       ]
     },
     {

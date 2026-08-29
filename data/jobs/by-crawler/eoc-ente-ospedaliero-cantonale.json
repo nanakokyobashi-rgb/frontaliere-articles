@@ -549,6 +549,23 @@
         "fr": []
       },
       "sourceLang": "it",
+      "salaryMin": 63000,
+      "salaryMax": 87500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 63000,
+          "maxValue": 87500,
+          "unitText": "YEAR"
+        }
+      },
+      "streetAddress": "Viale Officina 3",
+      "postalCode": "6500",
+      "addressLocality": "Bellinzona",
+      "addressRegion": "TI",
+      "employmentType": "FULL_TIME",
       "previousSlugsByLocale": {
         "it": [
           "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona-feezrj",
@@ -569,24 +586,7 @@
         "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona-uil172",
         "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona-uil177",
         "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-bellinzona-uil178"
-      ],
-      "salaryMin": 63000,
-      "salaryMax": 87500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 63000,
-          "maxValue": 87500,
-          "unitText": "YEAR"
-        }
-      },
-      "streetAddress": "Viale Officina 3",
-      "postalCode": "6500",
-      "addressLocality": "Bellinzona",
-      "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      ]
     },
     {
       "id": "company-feezsa",
@@ -628,6 +628,21 @@
       },
       "requirementsByLocale": {},
       "sourceLang": "it",
+      "salaryMin": 70500,
+      "salaryMax": 98500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 70500,
+          "maxValue": 98500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressLocality": "Novaggio",
+      "addressRegion": "TI",
+      "employmentType": "FULL_TIME",
       "previousSlugsByLocale": {
         "it": [
           "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-novaggio-feezsb",
@@ -644,22 +659,7 @@
         "general-care-nurse-eoc-ente-ospedaliero-cantonale-novaggio-f2b1d1",
         "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-novaggio-feezsa",
         "infermiere-a-in-cure-generali-eoc-ente-ospedaliero-cantonale-novaggio-uil17z"
-      ],
-      "salaryMin": 70500,
-      "salaryMax": 98500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 70500,
-          "maxValue": 98500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressLocality": "Novaggio",
-      "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      ]
     },
     {
       "id": "company-4333hr",
@@ -701,6 +701,21 @@
       },
       "requirementsByLocale": {},
       "sourceLang": "it",
+      "salaryMin": 70500,
+      "salaryMax": 98500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 70500,
+          "maxValue": 98500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressLocality": "Novaggio",
+      "addressRegion": "TI",
+      "employmentType": "FULL_TIME",
       "previousSlugsByLocale": {
         "it": [
           "medico-assistente-medico-ospedaliero-eoc-ente-ospedaliero-cantonale-novaggio-4333hs",
@@ -740,22 +755,7 @@
         "assistant-medical-hopital-medical-eoc-ente-ospedaliero-cantonale-novaggio-9f5427",
         "assistenzarzt-krankenhausarzt-eoc-ente-ospedaliero-cantonale-novaggio",
         "medico-assistente-medico-ospedaliero-eoc-ente-ospedaliero-cantonale-novaggio-4333hr"
-      ],
-      "salaryMin": 70500,
-      "salaryMax": 98500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 70500,
-          "maxValue": 98500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressLocality": "Novaggio",
-      "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      ]
     },
     {
       "id": "company-4333gz",
@@ -798,6 +798,9 @@
       "requirementsByLocale": {},
       "sourceLang": "it",
       "previousSlugsByLocale": {
+        "en": [
+          "social-health-worker-eoc-ente-ospedaliero-cantonale-novaggio"
+        ],
         "de": [
           "sozialarbeiter-eoc-ente-ospedaliero-cantonale-novaggio",
           "beschaftigte-im-gesundheitswesen-eoc-ente-ospedaliero-cantonale-novaggio"
@@ -822,9 +825,6 @@
           "travailleurs-employes-de-la-sante-eoc-ente-ospedaliero-cantonale-novaggio-4cb009",
           "travailleurs-employes-de-la-sante-eoc-ente-ospedaliero-cantonale-novaggio-56991c",
           "travailleurs-employes-de-la-sante-eoc-ente-ospedaliero-cantonale-novaggio-8c2d0e"
-        ],
-        "en": [
-          "social-health-worker-eoc-ente-ospedaliero-cantonale-novaggio"
         ]
       },
       "previousSlugs": [
@@ -994,6 +994,21 @@
       },
       "requirementsByLocale": {},
       "sourceLang": "it",
+      "salaryMin": 63000,
+      "salaryMax": 87500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 63000,
+          "maxValue": 87500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressLocality": "Novaggio",
+      "addressRegion": "TI",
+      "employmentType": "FULL_TIME",
       "previousSlugsByLocale": {
         "it": [
           "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-novaggio-4333g6",
@@ -1021,22 +1036,7 @@
         "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-novaggio-x29n5z",
         "stage-servizio-infermieristico-eoc-ente-ospedaliero-cantonale-novaggio-4333g5",
         "praktikum-im-pflegedienst-eoc-ente-ospedaliero-cantonale-novaggio"
-      ],
-      "salaryMin": 63000,
-      "salaryMax": 87500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 63000,
-          "maxValue": 87500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressLocality": "Novaggio",
-      "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      ]
     },
     {
       "id": "company-4333g1",
@@ -1201,6 +1201,21 @@
         "fr": []
       },
       "sourceLang": "it",
+      "salaryMin": 70500,
+      "salaryMax": 98500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 70500,
+          "maxValue": 98500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressLocality": "Novaggio",
+      "addressRegion": "TI",
+      "employmentType": "FULL_TIME",
       "previousSlugsByLocale": {
         "it": [
           "ergoterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio-4333fc",
@@ -1234,22 +1249,7 @@
         "qualified-occupational-therapist-eoc-ente-ospedaliero-cantonale-novaggio",
         "qualifizierter-ergotherapeut-eoc-ente-ospedaliero-cantonale-novaggio",
         "ergoterapista-diplomato-a-eoc-ente-ospedaliero-cantonale-novaggio-4333fb"
-      ],
-      "salaryMin": 70500,
-      "salaryMax": 98500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 70500,
-          "maxValue": 98500,
-          "unitText": "YEAR"
-        }
-      },
-      "addressLocality": "Novaggio",
-      "addressRegion": "TI",
-      "employmentType": "FULL_TIME"
+      ]
     },
     {
       "id": "company-feey97",

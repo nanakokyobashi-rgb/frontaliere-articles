@@ -9,7 +9,7 @@
         "it": "store-leader-incubation-m-w-d-ost-e-zentralschweiz-decathlon-zurich",
         "en": "store-leader-incubation-m-f-d-eastern-and-central-switzerland-decathlon-zurich",
         "de": "store-leader-incubation-m-w-d-ost-und-zentralschweiz-decathlon-ch",
-        "fr": "store-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich"
+        "fr": "succursale-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich"
       },
       "company": "Decathlon",
       "companyKey": "decathlon",
@@ -60,7 +60,8 @@
         "fr": [
           "incubation-du-chef-de-magasin-m-f-d-suisse-orientale-et-centrale-decathlon-zurich",
           "succursale-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich",
-          "store-leader-incubation-m-w-d-ost-und-zentralschweiz-decathlon-ch"
+          "store-leader-incubation-m-w-d-ost-und-zentralschweiz-decathlon-ch",
+          "store-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich"
         ],
         "it": [
           "store-leader-incubation-m-w-d-ost-und-zentralschweiz-decathlon-ch"
@@ -72,7 +73,8 @@
       "previousSlugs": [
         "store-leader-incubation-m-w-d-ost-und-zentralschweiz-decathlon-ch",
         "incubation-du-chef-de-magasin-m-f-d-suisse-orientale-et-centrale-decathlon-zurich",
-        "succursale-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich"
+        "succursale-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich",
+        "store-leader-incubation-h-f-d-suisse-orientale-et-centrale-decathlon-zurich"
       ],
       "needsRetranslation": true,
       "firstSeenAt": "2026-06-10T09:03:00.823Z",

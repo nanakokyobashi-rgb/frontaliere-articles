@@ -546,9 +546,9 @@
     },
     {
       "id": "swissquote-778e18f7055d",
-      "slug": "responsabile-del-controllo-interno-swissquote-gland",
+      "slug": "ufficiale-di-controllo-interno-swissquote-gland",
       "slugByLocale": {
-        "it": "responsabile-del-controllo-interno-swissquote-gland",
+        "it": "ufficiale-di-controllo-interno-swissquote-gland",
         "en": "internal-controlling-officer-swissquote-gland",
         "de": "interner-kontrollbeamter-swissquote-gland",
         "fr": "specialiste-du-controle-interne-swissquote-gland"
@@ -596,12 +596,14 @@
       "streetAddress": "Chemin de la Crétaux 33",
       "previousSlugs": [
         "ufficiale-di-controllo-interno-swissquote-gland",
-        "internal-controlling-officer-swissquote-gland"
+        "internal-controlling-officer-swissquote-gland",
+        "responsabile-del-controllo-interno-swissquote-gland"
       ],
       "previousSlugsByLocale": {
         "it": [
           "ufficiale-di-controllo-interno-swissquote-gland",
-          "internal-controlling-officer-swissquote-gland"
+          "internal-controlling-officer-swissquote-gland",
+          "responsabile-del-controllo-interno-swissquote-gland"
         ],
         "de": [
           "internal-controlling-officer-swissquote-gland"
