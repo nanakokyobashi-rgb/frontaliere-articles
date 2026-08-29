@@ -1,7 +1,7 @@
 {
   "key": "cs-bregaglia",
   "label": "Centro Sanitario Bregaglia",
-  "generatedAt": "2026-08-29T03:18:44.950Z",
+  "generatedAt": "2026-08-29T14:27:59.609Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,11 +9,12 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3559,
-  "avgDurationMs": 3559,
+  "durationMs": 3314,
+  "avgDurationMs": 3314,
   "durationHistory": [
     3654,
-    3559
+    3559,
+    3314
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -30,7 +31,7 @@
       "url": "https://www.csbregaglia.ch/it/centro-sanitario/offerte-di-lavoro/419-offerta-di-lavoro-medico-di-medicina-generale-o-internista",
       "source": "CS Bregaglia Dedicated Parser (Joomla RSS feed)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:18:42.612Z",
+      "crawledAt": "2026-08-29T14:27:57.094Z",
       "addressLocality": "Promontogno",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -67,7 +68,7 @@
       "url": "https://www.csbregaglia.ch/it/centro-sanitario/offerte-di-lavoro/324-apertura-bandi-per-apprendistato-al-csb",
       "source": "CS Bregaglia Dedicated Parser (Joomla RSS feed)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T03:18:42.614Z",
+      "crawledAt": "2026-08-29T14:27:57.096Z",
       "addressLocality": "Promontogno",
       "addressRegion": "GR",
       "addressCountry": "CH",
