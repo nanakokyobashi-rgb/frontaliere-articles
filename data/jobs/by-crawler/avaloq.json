@@ -1,6 +1,6 @@
 {
   "crawlerKey": "avaloq",
-  "assembledAt": "2026-08-29T15:05:06.923Z",
+  "assembledAt": "2026-08-29T15:16:00.442Z",
   "jobs": [
     {
       "title": "Corporate Real Estate Manager",
@@ -59,7 +59,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:05:06.922Z"
+      "firstSeenAt": "2026-08-29T15:16:00.440Z"
     },
     {
       "title": "Senior Project Manager, PaaS & Cloud Automation",
@@ -237,7 +237,7 @@
         }
       },
       "streetAddress": "Via Industria 1",
-      "firstSeenAt": "2026-08-29T15:05:06.922Z"
+      "firstSeenAt": "2026-08-29T15:16:00.440Z"
     },
     {
       "title": "Avaloq Project Manager",
