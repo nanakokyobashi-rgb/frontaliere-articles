@@ -1,17 +1,18 @@
 {
   "key": "afry",
   "label": "AFRY",
-  "generatedAt": "2026-08-29T03:41:47.916Z",
+  "generatedAt": "2026-08-29T23:23:04.190Z",
   "total": 64,
   "newCount": 2,
   "updatedCount": 61,
   "removedCount": 1,
   "unchangedCount": 1,
-  "durationMs": 131564,
-  "avgDurationMs": 131564,
+  "durationMs": 97210,
+  "avgDurationMs": 97210,
   "durationHistory": [
     143676,
-    131564
+    131564,
+    97210
   ],
   "newJobs": [
     {
