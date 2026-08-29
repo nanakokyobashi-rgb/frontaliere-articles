@@ -1,7 +1,7 @@
 {
   "key": "ardian",
   "label": "Ardian",
-  "generatedAt": "2026-08-28T21:23:46.351Z",
+  "generatedAt": "2026-08-29T03:56:01.423Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,11 +9,6 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 5047,
-  "avgDurationMs": 5047,
-  "durationHistory": [
-    5047
-  ],
   "newJobs": [
     {
       "id": "ardian-06257c7ac5a7",
@@ -28,7 +23,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:42.621Z",
+      "crawledAt": "2026-08-29T03:55:58.316Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -40,7 +35,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "_qualityScore": 61,
       "_qualityBreakdown": {
@@ -63,7 +58,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:43.320Z",
+      "crawledAt": "2026-08-29T03:55:58.965Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -75,7 +70,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "_qualityScore": 56,
       "_qualityBreakdown": {
@@ -127,5 +122,11 @@
         "completeness": 19
       }
     }
+  ],
+  "durationMs": 4338,
+  "avgDurationMs": 4338,
+  "durationHistory": [
+    5047,
+    4338
   ]
 }

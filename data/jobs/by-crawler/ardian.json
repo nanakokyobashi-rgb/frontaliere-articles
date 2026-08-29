@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ardian",
-  "assembledAt": "2026-08-28T21:23:46.350Z",
+  "assembledAt": "2026-08-29T03:56:01.422Z",
   "jobs": [
     {
       "id": "ardian-9f5eec77bfad",
@@ -34,7 +34,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:43.320Z",
+      "crawledAt": "2026-08-29T03:55:58.965Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -46,7 +46,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "requirements": [],
       "requirementsByLocale": {
@@ -64,7 +64,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:43.320Z"
+      "firstSeenAt": "2026-08-29T03:55:58.965Z"
     },
     {
       "id": "ardian-06257c7ac5a7",
@@ -98,7 +98,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:23:42.621Z",
+      "crawledAt": "2026-08-29T03:55:58.316Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -110,7 +110,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "requirements": [],
       "requirementsByLocale": {
@@ -128,7 +128,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:23:42.621Z"
+      "firstSeenAt": "2026-08-29T03:55:58.316Z"
     },
     {
       "id": "ardian-0bcff807da42",
