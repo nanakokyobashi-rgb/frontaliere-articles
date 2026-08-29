@@ -1,6 +1,6 @@
 {
   "crawlerKey": "gim-architekten",
-  "assembledAt": "2026-08-28T21:07:13.106Z",
+  "assembledAt": "2026-08-29T23:22:03.314Z",
   "jobs": [
     {
       "id": "gim-architekten-dfcd34dca23b",
@@ -34,7 +34,7 @@
       "url": "https://www.jobs.ch/en/vacancies/detail/1d796c78-bfb5-4f59-abbc-afa0ee492061/",
       "source": "GIM Architekten AG Dedicated Parser (jobs.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:07:09.716Z",
+      "crawledAt": "2026-08-29T23:21:59.871Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
