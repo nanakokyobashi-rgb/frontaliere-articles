@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-28T17:13:03.464Z",
-  "dateIso": "2026-08-28",
+  "generatedAt": "2026-08-29T11:31:43.384Z",
+  "dateIso": "2026-08-29",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-28T06:20:11.762Z",
+      "generatedAt": "2026-08-29T09:23:49.281Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 63,
-      "cheaperSwissCount": 80,
-      "tieCount": 2,
+      "cheaperItalyCount": 72,
+      "cheaperSwissCount": 63,
+      "tieCount": 10,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -47,10 +47,10 @@
           "stationName": "ENI 2904"
         },
         {
-          "municipality": "Aprica",
-          "province": "SO",
+          "municipality": "Gera Lario",
+          "province": "CO",
           "minPriceEur": 1.919,
-          "stationName": "DISTRIBUTORE ENI APRICA"
+          "stationName": "IPERAL CARBURANTI GERA LARIO"
         }
       ],
       "bestSavings": [
@@ -59,56 +59,56 @@
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.528,
-          "swissPriceEur": 2.069,
+          "swissPriceEur": 2.072,
           "swissPriceChf": 1.94,
-          "saving50LEur": 27.05
+          "saving50LEur": 27.2
         },
         {
           "municipality": "Aprica",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.919,
-          "swissPriceEur": 2.112,
+          "swissPriceEur": 2.114,
           "swissPriceChf": 1.98,
-          "saving50LEur": 9.65
+          "saving50LEur": 9.75
         },
         {
           "municipality": "Montagna in Valtellina",
           "province": "SO",
           "cheaperCountry": "IT",
           "italyPriceEur": 1.929,
-          "swissPriceEur": 2.112,
+          "swissPriceEur": 2.114,
           "swissPriceChf": 1.98,
-          "saving50LEur": 9.15
+          "saving50LEur": 9.25
         }
       ],
       "cheapestSwissStation": {
         "name": "Alpha Petrol",
         "sp95PriceChf": 1.35,
-        "sp95PriceEur": 1.44,
+        "sp95PriceEur": 1.442,
         "nearestMunicipality": "Curon Venosta (BZ)"
       }
     },
     "exchange": {
       "available": true,
-      "rate": 1.0654,
-      "lastDate": "2026-08-27",
-      "prevRate": 1.0667,
-      "prevDate": "2026-08-26",
-      "delta1d": -0.0013,
-      "rate7dAgo": 1.0695,
-      "delta7d": -0.0041,
+      "rate": 1.0664,
+      "lastDate": "2026-08-28",
+      "prevRate": 1.066,
+      "prevDate": "2026-08-27",
+      "delta1d": 0.0004,
+      "rate7dAgo": 1.069,
+      "delta7d": -0.0026,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-28T13:51:20.169Z",
+      "generatedAt": "2026-08-29T08:17:13.082Z",
       "activeJobs": 22943,
       "activeCompanies": 864,
-      "todayAdded": 984,
-      "yesterdayAdded": 3602,
-      "last7dAdded": 11640
+      "todayAdded": 33,
+      "yesterdayAdded": 984,
+      "last7dAdded": 11105
     }
   }
 }
