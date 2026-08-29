@@ -934,7 +934,7 @@
         "it": "assistente-medico-neuroriabilitazione-a-klinik-lengg-zurich",
         "en": "assistant-physician-neurorehabilitation-a-klinik-lengg-zurich",
         "de": "assistenzarztin-assistenzarzt-neurorehabilitation-a-klinik-lengg-zurich",
-        "fr": "medecin-adjoint-neuroreadaptation-a-klinik-lengg-zurich"
+        "fr": "medecin-adjoint-neurorehabilitation-a-klinik-lengg-zurich"
       },
       "company": "Klinik Lengg",
       "companyKey": "klinik-lengg",
@@ -982,7 +982,8 @@
         "assistant-physician-assistant-physician-neurorehabilitation-a-klinik-lengg-zurich",
         "medecin-adjoint-medecin-adjoint-neurorehabilitation-a-klinik-lengg-zurich",
         "medecin-chef-medecin-chef-neurorehabilitation-a-klinik-lengg-zurich",
-        "assistenzarztin-assistenzarzt-neurorehabilitation-a-klinik-lengg-zurich"
+        "assistenzarztin-assistenzarzt-neurorehabilitation-a-klinik-lengg-zurich",
+        "medecin-adjoint-neuroreadaptation-a-klinik-lengg-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -998,7 +999,8 @@
         ],
         "fr": [
           "medecin-adjoint-neurorehabilitation-a-klinik-lengg-zurich",
-          "assistenzarztin-assistenzarzt-neurorehabilitation-a-klinik-lengg-zurich"
+          "assistenzarztin-assistenzarzt-neurorehabilitation-a-klinik-lengg-zurich",
+          "medecin-adjoint-neuroreadaptation-a-klinik-lengg-zurich"
         ]
       },
       "firstSeenAt": "2026-08-26T10:10:52.054Z",

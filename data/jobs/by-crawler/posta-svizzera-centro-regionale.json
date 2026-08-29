@@ -612,7 +612,7 @@
         "it": "responsabile-della-sicurezza-die-schweizerische-post-bellinzona",
         "en": "information-security-officer-post",
         "de": "information-security-officer-post",
-        "fr": "specialiste-de-la-securite-informatique-die-schweizerische-post-bellinzona"
+        "fr": "specialiste-de-la-securite-de-l-information-die-schweizerische-post-bellinzona"
       },
       "sourceLang": "de",
       "department": "",
@@ -655,12 +655,14 @@
         ],
         "fr": [
           "information-security-officer-post",
-          "specialiste-de-la-securite-de-l-information-die-schweizerische-post-bellinzona"
+          "specialiste-de-la-securite-de-l-information-die-schweizerische-post-bellinzona",
+          "specialiste-de-la-securite-informatique-die-schweizerische-post-bellinzona"
         ]
       },
       "previousSlugs": [
         "information-security-officer-post",
-        "specialiste-de-la-securite-de-l-information-die-schweizerische-post-bellinzona"
+        "specialiste-de-la-securite-de-l-information-die-schweizerische-post-bellinzona",
+        "specialiste-de-la-securite-informatique-die-schweizerische-post-bellinzona"
       ]
     },
     {

@@ -13407,11 +13407,11 @@
     },
     {
       "id": "richemont-24e62aa91511",
-      "slug": "pagamenti-e-assicurazioni-sociali-richemont-meyrin",
+      "slug": "paymaster-social-insurance-richemont-meyrin",
       "slugByLocale": {
-        "it": "pagamenti-e-assicurazioni-sociali-richemont-meyrin",
+        "it": "paymaster-social-insurance-richemont-meyrin",
         "en": "supervisor-pays-social-insurance-richemont-meyrin",
-        "de": "supervisor-zahlt-sozialversicherung-richemont-meyrin",
+        "de": "paymaster-sozialversicherung-richemont-meyrin",
         "fr": "superviseur-paie-assurances-sociales-richemont-meyrin"
       },
       "company": "Richemont",
@@ -13469,11 +13469,13 @@
       "previousSlugsByLocale": {
         "it": [
           "superviseur-paie-assurances-sociales-richemont-meyrin",
-          "paymaster-social-insurance-richemont-meyrin"
+          "paymaster-social-insurance-richemont-meyrin",
+          "pagamenti-e-assicurazioni-sociali-richemont-meyrin"
         ],
         "de": [
           "superviseur-paie-assurances-sociales-richemont-meyrin",
-          "paymaster-sozialversicherung-richemont-meyrin"
+          "paymaster-sozialversicherung-richemont-meyrin",
+          "supervisor-zahlt-sozialversicherung-richemont-meyrin"
         ],
         "en": [
           "superviseur-paie-assurances-sociales-richemont-meyrin"
@@ -13482,7 +13484,9 @@
       "previousSlugs": [
         "superviseur-paie-assurances-sociales-richemont-meyrin",
         "paymaster-social-insurance-richemont-meyrin",
-        "paymaster-sozialversicherung-richemont-meyrin"
+        "paymaster-sozialversicherung-richemont-meyrin",
+        "pagamenti-e-assicurazioni-sociali-richemont-meyrin",
+        "supervisor-zahlt-sozialversicherung-richemont-meyrin"
       ]
     },
     {

@@ -232,7 +232,7 @@
         "it": "team-leader-dati-legali-ai-outsourcing-zurcher-kantonalbank-zurich",
         "en": "team-leader-legal-data-ai-outsourcing-zurcher-kantonalbank-zurich",
         "de": "teamleiter-in-legal-data-ai-outsourcing-zkb-zurich",
-        "fr": "chef-d-equipe-donnees-juridiques-ai-et-externalisation-zurcher-kantonalbank-zurich"
+        "fr": "chef-d-equipe-donnees-juridiques-ia-et-externalisation-zurcher-kantonalbank-zurich"
       },
       "company": "Zürcher Kantonalbank",
       "companyKey": "zkb",
@@ -299,12 +299,14 @@
         ],
         "fr": [
           "teamleiter-in-legal-data-ai-outsourcing-zkb-zurich",
-          "chef-d-equipe-donnees-juridiques-ia-et-externalisation-zurcher-kantonalbank-zurich"
+          "chef-d-equipe-donnees-juridiques-ia-et-externalisation-zurcher-kantonalbank-zurich",
+          "chef-d-equipe-donnees-juridiques-ai-et-externalisation-zurcher-kantonalbank-zurich"
         ]
       },
       "previousSlugs": [
         "teamleiter-in-legal-data-ai-outsourcing-zkb-zurich",
-        "chef-d-equipe-donnees-juridiques-ia-et-externalisation-zurcher-kantonalbank-zurich"
+        "chef-d-equipe-donnees-juridiques-ia-et-externalisation-zurcher-kantonalbank-zurich",
+        "chef-d-equipe-donnees-juridiques-ai-et-externalisation-zurcher-kantonalbank-zurich"
       ]
     },
     {

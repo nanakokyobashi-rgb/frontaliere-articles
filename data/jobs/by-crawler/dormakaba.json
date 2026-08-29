@@ -1377,17 +1377,14 @@
       "requirementsByLocale": {},
       "previousSlugs": [
         "marketing-specialista-project-communication-100-w-m-d-dormakaba-rumlang",
-        "marketing-specialiste-project-communication-100-w-m-d-dormakaba-rumlang",
-        "marketing-specialist-project-communication-100-w-m-d-dormakaba-ch"
+        "marketing-specialiste-project-communication-100-w-m-d-dormakaba-rumlang"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "marketing-specialista-project-communication-100-w-m-d-dormakaba-rumlang",
-          "marketing-specialist-project-communication-100-w-m-d-dormakaba-ch"
+          "marketing-specialista-project-communication-100-w-m-d-dormakaba-rumlang"
         ],
         "fr": [
-          "marketing-specialiste-project-communication-100-w-m-d-dormakaba-rumlang",
-          "marketing-specialist-project-communication-100-w-m-d-dormakaba-ch"
+          "marketing-specialiste-project-communication-100-w-m-d-dormakaba-rumlang"
         ]
       },
       "needsRetranslation": true,

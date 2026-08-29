@@ -6210,12 +6210,12 @@
     },
     {
       "id": "lups-17a302acbab5",
-      "slug": "cappellano-della-clinica-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+      "slug": "cappellano-clinico-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
       "slugByLocale": {
-        "it": "cappellano-della-clinica-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
-        "en": "clinic-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+        "it": "cappellano-clinico-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+        "en": "clinical-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
         "de": "klinik-seelsorger-60-kath-m-w-d-lups-st-urban",
-        "fr": "aumonier-de-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
+        "fr": "aumonier-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
       },
       "company": "Luzerner Psychiatrie (LUPS)",
       "companyKey": "lups",
@@ -6272,22 +6272,28 @@
       "previousSlugsByLocale": {
         "it": [
           "klinik-seelsorger-60-kath-m-w-d-lups-st-urban",
-          "cappellano-clinico-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban"
+          "cappellano-clinico-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+          "cappellano-della-clinica-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban"
         ],
         "en": [
           "klinik-seelsorger-60-kath-m-w-d-lups-st-urban",
-          "clinical-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban"
+          "clinical-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+          "clinic-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban"
         ],
         "fr": [
           "klinik-seelsorger-60-kath-m-w-d-lups-st-urban",
-          "aumonier-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
+          "aumonier-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban",
+          "aumonier-de-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
         ]
       },
       "previousSlugs": [
         "klinik-seelsorger-60-kath-m-w-d-lups-st-urban",
         "cappellano-clinico-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
         "clinical-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
-        "aumonier-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
+        "aumonier-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban",
+        "cappellano-della-clinica-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+        "clinic-chaplain-60-kath-m-f-d-luzerner-psychiatrie-lups-st-urban",
+        "aumonier-de-clinique-60-kath-h-f-d-luzerner-psychiatrie-lups-st-urban"
       ]
     },
     {

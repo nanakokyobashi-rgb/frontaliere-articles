@@ -394,9 +394,9 @@
     },
     {
       "id": "hospice-general-01f77829a24a",
-      "slug": "responsabile-risorse-m-f-100-cdi-direzione-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
+      "slug": "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
       "slugByLocale": {
-        "it": "responsabile-risorse-m-f-100-cdi-direzione-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
+        "it": "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
         "en": "head-of-resources-m-f-100-cdi-directorate-of-integration-and-operational-support-hospice-general-geneve-switzerland",
         "de": "leiter-ressourcen-m-w-100-cdi-direktion-fur-integration-und-operative-unterstutzung-hospice-general-geneve-switzerland",
         "fr": "chef-de-service-ressources-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel"
@@ -459,7 +459,8 @@
       "previousSlugsByLocale": {
         "it": [
           "chef-de-service-ressources-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel",
-          "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland"
+          "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
+          "responsabile-risorse-m-f-100-cdi-direzione-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland"
         ],
         "en": [
           "chef-de-service-ressources-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel"
@@ -470,7 +471,8 @@
       },
       "previousSlugs": [
         "chef-de-service-ressources-h-f-100-cdi-direction-de-l-insertion-et-soutien-operationnel",
-        "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland"
+        "capo-delle-risorse-m-f-100-cdi-direzione-di-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland",
+        "responsabile-risorse-m-f-100-cdi-direzione-integrazione-e-supporto-operativo-hospice-general-geneve-switzerland"
       ],
       "crawlerMissStreak": 1
     },
