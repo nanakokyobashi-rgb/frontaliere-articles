@@ -1,6 +1,6 @@
 {
   "crawlerKey": "elettra-1938",
-  "assembledAt": "2026-08-28T21:11:54.618Z",
+  "assembledAt": "2026-08-29T04:09:29.890Z",
   "jobs": [
     {
       "id": "elettra-1938-73b81e3ccbae",
@@ -33,7 +33,7 @@
       "url": "https://inrecruiting.intervieweb.it/fiammcomponents/jobs/customer-quality-engineer-724414/it/",
       "source": "Elettra 1938 Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:11:52.131Z",
+      "crawledAt": "2026-08-29T04:09:27.128Z",
       "addressLocality": "Sede Stabio Svizzera",
       "addressRegion": "TI",
       "addressCountry": "CH",
