@@ -1,17 +1,18 @@
 {
   "key": "manor",
   "label": "Manor",
-  "generatedAt": "2026-08-29T03:30:51.001Z",
+  "generatedAt": "2026-08-29T15:13:19.957Z",
   "total": 195,
   "newCount": 18,
   "updatedCount": 173,
   "removedCount": 12,
   "unchangedCount": 4,
-  "durationMs": 356912,
-  "avgDurationMs": 356912,
+  "durationMs": 357183,
+  "avgDurationMs": 357183,
   "durationHistory": [
     346654,
-    356912
+    356912,
+    357183
   ],
   "newJobs": [
     {
