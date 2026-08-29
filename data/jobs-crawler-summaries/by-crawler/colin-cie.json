@@ -1,18 +1,19 @@
 {
   "key": "colin-cie",
   "label": "colin-cie",
-  "generatedAt": "2026-08-29T14:33:44.564Z",
+  "generatedAt": "2026-08-29T23:42:11.850Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 10,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 8109,
-  "avgDurationMs": 8109,
+  "durationMs": 8284,
+  "avgDurationMs": 8284,
   "durationHistory": [
     8035,
     8105,
-    8109
+    8109,
+    8284
   ],
   "newJobs": [],
   "updatedJobs": [
