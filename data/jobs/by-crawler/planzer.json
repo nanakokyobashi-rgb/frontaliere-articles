@@ -1,6 +1,6 @@
 {
   "crawlerKey": "planzer",
-  "assembledAt": "2026-08-29T03:15:54.061Z",
+  "assembledAt": "2026-08-29T14:25:02.632Z",
   "jobs": [
     {
       "id": "planzer-72cb59d3ac49",
@@ -34,7 +34,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057379",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:48.062Z",
+      "crawledAt": "2026-08-29T14:24:58.028Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "streetAddress": "Hermetschloostrasse 12",
@@ -109,7 +109,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057266",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:47.371Z",
+      "crawledAt": "2026-08-29T14:24:57.430Z",
       "addressLocality": "Kallnach",
       "addressRegion": "BE",
       "streetAddress": "Brühlgasse 9",
@@ -190,7 +190,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060240",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:46.702Z",
+      "crawledAt": "2026-08-29T14:24:56.732Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Murtenstrasse 85",
@@ -255,7 +255,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058103",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:46.109Z",
+      "crawledAt": "2026-08-29T14:24:56.125Z",
       "addressLocality": "Villmergen",
       "addressRegion": "AG",
       "streetAddress": "Allmendstrasse 14",
@@ -330,7 +330,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060246",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:45.513Z",
+      "crawledAt": "2026-08-29T14:24:55.514Z",
       "addressLocality": "Dällikon",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -461,7 +461,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059605",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:44.885Z",
+      "crawledAt": "2026-08-29T14:24:54.860Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "streetAddress": "Klosterstrasse 38",
@@ -526,7 +526,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058655",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:44.280Z",
+      "crawledAt": "2026-08-29T14:24:54.248Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Piccardstrasse 13",
@@ -614,7 +614,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059479",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:43.615Z",
+      "crawledAt": "2026-08-29T14:24:53.638Z",
       "addressLocality": "Seewen",
       "addressRegion": "SO",
       "streetAddress": "Seewernstrasse 203",
@@ -689,7 +689,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058819",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:42.967Z",
+      "crawledAt": "2026-08-29T14:24:53.023Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -772,7 +772,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4061919",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:15:42.228Z",
+      "crawledAt": "2026-08-29T14:24:52.289Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -805,7 +805,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:15:42.228Z"
+      "firstSeenAt": "2026-08-29T14:24:52.289Z"
     }
   ]
 }
