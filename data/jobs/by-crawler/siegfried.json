@@ -1,6 +1,6 @@
 {
   "crawlerKey": "siegfried",
-  "assembledAt": "2026-08-28T21:18:57.603Z",
+  "assembledAt": "2026-08-29T03:49:09.632Z",
   "jobs": [
     {
       "id": "siegfried-b2e1fb16eb0f",
@@ -33,7 +33,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Oprateur-de-production-4-8_R26_173",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:54.668Z",
+      "crawledAt": "2026-08-29T03:49:05.776Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -111,7 +111,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Lab-Technician-AD_R26_315",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:54.001Z",
+      "crawledAt": "2026-08-29T03:49:05.100Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -169,7 +169,6 @@
         ]
       },
       "firstSeenAt": "2026-04-13T11:14:35.504Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -182,7 +181,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-5ad954548659",
@@ -215,7 +215,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Senior-Lab-Technician-R-D_R26_104",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:53.252Z",
+      "crawledAt": "2026-08-29T03:49:04.376Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -246,7 +246,6 @@
         ]
       },
       "firstSeenAt": "2026-05-11T12:28:48.174Z",
-      "needsRetranslation": true,
       "salaryMin": 99500,
       "salaryMax": 151000,
       "baseSalary": {
@@ -259,7 +258,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-612b054c6700",
@@ -292,7 +292,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Lab-Technician-R-D_R26_438",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:52.587Z",
+      "crawledAt": "2026-08-29T03:49:03.681Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -320,7 +320,6 @@
         ]
       },
       "firstSeenAt": "2026-05-18T13:08:56.939Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -333,7 +332,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-5242db5ae6b0",
@@ -366,7 +366,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Lab-Technician_R26_410",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:52.031Z",
+      "crawledAt": "2026-08-29T03:49:02.961Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -404,7 +404,6 @@
         ]
       },
       "firstSeenAt": "2026-05-18T13:08:57.746Z",
-      "needsRetranslation": true,
       "salaryMin": 52000,
       "salaryMax": 78500,
       "baseSalary": {
@@ -417,7 +416,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-40180fafe703",
@@ -450,7 +450,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Maintenance-Technician-III_R26_278",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:51.390Z",
+      "crawledAt": "2026-08-29T03:49:02.259Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -486,7 +486,6 @@
         ]
       },
       "firstSeenAt": "2026-06-15T15:11:19.489Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -499,7 +498,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-825934eb33b4",
@@ -532,7 +532,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Senior-Lab-Technician---Process-Safety_R26_532",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:50.751Z",
+      "crawledAt": "2026-08-29T03:49:01.566Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -569,7 +569,6 @@
         ]
       },
       "firstSeenAt": "2026-06-18T13:04:11.702Z",
-      "needsRetranslation": true,
       "salaryMin": 97500,
       "salaryMax": 148000,
       "baseSalary": {
@@ -582,7 +581,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-afe92fdd4ce8",
@@ -615,7 +615,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Intern-Commercial-Excellence_R26_511",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:50.125Z",
+      "crawledAt": "2026-08-29T03:49:00.871Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -649,7 +649,6 @@
         ]
       },
       "firstSeenAt": "2026-06-22T15:18:10.178Z",
-      "needsRetranslation": true,
       "salaryMin": 52000,
       "salaryMax": 78500,
       "baseSalary": {
@@ -662,7 +661,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-c06711d142ad",
@@ -695,7 +695,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/CAD-Designer_R26_592",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:49.480Z",
+      "crawledAt": "2026-08-29T03:48:59.989Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -769,7 +769,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Betriebselektriker-in_R26_616",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:48.879Z",
+      "crawledAt": "2026-08-29T03:48:59.318Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -806,7 +806,6 @@
         ]
       },
       "firstSeenAt": "2026-07-20T12:19:28.317Z",
-      "needsRetranslation": true,
       "salaryMin": 72500,
       "salaryMax": 110500,
       "baseSalary": {
@@ -819,7 +818,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-aef2ae1f8a79",
@@ -852,7 +852,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Mechaniker-in--a-_R26_620",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:48.241Z",
+      "crawledAt": "2026-08-29T03:48:58.637Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -894,7 +894,6 @@
         ]
       },
       "firstSeenAt": "2026-07-27T22:13:20.607Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -907,7 +906,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-8161ac66c732",
@@ -940,7 +940,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Lab-technician-QC_R26_657",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:47.467Z",
+      "crawledAt": "2026-08-29T03:48:57.965Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -992,7 +992,6 @@
         ]
       },
       "firstSeenAt": "2026-08-03T12:33:49.045Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 107500,
       "baseSalary": {
@@ -1005,7 +1004,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-2d5530f58bd7",
@@ -1038,7 +1038,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Stage---Digitalisation-des-Processus-en-Environnement-Pharma_R26_661",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:46.840Z",
+      "crawledAt": "2026-08-29T03:48:57.256Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1117,7 +1117,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Evionnaz/Ingnieur-en-chimie---Expertise-QC_R26_679",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:18:46.201Z",
+      "crawledAt": "2026-08-29T03:48:56.583Z",
       "addressLocality": "Evionnaz",
       "addressCountry": "CH",
       "country": "CH",
@@ -1196,7 +1196,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Senior-Payroll-Expert_R26_664",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:45.441Z",
+      "crawledAt": "2026-08-29T03:48:55.874Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1273,7 +1273,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Rohrschlosser-in_R26_675",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:44.674Z",
+      "crawledAt": "2026-08-29T03:48:55.188Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1353,7 +1353,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/CAD-Konstrukteur--m-w-d-_R26_621",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:44.043Z",
+      "crawledAt": "2026-08-29T03:48:54.469Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1386,7 +1386,6 @@
         ]
       },
       "firstSeenAt": "2026-07-27T22:13:20.003Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -1399,7 +1398,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "needsRetranslation": true
     },
     {
       "id": "siegfried-a24d8567fb98",
@@ -1432,7 +1432,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Expert-Lab-Technician-Drug-Product-R-D_R26_716",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:18:43.397Z",
+      "crawledAt": "2026-08-29T03:48:53.787Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1450,7 +1450,6 @@
       "jobReqId": "R26_716",
       "hiringOrganization": "Siegfried AG",
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-27T00:59:40.249Z",
       "salaryMin": 72500,
       "salaryMax": 110500,
       "baseSalary": {
@@ -1463,7 +1462,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "AG"
+      "addressRegion": "AG",
+      "firstSeenAt": "2026-08-27T00:59:40.249Z"
     },
     {
       "id": "siegfried-e202936c1c64",
@@ -1496,7 +1496,7 @@
       "url": "https://siegfried.wd103.myworkdayjobs.com/en/external/job/Zofingen/Global-Head-Treasury_R26_700",
       "source": "Siegfried Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:18:42.735Z",
+      "crawledAt": "2026-08-29T03:48:53.045Z",
       "addressLocality": "Zofingen",
       "addressCountry": "CH",
       "country": "CH",
@@ -1529,7 +1529,7 @@
         }
       },
       "addressRegion": "AG",
-      "firstSeenAt": "2026-08-28T21:18:42.735Z"
+      "firstSeenAt": "2026-08-29T03:48:53.045Z"
     },
     {
       "id": "siegfried-b3129e52364a",
