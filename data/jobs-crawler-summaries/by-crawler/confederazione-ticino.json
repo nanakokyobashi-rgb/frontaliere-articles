@@ -1,17 +1,18 @@
 {
   "key": "confederazione-ticino",
   "label": "Confederazione CH",
-  "generatedAt": "2026-08-29T03:55:34.290Z",
+  "generatedAt": "2026-08-29T14:57:57.298Z",
   "total": 386,
   "newCount": 21,
   "updatedCount": 319,
   "removedCount": 11,
   "unchangedCount": 45,
-  "durationMs": 4955,
-  "avgDurationMs": 4955,
+  "durationMs": 4795,
+  "avgDurationMs": 4795,
   "durationHistory": [
     4715,
-    4955
+    4955,
+    4795
   ],
   "newJobs": [
     {
