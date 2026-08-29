@@ -199,6 +199,10 @@
     "https://jobs.sbb.ch/v2/offene-stellen/fahrzeugdiagnostiker-in-schienenfahrzeuge/3864fd3f-e37a-48e4-841d-087ed2bc84b3",
     "https://jobs.sbb.ch/v2/offene-stellen/diagnosticiene/36a8734e-be07-4755-9de9-ca8745812d9b",
     "https://jobs.sbb.ch/v2/offene-stellen/bauingenieur-in-im-konstruktiven-tiefbau/f15a238a-0414-4c4e-81ba-b6069e77d99c",
+    "https://jobs.sbb.ch/v2/offene-stellen/ingenieure-genie-civil-ouvrages-geotechnique/4f238ae7-8bf8-4953-a003-0a75fc7000ae",
+    "https://jobs.sbb.ch/v2/offene-stellen/fahrzeugdiagnostiker-in-schienenfahrzeuge/3864fd3f-e37a-48e4-841d-087ed2bc84b3",
+    "https://jobs.sbb.ch/v2/offene-stellen/diagnosticiene/36a8734e-be07-4755-9de9-ca8745812d9b",
+    "https://jobs.sbb.ch/v2/offene-stellen/bauingenieur-in-im-konstruktiven-tiefbau/f15a238a-0414-4c4e-81ba-b6069e77d99c",
     "https://jobs.sbb.ch/v2/offene-stellen/ingenieure-genie-civil-ouvrages-geotechnique/4f238ae7-8bf8-4953-a003-0a75fc7000ae"
   ],
   "notes": "SBB dedicated seeds from company.sbb.ch AEM JSON API + login.org apprenticeship listing (partner SBB CFF FFS, canton Ticino).",
