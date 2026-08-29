@@ -1,6 +1,6 @@
 {
   "crawlerKey": "apleona-schweiz-ag",
-  "assembledAt": "2026-08-28T21:11:30.325Z",
+  "assembledAt": "2026-08-29T03:37:25.582Z",
   "jobs": [
     {
       "id": "apleona-schweiz-ag-a73063427430",
@@ -30,7 +30,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2542/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:25.349Z",
+      "crawledAt": "2026-08-29T03:37:21.209Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -112,7 +112,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2505/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:25.047Z",
+      "crawledAt": "2026-08-29T03:37:20.907Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -189,7 +189,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2546/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:24.744Z",
+      "crawledAt": "2026-08-29T03:37:20.604Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -262,7 +262,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2548/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:24.440Z",
+      "crawledAt": "2026-08-29T03:37:20.301Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -341,7 +341,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2549/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:24.138Z",
+      "crawledAt": "2026-08-29T03:37:19.998Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -414,7 +414,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2530/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:23.834Z",
+      "crawledAt": "2026-08-29T03:37:19.694Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -481,7 +481,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2551/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:23.228Z",
+      "crawledAt": "2026-08-29T03:37:19.085Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -540,7 +540,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2481/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:22.925Z",
+      "crawledAt": "2026-08-29T03:37:18.783Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -556,7 +556,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:31:44.046Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -569,7 +568,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:31:44.046Z"
     },
     {
       "id": "apleona-schweiz-ag-a7c1145530c4",
@@ -599,7 +599,7 @@
       "url": "https://recruitingapp-2765.umantis.com/Vacancies/2547/Description/1",
       "source": "Apleona Schweiz AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:11:22.606Z",
+      "crawledAt": "2026-08-29T03:37:18.462Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -615,7 +615,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:31:43.730Z",
       "salaryMin": 49500,
       "salaryMax": 75000,
       "baseSalary": {
@@ -628,7 +627,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "TI"
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-28T05:31:43.730Z"
     },
     {
       "id": "apleona-schweiz-ag-dbbeef7f2dd9",
