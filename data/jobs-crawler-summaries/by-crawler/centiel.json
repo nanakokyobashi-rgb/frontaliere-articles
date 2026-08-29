@@ -1,7 +1,7 @@
 {
   "key": "centiel",
   "label": "centiel",
-  "generatedAt": "2026-08-29T03:21:36.684Z",
+  "generatedAt": "2026-08-29T14:42:55.069Z",
   "total": 9,
   "newCount": 0,
   "updatedCount": 9,
@@ -345,10 +345,11 @@
   ],
   "removedJobs": [],
   "unchangedJobs": [],
-  "durationMs": 3134,
-  "avgDurationMs": 3134,
+  "durationMs": 4697,
+  "avgDurationMs": 4697,
   "durationHistory": [
     5725,
-    3134
+    3134,
+    4697
   ]
 }
