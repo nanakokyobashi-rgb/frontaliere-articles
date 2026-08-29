@@ -1,7 +1,7 @@
 {
   "key": "ardian",
   "label": "Ardian",
-  "generatedAt": "2026-08-29T03:56:01.423Z",
+  "generatedAt": "2026-08-29T14:58:25.060Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -23,7 +23,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:55:58.316Z",
+      "crawledAt": "2026-08-29T14:58:21.365Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -35,7 +35,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-28",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Secondaries---Primaries-Intern---January-2027-I-Zurich_JR1002220",
       "_qualityScore": 61,
       "_qualityBreakdown": {
@@ -58,7 +58,7 @@
       "url": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "source": "Ardian Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:55:58.965Z",
+      "crawledAt": "2026-08-29T14:58:22.036Z",
       "addressLocality": "Zurich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -70,7 +70,7 @@
       "sector": "Finanza / Private Equity",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-28",
       "applyUrl": "https://ardian.wd103.myworkdayjobs.com/en-US/ArdianCareers/job/Zurich/Investor-Relations-Intern---January-2027-I-Zurich_JR1002219",
       "_qualityScore": 56,
       "_qualityBreakdown": {
@@ -123,10 +123,11 @@
       }
     }
   ],
-  "durationMs": 4338,
-  "avgDurationMs": 4338,
+  "durationMs": 5080,
+  "avgDurationMs": 5080,
   "durationHistory": [
     5047,
-    4338
+    4338,
+    5080
   ]
 }
