@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hilti",
-  "assembledAt": "2026-08-28T21:03:25.236Z",
+  "assembledAt": "2026-08-29T03:20:46.027Z",
   "jobs": [
     {
       "id": "hilti-14822-en",
@@ -33,7 +33,7 @@
       "url": "https://careers.hilti.group/en/jobs/14822-en/intern-data-ai-product-owner-m-f-x/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:21.759Z",
+      "crawledAt": "2026-08-29T03:20:43.467Z",
       "addressLocality": "Buchs",
       "postalCode": "",
       "addressRegion": "St. Gallen",
@@ -61,7 +61,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:55:38.629Z",
-      "needsRetranslation": true,
       "salaryMin": 54000,
       "salaryMax": 91500,
       "baseSalary": {
@@ -73,7 +72,8 @@
           "maxValue": 91500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hilti-19175-en",
@@ -106,7 +106,7 @@
       "url": "https://careers.hilti.group/en/jobs/19175-en/intern-it-controlling-m-f-x/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:21.758Z",
+      "crawledAt": "2026-08-29T03:20:43.466Z",
       "addressLocality": "Buchs",
       "postalCode": "",
       "addressRegion": "St. Gallen",
@@ -190,7 +190,7 @@
       "url": "https://careers.hilti.group/en/jobs/16292-de/quereinsteiger-aus-der-baubranche-technischer-berater-grossraum-luzern-m-w-d-100-oder-jobsharing-50-70-moglich/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.758Z",
+      "crawledAt": "2026-08-29T03:20:43.467Z",
       "addressLocality": "Luzern",
       "postalCode": "",
       "addressRegion": "Zentralschweiz",
@@ -268,7 +268,7 @@
       "url": "https://careers.hilti.group/en/jobs/19408-en/solution-owner-ai-analytics-m-f-x/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:21.757Z",
+      "crawledAt": "2026-08-29T03:20:43.464Z",
       "addressLocality": "Buchs",
       "postalCode": "",
       "addressRegion": "St. Gallen",
@@ -343,7 +343,7 @@
       "url": "https://careers.hilti.group/en/jobs/18706-de/car-fleet-specialist-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.757Z",
+      "crawledAt": "2026-08-29T03:20:43.466Z",
       "addressLocality": "Wollishofen Zürich",
       "postalCode": "",
       "addressRegion": "Stadt Zürich / Zürichsee",
@@ -360,10 +360,8 @@
       "applyUrl": "https://careers.hilti.group/en/jobs/18706-de/car-fleet-specialist-m-w-d/",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "car-fleet-specialist-m-w-d-hilti-ch",
-        "car-fleet-specialista-m-w-d-hilti-wollishofen-zurich"
-      ],
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-28T05:21:57.880Z",
       "previousSlugsByLocale": {
         "it": [
           "car-fleet-specialist-m-w-d-hilti-ch",
@@ -373,8 +371,10 @@
           "car-fleet-specialist-m-w-d-hilti-ch"
         ]
       },
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:21:57.880Z",
+      "previousSlugs": [
+        "car-fleet-specialist-m-w-d-hilti-ch",
+        "car-fleet-specialista-m-w-d-hilti-wollishofen-zurich"
+      ],
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -419,7 +419,7 @@
       "url": "https://careers.hilti.group/en/jobs/19440-de/verkaufsberater-im-aussendienst-bau-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.756Z",
+      "crawledAt": "2026-08-29T03:20:43.463Z",
       "addressLocality": "Zürich",
       "postalCode": "",
       "addressRegion": "Stadt Zürich / Zürichsee",
@@ -436,18 +436,16 @@
       "applyUrl": "https://careers.hilti.group/en/jobs/19440-de/verkaufsberater-im-aussendienst-bau-m-w-d/",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "verkaufsberater-im-aussendienst-bau-m-w-d-hilti-ch",
-        "consulente-commerciale-nel-settore-costruzione-m-f-d-hilti-zurich-stadt-zurich-zurichsee-schweiz"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "verkaufsberater-im-aussendienst-bau-m-w-d-hilti-ch",
           "consulente-commerciale-nel-settore-costruzione-m-f-d-hilti-zurich-stadt-zurich-zurichsee-schweiz"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:21:57.879Z",
-      "needsRetranslation": true,
+      "previousSlugs": [
+        "verkaufsberater-im-aussendienst-bau-m-w-d-hilti-ch",
+        "consulente-commerciale-nel-settore-costruzione-m-f-d-hilti-zurich-stadt-zurich-zurichsee-schweiz"
+      ],
       "salaryMin": 83000,
       "salaryMax": 127500,
       "baseSalary": {
@@ -459,7 +457,9 @@
           "maxValue": 127500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:21:57.879Z",
+      "needsRetranslation": true
     },
     {
       "id": "hilti-19455-de",
@@ -492,7 +492,7 @@
       "url": "https://careers.hilti.group/en/jobs/19455-de/verkaufsberater-im-aussendienst-holzbau-graubunden-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.755Z",
+      "crawledAt": "2026-08-29T03:20:43.462Z",
       "addressLocality": "Chur",
       "postalCode": "",
       "addressRegion": "Graubünden",
@@ -570,7 +570,7 @@
       "url": "https://careers.hilti.group/en/jobs/19443-de/sales-manager-im-aussendienst-bau-region-bern-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.755Z",
+      "crawledAt": "2026-08-29T03:20:43.463Z",
       "addressLocality": "Bern",
       "postalCode": "",
       "addressRegion": "Bern",
@@ -627,7 +627,6 @@
         "responsabile-vendite-nel-settore-costruzione-regione-berner-oberland-m-f-d-hilti-gstaad-interlaken-bern-schweiz"
       ],
       "firstSeenAt": "2026-08-12T10:28:08.928Z",
-      "needsRetranslation": true,
       "salaryMin": 109000,
       "salaryMax": 167000,
       "baseSalary": {
@@ -639,7 +638,8 @@
           "maxValue": 167000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "hilti-19353-fr",
@@ -672,7 +672,7 @@
       "url": "https://careers.hilti.group/en/jobs/19353-fr/conseiller-de-vente-en-externe-neuchatel-yverdon-h-f-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:03:21.754Z",
+      "crawledAt": "2026-08-29T03:20:43.462Z",
       "addressLocality": "Neuchatel, Yverdon",
       "postalCode": "",
       "addressRegion": "Suisse romande",
@@ -735,7 +735,7 @@
       "url": "https://careers.hilti.group/en/jobs/18708-de/hilti-store-springer-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.752Z",
+      "crawledAt": "2026-08-29T03:20:43.461Z",
       "addressLocality": "Zürich Oerlikon / Adliswil",
       "postalCode": "",
       "addressRegion": "Zürcher Unterland",
@@ -828,7 +828,7 @@
       "url": "https://careers.hilti.group/en/jobs/19790-de/werkstudent-credit-collection-60-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.751Z",
+      "crawledAt": "2026-08-29T03:20:43.460Z",
       "addressLocality": "Zürich",
       "postalCode": "",
       "addressRegion": "Stadt Zürich / Zürichsee",
@@ -906,7 +906,7 @@
       "url": "https://careers.hilti.group/en/jobs/19580-de/global-management-development-program-outperformer-business-track/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.751Z",
+      "crawledAt": "2026-08-29T03:20:43.460Z",
       "addressLocality": "Landesweit",
       "postalCode": "",
       "addressRegion": "Adliswil / Zürich",
@@ -984,7 +984,7 @@
       "url": "https://careers.hilti.group/en/jobs/19799-en/intern-cybersecurity-m-f-x/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:03:21.749Z",
+      "crawledAt": "2026-08-29T03:20:43.459Z",
       "addressLocality": "Buchs",
       "postalCode": "",
       "addressRegion": "St. Gallen",
@@ -1066,7 +1066,7 @@
       "url": "https://careers.hilti.group/en/jobs/20062-fr/collaborateur-gestion-des-donnees-clients-h-f-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T21:03:21.748Z",
+      "crawledAt": "2026-08-29T03:20:43.457Z",
       "addressLocality": "Zürich",
       "postalCode": "",
       "addressRegion": "Ville de Zurich / Lac de Zurich",
@@ -1155,7 +1155,7 @@
       "url": "https://careers.hilti.group/en/jobs/20155-de/key-account-verkaufsberater-graubunden-m-w-d/",
       "source": "Hilti Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:03:21.737Z",
+      "crawledAt": "2026-08-29T03:20:43.447Z",
       "addressLocality": "Chur",
       "postalCode": "",
       "addressRegion": "Graubünden",
@@ -1189,7 +1189,6 @@
         ]
       },
       "firstSeenAt": "2026-08-20T10:09:01.457Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -1201,7 +1200,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     }
   ]
 }
