@@ -230,13 +230,15 @@ export function resolveComuneCanton(m) {
 //     radius   Ticino  Grigioni  Vallese   comuni   structural pool
 //      20km     251       50       27       328          398
 //      25km     309       65       31       405          475
-//   →  30km     326       75       36       437          507
+//      30km     326       75       36       437          507
 //      35km     342       83       41       466          536
-//      40km     343       95       46       484          554
+//   →  40km     343       95       46       484          554
 //     no cap    343       99       64       506          576
 //
-// So this moves the structural pool 155 → 507 and the runtime pool 382 → 734,
-// well past the 537 the section had before the collapse.
+// So the 2026-08-18 change moved the structural pool 155 → 507 and the
+// runtime pool 382 → 734, well past the 537 the section had before the
+// collapse. The 2026-08-29 step below (#307) moves it again, 507 → 554
+// structural.
 //
 // This file is `mode: identical` and ships to both repos. The datasets it
 // reads — municipalities.ts, borderCrossings.ts — are NOT manifest-governed,
@@ -252,17 +254,25 @@ export function resolveComuneCanton(m) {
 // rather than containing it. #211 was ported to the site in the same change
 // that widened the radius, so both sides now select the same 437.
 //
-// Why 30km and not "take all 506": the last 69 comuni are the ones with the
-// least plausible search intent. They split Vallese 28 / Grigioni 24 /
-// Ticino 17 — a Vallese plurality, not a Vallese monopoly — and the extreme
-// cases are Gaby (59km, 405 residents), Rassa (54km, 68 residents),
-// Piode (53km, 188), Campertogno (50km, 231). A keyword like "vivere a Rassa e lavorare in
-// Vallese da frontaliere" addresses a 68-person alpine comune an hour and a
-// half from the border; publishing it costs a generation slot and returns
-// nothing. Spending the whole dataset at once would also leave no graduated
-// next step: keeping the tail in reserve means the table above is the
-// widening plan when this pool saturates again, one measured number at a time.
-const COMUNE_MAX_DISTANCE_KM = 30;
+// Why 40km and not "take all 506": the remaining 22 comuni beyond 40km are
+// the ones with the least plausible search intent — the extreme cases are
+// Gaby (59km, 405 residents), Rassa (54km, 68 residents), Piode (53km, 188),
+// Campertogno (50km, 231), all past the 40km line. A keyword like "vivere a
+// Rassa e lavorare in Vallese da frontaliere" addresses a 68-person alpine
+// comune an hour and a half from the border; publishing it costs a
+// generation slot and returns nothing. Keeping that tail in reserve leaves a
+// graduated next step for when the pool saturates again.
+//
+// 2026-08-29 (issue #307): this is that next step. 30km (widened 2026-08-18,
+// #414) saturated again within ~10 days — `frontaliere` was rejecting 83-90%
+// of runs, EVERGREEN_POOL_SATURATED showing `skipped_topic_coverage` as the
+// dominant reason (candidates matching an already-published comune/profession
+// guide within the 90-day window), not `skipped_title_jaccard` or
+// `skipped_family`. 30 -> 40km moves the table's next measured step: 437 ->
+// 484 comuni, structural pool 507 -> 554. Stops short of "no cap" (506
+// comuni) for the same reason 30km did: the last 22 comuni past 40km are the
+// implausible tail above, unchanged by this widening.
+const COMUNE_MAX_DISTANCE_KM = 40;
 
 // NB: the 9 MB comuni (distanceKm 19-22km) now DO place in the output — under
 // the old count cap they were crowded out by the closest ~40 CO/VA/VB comuni
