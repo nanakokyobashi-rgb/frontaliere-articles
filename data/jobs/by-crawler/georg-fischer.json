@@ -1,6 +1,6 @@
 {
   "crawlerKey": "georg-fischer",
-  "assembledAt": "2026-08-29T04:05:34.863Z",
+  "assembledAt": "2026-08-29T15:02:49.278Z",
   "jobs": [
     {
       "id": "georg-fischer-6be3ac9ab518",
@@ -33,7 +33,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/Business-Developer-VAG-Portfolio--m-f-d-_JR08951-1",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:32.041Z",
+      "crawledAt": "2026-08-29T15:02:46.358Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -110,7 +110,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schlatt-Thurgau/Koch---Kchin--m-w-d-_JR09162",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:31.371Z",
+      "crawledAt": "2026-08-29T15:02:45.684Z",
       "addressLocality": "Thurgau",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -189,7 +189,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Subingen-Solothurn/Tool-Maintenance-Technician_JR08893",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:30.689Z",
+      "crawledAt": "2026-08-29T15:02:44.994Z",
       "addressLocality": "Subingen",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -265,7 +265,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/Innovation-Engineer---Data-Center-Cooling--m-f-d-_JR10330",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T04:05:30.021Z",
+      "crawledAt": "2026-08-29T15:02:44.336Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -349,7 +349,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/SchichtfhrerIn-Logistik--m-w-d-_JR10708",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:29.346Z",
+      "crawledAt": "2026-08-29T15:02:43.672Z",
       "addressLocality": "Graubunden",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -427,7 +427,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/Quality-Engineer-Production--m-f-d-_JR10665",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:28.689Z",
+      "crawledAt": "2026-08-29T15:02:43.009Z",
       "addressLocality": "Graubunden",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -500,7 +500,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/ProzesstechnikerIn-Spritzguss--m-w-d-_JR10812",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:28.028Z",
+      "crawledAt": "2026-08-29T15:02:42.354Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -584,7 +584,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/KunststofftechnologIn--m-w-d-_JR10783",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:27.370Z",
+      "crawledAt": "2026-08-29T15:02:41.691Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -667,7 +667,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/FormenmonteurIn--m-w-d-_JR10784",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:26.705Z",
+      "crawledAt": "2026-08-29T15:02:41.012Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -752,7 +752,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Sissach-Basel-Country/Praktikant-in-QM_JR10915",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:26.040Z",
+      "crawledAt": "2026-08-29T15:02:40.362Z",
       "addressLocality": "Sissach",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -834,7 +834,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/Automation-Engineer-SPS--m-w-d-_JR10894",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:25.366Z",
+      "crawledAt": "2026-08-29T15:02:39.705Z",
       "addressLocality": "Graubunden",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -911,7 +911,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/Praktikant-im-Prozessingenieurwesen_JR10533",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:24.705Z",
+      "crawledAt": "2026-08-29T15:02:39.046Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -989,7 +989,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Subingen-Solothurn/Einrichter--m-w-d-_JR10356",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:24.043Z",
+      "crawledAt": "2026-08-29T15:02:38.391Z",
       "addressLocality": "Subingen",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -1069,7 +1069,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/Reinigungskraft--m-w-d-_JR10731",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:23.393Z",
+      "crawledAt": "2026-08-29T15:02:37.733Z",
       "addressLocality": "Graubunden",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -1152,7 +1152,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/Team-Assistant--m-f-d--60-_JR10653-1",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T04:05:22.645Z",
+      "crawledAt": "2026-08-29T15:02:37.047Z",
       "addressLocality": "Schaffhausen",
       "addressRegion": "SH",
       "addressCountry": "CH",
@@ -1164,7 +1164,7 @@
       "sector": "Industria / Manifattura",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-28",
       "applyUrl": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Schaffhausen/Team-Assistant--m-f-d--60-_JR10653-1",
       "requirements": [],
       "requirementsByLocale": {
@@ -1183,7 +1183,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T04:05:22.645Z"
+      "firstSeenAt": "2026-08-29T15:02:37.047Z"
     },
     {
       "id": "georg-fischer-99110c518118",
@@ -1217,7 +1217,7 @@
       "url": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/Anlagenfhrer-im-4-Schichtbetrieb-100---m-w-d-_JR11096",
       "source": "Georg Fischer Dedicated Parser (Workday)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T04:05:21.991Z",
+      "crawledAt": "2026-08-29T15:02:36.364Z",
       "addressLocality": "Graubunden",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -1229,7 +1229,7 @@
       "sector": "Industria / Manifattura",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-28",
       "applyUrl": "https://georgfischer.wd103.myworkdayjobs.com/en-US/GeorgFischer_Careers/job/Seewis-Graubunden/Anlagenfhrer-im-4-Schichtbetrieb-100---m-w-d-_JR11096",
       "requirements": [],
       "requirementsByLocale": {
@@ -1248,7 +1248,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T04:05:21.991Z"
+      "firstSeenAt": "2026-08-29T15:02:36.364Z"
     }
   ]
 }
