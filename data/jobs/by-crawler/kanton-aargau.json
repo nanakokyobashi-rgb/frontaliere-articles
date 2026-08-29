@@ -1,6 +1,6 @@
 {
   "crawlerKey": "kanton-aargau",
-  "assembledAt": "2026-08-29T15:04:34.167Z",
+  "assembledAt": "2026-08-29T15:17:36.597Z",
   "jobs": [
     {
       "id": "kanton-aargau-e393f97bba1a",
@@ -81,7 +81,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-b01a78db0324",
@@ -162,7 +163,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-997aa6d57a39",
@@ -243,7 +245,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-713c325b8ebd",
@@ -324,7 +327,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-a0e4d631f164",
@@ -405,7 +409,8 @@
           "maxValue": 56400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-28d27b5a9b17",
@@ -486,7 +491,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-fa38d398ed26",
@@ -567,7 +573,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-adaa6faff162",
@@ -648,7 +655,8 @@
           "maxValue": 47000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-734fe157c1ec",
@@ -731,7 +739,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-96da6ab1b108",
@@ -814,7 +823,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-eb8d1434165b",
@@ -895,7 +905,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-9d3e45a6913c",
@@ -978,7 +989,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-be31e0d622d5",
@@ -1059,7 +1071,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-3240d0119002",
@@ -1140,7 +1153,8 @@
           "maxValue": 61500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-c762c8622a6a",
@@ -1221,7 +1235,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-726bd5fb2986",
@@ -1302,7 +1317,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1939db05ddb4",
@@ -1385,7 +1401,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-b170cfb9ea31",
@@ -1466,7 +1483,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-446e743abc1c",
@@ -1550,7 +1568,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-8a41902f75d0",
@@ -1631,7 +1650,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1cb41a4bf0e5",
@@ -1712,7 +1732,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-161281ec6844",
@@ -1795,7 +1816,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-053426c0b77f",
@@ -1882,7 +1904,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-3e146b90414a",
@@ -1961,7 +1984,8 @@
           "maxValue": 47000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-e9560d7f87b2",
@@ -2042,7 +2066,8 @@
           "maxValue": 84600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-729630381849",
@@ -2123,7 +2148,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-8c624dc56f00",
@@ -2206,7 +2232,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-d491e55942b6",
@@ -2287,7 +2314,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-a73366875d29",
@@ -2368,7 +2396,8 @@
           "maxValue": 84600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-30b35eddf3ed",
@@ -2449,7 +2478,8 @@
           "maxValue": 103600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1ba44f2122ec",
@@ -2530,7 +2560,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-e4f4883d5d5b",
@@ -2611,7 +2642,8 @@
           "maxValue": 123000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-294de3d44c7f",
@@ -2694,7 +2726,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-f8ea0f0bfb02",
@@ -2775,7 +2808,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1928879ac5c6",
@@ -2856,7 +2890,8 @@
           "maxValue": 47000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-2cd470ec928a",
@@ -2935,7 +2970,8 @@
           "maxValue": 123000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-c5a8d00fe899",
@@ -3016,7 +3052,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-6a25448035c1",
@@ -3097,7 +3134,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-5cf20c2087cc",
@@ -3178,7 +3216,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-0c938bcaffdd",
@@ -3261,7 +3300,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-265fbae80a5b",
@@ -3346,7 +3386,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-ae3b51e5a707",
@@ -3425,7 +3466,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-c7db7ac74c16",
@@ -3506,7 +3548,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-a35feeca2fef",
@@ -3589,7 +3632,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-431b06fcb267",
@@ -3670,7 +3714,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-ca54441b76f5",
@@ -3751,7 +3796,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-b0cc13eb25b1",
@@ -3834,7 +3880,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-944da08f4311",
@@ -3915,7 +3962,8 @@
           "maxValue": 84600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-3e1322089990",
@@ -3998,7 +4046,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-8e8427d92eb6",
@@ -4079,7 +4128,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-0582b3387854",
@@ -4160,7 +4210,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-a8ad222a3c17",
@@ -4243,7 +4294,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-478bd52faeec",
@@ -4324,7 +4376,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-9ddb4edd3f12",
@@ -4405,7 +4458,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-aaaf50670b51",
@@ -4486,7 +4540,8 @@
           "maxValue": 78500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-08ab056e0314",
@@ -4565,7 +4620,8 @@
           "maxValue": 47000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-d251f47e8e2e",
@@ -4646,7 +4702,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-cd927940aad7",
@@ -4729,7 +4786,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-c46dea146cb6",
@@ -4810,7 +4868,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-f3b63a84dbc2",
@@ -4891,7 +4950,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-d79ee84ff5d0",
@@ -4972,7 +5032,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-361abe6980d8",
@@ -5053,7 +5114,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-2b3cb35d65f0",
@@ -5134,7 +5196,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-9901df0003dc",
@@ -5215,7 +5278,8 @@
           "maxValue": 75200,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-ec81485d7147",
@@ -5298,7 +5362,8 @@
           "maxValue": 65800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-ebb51087aa4a",
@@ -5379,7 +5444,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-7461cda04c61",
@@ -5475,7 +5541,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-4de2799a6c4b",
@@ -5558,7 +5625,8 @@
           "maxValue": 129500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-419f759d0137",
@@ -5639,7 +5707,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-26093d145cfa",
@@ -5720,7 +5789,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-da11acc267c0",
@@ -5754,7 +5824,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4664/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -5839,7 +5909,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4779/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -5920,7 +5990,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4809/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6001,7 +6071,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4903/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6081,7 +6151,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4923/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6166,7 +6236,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5025/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6244,7 +6314,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5143/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6326,7 +6396,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5312/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6406,7 +6476,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5395/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6487,7 +6557,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5463/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6569,7 +6639,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5510/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6649,7 +6719,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5676/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6731,7 +6801,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5778/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6811,7 +6881,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5801/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6893,7 +6963,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5805/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -6974,7 +7044,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5815/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7057,7 +7127,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5816/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7138,7 +7208,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5827/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7217,7 +7287,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5836/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7298,7 +7368,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5839/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7379,7 +7449,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5857/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7459,7 +7529,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5974/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7540,7 +7610,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6148/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7621,7 +7691,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6234/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7703,7 +7773,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6262/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7788,7 +7858,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6351/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7866,7 +7936,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6428/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -7948,7 +8018,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6444/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -8076,7 +8146,8 @@
           "maxValue": 84600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-5426db5da9f8",
@@ -8155,7 +8226,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-9500f1e35587",
@@ -8238,7 +8310,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-e11bccae88ef",
@@ -8319,7 +8392,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-000335e5a34f",
@@ -8400,7 +8474,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-d532bb9f5a52",
@@ -8483,7 +8558,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-674ab8d8b8b6",
@@ -8564,7 +8640,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-e7857e680bce",
@@ -8645,7 +8722,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-fa9bf4bbc802",
@@ -8724,88 +8802,8 @@
           "maxValue": 67600,
           "unitText": "YEAR"
         }
-      }
-    },
-    {
-      "id": "kanton-aargau-8b568ca7a71d",
-      "slug": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau",
-      "slugByLocale": {
-        "it": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau",
-        "en": "housekeeping-employee-housekeeping-employee-60-kanton-aargau-aarau",
-        "de": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch",
-        "fr": "employe-de-menage-employe-de-menage-60-kanton-aargau-aarau"
       },
-      "company": "Kanton Aargau",
-      "companyKey": "kanton-aargau",
-      "companyDomain": "ag.ch",
-      "title": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60 %",
-      "titleByLocale": {
-        "it": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Collaboratore/trice 60 %",
-        "en": "Housekeeping employee / Housekeeping employee 60%",
-        "de": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60 %",
-        "fr": "Employé de ménage / Employé de ménage 60%"
-      },
-      "description": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60 % — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18058\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
-      "descriptionByLocale": {
-        "it": "Dipendente nazionale / dipendente nazionale 60% — posti vacanti al Canton Aargau, pubblicizzato direttamente sul portale ufficiale di lavoro dell'amministrazione cantonale. Con una popolazione di circa 700.000 abitanti, il cantone di Aargau è uno dei cantoni più popolosi della Svizzera ed è uno dei maggiori datori di lavoro della regione. In qualità di pubblica amministrazione, impiega i dipendenti nell'amministrazione cantonale, nei tribunali, nella polizia cantonale e nel settore dell'istruzione e offre una vasta gamma di opportunità di carriera significative in vari settori specializzati.\n• Datore di lavoro: Cantone di Aargau\n• Posizione: Aarau (Kanton AG)\n• Numero di riferimento: 18058\n• Online da: 2026-07-04\n• Applicazione tramite il portale ufficiale del lavoro del Canton Aargau (https://www.ag.ch/de/ueber-us/jobs-career/open-jobs/job market)",
-        "en": "Domestic Employee / Domestic Employee 60% — vacancies at the Canton of Aargau, advertised directly on the official job portal of the Cantonal Administration. With a population of around 700,000, the canton of Aargau is one of the most populous cantons in Switzerland and is one of the largest employers in the region. As a public administration, he employs employees in the cantonal administration, the courts, the cantonal police and in the education sector and offers a wide range of meaningful career opportunities in various specialist areas.\n• Employer: Canton of Aargau\n• Location: Aarau (Kanton AG)\n• Reference number: 18058\n• Online since: 2026-07-04\n• Application via the official job portal of the Canton of Aargau (https://www.ag.ch/de/ueber-us/jobs-career/open-jobs/job market)",
-        "de": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60 % — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18058\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
-        "fr": "Salarié domestique / Salarié domestique 60% — postes vacants au canton d'Argau, annoncé directement sur le portail officiel de l'Administration cantonale. Avec une population d'environ 700 000 habitants, le canton d'Argovie est l'un des cantons les plus peuplés de Suisse et l'un des plus grands employeurs de la région. En tant qu'administration publique, il emploie des employés de l'administration cantonale, des tribunaux, de la police cantonale et du secteur de l'éducation et offre un large éventail de possibilités de carrière significatives dans divers domaines spécialisés.\n• Employeur : Canton d'Argovie\n• Lieu: Aarau (Kanton AG)\n• Numéro de référence: 18058\n• En ligne depuis: 2026-07-04\n• Application via le portail officiel de l'emploi du canton d'Argovie (https://www.ag.ch/de/ueber-us/jobs-career/open-jobs/job market)"
-      },
-      "needsRetranslation": true,
-      "location": "Aarau",
-      "canton": "AG",
-      "url": "https://recruitingapp-12705.umantis.com/Vacancies/6836/Application/CheckLogin/1",
-      "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
-      "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
-      "addressLocality": "Aarau",
-      "addressRegion": "AG",
-      "streetAddress": "Bahnhofstrasse 2",
-      "postalCode": "5000",
-      "addressCountry": "CH",
-      "country": "CH",
-      "category": "Ospitalità",
-      "contract": "full-time",
-      "employmentType": "PART_TIME",
-      "experienceLevel": "mid",
-      "sector": "Amministrazione Pubblica",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-07-04",
-      "applyUrl": "https://recruitingapp-12705.umantis.com/Vacancies/6836/Application/CheckLogin/1",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "referenceNumber": "18058",
-      "previousSlugs": [
-        "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch",
-        "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch",
-          "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau"
-        ],
-        "en": [
-          "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch"
-        ],
-        "fr": [
-          "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch"
-        ]
-      },
-      "firstSeenAt": "2026-07-04T11:08:20.236Z",
-      "salaryMin": 40500,
-      "salaryMax": 50700,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 40500,
-          "maxValue": 50700,
-          "unitText": "YEAR"
-        }
-      }
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-63c4b1c33930",
@@ -8884,7 +8882,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-32a90038e884",
@@ -8965,7 +8964,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-335994467535",
@@ -9046,7 +9046,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-0ed26222cc86",
@@ -9125,7 +9126,8 @@
           "maxValue": 96400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-349b6b0a30aa",
@@ -9206,7 +9208,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-61d375499ac4",
@@ -9291,7 +9294,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1e5a80ba5a03",
@@ -9374,7 +9378,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-71b4c874a924",
@@ -9455,7 +9460,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-ccc849ce6c93",
@@ -9540,7 +9546,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-936b4920907a",
@@ -9621,7 +9628,8 @@
           "maxValue": 84600,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1c6f6fa39ece",
@@ -9706,7 +9714,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-513e2bd240aa",
@@ -9787,7 +9796,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-1b11437b4b6d",
@@ -9868,7 +9878,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-9c6c906235c6",
@@ -9949,7 +9960,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-36907e914e5b",
@@ -10030,7 +10042,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-49c685c3126a",
@@ -10111,7 +10124,8 @@
           "maxValue": 96500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-70b30873b495",
@@ -10192,7 +10206,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-d14a1026c97c",
@@ -10273,7 +10288,8 @@
           "maxValue": 78500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-7c248a2e8bfc",
@@ -10354,7 +10370,8 @@
           "maxValue": 65800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-0cd4d76eecc0",
@@ -10435,7 +10452,8 @@
           "maxValue": 82500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-3d2c0ed68742",
@@ -10516,7 +10534,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-b77edd6fd1a5",
@@ -10597,7 +10616,8 @@
           "unitText": "YEAR"
         }
       },
-      "needsRetranslation": true
+      "needsRetranslation": true,
+      "crawlerMissStreak": 1
     },
     {
       "id": "kanton-aargau-4f3c7166c8ff",
@@ -10630,7 +10650,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2782/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -10712,7 +10732,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2858/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -10793,7 +10813,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2875/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -10872,7 +10892,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2876/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -10955,7 +10975,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2879/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11036,7 +11056,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2882/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11117,7 +11137,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2908/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11198,7 +11218,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2909/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11279,7 +11299,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2910/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11360,7 +11380,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2912/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11441,7 +11461,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2934/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11522,7 +11542,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3082/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11604,7 +11624,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3124/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11686,7 +11706,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3135/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11767,7 +11787,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3150/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11848,7 +11868,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3164/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -11930,7 +11950,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3390/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12012,7 +12032,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3453/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12092,7 +12112,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3460/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12172,7 +12192,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3494/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12253,7 +12273,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3690/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12334,7 +12354,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3701/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12416,7 +12436,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3762/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12500,7 +12520,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3763/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12581,7 +12601,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3800/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12662,7 +12682,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3848/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12743,7 +12763,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4000/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12818,7 +12838,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4023/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12899,7 +12919,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4024/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -12980,7 +13000,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4059/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13061,7 +13081,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4277/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13140,7 +13160,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4278/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13221,7 +13241,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4327/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13301,7 +13321,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4429/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13383,7 +13403,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4453/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13466,7 +13486,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4566/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13548,7 +13568,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4594/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.210Z",
+      "crawledAt": "2026-08-29T15:16:03.718Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13630,7 +13650,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2763/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13715,7 +13735,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1717/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13794,7 +13814,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1718/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13875,7 +13895,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1719/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -13954,7 +13974,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1788/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14035,7 +14055,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1798/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14114,7 +14134,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1811/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14195,7 +14215,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1819/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14278,7 +14298,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1823/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14359,7 +14379,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1824/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14440,7 +14460,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1825/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14515,7 +14535,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1853/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14598,7 +14618,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1975/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14679,7 +14699,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2168/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14760,7 +14780,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2172/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14841,7 +14861,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2210/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -14924,7 +14944,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2221/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15005,7 +15025,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2252/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15088,7 +15108,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2287/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15167,7 +15187,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2291/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15241,7 +15261,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2292/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15324,7 +15344,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2293/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15405,7 +15425,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2311/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15487,7 +15507,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2312/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15576,7 +15596,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2314/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15659,7 +15679,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2338/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15739,7 +15759,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2340/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15821,7 +15841,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2341/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15906,7 +15926,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2369/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -15987,7 +16007,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2432/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16068,7 +16088,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2440/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16149,7 +16169,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2451/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16230,7 +16250,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2463/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16313,7 +16333,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2466/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16398,7 +16418,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2525/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16478,7 +16498,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2528/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16559,7 +16579,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2575/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16641,7 +16661,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2592/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16716,7 +16736,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2594/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16802,7 +16822,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2605/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16881,7 +16901,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2612/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -16962,7 +16982,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2646/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17043,7 +17063,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2662/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17124,7 +17144,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2671/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17204,7 +17224,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2682/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17285,7 +17305,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2687/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17366,7 +17386,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2697/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17445,7 +17465,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2722/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17526,7 +17546,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2724/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17606,7 +17626,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2731/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17687,7 +17707,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2737/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17773,7 +17793,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2738/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17862,7 +17882,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2749/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -17944,7 +17964,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2750/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18025,7 +18045,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2751/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.716Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18104,7 +18124,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2752/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.717Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18182,7 +18202,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1336/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18265,7 +18285,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1366/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18348,7 +18368,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1370/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18429,7 +18449,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1523/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18512,7 +18532,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1573/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18605,7 +18625,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1645/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18691,7 +18711,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4013/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18772,7 +18792,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3981/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18852,7 +18872,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3914/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -18937,7 +18957,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3882/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19021,7 +19041,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3834/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19100,7 +19120,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3830/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19181,7 +19201,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3828/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19260,7 +19280,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3825/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19341,7 +19361,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3772/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19424,7 +19444,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3755/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19504,7 +19524,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3441/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19583,7 +19603,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3435/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19664,7 +19684,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3347/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19745,7 +19765,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3310/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19826,7 +19846,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3307/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19905,7 +19925,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3305/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -19986,7 +20006,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3219/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20069,7 +20089,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3216/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20148,7 +20168,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3186/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20229,7 +20249,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3126/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20310,7 +20330,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3127/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20391,7 +20411,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3115/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20472,7 +20492,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3097/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20553,7 +20573,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3094/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20634,7 +20654,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3083/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20714,7 +20734,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3022/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20796,7 +20816,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3035/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20877,7 +20897,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3021/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -20957,7 +20977,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3034/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21032,7 +21052,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3036/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21116,7 +21136,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3020/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21197,7 +21217,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3007/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21278,7 +21298,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1291/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.711Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21359,7 +21379,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1259/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21424,7 +21444,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1257/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21504,7 +21524,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1229/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21585,7 +21605,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1131/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21665,7 +21685,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1129/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21750,7 +21770,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1117/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21831,7 +21851,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1103/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21913,7 +21933,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1054/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -21991,7 +22011,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/1041/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22071,7 +22091,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/897/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22157,7 +22177,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/462/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.712Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22232,7 +22252,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5123/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22312,7 +22332,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5003/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22396,7 +22416,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5114/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22477,7 +22497,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5111/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22558,7 +22578,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5103/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22637,7 +22657,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5059/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22716,7 +22736,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5043/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22794,7 +22814,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4812/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22880,7 +22900,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4944/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -22963,7 +22983,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4939/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23044,7 +23064,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4932/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23124,7 +23144,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4907/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23209,7 +23229,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4876/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23295,7 +23315,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4794/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23375,7 +23395,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4848/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23460,7 +23480,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4821/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23541,7 +23561,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4727/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23623,7 +23643,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4750/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23704,7 +23724,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4747/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23787,7 +23807,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4340/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23868,7 +23888,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4705/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -23948,7 +23968,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4694/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24031,7 +24051,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4637/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24113,7 +24133,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4572/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24194,7 +24214,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4512/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24274,7 +24294,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4466/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24360,7 +24380,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4441/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24440,7 +24460,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4396/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24525,7 +24545,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4382/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24611,7 +24631,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4222/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24690,7 +24710,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4122/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24765,7 +24785,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4127/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24846,7 +24866,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4109/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -24927,7 +24947,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4088/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25008,7 +25028,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4057/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25086,7 +25106,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4061/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25164,7 +25184,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3972/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25246,7 +25266,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3949/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25329,7 +25349,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/3973/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25410,7 +25430,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4012/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.207Z",
+      "crawledAt": "2026-08-29T15:16:03.707Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25491,7 +25511,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6530/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25571,7 +25591,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6346/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25654,7 +25674,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6461/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25729,7 +25749,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6630/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25810,7 +25830,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6070/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25894,7 +25914,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6460/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -25974,7 +25994,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6297/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26060,7 +26080,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6604/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26141,7 +26161,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6585/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26221,7 +26241,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6551/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26307,7 +26327,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6538/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26388,7 +26408,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6442/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26468,7 +26488,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6427/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26550,7 +26570,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6282/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26631,7 +26651,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6368/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26712,7 +26732,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6361/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26795,7 +26815,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5850/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26877,7 +26897,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6189/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -26959,7 +26979,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6222/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27040,7 +27060,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6187/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27123,7 +27143,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6193/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27204,7 +27224,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6195/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27285,7 +27305,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6188/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27366,7 +27386,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6181/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27445,7 +27465,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6096/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27510,7 +27530,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5380/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27591,7 +27611,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6095/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27672,7 +27692,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6169/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27755,7 +27775,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6152/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27820,7 +27840,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6065/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27901,7 +27921,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6132/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -27976,7 +27996,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5999/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28057,7 +28077,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6011/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28139,7 +28159,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6012/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28222,7 +28242,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6019/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28301,7 +28321,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6020/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28380,7 +28400,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6015/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28462,7 +28482,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5900/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28544,7 +28564,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5921/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28627,7 +28647,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5932/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28708,7 +28728,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5949/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28787,7 +28807,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5915/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28870,7 +28890,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5838/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -28953,7 +28973,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/4834/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29034,7 +29054,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5817/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29117,7 +29137,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5800/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29198,7 +29218,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5774/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29279,7 +29299,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5790/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29368,7 +29388,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5628/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29449,7 +29469,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5747/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29530,7 +29550,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5636/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29613,7 +29633,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5525/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29693,7 +29713,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5460/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29782,7 +29802,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5501/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29860,7 +29880,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5409/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -29941,7 +29961,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5447/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30027,7 +30047,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5211/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30108,7 +30128,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5339/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.705Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30187,7 +30207,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5229/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30268,7 +30288,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5216/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30351,7 +30371,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5168/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30433,7 +30453,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5151/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30515,7 +30535,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5126/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30590,7 +30610,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/5130/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.206Z",
+      "crawledAt": "2026-08-29T15:16:03.706Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30671,7 +30691,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/9000/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.695Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30750,7 +30770,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/8763/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30831,7 +30851,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/8425/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30914,7 +30934,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/8325/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -30995,7 +31015,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6862/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31073,7 +31093,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6860/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31155,7 +31175,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6861/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31236,7 +31256,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6845/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31319,7 +31339,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6846/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31400,7 +31420,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6837/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31483,7 +31503,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6838/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31564,7 +31584,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6827/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31645,7 +31665,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6830/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.699Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31709,7 +31729,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6834/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31790,7 +31810,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6820/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31872,7 +31892,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6826/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -31952,7 +31972,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6806/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32038,7 +32058,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6802/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32112,7 +32132,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6810/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32198,7 +32218,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6814/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32278,7 +32298,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6815/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32360,7 +32380,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6812/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32441,7 +32461,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6811/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32522,7 +32542,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6809/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32601,7 +32621,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6777/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32684,7 +32704,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6792/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32749,7 +32769,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6780/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32830,7 +32850,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6779/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32911,7 +32931,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6676/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -32991,7 +33011,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6770/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33073,7 +33093,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6760/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33138,7 +33158,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6737/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33219,7 +33239,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6714/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33300,7 +33320,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/6699/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.205Z",
+      "crawledAt": "2026-08-29T15:16:03.700Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33383,7 +33403,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/10927/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.203Z",
+      "crawledAt": "2026-08-29T15:16:03.695Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33465,7 +33485,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/10098/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.203Z",
+      "crawledAt": "2026-08-29T15:16:03.695Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33545,7 +33565,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/10070/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.203Z",
+      "crawledAt": "2026-08-29T15:16:03.695Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33621,7 +33641,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/9077/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.204Z",
+      "crawledAt": "2026-08-29T15:16:03.695Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33702,7 +33722,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/11019/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.203Z",
+      "crawledAt": "2026-08-29T15:16:03.694Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33783,7 +33803,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/10990/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.202Z",
+      "crawledAt": "2026-08-29T15:16:03.693Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33941,7 +33961,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2397/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.208Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -33986,7 +34006,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:03:03.208Z"
+      "firstSeenAt": "2026-08-29T15:16:03.713Z"
     },
     {
       "id": "kanton-aargau-c7e8e93c7722",
@@ -34020,7 +34040,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2442/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:39:00.765Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -34061,7 +34081,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:39:00.765Z"
+      "firstSeenAt": "2026-08-29T15:16:03.713Z"
     },
     {
       "id": "kanton-aargau-d7a57cff459f",
@@ -34170,7 +34190,7 @@
       "url": "https://recruitingapp-12705.umantis.com/Vacancies/2701/Application/CheckLogin/1",
       "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:03:03.209Z",
+      "crawledAt": "2026-08-29T15:16:03.713Z",
       "addressLocality": "Aarau",
       "addressRegion": "AG",
       "streetAddress": "Bahnhofstrasse 2",
@@ -34211,7 +34231,157 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:03:03.209Z"
+      "firstSeenAt": "2026-08-29T15:16:03.713Z"
+    },
+    {
+      "id": "kanton-aargau-0e4b9045f13f",
+      "slug": "lehrperson-per-allgemeinbildenden-unterricht-abu-68-kanton-aargau-aarau",
+      "slugByLocale": {
+        "de": "lehrperson-fur-allgemeinbildenden-unterricht-abu-68-kanton-aargau-ch",
+        "it": "lehrperson-per-allgemeinbildenden-unterricht-abu-68-kanton-aargau-aarau",
+        "en": "lehrperson-fur-allgemeinbildenden-unterricht-abu-68-kanton-aargau-ch",
+        "fr": "lehrperson-fur-allgemeinbildenden-unterricht-abu-68-kanton-aargau-ch"
+      },
+      "company": "Kanton Aargau",
+      "companyKey": "kanton-aargau",
+      "companyDomain": "ag.ch",
+      "title": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68%",
+      "titleByLocale": {
+        "de": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68%",
+        "it": "Lehrperson per allgemeinbildenden Unterricht (ABU) 68%",
+        "en": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68%",
+        "fr": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68%"
+      },
+      "description": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18028\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+      "descriptionByLocale": {
+        "de": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18028\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "it": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18028\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "en": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18028\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "fr": "Lehrperson für allgemeinbildenden Unterricht (ABU) 68% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18028\n• Online seit: 2026-08-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)"
+      },
+      "needsRetranslation": true,
+      "location": "Aarau",
+      "canton": "AG",
+      "url": "https://recruitingapp-12705.umantis.com/Vacancies/5837/Application/CheckLogin/1",
+      "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T15:16:03.719Z",
+      "addressLocality": "Aarau",
+      "addressRegion": "AG",
+      "streetAddress": "Bahnhofstrasse 2",
+      "postalCode": "5000",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Formazione",
+      "contract": "full-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Amministrazione Pubblica",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://recruitingapp-12705.umantis.com/Vacancies/5837/Application/CheckLogin/1",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "referenceNumber": "18028",
+      "previousSlugsByLocale": {
+        "it": [
+          "lehrperson-fur-allgemeinbildenden-unterricht-abu-68-kanton-aargau-ch"
+        ]
+      },
+      "previousSlugs": [
+        "lehrperson-fur-allgemeinbildenden-unterricht-abu-68-kanton-aargau-ch"
+      ],
+      "salaryMin": 35700,
+      "salaryMax": 65600,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 35700,
+          "maxValue": 65600,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T15:16:03.719Z"
+    },
+    {
+      "id": "kanton-aargau-da08d65f9dd3",
+      "slug": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau",
+      "slugByLocale": {
+        "de": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch",
+        "it": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-collaboratore-trice-60-kanton-aargau-aarau",
+        "en": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch",
+        "fr": "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch"
+      },
+      "company": "Kanton Aargau",
+      "companyKey": "kanton-aargau",
+      "companyDomain": "ag.ch",
+      "title": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60%",
+      "titleByLocale": {
+        "de": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60%",
+        "it": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Collaboratore/trice 60%",
+        "en": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60%",
+        "fr": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60%"
+      },
+      "description": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18059\n• Online seit: 2021-11-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+      "descriptionByLocale": {
+        "de": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18059\n• Online seit: 2021-11-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "it": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18059\n• Online seit: 2021-11-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "en": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18059\n• Online seit: 2021-11-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)",
+        "fr": "Hauswirtschaftliche Mitarbeiterin / Hauswirtschaftlicher Mitarbeiter 60% — offene Stelle beim Kanton Aargau, direkt auf dem offiziellen Stellenportal der Kantonalen Verwaltung ausgeschrieben.\n\nDer Kanton Aargau zählt mit rund 700'000 Einwohnerinnen und Einwohnern zu den bevölkerungsreichsten Kantonen der Schweiz und ist einer der grössten Arbeitgeber der Region. Als öffentliche Verwaltung beschäftigt er Mitarbeitende in der kantonalen Verwaltung, den Gerichten, der Kantonspolizei und im Bildungswesen und bietet vielfältige, sinnstiftende Karrieremöglichkeiten in unterschiedlichen Fachbereichen.\n\n• Arbeitgeber: Kanton Aargau\n• Standort: Aarau (Kanton AG)\n• Referenznummer: 18059\n• Online seit: 2021-11-29\n• Bewerbung über das offizielle Stellenportal des Kantons Aargau (https://www.ag.ch/de/ueber-uns/jobs-karriere/offene-stellen/stellenmarkt)"
+      },
+      "needsRetranslation": true,
+      "location": "Aarau",
+      "canton": "AG",
+      "url": "https://recruitingapp-12705.umantis.com/Vacancies/5964/Application/CheckLogin/1",
+      "source": "Kanton Aargau Dedicated Parser (Umantis tenant 12705)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T15:16:03.701Z",
+      "addressLocality": "Aarau",
+      "addressRegion": "AG",
+      "streetAddress": "Bahnhofstrasse 2",
+      "postalCode": "5000",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Ospitalità",
+      "contract": "full-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Amministrazione Pubblica",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2021-11-29",
+      "applyUrl": "https://recruitingapp-12705.umantis.com/Vacancies/5964/Application/CheckLogin/1",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "referenceNumber": "18059",
+      "previousSlugsByLocale": {
+        "it": [
+          "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch"
+        ]
+      },
+      "previousSlugs": [
+        "hauswirtschaftliche-mitarbeiterin-hauswirtschaftlicher-mitarbeiter-60-kanton-aargau-ch"
+      ],
+      "salaryMin": 40500,
+      "salaryMax": 50700,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 40500,
+          "maxValue": 50700,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-29T15:16:03.701Z"
     }
   ]
 }
