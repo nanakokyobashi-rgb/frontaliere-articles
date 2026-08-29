@@ -1,6 +1,6 @@
 {
   "crawlerKey": "sonova",
-  "assembledAt": "2026-08-28T20:52:57.570Z",
+  "assembledAt": "2026-08-29T03:13:37.866Z",
   "jobs": [
     {
       "id": "sonova-25f281d613d2",
@@ -33,7 +33,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Informatikerin-EFZ-Applikationsentwicklung-%28mfd%29/1421272633/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.280Z",
+      "crawledAt": "2026-08-29T03:13:32.702Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -110,7 +110,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Fachmann-frau-Betriebsunterhalt-EFZ-%28mfd%29/1421326833/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.274Z",
+      "crawledAt": "2026-08-29T03:13:32.709Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -187,7 +187,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Automatikerin-EFZ-%28mwd%29/1421271733/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.269Z",
+      "crawledAt": "2026-08-29T03:13:32.723Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -264,7 +264,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Elektronikerin-EFZ-%28mwd%29/1421321433/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.261Z",
+      "crawledAt": "2026-08-29T03:13:32.675Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -341,7 +341,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Polymechanikerin-EFZ-%28mwd%29/1421327533/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.258Z",
+      "crawledAt": "2026-08-29T03:13:32.690Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -418,7 +418,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Konstrukteurin-EFZ-%28mwd%29/1421328433/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.255Z",
+      "crawledAt": "2026-08-29T03:13:32.683Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -495,7 +495,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Logistikerin-EFZ-%28mwd%29/1421325033/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.252Z",
+      "crawledAt": "2026-08-29T03:13:32.666Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -572,7 +572,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-KochK%C3%B6chin-EFZ-%28mwd%29/1421319833/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.248Z",
+      "crawledAt": "2026-08-29T03:13:32.696Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -651,7 +651,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Lehrstelle-Kunststofftechnologe-login-EFZ-%28mwd%29/1421323633/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.245Z",
+      "crawledAt": "2026-08-29T03:13:32.715Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -683,7 +683,6 @@
         ]
       },
       "firstSeenAt": "2026-07-31T22:06:52.246Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -695,7 +694,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-5017539fdb4e",
@@ -728,7 +728,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Director-Anatomic-and-Acoustic-Design-RIC-BTE-%28mfd%29/1411678033/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.241Z",
+      "crawledAt": "2026-08-29T03:13:32.813Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -758,7 +758,6 @@
         ]
       },
       "firstSeenAt": "2026-07-06T22:23:25.008Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -770,7 +769,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-05280fbe6de4",
@@ -803,7 +803,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Global-Head-of-Intellectual-Property/1412981233/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.237Z",
+      "crawledAt": "2026-08-29T03:13:32.807Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -873,7 +873,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-lnnovations-&-Process-Engineer/1424675533/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.233Z",
+      "crawledAt": "2026-08-29T03:13:32.799Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -949,7 +949,7 @@
       "url": "https://jobs.sonova.com/job/Murten-RF-Design-Engineer-%28mfd%29/1414301033/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.227Z",
+      "crawledAt": "2026-08-29T03:13:32.793Z",
       "addressLocality": "Murten",
       "addressCountry": "CH",
       "country": "CH",
@@ -1019,7 +1019,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-International-Customer-Service-Specialist-%28mwd%29/1416178333/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.226Z",
+      "crawledAt": "2026-08-29T03:13:32.792Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1045,7 +1045,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T22:19:22.435Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1057,7 +1056,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-c2b12b6fa110",
@@ -1090,7 +1090,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Product-Cybersecurity-Manager/1416109733/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.216Z",
+      "crawledAt": "2026-08-29T03:13:32.786Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1151,7 +1151,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Werkzeugmacher-im-Bereich-Montage-WZB-%28mwd%29/1387283333/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.206Z",
+      "crawledAt": "2026-08-29T03:13:32.779Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1222,7 +1222,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Technical-Specialist-Production-%28TSP%29-%28mfd%29/1407383533/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.197Z",
+      "crawledAt": "2026-08-29T03:13:32.765Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1248,7 +1248,6 @@
         ]
       },
       "firstSeenAt": "2026-06-23T12:18:52.625Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -1260,7 +1259,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-a77ade8c1fe1",
@@ -1293,7 +1293,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Power-Management-Engineer-%2880-100%29-%28mfd%29/1417571533/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.190Z",
+      "crawledAt": "2026-08-29T03:13:32.773Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1369,7 +1369,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Practical-Trainee-Power-Management-%28mfd%29/1418818733/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.183Z",
+      "crawledAt": "2026-08-29T03:13:32.757Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1408,7 +1408,6 @@
         ]
       },
       "firstSeenAt": "2026-07-24T22:05:37.985Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -1420,7 +1419,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-9b40720b457c",
@@ -1453,7 +1453,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Teamleader-Support-Specialist-%28mfd%29/1286553001/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:52:53.176Z",
+      "crawledAt": "2026-08-29T03:13:32.748Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1479,7 +1479,6 @@
         ]
       },
       "firstSeenAt": "2026-06-13T22:42:45.620Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1491,7 +1490,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "sonova-bc1b748c5bf1",
@@ -1524,7 +1524,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Program-Manager-Hear-the-World-Foundation-%28Temporary-Cover%29/1430508533/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.167Z",
+      "crawledAt": "2026-08-29T03:13:32.741Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
@@ -1585,7 +1585,7 @@
       "url": "https://jobs.sonova.com/job/Staefa-Senior-Manager-Signal-Processing-RIC-and-BTE-%28mfd%29/1409309433/",
       "source": "Sonova Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T20:52:53.158Z",
+      "crawledAt": "2026-08-29T03:13:32.733Z",
       "addressLocality": "Staefa",
       "addressRegion": "Zürich",
       "addressCountry": "CH",
