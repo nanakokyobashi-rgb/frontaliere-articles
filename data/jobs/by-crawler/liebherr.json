@@ -816,7 +816,7 @@
       "companyDomain": "liebherr.com",
       "title": "Operator Trainer (m/w/d)",
       "titleByLocale": {
-        "it": "Operatore Trainer (m/f/d)",
+        "it": "Allenatore operatore (m/f/d)",
         "en": "Operator Trainer (m/f/d)",
         "de": "Operator Trainer (m/w/d)",
         "fr": "Opérateur Trainer (m/w/d)"
@@ -1317,7 +1317,7 @@
       "title": "Senior Process-/Org.-Developer (m/w/d)",
       "titleByLocale": {
         "it": "Senior Process-/Org.-Sviluppatore (m/w/d)",
-        "en": "Senior Process/Org. -Developer (m/f/d)",
+        "en": "Senior Process-/Org. -Developer (m/f/d)",
         "de": "Senior Process-/Org.-Entwickler (m/w/d)",
         "fr": "Développeur principal (m/f/d)"
       },
@@ -1552,7 +1552,7 @@
       "title": "Candidature spontanée",
       "titleByLocale": {
         "it": "Applicazione spontanea",
-        "en": "Unsolicited application",
+        "en": "Spontaneous application",
         "de": "Spontane Anwendung",
         "fr": "Candidature spontanée"
       },
@@ -4611,7 +4611,7 @@
       "companyDomain": "liebherr.com",
       "title": "Operator Trainer (m/f/x)",
       "titleByLocale": {
-        "it": "Operatore Trainer (m/f/x)",
+        "it": "Allenatore operatore (m/f/x)",
         "en": "Operator Trainer (m/f/x)",
         "de": "Operator Trainer (m/w/x)",
         "fr": "Opérateur Trainer (m/f/x)"
