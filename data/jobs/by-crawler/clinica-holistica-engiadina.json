@@ -1,6 +1,6 @@
 {
   "crawlerKey": "clinica-holistica-engiadina",
-  "assembledAt": "2026-08-28T21:53:00.202Z",
+  "assembledAt": "2026-08-29T03:58:25.657Z",
   "jobs": [
     {
       "id": "clinica-holistica-engiadina-72c9c3974d19",
@@ -47,7 +47,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/job/oberaerztin-oder-oberarzt-mit-facharzttitel-psychiatrie-und-psychotherapie-80-100-bei",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:56.495Z",
+      "crawledAt": "2026-08-29T03:58:22.511Z",
       "needsRetranslation": true,
       "previousSlugs": [
         "oberarztin-oder-oberarzt-mit-facharzttitel-in-psychiatrie-und-psychotherapie-80-100-bei",
@@ -130,7 +130,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/job/fachpsychologin-fachpsychologe-80-100-bei-hinreichender-eignung-anstellung-als-oberpsychologin",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:53.658Z",
+      "crawledAt": "2026-08-29T03:58:20.076Z",
       "needsRetranslation": true,
       "previousSlugs": [
         "fachpsychologin-fachpsychologe-80-100-bei-hinreichender-eignung-anstellung-als",
@@ -213,7 +213,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/node/293",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:51.458Z",
+      "crawledAt": "2026-08-29T03:58:18.023Z",
       "needsRetranslation": true,
       "previousSlugs": [
         "somatische-arztin-oder-somatischer-arzt-facharzttitel-allgemeinmedizin-innere-medizin",
@@ -296,7 +296,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/job/hilfskoch-kuechenhilfe-mwd",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:49.126Z",
+      "crawledAt": "2026-08-29T03:58:15.876Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "hilfskoch-kuchenhilfe-m-w-d-clinica-holistica-engiadina-susch",
@@ -381,7 +381,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/job/raumpflegerin",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:46.486Z",
+      "crawledAt": "2026-08-29T03:58:13.465Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "raumpfleger-in-clinica-holistica-engiadina-susch",
@@ -458,7 +458,7 @@
       "applyUrl": "https://www.clinica-holistica.ch/de/job/leiterin-kunsttherapie",
       "source": "Clinica Holistica Engiadina Dedicated Parser (Playwright)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:52:43.973Z",
+      "crawledAt": "2026-08-29T03:58:11.411Z",
       "needsRetranslation": false,
       "previousSlugs": [
         "leiter-in-kunsttherapie-clinica-holistica-engiadina-susch",
