@@ -1,7 +1,7 @@
 {
   "key": "wagerenhof",
   "label": "Stiftung Wagerenhof",
-  "generatedAt": "2026-08-28T21:43:54.370Z",
+  "generatedAt": "2026-08-29T03:25:48.555Z",
   "total": 9,
   "discovered": null,
   "written": 9,
@@ -9,11 +9,12 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 4,
-  "durationMs": 11455,
-  "avgDurationMs": 11455,
+  "durationMs": 10754,
+  "avgDurationMs": 10754,
   "durationHistory": [
     11898,
-    11455
+    11455,
+    10754
   ],
   "newJobs": [
     {
@@ -29,7 +30,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-544&cHash=b0621d763eca6fa19183259e3a65d94d",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:44.839Z",
+      "crawledAt": "2026-08-29T03:25:39.607Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -42,7 +43,7 @@
       "sector": "Sociale / Educazione",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-544&cHash=b0621d763eca6fa19183259e3a65d94d",
       "_qualityScore": 64,
       "_qualityBreakdown": {
@@ -65,7 +66,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-550&cHash=d66bc7918061a2740738e83f1ffe1f0f",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:45.900Z",
+      "crawledAt": "2026-08-29T03:25:40.361Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -78,7 +79,7 @@
       "sector": "Sociale / Educazione",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-550&cHash=d66bc7918061a2740738e83f1ffe1f0f",
       "_qualityScore": 64,
       "_qualityBreakdown": {
@@ -101,7 +102,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-551&cHash=4458144a462cefca76622c06d8d05fff",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:47.394Z",
+      "crawledAt": "2026-08-29T03:25:41.136Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -114,7 +115,7 @@
       "sector": "Sociale / Educazione",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-551&cHash=4458144a462cefca76622c06d8d05fff",
       "_qualityScore": 64,
       "_qualityBreakdown": {
@@ -139,7 +140,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-511&cHash=f2e20edb1dd6f065f8c6e62248937788",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:48.349Z",
+      "crawledAt": "2026-08-29T03:25:41.992Z",
       "addressLocality": "Bauma",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -176,7 +177,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-535&cHash=35a4cedfc1091d73415c31e6ac0d32d9",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:43:49.368Z",
+      "crawledAt": "2026-08-29T03:25:42.827Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
