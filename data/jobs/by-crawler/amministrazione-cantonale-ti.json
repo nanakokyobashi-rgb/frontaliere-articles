@@ -1,6 +1,6 @@
 {
   "crawlerKey": "amministrazione-cantonale-ti",
-  "assembledAt": "2026-08-28T21:06:31.548Z",
+  "assembledAt": "2026-08-29T03:27:22.795Z",
   "jobs": [
     {
       "id": "company-213hls",
@@ -22,7 +22,7 @@
       "salaryMax": 72822,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-28T05:27:13.245Z",
       "titleByLocale": {
         "it": "Assistente di farmacia a tempo parziale (50%), presso l’Ufficio del farmacista cantonale, Mendrisio",
@@ -89,7 +89,7 @@
       "salaryMax": 167309,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-28T05:27:13.245Z",
       "titleByLocale": {
         "it": "Medico AI a tempo parziale (50%) – a tempo pieno (100%), presso l’Istituto delle assicurazioni sociali, Ufficio dell’assicurazione invalidità, Servizio medico regionale (SMR), Bellinzona",
@@ -154,7 +154,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-26T10:08:21.621Z",
       "titleByLocale": {
         "it": "Medico capo clinica in psichiatria a tempo parziale (60%), incaricato/a (art. 15 e 16 LORD), presso l’Organizzazione sociopsichiatrica cantonale (OSC), Servizio psico-sociale (SPS) per adulti, Bellinzona",
@@ -234,7 +234,7 @@
       "salaryMax": 158999,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-19T10:16:04.748Z",
       "titleByLocale": {
         "it": "Capoufficio III, a tempo pieno (100%) presso la Sezione forestale, 9° circondario forestale, Arbedo",
@@ -300,7 +300,7 @@
       "salaryMax": 116071,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-17T10:02:50.276Z",
       "titleByLocale": {
         "it": "Curatore/trice a tempo parziale (50%), presso l'Ufficio dell’aiuto e della protezione, Bellinzona",
@@ -368,7 +368,7 @@
       "salaryMax": 167309,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-11T10:38:28.356Z",
       "titleByLocale": {
         "it": "Capo ufficio II, a tempo parziale (80%) - a tempo pieno (100%), presso l’Ufficio di statistica, Giubiasco",
@@ -439,7 +439,7 @@
       "salaryMax": 158999,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-08-04T22:20:27.551Z",
       "titleByLocale": {
         "it": "Capo ufficio III a tempo parziale (80%) - a tempo pieno (100%), presso l’Ufficio di sanità, Bellinzona",
@@ -532,7 +532,7 @@
       "salaryMax": 99178,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-07-06T00:31:52.385Z",
       "titleByLocale": {
         "it": "Concorso generale 2026 Infermieri/e con specialità (salute mentale) e infermieri/e presso l’Organizzazione sociopsichiatrica cantonale (OSC), Mendrisio",
@@ -623,7 +623,7 @@
       "salaryMax": 64005,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-06-08T13:55:55.547Z",
       "slugByLocale": {
         "it": "concorso-generale-2026-personale-ai-servizi-generali-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-mendrisio-sociopsichiatrica-can-213j0l",
@@ -704,7 +704,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-07-06T22:31:01.671Z",
       "slugByLocale": {
         "it": "candidature-spontanee-per-stage-durante-e-post-studi-universitari-presso-l-amministrazione-cantonale-amministrazione-cantonale-ti-2026-indie-213j37",
@@ -832,7 +832,7 @@
       "salaryMax": 64005,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-05-31T13:06:08.322Z",
       "slugByLocale": {
         "it": "concorso-generale-2026-aiuto-cucina-presso-l-ufficio-della-refezione-e-dei-trasporti-scolastici-bellinzona-presso-l-ufficio-della-refezione--213j3w",
@@ -904,7 +904,7 @@
       "salaryMax": 72822,
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-05-31T13:06:08.322Z",
       "slugByLocale": {
         "it": "concorso-generale-2026-collaboratori-trici-amministrativi-e-addetti-e-al-servizio-accoglienza-addetti-e-agli-assicurati-iii-consulenti-telef-213zbv",
@@ -976,7 +976,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-05-31T13:06:08.322Z",
       "slugByLocale": {
         "it": "concorso-generale-2026-medico-capo-clinica-in-psichiatria-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-mendrisio-sociopsichiatric-213j0o",
@@ -1061,7 +1061,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
       "firstSeenAt": "2026-05-31T13:06:08.322Z",
       "slugByLocale": {
         "it": "concorso-generale-2026-medici-assistenti-presso-l-organizzazione-sociopsichiatrica-cantonale-osc-mendrisio-sociopsichiatrica-cantonale-osc-m-213j0g",
@@ -1144,13 +1144,13 @@
       "description": "Compiti\n\n- decide e gestisce il piano terapeutico individuale per il/la paziente secondo l’inquadramento diagnostico e farmacoterapeutico garantendo, in collaborazione con l’equipe multidisciplinare, la corretta realizzazione della presa a carico del/la paziente, come da protocollo “Responsabilità medica e delega”\n\n- assicura ed effettua visite specialistiche medico-psichiatriche, ove necessario in collaborazione con gli/le psicologi/he, ai/lle pazienti garantendo il corretto inquadramento diagnostico, psicofarmacologico e riabilitativo\n\n- collabora attivamente con i medici delle strutture ospedaliere psichiatriche e somatiche e con i medici con pratica privata, in accordo con il medico psichiatra capo servizio OSC. Relativamente alle cure somatiche necessarie al benessere del/la paziente organizza e cogestisce le cure somatiche previste\n\n- assicura la formazione FMH dei medici assistenti e altre figure professionali pubbliche o di interesse pubblico. È tenuto/a ad aggiornare le proprie conoscenze professionali nel rispetto delle disposizioni della FMH per il mantenimento del titolo di specialità\n\n- realizza, in accordo con il medico psichiatra capo servizio OSC, le relazioni con altre strutture pubbliche e private che operano sul territorio al fine di creare le precondizioni ideali per un intervento di rete\n\n- assicura il picchetto sul territorio e/o le guardie in Clinica psichiatrica cantonale (CPC) come previsto dal “Regolamento guardie e picchetti medici OSC”\n\n- allestisce perizie medico psichiatriche a lui/lei affidate e supervisionate dal/la caposervizio\n\n- garantisce la corretta redazione delle prestazioni TARDOC e TARPSY\n\nRequisiti\n\n- diploma di medico (o titolo equivalente)\n\n- titolo di specialista FMH in psichiatria e psicoterapia (o titolo equivalente)\n\n- autorizzazione al libero esercizio nel Cantone Ticino della professione di medico rilasciato dall’Ufficio di sanità\n\n- esperienze di lavoro medico-terapeutiche in équipes sociopsichiatriche\n\n- attitudine al lavoro di gruppo\n\n- perfetta padronanza della lingua italiana (conversazione e redazione), conoscenza della lingua inglese (conversazione) e/o di una seconda lingua ufficiale (conversazione)\n\n- conoscenze del territorio e della rete di assistenza sociopsichiatrica del Cantone Ticino\n\nOsservazioni particolari\n\n- grado di occupazione: 40% - incarico art. 15 e 16 LORD fino al 31 dicembre 2027\n\n- sede di lavoro: Chiasso nell'ambito della convenzione del Servizio di liaison presso EOC/Ospedale regionale di Mendrisio-Beata Vergine e Ospedale Regionale di Lugano\n\n- disponibilità da parte del/della candidato/a a lavorare a turni irregolari\n\n- data di inizio: 01.10.2026 o data da concordare\n\nCondizioni di presentazione della candidatura\n\n- le candidature vanno inoltrate on-line. Altre forme di candidatura non saranno ritenute valide\n\n- oltre ai documenti da inoltrare al momento della candidatura on-line (lettera di presentazione e motivazione, curriculum vitae, diplomi, certificati e attestati di lavoro), in un secondo momento potrà essere richiesta ulteriore documentazione (casellario giudiziale con relativa autocertificazione e autocertificazione sullo stato di salute)\n\nCondizioni d’impiego\n\n- nomina o incarico: sono quelle previste dalla Legge sull'ordinamento degli impiegati dello Stato e dei docenti del 15 marzo 1995 (LORD) e dal relativo Regolamento. Rimane esplicitamente riservata ogni modificazione di legge concernente lo stipendio e l'organizzazione\n\n- orario di lavoro: 42 ore settimanali (per un rapporto d’impiego al 100%), flessibile o secondo le esigenze di servizio\n\nScadenza\n\n11 settembre 2026\n\nUlteriori informazioni si possono ottenere presso il signor Dr. med. Emilio Bolla, Medico capo servizio, Servizio di liaison Sopraceneri e Sottoceneri, tel. 091 815 21 11.",
       "requirements": [],
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "url": "https://www.concorsi.ti.ch/offerte-d'impieghi.html?yid=4266",
       "source": "Company Careers Crawler",
       "companyKey": "amministrazione-cantonale-ti",
       "companyDomain": "concorsi.ti.ch",
-      "crawledAt": "2026-08-28T21:06:25.535Z",
-      "firstSeenAt": "2026-08-28T21:06:25.535Z",
+      "crawledAt": "2026-08-29T03:27:15.658Z",
+      "firstSeenAt": "2026-08-29T03:27:15.658Z",
       "titleByLocale": {
         "it": "Medico psichiatra aggiunto/a a tempo parziale (40%), (incaricato/a art. 15 e 16 LORD), presso l’Organizzazione sociopsichiatrica cantonale (OSC), Servizio psico-sociale (SPS), Servizio di psichiatria e psicologia medica (SPP), Servizio di Liaison, Chiasso e Lugano",
         "en": "Medico psichiatra aggiunto/a a tempo parziale (40%), (incaricato/a art. 15 e 16 LORD), presso l’Organizzazione sociopsichiatrica cantonale (OSC), Servizio psico-sociale (SPS), Servizio di psichiatria e psicologia medica (SPP), Servizio di Liaison, Chiasso e Lugano",
