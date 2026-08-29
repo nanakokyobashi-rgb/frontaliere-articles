@@ -1,6 +1,6 @@
 {
   "crawlerKey": "szb-chb",
-  "assembledAt": "2026-08-28T21:00:51.940Z",
+  "assembledAt": "2026-08-29T14:28:14.310Z",
   "jobs": [
     {
       "id": "szb-chb-9579a8d7cea6",
@@ -34,7 +34,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4583/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:48.515Z",
+      "crawledAt": "2026-08-29T14:28:10.549Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -108,13 +108,12 @@
         "de": "Fachangestellte(r) Gesundheit FaGe Pool Pflege - Spitalzentrum Biel / Centre hospitalier Bienne Das Spitalzentrum Biel ist das öffentliche Zentrumsspital der zweisprachigen Region Biel-Seeland-Berner Jura. Bist du interessiert, an der Seite unserer 2'000 Mitarbeitenden für die Gesundheit unserer Bevölkerung tätig zu sein? Sie möchten auf verschiedenen Abteilungen eingesetzt werden und selbst bestimmen wann Sie arbeiten. Sie suchen eine Anstellung mit fixen Prozent oder eine Anstellung im Stundenlohn? Dann ist unser Pool Pflege genau das Richtige für Sie! Der Pool Pflege im Spitalzentrum Biel bietet flexible Arbeitsbedingungen für Fachangestellte(r) Gesundheit. Diese Flexibilität erleichtert die Vereinbarkeit von Berufsleben mit ausserberuflichen Aktivitäten und Projekten. Zudem eröffnet es die Möglichkeit, Berufserfahrung zu sammeln und spezifische Kompetenzen in verschiedenen Disziplinen zu entwickeln. Fachangestellte(r) Gesundheit FaGe Pool Pflege Das tun Sie Als FaGe Pool Pflege werden Sie in flexiblen Einsätzen im Spitalzentrum Biel eingeplant.\n\nSie unterstützen die Bettenabteilungen mit der Gewährleistung einer professionellen pflegerischen Betreuung unserer Patientinnen und Patienten\n\nSie übernehmen die individuelle Pflege unserer Patientinnen und Patienten.\n\nSie unterstützen einen reibungslosen Schichtbetrieb und eine abteilungsübergreifende und interdisziplinäre Zusammenarbeit.\n\nFähigkeitszeugnis Fachangestellte Gesundheit FaGe Berufserfahrung und Verantwortungsbewusstsein, Fähigkeit, sich in multidisziplinären Teams anzupassen und Prioritäten zu setzen Verfügbarkeit, Vielseitigkeit und Flexibilität Kommunikationsfähigkeit in Deutsch oder Französisch\n\nFlexible Arbeitsbedingungen, die die Vereinbarkeit von Berufsleben und ausserberuflichen Aktivitäten und Projekten erleichtern. Die Möglichkeit, Berufserfahrung zu sammeln und spezifische Kompetenzen in verschiedenen Disziplinen zu entwickeln. Zusammenarbeit mit zweisprachigen Kolleginnen und Kollegen aus vielen verschiedenen Berufsbereichen in einem dynamischen Umfeld. Gute Erreichbarkeit mit öffentlichen Verkehrsmitteln oder mit dem Auto\n\nFür weitere Auskünfte steht Ihnen Sabrina Scassa, Teamleitung Pool, unter Tel. 032 324 44 66 gerne zur Verfügung. Wir freuen uns auf Ihre online-Bewerbung.\n\n• Bereich: Pflegeberufe",
         "fr": "Employé(s) spécialisé(s) Santé FaGe Pool Care - Hospital Center Bienne / Centre hospitalier Bienne Le centre hospitalier Bienne est le centre hospitalier de la région bilingue du Jura Bienne-Seeland. Êtes-vous intéressé à travailler avec nos 2 000 employés pour la santé de notre population? Vous voulez être utilisé dans différents départements et vous déterminer quand vous travaillez. Vous cherchez un emploi avec un pourcentage fixe ou un emploi dans le salaire horaire? Alors nos soins de piscine sont parfaits pour vous ! Les soins de piscine du centre hospitalier de Biel offrent des conditions de travail flexibles aux travailleurs de la santé qualifiés. Cette flexibilité facilite la conciliation de la vie professionnelle avec les activités et projets non professionnels. Il offre également la possibilité d'acquérir une expérience professionnelle et de développer des compétences spécifiques dans différentes disciplines. Employé(e) professionnel(e) Soins de piscine FaGe Les soins de piscine FaGe vous sont programmés dans des missions flexibles dans le centre hospitalier Biel.\n\nVous aidez les services de lit en assurant des soins infirmiers professionnels pour nos patients\n\nIls prennent soin de nos patients.\n\nIls soutiennent des opérations de changement en douceur et une coopération interministérielle et interdisciplinaire.\n\nCertificat de compétence Spécialiste Santé FaGe Expérience de travail et sens des responsabilités, capacité d'adaptation dans les équipes multidisciplinaires et priorité disponibilité, polyvalence et flexibilité Capacité de communication en allemand ou en français\n\nDes conditions de travail flexibles qui facilitent la conciliation de la vie professionnelle et des activités et projets non professionnels. La possibilité d'acquérir une expérience professionnelle et de développer des compétences spécifiques dans différentes disciplines. Collaboration avec des collègues bilingues de nombreux secteurs professionnels dans un environnement dynamique. Bonne accessibilité en transports publics ou en voiture\n\nPour de plus amples informations, Sabrina Scassa, Team Leader Pool, est disponible au tél. 032 324 44 66 est disponible. Nous nous réjouissons de votre candidature en ligne.\n\n• Domaine: Sciences infirmières"
       },
-      "needsRetranslation": true,
       "location": "Biel/Bienne",
       "canton": "BE",
       "url": "https://jobs.szb-chb.ch/Vacancies/3676/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:47.726Z",
+      "crawledAt": "2026-08-29T14:28:09.819Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -161,7 +160,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "szb-chb-7802123249ba",
@@ -195,7 +195,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4399/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:47.324Z",
+      "crawledAt": "2026-08-29T14:28:09.068Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -268,7 +268,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/3445/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:46.820Z",
+      "crawledAt": "2026-08-29T14:28:08.336Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -339,7 +339,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4320/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:46.317Z",
+      "crawledAt": "2026-08-29T14:28:07.587Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -424,7 +424,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4597/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:45.847Z",
+      "crawledAt": "2026-08-29T14:28:06.866Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -504,7 +504,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4610/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:45.348Z",
+      "crawledAt": "2026-08-29T14:28:06.136Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -567,7 +567,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4599/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:44.882Z",
+      "crawledAt": "2026-08-29T14:28:05.429Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -642,7 +642,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4555/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:44.385Z",
+      "crawledAt": "2026-08-29T14:28:04.700Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -731,7 +731,7 @@
       "url": "https://jobs.szb-chb.ch/Vacancies/4625/Description/1",
       "source": "Spitalzentrum Biel / Centre hospitalier Bienne Dedicated Parser (Umantis listing @ jobs.szb-chb.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:00:43.878Z",
+      "crawledAt": "2026-08-29T14:28:03.959Z",
       "addressLocality": "Biel/Bienne",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -744,7 +744,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://jobs.szb-chb.ch/Vacancies/4625/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {
@@ -770,7 +770,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:00:43.878Z"
+      "firstSeenAt": "2026-08-29T14:28:03.959Z"
     },
     {
       "id": "szb-chb-6a62de418514",
