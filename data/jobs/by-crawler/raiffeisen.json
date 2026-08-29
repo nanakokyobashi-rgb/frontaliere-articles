@@ -12015,7 +12015,8 @@
           "maxValue": 120500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "retranslationAttempts": 2
     },
     {
       "id": "raiffeisen-1f5a50e27c33",
