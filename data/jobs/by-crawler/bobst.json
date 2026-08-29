@@ -1,6 +1,6 @@
 {
   "crawlerKey": "bobst",
-  "assembledAt": "2026-08-29T03:50:45.632Z",
+  "assembledAt": "2026-08-29T15:12:28.559Z",
   "jobs": [
     {
       "id": "bobst-6b9490c1deb3",
@@ -33,7 +33,7 @@
       "url": "https://jobs.bobst.com/Vacancies/4997/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:41.889Z",
+      "crawledAt": "2026-08-29T15:12:24.275Z",
       "addressLocality": "India (Pune)",
       "addressCountry": "CH",
       "country": "CH",
@@ -105,7 +105,7 @@
       "url": "https://jobs.bobst.com/Vacancies/6868/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:41.153Z",
+      "crawledAt": "2026-08-29T15:12:23.519Z",
       "addressLocality": "Thailand (Bangkok)",
       "addressCountry": "CH",
       "country": "CH",
@@ -178,7 +178,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8700/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:40.407Z",
+      "crawledAt": "2026-08-29T15:12:22.717Z",
       "addressLocality": "Germany (Bielefeld)",
       "addressCountry": "CH",
       "country": "CH",
@@ -271,7 +271,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8701/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:39.634Z",
+      "crawledAt": "2026-08-29T15:12:21.905Z",
       "addressLocality": "Germany (Bielefeld)",
       "addressCountry": "CH",
       "country": "CH",
@@ -345,7 +345,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8661/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:38.910Z",
+      "crawledAt": "2026-08-29T15:12:21.165Z",
       "addressLocality": "Germany (Meerbusch)",
       "addressCountry": "CH",
       "country": "CH",
@@ -432,7 +432,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8519/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:38.154Z",
+      "crawledAt": "2026-08-29T15:12:20.390Z",
       "addressLocality": "Poland (Lodz)",
       "addressCountry": "CH",
       "country": "CH",
@@ -517,7 +517,7 @@
       "url": "https://jobs.bobst.com/Vacancies/3098/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:37.419Z",
+      "crawledAt": "2026-08-29T15:12:19.577Z",
       "addressLocality": "Germany (Meerbusch)",
       "addressCountry": "CH",
       "country": "CH",
@@ -612,7 +612,7 @@
       "url": "https://jobs.bobst.com/Vacancies/7707/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:36.665Z",
+      "crawledAt": "2026-08-29T15:12:18.789Z",
       "addressLocality": "Switzerland (Grenchen)",
       "addressCountry": "CH",
       "country": "CH",
@@ -716,7 +716,7 @@
       "url": "https://jobs.bobst.com/Vacancies/7706/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:35.940Z",
+      "crawledAt": "2026-08-29T15:12:18.044Z",
       "addressLocality": "Switzerland (Grenchen)",
       "addressCountry": "CH",
       "country": "CH",
@@ -808,7 +808,7 @@
       "url": "https://jobs.bobst.com/Vacancies/4667/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:35.210Z",
+      "crawledAt": "2026-08-29T15:12:17.268Z",
       "addressLocality": "Switzerland (Grenchen)",
       "addressCountry": "CH",
       "country": "CH",
@@ -897,7 +897,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8743/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:34.424Z",
+      "crawledAt": "2026-08-29T15:12:16.448Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -991,7 +991,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9003/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:33.693Z",
+      "crawledAt": "2026-08-29T15:12:15.689Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1069,7 +1069,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8736/Description/1",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:32.936Z",
+      "crawledAt": "2026-08-29T15:12:14.910Z",
       "addressLocality": "Switzerland (Grenchen)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1142,7 +1142,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8868/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:31.640Z",
+      "crawledAt": "2026-08-29T15:12:13.628Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1221,7 +1221,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9036/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:30.902Z",
+      "crawledAt": "2026-08-29T15:12:12.834Z",
       "addressLocality": "India (Pune)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1299,7 +1299,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9073/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:30.159Z",
+      "crawledAt": "2026-08-29T15:12:12.026Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1380,7 +1380,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9034/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:29.380Z",
+      "crawledAt": "2026-08-29T15:12:11.273Z",
       "addressLocality": "India (Pune)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1442,7 +1442,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9070/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:28.620Z",
+      "crawledAt": "2026-08-29T15:12:10.434Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1536,7 +1536,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9151/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:27.896Z",
+      "crawledAt": "2026-08-29T15:12:09.662Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1609,7 +1609,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9158/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:50:27.113Z",
+      "crawledAt": "2026-08-29T15:12:08.898Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1688,7 +1688,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9179/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:26.397Z",
+      "crawledAt": "2026-08-29T15:12:08.096Z",
       "addressLocality": "France (Bron)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1767,7 +1767,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9039/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:25.588Z",
+      "crawledAt": "2026-08-29T15:12:07.294Z",
       "addressLocality": "Germany (Meerbusch)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1842,7 +1842,7 @@
       "url": "https://jobs.bobst.com/Vacancies/8728/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:24.857Z",
+      "crawledAt": "2026-08-29T15:12:06.514Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1921,7 +1921,7 @@
       "url": "https://jobs.bobst.com/Vacancies/6329/Description/2",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:50:24.061Z",
+      "crawledAt": "2026-08-29T15:12:05.720Z",
       "addressLocality": "Germany (Meerbusch)",
       "addressCountry": "CH",
       "country": "CH",
@@ -1995,7 +1995,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9221/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:23.258Z",
+      "crawledAt": "2026-08-29T15:12:04.894Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2026,7 +2026,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:23.258Z",
+      "firstSeenAt": "2026-08-29T15:12:04.894Z",
       "previousSlugsByLocale": {
         "fr": [
           "apprenti-automaticien-ne-bobst-switzerland-mex"
@@ -2068,7 +2068,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9220/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:22.476Z",
+      "crawledAt": "2026-08-29T15:12:04.084Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2099,7 +2099,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:22.476Z"
+      "firstSeenAt": "2026-08-29T15:12:04.084Z"
     },
     {
       "id": "bobst-f8dd9f2738dd",
@@ -2133,7 +2133,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9222/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:21.692Z",
+      "crawledAt": "2026-08-29T15:12:03.260Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2164,7 +2164,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:21.692Z",
+      "firstSeenAt": "2026-08-29T15:12:03.260Z",
       "previousSlugsByLocale": {
         "fr": [
           "apprenti-polymecanicien-ne-bobst-switzerland-mex"
@@ -2206,7 +2206,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9223/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:20.934Z",
+      "crawledAt": "2026-08-29T15:12:02.388Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2237,7 +2237,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:20.934Z"
+      "firstSeenAt": "2026-08-29T15:12:02.388Z"
     },
     {
       "id": "bobst-49bee4b2fcbf",
@@ -2271,7 +2271,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9225/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:20.178Z",
+      "crawledAt": "2026-08-29T15:12:01.563Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2302,7 +2302,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:20.178Z"
+      "firstSeenAt": "2026-08-29T15:12:01.563Z"
     },
     {
       "id": "bobst-ca582ec179f7",
@@ -2336,7 +2336,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9227/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:19.377Z",
+      "crawledAt": "2026-08-29T15:12:00.742Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2367,7 +2367,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:19.377Z",
+      "firstSeenAt": "2026-08-29T15:12:00.742Z",
       "previousSlugsByLocale": {
         "fr": [
           "apprenti-mediamaticien-ne-bobst-switzerland-mex"
@@ -2409,7 +2409,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9228/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:18.606Z",
+      "crawledAt": "2026-08-29T15:11:59.953Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2440,7 +2440,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:18.606Z"
+      "firstSeenAt": "2026-08-29T15:11:59.953Z"
     },
     {
       "id": "bobst-9b1013c9b68b",
@@ -2474,7 +2474,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9229/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:17.885Z",
+      "crawledAt": "2026-08-29T15:11:59.144Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2505,7 +2505,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:17.885Z"
+      "firstSeenAt": "2026-08-29T15:11:59.144Z"
     },
     {
       "id": "bobst-7953b2006541",
@@ -2539,7 +2539,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9230/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:17.089Z",
+      "crawledAt": "2026-08-29T15:11:58.388Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2570,7 +2570,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:17.089Z"
+      "firstSeenAt": "2026-08-29T15:11:58.388Z"
     },
     {
       "id": "bobst-3621de669a99",
@@ -2604,7 +2604,7 @@
       "url": "https://jobs.bobst.com/Vacancies/9231/Description/3",
       "source": "Bobst Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:50:16.286Z",
+      "crawledAt": "2026-08-29T15:11:57.561Z",
       "addressLocality": "Switzerland (Mex)",
       "addressCountry": "CH",
       "country": "CH",
@@ -2635,7 +2635,7 @@
         }
       },
       "addressRegion": "VD",
-      "firstSeenAt": "2026-08-29T03:50:16.286Z"
+      "firstSeenAt": "2026-08-29T15:11:57.561Z"
     }
   ]
 }
