@@ -9393,9 +9393,9 @@
     },
     {
       "id": "equans-9cb70fda9599",
-      "slug": "disponent-in-service-support-equans-switzerland-basel",
+      "slug": "fornito-nel-supporto-di-servizio-equans-switzerland-basel",
       "slugByLocale": {
-        "it": "disponent-in-service-support-equans-switzerland-basel",
+        "it": "fornito-nel-supporto-di-servizio-equans-switzerland-basel",
         "en": "disponent-in-service-support-equans-basel",
         "de": "disponent-in-service-support-equans-basel",
         "fr": "disponent-in-service-support-equans-basel"
@@ -9442,11 +9442,13 @@
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
-        "disponent-in-service-support-equans-basel"
+        "disponent-in-service-support-equans-basel",
+        "disponent-in-service-support-equans-switzerland-basel"
       ],
       "previousSlugsByLocale": {
         "it": [
-          "disponent-in-service-support-equans-basel"
+          "disponent-in-service-support-equans-basel",
+          "disponent-in-service-support-equans-switzerland-basel"
         ]
       },
       "firstSeenAt": "2026-08-27T19:57:22.094Z",

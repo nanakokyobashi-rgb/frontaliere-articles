@@ -246,11 +246,11 @@
     },
     {
       "id": "clinique-la-source-86ead7dd3693",
-      "slug": "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne",
+      "slug": "infermiera-in-chirurgia-urologica-e-viscerale-clinique-de-la-source-lausanne",
       "slugByLocale": {
-        "it": "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne",
-        "en": "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne",
-        "de": "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne",
+        "it": "infermiera-in-chirurgia-urologica-e-viscerale-clinique-de-la-source-lausanne",
+        "en": "nurse-in-urological-and-visceral-surgery-clinique-de-la-source-lausanne",
+        "de": "krankenschwester-in-urologischen-und-viszeralen-chirurgie-clinique-de-la-source-lausanne",
         "fr": "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne"
       },
       "company": "Clinique de La Source",
@@ -306,7 +306,21 @@
           "maxValue": 120500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne"
+        ],
+        "en": [
+          "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne"
+        ],
+        "de": [
+          "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne"
+        ]
+      },
+      "previousSlugs": [
+        "infirmier-ere-en-chirurgie-urologique-et-viscerale-clinique-la-source-lausanne"
+      ]
     },
     {
       "id": "clinique-la-source-a87adb4c5024",
