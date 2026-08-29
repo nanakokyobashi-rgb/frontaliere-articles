@@ -1,6 +1,6 @@
 {
   "crawlerKey": "accor",
-  "assembledAt": "2026-08-29T15:02:06.663Z",
+  "assembledAt": "2026-08-29T23:44:17.808Z",
   "jobs": [
     {
       "id": "accor-1c6744df6976",
@@ -1513,6 +1513,250 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-29T15:02:00.176Z"
+    },
+    {
+      "id": "accor-51570a8900f2",
+      "slug": "server-t-in-room-dining-full-time-accor-ch",
+      "slugByLocale": {
+        "en": "server-t-in-room-dining-full-time-accor-ch",
+        "it": "server-t-in-room-dining-full-time-accor-ch",
+        "de": "server-t-in-room-dining-full-time-accor-ch",
+        "fr": "server-t-in-room-dining-full-time-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Server (T), In Room Dining (Full Time)",
+      "titleByLocale": {
+        "en": "Server (T), In Room Dining (Full Time)",
+        "it": "Server (T), In Room Dining (Tempo pieno)",
+        "de": "Server (T), In Room Dining (Vollzeit)",
+        "fr": "Server (T), In Room Dining (Temps plein)"
+      },
+      "description": "Server (T), In Room Dining (Full Time) — Ibis Budget",
+      "descriptionByLocale": {
+        "en": "Server (T), In Room Dining (Full Time) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/server-t-in-room-dining-full-time-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-100193",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T23:44:14.469Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/server-t-in-room-dining-full-time-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-100193",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:44:14.469Z"
+    },
+    {
+      "id": "accor-841c37b3047d",
+      "slug": "limo-shuttle-driver-casual-accor-ch",
+      "slugByLocale": {
+        "de": "limo-shuttle-driver-casual-accor-ch",
+        "it": "limo-shuttle-driver-casual-accor-ch",
+        "en": "limo-shuttle-driver-casual-accor-ch",
+        "fr": "limo-shuttle-driver-casual-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Limo/Shuttle Driver (Casual)",
+      "titleByLocale": {
+        "de": "Limo/Shuttle Driver (Casual)",
+        "it": "Limo/Shuttle Driver (Casual)",
+        "en": "Limo/Shuttle Driver (Casual)",
+        "fr": "Limo/Shuttle Driver (Casual)"
+      },
+      "description": "Limo/Shuttle Driver (Casual) — Ibis Budget",
+      "descriptionByLocale": {
+        "de": "Limo/Shuttle Driver (Casual) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/limo-shuttle-driver-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-100192",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T23:44:13.864Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/limo-shuttle-driver-casual-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-100192",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:44:13.864Z"
+    },
+    {
+      "id": "accor-b13f8868314a",
+      "slug": "assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-accor-ch",
+      "slugByLocale": {
+        "fr": "assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-accor-ch",
+        "it": "assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-accor-ch",
+        "en": "assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-accor-ch",
+        "de": "assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4*",
+      "titleByLocale": {
+        "fr": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4*",
+        "it": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4*",
+        "en": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4*",
+        "de": "Assistent responsable banquet H/F - Pullman Paris Montparnasse 4*"
+      },
+      "description": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4* — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Assistant responsable banquet H/F - Pullman Paris Montparnasse 4* — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-in-pullman-paris-montparnasse-paris-france-jid-104372",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T23:44:12.649Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/assistant-responsable-banquet-h-f-pullman-paris-montparnasse-4-in-pullman-paris-montparnasse-paris-france-jid-104372",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:44:12.649Z"
+    },
+    {
+      "id": "accor-1c37a857de4b",
+      "slug": "stewarding-supervisor-full-time-contract-position-till-december-31-2026-accor-ch",
+      "slugByLocale": {
+        "en": "stewarding-supervisor-full-time-contract-position-till-december-31-2026-accor-ch",
+        "it": "stewarding-supervisor-full-time-contract-position-till-december-31-2026-accor-ch",
+        "de": "stewarding-supervisor-full-time-contract-position-till-december-31-2026-accor-ch",
+        "fr": "stewarding-supervisor-full-time-contract-position-till-december-31-2026-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Stewarding Supervisor (Full Time Contract Position till December 31, 2026)",
+      "titleByLocale": {
+        "en": "Stewarding Supervisor (Full Time Contract Position till December 31, 2026)",
+        "it": "Stewarding Supervisore (Tempo pieno Contract Position till December 31, 2026)",
+        "de": "Stewarding Vorgesetzter (Vollzeit Contract Position till December 31, 2026)",
+        "fr": "Stewarding Superviseur (Temps plein Contract Position till December 31, 2026)"
+      },
+      "description": "Stewarding Supervisor (Full Time Contract Position till December 31, 2026) — Ibis Budget",
+      "descriptionByLocale": {
+        "en": "Stewarding Supervisor (Full Time Contract Position till December 31, 2026) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/stewarding-supervisor-full-time-contract-position-till-december-31-2026-in-fairmont-hotel-macdonald-edmonton-canada-jid-108120",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-29T23:44:12.044Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/stewarding-supervisor-full-time-contract-position-till-december-31-2026-in-fairmont-hotel-macdonald-edmonton-canada-jid-108120",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T23:44:12.044Z"
     }
   ]
 }
