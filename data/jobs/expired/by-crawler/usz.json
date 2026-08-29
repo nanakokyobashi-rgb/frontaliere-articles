@@ -25,7 +25,7 @@
       "fr": "praktikant-in-klinik-fur-gastroenterologie-und-hepatologie-80-100-usz-ch"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T03:37:09.533Z",
+    "expiredAt": "2026-08-29T14:58:39.994Z",
     "previousSlugs": [
       "praktikant-in-klinik-fur-gastroenterologie-und-hepatologie-80-100-usz-ch",
       "praktikant-in-klinik-per-gastroenterologie-e-hepatologie-80-100-universitatsspital-zurich-usz-campus"
@@ -115,7 +115,7 @@
       "fr": "senior-system-ingenieur-architecte-fokus-oneidentity-und-iam-gesamtarchitektur-80-100-universitatsspital-zurich-usz"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T03:37:09.533Z",
+    "expiredAt": "2026-08-29T14:58:39.994Z",
     "previousSlugs": [
       "senior-system-engineer-architect-fokus-oneidentity-und-iam-gesamtarchitektur-80-100-usz-ch",
       "senior-system-ingegnere-architetto-fokus-oneidentity-e-iam-gesamtarchitektur-80-100-universitatsspital-zurich-usz-stettbach"
@@ -161,7 +161,7 @@
       "fr": "medecin-adjoint-h-f-d-clinique-d-immunologie-80-100-universitatsspital-zurich-usz-campus"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T03:37:09.533Z",
+    "expiredAt": "2026-08-29T14:58:39.994Z",
     "previousSlugs": [
       "assistenzarztin-assistenzarzt-w-m-d-klinik-fur-immunologie-80-100-usz-ch",
       "assistenzarztin-assistenzarzt-m-w-d-klinik-per-immunologie-80-100-universitatsspital-zurich-usz-campus"
@@ -12626,6 +12626,68 @@
     "postalCode": "8091",
     "salaryMin": 91400,
     "salaryMax": 138600,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "fage-per-la-interdisziplinare-bettenstation-innere-medizin-50-100-universitatsspital-zurich-usz-campus",
+    "title": "FaGe für die interdisziplinäre Bettenstation Innere Medizin 50-100%",
+    "titleByLocale": {
+      "it": "FaGe per la interdisziplinäre Bettenstation Innere Medizin 50-100%",
+      "en": "FaGe for the interdisciplinary bed station Internal Medicine 50-100 %",
+      "de": "FaGe für die interdisziplinäre Bettenstation Innere Medizin 50-100%",
+      "fr": "FaGe pour la station-lit interdisciplinaire Internal Medicine 50-100 %"
+    },
+    "company": "Universitätsspital Zürich (USZ)",
+    "companyKey": "usz",
+    "location": "Campus",
+    "addressLocality": "Campus",
+    "descriptionByLocale": {
+      "it": "Sei un professionista sanitario EFZ e vorrebbe espandere la tua conoscenza, assumersi la responsabilità e svilupparsi professionalmente? Allora hai esattamente ragione con noi. Il nostro reparto letto interdisciplinare offre complesse condizioni mediche, diverse tecnologie mediche, situazioni di cura esigenti e un team interprofessionale impegnato. Insieme curiamo il nostro paziente: le donne e i loro parenti con competenza, rispetto e cuore. Con una familiarizzazione strutturata e una vasta gamma di opportunità di sviluppo, ti sosteniamo nello sviluppo del tuo potenziale – che tu abbia già esperienza nella cura acuta o stia entrando in questo campo emozionante. I nostri oltre 8.600 dipendenti e circa 700 tirocinanti lavorano ogni giorno per il benessere dei nostri pazienti.\n\nCompiti:\n• Insieme a infermieri qualificati HF/FH, si prende cura di un gruppo paziente assegnato e partecipare attivamente al processo di cura.\n\n• Usa le tue competenze professionali in modo responsabile e indipendente.\n\n• Attraverso una stretta collaborazione con vari gruppi professionali e specialisti, si contribuisce ad una cura professionale, sicura e paziente.\n\n• Accompagnate studenti e tirocinanti nel lavoro quotidiano e siete felici di trasmettere le vostre conoscenze.\n\n• Con compiti organizzativi e logistici, si supporta una routine stazione liscia.\n\nRequisiti\n• Formazione EFZ completa\n\n• Godetevi l'apprendimento di nuove cose e svilupparsi continuamente professionalmente\n\n• Interessi in immagini cliniche complesse, diverse tecnologie mediche e varie situazioni di cura\n\n• Metodi di lavoro autonomi, responsabili e affidabili\n\n• Godetevi il lavoro in un team interprofessionale\n\n• Comunicazione apprezzata e rispettosa con pazienti, parenti e dipendenti\n\nL'esperienza nella cura acuta è un vantaggio, ma non un requisito. Molto più importante è la vostra motivazione, la vostra volontà di imparare e la vostra gioia di lavorare insieme.\n\nOffriamo:\nCon noi puoi arrivare, imparare e crescere.\n• Conoscenze strutturate: Vi accompagniamo con un concetto introduttivo individuale – su misura per la vostra esperienza precedente e le vostre esigenze di apprendimento personale.\n\n• Più forte insieme: si lavora in un team con diverse qualifiche professionali, esperienza e competenze (skill grade mix). Impariamo l'un l'altro, ci sosteniamo e ci incontriamo a livello degli occhi.\n\n• Ambiente di lavoro vario: immagini cliniche complesse, tecnologia medica diversificata e situazioni di cura esigenti offrono nuove opportunità di apprendimento e sviluppo ogni giorno.\n\n• Sviluppo con prospettiva: Il nostro modello di carriera apre molte opportunità per lo sviluppo professionale e personale.\n\n• Cultura dell'apprendimento e dell'errore: Condividiamo la conoscenza, riflettiamo insieme e sviluppiamo continuamente la nostra cura.\n\n• Co-creazione desiderata: Le vostre idee, esperienza e impegno sono benvenuti e contribuiscono all'ulteriore sviluppo della nostra stazione.",
+      "en": "You are a health professional EFZ and would like to expand your knowledge, take on responsibility and develop yourself professionally? Then you are exactly right with us.<br/><br/ >Our interdisciplinary bed ward offers you complex medical conditions, diverse medical technology, demanding care situations and a committed interprofessional team. Together we look after our patient: women and their relatives with competence, respect and heart.<br/><br/ >With a structured familiarization and a wide range of development opportunities, we support you in unfolding your potential – whether you already have experience in acute care or are entering this exciting field.<br/ >The University Hospital Zurich is one of the largest hospitals in Switzerland. Our more than 8,600 employees and around 700 trainees work every day for the well-being of our patients.\n\nTasks:\n• Together with qualified nurses HF/FH, you take care of an assigned patient group and actively participate in the care process.\n\n• You use your professional skills responsibly and independently.\n\n• Through close cooperation with various professional groups and specialists, you contribute to a professional, safe and patient-centered care.\n\n• You accompany learners and trainees in everyday work and are happy to pass on your knowledge.\n\n• With organizational and logistical tasks, you support a smooth station routine.\n\nRequirements\n• Completed health EFZ training\n\n• Enjoy learning new things and continuously developing yourself professionally\n\n• Interest in complex clinical pictures, diverse medical technology and varied care situations\n\n• Self-employed, responsible and reliable working methods\n\n• Enjoy working in an interprofessional team\n\n• Appreciative and respectful communication with patients, relatives and employees\n\nExperience in acute care is an advantage, but not a requirement. Much more important is your motivation, your willingness to learn and your joy of working together.\n\nWe offer:\nWith us you can arrive, learn and grow.\n• Structured familiarization: We accompany you with an individual introductory concept – tailored to your previous experience and your personal learning needs.\n\n• Stronger together: You work in a team with different professional qualifications, experience and skills (skill grade mix). We learn from each other, support each other and meet at eye level.\n\n• Varied working environment: Complex clinical pictures, diverse medical technology and demanding care situations offer you new learning and development opportunities every day.\n\n• Development with perspective: Our career model opens up many opportunities for professional and personal development.\n\n• Learning and error culture: We share knowledge, reflect together and continuously develop our care.\n\n• Co-creation desired: Your ideas, experience and commitment are welcome and contribute to the further development of our station.",
+      "de": "Du bist Fachperson Gesundheit EFZ und möchtest dein Wissen erweitern, Verantwortung übernehmen und dich fachlich weiterentwickeln? Dann bist du bei uns genau richtig.<br/><br/>Auf unserer interdisziplinären Bettenstation erwarten dich komplexe Krankheitsbilder, vielfältige Medizinaltechnik, anspruchsvolle Pflegesituationen und ein engagiertes interprofessionelles Team. Gemeinsam betreuen wir unseren Patient:innen und ihre Angehörigen mit Kompetenz, Respekt und Herz.<br/><br/>Mit einer strukturierten Einarbeitung und vielfältigen Entwicklungsmöglichkeiten unterstützen wir dich dabei, dein Potenzial zu entfalten – ganz gleich, ob du bereits Erfahrung in der Akutpflege mitbringst oder neu in dieses spannende Fachgebiet einsteigst.<br/>Das Universitätsspital Zürich ist eines der grössten Spitäler in der Schweiz. Unsere über 8'600 Mitarbeitenden und rund 700 Auszubildende setzen sich täglich für das Wohl unserer Patient:innen ein.\n\nAufgaben:\n• Gemeinsam mit diplomierten Pflegefachpersonen HF/ FH betreust du im Pflegetandem eine zugeteilte Patientengruppe und gestaltest den Pflegeprozess aktiv mit.\n\n• Du setzt deine fachlichen Kompetenzen verantwortungsvoll und selbstständig ein.\n\n• Durch die enge Zusammenarbeit mit verschiedenen Berufsgruppen und Fachspezialist:innen trägst du zu einer professionellen, sicheren und patientenzentrierten Versorgung bei.\n\n• Du begleitest Lernende und Praktikant:innen im Arbeitsalltag und gibst dein Wissen gerne weiter.\n\n• Mit organisatorischen und logistischen Aufgaben unterstützt du einen reibungslosen Stationsalltag.\n\nAnforderungen:\n• Abgeschlossene Ausbildung als Fachperson Gesundheit EFZ\n\n• Freude daran, Neues zu lernen und dich fachlich kontinuierlich weiterzuentwickeln\n\n• Interesse an komplexen Krankheitsbildern, vielfältiger Medizinaltechnik und abwechslungsreichen Pflegesituationen\n\n• Selbstständige, verantwortungsbewusste und zuverlässige Arbeitsweise\n\n• Freude an der Zusammenarbeit in einem interprofessionellen Team\n\n• Wertschätzende und respektvolle Kommunikation mit Patienten, Angehörigen und Mitarbeitenden\n\nErfahrung in der Akutpflege ist von Vorteil, aber keine Voraussetzung. Viel wichtiger sind deine Motivation, deine Lernbereitschaft und deine Freude an der Zusammenarbeit.\n\nWir bieten:\nBei uns kannst du ankommen, lernen und wachsen.\n• Strukturierte Einarbeitung: Wir begleiten dich mit einem individuellen Einführungskonzept – abgestimmt auf deine bisherigen Erfahrungen und deinen persönlichen Lernbedarf.\n\n• Gemeinsam stärker: Du arbeitest in einem Team mit unterschiedlichen Berufsabschlüssen, Erfahrungen und Kompetenzen (Skill Grade Mix). Wir lernen voneinander, unterstützen uns gegenseitig und begegnen uns auf Augenhöhe.\n\n• Abwechslungsreiches Arbeitsumfeld: Komplexe Krankheitsbilder, vielfältige Medizinaltechnik und anspruchsvolle Pflegesituationen bieten dir jeden Tag neue Lern- und Entwicklungsmöglichkeiten.\n\n• Entwicklung mit Perspektive: Unser Laufbahnmodell eröffnet dir vielfältige Möglichkeiten zur fachlichen und persönlichen Weiterentwicklung.\n\n• Lern- und Fehlerkultur: Wir teilen Wissen, reflektieren gemeinsam und entwickeln unsere Pflege kontinuierlich weiter.\n\n• Mitgestaltung erwünscht: Deine Ideen, deine Erfahrung und dein Engagement sind bei uns willkommen und tragen zur Weiterentwicklung unserer Station bei.",
+      "fr": "Vous êtes un professionnel de la santé EFZ et souhaitez élargir vos connaissances, prendre des responsabilités et vous développer professionnellement? Alors vous avez exactement raison avec nous.<br/><br/ > Notre service de lit interdisciplinaire vous offre des conditions médicales complexes, une technologie médicale diversifiée, des situations de soins exigeantes et une équipe interprofessionnelle engagée. Ensemble, nous prenons soin de notre patiente : les femmes et leurs proches avec compétence, respect et cœur.<br/><br/ > Avec une familiarisation structurée et un large éventail d'opportunités de développement, nous vous accompagnons dans le développement de votre potentiel, que vous ayez déjà une expérience en soins actifs ou que vous entriez dans ce domaine passionnant.<br/ >L'hôpital universitaire de Zurich est l'un des plus grands hôpitaux de Suisse. Nos plus de 8 600 employés et quelque 700 stagiaires travaillent chaque jour pour le bien-être de nos patients.\n\nTâches :\n• En collaboration avec des infirmières qualifiées HF/FH, vous prenez soin d'un groupe de patients assigné et participez activement au processus de soins.\n\n• Vous utilisez vos compétences professionnelles de manière responsable et indépendante.\n\n• Grâce à une collaboration étroite avec divers groupes professionnels et spécialistes, vous contribuez à un traitement professionnel, sûr et axé sur le patient.\n\n• Vous accompagnez les apprenants et les stagiaires dans le travail quotidien et êtes heureux de transmettre vos connaissances.\n\n• Avec des tâches organisationnelles et logistiques, vous soutenez une routine de station en douceur.\n\nExigences\n• Formation en matière de santé\n\n• Appréciez de nouvelles choses et développez-vous en permanence professionnellement\n\n• Intérêt pour des images cliniques complexes, des technologies médicales diverses et des situations de soins variées\n\n• Travailleurs indépendants, méthodes de travail responsables et fiables\n\n• Profitez de travailler dans une équipe interprofessionnelle\n\n• Communication reconnaissante et respectueuse avec les patients, les parents et les employés\n\nL'expérience des soins actifs est un avantage, mais pas une exigence. Beaucoup plus important est votre motivation, votre volonté d'apprendre et votre joie de travailler ensemble.\n\nNous offrons:\nAvec nous, vous pouvez arriver, apprendre et grandir.\n• Familiarisation structurée : Nous vous accompagnons avec un concept d'introduction individuel – adapté à votre expérience antérieure et à vos besoins d'apprentissage personnels.\n\n• Plus forts ensemble : Vous travaillez en équipe avec différentes qualifications professionnelles, expérience et compétences (mélange de compétences). Nous apprenons les uns des autres, nous soutenons mutuellement et nous rencontrons au niveau des yeux.\n\n• Environnement de travail varié : photos cliniques complexes, diverses technologies médicales et situations exigeantes de soins vous offrent de nouvelles possibilités d'apprentissage et de développement chaque jour.\n\n• Développement en perspective : Notre modèle de carrière ouvre de nombreuses possibilités de développement professionnel et personnel.\n\n• Culture d'apprentissage et d'erreur : Nous partageons les connaissances, réfléchissons ensemble et développons continuellement nos soins.\n\n• Co-création souhaitée : Vos idées, votre expérience et votre engagement sont les bienvenus et contribuent au développement de notre station."
+    },
+    "slugByLocale": {
+      "it": "fage-per-la-interdisziplinare-bettenstation-innere-medizin-50-100-universitatsspital-zurich-usz-campus",
+      "en": "fage-for-the-interdisciplinary-bed-station-internal-medicine-50-100-universitatsspital-zurich-usz-campus",
+      "de": "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
+      "fr": "fage-pour-la-station-lit-interdisciplinaire-internal-medicine-50-100-universitatsspital-zurich-usz-campus"
+    },
+    "sector": "Sanità / Ospedali",
+    "expiredAt": "2026-08-29T14:58:39.994Z",
+    "previousSlugs": [
+      "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
+      "pflegefachperson-per-la-interdisziplinare-bettenstation-con-schwerpunkt-innere-medizin-50-100-universitatsspital-zurich-usz-campus",
+      "nursing-specialist-for-the-interdisciplinary-bed-station-with-a-focus-on-internal-medicine-50-100-universitatsspital",
+      "pflegefachperson-fur-die-interdisziplinare-bettenstation-mit-schwerpunkt-innere-medizin-50",
+      "specialiste-des-soins-infirmiers-pour-la-station-lit-interdisciplinaire-avec-un-accent-sur-la-medecine-interne-50-100",
+      "fage-per-la-interdisziplinare-bettenstation-innere-medizin-50-100-universitatsspital-zurich-usz-campus"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
+        "pflegefachperson-per-la-interdisziplinare-bettenstation-con-schwerpunkt-innere-medizin-50-100-universitatsspital-zurich-usz-campus",
+        "nursing-specialist-for-the-interdisciplinary-bed-station-with-a-focus-on-internal-medicine-50-100-universitatsspital",
+        "pflegefachperson-fur-die-interdisziplinare-bettenstation-mit-schwerpunkt-innere-medizin-50",
+        "specialiste-des-soins-infirmiers-pour-la-station-lit-interdisciplinaire-avec-un-accent-sur-la-medecine-interne-50-100",
+        "fage-per-la-interdisziplinare-bettenstation-innere-medizin-50-100-universitatsspital-zurich-usz-campus"
+      ],
+      "en": [
+        "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
+        "nursing-specialist-for-the-interdisciplinary-bed-station-with-a-focus-on-internal-medicine-50-100-universitatsspital"
+      ],
+      "de": [
+        "pflegefachperson-fur-die-interdisziplinare-bettenstation-mit-schwerpunkt-innere-medizin-50"
+      ],
+      "fr": [
+        "fage-fur-die-interdisziplinare-bettenstation-innere-medizin-50-100-usz-ch",
+        "specialiste-des-soins-infirmiers-pour-la-station-lit-interdisciplinaire-avec-un-accent-sur-la-medecine-interne-50-100"
+      ]
+    },
+    "postalCode": "8091",
+    "salaryMin": 73500,
+    "salaryMax": 111500,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
