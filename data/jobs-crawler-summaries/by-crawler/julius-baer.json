@@ -1,18 +1,19 @@
 {
   "key": "julius-baer",
   "label": "Julius Baer",
-  "generatedAt": "2026-08-29T14:25:32.303Z",
+  "generatedAt": "2026-08-29T23:08:52.877Z",
   "total": 65,
   "newCount": 3,
   "updatedCount": 59,
   "removedCount": 1,
   "unchangedCount": 3,
-  "durationMs": 42923,
-  "avgDurationMs": 42923,
+  "durationMs": 36051,
+  "avgDurationMs": 36051,
   "durationHistory": [
     39083,
     35901,
-    42923
+    42923,
+    36051
   ],
   "newJobs": [
     {
