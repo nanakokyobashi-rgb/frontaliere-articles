@@ -1,90 +1,13 @@
 {
   "crawlerKey": "sicpa",
-  "assembledAt": "2026-08-29T03:37:10.374Z",
+  "assembledAt": "2026-08-29T14:52:14.942Z",
   "jobs": [
-    {
-      "id": "sicpa-49eb9303d2df",
-      "slug": "servizio-di-campo-tecnico-sicpa-sa-huechuraba",
-      "slugByLocale": {
-        "it": "servizio-di-campo-tecnico-sicpa-sa-huechuraba",
-        "en": "field-service-technician-sicpa-huechuraba",
-        "de": "field-service-techniker-sicpa-sa-huechuraba",
-        "fr": "field-service-technicien-sicpa-sa-huechuraba"
-      },
-      "company": "SICPA SA",
-      "companyKey": "sicpa",
-      "companyDomain": "sicpa.com",
-      "title": "Field Service Technician",
-      "titleByLocale": {
-        "it": "Servizio di campo Tecnico",
-        "en": "Field Service Technician",
-        "de": "Field Service Techniker",
-        "fr": "Field Service Technicien"
-      },
-      "description": "Competencies\n\n01.Understand and resolve issues\n 02.Understand the environment\n 03.Identify improvements\n 04.Understand the job\n 05.Coordinate with others\n 06.Deliver efficiently\n 07.Run for results\n 09.Work in team\n 10.Seek satisfaction\n\nApply now »\n\n•\n\nStart apply with LinkedIn\n\nStart\n\nPlease wait...\n\nFind similar jobs:\n\nOportunidades,\n Offres,\n Jobs\n\n• Privacy Policy\n\nOpens in a new tab.\n\n<path fill=\"#ffffff\" id=\"linkedin1",
-      "descriptionByLocale": {
-        "it": "Competenze\n\n01.Understand e risolvere i problemi\n02. Sostenere l'ambiente\n03.Identificare i miglioramenti\n04.Understand the job\n05.Coordinare con gli altri\n06.Deliver efficacemente\n07.Run per risultati\n09.Work in squadra\n10. Cerca soddisfazione\n\nRichiedi ora »\n\n•\n\nIniziare con LinkedIn\n\nInizio\n\nTi prego, aspetta...\n\nTrova lavori simili:\n\nOportunidades,\nOfferte,\nLavoro\n\n• Informativa sulla privacy\n\nSi apre in una nuova scheda.\n\nTraduzione:",
-        "en": "Competencies\n\n01.Understand and resolve issues\n02.Understand the environment\n03.Identify improvements\n04.Understand the job\n05.Coordinate with others\n06.Deliver efficiently\n07.Run for results\n09.Work in team\n10.Seek satisfaction\n\nApply now »\n\n•\n\nStart apply with LinkedIn\n\nStart\n\nPlease wait...\n\nFind similar jobs:\n\nOportunidades,\nOffres,\nJobs\n\n• Privacy Policy\n\nOpens in a new tab.\n\n<path fill=\"#ffffff\" id=\"linkedin1",
-        "de": "Kompetenzen\n\n01.Probleme verstehen und lösen\n02.Umwelt verstehen\n03.Erkennen von Verbesserungen\n04.Verstehen Sie den Job\n05.Koordinieren Sie sich mit anderen\n06.Deliver effizient\n07.Run für Ergebnisse\n09.Arbeit im Team\n10. Suchen Sie Zufriedenheit\n\nJetzt bewerben »\n\n•\n\nStarten Sie die Bewerbung mit LinkedIn\n\nBeginn\n\nBitte warten Sie...\n\nÄhnliche Jobs finden:\n\nOportunidades\nOffres,\nArbeitsplätze\n\n• Datenschutzpolitik\n\nÖffnet sich in einem neuen Tab.\n\n<path fill=\"#ffffff\" id=\"linkedin1\"",
-        "fr": "Compétences\n\n01. Comprendre et résoudre les problèmes\n02.Comprendre l'environnement\n03.Identifier les améliorations\n04.Comprendre le travail\n05.Coordonner avec les autres\n06.Exécuter efficacement\n07.Run pour les résultats\n09.Travailler en équipe\n10.Chercher satisfaction\n\nPostuler maintenant »\n\n•\n\nCommencez à appliquer avec LinkedIn\n\nDémarrer\n\nAttendez...\n\nTrouver des emplois similaires :\n\nOportunidades,\nDes offres,\nEmploi\n\n• Politique de confidentialité\n\nOuvre dans un nouvel onglet.\n\n<path fill=\"#ffffff\" id=\"linkedin1"
-      },
-      "needsRetranslation": false,
-      "location": "Huechuraba",
-      "canton": "VD",
-      "url": "https://jobs.sicpa.com/job/Huechuraba-Field-Service-Technician/1429218133/",
-      "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
-      "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:06.758Z",
-      "addressLocality": "Huechuraba",
-      "addressRegion": "VD",
-      "addressCountry": "CH",
-      "country": "CH",
-      "postalCode": "1008",
-      "category": "Tecnica",
-      "contract": "full-time",
-      "employmentType": "OTHER",
-      "experienceLevel": "mid",
-      "sector": "Industria di sicurezza / Tecnologie anti-contraffazione (manifatturiero)",
-      "currency": "CHF",
-      "featured": false,
-      "postedDate": "2026-08-24",
-      "applyUrl": "https://jobs.sicpa.com/talentcommunity/apply/1429218133/?locale=en_GB",
-      "requirements": [],
-      "requirementsByLocale": {},
-      "previousSlugs": [
-        "field-service-technician-sicpa-huechuraba"
-      ],
-      "previousSlugsByLocale": {
-        "it": [
-          "field-service-technician-sicpa-huechuraba"
-        ],
-        "de": [
-          "field-service-technician-sicpa-huechuraba"
-        ],
-        "fr": [
-          "field-service-technician-sicpa-huechuraba"
-        ]
-      },
-      "firstSeenAt": "2026-08-24T21:51:32.281Z",
-      "salaryMin": 71000,
-      "salaryMax": 107500,
-      "baseSalary": {
-        "@type": "MonetaryAmount",
-        "currency": "CHF",
-        "value": {
-          "@type": "QuantitativeValue",
-          "minValue": 71000,
-          "maxValue": 107500,
-          "unitText": "YEAR"
-        }
-      }
-    },
     {
       "id": "sicpa-058c84d88c58",
       "slug": "partnerships-coordinatore-sicpa-sa-prilly",
       "slugByLocale": {
-        "en": "partnerships-coordinator-sicpa-prilly",
         "it": "partnerships-coordinatore-sicpa-sa-prilly",
+        "en": "partnerships-coordinator-sicpa-prilly",
         "de": "partnerships-koordinator-sicpa-sa-prilly",
         "fr": "partnerships-coordinateur-sicpa-sa-prilly"
       },
@@ -111,7 +34,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Partnerships-Coordinator/1431162533/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:05.213Z",
+      "crawledAt": "2026-08-29T14:52:06.939Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -188,7 +111,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Delivery-Lead/1430826733/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:04.676Z",
+      "crawledAt": "2026-08-29T14:52:06.383Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -251,7 +174,7 @@
       "url": "https://jobs.sicpa.com/job/Chavornay-Automaticien/1409947133/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:37:04.142Z",
+      "crawledAt": "2026-08-29T14:52:05.820Z",
       "addressLocality": "Chavornay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -328,7 +251,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Senior-Cloud-Platform-Engineer/1429917033/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:03.629Z",
+      "crawledAt": "2026-08-29T14:52:05.197Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -391,7 +314,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Data-Protection-&-Privacy-Specialist/1419224133/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:03.124Z",
+      "crawledAt": "2026-08-29T14:52:04.551Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -454,7 +377,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Principal-Software-Engineer-Mobile-SDK-Tooling-&-On%E2%80%91Device-Computer-Vision-%28iOSAndroid%29/1393025833/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:02.599Z",
+      "crawledAt": "2026-08-29T14:52:03.907Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -531,7 +454,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Technical-Advisor/1418635833/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:02.084Z",
+      "crawledAt": "2026-08-29T14:52:03.279Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -607,7 +530,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Senior-Laboratory-Technical-Specialist/1418754533/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:37:01.561Z",
+      "crawledAt": "2026-08-29T14:52:02.687Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -669,7 +592,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Technical-Coordinator/1404844633/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:37:01.048Z",
+      "crawledAt": "2026-08-29T14:52:02.103Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -745,7 +668,7 @@
       "url": "https://jobs.sicpa.com/job/Chavornay-Op%C3%A9rateur-de-logistique-confirm%C3%A9/1400431333/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:37:06.257Z",
+      "crawledAt": "2026-08-29T14:52:08.509Z",
       "addressLocality": "Chavornay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -822,7 +745,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Operator%2C-Gardening-&-Road/1431520733/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:37:05.750Z",
+      "crawledAt": "2026-08-29T14:52:07.666Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -853,7 +776,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:37:05.750Z"
+      "firstSeenAt": "2026-08-29T14:52:07.666Z"
     }
   ]
 }
