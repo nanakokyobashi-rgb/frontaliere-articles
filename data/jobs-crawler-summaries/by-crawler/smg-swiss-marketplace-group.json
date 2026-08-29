@@ -1,7 +1,7 @@
 {
   "key": "smg-swiss-marketplace-group",
   "label": "SMG Swiss Marketplace Group",
-  "generatedAt": "2026-08-29T14:25:53.438Z",
+  "generatedAt": "2026-08-29T23:11:41.088Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,12 +9,13 @@
   "updatedCount": 3,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5178,
-  "avgDurationMs": 5178,
+  "durationMs": 5765,
+  "avgDurationMs": 5765,
   "durationHistory": [
     5043,
     5048,
-    5178
+    5178,
+    5765
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://jobs.smartrecruiters.com/SMGSwissMarketplaceGroup/744000145976936-werkstudent-in-real-estate-valuation-f-m-d-40-hybrid-working-model-zurich?oga=true",
       "source": "SMG Swiss Marketplace Group Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:25:49.436Z",
+      "crawledAt": "2026-08-29T23:11:36.369Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -67,7 +68,7 @@
       "url": "https://jobs.smartrecruiters.com/SMGSwissMarketplaceGroup/744000145968379-key-account-manager-banken-finanzinstitute-f-m-d-80-100-hybrid-working-model-zurich?oga=true",
       "source": "SMG Swiss Marketplace Group Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:25:49.444Z",
+      "crawledAt": "2026-08-29T23:11:36.372Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
@@ -103,7 +104,7 @@
       "url": "https://jobs.smartrecruiters.com/SMGSwissMarketplaceGroup/744000142145079-staff-frontend-engineer-f-m-d-80-100-hybrid-working-model-zurich?oga=true",
       "source": "SMG Swiss Marketplace Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:25:49.451Z",
+      "crawledAt": "2026-08-29T23:11:36.376Z",
       "addressLocality": "Zürich",
       "addressCountry": "CH",
       "country": "CH",
