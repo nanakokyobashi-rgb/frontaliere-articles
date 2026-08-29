@@ -1,7 +1,7 @@
 {
   "key": "bucherer",
   "label": "Bucherer",
-  "generatedAt": "2026-08-29T03:21:51.569Z",
+  "generatedAt": "2026-08-29T14:50:31.170Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,11 +9,12 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 13308,
-  "avgDurationMs": 13308,
+  "durationMs": 14133,
+  "avgDurationMs": 14133,
   "durationHistory": [
     15544,
-    13308
+    13308,
+    14133
   ],
   "newJobs": [
     {
@@ -28,7 +29,7 @@
       "url": "https://jobs.dayforcehcm.com/en-GB/bucherer/CANDIDATEPORTAL/Job/886",
       "source": "Bucherer Dedicated Parser (Dayforce CandidatePortal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:48.957Z",
+      "crawledAt": "2026-08-29T14:50:27.544Z",
       "addressLocality": "Luzern",
       "addressRegion": "LU",
       "streetAddress": "Langensandstrasse 27",
@@ -65,7 +66,7 @@
       "url": "https://jobs.dayforcehcm.com/en-GB/bucherer/CANDIDATEPORTAL/Job/869",
       "source": "Bucherer Dedicated Parser (Dayforce CandidatePortal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:48.958Z",
+      "crawledAt": "2026-08-29T14:50:27.545Z",
       "addressLocality": "Luzern",
       "addressRegion": "LU",
       "streetAddress": "Langensandstrasse 27",
@@ -102,7 +103,7 @@
       "url": "https://jobs.dayforcehcm.com/en-GB/bucherer/CANDIDATEPORTAL/Job/840",
       "source": "Bucherer Dedicated Parser (Dayforce CandidatePortal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T03:21:48.959Z",
+      "crawledAt": "2026-08-29T14:50:27.545Z",
       "addressLocality": "Luzern",
       "addressRegion": "LU",
       "streetAddress": "Langensandstrasse 27",
