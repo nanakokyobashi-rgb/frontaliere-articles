@@ -1,6 +1,6 @@
 {
   "crawlerKey": "spitex-ch",
-  "assembledAt": "2026-08-29T03:20:52.029Z",
+  "assembledAt": "2026-08-29T14:31:08.543Z",
   "jobs": [
     {
       "id": "spitex-ch-f7b64db24c9b",
@@ -34,7 +34,7 @@
       "url": "https://www.spitexjobs.ch/job/herzlich-willkommen-bei-rebeno/J988181",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:42.484Z",
+      "crawledAt": "2026-08-29T14:31:00.389Z",
       "addressLocality": "Zollikofen",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -160,7 +160,8 @@
           "maxValue": 143000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-49deac22d4cc",
@@ -194,7 +195,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf/J989321",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:25.904Z",
+      "crawledAt": "2026-08-29T14:31:01.781Z",
       "addressLocality": "Lenzerheide/Lai",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -316,7 +317,8 @@
           "maxValue": 77000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-35e17f9805f9",
@@ -350,7 +352,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-m-w-d-40-prozent-80-prozent/J986599",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:40.110Z",
+      "crawledAt": "2026-08-29T14:30:59.432Z",
       "addressLocality": "Grosshöchstetten",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -465,7 +467,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-690a56bbce3d",
@@ -499,7 +502,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-als-fachfrau-fachmann-gesundheit-efz-fage-fuer-2027/J991482",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:39.473Z",
+      "crawledAt": "2026-08-29T14:30:58.609Z",
       "addressLocality": "Goldau",
       "addressRegion": "SZ",
       "addressCountry": "CH",
@@ -573,7 +576,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-wattenwil/J991534",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:38.032Z",
+      "crawledAt": "2026-08-29T14:30:57.041Z",
       "addressLocality": "Wattenwil",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -654,7 +657,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-wattenwil/J991535",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:37.400Z",
+      "crawledAt": "2026-08-29T14:30:56.440Z",
       "addressLocality": "Wattenwil",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -728,7 +731,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-thun/J991536",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:36.491Z",
+      "crawledAt": "2026-08-29T14:30:55.513Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -802,7 +805,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-thun/J991540",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:35.793Z",
+      "crawledAt": "2026-08-29T14:30:54.658Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -876,7 +879,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-spiez/J991541",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:35.165Z",
+      "crawledAt": "2026-08-29T14:30:53.828Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -950,7 +953,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-spiez/J991542",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:34.681Z",
+      "crawledAt": "2026-08-29T14:30:52.937Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1024,7 +1027,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-assistentin-gesundheit-und-soziales-eba/J991543",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:33.990Z",
+      "crawledAt": "2026-08-29T14:30:52.001Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1108,7 +1111,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-zusammenarbeit-mit-solina-ziegelei/J991548",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:33.505Z",
+      "crawledAt": "2026-08-29T14:30:51.107Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1182,7 +1185,7 @@
       "url": "https://www.spitexjobs.ch/job/studium-dipl-pflegefachperson-hf-in-betriebsanstellung-fokus-p-k/J991549",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:33.021Z",
+      "crawledAt": "2026-08-29T14:30:50.415Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1245,7 +1248,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-abenddienst-40-70-prozent/J980875",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:31.828Z",
+      "crawledAt": "2026-08-29T14:30:48.544Z",
       "addressLocality": "Muttenz",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -1320,7 +1323,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachfrau-pflegefachmann-hf-im-tagdienst-mo-fr/J982990",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:31.162Z",
+      "crawledAt": "2026-08-29T14:30:47.630Z",
       "addressLocality": "Untersiggenthal",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -1394,7 +1397,7 @@
       "url": "https://www.spitexjobs.ch/job/du-moechtest-als-dipl-pflegefachperson-einfach-wieder-zeit-fuer-menschen-haben/J977488",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:30.534Z",
+      "crawledAt": "2026-08-29T14:30:46.817Z",
       "addressLocality": "Affoltern am Albis",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1479,7 +1482,7 @@
       "url": "https://www.spitexjobs.ch/job/fage-hauspflegerin-40-90-prozent/J982962",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:29.617Z",
+      "crawledAt": "2026-08-29T14:30:45.848Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1519,7 +1522,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:20:29.617Z"
+      "firstSeenAt": "2026-08-29T14:30:45.848Z"
     },
     {
       "id": "spitex-ch-6ed2ea4a768c",
@@ -1553,7 +1556,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachpersonen-hf-40-100-prozent/J982960",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:28.786Z",
+      "crawledAt": "2026-08-29T14:30:45.214Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1593,7 +1596,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:20:28.786Z"
+      "firstSeenAt": "2026-08-29T14:30:45.214Z"
     },
     {
       "id": "spitex-ch-dd12b0fe86c8",
@@ -1627,7 +1630,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-fabe-efz-50-80-prozent/J974896",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:28.147Z",
+      "crawledAt": "2026-08-29T14:30:44.273Z",
       "addressLocality": "Olten",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -1659,7 +1662,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:20:28.147Z"
+      "firstSeenAt": "2026-08-29T14:30:44.273Z"
     },
     {
       "id": "spitex-ch-0b0d61a0ed9c",
@@ -1693,7 +1696,7 @@
       "url": "https://www.spitexjobs.ch/job/mitarbeiter-in-fallfuehrung-demenz-50-70-prozent/J991672",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:27.517Z",
+      "crawledAt": "2026-08-29T14:30:43.624Z",
       "addressLocality": "Zug",
       "addressRegion": "ZG",
       "addressCountry": "CH",
@@ -1733,7 +1736,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:20:27.517Z"
+      "firstSeenAt": "2026-08-29T14:30:43.624Z"
     },
     {
       "id": "spitex-ch-db747145e83c",
@@ -1767,7 +1770,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-m-w-d-40100-prozent-zuerich/J990941",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:27.024Z",
+      "crawledAt": "2026-08-29T14:31:01.147Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1860,7 +1863,7 @@
       "url": "https://www.spitexjobs.ch/job/wundexperte-in-safw-40-50-prozent/J988794",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:40.692Z",
+      "crawledAt": "2026-08-29T14:30:42.295Z",
       "addressLocality": "Niederuzwil",
       "addressRegion": "SG",
       "addressCountry": "CH",
@@ -1940,7 +1943,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-als-fachfrau-oder-fachmann-gesundheit-fage-efz/J991394",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:43.113Z",
+      "crawledAt": "2026-08-29T14:30:40.953Z",
       "addressLocality": "Lenzburg",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -2057,7 +2060,8 @@
           "maxValue": 124500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-3cf2f3c40f3d",
@@ -2091,7 +2095,7 @@
       "url": "https://www.spitexjobs.ch/job/fachmann-fachfrau-gesundheit-mit-einsatzplanung-70-100-prozent/J989339",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:26.543Z",
+      "crawledAt": "2026-08-29T14:30:41.723Z",
       "addressLocality": "Glattbrugg",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2241,7 +2245,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf-50-prozent-wiedereinsteigerin-wiedereinsteiger-willkommen/J990010",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:25.259Z",
+      "crawledAt": "2026-08-29T14:30:43.138Z",
       "addressLocality": "Bauma",
       "addressRegion": "ZH",
       "addressCountry": "CH",
