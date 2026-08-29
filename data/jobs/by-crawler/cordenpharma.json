@@ -1,6 +1,6 @@
 {
   "crawlerKey": "cordenpharma",
-  "assembledAt": "2026-08-28T20:54:40.231Z",
+  "assembledAt": "2026-08-29T03:16:32.431Z",
   "jobs": [
     {
       "id": "cordenpharma-91510af6435e",
@@ -33,7 +33,7 @@
       "url": "https://career.cordenpharma.com/de/p/ettingen/jobs/20929/technischer-mitarbeitender-infrastruktur-projekte-80-mwd",
       "source": "CordenPharma Dedicated Parser (d.vinci)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:36.814Z",
+      "crawledAt": "2026-08-29T03:16:29.987Z",
       "addressLocality": "Ettingen",
       "addressRegion": "BL",
       "streetAddress": "Brühlstrasse 50",
@@ -68,7 +68,6 @@
         ]
       },
       "firstSeenAt": "2026-07-16T12:36:03.436Z",
-      "needsRetranslation": true,
       "salaryMin": 55600,
       "salaryMax": 74800,
       "baseSalary": {
@@ -80,7 +79,8 @@
           "maxValue": 74800,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "cordenpharma-9b691725a838",
@@ -113,7 +113,7 @@
       "url": "https://career.cordenpharma.com/de/p/ettingen/jobs/20956/gruppenleiter-mwd-2-schicht-ettingen-basel-land-schweiz",
       "source": "CordenPharma Dedicated Parser (d.vinci)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:36.368Z",
+      "crawledAt": "2026-08-29T03:16:29.505Z",
       "addressLocality": "Ettingen",
       "addressRegion": "BL",
       "streetAddress": "Brühlstrasse 50",
@@ -177,7 +177,7 @@
       "url": "https://career.cordenpharma.com/de/p/ettingen/jobs/20928/anlagenfuhrer-mwd-3-schicht-ettingen-schweiz",
       "source": "CordenPharma Dedicated Parser (d.vinci)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:35.935Z",
+      "crawledAt": "2026-08-29T03:16:28.950Z",
       "addressLocality": "Ettingen",
       "addressRegion": "BL",
       "streetAddress": "Brühlstrasse 50",
@@ -212,7 +212,6 @@
         ]
       },
       "firstSeenAt": "2026-07-16T12:36:02.888Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 93500,
       "baseSalary": {
@@ -224,7 +223,8 @@
           "maxValue": 93500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "cordenpharma-176c94a12519",
@@ -257,7 +257,7 @@
       "url": "https://career.cordenpharma.com/de/p/liestal/jobs/20925/laborant-100-mwd-fachrichtung-chemie-prozessforschung-entwicklung-schwerpunkt-synthese",
       "source": "CordenPharma Dedicated Parser (d.vinci)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:35.497Z",
+      "crawledAt": "2026-08-29T03:16:28.397Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "streetAddress": "Eichenweg 1 A",
@@ -292,7 +292,6 @@
         ]
       },
       "firstSeenAt": "2026-07-07T22:16:49.306Z",
-      "needsRetranslation": true,
       "salaryMin": 69500,
       "salaryMax": 93500,
       "baseSalary": {
@@ -304,7 +303,8 @@
           "maxValue": 93500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "cordenpharma-4605023155c6",
@@ -337,7 +337,7 @@
       "url": "https://career.cordenpharma.com/de/p/liestal/jobs/20922/analytical-project-leader-apl-100-mwd",
       "source": "CordenPharma Dedicated Parser (d.vinci)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:35.048Z",
+      "crawledAt": "2026-08-29T03:16:27.937Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "streetAddress": "Eichenweg 1 A",
@@ -369,7 +369,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T10:47:48.276Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 138500,
       "baseSalary": {
@@ -381,7 +380,8 @@
           "maxValue": 138500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     }
   ]
 }
