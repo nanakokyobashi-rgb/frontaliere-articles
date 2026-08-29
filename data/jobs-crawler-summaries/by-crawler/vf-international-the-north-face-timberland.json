@@ -1,17 +1,18 @@
 {
   "key": "vf-international-the-north-face-timberland",
   "label": "VF",
-  "generatedAt": "2026-08-29T03:16:44.001Z",
+  "generatedAt": "2026-08-29T14:25:17.892Z",
   "total": 44,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 20581,
-  "avgDurationMs": 20581,
+  "durationMs": 18647,
+  "avgDurationMs": 18647,
   "durationHistory": [
     21318,
-    20581
+    20581,
+    18647
   ],
   "newJobs": [],
   "updatedJobs": [],
