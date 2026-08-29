@@ -1,6 +1,6 @@
 {
   "crawlerKey": "kzu",
-  "assembledAt": "2026-08-28T20:56:20.228Z",
+  "assembledAt": "2026-08-29T03:16:36.132Z",
   "jobs": [
     {
       "id": "kzu-bd9b969abcfa",
@@ -34,7 +34,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2075/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:15.253Z",
+      "crawledAt": "2026-08-29T03:16:30.335Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -110,7 +110,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/1949/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:14.481Z",
+      "crawledAt": "2026-08-29T03:16:29.666Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -196,13 +196,12 @@
         "de": "Dipl. Pflegefachmann/- frau HF/FH 30-100% (Spitex) bei KZU Kompetenzzentrum Pflege und Gesundheit in Embrach (8424, ZH), Schweiz.\n\n• Art: Voll- oder Teilzeit\n• Befristung: Festanstellung\n• Standort: Embrach (ZH)\n• Bewerbung über das Umantis-Karriereportal von KZU Kompetenzzentrum Pflege und Gesundheit",
         "fr": "KZU Competence Center Soins et santé en ligne depuis : 28.05.2026 Numéro de référence : 2067 Le KZU-Spitex permet aux gens de se sentir en sécurité et bien soignés chez eux. Avec cœur, expertise et engagement, vous apportez une contribution précieuse. Nous vous proposons une petite équipe familiale, un large éventail d'applications et un environnement de travail dans lequel les gens sont au centre. Vos devoirs\n• Soins aux travailleurs indépendants et indépendants et soins aux clients à domicile\n• Type: plein temps ou à temps partiel\n• Licenciement : emploi permanent"
       },
-      "needsRetranslation": true,
       "location": "Embrach",
       "canton": "ZH",
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2067/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:13.742Z",
+      "crawledAt": "2026-08-29T03:16:29.022Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -252,7 +251,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kzu-1d78d42a9505",
@@ -286,7 +286,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2086/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:13.002Z",
+      "crawledAt": "2026-08-29T03:16:28.380Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -367,7 +367,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2090/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:12.229Z",
+      "crawledAt": "2026-08-29T03:16:27.735Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -440,13 +440,12 @@
         "de": "Dipl. Pflegefachfrau/-mann HF/ FH 40-100% bei KZU Kompetenzzentrum Pflege und Gesundheit in Embrach (8424, ZH), Schweiz.\n\n• Art: Teilzeit\n• Befristung: Festanstellung\n• Standort: Embrach (ZH)\n• Bewerbung über das Umantis-Karriereportal von KZU Kompetenzzentrum Pflege und Gesundheit",
         "fr": "KZU Centre de compétence en soins infirmiers et santé | en ligne depuis : 20/02/2026 Numéro de référence : 2029 Descrizione Immédiatement ou sur rendez-vous Mansioni - Responsabilité du processus pour les soins centrés sur la personne et la prise en charge de nos résidents Dettagli - Type : temps partiel - Durée : emploi fixe"
       },
-      "needsRetranslation": true,
       "location": "Embrach",
       "canton": "ZH",
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2029/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:11.477Z",
+      "crawledAt": "2026-08-29T03:16:27.104Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -495,7 +494,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kzu-b74d18e78e70",
@@ -523,13 +523,12 @@
         "de": "Dipl. Pflegefachfrau-/mann HF/FH 40-80% (Spitex) bei KZU Kompetenzzentrum Pflege und Gesundheit in Embrach (8424, ZH), Schweiz.\n\n• Art: Voll- oder Teilzeit\n• Befristung: Festanstellung\n• Standort: Embrach (ZH)\n• Bewerbung über das Umantis-Karriereportal von KZU Kompetenzzentrum Pflege und Gesundheit",
         "fr": "Centre de compétences en soins infirmiers et santé KZU | en ligne depuis : 04/05/2026 Numéro de référence : 2011 Avec effet immédiat ou sur rendez-vous Vos tâches\n• Soins et prise en charge indépendants et professionnels des clients dans leur domicile Type : à temps plein ou à temps partiel Durée : emploi fixe"
       },
-      "needsRetranslation": true,
       "location": "Embrach",
       "canton": "ZH",
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2011/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:10.682Z",
+      "crawledAt": "2026-08-29T03:16:26.461Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -574,7 +573,8 @@
           "maxValue": 102400,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "kzu-08fb3c961141",
@@ -608,7 +608,7 @@
       "url": "https://recruitingapp-1251.umantis.com/Vacancies/2103/Description/1",
       "source": "KZU Kompetenzzentrum Pflege und Gesundheit Dedicated Parser (Umantis listing tenant 1251)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:56:09.747Z",
+      "crawledAt": "2026-08-29T03:16:25.680Z",
       "addressLocality": "Embrach",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -621,7 +621,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://recruitingapp-1251.umantis.com/Vacancies/2103/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {
@@ -647,7 +647,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:56:09.747Z"
+      "firstSeenAt": "2026-08-29T03:16:25.680Z"
     },
     {
       "id": "kzu-48fabefee15d",
