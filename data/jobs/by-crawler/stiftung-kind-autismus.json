@@ -1,6 +1,6 @@
 {
   "crawlerKey": "stiftung-kind-autismus",
-  "assembledAt": "2026-08-28T21:09:26.578Z",
+  "assembledAt": "2026-08-29T03:31:47.491Z",
   "jobs": [
     {
       "id": "stiftung-kind-autismus-c04f839d446c",
@@ -34,7 +34,7 @@
       "url": "https://app.reflinejobs.io/2044/0102/pub/99/index.html",
       "source": "Stiftung Kind und Autismus Dedicated Parser (Refline 2044)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:09:22.696Z",
+      "crawledAt": "2026-08-29T03:31:42.019Z",
       "addressLocality": "Urdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "url": "https://app.reflinejobs.io/2044/0081/pub/100/index.html",
       "source": "Stiftung Kind und Autismus Dedicated Parser (Refline 2044)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:09:21.859Z",
+      "crawledAt": "2026-08-29T03:31:41.475Z",
       "addressLocality": "Urdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
