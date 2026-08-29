@@ -25,7 +25,7 @@
       "fr": "ingenieur-automatique-in-mecanicien-de-camion-in-ingenieur-automatique-in-bls-ag-givisiez"
     },
     "sector": "Trasporti / Ferrovia",
-    "expiredAt": "2026-08-28T21:19:41.751Z",
+    "expiredAt": "2026-08-29T03:49:58.747Z",
     "previousSlugs": [
       "automechatronics-engineer-in-truck-mechanic-in-automatic-engineer-in-bls-ag-givisiez",
       "ingenieur-automatique-in-mecanicien-de-camion-in-ingenieur-automatique-in-bls-ag-givisiez",
@@ -87,7 +87,7 @@
       "fr": "societe-d-entretien-dans-les-vehicules-ferroviaires-bls-ag-givisiez"
     },
     "sector": "Trasporti / Ferrovia",
-    "expiredAt": "2026-08-28T21:19:41.751Z",
+    "expiredAt": "2026-08-29T03:49:58.748Z",
     "previousSlugs": [
       "instandhalter-in-schienenfahrzeuge-bls-ch",
       "maintenance-company-in-rail-vehicles-bls-ag-givisiez",
@@ -143,7 +143,7 @@
       "fr": "installateur-electrique-in-installateur-in-signaltechnik-bls-ag-hasle-bei-burgdorf"
     },
     "sector": "Trasporti / Ferrovia",
-    "expiredAt": "2026-08-28T21:19:41.751Z",
+    "expiredAt": "2026-08-29T03:49:58.748Z",
     "previousSlugs": [
       "elektroinstallateur-in-monteur-in-signaltechnik-bls-ch",
       "installatore-trice-elettrico-a-in-monteur-in-signaltechnik-bls-ag-hasle-bei-burgdorf"
@@ -1860,6 +1860,72 @@
     "postalCode": "3001",
     "streetAddress": "Freiburgstrasse 130",
     "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "tecnico-di-preparazione-dei-treni-pdt-bls-ch",
+    "title": "Tecnico di preparazione dei treni (PDT)",
+    "titleByLocale": {
+      "it": "Tecnico di preparazione dei treni (PDT)",
+      "en": "Technician di preparazione dei treni (PDT)",
+      "de": "Techniker di preparazione dei treni (PDT)",
+      "fr": "Technicien di preparazione dei treni (PDT)"
+    },
+    "company": "BLS AG",
+    "companyKey": "bls",
+    "location": "Beura-cardezza",
+    "addressLocality": "Beura-cardezza",
+    "descriptionByLocale": {
+      "it": "Senza di te nessun treno può partire. Come membro dell'affiatato team di BLS Cargo Italia, ti assicuri che tutto funzioni alla perfezione. Il trasporto ferroviario ti appassiona e in un batter d'occhio fai in modo che i nostri treni possano circolare. Grazie a te, migliaia di tonnellate di merci possono attraversare le Alpi in tutta sicurezza.\n\nIl tuo lavoro:\n\n• Formazione del treno: rilevamento dei dati caratteristici e preparazione dei documenti scorta treno\n\n• Verifica tecnica dei veicoli e del carico.\n\n• Verifica dell'idoneità alla circolazione.\n\n• Garantire il rispetto degli standard di sicurezza.\n\n• Attività di manovra ferroviaria: Unione e distacco dei veicoli ferroviari.\n\n• Composizione e scomposizione dei convogli.\n\n• Supporto alle operazioni necessarie per la preparazione del treno.\n\nLe tue competenze:\n\n• Abilitazione PDT completo : Tecnico di preparazione treni e comprovata esperienza pregressa nel ruolo di PDT Italia\n\n• Buone conoscenze informatiche\n\n• Diploma di scuola superiore\n\n• Ottima conoscenza della lingua italiana\n\n• Anche se non obbligatorie, costituiranno titolo preferenziale il possesso di abilitazioni ferroviarie di TKC / ZV Svizzera\n\n• La conoscenza delle lingue inglese e tedesco\n\nChi siamo\n\nNon possiamo spostare le montagne, è chiaro. Ma non importa. Perché, come alpinisti esperti nel trasporto merci su rotaia, vediamo le montagne come una sfida, non come un ostacolo. Trasportiamo merci di tonnellate dal Mare del Nord, attraverso le Alpi, fino al Mediterraneo, e questa è un'impresa complessa. La affrontiamo in squadra con i nostri circa 450 collaboratori in Svizzera, Belgio, Germania e Italia. I nostri clienti sono internazionali, le nostre radici locali. Proprio per questo lavorare per BLS Cargo è particolarmente stimolante.",
+      "en": "Without you no train can leave. As a member of the dedicated team of BLS Cargo Italia, make sure everything works perfectly. Rail transport is passionate about you and in a blink of an eye, so that our trains can circulate. Thanks to you, thousands of tons of goods can cross the Alps safely.\n\nYour job:\n\n• Train training: detection of characteristic data and preparation of train escort documents\n\n• Technical verification of vehicles and cargo.\n\n• Verification of suitability for circulation.\n\n• Ensure compliance with safety standards.\n\n• Railway manoeuvre activities: Union and detachment of railway vehicles.\n\n• Composition and decomposition of convoys.\n\n• Support for the operations necessary for the preparation of the train.\n\nYour skills:\n\n• Comprehensive PDT Abilitation: Train preparation and proven experience in the role of PDT Italia\n\n• Good computer knowledge\n\n• High School Diploma\n\n• Excellent knowledge of the Italian language\n\n• Even if not mandatory, will constitute preferential title the possession of railway permits of TKC / ZV Switzerland\n\n• Knowledge of English and German languages\n\nWho are we?\n\nWe can't move the mountains, it's clear. But it doesn't matter. Because, as experienced mountaineers in freight transport on rail, we see the mountains as a challenge, not as an obstacle. We transport goods of tons from the North Sea, through the Alps, to the Mediterranean, and this is a complex enterprise. We team up with our approximately 450 employees in Switzerland, Belgium, Germany and Italy. Our customers are international, our local roots. For this reason, working for BLS Cargo is particularly challenging.",
+      "de": "Ohne dich kann kein Zug abfahren. Als Mitglied des engagierten Teams von BLS Cargo Italia, stellen Sie sicher, dass alles perfekt funktioniert. Der Schienenverkehr ist leidenschaftlich für Sie und im Handumdrehen, damit unsere Züge fahren können. Dank Ihnen können Tausende Tonnen Waren die Alpen sicher überqueren.\n\nIhr Job:\n\n• Zugschulung: Erkennung charakteristischer Daten und Erstellung von Begleitdokumenten\n\n• Technische Überprüfung von Fahrzeugen und Fracht.\n\n• Überprüfung der Umlauffähigkeit.\n\n• Gewährleistung der Einhaltung der Sicherheitsstandards.\n\n• Eisenbahnmanöver: Union und Ablösung von Eisenbahnfahrzeugen.\n\n• Zusammensetzung und Zerlegung von Konvois.\n\n• Unterstützung der für die Zugvorbereitung erforderlichen Maßnahmen.\n\nIhre Fähigkeiten:\n\n• Umfassende PDT Abilitation: Zugvorbereitung und nachgewiesene Erfahrung in der Rolle von PDT Italia\n\n• Gute Computerkenntnisse\n\n• High School Diplom\n\n• Ausgezeichnete Kenntnisse der italienischen Sprache\n\n• Auch wenn nicht obligatorisch, wird der Besitz von Eisenbahngenehmigungen von TKC / ZV Schweiz Vorzugstitel darstellen\n\n• Kenntnisse der englischen und deutschen Sprachen\n\nWer sind wir?\n\nWir können die Berge nicht bewegen, es ist klar. Aber es spielt keine Rolle. Denn als erfahrene Bergsteiger im Güterverkehr auf der Schiene sehen wir die Berge als Herausforderung, nicht als Hindernis. Wir transportieren Tonnengüter von der Nordsee, durch die Alpen, bis zum Mittelmeer, und das ist ein komplexes Unterfangen. Wir arbeiten mit unseren rund 450 Mitarbeitern in der Schweiz, Belgien, Deutschland und Italien zusammen. Unsere Kunden sind international, unsere lokalen Wurzeln. Aus diesem Grund ist die Arbeit für BLS Cargo eine besondere Herausforderung.",
+      "fr": "Sans toi, aucun train ne peut partir. En tant que membre de l'équipe dédiée de BLS Cargo Italia, assurez-vous que tout fonctionne parfaitement. Le transport ferroviaire est passionné par vous et en un clin d'œil, afin que nos trains puissent circuler. Grâce à vous, des milliers de tonnes de marchandises peuvent traverser les Alpes en toute sécurité.\n\nVotre travail :\n\n• Formation des trains: détection des données caractéristiques et préparation des documents d'escorte des trains\n\n• Vérification technique des véhicules et du fret.\n\n• Vérification de l'aptitude à la circulation.\n\n• Assurer le respect des normes de sécurité.\n\n• Activités de manoeuvre ferroviaire: Union et détachement de véhicules ferroviaires.\n\n• Composition et décomposition des convois.\n\n• Soutien aux opérations nécessaires à la préparation du train.\n\nVos compétences :\n\n• Aptitude PDT globale: Préparation du train et expérience prouvée dans le rôle de PDT Italia\n\n• Bonnes connaissances informatiques\n\n• Diplôme d'études secondaires\n\n• Excellente connaissance de la langue italienne\n\n• Même si elle n'est pas obligatoire, constitue un titre préférentiel la possession de permis ferroviaires de CTK / ZV Suisse\n\n• Connaissance des langues anglaise et allemande\n\nQui sommes-nous ?\n\nOn ne peut pas déplacer les montagnes, c'est clair. Mais peu importe. Parce que, comme les alpinistes expérimentés dans le transport de marchandises sur le rail, nous voyons les montagnes comme un défi, pas comme un obstacle. Nous transportons des marchandises de tonnes de la mer du Nord, à travers les Alpes, à la Méditerranée, et c'est une entreprise complexe. Nous faisons équipe avec environ 450 employés en Suisse, Belgique, Allemagne et Italie. Nos clients sont internationaux, nos racines locales. Pour cette raison, travailler pour BLS Cargo est particulièrement difficile."
+    },
+    "slugByLocale": {
+      "it": "tecnico-di-preparazione-dei-treni-pdt-bls-ch",
+      "en": "technician-di-preparazione-dei-treni-pdt-bls-ag-beura-cardezza",
+      "de": "techniker-di-preparazione-dei-treni-pdt-bls-ag-beura-cardezza",
+      "fr": "technicien-di-preparazione-dei-treni-pdt-bls-ag-beura-cardezza"
+    },
+    "sector": "Trasporti / Ferrovia",
+    "expiredAt": "2026-08-29T03:49:58.748Z",
+    "postalCode": "28851",
+    "salaryMin": 58000,
+    "salaryMax": 88000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "operatrice-operatore-di-sala-operativa-bls-ch",
+    "title": "Operatrice/Operatore di Sala Operativa",
+    "titleByLocale": {
+      "it": "Operatrice/Operatore di Sala Operativa",
+      "en": "Operator/Operator",
+      "de": "Betreiber/Betreiber",
+      "fr": "Opérateur/exploitant"
+    },
+    "company": "BLS AG",
+    "companyKey": "bls",
+    "location": "Beura-cardezza",
+    "addressLocality": "Beura-cardezza",
+    "descriptionByLocale": {
+      "it": "Senza di te nessun treno può partire. Come membro dell'affiatato team di BLS Cargo Italia, ti assicuri che tutto funzioni alla perfezione. Il trasporto ferroviario ti appassiona e in un batter d'occhio fai in modo che i nostri treni possano circolare. Grazie a te, migliaia di tonnellate di merci possono attraversare le Alpi in tutta sicurezza.\n\nIl tuo lavoro:\n\n• Inserire e monitorare i dati attraverso software dedicati, assicurando la regolare partenza e l'andamento dei treni\n\n• Interfacciarti con le altre imprese ferroviarie e i terminal per una gestione ottimale del traffico ferroviario\n\n• Gestire situazioni di emergenza e di stress e risolvere problematiche in tempo reale garantendo il corretto svolgimento dell'esercizio\n\n• Gestione delle risorse mirata alla copertura del traffico ferroviario\n\nLe tue competenze:\n\n• Ottima conoscenza della lingua italiana, almeno C1\n\n• Buona conoscenza della lingua tedesca e/o inglese, almeno B2\n\n• Buone conoscenze informatiche\n\n• Diploma di scuola superiore\n\n• Anche se non obbligatorie, costituiranno titolo preferenziale una comprovata esperienza pregressa nel ruolo e il possesso di abilitazioni ferroviarie di TKC / ZV Svizzera o PDT Italia\n\nChi siamo\n\nNon possiamo spostare le montagne, è chiaro. Ma non importa. Perché, come alpinisti esperti nel trasporto merci su rotaia, vediamo le montagne come una sfida, non come un ostacolo. Trasportiamo merci di tonnellate dal Mare del Nord, attraverso le Alpi, fino al Mediterraneo, e questa è un'impresa complessa. La affrontiamo in squadra con i nostri circa 450 collaboratori in Svizzera, Belgio, Germania e Italia. I nostri clienti sono internazionali, le nostre radici locali. Proprio per questo lavorare per BLS Cargo è particolarmente stimolante.",
+      "en": "Without you no train can leave. As a member of the dedicated team of BLS Cargo Italia, make sure everything works perfectly. Rail transport is passionate about you and in a blink of an eye, so that our trains can circulate. Thanks to you, thousands of tons of goods can cross the Alps safely.\n\nYour job:\n\n• Insert and monitor data through dedicated software, ensuring the regular departure and performance of trains\n\n• Interface with other railway companies and terminals for optimal management of railway traffic\n\n• Manage emergency and stress situations and solve real-time problems by ensuring proper exercise\n\n• Management of resources aimed at rail traffic coverage\n\nYour skills:\n\n• Excellent knowledge of the Italian language, at least C1\n\n• Good knowledge of German and/or English, at least B2\n\n• Good computer knowledge\n\n• High School Diploma\n\n• Even if not mandatory, will constitute preferential title a proven experience in the role and possession of TKC / ZV Switzerland or PDT Italy railway permits\n\nWho are we?\n\nWe can't move the mountains, it's clear. But it doesn't matter. Because, as experienced mountaineers in freight transport on rail, we see the mountains as a challenge, not as an obstacle. We transport goods of tons from the North Sea, through the Alps, to the Mediterranean, and this is a complex enterprise. We team up with our approximately 450 employees in Switzerland, Belgium, Germany and Italy. Our customers are international, our local roots. For this reason, working for BLS Cargo is particularly challenging.",
+      "de": "Ohne dich kann kein Zug abfahren. Als Mitglied des engagierten Teams von BLS Cargo Italia, stellen Sie sicher, dass alles perfekt funktioniert. Der Schienenverkehr ist leidenschaftlich für Sie und im Handumdrehen, damit unsere Züge fahren können. Dank Ihnen können Tausende Tonnen Waren die Alpen sicher überqueren.\n\nIhr Job:\n\n• Einfügen und Überwachen von Daten durch spezielle Software, um die regelmäßige Abfahrt und Leistung von Zügen zu gewährleisten\n\n• Schnittstelle zu anderen Eisenbahnunternehmen und Terminals für optimales Management des Eisenbahnverkehrs\n\n• Verwalten Sie Notfall- und Stresssituationen und lösen Sie Echtzeitprobleme, indem Sie die richtige Bewegung sicherstellen\n\n• Verwaltung von Ressourcen zur Abdeckung des Schienenverkehrs\n\nIhre Fähigkeiten:\n\n• Ausgezeichnete Kenntnisse der italienischen Sprache, mindestens C1\n\n• Gute Deutsch- und/oder Englischkenntnisse, mindestens B2\n\n• Gute Computerkenntnisse\n\n• High School Diplom\n\n• Auch wenn nicht obligatorisch, wird ein bevorzugter Titel eine nachgewiesene Erfahrung in der Rolle und im Besitz von TKC / ZV Schweiz oder PDT Italien Eisenbahngenehmigungen darstellen\n\nWer sind wir?\n\nWir können die Berge nicht bewegen, es ist klar. Aber es spielt keine Rolle. Denn als erfahrene Bergsteiger im Güterverkehr auf der Schiene sehen wir die Berge als Herausforderung, nicht als Hindernis. Wir transportieren Tonnengüter von der Nordsee, durch die Alpen, bis zum Mittelmeer, und das ist ein komplexes Unterfangen. Wir arbeiten mit unseren rund 450 Mitarbeitern in der Schweiz, Belgien, Deutschland und Italien zusammen. Unsere Kunden sind international, unsere lokalen Wurzeln. Aus diesem Grund ist die Arbeit für BLS Cargo eine besondere Herausforderung.",
+      "fr": "Sans toi, aucun train ne peut partir. En tant que membre de l'équipe dédiée de BLS Cargo Italia, assurez-vous que tout fonctionne parfaitement. Le transport ferroviaire est passionné par vous et en un clin d'œil, afin que nos trains puissent circuler. Grâce à vous, des milliers de tonnes de marchandises peuvent traverser les Alpes en toute sécurité.\n\nVotre travail :\n\n• Insérer et surveiller les données au moyen de logiciels dédiés, en assurant le départ et la performance réguliers des trains\n\n• Interface avec d'autres compagnies ferroviaires et terminaux pour une gestion optimale du trafic ferroviaire\n\n• Gérer les situations d'urgence et de stress et résoudre les problèmes en temps réel en assurant un exercice approprié\n\n• Gestion des ressources destinées à couvrir le trafic ferroviaire\n\nVos compétences :\n\n• Excellente connaissance de la langue italienne, au moins C1\n\n• Bonne connaissance de l'allemand et/ou de l'anglais, au moins B2\n\n• Bonnes connaissances informatiques\n\n• Diplôme d'études secondaires\n\n• Même si elle n'est pas obligatoire, constitue un titre préférentiel une expérience prouvée dans le rôle et la possession du CTK / ZV Suisse ou PDT Italie permis ferroviaires\n\nQui sommes-nous ?\n\nOn ne peut pas déplacer les montagnes, c'est clair. Mais peu importe. Parce que, comme les alpinistes expérimentés dans le transport de marchandises sur le rail, nous voyons les montagnes comme un défi, pas comme un obstacle. Nous transportons des marchandises de tonnes de la mer du Nord, à travers les Alpes, à la Méditerranée, et c'est une entreprise complexe. Nous faisons équipe avec environ 450 employés en Suisse, Belgique, Allemagne et Italie. Nos clients sont internationaux, nos racines locales. Pour cette raison, travailler pour BLS Cargo est particulièrement difficile."
+    },
+    "slugByLocale": {
+      "it": "operatrice-operatore-di-sala-operativa-bls-ch",
+      "en": "operator-operator-bls-ag-beura-cardezza",
+      "de": "betreiber-betreiber-bls-ag-beura-cardezza",
+      "fr": "operateur-exploitant-bls-ag-beura-cardezza"
+    },
+    "sector": "Trasporti / Ferrovia",
+    "expiredAt": "2026-08-29T03:49:58.748Z",
+    "postalCode": "28851",
+    "salaryMin": 55500,
     "salaryMax": 75000,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
