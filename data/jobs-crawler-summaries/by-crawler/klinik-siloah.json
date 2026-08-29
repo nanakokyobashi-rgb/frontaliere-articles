@@ -1,7 +1,7 @@
 {
   "key": "klinik-siloah",
   "label": "Privatklinik Siloah",
-  "generatedAt": "2026-08-29T03:20:26.889Z",
+  "generatedAt": "2026-08-29T14:30:45.453Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,10 +9,11 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 8197,
-  "avgDurationMs": 8197,
+  "durationMs": 8711,
+  "avgDurationMs": 8711,
   "durationHistory": [
-    8197
+    8197,
+    8711
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -30,7 +31,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000145455543-dipl-pflegefachperson-hf-fh-40-100-fur-die-chirurgische-bettenstation",
       "source": "Privatklinik Siloah Dedicated Parser (SMN clinic=PKS)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:20:19.866Z",
+      "crawledAt": "2026-08-29T14:30:37.995Z",
       "addressLocality": "Muri bei Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
