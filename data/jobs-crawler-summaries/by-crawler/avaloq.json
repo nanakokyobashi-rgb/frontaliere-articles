@@ -1,17 +1,18 @@
 {
   "key": "avaloq",
   "label": "Avaloq",
-  "generatedAt": "2026-08-28T21:50:05.949Z",
+  "generatedAt": "2026-08-29T03:38:46.000Z",
   "total": 23,
   "newCount": 2,
   "updatedCount": 21,
   "removedCount": 2,
   "unchangedCount": 0,
-  "durationMs": 4697,
-  "avgDurationMs": 4697,
+  "durationMs": 5061,
+  "avgDurationMs": 5061,
   "durationHistory": [
     4787,
-    4697
+    4697,
+    5061
   ],
   "newJobs": [
     {
