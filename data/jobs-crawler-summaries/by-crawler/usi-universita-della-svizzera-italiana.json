@@ -1,18 +1,19 @@
 {
   "key": "usi-universita-della-svizzera-italiana",
   "label": "USI",
-  "generatedAt": "2026-08-29T14:41:35.688Z",
+  "generatedAt": "2026-08-29T23:28:45.987Z",
   "total": 21,
   "newCount": 0,
   "updatedCount": 21,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 86692,
-  "avgDurationMs": 86692,
+  "durationMs": 92856,
+  "avgDurationMs": 92856,
   "durationHistory": [
     105396,
     88709,
-    86692
+    86692,
+    92856
   ],
   "newJobs": [],
   "updatedJobs": [
