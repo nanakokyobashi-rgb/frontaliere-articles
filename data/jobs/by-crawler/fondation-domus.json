@@ -1,6 +1,6 @@
 {
   "crawlerKey": "fondation-domus",
-  "assembledAt": "2026-08-29T03:26:26.820Z",
+  "assembledAt": "2026-08-29T14:50:55.334Z",
   "jobs": [
     {
       "id": "fondation-domus-b22f9013dfc2",
@@ -33,7 +33,7 @@
       "url": "https://www.jobup.ch/fr/emplois/detail/5c523a8f-69e1-437e-9137-58d38ab67258/?source=[platform]",
       "source": "Fondation Domus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T03:26:24.531Z",
+      "crawledAt": "2026-08-29T14:50:52.913Z",
       "addressLocality": "Ardon",
       "postalCode": "1957",
       "addressCountry": "CH",
