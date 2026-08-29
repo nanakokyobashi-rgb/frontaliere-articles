@@ -1,6 +1,6 @@
 {
   "crawlerKey": "fusalp",
-  "assembledAt": "2026-08-28T21:37:36.390Z",
+  "assembledAt": "2026-08-29T03:51:29.137Z",
   "jobs": [
     {
       "id": "fusalp-375e9ddc749d",
@@ -33,7 +33,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/sales-associate-m-w-dec-to-april-26-80_zermatt",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:37:27.367Z",
+      "crawledAt": "2026-08-29T03:51:17.441Z",
       "addressLocality": "Zermatt",
       "addressCountry": "CH",
       "country": "CH",
@@ -50,7 +50,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:23:06.096Z",
       "salaryMin": 57600,
       "salaryMax": 88800,
       "baseSalary": {
@@ -63,7 +62,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "firstSeenAt": "2026-08-28T05:23:06.096Z"
     },
     {
       "id": "fusalp-98faeb272faa",
@@ -96,7 +96,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/sales-associate-m-w-dec-to-april-100_val-de-bagnes",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:37:26.433Z",
+      "crawledAt": "2026-08-29T03:51:16.247Z",
       "addressLocality": "Val De Bagnes",
       "addressCountry": "CH",
       "country": "CH",
@@ -113,7 +113,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:23:04.982Z",
       "salaryMin": 72000,
       "salaryMax": 111000,
       "baseSalary": {
@@ -126,7 +125,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "VS"
+      "addressRegion": "VS",
+      "firstSeenAt": "2026-08-28T05:23:04.982Z"
     },
     {
       "id": "fusalp-1cde95462f05",
@@ -159,7 +159,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/ales-associate-m-w-dec-26-to-march-27-100_saanen",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:37:25.392Z",
+      "crawledAt": "2026-08-29T03:51:15.123Z",
       "addressLocality": "Saanen",
       "addressCountry": "CH",
       "country": "CH",
@@ -176,7 +176,6 @@
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:23:03.917Z",
       "salaryMin": 77500,
       "salaryMax": 118500,
       "baseSalary": {
@@ -189,7 +188,8 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "firstSeenAt": "2026-08-28T05:23:03.917Z"
     },
     {
       "id": "fusalp-6e36f7c9deae",
@@ -222,7 +222,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/assistant-store-manager-m-w-dec-26-to-march-27-100_saanen",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:37:24.390Z",
+      "crawledAt": "2026-08-29T03:51:14.110Z",
       "addressLocality": "Saanen",
       "addressCountry": "CH",
       "country": "CH",
@@ -254,7 +254,7 @@
         }
       },
       "addressRegion": "BE",
-      "firstSeenAt": "2026-08-28T21:37:24.390Z"
+      "firstSeenAt": "2026-08-29T03:51:14.110Z"
     }
   ]
 }
