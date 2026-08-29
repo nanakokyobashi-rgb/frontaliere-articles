@@ -81,7 +81,7 @@
       "fr": "responsable-de-l-entretien-operationnel-domicil-bern-west-80-100-concara-domicil-spitex-bern-bern"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:33:14.300Z",
+    "expiredAt": "2026-08-29T23:41:42.226Z",
     "previousSlugs": [
       "leiter-in-betriebsunterhalt-domicil-bern-west-80-100-concara-bern",
       "capo-manutenzione-operativa-domicil-bern-west-80-100-concara-domicil-spitex-bern-bern"
@@ -125,7 +125,7 @@
       "fr": "dauernachtwache-collaborateur-trice-betreuung-und-pflege-srk-60-80-concara-domicil-spitex-bern-munchenbuchsee"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:33:14.300Z",
+    "expiredAt": "2026-08-29T23:41:42.226Z",
     "previousSlugs": [
       "dauernachtwache-mitarbeiter-in-betreuung-und-pflege-srk-60-80-concara-munchenbuchsee",
       "collaboratore-trice-betreuung-e-pflege-ags-o-pflegehelfer-in-srk-60-80-concara-domicil-spitex-bern-munchenbuchsee",
@@ -188,7 +188,7 @@
       "fr": "co-gestionnaire-dans-la-cuisine-de-production-50-80-concara-domicil-spitex-bern-bern-99cc8f"
     },
     "sector": "Sanità / Ospedali",
-    "expiredAt": "2026-08-29T14:33:14.300Z",
+    "expiredAt": "2026-08-29T23:41:42.226Z",
     "previousSlugs": [
       "co-stv-betriebsleiter-in-produktionskuche-50-80-concara-bern",
       "co-stv-manager-in-cucina-di-produzione-50-80-concara-domicil-spitex-bern-bern-99cc8f"
@@ -1102,6 +1102,56 @@
     "postalCode": "3012",
     "salaryMin": 49500,
     "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "collaboratore-trice-administration-60-concara-domicil-spitex-bern-belp",
+    "title": "Mitarbeiter:in Administration 60%",
+    "titleByLocale": {
+      "it": "Collaboratore/trice Administration 60%",
+      "en": "Associate Administration 60%",
+      "de": "Mitarbeiter:in Administration 60%",
+      "fr": "Collaborateur/trice Administration 60%"
+    },
+    "company": "Concara (Domicil & Spitex Bern)",
+    "companyKey": "concara",
+    "location": "Belp",
+    "addressLocality": "Belp",
+    "descriptionByLocale": {
+      "it": "Compiti:\nCon il tuo metodo di lavoro indipendente, preciso e affidabile, garantisci un processo di amministrazione regolare e supporta altri settori, nonché la gestione in questioni amministrative e organizzative. Come parte del team di amministrazione di Belp, lavorerai a stretto contatto con il libro paga e il reparto contabilità. Conosci già i processi di digitalizzazione. I vostri compiti principali includono la completa amministrazione residenziale (dal contatto iniziale all'ingresso al supporto amministrativo) e l'attenta gestione dell'amministrazione del personale (ingresso e uscita, contratti, certificati di lavoro, fatturazione, gestione del tempo, ecc.).\nInoltre, si completerà i compiti amministrativi generali. Al telefono e alla reception rappresentate la nostra azienda con la vostra natura amichevole e l'alto orientamento del cliente. Incontri persone anziane con molta empatia e comprensione.\n\nRequisiti\n• Donna/uomo d'affari EFZ\n\n• Stylistic tedesco\n\n• Eccellente conoscenza degli utenti IT (MS Office, conoscenza Abacus dei vantaggi)\n\n• Occupazione e iniziativa\n\n• Sensibilizzazione della qualità\n\n• Capacità di fissare priorità\n\n• Pensiero in rete\n\n• Flessibilità e riservatezza\n\nOffriamo:\n• Spazio per lo sviluppo personale con ulteriori opportunità di istruzione e carriera\n\n• 5 settimane di vacanza, da 45 anni 6 settimane, da 55 anni 7 settimane\n\n• Quota del datore di lavoro Premium per l'assicurazione malattia e il fondo pensionistico superiore alle norme di legge\n\n• Team competente, impegnato e collaborativo\n\n• Cultura aziendale apprezzata e cultura della leadership orientata al valore\n\nDomicil offre ai cittadini anziani vari servizi ambulatoriali e apatici nella cura e nella cura. Con oltre 20 sedi e circa 1.600 dipendenti, il Gruppo Domicil è il numero 1 di assistenza a lungo termine nel Cantone di Berna. Siamo una società innovativa e non-profit. Continuiamo a sviluppare le nostre offerte di assistenza integrate con la massima qualità e siamo guidati dalle mutevoli esigenze dei nostri clienti. I dipendenti soddisfatti sono la base del nostro successo. Insieme rafforziamo la nostra posizione come datore di lavoro preferito.\n\nDomicil dormitorio Belp si trova nella posizione più bella sopra i tetti di Belp. In un ambiente familiare, ci preoccupiamo e ci prendiamo cura di approccio olistico e individuale.\n\nDomicil Galactina Park è situato in posizione centrale nelle immediate vicinanze della stazione ferroviaria ed è caratterizzato da un'atmosfera calda e aperta.\n\nIl Domicil Centre for Dementia Oberried è circondato da un ampio parco con diversi mondi da giardino, che permettono un sacco di spazio per il movimento. Dobbiamo stare attenti a vicenda.",
+      "en": "Tasks:\nWith your independent, exact and reliable working method, you ensure a smooth administration process and support other areas as well as the management in administrative and organizational matters. As part of the Belp administration team, you will work closely with the payroll and accounting department. You are already familiar with digitalization processes. Your main tasks include the complete residential administration (from initial contact to entry to administrative support) and the careful handling of the personnel administration (entry and exit, contracts, employment certificates, billing, time management, etc.).\nFurthermore, you will complete the general administrative tasks. On the phone and reception you represent our company with your friendly nature and high customer orientation. You meet older people with a lot of empathy and understanding.\n\nRequirements\n• Businesswoman/man EFZ\n\n• Stylistic German\n\n• Excellent IT user knowledge (MS Office, Abacus knowledge of advantages)\n\n• Self-employment and initiative\n\n• Quality awareness\n\n• Ability to set priorities\n\n• Networked thinking\n\n• Flexibility and confidentiality\n\nWe offer:\n• Space for personal development with comprehensive further education and career opportunities\n\n• 5 weeks holiday, from 45 years 6 weeks, from 55 years 7 weeks\n\n• Employer share Premiums for health day allowance insurance and pension fund higher than statutory regulations\n\n• Competent, committed and collaborative team\n\n• Appreciative corporate culture and value-oriented leadership culture\n\nDomicil offers senior citizens various ambulatory and inpatient services in care and care. With more than 20 locations and around 1,600 employees, the Domicil Group is the number 1 in long-term care in the Canton of Bern. We are an innovative, non-profit company. We continue to develop our integrated care offerings with the highest quality and are guided by the changing needs of our customers. Satisfied employees are the foundation of our success. Together we strengthen our position as a preferred employer.\n\nDomicil dormitory Belp is located in the most beautiful location above the roofs of Belp. In a family environment, we care for and look after holistically and individually.\n\nDomicil Galactina Park is centrally located in the immediate vicinity of the train station and is characterized by a warm and open atmosphere.\n\nThe Domicil Centre for Dementia Oberried is surrounded by a large park with different garden worlds, which allow plenty of space for movement. We have to be careful with each other.",
+      "de": "Aufgaben:\nMit deiner selbstständigen, exakten und zuverlässigen Arbeitsweise sorgst du für einen reibungslosen Ablauf in der Administration und unterstützt andere Bereiche sowie die Geschäftsleitung in administrativen und organisatorischen Belangen. Als Teil des Administrations-Teams der Standorte Belp arbeitest du eng mit der Lohn- und Buchhaltungsabteilung zusammen. Du bist bereits mit Digitalisierungsprozessen vertraut. Zu deinen Hauptaufgaben gehören die komplette Bewohneradministration (vom Erstkontakt über den Einzug bis zur administrativen Betreuung) und die sorgfältige Erledigung der Personaladministration (Ein- und Austritte, Verträge, Arbeitszeugnisse, Abrechnungen, Zeitwirtschaft, etc.).\nWeiter erledigst du die allgemein anfallenden administrativen Aufgaben. Am Telefon und Empfang vertrittst du mit deiner freundlichen Art und hoher Kundenorientierung unseren Betrieb. Älteren Menschen begegnest du mit viel Einfühlungsvermögen und Verständnis.\n\nAnforderungen:\n• Abschluss Kauffrau/-mann EFZ\n\n• Stilsicheres Deutsch\n\n• Hervorragende IT-Anwenderkenntnisse (MS-Office, Abacus-Kenntnisse von Vorteil)\n\n• Selbständigkeit und Eigeninitiative\n\n• Qualitätsbewusstsein\n\n• Fähigkeit, Prioritäten zu setzen\n\n• Vernetztes Denken\n\n• Flexibilität und Verschwiegenheit\n\nWir bieten:\n• Raum für persönliche Entwicklung mit umfassenden Weiterbildungsangeboten und Karrierechancen\n\n• 5 Wochen Ferien, ab 45 Jahren 6 Wochen, ab 55 Jahren 7 Wochen\n\n• Arbeitgeberanteil Prämien für Krankentaggeldversicherung und Pensionskasse höher als gesetzliche Regelungen\n\n• Kompetentes, engagiertes und kollegiales Team\n\n• Wertschätzende Unternehmenskultur und werteorientierte Führungskultur\n\nDomicil bietet Seniorinnen und Senioren diverse ambulante und stationäre Dienstleistungen in Pflege und Betreuung an. Mit über 20 Standorten und rund 1'600 Mitarbeitenden ist die Domicil-Gruppe die Nummer 1 in der Langzeitpflege im Kanton Bern. Wir sind ein innovatives, gemeinnützig orientiertes Unternehmen. Unsere Angebote in der integrierten Versorgung entwickeln wir stets mit höchster Qualität weiter und richten uns nach den sich wandelnden Bedürfnissen unserer Kundinnen und Kunden. Zufriedene Mitarbeitende sind das Fundament unseres Erfolgs. Gemeinsam stärken wir unsere Position als bevorzugte Arbeitgeberin.\n\nDomicil Wohnheim Belp liegt an schönster Lage über den Dächern von Belp. In familiärem Ambiente pflegen und betreuen wir ganzheitlich und individuell.\n\nDomicil Galactina Park liegt zentral in unmittelbarer Nähe des Bahnhofs und zeichnet sich durch eine herzliche und offene Atmosphäre aus.\n\nDas Domicil Kompetenzzentrum Demenz Oberried ist umgeben von einer grossen Parkanlage mit verschiedenen Gartenwelten, die viel Raum für Bewegung ermöglichen. Miteinander pflegen wir einen achtsamen Umgang.",
+      "fr": "Tâches :\nAvec votre méthode de travail indépendante, exacte et fiable, vous assurez un processus d'administration en douceur et soutiennez d'autres domaines ainsi que la gestion en matière administrative et organisationnelle. Dans le cadre de l'équipe d'administration de Belp, vous travaillerez en étroite collaboration avec le service de la paye et de la comptabilité. Vous connaissez déjà les processus de numérisation. Parmi vos principales tâches, mentionnons l'administration complète du logement (du contact initial à l'entrée au soutien administratif) et le traitement minutieux de l'administration du personnel (entrée et sortie, contrats, certificats d'emploi, facturation, gestion du temps, etc.).\nDe plus, vous accomplirez les tâches administratives générales. Au téléphone et à la réception, vous représentez notre entreprise avec votre nature amicale et une grande orientation client. Vous rencontrez des personnes âgées avec beaucoup d'empathie et de compréhension.\n\nExigences\n• Femme d'affaires/homme EFZ\n\n• Allemand stylistique\n\n• Excellente connaissance de l'utilisateur de la TI (MS Office, Abacus connaissance des avantages)\n\n• Travail indépendant et initiative\n\n• Sensibilisation à la qualité\n\n• Aptitude à fixer des priorités\n\n• Réflexion en réseau\n\n• Souplesse et confidentialité\n\nNous offrons:\n• Espace pour le développement personnel avec une formation complémentaire complète et des possibilités de carrière\n\n• 5 semaines de vacances, à partir de 45 ans 6 semaines, à partir de 55 ans 7 semaines\n\n• Part de l'employeur Primes pour l'assurance maladie et la caisse de retraite supérieures à la réglementation\n\n• Équipe compétente, engagée et collaborative\n\n• Appréciation de la culture d'entreprise et de la culture du leadership axée sur la valeur\n\nDomicil offre aux personnes âgées divers services ambulatoires et hospitaliers en soins et soins. Avec plus de 20 emplacements et environ 1600 employés, le groupe Domicil est le numéro 1 des soins de longue durée dans le canton de Berne. Nous sommes une entreprise innovante et sans but lucratif. Nous continuons à développer nos offres de soins intégrées avec la plus haute qualité et sont guidés par l'évolution des besoins de nos clients. Les employés satisfaits sont le fondement de notre succès. Ensemble, nous renforçons notre position d'employeur privilégié.\n\nDomicil dortoir Belp est situé dans le plus bel emplacement au-dessus des toits de Belp. Dans un milieu familial, nous prenons soin et nous prenons soin de façon holistique et individuelle.\n\nLe Domicil Galactina Park est situé au centre de la gare et se caractérise par une atmosphère chaleureuse et ouverte.\n\nLe centre Domicile pour Démence Oberried est entouré d'un grand parc avec différents mondes de jardin, ce qui permet beaucoup d'espace pour le mouvement. Nous devons faire attention les uns aux autres."
+    },
+    "slugByLocale": {
+      "it": "collaboratore-trice-administration-60-concara-domicil-spitex-bern-belp",
+      "en": "associate-administration-60-concara-domicil-spitex-bern-belp",
+      "de": "mitarbeiter-in-administration-60-concara-belp",
+      "fr": "collaborateur-trice-administration-60-concara-domicil-spitex-bern-belp"
+    },
+    "sector": "Sanità / Ospedali",
+    "expiredAt": "2026-08-29T23:42:02.481Z",
+    "previousSlugs": [
+      "mitarbeiter-in-administration-60-concara-belp",
+      "collaboratore-trice-administration-60-concara-domicil-spitex-bern-belp"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "mitarbeiter-in-administration-60-concara-belp",
+        "collaboratore-trice-administration-60-concara-domicil-spitex-bern-belp"
+      ],
+      "en": [
+        "mitarbeiter-in-administration-60-concara-belp"
+      ],
+      "fr": [
+        "mitarbeiter-in-administration-60-concara-belp"
+      ]
+    },
+    "postalCode": "3123",
+    "streetAddress": "Eichenweg 17, 3123 Belp",
+    "salaryMin": 41100,
+    "salaryMax": 62400,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
