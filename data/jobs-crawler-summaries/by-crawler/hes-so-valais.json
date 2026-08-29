@@ -1,17 +1,18 @@
 {
   "key": "hes-so-valais",
   "label": "HES-SO Valais-Wallis",
-  "generatedAt": "2026-08-29T03:18:57.081Z",
+  "generatedAt": "2026-08-29T14:28:11.480Z",
   "total": 3,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4783,
-  "avgDurationMs": 4783,
+  "durationMs": 4367,
+  "avgDurationMs": 4367,
   "durationHistory": [
     4463,
-    4783
+    4783,
+    4367
   ],
   "newJobs": [],
   "updatedJobs": [],
