@@ -1,16 +1,17 @@
 {
   "key": "guess-europe",
   "label": "Guess Europe Sagl",
-  "generatedAt": "2026-08-28T21:05:52.790Z",
+  "generatedAt": "2026-08-29T03:28:57.748Z",
   "total": 13,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 13,
-  "durationMs": 3184,
-  "avgDurationMs": 3184,
+  "durationMs": 2240,
+  "avgDurationMs": 2240,
   "durationHistory": [
-    3184
+    3184,
+    2240
   ],
   "newJobs": [],
   "updatedJobs": [],
