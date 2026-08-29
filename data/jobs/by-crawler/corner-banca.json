@@ -1,6 +1,6 @@
 {
   "crawlerKey": "corner-banca",
-  "assembledAt": "2026-08-29T14:55:33.395Z",
+  "assembledAt": "2026-08-29T15:29:44.113Z",
   "jobs": [
     {
       "id": "corner-banca-62309aa78f00",
@@ -74,7 +74,7 @@
       "url": "https://jobs.corner.ch/o/employee-collection-team-zurich-ref-1068",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.986Z",
+      "crawledAt": "2026-08-29T15:29:41.394Z",
       "previousSlugs": [
         "employee-collection-team-zurich-ref-1068-corner-banca-wallisellen",
         "team-recupero-dipendenti-di-zurigo-corner-banca-wallisellen"
@@ -174,7 +174,7 @@
       "url": "https://jobs.corner.ch/o/legal-collection-case-manager-ref-1095",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.986Z",
+      "crawledAt": "2026-08-29T15:29:41.393Z",
       "previousSlugs": [
         "gestionnaire-de-dossier-de-recouvrement-juridique-corner-banca-wallisellen",
         "fallmanager-fur-rechtssammlung-corner-banca-wallisellen",
@@ -279,7 +279,7 @@
       "url": "https://jobs.corner.ch/o/risk-manager-asset-liability-management-alm-and-liquidity-risk-ref-1086",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.987Z",
+      "crawledAt": "2026-08-29T15:29:41.395Z",
       "previousSlugsByLocale": {
         "it": [
           "risk-manager-asset-liability-management-alm-and-liquidity-risk-ref-1086-corner-banca-lugano",
@@ -379,7 +379,7 @@
       "url": "https://jobs.corner.ch/o/unsolicited-application-apprenticeship",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.987Z",
+      "crawledAt": "2026-08-29T15:29:41.396Z",
       "previousSlugs": [
         "initiativbewerbung-lehre-corner-banca-switzerland"
       ],
@@ -474,7 +474,7 @@
       "url": "https://jobs.corner.ch/o/fi-administration-business-support-ref-1116",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.985Z",
+      "crawledAt": "2026-08-29T15:29:41.391Z",
       "previousSlugs": [
         "fi-administration-e-business-support-2-corner-banca-lugano"
       ],
@@ -568,7 +568,7 @@
       "url": "https://jobs.corner.ch/o/information-security-specialist-ref-1108",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.986Z",
+      "crawledAt": "2026-08-29T15:29:41.392Z",
       "previousSlugs": [
         "information-security-specialist-ref-1108-corner-banca-lugano"
       ],
@@ -661,7 +661,7 @@
       "url": "https://jobs.corner.ch/o/employee-backoffice-ref-1110",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.984Z",
+      "crawledAt": "2026-08-29T15:29:41.390Z",
       "previousSlugs": [
         "employee-backoffice-ref-1110-corner-banca-lugano"
       ],
@@ -753,7 +753,7 @@
       "url": "https://jobs.corner.ch/o/employee-consumer-dispute-management-ref-1103",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.985Z",
+      "crawledAt": "2026-08-29T15:29:41.390Z",
       "previousSlugs": [
         "employee-consumer-dispute-management-ref-1103-corner-banca-wallisellen"
       ],
@@ -857,7 +857,7 @@
       "url": "https://jobs.corner.ch/o/senior-devops-engineer-ref-1114",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:55:30.983Z",
+      "crawledAt": "2026-08-29T15:29:41.388Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-19T21:44:21.463Z",
       "salaryMin": 79500,
@@ -942,7 +942,7 @@
       "url": "https://jobs.corner.ch/o/employee-underwriting-e-cash-ref-1113",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.983Z",
+      "crawledAt": "2026-08-29T15:29:41.389Z",
       "previousSlugs": [
         "employee-underwriting-e-cash-ref-1113-corner-banca-lugano"
       ],
@@ -1037,7 +1037,7 @@
       "url": "https://jobs.corner.ch/o/senior-compliance-officer-ref-1111",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.982Z",
+      "crawledAt": "2026-08-29T15:29:41.387Z",
       "previousSlugsByLocale": {
         "it": [
           "senior-compliance-officer-ref-1111-corner-banca-lugano"
@@ -1132,7 +1132,7 @@
       "url": "https://jobs.corner.ch/o/tax-consultant-private-banking-ref-1117",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.981Z",
+      "crawledAt": "2026-08-29T15:29:41.386Z",
       "previousSlugs": [
         "tax-consultant-private-banking-ref-1117-corner-banca-lugano"
       ],
@@ -1213,7 +1213,7 @@
       "url": "https://jobs.corner.ch/o/customer-retention-growth-ref-1118",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.979Z",
+      "crawledAt": "2026-08-29T15:29:41.381Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-27T20:12:11.446Z",
       "salaryMin": 59000,
@@ -1299,7 +1299,7 @@
       "url": "https://jobs.corner.ch/o/online-campaign-manager-ref-1102",
       "source": "Corner Dedicated Parser (Recruitee API)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:55:30.978Z",
+      "crawledAt": "2026-08-29T15:29:41.379Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-25T21:51:32.218Z",
       "salaryMin": 68000,
