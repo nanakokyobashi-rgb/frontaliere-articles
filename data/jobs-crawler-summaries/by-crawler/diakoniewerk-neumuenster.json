@@ -1,7 +1,7 @@
 {
   "key": "diakoniewerk-neumuenster",
   "label": "Diakoniewerk Neumünster (Gesundheitswelt Zollikerberg)",
-  "generatedAt": "2026-08-29T03:39:07.136Z",
+  "generatedAt": "2026-08-29T15:05:34.506Z",
   "total": 6,
   "discovered": null,
   "written": 6,
@@ -9,12 +9,13 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 32280,
-  "avgDurationMs": 32280,
+  "durationMs": 39114,
+  "avgDurationMs": 39114,
   "durationHistory": [
     35958,
     35780,
-    32280
+    32280,
+    39114
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://stiftdia.pi-asp.de/bewerber-web?company=1-FIRMA-ID&tenant=&lang=DS#position,id=a6b81d1d-fead-4d6d-a3fc-7889cc22f1b1,jobportalid=7d51b858-e466-400d-8696-5e01d3b26140",
       "source": "Diakoniewerk Neumünster (Gesundheitswelt Zollikerberg) Dedicated Parser (Custom HTML listing + PI-ASP Playwright detail)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:39:04.700Z",
+      "crawledAt": "2026-08-29T15:05:30.895Z",
       "addressLocality": "Zollikerberg",
       "addressRegion": "ZH",
       "addressCountry": "CH",
