@@ -1,7 +1,7 @@
 {
   "key": "scandit",
   "label": "Scandit AG",
-  "generatedAt": "2026-08-29T15:27:49.665Z",
+  "generatedAt": "2026-08-29T23:29:59.743Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,15 +9,16 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5936,
-  "avgDurationMs": 5936,
+  "durationMs": 5820,
+  "avgDurationMs": 5820,
   "durationHistory": [
     5130,
     18952,
     6288,
     6378,
     7863,
-    5936
+    5936,
+    5820
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -33,7 +34,7 @@
       "url": "https://www.scandit.com/careers/job-description/?gh_jid=8093936",
       "source": "Scandit AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T15:27:44.449Z",
+      "crawledAt": "2026-08-29T23:29:54.615Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
@@ -68,7 +69,7 @@
       "url": "https://www.scandit.com/careers/job-description/?gh_jid=7588975",
       "source": "Scandit AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T15:27:44.132Z",
+      "crawledAt": "2026-08-29T23:29:54.304Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "country": "CH",
