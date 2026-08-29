@@ -1,19 +1,22 @@
 {
   "key": "spital-thusis",
   "label": "Spital Thusis",
-  "generatedAt": "2026-08-29T14:52:38.645Z",
+  "generatedAt": "2026-08-29T15:28:03.172Z",
   "total": 0,
   "discovered": null,
   "written": 0,
   "newCount": 0,
-  "updatedCount": 0,
+  "updatedCount": 20,
   "removedCount": 0,
   "unchangedCount": 1,
+  "durationMs": 19403,
+  "avgDurationMs": 19403,
   "durationHistory": [
     17707,
     18939,
     16902,
-    17988
+    17988,
+    19403
   ],
   "newJobs": [],
   "updatedJobs": [],
