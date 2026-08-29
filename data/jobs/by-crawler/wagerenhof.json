@@ -1,6 +1,6 @@
 {
   "crawlerKey": "wagerenhof",
-  "assembledAt": "2026-08-29T15:13:20.812Z",
+  "assembledAt": "2026-08-29T23:19:16.156Z",
   "jobs": [
     {
       "id": "wagerenhof-e5f225fce6d0",
@@ -34,7 +34,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-535&cHash=35a4cedfc1091d73415c31e6ac0d32d9",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:13:15.486Z",
+      "crawledAt": "2026-08-29T23:19:10.986Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -123,7 +123,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-511&cHash=f2e20edb1dd6f065f8c6e62248937788",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:13:14.534Z",
+      "crawledAt": "2026-08-29T23:19:09.969Z",
       "addressLocality": "Bauma",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -196,7 +196,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-551&cHash=4458144a462cefca76622c06d8d05fff",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:13:13.608Z",
+      "crawledAt": "2026-08-29T23:19:08.996Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -227,7 +227,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:13:13.608Z"
+      "firstSeenAt": "2026-08-29T23:19:08.996Z"
     },
     {
       "id": "wagerenhof-2981c897a451",
@@ -261,7 +261,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-550&cHash=d66bc7918061a2740738e83f1ffe1f0f",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:13:12.808Z",
+      "crawledAt": "2026-08-29T23:19:07.996Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -292,7 +292,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:13:12.808Z"
+      "firstSeenAt": "2026-08-29T23:19:07.996Z"
     },
     {
       "id": "wagerenhof-e6df1f3c792b",
@@ -326,7 +326,7 @@
       "url": "https://www.wagerenhof.ch/wagerenhof/arbeiten-beim-wagerenhof/offene-stellen/vacancy-details?reference=2026-544&cHash=b0621d763eca6fa19183259e3a65d94d",
       "source": "Wagerenhof Dedicated Parser (TYPO3 HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T15:13:11.968Z",
+      "crawledAt": "2026-08-29T23:19:07.011Z",
       "addressLocality": "Uster",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -368,7 +368,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T15:13:11.968Z"
+      "firstSeenAt": "2026-08-29T23:19:07.011Z"
     },
     {
       "id": "wagerenhof-620c7177f6d2",
