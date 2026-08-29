@@ -1,17 +1,18 @@
 {
   "key": "lombardi-group",
   "label": "Lombardi Group",
-  "generatedAt": "2026-08-29T03:39:23.936Z",
+  "generatedAt": "2026-08-29T23:21:17.753Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 8,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 15035,
-  "avgDurationMs": 15035,
+  "durationMs": 16638,
+  "avgDurationMs": 16638,
   "durationHistory": [
     15353,
-    15035
+    15035,
+    16638
   ],
   "newJobs": [],
   "updatedJobs": [
