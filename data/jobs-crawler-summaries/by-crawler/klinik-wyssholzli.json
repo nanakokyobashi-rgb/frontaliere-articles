@@ -1,16 +1,17 @@
 {
   "key": "klinik-wyssholzli",
   "label": "Klinik Wysshölzli",
-  "generatedAt": "2026-08-28T21:29:39.224Z",
+  "generatedAt": "2026-08-29T04:05:30.830Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 7,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 5131,
-  "avgDurationMs": 5131,
+  "durationMs": 5200,
+  "avgDurationMs": 5200,
   "durationHistory": [
-    5131
+    5131,
+    5200
   ],
   "newJobs": [],
   "updatedJobs": [
