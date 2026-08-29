@@ -1,6 +1,6 @@
 {
   "crawlerKey": "accor",
-  "assembledAt": "2026-08-29T04:04:52.081Z",
+  "assembledAt": "2026-08-29T15:02:06.663Z",
   "jobs": [
     {
       "id": "accor-1c6744df6976",
@@ -1298,7 +1298,7 @@
       "url": "https://careers.accor.com/fr/fr/job/director-of-marketing-and-communications-in-fairmont-orchid-hawaii-kohala-coast-united-states-jid-102027",
       "source": "Ibis Budget Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:04:46.379Z",
+      "crawledAt": "2026-08-29T15:02:02.940Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -1329,7 +1329,190 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T04:04:46.379Z"
+      "firstSeenAt": "2026-08-29T15:02:02.940Z"
+    },
+    {
+      "id": "accor-6f3e1c05535f",
+      "slug": "general-maintenance-technician-ac-technician-accor-ch",
+      "slugByLocale": {
+        "de": "general-maintenance-technician-ac-technician-accor-ch",
+        "it": "general-maintenance-technician-ac-technician-accor-ch",
+        "en": "general-maintenance-technician-ac-technician-ibis-budget-lugano",
+        "fr": "general-maintenance-technician-ac-technician-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "General Maintenance Technician (AC Technician)",
+      "titleByLocale": {
+        "de": "General Maintenance Techniker (AC Techniker)",
+        "en": "General Maintenance Technician (AC Technician)",
+        "it": "General Maintenance Technician (AC Technician)",
+        "fr": "General Maintenance Technicien (AC Technicien)"
+      },
+      "description": "General Maintenance Technician (AC Technician) — Ibis Budget",
+      "descriptionByLocale": {
+        "de": "General Maintenance Technician (AC Technician) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/general-maintenance-technician-ac-technician-in-grand-mercure-ahmedabad-gift-city-gandhinagar-indi-jid-94052",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T15:02:02.632Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Tecnica",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/general-maintenance-technician-ac-technician-in-grand-mercure-ahmedabad-gift-city-gandhinagar-indi-jid-94052",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 58000,
+      "salaryMax": 88000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 58000,
+          "maxValue": 88000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T15:02:02.632Z"
+    },
+    {
+      "id": "accor-31e5a836186a",
+      "slug": "night-team-member-multi-skilled-accor-ch",
+      "slugByLocale": {
+        "de": "night-team-member-multi-skilled-accor-ch",
+        "it": "night-team-member-multi-skilled-accor-ch",
+        "en": "night-team-member-multi-skilled-accor-ch",
+        "fr": "night-team-member-multi-skilled-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Night team member - Multi Skilled",
+      "titleByLocale": {
+        "de": "Night team member - Multi Skilled",
+        "it": "Night team member - Multi Skilled",
+        "en": "Night team member - Multi Skilled",
+        "fr": "Night team member - Multi Skilled"
+      },
+      "description": "Night team member - Multi Skilled — Ibis Budget",
+      "descriptionByLocale": {
+        "de": "Night team member - Multi Skilled — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/night-team-member-multi-skilled-in-novotel-liverpool-centre-liverpool-united-kingdom-jid-108108",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-29T15:02:01.720Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/night-team-member-multi-skilled-in-novotel-liverpool-centre-liverpool-united-kingdom-jid-108108",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T15:02:01.720Z"
+    },
+    {
+      "id": "accor-d51b4f6028c4",
+      "slug": "associate-director-of-sales-accor-ch",
+      "slugByLocale": {
+        "fr": "associate-director-of-sales-accor-ch",
+        "it": "associate-director-of-sales-accor-ch",
+        "en": "associate-director-of-sales-ibis-budget-lugano",
+        "de": "associate-director-of-sales-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Associate Director of Sales",
+      "titleByLocale": {
+        "fr": "Associate Directeur of Sales",
+        "en": "Associate Director of Sales",
+        "it": "Associate Direttore of Sales",
+        "de": "Associate Direktor of Sales"
+      },
+      "description": "Associate Director of Sales — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Associate Director of Sales — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/associate-director-of-sales-in-novotel-new-delhi-city-centre-new-delhi-india-jid-108113",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-29T15:02:00.176Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Commerciale",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-29",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/associate-director-of-sales-in-novotel-new-delhi-city-centre-new-delhi-india-jid-108113",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 82500,
+      "salaryMax": 127000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 82500,
+          "maxValue": 127000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-29T15:02:00.176Z"
     }
   ]
 }
