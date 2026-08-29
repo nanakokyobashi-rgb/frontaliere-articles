@@ -1,6 +1,6 @@
 {
   "crawlerKey": "stgag",
-  "assembledAt": "2026-08-28T21:01:42.652Z",
+  "assembledAt": "2026-08-29T03:20:33.043Z",
   "jobs": [
     {
       "id": "stgag-8ed4c0737eb7",
@@ -262,7 +262,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3773/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:38.980Z",
+      "crawledAt": "2026-08-29T03:20:30.352Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -336,7 +336,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3766/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:38.032Z",
+      "crawledAt": "2026-08-29T03:20:29.368Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -422,7 +422,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3775/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:37.087Z",
+      "crawledAt": "2026-08-29T03:20:28.329Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -485,7 +485,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3779/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:36.143Z",
+      "crawledAt": "2026-08-29T03:20:27.367Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -561,13 +561,12 @@
         "de": "Für unser chirurgisch/orthopädisches Pflegeteam suchen wir ab Oktober oder nach Vereinbarung eine/n Fachmann/-frau Gesundheit für Chirurgie/Orthopädie im Stundenlohn bei uns im Pool. Dipl. Pflegefachmann/-frau im Pool 20-100% Suchst du ein Arbeitsumfeld, das mehr ist als nur ein Ort des täglichen Wirkens? Bei uns erlebst du ein inspirierendes Arbeitsklima. Unsere Unternehmenskultur zeichnet sich durch Zusammenhalt, Respekt und Wertschätzung aus. Du übernimmst Ausführung einer professionellen Pflege und Betreuung unserer Patientinnen und Patienten und deren Angehörigen\n\nVerantwortungsübernahme im Bereich Administration, Office und Hauswirtschaft\n\nZiel- und lösungsorientiertes Arbeiten im interdisziplinären Behandlungsteam\n\nAnleitung und Begleitung von Lernenden und neuen Mitarbeitern\n\nAbgeschlossene Berufsausbildung als Pflegefachperson HF / FH\n\nIdealerweise mehrjährige praktische Erfahrung in der Pflege in einem chirurgischen und/oder orthopädischen Fachbereich\n\nErfahrung in einem Schweizer Akutspital\n\nKreativität, Initiative und Belastbarkeit\n\n• Bereich: Pflege (inkl. Hebamme)\n• Art: Teilzeit, Vollzeit möglich\n• Befristung: Unbefristet",
         "fr": "Pour notre équipe de soins chirurgicaux/orthopédiques, nous recherchons un spécialiste en chirurgie/orthopédie dans notre piscine à partir d'octobre ou sur rendez-vous. Soins professionnels dans la piscine 20-100% Vous recherchez un environnement de travail qui est plus qu'un simple lieu de travail quotidien? Avec nous, vous vivez une atmosphère de travail inspirante. Notre culture d'entreprise se caractérise par la cohésion, le respect et l'appréciation. Vous prenez soin de nos patients et de leurs proches professionnellement\n\nAssomption de responsabilité dans les domaines de l'administration, du bureau et de l'entretien ménager\n\nTravail axé sur les objectifs et les solutions dans l'équipe de traitement interdisciplinaire\n\nOrientation et orientation pour les apprenants et les nouveaux employés\n\nFormation professionnelle complétée comme infirmière HF / FH\n\nIdéalement, plusieurs années d'expérience pratique en soins dans une spécialité chirurgicale et/ou orthopédique\n\nExpérience dans un hôpital suisse aigu\n\nCréativité, initiative et résilience\n\n• Zone: soins (y compris la sage-femme)\n• Type: Temps partiel, temps plein possible\n• Terme temporaire : perpétuel"
       },
-      "needsRetranslation": true,
       "location": "Münsterlingen",
       "canton": "TG",
       "url": "https://rekrutierung.stgag.ch/Vacancies/3776/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:35.201Z",
+      "crawledAt": "2026-08-29T03:20:26.392Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -584,11 +583,6 @@
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/3776/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "dipl-pflegefachmann-frau-im-pool-stgag-munsterlingen",
-        "dipl-pflegefachmann-frau-im-pool-stgag-ch",
-        "dipl-pflegefachmann-frau-im-pool-spital-thurgau-stgag-kantonsspital-munsterlingen"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "dipl-pflegefachmann-frau-im-pool-stgag-munsterlingen",
@@ -605,7 +599,11 @@
           "dipl-pflegefachmann-frau-im-pool-stgag-ch"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:24:18.760Z",
+      "previousSlugs": [
+        "dipl-pflegefachmann-frau-im-pool-stgag-munsterlingen",
+        "dipl-pflegefachmann-frau-im-pool-stgag-ch",
+        "dipl-pflegefachmann-frau-im-pool-spital-thurgau-stgag-kantonsspital-munsterlingen"
+      ],
       "salaryMin": 81500,
       "salaryMax": 114000,
       "baseSalary": {
@@ -617,7 +615,9 @@
           "maxValue": 114000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:24:18.760Z",
+      "needsRetranslation": true
     },
     {
       "id": "stgag-69c86a92d5a3",
@@ -651,7 +651,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/1500/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:34.230Z",
+      "crawledAt": "2026-08-29T03:20:25.432Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -668,11 +668,6 @@
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/1500/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "assistenzarzte-innen-psychiatrie-und-psychotherapie-stgag-munsterlingen",
-        "assistant-doctors-psychiatry-and-psychotherapy-spital-thurgau-stgag-munsterlingen-22a717",
-        "assistenzarzte-innen-psychiatrie-und-psychotherapie-spital-thurgau-stgag-munsterlingen"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "assistenzarzte-innen-psychiatrie-und-psychotherapie-stgag-munsterlingen"
@@ -685,7 +680,11 @@
           "assistenzarzte-innen-psychiatrie-und-psychotherapie-stgag-munsterlingen"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:24:17.789Z",
+      "previousSlugs": [
+        "assistenzarzte-innen-psychiatrie-und-psychotherapie-stgag-munsterlingen",
+        "assistant-doctors-psychiatry-and-psychotherapy-spital-thurgau-stgag-munsterlingen-22a717",
+        "assistenzarzte-innen-psychiatrie-und-psychotherapie-spital-thurgau-stgag-munsterlingen"
+      ],
       "salaryMin": 81500,
       "salaryMax": 114000,
       "baseSalary": {
@@ -697,7 +696,8 @@
           "maxValue": 114000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:24:17.789Z"
     },
     {
       "id": "stgag-9602659c37b0",
@@ -731,7 +731,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/1536/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:33.284Z",
+      "crawledAt": "2026-08-29T03:20:24.477Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -748,11 +748,6 @@
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/1536/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {},
-      "previousSlugs": [
-        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und",
-        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und-psychotherapie-spital-thurgau-stgag-munsterlingen",
-        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und-psychothera"
-      ],
       "previousSlugsByLocale": {
         "it": [
           "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und",
@@ -762,7 +757,11 @@
           "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und-psychotherapie-spital-thurgau-stgag-munsterlingen"
         ]
       },
-      "firstSeenAt": "2026-08-28T05:24:16.790Z",
+      "previousSlugs": [
+        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und",
+        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und-psychotherapie-spital-thurgau-stgag-munsterlingen",
+        "assistenzarzt-arztin-in-facharztweiterbildung-kinder-und-jugendpsychiatrie-und-psychothera"
+      ],
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -774,7 +773,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:24:16.790Z"
     },
     {
       "id": "stgag-3f93cd956fad",
@@ -1151,7 +1151,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3772/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:32.352Z",
+      "crawledAt": "2026-08-29T03:20:23.506Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -1164,7 +1164,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/3772/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {
@@ -1193,7 +1193,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:01:32.352Z"
+      "firstSeenAt": "2026-08-29T03:20:23.506Z"
     },
     {
       "id": "stgag-11e00cff4595",
@@ -1227,7 +1227,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3024/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:31.381Z",
+      "crawledAt": "2026-08-29T03:20:22.511Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -1240,7 +1240,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/3024/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {
@@ -1269,7 +1269,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:01:31.381Z"
+      "firstSeenAt": "2026-08-29T03:20:22.511Z"
     },
     {
       "id": "stgag-75e3736b8a8f",
@@ -1303,7 +1303,7 @@
       "url": "https://rekrutierung.stgag.ch/Vacancies/3783/Description/1",
       "source": "Spital Thurgau (STGAG) Dedicated Parser (Umantis listing @ rekrutierung.stgag.ch)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T21:01:30.346Z",
+      "crawledAt": "2026-08-29T03:20:21.441Z",
       "addressLocality": "Münsterlingen",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -1316,7 +1316,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://rekrutierung.stgag.ch/Vacancies/3783/Application/CheckLogin/1",
       "requirements": [],
       "requirementsByLocale": {
@@ -1345,7 +1345,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T21:01:30.346Z"
+      "firstSeenAt": "2026-08-29T03:20:21.441Z"
     }
   ]
 }
