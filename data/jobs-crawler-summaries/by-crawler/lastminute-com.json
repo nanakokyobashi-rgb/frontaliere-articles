@@ -1,17 +1,18 @@
 {
   "key": "lastminute-com",
   "label": "lastminute.com",
-  "generatedAt": "2026-08-29T03:43:48.181Z",
+  "generatedAt": "2026-08-29T14:53:09.054Z",
   "total": 1,
   "newCount": 1,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 23729,
-  "avgDurationMs": 23729,
+  "durationMs": 23289,
+  "avgDurationMs": 23289,
   "durationHistory": [
     20622,
-    23729
+    23729,
+    23289
   ],
   "newJobs": [
     {
