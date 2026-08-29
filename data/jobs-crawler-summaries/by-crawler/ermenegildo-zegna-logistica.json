@@ -1,18 +1,19 @@
 {
   "key": "ermenegildo-zegna-logistica",
   "label": "Zegna",
-  "generatedAt": "2026-08-29T14:33:11.790Z",
+  "generatedAt": "2026-08-29T23:32:33.513Z",
   "total": 4,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 4,
-  "durationMs": 10063,
-  "avgDurationMs": 10063,
+  "durationMs": 9274,
+  "avgDurationMs": 9274,
   "durationHistory": [
     10962,
     10265,
-    10063
+    10063,
+    9274
   ],
   "newJobs": [],
   "updatedJobs": [],
