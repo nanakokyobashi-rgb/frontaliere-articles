@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ffs-officine-ferrovie-federali",
-  "assembledAt": "2026-08-29T15:25:19.356Z",
+  "assembledAt": "2026-08-29T23:29:19.995Z",
   "jobs": [
     {
       "id": "sbb-f8101238f23f",
@@ -72,7 +72,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/unterhaltsfachmann-frau-von-gleisanlagen/8966ef70-b3b8-4700-9dc9-70daf86850a1",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:13:51.924Z",
+      "crawledAt": "2026-08-29T23:19:50.951Z",
       "previousSlugsByLocale": {
         "it": [
           "unterhaltsfachmann-frau-von-gleisanlagen-ffs-officine-ferrovie-federali-sarnen"
@@ -158,7 +158,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-de-la-gestion-des-donnees-de-base-des-materiaux-h-f-d/a74ccce9-ee82-4948-9bb8-82825cbbf9c4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:34.441Z",
+      "crawledAt": "2026-08-29T23:20:10.963Z",
       "previousSlugsByLocale": {
         "it": [
           "responsable-de-la-gestion-des-donnees-de-base-des-materiaux-h-f-d-ffs-officine-ferrovie-federali-berne"
@@ -252,7 +252,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-datenmanagement-transport/084cde14-dcd4-4f8e-9bf8-37612c09d09a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:40.736Z",
+      "crawledAt": "2026-08-29T23:20:16.559Z",
       "previousSlugsByLocale": {
         "it": [
           "leiter-in-datenmanagement-e-transport-ffs-officine-ferrovie-federali-bern",
@@ -358,7 +358,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d/7b22fee5-73c5-4f0f-9e4f-822b3380ff6a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:33.340Z",
+      "crawledAt": "2026-08-29T23:20:12.235Z",
       "previousSlugsByLocale": {
         "it": [
           "specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d-ffs-officine-ferrovie-federali-renens-vd"
@@ -448,7 +448,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-spezialist-in-bahnrettung/ff0ec9a0-7c1e-40cd-846b-d0e4887f9750",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:43.645Z",
+      "crawledAt": "2026-08-29T23:20:12.502Z",
       "previousSlugsByLocale": {
         "it": [
           "quereinstieg-spezialist-in-bahnrettung-ffs-officine-ferrovie-federali-brig-glis",
@@ -537,7 +537,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-geschaeftssteuerung/66f58d54-b178-4be8-9012-ae59726a7978",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:55.604Z",
+      "crawledAt": "2026-08-29T23:20:36.588Z",
       "previousSlugsByLocale": {
         "it": [
           "projektleiter-in-geschaftssteuerung-ffs-officine-ferrovie-federali-bern"
@@ -640,7 +640,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/teamleiter-in-cleaning/d1fa0fc5-3110-4585-b336-8d7b9255775f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:37.946Z",
+      "crawledAt": "2026-08-29T23:20:27.920Z",
       "previousSlugsByLocale": {
         "it": [
           "teamleiter-in-cleaning-ffs-officine-ferrovie-federali-olten"
@@ -706,7 +706,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/key-account-manager-m-w-d/1d08e34c-d6ae-4406-abed-b5e39ed165eb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:18.478Z",
+      "crawledAt": "2026-08-29T23:20:59.304Z",
       "previousSlugsByLocale": {
         "it": [
           "key-account-manager-m-w-d-ffs-officine-ferrovie-federali-basel-direkt-beim-bahnhof-sbb",
@@ -823,7 +823,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/4ef6ab03-a62b-46fe-881a-0c56f872ab5a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:53.698Z",
+      "crawledAt": "2026-08-29T23:20:49.409Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-romanshorn"
       ],
@@ -913,7 +913,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/01d41364-2b82-48cd-9f43-2c5b234d8f07",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:57.680Z",
+      "crawledAt": "2026-08-29T23:21:00.806Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-rapperswil-sg",
         "ingresso-trasversale-macchinista-in-manovra-ffs-officine-ferrovie-federali-rapperswil-sg"
@@ -1001,7 +1001,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-de-la-planification-et-du-pilotage-des-materiaux-h-f-d/7a6c84a2-e7b0-4c6f-840f-0a48bc18dd58",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:14.049Z",
+      "crawledAt": "2026-08-29T23:21:08.355Z",
       "previousSlugs": [
         "responsable-de-la-planification-et-du-pilotage-des-materiaux-h-f-d-ffs-officine-ferrovie-federali-berne",
         "responsabile-jobcenter-m-f-d-ffs-officine-ferrovie-federali-berne",
@@ -1106,7 +1106,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-materialplanung-steuerung/7a67a4fa-def1-4e26-85a3-ac9088b5650a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:19.881Z",
+      "crawledAt": "2026-08-29T23:21:08.072Z",
       "previousSlugs": [
         "leiter-in-materialplanung-e-steuerung-ffs-officine-ferrovie-federali-bern"
       ],
@@ -1193,7 +1193,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-pianificazione-e-controllo-materiali-m-f-d/964c9106-f1b6-4c15-bb20-4c8fbe5f6716",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:38.134Z",
+      "crawledAt": "2026-08-29T23:21:15.637Z",
       "previousSlugs": [
         "responsabile-jobcenter-m-f-d-ffs-officine-ferrovie-federali-berna",
         "jobcenter-manager-m-f-d-ffs-officine-ferrovie-federali-berna",
@@ -1285,7 +1285,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/product-architect-microsoft-365-m-w-d/13ac9640-3062-4651-92bd-9765c9bc9b0e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:33.114Z",
+      "crawledAt": "2026-08-29T23:21:31.969Z",
       "previousSlugs": [
         "product-architect-microsoft-365-m-w-d-ffs-officine-ferrovie-federali-bern"
       ],
@@ -1372,7 +1372,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-kundenbegleiter-in-fuer-frequenzerfassung/06de6ad8-705c-4132-ada4-c527d97632ae",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:35.588Z",
+      "crawledAt": "2026-08-29T23:21:17.455Z",
       "previousSlugsByLocale": {
         "it": [
           "quereinstieg-kundenbegleiter-in-fur-frequenzerfassung-ffs-officine-ferrovie-federali-luzern"
@@ -1444,7 +1444,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/sap-enterprise-architect-m-w-d/18da5669-477a-4832-85ba-8f0c7f7cb277",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:05.791Z",
+      "crawledAt": "2026-08-29T23:22:04.891Z",
       "previousSlugs": [
         "sap-enterprise-architect-m-w-d-ffs-officine-ferrovie-federali-bern"
       ],
@@ -1530,7 +1530,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/contremaitre-voies-ferrees-h-f-d/416cd994-fa4c-43ca-9293-c1359b5b6d26",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:35.337Z",
+      "crawledAt": "2026-08-29T23:20:32.539Z",
       "previousSlugs": [
         "contremaitre-voies-ferrees-h-f-d-ffs-officine-ferrovie-federali-allaman",
         "contremaitre-voies-ferrees-f-m-d-ffs-officine-ferrovie-federali-allaman",
@@ -1638,7 +1638,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-ingenieurbau/f32505cf-e72f-43df-b289-67f6c7cc0bfb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:58.391Z",
+      "crawledAt": "2026-08-29T23:20:52.329Z",
       "previousSlugs": [
         "projektleiter-in-ingenieurbau-ffs-officine-ferrovie-federali-arth-goldau-oder-erstfeld",
         "responsabile-di-progetto-in-ingegneria-ffs-officine-ferrovie-federali-arth-goldau-oder-erstfeld"
@@ -1730,7 +1730,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/electricienne-installations-de-securite-interieures-sai/68705d30-faa2-40cb-9311-2eb957fd59a3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:10.473Z",
+      "crawledAt": "2026-08-29T23:21:03.542Z",
       "previousSlugs": [
         "electricien-ne-installations-de-securite-interieures-sai-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -1816,7 +1816,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/disponent-in-personaleinsatz-fahrgastzaehlung/9be87cd2-c976-44a0-8b95-6b65703e1bab",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:45.350Z",
+      "crawledAt": "2026-08-29T23:21:24.033Z",
       "previousSlugs": [
         "disponent-in-personaleinsatz-fahrgastzahlung-ffs-officine-ferrovie-federali-bern",
         "responsabile-in-impiego-di-personale-conteggio-passeggeri-ffs-officine-ferrovie-federali-bern",
@@ -1919,7 +1919,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/technische-r-assistent-in-helpdesk/22e7fd36-651b-4c01-a136-ae1187342413",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:39.148Z",
+      "crawledAt": "2026-08-29T23:21:19.208Z",
       "previousSlugsByLocale": {
         "it": [
           "technische-r-assistent-in-helpdesk-ffs-officine-ferrovie-federali-bern"
@@ -2005,7 +2005,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-bauingenieurwesen/e8862e33-3ae1-488d-9b0c-523e40012cb6",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:55.053Z",
+      "crawledAt": "2026-08-29T23:21:32.151Z",
       "previousSlugs": [
         "projektleiter-in-bauingenieurwesen-ffs-officine-ferrovie-federali-olten"
       ],
@@ -2091,7 +2091,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/strategische-r-einkaeufer-in/50ee6764-1c0b-437d-9032-8467d4c34c49",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:57.462Z",
+      "crawledAt": "2026-08-29T23:21:32.425Z",
       "previousSlugs": [
         "strategische-r-einkaufer-in-ffs-officine-ferrovie-federali-bern"
       ],
@@ -2164,7 +2164,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/assistante-clientele-en-charge-du-releve-des-frequences-en-reconversion-professionnelle/9cffe872-001c-47d6-a862-9bc2c9dce1ab",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:00.305Z",
+      "crawledAt": "2026-08-29T23:21:31.582Z",
       "previousSlugs": [
         "assistant-e-clientele-en-charge-du-releve-des-frequences-en-reconversion-professionnelle-ffs-officine-ferrovie-federali-lausanne"
       ],
@@ -2258,7 +2258,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-feuerwehrmann-oder-feuerwehrfrau-und-lokfuehrer-in/e67d01c1-18ab-46fd-9816-dbad8ad77bd6",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:05.821Z",
+      "crawledAt": "2026-08-29T23:21:39.166Z",
       "previousSlugs": [
         "quereinstieg-feuerwehrmann-oder-feuerwehrfrau-und-lokfuhrer-in-ffs-officine-ferrovie-federali-rapperswil-sg",
         "accesso-incrociato-pompiere-o-vigile-del-fuoco-e-macchinista-in-ffs-officine-ferrovie-federali-rapperswil-sg"
@@ -2358,7 +2358,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-d-equipe-utilisation-acquisition-region-zurich-metropole/daf6881e-f0bf-4d19-a6ae-818d39e91f58",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:16.276Z",
+      "crawledAt": "2026-08-29T23:21:42.289Z",
       "previousSlugsByLocale": {
         "it": [
           "chef-fe-d-equipe-utilisation-e-acquisition-region-zurich-metropole-ffs-officine-ferrovie-federali-zurich-altstetten",
@@ -2462,7 +2462,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/teamleiter-in-nutzung-akquisition-grossraum-zuerich/1602362e-b2f0-42d5-9ecb-4ebdecf18f2e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:20.110Z",
+      "crawledAt": "2026-08-29T23:21:47.582Z",
       "previousSlugs": [
         "teamleiter-in-nutzung-e-akquisition-grossraum-zurich-ffs-officine-ferrovie-federali-zurich-altstetten"
       ],
@@ -2560,7 +2560,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/capo-a-team-utilizzo-e-acquisizione-area-metropolitana-di-zurigo/e71e5739-ad45-4de3-ae19-b06878698ede",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:26.657Z",
+      "crawledAt": "2026-08-29T23:21:48.110Z",
       "previousSlugsByLocale": {
         "en": [
           "head-of-team-utilization-and-acquisition-of-the-zurich-metropolitan-area-ffs-officine-ferrovie-federali-zurigo-altstetten"
@@ -2648,7 +2648,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-kurzfristplanung/1ae5f74b-454d-4c04-b77c-431a866ca4b9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:42.126Z",
+      "crawledAt": "2026-08-29T23:21:52.751Z",
       "previousSlugs": [
         "leiter-in-kurzfristplanung-ffs-officine-ferrovie-federali-olten"
       ],
@@ -2732,7 +2732,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-della-pianificazione-a-breve-termine-m-f-d/adcfde82-dc3f-41c8-b6b3-9e96c1225d00",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:43.136Z",
+      "crawledAt": "2026-08-29T23:22:31.757Z",
       "firstSeenAt": "2026-08-25T10:03:52.867Z",
       "salaryMin": 113000,
       "salaryMax": 192000,
@@ -2810,7 +2810,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/instandhalter-in-erdungsgeraete-und-erdungsstangen/54e21a2d-4e97-435b-a9d3-0eaf9bd283a9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:35.114Z",
+      "crawledAt": "2026-08-29T23:22:15.661Z",
       "previousSlugs": [
         "instandhalter-in-erdungsgerate-und-erdungsstangen-ffs-officine-ferrovie-federali-dulliken",
         "instandhalter-in-erdungsgerate-e-erdungsstangen-ffs-officine-ferrovie-federali-dulliken"
@@ -2898,7 +2898,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/verbundleiter-in-ostschweiz/a8398384-ae8c-4d2e-9b43-749238a29dfd",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:44.603Z",
+      "crawledAt": "2026-08-29T23:22:34.328Z",
       "previousSlugs": [
         "verbundleiter-in-ostschweiz-ffs-officine-ferrovie-federali-zurich-altstetten"
       ],
@@ -2971,7 +2971,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/system-engineer-m-w-d/90aafb96-0967-4833-8bd8-eaafaa654e57",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:09.258Z",
+      "crawledAt": "2026-08-29T23:22:40.946Z",
       "previousSlugs": [
         "system-engineer-m-w-d-ffs-officine-ferrovie-federali-bern",
         "ingegnere-civile-in-ingegneria-civile-ffs-officine-ferrovie-federali-bern",
@@ -3081,7 +3081,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-de-team-voies-ferrees/1dfb5ef0-ed8a-46f4-8d23-5cb0c13f08ff",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:47.183Z",
+      "crawledAt": "2026-08-29T23:22:34.365Z",
       "previousSlugs": [
         "chef-fe-de-team-voies-ferrees-ffs-officine-ferrovie-federali-renens-vd"
       ],
@@ -3175,7 +3175,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fachtechniker-in-instandhaltung/229d687f-8044-402f-981f-3917ac750ed9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:35.106Z",
+      "crawledAt": "2026-08-29T23:22:07.417Z",
       "previousSlugs": [
         "fachtechniker-in-instandhaltung-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -3269,7 +3269,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/technicienne-qualifiee-maintenance/7fcc9775-9528-41de-a5c6-fca18969bfb9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:38.651Z",
+      "crawledAt": "2026-08-29T23:22:13.420Z",
       "previousSlugs": [
         "technicien-ne-qualifie-e-maintenance-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -3357,7 +3357,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/mecanicienne-installations-de-securite-ferroviaires/ec9cb54f-08ec-457a-8644-53e513f72c36",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:39:53.134Z",
+      "crawledAt": "2026-08-29T23:22:34.306Z",
       "previousSlugs": [
         "mecanicien-ne-installations-de-securite-ferroviaires-ffs-officine-ferrovie-federali-delemont"
       ],
@@ -3429,7 +3429,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/sap-consultant-invoice-to-pay-m-w-d/69e449e1-ea2b-417e-9441-8ac173d517bf",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:49.870Z",
+      "crawledAt": "2026-08-29T23:22:43.223Z",
       "previousSlugs": [
         "sap-consultant-invoice-to-pay-m-w-d-ffs-officine-ferrovie-federali-bern",
         "consulente-di-controllo-l-f-d-ffs-officine-ferrovie-federali-bern"
@@ -3516,7 +3516,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/teamleiter-in-logistik/0c2a5f7b-55e4-4a0d-a9c0-081e2710a9d5",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:40:26.600Z",
+      "crawledAt": "2026-08-29T23:23:15.523Z",
       "previousSlugs": [
         "teamleiter-in-logistik-ffs-officine-ferrovie-federali-st-gallen"
       ],
@@ -3602,7 +3602,7 @@
       "postedDate": "2026-08-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-kundenbegleiter-in-fuer-frequenzerfassung/93b0aee8-2094-4a8c-bc27-6b819c420837",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:55.149Z",
+      "crawledAt": "2026-08-29T23:25:47.897Z",
       "previousSlugs": [
         "quereinstieg-kundenbegleiter-in-fur-frequenzerfassung-ffs-officine-ferrovie-federali-bern",
         "accesso-incrociato-assistente-cliente-per-il-rilevamento-delle-frequenze-03-27-ffs-officine-ferrovie-federali-zurich",
@@ -3692,7 +3692,7 @@
       "postedDate": "2026-08-21",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/product-manager-application-platform-m-w-d/11a7477e-7e47-452b-a4ff-e0c232ae7327",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:57.670Z",
+      "crawledAt": "2026-08-29T23:23:37.198Z",
       "previousSlugs": [
         "product-manager-application-platform-m-w-d-ffs-officine-ferrovie-federali-bern",
         "gestione-operativa-delle-applicazioni-m-f-d-ffs-officine-ferrovie-federali-bern",
@@ -3790,7 +3790,7 @@
       "postedDate": "2026-08-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/abteilungsleiter-in-entwicklung-bei-der-bahnsteuerung/71fe07e4-289e-4b29-b782-b5df81fa3600",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:50.262Z",
+      "crawledAt": "2026-08-29T23:22:46.718Z",
       "previousSlugs": [
         "abteilungsleiter-in-entwicklung-bei-der-bahnsteuerung-ffs-officine-ferrovie-federali-bern"
       ],
@@ -3876,7 +3876,7 @@
       "postedDate": "2026-08-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-d-unite-developpement-chez-gestion-ferroviaire/ccdbeba5-c965-4690-b51a-57e5524f41bb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:19.701Z",
+      "crawledAt": "2026-08-29T23:22:50.924Z",
       "previousSlugs": [
         "responsable-d-unite-developpement-chez-gestion-ferroviaire-ffs-officine-ferrovie-federali-bern"
       ],
@@ -3962,7 +3962,7 @@
       "postedDate": "2026-08-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-della-divisione-sviluppo-gestione-del-traffico-ferroviario/ccd22e28-993a-45b1-ae99-0aafccfb24b4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:40:25.666Z",
+      "crawledAt": "2026-08-29T23:23:10.450Z",
       "previousSlugsByLocale": {
         "it": [
           "responsabile-della-divisione-sviluppo-gestione-del-traffico-ferroviario-ffs-officine-ferrovie-federali-berna"
@@ -4059,7 +4059,7 @@
       "postedDate": "2026-08-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-d-equipe-voie-ferree/3a786780-ea93-4009-8d9a-726315237a47",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:40:27.313Z",
+      "crawledAt": "2026-08-29T23:23:09.054Z",
       "previousSlugs": [
         "chef-fe-d-equipe-voie-ferree-ffs-officine-ferrovie-federali-st-maurice"
       ],
@@ -4148,7 +4148,7 @@
       "postedDate": "2026-08-19",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/specialiste-de-la-manuvre-en-reconversion-professionnelle/da9f932d-0c5b-4f05-a361-47ddde094c95",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:15.017Z",
+      "crawledAt": "2026-08-29T23:23:01.810Z",
       "previousSlugs": [
         "specialiste-de-la-man-uvre-en-reconversion-professionnelle-ffs-officine-ferrovie-federali-denges"
       ],
@@ -4255,7 +4255,7 @@
       "postedDate": "2026-08-19",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/berufsbildner-in-gleisbau/4dafde96-0596-4220-8ca8-4ddc2abba070",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:21.865Z",
+      "crawledAt": "2026-08-29T23:23:16.478Z",
       "previousSlugs": [
         "berufsbildner-in-gleisbau-ffs-officine-ferrovie-federali-olten"
       ],
@@ -4361,7 +4361,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/zugbegleiter-in-quereinstieg/faeaeb76-a230-449b-8d83-ce21ab01675f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:08.134Z",
+      "crawledAt": "2026-08-29T23:23:47.809Z",
       "previousSlugs": [
         "zugbegleiter-in-quereinstieg-ffs-officine-ferrovie-federali-luzern"
       ],
@@ -4433,7 +4433,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-de-projet-genie-civil/2868633a-3364-4d9d-aa38-59659c9ae1b1",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:38.137Z",
+      "crawledAt": "2026-08-29T23:23:24.172Z",
       "previousSlugs": [
         "chef-fe-de-projet-genie-civil-ffs-officine-ferrovie-federali-renens-vd"
       ],
@@ -4504,7 +4504,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-planification-et-disposition-des-machines-de-chantiers-ferroviaires-h-f-d/c4db5e4d-02ee-488a-9b4d-1cf130327f94",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:39.312Z",
+      "crawledAt": "2026-08-29T23:23:25.967Z",
       "previousSlugs": [
         "responsable-planification-et-disposition-des-machines-de-chantiers-ferroviaires-h-f-d-ffs-officine-ferrovie-federali-berne-wankdorf"
       ],
@@ -4588,7 +4588,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-planung-und-disposition-gleisbaumaschinen/1f1a82f2-6f94-4f91-9f46-a078770772f5",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:47.236Z",
+      "crawledAt": "2026-08-29T23:23:30.829Z",
       "previousSlugs": [
         "leiter-in-planung-und-disposition-gleisbaumaschinen-ffs-officine-ferrovie-federali-bern-wankdorf"
       ],
@@ -4676,7 +4676,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-pianificazione-e-disposizione-macchine-per-la-posa-del-binario-m-f-d/b62cc731-5901-45eb-bd3d-f224f507bc09",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:56.888Z",
+      "crawledAt": "2026-08-29T23:23:34.168Z",
       "firstSeenAt": "2026-08-19T09:55:03.565Z",
       "salaryMin": 113000,
       "salaryMax": 192000,
@@ -4740,7 +4740,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/finance-business-partner-programmes-d-extension-h-f-d/7756eddb-07f8-4755-8081-2c4b066ae1e4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:54.094Z",
+      "crawledAt": "2026-08-29T23:23:34.059Z",
       "previousSlugs": [
         "finance-business-partner-programmes-d-extension-h-f-d-ffs-officine-ferrovie-federali-bern"
       ],
@@ -4829,7 +4829,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/finance-business-partner-ausbauprogramme-m-w-d/3125862a-2162-4dc9-a36c-dd5f8a76c94e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:01.398Z",
+      "crawledAt": "2026-08-29T23:23:39.728Z",
       "previousSlugs": [
         "finance-business-partner-ausbauprogramme-m-w-d-ffs-officine-ferrovie-federali-bern"
       ],
@@ -4899,7 +4899,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/techniker-in-fuer-elektro-und-telekommunikationsanlagen/1aa15280-2f71-4962-9449-b94d1e591976",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:04.576Z",
+      "crawledAt": "2026-08-29T23:23:42.184Z",
       "previousSlugs": [
         "techniker-in-fur-elektro-und-telekommunikationsanlagen-ffs-officine-ferrovie-federali-basel"
       ],
@@ -4970,7 +4970,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/anlagenverantwortliche-r-ingenieurbau/832551bc-5e98-481d-b9f1-38ca7c89e64a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:11.713Z",
+      "crawledAt": "2026-08-29T23:23:46.873Z",
       "previousSlugs": [
         "anlagenverantwortliche-r-ingenieurbau-ffs-officine-ferrovie-federali-olten"
       ],
@@ -5041,7 +5041,7 @@
       "postedDate": "2026-08-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-rayonmanagement-region-mitte/c030ed91-725f-4e10-b14f-4556d201b7ca",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:12.227Z",
+      "crawledAt": "2026-08-29T23:23:43.951Z",
       "previousSlugs": [
         "projektleiter-in-rayonmanagement-region-mitte-ffs-officine-ferrovie-federali-olten"
       ],
@@ -5125,7 +5125,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/specialiste-de-la-manuvre-en-reconversion-professionnelle/92c798be-e5ec-4d51-a3db-2e8ae3fc0a35",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:34.484Z",
+      "crawledAt": "2026-08-29T23:22:24.679Z",
       "previousSlugs": [
         "specialiste-de-la-man-uvre-en-reconversion-professionnelle-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -5211,7 +5211,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/reiniger-in/79914939-e5dc-4c59-999c-685a5e1b4075",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:22.912Z",
+      "crawledAt": "2026-08-29T23:22:59.545Z",
       "previousSlugs": [
         "reiniger-ffs-officine-ferrovie-federali-konolfingen",
         "reiniger-in-ffs-officine-ferrovie-federali-konolfingen"
@@ -5299,7 +5299,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/reiniger-in/892ad083-520a-4392-be6e-8725a5b3a21a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:13.264Z",
+      "crawledAt": "2026-08-29T23:24:35.869Z",
       "previousSlugs": [
         "reiniger-in-ffs-officine-ferrovie-federali-brig"
       ],
@@ -5384,7 +5384,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/automobilmechatroniker-in-fuer-die-zugdiagnostik/ad0f31a5-2eb9-48c9-b1d8-408589667010",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:16.038Z",
+      "crawledAt": "2026-08-29T23:23:49.162Z",
       "previousSlugsByLocale": {
         "de": [
           "automobilmechatroniker-in-fur-die-zugdiagnostik-ffs-officine-ferrovie-federali-basel"
@@ -5478,7 +5478,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/spezialist-in-grundstuecksgeschaefte-anlageobjekte/8e460863-7d1b-4159-845a-fc72740c9c1f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:25.140Z",
+      "crawledAt": "2026-08-29T23:23:55.386Z",
       "previousSlugs": [
         "spezialist-in-grundstucksgeschafte-anlageobjekte-ffs-officine-ferrovie-federali-zurich-altstetten"
       ],
@@ -5563,7 +5563,7 @@
       "postedDate": "2026-08-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/teamleiter-in-instandhaltung-anlagen/2cec46c7-83f4-40b2-9f92-cc84f71c5580",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:28.292Z",
+      "crawledAt": "2026-08-29T23:23:56.524Z",
       "previousSlugs": [
         "teamleiter-in-instandhaltung-anlagen-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -5651,7 +5651,7 @@
       "postedDate": "2026-08-16",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/4169895d-9700-489f-bbc6-b9f1b779f7c6",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:26.250Z",
+      "crawledAt": "2026-08-29T23:23:56.851Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-zurich",
         "cambio-carriera-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-zurich"
@@ -5725,7 +5725,7 @@
       "postedDate": "2026-08-16",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/security-engineer-m-w-d-netzleitsystem-energie/6108af33-2f9c-4b20-b180-f811d5be0c7b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:31.191Z",
+      "crawledAt": "2026-08-29T23:24:00.056Z",
       "previousSlugs": [
         "security-engineer-m-w-d-netzleitsystem-energie-ffs-officine-ferrovie-federali-zollikofen",
         "security-engineer-m-f-d-grid-control-system-energy-ffs-officine-ferrovie-federali-zollikofen"
@@ -5802,7 +5802,7 @@
       "postedDate": "2026-08-16",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-d-equipe-maintenance-des-installations/2f62724e-feb4-4d72-82f0-c57ea2f0c248",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:31.358Z",
+      "crawledAt": "2026-08-29T23:23:57.788Z",
       "previousSlugs": [
         "chef-fe-d-equipe-maintenance-des-installations-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -5890,7 +5890,7 @@
       "postedDate": "2026-08-16",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/spezialmonteur-in-fahrleitung/5eb88de0-3445-4dc0-b43e-1bb781c3b264",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:38.932Z",
+      "crawledAt": "2026-08-29T23:24:04.765Z",
       "previousSlugs": [
         "spezialmonteur-in-fahrleitung-ffs-officine-ferrovie-federali-arth-goldau"
       ],
@@ -5991,7 +5991,7 @@
       "postedDate": "2026-08-16",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/monteur-in-fahrleitung-b100-und-triebfahrzeugfuehrer-in/e370c8ad-1ed8-4f15-9560-280ae8f25242",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:47.530Z",
+      "crawledAt": "2026-08-29T23:24:10.622Z",
       "previousSlugs": [
         "monteur-in-fahrleitung-b100-und-triebfahrzeugfuhrer-in-ffs-officine-ferrovie-federali-arth-goldau"
       ],
@@ -6080,7 +6080,7 @@
       "postedDate": "2026-08-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/personaldisponent-in-fahrbahn/e912fcd5-db60-4d3a-a4ee-6b8b3364c21e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:47.839Z",
+      "crawledAt": "2026-08-29T23:24:08.692Z",
       "previousSlugs": [
         "personaldisponent-in-fahrbahn-ffs-officine-ferrovie-federali-olten"
       ],
@@ -6146,7 +6146,7 @@
       "postedDate": "2026-08-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-accounting-m-w-d/14372da2-ad87-46f8-bad3-cbaf8da9c0d0",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:53.612Z",
+      "crawledAt": "2026-08-29T23:24:10.330Z",
       "previousSlugs": [
         "leiter-in-accounting-m-w-d-80-100-ffs-officine-ferrovie-federali-olten"
       ],
@@ -6252,7 +6252,7 @@
       "postedDate": "2026-08-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/betriebskoordinator-in-80-in-stansstad/32908248-9cbc-418c-ba49-41162a18e158",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:50.096Z",
+      "crawledAt": "2026-08-29T23:24:20.219Z",
       "previousSlugs": [
         "betriebskoordinator-in-80-100-in-stansstad-ffs-officine-ferrovie-federali-stansstad"
       ],
@@ -6325,7 +6325,7 @@
       "postedDate": "2026-08-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/sap-consultant-treasury-risk-management-m-w-d/5e3d2406-f76e-42cd-989b-aebcb89e59e7",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:42.775Z",
+      "crawledAt": "2026-08-29T23:25:03.150Z",
       "previousSlugs": [
         "sap-consultant-treasury-e-risk-management-m-w-d-ffs-officine-ferrovie-federali-bern"
       ],
@@ -6422,7 +6422,7 @@
       "postedDate": "2026-08-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lehrperson-berufskunde-fachfrau-fachmann-bahntransport-efz-5-lektionen-woche/ea6a67c3-846b-449c-b0bc-9f18cc2a6f40",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:59.168Z",
+      "crawledAt": "2026-08-29T23:24:22.004Z",
       "previousSlugs": [
         "lehrperson-berufskunde-fachfrau-fachmann-bahntransport-efz-5-lektionen-woche-ffs-officine-ferrovie-federali-olten"
       ],
@@ -6519,7 +6519,7 @@
       "postedDate": "2026-08-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/formatore-trice-professionale-meccanica/57a29208-1b69-4038-90b3-6a3b46e4d1a1",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:00.975Z",
+      "crawledAt": "2026-08-29T23:24:25.072Z",
       "previousSlugs": [
         "tecnico-della-qualita-m-f-d-ffs-officine-ferrovie-federali-bellinzona",
         "qualitatstechniker-m-w-d-ffs-officine-ferrovie-federali-bellinzona",
@@ -6630,7 +6630,7 @@
       "postedDate": "2026-08-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektriker-in-automatiker-in-fuer-den-einstieg-in-den-bereich-bahnsicherungsanlagen/bffe9ea8-6fb7-4ff1-97d6-7dfc7a9090dd",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:18:47.918Z",
+      "crawledAt": "2026-08-29T23:24:13.274Z",
       "previousSlugs": [
         "elektriker-in-automatiker-in-fur-den-einstieg-in-den-bereich-bahnsicherungsanlagen-ffs-officine-ferrovie-federali-luzern"
       ],
@@ -6719,7 +6719,7 @@
       "postedDate": "2026-08-11",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/landschaftsgaertner-in-maurer-in-oder-strassenbauer-in-fuer-den-bereich-kabel-tiefbau/10719ad8-25ed-4e94-8b09-39804183f449",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:07.637Z",
+      "crawledAt": "2026-08-29T23:24:23.278Z",
       "previousSlugs": [
         "landschaftsgartner-in-maurer-in-oder-strassenbauer-in-fur-den-bereich-kabel-tiefbau-ffs-officine-ferrovie-federali-muttenz",
         "giardiniere-paesaggista-muratore-o-costruttore-stradale-nel-campo-dell-ingegneria-civile-dei-cavi-ffs-officine-ferrovie-federali-rapperswil-sg",
@@ -6815,7 +6815,7 @@
       "postedDate": "2026-08-11",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/capo-progetto-junior-m-f-d/42bb31a5-6a7b-4822-8037-23bf98c1415d",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:19.892Z",
+      "crawledAt": "2026-08-29T23:24:31.228Z",
       "firstSeenAt": "2026-08-11T10:35:46.408Z",
       "salaryMin": 46000,
       "salaryMax": 78500,
@@ -6898,7 +6898,7 @@
       "postedDate": "2026-08-10",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangiermitarbeiter-in/84e60310-488b-4b90-ac05-c5750f07bcef",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:22.082Z",
+      "crawledAt": "2026-08-29T23:24:36.087Z",
       "previousSlugs": [
         "quereinstieg-rangiermitarbeiter-in-ffs-officine-ferrovie-federali-spreitenbach",
         "dipendente-di-manovra-a-ingresso-laterale-ffs-officine-ferrovie-federali-spreitenbach",
@@ -7001,7 +7001,7 @@
       "postedDate": "2026-08-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/schichtleiter-in-fachtechniker-in-industrie/831158b7-c0ce-431d-9cae-fcbecd8ae61b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:59.563Z",
+      "crawledAt": "2026-08-29T23:22:49.650Z",
       "previousSlugs": [
         "schichtleiter-in-fachtechniker-in-industrie-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -7098,7 +7098,7 @@
       "postedDate": "2026-08-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/stellwerkangestellte-r-olten/0d9ff808-b381-4f4e-91d4-7d19415e9d14",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:25.738Z",
+      "crawledAt": "2026-08-29T23:24:36.131Z",
       "previousSlugs": [
         "stellwerkangestellte-r-olten-ffs-officine-ferrovie-federali-olten",
         "assistente-clienti-in-ffs-officine-ferrovie-federali-olten",
@@ -7225,7 +7225,7 @@
       "postedDate": "2026-08-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektroinstallateur-in/5ef089fc-36a2-4143-9d13-a2873562a2c6",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:30.396Z",
+      "crawledAt": "2026-08-29T23:24:39.983Z",
       "previousSlugs": [
         "elektroinstallateur-in-ffs-officine-ferrovie-federali-brig",
         "elettricista-in-ffs-officine-ferrovie-federali-brig"
@@ -7299,7 +7299,7 @@
       "postedDate": "2026-08-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/mechaniker-in-automatiker-in-elektroinstallateur-in-im-wasserkraftwerk-etzelwerk/5c7cb136-82c5-44f9-bc71-0fd23226dca0",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:38.947Z",
+      "crawledAt": "2026-08-29T23:24:46.932Z",
       "previousSlugs": [
         "mechaniker-in-automatiker-in-elektroinstallateur-in-im-wasserkraftwerk-etzelwerk-ffs-officine-ferrovie-federali-altendorf",
         "meccanico-a-automatico-a-elettricista-a-presso-la-centrale-idroelettrica-di-etzelwerk-ffs-officine-ferrovie-federali-altendorf"
@@ -7387,7 +7387,7 @@
       "postedDate": "2026-08-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/werkmitarbeiter-in-im-kraft-und-frequenzumformerwerk-massaboden-bitsch/f8476c63-19dc-4191-9a55-ac2e8623908a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:41.258Z",
+      "crawledAt": "2026-08-29T23:24:52.210Z",
       "previousSlugs": [
         "werkmitarbeiter-in-im-kraft-und-frequenzumformerwerk-massaboden-bitsch-ffs-officine-ferrovie-federali-bitsch"
       ],
@@ -7471,7 +7471,7 @@
       "postedDate": "2026-08-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fachtechniker-in-industrie/1d06af8b-81a6-4f68-ac2f-3f4a10f74b62",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:44.995Z",
+      "crawledAt": "2026-08-29T23:24:53.075Z",
       "previousSlugs": [
         "fachtechniker-in-industrie-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -7560,7 +7560,7 @@
       "postedDate": "2026-08-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/c27dd8b2-a9ee-494c-8c6c-d81531879e6f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:46.287Z",
+      "crawledAt": "2026-08-29T23:24:55.158Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-biel-bienne"
       ],
@@ -7649,7 +7649,7 @@
       "postedDate": "2026-08-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/4e8754c7-1122-4cc0-b301-dcbb260bbcbd",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:43.414Z",
+      "crawledAt": "2026-08-29T23:24:52.777Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-brig"
       ],
@@ -7739,7 +7739,7 @@
       "postedDate": "2026-08-05",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/181b575a-0f66-4ee6-a4c0-f78ee17305db",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:02.025Z",
+      "crawledAt": "2026-08-29T23:25:02.276Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -7858,7 +7858,7 @@
       "postedDate": "2026-08-04",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/naturgefahrenmanager-in/8d52012d-8f98-44f3-b568-4bf8780ff415",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:51.842Z",
+      "crawledAt": "2026-08-29T23:25:07.376Z",
       "previousSlugs": [
         "naturgefahrenmanager-in-ffs-officine-ferrovie-federali-stansstad"
       ],
@@ -7948,7 +7948,7 @@
       "postedDate": "2026-08-03",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/a2bf6a30-2758-4d43-8a39-c6eb43a2f4d0",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:03.552Z",
+      "crawledAt": "2026-08-29T23:25:09.253Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-brugg-ag"
       ],
@@ -8019,7 +8019,7 @@
       "postedDate": "2026-08-03",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/portfoliomanager-in-instandhaltungsanlagen/38132e30-ca6f-4125-bdc9-9e110991bdc8",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:08.942Z",
+      "crawledAt": "2026-08-29T23:25:16.977Z",
       "previousSlugs": [
         "portfoliomanager-in-instandhaltungsanlagen-ffs-officine-ferrovie-federali-bern"
       ],
@@ -8104,7 +8104,7 @@
       "postedDate": "2026-08-03",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-personenverkehr/52cb6107-1a9a-4f9e-aa50-ed406bfe2895",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:25.891Z",
+      "crawledAt": "2026-08-29T23:25:22.944Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-personenverkehr-ffs-officine-ferrovie-federali-beinwil-am-see"
       ],
@@ -8206,7 +8206,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/disponent-in-lasten-gueterverkehr/3f0de93e-e053-4301-81be-3138b03c6ebb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:03.068Z",
+      "crawledAt": "2026-08-29T23:25:07.941Z",
       "previousSlugs": [
         "disponent-in-lasten-guterverkehr-ffs-officine-ferrovie-federali-spreitenbach"
       ],
@@ -8299,7 +8299,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/rangierspezialist-in-ai40/9f9973e2-141c-4127-bfe3-2ba263c0eb3a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:14.038Z",
+      "crawledAt": "2026-08-29T23:25:18.360Z",
       "previousSlugs": [
         "rangierspezialist-in-ai40-ffs-officine-ferrovie-federali-zurich",
         "specialista-di-manovra-ai40-ffs-officine-ferrovie-federali-interlaken",
@@ -8432,7 +8432,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lackierer-in-schienenfahrzeuge-80/1d308a41-0d10-41f8-b7d5-0d2ab2a77589",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:13.856Z",
+      "crawledAt": "2026-08-29T23:25:22.133Z",
       "previousSlugs": [
         "lackierer-in-schienenfahrzeuge-80-100-ffs-officine-ferrovie-federali-3860-meiringen",
         "operatore-logistico-nell-80-100-ffs-officine-ferrovie-federali-meiringen",
@@ -8533,7 +8533,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/triebfahrzeugfuehrer-in-kat-a-fahrleitungszugmaschine-fzm/47d01f3d-a232-4ffb-951c-920d5a94f8da",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:27.731Z",
+      "crawledAt": "2026-08-29T23:25:25.600Z",
       "previousSlugs": [
         "triebfahrzeugfuhrer-in-kat-a-fahrleitungszugmaschine-fzm-ffs-officine-ferrovie-federali-dulliken"
       ],
@@ -8604,7 +8604,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/58218cc2-d1a5-409f-b179-02c5db2d843b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:43.157Z",
+      "crawledAt": "2026-08-29T23:25:40.488Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-biel"
       ],
@@ -8675,7 +8675,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/ea3733d6-d924-4d8f-a421-dda955ab03ee",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:31.625Z",
+      "crawledAt": "2026-08-29T23:25:31.340Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-brugg-ag"
       ],
@@ -8746,7 +8746,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/ec9482c1-3a4f-4461-a255-bb8fdbf38519",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:41.910Z",
+      "crawledAt": "2026-08-29T23:25:37.788Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-schaffhausen"
       ],
@@ -8817,7 +8817,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/14a57d8c-daf0-40a0-99a6-507bede5b3dc",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:41.901Z",
+      "crawledAt": "2026-08-29T23:25:38.158Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-zurich"
       ],
@@ -8888,7 +8888,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/31f6042e-c039-4819-bebb-a98347a3b746",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:32.592Z",
+      "crawledAt": "2026-08-29T23:25:32.436Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-rapperswil-sg"
       ],
@@ -8959,7 +8959,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/94c68e03-4bbc-4152-968a-4e3a8cdd85cb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:33.838Z",
+      "crawledAt": "2026-08-29T23:25:37.106Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-bern"
       ],
@@ -9030,7 +9030,7 @@
       "postedDate": "2026-08-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kategorie-b-personenverkehr/6d4212fc-240e-4578-bf77-ac45b52d85c1",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:48.642Z",
+      "crawledAt": "2026-08-29T23:25:46.667Z",
       "previousSlugs": [
         "lokfuhrer-in-kategorie-b-personenverkehr-ffs-officine-ferrovie-federali-ziegelbrucke"
       ],
@@ -9119,7 +9119,7 @@
       "postedDate": "2026-07-30",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kat-a40/97a912b5-76a7-4f46-a550-e895c36c6270",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:17:02.153Z",
+      "crawledAt": "2026-08-29T23:22:49.821Z",
       "previousSlugs": [
         "lokfuhrer-in-kat-a40-ffs-officine-ferrovie-federali-zurich",
         "gatto-macchinista-a40-ffs-officine-ferrovie-federali-zurich",
@@ -9217,7 +9217,7 @@
       "postedDate": "2026-07-29",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektroinstallateur-in-efz/666a464a-2aac-4c6d-935a-a3f0cea4383e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:06.054Z",
+      "crawledAt": "2026-08-29T23:25:08.627Z",
       "previousSlugs": [
         "elektroinstallateur-in-efz-ffs-officine-ferrovie-federali-rapperswil-sg",
         "elettricista-in-afc-ffs-officine-ferrovie-federali-rapperswil-sg"
@@ -9290,7 +9290,7 @@
       "postedDate": "2026-07-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/chefmonteur-in-fahrleitungszugmaschine-fzm/d33b6b90-7077-4ea2-812a-258e619e0852",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:55.693Z",
+      "crawledAt": "2026-08-29T23:25:48.787Z",
       "previousSlugs": [
         "chefmonteur-in-fahrleitungszugmaschine-fzm-ffs-officine-ferrovie-federali-dulliken",
         "agente-di-condotta-in-cat-a-macchina-di-trazione-della-linea-di-contatto-fzm-ffs-officine-ferrovie-federali-dulliken",
@@ -9393,7 +9393,7 @@
       "postedDate": "2026-07-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/recyclist-in/b1637ff3-f75d-4e5f-b787-e68963c2f343",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:56.401Z",
+      "crawledAt": "2026-08-29T23:25:52.845Z",
       "previousSlugs": [
         "recyclist-in-ffs-officine-ferrovie-federali-trimbach"
       ],
@@ -9487,7 +9487,7 @@
       "postedDate": "2026-07-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fachverantwortliche-r-im-klimakompetenzzentrum/3971244a-4302-4f42-ad3d-c920e40e69c3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:05.716Z",
+      "crawledAt": "2026-08-29T23:25:54.492Z",
       "previousSlugs": [
         "assistant-client-ffs-officine-ferrovie-federali-olten",
         "kundenassistent-in-ffs-officine-ferrovie-federali-olten",
@@ -9648,7 +9648,7 @@
       "postedDate": "2026-07-19",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/landschaftsgaertner-in-maurer-in-oder-strassenbauer-in-fuer-den-bereich-kabel-tiefbau/835be5a2-bcc2-4afc-ad95-1d36486d9307",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:56.403Z",
+      "crawledAt": "2026-08-29T23:26:00.596Z",
       "previousSlugs": [
         "landschaftsgartner-in-maurer-in-oder-strassenbauer-in-fur-den-bereich-kabel-tiefbau-ffs-officine-ferrovie-federali-rapperswil-sg"
       ],
@@ -9755,7 +9755,7 @@
       "postedDate": "2026-07-15",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/berufsbildner-in-gleisbau/d5f26978-0802-4886-a588-575942b85f55",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:06.202Z",
+      "crawledAt": "2026-08-29T23:26:01.225Z",
       "previousSlugs": [
         "berufsbildner-in-gleisbau-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -9844,7 +9844,7 @@
       "postedDate": "2026-07-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektriker-in-automatiker-in-fuer-den-einstieg-in-den-bereich-bahnsicherungsanlagen/1535df5b-6256-4f29-8aa4-e70925b6ca64",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:11.802Z",
+      "crawledAt": "2026-08-29T23:25:58.998Z",
       "previousSlugs": [
         "elektriker-in-automatiker-in-fur-den-einstieg-in-den-bereich-bahnsicherungsanlagen-ffs-officine-ferrovie-federali-sargans"
       ],
@@ -9935,7 +9935,7 @@
       "postedDate": "2026-07-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fahrleitungsmonteur-in-schlosser-in-mechaniker-in-netzelektriker-in-elektroinstallateur-in/d26025bf-b71a-449c-b74a-f5a49942d33f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:17.138Z",
+      "crawledAt": "2026-08-29T23:26:04.956Z",
       "previousSlugs": [
         "fahrleitungsmonteur-in-schlosser-in-mechaniker-in-netzelektriker-in-elektroinstallateur-in-ffs-officine-ferrovie-federali-deutschschweiz",
         "montatore-di-catenarie-fabbro-meccanico-elettricista-di-rete-elettricista-ffs-officine-ferrovie-federali-deutschschweiz",
@@ -10013,7 +10013,7 @@
       "postedDate": "2026-07-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/techniker-in-sicherungsanlagen-aussen-produktionsmechaniker-in-polymechaniker-in-schlosser-in/1b722e38-412d-48f8-a190-98bdda7c6c62",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:19.422Z",
+      "crawledAt": "2026-08-29T23:26:09.111Z",
       "previousSlugs": [
         "techniker-in-sicherungsanlagen-aussen-produktionsmechaniker-in-polymechaniker-in-schlosser-in-ffs-officine-ferrovie-federali-deutschschweiz",
         "tecnico-per-sistemi-di-sicurezza-esterno-meccanico-di-produzione-polimeccanico-fabbro-ffs-officine-ferrovie-federali-deutschschweiz",
@@ -10105,7 +10105,7 @@
       "postedDate": "2026-07-13",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-personenverkehr-03-2027/dd759881-368e-4e1f-8490-92e1f377fa1d",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:19.428Z",
+      "crawledAt": "2026-08-29T23:26:09.535Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-personenverkehr-03-2027-ffs-officine-ferrovie-federali-luzern",
         "cross-entry-locomotive-engineer-passenger-12-2026-ffs-officine-ferrovie-federali-chur"
@@ -10200,7 +10200,7 @@
       "postedDate": "2026-07-08",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-kat-b100-fahrleitungszugmaschine/b0e04be8-b20e-450d-be7e-611e612644b4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:30.281Z",
+      "crawledAt": "2026-08-29T23:26:15.955Z",
       "previousSlugs": [
         "lokfuhrer-in-kat-b100-fahrleitungszugmaschine-ffs-officine-ferrovie-federali-dulliken"
       ],
@@ -10290,7 +10290,7 @@
       "postedDate": "2026-07-08",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/56d18928-874a-4500-b3db-a40d8605eec0",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:28.617Z",
+      "crawledAt": "2026-08-29T23:26:15.803Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-lenzburg",
         "ingresso-trasversale-macchinista-in-treno-con-esperienza-artigianale-ffs-officine-ferrovie-federali-lenzburg"
@@ -10399,7 +10399,7 @@
       "postedDate": "2026-07-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/policier-policiere-aupres-de-la-police-des-transports-cff-tpo/73d0a66b-ac54-4883-a84f-0bc8117820ff",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:37.134Z",
+      "crawledAt": "2026-08-29T23:26:20.807Z",
       "previousSlugs": [
         "policier-policiere-aupres-de-la-police-des-transports-cff-tpo-ffs-officine-ferrovie-federali-lausanne"
       ],
@@ -10505,7 +10505,7 @@
       "postedDate": "2026-07-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/policier-policiere-aupres-de-la-police-des-transports-cff-tpo/4241f66c-05c3-4711-8590-ff57faea5fd9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:33.348Z",
+      "crawledAt": "2026-08-29T23:26:15.081Z",
       "previousSlugs": [
         "policier-policiere-aupres-de-la-police-des-transports-cff-tpo-ffs-officine-ferrovie-federali-fribourg"
       ],
@@ -10611,7 +10611,7 @@
       "postedDate": "2026-07-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/policier-policiere-aupres-de-la-police-des-transports-cff-tpo/f41f2185-67a8-4799-8a30-dbacda54acc4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:37.144Z",
+      "crawledAt": "2026-08-29T23:26:23.605Z",
       "previousSlugs": [
         "policier-policiere-aupres-de-la-police-des-transports-cff-tpo-ffs-officine-ferrovie-federali-geneve"
       ],
@@ -10708,7 +10708,7 @@
       "postedDate": "2026-06-28",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/9aba6330-e7ba-47a7-9d5b-fd6f3577aa7b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:39.683Z",
+      "crawledAt": "2026-08-29T23:20:43.366Z",
       "previousSlugsByLocale": {
         "de": [
           "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-basel"
@@ -10799,7 +10799,7 @@
       "postedDate": "2026-06-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-zugverkehrsleiter-in/905caa36-3609-4805-be14-0245d42d2e1b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:54.788Z",
+      "crawledAt": "2026-08-29T23:26:32.368Z",
       "previousSlugs": [
         "quereinstieg-zugverkehrsleiter-in-ffs-officine-ferrovie-federali-olten"
       ],
@@ -10890,7 +10890,7 @@
       "postedDate": "2026-06-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/6c7f6e35-c7cd-48d4-89fe-153b56d40827",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:56.064Z",
+      "crawledAt": "2026-08-29T23:26:30.664Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-basel"
       ],
@@ -10976,7 +10976,7 @@
       "postedDate": "2026-06-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-zugverkehrsleiter-in/fd78e6ea-6ae5-454d-bdf8-27bfdd1462f8",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:54.784Z",
+      "crawledAt": "2026-08-29T23:26:31.869Z",
       "previousSlugs": [
         "quereinstieg-zugverkehrsleiter-in-ffs-officine-ferrovie-federali-muttenz"
       ],
@@ -11070,7 +11070,7 @@
       "postedDate": "2026-06-23",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-kundenberater-in-im-contact-center/79c05fea-7983-439e-be67-c54fa18f9313",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:07.379Z",
+      "crawledAt": "2026-08-29T23:19:56.416Z",
       "previousSlugs": [
         "quereinstieg-kundenberater-in-im-contact-center-ffs-officine-ferrovie-federali-brig",
         "ingresso-laterale-come-consulente-clienti-nel-contact-center-ffs-officine-ferrovie-federali-brig",
@@ -11161,7 +11161,7 @@
       "postedDate": "2026-06-21",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierspezialist-in-gueterverkehr/69ff555d-150b-43be-b74f-755de2e71a06",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:05.245Z",
+      "crawledAt": "2026-08-29T23:26:45.517Z",
       "previousSlugs": [
         "quereinstieg-rangierspezialist-in-guterverkehr-ffs-officine-ferrovie-federali-zurich"
       ],
@@ -11246,7 +11246,7 @@
       "postedDate": "2026-06-21",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierspezialist-in-gueterverkehr-luzern-oder-rotkreuz/bb7c0e45-d7f9-499b-8659-2ebcd02ce88f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:03.177Z",
+      "crawledAt": "2026-08-29T23:26:38.608Z",
       "previousSlugs": [
         "quereinstieg-rangierspezialist-in-guterverkehr-luzern-oder-rotkreuz-ffs-officine-ferrovie-federali-luzern-und-rotkreuz"
       ],
@@ -11343,7 +11343,7 @@
       "postedDate": "2026-06-15",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/berufsbildner-in-gleisbau-vorarbeiter-in-bern/1c6d635e-bb00-4959-98bf-e6453ab409cf",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:03.937Z",
+      "crawledAt": "2026-08-29T23:26:45.847Z",
       "previousSlugs": [
         "berufsbildner-in-gleisbau-vorarbeiter-in-bern-ffs-officine-ferrovie-federali-bern"
       ],
@@ -11415,7 +11415,7 @@
       "postedDate": "2026-06-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-personenverkehr-ziegelbruecke-12-2026/ccd01a0f-250a-477d-a0c6-32ccf0164df3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:18.139Z",
+      "crawledAt": "2026-08-29T23:26:47.877Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-personenverkehr-ziegelbrucke-12-2026-ffs-officine-ferrovie-federali-ziegelbrucke"
       ],
@@ -11501,7 +11501,7 @@
       "postedDate": "2026-06-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-zugverkehrsleiter-in/fc9d29a1-5c21-4b43-9570-01f459f561a3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:19.457Z",
+      "crawledAt": "2026-08-29T23:26:47.579Z",
       "previousSlugs": [
         "quereinstieg-zugverkehrsleiter-in-ffs-officine-ferrovie-federali-zurich-flughafen-oder-rangierbahnhof-limmattal",
         "controllo-del-traffico-ferroviario-a-ingresso-laterale-2026-ffs-officine-ferrovie-federali-zurich-flughafen-oder-rangierbahnhof-limmattal",
@@ -11607,7 +11607,7 @@
       "postedDate": "2026-06-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierlokfuehrer-in-rangierleiter-in-kat-a40/7db3ce4e-0d41-40b9-a121-4596055d6949",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:20.508Z",
+      "crawledAt": "2026-08-29T23:26:47.660Z",
       "previousSlugs": [
         "quereinstieg-rangierlokfuhrer-in-e-rangierleiter-in-kat-a40-ffs-officine-ferrovie-federali-hagendorf"
       ],
@@ -11696,7 +11696,7 @@
       "postedDate": "2026-06-09",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/mitarbeiter-in-weichenmontage/03fd2c08-9f3b-4fbc-8202-946b15839c45",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:27.847Z",
+      "crawledAt": "2026-08-29T23:27:00.668Z",
       "previousSlugs": [
         "mitarbeiter-in-weichenmontage-ffs-officine-ferrovie-federali-hagendorf",
         "dipendente-in-assemblaggio-deviatoi-ffs-officine-ferrovie-federali-hagendorf",
@@ -11798,7 +11798,7 @@
       "postedDate": "2026-06-04",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/564c40cb-78f9-4d81-9a54-d73b2137d3f7",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:33.832Z",
+      "crawledAt": "2026-08-29T23:27:02.627Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-erstfeld"
       ],
@@ -11887,7 +11887,7 @@
       "postedDate": "2026-06-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/spezialmonteur-in-kabel-spleisser-in-elektroinstallateur-in-elektriker-in-mechaniker-in/6014e2c8-debd-4f8e-ac2a-5c08adaa1440",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:48.525Z",
+      "crawledAt": "2026-08-29T23:26:32.000Z",
       "previousSlugs": [
         "spezialmonteur-in-kabel-spleisser-in-elektroinstallateur-in-elektriker-in-mechaniker-in-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -11973,7 +11973,7 @@
       "postedDate": "2026-06-02",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/lokfuehrer-in-rangier-oder-rangierspezialist-in/51092f2d-eac9-470c-b2c3-7c795bfba356",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:43.183Z",
+      "crawledAt": "2026-08-29T23:27:03.170Z",
       "previousSlugs": [
         "lokfuhrer-in-rangier-oder-rangierspezialist-in-ffs-officine-ferrovie-federali-olten"
       ],
@@ -12058,7 +12058,7 @@
       "postedDate": "2026-05-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/schichtleiter-in-transport/50b79244-e048-4f10-9b19-2bd3dd750b6a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:44.534Z",
+      "crawledAt": "2026-08-29T23:27:04.598Z",
       "previousSlugs": [
         "schichtleiter-in-transport-ffs-officine-ferrovie-federali-oensingen"
       ],
@@ -12144,7 +12144,7 @@
       "postedDate": "2026-05-19",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/spezialmonteur-in-kabel-tiefbau-landschaftsgaertner-in-maurer-in-tiefbauer-in-verkehrswegbauer-in/3a885cd7-35b6-4282-bab1-ec9c26ce4f6a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:19:06.069Z",
+      "crawledAt": "2026-08-29T23:24:21.107Z",
       "previousSlugs": [
         "spezialmonteur-in-kabel-tiefbau-landschaftsgartner-in-maurer-in-tiefbauer-in-verkehrswegbauer-in-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -12233,7 +12233,7 @@
       "postedDate": "2026-05-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-rangier/7848d2ad-6805-4d50-bb1e-a2df3529e2de",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:35.237Z",
+      "crawledAt": "2026-08-29T23:27:03.687Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-rangier-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -12317,7 +12317,7 @@
       "postedDate": "2026-05-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-personenverkehr-03-2027/40c52ee8-c98e-4ccc-9bb3-ee20f4758239",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:44.485Z",
+      "crawledAt": "2026-08-29T23:27:16.353Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-personenverkehr-03-2027-ffs-officine-ferrovie-federali-zug",
         "lateral-entry-train-driver-passenger-transport-ziegelbrucke-12-2026-ffs-officine-ferrovie-federali-ziegelbrucke",
@@ -12406,7 +12406,7 @@
       "postedDate": "2026-05-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-personenverkehr-03-2027/23f571c2-4c91-4f72-aca1-6e99263e13e9",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:37.346Z",
+      "crawledAt": "2026-08-29T23:27:13.348Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-personenverkehr-03-2027-ffs-officine-ferrovie-federali-goldau"
       ],
@@ -12496,7 +12496,7 @@
       "postedDate": "2026-05-06",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/b5a8750c-c9f5-4b32-b724-70afb312ce36",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:52.359Z",
+      "crawledAt": "2026-08-29T23:27:18.045Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-rapperswil-sg"
       ],
@@ -12567,7 +12567,7 @@
       "postedDate": "2026-04-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinsteiger-in-in-die-welt-der-mechanisch-handwerklichen-berufe/ee3d5e25-8635-4a78-812d-5975c8baaa3f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:41.138Z",
+      "crawledAt": "2026-08-29T23:26:21.174Z",
       "previousSlugs": [
         "quereinsteiger-in-in-die-welt-der-mechanisch-handwerklichen-berufe-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -12652,7 +12652,7 @@
       "postedDate": "2026-04-20",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/fe67b68e-9147-4ed6-bb72-e6b2998db7de",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:09.815Z",
+      "crawledAt": "2026-08-29T23:27:28.431Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-zurich"
       ],
@@ -12723,7 +12723,7 @@
       "postedDate": "2026-04-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/chefmonteur-in-fahrleitung/849e9868-857b-4a00-ba41-36d11a055fef",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:54.814Z",
+      "crawledAt": "2026-08-29T23:27:17.403Z",
       "previousSlugs": [
         "chefmonteur-in-fahrleitung-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -12815,7 +12815,7 @@
       "postedDate": "2026-04-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/vorarbeiter-in-gleisbau/02a24c36-7d33-4c07-87c6-2e0f5c241bd5",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:13.468Z",
+      "crawledAt": "2026-08-29T23:27:33.682Z",
       "previousSlugs": [
         "vorarbeiter-in-gleisbau-ffs-officine-ferrovie-federali-deutschschweiz",
         "caposquadra-o-caposquadra-di-costruzione-di-binari-ffs-officine-ferrovie-federali-lenzburg",
@@ -12925,7 +12925,7 @@
       "postedDate": "2026-04-14",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polier-in-gleisbau/2a01ef4d-f337-4400-8c48-426ba7481cb4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:14.428Z",
+      "crawledAt": "2026-08-29T23:27:31.091Z",
       "previousSlugs": [
         "polier-in-gleisbau-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -13031,7 +13031,7 @@
       "postedDate": "2026-04-12",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/reiniger-in/6ce298c1-97ed-4a2e-a56c-07ca84cac713",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:23.225Z",
+      "crawledAt": "2026-08-29T23:26:58.661Z",
       "previousSlugs": [
         "reiniger-in-ffs-officine-ferrovie-federali-brugg-ag",
         "ispettore-per-il-monitoraggio-stradale-ffs-officine-ferrovie-federali-brugg-ag"
@@ -13126,7 +13126,7 @@
       "postedDate": "2026-04-01",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/monteur-in-fahrleitungszugmaschine-fzm/2256905c-9633-4aa3-91ad-5c46b99eb8f4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:21:51.556Z",
+      "crawledAt": "2026-08-29T23:26:30.337Z",
       "previousSlugsByLocale": {
         "de": [
           "monteur-in-fahrleitungszugmaschine-fzm-ffs-officine-ferrovie-federali-dulliken"
@@ -13222,7 +13222,7 @@
       "postedDate": "2026-03-30",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierlokfuehrer-in-rangierleiter-in-kat-a40/deef1a9b-ef07-4817-8cca-fec0d9b27fcb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:09.819Z",
+      "crawledAt": "2026-08-29T23:27:33.919Z",
       "previousSlugs": [
         "quereinstieg-rangierlokfuhrer-in-e-rangierleiter-in-kat-a40-ffs-officine-ferrovie-federali-hagendorf"
       ],
@@ -13311,7 +13311,7 @@
       "postedDate": "2026-03-29",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-sicherheitswaerter-in-sicherheitschef/ed58eb66-2df5-4a0b-845c-aae5d6da439f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:04.268Z",
+      "crawledAt": "2026-08-29T23:27:19.478Z",
       "previousSlugs": [
         "quereinstieg-sicherheitswarter-in-sicherheitschef-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -13401,7 +13401,7 @@
       "postedDate": "2026-03-29",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-lokfuehrer-in-bauzug-mit-handwerklicher-erfahrung/ba53cf7b-f8f5-4a87-bc12-873eaf58e58a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:22.032Z",
+      "crawledAt": "2026-08-29T23:27:34.205Z",
       "previousSlugs": [
         "quereinstieg-lokfuhrer-in-bauzug-mit-handwerklicher-erfahrung-ffs-officine-ferrovie-federali-olten"
       ],
@@ -13472,7 +13472,7 @@
       "postedDate": "2026-03-29",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/techniker-in-klimaanlagen-der-sbb-flotte/051e1df0-66b2-457c-a1f8-bb0dcc506d98",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:27.703Z",
+      "crawledAt": "2026-08-29T23:27:35.824Z",
       "previousSlugs": [
         "techniker-in-klimaanlagen-der-sbb-flotte-ffs-officine-ferrovie-federali-olten"
       ],
@@ -13557,7 +13557,7 @@
       "postedDate": "2026-03-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/automatiker-in-elektrotechniker-in-oder-elektroinstallateur-in-im-bereich-der-stellwerktechnik/af71d961-43a8-473f-abb6-f461a14d2d75",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:34.515Z",
+      "crawledAt": "2026-08-29T23:27:44.744Z",
       "previousSlugs": [
         "automatiker-in-elektrotechniker-in-oder-elektroinstallateur-in-im-bereich-der-stellwerktechnik-ffs-officine-ferrovie-federali-brugg-ag"
       ],
@@ -13642,7 +13642,7 @@
       "postedDate": "2026-03-22",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/38b5218d-91c9-474d-bb67-28570e713b56",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:33.713Z",
+      "crawledAt": "2026-08-29T23:27:48.631Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-st-gallen"
       ],
@@ -13726,7 +13726,7 @@
       "postedDate": "2026-03-22",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/46d533b8-f18f-45aa-8620-dbabe24bd9c5",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:32.868Z",
+      "crawledAt": "2026-08-29T23:27:45.774Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -13815,7 +13815,7 @@
       "postedDate": "2026-03-18",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-spezialist-in-bahnrettung/3740a546-bb55-4e36-a9be-f1a0360f39f3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:22:15.945Z",
+      "crawledAt": "2026-08-29T23:26:47.659Z",
       "previousSlugs": [
         "quereinstieg-spezialist-in-bahnrettung-ffs-officine-ferrovie-federali-ostermundigen"
       ],
@@ -13900,7 +13900,7 @@
       "postedDate": "2026-03-03",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-rangierspezialist-in/d781a513-ee0b-4749-a032-7f601128d8e7",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:24.969Z",
+      "crawledAt": "2026-08-29T23:25:23.474Z",
       "previousSlugsByLocale": {
         "de": [
           "quereinstieg-rangierspezialist-in-ffs-officine-ferrovie-federali-bern"
@@ -14004,7 +14004,7 @@
       "postedDate": "2026-02-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/polizist-in-transportpolizei/a2ef93f0-4915-44c1-81df-7359d62d676e",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:03.208Z",
+      "crawledAt": "2026-08-29T23:27:19.798Z",
       "previousSlugs": [
         "polizist-in-transportpolizei-ffs-officine-ferrovie-federali-olten"
       ],
@@ -14089,7 +14089,7 @@
       "postedDate": "2025-12-31",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/techniker-in-sicherungsanlagen-innen-elektroinstallateur-in-automatiker-in/615a1b67-f79b-4e0a-98de-7ffffd309378",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:20:58.993Z",
+      "crawledAt": "2026-08-29T23:25:49.437Z",
       "previousSlugs": [
         "techniker-in-sicherungsanlagen-innen-elektroinstallateur-in-automatiker-in-ffs-officine-ferrovie-federali-deutschschweiz",
         "tecnico-in-impianti-di-sicurezza-interni-installatore-elettrico-in-operatore-automatico-in-ffs-officine-ferrovie-federali-deutschschweiz"
@@ -14161,7 +14161,7 @@
       "postedDate": "2025-12-31",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/elektroinstallateur-in-elektrofachpersonal-in-der-welt-der-technischen-bahnberufe/8d93b023-24ce-47a6-937b-89eebe726968",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:29.981Z",
+      "crawledAt": "2026-08-29T23:27:42.835Z",
       "previousSlugs": [
         "elektroinstallateur-in-elektrofachpersonal-in-der-welt-der-technischen-bahnberufe-ffs-officine-ferrovie-federali-deutschschweiz"
       ],
@@ -14253,7 +14253,7 @@
       "postedDate": "2025-12-17",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-des-cie-pour-les-agentes-de-transport-ferroviaire-cfc/9afa011e-3030-492b-a1d5-6fa693f6d017",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:51.200Z",
+      "crawledAt": "2026-08-29T23:27:45.991Z",
       "previousSlugs": [
         "responsable-des-cie-pour-les-agent-e-s-de-transport-ferroviaire-cfc-ffs-officine-ferrovie-federali-olten"
       ],
@@ -14342,7 +14342,7 @@
       "postedDate": "2025-12-15",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/rangierspezialist-in-infrastruktur/fb317703-f48a-45f3-8688-0bf1b2f96c94",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:23:43.905Z",
+      "crawledAt": "2026-08-29T23:27:49.022Z",
       "previousSlugs": [
         "rangierspezialist-in-infrastruktur-ffs-officine-ferrovie-federali-winterthur"
       ],
@@ -14442,7 +14442,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/diagnosticiene/36a8734e-be07-4755-9de9-ca8745812d9b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:02.481Z",
+      "crawledAt": "2026-08-29T23:19:48.694Z",
       "previousSlugsByLocale": {
         "it": [
           "diagnosticien-e-ffs-officine-ferrovie-federali-biel-bienne"
@@ -14465,7 +14465,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T15:14:02.481Z"
+      "firstSeenAt": "2026-08-29T23:19:48.694Z"
     },
     {
       "id": "sbb-1b82f1202e3c",
@@ -14547,7 +14547,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/ingenieure-genie-civil-ouvrages-geotechnique/4f238ae7-8bf8-4953-a003-0a75fc7000ae",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:02.465Z",
+      "crawledAt": "2026-08-29T23:19:50.598Z",
       "previousSlugsByLocale": {
         "it": [
           "ingenieur-e-genie-civil-ouvrages-geotechnique-ffs-officine-ferrovie-federali-berne"
@@ -14570,7 +14570,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T15:14:02.465Z"
+      "firstSeenAt": "2026-08-29T23:19:50.598Z"
     },
     {
       "id": "sbb-9602863d2dd1",
@@ -14595,7 +14595,7 @@
       "descriptionByLocale": {
         "de": "Bauingenieur:in im konstruktiven Tiefbau 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nBauingenieur:in im konstruktiven Tiefbau\nBern / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100% (Jobsharing möglich)\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nDie Division SBB Infrastruktur ist für den Bau, Unterhalt und Betrieb der Infrastruktur verantwortlich und im Bereich «Netzdesign, Anlagen und Technologie» wird das strategische und technologische Anlagenmanagement sichergestellt. Die Abteilung «Ingenieurbau» ist verantwortlich für die SBB weite Fachführung für Tunnel, Brücken, Stützbauwerke, Erdbauwerke, Lärmschutzwände, Trinkwasserversorgungsanlagen und Abwasserentsorgungsanlagen von Kunstbauten. Wir entwickeln Techniken, Vorgaben und Methoden für Neubau, Instandsetzung und Überwachung von Ingenieurbauwerken.\nUnsere Benefits wie Kinderzulagen, kostenloses 1. Klasse GA und vergünstigtes Reisen im Ausland, auch für deine Familie, findest du auf unserer Website unter Benefits .\nDas kannst du bewegen.\n- In dieser spannenden Funktion übernimmst du die Fachführung Stützbauwerke mit Schwerpunkt konstruktiver Tiefbau für Neubau und Erhaltungsprojekte der SBB-Infrastruktur und unterstützt die Fachbereiche Tunnelbau, Geotechnik und Spezialtiefbau.\n- Unter deiner Verantwortung prüfst du Projektdossiers von Variantenstudien bis zu Vor- und Bauprojekten für Stützbauwerke und Tagbautunnel in Bezug auf die korrekte Umsetzung von technischen Vorschriften und qualitativen Anforderungen. Dabei stehst du im engen Austausch mit ausführenden Projektleitenden und Spezialisten der Überwachung.\n- Du übernimmst Expertenleistungen innerhalb der SBB für die Beurteilung von bestehenden Stützbauwerken und strategische und operative Beratung für die Umsetzung von Baumassnahmen.\n- In deiner Rolle entwickelst du SBB-Fachvorgaben und Richtlinien für Neubau- und Erhaltungsmassahmen und der Überwachung für Stützbauwerke weiter. Du führst regelmässige Abstimmungen mit der Behörde durch und nimmst aktiv in Arbeitsgruppen für die Normenentwicklung teil.\n- Du initiierst und begleitest Forschungsprojekte für Innovationen und Weiterentwicklungen im konstruktiven Tiefbau und zur Überwachung von Stützbauwerken.\nDas bringst du mit.\n- Eigeninitiative, Selbstständigkeit und Verantwortungsbewusstsein zeichnen deine Persönlichkeit aus.\n- Du kannst auf fachliche Führungserfahrung zurückgreifen und kommunizierst adressatengerecht. Innerhalb des Fachbereichs verfügst du über ein breites Netzwerk und bist bereit, dieses intern und extern weiter auszubauen.\n- Du verfügst über mehrjährige Praxiserfahrung im konstruktiven Tiefbau.\n- Der Stand von Wissenschaft und Technik im konstruktiven Tiefbau ist dir bekannt und du bringst Fachwissen zum Eisenbahnbetrieb sowie den relevanten Vorschriften mit.\n- Für diese Rolle setzen wir ein abgeschlossenes Studium in Bauingenieurwesen (FH/Uni/ETH) voraus.\n- Du kommunizierst fliessend in Deutsch (mind. C1) und deine Italienisch oder Französisch Kenntnisse sind gut (mind. B2).\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau K, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nSpätestens 10 Arbeitstage nach Bewerbungseingang erhältst du eine erste Rückmeldung von uns.\nFinaler Entscheid 6 Wochen nach Bewerbungseingang\nBewerbung\nFinaler Entscheid 6 Wochen nach Bewerbungseingang\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103727\nHerbert Friedl, Leiter Ingenieurbau\nTelefon +41 79 765 49 18\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
         "en": "Civil engineer in civil engineering 60-100% | SBB\n-\n-\n-\n-\n-\n-\nMove Switzerland with us.\nCivil engineer in structural civil engineering\nBern / Work Smart, January 1st, 2027 or by arrangement, 60-100% (job sharing possible)\nApply now\n\n## You can look forward to this. The SBB Infrastructure division is responsible for the construction, maintenance and operation of the infrastructure, and the “Network design, facilities and technology” area ensures strategic and technological asset management. The “Engineering” department is responsible for the SBB-wide specialist management of tunnels, bridges, supporting structures, earthworks, noise barriers, drinking water supply systems and wastewater disposal systems for engineering structures. We develop techniques, specifications and methods for new construction, repair and monitoring of civil engineering structures. You can find our benefits such as child allowances, free 1st class GA and discounted travel abroad, including for your family, on our website under Benefits. You can move that. - In this exciting role, you will take on specialist management of supporting structures with a focus on structural civil engineering for new construction and maintenance projects of the SBB infrastructure and support the tunnel construction, geotechnics and specialist civil engineering departments. - Under your responsibility, you will check project dossiers from variant studies to pre-construction and construction projects for retaining structures and open-cast tunnels with regard to the correct implementation of technical regulations and qualitative requirements. You will be in close contact with executing project managers and monitoring specialists. - You will provide expert services within SBB for the assessment of existing supporting structures and strategic and operational advice for the implementation of construction measures. - In your role, you will further develop SBB technical specifications and guidelines for new construction and maintenance measures and the monitoring of supporting structures.\n\nYou carry out regular coordination with the authorities and actively participate in working groups for the development of standards. - You initiate and support research projects for innovations and further developments in civil engineering and for monitoring supporting structures. This is what you bring with you. - Your personality is characterized by initiative, independence and a sense of responsibility. - You can draw on professional leadership experience and communicate in an appropriate manner. You have a broad network within the department and are willing to expand this further internally and externally. - You have several years of practical experience in structural civil engineering. - You are familiar with the state of science and technology in civil engineering and have specialist knowledge of railway operations and the relevant regulations. - For this role we require a completed degree in civil engineering (FH/Uni/ETH). - You communicate fluently in German (at least C1) and your knowledge of Italian or French is good (at least B2).\n\n## Your salary and your benefits.\nWe have a fair and progressive wage system and are actively committed to equal pay. Therefore, further and detailed information about the wage system at SBB can be viewed transparently. This position is at requirement level K, regional allowance level 1. More about wages and benefits.\n\n## This gets you started.\nThe fact that you want to move Switzerland with us is our greatest motivation. That's why we don't include a letter of motivation at this point. If you still want to tell us your motivation, you still have the opportunity to do so in our application tool.\nDoing great things is easier if you do it yourself. This starts with your application.\n\n## This is how it continues.\n×\nYou will receive initial feedback from us no later than 10 working days after receipt of your application.\nFinal decision 6 weeks after receipt of application\nApplication\nFinal decision 6 weeks after receipt of application\nAny questions?\nAbout the application process\nSBB Recruiting Support\nTelephone + 41 51 220 20 29\nrecruiting@sbb.ch\n#simplyyou\nFAQ about the application\nOn the spot\nJob ID 103727\nHerbert Friedl, Head of Civil Engineering\nTelephone +41 79 765 49 18\nUnfortunately, applications via email cannot be considered.\nWe do not accept dossiers from recruiters for this position.\n\n## This is what we offer.\nBenefits\nBenefits\nFind out more\nWherever possible, we rely on flexible working hours and modern working time models. In addition, as an employer, we are also flexible when it comes to balancing your professional life with your private life.\nFind out more\nFind out more\nDifferences welcome\nDifferences welcome\nFind out more\nWith over 150 different professions, we offer an impressive variety of entry and development opportunities. Our employees are just as diverse. That is why we are committed to ensuring that all employees can contribute their individual strengths and ways of thinking.\nFind out more\nFind out more\nCareer and development\nCareer and development\nFind out more\nWe support our employees based on their personal needs and ambitions. To this end, we provide a wide range of cross-disciplinary and cross-departmental training courses. We contribute financially and temporally to selected external further training courses.\nFind out more\nFind out more",
-        "fr": "Ingénieur civil en génie civil 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nIngénieur civil en génie civil structure\nBerne / Work Smart, 1er janvier 2027 ou sur rendez-vous, 60-100% (jobsharing possible)\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. La division Infrastructure CFF est responsable de la construction, de l'entretien et de l'exploitation de l'infrastructure, tandis que le domaine «Conception, installations et technologie du réseau» assure la gestion stratégique et technologique des actifs. Le département «Ingénierie» est responsable de la gestion spécialisée à l'échelle des CFF des tunnels, ponts, ouvrages de soutènement, terrassements, murs antibruit, systèmes d'approvisionnement en eau potable et systèmes d'évacuation des eaux usées pour ouvrages d'art. Nous développons des techniques, des spécifications et des méthodes pour la construction neuve, la réparation et le suivi des ouvrages de génie civil. Vous pouvez retrouver nos avantages tels que les allocations familiales, l'AG 1ère classe gratuite et les voyages à l'étranger à prix réduit, y compris pour votre famille, sur notre site Internet sous Avantages. Vous pouvez déplacer cela. - Dans ce rôle passionnant, vous assumerez la gestion spécialisée des structures de support, en mettant l'accent sur le génie civil structurel pour les nouveaux projets de construction et de maintenance de l'infrastructure des CFF, et soutiendrez les services de construction de tunnels, de géotechnique et de génie civil spécialisé. - Sous votre responsabilité, vous vérifierez les dossiers de projets depuis les études de variantes jusqu'aux projets d'avant-construction et de construction d'ouvrages de soutènement et de tunnels à ciel ouvert au regard de la bonne mise en œuvre des réglementations techniques et des exigences qualitatives. Vous serez en contact étroit avec les chefs de projet d'exécution et les spécialistes du suivi. - Vous fournissez des prestations d'expertise au sein des CFF pour l'évaluation des structures porteuses existantes et des conseils stratégiques et opérationnels pour la mise en œuvre de mesures de construction. - Dans le cadre de vos fonctions, vous développerez les spécifications techniques et les directives des CFF pour les nouvelles mesures de construction et d'entretien ainsi que pour la surveillance des structures porteuses.\n\nVous effectuez une coordination régulière avec les autorités et participez activement aux groupes de travail pour l'élaboration des normes. - Vous lancez et soutenez des projets de recherche pour des innovations et des développements ultérieurs dans le génie civil et pour le suivi des structures porteuses. C'est ce que vous apportez avec vous. - Votre personnalité se caractérise par l'initiative, l'indépendance et le sens des responsabilités. - Vous pouvez vous appuyer sur une expérience professionnelle en leadership et communiquer de manière appropriée. Vous disposez d'un vaste réseau au sein du département et souhaitez l'étendre davantage en interne et en externe. - Vous disposez de plusieurs années d'expérience pratique en génie civil structure. - Vous connaissez l'état de la science et de la technologie en matière de génie civil et disposez de connaissances spécialisées dans le domaine de l'exploitation ferroviaire et des réglementations en vigueur. - Pour ce poste, nous avons besoin d'un diplôme d'ingénieur civil (FH/Uni/ETH). - Vous communiquez couramment en allemand (au moins C1) et votre connaissance de l'italien ou du français est bonne (au moins B2).\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence K, niveau d'allocation régionale 1. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nVous recevrez un premier retour de notre part au plus tard 10 jours ouvrables après réception de votre candidature.\nDécision finale 6 semaines après réception de la demande\nDemande\nDécision finale 6 semaines après réception de la demande\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nNuméro de travail 103727\nHerbert Friedl, responsable du génie civil\nTéléphone +41 79 765 49 18\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d'opportunités d'entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus",
+        "fr": "Ingénieur civil en génie civil 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nIngénieur civil en génie civil structure\nBerne / Work Smart, 1er janvier 2027 ou sur rendez-vous, 60-100% (jobsharing possible)\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. La division Infrastructure CFF est responsable de la construction, de l'entretien et de l'exploitation de l'infrastructure, tandis que le domaine «Conception, installations et technologie du réseau» assure la gestion stratégique et technologique des actifs. Le département «Ingénierie» est responsable de la gestion spécialisée à l'échelle des CFF des tunnels, ponts, ouvrages de soutènement, terrassements, murs antibruit, systèmes d'approvisionnement en eau potable et systèmes d'évacuation des eaux usées pour ouvrages d'art. Nous développons des techniques, des spécifications et des méthodes pour la construction neuve, la réparation et le suivi des ouvrages de génie civil. Vous pouvez retrouver nos avantages tels que les allocations familiales, l'AG 1ère classe gratuite et les voyages à l'étranger à prix réduit, y compris pour votre famille, sur notre site Internet sous Avantages. Vous pouvez déplacer cela. - Dans ce rôle passionnant, vous assumerez la gestion spécialisée des structures de support, en mettant l'accent sur le génie civil structurel pour les nouveaux projets de construction et de maintenance de l'infrastructure des CFF, et soutiendrez les services de construction de tunnels, de géotechnique et de génie civil spécialisé. - Sous votre responsabilité, vous vérifierez les dossiers de projets depuis les études de variantes jusqu'aux projets d'avant-construction et de construction d'ouvrages de soutènement et de tunnels à ciel ouvert au regard de la bonne mise en œuvre des réglementations techniques et des exigences qualitatives. Vous serez en contact étroit avec les chefs de projet d'exécution et les spécialistes du suivi. - Vous fournissez des prestations d'expertise au sein des CFF pour l'évaluation des structures porteuses existantes et des conseils stratégiques et opérationnels pour la mise en œuvre de mesures de construction. - Dans le cadre de vos fonctions, vous développerez les spécifications techniques et les directives des CFF pour les nouvelles mesures de construction et d'entretien ainsi que pour la surveillance des structures porteuses.\n\nVous effectuez une coordination régulière avec les autorités et participez activement aux groupes de travail pour l'élaboration des normes. - Vous lancez et soutenez des projets de recherche pour des innovations et des développements ultérieurs dans le génie civil et pour le suivi des structures porteuses. C'est ce que vous apportez avec vous. - Votre personnalité se caractérise par l'initiative, l'indépendance et le sens des responsabilités. - Vous pouvez vous appuyer sur une expérience professionnelle en leadership et communiquer de manière appropriée. Vous disposez d'un vaste réseau au sein du département et souhaitez l'étendre davantage en interne et en externe. - Vous disposez de plusieurs années d'expérience pratique en génie civil structure. - Vous connaissez l'état de la science et de la technologie en matière de génie civil et disposez de connaissances spécialisées dans le domaine de l'exploitation ferroviaire et des réglementations en vigueur. - Pour ce poste, nous avons besoin d'un diplôme d'ingénieur civil (FH/Uni/ETH). - Vous communiquez couramment en allemand (au moins C1) et votre connaissance de l'italien ou du français est bonne (au moins B2).\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence K, niveau d'allocation régionale 1. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nVous recevrez un premier retour de notre part au plus tard 10 jours ouvrables après réception de votre candidature.\nDécision finale 6 semaines après réception de la demande\nDemande\nDécision finale 6 semaines après réception de la demande\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nNuméro de travail 103727\nHerbert Friedl, responsable du génie civil\nTéléphone +41 79 765 49 18\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d’opportunités d’entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus",
         "it": "Bauingenieur:in im konstruktiven Tiefbau 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nBauingenieur:in im konstruktiven Tiefbau\nBern / Work Smart, 01.01.2027 oder nach Vereinbarung, 60-100% (Jobsharing möglich)\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nDie Division SBB Infrastruktur ist für den Bau, Unterhalt und Betrieb der Infrastruktur verantwortlich und im Bereich «Netzdesign, Anlagen und Technologie» wird das strategische und technologische Anlagenmanagement sichergestellt. Die Abteilung «Ingenieurbau» ist verantwortlich für die SBB weite Fachführung für Tunnel, Brücken, Stützbauwerke, Erdbauwerke, Lärmschutzwände, Trinkwasserversorgungsanlagen und Abwasserentsorgungsanlagen von Kunstbauten. Wir entwickeln Techniken, Vorgaben und Methoden für Neubau, Instandsetzung und Überwachung von Ingenieurbauwerken.\nUnsere Benefits wie Kinderzulagen, kostenloses 1. Klasse GA und vergünstigtes Reisen im Ausland, auch für deine Familie, findest du auf unserer Website unter Benefits .\nDas kannst du bewegen.\n- In dieser spannenden Funktion übernimmst du die Fachführung Stützbauwerke mit Schwerpunkt konstruktiver Tiefbau für Neubau und Erhaltungsprojekte der SBB-Infrastruktur und unterstützt die Fachbereiche Tunnelbau, Geotechnik und Spezialtiefbau.\n- Unter deiner Verantwortung prüfst du Projektdossiers von Variantenstudien bis zu Vor- und Bauprojekten für Stützbauwerke und Tagbautunnel in Bezug auf die korrekte Umsetzung von technischen Vorschriften und qualitativen Anforderungen. Dabei stehst du im engen Austausch mit ausführenden Projektleitenden und Spezialisten der Überwachung.\n- Du übernimmst Expertenleistungen innerhalb der SBB für die Beurteilung von bestehenden Stützbauwerken und strategische und operative Beratung für die Umsetzung von Baumassnahmen.\n- In deiner Rolle entwickelst du SBB-Fachvorgaben und Richtlinien für Neubau- und Erhaltungsmassahmen und der Überwachung für Stützbauwerke weiter. Du führst regelmässige Abstimmungen mit der Behörde durch und nimmst aktiv in Arbeitsgruppen für die Normenentwicklung teil.\n- Du initiierst und begleitest Forschungsprojekte für Innovationen und Weiterentwicklungen im konstruktiven Tiefbau und zur Überwachung von Stützbauwerken.\nDas bringst du mit.\n- Eigeninitiative, Selbstständigkeit und Verantwortungsbewusstsein zeichnen deine Persönlichkeit aus.\n- Du kannst auf fachliche Führungserfahrung zurückgreifen und kommunizierst adressatengerecht. Innerhalb des Fachbereichs verfügst du über ein breites Netzwerk und bist bereit, dieses intern und extern weiter auszubauen.\n- Du verfügst über mehrjährige Praxiserfahrung im konstruktiven Tiefbau.\n- Der Stand von Wissenschaft und Technik im konstruktiven Tiefbau ist dir bekannt und du bringst Fachwissen zum Eisenbahnbetrieb sowie den relevanten Vorschriften mit.\n- Für diese Rolle setzen wir ein abgeschlossenes Studium in Bauingenieurwesen (FH/Uni/ETH) voraus.\n- Du kommunizierst fliessend in Deutsch (mind. C1) und deine Italienisch oder Französisch Kenntnisse sind gut (mind. B2).\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau K, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nSpätestens 10 Arbeitstage nach Bewerbungseingang erhältst du eine erste Rückmeldung von uns.\nFinaler Entscheid 6 Wochen nach Bewerbungseingang\nBewerbung\nFinaler Entscheid 6 Wochen nach Bewerbungseingang\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 103727\nHerbert Friedl, Leiter Ingenieurbau\nTelefon +41 79 765 49 18\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren"
       },
       "requirements": [
@@ -14652,7 +14652,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/bauingenieur-in-im-konstruktiven-tiefbau/f15a238a-0414-4c4e-81ba-b6069e77d99c",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:06.581Z",
+      "crawledAt": "2026-08-29T23:19:55.429Z",
       "previousSlugsByLocale": {
         "it": [
           "bauingenieur-in-im-konstruktiven-tiefbau-ffs-officine-ferrovie-federali-bern"
@@ -14675,7 +14675,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T15:14:06.581Z"
+      "firstSeenAt": "2026-08-29T23:19:55.429Z"
     },
     {
       "id": "sbb-20feb2c97427",
@@ -14752,7 +14752,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fahrzeugdiagnostiker-in-schienenfahrzeuge/3864fd3f-e37a-48e4-841d-087ed2bc84b3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:07.663Z",
+      "crawledAt": "2026-08-29T23:19:53.189Z",
       "previousSlugsByLocale": {
         "it": [
           "fahrzeugdiagnostiker-in-schienenfahrzeuge-ffs-officine-ferrovie-federali-biel-bienne"
@@ -14775,7 +14775,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T15:14:07.663Z"
+      "firstSeenAt": "2026-08-29T23:19:53.189Z"
     },
     {
       "id": "sbb-417cffcec717",
@@ -14800,8 +14800,8 @@
       "descriptionByLocale": {
         "it": "Responsabile gestione dei dati dei materiali (m/f/d) 60-100% | FFS\n-\n-\n-\n-\n-\n-\nMetti in movimento la Svizzera insieme a noi.\nResponsabile gestione dei dati dei materiali (m/f/d)\nBerna / Work Smart, 01.10.2026 o in data da convenire, 60-100%\nCandidarsi qui\n\n## Cosa ti offriamo.\nIn questo ruolo chiave sei responsabile della gestione dei dati dei materiali e della gestione dei trasporti nell'ambito dell'infrastruttura. Sei alla guida di un team interdisciplinare e partecipi attivamente alla digitalizzazione e all'ulteriore sviluppo di processi logistici. Lavori a stretto contatto con partner interni ed esterni e contribuisci in modo significativo alla qualità e alla trasparenza dei processi logistici.\nQuello che puoi mettere in movimento.\n- Guidi e sviluppi un team interdisciplinare di sei persone nei settori della gestione dei dati e della gestione dei trasporti.\n- Sei responsabile della data governance e della qualità dei dati anagrafici logistici lungo l'intero processo end to end.\n- Sviluppi ulteriormente i processi relativi ai dati anagrafici, le soluzioni digitali e automatizzate e ne promuovi la standardizzazione.\n- Garantisci dati di alta qualità per pianificazione, controllo, reporting e performance management.\n- Sei responsabile della gestione dei trasporti su strada, inclusi la messa a concorso, il monitoraggio delle prestazioni e la gestione dei fornitori di servizi.\n- Assicuri il rispetto dei requisiti legali in commercio estero e dogana e promuovi ottimizzazioni trasversali tra i reparti.\nQuello che porti con te.\n- Vanti un'esperienza pluriennale dirigenziale e conoscenze approfondite nella gestione dei dati, nella logistica, nella catena di approvvigionamento o nella gestione dei trasporti.\n- Hai già maturato esperienza in materia di governance dei dati anagrafici, digitalizzazione e ottimizzazione dei processi.\n- Grazie alla tua grande affinità per dati, analisi e soluzioni digitali, disponi di un'ampia comprensione dei processi.\n- Lavori in modo strutturato e orientato alla soluzione e ti muovi con sicurezza in contesti interdisciplinari.\n- Grazie alla tua comunicazione adeguata ai destinatari, riesci a coinvolgere diversi stakeholder per trovare soluzioni comuni.\n- Hai una formazione terziaria presso una scuola universitaria professionale, un'università o equivalente e possiedi un'ottima conoscenza del tedesco. Altre lingue nazionali sono considerate un vantaggio.\n\n## Salario e benefit.\nAbbiamo un sistema retributivo equo e moderno e ci impegniamo attivamente per la parità salariale. Per questo motivo, sono disponibili informazioni dettagliate e trasparenti sul sistema retributivo delle FFS. Questo impiego rientra nel livello di esigenze K, indennità regionale di livello 1. Di più su salario e benefit .\n\n## Questo è un buon modo per iniziare.\nIl tuo desiderio di mettere in movimento la Svizzera insieme a noi è la più grande prova di motivazione che puoi dimostrarci. Rinunciamo quindi a richiedere una lettera di motivazione per questo posto. Se desideri comunicarci le ragioni della tua candidatura puoi farlo utilizzando il nostro tool.\nFare qualcosa di grande è più facile dandosi del tu. A cominciare dalla tua candidatura.\n\n## Prossimi passi.\n×\nRiceverai un primo riscontro da parte nostra entro e non oltre 10 giorni lavorativi dalla sottomissione della tua candidatura.\nDecisione finale Ottobre 2026\nCandidatura\nDecisione finale Ottobre 2026\nDomande?\nSul processo di candidatura\nRecruiting Support FFS\nTelefono + 41 51 220 20 29\nrecruiting@ffs.ch\n#semplicementeTu\nFAQ per candidati\nSul posto\nJob ID 103993\nShkelzen Thaqi\nTelefono +41 79 367 40 35\nLe candidature per e-mail non possono purtroppo essere prese in considerazione.\nPer questo posto non accettiamo dossier di agenzie di collocamento.\n\n## Ciò che offriamo.\nVantaggi\nVantaggi\nDi più\nPer quanto possibile cerchiamo di offrire orari di lavoro flessibili e consentiamo il lavoro a tempo parziale grazie a modelli di tempo di lavoro moderni. Inoltre, siamo un datore di lavoro flessibile anche quando si tratta di conciliare la vita professionale con la vita privata.\nDi più\nDi più\nBenvenuta la diversità\nBenvenuta la diversità\nDi più\nCon oltre 150 professioni diverse, offriamo una sorprendente varietà di inizio di carriera e di sviluppo. Per questo ci impegniamo per un ambiente di lavoro in cui tutti i collaboratori possano esprimere i propri punti di forza individuali, esperienze e modi di pensare.\nDi più\nDi più\nCarriera e sviluppo\nCarriera e sviluppo\nDi più\nPromuoviamo le nostre collaboratrici e i nostri collaboratori, accompagnandoli nelle loro esigenze e ambizioni personali. Partecipiamo finanziariamente e in termini di tempo alle formazioni continue esterne che portano vantaggi al nostro personale e alle FFS.\nDi più\nDi più",
         "en": "Material Data Management Manager (m/f/d) 60-100% | FFS\n\nGet Switzerland moving with us.\nResponsible for material data management (m/f/d)\nBern / Work Smart, 01.10.2026 or date to be agreed, 60-100%\nApply here\n\n## What we offer you. In this key role you are responsible for material data management and transportation management within the infrastructure. You lead an interdisciplinary team and actively participate in the digitalization and further development of logistics processes. You work closely with internal and external partners and contribute significantly to the quality and transparency of logistics processes. What you can put in motion. - You lead and develop an interdisciplinary team of six people in the fields of data management and transportation management. - You are responsible for data governance and quality of logistics master data throughout the entire end to end process. - Further develop master data processes, digital and automated solutions and promote their standardization. - Ensure high-quality data for planning, control, reporting and performance management. - You are responsible for road transport management, including tendering, performance monitoring and service provider management. - Ensure compliance with legal requirements in foreign trade and customs and promote cross-departmental optimizations. What you take with you. - You have many years of management experience and in-depth knowledge in data management, logistics, supply chain or transportation management. - You have already gained experience in master data governance, digitalization and process optimization. - Thanks to your great affinity for data, analytics and digital solutions, you have a broad understanding of processes.\n\n- You work in a structured and solution-oriented way and move confidently in interdisciplinary contexts. - Thanks to your adequate communication to the recipients, you manage to involve different stakeholders to find common solutions. - You have tertiary education at a university of applied sciences, university or equivalent and have excellent knowledge of German. Other national languages ​​are considered an advantage.\n\n## Salary and benefits.\nWe have a fair and modern pay system and are actively committed to equal pay. For this reason, detailed and transparent information on the SBB remuneration system is available. This job falls under Need Level K, Regional Compensation Level 1. More about salary and benefits.\n\n## This is a good way to start.\nYour desire to put Switzerland in motion together with us is the greatest proof of motivation you can show us. We therefore waive the need to request a cover letter for this position. If you wish to tell us the reasons for your application you can do so using our tool.\nDoing something great is easier by being familiar. Starting with your application.\n\n## Next steps.\n×\nYou will receive an initial response from us no later than 10 working days from the submission of your application.\nFinal decision October 2026\nApplication\nFinal decision October 2026\nQuestions?\nAbout the application process\nRecruiting Support FFS\nTelephone + 41 51 220 20 29\nrecruiting@ffs.ch\n#simplyYou\nFAQ for candidates\nOn site\nJob ID 103993\nShkelzen Thaqi\nTelephone +41 79 367 40 35\nUnfortunately, applications by email cannot be taken into consideration.\nFor this post we do not accept dossiers from employment agencies.\n\n## What we offer.\nAdvantages\nAdvantages\nMore\nAs far as possible we try to offer flexible working hours and allow part-time work thanks to modern working time models. Furthermore, we are also a flexible employer when it comes to reconciling work and private life.\nMore\nMore\nDiversity is welcome\nDiversity is welcome\nMore\nWith over 150 different professions, we offer an astonishing variety of career starts and development. This is why we are committed to a work environment in which all employees can express their individual strengths, experiences and ways of thinking.\nMore\nMore\nCareer and development\nCareer and development\nMore\nWe promote our collaborators, accompanying them in their personal needs and ambitions. We participate financially and in terms of time in external ongoing training which benefits our staff and SBB.\nMore\nMore",
-        "de": "Material Data Management Manager (m/w/d) 60-100 % | FFS\n\nBringen Sie mit uns die Schweiz in Bewegung.\nVerantwortlich für die Materialdatenverwaltung (m/w/d)\nBern / Work Smart, 01.10.2026 oder Termin nach Vereinbarung, 60-100%\nBewerben Sie sich hier\n\n## Was wir Ihnen bieten. In dieser Schlüsselrolle sind Sie für die Materialdatenverwaltung und das Transportmanagement innerhalb der Infrastruktur verantwortlich. Sie leiten ein interdisziplinäres Team und wirken aktiv an der Digitalisierung und Weiterentwicklung logistischer Prozesse mit. Sie arbeiten eng mit internen und externen Partnern zusammen und tragen maßgeblich zur Qualität und Transparenz der Logistikprozesse bei. Was Sie bewegen können. - Sie leiten und entwickeln ein interdisziplinäres Team von sechs Personen in den Bereichen Datenmanagement und Transportmanagement. - Sie sind für die Datenverwaltung und Qualität der Logistikstammdaten während des gesamten End-to-End-Prozesses verantwortlich. - Stammdatenprozesse, digitale und automatisierte Lösungen weiterentwickeln und deren Standardisierung vorantreiben. - Stellen Sie qualitativ hochwertige Daten für Planung, Kontrolle, Berichterstattung und Leistungsmanagement sicher. - Sie sind verantwortlich für das Straßentransportmanagement, einschließlich Ausschreibung, Leistungsüberwachung und Dienstleistermanagement. - Stellen Sie die Einhaltung gesetzlicher Anforderungen im Außenhandel und Zoll sicher und treiben Sie abteilungsübergreifende Optimierungen voran. Was du mitnimmst. - Sie verfügen über langjährige Managementerfahrung und fundierte Kenntnisse im Datenmanagement, Logistik, Supply Chain oder Transportmanagement. - Sie haben bereits Erfahrungen in den Bereichen Master Data Governance, Digitalisierung und Prozessoptimierung gesammelt. - Durch deine große Affinität zu Daten, Analytics und digitalen Lösungen verfügst du über ein breites Prozessverständnis.\n\n- Sie arbeiten strukturiert und lösungsorientiert und bewegen sich sicher in interdisziplinären Zusammenhängen. - Dank Ihrer adäquaten Kommunikation mit den Empfängern schaffen Sie es, verschiedene Interessengruppen einzubeziehen, um gemeinsame Lösungen zu finden. - Sie verfügen über eine Hochschulausbildung an einer Fachhochschule, Universität oder einem gleichwertigen Abschluss und verfügen über ausgezeichnete Deutschkenntnisse. Weitere Landessprachen gelten als Vorteil.\n\n## Gehalt und Sozialleistungen.\nWir verfügen über ein faires und modernes Lohnsystem und setzen uns aktiv für gleiches Entgelt ein. Aus diesem Grund stehen detaillierte und transparente Informationen zum Vergütungssystem der SBB zur Verfügung. Dieser Job fällt unter Bedarfsstufe K, regionale Vergütungsstufe 1. Weitere Informationen zu Gehalt und Sozialleistungen.\n\n## Dies ist ein guter Anfang.\nIhr Wunsch, gemeinsam mit uns die Schweiz in Bewegung zu bringen, ist der größte Motivationsbeweis, den Sie uns zeigen können. Wir verzichten daher auf die Anforderung eines Anschreibens für diese Stelle. Wenn Sie uns die Gründe für Ihre Bewerbung mitteilen möchten, können Sie dies über unser Tool tun.\nEs ist einfacher, etwas Großartiges zu tun, wenn man vertraut ist. Beginnend mit Ihrer Bewerbung.\n\n## Nächste Schritte.\n×\nSpätestens 10 Werktage nach Einreichung Ihrer Bewerbung erhalten Sie von uns eine erste Rückmeldung.\nEndgültige Entscheidung Oktober 2026\nBewerbung\nEndgültige Entscheidung Oktober 2026\nFragen?\nÜber den Bewerbungsprozess\nRekrutierungsunterstützung FFS\nTelefon + 41 51 220 20 29\nrecruiting@ffs.ch\n#einfachDu\nFAQ für Kandidaten\nVor Ort\nJob-ID 103993\nShkelzen Thaqi\nTelefon +41 79 367 40 35\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle akzeptieren wir keine Dossiers von Arbeitsagenturen.\n\n## Was wir bieten.\nVorteile\nVorteile\nMehr\nSoweit möglich versuchen wir, flexible Arbeitszeiten anzubieten und durch moderne Arbeitszeitmodelle Teilzeitarbeit zu ermöglichen. Darüber hinaus sind wir ein flexibler Arbeitgeber, wenn es um die Vereinbarkeit von Beruf und Privatleben geht.\nMehr\nMehr\nVielfalt ist willkommen\nVielfalt ist willkommen\nMehr\nMit über 150 verschiedenen Berufen bieten wir eine erstaunliche Vielfalt an Berufseinstiegen und -entwicklungen. Deshalb setzen wir uns für ein Arbeitsumfeld ein, in dem alle Mitarbeiter ihre individuellen Stärken, Erfahrungen und Denkweisen zum Ausdruck bringen können.\nMehr\nMehr\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr\nWir fördern unsere Mitarbeiter und begleiten sie bei ihren persönlichen Bedürfnissen und Ambitionen. Wir beteiligen uns finanziell und zeitlich an externen Weiterbildungen, die unseren Mitarbeitenden und der SBB zugutekommen.\nMehr\nMehr",
-        "fr": "Gestionnaire de gestion des données matérielles (h/f/d) 60-100% | FFS\n\nFaites bouger la Suisse avec nous.\nResponsable de la gestion des données matières (h/f/d)\nBerne / Work Smart, 01.10.2026 ou date à convenir, 60-100%\nPostulez ici\n\n## Ce que nous vous proposons. Dans ce rôle clé, vous êtes responsable de la gestion des données matérielles et de la gestion du transport au sein de l'infrastructure. Vous dirigez une équipe interdisciplinaire et participez activement à la numérisation et au développement des processus logistiques. Vous travaillez en étroite collaboration avec des partenaires internes et externes et contribuez de manière significative à la qualité et à la transparence des processus logistiques. Ce que vous pouvez mettre en mouvement. - Vous animez et développez une équipe interdisciplinaire de six personnes dans les domaines de la gestion des données et de la gestion des transports. - Vous êtes responsable de la gouvernance des données et de la qualité des données de base logistiques tout au long du processus de bout en bout. - Développer davantage les processus de données de référence, les solutions numériques et automatisées et promouvoir leur standardisation. - Garantir des données de haute qualité pour la planification, le contrôle, le reporting et la gestion des performances. - Vous êtes responsable de la gestion du transport routier, y compris les appels d'offres, le suivi des performances et la gestion des prestataires de services. - Veiller au respect des exigences légales en matière de commerce extérieur et douanier et favoriser les optimisations transversales. Ce que vous emportez avec vous. - Vous possédez de nombreuses années d'expérience en gestion et des connaissances approfondies en gestion de données, en logistique, en supply chain ou en gestion des transports. - Vous avez déjà acquis une expérience en matière de gouvernance des données de référence, de digitalisation et d'optimisation des processus. - Grâce à votre grande affinité pour les données, les analyses et les solutions numériques, vous disposez d'une large compréhension des processus.\n\n- Vous travaillez de manière structurée et orientée solutions et évoluez en toute confiance dans des contextes interdisciplinaires. - Grâce à votre communication adéquate auprès des destinataires, vous parvenez à impliquer différentes parties prenantes pour trouver des solutions communes. - Vous avez fait des études supérieures dans une haute école spécialisée, une université ou équivalente et avez d'excellentes connaissances en allemand. D'autres langues nationales sont considérées comme un avantage.\n\n## Salaire et avantages sociaux.\nNous disposons d’un système de rémunération juste et moderne et nous nous engageons activement en faveur de l’égalité salariale. C'est pourquoi des informations détaillées et transparentes sur le système de rémunération des CFF sont disponibles. Cet emploi relève du niveau de besoin K, niveau de rémunération régional 1. En savoir plus sur le salaire et les avantages sociaux.\n\n## C'est une bonne façon de commencer.\nVotre désir de faire bouger la Suisse avec nous est la plus grande preuve de motivation que vous puissiez nous démontrer. Nous renonçons donc à demander une lettre de motivation pour ce poste. Si vous souhaitez nous faire part des raisons de votre candidature vous pouvez le faire via notre outil.\nFaire quelque chose de grand est plus facile en étant familier. À commencer par votre candidature.\n\n## Prochaines étapes.\n×\nVous recevrez une première réponse de notre part au plus tard 10 jours ouvrés à compter du dépôt de votre candidature.\nDécision finale octobre 2026\nDemande\nDécision finale octobre 2026\nDes questions?\nÀ propos du processus de candidature\nAccompagnement au recrutement FFS\nTéléphone + 41 51 220 20 29\nrecrutement@ffs.ch\n#simplementVous\nFAQ pour les candidats\nSur place\nNuméro de travail 103993\nShkelzen Thaqi\nTéléphone +41 79 367 40 35\nMalheureusement, les candidatures par email ne peuvent être prises en considération.\nPour ce poste, nous n'acceptons pas les dossiers des agences pour l'emploi.\n\n## Ce que nous proposons.\nAvantages\nAvantages\nPlus\nDans la mesure du possible, nous essayons d'offrir des horaires de travail flexibles et d'autoriser le travail à temps partiel grâce à des modèles de temps de travail modernes. De plus, nous sommes également un employeur flexible lorsqu'il s'agit de concilier vie professionnelle et vie privée.\nPlus\nPlus\nLa diversité est la bienvenue\nLa diversité est la bienvenue\nPlus\nAvec plus de 150 métiers différents, nous proposons une étonnante variété de débuts et d’évolutions de carrière. C'est pourquoi nous nous engageons en faveur d'un environnement de travail dans lequel tous les employés peuvent exprimer leurs forces, leurs expériences et leurs façons de penser.\nPlus\nPlus\nCarrière et développement\nCarrière et développement\nPlus\nNous valorisons nos collaborateurs en les accompagnant dans leurs besoins et ambitions personnels. Nous participons financièrement et en temps à des formations continues externes dont profitent nos collaborateurs et les CFF.\nPlus\nPlus"
+        "de": "Material Data Management Manager (m/w/d) 60-100 % | FFS\n\nBringen Sie mit uns die Schweiz in Bewegung.\nVerantwortlich für die Materialdatenverwaltung (m/w/d)\nBern / Work Smart, 01.10.2026 oder Termin nach Vereinbarung, 60-100%\nBewerben Sie sich hier\n\n## Was wir Ihnen bieten. In dieser Schlüsselrolle sind Sie für die Materialdatenverwaltung und das Transportmanagement innerhalb der Infrastruktur verantwortlich. Sie leiten ein interdisziplinäres Team und wirken aktiv an der Digitalisierung und Weiterentwicklung logistischer Prozesse mit. Sie arbeiten eng mit internen und externen Partnern zusammen und tragen maßgeblich zur Qualität und Transparenz der Logistikprozesse bei. Was Sie bewegen können. - Sie leiten und entwickeln ein interdisziplinäres Team von sechs Personen in den Bereichen Datenmanagement und Transportmanagement. - Sie sind für die Datenverwaltung und Qualität der Logistikstammdaten während des gesamten End-to-End-Prozesses verantwortlich. - Stammdatenprozesse, digitale und automatisierte Lösungen weiterentwickeln und deren Standardisierung vorantreiben. - Stellen Sie qualitativ hochwertige Daten für Planung, Kontrolle, Berichterstattung und Leistungsmanagement sicher. - Sie sind verantwortlich für das Straßentransportmanagement, einschließlich Ausschreibung, Leistungsüberwachung und Dienstleistermanagement. - Stellen Sie die Einhaltung gesetzlicher Anforderungen im Außenhandel und Zoll sicher und treiben Sie abteilungsübergreifende Optimierungen voran. Was du mitnimmst. - Sie verfügen über langjährige Managementerfahrung und fundierte Kenntnisse im Datenmanagement, Logistik, Supply Chain oder Transportmanagement. - Sie haben bereits Erfahrungen in den Bereichen Master Data Governance, Digitalisierung und Prozessoptimierung gesammelt. - Durch deine große Affinität zu Daten, Analytics und digitalen Lösungen verfügst du über ein breites Prozessverständnis.\n\n- Sie arbeiten strukturiert und lösungsorientiert und bewegen sich sicher in interdisziplinären Zusammenhängen. - Dank Ihrer adäquaten Kommunikation mit den Empfängern schaffen Sie es, verschiedene Interessengruppen einzubeziehen, um gemeinsame Lösungen zu finden. - Sie verfügen über eine Hochschulausbildung an einer Fachhochschule, Universität oder einem gleichwertigen Abschluss und verfügen über ausgezeichnete Deutschkenntnisse. Weitere Landessprachen gelten als Vorteil.\n\n## Gehalt und Sozialleistungen.\nWir verfügen über ein faires und modernes Lohnsystem und setzen uns aktiv für gleiches Entgelt ein. Aus diesem Grund stehen detaillierte und transparente Informationen zum Vergütungssystem der SBB zur Verfügung. Dieser Job fällt unter Bedarfsstufe K, regionale Vergütungsstufe 1. Weitere Informationen zu Gehalt und Sozialleistungen.\n\n## Dies ist ein guter Anfang.\nIhr Wunsch, gemeinsam mit uns die Schweiz in Bewegung zu setzen, ist der größte Motivationsbeweis, den Sie uns zeigen können. Wir verzichten daher auf die Anforderung eines Anschreibens für diese Stelle. Wenn Sie uns die Gründe für Ihre Bewerbung mitteilen möchten, können Sie dies über unser Tool tun.\nEtwas Großartiges zu tun ist einfacher, wenn man vertraut ist. Beginnend mit Ihrer Bewerbung.\n\n## Nächste Schritte.\n×\nSpätestens 10 Werktage nach Einreichung Ihrer Bewerbung erhalten Sie von uns eine erste Rückmeldung.\nEndgültige Entscheidung Oktober 2026\nBewerbung\nEndgültige Entscheidung Oktober 2026\nFragen?\nÜber den Bewerbungsprozess\nRekrutierungsunterstützung FFS\nTelefon + 41 51 220 20 29\nrecruiting@ffs.ch\n#einfachDu\nFAQ für Kandidaten\nVor Ort\nJob-ID 103993\nShkelzen Thaqi\nTelefon +41 79 367 40 35\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle akzeptieren wir keine Dossiers von Arbeitsagenturen.\n\n## Was wir bieten.\nVorteile\nVorteile\nMehr\nSoweit möglich versuchen wir, flexible Arbeitszeiten anzubieten und durch moderne Arbeitszeitmodelle Teilzeitarbeit zu ermöglichen. Darüber hinaus sind wir ein flexibler Arbeitgeber, wenn es um die Vereinbarkeit von Beruf und Privatleben geht.\nMehr\nMehr\nVielfalt ist willkommen\nVielfalt ist willkommen\nMehr\nMit über 150 verschiedenen Berufen bieten wir eine erstaunliche Vielfalt an Berufseinstiegen und -entwicklungen. Deshalb setzen wir uns für ein Arbeitsumfeld ein, in dem alle Mitarbeiter ihre individuellen Stärken, Erfahrungen und Denkweisen zum Ausdruck bringen können.\nMehr\nMehr\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr\nWir fördern unsere Mitarbeiter und begleiten sie bei ihren persönlichen Bedürfnissen und Ambitionen. Wir beteiligen uns finanziell und zeitlich an externen Weiterbildungen, die unseren Mitarbeitenden und der SBB zugute kommen.\nMehr\nMehr",
+        "fr": "Gestionnaire de gestion des données matérielles (h/f/d) 60-100% | FFS\n\nFaites bouger la Suisse avec nous.\nResponsable de la gestion des données matières (h/f/d)\nBerne / Work Smart, 01.10.2026 ou date à convenir, 60-100%\nPostulez ici\n\n## Ce que nous vous proposons. Dans ce rôle clé, vous êtes responsable de la gestion des données matérielles et de la gestion du transport au sein de l'infrastructure. Vous dirigez une équipe interdisciplinaire et participez activement à la numérisation et au développement des processus logistiques. Vous travaillez en étroite collaboration avec des partenaires internes et externes et contribuez de manière significative à la qualité et à la transparence des processus logistiques. Ce que vous pouvez mettre en mouvement. - Vous animez et développez une équipe interdisciplinaire de six personnes dans les domaines de la gestion des données et de la gestion des transports. - Vous êtes responsable de la gouvernance des données et de la qualité des données de base logistiques tout au long du processus de bout en bout. - Développer davantage les processus de données de référence, les solutions numériques et automatisées et promouvoir leur standardisation. - Garantir des données de haute qualité pour la planification, le contrôle, le reporting et la gestion des performances. - Vous êtes responsable de la gestion du transport routier, y compris les appels d'offres, le suivi des performances et la gestion des prestataires de services. - Veiller au respect des exigences légales en matière de commerce extérieur et douanier et favoriser les optimisations transversales. Ce que vous emportez avec vous. - Vous possédez de nombreuses années d'expérience en gestion et des connaissances approfondies en gestion de données, en logistique, en supply chain ou en gestion des transports. - Vous avez déjà acquis une expérience en matière de gouvernance des données de référence, de digitalisation et d'optimisation des processus. - Grâce à votre grande affinité pour les données, l'analytique et les solutions numériques, vous disposez d'une large compréhension des processus.\n\n- Vous travaillez de manière structurée et orientée solutions et évoluez en toute confiance dans des contextes interdisciplinaires. - Grâce à votre communication adéquate auprès des destinataires, vous parvenez à impliquer différentes parties prenantes pour trouver des solutions communes. - Vous avez fait des études supérieures dans une haute école spécialisée, une université ou équivalente et avez d'excellentes connaissances en allemand. D'autres langues nationales sont considérées comme un avantage.\n\n## Salaire et avantages sociaux.\nNous disposons d’un système de rémunération juste et moderne et nous nous engageons activement en faveur de l’égalité salariale. C'est pourquoi des informations détaillées et transparentes sur le système de rémunération des CFF sont disponibles. Cet emploi relève du niveau de besoin K, niveau de rémunération régional 1. En savoir plus sur le salaire et les avantages sociaux.\n\n## C'est une bonne façon de commencer.\nVotre désir de faire bouger la Suisse avec nous est la plus grande preuve de motivation que vous puissiez nous démontrer. Nous renonçons donc à demander une lettre de motivation pour ce poste. Si vous souhaitez nous communiquer les raisons de votre candidature, vous pouvez le faire via notre outil.\nFaire quelque chose de grand est plus facile en étant familier. À commencer par votre candidature.\n\n## Prochaines étapes.\n×\nVous recevrez une première réponse de notre part au plus tard 10 jours ouvrés à compter du dépôt de votre candidature.\nDécision finale octobre 2026\nDemande\nDécision finale octobre 2026\nDes questions?\nÀ propos du processus de candidature\nAccompagnement au recrutement FFS\nTéléphone + 41 51 220 20 29\nrecrutement@ffs.ch\n#simplementVous\nFAQ pour les candidats\nSur place\nNuméro de travail 103993\nShkelzen Thaqi\nTéléphone +41 79 367 40 35\nMalheureusement, les candidatures par email ne peuvent être prises en considération.\nPour ce poste, nous n'acceptons pas les dossiers des agences pour l'emploi.\n\n## Ce que nous proposons.\nAvantages\nAvantages\nPlus\nDans la mesure du possible, nous essayons d'offrir des horaires de travail flexibles et d'autoriser le travail à temps partiel grâce à des modèles de temps de travail modernes. De plus, nous sommes également un employeur flexible lorsqu'il s'agit de concilier vie professionnelle et vie privée.\nPlus\nPlus\nLa diversité est la bienvenue\nLa diversité est la bienvenue\nPlus\nAvec plus de 150 métiers différents, nous proposons une étonnante variété de débuts et d’évolutions de carrière. C'est pourquoi nous nous engageons en faveur d'un environnement de travail dans lequel tous les employés peuvent exprimer leurs forces, leurs expériences et leurs façons de penser.\nPlus\nPlus\nCarrière et développement\nCarrière et développement\nPlus\nNous valorisons nos collaborateurs en les accompagnant dans leurs besoins et ambitions personnels. Nous participons financièrement et en temps à des formations continues externes dont profitent nos collaborateurs et les CFF.\nPlus\nPlus"
       },
       "requirements": [
         "Vanti un'esperienza pluriennale dirigenziale e conoscenze approfondite nella gestione dei dati, nella logistica, nella catena di approvvigionamento o nella gestione dei trasporti.",
@@ -14857,7 +14857,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-gestione-dei-dati-dei-materiali-m-f-d/4221ed94-0b14-497f-91aa-d06baf9433ef",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:50.652Z",
+      "crawledAt": "2026-08-29T23:20:20.519Z",
       "salaryMin": 113000,
       "salaryMax": 192000,
       "baseSalary": {
@@ -14872,7 +14872,7 @@
       },
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T14:37:50.652Z"
+      "firstSeenAt": "2026-08-29T23:20:20.519Z"
     },
     {
       "id": "sbb-fb43c695c90e",
@@ -14896,9 +14896,9 @@
       "description": "Diagnostiker:in / Fahrzeugdiagnostiker:in Störungssuche 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nDiagnostiker:in / Fahrzeugdiagnostiker:in Störungssuche\nWinterthur, 01.10.2026 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nEs erwartet dich eine spannende und vielseitige Tätigkeit als Diagnostiker:in Störungsdiagnose. In dieser Funktion bist du in einer durchgehenden Fünf-Tagewoche und vereinzelt an Wochenendeinsätzen wesentlich daran beteiligt, dass die Züge fahren und bei Störungen schnell wieder in Betrieb genommen werden können. Damit trägst du täglich dazu bei, unseren Kund:innen den grösstmöglichen Komfort zu bieten. Du arbeitest an einer der modernsten Fahrzeugflotten (Flirt Evo), welche ab 2026 in Betrieb genommen werden. Auf ein kollegiales Umfeld, in welchem Know-how gerne geteilt wird, sowie auf interessante Weiterentwicklungsmöglichkeiten kannst du dich freuen. Bei uns zählen Miteinander und Gemeinschaft im Team. Wir sind eine attraktive Arbeitgeberin und bieten viele Benefits wie extra Kinderzulagen, grosszügige Sonntagszulage, kostenloses 2. Klasse GA und vergünstigtes Reisen im Ausland - auch für die Familie. Alle Informationen findest du auf unserer Website unter Benefits | SBB .\nDas kannst du bewegen.\n- Als Fahrzeugdiagnostiker:in bist du für die Erstellung von Störungsdiagnosen am Rollmaterial des Personenverkehrs zuständig.\n- Es bereitet dir Freude, Störungsdiagnosen während des Betriebes und in Stillstandzeiten durchzuführen sowie in einem Schichtbetrieb mit unregelmässigen Arbeitszeiten und Wochenendeinsätzen zu arbeiten.\n- Du unterstützt im Bereich der Erhöhung der Verfügbarkeit der Züge sowie in der Minimierung der Störungszeiten.\n- Gewartete und reparierte Fahrzeuge setzt du wieder in Betrieb und stellst damit sicher, dass unsere Kundinnen und Kunden mit höchstmöglichem Komfort reisen.\n- Du unterstützt den Wissensaustausch zur Flotte und sicherst das Fachwissen zur Instandhaltung der Fahrzeugflotte am Instandhaltungsstandort.\nDas bringst du mit.\n- Du besitzt ein hohes Mass an Selbständigkeit, Eigeninitiative und Verantwortungsbewusstsein. Vernetzt-analytisches Denken und Handeln, wie deine Flexibilität zeichnen dich als Person aus.\n- Für diese spannende und anspruchsvolle Position verfügst du über eine abgeschlossene 4-jährige Berufslehre EFZ in elektrischer Richtung. In deiner bisherigen Karriere konntest du mehrjährige fundierte Berufserfahrung sammeln.\n- Sehr gute mündliche und schriftliche Deutschkenntnisse (C1/C2) setzen wir für diese Stelle voraus.\n- Da sämtliche Anweisungen und Dokumentationen in digitaler Form bestehen, hast du keine Berührungsängste mit gängigen modernen Arbeitsmitteln und IT-Programmen wie MS-Office und SAP\n- Ein Führerausweis der Kategorie B ist von Vorteil.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau F, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nSpätestens 10 Arbeitstage nach Bewerbungseingang erhältst du eine erste Rückmeldung von uns.\nFinaler Entscheid\nBewerbung\nFinaler Entscheid\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 104020\nRico Hanske, Teamleiter\nTelefon +41 79 923 13 48\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
       "descriptionByLocale": {
         "de": "Diagnostiker:in / Fahrzeugdiagnostiker:in Störungssuche 60-100% | SBB\n-\n-\n-\n-\n-\n-\nBeweg die Schweiz mit uns.\nDiagnostiker:in / Fahrzeugdiagnostiker:in Störungssuche\nWinterthur, 01.10.2026 oder nach Vereinbarung, 60-100%\nJetzt bewerben\n\n## Darauf kannst du dich freuen.\nEs erwartet dich eine spannende und vielseitige Tätigkeit als Diagnostiker:in Störungsdiagnose. In dieser Funktion bist du in einer durchgehenden Fünf-Tagewoche und vereinzelt an Wochenendeinsätzen wesentlich daran beteiligt, dass die Züge fahren und bei Störungen schnell wieder in Betrieb genommen werden können. Damit trägst du täglich dazu bei, unseren Kund:innen den grösstmöglichen Komfort zu bieten. Du arbeitest an einer der modernsten Fahrzeugflotten (Flirt Evo), welche ab 2026 in Betrieb genommen werden. Auf ein kollegiales Umfeld, in welchem Know-how gerne geteilt wird, sowie auf interessante Weiterentwicklungsmöglichkeiten kannst du dich freuen. Bei uns zählen Miteinander und Gemeinschaft im Team. Wir sind eine attraktive Arbeitgeberin und bieten viele Benefits wie extra Kinderzulagen, grosszügige Sonntagszulage, kostenloses 2. Klasse GA und vergünstigtes Reisen im Ausland - auch für die Familie. Alle Informationen findest du auf unserer Website unter Benefits | SBB .\nDas kannst du bewegen.\n- Als Fahrzeugdiagnostiker:in bist du für die Erstellung von Störungsdiagnosen am Rollmaterial des Personenverkehrs zuständig.\n- Es bereitet dir Freude, Störungsdiagnosen während des Betriebes und in Stillstandzeiten durchzuführen sowie in einem Schichtbetrieb mit unregelmässigen Arbeitszeiten und Wochenendeinsätzen zu arbeiten.\n- Du unterstützt im Bereich der Erhöhung der Verfügbarkeit der Züge sowie in der Minimierung der Störungszeiten.\n- Gewartete und reparierte Fahrzeuge setzt du wieder in Betrieb und stellst damit sicher, dass unsere Kundinnen und Kunden mit höchstmöglichem Komfort reisen.\n- Du unterstützt den Wissensaustausch zur Flotte und sicherst das Fachwissen zur Instandhaltung der Fahrzeugflotte am Instandhaltungsstandort.\nDas bringst du mit.\n- Du besitzt ein hohes Mass an Selbständigkeit, Eigeninitiative und Verantwortungsbewusstsein. Vernetzt-analytisches Denken und Handeln, wie deine Flexibilität zeichnen dich als Person aus.\n- Für diese spannende und anspruchsvolle Position verfügst du über eine abgeschlossene 4-jährige Berufslehre EFZ in elektrischer Richtung. In deiner bisherigen Karriere konntest du mehrjährige fundierte Berufserfahrung sammeln.\n- Sehr gute mündliche und schriftliche Deutschkenntnisse (C1/C2) setzen wir für diese Stelle voraus.\n- Da sämtliche Anweisungen und Dokumentationen in digitaler Form bestehen, hast du keine Berührungsängste mit gängigen modernen Arbeitsmitteln und IT-Programmen wie MS-Office und SAP\n- Ein Führerausweis der Kategorie B ist von Vorteil.\n\n## Dein Lohn und deine Benefits.\nWir haben ein faires und fortschrittliches Lohnsystem und setzen uns aktiv für Lohngleichheit ein. Deshalb sind weiterführende und detaillierte Informationen zum Lohnsystem bei der SBB transparent einsehbar. Diese Stelle befindet sich im Anforderungsniveau F, Regionalzulage Stufe 1. Mehr zu Lohn und Benefits .\n\n## Damit gelingt der Einstieg.\nDass du mit uns die Schweiz bewegen willst, ist für uns die grösste Motivation. Darum verzichten wir bei dieser Stelle auf ein Motivationsschreiben. Falls du uns deine Motivation dennoch mitteilen möchtest, hast du in unserem Bewerbungstool nach wie vor die Möglichkeit dazu.\nGrosses machen ist einfacher per du. Das beginnt bereits bei deiner Bewerbung.\n\n## So geht's weiter.\n×\nSpätestens 10 Arbeitstage nach Bewerbungseingang erhältst du eine erste Rückmeldung von uns.\nFinaler Entscheid\nBewerbung\nFinaler Entscheid\nNoch Fragen?\nZum Bewerbungsprozess\nSBB Recruiting Support\nTelefon + 41 51 220 20 29\nrecruiting@sbb.ch\n#einfachDu\nFAQ zur Bewerbung\nZur Stelle\nJob ID 104020\nRico Hanske, Teamleiter\nTelefon +41 79 923 13 48\nBewerbungen per E-Mail können leider nicht berücksichtigt werden.\nFür diese Stelle nehmen wir keine Dossiers von Personalvermittlern entgegen.\n\n## Das bieten wir.\nBenefits\nBenefits\nMehr erfahren\nWo immer möglich setzen wir auf flexible Arbeitszeiten und moderne Arbeitszeitmodelle. Darüber hinaus sind wir als Arbeitgeberin auch flexibel, wenn es darum geht, dein Berufsleben mit deinem Privatleben in Einklang zu bringen.\nMehr erfahren\nMehr erfahren\nUnterschiede willkommen\nUnterschiede willkommen\nMehr erfahren\nMit über 150 verschiedenen Berufen bieten wir eine beeindruckende Vielfalt an Einstiegs- und Entwicklungsmöglichkeiten. Ebenso vielfältig sind unsere Mitarbeitenden. Darum engagieren wir uns dafür dass alle Mitarbeitenden ihre individuellen Stärken und Denkweisen einbringen können.\nMehr erfahren\nMehr erfahren\nKarriere und Entwicklung\nKarriere und Entwicklung\nMehr erfahren\nWir fördern unsere Mitarbeitenden entlang ihren persönlichen Bedürfnissen und Ambitionen. Dafür stellen wir ein breites Angebot an fach- und bereichsübergreifenden Weiterbildungsangeboten zur Verfügung. An ausgewählten externen Weiterbildungen, beteiligen wir uns finanziell und zeitlich.\nMehr erfahren\nMehr erfahren",
-        "it": "Risoluzione dei problemi del diagnostico/diagnostico del veicolo 60-100% | FFS\n-\n-\n-\n-\n-\n-\nMuovi la Svizzera con noi.\nRisoluzione dei problemi del diagnostico/diagnostico del veicolo\nWinterthur, 1 ottobre 2026 o previo accordo, 60-100%\nCandidati ora\n\n## Puoi aspettarti questo. Un lavoro entusiasmante e vario ti aspetta come diagnostico nella diagnosi dei disturbi. In questo ruolo sarai coinvolto in modo significativo nel garantire che i treni circolino e possano essere rimessi in servizio rapidamente in caso di interruzioni per una settimana continua di cinque giorni e in alcuni fine settimana. In questo modo contribuisci ogni giorno ad offrire ai nostri clienti il ​​massimo comfort possibile. Lavori su una delle flotte di veicoli più moderne (Flirt Evo), che sarà messa in funzione dal 2026. Puoi aspettarti un ambiente collegiale in cui viene condiviso il know-how, nonché interessanti opportunità di ulteriore sviluppo. Ciò che conta per noi è l’unione e la comunità nel team. Siamo un datore di lavoro interessante e offriamo numerosi vantaggi come assegni familiari aggiuntivi, generosa indennità domenicale, 2a classe AG gratuita e viaggi scontati all'estero - anche per la famiglia. Tutte le informazioni le trovate sul nostro sito alla voce Vantaggi | FFS. Puoi spostarlo. - In qualità di diagnostico del veicolo, sei responsabile della diagnosi dei guasti sul materiale rotabile nel trasporto passeggeri. - Ti piace diagnosticare i guasti durante le operazioni e durante i tempi di inattività, nonché lavorare su turni con orari di lavoro irregolari e turni nel fine settimana. - Fornisci supporto per aumentare la disponibilità dei treni e ridurre al minimo i tempi di perturbazione. - Rimetterai in funzione i veicoli tagliandati e riparati, assicurando che i nostri clienti viaggino con il massimo comfort possibile. - Sostieni lo scambio di conoscenze sulla flotta e garantisci competenza nella manutenzione della flotta di veicoli nel luogo di manutenzione.\n\nQuesto è quello che porti con te. - Hai un alto grado di indipendenza, iniziativa e senso di responsabilità. Il pensiero e le azioni analitici e collegati in rete, così come la tua flessibilità, ti caratterizzano come persona. - Per questa posizione entusiasmante ed impegnativa hai completato un apprendistato EFZ di 4 anni in ingegneria elettrica. Nella tua carriera fino ad oggi hai potuto maturare diversi anni di solida esperienza professionale. - Per questa posizione richiediamo ottime competenze di tedesco orale e scritto (C1/C2). - Poiché tutte le istruzioni e la documentazione sono in formato digitale, non hai paura di entrare in contatto con i comuni strumenti di lavoro moderni e programmi IT come MS Office e SAP\n- Costituisce titolo preferenziale il possesso della patente di guida di categoria B.\n\n## Il tuo stipendio e i tuoi benefici.\nAbbiamo un sistema salariale giusto e progressivo e ci impegniamo attivamente per garantire la parità retributiva. Pertanto è possibile visualizzare in modo trasparente ulteriori informazioni dettagliate sul sistema salariale delle FFS. Questa posizione è al livello di requisito F, livello di indennità regionale 1. Maggiori informazioni su salari e benefici.\n\n## Con questo puoi iniziare.\nIl fatto che tu voglia spostare la Svizzera con noi è la nostra più grande motivazione. Ecco perché a questo punto non includiamo una lettera di motivazione. Se vuoi ancora comunicarci la tua motivazione, hai ancora la possibilità di farlo nel nostro strumento di candidatura.\nFare grandi cose è più facile se lo fai da solo. Questo inizia con la tua domanda.\n\n## Ecco come continua.\n×\nRiceverai un feedback iniziale da parte nostra entro e non oltre 10 giorni lavorativi dal ricevimento della domanda.\nDecisione finale\nApplicazione\nDecisione finale\nQualche domanda?\nInformazioni sul processo di candidatura\nSupporto al reclutamento delle FFS\nTelefono + 41 51 220 20 29\nrecruiting@ffs.ch\n#semplicementetu\nDomande frequenti sull'applicazione\nSul posto\nID lavoro 104020\nRico Hanske, caposquadra\nTelefono +41 79 923 13 48\nPurtroppo le candidature via email non possono essere prese in considerazione.\nNon accettiamo dossier dai reclutatori per questa posizione.\n\n## Questo è ciò che offriamo.\nVantaggi\nVantaggi\nScopri di più\nOve possibile, puntiamo su orari di lavoro flessibili e modelli di orario di lavoro moderni. Inoltre, come datore di lavoro, siamo flessibili anche quando si tratta di conciliare la vostra vita professionale con la vostra vita privata.\nScopri di più\nScopri di più\nLe differenze sono benvenute\nLe differenze sono benvenute\nScopri di più\nCon oltre 150 professioni diverse, offriamo un'impressionante varietà di opportunità di ingresso e di sviluppo. I nostri dipendenti sono altrettanto diversi. Ecco perché ci impegniamo a garantire che tutti i dipendenti possano contribuire con i propri punti di forza e modi di pensare individuali.\nScopri di più\nScopri di più\nCarriera e sviluppo\nCarriera e sviluppo\nScopri di più\nSupportiamo i nostri dipendenti in base alle loro esigenze e ambizioni personali. A tal fine, forniamo un’ampia gamma di corsi di formazione interdisciplinari e interdipartimentali. Contribuiamo finanziariamente e temporalmente a selezionati corsi di perfezionamento esterni.\nScopri di più\nScopri di più",
+        "it": "Risoluzione dei problemi del diagnostico/diagnostico del veicolo 60-100% | FFS\n-\n-\n-\n-\n-\n-\nMuovi la Svizzera con noi.\nRisoluzione dei problemi del diagnostico/diagnostico del veicolo\nWinterthur, 1 ottobre 2026 o previo accordo, 60-100%\nCandidati ora\n\n## Puoi aspettarti questo. Un lavoro entusiasmante e vario ti aspetta come diagnostico nella diagnosi dei disturbi. In questo ruolo sarai coinvolto in modo significativo nel garantire che i treni circolino e possano essere rimessi in servizio rapidamente in caso di interruzioni per una settimana continua di cinque giorni e in alcuni fine settimana. In questo modo contribuisci ogni giorno ad offrire ai nostri clienti il ​​massimo comfort possibile. Lavori su una delle flotte di veicoli più moderne (Flirt Evo), che sarà messa in funzione dal 2026. Puoi aspettarti un ambiente collegiale in cui viene condiviso il know-how, nonché interessanti opportunità di ulteriore sviluppo. Ciò che conta per noi è l’unione e la comunità nel team. Siamo un datore di lavoro interessante e offriamo numerosi vantaggi come assegni familiari aggiuntivi, generosa indennità domenicale, 2a classe AG gratuita e viaggi scontati all'estero - anche per la famiglia. Tutte le informazioni le trovate sul nostro sito alla voce Vantaggi | FFS. Puoi spostarlo. - In qualità di diagnostico del veicolo, sei responsabile della diagnosi dei guasti sul materiale rotabile nel trasporto passeggeri. - Ti piace diagnosticare i guasti durante le operazioni e durante i tempi di inattività, nonché lavorare su turni con orari di lavoro irregolari e turni nel fine settimana. - Fornisci supporto per aumentare la disponibilità dei treni e ridurre al minimo i tempi di perturbazione. - Rimetterai in funzione i veicoli tagliandati e riparati, assicurando che i nostri clienti viaggino con il massimo comfort possibile. - Sostieni lo scambio di conoscenze sulla flotta e garantisci competenza nella manutenzione della flotta di veicoli nel luogo di manutenzione.\n\nQuesto è quello che porti con te. - Hai un alto grado di indipendenza, iniziativa e senso di responsabilità. Il pensiero e le azioni analitici e collegati in rete, così come la tua flessibilità, ti caratterizzano come persona. - Per questa posizione entusiasmante ed impegnativa hai completato un apprendistato EFZ di 4 anni in ingegneria elettrica. Nella tua carriera fino ad oggi hai potuto maturare diversi anni di solida esperienza professionale. - Per questa posizione richiediamo ottime competenze di tedesco orale e scritto (C1/C2). - Poiché tutte le istruzioni e la documentazione sono in formato digitale, non hai paura di entrare in contatto con i comuni strumenti di lavoro moderni e programmi IT come MS Office e SAP\n- Costituisce titolo preferenziale il possesso della patente di guida di categoria B.\n\n## Il tuo stipendio e i tuoi benefici.\nAbbiamo un sistema salariale giusto e progressivo e ci impegniamo attivamente per garantire la parità retributiva. Pertanto è possibile visualizzare in modo trasparente ulteriori informazioni dettagliate sul sistema salariale delle FFS. Questa posizione è al livello di requisito F, livello di indennità regionale 1. Maggiori informazioni su salari e benefici.\n\n## Con questo puoi iniziare.\nIl fatto che tu voglia spostare la Svizzera con noi è la nostra più grande motivazione. Ecco perché a questo punto non includiamo una lettera di motivazione. Se vuoi ancora comunicarci la tua motivazione, hai ancora la possibilità di farlo nel nostro strumento di candidatura.\nFare grandi cose è più facile se lo fai da solo. Questo inizia con la tua domanda.\n\n## Ecco come continua.\n×\nRiceverai un feedback iniziale da parte nostra entro e non oltre 10 giorni lavorativi dal ricevimento della domanda.\nDecisione finale\nApplicazione\nDecisione finale\nQualche domanda?\nInformazioni sul processo di candidatura\nSupporto al reclutamento delle FFS\nTelefono + 41 51 220 20 29\nrecruiting@ffs.ch\n#semplicementetu\nDomande frequenti sull'applicazione\nSul posto\nID lavoro 104020\nRico Hanske, caposquadra\nTelefono +41 79 923 13 48\nPurtroppo le candidature via email non possono essere prese in considerazione.\nNon accettiamo dossier dai reclutatori per questa posizione.\n\n## Questo è ciò che offriamo.\nVantaggi\nVantaggi\nScopri di più\nOve possibile, puntiamo su orari di lavoro flessibili e modelli di orario di lavoro moderni. Inoltre, come datore di lavoro, siamo flessibili anche quando si tratta di conciliare la vostra vita professionale con la vostra vita privata.\nScopri di più\nScopri di più\nBenvenute le differenze\nBenvenute le differenze\nScopri di più\nCon oltre 150 professioni diverse, offriamo un'impressionante varietà di opportunità di ingresso e di sviluppo. I nostri dipendenti sono altrettanto diversi. Ecco perché ci impegniamo a garantire che tutti i dipendenti possano contribuire con i propri punti di forza e modi di pensare individuali.\nScopri di più\nScopri di più\nCarriera e sviluppo\nCarriera e sviluppo\nScopri di più\nSupportiamo i nostri dipendenti in base alle loro esigenze e ambizioni personali. A tal fine, forniamo un’ampia gamma di corsi di formazione interdisciplinari e interdipartimentali. Contribuiamo finanziariamente e temporalmente a selezionati corsi di perfezionamento esterni.\nScopri di più\nScopri di più",
         "en": "Diagnostician / vehicle diagnostician troubleshooting 60-100% | SBB\n-\n-\n-\n-\n-\n-\nMove Switzerland with us.\nDiagnostician/vehicle diagnostician troubleshooting\nWinterthur, October 1st, 2026 or by arrangement, 60-100%\nApply now\n\n## You can look forward to this. An exciting and varied job awaits you as a diagnostician in disorder diagnosis. In this role, you will be significantly involved in ensuring that the trains run and can be put back into operation quickly in the event of disruptions over a continuous five-day week and on a few weekends. In this way, you contribute every day to offering our customers the greatest possible comfort. You work on one of the most modern vehicle fleets (Flirt Evo), which will be put into operation from 2026. You can look forward to a collegial environment in which know-how is shared, as well as interesting opportunities for further development. What counts for us is togetherness and community in the team. We are an attractive employer and offer many benefits such as extra child allowances, generous Sunday allowance, free 2nd class GA and discounted travel abroad - also for the family. You can find all information on our website under Benefits | SBB. You can move that. - As a vehicle diagnostician, you are responsible for diagnosing faults on rolling stock in passenger transport. - You enjoy diagnosing faults during operations and during downtimes, as well as working in shifts with irregular working hours and weekend shifts. - You provide support in increasing the availability of trains and minimizing disruption times. - You will put serviced and repaired vehicles back into operation, ensuring that our customers travel with the highest possible comfort. - You support the exchange of knowledge about the fleet and ensure expertise in maintaining the vehicle fleet at the maintenance location.\n\nThis is what you bring with you. - You have a high degree of independence, initiative and a sense of responsibility. Networked, analytical thinking and actions, as well as your flexibility, characterize you as a person. - For this exciting and demanding position, you have completed a 4-year EFZ apprenticeship in electrical engineering. In your career so far, you have been able to gain several years of solid professional experience. - We require very good oral and written German skills (C1/C2) for this position. - Since all instructions and documentation are in digital form, you have no fear of contact with common modern work tools and IT programs such as MS Office and SAP\n- A category B driving license is an advantage.\n\n## Your salary and your benefits.\nWe have a fair and progressive wage system and are actively committed to equal pay. Therefore, further and detailed information about the wage system at SBB can be viewed transparently. This position is at requirement level F, regional allowance level 1. More about wages and benefits.\n\n## This gets you started.\nThe fact that you want to move Switzerland with us is our greatest motivation. That's why we don't include a letter of motivation at this point. If you still want to tell us your motivation, you still have the opportunity to do so in our application tool.\nDoing great things is easier if you do it yourself. This starts with your application.\n\n## This is how it continues.\n×\nYou will receive initial feedback from us no later than 10 working days after receipt of your application.\nFinal decision\nApplication\nFinal decision\nAny questions?\nAbout the application process\nSBB Recruiting Support\nTelephone + 41 51 220 20 29\nrecruiting@sbb.ch\n#simplyyou\nFAQ about the application\nOn the spot\nJob ID 104020\nRico Hanske, team leader\nTelephone +41 79 923 13 48\nUnfortunately, applications via email cannot be considered.\nWe do not accept dossiers from recruiters for this position.\n\n## This is what we offer.\nBenefits\nBenefits\nFind out more\nWherever possible, we rely on flexible working hours and modern working time models. In addition, as an employer, we are also flexible when it comes to balancing your professional life with your private life.\nFind out more\nFind out more\nDifferences welcome\nDifferences welcome\nFind out more\nWith over 150 different professions, we offer an impressive variety of entry and development opportunities. Our employees are just as diverse. That is why we are committed to ensuring that all employees can contribute their individual strengths and ways of thinking.\nFind out more\nFind out more\nCareer and development\nCareer and development\nFind out more\nWe support our employees based on their personal needs and ambitions. To this end, we provide a wide range of cross-disciplinary and cross-departmental training courses. We contribute financially and temporally to selected external further training courses.\nFind out more\nFind out more",
-        "fr": "Diagnosticien/diagnosticien véhicule dépannage 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nDépannage diagnostiqueur/diagnosticien de véhicule\nWinterthur, 1er octobre 2026 ou sur rendez-vous, 60-100%\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. Un travail passionnant et varié vous attend en tant que diagnostiqueur en diagnostic de troubles. Dans ce rôle, vous contribuerez de manière significative à garantir que les trains circulent et puissent être remis en service rapidement en cas de perturbations sur une semaine continue de cinq jours et sur quelques week-ends. Vous contribuez ainsi chaque jour à offrir à nos clients le plus grand confort possible. Vous travaillez sur l'une des flottes de véhicules les plus modernes (Flirt Evo), qui sera mise en service à partir de 2026. Vous pouvez vous attendre à un environnement collégial dans lequel le savoir-faire est partagé, ainsi qu'à des opportunités intéressantes de développement ultérieur. Ce qui compte pour nous, c'est la convivialité et la communauté au sein de l'équipe. Nous sommes un employeur attractif et offrons de nombreux avantages tels que des allocations familiales supplémentaires, une généreuse allocation du dimanche, une AG de 2e classe gratuite et des voyages à l'étranger à prix réduit - également pour la famille. Vous pouvez trouver toutes les informations sur notre site Web sous Avantages | CFF. Vous pouvez déplacer cela. - En tant que diagnostiqueur véhicule, vous êtes chargé de diagnostiquer les pannes sur le matériel roulant dans le transport de personnes. - Vous aimez diagnostiquer les pannes pendant les opérations et pendant les temps d'arrêt, ainsi que travailler en équipes avec des horaires irréguliers et des équipes de week-end. - Vous accompagnez l'augmentation de la disponibilité des trains et la minimisation des temps de perturbation. - Vous remettrez en service les véhicules entretenus et réparés, en veillant à ce que nos clients voyagent avec le plus grand confort possible. - Vous soutenez l'échange de connaissances sur la flotte et assurez une expertise dans la maintenance de la flotte de véhicules sur le site de maintenance.\n\nC'est ce que vous apportez avec vous. - Vous disposez d'un haut degré d'autonomie, d'initiative et d'un sens des responsabilités. La pensée et les actions en réseau et analytiques, ainsi que votre flexibilité, vous caractérisent en tant que personne. - Pour ce poste passionnant et exigeant, vous avez suivi un apprentissage EFZ de 4 ans en électrotechnique. Dans votre carrière jusqu’à présent, vous avez pu acquérir plusieurs années d’expérience professionnelle solide. - Nous avons besoin de très bonnes compétences en allemand oral et écrit (C1/C2) pour ce poste. - Étant donné que toutes les instructions et la documentation sont sous forme numérique, vous n'avez aucune crainte d'être en contact avec des outils de travail et des programmes informatiques modernes et courants tels que MS Office et SAP.\n- Un permis de conduire de catégorie B est un avantage.\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence F, niveau d'allocation régionale 1. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nVous recevrez un premier retour de notre part au plus tard 10 jours ouvrables après réception de votre candidature.\nDécision finale\nDemande\nDécision finale\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nID de travail 104020\nRico Hanske, chef d'équipe\nTéléphone +41 79 923 13 48\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d'opportunités d'entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus"
+        "fr": "Diagnosticien/diagnosticien véhicule dépannage 60-100% | CFF\n-\n-\n-\n-\n-\n-\nDéplacez la Suisse avec nous.\nDépannage diagnostiqueur/diagnosticien de véhicule\nWinterthur, 1er octobre 2026 ou sur rendez-vous, 60-100%\nPostulez maintenant\n\n## Vous pouvez vous attendre à cela. Un travail passionnant et varié vous attend en tant que diagnostiqueur en diagnostic de troubles. Dans ce rôle, vous contribuerez de manière significative à garantir que les trains circulent et puissent être remis en service rapidement en cas de perturbations sur une semaine continue de cinq jours et sur quelques week-ends. Vous contribuez ainsi chaque jour à offrir à nos clients le plus grand confort possible. Vous travaillez sur l'une des flottes de véhicules les plus modernes (Flirt Evo), qui sera mise en service à partir de 2026. Vous pouvez vous attendre à un environnement collégial dans lequel le savoir-faire est partagé, ainsi qu'à des opportunités intéressantes de développement ultérieur. Ce qui compte pour nous, c'est la convivialité et la communauté au sein de l'équipe. Nous sommes un employeur attractif et offrons de nombreux avantages tels que des allocations familiales supplémentaires, une généreuse allocation du dimanche, une AG de 2e classe gratuite et des voyages à l'étranger à prix réduit - également pour la famille. Vous pouvez trouver toutes les informations sur notre site Web sous Avantages | CFF. Vous pouvez déplacer cela. - En tant que diagnostiqueur véhicule, vous êtes chargé de diagnostiquer les pannes sur le matériel roulant dans le transport de personnes. - Vous aimez diagnostiquer les pannes pendant les opérations et pendant les temps d'arrêt, ainsi que travailler en équipe avec des horaires irréguliers et des équipes de week-end. - Vous accompagnez l'augmentation de la disponibilité des trains et la minimisation des temps de perturbation. - Vous remettrez en service les véhicules entretenus et réparés, en veillant à ce que nos clients voyagent avec le plus grand confort possible. - Vous soutenez l'échange de connaissances sur la flotte et assurez une expertise dans la maintenance de la flotte de véhicules sur le site de maintenance.\n\nC'est ce que vous apportez avec vous. - Vous disposez d'un haut degré d'autonomie, d'initiative et d'un sens des responsabilités. La pensée et les actions en réseau et analytiques, ainsi que votre flexibilité, vous caractérisent en tant que personne. - Pour ce poste passionnant et exigeant, vous avez suivi un apprentissage EFZ de 4 ans en électrotechnique. Dans votre carrière jusqu’à présent, vous avez pu acquérir plusieurs années d’expérience professionnelle solide. - Nous avons besoin de très bonnes compétences en allemand oral et écrit (C1/C2) pour ce poste. - Étant donné que toutes les instructions et la documentation sont sous forme numérique, vous n'avez aucune crainte d'être en contact avec des outils de travail et des programmes informatiques modernes et courants tels que MS Office et SAP.\n- Un permis de conduire de catégorie B est un avantage.\n\n## Votre salaire et vos avantages sociaux.\nNous disposons d’un système salarial juste et progressif et nous nous engageons activement en faveur de l’égalité salariale. Des informations complémentaires et détaillées sur le système salarial des CFF peuvent ainsi être consultées en toute transparence. Ce poste est au niveau d'exigence F, niveau d'allocation régionale 1. En savoir plus sur les salaires et les avantages sociaux.\n\n## Cela vous permet de démarrer.\nLe fait que vous souhaitiez déménager en Suisse avec nous est notre plus grande motivation. C'est pourquoi nous n'incluons pas de lettre de motivation à ce stade. Si vous souhaitez tout de même nous faire part de votre motivation, vous avez toujours la possibilité de le faire dans notre outil de candidature.\nFaire de grandes choses est plus facile si vous le faites vous-même. Cela commence par votre candidature.\n\n## C'est comme ça que ça continue.\n×\nVous recevrez un premier retour de notre part au plus tard 10 jours ouvrables après réception de votre candidature.\nDécision finale\nDemande\nDécision finale\nDes questions ?\nÀ propos du processus de candidature\nSoutien au recrutement des CFF\nTéléphone + 41 51 220 20 29\nrecrutement@cff.ch\n#simplementvous\nFAQ sur la candidature\nSur place\nID de travail 104020\nRico Hanske, chef d'équipe\nTéléphone +41 79 923 13 48\nMalheureusement, les candidatures par courrier électronique ne peuvent pas être prises en compte.\nNous n'acceptons pas les dossiers des recruteurs pour ce poste.\n\n## C'est ce que nous proposons.\nAvantages\nAvantages\nEn savoir plus\nDans la mesure du possible, nous misons sur des horaires de travail flexibles et des modèles de temps de travail modernes. De plus, en tant qu'employeur, nous sommes également flexibles lorsqu'il s'agit de concilier votre vie professionnelle avec votre vie privée.\nEn savoir plus\nEn savoir plus\nLes différences sont bienvenues\nLes différences sont bienvenues\nEn savoir plus\nAvec plus de 150 métiers différents, nous offrons une variété impressionnante d’opportunités d’entrée et de développement. Nos employés sont tout aussi diversifiés. C'est pourquoi nous nous engageons à garantir que tous les collaborateurs puissent apporter leurs atouts et leur façon de penser individuels.\nEn savoir plus\nEn savoir plus\nCarrière et développement\nCarrière et développement\nEn savoir plus\nNous accompagnons nos collaborateurs en fonction de leurs besoins et ambitions personnels. A cet effet, nous proposons une large gamme de formations transversales et transversales. Nous contribuons financièrement et temporellement à des formations continues externes sélectionnées.\nEn savoir plus\nEn savoir plus"
       },
       "requirements": [
         "Du besitzt ein hohes Mass an Selbständigkeit, Eigeninitiative und Verantwortungsbewusstsein. Vernetzt-analytisches Denken und Handeln, wie deine Flexibilität zeichnen dich als Person aus.",
@@ -14949,7 +14949,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/diagnostiker-in-fahrzeugdiagnostiker-in-stoerungssuche/254e7fac-04dd-44db-8168-eb816993fd01",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:54.274Z",
+      "crawledAt": "2026-08-29T23:20:34.946Z",
       "previousSlugsByLocale": {
         "it": [
           "diagnostiker-in-fahrzeugdiagnostiker-in-storungssuche-ffs-officine-ferrovie-federali-winterthur"
@@ -14972,7 +14972,7 @@
       },
       "addressRegion": "ZH",
       "employmentType": "FULL_TIME",
-      "firstSeenAt": "2026-08-29T14:37:54.274Z"
+      "firstSeenAt": "2026-08-29T23:20:34.946Z"
     }
   ]
 }

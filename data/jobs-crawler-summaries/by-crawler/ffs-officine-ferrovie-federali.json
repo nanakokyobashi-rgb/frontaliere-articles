@@ -1,19 +1,20 @@
 {
   "key": "ffs-officine-ferrovie-federali",
   "label": "SBB",
-  "generatedAt": "2026-08-29T15:23:53.458Z",
-  "total": 171,
-  "newCount": 4,
-  "updatedCount": 151,
+  "generatedAt": "2026-08-29T23:27:52.504Z",
+  "total": 174,
+  "newCount": 7,
+  "updatedCount": 163,
   "removedCount": 3,
-  "unchangedCount": 16,
-  "durationMs": 642738,
-  "avgDurationMs": 642738,
+  "unchangedCount": 4,
+  "durationMs": 527174,
+  "avgDurationMs": 527174,
   "durationHistory": [
     527834,
     80102,
     653223,
-    642738
+    642738,
+    527174
   ],
   "newJobs": [
     {
@@ -35,7 +36,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/diagnosticiene/36a8734e-be07-4755-9de9-ca8745812d9b",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:02.481Z",
+      "crawledAt": "2026-08-29T23:19:48.694Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -63,7 +64,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/ingenieure-genie-civil-ouvrages-geotechnique/4f238ae7-8bf8-4953-a003-0a75fc7000ae",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:02.465Z",
+      "crawledAt": "2026-08-29T23:19:50.598Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -91,7 +92,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/bauingenieur-in-im-konstruktiven-tiefbau/f15a238a-0414-4c4e-81ba-b6069e77d99c",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:06.581Z",
+      "crawledAt": "2026-08-29T23:19:55.429Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -119,7 +120,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/fahrzeugdiagnostiker-in-schienenfahrzeuge/3864fd3f-e37a-48e4-841d-087ed2bc84b3",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:07.663Z",
+      "crawledAt": "2026-08-29T23:19:53.189Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -147,7 +148,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsabile-gestione-dei-dati-dei-materiali-m-f-d/4221ed94-0b14-497f-91aa-d06baf9433ef",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:50.652Z",
+      "crawledAt": "2026-08-29T23:20:20.519Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -175,7 +176,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/diagnostiker-in-fahrzeugdiagnostiker-in-stoerungssuche/254e7fac-04dd-44db-8168-eb816993fd01",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:54.274Z",
+      "crawledAt": "2026-08-29T23:20:34.946Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -205,7 +206,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/unterhaltsfachmann-frau-von-gleisanlagen/8966ef70-b3b8-4700-9dc9-70daf86850a1",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:13:51.924Z",
+      "crawledAt": "2026-08-29T23:19:50.951Z",
       "firstSeenAt": "2026-08-28T05:27:11.895Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -234,7 +235,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/specialiste-technique-pour-les-infrastructures-ferroviaires-h-f-d/7b22fee5-73c5-4f0f-9e4f-822b3380ff6a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:33.340Z",
+      "crawledAt": "2026-08-29T23:20:12.235Z",
       "firstSeenAt": "2026-08-28T05:27:17.705Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -246,7 +247,7 @@
     },
     {
       "id": "sbb-b119189d23d9",
-      "slug": "responsabile-datenmanagement-transport-ffs-officine-ferrovie-federali-bern",
+      "slug": "responsabile-in-gestione-dati-e-trasporti-ffs-officine-ferrovie-federali-bern",
       "company": "FFS Officine (Ferrovie Federali)",
       "companyKey": "ffs-officine-ferrovie-federali",
       "companyDomain": "jobs.sbb.ch",
@@ -263,19 +264,19 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/leiter-in-datenmanagement-transport/084cde14-dcd4-4f8e-9bf8-37612c09d09a",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T05:27:16.867Z",
+      "crawledAt": "2026-08-29T23:20:16.559Z",
       "salaryMin": 113000,
       "salaryMax": 192000,
       "addressRegion": "BE",
       "employmentType": "FULL_TIME",
       "firstSeenAt": "2026-08-28T05:27:16.867Z",
       "crawlerMissStreak": 1,
-      "_qualityScore": 92,
+      "_qualityScore": 87,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
         "translation": 23,
-        "completeness": 19
+        "completeness": 14
       },
       "previousSlugs": [
         "responsabile-datenmanagement-transport-ffs-officine-ferrovie-federali-bern",
@@ -284,7 +285,7 @@
     },
     {
       "id": "sbb-d2904208229d",
-      "slug": "cambio-carriera-spezialist-in-bahnrettung-ffs-officine-ferrovie-federali-brig-glis",
+      "slug": "specialista-di-accesso-trasversale-nel-soccorso-ferroviario-ffs-officine-ferrovie-federali-brig-glis",
       "company": "FFS Officine (Ferrovie Federali)",
       "companyKey": "ffs-officine-ferrovie-federali",
       "companyDomain": "jobs.sbb.ch",
@@ -301,19 +302,19 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-spezialist-in-bahnrettung/ff0ec9a0-7c1e-40cd-846b-d0e4887f9750",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-28T05:27:19.432Z",
+      "crawledAt": "2026-08-29T23:20:12.502Z",
       "salaryMin": 63000,
       "salaryMax": 107500,
       "addressRegion": "VS",
       "employmentType": "FULL_TIME",
       "firstSeenAt": "2026-08-28T05:27:19.432Z",
       "crawlerMissStreak": 1,
-      "_qualityScore": 94,
+      "_qualityScore": 89,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 25,
         "translation": 25,
-        "completeness": 19
+        "completeness": 14
       },
       "previousSlugs": [
         "cambio-carriera-spezialist-in-bahnrettung-ffs-officine-ferrovie-federali-brig-glis",
@@ -339,7 +340,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/quereinstieg-kundenbegleiter-in-fuer-frequenzerfassung/06de6ad8-705c-4132-ada4-c527d97632ae",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:35.588Z",
+      "crawledAt": "2026-08-29T23:21:17.455Z",
       "firstSeenAt": "2026-08-28T05:28:54.621Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -368,7 +369,7 @@
       "postedDate": "2026-08-25",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/technische-r-assistent-in-helpdesk/22e7fd36-651b-4c01-a136-ae1187342413",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:39.148Z",
+      "crawledAt": "2026-08-29T23:21:19.208Z",
       "firstSeenAt": "2026-08-28T05:28:55.886Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -397,7 +398,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/cheffe-d-equipe-utilisation-acquisition-region-zurich-metropole/daf6881e-f0bf-4d19-a6ae-818d39e91f58",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:16.276Z",
+      "crawledAt": "2026-08-29T23:21:42.289Z",
       "firstSeenAt": "2026-08-28T05:29:34.917Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -426,7 +427,7 @@
       "postedDate": "2026-08-24",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/capo-a-team-utilizzo-e-acquisizione-area-metropolitana-di-zurigo/e71e5739-ad45-4de3-ae19-b06878698ede",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:16:26.657Z",
+      "crawledAt": "2026-08-29T23:21:48.110Z",
       "firstSeenAt": "2026-08-28T05:29:43.187Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -774,7 +775,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/responsable-de-la-gestion-des-donnees-de-base-des-materiaux-h-f-d/a74ccce9-ee82-4948-9bb8-82825cbbf9c4",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:34.441Z",
+      "crawledAt": "2026-08-29T23:20:10.963Z",
       "firstSeenAt": "2026-08-28T05:27:16.371Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
@@ -803,7 +804,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/projektleiter-in-geschaeftssteuerung/66f58d54-b178-4be8-9012-ae59726a7978",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T14:37:55.604Z",
+      "crawledAt": "2026-08-29T23:20:36.588Z",
       "firstSeenAt": "2026-08-28T05:27:51.934Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -832,7 +833,7 @@
       "postedDate": "2026-08-27",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/teamleiter-in-cleaning/d1fa0fc5-3110-4585-b336-8d7b9255775f",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:14:37.946Z",
+      "crawledAt": "2026-08-29T23:20:27.920Z",
       "firstSeenAt": "2026-08-28T05:27:53.523Z",
       "_qualityScore": 89,
       "_qualityBreakdown": {
@@ -861,7 +862,7 @@
       "postedDate": "2026-08-26",
       "url": "https://jobs.sbb.ch/v2/offene-stellen/key-account-manager-m-w-d/1d08e34c-d6ae-4406-abed-b5e39ed165eb",
       "source": "SBB Dedicated Parser (API + login.org)",
-      "crawledAt": "2026-08-29T15:15:18.478Z",
+      "crawledAt": "2026-08-29T23:20:59.304Z",
       "firstSeenAt": "2026-08-28T05:28:06.428Z",
       "_qualityScore": 86,
       "_qualityBreakdown": {
