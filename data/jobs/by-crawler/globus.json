@@ -1,6 +1,6 @@
 {
   "crawlerKey": "globus",
-  "assembledAt": "2026-08-28T20:54:56.697Z",
+  "assembledAt": "2026-08-29T03:16:45.294Z",
   "jobs": [
     {
       "id": "globus-c6c184524b7c",
@@ -33,7 +33,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Parfuemerie-80-wmd-befristet-Juni-Dezemb-de-j2421.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.688Z",
+      "crawledAt": "2026-08-29T03:16:40.616Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -84,7 +84,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:52:17.178Z",
-      "needsRetranslation": true,
       "salaryMin": 66400,
       "salaryMax": 102000,
       "baseSalary": {
@@ -96,7 +95,8 @@
           "maxValue": 102000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "globus-acf4a6646645",
@@ -129,7 +129,7 @@
       "url": "https://jobs.globus.ch/Sales-Support-Samstagseinsaetze-20-im-Bereich-Food-wmd-de-j2431.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.687Z",
+      "crawledAt": "2026-08-29T03:16:40.615Z",
       "addressLocality": "Wallisellen",
       "streetAddress": "Neue Winterthurerstrasse 99",
       "postalCode": "8304",
@@ -175,7 +175,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:52:17.165Z",
-      "needsRetranslation": true,
       "salaryMin": 16600,
       "salaryMax": 25500,
       "baseSalary": {
@@ -187,7 +186,8 @@
           "maxValue": 25500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "globus-301aaa7f822e",
@@ -220,7 +220,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Home-Lifestyle-50-wmd-ab-Oktober-2026-de-j2466.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.685Z",
+      "crawledAt": "2026-08-29T03:16:40.613Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -330,7 +330,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Parfuemerie-Pflege-Haarpflege-100-wmd-de-j2452.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.685Z",
+      "crawledAt": "2026-08-29T03:16:40.614Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -435,7 +435,7 @@
       "url": "https://jobs.globus.ch/Burberry-Sales-Consultant-Premium-Segment-60-wmd-de-j2422.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.684Z",
+      "crawledAt": "2026-08-29T03:16:40.612Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -480,7 +480,6 @@
         ]
       },
       "firstSeenAt": "2026-07-07T12:00:32.897Z",
-      "needsRetranslation": true,
       "salaryMin": 58100,
       "salaryMax": 89300,
       "baseSalary": {
@@ -492,7 +491,8 @@
           "maxValue": 89300,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "globus-56f2423406b6",
@@ -525,7 +525,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Detailhandelsfachfrau-mann-EFZ-Herrenmode-de-j2469.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.683Z",
+      "crawledAt": "2026-08-29T03:16:40.611Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -605,7 +605,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Detailhandelsfachfrau-mann-EFZ-Lebensmittel-de-j2470.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.682Z",
+      "crawledAt": "2026-08-29T03:16:40.611Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -684,7 +684,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Parfuemerie-fuer-die-Marke-Ex-Nihilo-100-de-j2436.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.681Z",
+      "crawledAt": "2026-08-29T03:16:40.610Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -759,7 +759,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-delicatessa-Grundnahrungsmittel-Kasse-Ku-de-j2474.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.680Z",
+      "crawledAt": "2026-08-29T03:16:40.609Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -847,7 +847,7 @@
       "url": "https://jobs.globus.ch/Stellvertretender-Verkaufsleiterin-delicatessa-100-wmd-de-j2442.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.680Z",
+      "crawledAt": "2026-08-29T03:16:40.609Z",
       "addressLocality": "Luzern",
       "streetAddress": "Pilatusstrasse 4",
       "postalCode": "6002",
@@ -921,7 +921,7 @@
       "url": "https://jobs.globus.ch/Conseillerre-de-vente-80-pour-notre-rayon-Maroquinerie-fr-j2475.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.679Z",
+      "crawledAt": "2026-08-29T03:16:40.608Z",
       "addressLocality": "Genève",
       "streetAddress": "Rue du Rhône 48",
       "postalCode": "1204 ",
@@ -1000,7 +1000,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Herrenmode-80-mwd-de-j2459.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.678Z",
+      "crawledAt": "2026-08-29T03:16:40.607Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -1098,7 +1098,7 @@
       "url": "https://jobs.globus.ch/Mitarbeiterin-Visual-Merchandising-Damenmode-100-wmd-de-j2309.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.677Z",
+      "crawledAt": "2026-08-29T03:16:40.606Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -1131,7 +1131,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:52:17.193Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1143,7 +1142,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "globus-cd82714bac32",
@@ -1176,7 +1176,7 @@
       "url": "https://jobs.globus.ch/Sales-Support-fuer-Einsaetze-im-Non-Food-Bereich-20-vorwie-de-j2086.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.676Z",
+      "crawledAt": "2026-08-29T03:16:40.605Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -1209,7 +1209,6 @@
         ]
       },
       "firstSeenAt": "2026-06-10T07:52:17.191Z",
-      "needsRetranslation": true,
       "salaryMin": 16600,
       "salaryMax": 25500,
       "baseSalary": {
@@ -1221,7 +1220,8 @@
           "maxValue": 25500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "globus-8a6810722837",
@@ -1254,7 +1254,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Metzgerei-100-wmd-de-j2409.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.675Z",
+      "crawledAt": "2026-08-29T03:16:40.604Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -1334,7 +1334,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-delicatessa-40-60-wmd-de-j2480.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.674Z",
+      "crawledAt": "2026-08-29T03:16:40.603Z",
       "addressLocality": "Luzern",
       "streetAddress": "Pilatusstrasse 4",
       "postalCode": "6002",
@@ -1416,7 +1416,7 @@
       "url": "https://jobs.globus.ch/Conseillerre-de-vente-80-pour-notre-rayon-Beauty-fr-j2482.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.673Z",
+      "crawledAt": "2026-08-29T03:16:40.602Z",
       "addressLocality": "Genève",
       "streetAddress": "Rue du Rhône 48",
       "postalCode": "1204 ",
@@ -1495,7 +1495,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Kids-Papeterie-Designshop-80-wmd-de-j2481.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.673Z",
+      "crawledAt": "2026-08-29T03:16:40.603Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -1572,7 +1572,7 @@
       "url": "https://jobs.globus.ch/Collaborateurtrice-Logistique-pour-notre-picerie-fine-deli-fr-j2485.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.671Z",
+      "crawledAt": "2026-08-29T03:16:40.600Z",
       "addressLocality": "Lausanne",
       "streetAddress": "Rue du Pont 5",
       "postalCode": "1003 ",
@@ -1657,7 +1657,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Home-Lifestyle-40-50-wmd-de-j2484.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.671Z",
+      "crawledAt": "2026-08-29T03:16:40.601Z",
       "addressLocality": "St. Gallen",
       "streetAddress": "Multergasse 47",
       "postalCode": "9001",
@@ -1739,7 +1739,7 @@
       "url": "https://jobs.globus.ch/Mitarbeiterin-Warenservice-delicatessa-Grundnahrungsmittel-de-j2488.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.670Z",
+      "crawledAt": "2026-08-29T03:16:40.599Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -1819,7 +1819,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-delicatessa-im-Bereich-Frische-50-wmd-de-j2486.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.669Z",
+      "crawledAt": "2026-08-29T03:16:40.599Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -1899,7 +1899,7 @@
       "url": "https://jobs.globus.ch/Sales-Supportin-Samstagseinsaetze-im-Bereich-Herrenmode-20-de-j2491.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.668Z",
+      "crawledAt": "2026-08-29T03:16:40.597Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -1979,7 +1979,7 @@
       "url": "https://jobs.globus.ch/Sales-Supportin-Samstagseinsaetze-im-Bereich-Food-20-befri-de-j2490.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.668Z",
+      "crawledAt": "2026-08-29T03:16:40.598Z",
       "addressLocality": "Basel",
       "streetAddress": "Marktplatz 2",
       "postalCode": "4001",
@@ -2061,7 +2061,7 @@
       "url": "https://jobs.globus.ch/Conseillerre-de-vente-80-pour-notre-Confection-Dames-fr-j2492.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.667Z",
+      "crawledAt": "2026-08-29T03:16:40.597Z",
       "addressLocality": "Genève",
       "streetAddress": "Rue du Rhône 48",
       "postalCode": "1204 ",
@@ -2140,7 +2140,7 @@
       "url": "https://jobs.globus.ch/Conseillerre-de-vente-aux-secteurs-produits-frais-de-notre-fr-j2493.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.666Z",
+      "crawledAt": "2026-08-29T03:16:40.595Z",
       "addressLocality": "Genève",
       "streetAddress": "Rue du Rhône 48",
       "postalCode": "1204 ",
@@ -2219,7 +2219,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Polydesigner-in-3D-EFZ-de-j2494.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.664Z",
+      "crawledAt": "2026-08-29T03:16:40.594Z",
       "addressLocality": "St. Gallen",
       "streetAddress": "Multergasse 47",
       "postalCode": "9001",
@@ -2301,7 +2301,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Detailhandelsfachfrau-mann-EFZ-Damenmode-de-j2495.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.663Z",
+      "crawledAt": "2026-08-29T03:16:40.593Z",
       "addressLocality": "Wallisellen",
       "streetAddress": "Neue Winterthurerstrasse 99",
       "postalCode": "8304",
@@ -2380,7 +2380,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Detailhandelsfachfrau-mann-EFZ-Lebensmittel-de-j2496.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.650Z",
+      "crawledAt": "2026-08-29T03:16:40.579Z",
       "addressLocality": "Wallisellen",
       "streetAddress": "Neue Winterthurerstrasse 99",
       "postalCode": "8304",
@@ -2455,7 +2455,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-Damenhandtaschen-80-100-mwd-de-j2497.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.628Z",
+      "crawledAt": "2026-08-29T03:16:40.556Z",
       "addressLocality": "Zürich",
       "streetAddress": "",
       "postalCode": "8001",
@@ -2535,7 +2535,7 @@
       "url": "https://jobs.globus.ch/Mitarbeiterin-KundendienstService-Desk-80-wmd-de-j2501.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.626Z",
+      "crawledAt": "2026-08-29T03:16:40.554Z",
       "addressLocality": "Zürich Bahnhofstrasse",
       "streetAddress": "Schweizergasse 11",
       "postalCode": "8001",
@@ -2615,7 +2615,7 @@
       "url": "https://jobs.globus.ch/Collaborateurrice-de-vente-Bijoux-Accessoires-pour-notre-c-fr-j2498.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.626Z",
+      "crawledAt": "2026-08-29T03:16:40.555Z",
       "addressLocality": "Lausanne",
       "streetAddress": "Rue du Pont 5",
       "postalCode": "1003 ",
@@ -2694,7 +2694,7 @@
       "url": "https://jobs.globus.ch/SommelierCaviste-100-fr-j2502.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-28T20:54:51.621Z",
+      "crawledAt": "2026-08-29T03:16:40.550Z",
       "addressLocality": "Genève",
       "streetAddress": "Rue du Rhône 48",
       "postalCode": "1204 ",
@@ -2757,7 +2757,7 @@
       "url": "https://jobs.globus.ch/Lehrstelle-als-Kaufmann-frau-EFZ-de-j2503.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.609Z",
+      "crawledAt": "2026-08-29T03:16:40.537Z",
       "addressLocality": "Zürich Headquarter",
       "streetAddress": "Schweizergasse 12",
       "postalCode": "8001",
@@ -2831,7 +2831,7 @@
       "url": "https://jobs.globus.ch/Verkaufsberaterin-delicatessa-80-wmd-de-j2504.html",
       "source": "Globus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:54:51.604Z",
+      "crawledAt": "2026-08-29T03:16:40.531Z",
       "addressLocality": "Luzern",
       "streetAddress": "Pilatusstrasse 4",
       "postalCode": "6002",
@@ -2872,7 +2872,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:54:51.604Z"
+      "firstSeenAt": "2026-08-29T03:16:40.531Z"
     }
   ]
 }
