@@ -1,6 +1,6 @@
 {
   "crawlerKey": "csvp-poschiavo",
-  "assembledAt": "2026-08-28T21:45:09.444Z",
+  "assembledAt": "2026-08-29T03:39:55.574Z",
   "jobs": [
     {
       "id": "csvp-poschiavo-4229ad282e88",
@@ -33,7 +33,7 @@
       "url": "https://www.csvp.ch/it/lavora-con-noi/cerchiamo/922-infermiere-sss-oss-fage",
       "source": "CSVP Dedicated Parser (Joomla HTML)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-28T21:45:06.208Z",
+      "crawledAt": "2026-08-29T03:39:52.674Z",
       "addressLocality": "Poschiavo",
       "addressRegion": "GR",
       "addressCountry": "CH",
