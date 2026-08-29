@@ -1,17 +1,18 @@
 {
   "key": "engel-voelkers",
   "label": "Engel & Völkers",
-  "generatedAt": "2026-08-29T03:31:43.442Z",
+  "generatedAt": "2026-08-29T15:10:21.189Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 10,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 21642,
-  "avgDurationMs": 21642,
+  "durationMs": 21433,
+  "avgDurationMs": 21433,
   "durationHistory": [
     20885,
-    21642
+    21642,
+    21433
   ],
   "newJobs": [],
   "updatedJobs": [
