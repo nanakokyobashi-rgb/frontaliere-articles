@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hrc",
-  "assembledAt": "2026-08-29T04:05:58.633Z",
+  "assembledAt": "2026-08-29T15:03:13.150Z",
   "jobs": [
     {
       "id": "hrc-cb661a105a08",
@@ -33,7 +33,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.140Z",
+      "crawledAt": "2026-08-29T15:03:09.479Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -113,7 +113,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-60-80",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.135Z",
+      "crawledAt": "2026-08-29T15:03:09.473Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -152,7 +152,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T04:05:55.135Z"
+      "firstSeenAt": "2026-08-29T15:03:09.473Z"
     },
     {
       "id": "hrc-cf4070c01107",
@@ -186,7 +186,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/specialiste-en-activite-physique-adaptee-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.131Z",
+      "crawledAt": "2026-08-29T15:03:09.469Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -249,7 +249,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/assistant-en-soins-en-sante-communautaire-assc-hf-en-chirurgie-a-60",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.100Z",
+      "crawledAt": "2026-08-29T15:03:09.438Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -280,7 +280,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T04:05:55.100Z"
+      "firstSeenAt": "2026-08-29T15:03:09.438Z"
     }
   ]
 }

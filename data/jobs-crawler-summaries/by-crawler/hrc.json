@@ -1,7 +1,7 @@
 {
   "key": "hrc",
   "label": "Hôpital Riviera-Chablais (HRC)",
-  "generatedAt": "2026-08-29T04:05:58.634Z",
+  "generatedAt": "2026-08-29T15:03:13.151Z",
   "total": 4,
   "discovered": null,
   "written": 4,
@@ -9,11 +9,12 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5086,
-  "avgDurationMs": 5086,
+  "durationMs": 5374,
+  "avgDurationMs": 5374,
   "durationHistory": [
     4261,
-    5086
+    5086,
+    5374
   ],
   "newJobs": [
     {
@@ -29,7 +30,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/assistant-en-soins-en-sante-communautaire-assc-hf-en-chirurgie-a-60",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.100Z",
+      "crawledAt": "2026-08-29T15:03:09.438Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -65,7 +66,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-60-80",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.135Z",
+      "crawledAt": "2026-08-29T15:03:09.473Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -103,7 +104,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/specialiste-en-activite-physique-adaptee-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.131Z",
+      "crawledAt": "2026-08-29T15:03:09.469Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -140,7 +141,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T04:05:55.140Z",
+      "crawledAt": "2026-08-29T15:03:09.479Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
