@@ -1,17 +1,18 @@
 {
   "key": "tarchini-group",
   "label": "Tarchini Group",
-  "generatedAt": "2026-08-29T03:12:59.717Z",
+  "generatedAt": "2026-08-29T14:24:38.451Z",
   "total": 4,
   "newCount": 0,
   "updatedCount": 4,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5831,
-  "avgDurationMs": 5831,
+  "durationMs": 5666,
+  "avgDurationMs": 5666,
   "durationHistory": [
     5316,
-    5831
+    5831,
+    5666
   ],
   "newJobs": [],
   "updatedJobs": [
