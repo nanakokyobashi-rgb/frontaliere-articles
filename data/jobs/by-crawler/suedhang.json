@@ -1,6 +1,6 @@
 {
   "crawlerKey": "suedhang",
-  "assembledAt": "2026-08-29T03:14:09.180Z",
+  "assembledAt": "2026-08-29T14:29:04.671Z",
   "jobs": [
     {
       "id": "suedhang-e01dd9e6dfeb",
@@ -34,7 +34,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/mitarbeiterin-facility-management/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:14:01.391Z",
+      "crawledAt": "2026-08-29T14:28:57.087Z",
       "addressLocality": "Kirchlindach",
       "postalCode": "3038",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/it-applikationsmanager-in/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:14:00.865Z",
+      "crawledAt": "2026-08-29T14:28:56.578Z",
       "addressLocality": "Kirchlindach",
       "postalCode": "3038",
       "addressCountry": "CH",
@@ -201,7 +201,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/leiter-in-praxismanagement/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:14:00.342Z",
+      "crawledAt": "2026-08-29T14:28:56.063Z",
       "addressLocality": "Ambulatorium Bern",
       "postalCode": "3000",
       "addressCountry": "CH",
@@ -243,7 +243,7 @@
         }
       },
       "addressRegion": "BE",
-      "firstSeenAt": "2026-08-29T03:14:00.342Z"
+      "firstSeenAt": "2026-08-29T14:28:56.063Z"
     },
     {
       "id": "suedhang-bf876b3c803b",
@@ -277,7 +277,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/stellvertreter-in-tanztherapie/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:13:59.815Z",
+      "crawledAt": "2026-08-29T14:28:55.554Z",
       "addressLocality": "Kirchlindach",
       "postalCode": "3038",
       "addressCountry": "CH",
@@ -356,7 +356,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/fachfrau_fachmann_gesundheit/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:13:59.277Z",
+      "crawledAt": "2026-08-29T14:28:55.039Z",
       "addressLocality": "Kirchlindach",
       "postalCode": "3038",
       "addressCountry": "CH",
@@ -390,7 +390,7 @@
         }
       },
       "addressRegion": "BE",
-      "firstSeenAt": "2026-08-29T03:13:59.277Z"
+      "firstSeenAt": "2026-08-29T14:28:55.039Z"
     },
     {
       "id": "suedhang-86806469200f",
@@ -424,7 +424,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/sport_und_bewegungstherapeut_in/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:13:58.749Z",
+      "crawledAt": "2026-08-29T14:28:54.529Z",
       "addressLocality": "Kirchlindach",
       "postalCode": "3038",
       "addressCountry": "CH",
@@ -509,7 +509,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/assistenzarzt-assistenzaerztin-ambulatorium-biel/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:13:58.222Z",
+      "crawledAt": "2026-08-29T14:28:54.015Z",
       "addressLocality": "Ambulatorium Biel/Bienne",
       "postalCode": "2502",
       "addressCountry": "CH",
@@ -619,7 +619,7 @@
       "url": "https://www.suedhang.ch/karriere/offene-stellen/klinische-r_psycholog-in_ambulatorium_biel-bienne/",
       "source": "Klinik Südhang Dedicated Parser (custom HTML)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T03:13:57.689Z",
+      "crawledAt": "2026-08-29T14:28:53.499Z",
       "addressLocality": "Ambulatorium Biel/Bienne",
       "postalCode": "2502",
       "addressCountry": "CH",
