@@ -1,6 +1,6 @@
 {
   "crawlerKey": "google-switzerland",
-  "assembledAt": "2026-08-28T21:07:14.575Z",
+  "assembledAt": "2026-08-29T03:14:20.687Z",
   "jobs": [
     {
       "id": "google-switzerland-b7aae729e3e0",
@@ -33,7 +33,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/143299441233666758-customer-engineer-security-google-cloud-sales-english",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:11.354Z",
+      "crawledAt": "2026-08-29T03:14:16.501Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -63,7 +63,6 @@
         ]
       },
       "firstSeenAt": "2026-08-18T21:32:31.609Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -75,7 +74,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-30025ee810c0",
@@ -108,7 +108,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/105458081579573958-software-engineer-iii-aiml-dsphtp-optimisation",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:10.823Z",
+      "crawledAt": "2026-08-29T03:14:15.959Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -137,7 +137,6 @@
         ]
       },
       "firstSeenAt": "2026-07-04T11:16:03.055Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -149,7 +148,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-7175faa5b9c3",
@@ -182,7 +182,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/77684590197514950-data-science-phd-intern-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:10.179Z",
+      "crawledAt": "2026-08-29T03:14:15.405Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -210,7 +210,6 @@
         ]
       },
       "firstSeenAt": "2026-08-17T21:32:11.922Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -222,7 +221,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-cd6051cf7b6f",
@@ -255,7 +255,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/111870753367827142-apprenticeship-in-digital-business-entwicklerin-efz-august-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:09.682Z",
+      "crawledAt": "2026-08-29T03:14:14.871Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -342,7 +342,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/98981566176207558-senior-ux-designer-youtube-creators-monetization",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:09.091Z",
+      "crawledAt": "2026-08-29T03:14:14.328Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -416,7 +416,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/127108116754899654-senior-product-manager-shopping-on-gemini-core-experience",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:08.592Z",
+      "crawledAt": "2026-08-29T03:14:13.790Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -492,7 +492,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/127697036228076230-software-engineer-ii-sustainability-full-stack",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:08.066Z",
+      "crawledAt": "2026-08-29T03:14:13.196Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -524,7 +524,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T10:05:33.367Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -536,7 +535,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-862e999aa3bf",
@@ -569,7 +569,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/86714054562718406-senior-security-engineer-firmware-security",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:07.424Z",
+      "crawledAt": "2026-08-29T03:14:12.635Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -647,7 +647,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/138370376240374470-senior-software-engineer-operations-research-and-gemini",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:06.830Z",
+      "crawledAt": "2026-08-29T03:14:12.113Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -697,7 +697,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:45.827Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -709,7 +708,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-f96b5e1e203a",
@@ -742,7 +742,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/87843457015390918-software-engineer-iii-generative-ai-safety",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:06.253Z",
+      "crawledAt": "2026-08-29T03:14:11.510Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -819,7 +819,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/142660341510087366-software-engineer-iii-infrastructure-account-and-device-integrity",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:05.749Z",
+      "crawledAt": "2026-08-29T03:14:10.930Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -864,7 +864,6 @@
         ]
       },
       "firstSeenAt": "2026-08-21T09:46:45.788Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -876,7 +875,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-61a826227744",
@@ -909,7 +909,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/126776304761479878-technical-lead-xr-semantic-perception",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:05.225Z",
+      "crawledAt": "2026-08-29T03:14:10.387Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -985,7 +985,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/143325582015242950-apprenticeship-in-interactive-media-design-efz-august-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:04.719Z",
+      "crawledAt": "2026-08-29T03:14:09.845Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1027,7 +1027,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:45.278Z",
-      "needsRetranslation": true,
       "salaryMin": 62000,
       "salaryMax": 94000,
       "baseSalary": {
@@ -1039,7 +1038,8 @@
           "maxValue": 94000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-d8b09a97dda0",
@@ -1072,7 +1072,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/83061889252106950-ux-designer-youtube-shopping-creator",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:04.126Z",
+      "crawledAt": "2026-08-29T03:14:09.309Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1146,7 +1146,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/107073238927844038-industry-manager-global-brands-alpine-luxury",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:03.604Z",
+      "crawledAt": "2026-08-29T03:14:08.781Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1190,7 +1190,6 @@
         ]
       },
       "firstSeenAt": "2026-08-22T09:34:43.846Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -1202,7 +1201,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-0050c05dc287",
@@ -1235,7 +1235,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/104587629684499142-software-engineer-iii-data-protection-acceleration",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:03.087Z",
+      "crawledAt": "2026-08-29T03:14:08.248Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1262,7 +1262,6 @@
         ]
       },
       "firstSeenAt": "2026-08-18T21:32:24.673Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -1274,7 +1273,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-6bf36c69e966",
@@ -1307,7 +1307,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/75651900287918790-program-manager-youtube-ads-brand-and-advertiser-experience",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:02.522Z",
+      "crawledAt": "2026-08-29T03:14:07.700Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1380,7 +1380,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/94719601408910022-staff-software-engineer-performance-and-kernel-deepmind",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:01.998Z",
+      "crawledAt": "2026-08-29T03:14:07.118Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1416,7 +1416,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:43.693Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -1428,7 +1427,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-e78e086c1472",
@@ -1461,7 +1461,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/123122307647316678-strategic-partnerships-development-manager-platforms-and-devices",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:01.315Z",
+      "crawledAt": "2026-08-29T03:14:06.574Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1504,7 +1504,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T10:18:43.047Z",
-      "needsRetranslation": true,
       "salaryMin": 121500,
       "salaryMax": 206500,
       "baseSalary": {
@@ -1516,7 +1515,8 @@
           "maxValue": 206500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-bda5c36500ac",
@@ -1549,7 +1549,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/124268043860615878-software-engineer-ii-commerce-business-agent",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:00.780Z",
+      "crawledAt": "2026-08-29T03:14:06.031Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1624,7 +1624,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/111285665542349510-research-scientist-phd-intern-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:07:00.283Z",
+      "crawledAt": "2026-08-29T03:14:05.485Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1669,7 +1669,6 @@
         ]
       },
       "firstSeenAt": "2026-08-17T21:32:04.821Z",
-      "needsRetranslation": true,
       "salaryMin": 71000,
       "salaryMax": 120500,
       "baseSalary": {
@@ -1681,7 +1680,8 @@
           "maxValue": 120500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-7ae0b3017852",
@@ -1714,7 +1714,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/85258707578823366-field-sales-account-manager-ii-google-cloud",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:59.675Z",
+      "crawledAt": "2026-08-29T03:14:04.945Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1805,7 +1805,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/142659746657116870-senior-software-engineer-xr-world-context",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:59.176Z",
+      "crawledAt": "2026-08-29T03:14:04.425Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1880,7 +1880,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/120968646225732294-staff-silicon-architect-deepmind",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:58.635Z",
+      "crawledAt": "2026-08-29T03:14:03.901Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -1911,7 +1911,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:42.584Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -1923,7 +1922,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-d4a6337b6d54",
@@ -1956,7 +1956,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/101791861525357254-software-engineer-ii-youtube-studio-full-stack",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:58.097Z",
+      "crawledAt": "2026-08-29T03:14:03.326Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2031,7 +2031,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/74517571507757766-software-engineer-iii-search-quality",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:57.577Z",
+      "crawledAt": "2026-08-29T03:14:02.784Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2060,7 +2060,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T21:48:02.679Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -2072,7 +2071,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-5c8818ad88a6",
@@ -2105,7 +2105,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/110264453852734150-technical-operations-compliance-manager-third-party-data-centers",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:57.029Z",
+      "crawledAt": "2026-08-29T03:14:02.234Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2152,7 +2152,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T11:31:05.310Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -2164,7 +2163,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-08e3942b535f",
@@ -2197,7 +2197,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/104722571651359430-senior-staff-software-engineer-full-stack",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:56.400Z",
+      "crawledAt": "2026-08-29T03:14:01.697Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2252,7 +2252,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:40.927Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -2264,7 +2263,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-4ca4101a0fe3",
@@ -2297,7 +2297,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/109870031436686022-senior-staff-forward-deployed-engineer-genai-google-cloud",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:55.822Z",
+      "crawledAt": "2026-08-29T03:14:01.155Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2374,7 +2374,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/79802679089341126-key-account-executive-fsi-google-cloud",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:55.310Z",
+      "crawledAt": "2026-08-29T03:14:00.476Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2448,7 +2448,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/90134549337383622-software-engineer-iii-open-cloud-networking",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:54.640Z",
+      "crawledAt": "2026-08-29T03:13:59.734Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2499,7 +2499,6 @@
         ]
       },
       "firstSeenAt": "2026-08-18T21:32:15.842Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -2511,7 +2510,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-3059ff2777ae",
@@ -2544,7 +2544,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/77058897214350022-research-scientist-ai",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:54.126Z",
+      "crawledAt": "2026-08-29T03:13:59.205Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2635,7 +2635,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/133446172076319430-forward-deployed-engineering-manager-generative-ai-google-cloud",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:53.619Z",
+      "crawledAt": "2026-08-29T03:13:58.642Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2722,7 +2722,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/139750080260252358-data-center-technician-ii-third-party-data-centers",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:53.110Z",
+      "crawledAt": "2026-08-29T03:13:58.105Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2808,7 +2808,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/98867160595473094-software-engineer-ii-full-stack",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:52.573Z",
+      "crawledAt": "2026-08-29T03:13:57.503Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2895,7 +2895,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/118881439759377094-software-engineer-iii-data-engineering-console-agentic-infrastructure",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:52.025Z",
+      "crawledAt": "2026-08-29T03:13:56.965Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -2989,7 +2989,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/108588288641508038-senior-software-engineer-gemini-and-search",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:51.503Z",
+      "crawledAt": "2026-08-29T03:13:56.427Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3019,7 +3019,6 @@
         ]
       },
       "firstSeenAt": "2026-08-17T21:31:56.581Z",
-      "needsRetranslation": true,
       "salaryMin": 113500,
       "salaryMax": 172000,
       "baseSalary": {
@@ -3031,7 +3030,8 @@
           "maxValue": 172000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-c0182140aceb",
@@ -3064,7 +3064,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/122676363340456646-senior-software-engineering-manager-youtube-channel-memberships",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:50.977Z",
+      "crawledAt": "2026-08-29T03:13:55.849Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3141,7 +3141,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/93078491720753862-software-engineering-phd-intern-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:50.320Z",
+      "crawledAt": "2026-08-29T03:13:55.288Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3169,7 +3169,6 @@
         ]
       },
       "firstSeenAt": "2026-08-18T09:46:53.682Z",
-      "needsRetranslation": true,
       "salaryMin": 57500,
       "salaryMax": 87000,
       "baseSalary": {
@@ -3181,7 +3180,8 @@
           "maxValue": 87000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-423377bafee0",
@@ -3214,7 +3214,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/95468220114182854-principal-engineer-shopping-graph-core-data",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:49.814Z",
+      "crawledAt": "2026-08-29T03:13:54.724Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3289,7 +3289,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/135233176434811590-apprenticeship-in-application-development-informatikerin-efz-applikationsentwicklung-august-2027",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:49.220Z",
+      "crawledAt": "2026-08-29T03:13:54.150Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3383,7 +3383,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/101742858095993542-ai-architect-partner-engineering",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:48.574Z",
+      "crawledAt": "2026-08-29T03:13:53.561Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3413,7 +3413,6 @@
         ]
       },
       "firstSeenAt": "2026-08-24T21:31:31.903Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -3425,7 +3424,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-2c2e1c0698df",
@@ -3458,7 +3458,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/82143346071347910-software-engineer-iii-search-ads-quality-and-ai",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:47.966Z",
+      "crawledAt": "2026-08-29T03:13:52.998Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3487,7 +3487,6 @@
         ]
       },
       "firstSeenAt": "2026-08-07T21:44:34.863Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -3499,7 +3498,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-01b28c534a4a",
@@ -3532,7 +3532,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/124826554965336774-senior-partner-forward-deployed-engineer-google-cloud-french-german",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:47.232Z",
+      "crawledAt": "2026-08-29T03:13:52.414Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3655,7 +3655,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/102840960974496454-senior-product-manager-merchant-api",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:46.697Z",
+      "crawledAt": "2026-08-29T03:13:51.859Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3731,7 +3731,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/143876826572169926-ux-engineer-privacy-safety-and-security",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:46.158Z",
+      "crawledAt": "2026-08-29T03:13:51.313Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
@@ -3763,7 +3763,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T21:47:53.329Z",
-      "needsRetranslation": true,
       "salaryMin": 83000,
       "salaryMax": 126000,
       "baseSalary": {
@@ -3775,7 +3774,8 @@
           "maxValue": 126000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "google-switzerland-c2e3c0708913",
@@ -3808,7 +3808,7 @@
       "url": "https://www.google.com/about/careers/applications/jobs/results/86413698909774534-customer-solution-engineer-google-flights",
       "source": "Google Switzerland Dedicated Parser (server-rendered HTML)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-28T21:06:45.641Z",
+      "crawledAt": "2026-08-29T03:13:50.748Z",
       "addressLocality": "Zürich",
       "addressRegion": "Zürich",
       "streetAddress": "Brandschenkestrasse 110",
