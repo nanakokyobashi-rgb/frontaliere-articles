@@ -1,7 +1,7 @@
 {
   "key": "mabetex",
   "label": "Mabetex Group",
-  "generatedAt": "2026-08-29T15:15:01.064Z",
+  "generatedAt": "2026-08-29T23:47:37.853Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,14 +9,15 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4524,
-  "avgDurationMs": 4524,
+  "durationMs": 3650,
+  "avgDurationMs": 3650,
   "durationHistory": [
     3762,
     3545,
     3545,
     4569,
-    4524
+    4524,
+    3650
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -45,7 +46,7 @@
       "applyUrl": "https://www.mabetex.com/career/",
       "source": "Mabetex Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T15:14:57.941Z",
+      "crawledAt": "2026-08-29T23:47:35.318Z",
       "firstSeenAt": "2026-05-11T22:31:06.468Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
