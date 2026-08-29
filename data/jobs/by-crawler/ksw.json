@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ksw",
-  "assembledAt": "2026-08-28T20:53:52.968Z",
+  "assembledAt": "2026-08-29T03:15:47.629Z",
   "jobs": [
     {
       "id": "ksw-f1e52d8e72a1",
@@ -33,7 +33,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4061178",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -52,7 +52,6 @@
       "requirementsByLocale": {},
       "department": "Klinik für Akutgeriatrie",
       "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:14:11.715Z",
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -64,7 +63,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "firstSeenAt": "2026-08-28T05:14:11.715Z"
     },
     {
       "id": "ksw-f552fc79c232",
@@ -97,7 +97,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4060545",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -169,7 +169,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4055145",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -204,7 +204,6 @@
         ]
       },
       "firstSeenAt": "2026-08-17T09:51:56.192Z",
-      "needsRetranslation": true,
       "salaryMin": 124000,
       "salaryMax": 173000,
       "baseSalary": {
@@ -216,7 +215,8 @@
           "maxValue": 173000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-c5e41d83de64",
@@ -249,7 +249,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4054853",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -327,7 +327,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4051843",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -372,7 +372,6 @@
         ]
       },
       "firstSeenAt": "2026-08-12T10:15:24.716Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -384,7 +383,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-54e5756b2328",
@@ -417,7 +417,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048760",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -502,7 +502,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050821",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -588,7 +588,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4045871",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -693,7 +693,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050693",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -771,7 +771,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050301",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -880,7 +880,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048230",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -932,7 +932,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T22:19:38.060Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -944,7 +943,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-8c15ced349b6",
@@ -977,7 +977,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048799",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1056,7 +1056,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4044462",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1140,7 +1140,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4037812",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1185,7 +1185,6 @@
         ]
       },
       "firstSeenAt": "2026-07-30T22:08:07.552Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -1197,7 +1196,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-6b28fa18d9d1",
@@ -1230,7 +1230,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4043783",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1322,7 +1322,6 @@
         "assistente-di-pratica-medica-assistente-di-pratica-medica-kantonsspital-winterthur-ksw-winterthur-fcf325"
       ],
       "firstSeenAt": "2026-07-28T22:07:05.114Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -1334,7 +1333,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-58fd221ee193",
@@ -1367,7 +1367,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4044688",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1410,7 +1410,6 @@
         ]
       },
       "firstSeenAt": "2026-07-28T22:07:05.114Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -1422,7 +1421,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-67d0a4e982b5",
@@ -1455,7 +1455,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4039782",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.482Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1557,7 +1557,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4037806",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1650,7 +1650,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4037809",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1750,7 +1750,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4040289",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1786,7 +1786,6 @@
         ]
       },
       "firstSeenAt": "2026-07-17T21:54:07.164Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -1798,7 +1797,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-ef1ba1e5c4e7",
@@ -1831,7 +1831,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4040341",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1909,7 +1909,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038418",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -1986,7 +1986,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038617",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2021,7 +2021,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:01:30.194Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2033,7 +2032,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-0f2d1493a5c6",
@@ -2066,7 +2066,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038700",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2109,7 +2109,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:01:30.194Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2121,7 +2120,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-734b1c46e588",
@@ -2154,7 +2154,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038611",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2197,7 +2197,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:01:30.194Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2209,7 +2208,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-675230c4266f",
@@ -2242,7 +2242,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038614",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2277,7 +2277,6 @@
         ]
       },
       "firstSeenAt": "2026-07-15T22:01:30.194Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2289,7 +2288,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-75902fcce428",
@@ -2322,7 +2322,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4032826",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2400,7 +2400,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4032901",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2435,7 +2435,6 @@
         ]
       },
       "firstSeenAt": "2026-07-08T22:06:32.752Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2447,7 +2446,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-1e645275ba8a",
@@ -2480,7 +2480,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4029791",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2544,7 +2544,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4027429",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2585,7 +2585,6 @@
         ]
       },
       "firstSeenAt": "2026-06-29T13:20:27.752Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2597,7 +2596,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-e7ab4aa8a742",
@@ -2630,7 +2630,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4024495",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2708,7 +2708,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4017422",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2761,7 +2761,6 @@
         ]
       },
       "firstSeenAt": "2026-06-13T22:13:04.763Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -2773,7 +2772,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-028827099c68",
@@ -2806,7 +2806,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4013823",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2883,7 +2883,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4013672",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.481Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -2922,7 +2922,6 @@
         ]
       },
       "firstSeenAt": "2026-06-02T13:46:35.675Z",
-      "needsRetranslation": true,
       "salaryMin": 124000,
       "salaryMax": 173000,
       "baseSalary": {
@@ -2934,7 +2933,8 @@
           "maxValue": 173000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-405a4136723c",
@@ -2967,7 +2967,7 @@
       "url": "https://live.solique.ch/ksw/job/details/3905698",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.385Z",
+      "crawledAt": "2026-08-29T03:15:44.482Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3004,7 +3004,6 @@
         ]
       },
       "firstSeenAt": "2026-05-10T21:55:26.417Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3016,7 +3015,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-1ff4e15327eb",
@@ -3049,7 +3049,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4061336",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3062,7 +3062,7 @@
       "sector": "Sanità / Ospedali",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-28",
+      "postedDate": "2026-08-29",
       "applyUrl": "https://live.solique.ch/ksw/job/details/4061336",
       "requirements": [],
       "requirementsByLocale": {
@@ -3090,7 +3090,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T20:53:49.384Z"
+      "firstSeenAt": "2026-08-29T03:15:44.480Z"
     },
     {
       "id": "ksw-2dfd45ab55e8",
@@ -3123,7 +3123,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4052256",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3202,7 +3202,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4051840",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3293,7 +3293,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4051757",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3340,7 +3340,6 @@
         ]
       },
       "firstSeenAt": "2026-08-12T10:15:24.716Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3352,7 +3351,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-445a24d0c4fd",
@@ -3385,7 +3385,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4052066",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3465,7 +3465,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048757",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3548,7 +3548,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050232",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3626,7 +3626,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038439",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3700,7 +3700,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4045911",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3801,7 +3801,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4045914",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -3876,7 +3876,6 @@
         ]
       },
       "firstSeenAt": "2026-08-02T10:48:23.466Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -3888,7 +3887,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-5804b9eb4ccd",
@@ -3921,7 +3921,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4043541",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4028,7 +4028,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4043681",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4109,7 +4109,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4043019",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4184,7 +4184,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4042595",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4264,7 +4264,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4037372",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4353,7 +4353,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038442",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4433,7 +4433,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4037288",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4468,7 +4468,6 @@
         ]
       },
       "firstSeenAt": "2026-07-13T21:56:57.926Z",
-      "needsRetranslation": true,
       "salaryMin": 73500,
       "salaryMax": 111500,
       "baseSalary": {
@@ -4480,7 +4479,8 @@
           "maxValue": 111500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-2b5dbcbca20c",
@@ -4513,7 +4513,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4032466",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4548,7 +4548,6 @@
         ]
       },
       "firstSeenAt": "2026-07-03T22:55:00.646Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -4560,7 +4559,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-cbdeca6959e1",
@@ -4593,7 +4593,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4025151",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4704,7 +4704,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4019967",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.384Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4781,7 +4781,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4053994",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4815,7 +4815,6 @@
         ]
       },
       "firstSeenAt": "2026-08-27T00:33:05.561Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -4827,7 +4826,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-fd2bc4316799",
@@ -4860,7 +4860,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4060393",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -4924,7 +4924,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4057681",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5004,7 +5004,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4054162",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5039,7 +5039,6 @@
         ]
       },
       "firstSeenAt": "2026-08-13T10:16:25.963Z",
-      "needsRetranslation": true,
       "salaryMin": 53500,
       "salaryMax": 98500,
       "baseSalary": {
@@ -5051,7 +5050,8 @@
           "maxValue": 98500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-2804d52fb092",
@@ -5084,7 +5084,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048227",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5164,7 +5164,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050824",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5243,7 +5243,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4048573",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5321,7 +5321,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4032823",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.383Z",
+      "crawledAt": "2026-08-29T03:15:44.480Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5400,7 +5400,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4038319",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.382Z",
+      "crawledAt": "2026-08-29T03:15:44.479Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5485,7 +5485,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4017085",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.382Z",
+      "crawledAt": "2026-08-29T03:15:44.478Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5567,7 +5567,6 @@
         ]
       },
       "firstSeenAt": "2026-06-08T22:46:05.232Z",
-      "needsRetranslation": true,
       "salaryMin": 91500,
       "salaryMax": 128000,
       "baseSalary": {
@@ -5579,7 +5578,8 @@
           "maxValue": 128000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     },
     {
       "id": "ksw-ec7a4c4dabe1",
@@ -5612,7 +5612,7 @@
       "url": "https://live.solique.ch/ksw/job/details/4050256",
       "source": "KSW Dedicated Parser (Solique tenant ksw)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-28T20:53:49.381Z",
+      "crawledAt": "2026-08-29T03:15:44.477Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "postalCode": "8400",
@@ -5649,7 +5649,6 @@
         ]
       },
       "firstSeenAt": "2026-08-05T22:19:38.057Z",
-      "needsRetranslation": true,
       "salaryMin": 101500,
       "salaryMax": 154000,
       "baseSalary": {
@@ -5661,7 +5660,8 @@
           "maxValue": 154000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "needsRetranslation": true
     }
   ]
 }
