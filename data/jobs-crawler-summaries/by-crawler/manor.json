@@ -1,18 +1,19 @@
 {
   "key": "manor",
   "label": "Manor",
-  "generatedAt": "2026-08-29T15:13:19.957Z",
+  "generatedAt": "2026-08-30T14:55:45.415Z",
   "total": 195,
   "newCount": 18,
   "updatedCount": 173,
   "removedCount": 12,
   "unchangedCount": 4,
-  "durationMs": 357183,
-  "avgDurationMs": 357183,
+  "durationMs": 361349,
+  "avgDurationMs": 361349,
   "durationHistory": [
     346654,
     356912,
-    357183
+    357183,
+    361349
   ],
   "newJobs": [
     {
@@ -1227,6 +1228,32 @@
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 14,
+        "translation": 25,
+        "completeness": 11
+      }
+    },
+    {
+      "title": "Mitarbeiter*in Kasse 20%",
+      "company": "Manor AG",
+      "companyKey": "manor",
+      "url": "https://positions.manor.ch/job/Basel-Mitarbeiterin-Kasse-20/1365263455/",
+      "location": "Basel Mitarbeiterin Kasse 20",
+      "canton": "BS",
+      "country": "CH",
+      "category": "sales",
+      "descriptionIt": "KOMMERZIELLE Kernaufgaben :\n- Professionelle, umfassende und kompetente\nKundenberatung (Zusatzverkäufe, Instore Ordering,\nVerkaufsabschluss)\n- Anwendung des OMNICHANNEL-Konzepts\n- Die Manor Mastercard anbieten und Informationen\nüber das Treueprogramm geben\n- Bearbeitung von Retouren und Garantiefällen\n- Sicherstellung einer qualitativ hochwertigen\nVerpackung und Behandlung der Produkte\n- Hilfe beim Verkauf und Service in den benachbarten\nAbteilungen\n- Tägliche Pflege der Kassen (Ordnung, Sauberkeit)\nADMINISTRATIVE Kernaufgaben :\n- sich selbstständig über Statistiken informieren:\nUmsatz, Reassort von Waren, Omnichannel-\nStatistiken (Instore Ordering /Click & Collect (Express)",
+      "postedDate": "2026-08-21",
+      "source": "company-website",
+      "slug": "collaboratore-trice-in-kasse-20-manor-ag-basel-mitarbeiterin-kasse-20",
+      "sourceLang": "de",
+      "id": "manor-7268bd527ff3",
+      "needsRetranslation": true,
+      "firstSeenAt": "2026-08-21T21:57:07.922Z",
+      "crawledAt": "",
+      "_qualityScore": 83,
+      "_qualityBreakdown": {
+        "cleanliness": 25,
+        "richness": 22,
         "translation": 25,
         "completeness": 11
       }
