@@ -1,6 +1,6 @@
 {
   "crawlerKey": "riveneuve",
-  "assembledAt": "2026-08-30T14:35:12.250Z",
+  "assembledAt": "2026-08-30T23:25:31.009Z",
   "jobs": [
     {
       "id": "riveneuve-6211b5c5e83a",
@@ -33,7 +33,7 @@
       "url": "https://www.riveneuve.ch/jcms/rivd_32273/fr/un-e-infirmier-ere-a-100-taux-negociable",
       "source": "Rive-Neuve Dedicated Parser (Jalios JCMS publication-body)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:09.573Z",
+      "crawledAt": "2026-08-30T23:25:28.820Z",
       "addressLocality": "Blonay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -139,7 +139,7 @@
       "url": "https://www.riveneuve.ch/jcms/rivd_32285/fr/un-e-assistant-e-en-soins-et-sante-communautaire-a-80",
       "source": "Rive-Neuve Dedicated Parser (Jalios JCMS publication-body)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:08.540Z",
+      "crawledAt": "2026-08-30T23:25:27.883Z",
       "addressLocality": "Blonay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -236,7 +236,7 @@
       "url": "https://www.riveneuve.ch/jcms/rivd_32286/fr/un-e-assistant-e-en-soins-et-sante-communautaire-journalier-ere",
       "source": "Rive-Neuve Dedicated Parser (Jalios JCMS publication-body)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:07.623Z",
+      "crawledAt": "2026-08-30T23:25:26.825Z",
       "addressLocality": "Blonay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -333,7 +333,7 @@
       "url": "https://www.riveneuve.ch/jcms/rivd_32287/fr/un-e-infirmier-ere-journalier-ere",
       "source": "Rive-Neuve Dedicated Parser (Jalios JCMS publication-body)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:06.598Z",
+      "crawledAt": "2026-08-30T23:25:25.940Z",
       "addressLocality": "Blonay",
       "addressRegion": "VD",
       "addressCountry": "CH",
