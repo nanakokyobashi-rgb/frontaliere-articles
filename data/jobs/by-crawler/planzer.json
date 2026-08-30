@@ -1,6 +1,6 @@
 {
   "crawlerKey": "planzer",
-  "assembledAt": "2026-08-30T14:30:33.196Z",
+  "assembledAt": "2026-08-30T15:33:56.710Z",
   "jobs": [
     {
       "id": "planzer-72cb59d3ac49",
@@ -110,7 +110,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4057266",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:28.020Z",
+      "crawledAt": "2026-08-30T15:33:50.475Z",
       "addressLocality": "Kallnach",
       "addressRegion": "BE",
       "streetAddress": "Brühlgasse 9",
@@ -191,7 +191,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060240",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:27.216Z",
+      "crawledAt": "2026-08-30T15:33:49.837Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "streetAddress": "Murtenstrasse 85",
@@ -256,7 +256,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058103",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:26.383Z",
+      "crawledAt": "2026-08-30T15:33:49.231Z",
       "addressLocality": "Villmergen",
       "addressRegion": "AG",
       "streetAddress": "Allmendstrasse 14",
@@ -331,7 +331,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4060246",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:25.658Z",
+      "crawledAt": "2026-08-30T15:33:48.617Z",
       "addressLocality": "Dällikon",
       "addressRegion": "ZH",
       "streetAddress": "",
@@ -462,7 +462,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059605",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:24.901Z",
+      "crawledAt": "2026-08-30T15:33:47.972Z",
       "addressLocality": "Winterthur",
       "addressRegion": "ZH",
       "streetAddress": "Klosterstrasse 38",
@@ -527,7 +527,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058655",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:24.190Z",
+      "crawledAt": "2026-08-30T15:33:47.295Z",
       "addressLocality": "St. Gallen",
       "addressRegion": "SG",
       "streetAddress": "Piccardstrasse 13",
@@ -615,7 +615,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059479",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:23.440Z",
+      "crawledAt": "2026-08-30T15:33:46.680Z",
       "addressLocality": "Seewen",
       "addressRegion": "SO",
       "streetAddress": "Seewernstrasse 203",
@@ -690,7 +690,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4058819",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:22.645Z",
+      "crawledAt": "2026-08-30T15:33:45.966Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -773,7 +773,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4061919",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:21.897Z",
+      "crawledAt": "2026-08-30T15:33:45.354Z",
       "addressLocality": "Schmerikon",
       "addressRegion": "SG",
       "streetAddress": "Allmeindstrasse 23",
@@ -806,7 +806,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:30:21.897Z"
+      "firstSeenAt": "2026-08-30T15:33:45.354Z"
     },
     {
       "id": "planzer-d55ae7a0dfe4",
@@ -840,7 +840,7 @@
       "url": "https://live.solique.ch/planzer/job/details/4059599",
       "source": "Planzer Dedicated Parser (Solique)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:20.917Z",
+      "crawledAt": "2026-08-30T15:33:44.587Z",
       "addressLocality": "Dällikon",
       "addressRegion": "ZH",
       "streetAddress": "Industriestrasse 10",
@@ -873,7 +873,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:30:20.917Z"
+      "firstSeenAt": "2026-08-30T15:33:44.587Z"
     }
   ]
 }
