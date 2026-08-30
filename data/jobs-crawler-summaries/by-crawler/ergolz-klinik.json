@@ -1,7 +1,7 @@
 {
   "key": "ergolz-klinik",
   "label": "Ergolz Klinik",
-  "generatedAt": "2026-08-30T14:54:41.731Z",
+  "generatedAt": "2026-08-30T23:40:55.193Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -24,7 +24,7 @@
       "url": "https://ergolz.cardiance.com/wp-content/uploads/sites/4/2026/07/Inserat-Dipl.-Pflege-HF-50-100_10.07.2026-1.pdf",
       "source": "Ergolz Klinik Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:54:39.231Z",
+      "crawledAt": "2026-08-30T23:40:52.831Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -61,7 +61,7 @@
       "url": "https://ergolz.cardiance.com/wp-content/uploads/sites/4/2026/04/Inserat-Anasthesie-Pflege-60-80.pdf",
       "source": "Ergolz Klinik Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:54:38.405Z",
+      "crawledAt": "2026-08-30T23:40:52.051Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -88,12 +88,13 @@
   ],
   "removedJobs": [],
   "unchangedJobs": [],
-  "durationMs": 4818,
-  "avgDurationMs": 4818,
+  "durationMs": 4973,
+  "avgDurationMs": 4973,
   "durationHistory": [
     4330,
     4838,
     5386,
-    4818
+    4818,
+    4973
   ]
 }
