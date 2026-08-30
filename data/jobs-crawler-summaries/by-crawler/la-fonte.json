@@ -1,18 +1,19 @@
 {
   "key": "la-fonte",
   "label": "La Fonte",
-  "generatedAt": "2026-08-30T14:37:45.117Z",
+  "generatedAt": "2026-08-30T23:26:03.732Z",
   "total": 5,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3893,
-  "avgDurationMs": 3893,
+  "durationMs": 3524,
+  "avgDurationMs": 3524,
   "durationHistory": [
     3543,
     3777,
-    3893
+    3893,
+    3524
   ],
   "newJobs": [],
   "updatedJobs": [],
