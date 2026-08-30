@@ -1,19 +1,20 @@
 {
   "key": "agroscope",
   "label": "Agroscope",
-  "generatedAt": "2026-08-29T23:10:39.564Z",
+  "generatedAt": "2026-08-30T14:32:39.435Z",
   "total": 13,
   "newCount": 0,
   "updatedCount": 7,
   "removedCount": 1,
   "unchangedCount": 6,
-  "durationMs": 3832,
-  "avgDurationMs": 3832,
+  "durationMs": 2803,
+  "avgDurationMs": 2803,
   "durationHistory": [
     2596,
     2667,
     3288,
-    3832
+    3832,
+    2803
   ],
   "newJobs": [],
   "updatedJobs": [
