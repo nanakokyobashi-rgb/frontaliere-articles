@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hopital-de-lavaux",
-  "assembledAt": "2026-08-30T14:35:32.365Z",
+  "assembledAt": "2026-08-30T15:35:30.398Z",
   "jobs": [
     {
       "id": "hopital-de-lavaux-a7255dd10142",
@@ -33,7 +33,7 @@
       "url": "https://app.beehire.com/invite/GFUnCnSo4",
       "source": "Hôpital de Lavaux Dedicated Parser (Beehire JSON)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:29.174Z",
+      "crawledAt": "2026-08-30T15:35:28.014Z",
       "addressLocality": "Bourg-en-Lavaux",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -107,7 +107,7 @@
       "url": "https://app.beehire.com/invite/swtNGdXFJ",
       "source": "Hôpital de Lavaux Dedicated Parser (Beehire JSON)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:29.173Z",
+      "crawledAt": "2026-08-30T15:35:28.013Z",
       "addressLocality": "Bourg-en-Lavaux",
       "addressRegion": "VD",
       "addressCountry": "CH",
