@@ -11,7 +11,7 @@
     "https://jobs.skyguide.ch/search/?createNewAlert=false&q=&locationsearch=&optionsFacetsDD_department=&optionsFacetsDD_location=&startrow=0"
   ],
   "notes": "Dedicated Skyguide crawler parses the national SuccessFactors listing (all cantons, paginated) and extracts full detail pages; canton derived per-job.",
-  "updatedAt": "2026-08-29T23:13:44.059Z",
+  "updatedAt": "2026-08-30T14:43:16.116Z",
   "seedMetaByUrl": {
     "https://jobs.skyguide.ch/job/D%C3%BCbendorf-Lernender-Informatik-EFZ-%28Plattformentwicklung%29/1421327633/": {
       "location": "Dübendorf",
@@ -43,15 +43,15 @@
       "company": "Skyguide",
       "postedDate": "2026-08-18"
     },
-    "https://jobs.skyguide.ch/job/D%C3%BCbendorf-Ausbildung-Flugverkehrsleiterin-Fluglotsin/1140795501/": {
-      "location": "Dübendorf",
-      "canton": "ZH",
+    "https://jobs.skyguide.ch/job/Gen%C3%A8ve-Formation-contr%C3%B4leur%C2%B7euse-de-la-circulation-a%C3%A9rienne-Gen%C3%A8ve/1140871001/": {
+      "location": "Genève",
+      "canton": "GE",
       "company": "Skyguide",
       "postedDate": "2026-08-18"
     },
-    "https://jobs.skyguide.ch/job/Sion-Formation-contr%C3%B4leur%C2%B7euse-de-la-circulation-a%C3%A9rienne-Sion/1140869101/": {
-      "location": "Sion",
-      "canton": "VS",
+    "https://jobs.skyguide.ch/job/D%C3%BCbendorf-Ausbildung-Flugverkehrsleiterin-Fluglotsin/1140795501/": {
+      "location": "Dübendorf",
+      "canton": "ZH",
       "company": "Skyguide",
       "postedDate": "2026-08-18"
     },
@@ -61,9 +61,9 @@
       "company": "Skyguide",
       "postedDate": "2026-08-18"
     },
-    "https://jobs.skyguide.ch/job/Gen%C3%A8ve-Formation-contr%C3%B4leur%C2%B7euse-de-la-circulation-a%C3%A9rienne-Gen%C3%A8ve/1140871001/": {
-      "location": "Genève",
-      "canton": "GE",
+    "https://jobs.skyguide.ch/job/Sion-Formation-contr%C3%B4leur%C2%B7euse-de-la-circulation-a%C3%A9rienne-Sion/1140869101/": {
+      "location": "Sion",
+      "canton": "VS",
       "company": "Skyguide",
       "postedDate": "2026-08-18"
     },
