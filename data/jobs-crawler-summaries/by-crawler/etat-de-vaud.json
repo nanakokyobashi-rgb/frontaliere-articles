@@ -1,7 +1,7 @@
 {
   "key": "etat-de-vaud",
   "label": "État de Vaud (Administration cantonale vaudoise)",
-  "generatedAt": "2026-08-29T23:27:41.136Z",
+  "generatedAt": "2026-08-30T14:43:39.705Z",
   "total": 62,
   "discovered": null,
   "written": 62,
@@ -9,13 +9,14 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 32182,
-  "avgDurationMs": 32182,
+  "durationMs": 34759,
+  "avgDurationMs": 34759,
   "durationHistory": [
     37409,
     33322,
     32179,
-    32182
+    32182,
+    34759
   ],
   "newJobs": [],
   "updatedJobs": [
