@@ -42,7 +42,7 @@
         "it": "gestione-delle-operazioni-zcam-zurich-insurance-sede-ticino-lugano",
         "en": "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait",
         "de": "betriebsleiter-zcam-zurich-insurance-sede-ticino-lugano",
-        "fr": "directeur-des-operations-zcam-zurich-insurance-sede-ticino-lugano"
+        "fr": "gestionnaire-des-operations-zcam-zurich-insurance-sede-ticino-lugano"
       },
       "requirementsByLocale": {
         "it": [],
@@ -64,12 +64,14 @@
           "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait"
         ],
         "fr": [
-          "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait"
+          "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait",
+          "directeur-des-operations-zcam-zurich-insurance-sede-ticino-lugano"
         ]
       },
       "previousSlugs": [
         "operations-manager-zcam-zurich-insurance-sede-ticino-lugano",
-        "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait"
+        "operations-manager-zcam-zurich-insurance-sede-ticino-lugano-bpmait",
+        "directeur-des-operations-zcam-zurich-insurance-sede-ticino-lugano"
       ],
       "salaryMin": 79500,
       "salaryMax": 135000,

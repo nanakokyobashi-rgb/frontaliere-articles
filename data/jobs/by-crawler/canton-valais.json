@@ -1557,12 +1557,12 @@
     },
     {
       "id": "canton-valais-b0464c16722b",
-      "slug": "un-recensore-fiscale-o-un-recensore-fiscale-80-100-canton-du-valais-sion",
+      "slug": "un-consulente-fiscale-o-un-consulente-fiscale-80-100-canton-du-valais-sion",
       "slugByLocale": {
         "fr": "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch",
-        "it": "un-recensore-fiscale-o-un-recensore-fiscale-80-100-canton-du-valais-sion",
-        "en": "a-tax-reviewer-or-tax-reviewer-80-100-canton-du-valais-sion",
-        "de": "steuergutachter-oder-steuergutachter-80-100-canton-du-valais-sion"
+        "it": "un-consulente-fiscale-o-un-consulente-fiscale-80-100-canton-du-valais-sion",
+        "en": "a-tax-revisor-or-a-tax-reviser-80-100-canton-du-valais-sion",
+        "de": "ein-steuerrevisor-oder-ein-steuerrevisor-80-100-canton-du-valais-sion"
       },
       "company": "Canton du Valais",
       "companyKey": "canton-valais",
@@ -1618,17 +1618,23 @@
       "firstSeenAt": "2026-08-28T05:35:49.610Z",
       "previousSlugsByLocale": {
         "it": [
-          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch"
+          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch",
+          "un-recensore-fiscale-o-un-recensore-fiscale-80-100-canton-du-valais-sion"
         ],
         "en": [
-          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch"
+          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch",
+          "a-tax-reviewer-or-tax-reviewer-80-100-canton-du-valais-sion"
         ],
         "de": [
-          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch"
+          "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch",
+          "steuergutachter-oder-steuergutachter-80-100-canton-du-valais-sion"
         ]
       },
       "previousSlugs": [
-        "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch"
+        "un-taxateur-reviseur-ou-une-taxatrice-reviseuse-80-100-canton-valais-ch",
+        "un-recensore-fiscale-o-un-recensore-fiscale-80-100-canton-du-valais-sion",
+        "a-tax-reviewer-or-tax-reviewer-80-100-canton-du-valais-sion",
+        "steuergutachter-oder-steuergutachter-80-100-canton-du-valais-sion"
       ]
     },
     {

@@ -29712,9 +29712,9 @@
     },
     {
       "id": "hirslanden-1e8855467022",
-      "slug": "dipl-clinica-diurna-specialistica-a-cuore-di-fuoco-al-100-nave-mo-fr-hirslanden-klinik-zurich",
+      "slug": "dipl-clinica-diurna-specialistica-a-cuore-di-messa-a-fuoco-100-nave-mo-fr-hirslanden-klinik-zurich",
       "slugByLocale": {
-        "it": "dipl-clinica-diurna-specialistica-a-cuore-di-fuoco-al-100-nave-mo-fr-hirslanden-klinik-zurich",
+        "it": "dipl-clinica-diurna-specialistica-a-cuore-di-messa-a-fuoco-100-nave-mo-fr-hirslanden-klinik-zurich",
         "en": "dipl-nursing-specialist-day-clinic-a-100-focus-heart-vessel-mo-fr-hirslanden-klinik-zurich",
         "de": "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr",
         "fr": "dipl-clinique-de-jour-specialisee-en-soins-infirmiers-a-100-coeur-focalise-vaisseau-mo-fr-hirslanden-klinik-zurich"
@@ -29773,7 +29773,8 @@
       },
       "previousSlugsByLocale": {
         "it": [
-          "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr"
+          "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr",
+          "dipl-clinica-diurna-specialistica-a-cuore-di-fuoco-al-100-nave-mo-fr-hirslanden-klinik-zurich"
         ],
         "en": [
           "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr"
@@ -29783,7 +29784,8 @@
         ]
       },
       "previousSlugs": [
-        "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr"
+        "dipl-pflegefachfrau-pflegefachmann-tagesklinik-a-100-schwerpunkt-herz-gefass-mo-fr",
+        "dipl-clinica-diurna-specialistica-a-cuore-di-fuoco-al-100-nave-mo-fr-hirslanden-klinik-zurich"
       ]
     },
     {

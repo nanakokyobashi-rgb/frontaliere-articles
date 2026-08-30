@@ -37,9 +37,9 @@
       "requirementsByLocale": {},
       "slugByLocale": {
         "it": "kauffrau-mann-cfc-coop-dietikon-nz7buh",
-        "en": "retail-employee-efz-coop-dietikon",
+        "en": "commercial-employee-apprentice-coop-dietikon",
         "de": "kauffrau-mann-efz-coop-dietikon-nz7buh",
-        "fr": "employe-e-de-commerce-cfc-coop-dietikon"
+        "fr": "apprenti-e-de-commerce-coop-dietikon"
       },
       "addressLocality": "Dietikon",
       "sourceLang": "de",
@@ -64,7 +64,8 @@
           "kauffrau-mann-efz-coop-dietikon-nz7buh",
           "commercial-clerk-efz-coop-dietikon",
           "commercial-apprentice-efz-coop-dietikon",
-          "commercial-apprentice-efz-cfc-coop-dietikon"
+          "commercial-apprentice-efz-cfc-coop-dietikon",
+          "retail-employee-efz-coop-dietikon"
         ],
         "fr": [
           "kauffrau-mann-efz-coop-dietikon-nz7buh",
@@ -83,7 +84,8 @@
         "commercial-apprentice-efz-coop-dietikon",
         "apprenti-e-commerce-cfc-coop-dietikon",
         "commercial-apprentice-efz-cfc-coop-dietikon",
-        "apprenti-e-commercial-e-cfc-coop-dietikon"
+        "apprenti-e-commercial-e-cfc-coop-dietikon",
+        "retail-employee-efz-coop-dietikon"
       ]
     },
     {
