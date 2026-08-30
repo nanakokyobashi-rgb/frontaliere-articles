@@ -1,7 +1,7 @@
 {
   "key": "geberit",
   "label": "Geberit",
-  "generatedAt": "2026-08-29T23:41:01.919Z",
+  "generatedAt": "2026-08-30T15:09:48.739Z",
   "total": 32,
   "discovered": null,
   "written": 32,
@@ -9,13 +9,14 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 29,
-  "durationMs": 3866,
-  "avgDurationMs": 3866,
+  "durationMs": 3760,
+  "avgDurationMs": 3760,
   "durationHistory": [
     3233,
     3388,
     3418,
-    3866
+    3866,
+    3760
   ],
   "newJobs": [
     {
@@ -30,7 +31,7 @@
       "url": "https://jobs.geberit.com/job-invite/1669/?locale=sv_SE",
       "source": "Geberit Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:40:58.670Z",
+      "crawledAt": "2026-08-30T15:09:45.846Z",
       "addressLocality": "Rapperswil-Jona",
       "postalCode": "8645",
       "streetAddress": "Schachenstrasse 77",
@@ -67,7 +68,7 @@
       "url": "https://jobs.geberit.com/job-invite/2182/?locale=sv_SE",
       "source": "Geberit Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:40:58.672Z",
+      "crawledAt": "2026-08-30T15:09:45.849Z",
       "addressLocality": "Rapperswil-Jona",
       "postalCode": "8645",
       "streetAddress": "Schachenstrasse 77",
@@ -104,7 +105,7 @@
       "url": "https://jobs.geberit.com/job-invite/1918/?locale=de_DE",
       "source": "Geberit Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:40:58.736Z",
+      "crawledAt": "2026-08-30T15:09:45.946Z",
       "addressLocality": "Rapperswil-Jona",
       "postalCode": "8645",
       "streetAddress": "Schachenstrasse 77",
