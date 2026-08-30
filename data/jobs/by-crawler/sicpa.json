@@ -1,13 +1,13 @@
 {
   "crawlerKey": "sicpa",
-  "assembledAt": "2026-08-30T14:55:08.636Z",
+  "assembledAt": "2026-08-30T23:44:01.471Z",
   "jobs": [
     {
       "id": "sicpa-058c84d88c58",
       "slug": "partnerships-coordinatore-sicpa-sa-prilly",
       "slugByLocale": {
-        "en": "partnerships-coordinator-sicpa-prilly",
         "it": "partnerships-coordinatore-sicpa-sa-prilly",
+        "en": "partnerships-coordinator-sicpa-prilly",
         "de": "partnerships-koordinator-sicpa-sa-prilly",
         "fr": "partnerships-coordinateur-sicpa-sa-prilly"
       },
@@ -34,7 +34,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Partnerships-Coordinator/1431162533/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:02.537Z",
+      "crawledAt": "2026-08-30T23:43:55.502Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -111,7 +111,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Delivery-Lead/1430826733/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:01.924Z",
+      "crawledAt": "2026-08-30T23:43:54.912Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -174,7 +174,7 @@
       "url": "https://jobs.sicpa.com/job/Chavornay-Automaticien/1409947133/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:55:01.301Z",
+      "crawledAt": "2026-08-30T23:43:54.285Z",
       "addressLocality": "Chavornay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -251,7 +251,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Senior-Cloud-Platform-Engineer/1429917033/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:00.642Z",
+      "crawledAt": "2026-08-30T23:43:53.664Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -314,7 +314,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Data-Protection-&-Privacy-Specialist/1419224133/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:00.038Z",
+      "crawledAt": "2026-08-30T23:43:53.068Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -377,7 +377,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Principal-Software-Engineer-Mobile-SDK-Tooling-&-On%E2%80%91Device-Computer-Vision-%28iOSAndroid%29/1393025833/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:54:59.455Z",
+      "crawledAt": "2026-08-30T23:43:52.440Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -454,7 +454,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Technical-Advisor/1418635833/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:54:58.833Z",
+      "crawledAt": "2026-08-30T23:43:51.819Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -530,7 +530,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Senior-Laboratory-Technical-Specialist/1418754533/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:54:58.243Z",
+      "crawledAt": "2026-08-30T23:43:51.220Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -592,7 +592,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Technical-Coordinator/1404844633/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:54:57.653Z",
+      "crawledAt": "2026-08-30T23:43:50.554Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -668,7 +668,7 @@
       "url": "https://jobs.sicpa.com/job/Chavornay-Op%C3%A9rateur-de-logistique-confirm%C3%A9/1400431333/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:55:03.697Z",
+      "crawledAt": "2026-08-30T23:43:56.688Z",
       "addressLocality": "Chavornay",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -745,7 +745,7 @@
       "url": "https://jobs.sicpa.com/job/Prilly-Operator%2C-Gardening-&-Road/1431520733/",
       "source": "SICPA SA Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:55:03.115Z",
+      "crawledAt": "2026-08-30T23:43:56.111Z",
       "addressLocality": "Prilly",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -776,7 +776,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:55:03.115Z"
+      "firstSeenAt": "2026-08-30T23:43:56.111Z"
     }
   ]
 }
