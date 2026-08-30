@@ -25,7 +25,7 @@
       "fr": "apprentissage-comme-specialiste-care-efz-enfants-specialises-stadt-bern-bern"
     },
     "sector": "Amministrazione Pubblica",
-    "expiredAt": "2026-08-29T23:07:20.249Z",
+    "expiredAt": "2026-08-30T23:17:18.650Z",
     "previousSlugs": [
       "lehrstellen-als-fachperson-betreuung-efz-fachrichtung-kinder-stadt-bern-bern",
       "lehrstellen-als-fachperson-betreuung-efz-fachrichtung-kinder-tagesbetreuung-stadt-bern",
@@ -1852,7 +1852,7 @@
       "fr": "employe-en-caisse-enregistreuse-dans-la-piscine-interieure-et-exterieure-weyermannshaus-stadt-bern-bern"
     },
     "sector": "Amministrazione Pubblica",
-    "expiredAt": "2026-08-30T14:28:46.403Z",
+    "expiredAt": "2026-08-30T23:17:18.650Z",
     "previousSlugs": [
       "mitarbeiter-in-kasse-im-hallen-und-freibad-weyermannshaus-stadt-bern-bern",
       "collaboratore-trice-in-kasse-im-hallen-e-freibad-weyermannshaus-stadt-bern"
@@ -1873,6 +1873,127 @@
     "streetAddress": "Stöckackerstrasse 9",
     "salaryMin": 85000,
     "salaryMax": 119000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "lavoro-sociale-stadt-bern-bern",
+    "title": "Sozialarbeiter*in",
+    "titleByLocale": {
+      "it": "Lavoro sociale*",
+      "en": "Social Worker*",
+      "de": "Sozialarbeiter*in",
+      "fr": "Travailleur social*"
+    },
+    "company": "Stadt Bern",
+    "companyKey": "stadt-bern",
+    "location": "Bern",
+    "addressLocality": "Bern",
+    "descriptionByLocale": {
+      "it": "Per l'Asylum Service della Città di Berna, cerchiamo lavoratori sociali impegnati a rafforzare il nostro team per accompagnare i rifugiati. Il nostro campo di lavoro è esigente, versatile e di grande importanza sociale. <br/ Con questo reclutamento, stiamo perseguendo l'obiettivo di ridurre significativamente l'onere dei casi nella squadra. In questo modo, creiamo le condizioni per una gestione dei casi professionale, affidabile e di alta qualità, nonché un supporto sostenibile delle persone a cui si interessa.\n\nCompiti:\n• Potrai accompagnare e consigliare le persone con status di rifugiato, ammissione temporanea, richiedenti asilo e cercatori di protezione in questioni personali, finanziarie, materiali e legali – con l'obiettivo di sostenerle sulla loro strada per una maggiore indipendenza e partecipazione sociale/società.\n\n• Promuovi e accompagni l'integrazione linguistica, professionale e sociale dei clienti e contribuisci così al loro futuro di successo in Svizzera\n\n• Lei chiarisce attentamente le richieste di sussidiarietà e aiuta a garantire che i servizi siano forniti in modo trasparente e su richiesta\n\n• Creare bilanci individuali secondo le linee guida cantonali dell'assistenza sociale (asilo)\n\n• Lavori come necessario con specialisti interni ed esterni e costruisci una rete sostenibile per raggiungere soluzioni sostenibili con i clienti\n\n• Tenere la documentazione del caso nel sistema di gestione dei casi (NFAM) comprensibile e completo e garantire la manutenzione dei dati professionali\n\nRequisiti\n• Hai completato la formazione nel lavoro sociale\n\n• Preferibilmente avete esperienza professionale nel lavoro sociale legale e asilo\n\n• Hai buone competenze informatiche\n\n• Porti flessibilità, indipendenza e elevata resistenza\n\n• Sei un giocatore di squadra\n\nOffriamo:\nPer il senso e la vita della città\nCon noi cambi qualcosa. Aiutate a plasmare la vita della città, assumete la responsabilità e rendete Berna più vivibile.\n\nNella città di Berna, più di 4.500 persone lavorano insieme in cinque directory e oltre 80 profili di lavoro. Ci impegniamo con passione e convinzione per le persone che vivono qui, che lavorano qui. Insieme formiamo la comunità e il futuro di questa città – visibile, tangibile, sostenibile. per la nostra città. Per Bern.",
+      "en": "For the Asylum Service of the City of Bern, we are looking for committed social workers to reinforce our team to accompany refugees. Our field of work is demanding, versatile and of great social importance. <br/ With this recruitment, we are pursuing the goal of significantly reducing the burden of cases in the team. In this way, we create the conditions for a professionally sound, reliable and high-quality case management as well as a sustainable support of the persons cared for.\n\nTasks:\n• You will accompany and advise people with refugee status, temporary admission, asylum seekers and protection seekers in personal, financial, material and legal matters – with the aim of supporting them on their way to greater independence and social/societal participation.\n\n• You promote and accompany the linguistic, professional and social integration of clients and thus make a valuable contribution to their successful future in Switzerland\n\n• You carefully clarify subsidiarity claims and help ensure that services are provided transparently and on demand\n\n• You create individual budgets according to cantonal guidelines of (asylum) social assistance\n\n• You work as needed with internal and external specialists and build a sustainable network to achieve sustainable solutions with clients\n\n• You keep the case documentation in the case management system (NFAM) comprehensible and complete and ensure professional data maintenance\n\nRequirements\n• You have completed training in social work\n\n• You preferably have professional experience in legal social work and asylum\n\n• You have good computer skills\n\n• You bring flexibility, independence and high resilience\n\n• You are a team player\n\nWe offer:\nFor sense and city life\nWith us you change something. You help shape city life, carry responsibility and make Bern more liveable.\n\nIn the city of Bern, more than 4,500 people work together across five directorates and more than 80 job profiles. We are committed with passion and conviction to the people who live here, who work here. Together we shape the community and the future of this city – visible, tangible, sustainable. for our city. For Bern.",
+      "de": "Für den Asylsozialdienst der Stadt Bern suchen wir engagierte Sozialarbeiter*innen zur Verstärkung unseres Teams in der Begleitung geflüchteter Menschen. Unser Arbeitsfeld ist anspruchsvoll, vielseitig und gesellschaftlich von hoher Bedeutung.<br/>Mit dieser Rekrutierung verfolgen wir das Ziel, die Fallbelastung im Team spürbar zu reduzieren. So schaffen wir die Voraussetzungen für eine fachlich fundierte, verlässliche und qualitativ hochwertige Fallführung sowie eine nachhaltige Unterstützung der betreuten Personen.<br/><br/>Bitte sende uns deine Bewerbungsunterlagen bis am 30. August 2026.\n\nAufgaben:\n• Du begleitest und berätst Menschen mit Flüchtlingsstatus (B, F-FL.), vorläufiger Aufnahme (VA), Asylsuchende (N) sowie Schutzsuchende (S) in persönlichen, finanziellen, materiellen und rechtlichen Anliegen – mit dem Ziel, sie auf ihrem Weg zu mehr Selbstständigkeit und sozialer/gesellschaftlicher Teilhabe zu unterstützen\n\n• Du förderst und begleitest die sprachliche, berufliche und soziale Integration der Klient*innen und leistest damit einen wertvollen Beitrag zu ihrer erfolgreichen Zukunft in der Schweiz\n\n• Du klärst Subsidiaritätsansprüche sorgfältig ab und trägst dazu bei, dass Leistungen transparent und bedarfsgerecht erbracht werden\n\n• Du erstellst individuelle Budgets nach kantonalen Richtlinien der (Asyl)-Sozialhilfe\n\n• Du arbeitest nach Bedarf mit internen und externen Fachstellen zusammen und baust ein tragfähiges Netzwerk auf, um mit den Klient*innen nachhaltige Lösungen zu erreichen\n\n• Du führst die Falldokumentation im Fallführungssystem (NFAM) nachvollziehbar und vollständig und sorgst für eine professionelle Datenpflege\n\nAnforderungen:\n• Du hast eine abgeschlossene Ausbildung in Sozialer Arbeit\n\n• Du hast vorzugsweise Berufserfahrung in der gesetzlichen Sozialarbeit sowie im Asylwesen\n\n• Du hast gute EDV-Kenntnisse\n\n• Du bringst Flexibilität, Selbständigkeit und hohe Belastbarkeit mit\n\n• Du bist eine Teamplayer*in\n\nWir bieten:\nFür Sinn & Stadtleben\nBei uns veränderst du etwas. Du gestaltest das Stadtleben mit, trägst Verantwortung und machst Bern lebenswerter.\n\nIn der Stadt Bern arbeiten über 4'500 Menschen verteilt auf fünf Direktionen und mehr als 80 Berufsbilder zusammen. Wir engagieren uns mit Leidenschaft und Überzeugung für die Menschen, die hier leben, die hier arbeiten. Gemeinsam gestalten wir die Gemeinschaft und die Zukunft dieser Stadt – sichtbar, spürbar, nachhaltig. Für unsere Stadt. Für Bern.",
+      "fr": "Pour le Service d'Asile de la Ville de Berne, nous recherchons des travailleurs sociaux engagés pour renforcer notre équipe d'accompagnement des réfugiés. Notre domaine de travail est exigeant, polyvalent et d'une grande importance sociale. <br/ Avec ce recrutement, nous poursuivons l'objectif de réduire considérablement le fardeau des cas dans l'équipe. De cette manière, nous créons les conditions d'une gestion de cas professionnellement saine, fiable et de haute qualité, ainsi qu'un soutien durable des personnes qui s'occupent.\n\nTâches :\n• Vous accompagnerez et conseillerez les personnes ayant le statut de réfugié, l'admission temporaire, les demandeurs d'asile et les demandeurs d'asile en matière personnelle, financière, matérielle et juridique – dans le but de les soutenir sur leur chemin vers une plus grande indépendance et la participation sociale/sociétale.\n\n• Vous encouragez et accompagnez l'intégration linguistique, professionnelle et sociale des clients et contribuez ainsi à leur succès en Suisse\n\n• Vous clarifiez soigneusement les revendications de subsidiarité et contribuez à garantir que les services sont fournis de manière transparente et sur demande\n\n• Vous créez des budgets individuels selon les orientations cantonales de l'aide sociale (asile)\n\n• Vous travaillez au besoin avec des spécialistes internes et externes et construisez un réseau durable pour parvenir à des solutions durables avec les clients\n\n• Vous conservez la documentation de cas dans le système de gestion de cas (NFAM) compréhensible et complète et vous assurez la maintenance des données professionnelle\n\nExigences\n• Vous avez suivi une formation en travail social\n\n• Vous avez de préférence une expérience professionnelle en travail social juridique et asile\n\n• Vous avez de bonnes compétences en informatique\n\n• Vous apportez flexibilité, indépendance et haute résilience\n\n• Vous êtes un joueur d'équipe\n\nNous offrons:\nPour le sens et la vie urbaine\nAvec nous, tu changes quelque chose. Vous aidez à façonner la vie de la ville, à porter des responsabilités et à rendre Berne plus vivante.\n\nDans la ville de Berne, plus de 4 500 personnes travaillent ensemble dans cinq directions et plus de 80 profils d'emploi. Nous sommes engagés avec passion et conviction envers les gens qui vivent ici, qui travaillent ici. Ensemble, nous façonnons la communauté et l'avenir de cette ville – visible, tangible, durable. pour notre ville. Pour Bern."
+    },
+    "slugByLocale": {
+      "it": "lavoro-sociale-stadt-bern-bern",
+      "en": "social-worker-stadt-bern-bern",
+      "de": "sozialarbeiter-in-stadt-bern-bern",
+      "fr": "travailleur-social-stadt-bern-bern"
+    },
+    "sector": "Amministrazione Pubblica",
+    "expiredAt": "2026-08-30T23:17:18.650Z",
+    "previousSlugs": [
+      "sozialarbeiter-in-stadt-bern-bern",
+      "istruzione-sociale-stadt-bern-bern",
+      "social-education-stadt-bern-bern",
+      "sozialpadagog-in-stadt-bern-bern",
+      "education-sociale-stadt-bern-bern",
+      "educazione-sociale-in-wg-alpenegg-stadt-bern-bern",
+      "social-education-in-wg-alpenegg-stadt-bern-bern",
+      "sozialpadagog-in-wg-alpenegg-stadt-bern-bern",
+      "education-sociale-au-gt-alpenegg-stadt-bern-bern",
+      "lavoro-sociale-stadt-bern-bern"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "sozialarbeiter-in-stadt-bern-bern",
+        "istruzione-sociale-stadt-bern-bern",
+        "social-education-stadt-bern-bern",
+        "sozialpadagog-in-stadt-bern-bern",
+        "education-sociale-stadt-bern-bern",
+        "educazione-sociale-in-wg-alpenegg-stadt-bern-bern",
+        "social-education-in-wg-alpenegg-stadt-bern-bern",
+        "sozialpadagog-in-wg-alpenegg-stadt-bern-bern",
+        "education-sociale-au-gt-alpenegg-stadt-bern-bern",
+        "lavoro-sociale-stadt-bern-bern"
+      ],
+      "en": [
+        "sozialarbeiter-in-stadt-bern-bern",
+        "social-education-stadt-bern-bern"
+      ],
+      "de": [
+        "sozialpadagog-in-stadt-bern-bern"
+      ],
+      "fr": [
+        "sozialarbeiter-in-stadt-bern-bern",
+        "education-sociale-stadt-bern-bern"
+      ]
+    },
+    "postalCode": "3008",
+    "streetAddress": "Effingerstrasse 33",
+    "salaryMin": 85000,
+    "salaryMax": 119000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "apprendistato-come-kuchenangestellte-r-afp-stadt-bern",
+    "title": "Lehrstelle als Küchenangestellte*r EBA",
+    "titleByLocale": {
+      "it": "Apprendistato come Küchenangestellte*r AFP",
+      "en": "Apprenticeship as a kitchen employee EBA",
+      "de": "Lehrstelle als Küchenangestellte*r EBA",
+      "fr": "Apprentissage comme employé de cuisine EBA"
+    },
+    "company": "Stadt Bern",
+    "companyKey": "stadt-bern",
+    "location": "Bern",
+    "addressLocality": "Bern",
+    "descriptionByLocale": {
+      "it": "Il Competence Center Schlossmatt supporta bambini, giovani e famiglie in emergenze e situazioni stressanti. La pulizia è responsabile per la cucina/cibo e aree di pulizia. Ulteriori informazioni sono disponibili su <a href=\"https://www.schlossmatt-bern.ch\" target=\" blank\">www.schlossmatt-bern.ch\n\nCompiti:\n• Preparazione di cibi freddi e caldi\n\n• Conoscere i prodotti e la loro conservazione e lavorazione professionale – dalla consegna al servizio\n\n• Imparare e applicare le norme di igiene e protezione\n\n• Cooperazione nei lavori di pulizia e nell'organizzazione del lavaggio\n\nRequisiti\n• Completamento dell'istruzione obbligatoria\n\n• Gioia di cucina e interesse nella gestione del cibo\n\n• Senso di ordine, pulizia e alta consapevolezza dell'igiene\n\n• Apertura nel trattare con le persone e un pizzico di umorismo\n\n• Buona conoscenza orale e scritta del tedesco (livello minimo B1)\n\nOffriamo:\nDiverso e giusto\nPiù di 20 apprendisti vi aspettano con noi – dall’artigianato all’amministrazione. Come azienda di apprendistato versatile, valutiamo i diversi modelli di ruolo e paghiamo tutti gli apprendisti lo stesso salario – e gli studenti da 25 anche un po 'di più.\n\nLa città di Berna è impegnata nella formazione professionale sostenibile e vi offre una vasta gamma di opportunità per la vostra carriera. Circa 200 apprendisti stanno attualmente completando la loro formazione in oltre 20 professioni diverse – accompagnati da oltre 300 dipendenti esperti che trasmettono la loro conoscenza ed entusiasmo. Con noi non solo impari il tuo lavoro da sogno, ma anche forma attivamente la vita nella nostra città. Diventa parte di un team che lavora con gioia, responsabilità e cuore per Berna.",
+      "en": "The Competence Center Schlossmatt supports children, young people and families in emergencies and stressful situations. Housekeeping is responsible for the kitchen/food and cleaning areas. Further information can be found at <a href=\"https://www.schlossmatt-bern.ch\" target=\" blank\">www.schlossmatt-bern.ch</a><br/>\n\nTasks:\n• Preparation of cold and warm food\n\n• Getting to know products as well as their professional storage and processing – from delivery to serving\n\n• Learning and applying hygiene and protection regulations\n\n• Cooperation in cleaning work and in the washing organisation\n\nRequirements\n• Completion of compulsory education\n\n• Joy of cooking and interest in handling food\n\n• Sense of order, cleanliness and high hygiene awareness\n\n• Openness in dealing with people and a pinch of humor\n\n• Good oral and written knowledge of German (minor level B1)\n\nWe offer:\nDiverse and fair\nMore than 20 exciting apprenticeships await you with us – from crafts to administrative. As a versatile apprenticeship company, we value the different role models and pay all apprenticeships the same wage – and learners from 25 even a little more.\n\nThe city of Bern is committed to sustainable vocational training and offers you a wide range of opportunities for your career. Around 200 apprentices are currently completing their training in over 20 different professions – accompanied by more than 300 experienced employees who pass on their knowledge and enthusiasm. With us you not only learn your dream job, but also actively shape life in our city. Become part of a team that works with joy, responsibility and heart for Bern.",
+      "de": "Das Kompetenzzentrum Schlossmatt unterstützt Kinder, Jugendliche und Familien in Notlagen und Belastungssituationen. Die Hauswirtschaft ist zuständig für die Bereiche Küche/Verpflegung und Reinigung. Weitere Informationen findest du auf <a href=\"https://www.schlossmatt-bern.ch\" target=\"_blank\">www.schlossmatt-bern.ch</a>.<br/>\n\nAufgaben:\n• Zubereitung von kalten und warmen Speisen\n\n• Kennenlernen von Produkten sowie deren fachgerechter Lagerung und Verarbeitung – von der Anlieferung bis zum Servieren\n\n• Erlernen und Anwenden der Hygiene- und Schutzvorschriften\n\n• Mitarbeit bei Reinigungsarbeiten und in der Abwaschorganisation\n\nAnforderungen:\n• Abschluss der obligatorischen Schulbildung\n\n• Freude am Kochen und Interesse am Umgang mit Lebensmitteln\n\n• Sinn für Ordnung, Sauberkeit und hohes Hygienebewusstsein\n\n• Offenheit im Umgang mit Menschen und eine Prise Humor\n\n• Gute mündliche & schriftliche Deutschkenntnisse (mind. Niveau B1)\n\nWir bieten:\nVielfältig & fair\nBei uns erwarten dich über 20 spannende Lehrberufe – von handwerklich bis administrativ. Als vielseitiger Ausbildungsbetrieb schätzen wir die unterschiedlichen Rollenbilder und zahlen allen Lehrberufen den gleichen Lohn – und Lernenden ab 25 sogar etwas mehr.\n\nDie Stadt Bern engagiert sich für eine nachhaltige Berufsbildung und bietet dir vielfältige Chancen für deinen Berufseinstieg. Rund 200 Lernende absolvieren aktuell ihre Ausbildung in über 20 verschiedenen Berufen – begleitet von mehr als 300 erfahrenen Mitarbeitenden, die ihr Wissen und ihre Begeisterung weitergeben. Bei uns erlernst du nicht nur deinen Traumberuf, sondern gestaltest auch das Leben in unserer Stadt aktiv mit. Werde Teil eines Teams, das mit Freude, Verantwortung und Herz für Bern arbeitet.",
+      "fr": "Le Centre de compétences Schlossmatt soutient les enfants, les jeunes et les familles dans les situations d'urgence et de stress. L'entretien ménager est responsable des aires de cuisine/alimentation et de nettoyage. Pour de plus amples renseignements, veuillez consulter le site <a href=\"https://www.schlossmatt-bern.ch\" cible>>www.schlossmatt-bern.ch</a><br/>\n\nTâches :\n• Préparation d'aliments froids et chauds\n\n• Apprendre à connaître les produits ainsi que leur stockage et leur transformation professionnels – de la livraison au service\n\n• Apprentissage et application des règles d'hygiène et de protection\n\n• Coopération dans les travaux de nettoyage et dans l'organisation de lavage\n\nExigences\n• Achèvement de la scolarité obligatoire\n\n• Joy de cuisine et intérêt pour la manipulation des aliments\n\n• Sens de l'ordre, propreté et bonne hygiène\n\n• L'ouverture dans les rapports avec les gens et une pincée d'humour\n\n• Bonne connaissance orale et écrite de l'allemand (niveau B1)\n\nNous offrons:\nDivers et équitables\nPlus de 20 apprentissages passionnants vous attendent avec nous – de l'artisanat à l'administration. En tant qu'entreprise d'apprentissage polyvalente, nous valorisons les différents modèles et payons tous les apprentissages le même salaire – et les apprenants de 25 encore un peu plus.\n\nLa ville de Berne est engagée dans la formation professionnelle durable et vous offre un large éventail d'opportunités pour votre carrière. Environ 200 apprentis suivent actuellement leur formation dans plus de 20 professions différentes, accompagnés de plus de 300 employés expérimentés qui transmettent leurs connaissances et leur enthousiasme. Avec nous, vous apprenez non seulement votre travail de rêve, mais aussi façonner activement la vie dans notre ville. Devenez membre d'une équipe qui travaille avec joie, responsabilité et cœur pour Berne."
+    },
+    "slugByLocale": {
+      "it": "apprendistato-come-kuchenangestellte-r-afp-stadt-bern",
+      "en": "apprenticeship-as-a-kitchen-employee-eba-stadt-bern-bern",
+      "de": "lehrstelle-als-kuchenangestellte-r-eba-stadt-bern-bern",
+      "fr": "apprentissage-comme-employe-de-cuisine-eba-stadt-bern-bern"
+    },
+    "sector": "Amministrazione Pubblica",
+    "expiredAt": "2026-08-30T23:17:18.649Z",
+    "previousSlugs": [
+      "lehrstelle-als-kuchenangestellte-r-eba-stadt-bern-bern",
+      "apprendistato-come-kuchenangestellte-r-afp-stadt-bern"
+    ],
+    "previousSlugsByLocale": {
+      "it": [
+        "lehrstelle-als-kuchenangestellte-r-eba-stadt-bern-bern",
+        "apprendistato-come-kuchenangestellte-r-afp-stadt-bern"
+      ],
+      "en": [
+        "lehrstelle-als-kuchenangestellte-r-eba-stadt-bern-bern"
+      ],
+      "fr": [
+        "lehrstelle-als-kuchenangestellte-r-eba-stadt-bern-bern"
+      ]
+    },
+    "postalCode": "3008",
+    "streetAddress": "Huberstrasse 30",
+    "salaryMin": 54000,
+    "salaryMax": 68000,
     "salaryCurrency": "CHF",
     "salaryPeriod": "YEAR"
   }
