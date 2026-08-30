@@ -1,7 +1,7 @@
 {
   "key": "adus-klinik",
   "label": "ADUS Klinik",
-  "generatedAt": "2026-08-29T23:48:55.467Z",
+  "generatedAt": "2026-08-30T15:06:56.866Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,13 +9,14 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3685,
-  "avgDurationMs": 3685,
+  "durationMs": 2996,
+  "avgDurationMs": 2996,
   "durationHistory": [
     2884,
     3937,
     4232,
-    3685
+    3685,
+    2996
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://karriere.adus-klinik.ch/jobs/7537525-dipl-expert-in-anaesthesiepflege-50-60",
       "source": "ADUS Klinik Dedicated Parser (Teamtailor RSS)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:48:52.383Z",
+      "crawledAt": "2026-08-30T15:06:54.331Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -68,7 +69,7 @@
       "url": "https://karriere.adus-klinik.ch/jobs/6277966-dipl-physiotherapeut-in-20-30-im-stundenlohn",
       "source": "ADUS Klinik Dedicated Parser (Teamtailor RSS)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:48:52.384Z",
+      "crawledAt": "2026-08-30T15:06:54.333Z",
       "addressLocality": "Dielsdorf",
       "addressRegion": "ZH",
       "addressCountry": "CH",
