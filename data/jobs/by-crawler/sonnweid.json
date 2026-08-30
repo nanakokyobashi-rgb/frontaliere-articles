@@ -1,6 +1,6 @@
 {
   "crawlerKey": "sonnweid",
-  "assembledAt": "2026-08-30T14:27:13.046Z",
+  "assembledAt": "2026-08-30T23:15:39.803Z",
   "jobs": [
     {
       "id": "sonnweid-b9f771afc509",
@@ -34,7 +34,7 @@
       "url": "https://www.sonnweid.ch/karriere/job/dipl-pflegefachperson-hf/",
       "source": "Pflegezentrum Sonnweid Dedicated Parser (Custom HTML — WordPress)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:27:09.045Z",
+      "crawledAt": "2026-08-30T23:15:35.561Z",
       "addressLocality": "Wetzikon",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -116,7 +116,7 @@
       "url": "https://www.sonnweid.ch/karriere/job/fachperson-gesundheit-oder-betreuung-efz/",
       "source": "Pflegezentrum Sonnweid Dedicated Parser (Custom HTML — WordPress)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:27:08.358Z",
+      "crawledAt": "2026-08-30T23:15:34.836Z",
       "addressLocality": "Wetzikon",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -200,7 +200,7 @@
       "url": "https://www.sonnweid.ch/karriere/job/pflegefachperson-hf-als-stationsleitung/",
       "source": "Pflegezentrum Sonnweid Dedicated Parser (Custom HTML — WordPress)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:27:07.733Z",
+      "crawledAt": "2026-08-30T23:15:34.145Z",
       "addressLocality": "Wetzikon",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -327,7 +327,7 @@
       "url": "https://www.sonnweid.ch/karriere/job/fachperson-gesundheit-fuer-die-oase/",
       "source": "Pflegezentrum Sonnweid Dedicated Parser (Custom HTML — WordPress)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:27:06.976Z",
+      "crawledAt": "2026-08-30T23:15:33.416Z",
       "addressLocality": "Wetzikon",
       "addressRegion": "ZH",
       "addressCountry": "CH",

@@ -1,7 +1,7 @@
 {
   "key": "sonnweid",
   "label": "Pflegezentrum Sonnweid",
-  "generatedAt": "2026-08-30T14:27:13.048Z",
+  "generatedAt": "2026-08-30T23:15:39.804Z",
   "total": 0,
   "discovered": null,
   "written": 0,
@@ -9,12 +9,13 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 8593,
-  "avgDurationMs": 8593,
+  "durationMs": 9762,
+  "avgDurationMs": 9762,
   "durationHistory": [
     8247,
     7397,
-    8593
+    8593,
+    9762
   ],
   "newJobs": [],
   "updatedJobs": [],
