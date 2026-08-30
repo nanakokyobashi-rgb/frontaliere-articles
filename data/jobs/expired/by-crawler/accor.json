@@ -22,7 +22,7 @@
       "de": "sales-manager-conference-groups-events-accor-ch"
     },
     "sector": "Altro",
-    "expiredAt": "2026-08-29T23:44:14.785Z",
+    "expiredAt": "2026-08-30T15:05:38.980Z",
     "salaryMin": 82500,
     "salaryMax": 127000,
     "salaryCurrency": "CHF",
@@ -51,7 +51,7 @@
       "de": "directeur-trice-des-ventes-et-marketing-accor-ch"
     },
     "sector": "Altro",
-    "expiredAt": "2026-08-29T23:44:14.785Z",
+    "expiredAt": "2026-08-30T15:05:38.981Z",
     "salaryMin": 50500,
     "salaryMax": 89000,
     "salaryCurrency": "CHF",
@@ -80,7 +80,7 @@
       "de": "housekeeping-villa-attendant-vollzeit-ibis-budget-lugano"
     },
     "sector": "Altro",
-    "expiredAt": "2026-08-29T23:44:14.785Z",
+    "expiredAt": "2026-08-30T15:05:38.981Z",
     "previousSlugs": [
       "housekeeping-villa-attendant-full-time-accor-ch"
     ],
@@ -609,6 +609,35 @@
     },
     "sector": "Altro",
     "expiredAt": "2026-08-25T22:13:32.831Z",
+    "salaryMin": 49500,
+    "salaryMax": 75000,
+    "salaryCurrency": "CHF",
+    "salaryPeriod": "YEAR"
+  },
+  {
+    "slug": "male-front-desk-agent-receptionist-movenpick-hotel-amman-accor-ch",
+    "title": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman",
+    "titleByLocale": {
+      "fr": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman",
+      "de": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman",
+      "it": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman",
+      "en": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman"
+    },
+    "company": "Ibis Budget",
+    "companyKey": "accor",
+    "location": "Lugano",
+    "addressLocality": "Lugano",
+    "descriptionByLocale": {
+      "fr": "Male Front Desk Agent - Receptionist - Mövenpick Hotel Amman — Ibis Budget"
+    },
+    "slugByLocale": {
+      "fr": "male-front-desk-agent-receptionist-movenpick-hotel-amman-accor-ch",
+      "it": "male-front-desk-agent-receptionist-movenpick-hotel-amman-accor-ch",
+      "en": "male-front-desk-agent-receptionist-movenpick-hotel-amman-accor-ch",
+      "de": "male-front-desk-agent-receptionist-movenpick-hotel-amman-ibis-budget-lugano"
+    },
+    "sector": "Altro",
+    "expiredAt": "2026-08-30T15:05:44.114Z",
     "salaryMin": 49500,
     "salaryMax": 75000,
     "salaryCurrency": "CHF",

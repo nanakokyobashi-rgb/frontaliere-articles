@@ -1,6 +1,6 @@
 {
   "crawlerKey": "accor",
-  "assembledAt": "2026-08-29T23:44:17.808Z",
+  "assembledAt": "2026-08-30T15:05:44.125Z",
   "jobs": [
     {
       "id": "accor-1c6744df6976",
@@ -1757,6 +1757,250 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-29T23:44:12.044Z"
+    },
+    {
+      "id": "accor-2b3c5c0b74fa",
+      "slug": "commis-de-salle-h-f-abbaye-des-vaux-de-cernay-accor-ch",
+      "slugByLocale": {
+        "fr": "commis-de-salle-h-f-abbaye-des-vaux-de-cernay-accor-ch",
+        "it": "commis-de-salle-h-f-abbaye-des-vaux-de-cernay-accor-ch",
+        "en": "commis-de-salle-h-f-abbaye-des-vaux-de-cernay-accor-ch",
+        "de": "commis-de-salle-h-f-abbaye-des-vaux-de-cernay-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Commis de salle H/F - Abbaye des Vaux de Cernay",
+      "titleByLocale": {
+        "fr": "Commis de salle H/F - Abbaye des Vaux de Cernay",
+        "it": "Commis de salle H/F - Abbaye des Vaux de Cernay",
+        "en": "Commis de salle H/F - Abbaye des Vaux de Cernay",
+        "de": "Commis de salle H/F - Abbaye des Vaux de Cernay"
+      },
+      "description": "Commis de salle H/F - Abbaye des Vaux de Cernay — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Commis de salle H/F - Abbaye des Vaux de Cernay — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/commis-de-salle-h-f-abbaye-des-vaux-de-cernay-in-abbaye-des-vaux-de-cernay-cernay-la-ville-france-jid-99210",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-30T15:05:38.665Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/commis-de-salle-h-f-abbaye-des-vaux-de-cernay-in-abbaye-des-vaux-de-cernay-cernay-la-ville-france-jid-99210",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T15:05:38.665Z"
+    },
+    {
+      "id": "accor-ce1d0c554b37",
+      "slug": "spa-recreation-attendant-accor-ch",
+      "slugByLocale": {
+        "fr": "spa-recreation-attendant-accor-ch",
+        "it": "spa-recreation-attendant-accor-ch",
+        "en": "spa-recreation-attendant-accor-ch",
+        "de": "spa-recreation-attendant-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Spa & Recreation Attendant",
+      "titleByLocale": {
+        "fr": "Spa & Recreation Attendant",
+        "it": "Spa & Recreation Attendant",
+        "en": "Spa & Recreation Attendant",
+        "de": "Spa & Recreation Attendant"
+      },
+      "description": "Spa & Recreation Attendant — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Spa & Recreation Attendant — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/spa-and-recreation-attendant-in-raffles-doha-doha-qatar-jid-108134",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-30T15:05:38.059Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/spa-and-recreation-attendant-in-raffles-doha-doha-qatar-jid-108134",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T15:05:38.059Z"
+    },
+    {
+      "id": "accor-c29a92b35821",
+      "slug": "director-finance-business-support-accor-ch",
+      "slugByLocale": {
+        "fr": "director-finance-business-support-accor-ch",
+        "it": "director-finance-business-support-accor-ch",
+        "en": "director-finance-business-support-ibis-budget-lugano",
+        "de": "director-finance-business-support-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Director, Finance & Business Support",
+      "titleByLocale": {
+        "fr": "Directeur, Finance & Business Support",
+        "en": "Director, Finance & Business Support",
+        "it": "Direttore, Finanza & Business Support",
+        "de": "Direktor, Finanzen & Business Support"
+      },
+      "description": "Director, Finance & Business Support — Ibis Budget",
+      "descriptionByLocale": {
+        "fr": "Director, Finance & Business Support — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/director-finance-and-business-support-in-fairmont-ramla-serviced-residences-riyadh-saudi-ar-jid-108135",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-30T15:05:37.756Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Finanza",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/director-finance-and-business-support-in-fairmont-ramla-serviced-residences-riyadh-saudi-ar-jid-108135",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 142000,
+      "salaryMax": 249500,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 142000,
+          "maxValue": 249500,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T15:05:37.756Z"
+    },
+    {
+      "id": "accor-f103dae137a8",
+      "slug": "overnight-bell-valet-attendant-full-time-contract-accor-ch",
+      "slugByLocale": {
+        "it": "overnight-bell-valet-attendant-full-time-contract-accor-ch",
+        "en": "overnight-bell-valet-attendant-full-time-contract-accor-ch",
+        "de": "overnight-bell-valet-attendant-full-time-contract-accor-ch",
+        "fr": "overnight-bell-valet-attendant-full-time-contract-accor-ch"
+      },
+      "company": "Ibis Budget",
+      "companyKey": "accor",
+      "companyDomain": "careers.accor.com",
+      "title": "Overnight Bell/Valet Attendant (Full-time, Contract)",
+      "titleByLocale": {
+        "it": "Overnight Bell/Valet Attendant (Full-time, Contract)",
+        "en": "Overnight Bell/Valet Attendant (Full-time, Contract)",
+        "de": "Overnight Bell/Valet Attendant (Vollzeit, Contract)",
+        "fr": "Overnight Bell/Valet Attendant (Temps plein, Contract)"
+      },
+      "description": "Overnight Bell/Valet Attendant (Full-time, Contract) — Ibis Budget",
+      "descriptionByLocale": {
+        "it": "Overnight Bell/Valet Attendant (Full-time, Contract) — Ibis Budget"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://careers.accor.com/fr/fr/job/overnight-bell-valet-attendant-full-time-contract-in-eau-claire-calgary-calgary-canada-jid-108144",
+      "source": "Ibis Budget Dedicated Parser",
+      "sourceLang": "it",
+      "crawledAt": "2026-08-30T15:05:35.910Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "FULL_TIME",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://careers.accor.com/fr/fr/job/overnight-bell-valet-attendant-full-time-contract-in-eau-claire-calgary-calgary-canada-jid-108144",
+      "requirements": [],
+      "requirementsByLocale": {
+        "it": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T15:05:35.910Z"
     }
   ]
 }
