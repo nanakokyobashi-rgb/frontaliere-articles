@@ -1,19 +1,20 @@
 {
   "key": "swiss-medical-network",
   "label": "Swiss Medical Network",
-  "generatedAt": "2026-08-30T14:34:46.142Z",
+  "generatedAt": "2026-08-30T23:22:55.344Z",
   "total": 58,
   "newCount": 4,
   "updatedCount": 53,
   "removedCount": 1,
   "unchangedCount": 1,
-  "durationMs": 43143,
-  "avgDurationMs": 43143,
+  "durationMs": 44791,
+  "avgDurationMs": 44791,
   "durationHistory": [
     55514,
     43989,
     46928,
-    43143
+    43143,
+    44791
   ],
   "newJobs": [
     {
