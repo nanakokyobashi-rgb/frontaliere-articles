@@ -1,19 +1,20 @@
 {
   "key": "mikron",
   "label": "Mikron",
-  "generatedAt": "2026-08-29T23:22:33.017Z",
+  "generatedAt": "2026-08-30T14:47:58.852Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 8,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 15212,
-  "avgDurationMs": 15212,
+  "durationMs": 15426,
+  "avgDurationMs": 15426,
   "durationHistory": [
     17401,
     15762,
     15680,
-    15212
+    15212,
+    15426
   ],
   "newJobs": [],
   "updatedJobs": [
