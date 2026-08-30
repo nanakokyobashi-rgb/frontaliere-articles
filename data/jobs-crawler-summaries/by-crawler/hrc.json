@@ -1,7 +1,7 @@
 {
   "key": "hrc",
   "label": "Hôpital Riviera-Chablais (HRC)",
-  "generatedAt": "2026-08-29T23:45:20.875Z",
+  "generatedAt": "2026-08-30T15:06:47.106Z",
   "total": 4,
   "discovered": null,
   "written": 4,
@@ -9,13 +9,14 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4701,
-  "avgDurationMs": 4701,
+  "durationMs": 4871,
+  "avgDurationMs": 4871,
   "durationHistory": [
     4261,
     5086,
     5374,
-    4701
+    4701,
+    4871
   ],
   "newJobs": [
     {
@@ -31,7 +32,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/assistant-en-soins-en-sante-communautaire-assc-hf-en-chirurgie-a-60",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:45:17.730Z",
+      "crawledAt": "2026-08-30T15:06:44.332Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -67,7 +68,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-60-80",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:45:17.757Z",
+      "crawledAt": "2026-08-30T15:06:44.369Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -105,7 +106,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/specialiste-en-activite-physique-adaptee-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:45:17.753Z",
+      "crawledAt": "2026-08-30T15:06:44.364Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -142,7 +143,7 @@
       "url": "https://emploi.hopitalrivierachablais.ch/nos-offres/physiotherapeute-hf-a-100",
       "source": "HRC Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:45:17.762Z",
+      "crawledAt": "2026-08-30T15:06:44.378Z",
       "addressLocality": "Rennaz",
       "addressRegion": "VD",
       "addressCountry": "CH",
