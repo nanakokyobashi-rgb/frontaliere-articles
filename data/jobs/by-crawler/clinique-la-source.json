@@ -565,10 +565,10 @@
     },
     {
       "id": "clinique-la-source-dc6deef237e2",
-      "slug": "assistant-e-gouvernant-e-clinique-la-source-lausanne",
+      "slug": "assistente-di-governo-clinique-de-la-source-lausanne",
       "slugByLocale": {
-        "it": "assistant-e-gouvernant-e-clinique-la-source-lausanne",
-        "en": "assistant-e-gouvernant-e-clinique-la-source-lausanne",
+        "it": "assistente-di-governo-clinique-de-la-source-lausanne",
+        "en": "governing-assistant-clinique-de-la-source-lausanne",
         "de": "assistent-e-gouvernant-e-clinique-de-la-source-lausanne",
         "fr": "assistant-e-gouvernant-e-clinique-la-source-lausanne"
       },
@@ -577,8 +577,8 @@
       "companyDomain": "lasource.ch",
       "title": "Assistant·e Gouvernant·e",
       "titleByLocale": {
-        "it": "Assistant·e Gouvernant·e",
-        "en": "Assistant·e Gouvernant·e",
+        "it": "Assistente di governo",
+        "en": "Governing Assistant",
         "de": "Assistent·e Gouvernant·e",
         "fr": "Assistant·e Gouvernant·e"
       },
@@ -625,7 +625,18 @@
           "maxValue": 120500,
           "unitText": "YEAR"
         }
-      }
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "assistant-e-gouvernant-e-clinique-la-source-lausanne"
+        ],
+        "en": [
+          "assistant-e-gouvernant-e-clinique-la-source-lausanne"
+        ]
+      },
+      "previousSlugs": [
+        "assistant-e-gouvernant-e-clinique-la-source-lausanne"
+      ]
     },
     {
       "id": "clinique-la-source-6a5c48ff92d6",
