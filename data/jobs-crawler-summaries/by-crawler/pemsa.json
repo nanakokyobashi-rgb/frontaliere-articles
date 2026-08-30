@@ -1,20 +1,21 @@
 {
   "key": "pemsa",
   "label": "PEMSA",
-  "generatedAt": "2026-08-30T14:38:57.959Z",
-  "total": 215,
+  "generatedAt": "2026-08-30T23:26:49.529Z",
+  "total": 214,
   "newCount": 61,
   "updatedCount": 67,
-  "removedCount": 27,
-  "unchangedCount": 87,
-  "durationMs": 501274,
-  "avgDurationMs": 501274,
+  "removedCount": 28,
+  "unchangedCount": 86,
+  "durationMs": 531975,
+  "avgDurationMs": 531975,
   "durationHistory": [
     495033,
     557087,
     534901,
     533814,
-    501274
+    501274,
+    531975
   ],
   "newJobs": [
     {
@@ -3358,6 +3359,41 @@
         "richness": 22,
         "translation": 25,
         "completeness": 22
+      }
+    },
+    {
+      "title": "Installatore di quadri elettrici / Cablatore di quadri elettrici (M/F/D)",
+      "slug": "installatore-di-quadri-elettrici-cablatore-di-quadri-elettrici-m-f-d-pemsa-geneve",
+      "url": "https://www.pemsa.ch/it/job/installatore-di-quadri-elettrici-cablatore-di-quadri-elettrici-m-f-d-2684163/",
+      "applyUrl": "https://www.pemsa.ch/it/job/installatore-di-quadri-elettrici-cablatore-di-quadri-elettrici-m-f-d-2684163/",
+      "company": "PEMSA",
+      "companyKey": "pemsa",
+      "companyDomain": "pemsa.ch",
+      "location": "Genève",
+      "addressLocality": "Genève",
+      "addressRegion": "GE",
+      "addressCountry": "CH",
+      "canton": "GE",
+      "country": "CH",
+      "category": "elettricità",
+      "sector": "Edilizia e tecnica",
+      "source": "pemsa-dedicated-crawler",
+      "sourceLang": "it",
+      "postedDate": "2026-07-21",
+      "employmentType": "full-time",
+      "contractType": "temporary",
+      "validThrough": "2026-08-30",
+      "id": "pemsa-bcb8e6a4b0cb",
+      "salaryMin": 60500,
+      "salaryMax": 91500,
+      "currency": "CHF",
+      "firstSeenAt": "2026-07-21T11:23:36.348Z",
+      "_qualityScore": 91,
+      "_qualityBreakdown": {
+        "cleanliness": 25,
+        "richness": 22,
+        "translation": 25,
+        "completeness": 19
       }
     }
   ],
