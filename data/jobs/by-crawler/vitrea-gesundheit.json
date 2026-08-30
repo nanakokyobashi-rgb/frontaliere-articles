@@ -1,6 +1,6 @@
 {
   "crawlerKey": "vitrea-gesundheit",
-  "assembledAt": "2026-08-30T14:30:14.305Z",
+  "assembledAt": "2026-08-30T23:17:50.977Z",
   "jobs": [
     {
       "id": "vitrea-gesundheit-d31e216ef397",
@@ -34,7 +34,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/qdmiaqy8io593p97jxyjgg9yx6xgekx",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:11.504Z",
+      "crawledAt": "2026-08-30T23:17:47.908Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -112,7 +112,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/7b7w5k2apjm0ieaps75pghysnvz8t4z",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:09.893Z",
+      "crawledAt": "2026-08-30T23:17:46.710Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -215,7 +215,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/ywwwv6ezl7ifkeaix5w59tg3xtty144",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:08.302Z",
+      "crawledAt": "2026-08-30T23:17:45.034Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -294,7 +294,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/3zfzs3rjydvbzmas1ejwga59yve8abs",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:06.981Z",
+      "crawledAt": "2026-08-30T23:17:43.334Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -372,7 +372,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/dem7bll52g3sat65pollc2ie6a53buo",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:05.685Z",
+      "crawledAt": "2026-08-30T23:17:41.160Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -448,7 +448,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/0pwg2psl3lrxu0m6nbejbysqxw5m5qj",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:04.063Z",
+      "crawledAt": "2026-08-30T23:17:39.095Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -540,7 +540,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/6089n9uv84w9zu5h2ie5icnzxlplda1",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:02.397Z",
+      "crawledAt": "2026-08-30T23:17:37.441Z",
       "addressLocality": "Dussnang",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -603,7 +603,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/fkf9o33mxw38rfo3zqza4i8vwis0kbu",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:00.794Z",
+      "crawledAt": "2026-08-30T23:17:35.323Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -666,7 +666,7 @@
       "url": "https://vamed-ag-ch.onlyfy.jobs/de/job/8rq454luqyfl0ww1psplwh46me71m12",
       "source": "Vitrea Gesundheit Dedicated Parser (softgarden onlyfy.jobs)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:29:57.648Z",
+      "crawledAt": "2026-08-30T23:17:31.389Z",
       "addressLocality": "Zihlschlacht-Sitterdorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -708,7 +708,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:29:57.648Z"
+      "firstSeenAt": "2026-08-30T23:17:31.389Z"
     },
     {
       "id": "vitrea-gesundheit-276219928cc5",
