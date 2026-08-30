@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ipersonal",
-  "assembledAt": "2026-08-30T14:31:46.561Z",
+  "assembledAt": "2026-08-30T23:22:50.697Z",
   "jobs": [
     {
       "id": "ipersonal-7f14d039da7d",
@@ -5638,6 +5638,1051 @@
       },
       "addressRegion": "TI",
       "firstSeenAt": "2026-08-30T14:31:38.606Z"
+    },
+    {
+      "id": "ipersonal-6edf93564d1b",
+      "slug": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-e-verantwortung-im-op-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-und",
+        "it": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-e-verantwortung-im-op-ipersonal-ag-lugano",
+        "en": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-und",
+        "fr": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-und"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP",
+      "titleByLocale": {
+        "de": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP",
+        "en": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP",
+        "it": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision e Verantwortung im OP",
+        "fr": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP"
+      },
+      "description": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "en": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "it": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "fr": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Aarberg gesucht – Präzision und Verantwortung im OP — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-praezision-und-verantwortung-im-op/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T23:22:46.258Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-praezision-und-verantwortung-im-op/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-und"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-aarberg-gesucht-prazision-und"
+      ],
+      "salaryMin": 55500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 55500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:46.258Z"
+    },
+    {
+      "id": "ipersonal-dd3d83a3dd98",
+      "slug": "dipl-fachfrau-fachmann-uberwachungspflege-ndk-80-100-in-sirnach-gesucht-prazise-pflege-in",
+      "slugByLocale": {
+        "en": "dipl-fachfrau-fachmann-uberwachungspflege-ndk-80-100-in-sirnach-gesucht-prazise-pflege-in",
+        "it": "dipl-fachfrau-fachmann-uberwachungspflege-ndk-80-100-in-sirnach-gesucht-prazise-pflege-in",
+        "de": "dipl-fachfrau-fachmann-uberwachungspflege-ndk-80-100-in-sirnach-gesucht-prazise-pflege-in",
+        "fr": "dipl-fachfrau-fachmann-uberwachungspflege-ndk-80-100-in-sirnach-gesucht-prazise-pflege-in"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen",
+      "titleByLocale": {
+        "en": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen",
+        "de": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen",
+        "it": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen",
+        "fr": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen"
+      },
+      "description": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen — iPersonal AG",
+      "descriptionByLocale": {
+        "en": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen — iPersonal AG",
+        "it": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen — iPersonal AG",
+        "de": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen — iPersonal AG",
+        "fr": "Dipl. Fachfrau/Fachmann überwachungspflege NDK 80-100% in Sirnach gesucht – Präzise Pflege in sensiblen Situationen — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-ueberwachungspflege-ndk-80-100-in-sirnach-gesucht-praezise-pflege-in-sensiblen-situationen/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T23:22:45.956Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-ueberwachungspflege-ndk-80-100-in-sirnach-gesucht-praezise-pflege-in-sensiblen-situationen/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:45.956Z"
+    },
+    {
+      "id": "ipersonal-63d2d7bf3f08",
+      "slug": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-prazision",
+      "slugByLocale": {
+        "en": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-prazision",
+        "it": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-prazision",
+        "de": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-prazision",
+        "fr": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-prazision"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP",
+      "titleByLocale": {
+        "en": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP",
+        "de": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP",
+        "it": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision e Verantwortung im OP",
+        "fr": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP"
+      },
+      "description": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+      "descriptionByLocale": {
+        "en": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "it": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "de": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "fr": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Weggis gesucht – Präzision und Verantwortung im OP — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-praezision-und-verantwortung-im-op/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T23:22:45.654Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-weggis-gesucht-praezision-und-verantwortung-im-op/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 55500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 55500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:45.654Z"
+    },
+    {
+      "id": "ipersonal-fd532892ba60",
+      "slug": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-e-verantwortung-im-op-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "en": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-und",
+        "it": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-e-verantwortung-im-op-ipersonal-ag-lugano",
+        "de": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-und",
+        "fr": "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-und"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP",
+      "titleByLocale": {
+        "en": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP",
+        "de": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP",
+        "it": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision e Verantwortung im OP",
+        "fr": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP"
+      },
+      "description": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+      "descriptionByLocale": {
+        "en": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "it": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "de": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "fr": "Dipl. Fachfrau/Fachmann Operationstechnik HF 80-100% in Tübach gesucht – Präzision und Verantwortung im OP — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tuebach-gesucht-praezision-und-verantwortung-im-op/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T23:22:45.351Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tuebach-gesucht-praezision-und-verantwortung-im-op/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-und"
+        ]
+      },
+      "previousSlugs": [
+        "dipl-fachfrau-fachmann-operationstechnik-hf-80-100-in-tubach-gesucht-prazision-und"
+      ],
+      "salaryMin": 55500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 55500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:45.351Z"
+    },
+    {
+      "id": "ipersonal-cb98b86c1672",
+      "slug": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baretswil-gesucht",
+      "slugByLocale": {
+        "en": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baretswil-gesucht",
+        "it": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baretswil-gesucht",
+        "de": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baretswil-gesucht",
+        "fr": "dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baretswil-gesucht"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP",
+      "titleByLocale": {
+        "en": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP",
+        "de": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP",
+        "it": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision e Verantwortung im OP",
+        "fr": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP"
+      },
+      "description": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+      "descriptionByLocale": {
+        "en": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "it": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "de": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP — iPersonal AG",
+        "fr": "Dipl. Pflegefachfrau/Pflegefachmann HF – Operationspflege 80-100% in Bäretswil gesucht – Präzision und Verantwortung im OP — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baeretswil-gesucht-praezision-und-verantwortung-im-op/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T23:22:45.048Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Produzione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachfrau-pflegefachmann-hf-operationspflege-80-100-in-baeretswil-gesucht-praezision-und-verantwortung-im-op/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "en": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 55500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 55500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:45.048Z"
+    },
+    {
+      "id": "ipersonal-32bfccf5e6aa",
+      "slug": "medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht",
+      "slugByLocale": {
+        "de": "medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht",
+        "it": "medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht",
+        "en": "medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht",
+        "fr": "medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung",
+      "titleByLocale": {
+        "de": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung",
+        "it": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent con Herz per la Patientenbetreuung",
+        "en": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung",
+        "fr": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung"
+      },
+      "description": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung — iPersonal AG",
+        "it": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung — iPersonal AG",
+        "en": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung — iPersonal AG",
+        "fr": "Medizinische Praxisassistentin / Praxisassistent (MPA) 80-100% in Gunten gesucht – Organisationstalent mit Herz für die Patientenbetreuung — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht-organisationstalent-mit-herz-fuer-die-patientenbetreuung/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:44.746Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/medizinische-praxisassistentin-praxisassistent-mpa-80-100-in-gunten-gesucht-organisationstalent-mit-herz-fuer-die-patientenbetreuung/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:44.746Z"
+    },
+    {
+      "id": "ipersonal-357ad8da8262",
+      "slug": "facharzt-arztin-per-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht-patientenorientierte-medizin-con-verantwortung-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "facharzt-arztin-fur-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht",
+        "it": "facharzt-arztin-per-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht-patientenorientierte-medizin-con-verantwortung-ipersonal-ag-lugano",
+        "en": "facharzt-arztin-fur-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht",
+        "fr": "facharzt-arztin-fur-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung",
+      "titleByLocale": {
+        "de": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung",
+        "it": "Facharzt/-ärztin per Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin con Verantwortung",
+        "en": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung",
+        "fr": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung"
+      },
+      "description": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung — iPersonal AG",
+        "it": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung — iPersonal AG",
+        "en": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung — iPersonal AG",
+        "fr": "Facharzt/-ärztin für Allgemeine Innere Medizin (Hausarztmedizin) 80-100% in Tafers gesucht – Patientenorientierte Medizin mit Verantwortung — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/facharzt-aerztin-fuer-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht-patientenorientierte-medizin-mit-verantwortung/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:44.443Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/facharzt-aerztin-fuer-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht-patientenorientierte-medizin-mit-verantwortung/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "facharzt-arztin-fur-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht"
+        ]
+      },
+      "previousSlugs": [
+        "facharzt-arztin-fur-allgemeine-innere-medizin-hausarztmedizin-80-100-in-tafers-gesucht"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:44.443Z"
+    },
+    {
+      "id": "ipersonal-0f674914aeb7",
+      "slug": "geschaftsleiter-in-facharzt-arztin-per-allgemeine-innere-medizin-80-100-in-binningen-gesucht-medizinische-fuhrung-con-gestaltungsfreiheit-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "geschaftsleiter-in-facharzt-arztin-fur-allgemeine-innere-medizin-80-100-in-binningen",
+        "it": "geschaftsleiter-in-facharzt-arztin-per-allgemeine-innere-medizin-80-100-in-binningen-gesucht-medizinische-fuhrung-con-gestaltungsfreiheit-ipersonal-ag-lugano",
+        "en": "geschaftsleiter-in-facharzt-arztin-fur-allgemeine-innere-medizin-80-100-in-binningen",
+        "fr": "geschaftsleiter-in-facharzt-arztin-fur-allgemeine-innere-medizin-80-100-in-binningen"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+      "titleByLocale": {
+        "de": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+        "it": "Geschäftsleiter/in & Facharzt/-ärztin per Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung con Gestaltungsfreiheit",
+        "en": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+        "fr": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit"
+      },
+      "description": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "it": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "en": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "fr": "Geschäftsleiter/in & Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% in Binningen gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/geschaeftsleiter-in-facharzt-aerztin-fuer-allgemeine-innere-medizin-80-100-in-binningen-gesucht-medizinische-fuehrung-mit-gestaltungsfreiheit/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:44.140Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/geschaeftsleiter-in-facharzt-aerztin-fuer-allgemeine-innere-medizin-80-100-in-binningen-gesucht-medizinische-fuehrung-mit-gestaltungsfreiheit/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "geschaftsleiter-in-facharzt-arztin-fur-allgemeine-innere-medizin-80-100-in-binningen"
+        ]
+      },
+      "previousSlugs": [
+        "geschaftsleiter-in-facharzt-arztin-fur-allgemeine-innere-medizin-80-100-in-binningen"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:44.140Z"
+    },
+    {
+      "id": "ipersonal-bb1ce5b1b991",
+      "slug": "facharzt-arztin-per-allgemeine-innere-medizin-80-100-come-standortleiter-in-walenstadtberg-gesucht-medizinische-fuhrung-con-gestaltungsfreiheit-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "facharzt-arztin-fur-allgemeine-innere-medizin-80-100-als-standortleiter-in-in",
+        "it": "facharzt-arztin-per-allgemeine-innere-medizin-80-100-come-standortleiter-in-walenstadtberg-gesucht-medizinische-fuhrung-con-gestaltungsfreiheit-ipersonal-ag-lugano",
+        "en": "facharzt-arztin-fur-allgemeine-innere-medizin-80-100-als-standortleiter-in-in",
+        "fr": "facharzt-arztin-fur-allgemeine-innere-medizin-80-100-als-standortleiter-in-in"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+      "titleByLocale": {
+        "de": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+        "it": "Facharzt/-ärztin per Allgemeine Innere Medizin 80-100% come Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung con Gestaltungsfreiheit",
+        "en": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit",
+        "fr": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit"
+      },
+      "description": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "it": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "en": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG",
+        "fr": "Facharzt/-ärztin für Allgemeine Innere Medizin 80-100% als Standortleiter/in in Walenstadtberg gesucht – Medizinische Führung mit Gestaltungsfreiheit — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/facharzt-aerztin-fuer-allgemeine-innere-medizin-80-100-als-standortleiter-in-in-walenstadtberg-gesucht-medizinische-fuehrung-mit-gestaltungsfreiheit/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:43.838Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/facharzt-aerztin-fuer-allgemeine-innere-medizin-80-100-als-standortleiter-in-in-walenstadtberg-gesucht-medizinische-fuehrung-mit-gestaltungsfreiheit/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "facharzt-arztin-fur-allgemeine-innere-medizin-80-100-als-standortleiter-in-in"
+        ]
+      },
+      "previousSlugs": [
+        "facharzt-arztin-fur-allgemeine-innere-medizin-80-100-als-standortleiter-in-in"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:43.838Z"
+    },
+    {
+      "id": "ipersonal-012e608160e4",
+      "slug": "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-per-eine-ganzheitliche-patientenversorgung-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-fur-eine-ganzheitliche",
+        "it": "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-per-eine-ganzheitliche-patientenversorgung-ipersonal-ag-lugano",
+        "en": "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-fur-eine-ganzheitliche",
+        "fr": "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-fur-eine-ganzheitliche"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung",
+      "titleByLocale": {
+        "de": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung",
+        "it": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise per eine ganzheitliche Patientenversorgung",
+        "en": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung",
+        "fr": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung"
+      },
+      "description": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung — iPersonal AG",
+        "it": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung — iPersonal AG",
+        "en": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung — iPersonal AG",
+        "fr": "Allgemeinarzt/-ärztin 80-100% in Davos gesucht – Ihre Expertise für eine ganzheitliche Patientenversorgung — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/allgemeinarzt-aerztin-80-100-in-davos-gesucht-ihre-expertise-fuer-eine-ganzheitliche-patientenversorgung/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:43.536Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/allgemeinarzt-aerztin-80-100-in-davos-gesucht-ihre-expertise-fuer-eine-ganzheitliche-patientenversorgung/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-fur-eine-ganzheitliche"
+        ]
+      },
+      "previousSlugs": [
+        "allgemeinarzt-arztin-80-100-in-davos-gesucht-ihre-expertise-fur-eine-ganzheitliche"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:43.536Z"
+    },
+    {
+      "id": "ipersonal-8f073ca65cc4",
+      "slug": "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-e-fachkompetenz-per-eine-erstklassige-pflege-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-und-fachkompetenz-fur-eine",
+        "it": "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-e-fachkompetenz-per-eine-erstklassige-pflege-ipersonal-ag-lugano",
+        "en": "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-und-fachkompetenz-fur-eine",
+        "fr": "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-und-fachkompetenz-fur-eine"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege",
+      "titleByLocale": {
+        "de": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege",
+        "it": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung e Fachkompetenz per eine erstklassige Pflege",
+        "en": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege",
+        "fr": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege"
+      },
+      "description": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Pflegedienstleiter/in 80-100% in Wohlen gesucht – Führung und Fachkompetenz für eine erstklassige Pflege — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuehrung-und-fachkompetenz-fuer-eine-erstklassige-pflege/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:43.232Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuehrung-und-fachkompetenz-fuer-eine-erstklassige-pflege/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-und-fachkompetenz-fur-eine"
+        ]
+      },
+      "previousSlugs": [
+        "pflegedienstleiter-in-80-100-in-wohlen-gesucht-fuhrung-und-fachkompetenz-fur-eine"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:43.232Z"
+    },
+    {
+      "id": "ipersonal-a0ed4e471d2d",
+      "slug": "facharzt-facharztin-per-allgemeine-innere-medizin-come-standortleitung-80-100-in-meilen-gesucht-ubernehmen-sie-verantwortung-in-einer-modernen-praxis-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "facharzt-facharztin-fur-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen",
+        "it": "facharzt-facharztin-per-allgemeine-innere-medizin-come-standortleitung-80-100-in-meilen-gesucht-ubernehmen-sie-verantwortung-in-einer-modernen-praxis-ipersonal-ag-lugano",
+        "en": "facharzt-facharztin-fur-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen",
+        "fr": "facharzt-facharztin-fur-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis!",
+      "titleByLocale": {
+        "de": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis!",
+        "it": "Facharzt / Fachärztin per Allgemeine Innere Medizin come Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis!",
+        "en": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis!",
+        "fr": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis!"
+      },
+      "description": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis! — iPersonal AG",
+        "it": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis! — iPersonal AG",
+        "en": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis! — iPersonal AG",
+        "fr": "Facharzt / Fachärztin für Allgemeine Innere Medizin als Standortleitung 80-100% in Meilen gesucht – übernehmen Sie Verantwortung in einer modernen Praxis! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/facharzt-fachaerztin-fuer-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen-gesucht-uebernehmen-sie-verantwortung-in-einer-modernen-praxis/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:42.929Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/facharzt-fachaerztin-fuer-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen-gesucht-uebernehmen-sie-verantwortung-in-einer-modernen-praxis/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "facharzt-facharztin-fur-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen"
+        ]
+      },
+      "previousSlugs": [
+        "facharzt-facharztin-fur-allgemeine-innere-medizin-als-standortleitung-80-100-in-meilen"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:42.929Z"
+    },
+    {
+      "id": "ipersonal-1e6ae312c8c6",
+      "slug": "geschaftsleiter-in-facharzt-facharztin-per-allgemeine-innere-medizin-80-100-in-koniz-gesucht-medizinische-fuhrung-con-verantwortung-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "geschaftsleiter-in-facharzt-facharztin-fur-allgemeine-innere-medizin-80-100-in-koniz",
+        "it": "geschaftsleiter-in-facharzt-facharztin-per-allgemeine-innere-medizin-80-100-in-koniz-gesucht-medizinische-fuhrung-con-verantwortung-ipersonal-ag-lugano",
+        "en": "geschaftsleiter-in-facharzt-facharztin-fur-allgemeine-innere-medizin-80-100-in-koniz",
+        "fr": "geschaftsleiter-in-facharzt-facharztin-fur-allgemeine-innere-medizin-80-100-in-koniz"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung!",
+      "titleByLocale": {
+        "de": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung!",
+        "it": "Geschäftsleiter/in & Facharzt / Fachärztin per Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung con Verantwortung!",
+        "en": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung!",
+        "fr": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung!"
+      },
+      "description": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung! — iPersonal AG",
+        "it": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung! — iPersonal AG",
+        "en": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung! — iPersonal AG",
+        "fr": "Geschäftsleiter/in & Facharzt / Fachärztin für Allgemeine Innere Medizin (80-100%) in Köniz gesucht – Medizinische Führung mit Verantwortung! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/geschaeftsleiter-in-facharzt-fachaerztin-fuer-allgemeine-innere-medizin-80-100-in-koeniz-gesucht-medizinische-fuehrung-mit-verantwortung/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:42.626Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "senior",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/geschaeftsleiter-in-facharzt-fachaerztin-fuer-allgemeine-innere-medizin-80-100-in-koeniz-gesucht-medizinische-fuehrung-mit-verantwortung/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "geschaftsleiter-in-facharzt-facharztin-fur-allgemeine-innere-medizin-80-100-in-koniz"
+        ]
+      },
+      "previousSlugs": [
+        "geschaftsleiter-in-facharzt-facharztin-fur-allgemeine-innere-medizin-80-100-in-koniz"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:42.626Z"
+    },
+    {
+      "id": "ipersonal-814f6e4b73ac",
+      "slug": "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-per-eine-exzellente-pflege-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-fur",
+        "it": "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-per-eine-exzellente-pflege-ipersonal-ag-lugano",
+        "en": "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-fur",
+        "fr": "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-fur"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege!",
+      "titleByLocale": {
+        "de": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege!",
+        "it": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke per eine exzellente Pflege!",
+        "en": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege!",
+        "fr": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege!"
+      },
+      "description": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege! — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege! — iPersonal AG",
+        "it": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege! — iPersonal AG",
+        "en": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege! — iPersonal AG",
+        "fr": "Pflegedienstleiter / Pflegedienstleiterin (80-100%) in Aarau gesucht – Ihre Führungsstärke für eine exzellente Pflege! — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuehrungsstaerke-fuer-eine-exzellente-pflege/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:42.322Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Risorse Umane",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuehrungsstaerke-fuer-eine-exzellente-pflege/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-fur"
+        ]
+      },
+      "previousSlugs": [
+        "pflegedienstleiter-pflegedienstleiterin-80-100-in-aarau-gesucht-ihre-fuhrungsstarke-fur"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:42.322Z"
+    },
+    {
+      "id": "ipersonal-1e5def8cfa2a",
+      "slug": "fachfrau-fachmann-gesundheit-cfc-fage-80-100-in-chur-e-umgebung-gesucht-ihr-engagement-per-eine-hochwertige-pflege-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement",
+        "it": "fachfrau-fachmann-gesundheit-cfc-fage-80-100-in-chur-e-umgebung-gesucht-ihr-engagement-per-eine-hochwertige-pflege-ipersonal-ag-lugano",
+        "en": "fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement",
+        "fr": "fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege",
+      "titleByLocale": {
+        "de": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege",
+        "it": "Fachfrau/Fachmann Gesundheit CFC (FaGe) 80-100% in Chur e Umgebung gesucht – Ihr Engagement per eine hochwertige Pflege",
+        "en": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege",
+        "fr": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege"
+      },
+      "description": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege — iPersonal AG",
+        "it": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege — iPersonal AG",
+        "en": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege — iPersonal AG",
+        "fr": "Fachfrau/Fachmann Gesundheit EFZ (FaGe) 80-100% in Chur und Umgebung gesucht – Ihr Engagement für eine hochwertige Pflege — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement-fuer-eine-hochwertige-pflege/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:22:42.002Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement-fuer-eine-hochwertige-pflege/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement"
+        ]
+      },
+      "previousSlugs": [
+        "fachfrau-fachmann-gesundheit-efz-fage-80-100-in-chur-und-umgebung-gesucht-ihr-engagement"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T23:22:42.002Z"
     }
   ]
 }
