@@ -1,20 +1,21 @@
 {
   "key": "tsmg",
   "label": "TSMG",
-  "generatedAt": "2026-08-30T14:39:34.344Z",
+  "generatedAt": "2026-08-30T23:24:43.966Z",
   "total": 99,
   "newCount": 0,
   "updatedCount": 99,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 10178,
-  "avgDurationMs": 10178,
+  "durationMs": 10754,
+  "avgDurationMs": 10754,
   "durationHistory": [
     8701,
     10081,
     10408,
     7539,
-    10178
+    10178,
+    10754
   ],
   "newJobs": [],
   "updatedJobs": [
