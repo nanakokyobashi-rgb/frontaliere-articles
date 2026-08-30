@@ -232,6 +232,32 @@ test('un modello sporco senza esiti non riscrive i contatori', async () => {
   run.resetState();
 });
 
+test('lastUsed avanza solo su un successo, mai su un fallimento', async () => {
+  // _decayScore calcola l'eta' da lastUsed per decidere il bucket >24h che fa
+  // scendere un modello permanentemente rotto. Se lastUsed avanzasse anche sui
+  // fallimenti, un modello che fallisce a ogni run sembrerebbe sempre "appena
+  // usato" e non uscirebbe mai dal bucket alto — issue #627.
+  const STALE = '2020-01-01T00:00:00.000Z';
+  const db = makeFakeFirestore();
+  db._seed('ai_model_scores/_all', {
+    models: { [ENC_HAIKU]: { modelId: HAIKU, score: -3, successes: 10, failures: 3, lastUsed: STALE } },
+  });
+  const run = await freshInstance();
+  run.__installScoreStoreForTests(db, makeFieldValue());
+
+  run.recordModelFailure(HAIKU);
+  await run.flushScores();
+  assert.equal(db._model().lastUsed, STALE, 'un fallimento non deve toccare lastUsed');
+  const failurePayload = db._state.lastPayloads.at(-1).models[ENC_HAIKU];
+  assert.ok(!('lastUsed' in failurePayload), 'il campo non va scritto affatto, non riscritto uguale');
+
+  run.recordModelSuccess(HAIKU);
+  await run.flushScores();
+  assert.notEqual(db._model().lastUsed, STALE, 'un successo deve ancorare lastUsed a ora');
+
+  run.resetState();
+});
+
 test('flushScoresBeforeExit attende davvero la scrittura invece di lanciarla e uscire', async () => {
   const db = makeFakeFirestore({ delayMs: 40 });
   const run = await freshInstance();
