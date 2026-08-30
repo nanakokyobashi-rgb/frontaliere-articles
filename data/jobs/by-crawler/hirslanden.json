@@ -1,6 +1,6 @@
 {
   "crawlerKey": "hirslanden",
-  "assembledAt": "2026-08-30T14:48:15.589Z",
+  "assembledAt": "2026-08-30T23:33:43.705Z",
   "jobs": [
     {
       "id": "hirslanden-884fe67c1daa",
@@ -47,7 +47,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389356333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:35.589Z",
+      "crawledAt": "2026-08-30T23:33:11.602Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -131,7 +131,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389326233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:34.569Z",
+      "crawledAt": "2026-08-30T23:33:10.677Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -216,7 +216,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421157533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:46.715Z",
+      "crawledAt": "2026-08-30T23:21:55.115Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -297,7 +297,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421223833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:47.863Z",
+      "crawledAt": "2026-08-30T23:21:56.144Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -360,7 +360,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421106333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:42.214Z",
+      "crawledAt": "2026-08-30T23:21:50.699Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -433,7 +433,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421275333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:43.414Z",
+      "crawledAt": "2026-08-30T23:21:51.829Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -512,7 +512,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1390346033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:45.577Z",
+      "crawledAt": "2026-08-30T23:21:53.998Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -598,7 +598,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1410650933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:44.506Z",
+      "crawledAt": "2026-08-30T23:21:52.920Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -692,7 +692,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/940029901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:40.988Z",
+      "crawledAt": "2026-08-30T23:21:49.727Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -776,7 +776,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421499833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:38.658Z",
+      "crawledAt": "2026-08-30T23:21:47.821Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -853,7 +853,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411213233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:39.729Z",
+      "crawledAt": "2026-08-30T23:21:48.768Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -957,7 +957,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411319533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:37.646Z",
+      "crawledAt": "2026-08-30T23:21:46.895Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1035,7 +1035,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/748200701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:35.572Z",
+      "crawledAt": "2026-08-30T23:21:45.022Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1117,7 +1117,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1381249333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:33.391Z",
+      "crawledAt": "2026-08-30T23:21:43.064Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1201,7 +1201,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1371456433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:34.475Z",
+      "crawledAt": "2026-08-30T23:21:44.041Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1285,7 +1285,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411319433/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:34:36.624Z",
+      "crawledAt": "2026-08-30T23:21:45.971Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -1364,7 +1364,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1400800233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:31.147Z",
+      "crawledAt": "2026-08-30T23:21:40.752Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1449,7 +1449,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1381176133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:32.306Z",
+      "crawledAt": "2026-08-30T23:21:41.928Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1534,7 +1534,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1401254933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:47:32.528Z",
+      "crawledAt": "2026-08-30T23:33:08.827Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1617,7 +1617,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1372194833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:31.493Z",
+      "crawledAt": "2026-08-30T23:33:07.909Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1704,7 +1704,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391498333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:33.547Z",
+      "crawledAt": "2026-08-30T23:33:09.742Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1790,7 +1790,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1401353033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:03.398Z",
+      "crawledAt": "2026-08-30T23:32:43.932Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1874,7 +1874,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391464733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:02.358Z",
+      "crawledAt": "2026-08-30T23:32:43.009Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -1959,7 +1959,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391467433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:01.348Z",
+      "crawledAt": "2026-08-30T23:32:42.086Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2044,7 +2044,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391470933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:47:00.310Z",
+      "crawledAt": "2026-08-30T23:32:41.176Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2130,7 +2130,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1381809533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:59.303Z",
+      "crawledAt": "2026-08-30T23:32:40.250Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2215,7 +2215,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1371974933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:58.269Z",
+      "crawledAt": "2026-08-30T23:32:39.352Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2300,7 +2300,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1421688033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:57.239Z",
+      "crawledAt": "2026-08-30T23:32:38.413Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2377,7 +2377,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391874533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:52.125Z",
+      "crawledAt": "2026-08-30T23:32:33.781Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2467,7 +2467,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391700933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:56.220Z",
+      "crawledAt": "2026-08-30T23:32:37.452Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2551,7 +2551,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1292371401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:53.181Z",
+      "crawledAt": "2026-08-30T23:32:34.704Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2637,7 +2637,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391701033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:46:51.061Z",
+      "crawledAt": "2026-08-30T23:32:32.841Z",
       "requirements": [],
       "requirementsByLocale": {
         "it": [
@@ -2753,7 +2753,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391700433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:55.213Z",
+      "crawledAt": "2026-08-30T23:32:36.527Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -2837,7 +2837,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391700533/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:46:54.202Z",
+      "crawledAt": "2026-08-30T23:32:35.620Z",
       "requirements": [],
       "requirementsByLocale": {
         "en": [
@@ -2933,7 +2933,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/872996501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:49.957Z",
+      "crawledAt": "2026-08-30T23:32:31.908Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3018,7 +3018,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411715233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:45.840Z",
+      "crawledAt": "2026-08-30T23:32:28.256Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3101,7 +3101,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411729733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:48.906Z",
+      "crawledAt": "2026-08-30T23:32:31.007Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3180,7 +3180,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411689533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:47.886Z",
+      "crawledAt": "2026-08-30T23:32:30.100Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3261,7 +3261,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411733833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:43.803Z",
+      "crawledAt": "2026-08-30T23:32:26.360Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3342,7 +3342,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1402528033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:46.853Z",
+      "crawledAt": "2026-08-30T23:32:29.168Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3413,7 +3413,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1411601933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:41.780Z",
+      "crawledAt": "2026-08-30T23:32:24.475Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3490,7 +3490,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1372974433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:42.788Z",
+      "crawledAt": "2026-08-30T23:32:25.429Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3572,7 +3572,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1373294433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:44.822Z",
+      "crawledAt": "2026-08-30T23:32:27.307Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3656,7 +3656,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423382433/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:46:12.106Z",
+      "crawledAt": "2026-08-30T23:31:57.494Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -3737,7 +3737,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423283933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:38.778Z",
+      "crawledAt": "2026-08-30T23:32:21.713Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3827,7 +3827,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423505033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:40.726Z",
+      "crawledAt": "2026-08-30T23:32:23.560Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3903,7 +3903,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423363833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:39.678Z",
+      "crawledAt": "2026-08-30T23:32:22.646Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -3980,7 +3980,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412408833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:11.101Z",
+      "crawledAt": "2026-08-30T23:31:56.564Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4058,7 +4058,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412362533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:09.058Z",
+      "crawledAt": "2026-08-30T23:31:54.709Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4131,7 +4131,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1373708833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:06.997Z",
+      "crawledAt": "2026-08-30T23:31:52.868Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4215,7 +4215,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412362433/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:46:05.966Z",
+      "crawledAt": "2026-08-30T23:31:51.951Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4288,7 +4288,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412362033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:10.081Z",
+      "crawledAt": "2026-08-30T23:31:55.631Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4361,7 +4361,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412362133/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:46:08.040Z",
+      "crawledAt": "2026-08-30T23:31:53.780Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4434,7 +4434,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1401735233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:04.929Z",
+      "crawledAt": "2026-08-30T23:31:51.020Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4519,7 +4519,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1213917001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:03.913Z",
+      "crawledAt": "2026-08-30T23:31:50.115Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4604,7 +4604,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423919333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:01.861Z",
+      "crawledAt": "2026-08-30T23:31:48.338Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4675,7 +4675,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423934233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:02.903Z",
+      "crawledAt": "2026-08-30T23:31:49.273Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -4738,7 +4738,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1423840133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:46:00.807Z",
+      "crawledAt": "2026-08-30T23:31:47.414Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4814,7 +4814,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412618833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:59.798Z",
+      "crawledAt": "2026-08-30T23:31:46.510Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4894,7 +4894,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412859933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:52.509Z",
+      "crawledAt": "2026-08-30T23:31:39.955Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -4972,7 +4972,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1402182933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:58.770Z",
+      "crawledAt": "2026-08-30T23:31:45.598Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5056,7 +5056,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1402346633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:50.472Z",
+      "crawledAt": "2026-08-30T23:31:38.136Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5143,7 +5143,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1402485633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:54.581Z",
+      "crawledAt": "2026-08-30T23:31:41.883Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5229,7 +5229,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1293595201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:53.516Z",
+      "crawledAt": "2026-08-30T23:31:40.968Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5314,7 +5314,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1402269733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:55.647Z",
+      "crawledAt": "2026-08-30T23:31:42.817Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5399,7 +5399,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1264226401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:57.750Z",
+      "crawledAt": "2026-08-30T23:31:44.695Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5483,7 +5483,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1392437133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:51.480Z",
+      "crawledAt": "2026-08-30T23:31:39.038Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5567,7 +5567,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1412777333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:56.732Z",
+      "crawledAt": "2026-08-30T23:31:43.745Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5643,7 +5643,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1424278333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:49.441Z",
+      "crawledAt": "2026-08-30T23:31:37.238Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5719,7 +5719,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1424274533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:48.430Z",
+      "crawledAt": "2026-08-30T23:31:36.339Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5792,7 +5792,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1413412333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:47.409Z",
+      "crawledAt": "2026-08-30T23:31:35.414Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5870,7 +5870,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1413409733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:18.377Z",
+      "crawledAt": "2026-08-30T23:31:09.518Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -5946,7 +5946,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1370605433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:19.414Z",
+      "crawledAt": "2026-08-30T23:31:10.448Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6039,7 +6039,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1413268533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:20.451Z",
+      "crawledAt": "2026-08-30T23:31:11.367Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6110,7 +6110,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1392743633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:17.359Z",
+      "crawledAt": "2026-08-30T23:31:08.591Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6194,7 +6194,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/635568301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:16.346Z",
+      "crawledAt": "2026-08-30T23:31:07.676Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6278,7 +6278,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/686405701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:10.197Z",
+      "crawledAt": "2026-08-30T23:31:01.984Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6360,7 +6360,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389327433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:15.326Z",
+      "crawledAt": "2026-08-30T23:31:06.772Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6431,7 +6431,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1015560901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:14.286Z",
+      "crawledAt": "2026-08-30T23:31:05.842Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -6520,7 +6520,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1196023201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:13.268Z",
+      "crawledAt": "2026-08-30T23:31:04.877Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -6604,7 +6604,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1413785433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:12.236Z",
+      "crawledAt": "2026-08-30T23:31:03.886Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6680,7 +6680,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1378905433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:07.102Z",
+      "crawledAt": "2026-08-30T23:30:59.158Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6770,7 +6770,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1403401833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:11.211Z",
+      "crawledAt": "2026-08-30T23:31:02.928Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6889,7 +6889,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1403487133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:08.151Z",
+      "crawledAt": "2026-08-30T23:31:00.064Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -6969,7 +6969,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1255070701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:09.155Z",
+      "crawledAt": "2026-08-30T23:31:01.018Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7046,7 +7046,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1374700733/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:45:02.981Z",
+      "crawledAt": "2026-08-30T23:30:55.515Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7173,7 +7173,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1383993333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:05.085Z",
+      "crawledAt": "2026-08-30T23:30:57.340Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7258,7 +7258,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1384125233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:00.839Z",
+      "crawledAt": "2026-08-30T23:30:53.672Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7342,7 +7342,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1403938233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:06.096Z",
+      "crawledAt": "2026-08-30T23:30:58.259Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7412,7 +7412,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1119582001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:01.870Z",
+      "crawledAt": "2026-08-30T23:30:54.607Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7499,7 +7499,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1263681601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:45:04.014Z",
+      "crawledAt": "2026-08-30T23:30:56.434Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7584,7 +7584,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1129355701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:59.925Z",
+      "crawledAt": "2026-08-30T23:30:52.624Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7668,7 +7668,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/672641601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:58.906Z",
+      "crawledAt": "2026-08-30T23:30:51.627Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7752,7 +7752,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1236653501/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:57.866Z",
+      "crawledAt": "2026-08-30T23:30:48.508Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7836,7 +7836,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1263671801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:56.838Z",
+      "crawledAt": "2026-08-30T23:30:47.571Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -7920,7 +7920,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/641164401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:55.810Z",
+      "crawledAt": "2026-08-30T23:30:46.647Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8004,7 +8004,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/898820401/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:28.661Z",
+      "crawledAt": "2026-08-30T23:30:22.773Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8091,7 +8091,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/898818401/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:27.618Z",
+      "crawledAt": "2026-08-30T23:30:21.861Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8178,7 +8178,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1140579201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:26.608Z",
+      "crawledAt": "2026-08-30T23:30:20.958Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8263,7 +8263,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1383994633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:25.287Z",
+      "crawledAt": "2026-08-30T23:30:20.023Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8347,7 +8347,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1424851333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:23.260Z",
+      "crawledAt": "2026-08-30T23:30:18.178Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8417,7 +8417,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1424816033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:44:24.287Z",
+      "crawledAt": "2026-08-30T23:30:19.114Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -8512,7 +8512,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/941679901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:22.207Z",
+      "crawledAt": "2026-08-30T23:30:17.246Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8597,7 +8597,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1384571133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:21.184Z",
+      "crawledAt": "2026-08-30T23:30:16.318Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8682,7 +8682,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1099851101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:20.157Z",
+      "crawledAt": "2026-08-30T23:30:15.409Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8767,7 +8767,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1044984201/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:19.144Z",
+      "crawledAt": "2026-08-30T23:30:14.463Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8853,7 +8853,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/705348901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:18.134Z",
+      "crawledAt": "2026-08-30T23:30:13.547Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -8937,7 +8937,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1222224901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:17.097Z",
+      "crawledAt": "2026-08-30T23:30:12.622Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9022,7 +9022,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/623010701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:16.088Z",
+      "crawledAt": "2026-08-30T23:30:11.711Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9106,7 +9106,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1181945601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:15.057Z",
+      "crawledAt": "2026-08-30T23:30:10.755Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9190,7 +9190,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425341833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:10.943Z",
+      "crawledAt": "2026-08-30T23:30:06.913Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9266,7 +9266,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425227433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:09.939Z",
+      "crawledAt": "2026-08-30T23:30:06.009Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9342,7 +9342,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425180233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:11.974Z",
+      "crawledAt": "2026-08-30T23:30:07.844Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9418,7 +9418,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425136533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:14.013Z",
+      "crawledAt": "2026-08-30T23:30:09.765Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -9481,7 +9481,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425315133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:07.896Z",
+      "crawledAt": "2026-08-30T23:30:04.143Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -9544,7 +9544,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425102733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:12.995Z",
+      "crawledAt": "2026-08-30T23:30:08.785Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9621,7 +9621,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425311333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:08.924Z",
+      "crawledAt": "2026-08-30T23:30:05.061Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9722,7 +9722,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1237309401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:05.050Z",
+      "crawledAt": "2026-08-30T23:30:02.234Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9798,7 +9798,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1414182933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:06.058Z",
+      "crawledAt": "2026-08-30T23:30:03.189Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9874,7 +9874,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1414554333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:44:04.008Z",
+      "crawledAt": "2026-08-30T23:30:01.235Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -9952,7 +9952,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425634133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:34.948Z",
+      "crawledAt": "2026-08-30T23:29:35.361Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10028,7 +10028,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425771933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:44:02.976Z",
+      "crawledAt": "2026-08-30T23:30:00.282Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -10105,7 +10105,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425494833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:35.995Z",
+      "crawledAt": "2026-08-30T23:29:36.298Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10182,7 +10182,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1425479033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:33.910Z",
+      "crawledAt": "2026-08-30T23:29:34.460Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10261,7 +10261,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1123876301/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:32.877Z",
+      "crawledAt": "2026-08-30T23:29:33.528Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10345,7 +10345,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/635926701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:10.969Z",
+      "crawledAt": "2026-08-30T23:29:19.862Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10435,7 +10435,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/671179801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:31.858Z",
+      "crawledAt": "2026-08-30T23:29:32.631Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10520,7 +10520,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1124147801/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:27.697Z",
+      "crawledAt": "2026-08-30T23:29:29.032Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10604,7 +10604,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1235316601/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:30.822Z",
+      "crawledAt": "2026-08-30T23:29:31.733Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10688,7 +10688,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1404256333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:20.743Z",
+      "crawledAt": "2026-08-30T23:29:24.444Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10764,7 +10764,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/767935201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:14.430Z",
+      "crawledAt": "2026-08-30T23:29:21.711Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10850,7 +10850,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1244031801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:12.554Z",
+      "crawledAt": "2026-08-30T23:29:20.787Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -10933,7 +10933,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1145097801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:29.752Z",
+      "crawledAt": "2026-08-30T23:29:30.836Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11019,7 +11019,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/925915801/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:21.917Z",
+      "crawledAt": "2026-08-30T23:29:25.359Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11105,7 +11105,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/754575401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:07.381Z",
+      "crawledAt": "2026-08-30T23:29:17.944Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11189,7 +11189,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1404331933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:43:26.694Z",
+      "crawledAt": "2026-08-30T23:29:28.099Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -11274,7 +11274,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1404274433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:09.871Z",
+      "crawledAt": "2026-08-30T23:29:18.878Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11350,7 +11350,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1194526101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:23.015Z",
+      "crawledAt": "2026-08-30T23:29:26.270Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11434,7 +11434,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1235315401/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:28.724Z",
+      "crawledAt": "2026-08-30T23:29:29.923Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11520,7 +11520,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1145097401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:17.140Z",
+      "crawledAt": "2026-08-30T23:29:23.519Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11606,7 +11606,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/925913601/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:16.017Z",
+      "crawledAt": "2026-08-30T23:29:22.616Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11694,7 +11694,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/630411501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:25.529Z",
+      "crawledAt": "2026-08-30T23:29:27.186Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -11782,7 +11782,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1044986401/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:05.718Z",
+      "crawledAt": "2026-08-30T23:29:17.041Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11866,7 +11866,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/896304901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:04.632Z",
+      "crawledAt": "2026-08-30T23:29:16.122Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -11950,7 +11950,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/741959701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:02.913Z",
+      "crawledAt": "2026-08-30T23:29:15.219Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12034,7 +12034,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1047343701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:43:01.808Z",
+      "crawledAt": "2026-08-30T23:29:14.318Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12118,7 +12118,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1375933733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:18.250Z",
+      "crawledAt": "2026-08-30T23:28:49.111Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12208,7 +12208,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/630623201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:17.133Z",
+      "crawledAt": "2026-08-30T23:28:48.177Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12294,7 +12294,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/630385101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:16.090Z",
+      "crawledAt": "2026-08-30T23:28:47.268Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12378,7 +12378,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/686750601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:14.943Z",
+      "crawledAt": "2026-08-30T23:28:46.370Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12462,7 +12462,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/705601801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:13.911Z",
+      "crawledAt": "2026-08-30T23:28:45.447Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12548,7 +12548,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/961593301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:12.618Z",
+      "crawledAt": "2026-08-30T23:28:44.489Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12632,7 +12632,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1365609033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:11.435Z",
+      "crawledAt": "2026-08-30T23:28:43.529Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12716,7 +12716,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1173341601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:10.390Z",
+      "crawledAt": "2026-08-30T23:28:42.594Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12800,7 +12800,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1414606333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:09.283Z",
+      "crawledAt": "2026-08-30T23:28:41.583Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12876,7 +12876,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1414790333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:08.069Z",
+      "crawledAt": "2026-08-30T23:28:40.662Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -12992,7 +12992,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1426236333/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:42:05.808Z",
+      "crawledAt": "2026-08-30T23:28:38.729Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -13068,7 +13068,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1426119833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:07.011Z",
+      "crawledAt": "2026-08-30T23:28:39.736Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13160,7 +13160,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1256069901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:02.581Z",
+      "crawledAt": "2026-08-30T23:28:35.871Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13246,7 +13246,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1405109133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:04.767Z",
+      "crawledAt": "2026-08-30T23:28:37.772Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13345,7 +13345,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1215489101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:03.751Z",
+      "crawledAt": "2026-08-30T23:28:36.837Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13429,7 +13429,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1405145033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:01.566Z",
+      "crawledAt": "2026-08-30T23:28:34.963Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13505,7 +13505,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1255790501/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:42:00.499Z",
+      "crawledAt": "2026-08-30T23:28:34.049Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13591,7 +13591,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1394399733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:59.481Z",
+      "crawledAt": "2026-08-30T23:28:33.126Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13676,7 +13676,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1404873033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:58.456Z",
+      "crawledAt": "2026-08-30T23:28:32.056Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13756,7 +13756,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1256051301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:57.418Z",
+      "crawledAt": "2026-08-30T23:28:31.089Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -13843,7 +13843,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415375933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:56.400Z",
+      "crawledAt": "2026-08-30T23:28:30.164Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -13934,7 +13934,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415328033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:55.369Z",
+      "crawledAt": "2026-08-30T23:28:29.175Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14012,7 +14012,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415312933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:41:54.349Z",
+      "crawledAt": "2026-08-30T23:28:28.182Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -14117,7 +14117,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415402333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:53.315Z",
+      "crawledAt": "2026-08-30T23:28:27.125Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14193,7 +14193,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1267276001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:25.514Z",
+      "crawledAt": "2026-08-30T23:27:59.697Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14278,7 +14278,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1258801601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:20.299Z",
+      "crawledAt": "2026-08-30T23:27:55.102Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14362,7 +14362,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/843049901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:24.476Z",
+      "crawledAt": "2026-08-30T23:27:58.753Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14446,7 +14446,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1259110401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:22.373Z",
+      "crawledAt": "2026-08-30T23:27:56.921Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14536,7 +14536,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1007615101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:52.256Z",
+      "crawledAt": "2026-08-30T23:28:26.116Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14622,7 +14622,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1007595601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:21.342Z",
+      "crawledAt": "2026-08-30T23:27:56.015Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14708,7 +14708,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/875380301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:23.437Z",
+      "crawledAt": "2026-08-30T23:27:57.842Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14800,7 +14800,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1070374701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:19.267Z",
+      "crawledAt": "2026-08-30T23:27:54.177Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14883,7 +14883,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/888509101/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:18.246Z",
+      "crawledAt": "2026-08-30T23:27:53.238Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -14968,7 +14968,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/888507101/?locale=en_GB",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:17.240Z",
+      "crawledAt": "2026-08-30T23:27:52.043Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15054,7 +15054,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/825800901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:16.213Z",
+      "crawledAt": "2026-08-30T23:27:51.033Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15140,7 +15140,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/841231101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:15.202Z",
+      "crawledAt": "2026-08-30T23:27:50.123Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15225,7 +15225,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1035750601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:14.198Z",
+      "crawledAt": "2026-08-30T23:27:49.196Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15310,7 +15310,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1205548001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:13.168Z",
+      "crawledAt": "2026-08-30T23:27:48.246Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15392,7 +15392,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/642185801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:12.145Z",
+      "crawledAt": "2026-08-30T23:27:47.347Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15474,7 +15474,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/623499001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:11.126Z",
+      "crawledAt": "2026-08-30T23:27:46.377Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15559,7 +15559,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/630371001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:10.116Z",
+      "crawledAt": "2026-08-30T23:27:45.261Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15644,7 +15644,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/772361001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:09.012Z",
+      "crawledAt": "2026-08-30T23:27:44.330Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15727,7 +15727,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1248288201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:07.958Z",
+      "crawledAt": "2026-08-30T23:27:43.283Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15811,7 +15811,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1266821001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:06.927Z",
+      "crawledAt": "2026-08-30T23:27:42.208Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -15893,7 +15893,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415713033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:41:05.908Z",
+      "crawledAt": "2026-08-30T23:27:41.195Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -15971,7 +15971,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415602733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:04.890Z",
+      "crawledAt": "2026-08-30T23:27:40.111Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16049,7 +16049,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1395090133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:00.744Z",
+      "crawledAt": "2026-08-30T23:27:35.869Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16126,7 +16126,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415769833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:02.831Z",
+      "crawledAt": "2026-08-30T23:27:38.270Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16199,7 +16199,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415835033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:41:01.795Z",
+      "crawledAt": "2026-08-30T23:27:37.177Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16302,7 +16302,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1415769933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:41:03.883Z",
+      "crawledAt": "2026-08-30T23:27:39.193Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16378,7 +16378,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1394864633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:33.663Z",
+      "crawledAt": "2026-08-30T23:27:10.207Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16463,7 +16463,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1394893733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:32.651Z",
+      "crawledAt": "2026-08-30T23:27:09.157Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16547,7 +16547,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1426781633/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:40:31.642Z",
+      "crawledAt": "2026-08-30T23:27:08.214Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -16625,7 +16625,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1405831033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:29.578Z",
+      "crawledAt": "2026-08-30T23:27:06.132Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16703,7 +16703,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1395344733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:27.532Z",
+      "crawledAt": "2026-08-30T23:27:04.099Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16789,7 +16789,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1061327901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:30.603Z",
+      "crawledAt": "2026-08-30T23:27:07.291Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16865,7 +16865,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1148755701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:28.549Z",
+      "crawledAt": "2026-08-30T23:27:05.123Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -16949,7 +16949,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1395578733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:26.506Z",
+      "crawledAt": "2026-08-30T23:27:02.977Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17033,7 +17033,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1228863801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:25.481Z",
+      "crawledAt": "2026-08-30T23:27:01.881Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17117,7 +17117,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1395495133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:24.448Z",
+      "crawledAt": "2026-08-30T23:27:00.951Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17202,7 +17202,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1228042001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:23.423Z",
+      "crawledAt": "2026-08-30T23:27:00.008Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17284,7 +17284,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1376415233/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:40:20.338Z",
+      "crawledAt": "2026-08-30T23:26:57.252Z",
       "requirements": [],
       "requirementsByLocale": {
         "it": [
@@ -17371,7 +17371,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1269493601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:22.365Z",
+      "crawledAt": "2026-08-30T23:26:59.099Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17455,7 +17455,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/941680401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:17.239Z",
+      "crawledAt": "2026-08-30T23:26:54.487Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17540,7 +17540,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1078941201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:15.186Z",
+      "crawledAt": "2026-08-30T23:26:52.612Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17618,7 +17618,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1406578033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:40:19.301Z",
+      "crawledAt": "2026-08-30T23:26:56.338Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -17707,7 +17707,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1406457233/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:40:21.359Z",
+      "crawledAt": "2026-08-30T23:26:58.167Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -17796,7 +17796,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1406548433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:18.248Z",
+      "crawledAt": "2026-08-30T23:26:55.390Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17868,7 +17868,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1072046501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:14.165Z",
+      "crawledAt": "2026-08-30T23:26:51.675Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -17954,7 +17954,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1396005033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:16.208Z",
+      "crawledAt": "2026-08-30T23:26:53.528Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18040,7 +18040,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/941837701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:13.155Z",
+      "crawledAt": "2026-08-30T23:26:50.788Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18125,7 +18125,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/721242901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:12.119Z",
+      "crawledAt": "2026-08-30T23:26:49.865Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18211,7 +18211,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/799393801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:11.111Z",
+      "crawledAt": "2026-08-30T23:26:48.974Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18297,7 +18297,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1072064201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:10.101Z",
+      "crawledAt": "2026-08-30T23:26:48.044Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18383,7 +18383,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1093220501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:40:09.061Z",
+      "crawledAt": "2026-08-30T23:26:47.150Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18468,7 +18468,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1177146101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:42.387Z",
+      "crawledAt": "2026-08-30T23:26:23.037Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18552,7 +18552,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/622112101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:41.337Z",
+      "crawledAt": "2026-08-30T23:26:22.138Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18637,7 +18637,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1396094833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:40.263Z",
+      "crawledAt": "2026-08-30T23:26:21.219Z",
       "requirements": [],
       "requirementsByLocale": {
         "it": [
@@ -18725,7 +18725,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/700631301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:39.250Z",
+      "crawledAt": "2026-08-30T23:26:20.289Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18809,7 +18809,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1396076433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:38.222Z",
+      "crawledAt": "2026-08-30T23:26:19.324Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18894,7 +18894,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427134333/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:34.114Z",
+      "crawledAt": "2026-08-30T23:26:15.527Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -18975,7 +18975,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427158033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:32.083Z",
+      "crawledAt": "2026-08-30T23:26:13.701Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19046,7 +19046,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427154833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:33.076Z",
+      "crawledAt": "2026-08-30T23:26:14.593Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19123,7 +19123,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427019033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:37.203Z",
+      "crawledAt": "2026-08-30T23:26:18.366Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19193,7 +19193,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427087233/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:36.181Z",
+      "crawledAt": "2026-08-30T23:26:17.425Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19273,7 +19273,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427124433/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:35.145Z",
+      "crawledAt": "2026-08-30T23:26:16.454Z",
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-17T21:30:17.534Z",
@@ -19346,7 +19346,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1261594201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:20.800Z",
+      "crawledAt": "2026-08-30T23:26:03.467Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19430,7 +19430,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1229404001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:30.034Z",
+      "crawledAt": "2026-08-30T23:26:11.846Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -19517,7 +19517,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1050710801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:19.722Z",
+      "crawledAt": "2026-08-30T23:26:02.561Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19601,7 +19601,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1376942033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:21.850Z",
+      "crawledAt": "2026-08-30T23:26:04.404Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19684,7 +19684,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1229393701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:29.026Z",
+      "crawledAt": "2026-08-30T23:26:10.922Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -19772,7 +19772,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1169486101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:24.927Z",
+      "crawledAt": "2026-08-30T23:26:07.172Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19862,7 +19862,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1062065301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:22.873Z",
+      "crawledAt": "2026-08-30T23:26:05.317Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -19947,7 +19947,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1062065801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:23.909Z",
+      "crawledAt": "2026-08-30T23:26:06.253Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20032,7 +20032,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1199134301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:49.652Z",
+      "crawledAt": "2026-08-30T23:25:35.768Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20114,7 +20114,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1261316201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:17.666Z",
+      "crawledAt": "2026-08-30T23:26:00.716Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20199,7 +20199,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1178388101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:50.667Z",
+      "crawledAt": "2026-08-30T23:25:36.688Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20281,7 +20281,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1199837701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:28.001Z",
+      "crawledAt": "2026-08-30T23:26:10.009Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20363,7 +20363,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1199837601/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:26.979Z",
+      "crawledAt": "2026-08-30T23:26:09.057Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20452,7 +20452,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1199134201/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:39:25.970Z",
+      "crawledAt": "2026-08-30T23:26:08.113Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20540,7 +20540,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/692585701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:31.081Z",
+      "crawledAt": "2026-08-30T23:26:12.784Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -20629,7 +20629,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1062066201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:39:18.672Z",
+      "crawledAt": "2026-08-30T23:26:01.641Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20715,7 +20715,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/737919201/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:48.605Z",
+      "crawledAt": "2026-08-30T23:25:34.797Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20800,7 +20800,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1168290501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:47.585Z",
+      "crawledAt": "2026-08-30T23:25:33.902Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20895,7 +20895,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/997739701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:46.626Z",
+      "crawledAt": "2026-08-30T23:25:32.971Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -20980,7 +20980,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1230011301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:45.609Z",
+      "crawledAt": "2026-08-30T23:25:32.058Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21066,7 +21066,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/735938501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:44.565Z",
+      "crawledAt": "2026-08-30T23:25:31.130Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21151,7 +21151,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/778959001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:43.487Z",
+      "crawledAt": "2026-08-30T23:25:30.181Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21237,7 +21237,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/693178001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:42.471Z",
+      "crawledAt": "2026-08-30T23:25:29.237Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21322,7 +21322,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1109035101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:41.468Z",
+      "crawledAt": "2026-08-30T23:25:28.182Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21405,7 +21405,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1188289901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:40.354Z",
+      "crawledAt": "2026-08-30T23:25:27.273Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21487,7 +21487,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1386272333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:39.314Z",
+      "crawledAt": "2026-08-30T23:25:26.320Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21571,7 +21571,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1220045301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:38.307Z",
+      "crawledAt": "2026-08-30T23:25:25.412Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21657,7 +21657,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1386786733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:37.267Z",
+      "crawledAt": "2026-08-30T23:25:24.568Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21741,7 +21741,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427303533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:32.128Z",
+      "crawledAt": "2026-08-30T23:25:19.888Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21817,7 +21817,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427450433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:35.191Z",
+      "crawledAt": "2026-08-30T23:25:22.696Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21887,7 +21887,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427450233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:33.170Z",
+      "crawledAt": "2026-08-30T23:25:20.829Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -21960,7 +21960,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427492233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:34.173Z",
+      "crawledAt": "2026-08-30T23:25:21.761Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22031,7 +22031,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427516633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:36.258Z",
+      "crawledAt": "2026-08-30T23:25:23.624Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22108,7 +22108,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1377939033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:31.044Z",
+      "crawledAt": "2026-08-30T23:25:18.932Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22190,7 +22190,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1387048033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:30.038Z",
+      "crawledAt": "2026-08-30T23:25:18.015Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22274,7 +22274,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427930333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:27.931Z",
+      "crawledAt": "2026-08-30T23:25:16.165Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22348,7 +22348,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427882333/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:38:29.000Z",
+      "crawledAt": "2026-08-30T23:25:17.096Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -22411,7 +22411,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1427765733/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:38:26.912Z",
+      "crawledAt": "2026-08-30T23:25:15.218Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -22488,7 +22488,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1190067901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:38:25.875Z",
+      "crawledAt": "2026-08-30T23:25:14.270Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22573,7 +22573,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/776391101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:58.895Z",
+      "crawledAt": "2026-08-30T23:24:49.748Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22663,7 +22663,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1406905433/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:57.871Z",
+      "crawledAt": "2026-08-30T23:24:48.807Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -22758,7 +22758,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1196950701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:56.812Z",
+      "crawledAt": "2026-08-30T23:24:47.846Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22847,7 +22847,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1378582333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:55.759Z",
+      "crawledAt": "2026-08-30T23:24:46.882Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -22932,7 +22932,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/928896601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:54.757Z",
+      "crawledAt": "2026-08-30T23:24:45.977Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23017,7 +23017,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428367533/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:52.719Z",
+      "crawledAt": "2026-08-30T23:24:44.125Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -23105,7 +23105,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428261633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:53.738Z",
+      "crawledAt": "2026-08-30T23:24:45.045Z",
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-20T21:34:54.771Z",
@@ -23167,7 +23167,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1273638501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:49.599Z",
+      "crawledAt": "2026-08-30T23:24:41.323Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -23257,7 +23257,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1271499701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:50.618Z",
+      "crawledAt": "2026-08-30T23:24:42.268Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23341,7 +23341,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1169722301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:48.597Z",
+      "crawledAt": "2026-08-30T23:24:40.415Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23425,7 +23425,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1253393101/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:51.682Z",
+      "crawledAt": "2026-08-30T23:24:43.197Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23506,7 +23506,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1243028401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:45.301Z",
+      "crawledAt": "2026-08-30T23:24:37.633Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23591,7 +23591,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1407548533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:46.349Z",
+      "crawledAt": "2026-08-30T23:24:38.546Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23667,7 +23667,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/676689601/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:47.421Z",
+      "crawledAt": "2026-08-30T23:24:39.496Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23752,7 +23752,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/750944901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:44.206Z",
+      "crawledAt": "2026-08-30T23:24:36.715Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23838,7 +23838,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1031028001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:43.135Z",
+      "crawledAt": "2026-08-30T23:24:35.793Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -23922,7 +23922,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1272768601/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:42.106Z",
+      "crawledAt": "2026-08-30T23:24:34.878Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24002,7 +24002,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/684990301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:41.094Z",
+      "crawledAt": "2026-08-30T23:24:33.956Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24087,7 +24087,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/694375901/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:40.077Z",
+      "crawledAt": "2026-08-30T23:24:33.058Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24172,7 +24172,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1012500301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:39.073Z",
+      "crawledAt": "2026-08-30T23:24:32.135Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24256,7 +24256,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1368573133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:38.078Z",
+      "crawledAt": "2026-08-30T23:24:31.229Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24341,7 +24341,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1417826833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:37.069Z",
+      "crawledAt": "2026-08-30T23:24:30.282Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24417,7 +24417,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428787233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:36.013Z",
+      "crawledAt": "2026-08-30T23:24:29.350Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24494,7 +24494,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428720433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:33.948Z",
+      "crawledAt": "2026-08-30T23:24:27.521Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24568,7 +24568,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428792833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:35.005Z",
+      "crawledAt": "2026-08-30T23:24:28.436Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24644,7 +24644,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1428801733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:07.223Z",
+      "crawledAt": "2026-08-30T23:24:02.664Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24721,7 +24721,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1418111733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:58.968Z",
+      "crawledAt": "2026-08-30T23:23:55.231Z",
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-07-23T22:08:27.359Z",
@@ -24783,7 +24783,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397410833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:03.126Z",
+      "crawledAt": "2026-08-30T23:23:58.951Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -24870,7 +24870,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1418153933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:53.840Z",
+      "crawledAt": "2026-08-30T23:23:50.578Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -24977,7 +24977,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397378633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:54.868Z",
+      "crawledAt": "2026-08-30T23:23:51.480Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25062,7 +25062,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397281233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:04.143Z",
+      "crawledAt": "2026-08-30T23:23:59.863Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25147,7 +25147,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1275809101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:56.917Z",
+      "crawledAt": "2026-08-30T23:23:53.392Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25234,7 +25234,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397351333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:51.792Z",
+      "crawledAt": "2026-08-30T23:23:48.714Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25318,7 +25318,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1407786633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:05.186Z",
+      "crawledAt": "2026-08-30T23:24:00.807Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25394,7 +25394,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1371912533/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:01.049Z",
+      "crawledAt": "2026-08-30T23:23:57.081Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25478,7 +25478,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397178033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:36:55.909Z",
+      "crawledAt": "2026-08-30T23:23:52.430Z",
       "requirements": [],
       "requirementsByLocale": {
         "it": [
@@ -25563,7 +25563,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1407767833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:02.075Z",
+      "crawledAt": "2026-08-30T23:23:58.010Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25641,7 +25641,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1407975233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:00.010Z",
+      "crawledAt": "2026-08-30T23:23:56.154Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25730,7 +25730,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408001733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:57.941Z",
+      "crawledAt": "2026-08-30T23:23:54.311Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25808,7 +25808,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408006733/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:37:06.212Z",
+      "crawledAt": "2026-08-30T23:24:01.749Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25881,7 +25881,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1418131333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:52.807Z",
+      "crawledAt": "2026-08-30T23:23:49.622Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -25958,7 +25958,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1387740233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:50.798Z",
+      "crawledAt": "2026-08-30T23:23:47.785Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26043,7 +26043,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408081033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:49.784Z",
+      "crawledAt": "2026-08-30T23:23:46.886Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26121,7 +26121,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1397129533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:48.760Z",
+      "crawledAt": "2026-08-30T23:23:45.947Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26205,7 +26205,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1387712333/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:36:47.714Z",
+      "crawledAt": "2026-08-30T23:23:44.988Z",
       "requirements": [],
       "requirementsByLocale": {
         "en": [
@@ -26308,7 +26308,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408326133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:45.669Z",
+      "crawledAt": "2026-08-30T23:23:43.106Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26387,7 +26387,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408190933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:36:44.630Z",
+      "crawledAt": "2026-08-30T23:23:42.174Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26462,7 +26462,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408427733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:46.682Z",
+      "crawledAt": "2026-08-30T23:23:44.034Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26546,7 +26546,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1215797301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:43.614Z",
+      "crawledAt": "2026-08-30T23:23:41.233Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26623,7 +26623,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1280027801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:42.560Z",
+      "crawledAt": "2026-08-30T23:23:40.309Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26708,7 +26708,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408171433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:15.520Z",
+      "crawledAt": "2026-08-30T23:23:16.256Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26786,7 +26786,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398125233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:10.382Z",
+      "crawledAt": "2026-08-30T23:23:11.635Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -26923,7 +26923,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1283555101/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:13.490Z",
+      "crawledAt": "2026-08-30T23:23:14.435Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -27013,7 +27013,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398130133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:14.513Z",
+      "crawledAt": "2026-08-30T23:23:15.348Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27095,7 +27095,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398394233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:12.458Z",
+      "crawledAt": "2026-08-30T23:23:13.512Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27179,7 +27179,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1138926701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:11.419Z",
+      "crawledAt": "2026-08-30T23:23:12.563Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27264,7 +27264,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408948933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:08.213Z",
+      "crawledAt": "2026-08-30T23:23:09.806Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -27345,7 +27345,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1408990633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:09.241Z",
+      "crawledAt": "2026-08-30T23:23:10.722Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27421,7 +27421,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398130933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:07.175Z",
+      "crawledAt": "2026-08-30T23:23:08.872Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27504,7 +27504,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398127833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:06.149Z",
+      "crawledAt": "2026-08-30T23:23:07.958Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27587,7 +27587,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1283556801/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:05.150Z",
+      "crawledAt": "2026-08-30T23:23:07.036Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27671,7 +27671,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1283043701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:04.137Z",
+      "crawledAt": "2026-08-30T23:23:06.121Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27755,7 +27755,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1388836333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:03.201Z",
+      "crawledAt": "2026-08-30T23:23:05.211Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27853,7 +27853,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1379489933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:02.183Z",
+      "crawledAt": "2026-08-30T23:23:04.271Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -27934,7 +27934,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398053633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:01.151Z",
+      "crawledAt": "2026-08-30T23:23:03.296Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28018,7 +28018,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1398036433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:00.110Z",
+      "crawledAt": "2026-08-30T23:23:02.381Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28103,7 +28103,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1429092833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:59.085Z",
+      "crawledAt": "2026-08-30T23:23:01.446Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28176,7 +28176,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389377133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:54.961Z",
+      "crawledAt": "2026-08-30T23:22:57.756Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28265,7 +28265,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389413933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:57.031Z",
+      "crawledAt": "2026-08-30T23:22:59.599Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28349,7 +28349,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1203406501/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:58.055Z",
+      "crawledAt": "2026-08-30T23:23:00.526Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28429,7 +28429,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1379851933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:51.924Z",
+      "crawledAt": "2026-08-30T23:22:54.983Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28512,7 +28512,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1286601201/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:52.960Z",
+      "crawledAt": "2026-08-30T23:22:55.893Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28605,7 +28605,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1285125901/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:55.994Z",
+      "crawledAt": "2026-08-30T23:22:58.691Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28685,7 +28685,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1285830001/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:53.963Z",
+      "crawledAt": "2026-08-30T23:22:56.822Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28772,7 +28772,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1429733233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:50.894Z",
+      "crawledAt": "2026-08-30T23:22:54.008Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28845,7 +28845,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1429469333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:24.275Z",
+      "crawledAt": "2026-08-30T23:22:29.990Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -28908,7 +28908,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389544033/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:21.033Z",
+      "crawledAt": "2026-08-30T23:22:27.296Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -28989,7 +28989,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1391736533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:22.176Z",
+      "crawledAt": "2026-08-30T23:22:28.241Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29062,7 +29062,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1289119401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:19.995Z",
+      "crawledAt": "2026-08-30T23:22:26.353Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -29150,7 +29150,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1287751301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:18.984Z",
+      "crawledAt": "2026-08-30T23:22:25.426Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29235,7 +29235,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1288205301/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:23.226Z",
+      "crawledAt": "2026-08-30T23:22:29.074Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29319,7 +29319,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1288158401/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:17.923Z",
+      "crawledAt": "2026-08-30T23:22:24.399Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29403,7 +29403,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1430468933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:13.786Z",
+      "crawledAt": "2026-08-30T23:22:20.445Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29474,7 +29474,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1430490933/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:35:15.890Z",
+      "crawledAt": "2026-08-30T23:22:22.444Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29545,7 +29545,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1430443333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:16.908Z",
+      "crawledAt": "2026-08-30T23:22:23.458Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -29608,7 +29608,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1430033733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:14.864Z",
+      "crawledAt": "2026-08-30T23:22:21.435Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29679,7 +29679,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1419568933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:10.669Z",
+      "crawledAt": "2026-08-30T23:22:17.449Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29755,7 +29755,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1414598733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:11.740Z",
+      "crawledAt": "2026-08-30T23:22:18.466Z",
       "requirements": [],
       "requirementsByLocale": {},
       "firstSeenAt": "2026-08-25T21:49:31.039Z",
@@ -29833,7 +29833,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1419803733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:09.609Z",
+      "crawledAt": "2026-08-30T23:22:16.476Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29910,7 +29910,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1419722433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:12.771Z",
+      "crawledAt": "2026-08-30T23:22:19.461Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -29987,7 +29987,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/683681701/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:08.565Z",
+      "crawledAt": "2026-08-30T23:22:15.492Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugsByLocale": {
@@ -30062,7 +30062,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1370578933/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:07.537Z",
+      "crawledAt": "2026-08-30T23:22:14.431Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30148,7 +30148,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1370533533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:06.534Z",
+      "crawledAt": "2026-08-30T23:22:13.439Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30234,7 +30234,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1419897033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:05.523Z",
+      "crawledAt": "2026-08-30T23:22:12.459Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30311,7 +30311,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1431147733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:04.443Z",
+      "crawledAt": "2026-08-30T23:22:11.453Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -30374,7 +30374,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1430833133/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:03.310Z",
+      "crawledAt": "2026-08-30T23:22:10.426Z",
       "requirements": [],
       "requirementsByLocale": {},
       "needsRetranslation": true,
@@ -30445,7 +30445,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1420076633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:02.183Z",
+      "crawledAt": "2026-08-30T23:22:09.446Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30522,7 +30522,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399205433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:35:01.085Z",
+      "crawledAt": "2026-08-30T23:22:08.461Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30613,7 +30613,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399172533/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:59.961Z",
+      "crawledAt": "2026-08-30T23:22:07.392Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30697,7 +30697,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399226733/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:58.871Z",
+      "crawledAt": "2026-08-30T23:22:06.384Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30782,7 +30782,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399237033/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:57.771Z",
+      "crawledAt": "2026-08-30T23:22:05.331Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30868,7 +30868,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399967233/?locale=fr_FR",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:34:51.185Z",
+      "crawledAt": "2026-08-30T23:21:59.147Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -30948,7 +30948,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399641233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:50.072Z",
+      "crawledAt": "2026-08-30T23:21:58.152Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -31032,7 +31032,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1390034233/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:52.246Z",
+      "crawledAt": "2026-08-30T23:22:00.152Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -31119,7 +31119,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1389878433/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:53.333Z",
+      "crawledAt": "2026-08-30T23:22:01.163Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -31206,7 +31206,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399702833/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:54.386Z",
+      "crawledAt": "2026-08-30T23:22:02.165Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -31291,7 +31291,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1399967333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:48.958Z",
+      "crawledAt": "2026-08-30T23:21:57.141Z",
       "requirements": [],
       "requirementsByLocale": {},
       "previousSlugs": [
@@ -31375,7 +31375,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1431444633/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:56.576Z",
+      "crawledAt": "2026-08-30T23:22:04.226Z",
       "requirements": [],
       "requirementsByLocale": {
         "de": []
@@ -31393,7 +31393,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:34:56.576Z"
+      "firstSeenAt": "2026-08-30T23:22:04.226Z"
     },
     {
       "id": "hirslanden-ed3b33d64faa",
@@ -31440,7 +31440,7 @@
       "applyUrl": "https://careers.mediclinic.com/talentcommunity/apply/1431405333/?locale=de_DE",
       "source": "Hirslanden Klinik Dedicated Parser (SuccessFactors j2w)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:34:55.483Z",
+      "crawledAt": "2026-08-30T23:22:03.210Z",
       "requirements": [],
       "requirementsByLocale": {
         "de": []
@@ -31458,7 +31458,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:34:55.483Z"
+      "firstSeenAt": "2026-08-30T23:22:03.210Z"
     }
   ]
 }
