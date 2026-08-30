@@ -1,6 +1,6 @@
 {
   "crawlerKey": "vaxcyte",
-  "assembledAt": "2026-08-30T14:30:00.109Z",
+  "assembledAt": "2026-08-30T23:17:31.874Z",
   "jobs": [
     {
       "id": "vaxcyte-f558683786d7",
@@ -33,7 +33,7 @@
       "url": "https://boards.greenhouse.io/vaxcyte/jobs/5267677008?gh_jid=5267677008",
       "source": "Vaxcyte Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:29:54.471Z",
+      "crawledAt": "2026-08-30T23:17:26.070Z",
       "addressLocality": "Visp",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -117,7 +117,7 @@
       "url": "https://boards.greenhouse.io/vaxcyte/jobs/5311536008?gh_jid=5311536008",
       "source": "Vaxcyte Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:29:54.439Z",
+      "crawledAt": "2026-08-30T23:17:26.043Z",
       "addressLocality": "Visp",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -185,7 +185,7 @@
       "url": "https://boards.greenhouse.io/vaxcyte/jobs/5263512008?gh_jid=5263512008",
       "source": "Vaxcyte Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:29:54.422Z",
+      "crawledAt": "2026-08-30T23:17:26.036Z",
       "addressLocality": "Visp",
       "addressRegion": "VS",
       "addressCountry": "CH",
@@ -268,7 +268,7 @@
       "url": "https://boards.greenhouse.io/vaxcyte/jobs/5284887008?gh_jid=5284887008",
       "source": "Vaxcyte Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:29:54.402Z",
+      "crawledAt": "2026-08-30T23:17:26.026Z",
       "addressLocality": "Visp",
       "addressRegion": "VS",
       "addressCountry": "CH",
