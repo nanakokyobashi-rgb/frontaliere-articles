@@ -1,6 +1,6 @@
 {
   "crawlerKey": "rfsm-fribourg",
-  "assembledAt": "2026-08-30T14:57:30.821Z",
+  "assembledAt": "2026-08-30T23:41:16.530Z",
   "jobs": [
     {
       "id": "rfsm-fribourg-7f844c508cbd",
@@ -34,7 +34,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Horticulteur-rice%2C-option-floriculture%2C-RFSM-Marsens-Gruy/1369966357/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:27.456Z",
+      "crawledAt": "2026-08-30T23:41:13.771Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -122,7 +122,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Comptable-confirm%C3%A9-e%2C-RFSM-Marsens-Gruy/1370571657/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:26.659Z",
+      "crawledAt": "2026-08-30T23:41:13.014Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -185,7 +185,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Contr%C3%B4leur-euse-de-gestion%2C-RFSM-Marsens-Gruy/1370570757/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:25.864Z",
+      "crawledAt": "2026-08-30T23:41:12.165Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -247,7 +247,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Assistant-e-de-direction%2C-RFSM-Marsens%2C-Direction-g%C3%A9n%C3%A9rale-Gruy/1369298357/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:25.070Z",
+      "crawledAt": "2026-08-30T23:41:11.402Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -336,7 +336,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Chef-fe-de-clinique%2C-RFSM-Secteur-psychiatrie-et-psychoth%C3%A9rapie-adulte-Gruy/1350362157/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:24.269Z",
+      "crawledAt": "2026-08-30T23:41:10.638Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -425,7 +425,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-M%C3%A9decin-assistant-e%2C-RFSM-Secteur-psychiatrie-et-psychoth%C3%A9rapie-adulte-Gruy/1350361857/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:22.680Z",
+      "crawledAt": "2026-08-30T23:41:09.867Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -592,7 +592,8 @@
           "maxValue": 119000,
           "unitText": "YEAR"
         }
-      }
+      },
+      "crawlerMissStreak": 1
     },
     {
       "id": "rfsm-fribourg-6d1db82d9821",
@@ -626,7 +627,7 @@
       "url": "https://jobs.fr.ch/job/Villars-sur-Gl%C3%A2ne%2C-CH-Psychologue-psychoth%C3%A9rapeute-etou-en-formation%2C-RFSM-Villars-sur-Gl%C3%A2ne-Sari/1362614857/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:21.886Z",
+      "crawledAt": "2026-08-30T23:41:09.110Z",
       "addressLocality": "Villars-sur-Glâne",
       "addressRegion": "FR",
       "addressCountry": "CH",
@@ -701,7 +702,7 @@
       "url": "https://jobs.fr.ch/job/Marsens%2C-CH-Infirmier-%C3%A8re%2C-RFSM-Marsens-et-Villars-sur-Gl%C3%A2ne-pour-les-candidatures-spontan%C3%A9es-Gruy/1349950757/",
       "source": "RFSM - Réseau fribourgeois santé mentale Dedicated Parser",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T14:57:21.061Z",
+      "crawledAt": "2026-08-30T23:41:08.321Z",
       "addressLocality": "Marsens",
       "addressRegion": "FR",
       "addressCountry": "CH",
