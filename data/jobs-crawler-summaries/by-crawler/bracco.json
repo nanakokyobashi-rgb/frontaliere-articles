@@ -1,20 +1,21 @@
 {
   "key": "bracco",
   "label": "Bracco Suisse",
-  "generatedAt": "2026-08-30T14:32:23.809Z",
+  "generatedAt": "2026-08-30T23:33:55.273Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 8984,
-  "avgDurationMs": 8984,
+  "durationMs": 10021,
+  "avgDurationMs": 10021,
   "durationHistory": [
     8810,
     8542,
     10265,
     10157,
-    8984
+    8984,
+    10021
   ],
   "newJobs": [],
   "updatedJobs": [],
