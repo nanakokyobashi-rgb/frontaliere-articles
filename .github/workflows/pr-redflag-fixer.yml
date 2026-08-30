@@ -301,6 +301,49 @@ jobs:
         if: steps.guard.outputs.proceed == 'true'
         run: echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
 
+      # Contesto della PR + della review, deterministico e BOUNDED, prima di
+      # spendere un turno Claude — stesso pattern del gemello sul sito
+      # (frontaliere-si-o-no#6679, "Collect PR + review context"). Il prompt
+      # sotto rifaceva da sé, a OGNI round, `gh pr view --json title,body,
+      # headRefName,files` (files già fetchato sopra, nello step guard, per
+      # il tier) e `gh api .../reviews`. Zero-Claude qui, un bundle, una Read.
+      - name: Collect PR + review context (zero-Claude)
+        id: ctx
+        if: steps.guard.outputs.proceed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -uo pipefail
+          OUT="$RUNNER_TEMP/redflag"
+          mkdir -p "$OUT"
+
+          gh pr view "$PR_NUMBER" --repo "$REPO" --json title,body,headRefName \
+            > "$OUT/pr.json" 2>/dev/null || echo '{}' > "$OUT/pr.json"
+          # REST paginata, non `--json files` (tronca a 100 in silenzio sopra
+          # quella soglia — stessa trappola nota sul sito).
+          gh api "repos/$REPO/pulls/$PR_NUMBER/files" --paginate --jq '.[].filename' \
+            > "$OUT/files.txt" 2>/dev/null || : > "$OUT/files.txt"
+          gh api "repos/$REPO/pulls/$PR_NUMBER/reviews" \
+            --jq '[.[] | select(.user.login|test("claude";"i"))] | last | .body // empty' \
+            > "$OUT/latest-review.md" 2>/dev/null || : > "$OUT/latest-review.md"
+
+          {
+            echo "# Redflag-fix bundle — PR #$PR_NUMBER"
+            echo
+            echo "## PR metadata (title, body, headRefName)"
+            cat "$OUT/pr.json"
+            echo
+            echo "## Changed file list"
+            cat "$OUT/files.txt"
+            echo
+            echo '## Ultima review Claude (🔴 findings)'
+            cat "$OUT/latest-review.md"
+          } > "$OUT/redflag-bundle.md"
+          echo "Prefetched redflag context in $OUT:"
+          ls -la "$OUT"
+
       - name: Setup Headroom compression proxy
         if: steps.guard.outputs.proceed == 'true'
         uses: ./.github/actions/setup-headroom
@@ -364,7 +407,7 @@ jobs:
 
             **Bootstrap:**
             1. Leggi `REVIEW.md` (severity/scopo) + `AGENTS.md` (non-negotiables + Privacy). VINCOLANTI.
-            2. Carica la PR + le review: `gh pr view $PR_NUMBER --json title,body,headRefName,files`, `gh api repos/$REPO/pulls/$PR_NUMBER/reviews --jq '[.[] | select(.user.login|test("claude";"i"))] | last | .body'`. Il branch è già checkoutato sulla head della PR.
+            2. Il bundle deterministico è già pronto in `${{ runner.temp }}/redflag/redflag-bundle.md` (prefetch zero-Claude): PR metadata (title/body/headRefName), elenco file completo (REST paginata, non tronca a 100), ultima review Claude con i 🔴. **Leggilo con `Read` come prima cosa; non rieseguire `gh pr view` o `gh api .../reviews` per gli stessi dati** — solo se una sezione risulta vuota/mancante e ti serve davvero, ripeti la singola chiamata mancante. Il branch è già checkoutato sulla head della PR.
 
             **Obiettivo:** applica un fix CLASS-COMPLETE ai SOLI findings `🔴 Important` della review più recente su QUESTO branch. NON mergiare.
 
