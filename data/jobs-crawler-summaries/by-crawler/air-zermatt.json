@@ -1,7 +1,7 @@
 {
   "key": "air-zermatt",
   "label": "Air Zermatt AG",
-  "generatedAt": "2026-08-30T15:00:50.730Z",
+  "generatedAt": "2026-08-30T23:29:13.787Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,14 +9,15 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 3914,
-  "avgDurationMs": 3914,
+  "durationMs": 5284,
+  "avgDurationMs": 5284,
   "durationHistory": [
     4483,
     5111,
     5365,
     5441,
-    3914
+    3914,
+    5284
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -45,7 +46,7 @@
       "applyUrl": "https://www.air-zermatt.ch/de/service/offene-stellen/stipendium-atc-amp-swiss-sherpa-foundation-442",
       "source": "Air Zermatt Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:00:49.130Z",
+      "crawledAt": "2026-08-30T23:29:10.863Z",
       "needsRetranslation": false,
       "firstSeenAt": "2026-08-26T10:00:52.736Z",
       "_qualityScore": 76,
@@ -81,7 +82,7 @@
       "applyUrl": "https://www.air-zermatt.ch/de/service/offene-stellen/transport-oder-rettungssanitaeterin-mit-anteil-flugbetrieb-100--571",
       "source": "Air Zermatt Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T15:00:48.900Z",
+      "crawledAt": "2026-08-30T23:29:10.476Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-18T22:00:47.781Z",
       "_qualityScore": 85,
