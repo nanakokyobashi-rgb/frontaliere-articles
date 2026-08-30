@@ -1,20 +1,21 @@
 {
   "key": "sintetica",
   "label": "Sintetica SA",
-  "generatedAt": "2026-08-30T14:27:14.901Z",
+  "generatedAt": "2026-08-30T23:15:42.728Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 10,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 9205,
-  "avgDurationMs": 9205,
+  "durationMs": 11355,
+  "avgDurationMs": 11355,
   "durationHistory": [
     9939,
     10443,
     9707,
     9527,
-    9205
+    9205,
+    11355
   ],
   "newJobs": [],
   "updatedJobs": [
