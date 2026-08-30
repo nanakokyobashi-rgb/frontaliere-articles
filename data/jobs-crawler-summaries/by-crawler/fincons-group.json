@@ -1,19 +1,20 @@
 {
   "key": "fincons-group",
   "label": "Fincons Group",
-  "generatedAt": "2026-08-30T14:35:55.254Z",
+  "generatedAt": "2026-08-30T15:35:53.152Z",
   "total": 5,
   "newCount": 0,
   "updatedCount": 5,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 2168,
-  "avgDurationMs": 2168,
+  "durationMs": 1710,
+  "avgDurationMs": 1710,
   "durationHistory": [
     1516,
     1616,
     1575,
-    2168
+    2168,
+    1710
   ],
   "newJobs": [],
   "updatedJobs": [
