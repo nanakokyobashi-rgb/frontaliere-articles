@@ -1,7 +1,7 @@
 {
   "key": "klinik-aadorf",
   "label": "Klinik Aadorf",
-  "generatedAt": "2026-08-30T14:30:15.645Z",
+  "generatedAt": "2026-08-30T23:16:36.376Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,13 +9,14 @@
   "updatedCount": 3,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 6261,
-  "avgDurationMs": 6261,
+  "durationMs": 6113,
+  "avgDurationMs": 6113,
   "durationHistory": [
     6557,
     6534,
     12175,
-    6261
+    6261,
+    6113
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -32,7 +33,7 @@
       "url": "https://jobs.dualoo.com/portal/3ibnwlo9/ec61d00e-038b-4056-b9b4-7b3dfe0b3821/detail?lang=DE",
       "source": "Klinik Aadorf Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:10.293Z",
+      "crawledAt": "2026-08-30T23:16:30.988Z",
       "addressLocality": "Aadorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -69,7 +70,7 @@
       "url": "https://jobs.dualoo.com/portal/3ibnwlo9/0f84dc0a-aebd-499f-964f-415dbe22fb1f/detail?lang=DE",
       "source": "Klinik Aadorf Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:11.267Z",
+      "crawledAt": "2026-08-30T23:16:31.852Z",
       "addressLocality": "Aadorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
@@ -106,7 +107,7 @@
       "url": "https://jobs.dualoo.com/portal/3ibnwlo9/8216cfc3-8d7e-4f66-9b5b-979dd7655622/detail?lang=DE",
       "source": "Klinik Aadorf Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:30:10.776Z",
+      "crawledAt": "2026-08-30T23:16:31.423Z",
       "addressLocality": "Aadorf",
       "addressRegion": "TG",
       "addressCountry": "CH",
