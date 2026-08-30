@@ -1,7 +1,7 @@
 {
   "key": "oetiker",
   "label": "Oetiker",
-  "generatedAt": "2026-08-29T23:13:24.236Z",
+  "generatedAt": "2026-08-30T23:21:17.308Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,13 +9,14 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 5477,
-  "avgDurationMs": 5477,
+  "durationMs": 4605,
+  "avgDurationMs": 4605,
   "durationHistory": [
     5427,
     5408,
     4963,
-    5477
+    5477,
+    4605
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://jobs.smartrecruiters.com/Oetiker/744000143252339-lehrstelle-als-polymechaniker-in-efz-all-?oga=true",
       "source": "Oetiker Dedicated Parser (SmartRecruiters)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:13:20.170Z",
+      "crawledAt": "2026-08-30T23:21:13.867Z",
       "addressLocality": "Horgen",
       "addressRegion": "ZH",
       "streetAddress": "Spätzstrasse 11",
@@ -70,7 +71,7 @@
       "url": "https://jobs.smartrecruiters.com/Oetiker/744000135999378-it-service-management-specialist-emea-all-?oga=true",
       "source": "Oetiker Dedicated Parser (SmartRecruiters)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:13:20.208Z",
+      "crawledAt": "2026-08-30T23:21:13.916Z",
       "addressLocality": "Horgen",
       "addressRegion": "ZH",
       "streetAddress": "Spätzstrasse 11",
