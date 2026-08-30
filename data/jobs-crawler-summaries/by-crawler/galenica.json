@@ -1,18 +1,19 @@
 {
   "key": "galenica",
   "label": "Galenica",
-  "generatedAt": "2026-08-29T23:09:16.192Z",
+  "generatedAt": "2026-08-30T14:30:40.001Z",
   "total": 381,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 99032,
-  "avgDurationMs": 99032,
+  "durationMs": 94021,
+  "avgDurationMs": 94021,
   "durationHistory": [
     79409,
     90987,
-    99032
+    99032,
+    94021
   ],
   "newJobs": [],
   "updatedJobs": [
