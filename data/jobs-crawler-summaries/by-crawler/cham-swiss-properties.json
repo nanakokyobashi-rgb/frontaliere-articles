@@ -1,7 +1,7 @@
 {
   "key": "cham-swiss-properties",
   "label": "Cham Swiss Properties",
-  "generatedAt": "2026-08-29T23:23:17.696Z",
+  "generatedAt": "2026-08-30T14:54:14.320Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,13 +9,14 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4767,
-  "avgDurationMs": 4767,
+  "durationMs": 4177,
+  "avgDurationMs": 4177,
   "durationHistory": [
     4318,
     5542,
     4573,
-    4767
+    4767,
+    4177
   ],
   "newJobs": [
     {
@@ -31,7 +32,7 @@
       "url": "https://jobs.dualoo.com/portal/6j9quii0/e92babc9-d7a7-43ad-90f7-d07c64aae4f0/detail?lang=DE",
       "source": "Cham Swiss Properties Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:23:14.274Z",
+      "crawledAt": "2026-08-30T14:54:11.587Z",
       "addressLocality": "Cham",
       "addressRegion": "ZG",
       "streetAddress": "Fabrikstrasse 5",
@@ -45,7 +46,7 @@
       "sector": "Immobiliare / Project Management",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://jobs.dualoo.com/portal/6j9quii0/e92babc9-d7a7-43ad-90f7-d07c64aae4f0/detail?lang=DE",
       "hiringOrganizationName": "Cham Swiss Properties AG",
       "_qualityScore": 69,
@@ -71,7 +72,7 @@
       "url": "https://jobs.dualoo.com/portal/6j9quii0/157f7d95-d715-4a8f-a480-6f8601ffec1d/detail?lang=DE",
       "source": "Cham Swiss Properties Dedicated Parser (Dualoo)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:23:13.799Z",
+      "crawledAt": "2026-08-30T14:54:11.088Z",
       "addressLocality": "Cham",
       "addressRegion": "ZG",
       "streetAddress": "Fabrikstrasse 5",
