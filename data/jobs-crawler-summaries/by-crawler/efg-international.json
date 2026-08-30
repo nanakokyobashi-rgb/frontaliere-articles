@@ -1,19 +1,20 @@
 {
   "key": "efg-international",
   "label": "EFG",
-  "generatedAt": "2026-08-29T23:19:50.441Z",
+  "generatedAt": "2026-08-30T14:33:06.776Z",
   "total": 30,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 29,
-  "durationMs": 21237,
-  "avgDurationMs": 21237,
+  "durationMs": 17653,
+  "avgDurationMs": 17653,
   "durationHistory": [
     19388,
     18488,
     20962,
-    21237
+    21237,
+    17653
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -109,7 +110,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.725Z",
+      "crawledAt": "2026-08-30T14:33:03.910Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-08-13",
@@ -214,7 +215,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.723Z",
+      "crawledAt": "2026-08-30T14:33:03.907Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "datePosted": "2026-08-04",
@@ -335,7 +336,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.722Z",
+      "crawledAt": "2026-08-30T14:33:03.905Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "datePosted": "2026-07-20",
@@ -499,7 +500,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.721Z",
+      "crawledAt": "2026-08-30T14:33:03.903Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-06-25",
@@ -621,7 +622,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.719Z",
+      "crawledAt": "2026-08-30T14:33:03.900Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "datePosted": "2026-07-21",
@@ -728,7 +729,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.718Z",
+      "crawledAt": "2026-08-30T14:33:03.899Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-07-23",
@@ -781,7 +782,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.717Z",
+      "crawledAt": "2026-08-30T14:33:03.897Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-05-20",
@@ -836,7 +837,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.715Z",
+      "crawledAt": "2026-08-30T14:33:03.895Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-06-03",
@@ -965,7 +966,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.714Z",
+      "crawledAt": "2026-08-30T14:33:03.893Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-04-01",
@@ -1066,7 +1067,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.712Z",
+      "crawledAt": "2026-08-30T14:33:03.890Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "sourceLang": "en",
@@ -1121,7 +1122,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.707Z",
+      "crawledAt": "2026-08-30T14:33:03.881Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-05-28",
@@ -1245,7 +1246,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.705Z",
+      "crawledAt": "2026-08-30T14:33:03.879Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-01-19",
@@ -1300,7 +1301,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.703Z",
+      "crawledAt": "2026-08-30T14:33:03.876Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "datePosted": "2026-04-08",
@@ -1427,7 +1428,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.690Z",
+      "crawledAt": "2026-08-30T14:33:03.855Z",
       "addressLocality": "Zurich",
       "addressCountry": "CH",
       "sourceLang": "en",
@@ -1483,7 +1484,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.688Z",
+      "crawledAt": "2026-08-30T14:33:03.851Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-06-24",
@@ -1585,7 +1586,7 @@
           }
         }
       },
-      "crawledAt": "2026-08-29T23:19:47.726Z",
+      "crawledAt": "2026-08-30T14:33:03.914Z",
       "addressLocality": "Geneve",
       "addressCountry": "CH",
       "datePosted": "2026-08-14",
