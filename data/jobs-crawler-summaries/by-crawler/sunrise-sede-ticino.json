@@ -1,19 +1,20 @@
 {
   "key": "sunrise-sede-ticino",
   "label": "Sunrise Communications AG",
-  "generatedAt": "2026-08-29T23:15:40.584Z",
+  "generatedAt": "2026-08-30T14:45:41.330Z",
   "total": 15,
-  "newCount": 9,
-  "updatedCount": 13,
-  "removedCount": 2,
+  "newCount": 10,
+  "updatedCount": 14,
+  "removedCount": 1,
   "unchangedCount": 0,
-  "durationMs": 14282,
-  "avgDurationMs": 14282,
+  "durationMs": 14649,
+  "avgDurationMs": 14649,
   "durationHistory": [
     16999,
     15416,
     16177,
-    14282
+    14282,
+    14649
   ],
   "newJobs": [
     {
