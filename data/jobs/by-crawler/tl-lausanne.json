@@ -1,6 +1,6 @@
 {
   "crawlerKey": "tl-lausanne",
-  "assembledAt": "2026-08-30T15:02:46.574Z",
+  "assembledAt": "2026-08-30T15:21:25.744Z",
   "jobs": [
     {
       "id": "tl-lausanne-8c612a372231",
@@ -34,7 +34,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Stagiaire-Approvisionnement-Supply-Chain-Ferroviaire/1424618233/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:43.688Z",
+      "crawledAt": "2026-08-30T15:21:22.962Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -112,7 +112,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Chef%C2%B7fe-de-projet-ferroviaire-Installations-de-S%C3%A9curit%C3%A9/1425742733/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:43.063Z",
+      "crawledAt": "2026-08-30T15:21:22.390Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -214,7 +214,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Directrice-ou-Directeur-Strat%C3%A9gie-&-Transformation-d'entreprise/1429773933/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:41.775Z",
+      "crawledAt": "2026-08-30T15:21:21.114Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -278,7 +278,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Directrice-ou-Directeur-Route-&-immobilier/1429774733/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:42.380Z",
+      "crawledAt": "2026-08-30T15:21:21.702Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -342,7 +342,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Conductrices-et-conducteurs-de-bus-et-trolleybus/1281245901/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:41.159Z",
+      "crawledAt": "2026-08-30T15:21:20.531Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -441,7 +441,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Data-Engineer/1431535933/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:02:40.509Z",
+      "crawledAt": "2026-08-30T15:21:19.939Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -473,7 +473,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T15:02:40.509Z"
+      "firstSeenAt": "2026-08-30T15:21:19.939Z"
     }
   ]
 }
