@@ -1,20 +1,21 @@
 {
   "key": "a-group",
   "label": "a-plus-plus-group",
-  "generatedAt": "2026-08-30T14:48:49.070Z",
+  "generatedAt": "2026-08-30T23:38:26.494Z",
   "total": 2,
   "newCount": 3,
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4586,
-  "avgDurationMs": 4586,
+  "durationMs": 4328,
+  "avgDurationMs": 4328,
   "durationHistory": [
     5315,
     4791,
     5051,
     4727,
-    4586
+    4586,
+    4328
   ],
   "newJobs": [
     {
