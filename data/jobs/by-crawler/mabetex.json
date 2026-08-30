@@ -1,6 +1,6 @@
 {
   "crawlerKey": "mabetex",
-  "assembledAt": "2026-08-29T23:47:37.852Z",
+  "assembledAt": "2026-08-30T14:45:42.338Z",
   "jobs": [
     {
       "id": "mabetex-d49cdecce749",
@@ -46,7 +46,7 @@
       "applyUrl": "https://www.mabetex.com/career/",
       "source": "Mabetex Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:47:35.318Z",
+      "crawledAt": "2026-08-30T14:45:40.149Z",
       "previousSlugs": [
         "project-manager-lugano-mabetex",
         "responsabile-del-progetto-mabetex-group-southwest-africa"
