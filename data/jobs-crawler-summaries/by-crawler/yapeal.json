@@ -1,7 +1,7 @@
 {
   "key": "yapeal",
   "label": "Yapeal",
-  "generatedAt": "2026-08-29T23:05:53.064Z",
+  "generatedAt": "2026-08-30T14:27:08.991Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,13 +9,14 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5393,
-  "avgDurationMs": 5393,
+  "durationMs": 4710,
+  "avgDurationMs": 4710,
   "durationHistory": [
     5917,
     5364,
     4881,
-    5393
+    5393,
+    4710
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://yapeal-ag.jobs.personio.de/job/2733274",
       "source": "Yapeal Dedicated Parser (Personio)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:05:49.019Z",
+      "crawledAt": "2026-08-30T14:27:05.633Z",
       "addressLocality": "Zurich - Hybrid",
       "addressRegion": "ZH",
       "streetAddress": "Max-Högger-Strasse 6",
