@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ipersonal",
-  "assembledAt": "2026-08-29T23:09:43.613Z",
+  "assembledAt": "2026-08-30T14:31:46.561Z",
   "jobs": [
     {
       "id": "ipersonal-7f14d039da7d",
@@ -4676,7 +4676,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachkraft-efz-fuer-notfallpool-80-100-in-suhr-gesucht/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:09:38.437Z",
+      "crawledAt": "2026-08-30T14:31:42.867Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4687,7 +4687,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachkraft-efz-fuer-notfallpool-80-100-in-suhr-gesucht/",
       "requirements": [],
       "requirementsByLocale": {
@@ -4715,7 +4715,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:38.437Z"
+      "firstSeenAt": "2026-08-30T14:31:42.867Z"
     },
     {
       "id": "ipersonal-d8ef5e6a14a7",
@@ -4745,7 +4745,7 @@
       "url": "https://med-ipersonal.ch/jobs/anaesthesistin-anaesthesist-fuer-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:09:38.133Z",
+      "crawledAt": "2026-08-30T14:31:42.563Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4756,7 +4756,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/anaesthesistin-anaesthesist-fuer-intensiv-und-notfallmedizin-80-100-in-appenzell-ausserrhoden-gesucht/",
       "requirements": [],
       "requirementsByLocale": {
@@ -4784,7 +4784,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:38.133Z"
+      "firstSeenAt": "2026-08-30T14:31:42.563Z"
     },
     {
       "id": "ipersonal-21dee6d70e63",
@@ -4814,7 +4814,7 @@
       "url": "https://med-ipersonal.ch/jobs/personalberater-in-fuer-die-medizinbranche-gesucht-m-w-d-100-in-region-waedenswil/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:09:37.830Z",
+      "crawledAt": "2026-08-30T14:31:42.259Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4825,7 +4825,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/personalberater-in-fuer-die-medizinbranche-gesucht-m-w-d-100-in-region-waedenswil/",
       "requirements": [],
       "requirementsByLocale": {
@@ -4853,7 +4853,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:37.830Z"
+      "firstSeenAt": "2026-08-30T14:31:42.259Z"
     },
     {
       "id": "ipersonal-0cd4d66cabbe",
@@ -4883,7 +4883,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:09:37.528Z",
+      "crawledAt": "2026-08-30T14:31:41.957Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4894,7 +4894,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-80-100-in-kloten-gemeinsam-die-zukunft-gestalten/",
       "requirements": [],
       "requirementsByLocale": {
@@ -4914,7 +4914,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:37.528Z"
+      "firstSeenAt": "2026-08-30T14:31:41.957Z"
     },
     {
       "id": "ipersonal-468c91016335",
@@ -4947,7 +4947,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie-mit-uns-die-zukunft-der-pflege/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:09:37.226Z",
+      "crawledAt": "2026-08-30T14:31:41.654Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -4958,7 +4958,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-teamleiter-in-pflegeabteilung-80-100-in-zumikon-gestalten-sie-mit-uns-die-zukunft-der-pflege/",
       "requirements": [],
       "requirementsByLocale": {
@@ -4978,7 +4978,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:37.226Z"
+      "firstSeenAt": "2026-08-30T14:31:41.654Z"
     },
     {
       "id": "ipersonal-e0c1123199a6",
@@ -5008,7 +5008,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-staefa-ihre-kompetenz-ist-gefragt/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:09:36.923Z",
+      "crawledAt": "2026-08-30T14:31:41.353Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -5019,7 +5019,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-staefa-ihre-kompetenz-ist-gefragt/",
       "requirements": [],
       "requirementsByLocale": {
@@ -5039,7 +5039,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:36.923Z"
+      "firstSeenAt": "2026-08-30T14:31:41.353Z"
     },
     {
       "id": "ipersonal-2ba49af09172",
@@ -5072,7 +5072,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-waedenswil-werden-sie-teil-eines-professionellen-teams/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:09:36.619Z",
+      "crawledAt": "2026-08-30T14:31:41.051Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -5083,7 +5083,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-waedenswil-werden-sie-teil-eines-professionellen-teams/",
       "requirements": [],
       "requirementsByLocale": {
@@ -5103,7 +5103,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:36.619Z"
+      "firstSeenAt": "2026-08-30T14:31:41.051Z"
     },
     {
       "id": "ipersonal-6334915b6410",
@@ -5136,7 +5136,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-freienbach-werden-sie-teil-eines-professionellen-teams/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:09:36.316Z",
+      "crawledAt": "2026-08-30T14:31:40.747Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -5147,7 +5147,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-freienbach-werden-sie-teil-eines-professionellen-teams/",
       "requirements": [],
       "requirementsByLocale": {
@@ -5167,7 +5167,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:36.316Z"
+      "firstSeenAt": "2026-08-30T14:31:40.747Z"
     },
     {
       "id": "ipersonal-03d01cfffccb",
@@ -5200,7 +5200,7 @@
       "url": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-horgen-exzellente-pflege-braucht-sie/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:09:36.011Z",
+      "crawledAt": "2026-08-30T14:31:40.444Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -5211,7 +5211,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/dipl-pflegefachperson-hf-fh-fuer-spitaeler-oder-altersheime-80-100-in-horgen-exzellente-pflege-braucht-sie/",
       "requirements": [],
       "requirementsByLocale": {
@@ -5231,7 +5231,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:36.011Z"
+      "firstSeenAt": "2026-08-30T14:31:40.444Z"
     },
     {
       "id": "ipersonal-a5fece1ffe54",
@@ -5264,7 +5264,7 @@
       "url": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-dietikon-mit-unterstuetzung-bei-der-relocation/",
       "source": "iPersonal AG Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:09:35.690Z",
+      "crawledAt": "2026-08-30T14:31:40.141Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -5275,7 +5275,7 @@
       "sector": "Altro",
       "currency": "CHF",
       "featured": false,
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "applyUrl": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-dietikon-mit-unterstuetzung-bei-der-relocation/",
       "requirements": [],
       "requirementsByLocale": {
@@ -5303,7 +5303,341 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-29T23:09:35.690Z"
+      "firstSeenAt": "2026-08-30T14:31:40.141Z"
+    },
+    {
+      "id": "ipersonal-df87d7ee982d",
+      "slug": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-zurich-ipersonal",
+      "slugByLocale": {
+        "de": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-zurich-ipersonal",
+        "it": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-zurich-ipersonal",
+        "en": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-zurich-ipersonal",
+        "fr": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-zurich-ipersonal"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich",
+      "titleByLocale": {
+        "de": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich",
+        "en": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich",
+        "it": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich",
+        "fr": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich"
+      },
+      "description": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich — iPersonal AG",
+        "en": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Zürich — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/experte-expertin-anaesthesiepflege-arbeiten-im-interdisziplinaeren-team-in-zuerich/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T14:31:39.838Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/experte-expertin-anaesthesiepflege-arbeiten-im-interdisziplinaeren-team-in-zuerich/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T14:31:39.838Z"
+    },
+    {
+      "id": "ipersonal-a493e21878fc",
+      "slug": "anasthesiepflege-experte-m-w-d-per-la-schweiz-arbeiten-in-mettmenstetten-con-unterstutzung-bei-der-relocation-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-mettmenstetten-mit",
+        "it": "anasthesiepflege-experte-m-w-d-per-la-schweiz-arbeiten-in-mettmenstetten-con-unterstutzung-bei-der-relocation-ipersonal-ag-lugano",
+        "en": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-mettmenstetten-mit",
+        "fr": "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-mettmenstetten-mit"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation",
+      "titleByLocale": {
+        "de": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation",
+        "it": "Anästhesiepflege-Experte (m/w/d) per la Schweiz – Arbeiten in Mettmenstetten con Unterstützung bei der Relocation",
+        "en": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation",
+        "fr": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation"
+      },
+      "description": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation — iPersonal AG",
+        "it": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation — iPersonal AG",
+        "en": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation — iPersonal AG",
+        "fr": "Anästhesiepflege-Experte (m/w/d) für die Schweiz – Arbeiten in Mettmenstetten mit Unterstützung bei der Relocation — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-mettmenstetten-mit-unterstuetzung-bei-der-relocation/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T14:31:39.534Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/anaesthesiepflege-experte-m-w-d-fuer-die-schweiz-arbeiten-in-mettmenstetten-mit-unterstuetzung-bei-der-relocation/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-mettmenstetten-mit"
+        ]
+      },
+      "previousSlugs": [
+        "anasthesiepflege-experte-m-w-d-fur-die-schweiz-arbeiten-in-mettmenstetten-mit"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T14:31:39.534Z"
+    },
+    {
+      "id": "ipersonal-71aabd49bfa9",
+      "slug": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-niederglatt",
+      "slugByLocale": {
+        "de": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-niederglatt",
+        "it": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-niederglatt",
+        "en": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-niederglatt",
+        "fr": "experte-expertin-anasthesiepflege-arbeiten-im-interdisziplinaren-team-in-niederglatt"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt",
+      "titleByLocale": {
+        "de": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt",
+        "en": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt",
+        "it": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt",
+        "fr": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt"
+      },
+      "description": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt — iPersonal AG",
+        "en": "Experte/Expertin Anästhesiepflege – Arbeiten im interdisziplinären Team in Niederglatt — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/experte-expertin-anaesthesiepflege-arbeiten-im-interdisziplinaeren-team-in-niederglatt/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T14:31:39.230Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/experte-expertin-anaesthesiepflege-arbeiten-im-interdisziplinaeren-team-in-niederglatt/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T14:31:39.230Z"
+    },
+    {
+      "id": "ipersonal-2e08bfd399fb",
+      "slug": "hebamme-per-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "hebamme-fur-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ch",
+        "it": "hebamme-per-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ag-lugano",
+        "en": "hebamme-fur-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ch",
+        "fr": "hebamme-fur-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht",
+      "titleByLocale": {
+        "de": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht",
+        "en": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht",
+        "it": "Hebamme per Geburtsklinik (80-100%) in Hombrechtikon gesucht",
+        "fr": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht"
+      },
+      "description": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Hebamme für Geburtsklinik (80-100%) in Hombrechtikon gesucht — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/hebamme-fuer-geburtsklinik-80-100-in-hombrechtikon-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T14:31:38.927Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/hebamme-fuer-geburtsklinik-80-100-in-hombrechtikon-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "hebamme-fur-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "hebamme-fur-geburtsklinik-80-100-in-hombrechtikon-gesucht-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T14:31:38.927Z"
+    },
+    {
+      "id": "ipersonal-9215b0a6380c",
+      "slug": "hebamme-per-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ag-lugano",
+      "slugByLocale": {
+        "de": "hebamme-fur-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ch",
+        "it": "hebamme-per-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ag-lugano",
+        "en": "hebamme-fur-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ch",
+        "fr": "hebamme-fur-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ch"
+      },
+      "company": "iPersonal AG",
+      "companyKey": "ipersonal",
+      "companyDomain": "med-ipersonal.ch",
+      "title": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht",
+      "titleByLocale": {
+        "de": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht",
+        "en": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht",
+        "it": "Hebamme per Geburtsklinik (80-100%) in Otelfingen gesucht",
+        "fr": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht"
+      },
+      "description": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht — iPersonal AG",
+      "descriptionByLocale": {
+        "de": "Hebamme für Geburtsklinik (80-100%) in Otelfingen gesucht — iPersonal AG"
+      },
+      "location": "Lugano",
+      "canton": "TI",
+      "url": "https://med-ipersonal.ch/jobs/hebamme-fuer-geburtsklinik-80-100-in-otelfingen-gesucht/",
+      "source": "iPersonal AG Dedicated Parser",
+      "sourceLang": "en",
+      "crawledAt": "2026-08-30T14:31:38.606Z",
+      "addressLocality": "Lugano",
+      "addressCountry": "CH",
+      "country": "CH",
+      "category": "Altro",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "mid",
+      "sector": "Altro",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-30",
+      "applyUrl": "https://med-ipersonal.ch/jobs/hebamme-fuer-geburtsklinik-80-100-in-otelfingen-gesucht/",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "needsRetranslation": true,
+      "previousSlugsByLocale": {
+        "it": [
+          "hebamme-fur-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ch"
+        ]
+      },
+      "previousSlugs": [
+        "hebamme-fur-geburtsklinik-80-100-in-otelfingen-gesucht-ipersonal-ch"
+      ],
+      "salaryMin": 49500,
+      "salaryMax": 75000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 49500,
+          "maxValue": 75000,
+          "unitText": "YEAR"
+        }
+      },
+      "addressRegion": "TI",
+      "firstSeenAt": "2026-08-30T14:31:38.606Z"
     }
   ]
 }
