@@ -1,7 +1,7 @@
 {
   "key": "medics-labor",
   "label": "Medics Labor AG",
-  "generatedAt": "2026-08-29T23:23:05.016Z",
+  "generatedAt": "2026-08-30T14:57:26.133Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,13 +9,14 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 7120,
-  "avgDurationMs": 7120,
+  "durationMs": 7510,
+  "avgDurationMs": 7510,
   "durationHistory": [
     6169,
     7143,
     7663,
-    7120
+    7120,
+    7510
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -32,7 +33,7 @@
       "url": "https://app.reflinejobs.io/1474/0123/pub/100/index.html",
       "source": "Medics Labor Dedicated Parser (Refline 1474)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:22:59.609Z",
+      "crawledAt": "2026-08-30T14:57:21.071Z",
       "addressLocality": "Bern",
       "addressRegion": "BE",
       "addressCountry": "CH",
