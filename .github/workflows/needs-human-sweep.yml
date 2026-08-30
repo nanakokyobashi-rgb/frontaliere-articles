@@ -172,6 +172,10 @@ jobs:
           QUOTA_BEACON_PEER_REPO: valerielinc-ops/frontaliere-si-o-no
         run: node scripts/ci/check-quota-backoff.mjs
 
+      - name: Setup Headroom compression proxy
+        if: steps.quota.outputs.quota_blocked != 'true'
+        uses: ./.github/actions/setup-headroom
+
       - name: Run Claude sweep
         id: claude_sweep
         if: steps.quota.outputs.quota_blocked != 'true'
