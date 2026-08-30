@@ -1,7 +1,7 @@
 {
   "key": "csvp-poschiavo",
   "label": "Centro Sanitario Valposchiavo (CSVP)",
-  "generatedAt": "2026-08-29T23:21:48.380Z",
+  "generatedAt": "2026-08-30T14:42:08.178Z",
   "total": 1,
   "discovered": null,
   "written": 1,
@@ -9,12 +9,13 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4797,
-  "avgDurationMs": 4797,
+  "durationMs": 4874,
+  "avgDurationMs": 4874,
   "durationHistory": [
     5257,
     4200,
-    4797
+    4797,
+    4874
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -31,7 +32,7 @@
       "url": "https://www.csvp.ch/it/lavora-con-noi/cerchiamo/922-infermiere-sss-oss-fage",
       "source": "CSVP Dedicated Parser (Joomla HTML)",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:21:45.388Z",
+      "crawledAt": "2026-08-30T14:42:05.448Z",
       "addressLocality": "Poschiavo",
       "addressRegion": "GR",
       "addressCountry": "CH",
