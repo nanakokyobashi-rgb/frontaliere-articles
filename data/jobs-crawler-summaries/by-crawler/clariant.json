@@ -1,7 +1,7 @@
 {
   "key": "clariant",
   "label": "Clariant",
-  "generatedAt": "2026-08-30T14:55:21.982Z",
+  "generatedAt": "2026-08-30T23:44:53.929Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,14 +9,15 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4115,
-  "avgDurationMs": 4115,
+  "durationMs": 4803,
+  "avgDurationMs": 4803,
   "durationHistory": [
     4500,
     4622,
     5720,
     4494,
-    4115
+    4115,
+    4803
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -32,7 +33,7 @@
       "url": "https://careers.clariant.com/job/Pratteln-%28Senior%29-Manager-National-Tax-&-Tax-Governance/1421384933/",
       "source": "Clariant Dedicated Parser (SuccessFactors Jobs2Web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:19.363Z",
+      "crawledAt": "2026-08-30T23:44:50.707Z",
       "addressLocality": "Pratteln",
       "addressRegion": "Basel-Landschaft",
       "streetAddress": "Rothausstrasse 61",
@@ -69,7 +70,7 @@
       "url": "https://careers.clariant.com/job/Pratteln-Intern-Corporate-Strategy-&-Innovation/1405838633/",
       "source": "Clariant Dedicated Parser (SuccessFactors Jobs2Web)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:55:19.923Z",
+      "crawledAt": "2026-08-30T23:44:51.356Z",
       "addressLocality": "Pratteln",
       "addressRegion": "Basel-Landschaft",
       "streetAddress": "Rothausstrasse 61",
