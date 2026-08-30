@@ -1,7 +1,7 @@
 {
   "key": "fusalp",
   "label": "Fusalp",
-  "generatedAt": "2026-08-30T15:00:18.106Z",
+  "generatedAt": "2026-08-30T23:28:33.233Z",
   "total": 4,
   "discovered": null,
   "written": 4,
@@ -9,14 +9,15 @@
   "updatedCount": 3,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 20188,
-  "avgDurationMs": 20188,
+  "durationMs": 12405,
+  "avgDurationMs": 12405,
   "durationHistory": [
     13316,
     16419,
     15897,
     14300,
-    20188
+    20188,
+    12405
   ],
   "newJobs": [
     {
@@ -31,7 +32,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/assistant-store-manager-m-w-dec-26-to-march-27-100_saanen",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:59:59.252Z",
+      "crawledAt": "2026-08-30T23:28:21.977Z",
       "addressLocality": "Saanen",
       "addressCountry": "CH",
       "country": "CH",
@@ -67,7 +68,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/ales-associate-m-w-dec-26-to-march-27-100_saanen",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T15:00:00.348Z",
+      "crawledAt": "2026-08-30T23:28:22.860Z",
       "addressLocality": "Saanen",
       "addressCountry": "CH",
       "country": "CH",
@@ -103,7 +104,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/sales-associate-m-w-dec-to-april-100_val-de-bagnes",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T15:00:01.435Z",
+      "crawledAt": "2026-08-30T23:28:23.779Z",
       "addressLocality": "Val De Bagnes",
       "addressCountry": "CH",
       "country": "CH",
@@ -139,7 +140,7 @@
       "url": "https://fusalp.welcomekit.co/jobs/sales-associate-m-w-dec-to-april-26-80_zermatt",
       "source": "Fusalp Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T15:00:02.431Z",
+      "crawledAt": "2026-08-30T23:28:24.757Z",
       "addressLocality": "Zermatt",
       "addressCountry": "CH",
       "country": "CH",
