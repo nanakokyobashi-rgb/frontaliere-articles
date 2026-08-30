@@ -1,20 +1,21 @@
 {
   "key": "skyguide-sa",
   "label": "Skyguide",
-  "generatedAt": "2026-08-30T14:43:16.509Z",
+  "generatedAt": "2026-08-30T23:31:06.082Z",
   "total": 13,
   "newCount": 1,
   "updatedCount": 11,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 7990,
-  "avgDurationMs": 7990,
+  "durationMs": 6348,
+  "avgDurationMs": 6348,
   "durationHistory": [
     7478,
     7606,
     6378,
     6412,
-    7990
+    7990,
+    6348
   ],
   "newJobs": [
     {
