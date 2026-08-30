@@ -1,20 +1,21 @@
 {
   "key": "citta-di-lugano",
   "label": "Città di Lugano",
-  "generatedAt": "2026-08-30T14:58:33.121Z",
+  "generatedAt": "2026-08-30T23:26:26.144Z",
   "total": 9,
   "newCount": 0,
   "updatedCount": 9,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 8549,
-  "avgDurationMs": 8549,
+  "durationMs": 7312,
+  "avgDurationMs": 7312,
   "durationHistory": [
     9574,
     7365,
     7282,
     7561,
-    8549
+    8549,
+    7312
   ],
   "newJobs": [],
   "updatedJobs": [
