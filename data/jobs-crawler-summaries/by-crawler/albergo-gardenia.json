@@ -1,7 +1,7 @@
 {
   "key": "albergo-gardenia",
   "label": "Albergo Gardenia",
-  "generatedAt": "2026-08-29T14:43:52.986Z",
+  "generatedAt": "2026-08-29T23:38:59.230Z",
   "total": 2,
   "discovered": null,
   "written": 2,
@@ -9,12 +9,13 @@
   "updatedCount": 2,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4169,
-  "avgDurationMs": 4169,
+  "durationMs": 4063,
+  "avgDurationMs": 4063,
   "durationHistory": [
     4641,
     3985,
-    4169
+    4169,
+    4063
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -30,7 +31,7 @@
       "url": "https://www.hotelleriesuisse.ch/it/politica/lavoro-e-istruzione/carenza-di-personale-qualificato",
       "source": "Albergo Gardenia Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:43:49.503Z",
+      "crawledAt": "2026-08-29T23:38:55.950Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -65,7 +66,7 @@
       "url": "https://www.hotelleriesuisse.ch/it/politica/lavoro-e-istruzione/previdenza-per-la-vecchiaia",
       "source": "Albergo Gardenia Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T14:43:49.824Z",
+      "crawledAt": "2026-08-29T23:38:56.279Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
