@@ -1,7 +1,7 @@
 {
   "key": "klinik-schoenberg",
   "label": "Klinik Schönberg AG",
-  "generatedAt": "2026-08-29T23:13:48.173Z",
+  "generatedAt": "2026-08-30T14:43:21.725Z",
   "total": 0,
   "discovered": null,
   "written": 0,
@@ -9,12 +9,13 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 6884,
-  "avgDurationMs": 6884,
+  "durationMs": 8294,
+  "avgDurationMs": 8294,
   "durationHistory": [
     7350,
     8214,
-    6884
+    6884,
+    8294
   ],
   "newJobs": [],
   "updatedJobs": [],
