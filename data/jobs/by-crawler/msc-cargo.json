@@ -1,6 +1,6 @@
 {
   "crawlerKey": "msc-cargo",
-  "assembledAt": "2026-08-29T23:54:13.288Z",
+  "assembledAt": "2026-08-30T14:50:35.616Z",
   "jobs": [
     {
       "id": "msc-cargo-b06079cfe661",
@@ -33,7 +33,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17632EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:08.767Z",
+      "crawledAt": "2026-08-30T14:50:31.191Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -108,7 +108,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB16918EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:07.524Z",
+      "crawledAt": "2026-08-30T14:50:30.141Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -184,7 +184,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB10623EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:06.569Z",
+      "crawledAt": "2026-08-30T14:50:29.295Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -257,7 +257,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB12112EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:05.687Z",
+      "crawledAt": "2026-08-30T14:50:28.439Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -333,7 +333,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17643EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:04.733Z",
+      "crawledAt": "2026-08-30T14:50:27.647Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -420,7 +420,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17096EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:03.903Z",
+      "crawledAt": "2026-08-30T14:50:26.818Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -500,7 +500,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17630EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:03.058Z",
+      "crawledAt": "2026-08-30T14:50:25.383Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -576,7 +576,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17631EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:02.107Z",
+      "crawledAt": "2026-08-30T14:50:24.563Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -606,16 +606,16 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:28:37.504Z",
+      "firstSeenAt": "2026-08-30T14:50:24.563Z",
       "previousSlugsByLocale": {
         "it": [
-          "responsabile-analisi-aziendale-retail-msc-group-geneva",
-          "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
+          "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva",
+          "responsabile-analisi-aziendale-retail-msc-group-geneva"
         ]
       },
       "previousSlugs": [
-        "responsabile-analisi-aziendale-retail-msc-group-geneva",
-        "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva"
+        "directeur-de-l-analyse-commerciale-de-detail-msc-group-geneva",
+        "responsabile-analisi-aziendale-retail-msc-group-geneva"
       ],
       "crawlerMissStreak": 1
     },
@@ -650,7 +650,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17627EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:00.841Z",
+      "crawledAt": "2026-08-30T14:50:23.410Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -680,7 +680,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:28:36.665Z",
+      "firstSeenAt": "2026-08-30T14:50:23.410Z",
       "previousSlugsByLocale": {
         "it": [
           "gestionnaire-de-marchandises-visuelles-msc-group-geneva"
@@ -722,7 +722,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17629EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:54:00.008Z",
+      "crawledAt": "2026-08-30T14:50:20.632Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -796,7 +796,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17639EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:53:59.047Z",
+      "crawledAt": "2026-08-30T14:50:19.118Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -944,7 +944,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17211EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:38:29.540Z",
+      "crawledAt": "2026-08-30T14:50:15.046Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1026,7 +1026,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17119EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:53:56.974Z",
+      "crawledAt": "2026-08-30T14:50:18.337Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1109,7 +1109,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17209EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:53:55.729Z",
+      "crawledAt": "2026-08-30T14:50:17.012Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1189,7 +1189,7 @@
       "url": "https://careers.msccruises.com/gb/en/job/MCTMCUGB17227EXTERNALENGB",
       "source": "MSC Group Dedicated Parser (Phenom careers portal)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:53:54.485Z",
+      "crawledAt": "2026-08-30T14:50:15.864Z",
       "addressLocality": "Geneva",
       "addressRegion": "GE",
       "addressCountry": "CH",
@@ -1219,7 +1219,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T03:25:04.658Z",
+      "firstSeenAt": "2026-08-30T14:50:15.864Z",
       "previousSlugsByLocale": {
         "it": [
           "redacteur-contrat-de-6-mois-msc-group-geneva",
