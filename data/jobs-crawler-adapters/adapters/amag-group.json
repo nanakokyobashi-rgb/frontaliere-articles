@@ -12,7 +12,7 @@
     "https://jobs.amag-group.ch/it"
   ],
   "notes": "Dedicated AMAG Group crawler fetches Italian listing (pre-filtered to Ticino) + German full listing for TI/GR jobs, enriches with JSON-LD JobPosting from detail pages.",
-  "updatedAt": "2026-08-30T14:48:43.611Z",
+  "updatedAt": "2026-08-30T23:38:20.613Z",
   "seedMetaByUrl": {
     "https://jobs.amag-group.ch/Consulente-tecnico-motoveicoli-mf-100-it-j23121.html": {
       "location": "Breganzona",
