@@ -1,19 +1,20 @@
 {
   "key": "bosch-thermotechnik-ag",
   "label": "Bosch Thermotechnik AG",
-  "generatedAt": "2026-08-29T23:24:38.037Z",
+  "generatedAt": "2026-08-30T15:07:39.510Z",
   "total": 8,
   "newCount": 0,
   "updatedCount": 8,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 19762,
-  "avgDurationMs": 19762,
+  "durationMs": 19969,
+  "avgDurationMs": 19969,
   "durationHistory": [
     17001,
     21686,
     19716,
-    19762
+    19762,
+    19969
   ],
   "newJobs": [],
   "updatedJobs": [
