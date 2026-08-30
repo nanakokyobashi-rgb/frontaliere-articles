@@ -254,6 +254,10 @@ jobs:
             echo "push identity: GITHUB_TOKEN (.github/workflows/** NON pushabile, né dai run: né dall'action)"
           fi
 
+      - name: Setup Headroom compression proxy
+        if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
+        uses: ./.github/actions/setup-headroom
+
       - name: Run Claude fix
         id: claude_fix
         if: steps.quota.outputs.quota_blocked != 'true' && steps.preflight.outputs.already_resolved != 'true' && steps.scope_guard.outputs.workflows_blocked != 'true' && steps.claim.outputs.in_flight != 'true'
