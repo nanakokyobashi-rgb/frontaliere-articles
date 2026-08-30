@@ -1,7 +1,7 @@
 {
   "key": "klinik-gut",
   "label": "Klinik Gut AG",
-  "generatedAt": "2026-08-29T23:30:09.829Z",
+  "generatedAt": "2026-08-30T14:50:06.416Z",
   "total": 11,
   "discovered": null,
   "written": 11,
@@ -9,13 +9,14 @@
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 4256,
-  "avgDurationMs": 4256,
+  "durationMs": 4257,
+  "avgDurationMs": 4257,
   "durationHistory": [
     3667,
     3274,
     4474,
-    4256
+    4256,
+    4257
   ],
   "newJobs": [],
   "updatedJobs": [
