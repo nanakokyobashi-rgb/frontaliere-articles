@@ -1,19 +1,22 @@
 {
   "key": "hopital-la-tour",
   "label": "Hôpital de La Tour",
-  "generatedAt": "2026-08-30T14:59:14.272Z",
+  "generatedAt": "2026-08-30T23:41:41.341Z",
   "total": 0,
   "discovered": null,
   "written": 0,
   "newCount": 0,
-  "updatedCount": 0,
+  "updatedCount": 11,
   "removedCount": 0,
   "unchangedCount": 0,
+  "durationMs": 4596,
+  "avgDurationMs": 4596,
   "durationHistory": [
     3962,
     4958,
     3573,
-    4727
+    4727,
+    4596
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -30,7 +33,7 @@
       "url": "https://recrutement.latour.ch/nos-offres/aide-soignant-e-de-jour-service-pool-de-soins",
       "source": "Hôpital de La Tour Dedicated Parser (VD emploi platform)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:28:03.206Z",
+      "crawledAt": "2026-08-30T23:41:38.583Z",
       "addressLocality": "Meyrin",
       "addressRegion": "GE",
       "addressCountry": "CH",
