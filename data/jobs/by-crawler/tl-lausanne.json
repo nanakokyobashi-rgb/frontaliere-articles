@@ -1,6 +1,6 @@
 {
   "crawlerKey": "tl-lausanne",
-  "assembledAt": "2026-08-30T15:21:25.744Z",
+  "assembledAt": "2026-08-30T23:51:42.673Z",
   "jobs": [
     {
       "id": "tl-lausanne-8c612a372231",
@@ -34,7 +34,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Stagiaire-Approvisionnement-Supply-Chain-Ferroviaire/1424618233/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:22.962Z",
+      "crawledAt": "2026-08-30T23:51:39.327Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -110,7 +110,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Chef%C2%B7fe-de-projet-ferroviaire-Installations-de-S%C3%A9curit%C3%A9/1425742733/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:22.390Z",
+      "crawledAt": "2026-08-30T23:51:38.850Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -210,7 +210,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Directrice-ou-Directeur-Strat%C3%A9gie-&-Transformation-d'entreprise/1429773933/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:21.114Z",
+      "crawledAt": "2026-08-30T23:51:37.809Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -274,7 +274,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Directrice-ou-Directeur-Route-&-immobilier/1429774733/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:21.702Z",
+      "crawledAt": "2026-08-30T23:51:38.344Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -338,7 +338,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Conductrices-et-conducteurs-de-bus-et-trolleybus/1281245901/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:20.531Z",
+      "crawledAt": "2026-08-30T23:51:37.262Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -435,7 +435,7 @@
       "url": "https://carrieres.t-l.ch/job/Lausanne-Data-Engineer/1431535933/",
       "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-30T15:21:19.939Z",
+      "crawledAt": "2026-08-30T23:51:36.742Z",
       "addressLocality": "Lausanne",
       "addressRegion": "VD",
       "addressCountry": "CH",
@@ -467,7 +467,73 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T15:21:19.939Z"
+      "firstSeenAt": "2026-08-30T23:51:36.742Z"
+    },
+    {
+      "id": "tl-lausanne-7fdd1e80fc35",
+      "slug": "stagiaire-porte-parole-et-communication-institutionnelle-tl-lausanne-lausanne",
+      "slugByLocale": {
+        "fr": "stagiaire-porte-parole-et-communication-institutionnelle-tl-lausanne-lausanne",
+        "it": "stagiaire-porte-parole-et-communication-institutionnelle-tl-lausanne-lausanne",
+        "en": "stagiaire-porte-parole-et-communication-institutionnelle-tl-lausanne-lausanne",
+        "de": "stagiaire-porte-parole-et-communication-institutionnelle-tl-lausanne-lausanne"
+      },
+      "company": "tl (Transports publics de la région lausannoise)",
+      "companyKey": "tl-lausanne",
+      "companyDomain": "t-l.ch",
+      "title": "Stagiaire Porte-Parole et Communication institutionnelle",
+      "titleByLocale": {
+        "fr": "Stagiaire Porte-Parole et Communication institutionnelle",
+        "it": "Stagiaire Porte-Parole et Communication institutionnelle",
+        "en": "Stagiaire Porte-Parole et Communication institutionnelle",
+        "de": "Stagiaire Porte-Parole et Communication institutionnelle"
+      },
+      "description": "Acteur de référence en matière de transports publics, les tl contribuent à l’attractivité et à la qualité de vie d’une agglomération au rayonnement international.\n\nPour renforcer nos équipes, nous mettons au concours un poste de\n\nStagiaire Porte-Parole et Communication institutionnelle\n\nVotre mission\n\nAu sein de l’équipe porte-parolat et Communication institutionnelle, vous participez:\n\n• au recueil et à l'analyse des informations sur le contexte et les activités de l'entreprise\n\n• à la rédaction des rapports, argumentaires, communiqués de presse et newsletters tant pour l'interne que l'externe\n\n• aux activités de relations avec les médias (permanence du service de presse, prise en charge des demandes des professionnels des médias, recherche d'informations auprès des personnes clés de l'entreprise, gestion des autorisations de tournage)\n\n• à l'organisation des séances et des événements (conférences de presse ou visites d'entreprise)\n\n• à la gestion administrative de l'agenda de l'entité\n\n• au suivi de projets avec des mandataires externes\n\nVotre profil\n\nVous avez, durant les 18 derniers mois, obtenu votre Bachelor ou votre Master – filière communication ou relations publiques – ou un diplôme équivalent et recherchez une première expérience professionnelle. Vous avez des connaissances du monde des médias et du tissu politique vaudois, ainsi qu'un intérêt pour les transports publics, la durabilité et les enjeux de société. Vous avez de très bonnes capacités rédactionnelles, d'écoute, d'analyse et de synthèse. De plus, vous avez une grande résistance au stress et êtes capable de gérer plusieurs sujets en même temps. Vous êtes disponible pour des horaires parfois irréguliers.\n\nInfos\n\n• Stage rémunéré de 12 mois avec avantages entreprise\n\n• Taux d'activité: 100%\n\n• Début du stage: 1er novembre 2026\n\nDélai de postulation : 16.09.2026",
+      "descriptionByLocale": {
+        "fr": "Acteur de référence en matière de transports publics, les tl contribuent à l’attractivité et à la qualité de vie d’une agglomération au rayonnement international.\n\nPour renforcer nos équipes, nous mettons au concours un poste de\n\nStagiaire Porte-Parole et Communication institutionnelle\n\nVotre mission\n\nAu sein de l’équipe porte-parolat et Communication institutionnelle, vous participez:\n\n• au recueil et à l'analyse des informations sur le contexte et les activités de l'entreprise\n\n• à la rédaction des rapports, argumentaires, communiqués de presse et newsletters tant pour l'interne que l'externe\n\n• aux activités de relations avec les médias (permanence du service de presse, prise en charge des demandes des professionnels des médias, recherche d'informations auprès des personnes clés de l'entreprise, gestion des autorisations de tournage)\n\n• à l'organisation des séances et des événements (conférences de presse ou visites d'entreprise)\n\n• à la gestion administrative de l'agenda de l'entité\n\n• au suivi de projets avec des mandataires externes\n\nVotre profil\n\nVous avez, durant les 18 derniers mois, obtenu votre Bachelor ou votre Master – filière communication ou relations publiques – ou un diplôme équivalent et recherchez une première expérience professionnelle. Vous avez des connaissances du monde des médias et du tissu politique vaudois, ainsi qu'un intérêt pour les transports publics, la durabilité et les enjeux de société. Vous avez de très bonnes capacités rédactionnelles, d'écoute, d'analyse et de synthèse. De plus, vous avez une grande résistance au stress et êtes capable de gérer plusieurs sujets en même temps. Vous êtes disponible pour des horaires parfois irréguliers.\n\nInfos\n\n• Stage rémunéré de 12 mois avec avantages entreprise\n\n• Taux d'activité: 100%\n\n• Début du stage: 1er novembre 2026\n\nDélai de postulation : 16.09.2026",
+        "it": "Acteur de référence en matière de transports publics, les tl contribuent à l’attractivité et à la qualité de vie d’une agglomération au rayonnement international.\n\nPour renforcer nos équipes, nous mettons au concours un poste de\n\nStagiaire Porte-Parole et Communication institutionnelle\n\nVotre mission\n\nAu sein de l’équipe porte-parolat et Communication institutionnelle, vous participez:\n\n• au recueil et à l'analyse des informations sur le contexte et les activités de l'entreprise\n\n• à la rédaction des rapports, argumentaires, communiqués de presse et newsletters tant pour l'interne que l'externe\n\n• aux activités de relations avec les médias (permanence du service de presse, prise en charge des demandes des professionnels des médias, recherche d'informations auprès des personnes clés de l'entreprise, gestion des autorisations de tournage)\n\n• à l'organisation des séances et des événements (conférences de presse ou visites d'entreprise)\n\n• à la gestion administrative de l'agenda de l'entité\n\n• au suivi de projets avec des mandataires externes\n\nVotre profil\n\nVous avez, durant les 18 derniers mois, obtenu votre Bachelor ou votre Master – filière communication ou relations publiques – ou un diplôme équivalent et recherchez une première expérience professionnelle. Vous avez des connaissances du monde des médias et du tissu politique vaudois, ainsi qu'un intérêt pour les transports publics, la durabilité et les enjeux de société. Vous avez de très bonnes capacités rédactionnelles, d'écoute, d'analyse et de synthèse. De plus, vous avez une grande résistance au stress et êtes capable de gérer plusieurs sujets en même temps. Vous êtes disponible pour des horaires parfois irréguliers.\n\nInfos\n\n• Stage rémunéré de 12 mois avec avantages entreprise\n\n• Taux d'activité: 100%\n\n• Début du stage: 1er novembre 2026\n\nDélai de postulation : 16.09.2026",
+        "en": "Acteur de référence en matière de transports publics, les tl contribuent à l’attractivité et à la qualité de vie d’une agglomération au rayonnement international.\n\nPour renforcer nos équipes, nous mettons au concours un poste de\n\nStagiaire Porte-Parole et Communication institutionnelle\n\nVotre mission\n\nAu sein de l’équipe porte-parolat et Communication institutionnelle, vous participez:\n\n• au recueil et à l'analyse des informations sur le contexte et les activités de l'entreprise\n\n• à la rédaction des rapports, argumentaires, communiqués de presse et newsletters tant pour l'interne que l'externe\n\n• aux activités de relations avec les médias (permanence du service de presse, prise en charge des demandes des professionnels des médias, recherche d'informations auprès des personnes clés de l'entreprise, gestion des autorisations de tournage)\n\n• à l'organisation des séances et des événements (conférences de presse ou visites d'entreprise)\n\n• à la gestion administrative de l'agenda de l'entité\n\n• au suivi de projets avec des mandataires externes\n\nVotre profil\n\nVous avez, durant les 18 derniers mois, obtenu votre Bachelor ou votre Master – filière communication ou relations publiques – ou un diplôme équivalent et recherchez une première expérience professionnelle. Vous avez des connaissances du monde des médias et du tissu politique vaudois, ainsi qu'un intérêt pour les transports publics, la durabilité et les enjeux de société. Vous avez de très bonnes capacités rédactionnelles, d'écoute, d'analyse et de synthèse. De plus, vous avez une grande résistance au stress et êtes capable de gérer plusieurs sujets en même temps. Vous êtes disponible pour des horaires parfois irréguliers.\n\nInfos\n\n• Stage rémunéré de 12 mois avec avantages entreprise\n\n• Taux d'activité: 100%\n\n• Début du stage: 1er novembre 2026\n\nDélai de postulation : 16.09.2026",
+        "de": "Acteur de référence en matière de transports publics, les tl contribuent à l’attractivité et à la qualité de vie d’une agglomération au rayonnement international.\n\nPour renforcer nos équipes, nous mettons au concours un poste de\n\nStagiaire Porte-Parole et Communication institutionnelle\n\nVotre mission\n\nAu sein de l’équipe porte-parolat et Communication institutionnelle, vous participez:\n\n• au recueil et à l'analyse des informations sur le contexte et les activités de l'entreprise\n\n• à la rédaction des rapports, argumentaires, communiqués de presse et newsletters tant pour l'interne que l'externe\n\n• aux activités de relations avec les médias (permanence du service de presse, prise en charge des demandes des professionnels des médias, recherche d'informations auprès des personnes clés de l'entreprise, gestion des autorisations de tournage)\n\n• à l'organisation des séances et des événements (conférences de presse ou visites d'entreprise)\n\n• à la gestion administrative de l'agenda de l'entité\n\n• au suivi de projets avec des mandataires externes\n\nVotre profil\n\nVous avez, durant les 18 derniers mois, obtenu votre Bachelor ou votre Master – filière communication ou relations publiques – ou un diplôme équivalent et recherchez une première expérience professionnelle. Vous avez des connaissances du monde des médias et du tissu politique vaudois, ainsi qu'un intérêt pour les transports publics, la durabilité et les enjeux de société. Vous avez de très bonnes capacités rédactionnelles, d'écoute, d'analyse et de synthèse. De plus, vous avez une grande résistance au stress et êtes capable de gérer plusieurs sujets en même temps. Vous êtes disponible pour des horaires parfois irréguliers.\n\nInfos\n\n• Stage rémunéré de 12 mois avec avantages entreprise\n\n• Taux d'activité: 100%\n\n• Début du stage: 1er novembre 2026\n\nDélai de postulation : 16.09.2026"
+      },
+      "needsRetranslation": true,
+      "location": "Lausanne",
+      "canton": "VD",
+      "url": "https://carrieres.t-l.ch/job/Lausanne-Stagiaire-Porte-Parole-et-Communication-institutionnelle/1424627433/",
+      "source": "tl (Transports publics de la région lausannoise) Dedicated Parser (SuccessFactors CSB)",
+      "sourceLang": "fr",
+      "crawledAt": "2026-08-30T23:51:39.889Z",
+      "addressLocality": "Lausanne",
+      "addressRegion": "VD",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "1020",
+      "category": "Formazione",
+      "contract": "full-time",
+      "employmentType": "OTHER",
+      "experienceLevel": "intern",
+      "sector": "Trasporto pubblico urbano (TPL)",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-10",
+      "applyUrl": "https://carrieres.t-l.ch/talentcommunity/apply/1424627433/?locale=fr_FR",
+      "requirements": [],
+      "requirementsByLocale": {
+        "fr": []
+      },
+      "streetAddress": "Chemin du Closel 15-17",
+      "salaryMin": 43500,
+      "salaryMax": 80000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 43500,
+          "maxValue": 80000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-30T23:51:39.889Z"
     }
   ]
 }
