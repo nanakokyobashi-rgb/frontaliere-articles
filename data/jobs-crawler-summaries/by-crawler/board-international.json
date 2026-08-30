@@ -1,19 +1,20 @@
 {
   "key": "board-international",
   "label": "board",
-  "generatedAt": "2026-08-30T00:01:27.334Z",
+  "generatedAt": "2026-08-30T15:32:01.026Z",
   "total": 2,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 1185,
-  "avgDurationMs": 1185,
+  "durationMs": 1542,
+  "avgDurationMs": 1542,
   "durationHistory": [
     1212,
     1455,
     1283,
-    1185
+    1185,
+    1542
   ],
   "newJobs": [],
   "updatedJobs": [
