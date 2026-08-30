@@ -1,20 +1,21 @@
 {
   "key": "tinext",
   "label": "tinext",
-  "generatedAt": "2026-08-30T15:16:06.806Z",
+  "generatedAt": "2026-08-30T23:45:49.852Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 1169,
-  "avgDurationMs": 1169,
+  "durationMs": 1139,
+  "avgDurationMs": 1139,
   "durationHistory": [
     1355,
     907,
     919,
     997,
-    1169
+    1169,
+    1139
   ],
   "newJobs": [],
   "updatedJobs": [
