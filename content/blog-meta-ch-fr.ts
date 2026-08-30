@@ -4726,6 +4726,12 @@ const blogMetaChFr: Record<string, string> = {
     'blog.article.neutralita-svizzera-voto-settembre.title': 'Neutralité dans la Constitution : le 27 septembre, le vote fédéral',
     'blog.article.neutralita-svizzera-voto-settembre.excerpt': 'Initiative déposée en avril 2024 avec plus de 132\'000 signatures valables. Sanctions de l\'UE et coopération militaire dans le collimateur des promoteurs.',
     'blog.article.neutralita-svizzera-voto-settembre.imageAlt': 'Enveloppe de votation fédérale suisse sur une table d\'appartement',
+    'blog.article.abbonamenti-trasporti-san-gallo.title': 'Abonnements transports Saint-Gall : zones et tarifs',
+    'blog.article.abbonamenti-trasporti-san-gallo.excerpt': 'Découvrez la structure tarifaire du canton de Saint-Gall : communauté tarifaire, zones, abonnements annuels et mensuels, demi-tarif et AG, réductions pour étudiants.',
+    'blog.article.abbonamenti-trasporti-san-gallo.imageAlt': 'Transports publics dans le canton de Saint-Gall avec passagers à la gare',
+    'blog.article.aprire-attivita-san-gallo-registro-costi.title': 'Ouvrir une entreprise à Saint-Gall : registre, capital et coûts',
+    'blog.article.aprire-attivita-san-gallo-registro-costi.excerpt': 'Sagl CHF 20\'000, SA CHF 100\'000 : capital, inscription au registre cantonal, LAMal dès le premier jour et coûts salariaux AVS, LPP et LAA.',
+    'blog.article.aprire-attivita-san-gallo-registro-costi.imageAlt': 'Office cantonal du registre du commerce à Saint-Gall',
 };
 
 export default blogMetaChFr;
