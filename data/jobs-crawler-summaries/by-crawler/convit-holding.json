@@ -1,19 +1,20 @@
 {
   "key": "convit-holding",
   "label": "Convit Holding",
-  "generatedAt": "2026-08-30T00:06:25.915Z",
+  "generatedAt": "2026-08-30T15:30:08.535Z",
   "total": 161,
   "newCount": 72,
   "updatedCount": 89,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 247720,
-  "avgDurationMs": 247720,
+  "durationMs": 257248,
+  "avgDurationMs": 257248,
   "durationHistory": [
     283090,
     258455,
     249267,
-    247720
+    247720,
+    257248
   ],
   "newJobs": [
     {
@@ -1051,14 +1052,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-3a7fe8d411e8",
@@ -1089,14 +1090,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-360d3278bd1b",
@@ -1127,14 +1128,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-caf5f01686c7",
@@ -1313,14 +1314,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-42c11c5604d9",
@@ -1462,14 +1463,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-cfded655d12b",
@@ -1537,14 +1538,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-e470d47ccc0c",
@@ -1612,14 +1613,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-61e45957498d",
@@ -2020,14 +2021,14 @@
       "streetAddress": "",
       "postalCode": "6814",
       "firstSeenAt": "2026-05-17T10:01:25.841Z",
+      "needsRetranslation": true,
       "_qualityScore": 94,
       "_qualityBreakdown": {
         "cleanliness": 25,
         "richness": 22,
         "translation": 25,
         "completeness": 22
-      },
-      "needsRetranslation": true
+      }
     },
     {
       "id": "convit-3acf0ffc799f",
