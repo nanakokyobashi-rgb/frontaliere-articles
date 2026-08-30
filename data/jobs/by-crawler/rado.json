@@ -1,6 +1,6 @@
 {
   "crawlerKey": "rado",
-  "assembledAt": "2026-08-29T03:23:48.197Z",
+  "assembledAt": "2026-08-30T14:41:13.510Z",
   "jobs": [
     {
       "id": "company-7ubiyc",
@@ -20,7 +20,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "rado",
       "companyDomain": "swatchgroup.com",
-      "crawledAt": "2026-08-29T03:23:42.003Z",
+      "crawledAt": "2026-08-30T14:41:05.864Z",
       "firstSeenAt": "2026-08-27T20:01:08.851Z",
       "titleByLocale": {
         "it": "Collaboratore/trice Einpackerei 100%",
