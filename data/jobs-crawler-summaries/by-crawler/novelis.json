@@ -1,7 +1,7 @@
 {
   "key": "novelis",
   "label": "Novelis",
-  "generatedAt": "2026-08-29T23:30:36.837Z",
+  "generatedAt": "2026-08-30T14:39:35.966Z",
   "total": 6,
   "discovered": null,
   "written": 6,
@@ -9,13 +9,14 @@
   "updatedCount": 5,
   "removedCount": 0,
   "unchangedCount": 1,
-  "durationMs": 7278,
-  "avgDurationMs": 7278,
+  "durationMs": 6407,
+  "avgDurationMs": 6407,
   "durationHistory": [
     7087,
     8789,
     8067,
-    7278
+    7278,
+    6407
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -45,7 +46,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52860/internship-%28m-f-d%29-internal-communications-%2840%25-60%25%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:30:30.848Z",
+      "crawledAt": "2026-08-30T14:39:30.823Z",
       "firstSeenAt": "2026-08-03T12:38:44.264Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -81,7 +82,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52223/electricien---automaticien/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:30:34.474Z",
+      "crawledAt": "2026-08-30T14:39:33.644Z",
       "firstSeenAt": "2026-07-30T11:18:12.360Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
@@ -117,7 +118,7 @@
       "applyUrl": "https://de-careers-novelis.icims.com/jobs/52802/it-solutions-lead-%28m-w-d%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:30:32.037Z",
+      "crawledAt": "2026-08-30T14:39:31.587Z",
       "firstSeenAt": "2026-07-23T11:46:56.934Z",
       "_qualityScore": 84,
       "_qualityBreakdown": {
@@ -153,7 +154,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52764/m%c3%a9canicien-de-maintenance/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T23:30:32.837Z",
+      "crawledAt": "2026-08-30T14:39:32.261Z",
       "firstSeenAt": "2026-07-15T22:17:22.223Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
@@ -189,7 +190,7 @@
       "applyUrl": "https://ch-external-novelis.icims.com/jobs/52599/plant-hr-manager-%28f-m-d%29/job?hub=13&in_iframe=1",
       "source": "Novelis Dedicated Parser (iCIMS)",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:30:33.668Z",
+      "crawledAt": "2026-08-30T14:39:32.935Z",
       "firstSeenAt": "2026-07-08T11:23:11.600Z",
       "_qualityScore": 87,
       "_qualityBreakdown": {
