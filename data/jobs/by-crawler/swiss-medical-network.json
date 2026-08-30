@@ -1,6 +1,6 @@
 {
   "crawlerKey": "swiss-medical-network",
-  "assembledAt": "2026-08-29T23:17:11.574Z",
+  "assembledAt": "2026-08-30T14:34:49.248Z",
   "jobs": [
     {
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000146022254-it-project-manager-erp-digital-systems",
@@ -3098,7 +3098,7 @@
         "it": "facharzt-in-allgemeine-innere-medizin-swiss-medical-network"
       },
       "category": "healthcare",
-      "datePosted": "2026-08-29",
+      "datePosted": "2026-08-30",
       "source": "swiss-medical-smartrecruiters-crawler",
       "employmentType": "PART_TIME",
       "experienceLevel": "MID",
@@ -3121,7 +3121,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T23:17:08.014Z"
+      "firstSeenAt": "2026-08-30T14:34:46.126Z"
     },
     {
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000143785489-facharztin-facharzt-fur-allgemeine-innere-medizin",
@@ -3149,7 +3149,7 @@
         "it": "facharztin-facharzt-fur-allgemeine-innere-medizin-swiss-medical-network"
       },
       "category": "medical",
-      "datePosted": "2026-08-29",
+      "datePosted": "2026-08-30",
       "source": "swiss-medical-smartrecruiters-crawler",
       "employmentType": "FULL_TIME",
       "experienceLevel": "MID",
@@ -3172,7 +3172,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T23:17:08.014Z"
+      "firstSeenAt": "2026-08-30T14:34:46.126Z"
     },
     {
       "url": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000137621779-physiotherapeute",
@@ -3251,7 +3251,7 @@
         "it": "medizinische-praxisassistenz-fur-allgemeine-innere-medizin-swiss-medical-network"
       },
       "category": "healthcare",
-      "datePosted": "2026-08-29",
+      "datePosted": "2026-08-30",
       "source": "swiss-medical-smartrecruiters-crawler",
       "employmentType": "PART_TIME",
       "experienceLevel": "MID",
@@ -3274,7 +3274,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-29T23:17:08.014Z"
+      "firstSeenAt": "2026-08-30T14:34:46.126Z"
     }
   ]
 }
