@@ -1,7 +1,7 @@
 {
   "key": "engadin-tourismus",
   "label": "Engadin Tourismus AG",
-  "generatedAt": "2026-08-29T14:33:37.423Z",
+  "generatedAt": "2026-08-30T15:00:25.412Z",
   "total": 3,
   "discovered": null,
   "written": 3,
@@ -9,12 +9,13 @@
   "updatedCount": 3,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 6157,
-  "avgDurationMs": 6157,
+  "durationMs": 4070,
+  "avgDurationMs": 4070,
   "durationHistory": [
     4651,
     4673,
-    6157
+    6157,
+    4070
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -43,7 +44,7 @@
       "applyUrl": "https://www.engadintourismus.ch/ueber-uns/jobs/jobs/guest-experience-specialist-m-w-d-70-tourist-information-sils",
       "source": "Engadin Tourismus Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T14:33:33.396Z",
+      "crawledAt": "2026-08-30T15:00:23.216Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-12T21:56:51.841Z",
       "_qualityScore": 85,
@@ -79,7 +80,7 @@
       "applyUrl": "https://www.engadintourismus.ch/ueber-uns/jobs/jobs/product-manager-80-100-m-w-d-st-moritz",
       "source": "Engadin Tourismus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:33:34.468Z",
+      "crawledAt": "2026-08-30T15:00:23.478Z",
       "firstSeenAt": "2026-08-05T11:39:03.670Z",
       "_qualityScore": 85,
       "_qualityBreakdown": {
@@ -114,7 +115,7 @@
       "applyUrl": "https://www.engadintourismus.ch/ueber-uns/jobs/jobs/lehrstelle-kauffrau-kaufmann-efz-hotel-gastro-tourismus-hgt",
       "source": "Engadin Tourismus Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T14:33:34.750Z",
+      "crawledAt": "2026-08-30T15:00:23.752Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-05-17T10:09:22.701Z",
       "_qualityScore": 83,
