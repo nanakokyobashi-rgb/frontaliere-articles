@@ -1,19 +1,20 @@
 {
   "key": "prada",
   "label": "Prada Group",
-  "generatedAt": "2026-08-30T14:40:53.530Z",
+  "generatedAt": "2026-08-30T23:40:20.476Z",
   "total": 6,
   "newCount": 1,
   "updatedCount": 2,
   "removedCount": 2,
   "unchangedCount": 4,
-  "durationMs": 6719,
-  "avgDurationMs": 6719,
+  "durationMs": 6690,
+  "avgDurationMs": 6690,
   "durationHistory": [
     6768,
     6108,
     6326,
-    6719
+    6719,
+    6690
   ],
   "newJobs": [
     {
@@ -65,7 +66,7 @@
       "url": "https://jobs.pradagroup.com/job/Las-Vegas-Stock-Associate%2C-Las-Vegas-City-Center-NV-89044/1391073833/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:49.200Z",
+      "crawledAt": "2026-08-30T23:40:15.744Z",
       "_qualityScore": 61,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -94,7 +95,7 @@
       "url": "https://jobs.pradagroup.com/job/Topanga-Client-Advisor%2C-Topanga-CA/1391072233/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:50.789Z",
+      "crawledAt": "2026-08-30T23:40:17.152Z",
       "_qualityScore": 61,
       "_qualityBreakdown": {
         "cleanliness": 25,
@@ -433,7 +434,7 @@
       "url": "https://jobs.pradagroup.com/job/Topanga-Client-Advisor%2C-Topanga-CA/1391072233/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:50.789Z",
+      "crawledAt": "2026-08-30T23:40:17.152Z",
       "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
@@ -466,7 +467,7 @@
       "url": "https://jobs.pradagroup.com/job/Las-Vegas-Stock-Associate%2C-Las-Vegas-City-Center-NV-89044/1391073833/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:49.200Z",
+      "crawledAt": "2026-08-30T23:40:15.744Z",
       "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,

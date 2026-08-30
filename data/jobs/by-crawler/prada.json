@@ -1,6 +1,6 @@
 {
   "crawlerKey": "prada",
-  "assembledAt": "2026-08-30T14:40:53.528Z",
+  "assembledAt": "2026-08-30T23:40:20.474Z",
   "jobs": [
     {
       "id": "prada-7c9fb42c6646",
@@ -359,7 +359,7 @@
       "url": "https://jobs.pradagroup.com/job/Topanga-Client-Advisor%2C-Topanga-CA/1391072233/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:50.789Z",
+      "crawledAt": "2026-08-30T23:40:17.152Z",
       "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
@@ -374,7 +374,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-30T14:40:50.789Z"
+      "firstSeenAt": "2026-08-30T23:40:17.152Z"
     },
     {
       "id": "prada-56023555b85a",
@@ -419,7 +419,7 @@
       "url": "https://jobs.pradagroup.com/job/Las-Vegas-Stock-Associate%2C-Las-Vegas-City-Center-NV-89044/1391073833/",
       "source": "Prada Group Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-30T14:40:49.200Z",
+      "crawledAt": "2026-08-30T23:40:15.744Z",
       "needsRetranslation": true,
       "salaryMin": 49500,
       "salaryMax": 75000,
@@ -434,7 +434,7 @@
         }
       },
       "addressRegion": "TI",
-      "firstSeenAt": "2026-08-30T14:40:49.200Z"
+      "firstSeenAt": "2026-08-30T23:40:15.744Z"
     }
   ]
 }
