@@ -1,17 +1,18 @@
 {
   "key": "cambiavalute",
   "label": "Cambiavalute",
-  "generatedAt": "2026-08-29T23:43:26.325Z",
+  "generatedAt": "2026-08-30T15:10:18.913Z",
   "total": 0,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 193610,
-  "avgDurationMs": 193610,
+  "durationMs": 83809,
+  "avgDurationMs": 83809,
   "durationHistory": [
     174398,
-    193610
+    193610,
+    83809
   ],
   "newJobs": [],
   "updatedJobs": [],
