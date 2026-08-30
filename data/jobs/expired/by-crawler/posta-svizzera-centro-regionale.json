@@ -25,7 +25,7 @@
       "en": "postauto-chauffeur-in-post-gt3dts"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "postauto-chauffeur-in-post"
     ],
@@ -61,7 +61,7 @@
       "fr": "postauto-chauffeur-in-post-uf5ha3"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "postauto-chauffeur-in-post"
     ],
@@ -97,7 +97,7 @@
       "fr": "ticketkontrolleur-in-und-kundenberatung-postauto-chur"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "ticket-controller-in-and-customer-advice-postauto-chur",
       "controleur-de-billetterie-en-et-conseil-client-postauto-chur",
@@ -143,14 +143,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-vz9ssd"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.186Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-11",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-5"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-11"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-11",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-5"
       ]
     },
     "salaryMin": 51000,
@@ -185,14 +187,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-l97iu9"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.186Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-9",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-3"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-9"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-9",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-3"
       ]
     },
     "salaryMin": 48000,
@@ -227,14 +231,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-4zclhc"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.186Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-10",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-4"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-10"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-10",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-4"
       ]
     },
     "salaryMin": 57500,
@@ -521,14 +527,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-0uv9wc"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.186Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-12",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-6"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-12"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-12",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-6"
       ]
     },
     "salaryMin": 48000,
@@ -563,7 +571,7 @@
       "fr": "zusteller-in-pakete-post-jeb3iw"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "zusteller-in-pakete-post-2",
       "zusteller-in-pakete-post"
@@ -605,7 +613,7 @@
       "fr": "zusteller-in-pakete-post-ay6wgp"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "zusteller-in-pakete-post"
     ],
@@ -641,14 +649,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-obcnnj"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-8",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-2"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-8"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-8",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-2"
       ]
     },
     "salaryMin": 58500,
@@ -683,7 +693,7 @@
       "fr": "zusteller-in-briefe-und-pakete-post-uq4l2d"
     },
     "sector": "Servizi Postali",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "zusteller-in-briefe-und-pakete-post-2",
       "zusteller-in-briefe-und-pakete-post"
@@ -725,14 +735,16 @@
       "fr": "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-pos-owm2cl"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.186Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-13",
-      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post"
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post",
+      "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-7"
     ],
     "previousSlugsByLocale": {
       "it": [
-        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-13"
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-13",
+        "lehre-als-logistiker-in-efz-distribution-gemischte-zustellung-briefe-und-pakete-post-7"
       ]
     },
     "salaryMin": 58500,
@@ -767,7 +779,7 @@
       "fr": "apprentissage-en-tant-que-specialiste-de-la-logistique-en-eba-centre-de-tri-ou-en-interne-dans-une-zone-de-distribution"
     },
     "sector": "Logistica",
-    "expiredAt": "2026-08-29T14:34:28.185Z",
+    "expiredAt": "2026-08-30T14:43:37.751Z",
     "previousSlugs": [
       "lehre-als-logistiker-in-eba-sortierzentrum-oder-inhouse-in-einem-distributionsgebiet-post",
       "apprendistato-come-impiegata-impiegato-in-logistica-afp-sortierzentrum-o-inhouse-in-0bp6ih",
