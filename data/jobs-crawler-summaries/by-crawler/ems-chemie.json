@@ -1,20 +1,21 @@
 {
   "key": "ems-chemie",
   "label": "EMS-Chemie AG",
-  "generatedAt": "2026-08-30T14:34:09.561Z",
+  "generatedAt": "2026-08-30T23:22:17.281Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 10,
   "removedCount": 2,
   "unchangedCount": 0,
-  "durationMs": 6143,
-  "avgDurationMs": 6143,
+  "durationMs": 5858,
+  "avgDurationMs": 5858,
   "durationHistory": [
     7027,
     6108,
     6700,
     7064,
-    6143
+    6143,
+    5858
   ],
   "newJobs": [],
   "updatedJobs": [
