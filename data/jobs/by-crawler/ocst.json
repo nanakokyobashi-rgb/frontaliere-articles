@@ -1,6 +1,6 @@
 {
   "crawlerKey": "ocst",
-  "assembledAt": "2026-08-29T23:44:20.934Z",
+  "assembledAt": "2026-08-30T15:05:44.909Z",
   "jobs": [
     {
       "id": "ocst-67c3bd8ad1d0",
@@ -30,7 +30,7 @@
       "url": "https://www.ocst.ch/il-lavoro/548-approfondimenti/2607-ladi-un-fondo-ricco-e-troppi-bisogni-ignorati",
       "source": "OCST Dedicated Parser",
       "sourceLang": "en",
-      "crawledAt": "2026-08-29T23:44:17.511Z",
+      "crawledAt": "2026-08-30T15:05:42.084Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
@@ -97,7 +97,7 @@
       "url": "https://www.ocst.ch/il-lavoro/548-approfondimenti/2608-salute-in-azienda-il-benessere-organizzativo-e-possibile",
       "source": "OCST Dedicated Parser",
       "sourceLang": "it",
-      "crawledAt": "2026-08-29T23:44:17.185Z",
+      "crawledAt": "2026-08-30T15:05:41.755Z",
       "addressLocality": "Lugano",
       "addressCountry": "CH",
       "country": "CH",
