@@ -1,19 +1,20 @@
 {
   "key": "tinext",
   "label": "tinext",
-  "generatedAt": "2026-08-29T23:35:28.058Z",
+  "generatedAt": "2026-08-30T15:16:06.806Z",
   "total": 1,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 997,
-  "avgDurationMs": 997,
+  "durationMs": 1169,
+  "avgDurationMs": 1169,
   "durationHistory": [
     1355,
     907,
     919,
-    997
+    997,
+    1169
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -35,7 +36,7 @@
       "sector": "IT & Digital Transformation",
       "source": "tinext-dedicated-crawler",
       "sourceLang": "en",
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "validThrough": "",
       "employmentType": "full-time",
       "contractType": "full-time",
