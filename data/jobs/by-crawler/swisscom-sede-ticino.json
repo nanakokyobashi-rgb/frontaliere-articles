@@ -193,24 +193,9 @@
       },
       "sourceLang": "en",
       "jobReqId": "R-0006221",
-      "id": "swisscom-sede-ticino-24807d093bf8",
-      "needsRetranslation": true,
-      "firstSeenAt": "2026-08-28T05:27:23.915Z",
       "crawledAt": "",
-      "previousSlugsByLocale": {
-        "it": [
-          "site-reliability-engineer-swisscom-bern-drxfz0"
-        ],
-        "de": [
-          "site-reliability-engineer-swisscom-bern-drxfz0"
-        ],
-        "fr": [
-          "site-reliability-engineer-swisscom-bern-drxfz0"
-        ]
-      },
-      "previousSlugs": [
-        "site-reliability-engineer-swisscom-bern-drxfz0"
-      ],
+      "needsRetranslation": true,
+      "id": "swisscom-sede-ticino-24807d093bf8",
       "salaryMin": 73000,
       "salaryMax": 124500,
       "currency": "CHF",
@@ -224,7 +209,22 @@
           "unitText": "YEAR"
         }
       },
-      "addressRegion": "BE"
+      "addressRegion": "BE",
+      "firstSeenAt": "2026-08-28T05:27:23.915Z",
+      "previousSlugsByLocale": {
+        "it": [
+          "site-reliability-engineer-swisscom-bern-drxfz0"
+        ],
+        "de": [
+          "site-reliability-engineer-swisscom-bern-drxfz0"
+        ],
+        "fr": [
+          "site-reliability-engineer-swisscom-bern-drxfz0"
+        ]
+      },
+      "previousSlugs": [
+        "site-reliability-engineer-swisscom-bern-drxfz0"
+      ]
     },
     {
       "url": "https://swisscom.wd103.myworkdayjobs.com/it-IT/SwisscomExternalCareers/job/Zurich/Business-Process-Engineer_R-0004251-1",

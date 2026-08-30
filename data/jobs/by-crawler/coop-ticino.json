@@ -39,7 +39,7 @@
         "it": "kauffrau-mann-cfc-coop-dietikon-nz7buh",
         "en": "commercial-apprentice-efz-coop-dietikon",
         "de": "kauffrau-mann-efz-coop-dietikon-nz7buh",
-        "fr": "employe-e-de-commerce-cfc-coop-dietikon"
+        "fr": "apprenti-e-commerce-cfc-coop-dietikon"
       },
       "addressLocality": "Dietikon",
       "sourceLang": "de",
@@ -158,7 +158,7 @@
     },
     {
       "id": "company-xk4x58",
-      "slug": "addetto-a-vendita-food-coop-genossenschaft-zurich",
+      "slug": "commesso-a-alimentare-coop-genossenschaft-zurich",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Food",
       "location": "Zürich",
@@ -199,10 +199,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-vendita-food-coop-genossenschaft-zurich",
-        "en": "food-sales-assistant-coop-genossenschaft-zurich",
+        "it": "commesso-a-alimentare-coop-genossenschaft-zurich",
+        "en": "food-sales-associate-coop-genossenschaft-zurich",
         "de": "verkaufer-in-food-coop-genossenschaft-zurich-xk4x58",
-        "fr": "vendeur-vendeuse-food-coop-genossenschaft-zurich"
+        "fr": "vendeur-vendeuse-produits-alimentaires-coop-genossenschaft-zurich"
       },
       "addressLocality": "Zürich",
       "sourceLang": "de",
@@ -227,13 +227,15 @@
           "vendeur-dans-la-nourriture-coop-genossenschaft-zurich-b14a6a",
           "verkaufer-in-food-coop-genossenschaft-zurich-xk4x58",
           "addetto-a-vendita-alimentare-coop-genossenschaft-zurich",
-          "venditore-trice-food-coop-genossenschaft-zurich"
+          "venditore-trice-food-coop-genossenschaft-zurich",
+          "addetto-a-vendita-food-coop-genossenschaft-zurich"
         ],
         "en": [
           "seller-in-food-coop-genossenschaft-zurich-b14a6a",
           "verkaufer-in-food-coop-genossenschaft-zurich-xk4x58",
           "sales-assistant-food-coop-genossenschaft-zurich",
-          "salesman-food-coop-genossenschaft-zurich"
+          "salesman-food-coop-genossenschaft-zurich",
+          "food-sales-assistant-coop-genossenschaft-zurich"
         ],
         "de": [
           "verkaufer-in-food-coop-genossenschaft-zurich-iamsdx"
@@ -242,7 +244,8 @@
           "vendeur-dans-la-nourriture-coop-genossenschaft-zurich-b14a6a",
           "verkaufer-in-food-coop-genossenschaft-zurich-xk4x58",
           "vendeur-euse-alimentaire-coop-genossenschaft-zurich",
-          "vendeur-aliment-coop-genossenschaft-zurich"
+          "vendeur-aliment-coop-genossenschaft-zurich",
+          "vendeur-vendeuse-food-coop-genossenschaft-zurich"
         ]
       },
       "previousSlugs": [
@@ -257,7 +260,10 @@
         "vendeur-euse-alimentaire-coop-genossenschaft-zurich",
         "venditore-trice-food-coop-genossenschaft-zurich",
         "salesman-food-coop-genossenschaft-zurich",
-        "vendeur-aliment-coop-genossenschaft-zurich"
+        "vendeur-aliment-coop-genossenschaft-zurich",
+        "addetto-a-vendita-food-coop-genossenschaft-zurich",
+        "food-sales-assistant-coop-genossenschaft-zurich",
+        "vendeur-vendeuse-food-coop-genossenschaft-zurich"
       ],
       "_targetScope": {
         "type": "adapter_seed_meta",
@@ -813,7 +819,7 @@
     },
     {
       "id": "company-185u5n",
-      "slug": "addetto-a-cassa-servizi-aiuto-studenti-coop-genossenschaft-zurich",
+      "slug": "addetto-a-cassa-servizi-aiuto-studente-coop-genossenschaft-zurich",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Kassen/Services Studentenaushilfe",
       "location": "Zürich",
@@ -861,10 +867,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-cassa-servizi-aiuto-studenti-coop-genossenschaft-zurich",
-        "en": "checkout-services-sales-assistant-student-helper-coop-genossenschaft-zurich",
+        "it": "addetto-a-cassa-servizi-aiuto-studente-coop-genossenschaft-zurich",
+        "en": "sales-assistant-cash-register-services-student-helper-coop-genossenschaft-zurich",
         "de": "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-185u5n",
-        "fr": "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
+        "fr": "bureau-de-caisse-services-pour-vendeurs-aide-aux-etudiants-coop-genossenschaft-zurich"
       },
       "addressLocality": "Zürich",
       "sourceLang": "de",
@@ -887,24 +893,30 @@
         "bureau-de-caisse-services-pour-vendeurs-aide-aux-etudiants-coop-genossenschaft-zurich",
         "addetto-a-casse-e-servizi-collaboratore-trice-studentesco-coop-genossenschaft-zurich",
         "cashier-service-sales-assistant-student-helper-coop-genossenschaft-zurich",
-        "vendeur-euse-caisses-services-auxiliaire-etudiant-e-coop-genossenschaft-zurich"
+        "vendeur-euse-caisses-services-auxiliaire-etudiant-e-coop-genossenschaft-zurich",
+        "addetto-a-cassa-servizi-aiuto-studenti-coop-genossenschaft-zurich",
+        "checkout-services-sales-assistant-student-helper-coop-genossenschaft-zurich",
+        "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich",
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-185u5n",
           "venditore-casse-servizi-assistenza-agli-studenti-coop-genossenschaft-zurich",
-          "addetto-a-casse-e-servizi-collaboratore-trice-studentesco-coop-genossenschaft-zurich"
+          "addetto-a-casse-e-servizi-collaboratore-trice-studentesco-coop-genossenschaft-zurich",
+          "addetto-a-cassa-servizi-aiuto-studenti-coop-genossenschaft-zurich"
         ],
         "en": [
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-185u5n",
           "salesperson-checkout-services-student-assistant-coop-genossenschaft-zurich",
-          "cashier-service-sales-assistant-student-helper-coop-genossenschaft-zurich"
+          "cashier-service-sales-assistant-student-helper-coop-genossenschaft-zurich",
+          "checkout-services-sales-assistant-student-helper-coop-genossenschaft-zurich"
         ],
         "fr": [
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-185u5n",
           "bureau-de-caisse-services-pour-vendeurs-aide-aux-etudiants-coop-genossenschaft-zurich",
-          "vendeur-euse-caisses-services-auxiliaire-etudiant-e-coop-genossenschaft-zurich"
+          "vendeur-euse-caisses-services-auxiliaire-etudiant-e-coop-genossenschaft-zurich",
+          "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
         ]
       },
       "salaryMin": 73500,
@@ -1177,7 +1189,7 @@
     },
     {
       "id": "company-f4hvxf",
-      "slug": "addetto-a-casse-e-servizi-coop-genossenschaft-madiswil-bern",
+      "slug": "venditore-venditrice-cassa-servizi-coop-genossenschaft-madiswil-bern",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Kassen/Services",
       "location": "Madiswil, Bern",
@@ -1225,10 +1237,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-casse-e-servizi-coop-genossenschaft-madiswil-bern",
-        "en": "sales-clerk-checkout-services-coop-genossenschaft-madiswil-bern",
+        "it": "venditore-venditrice-cassa-servizi-coop-genossenschaft-madiswil-bern",
+        "en": "cashier-services-sales-associate-coop-genossenschaft-madiswil-bern",
         "de": "verkaufer-in-kassen-services-coop-madiswil-bern-f4hvxf",
-        "fr": "vendeur-euse-caisse-services-coop-genossenschaft-madiswil-bern"
+        "fr": "vendeur-vendeuse-caisse-services-coop-genossenschaft-madiswil-bern"
       },
       "addressLocality": "Madiswil",
       "sourceLang": "de",
@@ -1249,22 +1261,28 @@
         "sales-assistant-checkout-services-coop-genossenschaft-madiswil-bern",
         "vendeur-euse-caisses-services-coop-genossenschaft-madiswil-bern",
         "cashier-services-sales-assistant-coop-genossenschaft-madiswil-bern",
-        "vendeur-vendeuse-caisse-services-coop-genossenschaft-madiswil-bern"
+        "vendeur-vendeuse-caisse-services-coop-genossenschaft-madiswil-bern",
+        "addetto-a-casse-e-servizi-coop-genossenschaft-madiswil-bern",
+        "sales-clerk-checkout-services-coop-genossenschaft-madiswil-bern",
+        "vendeur-euse-caisse-services-coop-genossenschaft-madiswil-bern"
       ],
       "previousSlugsByLocale": {
         "it": [
           "verkaufer-in-kassen-services-coop-madiswil-bern",
-          "verkaufer-in-kassen-services-coop-madiswil-bern-f4hvxf"
+          "verkaufer-in-kassen-services-coop-madiswil-bern-f4hvxf",
+          "addetto-a-casse-e-servizi-coop-genossenschaft-madiswil-bern"
         ],
         "en": [
           "verkaufer-in-kassen-services-coop-madiswil-bern-f4hvxf",
           "sales-assistant-checkout-services-coop-genossenschaft-madiswil-bern",
-          "cashier-services-sales-assistant-coop-genossenschaft-madiswil-bern"
+          "cashier-services-sales-assistant-coop-genossenschaft-madiswil-bern",
+          "sales-clerk-checkout-services-coop-genossenschaft-madiswil-bern"
         ],
         "fr": [
           "verkaufer-in-kassen-services-coop-madiswil-bern-f4hvxf",
           "vendeur-euse-caisses-services-coop-genossenschaft-madiswil-bern",
-          "vendeur-vendeuse-caisse-services-coop-genossenschaft-madiswil-bern"
+          "vendeur-vendeuse-caisse-services-coop-genossenschaft-madiswil-bern",
+          "vendeur-euse-caisse-services-coop-genossenschaft-madiswil-bern"
         ]
       },
       "salaryMin": 68500,
@@ -1319,9 +1337,9 @@
       },
       "slugByLocale": {
         "it": "addetto-a-vendita-food-coop-genossenschaft-schwarzenburg-bern",
-        "en": "sales-assistant-food-coop-genossenschaft-schwarzenburg-bern",
+        "en": "food-sales-assistant-coop-genossenschaft-schwarzenburg-bern",
         "de": "verkaufer-in-food-coop-schwarzenburg-bern-s7fopk",
-        "fr": "vendeur-vendeuse-food-coop-genossenschaft-schwarzenburg-bern"
+        "fr": "vendeur-vendeuse-alimentation-coop-genossenschaft-schwarzenburg-bern"
       },
       "addressLocality": "Schwarzenburg",
       "sourceLang": "de",
@@ -1345,7 +1363,8 @@
         "venditore-trice-food-coop-genossenschaft-schwarzenburg-bern",
         "salesman-food-coop-genossenschaft-schwarzenburg-bern",
         "vendeur-aliment-coop-genossenschaft-schwarzenburg-bern",
-        "food-sales-assistant-coop-genossenschaft-schwarzenburg-bern"
+        "food-sales-assistant-coop-genossenschaft-schwarzenburg-bern",
+        "sales-assistant-food-coop-genossenschaft-schwarzenburg-bern"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -1358,7 +1377,8 @@
           "verkaufer-in-food-coop-schwarzenburg-bern-s7fopk",
           "salesperson-food-coop-genossenschaft-schwarzenburg-bern",
           "salesman-food-coop-genossenschaft-schwarzenburg-bern",
-          "food-sales-assistant-coop-genossenschaft-schwarzenburg-bern"
+          "food-sales-assistant-coop-genossenschaft-schwarzenburg-bern",
+          "sales-assistant-food-coop-genossenschaft-schwarzenburg-bern"
         ],
         "fr": [
           "verkaufer-in-food-coop-schwarzenburg-bern-s7fopk",
@@ -1575,7 +1595,7 @@
     },
     {
       "id": "company-yddeq3",
-      "slug": "addetto-a-vendita-food-coop-genossenschaft-disentis-muster-graubunden",
+      "slug": "addetto-a-vendite-food-coop-genossenschaft-disentis-muster-graubunden",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Food",
       "location": "Disentis/Mustér, Graubünden",
@@ -1621,10 +1641,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-vendita-food-coop-genossenschaft-disentis-muster-graubunden",
-        "en": "sales-assistant-food-coop-genossenschaft-disentis-muster-graubunden",
+        "it": "addetto-a-vendite-food-coop-genossenschaft-disentis-muster-graubunden",
+        "en": "food-sales-associate-coop-genossenschaft-disentis-muster-graubunden",
         "de": "verkaufer-in-food-coop-disentis-muster-graubunden-yddeq3",
-        "fr": "vendeur-vendeuse-food-coop-genossenschaft-disentis-muster-graubunden"
+        "fr": "vendeur-vendeuse-alimentaire-coop-genossenschaft-disentis-muster-graubunden"
       },
       "addressLocality": "Disentis/Mustér",
       "sourceLang": "de",
@@ -1656,7 +1676,8 @@
           "verkaufer-in-food-coop-disentis-muster-graubunden-yddeq3",
           "sales-clerk-food-coop-genossenschaft-disentis-muster-graubunden",
           "salesman-food-coop-genossenschaft-disentis-muster-graubunden",
-          "food-sales-assistant-coop-genossenschaft-disentis-muster-graubunden"
+          "food-sales-assistant-coop-genossenschaft-disentis-muster-graubunden",
+          "sales-assistant-food-coop-genossenschaft-disentis-muster-graubunden"
         ],
         "fr": [
           "verkaufer-in-food-coop-disentis-muster-graubunden-yddeq3",
@@ -1676,14 +1697,15 @@
         "salesman-food-coop-genossenschaft-disentis-muster-graubunden",
         "vendeur-aliment-coop-genossenschaft-disentis-muster-graubunden",
         "addetto-a-vendita-alimentare-coop-genossenschaft-disentis-muster-graubunden",
-        "food-sales-assistant-coop-genossenschaft-disentis-muster-graubunden"
+        "food-sales-assistant-coop-genossenschaft-disentis-muster-graubunden",
+        "sales-assistant-food-coop-genossenschaft-disentis-muster-graubunden"
       ],
       "salaryMin": 57500,
       "salaryMax": 87000
     },
     {
       "id": "company-1v0hsn",
-      "slug": "addetto-a-vendita-food-coop-genossenschaft-schattdorf-uri",
+      "slug": "commesso-a-alimentari-coop-genossenschaft-schattdorf-uri",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Food",
       "location": "Schattdorf, Uri",
@@ -1729,10 +1751,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-vendita-food-coop-genossenschaft-schattdorf-uri",
-        "en": "sales-assistant-food-coop-genossenschaft-schattdorf-uri",
+        "it": "commesso-a-alimentari-coop-genossenschaft-schattdorf-uri",
+        "en": "food-sales-associate-coop-genossenschaft-schattdorf-uri",
         "de": "verkaufer-in-food-coop-schattdorf-uri-1v0hsn",
-        "fr": "vendeur-vendeuse-food-coop-genossenschaft-schattdorf-uri"
+        "fr": "vendeur-vendeuse-alimentation-coop-genossenschaft-schattdorf-uri"
       },
       "addressLocality": "Schattdorf",
       "sourceLang": "de",
@@ -2388,7 +2410,7 @@
     },
     {
       "id": "company-e9t4ro",
-      "slug": "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-luzern",
+      "slug": "commesso-a-prodotti-freschi-coop-genossenschaft-luzern",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Frischprodukte",
       "location": "Luzern",
@@ -2434,10 +2456,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-luzern",
-        "en": "sales-assistant-fresh-products-coop-genossenschaft-luzern",
+        "it": "commesso-a-prodotti-freschi-coop-genossenschaft-luzern",
+        "en": "fresh-produce-sales-associate-coop-genossenschaft-luzern",
         "de": "verkaufer-in-frischprodukte-coop-luzern-e9t4ro",
-        "fr": "vendeur-se-produits-frais-coop-genossenschaft-luzern"
+        "fr": "vendeur-vendeuse-produits-frais-coop-genossenschaft-luzern"
       },
       "addressLocality": "Luzern",
       "sourceLang": "de",
@@ -2462,13 +2484,15 @@
           "verkaufer-in-frischprodukte-coop-luzern",
           "verkaufer-in-frischprodukte-coop-luzern-e9t4ro",
           "venditore-addetto-vendita-prodotti-freschi-coop-genossenschaft-luzern",
-          "venditore-addetto-alle-vendite-prodotti-freschi-coop-genossenschaft-luzern"
+          "venditore-addetto-alle-vendite-prodotti-freschi-coop-genossenschaft-luzern",
+          "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-luzern"
         ],
         "en": [
           "fresh-produce-salesperson-coop-genossenschaft-luzern-jhdz3y",
           "verkaufer-in-frischprodukte-coop-luzern-e9t4ro",
           "fresh-products-sales-assistant-coop-genossenschaft-luzern",
-          "sales-assistant-for-fresh-products-coop-genossenschaft-luzern"
+          "sales-assistant-for-fresh-products-coop-genossenschaft-luzern",
+          "sales-assistant-fresh-products-coop-genossenschaft-luzern"
         ],
         "de": [
           "verkaufer-in-frischprodukte-coop-luzern-jhdz3y"
@@ -2476,7 +2500,8 @@
         "fr": [
           "vendeur-de-produits-frais-coop-genossenschaft-luzern-jhdz3y",
           "verkaufer-in-frischprodukte-coop-luzern-e9t4ro",
-          "vendeur-vendeuse-produits-frais-coop-genossenschaft-luzern"
+          "vendeur-vendeuse-produits-frais-coop-genossenschaft-luzern",
+          "vendeur-se-produits-frais-coop-genossenschaft-luzern"
         ]
       },
       "previousSlugs": [
@@ -2491,7 +2516,10 @@
         "fresh-products-sales-assistant-coop-genossenschaft-luzern",
         "venditore-addetto-alle-vendite-prodotti-freschi-coop-genossenschaft-luzern",
         "sales-assistant-for-fresh-products-coop-genossenschaft-luzern",
-        "vendeur-vendeuse-produits-frais-coop-genossenschaft-luzern"
+        "vendeur-vendeuse-produits-frais-coop-genossenschaft-luzern",
+        "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-luzern",
+        "sales-assistant-fresh-products-coop-genossenschaft-luzern",
+        "vendeur-se-produits-frais-coop-genossenschaft-luzern"
       ],
       "salaryMin": 69500,
       "salaryMax": 106000
@@ -2545,9 +2573,9 @@
       },
       "slugByLocale": {
         "it": "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-mels-sankt-gallen",
-        "en": "fresh-produce-sales-assistant-coop-genossenschaft-mels-sankt-gallen",
+        "en": "sales-associate-fresh-products-coop-genossenschaft-mels-sankt-gallen",
         "de": "verkaufer-in-frischprodukte-coop-mels-sankt-gallen-5xqfw8",
-        "fr": "vendeur-euse-produits-frais-coop-genossenschaft-mels-sankt-gallen"
+        "fr": "vendeur-dans-les-produits-frais-coop-genossenschaft-mels-sankt-gallen"
       },
       "addressLocality": "Mels",
       "sourceLang": "de",
@@ -2569,7 +2597,9 @@
         "vendeur-se-produits-frais-coop-genossenschaft-mels-sankt-gallen",
         "venditore-trice-prodotti-freschi-coop-genossenschaft-mels-sankt-gallen",
         "fresh-products-sales-assistant-coop-genossenschaft-mels-sankt-gallen",
-        "vendeur-vendeuse-produits-frais-coop-genossenschaft-mels-sankt-gallen"
+        "vendeur-vendeuse-produits-frais-coop-genossenschaft-mels-sankt-gallen",
+        "fresh-produce-sales-assistant-coop-genossenschaft-mels-sankt-gallen",
+        "vendeur-euse-produits-frais-coop-genossenschaft-mels-sankt-gallen"
       ],
       "previousSlugsByLocale": {
         "it": [
@@ -2580,12 +2610,14 @@
         ],
         "en": [
           "verkaufer-in-frischprodukte-coop-mels-sankt-gallen-5xqfw8",
-          "fresh-products-sales-assistant-coop-genossenschaft-mels-sankt-gallen"
+          "fresh-products-sales-assistant-coop-genossenschaft-mels-sankt-gallen",
+          "fresh-produce-sales-assistant-coop-genossenschaft-mels-sankt-gallen"
         ],
         "fr": [
           "verkaufer-in-frischprodukte-coop-mels-sankt-gallen-5xqfw8",
           "vendeur-se-produits-frais-coop-genossenschaft-mels-sankt-gallen",
-          "vendeur-vendeuse-produits-frais-coop-genossenschaft-mels-sankt-gallen"
+          "vendeur-vendeuse-produits-frais-coop-genossenschaft-mels-sankt-gallen",
+          "vendeur-euse-produits-frais-coop-genossenschaft-mels-sankt-gallen"
         ]
       },
       "salaryMin": 57500,
@@ -2849,7 +2881,7 @@
     },
     {
       "id": "company-254go2",
-      "slug": "venditore-trice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
+      "slug": "venditore-venditrice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Frischprodukte (Backwaren)",
       "location": "Kleinandelfingen, Zürich",
@@ -2895,8 +2927,8 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "venditore-trice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
-        "en": "fresh-produce-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich",
+        "it": "venditore-venditrice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
+        "en": "sales-associate-for-fresh-products-bakery-coop-genossenschaft-kleinandelfingen-zurich",
         "de": "verkaufer-in-frischprodukte-backwaren-coop-kleinandelfingen-zurich-254go2",
         "fr": "vendeur-vendeuse-produits-frais-boulangerie-coop-genossenschaft-kleinandelfingen-zurich"
       },
@@ -2921,19 +2953,23 @@
         "vendeur-euse-produits-frais-boulangerie-coop-genossenschaft-kleinandelfingen-zurich",
         "venditore-di-prodotti-freschi-prodotti-da-forno-coop-genossenschaft-kleinandelfingen-zurich",
         "fresh-products-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich",
-        "vendeur-dans-les-produits-frais-marchandises-de-boulangerie-coop-genossenschaft-kleinandelfingen-zurich"
+        "vendeur-dans-les-produits-frais-marchandises-de-boulangerie-coop-genossenschaft-kleinandelfingen-zurich",
+        "venditore-trice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
+        "fresh-produce-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich"
       ],
       "previousSlugsByLocale": {
         "it": [
           "verkaufer-in-frischprodukte-backwaren-coop-kleinandelfingen-zurich",
           "verkaufer-in-frischprodukte-backwaren-coop-kleinandelfingen-zurich-254go2",
           "addetto-a-vendita-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich",
-          "venditore-di-prodotti-freschi-prodotti-da-forno-coop-genossenschaft-kleinandelfingen-zurich"
+          "venditore-di-prodotti-freschi-prodotti-da-forno-coop-genossenschaft-kleinandelfingen-zurich",
+          "venditore-trice-prodotti-freschi-panetteria-coop-genossenschaft-kleinandelfingen-zurich"
         ],
         "en": [
           "verkaufer-in-frischprodukte-backwaren-coop-kleinandelfingen-zurich-254go2",
           "sales-assistant-fresh-products-bakery-coop-genossenschaft-kleinandelfingen-zurich",
-          "fresh-products-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich"
+          "fresh-products-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich",
+          "fresh-produce-salesperson-bakery-coop-genossenschaft-kleinandelfingen-zurich"
         ],
         "fr": [
           "verkaufer-in-frischprodukte-backwaren-coop-kleinandelfingen-zurich-254go2",
@@ -3222,7 +3258,7 @@
     },
     {
       "id": "company-jwkd8i",
-      "slug": "addetto-a-cassa-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich",
+      "slug": "addetto-a-casse-servizi-studente-ssa-coop-genossenschaft-zurich",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Kassen/Services Studentenaushilfe",
       "location": "Zürich",
@@ -3270,10 +3306,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-cassa-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich",
-        "en": "cashier-services-sales-assistant-student-aide-coop-genossenschaft-zurich",
+        "it": "addetto-a-casse-servizi-studente-ssa-coop-genossenschaft-zurich",
+        "en": "sales-assistant-cash-registers-services-student-position-coop-genossenschaft-zurich",
         "de": "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-jwkd8i",
-        "fr": "vendeur-euse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
+        "fr": "vendeur-se-caisses-services-aide-etudiante-coop-genossenschaft-zurich"
       },
       "addressLocality": "Zürich",
       "sourceLang": "de",
@@ -3294,17 +3330,20 @@
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-2-2",
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-2",
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-jwkd8i",
-          "addetto-a-casse-e-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich"
+          "addetto-a-casse-e-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich",
+          "addetto-a-cassa-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich"
         ],
         "en": [
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-jwkd8i",
           "sales-clerk-checkout-services-student-assistant-coop-genossenschaft-zurich",
-          "sales-cashier-services-student-assistant-coop-genossenschaft-zurich"
+          "sales-cashier-services-student-assistant-coop-genossenschaft-zurich",
+          "cashier-services-sales-assistant-student-aide-coop-genossenschaft-zurich"
         ],
         "fr": [
           "verkaufer-in-kassen-services-studentenaushilfe-coop-zurich-jwkd8i",
           "vendeur-vendeuse-caisses-services-aide-etudiant-e-coop-genossenschaft-zurich",
-          "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
+          "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich",
+          "vendeur-euse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
         ]
       },
       "previousSlugs": [
@@ -3316,7 +3355,10 @@
         "vendeur-vendeuse-caisses-services-aide-etudiant-e-coop-genossenschaft-zurich",
         "addetto-a-casse-e-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich",
         "sales-cashier-services-student-assistant-coop-genossenschaft-zurich",
-        "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
+        "vendeur-vendeuse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich",
+        "addetto-a-cassa-servizi-collaboratore-trice-studente-coop-genossenschaft-zurich",
+        "cashier-services-sales-assistant-student-aide-coop-genossenschaft-zurich",
+        "vendeur-euse-caisse-services-aide-etudiant-e-coop-genossenschaft-zurich"
       ],
       "salaryMin": 73500,
       "salaryMax": 111500
@@ -3834,7 +3876,7 @@
     },
     {
       "id": "company-hy7rne",
-      "slug": "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-reiden-luzern",
+      "slug": "commesso-a-prodotti-freschi-coop-genossenschaft-reiden-luzern",
       "company": "Coop Genossenschaft",
       "title": "Verkäufer:in Frischprodukte",
       "location": "Reiden, Luzern",
@@ -3880,10 +3922,10 @@
         "fr": []
       },
       "slugByLocale": {
-        "it": "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-reiden-luzern",
-        "en": "fresh-products-sales-clerk-coop-genossenschaft-reiden-luzern",
+        "it": "commesso-a-prodotti-freschi-coop-genossenschaft-reiden-luzern",
+        "en": "fresh-produce-sales-associate-coop-genossenschaft-reiden-luzern",
         "de": "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne",
-        "fr": "vendeur-vendeuse-produits-frais-coop-genossenschaft-reiden-luzern"
+        "fr": "vendeur-euse-de-produits-frais-coop-genossenschaft-reiden-luzern"
       },
       "addressLocality": "Reiden",
       "sourceLang": "de",
@@ -3903,16 +3945,20 @@
         "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne",
         "vendeur-vendeuse-produits-frais-coop-genossenschaft-reiden-luzern",
         "fresh-produce-sales-assistant-coop-genossenschaft-reiden-luzern",
-        "vendeur-se-produits-frais-coop-genossenschaft-reiden-luzern"
+        "vendeur-se-produits-frais-coop-genossenschaft-reiden-luzern",
+        "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-reiden-luzern",
+        "fresh-products-sales-clerk-coop-genossenschaft-reiden-luzern"
       ],
       "previousSlugsByLocale": {
         "it": [
           "verkaufer-in-frischprodukte-coop-reiden-luzern",
-          "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne"
+          "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne",
+          "addetto-a-vendita-prodotti-freschi-coop-genossenschaft-reiden-luzern"
         ],
         "en": [
           "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne",
-          "fresh-produce-sales-assistant-coop-genossenschaft-reiden-luzern"
+          "fresh-produce-sales-assistant-coop-genossenschaft-reiden-luzern",
+          "fresh-products-sales-clerk-coop-genossenschaft-reiden-luzern"
         ],
         "fr": [
           "verkaufer-in-frischprodukte-coop-reiden-luzern-hy7rne",

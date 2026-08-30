@@ -9970,12 +9970,12 @@
           "projektleiter-in-luftung-alle-bkw-ch",
           "project-manager-ventilation-climate-f-m-bkw-st-gallen"
         ],
-        "de": [
-          "projektleiter-luftung-klima-w-m-bkw-ch"
-        ],
         "fr": [
           "projektleiter-in-luftung-alle-bkw-ch",
           "gestionnaire-de-projet-ventilation-climat-f-m-bkw-st-gallen"
+        ],
+        "de": [
+          "projektleiter-luftung-klima-w-m-bkw-ch"
         ]
       },
       "needsRetranslation": true,
@@ -13149,12 +13149,12 @@
           "servicetechniker-in-luftung-heizung-alle-bkw-ch",
           "service-technician-ventilation-heating-w-m-bkw-winterthur"
         ],
-        "de": [
-          "servicetechniker-luftung-heizung-w-m-bkw-ch"
-        ],
         "fr": [
           "servicetechniker-in-luftung-heizung-alle-bkw-ch",
           "technicien-de-service-ventilation-chauffage-m-m-bkw-winterthur"
+        ],
+        "de": [
+          "servicetechniker-luftung-heizung-w-m-bkw-ch"
         ]
       },
       "needsRetranslation": true,
@@ -21434,12 +21434,12 @@
           "lehrstelle-heizungsinstallateur-in-efz-alle-bkw-ch-8",
           "heating-installer-in-efz-all-bkw-luzern"
         ],
-        "de": [
-          "heizungsinstallateur-in-efz-alle-bkw-ch"
-        ],
         "fr": [
           "lehrstelle-heizungsinstallateur-in-efz-alle-bkw-ch-8",
           "installateur-de-chauffage-dans-efz-tous-bkw-luzern"
+        ],
+        "de": [
+          "heizungsinstallateur-in-efz-alle-bkw-ch"
         ]
       },
       "needsRetranslation": true,
@@ -23047,12 +23047,12 @@
           "lehrstelle-elektroinstallateur-in-efz-alle-bkw-ch-26",
           "specialist-electrical-electrical-installer-efz-all-bkw-schwarzenburg"
         ],
-        "de": [
-          "fachspezialist-in-elektro-elektroinstallateur-in-efz-alle-bkw-ch"
-        ],
         "fr": [
           "lehrstelle-elektroinstallateur-in-efz-alle-bkw-ch-26",
           "specialiste-en-electricite-installateur-electricien-cfc-tous-bkw-schwarzenburg"
+        ],
+        "de": [
+          "fachspezialist-in-elektro-elektroinstallateur-in-efz-alle-bkw-ch"
         ]
       },
       "needsRetranslation": true,
