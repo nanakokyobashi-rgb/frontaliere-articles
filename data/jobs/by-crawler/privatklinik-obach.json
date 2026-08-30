@@ -1,6 +1,6 @@
 {
   "crawlerKey": "privatklinik-obach",
-  "assembledAt": "2026-08-30T14:37:47.763Z",
+  "assembledAt": "2026-08-30T23:26:06.062Z",
   "jobs": [
     {
       "id": "privatklinik-obach-6eed3d30af76",
@@ -34,7 +34,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000109539219-dipl-fachperson-operationstechnik-pool-region-mittelland-im-stundenlohn",
       "source": "Privatklinik Obach Dedicated Parser (SMN clinic=PKO)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:44.280Z",
+      "crawledAt": "2026-08-30T23:26:02.817Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000131823739-sportphysiotherapeut-in",
       "source": "Privatklinik Obach Dedicated Parser (SMN clinic=PKO)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:41.440Z",
+      "crawledAt": "2026-08-30T23:26:00.032Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -199,7 +199,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000131822324-dipl-physiotherapeut-in",
       "source": "Privatklinik Obach Dedicated Parser (SMN clinic=PKO)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:41.445Z",
+      "crawledAt": "2026-08-30T23:26:00.027Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -279,7 +279,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000133075633-lagerungspfleger-in-60-100-",
       "source": "Privatklinik Obach Dedicated Parser (SMN clinic=PKO)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:41.437Z",
+      "crawledAt": "2026-08-30T23:26:00.022Z",
       "addressLocality": "Solothurn",
       "addressRegion": "SO",
       "addressCountry": "CH",
