@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-29T11:31:43.384Z",
-  "dateIso": "2026-08-29",
+  "generatedAt": "2026-08-30T10:23:09.868Z",
+  "dateIso": "2026-08-30",
   "counts": {
     "availableBlocks": 3,
     "crossings": 0,
@@ -16,11 +16,11 @@
     },
     "fuel": {
       "available": true,
-      "generatedAt": "2026-08-29T09:23:49.281Z",
+      "generatedAt": "2026-08-30T07:22:37.709Z",
       "municipalityCount": 518,
-      "cheaperItalyCount": 72,
-      "cheaperSwissCount": 63,
-      "tieCount": 10,
+      "cheaperItalyCount": 78,
+      "cheaperSwissCount": 61,
+      "tieCount": 7,
       "cheapestItaly": [
         {
           "municipality": "Livigno",
@@ -73,13 +73,13 @@
           "saving50LEur": 9.75
         },
         {
-          "municipality": "Montagna in Valtellina",
-          "province": "SO",
-          "cheaperCountry": "IT",
-          "italyPriceEur": 1.929,
-          "swissPriceEur": 2.114,
-          "swissPriceChf": 1.98,
-          "saving50LEur": 9.25
+          "municipality": "Premeno",
+          "province": "VB",
+          "cheaperCountry": "CH",
+          "italyPriceEur": 2.088,
+          "swissPriceEur": 1.922,
+          "swissPriceChf": 1.8,
+          "saving50LEur": 8.3
         }
       ],
       "cheapestSwissStation": {
@@ -91,24 +91,24 @@
     },
     "exchange": {
       "available": true,
-      "rate": 1.0664,
-      "lastDate": "2026-08-28",
-      "prevRate": 1.066,
-      "prevDate": "2026-08-27",
-      "delta1d": 0.0004,
-      "rate7dAgo": 1.069,
-      "delta7d": -0.0026,
+      "rate": 1.0662,
+      "lastDate": "2026-08-29",
+      "prevRate": 1.0661,
+      "prevDate": "2026-08-28",
+      "delta1d": 0.0001,
+      "rate7dAgo": 1.0689,
+      "delta7d": -0.0027,
       "source": "frankfurter",
       "pointCount": 32
     },
     "jobs": {
       "available": true,
-      "generatedAt": "2026-08-29T08:17:13.082Z",
+      "generatedAt": "2026-08-30T06:29:53.252Z",
       "activeJobs": 22943,
       "activeCompanies": 864,
       "todayAdded": 33,
-      "yesterdayAdded": 984,
-      "last7dAdded": 11105
+      "yesterdayAdded": 33,
+      "last7dAdded": 10691
     }
   }
 }
