@@ -1,7 +1,7 @@
 {
   "key": "kuhn-rikon",
   "label": "Kuhn Rikon",
-  "generatedAt": "2026-08-30T14:41:35.944Z",
+  "generatedAt": "2026-08-30T23:56:46.345Z",
   "total": 0,
   "discovered": null,
   "written": 0,
@@ -9,12 +9,13 @@
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5120,
-  "avgDurationMs": 5120,
+  "durationMs": 4638,
+  "avgDurationMs": 4638,
   "durationHistory": [
     3890,
     4349,
-    5120
+    5120,
+    4638
   ],
   "newJobs": [],
   "updatedJobs": [],
