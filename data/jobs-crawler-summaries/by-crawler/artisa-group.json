@@ -1,19 +1,20 @@
 {
   "key": "artisa-group",
   "label": "Artisa Group",
-  "generatedAt": "2026-08-29T23:23:25.733Z",
+  "generatedAt": "2026-08-30T15:04:54.025Z",
   "total": 3,
   "newCount": 0,
   "updatedCount": 1,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 5993,
-  "avgDurationMs": 5993,
+  "durationMs": 4940,
+  "avgDurationMs": 4940,
   "durationHistory": [
     5352,
     6896,
     6222,
-    5993
+    5993,
+    4940
   ],
   "newJobs": [],
   "updatedJobs": [
@@ -35,7 +36,7 @@
       "sector": "Immobiliare & Architettura",
       "source": "artisa-dedicated-crawler",
       "sourceLang": "it",
-      "postedDate": "2026-08-29",
+      "postedDate": "2026-08-30",
       "employmentType": "full-time",
       "contractType": "full-time",
       "validThrough": "",
