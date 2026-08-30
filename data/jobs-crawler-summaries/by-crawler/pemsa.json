@@ -1,19 +1,20 @@
 {
   "key": "pemsa",
   "label": "PEMSA",
-  "generatedAt": "2026-08-29T23:16:07.687Z",
+  "generatedAt": "2026-08-30T14:38:57.959Z",
   "total": 215,
   "newCount": 61,
   "updatedCount": 67,
   "removedCount": 27,
   "unchangedCount": 87,
-  "durationMs": 533814,
-  "avgDurationMs": 533814,
+  "durationMs": 501274,
+  "avgDurationMs": 501274,
   "durationHistory": [
     495033,
     557087,
     534901,
-    533814
+    533814,
+    501274
   ],
   "newJobs": [
     {
