@@ -1,6 +1,6 @@
 {
   "crawlerKey": "clinique-generale-beaulieu",
-  "assembledAt": "2026-08-29T15:22:41.490Z",
+  "assembledAt": "2026-08-30T00:01:23.140Z",
   "jobs": [
     {
       "id": "clinique-generale-beaulieu-fbe40293dbd8",
@@ -35,7 +35,7 @@
       "applyUrl": "https://jobs.smartrecruiters.com/SwissMedicalNetwork1/744000135518323-infirmier-ere-instrumentiste",
       "source": "Clinique Générale-Beaulieu Dedicated Parser (SMN clinic=CGB)",
       "sourceLang": "fr",
-      "crawledAt": "2026-08-29T15:22:36.961Z",
+      "crawledAt": "2026-08-30T00:01:18.440Z",
       "addressLocality": "Genève",
       "addressRegion": "GE",
       "addressCountry": "CH",
