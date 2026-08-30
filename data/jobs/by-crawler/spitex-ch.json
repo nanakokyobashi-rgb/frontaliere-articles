@@ -1,6 +1,6 @@
 {
   "crawlerKey": "spitex-ch",
-  "assembledAt": "2026-08-30T14:37:28.139Z",
+  "assembledAt": "2026-08-30T23:23:26.317Z",
   "jobs": [
     {
       "id": "spitex-ch-f7b64db24c9b",
@@ -34,7 +34,7 @@
       "url": "https://www.spitexjobs.ch/job/herzlich-willkommen-bei-rebeno/J988181",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:58.750Z",
+      "crawledAt": "2026-08-30T23:22:58.391Z",
       "addressLocality": "Zollikofen",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -114,7 +114,7 @@
       "url": "https://www.spitexjobs.ch/job/geschaeftsfuehrerin-geschaeftsfuehrer-80-100-prozent/J989020",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:59.609Z",
+      "crawledAt": "2026-08-30T23:22:59.157Z",
       "addressLocality": "Oberhofen am Thunersee",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -195,7 +195,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf/J989321",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:18.155Z",
+      "crawledAt": "2026-08-30T23:22:57.575Z",
       "addressLocality": "Lenzerheide/Lai",
       "addressRegion": "GR",
       "addressCountry": "CH",
@@ -269,7 +269,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-30-70-prozent/J986303",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:02.133Z",
+      "crawledAt": "2026-08-30T23:23:02.707Z",
       "addressLocality": "Lenzburg",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -352,7 +352,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-m-w-d-40-prozent-80-prozent/J986599",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:17:40.346Z",
+      "crawledAt": "2026-08-30T23:23:18.740Z",
       "addressLocality": "Grosshöchstetten",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -430,7 +430,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachperson-hf-fh-psychiatrie-oder-mit-erfahrung-in-der-psychiatrie-mit-einem-arbeitspensum-von-60-100-prozent/J976698",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:16.364Z",
+      "crawledAt": "2026-08-30T23:23:15.064Z",
       "addressLocality": "Turbenthal",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -700,7 +700,8 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-28T05:24:34.184Z"
+      "firstSeenAt": "2026-08-28T05:24:34.184Z",
+      "crawlerMissStreak": 1
     },
     {
       "id": "spitex-ch-7c9a677d03ac",
@@ -734,7 +735,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-thun/J991536",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:13.945Z",
+      "crawledAt": "2026-08-30T23:23:14.483Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -808,7 +809,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-thun/J991540",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:13.066Z",
+      "crawledAt": "2026-08-30T23:23:13.924Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -882,7 +883,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-spiez/J991541",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:12.192Z",
+      "crawledAt": "2026-08-30T23:23:13.115Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -956,7 +957,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-erwachsenenbildung-in-spiez/J991542",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:11.285Z",
+      "crawledAt": "2026-08-30T23:23:12.367Z",
       "addressLocality": "Spiez",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1030,7 +1031,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-assistentin-gesundheit-und-soziales-eba/J991543",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:10.659Z",
+      "crawledAt": "2026-08-30T23:23:11.650Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1114,7 +1115,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-fage-efz-in-zusammenarbeit-mit-solina-ziegelei/J991548",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:10.175Z",
+      "crawledAt": "2026-08-30T23:23:11.100Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1188,7 +1189,7 @@
       "url": "https://www.spitexjobs.ch/job/studium-dipl-pflegefachperson-hf-in-betriebsanstellung-fokus-p-k/J991549",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:09.705Z",
+      "crawledAt": "2026-08-30T23:23:10.310Z",
       "addressLocality": "Thun",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1251,7 +1252,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-abenddienst-40-70-prozent/J980875",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:07.924Z",
+      "crawledAt": "2026-08-30T23:23:08.250Z",
       "addressLocality": "Muttenz",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -1326,7 +1327,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachfrau-pflegefachmann-hf-im-tagdienst-mo-fr/J982990",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:06.900Z",
+      "crawledAt": "2026-08-30T23:23:07.419Z",
       "addressLocality": "Untersiggenthal",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -1400,7 +1401,7 @@
       "url": "https://www.spitexjobs.ch/job/du-moechtest-als-dipl-pflegefachperson-einfach-wieder-zeit-fuer-menschen-haben/J977488",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:05.918Z",
+      "crawledAt": "2026-08-30T23:23:06.611Z",
       "addressLocality": "Affoltern am Albis",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1485,7 +1486,7 @@
       "url": "https://www.spitexjobs.ch/job/fage-hauspflegerin-40-90-prozent/J982962",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:05.311Z",
+      "crawledAt": "2026-08-30T23:23:05.778Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1525,7 +1526,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:05.311Z"
+      "firstSeenAt": "2026-08-30T23:23:05.778Z"
     },
     {
       "id": "spitex-ch-6ed2ea4a768c",
@@ -1559,7 +1560,7 @@
       "url": "https://www.spitexjobs.ch/job/dipl-pflegefachpersonen-hf-40-100-prozent/J982960",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:04.420Z",
+      "crawledAt": "2026-08-30T23:23:05.002Z",
       "addressLocality": "Langnau im Emmental",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -1599,7 +1600,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:04.420Z"
+      "firstSeenAt": "2026-08-30T23:23:05.002Z"
     },
     {
       "id": "spitex-ch-dd12b0fe86c8",
@@ -1633,7 +1634,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-efz-fabe-efz-50-80-prozent/J974896",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:03.472Z",
+      "crawledAt": "2026-08-30T23:23:04.165Z",
       "addressLocality": "Olten",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -1665,7 +1666,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:03.472Z"
+      "firstSeenAt": "2026-08-30T23:23:04.165Z"
     },
     {
       "id": "spitex-ch-0b0d61a0ed9c",
@@ -1699,7 +1700,7 @@
       "url": "https://www.spitexjobs.ch/job/mitarbeiter-in-fallfuehrung-demenz-50-70-prozent/J991672",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:02.605Z",
+      "crawledAt": "2026-08-30T23:23:03.236Z",
       "addressLocality": "Zug",
       "addressRegion": "ZG",
       "addressCountry": "CH",
@@ -1739,7 +1740,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:02.605Z"
+      "firstSeenAt": "2026-08-30T23:23:03.236Z"
     },
     {
       "id": "spitex-ch-db747145e83c",
@@ -1773,7 +1774,7 @@
       "url": "https://www.spitexjobs.ch/job/fachfrau-fachmann-gesundheit-fage-m-w-d-40100-prozent-zuerich/J990941",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:57.256Z",
+      "crawledAt": "2026-08-30T23:22:59.841Z",
       "addressLocality": "Zürich",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -1866,7 +1867,7 @@
       "url": "https://www.spitexjobs.ch/job/lehrstelle-als-fachfrau-oder-fachmann-gesundheit-fage-efz/J991394",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:17.527Z",
+      "crawledAt": "2026-08-30T23:23:17.189Z",
       "addressLocality": "Lenzburg",
       "addressRegion": "AG",
       "addressCountry": "CH",
@@ -1940,7 +1941,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit/J985849",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-29T23:17:39.784Z",
+      "crawledAt": "2026-08-30T23:23:19.484Z",
       "addressLocality": "Riggisberg",
       "addressRegion": "BE",
       "addressCountry": "CH",
@@ -2018,7 +2019,7 @@
       "url": "https://www.spitexjobs.ch/job/fachmann-fachfrau-gesundheit-mit-einsatzplanung-70-100-prozent/J989339",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:15.765Z",
+      "crawledAt": "2026-08-30T23:23:16.467Z",
       "addressLocality": "Glattbrugg",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2168,7 +2169,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf-50-prozent-wiedereinsteigerin-wiedereinsteiger-willkommen/J990010",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:16.923Z",
+      "crawledAt": "2026-08-30T23:23:15.754Z",
       "addressLocality": "Bauma",
       "addressRegion": "ZH",
       "addressCountry": "CH",
@@ -2249,7 +2250,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-gesundheit-fage-efz-psychiatrie-50-60-prozent-montag-freitag/J989337",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:36:57.865Z",
+      "crawledAt": "2026-08-30T23:23:18.041Z",
       "addressLocality": "Liestal",
       "addressRegion": "BL",
       "addressCountry": "CH",
@@ -2968,7 +2969,7 @@
       "url": "https://www.spitexjobs.ch/job/pflegefachperson-hf-mit-berufsbildungsaufgaben-fuer-hf-studierende/J985626",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:00.385Z",
+      "crawledAt": "2026-08-30T23:23:01.223Z",
       "addressLocality": "Oensingen",
       "addressRegion": "SO",
       "addressCountry": "CH",
@@ -3016,7 +3017,7 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:00.385Z"
+      "firstSeenAt": "2026-08-30T23:23:01.223Z"
     },
     {
       "id": "spitex-ch-2e203e3ab611",
@@ -3050,7 +3051,7 @@
       "url": "https://www.spitexjobs.ch/job/fachperson-hauswirtschaft-efz-50-100-prozent/J981161",
       "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:37:01.542Z",
+      "crawledAt": "2026-08-30T23:23:01.976Z",
       "addressLocality": "Horw",
       "addressRegion": "LU",
       "addressCountry": "CH",
@@ -3093,7 +3094,92 @@
           "unitText": "YEAR"
         }
       },
-      "firstSeenAt": "2026-08-30T14:37:01.542Z"
+      "firstSeenAt": "2026-08-30T23:23:01.976Z"
+    },
+    {
+      "id": "spitex-ch-68ad8e056756",
+      "slug": "pflegefachfrau-mann-hf-per-den-stutzpunkt-ruti-zh-spitex-bachtel-ag-ruti-zh",
+      "slugByLocale": {
+        "de": "pflegefachfrau-mann-hf-fur-den-stutzpunkt-ruti-zh-spitex-ch-ruti-zh",
+        "it": "pflegefachfrau-mann-hf-per-den-stutzpunkt-ruti-zh-spitex-bachtel-ag-ruti-zh",
+        "en": "pflegefachfrau-mann-hf-fur-das-zentrum-ruti-zh-spitex-bachtel-ag-ruti-zh",
+        "fr": "pflegefachfrau-mann-hf-fur-das-zentrum-ruti-zh-spitex-bachtel-ag-ruti-zh"
+      },
+      "company": "Spitex Bachtel AG",
+      "companyKey": "spitex-ch",
+      "companyDomain": "spitexjobs.ch",
+      "title": "Pflegefachfrau/-mann HF für das Zentrum Rüti ZH",
+      "titleByLocale": {
+        "de": "Pflegefachfrau/-mann HF für das Zentrum Rüti ZH",
+        "it": "Pflegefachfrau/-mann HF per das Zentrum Rüti ZH",
+        "en": "Pflegefachfrau/-mann HF für das Zentrum Rüti ZH",
+        "fr": "Pflegefachfrau/-mann HF für das Zentrum Rüti ZH"
+      },
+      "description": "Von Visite, zu Visite: Kund*innen, Angehörige und Ich.\n \"Eigenständig, selbstbestimmt und kompetent - das ist das Team Rüti der Spitex Bachtel. Mit rund 30 Mitarbeitenden unterstützen wir in der Gemeinde Rüti im Zürcher Oberland das Wohnen und Leben von Menschen zu Hause, die auf Unterstützung angewiesen sind. Wir freuen uns Sie schon bald in unserem Team begrüssen zu dürfen.\"\n\nPflegefachfrau/-mann HF für das Zentrum Rüti ZH\n Sie sind interessiert und motiviert ...\n\n• selbständig unterwegs zu sein, aber als Teil des Behandlungsteams auftreten\n\n• als Bezugspflegende (oder Fallführende) Kund*innen auch in schwierigen Situationen zu begleiten und zu unterstützen\n\n• sich als Bezugspflegende mit externen Partnern, wie Hausärzten, dem PallCare-Team, der Ernährungsberatung, den Mitarbeitenden in Spitäler und Heimen, auszutauschen\n\n• lösungsorientiert, basierend auf dem Pflegeprozess, zu arbeiten\n\n• die Pflegedokumentation direkt bei den Kund*innen elektronisch zu erfassen\n\n• im interdisziplinären Team mit verschiedensten Berufsgruppen zusammenzuarbeiten und sich auszutauschen\n\n• sich in Fallbesprechungen zu engagieren und die eigene, wie auch die Arbeit der anderen, gemeinsam zu reflektieren\n\n• sich digital mit Arbeitskolleg*innen auszutauschen\n\n• sich in verschiedenen Rollen im Arbeitsalltag zu bewegen - als Vorbild, als Bezugspflegende, als Tagesverantwortliche, als Fachperson der Spitex, u.a.\n\n• sich als Kümmerer*in unserer Kund*innen und deren Angehörigen zu verstehen\n\n• nach Plan zu arbeiten und gleichzeitig seine Arbeit zu priorisieren - Verantwortung für seine Kund*innen und die Arbeit zu übernehmen\n\n• sich fachlich weiterzuentwickeln und ihr Wissen mit dem Team zu teilen, sowie Andre zu unterstützen\n\n• achtsam mit sich selber umzugehen und sich bezüglich Abgrenzung zu reflektieren\n\n• sich persönlich weiter zu entwickeln\n\n• mobil mit dem eigenen oder mit dem Geschäftsfahrzeug unterwegs zu sein\n Als Betrieb unterstützen wir unsere Mitarbeitenden in der Pflege und Betreuung durch ...\n\n• moderne technische Hilfsmittel (Natel, Tablets, Beekeeper als interne Kommunikationsplattform)\n\n• elektronische Kundendokumentation (Perigon) auf dem Natel oder Tablet\n\n• gezielten fachlichen und persönlichen Austausch (Fallbesprechung, Teamevents, u.a.)\n\n• eine Fehlerkultur, in welcher Probleme offen angesprochen und diskutiert werden\n\n• eine gelebte Lernkultur und gezieltem Wissensaustausch\n\n• ein breites Dienstleistungsangebot, mit welchem die Bedürfnisse unserer Kund*innen und deren Angehörige abgedeckt sind\n\n• die Möglichkeit sich in der Spitex Bachtel einzubringen und sich zu engagieren (Fachgruppen, Personalkommission, Vernetzungstreffen, Projekte, u.a.)\n\n• eine Verwaltung, welche die Mitarbeitenden und das Behandlungsteam entlastet\n Bei Fragen steht Ihnen das Team Rüti direkt zur Verfügung: Tel. 044 576 00 18\n Bewerberdossier an  bewerbungen@spitex-bachtel.ch  oder Spitex Bachtel,  Personal,  Binzstrasse 31, 8620 Wetzikon, Tel. 044 576 00 14\n Wir freuen uns Sie kennen zu lernen.\n Das Team Rüti stellt sich vor\n Fringe Benefits",
+      "descriptionByLocale": {
+        "de": "Von Visite, zu Visite: Kund*innen, Angehörige und Ich.\n \"Eigenständig, selbstbestimmt und kompetent - das ist das Team Rüti der Spitex Bachtel. Mit rund 30 Mitarbeitenden unterstützen wir in der Gemeinde Rüti im Zürcher Oberland das Wohnen und Leben von Menschen zu Hause, die auf Unterstützung angewiesen sind. Wir freuen uns Sie schon bald in unserem Team begrüssen zu dürfen.\"\n\nPflegefachfrau/-mann HF für das Zentrum Rüti ZH\n Sie sind interessiert und motiviert ...\n\n• selbständig unterwegs zu sein, aber als Teil des Behandlungsteams auftreten\n\n• als Bezugspflegende (oder Fallführende) Kund*innen auch in schwierigen Situationen zu begleiten und zu unterstützen\n\n• sich als Bezugspflegende mit externen Partnern, wie Hausärzten, dem PallCare-Team, der Ernährungsberatung, den Mitarbeitenden in Spitäler und Heimen, auszutauschen\n\n• lösungsorientiert, basierend auf dem Pflegeprozess, zu arbeiten\n\n• die Pflegedokumentation direkt bei den Kund*innen elektronisch zu erfassen\n\n• im interdisziplinären Team mit verschiedensten Berufsgruppen zusammenzuarbeiten und sich auszutauschen\n\n• sich in Fallbesprechungen zu engagieren und die eigene, wie auch die Arbeit der anderen, gemeinsam zu reflektieren\n\n• sich digital mit Arbeitskolleg*innen auszutauschen\n\n• sich in verschiedenen Rollen im Arbeitsalltag zu bewegen - als Vorbild, als Bezugspflegende, als Tagesverantwortliche, als Fachperson der Spitex, u.a.\n\n• sich als Kümmerer*in unserer Kund*innen und deren Angehörigen zu verstehen\n\n• nach Plan zu arbeiten und gleichzeitig seine Arbeit zu priorisieren - Verantwortung für seine Kund*innen und die Arbeit zu übernehmen\n\n• sich fachlich weiterzuentwickeln und ihr Wissen mit dem Team zu teilen, sowie Andre zu unterstützen\n\n• achtsam mit sich selber umzugehen und sich bezüglich Abgrenzung zu reflektieren\n\n• sich persönlich weiter zu entwickeln\n\n• mobil mit dem eigenen oder mit dem Geschäftsfahrzeug unterwegs zu sein\n Als Betrieb unterstützen wir unsere Mitarbeitenden in der Pflege und Betreuung durch ...\n\n• moderne technische Hilfsmittel (Natel, Tablets, Beekeeper als interne Kommunikationsplattform)\n\n• elektronische Kundendokumentation (Perigon) auf dem Natel oder Tablet\n\n• gezielten fachlichen und persönlichen Austausch (Fallbesprechung, Teamevents, u.a.)\n\n• eine Fehlerkultur, in welcher Probleme offen angesprochen und diskutiert werden\n\n• eine gelebte Lernkultur und gezieltem Wissensaustausch\n\n• ein breites Dienstleistungsangebot, mit welchem die Bedürfnisse unserer Kund*innen und deren Angehörige abgedeckt sind\n\n• die Möglichkeit sich in der Spitex Bachtel einzubringen und sich zu engagieren (Fachgruppen, Personalkommission, Vernetzungstreffen, Projekte, u.a.)\n\n• eine Verwaltung, welche die Mitarbeitenden und das Behandlungsteam entlastet\n Bei Fragen steht Ihnen das Team Rüti direkt zur Verfügung: Tel. 044 576 00 18\n Bewerberdossier an  bewerbungen@spitex-bachtel.ch  oder Spitex Bachtel,  Personal,  Binzstrasse 31, 8620 Wetzikon, Tel. 044 576 00 14\n Wir freuen uns Sie kennen zu lernen.\n Das Team Rüti stellt sich vor\n Fringe Benefits",
+        "it": "Von Visite, zu Visite: Kund*innen, Angehörige und Ich.\n \"Eigenständig, selbstbestimmt und kompetent - das ist das Team Rüti der Spitex Bachtel. Mit rund 30 Mitarbeitenden unterstützen wir in der Gemeinde Rüti im Zürcher Oberland das Wohnen und Leben von Menschen zu Hause, die auf Unterstützung angewiesen sind. Wir freuen uns Sie schon bald in unserem Team begrüssen zu dürfen.\"\n\nPflegefachfrau/-mann HF für das Zentrum Rüti ZH\n Sie sind interessiert und motiviert ...\n\n• selbständig unterwegs zu sein, aber als Teil des Behandlungsteams auftreten\n\n• als Bezugspflegende (oder Fallführende) Kund*innen auch in schwierigen Situationen zu begleiten und zu unterstützen\n\n• sich als Bezugspflegende mit externen Partnern, wie Hausärzten, dem PallCare-Team, der Ernährungsberatung, den Mitarbeitenden in Spitäler und Heimen, auszutauschen\n\n• lösungsorientiert, basierend auf dem Pflegeprozess, zu arbeiten\n\n• die Pflegedokumentation direkt bei den Kund*innen elektronisch zu erfassen\n\n• im interdisziplinären Team mit verschiedensten Berufsgruppen zusammenzuarbeiten und sich auszutauschen\n\n• sich in Fallbesprechungen zu engagieren und die eigene, wie auch die Arbeit der anderen, gemeinsam zu reflektieren\n\n• sich digital mit Arbeitskolleg*innen auszutauschen\n\n• sich in verschiedenen Rollen im Arbeitsalltag zu bewegen - als Vorbild, als Bezugspflegende, als Tagesverantwortliche, als Fachperson der Spitex, u.a.\n\n• sich als Kümmerer*in unserer Kund*innen und deren Angehörigen zu verstehen\n\n• nach Plan zu arbeiten und gleichzeitig seine Arbeit zu priorisieren - Verantwortung für seine Kund*innen und die Arbeit zu übernehmen\n\n• sich fachlich weiterzuentwickeln und ihr Wissen mit dem Team zu teilen, sowie Andre zu unterstützen\n\n• achtsam mit sich selber umzugehen und sich bezüglich Abgrenzung zu reflektieren\n\n• sich persönlich weiter zu entwickeln\n\n• mobil mit dem eigenen oder mit dem Geschäftsfahrzeug unterwegs zu sein\n Als Betrieb unterstützen wir unsere Mitarbeitenden in der Pflege und Betreuung durch ...\n\n• moderne technische Hilfsmittel (Natel, Tablets, Beekeeper als interne Kommunikationsplattform)\n\n• elektronische Kundendokumentation (Perigon) auf dem Natel oder Tablet\n\n• gezielten fachlichen und persönlichen Austausch (Fallbesprechung, Teamevents, u.a.)\n\n• eine Fehlerkultur, in welcher Probleme offen angesprochen und diskutiert werden\n\n• eine gelebte Lernkultur und gezieltem Wissensaustausch\n\n• ein breites Dienstleistungsangebot, mit welchem die Bedürfnisse unserer Kund*innen und deren Angehörige abgedeckt sind\n\n• die Möglichkeit sich in der Spitex Bachtel einzubringen und sich zu engagieren (Fachgruppen, Personalkommission, Vernetzungstreffen, Projekte, u.a.)\n\n• eine Verwaltung, welche die Mitarbeitenden und das Behandlungsteam entlastet\n Bei Fragen steht Ihnen das Team Rüti direkt zur Verfügung: Tel. 044 576 00 18\n Bewerberdossier an  bewerbungen@spitex-bachtel.ch  oder Spitex Bachtel,  Personal,  Binzstrasse 31, 8620 Wetzikon, Tel. 044 576 00 14\n Wir freuen uns Sie kennen zu lernen.\n Das Team Rüti stellt sich vor\n Fringe Benefits",
+        "en": "Von Visite, zu Visite: Kund*innen, Angehörige und Ich.\n \"Eigenständig, selbstbestimmt und kompetent - das ist das Team Rüti der Spitex Bachtel. Mit rund 30 Mitarbeitenden unterstützen wir in der Gemeinde Rüti im Zürcher Oberland das Wohnen und Leben von Menschen zu Hause, die auf Unterstützung angewiesen sind. Wir freuen uns Sie schon bald in unserem Team begrüssen zu dürfen.\"\n\nPflegefachfrau/-mann HF für das Zentrum Rüti ZH\n Sie sind interessiert und motiviert ...\n\n• selbständig unterwegs zu sein, aber als Teil des Behandlungsteams auftreten\n\n• als Bezugspflegende (oder Fallführende) Kund*innen auch in schwierigen Situationen zu begleiten und zu unterstützen\n\n• sich als Bezugspflegende mit externen Partnern, wie Hausärzten, dem PallCare-Team, der Ernährungsberatung, den Mitarbeitenden in Spitäler und Heimen, auszutauschen\n\n• lösungsorientiert, basierend auf dem Pflegeprozess, zu arbeiten\n\n• die Pflegedokumentation direkt bei den Kund*innen elektronisch zu erfassen\n\n• im interdisziplinären Team mit verschiedensten Berufsgruppen zusammenzuarbeiten und sich auszutauschen\n\n• sich in Fallbesprechungen zu engagieren und die eigene, wie auch die Arbeit der anderen, gemeinsam zu reflektieren\n\n• sich digital mit Arbeitskolleg*innen auszutauschen\n\n• sich in verschiedenen Rollen im Arbeitsalltag zu bewegen - als Vorbild, als Bezugspflegende, als Tagesverantwortliche, als Fachperson der Spitex, u.a.\n\n• sich als Kümmerer*in unserer Kund*innen und deren Angehörigen zu verstehen\n\n• nach Plan zu arbeiten und gleichzeitig seine Arbeit zu priorisieren - Verantwortung für seine Kund*innen und die Arbeit zu übernehmen\n\n• sich fachlich weiterzuentwickeln und ihr Wissen mit dem Team zu teilen, sowie Andre zu unterstützen\n\n• achtsam mit sich selber umzugehen und sich bezüglich Abgrenzung zu reflektieren\n\n• sich persönlich weiter zu entwickeln\n\n• mobil mit dem eigenen oder mit dem Geschäftsfahrzeug unterwegs zu sein\n Als Betrieb unterstützen wir unsere Mitarbeitenden in der Pflege und Betreuung durch ...\n\n• moderne technische Hilfsmittel (Natel, Tablets, Beekeeper als interne Kommunikationsplattform)\n\n• elektronische Kundendokumentation (Perigon) auf dem Natel oder Tablet\n\n• gezielten fachlichen und persönlichen Austausch (Fallbesprechung, Teamevents, u.a.)\n\n• eine Fehlerkultur, in welcher Probleme offen angesprochen und diskutiert werden\n\n• eine gelebte Lernkultur und gezieltem Wissensaustausch\n\n• ein breites Dienstleistungsangebot, mit welchem die Bedürfnisse unserer Kund*innen und deren Angehörige abgedeckt sind\n\n• die Möglichkeit sich in der Spitex Bachtel einzubringen und sich zu engagieren (Fachgruppen, Personalkommission, Vernetzungstreffen, Projekte, u.a.)\n\n• eine Verwaltung, welche die Mitarbeitenden und das Behandlungsteam entlastet\n Bei Fragen steht Ihnen das Team Rüti direkt zur Verfügung: Tel. 044 576 00 18\n Bewerberdossier an  bewerbungen@spitex-bachtel.ch  oder Spitex Bachtel,  Personal,  Binzstrasse 31, 8620 Wetzikon, Tel. 044 576 00 14\n Wir freuen uns Sie kennen zu lernen.\n Das Team Rüti stellt sich vor\n Fringe Benefits",
+        "fr": "Von Visite, zu Visite: Kund*innen, Angehörige und Ich.\n \"Eigenständig, selbstbestimmt und kompetent - das ist das Team Rüti der Spitex Bachtel. Mit rund 30 Mitarbeitenden unterstützen wir in der Gemeinde Rüti im Zürcher Oberland das Wohnen und Leben von Menschen zu Hause, die auf Unterstützung angewiesen sind. Wir freuen uns Sie schon bald in unserem Team begrüssen zu dürfen.\"\n\nPflegefachfrau/-mann HF für das Zentrum Rüti ZH\n Sie sind interessiert und motiviert ...\n\n• selbständig unterwegs zu sein, aber als Teil des Behandlungsteams auftreten\n\n• als Bezugspflegende (oder Fallführende) Kund*innen auch in schwierigen Situationen zu begleiten und zu unterstützen\n\n• sich als Bezugspflegende mit externen Partnern, wie Hausärzten, dem PallCare-Team, der Ernährungsberatung, den Mitarbeitenden in Spitäler und Heimen, auszutauschen\n\n• lösungsorientiert, basierend auf dem Pflegeprozess, zu arbeiten\n\n• die Pflegedokumentation direkt bei den Kund*innen elektronisch zu erfassen\n\n• im interdisziplinären Team mit verschiedensten Berufsgruppen zusammenzuarbeiten und sich auszutauschen\n\n• sich in Fallbesprechungen zu engagieren und die eigene, wie auch die Arbeit der anderen, gemeinsam zu reflektieren\n\n• sich digital mit Arbeitskolleg*innen auszutauschen\n\n• sich in verschiedenen Rollen im Arbeitsalltag zu bewegen - als Vorbild, als Bezugspflegende, als Tagesverantwortliche, als Fachperson der Spitex, u.a.\n\n• sich als Kümmerer*in unserer Kund*innen und deren Angehörigen zu verstehen\n\n• nach Plan zu arbeiten und gleichzeitig seine Arbeit zu priorisieren - Verantwortung für seine Kund*innen und die Arbeit zu übernehmen\n\n• sich fachlich weiterzuentwickeln und ihr Wissen mit dem Team zu teilen, sowie Andre zu unterstützen\n\n• achtsam mit sich selber umzugehen und sich bezüglich Abgrenzung zu reflektieren\n\n• sich persönlich weiter zu entwickeln\n\n• mobil mit dem eigenen oder mit dem Geschäftsfahrzeug unterwegs zu sein\n Als Betrieb unterstützen wir unsere Mitarbeitenden in der Pflege und Betreuung durch ...\n\n• moderne technische Hilfsmittel (Natel, Tablets, Beekeeper als interne Kommunikationsplattform)\n\n• elektronische Kundendokumentation (Perigon) auf dem Natel oder Tablet\n\n• gezielten fachlichen und persönlichen Austausch (Fallbesprechung, Teamevents, u.a.)\n\n• eine Fehlerkultur, in welcher Probleme offen angesprochen und diskutiert werden\n\n• eine gelebte Lernkultur und gezieltem Wissensaustausch\n\n• ein breites Dienstleistungsangebot, mit welchem die Bedürfnisse unserer Kund*innen und deren Angehörige abgedeckt sind\n\n• die Möglichkeit sich in der Spitex Bachtel einzubringen und sich zu engagieren (Fachgruppen, Personalkommission, Vernetzungstreffen, Projekte, u.a.)\n\n• eine Verwaltung, welche die Mitarbeitenden und das Behandlungsteam entlastet\n Bei Fragen steht Ihnen das Team Rüti direkt zur Verfügung: Tel. 044 576 00 18\n Bewerberdossier an  bewerbungen@spitex-bachtel.ch  oder Spitex Bachtel,  Personal,  Binzstrasse 31, 8620 Wetzikon, Tel. 044 576 00 14\n Wir freuen uns Sie kennen zu lernen.\n Das Team Rüti stellt sich vor\n Fringe Benefits"
+      },
+      "needsRetranslation": true,
+      "location": "Rüti ZH",
+      "canton": "ZH",
+      "url": "https://www.spitexjobs.ch/job/pflegefachfrau-mann-hf-fuer-das-zentrum-rueti-zh/J965319",
+      "source": "Spitex Schweiz Dedicated Parser (spitexjobs.ch federation board)",
+      "sourceLang": "de",
+      "crawledAt": "2026-08-30T23:23:00.671Z",
+      "addressLocality": "Rüti ZH",
+      "addressRegion": "ZH",
+      "addressCountry": "CH",
+      "country": "CH",
+      "postalCode": "8630",
+      "category": "Sanità / Ospedali",
+      "contract": "part-time",
+      "employmentType": "PART_TIME",
+      "experienceLevel": "mid",
+      "sector": "Sanità / Ospedali",
+      "currency": "CHF",
+      "featured": false,
+      "postedDate": "2026-08-31",
+      "validThrough": "2026-09-30",
+      "applyUrl": "https://www.spitexjobs.ch/job/pflegefachfrau-mann-hf-fuer-das-zentrum-rueti-zh/J965319",
+      "requirements": [],
+      "requirementsByLocale": {
+        "de": []
+      },
+      "previousSlugsByLocale": {
+        "it": [
+          "pflegefachfrau-mann-hf-fur-das-zentrum-ruti-zh-spitex-ch-ruti-zh"
+        ],
+        "de": [
+          "pflegefachfrau-mann-hf-fur-das-zentrum-ruti-zh-spitex-ch-ruti-zh"
+        ],
+        "en": [
+          "nursing-specialist-hf-for-the-base-ruti-zh-spitex-bachtel-ag-ruti-zh"
+        ],
+        "fr": [
+          "specialiste-des-soins-infirmiers-pour-la-base-ruti-zh-spitex-bachtel-ag-ruti-zh"
+        ]
+      },
+      "previousSlugs": [
+        "pflegefachfrau-mann-hf-fur-das-zentrum-ruti-zh-spitex-ch-ruti-zh",
+        "nursing-specialist-hf-for-the-base-ruti-zh-spitex-bachtel-ag-ruti-zh",
+        "specialiste-des-soins-infirmiers-pour-la-base-ruti-zh-spitex-bachtel-ag-ruti-zh"
+      ],
+      "salaryMin": 91500,
+      "salaryMax": 128000,
+      "baseSalary": {
+        "@type": "MonetaryAmount",
+        "currency": "CHF",
+        "value": {
+          "@type": "QuantitativeValue",
+          "minValue": 91500,
+          "maxValue": 128000,
+          "unitText": "YEAR"
+        }
+      },
+      "firstSeenAt": "2026-08-30T23:23:00.671Z"
     }
   ]
 }
