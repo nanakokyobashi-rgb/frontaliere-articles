@@ -1,6 +1,6 @@
 {
   "crawlerKey": "zurich-insurance-sede-ticino",
-  "assembledAt": "2026-08-29T14:42:37.575Z",
+  "assembledAt": "2026-08-29T23:25:42.632Z",
   "jobs": [
     {
       "id": "company-bpmait",
@@ -630,7 +630,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
       "firstSeenAt": "2026-08-25T21:50:55.380Z",
       "titleByLocale": {
         "it": "Responsable d'équipe Broker Account Management West (f/m/d) 80 - 100%",
@@ -699,7 +699,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
       "firstSeenAt": "2026-08-07T10:35:40.380Z",
       "titleByLocale": {
         "fr": "Responsable d'équipe sinistres complexes (h/f/d) 80 - 100%",
@@ -30386,8 +30386,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
-      "firstSeenAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
+      "firstSeenAt": "2026-08-29T23:25:21.232Z",
       "titleByLocale": {
         "en": "Global Head of Risk Advisory",
         "it": "Global Responsabile Risk Advisory",
@@ -30468,8 +30468,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
-      "firstSeenAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
+      "firstSeenAt": "2026-08-29T23:25:21.232Z",
       "titleByLocale": {
         "de": "Health Underwriter - Zurich Asuransi Indonesia",
         "en": "Health Underwriter - Zurich Asuransi Indonesia",
@@ -30546,8 +30546,8 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
-      "firstSeenAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
+      "firstSeenAt": "2026-08-29T23:25:21.232Z",
       "titleByLocale": {
         "de": "UNDERWRITER V ESPECIALISTA",
         "fr": "UNDERWRITER V ESPECIALISTA",
@@ -30620,7 +30620,7 @@
       "source": "Company Careers Crawler",
       "companyKey": "zurich-insurance-sede-ticino",
       "companyDomain": "zurich.ch",
-      "crawledAt": "2026-08-29T14:42:13.009Z",
+      "crawledAt": "2026-08-29T23:25:21.232Z",
       "firstSeenAt": "2026-07-31T22:31:25.722Z",
       "titleByLocale": {
         "en": "Finance and Insurance Executive - FL",
