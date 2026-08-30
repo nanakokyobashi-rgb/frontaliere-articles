@@ -1,6 +1,6 @@
 {
   "crawlerKey": "davos-klosters-bergbahnen",
-  "assembledAt": "2026-08-30T14:57:55.606Z",
+  "assembledAt": "2026-08-30T23:41:58.196Z",
   "jobs": [
     {
       "id": "davos-klosters-bergbahnen-14755ba16fde",
@@ -43,7 +43,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Housekeeping-Allrounder-in-Rinerhorn_j_3922189",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:47.668Z",
+      "crawledAt": "2026-08-30T23:41:49.135Z",
       "needsRetranslation": true,
       "firstSeenAt": "2026-08-24T21:51:52.120Z",
       "salaryMin": 62000,
@@ -101,7 +101,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Hilfskoch-in-am-Rinerhorn_j_3022542",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:47.373Z",
+      "crawledAt": "2026-08-30T23:41:48.830Z",
       "previousSlugs": [
         "hilfskoch-in-am-rinerhorn-davos-klosters-bergbahnen-davos",
         "assistente-cuoco-in-am-rinerhorn-davos-klosters-bergbahnen-ag-davos"
@@ -175,7 +175,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Betriebselektriker-in-Parsenn_j_2730837",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:47.072Z",
+      "crawledAt": "2026-08-30T23:41:48.549Z",
       "previousSlugs": [
         "betriebselektriker-in-parsenn-davos-klosters-bergbahnen-davos",
         "elettricista-commerciale-a-parsenn-davos-klosters-bergbahnen-ag-davos"
@@ -249,7 +249,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Betriebselektriker-In-Immobilienunterhalt_j_3890587",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:46.753Z",
+      "crawledAt": "2026-08-30T23:41:48.228Z",
       "previousSlugs": [
         "betriebselektriker-in-immobilienunterhalt-davos-klosters-bergbahnen-davos",
         "azienda-carpenter-in-manutenzione-immobiliare-davos-klosters-bergbahnen-ag-davos",
@@ -338,7 +338,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Aushilfe-Kasse-im-Stundenlohn_j_3013470",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:46.468Z",
+      "crawledAt": "2026-08-30T23:41:47.915Z",
       "previousSlugs": [
         "aushilfe-kasse-im-stundenlohn-davos-klosters-bergbahnen-davos",
         "salario-orario-cassiere-davos-klosters-bergbahnen-ag-davos"
@@ -411,7 +411,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Allrounder-in-Restaurant-Bolgen-Plaza_j_3007454",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:45.567Z",
+      "crawledAt": "2026-08-30T23:41:46.979Z",
       "previousSlugs": [
         "allrounder-in-restaurant-bolgen-plaza-davos-klosters-bergbahnen-davos",
         "tuttofare-nel-ristorante-bolgen-plaza-davos-klosters-bergbahnen-ag-davos"
@@ -481,7 +481,7 @@
       "url": "https://www.davosklostersmountains.ch/de/mountains/stellenangebote/Kabinenfuehrer-in-Jakobshorn_j_3891467",
       "source": "Davos Klosters Bergbahnen Dedicated Parser",
       "sourceLang": "de",
-      "crawledAt": "2026-08-30T14:57:47.977Z",
+      "crawledAt": "2026-08-30T23:41:49.470Z",
       "previousSlugsByLocale": {
         "it": [
           "kabinenfuhrer-in-jakobshorn-davos-klosters-bergbahnen-davos"
@@ -504,7 +504,7 @@
         }
       },
       "addressRegion": "GR",
-      "firstSeenAt": "2026-08-30T14:57:47.977Z"
+      "firstSeenAt": "2026-08-30T23:41:49.470Z"
     },
     {
       "id": "davos-klosters-bergbahnen-d95b5ed0bba3",
