@@ -1,6 +1,6 @@
 {
   "crawlerKey": "trumpf-schweiz",
-  "assembledAt": "2026-08-29T23:27:27.876Z",
+  "assembledAt": "2026-08-30T23:32:13.601Z",
   "jobs": [
     {
       "title": "MES Project Engineer (w/m/d)",
@@ -43,7 +43,7 @@
         "de": "mes-project-ingenieur-w-m-d-trumpf-schweiz-ag-bottighofen",
         "fr": "ingenieur-de-projet-mes-m-d-trumpf-schweiz-ag-bottighofen"
       },
-      "crawledAt": "2026-08-29T23:27:10.808Z",
+      "crawledAt": "2026-08-30T23:32:02.560Z",
       "id": "trumpf-schweiz-1d5e40360c3d",
       "salaryMin": 58000,
       "salaryMax": 88000,
@@ -119,7 +119,7 @@
         "de": "entwicklungsingenieur-fur-den-bereich-elektrowerkzeuge-m-w-d-trumpf-schweiz-ag-grusch",
         "fr": "concepteur-developpeur-pour-outils-electriques-m-f-d-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:18.253Z",
+      "crawledAt": "2026-08-30T23:32:03.117Z",
       "previousSlugs": [
         "konstrukteur-entwickler-fur-den-bereich-elektrowerkzeuge-m-w-d-trumpf-schweiz-ag-grusch",
         "konstrukteur-entwickler-fur-den-bereich-elektrowerkzeuge-m-w-d-trumpf-r00039314",
@@ -202,7 +202,7 @@
         "de": "senior-controller-finanzen-business-partner-m-w-d-trumpf-schweiz-ag-grusch",
         "fr": "senior-controller-finance-business-partner-m-w-d-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:18.793Z",
+      "crawledAt": "2026-08-30T23:32:03.596Z",
       "id": "trumpf-schweiz-6c6e0efb29bc",
       "salaryMin": 98000,
       "salaryMax": 132000,
@@ -280,7 +280,7 @@
         "de": "logistiker-befristet-trumpf-schweiz-ag-grusch",
         "fr": "logistique-temporaire-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:19.384Z",
+      "crawledAt": "2026-08-30T23:32:04.018Z",
       "id": "trumpf-schweiz-52895e8badb5",
       "previousSlugsByLocale": {
         "it": [
@@ -354,7 +354,7 @@
         "de": "sachbearbeiter-fertigungsorganisation-m-w-d-trumpf-schweiz-ag-grusch",
         "fr": "organisation-de-fabrication-m-f-d-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:19.828Z",
+      "crawledAt": "2026-08-30T23:32:04.450Z",
       "id": "trumpf-schweiz-0e1ad8ffcbcc",
       "previousSlugsByLocale": {
         "it": [
@@ -428,7 +428,7 @@
         "de": "sachbearbeiter-absatzfinanzierung-international-m-w-d-trumpf-finance-schweiz-ag-baar",
         "fr": "financement-international-des-ventes-de-personnel-m-f-d-trumpf-finance-schweiz-ag-baar"
       },
-      "crawledAt": "2026-08-29T23:27:20.349Z",
+      "crawledAt": "2026-08-30T23:32:04.873Z",
       "id": "trumpf-schweiz-ee16c6099a83",
       "previousSlugsByLocale": {
         "it": [
@@ -502,7 +502,7 @@
         "de": "hr-business-partner-w-m-d-trumpf-r00042636",
         "fr": "hr-business-partner-w-m-d-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:20.805Z",
+      "crawledAt": "2026-08-30T23:32:05.385Z",
       "id": "trumpf-schweiz-c0131fa83b1b",
       "salaryMin": 57500,
       "salaryMax": 87000,
@@ -568,7 +568,7 @@
         "de": "experte-fur-zoll-und-aussenhandel-m-w-d-trumpf-schweiz-ag-grusch",
         "fr": "experte-fur-zoll-und-aussenhandel-m-w-d-trumpf-r00042588"
       },
-      "crawledAt": "2026-08-29T23:27:21.357Z",
+      "crawledAt": "2026-08-30T23:32:05.848Z",
       "id": "trumpf-schweiz-6e9c45375db5",
       "salaryMin": 64500,
       "salaryMax": 87000,
@@ -634,7 +634,7 @@
         "de": "lehrstelle-2027-polymechaniker-in-efz-trumpf-schweiz-ag-grusch",
         "fr": "apprentissage-2027-polymecanique-efz-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:21.817Z",
+      "crawledAt": "2026-08-30T23:32:06.283Z",
       "id": "trumpf-schweiz-36b915dcb2de",
       "previousSlugsByLocale": {
         "fr": [
@@ -713,7 +713,7 @@
         "de": "lehrstelle-2027-produktionsmechaniker-in-efz-trumpf-schweiz-ag-grusch",
         "fr": "cours-2027-mecanique-de-production-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:22.400Z",
+      "crawledAt": "2026-08-30T23:32:06.812Z",
       "id": "trumpf-schweiz-78917d459fc1",
       "previousSlugsByLocale": {
         "it": [
@@ -790,7 +790,7 @@
         "de": "lehrstelle-2027-konstrukteur-in-efz-trumpf-schweiz-ag-grusch",
         "fr": "apprentissage-2027-constructeur-efz-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:22.918Z",
+      "crawledAt": "2026-08-30T23:32:07.325Z",
       "id": "trumpf-schweiz-2d1e6fc71e7a",
       "salaryMin": 46500,
       "salaryMax": 70500,
@@ -864,7 +864,7 @@
         "de": "lehrstelle-2027-logistiker-in-efz-trumpf-schweiz-ag-grusch",
         "fr": "lehrstelle-2027-logistiker-in-efz-trumpf-schweiz-ag-grusch"
       },
-      "crawledAt": "2026-08-29T23:27:24.008Z",
+      "crawledAt": "2026-08-30T23:32:08.527Z",
       "id": "trumpf-schweiz-76bd5be86c25",
       "previousSlugs": [
         "apprendistato-2027-logistiker-in-cfc-trumpf-schweiz-ag-grusch-frefwt",
