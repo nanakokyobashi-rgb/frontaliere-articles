@@ -272,6 +272,10 @@ import {
 } from './lib/article-meta-block.mjs';
 import { sanitizeText } from '../../scripts/lib/sanitize-control-chars.mjs';
 import { reportStrippedControlChars } from './lib/control-char-write-report.mjs';
+import {
+  beginRegisterLock as beginRegisterLockImpl,
+  endRegisterLock as endRegisterLockImpl,
+} from './lib/register-lock.mjs';
 // Il protocollo di riferimento del prompt di selezione headline (issue #188).
 // Le due liste del prompt — candidate e articoli gia' pubblicati — avevano la
 // STESSA sintassi `[n]`, quindi un riferimento del modello era leggibile in due
@@ -2729,6 +2733,31 @@ function write(rel, content) {
     try { unlinkSync(tmp); } catch { /* best-effort cleanup */ }
     throw err;
   }
+}
+
+// ── Multi-file registration lock (issue #562) ─────────────────
+// The 9-file article registration (router, blog list, i18n, three locale
+// files, SEO service, sitemap, sitemap-news — both here and in the primary
+// AI flow's own write step, which duplicates the same sequence instead of
+// calling registerArticleFiles()) has no cross-file transaction: each write()
+// above is atomic on its OWN target (issue #561), but nothing stops a kill —
+// or any other failure — landing BETWEEN two of the nine calls, which leaves
+// the corpus with an id registered in some files and not others.
+// `generate-article.yml`'s two-section retry loop runs this script twice in
+// the SAME checkout, so a killed first attempt's partial writes are still on
+// disk when the second attempt's `git add -A` later sweeps everything into
+// one commit — nothing before this lock ever compared the 9 files against
+// each other to catch it.
+//
+// The lock mechanism itself lives in lib/register-lock.mjs, not here — see
+// that module's header for why (this file imports jsdom statically, so
+// nothing inside it is reachable by `node --test` without node_modules).
+function beginRegisterLock(id) {
+  return beginRegisterLockImpl(PROJECT_ROOT, id);
+}
+
+function endRegisterLock() {
+  return endRegisterLockImpl(PROJECT_ROOT);
 }
 
 // ── Section config (--section=frontaliere|svizzera) ──────────────
@@ -14946,6 +14975,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
 
   // Step 4: Modify files
   console.error('\n📂 Modifica file sorgente:');
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -14955,6 +14985,7 @@ async function generateAndValidateArticle(url, sourceContext = null) {
   modifySeoService(data);
   modifySitemap(data);
   modifySitemapNews(data);
+  endRegisterLock();
 
   // Step 4a.2: RSS feeds — NOT regenerated here any more (issue #4974 item 2).
   //
@@ -15629,6 +15660,7 @@ export async function registerArticleFiles(data, opts = {}) {
   sanitizePromptPlaceholders(data);
   clampSeoDescriptions(data);
   const slugs = deriveAndSanitizeArticleSlugs(data);
+  beginRegisterLock(data.id);
   modifyRouterTs(data);
   modifyBlogArticlesTsx(data);
   modifyI18nTs(data);
@@ -15638,6 +15670,7 @@ export async function registerArticleFiles(data, opts = {}) {
   modifySeoService(data);
   modifySitemap(data);
   if (!opts.skipNews) modifySitemapNews(data);
+  endRegisterLock();
   validateStructuredData(data);
   // RSS regeneration removed with #4974 item 2 — see the sibling call site
   // above. `opts.skipRss` is kept accepted-and-ignored so existing callers
