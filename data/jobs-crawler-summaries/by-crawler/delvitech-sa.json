@@ -1,20 +1,21 @@
 {
   "key": "delvitech-sa",
   "label": "Delvitech SA",
-  "generatedAt": "2026-08-30T14:54:23.693Z",
+  "generatedAt": "2026-08-30T23:40:41.179Z",
   "total": 10,
   "newCount": 0,
   "updatedCount": 10,
   "removedCount": 0,
   "unchangedCount": 0,
-  "durationMs": 18734,
-  "avgDurationMs": 18734,
+  "durationMs": 20221,
+  "avgDurationMs": 20221,
   "durationHistory": [
     18277,
     19384,
     19049,
     18763,
-    18734
+    18734,
+    20221
   ],
   "newJobs": [],
   "updatedJobs": [
