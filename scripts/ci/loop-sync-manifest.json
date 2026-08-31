@@ -2495,9 +2495,9 @@
       "sitePath": "build-plugins/sharedWriteRegistry.ts",
       "mode": "identical",
       "baseline": {
-        "site": "8b993116044fb9f2",
-        "corpus": "8b993116044fb9f2",
-        "alignedAt": "2026-08-09"
+        "site": "a97ed1adc182a002",
+        "corpus": "a97ed1adc182a002",
+        "alignedAt": "2026-08-31"
       }
     },
     {
