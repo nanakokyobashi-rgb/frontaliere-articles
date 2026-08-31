@@ -1075,11 +1075,31 @@ const CLAUDE_CLI_STRUCTURED_OUTPUT_TOOL = 'StructuredOutput';
 const CLAUDE_CLI_TEXT_SALVAGE_COMPLETE_RE = /[.!?…:;—][)\]'"’”»“‘]*$/;
 
 // Cap sul buffer di `feed()` in createClaudeCliStreamTrace fra due `\n`.
-// Ogni evento `stream-json` legittimo (compreso un `tool_use` con l'intero
-// articolo strutturato) resta ben sotto: oltre questa soglia una riga senza
-// terminatore non e' un evento grande, e' anomala — senza cap crescerebbe
-// senza limite fino al timeout (follow-up #6034 item 3).
-const CLAUDE_CLI_STREAM_LINE_CAP = 1_000_000;
+// Serve a scartare un residuo che non e' un evento grande ma una riga
+// anomala (senza cap crescerebbe senza limite fino al timeout — follow-up
+// #6034 item 3), NON a bocciare un evento legittimo solo perche' e' grande.
+//
+// Il valore precedente (1_000_000) era giustificato da uno spot-check di
+// `content/blog-body*` (max ~46KB, #633) — copre un SOLO canale (`text`) e un
+// SOLO caller. Con --tools '' nessun tool esterno e' disponibile, quindi
+// l'unico evento potenzialmente grande resta il `tool_use` sintetico di
+// StructuredOutput sotto `--json-schema`: la sua dimensione dipende dallo
+// schema del CHIAMANTE, e ai-models.mjs e' condiviso da piu' pipeline oltre
+// agli articoli (vedi i vari caller di `callLLM`/`callSingleModel`) — non
+// c'e' un tetto di schema che questo modulo possa verificare staticamente.
+//
+// Il tetto che REGGE e' fisico, non un campione: un residuo senza `\n` puo'
+// crescere solo quanto il CLI genera prima di chiudere il blocco, e la
+// generazione e' limitata da CLAUDE_CLI_MAX_TIMEOUT_MS (600s) al throughput
+// piu' alto misurato in questo file (~90 tok/s costanti, vedi
+// CLAUDE_CLI_ALLOWANCE_SHARE) — 600s * 90 tok/s * ~5 char/tok (con margine
+// per l'escaping JSON) e' ~270.000 caratteri. 1_000_000 aveva gia' ~3.7x di
+// margine su quel tetto fisico, insufficiente contro l'incertezza su schemi
+// futuri (es. un array con molti elementi). A 10_000_000 il margine sale a
+// ~37x pur restando ordini di grandezza sotto cio' che serve a far pressione
+// sulla memoria — CLAUDE_CLI_MAX_CONCURRENCY e' 2, quindi il caso peggiore
+// resta ~20MB.
+const CLAUDE_CLI_STREAM_LINE_CAP = 10_000_000;
 
 // Tetto per una singola chiamata al CLI, per quanto grande sia l'allowance
 // residua. Serve a impedire che una sezione lunga (allowance 2400s) regali

@@ -258,18 +258,36 @@ describe('il ramo di timeout usa davvero il salvataggio, e non punisce il modell
 });
 
 describe('il buffer di feed() ha un cap: una riga senza terminatore non cresce senza limite (#628)', () => {
-  it('un residuo oltre 1_000_000 caratteri senza `\\n` viene scartato come riga malformata', () => {
+  it('un residuo oltre 10_000_000 caratteri senza `\\n` viene scartato come riga malformata', () => {
     const t = createClaudeCliStreamTrace();
     t.feed(`${INIT}\n`);
-    t.feed('x'.repeat(1_000_001));
+    t.feed('x'.repeat(10_000_001));
     assert.equal(t.state.malformed, 1, 'oltre il cap il residuo deve contarsi come riga malformata, non restare in attesa');
     assert.equal(t.pendingBytes, 0, 'il buffer va svuotato: altrimenti continuerebbe a crescere ad ogni chunk successivo fino al timeout');
   });
 
   it('un residuo appena sotto il cap resta in attesa, non scartato', () => {
     const t = createClaudeCliStreamTrace();
-    t.feed('x'.repeat(999_999));
+    t.feed('x'.repeat(9_999_999));
     assert.equal(t.state.malformed, 0, 'sotto soglia una riga ancora incompleta non e\' anomala, e\' solo grande');
-    assert.equal(t.pendingBytes, 999_999);
+    assert.equal(t.pendingBytes, 9_999_999);
+  });
+
+  it('un `tool_use` legittimo oltre la vecchia soglia di 1MB non viene scartato (#636)', () => {
+    // Regressione: prima di #636 il cap era 1_000_000, giustificato solo da
+    // uno spot-check di content/blog-body* (max ~46KB). Un evento reale ma
+    // piu' grande — es. un articolo multi-locale con uno schema verboso —
+    // superava quella soglia e veniva scartato come malformed, perdendo
+    // l'intero payload in silenzio.
+    const t = createClaudeCliStreamTrace();
+    const bigInput = { content: { it: 'x'.repeat(400_000), en: 'x'.repeat(400_000), de: 'x'.repeat(400_000) } };
+    const evt = JSON.stringify({
+      type: 'assistant',
+      message: { content: [{ type: 'tool_use', name: 'StructuredOutput', input: bigInput }] },
+    });
+    assert.ok(evt.length > 1_000_000, 'la fixture deve superare la vecchia soglia per essere un test utile');
+    t.feed(`${evt}\n`);
+    assert.equal(t.state.malformed, 0, 'un evento tool_use legittimo oltre 1MB non deve contarsi come malformed');
+    assert.equal(t.state.structured, JSON.stringify(bigInput));
   });
 });
