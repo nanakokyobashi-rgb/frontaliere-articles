@@ -1,20 +1,21 @@
 {
   "key": "debiopharm",
   "label": "Debiopharm",
-  "generatedAt": "2026-08-30T15:11:29.024Z",
+  "generatedAt": "2026-08-31T00:09:57.537Z",
   "total": 9,
   "newCount": 0,
   "updatedCount": 0,
   "removedCount": 0,
   "unchangedCount": 9,
-  "durationMs": 4012,
-  "avgDurationMs": 4012,
+  "durationMs": 3943,
+  "avgDurationMs": 3943,
   "durationHistory": [
     3125,
     4047,
     3831,
     3113,
-    4012
+    4012,
+    3943
   ],
   "newJobs": [],
   "updatedJobs": [],
