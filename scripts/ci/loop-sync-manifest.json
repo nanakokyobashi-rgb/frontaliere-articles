@@ -123,11 +123,12 @@
     },
     {
       "path": "scripts/ci/auto-merge-sweep.mjs",
-      "mode": "identical",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27): il sweep periodico e' stato sostituito dall'auto-merge nativo di GitHub, la logica di gate resta in scripts/ci/auto-merge-eval.mjs (adapted, ancora presente su entrambi i lati). Qui resta necessario: questo repo e' di un account diverso senza la GitHub App del sito e non puo' abilitare l'auto-merge nativo con l'identita' di merge corretta (GITHUB_PAT_NANAKO), e deve fare la dispatch esplicita di publish-api.yml dopo il merge — vedi .github/workflows/auto-merge-sweep.yml.",
       "baseline": {
-        "site": "d3eb47642f8c151e",
+        "site": null,
         "corpus": "d3eb47642f8c151e",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -456,22 +457,22 @@
     },
     {
       "path": ".github/workflows/pr-review-loop.yml",
-      "mode": "adapted",
-      "reason": "Stessa struttura del sito (trigger su workflow_run di `tests`, re-review guard, tier, debounce, prefetch, classificazione degli errori API). Divergono NONCODE_RE e funnel_crit, che puntano all'albero di questo repo: qui il grosso e' content/ (14.888 file) e il codice funnel-critical e' generator/, engine/, host/ e gli emitter di dist/api/. Escluso il proxy Headroom.",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6571 'Unify tests PR review workflow' (2026-08-26): la review delle PR e' stata assorbita dentro tests.yml. Qui resta un workflow a parte perche' .github/workflows/tests.yml di questo repo (gia' adapted) copre i gate di generazione/pubblicazione del corpus, non la review Claude — che qui e' quota-condivisa col sito (AGENTS.md, 'Il ciclo autonomo') e va tenuta isolabile, non fusa in un job che gira su ogni push indipendentemente dalla quota.",
       "baseline": {
-        "site": "6be9dd2d95c644a9",
+        "site": null,
         "corpus": "b7826bd6e68803ba",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-31"
       }
     },
     {
       "path": ".github/workflows/auto-merge-on-lgtm.yml",
-      "mode": "adapted",
-      "reason": "Identita' di merge = GITHUB_PAT_NANAKO da Remote Config (questo repo e' di un altro account e non ha la GitHub App del sito); ponte RC in generator/scripts/load-rc-env.mjs; nessun npm ci. In piu' una rete di sicurezza che non esiste sul sito: se il merge avviene col GITHUB_TOKEN di fallback, l'anti-ricorsione impedisce a publish-api.yml di partire e la superficie dati resterebbe vecchia in silenzio — lo step finale la dispatcha esplicitamente.",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27), sostituito dall'auto-merge nativo di GitHub. Qui resta necessario: identita' di merge = GITHUB_PAT_NANAKO da Remote Config (questo repo e' di un altro account e non ha la GitHub App del sito, quindi non puo' abilitare l'auto-merge nativo con l'identita' corretta); ponte RC in generator/scripts/load-rc-env.mjs; nessun npm ci. In piu' una rete di sicurezza che non esiste sul sito: se il merge avviene col GITHUB_TOKEN di fallback, l'anti-ricorsione impedisce a publish-api.yml di partire e la superficie dati resterebbe vecchia in silenzio — lo step finale la dispatcha esplicitamente.",
       "baseline": {
-        "site": "1d807b8fdfebeefc",
+        "site": null,
         "corpus": "c810a90b47eb97ea",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -750,12 +751,12 @@
     },
     {
       "path": ".github/workflows/auto-merge-sweep.yml",
-      "mode": "adapted",
-      "reason": "Identita' di merge GITHUB_PAT_NANAKO, CI_CHECK_NAME di questo repo, niente npm ci, cadenza sfasata (12,42 invece di */15). La logica di gate resta in auto-merge-eval.mjs, condivisa con l'auto-merge event-driven.",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6606 'chore(ci): use GitHub native auto-merge' (2026-08-27): il sito ha spostato il trigger sull'auto-merge nativo di GitHub. Qui resta necessario: identita' di merge GITHUB_PAT_NANAKO, CI_CHECK_NAME di questo repo, niente npm ci, cadenza sfasata (12,42 invece di */15), e nessuna GitHub App per abilitare il nativo con l'identita' corretta. La logica di gate resta in auto-merge-eval.mjs (adapted, ancora presente su entrambi i lati), condivisa con l'auto-merge event-driven.",
       "baseline": {
-        "site": "6512a455eeb91262",
+        "site": null,
         "corpus": "56d67d1ff1324e57",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -770,12 +771,12 @@
     },
     {
       "path": ".github/workflows/pr-autorebase.yml",
-      "mode": "adapted",
-      "reason": "Identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52).",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6584 'ci: richiedi LGTM prima dell'auto-merge nativo' (2026-08-26): il sito e' passato dall'autorebase custom alla merge queue nativa di GitHub. Qui resta necessario: identita' di push/dispatch GITHUB_PAT_NANAKO; sparse-checkout sui path pesanti di QUESTO repo (content/ con 14.888 file, dist/, public/) invece di public/images del sito — il job fa solo merge e push e non li legge mai; niente npm ci; cadenza sfasata (22,52); e nessuna GitHub App per usare la merge queue nativa con l'identita' corretta.",
       "baseline": {
-        "site": "3881f7aff32b5e5d",
+        "site": null,
         "corpus": "9898137394c5554e",
-        "alignedAt": "2026-08-07"
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -790,12 +791,12 @@
     },
     {
       "path": ".github/workflows/pr-body-contract.yml",
-      "mode": "adapted",
-      "reason": "Sottoinsieme generico di quello del sito: solo le due verifiche sul contratto del body, senza i check di dominio del sito. Zero Claude — intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa.",
+      "mode": "corpus-only",
+      "reason": "Rimosso sul sito in PR #6475 'sequenzializza collision/contract/typecheck/vitest per-PR (4 job paralleli -> 1)' (2026-08-25): le due verifiche sul contratto del body sono confluite dentro tests.yml per abbassare la concorrenza per-PR. Qui resta un workflow a parte perche' e' gia' un sottoinsieme generico di quello del sito (solo le due verifiche sul contratto, senza i check di dominio) e gira senza Claude: intercettare la violazione qui evita di spendere un ciclo di review (quota condivisa) per una cosa che una regex sa, e fondersi in .github/workflows/tests.yml (adapted, node --test dependency-free) accoppierebbe due concern separati apposta.",
       "baseline": {
-        "site": "587bbaf371bfbcc0",
+        "site": null,
         "corpus": "fd457b4af761ef94",
-        "alignedAt": "2026-08-08"
+        "alignedAt": "2026-08-31"
       }
     },
     {
