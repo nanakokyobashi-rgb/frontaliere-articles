@@ -190,6 +190,35 @@ export function isDeclaredSkipOnly(jobs) {
   return jobs.every((j) => typeof j?.step === 'string' && DECLARED_SKIP_STEP_RE.test(j.step));
 }
 
+/**
+ * Un job che il detector timeout/host-kill deve possedere in esclusiva.
+ *
+ * Il detector specializzato aspetta 120 secondi prima di APRIRE una issue,
+ * per non leggere una finalizzazione transitoria dell'API come host-kill. Qui
+ * invece la firma basta per cedere il job già al primo passaggio: se era solo
+ * transitoria, lo scanner ordinario lo rivede al cron successivo (30 minuti,
+ * dentro la finestra di 40) con tutti gli step conclusi. Segnalarlo subito da
+ * entrambi i percorsi conterebbe lo stesso evento anche nel rolling ledger.
+ */
+export function isTimeoutScannerOwnedFailure(job) {
+  return (
+    job?.conclusion === 'failure'
+    && job?.status === 'completed'
+    && Array.isArray(job.steps)
+    && job.steps.some((step) => step?.status === 'in_progress')
+  );
+}
+
+/** Mantiene segnalabili gli eventuali failure ordinari della stessa run. */
+export function partitionFailedJobsByOwner(jobs) {
+  const ordinary = [];
+  const timeoutScanner = [];
+  for (const job of Array.isArray(jobs) ? jobs : []) {
+    (isTimeoutScannerOwnedFailure(job) ? timeoutScanner : ordinary).push(job);
+  }
+  return { ordinary, timeoutScanner };
+}
+
 /** Run fallite nella finestra, escluse quelle da pull_request e dai gate pre-merge in preview. */
 function failedRuns() {
   const since = new Date(Date.now() - LOOKBACK_MIN * 60_000).toISOString();
@@ -241,7 +270,9 @@ function alreadyReported(title, runUrl) {
 function failedJobs(runId) {
   const raw = gh(
     ['api', `repos/${REPO}/actions/runs/${runId}/jobs`, '--jq',
-      '[.jobs[] | select(.conclusion=="failure") | {name, url: .html_url, step: ([.steps[]? | select(.conclusion=="failure") | .name] | first)}]'],
+      '[.jobs[] | select(.conclusion=="failure") | '
+        + '{name, url: .html_url, step: ([.steps[]? | select(.conclusion=="failure") | .name] | first), '
+        + 'status, conclusion, completed_at, steps}]'],
     '[]',
   );
   try {
@@ -535,7 +566,19 @@ async function main() {
       break;
     }
 
-    const jobs = failedJobs(run.databaseId);
+    const allFailedJobs = failedJobs(run.databaseId);
+    const { ordinary: jobs, timeoutScanner: timeoutOwnedJobs } = partitionFailedJobsByOwner(allFailedJobs);
+
+    if (timeoutOwnedJobs.length > 0) {
+      console.log(
+        `[scan-failed-runs] ${name}: ${timeoutOwnedJobs.length} job con firma host-kill `
+          + 'ceduto a scan-job-timeouts.mjs (nessun doppio conteggio nel gate).',
+      );
+      // Una run puo' contenere sia un host-kill sia un failure ordinario in un
+      // altro job: in quel caso il secondo resta segnalabile. Si salta la run
+      // solo quando ogni job fallito appartiene al detector specializzato.
+      if (jobs.length === 0) continue;
+    }
 
     // Rosso VOLUTO (issue #170): la run e' ferma su uno step di skip dichiarato,
     // non su un guasto. Segnalarla apre una "Workflow Failure" che nessun fix
