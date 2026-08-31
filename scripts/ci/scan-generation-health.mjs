@@ -1130,6 +1130,13 @@ export const CONDITIONS = [
       if (!m.commits.available) return { available: false };
       const last = m.commits.lastArticleAt;
       if (last === null) {
+        if (m.commits.truncated) {
+          // La finestra letta è più stretta di `lookbackHours` (budget di
+          // pagine esaurito prima del cutoff, tipicamente un burst di commit
+          // dei crawler): non sappiamo se un `Generate blog article` esiste
+          // appena fuori dai commit letti. Non misurato, non «guasto».
+          return { available: false };
+        }
         // Nessun articolo in TUTTA la finestra di commit letta: è la forma
         // estrema della stessa condizione, non un'assenza di dato.
         return {
@@ -1543,6 +1550,12 @@ export const CONDITIONS = [
       const other = SECTIONS.find((s) => s !== section);
       const otherPer = m.commits.perSection[other];
       const last = per.lastArticleAt;
+      if (last === null && m.commits.truncated) {
+        // Stesso caso di `generation-idle`: la finestra letta è più stretta
+        // del nominale, quindi «nessun articolo di questa sezione» non è
+        // distinguibile da «non ancora letto abbastanza indietro».
+        return { available: false };
+      }
       const since = last === null ? m.commits.windowStart : last;
       const hours = (m.now - since) / 3_600_000;
       if (hours < SECTION_DRY_HOURS) return { firing: false };
@@ -1731,12 +1744,18 @@ export function collectCommits(repo, lookbackHours) {
   let rejected = 0;
   let lastArticleAt = null;
   let reachedCutoff = false;
+  const MAX_PAGES = 3;
 
-  for (let page = 1; page <= 3 && !reachedCutoff; page++) {
+  let page = 1;
+  for (; page <= MAX_PAGES && !reachedCutoff; page++) {
     const raw = gh(['api', `repos/${repo}/commits?sha=main&per_page=100&page=${page}`,
       '--jq', '.[] | "\\(.commit.committer.date)\\t\\(.commit.message | split("\\n")[0])"']);
     if (raw === null) return { available: false, lookbackHours };
     const lines = raw.split('\n').filter(Boolean);
+    // Meno di 100 righe: `main` non ha più storia oltre questa pagina, quindi
+    // non c'è nient'altro da leggere — equivale a raggiungere il cutoff, non a
+    // una troncatura.
+    if (lines.length < 100) reachedCutoff = true;
     if (!lines.length) break;
     for (const line of lines) {
       const tab = line.indexOf('\t');
@@ -1760,8 +1779,20 @@ export function collectCommits(repo, lookbackHours) {
     }
   }
 
+  // Troncato: il budget di `MAX_PAGES` pagine (300 commit) si è esaurito PRIMA
+  // di raggiungere `cutoff`. Un burst di commit non-generazione (i crawler
+  // job — misurato: 100 commit in 37 minuti il 2026-08-31) può consumare 300
+  // commit in meno di un'ora, molto sotto le `lookbackHours` nominali. Quando
+  // questo succede, `lastArticleAt === null` NON è «zero articoli nella
+  // finestra»: è «non letta abbastanza finestra per saperlo». Le due condizioni
+  // che usano `lastArticleAt === null` come prova estrema (`generation-idle`,
+  // `section-dry`) devono trattarlo come non misurato, non come guasto — è
+  // esattamente la classe di difetto che questo scanner esiste per chiudere.
+  const truncated = !reachedCutoff;
+
   return {
     available: true,
+    truncated,
     lookbackHours,
     windowStart: cutoff,
     total,
