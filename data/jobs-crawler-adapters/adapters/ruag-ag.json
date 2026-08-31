@@ -67,17 +67,14 @@
     "https://jobs.ruag.ch/offene-stellen/lehrstelle-als-automatiker-in-efz-2027/3f24f18f-86b9-4562-81b4-232c469d4d5b",
     "https://jobs.ruag.ch/offene-stellen/devops-engineer-c5i/f48073a5-1687-46d4-b2ae-62a60c51c9ad",
     "https://jobs.ruag.ch/offene-stellen/director-project-house-c5i/1aee0c75-2152-435b-979a-d883ca08bd86",
-    "https://jobs.ruag.ch/offene-stellen/lead-architekt-network-und-richtfunk-engineering/ffebe23e-4a70-4cd5-9182-f9a260671e86"
+    "https://jobs.ruag.ch/offene-stellen/lead-architekt-network-und-richtfunk-engineering/ffebe23e-4a70-4cd5-9182-f9a260671e86",
+    "https://jobs.ruag.ch/offene-stellen/betriebselektrikerin-faciliy-manager-technics/190b7508-d7e8-403d-b49f-7c2f57a59965",
+    "https://jobs.ruag.ch/offene-stellen/elektronikerin-com-nav-radar/7046ce4e-c975-494e-b517-11c4cbea139b",
+    "https://jobs.ruag.ch/offene-stellen/director-project-house-c5i/1aee0c75-2152-435b-979a-d883ca08bd86"
   ],
   "notes": "Dedicated RUAG crawler uses official jobs.ruag.ch detail pages and recursive discovery from internal similar-job links because the public listing often returns 400.",
-  "updatedAt": "2026-08-30T15:04:19.572Z",
+  "updatedAt": "2026-08-30T23:47:32.081Z",
   "seedMetaByUrl": {
-    "https://jobs.ruag.ch/offene-stellen/betriebselektrikerin-faciliy-manager-technics/190b7508-d7e8-403d-b49f-7c2f57a59965": {
-      "location": "Altdorf",
-      "canton": "UR",
-      "company": "RUAG AG",
-      "postedDate": "2026-06-29"
-    },
     "https://jobs.ruag.ch/offene-stellen/lehrstelle-als-automatiker-in-efz-2027/e5115d98-fabd-4c70-b86f-8ec2c4dd88bb": {
       "location": "Emmen",
       "canton": "LU",
@@ -408,6 +405,12 @@
       "company": "RUAG AG",
       "postedDate": "2026-08-26"
     },
+    "https://jobs.ruag.ch/offene-stellen/betriebselektrikerin-faciliy-manager-technics/190b7508-d7e8-403d-b49f-7c2f57a59965": {
+      "location": "Altdorf",
+      "canton": "UR",
+      "company": "RUAG AG",
+      "postedDate": "2026-06-29"
+    },
     "https://jobs.ruag.ch/offene-stellen/director-project-house-c5i/1aee0c75-2152-435b-979a-d883ca08bd86": {
       "location": "Thun",
       "canton": "BE",
@@ -419,6 +422,12 @@
       "canton": "BE",
       "company": "RUAG AG",
       "postedDate": "2026-08-28"
+    },
+    "https://jobs.ruag.ch/offene-stellen/elektronikerin-com-nav-radar/7046ce4e-c975-494e-b517-11c4cbea139b": {
+      "location": "Wilderswil",
+      "canton": "BE",
+      "company": "RUAG AG",
+      "postedDate": "2026-08-31"
     }
   }
 }
