@@ -312,9 +312,9 @@
       "path": "scripts/lib/github-issue-creator.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "98bb8dd2ff527a59",
-        "corpus": "98bb8dd2ff527a59",
-        "alignedAt": "2026-08-14"
+        "site": "4ce6b3ed5d08a6f2",
+        "corpus": "4ce6b3ed5d08a6f2",
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -900,9 +900,9 @@
       "path": "scripts/ci/harvest-agent-lessons.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "2019ea735ceea114",
-        "corpus": "2019ea735ceea114",
-        "alignedAt": "2026-08-14"
+        "site": "72c91051ffe812d9",
+        "corpus": "72c91051ffe812d9",
+        "alignedAt": "2026-08-31"
       }
     },
     {
@@ -1890,12 +1890,13 @@
     {
       "path": "generator/scripts/lib/google-service-account-token.mjs",
       "sitePath": "scripts/lib/google-service-account-token.mjs",
-      "mode": "identical",
+      "mode": "adapted",
       "baseline": {
         "site": "3cd3caf6cb78e3d1",
-        "corpus": "3cd3caf6cb78e3d1",
-        "alignedAt": "2026-08-14"
-      }
+        "corpus": "e2e2c532b45bfbf0",
+        "alignedAt": "2026-08-31"
+      },
+      "reason": "Ritento anche su un fallimento di rete grezzo (TypeError 'fetch failed', DNS/TLS), non solo su AbortError/TimeoutError: issue #247 ha misurato il caso network-failure atterrare 272ms dopo l'avvio della richiesta sulla fetch RC gemella in load-rc-env.mjs, che ritenta ogni rejection per la stessa ragione. Rilanciare grezzo qualunque errore diverso da Abort/TimeoutError (comportamento precedente) saltava l'intero budget di retry TOKEN_EXCHANGE_ATTEMPTS/~63s proprio sul fallimento che doveva sopravvivere. E' un MIGLIORAMENTO del meccanismo: candidato a risalire al sito (scripts/lib/google-service-account-token.mjs), che resta sulla sola distinzione Abort/TimeoutError."
     },
     {
       "path": "generator/scripts/lib/haversine.mjs",
