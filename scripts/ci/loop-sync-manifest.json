@@ -191,9 +191,20 @@
       "path": "scripts/ci/claude-rate-limit.mjs",
       "mode": "identical",
       "baseline": {
-        "site": "30cee9619a3f49af",
-        "corpus": "30cee9619a3f49af",
-        "alignedAt": "2026-08-07"
+        "site": "5a9fc41530afbf1b",
+        "corpus": "5a9fc41530afbf1b",
+        "alignedAt": "2026-08-31"
+      }
+    },
+    {
+      "path": "generator/tests/claude-rate-limit.test.mjs",
+      "sitePath": "tests/claude-rate-limit.test.ts",
+      "mode": "adapted",
+      "reason": "Regressione del falso 429 osservato nella run corpus 33338838671: status=allowed con overageStatus=rejected deve restare un successo. Il sito usa Vitest e conserva la suite completa del parser; qui il gemello Node test pinna il caso di produzione e il controllo positivo status=rejected senza introdurre Vitest nel repo pubblicatore.",
+      "baseline": {
+        "site": "2dc2ac1df1cb5dae",
+        "corpus": "beb958405d5e2d75",
+        "alignedAt": "2026-08-31"
       }
     },
     {
